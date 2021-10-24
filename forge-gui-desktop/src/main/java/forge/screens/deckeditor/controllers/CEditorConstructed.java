@@ -27,6 +27,7 @@ import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
+import forge.itemmanager.filters.DeckSetFilter;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.deckeditor.AddBasicLandsDialog;
@@ -403,12 +404,14 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
      */
     @Override
     public void resetTables() {
-        // Constructed mode can use all cards, no limitations.
-        this.sectionMode = DeckSection.Main;
         ItemPool currentPool = this.getCatalogManager().getPool();
-        if (currentPool == null || !currentPool.equals(normalPool))
-            this.getCatalogManager().setPool(normalPool, true);
-        this.getDeckManager().setPool(this.controller.getModel().getMain());
+        DeckSection selectedSection = (DeckSection) this.getCbxSection().getSelectedItem();
+        if (selectedSection != DeckSection.Main || currentPool == null || !currentPool.equals(normalPool)) {
+            // Constructed mode can use all cards, no limitations.
+            this.getCbxSection().setSelectedItem(DeckSection.Main);
+            this.setEditorMode(DeckSection.Main);
+        } else
+            this.getDeckManager().setPool(this.controller.getModel().getMain());
     }
 
     @Override
