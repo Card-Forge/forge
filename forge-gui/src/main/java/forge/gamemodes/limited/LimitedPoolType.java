@@ -1,12 +1,14 @@
 package forge.gamemodes.limited;
 
-public enum LimitedPoolType { 
-    Full("Full Cardpool"),
-    Block("Block / Set"),
-    Prerelease("Prerelease"),
-    FantasyBlock("Fantasy Block"),
-    Custom("Custom Cube"),
-    Chaos("Chaos Draft");
+import forge.util.Localizer;
+
+public enum LimitedPoolType {
+    Full(Localizer.getInstance().getMessage("lblLimitedPoolFull")),
+    Block(Localizer.getInstance().getMessage("lblLimitedBlock")),
+    Prerelease(Localizer.getInstance().getMessage("lblLimitedPrerelease")),
+    FantasyBlock(Localizer.getInstance().getMessage("lblLimitedFantasy")),
+    Custom(Localizer.getInstance().getMessage("lblLimitedCustom")),
+    Chaos(Localizer.getInstance().getMessage("lblLimitedChaos"));
     
     private final String displayName;
     LimitedPoolType(String name) {
