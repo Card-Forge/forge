@@ -272,14 +272,17 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
     private void validateDeferredSections(){
         /*
-         Construct a temporary (DeckSection, CardPool) Maps, to be sanitise and finalised
+         Construct a temporary (DeckSection, CardPool) Maps, to be sanitised and finalised
          before copying into `this.parts`. This sanitisation is applied because of the
          validation schema introduced in DeckSections.
          */
+        Map<String, List<String>> validatedSections = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         for (Entry<String, List<String>> s : this.deferredSections.entrySet()) {
             final DeckSection deckSection = DeckSection.smartValueOf(s.getKey());
-            if (deckSection == null)
+            if (deckSection == null) {
+                validatedSections.put(s.getKey(), s.getValue());
                 continue;
+            }
 
             final List<String> cardsInSection = s.getValue();
             CardPool pool = CardPool.fromCardList(cardsInSection);
@@ -293,31 +296,46 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                     return deckSection.validate(input);
                 }
             });
+            // Add all the cards from ValidPool anyway!
+            List<String> whiteList = validatedSections.getOrDefault(s.getKey(), null);
+            if (whiteList == null)
+                whiteList = new ArrayList<>();
+            for (Entry<PaperCard, Integer> entry : filteredPool) {
+                String poolRequest = getPoolRequest(entry);
+                whiteList.add(poolRequest);
+            }
+            validatedSections.put(s.getKey(), whiteList);
 
-            if (filteredPool.countDistinct() != pool.countDistinct()) {  // Some cards have been filtered
-                CardPool blackListPool = pool.getFilteredPoolWithCardsCount(new Predicate<PaperCard>() {
+            if (filteredPool.countDistinct() != pool.countDistinct()){
+
+                CardPool blackList = pool.getFilteredPoolWithCardsCount(new Predicate<PaperCard>() {
                     @Override
                     public boolean apply(PaperCard input) {
                         return !(deckSection.validate(input));
                     }
                 });
 
-                List<Entry<PaperCard, Integer>> blackList = Lists.newArrayList(blackListPool);
                 for (Entry<PaperCard, Integer> entry : blackList) {
-                    PaperCard card = entry.getKey();
-                    DeckSection cardSection = DeckSection.matchingSection(card);
-                    if (cardSection == null)
-                        continue;  // No matching section could be found!
-                    String cardRequest = CardDb.CardRequest.compose(card.getName(), card.getEdition(), card.getArtIndex());
-                    String poolRequest = String.format("%d %s", entry.getValue(), cardRequest);
-                    List<String> sectionCardList = this.deferredSections.getOrDefault(cardSection.name(), null);
+                    DeckSection cardSection = DeckSection.matchingSection(entry.getKey());
+                    String poolRequest = getPoolRequest(entry);
+                    List<String> sectionCardList = validatedSections.getOrDefault(cardSection.name(), null);
                     if (sectionCardList == null)
                         sectionCardList = new ArrayList<>();
                     sectionCardList.add(poolRequest);
-                    this.deferredSections.put(cardSection.name(), sectionCardList);
-                }
-            }
-        }
+                    validatedSections.put(cardSection.name(), sectionCardList);
+                } // end for blacklist
+            } // end if
+        } // end main for on deferredSections
+
+        // Overwrite deferredSections
+        this.deferredSections = validatedSections;
+    }
+
+    private String getPoolRequest(Entry<PaperCard, Integer> entry) {
+        PaperCard card = entry.getKey();
+        int amount = entry.getValue();
+        String cardRequest = CardDb.CardRequest.compose(card.getName(), card.getEdition(), card.getArtIndex());
+        return String.format("%d %s", amount, cardRequest);
     }
 
     private ArrayList<String> getAllCardNamesWithNoSpecifiedEdition(List<String> cardsInSection) {
