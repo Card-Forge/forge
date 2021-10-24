@@ -45,7 +45,7 @@ public class SEditorIO {
                     Localizer.getInstance().getMessage("lblAlreadyDeckName") + name + Localizer.getInstance().getMessage("lblOverwriteConfirm"),
                     Localizer.getInstance().getMessage("lblOverwriteDeck"));
             } else {
-                performSave = true;
+                performSave = !controller.isSaved();
             }
         }
         // Confirm if a new deck will be created
@@ -88,7 +88,7 @@ public class SEditorIO {
             DeckPreferences.setCurrentDeck(deckStr);
         }
 
-        return true;
+        return performSave;
     }
 
     private final static ImmutableList<String> confirmSaveOptions = ImmutableList.of(
