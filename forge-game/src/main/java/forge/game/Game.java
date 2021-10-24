@@ -830,7 +830,7 @@ public class Game {
                     c.removeTempController(p);
                     // return stolen spells
                     if (c.isInZone(ZoneType.Stack)) {
-                        SpellAbilityStackInstance si = getStack().getInstanceFromSpellAbility(c.getCastSA());
+                        SpellAbilityStackInstance si = getStack().getInstanceMatchingSpellAbilityID(c.getCastSA());
                         si.setActivatingPlayer(c.getController());
                     }
                     if (c.getController().equals(p)) {
@@ -854,7 +854,7 @@ public class Game {
 
         if (p != null && p.isMonarch()) {
             // if the player who lost was the Monarch, someone else will be the monarch
-            if(p.equals(getPhaseHandler().getPlayerTurn())) {
+            if (p.equals(getPhaseHandler().getPlayerTurn())) {
                 getAction().becomeMonarch(getNextPlayerAfter(p), null);
             } else {
                 getAction().becomeMonarch(getPhaseHandler().getPlayerTurn(), null);

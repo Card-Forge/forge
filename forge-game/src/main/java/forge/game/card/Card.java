@@ -5891,6 +5891,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     @Override
     public final boolean canBeTargetedBy(final SpellAbility sa) {
+        if (getOwner().hasLost()) {
+            return false;
+        }
+
         if (sa == null) {
             return true;
         }

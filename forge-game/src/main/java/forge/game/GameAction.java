@@ -997,6 +997,9 @@ public class GameAction {
     }
 
     public void ceaseToExist(Card c, boolean skipTrig) {
+        if (c.isInZone(ZoneType.Stack)) {
+            c.getGame().getStack().remove(c);
+        }
         c.getZone().remove(c);
 
         // CR 603.6c other players LTB triggers should work

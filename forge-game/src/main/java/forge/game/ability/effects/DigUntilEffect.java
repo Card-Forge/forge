@@ -179,12 +179,12 @@ public class DigUntilEffect extends SpellAbilityEffect {
                                 Localizer.getInstance().getMessage("lblDoYouWantPutCardToZone", foundDest.getTranslatedName()))) {
                             continue;
                         }
+                        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                        moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+                        moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
                         Card m = null;
                         if (sa.hasParam("GainControl") && foundDest.equals(ZoneType.Battlefield)) {
                             c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
-                            Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                            moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
-                            moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
                             m = game.getAction().moveTo(c.getController().getZone(foundDest), c, sa, moveParams);
                             if (sa.hasParam("Tapped")) {
                                 c.setTapped(true);
@@ -195,7 +195,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                         } else if (sa.hasParam("NoMoveFound") && foundDest.equals(ZoneType.Library)) {
                             //Don't do anything
                         } else {
-                            m = game.getAction().moveTo(foundDest, c, foundLibPos, sa);
+                            m = game.getAction().moveTo(foundDest, c, foundLibPos, sa, moveParams);
                         }
                         revealed.remove(c);
                         if (m != null && !origin.equals(m.getZone().getZoneType())) {
