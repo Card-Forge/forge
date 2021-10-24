@@ -42,6 +42,8 @@ public enum DeckSection {
             return Planes;
         if (DeckSection.Commander.validate(card))
             return Commander;
+        if (DeckSection.Dungeon.validate(card))
+            return Dungeon;
         return Main;  // default
     }
 
