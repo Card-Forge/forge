@@ -18,7 +18,7 @@ Name=MTGO Legacy Cube July 2019
 1 Angrath, the Flame-Chained|RIX
 1 Anguished Unmaking|SOI
 1 Animate Dead|EMA
-1 Approach of the Second Sun|STX
+1 Approach of the Second Sun|STA
 1 Arbor Elf|A25
 1 Arcane Artisan
 1 Archangel Avacyn|SOI
@@ -65,7 +65,7 @@ Name=MTGO Legacy Cube July 2019
 1 Bonfire of the Damned|MM3
 1 Botanical Sanctum|KLD
 1 Brain Maggot|JOU
-1 Brainstorm|STX
+1 Brainstorm|STA
 1 Breeding Pool|RNA
 1 Brightling
 1 Brimaz, King of Oreskos|BNG
@@ -95,7 +95,7 @@ Name=MTGO Legacy Cube July 2019
 1 Coldsteel Heart|CSP
 1 Collective Brutality|EMN
 1 Collective Defiance|EMN
-1 Compulsive Research|STX
+1 Compulsive Research|STA
 1 Concealed Courtyard|KLD
 1 Conclave Tribunal|GRN
 1 Condemn|M11
@@ -111,14 +111,14 @@ Name=MTGO Legacy Cube July 2019
 1 Crucible of Worlds|M19
 1 Cryptbreaker|EMN
 1 Cryptic Command|IMA
-1 Cultivate|STX
+1 Cultivate|STA
 1 Cyclonic Rift|2XM
 1 Dack Fayden|EMA
 1 Damnation|MPS_AKH
 1 Dark Confidant|2XM
-1 Dark Ritual|STX
+1 Dark Ritual|STA
 1 Darkslick Shores|SOM
-1 Day of Judgment|STX
+1 Day of Judgment|STA
 1 Daze|MPS_AKH
 1 Deafening Clarion|GRN
 1 Deceiver Exarch|CN2
@@ -132,7 +132,7 @@ Name=MTGO Legacy Cube July 2019
 1 Devoted Druid|UMA
 1 Dismember|MM2
 1 Dismissive Pyromancer|M19
-1 Doom Blade|STX
+1 Doom Blade|STA
 1 Dragonlord Atarka|DTK
 1 Dragonlord Silumgar|DTK
 1 Dragonskull Summit|XLN
@@ -143,9 +143,9 @@ Name=MTGO Legacy Cube July 2019
 1 Drowned Catacomb|XLN
 1 Dualcaster Mage|2XM
 1 Duplicant|2XM
-1 Duress|STX
+1 Duress|STA
 1 Edric, Spymaster of Trest|VMA
-1 Electrolyze|STX
+1 Electrolyze|STA
 1 Elesh Norn, Grand Cenobite|IMA
 1 Elspeth, Knight-Errant|MMA
 1 Elspeth, Sun's Champion|THS
@@ -168,7 +168,7 @@ Name=MTGO Legacy Cube July 2019
 1 Fact or Fiction|MH1
 1 Fairgrounds Warden|KLD
 1 Faith's Fetters|M21
-1 Faithless Looting|STX
+1 Faithless Looting|STA
 1 Falkenrath Aristocrat|2XM
 1 Falkenrath Gorger|SOI
 1 Farseek|M13
@@ -234,7 +234,7 @@ Name=MTGO Legacy Cube July 2019
 1 Hallowed Fountain|RNA
 1 Hallowed Spiritkeeper|C14
 1 Hangarback Walker|MPS_KLD
-1 Harmonize|STX
+1 Harmonize|STA
 1 Hazoret the Fervent|AKR
 1 Hedron Archive|BFZ
 1 Hellrider|MM3
@@ -260,7 +260,7 @@ Name=MTGO Legacy Cube July 2019
 1 Incinerate|M12
 1 Incubation Druid|RNA
 1 Inferno Titan|M12
-1 Inquisition of Kozilek|STX
+1 Inquisition of Kozilek|STA
 1 Inspiring Vantage|KLD
 1 Into the Roil|ZNR
 1 Iona, Shield of Emeria|MM2
@@ -293,9 +293,9 @@ Name=MTGO Legacy Cube July 2019
 1 Lavaclaw Reaches|UMA
 1 Legion Warboss|GRN
 1 Legion's Landing|XLN
-1 Lightning Bolt|STX
+1 Lightning Bolt|STA
 1 Lightning Greaves|2XM
-1 Lightning Helix|STX
+1 Lightning Helix|STA
 1 Lightning Strike|M19
 1 Liliana of the Veil|UMA
 1 Liliana's Triumph|WAR
@@ -315,7 +315,7 @@ Name=MTGO Legacy Cube July 2019
 1 Man-o'-War|MH1
 1 Mana Confluence|EXP
 1 Mana Leak|IMA
-1 Mana Tithe|STX
+1 Mana Tithe|STA
 1 Manic Vandal|M12
 1 Marsh Flats|MH2
 1 Martial Coup|CFX
@@ -350,10 +350,10 @@ Name=MTGO Legacy Cube July 2019
 1 Mystic Snake|A25
 1 Nahiri, the Harbinger|SOI
 1 Narset, Parter of Veils|WAR
-1 Natural Order|STX
+1 Natural Order|STA
 1 Necromancy|VIS
 1 Needle Spires|OGW
-1 Negate|STX
+1 Negate|STA
 1 Nekrataal|EMA
 1 Never // Return|AKR
 1 Nicol Bolas, Dragon-God|WAR
@@ -372,7 +372,7 @@ Name=MTGO Legacy Cube July 2019
 1 Oona's Prowler|LRW
 1 Ophiomancer|C13
 1 Opposition|MPS_AKH
-1 Opt|STX
+1 Opt|STA
 1 Oracle of Mul Daya|ZEN
 1 Oust|ROE
 1 Outpost Siege|FRF
@@ -397,7 +397,7 @@ Name=MTGO Legacy Cube July 2019
 1 Ponder|M12
 1 Porcelain Legionnaire|NPH
 1 Preordain|M11
-1 Primal Command|STX
+1 Primal Command|STA
 1 Prime Speaker Vannifar|RNA
 1 Primeval Titan|IMA
 1 Prismatic Lens|UMA
@@ -504,7 +504,7 @@ Name=MTGO Legacy Cube July 2019
 1 Sword of Light and Shadow|2XM
 1 Sword of Sinew and Steel|MH1
 1 Sword of War and Peace|2XM
-1 Swords to Plowshares|STX
+1 Swords to Plowshares|STA
 1 Sylvan Caryatid|THS
 1 Sylvan Library|EMA
 1 Taiga|VMA
@@ -536,7 +536,7 @@ Name=MTGO Legacy Cube July 2019
 1 Thrun, the Last Troll|MBS
 1 Thunderbreak Regent|DTK
 1 Thundermaw Hellkite|IMA
-1 Time Warp|STX
+1 Time Warp|STA
 1 Tireless Tracker|SOI
 1 Tithe Taker|RNA
 1 Tooth and Nail|MMA

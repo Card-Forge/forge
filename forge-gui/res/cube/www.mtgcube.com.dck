@@ -53,7 +53,7 @@ Name=www.mtgcube.com
 1 Boros Reckoner|MM3
 1 Boros Signet|MM3
 1 Braids, Cabal Minion|MH2
-1 Brainstorm|STX
+1 Brainstorm|STA
 1 Breeding Pool|RNA
 1 Bribery|8ED
 1 Broodmate Dragon|MM3
@@ -85,16 +85,16 @@ Name=www.mtgcube.com
 1 Crucible of Worlds|M19
 1 Cryptic Command|IMA
 1 Crystal Shard|MRD
-1 Cultivate|STX
+1 Cultivate|STA
 1 Cursed Scroll|TPR
 1 Damnation|MPS_AKH
 1 Dance of the Dead|ICE
 1 Dark Confidant|2XM
-1 Dark Ritual|STX
-1 Day of Judgment|STX
+1 Dark Ritual|STA
+1 Day of Judgment|STA
 1 Daze|MPS_AKH
 1 Deep Analysis|EMA
-1 Demonic Tutor|STX
+1 Demonic Tutor|STA
 1 Deranged Hermit|VMA
 1 Detention Sphere|RTR
 1 Diabolic Edict|MH1
@@ -104,12 +104,12 @@ Name=www.mtgcube.com
 1 Dismember|MM2
 1 Dreadbore|RTR
 1 Dryad Militant|RTR
-1 Duress|STX
+1 Duress|STA
 1 Dust Bowl|EXP
 1 Dwarven Blastminer|ONS
 1 Earthquake|M10
 1 Edric, Spymaster of Trest|VMA
-1 Electrolyze|STX
+1 Electrolyze|STA
 1 Elesh Norn, Grand Cenobite|IMA
 1 Elite Vanguard|EMA
 1 Elspeth, Knight-Errant|MMA
@@ -130,7 +130,7 @@ Name=www.mtgcube.com
 1 Experiment One|GTC
 1 Fact or Fiction|MH1
 1 Faerie Conclave|10E
-1 Faithless Looting|STX
+1 Faithless Looting|STA
 1 Faith's Fetters|M21
 1 Falkenrath Aristocrat|2XM
 1 Fauna Shaman|UMA
@@ -201,7 +201,7 @@ Name=www.mtgcube.com
 1 Incinerate|M12
 1 Inferno Titan|M12
 1 Inkwell Leviathan|2XM
-1 Inquisition of Kozilek|STX
+1 Inquisition of Kozilek|STA
 1 Isamaru, Hound of Konda|CHK
 1 Izzet Boilerworks|IMA
 1 Izzet Charm|2XM
@@ -233,9 +233,9 @@ Name=www.mtgcube.com
 1 Library of Alexandria|VMA
 1 Life from the Loam|UMA
 1 Lifebane Zombie|M14
-1 Lightning Bolt|STX
+1 Lightning Bolt|STA
 1 Lightning Greaves|2XM
-1 Lightning Helix|STX
+1 Lightning Helix|STA
 1 Lightning Mauler|AVR
 1 Lightning Strike|M19
 1 Liliana of the Veil|UMA
@@ -253,7 +253,7 @@ Name=www.mtgcube.com
 1 Mana Crypt|2XM
 1 Mana Drain|IMA
 1 Mana Leak|IMA
-1 Mana Tithe|STX
+1 Mana Tithe|STA
 1 Mana Vault|UMA
 1 Manic Vandal|M12
 1 Marsh Flats|MH2
@@ -263,7 +263,7 @@ Name=www.mtgcube.com
 1 Maze of Ith|2XM
 1 Meloku the Clouded Mirror|MMA
 1 Memory Jar|VMA
-1 Memory Lapse|STX
+1 Memory Lapse|STA
 1 Metalworker|UDS
 1 Mimic Vat|SOM
 1 Mind Stone|IMA
@@ -293,7 +293,7 @@ Name=www.mtgcube.com
 1 Mystic Snake|A25
 1 Mystical Tutor|EMA
 1 Nantuko Vigilante|LGN
-1 Natural Order|STX
+1 Natural Order|STA
 1 Naya Charm|ALA
 1 Necromancy|VIS
 1 Nekrataal|EMA
@@ -342,7 +342,7 @@ Name=www.mtgcube.com
 1 Reckless Waif|ISD
 1 Recurring Nightmare|TPR
 1 Reflecting Pool|CNS
-1 Regrowth|STX
+1 Regrowth|STA
 1 Remand|MM2
 1 Restoration Angel|IMA
 1 Reveillark|UMA
@@ -419,7 +419,7 @@ Name=www.mtgcube.com
 1 Sword of Fire and Ice|2XM
 1 Sword of Light and Shadow|2XM
 1 Sword of War and Peace|2XM
-1 Swords to Plowshares|STX
+1 Swords to Plowshares|STA
 1 Sylvan Caryatid|THS
 1 Sylvan Library|EMA
 1 Taiga|VMA

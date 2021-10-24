@@ -62,7 +62,7 @@ Name=MTGO Vintage Cube 2014
 1 Braids, Cabal Minion|MH2
 1 Brain Freeze|VMA
 1 Brain Maggot|JOU
-1 Brainstorm|STX
+1 Brainstorm|STA
 1 Breeding Pool|RNA
 1 Bribery|8ED
 1 Brimaz, King of Oreskos|BNG
@@ -78,12 +78,12 @@ Name=MTGO Vintage Cube 2014
 1 Chandra, Pyromaster|M15
 1 Chandra's Phoenix|M14
 1 Char|RAV
-1 Channel|STX
+1 Channel|STA
 1 Chrome Mox|2XM
 1 Clifftop Retreat|DOM
 1 Cloudgoat Ranger|MMA
 1 Coalition Relic|A25
-1 Compulsive Research|STX
+1 Compulsive Research|STA
 1 Consecrated Sphinx|IMA
 1 Containment Priest|M21
 1 Control Magic|EMA
@@ -99,12 +99,12 @@ Name=MTGO Vintage Cube 2014
 1 Damnation|MPS_AKH
 1 Daretti, Scrap Savant|C16
 1 Dark Confidant|2XM
-1 Dark Ritual|STX
-1 Day of Judgment|STX
+1 Dark Ritual|STA
+1 Day of Judgment|STA
 1 Daze|MPS_AKH
 1 Deceiver Exarch|CN2
 1 Delver of Secrets|ISD
-1 Demonic Tutor|STX
+1 Demonic Tutor|STA
 1 Deranged Hermit|VMA
 1 Desecration Demon|MM3
 1 Detention Sphere|RTR
@@ -120,10 +120,10 @@ Name=MTGO Vintage Cube 2014
 1 Drowned Catacomb|XLN
 1 Dualcaster Mage|2XM
 1 Dungeon Geists|M20
-1 Duress|STX
+1 Duress|STA
 1 Edric, Spymaster of Trest|VMA
 1 Eidolon of the Great Revel|A25
-1 Electrolyze|STX
+1 Electrolyze|STA
 1 Elesh Norn, Grand Cenobite|IMA
 1 Elite Vanguard|EMA
 1 Elspeth Tirel|SOM
@@ -142,7 +142,7 @@ Name=MTGO Vintage Cube 2014
 1 Exalted Angel|ONS
 1 Fact or Fiction|MH1
 1 Faith's Fetters|M21
-1 Faithless Looting|STX
+1 Faithless Looting|STA
 1 Falkenrath Aristocrat|2XM
 1 Fauna Shaman|UMA
 1 Figure of Destiny|MMA
@@ -198,7 +198,7 @@ Name=MTGO Vintage Cube 2014
 1 Guttersnipe|M19
 1 Hallowed Fountain|RNA
 1 Hallowed Spiritkeeper|C14
-1 Harmonize|STX
+1 Harmonize|STA
 1 Heartbeat of Spring|2XM
 1 Hellrider|MM3
 1 Hero of Bladehold|MBS
@@ -217,7 +217,7 @@ Name=MTGO Vintage Cube 2014
 1 Indrik Stomphowler|DIS
 1 Inferno Titan|M12
 1 Inkwell Leviathan|2XM
-1 Inquisition of Kozilek|STX
+1 Inquisition of Kozilek|STA
 1 Iona, Shield of Emeria|MM2
 1 Isamaru, Hound of Konda|CHK
 1 Isochron Scepter|2XM
@@ -241,16 +241,16 @@ Name=MTGO Vintage Cube 2014
 1 Kitchen Finks|UMA
 1 Koth of the Hammer|SOM
 1 Kozilek, Butcher of Truth|UMA
-1 Krosan Grip|STX
+1 Krosan Grip|STA
 1 Land Tax|2XM
 1 Leonin Arbiter|SOM
 1 Leonin Relic-Warder|C17
 1 Library of Alexandria|VMA
 1 Life from the Loam|UMA
 1 Lifebane Zombie|M14
-1 Lightning Bolt|STX
+1 Lightning Bolt|STA
 1 Lightning Greaves|2XM
-1 Lightning Helix|STX
+1 Lightning Helix|STA
 1 Lightning Mauler|AVR
 1 Lightning Strike|M19
 1 Liliana of the Veil|UMA
@@ -269,7 +269,7 @@ Name=MTGO Vintage Cube 2014
 1 Mana Crypt|2XM
 1 Mana Drain|IMA
 1 Mana Leak|IMA
-1 Mana Tithe|STX
+1 Mana Tithe|STA
 1 Mana Vault|UMA
 1 Manic Vandal|M12
 1 Manriki-Gusari|SOK
@@ -281,11 +281,11 @@ Name=MTGO Vintage Cube 2014
 1 Maze of Ith|2XM
 1 Meloku the Clouded Mirror|MMA
 1 Memory Jar|VMA
-1 Memory Lapse|STX
+1 Memory Lapse|STA
 1 Mesmeric Fiend|A25
 1 Metalworker|UDS
 1 Mind Twist|MPS_AKH
-1 Mind's Desire|STX
+1 Mind's Desire|STA
 1 Mirari's Wake|MH2
 1 Mirran Crusader|MM2
 1 Mishra's Factory|MH2
@@ -307,7 +307,7 @@ Name=MTGO Vintage Cube 2014
 1 Mutavault|M14
 1 Myr Battlesphere|2XM
 1 Mystical Tutor|EMA
-1 Natural Order|STX
+1 Natural Order|STA
 1 Nature's Claim|IMA
 1 Necromancy|VIS
 1 Necropotence|IMA
@@ -352,7 +352,7 @@ Name=MTGO Vintage Cube 2014
 1 Ponder|M12
 1 Porcelain Legionnaire|NPH
 1 Preordain|M11
-1 Primal Command|STX
+1 Primal Command|STA
 1 Primeval Titan|IMA
 1 Progenitus|MMA
 1 Prophetic Flamespeaker|JOU
@@ -367,7 +367,7 @@ Name=MTGO Vintage Cube 2014
 1 Reanimate|UMA
 1 Reclamation Sage|2XM
 1 Recurring Nightmare|TPR
-1 Regrowth|STX
+1 Regrowth|STA
 1 Relic of Progenitus|EMA
 1 Remand|MM2
 1 Repeal|IMA
@@ -447,7 +447,7 @@ Name=MTGO Vintage Cube 2014
 1 Sword of Fire and Ice|2XM
 1 Sword of Light and Shadow|2XM
 1 Sword of War and Peace|2XM
-1 Swords to Plowshares|STX
+1 Swords to Plowshares|STA
 1 Sylvan Caryatid|THS
 1 Sylvan Library|EMA
 1 Taiga|VMA
@@ -457,7 +457,7 @@ Name=MTGO Vintage Cube 2014
 1 Tarmogoyf|UMA
 1 Teetering Peaks|ZEN
 1 Temple Garden|GRN
-1 Tendrils of Agony|STX
+1 Tendrils of Agony|STA
 1 Terastodon|2XM
 1 Terminate|MM3
 1 Terminus|MM3

@@ -63,7 +63,7 @@ Name=MTGO Legacy Cube May 2021
 1 Bonecrusher Giant|ELD
 1 Bonfire of the Damned|MM3
 1 Botanical Sanctum|KLD
-1 Brainstorm|STX
+1 Brainstorm|STA
 1 Brazen Borrower|ELD
 1 Breeding Pool|RNA
 1 Brightling
@@ -94,7 +94,7 @@ Name=MTGO Legacy Cube May 2021
 1 Coldsteel Heart|CSP
 1 Collective Brutality|EMN
 1 Collective Defiance|EMN
-1 Compulsive Research|STX
+1 Compulsive Research|STA
 1 Concealed Courtyard|KLD
 1 Conclave Tribunal|GRN
 1 Condemn|M11
@@ -111,14 +111,14 @@ Name=MTGO Legacy Cube May 2021
 1 Crucible of Worlds|M19
 1 Cryptbreaker|EMN
 1 Cryptic Command|IMA
-1 Cultivate|STX
+1 Cultivate|STA
 1 Cyclonic Rift|2XM
 1 Dack Fayden|EMA
 1 Damnation|MPS_AKH
 1 Dark Confidant|2XM
-1 Dark Ritual|STX
+1 Dark Ritual|STA
 1 Darkslick Shores|SOM
-1 Day of Judgment|STX
+1 Day of Judgment|STA
 1 Daze|MPS_AKH
 1 Deafening Clarion|GRN
 1 Deceiver Exarch|CN2
@@ -129,7 +129,7 @@ Name=MTGO Legacy Cube May 2021
 1 Devil's Play|ISD
 1 Devoted Druid|UMA
 1 Dismember|MM2
-1 Doom Blade|STX
+1 Doom Blade|STA
 1 Dragonkin Berserker|KHM
 1 Dragonlord Atarka|DTK
 1 Dragonlord Silumgar|DTK
@@ -140,10 +140,10 @@ Name=MTGO Legacy Cube May 2021
 1 Drowned Catacomb|XLN
 1 Dryad of the Ilysian Grove|THB
 1 Duplicant|2XM
-1 Duress|STX
+1 Duress|STA
 1 Edric, Spymaster of Trest|VMA
 1 Elder Gargaroth|M21
-1 Electrolyze|STX
+1 Electrolyze|STA
 1 Elesh Norn, Grand Cenobite|IMA
 1 Elite Spellbinder|STX
 1 Elspeth Conquers Death|THB
@@ -170,7 +170,7 @@ Name=MTGO Legacy Cube May 2021
 1 Fabled Passage|M21
 1 Fact or Fiction|MH1
 1 Faith's Fetters|M21
-1 Faithless Looting|STX
+1 Faithless Looting|STA
 1 Falkenrath Gorger|SOI
 1 Fall from Favor
 1 Fallen Shinobi|MH1
@@ -260,7 +260,7 @@ Name=MTGO Legacy Cube May 2021
 1 Incinerate|M12
 1 Inferno Titan|M12
 1 Ink-Eyes, Servant of Oni|PCA
-1 Inquisition of Kozilek|STX
+1 Inquisition of Kozilek|STA
 1 Inspiring Vantage|KLD
 1 Into the Roil|ZNR
 1 Iona, Shield of Emeria|MM2
@@ -295,9 +295,9 @@ Name=MTGO Legacy Cube May 2021
 1 Lavaclaw Reaches|UMA
 1 Legion Warboss|GRN
 1 Legion's Landing|XLN
-1 Lightning Bolt|STX
+1 Lightning Bolt|STA
 1 Lightning Greaves|2XM
-1 Lightning Helix|STX
+1 Lightning Helix|STA
 1 Lightning Phoenix
 1 Lightning Strike|M19
 1 Liliana of the Veil|UMA
@@ -320,7 +320,7 @@ Name=MTGO Legacy Cube May 2021
 1 Man-o'-War|MH1
 1 Mana Confluence|EXP
 1 Mana Leak|IMA
-1 Mana Tithe|STX
+1 Mana Tithe|STA
 1 Marsh Flats|MH2
 1 Massacre Wurm|M21
 1 Master of the Wild Hunt|A25
@@ -348,10 +348,10 @@ Name=MTGO Legacy Cube May 2021
 1 Myr Battlesphere|2XM
 1 Mystic Confluence|C15
 1 Narset, Parter of Veils|WAR
-1 Natural Order|STX
+1 Natural Order|STA
 1 Necromancy|VIS
 1 Needle Spires|OGW
-1 Negate|STX
+1 Negate|STA
 1 Nekrataal|EMA
 1 Nicol Bolas, Planeswalker|M13
 1 Night's Whisper|EMA
@@ -370,7 +370,7 @@ Name=MTGO Legacy Cube May 2021
 1 Oona's Prowler|LRW
 1 Ophiomancer|C13
 1 Opposition|MPS_AKH
-1 Opt|STX
+1 Opt|STA
 1 Oracle of Mul Daya|ZEN
 1 Oust|ROE
 1 Outpost Siege|FRF
@@ -397,7 +397,7 @@ Name=MTGO Legacy Cube May 2021
 1 Ponder|M12
 1 Porcelain Legionnaire|NPH
 1 Preordain|M11
-1 Primal Command|STX
+1 Primal Command|STA
 1 Primal Might|M21
 1 Primeval Titan|IMA
 1 Prismari Command|STX
@@ -505,7 +505,7 @@ Name=MTGO Legacy Cube May 2021
 1 Sword of Light and Shadow|2XM
 1 Sword of Sinew and Steel|MH1
 1 Sword of War and Peace|2XM
-1 Swords to Plowshares|STX
+1 Swords to Plowshares|STA
 1 Sylvan Caryatid|THS
 1 Sylvan Library|EMA
 1 Taiga|VMA
@@ -531,13 +531,13 @@ Name=MTGO Legacy Cube May 2021
 1 Thragtusk|2XM
 1 Thran Dynamo|IMA
 1 Thrashing Brontodon|M21
-1 Thrill of Possibility|STX
+1 Thrill of Possibility|STA
 1 Through the Breach|UMA
 1 Thrun, the Last Troll|MBS
 1 Thunderbreak Regent|DTK
 1 Thundermaw Hellkite|IMA
 1 Tidehollow Sculler|MMA
-1 Time Warp|STX
+1 Time Warp|STA
 1 Tireless Tracker|SOI
 1 Tooth and Nail|MMA
 1 Torrential Gearhulk|MPS_KLD
