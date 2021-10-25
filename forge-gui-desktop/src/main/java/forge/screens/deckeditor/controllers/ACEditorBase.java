@@ -545,9 +545,9 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                             cardManager.addItem(foiledCard, quantity);
                             cardManager.setSelectedItem(foiledCard);
                         }
-                    }, true, true);
+            }, true, true);
         }
-//TODO: need to translate getItemDisplayString
+        //TODO: need to translate getItemDisplayString
         private void addItem(final String verb, final String dest, final boolean toAlternate, final int qty, final int shortcutModifiers) {
             String label = verb + " " + SItemManagerUtil.getItemDisplayString(getItemManager().getSelectedItems(), qty, false);
             if (dest != null && !dest.isEmpty()) {
