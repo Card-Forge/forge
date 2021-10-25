@@ -4,7 +4,10 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -13,8 +16,6 @@ import forge.util.Localizer;
 import forge.util.MyRandom;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
     @Override
@@ -116,13 +117,6 @@ public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
                     }
                 }
         ));
-
-        Collections.sort(cardsOTB, new Comparator<Card>() {
-            @Override
-            public int compare(Card c0, Card c1) {
-                return c0.getId() - c1.getId();
-            }
-        });
 
         int loc = cardsOTB.indexOf(c);
         if (direction < 0 && loc > 0) {
