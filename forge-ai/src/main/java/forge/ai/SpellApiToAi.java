@@ -87,6 +87,7 @@ public enum SpellApiToAi {
             .put(ApiType.Explore, ExploreAi.class)
             .put(ApiType.Fight, FightAi.class)
             .put(ApiType.FlipACoin, FlipACoinAi.class)
+            .put(ApiType.FlipOntoBattlefield, FlipOntoBattlefieldAi.class)
             .put(ApiType.Fog, FogAi.class)
             .put(ApiType.GainControl, ControlGainAi.class)
             .put(ApiType.GainControlVariant, ControlGainVariantAi.class)

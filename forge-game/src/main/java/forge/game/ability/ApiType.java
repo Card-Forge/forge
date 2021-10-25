@@ -85,6 +85,7 @@ public enum ApiType {
     Explore (ExploreEffect.class),
     Fight (FightEffect.class),
     FlipACoin (FlipCoinEffect.class),
+    FlipOntoBattlefield (FlipOntoBattlefieldEffect.class),
     Fog (FogEffect.class),
     GainControl (ControlGainEffect.class),
     GainControlVariant (ControlGainVariantEffect.class),
