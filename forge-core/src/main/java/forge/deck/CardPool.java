@@ -53,7 +53,7 @@ public class CardPool extends ItemPool<PaperCard> {
 
     public void add(final String cardRequest, final int amount) {
         CardDb.CardRequest request = CardDb.CardRequest.fromString(cardRequest);
-        this.add(request.cardName, request.edition, request.artIndex, amount);
+        this.add(CardDb.CardRequest.compose(request.cardName, request.isFoil), request.edition, request.artIndex, amount);
     }
 
     public void add(final String cardName, final String setCode) {
