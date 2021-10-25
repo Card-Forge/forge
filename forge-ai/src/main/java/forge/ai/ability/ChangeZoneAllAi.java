@@ -260,8 +260,9 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             
                 // minimum card advantage unless the hand will be fully reloaded
                 int minAdv = logic.contains(".minAdv") ? Integer.parseInt(logic.substring(logic.indexOf(".minAdv") + 7)) : 0;
+                boolean noDiscard = logic.contains(".noDiscard");
 
-                if (numExiledWithSrc > curHandSize) {
+                if (numExiledWithSrc > curHandSize || (noDiscard && numExiledWithSrc > 0)) {
                     if (ComputerUtil.predictThreatenedObjects(ai, sa, true).contains(source)) {
                         // Try to gain some card advantage if the card will die anyway
                         // TODO: ideally, should evaluate the hand value and not discard good hands to it
@@ -269,7 +270,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                     }
                 }
 
-                return (curHandSize + minAdv - 1 < numExiledWithSrc) || (numExiledWithSrc >= ai.getMaxHandSize());
+                return (curHandSize + minAdv - 1 < numExiledWithSrc) || (!noDiscard && numExiledWithSrc >= ai.getMaxHandSize());
             }
         } else if (origin.equals(ZoneType.Stack)) {
             // time stop can do something like this:

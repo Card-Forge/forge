@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigEffect:DB$ Effect | Triggers$ TrigDamageDone
 SVar:TrigDamageDone:Mode$ DamageDone | ValidTarget$ Creature.OppCtrl | Execute$ TrigDestroy | TriggerDescription$ Poison Breath — Until end of turn, whenever a creature an opponent controls is dealt damage, destroy it.
 SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTarget
+SVar:PlayMain1:TRUE
 Oracle:Flying\nPoison Breath — When Green Dragon enters the battlefield, until end of turn, whenever a creature an opponent controls is dealt damage, destroy it.
