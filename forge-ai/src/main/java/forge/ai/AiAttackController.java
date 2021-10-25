@@ -208,7 +208,7 @@ public class AiAttackController {
      */
     public final boolean isEffectiveAttacker(final Player ai, final Card attacker, final Combat combat, final GameEntity defender) {
         // if the attacker will die when attacking don't attack
-        if ((attacker.getNetToughness() + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, null, combat, true)) <= 0) {
+        if (attacker.getNetToughness() + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, null, combat, true) <= 0) {
             return false;
         }
 

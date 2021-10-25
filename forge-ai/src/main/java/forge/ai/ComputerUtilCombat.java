@@ -1478,7 +1478,7 @@ public class ComputerUtilCombat {
 
             // DealDamage triggers
             if (ApiType.DealDamage.equals(sa.getApi())) {
-                if ("TriggeredAttacker".equals(sa.getParam("Defined"))) {
+                if (!sa.hasParam("Defined") || !sa.getParam("Defined").startsWith("TriggeredAttacker")) {
                     continue;
                 }
                 int damage = AbilityUtils.calculateAmount(source, sa.getParam("NumDmg"), sa);
