@@ -1,0 +1,8 @@
+Name:Chaos Orb
+ManaCost:2
+Types:Artifact
+A:AB$ FlipOntoBattlefield | Cost$ 1 T | SubAbility$ DBDestroyTouched | ActivationZone$ Battlefield | SpellDescription$ If CARDNAME is on the battlefield, flip CARDNAME onto the battlefield from a height of at least one foot. If CARDNAME turns over completely at least once during the flip, destroy all nontoken permanents it touches. Then destroy CARDNAME. | StackDescription$ SpellDescription
+SVar:DBDestroyTouched:DB$ DestroyAll | ValidCards$ Card.IsRemembered+nonToken | SubAbility$ DBDestroyChaosOrb | AILogic$ Always | StackDescription$ None
+SVar:DBDestroyChaosOrb:DB$ Destroy | Defined$ Self | SubAbility$ DBCleanup | AILogic$ Always | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:{1}, {T}: If Chaos Orb is on the battlefield, flip Chaos Orb onto the battlefield from a height of at least one foot. If Chaos Orb turns over completely at least once during the flip, destroy all nontoken permanents it touches. Then destroy Chaos Orb.
