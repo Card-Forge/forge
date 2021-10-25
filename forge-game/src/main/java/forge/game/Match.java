@@ -1,24 +1,7 @@
 package forge.game;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.HashMultiset;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Multiset;
+import com.google.common.collect.*;
 import com.google.common.eventbus.EventBus;
-
 import forge.LobbyPlayer;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -40,7 +23,11 @@ import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
 
+import java.util.*;
+import java.util.Map.Entry;
+
 public class Match {
+    private static List<PaperCard> removedCards = Lists.newArrayList();
     private final List<RegisteredPlayer> players;
     private final GameRules rules;
     private final String title;
@@ -198,6 +185,12 @@ public class Match {
         return myRemovedAnteCards;
     }
 
+    public static List<PaperCard> getRemovedCards() { return removedCards; }
+
+    public void removeCard(PaperCard c) {
+        removedCards.add(c);
+    }
+
     private static void preparePlayerZone(Player player, final ZoneType zoneType, CardPool section, boolean canRandomFoil) {
         PlayerZone library = player.getZone(zoneType);
         List<Card> newLibrary = new ArrayList<>();
@@ -257,6 +250,23 @@ public class Match {
                 }
 
                 Deck toChange = psc.getDeck();
+                if (!getRemovedCards().isEmpty()) {
+                    CardPool main = new CardPool();
+                    main.addAll(toChange.get(DeckSection.Main));
+                    CardPool sideboard = new CardPool();
+                    sideboard.addAll(toChange.getOrCreate(DeckSection.Sideboard));
+                    for (PaperCard c : removedCards) {
+                        if (main.contains(c)) {
+                            main.remove(c, 1);
+                        } else if (sideboard.contains(c)) {
+                            sideboard.remove(c, 1);
+                        }
+                    }
+                    toChange.getMain().clear();
+                    toChange.getMain().addAll(main);
+                    toChange.get(DeckSection.Sideboard).clear();
+                    toChange.get(DeckSection.Sideboard).addAll(sideboard);
+                }
                 List<PaperCard> newMain = person.sideboard(toChange, rules.getGameType(), player.getName());
                 if (null != newMain) {
                     CardPool allCards = new CardPool();
