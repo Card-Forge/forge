@@ -98,7 +98,7 @@ public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
     }
 
     private Card getNeighboringCard(Card c, int direction) {
-        // Currently gets the nearest (by ID) card to the left or to the right of the designated one by type
+        // Currently gets the nearest (in zone order) card to the left or to the right of the designated one by type
         Player controller = c.getController();
         ArrayList<Card> cardsOTB = Lists.newArrayList(CardLists.filter(
                 controller.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
