@@ -216,7 +216,6 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         }
 
         for (final Entry<TItem, Integer> itemEntry : itemsToAdd) {
-
             final TItem item = itemEntry.getKey();
             final PaperCard card = item instanceof PaperCard ? (PaperCard)item : null;
             int qty = itemEntry.getValue();
@@ -224,8 +223,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             int max;
             if (deck == null || card == null || limit == CardLimit.None || DeckFormat.canHaveAnyNumberOf(card)) {
                 max = Integer.MAX_VALUE;
-            }
-            else {
+            } else {
                 max = (limit == CardLimit.Singleton ? 1 : FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT));
 
                 Integer cardCopies = DeckFormat.canHaveSpecificNumberInDeck(card);
@@ -563,8 +561,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                     }
                     if (isAddContextMenu) {
                         CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(toAlternate, quantity);
-                    }
-                    else {
+                    } else {
                         CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(toAlternate, quantity);
                     }
                 }

@@ -216,7 +216,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     }
 
     private void loadDeferredSections() {
-        if ((deferredSections == null) && (loadedSections == null))
+        if (deferredSections == null && loadedSections == null)
             return;
 
         if (loadedSections != null && !includeCardsFromUnspecifiedSet)
@@ -236,8 +236,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         if (deferredSections != null) {
             this.validateDeferredSections();
             referenceDeckLoadingMap = new HashMap<>(this.deferredSections);
-        }
-        else
+        } else
             referenceDeckLoadingMap = new HashMap<>(loadedSections);
 
         loadedSections = new HashMap<>();
@@ -255,7 +254,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                 continue;
             final List<String> cardsInSection = s.getValue();
             ArrayList<String> cardNamesWithNoEdition = getAllCardNamesWithNoSpecifiedEdition(cardsInSection);
-            if (cardNamesWithNoEdition.size() > 0){
+            if (cardNamesWithNoEdition.size() > 0) {
                 includeCardsFromUnspecifiedSet = true;
                 if (smartCardArtSelection)
                     cardsWithNoEdition.put(sec, cardNamesWithNoEdition);
@@ -267,10 +266,9 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         deferredSections = null;  // set to null, just in case!
         if (includeCardsFromUnspecifiedSet && smartCardArtSelection)
             optimiseCardArtSelectionInDeckSections(cardsWithNoEdition);
-
     }
 
-    private void validateDeferredSections(){
+    private void validateDeferredSections() {
         /*
          Construct a temporary (DeckSection, CardPool) Maps, to be sanitised and finalised
          before copying into `this.parts`. This sanitisation is applied because of the
@@ -306,8 +304,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             }
             validatedSections.put(s.getKey(), whiteList);
 
-            if (filteredPool.countDistinct() != pool.countDistinct()){
-
+            if (filteredPool.countDistinct() != pool.countDistinct()) {
                 CardPool blackList = pool.getFilteredPoolWithCardsCount(new Predicate<PaperCard>() {
                     @Override
                     public boolean apply(PaperCard input) {
@@ -356,9 +353,9 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         boolean isCardArtPreferenceLatestArt = data.cardArtPreferenceIsLatest();
         boolean cardArtPreferenceHasFilter = data.isCoreExpansionOnlyFilterSet();
 
-        for(Entry<DeckSection, CardPool> part : parts.entrySet()) {
+        for (Entry<DeckSection, CardPool> part : parts.entrySet()) {
             DeckSection deckSection = part.getKey();
-            if(deckSection == DeckSection.Planes || deckSection == DeckSection.Schemes || deckSection == DeckSection.Avatar)
+            if (deckSection == DeckSection.Planes || deckSection == DeckSection.Schemes || deckSection == DeckSection.Avatar)
                 continue;
 
             // == 0. First Off, check if there is anything at all to do for the current section
@@ -432,7 +429,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         cardsPerArtIndex = Math.max(1, cardsPerArtIndex);  // make sure is never zero
         int cardsAdded = 0;
         PaperCard alternativeCardArt = null;
-        for (int artIndex = 1; artIndex <= nrOfAvailableArts; artIndex++){
+        for (int artIndex = 1; artIndex <= nrOfAvailableArts; artIndex++) {
             alternativeCardArt = data.getOrLoadCommonCard(cardName, setCode, artIndex, isFoil);
             cardsAdded += cardsPerArtIndex;
             pool.add(alternativeCardArt, cardsPerArtIndex);
@@ -461,7 +458,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
         if (card.getRules().isVariant())
             return false;  // skip variant cards
-        if (StaticData.instance().getCommonCards().hasPreferredArt(card.getName())){
+        if (StaticData.instance().getCommonCards().hasPreferredArt(card.getName())) {
             // if there is any preferred art, never update it!
             CardDb.CardRequest request = CardDb.CardRequest.fromString(card.getName());
             if (request.edition.equals(card.getEdition()) && request.artIndex == card.getArtIndex())
@@ -477,8 +474,6 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         // Original Art
         return releaseDate.compareTo(referenceReleaseDate) < 0;
     }
-
-
 
     public static final Function<Deck, String> FN_NAME_SELECTOR = new Function<Deck, String>() {
         @Override

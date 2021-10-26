@@ -268,7 +268,6 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         return sortableCNKey;
     }
 
-
     @Override
     public int compareTo(final IPaperCard o) {
         final int nameCmp = name.compareToIgnoreCase(o.getName());
