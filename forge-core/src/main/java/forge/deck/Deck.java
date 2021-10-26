@@ -539,4 +539,32 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     public Deck getHumanDeck() {
         return this;
     }
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean equals(final Object o) {
+        if (o instanceof Deck) {
+            final DeckBase dbase = (DeckBase) o;
+            boolean deckBaseEquals = super.equals(dbase);
+            if (!deckBaseEquals)
+                return false;
+            // ok so far we made sure they do have the same name. Now onto comparing parts
+            final Deck d = (Deck) o;
+            for (DeckSection deckSection : this.parts.keySet()) {
+                CardPool otherPool = d.get(deckSection);
+                CardPool thisPool = this.parts.get(deckSection);
+                if (!thisPool.equals(otherPool))  // this also accounts for null from d.get
+                    return false;
+            }
+            // if we reached this far, it means all sections in this.parts are identical to d.parts
+            // now let's consider the other way around, as in any section in d not in parts.
+            for (DeckSection deckSection: d.parts.keySet()){
+                CardPool otherPool = d.get(deckSection);
+                if (!this.parts.containsKey(deckSection) && otherPool.countAll() > 0)
+                    return false;
+            }
+            return true;
+        }
+        return false;
+    }
 }
