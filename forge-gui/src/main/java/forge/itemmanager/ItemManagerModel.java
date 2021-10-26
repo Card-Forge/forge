@@ -80,8 +80,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
         if (data.count(item0) > 0) {
             if (isInfinite()) {
                 data.removeAll(item0);
-            }
-            else {
+            } else {
                 data.remove(item0, qty);
             }
             isListInSync = false;
