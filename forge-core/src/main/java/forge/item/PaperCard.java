@@ -123,6 +123,14 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         }
         return this.foiledVersion;
     }
+    public PaperCard getUnFoiled() {
+        if (!this.foil)
+            return this;
+
+        PaperCard unFoiledVersion = new PaperCard(this.rules, this.edition, this.rarity,
+                this.artIndex, false, String.valueOf(collectorNumber), this.artist);
+        return unFoiledVersion;
+    }
 
 //    @Override
 //    public String getImageKey() {
@@ -259,7 +267,6 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         }
         return sortableCNKey;
     }
-
 
     @Override
     public int compareTo(final IPaperCard o) {
