@@ -86,10 +86,9 @@ public class DeckController<T extends DeckBase> {
     /**
      * Load deck from file or clipboard
      */
-    public void loadDeck(Deck deck){
+    public void loadDeck(Deck deck) {
         this.loadDeck(deck, true);
     }
-
     public void loadDeck(Deck deck, boolean substituteCurrentDeck) {
         if (view.getCatalogManager().isInfinite()) {
             Deck currentDeck = view.getHumanDeck();
@@ -155,7 +154,6 @@ public class DeckController<T extends DeckBase> {
     }
 
     private void pickFromCatalog(Map<String, Integer> countByName, CardPool catalog, CardPool targetSection) {
-
         CardPool catalogClone = new CardPool(catalog); // clone to iterate modified collection
         for (Map.Entry<PaperCard, Integer> entry : catalogClone) {
             PaperCard availableCard = entry.getKey();
@@ -214,7 +212,6 @@ public class DeckController<T extends DeckBase> {
     public void setModel(final T document) {
         setModel(document, false);
     }
-
     private void setModel(final T document, final boolean isStored) {
         model = document;
         onModelChanged(isStored);
@@ -230,8 +227,7 @@ public class DeckController<T extends DeckBase> {
         if (isStored) {
             if (isModelInSyncWithFolder()) {
                 setSaved(true);
-            }
-            else {
+            } else {
                 notifyModelChanged();
             }
         } else { //TODO: Make this smarter
@@ -313,8 +309,7 @@ public class DeckController<T extends DeckBase> {
         final T newModel = currentFolder.get(name);
         if (newModel != null) {
             setModel((T) newModel.copyTo(name), true);
-        }
-        else {
+        } else {
             setSaved(true);
         }
     }

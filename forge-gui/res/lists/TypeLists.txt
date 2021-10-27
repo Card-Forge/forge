@@ -374,6 +374,7 @@ Tezzeret
 Tibalt
 Tyvar
 Ugin
+Urza
 Venser
 Vivien
 Vraska
