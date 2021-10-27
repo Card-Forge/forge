@@ -1,0 +1,113 @@
+Name:Urza, Academy Headmaster
+ManaCost:W U B R G
+Types:Legendary Planeswalker Urza
+Loyalty:4
+A:AB$ GenericChoice | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | AtRandom$ Urza | ShowChoice$ Description | Choices$ Pump1,PutCounter2,Destroy3,Token4,Token5,Token6,Dig7,MustAttack8,PutCounter9,Effect10,Exile11,Dig12,Animate13,Draw14,Animate15,PumpAll16,Dig17,DealDamage18,Animate19,Mana20 | ShowChoice$ Description | StackDescription$ SpellDescription | SpellDescription$ Head to AskUrza.com and click +1.
+SVar:Pump1:DB$ Pump | TargetMin$ 0 | TargetMax$ 1 | KW$ First Strike & Vigilance & Lifelink | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | KW$ First Strike & Vigilance & Lifelink | SpellDescription$ Until end of turn, up to one target creature gets +1/+1 and gains first strike, vigilance, and lifelink.
+SVar:PutCounter2:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to distribute counters to | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ Distribute three +1/+1 counters among one, two, or three target creatures you control.
+SVar:Destroy3:DB$ Destroy | ValidTgts$ Permanent.nonCreature | TgtPrompt$ Select a noncreature permanent | SpellDescription$ Destroy target noncreature permanent.
+SVar:Token4:DB$ Token | TokenAmount$ 2 | TokenScript$ r_3_1_elemental_haste | AtEOT$ Exile | SpellDescription$ Create two 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step.
+SVar:Token5:DB$ Token | TokenAmount$ 3 | TokenScript$ w_1_1_soldier | SpellDescription$ Create three 1/1 white Soldier creature tokens.
+SVar:Token6:DB$ Token | TokenScript$ b_3_3_beast_deathtouch | SpellDescription$ Create a 3/3 black Beast creature token with deathtouch.
+SVar:Dig7:DB$ Dig | DigNum$ 5 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature | SpellDescription$ Reveal the top five cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.
+SVar:MustAttack8:DB$ MustAttack | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Defender$ Self | SpellDescription$ During target opponent's next turn, creatures that player controls attack NICKNAME if able.
+SVar:PutCounter9:DB$ PutCounter | Defined$ Self | CounterType$ LOYALTY | CounterNum$ X9 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | StackDescription$ SpellDescription | SpellDescription$ Put a loyalty counter on NICKNAME for each creature target opponent controls.
+SVar:X9:TargetedPlayer$CreaturesInPlay
+SVar:Effect10:DB$ Effect | Triggers$ TrigAttack10 | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.
+SVar:TrigAttack10:Mode$ Attacks | ValidCard$ Creature.OppCtrl | TriggerZones$ Command | Execute$ DebuffAttacker10 | TriggerDescription$ Whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.
+SVar:DebuffAttacker10:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ -1
+SVar:Exile11:DB$ ChangeZone | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Chooser$ Targeted | Hidden$ True | IsCurse$ True | Mandatory$ True | SpellDescription$ Target player exiles a card from their hand.
+SVar:Dig12:DB$ Dig | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Land | DestinationZone$ Battlefield | DestinationZone2$ Hand | SpellDescription$ Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand.
+SVar:Animate13:DB$ Animate | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Power$ 4 | Toughness$ 4 | Types$ Creature,Elemental | Duration$ Permanent | Keywords$ Trample | SpellDescription$ Target land you control becomes a 4/4 Elemental creature with trample. It's still a land.
+SVar:Draw14:DB$ Draw | Defined$ You | SubAbility$ DBMana14 | SpellDescription$ Draw a card, then add one mana of any color.
+SVar:DBMana14:DB$ Mana | Produced$ Any | AILogic$ MostProminentInComputerHand
+SVar:Animate15:DB$ Animate | Power$ 4 | Toughness$ 4 | Types$ Creature,Legendary,Dragon | Colors$ Red | OverwriteColors$ True | RemoveCardTypes$ True | Keywords$ Flying & Indestructible & Haste | SpellDescription$ Until end of turn, NICKNAME becomes a legendary 4/4 red Dragon creature with flying, indestructible, and haste. (He doesn't lose loyalty while he's not a planeswalker.)
+SVar:PumpAll16:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | KW$ Lifelink | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, creatures you control get +1/+0 and gain lifelink.
+SVar:Dig17:DB$ Dig | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Artifact | SpellDescription$ Look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+SVar:DealDamage18:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SpellDescription$ NICKNAME deals 3 damage to any target.
+SVar:Animate19:DB$ Animate | Defined$ Self | Triggers$ DamageTrig19 | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, whenever a creature deals combat damage to NICKNAME, destroy that creature. | StackDescription$ SpellDescription
+SVar:DamageTrig19:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ Card.Self | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigDestroy19 | TriggerDescription$ Whenever a creature deals combat damage to NICKNAME, destroy that creature.
+SVar:TrigDestroy19:DB$ Destroy | Defined$ TriggeredSourceLKICopy
+SVar:Mana20:DB$ Mana | Produced$ Combo Any | Amount$ X20 | SpellDescription$ Add X mana in any combination of colors, where X is the number of creatures you control.
+SVar:X20:Count$Valid Creature.YouCtrl
+A:AB$ GenericChoice | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | AtRandom$ Urza | ShowChoice$ Description | Choices$ DamageAll1M,GainControl2M,DealDamage3M,Destroy4M,Effect5M,ChangeZone6M,Draw7M,Mill8M,Dig9M,Exile10M,Reveal11M,Tutor12M,Sacrifice13M,Token14M,Token15M,SetLife16M,Destroy17M,Return18M,Token19M,Draw20M | ShowChoice$ Description | StackDescription$ SpellDescription | SpellDescription$ Head to AskUrza.com and click -1.
+SVar:DamageAll1M:DB$ DamageAll | NumDmg$ 3 | ValidCards$ Creature | SpellDescription$ NICKNAME deals 3 damage to each creature.
+SVar:GainControl2M:DB$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Gain control of target creature.
+SVar:DealDamage3M:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 4 | SubAbility$ DBGainLife3M | SpellDescription$ NICKNAME deals 4 damage to any target and you gain 4 life.
+SVar:DBGainLife3M:DB$ GainLife | Defined$ You | LifeAmount$ 4
+SVar:Destroy4M:DB$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife4M | SpellDescription$ Destroy target creature. You gain life equal to its toughness.
+SVar:DBGainLife4M:DB$ GainLife | Defined$ You | LifeAmount$ X4M
+SVar:X4M:TargetedLKI$CardToughness
+SVar:Effect5M:DB$ Effect | Name$ Emblem - Urza, Academy Headmaster (5M) | StaticAbilities$ STPump5M | Duration$ Permanent | SpellDescription$ You get an emblem with "Creatures you control get +1/+1."
+SVar:STPump5M:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control get +1/+1.
+SVar:ChangeZone6M:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ You may put a creature card from your hand onto the battlefield.
+SVar:Draw7M:DB$ Draw | NumCards$ 3 | SubAbility$ DBChangeZone7M | SpellDescription$ Draw three cards, then put a card from your hand on top of your library.
+SVar:DBChangeZone7M:DB$ ChangeZone | Origin$ Hand | Destination$ Library | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SelectPrompt$ Select a card from your hand to put on top of your library
+SVar:Mill8M:DB$ Mill | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 10 | SpellDescription$ Target player puts the top ten cards of their library into their graveyard.
+SVar:Dig9M:DB$ Dig | DigNum$ 5 | Reveal$ True | RememberRevealed$ True | NoMove$ True | SubAbility$ DBTwoPiles9M | SpellDescription$ Reveal the top five cards of your library. An opponent separates them into two piles. Put one pile into your hand and the other on the bottom of your library in any order.
+SVar:DBTwoPiles9M:DB$ TwoPiles | Defined$ You | DefinedCards$ Remembered | Separator$ Opponent | ChosenPile$ DBHand9M | UnchosenPile$ DBLibraryBottom9M
+SVar:DBHand9M:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand
+SVar:DBLibraryBottom9M:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | SubAbility$ DBCleanup
+SVar:Exile10M:DB$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target permanent.
+SVar:Reveal11M:DB$ Dig | DigNum$ 5 | Reveal$ True | RememberRevealed$ True | NoMove$ True | SubAbility$ DBChangeCreatures11M | SpellDescription$ Reveal the top five cards of your library. You may put all creature cards and/or land cards from among them into your hand. Put the rest into your graveyard.
+SVar:DBChangeCreatures11M:DB$ ChangeZoneAll | ChangeType$ Card.Creature+IsRemembered | Origin$ Library | Destination$ Hand | Optional$ True | OptionQuestion$ Put all creature cards into your hand? | ForgetChanged$ True | SubAbility$ DBChangeLands11M
+SVar:DBChangeLands11M:DB$ ChangeZoneAll | ChangeType$ Card.Land+IsRemembered | Origin$ Library | Destination$ Hand | Optional$ True | OptionQuestion$ Put all land cards into your hand? | ForgetChanged$ True | SubAbility$ DBChangeRest11M
+SVar:DBChangeRest11M:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Graveyard | ForgetChanged$ True
+SVar:Tutor12M:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ Search your library for a card and put that card into your hand. Then shuffle your library.
+SVar:Sacrifice13M:DB$ Sacrifice | ValidTgts$ Player | Amount$ 2 | SacValid$ Creature | SpellDescription$ Target player sacrifices two creatures.
+SVar:Token14M:DB$ Token | TokenScript$ b_5_5_demon_flying | SubAbility$ DBLoselife14M | SpellDescription$ Create a 5/5 black Demon creature token with flying. You lose 2 life.
+SVar:DBLoselife14M:DB$ LoseLife | LifeAmount$ 2
+SVar:Token15M:DB$ Token | TokenScript$ c_4_4_dragon_flying | SpellDescription$ Create a 4/4 gold Dragon creature token with flying.
+SVar:SetLife16M:DB$ SetLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 10 | SpellDescription$ Target player's life total becomes 10.
+SVar:Destroy17M:DB$ Destroy | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select a nonland permanent | SpellDescription$ Destroy target nonland permanent.
+SVar:Return18M:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Select target permanent in a graveyard | ValidTgts$ Permanent | SpellDescription$ Return target permanent from a graveyard to the battlefield under your control.
+SVar:Token19M:DB$ Token | TokenAmount$ 2 | TokenScript$ g_3_3_beast | SpellDescription$ Create two 3/3 green Beast creature tokens.
+SVar:Draw20M:DB$ Draw | NumCards$ 4 | SubAbility$ DBDiscard20M | SpellDescription$ Draw four cards, then discard two cards.
+SVar:DBDiscard20M:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
+A:AB$ GenericChoice | Cost$ SubCounter<6/LOYALTY> | AtRandom$ Urza | ShowChoice$ Description | Choices$ DealDamage1U,Effect2U,DestroyAll3U,Token4U,LifeGain5U,Damage6U,Effect7U,Effect8U,Token9U,Shuffle10U,Destroy11U,Effect12U,Effect13U,ControlPlayer14U,ExileLibrary15U,Token16U,Raise17U,LifeDraw18U,FlipTurns19U | Planeswalker$ True | Ultimate$ True | ShowChoice$ Description | StackDescription$ SpellDescription | SpellDescription$ Head to AskUrza.com and click -6.
+SVar:DealDamage1U:DB$ DealDamage | ValidTgts$ Player,Planeswalker | SubAbility$ DBDiscard1U | SpellDescription$ NICKNAME deals 7 damage to target player or planeswalker. That player or that planeswalker's controller discards seven cards, then sacrifices seven permanents.
+SVar:DBDiscard1U:DB$ Discard | Defined$ TargetedOrController | NumCards$ 7 | Mode$ TgtChoose | SubAbility$ DBSac1U
+SVar:DBSac1U:DB$Sacrifice | Defined$ TargetedOrController | SacValid$ Permanent | Amount$ 7
+SVar:Effect2U:DB$ Effect | Name$ Emblem - Urza, Academy Headmaster (2U) | ReplacementEffects$ RPreventDamage | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "If a source would deal damage to you or a planeswalker you control, prevent all but 1 of that damage."
+SVar:RPreventDamage:Event$ DamageDone | ValidTarget$ You,Planeswalker.YouCtrl | ReplaceWith$ PreventDmg | PreventionEffect$ True | Description$ If a source would deal damage to you or a planeswalker you control, prevent all but 1 of that damage.
+SVar:PreventDmg:DB$ ReplaceDamage | Amount$ ShieldAmount
+SVar:ShieldAmount:ReplaceCount$DamageAmount/Minus.1
+SVar:DestroyAll3U:DB$ DestroyAll | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Land | SpellDescription$ Destroy all lands target player controls.
+SVar:Token4U:DB$ Token | TokenAmount$ X4U | TokenScript$ w_2_2_cat | SpellDescription$ Create X 2/2 white Cat creature tokens, where X is your life total.
+SVar:X4U:Count$YourLifeTotal
+SVar:LifeGain5U:DB$ GainLife | LifeAmount$ 100 | SpellDescription$ You gain 100 life.
+SVar:Damage6U:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select a player or planeswalker | NumDmg$ 10 | SubAbility$ DmgAll6U | DamageMap$ True | SpellDescription$ NICKNAME deals 10 damage to target player or planeswalker and each creature that player or that planeswalker's controller controls.
+SVar:DmgAll6U:DB$ DamageAll | NumDmg$ 10 | ValidCards$ Creature.ControlledBy TargetedOrController | SubAbility$ DBDamageResolve6U
+SVar:DBDamageResolve6U:DB$ DamageResolve
+SVar:Effect7U:DB$ Effect | Name$ Emblem - Urza, Academy Headmaster (7U) | StaticAbilities$ ST7U | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Creatures you control have double strike, trample, hexproof and haste."
+SVar:ST7U:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddKeyword$ Double Strike & Trample & Hexproof & Haste | Description$ Creatures you control have double strike, trample, hexproof and haste.
+SVar:Effect8U:DB$ Effect | Name$ Emblem - Urza, Academy Headmaster (8U) | StaticAbilities$ STIndestructible8U | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Artifacts, creatures, enchantments, and lands you control have indestructible."
+SVar:STIndestructible8U:Mode$ Continuous | EffectZone$ Command | Affected$ Artifact.YouCtrl,Creature.YouCtrl,Enchantment.YouCtrl,Land.YouCtrl | AffectedZone$ Battlefield | AddKeyword$ Indestructible | Description$ Artifacts, creatures, enchantments, and lands you control are indestructible.
+SVar:Token9U:DB$ Token | TokenAmount$ Lands | TokenScript$ g_6_6_wurm | SpellDescription$ Create a 6/6 green Wurm creature token for each land you control.
+SVar:Lands:Count$Valid Land.YouCtrl
+SVar:Shuffle10U:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | SubAbility$ DBDraw10U | UseAllOriginZones$ True | SpellDescription$ Each player shuffles their hand and graveyard into their library. You draw seven cards.
+SVar:DBDraw10U:DB$ Draw | Defined$ You | NumCards$ 7
+SVar:Destroy11U:DB$ Destroy | ValidTgts$ Creature,Planeswalker.Other | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Select up to three target creatures and/or other planeswalkers | RememberTargets$ True | SubAbility$ DBChangeZoneAll11U | SpellDescription$ Destroy up to three target creatures and/or other planeswalkers. Return each card put into a graveyard this way to the battlefield under your control.
+SVar:DBChangeZoneAll11U:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SubAbility$ DBCleanup
+SVar:Effect12U:DB$ Effect | Name$ Emblem - Urza, Academy Headmaster (12U) | Triggers$ TrigSpellCast12U | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever you cast a spell, exile target permanent."
+SVar:TrigSpellCast12U:Mode$ SpellCast | ValidActivatingPlayer$ You | Execute$ EffSpellCast12U | TriggerDescription$ Whenever you cast a spell, exile target permanent.
+SVar:EffSpellCast12U:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent
+SVar:Effect13U:DB$ Effect | Name$ Emblem - Urza, Academy Headmaster (13U) | Triggers$ TrigFight13U | Duration$ Permanent | AILogic$ Always | SubAbility$ DBToken13U | SpellDescription$ You get an emblem with "Whenever a creature enters the battlefield under your control, you may have it fight target creature." Then create three 8/8 blue Octopus creature tokens.
+SVar:TrigFight13U:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | Execute$ DBFight13U | OptionalDecider$ You | TriggerZones$ Command | TriggerDescription$ Whenever a creature enters the battlefield under your control, you may have it fight target creature.
+SVar:DBFight13U:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature | TgtPrompt$ Choose target creature
+SVar:DBToken13U:DB$ Token | TokenAmount$ 3 | TokenScript$ u_8_8_octopus
+SVar:ControlPlayer14U:DB$ ControlPlayer | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ You control target player during that player's next turn.
+SVar:ExileLibrary15U:DB$ ChangeZoneAll | Origin$ Library | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBChangeZone15U | Planeswalker$ True | Ultimate$ True | SpellDescription$ Exile all cards from target player's library, then that player shuffles their hand into their library.
+SVar:DBChangeZone15U:DB$ ChangeZoneAll | Origin$ Hand | Destination$ Library | Defined$ Targeted | ChangeType$ Card | Shuffle$ True
+SVar:Token16U:DB$ Token | TokenAmount$ 3 | TokenScript$ b_1_1_assassin_lose_con | SpellDescription$ Create three 1/1 black Assassin creature tokens with "Whenever this creature deals combat damage to a player, that player loses the game."
+SVar:Raise17U:DB$ ChangeZoneAll | ChangeType$ Creature | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SpellDescription$ Put all creature cards in all graveyards onto the battlefield under your control.
+SVar:LifeDraw18U:DB$ GainLife | LifeAmount$ Lands | SubAbility$ DBDraw18U | SpellDescription$ You gain X life and draw X cards, where X is the number of lands you control.
+SVar:DBDraw18U:DB$ Draw | NumCards$ Lands
+SVar:FlipTurns19U:DB$ FlipACoin | Amount$ 5 | NoCall$ True | HeadsSubAbility$ DBAddTurn19U | StackDescription$ SpellDescription | SpellDescription$ Flip 5 coins. Take an extra turn after this one for each coin that comes up heads.
+SVar:DBAddTurn19U:DB$ AddTurn | Defined$ You | NumTurns$ 1
+SVar:LifeDrawPut20U:DB$ GainLife | LifeAmount$ 7 | SubAbility$ DBDraw20U | SpellDescription$ You gain 7 life, draw seven cards, then put up to seven permanent cards from your hand onto the battlefield.
+SVar:DBDraw20U:DB$ Draw | NumCards$ 7 | SubAbility$ DBChangeZone20U
+SVar:DBChangeZone20U:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent | ChangeNum$ 7
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+DeckHas:Ability$Counters & Ability$Token & Ability$LifeGain & Ability$Discard
+Oracle:[+1]: Head to AskUrza.com and click +1.\n[-1]: Head to AskUrza.com and click -1.\n[-6]: Head to AskUrza.com and click -6.
