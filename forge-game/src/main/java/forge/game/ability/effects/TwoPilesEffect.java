@@ -51,7 +51,7 @@ public class TwoPilesEffect extends SpellAbilityEffect {
             zone = ZoneType.smartValueOf(sa.getParam("Zone"));
         }
 
-        final String valid = sa.getParamOrDefault("ValidCards", "");
+        final String valid = sa.getParamOrDefault("ValidCards", "Card");
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
