@@ -82,9 +82,8 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                 chosenSAs = p.getController().chooseSpellAbilitiesForEffect(abilities, sa, prompt, amount, ImmutableMap.of());
             }
 
-            // TODO: Move this up into the AtRandom area
             for (SpellAbility chosenSA : chosenSAs) {
-                if (sa.getParam("ChangeToAtRandom").equals("Urza") && chosenSA.usesTargeting()) {
+                if (sa.getParam("AtRandom").equals("Urza") && chosenSA.usesTargeting()) {
                     List<Card> validTargets = CardUtil.getValidCardsToTarget(chosenSA.getTargetRestrictions(), sa);
                     if (validTargets.isEmpty()) {
                         List <SpellAbility> newChosenSAs = Lists.newArrayList();

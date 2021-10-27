@@ -2,7 +2,7 @@ Name:Urza, Academy Headmaster
 ManaCost:W U B R G
 Types:Legendary Planeswalker Urza
 Loyalty:4
-A:AB$ GenericChoice | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ChangeToAtRandom$ Urza | Choices$ Pump1,PutCounter2,Destroy3,Token4,Token5,Token6,Dig7,MustAttack8,PutCounter9,Effect10,Exile11,Dig12,Animate13,Draw14,Animate15,PumpAll16,Dig17,DealDamage18,Animate19,Mana20 | ShowChoice$ Description | StackDescription$ SpellDescription | SpellDescription$ Head to AskUrza.com and click +1.
+A:AB$ GenericChoice | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | AtRandom$ Urza | ShowChoice$ Description | Choices$ Pump1,PutCounter2,Destroy3,Token4,Token5,Token6,Dig7,MustAttack8,PutCounter9,Effect10,Exile11,Dig12,Animate13,Draw14,Animate15,PumpAll16,Dig17,DealDamage18,Animate19,Mana20 | ShowChoice$ Description | StackDescription$ SpellDescription | SpellDescription$ Head to AskUrza.com and click +1.
 SVar:Pump1:DB$ Pump | TargetMin$ 0 | TargetMax$ 1 | KW$ First Strike & Vigilance & Lifelink | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | KW$ First Strike & Vigilance & Lifelink | SpellDescription$ Until end of turn, up to one target creature gets +1/+1 and gains first strike, vigilance, and lifelink.
 SVar:PutCounter2:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to distribute counters to | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ Distribute three +1/+1 counters among one, two, or three target creatures you control.
 SVar:Destroy3:DB$ Destroy | ValidTgts$ Permanent.nonCreature | TgtPrompt$ Select a noncreature permanent | SpellDescription$ Destroy target noncreature permanent.
@@ -30,7 +30,7 @@ SVar:DamageTrig19:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ Card.S
 SVar:TrigDestroy19:DB$ Destroy | Defined$ TriggeredSourceLKICopy
 SVar:Mana20:DB$ Mana | Produced$ Combo Any | Amount$ X20 | SpellDescription$ Add X mana in any combination of colors, where X is the number of creatures you control.
 SVar:X20:Count$Valid Creature.YouCtrl
-A:AB$ GenericChoice | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | ChangeToAtRandom$ Urza | Choices$ DamageAll1M,GainControl2M,DealDamage3M,Destroy4M,Effect5M,ChangeZone6M,Draw7M,Mill8M,Dig9M,Exile10M,Reveal11M,Tutor12M,Sacrifice13M,Token14M,Token15M,SetLife16M,Destroy17M,Return18M,Token19M,Draw20M | ShowChoice$ Description | StackDescription$ SpellDescription | SpellDescription$ Head to AskUrza.com and click -1.
+A:AB$ GenericChoice | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | AtRandom$ Urza | ShowChoice$ Description | Choices$ DamageAll1M,GainControl2M,DealDamage3M,Destroy4M,Effect5M,ChangeZone6M,Draw7M,Mill8M,Dig9M,Exile10M,Reveal11M,Tutor12M,Sacrifice13M,Token14M,Token15M,SetLife16M,Destroy17M,Return18M,Token19M,Draw20M | ShowChoice$ Description | StackDescription$ SpellDescription | SpellDescription$ Head to AskUrza.com and click -1.
 SVar:DamageAll1M:DB$ DamageAll | NumDmg$ 3 | ValidCards$ Creature | SpellDescription$ NICKNAME deals 3 damage to each creature.
 SVar:GainControl2M:DB$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Gain control of target creature.
 SVar:DealDamage3M:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 4 | SubAbility$ DBGainLife3M | SpellDescription$ NICKNAME deals 4 damage to any target and you gain 4 life.
@@ -64,7 +64,7 @@ SVar:Return18M:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | G
 SVar:Token19M:DB$ Token | TokenAmount$ 2 | TokenScript$ g_3_3_beast | SpellDescription$ Create two 3/3 green Beast creature tokens.
 SVar:Draw20M:DB$ Draw | NumCards$ 4 | SubAbility$ DBDiscard20M | SpellDescription$ Draw four cards, then discard two cards.
 SVar:DBDiscard20M:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
-A:AB$ GenericChoice | Cost$ SubCounter<6/LOYALTY> | ChangeToAtRandom$ Urza | Choices$ | Planeswalker$ True | Ultimate$ True | ShowChoice$ Description | StackDescription$ SpellDescription | SpellDescription$ Head to AskUrza.com and click -6.
+A:AB$ GenericChoice | Cost$ SubCounter<6/LOYALTY> | AtRandom$ Urza | ShowChoice$ Description | Choices$ DealDamage1U,Effect2U,DestroyAll3U,Token4U,LifeGain5U,Damage6U,Effect7U,Effect8U,Token9U,Shuffle10U,Destroy11U,Effect12U,Effect13U,ControlPlayer14U,ExileLibrary15U,Token16U,Raise17U,LifeDraw18U,FlipTurns19U | Planeswalker$ True | Ultimate$ True | ShowChoice$ Description | StackDescription$ SpellDescription | SpellDescription$ Head to AskUrza.com and click -6.
 SVar:DealDamage1U:DB$ DealDamage | ValidTgts$ Player,Planeswalker | SubAbility$ DBDiscard1U | SpellDescription$ NICKNAME deals 7 damage to target player or planeswalker. That player or that planeswalker's controller discards seven cards, then sacrifices seven permanents.
 SVar:DBDiscard1U:DB$ Discard | Defined$ TargetedOrController | NumCards$ 7 | Mode$ TgtChoose | SubAbility$ DBSac1U
 SVar:DBSac1U:DB$Sacrifice | Defined$ TargetedOrController | SacValid$ Permanent | Amount$ 7
@@ -72,9 +72,42 @@ SVar:Effect2U:DB$ Effect | Name$ Emblem - Urza, Academy Headmaster (2U) | Replac
 SVar:RPreventDamage:Event$ DamageDone | ValidTarget$ You,Planeswalker.YouCtrl | ReplaceWith$ PreventDmg | PreventionEffect$ True | Description$ If a source would deal damage to you or a planeswalker you control, prevent all but 1 of that damage.
 SVar:PreventDmg:DB$ ReplaceDamage | Amount$ ShieldAmount
 SVar:ShieldAmount:ReplaceCount$DamageAmount/Minus.1
-
-
-
+SVar:DestroyAll3U:DB$ DestroyAll | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Land | SpellDescription$ Destroy all lands target player controls.
+SVar:Token4U:DB$ Token | TokenAmount$ X4U | TokenScript$ w_2_2_cat | SpellDescription$ Create X 2/2 white Cat creature tokens, where X is your life total.
+SVar:X4U:Count$YourLifeTotal
+SVar:LifeGain5U:DB$ GainLife | LifeAmount$ 100 | SpellDescription$ You gain 100 life.
+SVar:Damage6U:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select a player or planeswalker | NumDmg$ 10 | SubAbility$ DmgAll6U | DamageMap$ True | SpellDescription$ NICKNAME deals 10 damage to target player or planeswalker and each creature that player or that planeswalker's controller controls.
+SVar:DmgAll6U:DB$ DamageAll | NumDmg$ 10 | ValidCards$ Creature.ControlledBy TargetedOrController | SubAbility$ DBDamageResolve6U
+SVar:DBDamageResolve6U:DB$ DamageResolve
+SVar:Effect7U:DB$ Effect | Name$ Emblem - Urza, Academy Headmaster (7U) | StaticAbilities$ ST7U | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Creatures you control have double strike, trample, hexproof and haste."
+SVar:ST7U:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddKeyword$ Double Strike & Trample & Hexproof & Haste | Description$ Creatures you control have double strike, trample, hexproof and haste.
+SVar:Effect8U:DB$ Effect | Name$ Emblem - Urza, Academy Headmaster (8U) | StaticAbilities$ STIndestructible8U | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Artifacts, creatures, enchantments, and lands you control have indestructible."
+SVar:STIndestructible8U:Mode$ Continuous | EffectZone$ Command | Affected$ Artifact.YouCtrl,Creature.YouCtrl,Enchantment.YouCtrl,Land.YouCtrl | AffectedZone$ Battlefield | AddKeyword$ Indestructible | Description$ Artifacts, creatures, enchantments, and lands you control are indestructible.
+SVar:Token9U:DB$ Token | TokenAmount$ Lands | TokenScript$ g_6_6_wurm | SpellDescription$ Create a 6/6 green Wurm creature token for each land you control.
+SVar:Lands:Count$Valid Land.YouCtrl
+SVar:Shuffle10U:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | SubAbility$ DBDraw10U | UseAllOriginZones$ True | SpellDescription$ Each player shuffles their hand and graveyard into their library. You draw seven cards.
+SVar:DBDraw10U:DB$ Draw | Defined$ You | NumCards$ 7
+SVar:Destroy11U:DB$ Destroy | ValidTgts$ Creature,Planeswalker.Other | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Select up to three target creatures and/or other planeswalkers | RememberTargets$ True | SubAbility$ DBChangeZoneAll11U | SpellDescription$ Destroy up to three target creatures and/or other planeswalkers. Return each card put into a graveyard this way to the battlefield under your control.
+SVar:DBChangeZoneAll11U:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SubAbility$ DBCleanup
+SVar:Effect12U:DB$ Effect | Name$ Emblem - Urza, Academy Headmaster (12U) | Triggers$ TrigSpellCast12U | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever you cast a spell, exile target permanent."
+SVar:TrigSpellCast12U:Mode$ SpellCast | ValidActivatingPlayer$ You | Execute$ EffSpellCast12U | TriggerDescription$ Whenever you cast a spell, exile target permanent.
+SVar:EffSpellCast12U:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent
+SVar:Effect13U:DB$ Effect | Name$ Emblem - Urza, Academy Headmaster (13U) | Triggers$ TrigFight13U | Duration$ Permanent | AILogic$ Always | SubAbility$ DBToken13U | SpellDescription$ You get an emblem with "Whenever a creature enters the battlefield under your control, you may have it fight target creature." Then create three 8/8 blue Octopus creature tokens.
+SVar:TrigFight13U:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | Execute$ DBFight13U | OptionalDecider$ You | TriggerZones$ Command | TriggerDescription$ Whenever a creature enters the battlefield under your control, you may have it fight target creature.
+SVar:DBFight13U:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature | TgtPrompt$ Choose target creature
+SVar:DBToken13U:DB$ Token | TokenAmount$ 3 | TokenScript$ u_8_8_octopus
+SVar:ControlPlayer14U:DB$ ControlPlayer | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ You control target player during that player's next turn.
+SVar:ExileLibrary15U:DB$ ChangeZoneAll | Origin$ Library | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBChangeZone15U | Planeswalker$ True | Ultimate$ True | SpellDescription$ Exile all cards from target player's library, then that player shuffles their hand into their library.
+SVar:DBChangeZone15U:DB$ ChangeZoneAll | Origin$ Hand | Destination$ Library | Defined$ Targeted | ChangeType$ Card | Shuffle$ True
+SVar:Token16U:DB$ Token | TokenAmount$ 3 | TokenScript$ b_1_1_assassin_lose_con | SpellDescription$ Create three 1/1 black Assassin creature tokens with "Whenever this creature deals combat damage to a player, that player loses the game."
+SVar:Raise17U:DB$ ChangeZoneAll | ChangeType$ Creature | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SpellDescription$ Put all creature cards in all graveyards onto the battlefield under your control.
+SVar:LifeDraw18U:DB$ GainLife | LifeAmount$ Lands | SubAbility$ DBDraw18U | SpellDescription$ You gain X life and draw X cards, where X is the number of lands you control.
+SVar:DBDraw18U:DB$ Draw | NumCards$ Lands
+SVar:FlipTurns19U:DB$ FlipACoin | Amount$ 5 | NoCall$ True | HeadsSubAbility$ DBAddTurn19U | StackDescription$ SpellDescription | SpellDescription$ Flip 5 coins. Take an extra turn after this one for each coin that comes up heads.
+SVar:DBAddTurn19U:DB$ AddTurn | Defined$ You | NumTurns$ 1
+SVar:LifeDrawPut20U:DB$ GainLife | LifeAmount$ 7 | SubAbility$ DBDraw20U | SpellDescription$ You gain 7 life, draw seven cards, then put up to seven permanent cards from your hand onto the battlefield.
+SVar:DBDraw20U:DB$ Draw | NumCards$ 7 | SubAbility$ DBChangeZone20U
+SVar:DBChangeZone20U:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent | ChangeNum$ 7
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 DeckHas:Ability$Counters & Ability$Token & Ability$LifeGain & Ability$Discard
 Oracle:[+1]: Head to AskUrza.com and click +1.\n[-1]: Head to AskUrza.com and click -1.\n[-6]: Head to AskUrza.com and click -6.
