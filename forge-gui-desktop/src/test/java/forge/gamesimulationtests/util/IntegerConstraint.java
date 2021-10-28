@@ -23,7 +23,7 @@ public class IntegerConstraint {
 	
 	@Override
 	public String toString() {
-		if( min == max ) {
+		if (min == max) {
 			return String.valueOf( min );
 		}
 		return "between " + min + " and " + max;

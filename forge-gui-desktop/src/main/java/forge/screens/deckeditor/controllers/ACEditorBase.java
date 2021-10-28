@@ -216,7 +216,6 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         }
 
         for (final Entry<TItem, Integer> itemEntry : itemsToAdd) {
-
             final TItem item = itemEntry.getKey();
             final PaperCard card = item instanceof PaperCard ? (PaperCard)item : null;
             int qty = itemEntry.getValue();
@@ -224,8 +223,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             int max;
             if (deck == null || card == null || limit == CardLimit.None || DeckFormat.canHaveAnyNumberOf(card)) {
                 max = Integer.MAX_VALUE;
-            }
-            else {
+            } else {
                 max = (limit == CardLimit.Singleton ? 1 : FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT));
 
                 Integer cardCopies = DeckFormat.canHaveSpecificNumberInDeck(card);
@@ -538,16 +536,16 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                             CardManager cardManager = (CardManager) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckManager();
                             PaperCard existingCard = cardManager.getSelectedItem();
                             // make a foiled version based on the original
-                            PaperCard foiledCard = existingCard.getFoiled();
+                            PaperCard foiledCard = existingCard.isFoil() ? existingCard.getUnFoiled() : existingCard.getFoiled();
                             // remove *quantity* instances of existing card
                             CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, quantity);
                             // add *quantity* into the deck and set them as selected
                             cardManager.addItem(foiledCard, quantity);
                             cardManager.setSelectedItem(foiledCard);
                         }
-                    }, true, true);
+            }, true, true);
         }
-//TODO: need to translate getItemDisplayString
+        //TODO: need to translate getItemDisplayString
         private void addItem(final String verb, final String dest, final boolean toAlternate, final int qty, final int shortcutModifiers) {
             String label = verb + " " + SItemManagerUtil.getItemDisplayString(getItemManager().getSelectedItems(), qty, false);
             if (dest != null && !dest.isEmpty()) {
@@ -563,8 +561,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                     }
                     if (isAddContextMenu) {
                         CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(toAlternate, quantity);
-                    }
-                    else {
+                    } else {
                         CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(toAlternate, quantity);
                     }
                 }

@@ -4937,17 +4937,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         view.updateEmblem(this);
     }
 
-    /*
-     * there are easy checkers for Color. The CardUtil functions should be made
-     * part of the Card class, so calling out is not necessary
-     */
-    public final boolean isOfColor(final String col) { return CardUtil.getColors(this).hasAnyColor(MagicColor.fromName(col)); }
-    public final boolean isBlack() { return CardUtil.getColors(this).hasBlack(); }
-    public final boolean isBlue() { return CardUtil.getColors(this).hasBlue(); }
-    public final boolean isRed() { return CardUtil.getColors(this).hasRed(); }
-    public final boolean isGreen() { return CardUtil.getColors(this).hasGreen(); }
-    public final boolean isWhite() { return CardUtil.getColors(this).hasWhite(); }
-    public final boolean isColorless() { return CardUtil.getColors(this).isColorless(); }
+    public final boolean isOfColor(final String col) { return determineColor().hasAnyColor(MagicColor.fromName(col)); }
+    public final boolean isBlack() { return determineColor().hasBlack(); }
+    public final boolean isBlue() { return determineColor().hasBlue(); }
+    public final boolean isRed() { return determineColor().hasRed(); }
+    public final boolean isGreen() { return determineColor().hasGreen(); }
+    public final boolean isWhite() { return determineColor().hasWhite(); }
+    public final boolean isColorless() { return determineColor().isColorless(); }
 
     public final boolean sharesNameWith(final Card c1) {
         // in a corner case where c1 is null, there is no name to share with.
@@ -5891,6 +5887,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     @Override
     public final boolean canBeTargetedBy(final SpellAbility sa) {
+        if (getOwner().hasLost()) {
+            return false;
+        }
+
         if (sa == null) {
             return true;
         }

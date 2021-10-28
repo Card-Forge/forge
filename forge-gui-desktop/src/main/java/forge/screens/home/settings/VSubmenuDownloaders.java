@@ -8,7 +8,6 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -96,7 +95,6 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         pnlContent.setOpaque(false);
 
         if (javaRecentEnough()) {
-
             // With Blacksmith we would upload the releases and the /latest would redirect to the right URL
             // That currently doesn't happen so lets comment out this button for now
 //            pnlContent.add(btnCheckForUpdates, constraintsBTN);
@@ -122,9 +120,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
             pnlContent.add(btnDownloadSkins, constraintsBTN);
             pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadSkins")), constraintsLBL);
-
         } else {
-
             String text = localizer.getMessage("lblYourVersionOfJavaIsTooOld");
             FLabel label = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text(text).fontStyle(Font.BOLD).fontSize(18).build();
             pnlContent.add(label, "w 90%!, h 25px!, center, gap 0 0 30px 3px");
@@ -137,7 +133,6 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
             text = text + " . " + localizer.getMessage("lblYouNeedAtLeastJavaVersion") ;
             label = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text(text).fontStyle(Font.BOLD).fontSize(18).build();
             pnlContent.add(label, "w 90%!, h 25px!, center, gap 0 0 0 36px");
-
         }
 
         pnlContent.add(btnListImageData, constraintsBTN);
@@ -154,15 +149,12 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
         pnlContent.add(btnLicensing, constraintsBTN);
         pnlContent.add(_makeLabel(localizer.getMessage("lblLicensing")), constraintsLBL);
-
     }
 
     private boolean javaRecentEnough() {
-
         RuntimeVersion javaVersion = RuntimeVersion.of(System.getProperty("java.version"));
 
         return javaVersion.getMajor() >= 9 || (javaVersion.getMajor() >= 1 && (javaVersion.getMinor() > 8 || (javaVersion.getMinor() == 8 && javaVersion.getUpdate() >= 101)));
-
     }
 
     /* (non-Javadoc)
@@ -199,7 +191,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     public void setHowToPlayCommand(UiCommand command)                 { btnHowToPlay.setCommand(command);           }
     public void setDownloadPricesCommand(UiCommand command)            { btnDownloadPrices.setCommand(command);      }
     public void setLicensingCommand(UiCommand command)                 { btnLicensing.setCommand(command);           }
-    public void setDownloadSkinsCommand(UiCommand command)             { btnDownloadSkins.setCommand(command);           }
+    public void setDownloadSkinsCommand(UiCommand command)             { btnDownloadSkins.setCommand(command);       }
 
     public void focusTopButton() {
         btnDownloadPics.requestFocusInWindow();
@@ -269,7 +261,6 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
             String imagePath;
             int artIndex = 1;
-            ArrayList<String> cis = new ArrayList<>();
 
             HashMap<String, Pair<Boolean, Integer>> cardCount = new HashMap<>();
             for (CardInSet c : e.getAllCardsInSet()) {
@@ -302,10 +293,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                     continue;
                 }
 
-
-                //
                 // check the front image
-                //
                 imagePath = ImageUtil.getImageRelativePath(cp, false, true, false);
                 if (imagePath != null) {
                     File file = ImageKeys.getImageFile(imagePath);
@@ -319,9 +307,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                     }
                 } 
 
-                //
                 // check the back face
-                //
                 if (cp.hasBackFace()) {
                     imagePath = ImageUtil.getImageRelativePath(cp, true, true, false);
                     if (imagePath != null) {
@@ -371,7 +357,6 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
             if (nifHeader)
                 nifSB.append("\n");
         }
-
 
         String totalStats = "Missing images: " + missingCount + "\nUnimplemented cards: " + notImplementedCount + "\n";
         cniSB.append("\n-----------\n");
@@ -424,7 +409,6 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
             }
         });
     }
-    
 
     public void showLicensing() {
         String license = "<html>Forge License Information<br><br>"

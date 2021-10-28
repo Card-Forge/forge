@@ -303,6 +303,8 @@ public class DestroyAi extends SpellAbilityAi {
                 || ai.getLife() <= 5)) {
                 // Basic ai logic for Lethal Vapors
                 return false;
+            } else if ("Always".equals(logic)) {
+                return true;
             }
 
             if (list.isEmpty()

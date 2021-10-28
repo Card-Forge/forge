@@ -8,6 +8,7 @@ import com.google.common.collect.Lists;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardModeChosen;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -79,6 +80,19 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                 Aggregates.random(abilities, amount, chosenSAs);
             } else {
                 chosenSAs = p.getController().chooseSpellAbilitiesForEffect(abilities, sa, prompt, amount, ImmutableMap.of());
+            }
+
+            for (SpellAbility chosenSA : chosenSAs) {
+                if (sa.hasParam("AtRandom") && sa.getParam("AtRandom").equals("Urza") && chosenSA.usesTargeting()) {
+                    List<Card> validTargets = CardUtil.getValidCardsToTarget(chosenSA.getTargetRestrictions(), sa);
+                    if (validTargets.isEmpty()) {
+                        List <SpellAbility> newChosenSAs = Lists.newArrayList();
+                        Aggregates.random(abilities, amount, newChosenSAs);
+                        chosenSAs = newChosenSAs;
+                    } else {
+                        p.getController().chooseTargetsFor(chosenSA);
+                    }
+                }
             }
 
             if (!chosenSAs.isEmpty()) {

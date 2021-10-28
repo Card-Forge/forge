@@ -40,7 +40,6 @@ import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
 import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
@@ -905,7 +904,7 @@ public class ComputerUtilCard {
         }
 
         for (final Card crd : list) {
-            ColorSet color = CardUtil.getColors(crd);
+            ColorSet color = crd.determineColor();
             if (color.hasWhite()) map.get(0).setValue(Integer.valueOf(map.get(0).getValue()+1));
             if (color.hasBlue()) map.get(1).setValue(Integer.valueOf(map.get(1).getValue()+1));
             if (color.hasBlack()) map.get(2).setValue(Integer.valueOf(map.get(2).getValue()+1));
