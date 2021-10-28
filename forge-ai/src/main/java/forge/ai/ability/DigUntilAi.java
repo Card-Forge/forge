@@ -51,8 +51,8 @@ public class DigUntilAi extends SpellAbilityAi {
                 // until opponent's end of turn phase!
                 // But we still want more (and want to fill grave) if nothing better to do then
                 // This is important for Replenish/Living Death type decks
-                if (!((ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN))
-                        && (!ai.getGame().getPhaseHandler().isPlayerTurn(ai)))) {
+                if (!ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)
+                        && !ai.getGame().getPhaseHandler().isPlayerTurn(ai)) {
                     return false;
                 }
             }
@@ -75,7 +75,7 @@ public class DigUntilAi extends SpellAbilityAi {
         }
 
         final String num = sa.getParam("Amount");
-        if ((num != null) && num.equals("X") && sa.getSVar(num).equals("Count$xPaid")) {
+        if (num != null && num.equals("X") && sa.getSVar(num).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             SpellAbility root = sa.getRootAbility();
             if (root.getXManaCostPaid() == null) {

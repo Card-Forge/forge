@@ -165,10 +165,9 @@ public class StaticData {
         return this.editions;
     }
 
-    public final CardEdition.Collection getCustomEditions(){
+    public final CardEdition.Collection getCustomEditions() {
         return this.customEditions;
     }
-
 
     private List<CardEdition> sortedEditions;
     public final List<CardEdition> getSortedEditions() {
@@ -189,13 +188,13 @@ public class StaticData {
     }
 
     private TreeMap<CardEdition.Type, List<CardEdition>> editionsTypeMap;
-    public final Map<CardEdition.Type, List<CardEdition>> getEditionsTypeMap(){
-        if (editionsTypeMap == null){
+    public final Map<CardEdition.Type, List<CardEdition>> getEditionsTypeMap() {
+        if (editionsTypeMap == null) {
             editionsTypeMap = new TreeMap<>();
-            for (CardEdition.Type editionType : CardEdition.Type.values()){
+            for (CardEdition.Type editionType : CardEdition.Type.values()) {
                 editionsTypeMap.put(editionType, new ArrayList<>());
             }
-            for (CardEdition edition : this.getSortedEditions()){
+            for (CardEdition edition : this.getSortedEditions()) {
                 CardEdition.Type key = edition.getType();
                 List<CardEdition> editionsOfType = editionsTypeMap.get(key);
                 editionsOfType.add(edition);
@@ -204,9 +203,9 @@ public class StaticData {
         return editionsTypeMap;
     }
 
-    public CardEdition getCardEdition(String setCode){
+    public CardEdition getCardEdition(String setCode) {
         CardEdition edition = this.editions.get(setCode);
-        if (edition == null)  // try custom editions
+        if (edition == null) // try custom editions
             edition = this.customEditions.get(setCode);
         return edition;
     }
@@ -231,8 +230,7 @@ public class StaticData {
     public void attemptToLoadCard(String cardName){
         this.attemptToLoadCard(cardName, null);
     }
-
-    public void attemptToLoadCard(String cardName, String setCode){
+    public void attemptToLoadCard(String cardName, String setCode) {
         CardRules rules = cardReader.attemptToLoadCard(cardName);
         CardRules customRules = null;
         if (customCardReader != null) {
@@ -257,7 +255,7 @@ public class StaticData {
      * @param collectorNumber Card's collector Number
      * @return PaperCard instance found in one of the available CardDb databases, or <code>null</code> if not found.
      */
-    public PaperCard fetchCard(final String cardName, final String setCode, final String collectorNumber){
+    public PaperCard fetchCard(final String cardName, final String setCode, final String collectorNumber) {
         PaperCard card = null;
         for (CardDb db : this.getAvailableDatabases().values()) {
             card = db.getCard(cardName, setCode, collectorNumber);
@@ -345,7 +343,7 @@ public class StaticData {
         return result;
     }
 
-    private CardDb matchTargetCardDb(final String cardName){
+    private CardDb matchTargetCardDb(final String cardName) {
         // NOTE: any foil request in cardName is NOT taken into account here.
         // It's a private method, so it's a fair assumption.
         for (CardDb targetDb : this.getAvailableDatabases().values()){
@@ -360,7 +358,7 @@ public class StaticData {
      * @param cardName Name of the Card to verify (CASE SENSITIVE)
      * @return True if a card with the given input string can be found. False otherwise.
      */
-    public boolean isMTGCard(final String cardName){
+    public boolean isMTGCard(final String cardName) {
         if (cardName == null || cardName.trim().length() == 0)
             return false;
         CardDb.CardRequest cr = CardDb.CardRequest.fromString(cardName);  // accounts for any foil request ending with +
@@ -450,10 +448,6 @@ public class StaticData {
 
     public Predicate<PaperCard> getBrawlPredicate() { return brawlPredicate; }
 
-    public void setFilteredHandsEnabled(boolean filteredHandsEnabled){
-        this.filteredHandsEnabled = filteredHandsEnabled;
-    }
-
     /**
      * Get an alternative card print for the given card wrt. the input setReleaseDate.
      * The reference release date will be used to retrieve the alternative art, according
@@ -501,7 +495,7 @@ public class StaticData {
      */
     public PaperCard getAlternativeCardPrint(PaperCard card, Date setReleaseDate,
                                              boolean isCardArtPreferenceLatestArt,
-                                             boolean cardArtPreferenceHasFilter){
+                                             boolean cardArtPreferenceHasFilter) {
         Date searchReferenceDate = getReferenceDate(setReleaseDate, isCardArtPreferenceLatestArt);
         CardDb.CardArtPreference searchCardArtStrategy = getSearchStrategyForAlternativeCardArt(isCardArtPreferenceLatestArt,
                                                                           cardArtPreferenceHasFilter);
@@ -537,7 +531,6 @@ public class StaticData {
     public PaperCard getAlternativeCardPrint(PaperCard card, Date setReleaseDate, boolean isCardArtPreferenceLatestArt,
                                              boolean cardArtPreferenceHasFilter,
                                              boolean preferCandidatesFromExpansionSets, boolean preferModernFrame) {
-
         PaperCard altCard = this.getAlternativeCardPrint(card, setReleaseDate, isCardArtPreferenceLatestArt,
                                                          cardArtPreferenceHasFilter);
         if (altCard == null)
@@ -618,7 +611,7 @@ public class StaticData {
 
     private PaperCard tryToGetCardPrintFromExpansionSet(PaperCard altCard,
                                                         boolean isCardArtPreferenceLatestArt,
-                                                        boolean preferModernFrame){
+                                                        boolean preferModernFrame) {
         CardEdition altCardEdition = editions.get(altCard.getEdition());
         if (altCardEdition.getType() == CardEdition.Type.EXPANSION)
             return null;  // Nothing to do here!
@@ -628,7 +621,7 @@ public class StaticData {
         CardDb.CardArtPreference searchStrategy = getSearchStrategyForAlternativeCardArt(searchStrategyFlag,
                                                                                          true);
         PaperCard altCandidate = altCard;
-        while (altCandidate != null){
+        while (altCandidate != null) {
             Date referenceDate = editions.get(altCandidate.getEdition()).getDate();
             altCandidate = this.searchAlternativeCardCandidate(altCandidate, preferModernFrame,
                                                                 referenceDate, searchStrategy);
@@ -645,7 +638,7 @@ public class StaticData {
     private PaperCard tryToGetCardPrintWithMatchingFrame(PaperCard altCard,
                                                          boolean isCardArtPreferenceLatestArt,
                                                          boolean cardArtHasFilter,
-                                                         boolean preferModernFrame){
+                                                         boolean preferModernFrame) {
         CardEdition altCardEdition = editions.get(altCard.getEdition());
         boolean frameIsCompliantAlready = (altCardEdition.isModern() == preferModernFrame);
         if (frameIsCompliantAlready)
@@ -654,7 +647,7 @@ public class StaticData {
         CardDb.CardArtPreference searchStrategy = getSearchStrategyForAlternativeCardArt(searchStrategyFlag,
                                                                                          cardArtHasFilter);
         PaperCard altCandidate = altCard;
-        while (altCandidate != null){
+        while (altCandidate != null) {
             Date referenceDate = editions.get(altCandidate.getEdition()).getDate();
             altCandidate = this.searchAlternativeCardCandidate(altCandidate, preferModernFrame,
                                                                referenceDate, searchStrategy);
@@ -677,7 +670,7 @@ public class StaticData {
      * @param card Instance of target <code>PaperCard</code>
      * @return The number of available arts for the given card in the corresponding set, or 0 if not found.
      */
-    public int getCardArtCount(PaperCard card){
+    public int getCardArtCount(PaperCard card) {
         Collection<CardDb> databases = this.getAvailableDatabases().values();
         for (CardDb db: databases){
             int artCount = db.getArtCount(card.getName(), card.getEdition());
@@ -687,8 +680,11 @@ public class StaticData {
         return 0;
     }
 
-    public boolean getFilteredHandsEnabled(){
+    public boolean getFilteredHandsEnabled() {
         return filteredHandsEnabled;
+    }
+    public void setFilteredHandsEnabled(boolean filteredHandsEnabled) {
+        this.filteredHandsEnabled = filteredHandsEnabled;
     }
 
     public void setMulliganRule(MulliganDefs.MulliganRule rule) {
@@ -699,21 +695,21 @@ public class StaticData {
         return mulliganRule;
     }
 
-    public void setCardArtPreference(boolean latestArt, boolean coreExpansionOnly){
+    public void setCardArtPreference(boolean latestArt, boolean coreExpansionOnly) {
         this.commonCards.setCardArtPreference(latestArt, coreExpansionOnly);
         this.variantCards.setCardArtPreference(latestArt, coreExpansionOnly);
         this.customCards.setCardArtPreference(latestArt, coreExpansionOnly);
     }
 
-    public String getCardArtPreferenceName(){
+    public String getCardArtPreferenceName() {
         return this.commonCards.getCardArtPreference().toString();
     }
 
-    public CardDb.CardArtPreference getCardArtPreference(){
+    public CardDb.CardArtPreference getCardArtPreference() {
         return this.commonCards.getCardArtPreference();
     }
 
-    public CardDb.CardArtPreference getCardArtPreference(boolean latestArt, boolean coreExpansionOnly){
+    public CardDb.CardArtPreference getCardArtPreference(boolean latestArt, boolean coreExpansionOnly) {
         if (latestArt){
             return coreExpansionOnly ? CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY : CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
         }
@@ -721,15 +717,15 @@ public class StaticData {
     }
 
 
-    public boolean isCoreExpansionOnlyFilterSet(){ return this.commonCards.getCardArtPreference().filterSets; }
+    public boolean isCoreExpansionOnlyFilterSet() { return this.commonCards.getCardArtPreference().filterSets; }
 
-    public boolean cardArtPreferenceIsLatest(){
+    public boolean cardArtPreferenceIsLatest() {
         return this.commonCards.getCardArtPreference().latestFirst;
     }
 
     // === MOBILE APP Alternative Methods (using String Labels, not yet localised!!) ===
     // Note: only used in mobile
-    public String[] getCardArtAvailablePreferences(){
+    public String[] getCardArtAvailablePreferences() {
         CardDb.CardArtPreference[] preferences = CardDb.CardArtPreference.values();
         String[] preferences_avails = new String[preferences.length];
         for (int i = 0; i < preferences.length; i++)
@@ -745,17 +741,16 @@ public class StaticData {
         return label.toString().trim();
     }
 
-    public void setCardArtPreference(String artPreference){
+    public void setCardArtPreference(String artPreference) {
         this.commonCards.setCardArtPreference(artPreference);
         this.variantCards.setCardArtPreference(artPreference);
         this.customCards.setCardArtPreference(artPreference);
     }
 
-    //
-    public boolean isEnabledCardArtSmartSelection(){
+    public boolean isEnabledCardArtSmartSelection() {
         return this.enableSmartCardArtSelection;
     }
-    public void setEnableSmartCardArtSelection(boolean isEnabled){
+    public void setEnableSmartCardArtSelection(boolean isEnabled) {
         this.enableSmartCardArtSelection = isEnabled;
     }
 
