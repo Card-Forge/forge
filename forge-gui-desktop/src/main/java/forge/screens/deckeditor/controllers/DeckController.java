@@ -91,17 +91,21 @@ public class DeckController<T extends DeckBase> {
     }
 
     public void loadDeck(Deck deck, boolean substituteCurrentDeck) {
+        boolean isStored;
         if (view.getCatalogManager().isInfinite()) {
             Deck currentDeck = view.getHumanDeck();
             if (substituteCurrentDeck || currentDeck.isEmpty()) {
                 newModel();
-            }
+                isStored = false;
+            } else
+                isStored = !this.modelPath.equals("");
         } else {
             CardPool catalogClone = new CardPool(view.getInitialCatalog());
             deck = pickFromCatalog(deck, catalogClone);
             ItemPool<PaperCard> catalogPool = view.getCatalogManager().getPool();
             catalogPool.clear();
             catalogPool.addAll(catalogClone);
+            isStored = false;
         }
 
         Deck currentDeck = view.getHumanDeck();
@@ -112,9 +116,9 @@ public class DeckController<T extends DeckBase> {
             }
         }
         // Allow to specify the name of Deck in DeckImporter
-        if ((deck.hasName()) && (!currentDeck.hasName()))
-            view.getHumanDeck().setName(deck.getName());
-        onModelChanged(false);
+        if (deck.hasName())
+            currentDeck.setName(deck.getName());
+        this.setModel((T) currentDeck, isStored);
     }
 
     private Deck pickFromCatalog(Deck deck, CardPool catalog) {
@@ -237,7 +241,7 @@ public class DeckController<T extends DeckBase> {
         } else { //TODO: Make this smarter
             currentFolder = rootFolder;
             modelPath = "";
-            setSaved(true);
+            setSaved(this.model.isEmpty());
         }
     }
 
