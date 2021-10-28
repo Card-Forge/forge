@@ -104,6 +104,11 @@ public class CardFactory {
         out.setCommander(in.isRealCommander());
         //out.setFaceDown(in.isFaceDown());
 
+        int foil = in.getCurrentState().getFoil();
+        if (foil > 0) {
+            out.setFoil(foil);
+        }
+
         return out;
     }
 

@@ -1,0 +1,90 @@
+[metadata]
+Code=VOW
+Date=2021-11-19
+Name=Innistrad: Crimson Vow
+Code2=VOW
+MciCode=vow
+Type=Expansion
+ScryfallCode=VOW
+
+[cards]
+5 R By Invitation Only @
+10 C Drogskol Infantry @
+15 C Gryff Rider @
+34 M Savior of Ollenbock @
+36 R Sigarda's Summons @
+38 R Thalia, Guardian of Thraben @
+45 R Wedding Announcement @
+60 U Geistlight Snare @
+71 R Overcharged Amalgam @
+103 R Demonic Bargain @
+112 U Fell Stinger @
+114 C Gluttonous Guest @
+129 C Rot-Tide Gargantua @
+131 M Sorin the Mirthless @
+137 R Voldaren Bloodcaster @
+154 R Dominating Vampire @
+184 C Weary Prisoner @
+185 C Apprentice Sharpshooter @
+197 R Dig Up @
+208 C Massive Might @
+235 R Dorothea, Vengeful Victim @
+238 R Grolnok, the Omnivore @
+245 M Olivia, Crimson Bride @
+260 C Wedding Invitation @
+261 R Deathcap Glade @
+262 R Dreamroot Cascade @
+264 R Shattered Sanctum @
+265 R Stormcarved Coast @
+266 R Sundown Pass @
+267 R Voldaren Estate @
+268 L Plains @
+269 L Plains @
+270 L Island @
+271 L Island @
+272 L Swamp @
+273 L Swamp @
+274 L Mountain @
+275 L Mountain @
+276 L Forest @
+277 L Forest @
+278 M Sorin the Mirthless @
+281 R Deathcap Glade @
+282 R Dreamroot Cascade @
+283 R Shattered Sanctum @
+284 R Stormcarved Coast @
+285 R Sundown Pass @
+292 C Gluttonous Guest @
+297 M Sorin the Mirthless @
+298 R Voldaren Bloodcaster @
+305 R Dominating Vampire @
+315 M Olivia, Crimson Bride @
+318 R Thalia, Guardian of Thraben @
+322 R Dorothea, Vengeful Victim @
+324 R Grolnok, the Omnivore @
+330 M Savior of Ollenbock @
+331 R Thalia, Guardian of Thraben @
+337 M Sorin the Mirthless @
+338 R Voldaren Bloodcaster @
+343 M Olivia, Crimson Bride @
+346 R By Invitation Only @
+352 M Savior of Ollenbock @
+353 R Sigarda's Summons @
+355 R Wedding Announcement @
+363 R Overcharged Amalgam @
+368 R Demonic Bargain @
+387 R Dig Up @
+397 R Voldaren Estate @
+398 L Plains @
+399 L Island @
+400 L Swamp @
+401 L Mountain @
+402 L Forest @
+403 R Voldaren Estate @
+404 R Sigarda's Summons @
+405 U Geistlight Snare @
+406 U Fell Stinger @
+407 R Dominating Vampire @
+
+[tokens]
+c_a_blood_draw
