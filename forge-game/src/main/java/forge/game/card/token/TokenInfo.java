@@ -158,7 +158,7 @@ public class TokenInfo {
         if (!colorMap.isEmpty()) {
             if (!result.isColorless()) {
                 // change Token Colors
-                byte color = CardUtil.getColors(result).getColor();
+                byte color = result.determineColor().getColor();
 
                 for (final Map.Entry<String, String> e : colorMap.entrySet()) {
                     byte v = MagicColor.fromName(e.getValue());
