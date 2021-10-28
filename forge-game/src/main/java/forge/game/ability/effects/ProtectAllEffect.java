@@ -15,7 +15,6 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
-import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -65,7 +64,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
                 }
             } else if (sa.getParam("Gains").equals("TargetedCardColor")) {
                 for (final Card c : sa.getSATargetingCard().getTargets().getTargetCards()) {
-                    ColorSet cs = CardUtil.getColors(c);
+                    ColorSet cs = c.determineColor();
                     for (byte col : MagicColor.WUBRG) {
                         if (cs.hasAnyColor(col))
                             gains.add(MagicColor.toLongString(col).toLowerCase());

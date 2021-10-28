@@ -1789,7 +1789,7 @@ public class AbilityUtils {
                 if (sq[0].contains("HasNumChosenColors")) {
                     int sum = 0;
                     for (Card card : getDefinedCards(c, sq[1], sa)) {
-                        sum += CardUtil.getColors(card).getSharedColors(ColorSet.fromNames(c.getChosenColors())).countColors();
+                        sum += card.determineColor().getSharedColors(ColorSet.fromNames(c.getChosenColors())).countColors();
                     }
                     return sum;
                 }
@@ -1990,7 +1990,7 @@ public class AbilityUtils {
 
         // Count$CardMulticolor.<numMC>.<numNotMC>
         if (sq[0].contains("CardMulticolor")) {
-            final boolean isMulti = CardUtil.getColors(c).isMulticolor();
+            final boolean isMulti = c.determineColor().isMulticolor();
             return doXMath(Integer.parseInt(sq[isMulti ? 1 : 2]), expr, c, ctb);
         }
         // Count$Madness.<True>.<False>
@@ -2046,7 +2046,7 @@ public class AbilityUtils {
         }
 
         if (sq[0].contains("CardNumColors")) {
-            return doXMath(CardUtil.getColors(c).countColors(), expr, c, ctb);
+            return doXMath(c.determineColor().countColors(), expr, c, ctb);
         }
         if (sq[0].contains("CardNumAttacksThisTurn")) {
             return doXMath(c.getDamageHistory().getCreatureAttacksThisTurn(), expr, c, ctb);
@@ -3766,7 +3766,7 @@ public class AbilityUtils {
             someCards = CardLists.filter(someCards, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return CardUtil.getColors(c).isMulticolor();
+                    return c.determineColor().isMulticolor();
                 }
             });
         }
@@ -3775,7 +3775,7 @@ public class AbilityUtils {
             someCards = CardLists.filter(someCards, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return CardUtil.getColors(c).isMonoColor();
+                    return c.determineColor().isMonoColor();
                 }
             });
         }
