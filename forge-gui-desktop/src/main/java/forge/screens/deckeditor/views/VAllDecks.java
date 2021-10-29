@@ -86,8 +86,10 @@ public enum VAllDecks implements IVDoc<CAllDecks> {
         parentBody.add(new ItemManagerContainer(lstDecks), "push, grow");
         String preferredDeck = DeckPreferences.getCurrentDeck();
         DeckProxy deckProxy = lstDecks.stringToItem(preferredDeck);
-        if (deckProxy != null)
+        if (deckProxy != null) {
             lstDecks.editDeck(deckProxy);
+            lstDecks.setSelectedItem(deckProxy);
+        }
     }
 
     //========== Retrieval methods
