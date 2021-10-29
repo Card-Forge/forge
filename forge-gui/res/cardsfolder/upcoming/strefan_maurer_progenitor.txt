@@ -2,7 +2,7 @@ Name:Strefan, Maurer Progenitor
 ManaCost:2 B R
 Types:Legendary Creature Vampire Noble
 PT:3/2
-Oracle:Flying
+K:Flying
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, create a Blood token for each player who lost life this turn.
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_blood_draw
 SVar:X:PlayerCountPlayers$HasPropertyLostLifeThisTurn
@@ -13,4 +13,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Token & Ability$Sacrifice
 DeckHints:Type$Vampire
-Oracle:At the beginning of your end step, create a Blood token for each player who lost life this turn.\nWhenever Strefan attacks, you may sacrifice two Blood tokens. If you do, you may put a Vampire card from your hand onto the battlefield tapped and attacking. It gains indestructible until end of turn.
+Oracle:Flying\nAt the beginning of your end step, create a Blood token for each player who lost life this turn.\nWhenever Strefan attacks, you may sacrifice two Blood tokens. If you do, you may put a Vampire card from your hand onto the battlefield tapped and attacking. It gains indestructible until end of turn.
