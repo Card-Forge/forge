@@ -1,0 +1,13 @@
+Name:Millicent, Restless Revenant
+ManaCost:5 W U
+Types:Legendary Creature Spirit Soldier
+PT:4/4
+K:Flying
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each Spirit you control.
+SVar:X:Count$TypeYouCtrl.Spirit
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Spirit.Other+nonToken+YouCtrl | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another nontoken Spirit you control dies or deals combat damage to a player, create a 1/1 white Spirit creature token with flying.
+T:Mode$ DamageDone | ValidSource$ Card.Self,Spirit.Other+nonToken+YouCtrl | ValidTarget$ Player | Execute$ TrigToken | CombatDamage$ True | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another nontoken Spirit you control dies or deals combat damage to a player, create a 1/1 white Spirit creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_spirit_flying
+DeckHints:Type$Spirit & Ability$Disturb
+DeckHas:Ability$Token
+Oracle:This spell costs {1} less to cast for each Spirit you control.\nFlying\nWhenever Millicent, Restless Revenant or another nontoken Spirit you control dies or deals combat damage to a player, create a 1/1 white Spirit creature token with flying.
