@@ -115,7 +115,7 @@ public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
                             return card.isPlaneswalker() || card.isArtifact() || (c.isEnchantment() && !c.isAura());
                         } else if (c.isLand()) {
                             return card.isLand();
-                        } else if (c.isAttachedToEntity() && card.getController() == controller) {
+                        } else if (c.isAttachedToEntity()) {
                             return card.isAttachedToEntity(c.getEntityAttachedTo()) || c.equals(card.getAttachedTo());
                         }
                         return card.sharesCardTypeWith(c);
