@@ -17,26 +17,26 @@
  */
 package forge.game.trigger;
 
-import java.util.Map;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
+import java.util.Map;
+
 /**
  * <p>
- * Trigger_LandPlayed class.
+ * Trigger_Trains class.
  * </p>
  *
  * @author Forge
- * @version $Id: TriggerInvestigated.java 30294 2015-10-16 01:53:32Z friarsol $
  */
-public class TriggerTokenCreated extends Trigger {
+public class TriggerTrains extends Trigger {
 
     /**
      * <p>
-     * Constructor for Trigger_Investigated.
+     * Constructor for TriggerTrains.
      * </p>
      *
      * @param params
@@ -46,42 +46,30 @@ public class TriggerTokenCreated extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerTokenCreated(final Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerTrains(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
-    }
-
-    @Override
-    public String getImportantStackObjects(SpellAbility sa) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(Localizer.getInstance().getMessage("lblPlayer")).append(": ").append(sa.getTriggeringObject(AbilityKey.Player));
-        return sb.toString();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player);
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card);
     }
 
     /** {@inheritDoc}
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
             return false;
-        }
-
-        if (!matchesValidParam("ValidToken", runParams.get(AbilityKey.Card))) {
-            return false;
-        }
-
-        if (hasParam("OnlyFirst")) {
-            if ((int) runParams.get(AbilityKey.Num) != 1) {
-                return false;
-            }
         }
         return true;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card);
+    }
+
+    @Override
+    public String getImportantStackObjects(SpellAbility sa) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(Localizer.getInstance().getMessage("lblTrains")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card));
+        return sb.toString();
+    }
 }
