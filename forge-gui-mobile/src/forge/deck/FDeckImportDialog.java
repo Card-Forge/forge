@@ -93,11 +93,13 @@ public class FDeckImportDialog extends FDialog {
                     public void run() {
                         List<DeckRecognizer.Token> tokens = controller.parseInput(txtInput.getText()); //ensure deck updated based on any changes to options
 
-                        //if there are any unknown cards, let user know this and give them the option to cancel
+                        //if there are any cards that cannot be imported, let user know this and give them the option to cancel
                         StringBuilder sb = new StringBuilder();
                         for (DeckRecognizer.Token token : tokens) {
-                            if ((token.getType() == TokenType.UNKNOWN_CARD) ||
-                                    (token.getType() == TokenType.UNSUPPORTED_CARD)) {
+                            if (TokenType.CARD_FROM_NOT_ALLOWED_SET.equals(token.getType())
+                                    || TokenType.CARD_FROM_INVALID_SET.equals(token.getType())
+                                    || TokenType.UNKNOWN_CARD.equals(token.getType())
+                                    || TokenType.UNSUPPORTED_CARD.equals(token.getType())) {
                                 if (sb.length() > 0) {
                                     sb.append("\n");
                                 }
