@@ -171,7 +171,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 }
                 triggerList.put(ZoneType.None, moved.getZone().getZoneType(), moved);
 
-                creator.addTokensCreatedThisTurn();
+                creator.addTokensCreatedThisTurn(tok);
 
                 if (clone) {
                     moved.setCloneOrigin(host);
