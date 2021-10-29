@@ -25,6 +25,7 @@ import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -283,6 +284,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             }
 
             final List<String> cardsInSection = s.getValue();
+            List<Pair<String, Integer>> originalCardRequests = CardPool.processCardList(cardsInSection);
             CardPool pool = CardPool.fromCardList(cardsInSection);
             if (pool.countDistinct() == 0)
                 continue;  // pool empty, no card has been found!
@@ -299,7 +301,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             if (whiteList == null)
                 whiteList = new ArrayList<>();
             for (Entry<PaperCard, Integer> entry : filteredPool) {
-                String poolRequest = getPoolRequest(entry);
+                String poolRequest = getPoolRequest(entry, originalCardRequests);
                 whiteList.add(poolRequest);
             }
             validatedSections.put(s.getKey(), whiteList);
@@ -314,7 +316,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
                 for (Entry<PaperCard, Integer> entry : blackList) {
                     DeckSection cardSection = DeckSection.matchingSection(entry.getKey());
-                    String poolRequest = getPoolRequest(entry);
+                    String poolRequest = getPoolRequest(entry, originalCardRequests);
                     List<String> sectionCardList = validatedSections.getOrDefault(cardSection.name(), null);
                     if (sectionCardList == null)
                         sectionCardList = new ArrayList<>();
@@ -328,11 +330,26 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         this.deferredSections = validatedSections;
     }
 
-    private String getPoolRequest(Entry<PaperCard, Integer> entry) {
+    private String getPoolRequest(Entry<PaperCard, Integer> entry, List<Pair<String, Integer>> originalCardRequests) {
         PaperCard card = entry.getKey();
         int amount = entry.getValue();
-        String cardRequest = CardDb.CardRequest.compose(card.isFoil() ? CardDb.CardRequest.compose(card.getName(), true) : card.getName(), card.getEdition(), card.getArtIndex());
-        return String.format("%d %s", amount, cardRequest);
+        String poolCardRequest = CardDb.CardRequest.compose(
+                card.isFoil() ? CardDb.CardRequest.compose(card.getName(), true) : card.getName(),
+                card.getEdition(), card.getArtIndex());
+        String originalRequestCandidate = null;
+        for (Pair<String, Integer> originalRequest : originalCardRequests){
+            String cardRequest = originalRequest.getLeft();
+            if (!StringUtils.startsWithIgnoreCase(poolCardRequest, cardRequest))
+                continue;
+            originalRequestCandidate = cardRequest;
+            int cardAmount = originalRequest.getRight();
+            if (amount == cardAmount)
+                return String.format("%d %s", cardAmount, cardRequest);
+        }
+        // This is just in case, it should never happen as we're
+        if (originalRequestCandidate != null)
+            return String.format("%d %s", amount, originalRequestCandidate);
+        return String.format("%d %s", amount, poolCardRequest);
     }
 
     private ArrayList<String> getAllCardNamesWithNoSpecifiedEdition(List<String> cardsInSection) {
@@ -355,7 +372,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
         for (Entry<DeckSection, CardPool> part : parts.entrySet()) {
             DeckSection deckSection = part.getKey();
-            if (deckSection == DeckSection.Planes || deckSection == DeckSection.Schemes || deckSection == DeckSection.Avatar)
+            if (deckSection != DeckSection.Main && deckSection != DeckSection.Sideboard && deckSection != DeckSection.Commander)
                 continue;
 
             // == 0. First Off, check if there is anything at all to do for the current section

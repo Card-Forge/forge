@@ -30,8 +30,7 @@ public class FThreads {
     public static void invokeInEdtNowOrLater(final Runnable proc) {
         if (isGuiThread()) {
             GuiBase.getInterface().invokeInEdtNow(proc);
-        }
-        else {
+        } else {
             GuiBase.getInterface().invokeInEdtLater(proc);
         }
     }

@@ -264,7 +264,7 @@ public final class CardPredicates {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return CardUtil.getColors(c).hasAnyColor(color);
+                return c.determineColor().hasAnyColor(color);
             }
         };
     } // getColor()
@@ -273,7 +273,7 @@ public final class CardPredicates {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return CardUtil.getColors(c).hasExactlyColor(color);
+                return c.determineColor().hasExactlyColor(color);
             }
         };
     }
@@ -282,7 +282,7 @@ public final class CardPredicates {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return CardUtil.getColors(c).isColorless();
+                return c.determineColor().isColorless();
             }
         };
     }
