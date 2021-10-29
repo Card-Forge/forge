@@ -1,0 +1,8 @@
+Name:Sigarda's Summons
+ManaCost:4 W W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ Flying | AddType$ Angel | SetPower$ 4 | SetToughness$ 4 | Description$ Creatures you control with +1/+1 counters on them have base power and toughness 4/4, have flying, and are Angels in addition to their other types.
+SVar:PlayMain1:TRUE
+DeckNeeds:Ability$Counters
+DeckHints:Type$Angel
+Oracle:Creatures you control with +1/+1 counters on them have base power and toughness 4/4, have flying, and are Angels in addition to their other types.
