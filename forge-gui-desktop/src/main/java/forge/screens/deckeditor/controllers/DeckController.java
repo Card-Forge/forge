@@ -241,10 +241,14 @@ public class DeckController<T extends DeckBase> {
         }
     }
 
+    private Boolean isInSyncCacheResult = null;
+    private T syncModelCache = null;
     private boolean isModelInSyncWithFolder() {
-        if (model.getName().isEmpty()) {
+        if (syncModelCache != null && model == syncModelCache)
+            return isInSyncCacheResult;
+
+        if (model.getName().isEmpty())
             return true;
-        }
 
         final T modelStored = currentFolder.get(model.getName());
         // checks presence in dictionary only.
@@ -254,8 +258,9 @@ public class DeckController<T extends DeckBase> {
         if (modelStored == null) {
             return false;
         }
-
-        return modelStored.equals(model);
+        syncModelCache = model;
+        isInSyncCacheResult = modelStored.equals(model);
+        return isInSyncCacheResult;
     }
 
     /**
