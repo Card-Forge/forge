@@ -1,0 +1,9 @@
+Name:Varis, Silverymoon Ranger|Deck:Varis, Silverymoon Ranger.dck|Variant:Commander|Avatar:Varis, Silverymoon Ranger|Desc:
+Name:Trelasarra, Moon Dancer|Deck:Trelasarra, Moon Dancer.dck|Variant:Commander|Avatar:Trelasarra, Moon Dancer|Desc:
+Name:Old Gnawbone|Deck:Old Gnawbone.dck|Variant:Commander|Avatar:Old Gnawbone|Desc:
+Name:Catti-brie of Mithral Hall|Deck:Catti-brie of Mithral Hall.dck|Variant:Commander|Avatar:Catti-brie of Mithral Hall|Desc:
+Name:Ellywick Tumblestrum|Deck:Ellywick Tumblestrum.dck|Variant:Planeswalker|Avatar:Ellywick Tumblestrum|Desc:
+Name:Wulfgar of Icewind Dale|Deck:Wulfgar of Icewind Dale|Variant:Commander|Avatar:Wulfgar of Icewind Dale|Desc:
+Name:Heartwood Storyteller|Deck:Heartwood Storyteller.dck|Variant:Vanguard|Avatar:Heartwood Storyteller|Desc:
+Name:Galea, Kindler of Hope|Deck:Galea, Kindler of Hope.dck|Variant:Commander|Avatar:Galea, Kindler of Hope|Desc:
+Name:Green Planar Mage|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
