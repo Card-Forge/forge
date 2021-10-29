@@ -71,6 +71,8 @@ public enum CounterEnumType {
 
     CORRUPTION("CRPTN", 210, 121, 210),
 
+    CROAK("CROAK", 155, 255, 5),
+
     CREDIT("CRDIT", 188, 197, 234),
 
     CRYSTAL("CRYST", 255, 85, 206),
