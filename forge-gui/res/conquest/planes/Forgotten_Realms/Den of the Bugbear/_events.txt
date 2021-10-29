@@ -1,0 +1,9 @@
+Name:Delina, Wild Mage|Deck:Delina, Wild Mage.dck|Variant:Commander|Avatar:Delina, Wild Mage|Desc:
+Name:Zalto, Fire Giant Duke|Deck:Zalto, Fire Giant Duke.dck|Variant:Commander|Avatar:Zalto, Fire Giant Duke|Desc:
+Name:Inferno of the Star Mounts|Deck:Inferno of the Star Mounts.dck|Variant:Commander|Avatar:Inferno of the Star Mounts|Desc:
+Name:Minsc, Beloved Ranger|Deck:Minsc, Beloved Ranger.dck|Variant:Commander|Avatar:Minsc, Beloved Ranger|Desc:
+Name:Zariel, Archduke of Avernus|Deck:Zariel, Archduke of Avernus.dck|Variant:Planeswalker|Avatar:Zariel, Archduke of Avernus|Desc:
+Name:Targ Nar, Demon-Fang Gnoll|Deck:Targ Nar, Demon-Fang Gnoll.dck|Variant:Commander|Avatar:Targ Nar, Demon-Fang Gnoll|Desc:
+Name:Goblin Warchief|Deck:Goblin Warchief.dck|Variant:Vanguard|Avatar:Goblin Warchief Avatar|Desc:
+Name:Vrondiss, Rage of Ancients|Deck:Vrondiss, Rage of Ancients.dck|Variant:Commander|Avatar:Vrondiss, Rage of Ancients|Desc:
+Name:Red Planar Mage|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

@@ -143,6 +143,7 @@ public class PermanentCreatureAi extends PermanentAi {
         boolean willDiscardNow = isOwnEOT && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize();
         boolean willDieNow = combat != null && ComputerUtilCombat.lifeInSeriousDanger(ai, combat);
         boolean wantToCastInMain1 = ph.is(PhaseType.MAIN1, ai) && ComputerUtil.castPermanentInMain1(ai, sa);
+        boolean isCommander = card.isCommander();
 
         // figure out if the card might be a valuable blocker
         boolean valuableBlocker = false;
@@ -177,6 +178,9 @@ public class PermanentCreatureAi extends PermanentAi {
 
         if (hasFloatMana || willDiscardNow || willDieNow) {
             // Will lose mana in pool or about to discard a card in cleanup or about to die in combat, so use this opportunity
+            return true;
+        } else if (isCommander && isMyMain1OrLater) {
+            // Don't hold out specifically if this card is a commander, since otherwise it leads to stupid AI choices
             return true;
         } else if (wantToCastInMain1) {
             // Would rather cast it in Main 1 or as soon as possible anyway, so go for it
