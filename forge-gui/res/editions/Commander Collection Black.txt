@@ -1,6 +1,6 @@
 [metadata]
 Code=CC2
-Date=2021-12-31
+Date=2022-01-28
 Name=Commander Collection Black
 Type=Collector_Edition
 ScryfallCode=CC2
