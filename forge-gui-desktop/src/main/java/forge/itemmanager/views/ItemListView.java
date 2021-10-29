@@ -543,8 +543,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         /**
          * Instantiates a new table model.
          *
-         * @param table0 &emsp; {@link forge.gui.ItemManager.ItemTable<T>}
-         * @param model0 &emsp; {@link forge.gui.ItemManager.ItemManagerModel<T>}
+         * @param model0 &emsp; {@link forge.itemmanager.ItemManagerModel<T>}
          */
         public ItemTableModel(final ItemManagerModel<T> model0) {
             this.model = model0;
