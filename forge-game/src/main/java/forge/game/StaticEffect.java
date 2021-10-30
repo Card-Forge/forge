@@ -211,7 +211,7 @@ public class StaticEffect {
 
             // remove set P/T
             if (hasParam("SetPower") || hasParam("SetToughness")) {
-                affectedCard.removeNewPT(getTimestamp());
+                affectedCard.removeNewPT(getTimestamp(), ability.getId());
             }
 
             // remove P/T bonus
@@ -261,7 +261,15 @@ public class StaticEffect {
             }
 
             if (hasParam("GainTextOf")) {
-                affectedCard.removeTextChangeState(getTimestamp());
+                affectedCard.removeChangedName(getTimestamp(), ability.getId());
+                affectedCard.removeChangedManaCost(getTimestamp(), ability.getId());
+                affectedCard.removeColor(getTimestamp(), ability.getId());
+                affectedCard.removeChangedCardTypes(getTimestamp(), ability.getId());
+                affectedCard.removeChangedCardTraits(getTimestamp(), ability.getId());
+                affectedCard.removeChangedCardKeywords(getTimestamp(), ability.getId());
+                affectedCard.removeNewPT(getTimestamp(), ability.getId());
+
+                affectedCard.updateChangedText();
             }
 
             if (hasParam("Goad")) {

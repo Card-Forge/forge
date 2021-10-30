@@ -247,7 +247,7 @@ public final class CardUtil {
 
         newCopy.setCounters(Maps.newHashMap(in.getCounters()));
 
-        newCopy.setColor(in.determineColor().getColor());
+        newCopy.setColor(in.getColor().getColor());
         newCopy.setPhasedOut(in.isPhasedOut());
 
         newCopy.setReceivedDamageFromThisTurn(in.getReceivedDamageFromThisTurn());
@@ -338,7 +338,7 @@ public final class CardUtil {
 
         byte combinedColor = 0;
         for (Card tgt : tgts) {
-            ColorSet cs = tgt.determineColor();
+            ColorSet cs = tgt.getColor();
             for (byte color : MagicColor.WUBRG) {
                 if(!cs.hasAnyColor(color))
                     continue;
@@ -362,7 +362,7 @@ public final class CardUtil {
     public static ColorSet getColorsYouCtrl(final Player p) {
         byte b = 0;
         for (Card c : p.getCardsIn(ZoneType.Battlefield)) {
-            b |= c.determineColor().getColor();
+            b |= c.getColor().getColor();
         }
         return ColorSet.fromMask(b);
     }

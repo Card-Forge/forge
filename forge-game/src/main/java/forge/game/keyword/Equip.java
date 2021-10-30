@@ -6,7 +6,7 @@ public class Equip extends KeywordWithCost {
 
     public Equip() {
     }
-    
+
     @Override
     protected void parse(String details) {
         String[] k = details.split(":");
@@ -15,7 +15,7 @@ public class Equip extends KeywordWithCost {
             type = k[2];
         }
     }
-    
+
     @Override
     protected String formatReminderText(String reminderText) {
         return String.format(reminderText, cost.toSimpleString(), type);

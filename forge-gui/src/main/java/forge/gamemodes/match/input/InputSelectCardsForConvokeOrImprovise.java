@@ -73,7 +73,7 @@ public final class InputSelectCardsForConvokeOrImprovise extends InputSelectMany
             if (improvise) {
                 chosenColor = ManaCostShard.COLORLESS.getColorMask();
             } else {
-                ColorSet colors = card.determineColor();
+                ColorSet colors = card.getColor();
                 if (colors.isMulticolor()) {
                     //if card is multicolor, strip out any colors which can't be paid towards remaining cost
                     colors = ColorSet.fromMask(colors.getColor() & remainingCost.getUnpaidColors());

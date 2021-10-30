@@ -13,7 +13,7 @@ public class KeywordWithAmountAndType extends KeywordInstance<KeywordWithAmountA
 
     @Override
     protected void parse(String details) {
-        String[] d = details.split(":");  
+        String[] d = details.split(":");
         amount = Integer.parseInt(d[0]);
         type = TextUtil.fastReplace(d[1], ",", " and/or ");
     }
