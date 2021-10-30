@@ -4,7 +4,7 @@ Types:Legendary Creature Kirin Spirit
 PT:3/3
 K:Flying
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, target player reveals their hand and discards all cards with that spell's mana value.
-SVar:TrigDiscard:DB$Discard | ValidTgts$ Player | Mode$ RevealDiscardAll | DiscardValid$ Card.cmcEQX
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Player | Mode$ RevealDiscardAll | DiscardValid$ Card.cmcEQX
 SVar:X:TriggerCount$CastSACMC
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_kirin.jpg
 Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, target player reveals their hand and discards all cards with that spell's mana value.

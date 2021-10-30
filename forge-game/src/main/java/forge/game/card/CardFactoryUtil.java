@@ -338,7 +338,7 @@ public class CardFactoryUtil {
         }
 
         for (final Card crd : list) {
-            ColorSet color = CardUtil.getColors(crd);
+            ColorSet color = crd.getColor();
             for (int i = 0; i < cntColors; i++) {
                 if (color.hasAnyColor(MagicColor.WUBRG[i]))
                     map[i]++;
@@ -376,7 +376,7 @@ public class CardFactoryUtil {
         }
 
         for (final Card crd : list) {
-            ColorSet color = CardUtil.getColors(crd);
+            ColorSet color = crd.getColor();
             for (int i = 0; i < cntColors; i++) {
                 if (color.hasAnyColor(MagicColor.WUBRG[i]))
                     map[i]++;
@@ -407,7 +407,7 @@ public class CardFactoryUtil {
         }
 
         for (final Card crd : list) {
-            ColorSet color = CardUtil.getColors(crd);
+            ColorSet color = crd.getColor();
             for (int i = 0; i < cntColors; i++) {
                 if (color.hasAnyColor(colorRestrictions.get(i))) {
                     map[i]++;
@@ -1842,7 +1842,7 @@ public class CardFactoryUtil {
             if (card.isPermanent()) {
                 final String abPump = "DB$ Pump | Defined$ Remembered | KW$ Haste | PumpZone$ Stack "
                         + "| ConditionDefined$ Remembered | ConditionPresent$ Creature | Duration$ UntilLoseControlOfHost";
-                final AbilitySub saPump = (AbilitySub)AbilityFactory.getAbility(abPump, card);
+                final AbilitySub saPump = (AbilitySub) AbilityFactory.getAbility(abPump, card);
 
                 String dbClean = "DB$ Cleanup | ClearRemembered$ True";
                 final AbilitySub saCleanup = (AbilitySub) AbilityFactory.getAbility(dbClean, card);
@@ -1856,6 +1856,21 @@ public class CardFactoryUtil {
 
             inst.addTrigger(parsedUpkeepTrig);
             inst.addTrigger(parsedPlayTrigger);
+        } else if (keyword.equals("Training")) {
+            final String trigStr = "Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True | " +
+                    "IsPresent$ Creature.attacking+Other+powerGTX | TriggerDescription$ Training (" +
+                    inst.getReminderText() + ")";
+
+            final String effect = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | Defined$ Self | Training$ True";
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+
+            SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            trigger.setSVar("X", "Count$CardPower");
+            sa.setIntrinsic(intrinsic);
+            trigger.setOverridingAbility(sa);
+
+            inst.addTrigger(trigger);
+
         } else if (keyword.startsWith("Tribute")) {
             // use hardcoded ability name
             final String abStr = "TrigNotTribute";
@@ -2239,16 +2254,7 @@ public class CardFactoryUtil {
                 }
             }
 
-            sb.append(" (");
-            if (host.hasStartOfKeyword("AlternateAdditionalCost")
-                    || !host.getFirstSpellAbility().getPayCosts().isOnlyManaCost()) {
-                String reminder = inst.getReminderText();
-                sb.append(reminder, 0, 65).append(" and any additional costs");
-                sb.append(reminder, 65, 81);
-            } else {
-                sb.append(inst.getReminderText());
-            }
-            sb.append(")");
+            sb.append(" (").append(inst.getReminderText()).append(")");
 
             String repeffstr = sb.toString();
 
@@ -2654,7 +2660,7 @@ public class CardFactoryUtil {
 
             final String awaken = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ "+ counters + " | "
                     + "ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Awaken$ True";
-            final String animate = "DB$ Animate | Defined$ Targeted | Power$ 0 | Toughness$ 0 | Types$"
+            final String animate = "DB$ Animate | Defined$ ParentTarget | Power$ 0 | Toughness$ 0 | Types$"
                     + " Creature,Elemental | Duration$ Permanent | Keywords$ Haste";
 
             final AbilitySub awakenSub = (AbilitySub) AbilityFactory.getAbility(awaken, card);
@@ -2844,9 +2850,9 @@ public class CardFactoryUtil {
             final SpellAbility newSA = sa.copyWithDefinedCost(evokedCost);
 
             final StringBuilder desc = new StringBuilder();
-            desc.append("Evoke ").append(evokedCost.toSimpleString()).append(" (");
-            desc.append(inst.getReminderText());
-            desc.append(")");
+            boolean onlyMana = evokedCost.isOnlyManaCost();
+            desc.append("Evoke").append(onlyMana ? " " : "—").append(evokedCost.toSimpleString());
+            desc.append(onlyMana ? "" : ".").append(" (").append(inst.getReminderText()).append(")");
 
             newSA.setDescription(desc.toString());
 

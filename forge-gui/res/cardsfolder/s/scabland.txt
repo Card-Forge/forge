@@ -5,6 +5,6 @@ A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Mana | Cost$ T | Produced$ W | SubAbility$ DBPain | SpellDescription$ Add {W}. CARDNAME deals 1 damage to you.
 A:AB$ Mana | Cost$ T | Produced$ R | SubAbility$ DBPain | SpellDescription$ Add {R}. CARDNAME deals 1 damage to you.
 K:CARDNAME enters the battlefield tapped.
-SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You
+SVar:DBPain:DB$ DealDamage | NumDmg$ 1 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scabland.jpg
 Oracle:Scabland enters the battlefield tapped.\n{T}: Add {C}.\n{T}: Add {R} or {W}. Scabland deals 1 damage to you.

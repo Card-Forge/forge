@@ -4,6 +4,6 @@ Types:Creature Human Rogue
 PT:3/2
 K:Spectacle:2 B
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to you and you draw a card.
-SVar:TrigDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 1 | SubAbility$ DBDraw
-SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 1
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 Oracle:Spectacle {2}{B} (You may cast this spell for its spectacle cost rather than its mana cost if an opponent lost life this turn.)\nWhen Blade Juggler enters the battlefield, it deals 1 damage to you and you draw a card.

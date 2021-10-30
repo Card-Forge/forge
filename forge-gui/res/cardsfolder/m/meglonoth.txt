@@ -5,7 +5,7 @@ PT:6/6
 K:Vigilance
 K:Trample
 T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME blocks a creature, CARDNAME deals damage to that creature's controller equal to CARDNAME's power.
-SVar:TrigDealDamage:DB$DealDamage | Defined$ TriggeredAttackerController | NumDmg$ X
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredAttackerController | NumDmg$ X
 SVar:X:Count$CardPower
 SVar:HasBlockEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meglonoth.jpg

@@ -35,16 +35,16 @@ Name=MTGO Vintage Cube December 2020
 1 Gideon Jura|M12
 1 Elspeth, Sun's Champion|THS
 1 Condemn|M11
-1 Mana Tithe|STX
+1 Mana Tithe|STA
 1 Path to Exile|2XM
-1 Swords to Plowshares|STX
+1 Swords to Plowshares|STA
 1 Disenchant|ZNR
 1 Unexpectedly Absent|EMA
 1 Balance|EMA
 1 Council's Judgment|2XM
 1 Spectral Procession|MM2
 1 Armageddon|A25
-1 Day of Judgment|STX
+1 Day of Judgment|STA
 1 Ravages of War|PTK
 1 Wrath of God|AKR
 1 Land Tax|2XM
@@ -79,7 +79,7 @@ Name=MTGO Vintage Cube December 2020
 1 Jace, the Mind Sculptor|VMA
 1 Tezzeret the Seeker|MM2
 1 Ancestral Recall|VMA
-1 Brainstorm|STX
+1 Brainstorm|STA
 1 High Tide|VMA
 1 Mystical Tutor|EMA
 1 Spell Pierce|XLN
@@ -110,8 +110,8 @@ Name=MTGO Vintage Cube December 2020
 1 Timetwister|VMA
 1 Tinker|ULG
 1 Bribery|8ED
-1 Time Warp|STX
-1 Mind's Desire|STX
+1 Time Warp|STA
+1 Mind's Desire|STA
 1 Time Spiral|USG
 1 Upheaval|MH2
 1 Treasure Cruise|UMA
@@ -138,7 +138,7 @@ Name=MTGO Vintage Cube December 2020
 1 Griselbrand|MM3
 1 Liliana of the Veil|UMA
 1 Liliana, Death's Majesty|AKR
-1 Dark Ritual|STX
+1 Dark Ritual|STA
 1 Entomb|UMA
 1 Fatal Push|2XM
 1 Vampiric Tutor|EMA
@@ -149,13 +149,13 @@ Name=MTGO Vintage Cube December 2020
 1 Dismember|MM2
 1 Hero's Downfall|THS
 1 Makeshift Mannequin|LRW
-1 Duress|STX
+1 Duress|STA
 1 Imperial Seal|PTK
-1 Inquisition of Kozilek|STX
+1 Inquisition of Kozilek|STA
 1 Reanimate|UMA
 1 Thoughtseize|AKR
 1 Collective Brutality|EMN
-1 Demonic Tutor|STX
+1 Demonic Tutor|STA
 1 Exhume|USG
 1 Hymn to Tourach|EMA
 1 Night's Whisper|EMA
@@ -164,7 +164,7 @@ Name=MTGO Vintage Cube December 2020
 1 Damnation|MPS_AKH
 1 Languish|ORI
 1 Mastermind's Acquisition|RIX
-1 Tendrils of Agony|STX
+1 Tendrils of Agony|STA
 1 Dark Petition|ORI
 1 Living Death|A25
 1 Mind Twist|MPS_AKH
@@ -201,7 +201,7 @@ Name=MTGO Vintage Cube December 2020
 1 Daretti, Scrap Savant|C16
 1 Koth of the Hammer|SOM
 1 Burst Lightning|MM2
-1 Lightning Bolt|STX
+1 Lightning Bolt|STA
 1 Abrade|AKR
 1 Ancient Grudge|MM3
 1 Desperate Ritual|UMA
@@ -214,7 +214,7 @@ Name=MTGO Vintage Cube December 2020
 1 Through the Breach|UMA
 1 Fireblast|VMA
 1 Chain Lightning|MPS_AKH
-1 Faithless Looting|STX
+1 Faithless Looting|STA
 1 Firebolt|MH1
 1 Flame Slash|CN2
 1 Mizzium Mortars|MM3
@@ -271,14 +271,14 @@ Name=MTGO Vintage Cube December 2020
 1 Garruk Wildspeaker|M11
 1 Nature's Claim|IMA
 1 Beast Within|CN2
-1 Channel|STX
-1 Regrowth|STX
+1 Channel|STA
+1 Regrowth|STA
 1 Search for Tomorrow|IMA
 1 Eureka|VMA
-1 Harmonize|STX
-1 Natural Order|STX
+1 Harmonize|STA
+1 Natural Order|STA
 1 Plow Under|8ED
-1 Primal Command|STX
+1 Primal Command|STA
 1 Green Sun's Zenith|EMA
 1 Finale of Devastation|WAR
 1 Fastbond|VMA
@@ -369,7 +369,7 @@ Name=MTGO Vintage Cube December 2020
 1 Ajani Vengeant|ALA
 1 Nahiri, the Harbinger|SOI
 1 Wear // Tear|DGM
-1 Lightning Helix|STX
+1 Lightning Helix|STA
 1 Arid Mesa|MH2
 1 Inspiring Vantage|KLD
 1 Needle Spires|OGW
@@ -496,7 +496,7 @@ Name=MTGO Vintage Cube December 2020
 1 Shark Typhoon|IKO
 1 Heartless Act|IKO
 1 Soul-Scar Mage|AKR
-1 Cultivate|STX
+1 Cultivate|STA
 1 Elder Gargaroth|M21
 1 Yorion, Sky Nomad|IKO
 1 Spirit of the Labyrinth|BNG

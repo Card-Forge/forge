@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddKeyword$ First Strike | Description$ Attacking creatures you control have first strike.
 T:Mode$ DamageDone | ValidSource$ Vampire.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Vampire you control deals combat damage to a player, put a +1/+1 counter on it.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ TriggeredSourceLKICopy | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredSourceLKICopy | CounterType$ P1P1 | CounterNum$ 1
 K:Madness:2 R
 SVar:PlayMain1:TRUE
 DeckHints:Ability$Discard & Type$Vampire

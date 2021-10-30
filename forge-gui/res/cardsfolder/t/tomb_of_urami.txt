@@ -2,7 +2,7 @@ Name:Tomb of Urami
 ManaCost:no cost
 Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ B | SubAbility$ DBPain | SpellDescription$ Add {B}. CARDNAME deals 1 damage to you if you don't control an Ogre.
-SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You | ConditionPresent$ Ogre.YouCtrl | ConditionCompare$ EQ0
+SVar:DBPain:DB$ DealDamage | NumDmg$ 1 | Defined$ You | ConditionPresent$ Ogre.YouCtrl | ConditionCompare$ EQ0
 A:AB$ Token | Cost$ 2 B B T Sac<All/Land> | TokenAmount$ 1 | TokenController$ You | TokenScript$ urami | LegacyImage$ urami sok | CostDesc$ {2}{B}{B}, {T}, Sacrifice all lands you control: | SpellDescription$ Create Urami, a legendary 5/5 black Demon Spirit creature token with flying.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tomb_of_urami.jpg

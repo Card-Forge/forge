@@ -3,9 +3,9 @@ ManaCost:3 R R
 Types:Creature Phyrexian Insect
 PT:3/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ Imprint — When CARDNAME enters the battlefield, exile target land.
-SVar:TrigExile:DB$ChangeZone | Imprint$ True | ValidTgts$ Land | TgtPrompt$ Select target land | Origin$ Battlefield | Destination$ Exile
+SVar:TrigExile:DB$ ChangeZone | Imprint$ True | ValidTgts$ Land | TgtPrompt$ Select target land | Origin$ Battlefield | Destination$ Exile
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.sharesNameWith Imprinted+OppCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a land with the same name as the exiled card enters the battlefield under an opponent's control, CARDNAME deals 2 damage to that player.
-SVar:TrigDamage:DB$DealDamage | Defined$ TriggeredCardController | NumDmg$ 2
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 2
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted+ExiledWithSource | Execute$ DBForget

@@ -17,6 +17,7 @@
  */
 package forge.game;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +42,7 @@ import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.keyword.KeywordsChange;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerController;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
@@ -106,7 +108,7 @@ public final class GameActionUtil {
             if (lkicheck) {
                 // double freeze tracker, so it doesn't update view
                 game.getTracker().freeze();
-                source.clearChangedCardKeywords(false);
+                source.clearStaticChangedCardKeywords(false);
                 CardCollection preList = new CardCollection(source);
                 game.getAction().checkStaticAbilities(false, Sets.newHashSet(source), preList);
             }
@@ -187,6 +189,11 @@ public final class GameActionUtil {
                         desc.append("(").append(inst.getReminderText()).append(")");
                         newSA.setDescription(desc.toString());
                         newSA.putParam("AfterDescription", "(Disturbed)");
+                        final String type = source.getAlternateState().getType().toString();
+                        if (!type.contains("Creature")) {
+                            final String name = source.getAlternateState().getName();
+                            newSA.putParam("StackDescription", name + " — " + type + " (Disturbed)");
+                        }
 
                         newSA.setAlternativeCost(AlternativeCost.Disturb);
                         newSA.getRestrictions().setZone(ZoneType.Graveyard);
@@ -359,7 +366,25 @@ public final class GameActionUtil {
         if (sa == null || !sa.isSpell()) {
             return costs;
         }
-        final Card source = sa.getHostCard();
+
+        Card source = sa.getHostCard();
+        final Game game = source.getGame();
+        boolean lkicheck = false;
+
+        Card newHost = ((Spell)sa).getAlternateHost(source);
+        if (newHost != null) {
+            source = newHost;
+            lkicheck = true;
+        }
+
+        if (lkicheck) {
+            // double freeze tracker, so it doesn't update view
+            game.getTracker().freeze();
+            source.clearStaticChangedCardKeywords(false);
+            CardCollection preList = new CardCollection(source);
+            game.getAction().checkStaticAbilities(false, Sets.newHashSet(source), preList);
+        }
+
         for (KeywordInterface inst : source.getKeywords()) {
             final String keyword = inst.getOriginal();
             if (keyword.startsWith("Buyback")) {
@@ -402,6 +427,16 @@ public final class GameActionUtil {
 
             // Surge while having OptionalCost is none of them
         }
+
+        // reset static abilities
+        if (lkicheck) {
+            game.getAction().checkStaticAbilities(false);
+            // clear delayed changes, this check should not have updated the view
+            game.getTracker().clearDelayed();
+            // need to unfreeze tracker
+            game.getTracker().unfreeze();
+        }
+
         return costs;
     }
 
@@ -696,10 +731,17 @@ public final class GameActionUtil {
             return list;
         }
         CardCollection completeList = new CardCollection();
-        for (Player p : game.getPlayers()) {
+        PlayerCollection players = game.getPlayers();
+        // CR 613.7k use APNAP
+        int indexAP = players.indexOf(game.getPhaseHandler().getPlayerTurn());
+        if (indexAP != -1) {
+            Collections.rotate(players, - indexAP);
+        }
+        for (Player p : players) {
             CardCollection subList = new CardCollection();
             for (Card c : list) {
-                if (c.getOwner().equals(p)) {
+                Player decider = dest == ZoneType.Battlefield ? c.getController() : c.getOwner();
+                if (decider.equals(p)) {
                     subList.add(c);
                 }
             }

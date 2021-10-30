@@ -3,6 +3,6 @@ ManaCost:3 U
 Types:Creature Human Pirate
 PT:3/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | CheckSVar$ RaidTest | OptionalDecider$ You | Execute$ TrigChangeZone | TriggerDescription$ Raid — When CARDNAME enters the battlefield, if you attacked this turn, you may return target creature to its owner's hand.
-SVar:TrigChangeZone:DB$ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand
 SVar:RaidTest:Count$AttackersDeclared
 Oracle:Raid — When Deadeye Rig-Hauler enters the battlefield, if you attacked this turn, you may return target creature to its owner's hand.

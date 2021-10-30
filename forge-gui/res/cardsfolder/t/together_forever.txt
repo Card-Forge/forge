@@ -2,7 +2,7 @@ Name:Together Forever
 ManaCost:W W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters the battlefield, support 2. (Put a +1/+1 counter on each of up to two other target creatures.)
-SVar:TrigPut:DB$PutCounter | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 2 | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 2 | CounterType$ P1P1 | CounterNum$ 1
 A:AB$ ChooseCard | Cost$ 1 | ValidTgts$ Creature.HasCounters | TgtPrompt$ Choose target creature with a counter on it | SubAbility$ DBDelayedTrigger | StackDescription$ When {c:Targeted} dies this turn, return that card to its owner's hand. | SpellDescription$ Choose target creature with a counter on it. When that creature dies this turn, return that card to its owner's hand.
 SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigReturn | StackDescription$ None | TriggerDescription$ When that creature dies this turn, return that card to its owner's hand.
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredCard

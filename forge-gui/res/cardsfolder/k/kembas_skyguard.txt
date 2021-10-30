@@ -4,6 +4,6 @@ Types:Creature Cat Knight
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ 2
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kembas_skyguard.jpg
 Oracle:Flying\nWhen Kemba's Skyguard enters the battlefield, you gain 2 life.

@@ -2,6 +2,6 @@ Name:Instill Infection
 ManaCost:3 B
 Types:Instant
 A:SP$ PutCounter | Cost$ 3 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True | SpellDescription$ Put a -1/-1 counter on target creature. | SubAbility$ DBDraw
-SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/instill_infection.jpg
 Oracle:Put a -1/-1 counter on target creature.\nDraw a card.

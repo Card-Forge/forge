@@ -2,7 +2,7 @@ Name:Time Bomb
 ManaCost:4
 Types:Artifact
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a time counter on CARDNAME.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1
 A:AB$ DamageAll | Cost$ 1 T Sac<1/CARDNAME> | ValidCards$ Creature | ValidPlayers$ Player | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of time counters on it to each creature and each player.
 SVar:X:Count$CardCounters.TIME
 SVar:Picture:http://www.wizards.com/global/images/magic/general/time_bomb.jpg

@@ -34,7 +34,6 @@ import forge.game.GameObjectPredicates;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.card.CardUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -300,9 +299,9 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (first == null) {
                 return false;
             }
-            byte firstColor = CardUtil.getColors(first).getColor();
+            byte firstColor = first.getColor().getColor();
             for (Card c : tgts) {
-                if (CardUtil.getColors(c).getColor() != firstColor) {
+                if (c.getColor().getColor() != firstColor) {
                     return false;
                 }
             }

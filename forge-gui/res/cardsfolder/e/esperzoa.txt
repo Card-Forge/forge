@@ -4,7 +4,7 @@ Types:Artifact Creature Jellyfish
 PT:4/3
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ At the beginning of your upkeep, return an artifact you control to its owner's hand.
-SVar:TrigBounce:DB$ChangeZone | ChangeType$ Artifact.YouCtrl | ChangeNum$ 1 | Origin$ Battlefield | Destination$ Hand | Mandatory$ True | Hidden$ True
+SVar:TrigBounce:DB$ ChangeZone | ChangeType$ Artifact.YouCtrl | ChangeNum$ 1 | Origin$ Battlefield | Destination$ Hand | Mandatory$ True | Hidden$ True
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/esperzoa.jpg
 Oracle:Flying\nAt the beginning of your upkeep, return an artifact you control to its owner's hand.

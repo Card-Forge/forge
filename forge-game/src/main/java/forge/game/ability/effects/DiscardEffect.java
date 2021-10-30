@@ -182,7 +182,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                     boolean runDiscard = !sa.hasParam("Optional") || p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, message);
 
                     if (runDiscard) {
-                        final String valid = sa.hasParam("DiscardValid") ? sa.getParam("DiscardValid") : "Card";
+                        final String valid = sa.getParamOrDefault("DiscardValid", "Card");
                         List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), valid, source.getController(), source, sa);
                         list = CardLists.filter(list, Presets.NON_TOKEN);
                         CardCollection toDiscard = new CardCollection();
@@ -250,7 +250,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                         dPHand = p.getController().chooseCardsToRevealFromHand(amount, amount, dPHand);
                     }
 
-                    final String valid = sa.hasParam("DiscardValid") ? sa.getParam("DiscardValid") : "Card";
+                    final String valid = sa.getParamOrDefault("DiscardValid", "Card");
                     String[] dValid = valid.split(",");
                     CardCollection validCards = CardLists.getValidCards(dPHand, dValid, source.getController(), source, sa);
 

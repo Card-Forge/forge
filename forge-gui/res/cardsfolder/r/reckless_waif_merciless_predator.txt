@@ -3,7 +3,7 @@ ManaCost:R
 Types:Creature Human Rogue Werewolf
 PT:1/1
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
-SVar:TrigTransform:DB$SetState | Defined$ Self | Mode$ Transform
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_waif.jpg
 Oracle:At the beginning of each upkeep, if no spells were cast last turn, transform Reckless Waif.
@@ -16,6 +16,6 @@ Colors:red
 Types:Creature Werewolf
 PT:3/2
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
-SVar:TrigTransform:DB$SetState | Defined$ Self | Mode$ Transform
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merciless_predator.jpg
 Oracle:At the beginning of each upkeep, if a player cast two or more spells last turn, transform Merciless Predator.

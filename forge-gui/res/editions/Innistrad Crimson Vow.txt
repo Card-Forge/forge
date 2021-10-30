@@ -1,0 +1,98 @@
+[metadata]
+Code=VOW
+Date=2021-11-19
+Name=Innistrad: Crimson Vow
+Code2=VOW
+MciCode=vow
+Type=Expansion
+ScryfallCode=VOW
+
+[cards]
+5 R By Invitation Only @Micah Epstein
+10 C Drogskol Infantry @Cristi Balanescu
+15 C Gryff Rider @Yongjae Choi
+34 M Savior of Ollenbock @Aaron J. Riley
+36 R Sigarda's Summons @Nestor Ossandon Leal
+38 R Thalia, Guardian of Thraben @Magali Villeneuve
+45 R Wedding Announcement @Caroline Gariba
+60 U Geistlight Snare @Anato Finnstark
+71 R Overcharged Amalgam @Mike Jordana
+103 R Demonic Bargain @Sam Guay
+112 U Fell Stinger @Lars Grant-West
+114 C Gluttonous Guest @Jesper Ejsing
+129 C Rot-Tide Gargantua @Filip Burburan
+131 M Sorin the Mirthless @Martina Fackova
+137 R Voldaren Bloodcaster @Kim Sokol
+150 R Change of Fortune @Sam Guay
+154 R Dominating Vampire @PINDURSKI
+180 U Vampires' Vengeance @Chris Cold
+181 M Volatile Arsonist @Gabor Szikszai
+184 C Weary Prisoner @Jason Rainville
+185 C Apprentice Sharpshooter @Steve Prescott
+197 R Dig Up @Slawomir Maniak
+208 C Massive Might @Iris Compiet
+231 R Anje, Maid of Dishonor @Yongjae Choi
+235 R Dorothea, Vengeful Victim @Marta Nael
+238 R Grolnok, the Omnivore @Simon Dominic
+245 M Olivia, Crimson Bride @Anna Steinbauer
+260 C Wedding Invitation @Justyna Gil
+261 R Deathcap Glade @Sam Burley
+262 R Dreamroot Cascade @Sam Burley
+264 R Shattered Sanctum @Muhammad Firdaus
+265 R Stormcarved Coast @Sarah Finnigan
+266 R Sundown Pass @Muhammad Firdaus
+267 R Voldaren Estate @Richard Wright
+268 L Plains @Daria Khlebnikova
+269 L Plains @Indra Nugroho
+270 L Island @Alayna Danner
+271 L Island @Rio Krisma
+272 L Swamp @Pig Hands
+273 L Swamp @Kerby Rosanes
+274 L Mountain @Alayna Danner
+275 L Mountain @Daria Khlebnikova
+276 L Forest @Pig Hands
+277 L Forest @Indra Nugroho
+278 M Sorin the Mirthless @Justyna Gil
+281 R Deathcap Glade @Muhammad Firdaus
+282 R Dreamroot Cascade @Jokubas Uogintas
+283 R Shattered Sanctum @Donato Giancola
+284 R Stormcarved Coast @Jokubas Uogintas
+285 R Sundown Pass @Johannes Voss
+292 C Gluttonous Guest @Marie Magny
+297 M Sorin the Mirthless @
+298 R Voldaren Bloodcaster @Samuel Araya
+305 R Dominating Vampire @Christian Angel
+309 R Anje, Maid of Dishonor @Christian Angel
+315 M Olivia, Crimson Bride @
+318 R Thalia, Guardian of Thraben @Cabrol
+322 R Dorothea, Vengeful Victim @Karmazid
+324 R Grolnok, the Omnivore @DZO
+330 M Savior of Ollenbock @Johannes Voss
+331 R Thalia, Guardian of Thraben @Magali Villeneuve
+337 M Sorin the Mirthless @Bastien L. Deharme
+338 R Voldaren Bloodcaster @Johann Bodin
+339 U Vampires' Vengeance @Dave Kendall
+343 M Olivia, Crimson Bride @Bastien L. Deharme
+346 R By Invitation Only @Micah Epstein
+352 M Savior of Ollenbock @Aaron J. Riley
+353 R Sigarda's Summons @Nestor Ossandon Leal
+355 R Wedding Announcement @Caroline Gariba
+363 R Overcharged Amalgam @Mike Jordana
+368 R Demonic Bargain @Sam Guay
+375 R Change of Fortune @Sam Guay
+387 R Dig Up @Slawomir Maniak
+397 R Voldaren Estate @Richard Wright
+398 L Plains @Sam White
+399 L Island @Sam White
+400 L Swamp @Sam White
+401 L Mountain @Sam White
+402 L Forest @Sam White
+403 R Voldaren Estate @Cliff Childs
+404 R Sigarda's Summons @Wisnu Tan
+405 U Geistlight Snare @Anato Finnstark
+406 U Fell Stinger @Lars Grant-West
+407 R Dominating Vampire @PINDURSKI
+
+[tokens]
+c_a_blood_draw
+gw_1_1_human_soldier_training

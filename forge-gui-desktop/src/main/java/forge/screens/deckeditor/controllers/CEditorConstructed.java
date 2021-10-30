@@ -55,7 +55,8 @@ import java.util.Map.Entry;
 public final class CEditorConstructed extends CDeckEditor<Deck> {
     private DeckController<Deck> controller;
     private final List<DeckSection> allSections = new ArrayList<>();
-    private ItemPool<PaperCard> normalPool, avatarPool, planePool, schemePool, conspiracyPool, commanderPool;
+    private ItemPool<PaperCard> normalPool, avatarPool, planePool, schemePool, conspiracyPool,
+            commanderPool, dungeonPool;
 
     CardManager catalogManager;
     CardManager deckManager;
@@ -85,12 +86,14 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Schemes);
                 allSections.add(DeckSection.Planes);
                 allSections.add(DeckSection.Conspiracy);
+                allSections.add(DeckSection.Dungeon);
 
                 normalPool = FModel.getAllCardsNoAlt();
                 avatarPool = FModel.getAvatarPool();
                 planePool = FModel.getPlanechaseCards();
                 schemePool = FModel.getArchenemyCards();
                 conspiracyPool = FModel.getConspiracyPool();
+                dungeonPool = FModel.getDungeonPool();
 
                 break;
             case Commander:
@@ -336,6 +339,9 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         case Conspiracy:
             cmb.addMoveItems(localizer.getMessage("lblAdd"), localizer.getMessage("lbltoconspiracydeck"));
             break;
+        case Dungeon:
+            cmb.addMoveItems(localizer.getMessage("lblAdd"), localizer.getMessage("lbltodungeondeck"));
+            break;
         }
     }
 
@@ -364,6 +370,9 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             break;
         case Conspiracy:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromconspiracydeck"));
+            break;
+        case Dungeon:
+            cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromdungeondeck"));
             break;
         }
         if (foilAvailable) {
@@ -394,12 +403,14 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
      */
     @Override
     public void resetTables() {
-        // Constructed mode can use all cards, no limitations.
-        this.sectionMode = DeckSection.Main;
         ItemPool currentPool = this.getCatalogManager().getPool();
-        if (currentPool == null || !currentPool.equals(normalPool))
-            this.getCatalogManager().setPool(normalPool, true);
-        this.getDeckManager().setPool(this.controller.getModel().getMain());
+        DeckSection selectedSection = (DeckSection) this.getCbxSection().getSelectedItem();
+        if (selectedSection != DeckSection.Main || currentPool == null || !currentPool.equals(normalPool)) {
+            // Constructed mode can use all cards, no limitations.
+            this.getCbxSection().setSelectedItem(DeckSection.Main);
+            this.setEditorMode(DeckSection.Main);
+        } else
+            this.getDeckManager().setPool(this.controller.getModel().getMain());
     }
 
     @Override
@@ -464,6 +475,13 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                         this.getCatalogManager().setPool(conspiracyPool, true);
                         this.getCatalogManager().setAllowMultipleSelections(true);
                         this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Conspiracy));
+                        break;
+                    case Dungeon:
+                        this.getCatalogManager().setup(ItemManagerConfig.DUNGEON_DECKS);
+                        this.getCatalogManager().setPool(dungeonPool, true);
+                        this.getCatalogManager().setAllowMultipleSelections(true);
+                        this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Dungeon));
+                        break;
                 }
             case Commander:
             case Oathbreaker:

@@ -4,7 +4,7 @@ Types:Artifact Equipment
 K:Equip:2
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each charge counter on CARDNAME.
 T:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Creature.EquippedBy | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage, put a charge counter on CARDNAME.
-SVar:TrigPutCounter:DB$PutCounter | CounterType$ CHARGE | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ CHARGE | CounterNum$ 1
 SVar:X:Count$CardCounters.CHARGE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/banshees_blade.jpg
 Oracle:Equipped creature gets +1/+1 for each charge counter on Banshee's Blade.\nWhenever equipped creature deals combat damage, put a charge counter on Banshee's Blade.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)

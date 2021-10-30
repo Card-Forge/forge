@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Creature Zubera Spirit
 PT:1/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, draw a card for each Zubera that died this turn.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ X
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Card.Zubera
 DeckHints:Type$Zubera
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80507.jpg

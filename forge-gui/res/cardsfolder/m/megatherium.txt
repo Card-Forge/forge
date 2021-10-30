@@ -4,7 +4,7 @@ Types:Creature Beast
 PT:4/4
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you pay {1} for each card in your hand.
-SVar:TrigSac:DB$Sacrifice | Defined$ Self | UnlessCost$ X | UnlessPayer$ You
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self | UnlessCost$ X | UnlessPayer$ You
 SVar:X:Count$InYourHand
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/megatherium.jpg

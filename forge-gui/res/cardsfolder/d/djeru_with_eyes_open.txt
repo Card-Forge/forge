@@ -4,7 +4,7 @@ Types:Legendary Creature Human Warrior
 PT:4/3
 K:Vigilance
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a planeswalker card, reveal it, put it into your hand, then shuffle.
-SVar:TrigChange:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Planeswalker | ChangeNum$ 1 | ShuffleNonMandatory$ True
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Planeswalker | ChangeNum$ 1 | ShuffleNonMandatory$ True
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Planeswalker.YouCtrl | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ If a source would deal damage to a planeswalker you control, prevent 1 of that damage.
 SVar:DBReplace:DB$ ReplaceDamage | Amount$ 1
 Oracle:Vigilance\nWhen Djeru, With Eyes Open enters the battlefield, you may search your library for a planeswalker card, reveal it, put it into your hand, then shuffle.\nIf a source would deal damage to a planeswalker you control, prevent 1 of that damage.

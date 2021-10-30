@@ -107,8 +107,7 @@ public class CountersPutAi extends CountersAi {
         final Card source = sa.getHostCard();
 
         if (sa.isOutlast()) {
-            if (ph.is(PhaseType.MAIN2, ai)) { // applicable to non-attackers
-                                              // only
+            if (ph.is(PhaseType.MAIN2, ai)) { // applicable to non-attackers only
                 float chance = 0.8f;
                 if (ComputerUtilCard.doesSpecifiedCreatureBlock(ai, source)) {
                     return false;
@@ -258,18 +257,18 @@ public class CountersPutAi extends CountersAi {
             if (playAggro) {
                 // aggro profiles ignore conservative play for this AI logic
                 return true;
-            } else if (ai.getGame().getCombat() != null && sa.getHostCard() != null) {
-                if (ai.getGame().getCombat().isAttacking(sa.getHostCard()) && !onlyDefensive) {
+            } else if (ai.getGame().getCombat() != null && source != null) {
+                if (ai.getGame().getCombat().isAttacking(source) && !onlyDefensive) {
                     return true;
-                } else if (ai.getGame().getCombat().isBlocking(sa.getHostCard())) {
+                } else if (ai.getGame().getCombat().isBlocking(source)) {
                     // when blocking, consider this if it's possible to save the blocker and/or kill at least one attacker
-                    CardCollection blocked = ai.getGame().getCombat().getAttackersBlockedBy(sa.getHostCard());
+                    CardCollection blocked = ai.getGame().getCombat().getAttackersBlockedBy(source);
                     int totBlkPower = Aggregates.sum(blocked, CardPredicates.Accessors.fnGetNetPower);
                     int totBlkToughness = Aggregates.min(blocked, CardPredicates.Accessors.fnGetNetToughness);
 
                     int numActivations = ai.getCounters(CounterEnumType.ENERGY) / sa.getPayCosts().getCostEnergy().convertAmount();
-                    if (sa.getHostCard().getNetToughness() + numActivations > totBlkPower
-                            || sa.getHostCard().getNetPower() + numActivations >= totBlkToughness) {
+                    if (source.getNetToughness() + numActivations > totBlkPower
+                            || source.getNetPower() + numActivations >= totBlkToughness) {
                         return true;
                     }
                 }
@@ -347,6 +346,10 @@ public class CountersPutAi extends CountersAi {
 
         // TODO handle proper calculation of X values based on Cost
         int amount = AbilityUtils.calculateAmount(source, amountStr, sa);
+
+        if (amount == 0 && logic.equals("FromDiceRoll")) {
+            amount = 1; // TODO: improve this to possibly account for some variability depending on the roll outcome (e.g. 4 for 1d8, perhaps)
+        }
 
         if (sa.hasParam("Adapt")) {
             Game game = ai.getGame();
@@ -598,7 +601,7 @@ public class CountersPutAi extends CountersAi {
                 return false;
             }
         } else {
-            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+            final List<Card> cards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
             // Don't activate Curse abilities on my cards and non-curse abilities
             // on my opponents
             if (cards.isEmpty() || (cards.get(0).getController().isOpponentOf(ai) && !sa.isCurse())) {
@@ -736,7 +739,7 @@ public class CountersPutAi extends CountersAi {
         final String type = sa.getParam("CounterType");
         final String amountStr = sa.getParamOrDefault("CounterNum", "1");
         final boolean divided = sa.isDividedAsYouChoose();
-        final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
+        final int amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         int left = amount;
 
         if (!sa.usesTargeting()) {
@@ -784,7 +787,7 @@ public class CountersPutAi extends CountersAi {
             List<Player> playerList = Lists.newArrayList(Iterables.filter(
                     sa.getTargetRestrictions().getAllCandidates(sa, true, true), Player.class));
 
-            if (playerList.isEmpty() && mandatory) {
+            if (playerList.isEmpty()) {
                 return false;
             }
 
@@ -892,7 +895,7 @@ public class CountersPutAi extends CountersAi {
             // add counter if that opponent has a giant creature
             final List<Card> creats = player.getCreaturesInPlay();
             final String amountStr = sa.getParamOrDefault("CounterNum", "1");
-            final int tributeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
+            final int tributeAmount = AbilityUtils.calculateAmount(source, amountStr, sa);
 
             final boolean isHaste = source.hasKeyword(Keyword.HASTE);
             List<Card> threatening = CardLists.filter(creats, new Predicate<Card>() {
@@ -1001,7 +1004,7 @@ public class CountersPutAi extends CountersAi {
             final CardCollection doNotHaveKeyword = CardLists.filter(filtered, new Predicate<Card>() {
                 @Override
                 public boolean apply(Card card) {
-                    return !card.hasKeyword(kw) && card.canBeTargetedBy(sa) && sa.canTarget(card);
+                    return !card.hasKeyword(kw) && sa.canTarget(card);
                 }
             });
 

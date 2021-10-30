@@ -2,7 +2,7 @@ Name:Gate to the Afterlife
 ManaCost:3
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ValidCard$ Creature.nonToken+YouCtrl | Execute$ TrigGainLife | TriggerDescription$ Whenever a nontoken creature you control dies, you gain 1 life. Then you may draw a card. If you do, discard a card.
-SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBDraw
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | OptionalDecider$ You | RememberDrawn$ True | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

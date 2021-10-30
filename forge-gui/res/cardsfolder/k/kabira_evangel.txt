@@ -3,6 +3,6 @@ ManaCost:2 W
 Types:Creature Human Cleric Ally
 PT:2/3
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self,Ally.Other+YouCtrl | Execute$ TrigProt | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may choose a color. If you do, Allies you control gain protection from the chosen color until end of turn.
-SVar:TrigProt:DB$ProtectionAll | ValidCards$ Card.Ally+YouCtrl | Gains$ Choice | Choices$ AnyColor
+SVar:TrigProt:DB$ ProtectionAll | ValidCards$ Card.Ally+YouCtrl | Gains$ Choice | Choices$ AnyColor
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kabira_evangel.jpg
 Oracle:Whenever Kabira Evangel or another Ally enters the battlefield under your control, you may choose a color. If you do, Allies you control gain protection from the chosen color until end of turn.

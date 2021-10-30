@@ -5,6 +5,6 @@ PT:2/2
 K:Flying
 K:Ascend
 T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigPutCounter | Blessing$ True | TriggerDescription$ Whenever CARDNAME attacks, if you have the city's blessing, put a +1/+1 counter on it.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionPresent$ Card.StrictlySelf 
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionPresent$ Card.StrictlySelf
 SVar:Picture:http://www.wizards.com/global/images/magic/general/resplendent_griffin.jpg
 Oracle:Flying\nAscend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nWhenever Resplendent Griffin attacks, if you have the city's blessing, put a +1/+1 counter on it.

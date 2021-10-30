@@ -181,6 +181,23 @@ public class KeywordCollection implements Iterable<KeywordInterface> {
         return view;
     }
 
+    public void applyChanges(Iterable<KeywordsChange> changes) {
+        for (final KeywordsChange ck : changes) {
+            if (ck.isRemoveAllKeywords()) {
+                clear();
+            }
+            else if (ck.getRemoveKeywords() != null) {
+                removeAll(ck.getRemoveKeywords());
+            }
+
+            removeInstances(ck.getRemovedKeywordInstances());
+
+            if (ck.getKeywords() != null) {
+                insertAll(ck.getKeywords());
+            }
+        }
+    }
+
     public class KeywordCollectionView implements Iterable<KeywordInterface> {
 
         protected KeywordCollectionView() {

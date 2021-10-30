@@ -67,6 +67,7 @@ public class TargetRestrictions {
     private boolean withSameCardType = false;
     private boolean singleTarget = false;
     private boolean randomTarget = false;
+    private boolean randomNumTargets = false;
 
     // How many can be targeted?
     private String minTargets;
@@ -109,6 +110,7 @@ public class TargetRestrictions {
         this.withSameCardType = target.isWithSameCardType();
         this.singleTarget = target.isSingleTarget();
         this.randomTarget = target.isRandomTarget();
+        this.randomNumTargets = target.isRandomNumTargets();
     }
 
     /**
@@ -694,6 +696,20 @@ public class TargetRestrictions {
      */
     public void setRandomTarget(boolean random) {
         this.randomTarget = random;
+    }
+
+    /**
+     * @return the randomNumTargets
+     */
+    public boolean isRandomNumTargets() {
+        return randomNumTargets;
+    }
+
+    /**
+     * @param randomNumTgts the randomNumTarget to set
+     */
+    public void setRandomNumTargets(boolean randomNumTgts) {
+        this.randomNumTargets = randomNumTgts;
     }
 
     /**

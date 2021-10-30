@@ -2,7 +2,7 @@ Name:Mirror March
 ManaCost:5 R
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.nonToken+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigFlipACoin | TriggerDescription$ Whenever a nontoken creature enters the battlefield under your control, flip a coin until you lose a flip. For each flip you won, create a token that's a copy of that creature. Those tokens gain haste. Exile them at the beginning of the next end step.
-SVar:TrigFlipACoin:DB$FlipACoin | FlipUntilYouLose$ True | SaveNumFlipsToSVar$ MirrorAmount | LoseSubAbility$ DBCopies
+SVar:TrigFlipACoin:DB$ FlipACoin | FlipUntilYouLose$ True | SaveNumFlipsToSVar$ MirrorAmount | LoseSubAbility$ DBCopies
 SVar:DBCopies:DB$ CopyPermanent | PumpKeywords$ Haste | AtEOT$ Exile | Defined$ TriggeredCard | NumCopies$ MirrorAmount
 SVar:MirrorAmount:Number$0
 DeckHas:Ability$Token

@@ -22,7 +22,7 @@ public class AchievementTracker {
         if (sa.isPwAbility() && sa.hasParam("Ultimate")) {
             activatedUltimates.add(card.getName());
         }
-        if (card.determineColor().equals(ColorSet.ALL_COLORS)) {
+        if (card.getColor().equals(ColorSet.ALL_COLORS)) {
             challengesCompleted.add("Chromatic");
         }
     }

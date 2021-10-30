@@ -3,6 +3,6 @@ ManaCost:W
 Types:Creature Human Monk Cleric
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 1 life.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ 1
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Starter_1999/devout_monk.jpg
 Oracle:When Devout Monk enters the battlefield, you gain 1 life.

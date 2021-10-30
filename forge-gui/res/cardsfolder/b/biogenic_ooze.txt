@@ -3,9 +3,9 @@ ManaCost:3 G G
 Types:Creature Ooze
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 green Ooze creature token.
-SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenScript$ g_2_2_ooze | LegacyImage$ g 2 2 ooze rna
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_ooze | LegacyImage$ g 2 2 ooze rna
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, put a +1/+1 counter on each Ooze you control.
-SVar:TrigPutCounter:DB$PutCounterAll | ValidCards$ Ooze.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounterAll | ValidCards$ Ooze.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
 SVar:BuffedBy:Artifact
 A:AB$ Token | Cost$ 1 G G G | TokenAmount$ 1 | TokenScript$ g_2_2_ooze | LegacyImage$ g 2 2 ooze rna | SpellDescription$ Create a 2/2 green Ooze creature token.
 DeckHas:Ability$Token & Ability$Counters

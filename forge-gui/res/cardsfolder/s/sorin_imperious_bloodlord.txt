@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Legendary Planeswalker Sorin
 Loyalty:4
 A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Deathtouch & Lifelink | SubAbility$ DBPutCounter | SpellDescription$ Target creature you control gains deathtouch and lifelink until end of turn. If it's a Vampire, put a +1/+1 counter on it.
-SVar:DBPutCounter:DB$PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 1 | ConditionDefined$ Targeted | ConditionPresent$ Card.Vampire | ConditionCompare$ GE1
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 1 | ConditionDefined$ Targeted | ConditionPresent$ Card.Vampire | ConditionCompare$ GE1
 A:AB$ Sacrifice | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ You | SacValid$ Vampire | Optional$ True | RememberSacrificed$ True | SubAbility$ TrigPayCost | SpellDescription$ You may sacrifice a Vampire. When you do, CARDNAME deals 3 damage to any target and you gain 3 life.
 SVar:TrigPayCost:DB$ ImmediateTrigger | Execute$ DBDmg | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ GE1 | TriggerDescription$ When you do, CARDNAME deals 3 damage to any target and you gain 3 life. | SubAbility$ DBCleanup
 SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SubAbility$ DBGainLife

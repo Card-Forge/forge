@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Zubera Spirit
 PT:1/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, it deals damage to any target equal to the number of Zubera that died this turn.
-SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Card.Zubera
 DeckHints:Type$Zubera
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80508.jpg

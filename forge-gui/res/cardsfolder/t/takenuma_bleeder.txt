@@ -4,7 +4,7 @@ Types:Creature Ogre Shaman
 PT:3/3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME attacks or blocks, you lose 1 life if you don't control a Demon.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigLoseLife | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, you lose 1 life if you don't control a Demon.
-SVar:TrigLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ 1 | ConditionPresent$ Demon.YouCtrl | ConditionCompare$ EQ0
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1 | ConditionPresent$ Demon.YouCtrl | ConditionCompare$ EQ0
 DeckHints:Type$Demon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/takenuma_bleeder.jpg
 Oracle:Whenever Takenuma Bleeder attacks or blocks, you lose 1 life if you don't control a Demon.

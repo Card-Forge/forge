@@ -27,6 +27,7 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
@@ -52,6 +53,9 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             }
         } else if ("GideonBlackblade".equals(aiLogic)) {
             return SpecialCardAi.GideonBlackblade.consider(ai, sa);
+        } else if ("AtOppEOT".equals(aiLogic)) {
+            PhaseHandler ph = ai.getGame().getPhaseHandler();
+            return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai;
         } else if ("Always".equals(aiLogic)) {
             return true;
         }
@@ -244,7 +248,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
 
             //if Iona does prevent from casting, allow it to draw
             for (final Card io : player.getCardsIn(ZoneType.Battlefield, "Iona, Shield of Emeria")) {
-                if (CardUtil.getColors(imprinted).hasAnyColor(MagicColor.fromName(io.getChosenColor()))) {
+                if (imprinted.getColor().hasAnyColor(MagicColor.fromName(io.getChosenColor()))) {
                     return allow;
                 }
             }

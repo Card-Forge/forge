@@ -5,6 +5,6 @@ K:Saga:3:DBGainLife,DBMana,DBChangeZone
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SpellDescription$ You gain 2 life for each foretold card you own in exile.
 SVar:X:Count$ValidExile Card.foretold+YouOwn/Times.2
 SVar:DBMana:DB$ Mana | Produced$ W U | RestrictValid$ Static.Foretelling,Card.withForetell | SpellDescription$ Add {W}{U}. Spend this mana only to foretell cards or cast spells that have foretell.
-SVar:DBChangeZone:DB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.YouOwn+withForetell | SpellDescription$ Return target card with foretell from your graveyard to your hand.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.YouOwn+withForetell | SpellDescription$ Return target card with foretell from your graveyard to your hand.
 DeckHas:Ability$Graveyard & Ability$GainLife
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — You gain 2 life for each foretold card you own in exile.\nII — Add {W}{U}. Spend this mana only to foretell cards or cast spells that have foretell.\nIII — Return target card with foretell from your graveyard to your hand.

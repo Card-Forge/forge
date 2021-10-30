@@ -7,7 +7,7 @@ SVar:DBReveal:DB$ Reveal | RevealDefined$ Self | SubAbility$ DBChoose | SpellDes
 SVar:DBChoose:DB$ ChooseCard | MinAmount$ 0 | Amount$ X | Choices$ Creature.YouOwn | ChoiceTitle$ Exile with Volatile Chimera | ChoiceZone$ Sideboard | RememberChosen$ True | ConditionGameTypes$ Draft,QuestDraft | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Origin$ Sideboard | Destination$ Exile | Defined$ Remembered | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE3 | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | NoteCards$ Remembered | NoteCardsFor$ VolatileChimera | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ ChooseCard | Cost$ 1 R | ChoiceZone$ Exile | AtRandom$ True | Choices$ Card.YouOwn+NotedForVolatileChimera | SubAbility$ DBClone | SpellDescription$ Choose a card at random you exiled with cards named Volatile Chimera. Volatile Chimera becomes a copy of that card, except it has this ability.
 SVar:DBClone:DB$ Clone | Defined$ ChosenCard | GainThisAbility$ True
 SVar:X:Count$InYourSideboard

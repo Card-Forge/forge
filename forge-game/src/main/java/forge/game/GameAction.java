@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import forge.util.*;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import com.google.common.base.Predicate;
@@ -83,13 +84,6 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
-import forge.util.Aggregates;
-import forge.util.CardTranslation;
-import forge.util.Expressions;
-import forge.util.Localizer;
-import forge.util.MyRandom;
-import forge.util.ThreadUtil;
-import forge.util.Visitor;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 
@@ -1003,6 +997,9 @@ public class GameAction {
     }
 
     public void ceaseToExist(Card c, boolean skipTrig) {
+        if (c.isInZone(ZoneType.Stack)) {
+            c.getGame().getStack().remove(c);
+        }
         c.getZone().remove(c);
 
         // CR 603.6c other players LTB triggers should work
@@ -1508,7 +1505,7 @@ public class GameAction {
             c.getGame().getTracker().flush();
 
             c.setMoveToCommandZone(false);
-            if (c.getOwner().getController().confirmAction(c.getSpellPermanent(), PlayerActionConfirmMode.ChangeZoneToAltDestination, c.getName() + ": If a commander is in a graveyard or in exile and that card was put into that zone since the last time state-based actions were checked, its owner may put it into the command zone.")) {
+            if (c.getOwner().getController().confirmAction(c.getFirstSpellAbility(), PlayerActionConfirmMode.ChangeZoneToAltDestination, c.getName() + ": If a commander is in a graveyard or in exile and that card was put into that zone since the last time state-based actions were checked, its owner may put it into the command zone.")) {
                 moveTo(c.getOwner().getZone(ZoneType.Command), c, null);
                 return true;
             }
@@ -1644,7 +1641,7 @@ public class GameAction {
 
     private boolean handlePlaneswalkerRule(Player p, CardZoneTable table) {
         // get all Planeswalkers
-        final List<Card> list = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANESWALKERS);
+        final List<Card> list = p.getPlaneswalkersInPlay();
         boolean recheck = false;
 
         //final Multimap<String, Card> uniqueWalkers = ArrayListMultimap.create(); // Not used as of Ixalan
@@ -1891,6 +1888,9 @@ public class GameAction {
 
     /** Delivers a message to all players. (use reveal to show Cards) */
     public void notifyOfValue(SpellAbility saSource, GameObject relatedTarget, String value, Player playerExcept) {
+        String name = CardTranslation.getTranslatedName(saSource.getHostCard().getName());
+        value = TextUtil.fastReplace(value, "CARDNAME", name);
+        value = TextUtil.fastReplace(value, "NICKNAME", Lang.getInstance().getNickName(name));
         for (Player p : game.getPlayers()) {
             if (playerExcept == p) continue;
             p.getController().notifyOfValue(saSource, relatedTarget, value);

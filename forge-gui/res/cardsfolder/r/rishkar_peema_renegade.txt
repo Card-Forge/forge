@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Legendary Creature Elf Druid
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on each of up to two target creatures.
-SVar:TrigPut:DB$PutCounter | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPut:DB$ PutCounter | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+HasCounters | AddAbility$ Mana | Description$ Each creature you control with a counter on it has "{T}: Add {G}."
 SVar:Mana:AB$Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rishkar_peema_renegade.jpg

@@ -10,31 +10,16 @@ import com.google.common.eventbus.Subscribe;
 
 import forge.LobbyPlayer;
 import forge.game.card.Card;
-import forge.game.event.GameEvent;
-import forge.game.event.GameEventAttackersDeclared;
-import forge.game.event.GameEventBlockersDeclared;
-import forge.game.event.GameEventCardDamaged;
+import forge.game.event.*;
 import forge.game.event.GameEventCardDamaged.DamageType;
-import forge.game.event.GameEventCardModeChosen;
-import forge.game.event.GameEventGameOutcome;
-import forge.game.event.GameEventLandPlayed;
-import forge.game.event.GameEventMulligan;
-import forge.game.event.GameEventPlayerControl;
-import forge.game.event.GameEventPlayerDamaged;
-import forge.game.event.GameEventPlayerPoisoned;
-import forge.game.event.GameEventScry;
-import forge.game.event.GameEventSpellAbilityCast;
-import forge.game.event.GameEventSpellResolved;
-import forge.game.event.GameEventSurveil;
-import forge.game.event.GameEventTurnBegan;
-import forge.game.event.GameEventTurnPhase;
-import forge.game.event.IGameEventVisitor;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
+import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
+import forge.util.TextUtil;
 import forge.util.maps.MapOfLists;
 
 public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
@@ -128,8 +113,23 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             return null;
         }
 
-        String modeChoiceOutcome = Localizer.getInstance().getMessage("lblLogPlayerChosenModeForCard", ev.player.toString(), ev.mode, ev.cardName);
+        String modeChoiceOutcome;
+        if (ev.random) {
+            modeChoiceOutcome = Localizer.getInstance().getMessage("lblLogRandomMode", ev.cardName, ev.mode);
+        } else {
+            modeChoiceOutcome = Localizer.getInstance().getMessage("lblLogPlayerChosenModeForCard",
+                    ev.player.toString(), ev.mode, ev.cardName);
+        }
+        String name = CardTranslation.getTranslatedName(ev.cardName);
+        modeChoiceOutcome = TextUtil.fastReplace(modeChoiceOutcome, "CARDNAME", name);
+        modeChoiceOutcome = TextUtil.fastReplace(modeChoiceOutcome, "NICKNAME",
+                Lang.getInstance().getNickName(name));
         return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, modeChoiceOutcome);
+    }
+
+    @Override
+    public GameLogEntry visit(GameEventRandomLog ev) {
+        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, ev.message);
     }
 
     private static GameLogEntry generateSummary(final Collection<GameOutcome> gamesPlayed) {

@@ -41,7 +41,6 @@ public class Aggregates {
         return max;
     }
 
-
     public static final <T> T itemWithMax(final Iterable<T> source, final Function<T, Integer> valueAccessor) {
         if (source == null) { return null; }
         int max = Integer.MIN_VALUE;
@@ -187,7 +186,6 @@ public class Aggregates {
         }
         return result;
     }
-
 
     public static <TItem, TField> TItem firstFieldEquals(List<TItem> source, Function<TItem, TField> valueAccessor, TField valueEquals) {
         if (source == null) { return null; }

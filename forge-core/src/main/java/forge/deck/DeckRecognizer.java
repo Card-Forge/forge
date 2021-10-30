@@ -410,12 +410,12 @@ public class DeckRecognizer {
     public static final Pattern SET_CARD_PATTERN = Pattern.compile(REX_SET_CARD_REQUEST);
     // 3. Full-Request (Amount?, CardName, Set, Collector Number|Art Index) - MTGArena Format
     public static final String REX_FULL_REQUEST_CARD_SET = String.format(
-            "(%s\\s*:\\s*)?(%s\\s)?\\s*%s\\s*(\\||\\(|\\[|\\{|\\s)%s(\\s|\\)|\\]|\\})?\\s+%s\\s*%s\\s*",
+            "(%s\\s*:\\s*)?(%s\\s)?\\s*%s\\s*(\\||\\(|\\[|\\{|\\s)%s(\\s|\\)|\\]|\\})?(\\s+|\\|\\s*)%s\\s*%s\\s*",
             REX_DECKSEC_XMAGE, REX_CARD_COUNT, REX_CARD_NAME, REX_SET_CODE, REX_COLL_NUMBER, REX_FOIL_MTGGOLDFISH);
     public static final Pattern CARD_SET_COLLNO_PATTERN = Pattern.compile(REX_FULL_REQUEST_CARD_SET);
     // 4. Full-Request (Amount?, Set, CardName, Collector Number|Art Index) - Alternative for flexibility
     public static final String REX_FULL_REQUEST_SET_CARD = String.format(
-            "^(%s\\s*:\\s*)?(%s\\s)?\\s*(\\(|\\[|\\{)?%s(\\s+|\\)|\\]|\\}|\\|)\\s*%s\\s+%s\\s*%s$",
+            "^(%s\\s*:\\s*)?(%s\\s)?\\s*(\\(|\\[|\\{)?%s(\\s+|\\)|\\]|\\}|\\|)\\s*%s(\\s+|\\|\\s*)%s\\s*%s$",
             REX_DECKSEC_XMAGE, REX_CARD_COUNT, REX_SET_CODE, REX_CARD_NAME, REX_COLL_NUMBER, REX_FOIL_MTGGOLDFISH);
     public static final Pattern SET_CARD_COLLNO_PATTERN = Pattern.compile(REX_FULL_REQUEST_SET_CARD);
     // 5. (MTGGoldfish mostly) (Amount?, Card Name, <Collector Number>, Set)
@@ -439,7 +439,7 @@ public class DeckRecognizer {
             "side", "sideboard", "sb",
             "main", "card", "mainboard",
             "avatar", "commander", "schemes",
-            "conspiracy", "planes", "deck", };
+            "conspiracy", "planes", "deck", "dungeon"};
 
     private static CharSequence[] allCardTypes(){
         List<String> cardTypesList = new ArrayList<>();
@@ -551,11 +551,15 @@ public class DeckRecognizer {
         if (StringUtils.startsWith(line, ASTERISK))  // markdown lists (tappedout md export)
             line = line.substring(2);
 
+        // == Patches to Corner Cases
         // FIX Commander in Deckstats export
         if (line.endsWith("#!Commander")) {
             line = line.replaceAll("#!Commander", "");
             line = String.format("CM:%s", line.trim());
         }
+        // Conspiracy section in .dec files - force to make it recognise as a placeholder
+        else if (line.trim().equals("[Conspiracy]"))
+            line = String.format("/ %s", line);
 
         Token result = recogniseCardToken(line, referenceSection);
         if (result == null)
@@ -580,7 +584,7 @@ public class DeckRecognizer {
 
     public Token recogniseCardToken(final String text, final DeckSection currentDeckSection) {
         String line = text.trim();
-        Token uknonwnCardToken = null;
+        Token unknownCardToken = null;
         StaticData data = StaticData.instance();
         List<Matcher> cardMatchers = getRegExMatchers(line);
         for (Matcher matcher : cardMatchers) {
@@ -592,10 +596,7 @@ public class DeckRecognizer {
             if (!data.isMTGCard(cardName)){
                 // check the case for double-sided cards
                 cardName = checkDoubleSidedCard(cardName);
-                if (cardName == null)
-                    continue;
             }
-
             String ccount = getRexGroup(matcher, REGRP_CARDNO);
             String setCode = getRexGroup(matcher, REGRP_SET);
             String collNo = getRexGroup(matcher, REGRP_COLLNR);
@@ -603,6 +604,14 @@ public class DeckRecognizer {
             String deckSecFromCardLine = getRexGroup(matcher, REGRP_DECK_SEC_XMAGE_STYLE);
             boolean isFoil = foilGr != null;
             int cardCount = ccount != null ? Integer.parseInt(ccount) : 1;
+
+            if (cardName == null){
+                if (ccount != null)
+                    // setting cardCount to zero as the text is the whole line
+                    unknownCardToken = Token.UnknownCard(text, null, 0);
+                continue;
+            }
+
             // if any, it will be tried to convert specific collector number to art index (useful for lands).
             String collectorNumber = collNo != null ? collNo : IPaperCard.NO_COLLECTOR_NUMBER;
             int artIndex;
@@ -616,7 +625,7 @@ public class DeckRecognizer {
                 CardEdition edition = StaticData.instance().getEditions().get(setCode);
                 if (edition == null) {
                     // set the case for unknown card (in case) and continue to the next for any better matching
-                    uknonwnCardToken = Token.UnknownCard(cardName, setCode, cardCount);
+                    unknownCardToken = Token.UnknownCard(cardName, setCode, cardCount);
                     continue;
                 }
 
@@ -648,7 +657,7 @@ public class DeckRecognizer {
                 return checkAndSetCardToken(pc, edition, cardCount, deckSecFromCardLine, currentDeckSection);
             }
         }
-        return uknonwnCardToken;  // either null or unknown card
+        return unknownCardToken;  // either null or unknown card
     }
 
     private String checkDoubleSidedCard(final String cardName){

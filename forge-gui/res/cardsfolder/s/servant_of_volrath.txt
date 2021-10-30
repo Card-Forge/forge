@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Creature Minion
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigSacrifice | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, sacrifice a creature.
-SVar:TrigSacrifice:DB$Sacrifice | SacValid$ Creature
+SVar:TrigSacrifice:DB$ Sacrifice | SacValid$ Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/servant_of_volrath.jpg
 Oracle:When Servant of Volrath leaves the battlefield, sacrifice a creature.

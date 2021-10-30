@@ -1604,11 +1604,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         return numTokenCreatedThisTurn;
     }
 
-    public final void addTokensCreatedThisTurn() {
+    public final void addTokensCreatedThisTurn(Card token) {
         numTokenCreatedThisTurn++;
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Player, this);
         runParams.put(AbilityKey.Num, numTokenCreatedThisTurn);
+        runParams.put(AbilityKey.Card, token);
         game.getTriggerHandler().runTrigger(TriggerType.TokenCreated, runParams, false);
     }
 
@@ -2447,6 +2448,10 @@ public class Player extends GameEntity implements Comparable<Player> {
      */
     public CardCollection getCreaturesInPlay() {
         return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+    }
+
+    public CardCollection getPlaneswalkersInPlay() {
+        return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.PLANESWALKERS);
     }
 
     /**

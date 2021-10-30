@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Instant
 A:SP$ ChangeZone | Cost$ 3 B | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DBChangeZone | SpellDescription$ Exile target creature. If that creature was a God, its controller reveals their hand and exiles all cards from it with the same name as that creature.
 SVar:DBChangeZone:DB$ ChangeZoneAll | Origin$ Hand | Destination$ Exile | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | DefinedPlayer$ TargetedController | ChangeType$ Remembered.sameName | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Targeted$Valid God
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hour_of_glory.jpg
 Oracle:Exile target creature. If that creature was a God, its controller reveals their hand and exiles all cards from it with the same name as that creature.

@@ -3,6 +3,6 @@ ManaCost:3 W
 Types:Creature Vampire Cleric
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on another target Vampire you control.
-SVar:TrigPutCounter:DB$PutCounter | ValidTgts$ Permanent.Vampire+Other+YouCtrl | TgtPrompt$ Select another target Vampire you control | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Permanent.Vampire+Other+YouCtrl | TgtPrompt$ Select another target Vampire you control | CounterType$ P1P1 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanguine_glorifier.jpg
 Oracle:When Sanguine Glorifier enters the battlefield, put a +1/+1 counter on another target Vampire you control.

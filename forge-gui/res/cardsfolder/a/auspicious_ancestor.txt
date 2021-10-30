@@ -4,7 +4,7 @@ Types:Creature Human Cleric
 PT:2/3
 T:Mode$ SpellCast | ValidCard$ Card.White | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a player casts a white spell, you may pay {1}. If you do, gain 1 life.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigGrave | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you gain 3 life.
-SVar:TrigGrave:DB$GainLife | Defined$ TriggeredCardController | LifeAmount$ 3
+SVar:TrigGrave:DB$ GainLife | Defined$ TriggeredCardController | LifeAmount$ 3
 SVar:TrigGainLife:AB$GainLife | Cost$ 1 | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auspicious_ancestor.jpg
 Oracle:When Auspicious Ancestor dies, you gain 3 life.\nWhenever a player casts a white spell, you may pay {1}. If you do, you gain 1 life.

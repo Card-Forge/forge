@@ -553,13 +553,12 @@ public class Game {
         if (zone == ZoneType.Stack) {
             return getStackZone().getCards();
         }
-        else {
-            CardCollection cards = new CardCollection();
-            for (final Player p : getPlayers()) {
-                cards.addAll(p.getCardsIncludePhasingIn(zone));
-            }
-            return cards;
+
+        CardCollection cards = new CardCollection();
+        for (final Player p : getPlayers()) {
+            cards.addAll(p.getCardsIncludePhasingIn(zone));
         }
+        return cards;
     }
 
     public CardCollectionView getCardsIn(final Iterable<ZoneType> zones) {
@@ -622,7 +621,6 @@ public class Game {
     public Card getCardState(final Card card) {
         return getCardState(card, card);
     }
-
     public Card getCardState(final Card card, final Card notFound) {
         CardStateVisitor visit = new CardStateVisitor(card);
         this.forEachCardInGame(visit);
@@ -830,6 +828,11 @@ public class Game {
                         getAction().controllerChangeZoneCorrection(c);
                     }
                     c.removeTempController(p);
+                    // return stolen spells
+                    if (c.isInZone(ZoneType.Stack)) {
+                        SpellAbilityStackInstance si = getStack().getInstanceMatchingSpellAbilityID(c.getCastSA());
+                        si.setActivatingPlayer(c.getController());
+                    }
                     if (c.getController().equals(p)) {
                         getAction().exile(c, null);
                     }
@@ -851,7 +854,7 @@ public class Game {
 
         if (p != null && p.isMonarch()) {
             // if the player who lost was the Monarch, someone else will be the monarch
-            if(p.equals(getPhaseHandler().getPlayerTurn())) {
+            if (p.equals(getPhaseHandler().getPlayerTurn())) {
                 getAction().becomeMonarch(getNextPlayerAfter(p), null);
             } else {
                 getAction().becomeMonarch(getPhaseHandler().getPlayerTurn(), null);

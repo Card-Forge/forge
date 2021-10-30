@@ -4,7 +4,7 @@ Types:Creature Drake
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, put target red or green creature on top of its owner's library.
-SVar:TrigChangeZone:DB$ChangeZone | ValidTgts$ Creature.Red,Creature.Green | TgtPrompt$ Select target red or green creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.Red,Creature.Green | TgtPrompt$ Select target red or green creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_drake.jpg
 Oracle:Flying\nWhen Hunting Drake enters the battlefield, put target red or green creature on top of its owner's library.

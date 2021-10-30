@@ -122,8 +122,8 @@ public enum CSubmenuGauntletBuild implements ICDoc {
     }
 
     private void addDeck() {
-        final Deck deckToAdd = view.getLstLeft().getPlayer().getDeck();
-        if ( null == deckToAdd ) {
+        final Deck deckToAdd = view.getLstLeft().getPlayer() != null ? view.getLstLeft().getPlayer().getDeck() : null;
+        if (null == deckToAdd) {
             return;
         }
         workingDecks.add(deckToAdd);
@@ -145,7 +145,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
     private void deckUp() {
         final int oldIndex = view.getLstRight().getSelectedIndex();
 
-        if (oldIndex == 0) { return; }
+        if (oldIndex <= 0) { return; }
 
         final Deck movingDeck = workingDecks.remove(oldIndex);
         workingDecks.add(oldIndex - 1, movingDeck);

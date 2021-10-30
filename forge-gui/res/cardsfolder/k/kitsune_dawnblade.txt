@@ -4,7 +4,7 @@ Types:Creature Fox Samurai
 PT:2/3
 K:Bushido:1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, you may tap target creature.
-SVar:TrigTap:DB$Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kitsune_dawnblade.jpg
 Oracle:Bushido 1 (Whenever this creature blocks or becomes blocked, it gets +1/+1 until end of turn.)\nWhen Kitsune Dawnblade enters the battlefield, you may tap target creature.

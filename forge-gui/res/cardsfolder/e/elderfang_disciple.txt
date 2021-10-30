@@ -3,5 +3,5 @@ ManaCost:1 B
 Types:Creature Elf Cleric
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, each opponent discards a card.
-SVar:TrigDiscard:DB$Discard | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose
+SVar:TrigDiscard:DB$ Discard | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose
 Oracle:When Elderfang Disciple enters the battlefield, each opponent discards a card.

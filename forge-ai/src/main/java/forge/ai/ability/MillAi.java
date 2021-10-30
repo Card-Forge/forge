@@ -117,8 +117,7 @@ public class MillAi extends SpellAbilityAi {
 
                 // if it would mill none, try other one
                 if (numCards <= 0) {
-                    if ((sa.getParam("NumCards").equals("X") || sa.getParam("NumCards").equals("Z")))
-                    {
+                    if ((sa.getParam("NumCards").equals("X") || sa.getParam("NumCards").equals("Z"))) {
                         if (source.getSVar("X").startsWith("Count$xPaid")) {
                             // Spell is PayX based
                         } else if (source.getSVar("X").startsWith("Remembered$ChromaSource")) {
@@ -136,7 +135,7 @@ public class MillAi extends SpellAbilityAi {
                     continue;
                 }
 
-                // if that player can be miled, select this one.
+                // if that player can be milled, select this one.
                 if (numCards >= pLibrary.size()) {
                     sa.getTargets().add(o);
                     return true;

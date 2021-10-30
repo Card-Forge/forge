@@ -269,7 +269,6 @@ public class QuestAchievements {
         }
 
         FModel.getQuest().save();
-
     }
 
     public void addDraftToken() {

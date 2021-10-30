@@ -2,7 +2,7 @@ Name:Second Chance
 ManaCost:2 U
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | LifeTotal$ You | LifeAmount$ LE5 | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, if you have 5 or less life, sacrifice CARDNAME and take an extra turn after this one.
-SVar:TrigSac:DB$Sacrifice | Defined$ Self | SubAbility$ DBAddTurn
-SVar:DBAddTurn:DB$AddTurn | Defined$ You | NumTurns$ 1
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self | SubAbility$ DBAddTurn
+SVar:DBAddTurn:DB$ AddTurn | Defined$ You | NumTurns$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/second_chance.jpg
 Oracle:At the beginning of your upkeep, if you have 5 or less life, sacrifice Second Chance and take an extra turn after this one.

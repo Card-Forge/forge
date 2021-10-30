@@ -2,9 +2,9 @@ Name:Sarcomancy
 ManaCost:B
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 black Zombie creature token.
-SVar:TrigToken:DB$Token | LegacyImage$ b 2 2 zombie tmp | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ 1
+SVar:TrigToken:DB$ Token | LegacyImage$ b 2 2 zombie tmp | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ 1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Zombie | PresentCompare$ EQ0 | Execute$ TrigNoZombies | TriggerDescription$ At the beginning of your upkeep, if there are no Zombies on the battlefield, CARDNAME deals 1 damage to you.
-SVar:TrigNoZombies:DB$DealDamage | NumDmg$ 1 | Defined$ You
+SVar:TrigNoZombies:DB$ DealDamage | NumDmg$ 1 | Defined$ You
 SVar:BuffedBy:Zombie
 SVar:SacMe:5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sarcomancy.jpg

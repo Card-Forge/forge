@@ -4,7 +4,7 @@ Types:Creature Human Soldier
 PT:0/4
 K:Defender
 T:Mode$ Blocks | ValidCard$ Creature.YouCtrl+withDefender | TriggerZones$ Battlefield | Execute$ TrigGainLife | OptionalDecider$ You | TriggerDescription$ Whenever a creature you control with defender blocks, you may gain 2 life.
-SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 SVar:HasBlockEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/perimeter_captain.jpg
 Oracle:Defender\nWhenever a creature you control with defender blocks, you may gain 2 life.

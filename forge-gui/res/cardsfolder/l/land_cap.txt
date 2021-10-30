@@ -5,7 +5,7 @@ S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_DEPLETION | AddHiddenKeywo
 A:AB$ Mana | Cost$ T | Produced$ W | Amount$ 1 | SubAbility$ AddCounter | SpellDescription$ Add {W}. Put a depletion counter on CARDNAME.
 A:AB$ Mana | Cost$ T | Produced$ U | Amount$ 1 | SubAbility$ AddCounter | SpellDescription$ Add {U}. Put a depletion counter on CARDNAME.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSubCounter | TriggerDescription$ At the beginning of your upkeep, remove a depletion counter from CARDNAME.
-SVar:TrigSubCounter:DB$RemoveCounter | Defined$ Self | CounterType$ DEPLETION | CounterNum$ 1
-SVar:AddCounter:DB$PutCounter | Defined$ Self | CounterType$ DEPLETION | CounterNum$ 1
+SVar:TrigSubCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ DEPLETION | CounterNum$ 1
+SVar:AddCounter:DB$ PutCounter | Defined$ Self | CounterType$ DEPLETION | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/land_cap.jpg
 Oracle:Land Cap doesn't untap during your untap step if it has a depletion counter on it.\nAt the beginning of your upkeep, remove a depletion counter from Land Cap.\n{T}: Add {W} or {U}. Put a depletion counter on Land Cap.

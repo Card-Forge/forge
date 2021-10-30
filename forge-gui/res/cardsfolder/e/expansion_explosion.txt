@@ -11,6 +11,6 @@ Name:Explosion
 ManaCost:X U U R R
 Types:Instant
 A:SP$ DealDamage | Cost$ X U U R R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals X damage to any target. Target player draws X cards.
-SVar:DBDraw:DB$Draw | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Select target player
+SVar:DBDraw:DB$ Draw | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Select target player
 SVar:X:Count$xPaid
 Oracle:Explosion deals X damage to any target. Target player draws X cards.

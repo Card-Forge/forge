@@ -7,5 +7,5 @@ A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | StaticAbilitie
 SVar:STPlay:Mode$ CastWithFlash | ValidCard$ Sorcery | ValidSA$ Spell | EffectZone$ Command | Caster$ You | Description$ Until your next turn, you may cast sorcery spells as though they had flash.
 SVar:PlayMain1:TRUE
 A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Origin$ Battlefield | Destination$ Hand | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Artifact,Creature,Enchantment | TgtPrompt$ Select target artifact, creature, or enchantment | SpellDescription$ Return up to one target artifact, creature, or enchantment to its owner's hand. Draw a card. | SubAbility$ DBDraw
-SVar:DBDraw:DB$Draw | NumCards$ 1
+SVar:DBDraw:DB$ Draw | NumCards$ 1
 Oracle:Each opponent can cast spells only any time they could cast a sorcery.\n[+1]: Until your next turn, you may cast sorcery spells as though they had flash.\n[−3]: Return up to one target artifact, creature, or enchantment to its owner's hand. Draw a card.

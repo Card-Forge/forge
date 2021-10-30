@@ -12,7 +12,7 @@ public class Kicker extends KeywordWithCost {
 
     public Kicker() {
     }
-    
+
     @Override
     protected void parse(String details) {
         List<String> l = Lists.newArrayList(TextUtil.split(details, ':'));
@@ -20,7 +20,7 @@ public class Kicker extends KeywordWithCost {
         if (l.size() > 1)
             cost2 = new Cost(l.get(1), false);
     }
-    
+
     @Override
     protected String formatReminderText(String reminderText) {
         if (cost2 == null) {

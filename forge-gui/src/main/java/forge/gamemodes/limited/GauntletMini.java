@@ -66,7 +66,6 @@ public class GauntletMini {
         currentRound = 1;
     }
 
-
     /**
      * Advances the tournament to the next round.
      */
@@ -206,4 +205,3 @@ public class GauntletMini {
     }
 
 }
-

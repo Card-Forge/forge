@@ -94,7 +94,7 @@ public class  DamageAllAi extends SpellAbilityAi {
     private Player determineOppToKill(Player ai, SpellAbility sa, Card source, int x) {
         // Attempt to determine which opponent can be finished off such that the most players
         // are killed at the same time, given X damage tops
-        final String validP = sa.hasParam("ValidPlayers") ? sa.getParam("ValidPlayers") : "";
+        final String validP = sa.getParamOrDefault("ValidPlayers", "");
         int aiLife = ai.getLife();
         Player bestOpp = null; // default opponent, if all else fails
 
@@ -125,7 +125,7 @@ public class  DamageAllAi extends SpellAbilityAi {
             computerList.clear();
         }
 
-        final String validP = sa.hasParam("ValidPlayers") ? sa.getParam("ValidPlayers") : "";
+        final String validP = sa.getParamOrDefault("ValidPlayers", "");
         // TODO: if damage is dependant on mana paid, maybe have X be human's max life
         // Don't kill yourself
         if (validP.equals("Player") && (ai.getLife() <= ComputerUtilCombat.predictDamageTo(ai, dmg, source, false))) {
@@ -191,7 +191,7 @@ public class  DamageAllAi extends SpellAbilityAi {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         final Card source = sa.getHostCard();
-        String validP = "";
+        final String validP = sa.getParamOrDefault("ValidPlayers", "");
 
         final String damage = sa.getParam("NumDmg");
         int dmg;
@@ -201,10 +201,6 @@ public class  DamageAllAi extends SpellAbilityAi {
             sa.setXManaCostPaid(dmg);
         } else {
             dmg = AbilityUtils.calculateAmount(source, damage, sa);
-        }
-
-        if (sa.hasParam("ValidPlayers")) {
-            validP = sa.getParam("ValidPlayers");
         }
 
         // Evaluate creatures getting killed
@@ -251,7 +247,7 @@ public class  DamageAllAi extends SpellAbilityAi {
      */
     private CardCollection getKillableCreatures(final SpellAbility sa, final Player player, final int dmg) {
         final Card source = sa.getHostCard();
-        String validC = sa.hasParam("ValidCards") ? sa.getParam("ValidCards") : "";
+        String validC = sa.getParamOrDefault("ValidCards", "");
 
         // TODO: X may be something different than X paid
         CardCollection list =
@@ -260,7 +256,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         final Predicate<Card> filterKillable = new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return (ComputerUtilCombat.predictDamageTo(c, dmg, source, false) >= ComputerUtilCombat.getDamageToKill(c));
+                return (ComputerUtilCombat.predictDamageTo(c, dmg, source, false) >= ComputerUtilCombat.getDamageToKill(c, false));
             }
         };
 
@@ -273,7 +269,7 @@ public class  DamageAllAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
-        String validP = "";
+        final String validP = sa.getParamOrDefault("ValidPlayers", "");
 
         final String damage = sa.getParam("NumDmg");
         int dmg;
@@ -284,10 +280,6 @@ public class  DamageAllAi extends SpellAbilityAi {
             sa.setXManaCostPaid(dmg);
         } else {
             dmg = AbilityUtils.calculateAmount(source, damage, sa);
-        }
-
-        if (sa.hasParam("ValidPlayers")) {
-            validP = sa.getParam("ValidPlayers");
         }
 
         // Evaluate creatures getting killed

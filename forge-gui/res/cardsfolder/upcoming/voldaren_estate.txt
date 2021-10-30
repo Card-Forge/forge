@@ -1,0 +1,10 @@
+Name:Voldaren Estate
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T PayLife<1> | Produced$ Any | Amount$ 1 | RestrictValid$ Vampire | SpellDescription$ Add one mana of any color. Spend this mana only to cast a Vampire spell.
+A:AB$ Token | Cost$ 5 T | TokenScript$ c_a_blood_draw | ReduceCost$ X | SpellDescription$ Create a Blood token. This ability costs {1} less to activate for each Vampire you control. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
+SVar:X:Count$TypeYouCtrl.Vampire
+DeckNeeds:Type$Vampire
+DeckHas:Ability$Token & Ability$Sacrifice & Type$Blood
+Oracle:{T}: Add {C}.\n{T}, Pay 1 life: Add one mana of any color. Spend this mana only to cast a Vampire spell.\n{5}, {T}: Create a Blood token. This ability costs {1} less to activate for each Vampire you control. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")

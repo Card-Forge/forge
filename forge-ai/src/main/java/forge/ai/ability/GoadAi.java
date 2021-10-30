@@ -19,7 +19,6 @@ public class GoadAi extends SpellAbilityAi {
 
     @Override
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
-
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
 

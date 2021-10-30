@@ -261,7 +261,7 @@ public abstract class SpellAbilityEffect {
         boolean your = location.startsWith("Your");
         boolean combat = location.endsWith("Combat");
 
-        String desc = sa.hasParam("AtEOTDesc") ? sa.getParam("AtEOTDesc") : "";
+        String desc = sa.getParamOrDefault("AtEOTDesc", "");
 
         if (your) {
             location = location.substring("Your".length());
@@ -462,7 +462,7 @@ public abstract class SpellAbilityEffect {
         final Card eff = new Card(game.nextCardId(), game);
         eff.setTimestamp(game.getNextTimestamp());
         eff.setName(name);
-        eff.setColor(hostCard.determineColor().getColor());
+        eff.setColor(hostCard.getColor().getColor());
         // if name includes emblem then it should be one
         if (name.startsWith("Emblem")) {
             eff.setEmblem(true);

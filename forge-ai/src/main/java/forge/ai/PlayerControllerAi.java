@@ -95,7 +95,7 @@ public class PlayerControllerAi extends PlayerController {
         brains = new AiController(p, game);
     }
 
-    public void allowCheatShuffle(boolean value){
+    public void allowCheatShuffle(boolean value) {
         brains.allowCheatShuffle(value);
     }
 
@@ -566,7 +566,6 @@ public class PlayerControllerAi extends PlayerController {
         return getAi().getCardsToDiscard(num, null, sa);
     }
 
-
     @Override
     public Mana chooseManaFromPool(List<Mana> manaChoices) {
         return manaChoices.get(0); // no brains used
@@ -579,7 +578,6 @@ public class PlayerControllerAi extends PlayerController {
             chosen = validTypes.iterator().next();
             System.err.println("AI has no idea how to choose " + kindOfType +", defaulting to arbitrary element: chosen");
         }
-        getGame().getAction().notifyOfValue(sa, player, chosen, player);
         return chosen;
     }
 

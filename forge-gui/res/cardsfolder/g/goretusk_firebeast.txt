@@ -3,6 +3,6 @@ ManaCost:5 R
 Types:Creature Elemental Boar Beast
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 4 damage to target player or planeswalker.
-SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 4
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 4
 SVar:Picture:http://resources.wizards.com/magic/cards/jud/en-us/card34917.jpg
 Oracle:When Goretusk Firebeast enters the battlefield, it deals 4 damage to target player or planeswalker.

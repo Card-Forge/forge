@@ -4,6 +4,6 @@ Types:Creature Demon
 PT:8/8
 T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromHand+Self | Destination$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, destroy all creatures your opponents control, then tap all other creatures you control.
 SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Creature.OppCtrl | SubAbility$ DBTapAll
-SVar:DBTapAll:DB$TapAll | ValidCards$ Creature.YouCtrl+Other
+SVar:DBTapAll:DB$ TapAll | ValidCards$ Creature.YouCtrl+Other
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_cacodemon.jpg
 Oracle:When Dread Cacodemon enters the battlefield, if you cast it from your hand, destroy all creatures your opponents control, then tap all other creatures you control.

@@ -371,7 +371,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     @Override
     public void deckTypeSelected(final DecksComboBoxEvent ev) {
         if (ev.getDeckType() == DeckType.NET_ARCHIVE_STANDARD_DECK && !refreshingDeckType) {
-            if(lstDecks.getGameType() != GameType.Constructed)
+            if (lstDecks.getGameType() != GameType.Constructed)
                 return;
             FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
                 @Override
@@ -398,7 +398,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             return;
 
         } else if (ev.getDeckType() == DeckType.NET_ARCHIVE_PIONEER_DECK && !refreshingDeckType) {
-            if(lstDecks.getGameType() != GameType.Constructed)
+            if (lstDecks.getGameType() != GameType.Constructed)
                 return;
             FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
                 @Override
@@ -424,7 +424,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             return;
 
         } else if (ev.getDeckType() == DeckType.NET_ARCHIVE_MODERN_DECK && !refreshingDeckType) {
-            if(lstDecks.getGameType() != GameType.Constructed)
+            if (lstDecks.getGameType() != GameType.Constructed)
                 return;
             FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
                 @Override
@@ -450,7 +450,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             return;
 
         } else if (ev.getDeckType() == DeckType.NET_ARCHIVE_PAUPER_DECK && !refreshingDeckType) {
-            if(lstDecks.getGameType() != GameType.Constructed)
+            if (lstDecks.getGameType() != GameType.Constructed)
                 return;
             FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
                 @Override
@@ -476,7 +476,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             return;
 
         } else if (ev.getDeckType() == DeckType.NET_ARCHIVE_LEGACY_DECK && !refreshingDeckType) {
-            if(lstDecks.getGameType() != GameType.Constructed)
+            if (lstDecks.getGameType() != GameType.Constructed)
                 return;
             FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
                 @Override
@@ -502,7 +502,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             return;
 
         } else if (ev.getDeckType() == DeckType.NET_ARCHIVE_VINTAGE_DECK && !refreshingDeckType) {
-            if(lstDecks.getGameType() != GameType.Constructed)
+            if (lstDecks.getGameType() != GameType.Constructed)
                 return;
             FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
                 @Override
@@ -528,7 +528,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             return;
 
         } else if (ev.getDeckType() == DeckType.NET_ARCHIVE_BLOCK_DECK && !refreshingDeckType) {
-            if(lstDecks.getGameType() != GameType.Constructed)
+            if (lstDecks.getGameType() != GameType.Constructed)
                 return;
             FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
                 @Override
@@ -712,7 +712,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         prefs.save();
     }
 
-
     private String getState() {
         final StringBuilder state = new StringBuilder();
         DeckType selectedDeckType = this.selectedDeckType;   // decksComboBox.getDeckType()
@@ -826,7 +825,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             return selectedDeckType;
         }
     }
-
 
     private List<String> getSelectedDecksFromSavedState(final String savedState) {
         try {

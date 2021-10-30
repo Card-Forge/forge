@@ -1,0 +1,6 @@
+Name:Orcish Catapult
+ManaCost:X R R
+Types:Instant
+A:SP$ PutCounter | ValidTgts$ Creature | TargetsAtRandom$ True | CounterType$ M0M1 | CounterNum$ X | RandomNumTargets$ True | TargetMin$ 0 | TargetMax$ X | DividedRandomly$ True | SpellDescription$ Randomly distribute X -0/-1 counters among a random number of random target creatures.
+SVar:X:Count$xPaid
+Oracle:Randomly distribute X -0/-1 counters among a random number of random target creatures.

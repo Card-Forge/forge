@@ -3,6 +3,6 @@ ManaCost:1 W
 Types:Creature Kor Soldier
 PT:1/3
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME becomes blocked, untap it.
-SVar:TrigUntap:DB$Untap | Defined$ Self
+SVar:TrigUntap:DB$ Untap | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silkenfist_fighter.jpg
 Oracle:Whenever Silkenfist Fighter becomes blocked, untap it.

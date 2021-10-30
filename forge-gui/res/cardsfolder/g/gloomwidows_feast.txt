@@ -2,6 +2,6 @@ Name:Gloomwidow's Feast
 ManaCost:3 G
 Types:Instant
 A:SP$ Destroy | Cost$ 3 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SubAbility$ DBToken | SpellDescription$ Destroy target creature with flying. If that creature was blue or black, create a 1/2 green Spider creature token with reach.
-SVar:DBToken:DB$Token | ConditionDefined$ Targeted | ConditionPresent$ Card.Blue,Card.Black | ConditionCompare$ EQ1 | TokenAmount$ 1 | TokenScript$ g_1_2_spider_reach | TokenOwner$ You | LegacyImage$ g 1 2 spider reach shm | ConditionDescription$ If that creature was blue or black, put a 1/2 green Spider creature token with reach onto the battlefield.
+SVar:DBToken:DB$ Token | ConditionDefined$ Targeted | ConditionPresent$ Card.Blue,Card.Black | ConditionCompare$ EQ1 | TokenAmount$ 1 | TokenScript$ g_1_2_spider_reach | TokenOwner$ You | LegacyImage$ g 1 2 spider reach shm | ConditionDescription$ If that creature was blue or black, put a 1/2 green Spider creature token with reach onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gloomwidows_feast.jpg
 Oracle:Destroy target creature with flying. If that creature was blue or black, create a 1/2 green Spider creature token with reach. (It can block creatures with flying.)

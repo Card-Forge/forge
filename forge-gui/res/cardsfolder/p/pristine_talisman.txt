@@ -2,6 +2,6 @@ Name:Pristine Talisman
 ManaCost:3
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ C | SubAbility$ DBGainLife | SpellDescription$ Add {C}. You gain 1 life.
-SVar:DBGainLife:DB$GainLife | LifeAmount$ 1 | Defined$ You
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pristine_talisman.jpg
 Oracle:{T}: Add {C}. You gain 1 life.

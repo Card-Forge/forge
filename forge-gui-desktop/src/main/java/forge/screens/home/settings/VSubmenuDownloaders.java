@@ -8,7 +8,6 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -48,6 +47,7 @@ import forge.util.ImageUtil;
 import forge.util.Localizer;
 import forge.util.RuntimeVersion;
 import net.miginfocom.swing.MigLayout;
+import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * Assembles Swing components of utilities submenu singleton.
@@ -95,9 +95,10 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         pnlContent.setOpaque(false);
 
         if (javaRecentEnough()) {
-
-            pnlContent.add(btnCheckForUpdates, constraintsBTN);
-            pnlContent.add(_makeLabel(localizer.getMessage("lblCheckForUpdates")), constraintsLBL);
+            // With Blacksmith we would upload the releases and the /latest would redirect to the right URL
+            // That currently doesn't happen so lets comment out this button for now
+//            pnlContent.add(btnCheckForUpdates, constraintsBTN);
+//            pnlContent.add(_makeLabel(localizer.getMessage("lblCheckForUpdates")), constraintsLBL);
 
             pnlContent.add(btnDownloadPics, constraintsBTN);
             pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadPics")), constraintsLBL);
@@ -119,9 +120,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
             pnlContent.add(btnDownloadSkins, constraintsBTN);
             pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadSkins")), constraintsLBL);
-
         } else {
-
             String text = localizer.getMessage("lblYourVersionOfJavaIsTooOld");
             FLabel label = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text(text).fontStyle(Font.BOLD).fontSize(18).build();
             pnlContent.add(label, "w 90%!, h 25px!, center, gap 0 0 30px 3px");
@@ -134,7 +133,6 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
             text = text + " . " + localizer.getMessage("lblYouNeedAtLeastJavaVersion") ;
             label = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text(text).fontStyle(Font.BOLD).fontSize(18).build();
             pnlContent.add(label, "w 90%!, h 25px!, center, gap 0 0 0 36px");
-
         }
 
         pnlContent.add(btnListImageData, constraintsBTN);
@@ -151,15 +149,12 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
         pnlContent.add(btnLicensing, constraintsBTN);
         pnlContent.add(_makeLabel(localizer.getMessage("lblLicensing")), constraintsLBL);
-
     }
 
     private boolean javaRecentEnough() {
-
         RuntimeVersion javaVersion = RuntimeVersion.of(System.getProperty("java.version"));
 
         return javaVersion.getMajor() >= 9 || (javaVersion.getMajor() >= 1 && (javaVersion.getMinor() > 8 || (javaVersion.getMinor() == 8 && javaVersion.getUpdate() >= 101)));
-
     }
 
     /* (non-Javadoc)
@@ -196,7 +191,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     public void setHowToPlayCommand(UiCommand command)                 { btnHowToPlay.setCommand(command);           }
     public void setDownloadPricesCommand(UiCommand command)            { btnDownloadPrices.setCommand(command);      }
     public void setLicensingCommand(UiCommand command)                 { btnLicensing.setCommand(command);           }
-    public void setDownloadSkinsCommand(UiCommand command)             { btnDownloadSkins.setCommand(command);           }
+    public void setDownloadSkinsCommand(UiCommand command)             { btnDownloadSkins.setCommand(command);       }
 
     public void focusTopButton() {
         btnDownloadPics.requestFocusInWindow();
@@ -258,26 +253,28 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         cniSB.append("-------------------\n\n");
 
         for (CardEdition e : editions) {
-            nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
-            cniSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+            if (CardEdition.Type.FUNNY.equals(e.getType()))
+                continue;
+            boolean nifHeader = false;
+            boolean cniHeader = false;
+            boolean tokenHeader = false;
 
             String imagePath;
             int artIndex = 1;
-            ArrayList<String> cis = new ArrayList<>();
 
-            HashMap<String, Integer> cardCount = new HashMap<>();
+            HashMap<String, Pair<Boolean, Integer>> cardCount = new HashMap<>();
             for (CardInSet c : e.getAllCardsInSet()) {
                 if (cardCount.containsKey(c.name)) {
-                    cardCount.put(c.name, cardCount.get(c.name) + 1);
+                    cardCount.put(c.name, Pair.of(c.collectorNumber.startsWith("F"), cardCount.get(c.name).getRight() + 1));
                 } else {
-                    cardCount.put(c.name, 1);
+                    cardCount.put(c.name, Pair.of(c.collectorNumber.startsWith("F"), 1));
                 }
             }
             
             // loop through the cards in this edition, considering art variations...
-            for (Entry<String, Integer> entry : cardCount.entrySet()) {
+            for (Entry<String, Pair<Boolean, Integer>> entry : cardCount.entrySet()) {
                 String c = entry.getKey();
-                artIndex = entry.getValue();
+                artIndex = entry.getValue().getRight();
 
                 PaperCard cp = cardDb.getCard(c, e.getCode(), artIndex);
                 if (cp == null) {
@@ -285,40 +282,47 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                 }
 
                 if (cp == null) {
+                    if (entry.getValue().getLeft()) //skip funny cards
+                        continue;
+                    if (!cniHeader) {
+                        cniSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+                        cniHeader = true;
+                    }
                     cniSB.append(" ").append(c).append("\n");
                     notImplementedCount++;
                     continue;
                 }
 
-
-                //
                 // check the front image
-                //
                 imagePath = ImageUtil.getImageRelativePath(cp, false, true, false);
                 if (imagePath != null) {
                     File file = ImageKeys.getImageFile(imagePath);
                     if (file == null) {
+                        if (!nifHeader) {
+                            nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+                            nifHeader = true;
+                        }
                         nifSB.append(" ").append(imagePath).append("\n");
                         missingCount++;
                     }
                 } 
 
-                //
                 // check the back face
-                //
                 if (cp.hasBackFace()) {
                     imagePath = ImageUtil.getImageRelativePath(cp, true, true, false);
                     if (imagePath != null) {
                         File file = ImageKeys.getImageFile(imagePath);
                         if (file == null) {
+                            if (!nifHeader) {
+                                nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+                                nifHeader = true;
+                            }
                             nifSB.append(" ").append(imagePath).append("\n");
                             missingCount++;
                         }
                     } 
                 }
             }
-
-            nifSB.append("\nTOKENS\n");
 
             // TODO: Audit token images here...
             for(Entry<String, Integer> tokenEntry : e.getTokens().entrySet()) {
@@ -334,6 +338,14 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                         String imgKey = token.getImageKey(i);
                         File file = ImageKeys.getImageFile(imgKey);
                         if (file == null) {
+                            if (!nifHeader) {
+                                nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+                                nifHeader = true;
+                            }
+                            if (!tokenHeader) {
+                                nifSB.append("\nTOKENS\n");
+                                tokenHeader = true;
+                            }
                             nifSB.append(" ").append(token.getImageFilename(i + 1)).append("\n");
                             missingCount++;
                         }
@@ -342,9 +354,9 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                     System.out.println("No Token found: " + name + " in " + e.getName());
                 }
             }
-            nifSB.append("\n");
+            if (nifHeader)
+                nifSB.append("\n");
         }
-
 
         String totalStats = "Missing images: " + missingCount + "\nUnimplemented cards: " + notImplementedCount + "\n";
         cniSB.append("\n-----------\n");
@@ -397,7 +409,6 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
             }
         });
     }
-    
 
     public void showLicensing() {
         String license = "<html>Forge License Information<br><br>"

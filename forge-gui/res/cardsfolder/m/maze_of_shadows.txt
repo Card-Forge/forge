@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature.attacking+withShadow | TgtPrompt$ Select target attacking creature with shadow | KW$ Prevent all combat damage that would be dealt to and dealt by CARDNAME. | SubAbility$ DBUntap | SpellDescription$ Untap target attacking creature with shadow. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
-SVar:DBUntap:DB$Untap | Defined$ Targeted
+SVar:DBUntap:DB$ Untap | Defined$ Targeted
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maze_of_shadows.jpg
 Oracle:{T}: Add {C}.\n{T}: Untap target attacking creature with shadow. Prevent all combat damage that would be dealt to and dealt by that creature this turn.

@@ -411,7 +411,7 @@ public final class CardScriptParser {
             "CanBeEquippedBy", "Equipped", "Fortified", "HauntedBy",
             "notTributed", "madness", "Paired", "NotPaired", "PairedWith",
             "Above", "DirectlyAbove", "TopGraveyardCreature",
-            "BottomGraveyard", "TopLibrary", "Cloned", "DamagedBy", "Damaged",
+            "BottomGraveyard", "TopLibrary", "BottomLibrary", "Cloned", "DamagedBy", "Damaged",
             "sharesPermanentTypeWith", "canProduceSameManaTypeWith", "SecondSpellCastThisTurn",
             "ThisTurnCast", "withFlashback", "tapped", "untapped", "faceDown",
             "faceUp", "hasLevelUp", "DrawnThisTurn", "notDrawnThisTurn",

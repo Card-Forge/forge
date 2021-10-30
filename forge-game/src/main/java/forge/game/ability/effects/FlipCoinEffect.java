@@ -60,7 +60,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         }
 
         final boolean noCall = sa.hasParam("NoCall");
-        String varName = sa.hasParam("SaveNumFlipsToSVar") ? sa.getParam("SaveNumFlipsToSVar") : "X";
+        String varName = sa.getParamOrDefault("SaveNumFlipsToSVar", "X");
         boolean victory = false;
         int amount = 1;
         if (sa.hasParam("Amount")) {
@@ -220,7 +220,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
      * @return a boolean.
      */
     public static boolean flipCoinCall(final Player caller, final SpellAbility sa, final int multiplier) {
-        String varName = sa.hasParam("SaveNumFlipsToSVar") ? sa.getParam("SaveNumFlipsToSVar") : "X";
+        String varName = sa.getParamOrDefault("SaveNumFlipsToSVar", "X");
         return flipCoinCall(caller, sa, multiplier, varName);
     }
     public static boolean flipCoinCall(final Player caller, final SpellAbility sa, final int multiplier, final String varName) {

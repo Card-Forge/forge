@@ -7,6 +7,6 @@ K:CARDNAME can't have more than seven dream counters on it.
 A:AB$ Mana | Cost$ SubCounter<1/DREAM> | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ PreventDamage | Cost$ SubCounter<1/DREAM> | Defined$ Self | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to CARDNAME this turn.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | IsPresent$ Card.Self+startedTheTurnUntapped | TriggerDescription$ At the beginning of your upkeep, if CARDNAME started the turn untapped, put a dream counter on it.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ DREAM | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ DREAM | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rasputin_dreamweaver.jpg
 Oracle:Rasputin Dreamweaver enters the battlefield with seven dream counters on it.\nRemove a dream counter from Rasputin: Add {C}.\nRemove a dream counter from Rasputin: Prevent the next 1 damage that would be dealt to Rasputin this turn.\nAt the beginning of your upkeep, if Rasputin started the turn untapped, put a dream counter on it.\nRasputin can't have more than seven dream counters on it.

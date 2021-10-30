@@ -604,6 +604,12 @@ public class CardProperty {
             if (cards.isEmpty() || !card.equals(cards.get(0))) {
                 return false;
             }
+        } else if (property.startsWith("BottomLibrary")) {
+            final CardCollection cards = new CardCollection(card.getOwner().getCardsIn(ZoneType.Library));
+            Collections.reverse(cards);
+            if (cards.isEmpty() || !card.equals(cards.get(0))) {
+                return false;
+            }
         } else if (property.startsWith("Cloned")) {
             if ((card.getCloneOrigin() == null) || !card.getCloneOrigin().equals(source)) {
                 return false;
@@ -683,7 +689,7 @@ public class CardProperty {
                         break;
                     case "MostProminentColor":
                         byte mask = CardFactoryUtil.getMostProminentColors(game.getCardsIn(ZoneType.Battlefield));
-                        if (!CardUtil.getColors(card).hasAnyColor(mask))
+                        if (!card.getColor().hasAnyColor(mask))
                             return false;
                         break;
                     case "LastCastThisTurn":
@@ -697,7 +703,7 @@ public class CardProperty {
                         if (castSA == null) {
                             return false;
                         }
-                        if (!CardUtil.getColors(card).hasAnyColor(castSA.getPayingColors().getColor())) {
+                        if (!card.getColor().hasAnyColor(castSA.getPayingColors().getColor())) {
                             return false;
                         }
                         break;
@@ -1479,7 +1485,7 @@ public class CardProperty {
             if (StringUtils.isEmpty(what)) return combat.isBlocking(card);
             if (what.startsWith("Source")) return combat.isBlocking(card, source);
             if (what.startsWith("CreatureYouCtrl")) {
-                for (final Card c : CardLists.filter(sourceController.getCardsIn(ZoneType.Battlefield), Presets.CREATURES))
+                for (final Card c : sourceController.getCreaturesInPlay())
                     if (combat.isBlocking(card, c))
                         return true;
                 return false;

@@ -20,8 +20,6 @@ package forge.gamemodes.match.input;
 import java.util.List;
 
 import forge.game.card.Card;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardView;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -60,7 +58,7 @@ public class InputBlock extends InputSyncronizedBase {
 
         //auto-select first attacker to declare blockers for
         for (final Card attacker : combat.getAttackers()) {
-            for (final Card c : CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
+            for (final Card c : defender.getCreaturesInPlay()) {
                 if (CombatUtil.canBlock(attacker, c, combat)) {
                     FThreads.invokeInEdtNowOrLater(new Runnable() { //must set current attacker on EDT
                         @Override
@@ -83,8 +81,7 @@ public class InputBlock extends InputSyncronizedBase {
 
         if (currentAttacker == null) {
             showMessage(localizer.getMessage("lblSelectBlockTarget"));
-        }
-        else {
+        } else {
             String attackerName = currentAttacker.isFaceDown() ? localizer.getMessage("lblMorph") : currentAttacker.getName() + " (" + currentAttacker.getId() + ")";
             String message = localizer.getMessage("lblSelectBlocker") + attackerName + " " + localizer.getMessage("lblOrSelectBlockTarget");
             showMessage(message);
@@ -104,8 +101,7 @@ public class InputBlock extends InputSyncronizedBase {
             // Done blocking
             setCurrentAttacker(null);
             stop();
-        }
-        else {
+        } else {
             //must run in game thread to prevent problems for mobile game
             ThreadUtil.invokeInGameThread(new Runnable() {
                 @Override
@@ -124,14 +120,12 @@ public class InputBlock extends InputSyncronizedBase {
             combat.removeFromCombat(card);
             card.getGame().getMatch().fireEvent(new UiEventBlockerAssigned(CardView.get(card), null));
             isCorrectAction = true;
-        }
-        else {
+        } else {
             // is attacking?
             if (combat.isAttacking(card)) {
                 setCurrentAttacker(card);
                 isCorrectAction = true;
-            }
-            else {
+            } else {
                 // Make sure this card is valid to even be a blocker
                 if (currentAttacker != null && card.isCreature() && defender.getZone(ZoneType.Battlefield).contains(card)) {
                     if (combat.isBlocking(card, currentAttacker)) {
@@ -139,8 +133,7 @@ public class InputBlock extends InputSyncronizedBase {
                         combat.removeBlockAssignment(currentAttacker, card);
                         card.getGame().getMatch().fireEvent(new UiEventBlockerAssigned(CardView.get(card), null));
                         isCorrectAction = true;
-                    }
-                    else {
+                    } else {
                         isCorrectAction = CombatUtil.canBlock(currentAttacker, card, combat);
                         if (isCorrectAction) {
                             combat.addBlocker(currentAttacker, card);

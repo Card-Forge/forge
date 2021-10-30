@@ -3,7 +3,7 @@ ManaCost:U R
 Types:Creature Human Wizard
 PT:2/2
 A:AB$ Draw | Cost$ 1 U R | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 A:AB$ CopySpellAbility | Cost$ 2 U R | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | TargetType$ Spell | AILogic$ OnceIfViable | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell you control. You may choose new targets for the copy.
 DeckHints:Type$Instant|Sorcery
 Oracle:{1}{U}{R}: Draw a card, then discard a card.\n{2}{U}{R}: Copy target instant or sorcery spell you control. You may choose new targets for the copy.

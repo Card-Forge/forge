@@ -5,6 +5,6 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 4 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ CommanderTrig | AddSVar$ CommanderToken | Description$ Enchanted creature has "At the beginning of your upkeep, create a 1/1 white Human creature token."
 SVar:CommanderTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ CommanderToken | TriggerDescription$ At the beginning of your upkeep, create a 1/1 white Human creature token. 
-SVar:CommanderToken:DB$Token | TokenAmount$ 1 | TokenScript$ w_1_1_human | TokenOwner$ You | LegacyImage$ w 1 1 human avr
+SVar:CommanderToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human | TokenOwner$ You | LegacyImage$ w 1 1 human avr
 SVar:Picture:http://www.wizards.com/global/images/magic/general/commanders_authority.jpg
 Oracle:Enchant creature\nEnchanted creature has "At the beginning of your upkeep, create a 1/1 white Human creature token."

@@ -48,7 +48,7 @@ Name=Jim Davis's Cube
 1 Bounding Krasis|ORI
 1 Braids, Cabal Minion|MH2
 1 Brain Freeze|VMA
-1 Brainstorm|STX
+1 Brainstorm|STA
 1 Breeding Pool|RNA
 1 Brimaz, King of Oreskos|BNG
 1 Bring to Light|BFZ
@@ -86,14 +86,14 @@ Name=Jim Davis's Cube
 1 Cursed Scroll|TPR
 1 Damnation|MPS_AKH
 1 Dark Confidant|2XM
-1 Dark Ritual|STX
+1 Dark Ritual|STA
 1 Darkslick Shores|SOM
 1 Darksteel Citadel|2XM
 1 Daze|MPS_AKH
 1 Deathrite Shaman|EMA
 1 Declaration in Stone|SOI
 1 Delver of Secrets|ISD
-1 Demonic Tutor|STX
+1 Demonic Tutor|STA
 1 Detention Sphere|RTR
 1 Dig Through Time|UMA
 1 Dimir Signet|MM3
@@ -108,7 +108,7 @@ Name=Jim Davis's Cube
 1 Dwarven Blastminer|ONS
 1 Edric, Spymaster of Trest|VMA
 1 Eidolon of the Great Revel|A25
-1 Electrolyze|STX
+1 Electrolyze|STA
 1 Emrakul, the Aeons Torn|UMA
 1 Engineered Explosives|2XM
 1 Enlightened Tutor|EMA
@@ -123,7 +123,7 @@ Name=Jim Davis's Cube
 1 Experiment One|GTC
 1 Explore|MM3
 1 Fact or Fiction|MH1
-1 Faithless Looting|STX
+1 Faithless Looting|STA
 1 Falkenrath Aristocrat|2XM
 1 Falkenrath Gorger|SOI
 1 Far // Away|DGM
@@ -177,7 +177,7 @@ Name=Jim Davis's Cube
 1 Hallowed Fountain|RNA
 1 Hallowed Spiritkeeper|C14
 1 Hangarback Walker|MPS_KLD
-1 Harmonize|STX
+1 Harmonize|STA
 1 Heartbeat of Spring|2XM
 1 Hellrider|MM3
 1 Hellspark Elemental|CFX
@@ -192,7 +192,7 @@ Name=Jim Davis's Cube
 1 Imperial Recruiter|MH2
 1 Imperial Seal|PTK
 1 Inferno Titan|M12
-1 Inquisition of Kozilek|STX
+1 Inquisition of Kozilek|STA
 1 Isamaru, Hound of Konda|CHK
 1 Isochron Scepter|2XM
 1 Isolated Chapel|DOM
@@ -215,8 +215,8 @@ Name=Jim Davis's Cube
 1 Kytheon, Hero of Akros|ORI
 1 Land Tax|2XM
 1 Life from the Loam|UMA
-1 Lightning Bolt|STX
-1 Lightning Helix|STX
+1 Lightning Bolt|STA
+1 Lightning Helix|STA
 1 Lightning Mauler|AVR
 1 Liliana of the Veil|UMA
 1 Lim-Dul's Vault|ALL
@@ -240,7 +240,7 @@ Name=Jim Davis's Cube
 1 Meloku the Clouded Mirror|MMA
 1 Memnite|SOM
 1 Memory Jar|VMA
-1 Memory Lapse|STX
+1 Memory Lapse|STA
 1 Mentor of the Meek|M19
 1 Metalworker|UDS
 1 Mind Stone|IMA
@@ -308,7 +308,7 @@ Name=Jim Davis's Cube
 1 Reclamation Sage|2XM
 1 Recurring Nightmare|TPR
 1 Reflector Mage|OGW
-1 Regrowth|STX
+1 Regrowth|STA
 1 Relic Seeker|ORI
 1 Remand|MM2
 1 Restoration Angel|IMA
@@ -375,7 +375,7 @@ Name=Jim Davis's Cube
 1 Survival of the Fittest|TPR
 1 Sword of Feast and Famine|2XM
 1 Sword of Fire and Ice|2XM
-1 Swords to Plowshares|STX
+1 Swords to Plowshares|STA
 1 Sylvan Library|EMA
 1 Taiga|VMA
 1 Tangle Wire|NMS
@@ -385,7 +385,7 @@ Name=Jim Davis's Cube
 1 Temple Garden|GRN
 1 Temple of Epiphany|M21
 1 Temple of Malice|THB
-1 Tendrils of Agony|STX
+1 Tendrils of Agony|STA
 1 Terastodon|2XM
 1 Terminate|MM3
 1 Tezzeret, Agent of Bolas|MBS

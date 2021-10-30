@@ -4,5 +4,5 @@ Types:Creature Fish
 Colors:blue
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When this creature dies, create a 6/6 blue Whale creature token with "When this creature dies, create a 9/9 blue Kraken creature token."
-SVar:TrigToken:DB$Token | LegacyImage$ u 6 6 whale hatches kraken c14| TokenScript$ u_6_6_whale_hatches_kraken | TokenOwner$ You | TokenAmount$ 1
+SVar:TrigToken:DB$ Token | LegacyImage$ u 6 6 whale hatches kraken c14| TokenScript$ u_6_6_whale_hatches_kraken | TokenOwner$ You | TokenAmount$ 1
 Oracle:When this creature dies, create a 6/6 blue Whale creature token with "When this creature dies, create a 9/9 blue Kraken creature token.".

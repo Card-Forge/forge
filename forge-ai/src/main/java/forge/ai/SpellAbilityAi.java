@@ -182,13 +182,12 @@ public abstract class SpellAbilityAi {
         return doTriggerNoCostWithSubs(aiPlayer, sa, mandatory);
     }
 
-    public final boolean doTriggerNoCostWithSubs(final Player aiPlayer, final SpellAbility sa, final boolean mandatory)
-    {
+    public final boolean doTriggerNoCostWithSubs(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         if (!doTriggerAINoCost(aiPlayer, sa, mandatory) && !"Always".equals(sa.getParam("AILogic"))) {
             return false;
         }
         final AbilitySub subAb = sa.getSubAbility();
-        return subAb == null || chkDrawbackWithSubs(aiPlayer,  subAb) || mandatory;
+        return subAb == null || chkDrawbackWithSubs(aiPlayer, subAb) || mandatory;
     }
 
     /**
@@ -214,7 +213,7 @@ public abstract class SpellAbilityAi {
 
             // try to target opponent, then ally, then itself
             for (final Player p : players) {
-                if (p.canBeTargetedBy(sa) && sa.canTarget(p)) {
+                if (sa.canTarget(p)) {
                     sa.resetTargets();
                     sa.getTargets().add(p);
                     return true;

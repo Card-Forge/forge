@@ -4,6 +4,6 @@ Types:Creature Human Druid
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ Whenever a land enters the battlefield under your control, untap CARDNAME.
 A:AB$ Untap | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | AILogic$ PoolExtraMana | SpellDescription$ Untap target land.
-SVar:TrigUntap:DB$Untap | Defined$ Self
+SVar:TrigUntap:DB$ Untap | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_seeder_hierophant.jpg
 Oracle:Whenever a land enters the battlefield under your control, untap Stone-Seeder Hierophant.\n{T}: Untap target land.

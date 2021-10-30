@@ -4,6 +4,6 @@ Types:Creature Plant Wall
 PT:2/6
 K:Defender
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jungle_barrier.jpg
 Oracle:Defender (This creature can't attack.)\nWhen Jungle Barrier enters the battlefield, draw a card.

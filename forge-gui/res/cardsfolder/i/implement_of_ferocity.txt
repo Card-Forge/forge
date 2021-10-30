@@ -3,7 +3,7 @@ ManaCost:1
 Types:Artifact
 A:AB$ PutCounter | Cost$ G Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Put a +1/+1 counter on target creature. Activate only as a sorcery.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, draw a card.
-SVar:TrigDraw:DB$Draw | NumCards$ 1 | Defined$ TriggeredCardController
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredCardController
 AI:RemoveDeck:Random
 DeckNeeds:Color$Green
 SVar:Picture:http://www.wizards.com/global/images/magic/general/implement_of_ferocity.jpg

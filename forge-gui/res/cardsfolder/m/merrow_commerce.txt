@@ -2,7 +2,7 @@ Name:Merrow Commerce
 ManaCost:1 U
 Types:Tribal Enchantment Merfolk
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ UntapMerfolk | TriggerDescription$ At the beginning of your end step, untap all Merfolk you control.
-SVar:UntapMerfolk:DB$UntapAll | ValidCards$ Merfolk.YouCtrl | SpellDescription$ Untap all Merfolk you control.
+SVar:UntapMerfolk:DB$ UntapAll | ValidCards$ Merfolk.YouCtrl | SpellDescription$ Untap all Merfolk you control.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merrow_commerce.jpg
 Oracle:At the beginning of your end step, untap all Merfolk you control.

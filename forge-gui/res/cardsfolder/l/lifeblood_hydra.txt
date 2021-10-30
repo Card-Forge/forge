@@ -6,8 +6,8 @@ K:Trample
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSac | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you gain life and draw cards equal to its power.
-SVar:TrigSac:DB$GainLife | Defined$ TriggeredCardController | LifeAmount$ XPower | SubAbility$ DBDrawCards
-SVar:DBDrawCards:DB$Draw | NumCards$ XPower
+SVar:TrigSac:DB$ GainLife | Defined$ TriggeredCardController | LifeAmount$ XPower | SubAbility$ DBDrawCards
+SVar:DBDrawCards:DB$ Draw | NumCards$ XPower
 SVar:XPower:TriggeredCard$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lifeblood_hydra.jpg
 Oracle:Trample\nLifeblood Hydra enters the battlefield with X +1/+1 counters on it.\nWhen Lifeblood Hydra dies, you gain life and draw cards equal to its power.

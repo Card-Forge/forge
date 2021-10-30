@@ -2,7 +2,7 @@ Name:Black Market
 ManaCost:3 B B
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature dies, put a charge counter on CARDNAME.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
 T:Mode$ Phase | PreCombatMain$ True | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGetMana | TriggerDescription$ At the beginning of your precombat main phase, add {B} for each charge counter on CARDNAME.
 SVar:TrigGetMana:DB$ Mana | Produced$ B | Amount$ X | SpellDescription$ Add {X}{B}
 SVar:X:Count$CardCounters.CHARGE

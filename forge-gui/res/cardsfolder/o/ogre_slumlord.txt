@@ -3,7 +3,7 @@ ManaCost:3 B B
 Types:Creature Ogre Rogue
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken+Other | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever another nontoken creature dies, you may create a 1/1 black Rat creature token.
-SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenScript$ b_1_1_rat | TokenOwner$ You | LegacyImage$ b 1 1 rat gtc
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_rat | TokenOwner$ You | LegacyImage$ b 1 1 rat gtc
 S:Mode$ Continuous | Affected$ Creature.Rat+YouCtrl | AddKeyword$ Deathtouch | Description$ Rats you control have deathtouch.
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_slumlord.jpg

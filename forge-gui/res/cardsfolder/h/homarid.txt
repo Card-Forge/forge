@@ -6,7 +6,7 @@ K:etbCounter:TIDE:1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a tide counter on CARDNAME.
 S:Mode$ Continuous | Affected$ Card.Self+counters_EQ1_TIDE | AddPower$ -1 | AddToughness$ -1 | Description$ As long as there is exactly one tide counter on CARDNAME, it gets -1/-1.
 S:Mode$ Continuous | Affected$ Card.Self+counters_EQ3_TIDE | AddPower$ 1 | AddToughness$ 1 | Description$ As long as there are exactly three tide counters on CARDNAME, it gets +1/+1.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ TIDE | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ TIDE | CounterNum$ 1
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE4_TIDE | Execute$ TrigRemove | TriggerDescription$ Whenever there are four or more tide counters on CARDNAME, remove all tide counters from it.
 SVar:TrigRemove:DB$ RemoveCounter | CounterType$ TIDE | CounterNum$ All
 SVar:All:Count$CardCounters.TIDE

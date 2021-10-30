@@ -43,7 +43,6 @@ import forge.item.PaperCard;
 import forge.screens.deckeditor.controllers.CDeckEditor;
 import forge.screens.deckeditor.controllers.CStatisticsImporter;
 import forge.screens.deckeditor.views.VStatisticsImporter;
-import forge.toolbox.FComboBox;
 import forge.toolbox.*;
 import forge.util.Localizer;
 import forge.view.FDialog;
@@ -62,9 +61,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
     private static final long serialVersionUID = -5837776824284093004L;
 
     private final FTextArea txtInput = new FTextArea();
-    // FIXME: review colours!
-    // FIXME: Background colour: #3e4f63
-
+    // Memo: Background colour: #3e4f63
     // UN-USED COLOUR TO USE "#E1E35F;";
 
     public static final String OK_CARD_IMPORT_COLOUR = "#89DC9F;";
@@ -551,7 +548,6 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
     }
 
     private void activateCardPreview(HyperlinkEvent e) {
-        // FIXME: Card Status
         if(e.getEventType() == HyperlinkEvent.EventType.ENTERED ||
            e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
             String keyString = e.getDescription();
@@ -759,7 +755,8 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             // Card Warning Msgs
             case UNKNOWN_CARD:
             case UNSUPPORTED_CARD:
-                return String.format("%s x %s", token.getQuantity(), token.getText());
+                return token.getQuantity() > 0 ? String.format("%s x %s", token.getQuantity(), token.getText())
+                        : token.getText();
 
             case UNSUPPORTED_DECK_SECTION:
                 return String.format("%s: %s", Localizer.getInstance().getMessage("lblWarningMsgPrefix"),
@@ -831,6 +828,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             case CARD_RARITY:
             case DECK_NAME:
             case LEGAL_CARD:
+            case UNKNOWN_TEXT:
             default:
                 return null;
 
@@ -848,11 +846,10 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             case CARD_FROM_INVALID_SET:
             case UNSUPPORTED_CARD:
                 return KO_NOIMPORT_CLASS;
-            case UNKNOWN_CARD:
             case UNSUPPORTED_DECK_SECTION:
             case WARNING_MESSAGE:
+            case UNKNOWN_CARD:
                 return WARN_MSG_CLASS;
-            case UNKNOWN_TEXT:
             case COMMENT:
                 return COMMENT_CLASS;
             case DECK_NAME:
@@ -866,6 +863,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             case CARD_CMC:
             case MANA_COLOUR:
                 return CMC_CLASS;
+            case UNKNOWN_TEXT:
             default:
                 return "";
         }

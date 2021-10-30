@@ -195,14 +195,16 @@ public class ChangeZoneAi extends SpellAbilityAi {
      */
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+        String aiLogic = sa.getParamOrDefault("AILogic", "");
+
         if (sa.isReplacementAbility() && "Command".equals(sa.getParam("Destination")) && "ReplacedCard".equals(sa.getParam("Defined"))) {
             // Process the commander replacement effect ("return to Command zone instead")
             return doReturnCommanderLogic(sa, aiPlayer);
         }
 
-        if ("Always".equals(sa.getParam("AILogic"))) {
+        if ("Always".equals(aiLogic)) {
             return true;
-        } else if ("IfNotBuffed".equals(sa.getParam("AILogic"))) {
+        } else if ("IfNotBuffed".equals(aiLogic)) {
             if (ComputerUtilCard.isUselessCreature(aiPlayer, sa.getHostCard())) {
                 return true; // debuffed by opponent's auras to the level that it becomes useless
             }
@@ -215,6 +217,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
             return delta <= 0;
+        } else if ("SaviorOfOllenbock".equals(aiLogic)) {
+            return SpecialCardAi.SaviorOfOllenbock.consider(aiPlayer, sa);
         }
 
         if (sa.isHidden()) {
@@ -344,12 +348,15 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 sa.resetTargets();
                 sa.getTargets().add(ai);
             }
+            if (!sa.isTargetNumberValid()) {
+                return false;
+            }
             pDefined = sa.getTargets().getTargetPlayers();
         } else {
             if (sa.hasParam("DefinedPlayer")) {
-                pDefined = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("DefinedPlayer"), sa);
+                pDefined = AbilityUtils.getDefinedPlayers(source, sa.getParam("DefinedPlayer"), sa);
             } else {
-                pDefined = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
+                pDefined = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
             }
         }
 
@@ -1168,7 +1175,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     CardCollection originalList = new CardCollection(list);
                     boolean mustTargetFiltered = StaticAbilityMustTarget.filterMustTargetCards(ai, list, sa);
 
-                    final Card mostExpensive = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, false);
+                    final Card mostExpensive = ComputerUtilCard.getMostExpensivePermanentAI(list);
                     if (mostExpensive.isCreature()) {
                         // if a creature is most expensive take the best one
                         if (destination.equals(ZoneType.Exile)) {
@@ -1419,7 +1426,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             Card choice = null;
 
             if (!list.isEmpty()) {
-                Card mostExpensivePermanent = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, false);
+                Card mostExpensivePermanent = ComputerUtilCard.getMostExpensivePermanentAI(list);
                 if (mostExpensivePermanent.isCreature()
                         && (destination.equals(ZoneType.Battlefield) || tgt.getZone().contains(ZoneType.Battlefield))) {
                     // if a creature is most expensive take the best
@@ -1938,7 +1945,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         int highestEval = -1;
         if (combat.getAttackingPlayer().isOpponentOf(aiPlayer)) {
             for (Card attacker : combat.getAttackers()) {
-                if (sa.canTarget(attacker) && attacker.canBeTargetedBy(sa)) {
+                if (sa.canTarget(attacker)) {
                     int eval = ComputerUtilCard.evaluateCreature(attacker);
                     if (combat.isUnblocked(attacker)) {
                         eval += 100; // TODO: make this smarter
@@ -1952,7 +1959,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         } else {
             // either the current AI player or one of its teammates is attacking, the opponent(s) are blocking
             for (Card blocker : combat.getAllBlockers()) {
-                if (sa.canTarget(blocker) && blocker.canBeTargetedBy(sa)) {
+                if (sa.canTarget(blocker)) {
                     if (blocker.getController().isOpponentOf(aiPlayer)) { // TODO: unnecessary sanity check?
                         int eval = ComputerUtilCard.evaluateCreature(blocker);
                         if (eval > highestEval) {

@@ -33,8 +33,7 @@ public abstract class LimitedWinLoseController {
 
         if (lastGame.isWinner(GamePlayerUtil.getGuiPlayer())) {
             gauntlet.addWin();
-        }
-        else {
+        } else {
             gauntlet.addLoss();
         }
 

@@ -225,8 +225,8 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     @Test void testMatchDeckSectionNames(){
-        String[] dckSections = new String[] {"Main", "main", "Mainboard",
-                "Sideboard", "Side", "Schemes", "Avatar", "avatar", "Commander", "Conspiracy", "card", "Planes"};
+        String[] dckSections = new String[] {"Main", "main", "Mainboard", "Sideboard", "Side", "Schemes", "Avatar",
+                "avatar", "Commander", "Conspiracy", "card", "Planes", "Dungeon"};
         for (String section : dckSections)
             assertTrue(DeckRecognizer.isDeckSectionName(section), "Unrecognised Deck Section: " + section);
 
@@ -240,7 +240,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         for (String entry: deckSectionEntriesFoundInMDExportFromTappedOut)
             assertTrue(DeckRecognizer.isDeckSectionName(entry), "Fail on "+entry);
 
-        String[] deckSectionEntriesFoundInDCKFormat = new String[] {"[Main]", "[Sideboard]"};
+        String[] deckSectionEntriesFoundInDCKFormat = new String[] {"[Main]", "[Sideboard]", "[Dungeon]"};
         for (String entry: deckSectionEntriesFoundInDCKFormat)
             assertTrue(DeckRecognizer.isDeckSectionName(entry), "Fail on "+entry);
     }
@@ -906,6 +906,22 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(matcher.group(DeckRecognizer.REGRP_CARD), "Power Sink ");  // TRIM
         assertEquals(matcher.group(DeckRecognizer.REGRP_SET), "TMP");
         assertEquals(matcher.group(DeckRecognizer.REGRP_COLLNR), "78");
+
+        validRequest = "Power Sink (TMP)|78";  // Pipe to separate collector number (as in .Dec files)
+        matcher = DeckRecognizer.CARD_SET_COLLNO_PATTERN.matcher(validRequest);
+        assertTrue(matcher.matches());
+        assertNull(matcher.group(DeckRecognizer.REGRP_CARDNO));
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARD), "Power Sink ");  // TRIM
+        assertEquals(matcher.group(DeckRecognizer.REGRP_SET), "TMP");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_COLLNR), "78");
+
+        validRequest = "Power Sink|TMP|78";  // .Dec file export entry format
+        matcher = DeckRecognizer.CARD_SET_COLLNO_PATTERN.matcher(validRequest);
+        assertTrue(matcher.matches());
+        assertNull(matcher.group(DeckRecognizer.REGRP_CARDNO));
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARD), "Power Sink");  // TRIM
+        assertEquals(matcher.group(DeckRecognizer.REGRP_SET), "TMP");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_COLLNR), "78");
     }
 
     @Test void testInvalidMatchFullCardSetRequest(){
@@ -991,6 +1007,14 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(matcher.group(DeckRecognizer.REGRP_COLLNR), "78");
 
         validRequest = "(TMP} Power Sink 78";  // mixed delimiters - still valid :D
+        matcher = DeckRecognizer.SET_CARD_COLLNO_PATTERN.matcher(validRequest);
+        assertTrue(matcher.matches());
+        assertNull(matcher.group(DeckRecognizer.REGRP_CARDNO));
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARD), "Power Sink");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_SET), "TMP");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_COLLNR), "78");
+
+        validRequest = "(TMP} Power Sink|78";  // Pipe to separate collector number as in .Dec format
         matcher = DeckRecognizer.SET_CARD_COLLNO_PATTERN.matcher(validRequest);
         assertTrue(matcher.matches());
         assertNull(matcher.group(DeckRecognizer.REGRP_CARDNO));
@@ -2486,8 +2510,63 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     /*=================================
-     * TEST BANNED
+     * TEST UNKNOWN CARDS
      * ================================ */
+
+    @Test void testUknonwCardIsReturnedForAnExistingCardFromTheWrongSet(){
+        String cardRequest = "Counterspell FEM";
+        DeckRecognizer recognizer = new DeckRecognizer();
+        Token unknonwCardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(unknonwCardToken);
+        assertEquals(unknonwCardToken.getType(), TokenType.UNKNOWN_CARD);
+        assertNull(unknonwCardToken.getCard());
+        assertNull(unknonwCardToken.getTokenSection());
+    }
+
+    @Test void testUknownCardIsReturnedForLineRequestsThatLooksLikeACardButAreNotSupported(){
+        String cardRequest = "2x Counterspelling TMP";
+        DeckRecognizer recognizer = new DeckRecognizer();
+        Token unknonwCardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(unknonwCardToken);
+        assertEquals(unknonwCardToken.getType(), TokenType.UNKNOWN_CARD);
+        assertNull(unknonwCardToken.getCard());
+        assertNull(unknonwCardToken.getTokenSection());
+
+        cardRequest = "2x Counterspelling";
+        unknonwCardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(unknonwCardToken);
+        assertEquals(unknonwCardToken.getType(), TokenType.UNKNOWN_CARD);
+        assertNull(unknonwCardToken.getCard());
+        assertNull(unknonwCardToken.getTokenSection());
+
+        cardRequest = "2x Counterspell FEM ";
+        unknonwCardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(unknonwCardToken);
+        assertEquals(unknonwCardToken.getType(), TokenType.UNKNOWN_CARD);
+        assertNull(unknonwCardToken.getCard());
+        assertNull(unknonwCardToken.getTokenSection());
+
+        cardRequest = "SB: 2x Counterspelling TMP";  // adding deck section reference
+        unknonwCardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(unknonwCardToken);
+        assertEquals(unknonwCardToken.getType(), TokenType.UNKNOWN_CARD);
+        assertNull(unknonwCardToken.getCard());
+        assertNull(unknonwCardToken.getTokenSection());
+
+        cardRequest = "SB: 2x Counterspelling TMP (F)";  // adding deck section reference
+        unknonwCardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(unknonwCardToken);
+        assertEquals(unknonwCardToken.getType(), TokenType.UNKNOWN_CARD);
+        assertNull(unknonwCardToken.getCard());
+        assertNull(unknonwCardToken.getTokenSection());
+
+        cardRequest = "SB: 2x Counterspelling+ TMP";  // adding deck section reference
+        unknonwCardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(unknonwCardToken);
+        assertEquals(unknonwCardToken.getType(), TokenType.UNKNOWN_CARD);
+        assertNull(unknonwCardToken.getCard());
+        assertNull(unknonwCardToken.getTokenSection());
+    }
 
     /*===============
      * TEST TOKEN-KEY

@@ -6,7 +6,7 @@ Name=Hypercube (383 cards)
 1 Abrupt Decay|MM3
 1 Acidic Slime|M13
 1 Adanto Vanguard|XLN
-1 Adventurous Impulse|STX
+1 Adventurous Impulse|STA
 1 Ahn-Crop Crasher|AKR
 1 Ancient Tomb|UMA
 1 Angel of Invention|KLD
@@ -77,13 +77,13 @@ Name=Hypercube (383 cards)
 1 Deathrite Shaman|EMA
 1 Declaration in Stone|SOI
 1 Delver of Secrets|ISD
-1 Demonic Tutor|STX
+1 Demonic Tutor|STA
 1 Depose // Deploy|RNA
 1 Dig Through Time|UMA
 1 Dimir Signet|MM3
 1 Dire Fleet Daredevil|RIX
 1 Dismember|MM2
-1 Doom Blade|STX
+1 Doom Blade|STA
 1 Doomed Traveler|IMA
 1 Dragonskull Summit|XLN
 1 Dread Wanderer|AKR
@@ -94,7 +94,7 @@ Name=Hypercube (383 cards)
 1 Dusk Legion Zealot|A25
 1 Duskwatch Recruiter|SOI
 1 Earthshaker Khenra|AKR
-1 Electrolyze|STX
+1 Electrolyze|STA
 1 Elesh Norn, Grand Cenobite|IMA
 1 Elspeth, Knight-Errant|MMA
 1 Elspeth, Sun's Champion|THS
@@ -157,7 +157,7 @@ Name=Hypercube (383 cards)
 1 Gutterbones|RNA
 1 Hallowed Fountain|RNA
 1 Hangarback Walker|MPS_KLD
-1 Harmonize|STX
+1 Harmonize|STA
 1 Hellrider|MM3
 1 Hero of Bladehold|MBS
 1 Hero's Downfall|THS
@@ -170,7 +170,7 @@ Name=Hypercube (383 cards)
 1 Ice-Fang Coatl|MH1
 1 Impulse|VIS
 1 Inferno Titan|M12
-1 Inquisition of Kozilek|STX
+1 Inquisition of Kozilek|STA
 1 Inspiring Vantage|KLD
 1 Irrigated Farmland|AKR
 1 Izzet Charm|2XM
@@ -192,8 +192,8 @@ Name=Hypercube (383 cards)
 1 Legion Warboss|GRN
 1 Life from the Loam|UMA
 1 Light Up the Stage|RNA
-1 Lightning Bolt|STX
-1 Lightning Helix|STX
+1 Lightning Bolt|STA
+1 Lightning Helix|STA
 1 Lightning Strike|M19
 1 Liliana, Dreadhorde General|WAR
 1 Liliana, the Last Hope|EMN
@@ -205,12 +205,12 @@ Name=Hypercube (383 cards)
 1 Magma Jet|MM3
 1 Mana Confluence|EXP
 1 Mana Leak|IMA
-1 Mana Tithe|STX
+1 Mana Tithe|STA
 1 Mardu Woe-Reaper|FRF
 1 Marsh Flats|MH2
 1 Massacre Girl|WAR
 1 Massacre Wurm|M21
-1 Memory Lapse|STX
+1 Memory Lapse|STA
 1 Mesmerizing Benthid|RNA
 1 Midnight Reaper|GRN
 1 Mimic Vat|SOM
@@ -223,7 +223,7 @@ Name=Hypercube (383 cards)
 1 Mulldrifter|MM2
 1 Myr Battlesphere|2XM
 1 Mystic Confluence|C15
-1 Natural Order|STX
+1 Natural Order|STA
 1 Nature's Lore|5ED
 1 Nicol Bolas, Dragon-God|WAR
 1 Nicol Bolas, God-Pharaoh|AKR
@@ -231,7 +231,7 @@ Name=Hypercube (383 cards)
 1 Oath of Nissa|OGW
 1 Ophiomancer|C13
 1 Opposition|MPS_AKH
-1 Opt|STX
+1 Opt|STA
 1 Oracle of Mul Daya|ZEN
 1 Orzhov Signet|MM3
 1 Overgrown Tomb|GRN
@@ -318,7 +318,7 @@ Name=Hypercube (383 cards)
 1 Supreme Will|AKR
 1 Surrak, the Hunt Caller|DTK
 1 Sword of Fire and Ice|2XM
-1 Swords to Plowshares|STX
+1 Swords to Plowshares|STA
 1 Sylvan Library|EMA
 1 Taiga|VMA
 1 Talisman of Creativity|MH1

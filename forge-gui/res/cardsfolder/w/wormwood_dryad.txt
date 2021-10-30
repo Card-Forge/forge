@@ -4,6 +4,6 @@ Types:Creature Dryad
 PT:3/1
 A:AB$ Pump | Cost$ G | KW$ Forestwalk | Defined$ Self | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME gains forestwalk until end of turn and deals 1 damage to you. (It can't be blocked as long as defending player controls a Forest.)
 A:AB$ Pump | Cost$ B | KW$ Swampwalk | Defined$ Self | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME gains swampwalk until end of turn and deals 1 damage to you. (It can't be blocked as long as defending player controls a Swamp.)
-SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 1
+SVar:DBDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wormwood_dryad.jpg
 Oracle:{G}: Wormwood Dryad gains forestwalk until end of turn and deals 1 damage to you. (It can't be blocked as long as defending player controls a Forest.)\n{B}: Wormwood Dryad gains swampwalk until end of turn and deals 1 damage to you. (It can't be blocked as long as defending player controls a Swamp.)

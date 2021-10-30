@@ -228,7 +228,8 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public boolean canBePartnerCommander() {
-        return canBeCommander() && (hasKeyword("Partner") || !this.partnerWith.isEmpty());
+        return canBeCommander() && (hasKeyword("Partner") || !this.partnerWith.isEmpty() ||
+                hasKeyword("Friends forever"));
     }
 
     public boolean canBeOathbreaker() {

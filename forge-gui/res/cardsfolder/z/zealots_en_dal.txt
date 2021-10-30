@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Creature Human Soldier
 PT:2/4
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Permanent.nonLand+White+YouCtrl | PresentCompare$ EQX | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, if all nonland permanents you control are white, you gain 1 life.
-SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:X:Count$Valid Permanent.nonLand+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zealots_en_dal.jpg
 Oracle:At the beginning of your upkeep, if all nonland permanents you control are white, you gain 1 life.

@@ -65,11 +65,11 @@ public class SacrificeAi extends SpellAbilityAi {
             sa.getTargets().add(opp);
             final String valid = sa.getParam("SacValid");
             String num = sa.getParamOrDefault("Amount" , "1");
-            final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
+            final int amount = AbilityUtils.calculateAmount(source, num, sa);
 
             List<Card> list = null;
             try {
-                list = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
+                list = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), source, sa);
             } catch (NullPointerException e) {
                 return false;
             } finally {
@@ -121,7 +121,7 @@ public class SacrificeAi extends SpellAbilityAi {
             // Only cast it if Human has the full amount of valid
             // Only cast it if AI doesn't have the full amount of Valid
             // TODO: Cast if the type is favorable: my "worst" valid is worse than his "worst" valid
-            final String num = sa.hasParam("Amount") ? sa.getParam("Amount") : "1";
+            final String num = sa.getParamOrDefault("Amount", "1");
             int amount = AbilityUtils.calculateAmount(source, num, sa);
 
             if (num.equals("X") && sa.getSVar(num).equals("Count$xPaid")) {
@@ -131,7 +131,7 @@ public class SacrificeAi extends SpellAbilityAi {
 
             List<Card> humanList = null;
             try {
-                humanList = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
+                humanList = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), source, sa);
             } catch (NullPointerException e) {
                 return false;
             } finally {
@@ -145,7 +145,7 @@ public class SacrificeAi extends SpellAbilityAi {
         } else if (defined.equals("You")) {
             List<Card> computerList = null;
             try {
-                computerList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
+                computerList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), source, sa);
             } catch (NullPointerException e) {
                 return false;
             } finally {

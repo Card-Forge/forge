@@ -6,6 +6,6 @@ K:Flying
 K:Double Strike
 K:Lifelink
 T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield |Execute$ TrigDraw | TriggerDescription$ Whenever you gain life, draw a card.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drogskol_reaver.jpg
 Oracle:Flying, double strike, lifelink\nWhenever you gain life, draw a card.

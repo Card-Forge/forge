@@ -6,7 +6,7 @@ A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 A:AB$ PutCounter | Cost$ U T | Defined$ Self | CounterType$ EON | CounterNum$ 1 | SubAbility$ DBSkipTurn | SpellDescription$ Put an eon counter on CARDNAME. Skip your next turn.
 A:AB$ AddTurn | Cost$ T SubCounter<1/EON> | NumTurns$ 1 | Defined$ You | SubAbility$ DBBounce | SpellDescription$ Take an extra turn after this one.
 SVar:DBSkipTurn:DB$ SkipTurn | NumTurns$ 1 | Defined$ You
-SVar:DBBounce:DB$ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
+SVar:DBBounce:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magosi_the_waterveil.jpg
 Oracle:Magosi, the Waterveil enters the battlefield tapped.\n{T}: Add {U}.\n{U}, {T}: Put an eon counter on Magosi, the Waterveil. Skip your next turn.\n{T}, Remove an eon counter from Magosi, the Waterveil and return it to its owner's hand: Take an extra turn after this one.

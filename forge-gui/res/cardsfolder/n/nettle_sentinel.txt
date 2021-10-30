@@ -4,6 +4,6 @@ Types:Creature Elf Warrior
 PT:2/2
 K:CARDNAME doesn't untap during your untap step.
 T:Mode$ SpellCast | ValidCard$ Card.Green | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a green spell, you may untap CARDNAME.
-SVar:TrigUntap:DB$Untap | Defined$ Self
+SVar:TrigUntap:DB$ Untap | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nettle_sentinel.jpg
 Oracle:Nettle Sentinel doesn't untap during your untap step.\nWhenever you cast a green spell, you may untap Nettle Sentinel.

@@ -2,7 +2,7 @@ Name:Sylvan Echoes
 ManaCost:G
 Types:Enchantment
 T:Mode$ Clashed | ValidPlayer$ You | Won$ True | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever you clash and win, you may draw a card. (This ability triggers after the clash ends.)
-SVar:TrigDraw:DB$Draw | Defined$ You
+SVar:TrigDraw:DB$ Draw | Defined$ You
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_echoes.jpg
 Oracle:Whenever you clash and win, you may draw a card. (This ability triggers after the clash ends.)

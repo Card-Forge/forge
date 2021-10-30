@@ -259,6 +259,9 @@ public enum DeckFormat {
                     } else if (a.getName().equals(b.getRules().getPartnerWith())
                             && b.getName().equals(a.getRules().getPartnerWith())) {
                         // paired partner commander
+                    } else if (a.getRules().hasKeyword("Friends forever") &&
+                            b.getRules().hasKeyword("Friends forever")) {
+                        // Stranger Things Secret Lair gimmick partner commander
                     } else {
                         return "has an illegal commander partnership";
                     }

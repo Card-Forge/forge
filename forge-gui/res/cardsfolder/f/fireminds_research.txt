@@ -2,7 +2,7 @@ Name:Firemind's Research
 ManaCost:U R
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ DBPutCounter | TriggerDescription$ Whenever you cast an instant or sorcery spell, put a charge counter on CARDNAME.
-SVar:DBPutCounter:DB$PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
 SVar:BuffedBy:Instant,Sorcery
 DeckHints:Type$Instant | Sorcery
 A:AB$ Draw | Cost$ 1 U SubCounter<2/CHARGE> | NumCards$ 1 | SpellDescription$ Draw a card.

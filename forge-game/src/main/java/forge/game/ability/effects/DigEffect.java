@@ -42,8 +42,9 @@ public class DigEffect extends SpellAbilityEffect {
         final int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
-        sb.append(host.getController()).append(" looks at the top ");
-        sb.append(Lang.nounWithAmount(numToDig, "card")).append(" of ");
+        sb.append(host.getController()).append(sa.hasParam("Reveal") && sa.getParam("Reveal").equals("True")
+                ? " reveals " : " looks at ").append("the top ");
+        sb.append(numToDig == 1 ? "card" : (Lang.getNumeral(numToDig) + " cards")).append(" of ");
 
         if (tgtPlayers.contains(host.getController())) {
             sb.append("their ");
@@ -72,7 +73,7 @@ public class DigEffect extends SpellAbilityEffect {
         int libraryPosition = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : -1;
         int destZone1ChangeNum = 1;
         final boolean mitosis = sa.hasParam("Mitosis");
-        String changeValid = sa.hasParam("ChangeValid") ? sa.getParam("ChangeValid") : "";
+        String changeValid = sa.getParamOrDefault("ChangeValid", "");
         final boolean anyNumber = sa.hasParam("AnyNumber");
 
         final int libraryPosition2 = sa.hasParam("LibraryPosition2") ? Integer.parseInt(sa.getParam("LibraryPosition2")) : -1;
@@ -86,7 +87,7 @@ public class DigEffect extends SpellAbilityEffect {
         // These parameters are used to indicate that a dialog box must be show to the player asking if the player wants to proceed
         // with an optional ability, otherwise the optional ability is skipped.
         final boolean mayBeSkipped = sa.hasParam("PromptToSkipOptionalAbility");
-        final String optionalAbilityPrompt = sa.hasParam("OptionalAbilityPrompt") ? sa.getParam("OptionalAbilityPrompt") : "";
+        final String optionalAbilityPrompt = sa.getParamOrDefault("OptionalAbilityPrompt", "");
 
         boolean remZone1 = false;
         boolean remZone2 = false;

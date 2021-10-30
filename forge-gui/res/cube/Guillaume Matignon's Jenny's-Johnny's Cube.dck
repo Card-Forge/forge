@@ -54,7 +54,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Bosh, Iron Golem|2XM
 1 Brain Maggot|JOU
 1 Braingeyser|3ED
-1 Brainstorm|STX
+1 Brainstorm|STA
 1 Breeding Pool|RNA
 1 Brion Stoutarm|A25
 1 Brushland|10E
@@ -86,7 +86,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Commune with the Gods|EMA
 1 Complicate|ONS
 1 Compulsion|TOR
-1 Compulsive Research|STX
+1 Compulsive Research|STA
 1 Condescend|IMA
 1 Courser of Kruphix|A25
 1 Cradle of Vitality|ALA
@@ -117,7 +117,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Distended Mindbender|EMN
 1 Docent of Perfection|EMN
 1 Domri Rade|MM3
-1 Doom Blade|STX
+1 Doom Blade|STA
 1 Doomed Necromancer|2XM
 1 Doomwake Giant|JOU
 1 Door of Destinies|M14
@@ -126,14 +126,14 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Drogskol Reaver|DKA
 1 Dromoka's Command|DTK
 1 Duplicant|2XM
-1 Duress|STX
+1 Duress|STA
 1 Dwynen, Gilt-Leaf Daen|ORI
 1 Edge of Autumn|FUT
 1 Edric, Spymaster of Trest|VMA
 1 Eidolon of Blossoms|JOU
 1 Eidolon of Countless Battles|BNG
 1 Elder Deep-Fiend|EMN
-1 Electrolyze|STX
+1 Electrolyze|STA
 1 Elixir of Immortality|M14
 1 Elspeth Tirel|SOM
 1 Elvish Vanguard|EMA
@@ -154,7 +154,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Extinguish All Hope|JOU
 1 Ezuri, Renegade Leader|SOM
 1 Faith's Fetters|M21
-1 Faithless Looting|STX
+1 Faithless Looting|STA
 1 Falkenrath Aristocrat|2XM
 1 Fatestitcher|ALA
 1 Fauna Shaman|UMA
@@ -244,7 +244,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Imperious Perfect|EMA
 1 Imprisoned in the Moon|EMN
 1 Inexorable Blob|SOI
-1 Inquisition of Kozilek|STX
+1 Inquisition of Kozilek|STA
 1 Intuition|TPR
 1 Ishkanah, Grafwidow|EMN
 1 Isolated Chapel|DOM
@@ -270,9 +270,9 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Legacy's Allure|TMP
 1 Leonin Relic-Warder|C17
 1 Life from the Loam|UMA
-1 Lightning Bolt|STX
+1 Lightning Bolt|STA
 1 Lightning Greaves|2XM
-1 Lightning Helix|STX
+1 Lightning Helix|STA
 1 Lightning Surge|JUD
 1 Lignify|LRW
 1 Liliana, Heretical Healer|ORI
@@ -292,7 +292,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Master Apothecary|ODY
 1 Master of Waves|THS
 1 Maze of Ith|2XM
-1 Memory Lapse|STX
+1 Memory Lapse|STA
 1 Mesa Enchantress|EMA
 1 Mikaeus, the Lunarch|ISD
 1 Mind Stone|IMA
@@ -320,7 +320,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Nearheath Pilgrim|AVR
 1 Necromancer's Stockpile|M15
 1 Necromancy|VIS
-1 Negate|STX
+1 Negate|STA
 1 Nephalia Drownyard|ISD
 1 Nighthowler|THS
 1 Nissa, Vastwood Seer|ORI
@@ -336,7 +336,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Oona's Grace|EMA
 1 Opalescence|UDS
 1 Open the Vaults|2XM
-1 Opt|STX
+1 Opt|STA
 1 Oracle of Mul Daya|ZEN
 1 Oracle of Nectars|SHM
 1 Outpost Siege|FRF
@@ -475,7 +475,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Thopter Spy Network|ORI
 1 Thought Courier|9ED
 1 Thought Scour|IMA
-1 Time Warp|STX
+1 Time Warp|STA
 1 Tireless Tracker|SOI
 1 Titania, Protector of Argoth|MH2
 1 To the Slaughter|SOI

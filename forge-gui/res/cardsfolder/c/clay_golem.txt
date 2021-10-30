@@ -2,7 +2,7 @@ Name:Clay Golem
 ManaCost:4
 Types:Artifact Creature Golem
 PT:4/4
-A:AB$ PutCounter | Cost$ 6 RollDice<1/8/X> | ConditionPresent$ Card.Self+IsNotMonstrous | Monstrosity$ True | CounterNum$ X | CounterType$ P1P1 | StackDescription$ SpellDescription | SpellDescription$ Monstrosity X, where X is the result. (If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstrous.)
+A:AB$ PutCounter | Cost$ 6 RollDice<1/8/X> | ConditionPresent$ Card.Self+IsNotMonstrous | Monstrosity$ True | CounterNum$ X | CounterType$ P1P1 | AILogic$ FromDiceRoll | StackDescription$ SpellDescription | SpellDescription$ Monstrosity X, where X is the result. (If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstrous.)
 T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Berserk — When CARDNAME becomes monstrous, destroy target permanent.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent
 DeckHas:Ability$Counters

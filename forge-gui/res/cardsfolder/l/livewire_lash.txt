@@ -4,6 +4,6 @@ Types:Artifact Equipment
 K:Equip:2
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 2 | AddTrigger$ PumpTrigger | AddSVar$ LivewireDamage | Description$ Equipped creature gets +2/+0 and has "Whenever this creature becomes the target of a spell, this creature deals 2 damage to any target."
 SVar:PumpTrigger:Mode$ BecomesTarget | SourceType$ Spell | ValidTarget$ Card.Self | Execute$ LivewireDamage | TriggerDescription$ Whenever this creature becomes the target of a spell, this creature deals 2 damage to any target.
-SVar:LivewireDamage:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2
+SVar:LivewireDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/livewire_lash.jpg
 Oracle:Equipped creature gets +2/+0 and has "Whenever this creature becomes the target of a spell, this creature deals 2 damage to any target."\nEquip {2}

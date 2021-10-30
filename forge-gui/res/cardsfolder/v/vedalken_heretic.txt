@@ -3,6 +3,6 @@ ManaCost:G U
 Types:Creature Vedalken Rogue
 PT:1/1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, you may draw a card.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_heretic.jpg
 Oracle:Whenever Vedalken Heretic deals damage to an opponent, you may draw a card.

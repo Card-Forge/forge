@@ -4,7 +4,7 @@ Types:Creature Goblin
 PT:2/1
 T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature | Execute$ ChangeControl | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked, target opponent gains control of it. (This removes CARDNAME from combat.)
 T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | Execute$ ChangeControl | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked, target opponent gains control of it. (This removes CARDNAME from combat.)
-SVar:ChangeControl:DB$GainControl | Defined$ Self | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SpellDescription$ Target opponent gains control of CARDNAME. | SubAbility$ RemCombat
+SVar:ChangeControl:DB$ GainControl | Defined$ Self | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SpellDescription$ Target opponent gains control of CARDNAME. | SubAbility$ RemCombat
 SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Self
 SVar:SacMe:1
 AI:RemoveDeck:All

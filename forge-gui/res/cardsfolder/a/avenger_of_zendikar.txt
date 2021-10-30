@@ -3,10 +3,10 @@ ManaCost:5 G G
 Types:Creature Elemental
 PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 0/1 green Plant creature token for each land you control.
-SVar:TrigToken:DB$Token | TokenAmount$ X | TokenScript$ g_0_1_plant | TokenOwner$ You | LegacyImage$ g 0 1 plant wwk
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_0_1_plant | TokenOwner$ You | LegacyImage$ g 0 1 plant wwk
 SVar:X:Count$NumTypeYouCtrl.Land
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | OptionalDecider$ You | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, you may put a +1/+1 counter on each Plant creature you control.
-SVar:TrigPutCounterAll:DB$PutCounterAll | ValidCards$ Creature.Plant+YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ Always
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.Plant+YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ Always
 SVar:BuffedBy:Land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avenger_of_zendikar.jpg
 Oracle:When Avenger of Zendikar enters the battlefield, create a 0/1 green Plant creature token for each land you control.\nLandfall — Whenever a land enters the battlefield under your control, you may put a +1/+1 counter on each Plant creature you control.

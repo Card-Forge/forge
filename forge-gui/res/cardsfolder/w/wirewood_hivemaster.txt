@@ -3,6 +3,6 @@ ManaCost:1 G
 Types:Creature Elf
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Elf.nonToken+Other | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMakeToken | TriggerDescription$ Whenever another nontoken Elf enters the battlefield, you may create a 1/1 green Insect creature token.
-SVar:TrigMakeToken:DB$Token | TokenAmount$ 1 | TokenScript$ g_1_1_insect | TokenOwner$ You | LegacyImage$ g 1 1 insect lgn
+SVar:TrigMakeToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_insect | TokenOwner$ You | LegacyImage$ g 1 1 insect lgn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_hivemaster.jpg
 Oracle:Whenever another nontoken Elf enters the battlefield, you may create a 1/1 green Insect creature token.

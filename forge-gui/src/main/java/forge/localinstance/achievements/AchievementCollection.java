@@ -102,8 +102,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         add(new TotalMatchWins(100, 250, 500, 1000));
         if (isLimitedFormat) { //make need for speed goal more realistic for limited formats
             add(new NeedForSpeed(8, 6, 4, 2));
-        }
-        else {
+        } else {
             add(new NeedForSpeed(5, 3, 1, 0));
         }
         add(new Overkill(-25, -50, -100, -200));
@@ -114,8 +113,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         add(new ManaScrewed());
         if (isLimitedFormat) { //lower gold and mythic thresholds based on smaller decks
             add(new ManaFlooded(8, 11, 14, 17));
-        }
-        else {
+        } else {
             add(new ManaFlooded(8, 12, 18, 24));
         }
         add(new RagsToRiches());

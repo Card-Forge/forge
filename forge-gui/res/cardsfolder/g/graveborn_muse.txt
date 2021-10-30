@@ -3,8 +3,8 @@ ManaCost:2 B B
 Types:Creature Zombie Spirit
 PT:3/3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, you draw X cards and you lose X life, where X is the number of Zombies you control.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ X | SubAbility$ DBLoseLife
-SVar:DBLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ X
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Zombie.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graveborn_muse.jpg
 Oracle:At the beginning of your upkeep, you draw X cards and you lose X life, where X is the number of Zombies you control.

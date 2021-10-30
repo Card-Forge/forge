@@ -4,7 +4,7 @@ Types:Legendary Creature Dragon Sliver
 PT:4/4
 S:Mode$ Continuous | Affected$ Permanent.Sliver+YouCtrl | AddKeyword$ Flying | AddTrigger$ PingTrig | AddSVar$ TrigDealDamage | AddAbility$ Draw | Description$ Slivers you control have flying and "Whenever you draw a card, this creature deals 1 damage to any target" and "{T}: Draw a card."
 SVar:PingTrig:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you draw a card, CARDNAME deals 1 damage to any target.
-SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
 SVar:Draw:AB$ Draw | Cost$ T | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:PlayMain1:TRUE
 Oracle:Slivers you control have flying and "Whenever you draw a card, this creature deals 1 damage to any target" and "{T}: Draw a card."

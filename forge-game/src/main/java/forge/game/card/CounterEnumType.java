@@ -71,6 +71,8 @@ public enum CounterEnumType {
 
     CORRUPTION("CRPTN", 210, 121, 210),
 
+    CROAK("CROAK", 155, 255, 5),
+
     CREDIT("CRDIT", 188, 197, 234),
 
     CRYSTAL("CRYST", 255, 85, 206),
@@ -161,6 +163,8 @@ public enum CounterEnumType {
 
     HUNGER("HUNGR", 255, 91, 149),
 
+    HUSK("HUSK", 227, 212, 173),
+
     ICE("ICE", 0, 239, 255),
 
     INCARNATION("INCRN", 247, 206, 64),
@@ -168,6 +172,8 @@ public enum CounterEnumType {
     INFECTION("INFCT", 0, 230, 66),
 
     INTERVENTION("INTRV", 205, 203, 105),
+
+    INVITATION("INVIT", 205, 0, 26),
 
     ISOLATION("ISOLT", 250, 190, 0),
 

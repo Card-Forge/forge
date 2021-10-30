@@ -4,7 +4,7 @@ Types:Creature Goblin Warrior
 PT:1/1
 K:Haste
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigFlip | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, flip it.
-SVar:TrigFlip:DB$SetState | Defined$ Self | Mode$ Flip
+SVar:TrigFlip:DB$ SetState | Defined$ Self | Mode$ Flip
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_lavarunner.jpg
 AlternateMode:Flip
 Oracle:Haste\nWhenever Akki Lavarunner deals damage to an opponent, flip it.

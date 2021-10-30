@@ -69,7 +69,7 @@ public class CombatUtil {
         final FCollection<GameEntity> defenders = new FCollection<>();
         for (final Player defender : playerWhoAttacks.getOpponents()) {
             defenders.add(defender);
-            final CardCollection planeswalkers = CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANESWALKERS);
+            final CardCollection planeswalkers = defender.getPlaneswalkersInPlay();
             defenders.addAll(planeswalkers);
         }
         return defenders;
@@ -501,7 +501,7 @@ public class CombatUtil {
             return true;
         }
 
-        if ( combat != null ) {
+        if (combat != null) {
             if (StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, defendingPlayer).getRight() == combat.getBlockers(attacker).size()) {
                 return false;
             }
@@ -763,7 +763,7 @@ public class CombatUtil {
                 for (final Card attacker : attackers) {
                     if (canBlock(attacker, blocker, combat)) {
                         boolean must = true;
-                        if (StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, defending).getLeft() > 1) {
+                        if (getMinNumBlockersForAttacker(attacker, defending) > 1) {
                             final List<Card> possibleBlockers = Lists.newArrayList(defendersArmy);
                             possibleBlockers.remove(blocker);
                             if (!canBeBlocked(attacker, possibleBlockers, combat)) {
@@ -875,7 +875,7 @@ public class CombatUtil {
 
                 Player defendingPlayer = combat.getDefenderPlayerByAttacker(attacker);
 
-                if (StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, defendingPlayer).getLeft() > 1) {
+                if (getMinNumBlockersForAttacker(attacker, defendingPlayer) > 1) {
                     final List<Card> blockers = defendingPlayer.getCreaturesInPlay();
                     blockers.remove(blocker);
                     if (!canBeBlocked(attacker, blockers, combat)) {
@@ -894,7 +894,7 @@ public class CombatUtil {
                         && combat.isAttacking(attacker)) {
                     boolean canBe = true;
                     Player defendingPlayer = combat.getDefenderPlayerByAttacker(attacker);
-                    if (StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, defendingPlayer).getLeft() > 1) {
+                    if (getMinNumBlockersForAttacker(attacker, defendingPlayer) > 1) {
                         final List<Card> blockers = freeBlockers != null ? new CardCollection(freeBlockers) : defendingPlayer.getCreaturesInPlay();
                         blockers.remove(blocker);
                         if (!canBeBlocked(attacker, blockers, combat)) {
@@ -1099,4 +1099,4 @@ public class CombatUtil {
     public static int getMinNumBlockersForAttacker(Card attacker, Player defender) {
         return StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, defender).getLeft();
     }
-} // end class CombatUtil
+}

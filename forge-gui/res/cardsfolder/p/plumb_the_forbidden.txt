@@ -4,6 +4,6 @@ Types:Instant
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCopy | CheckSVar$ X | TriggerDescription$ As an additional cost to cast this spell, you may sacrifice one or more creatures. When you do, copy this spell for each creature sacrificed this way.
 SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ X
 A:SP$ Draw | Cost$ 1 B Sac<X/Creature> | SubAbility$ DBLoseLife | CostDesc$ | SpellDescription$ You draw a card and you lose 1 life.
-SVar:DBLoseLife:DB$LoseLife | LifeAmount$ 1
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
 SVar:X:Count$xPaid
 Oracle:As an additional cost to cast this spell, you may sacrifice one or more creatures. When you do, copy this spell for each creature sacrificed this way.\nYou draw a card and you lose 1 life.

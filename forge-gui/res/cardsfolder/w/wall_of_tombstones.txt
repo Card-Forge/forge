@@ -4,7 +4,7 @@ Types:Creature Wall
 PT:0/1
 K:Defender
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTough | TriggerDescription$ At the beginning of your upkeep, change CARDNAME's base toughness to 1 plus the number of creature cards in your graveyard. (This effect lasts indefinitely.)
-SVar:TrigTough:DB$Animate | Toughness$ X | Duration$ Permanent
+SVar:TrigTough:DB$ Animate | Toughness$ X | Duration$ Permanent
 SVar:X:Count$TypeInYourYard.Creature/Plus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_tombstones.jpg
 Oracle:Defender (This creature can't attack.)\nAt the beginning of your upkeep, change Wall of Tombstones's base toughness to 1 plus the number of creature cards in your graveyard. (This effect lasts indefinitely.)

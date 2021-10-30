@@ -8,6 +8,7 @@ import com.google.common.collect.Lists;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardModeChosen;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -73,10 +74,25 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
 
             List<SpellAbility> chosenSAs = Lists.newArrayList();
             String prompt = sa.getParamOrDefault("ChoicePrompt","Choose");
+            boolean random = false;
             if (sa.hasParam("AtRandom")) {
+                random = true;
                 Aggregates.random(abilities, amount, chosenSAs);
             } else {
                 chosenSAs = p.getController().chooseSpellAbilitiesForEffect(abilities, sa, prompt, amount, ImmutableMap.of());
+            }
+
+            for (SpellAbility chosenSA : chosenSAs) {
+                if (sa.hasParam("AtRandom") && sa.getParam("AtRandom").equals("Urza") && chosenSA.usesTargeting()) {
+                    List<Card> validTargets = CardUtil.getValidCardsToTarget(chosenSA.getTargetRestrictions(), sa);
+                    if (validTargets.isEmpty()) {
+                        List <SpellAbility> newChosenSAs = Lists.newArrayList();
+                        Aggregates.random(abilities, amount, newChosenSAs);
+                        chosenSAs = newChosenSAs;
+                    } else {
+                        p.getController().chooseTargetsFor(chosenSA);
+                    }
+                }
             }
 
             if (!chosenSAs.isEmpty()) {
@@ -89,15 +105,17 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                     if (sa.hasParam("SetChosenMode")) {
                         sa.getHostCard().setChosenMode(chosenValue);
                     }
-                    p.getGame().fireEvent(new GameEventCardModeChosen(p, host.getName(), chosenValue, sa.hasParam("ShowChoice")));
+                    p.getGame().fireEvent(new GameEventCardModeChosen(p, host.getName(), chosenValue,
+                            sa.hasParam("ShowChoice"), random));
                     AbilityUtils.resolve(chosenSA);
                 }
             } else {
                 // no choices are valid, e.g. maybe all Unless costs are unpayable
                 if (fallback != null) {
-                    p.getGame().fireEvent(new GameEventCardModeChosen(p, host.getName(), fallback.getDescription(), sa.hasParam("ShowChoice")));
+                    p.getGame().fireEvent(new GameEventCardModeChosen(p, host.getName(), fallback.getDescription(),
+                            sa.hasParam("ShowChoice"), random));
                     AbilityUtils.resolve(fallback);                
-                } else if (!sa.hasParam("AtRandom")) {
+                } else if (!random) {
                     System.err.println("Warning: all Unless costs were unpayable for " + host.getName() +", but it had no FallbackAbility defined. Doing nothing (this is most likely incorrect behavior).");
                 }
             }

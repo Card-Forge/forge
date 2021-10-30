@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -33,7 +33,7 @@ import forge.game.trigger.Trigger;
  * <p>
  * Card_Keywords class.
  * </p>
- * 
+ *
  * @author Forge
  */
 public class KeywordsChange implements Cloneable {
@@ -43,9 +43,9 @@ public class KeywordsChange implements Cloneable {
     private boolean removeAllKeywords;
 
     /**
-     * 
+     *
      * Construct a new {@link KeywordsChange}.
-     * 
+     *
      * @param keywordList the list of keywords to add.
      * @param removeKeywordList the list of keywords to remove.
      * @param removeAll whether to remove all keywords.
@@ -81,9 +81,9 @@ public class KeywordsChange implements Cloneable {
     }
 
     /**
-     * 
+     *
      * getKeywords.
-     * 
+     *
      * @return ArrayList<String>
      */
     public final Collection<KeywordInterface> getKeywords() {
@@ -94,9 +94,9 @@ public class KeywordsChange implements Cloneable {
         return this.removeKeywordInterfaces;
     }
     /**
-     * 
+     *
      * getRemoveKeywords.
-     * 
+     *
      * @return ArrayList<String>
      */
     public final List<String> getRemoveKeywords() {
@@ -104,9 +104,9 @@ public class KeywordsChange implements Cloneable {
     }
 
     /**
-     * 
+     *
      * isRemoveAllKeywords.
-     * 
+     *
      * @return boolean
      */
     public final boolean isRemoveAllKeywords() {
@@ -136,10 +136,6 @@ public class KeywordsChange implements Cloneable {
 
     public final boolean removeKeywordfromAdd(final String keyword) {
         return keywords.remove(keyword);
-    }
-    
-    public final void addKeyword(final String keyword) {
-        keywords.add(keyword);
     }
 
     public void setHostCard(final Card host) {

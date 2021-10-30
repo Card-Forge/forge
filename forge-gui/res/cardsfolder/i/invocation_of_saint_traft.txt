@@ -5,7 +5,7 @@ K:Enchant Creature
 A:SP$ Attach | Cost$ 1 W U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ SaintTraftTrig | AddSVar$ SaintTraftToken | Description$ Enchanted creature has "Whenever this creature attacks, create a 4/4 white Angel creature token with flying that's tapped and attacking. Exile that token at end of combat."
 SVar:SaintTraftTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ SaintTraftToken | TriggerDescription$ Whenever this creature attacks, put a 4/4 white Angel creature token with flying onto the battlefield tapped and attacking. Exile that token at end of combat.
-SVar:SaintTraftToken:DB$Token | TokenScript$ w_4_4_angel_flying | LegacyImage$ w 4 4 angel flying soi | TokenTapped$ True | TokenAttacking$ True | AtEOT$ ExileCombat
+SVar:SaintTraftToken:DB$ Token | TokenScript$ w_4_4_angel_flying | LegacyImage$ w 4 4 angel flying soi | TokenTapped$ True | TokenAttacking$ True | AtEOT$ ExileCombat
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/invocation_of_saint_traft.jpg

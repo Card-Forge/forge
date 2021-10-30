@@ -71,7 +71,6 @@ public class ArchetypeDeckGenerator extends DeckProxy implements Comparable<Arch
 
     @Override
     public Deck getDeck() {
-
         return DeckgenUtil.buildLDACArchetypeDeck(archetype,format,isForAi);
     }
 

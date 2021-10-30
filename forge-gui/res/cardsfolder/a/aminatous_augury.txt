@@ -5,7 +5,7 @@ A:SP$ Dig | Cost$ 6 U U | Defined$ You | DigNum$ 8 | ChangeNum$ All | Destinatio
 SVar:DBChooseLand:DB$ ChooseCard | Defined$ You | Choices$ Land.IsRemembered | Mandatory$ True | Amount$ 1 | ChoiceZone$ Exile | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Optional$ True | Defined$ ChosenCard | Origin$ Exile | Destination$ Battlefield | ChangeNum$ 1 | ForgetChanged$ True | SubAbility$ DBCleanupChosen
 SVar:DBCleanupChosen:DB$ Cleanup | ClearChosenCard$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$Effect | RememberObjects$ RememberedCard | StaticAbilities$ PlayCr,PlayPl,PlayAr,PlayEn,PlayIn,PlaySo,PlayTr | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ PlayCr,PlayPl,PlayAr,PlayEn,PlayIn,PlaySo,PlayTr | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
 SVar:PlayCr:Mode$ Continuous | Affected$ Creature.YouCtrl+IsRemembered | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayLimit$ 1 | MayPlayText$ Creature | EffectZone$ Command | AffectedZone$ Exile
 SVar:PlayPl:Mode$ Continuous | Affected$ Planeswalker.YouCtrl+IsRemembered | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayLimit$ 1 | MayPlayText$ Planeswalker | EffectZone$ Command | AffectedZone$ Exile
 SVar:PlayAr:Mode$ Continuous | Affected$ Artifact.YouCtrl+IsRemembered | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayLimit$ 1 | MayPlayText$ Artifact | EffectZone$ Command | AffectedZone$ Exile

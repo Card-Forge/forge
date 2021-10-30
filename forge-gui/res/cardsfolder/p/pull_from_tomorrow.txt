@@ -2,7 +2,7 @@ Name:Pull from Tomorrow
 ManaCost:X U U
 Types:Instant
 A:SP$ Draw | Cost$ X U U | NumCards$ X | SpellDescription$ Draw X cards, then discard a card. | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pull_from_tomorrow.jpg
 Oracle:Draw X cards, then discard a card.

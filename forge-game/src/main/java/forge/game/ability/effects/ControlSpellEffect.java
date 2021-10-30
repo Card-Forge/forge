@@ -87,7 +87,7 @@ public class ControlSpellEffect extends SpellAbilityEffect {
                     if (remember) {
                         source.addRemembered(c);
                     }
-                    c.setController(si.getActivatingPlayer(), tStamp);
+                    c.addTempController(si.getActivatingPlayer(), tStamp);
                 }
             }
 
@@ -98,7 +98,7 @@ public class ControlSpellEffect extends SpellAbilityEffect {
             if (remember) {
                 source.addRemembered(tgtC);
             }
-            tgtC.setController(newController, tStamp);
+            tgtC.addTempController(newController, tStamp);
             si.setActivatingPlayer(newController);
         }
     }

@@ -3,5 +3,5 @@ ManaCost:1 G W
 Types:Creature Centaur Cleric
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, each player gains 4 life.
-SVar:TrigGainLife:DB$GainLife | Defined$ Player | LifeAmount$ 4
+SVar:TrigGainLife:DB$ GainLife | Defined$ Player | LifeAmount$ 4
 Oracle:When Centaur Peacemaker enters the battlefield, each player gains 4 life.

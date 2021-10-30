@@ -5,6 +5,6 @@ PT:3/3
 K:First Strike
 K:Deathtouch
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ Whenever a creature an opponent controls dies, you may return target artifact card from your graveyard to your hand.
-SVar:TrigChange:DB$ChangeZone | ValidTgts$ Artifact.YouCtrl | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target artifact card in your graveyard
+SVar:TrigChange:DB$ ChangeZone | ValidTgts$ Artifact.YouCtrl | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target artifact card in your graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glissa_the_traitor.jpg
 Oracle:First strike, deathtouch\nWhenever a creature an opponent controls dies, you may return target artifact card from your graveyard to your hand.

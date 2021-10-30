@@ -1,0 +1,18 @@
+[metadata]
+Code=Q06
+Date=2021-10-15
+Name=Pioneer Challenge Decks 2021
+Type=Promo
+ScryfallCode=Q06
+
+[cards]
+1 R Approach of the Second Sun @Kev Walker
+2 C Ethereal Armor @Daarken
+3 R Isolate @Adame Minguez
+4 U Silkwrap @David Gaillet
+5 C Hidden Strings @Daarken
+6 M Chandra, Torch of Defiance @Magali Villeneuve
+7 U Searing Blood @Daniel Ljunggren
+8 U Wild Slash @Raymond Swanland
+9 R Lurrus of the Dream-Den @Slawomir Maniak
+10 R Spell Queller @Adam Paquette

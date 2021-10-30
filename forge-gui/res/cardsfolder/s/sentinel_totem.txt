@@ -2,7 +2,7 @@ Name:Sentinel Totem
 ManaCost:1
 Types:Artifact
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 1.
-SVar:TrigScry:DB$Scry | ScryNum$ 1
+SVar:TrigScry:DB$ Scry | ScryNum$ 1
 A:AB$ ChangeZoneAll | Cost$ T Exile<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | AILogic$ ExileGraveyards | SpellDescription$ Exile all cards from all graveyards.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sentinel_totem.jpg
 Oracle:When Sentinel Totem enters the battlefield, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)\n{T}, Exile Sentinel Totem: Exile all cards from all graveyards.

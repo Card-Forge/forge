@@ -11,5 +11,5 @@ Name:Intervention
 ManaCost:2 R W
 Types:Instant
 A:SP$ DealDamage | Cost$ 2 R W | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SubAbility$ DBGainLife | SpellDescription$ Target player deals 3 damage to any target and you gain 3 life.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 3
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
 Oracle:Intervention deals 3 damage to any target and you gain 3 life.

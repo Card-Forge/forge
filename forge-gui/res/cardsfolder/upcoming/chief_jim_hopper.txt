@@ -1,0 +1,12 @@
+Name:Chief Jim Hopper
+ManaCost:2 R W
+Types:Legendary Creature Human Soldier
+PT:4/4
+K:Menace
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, investigate once for each nontoken attacking creature.
+SVar:TrigInvestigate:DB$ Investigate | Num$ X
+SVar:X:Count$Valid Creature.attacking+nonToken
+K:Friends forever
+DeckHas:Ability$Investigate & Ability$Token & Ability$Sacrifice
+SVar:HasAttackEffect:TRUE
+Oracle:Menace\nWhenever Chief Jim Hopper attacks, investigate once for each nontoken attacking creature.\nFriends forever (You can have two commanders if both have friends forever.)

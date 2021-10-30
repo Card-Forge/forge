@@ -6,7 +6,7 @@ A:SP$ Attach | Cost$ 2 W | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Land.AttachedBy | AddAbility$ PreventDamage | Description$ Enchanted land has "{T}: Prevent the next 1 damage that would be dealt to you this turn."
 SVar:PreventDamage:AB$ PreventDamage | Cost$ T | Defined$ You | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to you this turn.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 white Knight creature token with vigilance.
-SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | LegacyImage$ w 2 2 knight vigilance rtr
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | LegacyImage$ w 2 2 knight vigilance rtr
 SVar:NonStackingAttachEffect:True
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/security_blockade.jpg

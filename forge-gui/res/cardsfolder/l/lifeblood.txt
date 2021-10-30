@@ -2,7 +2,7 @@ Name:Lifeblood
 ManaCost:2 W W
 Types:Enchantment
 T:Mode$ Taps | ValidCard$ Mountain.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a Mountain an opponent controls becomes tapped, you gain 1 life.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ 1 | Defined$ You
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1 | Defined$ You
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lifeblood.jpg
 Oracle:Whenever a Mountain an opponent controls becomes tapped, you gain 1 life.

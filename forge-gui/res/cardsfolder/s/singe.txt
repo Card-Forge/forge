@@ -2,6 +2,6 @@ Name:Singe
 ManaCost:R
 Types:Instant
 A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ DBColor | SpellDescription$ CARDNAME deals 1 damage to target creature. That creature becomes black until end of turn.
-SVar:DBColor:DB$Animate | Colors$ Black | OverwriteColors$ True | Defined$ Targeted
+SVar:DBColor:DB$ Animate | Colors$ Black | OverwriteColors$ True | Defined$ Targeted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/singe.jpg
 Oracle:Singe deals 1 damage to target creature. That creature becomes black until end of turn.

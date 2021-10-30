@@ -2,7 +2,7 @@ Name:Jade Idol
 ManaCost:4
 Types:Artifact
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, CARDNAME becomes a 4/4 Spirit artifact creature until end of turn.
-SVar:TrigAnimate:DB$Animate | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Creature,Artifact,Spirit
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Creature,Artifact,Spirit
 SVar:BuffedBy:Arcane,Spirit
 AI:RemoveDeck:Random
 DeckHints:Type$Spirit|Arcane

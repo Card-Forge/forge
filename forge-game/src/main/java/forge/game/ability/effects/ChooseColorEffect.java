@@ -10,6 +10,7 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.Localizer;
 
@@ -52,7 +53,7 @@ public class ChooseColorEffect extends SpellAbilityEffect {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                List<String> chosenColors;
+                List<String> chosenColors = new ArrayList<>();
                 int cntMin = sa.hasParam("TwoColors") ? 2 : 1;
                 int cntMax = sa.hasParam("TwoColors") ? 2 : sa.hasParam("OrColors") ? colorChoices.size() : 1;
                 String prompt = null;
@@ -69,12 +70,23 @@ public class ChooseColorEffect extends SpellAbilityEffect {
                         prompt = Localizer.getInstance().getMessage("lblChooseNColors", Lang.getNumeral(cntMax));
                     }
                 }
-                chosenColors = p.getController().chooseColors(prompt, sa, cntMin, cntMax, colorChoices);
+                Player noNotify = p;
+                if (sa.hasParam("Random")) {
+                    String choice;
+                    for (int i=0; i<cntMin; i++) {
+                        choice = Aggregates.random(colorChoices);
+                        colorChoices.remove(choice);
+                        chosenColors.add(choice);
+                    }
+                    noNotify = null;
+                } else {
+                    chosenColors = p.getController().chooseColors(prompt, sa, cntMin, cntMax, colorChoices);
+                }
                 if (chosenColors.isEmpty()) {
                     return;
                 }
                 card.setChosenColors(chosenColors);
-                p.getGame().getAction().notifyOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), Lang.joinHomogenous(chosenColors)), p);
+                p.getGame().getAction().notifyOfValue(sa, p, Lang.joinHomogenous(chosenColors), noNotify);
             }
         }
     }

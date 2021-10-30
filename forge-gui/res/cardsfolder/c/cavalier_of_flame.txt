@@ -5,7 +5,7 @@ PT:6/5
 A:AB$ PumpAll | Cost$ 1 R | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | KW$ Haste | SpellDescription$ Creatures you control get +1/+0 and gain haste until end of turn.
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, discard any number of cards, then draw that many cards.
 SVar:TrigDiscard:DB$ Discard | Cost$ 3 R | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Discard any number of cards, then draw that many cards.
-SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ Y | SubAbility$ DBCleanup
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Remembered$Amount
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, it deals X damage to each opponent and each planeswalker they control, where X is the number of land cards in your graveyard.

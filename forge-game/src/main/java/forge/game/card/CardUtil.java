@@ -85,10 +85,6 @@ public final class CardUtil {
         return false;
     }
 
-    public static ColorSet getColors(final Card c) {
-        return c.determineColor();
-    }
-
     public static boolean isStackingKeyword(final String keyword) {
         String kw = keyword;
         if (kw.startsWith("HIDDEN")) {
@@ -158,7 +154,6 @@ public final class CardUtil {
 
     public static List<Card> getLastTurnCast(final String valid, final Card src, final CardTraitBase ctb) {
         return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, src.getController(), src, ctb);
-
     }
 
     public static List<Card> getLKICopyList(final Iterable<Card> in, Map<Integer, Card> cachedMap) {
@@ -252,7 +247,7 @@ public final class CardUtil {
 
         newCopy.setCounters(Maps.newHashMap(in.getCounters()));
 
-        newCopy.setColor(in.determineColor().getColor());
+        newCopy.setColor(in.getColor().getColor());
         newCopy.setPhasedOut(in.isPhasedOut());
 
         newCopy.setReceivedDamageFromThisTurn(in.getReceivedDamageFromThisTurn());
@@ -343,7 +338,7 @@ public final class CardUtil {
 
         byte combinedColor = 0;
         for (Card tgt : tgts) {
-            ColorSet cs = CardUtil.getColors(tgt);
+            ColorSet cs = tgt.getColor();
             for (byte color : MagicColor.WUBRG) {
                 if(!cs.hasAnyColor(color))
                     continue;
@@ -367,7 +362,7 @@ public final class CardUtil {
     public static ColorSet getColorsYouCtrl(final Player p) {
         byte b = 0;
         for (Card c : p.getCardsIn(ZoneType.Battlefield)) {
-            b |= c.determineColor().getColor();
+            b |= c.getColor().getColor();
         }
         return ColorSet.fromMask(b);
     }

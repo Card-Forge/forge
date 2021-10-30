@@ -67,6 +67,9 @@ public class CostFlipCoin extends CostPart {
         return true;
     }
 
+    @Override
+    public boolean isReusable() { return true; }
+
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }

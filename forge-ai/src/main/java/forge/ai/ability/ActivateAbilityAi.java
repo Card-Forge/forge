@@ -35,7 +35,11 @@ public class ActivateAbilityAi extends SpellAbilityAi {
             }
         } else {
             sa.resetTargets();
-            sa.getTargets().add(opp);
+            if (sa.canTarget(opp)) {
+                sa.getTargets().add(opp);
+            } else {
+                return false;
+            }
         }
 
         boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
@@ -57,7 +61,6 @@ public class ActivateAbilityAi extends SpellAbilityAi {
 
                 return defined.contains(opp);
             }
-
         } else {
             sa.resetTargets();
             sa.getTargets().add(opp);

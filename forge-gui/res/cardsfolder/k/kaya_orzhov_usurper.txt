@@ -3,7 +3,7 @@ ManaCost:1 W B
 Types:Legendary Planeswalker Kaya
 Loyalty:3
 A:AB$ ChangeZone | Cost$ AddCounter<1/LOYALTY> | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ 2 | TargetsFromSingleZone$ True | ValidTgts$ Card | TgtPrompt$ Select target card from a graveyard | Planeswalker$ True | SubAbility$ DBGainLife | RememberChanged$ True | SpellDescription$ Exile up to two target cards from a single graveyard. You gain 2 life if at least one creature card was exiled this way.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ ChangeZone | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Choose target nonland permanent with mana value 1 or less | ValidTgts$ Permanent.nonLand+cmcLE1 | SpellDescription$ Exile target nonland permanent with mana value 1 or less.
 A:AB$ DealDamage | Cost$ SubCounter<5/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Player | RememberTargets$ True | NumDmg$ X | SubAbility$ DBYouGainLife | SpellDescription$ CARDNAME deals damage to target player equal to the number of cards that player owns in exile and you gain that much life.

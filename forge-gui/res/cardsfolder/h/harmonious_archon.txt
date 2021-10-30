@@ -6,6 +6,6 @@ K:Flying
 S:Mode$ Continuous | Affected$ Creature.nonArchon | SetPower$ 3 | SetToughness$ 3 | Description$ Non-Archon creatures have base power and toughness 3/3.
 AI:RemoveDeck:Random
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 white Human creature tokens.
-SVar:TrigToken:DB$Token | TokenAmount$ 2 | TokenScript$ w_1_1_human | TokenOwner$ You | LegacyImage$ w 1 1 human eld
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_human | TokenOwner$ You | LegacyImage$ w 1 1 human eld
 DeckHas:Ability$Token
 Oracle:Flying\nNon-Archon creatures have base power and toughness 3/3.\nWhen Harmonious Archon enters the battlefield, create two 1/1 white Human creature tokens.

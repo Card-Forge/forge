@@ -5,7 +5,7 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Green+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other green creatures you control get +1/+1.
 S:Mode$ Continuous | Affected$ Creature.Black+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other black creatures you control get +1/+1.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, you may create a 1/1 black and green Worm creature token.
-SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenScript$ bg_1_1_worm | TokenOwner$ You | LegacyImage$ bg 1 1 worm eve
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ bg_1_1_worm | TokenOwner$ You | LegacyImage$ bg 1 1 worm eve
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/creakwood_liege.jpg
 Oracle:Other black creatures you control get +1/+1.\nOther green creatures you control get +1/+1.\nAt the beginning of your upkeep, you may create a 1/1 black and green Worm creature token.

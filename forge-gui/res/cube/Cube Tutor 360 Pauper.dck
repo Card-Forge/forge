@@ -33,7 +33,7 @@ Name=Cube Tutor 360 Pauper
 1 Totem-Guide Hartebeest|ORI
 1 Porcelain Legionnaire|NPH
 1 Cloudshift|A25
-1 Mana Tithe|STX
+1 Mana Tithe|STA
 1 Apostle's Blessing|MM2
 1 Feeling of Dread|ISD
 1 Momentary Blink|MM3
@@ -83,7 +83,7 @@ Name=Cube Tutor 360 Pauper
 1 Aethersnipe|UMA
 1 Errant Ephemeron|MMA
 1 Spined Thopter|NPH
-1 Brainstorm|STX
+1 Brainstorm|STA
 1 Force Spike|7ED
 1 Boomerang|10E
 1 Counterspell|MH2
@@ -106,7 +106,7 @@ Name=Cube Tutor 360 Pauper
 1 Preordain|M11
 1 Silent Departure|EMA
 1 Hands of Binding|GTC
-1 Compulsive Research|STX
+1 Compulsive Research|STA
 1 Probe|INV
 1 Deep Analysis|EMA
 1 Foresee|M11
@@ -146,7 +146,7 @@ Name=Cube Tutor 360 Pauper
 1 Vendetta|ROE
 1 Devour Flesh|GTC
 1 Diabolic Edict|MH1
-1 Doom Blade|STX
+1 Doom Blade|STA
 1 Grim Harvest|CSP
 1 Last Gasp|UMA
 1 Nameless Inversion|MM2
@@ -154,11 +154,11 @@ Name=Cube Tutor 360 Pauper
 1 Rend Flesh|CHK
 1 Snuff Out|MMQ
 1 Death Denied|UMA
-1 Duress|STX
+1 Duress|STA
 1 Unearth|MH1
 1 Disturbed Burial|TMP
 1 Hymn to Tourach|EMA
-1 Sign in Blood|STX
+1 Sign in Blood|STA
 1 Ashes to Ashes|5ED
 1 Crippling Fatigue|TOR
 1 Read the Bones|ORI
@@ -190,7 +190,7 @@ Name=Cube Tutor 360 Pauper
 1 Slash Panther|NPH
 1 Brute Force|MM2
 1 Burst Lightning|MM2
-1 Lightning Bolt|STX
+1 Lightning Bolt|STA
 1 Incinerate|M12
 1 Lash Out|LRW
 1 Searing Blaze|WWK
@@ -200,7 +200,7 @@ Name=Cube Tutor 360 Pauper
 1 Staggershock|IMA
 1 Fireblast|VMA
 1 Chain Lightning|MPS_AKH
-1 Faithless Looting|STX
+1 Faithless Looting|STA
 1 Firebolt|MH1
 1 Flame Slash|CN2
 1 Reckless Charge|MH1
@@ -262,7 +262,7 @@ Name=Cube Tutor 360 Pauper
 1 Edge of Autumn|FUT
 1 Rampant Growth|MM2
 1 Travel Preparations|UMA
-1 Cultivate|STX
+1 Cultivate|STA
 1 Kodama's Reach|UMA
 1 Rancor|A25
 1 Arachnus Web|MM3

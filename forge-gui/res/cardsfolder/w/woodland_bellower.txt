@@ -3,6 +3,6 @@ ManaCost:4 G G
 Types:Creature Beast
 PT:6/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a nonlegendary green creature card with mana value 3 or less, put it onto the battlefield, then shuffle.
-SVar:TrigChange:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.Creature+Green+nonLegendary+cmcLE3 | ChangeNum$ 1
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.Creature+Green+nonLegendary+cmcLE3 | ChangeNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/woodland_bellower.jpg
 Oracle:When Woodland Bellower enters the battlefield, you may search your library for a nonlegendary green creature card with mana value 3 or less, put it onto the battlefield, then shuffle.

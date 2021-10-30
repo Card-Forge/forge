@@ -3,7 +3,7 @@ ManaCost:4 U
 Types:Creature Illusion
 PT:2/2
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SubAbility$ DB1 | SpellDescription$ CARDNAME deals 2 damage to any target and 3 damage to itself.
-SVar:DB1:DB$DealDamage | NumDmg$ 3 | Defined$ Self
+SVar:DB1:DB$ DealDamage | NumDmg$ 3 | Defined$ Self
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psionic_entity.jpg
 Oracle:{T}: Psionic Entity deals 2 damage to any target and 3 damage to itself.

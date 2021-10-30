@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may look at the top five cards of your library. If you do, reveal up to one basic land card from among them, then put that card on top of your library and the rest on the bottom in any order.
-SVar:TrigDig:DB$Dig | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Land.Basic | DestinationZone$ Library | LibraryPosition$ 0
+SVar:TrigDig:DB$ Dig | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Land.Basic | DestinationZone$ Library | LibraryPosition$ 0
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fertile_thicket.jpg
 Oracle:Fertile Thicket enters the battlefield tapped.\nWhen Fertile Thicket enters the battlefield, you may look at the top five cards of your library. If you do, reveal up to one basic land card from among them, then put that card on top of your library and the rest on the bottom in any order.\n{T}: Add {G}.

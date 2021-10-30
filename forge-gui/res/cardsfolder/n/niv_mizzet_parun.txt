@@ -5,7 +5,7 @@ PT:5/5
 K:Flying
 K:CARDNAME can't be countered.
 T:Mode$ Drawn | ValidCard$ Card.YouOwn | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you draw a card, CARDNAME deals 1 damage to any target.
-SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a player casts an instant or sorcery spell, you draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 DeckHints:Type$Instant|Sorcery

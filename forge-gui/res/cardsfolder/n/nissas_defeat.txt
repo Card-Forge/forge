@@ -2,7 +2,7 @@ Name:Nissa's Defeat
 ManaCost:2 G
 Types:Sorcery
 A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Forest,Enchantment.Green,Planeswalker.Green | TgtPrompt$ Select target Forest, green enchantment, or green planeswalker | SubAbility$ DBDraw | SpellDescription$ Destroy target Forest, green enchantment, or green planeswalker. If that permanent was a Nissa planeswalker, draw a card.
-SVar:DBDraw:DB$Draw | NumCards$ 1 | ConditionDefined$ Targeted | ConditionPresent$ Planeswalker.Nissa
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Targeted | ConditionPresent$ Planeswalker.Nissa
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nissas_defeat.jpg
 Oracle:Destroy target Forest, green enchantment, or green planeswalker. If that permanent was a Nissa planeswalker, draw a card.

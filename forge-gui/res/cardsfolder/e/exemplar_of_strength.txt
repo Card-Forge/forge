@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ M1M1 | IsCurse$ True | CounterNum$ 3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigRemoveCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, remove a -1/-1 counter from it. If you do, you gain 1 life.
 SVar:TrigRemoveCounter:DB$ RemoveCounter | CounterType$ M1M1 | CounterNum$ 1 | RememberRemoved$ True | SubAbility$ DBGainLife
-SVar:DBGainLife:DB$GainLife | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | LifeAmount$ 1 | SubAbility$ DBCleanup
+SVar:DBGainLife:DB$ GainLife | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | LifeAmount$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
 SVar:X:Count$RememberedSize 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exemplar_of_strength.jpg

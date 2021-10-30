@@ -7,6 +7,6 @@ SVar:LandTapped:DB$ Tap | Defined$ Self | SubAbility$ DBAddCounter | ETB$ True |
 SVar:DBAddCounter:DB$ PutCounter | Defined$ Self | ETB$ True | CounterType$ SLUMBER | CounterNum$ 5
 S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_SLUMBER | AddType$ Land | RemoveCardTypes$ True | Description$ As long as CARDNAME has a slumber counter on it, it's a land. (It's not a creature.)
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigRemoveCounter | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast a spell, you may remove a slumber counter from CARDNAME.
-SVar:TrigRemoveCounter:DB$RemoveCounter | Defined$ Self | CounterType$ SLUMBER | CounterNum$ 1 | AILogic$ Always
+SVar:TrigRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ SLUMBER | CounterNum$ 1 | AILogic$ Always
 A:AB$ Mana | Cost$ T | Produced$ G U | SpellDescription$ Add {G}{U}.
 Oracle:Arixmethes, Slumbering Isle enters the battlefield tapped with five slumber counters on it.\nAs long as Arixmethes has a slumber counter on it, it's a land. (It's not a creature.)\nWhenever you cast a spell, you may remove a slumber counter from Arixmethes.\n{T}: Add {G}{U}.

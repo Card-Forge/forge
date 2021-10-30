@@ -2,6 +2,6 @@ Name:Tranquil Path
 ManaCost:4 G
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 4 G | ValidCards$ Enchantment | SpellDescription$ Destroy all enchantments. | SubAbility$ DBDraw
-SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_path.jpg
 Oracle:Destroy all enchantments.\nDraw a card.

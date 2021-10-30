@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Sorcery
 K:Escalate:Discard<1/Card>
 A:SP$ Charm | Cost$ 1 B | MinCharmNum$ 1 | CharmNum$ 3 | Choices$ DBDiscard,DBPump,DBDrain
-SVar:DBDiscard:DB$Discard | ValidTgts$ Opponent | NumCards$ 1 | DiscardValid$ Instant,Sorcery | Mode$ RevealYouChoose | SpellDescription$ Target opponent reveals their hand. You choose a instant or sorcery card from it. That player discards that card.
+SVar:DBDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 1 | DiscardValid$ Instant,Sorcery | Mode$ RevealYouChoose | SpellDescription$ Target opponent reveals their hand. You choose a instant or sorcery card from it. That player discards that card.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn.
 SVar:DBDrain:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses 2 life and you gain 2 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2

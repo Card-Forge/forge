@@ -3,7 +3,7 @@ ManaCost:W
 Types:Creature Human Soldier
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Human.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another Human enters the battlefield under your control, put a +1/+1 counter on CARDNAME.
-SVar:TrigPutCounter:DB$PutCounter | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
 SVar:BuffedBy:Human
 SVar:Picture:http://www.wizards.com/global/images/magic/general/champion_of_the_parish.jpg
 Oracle:Whenever another Human enters the battlefield under your control, put a +1/+1 counter on Champion of the Parish.

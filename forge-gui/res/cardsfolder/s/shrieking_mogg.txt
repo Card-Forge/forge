@@ -4,7 +4,7 @@ Types:Creature Goblin
 PT:1/1
 K:Haste
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters the battlefield, tap all other creatures.
-SVar:TrigTapAll:DB$TapAll | ValidCards$ Creature.Other
+SVar:TrigTapAll:DB$ TapAll | ValidCards$ Creature.Other
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrieking_mogg.jpg
 Oracle:Haste\nWhen Shrieking Mogg enters the battlefield, tap all other creatures.

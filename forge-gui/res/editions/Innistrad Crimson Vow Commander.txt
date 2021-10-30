@@ -1,0 +1,14 @@
+[metadata]
+Code=VOC
+Date=2021-11-19
+Name=Innistrad: Crimson Vow Commander
+Type=Commander
+ScryfallCode=VOC
+
+[cards]
+1 M Millicent, Restless Revenant @Denman Rooke
+2 M Strefan, Maurer Progenitor @Chris Rallis
+32 M Wedding Ring @Olena Richards
+39 M Millicent, Restless Revenant @Denman Rooke
+40 M Strefan, Maurer Progenitor @Chris Rallis
+70 M Wedding Ring @Olena Richards

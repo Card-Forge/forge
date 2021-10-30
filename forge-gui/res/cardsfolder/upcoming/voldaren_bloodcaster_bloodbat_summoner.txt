@@ -1,0 +1,25 @@
+Name:Voldaren Bloodcaster
+ManaCost:1 B
+Types:Creature Vampire Wizard
+PT:2/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Creature.Other+nonToken+YouCtrl | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another nontoken creature you control dies, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_blood_draw
+T:Mode$ TokenCreated | ValidPlayer$ You | ValidToken$ Blood | IsPresent$ Blood.token+YouCtrl | PresentCompare$ GE5 | Execute$ TrigTransform | TriggerZone$ Battlefield | TriggerDescription$ Whenever you create a Blood token, if you control five or more Blood tokens, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+DeckHas:Ability$Token & Ability$Sacrifice & Type$Blood
+Oracle:Flying\nWhenever Voldaren Bloodcaster or another nontoken creature you control dies, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")\nWhenever you create a Blood token, if you control five or more Blood tokens, transform Voldaren Bloodcaster.
+
+ALTERNATE
+
+Name:Bloodbat Summoner
+ManaCost:no cost
+Colors:black
+Types:Creature Vampire Wizard
+PT:3/3
+K:Flying
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigAnimate | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, up to one target Blood token you control becomes a 2/2 black Bat creature with flying and haste in addition to its other types.
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Blood.token+YouCtrl | TgtPrompt$ Select up to one target Blood token you control | TargetMin$ 0 | TargetMax$ 1 | Power$ 2 | Toughness$ 2 | Colors$ Black | OverwriteColors$ True | Types$ Creature,Bat | Keywords$ Flying & Haste | Duration$ Permanent
+DeckHas:Type$Bat
+Oracle:Flying\nAt the beginning of combat on your turn, up to one target Blood token you control becomes a 2/2 black Bat creature with flying and haste in addition to its other types.

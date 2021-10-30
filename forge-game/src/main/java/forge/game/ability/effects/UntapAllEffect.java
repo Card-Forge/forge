@@ -24,15 +24,9 @@ public class UntapAllEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
-
-        String valid = "";
         CardCollectionView list;
-
         List<Player> tgtPlayers = getTargetPlayers(sa);
-
-        if (sa.hasParam("ValidCards")) {
-            valid = sa.getParam("ValidCards");
-        }
+        final String valid = sa.getParamOrDefault("ValidCards", "");
 
         if (!sa.usesTargeting() && !sa.hasParam("Defined")) {
             list = sa.getActivatingPlayer().getGame().getCardsIn(ZoneType.Battlefield);

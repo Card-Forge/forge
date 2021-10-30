@@ -396,7 +396,6 @@ public abstract class DeckGeneratorBase {
      * @return dual land names
      */
     protected List<String> getDualLandList() {
-
         if (colors.countColors() > 3) {
             addCardNameToList("Rupture Spire", dLands);
             addCardNameToList("Undiscovered Paradise", dLands);

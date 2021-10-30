@@ -1115,16 +1115,16 @@ public class CardView extends GameEntityView {
             return get(TrackableProperty.RightSplitColors);
         }
         void updateColors(Card c) {
-            set(TrackableProperty.Colors, c.determineColor());
+            set(TrackableProperty.Colors, c.getColor());
         }
         void updateColors(CardState c) {
             set(TrackableProperty.Colors, ColorSet.fromMask(c.getColor()));
         }
         void setOriginalColors(Card c) {
-            set(TrackableProperty.OriginalColors, c.determineColor());
+            set(TrackableProperty.OriginalColors, c.getColor());
             if (c.isSplitCard()) {
-                set(TrackableProperty.LeftSplitColors, c.determineColor(c.getState(CardStateName.LeftSplit)));
-                set(TrackableProperty.RightSplitColors, c.determineColor(c.getState(CardStateName.RightSplit)));
+                set(TrackableProperty.LeftSplitColors, c.getColor(c.getState(CardStateName.LeftSplit)));
+                set(TrackableProperty.RightSplitColors, c.getColor(c.getState(CardStateName.RightSplit)));
             }
         }
         void updateHasChangeColors(boolean hasChangeColor) {

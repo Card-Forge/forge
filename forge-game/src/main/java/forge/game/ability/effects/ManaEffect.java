@@ -189,7 +189,7 @@ public class ManaEffect extends SpellAbilityEffect {
                             res, sa.getActivatingPlayer(), card, sa);
                     byte colors = 0;
                     for (Card c : list) {
-                        colors |= c.determineColor().getColor();
+                        colors |= c.getColor().getColor();
                     }
                     if (colors == 0) return;
                     abMana.setExpressChoice(ColorSet.fromMask(colors));

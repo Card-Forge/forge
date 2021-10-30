@@ -50,7 +50,7 @@ Name=Legendary Cube
 1 Boros Signet|MM3
 1 Brago, King Eternal|VMA
 1 Brainbite|ARB
-1 Brainstorm|STX
+1 Brainstorm|STA
 1 Breeding Pool|RNA
 1 Brimaz, King of Oreskos|BNG
 1 Brion Stoutarm|A25
@@ -79,7 +79,7 @@ Name=Legendary Cube
 1 Coalition Victory|TSB
 1 Coldsteel Heart|CSP
 1 Commander Eesha|JUD
-1 Compulsive Research|STX
+1 Compulsive Research|STA
 1 Condemn|M11
 1 Conflux|A25
 1 Contagion Clasp|SOM
@@ -90,9 +90,9 @@ Name=Legendary Cube
 1 Crovax, Ascendant Hero|PLC
 1 Cruel Ultimatum|MM3
 1 Crumbling Necropolis|MM3
-1 Crux of Fate|STX
+1 Crux of Fate|STA
 1 Crystal Ball|M11
-1 Cultivate|STX
+1 Cultivate|STA
 1 Cyclonic Rift|2XM
 1 Daretti, Scrap Savant|C16
 1 Dark Depths|2XM
@@ -123,7 +123,7 @@ Name=Legendary Cube
 1 Dreadship Reef|TSP
 1 Dromoka's Command|DTK
 1 Drowned Catacomb|XLN
-1 Duress|STX
+1 Duress|STA
 1 Dwynen, Gilt-Leaf Daen|ORI
 1 Edric, Spymaster of Trest|VMA
 1 Eiganjo Castle|CHK
@@ -147,7 +147,7 @@ Name=Legendary Cube
 1 Ezuri, Claw of Progress|C15
 1 Fact or Fiction|MH1
 1 Faith's Fetters|M21
-1 Faithless Looting|STX
+1 Faithless Looting|STA
 1 Far // Away|DGM
 1 Farseek|M13
 1 Fellwar Stone|9ED
@@ -180,7 +180,7 @@ Name=Legendary Cube
 1 Glissa, the Traitor|MBS
 1 Godless Shrine|RNA
 1 Godo, Bandit Warlord|2XM
-1 Gods Willing|STX
+1 Gods Willing|STA
 1 Golgari Rot Farm|IMA
 1 Golgari Signet|MM3
 1 Grasslands|VMA
@@ -191,7 +191,7 @@ Name=Legendary Cube
 1 Gruul Turf|IMA
 1 Hallowed Fountain|RNA
 1 Hanna, Ship's Navigator|2XM
-1 Harmonize|STX
+1 Harmonize|STA
 1 Heartless Hidetsugu|CNS
 1 Hedron Archive|BFZ
 1 Helvault|DKA
@@ -259,7 +259,7 @@ Name=Legendary Cube
 1 Kozilek, Butcher of Truth|UMA
 1 Krenko, Mob Boss|M13
 1 Kresh the Bloodbraided|ALA
-1 Krosan Grip|STX
+1 Krosan Grip|STA
 1 Krosan Verge|JUD
 1 Kumano, Master Yamabushi|CHK
 1 Kurkesh, Onakke Ancient|M15
@@ -268,7 +268,7 @@ Name=Legendary Cube
 1 Lavalanche|ARB
 1 Legacy Weapon|10E
 1 Life's Legacy|M15
-1 Lightning Bolt|STX
+1 Lightning Bolt|STA
 1 Lightning Greaves|2XM
 1 Liliana, Heretical Healer|ORI
 1 Linvala, Keeper of Silence|MM3
@@ -308,7 +308,7 @@ Name=Legendary Cube
 1 Misty Rainforest|MH2
 1 Mizzium Mortars|MM3
 1 Mizzix of the Izmagnus|C15
-1 Mizzix's Mastery|STX
+1 Mizzix's Mastery|STA
 1 Molten Slagheap|TSP
 1 Momentous Fall|ROE
 1 Mortify|RNA
@@ -327,7 +327,7 @@ Name=Legendary Cube
 1 Nagao, Bound by Honor|CHK
 1 Nath of the Gilt-Leaf|C16
 1 Naturalize|M19
-1 Negate|STX
+1 Negate|STA
 1 Night's Whisper|EMA
 1 Nissa's Revelation|ORI
 1 Nissa, Vastwood Seer|ORI
@@ -374,7 +374,7 @@ Name=Legendary Cube
 1 Prophetic Prism|A25
 1 Psychotic Fury|DIS
 1 Pure // Simple|DIS
-1 Putrefy|STX
+1 Putrefy|STA
 1 Pyromancer's Goggles|ORI
 1 Radha, Heir to Keld|PLC
 1 Radiant Purge|DTK
@@ -388,7 +388,7 @@ Name=Legendary Cube
 1 Read the Bones|ORI
 1 Recoup|ODY
 1 Reflecting Pool|CNS
-1 Regrowth|STX
+1 Regrowth|STA
 1 Reiterate|TSP
 1 Reki, the History of Kamigawa|SOK
 1 Repeal|IMA
@@ -436,7 +436,7 @@ Name=Legendary Cube
 1 Sidisi, Brood Tyrant|KTK
 1 Sidisi, Undead Vizier|DTK
 1 Sigarda, Host of Herons|AVR
-1 Sign in Blood|STX
+1 Sign in Blood|STA
 1 Silence the Believers|JOU
 1 Silumgar's Command|DTK
 1 Silumgar, the Drifting Death|FRF
@@ -479,7 +479,7 @@ Name=Legendary Cube
 1 Sylvan Bounty|CN2
 1 Tahngarth, Talruum Hero|PLS
 1 Taiga|VMA
-1 Tainted Pact|STX
+1 Tainted Pact|STA
 1 Tajic, Blade of the Legion|DGM
 1 Talisman of Dominance|MRD
 1 Talisman of Impulse|MRD
@@ -519,7 +519,7 @@ Name=Legendary Cube
 1 Thrun, the Last Troll|MBS
 1 Time of Need|CHK
 1 Time Stop|10E
-1 Time Warp|STX
+1 Time Warp|STA
 1 Titania, Protector of Argoth|MH2
 1 Tithe|VIS
 1 Tolsimir Wolfblood|RAV
@@ -550,7 +550,7 @@ Name=Legendary Cube
 1 Untaidake, the Cloud Keeper|CHK
 1 Urabrask the Hidden|IMA
 1 Urban Evolution|UMA
-1 Urza's Rage|STX
+1 Urza's Rage|STA
 1 Utter End|KTK
 1 Uyo, Silent Prophet|CHK
 1 Valorous Stance|2XM

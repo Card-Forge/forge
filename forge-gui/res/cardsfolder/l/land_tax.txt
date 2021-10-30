@@ -2,7 +2,7 @@ Name:Land Tax
 ManaCost:W
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChange | CheckSVar$ Y | SVarCompare$ GTX | TriggerDescription$ At the beginning of your upkeep, if an opponent controls more lands than you, you may search your library for up to three basic land cards, reveal them, put them into your hand, then shuffle.
-SVar:TrigChange:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 3 | ShuffleNonMandatory$ True
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 3 | ShuffleNonMandatory$ True
 SVar:X:Count$Valid Land.YouCtrl
 SVar:Y:PlayerCountOpponents$HighestValid Land.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/land_tax.jpg

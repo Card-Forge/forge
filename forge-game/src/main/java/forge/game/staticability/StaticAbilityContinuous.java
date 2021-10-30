@@ -32,6 +32,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.GameCommand;
+import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -45,13 +46,14 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CardState;
 import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
@@ -116,9 +118,6 @@ public final class StaticAbilityContinuous {
         se.setParams(params);
         se.setTimestamp(hostCard.getTimestamp());
 
-        String changeColorWordsTo = null;
-        Card gainTextSource = null;
-
         String addP = "";
         int powerBonus = 0;
         String addT = "";
@@ -136,7 +135,7 @@ public final class StaticAbilityContinuous {
         String[] addSVars = null;
         List<String> addTypes = null;
         List<String> removeTypes = null;
-        String addColors = null;
+        ColorSet addColors = null;
         String[] addTriggers = null;
         String[] addStatics = null;
         boolean removeAllAbilities = false;
@@ -164,23 +163,6 @@ public final class StaticAbilityContinuous {
         if (layer == StaticAbilityLayer.RULES && params.containsKey("GlobalRule")) {
             final StaticEffects effects = game.getStaticEffects();
             effects.setGlobalRuleChange(GlobalRuleChange.fromString(params.get("GlobalRule")));
-        }
-
-        if (layer == StaticAbilityLayer.TEXT && params.containsKey("GainTextOf")) {
-            final String valid = params.get("GainTextOf");
-            CardCollection allValid = CardLists.getValidCards(game.getCardsInGame(), valid, hostCard.getController(), hostCard, stAb);
-            if (allValid.size() > 1) {
-                // TODO: if ever necessary, support gaining text of multiple cards at the same time
-                System.err.println("Error: GainTextOf parameter was not defined as a unique card for " + hostCard);
-            } else if (allValid.size() == 1) {
-                gainTextSource = allValid.get(0);
-            } else {
-                gainTextSource = null;
-            }
-        }
-
-        if (layer == StaticAbilityLayer.TEXT && params.containsKey("ChangeColorWordsTo")) {
-            changeColorWordsTo = params.get("ChangeColorWordsTo");
         }
 
         if (layer == StaticAbilityLayer.SETPT &&params.containsKey("SetPower")) {
@@ -471,22 +453,22 @@ public final class StaticAbilityContinuous {
             if (params.containsKey("AddColor")) {
                 final String colors = params.get("AddColor");
                 if (colors.equals("ChosenColor")) {
-                    addColors = CardUtil.getShortColorsString(hostCard.getChosenColors());
+                    addColors = ColorSet.fromNames(hostCard.getChosenColors());
                 } else if (colors.equals("All")) {
-                    addColors = "W U B R G";
+                    addColors = ColorSet.ALL_COLORS;
                 } else {
-                    addColors = CardUtil.getShortColorsString(Arrays.asList(colors.split(" & ")));
+                    addColors = ColorSet.fromNames(colors.split(" & "));
                 }
             }
 
             if (params.containsKey("SetColor")) {
                 final String colors = params.get("SetColor");
                 if (colors.equals("ChosenColor")) {
-                    addColors = CardUtil.getShortColorsString(hostCard.getChosenColors());
+                    addColors = ColorSet.fromNames(hostCard.getChosenColors());
                 } else if (colors.equals("All")) {
-                    addColors = "W U B R G";
+                    addColors = ColorSet.ALL_COLORS;
                 } else {
-                    addColors = CardUtil.getShortColorsString(Arrays.asList(colors.split(" & ")));
+                    addColors = ColorSet.fromNames(colors.split(" & "));
                 }
                 overwriteColors = true;
             }
@@ -603,29 +585,98 @@ public final class StaticAbilityContinuous {
 
             // Gain text from another card
             if (layer == StaticAbilityLayer.TEXT) {
-                if (gainTextSource != null) {
-                    affectedCard.addTextChangeState(
-                        CardFactory.getCloneStates(gainTextSource, affectedCard, stAb), se.getTimestamp()
-                    );
-                }
-            }
+                if (params.containsKey("GainTextOf")) {
+                    CardCollection allValid = AbilityUtils.getDefinedCards(hostCard, params.get("GainTextOf"), stAb);
+                    if (!allValid.isEmpty()) {
+                        Card first = allValid.getFirst();
 
-            // Change color words
-            if (changeColorWordsTo != null) {
-                final byte color;
-                if (changeColorWordsTo.equals("ChosenColor")) {
-                    if (hostCard.hasChosenColor()) {
-                        color = MagicColor.fromName(Iterables.getFirst(hostCard.getChosenColors(), null));
-                    } else {
-                        color = 0;
+                        // for Volrath’s Shapeshifter, respect flipped state if able?
+                        CardState state = first.getState(affectedCard.isFlipped() && first.isFlipCard() ? CardStateName.Flipped : first.getCurrentStateName());
+
+                        List<SpellAbility> spellAbilities = Lists.newArrayList();
+                        List<Trigger> trigger = Lists.newArrayList();
+                        List<ReplacementEffect> replacementEffects = Lists.newArrayList();
+                        List<StaticAbility> staticAbilities = Lists.newArrayList();
+                        List<KeywordInterface> keywords = Lists.newArrayList();
+
+                        for(SpellAbility sa : state.getSpellAbilities()) {
+                            SpellAbility newSA = sa.copy(affectedCard, false);
+                            newSA.setOriginalAbility(sa); // need to be set to get the Once Per turn Clause correct
+                            newSA.setGrantorStatic(stAb);
+                            //newSA.setIntrinsic(false); needs to be changed by CardTextChanges
+
+                            spellAbilities.add(newSA);
+                        }
+                        if (params.containsKey("GainTextAbilities")) {
+                            for (String ability : params.get("GainTextAbilities").split(" & ")) {
+                                final SpellAbility sa = AbilityFactory.getAbility(AbilityUtils.getSVar(stAb, ability), affectedCard, stAb);
+                                sa.setIntrinsic(true); // needs to be affected by Text
+                                sa.setGrantorStatic(stAb);
+                                spellAbilities.add(sa);
+                            }
+                        }
+                        for (Trigger tr : state.getTriggers()) {
+                            Trigger newTr = tr.copy(affectedCard, false);
+                            //newTr.setIntrinsic(false); needs to be changed by CardTextChanges
+                            trigger.add(newTr);
+                        }
+                        for (ReplacementEffect re : state.getReplacementEffects()) {
+                            ReplacementEffect newRE = re.copy(affectedCard, false);
+                            //newRE.setIntrinsic(false); needs to be changed by CardTextChanges
+                            replacementEffects.add(newRE);
+                        }
+                        for (StaticAbility sa : state.getStaticAbilities()) {
+                            StaticAbility newST = sa.copy(affectedCard, false);
+                            //newST.setIntrinsic(false);  needs to be changed by CardTextChanges
+                            staticAbilities.add(newST);
+                        }
+                        for (KeywordInterface ki : state.getIntrinsicKeywords()) {
+                            KeywordInterface newKi = ki.copy(affectedCard, false);
+                            //newKi.setIntrinsic(false);  needs to be changed by CardTextChanges
+                            keywords.add(newKi);
+                        }
+
+                        // Volrath’s Shapeshifter has that card’s name, mana cost, color, types, abilities, power, and toughness.
+
+                        // name
+                        affectedCard.addChangedName(state.getName(), false, se.getTimestamp(), stAb.getId());
+                        // Mana cost
+                        affectedCard.addChangedManaCost(state.getManaCost(), se.getTimestamp(), stAb.getId());
+                        // color
+                        affectedCard.addColorByText(ColorSet.fromMask(state.getColor()), i, i);
+                        // type
+                        affectedCard.addChangedCardTypesByText(new CardType(state.getType()), se.getTimestamp(), stAb.getId());
+                        // abilities
+                        affectedCard.addChangedCardTraitsByText(spellAbilities, trigger, replacementEffects, staticAbilities, se.getTimestamp(), stAb.getId());
+                        affectedCard.addChangedCardKeywordsByText(keywords, se.getTimestamp(), stAb.getId(), false);
+
+                        // power and toughness
+                        affectedCard.addNewPTByText(state.getBasePower(), state.getBaseToughness(), se.getTimestamp(), stAb.getId());
                     }
-                } else {
-                    color = MagicColor.fromName(changeColorWordsTo);
                 }
 
-                if (color != 0) {
-                    final String colorName = MagicColor.toLongString(color);
-                    affectedCard.addChangedTextColorWord("Any", colorName, se.getTimestamp(), stAb.getId());
+                if (stAb.hasParam("AddNames")) { // currently only for AllNonLegendaryCreatureNames
+                    affectedCard.addChangedName(null, true, se.getTimestamp(), stAb.getId());
+                }
+
+                // Change color words
+                if (params.containsKey("ChangeColorWordsTo")) {
+                    final byte color;
+                    String changeColorWordsTo = params.get("ChangeColorWordsTo");
+                    if (changeColorWordsTo.equals("ChosenColor")) {
+                        if (hostCard.hasChosenColor()) {
+                            color = MagicColor.fromName(Iterables.getFirst(hostCard.getChosenColors(), null));
+                        } else {
+                            color = 0;
+                        }
+                    } else {
+                        color = MagicColor.fromName(changeColorWordsTo);
+                    }
+
+                    if (color != 0) {
+                        final String colorName = MagicColor.toLongString(color);
+                        affectedCard.addChangedTextColorWord(stAb.getParamOrDefault("ChangeColorWordsFrom", "Any"), colorName, se.getTimestamp(), stAb.getId());
+                    }
                 }
             }
 
@@ -640,7 +691,7 @@ public final class StaticAbilityContinuous {
                         setToughness = AbilityUtils.calculateAmount(affectedCard, setT, stAb, true);
                     }
                     affectedCard.addNewPT(setPower, setToughness,
-                        hostCard.getTimestamp(), stAb.hasParam("CharacteristicDefining"));
+                        hostCard.getTimestamp(), stAb.getId(), stAb.hasParam("CharacteristicDefining"));
                 }
             }
 
@@ -674,7 +725,7 @@ public final class StaticAbilityContinuous {
                             }
                             // replace one Keyword with list of keywords
                             if (input.startsWith("Protection") && input.contains("CardColors")) {
-                                for (Byte color : affectedCard.determineColor()) {
+                                for (Byte color : affectedCard.getColor()) {
                                     extraKeywords.add(input.replace("CardColors", MagicColor.toLongString(color)));
                                 }
                                 return true;

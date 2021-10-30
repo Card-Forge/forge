@@ -4,7 +4,7 @@ Types:Artifact Creature Angel
 PT:4/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life for each artifact you control.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ X
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X
 SVar:X:Count$Valid Artifact.YouCtrl/Times.3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/filigree_angel.jpg
 Oracle:Flying\nWhen Filigree Angel enters the battlefield, you gain 3 life for each artifact you control.

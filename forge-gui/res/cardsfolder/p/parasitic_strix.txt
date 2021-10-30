@@ -4,8 +4,8 @@ Types:Artifact Creature Bird
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Permanent.Black+YouCtrl | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, if you control a black permanent, target player loses 2 life and you gain 2 life.
-SVar:TrigLoseLife:DB$LoseLife | ValidTgts$ Player | TgtPrompt$ Choose target player | LifeAmount$ 2 | SubAbility$ DBGainLife
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
+SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Player | TgtPrompt$ Choose target player | LifeAmount$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 DeckHints:Color$Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/parasitic_strix.jpg
 Oracle:Flying\nWhen Parasitic Strix enters the battlefield, if you control a black permanent, target player loses 2 life and you gain 2 life.

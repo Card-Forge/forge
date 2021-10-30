@@ -5,8 +5,8 @@ PT:2/1
 K:Flying
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 green and blue Snake creature tokens.
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | ManaNotSpent$ U | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless {U} was spent to cast it.
-SVar:TrigToken:DB$Token | LegacyImage$ gu 1 1 snake dis | TokenAmount$ 2 | TokenScript$ gu_1_1_snake | TokenOwner$ You
-SVar:TrigSac:DB$Sacrifice | Defined$ Self
+SVar:TrigToken:DB$ Token | LegacyImage$ gu 1 1 snake dis | TokenAmount$ 2 | TokenScript$ gu_1_1_snake | TokenOwner$ You
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:ManaNeededToAvoidNegativeEffect:blue
 AI:RemoveDeck:Random
 DeckNeeds:Color$Blue

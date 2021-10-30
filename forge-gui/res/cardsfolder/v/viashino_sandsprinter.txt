@@ -5,7 +5,7 @@ PT:4/1
 K:Haste
 K:Trample
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of the end step, return CARDNAME to its owner's hand.
-SVar:TrigReturn:DB$ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
 SVar:PlayMain1:TRUE
 SVar:EndOfTurnLeavePlay:True
 K:Cycling:R

@@ -5,6 +5,6 @@ K:Enchant land
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Land | AILogic$ ChangeType
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ Swamp | RemoveLandTypes$ True | Description$ Enchanted land is a Swamp.
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigLose | TriggerDescription$ Whenever enchanted land becomes tapped, its controller loses 2 life.
-SVar:TrigLose:DB$LoseLife | Defined$ TriggeredCardController | LifeAmount$ 2
+SVar:TrigLose:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/contaminated_ground.jpg
 Oracle:Enchant land\nEnchanted land is a Swamp.\nWhenever enchanted land becomes tapped, its controller loses 2 life.

@@ -11,6 +11,6 @@ Name:Concoct
 ManaCost:3 U B
 Types:Sorcery
 A:SP$ Surveil | Cost$ 3 U B | Amount$ 3 | SubAbility$ DBReturn | SpellDescription$ Surveil 3, then return a creature card from your graveyard to the battlefield.
-SVar:DBReturn:DB$ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouCtrl | ChangeNum$ 1 | Hidden$ True
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouCtrl | ChangeNum$ 1 | Hidden$ True
 DeckHas:Ability$Surveil & Ability$Graveyard
 Oracle:Surveil 3, then return a creature card from your graveyard to the battlefield.

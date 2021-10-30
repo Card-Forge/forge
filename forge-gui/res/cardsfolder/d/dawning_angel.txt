@@ -4,6 +4,6 @@ Types:Creature Angel
 PT:3/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 4 life.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ 4
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 4
 DeckHas:Ability$LifeGain
 Oracle:Flying\nWhen Dawning Angel enters the battlefield, you gain 4 life.

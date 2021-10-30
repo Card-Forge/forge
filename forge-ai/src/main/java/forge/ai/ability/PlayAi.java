@@ -26,7 +26,7 @@ public class PlayAi extends SpellAbilityAi {
 
     @Override
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
-        final String logic = sa.hasParam("AILogic") ? sa.getParam("AILogic") : "";
+        final String logic = sa.getParamOrDefault("AILogic", "");
 
         final Game game = ai.getGame();
         final Card source = sa.getHostCard();

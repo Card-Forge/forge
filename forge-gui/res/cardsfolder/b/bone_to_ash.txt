@@ -2,6 +2,6 @@ Name:Bone to Ash
 ManaCost:2 U U
 Types:Instant
 A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SubAbility$ DBDraw | SpellDescription$ Counter target creature spell. Draw a card.
-SVar:DBDraw:DB$Draw | NumCards$ 1
+SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_to_ash.jpg
 Oracle:Counter target creature spell.\nDraw a card.

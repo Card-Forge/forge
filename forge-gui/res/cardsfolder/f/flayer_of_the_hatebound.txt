@@ -5,7 +5,7 @@ PT:4/2
 K:Undying
 T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Creature.YouOwn+Other | Execute$ ReanimateDmg | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield from your graveyard, that creature deals damage equal to its power to any target.
 T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Battlefield | ValidCard$ Creature.Self | Secondary$ True | Execute$ ReanimateDmg | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield from your graveyard, that creature deals damage equal to its power to any target.
-SVar:ReanimateDmg:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | DamageSource$ TriggeredCard | NumDmg$ Damage
+SVar:ReanimateDmg:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | DamageSource$ TriggeredCard | NumDmg$ Damage
 SVar:Damage:TriggeredCard$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flayer_of_the_hatebound.jpg
 Oracle:Undying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)\nWhenever Flayer of the Hatebound or another creature enters the battlefield from your graveyard, that creature deals damage equal to its power to any target.

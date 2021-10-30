@@ -805,7 +805,6 @@ public class AttachAi extends SpellAbilityAi {
             // grab Planeswalker first, then Creature
             // if Life < 5 grab Creature first, then Planeswalker. Lands,
             // Enchantments and Artifacts are probably "not good enough"
-
         }
 
         final Card c = ComputerUtilCard.getBestAI(list);
@@ -962,7 +961,6 @@ public class AttachAi extends SpellAbilityAi {
         return acceptableChoice(c, mandatory);
     }
 
-
     /**
      * Attach do trigger ai.
      * @param sa
@@ -981,7 +979,7 @@ public class AttachAi extends SpellAbilityAi {
         if (tgt == null) {
             targets = AbilityUtils.getDefinedObjects(card, sa.getParam("Defined"), sa);
         } else {
-            AttachAi.attachPreference(sa, tgt, mandatory);
+            attachPreference(sa, tgt, mandatory);
             targets = sa.getTargets();
         }
 
@@ -1112,7 +1110,6 @@ public class AttachAi extends SpellAbilityAi {
         list.removeAll(toRemove);
 
         if (magnetList != null) {
-
             // Look for Heroic triggers
             if (magnetList.isEmpty() && sa.isSpell()) {
                 for (Card target : list) {
@@ -1365,7 +1362,6 @@ public class AttachAi extends SpellAbilityAi {
             list = AbilityUtils.getDefinedCards(attachSource, sa.getParam("Defined"), sa);
         } else {
             list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource, sa);
-
             list = CardLists.filter(list, CardPredicates.canBeAttached(attachSource));
 
             // TODO If Attaching without casting, don't need to actually target.
@@ -1735,6 +1731,22 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         return chosen;
+    }
+
+    @Override
+    public boolean chkAIDrawback(final SpellAbility sa, final Player ai) {
+        // TODO for targeting optional Halvar trigger, needs to be coordinated with PumpAi to make it playable
+        if (sa.isTrigger() && sa.usesTargeting()) {
+            CardCollection targetables = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
+            CardCollection source = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Object"), sa);
+            Card tgt = attachGeneralAI(ai, sa, targetables, true, source.getFirst(), null);
+            if (tgt != null) {
+                sa.resetTargets();
+                sa.getTargets().add(tgt);
+            }
+            return sa.isTargetNumberValid();
+        }
+        return false;
     }
 
     @Override

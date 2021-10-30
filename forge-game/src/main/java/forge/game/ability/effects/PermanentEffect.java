@@ -30,8 +30,6 @@ public class PermanentEffect extends SpellAbilityEffect {
         CardZoneTable table = new CardZoneTable();
         ZoneType previousZone = host.getZone().getZoneType();
 
-        host.setController(sa.getActivatingPlayer(), 0);
-
         CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
         CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
 

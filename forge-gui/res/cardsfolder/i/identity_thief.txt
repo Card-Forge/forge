@@ -3,8 +3,8 @@ ManaCost:2 U U
 Types:Creature Shapeshifter
 PT:0/3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may exile another target nontoken creature. If you do, CARDNAME becomes a copy of that creature until end of turn. Return the exiled card to the battlefield under its owner's control at the beginning of the next end step.
-SVar:TrigExile:DB$ChangeZone | ValidTgts$ Creature.nonToken+Other | TgtPrompt$ Select another target nontoken creature | Mandatory$ True | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | Imprint$ True | SubAbility$ DelTrig
-SVar:DelTrig:DB$DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigBounce | TriggerDescription$ Return exiled permanent to the battlefield. | RememberObjects$ ImprintedLKI | SubAbility$ DBClone
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature.nonToken+Other | TgtPrompt$ Select another target nontoken creature | Mandatory$ True | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | Imprint$ True | SubAbility$ DelTrig
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigBounce | TriggerDescription$ Return exiled permanent to the battlefield. | RememberObjects$ ImprintedLKI | SubAbility$ DBClone
 SVar:TrigBounce:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRememberedLKI
 SVar:DBClone:DB$ Clone | Defined$ RememberedLKI | CloneTarget$ Self | Duration$ UntilEndOfTurn | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True

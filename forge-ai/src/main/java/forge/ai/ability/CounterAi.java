@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import java.util.Iterator;
 
+import forge.game.ability.effects.CounterEffect;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -68,6 +69,8 @@ public class CounterAi extends SpellAbilityAi {
             if (!CardFactoryUtil.isCounterableBy(topSA.getHostCard(), sa) || topSA.getActivatingPlayer() == ai
                     || ai.getAllies().contains(topSA.getActivatingPlayer())) {
                 // might as well check for player's friendliness
+                return false;
+            } else if (sa.hasParam("ConditionWouldDestroy") && !CounterEffect.checkForConditionWouldDestroy(sa, topSA)) {
                 return false;
             }
 

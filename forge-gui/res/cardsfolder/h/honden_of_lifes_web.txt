@@ -2,7 +2,7 @@ Name:Honden of Life's Web
 ManaCost:4 G
 Types:Legendary Enchantment Shrine
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a 1/1 colorless Spirit creature token for each Shrine you control.
-SVar:TrigToken:DB$Token | TokenAmount$ X | TokenScript$ c_1_1_spirit | LegacyImage$ c 1 1 spirit chk | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_1_1_spirit | LegacyImage$ c 1 1 spirit chk | TokenOwner$ You
 SVar:X:Count$TypeYouCtrl.Shrine
 DeckHints:Type$Shrine
 SVar:Picture:http://www.wizards.com/global/images/magic/general/honden_of_lifes_web.jpg

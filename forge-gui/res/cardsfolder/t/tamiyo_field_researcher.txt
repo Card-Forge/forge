@@ -11,6 +11,6 @@ A:AB$ Tap | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Perman
 SVar:DBPump:DB$ Pump | Defined$ Targeted | Duration$ Permanent | KW$ HIDDEN This card doesn't untap during your next untap step.
 A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Tamiyo, Field Researcher | Image$ emblem_tamiyo_field_researcher | StaticAbilities$ Omniscience | Stackable$ False | Duration$ Permanent | AILogic$ Always | SubAbility$ DBDraw | SpellDescription$ Draw three cards. You get an emblem with "You may cast spells from your hand without paying their mana costs."
 SVar:Omniscience:Mode$ Continuous | EffectZone$ Command | Affected$ Card.nonLand+YouOwn | MayPlay$ True | MayPlayWithoutManaCost$ True | AffectedZone$ Hand | Description$ You may cast spells from your hand without paying their mana costs.
-SVar:DBDraw:DB$Draw | NumCards$ 3
+SVar:DBDraw:DB$ Draw | NumCards$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tamiyo_field_researcher.jpg
 Oracle:[+1]: Choose up to two target creatures. Until your next turn, whenever either of those creatures deals combat damage, you draw a card.\n[−2]: Tap up to two target nonland permanents. They don't untap during their controller's next untap step.\n[−7]: Draw three cards. You get an emblem with "You may cast spells from your hand without paying their mana costs."

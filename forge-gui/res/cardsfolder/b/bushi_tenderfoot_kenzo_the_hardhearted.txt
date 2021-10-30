@@ -3,7 +3,7 @@ ManaCost:W
 Types:Creature Human Soldier
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | TriggerZones$ Battlefield | Execute$ TrigFlip | TriggerDescription$ When a creature dealt damage by CARDNAME this turn dies, flip CARDNAME.
-SVar:TrigFlip:DB$SetState | Defined$ Self | Mode$ Flip
+SVar:TrigFlip:DB$ SetState | Defined$ Self | Mode$ Flip
 AlternateMode:Flip
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bushi_tenderfoot.jpg
 Oracle:When a creature dealt damage by Bushi Tenderfoot this turn dies, flip Bushi Tenderfoot.

@@ -205,10 +205,10 @@ public class TokenAi extends SpellAbilityAi {
 
         if (sa.isPwAbility() && alwaysFromPW) {
             return true;
-        } else if (ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                && ai.getGame().getPhaseHandler().getPlayerTurn().isOpponentOf(ai)
-                && ai.getGame().getCombat() != null
-                && !ai.getGame().getCombat().getAttackers().isEmpty()
+        } else if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                && game.getPhaseHandler().getPlayerTurn().isOpponentOf(ai)
+                && game.getCombat() != null
+                && !game.getCombat().getAttackers().isEmpty()
                 && alwaysOnOppAttack) {
             return true;
         }
@@ -222,11 +222,11 @@ public class TokenAi extends SpellAbilityAi {
     private boolean canInterruptSacrifice(final Player ai, final SpellAbility sa, final Card token, final String tokenAmount) {
         final Game game = ai.getGame();
         if (game.getStack().isEmpty()) {
-            return false;   // nothing to interrupt
+            return false; // nothing to interrupt
         }
         final SpellAbility topStack = game.getStack().peekAbility();
         if (topStack.getApi() != ApiType.Sacrifice) {
-            return false;   // not sacrifice effect
+            return false; // not sacrifice effect
         }
         final int nTokens = AbilityUtils.calculateAmount(sa.getHostCard(), tokenAmount, sa);
         final String valid = topStack.getParamOrDefault("SacValid", "Card.Self");

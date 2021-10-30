@@ -3,5 +3,5 @@ ManaCost:4 U
 Types:Host Creature Human Fish
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | OptionalDecider$ You | Host$ True | TriggerDescription$ When this creature enters the battlefield, you may draw a card.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 Oracle:When this creature enters the battlefield, you may draw a card.

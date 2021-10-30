@@ -3,6 +3,6 @@ ManaCost:4
 Types:Artifact Creature Phyrexian Construct
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, target opponent loses 3 life.
-SVar:TrigLoseLife:DB$LoseLife | ValidTgts$ Opponent | LifeAmount$ 3
+SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pierce_strider.jpg
 Oracle:When Pierce Strider enters the battlefield, target opponent loses 3 life.

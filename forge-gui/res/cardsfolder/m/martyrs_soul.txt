@@ -4,6 +4,6 @@ Types:Creature Spirit Soldier
 PT:3/2
 K:Convoke
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | IsPresent$ Land.tapped+YouCtrl | PresentCompare$ EQ0 | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, if you control no tapped lands, put two +1/+1 counters on it.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 2
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 2
 SVar:PlayMain1:TRUE
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nWhen Martyr's Soul enters the battlefield, if you control no tapped lands, put two +1/+1 counters on it.

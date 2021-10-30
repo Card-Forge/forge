@@ -6,7 +6,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 3 B | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, target player discards two cards.
 A:AB$ Regenerate | Cost$ B | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
-SVar:TrigDiscard:DB$Discard | ValidTgts$ Player | TgtPrompt$ Select a player | NumCards$ 2 | Mode$ TgtChoose
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select a player | NumCards$ 2 | Mode$ TgtChoose
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strands_of_undeath.jpg
 Oracle:Enchant creature\nWhen Strands of Undeath enters the battlefield, target player discards two cards.\n{B}: Regenerate enchanted creature.

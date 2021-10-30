@@ -5,7 +5,7 @@ PT:7/7
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 7 life.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is dies, draw a card.
-SVar:TrigDraw:DB$Draw | Defined$ TriggeredCardController | NumCards$ 1
-SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ 7
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredCardController | NumCards$ 1
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 7
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pelakka_wurm.jpg
 Oracle:Trample\nWhen Pelakka Wurm enters the battlefield, you gain 7 life.\nWhen Pelakka Wurm dies, draw a card.

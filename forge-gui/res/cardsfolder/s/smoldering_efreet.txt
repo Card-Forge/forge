@@ -3,6 +3,6 @@ ManaCost:1 R
 Types:Creature Efreet Monk
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, it deals 2 damage to you.
-SVar:TrigDealDamage:DB$DealDamage | Defined$ TriggeredCardController | NumDmg$ 2
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sell_sword_brute.jpg
 Oracle:When Smoldering Efreet dies, it deals 2 damage to you.

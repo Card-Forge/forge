@@ -5,7 +5,7 @@ PT:0/0
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDrain | TriggerDescription$ When CARDNAME enters the battlefield, target player loses life equal to the number of +1/+1 counters on it.
-SVar:TrigDrain:DB$LoseLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ Y
+SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ Y
 SVar:Y:Count$CardCounters.P1P1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maga_traitor_to_mortals.jpg
 Oracle:Maga, Traitor to Mortals enters the battlefield with X +1/+1 counters on it.\nWhen Maga enters the battlefield, target player loses life equal to the number of +1/+1 counters on it.

@@ -6,7 +6,7 @@ K:Flash
 K:Cascade
 K:Reach
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put three +1/+1 counters on each of any number of target creatures that entered the battlefield this turn.
-SVar:TrigPutCounter:DB$PutCounter | CounterNum$ 3 | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Creature.ThisTurnEntered | TgtPrompt$ Select any number of target creatures that entered the battlefield this turn |
+SVar:TrigPutCounter:DB$ PutCounter | CounterNum$ 3 | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Creature.ThisTurnEntered | TgtPrompt$ Select any number of target creatures that entered the battlefield this turn |
 SVar:X:Count$Valid Creature.ThisTurnEntered
 DeckHas:Ability$Counters
 Oracle:Flash\nCascade\nReach\nWhen Sweet-Gum Recluse enters the battlefield, put three +1/+1 counters on each of any number of target creatures that entered the battlefield this turn.

@@ -1,10 +1,9 @@
 Name:Vexing Arcanix
 ManaCost:4
 Types:Artifact
-A:AB$ NameCard | Cost$ 3 T | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBDig | AILogic$ MostProminentInComputerDeck | SpellDescription$ Target player chooses a card name, then reveals the top card of their library. If that card has the chosen name, the player puts it into their hand. Otherwise, the player puts it into their graveyard and Vexing Arcanix deals 2 damage to their.
+A:AB$ NameCard | Cost$ 3 T | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBDig | AILogic$ MostProminentInComputerDeck | SpellDescription$ Target player chooses a card name, then reveals the top card of their library. If that card has the chosen name, the player puts it into their hand. Otherwise, the player puts it into their graveyard and CARDNAME deals 2 damage to them.
 SVar:DBDig:DB$ Dig | DigNum$ 1 | Defined$ Targeted | ChangeNum$ All | ChangeValid$ Card.NamedCard | DestinationZone2$ Graveyard | Reveal$ True | RememberChanged$ True | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ Targeted | ConditionDefined$ Remembered | ConditionPresent$ Card.NamedCard | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vexing_arcanix.jpg
 Oracle:{3}, {T}: Target player chooses a card name, then reveals the top card of their library. If that card has the chosen name, that player puts it into their hand. Otherwise, they put it into their graveyard and Vexing Arcanix deals 2 damage to them.

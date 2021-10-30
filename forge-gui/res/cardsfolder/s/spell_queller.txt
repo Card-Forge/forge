@@ -6,7 +6,7 @@ K:Flash
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target spell with mana value 4 or less.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigPlay | TriggerController$ TriggeredCardController | TriggerDescription$ When Spell Queller leaves the battlefield, the exiled card's owner may cast that card without paying its mana cost.
-SVar:TrigExile:DB$ChangeZone | TargetType$ Spell | ValidTgts$ Card.cmcLE4 | TgtZone$ Stack | Origin$ Stack | Fizzle$ True | Mandatory$ True | Destination$ Exile | IsCurse$ True | TgtPrompt$ Choose target spell with mana value 4 or less | RememberChanged$ True
+SVar:TrigExile:DB$ ChangeZone | TargetType$ Spell | ValidTgts$ Card.cmcLE4 | TgtZone$ Stack | Origin$ Stack | Fizzle$ True | Mandatory$ True | Destination$ Exile | IsCurse$ True | TgtPrompt$ Choose target spell with mana value 4 or less | RememberChanged$ True
 SVar:TrigPlay:DB$ Play | Defined$ Remembered.ExiledWithSource | Controller$ RememberedOwner | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
 SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard

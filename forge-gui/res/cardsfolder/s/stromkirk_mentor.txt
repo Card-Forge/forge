@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Creature Vampire Soldier
 PT:4/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on another target Vampire you control.
-SVar:TrigPut:DB$PutCounter | ValidTgts$ Vampire.Other+YouCtrl | TgtPrompt$ Select another target Vampire you control. | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Vampire.Other+YouCtrl | TgtPrompt$ Select another target Vampire you control. | CounterType$ P1P1 | CounterNum$ 1
 DeckHints:Type$Vampire
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stromkirk_mentor.jpg
 Oracle:When Stromkirk Mentor enters the battlefield, put a +1/+1 counter on another target Vampire you control.

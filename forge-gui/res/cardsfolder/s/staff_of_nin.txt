@@ -2,7 +2,7 @@ Name:Staff of Nin
 ManaCost:6
 Types:Artifact
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, draw a card.
-SVar:TrigDraw:DB$Draw | NumCards$ 1 | Defined$ You
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/staff_of_nin.jpg
 Oracle:At the beginning of your upkeep, draw a card.\n{T}: Staff of Nin deals 1 damage to any target.

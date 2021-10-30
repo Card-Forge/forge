@@ -2,7 +2,7 @@ Name:Mindswipe
 ManaCost:X U R
 Types:Instant
 A:SP$ Counter | Cost$ X U R | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ X | SubAbility$ DBBurn | SpellDescription$ Counter target spell unless its controller pays {X}. Mindswipe deals {X} damage to that spell's controller.
-SVar:DBBurn:DB$DealDamage | NumDmg$ X | Defined$ TargetedController
+SVar:DBBurn:DB$ DealDamage | NumDmg$ X | Defined$ TargetedController
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindswipe.jpg
 Oracle:Counter target spell unless its controller pays {X}. Mindswipe deals X damage to that spell's controller.

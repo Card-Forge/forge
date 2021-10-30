@@ -8,7 +8,7 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_vampire | TokenOw
 K:First Strike
 K:Haste
 T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever CARDNAME attacks, put a +1/+1 counter on each Vampire you control.
-SVar:TrigPutCounterAll:DB$PutCounterAll | ValidCards$ Vampire.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Vampire.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
 SVar:HasAttackEffect:TRUE
 SVar:BuffedBy:Vampire
 DeckHints:Type$Vampire

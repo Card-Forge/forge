@@ -222,7 +222,7 @@ public class CardRenderer {
 
     public static FImageComplex getCardArt(String imageKey, boolean isSplitCard, boolean isHorizontalCard, boolean isAftermathCard, boolean isSaga, boolean isClass, boolean isDungeon, boolean isFlipCard, boolean isPlanesWalker, boolean isModernFrame) {
         FImageComplex cardArt = cardArtCache.get(imageKey);
-        boolean isClassicModule = classicModuleCardtoCrop.contains(imageKey.substring(ImageKeys.CARD_PREFIX.length()).replace(".jpg","").replace(".png", ""));
+        boolean isClassicModule = imageKey != null && imageKey.length() > 2 && classicModuleCardtoCrop.contains(imageKey.substring(ImageKeys.CARD_PREFIX.length()).replace(".jpg", "").replace(".png", ""));
         if (cardArt == null) {
             Texture image = new RendererCachedCardImage(imageKey, true).getImage();
             if (image != null) {
@@ -307,6 +307,9 @@ public class CardRenderer {
                 cardArtCache.put(imageKey, cardArt);
             }
         }
+        //fix display for effect
+        if (imageKey == "" && cardArt == null)
+            return CardImageRenderer.forgeArt;
         return cardArt;
     }
 

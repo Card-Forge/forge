@@ -4,7 +4,7 @@ Types:Creature Vampire Assassin
 PT:3/1
 K:Lifelink
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may exile target card from a graveyard.
-SVar:TrigChangeZone:DB$ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TgtPrompt$ Select target card in a graveyard
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TgtPrompt$ Select target card in a graveyard
 T:Mode$ Surveil | ValidPlayer$ You | Execute$ TrigReturn | TriggerZones$ Graveyard | IsPresent$ Card.StrictlySelf | PresentZone$ Graveyard | PresentPlayer$ You | TriggerDescription$ Whenever you surveil, if CARDNAME is in your graveyard, you may pay 3 life. If you do, return CARDNAME to your hand.
 SVar:TrigReturn:AB$ChangeZone | Cost$ PayLife<3> | Defined$ Self | Origin$ Graveyard | Destination$ Hand
 Oracle:Lifelink\nWhen Blood Operative enters the battlefield, you may exile target card from a graveyard.\nWhenever you surveil, if Blood Operative is in your graveyard, you may pay 3 life. If you do, return Blood Operative to your hand.

@@ -25,6 +25,7 @@ import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -216,7 +217,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     }
 
     private void loadDeferredSections() {
-        if ((deferredSections == null) && (loadedSections == null))
+        if (deferredSections == null && loadedSections == null)
             return;
 
         if (loadedSections != null && !includeCardsFromUnspecifiedSet)
@@ -236,8 +237,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         if (deferredSections != null) {
             this.validateDeferredSections();
             referenceDeckLoadingMap = new HashMap<>(this.deferredSections);
-        }
-        else
+        } else
             referenceDeckLoadingMap = new HashMap<>(loadedSections);
 
         loadedSections = new HashMap<>();
@@ -255,7 +255,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                 continue;
             final List<String> cardsInSection = s.getValue();
             ArrayList<String> cardNamesWithNoEdition = getAllCardNamesWithNoSpecifiedEdition(cardsInSection);
-            if (cardNamesWithNoEdition.size() > 0){
+            if (cardNamesWithNoEdition.size() > 0) {
                 includeCardsFromUnspecifiedSet = true;
                 if (smartCardArtSelection)
                     cardsWithNoEdition.put(sec, cardNamesWithNoEdition);
@@ -266,22 +266,25 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         }
         deferredSections = null;  // set to null, just in case!
         if (includeCardsFromUnspecifiedSet && smartCardArtSelection)
-            optimiseCardArtSelectionInDeckSections(cardsWithNoEdition);
-
+            optimiseCardArtSelectionInDeckSections(cardsWithNoEdition, true);
     }
 
-    private void validateDeferredSections(){
+    private void validateDeferredSections() {
         /*
-         Construct a temporary (DeckSection, CardPool) Maps, to be sanitise and finalised
+         Construct a temporary (DeckSection, CardPool) Maps, to be sanitised and finalised
          before copying into `this.parts`. This sanitisation is applied because of the
          validation schema introduced in DeckSections.
          */
+        Map<String, List<String>> validatedSections = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         for (Entry<String, List<String>> s : this.deferredSections.entrySet()) {
             final DeckSection deckSection = DeckSection.smartValueOf(s.getKey());
-            if (deckSection == null)
+            if (deckSection == null) {
+                validatedSections.put(s.getKey(), s.getValue());
                 continue;
+            }
 
             final List<String> cardsInSection = s.getValue();
+            List<Pair<String, Integer>> originalCardRequests = CardPool.processCardList(cardsInSection);
             CardPool pool = CardPool.fromCardList(cardsInSection);
             if (pool.countDistinct() == 0)
                 continue;  // pool empty, no card has been found!
@@ -293,33 +296,70 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                     return deckSection.validate(input);
                 }
             });
+            // Add all the cards from ValidPool anyway!
+            List<String> whiteList = validatedSections.getOrDefault(s.getKey(), null);
+            if (whiteList == null)
+                whiteList = new ArrayList<>();
+            for (Entry<PaperCard, Integer> entry : filteredPool) {
+                String poolRequest = getPoolRequest(entry, originalCardRequests);
+                whiteList.add(poolRequest);
+            }
+            validatedSections.put(s.getKey(), whiteList);
 
-            if (filteredPool.countDistinct() != pool.countDistinct()) {  // Some cards have been filtered
-                CardPool blackListPool = pool.getFilteredPoolWithCardsCount(new Predicate<PaperCard>() {
+            if (filteredPool.countDistinct() != pool.countDistinct()) {
+                CardPool blackList = pool.getFilteredPoolWithCardsCount(new Predicate<PaperCard>() {
                     @Override
                     public boolean apply(PaperCard input) {
                         return !(deckSection.validate(input));
                     }
                 });
 
-                List<Entry<PaperCard, Integer>> blackList = Lists.newArrayList(blackListPool);
                 for (Entry<PaperCard, Integer> entry : blackList) {
-                    PaperCard card = entry.getKey();
-                    DeckSection cardSection = DeckSection.matchingSection(card);
-                    if (cardSection == null)
-                        continue;  // No matching section could be found!
-                    String cardRequest = CardDb.CardRequest.compose(card.getName(), card.getEdition(), card.getArtIndex());
-                    String poolRequest = String.format("%d %s", entry.getValue(), cardRequest);
-                    List<String> sectionCardList = this.deferredSections.getOrDefault(cardSection.name(), null);
+                    DeckSection cardSection = DeckSection.matchingSection(entry.getKey());
+                    String poolRequest = getPoolRequest(entry, originalCardRequests);
+                    List<String> sectionCardList = validatedSections.getOrDefault(cardSection.name(), null);
                     if (sectionCardList == null)
                         sectionCardList = new ArrayList<>();
                     sectionCardList.add(poolRequest);
-                    this.deferredSections.put(cardSection.name(), sectionCardList);
-                }
-            }
-        }
+                    validatedSections.put(cardSection.name(), sectionCardList);
+                } // end for blacklist
+            } // end if
+        } // end main for on deferredSections
+
+        // Overwrite deferredSections
+        this.deferredSections = validatedSections;
     }
 
+    private String getPoolRequest(Entry<PaperCard, Integer> entry, List<Pair<String, Integer>> originalCardRequests) {
+        PaperCard card = entry.getKey();
+        int amount = entry.getValue();
+        String poolCardRequest = CardDb.CardRequest.compose(
+                card.isFoil() ? CardDb.CardRequest.compose(card.getName(), true) : card.getName(),
+                card.getEdition(), card.getArtIndex());
+        String originalRequestCandidate = null;
+        for (Pair<String, Integer> originalRequest : originalCardRequests){
+            String cardRequest = originalRequest.getLeft();
+            if (!StringUtils.startsWithIgnoreCase(poolCardRequest, cardRequest))
+                continue;
+            originalRequestCandidate = cardRequest;
+            int cardAmount = originalRequest.getRight();
+            if (amount == cardAmount)
+                return String.format("%d %s", cardAmount, cardRequest);
+        }
+        // This is just in case, it should never happen as we're
+        if (originalRequestCandidate != null)
+            return String.format("%d %s", amount, originalRequestCandidate);
+        return String.format("%d %s", amount, poolCardRequest);
+    }
+    public void optimizeMainCardArt() {
+        Map<DeckSection, ArrayList<String>> cardsWithNoEdition = new EnumMap<>(DeckSection.class);
+        List<String> mainCards = new ArrayList<>();
+        for (Entry<PaperCard, Integer> e: getMain())
+            mainCards.add(e.getKey().getName());
+        cardsWithNoEdition.put(DeckSection.Main, getAllCardNamesWithNoSpecifiedEdition(mainCards));
+        optimiseCardArtSelectionInDeckSections(cardsWithNoEdition, false);
+
+    }
     private ArrayList<String> getAllCardNamesWithNoSpecifiedEdition(List<String> cardsInSection) {
         ArrayList<String> cardNamesWithNoEdition = new ArrayList<>();
         List<Pair<String, Integer>> cardRequests = CardPool.processCardList(cardsInSection);
@@ -332,15 +372,15 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return cardNamesWithNoEdition;
     }
 
-    private void optimiseCardArtSelectionInDeckSections(Map<DeckSection, ArrayList<String>> cardsWithNoEdition) {
+    private void optimiseCardArtSelectionInDeckSections(Map<DeckSection, ArrayList<String>> cardsWithNoEdition, boolean multiArtPrint) {
         StaticData data = StaticData.instance();
         // Get current Card Art Preference Settings
         boolean isCardArtPreferenceLatestArt = data.cardArtPreferenceIsLatest();
         boolean cardArtPreferenceHasFilter = data.isCoreExpansionOnlyFilterSet();
 
-        for(Entry<DeckSection, CardPool> part : parts.entrySet()) {
+        for (Entry<DeckSection, CardPool> part : parts.entrySet()) {
             DeckSection deckSection = part.getKey();
-            if(deckSection == DeckSection.Planes || deckSection == DeckSection.Schemes || deckSection == DeckSection.Avatar)
+            if (deckSection != DeckSection.Main && deckSection != DeckSection.Sideboard && deckSection != DeckSection.Commander)
                 continue;
 
             // == 0. First Off, check if there is anything at all to do for the current section
@@ -365,13 +405,13 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                 int totalToAddToPool = cp.getValue();
                 // A. Skip cards not requiring any update, because they add the edition specified!
                 if (!cardNamesWithNoEditionInSection.contains(card.getName())) {
-                    addCardToPool(newPool, card, totalToAddToPool, card.isFoil());
+                    addCardToPool(newPool, card, totalToAddToPool, card.isFoil(), multiArtPrint);
                     continue;
                 }
                 // B. Determine if current card requires update
                 boolean cardArtNeedsOptimisation = this.isCardArtUpdateRequired(card, releaseDatePivotEdition);
                 if (!cardArtNeedsOptimisation) {
-                    addCardToPool(newPool, card, totalToAddToPool, card.isFoil());
+                    addCardToPool(newPool, card, totalToAddToPool, card.isFoil(), multiArtPrint);
                     continue;
                 }
                 PaperCard alternativeCardPrint = data.getAlternativeCardPrint(card, releaseDatePivotEdition,
@@ -380,20 +420,22 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                                                                               isExpansionTheMajorityInThePool,
                                                                               isPoolModernFramed);
                 if (alternativeCardPrint == null)  // no alternative found, add original card in Pool
-                    addCardToPool(newPool, card, totalToAddToPool, card.isFoil());
+                    addCardToPool(newPool, card, totalToAddToPool, card.isFoil(), multiArtPrint);
                 else
-                    addCardToPool(newPool, alternativeCardPrint, totalToAddToPool, card.isFoil());
+                    addCardToPool(newPool, alternativeCardPrint, totalToAddToPool, card.isFoil(), multiArtPrint);
             }
             parts.put(deckSection, newPool);
         }
     }
 
-    private void addCardToPool(CardPool pool, PaperCard card, int totalToAdd, boolean isFoil) {
+    private void addCardToPool(CardPool pool, PaperCard card, int totalToAdd, boolean isFoil, boolean multiArtPrint) {
         StaticData data = StaticData.instance();
         if (card.getArtIndex() != IPaperCard.NO_ART_INDEX && card.getArtIndex() != IPaperCard.DEFAULT_ART_INDEX)
             pool.add(isFoil ? card.getFoiled() : card, totalToAdd);  // art index requested, keep that way!
         else {
-            int artCount = data.getCardArtCount(card);
+            int artCount = 1;
+            if (multiArtPrint)
+                artCount = data.getCardArtCount(card);
             if (artCount > 1)
                 addAlternativeCardPrintInPoolWithMultipleArt(card, pool, totalToAdd, artCount);
             else
@@ -414,7 +456,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         cardsPerArtIndex = Math.max(1, cardsPerArtIndex);  // make sure is never zero
         int cardsAdded = 0;
         PaperCard alternativeCardArt = null;
-        for (int artIndex = 1; artIndex <= nrOfAvailableArts; artIndex++){
+        for (int artIndex = 1; artIndex <= nrOfAvailableArts; artIndex++) {
             alternativeCardArt = data.getOrLoadCommonCard(cardName, setCode, artIndex, isFoil);
             cardsAdded += cardsPerArtIndex;
             pool.add(alternativeCardArt, cardsPerArtIndex);
@@ -443,7 +485,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
         if (card.getRules().isVariant())
             return false;  // skip variant cards
-        if (StaticData.instance().getCommonCards().hasPreferredArt(card.getName())){
+        if (StaticData.instance().getCommonCards().hasPreferredArt(card.getName())) {
             // if there is any preferred art, never update it!
             CardDb.CardRequest request = CardDb.CardRequest.fromString(card.getName());
             if (request.edition.equals(card.getEdition()) && request.artIndex == card.getArtIndex())
@@ -459,8 +501,6 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         // Original Art
         return releaseDate.compareTo(referenceReleaseDate) < 0;
     }
-
-
 
     public static final Function<Deck, String> FN_NAME_SELECTOR = new Function<Deck, String>() {
         @Override

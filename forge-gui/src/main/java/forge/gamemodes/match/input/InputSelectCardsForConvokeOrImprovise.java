@@ -13,7 +13,6 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardUtil;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -74,7 +73,7 @@ public final class InputSelectCardsForConvokeOrImprovise extends InputSelectMany
             if (improvise) {
                 chosenColor = ManaCostShard.COLORLESS.getColorMask();
             } else {
-                ColorSet colors = CardUtil.getColors(card);
+                ColorSet colors = card.getColor();
                 if (colors.isMulticolor()) {
                     //if card is multicolor, strip out any colors which can't be paid towards remaining cost
                     colors = ColorSet.fromMask(colors.getColor() & remainingCost.getUnpaidColors());

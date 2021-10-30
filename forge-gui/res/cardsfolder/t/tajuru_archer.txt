@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Elf Archer Ally
 PT:1/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Ally.Other+YouCtrl | OptionalDecider$ You | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have CARDNAME deal damage to target creature with flying equal to the number of Allies you control.
-SVar:TrigDamage:DB$DealDamage | ValidTgts$ Creature.withFlying | NumDmg$ NumAllies | TgtPrompt$ Select a target creature with flying.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.withFlying | NumDmg$ NumAllies | TgtPrompt$ Select a target creature with flying.
 SVar:NumAllies:Count$Valid Ally.YouCtrl
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Ally

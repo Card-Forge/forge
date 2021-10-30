@@ -3,6 +3,6 @@ ManaCost:1 G G W
 Types:Creature Fungus
 PT:5/4
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Creature.Other+powerGE5+YouCtrl | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME or another creature you control with power 5 or greater dies, you may gain 5 life.
-SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ 5
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mycoid_shepherd.jpg
 Oracle:Whenever Mycoid Shepherd or another creature you control with power 5 or greater dies, you may gain 5 life.

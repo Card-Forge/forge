@@ -525,6 +525,9 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     }
 
     public void addItem(final T item, int qty) {
+        if (pool == null) {
+            return;
+        }
         pool.add(item, qty);
         if (isUnfiltered()) {
             model.addItem(item, qty);
