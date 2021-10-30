@@ -21,6 +21,7 @@ import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.spellability.SpellAbility;
@@ -77,6 +78,8 @@ public class InputConfirm extends InputSyncronizedBase {
                  return controller.getGui().confirm(null, message, defaultIsYes, options);
              if (sa.getTargets() != null && sa.getTargets().isTargetingAnyCard() && sa.getTargets().size() == 1)
                  return controller.getGui().confirm((sa.getTargetCard()==null)?null:CardView.get(sa.getTargetCard()), message, defaultIsYes, options);
+             if (ApiType.Play.equals(sa.getApi()) && sa.getHostCard() != null && sa.getHostCard().getImprintedCards().size() == 1)
+                 return controller.getGui().confirm((sa.getHostCard().getImprintedCards().get(0)==null)?null:CardView.get(sa.getHostCard().getImprintedCards().get(0)), message, defaultIsYes, options);
              return controller.getGui().confirm(CardView.get(sa.getHostCard()), message, defaultIsYes, options);
          } else {
              InputConfirm inp;
