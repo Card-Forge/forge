@@ -195,14 +195,16 @@ public class ChangeZoneAi extends SpellAbilityAi {
      */
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+        String aiLogic = sa.getParamOrDefault("AILogic", "");
+
         if (sa.isReplacementAbility() && "Command".equals(sa.getParam("Destination")) && "ReplacedCard".equals(sa.getParam("Defined"))) {
             // Process the commander replacement effect ("return to Command zone instead")
             return doReturnCommanderLogic(sa, aiPlayer);
         }
 
-        if ("Always".equals(sa.getParam("AILogic"))) {
+        if ("Always".equals(aiLogic)) {
             return true;
-        } else if ("IfNotBuffed".equals(sa.getParam("AILogic"))) {
+        } else if ("IfNotBuffed".equals(aiLogic)) {
             if (ComputerUtilCard.isUselessCreature(aiPlayer, sa.getHostCard())) {
                 return true; // debuffed by opponent's auras to the level that it becomes useless
             }
@@ -215,6 +217,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
             return delta <= 0;
+        } else if ("SaviorOfOllenbock".equals(aiLogic)) {
+            return SpecialCardAi.SaviorOfOllenbock.consider(aiPlayer, sa);
         }
 
         if (sa.isHidden()) {
