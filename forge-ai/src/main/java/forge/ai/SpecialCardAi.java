@@ -1251,6 +1251,50 @@ public class SpecialCardAi {
         }
     }
 
+    // Savior of Ollenbock
+    public static class SaviorOfOllenbock {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            CardCollection threats = CardLists.filter(ai.getOpponents().getCreaturesInPlay(), new Predicate<Card>() {
+                @Override
+                public boolean apply(Card card) {
+                    return !ComputerUtilCard.isUselessCreature(card.getController(), card);
+                }
+            });
+            CardCollection ownTgts = CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
+
+            // TODO: improve the conditions for when the AI is considered threatened (check the possibility of being attacked?)
+            int lifeInDanger = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD));
+            boolean threatened = !threats.isEmpty() && ((ai.getLife() <= lifeInDanger && !ai.cantLoseForZeroOrLessLife()) || ai.getLifeLostLastTurn() + ai.getLifeLostThisTurn() > 0);
+
+            if (threatened) {
+                sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(threats));
+            } else if (!ownTgts.isEmpty()) {
+                Card target = ComputerUtilCard.getBestCreatureAI(ownTgts);
+                sa.getTargets().add(target);
+
+                int ownExiledValue = ComputerUtilCard.evaluateCreature(target), oppExiledValue = 0;
+                for (Card c : ai.getGame().getCardsIn(ZoneType.Exile)) {
+                    if (c.getExiledWith() == sa.getHostCard()) {
+                        if (c.getOwner() == ai) {
+                            ownExiledValue += ComputerUtilCard.evaluateCreature(c);
+                        } else {
+                            oppExiledValue += ComputerUtilCard.evaluateCreature(c);
+                        }
+                    }
+                }
+                if (ownExiledValue > oppExiledValue + 150) {
+                    sa.getHostCard().setSVar("SacMe", "5");
+                } else {
+                    sa.getHostCard().removeSVar("SacMe");
+                }
+            } else if (!threats.isEmpty()) {
+                sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(threats));
+            }
+
+            return sa.isTargetNumberValid();
+        }
+    }
+
     // Sorin, Vengeful Bloodlord
     public static class SorinVengefulBloodlord {
         public static boolean consider(final Player ai, final SpellAbility sa) {
