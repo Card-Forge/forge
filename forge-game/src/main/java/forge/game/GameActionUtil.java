@@ -189,6 +189,11 @@ public final class GameActionUtil {
                         desc.append("(").append(inst.getReminderText()).append(")");
                         newSA.setDescription(desc.toString());
                         newSA.putParam("AfterDescription", "(Disturbed)");
+                        final String type = source.getAlternateState().getType().toString();
+                        if (!type.contains("Creature")) {
+                            final String name = source.getAlternateState().getName();
+                            newSA.putParam("StackDescription", name + " — " + type + " (Disturbed)");
+                        }
 
                         newSA.setAlternativeCost(AlternativeCost.Disturb);
                         newSA.getRestrictions().setZone(ZoneType.Graveyard);
