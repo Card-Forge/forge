@@ -24,7 +24,7 @@ public class ForgeScript {
     public static boolean cardStateHasProperty(CardState cardState, String property, Player sourceController,
             Card source, CardTraitBase spellAbility) {
         final boolean isColorlessSource = cardState.getCard().hasKeyword("Colorless Damage Source", cardState);
-        final ColorSet colors = cardState.getCard().determineColor(cardState);
+        final ColorSet colors = cardState.getCard().getColor(cardState);
         if (property.contains("White") || property.contains("Blue") || property.contains("Black")
                 || property.contains("Red") || property.contains("Green")) {
             boolean mustHave = !property.startsWith("non");

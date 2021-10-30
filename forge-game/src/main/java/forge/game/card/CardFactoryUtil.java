@@ -338,7 +338,7 @@ public class CardFactoryUtil {
         }
 
         for (final Card crd : list) {
-            ColorSet color = crd.determineColor();
+            ColorSet color = crd.getColor();
             for (int i = 0; i < cntColors; i++) {
                 if (color.hasAnyColor(MagicColor.WUBRG[i]))
                     map[i]++;
@@ -376,7 +376,7 @@ public class CardFactoryUtil {
         }
 
         for (final Card crd : list) {
-            ColorSet color = crd.determineColor();
+            ColorSet color = crd.getColor();
             for (int i = 0; i < cntColors; i++) {
                 if (color.hasAnyColor(MagicColor.WUBRG[i]))
                     map[i]++;
@@ -407,7 +407,7 @@ public class CardFactoryUtil {
         }
 
         for (final Card crd : list) {
-            ColorSet color = crd.determineColor();
+            ColorSet color = crd.getColor();
             for (int i = 0; i < cntColors; i++) {
                 if (color.hasAnyColor(colorRestrictions.get(i))) {
                     map[i]++;

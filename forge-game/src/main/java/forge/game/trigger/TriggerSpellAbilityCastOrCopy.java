@@ -267,7 +267,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
                 if (!m.isSnow()) {
                     continue;
                 }
-                if (cast.determineColor().sharesColorWith(ColorSet.fromMask(m.getColor()))) {
+                if (cast.getColor().sharesColorWith(ColorSet.fromMask(m.getColor()))) {
                     found = true;
                     break;
                 }

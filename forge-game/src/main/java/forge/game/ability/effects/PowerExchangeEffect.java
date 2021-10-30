@@ -56,8 +56,8 @@ public class PowerExchangeEffect extends SpellAbilityEffect {
 
         final long timestamp = game.getNextTimestamp();
 
-        c1.addNewPT(power2, null, timestamp);
-        c2.addNewPT(power1, null, timestamp);
+        c1.addNewPT(power2, null, timestamp, 0);
+        c2.addNewPT(power1, null, timestamp, 0);
 
         game.fireEvent(new GameEventCardStatsChanged(c1));
         game.fireEvent(new GameEventCardStatsChanged(c2));
@@ -70,8 +70,8 @@ public class PowerExchangeEffect extends SpellAbilityEffect {
 
                 @Override
                 public void run() {
-                    c1.removeNewPT(timestamp);
-                    c2.removeNewPT(timestamp);
+                    c1.removeNewPT(timestamp, 0);
+                    c2.removeNewPT(timestamp, 0);
                     game.fireEvent(new GameEventCardStatsChanged(c1));
                     game.fireEvent(new GameEventCardStatsChanged(c2));
                 }

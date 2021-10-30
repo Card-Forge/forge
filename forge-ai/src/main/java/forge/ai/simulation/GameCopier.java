@@ -275,13 +275,10 @@ public class GameCopier {
             // TODO: Controllers' list with timestamps should be copied.
             zoneOwner = playerMap.get(c.getController());
             newCard.setController(zoneOwner, 0);
+
+            newCard.setPTTable(c.getSetPTTable());
+            newCard.setPTCharacterDefiningTable(c.getSetPTCharacterDefiningTable());
             
-            int setPower = c.getSetPower();
-            int setToughness = c.getSetToughness();
-            if (setPower != Integer.MAX_VALUE || setToughness != Integer.MAX_VALUE)  {
-                // TODO: Copy the full list with timestamps.
-                newCard.addNewPT(setPower, setToughness, newGame.getNextTimestamp());
-            }
             newCard.setPTBoost(c.getPTBoostTable());
             newCard.setDamage(c.getDamage());
 

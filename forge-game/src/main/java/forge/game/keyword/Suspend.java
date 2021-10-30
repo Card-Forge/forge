@@ -3,7 +3,7 @@ package forge.game.keyword;
 public class Suspend extends KeywordWithCostAndAmount {
 
     boolean withoutCostAndAmount = false;
-    
+
     @Override
     protected void parse(String details) {
         if ("".equals(details)) {

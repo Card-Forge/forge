@@ -248,7 +248,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
 
             //if Iona does prevent from casting, allow it to draw
             for (final Card io : player.getCardsIn(ZoneType.Battlefield, "Iona, Shield of Emeria")) {
-                if (imprinted.determineColor().hasAnyColor(MagicColor.fromName(io.getChosenColor()))) {
+                if (imprinted.getColor().hasAnyColor(MagicColor.fromName(io.getChosenColor()))) {
                     return allow;
                 }
             }

@@ -1962,7 +1962,7 @@ public class ComputerUtilMana {
         if (!improvise) {
             for (ManaCostShard toPay : cost) {
                 for (Card c : list) {
-                    final int mask = c.determineColor().getColor() & toPay.getColorMask();
+                    final int mask = c.getColor().getColor() & toPay.getColorMask();
                     if (mask != 0) {
                         convoked = c;
                         convoke.put(c, toPay);

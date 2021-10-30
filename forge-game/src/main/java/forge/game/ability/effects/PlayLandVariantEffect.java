@@ -34,7 +34,7 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
             cards = Lists.newArrayList(Iterables.filter(cards, cpp));
         }
         // current color of source card
-        final ColorSet color = source.determineColor();
+        final ColorSet color = source.getColor();
         if (color.isColorless()) {
             return;
         }

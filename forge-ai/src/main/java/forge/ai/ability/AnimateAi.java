@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.ai.*;
 import forge.card.CardType;
+import forge.card.ColorSet;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -442,16 +443,15 @@ public class AnimateAi extends SpellAbilityAi {
         }
 
         // colors to be added or changed to
-        String tmpDesc = "";
+        ColorSet finalColors = ColorSet.getNullColor();
         if (sa.hasParam("Colors")) {
             final String colors = sa.getParam("Colors");
             if (colors.equals("ChosenColor")) {
-                tmpDesc = CardUtil.getShortColorsString(source.getChosenColors());
+                finalColors = ColorSet.fromNames(source.getChosenColors());
             } else {
-                tmpDesc = CardUtil.getShortColorsString(Lists.newArrayList(Arrays.asList(colors.split(","))));
+                finalColors = ColorSet.fromNames(colors.split(","));
             }
         }
-        final String finalDesc = tmpDesc;
 
         // abilities to add to the animated being
         final List<String> abilities = Lists.newArrayList();
@@ -483,7 +483,7 @@ public class AnimateAi extends SpellAbilityAi {
             sVars.addAll(Arrays.asList(sa.getParam("sVars").split(",")));
         }
 
-        AnimateEffectBase.doAnimate(card, sa, power, toughness, types, removeTypes, finalDesc,
+        AnimateEffectBase.doAnimate(card, sa, power, toughness, types, removeTypes, finalColors,
                 keywords, removeKeywords, hiddenKeywords,
                 abilities, triggers, replacements, stAbs,
                 timestamp);
