@@ -1,0 +1,12 @@
+Name:Overcharged Amalgam
+ManaCost:2 U U
+Types:Creature Zombie Horror
+PT:2/2
+K:Flash
+K:Flying
+K:Exploit
+T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ When CARDNAME exploits a creature, counter target spell, activated ability, or triggered ability.
+SVar:TrigCounter:DB$ Counter | TargetType$ Spell,Activated,Triggered | TgtPrompt$ Select target spell or ability | ValidTgts$ Card | SpellDescription$ Counter target spell, activated ability, or triggered ability.
+AI:RemoveDeck:All
+DeckHas:Ability$Sacrifice
+Oracle:Flash\nFlying\nExploit (When this creature enters the battlefield, you may sacrifice a creature.)\nWhen Overcharged Amalgam exploits a creature, counter target spell, activated ability, or triggered ability.
