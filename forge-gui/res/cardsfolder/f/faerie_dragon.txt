@@ -3,7 +3,7 @@ ManaCost:2 G G
 Types:Creature Dragon
 PT:1/3
 K:Flying
-A:AB$ GenericChoice | Cost$ 1 G G | AtRandom$ True | ShowChoice$ Description | Choices$ Berserk,Twiddle,BloodLust,Green,White,Red,Damage3,Flying,P3P3,Banding,Black,Blue,NoRegen,LilSneak,M2M0,ToHand,Damage1,Nerf,Exile,Orcish | StackDescription$ SpellDescription | SpellDescription$ Perform a random action.
+A:AB$ GenericChoice | Cost$ 1 G G | AtRandom$ True | ShowChoice$ Description | Choices$ Berserk,Twiddle,BloodLust,Green,White,Red,Damage3,Flying,P3P3,Banding,Black,Blue,NoRegen,LilSneak,M2M0,ToHand,Damage1,Nerf,Exile,Orcish | AILogic$ AtOppEOT | StackDescription$ SpellDescription | SpellDescription$ Perform a random action.
 SVar:Berserk:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | RememberChosen$ True | SubAbility$ DBPump1 | SpellDescription$ A creature chosen at random gains trample and gets +X/+0 until end of turn, where X is its power. At the beginning of the next end step, destroy that creature if it attacked this turn.
 SVar:DBPump1:DB$ Pump | Defined$ Remembered | KW$ Trample | NumAtt$ X1 | SubAbility$ DBDelayedTrigger1
 SVar:DBDelayedTrigger1:DB$ DelayedTrigger | RememberObjects$ Remembered | Mode$ Phase | Phase$ End of Turn | Execute$ TrigDestroy1 | SubAbility$ DBCleanup | TriggerDescription$ At the beginning of the next end step, destroy that creature if it attacked this turn.
