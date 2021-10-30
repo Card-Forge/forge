@@ -1,7 +1,7 @@
 Name:Whimsy
 ManaCost:X U U
 Types:Sorcery
-A:SP$ Repeat | MaxRepeat$ X | RepeatSubAbility$ DBGenericChoice | StackDescription$ SpellDescription | SpellDescription$ Perform X random actions.
+A:SP$ Repeat | MaxRepeat$ X | RepeatSubAbility$ DBGenericChoice | AILogic$ MaxX | StackDescription$ SpellDescription | SpellDescription$ Perform X random actions.
 SVar:DBGenericChoice:DB$ GenericChoice | ShowChoice$ Description | AtRandom$ True | Choices$ ToHand,Untap,Tap,Damage,Draw3,DestroyGain,DestroyAE,Gain3,Anoint,DestroyCL,Mill2,Wasp,Nevinyrral,Suleiman,Pandora,Discard,Fog,Sindbad
 SVar:ToHand:DB$ ChooseCard | Choices$ Permanent.unenchanted | AtRandom$ True | SubAbility$ DBChangeZone3 | SpellDescription$ Return a permanent that isn't enchanted chosen at random to its owner's hand.
 SVar:DBChangeZone3:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBCleanup
