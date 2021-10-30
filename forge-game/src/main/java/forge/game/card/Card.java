@@ -4367,6 +4367,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return changed;
     }
 
+    public boolean clearStaticChangedCardKeywords(final boolean updateView) {
+        // remove all keywords which are done by static ability, where the staticId isn't 0 (these are currently pump or animate effects)
+        boolean changed = changedCardKeywords.columnKeySet().retainAll(ImmutableList.of((long)0));
+        if (changed && updateView) {
+            updateKeywords();
+        }
+        return changed;
+    }
+
     // Hidden keywords will be left out
     public final Collection<KeywordInterface> getUnhiddenKeywords() {
         return getUnhiddenKeywords(currentState);
