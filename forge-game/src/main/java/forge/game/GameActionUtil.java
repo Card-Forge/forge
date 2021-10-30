@@ -108,7 +108,7 @@ public final class GameActionUtil {
             if (lkicheck) {
                 // double freeze tracker, so it doesn't update view
                 game.getTracker().freeze();
-                source.clearChangedCardKeywords(false);
+                source.clearStaticChangedCardKeywords(false);
                 CardCollection preList = new CardCollection(source);
                 game.getAction().checkStaticAbilities(false, Sets.newHashSet(source), preList);
             }
