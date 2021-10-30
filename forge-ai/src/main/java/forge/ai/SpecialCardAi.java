@@ -1257,7 +1257,7 @@ public class SpecialCardAi {
             CardCollection threats = CardLists.filter(ai.getOpponents().getCreaturesInPlay(), new Predicate<Card>() {
                 @Override
                 public boolean apply(Card card) {
-                    return !ComputerUtilCard.isUselessCreature(card.getController(), card);
+                    return !ComputerUtilCard.isUselessCreature(card.getController(), card) && sa.canTarget(card);
                 }
             });
             CardCollection ownTgts = CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
