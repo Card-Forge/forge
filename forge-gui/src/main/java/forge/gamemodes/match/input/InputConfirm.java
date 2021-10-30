@@ -73,7 +73,11 @@ public class InputConfirm extends InputSyncronizedBase {
     }
     public static boolean confirm(final PlayerControllerHuman controller, final SpellAbility sa, final String message, final boolean defaultIsYes, final List<String> options) {
          if (GuiBase.getInterface().isLibgdxPort()) {
-             return controller.getGui().confirm((sa==null)?null:CardView.get(sa.getHostCard()), message, defaultIsYes, options);
+             if (sa == null)
+                 return controller.getGui().confirm(null, message, defaultIsYes, options);
+             if (sa.getTargets() != null && sa.getTargets().isTargetingAnyCard() && sa.getTargets().size() == 1)
+                 return controller.getGui().confirm((sa.getTargetCard()==null)?null:CardView.get(sa.getTargetCard()), message, defaultIsYes, options);
+             return controller.getGui().confirm(CardView.get(sa.getHostCard()), message, defaultIsYes, options);
          } else {
              InputConfirm inp;
              if (options.size() == 2) {
