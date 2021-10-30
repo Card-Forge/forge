@@ -171,6 +171,8 @@ public enum CounterEnumType {
 
     INTERVENTION("INTRV", 205, 203, 105),
 
+    INVITATION("INVIT", 205, 0, 26),
+
     ISOLATION("ISOLT", 250, 190, 0),
 
     JAVELIN("JAVLN", 180, 206, 172),
