@@ -1892,6 +1892,12 @@ public class AiController {
             return AbilityUtils.calculateAmount(source, source.getSVar("EnergyToPay"), sa);
         } else if ("Vermin".equals(logic)) {
             return MyRandom.getRandom().nextInt(Math.max(player.getLife() - 5, 0));
+        } else if ("SweepCreatures".equals(logic)) {
+            int maxCreatures = 0;
+            for (Player opp : player.getOpponents()) {
+                maxCreatures = Math.max(maxCreatures, opp.getCreaturesInPlay().size());
+            }
+            return Math.min(13, maxCreatures);
         }
         return max;
     }
