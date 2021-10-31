@@ -136,14 +136,13 @@ public class CardFactory {
 
         // change the color of the copy (eg: Fork)
         if (sourceSA.hasParam("CopyIsColor")) {
-            String tmp = "";
+            ColorSet finalColors = ColorSet.getNullColor();
             final String newColor = sourceSA.getParam("CopyIsColor");
             if (newColor.equals("ChosenColor")) {
-                tmp = CardUtil.getShortColorsString(source.getChosenColors());
+                finalColors = ColorSet.fromNames(source.getChosenColors());
             } else {
-                tmp = CardUtil.getShortColorsString(Lists.newArrayList(newColor.split(",")));
+                finalColors = ColorSet.fromNames(newColor.split(","));
             }
-            final String finalColors = tmp;
 
             c.addColor(finalColors, !sourceSA.hasParam("OverwriteColors"), c.getTimestamp(), 0, false);
         }
@@ -622,24 +621,24 @@ public class CardFactory {
             // if something is cloning a flip card, copy both original and
             // flipped state
             final CardState ret1 = new CardState(out, CardStateName.Original);
-            ret1.copyFrom(in.getState(CardStateName.Original, true), false);
+            ret1.copyFrom(in.getState(CardStateName.Original), false);
             result.put(CardStateName.Original, ret1);
 
             final CardState ret2 = new CardState(out, CardStateName.Flipped);
-            ret2.copyFrom(in.getState(CardStateName.Flipped, true), false);
+            ret2.copyFrom(in.getState(CardStateName.Flipped), false);
             result.put(CardStateName.Flipped, ret2);
         } else if (in.isAdventureCard()) {
             final CardState ret1 = new CardState(out, CardStateName.Original);
-            ret1.copyFrom(in.getState(CardStateName.Original, true), false);
+            ret1.copyFrom(in.getState(CardStateName.Original), false);
             result.put(CardStateName.Original, ret1);
 
             final CardState ret2 = new CardState(out, CardStateName.Adventure);
-            ret2.copyFrom(in.getState(CardStateName.Adventure, true), false);
+            ret2.copyFrom(in.getState(CardStateName.Adventure), false);
             result.put(CardStateName.Adventure, ret2);
         } else {
             // in all other cases just copy the current state to original
             final CardState ret = new CardState(out, CardStateName.Original);
-            ret.copyFrom(in.getState(in.getCurrentStateName(), true), false);
+            ret.copyFrom(in.getState(in.getCurrentStateName()), false);
             result.put(CardStateName.Original, ret);
         }
 
@@ -832,7 +831,7 @@ public class CardFactory {
         final CardStateName state = top.getCurrentStateName();
         final CardState ret = new CardState(card, state);
         if (top.isCloned()) {
-            ret.copyFrom(top.getState(state, true), false);
+            ret.copyFrom(top.getState(state), false);
         } else {
             ret.copyFrom(top.getOriginalState(state), false);
         }
@@ -852,7 +851,7 @@ public class CardFactory {
         // For face down, flipped, transformed, melded or MDFC card, also copy the original state to avoid crash
         if (state != CardStateName.Original) {
             final CardState ret1 = new CardState(card, CardStateName.Original);
-            ret1.copyFrom(top.getState(CardStateName.Original, true), false);
+            ret1.copyFrom(top.getState(CardStateName.Original), false);
             result.put(CardStateName.Original, ret1);
         }
 

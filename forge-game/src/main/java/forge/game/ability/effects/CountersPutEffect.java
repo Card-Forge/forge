@@ -390,6 +390,9 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         if (sa.hasParam("Adapt")) {
                             game.getTriggerHandler().runTrigger(TriggerType.Adapt, AbilityKey.mapFromCard(gameCard), false);
                         }
+                        if (sa.hasParam("Training")) {
+                            game.getTriggerHandler().runTrigger(TriggerType.Trains, AbilityKey.mapFromCard(gameCard), false);
+                        }
                     } else {
                         // adding counters to something like re-suspend cards
                         // etbcounter should apply multiplier

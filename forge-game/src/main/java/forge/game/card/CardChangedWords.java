@@ -1,15 +1,31 @@
 package forge.game.card;
 
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.SortedMap;
 
+import com.google.common.collect.ForwardingMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Table;
+import com.google.common.collect.TreeBasedTable;
 
-public final class CardChangedWords {
+public final class CardChangedWords extends ForwardingMap<String, String> {
 
-    private final SortedMap<Long, CardChangedWord> map = Maps.newTreeMap();
+    class WordHolder {
+        public String oldWord;
+        public String newWord;
+
+        public boolean clear = false;
+
+        WordHolder() {
+            this.clear = true;
+        }
+        WordHolder(String oldWord, String newWord) {
+            this.oldWord = oldWord;
+            this.newWord = newWord;
+        }
+    }
+
+    private final Table<Long, Long, WordHolder> map = TreeBasedTable.create();
 
     private boolean isDirty = false;
     private Map<String, String> resultCache = Maps.newHashMap();
@@ -17,19 +33,28 @@ public final class CardChangedWords {
     public CardChangedWords() {
     }
 
-    public Long add(final long timestamp, final String originalWord, final String newWord) {
+    public Long addEmpty(final long timestamp, final long staticId) {
         final Long stamp = Long.valueOf(timestamp);
-        map.put(stamp, new CardChangedWord(originalWord, newWord));
+        map.put(stamp, staticId, new WordHolder()); // Table doesn't allow null value
         isDirty = true;
         return stamp;
     }
 
-    public boolean remove(final Long timestamp) {
+    public Long add(final long timestamp, final long staticId, final String originalWord, final String newWord) {
+        final Long stamp = Long.valueOf(timestamp);
+        map.put(stamp, staticId, new WordHolder(originalWord, newWord));
         isDirty = true;
-        return map.remove(timestamp) != null;
+        return stamp;
     }
 
-    public void removeAll() {
+    public boolean remove(final Long timestamp, final long staticId) {
+        isDirty = true;
+        return map.remove(timestamp, staticId) != null;
+    }
+
+    @Override
+    public void clear() {
+        super.clear();
         map.clear();
         isDirty = true;
     }
@@ -46,26 +71,33 @@ public final class CardChangedWords {
      * @return a map of strings to strings, where each changed word in this
      * object is mapped to its corresponding replacement word.
      */
-    public Map<String, String> toMap() {
+    @Override
+    protected Map<String, String> delegate() {
         refreshCache();
         return resultCache;
     }
 
     private void refreshCache() {
         if (isDirty) {
-            resultCache = Maps.newHashMap();
-            for (final CardChangedWord ccw : this.map.values()) {
+            resultCache.clear();
+            for (final WordHolder ccw : this.map.values()) {
+                // is empty pair is for resetting the data, it is done for Volrath’s Shapeshifter
+                if (ccw.clear) {
+                    resultCache.clear();
+                    continue;
+                }
+
                 // changes because a->b and b->c (resulting in a->c)
                 final Map<String, String> toBeChanged = Maps.newHashMap();
                 for (final Entry<String, String> e : resultCache.entrySet()) {
-                    if (e.getValue().equals(ccw.getOriginalWord())) {
-                        toBeChanged.put(e.getKey(), ccw.getNewWord());
+                    if (e.getValue().equals(ccw.oldWord)) {
+                        toBeChanged.put(e.getKey(), ccw.newWord);
                     }
                 }
                 resultCache.putAll(toBeChanged);
 
                 // the actual change (b->c)
-                resultCache.put(ccw.getOriginalWord(), ccw.getNewWord());
+                resultCache.put(ccw.oldWord, ccw.newWord);
             }
 
             // TODO should that be removed?

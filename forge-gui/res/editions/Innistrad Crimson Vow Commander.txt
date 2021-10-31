@@ -6,9 +6,9 @@ Type=Commander
 ScryfallCode=VOC
 
 [cards]
-1 M Millicent, Restless Revenant @
-2 M Strefan, Maurer Progenitor @
-32 M Wedding Ring @
-39 M Millicent, Restless Revenant @
-40 M Strefan, Maurer Progenitor @
-70 M Wedding Ring @
+1 M Millicent, Restless Revenant @Denman Rooke
+2 M Strefan, Maurer Progenitor @Chris Rallis
+32 M Wedding Ring @Olena Richards
+39 M Millicent, Restless Revenant @Denman Rooke
+40 M Strefan, Maurer Progenitor @Chris Rallis
+70 M Wedding Ring @Olena Richards

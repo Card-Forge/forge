@@ -165,6 +165,15 @@ public class AbilityUtils {
                     c = sacrificed.getFirst().getEnchantingCard();
                 }
             }
+        } else if (defined.equals("TopOfGraveyard")) {
+            final CardCollectionView grave = hostCard.getController().getCardsIn(ZoneType.Graveyard);
+
+            if (grave.size() > 0) { // TopOfLibrary or BottomOfLibrary
+                c = grave.getLast();
+            } else {
+                // we don't want this to fall through and return the "Self"
+                return cards;
+            }
         }
         else if (defined.endsWith("OfLibrary")) {
             final CardCollectionView lib = hostCard.getController().getCardsIn(ZoneType.Library);
@@ -1789,7 +1798,7 @@ public class AbilityUtils {
                 if (sq[0].contains("HasNumChosenColors")) {
                     int sum = 0;
                     for (Card card : getDefinedCards(c, sq[1], sa)) {
-                        sum += card.determineColor().getSharedColors(ColorSet.fromNames(c.getChosenColors())).countColors();
+                        sum += card.getColor().getSharedColors(ColorSet.fromNames(c.getChosenColors())).countColors();
                     }
                     return sum;
                 }
@@ -1990,7 +1999,7 @@ public class AbilityUtils {
 
         // Count$CardMulticolor.<numMC>.<numNotMC>
         if (sq[0].contains("CardMulticolor")) {
-            final boolean isMulti = c.determineColor().isMulticolor();
+            final boolean isMulti = c.getColor().isMulticolor();
             return doXMath(Integer.parseInt(sq[isMulti ? 1 : 2]), expr, c, ctb);
         }
         // Count$Madness.<True>.<False>
@@ -2046,7 +2055,7 @@ public class AbilityUtils {
         }
 
         if (sq[0].contains("CardNumColors")) {
-            return doXMath(c.determineColor().countColors(), expr, c, ctb);
+            return doXMath(c.getColor().countColors(), expr, c, ctb);
         }
         if (sq[0].contains("CardNumAttacksThisTurn")) {
             return doXMath(c.getDamageHistory().getCreatureAttacksThisTurn(), expr, c, ctb);
@@ -2369,7 +2378,7 @@ public class AbilityUtils {
             final CardCollection list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), rest, player, c, ctb);
             byte n = 0;
             for (final Card card : list) {
-                n |= card.determineColor().getColor();
+                n |= card.getColor().getColor();
             }
             return doXMath(ColorSet.fromMask(n).countColors(), expr, c, ctb);
         }
@@ -2827,7 +2836,7 @@ public class AbilityUtils {
             final CardCollection list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), rest, player, c, ctb);
             byte n = 0;
             for (final Card card : list) {
-                n |= card.determineColor().getColor();
+                n |= card.getColor().getColor();
             }
             return doXMath(ColorSet.fromMask(n).countColors(), expr, c, ctb);
         }
@@ -3766,7 +3775,7 @@ public class AbilityUtils {
             someCards = CardLists.filter(someCards, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return c.determineColor().isMulticolor();
+                    return c.getColor().isMulticolor();
                 }
             });
         }
@@ -3775,7 +3784,7 @@ public class AbilityUtils {
             someCards = CardLists.filter(someCards, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return c.determineColor().isMonoColor();
+                    return c.getColor().isMonoColor();
                 }
             });
         }

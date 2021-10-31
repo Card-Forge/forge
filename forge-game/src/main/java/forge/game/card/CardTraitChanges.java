@@ -11,14 +11,14 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 
 public class CardTraitChanges implements Cloneable {
-    
+
     private List<Trigger> triggers = Lists.newArrayList();
     private List<ReplacementEffect> replacements = Lists.newArrayList();
     private List<SpellAbility> abilities = Lists.newArrayList();
     private List<StaticAbility> staticAbilities = Lists.newArrayList();
 
     private List<SpellAbility> removedAbilities = Lists.newArrayList();
-    
+
     private boolean removeAll = false;
     private boolean removeNonMana = false;
 
@@ -64,13 +64,13 @@ public class CardTraitChanges implements Cloneable {
     public Collection<SpellAbility> getAbilities() {
         return abilities;
     }
-    
+
     /**
      * @return the abilities
      */
     public Collection<SpellAbility> getRemovedAbilities() {
         return removedAbilities;
-    }    
+    }
 
     /**
      * @return the staticAbilities
@@ -78,11 +78,11 @@ public class CardTraitChanges implements Cloneable {
     public Collection<StaticAbility> getStaticAbilities() {
         return staticAbilities;
     }
-    
+
     public boolean isRemoveAll() {
         return removeAll;
     }
-    
+
     public boolean isRemoveNonMana() {
         return removeNonMana;
     }
@@ -90,7 +90,7 @@ public class CardTraitChanges implements Cloneable {
     public CardTraitChanges copy(Card host, boolean lki) {
         try {
             CardTraitChanges result = (CardTraitChanges) super.clone();
-            
+
             result.abilities = Lists.newArrayList();
             for (SpellAbility sa : this.abilities) {
                 result.abilities.add(sa.copy(host, lki));
@@ -99,25 +99,43 @@ public class CardTraitChanges implements Cloneable {
             for (SpellAbility sa : this.removedAbilities) {
                 result.removedAbilities.add(sa.copy(host, lki));
             }
-            
+
             result.triggers = Lists.newArrayList();
             for (Trigger tr : this.triggers) {
                 result.triggers.add(tr.copy(host, lki));
             }
-            
+
             result.replacements = Lists.newArrayList();
             for (ReplacementEffect re : this.replacements) {
                 result.replacements.add(re.copy(host, lki));
             }
-            
+
             result.staticAbilities = Lists.newArrayList();
             for (StaticAbility sa : this.staticAbilities) {
                 result.staticAbilities.add(sa.copy(host, lki));
             }
-            
+
             return result;
         } catch (final Exception ex) {
             throw new RuntimeException("CardTraitChanges : clone() error", ex);
+        }
+    }
+
+    public void changeText() {
+        for (SpellAbility sa : this.abilities) {
+            sa.changeText();
+        }
+
+        for (Trigger tr : this.triggers) {
+            tr.changeText();
+        }
+
+        for (ReplacementEffect re : this.replacements) {
+            re.changeText();
+        }
+
+        for (StaticAbility sa : this.staticAbilities) {
+            sa.changeText();
         }
     }
 }

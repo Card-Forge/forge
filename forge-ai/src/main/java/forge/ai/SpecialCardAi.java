@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import forge.game.GameEntity;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
@@ -616,6 +617,28 @@ public class SpecialCardAi {
         }
     }
 
+    // Goblin Polka Band
+    public static class GoblinPolkaBand {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            int maxPotentialTgts = Lists.newArrayList(Iterables.filter(ai.getOpponents().getCreaturesInPlay(), CardPredicates.Presets.UNTAPPED)).size();
+            int maxPotentialPayment = ComputerUtilMana.determineLeftoverMana(sa, ai, "R");
+
+            int numTgts = Math.min(maxPotentialPayment, maxPotentialTgts);
+            if (numTgts == 0) {
+                return false;
+            }
+
+            // Set Announce
+            sa.getHostCard().setSVar("TgtNum", String.valueOf(numTgts));
+
+            // Simulate random targeting
+            List<GameEntity> validTgts = sa.getTargetRestrictions().getAllCandidates(sa, true);
+            sa.resetTargets();
+            sa.getTargets().addAll(Aggregates.random(validTgts, numTgts));
+            return true;
+        }
+    }
+
     // Guilty Conscience
     public static class GuiltyConscience {
         public static Card getBestAttachTarget(final Player ai, final SpellAbility sa, final List<Card> list) {
@@ -1157,6 +1180,33 @@ public class SpecialCardAi {
         }
     }
 
+    // Power Struggle
+    public static class PowerStruggle {
+        public static boolean considerFirstTarget(final Player ai, final SpellAbility sa) {
+            Card firstTgt = (Card)Aggregates.random(sa.getTargetRestrictions().getAllCandidates(sa, true));
+            if (firstTgt != null) {
+                sa.getTargets().add(firstTgt);
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public static boolean considerSecondTarget(final Player ai, final SpellAbility sa) {
+            Card firstTgt = sa.getParent().getTargetCard();
+            Iterable<Card> candidates = Iterables.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield),
+                    Predicates.and(CardPredicates.sharesCardTypeWith(firstTgt), CardPredicates.isTargetableBy(sa)));
+            Card secondTgt = Aggregates.random(candidates);
+            if (secondTgt != null) {
+                sa.resetTargets();
+                sa.getTargets().add(secondTgt);
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
     // Price of Progress
     public static class PriceOfProgress {
         public static boolean consider(final Player ai, final SpellAbility sa) {
@@ -1248,6 +1298,51 @@ public class SpecialCardAi {
             }
 
             return dragonPower >= minLife;
+        }
+    }
+
+    // Savior of Ollenbock
+    public static class SaviorOfOllenbock {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            CardCollection oppTargetables = CardLists.getTargetableCards(ai.getOpponents().getCreaturesInPlay(), sa);
+            CardCollection threats = CardLists.filter(oppTargetables, new Predicate<Card>() {
+                @Override
+                public boolean apply(Card card) {
+                    return !ComputerUtilCard.isUselessCreature(card.getController(), card);
+                }
+            });
+            CardCollection ownTgts = CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
+
+            // TODO: improve the conditions for when the AI is considered threatened (check the possibility of being attacked?)
+            int lifeInDanger = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD));
+            boolean threatened = !threats.isEmpty() && ((ai.getLife() <= lifeInDanger && !ai.cantLoseForZeroOrLessLife()) || ai.getLifeLostLastTurn() + ai.getLifeLostThisTurn() > 0);
+
+            if (threatened) {
+                sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(threats));
+            } else if (!ownTgts.isEmpty()) {
+                Card target = ComputerUtilCard.getBestCreatureAI(ownTgts);
+                sa.getTargets().add(target);
+
+                int ownExiledValue = ComputerUtilCard.evaluateCreature(target), oppExiledValue = 0;
+                for (Card c : ai.getGame().getCardsIn(ZoneType.Exile)) {
+                    if (c.getExiledWith() == sa.getHostCard()) {
+                        if (c.getOwner() == ai) {
+                            ownExiledValue += ComputerUtilCard.evaluateCreature(c);
+                        } else {
+                            oppExiledValue += ComputerUtilCard.evaluateCreature(c);
+                        }
+                    }
+                }
+                if (ownExiledValue > oppExiledValue + 150) {
+                    sa.getHostCard().setSVar("SacMe", "5");
+                } else {
+                    sa.getHostCard().removeSVar("SacMe");
+                }
+            } else if (!threats.isEmpty()) {
+                sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(threats));
+            }
+
+            return sa.isTargetNumberValid();
         }
     }
 

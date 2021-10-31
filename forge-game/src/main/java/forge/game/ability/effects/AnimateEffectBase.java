@@ -23,6 +23,7 @@ import com.google.common.collect.Lists;
 
 import forge.GameCommand;
 import forge.card.CardType;
+import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.Game;
@@ -42,7 +43,7 @@ import forge.game.trigger.TriggerHandler;
 
 public abstract class AnimateEffectBase extends SpellAbilityEffect {
     public static void doAnimate(final Card c, final SpellAbility sa, final Integer power, final Integer toughness,
-            final CardType addType, final CardType removeType, final String colors,
+            final CardType addType, final CardType removeType, final ColorSet colors,
             final List<String> keywords, final List<String> removeKeywords, final List<String> hiddenKeywords,
             List<String> abilities, final List<String> triggers, final List<String> replacements, final List<String> stAbs,
             final long timestamp) {
@@ -89,7 +90,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         }
 
         if ((power != null) || (toughness != null)) {
-            c.addNewPT(power, toughness, timestamp);
+            c.addNewPT(power, toughness, timestamp, 0);
         }
 
         if (!addType.isEmpty() || !removeType.isEmpty() || removeCreatureTypes) {
@@ -159,7 +160,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             public void run() {
                 doUnanimate(c, timestamp);
 
-                c.removeChangedName(timestamp);
+                c.removeChangedName(timestamp, 0);
                 c.updateStateForView();
 
                 game.fireEvent(new GameEventCardStatsChanged(c));
@@ -218,7 +219,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
      *            a long.
      */
     static void doUnanimate(final Card c, final long timestamp) {
-        c.removeNewPT(timestamp);
+        c.removeNewPT(timestamp, 0);
 
         c.removeChangedCardKeywords(timestamp, 0);
 

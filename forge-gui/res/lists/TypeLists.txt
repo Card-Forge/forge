@@ -301,6 +301,7 @@ Rune
 Saga
 Shrine
 [ArtifactTypes]
+Blood
 Clue:Clues
 Contraption
 Equipment

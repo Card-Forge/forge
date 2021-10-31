@@ -730,7 +730,23 @@ public class AiController {
         if (sa.getCardState() != null && !sa.getHostCard().isInPlay() && sa.getCardState().getStateName() == CardStateName.Modal) {
             sa.getHostCard().setState(CardStateName.Modal, false);
         }
+
         AiPlayDecision canPlay = canPlaySa(sa); // this is the "heaviest" check, which also sets up targets, defines X, etc.
+
+        // Account for possible Ward after the spell is fully targeted
+        // TODO: ideally, this should be done while targeting, so that a different target can be preferred if the best
+        // one is warded and can't be paid for.
+        if (sa.usesTargeting()) {
+            for (Card tgt : sa.getTargets().getTargetCards()) {
+                if (tgt.hasKeyword(Keyword.WARD)) {
+                    int amount = tgt.getKeywordMagnitude(Keyword.WARD);
+                    if (amount > 0 && !ComputerUtilCost.canPayCost(sa, player)) {
+                        return AiPlayDecision.CantAfford;
+                    }
+                }
+            }
+        }
+
         if (sa.getCardState() != null && !sa.getHostCard().isInPlay() && sa.getCardState().getStateName() == CardStateName.Modal) {
             sa.getHostCard().setState(CardStateName.Original, false);
         }
@@ -1892,6 +1908,12 @@ public class AiController {
             return AbilityUtils.calculateAmount(source, source.getSVar("EnergyToPay"), sa);
         } else if ("Vermin".equals(logic)) {
             return MyRandom.getRandom().nextInt(Math.max(player.getLife() - 5, 0));
+        } else if ("SweepCreatures".equals(logic)) {
+            int maxCreatures = 0;
+            for (Player opp : player.getOpponents()) {
+                maxCreatures = Math.max(maxCreatures, opp.getCreaturesInPlay().size());
+            }
+            return Math.min(13, maxCreatures);
         }
         return max;
     }

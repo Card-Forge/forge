@@ -8,12 +8,12 @@ import com.google.common.collect.ImmutableList;
 
 import forge.GameCommand;
 import forge.card.CardType;
+import forge.card.ColorSet;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
-import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -88,16 +88,15 @@ public class AnimateAllEffect extends AnimateEffectBase {
         }
 
         // colors to be added or changed to
-        String tmpDesc = "";
+        ColorSet finalColors = ColorSet.getNullColor();
         if (sa.hasParam("Colors")) {
             final String colors = sa.getParam("Colors");
             if (colors.equals("ChosenColor")) {
-                tmpDesc = CardUtil.getShortColorsString(host.getChosenColors());
+                finalColors = ColorSet.fromNames(host.getChosenColors());
             } else {
-                tmpDesc = CardUtil.getShortColorsString(new ArrayList<>(Arrays.asList(colors.split(","))));
+                finalColors = ColorSet.fromNames(colors.split(","));
             }
         }
-        final String finalDesc = tmpDesc;
 
         // abilities to add to the animated being
         final List<String> abilities = new ArrayList<>();
@@ -134,7 +133,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
         list = CardLists.getValidCards(list, valid.split(","), host.getController(), host, sa);
 
         for (final Card c : list) {
-            doAnimate(c, sa, power, toughness, types, removeTypes, finalDesc,
+            doAnimate(c, sa, power, toughness, types, removeTypes, finalColors,
                     keywords, removeKeywords, hiddenKeywords,
                     abilities, triggers, replacements, ImmutableList.of(),
                     timestamp);

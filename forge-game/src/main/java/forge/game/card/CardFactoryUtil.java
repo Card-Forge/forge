@@ -338,7 +338,7 @@ public class CardFactoryUtil {
         }
 
         for (final Card crd : list) {
-            ColorSet color = crd.determineColor();
+            ColorSet color = crd.getColor();
             for (int i = 0; i < cntColors; i++) {
                 if (color.hasAnyColor(MagicColor.WUBRG[i]))
                     map[i]++;
@@ -376,7 +376,7 @@ public class CardFactoryUtil {
         }
 
         for (final Card crd : list) {
-            ColorSet color = crd.determineColor();
+            ColorSet color = crd.getColor();
             for (int i = 0; i < cntColors; i++) {
                 if (color.hasAnyColor(MagicColor.WUBRG[i]))
                     map[i]++;
@@ -407,7 +407,7 @@ public class CardFactoryUtil {
         }
 
         for (final Card crd : list) {
-            ColorSet color = crd.determineColor();
+            ColorSet color = crd.getColor();
             for (int i = 0; i < cntColors; i++) {
                 if (color.hasAnyColor(colorRestrictions.get(i))) {
                     map[i]++;
@@ -1842,7 +1842,7 @@ public class CardFactoryUtil {
             if (card.isPermanent()) {
                 final String abPump = "DB$ Pump | Defined$ Remembered | KW$ Haste | PumpZone$ Stack "
                         + "| ConditionDefined$ Remembered | ConditionPresent$ Creature | Duration$ UntilLoseControlOfHost";
-                final AbilitySub saPump = (AbilitySub)AbilityFactory.getAbility(abPump, card);
+                final AbilitySub saPump = (AbilitySub) AbilityFactory.getAbility(abPump, card);
 
                 String dbClean = "DB$ Cleanup | ClearRemembered$ True";
                 final AbilitySub saCleanup = (AbilitySub) AbilityFactory.getAbility(dbClean, card);
@@ -1856,6 +1856,21 @@ public class CardFactoryUtil {
 
             inst.addTrigger(parsedUpkeepTrig);
             inst.addTrigger(parsedPlayTrigger);
+        } else if (keyword.equals("Training")) {
+            final String trigStr = "Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True | " +
+                    "IsPresent$ Creature.attacking+Other+powerGTX | TriggerDescription$ Training (" +
+                    inst.getReminderText() + ")";
+
+            final String effect = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | Defined$ Self | Training$ True";
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+
+            SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            trigger.setSVar("X", "Count$CardPower");
+            sa.setIntrinsic(intrinsic);
+            trigger.setOverridingAbility(sa);
+
+            inst.addTrigger(trigger);
+
         } else if (keyword.startsWith("Tribute")) {
             // use hardcoded ability name
             final String abStr = "TrigNotTribute";

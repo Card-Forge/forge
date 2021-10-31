@@ -1,0 +1,9 @@
+Name:Minn, Wily Illusionist|Deck:Minn, Wily Illusionist.dck|Variant:Commander|Avatar:Minn, Wily Illusionist|Desc:
+Name:Grazilaxx, Illithid Scholar|Deck:Grazilaxx, Illithid Scholar.dck|Variant:Commander|Avatar:Grazilaxx, Illithid Scholar|Desc:
+Name:Iymrith, Desert Doom|Deck:Iymrith, Desert Doom.dck|Variant:Commander|Avatar:Iymrith, Desert Doom|Desc:
+Name:Hama Pashar, Ruin Seeker|Deck:Hama Pashar, Ruin Seeker.dck|Variant:Commander|Avatar:Hama Pashar, Ruin Seeker|Desc:
+Name:Mordenkainen|Deck:Mordenkainen.dck|Variant:Planeswalker|Avatar:Mordenkainen|Desc:
+Name:Farideh, Devil's Chosen|Deck:Farideh, Devil's Chosen.dck|Variant:Commander|Avatar:Farideh, Devil's Chosen|Desc:
+Name:Jhoira of the Ghitu|Deck:Jhoira of the Ghitu.dck|Variant:Vanguard|Avatar:Jhoira of the Ghitu Avatar|Desc:
+Name:Volo, Guide to Monsters|Deck:Volo, Guide to Monsters.dck|Variant:Commander|Avatar:Volo, Guide to Monsters|Desc:
+Name:Blue Planar Mage|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

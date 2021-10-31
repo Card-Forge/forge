@@ -98,7 +98,12 @@ public class TokenAi extends SpellAbilityAi {
                 sa.getRootAbility().setXManaCostPaid(x);
             }
             if (x <= 0) {
-                return false; // 0 tokens or 0 toughness token(s)
+                if ("RandomPT".equals(sa.getParam("AILogic"))) {
+                    // e.g. Necropolis of Azar - we're guaranteed at least 1 toughness from the ability
+                    x = 1;
+                } else {
+                    return false; // 0 tokens or 0 toughness token(s)
+                }
             }
         }
 

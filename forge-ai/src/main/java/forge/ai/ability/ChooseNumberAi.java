@@ -11,9 +11,21 @@ public class ChooseNumberAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        if (!sa.hasParam("AILogic")) {
+        String aiLogic = sa.getParamOrDefault("AILogic", "");
+
+        if (aiLogic.isEmpty()) {
             return false;
+        } else if (aiLogic.equals("SweepCreatures")) {
+            int ownCreatureCount = aiPlayer.getCreaturesInPlay().size();
+            int oppMaxCreatureCount = 0;
+            for (Player opp : aiPlayer.getOpponents()) {
+                oppMaxCreatureCount = Math.max(oppMaxCreatureCount, opp.getCreaturesInPlay().size());
+            }
+
+            // TODO: maybe check if the AI is actually pressured and/or check the total value of the creatures on both sides of the board
+            return ownCreatureCount > oppMaxCreatureCount + 2 || ownCreatureCount < oppMaxCreatureCount;
         }
+
         TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             sa.resetTargets();

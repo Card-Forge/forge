@@ -689,7 +689,7 @@ public class CardProperty {
                         break;
                     case "MostProminentColor":
                         byte mask = CardFactoryUtil.getMostProminentColors(game.getCardsIn(ZoneType.Battlefield));
-                        if (!card.determineColor().hasAnyColor(mask))
+                        if (!card.getColor().hasAnyColor(mask))
                             return false;
                         break;
                     case "LastCastThisTurn":
@@ -703,7 +703,7 @@ public class CardProperty {
                         if (castSA == null) {
                             return false;
                         }
-                        if (!card.determineColor().hasAnyColor(castSA.getPayingColors().getColor())) {
+                        if (!card.getColor().hasAnyColor(castSA.getPayingColors().getColor())) {
                             return false;
                         }
                         break;

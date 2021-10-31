@@ -98,13 +98,18 @@ public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
     }
 
     private Card getNeighboringCard(Card c, int direction) {
-        // Currently gets the nearest (in zone order) card to the left or to the right of the designated one by type
+        // Currently gets the nearest (in zone order) card to the left or to the right of the designated one by type,
+        // as well as cards attachments by the same controller that are visually located next to the requested card.
         Player controller = c.getController();
+        ArrayList<Card> ownAttachments = Lists.newArrayList();
         ArrayList<Card> cardsOTB = Lists.newArrayList(CardLists.filter(
                 controller.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
                     @Override
                     public boolean apply(Card card) {
-                        if (c.isCreature()) {
+                        if (card.isAttachedToEntity(c) && card.getController() == controller) {
+                            ownAttachments.add(card);
+                            return true;
+                        } else if (c.isCreature()) {
                             return card.isCreature();
                         } else if (c.isPlaneswalker() || c.isArtifact() || (c.isEnchantment() && !c.isAura())) {
                             return card.isPlaneswalker() || card.isArtifact() || (c.isEnchantment() && !c.isAura());
@@ -117,6 +122,12 @@ public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
                     }
                 }
         ));
+
+        // Chance to hit an attachment
+        float hitAttachment = 0.50f;
+        if (!ownAttachments.isEmpty() && direction < 0 && MyRandom.getRandom().nextFloat() <= hitAttachment) {
+            return Aggregates.random(ownAttachments);
+        }
 
         int loc = cardsOTB.indexOf(c);
         if (direction < 0 && loc > 0) {

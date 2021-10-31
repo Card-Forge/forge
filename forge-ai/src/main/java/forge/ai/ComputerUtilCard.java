@@ -904,7 +904,7 @@ public class ComputerUtilCard {
         }
 
         for (final Card crd : list) {
-            ColorSet color = crd.determineColor();
+            ColorSet color = crd.getColor();
             if (color.hasWhite()) map.get(0).setValue(Integer.valueOf(map.get(0).getValue()+1));
             if (color.hasBlue()) map.get(1).setValue(Integer.valueOf(map.get(1).getValue()+1));
             if (color.hasBlack()) map.get(2).setValue(Integer.valueOf(map.get(2).getValue()+1));
@@ -1676,7 +1676,7 @@ public class ComputerUtilCard {
             }
         }
 
-        pumped.addNewPT(c.getCurrentPower(), c.getCurrentToughness(), timestamp);
+        pumped.addNewPT(c.getCurrentPower(), c.getCurrentToughness(), timestamp, 0);
         pumped.setPTBoost(c.getPTBoostTable());
         pumped.addPTBoost(power + berserkPower, toughness, timestamp, 0);
 

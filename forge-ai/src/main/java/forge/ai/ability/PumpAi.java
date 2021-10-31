@@ -436,6 +436,11 @@ public class PumpAi extends PumpAiBase {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         sa.resetTargets();
+
+        if ("PowerStruggle".equals(sa.getParam("AILogic"))) {
+            return SpecialCardAi.PowerStruggle.considerFirstTarget(ai, sa);
+        }
+
         if (sa.hasParam("TargetingPlayer") && sa.getActivatingPlayer().equals(ai) && !sa.isTrigger()) {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);
