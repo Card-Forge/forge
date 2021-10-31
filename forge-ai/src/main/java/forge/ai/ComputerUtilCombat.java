@@ -60,7 +60,7 @@ import forge.util.collect.FCollection;
 /**
  * <p>
  * ComputerCombatUtil class.
- * </p>
+ * </p>;
  *
  * @author Forge
  * @version $Id: ComputerUtil.java 19179 2013-01-25 18:48:29Z Max mtg  $
@@ -253,9 +253,8 @@ public class ComputerUtilCombat {
                 poison += pd;
             }
         }
-        if (attacker.hasKeyword(Keyword.POISONOUS) && damage > 0) {
-            // TODO need to check for magnitude 1, each of their triggers could be replaced to 0
-            poison += attacker.getKeywordMagnitude(Keyword.POISONOUS);
+        if (damage > 0) {
+            poison += predictPoisonFromTriggers(attacker, attacked, damage);
         }
         return poison;
     }
@@ -373,12 +372,11 @@ public class ComputerUtilCombat {
                 unblocked.add(attacker);
             } else if (attacker.hasKeyword(Keyword.TRAMPLE)
                     && (getAttack(attacker) > totalShieldDamage(attacker, blockers))) {
+                int trampleDamage = getAttack(attacker) - totalShieldDamage(attacker, blockers);
                 if (attacker.hasKeyword(Keyword.INFECT)) {
-                    poison += getAttack(attacker) - totalShieldDamage(attacker, blockers);
+                    poison += trampleDamage;
                 }
-                if (attacker.hasKeyword(Keyword.POISONOUS)) {
-                    poison += attacker.getKeywordMagnitude(Keyword.POISONOUS);
-                }
+                poison += predictPoisonFromTriggers(attacker, ai, trampleDamage);
             }
         }
 
@@ -2474,5 +2472,26 @@ public class ComputerUtilCombat {
         }
 
         return false;
+    }
+
+    public static int predictPoisonFromTriggers(Card attacker, Player attacked, int damage) {
+        int pd = 0, poison = 0;
+        int damageAfterRepl = predictDamageTo(attacked, damage, attacker, true);
+        if (damageAfterRepl > 0) {
+            for (Trigger t : attacker.getTriggers()) {
+                if (t.getMode() == TriggerType.DamageDone && "True".equals(t.getParam("CombatDamage"))) {
+                    SpellAbility ab = t.getOverridingAbility();
+                    if (ab.getApi() == ApiType.Poison && "TriggeredTarget".equals(ab.getParam("Defined"))) {
+                        pd += AbilityUtils.calculateAmount(attacker, ab.getParam("Num"), ab);
+                    }
+                }
+            }
+            poison += pd;
+            if (pd > 0 && attacker.hasKeyword(Keyword.DOUBLE_STRIKE)) {
+                poison += pd;
+            }
+            // TODO: Predict replacement effects for counters (doubled, reduced, additional counters, etc.)
+        }
+        return poison;
     }
 }
