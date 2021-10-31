@@ -734,6 +734,8 @@ public class AiController {
         AiPlayDecision canPlay = canPlaySa(sa); // this is the "heaviest" check, which also sets up targets, defines X, etc.
 
         // Account for possible Ward after the spell is fully targeted
+        // TODO: ideally, this should be done while targeting, so that a different target can be preferred if the best
+        // one is warded and can't be paid for.
         if (sa.usesTargeting()) {
             for (Card tgt : sa.getTargets().getTargetCards()) {
                 if (tgt.hasKeyword(Keyword.WARD)) {
