@@ -1304,10 +1304,11 @@ public class SpecialCardAi {
     // Savior of Ollenbock
     public static class SaviorOfOllenbock {
         public static boolean consider(final Player ai, final SpellAbility sa) {
-            CardCollection threats = CardLists.filter(ai.getOpponents().getCreaturesInPlay(), new Predicate<Card>() {
+            CardCollection oppTargetables = CardLists.getTargetableCards(ai.getOpponents().getCreaturesInPlay(), sa);
+            CardCollection threats = CardLists.filter(oppTargetables, new Predicate<Card>() {
                 @Override
                 public boolean apply(Card card) {
-                    return !ComputerUtilCard.isUselessCreature(card.getController(), card) && sa.canTarget(card);
+                    return !ComputerUtilCard.isUselessCreature(card.getController(), card);
                 }
             });
             CardCollection ownTgts = CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
