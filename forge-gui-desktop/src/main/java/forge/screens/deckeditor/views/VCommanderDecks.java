@@ -2,6 +2,7 @@ package forge.screens.deckeditor.views;
 
 import javax.swing.JPanel;
 
+import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
 import forge.gui.framework.DragCell;
@@ -84,7 +85,11 @@ public enum VCommanderDecks implements IVDoc<CCommanderDecks> {
         parentBody.setLayout(new MigLayout("insets 5, gap 0, wrap, hidemode 3"));
         parentBody.add(new ItemManagerContainer(lstDecks), "push, grow");
         String preferredDeck = DeckPreferences.getCommanderDeck();
-        lstDecks.editDeck(lstDecks.stringToItem(preferredDeck));
+        DeckProxy deckProxy = lstDecks.stringToItem(preferredDeck);
+        if (deckProxy != null) {
+            lstDecks.editDeck(deckProxy);
+            lstDecks.setSelectedItem(deckProxy);
+        }
     }
 
     //========== Retrieval methods
