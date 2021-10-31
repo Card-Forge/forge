@@ -1,12 +1,7 @@
 package forge.screens.deckeditor.controllers;
 
-import forge.deck.DeckBase;
 import forge.deck.DeckProxy;
 import forge.gui.framework.ICDoc;
-import forge.item.InventoryItem;
-import forge.itemmanager.DeckManager;
-import forge.itemmanager.ItemManagerConfig;
-import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.views.VCommanderDecks;
 
 /**

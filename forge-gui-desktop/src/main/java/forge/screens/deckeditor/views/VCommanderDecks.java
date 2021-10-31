@@ -2,7 +2,6 @@ package forge.screens.deckeditor.views;
 
 import javax.swing.JPanel;
 
-import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
 import forge.gui.framework.DragCell;
