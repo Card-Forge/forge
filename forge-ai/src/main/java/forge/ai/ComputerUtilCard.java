@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import forge.card.mana.ManaCost;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -1969,6 +1970,19 @@ public class ComputerUtilCard {
         }
 
         return AiPlayDecision.WillPlay;
+    }
+
+    public static Cost getTotalWardCost(Card c) {
+        Cost totalCost = new Cost(ManaCost.NO_COST, false);
+        for (final KeywordInterface inst : c.getKeywords()) {
+            if (inst.getKeyword() == Keyword.WARD) {
+                final String keyword = inst.getOriginal();
+                final String[] k = keyword.split(":");
+                final Cost wardCost = new Cost(k[1], false);
+                totalCost = totalCost.add(wardCost);
+            }
+        }
+        return totalCost;
     }
 
     // Determine if the AI has an AI:RemoveDeck:All or an AI:RemoveDeck:Random hint specified.

@@ -747,8 +747,22 @@ public class AiController {
         if (sa.usesTargeting()) {
             for (Card tgt : sa.getTargets().getTargetCards()) {
                 if (tgt.hasKeyword(Keyword.WARD) && tgt.getController().isOpponentOf(sa.getHostCard().getController())) {
-                    int amount = tgt.getKeywordMagnitude(Keyword.WARD);
-                    if (amount > 0 && !ComputerUtilCost.canPayCost(sa, player)) {
+                    int amount = 0;
+                    Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
+                    if (wardCost.hasManaCost()) {
+                        amount = wardCost.getTotalMana().getCMC();
+                        if (amount > 0 && !ComputerUtilCost.canPayCost(sa, player)) {
+                            return AiPlayDecision.CantAfford;
+                        }
+                    }
+                    if (wardCost.hasSpecificCostType(CostPayLife.class)) {
+                        int lifeToPay = wardCost.getCostPartByType(CostPayLife.class).convertAmount();
+                        if (lifeToPay > player.getLife() || (lifeToPay == player.getLife() && !player.cantLoseForZeroOrLessLife())) {
+                            return AiPlayDecision.CantAfford;
+                        }
+                    }
+                    if (wardCost.hasSpecificCostType(CostDiscard.class)
+                            && wardCost.getCostPartByType(CostDiscard.class).convertAmount() > player.getCardsIn(ZoneType.Hand).size()) {
                         return AiPlayDecision.CantAfford;
                     }
                 }

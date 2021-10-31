@@ -593,7 +593,10 @@ public class ComputerUtilCost {
         if (sa.usesTargeting()) {
             for (Card tgt : sa.getTargets().getTargetCards()) {
                 if (tgt.hasKeyword(Keyword.WARD) && tgt.getController().isOpponentOf(sa.getHostCard().getController())) {
-                    extraManaNeeded += tgt.getKeywordMagnitude(Keyword.WARD);
+                    Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
+                    if (wardCost.hasManaCost()) {
+                        extraManaNeeded += wardCost.getTotalMana().getCMC();
+                    }
                 }
             }
         }
