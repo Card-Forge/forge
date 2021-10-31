@@ -289,7 +289,7 @@ public class ComputerUtil {
 
         final Card source = newSA.getHostCard();
         if (newSA.isSpell() && !source.isCopiedSpell()) {
-            newSA.setHostCard(game.getAction().moveToStack(source, sa));
+            newSA.setHostCard(game.getAction().moveToStack(source, newSA));
 
             if (newSA.getApi() == ApiType.Charm && !newSA.isWrapper()) {
                 if (!CharmEffect.makeChoices(newSA)) {

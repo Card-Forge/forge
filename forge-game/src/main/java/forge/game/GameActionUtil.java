@@ -105,6 +105,7 @@ public final class GameActionUtil {
                 lkicheck = true;
             }
 
+            // 601.3e
             if (lkicheck) {
                 // double freeze tracker, so it doesn't update view
                 game.getTracker().freeze();
@@ -377,6 +378,7 @@ public final class GameActionUtil {
             lkicheck = true;
         }
 
+        // 601.3e
         if (lkicheck) {
             // double freeze tracker, so it doesn't update view
             game.getTracker().freeze();
