@@ -123,9 +123,9 @@ public final class StaticAbilityContinuous {
         String addT = "";
         int toughnessBonus = 0;
         String setP = "";
-        int setPower = Integer.MAX_VALUE;
+        Integer setPower = null;
         String setT = "";
-        int setToughness = Integer.MAX_VALUE;
+        Integer setToughness = null;
 
         List<String> addKeywords = null;
         List<String> addHiddenKeywords = Lists.newArrayList();
@@ -682,7 +682,7 @@ public final class StaticAbilityContinuous {
 
             // set P/T
             if (layer == StaticAbilityLayer.SETPT) {
-                if ((setPower != Integer.MAX_VALUE) || (setToughness != Integer.MAX_VALUE)) {
+                if ((setPower != null) || (setToughness != null)) {
                     // non CharacteristicDefining
                     if (setP.startsWith("Affected")) {
                         setPower = AbilityUtils.calculateAmount(affectedCard, setP, stAb, true);
