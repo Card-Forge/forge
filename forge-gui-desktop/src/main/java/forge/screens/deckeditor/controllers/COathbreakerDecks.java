@@ -31,7 +31,7 @@ public enum COathbreakerDecks implements ICDoc {
     }
 
     public void refresh() {
-        view.getLstDecks().setPool(DeckProxy.getAllOathbreakerDecks());
+        CAllDecks.refreshDeckManager(view.getLstDecks(), DeckProxy.getAllOathbreakerDecks());
     }
 
     /* (non-Javadoc)
@@ -39,6 +39,6 @@ public enum COathbreakerDecks implements ICDoc {
      */
     @Override
     public void update() {
-        view.getLstDecks().setup(ItemManagerConfig.CONSTRUCTED_DECKS);
+        CAllDecks.updateDeckManager(view.getLstDecks());
     }
 }

@@ -35,7 +35,7 @@ public enum CAllDecks implements ICDoc {
     }
 
     public void refresh() {
-        view.getLstDecks().setPool(DeckProxy.getAllConstructedDecks());
+        refreshDeckManager(view.getLstDecks(), DeckProxy.getAllConstructedDecks());
     }
 
     /* (non-Javadoc)
@@ -43,18 +43,25 @@ public enum CAllDecks implements ICDoc {
      */
     @Override
     public void update() {
-        DeckManager deckManager = view.getLstDecks();
-        deckManager.setup(ItemManagerConfig.CONSTRUCTED_DECKS);
-        if (deckManager.getSelectedIndex() == 0) {
+        updateDeckManager(view.getLstDecks());
+    }
+
+    public static void refreshDeckManager(DeckManager dm, Iterable<DeckProxy> deckList){
+        dm.setPool(deckList);
+    }
+
+    public static void updateDeckManager(DeckManager dm){
+        dm.setup(ItemManagerConfig.CONSTRUCTED_DECKS);
+        if (dm.getSelectedIndex() == 0) {
             // This may be default and so requiring potential update!
             ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl =
                     CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
             if (editorCtrl != null) {
                 String currentDeckName = editorCtrl.getDeckController().getModelName();
                 if (currentDeckName != null && currentDeckName.length() > 0) {
-                    DeckProxy deckProxy = deckManager.stringToItem(currentDeckName);
-                    if (deckProxy != null && !deckManager.getSelectedItem().equals(deckProxy))
-                        view.getLstDecks().setSelectedItem(deckProxy);
+                    DeckProxy deckProxy = dm.stringToItem(currentDeckName);
+                    if (deckProxy != null && !dm.getSelectedItem().equals(deckProxy))
+                        dm.setSelectedItem(deckProxy);
                 }
             }
         }

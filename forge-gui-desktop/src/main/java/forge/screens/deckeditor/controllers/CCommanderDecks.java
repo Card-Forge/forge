@@ -35,7 +35,7 @@ public enum CCommanderDecks implements ICDoc {
     }
 
     public void refresh() {
-        view.getLstDecks().setPool(DeckProxy.getAllCommanderDecks());
+        CAllDecks.refreshDeckManager(view.getLstDecks(), DeckProxy.getAllCommanderDecks());
     }
 
     /* (non-Javadoc)
@@ -43,20 +43,6 @@ public enum CCommanderDecks implements ICDoc {
      */
     @Override
     public void update() {
-        DeckManager deckManager = view.getLstDecks();
-        deckManager.setup(ItemManagerConfig.CONSTRUCTED_DECKS);
-        if (deckManager.getSelectedIndex() == 0) {
-            // This may be default and so requiring potential update!
-            ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl =
-                    CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
-            if (editorCtrl != null) {
-                String currentDeckName = editorCtrl.getDeckController().getModelName();
-                if (currentDeckName != null && currentDeckName.length() > 0) {
-                    DeckProxy deckProxy = deckManager.stringToItem(currentDeckName);
-                    if (deckProxy != null && !deckManager.getSelectedItem().equals(deckProxy))
-                        view.getLstDecks().setSelectedItem(deckProxy);
-                }
-            }
-        }
+        CAllDecks.updateDeckManager(view.getLstDecks());
     }
 }

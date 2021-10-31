@@ -79,12 +79,13 @@ public enum VTinyLeadersDecks implements IVDoc<CTinyLeadersDecks> {
     @Override
     public void populate() {
         CTinyLeadersDecks.SINGLETON_INSTANCE.refresh(); //ensure decks refreshed in case any deleted or added since last loaded
+        String preferredDeck = DeckPreferences.getTinyLeadersDeck();
 
         JPanel parentBody = parentCell.getBody();
         parentBody.setLayout(new MigLayout("insets 5, gap 0, wrap, hidemode 3"));
         parentBody.add(new ItemManagerContainer(lstDecks), "push, grow");
-        String preferredDeck = DeckPreferences.getTinyLeadersDeck();
-        lstDecks.editDeck(lstDecks.stringToItem(preferredDeck));
+
+        VAllDecks.editPreferredDeck(lstDecks, preferredDeck);
     }
 
     //========== Retrieval methods

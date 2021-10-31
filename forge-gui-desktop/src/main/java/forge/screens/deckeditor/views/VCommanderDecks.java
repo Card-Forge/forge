@@ -80,16 +80,11 @@ public enum VCommanderDecks implements IVDoc<CCommanderDecks> {
     @Override
     public void populate() {
         CCommanderDecks.SINGLETON_INSTANCE.refresh(); //ensure decks refreshed in case any deleted or added since last loaded
-
+        String preferredDeck = DeckPreferences.getCommanderDeck();
         JPanel parentBody = parentCell.getBody();
         parentBody.setLayout(new MigLayout("insets 5, gap 0, wrap, hidemode 3"));
         parentBody.add(new ItemManagerContainer(lstDecks), "push, grow");
-        String preferredDeck = DeckPreferences.getCommanderDeck();
-        DeckProxy deckProxy = lstDecks.stringToItem(preferredDeck);
-        if (deckProxy != null) {
-            lstDecks.editDeck(deckProxy);
-            lstDecks.setSelectedItem(deckProxy);
-        }
+        VAllDecks.editPreferredDeck(lstDecks, preferredDeck);
     }
 
     //========== Retrieval methods
