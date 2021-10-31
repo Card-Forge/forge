@@ -2,6 +2,7 @@ package forge.screens.deckeditor.views;
 
 import javax.swing.JPanel;
 
+import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
 import forge.gui.framework.DragCell;
@@ -79,12 +80,13 @@ public enum VBrawlDecks implements IVDoc<CBrawlDecks> {
     @Override
     public void populate() {
         CBrawlDecks.SINGLETON_INSTANCE.refresh(); //ensure decks refreshed in case any deleted or added since last loaded
+        String preferredDeck = DeckPreferences.getBrawlDeck();
 
         JPanel parentBody = parentCell.getBody();
         parentBody.setLayout(new MigLayout("insets 5, gap 0, wrap, hidemode 3"));
         parentBody.add(new ItemManagerContainer(lstDecks), "push, grow");
-        String preferredDeck = DeckPreferences.getBrawlDeck();
-        lstDecks.editDeck(lstDecks.stringToItem(preferredDeck));
+
+        VAllDecks.editPreferredDeck(lstDecks, preferredDeck);
     }
 
     //========== Retrieval methods

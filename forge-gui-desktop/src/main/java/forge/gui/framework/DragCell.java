@@ -214,7 +214,6 @@ public final class DragCell extends JPanel implements ILocalRepaint {
 
     /**
      * Automatically calculates rough bounds of this cell.
-     * @param rectangleOfDouble
      */
     public void updateRoughBounds() {
         final double contentW = FView.SINGLETON_INSTANCE.getPnlContent().getWidth();
@@ -226,10 +225,6 @@ public final class DragCell extends JPanel implements ILocalRepaint {
 
     /** Explicitly sets percent bounds of this cell.  Will be smoothed
      *  later to avoid pixel rounding errors.
-     *  @param x0 &emsp; double
-     *  @param y0 &emsp; double
-     *  @param w0 &emsp; double
-     *  @param h0 &emsp; double
      */
     public void setRoughBounds(final RectangleOfDouble rectangleOfDouble) {
         this.roughSize = rectangleOfDouble;

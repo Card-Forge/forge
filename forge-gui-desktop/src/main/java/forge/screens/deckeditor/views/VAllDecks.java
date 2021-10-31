@@ -2,6 +2,7 @@ package forge.screens.deckeditor.views;
 
 import javax.swing.JPanel;
 
+import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
 import forge.gui.framework.DragCell;
@@ -79,12 +80,18 @@ public enum VAllDecks implements IVDoc<CAllDecks> {
     @Override
     public void populate() {
         CAllDecks.SINGLETON_INSTANCE.refresh(); //ensure decks refreshed in case any deleted or added since last loaded
-
+        String preferredDeck = DeckPreferences.getCurrentDeck();
         JPanel parentBody = parentCell.getBody();
         parentBody.setLayout(new MigLayout("insets 5, gap 0, wrap, hidemode 3"));
         parentBody.add(new ItemManagerContainer(lstDecks), "push, grow");
-        String preferredDeck = DeckPreferences.getCurrentDeck();
-        lstDecks.editDeck(lstDecks.stringToItem(preferredDeck));
+        editPreferredDeck(lstDecks, preferredDeck);
+    }
+
+    public static void editPreferredDeck(DeckManager lstDecks, String preferredDeck) {
+        DeckProxy deckProxy = lstDecks.stringToItem(preferredDeck);
+        lstDecks.editDeck(deckProxy);
+        if (deckProxy != null)
+            lstDecks.setSelectedItem(deckProxy);
     }
 
     //========== Retrieval methods

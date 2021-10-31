@@ -31,7 +31,7 @@ public enum CBrawlDecks implements ICDoc {
     }
 
     public void refresh() {
-        view.getLstDecks().setPool(DeckProxy.getAllBrawlDecks());
+        CAllDecks.refreshDeckManager(view.getLstDecks(), DeckProxy.getAllBrawlDecks());
     }
 
     /* (non-Javadoc)
@@ -39,6 +39,6 @@ public enum CBrawlDecks implements ICDoc {
      */
     @Override
     public void update() {
-        view.getLstDecks().setup(ItemManagerConfig.CONSTRUCTED_DECKS);
+        CAllDecks.updateDeckManager(view.getLstDecks());
     }
 }

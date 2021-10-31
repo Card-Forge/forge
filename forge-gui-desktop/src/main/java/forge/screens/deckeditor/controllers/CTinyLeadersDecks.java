@@ -31,7 +31,7 @@ public enum CTinyLeadersDecks implements ICDoc {
     }
 
     public void refresh() {
-        view.getLstDecks().setPool(DeckProxy.getAllTinyLeadersDecks());
+        CAllDecks.refreshDeckManager(view.getLstDecks(), DeckProxy.getAllTinyLeadersDecks());
     }
 
     /* (non-Javadoc)
@@ -39,6 +39,6 @@ public enum CTinyLeadersDecks implements ICDoc {
      */
     @Override
     public void update() {
-        view.getLstDecks().setup(ItemManagerConfig.CONSTRUCTED_DECKS);
+        CAllDecks.updateDeckManager(view.getLstDecks());
     }
 }
