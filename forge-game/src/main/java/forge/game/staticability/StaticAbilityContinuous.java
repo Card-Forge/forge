@@ -165,7 +165,7 @@ public final class StaticAbilityContinuous {
             effects.setGlobalRuleChange(GlobalRuleChange.fromString(params.get("GlobalRule")));
         }
 
-        if (layer == StaticAbilityLayer.SETPT &&params.containsKey("SetPower")) {
+        if (layer == StaticAbilityLayer.SETPT && params.containsKey("SetPower")) {
             setP = params.get("SetPower");
             setPower = AbilityUtils.calculateAmount(hostCard, setP, stAb);
         }
