@@ -1,0 +1,10 @@
+Name:Dominating Vampire
+ManaCost:1 R R
+Types:Creature Vampire
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainControl | TriggerDescription$ When CARDNAME enters the battlefield, gain control of target creature an opponent controls with mana value less than or equal to the number of Vampires you control until end of turn. Untap that creature. It gains haste until end of turn.
+SVar:TrigGainControl:DB$ GainControl | TgtPrompt$ Select target creature with mana value less than or equal to the number of Vampires you control | ValidTgts$ Creature.cmcLEX | LoseControl$ EOT | Untap$ True | AddKWs$ Haste
+SVar:X:Count$Valid Vampire.YouCtrl
+DeckHints:Type$Vampire
+SVar:PlayMain1:OPPONENTCREATURES
+Oracle:When Dominating Vampire enters the battlefield, gain control of target creature with mana value less than or equal to the number of Vampires you control until end of turn. Untap that creature. It gains haste until end of turn.
