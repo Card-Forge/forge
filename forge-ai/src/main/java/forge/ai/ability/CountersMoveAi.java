@@ -492,4 +492,10 @@ public class CountersMoveAi extends SpellAbilityAi {
         // like keeping the last counter on a 0/0 creature
         return max;
     }
+
+    @Override
+    public CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, Map<String, Object> params) {
+        // TODO
+        return super.chooseCounterType(options, sa, params);
+    }
 }

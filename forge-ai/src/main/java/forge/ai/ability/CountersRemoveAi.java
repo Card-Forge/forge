@@ -144,7 +144,6 @@ public class CountersRemoveAi extends SpellAbilityAi {
                 sa.getTargets().add(ComputerUtilCard.getBestPlaneswalkerAI(planeswalkerList));
                 return true;
             }
-
         } else if (type.matches("Any")) {
             // variable amount for Hex Parasite
             int amount;
@@ -264,7 +263,6 @@ public class CountersRemoveAi extends SpellAbilityAi {
                 sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(aiList));
                 return true;
             }
-
         } else if (type.equals("P1P1")) {
             // no special amount for that one yet
             int amount = AbilityUtils.calculateAmount(source, amountStr, sa);
@@ -298,7 +296,6 @@ public class CountersRemoveAi extends SpellAbilityAi {
                     return true;
                 }
             }
-
         } else if (type.equals("TIME")) {
             int amount;
             boolean xPay = false;

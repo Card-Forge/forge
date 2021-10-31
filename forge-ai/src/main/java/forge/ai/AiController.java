@@ -733,26 +733,40 @@ public class AiController {
 
         AiPlayDecision canPlay = canPlaySa(sa); // this is the "heaviest" check, which also sets up targets, defines X, etc.
 
-        // Account for possible Ward after the spell is fully targeted
-        // TODO: ideally, this should be done while targeting, so that a different target can be preferred if the best
-        // one is warded and can't be paid for.
-        if (sa.usesTargeting()) {
-            for (Card tgt : sa.getTargets().getTargetCards()) {
-                if (tgt.hasKeyword(Keyword.WARD)) {
-                    int amount = tgt.getKeywordMagnitude(Keyword.WARD);
-                    if (amount > 0 && !ComputerUtilCost.canPayCost(sa, player)) {
-                        return AiPlayDecision.CantAfford;
-                    }
-                }
-            }
-        }
-
         if (sa.getCardState() != null && !sa.getHostCard().isInPlay() && sa.getCardState().getStateName() == CardStateName.Modal) {
             sa.getHostCard().setState(CardStateName.Original, false);
         }
 
         if (canPlay != AiPlayDecision.WillPlay) {
             return canPlay;
+        }
+
+        // Account for possible Ward after the spell is fully targeted
+        // TODO: ideally, this should be done while targeting, so that a different target can be preferred if the best
+        // one is warded and can't be paid for.
+        if (sa.usesTargeting()) {
+            for (Card tgt : sa.getTargets().getTargetCards()) {
+                if (tgt.hasKeyword(Keyword.WARD) && tgt.getController().isOpponentOf(sa.getHostCard().getController())) {
+                    int amount = 0;
+                    Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
+                    if (wardCost.hasManaCost()) {
+                        amount = wardCost.getTotalMana().getCMC();
+                        if (amount > 0 && !ComputerUtilCost.canPayCost(sa, player)) {
+                            return AiPlayDecision.CantAfford;
+                        }
+                    }
+                    if (wardCost.hasSpecificCostType(CostPayLife.class)) {
+                        int lifeToPay = wardCost.getCostPartByType(CostPayLife.class).convertAmount();
+                        if (lifeToPay > player.getLife() || (lifeToPay == player.getLife() && !player.cantLoseForZeroOrLessLife())) {
+                            return AiPlayDecision.CantAfford;
+                        }
+                    }
+                    if (wardCost.hasSpecificCostType(CostDiscard.class)
+                            && wardCost.getCostPartByType(CostDiscard.class).convertAmount() > player.getCardsIn(ZoneType.Hand).size()) {
+                        return AiPlayDecision.CantAfford;
+                    }
+                }
+            }
         }
 
         // check if some target raised cost
