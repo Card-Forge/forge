@@ -2478,19 +2478,22 @@ public class ComputerUtilCombat {
         int pd = 0, poison = 0;
         int damageAfterRepl = predictDamageTo(attacked, damage, attacker, true);
         if (damageAfterRepl > 0) {
-            for (Trigger t : attacker.getTriggers()) {
-                if (t.getMode() == TriggerType.DamageDone && "True".equals(t.getParam("CombatDamage"))) {
-                    SpellAbility ab = t.getOverridingAbility();
-                    if (ab.getApi() == ApiType.Poison && "TriggeredTarget".equals(ab.getParam("Defined"))) {
-                        pd += AbilityUtils.calculateAmount(attacker, ab.getParam("Num"), ab);
+            CardCollectionView trigCards = attacker.getController().getCardsIn(ZoneType.Battlefield);
+            for (Card c : trigCards) {
+                for (Trigger t : c.getTriggers()) {
+                    if (t.getMode() == TriggerType.DamageDone && "True".equals(t.getParam("CombatDamage")) && t.matchesValidParam("ValidSource", attacker)) {
+                        SpellAbility ab = t.getOverridingAbility();
+                        if (ab.getApi() == ApiType.Poison && "TriggeredTarget".equals(ab.getParam("Defined"))) {
+                            pd += AbilityUtils.calculateAmount(attacker, ab.getParam("Num"), ab);
+                        }
                     }
                 }
-            }
-            poison += pd;
-            if (pd > 0 && attacker.hasKeyword(Keyword.DOUBLE_STRIKE)) {
                 poison += pd;
+                if (pd > 0 && attacker.hasKeyword(Keyword.DOUBLE_STRIKE)) {
+                    poison += pd;
+                }
+                // TODO: Predict replacement effects for counters (doubled, reduced, additional counters, etc.)
             }
-            // TODO: Predict replacement effects for counters (doubled, reduced, additional counters, etc.)
         }
         return poison;
     }
