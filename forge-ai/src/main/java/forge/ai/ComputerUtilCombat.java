@@ -60,7 +60,7 @@ import forge.util.collect.FCollection;
 /**
  * <p>
  * ComputerCombatUtil class.
- * </p>;
+ * </p>
  *
  * @author Forge
  * @version $Id: ComputerUtil.java 19179 2013-01-25 18:48:29Z Max mtg  $
