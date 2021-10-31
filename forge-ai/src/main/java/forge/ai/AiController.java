@@ -730,7 +730,21 @@ public class AiController {
         if (sa.getCardState() != null && !sa.getHostCard().isInPlay() && sa.getCardState().getStateName() == CardStateName.Modal) {
             sa.getHostCard().setState(CardStateName.Modal, false);
         }
+
         AiPlayDecision canPlay = canPlaySa(sa); // this is the "heaviest" check, which also sets up targets, defines X, etc.
+
+        // Account for possible Ward after the spell is fully targeted
+        if (sa.usesTargeting()) {
+            for (Card tgt : sa.getTargets().getTargetCards()) {
+                if (tgt.hasKeyword(Keyword.WARD)) {
+                    int amount = tgt.getKeywordMagnitude(Keyword.WARD);
+                    if (amount > 0 && !ComputerUtilCost.canPayCost(sa, player)) {
+                        return AiPlayDecision.CantAfford;
+                    }
+                }
+            }
+        }
+
         if (sa.getCardState() != null && !sa.getHostCard().isInPlay() && sa.getCardState().getStateName() == CardStateName.Modal) {
             sa.getHostCard().setState(CardStateName.Original, false);
         }
