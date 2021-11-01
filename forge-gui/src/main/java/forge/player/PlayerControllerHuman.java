@@ -481,7 +481,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public CardCollectionView choosePermanentsToSacrifice(final SpellAbility sa, final int min, final int max,
             final CardCollectionView valid, final String message) {
-        return choosePermanentsTo(min, max, valid, message, localizer.getMessage("lblSacrifice"), sa);
+        return choosePermanentsTo(min, max, valid, message, localizer.getMessage("lblSacrifice").toLowerCase(), sa);
     }
 
     @Override
