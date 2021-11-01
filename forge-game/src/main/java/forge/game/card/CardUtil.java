@@ -64,7 +64,7 @@ public final class CardUtil {
             "Affinity", "Entwine", "Splice", "Ninjutsu", "Presence",
             "Transmute", "Replicate", "Recover", "Suspend", "Aura swap",
             "Fortify", "Transfigure", "Champion", "Evoke", "Prowl", "IfReach",
-            "Reinforce", "Unearth", "Level up", "Miracle", "Overload",
+            "Reinforce", "Unearth", "Level up", "Miracle", "Overload", "Cleave",
             "Scavenge", "Encore", "Bestow", "Outlast", "Dash", "Surge", "Emerge", "Hexproof:",
             "etbCounter", "Reflect", "Ward").build();
     /** List of keyword endings of keywords that could be modified by text changes. */
