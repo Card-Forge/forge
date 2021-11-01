@@ -1923,11 +1923,12 @@ public class AiController {
         } else if ("Vermin".equals(logic)) {
             return MyRandom.getRandom().nextInt(Math.max(player.getLife() - 5, 0));
         } else if ("SweepCreatures".equals(logic)) {
+            int choiceLimit = AbilityUtils.calculateAmount(source, sa.getParam("Max"), sa);
             int maxCreatures = 0;
             for (Player opp : player.getOpponents()) {
                 maxCreatures = Math.max(maxCreatures, opp.getCreaturesInPlay().size());
             }
-            return Math.min(13, maxCreatures);
+            return Math.min(choiceLimit, maxCreatures);
         }
         return max;
     }
