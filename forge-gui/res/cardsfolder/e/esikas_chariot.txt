@@ -3,8 +3,8 @@ ManaCost:3 G
 Types:Legendary Artifact Vehicle
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 2/2 green Cat creature tokens.
-SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_2_2_cat | TokenOwner$ You
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ Whenever CARDNAME attacks, create a token that’s a copy of target token you control.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_2_2_cat
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ Whenever CARDNAME attacks, create a token that's a copy of target token you control.
 SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Permanent.token+YouCtrl | TgtPrompt$ Select target token you control | NumCopies$ 1
 K:Crew:4
 DeckHas:Ability$Token
