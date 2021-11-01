@@ -1,0 +1,9 @@
+Name:Mindleech Ghoul
+ManaCost:1 B
+Types:Creature Zombie
+PT:2/2
+K:Exploit
+T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME exploits a creature, each opponent exiles a card from their hand.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | DefinedPlayer$ Player.Opponent | Mandatory$ True | ChangeType$ Card | ChangeNum$ 1 | Hidden$ True | IsCurse$ True
+DeckHas:Ability$Sacrifice
+Oracle:Exploit (When this creature enters the battlefield, you may sacrifice a creature.)\nWhen Mindleech Ghoul exploits a creature, each opponent exiles a card from their hand.
