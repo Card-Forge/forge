@@ -1,0 +1,9 @@
+Name:Investigator's Journal
+ManaCost:2
+Types:Artifact Clue
+K:etbCounter:SUSPECT:X:no Condition:CARDNAME enters the battlefield with a number of suspect counters on it equal to the greatest number of creatures a player controls.
+SVar:X:PlayerCountPlayers$HighestValid Creature.YouCtrl
+A:AB$ Draw | Cost$ 2 T SubCounter<1/SUSPECT> | NumCards$ 1 | SpellDescription$ Draw a card.
+A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$Counters & Ability$Sacrifice
+Oracle:Investigator's Journal enters the battlefield with a number of suspect counters on it equal to the greatest number of creatures a player controls.\n{2}, {T}, Remove a suspect counter from Investigator's Journal: Draw a card.\n{2}, Sacrifice Investigator's Journal: Draw a card.
