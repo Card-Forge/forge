@@ -83,23 +83,29 @@ public class DeckRecognizer {
         // only used for card tokens
         private PaperCard card = null;
         private DeckSection tokenSection = null;
+        // Flag used to mark whether original card request had any specified set code
+        // This will be used to mark tokens that could be further processed by
+        // card art optimisation (if enabled)
+        private boolean cardRequestHasSetCode = true;
+
 
         public static Token LegalCard(final PaperCard card, final int count,
-                                      final DeckSection section) {
-            return new Token(TokenType.LEGAL_CARD, count, card, section);
+                                      final DeckSection section, final boolean cardRequestHasSetCode) {
+            return new Token(TokenType.LEGAL_CARD, count, card, section, cardRequestHasSetCode);
         }
 
         public static Token LimitedCard(final PaperCard card, final int count,
-                                        final DeckSection section, final LimitedCardType limitedType){
-            return new Token(TokenType.LIMITED_CARD, count, card, section, limitedType);
+                                        final DeckSection section, final LimitedCardType limitedType,
+                                        final boolean cardRequestHasSetCode){
+            return new Token(TokenType.LIMITED_CARD, count, card, section, limitedType, cardRequestHasSetCode);
         }
 
-        public static Token NotAllowedCard(final PaperCard card, final int count) {
-            return new Token(TokenType.CARD_FROM_NOT_ALLOWED_SET, count, card);
+        public static Token NotAllowedCard(final PaperCard card, final int count, final boolean cardRequestHasSetCode) {
+            return new Token(TokenType.CARD_FROM_NOT_ALLOWED_SET, count, card, cardRequestHasSetCode);
         }
 
-        public static Token CardInInvalidSet(final PaperCard card, final int count) {
-            return new Token(TokenType.CARD_FROM_INVALID_SET, count, card);
+        public static Token CardInInvalidSet(final PaperCard card, final int count, final boolean cardRequestHasSetCode) {
+            return new Token(TokenType.CARD_FROM_INVALID_SET, count, card, cardRequestHasSetCode);
         }
 
         // WARNING MESSAGES
@@ -154,7 +160,7 @@ public class DeckRecognizer {
             return new Token(TokenType.DECK_SECTION_NAME, matchedSection.name());
         }
 
-        private Token(final TokenType type1, final int count, final PaperCard tokenCard) {
+        private Token(final TokenType type1, final int count, final PaperCard tokenCard, boolean cardRequestHasSetCode) {
             this.number = count;
             this.type = type1;
             this.text = String.format("%s [%s] #%s",
@@ -162,18 +168,20 @@ public class DeckRecognizer {
             this.card = tokenCard;
             this.tokenSection = null;
             this.limitedCardType = null;
+            this.cardRequestHasSetCode = cardRequestHasSetCode;
         }
 
         private Token(final TokenType type1, final int count, final PaperCard tokenCard,
-                      final DeckSection section) {
-            this(type1, count, tokenCard);
+                      final DeckSection section, boolean cardRequestHasSetCode) {
+            this(type1, count, tokenCard, cardRequestHasSetCode);
             this.tokenSection = section;
             this.limitedCardType = null;
         }
 
         private Token(final TokenType type1, final int count, final PaperCard tokenCard,
-                      final DeckSection section, final LimitedCardType limitedCardType1) {
-            this(type1, count, tokenCard);
+                      final DeckSection section, final LimitedCardType limitedCardType1,
+                      boolean cardRequestHasSetCode) {
+            this(type1, count, tokenCard, cardRequestHasSetCode);
             this.tokenSection = section;
             this.limitedCardType = limitedCardType1;
         }
@@ -202,6 +210,10 @@ public class DeckRecognizer {
 
         public final int getQuantity() {
             return this.number;
+        }
+
+        public final boolean cardRequestHasNoCode() {
+            return !(this.cardRequestHasSetCode);
         }
 
         public final DeckSection getTokenSection() { return this.tokenSection; }
@@ -635,7 +647,8 @@ public class DeckRecognizer {
                 PaperCard pc = data.getCardFromSet(cardName, edition, collectorNumber, artIndex, isFoil);
                 if (pc != null)
                     // ok so the card has been found - let's see if there's any restriction on the set
-                    return checkAndSetCardToken(pc, edition, cardCount, deckSecFromCardLine, currentDeckSection);
+                    return checkAndSetCardToken(pc, edition, cardCount, deckSecFromCardLine,
+                                                currentDeckSection, true);
                 // UNKNOWN card as in the Counterspell|FEM case
                 return Token.UnknownCard(cardName, setCode, cardCount);
             }
@@ -654,7 +667,8 @@ public class DeckRecognizer {
 
             if (pc != null) {
                 CardEdition edition = StaticData.instance().getCardEdition(pc.getEdition());
-                return checkAndSetCardToken(pc, edition, cardCount, deckSecFromCardLine, currentDeckSection);
+                return checkAndSetCardToken(pc, edition, cardCount, deckSecFromCardLine,
+                                            currentDeckSection, false);
             }
         }
         return unknownCardToken;  // either null or unknown card
@@ -677,25 +691,26 @@ public class DeckRecognizer {
         return null;
     }
 
-    private Token checkAndSetCardToken(PaperCard pc, CardEdition edition, int cardCount,
-                                       String deckSecFromCardLine, DeckSection referenceSection) {
+    private Token checkAndSetCardToken(final PaperCard pc, final CardEdition edition, final int cardCount,
+                                       final String deckSecFromCardLine, final DeckSection referenceSection,
+                                       final boolean cardRequestHasSetCode) {
         // Note: Always Check Allowed Set First to avoid accidentally importing invalid cards
         // e.g. Banned Cards from not-allowed sets!
         if (IsIllegalInFormat(edition.getCode()))
             // Mark as illegal card
-            return Token.NotAllowedCard(pc, cardCount);
+            return Token.NotAllowedCard(pc, cardCount, cardRequestHasSetCode);
 
         if (isNotCompliantWithReleaseDateRestrictions(edition))
-            return Token.CardInInvalidSet(pc, cardCount);
+            return Token.CardInInvalidSet(pc, cardCount, cardRequestHasSetCode);
 
         DeckSection tokenSection = getTokenSection(deckSecFromCardLine, referenceSection, pc);
         if (isBannedInFormat(pc))
-            return Token.LimitedCard(pc, cardCount, tokenSection, LimitedCardType.BANNED);
+            return Token.LimitedCard(pc, cardCount, tokenSection, LimitedCardType.BANNED, cardRequestHasSetCode);
 
         if (isRestrictedInFormat(pc, cardCount))
-            return Token.LimitedCard(pc, cardCount, tokenSection, LimitedCardType.RESTRICTED);
+            return Token.LimitedCard(pc, cardCount, tokenSection, LimitedCardType.RESTRICTED, cardRequestHasSetCode);
 
-        return Token.LegalCard(pc, cardCount, tokenSection);
+        return Token.LegalCard(pc, cardCount, tokenSection, cardRequestHasSetCode);
     }
 
     // This would save tons of time in parsing Input + would also allow to return UnsupportedCardTokens beforehand
