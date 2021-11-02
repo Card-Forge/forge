@@ -351,7 +351,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             return String.format("%d %s", amount, originalRequestCandidate);
         return String.format("%d %s", amount, poolCardRequest);
     }
-    public void optimizeMainCardArt() {
+
+    public void optimizeCardArtInMain() {
         Map<DeckSection, ArrayList<String>> cardsWithNoEdition = new EnumMap<>(DeckSection.class);
         List<String> mainCards = new ArrayList<>();
         for (Entry<PaperCard, Integer> e: getMain())
@@ -360,6 +361,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         optimiseCardArtSelectionInDeckSections(cardsWithNoEdition, false);
 
     }
+
     private ArrayList<String> getAllCardNamesWithNoSpecifiedEdition(List<String> cardsInSection) {
         ArrayList<String> cardNamesWithNoEdition = new ArrayList<>();
         List<Pair<String, Integer>> cardRequests = CardPool.processCardList(cardsInSection);
@@ -434,8 +436,10 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             pool.add(isFoil ? card.getFoiled() : card, totalToAdd);  // art index requested, keep that way!
         else {
             int artCount = 1;
+
             if (multiArtPrint)
                 artCount = data.getCardArtCount(card);
+
             if (artCount > 1)
                 addAlternativeCardPrintInPoolWithMultipleArt(card, pool, totalToAdd, artCount);
             else

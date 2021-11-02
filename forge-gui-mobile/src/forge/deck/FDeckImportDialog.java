@@ -118,7 +118,7 @@ public class FDeckImportDialog extends FDialog {
                         FThreads.invokeInEdtLater(new Runnable() {
                             @Override
                             public void run() {
-                                deck.optimizeMainCardArt();
+                                deck.optimizeCardArtInMain();
                                 hide();
                                 callback.run(deck);
                             }
