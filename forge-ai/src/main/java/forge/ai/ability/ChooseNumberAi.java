@@ -3,6 +3,7 @@ package forge.ai.ability;
 import forge.ai.AiAttackController;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
+import forge.game.ability.AbilityUtils;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -17,6 +18,7 @@ public class ChooseNumberAi extends SpellAbilityAi {
         if (aiLogic.isEmpty()) {
             return false;
         } else if (aiLogic.equals("SweepCreatures")) {
+            int maxChoiceLimit = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Max"), sa);
             int ownCreatureCount = aiPlayer.getCreaturesInPlay().size();
             int oppMaxCreatureCount = 0;
             Player refOpp = null;
@@ -39,7 +41,7 @@ public class ChooseNumberAi extends SpellAbilityAi {
                 return false; // we're not pressured and our stuff seems better, don't do it yet
             }
 
-            return ownCreatureCount > oppMaxCreatureCount + 2 || ownCreatureCount < oppMaxCreatureCount;
+            return ownCreatureCount > oppMaxCreatureCount + 2 || ownCreatureCount < Math.min(oppMaxCreatureCount, maxChoiceLimit);
         }
 
         TargetRestrictions tgt = sa.getTargetRestrictions();
