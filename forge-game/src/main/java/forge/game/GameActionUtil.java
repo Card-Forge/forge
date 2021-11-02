@@ -733,7 +733,7 @@ public final class GameActionUtil {
             return list;
         }
         CardCollection completeList = new CardCollection();
-        PlayerCollection players = game.getPlayers();
+        PlayerCollection players = new PlayerCollection(game.getPlayers());
         // CR 613.7k use APNAP
         int indexAP = players.indexOf(game.getPhaseHandler().getPlayerTurn());
         if (indexAP != -1) {
