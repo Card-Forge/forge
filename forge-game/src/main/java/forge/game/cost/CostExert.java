@@ -84,7 +84,6 @@ public class CostExert extends CostPartWithList {
     public final boolean canPay(final SpellAbility ability, final Player payer) {
         final Card source = ability.getHostCard();
 
-
         if (!this.payCostFromSource()) {
             boolean needsAnnoucement = ability.hasParam("Announce") && this.getType().contains(ability.getParam("Announce"));
 
@@ -94,7 +93,6 @@ public class CostExert extends CostPartWithList {
 
 
             return needsAnnoucement || (amount == null) || (typeList.size() >= amount);
-
         }
 
         return true;

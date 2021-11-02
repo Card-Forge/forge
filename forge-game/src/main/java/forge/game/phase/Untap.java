@@ -226,8 +226,7 @@ public class Untap extends Phase {
         // even if they are not creatures
         for (final Card c : game.getCardsInGame()) {
             c.removeExertedBy(player);
-        }
-        
+        } 
     } // end doUntap
 
     private static void optionalUntap(final Card c) {
@@ -261,7 +260,7 @@ public class Untap extends Phase {
 
             @Override
             public boolean apply(final Card c) {
-                return ((c.isPhasedOut() && c.isDirectlyPhasedOut()) || c.hasKeyword(Keyword.PHASING));
+                return (c.isPhasedOut() && c.isDirectlyPhasedOut()) || c.hasKeyword(Keyword.PHASING);
             }
         });
 

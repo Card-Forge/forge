@@ -38,17 +38,16 @@ public class CostTap extends CostPart {
     }
 
     public int paymentOrder() { return -1; }
-    
+
     @Override
     public boolean isUndoable() { return true; }
-    
 
     @Override
     public boolean isReusable() { return true; }
 
     @Override
     public boolean isRenewable() { return true; }
-    
+
     @Override
     public final String toString() {
         return "{T}";
@@ -70,7 +69,7 @@ public class CostTap extends CostPart {
         ability.getHostCard().tap(true);
         return true;
     }
-    
+
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }

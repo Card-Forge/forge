@@ -350,7 +350,6 @@ public class AbilityManaPart implements java.io.Serializable {
                 }
             }
 
-
             if (sa.getHostCard() != null) {
                 if (sa.getHostCard().isValid(restriction, this.getSourceCard().getController(), this.getSourceCard(), null)) {
                     return true;
@@ -583,7 +582,6 @@ public class AbilityManaPart implements java.io.Serializable {
     public Card getSourceCard() {
         return sourceCard;
     }
-
     public void setSourceCard(final Card host) {
         sourceCard = host;
     }

@@ -132,9 +132,9 @@ public class FCheckBoxTree extends JTree {
             this.selectedChildrenCount = selectedChildrenCount;
             this.enabledChildrenCount = enabledChildrenCount;
         }
-        public boolean hasChildren() { return this.numberOfChildren > 0;}
-        public boolean allChildrenSelected(){ return this.numberOfChildren == this.selectedChildrenCount; };
-        public boolean allChildrenEnabled(){ return this.enabledChildrenCount == this.numberOfChildren; };
+        public boolean hasChildren() { return this.numberOfChildren > 0; }
+        public boolean allChildrenSelected() { return this.numberOfChildren == this.selectedChildrenCount; }
+        public boolean allChildrenEnabled() { return this.enabledChildrenCount == this.numberOfChildren; }
     }
 
     // == Fields of the FCheckboxTree class ==

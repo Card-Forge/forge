@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 blue Merfolk creature tokens with hexproof.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | LegacyImage$ u 1 1 merfolk hexproof rix | TokenScript$ u_1_1_merfolk_hexproof | TokenOwner$ You
-A:AB$ Pump | Cost$ 3 U  | ValidTgts$ Merfolk | TgtPrompt$ Select target Merfolk | KW$ HIDDEN Unblockable | SpellDescription$ Target Merfolk can't be blocked this turn.
+A:AB$ Pump | Cost$ 3 U | ValidTgts$ Merfolk | TgtPrompt$ Select target Merfolk | KW$ HIDDEN Unblockable | SpellDescription$ Target Merfolk can't be blocked this turn.
 DeckHints:Type$Merfolk
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aquatic_incursion.jpg
 Oracle:When Aquatic Incursion enters the battlefield, create two 1/1 blue Merfolk creature tokens with hexproof. (They can't be the targets of spells or abilities your opponents control.)\n{3}{U}: Target Merfolk can't be blocked this turn.

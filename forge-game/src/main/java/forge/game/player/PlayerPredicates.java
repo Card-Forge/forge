@@ -63,7 +63,6 @@ public final class PlayerPredicates {
         return Predicates.not(isCardInPlay(cardName));
     }
 
-
     public static final Predicate<Player> hasCounters() {
         return new Predicate<Player>() {
             @Override

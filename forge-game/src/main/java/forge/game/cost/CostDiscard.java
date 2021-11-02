@@ -226,8 +226,7 @@ public class CostDiscard extends CostPartWithList {
     protected void handleChangeZoneTrigger(Player payer, SpellAbility ability, CardCollectionView targetCards) {
         super.handleChangeZoneTrigger(payer, ability, targetCards);
 
-        if (!targetCards.isEmpty())
-        {
+        if (!targetCards.isEmpty()) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Player, payer);
             runParams.put(AbilityKey.Cards, new CardCollection(targetCards));

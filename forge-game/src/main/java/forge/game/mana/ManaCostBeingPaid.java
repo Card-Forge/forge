@@ -154,8 +154,7 @@ public class ManaCostBeingPaid {
         for (ManaCostShard shard : manaCost) {
             if (shard == ManaCostShard.X) {
                 cntX++;
-            }
-            else {
+            } else {
                 increaseShard(shard, 1, false);
             }
         }
@@ -588,8 +587,7 @@ public class ManaCostBeingPaid {
         for (ManaCostShard shard : extra) {
             if (shard == ManaCostShard.X) {
                 cntX++;
-            }
-            else {
+            } else {
                 increaseShard(shard, 1, false);
             }
         }

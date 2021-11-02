@@ -682,7 +682,7 @@ public final class StaticAbilityContinuous {
 
             // set P/T
             if (layer == StaticAbilityLayer.SETPT) {
-                if ((setPower != null) || (setToughness != null)) {
+                if (setPower != null || setToughness != null) {
                     // non CharacteristicDefining
                     if (setP.startsWith("Affected")) {
                         setPower = AbilityUtils.calculateAmount(affectedCard, setP, stAb, true);
@@ -709,7 +709,7 @@ public final class StaticAbilityContinuous {
             // add keywords
             // TODO regular keywords currently don't try to use keyword multiplier
             // (Although nothing uses it at this time)
-            if ((addKeywords != null) || (removeKeywords != null) || removeAllAbilities) {
+            if (addKeywords != null || removeKeywords != null || removeAllAbilities) {
                 List<String> newKeywords = null;
                 if (addKeywords != null) {
                     newKeywords = Lists.newArrayList(addKeywords);

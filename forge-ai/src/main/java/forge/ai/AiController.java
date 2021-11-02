@@ -746,7 +746,7 @@ public class AiController {
         // one is warded and can't be paid for.
         if (sa.usesTargeting()) {
             for (Card tgt : sa.getTargets().getTargetCards()) {
-                if (tgt.hasKeyword(Keyword.WARD) && tgt.getController().isOpponentOf(sa.getHostCard().getController())) {
+                if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(sa.getHostCard().getController())) {
                     int amount = 0;
                     Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
                     if (wardCost.hasManaCost()) {
