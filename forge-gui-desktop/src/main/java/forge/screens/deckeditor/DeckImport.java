@@ -565,13 +565,13 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
                     DeckRecognizer.Token dummy = null;
                     switch (tokenKey.tokenType) {
                         case CARD_FROM_INVALID_SET:
-                            dummy = DeckRecognizer.Token.CardInInvalidSet(card, 0);
+                            dummy = DeckRecognizer.Token.CardInInvalidSet(card, 0, true);
                             break;
                         case CARD_FROM_NOT_ALLOWED_SET:
-                            dummy = DeckRecognizer.Token.NotAllowedCard(card, 0);
+                            dummy = DeckRecognizer.Token.NotAllowedCard(card, 0, true);
                             break;
                         case LIMITED_CARD:
-                            dummy = DeckRecognizer.Token.LimitedCard(card, 0, tokenKey.deckSection, tokenKey.limitedType);
+                            dummy = DeckRecognizer.Token.LimitedCard(card, 0, tokenKey.deckSection, tokenKey.limitedType, true);
                             break;
                     }
                     String cssClass = getTokenCSSClass(tokenKey.tokenType);
