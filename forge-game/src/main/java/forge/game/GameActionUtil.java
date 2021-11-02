@@ -178,10 +178,13 @@ public final class GameActionUtil {
                         final String[] k = keyword.split(":");
                         final Cost disturbCost = new Cost(k[1], true);
 
-                        final SpellAbility backSA = source.getAlternateState().getFirstAbility();
-                        SpellAbility newSA = source.getAlternateState().getType().isCreature() ?
-                                sa.copyWithManaCostReplaced(activator, disturbCost) :
-                                backSA.copyWithManaCostReplaced(activator, disturbCost);
+                        SpellAbility newSA;
+                        if (source.getAlternateState().getType().isEnchantment()) {
+                            newSA = source.getAlternateState().getFirstAbility().copyWithManaCostReplaced(activator,
+                                    disturbCost);
+                        } else {
+                            newSA = sa.copyWithManaCostReplaced(activator, disturbCost);
+                        }
                         newSA.setActivatingPlayer(activator);
 
                         newSA.putParam("PrecostDesc", "Disturb —");
