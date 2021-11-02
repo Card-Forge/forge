@@ -182,8 +182,7 @@ public class DeckController<T extends DeckBase> {
             if (card == null)
                 continue;
             int countToAdd = countByName.get(cardName);
-            card = StaticData.instance().getAlternativeCardPrint(card, referenceReleaseDate,
-                                        true, true);
+            card = StaticData.instance().getAlternativeCardPrint(card, referenceReleaseDate);
             if (card != null)
                 targetSection.add(card.getName(), card.getEdition(), countToAdd);
         }
