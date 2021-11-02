@@ -712,6 +712,13 @@ public class AiController {
             return AiPlayDecision.CantPlaySa;
         }
 
+        // Check a predefined condition
+        if (sa.hasParam("AICheckSVar")) {
+            if (!checkAISpecificSVarCondition(sa, sa.getHostCard())) {
+                return AiPlayDecision.AnotherTime;
+            }
+        }
+
         int oldCMC = -1;
         boolean xCost = sa.getPayCosts().hasXInAnyCostPart() || sa.getHostCard().hasStartOfKeyword("Strive");
         if (!xCost) {
@@ -1802,35 +1809,7 @@ public class AiController {
             }
         }
         if (effect.hasParam("AICheckSVar")) {
-            System.out.println("aiShouldRun?" + sa);
-            final String svarToCheck = effect.getParam("AICheckSVar");
-            String comparator = "GE";
-            int compareTo = 1;
-
-            if (effect.hasParam("AISVarCompare")) {
-                final String fullCmp = effect.getParam("AISVarCompare");
-                comparator = fullCmp.substring(0, 2);
-                final String strCmpTo = fullCmp.substring(2);
-                try {
-                    compareTo = Integer.parseInt(strCmpTo);
-                } catch (final Exception ignored) {
-                    if (sa == null) {
-                        compareTo = AbilityUtils.calculateAmount(hostCard, hostCard.getSVar(strCmpTo), effect);
-                    } else {
-                        compareTo = AbilityUtils.calculateAmount(hostCard, hostCard.getSVar(strCmpTo), sa);
-                    }
-                }
-            }
-
-            int left = 0;
-
-            if (sa == null) {
-                left = AbilityUtils.calculateAmount(hostCard, svarToCheck, effect);
-            } else {
-                left = AbilityUtils.calculateAmount(hostCard, svarToCheck, sa);
-            }
-            System.out.println("aiShouldRun?" + left + comparator + compareTo);
-            return Expressions.compare(left, comparator, compareTo);
+            return checkAISpecificSVarCondition(effect, hostCard);
         } else if (effect.hasParam("AICheckDredge")) {
             return player.getCardsIn(ZoneType.Library).size() > 8 || player.isCardInPlay("Laboratory Maniac");
         } else return sa != null && doTrigger(sa, false);
@@ -2336,4 +2315,37 @@ public class AiController {
         return Iterables.getFirst(list, null);
     }
 
+    private static boolean checkAISpecificSVarCondition(CardTraitBase ab, Card host) {
+        if (ab.hasParam("AICheckSVar")) {
+            final String svarToCheck = ab.getParam("AICheckSVar");
+            String comparator = "GE";
+            int compareTo = 1;
+
+            if (ab.hasParam("AISVarCompare")) {
+                final String fullCmp = ab.getParam("AISVarCompare");
+                comparator = fullCmp.substring(0, 2);
+                final String strCmpTo = fullCmp.substring(2);
+                try {
+                    compareTo = Integer.parseInt(strCmpTo);
+                } catch (final Exception ignored) {
+                    if (ab == null) {
+                        compareTo = AbilityUtils.calculateAmount(host, host.getSVar(strCmpTo), ab);
+                    } else {
+                        compareTo = AbilityUtils.calculateAmount(host, host.getSVar(strCmpTo), ab);
+                    }
+                }
+            }
+
+            int left = 0;
+
+            if (ab == null) {
+                left = AbilityUtils.calculateAmount(host, svarToCheck, ab);
+            } else {
+                left = AbilityUtils.calculateAmount(host, svarToCheck, ab);
+            }
+            return Expressions.compare(left, comparator, compareTo);
+        }
+
+        return false;
+    }
 }
