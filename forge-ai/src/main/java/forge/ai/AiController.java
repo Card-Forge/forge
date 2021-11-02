@@ -712,6 +712,40 @@ public class AiController {
             return AiPlayDecision.CantPlaySa;
         }
 
+        // Check a predefined condition (maybe refactor it later to avoid code duplication with similar replacement effect code?)
+        if (sa.hasParam("AICheckSVar")) {
+            final Card host = sa.getHostCard();
+            final String svarToCheck = sa.getParam("AICheckSVar");
+            String comparator = "GE";
+            int compareTo = 1;
+
+            if (sa.hasParam("AISVarCompare")) {
+                final String fullCmp = sa.getParam("AISVarCompare");
+                comparator = fullCmp.substring(0, 2);
+                final String strCmpTo = fullCmp.substring(2);
+                try {
+                    compareTo = Integer.parseInt(strCmpTo);
+                } catch (final Exception ignored) {
+                    if (sa == null) {
+                        compareTo = AbilityUtils.calculateAmount(host, host.getSVar(strCmpTo), sa);
+                    } else {
+                        compareTo = AbilityUtils.calculateAmount(host, host.getSVar(strCmpTo), sa);
+                    }
+                }
+            }
+
+            int left = 0;
+
+            if (sa == null) {
+                left = AbilityUtils.calculateAmount(host, svarToCheck, sa);
+            } else {
+                left = AbilityUtils.calculateAmount(host, svarToCheck, sa);
+            }
+            if (!Expressions.compare(left, comparator, compareTo)) {
+                return AiPlayDecision.AnotherTime;
+            }
+        }
+
         int oldCMC = -1;
         boolean xCost = sa.getPayCosts().hasXInAnyCostPart() || sa.getHostCard().hasStartOfKeyword("Strive");
         if (!xCost) {
