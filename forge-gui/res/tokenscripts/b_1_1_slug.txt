@@ -1,0 +1,6 @@
+Name:Slug
+ManaCost:no cost
+Types:Creature Slug
+Colors:black
+PT:1/1
+Oracle:
