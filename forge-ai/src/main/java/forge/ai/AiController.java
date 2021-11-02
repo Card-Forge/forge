@@ -712,7 +712,7 @@ public class AiController {
             return AiPlayDecision.CantPlaySa;
         }
 
-        // Check a predefined condition (maybe refactor it later to avoid code duplication with similar replacement effect code?)
+        // Check a predefined condition
         if (sa.hasParam("AICheckSVar")) {
             if (!checkAISpecificSVarCondition(sa, sa.getHostCard())) {
                 return AiPlayDecision.AnotherTime;
