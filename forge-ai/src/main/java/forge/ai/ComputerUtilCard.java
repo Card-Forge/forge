@@ -1746,12 +1746,12 @@ public class ComputerUtilCard {
                 int att = 0;
                 if (stAb.hasParam("AddPower")) {
                     String addP = stAb.getParam("AddPower");
-                    att = AbilityUtils.calculateAmount(addP.startsWith("Affected") ? vCard : c, addP, stAb, true);
+                    att = AbilityUtils.calculateAmount(addP.contains("Affected") ? vCard : c, addP, stAb, true);
                 }
                 int def = 0;
                 if (stAb.hasParam("AddToughness")) {
                     String addT = stAb.getParam("AddToughness");
-                    def = AbilityUtils.calculateAmount(addT.startsWith("Affected") ? vCard : c, addT, stAb, true);
+                    def = AbilityUtils.calculateAmount(addT.contains("Affected") ? vCard : c, addT, stAb, true);
                 }
                 vCard.addPTBoost(att, def, c.getTimestamp(), stAb.getId());
             }
