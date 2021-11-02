@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import forge.ai.AiAttackController;
+import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -18,11 +19,26 @@ public class ChooseNumberAi extends SpellAbilityAi {
         } else if (aiLogic.equals("SweepCreatures")) {
             int ownCreatureCount = aiPlayer.getCreaturesInPlay().size();
             int oppMaxCreatureCount = 0;
+            Player refOpp = null;
             for (Player opp : aiPlayer.getOpponents()) {
-                oppMaxCreatureCount = Math.max(oppMaxCreatureCount, opp.getCreaturesInPlay().size());
+                int oppCreatureCount = Math.max(oppMaxCreatureCount, opp.getCreaturesInPlay().size());
+                if (oppCreatureCount > oppMaxCreatureCount) {
+                    oppMaxCreatureCount = oppCreatureCount;
+                    refOpp = opp;
+                }
             }
 
-            // TODO: maybe check if the AI is actually pressured and/or check the total value of the creatures on both sides of the board
+            if (refOpp == null) {
+                return false; // no opponent has any creatures
+            }
+
+            int evalAI = ComputerUtilCard.evaluateCreatureList(aiPlayer.getCreaturesInPlay());
+            int evalOpp = ComputerUtilCard.evaluateCreatureList(refOpp.getCreaturesInPlay());
+
+            if (aiPlayer.getLifeLostLastTurn() + aiPlayer.getLifeLostThisTurn() == 0 && evalAI > evalOpp) {
+                return false; // we're not pressured and our stuff seems better, don't do it yet
+            }
+
             return ownCreatureCount > oppMaxCreatureCount + 2 || ownCreatureCount < oppMaxCreatureCount;
         }
 
