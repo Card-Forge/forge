@@ -592,7 +592,7 @@ public class ComputerUtilCost {
         // Ward - will be accounted for when rechecking a targeted ability
         if (sa.usesTargeting()) {
             for (Card tgt : sa.getTargets().getTargetCards()) {
-                if (tgt.hasKeyword(Keyword.WARD) && tgt.getController().isOpponentOf(sa.getHostCard().getController())) {
+                if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(sa.getHostCard().getController())) {
                     Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
                     if (wardCost.hasManaCost()) {
                         extraManaNeeded += wardCost.getTotalMana().getCMC();

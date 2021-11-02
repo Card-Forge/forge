@@ -2,7 +2,7 @@ Name:Awe for the Guilds
 ManaCost:2 R
 Types:Sorcery
 A:SP$ Effect | Cost$ 2 R | Name$ Awe for the Guilds Effect | StaticAbilities$ KWPump | AILogic$ Evasion | SpellDescription$ Monocolored creatures can't block this turn.
-SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.MonoColor| AddHiddenKeyword$ CARDNAME can't block. | Description$ Monocolored creatures can't block this turn.
+SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.MonoColor | AddHiddenKeyword$ CARDNAME can't block. | Description$ Monocolored creatures can't block this turn.
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/awe_for_the_guilds.jpg

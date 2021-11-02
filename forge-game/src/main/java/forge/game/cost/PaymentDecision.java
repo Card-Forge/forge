@@ -38,7 +38,7 @@ public class PaymentDecision {
         this.counterTable = counterTable;
     }
 
-    private  PaymentDecision(Card chosen) {
+    private PaymentDecision(Card chosen) {
         this(null, null, null, null, null);
         cards.add(chosen);
     }
@@ -81,7 +81,7 @@ public class PaymentDecision {
      */
     @Override
     public String toString() {
-        return  TextUtil.concatWithSpace("Payment Decision:", TextUtil.addSuffix(String.valueOf(c),","), cards.toString());
+        return TextUtil.concatWithSpace("Payment Decision:", TextUtil.addSuffix(String.valueOf(c),","), cards.toString());
     }
 
     public static PaymentDecision type(String choice) {
