@@ -178,7 +178,10 @@ public final class GameActionUtil {
                         final String[] k = keyword.split(":");
                         final Cost disturbCost = new Cost(k[1], true);
 
-                        final SpellAbility newSA = sa.copyWithManaCostReplaced(activator, disturbCost);
+                        final SpellAbility backSA = source.getAlternateState().getFirstAbility();
+                        SpellAbility newSA = source.getAlternateState().getType().isCreature() ?
+                                sa.copyWithManaCostReplaced(activator, disturbCost) :
+                                backSA.copyWithManaCostReplaced(activator, disturbCost);
                         newSA.setActivatingPlayer(activator);
 
                         newSA.putParam("PrecostDesc", "Disturb —");
@@ -190,11 +193,6 @@ public final class GameActionUtil {
                         desc.append("(").append(inst.getReminderText()).append(")");
                         newSA.setDescription(desc.toString());
                         newSA.putParam("AfterDescription", "(Disturbed)");
-                        final String type = source.getAlternateState().getType().toString();
-                        if (!type.contains("Creature")) {
-                            final String name = source.getAlternateState().getName();
-                            newSA.putParam("StackDescription", name + " — " + type + " (Disturbed)");
-                        }
 
                         newSA.setAlternativeCost(AlternativeCost.Disturb);
                         newSA.getRestrictions().setZone(ZoneType.Graveyard);
