@@ -1,7 +1,10 @@
 package forge.adventure.world;
 
 import forge.adventure.data.DifficultyData;
+import forge.adventure.stage.WorldStage;
 import forge.adventure.util.Config;
+import forge.adventure.util.SaveFileData;
+import forge.adventure.util.SignalList;
 import forge.deck.Deck;
 import forge.localinstance.properties.ForgeProfileProperties;
 import org.jetbrains.annotations.NotNull;
@@ -16,16 +19,17 @@ import java.util.zip.InflaterInputStream;
  */
 public class WorldSave {
 
-    static final int AUTO_SAVE_SLOT =-1;
-    static final int QUICK_SAVE_SLOT =-2;
-    static final int INVALID_SAVE_SLOT =-3;
-    static WorldSave currentSave=new WorldSave();
+    static final public int AUTO_SAVE_SLOT =-1;
+    static final public int QUICK_SAVE_SLOT =-2;
+    static final public int INVALID_SAVE_SLOT =-3;
+    static final WorldSave currentSave=new WorldSave();
     public WorldSaveHeader header = new WorldSaveHeader();
     private final AdventurePlayer player=new AdventurePlayer();
     private final World world=new World();
     private final HashMap<String,PointOfInterestChanges> pointOfInterestChanges=new HashMap<>();
 
 
+    private final SignalList onLoadList=new SignalList();
 
     public final World getWorld()
     {
@@ -36,6 +40,10 @@ public class WorldSave {
         return player;
     }
 
+    public void onLoad(Runnable run)
+    {
+        onLoadList.add(run);
+    }
     public PointOfInterestChanges getPointOfInterestChanges(String id)
     {
         if(!pointOfInterestChanges.containsKey(id))
@@ -53,8 +61,13 @@ public class WorldSave {
                 ObjectInputStream oos = new ObjectInputStream(inf))
             {
                 currentSave.header = (WorldSaveHeader) oos.readObject();
-                currentSave.player.readFromSaveFile(oos);
-                currentSave.world.readFromSaveFile(oos);
+                SaveFileData mainData=(SaveFileData)oos.readObject();
+                currentSave.player.load(mainData.readSubData("player"));
+                currentSave.world.load(mainData.readSubData("world"));
+                WorldStage.getInstance().load(mainData.readSubData("worldStage"));
+
+                currentSave.onLoadList.emit();
+
             }
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
@@ -105,10 +118,19 @@ public class WorldSave {
         currentSave.player.create(name, starterDeck, male, race, avatarIndex,diff);
         currentSave.player.setWorldPosY((int) (currentSave.world.getData().playerStartPosY * currentSave.world.getData().height * currentSave.world.getTileSize()));
         currentSave.player.setWorldPosX((int) (currentSave.world.getData().playerStartPosX * currentSave.world.getData().width * currentSave.world.getTileSize()));
+        currentSave.onLoadList.emit();
         return currentSave;
         //return currentSave = ret;
     }
-
+    public boolean autoSave() {
+        return save("auto save",AUTO_SAVE_SLOT);
+    }
+    public boolean quickSave() {
+        return save("quick save",QUICK_SAVE_SLOT);
+    }
+    public boolean quickLoad() {
+        return load(QUICK_SAVE_SLOT);
+    }
     public boolean save(String text, int currentSlot) {
         header.name = text;
 
@@ -121,8 +143,12 @@ public class WorldSave {
                 ObjectOutputStream oos = new ObjectOutputStream(def))
             {
                 oos.writeObject(header);
-                player.writeToSaveFile(oos);
-                world.writeToSaveFile(oos);
+                SaveFileData mainData=new SaveFileData();
+                mainData.store("player",currentSave.player.save());
+                mainData.store("world",currentSave.world.save());
+                mainData.store("worldStage", WorldStage.getInstance().save());
+
+                oos.writeObject(mainData);
             }
 
         } catch (IOException e) {
@@ -130,13 +156,6 @@ public class WorldSave {
             return false;
         }
         return true;
-    }
-
-    private void dispose() {
-
-        header.dispose();
-        player.dispose();
-        world.dispose();
     }
 
 }

@@ -266,7 +266,7 @@ public class CardUtil {
             case MythicRare:
                 return 500;
             default:
-                return 90000;
+                return 600;
         }
     }
 

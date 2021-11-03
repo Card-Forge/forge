@@ -13,10 +13,9 @@ import forge.adventure.scene.Scene;
 import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
 import forge.adventure.util.SaveFileContent;
-import forge.adventure.util.Serializer;
+import forge.adventure.util.SaveFileData;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -39,6 +38,7 @@ public class World implements  Disposable, SaveFileContent {
     private BiomeTexture[] biomeTexture;
     private long seed;
     private final Random random = new Random();
+    private boolean worldDataLoaded=false;
 
     public Random getRandom()
     {
@@ -48,48 +48,64 @@ public class World implements  Disposable, SaveFileContent {
         return (int) (Math.log(Long.highestOneBit(biome)) / Math.log(2));
     }
 
-    @Override
-    public void writeToSaveFile(java.io.ObjectOutputStream out) throws IOException {
-
-
-        Serializer.WritePixmap(out, biomeImage);
-        out.writeObject(biomeMap);
-        out.writeObject(terrainMap);
-        out.writeInt(width);
-        out.writeInt(height);
-        out.writeObject(mapObjectIds);
-        mapPoiIds.writeToSaveFile(out);
-        out.writeLong(seed);
-    }
-
-    @Override
-    public void readFromSaveFile(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+    public void loadWorldData()
+    {
+        if(worldDataLoaded)
+            return;
 
         FileHandle handle = Config.instance().getFile(Paths.WORLD);
         String rawJson = handle.readString();
-        data = (new Json()).fromJson(WorldData.class, rawJson);
+        this.data = (new Json()).fromJson(WorldData.class, rawJson);
+        biomeTexture = new BiomeTexture[data.GetBiomes().size() + 1];
 
-        if (biomeImage != null) biomeImage.dispose();
-        biomeImage = Serializer.ReadPixmap(in);
-        biomeMap = (long[][]) in.readObject();
-        terrainMap = (int[][]) in.readObject();
-        width = in.readInt();
-        height = in.readInt();
-        mapObjectIds = (SpritesDataMap) in.readObject();
-        if(mapPoiIds==null)mapPoiIds=new PointOfInterestMap(1,1,1,1);
-        mapPoiIds.readFromSaveFile(in);
-        seed = in.readLong();
+        int biomeIndex=0;
+        for (BiomeData biome : data.GetBiomes()) {
 
-        biomeTexture = new BiomeTexture[data.GetBiomes().size()+1];
-        for(int i = 0; i<data.GetBiomes().size(); i++)
-        {
-            biomeTexture[i] = new BiomeTexture(data.GetBiomes().get(i), data.tileSize);
+            biomeTexture[biomeIndex] = new BiomeTexture(biome, data.tileSize);
+            biomeIndex++;
         }
-        biomeTexture[data.GetBiomes().size()] = new BiomeTexture(data.roadTileset, data.tileSize);
-
-
-
+        biomeTexture[biomeIndex] = new BiomeTexture(data.roadTileset, data.tileSize);
+        worldDataLoaded=true;
     }
+
+    @Override
+    public void load(SaveFileData saveFileData) {
+
+        if(biomeImage!=null)
+            biomeImage.dispose();
+
+       loadWorldData();
+
+        biomeImage=saveFileData.readPixmap("biomeImage");
+        biomeMap=(long[][])saveFileData.readObject("biomeMap");
+        terrainMap=(int[][])saveFileData.readObject("terrainMap");
+        width=saveFileData.readInt("width");
+        height=saveFileData.readInt("height");
+        mapObjectIds = new SpritesDataMap(getChunkSize(), this.data.tileSize, this.data.width / getChunkSize());
+        mapObjectIds.load(saveFileData.readSubData("mapObjectIds"));
+        mapPoiIds = new PointOfInterestMap(getChunkSize(), this.data.tileSize, this.data.width / getChunkSize(),this.data.height / getChunkSize());
+        mapPoiIds.load(saveFileData.readSubData("mapPoiIds"));
+        seed=saveFileData.readLong("seed");
+    }
+
+    @Override
+    public SaveFileData save() {
+
+        SaveFileData data=new SaveFileData();
+
+        data.store("biomeImage",biomeImage);
+        data.storeObject("biomeMap",biomeMap);
+        data.storeObject("terrainMap",terrainMap);
+        data.store("width",width);
+        data.store("height",height);
+        data.store("mapObjectIds",mapObjectIds.save());
+        data.store("mapPoiIds",mapPoiIds.save());
+        data.store("seed",seed);
+
+
+        return data;
+    }
+
 
     public BiomeSpriteData getObject(int id) {
         return mapObjectIds.get(id);
@@ -201,9 +217,7 @@ public class World implements  Disposable, SaveFileContent {
 
     public World generateNew(long seed) {
 
-        FileHandle handle = Config.instance().getFile(Paths.WORLD);
-        String rawJson = handle.readString();
-        data = (new Json()).fromJson(WorldData.class, rawJson);
+        loadWorldData();
         if(seed==0)
         {
             seed=random.nextLong();
@@ -231,11 +245,9 @@ public class World implements  Disposable, SaveFileContent {
         pix.fill();
 
         int biomeIndex = -1;
-        biomeTexture = new BiomeTexture[data.GetBiomes().size() + 1];
         for (BiomeData biome : data.GetBiomes()) {
 
             biomeIndex++;
-            biomeTexture[biomeIndex] = new BiomeTexture(biome, data.tileSize);
             int biomeXStart = (int) Math.round(biome.startPointX * (double) width);
             int biomeYStart = (int) Math.round(biome.startPointY * (double) height);
             int biomeWidth = (int) Math.round(biome.width * (double) width);
@@ -380,7 +392,6 @@ public class World implements  Disposable, SaveFileContent {
 
         biomeIndex++;
         pix.setColor(1, 1, 1, 1);
-        biomeTexture[biomeIndex] = new BiomeTexture(data.roadTileset, data.tileSize);
         for (Pair<PointOfInterest, PointOfInterest> townPair : allSortedTowns) {
 
             Vector2 currentPoint = townPair.getKey().getTilePosition(data.tileSize);

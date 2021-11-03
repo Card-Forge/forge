@@ -128,17 +128,45 @@ public class WorldBackground extends Actor {
     public void initialize() {
         tileSize = WorldSave.getCurrentSave().getWorld().getTileSize();
         chunkSize = WorldSave.getCurrentSave().getWorld().getChunkSize();
+        if(chunks!=null)
+        {
+            stage.GetSpriteGroup().clear();
+            for(int i=0;i<chunks.length;i++)
+                for(int j=0;j<chunks[i].length;j++)
+                    if(chunks[i][j]!=null)
+                        chunks[i][j].dispose();
+        }
         chunks = new Texture[WorldSave.getCurrentSave().getWorld().getWidthInTiles()][WorldSave.getCurrentSave().getWorld().getHeightInTiles()];
         ArrayList[][] createChunks = new ArrayList[WorldSave.getCurrentSave().getWorld().getWidthInTiles()][WorldSave.getCurrentSave().getWorld().getHeightInTiles()];
         chunksSprites = createChunks;
         ArrayList[][] createSprites = new ArrayList[WorldSave.getCurrentSave().getWorld().getWidthInTiles()][WorldSave.getCurrentSave().getWorld().getHeightInTiles()];
         chunksSpritesBackground = createSprites;
-        Pixmap loadPix = new Pixmap(chunkSize * tileSize, chunkSize * tileSize, Pixmap.Format.RGB565);
-        loadPix.setColor(0.5f, 0.5f, 0.5f, 1);
-        loadPix.fill();
-        loadingTexture = new Texture(loadPix);
+
+
+        if(loadingTexture==null)
+        {
+            Pixmap loadPix = new Pixmap(chunkSize * tileSize, chunkSize * tileSize, Pixmap.Format.RGB565);
+            loadPix.setColor(0.5f, 0.5f, 0.5f, 1);
+            loadPix.fill();
+            loadingTexture = new Texture(loadPix);
+        }
+
+
+        for (int x = -1; x < 2; x++) {
+            for (int y = -1; y < 2; y++) {
+                Point point = new Point(currentChunkX + x, currentChunkY + y);
+                if (point.y < 0 || point.x < 0 || point.y >= chunks[0].length || point.x >= chunks.length)
+                    continue;
+                loadChunk(point.x, point.y);
+            }
+        }
     }
 
+    @Override
+    public void clear() {
+        super.clear();
+        initialize();
+    }
     int transChunkToWorld(int xy) {
         return xy * tileSize * chunkSize;
     }

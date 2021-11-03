@@ -1,6 +1,7 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import forge.adventure.AdventureApplicationAdapter;
 import forge.adventure.world.WorldSave;
@@ -18,7 +19,6 @@ public class StartScene extends UIScene {
         super("ui/start_menu.json");
 
     }
-
     public boolean NewGame() {
         AdventureApplicationAdapter.instance.switchScene(SceneType.NewGameScene.instance);
         return true;
@@ -67,6 +67,16 @@ public class StartScene extends UIScene {
 
     }
 
+    @Override
+    public boolean keyPressed(int keycode)
+    {
+        if (keycode == Input.Keys.ESCAPE)
+        {
+            if(WorldSave.getCurrentSave().getWorld().getData() != null)
+                Resume();
+        }
+        return true;
+    }
     @Override
     public void resLoaded() {
         super.resLoaded();

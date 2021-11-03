@@ -8,8 +8,11 @@ import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.BiomeData;
 import forge.adventure.data.EnemyData;
+import forge.adventure.data.WorldData;
 import forge.adventure.scene.*;
 import forge.adventure.util.Current;
+import forge.adventure.util.SaveFileContent;
+import forge.adventure.util.SaveFileData;
 import forge.adventure.world.World;
 import forge.adventure.world.WorldSave;
 import org.apache.commons.lang3.tuple.Pair;
@@ -22,7 +25,7 @@ import java.util.Random;
 /**
  * Stage for the over world. Will handle monster spawns
  */
-public class WorldStage extends GameStage {
+public class WorldStage extends GameStage implements SaveFileContent {
 
     private static WorldStage instance=null;
     protected EnemySprite currentMob;
@@ -75,6 +78,7 @@ public class WorldStage extends GameStage {
                         AdventureApplicationAdapter.instance.switchScene(SceneType.DuelScene.instance);
                     });
                     currentMob = mob;
+                    WorldSave.getCurrentSave().autoSave();
                     break;
                 }
             }
@@ -224,12 +228,62 @@ public class WorldStage extends GameStage {
             }
 
         }
-
         setBounds(WorldSave.getCurrentSave().getWorld().getWidthInPixels(), WorldSave.getCurrentSave().getWorld().getHeightInPixels());
     }
 
     @Override
     public void leave() {
         GetPlayer().storePos();
+    }
+
+    @Override
+    public void load(SaveFileData data) {
+        try {
+            for(Pair<Float, EnemySprite> enemy:enemies)
+                foregroundSprites.removeActor(enemy.getValue());
+            enemies.clear();
+            background.clear();
+
+
+            List<Float> timeouts= (List<Float>) data.readObject("timeouts");
+            List<String> names  = (List<String>) data.readObject("names");
+            List<Float> x       = (List<Float>) data.readObject("x");
+            List<Float> y       = (List<Float>) data.readObject("y");
+            for(int i=0;i<timeouts.size();i++)
+            {
+                EnemySprite sprite = new EnemySprite(WorldData.getEnemy(names.get(i)));
+                sprite.setX(x.get(i));
+                sprite.setY(y.get(i));
+                enemies.add(Pair.of(timeouts.get(i),sprite));
+                foregroundSprites.addActor(sprite);
+            }
+            globalTimer=data.readFloat("globalTimer");
+        }
+        catch (Exception e)
+        {
+
+        }
+    }
+
+    @Override
+    public SaveFileData save() {
+        SaveFileData data=new SaveFileData();
+        List<Float> timeouts=new ArrayList<>();
+        List<String> names=new ArrayList<>();
+        List<Float> x=new ArrayList<>();
+        List<Float> y=new ArrayList<>();
+        for(Pair<Float, EnemySprite> enemy:enemies)
+        {
+            timeouts.add(enemy.getKey());
+            names.add(enemy.getValue().getData().name);
+            x.add(enemy.getValue().getX());
+            y.add(enemy.getValue().getY());
+        }
+        data.storeObject("timeouts",timeouts);
+        data.storeObject("names",names);
+        data.storeObject("x",x);
+        data.storeObject("y",y);
+        data.store("globalTimer",globalTimer);
+        return data;
     }
 }
