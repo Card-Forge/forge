@@ -1,0 +1,8 @@
+Name:Geistlight Snare
+ManaCost:2 U
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | IsPresent$ Spirit.YouCtrl | Description$ This spell costs {1} less to cast if you control a Spirit. It also costs {1} less to cast if you control an enchantment.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | IsPresent$ Enchantment.YouCtrl | Secondary$ True
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell | UnlessCost$ 3 | SpellDescription$ Counter target spell unless its controller pays {3}.
+DeckHints:Type$Spirit|Enchantment
+Oracle:This spell costs {1} less to cast if you control a Spirit. It also costs {1} less to cast if you control an enchantment.\nCounter target spell unless its controller pays {3}.

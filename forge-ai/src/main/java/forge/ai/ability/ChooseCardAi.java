@@ -24,6 +24,7 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.keyword.Keyword;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerPredicates;
@@ -144,6 +145,16 @@ public class ChooseCardAi extends SpellAbilityAi {
             return false;
         }
         return checkApiLogic(ai, sa);
+    }
+
+    protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
+        String aiLogic = sa.getParamOrDefault("AILogic", "");
+
+        if (aiLogic.equals("AtOppEOT")) {
+            return ph.getNextTurn().equals(ai) && ph.is(PhaseType.END_OF_TURN);
+        }
+
+        return super.checkPhaseRestrictions(ai, sa, ph);
     }
 
     /* (non-Javadoc)

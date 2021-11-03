@@ -1095,7 +1095,7 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Exploit")) {
             final String trigStr = "Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Secondary$ True"
                     + " | TriggerDescription$ Exploit (" + inst.getReminderText() + ")";
-            final String effect = "DB$ Sacrifice | SacValid$ Creature | Exploit$ True | Optional$ True";
+            final String effect = "DB$ Sacrifice | SacValid$ Creature | SacMessage$ creature | Exploit$ True | Optional$ True";
 
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
 

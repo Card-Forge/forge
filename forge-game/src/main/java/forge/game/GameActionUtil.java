@@ -105,6 +105,7 @@ public final class GameActionUtil {
                 lkicheck = true;
             }
 
+            // 601.3e
             if (lkicheck) {
                 // double freeze tracker, so it doesn't update view
                 game.getTracker().freeze();
@@ -177,7 +178,13 @@ public final class GameActionUtil {
                         final String[] k = keyword.split(":");
                         final Cost disturbCost = new Cost(k[1], true);
 
-                        final SpellAbility newSA = sa.copyWithManaCostReplaced(activator, disturbCost);
+                        SpellAbility newSA;
+                        if (source.getAlternateState().getType().isEnchantment()) {
+                            newSA = source.getAlternateState().getFirstAbility().copyWithManaCostReplaced(activator,
+                                    disturbCost);
+                        } else {
+                            newSA = sa.copyWithManaCostReplaced(activator, disturbCost);
+                        }
                         newSA.setActivatingPlayer(activator);
 
                         newSA.putParam("PrecostDesc", "Disturb —");
@@ -189,11 +196,6 @@ public final class GameActionUtil {
                         desc.append("(").append(inst.getReminderText()).append(")");
                         newSA.setDescription(desc.toString());
                         newSA.putParam("AfterDescription", "(Disturbed)");
-                        final String type = source.getAlternateState().getType().toString();
-                        if (!type.contains("Creature")) {
-                            final String name = source.getAlternateState().getName();
-                            newSA.putParam("StackDescription", name + " — " + type + " (Disturbed)");
-                        }
 
                         newSA.setAlternativeCost(AlternativeCost.Disturb);
                         newSA.getRestrictions().setZone(ZoneType.Graveyard);
@@ -377,6 +379,7 @@ public final class GameActionUtil {
             lkicheck = true;
         }
 
+        // 601.3e
         if (lkicheck) {
             // double freeze tracker, so it doesn't update view
             game.getTracker().freeze();
@@ -731,7 +734,7 @@ public final class GameActionUtil {
             return list;
         }
         CardCollection completeList = new CardCollection();
-        PlayerCollection players = game.getPlayers();
+        PlayerCollection players = new PlayerCollection(game.getPlayers());
         // CR 613.7k use APNAP
         int indexAP = players.indexOf(game.getPhaseHandler().getPlayerTurn());
         if (indexAP != -1) {

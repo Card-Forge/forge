@@ -2,7 +2,6 @@ package forge.screens.deckeditor.controllers;
 
 import forge.deck.DeckProxy;
 import forge.gui.framework.ICDoc;
-import forge.itemmanager.ItemManagerConfig;
 import forge.screens.deckeditor.views.VCommanderDecks;
 
 /**
@@ -31,7 +30,7 @@ public enum CCommanderDecks implements ICDoc {
     }
 
     public void refresh() {
-        view.getLstDecks().setPool(DeckProxy.getAllCommanderDecks());
+        CAllDecks.refreshDeckManager(view.getLstDecks(), DeckProxy.getAllCommanderDecks());
     }
 
     /* (non-Javadoc)
@@ -39,6 +38,6 @@ public enum CCommanderDecks implements ICDoc {
      */
     @Override
     public void update() {
-        view.getLstDecks().setup(ItemManagerConfig.CONSTRUCTED_DECKS);
+        CAllDecks.updateDeckManager(view.getLstDecks());
     }
 }

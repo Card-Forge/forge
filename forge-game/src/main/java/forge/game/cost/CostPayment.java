@@ -57,7 +57,7 @@ public class CostPayment extends ManaConversionMatrix {
     public final SpellAbility getAbility() {
         return this.ability;
     }
-    
+
     /**
      * <p>
      * Constructor for Cost_Payment.

@@ -1,0 +1,8 @@
+Name:Dreamroot Cascade
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ Combo G U | SpellDescription$ Add {G} or {U}.
+K:ETBReplacement:Other:LandTapped
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar2 | ConditionSVarCompare$ LT2 | SpellDescription$ CARDNAME enters the battlefield tapped unless you control two or more other lands.
+SVar:ETBCheckSVar2:Count$LastStateBattlefield Land.YouCtrl
+Oracle:Dreamroot Cascade enters the battlefield tapped unless you control two or more other lands.\n{T}: Add {G} or {U}.

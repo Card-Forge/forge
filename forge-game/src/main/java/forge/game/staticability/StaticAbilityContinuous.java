@@ -123,9 +123,9 @@ public final class StaticAbilityContinuous {
         String addT = "";
         int toughnessBonus = 0;
         String setP = "";
-        int setPower = Integer.MAX_VALUE;
+        Integer setPower = null;
         String setT = "";
-        int setToughness = Integer.MAX_VALUE;
+        Integer setToughness = null;
 
         List<String> addKeywords = null;
         List<String> addHiddenKeywords = Lists.newArrayList();
@@ -165,7 +165,7 @@ public final class StaticAbilityContinuous {
             effects.setGlobalRuleChange(GlobalRuleChange.fromString(params.get("GlobalRule")));
         }
 
-        if (layer == StaticAbilityLayer.SETPT &&params.containsKey("SetPower")) {
+        if (layer == StaticAbilityLayer.SETPT && params.containsKey("SetPower")) {
             setP = params.get("SetPower");
             setPower = AbilityUtils.calculateAmount(hostCard, setP, stAb);
         }
@@ -682,12 +682,12 @@ public final class StaticAbilityContinuous {
 
             // set P/T
             if (layer == StaticAbilityLayer.SETPT) {
-                if ((setPower != Integer.MAX_VALUE) || (setToughness != Integer.MAX_VALUE)) {
+                if (setPower != null || setToughness != null) {
                     // non CharacteristicDefining
-                    if (setP.startsWith("Affected")) {
+                    if (setP.contains("Affected")) {
                         setPower = AbilityUtils.calculateAmount(affectedCard, setP, stAb, true);
                     }
-                    if (setT.startsWith("Affected")) {
+                    if (setT.contains("Affected")) {
                         setToughness = AbilityUtils.calculateAmount(affectedCard, setT, stAb, true);
                     }
                     affectedCard.addNewPT(setPower, setToughness,
@@ -697,10 +697,10 @@ public final class StaticAbilityContinuous {
 
             // add P/T bonus
             if (layer == StaticAbilityLayer.MODIFYPT) {
-                if (addP.startsWith("Affected")) {
+                if (addP.contains("Affected")) {
                     powerBonus = AbilityUtils.calculateAmount(affectedCard, addP, stAb, true);
                 }
-                if (addT.startsWith("Affected")) {
+                if (addT.contains("Affected")) {
                     toughnessBonus = AbilityUtils.calculateAmount(affectedCard, addT, stAb, true);
                 }
                 affectedCard.addPTBoost(powerBonus, toughnessBonus, se.getTimestamp(), stAb.getId());
@@ -709,7 +709,7 @@ public final class StaticAbilityContinuous {
             // add keywords
             // TODO regular keywords currently don't try to use keyword multiplier
             // (Although nothing uses it at this time)
-            if ((addKeywords != null) || (removeKeywords != null) || removeAllAbilities) {
+            if (addKeywords != null || removeKeywords != null || removeAllAbilities) {
                 List<String> newKeywords = null;
                 if (addKeywords != null) {
                     newKeywords = Lists.newArrayList(addKeywords);

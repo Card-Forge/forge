@@ -63,7 +63,7 @@ public class CostGainLife extends CostPart {
         sb.append("Have an opponent gain ").append(this.getAmount()).append(" life");
         return sb.toString();
     }
-    
+
     public List<Player> getPotentialTargets(final Player payer, final Card source) {
         List<Player> res = new ArrayList<>();
         for (Player p : payer.getGame().getPlayers()) {
@@ -121,7 +121,6 @@ public class CostGainLife extends CostPart {
         return true;
     }
 
-    
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }

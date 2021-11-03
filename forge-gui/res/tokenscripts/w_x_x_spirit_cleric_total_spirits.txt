@@ -1,0 +1,7 @@
+Name:Spirit Cleric
+ManaCost:no cost
+Types:Creature Spirit Cleric
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ TokenX | SetToughness$ TokenX | Description$ This creature's power and toughness are each equal to the number of Spirits you control.
+SVar:TokenX:Count$Valid Spirit.YouCtrl
+Oracle:This creature's power and toughness are each equal to the number of Spirits you control.

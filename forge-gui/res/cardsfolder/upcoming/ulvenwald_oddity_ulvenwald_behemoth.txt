@@ -1,0 +1,21 @@
+Name:Ulvenwald Oddity
+ManaCost:2 G G
+Types:Creature Beast
+PT:4/4
+K:Trample
+K:Haste
+A:AB$ SetState | Cost$ 5 G G | Defined$ Self | Mode$ Transform | AILogic$ Always | SpellDescription$ Transform CARDNAME.
+AlternateMode:DoubleFaced
+Oracle:Trample, haste\n{5}{G}{G}: Transform Ulvenwald Oddity.
+
+ALTERNATE
+
+Name:Ulvenwald Behemoth
+ManaCost:no cost
+Colors:green
+Types:Creature Beast Horror
+PT:8/8
+K:Trample
+K:Haste
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Trample & Haste | Description$ Other creatures you control get +1/+1 and have trample and haste.
+Oracle:Trample, haste\nOther creatures you control get +1/+1 and have trample and haste.

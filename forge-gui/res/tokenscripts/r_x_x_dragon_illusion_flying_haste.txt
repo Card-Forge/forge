@@ -1,0 +1,8 @@
+Name:Dragon Illusion
+ManaCost:no cost
+Types:Creature Dragon Illusion
+Colors:red
+PT:*/*
+K:Flying
+K:Haste
+Oracle:Flying, haste

@@ -120,5 +120,5 @@ public class CostExileFromStack extends CostPart {
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }
-    
+
 }

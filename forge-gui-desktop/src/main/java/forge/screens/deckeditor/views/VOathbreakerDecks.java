@@ -79,12 +79,13 @@ public enum VOathbreakerDecks implements IVDoc<COathbreakerDecks> {
     @Override
     public void populate() {
         COathbreakerDecks.SINGLETON_INSTANCE.refresh(); //ensure decks refreshed in case any deleted or added since last loaded
+        String preferredDeck = DeckPreferences.getOathbreakerDeck();
 
         JPanel parentBody = parentCell.getBody();
         parentBody.setLayout(new MigLayout("insets 5, gap 0, wrap, hidemode 3"));
         parentBody.add(new ItemManagerContainer(lstDecks), "push, grow");
-        String preferredDeck = DeckPreferences.getOathbreakerDeck();
-        lstDecks.editDeck(lstDecks.stringToItem(preferredDeck));
+
+        VAllDecks.editPreferredDeck(lstDecks, preferredDeck);
     }
 
     //========== Retrieval methods

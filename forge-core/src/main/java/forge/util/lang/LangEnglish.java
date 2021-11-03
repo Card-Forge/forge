@@ -32,6 +32,10 @@ public class LangEnglish extends Lang {
 
     @Override
     public String getNickName(final String name) {
-        return name.split(" ")[0].replace(",", "");
+        if (name.contains(",")) {
+            return name.split(",")[0];
+        } else {
+            return name.split(" ")[0];
+        }
     }
 }

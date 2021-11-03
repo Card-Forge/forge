@@ -589,6 +589,18 @@ public class ComputerUtilCost {
             }
         }
 
+        // Ward - will be accounted for when rechecking a targeted ability
+        if (sa.usesTargeting()) {
+            for (Card tgt : sa.getTargets().getTargetCards()) {
+                if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(sa.getHostCard().getController())) {
+                    Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
+                    if (wardCost.hasManaCost()) {
+                        extraManaNeeded += wardCost.getTotalMana().getCMC();
+                    }
+                }
+            }
+        }
+
         // TODO: Alternate costs which involve both paying mana and tapping a card, e.g. Zahid, Djinn of the Lamp
         // Current AI decides on each part separately, thus making it possible for the AI to cheat by
         // tapping a mana source for mana and for the tap cost at the same time. Until this is improved, AI

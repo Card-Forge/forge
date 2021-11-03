@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 import forge.ai.ComputerUtilCard;
+import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -79,6 +80,10 @@ public class ControlExchangeAi extends SpellAbilityAi {
         }
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
+
+        if ("PowerStruggle".equals(sa.getParam("AILogic"))) {
+            return SpecialCardAi.PowerStruggle.considerSecondTarget(aiPlayer, sa);
+        }
 
         // for TrigTwoTargets logic, only get the opponents' cards for the first target
         CardCollectionView unfilteredList = "TrigTwoTargets".equals(sa.getParam("AILogic")) ?

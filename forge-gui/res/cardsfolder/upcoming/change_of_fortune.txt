@@ -1,0 +1,9 @@
+Name:Change of Fortune
+ManaCost:3 R
+Types:Sorcery
+A:SP$ Discard | Mode$ Hand | Defined$ You | SubAbility$ DBDraw | StackDescription$ SpellDescription | SpellDescription$ Discard your hand, then draw a card for each card you've discarded this turn.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | StackDescription$ None
+SVar:X:PlayerCountPropertyYou$CardsDiscardedThisTurn
+DeckHas:Ability$Discard
+DeckHints:Keyword$Madness & Ability$Delirium
+Oracle:Discard your hand, then draw a card for each card you've discarded this turn.

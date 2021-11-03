@@ -78,7 +78,7 @@ public class CostTapType extends CostPartWithList {
 
     @Override
     public boolean isRenewable() { return true; }
-    
+
     /*
      * (non-Javadoc)
      * 
@@ -131,7 +131,7 @@ public class CostTapType extends CostPartWithList {
 
         String type = this.getType();
         boolean sameType = false;
-        
+
         if (type.contains(".sharesCreatureTypeWith")) {
             sameType = true;
             type = TextUtil.fastReplace(type, ".sharesCreatureTypeWith", "");

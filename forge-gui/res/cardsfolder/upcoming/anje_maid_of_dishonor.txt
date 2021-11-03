@@ -1,0 +1,11 @@
+Name:Anje, Maid of Dishonor
+ManaCost:2 B R
+Types:Legendary Creature Vampire
+PT:4/5
+T:Mode$ ChangesZoneAll | ValidCards$ Vampire.YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME and/or one or more other Vampires enter the battlefield under your control, create a Blood token. This ability triggers only once per turn. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_blood_draw
+A:AB$ LoseLife | Cost$ 2 Sac<1/Creature.Other;Blood.token;/another creature or a Blood token> | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 2 life and you gain 2 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+DeckHas:Ability$Token & Ability$Sacrifice & Ability$LifeGain & Type$Blood
+DeckHints:Type$Vampire
+Oracle:Whenever Anje, Maid of Dishonor and/or one or more other Vampires enter the battlefield under your control, create a Blood token. This ability triggers only once per turn. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")\n{2}, Sacrifice another creature or a Blood token: Each opponent loses 2 life and you gain 2 life.
