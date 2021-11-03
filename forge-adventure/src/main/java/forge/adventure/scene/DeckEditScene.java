@@ -92,8 +92,8 @@ public class DeckEditScene extends ForgeScene {
 
 
 
-        for (PaperCard card : AdventurePlayer.current().getCards())
-            FModel.getQuest().getCards().addSingleCard(card, 1);
+        for (Map.Entry<PaperCard, Integer> card : AdventurePlayer.current().getCards())
+            FModel.getQuest().getCards().addSingleCard(card.getKey(), card.getValue());
 
 
         Deck deck = AdventurePlayer.current().getDeck();

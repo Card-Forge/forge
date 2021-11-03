@@ -2,10 +2,10 @@ package forge.adventure.world;
 
 import com.badlogic.gdx.math.Vector2;
 import forge.adventure.data.BiomeSpriteData;
+import forge.adventure.util.SaveFileContent;
+import forge.adventure.util.SaveFileData;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,10 +13,37 @@ import java.util.List;
 /**
  * Class that hold all sprites as a list for each chunk
  */
-public class SpritesDataMap implements Serializable {
+public class SpritesDataMap implements SaveFileContent {
+    public class BiomeSpriteDataMap extends HashMap<Integer, BiomeSpriteData> implements SaveFileContent
+    {
+        @Override
+        public void load(SaveFileData data) {
+            clear();
+            List<Integer> keyList=(List<Integer>)data.readObject("keyList");
+            for(Integer key:keyList)
+            {
+                BiomeSpriteData biomeData=new BiomeSpriteData();
+                biomeData.load(data.readSubData(key.toString()));
+                put(key,biomeData);
+            }
+        }
 
+        @Override
+        public SaveFileData save() {
+
+            SaveFileData data = new SaveFileData();
+            List<Integer> keyList=new ArrayList<>();
+            for(Entry<Integer, BiomeSpriteData> entry:this.entrySet())
+            {
+                keyList.add(entry.getKey());
+                data.store(entry.getKey().toString(),entry.getValue().save());
+            }
+            data.storeObject("keyList",keyList);
+            return data;
+        }
+    }
     private final int numberOfChunks;
-    HashMap<Integer, BiomeSpriteData> objectData = new HashMap<>();
+    BiomeSpriteDataMap objectData = new BiomeSpriteDataMap();
     HashMap<String, Integer> objectKeys = new HashMap<>();
     int tileSize;
     int chunkSize;
@@ -34,25 +61,7 @@ public class SpritesDataMap implements Serializable {
         }
     }
 
-    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
 
-        out.writeObject(mapObjects);
-        out.writeObject(objectData);
-        out.writeObject(objectKeys);
-        out.writeInt(tileSize);
-        out.writeInt(chunkSize);
-    }
-
-    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
-
-        mapObjects = (List<Pair<Vector2, Integer>>[][]) in.readObject();
-        objectData = (HashMap<Integer, BiomeSpriteData>) in.readObject();
-        objectKeys = (HashMap<String, Integer>) in.readObject();
-        tileSize = in.readInt();
-        chunkSize = in.readInt();
-
-
-    }
 
     public BiomeSpriteData get(int id) {
         return objectData.get(id);
@@ -86,4 +95,28 @@ public class SpritesDataMap implements Serializable {
             return new ArrayList<>();
         return mapObjects[chunkX][chunkY];
     }
+
+
+    @Override
+    public void load(SaveFileData data) {
+
+        objectData.load(data.readSubData("objectData"));
+        mapObjects = (List<Pair<Vector2, Integer>>[][])data.readObject("mapObjects");
+        objectKeys = (HashMap<String, Integer>)data.readObject("objectKeys");
+        tileSize = data.readInt("tileSize");
+        chunkSize = data.readInt("chunkSize");
+    }
+
+    @Override
+    public SaveFileData save() {
+        SaveFileData data=new SaveFileData();
+        data.store("objectData",objectData.save());
+        data.storeObject("mapObjects",mapObjects);
+        data.storeObject("objectKeys",objectKeys);
+        data.store("tileSize",tileSize);
+        data.store("chunkSize",chunkSize);
+
+        return data;
+    }
+
 }

@@ -46,6 +46,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
         if(needsToBeDisposed)
             image.dispose();
+
     }
 
     public Reward getReward() {
@@ -54,18 +55,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     @Override
     public void onImageFetched() {
-        if(ImageCache.imageKeyFileExists(reward.getCard().getImageKey(false)))
-        {
-            setCardImage(ImageCache.getImage(reward.getCard().getImageKey(false),false));
-        }
+        setCardImage(ImageCache.getImage(reward.getCard().getImageKey(false),false));
     }
 
-    public enum Type
-    {
-        Shop,
-        Loot
-
-    }
     public RewardActor(Reward reward,boolean flippable)
     {
 
