@@ -113,7 +113,7 @@ public class NewGauntletScreen extends LaunchScreen {
                         });
                     }
                 });
-                chooser.show(null, true);
+                chooser.show(null, false); /*setting selectMax to true will select all available option*/
             }
         });
     }
