@@ -585,7 +585,7 @@ public class HumanPlay {
                         return false;
                     }
 
-                    ((CostDiscard)part).payAsDecided(p, (PaymentDecision.card(Aggregates.random(p.getCardsIn(ZoneType.Hand), amount, new CardCollection()))), sourceAbility);
+                    ((CostDiscard)part).payAsDecided(p, PaymentDecision.card(Aggregates.random(p.getCardsIn(ZoneType.Hand), amount, new CardCollection())), sourceAbility);
                 } else {
                     CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source, sourceAbility);
                     boolean hasPaid = payCostPart(controller, p, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lbldiscard") + orString);
