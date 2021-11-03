@@ -27,6 +27,8 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
@@ -262,6 +264,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeAutoUpdaterComboBox();
         initializeMulliganRuleComboBox();
         initializeAiProfilesComboBox();
+        initializeSoundSetsComboBox();
         initializeStackAdditionsComboBox();
         initializeLandPlayedComboBox();
         initializeColorIdentityCombobox();
@@ -464,6 +467,20 @@ public enum CSubmenuPreferences implements ICDoc {
         final FComboBox<String> comboBox = createComboBox(AiProfileUtil.getProfilesArray(), userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);
+    }
+
+    private void initializeSoundSetsComboBox() {
+        final FPref userSetting = FPref.UI_CURRENT_SOUND_SET;
+        final FComboBoxPanel<String> panel = this.view.getSoundSetsComboBoxPanel();
+        final FComboBox<String> comboBox = createComboBox(SoundSystem.getAvailableSoundSets(), userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);
+        comboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                SoundSystem.invalidateSoundCache();
+            }
+        });
     }
 
     private void initializeCardArtPreference() {
