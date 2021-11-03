@@ -726,21 +726,11 @@ public class AiController {
                 try {
                     compareTo = Integer.parseInt(strCmpTo);
                 } catch (final Exception ignored) {
-                    if (sa == null) {
-                        compareTo = AbilityUtils.calculateAmount(host, host.getSVar(strCmpTo), sa);
-                    } else {
-                        compareTo = AbilityUtils.calculateAmount(host, host.getSVar(strCmpTo), sa);
-                    }
+                    compareTo = AbilityUtils.calculateAmount(host, host.getSVar(strCmpTo), sa);
                 }
             }
 
-            int left = 0;
-
-            if (sa == null) {
-                left = AbilityUtils.calculateAmount(host, svarToCheck, sa);
-            } else {
-                left = AbilityUtils.calculateAmount(host, svarToCheck, sa);
-            }
+            int left = AbilityUtils.calculateAmount(host, svarToCheck, sa);
             if (!Expressions.compare(left, comparator, compareTo)) {
                 return AiPlayDecision.AnotherTime;
             }
