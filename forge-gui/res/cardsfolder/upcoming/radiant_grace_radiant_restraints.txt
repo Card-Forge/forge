@@ -1,0 +1,23 @@
+Name:Radiant Grace
+ManaCost:W
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddKeyword$ Vigilance | Description$ Enchanted creature gets +1/+0 and has vigilance.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigCurse | TriggerDescription$ When enchanted creature dies, return CARDNAME to the battlefield transformed under your control attached to target opponent.
+SVar:TrigCurse:DB$ Pump | ValidTgts$ Opponent | TgtPrompt$ Choose a opponent | IsCurse$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ CorrectedSelf | Origin$ Graveyard | Destination$ Battlefield | AttachedToPlayer$ ParentTarget | Transformed$ True | GainControl$ True | AILogic$ Curse
+AlternateMode:DoubleFaced
+Oracle:Enchant creature\nEnchanted creature gets +1/+0 and has vigilance.\nWhen enchanted creature dies, return Radiant Grace to the battlefield transformed under your control attached to target opponent.
+
+ALTERNATE
+
+Name:Radiant Restraints
+ManaCost:no cost
+Colors:white
+Types:Enchantment Aura Curse
+K:Enchant player
+A:SP$ Attach | ValidTgts$ Player | AILogic$ Curse
+R:Event$ Moved | ValidCard$ Creature.EnchantedPlayerCtrl | Destination$ Battlefield | ReplaceWith$ ETBTapped | ActiveZones$ Battlefield | Description$ Creatures your opponents control enter the battlefield tapped.
+SVar:ETBTapped:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Tapped$ True | Defined$ ReplacedCard
+Oracle:Creatures enchanted player controls enter the battlefield tapped.
