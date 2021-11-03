@@ -163,8 +163,7 @@ public class DeckRecognizer {
         private Token(final TokenType type1, final int count, final PaperCard tokenCard, boolean cardRequestHasSetCode) {
             this.number = count;
             this.type = type1;
-            this.text = String.format("%s [%s] #%s",
-                    tokenCard.getName(), tokenCard.getEdition(), tokenCard.getCollectorNumber());
+            this.text = "";
             this.card = tokenCard;
             this.tokenSection = null;
             this.limitedCardType = null;
@@ -197,6 +196,9 @@ public class DeckRecognizer {
         }
 
         public final String getText() {
+            if (this.isCardToken())
+                return String.format("%s [%s] #%s",
+                        this.card.getName(), this.card.getEdition(), this.card.getCollectorNumber());
             return this.text;
         }
 
@@ -222,10 +224,16 @@ public class DeckRecognizer {
             this.tokenSection = referenceDeckSection != null ? referenceDeckSection : DeckSection.Main;
         }
 
+        public void replaceTokenCard(PaperCard replacementCard){
+            if (!this.isCardToken())
+                return;
+            this.card = replacementCard;
+        }
+
         public final LimitedCardType getLimitedCardType() { return this.limitedCardType; }
 
         /**
-         * Filters all tokens types that have a PaperCard instance set (not null)
+         * Filters all token types that have a PaperCard instance set (not null)
          * @return true for tokens of type:
          * LEGAL_CARD, LIMITED_CARD, CARD_FROM_NOT_ALLOWED_SET and CARD_FROM_INVALID_SET.
          * False otherwise.
@@ -246,6 +254,15 @@ public class DeckRecognizer {
             return (this.type == TokenType.LEGAL_CARD ||
                     this.type == TokenType.LIMITED_CARD ||
                     this.type == TokenType.DECK_NAME);
+        }
+
+        /**
+         * Filters all tokens for deck that are also Card Token..
+         * @return true for tokens of type: LEGAL_CARD, LIMITED_CARD.
+         * False otherwise.
+         */
+        public boolean isCardTokenForDeck() {
+            return (this.type == TokenType.LEGAL_CARD || this.type == TokenType.LIMITED_CARD);
         }
 
         /**
