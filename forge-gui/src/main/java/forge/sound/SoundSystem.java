@@ -107,7 +107,7 @@ public class SoundSystem {
      */
     public void play(final String resourceFileName, final boolean isSynchronized) {
         if (isUsingAltSystem()) {
-            GuiBase.getInterface().startAltSoundSystem(ForgeConstants.SOUND_DIR + resourceFileName, isSynchronized);
+            GuiBase.getInterface().startAltSoundSystem(getSoundDirectory() + resourceFileName, isSynchronized);
         }
         else {
             final IAudioClip snd = fetchResource(resourceFileName);
@@ -122,7 +122,7 @@ public class SoundSystem {
      */
     public void play(final SoundEffectType type, final boolean isSynchronized) {
         if (isUsingAltSystem()) {
-            GuiBase.getInterface().startAltSoundSystem(ForgeConstants.SOUND_DIR + type.getResourceFileName(), isSynchronized);
+            GuiBase.getInterface().startAltSoundSystem(getSoundDirectory() + type.getResourceFileName(), isSynchronized);
         } else {
             final IAudioClip snd = fetchResource(type);
             if (!isSynchronized || snd.isDone()) {
@@ -248,17 +248,20 @@ public class SoundSystem {
     public static String[] getAvailableSoundProfiles()
     {
         final List<String> availableProfiles = new ArrayList<>();
-        availableProfiles.add("Default");
 
         final File dir = new File(ForgeConstants.CACHE_SOUND_DIR);
         if (dir != null && dir.exists()) {
             final String[] files = dir.list();
             for (String fileName : files) {
-                if (!fileName.equals("Default") && new File(fileName).isDirectory()) {
+                String fullPath = ForgeConstants.CACHE_SOUND_DIR + fileName;
+                if (!fileName.equals("Default") && new File(fullPath).isDirectory()) {
                     availableProfiles.add(fileName);
                 }
             }
         }
+
+        Collections.sort(availableProfiles);
+        availableProfiles.add(0, "Default");
 
         return availableProfiles.toArray(new String[availableProfiles.size()]);
     }
