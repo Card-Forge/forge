@@ -179,7 +179,7 @@ public final class GameActionUtil {
                         final Cost disturbCost = new Cost(k[1], true);
 
                         SpellAbility newSA;
-                        if (source.getAlternateState().getType().isEnchantment()) {
+                        if (source.getAlternateState().getType().hasSubtype("Aura")) {
                             newSA = source.getAlternateState().getFirstAbility().copyWithManaCostReplaced(activator,
                                     disturbCost);
                         } else {
