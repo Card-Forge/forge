@@ -245,9 +245,9 @@ public class SoundSystem {
         }
     }
 
-    public static String[] getAvailableSoundProfiles()
+    public static String[] getAvailableSoundSets()
     {
-        final List<String> availableProfiles = new ArrayList<>();
+        final List<String> availableSets = new ArrayList<>();
 
         final File dir = new File(ForgeConstants.CACHE_SOUND_DIR);
         if (dir != null && dir.exists()) {
@@ -255,19 +255,24 @@ public class SoundSystem {
             for (String fileName : files) {
                 String fullPath = ForgeConstants.CACHE_SOUND_DIR + fileName;
                 if (!fileName.equals("Default") && new File(fullPath).isDirectory()) {
-                    availableProfiles.add(fileName);
+                    availableSets.add(fileName);
                 }
             }
         }
 
-        Collections.sort(availableProfiles);
-        availableProfiles.add(0, "Default");
+        Collections.sort(availableSets);
+        availableSets.add(0, "Default");
 
-        return availableProfiles.toArray(new String[availableProfiles.size()]);
+        if (availableSets.size() == 1) {
+            // Default profile only - ensure that the preference is set accordingly
+            FModel.getPreferences().setPref(FPref.UI_CURRENT_SOUND_SET, "Default");
+        }
+
+        return availableSets.toArray(new String[availableSets.size()]);
     }
 
     public static String getSoundDirectory() {
-        String profileName = FModel.getPreferences().getPref(FPref.UI_CURRENT_SOUND_PROFILE);
+        String profileName = FModel.getPreferences().getPref(FPref.UI_CURRENT_SOUND_SET);
         if (profileName.equals("Default")) {
             return ForgeConstants.SOUND_DIR;
         } else {

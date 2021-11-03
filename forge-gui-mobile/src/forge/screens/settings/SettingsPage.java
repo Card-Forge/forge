@@ -612,10 +612,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("nlVibrateAfterLongPress")),
                 6);
         //Sound Options
-        lstSettings.addItem(new CustomSelectSetting(FPref.UI_CURRENT_SOUND_PROFILE,
-                        localizer.getMessage("cbpSoundProfiles"),
-                        localizer.getMessage("nlpSoundProfiles"),
-                        SoundSystem.getAvailableSoundProfiles()),
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_CURRENT_SOUND_SET,
+                        localizer.getMessage("cbpSoundSets"),
+                        localizer.getMessage("nlpSoundSets"),
+                        SoundSystem.getAvailableSoundSets()),
                 7);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_VOL_SOUNDS,
                 localizer.getMessage("cbAdjustSoundsVolume"),
