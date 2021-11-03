@@ -615,7 +615,13 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CURRENT_SOUND_SET,
                         localizer.getMessage("cbpSoundSets"),
                         localizer.getMessage("nlpSoundSets"),
-                        SoundSystem.getAvailableSoundSets()),
+                        SoundSystem.getAvailableSoundSets()) {
+                            @Override
+                            public void valueChanged(String newValue) {
+                                super.valueChanged(newValue);
+                                SoundSystem.invalidateSoundCache();
+                            }
+                        },
                 7);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_VOL_SOUNDS,
                 localizer.getMessage("cbAdjustSoundsVolume"),

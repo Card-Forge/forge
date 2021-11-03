@@ -279,4 +279,9 @@ public class SoundSystem {
             return ForgeConstants.CACHE_SOUND_DIR + profileName + ForgeConstants.PATH_SEPARATOR;
         }
     }
+    
+    public static void invalidateSoundCache() {
+        loadedClips.clear();
+        loadedScriptClips.clear();
+    }
 }
