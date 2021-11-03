@@ -40,9 +40,6 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import com.google.common.io.Files;
 import com.sipgate.mp3wav.Converter;
 
-import forge.localinstance.properties.ForgeConstants;
-
-
 /**
  * SoundSystem - a simple sound playback system for Forge.
  * Do not use directly. Instead, use the {@link forge.sound.SoundEffectType} enumeration.

@@ -39,7 +39,6 @@ import forge.gui.events.IUiEventVisitor;
 import forge.gui.events.UiEventAttackerDeclared;
 import forge.gui.events.UiEventBlockerAssigned;
 import forge.gui.events.UiEventNextGameDecision;
-import forge.localinstance.properties.ForgeConstants;
 import forge.util.TextUtil;
 import forge.util.maps.MapOfLists;
 
