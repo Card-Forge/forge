@@ -1,0 +1,8 @@
+Name:Orzhov Extort|Deck:Orzhov Extort.dck|Variant:None|Avatar:Pontiff of Blight|Desc:
+Name:Orzhov Haunt|Deck:Orzhov Haunt.dck|Variant:None|Avatar:Blind Hunter|Desc:
+Name:Teysa, Orzhov Scion|Deck:Teysa, Orzhov Scion.dck|Variant:Commander|Avatar:Teysa, Orzhov Scion|Desc:
+Name:Ghost Council of Orzhova|Deck:Ghost Council of Orzhova.dck|Variant:Commander|Avatar:Ghost Council of Orzhova|Desc:
+Name:Karlov of the Ghost Council|Deck:Karlov of the Ghost Council.dck|Variant:Commander|Avatar:Karlov of the Ghost Council|Desc:
+Name:Obzedat, Ghost Council|Deck:Obzedat, Ghost Council.dck|Variant:Commander|Avatar:Obzedat, Ghost Council|Desc:
+Name:Teysa, Envoy of Ghosts|Deck:Teysa, Envoy of Ghosts.dck|Variant:Commander|Avatar:Teysa, Envoy of Ghosts|Desc:
+Name:Teysa, Orzhov Scion|Deck:Teysa, Orzhov Scion Vanguard.dck|Variant:Vanguard|Avatar:Teysa, Orzhov Scion|Desc:

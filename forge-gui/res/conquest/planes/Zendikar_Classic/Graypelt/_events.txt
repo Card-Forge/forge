@@ -1,0 +1,9 @@
+Name:Graypelt Support|Deck:Graypelt Support.dck|Variant:None|Avatar:Undergrowth Champion|Desc:
+Name:General Tazri|Deck:General Tazri.dck|Variant:Commander|Avatar:General Tazri|Desc:
+Name:Munda, Ambush Leader|Deck:Munda, Ambush Leader.dck|Variant:Commander|Avatar:Munda, Ambush Leader|Desc:
+Name:Omnath, Locus of Mana|Deck:Omnath, Locus of Mana.dck|Variant:Commander|Avatar:Omnath, Locus of Mana|Desc:
+Name:Nissa, Vastwood Seer|Deck:Nissa, Vastwood Seer.dck|Variant:Commander|Avatar:Nissa, Vastwood Seer|Desc:
+Name:Nissa Revane|Deck:Nissa Revane.dck|Variant:Planeswalker|Avatar:Nissa Revane|Desc:
+Name:Nissa, Worldwaker|Deck:Nissa, Worldwaker.dck|Variant:Planeswalker|Avatar:Nissa, Worldwaker|Desc:
+Name:Gideon Jura|Deck:Gideon Jura.dck|Variant:Planeswalker|Avatar:Gideon Jura|Desc:
+Name:Gideon, Ally of Zendikar|Deck:Gideon, Ally of Zendikar.dck|Variant:Planeswalker|Avatar:Gideon, Ally of Zendikar|Desc:
