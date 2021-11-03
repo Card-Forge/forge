@@ -714,7 +714,34 @@ public class AiController {
 
         // Check a predefined condition
         if (sa.hasParam("AICheckSVar")) {
-            if (!checkAISpecificSVarCondition(sa, sa.getHostCard())) {
+            final Card host = sa.getHostCard();
+            final String svarToCheck = sa.getParam("AICheckSVar");
+            String comparator = "GE";
+            int compareTo = 1;
+
+            if (sa.hasParam("AISVarCompare")) {
+                final String fullCmp = sa.getParam("AISVarCompare");
+                comparator = fullCmp.substring(0, 2);
+                final String strCmpTo = fullCmp.substring(2);
+                try {
+                    compareTo = Integer.parseInt(strCmpTo);
+                } catch (final Exception ignored) {
+                    if (sa == null) {
+                        compareTo = AbilityUtils.calculateAmount(host, host.getSVar(strCmpTo), sa);
+                    } else {
+                        compareTo = AbilityUtils.calculateAmount(host, host.getSVar(strCmpTo), sa);
+                    }
+                }
+            }
+
+            int left = 0;
+
+            if (sa == null) {
+                left = AbilityUtils.calculateAmount(host, svarToCheck, sa);
+            } else {
+                left = AbilityUtils.calculateAmount(host, svarToCheck, sa);
+            }
+            if (!Expressions.compare(left, comparator, compareTo)) {
                 return AiPlayDecision.AnotherTime;
             }
         }
@@ -1809,7 +1836,35 @@ public class AiController {
             }
         }
         if (effect.hasParam("AICheckSVar")) {
-            return checkAISpecificSVarCondition(effect, hostCard);
+            System.out.println("aiShouldRun?" + sa);
+            final String svarToCheck = effect.getParam("AICheckSVar");
+            String comparator = "GE";
+            int compareTo = 1;
+
+            if (effect.hasParam("AISVarCompare")) {
+                final String fullCmp = effect.getParam("AISVarCompare");
+                comparator = fullCmp.substring(0, 2);
+                final String strCmpTo = fullCmp.substring(2);
+                try {
+                    compareTo = Integer.parseInt(strCmpTo);
+                } catch (final Exception ignored) {
+                    if (sa == null) {
+                        compareTo = AbilityUtils.calculateAmount(hostCard, hostCard.getSVar(strCmpTo), effect);
+                    } else {
+                        compareTo = AbilityUtils.calculateAmount(hostCard, hostCard.getSVar(strCmpTo), sa);
+                    }
+                }
+            }
+
+            int left = 0;
+
+            if (sa == null) {
+                left = AbilityUtils.calculateAmount(hostCard, svarToCheck, effect);
+            } else {
+                left = AbilityUtils.calculateAmount(hostCard, svarToCheck, sa);
+            }
+            System.out.println("aiShouldRun?" + left + comparator + compareTo);
+            return Expressions.compare(left, comparator, compareTo);
         } else if (effect.hasParam("AICheckDredge")) {
             return player.getCardsIn(ZoneType.Library).size() > 8 || player.isCardInPlay("Laboratory Maniac");
         } else return sa != null && doTrigger(sa, false);
@@ -2315,37 +2370,4 @@ public class AiController {
         return Iterables.getFirst(list, null);
     }
 
-    private static boolean checkAISpecificSVarCondition(CardTraitBase ab, Card host) {
-        if (ab.hasParam("AICheckSVar")) {
-            final String svarToCheck = ab.getParam("AICheckSVar");
-            String comparator = "GE";
-            int compareTo = 1;
-
-            if (ab.hasParam("AISVarCompare")) {
-                final String fullCmp = ab.getParam("AISVarCompare");
-                comparator = fullCmp.substring(0, 2);
-                final String strCmpTo = fullCmp.substring(2);
-                try {
-                    compareTo = Integer.parseInt(strCmpTo);
-                } catch (final Exception ignored) {
-                    if (ab == null) {
-                        compareTo = AbilityUtils.calculateAmount(host, host.getSVar(strCmpTo), ab);
-                    } else {
-                        compareTo = AbilityUtils.calculateAmount(host, host.getSVar(strCmpTo), ab);
-                    }
-                }
-            }
-
-            int left = 0;
-
-            if (ab == null) {
-                left = AbilityUtils.calculateAmount(host, svarToCheck, ab);
-            } else {
-                left = AbilityUtils.calculateAmount(host, svarToCheck, ab);
-            }
-            return Expressions.compare(left, comparator, compareTo);
-        }
-
-        return false;
-    }
 }
