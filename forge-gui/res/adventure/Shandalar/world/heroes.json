@@ -51,7 +51,7 @@
     "maleAvatar":"Viashino_m" 
   }   ,
   {
-    "name":"Drawf",
+    "name":"Dwarf",
     "female":"sprites/heroes/dwarf_f.atlas",      
     "male":"sprites/heroes/dwarf_m.atlas",      
     "femaleAvatar":"Dwarf_f",      

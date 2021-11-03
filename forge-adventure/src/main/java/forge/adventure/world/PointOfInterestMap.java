@@ -1,10 +1,8 @@
 package forge.adventure.world;
 
 import forge.adventure.util.SaveFileContent;
+import forge.adventure.util.SaveFileData;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,42 +46,48 @@ public class PointOfInterestMap implements SaveFileContent {
         return mapObjects[chunkX][chunkY];
     }
 
+
     @Override
-    public void writeToSaveFile(ObjectOutputStream saveFile) throws IOException {
-        saveFile.writeInt(numberOfChunksX);
-        saveFile.writeInt(numberOfChunksY);
-        saveFile.writeInt(tileSize);
-        saveFile.writeInt(chunkSize);
+    public void load(SaveFileData data) {
+        numberOfChunksX=data.readInt("numberOfChunksX");
+        numberOfChunksY=data.readInt("numberOfChunksY");
+        tileSize=data.readInt("tileSize");
+        chunkSize=data.readInt("chunkSize");
+
+        mapObjects = new List[numberOfChunksX][numberOfChunksY];
         for (int x = 0; x < numberOfChunksX; x++) {
             for (int y = 0; y < numberOfChunksY; y++) {
-                saveFile.writeInt(mapObjects[x][y].size());
-                for(PointOfInterest poi:mapObjects[x][y])
+                mapObjects[x][y] = new ArrayList();
+                int arraySize=data.readInt("mapObjects["+x +"]["+y+"]");
+                for(int i=0;i<arraySize;i++)
                 {
-                    poi.writeToSaveFile(saveFile);
+                    PointOfInterest pointsOfInterest=new PointOfInterest();
+                    pointsOfInterest.load(data.readSubData("mapObjects["+x +"]["+y+"]["+i+"]"));
+                    mapObjects[x][y].add(pointsOfInterest);
                 }
             }
         }
     }
 
     @Override
-    public void readFromSaveFile(ObjectInputStream saveFile) throws IOException, ClassNotFoundException {
-        numberOfChunksX=saveFile.readInt();
-        numberOfChunksY=saveFile.readInt();
-        tileSize=saveFile.readInt();
-        chunkSize=saveFile.readInt();
+    public SaveFileData save() {
+        SaveFileData data=new SaveFileData();
 
-        mapObjects = new List[numberOfChunksX][numberOfChunksY];
+        data.store("numberOfChunksX",numberOfChunksX);
+        data.store("numberOfChunksY",numberOfChunksY);
+        data.store("tileSize",tileSize);
+        data.store("chunkSize",chunkSize);
+        data.store("numberOfChunksX",numberOfChunksX);
+
         for (int x = 0; x < numberOfChunksX; x++) {
             for (int y = 0; y < numberOfChunksY; y++) {
-                mapObjects[x][y] = new ArrayList();
-                int arraySize=saveFile.readInt();
-                for(int i=0;i<arraySize;i++)
+                data.store("mapObjects["+x +"]["+y+"]",mapObjects[x][y].size());
+                for(int i=0;i<mapObjects[x][y].size();i++)
                 {
-                    PointOfInterest pointsOfInterest=new PointOfInterest();
-                    pointsOfInterest.readFromSaveFile(saveFile);
-                    mapObjects[x][y].add(pointsOfInterest);
+                    data.store("mapObjects["+x +"]["+y+"]["+i+"]",mapObjects[x][y].get(i).save());
                 }
             }
         }
+        return data;
     }
 }

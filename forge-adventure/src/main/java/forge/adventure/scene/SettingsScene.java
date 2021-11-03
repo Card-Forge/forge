@@ -1,6 +1,7 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -53,6 +54,15 @@ public class SettingsScene extends UIScene {
 
     }
 
+    @Override
+    public boolean keyPressed(int keycode)
+    {
+        if (keycode == Input.Keys.ESCAPE)
+        {
+            back();
+        }
+        return true;
+    }
     public boolean back() {
         AdventureApplicationAdapter.instance.switchToLast();
         return true;

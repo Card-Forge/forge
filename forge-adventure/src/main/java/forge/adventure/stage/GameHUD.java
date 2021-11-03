@@ -57,6 +57,7 @@ public class GameHUD extends Stage {
 
         addActor(ui);
         addActor(miniMapPlayer);
+        WorldSave.getCurrentSave().onLoad(() -> enter());
     }
 
     public static GameHUD getInstance() {
@@ -94,10 +95,9 @@ public class GameHUD extends Stage {
     Texture miniMapTexture;
     public void enter() {
 
-        if(miniMapTexture==null)
-        {
-            miniMapTexture=new Texture(WorldSave.getCurrentSave().getWorld().getBiomeImage());
-        }
+        if(miniMapTexture!=null)
+            miniMapTexture.dispose();
+        miniMapTexture=new Texture(WorldSave.getCurrentSave().getWorld().getBiomeImage());
 
         miniMap.setDrawable(new TextureRegionDrawable(miniMapTexture));
         avatar.setDrawable(new TextureRegionDrawable(Current.player().avatar()));

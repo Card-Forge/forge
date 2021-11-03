@@ -872,7 +872,7 @@
 {
 	"name": "Djinn",
 	"sprite": "sprites/djinn.atlas",
-	"deck": "decks/Djinni.json",
+	"deck": "decks/Djinn.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
 	"speed": 30,

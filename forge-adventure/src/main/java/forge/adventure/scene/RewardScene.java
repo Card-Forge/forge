@@ -1,6 +1,7 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -103,6 +104,15 @@ public class RewardScene extends UIScene  {
         doneButton=ui.findActor("done");
     }
 
+    @Override
+    public boolean keyPressed(int keycode)
+    {
+        if (keycode == Input.Keys.ESCAPE)
+        {
+            done();
+        }
+        return true;
+    }
 
 
     public void loadRewards(Array<Reward> newRewards, Type type, ShopActor shopActor)

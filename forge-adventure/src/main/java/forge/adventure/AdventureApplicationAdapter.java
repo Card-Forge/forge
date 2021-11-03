@@ -83,7 +83,11 @@ public class AdventureApplicationAdapter extends ApplicationAdapter {
 
     private void storeScreen() {
          if(!(currentScene instanceof ForgeScene))
-            lastScreenTexture = ScreenUtils.getFrameBufferTexture();
+         {
+            if(lastScreenTexture!=null)
+                lastScreenTexture.getTexture().dispose();
+             lastScreenTexture = ScreenUtils.getFrameBufferTexture();
+         }
 
 
     }

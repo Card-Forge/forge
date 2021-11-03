@@ -1,5 +1,6 @@
 package forge.adventure.scene;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -36,6 +37,8 @@ public class SaveLoadScene extends UIScene {
     int currentSlot = -3;
     Image previewImage;
     TextButton saveLoadButton;
+    TextButton quickSave;
+    TextButton autoSave;
 
     public SaveLoadScene() {
         super("ui/save_load.json");
@@ -44,14 +47,15 @@ public class SaveLoadScene extends UIScene {
 
 
 
-    private void addSaveSlot(String name, int i) {
+    private TextButton addSaveSlot(String name, int i) {
         layout.add(Controls.newLabel(name));
         TextButton button = Controls.newTextButton("...");
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 try {
-                    select(i);
+                    if(!button.isDisabled())
+                        select(i);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -60,6 +64,7 @@ public class SaveLoadScene extends UIScene {
         layout.add(button).expandX();
         buttons.put(i, button);
         layout.row();
+        return button;
 
     }
 
@@ -105,6 +110,15 @@ public class SaveLoadScene extends UIScene {
         return true;
     }
 
+    @Override
+    public boolean keyPressed(int keycode)
+    {
+        if (keycode == Input.Keys.ESCAPE)
+        {
+                back();
+        }
+        return true;
+    }
     public void save() {
         dialog.hide();
         if( WorldSave.getCurrentSave().save(textInput.getText(), currentSlot))
@@ -157,6 +171,8 @@ public class SaveLoadScene extends UIScene {
             header.setText("Load game");
             saveLoadButton.setText("Load");
         }
+        autoSave.setDisabled(save);
+        quickSave.setDisabled(save);
         this.save = save;
     }
 
@@ -188,8 +204,8 @@ public class SaveLoadScene extends UIScene {
         header.setHeight(header.getHeight() * 2);
         layout.add(header).colspan(2).align(Align.center);
         layout.row();
-        addSaveSlot("Auto save", -2);
-        addSaveSlot("Quick save", -1);
+        autoSave=addSaveSlot("Auto save", WorldSave.AUTO_SAVE_SLOT);
+        quickSave=addSaveSlot("Quick save", WorldSave.QUICK_SAVE_SLOT);
         for (int i = 1; i < 11; i++)
             addSaveSlot("Slot:" + i, i);
 
