@@ -120,6 +120,14 @@ public class DeckController<T extends DeckBase> {
         this.setModel((T) currentDeck, isStored);
     }
 
+    public Deck getCurrentDeckInEditor(){
+        try{
+            return this.getModel().getHumanDeck();
+        } catch (NullPointerException npe){
+            return null;
+        }
+    }
+
     private Deck pickFromCatalog(Deck deck, CardPool catalog) {
         // Getting Latest among the earliest editions in catalog!
         CardEdition referenceEdition = StaticData.instance().getEditions().getTheLatestOfAllTheOriginalEditionsOfCardsIn(catalog);
