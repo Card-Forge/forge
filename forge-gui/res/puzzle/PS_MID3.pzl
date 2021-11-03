@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Innistrad: Midnight Hunt #03
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/10/186.-MID3-scaled.jpg
+Goal:Win
+Turns:2
+Difficulty:Uncommon
+Description:Start in your opponent's end step, and win before their untap step. (They are currently tapped out.) Assume you have at least one additional copy of each card in your hand and on your board left in your library. Mascot Interception is on top of your library (and can draw it in your draw step.)
+[state]
+humanlife=20
+ailife=28
+turn=1
+activeplayer=ai
+activephase=END_OF_TURN
+humanhand=Deadly Alliance;Burn the Accursed;Explosive Welcome;Defenestrate;Unexpected Windfall
+humanlibrary=Mascot Interception;Deadly Alliance;Burn the Accursed;Explosive Welcome;Defenestrate;Unexpected Windfall;Gisa, Glorious Resurrector;Birgi, God of Storytelling;Varragoth, Bloodsky Sire;Mountain;Mountain;Mountain;Swamp;Swamp;Swamp
+humanbattlefield=Gisa, Glorious Resurrector;Birgi, God of Storytelling;Varragoth, Bloodsky Sire;Mountain;Mountain;Mountain;Swamp;Swamp;Swamp
+aibattlefield=Biblioplex Assistant;Smoldering Egg|Transformed;Rem Karolus, Stalwart Slayer;Doomskar Titan
