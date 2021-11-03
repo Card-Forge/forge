@@ -262,6 +262,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeAutoUpdaterComboBox();
         initializeMulliganRuleComboBox();
         initializeAiProfilesComboBox();
+        initializeSoundProfilesComboBox();
         initializeStackAdditionsComboBox();
         initializeLandPlayedComboBox();
         initializeColorIdentityCombobox();
@@ -462,6 +463,14 @@ public enum CSubmenuPreferences implements ICDoc {
         final FPref userSetting = FPref.UI_CURRENT_AI_PROFILE;
         final FComboBoxPanel<String> panel = this.view.getAiProfilesComboBoxPanel();
         final FComboBox<String> comboBox = createComboBox(AiProfileUtil.getProfilesArray(), userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);
+    }
+
+    private void initializeSoundProfilesComboBox() {
+        final FPref userSetting = FPref.UI_CURRENT_SOUND_PROFILE;
+        final FComboBoxPanel<String> panel = this.view.getSoundProfilesComboBoxPanel();
+        final FComboBox<String> comboBox = createComboBox(SoundSystem.getAvailableSoundProfiles(), userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);
     }

@@ -1,8 +1,7 @@
 package forge.sound;
 
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.File;
+import java.util.*;
 
 import com.google.common.eventbus.Subscribe;
 
@@ -243,6 +242,33 @@ public class SoundSystem {
         if (currentTrack != null) {
             currentTrack.dispose();
             currentTrack = null;
+        }
+    }
+
+    public static String[] getAvailableSoundProfiles()
+    {
+        final List<String> availableProfiles = new ArrayList<>();
+        availableProfiles.add("Default");
+
+        final File dir = new File(ForgeConstants.CACHE_SOUND_DIR);
+        if (dir != null && dir.exists()) {
+            final String[] files = dir.list();
+            for (String fileName : files) {
+                if (!fileName.equals("Default") && new File(fileName).isDirectory()) {
+                    availableProfiles.add(fileName);
+                }
+            }
+        }
+
+        return availableProfiles.toArray(new String[availableProfiles.size()]);
+    }
+
+    public static String getSoundDirectory() {
+        String profileName = FModel.getPreferences().getPref(FPref.UI_CURRENT_SOUND_PROFILE);
+        if (profileName.equals("Default")) {
+            return ForgeConstants.SOUND_DIR;
+        } else {
+            return ForgeConstants.CACHE_SOUND_DIR + profileName + ForgeConstants.PATH_SEPARATOR;
         }
     }
 }
