@@ -61,7 +61,7 @@ public class AudioClip implements IAudioClip {
     }
 
     public static boolean fileExists(String fileName) {
-        File fSound = new File(SoundSystem.getSoundDirectory(), fileName);
+        File fSound = new File(SoundSystem.instance.getSoundDirectory(), fileName);
         return fSound.exists();
     }
 
@@ -192,7 +192,7 @@ public class AudioClip implements IAudioClip {
         }
 
         private Clip createClip(String filename) {
-            File fSound = new File(SoundSystem.getSoundDirectory(), filename);
+            File fSound = new File(SoundSystem.instance.getSoundDirectory(), filename);
             if (!fSound.exists()) {
                 throw new IllegalArgumentException("Sound file " + fSound.toString() + " does not exist, cannot make a clip of it");
             }

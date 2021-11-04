@@ -330,7 +330,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
         }
 
         // Only proceed if the file actually exists
-        return new File(SoundSystem.getSoundDirectory(), effect).exists();
+        return new File(SoundSystem.instance.getSoundDirectory(), effect).exists();
     }
 
 
