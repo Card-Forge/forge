@@ -403,15 +403,26 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             addItem(new FMenuItem(localizer.getMessage("lblImportFromClipboard"), Forge.hdbuttons ? FSkinImage.HDIMPORT : FSkinImage.OPEN, new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
-                                    FDeckImportDialog dialog = new FDeckImportDialog(!deck.isEmpty(), editorType, new Callback<Deck>() {
+                                    FDeckImportDialog dialog = new FDeckImportDialog(!deck.isEmpty(), editorType);
+                                    dialog.setCallback(new Callback<Deck>() {
                                         @Override
                                         public void run(Deck importedDeck) {
-                                            getMainDeckPage().setCards(importedDeck.getMain());
-                                            if (getSideboardPage() != null) {
-                                                getSideboardPage().setCards(importedDeck.getOrCreate(DeckSection.Sideboard));
+                                            if (deck != null && importedDeck.hasName()) {
+                                                deck.setName(importedDeck.getName());
+                                                lblName.setText(importedDeck.getName());
                                             }
-                                            if (getCommanderPage() != null) {
-                                                getCommanderPage().setCards(importedDeck.getOrCreate(DeckSection.Commander));
+                                            if (dialog.createNewDeck()) {
+                                                getMainDeckPage().setCards(importedDeck.getMain());
+                                                if (getSideboardPage() != null)
+                                                    getSideboardPage().setCards(importedDeck.getOrCreate(DeckSection.Sideboard));
+                                                if (getCommanderPage() != null)
+                                                    getCommanderPage().setCards(importedDeck.getOrCreate(DeckSection.Commander));
+                                            } else {
+                                                getMainDeckPage().addCards(importedDeck.getMain());
+                                                if (getSideboardPage() != null)
+                                                    getSideboardPage().addCards(importedDeck.getOrCreate(DeckSection.Sideboard));
+                                                if (getCommanderPage() != null)
+                                                    getCommanderPage().addCards(importedDeck.getOrCreate(DeckSection.Commander));
                                             }
                                         }
                                     });
