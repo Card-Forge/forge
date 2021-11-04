@@ -128,7 +128,8 @@ public class FDeckImportDialog extends FDialog {
                             @Override
                             public void run() {
                                 hide();
-                                callback.run(deck);
+                                if (callback != null)
+                                    callback.run(deck);
                             }
                         });
                     }
