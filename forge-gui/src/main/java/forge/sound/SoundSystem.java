@@ -263,9 +263,10 @@ public class SoundSystem {
         Collections.sort(availableSets);
         availableSets.add(0, "Default");
 
-        if (availableSets.size() == 1) {
-            // Default profile only - ensure that the preference is set accordingly
+        if (availableSets.size() == 1 || !availableSets.contains(FModel.getPreferences().getPref(FPref.UI_CURRENT_SOUND_SET))) {
+            // Default profile only or the current set is no longer available - revert the preference setting to default
             FModel.getPreferences().setPref(FPref.UI_CURRENT_SOUND_SET, "Default");
+            invalidateSoundCache();
         }
 
         return availableSets.toArray(new String[availableSets.size()]);
@@ -312,9 +313,10 @@ public class SoundSystem {
         Collections.sort(availableSets);
         availableSets.add(0, "Default");
 
-        if (availableSets.size() == 1) {
-            // Default profile only - ensure that the preference is set accordingly
+        if (availableSets.size() == 1 || !availableSets.contains(FModel.getPreferences().getPref(FPref.UI_CURRENT_MUSIC_SET))) {
+            // Default profile only or the current set is no longer available - revert the preference setting to default
             FModel.getPreferences().setPref(FPref.UI_CURRENT_MUSIC_SET, "Default");
+            MusicPlaylist.invalidateMusicPlaylist();
         }
 
         return availableSets.toArray(new String[availableSets.size()]);
