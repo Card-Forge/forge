@@ -41,11 +41,14 @@ import forge.util.Localizer;
 
 
 public class FDeckImportDialog extends FDialog {
-    private final Callback<Deck> callback;
+    private Callback<Deck> callback;
 
     private final FTextArea txtInput = add(new FTextArea(true));
     private final FCheckBox newEditionCheck = add(new FCheckBox(Localizer.getInstance().getMessage("lblImportLatestVersionCard"), false));
     private final FCheckBox dateTimeCheck = add(new FCheckBox(Localizer.getInstance().getMessage("lblUseOnlySetsReleasedBefore"), false));
+    private final FCheckBox smartCardArtCheck = add(new FCheckBox(Localizer.getInstance().getMessage("lblUseSmartCardArt"), false));
+    private final FCheckBox createNewDeckCheck = add(new FCheckBox(Localizer.getInstance().getMessage("lblNewDeckCheckbox"), false));
+//    private final FCheckBox importInDeck = add(new FCheckBox()
     /*setting onlyCoreExpCheck to false allow the copied cards to pass the check of deck contents
       forge-core\src\main\java\forge\deck\Deck.javaDeck.java starting @ Line 320 which is called by
       forge-gui-mobile\src\forge\deck\FDeckEditor.java starting @ Line 373
@@ -57,14 +60,14 @@ public class FDeckImportDialog extends FDialog {
     private final FComboBox<Integer> yearDropdown = add(new FComboBox<>());
 
     private final boolean showOptions;
+    private final boolean currentDeckIsEmpty;
+    private boolean createNewDeckControl;
     private final DeckImportController controller;
 
     private final static ImmutableList<String> importOrCancel = ImmutableList.of(Localizer.getInstance().getMessage("lblImport"), Localizer.getInstance().getMessage("lblCancel"));
 
-    public FDeckImportDialog(final boolean replacingDeck, final FDeckEditor.EditorType editorType, final Callback<Deck> callback0) {
+    public FDeckImportDialog(final boolean replacingDeck, final FDeckEditor.EditorType editorType) {
         super(Localizer.getInstance().getMessage("lblImportFromClipboard"), 2);
-
-        callback = callback0;
         controller = new DeckImportController(dateTimeCheck, monthDropdown, yearDropdown, replacingDeck);
         String contents = Forge.getClipboard().getContents();
         if (contents == null)
@@ -84,6 +87,10 @@ public class FDeckImportDialog extends FDialog {
 
         onlyCoreExpCheck.setSelected(StaticData.instance().isCoreExpansionOnlyFilterSet());
         newEditionCheck.setSelected(StaticData.instance().cardArtPreferenceIsLatest());
+        smartCardArtCheck.setSelected(StaticData.instance().isEnabledCardArtSmartSelection());
+        createNewDeckCheck.setSelected(replacingDeck);
+        this.currentDeckIsEmpty = !replacingDeck;
+        this.createNewDeckControl = replacingDeck;
 
         initButton(0, Localizer.getInstance().getMessage("lblImport"), new FEventHandler() {
             @Override
@@ -93,21 +100,23 @@ public class FDeckImportDialog extends FDialog {
                     public void run() {
                         List<DeckRecognizer.Token> tokens = controller.parseInput(txtInput.getText()); //ensure deck updated based on any changes to options
 
+                        if (controller.isSmartCardArtEnabled())
+                            tokens = controller.optimiseCardArtInTokens();
+
                         //if there are any cards that cannot be imported, let user know this and give them the option to cancel
                         StringBuilder sb = new StringBuilder();
                         for (DeckRecognizer.Token token : tokens) {
-                            if (TokenType.CARD_FROM_NOT_ALLOWED_SET.equals(token.getType())
-                                    || TokenType.CARD_FROM_INVALID_SET.equals(token.getType())
-                                    || TokenType.UNKNOWN_CARD.equals(token.getType())
-                                    || TokenType.UNSUPPORTED_CARD.equals(token.getType())) {
-                                if (sb.length() > 0) {
+                            if (token.getType() == TokenType.CARD_FROM_NOT_ALLOWED_SET
+                                    || token.getType() == TokenType.CARD_FROM_INVALID_SET
+                                    || token.getType() == TokenType.UNKNOWN_CARD
+                                    || token.getType() == TokenType.UNSUPPORTED_CARD) {
+                                if (sb.length() > 0)
                                     sb.append("\n");
-                                }
                                 sb.append(token.getQuantity()).append(" ").append(token.getText());
                             }
                         }
                         if (sb.length() > 0) {
-                            if (SOptionPane.showOptionDialog(Localizer.getInstance().getMessage("lblFollowingCardsCannotBeImported") + "\n\n" + sb.toString(), Localizer.getInstance().getMessage("lblImportRemainingCards"), SOptionPane.INFORMATION_ICON, importOrCancel) == 1) {
+                            if (SOptionPane.showOptionDialog(Localizer.getInstance().getMessage("lblFollowingCardsCannotBeImported") + "\n\n" + sb, Localizer.getInstance().getMessage("lblImportRemainingCards"), SOptionPane.INFORMATION_ICON, importOrCancel) == 1) {
                                 return;
                             }
                         }
@@ -118,7 +127,6 @@ public class FDeckImportDialog extends FDialog {
                         FThreads.invokeInEdtLater(new Runnable() {
                             @Override
                             public void run() {
-                                deck.optimizeCardArtInMain();
                                 hide();
                                 callback.run(deck);
                             }
@@ -135,7 +143,8 @@ public class FDeckImportDialog extends FDialog {
         });
 
         List<DeckRecognizer.Token> tokens = controller.parseInput(txtInput.getText());
-        StaticData data = StaticData.instance();
+        if (controller.isSmartCardArtEnabled())
+            tokens = controller.optimiseCardArtInTokens();
         //ensure at least one known card found on clipboard
         for (DeckRecognizer.Token token : tokens) {
             if (token.getType() == TokenType.LEGAL_CARD) {
@@ -154,6 +163,19 @@ public class FDeckImportDialog extends FDialog {
                 onlyCoreExpCheck.setCommand(new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {setArtPreferenceInController();}
+                });
+                smartCardArtCheck.setCommand(new FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {
+                        controller.setSmartCardArtOptimisation(smartCardArtCheck.isSelected());
+                    }
+                });
+                createNewDeckCheck.setCommand(new FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {
+                        createNewDeckControl = createNewDeckCheck.isSelected();
+                        controller.setCreateNewDeck(createNewDeckControl);
+                    }
                 });
                 updateDropDownEnabled();
                 setArtPreferenceInController();
@@ -178,6 +200,12 @@ public class FDeckImportDialog extends FDialog {
         yearDropdown.setEnabled(enabled);
     }
 
+    public void setCallback(Callback<Deck> callback0){
+        callback = callback0;
+    }
+
+    public boolean createNewDeck(){ return this.createNewDeckControl; }
+
     @Override
     public void drawOverlay(Graphics g) {
         super.drawOverlay(g);
@@ -198,7 +226,8 @@ public class FDeckImportDialog extends FDialog {
             h = monthDropdown.getHeight();
             float fieldPadding = padding / 2;
 
-            newEditionCheck.setBounds(x, y, w, h);
+            newEditionCheck.setBounds(x, y, w / 2, h);
+            onlyCoreExpCheck.setBounds(x + w/2, y, w/2, h);
             y += h + fieldPadding;
             dateTimeCheck.setBounds(x, y, w, h);
             y += h + fieldPadding;
@@ -208,7 +237,12 @@ public class FDeckImportDialog extends FDialog {
             yearDropdown.setBounds(x + dropDownWidth + fieldPadding, y, dropDownWidth, h);
             y += h + fieldPadding;
 
-            onlyCoreExpCheck.setBounds(x, y, w, h);
+            if (!this.currentDeckIsEmpty){
+                smartCardArtCheck.setBounds(x, y, w/2, h);
+                createNewDeckCheck.setBounds(x + w/2, y, w/2, h);
+            } else
+                smartCardArtCheck.setBounds(x, y, w, h);
+
             y += h + 2 * padding;
         }
         h = txtInput.getPreferredHeight(w);
