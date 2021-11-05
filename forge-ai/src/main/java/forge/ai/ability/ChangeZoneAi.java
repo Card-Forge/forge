@@ -1393,6 +1393,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
         // Reload Undying and Persist, get rid of -1/-1 counters, get rid of enemy auras if able
+        Card bestChoice = null;
+        int bestEval = 0;
         for (Card c : aiPermanents) {
             if (c.isCreature()) {
                 boolean hasValuableAttachments = false;
@@ -1420,14 +1422,27 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     continue;
                 }
 
+                Card considered = null;
                 if ((c.hasKeyword(Keyword.PERSIST) || c.hasKeyword(Keyword.UNDYING))
                         && !ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
-                    return c;
+                    considered = c;
                 } else if (hasOppAttachments || (numTotalCounters > 0 && numNegativeCounters > numTotalCounters / 2)) {
-                    return c;
+                    considered = c;
+                }
+
+                if (considered != null) {
+                    int eval = ComputerUtilCard.evaluateCreature(c);
+                    if (eval > bestEval) {
+                        bestEval = eval;
+                        bestChoice = considered;
+                    }
                 }
             }
         }
+        if (bestChoice != null) {
+            return bestChoice;
+        }
+
         return null;
     }
 
