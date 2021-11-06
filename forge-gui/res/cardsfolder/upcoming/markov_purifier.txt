@@ -1,0 +1,11 @@
+Name:Markov Purifier
+ManaCost:1 W B
+Types:Creature Vampire Cleric
+PT:2/3
+K:Lifelink
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, if you gained life this turn, you may pay {2}. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ 2 | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:X:Count$LifeYouGainedThisTurn
+DeckHas:Ability$LifeGain
+DeckHints:Ability$LifeGain
+Oracle:Lifelink\nAt the beginning of your end step, if you gained life this turn, you may pay {2}. If you do, draw a card.
