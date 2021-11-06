@@ -1,0 +1,11 @@
+Name:Consuming Tide
+ManaCost:2 U U
+Types:Sorcery
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseCard | SubAbility$ DBReturnAll | SpellDescription$ Each player chooses a nonland permanent they control. Return all nonland permanents not chosen this way to their owners' hands. Then you draw a card for each opponent who has more cards in their hand than you.
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Permanent.nonLand+RememberedPlayerCtrl | ChoiceTitle$ Choose a nonland permanent you control | RememberChosen$ True | AILogic$ BestCard
+SVar:DBReturnAll:DB$ ChangeZoneAll | ChangeType$ Permanent.nonLand+IsNotRemembered | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | StackDescription$ None | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:PlayerCountOpponents$HasPropertyHasCardsInHand_Card_GTY
+SVar:Y:Count$CardsInYourHand
+Oracle:Each player chooses a nonland permanent they control. Return all nonland permanents not chosen this way to their owners' hands. Then you draw a card for each opponent who has more cards in their hand than you.
