@@ -1,0 +1,28 @@
+Name:Henrika Domnathi
+ManaCost:2 B B
+Types:Legendary Creature Vampire
+PT:1/3
+K:Flying
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ SacDom,DrawDom,TransDom | ChoiceRestriction$ ThisGame | CharmNum$ 1
+SVar:SacDom:DB$ Sacrifice | Amount$ 1 | SacValid$ Creature | Defined$ Player | SpellDescription$ Each player sacrifices a creature.
+SVar:DrawDom:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife | SpellDescription$ You draw a card and you lose 1 life.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1 | StackDescription$ None
+SVar:TransDom:DB$ SetState | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
+AlternateMode:DoubleFaced
+DeckHas:Ability$Sacrifice
+Oracle:Flying\nAt the beginning of combat on your turn, choose one that hasn't been chosen –\n• Each player sacrifices a creature.\n• You draw a card and you lose 1 life.\n•Transform Henrika Domnathi.
+
+ALTERNATE
+
+Name:Henrika, Infernal Seer
+ManaCost:no cost
+Colors:black
+Types:Legendary Creature Vampire
+PT:3/4
+K:Flying
+K:Deathtouch
+K:Lifelink
+A:AB$ PumpAll | Cost$ 1 B B | ValidCards$ Creature.YouCtrl+withFlying,Creature.YouCtrl+withLifelink,Creature.YouCtrl+withDeathtouch | NumAtt$ +1 | SpellDescription$ Each creature you control with flying, deathtouch and/or lifelink gets +1/+0 until end of turn.
+DeckHas:Ability$LifeGain
+Oracle:Flying, deathtouch, lifelink\n{1}{B}{B}: Each creature you control with flying, deathtouch and/or lifelink gets +1/+0 until end of turn.
