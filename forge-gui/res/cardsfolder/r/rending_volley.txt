@@ -1,8 +1,7 @@
 Name:Rending Volley
 ManaCost:R
 Types:Instant
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature.White,Creature.Blue | NumDmg$ 4 | TgtPrompt$ Select target white or blue creature. | SpellDescription$ CARDNAME deals 4 damage to target white or blue creature.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rending_volley.jpg
 Oracle:This spell can't be countered.\nRending Volley deals 4 damage to target white or blue creature.

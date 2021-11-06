@@ -3,7 +3,7 @@ ManaCost:2 G U R
 Types:Legendary Creature Human Warrior
 PT:6/6
 K:Flash
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Stack | AddHiddenKeyword$ This spell can't be countered. | Description$ Creature spells you control can't be countered.
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Trample | Description$ Other creatures you control have trample.
 SVar:PlayMain1:TRUE

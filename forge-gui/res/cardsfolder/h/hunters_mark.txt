@@ -1,7 +1,7 @@
 Name:Hunter's Mark
 ManaCost:3 G
 Types:Instant
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ CostReduction | Relative$ True | EffectZone$ All | Description$ This spell costs {3} less to cast if it targets a blue permanent you don't control.
 SVar:CostReduction:Count$Compare CheckTgt GE1.3.0
 SVar:CheckTgt:TargetedObjects$Valid Card.Blue+YouDontCtrl

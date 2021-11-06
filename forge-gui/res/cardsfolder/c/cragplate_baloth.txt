@@ -3,7 +3,7 @@ ManaCost:5 G G
 Types:Creature Beast
 PT:6/6
 K:Kicker:2 G
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 K:Hexproof
 K:Haste
 K:etbCounter:P1P1:4:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the battlefield with four +1/+1 counters on it.

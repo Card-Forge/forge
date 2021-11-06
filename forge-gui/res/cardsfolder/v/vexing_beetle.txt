@@ -2,8 +2,7 @@ Name:Vexing Beetle
 ManaCost:4 G
 Types:Creature Insect
 PT:3/3
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME gets +3/+3 as long as no opponent controls a creature.
 SVar:X:Count$Valid Creature.OppCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vexing_beetle.jpg
 Oracle:This spell can't be countered.\nVexing Beetle gets +3/+3 as long as no opponent controls a creature.

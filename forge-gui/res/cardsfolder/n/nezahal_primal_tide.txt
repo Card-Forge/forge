@@ -2,7 +2,7 @@ Name:Nezahal, Primal Tide
 ManaCost:5 U U
 Types:Legendary Creature Elder Dinosaur
 PT:7/7
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Opponent | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent casts a noncreature spell, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1

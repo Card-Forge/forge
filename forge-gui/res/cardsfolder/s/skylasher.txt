@@ -3,8 +3,7 @@ ManaCost:1 G
 Types:Creature Insect
 PT:2/2
 K:Flash
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 K:Reach
 K:Protection from blue
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skylasher.jpg
 Oracle:Flash\nThis spell can't be countered.\nReach, protection from blue

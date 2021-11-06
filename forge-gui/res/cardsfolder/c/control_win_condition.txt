@@ -2,7 +2,7 @@ Name:Control Win Condition
 ManaCost:4 U U
 Types:Creature Whale
 PT:*/*
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 K:Shroud
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of turns you’ve taken this game. (If this is in your deck, please keep track of your turns. This means you, Mark.)
 SVar:X:Count$YourTurns
