@@ -1,0 +1,9 @@
+Name:Markov Waltzer
+ManaCost:2 R W
+Types:Creature Vampire
+PT:1/3
+K:Flying
+K:Haste
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, up to two target creatures you control each get +1/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to two target creatures you control | NumAtt$ +1
+Oracle:Flying, haste\nAt the beginning of combat on your turn, up to two target creatures you control each get +1/+0 until end of turn.
