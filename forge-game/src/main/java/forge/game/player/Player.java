@@ -105,6 +105,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantBeCast;
 import forge.game.staticability.StaticAbilityCantDraw;
+import forge.game.staticability.StaticAbilityCantGainLosePayLife;
 import forge.game.staticability.StaticAbilityCantPutCounter;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
@@ -539,7 +540,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean canGainLife() {
-        return !hasLost() && !hasKeyword("You can't gain life.") && !hasKeyword("Your life total can't change.");
+        return !hasLost() && !StaticAbilityCantGainLosePayLife.anyCantGainLife(this);
     }
 
     public final int loseLife(int toLose, final boolean damage, final boolean manaBurn) {
@@ -607,14 +608,14 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean canLoseLife() {
-        return !hasLost() && !hasKeyword("Your life total can't change.");
+        return !hasLost() && !StaticAbilityCantGainLosePayLife.anyCantLosePayLife(this);
     }
 
     public final boolean canPayLife(final int lifePayment) {
         if (lifePayment > 0 && life < lifePayment) {
             return false;
         }
-        return (lifePayment <= 0) || !hasKeyword("Your life total can't change.");
+        return (lifePayment <= 0) || !StaticAbilityCantGainLosePayLife.anyCantLosePayLife(this);
     }
 
     public final boolean payLife(final int lifePayment, final Card source) {
