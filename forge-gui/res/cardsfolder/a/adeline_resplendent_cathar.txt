@@ -5,8 +5,8 @@ PT:*/4
 K:Vigilance
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl
-T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, for each opponent, create a 1/1 white Human creature token that's tapped and attacking that player or a planeswalker they control.
-SVar:TrigToken:DB$ Token | TokenAmount$ Y | TokenScript$ w_1_1_human | TokenTapped$ True | TokenAttacking$ True | ChoosePlayerOrPlaneswalker$ True | TokenOwner$ You
-SVar:Y:PlayerCountOpponents$Amount
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ DBRepeat | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, for each opponent, create a 1/1 white Human creature token that's tapped and attacking that player or a planeswalker they control.
+SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Opponent | ChangeZoneTable$ True | RepeatSubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human | TokenTapped$ True | TokenAttacking$ Remembered | ChoosePlayerOrPlaneswalker$ True | TokenOwner$ You
 DeckHas:Ability$Token
 Oracle:Vigilance\nAdeline, Resplendent Cathar's power is equal to the number of creatures you control.\nWhenever you attack, for each opponent, create a 1/1 white Human creature token that's tapped and attacking that player or a planeswalker they control.
