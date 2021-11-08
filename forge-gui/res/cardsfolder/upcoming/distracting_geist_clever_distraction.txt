@@ -1,0 +1,27 @@
+Name:Distracting Geist
+ManaCost:2 W
+Types:Creature Spirit
+PT:2/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME attacks, tap target creature defending player controls.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature defending player controls
+SVar:HasAttackEffect:TRUE
+K:Disturb:4 W
+AlternateMode:DoubleFaced
+DeckHas:Ability$Graveyard
+Oracle:Whenever Distracting Geist attacks, tap target creature defending player controls.\nDisturb {4}{W} (You may cast this card from your graveyard transformed for its disturb cost.)
+
+ALTERNATE
+
+Name:Clever Distraction
+ManaCost:no cost
+Colors:white
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ AttackTrigger | AddSVar$ AE | Description$ Enchanted creature has "Whenever this creature attacks, tap target creature defending player controls."
+SVar:AttackTrigger:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME attacks, tap target creature defending player controls.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature defending player controls
+SVar:AE:SVar:HasAttackEffect:TRUE
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+Oracle:Enchant creature\nEnchanted creature has "Whenever this creature attacks, tap target creature defending player controls." If Clever Distraction would be put into a graveyard from anywhere, exile it instead.

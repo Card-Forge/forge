@@ -1,0 +1,10 @@
+Name:Ollenbock Escort
+ManaCost:W
+Types:Creature Human Cleric
+PT:1/1
+K:Vigilance
+A:AB$ Pump | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.YouCtrl+counters_GE1_P1P1 | TgtPrompt$ Select target creature you control with a +1/+1 counter on it | KW$ Lifelink & Indestructible | SpellDescription$ Target creature you control with a +1/+1 counter on it gains lifelink and indestructible until end of turn.
+AI:RemoveDeck:Random
+DeckNeeds:Ability$Counters
+DeckHas:Ability$Sacrifice & Ability$LifeGain
+Oracle:Vigilance\nSacrifice Ollenbock Escort: Target creature you control with a +1/+1 counter on it gains lifelink and indestructible until end of turn.

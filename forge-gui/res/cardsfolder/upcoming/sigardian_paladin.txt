@@ -1,0 +1,10 @@
+Name:Sigardian Paladin
+ManaCost:2 G W
+Types:Creature Human Knight
+PT:4/4
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Trample & Lifelink | CheckSVar$ X | Description$ As long as you've put one or more +1/+1 counters on a creature this turn, Sigardian Paladin has trample and lifelink.
+SVar:X:Count$CountersAddedThisTurn P1P1 You Creature
+A:AB$ Pump | Cost$ 1 G W | ValidTgts$ Creature.YouCtrl+counters_GE1_P1P1 | TgtPrompt$ Select target creature with a +1/+1 counter on it | KW$ Trample & Lifelink | SpellDescription$ Target creature you control with a +1/+1 counter on it gains trample and lifelink until end of turn.
+DeckNeeds:Ability$Counters
+DeckHas:Ability$LifeGain
+Oracle:As long as you've put one or more +1/+1 counters on a creature this turn, Sigardian Paladin has trample and lifelink.\n{1}{G}{W}: Target creature you control with a +1/+1 counter on it gains trample and lifelink until end of turn.

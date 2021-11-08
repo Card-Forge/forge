@@ -1,0 +1,13 @@
+Name:Bloodvial Purveyor
+ManaCost:2 B B
+Types:Creature Vampire
+PT:5/6
+K:Flying
+K:Trample
+T:Mode$ SpellCast | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an opponent casts a spell, that player creates a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_blood_draw | TokenOwner$ TriggeredActivator
+T:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Blood.token+DefendingPlayerCtrl | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+0 until end of turn for each Blood token defending player controls.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X
+SVar:X:Count$Valid Blood.token+DefendingPlayerCtrl
+SVar:HasAttackEffect:TRUE
+Oracle:Flying, trample\nWhenever an opponent casts a spell, that player creates a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")\nWhenever Bloodvial Purveyor attacks, it gets +1/+0 until end of turn for each Blood token defending player controls.

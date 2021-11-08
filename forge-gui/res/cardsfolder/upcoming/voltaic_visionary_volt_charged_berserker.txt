@@ -1,0 +1,28 @@
+Name:Voltaic Visionary
+ManaCost:1 R
+Types:Creature Human Wizard
+PT:3/1
+A:AB$ DealDamage | Cost$ T | NumDmg$ 2 | Defined$ You | SorcerySpeed$ True | SubAbility$ DBExile | SpellDescription$ CARDNAME deals 2 damage to you.
+SVar:DBExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | Imprint$ True | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Exile the top card of your library.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | StackDescription$ SpellDescription | SpellDescription$ You may play that card this turn. Activate only as a sorcery.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card this turn.
+T:Mode$ SpellCast | ValidCard$ Card.IsImprinted | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ Whenever you play a card exiled with CARDNAME, transform it.
+T:Mode$ LandPlayed | ValidCard$ Land.IsImprinted+YouCtrl | Execute$ TrigTransform | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever you play a card exiled with CARDNAME, transform it.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBClear | Static$ True
+SVar:DBClear:DB$ Cleanup | ClearImprinted$ True
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
+AlternateMode:DoubleFaced
+Oracle:{T}: Voltaic Visionary deals 2 damage to you. Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.\nWhenever you play a card exiled with Voltaic Visionary, transform it.
+
+ALTERNATE
+
+Name:Volt-Charged Berserker
+ManaCost:no cost
+Colors:red
+Types:Creature Human Berserker
+PT:4/3
+K:CARDNAME can't block.
+Oracle:Volt-Charged Berserker can't block.

@@ -1,0 +1,10 @@
+Name:Laid to Rest
+ManaCost:3 G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Human.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a Human you control dies, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ValidCard$ Creature.YouCtrl+counters_GE1_P1P1 | Execute$ DBGainLife | TriggerDescription$ Whenever a creature you control with a +1/+1 counter on it dies, you gain 2 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+DeckNeeds:Type$Human & Ability$Counters
+DeckHas:Ability$LifeGain
+Oracle:Whenever a Human you control dies, draw a card.\nWhenever a creature you control with a +1/+1 counter on it dies, you gain 2 life.
