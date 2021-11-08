@@ -770,6 +770,7 @@ public class AiController {
         // one is warded and can't be paid for.
         if (sa.usesTargeting()) {
             for (Card tgt : sa.getTargets().getTargetCards()) {
+                // TODO some older cards don't use the keyword, so check for trigger instead
                 if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(sa.getHostCard().getController())) {
                     int amount = 0;
                     Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);

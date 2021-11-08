@@ -412,7 +412,7 @@ public class GameAction {
             CardCollection cards = new CardCollection(c.getMergedCards());
             // replace top card with copied card for correct name for human to choose.
             cards.set(cards.indexOf(c), copied);
-            // 721.3b
+            // 723.3b
             if (cause != null && zoneTo.getZoneType() == ZoneType.Exile) {
                 cards = (CardCollection) cause.getHostCard().getController().getController().orderMoveToZoneList(cards, zoneTo.getZoneType(), cause);
             } else {

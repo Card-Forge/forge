@@ -29,6 +29,7 @@ import forge.ai.SpellAbilityAi;
 import forge.ai.SpellApiToAi;
 import forge.card.MagicColor;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityKey;
@@ -50,6 +51,7 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+import forge.util.collect.FCollection;
 
 public class ChangeZoneAi extends SpellAbilityAi {
     /*
@@ -423,7 +425,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
                 return canBouncePermanent(ai, sa, list) != null;
             }
-
         }
 
         if (ComputerUtil.playImmediately(ai, sa)) {
@@ -1784,8 +1785,20 @@ public class ChangeZoneAi extends SpellAbilityAi {
      */
     @Override
     public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
-        // Called when attaching Aura to player
-        return AttachAi.attachToPlayerAIPreferences(ai, sa, true);
+        // Called when attaching Aura to player or adding creature to combat
+        if (params.containsKey("Attacker")) {
+            return (Player) ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), new FCollection<GameEntity>(options));
+        }
+        return AttachAi.attachToPlayerAIPreferences(ai, sa, true, (List<Player>)options);
+    }
+
+    @Override
+    protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options, Map<String, Object> params) {
+        if (params.containsKey("Attacker")) {
+            return ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), new FCollection<GameEntity>(options));
+        }
+        // should not be reached
+        return super.chooseSinglePlayerOrPlaneswalker(ai, sa, options, params);
     }
 
     private boolean doSacAndReturnFromGraveLogic(final Player ai, final SpellAbility sa) {

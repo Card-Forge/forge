@@ -5,5 +5,5 @@ A:SP$ DealDamage | Cost$ X X R | ValidTgts$ Creature,Player,Planeswalker | TgtPr
 SVar:MaxTgts:PlayerCountPlayers$Amount/Plus.NumCreatures
 SVar:NumCreatures:Count$Valid Creature,Planeswalker
 SVar:X:Count$xPaid
-K:Flashback:R R Discard<X/Card/card>
+K:Flashback:R R Discard<X/Card/cards>
 Oracle:Conflagrate deals X damage divided as you choose among any number of targets.\nFlashback—{R}{R}, Discard X cards. (You may cast this card from your graveyard for its flashback cost. Then exile it.)
