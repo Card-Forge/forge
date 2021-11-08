@@ -122,6 +122,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_VOL_MUSIC ("100"),
         UI_ALT_SOUND_SYSTEM ("false"),
         UI_CURRENT_SOUND_SET("Default"),
+        UI_CURRENT_MUSIC_SET("Default"),
         UI_CURRENT_AI_PROFILE ("Default"),
         UI_CLONE_MODE_SOURCE ("false"),
         UI_MATCH_IMAGE_VISIBLE ("true"),

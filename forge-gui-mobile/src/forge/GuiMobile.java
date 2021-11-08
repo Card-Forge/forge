@@ -269,7 +269,7 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public IAudioClip createAudioClip(final String filename) {
-        return AudioClip.createClip(SoundSystem.getSoundDirectory() + filename);
+        return AudioClip.createClip(SoundSystem.instance.getSoundDirectory() + filename);
     }
 
     @Override

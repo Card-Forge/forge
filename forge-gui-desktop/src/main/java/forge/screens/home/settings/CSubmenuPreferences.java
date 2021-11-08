@@ -19,6 +19,7 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorTokenViewer;
+import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.*;
 import forge.util.Localizer;
@@ -265,6 +266,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeMulliganRuleComboBox();
         initializeAiProfilesComboBox();
         initializeSoundSetsComboBox();
+        initializeMusicSetsComboBox();
         initializeStackAdditionsComboBox();
         initializeLandPlayedComboBox();
         initializeColorIdentityCombobox();
@@ -472,13 +474,28 @@ public enum CSubmenuPreferences implements ICDoc {
     private void initializeSoundSetsComboBox() {
         final FPref userSetting = FPref.UI_CURRENT_SOUND_SET;
         final FComboBoxPanel<String> panel = this.view.getSoundSetsComboBoxPanel();
-        final FComboBox<String> comboBox = createComboBox(SoundSystem.getAvailableSoundSets(), userSetting);
+        final FComboBox<String> comboBox = createComboBox(SoundSystem.instance.getAvailableSoundSets(), userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);
         comboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                SoundSystem.invalidateSoundCache();
+                SoundSystem.instance.invalidateSoundCache();
+            }
+        });
+    }
+
+    private void initializeMusicSetsComboBox() {
+        final FPref userSetting = FPref.UI_CURRENT_MUSIC_SET;
+        final FComboBoxPanel<String> panel = this.view.getMusicSetsComboBoxPanel();
+        final FComboBox<String> comboBox = createComboBox(SoundSystem.instance.getAvailableMusicSets(), userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);
+        comboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                MusicPlaylist.invalidateMusicPlaylist();
+                SoundSystem.instance.changeBackgroundTrack();
             }
         });
     }

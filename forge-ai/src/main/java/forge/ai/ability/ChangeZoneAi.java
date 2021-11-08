@@ -2,6 +2,8 @@ package forge.ai.ability;
 
 import java.util.*;
 
+import forge.game.card.*;
+import forge.game.keyword.Keyword;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -32,14 +34,7 @@ import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
@@ -1397,6 +1392,57 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
         }
+        // Reload Undying and Persist, get rid of -1/-1 counters, get rid of enemy auras if able
+        Card bestChoice = null;
+        int bestEval = 0;
+        for (Card c : aiPermanents) {
+            if (c.isCreature()) {
+                boolean hasValuableAttachments = false;
+                boolean hasOppAttachments = false;
+                int numNegativeCounters = 0;
+                int numTotalCounters = 0;
+                for (Card attached : c.getAttachedCards()) {
+                    if (attached.isAura()) {
+                        if (attached.getController() == c.getController()) {
+                            hasValuableAttachments = true;
+                        } else if (attached.getController().isOpponentOf(c.getController())) {
+                            hasOppAttachments = true;
+                        }
+                    }
+                }
+                Map<CounterType, Integer> counters = c.getCounters();
+                for (CounterType ct : counters.keySet()) {
+                    int amount = counters.get(ct);
+                    if (ComputerUtil.isNegativeCounter(ct, c)) {
+                        numNegativeCounters += amount;
+                    }
+                    numTotalCounters += amount;
+                }
+                if (hasValuableAttachments || (ComputerUtilCard.isUselessCreature(ai, c) && !hasOppAttachments)) {
+                    continue;
+                }
+
+                Card considered = null;
+                if ((c.hasKeyword(Keyword.PERSIST) || c.hasKeyword(Keyword.UNDYING))
+                        && !ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
+                    considered = c;
+                } else if (hasOppAttachments || (numTotalCounters > 0 && numNegativeCounters > numTotalCounters / 2)) {
+                    considered = c;
+                }
+
+                if (considered != null) {
+                    int eval = ComputerUtilCard.evaluateCreature(c);
+                    if (eval > bestEval) {
+                        bestEval = eval;
+                        bestChoice = considered;
+                    }
+                }
+            }
+        }
+        if (bestChoice != null) {
+            return bestChoice;
+        }
+
         return null;
     }
 
