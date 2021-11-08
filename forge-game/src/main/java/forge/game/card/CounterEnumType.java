@@ -179,6 +179,8 @@ public enum CounterEnumType {
 
     JAVELIN("JAVLN", 180, 206, 172),
 
+    JUDGMENT("JUDGM", 249, 220, 52),
+
     KI("KI", 190, 189, 255),
 
     KNOWLEDGE("KNOWL", 0, 115, 255),

@@ -1,0 +1,6 @@
+Name:Unhallowed Phalanx
+ManaCost:4 B
+Types:Creature Zombie Soldier
+PT:1/13
+K:CARDNAME enters the battlefield tapped.
+Oracle:Unhallowed Phalanx enters the battlefield tapped.

@@ -1,0 +1,13 @@
+Name:Old Rutstein
+ManaCost:1 B G
+Types:Legendary Creature Human Peasant
+PT:1/4
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield or at the beginning of your upkeep, mill a card. If a land card is milled this way, create a Treasure token. If a creature card is milled this way, create a 1/1 green Insect creature token. If a noncreature, nonland card is milled this way, create a Blood token.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or at the beginning of your upkeep, mill a card. If a land card is milled this way, create a Treasure token. If a creature card is milled this way, create a 1/1 green Insect creature token. If a noncreature, nonland card is milled this way, create a Blood token.
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 1 | RememberMilled$ True | SubAbility$ Treasure
+SVar:Treasure:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Land | TokenScript$ c_a_treasure_sac | SubAbility$ Insect
+SVar:Insect:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Creature | TokenScript$ g_1_1_insect | SubAbility$ Blood
+SVar:Blood:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Card.nonCreature+nonLand | TokenScript$ c_a_blood_draw | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Mill & Ability$Token & Ability$Sacrifice & Type$Blood
+Oracle:When Old Rutstein enters the battlefield or at the beginning of your upkeep, mill a card. If a land card is milled this way, create a Treasure token. If a creature card is milled this way, create a 1/1 green Insect creature token. If a noncreature, nonland card is milled this way, create a Blood token.

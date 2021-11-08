@@ -1,0 +1,8 @@
+Name:Hopeful Initiate
+ManaCost:W
+Types:Creature Human Warlock
+PT:1/2
+K:Training
+A:AB$ Destroy | Cost$ 2 W RemoveAnyCounter<2/P1P1/Creature.YouCtrl/among creatures you control> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+DeckHas:Ability$Counters
+Oracle:Training (Whenever this creature attacks with another creature with greater power, put a +1/+1 counter on this creature.)\n{2}{W}, Remove two +1/+1 counters from among creatures you control: Destroy target artifact or enchantment.
