@@ -451,7 +451,7 @@ public final class CardScriptParser {
                     "ControllerControls", "AttachedTo", "EnchantedBy",
                     "NotEnchantedBy", "TopGraveyard", "SharesColorWith",
                     "MostProminentColor", "notSharesColorWith",
-                    "sharesCreatureTypeWith", "sharesCardTypeWith",
+                    "sharesCreatureTypeWith", "sharesCardTypeWith", "sharesLandTypeWith",
                     "sharesNameWith", "doesNotShareNameWith",
                     "sharesControllerWith", "sharesOwnerWith",
                     "ThisTurnEntered", "ControlledByPlayerInTheDirection",

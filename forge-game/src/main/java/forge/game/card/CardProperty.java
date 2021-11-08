@@ -825,6 +825,11 @@ public class CardProperty {
                         }
                 }
             }
+        } else if (property.startsWith("sharesLandTypeWith")) {
+            final String restriction = property.split("sharesLandTypeWith ")[1];
+            if (!Iterables.any(AbilityUtils.getDefinedCards(source, restriction, spellAbility), CardPredicates.sharesLandTypeWith(card))) {
+                return false;
+            }
         } else if (property.equals("sharesPermanentTypeWith")) {
             if (!card.sharesPermanentTypeWith(source)) {
                 return false;
