@@ -1,0 +1,15 @@
+Name:Cultivator Colossus
+ManaCost:4 G G G
+Types:Creature Plant Beast
+PT:*/*
+K:Trample
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of lands you control.
+SVar:X:Count$Valid Land.YouCtrl
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigRepeat | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may put a land card from your hand onto the battlefield tapped. If you do, draw a card and repeat this process.
+SVar:TrigRepeat:DB$ Repeat | RepeatSubAbility$ DBClear | RepeatDefined$ Remembered | RepeatPresent$ Card | RepeatSVarCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBClear:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.YouOwn | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:BuffedBy:Land
+Oracle:Trample\nCultivator Colossus's power and toughness are each equal to the number of lands you control.\nWhen Cultivator Colossus enters the battlefield, you may put a land card from your hand onto the battlefield tapped. If you do, draw a card and repeat this process.

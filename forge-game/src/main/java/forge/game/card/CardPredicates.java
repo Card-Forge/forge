@@ -197,6 +197,15 @@ public final class CardPredicates {
         };
     }
 
+    public static Predicate<Card> sharesLandTypeWith(final Card card) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.sharesLandTypeWith(card);
+            }
+        };
+    }
+
     public static final Predicate<Card> possibleBlockers(final Card attacker) {
         return new Predicate<Card>() {
             @Override

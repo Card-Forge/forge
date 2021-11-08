@@ -1,0 +1,11 @@
+Name:Sigarda's Imprisonment
+ManaCost:2 W
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Enchanted creature can't attack or block.
+A:AB$ ChangeZone | Cost$ 4 W | Defined$ Enchanted | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken | SpellDescription$ Exile enchanted creature.
+SVar:DBToken:DB$ Token | TokenScript$ c_a_blood_draw | SpellDescription$ Create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
+SVar:NonStackingAttachEffect:True
+DeckHas:Ability$Token & Ability$Sacrifice & Type$Blood
+Oracle:Enchant creature\nEnchanted creature can't attack or block.\n{4}{W}: Exile enchanted creature. Create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
