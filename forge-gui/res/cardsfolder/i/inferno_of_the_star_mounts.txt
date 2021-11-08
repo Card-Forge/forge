@@ -2,7 +2,7 @@ Name:Inferno of the Star Mounts
 ManaCost:4 R R
 Types:Legendary Creature Dragon
 PT:6/6
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 K:Flying
 K:Haste
 A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +1 | SubAbility$ DBImmediateTrigger | AILogic$ InfernoOfTheStarMounts | SpellDescription$ CARDNAME gets +1/+0 until end of turn. When its power becomes 20 this way, it deals 20 damage to any target.

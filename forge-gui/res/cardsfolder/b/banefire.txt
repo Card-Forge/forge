@@ -3,6 +3,6 @@ ManaCost:X R
 Types:Sorcery
 A:SP$ DealDamage | Cost$ X R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | ConditionCheckSVar$ X | ConditionSVarCompare$ LT5 | SubAbility$ BanefulDmg | SpellDescription$ CARDNAME deals X damage to any target.
 SVar:BanefulDmg:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | NoPrevention$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5 | StackDescription$ If X is 5 or more, CARDNAME can't be countered by spells or abilities and the damage can't be prevented.
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | AddHiddenKeyword$ CARDNAME can't be countered. | CheckSVar$ X | SVarCompare$ GE5 | Description$ If X is 5 or more, CARDNAME can't be countered by spells or abilities and the damage can't be prevented.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | AddHiddenKeyword$ This spell can't be countered. | CheckSVar$ X | SVarCompare$ GE5 | Description$ If X is 5 or more, CARDNAME can't be countered by spells or abilities and the damage can't be prevented.
 SVar:X:Count$xPaid
 Oracle:Banefire deals X damage to any target.\nIf X is 5 or more, this spell can't be countered and the damage can't be prevented.

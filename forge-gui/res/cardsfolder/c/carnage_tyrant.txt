@@ -2,8 +2,7 @@ Name:Carnage Tyrant
 ManaCost:4 G G
 Types:Creature Dinosaur
 PT:7/6
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 K:Trample
 K:Hexproof
-SVar:Picture:http://www.wizards.com/global/images/magic/general/carnage_tyrant.jpg
 Oracle:This spell can't be countered.\nTrample, hexproof

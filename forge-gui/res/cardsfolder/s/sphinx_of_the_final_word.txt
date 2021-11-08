@@ -4,7 +4,6 @@ Types:Creature Sphinx
 PT:5/5
 K:Flying
 K:Hexproof
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 S:Mode$ Continuous | Affected$ Instant.YouCtrl,Sorcery.YouCtrl | AddHiddenKeyword$ This spell can't be countered. | AffectedZone$ Stack | Description$Instant and sorcery spells you control can't be countered.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinx_of_the_final_word.jpg
 Oracle:This spell can't be countered.\nFlying, hexproof\nInstant and sorcery spells you control can't be countered.

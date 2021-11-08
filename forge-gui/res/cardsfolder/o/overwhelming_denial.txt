@@ -3,6 +3,5 @@ ManaCost:2 U U
 Types:Instant
 K:Surge:U U
 A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
-K:CARDNAME can't be countered.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/overwhelming_denial.jpg
+K:This spell can't be countered.
 Oracle:Surge {U}{U} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn.)\nThis spell can't be countered.\nCounter target spell.

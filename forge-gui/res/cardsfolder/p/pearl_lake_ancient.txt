@@ -4,7 +4,6 @@ Types:Creature Leviathan
 PT:6/7
 K:Flash
 K:Prowess
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 A:AB$ ChangeZone | Cost$ Return<3/Land> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pearl_lake_ancient.jpg
 Oracle:Flash\nThis spell can't be countered.\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nReturn three lands you control to their owner's hand: Return Pearl Lake Ancient to its owner's hand.

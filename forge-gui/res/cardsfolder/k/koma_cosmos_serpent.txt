@@ -2,7 +2,7 @@ Name:Koma, Cosmos Serpent
 ManaCost:3 G G U U
 Types:Legendary Creature Serpent
 PT:6/6
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of each upkeep, create a 3/3 blue Serpent creature token named Koma's Coil.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ komas_coil | TokenOwner$ You
 A:AB$ Charm | Cost$ Sac<1/Serpent.Other/another Serpent> | Choices$ DBTap,DBPump
