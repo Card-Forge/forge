@@ -9,6 +9,7 @@ SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | Co
 SVar:TrigCharm:DB$ Charm | Choices$ DBRemoveCounter,DBPump
 SVar:DBRemoveCounter:DB$ RemoveCounter | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | CounterType$ Any | CounterNum$ X | SubAbility$ DBCleanup | SpellDescription$ Remove X counters from target permanent, where X is the mana value of the exiled card.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | IsCurse$ True | NumAtt$ -X | NumDef$ -X | SubAbility$ DBCleanup | SpellDescription$ Target creature an opponent controls gets -X/-X until end of turn, where X is the mana value of the exiled card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 DeckHas:Ability$Graveyard
 Oracle:Menace\nWhen Cemetery Desecrator enters the battlefield or dies, exile another card from a graveyard. When you do, choose one —\n• Remove X counters from target permanent, where X is the mana value of the exiled card.\n• Target creature an opponent controls gets -X/-X until end of turn, where X is the mana value of the exiled card.
