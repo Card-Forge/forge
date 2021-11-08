@@ -6,10 +6,8 @@ SVar:PutPlagueCounter:DB$ PutCounter | Defined$ Self | CounterType$ PLAGUE | Cou
 A:AB$ GenericChoice | Cost$ 1 B G | Choices$ DBPutPlagueCounter,DBRemovePlagueCounter | SpellDescription$ Put a plague counter on CARDNAME or remove a plague counter from it.
 SVar:DBRemovePlagueCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ PLAGUE | CounterNum$ 1 | SpellDescription$ Remove a plague counter on this card.
 SVar:DBPutPlagueCounter:DB$ PutCounter | Defined$ Self | CounterType$ PLAGUE | CounterNum$ 1 | SpellDescription$ Put a plague counter on this card.
-T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE3_PLAGUE | Execute$ TrigSac | TriggerDescription$ When CARDNAME has three or more plague counters on it, sacrifice it. If you do, destroy all nonland permanents.
-SVar:TrigSac:DB$ Sacrifice | Defined$ Self | RememberSacrificed$ True | SubAbility$ DBDestroyAll
-SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Permanent.nonLand | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE3_PLAGUE | Execute$ TrigDestroyAll | TriggerDescription$ When CARDNAME has three or more plague counters on it, sacrifice it. If you do, destroy all nonland permanents.
+SVar:TrigDestroyAll:AB$ DestroyAll | ValidCards$ Permanent.nonLand | Cost$ Mandatory Sac<1/CARDNAME>
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plague_boiler.jpg
 Oracle:At the beginning of your upkeep, put a plague counter on Plague Boiler.\n{1}{B}{G}: Put a plague counter on Plague Boiler or remove a plague counter from it.\nWhen Plague Boiler has three or more plague counters on it, sacrifice it. If you do, destroy all nonland permanents.

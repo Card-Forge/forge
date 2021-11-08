@@ -159,7 +159,7 @@ public class CostExile extends CostPartWithList {
             amount++;
         }
 
-        if ((amount != null) && (list.size() < amount)) {
+        if (amount != null && list.size() < amount) {
             return false;
         }
 

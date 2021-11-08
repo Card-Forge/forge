@@ -5,10 +5,8 @@ PT:2/2
 K:Flying
 S:Mode$ Continuous | Affected$ Card.Self+counters_GE5_P1P1 | AddKeyword$ Lifelink | Description$ CARDNAME has lifelink as long as it has five or more +1/+1 counters on it.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken+Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another nontoken creature you control dies, put a +1/+1 counter on CARDNAME. If that creature was a Cleric, you may draw a card. If you do, you lose 1 life.
-SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ TriggeredCardLKICopy | ConditionPresent$ Creature.Cleric | ConditionCompare$ EQ1 | OptionalDecider$ True | RememberDrawn$ True | SubAbility$ DBLoseLife
-SVar:DBLoseLife:DB$ LoseLife | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ1 | Defined$ You | LifeAmount$ 1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1 | UnlessCost$ Draw<1/Card> | UnlessSwitched$ True | UnlessPayer$ You | ConditionDefined$ TriggeredCardLKICopy | ConditionPresent$ Creature.Cleric | ConditionCompare$ EQ1 
 DeckHas:Ability$Counters
 DeckHints:Type$Cleric
 Oracle:Flying\nTaborax, Hope's Demise has lifelink as long as it has five or more +1/+1 counters on it.\nWhenever another nontoken creature you control dies, put a +1/+1 counter on Taborax. If that creature was a Cleric, you may draw a card. If you do, you lose 1 life.
