@@ -1,0 +1,15 @@
+Name:Circle of Confinement
+ManaCost:1 W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature with mana value 3 or less an opponent controls until CARDNAME leaves the battlefield. (That creature returns under its owner's control.)
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ValidTgts$ Creature.cmcLE3+OppCtrl | TgtPrompt$ Select target creature with mana value 3 or less an opponent controls | AITgts$ Vampire.cmcLE3+OppCtrl | Duration$ UntilHostLeavesPlay
+T:Mode$ SpellCast | ValidCard$ Card.Vampire+sharesNameWith Remembered.ExiledWithSource | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever an opponent casts a Vampire spell with the same name as a card exiled with CARDNAME, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:PlayMain1:TRUE
+SVar:NeedsToPlay:Creature.cmcLE3+OppCtrl
+DeckHas:Ability$LifeGain
+Oracle:When Circle of Confinement enters the battlefield, exile target creature with mana value 3 or less an opponent controls until Circle of Confinement leaves the battlefield.\nWhenever an opponent casts a Vampire spell with the same name as a card exiled with Circle of Confinement, you gain 2 life.

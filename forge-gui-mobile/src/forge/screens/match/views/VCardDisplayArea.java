@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardZoom;
@@ -324,7 +326,15 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                 ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread in case a dialog needs to be shown
                     @Override
                     public void run() {
-                        if (!selectCard(false)) {
+                        if (GuiBase.getInterface().isRunningOnDesktop() && Forge.mouseButtonID == Input.Buttons.RIGHT) {
+                            FThreads.invokeInEdtLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    showZoom();
+                                }
+                            });
+                            return;
+                        } else if (!selectCard(false)) {
                             //if no cards in stack can be selected, just show zoom/details for card
                             FThreads.invokeInEdtLater(new Runnable() {
                                 @Override

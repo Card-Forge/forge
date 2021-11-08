@@ -1,18 +1,17 @@
 package forge.sound;
 
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.google.common.eventbus.Subscribe;
-
 import forge.game.event.GameEvent;
 import forge.gui.GuiBase;
 import forge.gui.events.UiEvent;
 import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
+
+import java.io.File;
+import java.util.*;
 
 /**
  * Manages playback of all sounds for the client.
@@ -108,7 +107,7 @@ public class SoundSystem {
      */
     public void play(final String resourceFileName, final boolean isSynchronized) {
         if (isUsingAltSystem()) {
-            GuiBase.getInterface().startAltSoundSystem(ForgeConstants.SOUND_DIR + resourceFileName, isSynchronized);
+            GuiBase.getInterface().startAltSoundSystem(getSoundDirectory() + resourceFileName, isSynchronized);
         }
         else {
             final IAudioClip snd = fetchResource(resourceFileName);
@@ -123,7 +122,7 @@ public class SoundSystem {
      */
     public void play(final SoundEffectType type, final boolean isSynchronized) {
         if (isUsingAltSystem()) {
-            GuiBase.getInterface().startAltSoundSystem(ForgeConstants.SOUND_DIR + type.getResourceFileName(), isSynchronized);
+            GuiBase.getInterface().startAltSoundSystem(getSoundDirectory() + type.getResourceFileName(), isSynchronized);
         } else {
             final IAudioClip snd = fetchResource(type);
             if (!isSynchronized || snd.isDone()) {
@@ -244,5 +243,82 @@ public class SoundSystem {
             currentTrack.dispose();
             currentTrack = null;
         }
+    }
+
+    public String[] getAvailableSoundSets()
+    {
+        final List<String> availableSets = new ArrayList<>();
+
+        final File dir = new File(ForgeConstants.CACHE_SOUND_DIR);
+        if (dir != null && dir.exists()) {
+            final String[] files = dir.list();
+            for (String fileName : files) {
+                String fullPath = ForgeConstants.CACHE_SOUND_DIR + fileName;
+                if (!fileName.equals("Default") && new File(fullPath).isDirectory()) {
+                    availableSets.add(fileName);
+                }
+            }
+        }
+
+        Collections.sort(availableSets);
+        availableSets.add(0, "Default");
+
+        if (availableSets.size() == 1 || !availableSets.contains(FModel.getPreferences().getPref(FPref.UI_CURRENT_SOUND_SET))) {
+            // Default profile only or the current set is no longer available - revert the preference setting to default
+            FModel.getPreferences().setPref(FPref.UI_CURRENT_SOUND_SET, "Default");
+            invalidateSoundCache();
+        }
+
+        return availableSets.toArray(new String[availableSets.size()]);
+    }
+
+    public String getSoundDirectory() {
+        String profileName = FModel.getPreferences().getPref(FPref.UI_CURRENT_SOUND_SET);
+        if (profileName.equals("Default")) {
+            return ForgeConstants.SOUND_DIR;
+        } else {
+            return ForgeConstants.CACHE_SOUND_DIR + profileName + ForgeConstants.PATH_SEPARATOR;
+        }
+    }
+
+    public void invalidateSoundCache() {
+        loadedClips.clear();
+        loadedScriptClips.clear();
+    }
+
+    public String getMusicDirectory() {
+        String profileName = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CURRENT_MUSIC_SET);
+        if (profileName.equals("Default")) {
+            return ForgeConstants.MUSIC_DIR;
+        } else {
+            return ForgeConstants.CACHE_MUSIC_DIR + profileName + ForgeConstants.PATH_SEPARATOR;
+        }
+    }
+
+    public static String[] getAvailableMusicSets()
+    {
+        final List<String> availableSets = new ArrayList<>();
+
+        final File dir = new File(ForgeConstants.CACHE_MUSIC_DIR);
+        if (dir != null && dir.exists()) {
+            final String[] files = dir.list();
+            for (String fileName : files) {
+                String fullPath = ForgeConstants.CACHE_MUSIC_DIR + fileName;
+                if (!fileName.equals("Default") && new File(fullPath).isDirectory()) {
+                    availableSets.add(fileName);
+                }
+            }
+        }
+
+        Collections.sort(availableSets);
+        availableSets.add(0, "Default");
+
+        if (availableSets.size() == 1 || !availableSets.contains(FModel.getPreferences().getPref(FPref.UI_CURRENT_MUSIC_SET))) {
+            // Default profile only or the current set is no longer available - revert the preference setting to default
+            FModel.getPreferences().setPref(FPref.UI_CURRENT_MUSIC_SET, "Default");
+            MusicPlaylist.invalidateMusicPlaylist();
+        }
+
+        return availableSets.toArray(new String[availableSets.size()]);
     }
 }

@@ -1,7 +1,7 @@
 Name:Thought Distortion
 ManaCost:4 B B
 Types:Sorcery
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 A:SP$ RevealHand | Cost$ 4 B B | ValidTgts$ Opponent | IsCurse$ True | SubAbility$ DBExile | SpellDescription$ Target opponent reveals their hand. Exile all noncreature, nonland cards from that player's hand and graveyard.
 SVar:DBExile:DB$ ChangeZoneAll | Origin$ Hand,Graveyard | Destination$ Exile | ChangeType$ Card.nonCreature+nonLand+TargetedPlayerCtrl
 Oracle:This spell can't be countered.\nTarget opponent reveals their hand. Exile all noncreature, nonland cards from that player's hand and graveyard.

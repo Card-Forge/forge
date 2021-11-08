@@ -5,6 +5,7 @@ import java.util.*;
 
 import forge.StaticData;
 import forge.card.CardDb;
+import forge.card.CardEdition;
 import forge.deck.DeckRecognizer.TokenType;
 import forge.game.GameFormat;
 import forge.game.GameType;
@@ -28,12 +29,14 @@ public class DeckImportController {
     private final IComboBox<Integer> yearDropdown;
     // CardArt Preference Filter
     private CardDb.CardArtPreference artPreference;
+    private boolean smartCardArt;
     // Block Preference Filter
     private boolean inlcludeBnRInDeck = false;
 
     private final List<Token> tokens = new ArrayList<>();
     private final Map<PaperCard, Token> cardsInTokens = new HashMap<>();
     private final boolean currentDeckNotEmpty;
+    private Deck currentDeckInEditor = null;
     private DeckFormat currentDeckFormat;
     private GameFormat currentGameFormat;
     private final List<DeckSection> allowedSections = new ArrayList<>();
@@ -56,6 +59,7 @@ public class DeckImportController {
 
         // Init default parameters
         this.artPreference = StaticData.instance().getCardArtPreference();  // default
+        this.smartCardArt = StaticData.instance().isEnabledCardArtSmartSelection();
         this.currentDeckFormat = null;
         this.currentGameFormat = null;
         fillDateDropdowns();
@@ -70,6 +74,10 @@ public class DeckImportController {
             this.currentDeckFormat = gameType.getDeckFormat();
             this.currentGameFormat = FModel.getFormats().get(gameType.name());
         }
+    }
+
+    public void setCurrentDeckInEditor(Deck deckInEditor){
+        this.currentDeckInEditor = deckInEditor;
     }
 
     public void setAllowedSections(List<DeckSection> allSections){
@@ -88,6 +96,14 @@ public class DeckImportController {
 
     public void setCardArtPreference(boolean isLatest, boolean coreFilterEnabled){
         this.artPreference = StaticData.instance().getCardArtPreference(isLatest, coreFilterEnabled);
+    }
+
+    public void setSmartCardArtOptimisation(boolean enableSmartArt){
+        this.smartCardArt = enableSmartArt;
+    }
+
+    public boolean isSmartCardArtEnabled(){
+        return this.smartCardArt;
     }
 
     public void setCreateNewDeck(boolean createNewDeck){
@@ -290,6 +306,143 @@ public class DeckImportController {
         return this.allowedSections.contains(DeckSection.Commander);
     }
 
+    public List<Token> optimiseCardArtInTokens(){
+        /* == STEP 1. Collect info about tokens to optimise
+
+        Organise card tokens (per section) into two groups, depending on whether they have or not
+        the edition specified in original request.
+        If no tokens with NO set will be found, there is no optimisation to run, so we could
+        skip remaining steps.
+         */
+        Map<DeckSection, List<Token>> tokensPerSectionWithSet = new HashMap<>();
+        Map<DeckSection, List<Token>> tokensPerSectionWithNoSet = new HashMap<>();
+        for (Token token : this.tokens){
+            if (!token.isCardTokenForDeck())
+                continue;
+            DeckSection tokenSection = token.getTokenSection();
+            Map<DeckSection, List<Token>> refTokenMap;
+            if (token.cardRequestHasNoCode())
+                refTokenMap = tokensPerSectionWithNoSet;
+            else
+                refTokenMap = tokensPerSectionWithSet;
+
+            List<Token> tokensInSection = refTokenMap.getOrDefault(tokenSection, null);
+            if (tokensInSection == null) {
+                tokensInSection = new ArrayList<>();
+                tokensInSection.add(token);
+                refTokenMap.put(tokenSection, tokensInSection);
+            } else
+                tokensInSection.add(token);
+        }
+
+        if (tokensPerSectionWithNoSet.isEmpty())
+            return tokens; // NO Optimisation needed.
+
+        /* == STEP 2. Set up the reference pool of cards for optimisation per each section.
+            - we will start by considering whether we should include or not current deck;
+            - we will then consider the tokens with set collected in previous step.
+
+            In the end, if cards with specified set (either in tokens or in current deck, if any)
+            account for less than the 50% of total card counts (excl. basic lands), the whole
+            pool of cards will be considered for optimisation - similarly to what happens with
+            Decks with no editions, e.g. Net decks.
+        */
+
+        Map<DeckSection, CardPool> referencePoolPerSection = new HashMap<>();
+
+        if (this.currentDeckNotEmpty && !this.createNewDeck && this.currentDeckInEditor != null){
+            // We will always consider ONLY sections for cards needing art optimisation
+            for (DeckSection section : tokensPerSectionWithNoSet.keySet()){
+                CardPool cardsInDeck = this.currentDeckInEditor.get(section);
+                if (cardsInDeck == null || cardsInDeck.isEmpty())
+                    continue;
+                CardPool optCardPool = new CardPool(cardsInDeck);
+                referencePoolPerSection.put(section, optCardPool);
+            }
+        }
+
+        // Now check tokens with set wrt. tokens with no set
+        for (DeckSection section: tokensPerSectionWithNoSet.keySet()){
+            List<Token> sectionTokensNoSet = tokensPerSectionWithNoSet.get(section);
+            List<Token> sectionTokenWithSet = tokensPerSectionWithSet.getOrDefault(section, null);
+
+            CardPool sectionCardPool = referencePoolPerSection.getOrDefault(section, null);
+            if (sectionCardPool == null)  // No current deck, or deck has that section empty
+                sectionCardPool = new CardPool();
+
+            int tokensWithSetCount = countTokens(sectionTokenWithSet);
+            int cardsInPoolCount = sectionCardPool.countAll();
+            int tokensNoSetCount = countTokens(sectionTokensNoSet);
+            int totalCount = tokensNoSetCount + tokensWithSetCount + cardsInPoolCount;
+            if (totalCount == 0)
+                continue;
+            float cardsWithSetRatio = (float)(tokensWithSetCount + cardsInPoolCount) / totalCount;
+
+            // If all cards in section are missing or
+            if (cardsWithSetRatio < 0.5) {
+                for (Token t: sectionTokensNoSet)
+                    sectionCardPool.add(t.getCard(), t.getQuantity());
+            }
+
+            if (sectionTokenWithSet != null){
+                for (Token t: sectionTokenWithSet)
+                    sectionCardPool.add(t.getCard(), t.getQuantity());
+            }
+
+            referencePoolPerSection.put(section, sectionCardPool);
+        }
+
+        /* == STEP 3. Optimise card art in tokens
+        Now we do have collected the reference pool of cards. We can now proceed with
+        the final optimisation step
+         */
+        StaticData data = StaticData.instance();
+        boolean isCardArtPreferenceLatestArt = this.artPreference.latestFirst;
+        boolean cardArtPreferenceHasFilter = this.artPreference.filterSets;
+        List<String> allowedSetCodes = this.currentGameFormat != null ? this.currentGameFormat.getAllowedSetCodes() : null;
+        for (DeckSection section: tokensPerSectionWithNoSet.keySet()){
+            CardPool cardArtReferencePool = referencePoolPerSection.get(section);
+            if (cardArtReferencePool == null || cardArtReferencePool.isEmpty())
+                continue;  // nothing to do here.
+            boolean isExpansionTheMajorityInThePool = (cardArtReferencePool.getTheMostFrequentEditionType() == CardEdition.Type.EXPANSION);
+            boolean isPoolModernFramed = cardArtReferencePool.isModern();
+            CardEdition pivotEdition = cardArtReferencePool.getPivotCardEdition(isCardArtPreferenceLatestArt);
+            Date releaseDatePivotEdition = pivotEdition.getDate();
+
+            List<Token> tokensToOptimise = tokensPerSectionWithNoSet.get(section);
+            for (Token t: tokensToOptimise){
+                PaperCard tokenCard = t.getCard();
+                PaperCard alternativeCardPrint = data.getAlternativeCardPrint(tokenCard, releaseDatePivotEdition,
+                                                                                isCardArtPreferenceLatestArt,
+                                                                                cardArtPreferenceHasFilter,
+                                                                                isExpansionTheMajorityInThePool,
+                                                                                isPoolModernFramed, allowedSetCodes);
+                if (alternativeCardPrint != null)
+                    t.replaceTokenCard(alternativeCardPrint);
+            }
+        }
+
+        // Regenerate cardsInTokens Map
+        collectAllCardsInTokens();
+
+        return tokens;
+    }
+
+    private int countTokens(List<Token> tokensInSection){
+        if (tokensInSection == null || tokensInSection.isEmpty())
+            return 0;
+        int tokensCount = 0;
+        for (Token t: tokensInSection){
+            if (!t.isCardTokenForDeck())
+                continue;
+            PaperCard tCard = t.getCard();
+            if (tCard.isVeryBasicLand())
+                continue;
+            tokensCount += t.getQuantity();
+        }
+        return tokensCount;
+    }
+
     public PaperCard getCardFromDecklist(final PaperCard card){
         if (cardsInTokens.containsKey(card))
             return card; // found - same instance returned
@@ -301,17 +454,21 @@ public class DeckImportController {
                                false, card.getCollectorNumber(), card.getArtist());
         else
             cardKey = card.getFoiled();
-        return cardsInTokens.containsKey(cardKey) ? cardsInTokens.get(cardKey).getCard() : null;
+
+        return cardsInTokens.containsKey(cardKey) ? cardKey : null;
     }
 
-    public boolean isTokenInListLimited(PaperCard cardKey) {
-        Token cardToken = this.cardsInTokens.getOrDefault(cardKey, null);
-        return (cardToken != null) && (cardToken.getType() == TokenType.LIMITED_CARD);
+    public PaperCard getCardFromDecklistByName(String cardName){
+        for (PaperCard cardKey : this.cardsInTokens.keySet()){
+            if (!cardKey.getName().equals(cardName))
+                continue;
+            return cardKey;
+        }
+        return null;
     }
 
-    public boolean isTokenInListLegal(PaperCard cardKey) {
-        Token cardToken = this.cardsInTokens.getOrDefault(cardKey, null);
-        return (cardToken != null) && (cardToken.getType() == TokenType.LEGAL_CARD);
+    public Token getTokenFromCardInDecklist(PaperCard cardKey){
+        return this.cardsInTokens.getOrDefault(cardKey, null);
     }
 
     public Deck accept(){

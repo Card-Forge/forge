@@ -1,0 +1,12 @@
+Name:Undead Butler
+ManaCost:1 B
+Types:Creature Zombie
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill three cards. (Put the top three cards of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExile | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may exile it. When you do, return target creature card from your graveyard to your hand.
+SVar:TrigExile:DB$ ChangeZone | Destination$ Exile | Defined$ TriggeredNewCardLKICopy | RememberChanged$ True | SubAbility$ DBImmediateTrig
+SVar:DBImmediateTrig:DB$ ImmediateTrigger | Execute$ TrigReturn | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup | TriggerDescription$ When you do, return target creature card from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature card in your graveyard
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When Undead Butler enters the battlefield, mill three cards. (Put the top three cards of your library into your graveyard.)\nWhen Undead Butler dies, you may exile it. When you do, return target creature card from your graveyard to your hand.

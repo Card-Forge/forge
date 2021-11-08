@@ -1,0 +1,8 @@
+Name:Inspired Idea
+ManaCost:2 U
+Types:Sorcery
+A:SP$ Draw | NumCards$ 3 | SubAbility$ DBEffect | SpellDescription$ Draw three cards. [Your maximum hand size is reduced by three for the rest of the game.]
+SVar:DBEffect:DB$ Effect | StaticAbilities$ ReduceHand | Duration$ Permanent
+SVar:ReduceHand:Mode$ Continuous | Affected$ You | RaiseMaxHandSize$ -3 | Description$ Your maximum hand size is reduced by three for the rest of the game.
+A:SP$ Draw | Cost$ 3 U U | NumCards$ 3 | PrecostDesc$ Cleave | CostDesc$ {3}{U}{U} | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its cleave cost. If you do, remove the words in square brackets.)
+Oracle:Cleave {3}{U}{U} (You may cast this spell for its cleave cost. If you do, remove the words in square brackets.)\nDraw three cards. [Your maximum hand size is reduced by three for the rest of the game.]

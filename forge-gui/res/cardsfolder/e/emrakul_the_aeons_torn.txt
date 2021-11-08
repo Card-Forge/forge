@@ -2,7 +2,7 @@ Name:Emrakul, the Aeons Torn
 ManaCost:15
 Types:Legendary Creature Eldrazi
 PT:15/15
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 K:Flying
 K:Protection:Spell.nonColorless:Protection from colored spells
 K:Annihilator:6

@@ -832,12 +832,7 @@ public class Cost implements Serializable {
             sb.append(Cost.NUM_NAMES[i]);
         }
 
-        sb.append(" ");
-        char firstChar = type.charAt(0);
-        if (Character.isUpperCase(firstChar)) { //fix case of type before appending
-            type = Character.toLowerCase(firstChar) + type.substring(1);
-        }
-        sb.append(type);
+        sb.append(" ").append(type);
         if (1 != i) {
             sb.append("s");
         }

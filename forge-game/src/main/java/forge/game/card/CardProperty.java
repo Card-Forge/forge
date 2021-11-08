@@ -25,6 +25,7 @@ import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Expressions;
 import forge.util.TextUtil;
+import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
 
@@ -825,6 +826,11 @@ public class CardProperty {
                         }
                 }
             }
+        } else if (property.startsWith("sharesLandTypeWith")) {
+            final String restriction = property.split("sharesLandTypeWith ")[1];
+            if (!Iterables.any(AbilityUtils.getDefinedCards(source, restriction, spellAbility), CardPredicates.sharesLandTypeWith(card))) {
+                return false;
+            }
         } else if (property.equals("sharesPermanentTypeWith")) {
             if (!card.sharesPermanentTypeWith(source)) {
                 return false;
@@ -1459,6 +1465,14 @@ public class CardProperty {
             if (property.equals("attackingOpponent")) {
                 Player defender = combat.getDefenderPlayerByAttacker(card);
                 if (!sourceController.isOpponentOf(defender)) {
+                    return false;
+                }
+            }
+            if (property.startsWith("attacking ")) { // generic "attacking [DefinedGameEntity]"
+                FCollection<GameEntity> defined = AbilityUtils.getDefinedEntities(source, property.split(" ")[1],
+                        spellAbility);
+                final GameEntity defender = combat.getDefenderByAttacker(card);
+                if (!defined.contains(defender)) {
                     return false;
                 }
             }

@@ -164,7 +164,6 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     game.getAction().reveal(revealed, p, false);
                 }
 
-
                 if (foundDest != null) {
                     // Allow ordering of found cards
                     if ((foundDest.isKnown()) && found.size() >= 2 && !foundDest.equals(ZoneType.Exile)) {

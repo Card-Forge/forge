@@ -256,7 +256,8 @@ public class CardFactoryUtil {
      * @return a boolean.
      */
     public static boolean isCounterable(final Card c) {
-        return !c.hasKeyword("CARDNAME can't be countered.") && c.getCanCounter();
+        return !(c.hasKeyword("CARDNAME can't be countered.") || c.hasKeyword("This spell can't be countered."))
+                && c.getCanCounter();
     }
 
     /**

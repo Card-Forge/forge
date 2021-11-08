@@ -2,11 +2,10 @@ Name:Altered Ego
 ManaCost:X 2 G U
 Types:Creature Shapeshifter
 PT:0/0
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 K:ETBReplacement:Copy:DBCopy:Optional
 SVar:DBCopy:DB$ Clone | Choices$ Creature.Other | SubAbility$ DBAddCounter | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any creature on the battlefield, except it enters with X additional +1/+1 counters on it.
 SVar:DBAddCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | ETB$ True | CounterNum$ X
 SVar:X:Count$xPaid
 DeckHas:Ability$Counter
-SVar:Picture:http://www.wizards.com/global/images/magic/general/altered_ego.jpg
 Oracle:This spell can't be countered.\nYou may have Altered Ego enter the battlefield as a copy of any creature on the battlefield, except it enters with X additional +1/+1 counters on it.

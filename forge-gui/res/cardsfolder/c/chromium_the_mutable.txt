@@ -4,6 +4,6 @@ Types:Legendary Creature Elder Dragon
 PT:7/7
 K:Flash
 K:Flying
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 A:AB$ Animate | Cost$ Discard<1/Card> | Types$ Human | Power$ 1 | Toughness$ 1 | Keywords$ Hexproof | HiddenKeywords$ Unblockable | RemoveAllAbilities$ True | RemoveCreatureTypes$ True | SpellDescription$ Until end of turn, CARDNAME becomes a Human with base power and toughness 1/1, loses all abilities, and gains hexproof. It can't be blocked this turn.
 Oracle:Flash\nThis spell can't be countered.\nFlying\nDiscard a card: Until end of turn, Chromium, the Mutable becomes a Human with base power and toughness 1/1, loses all abilities, and gains hexproof. It can't be blocked this turn.

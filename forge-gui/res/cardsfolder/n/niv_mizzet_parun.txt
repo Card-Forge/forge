@@ -3,7 +3,7 @@ ManaCost:U U U R R R
 Types:Legendary Creature Dragon Wizard
 PT:5/5
 K:Flying
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 T:Mode$ Drawn | ValidCard$ Card.YouOwn | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you draw a card, CARDNAME deals 1 damage to any target.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a player casts an instant or sorcery spell, you draw a card.

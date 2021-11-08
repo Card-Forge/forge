@@ -39,7 +39,6 @@ import forge.gui.events.IUiEventVisitor;
 import forge.gui.events.UiEventAttackerDeclared;
 import forge.gui.events.UiEventBlockerAssigned;
 import forge.gui.events.UiEventNextGameDecision;
-import forge.localinstance.properties.ForgeConstants;
 import forge.util.TextUtil;
 import forge.util.maps.MapOfLists;
 
@@ -331,7 +330,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
         }
 
         // Only proceed if the file actually exists
-        return new File(ForgeConstants.SOUND_DIR, effect).exists();
+        return new File(SoundSystem.instance.getSoundDirectory(), effect).exists();
     }
 
 

@@ -2,7 +2,7 @@ Name:Shifting Ceratops
 ManaCost:2 G G
 Types:Creature Dinosaur
 PT:5/4
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 K:Protection from blue
 A:AB$ GenericChoice | Cost$ G | Choices$ DBReach,DBTrample,DBHaste | SpellDescription$ CARDNAME gains your choice of reach, trample, or haste until end of turn.
 SVar:DBReach:DB$ Pump | Defined$ Self | KW$ Reach | SpellDescription$ CARDNAME gains reach until end of turn.

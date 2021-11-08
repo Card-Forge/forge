@@ -79,6 +79,7 @@ public class Forge implements ApplicationListener {
     public static String CJK_Font = "";
     public static int hoveredCount = 0;
     public static boolean afterDBloaded = false;
+    public static int mouseButtonID = 0;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
         app = new Forge();
@@ -780,6 +781,7 @@ public class Forge implements ApplicationListener {
                     }
                 }
             }
+            mouseButtonID = button;
             return super.touchDown(x, y, pointer, button);
         }
 

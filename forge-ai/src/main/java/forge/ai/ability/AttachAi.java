@@ -452,21 +452,15 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Attach to player ai preferences.
-     *
      * @param sa
      *            the sa
      * @param mandatory
      *            the mandatory
+     * @param newParam TODO
+     *
      * @return the player
      */
-    public static Player attachToPlayerAIPreferences(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
-        List<Player> targetable = new ArrayList<>();
-        for (final Player player : aiPlayer.getGame().getPlayers()) {
-            if (sa.canTarget(player)) {
-                targetable.add(player);
-            }
-        }
-
+    public static Player attachToPlayerAIPreferences(final Player aiPlayer, final SpellAbility sa, final boolean mandatory, List<Player> targetable) {
         if ("Curse".equals(sa.getParam("AILogic"))) {
             if (!mandatory) {
                 targetable.removeAll(aiPlayer.getAllies());
@@ -1020,7 +1014,13 @@ public class AttachAi extends SpellAbilityAi {
     private static boolean attachPreference(final SpellAbility sa, final TargetRestrictions tgt, final boolean mandatory) {
         GameObject o;
         if (tgt.canTgtPlayer()) {
-            o = attachToPlayerAIPreferences(sa.getActivatingPlayer(), sa, mandatory);
+            List<Player> targetable = new ArrayList<>();
+            for (final Player player : sa.getHostCard().getGame().getPlayers()) {
+                if (sa.canTarget(player)) {
+                    targetable.add(player);
+                }
+            }
+            o = attachToPlayerAIPreferences(sa.getActivatingPlayer(), sa, mandatory, targetable);
         } else {
             o = attachToCardAIPreferences(sa.getActivatingPlayer(), sa, mandatory);
         }
@@ -1459,10 +1459,12 @@ public class AttachAi extends SpellAbilityAi {
      */
     public static Card attachGeneralAI(final Player ai, final SpellAbility sa, final List<Card> list, final boolean mandatory,
             final Card attachSource, final String logic) {
-        Player prefPlayer = AiAttackController.choosePreferredDefenderPlayer(ai);
+        Player prefPlayer;
         if ("Pump".equals(logic) || "Animate".equals(logic) || "Curiosity".equals(logic) || "MoveTgtAura".equals(logic)
                 || "MoveAllAuras".equals(logic)) {
             prefPlayer = ai;
+        } else {
+            prefPlayer = AiAttackController.choosePreferredDefenderPlayer(ai);
         }
         // Some ChangeType cards are beneficial, and PrefPlayer should be
         // changed to represent that
@@ -1745,6 +1747,10 @@ public class AttachAi extends SpellAbilityAi {
                 sa.getTargets().add(tgt);
             }
             return sa.isTargetNumberValid();
+        } else if ("Remembered".equals(sa.getParam("Defined")) && sa.getParent() != null
+            && sa.getParent().getApi() == ApiType.Token && sa.getParent().hasParam("RememberTokens")) {
+            // Living Weapon or similar
+            return true;
         }
         return false;
     }
@@ -1761,6 +1767,6 @@ public class AttachAi extends SpellAbilityAi {
 
     @Override
     protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
-        return attachToPlayerAIPreferences(ai, sa, true);
+        return attachToPlayerAIPreferences(ai, sa, true, (List<Player>)options);
     }
 }

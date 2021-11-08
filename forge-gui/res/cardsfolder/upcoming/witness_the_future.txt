@@ -1,0 +1,8 @@
+Name:Witness the Future
+ManaCost:2 U
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBChangeZone | StackDescription$ {p:Targeted} | SpellDescription$ Target player
+SVar:DBChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 4 | TargetsWithDefinedController$ ParentTarget | Origin$ Graveyard | Destination$ Library | Shuffle$ True | TgtPrompt$ Select up to four target cards | ValidTgts$ Card | SubAbility$ DBDig | StackDescription$ SpellDescription | SpellDescription$ shuffles up to four target cards from their graveyard into their library.
+SVar:DBDig:DB$ Dig | DigNum$ 4 | ChangeNum$ 1 | RestRandomOrder$ True | StackDescription$ SpellDescription | SpellDescription$ You look at the top four cards of your library, then put one of those cards into your hand and the rest on the bottom of your library in a random order.
+AI:RemoveDeck:All
+Oracle:Target player shuffles up to four target cards from their graveyard into their library. You look at the top four cards of your library, then put one of those cards into your hand and the rest on the bottom of your library in a random order.

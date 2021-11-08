@@ -199,7 +199,9 @@ public class CostDiscard extends CostPartWithList {
             // discard itself for cycling cost
             runParams.put(AbilityKey.Cycling, true);
         }
-        return targetCard.getController().discard(targetCard, null, null, runParams);
+        // if this is caused by 118.12 it's also an effect
+        SpellAbility cause = targetCard.getGame().getStack().isResolving(ability.getHostCard()) ? ability : null;
+        return targetCard.getController().discard(targetCard, cause, null, runParams);
     }
 
     /* (non-Javadoc)

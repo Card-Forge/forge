@@ -2,7 +2,7 @@ Name:Chandra, Awakened Inferno
 Types:Legendary Planeswalker Chandra
 ManaCost:4 R R
 Loyalty:6
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 A:AB$ Effect | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | EffectOwner$ Player.Opponent | Name$ Emblem - Chandra, Awakened Inferno | Triggers$ BOTTrig | Duration$ Permanent | AILogic$ Always | SpellDescription$ Each opponent gets an emblem with "At the beginning of your upkeep, this emblem deals 1 damage to you."
 SVar:BOTTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ ChandraDmg | TriggerDescription$ At the beginning of your upkeep, this emblem deals 1 damage to you.
 SVar:ChandraDmg:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 1

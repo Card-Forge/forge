@@ -2,9 +2,8 @@ Name:Isao, Enlightened Bushi
 ManaCost:2 G
 Types:Legendary Creature Human Samurai
 PT:2/1
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 K:Bushido:2
 A:AB$ Regenerate | Cost$ 2 | ValidTgts$ Samurai | TgtPrompt$ Select target Samurai. | SpellDescription$ Regenerate target Samurai.
 DeckHints:Type$Samurai
-SVar:Picture:http://www.wizards.com/global/images/magic/general/isao_enlightened_bushi.jpg
 Oracle:This spell can't be countered.\nBushido 2 (Whenever this creature blocks or becomes blocked, it gets +2/+2 until end of turn.)\n{2}: Regenerate target Samurai.

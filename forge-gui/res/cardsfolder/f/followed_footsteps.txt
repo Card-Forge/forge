@@ -2,8 +2,7 @@ Name:Followed Footsteps
 ManaCost:3 U U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 3 U U | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ HighestEvaluation
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, create a token that's a copy of enchanted creature.
-SVar:TrigCopy:DB$ CopyPermanent | Defined$ Enchanted | SpellDescription$ At the beginning of your upkeep, put a token that's a copy of enchanted creature onto the battlefield.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/followed_footsteps.jpg
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ Enchanted | SpellDescription$ At the beginning of your upkeep, create a token that's a copy of enchanted creature.
 Oracle:Enchant creature\nAt the beginning of your upkeep, create a token that's a copy of enchanted creature.

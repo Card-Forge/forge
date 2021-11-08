@@ -66,6 +66,10 @@ public final class ImageKeys {
     }
 
     private static final Map<String, File> cachedCards = new HashMap<>(50000);
+    private static HashSet<String> missingCards = new HashSet<>();
+    public static void clearMissingCards() {
+        missingCards.clear();
+    }
     public static File getCachedCardsFile(String key) {
         return cachedCards.get(key);
     }
@@ -100,6 +104,9 @@ public final class ImageKeys {
             filename = key;
             dir = CACHE_CARD_PICS_DIR;
         }
+
+        if (missingCards.contains(filename))
+            return null;
 
         File cachedFile = cachedCards.get(filename);
         if (cachedFile != null) {
@@ -237,6 +244,8 @@ public final class ImageKeys {
         }
 
         // System.out.println("File not found, no image created: " + key);
+        //add missing cards
+        missingCards.add(filename);
         return null;
     }
 

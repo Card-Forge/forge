@@ -132,7 +132,6 @@ public class CostReturn extends CostPartWithList {
     	return "ReturnedCards";
     }
 
-
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }
