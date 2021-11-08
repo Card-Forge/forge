@@ -1745,6 +1745,10 @@ public class AttachAi extends SpellAbilityAi {
                 sa.getTargets().add(tgt);
             }
             return sa.isTargetNumberValid();
+        } else if ("Remembered".equals(sa.getParam("Defined")) && sa.getParent() != null
+            && sa.getParent().getApi() == ApiType.Token && sa.getParent().hasParam("RememberTokens")) {
+            // Living Weapon or similar
+            return true;
         }
         return false;
     }

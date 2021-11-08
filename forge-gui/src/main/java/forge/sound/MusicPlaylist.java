@@ -3,7 +3,6 @@ package forge.sound;
 import java.io.File;
 import java.io.FilenameFilter;
 
-import forge.localinstance.properties.ForgeConstants;
 import forge.util.MyRandom;
 
 public enum MusicPlaylist {
@@ -13,13 +12,18 @@ public enum MusicPlaylist {
     private final String subDir;
     private int mostRecentTrackIdx = -1;
     private String[] filenames;
+    private static boolean isInvalidated = false;
 
     MusicPlaylist(String subDir0) {
         subDir = subDir0;
     }
 
+    public static void invalidateMusicPlaylist() {
+        isInvalidated = true;
+    }
+
     public String getRandomFilename() {
-        if (filenames == null) {
+        if (filenames == null || isInvalidated) {
             try {
                 FilenameFilter filter = new FilenameFilter(){
                     @Override
@@ -27,13 +31,14 @@ public enum MusicPlaylist {
                         return name.endsWith(".mp3") || name.endsWith(".wav") || name.endsWith(".m4a");
                     }
                 };
-                filenames = new File(ForgeConstants.MUSIC_DIR + subDir).list(filter);
+                filenames = new File(SoundSystem.instance.getMusicDirectory() + subDir).list(filter);
                 if (filenames == null) filenames = new String[0];
             }
             catch (Exception e) {
                 e.printStackTrace();
                 filenames = new String[0];
             }
+            isInvalidated = false;
         }
 
         if (filenames.length == 0) { return null; }
@@ -50,6 +55,6 @@ public enum MusicPlaylist {
             mostRecentTrackIdx = newIndex;
         }
 
-        return ForgeConstants.MUSIC_DIR + subDir + filenames[mostRecentTrackIdx];
+        return SoundSystem.instance.getMusicDirectory() + subDir + filenames[mostRecentTrackIdx];
     }
 }

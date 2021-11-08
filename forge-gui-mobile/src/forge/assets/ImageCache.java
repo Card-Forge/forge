@@ -113,6 +113,7 @@ public class ImageCache {
 
     public static void clear() {
         missingIconKeys.clear();
+        ImageKeys.clearMissingCards();
     }
 
     public static void disposeTexture(){

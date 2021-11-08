@@ -63,12 +63,14 @@ public abstract class GuiDownloadService implements Runnable {
     private IButton btnStart;
     private UiCommand cmdClose;
     private Runnable onUpdate;
+    private boolean clearImageCache = false;
 
     private final UiCommand cmdStartDownload = new UiCommand() {
         @Override
         public void run() {
             //invalidate image cache so newly downloaded images will be loaded
-            GuiBase.getInterface().clearImageCache();
+            if (clearImageCache)
+                GuiBase.getInterface().clearImageCache();
             FThreads.invokeInBackgroundThread(GuiDownloadService.this);
             btnStart.setEnabled(false);
         }
@@ -95,6 +97,7 @@ public abstract class GuiDownloadService implements Runnable {
         btnStart = btnStart0;
         cmdClose = cmdClose0;
         onUpdate = onUpdate0;
+        clearImageCache = txtAddress0.getText().contains(".jpg") || txtAddress0.getText().contains(".png");
 
         String startOverrideDesc = getStartOverrideDesc();
         if (startOverrideDesc == null) {

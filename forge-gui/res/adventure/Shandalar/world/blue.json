@@ -23,6 +23,6 @@
 		  "height": 0.7,
 		"color": "10a2e0",
     "spriteNames":["IslandTree","Coral","Shell"]       ,
-    "enemies":[ "Merfok","Merfok warrior","Merfok Avatar","Djinn","Blue Wiz1"]  ,
+    "enemies":[ "Merfolk","Merfolk warrior","Merfolk Avatar","Djinn","Blue Wiz1"]  ,
     "pointsOfInterest":[ "Island Town"]
 }

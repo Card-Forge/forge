@@ -1,10 +1,10 @@
 {                                    
-"name":"Djinni",
+"name":"Djinn",
   "template":
   {
    "count":60,
    "colors":["Blue","Red"],
-   "tribe":"Djinni",         
+   "tribe":"Djinn",         
    "tribeCards":0.7,     
    "tribeSynergyCards":0.0,
    "rares":0.5

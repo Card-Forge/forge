@@ -1,0 +1,6 @@
+Name:Wolf
+ManaCost:no cost
+PT:3/2
+Colors:red
+Types:Creature Wolf
+Oracle:

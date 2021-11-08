@@ -1,0 +1,25 @@
+Name:Concealing Curtains
+ManaCost:B
+Types:Creature Wall
+PT:0/4
+K:Defender
+A:AB$ SetState | Cost$ 2 B | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
+AlternateMode:DoubleFaced
+Oracle:Defender\n{2}{B}: Transform Concealing Curtains. Activate only as a sorcery.
+
+ALTERNATE
+
+Name:Revealing Eye
+ManaCost:no cost
+Colors:black
+Types:Creature Eye Horror
+PT:3/4
+K:Menace
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigReveal | TriggerDescription$ When this creature transforms into CARDNAME, target opponent reveals their hand. You may choose a nonland card from it. If you do, that player discards that card, then draws a card.
+SVar:TrigReveal:DB$ RevealHand | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | RememberRevealed$ True | SubAbility$ DBChoose
+SVar:DBChoose:DB$ ChooseCard | ChoiceZone$ Hand | Amount$ 1 | Choices$ Card.nonLand+IsRemembered | SubAbility$ DBDiscard | ChoiceTitle$ You may choose a nonland card
+SVar:DBDiscard:DB$ Discard | DefinedCards$ ChosenCard | Defined$ Targeted | Mode$ Defined | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ EQ1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ Targeted | NumCards$ 1 | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+DeckHas:Ability$Discard
+Oracle:Menace\nWhen this creature transforms into Revealing Eye, target opponent reveals their hand. You may choose a nonland card from it. If you do, that player discards that card, then draws a card.

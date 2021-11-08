@@ -1,0 +1,9 @@
+Name:Simic Evolve|Deck:Simic Evolve.dck|Variant:None|Avatar:Fathom Mage|Desc:
+Name:Simic Graft|Deck:Simic Graft.dck|Variant:None|Avatar:Cytoplast Root-Kin|Desc:
+Name:Biovisionary|Deck:Biovisionary.dck|Variant:None|Avatar:Biovisionary|Desc:
+Name:Experiment Kraj|Deck:Experiment Kraj.dck|Variant:Commander|Avatar:Experiment Kraj|Desc:
+Name:Prime Speaker Zegana|Deck:Prime Speaker Zegana.dck|Variant:Commander|Avatar:Prime Speaker Zegana|Desc:
+Name:Momir Vig, Simic Visionary|Deck:Momir Vig, Simic Visionary.dck|Variant:Commander|Avatar:Momir Vig, Simic Visionary|Desc:
+Name:Vorel of the Hull Clade|Deck:Vorel of the Hull Clade.dck|Variant:Commander|Avatar:Vorel of the Hull Clade|Desc:
+Name:Momir Vig|Deck:Momir Vig.dck|Variant:Vanguard|Avatar:Momir Vig, Simic Visionary|Desc:
+Name:Jace, the Living Guildpact|Deck:Jace, the Living Guildpact.dck|Variant:Planeswalker|Avatar:Jace, the Living Guildpact|Desc:

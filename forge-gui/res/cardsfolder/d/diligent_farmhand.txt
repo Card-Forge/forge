@@ -3,7 +3,7 @@ ManaCost:G
 Types:Creature Human Druid
 PT:1/1
 A:AB$ ChangeZone | Cost$ 1 G Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
-S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Graveyard | AddHiddenKeyword$ CARDNAME count as Muscle Burst. | Description$ If CARDNAME is in a graveyard, effects from spells named Muscle Burst count it as a card named Muscle Burst.
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Graveyard | AffectedZone$ Graveyard | AddHiddenKeyword$ CARDNAME count as Muscle Burst. | Description$ If CARDNAME is in a graveyard, effects from spells named Muscle Burst count it as a card named Muscle Burst.
 DeckHints:Name$Diligent Farmhand|Muscle Burst
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diligent_farmhand.jpg
 Oracle:{1}{G}, Sacrifice Diligent Farmhand: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nIf Diligent Farmhand is in a graveyard, effects from spells named Muscle Burst count it as a card named Muscle Burst.

@@ -1,8 +1,8 @@
 {
-    "activeFile": "map/swamp_town.tmx",
+    "activeFile": "map/island_town.tmx",
     "expandedProjectPaths": [
-        "map",
         "tileset",
+        "map",
         "obj"
     ],
     "file.lastUsedOpenFilter": "Alle Dateien (*)",
@@ -33,10 +33,10 @@
         },
         "map/island_town.tmx": {
             "scale": 3,
-            "selectedLayer": 2,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 240,
-                "y": 136
+                "x": 251,
+                "y": 73
             }
         },
         "map/mountain_town.tmx": {
@@ -100,9 +100,9 @@
         "tileset/buildings.tsx",
         "tileset/main.tsx",
         "map/forest_town.tmx",
-        "map/island_town.tmx",
-        "map/mountain_town.tmx",
+        "map/swamp_town.tmx",
         "map/plains_town.tmx",
-        "map/swamp_town.tmx"
+        "map/mountain_town.tmx",
+        "map/island_town.tmx"
     ]
 }

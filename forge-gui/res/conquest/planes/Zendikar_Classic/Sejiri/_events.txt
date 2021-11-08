@@ -1,0 +1,9 @@
+Name:Kickin' It|Deck:Kickin It.dck|Variant:None|Avatar:Sphinx of Lost Truths|Desc:
+Name:Totem Armor|Deck:Totem Armor.dck|Variant:None|Avatar:Umbra Mystic|Desc:
+Name:Ayli, Eternal Pilgrim|Deck:Ayli, Eternal Pilgrim.dck|Variant:Commander|Avatar:Ayli, Eternal Pilgrim|Desc:
+Name:Iona, Shield of Emeria|Deck:Iona, Shield of Emeria.dck|Variant:Commander|Avatar:Iona, Shield of Emeria|Desc:
+Name:Jori En, Ruin Diver|Deck:Jori En, Ruin Diver.dck|Variant:Commander|Avatar:Jori En, Ruin Diver|Desc:
+Name:Linvala, Keeper of Silence|Deck:Linvala, Keeper of Silence.dck|Variant:Commander|Avatar:Linvala, Keeper of Silence|Desc:
+Name:Noyan Dar, Roil Shaper|Deck:Noyan Dar, Roil Shaper.dck|Variant:Commander|Avatar:Noyan Dar, Roil Shaper|Desc:
+Name:Thada Adel, Acquisitor|Deck:Thada Adel, Acquisitor.dck|Variant:Commander|Avatar:Thada Adel, Acquisitor|Desc:
+Name:Nahiri, the Lithomancer|Deck:Nahiri, the Lithomancer.dck|Variant:Planeswalker|Avatar:Nahiri, the Lithomancer|Desc:

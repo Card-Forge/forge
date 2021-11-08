@@ -47,9 +47,19 @@ public class UIScene extends Scene{
     {
         return ui;
     }
+    public boolean keyPressed(int keycode)
+    {
+        return true;
+    }
     @Override
     public void resLoaded() {
-        stage = new Stage(new StretchViewport(GetIntendedWidth(), GetIntendedHeight()));
+        stage = new Stage(new StretchViewport(GetIntendedWidth(), GetIntendedHeight())){
+
+            @Override
+            public boolean keyUp(int keycode) {
+                return keyPressed(keycode);
+            }
+        };
         ui = new UIActor(Config.instance().getFile(uiFile));
         screenImage=ui.findActor("lastScreen");
         stage.addActor(ui);
@@ -75,6 +85,8 @@ public class UIScene extends Scene{
         potPixmap.fillRectangle(0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         backgroundTexture = new TextureRegion(new Texture(potPixmap), 0, Gdx.graphics.getHeight(), Gdx.graphics.getWidth(), -Gdx.graphics.getHeight());
         screenImage.setDrawable(new TextureRegionDrawable(backgroundTexture));
+        pixmap.dispose();
+        potPixmap.dispose();
     }
 
         super.enter();

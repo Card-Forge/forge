@@ -1,0 +1,9 @@
+Name:Spawn|Deck:Spawn.dck|Variant:None|Avatar:Broodwarden|Desc:
+Name:Ingest|Deck:Ingest.dck|Variant:None|Avatar:Fathom Feeder|Desc:
+Name:Scions|Deck:Scions.dck|Variant:None|Avatar:Drowner of Hope|Desc:
+Name:Devoid|Deck:Devoid.dck|Variant:None|Avatar:Barrage Tyrant|Desc:
+Name:Annihilator|Deck:Annihilator.dck|Variant:None|Avatar:It That Betrays|Desc:
+Name:Kozilek, Butcher of Truth|Deck:Kozilek, Butcher of Truth.dck|Variant:Commander|Avatar:Kozilek, Butcher of Truth|Desc:
+Name:Kozilek, the Great Distortion|Deck:Kozilek, the Great Distortion.dck|Variant:Commander|Avatar:Kozilek, the Great Distortion|Desc:
+Name:Ulamog, the Ceaseless Hunger|Deck:Ulamog, the Ceaseless Hunger.dck|Variant:Commander|Avatar:Ulamog, the Ceaseless Hunger|Desc:
+Name:Emrakul, the Aeons Torn|Deck:Emrakul, the Aeons Torn.dck|Variant:Commander|Avatar:Emrakul, the Aeons Torn|Desc:

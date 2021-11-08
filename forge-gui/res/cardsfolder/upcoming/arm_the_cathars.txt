@@ -1,0 +1,8 @@
+Name:Arm the Cathars
+ManaCost:1 W W
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature (+3/+3) | NumAtt$ 3 | NumDef$ 3 | KW$ Vigilance | SubAbility$ DBPump | StackDescription$ Until end of turn, {c:ThisTargetedCard} gets +3/+3, | SpellDescription$ Until end of turn, target creature gets +3/+3,
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select up to one other target creature (+2/+2) | TargetMin$ 0 | TargetMax$ 1 | NumAtt$ 2 | NumDef$ 2 | KW$ Vigilance | TargetUnique$ True | SubAbility$ DBPump2 | StackDescription$ SpellDescription | SpellDescription$ up to one other target creature gets +2/+2,
+SVar:DBPump2:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select up to one other target creature (+1/+1) | TargetMin$ 0 | TargetMax$ 1 | NumAtt$ 1 | NumDef$ 1 | KW$ Vigilance | TargetUnique$ True | SubAbility$ DBPump3 | StackDescription$ SpellDescription | SpellDescription$ and up to one other target creature gets +1/1.
+SVar:DBPump3:DB$ Pump | Defined$ Targeted | KW$ Vigilance | StackDescription$ SpellDescription | SpellDescription$ Those creatures gain vigilance until end of turn.
+Oracle:Until end of turn, target creature gets +3/+3, up to one other target creature gets +2/+2, and up to one other target creature gets +1/+1. Those creatures gain vigilance until end of turn.

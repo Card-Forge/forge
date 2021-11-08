@@ -1,0 +1,22 @@
+Name:Twinblade Geist
+ManaCost:1 W
+Types:Creature Spirit Warrior
+PT:1/1
+K:Double strike
+K:Disturb:2 W
+AlternateMode:DoubleFaced
+DeckHas:Ability$Graveyard
+Oracle:Double strike\nDisturb {2}{W} (You may cast this card from your graveyard transformed for its disturb cost.)
+
+ALTERNATE
+
+Name:Twinblade Invocation
+ManaCost:no cost
+Colors:white
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Double strike | Description$ Enchanted creature has double strike.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+Oracle:Enchant creature\nEnchanted creature has double strike.\nIf Twinblade Invocation would be put into a graveyard from anywhere, exile it instead.

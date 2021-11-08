@@ -1,9 +1,7 @@
 package forge.adventure.stage;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -16,7 +14,6 @@ import forge.adventure.character.PlayerSprite;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.world.WorldSave;
-import forge.adventure.world.WorldSaveHeader;
 
 /**
  * Base class to render a player sprite on a map
@@ -48,6 +45,13 @@ public abstract class GameStage extends Stage {
 
     public GameStage() {
         super(new StretchViewport(Scene.GetIntendedWidth(), Scene.GetIntendedHeight(), new OrthographicCamera()));
+        WorldSave.getCurrentSave().onLoad(() -> {
+            if(player==null)
+                return;
+            foregroundSprites.removeActor(player);
+            player=null;
+            GetPlayer();
+        });
         camera = (OrthographicCamera) getCamera();
 
         backgroundSprites = new Group();
@@ -157,6 +161,18 @@ public abstract class GameStage extends Stage {
         {
             player.getMovementDirection().y = -1;
         }
+        if (keycode == Input.Keys.F5)//todo config
+        {
+            GetPlayer().storePos();
+            WorldSave.getCurrentSave().header.createPreview();
+            WorldSave.getCurrentSave().quickSave();
+
+        }
+        if (keycode == Input.Keys.F8)//todo config
+        {
+            WorldSave.getCurrentSave().quickLoad();
+            enter();
+        }
         if (keycode == Input.Keys.F12)
         {
             debugCollision(true);
@@ -258,15 +274,8 @@ public abstract class GameStage extends Stage {
     }
 
     public void openMenu() {
-        Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        Pixmap scaled = new Pixmap(WorldSaveHeader.previewImageWidth, (int) (WorldSaveHeader.previewImageWidth / (Scene.GetIntendedWidth() / (float) Scene.GetIntendedHeight())), Pixmap.Format.RGB888);
-        scaled.drawPixmap(pixmap,
-                0, 0, pixmap.getWidth(), pixmap.getHeight(),
-                0, 0, scaled.getWidth(), scaled.getHeight());
-        pixmap.dispose();
-        if (WorldSave.getCurrentSave().header.preview != null)
-            WorldSave.getCurrentSave().header.preview.dispose();
-        WorldSave.getCurrentSave().header.preview = scaled;
+
+        WorldSave.getCurrentSave().header.createPreview();
         AdventureApplicationAdapter.instance.switchScene(SceneType.StartScene.instance);
     }
 

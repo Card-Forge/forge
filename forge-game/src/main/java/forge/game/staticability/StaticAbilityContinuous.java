@@ -682,12 +682,12 @@ public final class StaticAbilityContinuous {
 
             // set P/T
             if (layer == StaticAbilityLayer.SETPT) {
-                if ((setPower != null) || (setToughness != null)) {
+                if (setPower != null || setToughness != null) {
                     // non CharacteristicDefining
-                    if (setP.startsWith("Affected")) {
+                    if (setP.contains("Affected")) {
                         setPower = AbilityUtils.calculateAmount(affectedCard, setP, stAb, true);
                     }
-                    if (setT.startsWith("Affected")) {
+                    if (setT.contains("Affected")) {
                         setToughness = AbilityUtils.calculateAmount(affectedCard, setT, stAb, true);
                     }
                     affectedCard.addNewPT(setPower, setToughness,
@@ -697,10 +697,10 @@ public final class StaticAbilityContinuous {
 
             // add P/T bonus
             if (layer == StaticAbilityLayer.MODIFYPT) {
-                if (addP.startsWith("Affected")) {
+                if (addP.contains("Affected")) {
                     powerBonus = AbilityUtils.calculateAmount(affectedCard, addP, stAb, true);
                 }
-                if (addT.startsWith("Affected")) {
+                if (addT.contains("Affected")) {
                     toughnessBonus = AbilityUtils.calculateAmount(affectedCard, addT, stAb, true);
                 }
                 affectedCard.addPTBoost(powerBonus, toughnessBonus, se.getTimestamp(), stAb.getId());
@@ -709,7 +709,7 @@ public final class StaticAbilityContinuous {
             // add keywords
             // TODO regular keywords currently don't try to use keyword multiplier
             // (Although nothing uses it at this time)
-            if ((addKeywords != null) || (removeKeywords != null) || removeAllAbilities) {
+            if (addKeywords != null || removeKeywords != null || removeAllAbilities) {
                 List<String> newKeywords = null;
                 if (addKeywords != null) {
                     newKeywords = Lists.newArrayList(addKeywords);

@@ -7,11 +7,8 @@ import com.badlogic.gdx.utils.Array;
 import forge.adventure.data.PointOfInterestData;
 import forge.adventure.util.Config;
 import forge.adventure.util.SaveFileContent;
-import forge.adventure.util.Serializer;
+import forge.adventure.util.SaveFileData;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.Random;
 
 /**
@@ -21,23 +18,28 @@ public class PointOfInterest implements SaveFileContent {
 
 
     @Override
-    public void writeToSaveFile(ObjectOutputStream saveFile) throws IOException {
-        saveFile.writeUTF(data.name);
-        Serializer.writeVector(saveFile,position);
-        Serializer.writeRectangle(saveFile,rectangle);
-        saveFile.writeInt(spriteIndex);
+    public void load(SaveFileData saveFileData) {
+
+        data=PointOfInterestData.getPointOfInterest(saveFileData.readString("name"));
+        position.set(saveFileData.readVector2("position"));
+        rectangle.set(saveFileData.readRectangle("rectangle"));
+        spriteIndex=saveFileData.readInt("spriteIndex");
+
+
+        oldMapId="";
+        Array<Sprite> textureAtlas = Config.instance().getAtlas(this.data.spriteAtlas).createSprites(this.data.sprite);
+        sprite = textureAtlas.get(spriteIndex);
     }
 
     @Override
-    public void readFromSaveFile(ObjectInputStream saveFile) throws IOException {
-        String name= saveFile.readUTF();
-        data=PointOfInterestData.getPointOfInterest(name);
-        Serializer.readVector(saveFile,position);
-        Serializer.readRectangle(saveFile,rectangle);
-        spriteIndex=saveFile.readInt();
-        oldMapId="";
-        Array<Sprite> textureAtlas = Config.instance().getAtlas(data.spriteAtlas).createSprites(data.sprite);
-        sprite = textureAtlas.get(spriteIndex);
+    public SaveFileData save() {
+
+        SaveFileData data=new SaveFileData();
+        data.store("name",this.data.name);
+        data.store("position",position);
+        data.store("rectangle",rectangle);
+        data.store("spriteIndex",spriteIndex);
+        return data;
     }
 
     PointOfInterestData data;

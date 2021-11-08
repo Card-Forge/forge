@@ -18,6 +18,7 @@ import forge.screens.TabPageScreen;
 import forge.screens.TabPageScreen.TabPage;
 import forge.screens.home.HomeScreen;
 import forge.screens.match.MatchController;
+import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FGroupList;
@@ -612,6 +613,29 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("nlVibrateAfterLongPress")),
                 6);
         //Sound Options
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_CURRENT_SOUND_SET,
+                        localizer.getMessage("cbpSoundSets"),
+                        localizer.getMessage("nlpSoundSets"),
+                        SoundSystem.instance.getAvailableSoundSets()) {
+                            @Override
+                            public void valueChanged(String newValue) {
+                                super.valueChanged(newValue);
+                                SoundSystem.instance.invalidateSoundCache();
+                            }
+                        },
+                7);
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_CURRENT_MUSIC_SET,
+                                    localizer.getMessage("cbpMusicSets"),
+                                    localizer.getMessage("nlpMusicSets"),
+                                    SoundSystem.getAvailableMusicSets()) {
+                                @Override
+                                public void valueChanged(String newValue) {
+                                    super.valueChanged(newValue);
+                                    MusicPlaylist.invalidateMusicPlaylist();
+                                    SoundSystem.instance.changeBackgroundTrack();
+                                }
+                            },
+                7);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_VOL_SOUNDS,
                 localizer.getMessage("cbAdjustSoundsVolume"),
                 localizer.getMessage("nlAdjustSoundsVolume"),

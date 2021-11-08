@@ -44,10 +44,10 @@ public abstract class Serializer {
 
     }
 
-    public static void WritePixmap(ObjectOutputStream out, Pixmap pixmap, boolean b) throws IOException {
+    public static void WritePixmap(ObjectOutputStream out, Pixmap pixmap, boolean flip) throws IOException {
         if (pixmap != null) {
             PixmapIO.PNG png = new PixmapIO.PNG();
-            png.setFlipY(b);
+            png.setFlipY(flip);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             png.write(stream, pixmap);
             byte[] data = stream.toByteArray();

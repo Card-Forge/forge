@@ -21,10 +21,7 @@ import forge.screens.LoadingOverlay;
 import forge.screens.match.MatchController;
 import forge.screens.quest.QuestMenu;
 import forge.screens.settings.GuiDownloader;
-import forge.sound.AudioClip;
-import forge.sound.AudioMusic;
-import forge.sound.IAudioClip;
-import forge.sound.IAudioMusic;
+import forge.sound.*;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.GuiChoose;
 import forge.util.*;
@@ -272,7 +269,7 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public IAudioClip createAudioClip(final String filename) {
-        return AudioClip.createClip(ForgeConstants.SOUND_DIR + filename);
+        return AudioClip.createClip(SoundSystem.instance.getSoundDirectory() + filename);
     }
 
     @Override
@@ -288,6 +285,7 @@ public class GuiMobile implements IGuiBase {
     @Override
     public void clearImageCache() {
         ImageCache.clear();
+        ImageKeys.clearMissingCards();
     }
 
     @Override

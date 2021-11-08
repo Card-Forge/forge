@@ -712,6 +712,30 @@ public class AiController {
             return AiPlayDecision.CantPlaySa;
         }
 
+        // Check a predefined condition
+        if (sa.hasParam("AICheckSVar")) {
+            final Card host = sa.getHostCard();
+            final String svarToCheck = sa.getParam("AICheckSVar");
+            String comparator = "GE";
+            int compareTo = 1;
+
+            if (sa.hasParam("AISVarCompare")) {
+                final String fullCmp = sa.getParam("AISVarCompare");
+                comparator = fullCmp.substring(0, 2);
+                final String strCmpTo = fullCmp.substring(2);
+                try {
+                    compareTo = Integer.parseInt(strCmpTo);
+                } catch (final Exception ignored) {
+                    compareTo = AbilityUtils.calculateAmount(host, host.getSVar(strCmpTo), sa);
+                }
+            }
+
+            int left = AbilityUtils.calculateAmount(host, svarToCheck, sa);
+            if (!Expressions.compare(left, comparator, compareTo)) {
+                return AiPlayDecision.AnotherTime;
+            }
+        }
+
         int oldCMC = -1;
         boolean xCost = sa.getPayCosts().hasXInAnyCostPart() || sa.getHostCard().hasStartOfKeyword("Strive");
         if (!xCost) {
@@ -746,7 +770,7 @@ public class AiController {
         // one is warded and can't be paid for.
         if (sa.usesTargeting()) {
             for (Card tgt : sa.getTargets().getTargetCards()) {
-                if (tgt.hasKeyword(Keyword.WARD) && tgt.getController().isOpponentOf(sa.getHostCard().getController())) {
+                if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(sa.getHostCard().getController())) {
                     int amount = 0;
                     Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
                     if (wardCost.hasManaCost()) {

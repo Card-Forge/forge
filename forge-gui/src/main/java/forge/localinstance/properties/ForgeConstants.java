@@ -283,6 +283,8 @@ public final class ForgeConstants {
     public static final String DB_DIR                        = CACHE_DIR + "db" + PATH_SEPARATOR;
     public static final String FONTS_DIR                     = CACHE_DIR + "fonts" + PATH_SEPARATOR;
     public static final String CACHE_SKINS_DIR               = CACHE_DIR + "skins" + PATH_SEPARATOR;
+    public static final String CACHE_SOUND_DIR               = CACHE_DIR + "sound" + PATH_SEPARATOR;
+    public static final String CACHE_MUSIC_DIR               = CACHE_DIR + "music" + PATH_SEPARATOR;
     public static final String CACHE_TOKEN_PICS_DIR          = PICS_DIR + "tokens" + PATH_SEPARATOR;
     public static final String CACHE_ICON_PICS_DIR           = PICS_DIR + "icons" + PATH_SEPARATOR;
     public static final String CACHE_SYMBOLS_DIR             = PICS_DIR + "symbols" + PATH_SEPARATOR;

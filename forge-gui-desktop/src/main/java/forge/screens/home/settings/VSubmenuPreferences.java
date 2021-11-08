@@ -128,6 +128,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FComboBoxPanel<String> cbpCardArtFormat = new FComboBoxPanel<>(localizer.getMessage("cbpCardArtFormat")+":");
     private final FComboBoxPanel<String> cbpCardArtPreference = new FComboBoxPanel<>(localizer.getMessage("lblPreferredArt")+":");
     private final FComboBoxPanel<String> cbpMulliganRule = new FComboBoxPanel<>(localizer.getMessage("cbpMulliganRule")+":");
+    private final FComboBoxPanel<String> cbpSoundSets = new FComboBoxPanel<>(localizer.getMessage("cbpSoundSets")+":");
+    private final FComboBoxPanel<String> cbpMusicSets = new FComboBoxPanel<>(localizer.getMessage("cbpMusicSets")+":");
     private final FComboBoxPanel<String> cbpAiProfiles = new FComboBoxPanel<>(localizer.getMessage("cbpAiProfiles")+":");
     private final FComboBoxPanel<String> cbpStackAdditions = new FComboBoxPanel<>(localizer.getMessage("cbpStackAdditions")+":");
     private final FComboBoxPanel<String> cbpLandPlayed = new FComboBoxPanel<>(localizer.getMessage("cbpLandPlayed")+":");
@@ -414,8 +416,14 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbEnableSounds, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnableSounds")), descriptionConstraints);
 
+        pnlPrefs.add(cbpSoundSets, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlpSoundSets")), descriptionConstraints);
+
         pnlPrefs.add(cbEnableMusic, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnableMusic")), descriptionConstraints);
+
+        pnlPrefs.add(cbpMusicSets, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlpMusicSets")), descriptionConstraints);
 
         pnlPrefs.add(cbAltSoundSystem, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAltSoundSystem")), descriptionConstraints);
@@ -738,6 +746,14 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public FComboBoxPanel<String> getCbpMulliganRule() {
         return cbpMulliganRule;
+    }
+
+    public FComboBoxPanel<String> getSoundSetsComboBoxPanel() {
+        return cbpSoundSets;
+    }
+
+    public FComboBoxPanel<String> getMusicSetsComboBoxPanel() {
+        return cbpMusicSets;
     }
 
     public FComboBoxPanel<String> getAiProfilesComboBoxPanel() {

@@ -151,7 +151,6 @@ public class CostPutCounter extends CostPartWithList {
 
             return !typeList.isEmpty();
         }
-
     }
 
     /*
@@ -203,7 +202,6 @@ public class CostPutCounter extends CostPartWithList {
         tempTable.putAll(counterTable);
         tempTable.triggerCountersPutAll(ability.getHostCard().getGame());
     }
-
 
     /* (non-Javadoc)
      * @see forge.game.cost.CostPartWithList#resetLists()
