@@ -1,15 +1,14 @@
 package forge.adventure.scene;
 
+import com.badlogic.gdx.Gdx;
 import forge.LobbyPlayer;
 import forge.adventure.AdventureApplicationAdapter;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.character.PlayerSprite;
-import forge.assets.FSkin;
-import forge.screens.FScreen;
-import forge.screens.match.MatchController;
-import forge.adventure.util.Current;
 import forge.adventure.util.Config;
+import forge.adventure.util.Current;
 import forge.adventure.world.AdventurePlayer;
+import forge.assets.FSkin;
 import forge.deck.Deck;
 import forge.game.GameRules;
 import forge.game.GameType;
@@ -19,6 +18,10 @@ import forge.gamemodes.match.HostedMatch;
 import forge.gui.interfaces.IGuiGame;
 import forge.player.GamePlayerUtil;
 import forge.player.PlayerControllerHuman;
+import forge.screens.FScreen;
+import forge.screens.match.MatchController;
+import forge.sound.MusicPlaylist;
+import forge.sound.SoundSystem;
 import forge.trackable.TrackableCollection;
 
 import java.util.*;
@@ -44,12 +47,16 @@ public class DuelScene extends ForgeScene {
 
 
     public void GameEnd() {
-       Scene last= AdventureApplicationAdapter.instance.switchToLast();
+        Gdx.app.postRunnable(() -> {
+            SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
+            Scene last= AdventureApplicationAdapter.instance.switchToLast();
 
-       if(last instanceof HudScene)
-       {
-           ((HudScene)last).stage.setWinner(humanPlayer == hostedMatch.getGame().getMatch().getWinner());
-       }
+            if(last instanceof HudScene)
+            {
+                ((HudScene)last).stage.setWinner(humanPlayer == hostedMatch.getGame().getMatch().getWinner());
+            }
+        });
+
 
     }
 

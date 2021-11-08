@@ -1,15 +1,11 @@
 package forge;
 
-import java.io.File;
-import java.util.*;
-
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Clipboard;
-
 import forge.animation.ForgeAnimation;
 import forge.assets.AssetsDownloader;
 import forge.assets.FSkin;
@@ -31,21 +27,19 @@ import forge.screens.home.NewGameMenu;
 import forge.screens.match.MatchController;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
-import forge.toolbox.FContainer;
-import forge.toolbox.FDisplayObject;
-import forge.toolbox.FGestureAdapter;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.FOverlay;
-import forge.util.Callback;
-import forge.util.CardTranslation;
-import forge.util.FileUtil;
-import forge.util.Localizer;
-import forge.util.Utils;
+import forge.toolbox.*;
+import forge.util.*;
+
+import java.io.File;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.List;
 
 public class Forge implements ApplicationListener {
     public static final String CURRENT_VERSION = "1.6.45.001";
 
-    private static final ApplicationListener app = new Forge();
+    private static ApplicationListener app = null;
     private static Clipboard clipboard;
     private static IDeviceAdapter deviceAdapter;
     private static int screenWidth;
@@ -53,7 +47,7 @@ public class Forge implements ApplicationListener {
     private static Graphics graphics;
     private static FrameRate frameRate;
     private static FScreen currentScreen;
-    private static SplashScreen splashScreen;
+    protected static SplashScreen splashScreen;
     private static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
     private static int continuousRenderingCount = 1; //initialize to 1 since continuous rendering is the default
@@ -87,6 +81,7 @@ public class Forge implements ApplicationListener {
     public static boolean afterDBloaded = false;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
+        app = new Forge();
         if (GuiBase.getInterface() == null) {
             clipboard = clipboard0;
             deviceAdapter = deviceAdapter0;
@@ -101,7 +96,21 @@ public class Forge implements ApplicationListener {
         GuiBase.setDeviceInfo(deviceName, AndroidRelease, AndroidAPI, totalRAM);
         return app;
     }
-
+    protected Forge(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
+        if (GuiBase.getInterface() == null) {
+            clipboard = clipboard0;
+            deviceAdapter = deviceAdapter0;
+            GuiBase.setUsingAppDirectory(assetDir0.contains("forge.app")); //obb directory on android uses the package name as entrypoint
+            GuiBase.setInterface(new GuiMobile(assetDir0));
+            GuiBase.enablePropertyConfig(value);
+            isPortraitMode = androidOrientation;
+            totalDeviceRAM = totalRAM;
+            isTabletDevice = isTablet;
+            androidVersion = AndroidAPI;
+        }
+        GuiBase.setDeviceInfo(deviceName, AndroidRelease, AndroidAPI, totalRAM);
+        app=this;
+    }
     private Forge() {
     }
 
@@ -242,7 +251,7 @@ public class Forge implements ApplicationListener {
             System.out.println(fScreen.toString());*/
     }
 
-    private void afterDbLoaded() {
+    protected void afterDbLoaded() {
         stopContinuousRendering(); //save power consumption by disabling continuous rendering once assets loaded
 
         FSkin.loadFull(splashScreen);
