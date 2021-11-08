@@ -1,0 +1,25 @@
+Name:Howlpack Piper
+ManaCost:3 G
+Types:Creature Human Werewolf
+PT:2/2
+K:CARDNAME can't be countered.
+A:AB$ ChangeZone | Cost$ 1 G T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | SorcerySpeed$ True | RememberChanged$ True | SubAbility$ DBUntap | StackDescription$ You may put a creature card from your hand onto the battlefield. If it's a Wolf or Werewolf, untap CARDNAME. | SpellDescription$ You may put a creature card from your hand onto the battlefield. If it's a Wolf or Werewolf, untap CARDNAME. Activate only as a sorcery.
+SVar:DBUntap:DB$ Untap | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Wolf,Werewolf | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Daybound
+AlternateMode:DoubleFaced
+DeckHints:Type$Wolf|Werewolf
+Oracle:This spell can't be countered.\n{1}{G}, {T}: You may put a creature card from your hand onto the battlefield. If it's a Wolf or Werewolf, untap Howlpack Piper. Activate only as a sorcery.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Wildsong Howler
+ManaCost:no cost
+Colors:green
+Types:Creature Werewolf
+PT:4/4
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ Whenever this creature enters the battlefield or transforms into CARDNAME, look at the top six cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigDig | Secondary$ True | TriggerDescription$ Whenever this creature enters the battlefield or transforms into CARDNAME, look at the top six cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 6 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Card.Creature | RestRandomOrder$ True | ForceRevealToController$ True
+K:Nightbound
+Oracle:Whenever this creature enters the battlefield or transforms into Wildsong Howler, look at the top six cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)
