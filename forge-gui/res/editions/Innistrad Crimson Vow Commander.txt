@@ -8,7 +8,21 @@ ScryfallCode=VOC
 [cards]
 1 M Millicent, Restless Revenant @Denman Rooke
 2 M Strefan, Maurer Progenitor @Chris Rallis
+31 R Breathkeeper Seraph @Alexander Mokhov
 32 M Wedding Ring @Olena Richards
+33 R Imperious Mindbreaker @Olivier Bernard
+34 R Doom Weaver @Helge C. Balzer
+35 R Mirage Phalanx @Scott Murphy
+36 R Hollowhenge Overlord @Milivoj Ćeran
+37 R Thundering Mightmare @Lorenzo Mastroianni
+38 M Umbris, Fear Manifest @Daarken
 39 M Millicent, Restless Revenant @Denman Rooke
 40 M Strefan, Maurer Progenitor @Chris Rallis
+69 R Breathkeeper Seraph @Alexander Mokhov
 70 M Wedding Ring @Olena Richards
+71 R Imperious Mindbreaker @Olivier Bernard
+72 R Doom Weaver @Helge C. Balzer
+73 R Mirage Phalanx @Scott Murphy
+74 R Hollowhenge Overlord @Milivoj Ćeran
+75 R Thundering Mightmare @Lorenzo Mastroianni
+76 M Umbris, Fear Manifest @Daarken
