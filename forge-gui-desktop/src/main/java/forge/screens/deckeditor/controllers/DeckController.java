@@ -120,6 +120,14 @@ public class DeckController<T extends DeckBase> {
         this.setModel((T) currentDeck, isStored);
     }
 
+    public Deck getCurrentDeckInEditor(){
+        try{
+            return this.getModel().getHumanDeck();
+        } catch (NullPointerException npe){
+            return null;
+        }
+    }
+
     private Deck pickFromCatalog(Deck deck, CardPool catalog) {
         // Getting Latest among the earliest editions in catalog!
         CardEdition referenceEdition = StaticData.instance().getEditions().getTheLatestOfAllTheOriginalEditionsOfCardsIn(catalog);
@@ -182,8 +190,7 @@ public class DeckController<T extends DeckBase> {
             if (card == null)
                 continue;
             int countToAdd = countByName.get(cardName);
-            card = StaticData.instance().getAlternativeCardPrint(card, referenceReleaseDate,
-                                        true, true);
+            card = StaticData.instance().getAlternativeCardPrint(card, referenceReleaseDate);
             if (card != null)
                 targetSection.add(card.getName(), card.getEdition(), countToAdd);
         }
