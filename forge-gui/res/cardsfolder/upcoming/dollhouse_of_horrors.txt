@@ -1,0 +1,10 @@
+Name:Dollhouse of Horrors
+ManaCost:5
+Types:Artifact
+A:AB$ CopyPermanent | Cost$ 1 T ExileFromGrave<1/Creature> | Defined$ Exiled | SetPower$ 0 | SetToughness$ 0 | AddTypes$ Construct & Artifact | AddStaticAbilities$ ConstructBuff | SorcerySpeed$ True | SubAbility$ DBPump | StackDescription$ Create a token that's a copy of {c:Exiled}, except it's a 0/0 Construct artifact in addition to its other types and it has "This creature gets +1/+1 for each Construct you control." | SpellDescription$ Create a token that's a copy of the exiled card, except it's a 0/0 Construct artifact in addition to its other types and it has "This creature gets +1/+1 for each Construct you control."
+SVar:DBPump:DB$ Pump | Defined$ Exiled | StackDescription$ That creature gains haste until end of turn. | SpellDescription$ That creature gains haste until end of turn. Activate only as a sorcery.
+SVar:ConstructBuff:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ This creature gets +1/+1 for each Construct you control.
+SVar:X:Count$Valid Construct.YouCtrl
+DeckHas:Ability$Token & Ability$Graveyard & Type$Artifact
+DeckHints:Type$Construct
+Oracle:{1}, {T}: Exile a creature card from your graveyard: Create a token that's a copy of the exiled card, except it's a 0/0 Construct artifact in addition to its other types and it has "This creature gets +1/+1 for each Construct you control." That creature gains haste until end of turn. Activate only as a sorcery.

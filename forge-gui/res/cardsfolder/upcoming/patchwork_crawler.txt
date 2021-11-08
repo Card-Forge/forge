@@ -1,0 +1,12 @@
+Name:Patchwork Crawler
+ManaCost:1 U
+Types:Creature Zombie Horror
+PT:1/2
+A:AB$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature.YouOwn | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Select target creature from your graveyard | SubAbility$ DBCounter | SpellDescription$ Exile target creature from your graveyard and put a +1/+1 counter on CARDNAME.
+SVar:DBCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | Defined$ Self
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Creature.ExiledWithSource | GainsAbilitiesOfZones$ Exile | Description$ CARDNAME has all activated abilities of all creature cards exiled with it.
+DeckHas:Ability$Counters & Ability$Graveyard
+DeckHints:Ability$Discard
+Oracle:{2}{U}: Exile target creature card from your graveyard and put a +1/+1 counter on Patchwork Crawler.\nPatchwork Crawler has all activated abilities of all creature cards exiled with it.

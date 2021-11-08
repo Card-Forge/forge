@@ -1,0 +1,25 @@
+Name:Mirrorhall Mimic
+ManaCost:3 U
+Types:Creature Spirit
+PT:0/0
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Creature.Other | ChoiceTitle$ Choose a creature on the battlefield to copy | AddTypes$ Spirit | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any creature on the battlefield, except it's an Spirit in addition to its other types.
+K:Disturb:3 U U
+AlternateMode:DoubleFaced
+DeckHas:Ability$Graveyard
+Oracle:You may have Mirrorhall Mimic enter the battlefield as a copy of any creature on the battlefield, except it's a Spirit in addition to its other types.\nDisturb {3}{U}{U} (You may cast this card from your graveyard transformed for its disturb cost.)
+
+ALTERNATE
+
+Name:Ghastly Mimicry
+ManaCost:no cost
+Colors:blue
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ HighestEvaluation
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, create a token that's a copy of enchanted creature, except it's a Spirit in addition to its other types.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ Enchanted | AddTypes$ Spirit | SpellDescription$ At the beginning of your upkeep, create a token that's a copy of enchanted creature, except it's a Spirit in addition to its other types.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+DeckHas:Ability$Token
+Oracle:Enchant creature\nAt the beginning of your upkeep, create a token that's a copy of enchanted creature, except it's a Spirit in addition to its other types.\nIf Ghastly Mimicry would be put into a graveyard from anywhere, exile it instead.

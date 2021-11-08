@@ -1,0 +1,8 @@
+Name:Sanctify
+ManaCost:1 W
+Types:Sorcery
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBGainLife | SpellDescription$ Destroy target artifact or enchantment. You gain 3 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
+DeckHas:Ability$LifeGain
+AI:RemoveDeck:Random
+Oracle:Destroy target artifact or enchantment. You gain 3 life.

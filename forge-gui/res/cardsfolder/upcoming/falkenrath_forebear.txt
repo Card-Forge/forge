@@ -1,0 +1,11 @@
+Name:Falkenrath Forebear
+ManaCost:2 B
+Types:Creature Vampire
+PT:3/1
+K:Flying
+K:CARDNAME can't block.
+T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigToken | CombatDamage$ True | ValidTarget$ Player | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, create a Blood token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_blood_draw
+A:AB$ ChangeZone | Cost$ B Sac<2/Blood.token/Blood token> | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to the battlefield.
+DeckHas:Ability$Token & Ability$Sacrifice & Ability$Graveyard & Type$Blood
+Oracle:Flying\nFalkenrath Forebear can't block.\nWhenever Falkenrath Forebear deals combat damage to a player, create a Blood token.\n{B}, Sacrifice two Blood tokens: Return Falkenrath Forebear from your graveyard to the battlefield.
