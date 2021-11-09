@@ -1,0 +1,8 @@
+Name:Wretched Throng
+ManaCost:1 U
+Types:Creature Zombie Horror
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME dies, you may search your library for a card named Wretched Throng, reveal it, put it into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedWretched Throng | ChangeNum$ 1
+DeckHints:Name$Wretched Throng
+Oracle:When Wretched Throng dies, you may search your library for a card named Wretched Throng, reveal it, put it into your hand, then shuffle.

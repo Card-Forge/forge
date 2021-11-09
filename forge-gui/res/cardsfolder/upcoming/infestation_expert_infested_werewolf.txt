@@ -1,0 +1,27 @@
+Name:Infestation Expert
+ManaCost:4 G
+Types:Creature Human Werewolf
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, create a 1/1 green Insect creature token.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, create a 1/1 green Insect creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_insect
+K:Daybound
+AlternateMode:DoubleFaced
+DeckHas:Ability$Token
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Infestation Expert enters the battlefield or attacks, create a 1/1 green Insect creature token.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Infested Werewolf
+ManaCost:no cost
+Colors:green
+Types:Creature Werewolf
+PT:4/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, create two 1/1 green Insect creature tokens.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, create two 1/1 green Insect creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_1_1_insect
+K:Nightbound
+DeckHas:Ability$Token
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Infested Werewolf enters the battlefield or attacks, create two 1/1 green Insect creature tokens.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)
