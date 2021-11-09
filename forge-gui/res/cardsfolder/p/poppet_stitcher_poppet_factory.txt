@@ -2,14 +2,14 @@ Name:Poppet Stitcher
 ManaCost:2 U
 Types:Creature Human Wizard
 PT:2/3
-T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an instant or sorcery spell, create a 2/2 black Zombie creature token with decayed. (It can’t block. When it attacks, sacrifice it at end of combat.)
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an instant or sorcery spell, create a 2/2 black Zombie creature token with decayed. (It can't block. When it attacks, sacrifice it at end of combat.)
 SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie_decayed | TokenOwner$ You
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Creature.token+YouCtrl | PresentCompare$ GE3 | TriggerZones$ Battlefield | Execute$ TrigTransform | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, if you control three or more creature tokens, you may transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 DeckNeeds:Type$Instant|Sorcery
 DeckHas:Ability$Token
-Oracle:Whenever you cast an instant or sorcery spell, create a 2/2 black Zombie creature token with decayed. (It can’t block. When it attacks, sacrifice it at end of combat.)\nAt the beginning of your upkeep, if you control three or more creature tokens, you may transform Poppet Sticher.
+Oracle:Whenever you cast an instant or sorcery spell, create a 2/2 black Zombie creature token with decayed. (It can't block. When it attacks, sacrifice it at end of combat.)\nAt the beginning of your upkeep, if you control three or more creature tokens, you may transform Poppet Sticher.
 
 ALTERNATE
 

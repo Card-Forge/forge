@@ -1,7 +1,7 @@
 Name:Topsy Turvy
 ManaCost:2 U
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Player | AddKeyword$ The phases of your turn are reversed. | Description$ The phases of each player’s turn are reversed. (The phases are, in reverse order, ending, postcombat main, combat, precombat main, and beginning.)
+S:Mode$ Continuous | Affected$ Player | AddKeyword$ The phases of your turn are reversed. | Description$ The phases of each player's turn are reversed. (The phases are, in reverse order, ending, postcombat main, combat, precombat main, and beginning.)
 S:Mode$ Continuous | Affected$ Player | AddKeyword$ The turn order is reversed. | CheckSVar$ X | SVarCompare$ GT2 | Description$ As long as there are more than two players in the game, the turn order is reversed.
 SVar:X:PlayerCountPlayers$Amount
 Oracle:The phases of each player's turn are reversed. (The phases are, in reverse order, ending, postcombat main, combat, precombat main, and beginning.)\nAs long as there are more than two players in the game, the turn order is reversed.

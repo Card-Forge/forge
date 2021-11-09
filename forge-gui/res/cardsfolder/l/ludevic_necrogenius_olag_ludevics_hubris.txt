@@ -19,7 +19,7 @@ ManaCost:no cost
 Colors:blue,black
 Types:Legendary Creature Zombie
 PT:4/4
-R:Event$ Transform | ValidCard$ Card.Self | ReplaceWith$ Copy | Description$ As this creature transforms into CARDNAME, it becomes a copy of a creature card exiled with it, except its name is Olag, Ludevic’s Hubris, it's 4/4, and it's a legendary blue and black Zombie in addition to its other colors and types. Put a number of +1/+1 counters on NICKNAME equal to the number of creature cards exiled with it.
+R:Event$ Transform | ValidCard$ Card.Self | ReplaceWith$ Copy | Description$ As this creature transforms into CARDNAME, it becomes a copy of a creature card exiled with it, except its name is Olag, Ludevic's Hubris, it's 4/4, and it's a legendary blue and black Zombie in addition to its other colors and types. Put a number of +1/+1 counters on NICKNAME equal to the number of creature cards exiled with it.
 SVar:Copy:DB$ Clone | Choices$ Creature.ExiledWithSource | ChoiceZone$ Exile | NewName$ Olag, Ludevic's Hubris | SetPower$ 4 | SetToughness$ 4 | AddTypes$ Legendary & Zombie | AddColors$ Blue & Black | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | CounterNum$ Y | CounterType$ P1P1
 SVar:Y:Count$ValidExile Creature.ExiledWithSource

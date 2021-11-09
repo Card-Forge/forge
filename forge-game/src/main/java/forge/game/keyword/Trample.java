@@ -15,7 +15,7 @@ public class Trample  extends KeywordInstance<Trample> {
     @Override
     protected String formatReminderText(String reminderText) {
         if (!type.isEmpty()) {
-            return "This creature can deal excess combat damage to the controller of the planeswalker it’s attacking.";
+            return "This creature can deal excess combat damage to the controller of the planeswalker it's attacking.";
         }
         return reminderText;
     }
