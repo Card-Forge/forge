@@ -134,7 +134,18 @@ public abstract class InputBase implements java.io.Serializable, Input {
         final StringBuilder sb = new StringBuilder();
         Localizer localizer = Localizer.getInstance();
         sb.append(localizer.getMessage("lblPriority")).append(": ").append(ph.getPriorityPlayer()).append("\n");
-        sb.append(localizer.getMessage("lblTurn")).append(": ").append(ph.getTurn()).append(" (").append(ph.getPlayerTurn()).append(")\n");
+        sb.append(localizer.getMessage("lblTurn")).append(": ").append(ph.getTurn()).append(" (").append(ph.getPlayerTurn()).append(")");
+
+        if (!game.isNeitherDayNorNight()) {
+            sb.append("  [");
+
+            String dayLabel = game.isDay() ? "Day" : "Night";
+
+            sb.append(Localizer.getInstance().getMessage("lbl" + dayLabel));
+            sb.append("]");
+        }
+
+        sb.append("\n");
         sb.append(localizer.getMessage("lblPhase")).append(": ").append(ph.getPhase().nameForUi).append("\n");
         sb.append(localizer.getMessage("lblStack")).append(": ");
         if (!game.getStack().isEmpty()) {
