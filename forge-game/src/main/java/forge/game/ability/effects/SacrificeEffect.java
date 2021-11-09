@@ -100,15 +100,19 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
         final boolean destroy = sa.hasParam("Destroy");
         final boolean remSacrificed = sa.hasParam("RememberSacrificed");
+        final boolean optional = sa.hasParam("Optional");
         CardZoneTable table = new CardZoneTable();
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         params.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
 
         if (valid.equals("Self") && game.getZoneOf(card) != null) {
             if (game.getZoneOf(card).is(ZoneType.Battlefield)) {
-                if (game.getAction().sacrifice(card, sa, table, params) != null) {
-                    if (remSacrificed) {
-                        card.addRemembered(card);
+                if (!optional || activator.getController().confirmAction(sa, null,
+                        Localizer.getInstance().getMessage("lblDoYouWantSacrificeThis", card.getName()))) {
+                    if (game.getAction().sacrifice(card, sa, table, params) != null) {
+                        if (remSacrificed) {
+                            card.addRemembered(card);
+                        }
                     }
                 }
             }
@@ -147,12 +151,11 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
                     if (sa.hasParam("Random")) {
                         choosenToSacrifice = Aggregates.random(validTargets, Math.min(amount, validTargets.size()), new CardCollection());
-                    } else if (sa.hasParam("OptionalSacrifice") && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantSacrifice"))) {
+                    } else if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantSacrifice"))) {
                         choosenToSacrifice = CardCollection.EMPTY;
                     } else {
-                        boolean isOptional = sa.hasParam("Optional");
                         boolean isStrict = sa.hasParam("StrictAmount");
-                        int minTargets = isOptional ? 0 : amount;
+                        int minTargets = optional ? 0 : amount;
                         boolean notEnoughTargets = isStrict && validTargets.size() < minTargets;
 
                         if (!notEnoughTargets) {
