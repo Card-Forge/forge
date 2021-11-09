@@ -8,6 +8,34 @@ ScryfallCode=VOC
 [cards]
 1 M Millicent, Restless Revenant @Denman Rooke
 2 M Strefan, Maurer Progenitor @Chris Rallis
+3 M Donal, Herald of Wings @Wayne Reynolds
+4 M Timothar, Baron of Bats @Jason A. Engle
+5 R Drogskol Reinforcements @Antonio José Manzanedo
+6 R Haunted Library @Justyna Gil
+7 R Priest of the Blessed Graf @Irina Nordsol
+8 R Rhoda, Geist Avenger @Randy Vargas
+9 R Storm of Souls @Liiga Smilshkalne
+10 R Sudden Salvation @Cristi Balanescu
+11 R Breath of the Sleepless @Robin Olausson
+12 R Ethereal Investigator @Sean Murray
+13 R Haunting Imitation @Liiga Smilshkalne
+14 R Occult Epiphany @Jason Rainville
+15 R Spectral Arcanist @Johan Grenier
+16 R Timin, Youthful Geist @Randy Vargas
+17 R Crossway Troublemakers @Aaron J. Riley
+18 R Glass-Cast Heart @Alayna Danner
+19 R Kamber, the Plunderer @Andrey Kuzinskiy
+20 R Olivia's Wrath @Nestor Ossandon Leal
+21 R Predators' Hour @Tomas Duchek
+22 R Shadowgrange Archfiend @Oleksandr Kozachenko
+23 R Arterial Alchemy @Caio Monteiro
+24 R Imposing Grandeur @Mila Pesic
+25 R Laurine, the Diversion @Andrey Kuzinskiy
+26 R Markov Enforcer @Wisnu Tan
+27 R Midnight Arsonist @Campbell White
+28 R Scion of Opulence @Chris Rallis
+29 R Disorder in the Court @Zoltan Boros
+30 R Sinister Waltz @Jason Rainville
 31 R Breathkeeper Seraph @Alexander Mokhov
 32 M Wedding Ring @Olena Richards
 33 R Imperious Mindbreaker @Olivier Bernard
@@ -18,6 +46,34 @@ ScryfallCode=VOC
 38 M Umbris, Fear Manifest @Daarken
 39 M Millicent, Restless Revenant @Denman Rooke
 40 M Strefan, Maurer Progenitor @Chris Rallis
+41 M Donal, Herald of Wings @Wayne Reynolds
+42 M Timothar, Baron of Bats @Jason A. Engle
+43 R Drogskol Reinforcements @Antonio José Manzanedo
+44 R Haunted Library @Justyna Gil
+45 R Priest of the Blessed Graf @Irina Nordsol
+46 R Rhoda, Geist Avenger @Randy Vargas
+47 R Storm of Souls @Liiga Smilshkalne
+48 R Sudden Salvation @Cristi Balanescu
+49 R Breath of the Sleepless @Robin Olausson
+50 R Ethereal Investigator @Sean Murray
+51 R Haunting Imitation @Liiga Smilshkalne
+52 R Occult Epiphany @Jason Rainville
+53 R Spectral Arcanist @Johan Grenier
+54 R Timin, Youthful Geist @Randy Vargas
+55 R Crossway Troublemakers @Aaron J. Riley
+56 R Glass-Cast Heart @Alayna Danner
+57 R Kamber, the Plunderer @Andrey Kuzinskiy
+58 R Olivia's Wrath @Nestor Ossandon Leal
+59 R Predators' Hour @Tomas Duchek
+60 R Shadowgrange Archfiend @Oleksandr Kozachenko
+61 R Arterial Alchemy @Caio Monteiro
+62 R Imposing Grandeur @Mila Pesic
+63 R Laurine, the Diversion @Andrey Kuzinskiy
+64 R Markov Enforcer @Wisnu Tan
+65 R Midnight Arsonist @Campbell White
+66 R Scion of Opulence @Chris Rallis
+67 R Disorder in the Court @Zoltan Boros
+68 R Sinister Waltz @Jason Rainville
 69 R Breathkeeper Seraph @Alexander Mokhov
 70 M Wedding Ring @Olena Richards
 71 R Imperious Mindbreaker @Olivier Bernard
@@ -26,3 +82,115 @@ ScryfallCode=VOC
 74 R Hollowhenge Overlord @Milivoj Ćeran
 75 R Thundering Mightmare @Lorenzo Mastroianni
 76 M Umbris, Fear Manifest @Daarken
+77 R Angel of Flight Alabaster @Howard Lyon
+78 R Benevolent Offering @Ryan Yee
+79 R Boreas Charger @Christine Choi
+80 R Bygone Bishop @Jason A. Engle
+81 U Crush Contraband @Jason A. Engle
+82 R Custodi Soulbinders @Karla Ortiz
+83 C Custodi Squire @Alex Horley-Orlandelli
+84 U Darksteel Mutation @Daniel Ljunggren
+85 R Fell the Mighty @Raymond Swanland
+86 U Field of Souls @Richard Kane Ferguson
+87 U Ghostly Prison @Daarken
+88 R Hallowed Spiritkeeper @Steve Prescott
+89 R Hanged Executioner @Johann Bodin
+90 R Karmic Guide @Allen Williams
+91 R Kirtar's Wrath @Kev Walker
+92 R Knight of the White Orchid @Mark Zug
+93 R Mentor of the Meek @Jana Schirmer & Johannes Voss
+94 R Mirror Entity @Zoltan Boros & Gabor Szikszai
+95 R Oyobi, Who Split the Heavens @Christopher Moeller
+96 U Promise of Bunrei @Stephen Tappin
+97 R Remorseful Cleric @Grzegorz Rutkowski
+98 U Spectral Shepherd @Johann Bodin
+99 U Swords to Plowshares @Jesper Ejsing
+100 R Twilight Drover @Dave Allsop
+101 R Windborn Muse @Adam Rex
+102 C Arcane Denial @Xi Zhang
+103 C Distant Melody @Omar Rayyan
+104 R Flood of Tears @Adam Paquette
+105 R Ghostly Pilferer @Craig J Spearing
+106 R Imprisoned in the Moon @Ryan Alexander Lee
+107 R Kami of the Crescent Moon @Darrell Riche
+108 R Midnight Clock @Alexander Forssberg
+109 U Nebelgast Herald @Zezhou Chen
+110 R Rattlechains @Lius Lasahido
+111 U Reconnaissance Mission @Johannes Voss
+112 R Shacklegeist @Igor Kieryluk
+113 U Sire of the Storm @Arnie Swekel
+114 U Spectral Sailor @Cristi Balanescu
+115 R Supreme Phantom @Robbie Trevino
+116 R Verity Circle @Volkan Baǵa
+117 U Ancient Craving @Rob Alexander
+118 R Anowon, the Ruin Sage @Dan Scott
+119 U Blood Artist @Johannes Voss
+120 U Bloodline Necromancer @Joe Slucher
+121 M Bloodlord of Vaasgoth @Greg Staples
+122 R Bloodtracker @Magali Villeneuve
+123 R Butcher of Malakir @Jason Chan
+124 R Champion of Dusk @Josh Hass
+125 R Cordial Vampire @Winona Nelson
+126 R Damnable Pact @Zack Stella
+127 R Dark Impostor @Johannes Voss
+128 U Falkenrath Noble @Slawomir Maniak
+129 C Feed the Swarm @Andrey Kuzinskiy
+130 U Indulgent Aristocrat @Anna Steinbauer
+131 R Malakir Bloodwitch @Shelly Wan
+132 M Necropolis Regent @Winona Nelson
+133 C Night's Whisper @John Severin Brassell
+134 M Nirkana Revenant @Livia Prima
+135 R Patron of the Vein @Tommy Arnold
+136 R Sanctum Seeker @Volkan Baǵa
+137 R Stromkirk Condemned @Magali Villeneuve
+138 R Underworld Connections @Yeong-Hao Han
+139 U Urge to Feed @Johann Bodin
+140 U Vampire Nighthawk @Jason Chan
+141 R Anje's Ravager @Antonio José Manzanedo
+142 R Avacyn's Judgment @Victor Adame Minguez
+143 R Blasphemous Act @Daarken
+144 R Bloodsworn Steward @Daarken
+145 R Crimson Honor Guard @Kieran Yanner
+146 R Falkenrath Gorger @Anna Steinbauer
+147 R Mob Rule @Jakub Kasper
+148 R Molten Echoes @Zoltan Boros
+149 U Rakish Heir @Winona Nelson
+150 U Stensia Masquerade @Willian Murai
+151 R Stromkirk Occultist @Magali Villeneuve
+152 U Vandalblast @Seb McKinnon
+153 M Dovin, Grand Arbiter @Kieran Yanner
+154 U Drogskol Captain @Cristi Balanescu
+155 M Geist of Saint Traft @Igor Kieryluk
+156 U Rakdos Charm @Zoltan Boros
+157 U Stromkirk Captain @Jana Schirmer & Johannes Voss
+158 R Vampiric Dragon @Gary Ruddell
+159 C Arcane Signet @Dan Scott
+160 C Azorius Locket @Craig J Spearing
+161 U Azorius Signet @Raoul Vitale
+162 C Charcoal Diamond @Lindsey Look
+163 C Commander's Sphere @Ryan Alexander Lee
+164 C Fire Diamond @Lindsey Look
+165 C Marble Diamond @Lindsey Look
+166 U Rakdos Signet @Martina Pilcerova
+167 C Sky Diamond @Lindsey Look
+168 U Sol Ring @Mike Bierek
+169 U Swiftfoot Boots @Svetlin Velinov
+170 U Unstable Obelisk @William Wu
+171 U Azorius Chancery @John Avon
+172 C Command Tower @Ryan Yee
+173 R Exotic Orchard @Steven Belledin
+174 R Foreboding Ruins @Adam Paquette
+175 R Moorland Haunt @James Paick
+176 U Myriad Landscape @Richard Wright
+177 C Path of Ancestry @Alayna Danner
+178 R Port Town @Kamila Szutenberg
+179 R Prairie Stream @Adam Paquette
+180 U Rakdos Carnarium @John Avon
+181 R Shadowblood Ridge @Sam White
+182 R Skycloud Expanse @Sam White
+183 R Smoldering Marsh @Adam Paquette
+184 U Tainted Peak @Tony Szczudlo
+185 R Temple of Enlightenment @Piotr Dura
+186 R Temple of Malice @Jonas De Ro
+187 U Temple of the False God @James Zapata
+188 U Unclaimed Territory @Dimitar Marinski
