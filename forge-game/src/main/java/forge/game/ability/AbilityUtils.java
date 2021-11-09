@@ -2445,6 +2445,19 @@ public class AbilityUtils {
             return doXMath(list.size(), expr, c, ctb);
         }
 
+        if (sq[0].contains("AbilityYouCtrl")) {
+            CardCollection all = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), "Creature", player,
+                    c, ctb);
+            int count = 0;
+            for (String ab : sq[0].substring(15).split(",")) {
+                CardCollection found = CardLists.getValidCards(all, "Creature.with" + ab, player, c, ctb);
+                if (!found.isEmpty()) {
+                    count++;
+                }
+            }
+            return doXMath(count, expr, c, ctb);
+        }
+
         if (sq[0].contains("Party")) {
             CardCollection adventurers = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield),
                     "Creature.Cleric,Creature.Rogue,Creature.Warrior,Creature.Wizard", player, c, ctb);
