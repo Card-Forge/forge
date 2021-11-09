@@ -1,9 +1,7 @@
 Name:Sarkhan, Fireblood
 ManaCost:1 R R
 Types:Legendary Planeswalker Sarkhan
-A:AB$ Discard | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 1 | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ You may discard a card. If you do, draw a card.
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ You | NumCards$ 1 | UnlessCost$ Discard<1/Card> | UnlessSwitched$ True | UnlessPayer$ You
 A:AB$ Mana | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Produced$ Combo W U B R G | Amount$ 2 | RestrictValid$ Card.Dragon | SpellDescription$ Add two mana in any combination of colors. Spend this mana only to cast Dragon spells.
 A:AB$ Token | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | TokenAmount$ 4 | TokenScript$ r_5_5_dragon_flying | LegacyImage$ r 5 5 dragon flying m19 | SpellDescription$ Create four 5/5 red Dragon creature tokens with flying.
 DeckHas:Ability$Token
