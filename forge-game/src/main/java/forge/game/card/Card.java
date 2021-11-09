@@ -2079,7 +2079,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbLong.append(((Companion)inst).getDescription());
                 } else if (keyword.startsWith("Presence") || keyword.startsWith("MayFlash")) {
                     // Pseudo keywords, only print Reminder
-                    sbLong.append(inst.getReminderText());
+                    sbLong.append(inst.getReminderText()).append("\r\n");
                 } else if (keyword.contains("At the beginning of your upkeep, ")
                         && keyword.contains(" unless you pay")) {
                     sbLong.append(keyword).append("\r\n");
