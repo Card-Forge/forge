@@ -32,7 +32,6 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.JButton;
 
-import forge.control.FControl;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.gui.FThreads;
@@ -43,7 +42,6 @@ import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FSkin;
-import forge.util.Localizer;
 
 /**
  * Controls the prompt panel in the match UI.
