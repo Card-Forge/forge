@@ -49,7 +49,7 @@
                             </goals>
                             <configuration>
                                 <headerType>gui</headerType>
-                                <outfile>${project.build.directory}/forge-adventure-old.exe</outfile>
+                                <outfile>${project.build.directory}/forge-adventure-java8.exe</outfile>
                                 <jar>${project.build.finalName}-jar-with-dependencies.jar</jar>
                                 <dontWrapJar>true</dontWrapJar>
                                 <errTitle>forge</errTitle>
@@ -83,7 +83,7 @@
                                     </txtProductVersion>
                                     <productName>forge-adventure</productName>
                                     <internalName>forge-adventure</internalName>
-                                    <originalFilename>forge-adventure-old.exe</originalFilename>
+                                    <originalFilename>forge-adventure-java8.exe</originalFilename>
                                 </versionInfo>
                             </configuration>
                         </execution>
