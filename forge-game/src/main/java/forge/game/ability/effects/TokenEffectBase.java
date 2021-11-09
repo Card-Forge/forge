@@ -39,7 +39,6 @@ import forge.game.zone.ZoneType;
 public abstract class TokenEffectBase extends SpellAbilityEffect {
 
     protected TokenCreateTable createTokenTable(Iterable<Player> players, String[] tokenScripts, final int finalAmount, final SpellAbility sa) {
-
         TokenCreateTable tokenTable = new TokenCreateTable();
         for (final Player owner : players) {
             for (String script : tokenScripts) {
@@ -83,7 +82,6 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
         // support PlayerCollection for affected
         Set<Player> toRemove = Sets.newHashSet();
         for (Player p : tokenTable.rowKeySet()) {
-
             final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(p);
             repParams.put(AbilityKey.Token, tokenTable);
             repParams.put(AbilityKey.EffectOnly, true); // currently only effects can create tokens?
