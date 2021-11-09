@@ -1191,6 +1191,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     for (String part : splitUTypes) {
                         if (c.getType().hasStringType(part)) {
                             return true;
+                        } else if (part.equals("Basic Land")) {
+                            if (c.isBasicLand()) {
+                                return true;
+                            }
                         }
                     }
                 }
@@ -1201,9 +1205,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         StringBuilder promptType = new StringBuilder();
         for (String part : splitUTypes) {
             if (n==1) {
-                promptType.append(part);
+                promptType.append(part.toLowerCase());
             } else {
-                promptType.append(" or ").append(part);
+                promptType.append(" or ").append(part.toLowerCase());
             }
             n++;
         }

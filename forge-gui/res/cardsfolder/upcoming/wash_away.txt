@@ -1,0 +1,6 @@
+Name:Wash Away
+ManaCost:U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell that wasn't cast from its owner's hand | ValidTgts$ Card.wasNotCastFromHand | SpellDescription$ Counter target spell [that wasn't cast from its owner's hand].
+A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | PrecostDesc$ Cleave | CostDesc$ {1}{U}{U} | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its cleave cost. If you do, remove the words in square brackets.)
+Oracle:Cleave {1}{U}{U} (You may cast this spell for its cleave cost. If you do, remove the words in square brackets.)\nCounter target spell [that wasn't cast from its owner's hand].
