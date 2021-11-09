@@ -1,7 +1,6 @@
 package forge.adventure.data;
 
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -28,7 +27,9 @@ public class HeroListData {
             instance = json.fromJson(HeroListData.class, handle);
             instance.avatarSprites = Config.instance().getAtlas(instance.avatar);
 
+         /*
             instance.avatarSprites.getTextures().first().setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+         */
         }
         return instance;
     }

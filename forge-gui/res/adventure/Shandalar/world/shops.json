@@ -236,11 +236,11 @@
   "rewards": [
     {
       "count":4,
-      "colors": ["black","white"]
+      "colors": ["blue","green"]
     },
     {
       "count":4,
-      "colors": ["black","white"],
+      "colors": ["blue","green"],
       "colorType": "MultiColor"
     }]
 },{                                    

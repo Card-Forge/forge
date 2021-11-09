@@ -25,6 +25,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import static forge.adventure.data.RewardData.*;
+
 /**
  * Utility class to deck generation and card filtering
  */
@@ -275,9 +277,9 @@ public class CardUtil {
         Deck deck= new Deck(data.name);
         if(data.template==null)
         {
-            deck.getOrCreate(DeckSection.Main).addAllFlat(RewardData.generateAllCards(Arrays.asList(data.mainDeck), true));
+            deck.getOrCreate(DeckSection.Main).addAllFlat(generateAllCards(Arrays.asList(data.mainDeck), true));
             if(data.sideBoard!=null)
-                deck.getOrCreate(DeckSection.Sideboard).addAllFlat(RewardData.generateAllCards(Arrays.asList(data.sideBoard), true));
+                deck.getOrCreate(DeckSection.Sideboard).addAllFlat(generateAllCards(Arrays.asList(data.sideBoard), true));
             return deck;
         }
         float count=data.template.count;
@@ -286,7 +288,7 @@ public class CardUtil {
         List<RewardData> dataArray= generateRewards(data.template,spells*0.5f,new int[]{1,2});
         dataArray.addAll(generateRewards(data.template,spells*0.3f,new int[]{3,4,5}));
         dataArray.addAll(generateRewards(data.template,spells*0.2f,new int[]{6,7,8}));
-        List<PaperCard>  nonLand=RewardData.generateAllCards(dataArray, true);
+        List<PaperCard>  nonLand= generateAllCards(dataArray, true);
 
         nonLand.addAll(fillWithLands(nonLand,data.template));
         deck.getOrCreate(DeckSection.Main).addAllFlat(nonLand);
@@ -442,7 +444,7 @@ public class CardUtil {
             rewards.addAll(Arrays.asList(sub1,sub2,sub3,sub4,sub5,sub6,sub7,sub8,sub9));
         }
 
-        Collection<PaperCard> ret = new ArrayList<>(RewardData.generateAllCards(rewards, true));
+        Collection<PaperCard> ret = new ArrayList<>(generateAllCards(rewards, true));
         return ret;
     }
 

@@ -67,6 +67,22 @@ public class SettingsScene extends UIScene {
         AdventureApplicationAdapter.instance.switchToLast();
         return true;
     }
+    private void addInputField(String name, ForgePreferences.FPref pref) {
+
+
+        TextField box = Controls.newTextField("");
+        box.setText(Preference.getPref(pref));
+        box.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Preference.setPref(pref, ((TextField) actor).getText());
+                Preference.save();
+            }
+        });
+
+        addLabel(name);
+        settingGroup.add(box).align(Align.right);
+    }
     private void addCheckBox(String name, ForgePreferences.FPref pref) {
 
 
@@ -182,6 +198,16 @@ public class SettingsScene extends UIScene {
         addCheckBox(localizer.getMessage("lblCardID"), ForgePreferences.FPref.UI_OVERLAY_CARD_ID);
         addCheckBox(localizer.getMessage("lblAbilityIcon"), ForgePreferences.FPref.UI_OVERLAY_ABILITY_ICONS);
         addCheckBox(localizer.getMessage("cbImageFetcher"), ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER);
+
+
+        addCheckBox(localizer.getMessage("lblBattlefieldTextureFiltering"), ForgePreferences.FPref.UI_LIBGDX_TEXTURE_FILTERING);
+        addCheckBox(localizer.getMessage("lblAltZoneTabs"), ForgePreferences.FPref.UI_ALT_PLAYERZONETABS);
+        addCheckBox(localizer.getMessage("lblAnimatedCardTapUntap"), ForgePreferences.FPref.UI_ANIMATED_CARD_TAPUNTAP);
+        addCheckBox(localizer.getMessage("lblBorderMaskOption"), ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
+        addCheckBox(localizer.getMessage("lblPreloadExtendedArtCards"), ForgePreferences.FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
+        addCheckBox(localizer.getMessage("lblAutoCacheSize"), ForgePreferences.FPref.UI_AUTO_CACHE_SIZE);
+        addCheckBox(localizer.getMessage("lblDisposeTextures"), ForgePreferences.FPref.UI_ENABLE_DISPOSE_TEXTURES);
+        addInputField(localizer.getMessage("lblDisposeTextures"), ForgePreferences.FPref.UI_LANGUAGE);
 
 
         settingGroup.row();

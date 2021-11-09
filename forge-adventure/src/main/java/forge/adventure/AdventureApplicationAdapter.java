@@ -1,6 +1,5 @@
 package forge.adventure;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -9,17 +8,20 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Clipboard;
 import com.badlogic.gdx.utils.ScreenUtils;
+import forge.Forge;
 import forge.Graphics;
 import forge.adventure.scene.ForgeScene;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.util.Config;
+import forge.interfaces.IDeviceAdapter;
 
 /**
  * Application adapter the handle switching and fading between scenes
  */
-public class AdventureApplicationAdapter extends ApplicationAdapter {
+public class AdventureApplicationAdapter extends Forge {
     public static AdventureApplicationAdapter instance;
     Scene currentScene = null;
     Array<Scene> lastScene = new Array<>();
@@ -42,7 +44,8 @@ public class AdventureApplicationAdapter extends ApplicationAdapter {
     public TextureRegion getLastScreenTexture() {
         return lastScreenTexture;
     }
-    public AdventureApplicationAdapter() {
+    public AdventureApplicationAdapter(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
+        super(clipboard0, deviceAdapter0, assetDir0, value, androidOrientation,  totalRAM,  isTablet,  AndroidAPI,  AndroidRelease,  deviceName);
         instance = this;
     }
 
@@ -63,7 +66,6 @@ public class AdventureApplicationAdapter extends ApplicationAdapter {
     public void resize(int w, int h) {
         currentWidth = w;
         currentHeight = h;
-        StartAdventure.app.resize(w, h);
         super.resize(w, h);
     }
 
@@ -114,6 +116,7 @@ public class AdventureApplicationAdapter extends ApplicationAdapter {
         for (forge.adventure.scene.SceneType entry : SceneType.values()) {
             entry.instance.create();
         }
+        super.create();
     }
 
     @Override
