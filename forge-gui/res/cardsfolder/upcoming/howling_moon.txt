@@ -1,0 +1,10 @@
+Name:Howling Moon
+ManaCost:2 G
+Types:Enchantment
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target Wolf or Werewolf you control gets +2/+2 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Wolf.YouCtrl,Werewolf.YouCtrl | TgtPrompt$ Select target Wolf or Werewolf you control | NumAtt$ 2 | NumDef$ 2
+T:Mode$ SpellCast | ValidActivatingPlayer$ Opponent | ActivatorThisTurnCast$ EQ2 | NoResolvingCheck$ True | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an opponent casts their second spell each turn, create a 2/2 green Wolf creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ g_2_2_wolf
+DeckHints:Type$Wolf|Werewolf
+DeckHas:Ability$Token
+Oracle:At the beginning of combat on your turn, target Wolf or Werewolf you control gets +2/+2 until end of turn.\nWhenever an opponent casts their second spell each turn, create a 2/2 green Wolf creature token.
