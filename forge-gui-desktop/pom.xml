@@ -250,7 +250,7 @@
                                 </goals>
                                 <configuration>
                                     <headerType>gui</headerType>
-                                    <outfile>${project.build.directory}/forge.exe</outfile>
+                                    <outfile>${project.build.directory}/forge-java8.exe</outfile>
                                     <jar>${project.build.finalName}-jar-with-dependencies.jar</jar>
                                     <dontWrapJar>true</dontWrapJar>
                                     <errTitle>forge</errTitle>
@@ -284,7 +284,7 @@
                                         </txtProductVersion>
                                         <productName>Forge</productName>
                                         <internalName>forge</internalName>
-                                        <originalFilename>forge.exe</originalFilename>
+                                        <originalFilename>forge-java8.exe</originalFilename>
                                     </versionInfo>
                                 </configuration>
                             </execution>
@@ -322,6 +322,7 @@
                                                 <include name="res/**" />
                                                 <exclude name="res/cardsfolder/**" />
                                             </fileset>
+                                            <fileset dir="${project.build.directory}" includes="forge-java8.exe" />
                                             <fileset dir="${project.build.directory}" includes="forge.exe" />
                                             <fileset dir="${project.build.directory}" includes="${project.build.finalName}-jar-with-dependencies.jar" />
                                         </copy>
@@ -329,18 +330,21 @@
                                         <zip destfile="${project.build.directory}/${project.build.finalName}/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/../forge-gui/res/cardsfolder" level="1" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.sh" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.command" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge-java8.exe" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.exe" perm="a+rx" />
                                         <tar destfile="${project.build.directory}/${project.build.finalName}.tar.bz2" compression="bzip2">
                                             <tarfileset filemode="755" dir="${project.build.directory}/${project.build.finalName}">
                                                 <include name="forge.sh" />
                                                 <include name="forge.command" />
                                                 <include name="forge.exe" />
+                                                <include name="forge-java8.exe" />
                                             </tarfileset>
                                             <tarfileset dir="${project.build.directory}/${project.build.finalName}">
                                                 <include name="**" />
                                                 <exclude name="forge.sh" />
                                                 <exclude name="forge.command" />
                                                 <exclude name="forge.exe" />
+                                                <exclude name="forge-java8.exe" />
                                             </tarfileset>
                                         </tar>
                                     </target>
@@ -407,7 +411,7 @@
                                 </goals>
                                 <configuration>
                                     <headerType>gui</headerType>
-                                    <outfile>${project.build.directory}/forge.exe</outfile>
+                                    <outfile>${project.build.directory}/forge-java8.exe</outfile>
                                     <jar>${project.build.finalName}-jar-with-dependencies.jar</jar>
                                     <dontWrapJar>true</dontWrapJar>
                                     <errTitle>forge</errTitle>
@@ -441,10 +445,65 @@
                                         </txtProductVersion>
                                         <productName>Forge</productName>
                                         <internalName>forge</internalName>
+                                        <originalFilename>forge-java8.exe</originalFilename>
+                                    </versionInfo>
+                                </configuration>
+                            </execution>
+                            <!--extra-->
+                            <execution>
+                                <id>l4j-gui2</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>launch4j</goal>
+                                </goals>
+                                <configuration>
+                                    <headerType>gui</headerType>
+                                    <outfile>${project.build.directory}/forge.exe</outfile>
+                                    <jar>${project.build.finalName}-jar-with-dependencies.jar</jar>
+                                    <dontWrapJar>true</dontWrapJar>
+                                    <errTitle>forge</errTitle>
+                                    <downloadUrl>https://www.oracle.com/java/technologies/downloads/</downloadUrl>
+                                    <icon>src/main/config/forge.ico</icon>
+                                    <classPath>
+                                        <mainClass>forge.view.Main</mainClass>
+                                        <addDependencies>false</addDependencies>
+                                        <preCp>anything</preCp>
+                                    </classPath>
+                                    <jre>
+                                        <minVersion>11.0.1</minVersion>
+                                        <jdkPreference>jdkOnly</jdkPreference>
+                                        <maxHeapSize>4096</maxHeapSize>
+                                        <opts>
+                                            <opt>-Dfile.encoding=UTF-8</opt>
+                                            <opt>--add-opens java.base/java.lang=ALL-UNNAMED</opt>
+                                            <opt>--add-opens java.base/java.util=ALL-UNNAMED</opt>
+                                            <opt>--add-opens java.base/java.lang.reflect=ALL-UNNAMED</opt>
+                                            <opt>--add-opens java.base/java.text=ALL-UNNAMED</opt>
+                                            <opt>--add-opens java.desktop/java.awt.font=ALL-UNNAMED</opt>
+                                        </opts>
+                                    </jre>
+                                    <versionInfo>
+                                        <fileVersion>
+                                            ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0
+                                        </fileVersion>
+                                        <txtFileVersion>
+                                            ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0
+                                        </txtFileVersion>
+                                        <fileDescription>Forge</fileDescription>
+                                        <copyright>Forge</copyright>
+                                        <productVersion>
+                                            ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0
+                                        </productVersion>
+                                        <txtProductVersion>
+                                            ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0
+                                        </txtProductVersion>
+                                        <productName>Forge</productName>
+                                        <internalName>forge</internalName>
                                         <originalFilename>forge.exe</originalFilename>
                                     </versionInfo>
                                 </configuration>
                             </execution>
+                            <!--extra-->
                         </executions>
                     </plugin>
 
@@ -482,9 +541,11 @@
                                                 <include name="res/**" />
                                                 <exclude name="res/cardsfolder/**" />
                                             </fileset>
+                                            <fileset dir="${project.build.directory}" includes="forge-java8.exe" />
                                             <fileset dir="${project.build.directory}" includes="forge.exe" />
                                             <fileset dir="${project.build.directory}" includes="${project.build.finalName}-jar-with-dependencies.jar" />
                                             <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure.exe" />
+                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-java8.exe" />
                                             <fileset dir="${project.build.directory}/../../forge-adventure/target"  includes="forge-adventure.sh" />
                                             <fileset dir="${project.build.directory}/../../forge-adventure/target"  includes="forge-adventure.command" />
                                             <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-${project.version}-jar-with-dependencies.jar" />
@@ -495,18 +556,22 @@
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.command" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.sh" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.command" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge-java8.exe" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.exe" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.exe" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure-java8.exe" perm="a+rx" />
                                         <tar destfile="${project.build.directory}/${project.build.finalName}.tar.bz2" compression="bzip2">
                                             <tarfileset filemode="755" dir="${project.build.directory}/${project.build.finalName}">
                                                 <include name="forge.sh" />
                                                 <include name="forge.command" />
+                                                <include name="forge-java8.exe" />
                                                 <include name="forge.exe" />
                                             </tarfileset>
                                             <tarfileset dir="${project.build.directory}/${project.build.finalName}">
                                                 <include name="**" />
                                                 <exclude name="forge.sh" />
                                                 <exclude name="forge.command" />
+                                                <exclude name="forge-java8.exe" />
                                                 <exclude name="forge.exe" />
                                             </tarfileset>
                                         </tar>

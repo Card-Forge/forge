@@ -172,10 +172,13 @@ public class FDeckViewer extends FDialog {
     private void copyToClipboard() {
         final String nl = System.getProperty("line.separator");
         final StringBuilder deckList = new StringBuilder();
-        final String dName = deck.getName();
+        String dName = deck.getName();
+        //fix copying a commander netdeck then importing it again...
+        if (dName.startsWith("[Commander")||dName.contains("Commander"))
+            dName = "";
         String cardName;
         SortedMap<String, Integer> sectionCards;
-        deckList.append(dName == null ? "" : dName + nl + nl);
+        deckList.append(dName == null ? "" : "Deck: "+dName + nl + nl);
 
         for (DeckSection s : DeckSection.values()){
             CardPool cp = deck.get(s);
