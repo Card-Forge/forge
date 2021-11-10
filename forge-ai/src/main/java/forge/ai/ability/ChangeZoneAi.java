@@ -1211,7 +1211,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     if (choice == null) { // Could not find a creature.
                         if (ai.getLife() <= 5) { // Desperate?
                             // Get something AI can cast soon.
-                            System.out.println("5 Life or less, trying to find something castable.");
                             CardLists.sortByCmcDesc(nonLands);
                             for (Card potentialCard : nonLands) {
                                if (ComputerUtilMana.hasEnoughManaSourcesToCast(potentialCard.getFirstSpellAbility(), ai)) {
@@ -1221,7 +1220,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                             }
                         } else {
                             // Get the best card in there.
-                            System.out.println("No creature and lots of life, finding something good.");
                             choice = ComputerUtilCard.getBestAI(nonLands);
                         }
                     }
@@ -1487,7 +1485,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     if (choice == null) { // Could not find a creature.
                         if (ai.getLife() <= 5) { // Desperate?
                             // Get something AI can cast soon.
-                            System.out.println("5 Life or less, trying to find something castable.");
                             CardLists.sortByCmcDesc(nonLands);
                             for (Card potentialCard : nonLands) {
                                if (ComputerUtilMana.hasEnoughManaSourcesToCast(potentialCard.getFirstSpellAbility(), ai)) {
@@ -1497,7 +1494,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                             }
                         } else {
                             // Get the best card in there.
-                            System.out.println("No creature and lots of life, finding something good.");
                             choice = ComputerUtilCard.getBestAI(nonLands);
                         }
                     }
@@ -1680,12 +1676,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     canCastSomething = canCastSomething || ComputerUtilMana.hasEnoughManaSourcesToCast(cardInHand.getFirstSpellAbility(), decider);
                 }
                 if (!canCastSomething) {
-                    System.out.println("Pulling a land as there are none in hand, less than 4 on the board, and nothing in hand is castable.");
                     c = basicManaFixing(decider, fetchList);
                 }
             }
             if (c == null) {
-                System.out.println("Don't need a land or none available; trying for a creature.");
                 fetchList = CardLists.getNotType(fetchList, "Land");
                 // Prefer to pull a creature, generally more useful for AI.
                 c = chooseCreature(decider, CardLists.filter(fetchList, CardPredicates.Presets.CREATURES));
@@ -1693,7 +1687,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (c == null) { // Could not find a creature.
                 if (decider.getLife() <= 5) { // Desperate?
                     // Get something AI can cast soon.
-                    System.out.println("5 Life or less, trying to find something castable.");
                     CardLists.sortByCmcDesc(fetchList);
                     for (Card potentialCard : fetchList) {
                        if (ComputerUtilMana.hasEnoughManaSourcesToCast(potentialCard.getFirstSpellAbility(), decider)) {
@@ -1703,7 +1696,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                 } else {
                     // Get the best card in there.
-                    System.out.println("No creature and lots of life, finding something good.");
                     c = ComputerUtilCard.getBestAI(fetchList);
                 }
             }
