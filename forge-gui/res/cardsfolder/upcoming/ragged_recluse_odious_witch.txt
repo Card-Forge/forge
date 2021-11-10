@@ -20,4 +20,5 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescript
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$LifeGain
 Oracle:Whenever Odious Witch attacks, defending player loses 1 life and you gain 1 life.
