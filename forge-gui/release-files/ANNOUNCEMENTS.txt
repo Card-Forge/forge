@@ -1,5 +1,6 @@
 #Add one announcement per line
 Get in the discord if you aren't yet. https://discord.gg/3v9JCVr
+A new game mode is now available as a separate executable - Forge Adventure, a Shandalar-like overworld adventure. This game mode is currently in its early stage of development, expect improvements and fixes in the future releases.
 Forge now supports 100% of core and expansion set cards from Limited Edition Alpha to Innistrad: Midnight Hunt. This includes Equinox, Chaos Orb, and Falling Star.
 Planar Conquest now features a new plane - Forgotten Realms, based on the AFR and AFC sets.
 Several planes are now available in Planar Conquest in their Classic form, as originally intended by the author, without support for the newer sets and with the original events not modified with newer cards. These planes are available in addition to the contemporary versions of the planes and are marked as "Classic".
