@@ -382,11 +382,11 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         origin.add(cost.from);
         final CardCollection exiled = new CardCollection();
 
-        final List<Card> chosen = controller.chooseCardsForZoneChange(ZoneType.Exile, origin, sa, typeList, nNeeded,
+        final List<Card> chosen = controller.chooseCardsForZoneChange(ZoneType.Exile, origin, sa, typeList, 0,
                 nNeeded, null, cost.toString(), null);
 
         exiled.addAll(chosen);
-        if (exiled.isEmpty()) {
+        if (exiled.size() < nNeeded) {
             return null;
         }
         return PaymentDecision.card(exiled);
