@@ -1915,7 +1915,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 sbLong.append(p[2]).append("\r\n");
             } else if (keyword.equals("Unblockable")) {
                 sbLong.append(getName()).append(" can't be blocked.\r\n");
-                sbLong.append(getName()).append(" has all names of nonlegendary creature cards.\r\n");
             } else if (keyword.startsWith("IfReach")) {
                 String[] k = keyword.split(":");
                 sbLong.append(getName()).append(" can block ")
