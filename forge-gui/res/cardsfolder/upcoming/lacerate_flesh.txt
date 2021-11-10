@@ -1,0 +1,7 @@
+Name:Lacerate Flesh
+ManaCost:4 R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | ExcessSVar$ X | SubAbility$ DBToken | SpellDescription$ CARDNAME deals 4 damage to target creature.
+SVar:DBToken:DB$ Token | TokenScript$ c_a_blood_draw | TokenAmount$ X | SpellDescription$ Create a number of Blood tokens equal to the amount of excess damage dealt to that creature this way. (They're artifacts with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
+DeckHas:Ability$Token & Ability$Sacrifice & Type$Blood
+Oracle:Lacerate Flesh deals 4 damage to target creature. Create a number of Blood tokens equal to the amount of excess damage dealt to that creature this way. (They're artifacts with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
