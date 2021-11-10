@@ -5,7 +5,7 @@ PT:2/1
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ CardsDiscarded | SVarCompare$ GE1 | Execute$ TrigTransform | TriggerDescription$ At the beginning of your end step, if you discarded a card this turn, transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:CardsDiscarded:PlayerCountPropertyYou$CardsDiscardedThisTurn
-DeckHas:Ability$Discard
+DeckHints:Ability$Discard
 AlternateMode:DoubleFaced
 Oracle:At the beginning of your end step, if you discarded a card this turn, transform Ragged Recluse.
 
