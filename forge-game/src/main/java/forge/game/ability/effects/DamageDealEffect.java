@@ -121,6 +121,17 @@ public class DamageDealEffect extends DamageBaseEffect {
         }
 
         stringBuilder.append(".");
+        if (spellAbility.hasParam("ReplaceDyingDefined")) {
+            String statement = "If that creature would die this turn, exile it instead.";
+            String[] sentences = spellAbility.getParam("SpellDescription").split("\\.");
+            for (String s : sentences) {
+                if (s.contains("would die")) {
+                    statement = s;
+                    break;
+                }
+            }
+            stringBuilder.append(statement);
+        }
         return stringBuilder.toString();
     }
 
