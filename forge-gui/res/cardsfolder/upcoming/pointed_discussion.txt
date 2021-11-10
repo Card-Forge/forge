@@ -1,0 +1,8 @@
+Name:Pointed Discussion
+ManaCost:2 B
+Types:Sorcery
+A:SP$ Draw | Cost$ 2 B | NumCards$ 2 | SpellDescription$ You draw two cards, lose 2 life, then create a Blood token. | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_blood_draw | TokenOwner$ You | SpellDescription$ Create two Blood tokens.
+DeckHas:Ability$Token & Ability$Sacrifice & Type$Blood
+Oracle:You draw two cards, lose 2 life, then create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
