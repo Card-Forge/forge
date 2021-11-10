@@ -1,0 +1,10 @@
+Name:Cradle of Safety
+ManaCost:1 U
+Types:Enchantment Aura
+K:Flash
+K:Enchant creature you control
+A:SP$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, enchanted creature gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)
+SVar:TrigPump:DB$ Pump | Defined$ Enchanted | KW$ Hexproof
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
+Oracle:Flash\nEnchant creature you control\nWhen Cradle of Safety enters the battlefield, enchanted creature gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)\nEnchanted creature gets +1/+1.

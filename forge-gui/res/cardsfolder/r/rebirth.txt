@@ -2,7 +2,7 @@ Name:Rebirth
 ManaCost:3 G G G
 Types:Sorcery
 K:Remove CARDNAME from your deck before playing if you're not playing for ante.
-A:SP$ RepeatEach | Cost$ 3 G G G | RepeatPlayers$ Player | RepeatSubAbility$ Ante | SpellDescription$ Each player may ante the top card of their library. If a player does, that player’s life total becomes 20.
+A:SP$ RepeatEach | Cost$ 3 G G G | RepeatPlayers$ Player | RepeatSubAbility$ Ante | SpellDescription$ Each player may ante the top card of their library. If a player does, that player's life total becomes 20.
 SVar:Ante:DB$ Dig | Defined$ Player.IsRemembered | Destination$ Ante | DigNum$ 1 | ChangeNum$ All | RememberChanged$ True | Optional$ True | SubAbility$ 20Life | AILogic$ Rebirth
 SVar:20Life:DB$ SetLife | Defined$ Player.IsRemembered | LifeAmount$ 20 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

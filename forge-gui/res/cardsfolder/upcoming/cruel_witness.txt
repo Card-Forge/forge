@@ -1,0 +1,10 @@
+Name:Cruel Witness
+ManaCost:2 U U
+Types:Creature Bird Horror
+PT:3/3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigDig | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, look at the top card of your library. You may put that card into your graveyard.
+SVar:TrigDig:DB$ Dig | DigNum$ 1 | DestinationZone$ Graveyard | Optional$ True | LibraryPosition2$ 0
+SVar:BuffedBy:Card.nonLand+nonCreature
+DeckHas:Ability$Graveyard
+Oracle:Flying\nWhenever you cast a noncreature spell, look at the top card of your library. You may put that card into your graveyard.
