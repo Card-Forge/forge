@@ -1,0 +1,8 @@
+Name:Nebelgast Beguiler
+ManaCost:4 W
+Types:Creature Spirit
+PT:2/5
+K:Flying
+A:AB$ Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
+SVar:NonCombatPriority:1
+Oracle:Flying\n{W}, {T}: Tap target creature.

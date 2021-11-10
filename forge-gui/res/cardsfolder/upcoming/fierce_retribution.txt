@@ -1,0 +1,6 @@
+Name:Fierce Retribution
+ManaCost:1 W
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SpellDescription$ Destroy target [attacking] creature.
+A:SP$ Destroy | Cost$ 5 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | PrecostDesc$ Cleave | CostDesc$ {5}{W} | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its cleave cost. If you do, remove the words in square brackets.)
+Oracle:Cleave {5}{W} (You may cast this spell for its cleave cost. If you do, remove the words in square brackets.)\nDestroy target [attacking] creature.

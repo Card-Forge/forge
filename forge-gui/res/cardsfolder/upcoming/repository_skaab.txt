@@ -1,0 +1,14 @@
+Name:Repository Skaab
+ManaCost:3 U
+Types:Creature Zombie
+PT:3/3
+K:Exploit
+T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME exploits a creature, return target target instant or sorcery card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl
+DeckHas:Ability$Sacrifice & Ability$Graveyard
+DeckHints:Type$Instant|Sorcery
+SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn/LimitMax.1
+SVar:Y:Count$Valid Creature.token,Creature.cmcLE2/LimitMax.1
+SVar:Z:SVar$X/Plus.Y
+SVar:NeedsToPlayVar:Z EQ2
+Oracle:Exploit (When this creature enters the battlefield, you may sacrifice a creature.)\nWhen Repository Skaab exploits a creature, return target target instant or sorcery card from your graveyard to your hand.
