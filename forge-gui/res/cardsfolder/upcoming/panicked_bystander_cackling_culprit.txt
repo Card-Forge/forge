@@ -7,6 +7,7 @@ SVar:TrigGainLife1:DB$ GainLife | Defined$ You | LifeAmount$ 1
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ YouLifeGained | SVarCompare$ GE3 | Execute$ TrigTransform | TriggerDescription$ At the beginning of your end step, if you gained 3 or more life this turn, transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:YouLifeGained:Count$LifeYouGainedThisTurn
+DeckHas:Ability$LifeGain
 AlternateMode:DoubleFaced
 Oracle:Whenever Panicked Bystander or another creature you control dies, you gain 1 life.\nAt the beginning of your end step, if you gained 3 or more life this turn, transform Panicked Bystander.
 
