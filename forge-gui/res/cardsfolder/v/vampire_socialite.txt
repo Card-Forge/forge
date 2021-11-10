@@ -10,4 +10,4 @@ SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | Counte
 SVar:X:Count$LifeOppsLostThisTurn
 DeckNeeds:Type$Vampire
 DeckHas:Ability$Counters
-Oracle:Menace (This creature can’t be blocked except by two or more creatures.)\nWhen Vampire Socialite enters the battlefield, if an opponent lost life this turn, put a +1/+1 counter on each other Vampire you control.\nAs long as an opponent lost life this turn, each other Vampire you control enters the battlefield with an additional +1/+1 counter on it.
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhen Vampire Socialite enters the battlefield, if an opponent lost life this turn, put a +1/+1 counter on each other Vampire you control.\nAs long as an opponent lost life this turn, each other Vampire you control enters the battlefield with an additional +1/+1 counter on it.

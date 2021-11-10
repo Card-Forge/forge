@@ -11,4 +11,4 @@ T:Mode$ DayTimeChanges | Execute$ TrigPutCounter | TriggerZones$ Battlefield | T
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 DeckHints:Type$Instant|Sorcery
 DeckHas:Ability$Counters
-Oracle:If it's neither day nor night, it becomes day as Vadrik, Astral Archmage enters the battlefield.\nInstant and sorcery spells you cast cost {X} less to cast, where X is Vadrik’s power.\nWhenever day becomes night or night becomes day, put a +1/+1 counter on Vadrik.
+Oracle:If it's neither day nor night, it becomes day as Vadrik, Astral Archmage enters the battlefield.\nInstant and sorcery spells you cast cost {X} less to cast, where X is Vadrik's power.\nWhenever day becomes night or night becomes day, put a +1/+1 counter on Vadrik.

@@ -3,6 +3,6 @@ ManaCost:R
 Types:Creature Weird
 PT:1/1
 SVar:X:Count$MaxDistinctOnStack
-T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigGeo | OptionalDecider$ You | TriggerDescription$ At the beginning of each end step, you may have Geometric Weird’s base power and toughness each become equal to the greatest number of spells and abilities from different sources that were on the stack simultaneously that turn.
-SVar:TrigGeo:DB$ Animate | Duration$ Permanent | Power$ X | Toughness$ X | Geometric Weird’s base power and toughness each become equal to the greatest number of spells and abilities from different sources that were on the stack simultaneously that turn.
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigGeo | OptionalDecider$ You | TriggerDescription$ At the beginning of each end step, you may have Geometric Weird's base power and toughness each become equal to the greatest number of spells and abilities from different sources that were on the stack simultaneously that turn.
+SVar:TrigGeo:DB$ Animate | Duration$ Permanent | Power$ X | Toughness$ X | Geometric Weird's base power and toughness each become equal to the greatest number of spells and abilities from different sources that were on the stack simultaneously that turn.
 Oracle:At the beginning of each end step, you may have Geometric Weird's base power and toughness each become equal to the greatest number of spells and abilities from different sources that were on the stack simultaneously that turn.
