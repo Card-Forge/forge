@@ -488,6 +488,9 @@ public class CountersPutAi extends CountersAi {
                 }
             });
 
+            // Filter AI-specific targets if provided
+            list = ComputerUtil.filterAITgts(sa, ai, list, false);
+
             if (abCost.hasSpecificCostType(CostSacrifice.class)) {
                 Card sacTarget = ComputerUtil.getCardPreference(ai, source, "SacCost", list);
                 // this card is planned to be sacrificed during cost payment, so don't target it
@@ -804,6 +807,9 @@ public class CountersPutAi extends CountersAi {
                 list = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
             }
             list = CardLists.getTargetableCards(list, sa);
+
+            // Filter AI-specific targets if provided
+            list = ComputerUtil.filterAITgts(sa, ai, list, false);
 
             int totalTargets = list.size();
 
