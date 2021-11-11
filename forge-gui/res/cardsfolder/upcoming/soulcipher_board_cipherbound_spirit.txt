@@ -1,0 +1,25 @@
+Name:Soulcipher Board
+ManaCost:1 U
+Types:Artifact
+K:etbCounter:OMEN:3
+A:AB$ Dig | Cost$ 1 U T | DigNum$ 2 | DestinationZone$ Graveyard | LibraryPosition2$ 0 | StackDescription$ {p:You} looks at the top two cards of their library, and puts one of them into their graveyard. | SpellDescription$ Look at the top two cards of your library. Put one of them into your graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.Creature+nonToken+YouOwn | TriggerZones$ Battlefield | Execute$ TrigRemoveCounter | TriggerDescription$ Whenever a creature card is put into your graveyard from anywhere, remove an omen counter from CARDNAME. Then if it has no omen counters on it, transform it.
+SVar:TrigRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ OMEN | CounterNum$ 1 | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | ConditionPresent$ Card.Self+counters_EQ0_OMEN | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+DeckHas:Ability$Counters & Ability$Graveyard
+Oracle:Soulcipher Board enters the battlefield with three omen counters on it.\n{1}{U}, {T}: Look at the top two cards of your library. Put one of them into your graveyard.\nWhenever a creature card is put into your graveyard from anywhere, remove an omen counter from Soulcipher Board. Then if it has no omen counters on it, transform it.
+
+ALTERNATE
+
+Name:Cipherbound Spirit
+ManaCost:no cost
+Colors:blue
+Types:Creature Spirit
+PT:3/2
+K:Flying
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
+A:AB$ Draw | Cost$ 3 U | NumCards$ 2 | SubAbility$ DBDiscard | StackDescription$ {p:You} draws two cards, | SpellDescription$ Draw two cards, then discard a card.
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | StackDescription$ then discards a card.
+DeckHas:Ability$Discard
+Oracle:Flying\nCipherbound Spirit can block only creatures with flying.\n{3}{U}: Draw two cards, then discard a card.

@@ -1,0 +1,7 @@
+Name:Bloody Betrayal
+ManaCost:2 R
+Types:Sorcery
+A:SP$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | Untap$ True | AddKWs$ Haste | LoseControl$ EOT | SubAbility$ DBToken | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
+SVar:DBToken:DB$ Token | TokenScript$ c_a_blood_draw | SpellDescription$ Create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
+DeckHas:Ability$Token & Ability$Sacrifice & Type$Blood
+Oracle:Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. Create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")

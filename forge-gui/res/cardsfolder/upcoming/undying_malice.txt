@@ -1,0 +1,8 @@
+Name:Undying Malice
+ManaCost:B
+Types:Instant
+A:SP$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Triggers$ DiesTrigger | StackDescription$ Until end of turn, {c:Targeted} gains "When this creature dies, return it to the battlefield tapped under its owner's control with a +1/+1 counter on it." | SpellDescription$ Until end of turn, target creature gains "When this creature dies, return it to the battlefield tapped under its owner's control with a +1/+1 counter on it."
+SVar:DiesTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this creature dies, return it to the battlefield tapped under its owner's control with a +1/+1 counter on it.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True  | Defined$ TriggeredNewCardLKICopy | WithCounters$ P1P1_1
+DeckHas:Ability$Counters
+Oracle:Until end of turn, target creature gains "When this creature dies, return it to the battlefield tapped under its owner's control with a +1/+1 counter on it."
