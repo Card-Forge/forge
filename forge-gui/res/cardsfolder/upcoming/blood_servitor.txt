@@ -1,0 +1,8 @@
+Name:Blood Servitor
+ManaCost:3
+Types:Artifact Creature Construct
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBlood | TriggerDescription$ When CARDNAME enters the battlefield, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
+SVar:TrigBlood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_blood_draw | TokenOwner$ You
+DeckHas:Ability$Token & Ability$Sacrifice & Type$Blood
+Oracle:When Blood Servitor enters the battlefield, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
