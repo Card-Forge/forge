@@ -1,0 +1,24 @@
+Name:Ragged Recluse
+ManaCost:1 B
+Types:Creature Human Peasant
+PT:2/1
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ CardsDiscarded | SVarCompare$ GE1 | Execute$ TrigTransform | TriggerDescription$ At the beginning of your end step, if you discarded a card this turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+SVar:CardsDiscarded:PlayerCountPropertyYou$CardsDiscardedThisTurn
+DeckHints:Ability$Discard
+AlternateMode:DoubleFaced
+Oracle:At the beginning of your end step, if you discarded a card this turn, transform Ragged Recluse.
+
+ALTERNATE
+
+Name:Odious Witch
+ManaCost:no cost
+Colors:black
+Types:Creature Human Warlock
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME attacks, defending player loses 1 life and you gain 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$LifeGain
+Oracle:Whenever Odious Witch attacks, defending player loses 1 life and you gain 1 life.
