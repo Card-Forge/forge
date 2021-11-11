@@ -4,9 +4,8 @@ Types:Instant
 A:SP$ Draw | Cost$ G | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Draw a card if an opponent has cast a blue or black spell this turn. Spells you control can't be countered this turn. You and permanents you control gain hexproof from blue and from black until end of turn. (You and they can't be the targets of blue or black spells or abilities your opponents control.)
 SVar:DBEffect:DB$ Effect | StaticAbilities$ AntiMagic | SubAbility$ DBPump
 SVar:AntiMagic:Mode$ Continuous | Affected$ Card.YouCtrl | AffectedZone$ Stack | EffectZone$ Command | AddHiddenKeyword$ CARDNAME can't be countered. | Description$ Spells you control can't be countered this turn.
-SVar:DBPump:DB$ Pump | Defined$ You | KW$ Hexproof:Card.Black:black & Hexproof:Card.Blue:blue | SubAbility$ DBPumpAll
+SVar:DBPump:DB$ Pump | Defined$ You | KW$ Hexproof:Card.Black:black & Hexproof:Card.Blue:blue | SubAbility$ DBPumpAll | StackDescription$ None
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Permanent.YouCtrl | KW$ Hexproof:Card.Black:black & Hexproof:Card.Blue:blue
 SVar:X:Count$ThisTurnCast_Card.OppCtrl+Blue,Card.OppCtrl+Black
 AI:RemoveDeck:Random
-DeckHints:Color$Blue|Black
 Oracle:Draw a card if an opponent has cast a blue or black spell this turn. Spells you control can't be countered this turn. You and permanents you control gain hexproof from blue and from black until end of turn. (You and they can't be the targets of blue or black spells or abilities your opponents control.)
