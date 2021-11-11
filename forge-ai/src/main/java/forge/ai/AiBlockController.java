@@ -29,6 +29,8 @@ import com.google.common.collect.Iterables;
 
 import forge.card.CardStateName;
 import forge.game.GameEntity;
+import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -39,6 +41,7 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -332,6 +335,35 @@ public class AiBlockController {
             }
 
         });
+    }
+
+    private Predicate<Card> changesPTWhenBlocked(final boolean onlyForDefVsTrample) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(Card card) {
+                for (final Trigger tr : card.getTriggers()) {
+                    if (tr.getMode() == TriggerType.AttackerBlocked) {
+                        SpellAbility ab = tr.getOverridingAbility();
+                        if (ab != null) {
+                            if (ab.getApi() == ApiType.Pump && "Self".equals(ab.getParam("Defined"))) {
+                                String rawP = ab.getParam("NumAtt");
+                                String rawT = ab.getParam("NumDef");
+                                if ("+X".equals(rawP) && "+X".equals(rawT) && "TriggerCount$NumBlockers".equals(card.getSVar("X"))) {
+                                    return true;
+                                }
+                                // TODO: maybe also predict calculated bonus above certain threshold?
+                            } else if (ab.getApi() == ApiType.PumpAll && ab.hasParam("ValidCards")
+                                && ab.getParam("ValidCards").startsWith("Creature.blockingSource")) {
+                                int pBonus = AbilityUtils.calculateAmount(card, ab.getParam("NumAtt"), ab);
+                                int tBonus = AbilityUtils.calculateAmount(card, ab.getParam("NumDef"), ab);
+                                return (!onlyForDefVsTrample && pBonus < 0) || tBonus < 0;
+                            }
+                        }
+                    }
+                }
+                return false;
+            }
+        };
     }
 
     // Good Gang Blocks means a good trade or no trade
@@ -725,8 +757,9 @@ public class AiBlockController {
         List<Card> tramplingAttackers = CardLists.getKeyword(attackers, Keyword.TRAMPLE);
         tramplingAttackers = CardLists.filter(tramplingAttackers, Predicates.not(rampagesOrNeedsManyToBlock(combat)));
 
-        // TODO - should check here for a "rampage-like" trigger that replaced the keyword:
-        // "Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it."
+        // TODO - Instead of filtering out rampage-like and similar triggers, make the AI properly count P/T and
+        // reinforce when actually possible without losing material.
+        tramplingAttackers = CardLists.filter(tramplingAttackers, Predicates.not(changesPTWhenBlocked(true)));
 
         for (final Card attacker : tramplingAttackers) {
             if (CombatUtil.getMinNumBlockersForAttacker(attacker, combat.getDefenderPlayerByAttacker(attacker)) > combat.getBlockers(attacker).size()
@@ -755,8 +788,9 @@ public class AiBlockController {
         List<Card> blockers;
         List<Card> targetAttackers = CardLists.filter(blockedButUnkilled, Predicates.not(rampagesOrNeedsManyToBlock(combat)));
 
-        // TODO - should check here for a "rampage-like" trigger that replaced
-        // the keyword: "Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it."
+        // TODO - Instead of filtering out rampage-like and similar triggers, make the AI properly count P/T and
+        // reinforce when actually possible without losing material.
+        targetAttackers = CardLists.filter(targetAttackers, Predicates.not(changesPTWhenBlocked(false)));
 
         for (final Card attacker : targetAttackers) {
             blockers = getPossibleBlockers(combat, attacker, blockersLeft, false);
