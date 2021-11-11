@@ -1,0 +1,9 @@
+Name:Rural Recruit
+ManaCost:3 G
+Types:Creature Human Peasant
+PT:1/1
+K:Training
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 3/1 green Boar creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_1_boar | TokenOwner$ You
+DeckHas:Ability$Token & Ability$Counters
+Oracle:Training\nWhen Rural Recruit enters the battlefield, create a 3/1 green Boar creature token.

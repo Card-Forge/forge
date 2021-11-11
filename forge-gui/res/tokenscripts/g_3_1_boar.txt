@@ -1,0 +1,6 @@
+Name:Boar
+Colors:green
+ManaCost:no cost
+PT:3/1
+Types:Creature Boar
+Oracle:
