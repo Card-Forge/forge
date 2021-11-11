@@ -1,0 +1,9 @@
+Name:Voldaren Epicure
+ManaCost:R
+Types:Creature Vampire
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDmg1 | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to each opponent. Create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
+SVar:TrigDmg1:DB$ DealDamage | NumDmg$ 1 | Defined$ Player.Opponent | SubAbility$ DBBlood
+SVar:DBBlood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_blood_draw | TokenOwner$ You
+DeckHas:Ability$Token & Ability$Sacrifice & Type$Blood
+Oracle:When Voldaren Epicure enters the battlefield, it deals 1 damage to each opponent. Create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
