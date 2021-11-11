@@ -528,13 +528,17 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         if (pool == null) {
             return;
         }
-        pool.add(item, qty);
-        if (isUnfiltered()) {
-            model.addItem(item, qty);
+        try {
+            pool.add(item, qty);
+            if (isUnfiltered()) {
+                model.addItem(item, qty);
+            }
+            List<T> items = new ArrayList<>();
+            items.add(item);
+            updateView(false, items);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        List<T> items = new ArrayList<>();
-        items.add(item);
-        updateView(false, items);
     }
 
     public void addItems(Iterable<Entry<T, Integer>> itemsToAdd) {
