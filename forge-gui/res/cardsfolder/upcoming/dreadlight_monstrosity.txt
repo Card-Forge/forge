@@ -1,5 +1,5 @@
 Name:Dreadlight Monstrosity
-ManaCost:3 U U
+ManaCost:4 U U
 Types:Creature Crab Horror
 PT:5/5
 K:Ward:2

@@ -1,0 +1,10 @@
+Name:Donal, Herald of Wings
+ManaCost:2 U U
+Types:Legendary Creature Human Wizard
+PT:3/3
+T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Creature.withFlying+nonLegendary | ValidActivatingPlayer$ You | NoResolvingCheck$ True | ActivationLimit$ 1 | Execute$ TrigCopy | OptionalDecider$ You | TriggerDescription$ Whenever you cast a nonlegendary creature spell with flying, you may copy it, except the copy is a 1/1 Spirit in addition to its other types. Do this only once each turn. (The copy becomes a token.)
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | CopySetPower$ 1 | CopySetToughness$ 1 | CopyAddTypes$ Spirit
+DeckHas:Ability$Token
+DeckHints:Keyword$Flying
+SVar:BuffedBy:Creature.withFlying
+Oracle:Whenever you cast a nonlegendary creature spell with flying, you may copy it, except the copy is a 1/1 Spirit in addition to its other types. Do this only once each turn. (The copy becomes a token.)

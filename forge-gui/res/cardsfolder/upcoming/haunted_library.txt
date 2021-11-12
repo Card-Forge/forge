@@ -1,0 +1,7 @@
+Name:Haunted Library
+ManaCost:1 W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ Whenever a creature an opponent controls dies, you may pay {1}. If you do, create a 1/1 white Spirit creature token with flying.
+SVar:TrigToken:AB$Token | Cost$ 1 | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:Whenever a creature an opponent controls dies, you may pay {1}. If you do, create a 1/1 white Spirit creature token with flying.
