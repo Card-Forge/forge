@@ -1,0 +1,15 @@
+Name:Timothar, Baron of Bats
+ManaCost:4 B B
+Types:Legendary Creature Vampire Noble
+PT:4/4
+K:Ward:Discard<1/Card>
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Vampire.Other+nonToken+YouCtrl | RememberTriggeringCard$ True | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever another nontoken Vampire you control dies, you may pay {1} and exile it. If you do, create a 1/1 black Bat creature token with flying. It gains “When this creature deals combat damage to a player, sacrifice it and return the exiled card to the battlefield tapped.”
+SVar:TrigToken:AB$ Token | Cost$ 1 ExileFromGrave<1/Card.IsRemembered/the Vampire card> | TokenRemembered$ ExiledCards | TokenScript$ b_1_1_bat_flying | ImprintTokens$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Imprinted | Duration$ Permanent | Triggers$ CDTrigger | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True | ClearRemembered$ True
+SVar:CDTrigger:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When this creature deals combat damage to a player, sacrifice it and return the exiled card to the battlefield tapped.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Tapped$ True
+DeckNeeds:Type$Vampire
+DeckHas:Ability$Token & Ability$Sacrifice
+Oracle:Ward—Discard a card.\nWhenever another nontoken Vampire you control dies, you may pay {1} and exile it. If you do, create a 1/1 black Bat creature token with flying. It gains "When this creature deals combat damage to a player, sacrifice it and return the exiled card to the battlefield tapped."
