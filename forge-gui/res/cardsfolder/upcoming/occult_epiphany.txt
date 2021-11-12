@@ -1,0 +1,11 @@
+Name:Occult Epiphany
+ManaCost:X U
+Types:Instant
+A:SP$ Draw | NumCards$ X | SubAbility$ DBDiscard | SpellDescription$ Draw X cards,
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ X | RememberDiscarded$ True | SubAbility$ DBToken | SpellDescription$ then discard X cards.
+SVar:DBToken:DB$ Token | TokenScript$ w_1_1_spirit_flying | TokenAmount$ Y | SubAbility$ DBCleanup | SpellDescription$ Create a 1/1 white Spirit creature token with flying for each card type among cards discarded this way.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+SVar:Y:Count$CardTypes.Remembered
+DeckHas:Ability$Discard & Ability$Token & Type$Spirit
+Oracle:Draw X cards, then discard X cards. Create a 1/1 white Spirit creature token with flying for each card type among cards discarded this way.
