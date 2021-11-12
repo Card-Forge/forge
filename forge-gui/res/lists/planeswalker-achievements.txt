@@ -23,6 +23,7 @@ Chandra Ablaze|Chandra's Bargain|I feel like I've seen those before...
 Chandra Nalaar|Chandra's Rage|Feel the power of my wrath!
 Chandra, Awakened Inferno|Chandra's Utter Disintegration|Is it hot here or is it just me?
 Chandra, Bold Pyromancer|Chandra's Flame Wave|Let's have a campfire!
+Chandra, Dressed to Kill|Chandra's Red Wedding|She's pretty in pink, cute in crimson, and mighty in maroon.
 Chandra, Fire Artisan|Chandra's Fiery Rush|Combo time!
 Chandra, Flame's Catalyst|Chandra's Sudden Epiphany|Forget everything you know and believe that everything is possible.
 Chandra, Flame's Fury|Chandra's Lake of Flame|Come in! The fire's great!
@@ -89,6 +90,7 @@ Jaya Ballard|Jaya's Flashback|Fire is easily rekindled.
 Karn Liberated|Karn's Reset|Let's do this again!
 Kasmina, Enigma Sage|Kasmina's Private Tutoring|This will be on the spelling test next week.
 Kaya the Inexorable|Kaya's Dimensional Breach|A little help here?
+Kaya, Geist Hunter|Kaya's Graf Liberation|Who would you like to call?
 Kaya, Ghost Assassin|Kaya's Syphon|You don't MIND, do you?
 Kaya, Orzhov Usurper|Kaya's Revenge of Emptiness|Nothing I do can hurt you. Literally.
 Kiora, Master of the Depths|Kiora's Fight Club|First rule is not to talk about the sucker punches
@@ -152,6 +154,7 @@ Sarkhan, the Dragonspeaker|Sarkhan's Voices|Huh? What are you saying?
 Sarkhan Unbroken|Sarkhan's Dragonstorm|Skies full of dragons! Oh, what a glorious day!
 Serra the Benevolent|Serra's Worship Service|As long as you have belief in me, you shall not die.
 Sorin Markov|Sorin's Hypnosis|You're getting sleepy... very sleepy...
+Sorin the Mirthless|Sorin's Unlucky Strike|Not very funny when it happens to you, is it?
 Sorin, Grim Nemesis|Sorin's Vampire Army|Taste the might of my blood relatives!
 Sorin, Imperious Bloodlord|Sorin's Progeny|Welcome to your new life. You serve me now.
 Sorin, Lord of Innistrad|Sorin's Recruitment|My favorite game is Shogi!
