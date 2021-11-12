@@ -332,6 +332,10 @@ public class CardPool extends ItemPool<PaperCard> {
             sumWeights += editionsCount;
             weightedMean += weightedFrequency;
         }
+
+        if (frequencyValues.isEmpty())
+            return null;
+
         int totalNoCards = (int)weightedMean;
         weightedMean /= sumWeights;
 
