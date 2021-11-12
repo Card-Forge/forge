@@ -1,0 +1,11 @@
+Name:Arterial Alchemy
+ManaCost:2 R
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a Blood token for each opponent you have. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_blood_draw
+SVar:X:PlayerCountOpponents$Amount
+S:Mode$ Continuous | Affected$ Blood.token+YouCtrl | AddType$ Equipment | AddStaticAbility$ BloodEquip | AddKeyword$ Equip:2 | Description$ Blood tokens you control are Equipment in addition to their other types and have "Equipped creature gets +2/+0" and equip {2}.
+SVar:BloodEquip:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | Description$ Equipped creature gets +2/+0.
+DeckHas:Ability$Token & Ability$Sacrifice & Type$Blood|Equipment
+DeckHints:Type$Blood
+Oracle:When Arterial Alchemy enters the battlefield, create a Blood token for each opponent you have. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")\nBlood tokens you control are Equipment in addition to their other types and have "Equipped creature gets +2/+0" and equip {2}.
