@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Vampire
 PT:3/3
 K:CARDNAME can't block.
-T:Mode$ Sacrificed | ValidCard$ Blood.token+YouCtrl | TriggerZone$ Battlefield | Execute$ TrigPump | ActivationLimit$ 1 | TriggerDescription$ Whenever you sacrifice one or more Blood tokens, target creature can't block this turn. This ability triggers only once each turn.
+T:Mode$ Sacrificed | ValidCard$ Blood.token+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | ActivationLimit$ 1 | TriggerDescription$ Whenever you sacrifice one or more Blood tokens, target creature can't block this turn. This ability triggers only once each turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True
 DeckNeeds:Type$Blood
 Oracle:Blood Hypnotist can't block.\nWhenever you sacrifice one or more Blood tokens, target creature can't block this turn. This ability triggers only once each turn.

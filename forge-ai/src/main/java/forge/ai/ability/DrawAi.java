@@ -526,7 +526,6 @@ public class DrawAi extends SpellAbilityAi {
         return targetAI(ai, sa, mandatory);
     }
 
-    
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
      */
