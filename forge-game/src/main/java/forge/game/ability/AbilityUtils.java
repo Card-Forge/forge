@@ -2627,7 +2627,21 @@ public class AbilityUtils {
         }
 
         if (sq[0].contains("CardTypes")) {
-            return doXMath(getCardTypesFromList(game.getCardsIn(ZoneType.smartValueOf(sq[1]))), expr, c, ctb);
+            if (sq[1].equals("Remembered")) {
+                CardCollection remCards = new CardCollection();
+                for (final Object o : c.getRemembered()) {
+                    if (o instanceof Card) {
+                        remCards.add((Card) o);
+                    }
+                }
+                if (remCards.isEmpty()) {
+                    return doXMath(0, expr, c, ctb);
+                } else {
+                    return doXMath(getCardTypesFromList(remCards), expr, c, ctb);
+                }
+            } else {
+                return doXMath(getCardTypesFromList(game.getCardsIn(ZoneType.smartValueOf(sq[1]))), expr, c, ctb);
+            }
         }
 
         if (sq[0].equals("TotalTurns")) {
