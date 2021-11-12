@@ -1,5 +1,5 @@
 Name:Apprentice Sharpshooter
-ManaCost:1 G
+ManaCost:2 G
 Types:Creature Human Archer
 PT:1/4
 K:Reach
