@@ -1,4 +1,5 @@
 Name:Honored Heirloom
+ManaCost:3
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 A:AB$ ChangeZone | Cost$ 2 T | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Select target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
