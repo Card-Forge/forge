@@ -117,6 +117,11 @@ public class CostExile extends CostPartWithList {
             return String.format ("Exile any number of %s from your %s", desc, origin);
         }
 
+        //for very specific situations like Timothar
+        if (desc.startsWith("the")) {
+            return String.format("Exile %s from your %s", desc, origin);
+        }
+
         return String.format("Exile %s from your %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), origin);
     }
 
