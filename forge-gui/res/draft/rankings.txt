@@ -585,18 +585,18 @@
 #19|Mila, Crafty Companion|M|STX
 #20|Gnarled Professor|R|STX
 #21|Plargg, Dean of Chaos|R|STX
-#22|Primal Command|M|STX
-#23|Day of Judgment|M|STX
+#22|Primal Command|M|STA
+#23|Day of Judgment|M|STA
 #24|Closing Statement|U|STX
 #25|Baleful Mastery|R|STX
 #26|Valentin, Dean of the Vein|R|STX
 #27|Flamescroll Celebrant|R|STX
-#28|Swords to Plowshares|R|STX
+#28|Swords to Plowshares|R|STA
 #29|Blade Historian|R|STX
 #30|Prismari Command|R|STX
 #31|Kasmina, Enigma Sage|M|STX
-#32|Lightning Bolt|C|STX
-#33|Demonic Tutor|M|STX
+#32|Lightning Bolt|C|STA
+#33|Demonic Tutor|M|STA
 #34|Mortality Spear|U|STX
 #35|Blex, Vexing Pest|M|STX
 #36|Retriever Phoenix|R|STX
@@ -605,7 +605,7 @@
 #39|Lorehold Command|R|STX
 #40|Quandrix Command|R|STX
 #41|Dragonsguard Elite|R|STX
-#42|Doom Blade|R|STX
+#42|Doom Blade|R|STA
 #43|Selfless Glyphweaver|R|STX
 #44|Igneous Inspiration|U|STX
 #45|Conspiracy Theorist|R|STX
@@ -616,28 +616,28 @@
 #50|Dream Strix|R|STX
 #51|Magma Opus|M|STX
 #52|Illuminate History|R|STX
-#53|Putrefy|R|STX
-#54|Lightning Helix|R|STX
-#55|Time Warp|M|STX
+#53|Putrefy|R|STA
+#54|Lightning Helix|R|STA
+#55|Time Warp|M|STA
 #56|Devastating Mastery|R|STX
 #57|Tempted by the Oriq|R|STX
 #58|Flunk|U|STX
 #59|Manifestation Sage|R|STX
 #60|Leonin Lightscribe|R|STX
 #61|Elite Spellbinder|R|STX
-#62|Mizzix's Mastery|M|STX
-#63|Crux of Fate|M|STX
+#62|Mizzix's Mastery|M|STA
+#63|Crux of Fate|M|STA
 #64|Rip Apart|U|STX
 #65|Poet's Quill|R|STX
 #66|Pestilent Cauldron|R|STX
 #67|Dramatic Finale|R|STX
-#68|Regrowth|R|STX
-#69|Electrolyze|R|STX
+#68|Regrowth|R|STA
+#69|Electrolyze|R|STA
 #70|Callous Bloodmage|R|STX
 #71|Codie, Vociferous Codex|R|STX
 #72|Teachings of the Archaics|R|STX
-#73|Harmonize|R|STX
-#74|Blue Sun's Zenith|M|STX
+#73|Harmonize|R|STA
+#74|Blue Sun's Zenith|M|STA
 #75|Mage Hunters' Onslaught||STX
 #76|Daemogoth Woe-Eater|U|STX
 #77|Devouring Tendrils|U|STX
@@ -649,7 +649,7 @@
 #83|Master Symmetrist|U|STX
 #84|Heated Debate|C|STX
 #85|Professor of Symbology|U|STX
-#86|Despark|R|STX
+#86|Despark|R|STA
 #87|Dina, Soul Steeper|U|STX
 #88|Daemogoth Titan|R|STX
 #89|Body of Research|M|STX
@@ -659,10 +659,10 @@
 #93|Frost Trickster|C|STX
 #94|Radiant Scrollwielder|R|STX
 #95|Archmage Emeritus|R|STX
-#96|Shock|U|STX
-#97|Inquisition of Kozilek|R|STX
-#98|Counterspell|R|STX
-#99|Approach of the Second Sun|M|STX
+#96|Shock|U|STA
+#97|Inquisition of Kozilek|R|STA
+#98|Counterspell|R|STA
+#99|Approach of the Second Sun|M|STA
 #100|Oriq Loremage|R|STX
 #101|Bayou Groff|C|STX
 #102|Bookwurm|U|STX
@@ -671,9 +671,9 @@
 #105|Biomathematician|C|STX
 #106|Quandrix Apprentice|U|STX
 #107|Basic Conjuration|R|STX
-#108|Eliminate|U|STX
-#109|Urza's Rage|R|STX
-#110|Compulsive Research|R|STX
+#108|Eliminate|U|STA
+#109|Urza's Rage|R|STA
+#110|Compulsive Research|R|STA
 #111|Divide by Zero|U|STX
 #112|Culling Ritual|R|STX
 #113|Professor of Zoomancy|C|STX
@@ -687,8 +687,8 @@
 #121|Efreet Flamepainter|R|STX
 #122|Prismari Apprentice|U|STX
 #123|Spirit Summoning|C|STX
-#124|Agonizing Remorse|U|STX
-#125|Gift of Estates|R|STX
+#124|Agonizing Remorse|U|STA
+#125|Gift of Estates|R|STA
 #126|Ingenious Mastery|R|STX
 #127|Mage Duel|C|STX
 #128|Jadzi, Oracle of Arcavios|M|STX
@@ -716,10 +716,10 @@
 #150|Silverquill Apprentice|U|STX
 #151|Lorehold Apprentice|U|STX
 #152|Storm-Kiln Artist|U|STX
-#153|Cultivate|U|STX
-#154|Growth Spiral|R|STX
-#155|Natural Order|M|STX
-#156|Increasing Vengeance|M|STX
+#153|Cultivate|U|STA
+#154|Growth Spiral|R|STA
+#155|Natural Order|M|STA
+#156|Increasing Vengeance|M|STA
 #157|Wormhole Serpent|U|STX
 #158|Lash of Malice|C|STX
 #159|Tend the Pests|U|STX
@@ -739,13 +739,13 @@
 #173|Karok Wrangler|U|STX
 #174|Reduce to Memory|U|STX
 #175|Dueling Coach|U|STX
-#176|Divine Gambit|U|STX
-#177|Grapeshot|R|STX
-#178|Sign in Blood|R|STX
-#179|Dark Ritual|R|STX
-#180|Memory Lapse|R|STX
-#181|Ephemerate|R|STX
-#182|Mind's Desire|M|STX
+#176|Divine Gambit|U|STA
+#177|Grapeshot|R|STA
+#178|Sign in Blood|R|STA
+#179|Dark Ritual|R|STA
+#180|Memory Lapse|R|STA
+#181|Ephemerate|R|STA
+#182|Mind's Desire|M|STA
 #183|Semester's End|R|STX
 #184|Reckless Amplimancer|C|STX
 #185|Reject|C|STX
@@ -773,13 +773,13 @@
 #207|Elemental Summoning|C|STX
 #208|Inkling Summoning|C|STX
 #209|Pest Summoning|C|STX
-#210|Snakeskin Veil|U|STX
-#211|Thrill of Possibility|U|STX
-#212|Whirlwind Denial|U|STX
-#213|Faithless Looting|R|STX
-#214|Tezzeret's Gambit|R|STX
-#215|Mana Tithe|R|STX
-#216|Tainted Pact|M|STX
+#210|Snakeskin Veil|U|STA
+#211|Thrill of Possibility|U|STA
+#212|Whirlwind Denial|U|STA
+#213|Faithless Looting|R|STA
+#214|Tezzeret's Gambit|R|STA
+#215|Mana Tithe|R|STA
+#216|Tainted Pact|M|STA
 #217|Rushed Rebirth|R|STX
 #218|Snow Day|U|STX
 #219|Stonerise Spirit|C|STX
@@ -830,14 +830,14 @@
 #264|Introduction to Prophecy|C|STX
 #265|Environmental Sciences|C|STX
 #266|Academic Probation|R|STX
-#267|Infuriate|U|STX
-#268|Village Rites|U|STX
-#269|Abundant Harvest|R|STX
-#270|Stone Rain|R|STX
-#271|Brainstorm|R|STX
-#272|Gods Willing|R|STX
-#273|Channel|M|STX
-#274|Teferi's Protection|M|STX
+#267|Infuriate|U|STA
+#268|Village Rites|U|STA
+#269|Abundant Harvest|R|STA
+#270|Stone Rain|R|STA
+#271|Brainstorm|R|STA
+#272|Gods Willing|R|STA
+#273|Channel|M|STA
+#274|Teferi's Protection|M|STA
 #275|Specter of the Fens|C|STX
 #276|Vortex Runner|C|STX
 #277|Spell Satchel|U|STX
@@ -860,9 +860,9 @@
 #294|Study Break|C|STX
 #295|Go Blank|U|STX
 #296|Beaming Defiance|C|STX
-#297|Adventurous Impulse|U|STX
-#298|Claim the Firstborn|U|STX
-#299|Chaos Warp|M|STX
+#297|Adventurous Impulse|U|STA
+#298|Claim the Firstborn|U|STA
+#299|Chaos Warp|M|STA
 #300|Guiding Voice|C|STX
 #301|Biblioplex Assistant|C|STX
 #302|Spined Karok|C|STX
@@ -880,11 +880,11 @@
 #314|Curate|C|STX
 #315|Campus Guide|C|STX
 #316|Ageless Guardian|C|STX
-#317|Duress|U|STX
-#318|Strategic Planning|U|STX
-#319|Opt|U|STX
-#320|Defiant Strike|U|STX
-#321|Tendrils of Agony|R|STX
+#317|Duress|U|STA
+#318|Strategic Planning|U|STA
+#319|Opt|U|STA
+#320|Defiant Strike|U|STA
+#321|Tendrils of Agony|R|STA
 #322|Fracture|U|STX
 #323|Excavated Wall|C|STX
 #324|Cogwork Archivist|C|STX
@@ -892,12 +892,12 @@
 #326|Square Up|C|STX
 #327|Solve the Equation|U|STX
 #328|Star Pupil|C|STX
-#329|Negate|U|STX
-#330|Revitalize|U|STX
-#331|Weather the Storm|R|STX
+#329|Negate|U|STA
+#330|Revitalize|U|STA
+#331|Weather the Storm|R|STA
 #332|Tangletrap|C|STX
 #333|Confront the Past|R|STX
-#334|Krosan Grip|R|STX
+#334|Krosan Grip|R|STA
 #335|Mercurial Transformation|U|STX
 #336|Dragon's Approach|C|STX
 #337|Test of Talents|U|STX
