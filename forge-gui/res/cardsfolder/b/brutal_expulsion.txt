@@ -2,8 +2,7 @@ Name:Brutal Expulsion
 ManaCost:2 U R
 Types:Instant
 K:Devoid
-A:SP$ Charm | Cost$ 2 U R | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBReturn,DBDmg
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBReturn,DBDmg
 SVar:DBReturn:DB$ ChangeZone | ValidTgts$ Creature,Card.inZoneStack | TgtZone$ Stack,Battlefield | Origin$ Battlefield,Stack | Fizzle$ True | Destination$ Hand | SpellDescription$ Return target spell or creature to its owner's hand.
-SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker. | NumDmg$ 2 | ReplaceDyingDefined$ Targeted | SpellDescription$ CARDNAME deals 2 damage to target creature or planeswalker. If that creature or planeswalker would die this turn, exile it instead.AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brutal_expulsion.jpg
+SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 2 | ReplaceDyingDefined$ Targeted | SpellDescription$ CARDNAME deals 2 damage to target creature or planeswalker. If that creature or planeswalker would die this turn, exile it instead.
 Oracle:Devoid (This card has no color.)\nChoose one or both —\n• Return target spell or creature to its owner's hand.\n• Brutal Expulsion deals 2 damage to target creature or planeswalker. If that creature or planeswalker would die this turn, exile it instead.

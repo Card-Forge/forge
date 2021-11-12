@@ -521,7 +521,7 @@ public abstract class SpellAbilityEffect {
 
             String repeffstr = "Event$ Moved | ValidCard$ " + valid +
                     "| Origin$ Battlefield | Destination$ Graveyard " +
-                    "| Description$ If the creature would die this turn, exile it instead.";
+                    "| Description$ If that permanent would die this turn, exile it instead.";
             String effect = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ " + zone;
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
