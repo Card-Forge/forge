@@ -1,0 +1,9 @@
+Name:Ominous Roost
+ManaCost:2 U
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield or whenever you cast a spell from your graveyard, create a 1/1 blue Bird creature token with flying and "This creature can block only creatures with flying."
+T:Mode$ SpellCast | ValidCard$ Card.wasCastFromGraveyard | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or whenever you cast a spell from your graveyard, create a 1/1 blue Bird creature token with flying and "This creature can block only creatures with flying."
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ u_1_1_bird_flying_blockflying
+DeckHas:Ability$Token
+DeckHints:Ability$Graveyard
+Oracle:When Ominous Roost enters the battlefield or whenever you cast a spell from your graveyard, create a 1/1 blue Bird creature token with flying and "This creature can block only creatures with flying."

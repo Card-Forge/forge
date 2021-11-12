@@ -1,0 +1,11 @@
+Name:Katilda, Dawnhart Prime
+ManaCost:G W
+Types:Legendary Creature Human Warlock
+PT:1/1
+K:Protection from Werewolves
+S:Mode$ Continuous | Affected$ Creature.Human+YouCtrl | AddAbility$ Mana | Description$ Human creatures you control have "{T}: Add one mana of any of this creature's colors."
+SVar:Mana:AB$ ManaReflected | Cost$ T | Valid$ Defined.Self | ColorOrType$ Color | ReflectProperty$ Is | SpellDescription$ Add one mana of any of this creature's colors.
+A:AB$ PutCounterAll | Cost$ 4 G W T | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each creature you control.
+DeckHas:Ability$Counters
+DeckHints:Type$Human
+Oracle:Protection from Werewolves\nHuman creatures you control have "{T}: Add one mana of any of this creature's colors."\n{4}{G}{W}, {T}: Put a +1/+1 counter on each creature you control.

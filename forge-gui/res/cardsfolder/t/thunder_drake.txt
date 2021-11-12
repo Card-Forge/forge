@@ -4,7 +4,7 @@ Types:Creature Elemental Drake
 PT:2/3
 K:Flying
 T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | CheckSVar$ YouCastThisTurn | SVarCompare$ EQ2 | NoResolvingCheck$ True | TriggerDescription$ Whenever you cast your second spell each turn, put a +1/+1 counter on CARDNAME.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:YouCastThisTurn:Count$ThisTurnCast_Card.YouCtrl
 SVar:BuffedBy:Card
 DeckHas:Ability$Counters

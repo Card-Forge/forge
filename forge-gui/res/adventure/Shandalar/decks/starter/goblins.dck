@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Title=Goblin General
+Icon=Dungeon Crawling Red.jpg
+Difficulty=easy
+Description=Goblins, goblins and more goblins!
+Deck Type=constructed
+Name=Goblins
+[Main]
+4 Goblin Bully|POR
+4 Goblin Cavaliers|PO2
+4 Goblin Chariot|S99
+4 Goblin General|PO2
+2 Goblin Glider|PO2
+4 Goblin Piker|PO2
+4 Goblin Raider|PO2
+2 Goblin War Strike|PO2
+2 Hulking Goblin|POR
+10 Mountain|PO2|1
+5 Mountain|PO2|2
+5 Mountain|PO2|3
+4 Raging Goblin|POR|2
+4 Relentless Assault|PO2
+2 Volcanic Hammer|POR

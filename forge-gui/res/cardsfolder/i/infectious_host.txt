@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Creature Zombie
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, target player loses 2 life.
-SVar:TrigLoseLife:DB$LoseLife | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 2
+SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infectious_host.jpg
 Oracle:When Infectious Host dies, target player loses 2 life.

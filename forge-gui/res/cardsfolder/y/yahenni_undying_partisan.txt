@@ -4,7 +4,7 @@ Types:Legendary Creature Aetherborn Vampire
 PT:2/2
 K:Haste
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature an opponent controls dies, put a +1/+1 counter on CARDNAME.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionPresent$ Card.StrictlySelf
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionPresent$ Card.StrictlySelf
 A:AB$ Pump | Cost$ Sac<1/Creature.Other/another creature> | Defined$ Self | KW$ Indestructible | SpellDescription$ CARDNAME gains indestructible until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yahenni_undying_partisan.jpg
 Oracle:Haste\nWhenever a creature an opponent controls dies, put a +1/+1 counter on Yahenni, Undying Partisan.\nSacrifice another creature: Yahenni gains indestructible until end of turn.

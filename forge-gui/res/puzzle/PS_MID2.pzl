@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Innistrad: Midnight Hunt #02
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/10/latest-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Your opponent has six cards in their graveyard. Assume that any cards you could draw are not relevant to the puzzle. Your Rune of Mortality is attached to your Runed Crown, which is attached to your left Relic Golem. Both your Relic Golems were slimed during your opponent's last turn.
+[state]
+humanlife=20
+ailife=5
+turn=2
+activeplayer=human
+activephase=MAIN1
+humanhand=Compelled Duel;Rune of Might;Arachnoform
+humanlibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humanbattlefield=Relic Golem|Id:2|Counters:SLIME=1;Runed Crown|Id:3|AttachedTo:2;Rune of Mortality|AttachedTo:3;Relic Golem|Counters:SLIME=1,P1P1=1;Forest|Set:MID;Forest|Set:MID;Forest|Set:MID;Forest|Set:MID
+aigraveyard=Opt;Opt;Opt;Opt;Opt;Opt
+aibattlefield=Sludge Monster|Counters:P1P1=1

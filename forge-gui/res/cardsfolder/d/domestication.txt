@@ -5,6 +5,6 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 2 U U | ValidTgts$ Creature | AILogic$ GainControl | AITgts$ Creature.powerLT4
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.AttachedBy+powerGE4 | Execute$ TrigSac | TriggerDescription$ At the beginning of your end step, if enchanted creature's power is 4 or greater, sacrifice CARDNAME.
-SVar:TrigSac:DB$Sacrifice | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/domestication.jpg
 Oracle:Enchant creature\nYou control enchanted creature.\nAt the beginning of your end step, if enchanted creature's power is 4 or greater, sacrifice Domestication.

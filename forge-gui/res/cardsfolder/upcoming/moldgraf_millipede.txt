@@ -1,0 +1,11 @@
+Name:Moldgraf Millipede
+ManaCost:4 G
+Types:Creature Insect Horror
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill three cards, then put a +1/+1 counter on CARDNAME for each creature card in your graveyard. (To mill a card, put the top card of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 3 | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
+SVar:X:Count$ValidGraveyard Creature.YouCtrl
+SVar:NeedsToPlayVar:X GE3
+DeckHas:Ability$Mill & Ability$Counters
+Oracle:When Moldgraf Millipede enters the battlefield, mill three cards, then put a +1/+1 counter on Moldgraf Millipede for each creature card in your graveyard. (To mill a card, put the top card of your library into your graveyard.)

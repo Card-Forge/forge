@@ -3,6 +3,6 @@ ManaCost:4 B B
 Types:Sorcery
 K:Flashback:7 B B
 A:SP$ DealDamage | Cost$ 4 B B | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SubAbility$ DB | SpellDescription$ CARDNAME deals 3 damage to any target. You gain 3 life.
-SVar:DB:DB$GainLife | LifeAmount$ 3
+SVar:DB:DB$ GainLife | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morbid_hunger.jpg
 Oracle:Morbid Hunger deals 3 damage to any target. You gain 3 life.\nFlashback {7}{B}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

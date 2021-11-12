@@ -4,6 +4,6 @@ Types:Creature Merfolk Wizard
 PT:2/1
 K:AlternateAdditionalCost:Reveal<1/Merfolk>:3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silvergill_adept.jpg
 Oracle:As an additional cost to cast this spell, reveal a Merfolk card from your hand or pay {3}.\nWhen Silvergill Adept enters the battlefield, draw a card.

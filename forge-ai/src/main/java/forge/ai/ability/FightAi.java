@@ -60,17 +60,19 @@ public class FightAi extends SpellAbilityAi {
         // assumes the triggered card belongs to the ai
         if (sa.hasParam("Defined")) {
             CardCollection fighter1List = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
+            if ("ChosenAsTgt".equals(sa.getParam("AILogic")) && sa.getRootAbility().getTargetCard() != null) {
+                if (fighter1List.isEmpty()) {
+                    fighter1List.add(sa.getRootAbility().getTargetCard());
+                }
+            }
             if (fighter1List.isEmpty()) {
-                return true;
+                return true; // FIXME: shouldn't this return "false" if nothing found?
             }
             Card fighter1 = fighter1List.get(0);
             for (Card humanCreature : humCreatures) {
-                if (ComputerUtilCombat.getDamageToKill(humanCreature) <= fighter1.getNetPower()
-                        && humanCreature.getNetPower() < ComputerUtilCombat.getDamageToKill(fighter1)) {
+                if (canKill(fighter1, humanCreature, 0)
+                        && !canKill(humanCreature, fighter1, 0)) {
                     // todo: check min/max targets; see if we picked the best matchup
-                    sa.getTargets().add(humanCreature);
-                    return true;
-                } else if (humanCreature.getSVar("Targeting").equals("Dies")) {
                     sa.getTargets().add(humanCreature);
                     return true;
                 }
@@ -82,13 +84,9 @@ public class FightAi extends SpellAbilityAi {
             if (!(humCreatures.isEmpty() && aiCreatures.isEmpty())) {
                 for (Card humanCreature : humCreatures) {
                     for (Card aiCreature : aiCreatures) {
-                        if (ComputerUtilCombat.getDamageToKill(humanCreature) <= aiCreature.getNetPower()
-                                && humanCreature.getNetPower() < ComputerUtilCombat.getDamageToKill(aiCreature)) {
+                        if (canKill(aiCreature, humanCreature, 0)
+                                && !canKill(humanCreature, aiCreature, 0)) {
                             // todo: check min/max targets; see if we picked the best matchup
-                            sa.getTargets().add(humanCreature);
-                            sa.getTargets().add(aiCreature);
-                            return true;
-                        } else if (humanCreature.getSVar("Targeting").equals("Dies")) {
                             sa.getTargets().add(humanCreature);
                             sa.getTargets().add(aiCreature);
                             return true;
@@ -106,10 +104,9 @@ public class FightAi extends SpellAbilityAi {
                 if (sa.hasParam("TargetsWithoutSameCreatureType") && creature1.sharesCreatureTypeWith(creature2)) {
                     continue;
                 }
-                if (ComputerUtilCombat.getDamageToKill(creature1) <= creature2.getNetPower()
-                        && creature1.getNetPower() >= ComputerUtilCombat.getDamageToKill(creature2)) {
-                    // todo: check min/max targets; see if we picked the best
-                    // matchup
+                if (canKill(creature1, creature2, 0)
+                        && canKill(creature2, creature1, 0)) {
+                    // todo: check min/max targets; see if we picked the best matchup
                     sa.getTargets().add(creature1);
                     sa.getTargets().add(creature2);
                     return true;
@@ -148,14 +145,14 @@ public class FightAi extends SpellAbilityAi {
         if (sa.hasParam("Defined")) {
             Card aiCreature = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).get(0);
             for (Card humanCreature : humCreatures) {
-                if (ComputerUtilCombat.getDamageToKill(humanCreature) <= aiCreature.getNetPower()
+                if (canKill(aiCreature, humanCreature, 0)
                         && ComputerUtilCard.evaluateCreature(humanCreature) > ComputerUtilCard.evaluateCreature(aiCreature)) {
                     sa.getTargets().add(humanCreature);
                     return true;
                 }
             }
             for (Card humanCreature : humCreatures) {
-                if (ComputerUtilCombat.getDamageToKill(aiCreature) > humanCreature.getNetPower()) {
+                if (!canKill(humanCreature, aiCreature, 0)) {
                     sa.getTargets().add(humanCreature);
                     return true;
                 }
@@ -203,7 +200,7 @@ public class FightAi extends SpellAbilityAi {
         // Evaluate creature pairs
         for (Card humanCreature : humCreatures) {
             for (Card aiCreature : aiCreatures) {
-                if (source.isSpell()) {   // heroic triggers adding counters and prowess
+                if (source.isSpell()) { // heroic triggers adding counters and prowess
                     final int bonus = getSpellBonus(aiCreature);
                     power += bonus;
                     toughness += bonus;
@@ -215,14 +212,15 @@ public class FightAi extends SpellAbilityAi {
                         CardCollection aiCreaturesByPower = new CardCollection(aiCreatures);
                         CardLists.sortByPowerDesc(aiCreaturesByPower);
                         Card maxPower = aiCreaturesByPower.getFirst();
-                        if (maxPower != null && maxPower != aiCreature) {
+                        if (maxPower != aiCreature) {
                             power += maxPower.getNetPower(); // potential bonus from adding a second target
                         }
-                        if (FightAi.canKill(aiCreature, humanCreature, power)) {
+                        else if ("2".equals(sa.getParam("TargetMin"))) {
+                            continue;
+                        }
+                        if (canKill(aiCreature, humanCreature, power)) {
                             sa.getTargets().add(aiCreature);
-                            if (maxPower != null) {
-                                sa.getTargets().add(maxPower);
-                            }
+                            sa.getTargets().add(maxPower);
                             if (!isChandrasIgnition) {
                                 tgtFight.resetTargets();
                                 tgtFight.getTargets().add(humanCreature);
@@ -231,7 +229,7 @@ public class FightAi extends SpellAbilityAi {
                         }
                     } else {
                         // Other cards that use AILogic PowerDmg and a single target
-                        if (FightAi.canKill(aiCreature, humanCreature, power)) {
+                        if (canKill(aiCreature, humanCreature, power)) {
                             sa.getTargets().add(aiCreature);
                             if (!isChandrasIgnition) {
                                 tgtFight.resetTargets();
@@ -241,8 +239,8 @@ public class FightAi extends SpellAbilityAi {
                         }
                     }
                 } else {
-                    if (FightAi.shouldFight(aiCreature, humanCreature, power, toughness)) {
-                    	if ("Time to Feed".equals(sourceName)) {	// flip targets
+                    if (shouldFight(aiCreature, humanCreature, power, toughness)) {
+                    	if ("Time to Feed".equals(sourceName)) { // flip targets
                     		final Card tmp = aiCreature;
                     		aiCreature = humanCreature;
                     		humanCreature = tmp;
@@ -287,10 +285,10 @@ public class FightAi extends SpellAbilityAi {
 
     private static boolean shouldFight(Card fighter, Card opponent, int pumpAttack, int pumpDefense) {
     	if (canKill(fighter, opponent, pumpAttack)) {
-    		if (!canKill(opponent, fighter, -pumpDefense)) {	// can survive
+    		if (!canKill(opponent, fighter, -pumpDefense)) { // can survive
     			return true;
     		} else {
-                if (MyRandom.getRandom().nextInt(20)<(opponent.getCMC() - fighter.getCMC())) {	// trade
+                if (MyRandom.getRandom().nextInt(20) < (opponent.getCMC() - fighter.getCMC())) { // trade
                     return true;
                 }
             }
@@ -307,7 +305,7 @@ public class FightAi extends SpellAbilityAi {
             return false;
         }
         if (fighter.hasKeyword(Keyword.DEATHTOUCH)
-                || ComputerUtilCombat.getDamageToKill(opponent) <= fighter.getNetPower() + pumpAttack) {
+                || ComputerUtilCombat.getDamageToKill(opponent, true) <= fighter.getNetPower() + pumpAttack) {
             return true;
         }
         return false;

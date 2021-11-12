@@ -190,6 +190,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             return sb.toString();
         }
 
+        private static final Map<String, String> sortableCollNumberLookup = new HashMap<>();
         /**
          * This method implements the main strategy to allow for natural ordering of collectorNumber
          * (i.e. "1" < "10"), overloading the default lexicographic order (i.e. "10" < "1").
@@ -200,28 +201,34 @@ public final class CardEdition implements Comparable<CardEdition> {
          * @return A 5-digits zero-padded collector number + any non-numerical parts attached.
          */
         public static String getSortableCollectorNumber(final String collectorNumber){
-            String sortableCollNr = collectorNumber;
-            if (sortableCollNr == null || sortableCollNr.length() == 0)
-                sortableCollNr = "50000";  // very big number of 5 digits to have them in last positions
+            String inputCollNumber = collectorNumber;
+            if (collectorNumber == null || collectorNumber.length() == 0)
+                inputCollNumber = "50000";  // very big number of 5 digits to have them in last positions
+
+            String matchedCollNr = sortableCollNumberLookup.getOrDefault(inputCollNumber, null);
+            if (matchedCollNr != null)
+                return  matchedCollNr;
 
             // Now, for proper sorting, let's zero-pad the collector number (if integer)
             int collNr;
+            String sortableCollNr;
             try {
-                collNr = Integer.parseInt(sortableCollNr);
+                collNr = Integer.parseInt(inputCollNumber);
                 sortableCollNr = String.format("%05d", collNr);
             } catch (NumberFormatException ex) {
-                String nonNumeric = sortableCollNr.replaceAll("[0-9]", "");
-                String onlyNumeric = sortableCollNr.replaceAll("[^0-9]", "");
+                String nonNumSub = inputCollNumber.replaceAll("[0-9]", "");
+                String onlyNumSub = inputCollNumber.replaceAll("[^0-9]", "");
                 try {
-                    collNr = Integer.parseInt(onlyNumeric);
+                    collNr = Integer.parseInt(onlyNumSub);
                 } catch (NumberFormatException exon) {
                     collNr = 0; // this is the case of ONLY-letters collector numbers
                 }
-                if ((collNr > 0) && (sortableCollNr.startsWith(onlyNumeric))) // e.g. 12a, 37+, 2018f,
-                    sortableCollNr = String.format("%05d", collNr) + nonNumeric;
+                if ((collNr > 0) && (inputCollNumber.startsWith(onlyNumSub))) // e.g. 12a, 37+, 2018f,
+                    sortableCollNr = String.format("%05d", collNr) + nonNumSub;
                 else // e.g. WS6, S1
-                    sortableCollNr = nonNumeric + String.format("%05d", collNr);
+                    sortableCollNr = nonNumSub + String.format("%05d", collNr);
             }
+            sortableCollNumberLookup.put(inputCollNumber, sortableCollNr);
             return sortableCollNr;
         }
 
@@ -373,6 +380,13 @@ public final class CardEdition implements Comparable<CardEdition> {
     }
 
     private ListMultimap<String, CardInSet> cardsInSetLookupMap = null;
+
+    /**
+     * Get all the CardInSet instances with the input card name.
+     * @param cardName Name of the Card to look for.
+     * @return A List of all the CardInSet instances for a given name.
+     * If not fount, an Empty sequence (view) will be returned instead!
+     */
     public List<CardInSet> getCardInSet(String cardName){
         if (cardsInSetLookupMap == null) {
             // initialise
@@ -506,7 +520,7 @@ public final class CardEdition implements Comparable<CardEdition> {
     }
 
     public static class Reader extends StorageReaderFolder<CardEdition> {
-        private boolean isCustomEditions;
+        private final boolean isCustomEditions;
 
         public Reader(File path) {
             super(path, CardEdition.FN_GET_CODE);
@@ -856,6 +870,27 @@ public final class CardEdition implements Comparable<CardEdition> {
         public static CardEdition getRandomSetWithAllBasicLands(Iterable<CardEdition> allEditions) {
             return Aggregates.random(Iterables.filter(allEditions, hasBasicLands));
         }
+
+        public static CardEdition getPreferredArtEditionWithAllBasicLands() {
+            CardDb.CardArtPreference artPreference = StaticData.instance().getCardArtPreference();
+            Iterable<CardEdition> editionsWithBasicLands = Iterables.filter(
+                    StaticData.instance().getEditions().getOrderedEditions(),
+                    com.google.common.base.Predicates.and(hasBasicLands, new Predicate<CardEdition>() {
+                        @Override
+                        public boolean apply(CardEdition edition) {
+                            return artPreference.accept(edition);
+                        }
+                    }));
+            Iterator<CardEdition> editionsIterator = editionsWithBasicLands.iterator();
+            List<CardEdition> selectedEditions = new ArrayList();
+            while (editionsIterator.hasNext())
+                selectedEditions.add(editionsIterator.next());
+            if (selectedEditions.isEmpty())
+                return null;
+            int editionIndex = artPreference.latestFirst ? 0 : selectedEditions.size() - 1;
+            return selectedEditions.get(editionIndex);
+        }
+
 
         public static final Predicate<CardEdition> HAS_TOURNAMENT_PACK = new CanMakeStarter();
         private static class CanMakeStarter implements Predicate<CardEdition> {

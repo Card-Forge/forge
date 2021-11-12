@@ -1,0 +1,13 @@
+Name:Intrepid Adversary
+ManaCost:1 W
+Types:Creature Human Scout
+PT:3/1
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPay | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {1}{W} any number of times. When you pay this cost one or more times, put that many valor counters on CARDNAME.
+SVar:TrigPay:AB$ ImmediateTrigger | Cost$ Mana<1 W\NumTimes> | Announce$ NumTimes | ConditionCheckSVar$ NumTimes | ConditionSVarCompare$ GE1 | Execute$ TrigPutCounter | TriggerDescription$ When you pay this cost one or more times, put that many valor counters on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ VALOR | CounterNum$ NumTimes
+SVar:NumTimes:Number$0
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ Z | AddToughness$ Z | Description$ Creatures you control get +1/+1 for each valor counter on CARDNAME.
+SVar:Z:Count$CardCounters.VALOR
+DeckHas:Ability$LifeGain & Ability$Counters
+Oracle:Lifelink\nWhen Intrepid Adversary enters the battlefield, you may pay {1}{W} any number of times. When you pay this cost one or more times, put that many valor counters on Intrepid Adversary.\nCreatures you control get +1/+1 for each valor counter on Intrepid Adversary.

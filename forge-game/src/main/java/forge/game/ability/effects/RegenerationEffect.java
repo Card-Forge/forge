@@ -27,7 +27,7 @@ public class RegenerationEffect extends SpellAbilityEffect {
 
             c.setDamage(0);
             c.setHasBeenDealtDeathtouchDamage(false);
-            c.tap();
+            c.tap(true);
             c.addRegeneratedThisTurn();
 
             if (game.getCombat() != null) {
@@ -48,7 +48,6 @@ public class RegenerationEffect extends SpellAbilityEffect {
             runParams.put(AbilityKey.Cause, host);
             game.getTriggerHandler().runTrigger(TriggerType.Regenerated, runParams, false);
         }
-
     }
 
 }

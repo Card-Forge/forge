@@ -4,7 +4,7 @@ Types:Creature Human Warrior
 PT:1/1
 T:Mode$ ChangesZoneAll | Origin$ Hand | Destination$ Exile | ValidCards$ Card.YouOwn | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more cards are put into exile from your hand or a spell or ability you control exiles one or more permanents from the battlefield, put that many +1/+1 counters on CARDNAME.
 T:Mode$ ChangesZoneAll | ValidCause$ SpellAbility.YouCtrl | Origin$ Battlefield | Destination$ Exile | Execute$ TrigPutCounter | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever one or more cards are put into exile from your hand or a spell or ability you control exiles one or more permanents from the battlefield, put that many +1/+1 counters on CARDNAME.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
 S:Mode$ Continuous | Affected$ Card.Self | CheckSVar$ Y | SVarCompare$ GT4 | AddKeyword$ Flying | AddType$ Angel | Description$ As long as CARDNAME has five or more counters on it, it has flying and is an Angel in addition to its other types.
 S:Mode$ Continuous | Affected$ Card.Self | CheckSVar$ Y | SVarCompare$ GT9 | AddKeyword$ Indestructible | AddType$ Angel & God | Description$ As long as CARDNAME has ten or more counters on it, it indestructible and is a God in addition to its other types.
 SVar:X:TriggerCount$Amount

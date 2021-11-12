@@ -5,6 +5,6 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 3 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ First Strike | AddTrigger$ TriggerDamageDone | Description$ Enchanted creature gets +2/+2 and has first strike and "Whenever this creature deals combat damage to a player, create a 1/1 white Human Soldier creature token."
 SVar:TriggerDamageDone:Mode$ DamageDone | ValidSource$ Card.Self | CombatDamage$ True | ValidTarget$ Player | Execute$ DBToken | TriggerDescription$ Whenever this creature deals combat damage to a player, create a 1/1 white Human Soldier token.
-SVar:DBToken:DB$Token | TokenOwner$ You | TokenScript$ w_1_1_human_soldier | LegacyImage$ w 1 1 human soldier thb | TokenAmount$ 1
+SVar:DBToken:DB$ Token | TokenOwner$ You | TokenScript$ w_1_1_human_soldier | LegacyImage$ w 1 1 human soldier thb | TokenAmount$ 1
 DeckHas:Ability$Token
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has first strike and "Whenever this creature deals combat damage to a player, create a 1/1 white Human Soldier creature token."

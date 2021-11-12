@@ -4,7 +4,7 @@ Types:Creature Bird Egg
 PT:0/3
 K:Defender
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, create a 3/3 white Bird creature token with flying.
-SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenScript$ w_3_3_bird_flying | TokenOwner$ TriggeredCardController | LegacyImage$ w 3 3 bird flying m11
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_3_3_bird_flying | TokenOwner$ TriggeredCardController | LegacyImage$ w 3 3 bird flying m11
 SVar:SacMe:4
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roc_egg.jpg

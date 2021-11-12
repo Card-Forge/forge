@@ -3,7 +3,7 @@ ManaCost:U R
 Types:Legendary Creature Vedalken Wizard
 PT:1/1
 A:AB$ DealDamage | Cost$ X U R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DBDraw | AILogic$ NinThePainArtist | SpellDescription$ CARDNAME deals X damage to target creature. That creature's controller draws X cards.
-SVar:DBDraw:DB$Draw | Defined$ TargetedController | NumCards$ X
+SVar:DBDraw:DB$ Draw | Defined$ TargetedController | NumCards$ X
 SVar:X:Count$xPaid
 AI:RemoveDeck:Random
 Oracle:{X}{U}{R}, {T}: Nin, the Pain Artist deals X damage to target creature. That creature's controller draws X cards.

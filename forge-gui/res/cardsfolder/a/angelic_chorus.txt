@@ -2,7 +2,7 @@ Name:Angelic Chorus
 ManaCost:3 W W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature enters the battlefield under your control, you gain life equal to its toughness.
-SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ X
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:TriggeredCard$CardToughness
 SVar:PlayMain1:TRUE
 SVar:AIPriorityModifier:9

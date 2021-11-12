@@ -1,0 +1,8 @@
+Name:Jack-o'-Lantern
+ManaCost:1
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 1 T Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SubAbility$ DBDraw | SpellDescription$ Exile up to one target card from a graveyard. Draw a card.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+A:AB$ Mana | Cost$ 1 ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | Produced$ Any | SpellDescription$ Add one mana of any color.
+AI:RemoveDeck:Random
+Oracle:{1}, {T}, Sacrifice Jack-o'-Lantern: Exile up to one target card from a graveyard. Draw a card.\n{1}, Exile Jack-o'-Lantern from your graveyard: Add one mana of any color.

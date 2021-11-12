@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 WU | ValidTgts$ Creature | AILogic$ KeepTapped
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ At the beginning of each upkeep, tap enchanted creature.
-SVar:TrigTap:DB$Tap | Defined$ Enchanted
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_chains.jpg
 Oracle:Enchant creature\nAt the beginning of each upkeep, tap enchanted creature.

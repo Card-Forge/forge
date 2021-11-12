@@ -1,0 +1,7 @@
+Name:Gem Bazaar
+ManaCost:no cost
+Types:Land
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Random$ True | SpellDescription$ As CARDNAME enters the battlefield, choose a color at random.
+A:AB$ Mana | Cost$ T | Produced$ Chosen | SubAbility$ ChooseColor | SpellDescription$ Add one mana of the chosen color. Then choose a color at random.
+Oracle:As Gem Bazaar enters the battlefield, choose a color at random.\n{T}: Add one mana of the chosen color. Then choose a color at random.

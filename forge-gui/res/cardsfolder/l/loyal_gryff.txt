@@ -1,0 +1,9 @@
+Name:Loyal Gryff
+ManaCost:2 W
+Types:Creature Hippogriff
+PT:2/2
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return another creature you control to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.Other+YouCtrl | SelectPrompt$ Select another creature you control
+Oracle:Flash\nFlying\nWhen Loyal Gryff enters the battlefield, you may return another creature you control to its owner's hand.

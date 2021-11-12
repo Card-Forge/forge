@@ -99,12 +99,8 @@ public class MillEffect extends SpellAbilityEffect {
         } else if (dest.equals(ZoneType.Ante)) {
             sb.append("antes ");
         }
-        sb.append(numCards);
-        sb.append(" card");
-        if (numCards != 1) {
-            sb.append("s");
-        }
-        sb.append(".");
+
+        sb.append(numCards == 1 ? "a card" : (Lang.getNumeral(numCards) + " cards")).append(".");
 
         return sb.toString();
     }

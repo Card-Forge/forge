@@ -1,0 +1,8 @@
+Name:Sundown Pass
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ Combo W R | SpellDescription$ Add {W} or {R}.
+K:ETBReplacement:Other:LandTapped
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar2 | ConditionSVarCompare$ LT2 | SpellDescription$ CARDNAME enters the battlefield tapped unless you control two or more other lands.
+SVar:ETBCheckSVar2:Count$LastStateBattlefield Land.YouCtrl
+Oracle:Sundown Pass enters the battlefield tapped unless you control two or more other lands.\n{T}: Add {W} or {R}.

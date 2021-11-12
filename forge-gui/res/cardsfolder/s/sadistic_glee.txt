@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature dies, put a +1/+1 counter on enchanted creature.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Enchanted | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Enchanted | CounterType$ P1P1 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sadistic_glee.jpg
 Oracle:Enchant creature\nWhenever a creature dies, put a +1/+1 counter on enchanted creature.

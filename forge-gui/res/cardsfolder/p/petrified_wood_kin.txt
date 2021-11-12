@@ -2,7 +2,7 @@ Name:Petrified Wood-Kin
 ManaCost:6 G
 Types:Creature Elemental Warrior
 PT:3/3
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 K:Bloodthirst:X
 K:Protection:Instant:Protection from instants
 SVar:Picture:http://www.wizards.com/global/images/magic/general/petrified_wood_kin.jpg

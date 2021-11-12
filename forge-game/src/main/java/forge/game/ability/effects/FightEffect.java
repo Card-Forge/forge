@@ -120,8 +120,7 @@ public class FightEffect extends DamageBaseEffect {
                 if (defined.size() > 1 && fighter1 == null) {
                     fighter1 = defined.get(0);
                     fighter2 = defined.get(1);
-                }
-                else {
+                } else {
                     fighter2 = defined.get(0);
                 }
             }

@@ -17,7 +17,6 @@ import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
@@ -35,10 +34,7 @@ public class TapAllAi extends SpellAbilityAi {
             return false;
         }
 
-        String valid = "";
-        if (sa.hasParam("ValidCards")) {
-            valid = sa.getParam("ValidCards");
-        }
+        final String valid = sa.getParamOrDefault("ValidCards", "");
 
         CardCollectionView validTappables = game.getCardsIn(ZoneType.Battlefield);
 
@@ -100,18 +96,13 @@ public class TapAllAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(final Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
 
-        String valid = "";
-        if (sa.hasParam("ValidCards")) {
-            valid = sa.getParam("ValidCards");
-        }
+        final String valid = sa.getParamOrDefault("ValidCards", "");
 
         CardCollectionView validTappables = getTapAllTargets(valid, source, sa);
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             sa.resetTargets();
-            Player opp = ai.getWeakestOpponent();
+            Player opp = ai.getStrongestOpponent();
             sa.getTargets().add(opp);
             validTappables = opp.getCardsIn(ZoneType.Battlefield);
         }

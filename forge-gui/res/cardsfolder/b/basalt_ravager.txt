@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Creature Giant Wizard
 PT:4/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals X damage to any target, where X is the greatest number of creatures you control that have a creature type in common.
-SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
 SVar:X:Count$MostProminentCreatureType Creature.YouCtrl
 SVar:PlayMain1:TRUE
 Oracle:When Basalt Ravager enters the battlefield, it deals X damage to any target, where X is the greatest number of creatures you control that have a creature type in common.

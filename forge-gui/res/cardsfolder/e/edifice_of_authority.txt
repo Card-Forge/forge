@@ -2,7 +2,7 @@ Name:Edifice of Authority
 ManaCost:3
 Types:Artifact
 A:AB$ Pump | Cost$ 1 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't attack. | SubAbility$ DBPutCounter | IsCurse$ True | SpellDescription$ Target creature can't attack this turn. Put a brick counter on CARDNAME.
-SVar:DBPutCounter:DB$PutCounter | Defined$ Self | CounterType$ BRICK | CounterNum$ 1
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ BRICK | CounterNum$ 1
 A:AB$ Pump | Cost$ 1 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Duration$ UntilYourNextTurn | KW$ HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated. | CheckSVar$ X | SVarCompare$ GE3 | IsCurse$ True | SpellDescription$ Until your next turn, target creature can't attack or block and its activated abilities can't be activated. Activate only if there are three or more brick counters on Edifice of Authority.
 SVar:X:Count$CardCounters.BRICK
 SVar:Picture:http://www.wizards.com/global/images/magic/general/edifice_of_authority.jpg

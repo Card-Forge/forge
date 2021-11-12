@@ -4,6 +4,6 @@ Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 A:AB$ Mill | Cost$ 3 U B B T Sac<1/CARDNAME> | Defined$ You | NumCards$ 4 | SubAbility$ DBReturn | SpellDescription$ Mill four cards, then return a creature card from your graveyard to the battlefield tapped. (To mill a card, put the top card of your library into your graveyard.)
-SVar:DBReturn:DB$ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouCtrl | ChangeNum$ 1 | Hidden$ True | Tapped$ True
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouCtrl | ChangeNum$ 1 | Hidden$ True | Tapped$ True
 DeckHas:Ability$Graveyard & Ability$Mill
 Oracle:Port of Karfell enters the battlefield tapped.\n{T}: Add {U}.\n{3}{U}{B}{B}, {T}, Sacrifice Port of Karfell: Mill four cards, then return a creature card from your graveyard to the battlefield tapped. (To mill a card, put the top card of your library into your graveyard.)

@@ -3,7 +3,7 @@ ManaCost:G G W W
 Types:Legendary Creature Dryad
 PT:2/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature enters the battlefield under your control, you gain life equal to that creature's toughness.
-SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ Life
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Life
 SVar:Life:TriggeredCard$CardToughness
 A:AB$ CopyPermanent | Cost$ 1 G W T | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True | StackDescription$ SpellDescription | SpellDescription$ Populate. (Create a token that's a copy of a creature token you control.)
 DeckHints:Ability$Token

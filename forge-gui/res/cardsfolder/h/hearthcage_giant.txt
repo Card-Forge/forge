@@ -3,7 +3,7 @@ ManaCost:6 R R
 Types:Creature Giant Warrior
 PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 3/1 red Elemental Shaman creature tokens.
-SVar:TrigToken:DB$Token | LegacyImage$ r 3 1 elemental shaman lrw | TokenScript$ r_3_1_elemental_shaman | TokenOwner$ You | TokenAmount$ 2
+SVar:TrigToken:DB$ Token | LegacyImage$ r 3 1 elemental shaman lrw | TokenScript$ r_3_1_elemental_shaman | TokenOwner$ You | TokenAmount$ 2
 A:AB$ Pump | Cost$ Sac<1/Elemental> | ValidTgts$ Creature.Giant | TgtPrompt$ Select target Giant creature | NumAtt$ +3 | NumDef$ +1 | SpellDescription$ Target Giant creature gets +3/+1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hearthcage_giant.jpg
 Oracle:When Hearthcage Giant enters the battlefield, create two 3/1 red Elemental Shaman creature tokens.\nSacrifice an Elemental: Target Giant creature gets +3/+1 until end of turn.

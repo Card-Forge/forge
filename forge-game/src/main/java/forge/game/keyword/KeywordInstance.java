@@ -23,8 +23,6 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     private Keyword keyword;
     private String original;
 
-    private boolean hidden;
-
     private List<Trigger> triggers = Lists.newArrayList();
     private List<ReplacementEffect> replacements = Lists.newArrayList();
     private List<SpellAbility> abilities = Lists.newArrayList();
@@ -205,21 +203,6 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
         staticAbilities.add(st);
     }
 
-    /* (non-Javadoc)
-     * @see forge.game.keyword.KeywordInterface#getHidden()
-     */
-    @Override
-    public boolean getHidden() {
-        return hidden;
-    }
-    /* (non-Javadoc)
-     * @see forge.game.keyword.KeywordInterface#setHidden(boolean)
-     */
-    @Override
-    public void setHidden(boolean val) {
-        hidden = val;        
-    }
-
     /*
      * (non-Javadoc)
      * @see forge.game.keyword.KeywordInterface#getTriggers()
@@ -256,27 +239,27 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     public KeywordInterface copy(final Card host, final boolean lki) {
         try {
             KeywordInstance<?> result = (KeywordInstance<?>) super.clone();
-            
+
             result.abilities = Lists.newArrayList();
             for (SpellAbility sa : this.abilities) {
                 result.abilities.add(sa.copy(host, lki));
             }
-            
+
             result.triggers = Lists.newArrayList();
             for (Trigger tr : this.triggers) {
                 result.triggers.add(tr.copy(host, lki));
             }
-            
+
             result.replacements = Lists.newArrayList();
             for (ReplacementEffect re : this.replacements) {
                 result.replacements.add(re.copy(host, lki));
             }
-            
+
             result.staticAbilities = Lists.newArrayList();
             for (StaticAbility sa : this.staticAbilities) {
                 result.staticAbilities.add(sa.copy(host, lki));
             }
-            
+
             return result;
         } catch (final Exception ex) {
             throw new RuntimeException("KeywordInstance : clone() error", ex);
@@ -318,6 +301,25 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
 
         for (StaticAbility sa : this.staticAbilities) {
             sa.setHostCard(host);
+        }
+    }
+
+    @Override
+    public void setIntrinsic(final boolean value) {
+        for (SpellAbility sa : this.abilities) {
+            sa.setIntrinsic(value);
+        }
+
+        for (Trigger tr : this.triggers) {
+            tr.setIntrinsic(value);
+        }
+
+        for (ReplacementEffect re : this.replacements) {
+            re.setIntrinsic(value);
+        }
+
+        for (StaticAbility sa : this.staticAbilities) {
+            sa.setIntrinsic(value);
         }
     }
 }

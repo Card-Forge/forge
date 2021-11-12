@@ -30,6 +30,7 @@ import javax.imageio.ImageIO;
 import forge.ImageCache;
 import forge.ImageKeys;
 import forge.game.card.CardView.CardStateView;
+import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.toolbox.CardFaceSymbols;
@@ -78,7 +79,9 @@ public final class FImageUtil {
         boolean altState = key.endsWith(ImageKeys.BACKFACE_POSTFIX);
         String imageKey = key;
         if (prefix.equals(ImageKeys.CARD_PREFIX)) {
-            imageKey = ImageUtil.getImageKey(ImageUtil.getPaperCardFromImageKey(key), altState, true);
+            PaperCard card = ImageUtil.getPaperCardFromImageKey(key);
+            if (card != null)
+                imageKey = altState ? card.getCardAltImageKey() : card.getCardImageKey();
         }
         if(altState) {
             imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
@@ -123,7 +126,7 @@ public final class FImageUtil {
         }
 
         ColorModel cm = plainImage.getColorModel();
-        BufferedImage foilImage = new BufferedImage(cm, plainImage.copyData(null), cm.isAlphaPremultiplied(), null);
+        BufferedImage foilImage = new BufferedImage(cm, plainImage.copyData(plainImage.getRaster().createCompatibleWritableRaster()), cm.isAlphaPremultiplied(), null);
         final String fl = String.format("foil%02d", foilIndex);
         CardFaceSymbols.drawOther(foilImage.getGraphics(), fl, 0, 0, foilImage.getWidth(), foilImage.getHeight());
         return foilImage;

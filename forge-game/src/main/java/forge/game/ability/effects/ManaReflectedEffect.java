@@ -21,7 +21,6 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-
         // Spells are not undoable
         AbilityManaPart ma = sa.getManaPart();
         sa.setUndoable(sa.isAbility() && sa.isUndoable());

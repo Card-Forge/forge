@@ -4,7 +4,7 @@ Types:Creature Whale
 PT:3/4
 K:Affinity:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | IsPresent$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever an artifact enters the battlefield under your control, untap CARDNAME.
-SVar:TrigUntap:DB$Untap | Defined$ Self
+SVar:TrigUntap:DB$ Untap | Defined$ Self
 AI:RemoveDeck:Random
 DeckNeeds:Type$Artifact
 Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nWhenever an artifact enters the battlefield under your control, untap Steelfin Whale.

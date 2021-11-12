@@ -1,0 +1,8 @@
+Name:Dustin, Gadget Genius
+ManaCost:2 W U
+Types:Legendary Creature Human
+PT:2/3
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | RestrictValid$ Card.Artifact,Activated.Artifact | SpellDescription$ Add {C}{C}. Spend this mana only to cast artifact spells or activate abilities of artifacts.
+K:Friends forever
+DeckNeeds:Type$Artifact
+Oracle:{T}: Add {C}{C}. Spend this mana only to cast artifact spells or activate abilities of artifacts.\nFriends forever (You can have two commanders if both have friends forever.)

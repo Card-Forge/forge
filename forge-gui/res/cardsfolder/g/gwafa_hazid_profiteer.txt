@@ -4,6 +4,6 @@ Types:Legendary Creature Human Rogue
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.counters_GE1_BRIBERY | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Creatures with bribery counters on them can't attack or block.
 A:AB$ PutCounter | Cost$ W U T | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control. | CounterType$ BRIBERY | CounterNum$ 1 | SubAbility$ DBDraw | SpellDescription$ Put a bribery counter on target creature you don't control. Its controller draws a card.
-SVar:DBDraw:DB$Draw | Defined$ TargetedController | NumCards$ 1
+SVar:DBDraw:DB$ Draw | Defined$ TargetedController | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gwafa_hazid_profiteer.jpg
 Oracle:{W}{U}, {T}: Put a bribery counter on target creature you don't control. Its controller draws a card.\nCreatures with bribery counters on them can't attack or block.

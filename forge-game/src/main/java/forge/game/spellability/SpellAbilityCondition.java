@@ -34,7 +34,6 @@ import forge.game.GameObjectPredicates;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.card.CardUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -131,10 +130,6 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
         }
 
-        if (params.containsKey("ConditionZone")) {
-            this.setZone(ZoneType.smartValueOf(params.get("ConditionZone")));
-        }
-
         if (params.containsKey("ConditionSorcerySpeed")) {
             this.setSorcerySpeed(true);
         }
@@ -173,6 +168,10 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
         if (params.containsKey("ConditionDefined")) {
             this.setPresentDefined(params.get("ConditionDefined"));
+        }
+
+        if (params.containsKey("ConditionZone")) {
+            this.setPresentZone(ZoneType.smartValueOf(params.get("ConditionZone")));
         }
 
         if (params.containsKey("ConditionPlayerDefined")) {
@@ -295,14 +294,14 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         }
 
         if (this.getShareAllColors() != null) {
-            List<Card> tgts = AbilityUtils.getDefinedCards(sa.getHostCard(), this.getShareAllColors(), sa);
+            List<Card> tgts = AbilityUtils.getDefinedCards(host, this.getShareAllColors(), sa);
             Card first = Iterables.getFirst(tgts, null);
             if (first == null) {
                 return false;
             }
-            byte firstColor = CardUtil.getColors(first).getColor();
+            byte firstColor = first.getColor().getColor();
             for (Card c : tgts) {
-                if (CardUtil.getColors(c).getColor() != firstColor) {
+                if (c.getColor().getColor() != firstColor) {
                     return false;
                 }
             }
@@ -312,19 +311,24 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             return false;
         }
 
-        if (this.isPlayerTurn() && !phase.isPlayerTurn(activator)) {
-            return false;
+        if (this.isPlayerTurn()) {
+            boolean b = !sa.getParam("ConditionPlayerTurn").equals("False");
+            if (!b && phase.isPlayerTurn(activator)) {
+                return false;
+            } else if (b && !phase.isPlayerTurn((activator))) {
+                return false;
+            }
         }
 
         if (this.isOpponentTurn() && !phase.getPlayerTurn().isOpponentOf(activator)) {
             return false;
         }
 
-        if ((this.getActivationLimit() != -1) && (sa.getActivationsThisTurn() >= this.getActivationLimit())) {
+        if (this.getActivationLimit() != -1 && sa.getActivationsThisTurn() >= this.getActivationLimit()) {
             return false;
         }
 
-        if ((this.getGameActivationLimit() != -1) && (sa.getActivationsThisGame() >= this.getGameActivationLimit())) {
+        if (this.getGameActivationLimit() != -1 && sa.getActivationsThisGame() >= this.getGameActivationLimit()) {
             return false;
         }
 
@@ -348,7 +352,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         }
 
         if (this.getColorToCheck() != null) {
-            if (!sa.getHostCard().hasChosenColor(this.getColorToCheck())) {
+            if (!host.hasChosenColor(this.getColorToCheck())) {
                 return false;
             }
         }
@@ -361,7 +365,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
                 list = new FCollection<GameObject>(game.getCardsIn(getPresentZone()));
             }
 
-            final int left = Iterables.size(Iterables.filter(list, GameObjectPredicates.restriction(getIsPresent().split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa)));
+            final int left = Iterables.size(Iterables.filter(list, GameObjectPredicates.restriction(getIsPresent().split(","), sa.getActivatingPlayer(), host, sa)));
 
             final String rightString = this.getPresentCompare().substring(2);
             int right = AbilityUtils.calculateAmount(host, rightString, sa);
@@ -374,9 +378,9 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.getPlayerContains() != null) {
             List<Player> list = new ArrayList<>();
             if (this.getPlayerDefined() != null) {
-                list.addAll(AbilityUtils.getDefinedPlayers(sa.getHostCard(), this.getPlayerDefined(), sa));
+                list.addAll(AbilityUtils.getDefinedPlayers(host, this.getPlayerDefined(), sa));
             }
-            List<Player> contains = AbilityUtils.getDefinedPlayers(sa.getHostCard(), this.getPlayerContains(), sa);
+            List<Player> contains = AbilityUtils.getDefinedPlayers(host, this.getPlayerContains(), sa);
             if (contains.isEmpty() || !list.containsAll(contains)) {
                 return false;
             }
@@ -413,7 +417,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             boolean result = false;
     
             for (final GameObject o : matchTgt.getFirstTargetedSpell().getTargets()) {
-                if (o.isValid(this.getTargetValidTargeting().split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
+                if (o.isValid(this.getTargetValidTargeting().split(","), sa.getActivatingPlayer(), host, sa)) {
                     result = true;
                     break;
                 }
@@ -444,7 +448,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         }
 
         if (StringUtils.isNotEmpty(getManaSpent())) {
-            SpellAbility castSa = sa.getHostCard().getCastSA();
+            SpellAbility castSa = host.getCastSA();
             if (castSa == null) {
                 return false;
             }
@@ -453,7 +457,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
         }
         if (StringUtils.isNotEmpty(getManaNotSpent())) {
-            SpellAbility castSa = sa.getHostCard().getCastSA();
+            SpellAbility castSa = host.getCastSA();
             if (castSa != null && castSa.getPayingColors().hasAllColors(ColorSet.fromNames(getManaNotSpent().split(" ")).getColor())) {
                 return false;
             }

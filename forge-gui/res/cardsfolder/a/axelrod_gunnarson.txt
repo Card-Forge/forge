@@ -4,7 +4,7 @@ Types:Legendary Creature Giant
 PT:5/5
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | Execute$ DBGainLife | TriggerDescription$ Whenever a creature dealt damage by CARDNAME this turn dies, you gain 1 life and CARDNAME deals 1 damage to target player or planeswalker.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBDealDamage
-SVar:DBDealDamage:DB$DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBDealDamage
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/axelrod_gunnarson.jpg
 Oracle:Trample\nWhenever a creature dealt damage by Axelrod Gunnarson this turn dies, you gain 1 life and Axelrod deals 1 damage to target player or planeswalker.

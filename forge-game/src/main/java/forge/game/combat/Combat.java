@@ -243,7 +243,6 @@ public class Combat {
     public final void addAttacker(final Card c, GameEntity defender) {
         addAttacker(c, defender, null);
     }
-
     public final void addAttacker(final Card c, GameEntity defender, AttackingBand band) {
         Collection<AttackingBand> attackersOfDefender = attackedByBands.get(defender);
         if (attackersOfDefender == null) {
@@ -260,8 +259,7 @@ public class Combat {
         if (band == null || !attackersOfDefender.contains(band)) {
             band = new AttackingBand(c);
             attackersOfDefender.add(band);
-        }
-        else {
+        } else {
             band.addAttacker(c);
         }
         c.updateAttackingForView();
@@ -347,13 +345,6 @@ public class Combat {
         return result;
     }
 
-    public final CardCollection getBlockers(final Card card) {
-        // If requesting the ordered blocking list pass true, directly.
-        AttackingBand band = getBandOfAttacker(card);
-        Collection<Card> blockers = blockedBands.get(band);
-        return blockers == null ? new CardCollection() : new CardCollection(blockers);
-    }
-
     public final boolean isBlocked(final Card attacker) {
         AttackingBand band = getBandOfAttacker(attacker);
         return band != null && Boolean.TRUE.equals(band.isBlocked());
@@ -410,6 +401,10 @@ public class Combat {
         return result;
     }
 
+    public final CardCollection getBlockers(final Card card) {
+        // If requesting the ordered blocking list pass true, directly.
+        return getBlockers(getBandOfAttacker(card));
+    }
     public final CardCollection getBlockers(final AttackingBand band) {
         Collection<Card> blockers = blockedBands.get(band);
         return blockers == null ? new CardCollection() : new CardCollection(blockers);
@@ -514,8 +509,7 @@ public class Combat {
     	final CardCollection oldBlockers = blockersOrderedForDamageAssignment.get(attacker);
     	if (oldBlockers == null || oldBlockers.isEmpty()) {
    			blockersOrderedForDamageAssignment.put(attacker, new CardCollection(blocker));
-    	}
-    	else {
+    	} else {
     		CardCollection orderedBlockers = playerWhoAttacks.getController().orderBlocker(attacker, blocker, oldBlockers);
             blockersOrderedForDamageAssignment.put(attacker, orderedBlockers);
     	}
@@ -768,8 +762,7 @@ public class Combat {
             if (divideCombatDamageAsChoose) {
                 if (orderedBlockers == null || orderedBlockers.isEmpty()) {
                     orderedBlockers = getDefendersCreatures();
-                }
-                else {
+                } else {
                     for (Card c : getDefendersCreatures()) {
                         if (!orderedBlockers.contains(c)) {
                             orderedBlockers.add(c);
@@ -798,8 +791,7 @@ public class Combat {
                 } else if (trampler || !band.isBlocked()) { // this is called after declare blockers, no worries 'bout nulls in isBlocked
                     damageMap.put(attacker, defender, damageDealt);
                 } // No damage happens if blocked but no blockers left
-            }
-            else {
+            } else {
                 Player assigningPlayer = getAttackingPlayer();
                 // Defensive Formation is very similar to Banding with Blockers
                 // It allows the defending player to assign damage instead of the attacking player
@@ -809,7 +801,7 @@ public class Combat {
                 if (defender instanceof Player && defender.hasKeyword("You assign combat damage of each creature attacking you.")) {
                     assigningPlayer = (Player)defender;
                 }
-                else if (AttackingBand.isValidBand(orderedBlockers, true)){
+                else if (AttackingBand.isValidBand(orderedBlockers, true)) {
                     assigningPlayer = orderedBlockers.get(0).getController();
                 }
 

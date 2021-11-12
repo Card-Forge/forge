@@ -203,7 +203,6 @@ public class SubgameEffect extends SpellAbilityEffect {
             }
         }
 
-
         String endMessage = outcome.isDraw() ? Localizer.getInstance().getMessage("lblSubgameEndDraw") :
                 Localizer.getInstance().getMessage("lblSubgameEnd", sbWinners.toString(), sbLosers.toString());
         maingame.fireEvent(new GameEventSubgameEnd(maingame, endMessage));

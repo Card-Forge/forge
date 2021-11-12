@@ -5,7 +5,7 @@ PT:10/10
 K:Indestructible
 K:Annihilator:4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.Self | Execute$ TrigShuffle | TriggerDescription$ When CARDNAME is put into a graveyard from anywhere, its owner shuffles their graveyard into their library.
-SVar:TrigShuffle:DB$ChangeZoneAll | Defined$ TriggeredCardOwner | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | Shuffle$ True
+SVar:TrigShuffle:DB$ ChangeZoneAll | Defined$ TriggeredCardOwner | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | Shuffle$ True
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When you cast this spell, destroy target permanent.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ulamog_the_infinite_gyre.jpg

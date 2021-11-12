@@ -2,7 +2,6 @@ Name:Blurred Mongoose
 ManaCost:1 G
 Types:Creature Mongoose
 PT:2/1
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 K:Shroud
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blurred_mongoose.jpg
 Oracle:This spell can't be countered.\nShroud (This creature can't be the target of spells or abilities.)

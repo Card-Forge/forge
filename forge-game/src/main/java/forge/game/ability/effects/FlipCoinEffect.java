@@ -60,14 +60,14 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         }
 
         final boolean noCall = sa.hasParam("NoCall");
-        String varName = sa.hasParam("SaveNumFlipsToSVar") ? sa.getParam("SaveNumFlipsToSVar") : "X";
+        String varName = sa.getParamOrDefault("SaveNumFlipsToSVar", "X");
         boolean victory = false;
         int amount = 1;
         if (sa.hasParam("Amount")) {
             amount = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
         }
 
-        if ((!noCall) && (amount == 1)) {
+        if (!noCall && amount == 1) {
             flipMultiplier = getFlipMultiplier(caller.get(0));
             victory = flipCoinCall(caller.get(0), sa, flipMultiplier, varName);
         }
@@ -81,7 +81,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                 int countHeads = 0;
                 int countTails = 0;
 
-                for(int i = 0; i < amount; ++i) {
+                for (int i = 0; i < amount; ++i) {
                     final boolean resultIsHeads = flipCoinNoCall(sa, flipper, flipMultiplier, varName);
 
                     if (resultIsHeads) {
@@ -118,7 +118,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                 int countWins = 0;
                 int countLosses = 0;
 
-                for(int i = 0; i < amount; ++i) {
+                for (int i = 0; i < amount; ++i) {
                     final boolean win = flipCoinCall(caller.get(0), sa, flipMultiplier, varName);
 
                     if (win) {
@@ -220,7 +220,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
      * @return a boolean.
      */
     public static boolean flipCoinCall(final Player caller, final SpellAbility sa, final int multiplier) {
-        String varName = sa.hasParam("SaveNumFlipsToSVar") ? sa.getParam("SaveNumFlipsToSVar") : "X";
+        String varName = sa.getParamOrDefault("SaveNumFlipsToSVar", "X");
         return flipCoinCall(caller, sa, multiplier, varName);
     }
     public static boolean flipCoinCall(final Player caller, final SpellAbility sa, final int multiplier, final String varName) {

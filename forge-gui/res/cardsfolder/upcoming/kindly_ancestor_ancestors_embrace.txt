@@ -1,0 +1,23 @@
+Name:Kindly Ancestor
+ManaCost:2 W
+Types:Creature Spirit
+PT:2/3
+K:Lifelink
+K:Disturb:1 W
+AlternateMode:DoubleFaced
+DeckHas:Ability$LifeGain & Ability$Graveyard
+Oracle:Lifelink\nDisturb {1}{W} (You may cast this card from your graveyard transformed for its disturb cost.)
+
+ALTERNATE
+
+Name:Ancestor's Embrace
+ManaCost:no cost
+Colors:white
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Lifelink | Description$ Enchanted creature has lifelink.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+DeckHas:Ability$LifeGain
+Oracle:Enchant creature\nEnchanted creature has lifelink.\nIf Ancestor's Embrace would be put into a graveyard from anywhere, exile it instead.

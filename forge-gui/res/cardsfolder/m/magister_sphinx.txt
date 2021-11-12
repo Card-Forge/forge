@@ -4,6 +4,6 @@ Types:Artifact Creature Sphinx
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigLife | TriggerDescription$ When CARDNAME enters the battlefield, target player's life total becomes 10.
-SVar:TrigLife:DB$SetLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 10
+SVar:TrigLife:DB$ SetLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 10
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magister_sphinx.jpg
 Oracle:Flying\nWhen Magister Sphinx enters the battlefield, target player's life total becomes 10.

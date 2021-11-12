@@ -1,0 +1,9 @@
+{                                    
+"name":"Green good",
+  "template":
+  {
+   "count":60,
+   "colors":["Green"], 
+   "rares":0.8
+  }
+}

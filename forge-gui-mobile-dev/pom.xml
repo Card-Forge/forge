@@ -4,7 +4,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.45-SNAPSHOT</version>
+        <version>1.6.46-SNAPSHOT</version>
     </parent>
 
     <artifactId>forge-gui-mobile-dev</artifactId>
@@ -13,6 +13,15 @@
 
     <build>
         <sourceDirectory>src</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>${project.basedir}</directory>
+                <includes>
+                    <include>**/*.vert</include>
+                    <include>**/*.frag</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>

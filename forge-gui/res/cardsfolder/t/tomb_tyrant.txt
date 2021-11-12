@@ -1,0 +1,10 @@
+Name:Tomb Tyrant
+ManaCost:3 B
+Types:Creature Zombie Noble
+PT:3/3
+S:Mode$ Continuous | Affected$ Zombie.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Zombies you control get +1/+1.
+A:AB$ ChangeZone | Cost$ 2 B T Sac<1/Creature/creature> | ChangeType$ Zombie.Creature.YouOwn | Origin$ Graveyard | Destination$ Battlefield | AtRandom$ True | CheckSVar$ X | SVarCompare$ GE3 | PlayerTurn$ True | Hidden$ True | StackDescription$ Return a Zombie creature card at random from your graveyard to the battlefield. | SpellDescription$ Return a Zombie creature card at random from your graveyard to the battlefield. Activate only during your turn and only if there are at least three Zombie creature cards in your graveyard.
+SVar:X:Count$ValidGraveyard Creature.Zombie+YouCtrl
+DeckNeeds:Type$Zombie
+DeckHas:Ability$Graveyard
+Oracle:Other Zombies you control get +1/+1.\n{2}{B}, {T}, Sacrifice a creature: Return a Zombie creature card at random from your graveyard to the battlefield. Activate only during your turn and only if there are at least three Zombie creature cards in your graveyard.

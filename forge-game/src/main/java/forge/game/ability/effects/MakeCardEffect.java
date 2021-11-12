@@ -15,7 +15,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
         final Player player = sa.getActivatingPlayer();
         final Game game = player.getGame();
 
-        String name = sa.hasParam("Name") ? sa.getParam("Name") : sa.getHostCard().getName();
+        String name = sa.getParamOrDefault("Name", sa.getHostCard().getName());
         if (name.equals("ChosenName")) {
             name = sa.getHostCard().getChosenName();
         }

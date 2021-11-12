@@ -1,5 +1,7 @@
 package forge.game;
 
+import com.google.common.collect.Iterables;
+
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
@@ -11,7 +13,9 @@ import forge.game.cost.Cost;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.staticability.StaticAbility;
+import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
@@ -20,7 +24,7 @@ public class ForgeScript {
     public static boolean cardStateHasProperty(CardState cardState, String property, Player sourceController,
             Card source, CardTraitBase spellAbility) {
         final boolean isColorlessSource = cardState.getCard().hasKeyword("Colorless Damage Source", cardState);
-        final ColorSet colors = cardState.getCard().determineColor(cardState);
+        final ColorSet colors = cardState.getCard().getColor(cardState);
         if (property.contains("White") || property.contains("Blue") || property.contains("Black")
                 || property.contains("Red") || property.contains("Green")) {
             boolean mustHave = !property.startsWith("non");
@@ -102,8 +106,11 @@ public class ForgeScript {
             }
             return false;
         } else if (property.equals("hasManaAbility")) {
-            for (final SpellAbility sa : cardState.getSpellAbilities()) {
-                if (sa.isManaAbility()) {
+            if (Iterables.any(cardState.getSpellAbilities(), SpellAbilityPredicates.isManaAbility())) {
+                return true;
+            }
+            for (final Trigger trig : cardState.getTriggers()) {
+                if (trig.getOverridingAbility() != null && trig.getOverridingAbility().isManaAbility()) {
                     return true;
                 }
             }
@@ -167,6 +174,10 @@ public class ForgeScript {
             return sa.isForetold();
         } else if (property.equals("ClassLevelUp")) {
             return sa.getApi() == ApiType.ClassLevelUp;
+        } else if (property.equals("Daybound")) {
+            return sa.hasParam("Daybound");
+        } else if (property.equals("Nightbound")) {
+            return sa.hasParam("Nightbound");
         } else if (property.equals("MayPlaySource")) {
             StaticAbility m = sa.getMayPlay();
             if (m == null) {

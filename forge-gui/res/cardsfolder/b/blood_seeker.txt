@@ -3,6 +3,6 @@ ManaCost:1 B
 Types:Creature Vampire Shaman
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDrain | TriggerDescription$ Whenever a creature enters the battlefield under an opponent's control, you may have that player lose 1 life.
-SVar:TrigDrain:DB$LoseLife | Defined$ TriggeredCardController | LifeAmount$ 1
+SVar:TrigDrain:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_seeker.jpg
 Oracle:Whenever a creature enters the battlefield under an opponent's control, you may have that player lose 1 life.

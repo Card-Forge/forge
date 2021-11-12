@@ -1,0 +1,9 @@
+Name:Ritual Guardian
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:3/2
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigPump | TriggerDescription$ Coven — At the beginning of combat on your turn, if you control three or more creatures with different powers, CARDNAME gains lifelink until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Lifelink
+SVar:X:Count$DifferentPower_Creature.YouCtrl
+DeckHas:Ability$LifeGain
+Oracle:Coven — At the beginning of combat on your turn, if you control three or more creatures with different powers, Ritual Guardian gains lifelink until end of turn.

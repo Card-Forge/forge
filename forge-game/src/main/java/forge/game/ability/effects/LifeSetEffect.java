@@ -24,14 +24,14 @@ public class LifeSetEffect extends SpellAbilityEffect {
         
         if (redistribute) {
             for (final Player p : getTargetPlayers(sa)) {
-                if ((tgt == null) || p.canBeTargetedBy(sa)) {
+                if (tgt == null || p.canBeTargetedBy(sa)) {
                     lifetotals.add(p.getLife());
                 }
             }
         }
 
         for (final Player p : getTargetPlayers(sa)) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
+            if (tgt == null || p.canBeTargetedBy(sa)) {
                 if (!redistribute) {
                     p.setLife(lifeAmount, sa.getHostCard());
                 } else {

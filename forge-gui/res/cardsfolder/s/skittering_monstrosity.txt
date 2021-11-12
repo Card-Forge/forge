@@ -3,7 +3,7 @@ ManaCost:3 B B
 Types:Creature Horror
 PT:5/5
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When you cast a creature spell, sacrifice CARDNAME.
-SVar:TrigSac:DB$Sacrifice | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skittering_monstrosity.jpg
 Oracle:When you cast a creature spell, sacrifice Skittering Monstrosity.

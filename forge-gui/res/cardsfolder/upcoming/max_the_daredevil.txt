@@ -1,0 +1,12 @@
+Name:Max, the Daredevil
+ManaCost:1 R G
+Types:Legendary Creature Human
+PT:3/2
+K:Haste
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigUntap | CheckSVar$ YouCastThisTurn | SVarCompare$ EQ2 | NoResolvingCheck$ True | TriggerDescription$ Whenever you cast your second spell each turn, untap target creature, then investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBInvestigate
+SVar:DBInvestigate:DB$ Investigate
+SVar:YouCastThisTurn:Count$ThisTurnCast_Card.YouCtrl
+K:Friends forever
+DeckHas:Ability$Investigate & Ability$Token & Ability$Sacrifice
+Oracle:Haste\nWhenever you cast your second spell each turn, untap target creature, then investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")\nFriends forever (You can have two commanders if both have friends forever.)

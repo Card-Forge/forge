@@ -301,6 +301,7 @@ Rune
 Saga
 Shrine
 [ArtifactTypes]
+Blood
 Clue:Clues
 Contraption
 Equipment
@@ -374,6 +375,7 @@ Tezzeret
 Tibalt
 Tyvar
 Ugin
+Urza
 Venser
 Vivien
 Vraska

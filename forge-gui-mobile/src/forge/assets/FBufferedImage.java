@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.math.Matrix4;
 
@@ -45,7 +46,29 @@ public abstract class FBufferedImage extends FImageComplex {
     }
 
     @Override
+    public TextureRegion getTextureRegion() {
+        return new TextureRegion(checkFrameBuffer().getColorBufferTexture());
+    }
+
+    @Override
     public Texture getTexture() {
+        return checkFrameBuffer().getColorBufferTexture();
+    }
+
+    public void clear() {
+        final FrameBuffer fb = frameBuffer;
+        if (fb != null) {
+            frameBuffer = null;
+            FThreads.invokeInEdtNowOrLater(new Runnable() {
+                @Override
+                public void run() {
+                    fb.dispose(); //must be disposed on EDT thread
+                }
+            });
+        }
+    }
+
+    public FrameBuffer checkFrameBuffer() {
         if (frameBuffer == null) {
             Gdx.gl.glDisable(GL20.GL_SCISSOR_TEST); //prevent buffered image being clipped
 
@@ -69,20 +92,7 @@ public abstract class FBufferedImage extends FImageComplex {
 
             Gdx.gl.glEnable(GL20.GL_SCISSOR_TEST);
         }
-        return frameBuffer.getColorBufferTexture();
-    }
-
-    public void clear() {
-        final FrameBuffer fb = frameBuffer;
-        if (fb != null) {
-            frameBuffer = null;
-            FThreads.invokeInEdtNowOrLater(new Runnable() {
-                @Override
-                public void run() {
-                    fb.dispose(); //must be disposed on EDT thread
-                }
-            });
-        }
+        return frameBuffer;
     }
 
     protected abstract void draw(Graphics g, float w, float h);

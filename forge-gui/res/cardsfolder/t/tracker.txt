@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Human
 PT:2/2
 A:AB$ DealDamage | Cost$ G G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DamageThis | SpellDescription$ CARDNAME deals damage equal to its power to target creature. That creature deals damage equal to its power to CARDNAME.
-SVar:DamageThis:DB$DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y
+SVar:DamageThis:DB$ DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y
 SVar:X:Count$CardPower
 SVar:Y:Targeted$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tracker.jpg

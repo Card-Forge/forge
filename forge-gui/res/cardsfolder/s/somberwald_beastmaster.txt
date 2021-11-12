@@ -1,0 +1,9 @@
+Name:Somberwald Beastmaster
+ManaCost:6 G
+Types:Creature Human Ranger
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 green Wolf creature token, a 3/3 green Beast creature token, and a 4/4 green Beast creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_wolf,g_3_3_beast,g_4_4_beast | TokenOwner$ You
+S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddKeyword$ Deathtouch | Description$ Creature tokens you control have deathtouch.
+DeckHas:Ability$Token
+Oracle:When Somberwald Beastmaster enters the battlefield, create a 2/2 green Wolf creature token, a 3/3 green Beast creature token, and a 4/4 green Beast creature token.\nCreature tokens you control have deathtouch.

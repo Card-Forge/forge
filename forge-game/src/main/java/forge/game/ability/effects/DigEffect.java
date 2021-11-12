@@ -3,11 +3,13 @@ package forge.game.ability.effects;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameEntityCounterTable;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -40,13 +42,13 @@ public class DigEffect extends SpellAbilityEffect {
         final int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
-        sb.append(host.getController()).append(" looks at the top ");
-        sb.append(Lang.nounWithAmount(numToDig, "card")).append(" of ");
+        sb.append(host.getController()).append(sa.hasParam("Reveal") && sa.getParam("Reveal").equals("True")
+                ? " reveals " : " looks at ").append("the top ");
+        sb.append(numToDig == 1 ? "card" : (Lang.getNumeral(numToDig) + " cards")).append(" of ");
 
         if (tgtPlayers.contains(host.getController())) {
             sb.append("their ");
-        }
-        else {
+        } else {
             for (final Player p : tgtPlayers) {
                 sb.append(Lang.getInstance().getPossesive(p.getName())).append(" ");
             }
@@ -71,7 +73,7 @@ public class DigEffect extends SpellAbilityEffect {
         int libraryPosition = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : -1;
         int destZone1ChangeNum = 1;
         final boolean mitosis = sa.hasParam("Mitosis");
-        String changeValid = sa.hasParam("ChangeValid") ? sa.getParam("ChangeValid") : "";
+        String changeValid = sa.getParamOrDefault("ChangeValid", "");
         final boolean anyNumber = sa.hasParam("AnyNumber");
 
         final int libraryPosition2 = sa.hasParam("LibraryPosition2") ? Integer.parseInt(sa.getParam("LibraryPosition2")) : -1;
@@ -85,7 +87,7 @@ public class DigEffect extends SpellAbilityEffect {
         // These parameters are used to indicate that a dialog box must be show to the player asking if the player wants to proceed
         // with an optional ability, otherwise the optional ability is skipped.
         final boolean mayBeSkipped = sa.hasParam("PromptToSkipOptionalAbility");
-        final String optionalAbilityPrompt = sa.hasParam("OptionalAbilityPrompt") ? sa.getParam("OptionalAbilityPrompt") : "";
+        final String optionalAbilityPrompt = sa.getParamOrDefault("OptionalAbilityPrompt", "");
 
         boolean remZone1 = false;
         boolean remZone2 = false;
@@ -122,6 +124,9 @@ public class DigEffect extends SpellAbilityEffect {
         CardZoneTable table = new CardZoneTable();
         GameEntityCounterTable counterTable = new GameEntityCounterTable();
         boolean combatChanged = false;
+        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
+        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
+
         for (final Player p : tgtPlayers) {
             if (tgt != null && !p.canBeTargetedBy(sa)) {
                 continue;
@@ -160,8 +165,6 @@ public class DigEffect extends SpellAbilityEffect {
                             }
                         }
                     }
-                    // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
-                    // - for when it exists
                 }
                 else if (!sa.hasParam("NoLooking")) {
                     // show the user the revealed cards
@@ -286,14 +289,14 @@ public class DigEffect extends SpellAbilityEffect {
                         if (valid.isEmpty()) {
                             chooser.getController().notifyOfValue(sa, null, Localizer.getInstance().getMessage("lblNoValidCards"));
                         } else {
-                            if ( p == chooser ) { // the digger can still see all the dug cards when choosing
+                            if (p == chooser) { // the digger can still see all the dug cards when choosing
                                 chooser.getController().tempShowCards(top);
                             }
                             List<Card> chosen = new ArrayList<>();
 
                             int max = anyNumber ? valid.size() : Math.min(valid.size(),destZone1ChangeNum);
                             int min = (anyNumber || optional) ? 0 : max;
-                            if ( max > 0 ) { // if max is 0 don't make a choice
+                            if (max > 0) { // if max is 0 don't make a choice
                                 chosen = chooser.getController().chooseEntitiesForEffect(valid, min, max, delayedReveal, sa, prompt, p, null);
                             }
 
@@ -310,6 +313,10 @@ public class DigEffect extends SpellAbilityEffect {
                     }
                     Collections.reverse(movedCards);
 
+                    if (destZone1.equals(ZoneType.Battlefield)) {
+                        movedCards = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, movedCards, destZone1, sa);
+                    }
+
                     Card effectHost = sa.getOriginalHost();
                     if (effectHost == null) {
                         effectHost = sa.getHostCard();
@@ -323,9 +330,11 @@ public class DigEffect extends SpellAbilityEffect {
                                 libraryPosition = zone.size();
                             }
                             c = game.getAction().moveTo(zone, c, libraryPosition, sa);
-                        }
-                        else {
-                            c = game.getAction().moveTo(zone, c, sa);
+                        } else {
+                            Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                            moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+                            moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+                            c = game.getAction().moveTo(zone, c, sa, moveParams);
                             if (destZone1.equals(ZoneType.Battlefield)) {
                                 if (sa.hasParam("Tapped")) {
                                     c.setTapped(true);
@@ -383,8 +392,7 @@ public class DigEffect extends SpellAbilityEffect {
                             Card m;
                             if (destZone2 == ZoneType.Library) {
                                 m = game.getAction().moveToLibrary(c, libraryPosition2, sa);
-                            }
-                            else {
+                            } else {
                                 m = game.getAction().moveToVariantDeck(c, destZone2, libraryPosition2, sa);
                             }
                             if (m != null && !origin.equals(m.getZone().getZoneType())) {
@@ -394,8 +402,7 @@ public class DigEffect extends SpellAbilityEffect {
                                 host.addRemembered(m);
                             }
                         }
-                    }
-                    else {
+                    } else {
                         // just move them randomly
                         for (int i = 0; i < rest.size(); i++) {
                             Card c = rest.get(i);

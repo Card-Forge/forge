@@ -1,0 +1,15 @@
+Name:Cemetery Protector
+ManaCost:2 W W
+Types:Creature Human Soldier
+PT:3/4
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile a card from a graveyard.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | SelectPrompt$ Select a card from a graveyard | Mandatory$ True | Hidden$ True | Imprint$ True
+T:Mode$ LandPlayed | ValidCard$ Land.YouOwn+sharesCardTypeWith Imprinted.ExiledWithSource | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you play a land or cast a spell, if it shares a card type with the exiled card, create a 1/1 white Human creature token.
+T:Mode$ SpellCast | ValidCard$ Card.sharesCardTypeWith Imprinted.ExiledWithSource | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever you play a land or cast a spell, if it shares a card type with the exiled card, create a 1/1 white Human creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_human
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+DeckHas:Ability$Token
+DeckHints:Ability$Graveyard & Ability$Discard
+Oracle:Flash\nWhen Cemetery Protector enters the battlefield, exile a card from a graveyard.\nWhenever you play a land or cast a spell, if it shares a card type with the exiled card, create a 1/1 white Human creature token.

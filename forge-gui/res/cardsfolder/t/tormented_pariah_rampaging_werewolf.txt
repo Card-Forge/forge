@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Creature Human Warrior Werewolf
 PT:3/2
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
-SVar:TrigTransform:DB$SetState | Defined$ Self | Mode$ Transform
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tormented_pariah.jpg
 Oracle:At the beginning of each upkeep, if no spells were cast last turn, transform Tormented Pariah.
@@ -16,6 +16,6 @@ Colors:red
 Types:Creature Werewolf
 PT:6/4
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
-SVar:TrigTransform:DB$SetState | Defined$ Self | Mode$ Transform
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rampaging_werewolf.jpg
 Oracle:At the beginning of each upkeep, if a player cast two or more spells last turn, transform Rampaging Werewolf.

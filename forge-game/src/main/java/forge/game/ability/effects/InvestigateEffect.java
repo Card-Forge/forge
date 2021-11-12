@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import forge.util.Localizer;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import forge.game.Game;
@@ -38,6 +39,11 @@ public class InvestigateEffect extends TokenEffectBase {
         // Investigate in Sequence
         for (final Player p : getTargetPlayers(sa)) {
             for (int i = 0; i < amount; i++) {
+                if (sa.hasParam("Optional") && !p.getController().confirmAction(sa, null,
+                        Localizer.getInstance().getMessage("lblWouldYouLikeInvestigate"))) {
+                    return;
+                }
+
                 CardZoneTable triggerList = new CardZoneTable();
                 MutableBoolean combatChanged = new MutableBoolean(false);
 
@@ -45,6 +51,10 @@ public class InvestigateEffect extends TokenEffectBase {
 
                 triggerList.triggerChangesZoneAll(game, sa);
                 p.addInvestigatedThisTurn();
+
+                if (sa.hasParam("RememberInvestigatingPlayers")) {
+                    card.addRemembered(p);
+                }
 
                 game.fireEvent(new GameEventTokenCreated());
 

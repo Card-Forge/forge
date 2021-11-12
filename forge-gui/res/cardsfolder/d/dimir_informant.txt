@@ -3,6 +3,6 @@ ManaCost:2 U
 Types:Creature Human Rogue
 PT:1/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When CARDNAME enters the battlefield, then surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on the top of your library in any order.)
-SVar:TrigSurveil:DB$Surveil | Defined$ You | Amount$ 2
+SVar:TrigSurveil:DB$ Surveil | Defined$ You | Amount$ 2
 DeckHas:Ability$Surveil & Ability$Graveyard
 Oracle:When Dimir Informant enters the battlefield, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)

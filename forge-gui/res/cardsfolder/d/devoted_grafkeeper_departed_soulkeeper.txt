@@ -1,0 +1,25 @@
+Name:Devoted Grafkeeper
+ManaCost:W U
+Types:Creature Human Peasant
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill two cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You
+T:Mode$ SpellCast | ValidCard$ Card.wasCastFromGraveyard | ValidActivatingPlayer$ You | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell from your graveyard, tap target creature you don't control.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control
+DeckHas:Ability$Mill & Ability$Graveyard
+K:Disturb:1 W U
+AlternateMode:DoubleFaced
+Oracle:When Devoted Grafkeeper enters the battlefield, mill two cards.\nWhenever you cast a spell from your graveyard, tap target creature you don't control.\nDisturb {1}{W}{U} (You may cast this card from your graveyard transformed for its disturb cost.)
+
+ALTERNATE
+
+Name:Departed Soulkeeper
+ManaCost:no cost
+Colors:white,blue
+Types:Creature Spirit
+PT:3/1
+K:Flying
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+Oracle:Flying\nDeparted Soulkeeper can block only creatures with flying.\nIf Departed Soulkeeper would be put into a graveyard from anywhere, exile it instead.

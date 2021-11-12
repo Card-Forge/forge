@@ -5,7 +5,7 @@ PT:4/4
 K:Reach
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroyAll | TriggerDescription$ When CARDNAME enters the battlefield, destroy all creatures with flying. Put a +1/+1 counter on CARDNAME for each creature destroyed this way.
 SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Creature.withFlying | RememberDestroyed$ True | SubAbility$ DBPutCounter
-SVar:DBPutCounter:DB$PutCounter | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 DeckHas:Ability$Counters

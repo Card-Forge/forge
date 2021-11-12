@@ -51,6 +51,8 @@ public enum CounterEnumType {
 
     BLOOD("BLOOD", 255, 108, 111),
 
+    BLOODLINE("BLDLN", 224, 44, 44),
+
     BOUNTY("BOUNT", 255, 158, 0),
 
     BRIBERY("BRIBE", 172, 201, 235),
@@ -70,6 +72,8 @@ public enum CounterEnumType {
     CORPSE("CRPSE", 230, 186, 209),
 
     CORRUPTION("CRPTN", 210, 121, 210),
+
+    CROAK("CROAK", 155, 255, 5),
 
     CREDIT("CRDIT", 188, 197, 234),
 
@@ -102,6 +106,8 @@ public enum CounterEnumType {
     ELIXIR("ELIXR", 81, 221, 175),
 
     EON("EON", 23, 194, 255),
+
+    EMBER("EMBER", 247, 52, 43),
 
     EYEBALL("EYE", 184, 202, 201),
 
@@ -159,6 +165,8 @@ public enum CounterEnumType {
 
     HUNGER("HUNGR", 255, 91, 149),
 
+    HUSK("HUSK", 227, 212, 173),
+
     ICE("ICE", 0, 239, 255),
 
     INCARNATION("INCRN", 247, 206, 64),
@@ -167,9 +175,13 @@ public enum CounterEnumType {
 
     INTERVENTION("INTRV", 205, 203, 105),
 
+    INVITATION("INVIT", 205, 0, 26),
+
     ISOLATION("ISOLT", 250, 190, 0),
 
     JAVELIN("JAVLN", 180, 206, 172),
+
+    JUDGMENT("JUDGM", 249, 220, 52),
 
     KI("KI", 190, 189, 255),
 
@@ -263,6 +275,8 @@ public enum CounterEnumType {
 
     QUEST("QUEST", 251, 189, 0),
 
+    RITUAL("RITUAL", 155, 17, 30),
+
     RUST("RUST", 255, 181, 116),
 
     SCREAM("SCREM", 0, 220, 255),
@@ -316,6 +330,8 @@ public enum CounterEnumType {
     TREASURE("TRSUR", 255, 184, 0),
 
     UNITY("UNITY", 242, 156, 255),
+
+    VALOR("VALOR", 252, 250, 222),
 
     VELOCITY("VELO", 255, 95, 138),
 

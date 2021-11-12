@@ -144,7 +144,7 @@ public class DeckgenUtil {
      * @return
      */
     public static Deck buildCardGenDeck(PaperCard card, PaperCard secondKeycard, GameFormat format, boolean isForAI){
-            return buildLDACardGenDeck(card, format, isForAI);
+        return buildLDACardGenDeck(card, format, isForAI);
     }
 
     /**
@@ -225,8 +225,6 @@ public class DeckgenUtil {
         }
         return deck;
     }
-
-
 
     public static Deck buildLDACArchetypeDeck(GameFormat format, boolean isForAI){
         List<Archetype> keys = new ArrayList<>(CardArchetypeLDAGenerator.ldaArchetypes.get(format.getName()));
@@ -427,6 +425,8 @@ public class DeckgenUtil {
     /** @return {@link forge.deck.Deck} */
     public static Deck getRandomCustomDeck() {
         final IStorage<Deck> allDecks = FModel.getDecks().getConstructed();
+        // in case user has not created any yet
+        if (allDecks.size() == 0) { return null; }
         final int rand = (int) (Math.floor(MyRandom.getRandom().nextDouble() * allDecks.size()));
         final String name = allDecks.getItemNames().toArray(new String[0])[rand];
         return allDecks.get(name);

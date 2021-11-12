@@ -16,8 +16,8 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerCollection;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
@@ -31,30 +31,30 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
         final PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
         final Card source = sa.getHostCard();
 
-        if (source.isPermanent() && !sa.getRestrictions().isSorcerySpeed()
-                && (sa.getPayCosts().hasTapCost() || sa.getPayCosts().hasManaCost())) {
-            // If it has an associated cost, try to only do this before own turn
-            if (!(ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer)) {
+        if (!sa.isTrigger()) {
+            if (source.isPermanent() && !sa.getRestrictions().isSorcerySpeed()
+                    && (sa.getPayCosts().hasTapCost() || sa.getPayCosts().hasManaCost())) {
+                // If it has an associated cost, try to only do this before own turn
+                if (!(ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer)) {
+                    return false;
+                }
+            }
+
+            // Do it once per turn, generally (may be improved later)
+            if (AiCardMemory.isRememberedCardByName(aiPlayer, source.getName(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
                 return false;
             }
         }
 
-        // Do it once per turn, generally (may be improved later)
-        if (!sa.isTrigger()
-                && AiCardMemory.isRememberedCardByName(aiPlayer, source.getName(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
-            return false;
-        }
-
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             // ability is targeted
             sa.resetTargets();
 
-            Player opp = aiPlayer.getWeakestOpponent();
+            PlayerCollection targetableOpps = aiPlayer.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
+            Player opp = targetableOpps.min(PlayerPredicates.compareByLife());
             final boolean canTgtAI = sa.canTarget(aiPlayer);
-            final boolean canTgtHuman = sa.canTarget(opp);
-            
+            final boolean canTgtHuman = opp != null && sa.canTarget(opp);
+
             if (canTgtHuman && canTgtAI) {
                 // TODO: maybe some other consideration rather than random?
                 Player preferredTarget = MyRandom.percentTrue(50) ? aiPlayer : opp;
@@ -117,7 +117,7 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
         if (!top.isLand() && cmc - maxCastable >= uncastableCMCThreshold) {
             // Can't cast in the foreseeable future. Shuffle if doing it to ourselves or an ally, otherwise keep it
             return !p.isOpponentOf(player);
-        } else if (top.isLand() && landsOTB <= minLandsToScryLandsAway){
+        } else if (top.isLand() && landsOTB <= minLandsToScryLandsAway) {
             // We don't want to give the opponent a free land if his land count is low
             return p.isOpponentOf(player);
         }

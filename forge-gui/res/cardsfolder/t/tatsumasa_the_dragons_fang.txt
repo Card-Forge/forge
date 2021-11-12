@@ -5,7 +5,7 @@ K:Equip:3
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 5 | AddToughness$ 5 | Description$ Equipped creature gets +5/+5.
 A:AB$ Token | Cost$ 6 Exile<1/CARDNAME> | TokenAmount$ 1 | TokenScript$ u_5_5_dragon_spirit_flying | TokenOwner$ You | LegacyImage$ u 5 5 dragon spirit flying chk | RememberTokens$ True | SpellDescription$ Create a 5/5 blue Dragon Spirit creature token with flying. Return CARDNAME to the battlefield under its owner's control when that token dies.
 T:Mode$ ChangesZone | ValidCard$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Exile | Execute$ TrigReturn | Secondary$ True | TriggerDescription$ Return CARDNAME to the battlefield under its owner's control when that token dies.
-SVar:TrigReturn:DB$ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ Self | SubAbility$ DBCleanUp
-SVar:DBCleanUp:DB$Cleanup | ClearRemembered$ True
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ Self | SubAbility$ DBCleanUp
+SVar:DBCleanUp:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tatsumasa_the_dragons_fang.jpg
 Oracle:Equipped creature gets +5/+5.\n{6}, Exile Tatsumasa, the Dragon's Fang: Create a 5/5 blue Dragon Spirit creature token with flying. Return Tatsumasa to the battlefield under its owner's control when that token dies.\nEquip {3}

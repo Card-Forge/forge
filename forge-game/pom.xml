@@ -6,7 +6,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.45-SNAPSHOT</version>
+        <version>1.6.46-SNAPSHOT</version>
     </parent>
 
     <artifactId>forge-game</artifactId>
@@ -34,6 +34,12 @@
             <groupId>io.sentry</groupId>
             <artifactId>sentry-log4j2</artifactId>
             <version>1.7.27</version>
+        </dependency>
+        <!-- declare a specific dependency to override io.sentry's transitive dependency -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.14.1</version>
         </dependency>
     </dependencies>
 

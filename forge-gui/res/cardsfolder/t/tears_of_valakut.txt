@@ -1,7 +1,6 @@
 Name:Tears of Valakut
 ManaCost:1 R
 Types:Instant
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature.withFlying | NumDmg$ 5 | TgtPrompt$ Select target creature with flying. | SpellDescription$ CARDNAME deals 5 damage to target creature with flying.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tears_of_valakut.jpg
 Oracle:This spell can't be countered.\nTears of Valakut deals 5 damage to target creature with flying.

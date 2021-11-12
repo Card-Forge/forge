@@ -86,10 +86,10 @@ public class ComputerUtilCombat {
         final Iterable<GameEntity> defenders = CombatUtil.getAllPossibleDefenders(attacker.getController());
         return Iterables.any(defenders, new Predicate<GameEntity>() {
             @Override public boolean apply(final GameEntity input) {
-                return ComputerUtilCombat.canAttackNextTurn(attacker, input);
+                return canAttackNextTurn(attacker, input);
             }
         });
-    } // canAttackNextTurn(Card)
+    }
 
     /**
      * <p>
@@ -110,7 +110,19 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        for (final KeywordInterface inst : attacker.getKeywords()) {
+        // TODO check if combat phase would be skipped
+
+        // TODO replace with Static Ability
+        for (final String keyword : attacker.getHiddenExtrinsicKeywords()) {
+            if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
+                final String defined = keyword.split(":")[1];
+                final Player player = AbilityUtils.getDefinedPlayers(attacker, defined, null).get(0);
+                if (!defender.equals(player)) {
+                    return false;
+                }
+            }
+        }
+        for (final KeywordInterface inst : attacker.getKeywords(Keyword.UNDEFINED)) {
             final String keyword = inst.getOriginal();
             if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
                 final String defined = keyword.split(":")[1];
@@ -152,9 +164,8 @@ public class ComputerUtilCombat {
             }
         });
 
-        return ComputerUtilCombat.totalDamageOfBlockers(attacker, list);
+        return totalFirstStrikeDamageOfBlockers(attacker, list);
     }
-
 
     // This function takes Doran and Double Strike into account
     /**
@@ -176,7 +187,6 @@ public class ComputerUtilCombat {
         return n;
     }
 
-
     // Returns the damage an unblocked attacker would deal
     /**
      * <p>
@@ -191,10 +201,10 @@ public class ComputerUtilCombat {
      *            a {@link forge.game.combat.Combat} object.
      * @return a int.
      */
-    public static int damageIfUnblocked(final Card attacker, final Player attacked, final Combat combat, boolean withoutAbilities) {
+    public static int damageIfUnblocked(final Card attacker, final GameEntity attacked, final Combat combat, boolean withoutAbilities) {
         int damage = attacker.getNetCombatDamage();
         int sum = 0;
-        if (!attacked.canLoseLife()) {
+        if (attacked instanceof Player && !((Player) attacked).canLoseLife()) {
             return 0;
         }
 
@@ -203,9 +213,9 @@ public class ComputerUtilCombat {
             return 0;
         }
 
-        damage += ComputerUtilCombat.predictPowerBonusOfAttacker(attacker, null, combat, withoutAbilities);
+        damage += predictPowerBonusOfAttacker(attacker, null, combat, withoutAbilities);
         if (!attacker.hasKeyword(Keyword.INFECT)) {
-            sum = ComputerUtilCombat.predictDamageTo(attacked, damage, attacker, true);
+            sum = predictDamageTo(attacked, damage, attacker, true);
             if (attacker.hasKeyword(Keyword.DOUBLE_STRIKE)) {
                 sum *= 2;
             }
@@ -226,18 +236,25 @@ public class ComputerUtilCombat {
      * @return a int.
      */
     public static int poisonIfUnblocked(final Card attacker, final Player attacked) {
+        if (!attacked.canReceiveCounters(CounterEnumType.POISON)) {
+            return 0;
+        }
         int damage = attacker.getNetCombatDamage();
         int poison = 0;
-        damage += ComputerUtilCombat.predictPowerBonusOfAttacker(attacker, null, null, false);
+        damage += predictPowerBonusOfAttacker(attacker, null, null, false);
         if (attacker.hasKeyword(Keyword.INFECT)) {
-            int pd = ComputerUtilCombat.predictDamageTo(attacked, damage, attacker, true);
+            int pd = predictDamageTo(attacked, damage, attacker, true);
+            // opponent can always order it so that he gets 0
+            if (pd == 1 && Iterables.any(attacker.getController().getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Vorinclex, Monstrous Raider"))) {
+                pd = 0;
+            }
             poison += pd;
             if (attacker.hasKeyword(Keyword.DOUBLE_STRIKE)) {
                 poison += pd;
             }
         }
-        if (attacker.hasKeyword(Keyword.POISONOUS) && (damage > 0)) {
-            poison += attacker.getKeywordMagnitude(Keyword.POISONOUS);
+        if (damage > 0) {
+            poison += predictPoisonFromTriggers(attacker, attacked, damage);
         }
         return poison;
     }
@@ -254,9 +271,16 @@ public class ComputerUtilCombat {
      * @return a int.
      */
     public static int sumDamageIfUnblocked(final Iterable<Card> attackers, final Player attacked) {
+        return sumDamageIfUnblocked(attackers, attacked, false);
+    }
+    public static int sumDamageIfUnblocked(final Iterable<Card> attackers, final Player attacked, boolean onlyPreventable) {
         int sum = 0;
         for (final Card attacker : attackers) {
-            sum += ComputerUtilCombat.damageIfUnblocked(attacker, attacked, null, false);
+            if (onlyPreventable && !attacker.canDamagePrevented(true)) {
+                continue;
+            }
+            // TODO always applies full prevention shields for each, so this might wrongly lower the result
+            sum += damageIfUnblocked(attacker, attacked, null, false);
         }
         return sum;
     }
@@ -275,7 +299,7 @@ public class ComputerUtilCombat {
     public static int sumPoisonIfUnblocked(final List<Card> attackers, final Player attacked) {
         int sum = 0;
         for (final Card attacker : attackers) {
-            sum += ComputerUtilCombat.poisonIfUnblocked(attacker, attacked);
+            sum += poisonIfUnblocked(attacker, attacked);
         }
         return sum;
     }
@@ -293,28 +317,26 @@ public class ComputerUtilCombat {
     public static int lifeThatWouldRemain(final Player ai, final Combat combat) {
         int damage = 0;
 
-        final List<Card> attackers = combat.getAttackersOf(ai);
-        final List<Card> unblocked = Lists.newArrayList();
+        if (ai.canLoseLife()) {
+            final List<Card> attackers = combat.getAttackersOf(ai);
+            final List<Card> unblocked = Lists.newArrayList();
 
-        for (final Card attacker : attackers) {
-            final List<Card> blockers = combat.getBlockers(attacker);
+            for (final Card attacker : attackers) {
+                final List<Card> blockers = combat.getBlockers(attacker);
 
-            if ((blockers.size() == 0)
-                    || attacker.hasKeyword("You may have CARDNAME assign its combat damage "
-                            + "as though it weren't blocked.")) {
-                unblocked.add(attacker);
-            } else if (attacker.hasKeyword(Keyword.TRAMPLE)
-                    && (ComputerUtilCombat.getAttack(attacker) > ComputerUtilCombat.totalShieldDamage(attacker, blockers))) {
-                if (!attacker.hasKeyword(Keyword.INFECT)) {
-                    damage += ComputerUtilCombat.getAttack(attacker) - ComputerUtilCombat.totalShieldDamage(attacker, blockers);
+                if ((blockers.size() == 0)
+                        || attacker.hasKeyword("You may have CARDNAME assign its combat damage "
+                                + "as though it weren't blocked.")) {
+                    unblocked.add(attacker);
+                } else if (attacker.hasKeyword(Keyword.TRAMPLE)
+                        && (getAttack(attacker) > totalShieldDamage(attacker, blockers))) {
+                    if (!attacker.hasKeyword(Keyword.INFECT)) {
+                        damage += getAttack(attacker) - totalShieldDamage(attacker, blockers);
+                    }
                 }
             }
-        }
 
-        damage += ComputerUtilCombat.sumDamageIfUnblocked(unblocked, ai);
-
-        if (!ai.canLoseLife()) {
-            damage = 0;
+            damage += sumDamageIfUnblocked(unblocked, ai);
         }
 
         return ai.getLife() - damage;
@@ -349,17 +371,16 @@ public class ComputerUtilCombat {
                             + " as though it weren't blocked.")) {
                 unblocked.add(attacker);
             } else if (attacker.hasKeyword(Keyword.TRAMPLE)
-                    && (ComputerUtilCombat.getAttack(attacker) > ComputerUtilCombat.totalShieldDamage(attacker, blockers))) {
+                    && (getAttack(attacker) > totalShieldDamage(attacker, blockers))) {
+                int trampleDamage = getAttack(attacker) - totalShieldDamage(attacker, blockers);
                 if (attacker.hasKeyword(Keyword.INFECT)) {
-                    poison += ComputerUtilCombat.getAttack(attacker) - ComputerUtilCombat.totalShieldDamage(attacker, blockers);
+                    poison += trampleDamage;
                 }
-                if (attacker.hasKeyword(Keyword.POISONOUS)) {
-                    poison += attacker.getKeywordMagnitude(Keyword.POISONOUS);
-                }
+                poison += predictPoisonFromTriggers(attacker, ai, trampleDamage);
             }
         }
 
-        poison += ComputerUtilCombat.sumPoisonIfUnblocked(unblocked, ai);
+        poison += sumPoisonIfUnblocked(unblocked, ai);
 
         return ai.getPoisonCounters() + poison;
     }
@@ -399,11 +420,11 @@ public class ComputerUtilCombat {
         CardCollectionView otb = ai.getCardsIn(ZoneType.Battlefield);
         // Special cases:
         // AI can't lose in combat in presence of Worship (with creatures)
-        if (!CardLists.filter(otb, CardPredicates.nameEquals("Worship")).isEmpty() && !ai.getCreaturesInPlay().isEmpty()) {
+        if (Iterables.any(otb, CardPredicates.nameEquals("Worship")) && !ai.getCreaturesInPlay().isEmpty()) {
             return false;
         }
         // AI can't lose in combat in presence of Elderscale Wurm (at 7 life or more)
-        if (!CardLists.filter(otb, CardPredicates.nameEquals("Elderscale Wurm")).isEmpty() && ai.getLife() >= 7) {
+        if (Iterables.any(otb, CardPredicates.nameEquals("Elderscale Wurm")) && ai.getLife() >= 7) {
             return false;
         }
 
@@ -447,12 +468,12 @@ public class ComputerUtilCombat {
             maxTreshold--;
         }
 
-        if (ComputerUtilCombat.lifeThatWouldRemain(ai, combat) - payment < Math.min(threshold, ai.getLife())
+        if (lifeThatWouldRemain(ai, combat) - payment < Math.min(threshold, ai.getLife())
                 && !ai.cantLoseForZeroOrLessLife()) {
             return true;
         }
 
-        return (ComputerUtilCombat.resultingPoison(ai, combat) > Math.max(7, ai.getPoisonCounters()));
+        return resultingPoison(ai, combat) > Math.max(7, ai.getPoisonCounters());
     }
 
     // Checks if the life of the attacked Player would be reduced
@@ -466,7 +487,7 @@ public class ComputerUtilCombat {
      * @return a boolean.
      */
     public static boolean wouldLoseLife(final Player ai, final Combat combat) {
-        return (ComputerUtilCombat.lifeThatWouldRemain(ai, combat) < ai.getLife());
+        return lifeThatWouldRemain(ai, combat) < ai.getLife();
     }
 
     // Checks if the life of the attacked Player/Planeswalker is in danger
@@ -488,13 +509,12 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        final List<Card> threateningCommanders = ComputerUtilCombat.getLifeThreateningCommanders(ai, combat);
+        final List<Card> threateningCommanders = getLifeThreateningCommanders(ai, combat);
 
         // check for creatures that must be blocked
         final List<Card> attackers = combat.getAttackersOf(ai);
 
         for (final Card attacker : attackers) {
-
             final List<Card> blockers = combat.getBlockers(attacker);
 
             if (blockers.isEmpty()) {
@@ -502,18 +522,17 @@ public class ComputerUtilCombat {
                     return true;
                 }
             }
-            if(threateningCommanders.contains(attacker)) {
+            if (threateningCommanders.contains(attacker)) {
                 return true;
             }
         }
 
-        if (ComputerUtilCombat.lifeThatWouldRemain(ai, combat) - payment < 1 && !ai.cantLoseForZeroOrLessLife()) {
+        if (lifeThatWouldRemain(ai, combat) - payment < 1 && !ai.cantLoseForZeroOrLessLife()) {
             return true;
         }
 
-        return (ComputerUtilCombat.resultingPoison(ai, combat) > 9);
+        return resultingPoison(ai, combat) > 9;
     }
-
 
     // This calculates the amount of damage a blockgang can deal to the attacker
     // (first strike not supported)
@@ -535,7 +554,7 @@ public class ComputerUtilCombat {
         }
 
         for (final Card defender : defenders) {
-            damage += ComputerUtilCombat.dealsDamageAsBlocker(attacker, defender);
+            damage += dealsDamageAsBlocker(attacker, defender);
         }
         return damage;
     }
@@ -553,7 +572,7 @@ public class ComputerUtilCombat {
         }
 
         for (final Card defender : defenders) {
-            damage += ComputerUtilCombat.predictDamageByBlockerWithoutDoubleStrike(attacker, defender);
+            damage += predictDamageByBlockerWithoutDoubleStrike(attacker, defender);
         }
         return damage;
     }
@@ -593,13 +612,12 @@ public class ComputerUtilCombat {
 
         int flankingMagnitude = 0;
         if (attacker.hasKeyword(Keyword.FLANKING) && !defender.hasKeyword(Keyword.FLANKING)) {
-
             flankingMagnitude = attacker.getAmountOfKeyword(Keyword.FLANKING);
 
             if (flankingMagnitude >= defender.getNetToughness()) {
                 return 0;
             }
-            if ((flankingMagnitude >= (defender.getNetToughness() - defender.getDamage()))
+            if (flankingMagnitude >= (defender.getNetToughness() - defender.getDamage())
                     && !defender.hasKeyword(Keyword.INDESTRUCTIBLE)) {
                 return 0;
             }
@@ -612,9 +630,9 @@ public class ComputerUtilCombat {
 
         int defenderDamage;
         if (defender.toughnessAssignsDamage()) {
-            defenderDamage = defender.getNetToughness() + ComputerUtilCombat.predictToughnessBonusOfBlocker(attacker, defender, true);
+            defenderDamage = defender.getNetToughness() + predictToughnessBonusOfBlocker(attacker, defender, true);
         } else {
-        	defenderDamage = defender.getNetPower() + ComputerUtilCombat.predictPowerBonusOfBlocker(attacker, defender, true);
+        	defenderDamage = defender.getNetPower() + predictPowerBonusOfBlocker(attacker, defender, true);
         }
 
         // consider static Damage Prevention
@@ -638,7 +656,7 @@ public class ComputerUtilCombat {
         int defenderDefense = 0;
 
         for (final Card defender : defenders) {
-            defenderDefense += ComputerUtilCombat.shieldDamage(attacker, defender);
+            defenderDefense += shieldDamage(attacker, defender);
         }
 
         return defenderDefense;
@@ -658,13 +676,12 @@ public class ComputerUtilCombat {
      * @return a int.
      */
     public static int shieldDamage(final Card attacker, final Card blocker) {
-        if (ComputerUtilCombat.canDestroyBlockerBeforeFirstStrike(blocker, attacker, false)) {
+        if (canDestroyBlockerBeforeFirstStrike(blocker, attacker, false)) {
         	return 0;
         }
 
         int flankingMagnitude = 0;
         if (attacker.hasKeyword(Keyword.FLANKING) && !blocker.hasKeyword(Keyword.FLANKING)) {
-
             flankingMagnitude = attacker.getAmountOfKeyword(Keyword.FLANKING);
 
             if (flankingMagnitude >= blocker.getNetToughness()) {
@@ -679,7 +696,7 @@ public class ComputerUtilCombat {
 
         final int defBushidoMagnitude = blocker.getKeywordMagnitude(Keyword.BUSHIDO);
 
-        final int defenderDefense = (blocker.getLethalDamage() - flankingMagnitude) + defBushidoMagnitude;
+        final int defenderDefense = blocker.getLethalDamage() - flankingMagnitude + defBushidoMagnitude;
 
         return defenderDefense;
     } // shieldDamage
@@ -696,12 +713,11 @@ public class ComputerUtilCombat {
      * @return a boolean.
      */
     public static boolean combatantWouldBeDestroyed(Player ai, final Card combatant, Combat combat) {
-
         if (combat.isAttacking(combatant)) {
-            return ComputerUtilCombat.attackerWouldBeDestroyed(ai, combatant, combat);
+            return attackerWouldBeDestroyed(ai, combatant, combat);
         }
         if (combat.isBlocking(combatant)) {
-            return ComputerUtilCombat.blockerWouldBeDestroyed(ai, combatant, combat);
+            return blockerWouldBeDestroyed(ai, combatant, combat);
         }
         return false;
     }
@@ -722,7 +738,7 @@ public class ComputerUtilCombat {
         int firstStrikeBlockerDmg = 0;
 
         for (final Card defender : blockers) {
-            if (ComputerUtilCombat.canDestroyAttacker(ai, attacker, defender, combat, true)
+            if (canDestroyAttacker(ai, attacker, defender, combat, true)
                     && !(defender.hasKeyword(Keyword.WITHER) || defender.hasKeyword(Keyword.INFECT))) {
                 return true;
             }
@@ -733,10 +749,10 @@ public class ComputerUtilCombat {
 
         // Consider first strike and double strike
         if (attacker.hasKeyword(Keyword.FIRST_STRIKE) || attacker.hasKeyword(Keyword.DOUBLE_STRIKE)) {
-            return firstStrikeBlockerDmg >= ComputerUtilCombat.getDamageToKill(attacker);
+            return firstStrikeBlockerDmg >= getDamageToKill(attacker, true);
         }
 
-        return ComputerUtilCombat.totalDamageOfBlockers(attacker, blockers) >= ComputerUtilCombat.getDamageToKill(attacker);
+        return totalDamageOfBlockers(attacker, blockers) >= getDamageToKill(attacker, false);
     }
 
     // Will this trigger trigger?
@@ -949,7 +965,7 @@ public class ComputerUtilCombat {
         for (final Trigger trigger : theTriggers) {
             final Card source = trigger.getHostCard();
 
-            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, null)) {
+            if (!combatTriggerWillTrigger(attacker, blocker, trigger, null)) {
                 continue;
             }
 
@@ -1067,7 +1083,7 @@ public class ComputerUtilCombat {
         for (final Trigger trigger : theTriggers) {
             final Card source = trigger.getHostCard();
 
-            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, null)) {
+            if (!combatTriggerWillTrigger(attacker, blocker, trigger, null)) {
                 continue;
             }
 
@@ -1082,7 +1098,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
                 int damage = AbilityUtils.calculateAmount(source, sa.getParam("NumDmg"), sa);
-                toughness -= predictDamageTo(blocker, damage, 0, source, false);
+                toughness -= predictDamageTo(blocker, damage, source, false);
             } else
 
             // -1/-1 PutCounter triggers
@@ -1209,9 +1225,9 @@ public class ComputerUtilCombat {
         // if the defender has first strike and wither the attacker will deal
         // less damage than expected
         if (null != blocker) {
-            if (ComputerUtilCombat.dealsFirstStrikeDamage(blocker, withoutAbilities, combat)
+            if (dealsFirstStrikeDamage(blocker, withoutAbilities, combat)
                     && (blocker.hasKeyword(Keyword.WITHER) || blocker.hasKeyword(Keyword.INFECT))
-                    && !ComputerUtilCombat.dealsFirstStrikeDamage(attacker, withoutAbilities, combat)
+                    && !dealsFirstStrikeDamage(attacker, withoutAbilities, combat)
                     && !attacker.canReceiveCounters(CounterEnumType.M1M1)) {
                 power -= blocker.getNetCombatDamage();
             }
@@ -1243,7 +1259,7 @@ public class ComputerUtilCombat {
         for (final Trigger trigger : theTriggers) {
             final Card source = trigger.getHostCard();
 
-            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, combat)) {
+            if (!combatTriggerWillTrigger(attacker, blocker, trigger, combat)) {
                 continue;
             }
 
@@ -1444,7 +1460,7 @@ public class ComputerUtilCombat {
         for (final Trigger trigger : theTriggers) {
             final Card source = trigger.getHostCard();
 
-            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, combat)) {
+            if (!combatTriggerWillTrigger(attacker, blocker, trigger, combat)) {
                 continue;
             }
 
@@ -1460,12 +1476,12 @@ public class ComputerUtilCombat {
 
             // DealDamage triggers
             if (ApiType.DealDamage.equals(sa.getApi())) {
-                if ("TriggeredAttacker".equals(sa.getParam("Defined"))) {
+                if (!sa.hasParam("Defined") || !sa.getParam("Defined").startsWith("TriggeredAttacker")) {
                     continue;
                 }
                 int damage = AbilityUtils.calculateAmount(source, sa.getParam("NumDmg"), sa);
 
-                toughness -= predictDamageTo(attacker, damage, 0, source, false);
+                toughness -= predictDamageTo(attacker, damage, source, false);
                 continue;
             } else if (ApiType.Pump.equals(sa.getApi())) {
                 if (sa.hasParam("Cost")) {
@@ -1593,8 +1609,8 @@ public class ComputerUtilCombat {
         }
 
         //Check triggers that deal damage or shrink the attacker
-        if (ComputerUtilCombat.getDamageToKill(attacker)
-                + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities) <= 0) {
+        if (getDamageToKill(attacker, false)
+                + predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities) <= 0) {
             return true;
         }
 
@@ -1606,7 +1622,7 @@ public class ComputerUtilCombat {
         for (Trigger trigger : theTriggers) {
             final Card source = trigger.getHostCard();
 
-            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, null)) {
+            if (!combatTriggerWillTrigger(attacker, blocker, trigger, null)) {
                 continue;
             }
             SpellAbility sa = trigger.ensureAbility();
@@ -1631,30 +1647,25 @@ public class ComputerUtilCombat {
         return false;
     }
 
-    // can the attacker be potentially destroyed in combat or is it potentially indestructible?
+    // can the combatant be potentially destroyed or is it potentially indestructible?
     /**
      * <p>
      * attackerCantBeDestroyedNow.
      * </p>
      * @param ai
      *
-     * @param attacker
+     * @param combatant
      *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
-    public static boolean attackerCantBeDestroyedInCombat(Player ai, final Card attacker) {
-        // attacker is either indestructible or may regenerate
-        if (attacker.hasKeyword(Keyword.INDESTRUCTIBLE) || (ComputerUtil.canRegenerate(ai, attacker))) {
+    public static boolean combatantCantBeDestroyed(Player ai, final Card combatant) {
+        // either indestructible or may regenerate
+        if (combatant.hasKeyword(Keyword.INDESTRUCTIBLE) || (ComputerUtil.canRegenerate(ai, combatant))) {
             return true;
         }
 
-        // attacker will regenerate
-        if (attacker.getShieldCount() > 0 && attacker.canBeShielded()) {
-            return true;
-        }
-
-        // all damage will be prevented
-        if (attacker.hasKeyword("PreventAllDamageBy Creature.blockingSource")) {
+        // will regenerate
+        if (combatant.getShieldCount() > 0 && combatant.canBeShielded()) {
             return true;
         }
 
@@ -1699,7 +1710,6 @@ public class ComputerUtilCombat {
 
         int flankingMagnitude = 0;
         if (attacker.hasKeyword(Keyword.FLANKING) && !blocker.hasKeyword(Keyword.FLANKING)) {
-
             flankingMagnitude = attacker.getAmountOfKeyword(Keyword.FLANKING);
 
             if (flankingMagnitude >= blocker.getNetToughness()) {
@@ -1720,25 +1730,21 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        if (attacker.hasKeyword("PreventAllDamageBy Creature.blockingSource")) {
-            return false;
-        }
-
         int defenderDamage;
         int attackerDamage;
         if (blocker.toughnessAssignsDamage()) {
             defenderDamage = blocker.getNetToughness()
-                    + ComputerUtilCombat.predictToughnessBonusOfBlocker(attacker, blocker, withoutAbilities);
+                    + predictToughnessBonusOfBlocker(attacker, blocker, withoutAbilities);
         } else {
         	defenderDamage = blocker.getNetPower()
-                    + ComputerUtilCombat.predictPowerBonusOfBlocker(attacker, blocker, withoutAbilities);
+                    + predictPowerBonusOfBlocker(attacker, blocker, withoutAbilities);
         }
         if (attacker.toughnessAssignsDamage()) {
             attackerDamage = attacker.getNetToughness()
-                    + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
+                    + predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
         } else {
         	attackerDamage = attacker.getNetPower()
-                    + ComputerUtilCombat.predictPowerBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
+                    + predictPowerBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
         }
 
         int possibleDefenderPrevention = 0;
@@ -1755,10 +1761,10 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        final int defenderLife = ComputerUtilCombat.getDamageToKill(blocker)
-                + ComputerUtilCombat.predictToughnessBonusOfBlocker(attacker, blocker, withoutAbilities);
-        final int attackerLife = ComputerUtilCombat.getDamageToKill(attacker)
-                + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
+        final int defenderLife = getDamageToKill(blocker, false)
+                + predictToughnessBonusOfBlocker(attacker, blocker, withoutAbilities);
+        final int attackerLife = getDamageToKill(attacker, false)
+                + predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
 
         if (blocker.hasKeyword(Keyword.DOUBLE_STRIKE)) {
             if (defenderDamage > 0 && (hasKeyword(blocker, "Deathtouch", withoutAbilities, combat) || attacker.hasSVar("DestroyWhenDamaged"))) {
@@ -1768,8 +1774,7 @@ public class ComputerUtilCombat {
                 return true;
             }
 
-            // Attacker may kill the blocker before he can deal normal
-            // (secondary) damage
+            // Attacker may kill the blocker before he can deal normal (secondary) damage
             if (dealsFirstStrikeDamage(attacker, withoutAbilities, combat)
                     && !blocker.hasKeyword(Keyword.INDESTRUCTIBLE)) {
                 if (attackerDamage >= defenderLife) {
@@ -1783,13 +1788,11 @@ public class ComputerUtilCombat {
                 return true;
             }
         } // defender double strike
-
         else { // no double strike for defender
                // Attacker may kill the blocker before he can deal any damage
             if (dealsFirstStrikeDamage(attacker, withoutAbilities, combat)
                     && !blocker.hasKeyword(Keyword.INDESTRUCTIBLE)
                     && !dealsFirstStrikeDamage(blocker, withoutAbilities, combat)) {
-
                 if (attackerDamage >= defenderLife) {
                     return false;
                 }
@@ -1803,7 +1806,6 @@ public class ComputerUtilCombat {
             }
 
             return defenderDamage >= attackerLife;
-
         } // defender no double strike
         return false;// should never arrive here
     } // canDestroyAttacker
@@ -1820,12 +1822,12 @@ public class ComputerUtilCombat {
      * @return a boolean.
      */
     public static boolean blockerWouldBeDestroyed(Player ai, final Card blocker, Combat combat) {
-        // TODO THis function only checks if a single attacker at a time would destroy a blocker
+        // TODO This function only checks if a single attacker at a time would destroy a blocker
         // This needs to expand to tally up damage
         final List<Card> attackers = combat.getAttackersBlockedBy(blocker);
 
         for (Card attacker : attackers) {
-            if (ComputerUtilCombat.canDestroyBlocker(ai, blocker, attacker, combat, true)
+            if (canDestroyBlocker(ai, blocker, attacker, combat, true)
                     && !(attacker.hasKeyword(Keyword.WITHER) || attacker.hasKeyword(Keyword.INFECT))) {
                 return true;
             }
@@ -1849,7 +1851,7 @@ public class ComputerUtilCombat {
             if (flankingMagnitude >= blocker.getNetToughness()) {
                 return true;
             }
-            if ((flankingMagnitude >= ComputerUtilCombat.getDamageToKill(blocker))
+            if (flankingMagnitude >= getDamageToKill(blocker, false)
                     && !blocker.hasKeyword(Keyword.INDESTRUCTIBLE)) {
                 return true;
             }
@@ -1860,8 +1862,8 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        if (ComputerUtilCombat.getDamageToKill(blocker)
-        		+ ComputerUtilCombat.predictToughnessBonusOfBlocker(attacker, blocker, withoutAbilities) <= 0) {
+        if (getDamageToKill(blocker, false)
+        		+ predictToughnessBonusOfBlocker(attacker, blocker, withoutAbilities) <= 0) {
         	return true;
         }
 
@@ -1873,7 +1875,7 @@ public class ComputerUtilCombat {
         for (Trigger trigger : theTriggers) {
             final Card source = trigger.getHostCard();
 
-            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, null)) {
+            if (!combatTriggerWillTrigger(attacker, blocker, trigger, null)) {
                 continue;
             }
             SpellAbility sa = trigger.ensureAbility();
@@ -1949,17 +1951,17 @@ public class ComputerUtilCombat {
         int attackerDamage;
         if (blocker.toughnessAssignsDamage()) {
             defenderDamage = blocker.getNetToughness()
-                    + ComputerUtilCombat.predictToughnessBonusOfBlocker(attacker, blocker, withoutAbilities);
+                    + predictToughnessBonusOfBlocker(attacker, blocker, withoutAbilities);
         } else {
         	defenderDamage = blocker.getNetPower()
-                    + ComputerUtilCombat.predictPowerBonusOfBlocker(attacker, blocker, withoutAbilities);
+                    + predictPowerBonusOfBlocker(attacker, blocker, withoutAbilities);
         }
         if (attacker.toughnessAssignsDamage()) {
             attackerDamage = attacker.getNetToughness()
-                    + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
+                    + predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
         } else {
         	attackerDamage = attacker.getNetPower()
-                    + ComputerUtilCombat.predictPowerBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
+                    + predictPowerBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
         }
 
         int possibleDefenderPrevention = 0;
@@ -1984,15 +1986,15 @@ public class ComputerUtilCombat {
         if (combat != null) {
             for (Card atkr : combat.getAttackersBlockedBy(blocker)) {
                 if (!atkr.equals(attacker)) {
-                    attackerDamage += predictDamageTo(blocker, atkr.getNetCombatDamage(), 0, atkr, true);
+                    attackerDamage += predictDamageTo(blocker, atkr.getNetCombatDamage(), atkr, true);
                 }
             }
         }
 
-        final int defenderLife = ComputerUtilCombat.getDamageToKill(blocker)
-                + ComputerUtilCombat.predictToughnessBonusOfBlocker(attacker, blocker, withoutAbilities);
-        final int attackerLife = ComputerUtilCombat.getDamageToKill(attacker)
-                + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
+        final int defenderLife = getDamageToKill(blocker, false)
+                + predictToughnessBonusOfBlocker(attacker, blocker, withoutAbilities);
+        final int attackerLife = getDamageToKill(attacker, false)
+                + predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
 
         if (attacker.hasKeyword(Keyword.DOUBLE_STRIKE)) {
             if (attackerDamage > 0 && (hasKeyword(attacker, "Deathtouch", withoutAbilities, combat) || blocker.hasSVar("DestroyWhenDamaged"))) {
@@ -2002,8 +2004,7 @@ public class ComputerUtilCombat {
                 return true;
             }
 
-            // Attacker may kill the blocker before he can deal normal
-            // (secondary) damage
+            // Attacker may kill the blocker before he can deal normal (secondary) damage
             if (dealsFirstStrikeDamage(blocker, withoutAbilities, combat)
                     && !attacker.hasKeyword(Keyword.INDESTRUCTIBLE)) {
                 if (defenderDamage >= attackerLife) {
@@ -2042,7 +2043,6 @@ public class ComputerUtilCombat {
         return false;// should never arrive here
     } // canDestroyBlocker
 
-
     /**
      * <p>
      * distributeAIDamage.
@@ -2075,8 +2075,7 @@ public class ComputerUtilCombat {
 
             // trample
             if (hasTrample) {
-
-                int dmgToKill = ComputerUtilCombat.getEnoughDamageToKill(blocker, dmgCanDeal, attacker, true);
+                int dmgToKill = getEnoughDamageToKill(blocker, dmgCanDeal, attacker, true);
 
                 if (dmgCanDeal < dmgToKill) {
                     dmgToKill = Math.min(blocker.getLethalDamage(), dmgCanDeal);
@@ -2106,7 +2105,7 @@ public class ComputerUtilCombat {
             Card lastBlocker = null;
             for (final Card b : block) {
                 lastBlocker = b;
-                final int dmgToKill = ComputerUtilCombat.getEnoughDamageToKill(b, dmgCanDeal, attacker, true);
+                final int dmgToKill = getEnoughDamageToKill(b, dmgCanDeal, attacker, true);
                 if (dmgToKill <= dmgCanDeal) {
                     damageMap.put(b, dmgToKill);
                     dmgCanDeal -= dmgToKill;
@@ -2124,14 +2123,13 @@ public class ComputerUtilCombat {
             if (dmgCanDeal > 0 ) { // if any damage left undistributed,
                 if (hasTrample && isAttacking) // if you have trample, deal damage to defending entity
                     damageMap.put(null, dmgCanDeal);
-                else if ( lastBlocker != null ) { // otherwise flush it into last blocker
+                else if (lastBlocker != null) { // otherwise flush it into last blocker
                     damageMap.put(lastBlocker, dmgCanDeal + damageMap.get(lastBlocker));
                 }
             }
         }
         return damageMap;
     } // setAssignedDamage()
-
 
     // how much damage is enough to kill the creature (for AI)
     /**
@@ -2168,13 +2166,13 @@ public class ComputerUtilCombat {
      */
     public static final int getEnoughDamageToKill(final Card c, final int maxDamage, final Card source, final boolean isCombat,
             final boolean noPrevention) {
-        final int killDamage = c.isPlaneswalker() ? c.getCurrentLoyalty() : ComputerUtilCombat.getDamageToKill(c);
+        final int killDamage = getDamageToKill(c, false);
 
         if (c.hasKeyword(Keyword.INDESTRUCTIBLE) || c.getShieldCount() > 0) {
             if (!(source.hasKeyword(Keyword.WITHER) || source.hasKeyword(Keyword.INFECT))) {
                 return maxDamage + 1;
             }
-        } else if (source.hasKeyword(Keyword.DEATHTOUCH)) {
+        } else if (source.hasKeyword(Keyword.DEATHTOUCH) && !c.isPlaneswalker()) {
             for (int i = 1; i <= maxDamage; i++) {
                 if (noPrevention) {
                     if (c.staticReplaceDamage(i, source, isCombat) > 0) {
@@ -2209,11 +2207,11 @@ public class ComputerUtilCombat {
      *
      * @return a int.
      */
-    public final static int getDamageToKill(final Card c) {
-        int damageShield = c.getPreventNextDamageTotalShields();
-        int killDamage = c.getLethalDamage() + damageShield;
+    public final static int getDamageToKill(final Card c, boolean withShields) {
+        int damageShield = withShields ? c.getPreventNextDamageTotalShields() : 0;
+        int killDamage = (c.isPlaneswalker() ? c.getCurrentLoyalty() : c.getLethalDamage()) + damageShield;
 
-        if ((killDamage > damageShield)
+        if (killDamage > damageShield
                 && c.hasSVar("DestroyWhenDamaged")) {
             killDamage = 1 + damageShield;
         }
@@ -2221,7 +2219,6 @@ public class ComputerUtilCombat {
         return killDamage;
     }
 
-
     /**
      * <p>
      * predictDamage.
@@ -2235,69 +2232,9 @@ public class ComputerUtilCombat {
      *            a boolean.
      * @return a int.
      */
-
-    public final static int predictDamageTo(final Player target, final int damage, final Card source, final boolean isCombat) {
-        final Game game = target.getGame();
-        int restDamage = damage;
-
-        restDamage = target.staticReplaceDamage(restDamage, source, isCombat);
-
-        // Predict replacement effects
-        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final ReplacementEffect re : ca.getReplacementEffects()) {
-                if (!re.getMode().equals(ReplacementType.DamageDone) ||
-                        (!re.hasParam("PreventionEffect") && !re.hasParam("Prevent"))) {
-                    continue;
-                }
-                // Immortal Coil prevents the damage but has a similar negative effect
-                if ("Immortal Coil".equals(ca.getName())) {
-                    continue;
-                }
-                if (!re.matchesValidParam("ValidSource", source)) {
-                    continue;
-                }
-                if (!re.matchesValidParam("ValidTarget", target)) {
-                    continue;
-                }
-                if (re.hasParam("IsCombat")) {
-                    if (re.getParam("IsCombat").equals("True") != isCombat) {
-                        continue;
-                    }
-                }
-                if (re.hasParam("Prevent")) {
-                    return 0;
-                } else if (re.getOverridingAbility() != null) {
-                    SpellAbility repSA = re.getOverridingAbility();
-                    if (repSA.getApi() == ApiType.ReplaceDamage) {
-                        return Math.max(0, restDamage - AbilityUtils.calculateAmount(ca, repSA.getParam("Amount"), repSA));
-                    }
-                }
-                return 0;
-            }
-        }
-
-        restDamage = target.staticDamagePrevention(restDamage, 0, source, isCombat);
-
-        return restDamage;
-    }
-
-    /**
-     * <p>
-     * predictDamage.
-     * </p>
-     *
-     * @param damage
-     *            a int.
-     * @param source
-     *            a {@link forge.game.card.Card} object.
-     * @param isCombat
-     *            a boolean.
-     * @return a int.
-     */
-    public final static int predictDamageTo(final Card target, final int damage, final Card source, final boolean isCombat) {
+    public final static int predictDamageTo(final GameEntity target, final int damage, final Card source, final boolean isCombat) {
         return predictDamageTo(target, damage, 0, source, isCombat);
     }
-
 
     // This function helps the AI calculate the actual amount of damage an
     // effect would deal
@@ -2316,7 +2253,7 @@ public class ComputerUtilCombat {
      *            a boolean.
      * @return a int.
      */
-    public final static int predictDamageTo(final Card target, final int damage, final int possiblePrevention, final Card source, final boolean isCombat) {
+    public final static int predictDamageTo(final GameEntity target, final int damage, final int possiblePrevention, final Card source, final boolean isCombat) {
         int restDamage = damage;
 
         restDamage = target.staticReplaceDamage(restDamage, source, isCombat);
@@ -2375,7 +2312,7 @@ public class ComputerUtilCombat {
 	                continue;
 	            }
 	            if (c != combatant) {
-	            	if (ability.getTargetRestrictions() == null || !ability.canTarget(combatant)) {
+	            	if (!ability.usesTargeting() || !ability.canTarget(combatant)) {
 	            		continue;
 	            	}
 	            	//the AI will will fail to predict tapping of attackers
@@ -2428,7 +2365,6 @@ public class ComputerUtilCombat {
         repParams.put(AbilityKey.DamageSource, attacker);
         repParams.put(AbilityKey.DamageAmount, damage);
         repParams.put(AbilityKey.IsCombat, true);
-        repParams.put(AbilityKey.Prevention, true);
 
         List<ReplacementEffect> list = game.getReplacementHandler().getReplacementList(
                 ReplacementType.DamageDone, repParams, ReplacementLayer.Other);
@@ -2523,18 +2459,65 @@ public class ComputerUtilCombat {
 
         if (combat.isBlocked(c)) {
             for (Card blk : combat.getBlockers(c)) {
-                if (ComputerUtilCombat.blockerWouldBeDestroyed(ai, blk, combat)) {
+                if (blockerWouldBeDestroyed(ai, blk, combat)) {
                     return true;
                 }
             }
         } else if (combat.isBlocking(c)) {
             for (Card atk : combat.getAttackersBlockedBy(c)) {
-                if (ComputerUtilCombat.attackerWouldBeDestroyed(ai, atk, combat)) {
+                if (attackerWouldBeDestroyed(ai, atk, combat)) {
                     return true;
                 }
             }
         }
 
         return false;
+    }
+
+    public static int predictPoisonFromTriggers(Card attacker, Player attacked, int damage) {
+        int pd = 0, poison = 0;
+        int damageAfterRepl = predictDamageTo(attacked, damage, attacker, true);
+        if (damageAfterRepl > 0) {
+            CardCollectionView trigCards = attacker.getController().getCardsIn(ZoneType.Battlefield);
+            for (Card c : trigCards) {
+                for (Trigger t : c.getTriggers()) {
+                    if (t.getMode() == TriggerType.DamageDone && "True".equals(t.getParam("CombatDamage")) && t.matchesValidParam("ValidSource", attacker)) {
+                        SpellAbility ab = t.getOverridingAbility();
+                        if (ab.getApi() == ApiType.Poison && "TriggeredTarget".equals(ab.getParam("Defined"))) {
+                            pd += AbilityUtils.calculateAmount(attacker, ab.getParam("Num"), ab);
+                        }
+                    }
+                }
+                poison += pd;
+                if (pd > 0 && attacker.hasKeyword(Keyword.DOUBLE_STRIKE)) {
+                    poison += pd;
+                }
+                // TODO: Predict replacement effects for counters (doubled, reduced, additional counters, etc.)
+            }
+        }
+        return poison;
+    }
+
+    public static GameEntity addAttackerToCombat(SpellAbility sa, Card attacker, FCollection<GameEntity> defenders) {
+        Combat combat = sa.getHostCard().getGame().getCombat();
+        if (combat != null) {
+            // 1. If the card that spawned the attacker was sent at a planeswalker, attack the same. Consider improving.
+            GameEntity def = combat.getDefenderByAttacker(sa.getHostCard());
+            if (def != null && def instanceof Card) {
+                if (((Card)def).isPlaneswalker()) {
+                    return def;
+                }
+            }
+            // 2. Otherwise, go through the list of options one by one, choose the first one that can't be blocked profitably.
+            for (GameEntity p : defenders) {
+                if (p instanceof Player && !ComputerUtilCard.canBeBlockedProfitably((Player)p, attacker)) {
+                    return p;
+                }
+                if (p instanceof Card && !ComputerUtilCard.canBeBlockedProfitably(((Card)p).getController(), attacker)) {
+                    return p;
+                }
+            }
+        }
+        return Iterables.getFirst(defenders, null);
     }
 }

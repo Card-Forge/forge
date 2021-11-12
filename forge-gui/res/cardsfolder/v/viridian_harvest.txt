@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant artifact
 A:SP$ Attach | Cost$ G | ValidTgts$ Artifact | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigGainLife | TriggerDescription$ When enchanted artifact is put into a graveyard, you gain 6 life.
-SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ 6
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 6
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_harvest.jpg
 Oracle:Enchant artifact\nWhen enchanted artifact is put into a graveyard, you gain 6 life.

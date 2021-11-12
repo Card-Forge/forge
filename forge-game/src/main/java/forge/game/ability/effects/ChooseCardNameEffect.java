@@ -141,7 +141,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                 }
 
                 host.setNamedCard(chosen);
-                if(!randomChoice) {
+                if (!randomChoice) {
                     p.getGame().getAction().notifyOfValue(sa, host, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), chosen), p);
                     p.setNamedCard(chosen);
                 }

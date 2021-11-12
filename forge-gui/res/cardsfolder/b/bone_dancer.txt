@@ -3,7 +3,7 @@ ManaCost:1 B B
 Types:Creature Zombie
 PT:2/2
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ DBChangeZone | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may put the top creature card of defending player's graveyard onto the battlefield under your control. If you do, CARDNAME assigns no combat damage this turn.
-SVar:DBChangeZone:DB$ChangeZoneAll | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.TopGraveyardCreature+DefenderCtrl | GainControl$ True | ChangeNum$ 1 | SubAbility$ DBNoCombatDamage
+SVar:DBChangeZone:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.TopGraveyardCreature+DefenderCtrl | GainControl$ True | ChangeNum$ 1 | SubAbility$ DBNoCombatDamage
 SVar:DBNoCombatDamage:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage
 SVar:NeedsOrderedGraveyard:OPPONENT
 Oracle:Whenever Bone Dancer attacks and isn't blocked, you may put the top creature card of defending player's graveyard onto the battlefield under your control. If you do, Bone Dancer assigns no combat damage this turn.

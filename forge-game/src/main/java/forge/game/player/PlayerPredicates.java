@@ -63,7 +63,6 @@ public final class PlayerPredicates {
         return Predicates.not(isCardInPlay(cardName));
     }
 
-
     public static final Predicate<Player> hasCounters() {
         return new Predicate<Player>() {
             @Override
@@ -117,6 +116,15 @@ public final class PlayerPredicates {
             @Override
             public boolean apply(final Player p) {
                 return p.hasKeyword(keyword);
+            }
+        };
+    }
+
+    public static final Predicate<Player> canBeAttached(final Card aura) {
+        return new Predicate<Player>() {
+            @Override
+            public boolean apply(final Player p) {
+                return p.canBeAttached(aura);
             }
         };
     }

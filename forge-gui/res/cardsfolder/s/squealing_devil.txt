@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | ManaNotSpent$ B | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless {B} was spent to cast it.
 SVar:TrigPump:AB$ Pump | Cost$ X | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | SpellDescription$ Target creature gets +X/+0 until end of turn.
 SVar:X:Count$xPaid
-SVar:TrigSac:DB$Sacrifice | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:ManaNeededToAvoidNegativeEffect:black
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squealing_devil.jpg

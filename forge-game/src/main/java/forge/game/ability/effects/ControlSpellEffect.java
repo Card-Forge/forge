@@ -28,7 +28,7 @@ public class ControlSpellEffect extends SpellAbilityEffect {
 
         sb.append(newController).append(" gains control of ");
 
-        for(SpellAbility spell : getTargetSpells(sa)) {
+        for (SpellAbility spell : getTargetSpells(sa)) {
             Card c = spell.getHostCard();
             sb.append(" ");
             if (c.isFaceDown()) {
@@ -59,7 +59,7 @@ public class ControlSpellEffect extends SpellAbilityEffect {
 
         // If an Exchange needs to happen, make sure both parties are still in the right zones
 
-        for(SpellAbility spell : tgtSpells) {
+        for (SpellAbility spell : tgtSpells) {
             Card tgtC = spell.getHostCard();
             SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spell);
             long tStamp = game.getNextTimestamp();
@@ -87,7 +87,7 @@ public class ControlSpellEffect extends SpellAbilityEffect {
                     if (remember) {
                         source.addRemembered(c);
                     }
-                    c.setController(si.getActivatingPlayer(), tStamp);
+                    c.addTempController(si.getActivatingPlayer(), tStamp);
                 }
             }
 
@@ -98,7 +98,7 @@ public class ControlSpellEffect extends SpellAbilityEffect {
             if (remember) {
                 source.addRemembered(tgtC);
             }
-            tgtC.setController(newController, tStamp);
+            tgtC.addTempController(newController, tStamp);
             si.setActivatingPlayer(newController);
         }
     }

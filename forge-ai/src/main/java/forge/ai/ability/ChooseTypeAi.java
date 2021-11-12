@@ -1,10 +1,13 @@
 package forge.ai.ability;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.google.common.base.Predicates;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import forge.ai.AiCardMemory;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
@@ -21,6 +24,7 @@ import forge.game.card.CardPredicates;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
@@ -104,12 +108,44 @@ public class ChooseTypeAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        boolean isCurse = sa.hasParam("IsCurse");
+
         if (sa.usesTargeting()) {
+            final List<Player> oppList = Lists.newArrayList(Iterables.filter(
+                    ai.getOpponents(), PlayerPredicates.isTargetableBy(sa)));
+            final List<Player> alliesList = Lists.newArrayList(Iterables.filter(
+                    ai.getAllies(), PlayerPredicates.isTargetableBy(sa)));
+
             sa.resetTargets();
-            sa.getTargets().add(ai);
+
+            if (isCurse) {
+                if (!oppList.isEmpty()) {
+                    sa.getTargets().add(Iterables.getFirst(oppList, null));
+                } else if (mandatory) {
+                    if (!alliesList.isEmpty()) {
+                        sa.getTargets().add(Iterables.getFirst(alliesList, null));
+                    } else if (ai.canBeTargetedBy(sa)) {
+                        sa.getTargets().add(ai);
+                    }
+                }
+            } else {
+                if (ai.canBeTargetedBy(sa)) {
+                    sa.getTargets().add(ai);
+                } else {
+                    if (!alliesList.isEmpty()) {
+                        sa.getTargets().add(Iterables.getFirst(alliesList, null));
+                    } else if (!oppList.isEmpty() && mandatory) {
+                        sa.getTargets().add(Iterables.getFirst(oppList, null));
+                    }
+                }
+            }
+
+            if (!sa.isTargetNumberValid()) {
+                return false; // nothing to target?
+            }
         } else {
             for (final Player p : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa)) {
-                if (p.isOpponentOf(ai) && !mandatory) {
+                if (p.isOpponentOf(ai) && !mandatory && !isCurse) {
                     return false;
                 }
             }

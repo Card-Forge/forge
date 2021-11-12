@@ -6,5 +6,5 @@ K:Flying
 K:ETBReplacement:Other:TrigRoll
 SVar:TrigRoll:DB$ RollDice | ResultSVar$ SetPwr | SubAbility$ RollTough | SpellDescription$ As CARDNAME enters the battlefield, roll a six-sided die twice. Its base power becomes the first result and its base toughness becomes the second result.
 SVar:RollTough:DB$ RollDice | ResultSVar$ SetTgn | SubAbility$ DBAnimate
-SVar:DBAnimate:DB$ Animate | Defined$ Self | Power$ SetPwr | Toughness$ SetTgn
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Power$ SetPwr | Toughness$ SetTgn | Duration$ Permanent
 Oracle:As Elvish Impersonators enters the battlefield, roll a six-sided die twice. Its base power becomes the first result and its base toughness becomes the second result.

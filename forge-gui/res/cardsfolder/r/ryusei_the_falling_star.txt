@@ -4,6 +4,6 @@ Types:Legendary Creature Dragon Spirit
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, it deals 5 damage to each creature without flying.
-SVar:TrigDamage:DB$DamageAll | ValidCards$ Creature.withoutFlying | NumDmg$ 5 | ValidDescription$ each creature without flying.
+SVar:TrigDamage:DB$ DamageAll | ValidCards$ Creature.withoutFlying | NumDmg$ 5 | ValidDescription$ each creature without flying.
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card79242.jpg
 Oracle:Flying\nWhen Ryusei, the Falling Star dies, it deals 5 damage to each creature without flying.

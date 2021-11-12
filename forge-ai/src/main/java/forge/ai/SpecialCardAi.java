@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import forge.game.GameEntity;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
@@ -127,11 +128,11 @@ public class SpecialCardAi {
                     CardPredicates.isType("Instant"), CardPredicates.isType("Sorcery")));
             if (!hand.isEmpty()) {
                 // has spell that can be cast in hand with put ability
-                if (!CardLists.filter(hand, CardPredicates.hasCMC(counterNum + 1)).isEmpty()) {
+                if (Iterables.any(hand, CardPredicates.hasCMC(counterNum + 1))) {
                     return false;
                 }
                 // has spell that can be cast if one counter is removed
-                if (!CardLists.filter(hand, CardPredicates.hasCMC(counterNum)).isEmpty()) {
+                if (Iterables.any(hand, CardPredicates.hasCMC(counterNum))) {
                     sa.setXManaCostPaid(1);
                     return true;
                 }
@@ -399,7 +400,7 @@ public class SpecialCardAi {
             }
 
             boolean isBlocking = combat.isBlocking(source);
-            boolean cantDie = ComputerUtilCombat.attackerCantBeDestroyedInCombat(ai, source);
+            boolean cantDie = ComputerUtilCombat.combatantCantBeDestroyed(ai, source);
 
             CardCollection opposition = isBlocking ? combat.getAttackersBlockedBy(source) : combat.getBlockers(source);
             int oppP = Aggregates.sum(opposition, CardPredicates.Accessors.fnGetAttack);
@@ -413,7 +414,7 @@ public class SpecialCardAi {
             if (!isBlocking && combat.getDefenderByAttacker(source) instanceof Card) {
                 int loyalty = combat.getDefenderByAttacker(source).getCounters(CounterEnumType.LOYALTY);
                 int totalDamageToPW = 0;
-                for (Card atk : (combat.getAttackersOf(combat.getDefenderByAttacker(source)))) {
+                for (Card atk :combat.getAttackersOf(combat.getDefenderByAttacker(source))) {
                     if (combat.isUnblocked(atk)) {
                         totalDamageToPW += atk.getNetCombatDamage();
                     }
@@ -433,7 +434,7 @@ public class SpecialCardAi {
                 if (c.hasKeyword(Keyword.FIRST_STRIKE) || c.hasKeyword(Keyword.DOUBLE_STRIKE)) {
                     oppHasFirstStrike = true;
                 }
-                if (!ComputerUtilCombat.attackerCantBeDestroyedInCombat(c.getController(), c)) {
+                if (!ComputerUtilCombat.combatantCantBeDestroyed(c.getController(), c)) {
                     oppCantDie = false;
                 }
             }
@@ -562,7 +563,7 @@ public class SpecialCardAi {
                     // Need to have something else in hand that is blue in addition to Force of Will itself,
                     // otherwise the AI will fail to play the card and the card will disappear from the pool
                     return false;
-                } else if (CardLists.filter(blueCards, CardPredicates.lessCMC(3)).isEmpty()) {
+                } else if (!Iterables.any(blueCards, CardPredicates.lessCMC(3))) {
                     // We probably need a low-CMC card to exile to it, exiling a higher CMC spell may be suboptimal
                     // since the AI does not prioritize/value cards vs. permission at the moment.
                     return false;
@@ -613,6 +614,28 @@ public class SpecialCardAi {
             } else {
                 return Aggregates.random(spells); // if worst comes to worst, it's a PW +1 ability, so do at least something
             }
+        }
+    }
+
+    // Goblin Polka Band
+    public static class GoblinPolkaBand {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            int maxPotentialTgts = Lists.newArrayList(Iterables.filter(ai.getOpponents().getCreaturesInPlay(), CardPredicates.Presets.UNTAPPED)).size();
+            int maxPotentialPayment = ComputerUtilMana.determineLeftoverMana(sa, ai, "R");
+
+            int numTgts = Math.min(maxPotentialPayment, maxPotentialTgts);
+            if (numTgts == 0) {
+                return false;
+            }
+
+            // Set Announce
+            sa.getHostCard().setSVar("TgtNum", String.valueOf(numTgts));
+
+            // Simulate random targeting
+            List<GameEntity> validTgts = sa.getTargetRestrictions().getAllCandidates(sa, true);
+            sa.resetTargets();
+            sa.getTargets().addAll(Aggregates.random(validTgts, numTgts));
+            return true;
         }
     }
 
@@ -740,7 +763,7 @@ public class SpecialCardAi {
 
                         for (Card c1 : lib) {
                             if (c1.getName().equals(c.getName())) {
-                                if (CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(c1.getName())).isEmpty()
+                                if (!Iterables.any(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(c1.getName()))
                                         && ComputerUtilMana.hasEnoughManaSourcesToCast(c1.getFirstSpellAbility(), ai)) {
                                     // Try not to search for things we already have in hand or that we can't cast
                                     libPriorityList.add(c1);
@@ -856,7 +879,7 @@ public class SpecialCardAi {
 
             for (Card gate : availableGates)
             {
-                if (CardLists.filter(currentGates, CardPredicates.nameEquals(gate.getName())).isEmpty())
+                if (!Iterables.any(currentGates, CardPredicates.nameEquals(gate.getName())))
                 {
                     // Diversify our mana base
                     return gate;
@@ -1006,7 +1029,7 @@ public class SpecialCardAi {
                 return false; // nothing to draw from the library
             }
 
-            if (!CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Yawgmoth's Bargain")).isEmpty()) {
+            if (Iterables.any(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Yawgmoth's Bargain"))) {
                 // Prefer Yawgmoth's Bargain because AI is generally better with it
 
                 // TODO: in presence of bad effects which deal damage when a card is drawn, probably better to prefer Necropotence instead?
@@ -1024,7 +1047,7 @@ public class SpecialCardAi {
             }
 
             // TODO: Any other bad effects like that?
-            boolean blackViseOTB = !CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Black Vise")).isEmpty();
+            boolean blackViseOTB = Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Black Vise"));
 
             if (ph.getNextTurn().equals(ai) && ph.is(PhaseType.MAIN2)
                     && ai.getSpellsCastLastTurn() == 0 
@@ -1157,6 +1180,33 @@ public class SpecialCardAi {
         }
     }
 
+    // Power Struggle
+    public static class PowerStruggle {
+        public static boolean considerFirstTarget(final Player ai, final SpellAbility sa) {
+            Card firstTgt = (Card)Aggregates.random(sa.getTargetRestrictions().getAllCandidates(sa, true));
+            if (firstTgt != null) {
+                sa.getTargets().add(firstTgt);
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public static boolean considerSecondTarget(final Player ai, final SpellAbility sa) {
+            Card firstTgt = sa.getParent().getTargetCard();
+            Iterable<Card> candidates = Iterables.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield),
+                    Predicates.and(CardPredicates.sharesCardTypeWith(firstTgt), CardPredicates.isTargetableBy(sa)));
+            Card secondTgt = Aggregates.random(candidates);
+            if (secondTgt != null) {
+                sa.resetTargets();
+                sa.getTargets().add(secondTgt);
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
     // Price of Progress
     public static class PriceOfProgress {
         public static boolean consider(final Player ai, final SpellAbility sa) {
@@ -1248,6 +1298,51 @@ public class SpecialCardAi {
             }
 
             return dragonPower >= minLife;
+        }
+    }
+
+    // Savior of Ollenbock
+    public static class SaviorOfOllenbock {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            CardCollection oppTargetables = CardLists.getTargetableCards(ai.getOpponents().getCreaturesInPlay(), sa);
+            CardCollection threats = CardLists.filter(oppTargetables, new Predicate<Card>() {
+                @Override
+                public boolean apply(Card card) {
+                    return !ComputerUtilCard.isUselessCreature(card.getController(), card);
+                }
+            });
+            CardCollection ownTgts = CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
+
+            // TODO: improve the conditions for when the AI is considered threatened (check the possibility of being attacked?)
+            int lifeInDanger = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD));
+            boolean threatened = !threats.isEmpty() && ((ai.getLife() <= lifeInDanger && !ai.cantLoseForZeroOrLessLife()) || ai.getLifeLostLastTurn() + ai.getLifeLostThisTurn() > 0);
+
+            if (threatened) {
+                sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(threats));
+            } else if (!ownTgts.isEmpty()) {
+                Card target = ComputerUtilCard.getBestCreatureAI(ownTgts);
+                sa.getTargets().add(target);
+
+                int ownExiledValue = ComputerUtilCard.evaluateCreature(target), oppExiledValue = 0;
+                for (Card c : ai.getGame().getCardsIn(ZoneType.Exile)) {
+                    if (c.getExiledWith() == sa.getHostCard()) {
+                        if (c.getOwner() == ai) {
+                            ownExiledValue += ComputerUtilCard.evaluateCreature(c);
+                        } else {
+                            oppExiledValue += ComputerUtilCard.evaluateCreature(c);
+                        }
+                    }
+                }
+                if (ownExiledValue > oppExiledValue + 150) {
+                    sa.getHostCard().setSVar("SacMe", "5");
+                } else {
+                    sa.getHostCard().removeSVar("SacMe");
+                }
+            } else if (!threats.isEmpty()) {
+                sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(threats));
+            }
+
+            return sa.isTargetNumberValid();
         }
     }
 
@@ -1572,7 +1667,7 @@ public class SpecialCardAi {
             int maxHandSize = ai.getMaxHandSize();
 
             // TODO: Any other bad effects like that?
-            boolean blackViseOTB = !CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Black Vise")).isEmpty();
+            boolean blackViseOTB = Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Black Vise"));
 
             // TODO: Consider effects like "whenever a player draws a card, he loses N life" (e.g. Nekusar, the Mindraiser),
             //       and effects that draw an additional card whenever a card is drawn.

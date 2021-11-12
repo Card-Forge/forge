@@ -154,14 +154,13 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                         copies.add(copy);
                     }
                 }
-            }
-            else {
+            } else {
                 for (int i = 0; i < amount; i++) {
                     SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
                     if (sa.hasParam("MayChooseTarget")) {
                         copy.setMayChooseNewTargets(true);
                     }
-                    if (sa.hasParam("RandomTarget")){
+                    if (sa.hasParam("RandomTarget")) {
                         List<GameEntity> candidates = copy.getTargetRestrictions().getAllCandidates(chosenSA, true);
                         if (sa.hasParam("RandomTargetRestriction")) {
                             candidates.removeIf(new Predicate<GameEntity>() {

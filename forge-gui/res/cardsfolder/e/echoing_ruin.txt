@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Sorcery
 A:SP$ Destroy | Cost$ 1 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ DBDestroyAll | RememberTargets$ True | ForgetOtherTargets$ True | SpellDescription$ Destroy target artifact and all other artifacts with the same name as that artifact.
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Remembered.Artifact+Other+sameName | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/echoing_ruin.jpg
 Oracle:Destroy target artifact and all other artifacts with the same name as that artifact.

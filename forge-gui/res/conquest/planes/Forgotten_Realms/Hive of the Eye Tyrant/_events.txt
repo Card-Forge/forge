@@ -1,0 +1,9 @@
+Name:Ebondeath, Dracolich|Deck:Ebondeath, Dracolich.dck|Variant:Commander|Avatar:Ebondeath, Dracolich|Desc:
+Name:Xanathar, Guild Kingpin|Deck:Xanathar, Guild Kingpin.dck|Variant:Commander|Avatar:Xanathar, Guild Kingpin|Desc:
+Name:Sefris of the Hidden Ways|Deck:Sefris of the Hidden Ways.dck|Variant:Commander|Avatar:Sefris of the Hidden Ways|Desc:
+Name:Krydle of Baldur's Gate|Deck:Krydle of Baldur's Gate.dck|Variant:Commander|Avatar:Krydle of Baldur's Gate|Desc:
+Name:Lolth, Spider Queen|Deck:Lolth, Spider Queen.dck|Variant:Planeswalker|Avatar:Lolth, Spider Queen|Desc:
+Name:Nihiloor|Deck:Nihiloor.dck|Variant:Commander|Avatar:Nihiloor|Desc:
+Name:Rith, the Awakener|Deck:Rith, the Awakener.dck|Variant:Vanguard|Avatar:Rith, the Awakener Avatar|Desc:
+Name:Orcus, Prince of Undeath|Deck:Orcus, Prince of Undeath.dck|Variant:Commander|Avatar:Orcus, Prince of Undeath|Desc:
+Name:Black Planar Mage|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

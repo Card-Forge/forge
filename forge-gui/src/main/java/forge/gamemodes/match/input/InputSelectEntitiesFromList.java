@@ -44,7 +44,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         getController().getGui().setSelectables(vCards);
         final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
         for (final GameEntity c : validChoices) {
-            final Zone cz = (c instanceof Card) ? ((Card) c).getZone() : null;
+            final Zone cz = (c instanceof Card) ? ((Card) c).getLastKnownZone() : null;
             if (cz != null) {
                 zonesToUpdate.add(new PlayerZoneUpdate(cz.getPlayer().getView(), cz.getZoneType()));
             }
@@ -100,8 +100,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         final boolean entityWasSelected = selected.contains(c);
         if (entityWasSelected) {
             selected.remove(c);
-        }
-        else {
+        } else {
             selected.add((T)c);
         }
         onSelectStateChanged(c, !entityWasSelected);
@@ -124,8 +123,8 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
 
     @Override
     protected void onStop() {
-	getController().getGui().hideZones(getController().getPlayer().getView(),zonesShown);  
-	getController().getGui().clearSelectables();
-	super.onStop();
+        getController().getGui().hideZones(getController().getPlayer().getView(),zonesShown);  
+        getController().getGui().clearSelectables();
+        super.onStop();
     }
 }

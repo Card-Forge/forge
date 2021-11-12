@@ -1,0 +1,9 @@
+Name:Drownyard Amalgam
+ManaCost:4 U
+Types:Creature Zombie Horror
+PT:3/6
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, target player mills three cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Select target player
+A:AB$ Pump | Cost$ 2 U | Defined$ Self | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME can't be blocked this turn. | StackDescription$ SpellDescription
+DeckHas:Ability$Token
+Oracle:When Drownyard Amalgam enters the battlefield, target player mills three cards. (They put the top three cards of their library into their graveyard.)\n{2}{U}: Drownyard Amalgam can't be blocked this turn.

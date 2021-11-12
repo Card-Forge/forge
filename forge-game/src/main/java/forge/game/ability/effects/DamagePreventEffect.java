@@ -57,10 +57,10 @@ public class DamagePreventEffect extends DamagePreventEffectBase {
         return sb.toString();
     }
 
-        /* (non-Javadoc)
-         * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
-         */
-        @Override
+    /* (non-Javadoc)
+     * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
+     */
+    @Override
     public void resolve(SpellAbility sa) {
         Card host = sa.getHostCard();
         int numDam = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);

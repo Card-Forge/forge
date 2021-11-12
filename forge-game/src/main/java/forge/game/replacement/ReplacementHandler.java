@@ -30,6 +30,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.common.collect.Table;
 
 import forge.game.CardTraitBase;
 import forge.game.Game;
@@ -80,7 +81,6 @@ public class ReplacementHandler {
     //private final List<ReplacementEffect> tmpEffects = new ArrayList<ReplacementEffect>();
 
     public List<ReplacementEffect> getReplacementList(final ReplacementType event, final Map<AbilityKey, Object> runParams, final ReplacementLayer layer) {
-
         final CardCollection preList = new CardCollection();
         boolean checkAgain = false;
         Card affectedLKI = null;
@@ -117,9 +117,9 @@ public class ReplacementHandler {
             }
 
             // need to check non Intrinsic
-            for (Map.Entry<Long, CardTraitChanges> e : affectedLKI.getChangedCardTraits().entrySet()) {
+            for (Table.Cell<Long, Long, CardTraitChanges> e : affectedLKI.getChangedCardTraits().cellSet()) {
                 boolean hasRunRE = false;
-                String skey = String.valueOf(e.getKey());
+                String skey = String.valueOf(e.getRowKey()) + ":" + String.valueOf(e.getColumnKey());
 
                 for (ReplacementEffect re : this.hasRun) {
                     if (!re.isIntrinsic() && skey.equals(re.getSVar("_ReplacedTimestamp"))) {
@@ -135,9 +135,9 @@ public class ReplacementHandler {
                     }
                 }
             }
-            for (Map.Entry<Long, KeywordsChange> e : affectedLKI.getChangedCardKeywords().entrySet()) {
+            for (Table.Cell<Long, Long, KeywordsChange> e : affectedLKI.getChangedCardKeywords().cellSet()) {
                 boolean hasRunRE = false;
-                String skey = String.valueOf(e.getKey());
+                String skey = String.valueOf(e.getRowKey()) + ":" + String.valueOf(e.getColumnKey());
 
                 for (ReplacementEffect re : this.hasRun) {
                     if (!re.isIntrinsic() && skey.equals(re.getSVar("_ReplacedTimestamp"))) {
@@ -175,7 +175,6 @@ public class ReplacementHandler {
                 final Card c = preList.get(crd);
 
                 for (final ReplacementEffect replacementEffect : c.getReplacementEffects()) {
-
                     // Use "CheckLKIZone" parameter to test for effects that care abut where the card was last (e.g. Kalitas, Traitor of Ghet
                     // getting hit by mass removal should still produce tokens).
                     Zone cardZone = "True".equals(replacementEffect.getParam("CheckSelfLKIZone")) ? game.getChangeZoneLKIInfo(c).getLastKnownZone() : game.getZoneOf(c);

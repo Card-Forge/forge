@@ -4,11 +4,9 @@ import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterEnumType;
+import forge.game.card.*;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -17,6 +15,7 @@ import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
 
 public class SetStateEffect extends SpellAbilityEffect {
 
@@ -47,9 +46,32 @@ public class SetStateEffect extends SpellAbilityEffect {
         final boolean optional = sa.hasParam("Optional");
         final CardCollection transformedCards = new CardCollection();
 
+        CardCollection cardsToTransform = new CardCollection();
+        if (sa.hasParam("Choices")) {
+            CardCollectionView choices = game.getCardsIn(ZoneType.Battlefield);
+            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), p, host, sa);
+
+            final String numericAmount = sa.getParamOrDefault("Amount", "1");
+            final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) :
+                    AbilityUtils.calculateAmount(host, numericAmount, sa);
+            final int minAmount = sa.hasParam("MinAmount") ? Integer.parseInt(sa.getParam("MinAmount")) :
+                    validAmount;
+
+            if (validAmount <= 0) {
+                return;
+            }
+
+            String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") :
+                    Localizer.getInstance().getMessage("lblChooseaCard") + " ";
+            cardsToTransform.addAll(p.getController().chooseCardsForEffect(choices, sa, title, minAmount, validAmount,
+                    !sa.hasParam("Mandatory"), null));
+        } else {
+            cardsToTransform = getTargetCards(sa);
+        }
+
         GameEntityCounterTable table = new GameEntityCounterTable();
 
-        for (final Card tgtCard : getTargetCards(sa)) {
+        for (final Card tgtCard : cardsToTransform) {
             // check if the object is still in game or if it was moved
             Card gameCard = game.getCardState(tgtCard, null);
             // gameCard is LKI in that case, the card is not in game anymore
@@ -64,8 +86,8 @@ public class SetStateEffect extends SpellAbilityEffect {
             }
 
             // Cards which are not on the battlefield should not be able to transform.
-            // TurnFace should be allowed in other zones like Exil too
-            if (!"TurnFace".equals(mode) && !gameCard.isInZone(ZoneType.Battlefield)) {
+            // TurnFace should be allowed in other zones like Exile too
+            if (!"TurnFace".equals(mode) && !gameCard.isInZone(ZoneType.Battlefield) && !sa.hasParam("ETB")) {
                 continue;
             }
 
@@ -112,7 +134,7 @@ public class SetStateEffect extends SpellAbilityEffect {
             }
 
             // for reasons it can't transform, skip
-            if ("Transform".equals(mode) && !gameCard.canTransform()) {
+            if ("Transform".equals(mode) && !gameCard.canTransform(sa)) {
                 continue;
             }
 
@@ -165,7 +187,8 @@ public class SetStateEffect extends SpellAbilityEffect {
                 if (remChanged) {
                     host.addRemembered(gameCard);
                 }
-                transformedCards.add(gameCard);
+                if (!gameCard.isDoubleFaced())
+                    transformedCards.add(gameCard);
             }
         }
         table.triggerCountersPutAll(game);

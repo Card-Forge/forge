@@ -1,0 +1,10 @@
+Name:Elemental
+ManaCost:no cost
+Types:Creature Elemental
+Colors:red
+PT:*/*
+K:Trample
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ This creature's power and toughness are each equal to the number of instant and sorcery cards in your graveyard, plus the number of cards with flashback you own in exile.
+SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn/Plus.Y
+SVar:Y:Count$ValidExile Card.YouOwn+withFlashback
+Oracle:Trample\nThis creature's power and toughness are each equal to the number of instant and sorcery cards in your graveyard, plus the number of cards with flashback you own in exile.

@@ -18,6 +18,7 @@ import forge.screens.TabPageScreen;
 import forge.screens.TabPageScreen.TabPage;
 import forge.screens.home.HomeScreen;
 import forge.screens.match.MatchController;
+import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FGroupList;
@@ -211,6 +212,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("cbDetailedPaymentDesc"),
                 localizer.getMessage("nlDetailedPaymentDesc")),
                 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_GRAY_INACTIVE_TEXT,
+                localizer.getMessage("cbGrayText"),
+                localizer.getMessage("nlGrayText")),
+                1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_STORM_COUNT_IN_PROMPT,
                 localizer.getMessage("cbShowStormCount"),
                 localizer.getMessage("nlShowStormCount")),
@@ -257,6 +262,16 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 Forge.altZoneTabs = FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_PLAYERZONETABS);
                 if (MatchController.instance != null)
                     MatchController.instance.resetPlayerPanels();
+            }
+        },1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ANIMATED_CARD_TAPUNTAP,
+                localizer.getMessage("lblAnimatedCardTapUntap"),
+                localizer.getMessage("nlAnimatedCardTapUntap")){
+            @Override
+            public void select() {
+                super.select();
+                //update
+                Forge.animatedCardTapUntap = FModel.getPreferences().getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);
             }
         },1);
 
@@ -521,7 +536,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_ENABLE_BORDER_MASKING,
                 localizer.getMessage("lblBorderMaskOption"),
                 localizer.getMessage("nlBorderMaskOption"),
-                new String[]{"Off", "Crop", "Full"}) {
+                new String[]{"Off", "Crop", "Full", "Art"}) {
             @Override
             public void valueChanged(String newValue) {
                 super.valueChanged(newValue);
@@ -584,6 +599,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("lblShowAbilityIconsOverlays"),
                 localizer.getMessage("nlShowAbilityIconsOverlays")),
                 5);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_USE_LASER_ARROWS,
+                        localizer.getMessage("lblUseLaserArrows"),
+                        localizer.getMessage("nlUseLaserArrows")),
+                5);
         //Vibration Options
         lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LIFE_LOSS,
                 localizer.getMessage("lblVibrateWhenLosingLife"),
@@ -594,6 +613,29 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("nlVibrateAfterLongPress")),
                 6);
         //Sound Options
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_CURRENT_SOUND_SET,
+                        localizer.getMessage("cbpSoundSets"),
+                        localizer.getMessage("nlpSoundSets"),
+                        SoundSystem.instance.getAvailableSoundSets()) {
+                            @Override
+                            public void valueChanged(String newValue) {
+                                super.valueChanged(newValue);
+                                SoundSystem.instance.invalidateSoundCache();
+                            }
+                        },
+                7);
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_CURRENT_MUSIC_SET,
+                                    localizer.getMessage("cbpMusicSets"),
+                                    localizer.getMessage("nlpMusicSets"),
+                                    SoundSystem.getAvailableMusicSets()) {
+                                @Override
+                                public void valueChanged(String newValue) {
+                                    super.valueChanged(newValue);
+                                    MusicPlaylist.invalidateMusicPlaylist();
+                                    SoundSystem.instance.changeBackgroundTrack();
+                                }
+                            },
+                7);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_VOL_SOUNDS,
                 localizer.getMessage("cbAdjustSoundsVolume"),
                 localizer.getMessage("nlAdjustSoundsVolume"),

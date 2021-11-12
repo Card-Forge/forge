@@ -4,6 +4,6 @@ Types:Creature Elemental
 PT:7/7
 K:Evoke:4 G
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, create a 4/4 green Elemental creature token.
-SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenScript$ g_4_4_elemental | TokenOwner$ You | LegacyImage$ g 4 4 elemental mor
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_4_4_elemental | TokenOwner$ You | LegacyImage$ g 4 4 elemental mor
 SVar:Picture:http://www.wizards.com/global/images/magic/general/walker_of_the_grove.jpg
 Oracle:When Walker of the Grove leaves the battlefield, create a 4/4 green Elemental creature token.\nEvoke {4}{G} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)

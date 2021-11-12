@@ -2,7 +2,7 @@ Name:Arcane Spyglass
 ManaCost:4
 Types:Artifact
 A:AB$ Draw | Cost$ 2 T Sac<1/Land> | NumCards$ 1 | SubAbility$ DBPutCounter | SpellDescription$ Draw a card and put a charge counter on CARDNAME.
-SVar:DBPutCounter:DB$PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
 A:AB$Draw | Cost$ SubCounter<3/CHARGE> | NumCards$ 1 | SpellDescription$ Draw a card.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcane_spyglass.jpg

@@ -16,6 +16,7 @@ import forge.gamemodes.quest.data.QuestPreferences;
 import forge.gamemodes.tournament.system.TournamentBracket;
 import forge.gamemodes.tournament.system.TournamentPairing;
 import forge.gamemodes.tournament.system.TournamentPlayer;
+import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
 import forge.gui.util.SGuiChoose;
@@ -364,8 +365,7 @@ public class QuestTournamentController {
 
         if (draft.playerHasMatchesLeft()) {
             view.getBtnLeaveTournament().setText(localizer.getMessage("btnLeaveTournament"));
-        }
-        else {
+        } else {
             view.getBtnLeaveTournament().setText(localizer.getMessage("lblCollectPrizes"));
         }
     }
@@ -407,7 +407,12 @@ public class QuestTournamentController {
                 drafting = true;
 
                 final BoosterDraft draft = draftEvent.enter();
-                view.startDraft(draft);
+                FThreads.invokeInEdtLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        view.startDraft(draft);
+                    }
+                });
             }
         });
     }

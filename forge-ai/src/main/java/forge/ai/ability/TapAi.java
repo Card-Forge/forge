@@ -1,11 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.AiController;
-import forge.ai.AiProps;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCost;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
@@ -17,7 +12,6 @@ import forge.game.spellability.SpellAbility;
 public class TapAi extends TapAiBase {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-
         final PhaseHandler phase = ai.getGame().getPhaseHandler();
         final Player turn = phase.getPlayerTurn();
 
@@ -36,7 +30,7 @@ public class TapAi extends TapAiBase {
                 // Don't tap down after blockers
                 return false;
             }
-        } else if (!SpellAbilityAi.playReusable(ai, sa)){
+        } else if (!SpellAbilityAi.playReusable(ai, sa)) {
             // Generally don't want to tap things with an Instant during Players turn outside of combat
             return false;
         }
@@ -48,6 +42,10 @@ public class TapAi extends TapAiBase {
 
         final Card source = sa.getHostCard();
         final Cost abCost = sa.getPayCosts();
+
+        if ("GoblinPolkaBand".equals(sa.getParam("AILogic"))) {
+            return SpecialCardAi.GoblinPolkaBand.consider(ai, sa);
+        }
 
         if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source, sa)) {
             return false;
@@ -71,7 +69,6 @@ public class TapAi extends TapAiBase {
             sa.resetTargets();
             return tapPrefTargeting(ai, source, sa, false);
         }
-
     }
 
 }

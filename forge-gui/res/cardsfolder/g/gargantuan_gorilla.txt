@@ -8,10 +8,9 @@ SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Trample | ConditionDefined$ Remembere
 SVar:DBSacMe:DB$ Sacrifice | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Forest | ConditionCompare$ EQ0 | SubAbility$ DBRageDamage
 SVar:DBRageDamage:DB$ DealDamage | Defined$ You | NumDmg$ 7 | ConditionDefined$ Remembered | ConditionPresent$ Forest | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.Other | TgtPrompt$ Select target othere creature | NumDmg$ X | SubAbility$ DamageThis | SpellDescription$ CARDNAME deals damage equal to its power to target creature. That creature deals damage equal to its power to CARDNAME.
-SVar:DamageThis:DB$DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | NumDmg$ X | SubAbility$ DamageThis | SpellDescription$ CARDNAME deals damage equal to its power to another target creature. That creature deals damage equal to its power to CARDNAME.
+SVar:DamageThis:DB$ DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y
 SVar:X:Count$CardPower
 SVar:Y:Targeted$CardPower
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gargantuan_gorilla.jpg
 Oracle:At the beginning of your upkeep, you may sacrifice a Forest. If you sacrifice a snow Forest this way, Gargantuan Gorilla gains trample until end of turn. If you don't sacrifice a Forest, sacrifice Gargantuan Gorilla and it deals 7 damage to you.\n{T}: Gargantuan Gorilla deals damage equal to its power to another target creature. That creature deals damage equal to its power to Gargantuan Gorilla.

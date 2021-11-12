@@ -4,7 +4,7 @@ Types:Creature Bird Warrior
 PT:4/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBGainLife | TriggerDescription$ When CARDNAME enters the battlefield,  you gain 2 life for each creature you control with flying.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Creature.YouCtrl+withFlying/Twice
 DeckHas:Ability$LifeGain
 Oracle:Flying\nWhen Aven Gagglemaster enters the battlefield, you gain 2 life for each creature you control with flying.

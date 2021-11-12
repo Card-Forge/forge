@@ -1,0 +1,22 @@
+Name:Outland Liberator
+ManaCost:1 G
+Types:Creature Human Werewolf
+PT:2/2
+A:AB$ Destroy | Cost$ 1 Sac<1/CARDNAME> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+K:Daybound
+AlternateMode:DoubleFaced
+Oracle:{1}, Sacrifice Outland Liberator: Destroy target artifact or enchantment.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Frenzied Trapbreaker
+ManaCost:no cost
+Colors:green
+Types:Creature Werewolf
+PT:3/3
+A:AB$ Destroy | Cost$ 1 Sac<1/CARDNAME> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME attacks, destroy target artifact or enchantment defending player controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.ControlledBy TriggeredDefendingPlayer,Enchantment.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target artifact or enchantment defending player controls
+K:Nightbound
+SVar:HasAttackEffect:TRUE
+Oracle:{1}, Sacrifice Frenzied Trapbreaker: Destroy target artifact or enchantment.\nWhenever Frenzied Trapbreaker attacks, destroy target artifact or enchantment defending player controls.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

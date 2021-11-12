@@ -13,8 +13,6 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -52,18 +50,27 @@ public class AttackRequirement {
             nAttackAnything += attacker.getGoaded().size();
         }
 
+        // remove it when all of them are HIDDEN or static
         for (final KeywordInterface inst : attacker.getKeywords()) {
             final String keyword = inst.getOriginal();
             if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
                 final String defined = keyword.split(":")[1];
                 final GameEntity mustAttack2 = AbilityUtils.getDefinedPlayers(attacker, defined, null).get(0);
                 defenderSpecific.add(mustAttack2);
-            } else if (keyword.equals("CARDNAME attacks each combat if able.") || 
-                    (keyword.equals("CARDNAME attacks each turn if able.")
-                            && !attacker.getDamageHistory().getCreatureAttackedThisTurn())) {
+            } else if (keyword.equals("CARDNAME attacks each combat if able.")) {
                 nAttackAnything++;
             }
         }
+        for (final String keyword : attacker.getHiddenExtrinsicKeywords()) {
+            if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
+                final String defined = keyword.split(":")[1];
+                final GameEntity mustAttack2 = AbilityUtils.getDefinedPlayers(attacker, defined, null).get(0);
+                defenderSpecific.add(mustAttack2);
+            } else if (keyword.equals("CARDNAME attacks each combat if able.")) {
+                nAttackAnything++;
+            }
+        }
+        
         final GameEntity mustAttack3 = attacker.getMustAttackEntity();
         if (mustAttack3 != null) {
             defenderSpecific.add(mustAttack3);
@@ -79,7 +86,7 @@ public class AttackRequirement {
             if (c.hasKeyword("Each opponent must attack you or a planeswalker you control with at least one creature each combat if able.")) {
                 if (attacker.getController().isOpponentOf(c.getController()) && !defenderOrPWSpecific.containsKey(c.getController())) {
                     defenderOrPWSpecific.put(c.getController(), 1);
-                    for (Card pw : CardLists.filter(c.getController().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANESWALKERS)) {
+                    for (Card pw : c.getController().getPlaneswalkersInPlay()) {
                         // Add the attack alternatives that suffice (planeswalkers that can be attacked instead of the player)
                         if (!defenderSpecificAlternatives.containsKey(c.getController())) {
                             defenderSpecificAlternatives.put(c.getController(), Lists.newArrayList());
@@ -149,7 +156,7 @@ public class AttackRequirement {
         int violations = 0;
 
         // first. check to see if "must attack X or Y with at least one creature" requirements are satisfied
-        List<GameEntity> toRemoveFromDefSpecific = Lists.newArrayList();
+        //List<GameEntity> toRemoveFromDefSpecific = Lists.newArrayList();
         if (!defenderOrPWSpecific.isEmpty()) {
             for (GameEntity def : defenderOrPWSpecific.keySet()) {
                 if (defenderSpecificAlternatives.containsKey(def)) {

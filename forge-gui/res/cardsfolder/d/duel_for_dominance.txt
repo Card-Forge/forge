@@ -1,0 +1,8 @@
+Name:Duel for Dominance
+ManaCost:1 G
+Types:Instant
+A:SP$ PutCounter | ConditionCheckSVar$ X | ConditionSVarCompare$ GE3 | AILogic$ Fight | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBFight | SpellDescription$ Coven — Choose target creature you control and target creature you don't control. If you control three or more creatures with different powers, put a +1/+1 counter on the chosen creature you control. Then the chosen creatures fight each other. (They each deal damage equal to their power to the other.) | StackDescription$ If you control three or more creatures with different powers, put a +1/+1 counter on the chosen creature you control.
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control | StackDescription$ Then the chosen creatures fight each other. (They each deal damage equal to their power to the other.)
+SVar:X:Count$DifferentPower_Creature.YouCtrl
+DeckHas:Ability$Counters
+Oracle:Coven — Choose target creature you control and target creature you don't control. If you control three or more creatures with different powers, put a +1/+1 counter on the chosen creature you control. Then the chosen creatures fight each other. (They each deal damage equal to their power to the other.)

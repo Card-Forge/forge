@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Plane Pyrulea
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Permanent | AddHiddenKeyword$ CARDNAME untaps during each other player's untap step. | Description$ All permanents untap during each player's untap step.
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ DBFetch | TriggerDescription$ Whenever you roll {CHAOS}, you may search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle.
-SVar:DBFetch:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 3 | ShuffleNonMandatory$ True
+SVar:DBFetch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 3 | ShuffleNonMandatory$ True
 SVar:Picture:https://downloads.cardforge.org/images/cards/HOP/Horizon Boughs.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | MaxRollsPerTurn$ 9
 Oracle:All permanents untap during each player's untap step.\nWhenever you roll {CHAOS}, you may search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle.

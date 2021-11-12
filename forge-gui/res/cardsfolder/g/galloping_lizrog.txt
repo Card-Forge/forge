@@ -5,7 +5,7 @@ PT:3/3
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigRemoveCounters | TriggerDescription$ When CARDNAME enters the battlefield, you may remove any number of +1/+1 counters from among creatures you control. If you do, put twice that many +1/+1 counters on CARDNAME.
 SVar:TrigRemoveCounters:DB$ RemoveCounter | ValidSource$ Creature.YouCtrl+counters_GE1_P1P1 | CounterType$ P1P1 | CounterNum$ Any | SubAbility$ DBPutCounters | RememberAmount$ True | StackDescription$ You may remove any number of +1/+1 counters from among creatures you control.
-SVar:DBPutCounters:DB$PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
+SVar:DBPutCounters:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedNumber/Twice
 DeckHints:Ability$Counters

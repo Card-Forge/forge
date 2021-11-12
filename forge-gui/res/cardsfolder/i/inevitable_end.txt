@@ -5,5 +5,5 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ InevitableTrig | Description$ Enchanted creature has "At the beginning of your upkeep, sacrifice a creature."
 SVar:InevitableTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ InevitableSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature.
-SVar:InevitableSac:DB$Sacrifice | Defined$ You | SacValid$ Creature
+SVar:InevitableSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature
 Oracle:Enchant creature\nEnchanted creature has "At the beginning of your upkeep, sacrifice a creature."

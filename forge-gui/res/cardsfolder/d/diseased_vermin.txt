@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Rat
 PT:1/1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put an infection counter on it.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ INFECTION | CounterNum$ 1 | SubAbility$ DBRemember
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ INFECTION | CounterNum$ 1 | SubAbility$ DBRemember
 SVar:DBRemember:DB$ Pump | RememberObjects$ Opponent | StackDescription$ None
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ DBDisease | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, Diseased Vermin deals X damage to target opponent previously dealt damage by it, where X is the number of infection counters on it.
 SVar:DBDisease:DB$ DealDamage| ValidTgts$ Opponent.IsRemembered | NumDmg$ X

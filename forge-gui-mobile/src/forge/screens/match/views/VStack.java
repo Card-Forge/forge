@@ -97,11 +97,12 @@ public class VStack extends FDropDown {
 
     public void checkEmptyStack() { //sort the bug in client when desynch happens
         final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
-        if(stack!=null)
-            if(isVisible() && stack.isEmpty()) { //visible stack but empty already
-                hide();
+        if(stack!=null) {
+            if (isVisible() && stack.isEmpty()) { //visible stack but empty already
                 getMenuTab().setText(Localizer.getInstance().getMessage("lblStack") + " (" + 0 + ")");
+                MatchController.getView().getStack().hide();
             }
+        }
     }
 
     @Override
@@ -228,11 +229,11 @@ public class VStack extends FDropDown {
             while (instance != null) {
                 for (CardView c : instance.getTargetCards()) {
                     TargetingOverlay.ArcConnection conn = activator.isOpponentOf(c.getController()) ? TargetingOverlay.ArcConnection.FoesStackTargeting : TargetingOverlay.ArcConnection.FriendsStackTargeting;
-                    TargetingOverlay.drawArrow(g, arrowOrigin, c, conn);
+                    TargetingOverlay.drawArrow(g, arrowOrigin, VCardDisplayArea.CardAreaPanel.get(c).getTargetingArrowOrigin(), conn);
                 }
                 for (PlayerView p : instance.getTargetPlayers()) {
                     TargetingOverlay.ArcConnection conn = activator.isOpponentOf(p) ? TargetingOverlay.ArcConnection.FoesStackTargeting : TargetingOverlay.ArcConnection.FriendsStackTargeting;
-                    TargetingOverlay.drawArrow(g, arrowOrigin, p, conn);
+                    TargetingOverlay.drawArrow(g, arrowOrigin, MatchController.getView().getPlayerPanel(p).getAvatar().getTargetingArrowOrigin(), conn);
                 }
                 instance = instance.getSubInstance();
             }
@@ -373,7 +374,7 @@ public class VStack extends FDropDown {
 
             g.startClip(0, 0, w, getHeight()); //clip based on actual height
 
-            g.fillRect(Color.BLACK, x, y, w, h); //draw rectangle for border
+            g.fillRect(isHovered() ? Color.GRAY : Color.BLACK, x, y, w, h); //draw rectangle for border
 
             x += BORDER_THICKNESS;
             y += BORDER_THICKNESS;

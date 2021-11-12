@@ -85,6 +85,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         if (discardType.equals("Hand")) {
+            if (!controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblDoYouWantDiscardYourHand"), ability)) {
+                return null;
+            }
             if (hand.size() > 1 && ability.getActivatingPlayer() != null) {
                 hand = ability.getActivatingPlayer().getController().orderMoveToZoneList(hand, ZoneType.Graveyard, ability);
             }
@@ -205,7 +208,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
-        if (!player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblDrawNCardsConfirm", String.valueOf(c)), ability)) {
+        if (!controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblDrawNCardsConfirm", String.valueOf(c)), ability)) {
             return null;
         }
 
@@ -240,7 +243,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         if (cost.payCostFromSource()) {
-            return source.getZone() == player.getZone(cost.from) && player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblExileConfirm", CardTranslation.getTranslatedName(source.getName())), ability) ? PaymentDecision.card(source) : null;
+            return source.getZone() == player.getZone(cost.from) && controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblExileConfirm", CardTranslation.getTranslatedName(source.getName())), ability) ? PaymentDecision.card(source) : null;
         }
 
         if (type.equals("All")) {
@@ -366,7 +369,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     private PaymentDecision exileFromTop(final CostExile cost, final SpellAbility sa, final Player player, final int nNeeded) {
         final CardCollectionView list = player.getCardsIn(ZoneType.Library, nNeeded);
 
-        if (list.size() > nNeeded || !player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblExileNCardFromYourTopLibraryConfirm"), ability)) {
+        if (list.size() > nNeeded || !controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblExileNCardFromYourTopLibraryConfirm"), ability)) {
             return null;
         }
         return PaymentDecision.card(list);
@@ -375,14 +378,16 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     private PaymentDecision exileFromMiscZone(final CostExile cost, final SpellAbility sa, final int nNeeded, final CardCollection typeList) {
         if (typeList.size() < nNeeded) { return null; }
 
-        GameEntityViewMap<Card, CardView> gameCacheCard = GameEntityView.getMap(typeList);
-
+        final List<ZoneType> origin = Lists.newArrayList();
+        origin.add(cost.from);
         final CardCollection exiled = new CardCollection();
-        for (int i = 0; i < nNeeded; i++) {
-            final CardView cv = controller.getGui().oneOrNone(Localizer.getInstance().getMessage("lblExileProgressFromZone", String.valueOf(i + 1), String.valueOf(nNeeded), cost.getFrom().getTranslatedName()), gameCacheCard.getTrackableKeys());
-            if (cv == null || !gameCacheCard.containsKey(cv)) { return null; }
 
-            exiled.add(gameCacheCard.remove(cv));
+        final List<Card> chosen = controller.chooseCardsForZoneChange(ZoneType.Exile, origin, sa, typeList, 0,
+                nNeeded, null, cost.toString(), null);
+
+        exiled.addAll(chosen);
+        if (exiled.size() < nNeeded) {
+            return null;
         }
         return PaymentDecision.card(exiled);
     }
@@ -434,7 +439,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         if (cost.payCostFromSource()) {
             if (source.getController() == ability.getActivatingPlayer() && source.isInPlay()) {
-                return player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblExertCardConfirm", CardTranslation.getTranslatedName(source.getName())), ability) ? PaymentDecision.card(source) : null;
+                return controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblExertCardConfirm", CardTranslation.getTranslatedName(source.getName())), ability) ? PaymentDecision.card(source) : null;
             }
             return null;
         }
@@ -470,7 +475,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
-        if (!player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblDoYouWantFlipNCoinAction", String.valueOf(c)), ability)) {
+        if (!controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblDoYouWantFlipNCoinAction", String.valueOf(c)), ability)) {
             return null;
         }
 
@@ -486,7 +491,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
-        if (!player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblDoYouWantRollNDiceAction", String.valueOf(c), "d" + cost.getType()), ability)) {
+        if (!controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblDoYouWantRollNDiceAction", String.valueOf(c), "d" + cost.getType()), ability)) {
             return null;
         }
 
@@ -551,7 +556,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
-        if (!player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblMillNCardsFromYourLibraryConfirm", String.valueOf(c)), ability)) {
+        if (!controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblMillNCardsFromYourLibraryConfirm", String.valueOf(c)), ability)) {
             return null;
         }
         return PaymentDecision.number(c);
@@ -567,7 +572,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         // for costs declared mandatory, this is only reachable with a valid amount
-        if (ability.getPayCosts().isMandatory() || (player.canPayLife(c) && player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblPayNLifeConfirm", String.valueOf(c)), ability))) {
+        if (ability.getPayCosts().isMandatory() || (player.canPayLife(c) && controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblPayNLifeConfirm", String.valueOf(c)), ability))) {
             return PaymentDecision.number(c);
         }
         return null;
@@ -583,7 +588,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         if (player.canPayEnergy(c) &&
-            player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblPayEnergyConfirm", cost.toString(), String.valueOf(player.getCounters(CounterEnumType.ENERGY)), "{E}"), ability)) {
+                controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblPayEnergyConfirm", cost.toString(), String.valueOf(player.getCounters(CounterEnumType.ENERGY)), "{E}"), ability)) {
             return PaymentDecision.number(c);
         }
         return null;
@@ -608,7 +613,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 player.getCardsIn(cost.getFrom()), cost.getType().split(";"), player, source, ability);
 
         if (cost.payCostFromSource()) {
-            return source.getZone() == player.getZone(cost.from) && player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblPutCardToLibraryConfirm", CardTranslation.getTranslatedName(source.getName())), ability) ? PaymentDecision.card(source) : null;
+            return source.getZone() == player.getZone(cost.from) && controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblPutCardToLibraryConfirm", CardTranslation.getTranslatedName(source.getName())), ability) ? PaymentDecision.card(source) : null;
         }
 
         if (cost.from == ZoneType.Hand) {
@@ -718,10 +723,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             final Card card = ability.getHostCard();
             if (card.getController() == player && card.isInPlay()) {
                 final CardView view = CardView.get(card);
-                return player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblReturnCardToHandConfirm", CardTranslation.getTranslatedName(view.getName())), ability) ? PaymentDecision.card(card) : null;
+                return controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblReturnCardToHandConfirm", CardTranslation.getTranslatedName(view.getName())), ability) ? PaymentDecision.card(card) : null;
             }
-        }
-        else {
+        } else {
             final CardCollectionView validCards = CardLists.getValidCards(ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield),
                     cost.getType().split(";"), player, source, ability);
 
@@ -849,7 +853,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             this.validChoices = validCards;
             counterType = cType;
 
-            setMessage(Localizer.getInstance().getMessage("lblRemoveNTargetCounterFromCardPayCostConfirm", "%d", counterType == null ? "any" : counterType.getName(), costPart.getDescriptiveType()));
+            setMessage(Localizer.getInstance().getMessage("lblRemoveNTargetCounterFromCardPayCostConfirm", "%d", counterType == null ? "any" : counterType.getName().toLowerCase(), costPart.getDescriptiveType()));
         }
 
         @Override
@@ -967,7 +971,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 if (maxCounters < cntRemoved) {
                     return null;
                 }
-                if (!player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblRemoveNTargetCounterFromCardPayCostConfirm", String.valueOf(amount), cost.counter.getName(), CardTranslation.getTranslatedName(source.getName())), ability)) {
+                if (!controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblRemoveNTargetCounterFromCardPayCostConfirm", amount, cost.counter.getName().toLowerCase(), CardTranslation.getTranslatedName(source.getName())), ability)) {
                     return null;
                 }
             }
@@ -1023,7 +1027,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         if (cost.payCostFromSource()) {
             if (source.getController() == ability.getActivatingPlayer() && source.isInPlay()) {
-                return ability.getPayCosts().isMandatory() || player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblSacrificeCardConfirm", CardTranslation.getTranslatedName(source.getName())), ability) ? PaymentDecision.card(source) : null;
+                return ability.getPayCosts().isMandatory() || controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblSacrificeCardConfirm", CardTranslation.getTranslatedName(source.getName())), ability) ? PaymentDecision.card(source) : null;
             }
             return null;
         }
@@ -1031,7 +1035,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (type.equals("OriginalHost")) {
             Card host = ability.getOriginalHost();
             if (host.getController() == ability.getActivatingPlayer() && host.isInPlay()) {
-                return player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblSacrificeCardConfirm", CardTranslation.getTranslatedName(host.getName())), ability) ? PaymentDecision.card(host) : null;
+                return controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblSacrificeCardConfirm", CardTranslation.getTranslatedName(host.getName())), ability) ? PaymentDecision.card(host) : null;
             }
             return null;
         }
@@ -1201,7 +1205,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     @Override
     public PaymentDecision visit(final CostUnattach cost) {
         final Card cardToUnattach = cost.findCardToUnattach(source, player, ability);
-        if (cardToUnattach != null && player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblUnattachCardConfirm", CardTranslation.getTranslatedName(cardToUnattach.getName())), ability)) {
+        if (cardToUnattach != null && controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblUnattachCardConfirm", CardTranslation.getTranslatedName(cardToUnattach.getName())), ability)) {
             return PaymentDecision.card(cardToUnattach);
         }
         return null;

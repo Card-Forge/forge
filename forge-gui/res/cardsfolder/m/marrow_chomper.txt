@@ -4,7 +4,7 @@ Types:Creature Zombie Lizard
 PT:3/3
 K:Devour:2
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life for each creature it devoured.
-SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ X
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Devoured Card/Twice
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marrow_chomper.jpg
 Oracle:Devour 2 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with twice that many +1/+1 counters on it.)\nWhen Marrow Chomper enters the battlefield, you gain 2 life for each creature it devoured.

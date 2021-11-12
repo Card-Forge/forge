@@ -3,6 +3,6 @@ ManaCost:G
 Types:Creature Elf Druid
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may put a basic land card from your hand onto the battlefield tapped.
-SVar:TrigChange:DB$ChangeZone | Origin$ Hand | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1
+SVar:TrigChange:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_pioneer.jpg
 Oracle:When Elvish Pioneer enters the battlefield, you may put a basic land card from your hand onto the battlefield tapped.

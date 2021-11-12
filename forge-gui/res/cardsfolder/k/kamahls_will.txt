@@ -4,7 +4,7 @@ Types:Instant
 A:SP$ Charm | Cost$ 3 G | MinCharmNum$ 1 | CharmNum$ X | Choices$ DBAnimate,DBGangUp | AdditionalDescription$ If you control a commander as you cast this spell, you may choose both.
 SVar:DBAnimate:DB$ Animate | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select any number of target lands you control | TargetMin$ 0 | TargetMax$ MaxTargets | Power$ 1 | Toughness$ 1 | Types$ Elemental,Creature | Keywords$ Vigilance & Indestructible & Haste | SpellDescription$ Until end of turn, any number of target lands you control become 1/1 Elemental creatures with vigilance, indestructible, and haste. They're still lands.
 SVar:DBGangUp:DB$ Pump | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control | ImprintCards$ Targeted | SubAbility$ DBRepeatEach
-SVar:DBRepeatEach:DB$ RepeatEach | RepeatCards$ Creature.YouCtrl | RepeatSubAbility$ DBDamage | DamageMap$ True | SubAbility$ DBCleanup | SpellDescription$ Choose target creature you don’t control. Each creature you control deals damage equal to its power to that creature.
+SVar:DBRepeatEach:DB$ RepeatEach | RepeatCards$ Creature.YouCtrl | RepeatSubAbility$ DBDamage | DamageMap$ True | SubAbility$ DBCleanup | SpellDescription$ Choose target creature you don't control. Each creature you control deals damage equal to its power to that creature.
 SVar:DBDamage:DB$ DealDamage | Defined$ Imprinted | DamageSource$ Remembered | NumDmg$ Z
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 SVar:X:Count$Compare Y GE1.2.1

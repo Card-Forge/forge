@@ -206,7 +206,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             return !ph.isPlayerTurn(opp) && (CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && newPower > 0
-                    && !CardLists.filter(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card)).isEmpty();
+                    && Iterables.any(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card));
         } else if (keyword.endsWith("Flying")) {
             CardCollectionView attackingFlyer = CardCollection.EMPTY;
             if (combat != null) {
@@ -228,9 +228,9 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 // Use defensively to destroy the opposing Flying creature when possible, or to block with an indestructible
                 // creature buffed with Flying
                 for (Card c : attackingFlyer) {
-                    if (!ComputerUtilCombat.attackerCantBeDestroyedInCombat(c.getController(), c)
+                    if (!ComputerUtilCombat.combatantCantBeDestroyed(c.getController(), c)
                             && (card.getNetPower() >= c.getNetToughness() && card.getNetToughness() > c.getNetPower()
-                            || ComputerUtilCombat.attackerCantBeDestroyedInCombat(ai, card))) {
+                            || ComputerUtilCombat.combatantCantBeDestroyed(ai, card))) {
                         return true;
                     }
                 }
@@ -300,7 +300,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             return !ph.isPlayerTurn(opp) && (CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
                     && !opp.getCreaturesInPlay().isEmpty()
-                    && !CardLists.filter(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card)).isEmpty();
+                    && Iterables.any(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card));
         } else if (keyword.equals("First Strike")) {
             if (card.hasKeyword(Keyword.DOUBLE_STRIKE)) {
                 return false;
@@ -343,7 +343,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                     && CombatUtil.canBeBlocked(card, opp)
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && newPower > 1
-                    && !CardLists.filter(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card)).isEmpty();
+                    && Iterables.any(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card));
         } else if (keyword.equals("Infect")) {
             if (newPower <= 0) {
                 return false;
@@ -384,25 +384,25 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && newPower > 0
                     && !CardLists.getType(opp.getLandsInPlay(), "Island").isEmpty()
-                    && !CardLists.filter(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card)).isEmpty();
+                    && Iterables.any(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card));
         } else if (keyword.equals("Swampwalk")) {
             return !ph.isPlayerTurn(opp) && (CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && newPower > 0
                     && !CardLists.getType(opp.getLandsInPlay(), "Swamp").isEmpty()
-                    && !CardLists.filter(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card)).isEmpty();
+                    && Iterables.any(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card));
         } else if (keyword.equals("Mountainwalk")) {
             return !ph.isPlayerTurn(opp) && (CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && newPower > 0
                     && !CardLists.getType(opp.getLandsInPlay(), "Mountain").isEmpty()
-                    && !CardLists.filter(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card)).isEmpty();
+                    && Iterables.any(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card));
         } else if (keyword.equals("Forestwalk")) {
             return !ph.isPlayerTurn(opp) && (CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && newPower > 0
                     && !CardLists.getType(opp.getLandsInPlay(), "Forest").isEmpty()
-                    && !CardLists.filter(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card)).isEmpty();
+                    && Iterables.any(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card));
         } else if (keyword.endsWith("CARDNAME can attack as though it didn't have defender.")) {
             return ph.isPlayerTurn(ai) && card.hasKeyword(Keyword.DEFENDER)
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN)
@@ -467,7 +467,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                     if (c.getSVar("Targeting").equals("Dies") || c.getNetToughness() <= -defense) {
                         return true; // can kill indestructible creatures
                     }
-                    return (ComputerUtilCombat.getDamageToKill(c) <= -defense && !c.hasKeyword(Keyword.INDESTRUCTIBLE));
+                    return ComputerUtilCombat.getDamageToKill(c, false) <= -defense && !c.hasKeyword(Keyword.INDESTRUCTIBLE);
                 }
             }); // leaves all creatures that will be destroyed
         } // -X/-X end

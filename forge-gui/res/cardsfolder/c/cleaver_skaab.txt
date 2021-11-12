@@ -1,0 +1,10 @@
+Name:Cleaver Skaab
+ManaCost:3 U
+Types:Creature Zombie Horror
+PT:2/4
+A:AB$ CopyPermanent | Cost$ 3 T Sac<1/Zombie.Other/another zombie> | Defined$ Sacrificed | NumCopies$ 2 | AILogic$ AtOppEOT
+DeckNeeds:Type$Zombie
+DeckHas:Ability$Sacrifice & Ability$Token
+SVar:AIPreference:SacCost$Zombie.Other
+SVar:AIPreferBestCard:TRUE
+Oracle:{3}, {T}, Sacrifice another Zombie: Create two tokens that are copies of the sacrificed creature.

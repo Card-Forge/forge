@@ -26,11 +26,7 @@ public class RegenerateAllAi extends SpellAbilityAi {
         final Game game = ai.getGame();
 
         // filter AIs battlefield by what I can target
-        String valid = "";
-
-        if (sa.hasParam("ValidCards")) {
-            valid = sa.getParam("ValidCards");
-        }
+        final String valid = sa.getParamOrDefault("ValidCards", "");
 
         CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
         list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard, sa);

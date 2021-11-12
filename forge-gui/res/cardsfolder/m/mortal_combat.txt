@@ -2,6 +2,6 @@ Name:Mortal Combat
 ManaCost:2 B B
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Creature | PresentZone$ Graveyard | PresentPlayer$ You | PresentCompare$ GE20 | TriggerZones$ Battlefield | Execute$ TrigWin | TriggerDescription$ At the beginning of your upkeep, if twenty or more creature cards are in your graveyard, you win the game.
-SVar:TrigWin:DB$WinsGame | Defined$ You
+SVar:TrigWin:DB$ WinsGame | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mortal_combat.jpg
 Oracle:At the beginning of your upkeep, if twenty or more creature cards are in your graveyard, you win the game.

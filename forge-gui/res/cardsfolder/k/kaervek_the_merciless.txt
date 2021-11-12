@@ -3,7 +3,7 @@ ManaCost:5 B R
 Types:Legendary Creature Human Shaman
 PT:5/4
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever an opponent casts a spell, CARDNAME deals damage equal to that spell's mana value to any target.
-SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
 SVar:X:TriggerCount$CastSACMC
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kaervek_the_merciless.jpg
 Oracle:Whenever an opponent casts a spell, Kaervek the Merciless deals damage equal to that spell's mana value to any target.

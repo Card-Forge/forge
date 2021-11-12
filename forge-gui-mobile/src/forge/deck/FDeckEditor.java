@@ -1,16 +1,5 @@
 package forge.deck;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import forge.gui.FThreads;
-import forge.screens.LoadingOverlay;
-import org.apache.commons.lang3.StringUtils;
-
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
@@ -18,20 +7,15 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
-
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
-import forge.assets.FImage;
-import forge.assets.FSkin;
-import forge.assets.FSkinFont;
-import forge.assets.FSkinImage;
-import forge.assets.FTextureRegionImage;
-import forge.card.CardDb;
+import forge.assets.*;
 import forge.card.CardEdition;
 import forge.deck.io.DeckPreferences;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.planarconquest.ConquestUtil;
+import forge.gui.FThreads;
 import forge.gui.card.CardPreferences;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
@@ -47,20 +31,17 @@ import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.screens.FScreen;
+import forge.screens.LoadingOverlay;
 import forge.screens.TabPageScreen;
-import forge.toolbox.FContainer;
-import forge.toolbox.FEvent;
+import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
-import forge.toolbox.FLabel;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.GuiChoose;
-import forge.util.Callback;
-import forge.util.ItemPool;
-import forge.util.Lang;
-import forge.util.Localizer;
-import forge.util.Utils;
+import forge.util.*;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     public static FSkinImage MAIN_DECK_ICON = Forge.hdbuttons ? FSkinImage.HDLIBRARY :FSkinImage.DECKLIST;
@@ -289,16 +270,19 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     private final FLabel btnMoreOptions = deckHeader.add(new FLabel.Builder().text("...").font(FSkinFont.get(20)).align(Align.center).pressedColor(Header.BTN_PRESSED_COLOR).build());
 
     public FDeckEditor(EditorType editorType0, DeckProxy editDeck, boolean showMainDeck) {
-        this(editorType0, editDeck.getName(), editDeck.getPath(), null, showMainDeck);
+        this(editorType0, editDeck.getName(), editDeck.getPath(), null, showMainDeck,null);
+    }
+    public FDeckEditor(EditorType editorType0, String editDeckName, boolean showMainDeck,FEventHandler backButton) {
+        this(editorType0, editDeckName, "", null, showMainDeck,backButton);
     }
     public FDeckEditor(EditorType editorType0, String editDeckName, boolean showMainDeck) {
-        this(editorType0, editDeckName, "", null, showMainDeck);
+        this(editorType0, editDeckName, "", null, showMainDeck,null);
     }
     public FDeckEditor(EditorType editorType0, Deck newDeck, boolean showMainDeck) {
-        this(editorType0, "", "", newDeck, showMainDeck);
+        this(editorType0, "", "", newDeck, showMainDeck,null);
     }
-    private FDeckEditor(EditorType editorType0, String editDeckName, String editDeckPath, Deck newDeck, boolean showMainDeck) {
-        super(getPages(editorType0));
+    private FDeckEditor(EditorType editorType0, String editDeckName, String editDeckPath, Deck newDeck, boolean showMainDeck,FEventHandler backButton) {
+        super(backButton,getPages(editorType0));
 
         if (editorType0 == EditorType.QuestCommander) //fix saving quest commander
             editorType = EditorType.Quest;
@@ -355,17 +339,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 //hide deck header on while drafting
                 setDeck(new Deck());
                 deckHeader.setVisible(false);
-            }
-            else {
+            } else {
                 if (newDeck == null) {
                     editorType.getController().newModel();
-                }
-                else {
+                } else {
                     editorType.getController().setDeck(newDeck);
                 }
             }
-        }
-        else {
+        } else {
             if (editorType == EditorType.Draft || editorType == EditorType.QuestDraft) {
                 tabPages[0].hideTab(); //hide Draft Pack page if editing existing draft deck
             }
@@ -422,15 +403,26 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             addItem(new FMenuItem(localizer.getMessage("lblImportFromClipboard"), Forge.hdbuttons ? FSkinImage.HDIMPORT : FSkinImage.OPEN, new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
-                                    FDeckImportDialog dialog = new FDeckImportDialog(!deck.isEmpty(), new Callback<Deck>() {
+                                    FDeckImportDialog dialog = new FDeckImportDialog(!deck.isEmpty(), editorType);
+                                    dialog.setCallback(new Callback<Deck>() {
                                         @Override
                                         public void run(Deck importedDeck) {
-                                            getMainDeckPage().setCards(importedDeck.getMain());
-                                            if (getSideboardPage() != null) {
-                                                getSideboardPage().setCards(importedDeck.getOrCreate(DeckSection.Sideboard));
+                                            if (deck != null && importedDeck.hasName()) {
+                                                deck.setName(importedDeck.getName());
+                                                lblName.setText(importedDeck.getName());
                                             }
-                                            if (getCommanderPage() != null) {
-                                                getCommanderPage().setCards(importedDeck.getOrCreate(DeckSection.Commander));
+                                            if (dialog.createNewDeck()) {
+                                                getMainDeckPage().setCards(importedDeck.getMain());
+                                                if (getSideboardPage() != null)
+                                                    getSideboardPage().setCards(importedDeck.getOrCreate(DeckSection.Sideboard));
+                                                if (getCommanderPage() != null)
+                                                    getCommanderPage().setCards(importedDeck.getOrCreate(DeckSection.Commander));
+                                            } else {
+                                                getMainDeckPage().addCards(importedDeck.getMain());
+                                                if (getSideboardPage() != null)
+                                                    getSideboardPage().addCards(importedDeck.getOrCreate(DeckSection.Sideboard));
+                                                if (getCommanderPage() != null)
+                                                    getCommanderPage().addCards(importedDeck.getOrCreate(DeckSection.Commander));
                                             }
                                         }
                                     });
@@ -675,6 +667,23 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
     }
 
+    public static boolean allowsReplacement(final EditorType editorType){
+        switch (editorType) {
+            case Constructed:
+            case Commander:
+            case Oathbreaker:
+            case TinyLeaders:
+            case Brawl:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private boolean isAllowedReplacement() {
+        return allowsReplacement(editorType);
+    }
+
     protected Map<ColumnDef, ItemColumn> getColOverrides(ItemManagerConfig config) {
         return null;
     }
@@ -896,8 +905,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 public void handleEvent(FEvent e) {
                     if (max == 1) {
                         callback.run(max);
-                    }
-                    else {
+                    } else {
                         final Localizer localizer = Localizer.getInstance();
                         GuiChoose.getInteger(cardManager.getSelectedItem() + " - " + verb + " " + localizer.getMessage("lblHowMany"), 1, max, 20, callback);
                     }
@@ -1149,8 +1157,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                             default:
                                                 // Do nothing
                                         }
-                                    }
-                                    else {
+                                    } else {
                                         //if a commander has been set, only show cards that match its color identity
                                         switch (editorType) {
                                             case Commander:
@@ -1175,8 +1182,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                 default:
                                     if (cardManager.getWantUnique()) {
                                         cardManager.setPool(editorType.applyCardFilter(FModel.getUniqueCardsNoAlt(), additionalFilter), true);
-                                    }
-                                    else {
+                                    } else {
                                         cardManager.setPool(editorType.applyCardFilter(FModel.getAllCardsNoAlt(), additionalFilter), true);
                                     }
                                     break;
@@ -1249,8 +1255,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             CardPreferences.save();
                         }
                     }));
-                }
-                else {
+                } else {
                     menu.addItem(new FMenuItem(localizer.getMessage("lblRemoveFavorites"), Forge.hdbuttons ? FSkinImage.HDSTAR_OUTLINE : FSkinImage.STAR_OUTLINE, new FEventHandler() {
                         @Override
                         public void handleEvent(FEvent e) {
@@ -1281,7 +1286,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                         if (result != card) {
                                             cardManager.replaceAll(card, result);
                                         }
-                                        prefs.setPreferredArt(result.getEdition() + CardDb.NameSetSeparator + result.getArtIndex());
+                                        prefs.setPreferredArt(result.getEdition(), result.getArtIndex());
                                         CardPreferences.save();
                                     }
                                 }
@@ -1375,8 +1380,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected void updateCaption() {
             if (deckSection == DeckSection.Commander) {
                 caption = captionPrefix; //don't display count for commander section since it won't be more than 1
-            }
-            else {
+            } else {
                 caption = captionPrefix + " (" + parentScreen.getDeck().get(deckSection).countAll() + ")";
             }
         }
@@ -1454,6 +1458,35 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         }
                     });
                 }
+                if (parentScreen.isAllowedReplacement()) {
+                    final List<PaperCard> cardOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
+                    if (cardOptions != null && cardOptions.size() > 1) {
+                        menu.addItem(new FMenuItem(localizer.getMessage("lblReplaceCard"), Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST, new FEventHandler() {
+                            @Override
+                            public void handleEvent(FEvent e) {
+                                //sort options so current option is on top and selected by default
+                                List<PaperCard> sortedOptions = new ArrayList<>();
+                                sortedOptions.add(card);
+                                for (PaperCard option : cardOptions) {
+                                    if (option != card) {
+                                        sortedOptions.add(option);
+                                    }
+                                }
+                                GuiChoose.oneOrNone(localizer.getMessage("lblSelectReplacementCard") + " " + card.getName(), sortedOptions, new Callback<PaperCard>() {
+                                    @Override
+                                    public void run(PaperCard result) {
+                                        if (result != null) {
+                                            if (result != card) {
+                                                addCard(result);
+                                                removeCard(card);
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                        }));
+                    }
+                }
                 addCommanderItems(menu, card, false, false);
                 break;
             case Sideboard:
@@ -1493,6 +1526,35 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         parentScreen.getMainDeckPage().addCard(card, result);
                     }
                 });
+                if (parentScreen.isAllowedReplacement()) {
+                    final List<PaperCard> cardOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
+                    if (cardOptions != null && cardOptions.size() > 1) {
+                        menu.addItem(new FMenuItem(localizer.getMessage("lblReplaceCard"), Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST, new FEventHandler() {
+                            @Override
+                            public void handleEvent(FEvent e) {
+                                //sort options so current option is on top and selected by default
+                                List<PaperCard> sortedOptions = new ArrayList<>();
+                                sortedOptions.add(card);
+                                for (PaperCard option : cardOptions) {
+                                    if (option != card) {
+                                        sortedOptions.add(option);
+                                    }
+                                }
+                                GuiChoose.oneOrNone(localizer.getMessage("lblSelectReplacementCard") + " " + card.getName(), sortedOptions, new Callback<PaperCard>() {
+                                    @Override
+                                    public void run(PaperCard result) {
+                                        if (result != null) {
+                                            if (result != card) {
+                                                addCard(result);
+                                                removeCard(card);
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                        }));
+                    }
+                }
                 addCommanderItems(menu, card, false, false);
                 break;
             case Commander:
@@ -1509,6 +1571,35 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             parentScreen.setSelectedPage(parentScreen.getCatalogPage());
                         }
                     });
+                }
+                if (parentScreen.isAllowedReplacement()) {
+                    final List<PaperCard> cardOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
+                    if (cardOptions != null && cardOptions.size() > 1) {
+                        menu.addItem(new FMenuItem(localizer.getMessage("lblReplaceCard"), Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST, new FEventHandler() {
+                            @Override
+                            public void handleEvent(FEvent e) {
+                                //sort options so current option is on top and selected by default
+                                List<PaperCard> sortedOptions = new ArrayList<>();
+                                sortedOptions.add(card);
+                                for (PaperCard option : cardOptions) {
+                                    if (option != card) {
+                                        sortedOptions.add(option);
+                                    }
+                                }
+                                GuiChoose.oneOrNone(localizer.getMessage("lblSelectReplacementCard") + " " + card.getName(), sortedOptions, new Callback<PaperCard>() {
+                                    @Override
+                                    public void run(PaperCard result) {
+                                        if (result != null) {
+                                            if (result != card) {
+                                                addCard(result);
+                                                removeCard(card);
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                        }));
+                    }
                 }
                 break;
             case Avatar:
@@ -1679,8 +1770,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             if (isStored) {
                 if (isModelInSyncWithFolder()) {
                     setSaved(true);
-                }
-                else {
+                } else {
                     notifyModelChanged();
                 }
             }
@@ -1691,8 +1781,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             }
             if (model != null) {
                 editor.setDeck(model.getHumanDeck());
-            }
-            else {
+            } else {
                 editor.setDeck(null);
             }
 

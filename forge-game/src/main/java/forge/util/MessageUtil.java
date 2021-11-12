@@ -36,20 +36,32 @@ public class MessageUtil {
         switch(sa.getApi()) {
             case ChooseDirection:
                 return value;
+            case ChooseColor:
+                return sa.hasParam("Random")
+                        ? Localizer.getInstance().getMessage("lblRandomColorChosen", value)
+                        : Localizer.getInstance().getMessage("lblPlayerPickedChosen", choser, value);
             case ChooseNumber:
                 if (sa.hasParam("SecretlyChoose")) {
                     return value;
                 }
                 return sa.hasParam("Random")
-                        ? Localizer.getInstance().getMessage("lblPlayerRandomChosenNumberIs", mayBeYou(player, target), value)
-                        : Localizer.getInstance().getMessage("lblPlayerChoosesNumberIs", mayBeYou(player, target), value);
+                        ? Localizer.getInstance().getMessage("lblPlayerRandomChosenNumberIs",
+                            mayBeYou(player, target), value)
+                        : Localizer.getInstance().getMessage("lblPlayerChoosesNumberIs",
+                            mayBeYou(player, target), value);
             case ChooseType:
-                return Localizer.getInstance().getMessage("lblPlayerChooseValueOfEffectOfCard", choser, value, CardTranslation.getTranslatedName(sa.getHostCard().getName()));
+                return sa.hasParam("AtRandom")
+                        ? Localizer.getInstance().getMessage("lblRandomTypeChosen", value)
+                        : Localizer.getInstance().getMessage("lblPlayerPickedChosen", choser, value);
             case FlipACoin:
                 String flipper = StringUtils.capitalize(mayBeYou(player, target));
                 return sa.hasParam("NoCall")
                         ? Localizer.getInstance().getMessage("lblPlayerFlipComesUpValue", Lang.getInstance().getPossesive(flipper), value)
                         : Localizer.getInstance().getMessage("lblPlayerActionFlip", flipper, Lang.joinVerb(flipper, value));
+            case GenericChoice:
+                if (sa.hasParam("ShowChoice") && sa.getParam("ShowChoice").equals("Description")) {
+                    return value;
+                }
             case Protection:
                 return Localizer.getInstance().getMessage("lblPlayerChooseValue", choser, value);
             case RollDice:

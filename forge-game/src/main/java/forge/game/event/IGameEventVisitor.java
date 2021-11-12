@@ -38,6 +38,7 @@ public interface IGameEventVisitor<T> {
     T visit(GameEventPlayerPoisoned event);
     T visit(GameEventPlayerPriority event);
     T visit(GameEventPlayerStatsChanged event);
+    T visit(GameEventRandomLog event);
     T visit(GameEventRollDie event);
     T visit(GameEventTokenStateUpdate event);
     T visit(GameEventScry event);
@@ -53,7 +54,8 @@ public interface IGameEventVisitor<T> {
     T visit(GameEventTurnEnded event);
     T visit(GameEventTurnPhase event);
     T visit(GameEventZone event);
-
+    T visit(GameEventCardForetold gameEventCardForetold);
+    T visit(GameEventDayTimeChanged gameEventDayTimeChanged);
 
     // This is base class for all visitors.
     class Base<T> implements IGameEventVisitor<T>{
@@ -89,6 +91,7 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventPlayerPoisoned event) { return null; }
         public T visit(GameEventPlayerPriority event) { return null; }
         public T visit(GameEventPlayerStatsChanged event) { return null; }
+        public T visit(GameEventRandomLog event) { return null; }
         public T visit(GameEventRollDie event) { return null; }
         public T visit(GameEventTokenStateUpdate event) { return null; }
         public T visit(GameEventScry event) { return null; }
@@ -105,5 +108,11 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventTurnPhase event) { return null; }
         public T visit(GameEventPlayerDamaged event) { return null; }
         public T visit(GameEventZone event) { return null; }
+        public T visit(GameEventCardForetold gameEventCardForetold) {
+            return null;
+        }
+        public T visit(GameEventDayTimeChanged gameEventDayTimeChanged) {
+            return null;
+        }
     }
 }

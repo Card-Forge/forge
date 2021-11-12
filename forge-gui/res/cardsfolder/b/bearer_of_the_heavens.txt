@@ -3,7 +3,7 @@ ManaCost:7 R
 Types:Creature Giant
 PT:10/10
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ DelTrigLeaves | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, destroy all permanents at the beginning of the next end step.
-SVar:DelTrigLeaves:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigDestroyAll | TriggerController$ TriggeredCardController | TriggerDescription$ Destroy all permanents at the beginning of the next end step.
+SVar:DelTrigLeaves:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigDestroyAll | CopyTriggeringObjects$ True | TriggerController$ TriggeredCardController | TriggerDescription$ Destroy all permanents at the beginning of the next end step.
 SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Permanent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bearer_of_the_heavens.jpg
 Oracle:When Bearer of the Heavens dies, destroy all permanents at the beginning of the next end step.

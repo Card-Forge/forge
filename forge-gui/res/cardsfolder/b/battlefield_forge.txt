@@ -4,6 +4,6 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Mana | Cost$ T | Produced$ W | SubAbility$ DBPain | SpellDescription$ Add {W}. CARDNAME deals 1 damage to you.
 A:AB$ Mana | Cost$ T | Produced$ R | SubAbility$ DBPain | SpellDescription$ Add {R}. CARDNAME deals 1 damage to you.
-SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You
+SVar:DBPain:DB$ DealDamage | NumDmg$ 1 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battlefield_forge.jpg
 Oracle:{T}: Add {C}.\n{T}: Add {R} or {W}. Battlefield Forge deals 1 damage to you.

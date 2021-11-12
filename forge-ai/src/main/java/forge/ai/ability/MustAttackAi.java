@@ -25,7 +25,6 @@ public class MustAttackAi extends SpellAbilityAi {
      */
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-
         boolean chance;
 
         // TODO - implement AI

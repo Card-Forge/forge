@@ -1,0 +1,7 @@
+Name:Zombie
+ManaCost:no cost
+Types:Creature Zombie
+Colors:black
+PT:2/2
+K:Decayed
+Oracle:Decayed

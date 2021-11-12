@@ -2,7 +2,7 @@ Name:Thopter Foundry
 ManaCost:WB U
 Types:Artifact
 A:AB$ Token | Cost$ 1 Sac<1/Artifact.nonToken/nontoken artifact> | TokenAmount$ 1 | TokenScript$ u_1_1_a_thopter_flying | TokenOwner$ You | LegacyImage$ u 1 1 a thopter flying arb | SubAbility$ DBGainLife | SpellDescription$ Create a 1/1 blue Thopter artifact creature token with flying.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
 SVar:AIPreference:SacCost$Permanent.namedSword of the Meek
 DeckHas:Ability$Token & Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thopter_foundry.jpg

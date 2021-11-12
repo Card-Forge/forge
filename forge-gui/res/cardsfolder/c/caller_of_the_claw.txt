@@ -4,7 +4,7 @@ Types:Creature Elf
 PT:2/2
 K:Flash
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 green Bear creature token for each nontoken creature put into your graveyard from the battlefield this turn.
-SVar:TrigToken:DB$Token | TokenAmount$ X | TokenOwner$ You | TokenScript$ g_2_2_bear | LegacyImage$ g 2 2 bear lgn
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenOwner$ You | TokenScript$ g_2_2_bear | LegacyImage$ g 2 2 bear lgn
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.nonToken+YouCtrl
 SVar:Picture:http://resources.wizards.com/magic/cards/lgn/en-us/card42187.jpg
 Oracle:Flash\nWhen Caller of the Claw enters the battlefield, create a 2/2 green Bear creature token for each nontoken creature put into your graveyard from the battlefield this turn.

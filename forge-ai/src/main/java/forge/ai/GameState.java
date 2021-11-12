@@ -1043,7 +1043,12 @@ public abstract class GameState {
             return;
         }
 
-        sa = c.getFirstSpellAbility();
+        if (!c.getName().equals(spellDef) && c.hasAlternateState() && spellDef.equals(c.getAlternateState().getName())) {
+            sa = c.getAlternateState().getFirstSpellAbility();
+        } else {
+            sa = c.getFirstSpellAbility();
+        }
+
         sa.setActivatingPlayer(activator);
 
         handleScriptedTargetingForSA(game, sa, tgtID);
@@ -1247,7 +1252,7 @@ public abstract class GameState {
                         p.getGame().getAction().moveTo(ZoneType.Battlefield, c, null);
                     } else {
                         p.getZone(ZoneType.Hand).add(c);
-                        p.getGame().getAction().moveToPlay(c, null);
+                        p.getGame().getAction().moveToPlay(c, null, null);
                     }
 
                     c.setTapped(tapped);
@@ -1267,7 +1272,7 @@ public abstract class GameState {
      * <p>
      * processCardsForZone.
      * </p>
-     * 
+     *
      * @param data
      *            an array of {@link java.lang.String} objects.
      * @param player
@@ -1286,7 +1291,7 @@ public abstract class GameState {
                     break;
                 }
             }
-            
+
             Card c;
             boolean hasSetCurSet = false;
             if (cardinfo[0].startsWith("t:")) {
@@ -1309,7 +1314,7 @@ public abstract class GameState {
 
             for (final String info : cardinfo) {
                 if (info.startsWith("Tapped")) {
-                    c.tap();
+                    c.tap(false);
                 } else if (info.startsWith("Renowned")) {
                     c.setRenowned(true);
                 } else if (info.startsWith("Monstrous")) {
@@ -1333,7 +1338,7 @@ public abstract class GameState {
                     c.setState(CardStateName.Meld, true);
                 } else if (info.startsWith("Modal")) {
                     c.setState(CardStateName.Modal, true);
-                } 
+                }
                 else if (info.startsWith("OnAdventure")) {
                     String abAdventure = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ExileOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.nonCopiedSpell";
                     SpellAbility saAdventure = AbilityFactory.getAbility(abAdventure, c);

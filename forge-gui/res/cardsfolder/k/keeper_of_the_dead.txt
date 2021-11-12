@@ -6,6 +6,5 @@ A:AB$ Pump | Cost$ B T | ValidTgts$ Opponent | TgtPrompt$ Choose target opponent
 SVar:DeadKeepersDestroy:DB$ Destroy | ValidTgts$ Creature.nonBlack+TargetedPlayerCtrl | TgtPrompt$ Select target nonblack creature targeted player controls
 SVar:X:Count$TypeInYourYard.Creature/Minus.2
 SVar:Y:Count$TypeInOppYard.Creature
-SVar:Z:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keeper_of_the_dead.jpg
 Oracle:{B}, {T}: Choose target opponent who had at least two fewer creature cards in their graveyard than you did as you activated this ability. Destroy target nonblack creature that player controls.

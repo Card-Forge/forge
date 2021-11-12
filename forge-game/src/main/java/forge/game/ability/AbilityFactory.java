@@ -32,11 +32,7 @@ import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.Card;
 import forge.game.card.CardState;
 import forge.game.cost.Cost;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityCondition;
-import forge.game.spellability.SpellAbilityRestriction;
-import forge.game.spellability.TargetRestrictions;
+import forge.game.spellability.*;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
 import io.sentry.Sentry;
@@ -216,7 +212,7 @@ public final class AbilityFactory {
 
         else if (api == ApiType.PermanentCreature || api == ApiType.PermanentNoncreature) {
             // If API is a permanent type, and creating AF Spell
-            // Clear out the auto created SpellPemanent spell
+            // Clear out the auto created SpellPermanent spell
             if (type == AbilityRecordType.Spell
                     && !mapParams.containsKey("SubAbility") && !mapParams.containsKey("NonBasicSpell")) {
                 hostCard.clearFirstSpell();
@@ -224,7 +220,6 @@ public final class AbilityFactory {
         }
 
         SpellAbility spellAbility = type.buildSpellAbility(api, hostCard, abCost, abTgt, mapParams);
-
 
         if (spellAbility == null) {
             final StringBuilder msg = new StringBuilder();
@@ -343,10 +338,8 @@ public final class AbilityFactory {
 
         TargetRestrictions abTgt = new TargetRestrictions(prompt, mapParams.get("ValidTgts").split(","), min, max);
 
-        if (mapParams.containsKey("TgtZone")) { // if Targeting
-                                                     // something
-            // not in play, this Key
-            // should be set
+        if (mapParams.containsKey("TgtZone")) {
+            // if Targeting something not in play, this Key should be set
             abTgt.setZone(ZoneType.listValueOf(mapParams.get("TgtZone")));
         }
 
@@ -395,6 +388,9 @@ public final class AbilityFactory {
         }
         if (mapParams.containsKey("TargetsAtRandom")) {
             abTgt.setRandomTarget(true);
+        }
+        if (mapParams.containsKey("RandomNumTargets")) {
+            abTgt.setRandomNumTargets(true);
         }
         if (mapParams.containsKey("TargetingPlayer")) {
             abTgt.setMandatory(true);

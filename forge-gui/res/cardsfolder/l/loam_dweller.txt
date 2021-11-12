@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Creature Spirit
 PT:2/2
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigLand | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may put a land card from your hand onto the battlefield tapped.
-SVar:TrigLand:DB$ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | Tapped$ True
+SVar:TrigLand:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | Tapped$ True
 DeckHints:Type$Spirit|Arcane
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loam_dweller.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, you may put a land card from your hand onto the battlefield tapped.

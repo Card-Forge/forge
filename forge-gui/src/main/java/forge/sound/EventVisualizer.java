@@ -1,5 +1,6 @@
 package forge.sound;
 
+import java.io.File;
 import java.util.Collection;
 
 import forge.LobbyPlayer;
@@ -16,6 +17,7 @@ import forge.game.event.GameEventCardPhased;
 import forge.game.event.GameEventCardRegenerated;
 import forge.game.event.GameEventCardSacrificed;
 import forge.game.event.GameEventCardTapped;
+import forge.game.event.GameEventDayTimeChanged;
 import forge.game.event.GameEventFlipCoin;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.event.GameEventGameStarted;
@@ -97,6 +99,10 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
     public SoundEffectType visit(final GameEventShuffle event) { return SoundEffectType.Shuffle; }
     @Override
     public SoundEffectType visit(final GameEventTokenCreated event) { return SoundEffectType.Token; }
+    @Override
+    public SoundEffectType visit(final GameEventDayTimeChanged event) {
+        return event.daytime ? SoundEffectType.Daytime : SoundEffectType.Nighttime;
+    }
     @Override
     public SoundEffectType visit(final GameEventBlockersDeclared event) {
         final boolean isLocalHuman = event.defendingPlayer.getLobbyPlayer() == player;
@@ -313,9 +319,18 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
         // Implement sound effects for specific cards here, if necessary.
         String effect = "";
         if (null != c) {
-            effect = c.getSVar("SoundEffect");
+            if (c.hasSVar("SoundEffect")) {
+                effect = c.getSVar("SoundEffect");
+            } else {
+                effect = TextUtil.fastReplace(TextUtil.fastReplace(
+                        TextUtil.fastReplace(c.getName(), ",", ""),
+                        " ", "_"), "'", "").toLowerCase() + ".mp3";
+
+            }
         }
-        return !effect.isEmpty();
+
+        // Only proceed if the file actually exists
+        return new File(SoundSystem.instance.getSoundDirectory(), effect).exists();
     }
 
 
@@ -332,11 +347,24 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
 
         if (evt instanceof GameEventSpellResolved) {
             c = ((GameEventSpellResolved) evt).spell.getHostCard();
-        } else if (evt instanceof GameEventLandPlayed) {
-            c = ((GameEventLandPlayed) evt).land;
+        } else if (evt instanceof GameEventZone) {
+            GameEventZone evZone = (GameEventZone)evt;
+            if (evZone.zoneType == ZoneType.Battlefield && evZone.mode == EventValueChangeType.Added && evZone.card.isLand()) {
+                c = evZone.card; // assuming a land is played or otherwise put on the battlefield
+            }
         }
 
-        return c != null ? c.getSVar("SoundEffect") : "";
+        if (c == null) {
+            return "";
+        } else {
+            if (c.hasSVar("SoundEffect")) {
+                return c.getSVar("SoundEffect");
+            } else {
+                return TextUtil.fastReplace(TextUtil.fastReplace(
+                        TextUtil.fastReplace(c.getName(), ",", ""),
+                        " ", "_"), "'", "").toLowerCase() + ".mp3";
+            }
+        }
     }
 
 

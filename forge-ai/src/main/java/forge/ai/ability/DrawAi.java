@@ -258,7 +258,7 @@ public class DrawAi extends SpellAbilityAi {
                     numCards = ComputerUtilCost.getMaxXValue(sa, ai);
                     // try not to overdraw
                     int safeDraw = Math.abs(Math.min(computerMaxHandSize - computerHandSize, computerLibrarySize - 3));
-                    if (sa.getHostCard().isInstant() || sa.getHostCard().isSorcery()) { safeDraw++; } // card will be spent
+                    if (source.isInstant() || source.isSorcery()) { safeDraw++; } // card will be spent
                     numCards = Math.min(numCards, safeDraw);
 
                     // assuming CostPayLife is the one with X
@@ -417,7 +417,7 @@ public class DrawAi extends SpellAbilityAi {
                 if (computerHandSize + numCards > computerMaxHandSize && game.getPhaseHandler().isPlayerTurn(ai)) {
                     if (xPaid) {
                         numCards = computerMaxHandSize - computerHandSize;
-                        if (sa.getHostCard().isInZone(ZoneType.Hand)) {
+                        if (source.isInZone(ZoneType.Hand)) {
                             numCards++; // the card will be spent
                         }
                         root.setXManaCostPaid(numCards);
@@ -517,7 +517,6 @@ public class DrawAi extends SpellAbilityAi {
         return true;
     } // drawTargetAI()
 
-
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (!mandatory && !willPayCosts(ai, sa, sa.getPayCosts(), sa.getHostCard())) {
@@ -527,7 +526,6 @@ public class DrawAi extends SpellAbilityAi {
         return targetAI(ai, sa, mandatory);
     }
 
-    
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
      */

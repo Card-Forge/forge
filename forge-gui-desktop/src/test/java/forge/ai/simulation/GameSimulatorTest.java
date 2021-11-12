@@ -1720,11 +1720,11 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertFalse(outlaw.isCloned());
         assertTrue(outlaw.isDoubleFaced());
         assertTrue(outlaw.hasState(CardStateName.Transformed));
-        assertTrue(outlaw.canTransform());
+        assertTrue(outlaw.canTransform(null));
         assertFalse(outlaw.isBackSide());
 
         assertFalse(giant.isDoubleFaced());
-        assertFalse(giant.canTransform());
+        assertFalse(giant.canTransform(null));
 
         addCard("Forest", p);
         addCard("Forest", p);
@@ -1756,7 +1756,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertTrue(clonedOutLaw.isCloned());
         assertTrue(clonedOutLaw.isDoubleFaced());
         assertFalse(clonedOutLaw.hasState(CardStateName.Transformed));
-        assertTrue(clonedOutLaw.canTransform());
+        assertTrue(clonedOutLaw.canTransform(null));
         assertFalse(clonedOutLaw.isBackSide());
 
         assertEquals(clonedOutLaw.getName(), hillGiantName);
@@ -1777,7 +1777,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertTrue(transformOutLaw.isCloned());
         assertTrue(transformOutLaw.isDoubleFaced());
         assertFalse(transformOutLaw.hasState(CardStateName.Transformed));
-        assertTrue(transformOutLaw.canTransform());
+        assertTrue(transformOutLaw.canTransform(null));
         assertTrue(transformOutLaw.isBackSide());
 
         assertEquals(transformOutLaw.getName(), hillGiantName);
@@ -1792,7 +1792,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertFalse(transformOutLaw.isCloned());
         assertTrue(transformOutLaw.isDoubleFaced());
         assertTrue(transformOutLaw.hasState(CardStateName.Transformed));
-        assertTrue(transformOutLaw.canTransform());
+        assertTrue(transformOutLaw.canTransform(null));
         assertTrue(transformOutLaw.isBackSide());
 
         assertEquals(transformOutLaw.getName(), terrorName);

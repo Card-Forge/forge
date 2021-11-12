@@ -1,0 +1,29 @@
+Name:Smoldering Egg
+ManaCost:1 R
+Types:Creature Dragon Egg
+PT:0/4
+K:Defender
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCharge | TriggerDescription$ Whenever you cast an instant or sorcery spell, put a number of ember counters on CARDNAME equal to the amount of mana spent to cast that spell. Then if CARDNAME has seven or more ember counters on it, remove them and transform Smoldering Egg.
+SVar:TrigCharge:DB$ PutCounter | Defined$ Self | CounterType$ EMBER | CounterNum$ X | SubAbility$ DBBranch
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ Ember | TrueSubAbility$ DBRemoveCtrs
+SVar:DBRemoveCtrs:DB$ RemoveCounter | Defined$ Self | CounterType$ EMBER | CounterNum$ All | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+SVar:X:Count$TriggeredManaSpent
+SVar:Ember:Count$Valid Card.Self+counters_GE7_EMBER
+AlternateMode:DoubleFaced
+DeckHas:Ability$Counters
+DeckNeeds:Type$Instant|Sorcery
+Oracle:Defender\nWhenever you cast an instant or sorcery spell, put a number of ember counters on Smoldering Egg equal to the amount of mana spent to cast that spell. Then if Smoldering Egg has seven or more ember counters on it, remove them and transform Smoldering Egg.
+
+ALTERNATE
+
+Name:Ashmouth Dragon
+ManaCost:no cost
+Colors:red
+Types:Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME deals 2 damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2
+DeckHints:Type$Instant|Sorcery
+Oracle:Flying\nWhenever you cast an instant or sorcery spell, Ashmouth Dragon deals 2 damage to any target.

@@ -1,0 +1,15 @@
+Name:Will the Wise
+ManaCost:W B
+Types:Legendary Creature Human
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerDescription$ When CARDNAME enters or leaves the battlefield, each opponent may investigate. Each opponent who doesn't loses 1 life. You investigate X times, where X is one plus the number of opponents who investigated this way.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigInvestigate | Secondary$ True | TriggerDescription$ When CARDNAME enters or leaves the battlefield, each opponent may investigate. Each opponent who doesn't loses 1 life. You investigate X times, where X is one plus the number of opponents who investigated this way.
+SVar:TrigInvestigate:DB$ Investigate | Defined$ Opponent | Optional$ True | RememberInvestigatingPlayers$ True | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Opponent.IsNotRemembered | LifeAmount$ 1 | SubAbility$ DBInvestigate
+SVar:DBInvestigate:DB$ Investigate | Num$ Y | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:PlayerCountRemembered$Amount
+SVar:Y:SVar$X/Plus.1
+K:Friends forever
+DeckHas:Ability$Investigate & Ability$Token & Ability$Sacrifice
+Oracle:When Will the Wise enters or leaves the battlefield, each opponent may investigate. Each opponent who doesn't loses 1 life. You investigate X times, where X is one plus the number of opponents who investigated this way.\nFriends forever (You can have two commanders if both have friends forever.)

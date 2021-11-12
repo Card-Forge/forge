@@ -41,10 +41,10 @@ public class ScryEffect extends SpellAbilityEffect {
         final List<Player> players = Lists.newArrayList(); // players really affected
 
         // Optional here for spells that have optional multi-player scrying
-            for (final Player p : getTargetPlayers(sa)) {
-                if ( (!sa.usesTargeting() || p.canBeTargetedBy(sa)) &&
-                  (!isOptional || p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWanttoScry"))) ) {
-                    players.add(p);
+        for (final Player p : getTargetPlayers(sa)) {
+            if ( (!sa.usesTargeting() || p.canBeTargetedBy(sa)) &&
+                    (!isOptional || p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWanttoScry"))) ) {
+                players.add(p);
             }
         }
         sa.getActivatingPlayer().getGame().getAction().scry(players, num, sa);

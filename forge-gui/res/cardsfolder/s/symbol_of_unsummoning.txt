@@ -2,6 +2,6 @@ Name:Symbol of Unsummoning
 ManaCost:2 U
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand. | SubAbility$ DBDraw
-SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/symbol_of_unsummoning.jpg
 Oracle:Return target creature to its owner's hand.\nDraw a card.

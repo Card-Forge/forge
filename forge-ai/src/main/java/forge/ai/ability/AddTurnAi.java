@@ -36,7 +36,6 @@ import forge.game.spellability.SpellAbility;
  */
 public class AddTurnAi extends SpellAbilityAi {
 
-
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Player opp = ai.getWeakestOpponent();

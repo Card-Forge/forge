@@ -3,7 +3,7 @@ ManaCost:3 R R
 Types:Creature Trilobite Beast
 PT:3/3
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDmgBlockers | TriggerDescription$ Whenever CARDNAME deals combat damage to defending player, it deals damage equal to its power to each blocking creature.
-SVar:TrigDmgBlockers:DB$DamageAll | ValidCards$ Creature.blocking | NumDmg$ X | ValidDescription$ each blocking creature
+SVar:TrigDmgBlockers:DB$ DamageAll | ValidCards$ Creature.blocking | NumDmg$ X | ValidDescription$ each blocking creature
 SVar:X:Count$CardPower
 SVar:MustBeBlocked:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/electryte.jpg

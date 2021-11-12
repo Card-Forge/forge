@@ -1,0 +1,7 @@
+Name:Flare of Faith
+ManaCost:1 W
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | AITgts$ Human.YouOwn | NumAtt$ 2 | NumDef$ 2 | SubAbility$ DBPump | SpellDescription$ Target creature gets +2/+2 until end of turn. If it is a Human, it gets +3/+3 and gains indestructible until end of turn instead.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | ConditionDefined$ Targeted | ConditionPresent$ Human | NumAtt$ 1 | NumDef$ 1 | KW$ Indestructible | StackDescription$ If it is a Human, it gets +3/+3 and gains indestructible until end of turn instead.
+DeckHints:Type$Human
+Oracle:Target creature gets +2/+2 until end of turn. If it is a Human, it gets +3/+3 and gains indestructible until end of turn instead.

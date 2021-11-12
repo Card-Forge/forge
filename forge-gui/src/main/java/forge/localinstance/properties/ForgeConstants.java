@@ -52,6 +52,7 @@ public final class ForgeConstants {
     public static final String NET_DECKS_OATHBREAKER_LIST_FILE       = LISTS_DIR + "net-decks-oathbreaker.txt";
     public static final String NET_DECKS_TINYLEADERS_LIST_FILE       = LISTS_DIR + "net-decks-tinyleaders.txt";
     public static final String BORDERLESS_CARD_LIST_FILE             = LISTS_DIR + "borderlessCardList.txt";
+    public static final String CLASSIC_MODULE_CARD_TO_CROP_FILE      = LISTS_DIR + "classicModuleCardtoCrop.txt";
     public static final String SKINS_LIST_FILE                       = LISTS_DIR + "skinsList.txt";
     public static final String CJK_FONTS_LIST_FILE                   = LISTS_DIR + "font-list.txt";
     public static final String NET_ARCHIVE_STANDARD_DECKS_LIST_FILE  = LISTS_DIR + "net-decks-archive-standard.txt";
@@ -116,14 +117,19 @@ public final class ForgeConstants {
     public static final String SPRITE_START_FILE      = "sprite_start.png";
     public static final String SPRITE_MANAICONS_FILE  = "sprite_manaicons.png";
     public static final String SPRITE_AVATARS_FILE    = "sprite_avatars.png";
+    public static final String SPRITE_CRACKS_FILE     = "sprite_cracks.png";
     public static final String SPRITE_SLEEVES_FILE    = "sprite_sleeves.png";
     public static final String SPRITE_SLEEVES2_FILE   = "sprite_sleeves2.png";
     public static final String SPRITE_FAVICONS_FILE   = "sprite_favicons.png";
     public static final String SPRITE_PLANAR_CONQUEST_FILE = "sprite_planar_conquest.png";
     public static final String SPRITE_SETLOGO_FILE    = "sprite_setlogo.png";
+    public static final String SPRITE_WATERMARK_FILE  = "sprite_watermark.png";
+    public static String SPRITE_CARDBG_FILE           = "sprite_cardbg.png";
     public static final String FONT_FILE              = "font1.ttf";
     public static final String SPLASH_BG_FILE         = "bg_splash.png";
     public static final String MATCH_BG_FILE          = "bg_match.jpg";
+    public static final String MATCH_BG_DAY_FILE      = "bg_day.jpg";
+    public static final String MATCH_BG_NIGHT_FILE    = "bg_night.jpg";
     public static final String TEXTURE_BG_FILE        = "bg_texture.jpg";
     public static final String SPACE_BG_FILE          = "bg_space.png";
     public static final String CHAOS_WHEEL_IMG_FILE   = "bg_chaos_wheel.png";
@@ -277,6 +283,8 @@ public final class ForgeConstants {
     public static final String DB_DIR                        = CACHE_DIR + "db" + PATH_SEPARATOR;
     public static final String FONTS_DIR                     = CACHE_DIR + "fonts" + PATH_SEPARATOR;
     public static final String CACHE_SKINS_DIR               = CACHE_DIR + "skins" + PATH_SEPARATOR;
+    public static final String CACHE_SOUND_DIR               = CACHE_DIR + "sound" + PATH_SEPARATOR;
+    public static final String CACHE_MUSIC_DIR               = CACHE_DIR + "music" + PATH_SEPARATOR;
     public static final String CACHE_TOKEN_PICS_DIR          = PICS_DIR + "tokens" + PATH_SEPARATOR;
     public static final String CACHE_ICON_PICS_DIR           = PICS_DIR + "icons" + PATH_SEPARATOR;
     public static final String CACHE_SYMBOLS_DIR             = PICS_DIR + "symbols" + PATH_SEPARATOR;
@@ -352,7 +360,6 @@ public final class ForgeConstants {
 
     // Constants for Land played notification policy
     public static final String SWITCH_CARDSTATES_DECK_NEVER = "Never";
-    public static final String SWITCH_CARDSTATES_DECK_ALWAYS = "Always";
     public static final String SWITCH_CARDSTATES_DECK_HOVER = "Switch back on hover";
 
     // Set boolean constant for landscape mode for gdx port

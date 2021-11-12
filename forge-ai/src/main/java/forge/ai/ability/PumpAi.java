@@ -1,32 +1,14 @@
 package forge.ai.ability;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
-
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpecialAiLogic;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.cost.CostTapType;
 import forge.game.keyword.Keyword;
@@ -38,6 +20,10 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class PumpAi extends PumpAiBase {
 
@@ -108,7 +94,7 @@ public class PumpAi extends PumpAiBase {
                 return true;
             }
 
-            return ph.getNextTurn().equals(ai) && !ph.getPhase().isBefore(PhaseType.END_OF_TURN);
+            return SpellAbilityAi.isSorcerySpeed(sa) || (ph.getNextTurn().equals(ai) && !ph.getPhase().isBefore(PhaseType.END_OF_TURN));
         } else if (logic.equals("Aristocrat")) {
             final boolean isThreatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(sa.getHostCard());
             if (!ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && !isThreatened) {
@@ -152,8 +138,8 @@ public class PumpAi extends PumpAiBase {
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
                 : Lists.newArrayList();
-        final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
-        final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
+        final String numDefense = sa.getParamOrDefault("NumDef", "");
+        final String numAttack = sa.getParamOrDefault("NumAtt", "");
 
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
 
@@ -290,9 +276,15 @@ public class PumpAi extends PumpAiBase {
                 sa.getTargets().add(lowest);
                 return true;
             }
-        } else if (sa.hasParam("AILogic") && sa.getParam("AILogic").startsWith("Donate")) {
+        } else if (aiLogic.startsWith("Donate")) {
             // Donate step 1 - try to target an opponent, preferably one who does not have a donate target yet
             return SpecialCardAi.Donate.considerTargetingOpponent(ai, sa);
+        } else if (aiLogic.equals("InfernoOfTheStarMounts")) {
+            int numRedMana = ComputerUtilMana.determineLeftoverMana(sa, ai, "R");
+            int currentPower = source.getNetPower();
+            if (currentPower < 20 && currentPower + numRedMana >= 20) {
+                return true;
+            }
         }
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
@@ -429,7 +421,7 @@ public class PumpAi extends PumpAiBase {
         final Card source = sa.getHostCard();
         final boolean isFight = "Fight".equals(sa.getParam("AILogic")) || "PowerDmg".equals(sa.getParam("AILogic"));
 
-        immediately |= ComputerUtil.playImmediately(ai, sa);
+        immediately = immediately || ComputerUtil.playImmediately(ai, sa);
 
         if (!mandatory
                 && !immediately
@@ -437,13 +429,18 @@ public class PumpAi extends PumpAiBase {
                 && !(sa.isCurse() && defense < 0)
                 && !containsNonCombatKeyword(keywords)
                 && !"UntilYourNextTurn".equals(sa.getParam("Duration"))
-                && !"Snapcaster".equals(sa.getParam("AILogic"))
+                && !"ReplaySpell".equals(sa.getParam("AILogic"))
                 && !isFight) {
             return false;
         }
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         sa.resetTargets();
+
+        if ("PowerStruggle".equals(sa.getParam("AILogic"))) {
+            return SpecialCardAi.PowerStruggle.considerFirstTarget(ai, sa);
+        }
+
         if (sa.hasParam("TargetingPlayer") && sa.getActivatingPlayer().equals(ai) && !sa.isTrigger()) {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);
@@ -526,15 +523,15 @@ public class PumpAi extends PumpAiBase {
             }
             list = getCurseCreatures(ai, sa, defense, attack, keywords);
         } else {
-            if (!tgt.canTgtCreature()) {
-                ZoneType zone = tgt.getZone().get(0);
-                list = new CardCollection(game.getCardsIn(zone));
-            } else {
-                list = getPumpCreatures(ai, sa, defense, attack, keywords, immediately);
-            }
             if (sa.canTarget(ai)) {
                 sa.getTargets().add(ai);
                 return true;
+            }
+            if (tgt.canTgtCreature()) {
+                list = getPumpCreatures(ai, sa, defense, attack, keywords, immediately);
+            } else {
+                ZoneType zone = tgt.getZone().get(0);
+                list = new CardCollection(game.getCardsIn(zone));
             }
         }
 
@@ -559,7 +556,7 @@ public class PumpAi extends PumpAiBase {
             list = CardLists.filter(list, Predicates.or(CardPredicates.Presets.CREATURES, new Predicate<Card>() {
                 @Override
                 public boolean apply(Card card) {
-                    for (SpellAbility sa: card.getSpellAbilities()) {
+                    for (SpellAbility sa : card.getSpellAbilities()) {
                         if (sa.isAbility()) {
                             return true;
                         }
@@ -595,8 +592,8 @@ public class PumpAi extends PumpAiBase {
             });
         }
 
-        if ("Snapcaster".equals(sa.getParam("AILogic"))) {
-            if (!ComputerUtil.targetPlayableSpellCard(ai, list, sa, false, false)) {
+        if ("ReplaySpell".equals(sa.getParam("AILogic"))) {
+            if (!ComputerUtil.targetPlayableSpellCard(ai, list, sa, false, mandatory)) {
                 return false;
             }
         }
@@ -637,8 +634,7 @@ public class PumpAi extends PumpAiBase {
     private boolean pumpMandatoryTarget(final Player ai, final SpellAbility sa) {
         final Game game = ai.getGame();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard(), sa);
-        list = CardLists.getTargetableCards(list, sa);
+        CardCollection list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
 
         if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             sa.resetTargets();
@@ -662,20 +658,13 @@ public class PumpAi extends PumpAiBase {
             forced = CardLists.filterControlledBy(list, ai.getOpponents());
         }
 
-        while (sa.getTargets().size() < tgt.getMaxTargets(source, sa)) {
+        while (sa.canAddMoreTarget()) {
             if (pref.isEmpty()) {
                 break;
             }
 
-            Card c;
-            if (CardLists.getNotType(pref, "Creature").isEmpty()) {
-                c = ComputerUtilCard.getBestCreatureAI(pref);
-            } else {
-                c = ComputerUtilCard.getMostExpensivePermanentAI(pref, sa, true);
-            }
-
+            Card c = ComputerUtilCard.getBestAI(list);
             pref.remove(c);
-
             sa.getTargets().add(c);
         }
 
@@ -688,7 +677,7 @@ public class PumpAi extends PumpAiBase {
             if (CardLists.getNotType(forced, "Creature").isEmpty()) {
                 c = ComputerUtilCard.getWorstCreatureAI(forced);
             } else {
-                c = ComputerUtilCard.getCheapestPermanentAI(forced, sa, true);
+                c = ComputerUtilCard.getCheapestPermanentAI(forced, sa, false);
             }
 
             forced.remove(c);
@@ -707,8 +696,8 @@ public class PumpAi extends PumpAiBase {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final SpellAbility root = sa.getRootAbility();
-        final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
-        final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
+        final String numDefense = sa.getParamOrDefault("NumDef", "");
+        final String numAttack = sa.getParamOrDefault("NumAtt", "");
 
         if (sa.getSVar("X").equals("Count$xPaid")) {
             sa.setXManaCostPaid(null);
@@ -758,8 +747,8 @@ public class PumpAi extends PumpAiBase {
         final SpellAbility root = sa.getRootAbility();
         final Card source = sa.getHostCard();
 
-        final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
-        final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
+        final String numDefense = sa.getParamOrDefault("NumDef", "");
+        final String numAttack = sa.getParamOrDefault("NumAtt", "");
 
         if (numDefense.equals("-X") && sa.getSVar("X").equals("Count$ChosenNumber")) {
             int energy = ai.getCounters(CounterEnumType.ENERGY);
@@ -811,16 +800,15 @@ public class PumpAi extends PumpAiBase {
             defense = AbilityUtils.calculateAmount(sa.getHostCard(), numDefense, sa);
         }
 
-        if (!sa.usesTargeting()) {
-            if (source.isCreature()) {
-                if (!source.hasKeyword(Keyword.INDESTRUCTIBLE) && source.getNetToughness() + defense <= source.getDamage()) {
-                    return false;
-                }
-                return source.getNetToughness() + defense > 0;
-            }
-        } else {
-            //Targeted
+        if (sa.usesTargeting()) {
             return pumpTgtAI(ai, sa, defense, attack, false, true);
+        }
+
+        if (source.isCreature()) {
+            if (!source.hasKeyword(Keyword.INDESTRUCTIBLE) && source.getNetToughness() + defense <= source.getDamage()) {
+                return false;
+            }
+            return source.getNetToughness() + defense > 0;
         }
 
         return true;

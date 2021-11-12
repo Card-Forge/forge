@@ -5,7 +5,7 @@ PT:4/3
 K:Flying
 K:Evoke:5 W
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturnCreatures | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return up to two target creature cards with power 2 or less from your graveyard to the battlefield.
-SVar:TrigReturnCreatures:DB$ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.powerLE2 | TargetsWithDefinedController$ TriggeredCardController | TgtPrompt$ Choose target creature
+SVar:TrigReturnCreatures:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.powerLE2 | TargetsWithDefinedController$ TriggeredCardController | TgtPrompt$ Choose target creature
 SVar:NeedsToPlayEvokedVar:Z GE2
 SVar:Z:Count$ValidGraveyard Creature.YouCtrl+powerLE2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reveillark.jpg

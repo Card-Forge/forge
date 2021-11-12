@@ -5,6 +5,6 @@ PT:3/2
 K:Flash
 K:Vigilance
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPhaseOut | TriggerDescription$ When CARDNAME enters the battlefield, any number of other target creatures you control phase out. (Treat them and anything attached to them as though they don't exist until their controller's next turn.)
-SVar:TrigPhaseOut:DB$ Phases | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select target artifact, creature or land | TargetMin$ 0 | TargetMax$ MaxTgts | SelectPrompt$ Choose any number of non-Angel creatures you control | Duration$ UntilHostLeavesPlay
+SVar:TrigPhaseOut:DB$ Phases | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select other creature | TargetMin$ 0 | TargetMax$ MaxTgts | SelectPrompt$ Choose any number of creatures you control | Duration$ UntilHostLeavesPlay
 SVar:MaxTgts:Count$Valid Creature.Other+YouCtrl
 Oracle:Flash\nVigilance\nWhen Guardian of Faith enters the battlefield, any number of other target creatures you control phase out. (Treat them and anything attached to them as though they don't exist until their controller's next turn.)

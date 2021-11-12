@@ -2,7 +2,7 @@ Name:Honden of Seeing Winds
 ManaCost:4 U
 Types:Legendary Enchantment Shrine
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, draw a card for each Shrine you control.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ X
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:Count$TypeYouCtrl.Shrine
 DeckHints:Type$Shrine
 SVar:Picture:http://www.wizards.com/global/images/magic/general/honden_of_seeing_winds.jpg

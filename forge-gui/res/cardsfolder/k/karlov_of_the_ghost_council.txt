@@ -3,7 +3,7 @@ ManaCost:W B
 Types:Legendary Creature Spirit Advisor
 PT:2/2
 T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put two +1/+1 counters on CARDNAME.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
 A:AB$ ChangeZone | Cost$ W B SubCounter<6/P1P1> | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature | SpellDescription$ Exile target creature. 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karlov_of_the_ghost_council.jpg
 Oracle:Whenever you gain life, put two +1/+1 counters on Karlov of the Ghost Council.\n{W}{B}, Remove six +1/+1 counters from Karlov of the Ghost Council: Exile target creature.

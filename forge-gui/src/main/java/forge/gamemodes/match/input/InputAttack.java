@@ -27,8 +27,6 @@ import forge.game.GameEntity;
 import forge.game.GameEntityView;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardView;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
@@ -128,7 +126,7 @@ public class InputAttack extends InputSyncronizedBase {
         final List<Player> defenders = playerAttacks.getOpponents();
         final Set<CardView> refreshCards = Sets.newHashSet();
 
-        for (final Card c : CardLists.filter(playerAttacks.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
+        for (final Card c : playerAttacks.getCreaturesInPlay()) {
             if (combat.isAttacking(c)) {
                 continue;
             }

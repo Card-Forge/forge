@@ -62,8 +62,7 @@ public class InputPlaybackControl extends InputSyncronizedBase {
         if (isPaused) {
             control.resume();
             setPause(false);
-        }
-        else {
+        } else {
             control.pause();
             setPause(true);
         }
@@ -77,6 +76,7 @@ public class InputPlaybackControl extends InputSyncronizedBase {
         else {
             isFast = !isFast;
             control.setSpeed(isFast);
+            getController().getGui().setGameSpeed(isFast);
             setPause(isPaused); // update message
         }
     }

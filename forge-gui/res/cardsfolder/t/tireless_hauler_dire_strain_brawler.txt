@@ -1,0 +1,19 @@
+Name:Tireless Hauler
+ManaCost:4 G
+Types:Creature Human Werewolf
+PT:4/5
+K:Vigilance
+K:Daybound
+AlternateMode:DoubleFaced
+Oracle:Vigilance\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Dire-Strain Brawler
+ManaCost:no cost
+Colors:green
+Types:Creature Werewolf
+PT:6/6
+K:Vigilance
+K:Nightbound
+Oracle:Vigilance\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

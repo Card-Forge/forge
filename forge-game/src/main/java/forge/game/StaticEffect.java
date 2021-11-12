@@ -174,37 +174,21 @@ public class StaticEffect {
         final CardCollectionView affectedCards = getAffectedCards();
         final List<Player> affectedPlayers = getAffectedPlayers();
 
-        String changeColorWordsTo = null;
-
-        boolean setPT = false;
-        String[] addHiddenKeywords = null;
         boolean removeMayPlay = false;
-
-        if (hasParam("ChangeColorWordsTo")) {
-            changeColorWordsTo = getParam("ChangeColorWordsTo");
-        }
-
-        if (hasParam("SetPower") || hasParam("SetToughness")) {
-            setPT = true;
-        }
-
-        if (hasParam("AddHiddenKeyword")) {
-            addHiddenKeywords = getParam("AddHiddenKeyword").split(" & ");
-        }
 
         if (hasParam("MayPlay")) {
             removeMayPlay = true;
         }
 
         if (hasParam("IgnoreEffectCost")) {
-            getSource().removeChangedCardTraits(getTimestamp());
+            getSource().removeChangedCardTraits(getTimestamp(), ability.getId());
         }
 
         // modify players
         for (final Player p : affectedPlayers) {
             p.setUnlimitedHandSize(false);
             p.setMaxHandSize(p.getStartingHandSize());
-            p.removeChangedKeywords(getTimestamp());
+            p.removeChangedKeywords(getTimestamp(), ability.getId());
 
             p.removeMaxLandPlays(getTimestamp());
             p.removeMaxLandPlaysInfinite(getTimestamp());
@@ -223,13 +207,11 @@ public class StaticEffect {
             }
 
             // Revert changed color words
-            if (changeColorWordsTo != null) {
-                affectedCard.removeChangedTextColorWord(getTimestamp());
-            }
+            affectedCard.removeChangedTextColorWord(getTimestamp(), ability.getId());
 
             // remove set P/T
-            if (setPT) {
-                affectedCard.removeNewPT(getTimestamp());
+            if (hasParam("SetPower") || hasParam("SetToughness")) {
+                affectedCard.removeNewPT(getTimestamp(), ability.getId());
             }
 
             // remove P/T bonus
@@ -241,35 +223,33 @@ public class StaticEffect {
             // (Although nothing uses it at this time)
             if (hasParam("AddKeyword") || hasParam("RemoveKeyword")
                     || hasParam("RemoveAllAbilities") || hasParam("RemoveLandTypes")) {
-                affectedCard.removeChangedCardKeywords(getTimestamp());
+                affectedCard.removeChangedCardKeywords(getTimestamp(), ability.getId());
             }
 
             if (hasParam("CantHaveKeyword")) {
                 affectedCard.removeCantHaveKeyword(getTimestamp());
             }
 
-            if (addHiddenKeywords != null) {
-                for (final String k : addHiddenKeywords) {
-                    affectedCard.removeHiddenExtrinsicKeyword(k);
-                }
+            if (hasParam("AddHiddenKeyword")) {
+                affectedCard.removeHiddenExtrinsicKeywords(timestamp, ability.getId());
             }
 
             // remove abilities
             if (hasParam("AddAbility") || hasParam("GainsAbilitiesOf") || hasParam("GainsAbilitiesOfDefined")
                     || hasParam("AddTrigger") || hasParam("AddStaticAbility") || hasParam("AddReplacementEffects")
                     || hasParam("RemoveAllAbilities") || hasParam("RemoveLandTypes")) {
-                affectedCard.removeChangedCardTraits(getTimestamp());
+                affectedCard.removeChangedCardTraits(getTimestamp(), ability.getId());
             }
 
             // remove Types
             if (hasParam("AddType") || hasParam("RemoveType")) {
                 // the view is updated in GameAction#checkStaticAbilities to avoid flickering
-                affectedCard.removeChangedCardTypes(getTimestamp(), false);
+                affectedCard.removeChangedCardTypes(getTimestamp(), ability.getId(), false);
             }
 
             // remove colors
             if (hasParam("AddColor") || hasParam("SetColor")) {
-                affectedCard.removeColor(getTimestamp());
+                affectedCard.removeColor(getTimestamp(), ability.getId());
             }
 
             // remove may look at
@@ -281,7 +261,15 @@ public class StaticEffect {
             }
 
             if (hasParam("GainTextOf")) {
-                affectedCard.removeTextChangeState(getTimestamp());
+                affectedCard.removeChangedName(getTimestamp(), ability.getId());
+                affectedCard.removeChangedManaCost(getTimestamp(), ability.getId());
+                affectedCard.removeColor(getTimestamp(), ability.getId());
+                affectedCard.removeChangedCardTypes(getTimestamp(), ability.getId());
+                affectedCard.removeChangedCardTraits(getTimestamp(), ability.getId());
+                affectedCard.removeChangedCardKeywords(getTimestamp(), ability.getId());
+                affectedCard.removeNewPT(getTimestamp(), ability.getId());
+
+                affectedCard.updateChangedText();
             }
 
             if (hasParam("Goad")) {

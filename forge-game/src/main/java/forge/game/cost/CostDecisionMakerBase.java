@@ -2,7 +2,7 @@ package forge.game.cost;
 
 import forge.game.player.Player;
 
-public abstract class CostDecisionMakerBase  implements ICostVisitor<PaymentDecision> {
+public abstract class CostDecisionMakerBase implements ICostVisitor<PaymentDecision> {
 
     protected final Player player;
     public CostDecisionMakerBase(Player player0) {

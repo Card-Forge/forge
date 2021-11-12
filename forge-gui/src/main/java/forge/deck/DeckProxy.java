@@ -256,7 +256,8 @@ public class DeckProxy implements InventoryItem {
 
         for (final Entry <PaperCard, Integer> pc : getDeck().getAllCardsInASinglePool()) {
             if (pc.getKey().getRules().getManaCost() != null) {
-                if (pc.getKey().getRules().getSplitType() != CardSplitType.Split)
+                if (pc.getKey().getRules().getType().hasSubtype("Saga") || pc.getKey().getRules().getType().hasSubtype("Class") || CardSplitType.Split.equals(pc.getKey().getRules().getSplitType()))
+                    continue;
                     keyCMC.put(pc.getKey(),pc.getKey().getRules().getManaCost().getCMC());
             }
         }
@@ -316,8 +317,7 @@ public class DeckProxy implements InventoryItem {
         if (mainSize == null) {
             if (deck == null) {
                 mainSize = -1;
-            }
-            else {
+            } else {
                 final Deck d = getDeck();
                 mainSize = d.getMain().countAll();
 
@@ -423,8 +423,7 @@ public class DeckProxy implements InventoryItem {
         final List<DeckProxy> result = new ArrayList<>();
         if (filter == null) {
             filter = DeckFormat.TinyLeaders.hasLegalCardsPredicate();
-        }
-        else {
+        } else {
             filter = Predicates.and(DeckFormat.TinyLeaders.hasLegalCardsPredicate(), filter);
         }
         addDecksRecursivelly("Tiny Leaders", GameType.TinyLeaders, result, "", FModel.getDecks().getTinyLeaders(), filter);
@@ -438,8 +437,7 @@ public class DeckProxy implements InventoryItem {
         final List<DeckProxy> result = new ArrayList<>();
         if (filter == null) {
             filter = DeckFormat.Brawl.hasLegalCardsPredicate();
-        }
-        else {
+        } else {
             filter = Predicates.and(DeckFormat.Brawl.hasLegalCardsPredicate(), filter);
         }
         addDecksRecursivelly("Brawl", GameType.Brawl, result, "", FModel.getDecks().getBrawl(), filter);
@@ -690,11 +688,18 @@ public class DeckProxy implements InventoryItem {
         List<CardEdition> availableEditions = new ArrayList<>();
 
         for (PaperCard c : deck.getAllCardsInASinglePool().toFlatList()) {
-            availableEditions.add(FModel.getMagicDb().getEditions().get(c.getEdition()));
+            CardEdition edition = FModel.getMagicDb().getEditions().get(c.getEdition());
+            if (edition == null)
+                continue;
+            availableEditions.add(edition);
         }
 
         CardEdition randomLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditions);
-        return randomLandSet == null ? FModel.getMagicDb().getEditions().get("ZEN") : randomLandSet;
+        if (randomLandSet == null) {
+            CardEdition preferredArtEdition = CardEdition.Predicates.getPreferredArtEditionWithAllBasicLands();
+            return preferredArtEdition != null ? preferredArtEdition : FModel.getMagicDb().getEditions().get("ZEN");
+        }
+        return randomLandSet;
     }
 
     public static final Predicate<DeckProxy> IS_WHITE = new Predicate<DeckProxy>() {

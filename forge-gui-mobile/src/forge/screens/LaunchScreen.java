@@ -78,11 +78,12 @@ public abstract class LaunchScreen extends FScreen {
         @Override
         public void draw(Graphics g) {
             if (Forge.hdstart)
-                g.drawImage(pressed ? FSkinImage.HDBTN_START_DOWN : FSkinImage.HDBTN_START_UP,
-                    0, 0, getWidth(), getHeight());
+                g.drawImage(pressed ? FSkinImage.HDBTN_START_DOWN :
+                        isHovered() ? FSkinImage.HDBTN_START_OVER : FSkinImage.HDBTN_START_UP,
+                        isHovered() ? -2 : 0, 0, getWidth(), getHeight());
             else
-                g.drawImage(pressed ? FSkinImage.BTN_START_DOWN : FSkinImage.BTN_START_UP,
-                        0, 0, getWidth(), getHeight());
+                g.drawImage(pressed ? FSkinImage.BTN_START_DOWN :
+                        isHovered() ? FSkinImage.BTN_START_OVER : FSkinImage.BTN_START_UP, 0, 0, getWidth(), getHeight());
             //its must be enabled or you can't start any game modes
             if (!Forge.isLoadingaMatch()) {
                 if(!btnStart.isEnabled())

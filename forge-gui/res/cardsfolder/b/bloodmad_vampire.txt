@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Vampire Berserker
 PT:4/1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a +1/+1 counter on it.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 K:Madness:1 R
 DeckHints:Ability$Discard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodmad_vampire.jpg

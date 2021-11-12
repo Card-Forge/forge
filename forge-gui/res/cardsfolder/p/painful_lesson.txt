@@ -2,6 +2,6 @@ Name:Painful Lesson
 ManaCost:2 B
 Types:Sorcery
 A:SP$ Draw | Cost$ 2 B | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBLoseLife | SpellDescription$ Target player draws two cards and loses 2 life.
-SVar:DBLoseLife:DB$LoseLife | LifeAmount$ 2 | Defined$ Targeted
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ Targeted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/painful_lesson.jpg
 Oracle:Target player draws two cards and loses 2 life.

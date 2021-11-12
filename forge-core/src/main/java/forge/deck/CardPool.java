@@ -53,7 +53,7 @@ public class CardPool extends ItemPool<PaperCard> {
 
     public void add(final String cardRequest, final int amount) {
         CardDb.CardRequest request = CardDb.CardRequest.fromString(cardRequest);
-        this.add(request.cardName, request.edition, request.artIndex, amount);
+        this.add(CardDb.CardRequest.compose(request.cardName, request.isFoil), request.edition, request.artIndex, amount);
     }
 
     public void add(final String cardName, final String setCode) {
@@ -64,8 +64,15 @@ public class CardPool extends ItemPool<PaperCard> {
         this.add(cardName, setCode, IPaperCard.DEFAULT_ART_INDEX, amount);
     }
 
+    public void add(final String cardName, final String setCode, final int amount, boolean addAny) {
+        this.add(cardName, setCode, IPaperCard.NO_ART_INDEX, amount, addAny);
+    }
+
     // NOTE: ART indices are "1" -based
     public void add(String cardName, String setCode, int artIndex, final int amount) {
+        this.add(cardName, setCode, artIndex, amount, false);
+    }
+    public void add(String cardName, String setCode, int artIndex, final int amount, boolean addAny) {
         Map<String, CardDb> dbs = StaticData.instance().getAvailableDatabases();
         PaperCard paperCard = null;
         String selectedDbName = "";
@@ -89,7 +96,11 @@ public class CardPool extends ItemPool<PaperCard> {
                 artIndex = IPaperCard.DEFAULT_ART_INDEX;  // Reset Any artIndex passed in, at this point
             }
         }
-        if (paperCard == null){
+        if (addAny && paperCard == null) {
+            paperCard = StaticData.instance().getCommonCards().getCard(cardName);
+            selectedDbName = "Common";
+        }
+        if (paperCard == null) {
             // after all still null
             System.err.println("An unsupported card was requested: \"" + cardName + "\" from \"" + setCode + "\". \n");
             paperCard = StaticData.instance().getCommonCards().createUnsupportedCard(cardName);
@@ -103,7 +114,7 @@ public class CardPool extends ItemPool<PaperCard> {
         boolean artIndexExplicitlySet = (artIndex > IPaperCard.DEFAULT_ART_INDEX) ||
                 (CardDb.CardRequest.fromString(cardName).artIndex > IPaperCard.NO_ART_INDEX);
 
-        if (artIndexExplicitlySet || artCount == 1) {
+        if ((artIndexExplicitlySet || artCount == 1) && !addAny) {
             // either a specific art index is specified, or there is only one art, so just add the card
             this.add(paperCard, amount);
         } else {
@@ -118,7 +129,6 @@ public class CardPool extends ItemPool<PaperCard> {
             }
         }
     }
-
 
     /**
      * Add all from a List of CardPrinted.
@@ -171,6 +181,8 @@ public class CardPool extends ItemPool<PaperCard> {
                 continue;
             int count = cp.getValue();
             CardEdition edition = StaticData.instance().getCardEdition(card.getEdition());
+            if (edition == null)
+                continue;
             int currentCount = editionStatistics.getOrDefault(edition, 0);
             currentCount += count;
             editionStatistics.put(edition, currentCount);
@@ -209,10 +221,10 @@ public class CardPool extends ItemPool<PaperCard> {
      *
      * @see CardPool#getCardEditionStatistics(boolean)
      */
-    public Map<CardEdition.Type, Integer> getCardEditionTypeStatistics(boolean includeBasicLands){
+    public Map<CardEdition.Type, Integer> getCardEditionTypeStatistics(boolean includeBasicLands) {
         Map<CardEdition.Type, Integer> editionTypeStats = new HashMap<>();
         Map<CardEdition, Integer> editionStatistics = this.getCardEditionStatistics(includeBasicLands);
-        for(Entry<CardEdition, Integer> entry : editionStatistics.entrySet()) {
+        for (Entry<CardEdition, Integer> entry : editionStatistics.entrySet()) {
             CardEdition edition = entry.getKey();
             int count = entry.getValue();
             CardEdition.Type key = edition.getType();
@@ -229,11 +241,11 @@ public class CardPool extends ItemPool<PaperCard> {
      *
      * @return The most frequent CardEdition.Type in the pool, or null if the Pool is empty
      */
-    public CardEdition.Type getTheMostFrequentEditionType(){
+    public CardEdition.Type getTheMostFrequentEditionType() {
         Map<CardEdition.Type, Integer> editionTypeStats = this.getCardEditionTypeStatistics(false);
         Integer mostFrequentType = 0;
         List<CardEdition.Type> mostFrequentEditionTypes = new ArrayList<>();
-        for (Map.Entry<CardEdition.Type, Integer> entry : editionTypeStats.entrySet()){
+        for (Map.Entry<CardEdition.Type, Integer> entry : editionTypeStats.entrySet()) {
             if (entry.getValue() > mostFrequentType) {
                 mostFrequentType = entry.getValue();
                 mostFrequentEditionTypes.add(entry.getKey());
@@ -258,11 +270,11 @@ public class CardPool extends ItemPool<PaperCard> {
      * If the count of Modern and PreModern cards is tied, the return value is determined
      * by the preferred Card Art Preference settings, namely True if Latest Art, False otherwise.
      */
-    public boolean isModern(){
+    public boolean isModern() {
         int modernEditionsCount = 0;
         int preModernEditionsCount = 0;
         Map<CardEdition, Integer> editionStats = this.getCardEditionStatistics(false);
-        for (Map.Entry<CardEdition, Integer> entry: editionStats.entrySet()){
+        for (Map.Entry<CardEdition, Integer> entry: editionStats.entrySet()) {
             CardEdition edition = entry.getKey();
             if (edition.isModern())
                 modernEditionsCount += entry.getValue();
@@ -351,7 +363,7 @@ public class CardPool extends ItemPool<PaperCard> {
     private static int getMedianFrequency(List<Integer> frequencyValues, float meanFrequency) {
         int medianFrequency = frequencyValues.get(0);
         float refDelta = Math.abs(meanFrequency - medianFrequency);
-        for (int i = 1; i < frequencyValues.size(); i++){
+        for (int i = 1; i < frequencyValues.size(); i++) {
             int currentFrequency = frequencyValues.get(i);
             float delta = Math.abs(meanFrequency - currentFrequency);
             if (delta < refDelta) {
@@ -398,7 +410,7 @@ public class CardPool extends ItemPool<PaperCard> {
         return pool;
     }
 
-    public static List<Pair<String, Integer>> processCardList(final Iterable<String> lines){
+    public static List<Pair<String, Integer>> processCardList(final Iterable<String> lines) {
         List<Pair<String, Integer>> cardRequests = new ArrayList<>();
         if (lines == null)
             return cardRequests;  // empty list
@@ -452,8 +464,27 @@ public class CardPool extends ItemPool<PaperCard> {
      */
     public CardPool getFilteredPool(Predicate<PaperCard> predicate) {
         CardPool filteredPool = new CardPool();
-        for (PaperCard pc : this.items.keySet()) {
-            if (predicate.apply(pc)) filteredPool.add(pc);
+        Iterator<PaperCard> cardsInPool = this.items.keySet().iterator();
+        while (cardsInPool.hasNext()) {
+            PaperCard c = cardsInPool.next();
+            if (predicate.apply(c))
+                filteredPool.add(c, this.items.get(c));
+        }
+        return filteredPool;
+    }
+
+    /**
+     * Applies a predicate to this CardPool's cards.
+     * @param predicate the Predicate to apply to this CardPool
+     * @return a new CardPool made from this CardPool with only the cards that agree with the provided Predicate
+     */
+    public CardPool getFilteredPoolWithCardsCount(Predicate<PaperCard> predicate) {
+        CardPool filteredPool = new CardPool();
+        for (Entry<PaperCard, Integer> entry : this.items.entrySet()) {
+            PaperCard pc = entry.getKey();
+            int count = entry.getValue();
+            if (predicate.apply(pc))
+                filteredPool.add(pc, count);
         }
         return filteredPool;
     }

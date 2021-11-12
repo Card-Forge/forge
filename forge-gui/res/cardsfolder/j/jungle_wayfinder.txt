@@ -3,5 +3,5 @@ ManaCost:2 G
 Types:Creature Elf Warrior
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, each player may search their library for a basic land card, reveal it, put it into their hand, then shuffle.
-SVar:TrigChange:DB$ChangeZone | Optional$ True | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | DefinedPlayer$ Player | ChangeNum$ 1 | ShuffleNonMandatory$ True
+SVar:TrigChange:DB$ ChangeZone | Optional$ True | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | DefinedPlayer$ Player | ChangeNum$ 1 | ShuffleNonMandatory$ True
 Oracle:When Jungle Wayfinder enters the battlefield, each player may search their library for a basic land card, reveal it, put it into their hand, then shuffle.

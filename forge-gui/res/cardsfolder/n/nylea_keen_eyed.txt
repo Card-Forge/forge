@@ -10,5 +10,5 @@ S:Mode$ ReduceCost | ValidCard$ Creature | Type$ Spell | Activator$ You | Amount
 A:AB$ Dig | Cost$ 2 G | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature | DestinationZone$ Hand | LibraryPosition2$ 0 | RememberChanged$ True | SubAbility$ DBDig | StackDescription$ SpellDescription | SpellDescription$ Reveal the top card of your library. If it's a creature card, put it into your hand. Otherwise, you may put it into your graveyard.
 SVar:DBDig:DB$ Dig | DigNum$ 1 | DestinationZone$ Library | DestinationZone2$ Graveyard | Optional$ True | LibraryPosition$ 0 | ConditionCheckSVar$ Y | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:Y:Remembered$Amount
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Indestructible\nAs long as your devotion to green is less than five, Nylea isn't a creature.\nCreature spells you cast cost {1} less to cast.\n{2}{G}: Reveal the top card of your library. If it's a creature card, put it into your hand. Otherwise, you may put it into your graveyard.

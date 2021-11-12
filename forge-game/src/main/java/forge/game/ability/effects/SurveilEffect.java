@@ -47,5 +47,4 @@ public class SurveilEffect extends SpellAbilityEffect {
         table.triggerChangesZoneAll(sa.getHostCard().getGame(), sa);
     }
 
-
 }

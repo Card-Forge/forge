@@ -50,7 +50,6 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.ImageUtil;
-import forge.util.TextUtil;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -113,9 +112,8 @@ public class ImageCache {
     }
 
     public static void clear() {
-        cache.invalidateAll();
-        cache.cleanUp();
         missingIconKeys.clear();
+        ImageKeys.clearMissingCards();
     }
 
     public static void disposeTexture(){
@@ -158,17 +156,23 @@ public class ImageCache {
 
         final String prefix = imageKey.substring(0, 2);
 
+        PaperCard paperCard = null;
         if (prefix.equals(ImageKeys.CARD_PREFIX)) {
-            PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
+            try {
+                paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
+            } catch (Exception e) {
+                return false;
+            }
             if (paperCard == null)
                 return false;
 
-            final boolean backFace = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
-            final String cardfilename = ImageUtil.getImageKey(paperCard, backFace, true);
-            if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + cardfilename + ".jpg").exists())
-                if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + cardfilename + ".png").exists())
-                    if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + TextUtil.fastReplace(cardfilename,".full", ".fullborder") + ".jpg").exists())
-                        return false;
+            if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER)) {
+                return paperCard.hasImage();
+            } else {
+                final boolean backFace = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
+                final String cardfilename = backFace ? paperCard.getCardAltImageKey() : paperCard.getCardImageKey();
+                return ImageKeys.getCachedCardsFile(cardfilename) != null;
+            }
         } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
             final String tokenfilename = imageKey.substring(2) + ".jpg";
 
@@ -191,6 +195,9 @@ public class ImageCache {
         return getImage(imageKey, useDefaultIfNotFound, false);
     }
     public static Texture getImage(String imageKey, boolean useDefaultIfNotFound, boolean useOtherCache) {
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))
+            return null;
+
         if (StringUtils.isEmpty(imageKey)) {
             return null;
         }
@@ -200,7 +207,9 @@ public class ImageCache {
             imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
         }
         if (imageKey.startsWith(ImageKeys.CARD_PREFIX)) {
-            imageKey = ImageUtil.getImageKey(ImageUtil.getPaperCardFromImageKey(imageKey), altState, true);
+            PaperCard card = ImageUtil.getPaperCardFromImageKey(imageKey);
+            if (card != null)
+                imageKey = altState ? card.getCardAltImageKey() : card.getCardImageKey();
             if (StringUtils.isBlank(imageKey)) {
                 return defaultImage;
             }
@@ -230,15 +239,14 @@ public class ImageCache {
         }
 
         // No image file exists for the given key so optionally associate with
-        // a default "not available" image and add to cache for given key.
+        // a default "not available" image.
         if (image == null) {
             if (useDefaultIfNotFound) {
                 image = defaultImage;
-                if (useOtherCache)
-                    otherCache.put(imageKey, defaultImage);
-                else
-                    cache.put(imageKey, defaultImage);
-                if (imageBorder.get(image.toString()) == null)
+                /*fix not loading image file since we intentionally not to update the cache in order for the
+                  image fetcher to update automatically after the card image/s are downloaded*/
+                imageLoaded = false;
+                if (image != null && imageBorder.get(image.toString()) == null)
                     imageBorder.put(image.toString(), Pair.of(Color.valueOf("#171717").toString(), false)); //black border
             }
         }

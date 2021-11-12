@@ -1,10 +1,7 @@
 Name:Burn Away
 ManaCost:4 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 4 R | ValidTgts$ Creature | TgtPrompt$ Select target creature to deal damage to | NumDmg$ 6 | SubAbility$ DBEffect | SpellDescription$ CARDNAME deals 6 damage to target creature. When that creature dies this turn, exile all cards from its controller's graveyard.
-SVar:DBEffect:DB$ Effect | Name$ Burn Away Effect | Triggers$ SearingDeath | RememberObjects$ ParentTarget | StackDescription$ When {c:Targeted} dies this turn, exile all cards from its controller's graveyard.
-SVar:SearingDeath:Mode$ ChangesZone | ValidCard$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Graveyard | Execute$ DBExile | TriggerDescription$ When that creature dies this turn, exile all cards from its controller's graveyard.
-SVar:DBExile:DB$ ChangeZoneAll | Defined$ TriggeredCardController | Origin$ Graveyard | Destination$ Exile | SubAbility$ EndEffect
-SVar:EndEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:Picture:http://www.wizards.com/global/images/magic/general/burn_away.jpg
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 6 | SubAbility$ DBDelayedTrigger | SpellDescription$ CARDNAME deals 6 damage to target creature. When that creature dies this turn, exile all cards from its controller's graveyard.
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigExile | TriggerDescription$ When that creature dies this turn, exile all cards from its controller's graveyard.
+SVar:TrigExile:DB$ ChangeZoneAll | Defined$ TriggeredCardController | Origin$ Graveyard | Destination$ Exile
 Oracle:Burn Away deals 6 damage to target creature. When that creature dies this turn, exile all cards from its controller's graveyard.

@@ -4,6 +4,6 @@ Types:Artifact
 K:CARDNAME doesn't untap during your untap step. 
 A:AB$ DealDamage | Cost$ 4 T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of your upkeep, you may discard a card. If you do, untap CARDNAME.
-SVar:TrigUntap:AB$Untap | Cost$ Discard<1/Card> | Defined$ Self 
+SVar:TrigUntap:AB$ Untap | Cost$ Discard<1/Card> | Defined$ Self 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elaborate_firecannon.jpg
 Oracle:Elaborate Firecannon doesn't untap during your untap step.\n{4}, {T}: Elaborate Firecannon deals 2 damage to any target.\nAt the beginning of your upkeep, you may discard a card. If you do, untap Elaborate Firecannon.

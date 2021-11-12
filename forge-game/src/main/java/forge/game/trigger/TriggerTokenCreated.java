@@ -60,7 +60,7 @@ public class TriggerTokenCreated extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player);
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player, AbilityKey.Card);
     }
 
     /** {@inheritDoc}
@@ -68,6 +68,10 @@ public class TriggerTokenCreated extends Trigger {
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+            return false;
+        }
+
+        if (!matchesValidParam("ValidToken", runParams.get(AbilityKey.Card))) {
             return false;
         }
 

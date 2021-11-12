@@ -2,12 +2,15 @@ package forge.game.ability.effects;
 
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.Map;
 
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardZoneTable;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
@@ -113,6 +116,8 @@ public class DigUntilEffect extends SpellAbilityEffect {
 
         CardZoneTable table = new CardZoneTable();
         boolean combatChanged = false;
+        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
+        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
 
         for (final Player p : getTargetPlayers(sa)) {
             if (p == null) {
@@ -159,7 +164,6 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     game.getAction().reveal(revealed, p, false);
                 }
 
-
                 if (foundDest != null) {
                     // Allow ordering of found cards
                     if ((foundDest.isKnown()) && found.size() >= 2 && !foundDest.equals(ZoneType.Exile)) {
@@ -174,10 +178,13 @@ public class DigUntilEffect extends SpellAbilityEffect {
                                 Localizer.getInstance().getMessage("lblDoYouWantPutCardToZone", foundDest.getTranslatedName()))) {
                             continue;
                         }
+                        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                        moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+                        moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
                         Card m = null;
                         if (sa.hasParam("GainControl") && foundDest.equals(ZoneType.Battlefield)) {
                             c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
-                            m = game.getAction().moveTo(c.getController().getZone(foundDest), c, sa);
+                            m = game.getAction().moveTo(c.getController().getZone(foundDest), c, sa, moveParams);
                             if (sa.hasParam("Tapped")) {
                                 c.setTapped(true);
                             }
@@ -187,7 +194,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                         } else if (sa.hasParam("NoMoveFound") && foundDest.equals(ZoneType.Library)) {
                             //Don't do anything
                         } else {
-                            m = game.getAction().moveTo(foundDest, c, foundLibPos, sa);
+                            m = game.getAction().moveTo(foundDest, c, foundLibPos, sa, moveParams);
                         }
                         revealed.remove(c);
                         if (m != null && !origin.equals(m.getZone().getZoneType())) {

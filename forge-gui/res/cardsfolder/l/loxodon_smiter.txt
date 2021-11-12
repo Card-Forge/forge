@@ -2,7 +2,7 @@ Name:Loxodon Smiter
 ManaCost:1 G W
 Types:Creature Elephant Soldier
 PT:4/4
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 R:Event$ Discard | ActiveZones$ Hand | ValidCard$ Card.Self | ValidSource$ Card.OppCtrl | ReplaceWith$ SurpriseETB | DiscardFromEffect$ True | Description$ If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.
 SVar:SurpriseETB:DB$ ChangeZone | DefinedPlayer$ ReplacedPlayer | Defined$ ReplacedCard | Origin$ Hand | Destination$ Battlefield
 SVar:DiscardMeByOpp:2

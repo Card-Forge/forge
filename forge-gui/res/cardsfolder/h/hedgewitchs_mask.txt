@@ -1,0 +1,7 @@
+Name:Hedgewitch's Mask
+ManaCost:W
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.EquippedBy | ValidBlocker$ Creature.powerGE4 | Description$ Equipped creature can't be blocked by creatures with power 4 or greater.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
+Oracle:Equipped creature gets +1/+1.\nEquipped creature can't be blocked by creatures with power 4 or greater.\nEquip {2}

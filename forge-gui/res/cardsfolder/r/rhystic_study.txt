@@ -2,6 +2,6 @@ Name:Rhystic Study
 ManaCost:2 U
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent casts a spell, you may draw a card unless that player pays {1}.
-SVar:TrigDraw:DB$Draw | Defined$ You | UnlessCost$ 1 | UnlessPayer$ TriggeredPlayer | NumCards$ 1 | OptionalDecider$ You
+SVar:TrigDraw:DB$ Draw | Defined$ You | UnlessCost$ 1 | UnlessPayer$ TriggeredPlayer | NumCards$ 1 | OptionalDecider$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhystic_study.jpg
 Oracle:Whenever an opponent casts a spell, you may draw a card unless that player pays {1}.

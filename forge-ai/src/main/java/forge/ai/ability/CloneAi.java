@@ -42,7 +42,7 @@ public class CloneAi extends SpellAbilityAi {
         // TODO - add some kind of check for during human turn to answer
         // "Can I use this to block something?"
 
-        if (!checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler())) {
+        if (!checkPhaseRestrictions(ai, sa, game.getPhaseHandler())) {
             return false;
         }
 
@@ -91,7 +91,6 @@ public class CloneAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             chance = cloneTgtAI(sa);
         }
-
 
         return chance;
     }

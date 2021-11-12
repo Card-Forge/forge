@@ -29,7 +29,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
             newController.add(sa.getActivatingPlayer());
         }
 
-        sb.append(newController).append(" gains control of");
+        sb.append(newController.get(0)).append(" gains control of");
 
         final CardCollectionView tgts = getDefinedCards(sa);
         if (tgts.isEmpty()) {
@@ -44,11 +44,39 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 }
             }
         }
+        if (sa.hasParam("LoseControl")) {
+            String loseCont = sa.getParam("LoseControl");
+            if (loseCont.contains("EOT")) {
+                sb.append(" until end of turn");
+            } else if (loseCont.contains("Untap")) {
+                sb.append(" for as long as ").append(sa.getHostCard()).append(" remains tapped");
+            } else if (loseCont.contains("LoseControl")) {
+                sb.append(" for as long as you control ").append(sa.getHostCard());
+            } else if (loseCont.contains("LeavesPlay")) {
+                sb.append(" for as long as ").append(sa.getHostCard()).append( "remains on the battlefield");
+            } else if (loseCont.equals("StaticCommandCheck")) {
+                sb.append(" for as long as that creature remains enchanted");
+            } else if (loseCont.equals("UntilTheEndOfYourNextTurn")) {
+                sb.append(" until the end of your next turn");
+            }
+        }
         sb.append(".");
 
         if (sa.hasParam("Untap")) {
             sb.append(" Untap it.");
         }
+        final List<String> keywords = sa.hasParam("AddKWs") ? Arrays.asList(sa.getParam("AddKWs").split(" & ")) : null;
+        if (sa.hasParam("AddKWs")) {
+            sb.append(" It gains ");
+            for (int i = 0; i < keywords.size(); i++) {
+                sb.append(keywords.get(i).toLowerCase());
+                sb.append(keywords.size() > 2 && i+1 != keywords.size() ? ", " : "");
+                sb.append(keywords.size() == 2 && i == 0 ? " " : "");
+                sb.append(i+2 == keywords.size() ? "and " : "");
+            }
+            sb.append(" until end of turn.");
+        }
+
 
         return sb.toString();
     }
@@ -65,7 +93,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
             game.getAction().controllerChangeZoneCorrection(c);
 
             if (tapOnLose) {
-                c.tap();
+                c.tap(false);
             }
         }
         host.removeGainControlTargets(c);
@@ -117,21 +145,18 @@ public class ControlGainEffect extends SpellAbilityEffect {
             }
 
             long tStamp = game.getNextTimestamp();
-            if (lose != null) {
-                tgtC.addTempController(newController, tStamp);
-            } else {
-                tgtC.setController(newController, tStamp);
-            }
+            tgtC.addTempController(newController, tStamp);
 
             if (bUntap) {
-                tgtC.untap();
+                tgtC.untap(true);
             }
 
             final List<String> kws = Lists.newArrayList();
+            final List<String> hiddenKws = Lists.newArrayList();
             if (null != keywords) {
                 for (final String kw : keywords) {
                     if (kw.startsWith("HIDDEN")) {
-                        tgtC.addHiddenExtrinsicKeyword(kw);
+                        hiddenKws.add(kw.substring(7));
                     } else {
                         kws.add(kw);
                     }
@@ -139,8 +164,11 @@ public class ControlGainEffect extends SpellAbilityEffect {
             }
 
             if (!kws.isEmpty()) {
-                tgtC.addChangedCardKeywords(kws, Lists.newArrayList(), false, false, tStamp);
+                tgtC.addChangedCardKeywords(kws, Lists.newArrayList(), false, tStamp, 0);
                 game.fireEvent(new GameEventCardStatsChanged(tgtC));
+            }
+            if (hiddenKws.isEmpty()) {
+                tgtC.addHiddenExtrinsicKeywords(tStamp, 0, hiddenKws);
             }
 
             if (remember && !source.isRemembered(tgtC)) {
@@ -191,14 +219,8 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
                     @Override
                     public void run() {
-                        if (keywords.size() > 0) {
-                            for (String kw : keywords) {
-                                if (kw.startsWith("HIDDEN")) {
-                                    tgtC.removeHiddenExtrinsicKeyword(kw);
-                                }
-                            }
-                            tgtC.removeChangedCardKeywords(tStamp);
-                        }
+                        tgtC.removeHiddenExtrinsicKeywords(tStamp, 0);
+                        tgtC.removeChangedCardKeywords(tStamp, 0);
                     }
                 };
                 game.getEndOfTurn().addUntil(untilKeywordEOT);
@@ -221,7 +243,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
      * <p>
      * getLoseControlCommand.
      * </p>
-     * 
+     *
      * @param i
      *            a int.
      * @param originalController

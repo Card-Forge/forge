@@ -4,7 +4,7 @@ Types:Creature Elemental
 PT:8/8
 K:Fear
 T:Mode$ SpellCast | ValidCard$ Card | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell, sacrifice a creature.
-SVar:TrigSac:DB$Sacrifice | SacValid$ Creature
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Creature
 AI:RemoveDeck:All
 SVar:AntiBuffedBy:Card
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desecration_elemental.jpg

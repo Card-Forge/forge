@@ -1,7 +1,6 @@
 Name:Supreme Verdict
 ManaCost:1 W W U
 Types:Sorcery
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 A:SP$ DestroyAll | Cost$ 1 W W U | ValidCards$ Creature | SpellDescription$ Destroy all creatures.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/supreme_verdict.jpg
 Oracle:This spell can't be countered.\nDestroy all creatures.

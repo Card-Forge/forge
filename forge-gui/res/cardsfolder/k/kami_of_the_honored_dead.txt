@@ -5,7 +5,7 @@ PT:3/5
 K:Flying
 K:Soulshift:6
 T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigGain | TriggerDescription$ Whenever CARDNAME is dealt damage, you gain that much life.
-SVar:TrigGain:DB$GainLife | Defined$ You | LifeAmount$ X
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
 DeckHints:Type$Spirit

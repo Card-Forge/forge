@@ -3,6 +3,6 @@ ManaCost:2 G
 Types:Legendary Creature Human Shaman
 PT:1/2
 T:Mode$ SpellCast | ValidCard$ Legendary | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a legendary spell, draw a card.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reki_the_history_of_kamigawa.jpg
 Oracle:Whenever you cast a legendary spell, draw a card.

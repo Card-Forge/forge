@@ -1108,7 +1108,7 @@ public class FSkin {
     private static String preferredDir;
     private static String preferredName;
     private static BufferedImage bimDefaultSprite, bimFavIcon, bimPreferredSprite, bimFoils, bimQuestDraftDeck, bimOldFoils,
-    bimDefaultAvatars, bimPreferredAvatars, bimTrophies, bimAbilities, bimManaIcons, bimDefaultSleeve, bimDefaultSleeve2, bimDefaultDeckbox, bimPrefferedSetLogo;
+    bimDefaultAvatars, bimPreferredAvatars, bimTrophies, bimAbilities, bimManaIcons, bimDefaultSleeve, bimDefaultSleeve2, bimDefaultDeckbox, bimPrefferedSetLogo, bimDefaultWatermark;
     private static int x0, y0, w0, h0, newW, newH, preferredW, preferredH;
     private static int[] tempCoords;
     private static int defaultFontSize = 12;
@@ -1248,6 +1248,7 @@ public class FSkin {
         final File f14 = new File(defaultDir + ForgeConstants.SPRITE_DECKBOX_FILE);
         final File f15 = new File(defaultDir + ForgeConstants.SPRITE_SETLOGO_FILE);
         final File f16 = new File(preferredDir + ForgeConstants.SPRITE_SETLOGO_FILE);
+        final File f17 = new File(defaultDir + ForgeConstants.SPRITE_WATERMARK_FILE);
 
         try {
             int p = 0;
@@ -1272,6 +1273,8 @@ public class FSkin {
             bimDefaultDeckbox = ImageIO.read(f14);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimPrefferedSetLogo = f16.exists() ? ImageIO.read(f16) : ImageIO.read(f15);
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
+            bimDefaultWatermark = ImageIO.read(f17);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimTrophies = ImageIO.read(f7);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
@@ -1302,6 +1305,9 @@ public class FSkin {
         // Exceptions handled inside method.
         SkinIcon.setIcon(FSkinProp.BG_TEXTURE, preferredDir + ForgeConstants.TEXTURE_BG_FILE);
         SkinIcon.setIcon(FSkinProp.BG_MATCH, preferredDir + ForgeConstants.MATCH_BG_FILE);
+        //daynight bg
+        SkinIcon.setIcon(FSkinProp.BG_DAY, defaultDir + ForgeConstants.MATCH_BG_DAY_FILE);
+        SkinIcon.setIcon(FSkinProp.BG_NIGHT, defaultDir + ForgeConstants.MATCH_BG_NIGHT_FILE);
 
         // Run through enums and load their coords.
         Colors.updateAll();
@@ -1337,6 +1343,9 @@ public class FSkin {
                 case SETLOGO:
                     setImage(prop, bimPrefferedSetLogo);
                     break;
+                case WATERMARKS:
+                    setImage(prop, bimDefaultWatermark);
+                    break;
                 default:
                     break;
             }
@@ -1361,6 +1370,7 @@ public class FSkin {
         bimDefaultSleeve2.flush();
         bimDefaultDeckbox.flush();
         bimPrefferedSetLogo.flush();
+        bimDefaultWatermark.flush();
         bimQuestDraftDeck.flush();
         bimTrophies.flush();
         bimAbilities.flush();
@@ -1377,6 +1387,7 @@ public class FSkin {
         bimDefaultSleeve2 = null;
         bimDefaultDeckbox = null;
         bimPrefferedSetLogo = null;
+        bimDefaultWatermark = null;
         bimPreferredAvatars = null;
         bimQuestDraftDeck = null;
         bimTrophies = null;
@@ -1490,7 +1501,7 @@ public class FSkin {
      * @param pixel
      * @return
      */
-    private static Color getColorFromPixel(final int pixel) {
+    public static Color getColorFromPixel(final int pixel) {
         int r, g, b, a;
         a = (pixel >> 24) & 0x000000ff;
         r = (pixel >> 16) & 0x000000ff;
@@ -2250,10 +2261,11 @@ public class FSkin {
         protected FPanelBase() { super(); }
         public FPanelBase(final LayoutManager layoutManager) { super(layoutManager); }
 
-        protected abstract void onSetForegroundImage(final Image image);
-        public final void setForegroundImage(final SkinImage skinImage) { onSetForegroundImage(skinImage.image); this.foregroundImage = skinImage; }
-        public final void setForegroundImage(final Image image) { onSetForegroundImage(image); this.foregroundImage = null; }
-        public final void setForegroundImage(final ImageIcon imageIcon) { onSetForegroundImage(imageIcon.getImage()); this.foregroundImage = null; }
+        protected abstract void onSetForegroundImage(final Image image, boolean stretch);
+        public final void setForegroundImage(final SkinImage skinImage, final boolean stretch) { onSetForegroundImage(skinImage.image, stretch); this.foregroundImage = skinImage; }
+        public final void setForegroundImage(final SkinImage skinImage) { onSetForegroundImage(skinImage.image, false); this.foregroundImage = skinImage; }
+        public final void setForegroundImage(final Image image) { onSetForegroundImage(image, false); this.foregroundImage = null; }
+        public final void setForegroundImage(final ImageIcon imageIcon) { onSetForegroundImage(imageIcon.getImage(), false); this.foregroundImage = null; }
 
         protected abstract void onSetBackgroundTexture(final Image image);
         public final void setBackgroundTexture(final SkinImage skinImage) { onSetBackgroundTexture(skinImage.image); this.backgroundTexture = skinImage; }

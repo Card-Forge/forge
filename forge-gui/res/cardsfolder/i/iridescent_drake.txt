@@ -4,6 +4,6 @@ Types:Creature Drake
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, put target Aura card from a graveyard onto the battlefield under your control attached to Iridescent Drake.
-SVar:TrigChangeZone:DB$ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Aura | AttachedTo$ Self | GainControl$ True
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Aura | AttachedTo$ Self | GainControl$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iridescent_drake.jpg
 Oracle:Flying\nWhen Iridescent Drake enters the battlefield, put target Aura card from a graveyard onto the battlefield under your control attached to Iridescent Drake.

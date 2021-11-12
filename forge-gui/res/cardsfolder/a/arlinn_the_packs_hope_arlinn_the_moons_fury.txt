@@ -1,0 +1,26 @@
+Name:Arlinn, the Pack's Hope
+ManaCost:2 R G
+Types:Legendary Planeswalker Arlinn
+Loyalty:4
+K:Daybound
+A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Duration$ UntilYourNextTurn | StaticAbilities$ WithFlash | ReplacementEffects$ ExtraETBCounter | SpellDescription$ Until your next turn, you may cast creature spells as though they had flash, and each creature you control enters the battlefield with an additional +1/+1 counter on it.
+SVar:WithFlash:Mode$ CastWithFlash | ValidCard$ Creature | ValidSA$ Spell | EffectZone$ Command | Caster$ You | Description$ Until your next turn, you may cast creature spells as though they had flash, and each creature you control enters the battlefield with an additional +1/+1 counter on it.
+SVar:ExtraETBCounter:Event$ Moved | ActiveZones$ Command | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | ReplaceWith$ AddExtraCounter | Secondary$ True | Description$ Until your next turn, you may cast creature spells as though they had flash, and each creature you control enters the battlefield with an additional +1/+1 counter on it.
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ MoveToBattlefield
+SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
+A:AB$ Token | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | TokenAmount$ 2 | TokenScript$ g_2_2_wolf | SpellDescription$ Create two 2/2 green Wolf creature tokens.
+AlternateMode:DoubleFaced
+DeckHas:Ability$Token & Ability$Counters & Type$Wolf
+Oracle:Daybound (If a player casts no spells during their own turn, it becomes night next turn.)\n[+1]: Until your next turn, you may cast creature spells as though they had flash, and each creature you control enters the battlefield with an additional +1/+1 counter on it.\n[−3]: Create two 2/2 green Wolf creature tokens.
+
+ALTERNATE
+
+Name:Arlinn, the Moon's Fury
+ManaCost:no cost
+Colors:red,green
+Types:Legendary Planeswalker Arlinn
+Loyalty:4
+K:Nightbound
+A:AB$ Mana | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Produced$ R G | SpellDescription$ Add {R}{G}.
+A:AB$ Animate | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | Defined$ Self | Power$ 5 | Toughness$ 5 | Keywords$ Trample & Indestructible & Haste | Types$ Creature,Werewolf | RemoveCardTypes$ True | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, CARDNAME becomes a 5/5 Werewolf creature with trample, indestructible, and haste.
+Oracle:Nightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)\n[+2]: Add {R}{G}.\n[0]: Until end of turn, Arlinn, the Moon's Fury becomes a 5/5 Werewolf creature with trample, indestructible, and haste.

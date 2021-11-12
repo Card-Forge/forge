@@ -5,7 +5,7 @@ PT:6/1
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigSkip | TriggerDescription$ When CARDNAME enters the battlefield, you skip your next turn.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigAdd | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, you take an extra turn after this one.
-SVar:TrigAdd:DB$AddTurn | NumTurns$ 1 | Defined$ You
+SVar:TrigAdd:DB$ AddTurn | NumTurns$ 1 | Defined$ You
 SVar:TrigSkip:DB$ SkipTurn | NumTurns$ 1 | Defined$ You
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wormfang_manta.jpg

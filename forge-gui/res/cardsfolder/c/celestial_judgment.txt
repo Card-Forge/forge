@@ -1,0 +1,7 @@
+Name:Celestial Judgment
+ManaCost:4 W W
+Types:Sorcery
+A:SP$ ChooseCard | Choices$ Creature | EachDifferentPower$ True | RememberChosen$ True | SubAbility$ DBDestroy | StackDescription$ SpellDescription | SpellDescription$ For each different power among creatures on the battlefield, choose a creature with that power. Destroy each creature not chosen this way.
+SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Creature.IsNotRemembered | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+Oracle:For each different power among creatures on the battlefield, choose a creature with that power. Destroy each creature not chosen this way.

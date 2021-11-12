@@ -1,6 +1,6 @@
 Name:Heated Debate
 ManaCost:2 R
 Types:Instant
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker. | NumDmg$ 4  | SpellDescription$ CARDNAME deals 4 damage to target creature or planeswalker.
 Oracle:This spell can't be countered. (This includes by the ward ability.)\nHeated Debate deals 4 damage to target creature or planeswalker.

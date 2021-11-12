@@ -3,5 +3,5 @@ Name:Standard
 Order:101
 Subtype:Standard
 Type:Sanctioned
-Sets:ELD, THB, IKO, M21, ZNR, KHM, STX, AFR
-Banned:Cauldron Familiar; Escape to the Wilds; Fires of Invention; Lucky Clover; Oko, Thief of Crowns; Omnath, Locus of Creation; Once Upon a Time; Uro, Titan of Nature's Wrath; Veil of Summer
+Sets:ZNR, KHM, STX, AFR, MID
+Banned:Omnath, Locus of Creation

@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,7 @@ public class CharmAi extends SpellAbilityAi {
     protected boolean checkApiLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
+        Collections.shuffle(choices);
 
         final int num;
         final int min;
@@ -88,12 +90,12 @@ public class CharmAi extends SpellAbilityAi {
             if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
                 chosenList.add(sub);
                 if (chosenList.size() == num) {
-                    return chosenList;  // maximum choices reached
+                    return chosenList; // maximum choices reached
                 }
             }
         }
         if (isTrigger && chosenList.size() < min) {
-            // Second pass using doTrigger(false) to fulfil minimum choice
+            // Second pass using doTrigger(false) to fulfill minimum choice
             choices.removeAll(chosenList);
             for (AbilitySub sub : choices) {
                 sub.setActivatingPlayer(ai);
@@ -176,7 +178,7 @@ public class CharmAi extends SpellAbilityAi {
         } else if (ai.canGainLife() && aiLife <= 5) {
             // critical Life try to gain more
             chosenList.add(gain);
-        } else if(!ai.canGainLife() && aiLife == 14 ) {
+        } else if (!ai.canGainLife() && aiLife == 14 ) {
             // ai cant gain life, but try to avoid falling to 13
             // but if a opponent does control Tainted Remedy its irrelevant
             chosenList.add(oppTainted ? lose : gain);

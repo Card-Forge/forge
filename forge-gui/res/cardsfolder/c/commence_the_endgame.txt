@@ -1,7 +1,7 @@
 Name:Commence the Endgame
 ManaCost:4 U U
 Types:Instant
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 A:SP$ Draw | Cost$ 4 U U | NumCards$ 2 | SpellDescription$ Draw two cards, then amass X, where X is the number of cards in your hand. (Put X +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.) | SubAbility$ DBAmass
 SVar:DBAmass:DB$ Amass | Num$ X
 DeckHints:Ability$Amass & Type$Zombie

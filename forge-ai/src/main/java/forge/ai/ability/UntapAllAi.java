@@ -24,11 +24,8 @@ public class UntapAllAi extends SpellAbilityAi {
         			&& source.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_END)) {
         		return false;
         	}
-            String valid = "";
             CardCollectionView list = CardLists.filter(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.TAPPED);
-            if (sa.hasParam("ValidCards")) {
-                valid = sa.getParam("ValidCards");
-            }
+            final String valid = sa.getParamOrDefault("ValidCards", "");
             list = CardLists.getValidCards(list, valid.split(","), source.getController(), source, sa);
             // don't untap if only opponent benefits
             PlayerCollection goodControllers = aiPlayer.getAllies();

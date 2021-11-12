@@ -2,7 +2,7 @@ Name:Horn of Greed
 ManaCost:3
 Types:Artifact
 T:Mode$ LandPlayed | ValidCard$ Land | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a player plays a land, that player draws a card.
-SVar:TrigDraw:DB$Draw | Defined$ TriggeredCardController | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredCardController | NumCards$ 1
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horn_of_greed.jpg
 Oracle:Whenever a player plays a land, that player draws a card.

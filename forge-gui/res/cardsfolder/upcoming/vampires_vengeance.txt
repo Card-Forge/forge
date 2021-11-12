@@ -1,0 +1,8 @@
+Name:Vampires' Vengeance
+ManaCost:2 R
+Types:Instant
+A:SP$ DamageAll | NumDmg$ 2 | ValidCards$ Creature.nonVampire | ValidDescription$ each non-Vampire creature. | SubAbility$ DBToken | SpellDescription$ CARDNAME deals 2 damage to each non-Vampire creature.
+SVar:DBToken:DB$ Token | TokenScript$ c_a_blood_draw | SpellDescription$ Create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
+DeckNeeds:Type$Vampire
+DeckHas:Ability$Token & Ability$Sacrifice & Type$Blood
+Oracle:Vampires' Vengeance deals 2 damage to each non-Vampire creature. Create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")

@@ -1,0 +1,22 @@
+Name:Malevolent Hermit
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:2/1
+K:Disturb:2 U
+A:AB$ Counter | Cost$ U Sac<1/CARDNAME> | TargetType$ Spell | ValidTgts$ Card.nonCreature | UnlessCost$ 3 | TgtPrompt$ Select target noncreature spell | SpellDescription$ Counter target noncreature spell unless its controller pays {3}.
+AlternateMode:DoubleFaced
+DeckHas:Ability$Graveyard
+Oracle:{U}, Sacrifice Malevolent Hermit: Counter target noncreature spell unless its controller pays {3}.\nDisturb {2}{U} (You may cast this card from your graveyard transformed for its disturb cost.)
+
+ALTERNATE
+
+Name:Benevolent Geist
+ManaCost:no cost
+Colors:blue
+Types:Creature Spirit Wizard
+PT:2/2
+K:Flying
+S:Mode$ Continuous | Affected$ Card.nonCreature+YouCtrl | AffectedZone$ Stack | AddHiddenKeyword$ CARDNAME can't be countered. | Description$ Noncreature spells you control can't be countered.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+Oracle:Flying\nNoncreature spells you control can't be countered.\nIf Benevolent Geist would be put into a graveyard from anywhere, exile it instead.

@@ -45,7 +45,6 @@ public class Mana {
         return result;
     }
 
-
     @Override
     public boolean equals(Object other) {
         if (!(other instanceof Mana)) {
@@ -89,11 +88,9 @@ public class Mana {
         return this.manaAbility != null && (!manaAbility.getManaRestrictions().isEmpty() || !manaAbility.getExtraManaRestriction().isEmpty());
     }
 
-
     public final boolean addsNoCounterMagic(SpellAbility saBeingPaid) {
         return this.manaAbility != null && manaAbility.cannotCounterPaidWith(saBeingPaid);
     }
-
 
     public final boolean addsCounters(SpellAbility saBeingPaid) {
         return this.manaAbility != null && manaAbility.addsCounters(saBeingPaid);

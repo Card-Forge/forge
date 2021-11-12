@@ -24,7 +24,6 @@ import forge.game.card.CardFactory;
 import forge.game.card.CounterType;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
-import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -276,27 +275,24 @@ public class GameCopier {
             // TODO: Controllers' list with timestamps should be copied.
             zoneOwner = playerMap.get(c.getController());
             newCard.setController(zoneOwner, 0);
+
+            newCard.setPTTable(c.getSetPTTable());
+            newCard.setPTCharacterDefiningTable(c.getSetPTCharacterDefiningTable());
             
-            int setPower = c.getSetPower();
-            int setToughness = c.getSetToughness();
-            if (setPower != Integer.MAX_VALUE || setToughness != Integer.MAX_VALUE)  {
-                // TODO: Copy the full list with timestamps.
-                newCard.addNewPT(setPower, setToughness, newGame.getNextTimestamp());
-            }
             newCard.setPTBoost(c.getPTBoostTable());
             newCard.setDamage(c.getDamage());
 
-            newCard.setChangedCardColors(c.getChangedCardColorsMap());
-            newCard.setChangedCardColorsCharacterDefining(c.getChangedCardColorsCharacterDefiningMap());
+            newCard.setChangedCardColors(c.getChangedCardColorsTable());
+            newCard.setChangedCardColorsCharacterDefining(c.getChangedCardColorsCharacterDefiningTable());
 
-            newCard.setChangedCardTypes(c.getChangedCardTypesMap());
-            newCard.setChangedCardTypesCharacterDefining(c.getChangedCardTypesCharacterDefiningMap());
+            newCard.setChangedCardTypes(c.getChangedCardTypesTable());
+            newCard.setChangedCardTypesCharacterDefining(c.getChangedCardTypesCharacterDefiningTable());
             newCard.setChangedCardKeywords(c.getChangedCardKeywords());
             newCard.setChangedCardNames(c.getChangedCardNames());
 
             // TODO: Is this correct? Does it not duplicate keywords from enchantments and such?
-            for (KeywordInterface kw : c.getHiddenExtrinsicKeywords())
-                newCard.addHiddenExtrinsicKeyword(kw);
+            //for (KeywordInterface kw : c.getHiddenExtrinsicKeywords())
+            //    newCard.addHiddenExtrinsicKeyword(kw);
             if (c.isTapped()) {
                 newCard.setTapped(true);
             }

@@ -5,5 +5,5 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Flying | Description$ Enchanted creature gets +1/+1 and has flying.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Ninja+YouCtrl | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ When a Ninja enters the battlefield under your control, you may return CARDNAME from your graveyard to the battlefield attached to that creature.
-SVar:TrigReturn:DB$ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | AttachedTo$ TriggeredCard
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | AttachedTo$ TriggeredCard
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 and has flying.\nWhen a Ninja enters the battlefield under your control, you may return Smoke Shroud from your graveyard to the battlefield attached to that creature.

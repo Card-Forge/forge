@@ -193,7 +193,7 @@ public class HumanPlaySpellAbility {
 
             // no worries here. The same thread must resolve, and by this moment ability will have been resolved already
             // Triggers haven't resolved yet ??
-            if (mayChooseTargets) {
+            if (mayChooseTargets && !ability.hasParam("TargetsAtRandom")) {
                 ability.clearTargets();
             }
             if (manaTypeConversion || manaColorConversion || keywordColor) {
@@ -237,7 +237,7 @@ public class HumanPlaySpellAbility {
     }
 
     private boolean announceValuesLikeX() {
-        if (ability.isCopied()) { return true; } //don't re-announce for spell copies
+        if (ability.isCopied() || ability.isWrapper()) { return true; } //don't re-announce for spell copies
 
         boolean needX = true;
         final Cost cost = ability.getPayCosts();
@@ -320,7 +320,7 @@ public class HumanPlaySpellAbility {
         // For older abilities that don't setStackDescription set it here
         final StringBuilder sb = new StringBuilder();
         sb.append(ability.getHostCard().getName());
-        if (ability.getTargetRestrictions() != null) {
+        if (ability.usesTargeting()) {
             final Iterable<GameObject> targets = ability.getTargets();
             if (!Iterables.isEmpty(targets)) {
                 sb.append(" - Targeting ");

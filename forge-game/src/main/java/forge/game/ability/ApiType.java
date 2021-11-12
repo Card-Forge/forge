@@ -41,6 +41,7 @@ public enum ApiType {
     ChooseCard (ChooseCardEffect.class),
     ChooseColor (ChooseColorEffect.class),
     ChooseDirection (ChooseDirectionEffect.class),
+    ChooseEntity (ChooseEntityEffect.class),
     ChooseEvenOdd (ChooseEvenOddEffect.class),
     ChooseNumber (ChooseNumberEffect.class),
     ChoosePlayer (ChoosePlayerEffect.class),
@@ -58,6 +59,7 @@ public enum ApiType {
     Counter (CounterEffect.class),
     DamageAll (DamageAllEffect.class),
     DealDamage (DamageDealEffect.class),
+    DayTime (DayTimeEffect.class),
     Debuff (DebuffEffect.class),
     DeclareCombatants (DeclareCombatantsEffect.class),
     DelayedTrigger (DelayedTriggerEffect.class),
@@ -83,6 +85,7 @@ public enum ApiType {
     Explore (ExploreEffect.class),
     Fight (FightEffect.class),
     FlipACoin (FlipCoinEffect.class),
+    FlipOntoBattlefield (FlipOntoBattlefieldEffect.class),
     Fog (FogEffect.class),
     GainControl (ControlGainEffect.class),
     GainControlVariant (ControlGainVariantEffect.class),
@@ -136,6 +139,8 @@ public enum ApiType {
     RemoveCounter (CountersRemoveEffect.class),
     RemoveCounterAll (CountersRemoveAllEffect.class),
     RemoveFromCombat (RemoveFromCombatEffect.class),
+    RemoveFromGame (RemoveFromGameEffect.class),
+    RemoveFromMatch (RemoveFromMatchEffect.class),
     ReorderZone (ReorderZoneEffect.class),
     Repeat (RepeatEffect.class),
     RepeatEach (RepeatEachEffect.class),
@@ -192,7 +197,7 @@ public enum ApiType {
     private static final Map<String, ApiType> allValues = new HashMap<>();
 
     static {
-    	for(ApiType t : ApiType.values()) {
+    	for (ApiType t : ApiType.values()) {
     		allValues.put(t.name().toLowerCase(), t);
     	}
     }

@@ -2,7 +2,7 @@ Name:New Perspectives
 ManaCost:5 U
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw three cards.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 3
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 3
 S:Mode$ Continuous | Affected$ You | AddKeyword$ CyclingForZero | CheckSVar$ X | SVarCompare$ GE7 | Description$ As long as you have seven or more cards in hand, you may pay {0} rather than pay cycling costs.
 SVar:X:Count$InYourHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/new_perspectives.jpg

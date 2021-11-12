@@ -3,6 +3,6 @@ ManaCost:1 B B
 Types:Creature Zombie
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return a Zombie card at random from your graveyard to your hand.
-SVar:TrigChangeZone:DB$ChangeZone | ChangeType$ Zombie.YouCtrl | Origin$ Graveyard | Destination$ Hand | Hidden$ True | AtRandom$ True
+SVar:TrigChangeZone:DB$ ChangeZone | ChangeType$ Zombie.YouCtrl | Origin$ Graveyard | Destination$ Hand | Hidden$ True | AtRandom$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghoulraiser.jpg
 Oracle:When Ghoulraiser enters the battlefield, return a Zombie card at random from your graveyard to your hand.

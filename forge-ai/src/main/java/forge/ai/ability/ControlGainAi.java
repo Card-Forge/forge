@@ -137,7 +137,7 @@ public class ControlGainAi extends SpellAbilityAi {
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                if (!c.canBeTargetedBy(sa)) {
+                if (!sa.canTarget(c)) {
                     return false;
                 }
                 if (sa.isTrigger()) {
@@ -196,7 +196,7 @@ public class ControlGainAi extends SpellAbilityAi {
             }
         }
 
-        while (sa.getTargets().size() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
+        while (sa.canAddMoreTarget()) {
             Card t = null;
 
             if (list.isEmpty()) {
@@ -224,9 +224,9 @@ public class ControlGainAi extends SpellAbilityAi {
                 } else if (lands > 0) {
                     t = ComputerUtilCard.getBestLandAI(list);
                 } else if (enchantments > 0) {
-                    t = ComputerUtilCard.getBestEnchantmentAI(list, sa, true);
+                    t = ComputerUtilCard.getBestEnchantmentAI(list, sa, false);
                 } else {
-                    t = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, true);
+                    t = ComputerUtilCard.getMostExpensivePermanentAI(list);
                 }
 
                 if (t != null) {
@@ -267,7 +267,7 @@ public class ControlGainAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        if (sa.getTargetRestrictions() == null) {
+        if (!sa.usesTargeting()) {
             if (mandatory) {
                 return true;
             }

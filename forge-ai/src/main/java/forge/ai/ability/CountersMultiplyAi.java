@@ -49,7 +49,6 @@ public class CountersMultiplyAi extends SpellAbilityAi {
                         if (!c.canReceiveCounters(counterType)) {
                             return false;
                         }
-
                     } else {
                         for (Map.Entry<CounterType, Integer> e : c.getCounters().entrySet()) {
                             // has negative counter it would double
@@ -146,7 +145,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
         CardCollection aiList = CardLists.filterControlledBy(list, ai);
         if (!aiList.isEmpty()) {
             // counter type list to check
-            // first loyalty, then P1P!, then Charge Counter
+            // first loyalty, then P1P1, then Charge Counter
             List<CounterEnumType> typeList = Lists.newArrayList(CounterEnumType.LOYALTY, CounterEnumType.P1P1, CounterEnumType.CHARGE);
             for (CounterEnumType type : typeList) {
                 // enough targets
@@ -182,7 +181,6 @@ public class CountersMultiplyAi extends SpellAbilityAi {
 
     private void addTargetsByCounterType(final Player ai, final SpellAbility sa, final CardCollection list,
             final CounterType type) {
-
         CardCollection newList = CardLists.filter(list, CardPredicates.hasCounter(type));
         if (newList.isEmpty()) {
             return;

@@ -42,7 +42,6 @@ public class CopyPermanentEffect extends TokenEffectBase {
         }
         final StringBuilder sb = new StringBuilder();
 
-
         final List<Card> tgtCards = getTargetCards(sa);
 
         sb.append("Copy ");
@@ -60,14 +59,11 @@ public class CopyPermanentEffect extends TokenEffectBase {
         final Player activator = sa.getActivatingPlayer();
         final Game game = host.getGame();
 
-        if (sa.hasParam("Optional")) {
-            if (!activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblCopyPermanentConfirm"))) {
-                return;
-            }
+        if (sa.hasParam("Optional") && !activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblCopyPermanentConfirm"))) {
+            return;
         }
 
-        final int numCopies = sa.hasParam("NumCopies") ? AbilityUtils.calculateAmount(host,
-                sa.getParam("NumCopies"), sa) : 1;
+        final int numCopies = sa.hasParam("NumCopies") ? AbilityUtils.calculateAmount(host, sa.getParam("NumCopies"), sa) : 1;
 
         Player controller = null;
         if (sa.hasParam("Controller")) {
@@ -100,13 +96,15 @@ public class CopyPermanentEffect extends TokenEffectBase {
             if (sa.hasParam("RandomCopied")) {
                 List<PaperCard> copysource = Lists.newArrayList(cards);
                 List<Card> choice = Lists.newArrayList();
-                final String num = sa.getParamOrDefault("RandomNum","1");
+                final String num = sa.getParamOrDefault("RandomNum", "1");
                 int ncopied = AbilityUtils.calculateAmount(host, num, sa);
                 while (ncopied > 0 && !copysource.isEmpty()) {
                     final PaperCard cp = Aggregates.random(copysource);
                     Card possibleCard = Card.fromPaperCard(cp, activator); // Need to temporarily set the Owner so the Game is set
 
                     if (possibleCard.isValid(valid, host.getController(), host, sa)) {
+                        if (host.getController().isAI() && possibleCard.getRules() != null && possibleCard.getRules().getAiHints().getRemAIDecks())
+                            continue;
                         choice.add(possibleCard);
                         ncopied -= 1;
                     }

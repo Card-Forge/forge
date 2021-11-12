@@ -3,7 +3,7 @@ ManaCost:5
 Types:Artifact Creature Construct
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life and get {E}{E}{E} (three energy counters).
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ 3 | SubAbility$ DBEnergy
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3 | SubAbility$ DBEnergy
 SVar:DBEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reservoir_walker.jpg
 Oracle:When Reservoir Walker enters the battlefield, you gain 3 life and get {E}{E}{E} (three energy counters).

@@ -4,6 +4,6 @@ Types:Creature Dwarf Scout
 PT:4/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | Revolt$ True | TriggerDescription$ Revolt — When CARDNAME enters the battlefield, if a permanent you controlled left the battlefield this turn, you gain 5 life.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ 5
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/airdrop_aeronauts.jpg
 Oracle:Flying\nRevolt — When Airdrop Aeronauts enters the battlefield, if a permanent you controlled left the battlefield this turn, you gain 5 life.

@@ -5,7 +5,7 @@ A:SP$ RepeatEach | Cost$ 4 W | RepeatPlayers$ Player | RepeatSubAbility$ DBPutCo
 SVar:DBPutCounter:DB$ PutCounter | Choices$ Creature.ControlledBy Player.IsRemembered | ChoiceTitle$ Choose a creature you control | Chooser$ Player.IsRemembered | Placer$ Player.IsRemembered | CounterType$ VOW | CounterNum$ 1 | RememberCards$ True | SubAbility$ SacAllOthers
 SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Creature.IsNotRemembered+ControlledBy Player.IsRemembered
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ VowStatic | ForgetOnMoved$ Battlefield | ForgetCounter$ VOW | Duration$ Permanent | SubAbility$ DBCleanup
-SVar:VowStatic:Mode$ CantAttack | ValidCard$ Card.IsRemembered | Target$ You | Description$ Each of these creatures can’t attack you for as long as it has a vow counter on it.
+SVar:VowStatic:Mode$ CantAttack | ValidCard$ Card.IsRemembered | Target$ You | Description$ Each of these creatures can't attack you for as long as it has a vow counter on it.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters
 Oracle:Each player puts a vow counter on a creature they control and sacrifices the rest. Each of those creatures can't attack you or planeswalkers you control for as long as it has a vow counter on it.

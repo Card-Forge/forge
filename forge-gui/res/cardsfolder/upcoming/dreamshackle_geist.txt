@@ -1,0 +1,10 @@
+Name:Dreamshackle Geist
+ManaCost:1 U U
+Types:Creature Spirit
+PT:3/1
+K:Flying
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ Tap,Freeze | CharmNum$ 1
+SVar:Tap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
+SVar:Freeze:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | IsCurse$ True | SpellDescription$ Target creature doesn't untap during its controller's next untap step.
+Oracle:Flying\nAt the beginning of combat on your turn, choose up to one —\n• Tap target creature.\n• Target creature doesn't untap during its controller's next untap step.

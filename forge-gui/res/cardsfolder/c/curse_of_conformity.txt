@@ -1,0 +1,7 @@
+Name:Curse of Conformity
+ManaCost:4 W
+Types:Enchantment Aura Curse
+K:Enchant player
+A:SP$ Attach | ValidTgts$ Player | TgtPrompt$ Select player to curse | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.nonlegendary+EnchantedPlayerCtrl | SetPower$ 3 | SetToughness$ 3 | AddType$ Creature | RemoveCreatureTypes$ True | Description$ Nonlegendary creatures enchanted player controls have base power and toughness 3/3 and lose all creature types.
+Oracle:Enchant player\nNonlegendary creatures enchanted player controls have base power and toughness 3/3 and lose all creature types.

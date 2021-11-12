@@ -4,7 +4,7 @@ Types:Creature Faerie Rogue
 PT:1/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ TriggeredCardController | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may draw a card.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:SacMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surveilling_sprite.jpg
 Oracle:Flying\nWhen Surveilling Sprite dies, you may draw a card.

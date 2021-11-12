@@ -4,6 +4,6 @@ Types:Legendary Creature Goblin Shaman
 PT:3/3
 K:Fear
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may return target Goblin card from your graveyard to your hand.
-SVar:TrigChangeZone:DB$ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target Goblin card in your graveyard | ValidTgts$ Goblin.YouCtrl
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target Goblin card in your graveyard | ValidTgts$ Goblin.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wort_boggart_auntie.jpg
 Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nAt the beginning of your upkeep, you may return target Goblin card from your graveyard to your hand.

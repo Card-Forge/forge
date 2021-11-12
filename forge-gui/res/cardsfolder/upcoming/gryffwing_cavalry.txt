@@ -1,0 +1,10 @@
+Name:Gryffwing Cavalry
+ManaCost:3 W
+Types:Creature Human Knight
+PT:2/2
+K:Flying
+K:Training
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, you may pay {1}{W}. If you do, another target attacking creature without flying gains flying until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ 1 W | ValidTgts$ Creature.Other+attacking+withoutFlying | TgtPrompt$ Select another target attacking creature without flying | KW$ Flying
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nTraining (Whenever this creature attacks with another creature with greater power, put a +1/+1 counter on this creature.)\nWhenever Gryffwing Cavalry attacks, you may pay {1}{W}. If you do, another target attacking creature without flying gains flying until end of turn.

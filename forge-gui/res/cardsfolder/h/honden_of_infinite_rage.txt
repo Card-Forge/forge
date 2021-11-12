@@ -2,7 +2,7 @@ Name:Honden of Infinite Rage
 ManaCost:2 R
 Types:Legendary Enchantment Shrine
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals damage to any target equal to the number of Shrines you control.
-SVar:TrigDamage:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
 SVar:X:Count$TypeYouCtrl.Shrine
 DeckHints:Type$Shrine
 SVar:Picture:http://www.wizards.com/global/images/magic/general/honden_of_infinite_rage.jpg

@@ -44,13 +44,6 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
             mapParams.remove("SpellDescription");
         }
 
-        String triggerRemembered = null;
-
-        // Set Remembered
-        if (sa.hasParam("RememberObjects")) {
-            triggerRemembered = sa.getParam("RememberObjects");
-        }
-
         mapParams.put("Mode", TriggerType.Immediate.name());
 
         // in case the card moved before the delayed trigger can be created, need to check the latest card state for right timestamp
@@ -65,8 +58,8 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
 
         // Need to copy paid costs
 
-        if (triggerRemembered != null) {
-            for (final String rem : triggerRemembered.split(",")) {
+        if (sa.hasParam("RememberObjects")) {
+            for (final String rem : sa.getParam("RememberObjects").split(",")) {
                 for (final Object o : AbilityUtils.getDefinedObjects(sa.getHostCard(), rem, sa)) {
                     if (o instanceof SpellAbility) {
                         // "RememberObjects$ Remembered" don't remember spellability

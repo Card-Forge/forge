@@ -110,6 +110,7 @@ final class CardFace implements ICardFace {
         if (val.contains("*")) {
             val = val.replace("+*", "");
             val = val.replace("-*", "");
+            val = val.replace("*+", "");
             val = val.replace("*", "0");
         }
         return Integer.parseInt(val);

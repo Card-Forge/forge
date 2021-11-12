@@ -15,11 +15,7 @@ public class DamagePreventAllEffect extends DamagePreventEffectBase {
         final Game game = sa.getActivatingPlayer().getGame();
         final int numDam = AbilityUtils.calculateAmount(source, sa.getParam("Amount"), sa);
 
-        String players = "";
-
-        if (sa.hasParam("ValidPlayers")) {
-            players = sa.getParam("ValidPlayers");
-        }
+        final String players = sa.getParamOrDefault("ValidPlayers", "");
 
         if (sa.hasParam("ValidCards")) {
             CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);

@@ -19,6 +19,7 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorTokenViewer;
+import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.*;
 import forge.util.Localizer;
@@ -27,6 +28,8 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
@@ -157,6 +160,7 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbManaLostPrompt(), FPref.UI_MANA_LOST_PROMPT));
         lstControls.add(Pair.of(view.getCbEscapeEndsTurn(), FPref.UI_ALLOW_ESC_TO_END_TURN));
         lstControls.add(Pair.of(view.getCbDetailedPaymentDesc(), FPref.UI_DETAILED_SPELLDESC_IN_PROMPT));
+        lstControls.add(Pair.of(view.getCbGrayText(), FPref.UI_GRAY_INACTIVE_TEXT));
         lstControls.add(Pair.of(view.getCbPreselectPrevAbOrder(), FPref.UI_PRESELECT_PREVIOUS_ABILITY_ORDER));
         lstControls.add(Pair.of(view.getCbShowStormCount(), FPref.UI_SHOW_STORM_COUNT_IN_PROMPT));
         lstControls.add(Pair.of(view.getCbRemindOnPriority(), FPref.UI_REMIND_ON_PRIORITY));
@@ -261,6 +265,8 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeAutoUpdaterComboBox();
         initializeMulliganRuleComboBox();
         initializeAiProfilesComboBox();
+        initializeSoundSetsComboBox();
+        initializeMusicSetsComboBox();
         initializeStackAdditionsComboBox();
         initializeLandPlayedComboBox();
         initializeColorIdentityCombobox();
@@ -465,6 +471,35 @@ public enum CSubmenuPreferences implements ICDoc {
         panel.setComboBox(comboBox, selectedItem);
     }
 
+    private void initializeSoundSetsComboBox() {
+        final FPref userSetting = FPref.UI_CURRENT_SOUND_SET;
+        final FComboBoxPanel<String> panel = this.view.getSoundSetsComboBoxPanel();
+        final FComboBox<String> comboBox = createComboBox(SoundSystem.instance.getAvailableSoundSets(), userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);
+        comboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                SoundSystem.instance.invalidateSoundCache();
+            }
+        });
+    }
+
+    private void initializeMusicSetsComboBox() {
+        final FPref userSetting = FPref.UI_CURRENT_MUSIC_SET;
+        final FComboBoxPanel<String> panel = this.view.getMusicSetsComboBoxPanel();
+        final FComboBox<String> comboBox = createComboBox(SoundSystem.instance.getAvailableMusicSets(), userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);
+        comboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                MusicPlaylist.invalidateMusicPlaylist();
+                SoundSystem.instance.changeBackgroundTrack();
+            }
+        });
+    }
+
     private void initializeCardArtPreference() {
         final String latestOpt = Localizer.getInstance().getMessage("latestArtOpt");
         final String originalOpt = Localizer.getInstance().getMessage("originalArtOpt");
@@ -538,7 +573,7 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     private void initializeSwitchStatesCombobox() {
-        final String[] elems = {ForgeConstants.SWITCH_CARDSTATES_DECK_NEVER, ForgeConstants.SWITCH_CARDSTATES_DECK_HOVER, ForgeConstants.SWITCH_CARDSTATES_DECK_ALWAYS};
+        final String[] elems = {ForgeConstants.SWITCH_CARDSTATES_DECK_NEVER, ForgeConstants.SWITCH_CARDSTATES_DECK_HOVER};
         final FPref userSetting = FPref.UI_SWITCH_STATES_DECKVIEW;
         final FComboBoxPanel<String> panel = this.view.getSwitchStates();
         final FComboBox<String> comboBox = createComboBox(elems, userSetting);

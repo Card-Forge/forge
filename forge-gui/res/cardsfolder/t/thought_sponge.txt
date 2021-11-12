@@ -6,6 +6,6 @@ K:Flash
 K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with a number of +1/+1 counters on it equal to the greatest number of cards an opponent has drawn this turn.
 SVar:X:PlayerCountOpponents$HighestCardsDrawn
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, draw cards equal to its power.
-SVar:TrigDraw:DB$Draw | NumCards$ XPower
+SVar:TrigDraw:DB$ Draw | NumCards$ XPower
 SVar:XPower:TriggeredCard$CardPower
 Oracle:Flash\nThought Sponge enters the battlefield with a number of +1/+1 counters on it equal to the greatest number of cards an opponent has drawn this turn.\nWhen Thought Sponge dies, draw cards equal to its power.

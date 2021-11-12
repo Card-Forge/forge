@@ -1,11 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
+    <modelVersion>4.0.0</modelVersion> 
     <groupId>forge</groupId>
     <artifactId>forge</artifactId>
     <packaging>pom</packaging>
     <name>Forge Parent</name>
-    <version>1.6.45-SNAPSHOT</version>
+    <version>1.6.46-SNAPSHOT</version>
 
     <description>
         Forge lets you play the card game Magic: The Gathering against a computer opponent using all of the rules.
@@ -60,11 +59,12 @@
         <module>forge-game</module>
         <module>forge-ai</module>
         <module>forge-gui</module>
-        <module>forge-gui-desktop</module>
         <module>forge-gui-mobile</module>
+        <module>forge-adventure</module>
         <module>forge-gui-mobile-dev</module>
         <module>forge-gui-android</module>
         <module>forge-gui-ios</module>
+        <module>forge-gui-desktop</module>
         <module>forge-lda</module>
     </modules>
 

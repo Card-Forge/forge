@@ -167,7 +167,7 @@ public class AutoUpdater {
         System.out.println(index);
         Pattern p = Pattern.compile(">forge-(.*SNAPSHOT)");
         Matcher m = p.matcher(index);
-        while(m.find()){
+        while (m.find()) {
             version = m.group(1);
         }
     }
@@ -178,7 +178,7 @@ public class AutoUpdater {
 
         Pattern p = Pattern.compile("<release>(.*)</release>");
         Matcher m = p.matcher(xml);
-        while(m.find()){
+        while (m.find()) {
             version = m.group(1);
         }
     }
@@ -229,7 +229,7 @@ public class AutoUpdater {
         };
 
         SwingUtilities.invokeLater(callback);
-        //
+
         return false;
     }
 

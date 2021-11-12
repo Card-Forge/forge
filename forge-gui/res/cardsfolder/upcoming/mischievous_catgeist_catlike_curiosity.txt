@@ -1,0 +1,24 @@
+Name:Mischievous Catgeist
+ManaCost:1 U
+Types:Creature Cat Spirit
+PT:1/1
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+K:Disturb:2 U
+AlternateMode:DoubleFaced
+DeckHas:Ability$Graveyard
+Oracle:Whenever Mischievous Catgeist deals combat damage to a player, draw card.\nDisturb {2}{U} (You may cast this card from your graveyard transformed for its disturb cost.)
+
+ALTERNATE
+
+Name:Catlike Curiosity
+ManaCost:no cost
+Colors:blue
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Pump
+T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+Oracle:Enchant creature\nWhenever enchanted creature deals combat damage to a player, draw a card.\nIf Catlike Curiosity would be put into a graveyard from anywhere, exile it instead.

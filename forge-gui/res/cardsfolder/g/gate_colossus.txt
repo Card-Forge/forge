@@ -7,6 +7,6 @@ SVar:X:Count$Valid Gate.YouCtrl
 DeckNeeds:Type$Gate
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Gate.YouCtrl | OptionalDecider$ You | TriggerZones$ Graveyard | Execute$ TrigChange | TriggerDescription$ Whenever a Gate enters the battlefield under your control, you may put CARDNAME from your graveyard on top of your library.
-SVar:TrigChange:DB$ChangeZone | Origin$ Graveyard | Destination$ Library | Defined$ Self
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | Defined$ Self
 DeckHints:Type$Gate
 Oracle:This spell costs {1} less to cast for each Gate you control.\nGate Colossus can't be blocked by creatures with power 2 or less.\nWhenever a Gate enters the battlefield under your control, you may put Gate Colossus from your graveyard on top of your library.

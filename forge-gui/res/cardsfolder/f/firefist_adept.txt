@@ -2,7 +2,7 @@ Name:Firefist Adept
 ManaCost:4 R
 Types:Creature Human Wizard
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals X damage to target creature an opponent controls, where X is the number of instant and sorcery cards in your graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals X damage to target creature an opponent controls, where X is the number of Wizards you control.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ X
 SVar:X:Count$Valid Wizard.YouCtrl
 DeckHints:Type$Wizard

@@ -3,6 +3,6 @@ ManaCost:4 U
 Types:Creature Drone
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPeek | TriggerDescription$ When CARDNAME enters the battlefield, look at target opponent's hand.
-SVar:TrigPeek:DB$RevealHand | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
+SVar:TrigPeek:DB$ RevealHand | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wanderguard_sentry.jpg
 Oracle:When Wanderguard Sentry enters the battlefield, look at target opponent's hand.

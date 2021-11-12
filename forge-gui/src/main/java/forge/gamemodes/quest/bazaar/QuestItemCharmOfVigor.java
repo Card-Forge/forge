@@ -44,5 +44,4 @@ public class QuestItemCharmOfVigor extends QuestItemBasic {
         return super.isAvailableForPurchase(qA, qCtrl);
     }
 
-
 }

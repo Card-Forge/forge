@@ -73,6 +73,7 @@ public class GameWrapper {
 		rules.setPlayForAnte(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE));
         rules.setMatchAnteRarity(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_MATCH_RARITY));
 		rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
+		rules.setUseGrayText(FModel.getPreferences().getPrefBoolean(FPref.UI_GRAY_INACTIVE_TEXT));
 		Match match = new Match(rules, registeredPlayers, "Test");
 		game = match.createGame();
 		

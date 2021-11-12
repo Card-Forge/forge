@@ -2,6 +2,6 @@ Name:Grip of Amnesia
 ManaCost:1 U
 Types:Instant
 A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell | UnlessCost$ ExileFromGrave<1/All> | SubAbility$ DBDraw | SpellDescription$ Counter target spell unless its controller exiles all cards from their graveyard.
-SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grip_of_amnesia.jpg
 Oracle:Counter target spell unless its controller exiles all cards from their graveyard.\nDraw a card.

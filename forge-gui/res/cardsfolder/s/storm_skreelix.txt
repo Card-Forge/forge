@@ -1,0 +1,10 @@
+Name:Storm Skreelix
+ManaCost:3 U R
+Types:Creature Drake Horror
+PT:2/4
+K:Flying
+S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Instant and sorcery spells you cast cost {1} less to cast.
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | ValidCard$ Card.Self | NumAtt$ 2
+DeckHints:Type$Instant|Sorcery
+Oracle:Flying\nInstant and sorcery spells you cast cost {1} less to cast.\nWhenever you cast an instant or sorcery spell, Storm Skreelix gets +2/+0 until end of turn.

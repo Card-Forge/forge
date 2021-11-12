@@ -4,9 +4,6 @@ Types:Snow Creature Angel
 PT:4/5
 K:Flying
 K:Vigilance
-A:AB$ Effect | Cost$ T | Name$ Adarkar Valkyrie Effect | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature other than Adarkar Valkyrie | Triggers$ TrigChangesZone | RememberObjects$ Targeted | SpellDescription$ When target creature other than CARDNAME dies this turn, return that card to the battlefield under your control.
-SVar:TrigChangesZone:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.IsRemembered | Execute$ TrigChangeZone | TriggerDescription$ When creature targeted by Adarkar Valkyrie's ability dies this turn, return it to the battlefield and you gain control of it.
-SVar:TrigChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SubAbility$ EndEffect
-SVar:EndEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121196.jpg
+A:AB$ DelayedTrigger | Cost$ T | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature other than CARDNAME | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigChangeZone | StackDescription$ When {c:Targeted} dies this turn, return that card to the battlefield under your control. | SpellDescription$ When target creature other than CARDNAME dies this turn, return that card to the battlefield under your control.
+SVar:TrigChangeZone:DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True
 Oracle:Flying, vigilance\n{T}: When target creature other than Adarkar Valkyrie dies this turn, return that card to the battlefield under your control.

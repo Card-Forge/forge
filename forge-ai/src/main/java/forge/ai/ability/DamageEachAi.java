@@ -7,7 +7,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 
 public class DamageEachAi extends DamageAiBase {
 
@@ -16,13 +15,12 @@ public class DamageEachAi extends DamageAiBase {
      */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final String logic = sa.getParam("AILogic");
 
         PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
         Player weakestOpp = targetableOpps.min(PlayerPredicates.compareByLife());
 
-        if (tgt != null && weakestOpp != null) {
+        if (sa.usesTargeting() && weakestOpp != null) {
             sa.resetTargets();
             sa.getTargets().add(weakestOpp);
         }
@@ -33,7 +31,7 @@ public class DamageEachAi extends DamageAiBase {
         
         final String damage = sa.getParam("NumDmg");
         final int iDmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
-        return this.shouldTgtP(ai, sa, iDmg, false);
+        return shouldTgtP(ai, sa, iDmg, false);
     }
 
     @Override

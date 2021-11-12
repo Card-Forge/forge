@@ -1,0 +1,8 @@
+Name:Falling Star
+ManaCost:2 R
+Types:Sorcery
+A:SP$ FlipOntoBattlefield | SubAbility$ DBDamageTouched | AILogic$ DamageCreatures | SpellDescription$ Flip CARDNAME onto the playing area from a height of at least one foot. CARDNAME deals 3 damage to each creature it lands on. Tap all creatures dealt damage by CARDNAME. If CARDNAME doesn't turn completely over at least once during the flip, it has no effect. | StackDescription$ SpellDescription
+SVar:DBDamageTouched:DB$ DamageAll | ValidCards$ Creature.IsRemembered | ValidDescription$ each creature touched. | NumDmg$ 3 | SubAbility$ DBTapAllDamaged | StackDescription$ None
+SVar:DBTapAllDamaged:DB$ TapAll | ValidCards$ Creature.IsRemembered+DamagedBy | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Flip Falling Star onto the playing area from a height of at least one foot. Falling Star deals 3 damage to each creature it lands on. Tap all creatures dealt damage by Falling Star. If Falling Star doesn't turn completely over at least once during the flip, it has no effect.

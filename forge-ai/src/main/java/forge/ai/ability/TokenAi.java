@@ -9,6 +9,7 @@ import forge.ai.AiController;
 import forge.ai.AiProps;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCombat;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
 import forge.ai.PlayerControllerAi;
@@ -37,6 +38,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+import forge.util.collect.FCollection;
 
 /**
  * <p>
@@ -98,7 +100,12 @@ public class TokenAi extends SpellAbilityAi {
                 sa.getRootAbility().setXManaCostPaid(x);
             }
             if (x <= 0) {
-                return false; // 0 tokens or 0 toughness token(s)
+                if ("RandomPT".equals(sa.getParam("AILogic"))) {
+                    // e.g. Necropolis of Azar - we're guaranteed at least 1 toughness from the ability
+                    x = 1;
+                } else {
+                    return false; // 0 tokens or 0 toughness token(s)
+                }
             }
         }
 
@@ -205,10 +212,10 @@ public class TokenAi extends SpellAbilityAi {
 
         if (sa.isPwAbility() && alwaysFromPW) {
             return true;
-        } else if (ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                && ai.getGame().getPhaseHandler().getPlayerTurn().isOpponentOf(ai)
-                && ai.getGame().getCombat() != null
-                && !ai.getGame().getCombat().getAttackers().isEmpty()
+        } else if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                && game.getPhaseHandler().getPlayerTurn().isOpponentOf(ai)
+                && game.getCombat() != null
+                && !game.getCombat().getAttackers().isEmpty()
                 && alwaysOnOppAttack) {
             return true;
         }
@@ -222,16 +229,15 @@ public class TokenAi extends SpellAbilityAi {
     private boolean canInterruptSacrifice(final Player ai, final SpellAbility sa, final Card token, final String tokenAmount) {
         final Game game = ai.getGame();
         if (game.getStack().isEmpty()) {
-            return false;   // nothing to interrupt
+            return false; // nothing to interrupt
         }
         final SpellAbility topStack = game.getStack().peekAbility();
         if (topStack.getApi() != ApiType.Sacrifice) {
-            return false;   // not sacrifice effect
+            return false; // not sacrifice effect
         }
         final int nTokens = AbilityUtils.calculateAmount(sa.getHostCard(), tokenAmount, sa);
         final String valid = topStack.getParamOrDefault("SacValid", "Card.Self");
-        String num = sa.getParam("Amount");
-        num = (num == null) ? "1" : num;
+        String num = sa.getParamOrDefault("Amount", "1");
         final int nToSac = AbilityUtils.calculateAmount(topStack.getHostCard(), num, topStack);
         CardCollection list = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","),
         		ai.getWeakestOpponent(), topStack.getHostCard(), sa);
@@ -308,15 +314,8 @@ public class TokenAi extends SpellAbilityAi {
      */
     @Override
     protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
-        Combat combat = ai.getGame().getCombat();
-        // TokenAttacking
-        if (combat != null && sa.hasParam("TokenAttacking")) {
-            Card attacker = spawnToken(ai, sa);
-            for (Player p : options) {
-                if (!ComputerUtilCard.canBeBlockedProfitably(p, attacker)) {
-                    return p;
-                }
-            }
+        if (params.containsKey("Attacker")) {
+            return (Player) ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), new FCollection<GameEntity>(options));
         }
         return Iterables.getFirst(options, null);
     }
@@ -326,28 +325,11 @@ public class TokenAi extends SpellAbilityAi {
      */
     @Override
     protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options, Map<String, Object> params) {
-        Combat combat = ai.getGame().getCombat();
-        // TokenAttacking
-        if (combat != null && sa.hasParam("TokenAttacking")) {
-            // 1. If the card that spawned the token was sent at a planeswalker, attack the same planeswalker with the token. Consider improving.
-            GameEntity def = combat.getDefenderByAttacker(sa.getHostCard());
-            if (def != null && def instanceof Card) {
-                if (((Card)def).isPlaneswalker()) {
-                    return def;
-                }
-            }
-            // 2. Otherwise, go through the list of options one by one, choose the first one that can't be blocked profitably.
-            Card attacker = spawnToken(ai, sa);
-            for (GameEntity p : options) {
-                if (p instanceof Player && !ComputerUtilCard.canBeBlockedProfitably((Player)p, attacker)) {
-                    return p;
-                }
-                if (p instanceof Card && !ComputerUtilCard.canBeBlockedProfitably(((Card)p).getController(), attacker)) {
-                    return p;
-                }
-            }
+        if (params.containsKey("Attacker")) {
+            return ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), new FCollection<GameEntity>(options));
         }
-        return Iterables.getFirst(options, null);
+        // should not be reached
+        return super.chooseSinglePlayerOrPlaneswalker(ai, sa, options, params);
     }
 
     /**

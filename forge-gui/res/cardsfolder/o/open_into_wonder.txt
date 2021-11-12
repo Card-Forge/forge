@@ -4,6 +4,6 @@ Types:Sorcery
 A:SP$ Pump | Cost$ X U U | ValidTgts$ Creature | KW$ HIDDEN Unblockable | AILogic$ Pump | TargetMin$ X | TargetMax$ X | TgtPrompt$ Select X target creatures | SubAbility$ DBAnimate | StackDescription$ X target creatures [{c:Targeted}] can't be blocked this turn. Until end of turn, those creatures gain "Whenever this creature deals combat damage to a player, draw a card." | SpellDescription$ X target creatures can't be blocked this turn. Until end of turn, those creatures gain "Whenever this creature deals combat damage to a player, draw a card."
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Triggers$ OpenIntoWonderTrigger | sVars$ OpenIntoWonderDraw | StackDescription$ None
 SVar:OpenIntoWonderTrigger:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ OpenIntoWonderDraw | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to a player, draw a card.
-SVar:OpenIntoWonderDraw:DB$Draw | NumCards$ 1
+SVar:OpenIntoWonderDraw:DB$ Draw | NumCards$ 1
 SVar:X:Count$xPaid
 Oracle:X target creatures can't be blocked this turn. Until end of turn, those creatures gain "Whenever this creature deals combat damage to a player, draw a card."

@@ -37,9 +37,8 @@ public class LifeGainAi extends SpellAbilityAi {
         final PhaseHandler ph = game.getPhaseHandler();
         final int life = ai.getLife();
 
-        boolean lifeCritical = life <= 5;
-        lifeCritical |= ph.getPhase().isBefore(PhaseType.COMBAT_DAMAGE)
-                && ComputerUtilCombat.lifeInDanger(ai, game.getCombat());
+        boolean lifeCritical = life <= 5 || (ph.getPhase().isBefore(PhaseType.COMBAT_DAMAGE)
+                && ComputerUtilCombat.lifeInDanger(ai, game.getCombat()));
 
         if (!lifeCritical) {
             // return super.willPayCosts(ai, sa, cost, source);
@@ -136,7 +135,7 @@ public class LifeGainAi extends SpellAbilityAi {
             sa.setXManaCostPaid(xPay);
             lifeAmount = xPay;
         } else {
-            lifeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
+            lifeAmount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }
 
         // Ugin AI: always use ultimate
@@ -206,9 +205,7 @@ public class LifeGainAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa,
-    final boolean mandatory) {
-
+    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
         // If the Target is gaining life, target self.
         // if the Target is modifying how much life is gained, this needs to be
         // handled better

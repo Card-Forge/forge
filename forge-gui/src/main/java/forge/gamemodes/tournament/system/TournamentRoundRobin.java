@@ -50,7 +50,7 @@ public class TournamentRoundRobin extends AbstractTournament {
 
         activeRound++;
 
-        for(int i = 0; i < numPlayers/2; i++) {
+        for (int i = 0; i < numPlayers/2; i++) {
             boolean bye = false;
             if (roundPairings.get(i).getPlayer().getName().equals("BYE")) {
                 bye = true;

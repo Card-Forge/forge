@@ -31,10 +31,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import com.google.common.collect.*;
 
 import forge.GameCommand;
 import forge.card.CardStateName;
@@ -367,7 +364,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (isPwAbility()) {
             return false; //Loyalty ability, not a mana ability.
         }
-        if (isWrapper() && this.getTrigger().getMode() != TriggerType.TapsForMana) {
+        // CR 605.1b
+        if (isTrigger() && this.getTrigger().getMode() != TriggerType.TapsForMana) {
             return false;
         }
 
@@ -619,14 +617,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                         && host.getType().hasStringType(mana.getManaAbility().getAddsKeywordsType())) {
                     final long timestamp = host.getGame().getNextTimestamp();
                     final List<String> kws = Arrays.asList(mana.getAddedKeywords().split(" & "));
-                    host.addChangedCardKeywords(kws, null, false, false, timestamp);
+                    host.addChangedCardKeywords(kws, null, false, timestamp, 0);
                     if (mana.addsKeywordsUntil()) {
                         final GameCommand untilEOT = new GameCommand() {
                             private static final long serialVersionUID = -8285169579025607693L;
 
                             @Override
                             public void run() {
-                                host.removeChangedCardKeywords(timestamp);
+                                host.removeChangedCardKeywords(timestamp, 0);
                                 host.getGame().fireEvent(new GameEventCardStatsChanged(host));
                             }
                         };
@@ -735,6 +733,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         triggeringObjects = AbilityKey.newMap();
     }
 
+    @Override
     public List<Object> getTriggerRemembered() {
         return triggerRemembered;
     }
@@ -755,6 +754,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public void setReplacingObject(final AbilityKey type, final Object o) {
         replacingObjects.put(type, o);
+    }
+    public void setReplacingObjectsFrom(final Map<AbilityKey, Object> repParams, final AbilityKey... types) {
+        int typesLength = types.length;
+        for (int i = 0; i < typesLength; i += 1) {
+            AbilityKey type = types[i];
+            if (repParams.containsKey(type)) {
+                setReplacingObject(type, repParams.get(type));
+            }
+        }
     }
 
     public void resetOnceResolved() {
@@ -1082,7 +1090,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public SpellAbility copyWithNoManaCost() {
         return copyWithNoManaCost(getActivatingPlayer());
     }
-
     public SpellAbility copyWithNoManaCost(Player active) {
         final SpellAbility newSA = copy(active);
         if (newSA == null) {
@@ -1240,12 +1247,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                     return false;
                 }
                 switch (related) {
-                    case "LEPower" :
-                        return c.getNetPower() <= parentTarget.getNetPower();
-                    case "LECMC" :
-                        return c.getCMC() <= parentTarget.getCMC();
-                    case "SharedCreatureType" :
-                        return c.sharesCreatureTypeWith(parentTarget);
+                case "LEPower" :
+                    if (c.getNetPower() > parentTarget.getNetPower()) {
+                        return false;
+                    }
+                    break;
+                case "LECMC" :
+                    if (c.getCMC() > parentTarget.getCMC()) {
+                        return false;
+                    }
                 }
             }
 
@@ -1368,6 +1378,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public final boolean isDash() {
         return isAlternativeCost(AlternativeCost.Dash);
+    }
+
+    public final boolean isDisturb() {
+        return isAlternativeCost(AlternativeCost.Disturb);
     }
 
     public final boolean isEscape() {
@@ -2180,7 +2194,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     @Override
     public int compareTo(SpellAbility ab) {
-        if (this.isManaAbility() && ab.isManaAbility()){
+        if (this.isManaAbility() && ab.isManaAbility()) {
             return this.calculateScoreForManaAbility() - ab.calculateScoreForManaAbility();
         }
         return 0;
@@ -2331,7 +2345,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean canCastTiming(Player activator) {
         return canCastTiming(getHostCard(), activator);
     }
-
     public boolean canCastTiming(Card host, Player activator) {
         // for companion
         if (this instanceof AbilityStatic && getRestrictions().isSorcerySpeed() && !activator.canCastSorcery()) {
@@ -2350,7 +2363,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         // spells per default are sorcerySpeed
         if (isSpell()) {
             return false;
-        } else if (isActivatedAbility()) {
+        }
+
+        if (isActivatedAbility()) {
             // Activated Abillties are instant speed per default
             return !getRestrictions().isSorcerySpeed();
         }

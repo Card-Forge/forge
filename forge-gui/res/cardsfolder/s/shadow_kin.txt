@@ -1,0 +1,12 @@
+Name:Shadow Kin
+ManaCost:3 U
+Types:Creature Shapeshifter
+PT:2/2
+K:Flash
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMillSK | TriggerDescription$ At the beginning of your upkeep, each player mills three cards. You may exile a creature card from among the cards milled this way. If you do, CARDNAME becomes a copy of that card, except it has this ability.
+SVar:TrigMillSK:DB$ Mill | Defined$ Player | NumCards$ 3 | RememberMilled$ True | SubAbility$ DBExileSK
+SVar:DBExileSK:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Hidden$ True | ChangeType$ Creature.IsRemembered | ChangeNum$ 1 | Imprint$ True | ForgetOtherRemembered$ True | SelectPrompt$ You may exile a creature card from among the cards milled this way. | SubAbility$ DBCloneSK
+SVar:DBCloneSK:DB$ Clone | ConditionDefined$ Imprinted | ConditionZone$ Exile | ConditionPresent$ Card | Defined$ Imprinted | GainThisAbility$ True
+DeckHas:Ability$Mill
+DeckHints:Ability$Graveyard
+Oracle:Flash\nAt the beginning of your upkeep, each player mills three cards. You may exile a creature card from among the cards milled this way. If you do, Shadow Kin becomes a copy of that card, except it has this ability.

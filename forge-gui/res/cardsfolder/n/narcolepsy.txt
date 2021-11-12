@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | IsPresent$ Creature.AttachedBy+untapped | PresentCompare$ EQ1 | IsCurse$ True | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ At the beginning of each upkeep, if enchanted creature is untapped, tap it.
-SVar:TrigTap:DB$Tap | Defined$ Enchanted
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/narcolepsy.jpg
 Oracle:Enchant creature\nAt the beginning of each upkeep, if enchanted creature is untapped, tap it.

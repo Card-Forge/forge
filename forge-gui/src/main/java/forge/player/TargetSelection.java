@@ -102,7 +102,7 @@ public class TargetSelection {
             return true;
         }
 
-        final boolean hasCandidates = tgt.hasCandidates(this.ability, true);
+        final boolean hasCandidates = tgt.hasCandidates(this.ability);
         if (!hasCandidates && !hasEnoughTargets) {
             // Cancel ability if there aren't any valid Candidates
             return false;
@@ -117,9 +117,20 @@ public class TargetSelection {
 
         final boolean choiceResult;
         if (tgt.isRandomTarget() && numTargets == null) {
-            final List<GameEntity> candidates = tgt.getAllCandidates(this.ability, true);
-            final GameObject choice = Aggregates.random(candidates);
-            return ability.getTargets().add(choice);
+            List<GameEntity> candidates = tgt.getAllCandidates(this.ability, true);
+            List<GameEntity> choices = new ArrayList<>();
+            // currently, only cards that target randomly use a random number of targets
+            int top = Math.min(candidates.size(), maxTargets); // prevents choosing more targets than possible
+            int bot = minTargets > 0 ? minTargets : 1; // prevents randomly choosing zero targets
+            int num = tgt.isRandomNumTargets() ? Aggregates.randomInt(bot, top) : minTargets;
+            for (int i=0; i<num; i++) {
+                final GameEntity choice = Aggregates.random(candidates);
+                if (choice != null) {
+                    choices.add(choice);
+                    candidates.remove(choice);
+                }
+            }
+            return ability.getTargets().addAll(choices);
         }
         else if (zones.size() == 1 && zones.get(0) == ZoneType.Stack) {
             // If Zone is Stack, the choices are handled slightly differently.
@@ -330,8 +341,7 @@ public class TargetSelection {
             }
             if (madeChoice instanceof StackItemView) {
                 ability.getTargets().add(stackItemViewCache.get(madeChoice).getSpellAbility(true));
-            }
-            else {// 'FINISH TARGETING' chosen
+            } else {// 'FINISH TARGETING' chosen
                 bTargetingDone = true;
             }
         }

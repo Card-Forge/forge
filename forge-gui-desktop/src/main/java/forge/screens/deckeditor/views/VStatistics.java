@@ -32,13 +32,16 @@ public enum VStatistics implements IVDoc<CStatistics> {
 
     // Global stats
     private FLabel lblTotal = new FLabel.Builder()
-            .text("TOTAL CARDS: 0").tooltip(Localizer.getInstance().getMessage("lblTotalCards"))
+            .text(String.format("%s: 0", Localizer.getInstance().getMessage("lblTotalCards").toUpperCase()))
+            .tooltip(Localizer.getInstance().getMessage("lblTotalCards"))
             .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
     private FLabel lblTMC = new FLabel.Builder()
-            .text("TOTAL MANA COST: 0").tooltip(Localizer.getInstance().getMessage("lblTotalManaCost"))
+            .text(String.format("%s: 0", Localizer.getInstance().getMessage("lblTotalManaCost").toLowerCase()))
+            .tooltip(Localizer.getInstance().getMessage("lblTotalManaCost"))
             .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
     private FLabel lblAMC = new FLabel.Builder()
-            .text("AVERAGE MANA COST: 0.00").tooltip(Localizer.getInstance().getMessage("lblAverageManaCost"))
+            .text(String.format("%s: 0.00", Localizer.getInstance().getMessage("lblAverageManaCost").toUpperCase()))
+            .tooltip(Localizer.getInstance().getMessage("lblAverageManaCost"))
             .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
     private FLabel lblCardCountHeader = new FLabel.Builder()
             .text(Localizer.getInstance().getMessage("lblCardByColorTypeCMC")).tooltip(Localizer.getInstance().getMessage("lblBreakdownOfColorTypeCMC"))

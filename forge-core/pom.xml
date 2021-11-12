@@ -6,7 +6,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.45-SNAPSHOT</version>
+        <version>1.6.46-SNAPSHOT</version>
     </parent>
 
     <artifactId>forge-core</artifactId>
@@ -16,7 +16,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>24.1-android</version>
+            <version>31.0.1-android</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>

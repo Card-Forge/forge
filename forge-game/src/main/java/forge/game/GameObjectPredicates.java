@@ -36,7 +36,7 @@ public final class GameObjectPredicates {
         return new Predicate<GameObject>() {
             @Override
             public boolean apply(final GameObject c) {
-                return (c != null) && c.isValid(restrictions, sourceController, source, spellAbility);
+                return c != null && c.isValid(restrictions, sourceController, source, spellAbility);
             }
         };
     }

@@ -1,13 +1,7 @@
 Name:Fumble
 ManaCost:1 U
 Types:Instant
-A:SP$ Pump | Cost$ 1 U | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBRem | StackDescription$ SpellDescription | SpellDescription$ Return target creature to its owner's hand. Gain control of all Auras and Equipment that were attached to it, then attach them to another creature.
-SVar:DBRem:DB$ PumpAll | ValidCards$ Aura.AttachedTo Targeted,Equipment.AttachedTo Targeted | RememberAllPumped$ True | SubAbility$ DBBounce
-SVar:DBBounce:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Hand | SubAbility$ ChooseNewHost
-SVar:ChooseNewHost:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature.CanBeEnchantedByAllRemembered | ChoiceZone$ Battlefield | SubAbility$ GainControl
-SVar:GainControl:DB$ GainControl | AllValid$ Equipment.IsRemembered,Enchantment.IsRemembered | NewController$ You | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ EQ1 | SubAbility$ DBAttach
-SVar:DBAttach:DB$ Attach | Object$ Remembered | Defined$ ChosenCard | SubAbility$ CleanUpEnchantments
-SVar:CleanUpEnchantments:DB$ ChangeZone | Origin$ All | Destination$ Graveyard | ChangeType$ Enchantment.IsRemembered | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ ControlEquipment
-SVar:ControlEquipment:DB$ GainControl | AllValid$ Equipment.IsRemembered | NewController$ You | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanUp
-SVar:DBCleanUp:DB$ Cleanup | ClearRemembered$ True
+A:SP$ ChangeZone | Cost$ 1 U | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ GainControl | StackDescription$ SpellDescription | SpellDescription$ Return target creature to its owner's hand. Gain control of all Auras and Equipment that were attached to it, then attach them to another creature.
+SVar:GainControl:DB$ GainControl | Defined$ AttachedTo Targeted.Aura,Enchantment | NewController$ You | SubAbility$ DBAttach | StackDescription$ None
+SVar:DBAttach:DB$ Attach | Object$ AttachedTo Targeted.Aura,Enchantment | Choices$ Creature | StackDescription$ None
 Oracle:Return target creature to its owner's hand. Gain control of all Auras and Equipment that were attached to it, then attach them to another creature.

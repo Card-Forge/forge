@@ -1,8 +1,5 @@
 package forge.assets;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
@@ -10,7 +7,6 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
-
 import forge.Forge;
 import forge.assets.FSkinImage.SourceFile;
 import forge.card.CardFaceSymbols;
@@ -26,19 +22,24 @@ import forge.screens.SplashScreen;
 import forge.toolbox.FProgressBar;
 import forge.util.WordUtil;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class FSkin {
     private static final Map<FSkinProp, FSkinImage> images = new HashMap<>(512);
     private static final Map<Integer, TextureRegion> avatars = new HashMap<>(150);
     private static final Map<Integer, TextureRegion> sleeves = new HashMap<>(64);
+    private static final Map<Integer, TextureRegion> cracks = new HashMap<>(16);
     private static final Map<Integer, TextureRegion> borders = new HashMap<>();
     private static final Map<Integer, TextureRegion> deckbox = new HashMap<>();
-    private static final Map<Integer, TextureRegion> setlogo = new HashMap<>();
 
     private static Array<String> allSkins;
     private static FileHandle preferredDir;
     private static String preferredName;
     private static boolean loaded = false;
     public static Texture hdLogo = null;
+    public static Texture overlay_alpha = null;
+    public static Texture splatter = null;
 
     public static void changeSkin(final String skinName) {
         final ForgePreferences prefs = FModel.getPreferences();
@@ -81,7 +82,10 @@ public class FSkin {
             }
         });
     }
-
+    public static void loadLight(String skinName, final SplashScreen splashScreen,FileHandle prefDir) {
+        preferredDir = prefDir;
+        loadLight(skinName,splashScreen);
+    }
     /*
      * Loads a "light" version of FSkin, just enough for the splash screen:
      * skin name. Generates custom skin settings, fonts, and backgrounds.
@@ -99,36 +103,65 @@ public class FSkin {
 
         //ensure skins directory exists
         final FileHandle dir = Gdx.files.absolute(ForgeConstants.CACHE_SKINS_DIR);
-        if (!dir.exists() || !dir.isDirectory()) {
-            //if skins directory doesn't exist, point to internal assets/skin directory instead for the sake of the splash screen
-            preferredDir = Gdx.files.internal("fallback_skin");
-        }
-        else {
-            if (splashScreen != null) {
-                if (allSkins == null) { //initialize
-                    allSkins = new Array<>();
-                    allSkins.add("Default"); //init default
-                    final Array<String> skinDirectoryNames = getSkinDirectoryNames();
-                    for (final String skinDirectoryName : skinDirectoryNames) {
-                        allSkins.add(WordUtil.capitalize(skinDirectoryName.replace('_', ' ')));
+        if(preferredDir==null)
+        {
+            if (!dir.exists() || !dir.isDirectory()) {
+                //if skins directory doesn't exist, point to internal assets/skin directory instead for the sake of the splash screen
+                preferredDir = Gdx.files.internal("fallback_skin");
+            }
+            else {
+                if (splashScreen != null) {
+                    if (allSkins == null) { //initialize
+                        allSkins = new Array<>();
+                        allSkins.add("Default"); //init default
+                        final Array<String> skinDirectoryNames = getSkinDirectoryNames();
+                        for (final String skinDirectoryName : skinDirectoryNames) {
+                            allSkins.add(WordUtil.capitalize(skinDirectoryName.replace('_', ' ')));
+                        }
+                        allSkins.sort();
                     }
-                    allSkins.sort();
+                }
+
+                // Non-default (preferred) skin name and dir.
+                preferredDir = Gdx.files.absolute(preferredName.equals("default") ? ForgeConstants.BASE_SKINS_DIR + preferredName : ForgeConstants.CACHE_SKINS_DIR + preferredName);
+                if (!preferredDir.exists() || !preferredDir.isDirectory()) {
+                    preferredDir.mkdirs();
                 }
             }
-
-            // Non-default (preferred) skin name and dir.
-            preferredDir = Gdx.files.absolute(preferredName.equals("default") ? ForgeConstants.BASE_SKINS_DIR + preferredName : ForgeConstants.CACHE_SKINS_DIR + preferredName);
-            if (!preferredDir.exists() || !preferredDir.isDirectory()) {
-                preferredDir.mkdirs();
-            }
         }
 
+
         FSkinTexture.BG_TEXTURE.load(); //load background texture early for splash screen
+
+        //load theme logo while changing skins
+        final FileHandle theme_logo = getSkinFile("hd_logo.png");
+        if (theme_logo.exists()) {
+            Texture txOverlay = new Texture(theme_logo, true);
+            txOverlay.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+            hdLogo = txOverlay;
+        } else {
+            hdLogo = null;
+        }
+        final FileHandle duals_overlay = getDefaultSkinFile("overlay_alpha.png");
+        if (duals_overlay.exists()) {
+            Texture txAlphaLines = new Texture(duals_overlay, true);
+            txAlphaLines.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+            overlay_alpha = txAlphaLines;
+        } else {
+            overlay_alpha = null;
+        }
+        final FileHandle splatter_overlay = getDefaultSkinFile("splatter.png");
+        if (splatter_overlay.exists()) {
+            Texture txSplatter = new Texture(splatter_overlay, true);
+            txSplatter.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+            splatter = txSplatter;
+        } else {
+            splatter = null;
+        }
 
         if (splashScreen != null) {
             final FileHandle f = getSkinFile("bg_splash.png");
             final FileHandle f2 = getSkinFile("bg_splash_hd.png"); //HD Splashscreen
-            final FileHandle f3 = getSkinFile("hd_logo.png");
 
             if (!f.exists()) {
                 if (!skinName.equals("default")) {
@@ -148,14 +181,6 @@ public class FSkin {
                     splashScreen.setBackground(new TextureRegion(txSplashHD));
                 } else {
                     splashScreen.setBackground(new TextureRegion(txSplash, 0, 0, w, h - 100));
-                }
-
-                if (f3.exists()) {
-                    Texture txOverlay = new Texture(f3, true);
-                    txOverlay.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
-                    hdLogo = txOverlay;
-                } else {
-                    hdLogo = null;
                 }
 
                 Pixmap pxSplash = new Pixmap(f);
@@ -218,8 +243,13 @@ public class FSkin {
         final FileHandle f11 = getSkinFile(ForgeConstants.SPRITE_BUTTONS_FILE);
         final FileHandle f12 = getSkinFile(ForgeConstants.SPRITE_START_FILE);
         final FileHandle f13 = getDefaultSkinFile(ForgeConstants.SPRITE_DECKBOX_FILE);
+        final FileHandle f17 = getDefaultSkinFile(ForgeConstants.SPRITE_CRACKS_FILE);
+
+        /*TODO Themeable
         final FileHandle f14 = getDefaultSkinFile(ForgeConstants.SPRITE_SETLOGO_FILE);
         final FileHandle f15 = getSkinFile(ForgeConstants.SPRITE_SETLOGO_FILE);
+        final FileHandle f16 = getDefaultSkinFile(ForgeConstants.SPRITE_WATERMARK_FILE);
+        */
 
         try {
             textures.put(f1.path(), new Texture(f1));
@@ -291,8 +321,8 @@ public class FSkin {
             int counter = 0;
             int scount = 0;
             Color pxTest;
-            Pixmap pxDefaultAvatars, pxPreferredAvatars, pxDefaultSleeves;
-            Texture txDefaultAvatars, txPreferredAvatars, txDefaultSleeves;
+            Pixmap pxDefaultAvatars, pxPreferredAvatars, pxDefaultSleeves, pxCracks;
+            Texture txDefaultAvatars, txPreferredAvatars, txDefaultSleeves, txCracks;
 
             pxDefaultAvatars = new Pixmap(f4);
             pxDefaultSleeves = new Pixmap(f8);
@@ -377,6 +407,21 @@ public class FSkin {
                     FSkin.sleeves.put(scount++, new TextureRegion(txDefaultSleeves, i, j, 360, 500));
                 }
             }
+            //cracks
+            pxCracks = new Pixmap(f17);
+            txCracks = new Texture(f17, textureFilter);
+            int crackCount = 0;
+            if (textureFilter)
+                txCracks.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+
+            for (int j = 0; j < 4; j++) {
+                int x = j * 200;
+                for(int i = 0; i < 4; i++) {
+                    int y = i * 279;
+                    FSkin.cracks.put(crackCount++, new TextureRegion(txCracks, x, y, 200, 279));
+                }
+            }
+
             //borders
             Texture bordersBW = new Texture(f10);
             FSkin.borders.put(0, new TextureRegion(bordersBW, 2, 2, 672, 936));
@@ -391,24 +436,11 @@ public class FSkin {
             FSkin.deckbox.put(1, new TextureRegion(deckboxes, 492, 2, 488, 680));
             //generic deck box
             FSkin.deckbox.put(2, new TextureRegion(deckboxes, 982, 2, 488, 680));
-            //setlogo
-            Texture setlogos = f15.exists() ? new Texture(f15, textureFilter) : new Texture(f14, textureFilter);
-            if (textureFilter)
-                setlogos.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
-            //common logo
-            FSkin.setlogo.put(0, new TextureRegion(setlogos, 2, 2, 520, 451));
-            //uncommon logo
-            FSkin.setlogo.put(1, new TextureRegion(setlogos, 2, 455, 520, 451));
-            //rare logo
-            FSkin.setlogo.put(2, new TextureRegion(setlogos, 2, 908, 520, 451));
-            //mythic logo
-            FSkin.setlogo.put(3, new TextureRegion(setlogos, 2, 1361, 520, 451));
-            //special logo
-            FSkin.setlogo.put(4, new TextureRegion(setlogos, 2, 1814, 520, 451));
 
             preferredIcons.dispose();
             pxDefaultAvatars.dispose();
             pxDefaultSleeves.dispose();
+            pxCracks.dispose();
         }
         catch (final Exception e) {
             System.err.println("FSkin$loadFull: Missing a sprite (default icons, "
@@ -503,6 +535,10 @@ public class FSkin {
 
     public static Map<Integer, TextureRegion> getSleeves() {
         return sleeves;
+    }
+
+    public static Map<Integer, TextureRegion> getCracks() {
+        return cracks;
     }
 
     public static Map<Integer, TextureRegion> getBorders() {

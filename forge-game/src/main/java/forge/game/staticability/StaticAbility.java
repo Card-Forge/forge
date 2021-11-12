@@ -23,9 +23,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import com.google.common.collect.ComparisonChain;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import com.google.common.collect.*;
 
 import forge.card.MagicColor;
 import forge.game.CardTraitBase;
@@ -146,7 +144,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             layers.add(StaticAbilityLayer.CONTROL);
         }
 
-        if (hasParam("ChangeColorWordsTo") || hasParam("GainTextOf")) {
+        if (hasParam("ChangeColorWordsTo") || hasParam("GainTextOf") || hasParam("AddNames")) {
             layers.add(StaticAbilityLayer.TEXT);
         }
 
@@ -486,6 +484,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             if (condition.equals("Desert") && !controller.hasDesert()) return false;
             if (condition.equals("Blessing") && !controller.hasBlessing()) return false;
             if (condition.equals("Monarch") & !controller.isMonarch()) return false;
+            if (condition.equals("Night") & !game.isNight()) return false;
 
             if (condition.equals("PlayerTurn")) {
                 if (!ph.isPlayerTurn(controller)) {
@@ -698,7 +697,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         return layers;
     }
 
-
     public int getMayPlayTurn() {
         return mayPlayTurn;
     }
@@ -732,5 +730,10 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             System.err.println(e);
         }
         return clone;
+    }
+
+    @Override
+    public List<Object> getTriggerRemembered() {
+        return ImmutableList.of();
     }
 } // end class StaticAbility

@@ -20,7 +20,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
-import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
@@ -50,11 +49,12 @@ public class PumpEffect extends SpellAbilityEffect {
             return;
         }
         final List<String> kws = Lists.newArrayList();
+        final List<String> hiddenKws = Lists.newArrayList();
 
         boolean redrawPT = false;
         for (String kw : keywords) {
             if (kw.startsWith("HIDDEN")) {
-                gameCard.addHiddenExtrinsicKeyword(kw);
+                hiddenKws.add(kw.substring(7));
                 redrawPT |= kw.contains("CARDNAME's power and toughness are switched");
             } else {
                 kws.add(kw);
@@ -66,7 +66,12 @@ public class PumpEffect extends SpellAbilityEffect {
             redrawPT = true;
         }
 
-        gameCard.addChangedCardKeywords(kws, Lists.newArrayList(), false, false, timestamp);
+        if (!kws.isEmpty()) {
+            gameCard.addChangedCardKeywords(kws, Lists.newArrayList(), false, timestamp, 0);
+        }
+        if (!hiddenKws.isEmpty()) {
+            gameCard.addHiddenExtrinsicKeywords(timestamp, 0, hiddenKws);
+        }
         if (redrawPT) {
             gameCard.updatePowerToughnessForView();
         }
@@ -95,13 +100,8 @@ public class PumpEffect extends SpellAbilityEffect {
                     updateText |= gameCard.removeCanBlockAdditional(timestamp);
 
                     if (keywords.size() > 0) {
-
-                        for (String kw : keywords) {
-                            if (kw.startsWith("HIDDEN")) {
-                                gameCard.removeHiddenExtrinsicKeyword(kw);
-                            }
-                        }
-                        gameCard.removeChangedCardKeywords(timestamp);
+                        gameCard.removeHiddenExtrinsicKeywords(timestamp, 0);
+                        gameCard.removeChangedCardKeywords(timestamp, 0);
                     }
                     gameCard.updatePowerToughnessForView();
                     if (updateText) {
@@ -127,7 +127,7 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         if (!keywords.isEmpty()) {
-            p.addChangedKeywords(keywords, ImmutableList.of(), timestamp);
+            p.addChangedKeywords(keywords, ImmutableList.of(), timestamp, 0);
         }
 
         if (!"Permanent".equals(sa.getParam("Duration"))) {
@@ -137,7 +137,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
                 @Override
                 public void run() {
-                    p.removeChangedKeywords(timestamp);
+                    p.removeChangedKeywords(timestamp, 0);
                 }
             };
             addUntilCommand(sa, untilEOT);
@@ -179,46 +179,50 @@ public class PumpEffect extends SpellAbilityEffect {
             final int atk = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumAtt"), sa, true);
             final int def = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumDef"), sa, true);
 
-            boolean gains = sa.hasParam("NumAtt") || sa.hasParam("NumDef") || !keywords.isEmpty();
+            boolean gets = (sa.hasParam("NumAtt") || sa.hasParam("NumDef"));
+            boolean gains = !keywords.isEmpty();
 
-            if (gains) {
+            if (gets) {
+                sb.append("gets ");
+                if (atk != 0) {
+                    sb.append(atk > 0 ? "+" : "").append(atk).append("/");
+                } else {
+                    sb.append(def < 0 ? "-" : "+").append(atk).append("/");
+                }
+                if (def != 0) {
+                    sb.append(def > 0 ? "+" : "").append(def).append(" ");
+                } else {
+                    sb.append(atk < 0 ? "-" : "+").append(def).append(" ");
+                }
+                sb.append(gains ? "and gains " : "");
+            } else if (gains) {
                 sb.append("gains ");
             }
 
-            if (sa.hasParam("NumAtt") || sa.hasParam("NumDef")) {
-                if (atk >= 0) {
-                    sb.append("+");
-                }
-                sb.append(atk);
-                sb.append("/");
-                if (def >= 0) {
-                    sb.append("+");
-                }
-                sb.append(def);
-                sb.append(" ");
-            }
-
             for (int i = 0; i < keywords.size(); i++) {
-                sb.append(keywords.get(i)).append(" ");
+                sb.append(keywords.get(i).toLowerCase());
+                sb.append(keywords.size() > 2 && i+1 != keywords.size() ? ", " : "");
+                sb.append(keywords.size() == 2 && i == 0 ? " " : "");
+                sb.append(i+2 == keywords.size() ? "and " : "");
             }
 
             if (sa.hasParam("CanBlockAny")) {
-                if (gains) {
+                if (gets || gains) {
                     sb.append(" and ");
                 }
-                sb.append("can block any number of creatures ");
+                sb.append("can block any number of creatures");
             } else if (sa.hasParam("CanBlockAmount")) {
-                if (gains) {
+                if (gets || gains) {
                     sb.append(" and ");
                 }
                 String n = sa.getParam("CanBlockAmount");
                 sb.append("can block an additional ");
                 sb.append("1".equals(n) ? "creature" : Lang.nounWithNumeral(n, "creature"));
-                sb.append(" each combat ");
+                sb.append(" each combat");
             }
 
             if (!"Permanent".equals(sa.getParam("Duration"))) {
-                sb.append("until end of turn.");
+                sb.append(" until end of turn.");
             } else {
                 sb.append(".");
             }
@@ -244,7 +248,7 @@ public class PumpEffect extends SpellAbilityEffect {
         if (sa.hasParam("SharedKeywordsZone")) {
             List<ZoneType> zones = ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
             String[] restrictions = sa.hasParam("SharedRestrictions") ? sa.getParam("SharedRestrictions").split(",") : new String[]{"Card"};
-            keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, sa.getHostCard());
+            keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, sa.getHostCard(), sa);
         }
 
         List<GameEntity> tgts = Lists.newArrayList();
@@ -269,6 +273,9 @@ public class PumpEffect extends SpellAbilityEffect {
                 PlayerCollection players = AbilityUtils.getDefinedPlayers(host, defined, sa);
                 if (players.isEmpty()) return;
                 replaced = "PlayerUID_" + players.get(0).getId();
+            } else if (defined.equals("ChosenColor")) {
+                String color = host.getChosenColor();
+                replaced = color.substring(0, 1).toUpperCase() + color.substring(1);
             }
             for (int i = 0; i < keywords.size(); i++) {
                 keywords.set(i, TextUtil.fastReplace(keywords.get(i), defined, replaced));
@@ -285,14 +292,15 @@ public class PumpEffect extends SpellAbilityEffect {
             }
         }
         if (sa.hasParam("RandomKeyword")) {
-            final String num = sa.hasParam("RandomKWNum") ? sa.getParam("RandomKWNum") : "1";
+            final String num = sa.getParamOrDefault("RandomKWNum", "1");
             final int numkw = AbilityUtils.calculateAmount(host, num, sa);
             List<String> choice = Lists.newArrayList();
             List<String> total = Lists.newArrayList(keywords);
             if (sa.hasParam("NoRepetition")) {
-                for (KeywordInterface inst : tgtCards.get(0).getKeywords()) {
-                    final String kws = inst.getOriginal();
-                    total.remove(kws);
+                for (String kw : keywords) {
+                    if (tgtCards.get(0).hasKeyword(kw)) {
+                        total.remove(kw);
+                    }
                 }
             }
             final int min = Math.min(total.size(), numkw);

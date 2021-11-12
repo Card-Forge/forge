@@ -2,6 +2,6 @@ Name:Winding Way
 ManaCost:1 G
 Types:Sorcery
 A:SP$ ChooseType | Cost$ 1 G | Defined$ You | Type$ Card | ValidTypes$ Creature,Land | SubAbility$ DBDig | SpellDescription$ Choose a creature or land. Reveal the top four cards of your library. Put all cards of the chosen type revealed this way into your hand and the rest into your graveyard
-SVar:DBDig:DB$Dig | DigNum$ 4 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card.ChosenType | DestinationZone2$ Graveyard
+SVar:DBDig:DB$ Dig | DigNum$ 4 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card.ChosenType | DestinationZone2$ Graveyard
 AI:RemoveDeck:All
 Oracle:Choose creature or land. Reveal the top four cards of your library. Put all cards of the chosen type revealed this way into your hand and the rest into your graveyard.

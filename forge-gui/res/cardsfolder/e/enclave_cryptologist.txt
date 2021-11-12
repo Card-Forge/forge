@@ -8,5 +8,5 @@ S:Mode$ Continuous | Affected$ Card.Self | AddAbility$ Loot | IsPresent$ Card.Se
 S:Mode$ Continuous | Affected$ Card.Self | AddAbility$ Draw | IsPresent$ Card.Self+counters_GE3_LEVEL | Description$ LEVEL 3+ CARDNAME has {T}: Draw a card.
 SVar:Loot:AB$ Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
 SVar:Draw:AB$ Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 Oracle:Level up {1}{U} ({1}{U}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-2\n0/1\n{T}: Draw a card, then discard a card.\nLEVEL 3+\n0/1\n{T}: Draw a card.

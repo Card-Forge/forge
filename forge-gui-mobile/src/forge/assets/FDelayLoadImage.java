@@ -3,6 +3,7 @@ package forge.assets;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import forge.Graphics;
 
 //Special wrapper for a texture to be loaded later when it's needed
@@ -30,6 +31,14 @@ public class FDelayLoadImage extends FImageComplex {
             texture = new Texture(Gdx.files.absolute(filename));
         }
         return texture;
+    }
+
+    @Override
+    public TextureRegion getTextureRegion() {
+        if (texture == null) {
+            texture = new Texture(Gdx.files.absolute(filename));
+        }
+        return new TextureRegion(texture);
     }
 
     @Override

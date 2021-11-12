@@ -1,0 +1,11 @@
+Name:Kurbis, Harvest Celebrant
+ManaCost:X G G
+Types:Legendary Creature Treefolk
+PT:0/0
+K:etbCounter:P1P1:Y:no Condition:CARDNAME enters the battlefield with a number of +1/+1 counters on it equal to the amount of mana spent to cast it.
+A:AB$ Effect | Cost$ SubCounter<1/P1P1/CARDNAME/NICKNAME> | TgtPrompt$ Select another target creature with a +1/+1 counter on it | ValidTgts$ Creature.Other+counters_GE1_P1P1 | RememberObjects$ Targeted | ReplacementEffects$ RPrevent | StackDescription$ Prevent all damage that would be dealt this turn to {c:Targeted}. | SpellDescription$ Prevent all damage that would be dealt this turn to another target creature with a +1/+1 counter on it.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ Creature.IsRemembered | Description$ Prevent all damage that would be dealt to this creature this turn.
+SVar:X:Count$xPaid
+SVar:Y:Count$CastTotalManaSpent
+DeckHas:Ability$Counters
+Oracle:Kurbis, Harvest Celebrant enters the battlefield with a number of +1/+1 counters on it equal to the amount of mana spent to cast it.\nRemove a +1/+1 counter from Kurbis: Prevent all damage that would be dealt this turn to another target creature with a +1/+1 counter on it.

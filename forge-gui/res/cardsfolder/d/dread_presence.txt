@@ -4,8 +4,8 @@ Types:Creature Nightmare
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Swamp.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ Whenever a Swamp enters the battlefield under your control, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBDraw,DBDmg
-SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife | SpellDescription$ You draw a card and you lose 1 life.
-SVar:DBLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ 1
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife | SpellDescription$ You draw a card and you lose 1 life.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
 SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 2 damage to any target and you gain 2 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
 Oracle:Whenever a Swamp enters the battlefield under your control, choose one —\n• You draw a card and you lose 1 life.\n• Dread Presence deals 2 damage to any target and you gain 2 life.

@@ -1,11 +1,7 @@
 All creatures able to block CARDNAME do so.
 Banding
-CantBeBlockedByAmount LT2
-CantBeBlockedByAmount LT3
 CARDNAME's activated abilities can't be activated.
-CARDNAME attacks each turn if able.
 CARDNAME attacks each combat if able.
-CARDNAME blocks each turn if able.
 CARDNAME blocks each combat if able.
 CARDNAME can attack as though it didn't have defender.
 CARDNAME can block any number of creatures.

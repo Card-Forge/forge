@@ -24,17 +24,14 @@ public class TwoPilesAi extends SpellAbilityAi {
             zone = ZoneType.smartValueOf(sa.getParam("Zone"));
         }
 
-        String valid = "";
-        if (sa.hasParam("ValidCards")) {
-            valid = sa.getParam("ValidCards");
-        }
+        final String valid = sa.getParamOrDefault("ValidCards", "");
 
         final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             sa.resetTargets();
-            if (tgt.canTgtPlayer()) {
+            if (sa.canTarget(opp)) {
                 sa.getTargets().add(opp);
             }
         }

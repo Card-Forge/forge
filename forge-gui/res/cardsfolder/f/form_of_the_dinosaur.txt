@@ -4,7 +4,7 @@ Types:Enchantment
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLife | TriggerDescription$ When CARDNAME enters the battlefield, your life total becomes 15.
 SVar:TrigLife:DB$ SetLife | Defined$ You | LifeAmount$ 15
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 15 damage to target creature an opponent controls and that creature deals damage equal to its power to you.
-SVar:TrigDamage:DB$DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ 15 | SubAbility$ DBDealDamage
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ 15 | SubAbility$ DBDealDamage
 SVar:DBDealDamage:DB$ DealDamage | Defined$ You | DamageSource$ Targeted | NumDmg$ X
 SVar:X:Targeted$CardPower 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/form_of_the_dinosaur.jpg

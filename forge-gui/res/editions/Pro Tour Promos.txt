@@ -31,3 +31,6 @@ ScryfallCode=PPRO
 2032 M Basri Ket
 2033 U Seasoned Hallowblade
 2034 R Vito, Thorn of the Dusk Rose
+2035 U Saw it Coming @Anato Finnstark
+2036 M Kaya the Inexorable @Jason A. Engle
+2037 R Faceless Haven @Pablo Mendoza

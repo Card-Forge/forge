@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Zombie
 PT:1/1
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of each end step, put a +1/+1 counter on Khabál Ghoul for each creature that died this turn.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/khabal_ghoul.jpg
 Oracle:At the beginning of each end step, put a +1/+1 counter on Khabál Ghoul for each creature that died this turn.

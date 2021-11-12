@@ -2,7 +2,7 @@ Name:Bazaar of Baghdad
 ManaCost:no cost
 Types:Land
 A:AB$ Draw | Cost$ T | NumCards$ 2 | SpellDescription$ Draw two cards, then discard three cards. | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 3 | Mode$ TgtChoose
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 3 | Mode$ TgtChoose
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bazaar_of_baghdad.jpg
 Oracle:{T}: Draw two cards, then discard three cards.

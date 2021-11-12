@@ -5,7 +5,7 @@ PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in your hand.
 SVar:X:Count$InYourHand
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1 
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 T:Mode$ Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 #TODO: update logic for the AI to play around this

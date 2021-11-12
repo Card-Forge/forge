@@ -1,12 +1,9 @@
 Name:Otherworldly Outburst
 ManaCost:R
 Types:Instant
-A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | SubAbility$ DBEffect | SpellDescription$ Target creature gets +1/+0 until end of turn. When that creature dies this turn, create a 3/2 colorless Eldrazi Horror creature token.
-SVar:DBEffect:DB$ Effect | Name$ Otherworldly Outburst Effect | Triggers$ EldraziEmerge | RememberObjects$ ParentTarget | StackDescription$ When {c:Targeted} dies this turn, create a 3/2 colorless Eldrazi Horror creature token.
-SVar:EldraziEmerge:Mode$ ChangesZone | ValidCard$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Graveyard | Execute$ DBToken | TriggerDescription$ When that creature dies this turn, create a 3/2 colorless Eldrazi Horror creature token.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_3_2_eldrazi_horror | TokenOwner$ You | LegacyImage$ c 3 2 eldrazi horror emn | SubAbility$ EndEffect
-SVar:EndEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | SubAbility$ DBDelayedTrigger | SpellDescription$ Target creature gets +1/+0 until end of turn. When that creature dies this turn, create a 3/2 colorless Eldrazi Horror creature token.
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ DBToken | TriggerDescription$ When that creature dies this turn, create a 3/2 colorless Eldrazi Horror creature token.
+SVar:DBToken:DB$ Token | TokenScript$ c_3_2_eldrazi_horror
 DeckHints:Type$Eldrazi|Horror
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/otherworldly_outburst.jpg
 Oracle:Target creature gets +1/+0 until end of turn. When that creature dies this turn, create a 3/2 colorless Eldrazi Horror creature token.

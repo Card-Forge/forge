@@ -3,6 +3,6 @@ ManaCost:1 W
 Types:Creature Human Soldier
 PT:2/2
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckDefinedPlayer$ You.isMonarch | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, if you're the monarch, put a +1/+1 counter on Throne Warden.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/throne_warden.jpg
 Oracle:At the beginning of your end step, if you're the monarch, put a +1/+1 counter on Throne Warden.

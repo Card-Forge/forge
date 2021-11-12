@@ -12,10 +12,12 @@ import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCombat;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -32,6 +34,7 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.collect.FCollection;
 
 public class CopyPermanentAi extends SpellAbilityAi {
     @Override
@@ -89,7 +92,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);
             return targetingPlayer.getController().chooseTargetsFor(sa);
-        } else if (sa.getTargetRestrictions() != null && sa.getTargetRestrictions().canTgtPlayer()) {
+        } else if (sa.usesTargeting() && sa.getTargetRestrictions().canTgtPlayer()) {
                 if (!sa.isCurse()) {
                     if (sa.canTarget(aiPlayer)) {
                         sa.getTargets().add(aiPlayer);
@@ -167,14 +170,14 @@ public class CopyPermanentAi extends SpellAbilityAi {
                     }
                 });
                 Card choice;
-                if (!CardLists.filter(list, Presets.CREATURES).isEmpty()) {
+                if (Iterables.any(list, Presets.CREATURES)) {
                     if (sa.hasParam("TargetingPlayer")) {
                         choice = ComputerUtilCard.getWorstCreatureAI(list);
                     } else {
                         choice = ComputerUtilCard.getBestCreatureAI(list);
                     }
                 } else {
-                    choice = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, true);
+                    choice = ComputerUtilCard.getMostExpensivePermanentAI(list);
                 }
 
                 if (choice == null) { // can't find anything left
@@ -232,7 +235,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
         }
         return ComputerUtilCard.getBestAI(options);
     }
-    
+
     private CardCollection getBetterOptions(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional) {
         final Card host = sa.getHostCard();
         final Player ctrl = host.getController();
@@ -244,9 +247,21 @@ public class CopyPermanentAi extends SpellAbilityAi {
 
     @Override
     protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
+        if (params.containsKey("Attacker")) {
+            return (Player) ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), new FCollection<GameEntity>(options));
+        }
         final List<Card> cards = new PlayerCollection(options).getCreaturesInPlay();
         Card chosen = ComputerUtilCard.getBestCreatureAI(cards);
         return chosen != null ? chosen.getController() : Iterables.getFirst(options, null);
+    }
+
+    @Override
+    protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options, Map<String, Object> params) {
+        if (params.containsKey("Attacker")) {
+            return ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), new FCollection<GameEntity>(options));
+        }
+        // should not be reached
+        return super.chooseSinglePlayerOrPlaneswalker(ai, sa, options, params);
     }
 
 }

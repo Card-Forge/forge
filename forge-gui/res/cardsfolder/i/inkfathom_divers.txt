@@ -4,6 +4,6 @@ Types:Creature Merfolk Soldier
 PT:3/3
 K:Islandwalk
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRearrange | TriggerDescription$ When CARDNAME enters the battlefield, look at the top four cards of your library, then put them back in any order.
-SVar:TrigRearrange:DB$RearrangeTopOfLibrary | Defined$ You | NumCards$ 4
+SVar:TrigRearrange:DB$ RearrangeTopOfLibrary | Defined$ You | NumCards$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inkfathom_divers.jpg
 Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nWhen Inkfathom Divers enters the battlefield, look at the top four cards of your library, then put them back in any order.

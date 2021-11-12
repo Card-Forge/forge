@@ -1,0 +1,9 @@
+Name:Crawl from the Cellar
+ManaCost:B
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature card in your graveyard | SubAbility$ DBPutCounter | SpellDescription$ Return target creature card from your graveyard to your hand. Put a +1/+1 counter on up to one target Zombie you control.
+SVar:DBPutCounter:DB$ PutCounter | CounterNum$ 1 | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Zombie.YouCtrl | TgtPrompt$ Select up to one target Zombie you control
+K:Flashback:3 B
+DeckHas:Ability$Graveyard
+DeckNeeds:Type$Zombie
+Oracle:Return target creature card from your graveyard to your hand. Put a +1/+1 counter on up to one target Zombie you control.\nFlashback {3}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

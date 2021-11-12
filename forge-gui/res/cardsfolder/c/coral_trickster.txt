@@ -4,7 +4,7 @@ Types:Creature Merfolk Rogue
 PT:2/1
 K:Morph:U
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigTapOrUntap | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, you may tap or untap target permanent.
-SVar:TrigTapOrUntap:DB$TapOrUntap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
+SVar:TrigTapOrUntap:DB$ TapOrUntap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coral_trickster.jpg
 Oracle:Morph {U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Coral Trickster is turned face up, you may tap or untap target permanent.

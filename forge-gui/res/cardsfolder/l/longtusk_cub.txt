@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Creature Cat
 PT:2/2
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigEnergy | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you get {E}{E} (two energy counters).
-SVar:TrigEnergy:DB$PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
 A:AB$ PutCounter | Cost$ PayEnergy<2> | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ PayEnergyConservatively | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 DeckHints:Ability$Energy
 DeckHas:Ability$Counters

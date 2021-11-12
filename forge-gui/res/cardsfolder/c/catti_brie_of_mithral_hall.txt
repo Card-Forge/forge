@@ -7,7 +7,7 @@ K:Reach
 T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME attacks, put a +1/+1 counter on it for each Equipment attached to it.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Y
 SVar:Y:Count$Valid Equipment.Attached
-A:AB$ DealDamage | Cost$ 1 SubCounter<All/P1P1> | NumDmg$ X | ValidTgts$ Creature.attacking+OppCtrl,Creature.blocking+OppCtrl | TgtPrompt$ Select target attacking or blocking creature an opponent controls | SpellDescription$ It deals X damage to target attacking or blocking creature an opponent controls, where X is the number of counters removed this way.
+A:AB$ DealDamage | Cost$ 1 SubCounter<All/P1P1//NICKNAME> | NumDmg$ X | ValidTgts$ Creature.attacking+OppCtrl,Creature.blocking+OppCtrl | TgtPrompt$ Select target attacking or blocking creature an opponent controls | SpellDescription$ It deals X damage to target attacking or blocking creature an opponent controls, where X is the number of counters removed this way.
 SVar:X:SVar$CostCountersRemoved
 SVar:HasAttackEffect:TRUE
 SVar:EquipMe:Multiple

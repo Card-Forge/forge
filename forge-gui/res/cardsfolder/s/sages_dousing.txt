@@ -2,7 +2,7 @@ Name:Sage's Dousing
 ManaCost:2 U
 Types:Tribal Instant Wizard
 A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 3 | SubAbility$ DBDraw | SpellDescription$ Counter target spell unless its controller pays {3}. If you control a Wizard, draw a card.
-SVar:DBDraw:DB$Draw | NumCards$ 1 | ConditionPresent$ Wizard.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a Wizard,
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionPresent$ Wizard.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a Wizard,
 AI:RemoveDeck:Random
 DeckNeeds:Type$Wizard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sages_dousing.jpg

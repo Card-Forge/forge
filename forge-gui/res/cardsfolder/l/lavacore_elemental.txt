@@ -4,7 +4,7 @@ Types:Creature Elemental
 PT:5/3
 K:Vanishing:1
 T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control deals combat damage to a player, put a time counter on CARDNAME.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1
 SVar:PlayMain1:ALWAYS
 SVar:NeedsToPlay:Creature.YouCtrl
 AI:RemoveDeck:Random

@@ -1,0 +1,6 @@
+Name:Snarling Wolf
+ManaCost:G
+Types:Creature Wolf
+PT:1/1
+A:AB$ Pump | Cost$ 1 G | Defined$ Self | NumAtt$ 2 | NumDef$ 2 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 until end of turn. Activate only once each turn.
+Oracle:{1}{G}: Snarling Wolf gets +2/+2 until end of turn. Activate only once each turn.

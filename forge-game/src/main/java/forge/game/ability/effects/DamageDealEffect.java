@@ -121,6 +121,17 @@ public class DamageDealEffect extends DamageBaseEffect {
         }
 
         stringBuilder.append(".");
+        if (spellAbility.hasParam("ReplaceDyingDefined")) {
+            String statement = "If that creature would die this turn, exile it instead.";
+            String[] sentences = spellAbility.getParam("SpellDescription").split("\\.");
+            for (String s : sentences) {
+                if (s.contains("would die")) {
+                    statement = s;
+                    break;
+                }
+            }
+            stringBuilder.append(statement);
+        }
         return stringBuilder.toString();
     }
 
@@ -197,13 +208,7 @@ public class DamageDealEffect extends DamageBaseEffect {
                     return;
                 }
 
-                CardCollection assigneeCards = new CardCollection();
-                // Do we have a way of doing this in a better fashion?
-                for (GameObject obj : tgts) {
-                    if (obj instanceof Card) {
-                        assigneeCards.add((Card) obj);
-                    }
-                }
+                CardCollection assigneeCards = new CardCollection(Iterables.filter(tgts, Card.class));
 
                 Player assigningPlayer = players.get(0);
                 Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(sourceLKI, assigneeCards, dmg, null, true);
@@ -261,6 +266,16 @@ public class DamageDealEffect extends DamageBaseEffect {
     protected void internalDamageDeal(SpellAbility sa, Card sourceLKI, Card c, int dmg, CardDamageMap damageMap) {
         final Card hostCard = sa.getHostCard();
         final Player activationPlayer = sa.getActivatingPlayer();
+        int excess = 0;
+        int dmgToTarget = 0;
+        if (sa.hasParam("ExcessDamage") || (sa.hasParam("ExcessSVar"))) {
+            int lethal = c.getLethalDamage();
+            if (sourceLKI.hasKeyword(Keyword.DEATHTOUCH)) {
+                lethal = Math.min(lethal, 1);
+            }
+            dmgToTarget = Math.min(lethal, dmg);
+            excess = dmg - dmgToTarget;
+        }
 
         if (sa.hasParam("Remove")) {
             c.setDamage(0);
@@ -269,11 +284,6 @@ public class DamageDealEffect extends DamageBaseEffect {
         } else {
             if (sa.hasParam("ExcessDamage") && (!sa.hasParam("ExcessDamageCondition") ||
                     sourceLKI.isValid(sa.getParam("ExcessDamageCondition").split(","), activationPlayer, hostCard, sa))) {
-                int lethal = c.getLethalDamage();
-                if (sourceLKI.hasKeyword(Keyword.DEATHTOUCH)) {
-                    lethal = Math.min(lethal, 1);
-                }
-                int dmgToTarget = Math.min(lethal, dmg);
 
                 damageMap.put(sourceLKI, c, dmgToTarget);
 
@@ -282,10 +292,13 @@ public class DamageDealEffect extends DamageBaseEffect {
                 list.addAll(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("ExcessDamage"), sa));
 
                 if (!list.isEmpty()) {
-                    damageMap.put(sourceLKI, list.get(0), dmg - dmgToTarget);
+                    damageMap.put(sourceLKI, list.get(0), excess);
                 }
             } else {
                 damageMap.put(sourceLKI, c, dmg);
+                if (sa.hasParam("ExcessSVar")) {
+                    hostCard.setSVar(sa.getParam("ExcessSVar"), Integer.toString(excess));
+                }
             }
         }
     }

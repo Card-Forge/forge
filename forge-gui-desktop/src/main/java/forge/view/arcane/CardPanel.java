@@ -117,7 +117,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     static {
 
         try {
-
             Font roboto = Font.createFont(Font.TRUETYPE_FONT, Paths.get(ForgeConstants.COMMON_FONTS_DIR, "Roboto-Bold.ttf").toFile());
 
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -834,7 +833,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         } else if (counters > 3) {
             CardFaceSymbols.drawSymbol("countersMulti", g, cardXOffset - 15, yCounters);
         }
-
     }
 
     private void drawMarkersTabs(final Graphics g, List<String> markers) {
@@ -883,7 +881,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             nameBounds.width = 43;
             drawVerticallyCenteredString(g, marker, nameBounds, smallCounterFont, smallFontMetrics);
         }
-
     }
 
     /**
@@ -903,7 +900,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         g.setFont(font);
         g.drawString(text, x, y);
         g.setFont(oldFont);
-
     }
 
     @Override

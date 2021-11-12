@@ -26,7 +26,6 @@ public class UnattachEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-
         final List<Card> unattachList = getTargetCards(sa);
         for (final Card cardToUnattach : unattachList) {
             if (cardToUnattach.isAura()) {

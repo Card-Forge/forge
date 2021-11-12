@@ -98,7 +98,7 @@ public class CDetailPicture {
     }
 
     private boolean mayView() {
-        return currentView == null || mayView.mayView(currentView);
+        return currentView == null || mayView.mayView(currentView) || currentView.isForeTold(); // FIXME: should isForeTold be added somewhere higher up in the chain?
     }
 
     private boolean mayFlip() {

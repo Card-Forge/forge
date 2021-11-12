@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Creature Elemental Cat
 PT:2/3
 K:Haste
-S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Graveyard | AddHiddenKeyword$ CARDNAME count as Flame Burst. | Description$ If CARDNAME is in a graveyard, effects from spells named Flame Burst count it as a card named Flame Burst.
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Graveyard | AffectedZone$ Graveyard | AddHiddenKeyword$ CARDNAME count as Flame Burst. | Description$ If CARDNAME is in a graveyard, effects from spells named Flame Burst count it as a card named Flame Burst.
 DeckHints:Name$Flame Burst|Pardic Firecat
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pardic_firecat.jpg
 Oracle:Haste\nIf Pardic Firecat is in a graveyard, effects from spells named Flame Burst count it as a card named Flame Burst.

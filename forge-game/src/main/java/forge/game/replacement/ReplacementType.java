@@ -29,6 +29,7 @@ public enum ReplacementType {
     GainLife(ReplaceGainLife.class),
     GameLoss(ReplaceGameLoss.class),
     Learn(ReplaceLearn.class),
+    LifeReduced(ReplaceLifeReduced.class),
     Mill(ReplaceMill.class),
     Moved(ReplaceMoved.class),
     ProduceMana(ReplaceProduceMana.class),
@@ -36,6 +37,7 @@ public enum ReplacementType {
     SetInMotion(ReplaceSetInMotion.class),
     Surveil(ReplaceSurveil.class),
     Tap(ReplaceTap.class),
+    Transform(ReplaceTransform.class),
     TurnFaceUp(ReplaceTurnFaceUp.class),
     Untap(ReplaceUntap.class);
 

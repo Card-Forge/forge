@@ -1,11 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.AiController;
-import forge.ai.AiPlayDecision;
-import forge.ai.ComputerUtilCost;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
-import forge.ai.SpellApiToAi;
+import forge.ai.*;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;

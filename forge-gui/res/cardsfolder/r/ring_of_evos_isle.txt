@@ -4,7 +4,7 @@ Types:Artifact Equipment
 K:Equip:1
 A:AB$ Pump | Cost$ 2 | Defined$ Equipped | KW$ Hexproof | SpellDescription$ Equipped creature gains hexproof until end of turn.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ EvosCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's blue.
-SVar:EvosCounter:DB$PutCounter | Defined$ Equipped | ConditionDefined$ Equipped | ConditionPresent$ Creature.Blue | ConditionCompare$ EQ1 | CounterType$ P1P1 | CounterNum$ 1
+SVar:EvosCounter:DB$ PutCounter | Defined$ Equipped | ConditionDefined$ Equipped | ConditionPresent$ Creature.Blue | ConditionCompare$ EQ1 | CounterType$ P1P1 | CounterNum$ 1
 AI:RemoveDeck:Random
 SVar:AttachAi:AITgts$ Creature.Blue
 DeckNeeds:Color$Blue

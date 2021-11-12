@@ -3,6 +3,6 @@ ManaCost:3 G
 Types:Creature Djinn
 PT:4/4
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to you.
-SVar:TrigDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 1
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nettletooth_djinn.jpg
 Oracle:At the beginning of your upkeep, Nettletooth Djinn deals 1 damage to you.

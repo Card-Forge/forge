@@ -5,7 +5,8 @@ PT:7/7
 K:Trample
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigLife | CheckSVar$ ElderscaleCondition | SVarCompare$ LT7 | TriggerDescription$ When CARDNAME enters the battlefield, if your life total is less than 7, your life total becomes 7.
 SVar:TrigLife:DB$ SetLife | Defined$ You | LifeAmount$ 7
-S:Mode$ Continuous | Affected$ You | AddKeyword$ DamageLifeThreshold:7 | CheckSVar$ ElderscaleCondition | SVarCompare$ GE7 | Description$ As long as you have 7 or more life, damage that would reduce your life total to less than 7 reduces it to 7 instead.
+R:Event$ LifeReduced | ActiveZones$ Battlefield | ValidPlayer$ You | Result$ LT7 | IsDamage$ True | CheckSVar$ ElderscaleCondition | SVarCompare$ GE7 | ReplaceWith$ ReduceLoss | Description$ As long as you have 7 or more life, damage that would reduce your life total to less than 7 reduces it to 7 instead.
+SVar:ReduceLoss:DB$ ReplaceEffect | VarName$ Result | VarValue$ X
+SVar:X:ReplaceCount$Result/NMinus.7
 SVar:ElderscaleCondition:Count$YourLifeTotal
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elderscale_wurm.jpg
 Oracle:Trample\nWhen Elderscale Wurm enters the battlefield, if your life total is less than 7, your life total becomes 7.\nAs long as you have 7 or more life, damage that would reduce your life total to less than 7 reduces it to 7 instead.

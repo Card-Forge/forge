@@ -1,0 +1,6 @@
+Name:Lightning Wolf
+ManaCost:3 R
+Types:Creature Wolf
+PT:4/3
+A:AB$ Pump | Cost$ 1 R | Defined$ Self | KW$ First Strike | SorcerySpeed$ True | SpellDescription$ CARDNAME gains first strike until end of turn. Activate only as a sorcery.
+Oracle:{1}{R}: Lightning Wolf gains first strike until end of turn. Activate only as a sorcery.

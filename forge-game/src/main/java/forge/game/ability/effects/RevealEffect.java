@@ -47,7 +47,6 @@ public class RevealEffect extends SpellAbilityEffect {
 
                     if (sa.hasParam("NumCards")) {
                         final int revealnum = Math.min(cardsInHand.size(), cnt);
-                        final CardCollection hand = new CardCollection(cardsInHand);
                         for (int i = 0; i < revealnum; i++) {
                             final Card random = Aggregates.random(valid);
                             revealed.add(random);

@@ -1,0 +1,7 @@
+Name:Human Soldier
+ManaCost:no cost
+Types:Creature Human Soldier
+Colors:white,green
+PT:1/1
+K:Training
+Oracle:Training (Whenever this creature attacks with another creature with greater power, put a +1/+1 counter on this creature.)

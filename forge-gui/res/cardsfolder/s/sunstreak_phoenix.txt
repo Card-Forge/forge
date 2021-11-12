@@ -1,0 +1,12 @@
+Name:Sunstreak Phoenix
+ManaCost:2 R R
+Types:Creature Phoenix
+PT:4/2
+K:Flying
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | DayTime$ Neither | ReplaceWith$ DoDay | Description$ If it's neither day nor night, it becomes day as CARDNAME enters the battlefield.
+SVar:DoDay:DB$ DayTime | Value$ Day | SubAbility$ ETB
+SVar:ETB:DB$ InternalEtbReplacement
+T:Mode$ DayTimeChanges | Execute$ TrigReturn | TriggerZones$ Graveyard | TriggerDescription$ Whenever day becomes night or night becomes day, you may pay {1}{R}. If you do, return CARDNAME from your graveyard to the battlefield tapped.
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 1 R | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
+DeckHas:Ability$Graveyard
+Oracle:Flying\nIf it's neither day nor night, it becomes day as Sunstreak Phoenix enters the battlefield.\nWhenever day becomes night or night becomes day, you may pay {1}{R}. If you do, return Sunstreak Phoenix from your graveyard to the battlefield tapped.

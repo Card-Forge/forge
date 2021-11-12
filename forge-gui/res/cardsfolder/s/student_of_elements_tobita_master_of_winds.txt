@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Creature Human Wizard
 PT:1/1
 T:Mode$ Always | IsPresent$ Card.Self+withFlying | TriggerZones$ Battlefield | Execute$ TrigFlip | TriggerDescription$ When CARDNAME has flying, flip it.
-SVar:TrigFlip:DB$SetState | Defined$ Self | Mode$ Flip
+SVar:TrigFlip:DB$ SetState | Defined$ Self | Mode$ Flip
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/student_of_elements.jpg
 AlternateMode:Flip

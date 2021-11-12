@@ -39,72 +39,10 @@ public class Graphics {
     private int failedClipCount;
     private float alphaComposite = 1;
     private int transformCount = 0;
-    private String sVertex = "uniform mat4 u_projTrans;\n" +
-            "\n" +
-            "attribute vec4 a_position;\n" +
-            "attribute vec2 a_texCoord0;\n" +
-            "attribute vec4 a_color;\n" +
-            "\n" +
-            "varying vec4 v_color;\n" +
-            "varying vec2 v_texCoord;\n" +
-            "\n" +
-            "uniform vec2 u_viewportInverse;\n" +
-            "\n" +
-            "void main() {\n" +
-            "    gl_Position = u_projTrans * a_position;\n" +
-            "    v_texCoord = a_texCoord0;\n" +
-            "    v_color = a_color;\n" +
-            "}";
-    private String sFragment = "#ifdef GL_ES\n" +
-            "precision mediump float;\n" +
-            "precision mediump int;\n" +
-            "#endif\n" +
-            "\n" +
-            "uniform sampler2D u_texture;\n" +
-            "\n" +
-            "// The inverse of the viewport dimensions along X and Y\n" +
-            "uniform vec2 u_viewportInverse;\n" +
-            "\n" +
-            "// Color of the outline\n" +
-            "uniform vec3 u_color;\n" +
-            "\n" +
-            "// Thickness of the outline\n" +
-            "uniform float u_offset;\n" +
-            "\n" +
-            "// Step to check for neighbors\n" +
-            "uniform float u_step;\n" +
-            "\n" +
-            "varying vec4 v_color;\n" +
-            "varying vec2 v_texCoord;\n" +
-            "\n" +
-            "#define ALPHA_VALUE_BORDER 0.5\n" +
-            "\n" +
-            "void main() {\n" +
-            "   vec2 T = v_texCoord.xy;\n" +
-            "\n" +
-            "   float alpha = 0.0;\n" +
-            "   bool allin = true;\n" +
-            "   for( float ix = -u_offset; ix < u_offset; ix += u_step )\n" +
-            "   {\n" +
-            "      for( float iy = -u_offset; iy < u_offset; iy += u_step )\n" +
-            "       {\n" +
-            "          float newAlpha = texture2D(u_texture, T + vec2(ix, iy) * u_viewportInverse).a;\n" +
-            "          allin = allin && newAlpha > ALPHA_VALUE_BORDER;\n" +
-            "          if (newAlpha > ALPHA_VALUE_BORDER && newAlpha >= alpha)\n" +
-            "          {\n" +
-            "             alpha = newAlpha;\n" +
-            "          }\n" +
-            "      }\n" +
-            "   }\n" +
-            "   if (allin)\n" +
-            "   {\n" +
-            "      alpha = 0.0;\n" +
-            "   }\n" +
-            "\n" +
-            "   gl_FragColor = vec4(u_color,alpha);\n" +
-            "}";
-
-    private final ShaderProgram shaderOutline = new ShaderProgram(sVertex, sFragment);
+    private final ShaderProgram shaderOutline = new ShaderProgram(Gdx.files.internal("shaders").child("outline.vert"), Gdx.files.internal("shaders").child("outline.frag"));
+    private final ShaderProgram shaderGrayscale = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("grayscale.frag"));
+    private final ShaderProgram shaderWarp = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("warp.frag"));
+    private final ShaderProgram shaderUnderwater = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("underwater.frag"));
 
     public Graphics() {
         ShaderProgram.pedantic = false;
@@ -130,6 +68,9 @@ public class Graphics {
         batch.dispose();
         shapeRenderer.dispose();
         shaderOutline.dispose();
+        shaderGrayscale.dispose();
+        shaderUnderwater.dispose();
+        shaderWarp.dispose();
     }
 
     public SpriteBatch getBatch() {
@@ -298,6 +239,51 @@ public class Graphics {
         batch.begin();
     }
 
+    public void drawLineArrow(float arrowThickness, FSkinColor skinColor, float x1, float y1, float x2, float y2) {
+        fillCircle(skinColor.getColor(), x2, y2, arrowThickness);
+        drawLineArrow(arrowThickness, skinColor.getColor(), x1, y1, x2, y2);
+        fillCircle(Color.WHITE, x2, y2, arrowThickness/2);
+        drawLine(arrowThickness/3, Color.WHITE, x1, y1, x2, y2);
+    }
+    public void drawLineArrow(float thickness, Color color, float x1, float y1, float x2, float y2) {
+        batch.end(); //must pause batch while rendering shapes
+
+        float angle = new Vector2(x1 - x2, y1 - y2).angleRad();
+        float arrowHeadRotation = (float)(Math.PI * 0.8f);
+        Vector2 arrowCorner3 = new Vector2(x2 + (thickness/3) * (float)Math.cos(angle + arrowHeadRotation), y2 + (thickness/3) * (float)Math.sin(angle + arrowHeadRotation));
+        Vector2 arrowCorner4 = new Vector2(x2 + (thickness/3) * (float)Math.cos(angle - arrowHeadRotation), y2 + (thickness/3) * (float)Math.sin(angle - arrowHeadRotation));
+
+        if (thickness > 1) {
+            Gdx.gl.glLineWidth(thickness);
+        }
+        if (alphaComposite < 1) {
+            color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+        }
+        boolean needSmoothing = (x1 != x2 && y1 != y2);
+        if (color.a < 1 || needSmoothing) { //enable blending so alpha colored shapes work properly
+            Gdx.gl.glEnable(GL_BLEND);
+        }
+        if (needSmoothing) {
+            Gdx.gl.glEnable(GL_LINE_SMOOTH);
+        }
+
+        startShape(ShapeType.Line);
+        shapeRenderer.setColor(color);
+        shapeRenderer.line(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0));
+        endShape();
+
+        if (needSmoothing) {
+            Gdx.gl.glDisable(GL_LINE_SMOOTH);
+        }
+        if (color.a < 1 || needSmoothing) {
+            Gdx.gl.glDisable(GL_BLEND);
+        }
+        if (thickness > 1) {
+            Gdx.gl.glLineWidth(1);
+        }
+
+        batch.begin();
+    }
     public void drawArrow(float borderThickness, float arrowThickness, float arrowSize, FSkinColor skinColor, float x1, float y1, float x2, float y2) {
         drawArrow(borderThickness, arrowThickness, arrowSize, skinColor.getColor(), x1, y1, x2, y2);
     }
@@ -472,6 +458,12 @@ public class Graphics {
 
         batch.begin();
     }
+    public void drawRectLines(float thickness, Color color, float x, float y, float w, float h) {
+        drawLine(thickness, color, x, y, x+w, y);
+        drawLine(thickness, color, x+thickness/2f, y+thickness/2f, x+thickness/2f, y+h-thickness/2f);
+        drawLine(thickness, color, x, y+h, x+w, y+h);
+        drawLine(thickness, color, x+w-thickness/2f, y+thickness/2f, x+w-thickness/2f, y+h-thickness/2f);
+    }
 
     public void fillRect(FSkinColor skinColor, float x, float y, float w, float h) {
         fillRect(skinColor.getColor(), x, y, w, h);
@@ -626,6 +618,16 @@ public class Graphics {
         shapeRenderer.end();
     }
 
+    public void setColorRGBA(float r, float g, float b, float alphaComposite0) {
+        alphaComposite = alphaComposite0;
+        batch.setColor(new Color(r, g, b, alphaComposite));
+    }
+
+    public void resetColorRGBA(float alphaComposite0) {
+        alphaComposite = alphaComposite0;
+        batch.setColor(Color.WHITE);
+    }
+
     public void setAlphaComposite(float alphaComposite0) {
         alphaComposite = alphaComposite0;
         batch.setColor(new Color(1, 1, 1, alphaComposite));
@@ -655,6 +657,182 @@ public class Graphics {
     public void drawImage(FImage image, Color borderColor, float x, float y, float w, float h) {
         image.draw(this, x, y, w, h);
         fillRoundRect(borderColor, x+1, y+1, w-1.5f, h-1.5f, (h-w)/10);//used by zoom let some edges show...
+    }
+    public void drawAvatarImage(FImage image, float x, float y, float w, float h, boolean drawGrayscale) {
+        if (!drawGrayscale) {
+            image.draw(this, x, y, w, h);
+        } else {
+            batch.end();
+            shaderGrayscale.bind();
+            shaderGrayscale.setUniformf("u_grayness", 1f);
+            batch.setShader(shaderGrayscale);
+            batch.begin();
+            //draw gray
+            image.draw(this, x, y, w, h);
+            //reset
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        }
+    }
+    public void drawCardImage(FImage image, TextureRegion damage_overlay, float x, float y, float w, float h, boolean drawGrayscale, boolean damaged) {
+        if (!drawGrayscale) {
+            image.draw(this, x, y, w, h);
+            if (damage_overlay != null && damaged)
+                batch.draw(damage_overlay, adjustX(x), adjustY(y, h), w, h);
+        } else {
+            batch.end();
+            shaderGrayscale.bind();
+            shaderGrayscale.setUniformf("u_grayness", 1f);
+            batch.setShader(shaderGrayscale);
+            batch.begin();
+            //draw gray
+            image.draw(this, x, y, w, h);
+            //reset
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        }
+    }
+    public void drawCardImage(Texture image, TextureRegion damage_overlay, float x, float y, float w, float h, boolean drawGrayscale, boolean damaged) {
+        if (!drawGrayscale) {
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+            if (damage_overlay != null && damaged)
+                batch.draw(damage_overlay, adjustX(x), adjustY(y, h), w, h);
+        } else {
+            batch.end();
+            shaderGrayscale.bind();
+            shaderGrayscale.setUniformf("u_grayness", 1f);
+            batch.setShader(shaderGrayscale);
+            batch.begin();
+            //draw gray
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+            //reset
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        }
+    }
+    public void drawCardImage(TextureRegion image, TextureRegion damage_overlay, float x, float y, float w, float h, boolean drawGrayscale, boolean damaged) {
+        if (image != null) {
+            if (!drawGrayscale) {
+                batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+                if (damage_overlay != null && damaged)
+                    batch.draw(damage_overlay, adjustX(x), adjustY(y, h), w, h);
+            } else {
+                batch.end();
+                shaderGrayscale.bind();
+                shaderGrayscale.setUniformf("u_grayness", 1f);
+                batch.setShader(shaderGrayscale);
+                batch.begin();
+                //draw gray
+                batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+                //reset
+                batch.end();
+                batch.setShader(null);
+                batch.begin();
+            }
+        }
+    }
+    public void drawGrayTransitionImage(FImage image, float x, float y, float w, float h, boolean withDarkOverlay, float percentage) {
+        batch.end();
+        shaderGrayscale.bind();
+        shaderGrayscale.setUniformf("u_grayness", percentage);
+        batch.setShader(shaderGrayscale);
+        batch.begin();
+        //draw gray
+        image.draw(this, x, y, w, h);
+        //reset
+        batch.end();
+        batch.setShader(null);
+        batch.begin();
+        if(withDarkOverlay){
+            float oldalpha = alphaComposite;
+            setAlphaComposite(0.4f);
+            fillRect(Color.BLACK, x, y, w, h);
+            setAlphaComposite(oldalpha);
+        }
+    }
+    public void drawWarpImage(Texture image, float x, float y, float w, float h, float time) {
+        batch.end();
+        shaderWarp.bind();
+        shaderWarp.setUniformf("u_amount", 0.2f);
+        shaderWarp.setUniformf("u_speed", 0.6f);
+        shaderWarp.setUniformf("u_time", time);
+        batch.setShader(shaderWarp);
+        batch.begin();
+        //draw
+        batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        //reset
+        batch.end();
+        batch.setShader(null);
+        batch.begin();
+    }
+    public void drawWarpImage(TextureRegion image, float x, float y, float w, float h, float time) {
+        batch.end();
+        shaderWarp.bind();
+        shaderWarp.setUniformf("u_amount", 0.2f);
+        shaderWarp.setUniformf("u_speed", 0.6f);
+        shaderWarp.setUniformf("u_time", time);
+        batch.setShader(shaderWarp);
+        batch.begin();
+        //draw
+        batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        //reset
+        batch.end();
+        batch.setShader(null);
+        batch.begin();
+    }
+    public void drawWarpImage(FImage image, float x, float y, float w, float h, float time) {
+        batch.end();
+        shaderWarp.bind();
+        shaderWarp.setUniformf("u_amount", 0.2f);
+        shaderWarp.setUniformf("u_speed", 0.6f);
+        shaderWarp.setUniformf("u_time", time);
+        batch.setShader(shaderWarp);
+        batch.begin();
+        //draw
+        image.draw(this, x, y, w, h);
+        //reset
+        batch.end();
+        batch.setShader(null);
+        batch.begin();
+    }
+    public void drawUnderWaterImage(FImage image, float x, float y, float w, float h, float time, boolean withDarkOverlay) {
+        batch.end();
+        shaderUnderwater.bind();
+        shaderUnderwater.setUniformf("u_amount", 10f*time);
+        shaderUnderwater.setUniformf("u_speed", 0.5f*time);
+        shaderUnderwater.setUniformf("u_time", time);
+        batch.setShader(shaderUnderwater);
+        batch.begin();
+        //draw
+        image.draw(this, x, y, w, h);
+        //reset
+        batch.end();
+        batch.setShader(null);
+        batch.begin();
+        if(withDarkOverlay){
+            float oldalpha = alphaComposite;
+            setAlphaComposite(0.4f);
+            fillRect(Color.BLACK, x, y, w, h);
+            setAlphaComposite(oldalpha);
+        }
+    }
+    public void drawUnderWaterImage(TextureRegion image, float x, float y, float w, float h, float time) {
+        batch.end();
+        shaderUnderwater.bind();
+        shaderUnderwater.setUniformf("u_amount", 10f);
+        shaderUnderwater.setUniformf("u_speed", 0.5f);
+        shaderUnderwater.setUniformf("u_time", time);
+        batch.setShader(shaderUnderwater);
+        batch.begin();
+        //draw
+        batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        //reset
+        batch.end();
+        batch.setShader(null);
+        batch.begin();
     }
     public void drawImage(FImage image, float x, float y, float w, float h) {
         drawImage(image, x, y, w, h, false);
@@ -850,6 +1028,18 @@ public class Graphics {
 
     //use nifty trick with multiple text renders to draw outlined text
     public void drawOutlinedText(String text, FSkinFont skinFont, Color textColor, Color outlineColor, float x, float y, float w, float h, boolean wrap, int horzAlignment, boolean centerVertically) {
+        drawOutlinedText(text, skinFont, textColor, outlineColor, x, y, w, h, wrap, horzAlignment, centerVertically, false);
+    }
+    public void drawOutlinedText(String text, FSkinFont skinFont, Color textColor, Color outlineColor, float x, float y, float w, float h, boolean wrap, int horzAlignment, boolean centerVertically, boolean shadow) {
+        if (shadow) {
+            float oldAlpha = alphaComposite;
+            alphaComposite = 0.4f;
+            drawText(text, skinFont, outlineColor, x - 1.5f, y + 1.5f, w, h, wrap, horzAlignment, centerVertically);
+            drawText(text, skinFont, outlineColor, x + 1.5f, y + 1.5f, w, h, wrap, horzAlignment, centerVertically);
+            drawText(text, skinFont, outlineColor, x + 1.5f, y - 1.5f, w, h, wrap, horzAlignment, centerVertically);
+            drawText(text, skinFont, outlineColor, x - 1.5f, y - 1.5f, w, h, wrap, horzAlignment, centerVertically);
+            alphaComposite = oldAlpha;
+        }
         drawText(text, skinFont, outlineColor, x - 1, y, w, h, wrap, horzAlignment, centerVertically);
         drawText(text, skinFont, outlineColor, x, y - 1, w, h, wrap, horzAlignment, centerVertically);
         drawText(text, skinFont, outlineColor, x - 1, y - 1, w, h, wrap, horzAlignment, centerVertically);

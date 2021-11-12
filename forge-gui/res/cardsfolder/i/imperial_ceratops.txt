@@ -3,7 +3,7 @@ ManaCost:4 W
 Types:Creature Dinosaur
 PT:3/5
 T:Mode$ DamageDoneOnce | Execute$ TrigGainLife | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, you gain 2 life.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ 2
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
 DeckHas:Ability$LifeGain
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imperial_ceratops.jpg

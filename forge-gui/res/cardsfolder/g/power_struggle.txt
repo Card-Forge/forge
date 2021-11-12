@@ -1,0 +1,7 @@
+Name:Power Struggle
+ManaCost:2 U U U
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerController$ TriggeredPlayer | TriggerDescription$ At the beginning of each player's upkeep, that player exchanges control of random target artifact, creature or land he or she controls, for control of random target permanent of the same type that a random opponent controls.
+SVar:TrigPump:DB$ Pump | TargetsWithDefinedController$ TriggeredPlayer | ValidTgts$ Artifact,Creature,Land | TargetsAtRandom$ True | AILogic$ PowerStruggle | SubAbility$ DBExchangeControl
+SVar:DBExchangeControl:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Artifact,Creature,Land | TargetsWithDefinedController$ Player.OpponentOf TriggeredPlayer | TargetsWithSharedCardType$ ParentTarget | TargetsAtRandom$ True | AILogic$ PowerStruggle
+Oracle:At the beginning of each player's upkeep, that player exchanges control of random target artifact, creature or land he or she controls, for control of random target permanent of the same type that a random opponent controls.

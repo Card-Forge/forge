@@ -1,9 +1,8 @@
 Name:Virulent Wound
 ManaCost:B
 Types:Instant
-A:SP$ PutCounter | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True | SubAbility$ DBEffect | SpellDescription$ Put a -1/-1 counter on target creature. When that creature dies this turn, its controller gets a poison counter.
-SVar:DBEffect:DB$ Effect | Name$ Virulent Wound Effect | Triggers$ VirulentDies | RememberObjects$ Targeted 
-SVar:VirulentDies:Mode$ ChangesZone | ValidCard$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Graveyard | TriggerController$ TriggeredCardController | Execute$ PoisonController | TriggerDescription$ When that creature dies this turn, its controller gets a poison counter.
-SVar:PoisonController:DB$ Poison | Defined$ TriggeredCardController | Num$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/virulent_wound.jpg
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True | SubAbility$ DBDelayedTrigger | SpellDescription$ Put a -1/-1 counter on target creature. When that creature dies this turn, its controller gets a poison counter.
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigPoison | TriggerDescription$ When that creature dies this turn, its controller gets a poison counter.
+SVar:TrigPoison:DB$ Poison | Defined$ TriggeredCardController | Num$ 1
+DeckHas:Ability$Counters
 Oracle:Put a -1/-1 counter on target creature. When that creature dies this turn, its controller gets a poison counter.

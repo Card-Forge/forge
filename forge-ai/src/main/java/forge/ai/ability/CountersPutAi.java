@@ -53,7 +53,7 @@ import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 
-public class CountersPutAi extends SpellAbilityAi {
+public class CountersPutAi extends CountersAi {
 
     /*
      * (non-Javadoc)
@@ -107,8 +107,7 @@ public class CountersPutAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
 
         if (sa.isOutlast()) {
-            if (ph.is(PhaseType.MAIN2, ai)) { // applicable to non-attackers
-                                              // only
+            if (ph.is(PhaseType.MAIN2, ai)) { // applicable to non-attackers only
                 float chance = 0.8f;
                 if (ComputerUtilCard.doesSpecifiedCreatureBlock(ai, source)) {
                     return false;
@@ -179,7 +178,7 @@ public class CountersPutAi extends SpellAbilityAi {
 
                 if (abTgt.canTgtCreature()) {
                     // try to kill creature with -1/-1 counters if it can
-                    // receive counters, execpt it has undying
+                    // receive counters, except it has undying
                     CardCollection oppCreat = CardLists.getTargetableCards(ai.getOpponents().getCreaturesInPlay(), sa);
                     CardCollection oppCreatM1 = CardLists.filter(oppCreat, CardPredicates.hasCounter(CounterEnumType.M1M1));
                     oppCreatM1 = CardLists.getNotKeyword(oppCreatM1, Keyword.UNDYING);
@@ -258,18 +257,18 @@ public class CountersPutAi extends SpellAbilityAi {
             if (playAggro) {
                 // aggro profiles ignore conservative play for this AI logic
                 return true;
-            } else if (ai.getGame().getCombat() != null && sa.getHostCard() != null) {
-                if (ai.getGame().getCombat().isAttacking(sa.getHostCard()) && !onlyDefensive) {
+            } else if (ai.getGame().getCombat() != null && source != null) {
+                if (ai.getGame().getCombat().isAttacking(source) && !onlyDefensive) {
                     return true;
-                } else if (ai.getGame().getCombat().isBlocking(sa.getHostCard())) {
+                } else if (ai.getGame().getCombat().isBlocking(source)) {
                     // when blocking, consider this if it's possible to save the blocker and/or kill at least one attacker
-                    CardCollection blocked = ai.getGame().getCombat().getAttackersBlockedBy(sa.getHostCard());
+                    CardCollection blocked = ai.getGame().getCombat().getAttackersBlockedBy(source);
                     int totBlkPower = Aggregates.sum(blocked, CardPredicates.Accessors.fnGetNetPower);
                     int totBlkToughness = Aggregates.min(blocked, CardPredicates.Accessors.fnGetNetToughness);
 
                     int numActivations = ai.getCounters(CounterEnumType.ENERGY) / sa.getPayCosts().getCostEnergy().convertAmount();
-                    if (sa.getHostCard().getNetToughness() + numActivations > totBlkPower
-                            || sa.getHostCard().getNetPower() + numActivations >= totBlkToughness) {
+                    if (source.getNetToughness() + numActivations > totBlkPower
+                            || source.getNetPower() + numActivations >= totBlkToughness) {
                         return true;
                     }
                 }
@@ -306,7 +305,7 @@ public class CountersPutAi extends SpellAbilityAi {
             }
         } else if (logic.equals("CheckDFC")) {
             // for cards like Ludevic's Test Subject
-            if (!source.canTransform()) {
+            if (!source.canTransform(null)) {
                 return false;
             }
         } else if (logic.startsWith("MoveCounter")) {
@@ -347,6 +346,10 @@ public class CountersPutAi extends SpellAbilityAi {
 
         // TODO handle proper calculation of X values based on Cost
         int amount = AbilityUtils.calculateAmount(source, amountStr, sa);
+
+        if (amount == 0 && logic.equals("FromDiceRoll")) {
+            amount = 1; // TODO: improve this to possibly account for some variability depending on the roll outcome (e.g. 4 for 1d8, perhaps)
+        }
 
         if (sa.hasParam("Adapt")) {
             Game game = ai.getGame();
@@ -419,18 +422,18 @@ public class CountersPutAi extends SpellAbilityAi {
                 oa.setActivatingPlayer(ai);
                 CardCollection targets = CardLists.getTargetableCards(ai.getOpponents().getCreaturesInPlay(), oa);
 
-                if (!targets.isEmpty()){
+                if (!targets.isEmpty()) {
                     boolean canSurvive = false;
                     for (Card humanCreature : targets) {
-                        if (!FightAi.canKill(humanCreature, source, 0)){
+                        if (!FightAi.canKill(humanCreature, source, 0)) {
                             canSurvive = true;
                             break;
                         }
                     }
-                    if (!canSurvive){
+                    if (!canSurvive) {
                         return false;
                     }
-                };
+                }
                 found = true;
                 break;
             }
@@ -484,6 +487,9 @@ public class CountersPutAi extends SpellAbilityAi {
                     return sa.canTarget(c) && c.canReceiveCounters(CounterType.getType(type));
                 }
             });
+
+            // Filter AI-specific targets if provided
+            list = ComputerUtil.filterAITgts(sa, ai, list, false);
 
             if (abCost.hasSpecificCostType(CostSacrifice.class)) {
                 Card sacTarget = ComputerUtil.getCardPreference(ai, source, "SacCost", list);
@@ -549,7 +555,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
 
                 if (sa.isCurse()) {
-                    choice = CountersAi.chooseCursedTarget(list, type, amount);
+                    choice = chooseCursedTarget(list, type, amount, ai);
                 } else {
                     if (type.equals("P1P1") && !SpellAbilityAi.isSorcerySpeed(sa)) {
                         for (Card c : list) {
@@ -564,15 +570,15 @@ public class CountersPutAi extends SpellAbilityAi {
                                 if (abCost == null
                                         || (ph.is(PhaseType.END_OF_TURN) && ph.getPlayerTurn().isOpponentOf(ai))) {
                                     // only use at opponent EOT unless it is free
-                                    choice = CountersAi.chooseBoonTarget(list, type);
+                                    choice = chooseBoonTarget(list, type);
                                 }
                             }
                         }
                         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Dromoka's Command")) {
-                            choice = CountersAi.chooseBoonTarget(list, type);
+                            choice = chooseBoonTarget(list, type);
                         }
                     } else {
-                        choice = CountersAi.chooseBoonTarget(list, type);
+                        choice = chooseBoonTarget(list, type);
                     }
                 }
 
@@ -598,7 +604,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 return false;
             }
         } else {
-            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+            final List<Card> cards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
             // Don't activate Curse abilities on my cards and non-curse abilities
             // on my opponents
             if (cards.isEmpty() || (cards.get(0).getController().isOpponentOf(ai) && !sa.isCurse())) {
@@ -681,7 +687,6 @@ public class CountersPutAi extends SpellAbilityAi {
             sa.resetTargets();
             // target loop
             while (sa.canAddMoreTarget()) {
-
                 if (list.isEmpty()) {
                     if (!sa.isTargetNumberValid()
                             || sa.getTargets().size() == 0) {
@@ -693,7 +698,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
 
                 if (sa.isCurse()) {
-                    choice = CountersAi.chooseCursedTarget(list, type, amount);
+                    choice = chooseCursedTarget(list, type, amount, ai);
                 } else {
                     CardCollection lands = CardLists.filter(list, CardPredicates.Presets.LANDS);
                     SpellAbility animate = sa.findSubAbilityByType(ApiType.Animate);
@@ -702,7 +707,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     } else if ("BoonCounterOnOppCreature".equals(logic)) {
                         choice = ComputerUtilCard.getWorstCreatureAI(list);
                     } else {
-                        choice = CountersAi.chooseBoonTarget(list, type);
+                        choice = chooseBoonTarget(list, type);
                     }
                 }
 
@@ -737,7 +742,7 @@ public class CountersPutAi extends SpellAbilityAi {
         final String type = sa.getParam("CounterType");
         final String amountStr = sa.getParamOrDefault("CounterNum", "1");
         final boolean divided = sa.isDividedAsYouChoose();
-        final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
+        final int amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         int left = amount;
 
         if (!sa.usesTargeting()) {
@@ -785,7 +790,7 @@ public class CountersPutAi extends SpellAbilityAi {
             List<Player> playerList = Lists.newArrayList(Iterables.filter(
                     sa.getTargetRestrictions().getAllCandidates(sa, true, true), Player.class));
 
-            if (playerList.isEmpty() && mandatory) {
+            if (playerList.isEmpty()) {
                 return false;
             }
 
@@ -802,6 +807,9 @@ public class CountersPutAi extends SpellAbilityAi {
                 list = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
             }
             list = CardLists.getTargetableCards(list, sa);
+
+            // Filter AI-specific targets if provided
+            list = ComputerUtil.filterAITgts(sa, ai, list, false);
 
             int totalTargets = list.size();
 
@@ -838,7 +846,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 // Choose targets here:
                 if (sa.isCurse()) {
                     if (preferred) {
-                        choice = CountersAi.chooseCursedTarget(list, type, amount);
+                        choice = chooseCursedTarget(list, type, amount, ai);
                         if (choice == null && mandatory) {
                             choice = Aggregates.random(list);
                         }
@@ -852,7 +860,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 } else {
                     if (preferred) {
                         list = ComputerUtil.getSafeTargets(ai, sa, list);
-                        choice = CountersAi.chooseBoonTarget(list, type);
+                        choice = chooseBoonTarget(list, type);
                         if (choice == null && mandatory) {
                             choice = Aggregates.random(list);
                         }
@@ -893,7 +901,7 @@ public class CountersPutAi extends SpellAbilityAi {
             // add counter if that opponent has a giant creature
             final List<Card> creats = player.getCreaturesInPlay();
             final String amountStr = sa.getParamOrDefault("CounterNum", "1");
-            final int tributeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
+            final int tributeAmount = AbilityUtils.calculateAmount(source, amountStr, sa);
 
             final boolean isHaste = source.hasKeyword(Keyword.HASTE);
             List<Card> threatening = CardLists.filter(creats, new Predicate<Card>() {
@@ -1002,7 +1010,7 @@ public class CountersPutAi extends SpellAbilityAi {
             final CardCollection doNotHaveKeyword = CardLists.filter(filtered, new Predicate<Card>() {
                 @Override
                 public boolean apply(Card card) {
-                    return !card.hasKeyword(kw) && card.canBeTargetedBy(sa) && sa.canTarget(card);
+                    return !card.hasKeyword(kw) && sa.canTarget(card);
                 }
             });
 

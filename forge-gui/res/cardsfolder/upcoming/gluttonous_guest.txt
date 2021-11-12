@@ -1,0 +1,10 @@
+Name:Gluttonous Guest
+ManaCost:2 B
+Types:Creature Vampire
+PT:1/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_blood_draw
+T:Mode$ Sacrificed | ValidCard$ Blood.token+YouCtrl | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a Blood token, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+DeckHas:Ability$Token & Ability$Sacrifice & Ability$LifeGain & Type$Blood
+Oracle:When Gluttonous Guest enters the battlefield, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")\nWhenever you sacrifice a Blood token, you gain 1 life.

@@ -1,0 +1,11 @@
+Name:Drown in Dreams
+ManaCost:X 2 U
+Types:Instant
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ W | Choices$ DBDraw,DBMill | AdditionalDescription$ . If you control a commander as you cast this spell, you may choose both.
+SVar:DBDraw:DB$ Draw | ValidTgts$ Player | TgtPrompt$ Select target player to draw cards | NumCards$ X | StackDescription$ {p:ThisTargetedPlayer} draws X cards. | SpellDescription$ Target player draws X cards.
+SVar:DBMill:DB$ Mill | ValidTgts$ Player | TgtPrompt$ Select target player to mill cards | NumCards$ Z | StackDescription$ {p:ThisTargetedPlayer} mills twice X cards. | SpellDescription$ Target player mills twice X cards.
+SVar:W:Count$Compare Y GE1.2.1
+SVar:X:Count$xPaid
+SVar:Y:Count$Valid Card.IsCommander+YouCtrl
+SVar:Z:Count$xPaid/Twice
+Oracle:Choose one. If you control a commander as you cast this spell, you may choose both.\n• Target player draws X cards.\n• Target player mills twice X cards.

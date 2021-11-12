@@ -74,7 +74,7 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloadService {
 
             addDLObject(ImageUtil.getDownloadUrl(c, false), ImageUtil.getImageKey(c, false, true), downloads);
 
-            if (ImageUtil.hasBackFacePicture(c)) {
+            if (c.hasBackFace()) {
                 addDLObject(ImageUtil.getDownloadUrl(c, true), ImageUtil.getImageKey(c, true, true), downloads);
             }
         }

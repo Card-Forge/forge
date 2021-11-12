@@ -1,0 +1,214 @@
+[metadata]
+Code=MIC
+Date=2021-09-24
+Name=Innistrad: Midnight Hunt Commander
+Type=Commander
+ScryfallCode=MIC
+
+[cards]
+1 M Leinore, Autumn Sovereign @Fariba Khamseh
+2 M Wilhelt, the Rotcleaver @Chris Rallis
+3 M Eloise, Nephalia Sleuth @Jarel Threat
+4 M Kyler, Sigardian Emissary @Dmitry Burmak
+5 R Celestial Judgment @Alexander Mokhov
+6 R Curse of Conformity @Chris Cold
+7 R Moorland Rescuer @Justyna Gil
+8 R Sigarda's Vanguard @Martina Fackova
+9 R Stalwart Pathlighter @Sidharth Chaturvedi
+10 R Wall of Mourning @Kasia 'Kafis' Zielińska
+11 R Cleaver Skaab @Johann Bodin
+12 R Curse of Unbinding @Sebastian Giacobino
+13 R Drown in Dreams @Olena Richards
+14 R Empty the Laboratory @Tuan Duong Chu
+15 R Hordewing Skaab @Sidharth Chaturvedi
+16 R Shadow Kin @Irvin Rodriguez
+17 R Crowded Crypt @Jarel Threat
+18 R Curse of the Restless Dead @Brian Valeza
+19 R Ghouls' Night Out @Fajareka Setiawan
+20 R Gorex, the Tombshell @Wisnu Tan
+21 R Prowling Geistcatcher @Lie Setiawan
+22 R Ravenous Rotbelly @Nils Hamm
+23 R Tomb Tyrant @Chris Cold
+24 R Celebrate the Harvest @Eelis Kyttanen
+25 R Curse of Clinging Webs @Marie Magny
+26 R Heronblade Elite @Yigit Koroglu
+27 R Kurbis, Harvest Celebrant @Irvin Rodriguez
+28 R Ruinous Intrusion @Johann Bodin
+29 R Sigardian Zealot @Justyna Gil
+30 R Somberwald Beastmaster @Marta Nael
+31 M Avacyn's Memorial @Kasia 'Kafis' Zielińska
+32 R Visions of Glory @Alexander Mokhov
+33 R Visions of Duplicity @Alexander Mokhov
+34 R Visions of Dread @Andrew Mar
+35 R Curse of Obsession @Irvin Rodriguez
+36 R Visions of Ruin @Andrew Mar
+37 R Visions of Dominance @Andrew Mar
+38 M Lynde, Cheerful Tormentor @Anna Steinbauer
+39 M Leinore, Autumn Sovereign @Fariba Khamseh
+40 M Wilhelt, the Rotcleaver @Chris Rallis
+41 M Eloise, Nephalia Sleuth @Jarel Threat
+42 M Kyler, Sigardian Emissary @Dmitry Burmak
+43 R Celestial Judgment @Alexander Mokhov
+44 R Curse of Conformity @Chris Cold
+45 R Moorland Rescuer @Justyna Gil
+46 R Sigarda's Vanguard @Martina Fackova
+47 R Stalwart Pathlighter @Sidharth Chaturvedi
+48 R Wall of Mourning @Kasia 'Kafis' Zielińska
+49 R Cleaver Skaab @Johann Bodin
+50 R Curse of Unbinding @Sebastian Giacobino
+51 R Drown in Dreams @Olena Richards
+52 R Empty the Laboratory @Tuan Duong Chu
+53 R Hordewing Skaab @Sidharth Chaturvedi
+54 R Shadow Kin @Irvin Rodriguez
+55 R Crowded Crypt @Jarel Threat
+56 R Curse of the Restless Dead @Brian Valeza
+57 R Ghouls' Night Out @Fajareka Setiawan
+58 M Gorex, the Tombshell @Wisnu Tan
+59 R Prowling Geistcatcher @Lie Setiawan
+60 R Ravenous Rotbelly @Nils Hamm
+61 R Tomb Tyrant @Chris Cold
+62 R Celebrate the Harvest @Eelis Kyttanen
+63 R Curse of Clinging Webs @Marie Magny
+64 R Heronblade Elite @Yigit Koroglu
+65 M Kurbis, Harvest Celebrant @Irvin Rodriguez
+66 R Ruinous Intrusion @Johann Bodin
+67 R Sigardian Zealot @Justyna Gil
+68 R Somberwald Beastmaster @Marta Nael
+69 M Avacyn's Memorial @Kasia 'Kafis' Zielińska
+70 R Visions of Glory @Alexander Mokhov
+71 R Visions of Duplicity @Alexander Mokhov
+72 R Visions of Dread @Andrew Mar
+73 R Curse of Obsession @Irvin Rodriguez
+74 R Visions of Ruin @Andrew Mar
+75 R Visions of Dominance @Andrew Mar
+76 M Lynde, Cheerful Tormentor @Anna Steinbauer
+77 U Abzan Falconer @Steven Belledin
+78 C Ainok Bond-Kin @Chris Rahn
+79 R Angel of Glory's Rise @Andrew Mar
+80 R Bastion Protector @Victor Adame Minguez
+81 R Citadel Siege @Steven Belledin
+82 R Cleansing Nova @Marta Nael
+83 R Custodi Soulbinders @Karla Ortiz
+84 R Dearly Departed @Daniel Ljunggren
+85 U Elite Scaleguard @Steve Prescott
+86 R Herald of War @Eric Deschamps
+87 R Hour of Reckoning @Joseph Meehan
+88 R Knight of the White Orchid @Mark Zug
+89 M Mikaeus, the Lunarch @Steven Belledin
+90 R Odric, Master Tactician @Michael Komarck
+91 U Orzhov Advokist @Jason A. Engle
+92 U Return to Dust @Wayne Reynolds
+93 R Riders of Gavony @Volkan Baǵa
+94 U Swords to Plowshares @Sam Wolfe Connelly
+95 R Unbreakable Formation @Matt Stewart
+96 R Victory's Envoy @Sara Winters
+97 R Aetherspouts @Dan Scott
+98 C Distant Melody @Omar Rayyan
+99 U Eternal Skylord @Johan Grenier
+100 R Forgotten Creation @Izzy
+101 R Havengul Runebinder @Bud Cook
+102 R Hour of Eternity @Tyler Jacobson
+103 R Rooftop Storm @John Stanko
+104 M Stitcher Geralf @Karla Ortiz
+105 R Undead Alchemist @Michael C. Hayes
+106 M Army of the Damned @Ryan Pancoast
+107 R Butcher of Malakir @Jason Chan
+108 R Cemetery Reaper @Dave Allsop
+109 U Corpse Augur @Scott M. Fischer
+110 R Dark Salvation @Cynthia Sheppard
+111 R Death Baron @Nils Hamm
+112 R Diregraf Colossus @Vincent Proce
+113 R Dread Summons @Izzy
+114 R Dreadhorde Invasion @Stanton Feng
+115 R Eater of Hope @Mathias Kollros
+116 R Endless Ranks of the Dead @Ryan Yee
+117 C Feed the Swarm @Andrey Kuzinskiy
+118 U Fleshbag Marauder @Mark Zug
+119 U Go for the Throat @David Rapoza
+120 R Gravespawn Sovereign @Adam Rex
+121 M Liliana, Death's Majesty @Chris Rallis
+122 U Liliana's Devotee @Colin Boyer
+123 R Liliana's Mastery @Kieran Yanner
+124 U Lord of the Accursed @Grzegorz Rutkowski
+125 R Midnight Reaper @Sidharth Chaturvedi
+126 R Open the Graves @Vincent Proce
+127 R Overseer of the Damned @rk post
+128 C Spark Reaper @Zoltan Boros
+129 U Syphon Flesh @Ironbrush
+130 U Undead Augur @Sara Winters
+131 R Zombie Apocalypse @Volkan Baǵa
+132 C Avacyn's Pilgrim @Jana Schirmer & Johannes Voss
+133 U Beast Within @Jesper Ejsing
+134 U Bestial Menace @Andrew Robinson
+135 U Biogenic Upgrade @Tomasz Jedruszek
+136 R Champion of Lambholt @Christopher Moeller
+137 R Death's Presence @Ryan Barger
+138 U Eternal Witness @Chris Rahn
+139 C Growth Spasm @Dan Scott
+140 R Gyre Sage @Tyler Jacobson
+141 U Inspiring Call @Dan Scott
+142 R Kessig Cagebreakers @Wayne England
+143 R Shamanic Revelation @Cynthia Sheppard
+144 R Somberwald Sage @Steve Argyle
+145 M Verdurous Gearhulk @Jaime Jones
+146 R Wild Beastmaster @Kev Walker
+147 C Yavimaya Elder @Matt Cavotta
+148 U Diregraf Captain @Slawomir Maniak
+149 U Enduring Scalelord @Clint Cearley
+150 M Gisa and Geralf @Karla Ortiz
+151 U Gleaming Overseer @Volkan Baǵa
+152 R Heron's Grace Champion @Todd Lockwood
+153 U Juniper Order Ranger @Greg Hildebrandt
+154 U Ruthless Deathfang @Filip Burburan
+155 M Sigarda, Heron's Grace @Chris Rahn
+156 U Trostani's Summoner @Howard Lyon
+157 C Arcane Signet @Dan Scott
+158 C Charcoal Diamond @Lindsey Look
+159 C Commander's Sphere @Ryan Alexander Lee
+160 R Lifecrafter's Bestiary @Izzy
+161 C Sky Diamond @Lindsey Look
+162 U Sol Ring @Mike Bierek
+163 U Swiftfoot Boots @Svetlin Velinov
+164 U Talisman of Dominance @Mike Dringenberg
+165 U Talisman of Unity @Mike Dringenberg
+166 U Blighted Woodland @Jason Felix
+167 C Bojuka Bog @Howard Lyon
+168 R Canopy Vista @Adam Paquette
+169 R Choked Estuary @Vincent Proce
+170 C Command Tower @Evan Shipard
+171 R Darkwater Catacombs @Monte Michael Moore
+172 U Dimir Aqueduct @John Avon
+173 R Exotic Orchard @Steven Belledin
+174 R Fortified Village @Cliff Childs
+175 U Krosan Verge @Ruxing Gao
+176 C Mortuary Mire @James Paick
+177 U Myriad Landscape @Jonas De Ro
+178 C Path of Ancestry @Alayna Danner
+179 U Rogue's Passage @Christine Choi
+180 U Selesnya Sanctuary @John Avon
+181 R Sungrass Prairie @Ron Spencer
+182 R Sunken Hollow @Adam Paquette
+183 U Tainted Isle @Alan Pollack
+184 R Temple of Deceit @Jonas De Ro
+185 R Temple of Plenty @Chris Ostrowski
+186 U Temple of the False God @James Zapata
+187 U Unclaimed Territory @Dimitar Marinski
+
+[tokens]
+b_0_0_zombie_army
+b_2_2_zombie
+b_2_2_zombie_decayed
+c_0_1_eldrazi_spawn_sac
+c_a_clue_draw
+g_1_1_snake
+g_1_2_spider_reach
+g_2_2_wolf
+g_3_3_beast
+g_3_3_centaur
+g_3_3_elephant
+g_4_4_beast
+g_4_4_rhino_trample
+u_x_x_zombie
+w_1_1_human_soldier
+w_1_1_spirit_flying
+w_2_2_knight_vigilance

@@ -2,8 +2,6 @@ Name:Lotus Cobra
 ManaCost:1 G
 Types:Creature Snake
 PT:2/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMana | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, add one mana of any color.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, add one mana of any color.
 SVar:TrigMana:DB$ Mana | Produced$ Any | AILogic$ MostProminentInComputerHand
-AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lotus_cobra.jpg
 Oracle:Landfall — Whenever a land enters the battlefield under your control, add one mana of any color.

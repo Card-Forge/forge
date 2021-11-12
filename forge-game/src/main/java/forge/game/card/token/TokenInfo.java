@@ -152,13 +152,13 @@ public class TokenInfo {
     }
 
     static protected void protoTypeApplyTextChange(final Card result, final SpellAbility sa) {
-     // update Token with CardTextChanges
+        // update Token with CardTextChanges
         Map<String, String> colorMap = sa.getChangedTextColors();
         Map<String, String> typeMap = sa.getChangedTextTypes();
         if (!colorMap.isEmpty()) {
             if (!result.isColorless()) {
                 // change Token Colors
-                byte color = CardUtil.getColors(result).getColor();
+                byte color = result.getColor().getColor();
 
                 for (final Map.Entry<String, String> e : colorMap.entrySet()) {
                     byte v = MagicColor.fromName(e.getValue());
@@ -303,14 +303,14 @@ public class TokenInfo {
         // need to be done after text change so it isn't affected by that
         if (sa.hasParam("TokenTypes")) {
             String types = sa.getParam("TokenTypes");
-            types = types.replace("ChosenType", sa.getHostCard().getChosenType());
+            types = types.replace("ChosenType", host.getChosenType());
             result.addType(types);
             result.setName(types);
         }
 
         if (sa.hasParam("TokenColors")) {
             String colors = sa.getParam("TokenColors");
-            colors = colors.replace("ChosenColor", sa.getHostCard().getChosenColor());
+            colors = colors.replace("ChosenColor", host.getChosenColor());
             result.setColor(MagicColor.toShortString(colors));
         }
 

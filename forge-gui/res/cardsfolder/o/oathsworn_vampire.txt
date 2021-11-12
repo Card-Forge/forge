@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Creature Vampire Knight
 PT:2/2
 K:CARDNAME enters the battlefield tapped.
-S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Graveyard | MayPlay$ True | CheckSVar$ X | SVarCompare$ GE1 | Description$ You may cast CARDNAME from your graveyard if you gained life this turn.
+S:Mode$ Continuous | Affected$ Card.Self | AffectedZone$ Graveyard | EffectZone$ Graveyard | MayPlay$ True | CheckSVar$ X | SVarCompare$ GE1 | Description$ You may cast CARDNAME from your graveyard if you gained life this turn.
 SVar:X:Count$LifeYouGainedThisTurn
 SVar:SacMe:3
 SVar:DiscardMe:3

@@ -71,7 +71,6 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-
         final Card card = sa.getHostCard();
         final Game game = card.getGame();
         final Player player = sa.getActivatingPlayer();
@@ -175,7 +174,6 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                             String title = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget", type);
                             cntToRemove = pc.chooseNumber(sa, title, 0, cntToRemove, params);
                         }
-
                     }
                     if (cntToRemove > 0) {
                         gameCard.subtractCounter(counterType, cntToRemove);
@@ -198,7 +196,6 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             card.addRemembered(Integer.valueOf(totalRemoved));
         }
     }
-
 
     protected void removeAnyType(GameEntity entity, int cntToRemove, SpellAbility sa) {
         boolean rememberRemoved = sa.hasParam("RememberRemoved");

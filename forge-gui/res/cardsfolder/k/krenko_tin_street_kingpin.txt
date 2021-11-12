@@ -3,8 +3,8 @@ ManaCost:2 R
 Types:Legendary Creature Goblin
 PT:1/2
 T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigPut | TriggerDescription$ Whenever CARDNAME attacks, put a +1/+1 counter on it, then create a number of 1/1 red Goblin creature tokens equal to CARDNAME's power.
-SVar:TrigPut:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBToken
-SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenScript$ r_1_1_goblin | TokenOwner$ You | LegacyImage$ r 1 1 goblin war | TokenAmount$ X
+SVar:TrigPut:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_goblin | TokenOwner$ You | LegacyImage$ r 1 1 goblin war | TokenAmount$ X
 SVar:X:Count$CardPower
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Token & Ability$Counters

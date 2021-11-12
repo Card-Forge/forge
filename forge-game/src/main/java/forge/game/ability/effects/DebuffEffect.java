@@ -13,6 +13,7 @@ import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.spellability.SpellAbility;
 
@@ -72,17 +73,16 @@ public class DebuffEffect extends SpellAbilityEffect {
             final List<String> removedKW = Lists.newArrayList();
             if (tgtC.isInPlay() && (!sa.usesTargeting() || tgtC.canBeTargetedBy(sa))) {
                 if (sa.hasParam("AllSuffixKeywords")) {
-                    String suffix = sa.getParam("AllSuffixKeywords");
-                    for (final KeywordInterface kw : tgtC.getKeywords()) {
-                        String keyword = kw.getOriginal();
-                        if (keyword.endsWith(suffix)) {
-                            kws.add(keyword);
+                    // this only for walk abilities, may to try better
+                    if (sa.getParam("AllSuffixKeywords").equals("walk")) {
+                        for (final KeywordInterface kw : tgtC.getKeywords(Keyword.LANDWALK)) {
+                            removedKW.add(kw.getOriginal());
                         }
                     }
                 }
 
                 // special for Protection:Card.<color>:Protection from <color>:*             
-                for (final KeywordInterface inst : tgtC.getKeywords()) {
+                for (final KeywordInterface inst : tgtC.getUnhiddenKeywords()) {
                     String keyword = inst.getOriginal();
                     if (keyword.startsWith("Protection:")) {
                         for (final String kw : kws) {
@@ -96,7 +96,7 @@ public class DebuffEffect extends SpellAbilityEffect {
                 for (final String kw : kws) {
                     // Check if some of the Keywords are Protection from <color>
                     if (!ProtectionFromColor && kw.startsWith("Protection from ")) {
-                        for(byte col : MagicColor.WUBRG) {
+                        for (byte col : MagicColor.WUBRG) {
                             final String colString = MagicColor.toLongString(col);
                             if (kw.endsWith(colString.toLowerCase())) {
                                 ProtectionFromColor = true;
@@ -110,7 +110,7 @@ public class DebuffEffect extends SpellAbilityEffect {
                 if (ProtectionFromColor && tgtC.hasKeyword(allColors)) {
                     final List<String> allColorsProtect = Lists.newArrayList();
 
-                    for(byte col : MagicColor.WUBRG) {
+                    for (byte col : MagicColor.WUBRG) {
                         allColorsProtect.add("Protection from " + MagicColor.toLongString(col).toLowerCase());
                     }
                     allColorsProtect.removeAll(kws);
@@ -123,7 +123,7 @@ public class DebuffEffect extends SpellAbilityEffect {
                 if (ProtectionFromColor && tgtC.hasKeyword(allColors)) {
                     final List<String> allColorsProtect = Lists.newArrayList();
 
-                    for(byte col : MagicColor.WUBRG) {
+                    for (byte col : MagicColor.WUBRG) {
                         final String colString = MagicColor.toLongString(col);
                         if (!kws.contains("Protection from " + colString)) {
                             allColorsProtect.add(
@@ -137,7 +137,7 @@ public class DebuffEffect extends SpellAbilityEffect {
                 }
 
                 removedKW.addAll(kws);
-                tgtC.addChangedCardKeywords(addedKW, removedKW, false, false, timestamp);
+                tgtC.addChangedCardKeywords(addedKW, removedKW, false, timestamp, 0);
             }
             if (!"Permanent".equals(sa.getParam("Duration"))) {
                 final GameCommand until = new GameCommand() {
@@ -145,13 +145,12 @@ public class DebuffEffect extends SpellAbilityEffect {
 
                     @Override
                     public void run() {
-                        tgtC.removeChangedCardKeywords(timestamp);
+                        tgtC.removeChangedCardKeywords(timestamp, 0);
                     }
                 };
                 addUntilCommand(sa, until);
             }
         }
-
     } // debuffResolve
 
 }

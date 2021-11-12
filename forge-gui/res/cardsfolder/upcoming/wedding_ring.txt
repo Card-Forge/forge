@@ -1,0 +1,12 @@
+Name:Wedding Ring
+ManaCost:2 W W
+Types:Artifact
+T:Mode$ ChangesZone | ValidCard$ Card.Self+wasCast | Origin$ Any | Destination$ Battlefield | Execute$ TrigCopy | TriggerDescription$ When CARDNAME enters the battlefield, if it was cast, target opponent creates a token that's a copy of it.
+SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Defined$ Self | Controller$ TargetedPlayer
+T:Mode$ Drawn | ValidCard$ Card.OppOwn | ValidPlayer$ Player.Opponent+Active | ValidPlayerControls$ Card.namedWedding Ring | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent who controls an artifact named Wedding Ring draws a card during their turn, you draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+T:Mode$ LifeGained | ValidPlayer$ Player.Opponent+Active | ValidPlayerControls$ Card.namedWedding Ring | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever an opponent who controls an artifact named Wedding Ring gains life during their turn, you gain that much life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:TriggerCount$LifeAmount
+DeckHas:Ability$LifeGain
+Oracle:When Wedding Ring enters the battlefield, if it was cast, target opponent creates a token that's a copy of it.\n\nWhenever an opponent who controls an artifact named Wedding Ring draws a card during their turn, you draw a card.\nWhenever an opponent who controls an artifact named Wedding Ring gains life during their turn, you gain that much life.

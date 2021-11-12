@@ -244,8 +244,6 @@ public class QuestAssets {
         this.credits = credits0;
     }
 
-
-
     // Credits
     /**
      * Adds the credits.

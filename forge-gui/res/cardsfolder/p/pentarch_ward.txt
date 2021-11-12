@@ -5,7 +5,7 @@ K:Enchant creature
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentInHumanDeck
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection:Card.ChosenColor:Protection from chosenColor:Card.CardUID_HostCardUID | Description$ Enchanted creature has protection from the chosen color. This effect doesn't remove CARDNAME.
 SVar:ChosenProtection:True

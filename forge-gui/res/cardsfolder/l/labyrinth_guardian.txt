@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Creature Illusion Warrior
 PT:2/3
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | SourceType$ Spell | TriggerDescription$ When CARDNAME becomes the target of a spell, sacrifice it.
-SVar:TrigSac:DB$Sacrifice | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 K:Embalm:3 U
 SVar:Targeting:Dies
 DeckHas:Ability$Token

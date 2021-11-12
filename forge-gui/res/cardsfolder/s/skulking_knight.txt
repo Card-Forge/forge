@@ -4,7 +4,7 @@ Types:Creature Zombie Knight
 PT:3/3
 K:Flanking
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
-SVar:TrigSac:DB$Sacrifice | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:Targeting:Dies
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skulking_knight.jpg
 Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\nWhen Skulking Knight becomes the target of a spell or ability, sacrifice it.

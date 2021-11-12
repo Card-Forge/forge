@@ -28,8 +28,7 @@ public class TapOrUntapAllEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("ValidMessage")) {
             sb.append(sa.getParam("ValidMessage"));
-        }
-        else {
+        } else {
             final List<Card> tgtCards = getTargetCards(sa);
             sb.append(StringUtils.join(tgtCards, ", "));
         }
@@ -67,13 +66,12 @@ public class TapOrUntapAllEffect extends SpellAbilityEffect {
 
         toTap = sa.getActivatingPlayer().getController().chooseBinary(sa, sb.toString(), PlayerController.BinaryChoiceType.TapOrUntap);
 
-
         for (final Card cad : validCards) {
             if (cad.isInPlay()) {
                 if (toTap) {
-                    cad.tap();
+                    cad.tap(true);
                 } else {
-                    cad.untap();
+                    cad.untap(true);
                 }
             }
         }

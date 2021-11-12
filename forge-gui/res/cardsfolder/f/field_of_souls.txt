@@ -2,7 +2,7 @@ Name:Field of Souls
 ManaCost:2 W W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken+YouOwn | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever a nontoken creature is put into your graveyard from the battlefield, create a 1/1 white Spirit creature token with flying.
-SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | LegacyImage$ w 1 1 spirit flying tmp
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | LegacyImage$ w 1 1 spirit flying tmp
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/field_of_souls.jpg
 Oracle:Whenever a nontoken creature is put into your graveyard from the battlefield, create a 1/1 white Spirit creature token with flying.

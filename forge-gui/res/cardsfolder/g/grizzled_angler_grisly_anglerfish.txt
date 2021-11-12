@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Creature Human
 PT:2/3
 A:AB$ Mill | Cost$ T | Defined$ You | NumCards$ 2 | SubAbility$ DBTransform | SpellDescription$ Mill two cards. Then if there is a colorless creature card in your graveyard, transform CARDNAME.
-SVar:DBTransform:DB$SetState | Defined$ Self | Mode$ Transform | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
 SVar:X:Count$ValidGraveyard Creature.YouOwn+Colorless
 AlternateMode:DoubleFaced
 DeckHints:Ability$Delirium & Color$Colorless

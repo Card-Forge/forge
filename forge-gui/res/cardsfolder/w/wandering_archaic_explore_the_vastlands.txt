@@ -12,8 +12,8 @@ ALTERNATE
 Name:Explore the Vastlands
 ManaCost:3
 Types:Sorcery
-A:SP$ DigMultiple | Defined$ Player | DigNum$ 5 | Optional$ True | ChangeValid$ Land,Spell.HasNoSubtype Aura | RestRandomOrder$ True | SpellDescription$ Each player may reveal a land card and/or an instant or sorcery card from among them, then puts the cards they revealed this way into their hand and the rest on the bottom of their library in a random order.
-SVar:DBGainLife:DB$ GainLife | Defined$ Player | LifeAmount$ 3
+A:SP$ DigMultiple | Defined$ Player | DigNum$ 5 | Optional$ True | ChangeValid$ Land,Spell.HasNoSubtype Aura | RestRandomOrder$ True | SubAbility$ DBGainLife | SpellDescription$ Each player looks at the top five cards of their library and may reveal a land card and/or an instant or sorcery card from among them. Each player puts the cards they revealed this way into their hand and the rest on the bottom of their library in a random order. Each player gains 3 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ Player | LifeAmount$ 3 | StackDescription$ None
 DeckHas:Ability$LifeGain
 DeckHints:Type$Instant|Sorcery
 Oracle:Each player looks at the top five cards of their library and may reveal a land card and/or an instant or sorcery card from among them. Each player puts the cards they revealed this way into their hand and the rest on the bottom of their library in a random order. Each player gains 3 life.

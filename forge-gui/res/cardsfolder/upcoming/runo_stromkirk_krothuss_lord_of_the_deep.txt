@@ -1,0 +1,31 @@
+Name:Runo Stromkirk
+ManaCost:1 U B
+Types:Legendary Creature Vampire Cleric
+PT:1/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, put up to one target creature card from your graveyard on top of your library.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select up to one target creature card from your graveyard | TargetMin$ 0 | TargetMax$ 1 | AITgts$ Creature.cmcGE6
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPeek | TriggerDescription$ At the beginning of your upkeep, look at the top card of your library. You may reveal that card. If a creature card with mana value 6 or greater is revealed this way, transform CARDNAME.
+SVar:TrigPeek:DB$ PeekAndReveal | PeekAmount$ 1 | RevealOptional$ True | RememberRevealed$ True | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | ConditionDefined$ Remembered | ConditionPresent$ Creature.cmcGE6 | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AlternateMode:DoubleFaced
+DeckHas:Ability$Graveyard
+Oracle:Flying\nWhen Runo Stromkirk enters the battlefield, put up to one target creature card from your graveyard on top of your library.\nAt the beginning of your upkeep, look at the top card of your library. You may reveal that card. If a creature card with mana value 6 or greater is revealed this way, transform Runo Stromkirk.
+
+ALTERNATE
+
+Name:Krothuss, Lord of the Deep
+ManaCost:no cost
+Colors:blue,black
+Types:Legendary Creature Kraken Horror
+PT:3/5
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ Whenever CARDNAME attacks, create a tapped and attacking token that's a copy of another target attacking creature. If that creature is a Kraken, Leviathan, Octopus, or Serpent, create two of those tokens instead.
+SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Creature.Other+attacking | TgtPrompt$ Select another target attacking creature | TokenTapped$ True | TokenAttacking$ True | NumCopies$ X | AITgts$ Kraken.Other+attacking,Leviathan.Other+attacking,Octopus.Other+attacking,Serpent.Other+attacking
+SVar:X:Count$Compare Y GE1.2.1
+SVar:Y:Targeted$Valid Kraken,Leviathan,Octopus,Serpent
+DeckHas:Ability$Token
+DeckHints:Type$Kraken|Leviathan|Octopus|Serpent
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nWhenever Krothuss, Lord of the Deep attacks, create a tapped and attacking token that's a copy of another target attacking creature. If that creature is a Kraken, Leviathan, Octopus, or Serpent, create two of those tokens instead.

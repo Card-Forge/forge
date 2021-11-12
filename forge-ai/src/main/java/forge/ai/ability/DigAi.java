@@ -2,17 +2,18 @@ package forge.ai.ability;
 
 import java.util.Map;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.ai.AiAttackController;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCombat;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -21,9 +22,12 @@ import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.player.PlayerCollection;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
+import forge.util.collect.FCollection;
 
 
 public class DigAi extends SpellAbilityAi {
@@ -120,10 +124,11 @@ public class DigAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final SpellAbility root = sa.getRootAbility();
-        final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
+        PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
+        Player opp = targetableOpps.min(PlayerPredicates.compareByLife());
         if (sa.usesTargeting()) {
             sa.resetTargets();
-            if (mandatory && sa.canTarget(opp)) {
+            if (mandatory && opp != null) {
                 sa.getTargets().add(opp);
             } else if (mandatory && sa.canTarget(ai)) {
                 sa.getTargets().add(ai);
@@ -149,12 +154,7 @@ public class DigAi extends SpellAbilityAi {
             Card bestChoice = ComputerUtilCard.getBestCreatureAI(valid);
             if (bestChoice == null) {
                 // no creatures, but maybe there's a morphable card that can be played as a creature?
-                CardCollection morphs = CardLists.filter(valid, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(Card card) {
-                        return card.hasKeyword(Keyword.MORPH);
-                    }
-                });
+                CardCollection morphs = CardLists.getKeyword(valid, Keyword.MORPH);
                 if (!morphs.isEmpty()) {
                     bestChoice = ComputerUtilCard.getBestAI(morphs);
                 }
@@ -162,6 +162,13 @@ public class DigAi extends SpellAbilityAi {
 
             // still nothing, so return the worst card since it'll be unplayable from exile (e.g. Vivien, Champion of the Wilds)
             return bestChoice != null ? bestChoice : ComputerUtilCard.getWorstAI(valid);
+        } else if ("EmulateScry".equals(sa.getParam("AILogic"))) {
+            for (Card choice : valid) {
+                if (ComputerUtil.scryWillMoveCardToBottomOfLibrary(ai, choice)) {
+                    return choice;
+                }
+            }
+            return null;
         }
 
         if (sa.getActivatingPlayer().isOpponentOf(ai) && relatedPlayer.isOpponentOf(ai)) {
@@ -176,8 +183,20 @@ public class DigAi extends SpellAbilityAi {
      */
     @Override
     public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
+        if (params.containsKey("Attacker")) {
+            return (Player) ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), new FCollection<GameEntity>(options));
+        }
         // an opponent choose a card from
         return Iterables.getFirst(options, null);
+    }
+
+    @Override
+    protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options, Map<String, Object> params) {
+        if (params.containsKey("Attacker")) {
+            return ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), new FCollection<GameEntity>(options));
+        }
+        // should not be reached
+        return super.chooseSinglePlayerOrPlaneswalker(ai, sa, options, params);
     }
 
     /* (non-Javadoc)

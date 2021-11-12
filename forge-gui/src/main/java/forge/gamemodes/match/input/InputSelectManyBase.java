@@ -50,8 +50,7 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     protected void refresh() {
         if (hasAllTargets()) {
             selectButtonOK();
-        }
-        else {
+        } else {
             this.showMessage();
         }
     }
@@ -73,7 +72,7 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
             sb.append("\n\n").append(getMessage());
             showMessage(sb.toString(), card);
         } else {
-            if (card!=null) { 
+            if (card != null) { 
                 showMessage(getMessage(), card);
             } else {
                 showMessage(getMessage());
@@ -122,6 +121,6 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     }
 
     public final void setCancelAllowed(boolean allow) {
-        this.allowCancel = allow ;
+        this.allowCancel = allow;
     }
 }

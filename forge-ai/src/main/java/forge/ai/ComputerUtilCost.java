@@ -233,7 +233,8 @@ public class ComputerUtilCost {
     }
 
     public static boolean checkForManaSacrificeCost(final Player ai, final Cost cost, final Card source, final SpellAbility sourceAbility) {
-        if (cost == null) {
+        // TODO cheating via autopay can still happen, need to get the real ai player from controlledBy
+        if (cost == null || !ai.isAI()) {
             return true;
         }
         for (final CostPart part : cost.getCostParts()) {
@@ -588,6 +589,18 @@ public class ComputerUtilCost {
             }
         }
 
+        // Ward - will be accounted for when rechecking a targeted ability
+        if (sa.usesTargeting()) {
+            for (Card tgt : sa.getTargets().getTargetCards()) {
+                if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(sa.getHostCard().getController())) {
+                    Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
+                    if (wardCost.hasManaCost()) {
+                        extraManaNeeded += wardCost.getTotalMana().getCMC();
+                    }
+                }
+            }
+        }
+
         // TODO: Alternate costs which involve both paying mana and tapping a card, e.g. Zahid, Djinn of the Lamp
         // Current AI decides on each part separately, thus making it possible for the AI to cheat by
         // tapping a mana source for mana and for the tap cost at the same time. Until this is improved, AI
@@ -639,7 +652,7 @@ public class ComputerUtilCost {
                 return false;
             }
         } else if ("OnlyDontControl".equals(aiLogic)) {
-            if (sa.getHostCard() == null || payer.equals(sa.getHostCard().getController())) {
+            if (source == null || payer.equals(source.getController())) {
                 return false;
             }
         } else if ("Paralyze".equals(aiLogic)) {
@@ -777,7 +790,7 @@ public class ComputerUtilCost {
             if (sa.hasParam("AIMaxTgtsCount")) {
                 // Cards that have confusing costs for the AI (e.g. Eliminate the Competition) can have forced max target constraints specified
                 // TODO: is there a better way to predict things like "sac X" costs without needing a special AI variable?
-                val = ObjectUtils.min(val, AbilityUtils.calculateAmount(sa.getHostCard(), "Count$" + sa.getParam("AIMaxTgtsCount"), sa));
+                val = ObjectUtils.min(val, AbilityUtils.calculateAmount(source, "Count$" + sa.getParam("AIMaxTgtsCount"), sa));
             }
         }
 

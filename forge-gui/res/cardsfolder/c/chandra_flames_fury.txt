@@ -4,6 +4,6 @@ Types:Legendary Planeswalker Chandra
 Loyalty:4
 A:AB$ DealDamage | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 A:AB$ DealDamage | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 4 damage to target creature and 2 damage to that creature's controller.
-SVar:DBDealDamage:DB$DealDamage | Defined$ TargetedController | NumDmg$ 2
+SVar:DBDealDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 2
 A:AB$ DamageAll | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Player | ValidPlayers$ Targeted | ValidCards$ Creature.TargetedPlayerCtrl | NumDmg$ 10 | ValidDescription$ target player and each creature that player controls. | SpellDescription$ CARDNAME deals 10 damage to target player and each creature that player controls.
 Oracle:[+1]: Chandra, Flame's Fury deals 2 damage to any target.\n[−2]: Chandra, Flame's Fury deals 4 damage to target creature and 2 damage to that creature's controller.\n[−8]: Chandra, Flame's Fury deals 10 damage to target player and each creature that player controls.

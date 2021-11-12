@@ -9,16 +9,6 @@ import forge.game.spellability.SpellAbility;
 
 public class LifeExchangeEffect extends SpellAbilityEffect {
 
-    // *************************************************************************
-    // ************************ EXCHANGE LIFE **********************************
-    // *************************************************************************
-
-
-
-    // *************************************************************************
-    // ************************* LOSE LIFE *************************************
-    // *************************************************************************
-
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -27,7 +17,6 @@ public class LifeExchangeEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
         final Player activatingPlayer = sa.getActivatingPlayer();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
-
 
         if (tgtPlayers.size() == 1) {
             sb.append(activatingPlayer).append(" exchanges life totals with ");
@@ -69,16 +58,15 @@ public class LifeExchangeEffect extends SpellAbilityEffect {
 
         if ((life1 > life2) && p1.canLoseLife() && p2.canGainLife()) {
             final int diff = life1 - life2;
-            p1.loseLife(diff);
+            p1.loseLife(diff, false, false);
             p2.gainLife(diff, source, sa);
         } else if ((life2 > life1) && p2.canLoseLife() && p1.canGainLife()) {
             final int diff = life2 - life1;
-            p2.loseLife(diff);
+            p2.loseLife(diff, false, false);
             p1.gainLife(diff, source, sa);
         } else {
             // they are equal, so nothing to do
         }
-
     }
 
 }

@@ -1,0 +1,14 @@
+Name:Sigarda's Vanguard
+ManaCost:4 W
+Types:Creature Angel
+PT:3/3
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, choose any number of creatures with different powers. Those creatures gain double strike until end of turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChoose | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, choose any number of creatures with different powers. Those creatures gain double strike until end of turn.
+SVar:TrigChoose:DB$ ChooseCard | MinAmount$ 0 | Amount$ Max | Choices$ Creature | WithDifferentPowers$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ ChosenCard | KW$ Double strike | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:Max:Count$DifferentPower_Creature
+SVar:HasAttackEffect:TRUE
+Oracle:Flash\nFlying\nWhenever Sigarda's Vanguard enters the battlefield or attacks, choose any number of creatures with different powers. Those creatures gain double strike until end of turn.

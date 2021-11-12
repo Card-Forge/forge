@@ -23,7 +23,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
 public class MillAi extends SpellAbilityAi {
@@ -86,7 +85,7 @@ public class MillAi extends SpellAbilityAi {
             return false;   // prevent self and each player mill when library is small
         }
         
-        if (sa.getTargetRestrictions() != null && !targetAI(ai, sa, false)) {
+        if (sa.usesTargeting() && !targetAI(ai, sa, false)) {
             return false;
         }
 
@@ -101,10 +100,9 @@ public class MillAi extends SpellAbilityAi {
     }
 
     private boolean targetAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
 
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             sa.resetTargets();
             final Map<Player, Integer> list = Maps.newHashMap();
             for (final Player o : ai.getOpponents()) {
@@ -119,8 +117,7 @@ public class MillAi extends SpellAbilityAi {
 
                 // if it would mill none, try other one
                 if (numCards <= 0) {
-                    if ((sa.getParam("NumCards").equals("X") || sa.getParam("NumCards").equals("Z")))
-                    {
+                    if ((sa.getParam("NumCards").equals("X") || sa.getParam("NumCards").equals("Z"))) {
                         if (source.getSVar("X").startsWith("Count$xPaid")) {
                             // Spell is PayX based
                         } else if (source.getSVar("X").startsWith("Remembered$ChromaSource")) {
@@ -138,7 +135,7 @@ public class MillAi extends SpellAbilityAi {
                     continue;
                 }
 
-                // if that player can be miled, select this one.
+                // if that player can be milled, select this one.
                 if (numCards >= pLibrary.size()) {
                     sa.getTargets().add(o);
                     return true;

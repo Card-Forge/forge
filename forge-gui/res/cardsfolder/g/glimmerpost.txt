@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land Locus
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 1 life for each Locus on the battlefield.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ X
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X
 SVar:X:Count$TypeOnBattlefield.Locus
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glimmerpost.jpg
 Oracle:When Glimmerpost enters the battlefield, you gain 1 life for each Locus on the battlefield.\n{T}: Add {C}.

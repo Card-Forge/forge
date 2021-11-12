@@ -2,8 +2,8 @@ Name:Titan's Revenge
 ManaCost:X R R
 Types:Sorcery
 A:SP$ DealDamage | Cost$ X R R | NumDmg$ X | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | SubAbility$ DBClash | SpellDescription$ CARDNAME deals X damage to any target. Clash with an opponent. If you win, return CARDNAME to it's owner's hand.
-SVar:DBClash:DB$Clash | WinSubAbility$ DBReturn
-SVar:DBReturn:DB$ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Hand
+SVar:DBClash:DB$ Clash | WinSubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Hand
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/titans_revenge.jpg
 Oracle:Titan's Revenge deals X damage to any target. Clash with an opponent. If you win, return Titan's Revenge to its owner's hand. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)

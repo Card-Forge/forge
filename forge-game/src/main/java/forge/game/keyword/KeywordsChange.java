@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -33,20 +33,19 @@ import forge.game.trigger.Trigger;
  * <p>
  * Card_Keywords class.
  * </p>
- * 
+ *
  * @author Forge
  */
-public class KeywordsChange  implements Cloneable {
+public class KeywordsChange implements Cloneable {
     private KeywordCollection keywords = new KeywordCollection();
     private List<KeywordInterface> removeKeywordInterfaces = Lists.newArrayList();
     private List<String> removeKeywords = Lists.newArrayList();
     private boolean removeAllKeywords;
-    private boolean removeIntrinsicKeywords;
 
     /**
-     * 
+     *
      * Construct a new {@link KeywordsChange}.
-     * 
+     *
      * @param keywordList the list of keywords to add.
      * @param removeKeywordList the list of keywords to remove.
      * @param removeAll whether to remove all keywords.
@@ -54,8 +53,7 @@ public class KeywordsChange  implements Cloneable {
     public KeywordsChange(
             final Iterable<String> keywordList,
             final Collection<String> removeKeywordList,
-            final boolean removeAll,
-            final boolean removeIntrinsic) {
+            final boolean removeAll) {
         if (keywordList != null) {
             this.keywords.addAll(keywordList);
         }
@@ -65,14 +63,12 @@ public class KeywordsChange  implements Cloneable {
         }
 
         this.removeAllKeywords = removeAll;
-        this.removeIntrinsicKeywords = removeIntrinsic;
     }
 
     public KeywordsChange(
             final Collection<KeywordInterface> keywordList,
             final Collection<KeywordInterface> removeKeywordInterfaces,
-            final boolean removeAll,
-            final boolean removeIntrinsic) {
+            final boolean removeAll) {
         if (keywordList != null) {
             this.keywords.insertAll(keywordList);
         }
@@ -82,13 +78,12 @@ public class KeywordsChange  implements Cloneable {
         }
 
         this.removeAllKeywords = removeAll;
-        this.removeIntrinsicKeywords = removeIntrinsic;
     }
 
     /**
-     * 
+     *
      * getKeywords.
-     * 
+     *
      * @return ArrayList<String>
      */
     public final Collection<KeywordInterface> getKeywords() {
@@ -99,9 +94,9 @@ public class KeywordsChange  implements Cloneable {
         return this.removeKeywordInterfaces;
     }
     /**
-     * 
+     *
      * getRemoveKeywords.
-     * 
+     *
      * @return ArrayList<String>
      */
     public final List<String> getRemoveKeywords() {
@@ -109,17 +104,13 @@ public class KeywordsChange  implements Cloneable {
     }
 
     /**
-     * 
+     *
      * isRemoveAllKeywords.
-     * 
+     *
      * @return boolean
      */
     public final boolean isRemoveAllKeywords() {
         return this.removeAllKeywords;
-    }
-
-    public final boolean isRemoveIntrinsicKeywords() {
-        return this.removeIntrinsicKeywords;
     }
 
     /**
@@ -145,42 +136,6 @@ public class KeywordsChange  implements Cloneable {
 
     public final boolean removeKeywordfromAdd(final String keyword) {
         return keywords.remove(keyword);
-    }
-    
-    public final void addKeyword(final String keyword) {
-        keywords.add(keyword);
-    }
-    
-    public final KeywordsChange merge(
-            final Collection<KeywordInterface> keywordList,
-            final Collection<KeywordInterface> removeKeywordList,
-            final boolean removeAll,
-            final boolean removeIntrinsic) {
-        KeywordsChange result = new KeywordsChange(keywordList, removeKeywordList, removeAll, removeIntrinsic);
-        result.__merge(this);
-        return result;
-    }
-    
-    public final KeywordsChange merge(
-            final Iterable<String> keywordList,
-            final Collection<String> removeKeywordList,
-            final boolean removeAll,
-            final boolean removeIntrinsic) {
-        KeywordsChange result = new KeywordsChange(keywordList, removeKeywordList, removeAll, removeIntrinsic);
-        result.__merge(this);
-        return result;
-    }
-    
-    private void __merge(KeywordsChange other) {
-        keywords.insertAll(other.getKeywords());
-        removeKeywords.addAll(other.removeKeywords);
-        removeKeywordInterfaces.addAll(other.removeKeywordInterfaces);
-        if (other.removeAllKeywords) {
-            removeAllKeywords = true;
-        }
-        if (other.removeIntrinsicKeywords) {
-            removeIntrinsicKeywords = true;
-        }
     }
 
     public void setHostCard(final Card host) {

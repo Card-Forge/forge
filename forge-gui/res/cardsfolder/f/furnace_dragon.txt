@@ -5,6 +5,6 @@ PT:5/5
 K:Affinity:Artifact
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromHand+Self | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, exile all artifacts.
-SVar:TrigExile:DB$ChangeZoneAll | ChangeType$ Artifact | Origin$ Battlefield | Destination$ Exile
+SVar:TrigExile:DB$ ChangeZoneAll | ChangeType$ Artifact | Origin$ Battlefield | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/furnace_dragon.jpg
 Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nFlying\nWhen Furnace Dragon enters the battlefield, if you cast it from your hand, exile all artifacts.

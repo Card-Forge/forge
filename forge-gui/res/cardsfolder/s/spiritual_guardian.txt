@@ -3,6 +3,6 @@ ManaCost:3 W W
 Types:Creature Spirit
 PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 4 life.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ 4
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiritual_guardian.jpg
 Oracle:When Spiritual Guardian enters the battlefield, you gain 4 life.

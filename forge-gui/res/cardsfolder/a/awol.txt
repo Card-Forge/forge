@@ -1,0 +1,6 @@
+Name:AWOL
+ManaCost:2 W
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBRemove | SpellDescription$ Exile target attacking creature. Then remove it from the game. Then put it into the absolutely-removed-from-the-freaking-game-forever zone.
+SVar:DBRemove:DB$ RemoveFromGame | Defined$ Targeted | StackDescription$ Then remove it from the game. Then put it into the absolutely-removed-from-the-freaking-game-forever zone.
+Oracle:Exile target attacking creature. Then remove it from the game. Then put it into the absolutely-removed-from-the-freaking-game-forever zone.

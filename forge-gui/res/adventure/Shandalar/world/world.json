@@ -1,0 +1,16 @@
+{
+"width": 700,
+"height": 700,
+"playerStartPosY": 0.5,
+"playerStartPosX": 0.5,    
+"noiseZoomBiome": 30, 
+"tileSize": 16,      
+"maxRoadDistance": 1000,
+"roadTileset":{ 
+    "tilesetName":"Road",
+    "tilesetAtlas":"world/tilesets/terrain.atlas", 
+		"color": "ffffff" 
+},
+"biomesSprites":"world/sprites/map_sprites.json",
+"biomesNames": [ "world/base.json","world/waste.json","world/white.json","world/blue.json","world/black.json","world/red.json","world/green.json"]
+}

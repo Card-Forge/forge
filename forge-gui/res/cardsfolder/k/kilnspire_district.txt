@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Plane Ravnica
 T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ PutCounter | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your precombat main phase, put a charge counter on CARDNAME, then add {R} for each charge counter on it.
 T:Mode$ Phase | PreCombatMain$ True | ValidPlayer$ You | TriggerZones$ Command | Execute$ PutCounter | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your precombat main phase, put a charge counter on CARDNAME, then add {R} for each charge counter on it.
-SVar:PutCounter:DB$PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1 | SubAbility$ DBMana
+SVar:PutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1 | SubAbility$ DBMana
 SVar:DBMana:DB$ Mana | Produced$ R | Amount$ Y
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, you may pay {X}. If you do, CARDNAME deals X damage to any target.
 SVar:RolledChaos:AB$ DealDamage | Cost$ X | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X

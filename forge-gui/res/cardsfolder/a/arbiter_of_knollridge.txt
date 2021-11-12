@@ -4,7 +4,7 @@ Types:Creature Giant Wizard
 PT:5/5
 K:Vigilance
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigLife | TriggerDescription$ When CARDNAME enters the battlefield, each player's life total becomes the highest life total among all players.
-SVar:TrigLife:DB$SetLife | Defined$ Player | LifeAmount$ X
+SVar:TrigLife:DB$ SetLife | Defined$ Player | LifeAmount$ X
 SVar:X:PlayerCountPlayers$HighestLifeTotal
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arbiter_of_knollridge.jpg
 Oracle:Vigilance\nWhen Arbiter of Knollridge enters the battlefield, each player's life total becomes the highest life total among all players.

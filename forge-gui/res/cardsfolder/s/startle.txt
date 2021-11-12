@@ -1,0 +1,8 @@
+Name:Startle
+ManaCost:1 U
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | IsCurse$ True | SubAbility$ DBToken | StackDescription$ {c:Targeted} gets -2/-0 until end of turn. | SpellDescription$ Target creature gets -2/-0 until end of turn.
+SVar:DBToken:DB$ Token | TokenScript$ b_2_2_zombie_decayed | SubAbility$ DBDraw | SpellDescription$ Create a 2/2 black Zombie creature token with decayed. (It can't block. When it attacks, sacrifice it at end of combat.)
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$Token & Ability$Sacrifice
+Oracle:Target creature gets -2/-0 until end of turn. Create a 2/2 black Zombie creature token with decayed. (It can't block. When it attacks, sacrifice it at end of combat.)\nDraw a card.

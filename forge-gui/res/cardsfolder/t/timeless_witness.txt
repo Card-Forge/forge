@@ -3,7 +3,7 @@ ManaCost:2 G G
 Types:Creature Human Shaman
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target card from your graveyard to your hand.
-SVar:TrigChangeZone:DB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.YouCtrl
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.YouCtrl
 K:Eternalize:5 G G
 DeckHas:Ability$Token
 Oracle:When Timeless Witness enters the battlefield, return target card from your graveyard to your hand.\nEternalize {5}{G}{G} ({5}{G}{G}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie Human Shaman with no mana cost. Eternalize only as a sorcery.)

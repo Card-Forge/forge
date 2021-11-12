@@ -1,7 +1,7 @@
 Name:Combo Attack
 ManaCost:2 G
 Types:Sorcery
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature.YourTeamCtrl | TgtPrompt$ Select two target creatures your team controls | ImprintCards$ Targeted | TargetMin$ 2 | TargetMax$ 2 | AILogic$ PowerDmg | SubAbility$ DBPump | StackDescription$ SpellDescription | SpellDescription$ Two target creatures your team controls each deal damage equal to their power to target creature.
+A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature.YourTeamCtrl | TgtPrompt$ Select two target creatures your team controls | ImprintCards$ ThisTargetedCard | TargetMin$ 2 | TargetMax$ 2 | AILogic$ PowerDmg | SubAbility$ DBPump | StackDescription$ SpellDescription | SpellDescription$ Two target creatures your team controls each deal damage equal to their power to target creature.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to be dealt damage | RememberObjects$ ThisTargetedCard | IsCurse$ True | SubAbility$ DBEachDamage | StackDescription$ None
 SVar:DBEachDamage:DB$ EachDamage | ValidCards$ Creature.IsImprinted | NumDmg$ X | DefinedCards$ Remembered | SubAbility$ DBCleanup | StackDescription$ None
 #NumDmg isn't really used here. It is left for clarity. The AF pulls Damage straight from "X" hardcoded.

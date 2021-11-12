@@ -1,0 +1,7 @@
+Name:Fateful Absence
+ManaCost:1 W
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SubAbility$ DBInvestigate | SpellDescription$ Destroy target creature or planeswalker. Its controller investigates. (They create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:DBInvestigate:DB$ Investigate | Num$ 1 | Defined$ TargetedController | StackDescription$ {p:TargetedController} investigates.
+DeckHas:Ability$Token & Ability$Sacrifice
+Oracle:Destroy target creature or planeswalker. Its controller investigates. (They create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")

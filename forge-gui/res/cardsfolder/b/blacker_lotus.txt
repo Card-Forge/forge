@@ -1,0 +1,6 @@
+Name:Blacker Lotus
+ManaCost:0
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 4 | AILogic$ BlackLotus | SubAbility$ DBTearUpAndRemove | SpellDescription$ Tear CARDNAME into pieces. Add four mana of any one color. Remove the pieces from the game.
+SVar:DBTearUpAndRemove:DB$ RemoveFromMatch | Defined$ Self | LogMessage$ Torn to pieces and removed
+Oracle:{T}: Tear Blacker Lotus into pieces. Add four mana of any one color. Remove the pieces from the game.

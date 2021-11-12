@@ -1,0 +1,7 @@
+Name:Organ Hoarder
+ManaCost:3 U
+Types:Creature Zombie
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top three cards of your library, then put one of them into your hand and the rest into your graveyard.
+SVar:TrigDig:DB$Dig | DigNum$ 3 | ChangeNum$ 1 | DestinationZone2$ Graveyard
+Oracle:When Organ Hoarder enters the battlefield, look at the top three cards of your library, then put one of them into your hand and the rest into your graveyard.

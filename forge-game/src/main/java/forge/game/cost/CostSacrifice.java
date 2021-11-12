@@ -74,10 +74,18 @@ public class CostSacrifice extends CostPartWithList {
     @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Sacrifice ");
+        if (getAmount().equals("X")) {
+            sb.append("You may sacrifice ");
+        } else {
+            sb.append("Sacrifice ");
+        }
 
         if (payCostFromSource()) {
-            sb.append(getType());
+            sb.append(getTypeDescription() == null || !getTypeDescription().startsWith("this")
+                    ? getType() : getTypeDescription());
+        } else if (getAmount().equals("X")) {
+            String typeDesc = getType().toLowerCase().replace(";","s and/or ");
+            sb.append("any number of ").append(typeDesc).append("s");
         } else {
             final String desc = ObjectUtils.firstNonNull(getTypeDescription(), getType());
             sb.append(Cost.convertAmountTypeToWords(convertAmount(), getAmount(), desc));
@@ -119,7 +127,6 @@ public class CostSacrifice extends CostPartWithList {
             // choice, it can be Paid even if it's 0
         }
         else return source.canBeSacrificedBy(ability);
-
     }
 
     @Override

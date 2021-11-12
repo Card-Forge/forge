@@ -96,6 +96,7 @@ public class ImageCache {
     public static void clear() {
         _CACHE.invalidateAll();
         _missingIconKeys.clear();
+        ImageKeys.clearMissingCards();
     }
 
     /**
@@ -157,8 +158,13 @@ public class ImageCache {
         return getOriginalImageInternal(imageKey, useDefaultIfNotFound, cardView).getLeft();
     }
 
+    public static Pair<BufferedImage, Boolean> getCardOriginalImageInfo(String imageKey, boolean useDefaultIfNotFound) {
+        return getOriginalImageInternal(imageKey, useDefaultIfNotFound, null);
+    }
+
     // return the pair of image and a flag to indicate if it is a placeholder image.
-    private static Pair<BufferedImage, Boolean> getOriginalImageInternal(String imageKey, boolean useDefaultIfNotFound, CardView cardView) {
+    private static Pair<BufferedImage, Boolean> getOriginalImageInternal(String imageKey, boolean useDefaultIfNotFound,
+                                                                         CardView cardView) {
         if (null == imageKey) {
             return Pair.of(null, false);
         }
@@ -168,11 +174,11 @@ public class ImageCache {
         if (altState)
             imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
         if (imageKey.startsWith(ImageKeys.CARD_PREFIX)) {
-            PaperCard pc = ImageUtil.getPaperCardFromImageKey(imageKey);
-            ipc = pc;
-            imageKey = ImageUtil.getImageKey(pc, altState, true);
-            if (StringUtils.isBlank(imageKey)) {
-                return Pair.of(_defaultImage, true);
+            ipc = ImageUtil.getPaperCardFromImageKey(imageKey);
+            if (ipc != null) {
+                imageKey = altState ? ipc.getCardAltImageKey() : ipc.getCardImageKey();
+                if (StringUtils.isBlank(imageKey))
+                    return Pair.of(_defaultImage, true);
             }
         }
 
@@ -184,7 +190,7 @@ public class ImageCache {
         if (useArtCrop) {
             if (ipc != null && ipc.getRules().getSplitType() == CardSplitType.Flip) {
                 // Art crop will always use front face as image key for flip cards
-                imageKey = ImageUtil.getImageKey((PaperCard) ipc, false, true);
+                imageKey = ((PaperCard) ipc).getCardImageKey();
             }
             imageKey = TextUtil.fastReplace(imageKey, ".full", ".artcrop");
         }
@@ -206,6 +212,7 @@ public class ImageCache {
         boolean noBorder = !useArtCrop && !isPreferenceEnabled(ForgePreferences.FPref.UI_RENDER_BLACK_BORDERS);
         boolean fetcherEnabled = isPreferenceEnabled(ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER);
         boolean isPlaceholder = (original == null) && fetcherEnabled;
+        String setCode = imageKey.split("/")[0].trim().toUpperCase();
 
         // If the user has indicated that they prefer Forge NOT render a black border, round the image corners
         // to account for JPEG images that don't have a transparency.
@@ -213,7 +220,6 @@ public class ImageCache {
             // use a quadratic equation to calculate the needed radius from an image dimension
             int radius;
             float width = original.getWidth();
-            String setCode = imageKey.split("/")[0].trim().toUpperCase();
             if (setCode.equals("A")) {  // Alpha
                 // radius = 100; // 745 x 1040
                 // radius = 68; // 488 x 680
@@ -239,11 +245,20 @@ public class ImageCache {
             original = makeRoundedCorner(original, radius);
         }
 
+        // if image has white corners, get try to crop it out
+        if (original != null && isWhite(FSkin.getColorFromPixel(original.getRGB(0, 0)))) {
+            if (!isWhiteBorderSet(setCode)) {
+                int xSpacing = original.getWidth() / 40;
+                int ySpacing = original.getHeight() / 57;
+                original = original.getSubimage(xSpacing, ySpacing, original.getWidth() - (2* xSpacing), original.getHeight() - (2* ySpacing));
+            }
+        }
+
         // No image file exists for the given key so optionally associate with
         // a default "not available" image, however do not add it to the cache,
         // as otherwise it's problematic to update if the real image gets fetched.
         if (original == null || useArtCrop) {
-            if (ipc != null || cardView != null) {
+            if ((ipc != null || cardView != null) && !originalKey.equals(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD))) {
                 int width = 488, height = 680;
                 BufferedImage art = original;
                 CardView card = ipc != null ? Card.getCardForUi(ipc).getView() : cardView;
@@ -266,6 +281,15 @@ public class ImageCache {
         }
 
         return Pair.of(original, isPlaceholder);
+    }
+
+    private static boolean isWhite(Color color) {
+        return color.getRed() > 200 && color.getBlue() > 200 && color.getGreen() > 200;
+    }
+
+    private static boolean isWhiteBorderSet(String setCode) {
+        return setCode.equals("U") || setCode.equals("R") || setCode.equals("4E") || setCode.equals("5E") ||
+            setCode.equals("6E") || setCode.equals("7E") || setCode.equals("8E") || setCode.equals("9E");
     }
 
     // cardView is for Emblem, since there is no paper card for them
@@ -312,7 +336,6 @@ public class ImageCache {
         if (1 == bestFitScale) {
             result = original;
         } else {
-
             int destWidth  = (int)(original.getWidth()  * bestFitScale);
             int destHeight = (int)(original.getHeight() * bestFitScale);
 
@@ -398,4 +421,6 @@ public class ImageCache {
     public static boolean isDefaultImage(BufferedImage image) {
         return _defaultImage.equals(image);
     }
+
+    public static BufferedImage getDefaultImage() { return _defaultImage; }
 }

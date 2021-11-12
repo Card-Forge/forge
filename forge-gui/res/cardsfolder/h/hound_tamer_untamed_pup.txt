@@ -1,0 +1,23 @@
+Name:Hound Tamer
+ManaCost:2 G
+Types:Creature Human Werewolf
+PT:3/3
+K:Trample
+A:AB$ PutCounter | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
+K:Daybound
+AlternateMode:DoubleFaced
+Oracle:Trample\n{3}{G}: Put a +1/+1 counter on target creature.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Untamed Pup
+ManaCost:no cost
+Colors:green
+Types:Creature Werewolf
+PT:4/4
+K:Trample
+S:Mode$ Continuous | Affected$ Wolf.Other+YouCtrl,Werewolf.Other+YouCtrl | AddKeyword$ Trample | Description$ Other Wolves and Werewolves you control have trample.
+A:AB$ PutCounter | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
+K:Nightbound
+DeckHints:Type$Wolf & Type$Werewolf
+Oracle:Trample\nOther Wolves and Werewolves you control have trample.\n{3}{G}: Put a +1/+1 counter on target creature.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

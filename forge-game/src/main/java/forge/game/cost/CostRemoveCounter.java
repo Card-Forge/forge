@@ -108,15 +108,18 @@ public class CostRemoveCounter extends CostPart {
         } else {
             sb.append("Remove ");
             final Integer i = this.convertAmount();
-            sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), this.counter.getName() + " counter"));
-
-            if (this.getAmount().equals("All")) {
-                sb.append("s");
+            if (this.getAmount().equals("X")) {
+                sb.append("any number of counters");
+            } else if (this.getAmount().equals("All")) {
+                sb.append("all ").append(this.counter.getName().toLowerCase()).append(" counters");
+            } else {
+                sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(),
+                        this.counter.getName().toLowerCase() + " counter"));
             }
 
             sb.append(" from ");
 
-            if (this.payCostFromSource()) {
+            if (this.getTypeDescription() == null && this.payCostFromSource()) {
                 sb.append(this.getType());
             } else {
                 final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();

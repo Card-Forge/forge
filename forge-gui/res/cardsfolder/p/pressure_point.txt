@@ -2,6 +2,6 @@ Name:Pressure Point
 ManaCost:1 W
 Types:Instant
 A:SP$ Tap | Cost$ 1 W | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SubAbility$ DBDraw | SpellDescription$ Tap target creature. Draw a card.
-SVar:DBDraw:DB$Draw | NumCards$ 1
+SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pressure_point.jpg
 Oracle:Tap target creature.\nDraw a card.

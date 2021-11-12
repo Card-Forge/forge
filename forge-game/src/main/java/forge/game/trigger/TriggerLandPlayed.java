@@ -19,6 +19,8 @@ package forge.game.trigger;
 
 import java.util.Map;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
@@ -67,6 +69,19 @@ public class TriggerLandPlayed extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        if (hasParam("Origin")) {
+            if (!getParam("Origin").equals("Any")) {
+                if (getParam("Origin") == null) {
+                    return false;
+                }
+                if (!ArrayUtils.contains(
+                    getParam("Origin").split(","), runParams.get(AbilityKey.Origin)
+                )) {
+                    return false;
+                }
+            }
+        }
+
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
             return false;
         }

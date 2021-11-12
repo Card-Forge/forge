@@ -1,0 +1,21 @@
+Name:Drogskol Infantry
+ManaCost:1 W
+Types:Creature Spirit Soldier
+PT:2/2
+K:Disturb:3 W
+AlternateMode:DoubleFaced
+DeckHas:Ability$Graveyard
+Oracle:Disturb {3}{W} (You may cast this card from your graveyard transformed for its disturb cost.)
+
+ALTERNATE
+
+Name:Drogskol Armaments
+ManaCost:no cost
+Colors:white
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+Oracle:Enchant creature\nEnchanted creature gets +2/+2.\nIf Drogskol Armaments would be put into a graveyard from anywhere, exile it instead.

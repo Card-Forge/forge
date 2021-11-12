@@ -90,7 +90,7 @@ public class FDeckViewer extends FScreen {
         //fix copying a commander netdeck then importing it again...
         if (dName.startsWith("[Commander")||dName.contains("Commander"))
             dName = "";
-        deckList.append(dName == null ? "" : dName + nl + nl);
+        deckList.append(dName == null ? "" : "Deck: "+dName + nl + nl);
 
         for (DeckSection s : DeckSection.values()){
             CardPool cp = deck.get(s);

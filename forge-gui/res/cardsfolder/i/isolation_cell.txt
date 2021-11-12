@@ -2,6 +2,6 @@ Name:Isolation Cell
 ManaCost:4
 Types:Artifact
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigLose | TriggerDescription$ Whenever an opponent casts a creature spell, that player loses 2 life unless they pay {2}.
-SVar:TrigLose:DB$LoseLife | Defined$ TriggeredCardController | LifeAmount$ 2 | UnlessCost$ 2 | UnlessPayer$ TriggeredCardController
+SVar:TrigLose:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ 2 | UnlessCost$ 2 | UnlessPayer$ TriggeredCardController
 SVar:Picture:http://www.wizards.com/global/images/magic/general/isolation_cell.jpg
 Oracle:Whenever an opponent casts a creature spell, that player loses 2 life unless they pay {2}.

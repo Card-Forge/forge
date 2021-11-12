@@ -4,9 +4,7 @@ Types:Enchantment Aura Curse
 K:Enchant player
 A:SP$ Attach | Cost$ 2 R | ValidTgts$ Player | AILogic$ Curse
 T:Mode$ AttackersDeclared | Execute$ TrigDiscard | TriggerZones$ Battlefield | AttackedTarget$ Player.EnchantedBy | OptionalDecider$ TriggeredAttackingPlayer | TriggerDescription$ Whenever a player attacks enchanted player with one or more creatures, that attacking player may discard a card. If the player does, they draw a card.
-SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredAttackingPlayer | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBDraw | RememberDiscarded$ True
-SVar:DBDraw:DB$ Draw | Defined$ TriggeredAttackingPlayer | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TrigDiscard:DB$ Draw | Defined$ TriggeredAttackingPlayer | NumCards$ 1 | UnlessCost$ Discard<1/Card> | UnlessSwitched$ True | UnlessPayer$ TriggeredAttackingPlayer
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_chaos.jpg
 Oracle:Enchant player\nWhenever a player attacks enchanted player with one or more creatures, that attacking player may discard a card. If the player does, they draw a card.

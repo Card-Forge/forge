@@ -468,6 +468,19 @@ public class GameFormat implements Comparable<GameFormat> {
             return coreList;
         }
 
+        public Iterable<GameFormat> getBlockList() {
+            List<GameFormat> blockFormats = new ArrayList<>();
+            for (GameFormat format : this.getHistoricList()){
+                if (format.getFormatSubType() != GameFormat.FormatSubType.BLOCK)
+                    continue;
+                if (!format.getName().endsWith("Block"))
+                    continue;
+                blockFormats.add(format);
+            }
+            Collections.sort(blockFormats);  // GameFormat will be sorted by Index!
+            return blockFormats;
+        }
+
         public Map<String, List<GameFormat>> getHistoricMap() {
             Map<String, List<GameFormat>> coreList = new HashMap<>();
             for (GameFormat format: naturallyOrdered){

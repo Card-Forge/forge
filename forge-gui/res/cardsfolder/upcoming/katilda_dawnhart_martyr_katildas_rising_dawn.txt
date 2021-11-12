@@ -1,0 +1,32 @@
+Name:Katilda, Dawnhart Martyr
+ManaCost:1 W W
+Types:Legendary Creature Spirit Warlock
+PT:*/*
+K:Flying
+K:Lifelink
+K:Protection from Vampires
+K:Disturb:3 W W
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of permanents you control that are Spirits and/or enchantments.
+SVar:X:Count$Valid Spirit.YouCtrl,Enchantment.YouCtrl
+SVar:NeedsToPlayVar:X GE2
+SVar:BuffedBy:Enchantment,Spirit
+DeckHints:Type$Spirit|Enchantment
+DeckHas:Ability$LifeGain & Ability$Graveyard
+AlternateMode:DoubleFaced
+Oracle:Flying, lifelink, protection from Vampires\nKatilda, Dawnhart Martyr's power and toughness are each equal to the number of permanents you control that are Spirits and/or enchantments.\nDisturb {3}{W}{W} (You may cast this card from your graveyard transformed for its disturb cost.)
+
+ALTERNATE
+
+Name:Katilda's Rising Dawn
+ManaCost:no cost
+Colors:white
+Types:Legendary Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | AddKeyword$ Flying & Lifelink & Protection from Vampires | Description$ Enchanted creature has flying, lifelink, and protection from Vampires, and it gets +X/+X, where X is the number of permanents you control that are Spirits and/or enchantments.
+SVar:X:Count$Valid Spirit.YouCtrl,Enchantment.YouCtrl
+SVar:BuffedBy:Enchantment,Spirit
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+DeckHas:Ability$LifeGain
+Oracle:Enchant creature\nEnchanted creature has flying, lifelink, and protection from Vampires, and it gets +X/+X, where X is the number of permanents you control that are Spirits and/or enchantments.\nIf Katilda's Rising Dawn would be put into a graveyard from anywhere, exile it instead.

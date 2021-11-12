@@ -4,5 +4,5 @@ Types:Creature Bird Warrior
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, each player draws a card.
-SVar:TrigDraw:DB$Draw | Defined$ Player | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ Player | NumCards$ 1
 Oracle:Flying\nWhen Soaring Show-Off enters the battlefield, each player draws a card.

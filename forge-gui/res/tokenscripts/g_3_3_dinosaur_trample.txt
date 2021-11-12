@@ -4,4 +4,4 @@ Types:Creature Dinosaur
 Colors:green
 PT:3/3
 K:Trample
-Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it’s attacking.)
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)

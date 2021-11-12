@@ -1,0 +1,7 @@
+Name:Bounding Wolf
+ManaCost:2 G
+Types:Creature Wolf
+PT:3/2
+K:Flash
+K:Reach
+Oracle:Flash\nReach

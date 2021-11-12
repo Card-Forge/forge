@@ -1,31 +1,16 @@
 package forge.ai.ability;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
-import forge.ai.AiCardMemory;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.card.CardType;
+import forge.card.ColorSet;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.AnimateEffectBase;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardTraitChanges;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.cost.CostPutCounter;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -36,6 +21,10 @@ import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityContinuous;
 import forge.game.staticability.StaticAbilityLayer;
 import forge.game.zone.ZoneType;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -78,8 +67,7 @@ public class AnimateAi extends SpellAbilityAi {
             SpellAbility topStack = game.getStack().peekAbility();
             if (topStack.getApi() == ApiType.Sacrifice) {
                 final String valid = topStack.getParamOrDefault("SacValid", "Card.Self");
-                String num = topStack.getParam("Amount");
-                num = (num == null) ? "1" : num;
+                String num = topStack.getParamOrDefault("Amount", "1");
                 final int nToSac = AbilityUtils.calculateAmount(topStack.getHostCard(), num, topStack);
                 CardCollection list = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","),
                 		ai.getWeakestOpponent(), topStack.getHostCard(), topStack);
@@ -119,7 +107,7 @@ public class AnimateAi extends SpellAbilityAi {
         // Activating as a potential blocker is only viable if it's an ability activated from a permanent, otherwise
         // the AI will waste resources
         boolean activateAsPotentialBlocker = "UntilYourNextTurn".equals(sa.getParam("Duration"))
-                && ai.getGame().getPhaseHandler().getNextTurn() != ai
+                && game.getPhaseHandler().getNextTurn() != ai
                 && source.isPermanent();
         if (ph.isPlayerTurn(ai) && ai.getLife() < 6 && opponent.getLife() > 6
                 && Iterables.any(opponent.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)
@@ -135,16 +123,16 @@ public class AnimateAi extends SpellAbilityAi {
         final Game game = aiPlayer.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
         if (!sa.metConditions() && sa.getSubAbility() == null) {
-            return false;  // what is this for?
+            return false; // what is this for?
         }
         if (!game.getStack().isEmpty() && game.getStack().peekAbility().getApi() == ApiType.Sacrifice) {
-            if (!AnimateAi.isAnimatedThisTurn(aiPlayer, source)) {
-                this.rememberAnimatedThisTurn(aiPlayer, source);
-                return true;    // interrupt sacrifice
+            if (!isAnimatedThisTurn(aiPlayer, source)) {
+                rememberAnimatedThisTurn(aiPlayer, source);
+                return true;  // interrupt sacrifice
             }
         }
         if (!ComputerUtilCost.checkTapTypeCost(aiPlayer, sa.getPayCosts(), source, sa)) {
-            return false;   // prevent crewing with equal or better creatures
+            return false; // prevent crewing with equal or better creatures
         }
 
         if (sa.costHasManaX() && sa.getSVar("X").equals("Count$xPaid")) {
@@ -214,7 +202,7 @@ public class AnimateAi extends SpellAbilityAi {
                 }
             }
             if (bFlag) {
-                this.rememberAnimatedThisTurn(aiPlayer, sa.getHostCard());
+                rememberAnimatedThisTurn(aiPlayer, sa.getHostCard());
             }
             return bFlag; // All of the defined stuff is animated, not very useful
         } else {
@@ -246,7 +234,7 @@ public class AnimateAi extends SpellAbilityAi {
                 return false;
             }
             Card toAnimate = ComputerUtilCard.getWorstAI(list);
-            this.rememberAnimatedThisTurn(aiPlayer, toAnimate);
+            rememberAnimatedThisTurn(aiPlayer, toAnimate);
             sa.getTargets().add(toAnimate);
         }
         return true;
@@ -260,9 +248,10 @@ public class AnimateAi extends SpellAbilityAi {
     private boolean animateTgtAI(final SpellAbility sa) {
         final Player ai = sa.getActivatingPlayer();
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        final String logic = sa.getParamOrDefault("AILogic", "");
         final boolean alwaysActivatePWAbility = sa.isPwAbility()
                 && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class)
-                && sa.getTargetRestrictions() != null
+                && sa.usesTargeting()
                 && sa.getTargetRestrictions().getMinTargets(sa.getHostCard(), sa) == 0;
         
         final CardType types = new CardType(true);
@@ -353,18 +342,31 @@ public class AnimateAi extends SpellAbilityAi {
             if (worst != null) {
                 if (worst.isLand()) {
                     // e.g. Clan Guildmage, make sure we're not using the same land we want to animate to activate the ability
-                    this.holdAnimatedTillMain2(ai, worst);
+                    holdAnimatedTillMain2(ai, worst);
                     if (!ComputerUtilMana.canPayManaCost(sa, ai, 0)) {
-                        this.releaseHeldTillMain2(ai, worst);
+                        releaseHeldTillMain2(ai, worst);
                         return false;
                     }
                 }
-                this.rememberAnimatedThisTurn(ai, worst);
+                rememberAnimatedThisTurn(ai, worst);
                 sa.getTargets().add(worst);
             }
             return true;
         }
-        
+
+        if (logic.equals("SetPT")) {
+            // TODO: 1. Teach the AI to use this to save the creature from direct damage; 2. Determine the best target in a smarter way?
+            Card worst = ComputerUtilCard.getWorstCreatureAI(ai.getCreaturesInPlay());
+            Card buffed = becomeAnimated(worst, sa);
+
+            if (ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, buffed)
+                    && (buffed.getNetPower() - worst.getNetPower() >= 3 || !ComputerUtilCard.doesCreatureAttackAI(ai, worst))) {
+                sa.getTargets().add(worst);
+                rememberAnimatedThisTurn(ai, worst);
+                return true;
+            }
+        }
+
         // This is reasonable for now. Kamahl, Fist of Krosa and a sorcery or
         // two are the only things
         // that animate a target. Those can just use AI:RemoveDeck:All until
@@ -441,16 +443,15 @@ public class AnimateAi extends SpellAbilityAi {
         }
 
         // colors to be added or changed to
-        String tmpDesc = "";
+        ColorSet finalColors = ColorSet.getNullColor();
         if (sa.hasParam("Colors")) {
             final String colors = sa.getParam("Colors");
             if (colors.equals("ChosenColor")) {
-                tmpDesc = CardUtil.getShortColorsString(source.getChosenColors());
+                finalColors = ColorSet.fromNames(source.getChosenColors());
             } else {
-                tmpDesc = CardUtil.getShortColorsString(Lists.newArrayList(Arrays.asList(colors.split(","))));
+                finalColors = ColorSet.fromNames(colors.split(","));
             }
         }
-        final String finalDesc = tmpDesc;
 
         // abilities to add to the animated being
         final List<String> abilities = Lists.newArrayList();
@@ -482,13 +483,13 @@ public class AnimateAi extends SpellAbilityAi {
             sVars.addAll(Arrays.asList(sa.getParam("sVars").split(",")));
         }
 
-        AnimateEffectBase.doAnimate(card, sa, power, toughness, types, removeTypes, finalDesc,
+        AnimateEffectBase.doAnimate(card, sa, power, toughness, types, removeTypes, finalColors,
                 keywords, removeKeywords, hiddenKeywords,
                 abilities, triggers, replacements, stAbs,
                 timestamp);
 
         // check if animate added static Abilities
-        CardTraitChanges traits = card.getChangedCardTraits().get(timestamp);
+        CardTraitChanges traits = card.getChangedCardTraits().get(timestamp, 0);
         if (traits != null) {
             for (StaticAbility stAb : traits.getStaticAbilities()) {
                 if ("Continuous".equals(stAb.getParam("Mode"))) {

@@ -4,7 +4,7 @@ Types:Creature Zombie
 PT:4/1
 K:CARDNAME can't block.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Swamp.YouCtrl | OptionalDecider$ You | TriggerZones$ Graveyard | Execute$ TrigChange | TriggerDescription$ Whenever a Swamp enters the battlefield under your control, you may return CARDNAME from your graveyard to your hand.
-SVar:TrigChange:DB$ChangeZone | Origin$ Graveyard | Destination$ Hand
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand
 SVar:DiscardMe:3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veilborn_ghoul.jpg
 Oracle:Veilborn Ghoul can't block.\nWhenever a Swamp enters the battlefield under your control, you may return Veilborn Ghoul from your graveyard to your hand.

@@ -1,0 +1,20 @@
+[metadata]
+Name:Possibility Storm - Innistrad: Midnight Hunt #01
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/09/184MID1.png
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Your opponent has 22 cards left in their library. Your solution must work regardless what those cards are. You have 20 cards left in your library, and you know that exactly 10 of them are creatures.
+[state]
+humanlife=5
+ailife=16
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Island;Maddening Cacophony;Tapping at the Window;Zulaport Duelist;Blood Pact
+humanlibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Gavony Trapper;Gavony Trapper;Gavony Trapper;Gavony Trapper;Gavony Trapper;Gavony Trapper;Gavony Trapper;Gavony Trapper;Gavony Trapper;Gavony Trapper
+humanbattlefield=Dreadhound;Koma's Faithful;Lord of the Forsaken;Ruin Crab;Necroblossom Snarl|NoETBTrigs;Necroblossom Snarl|NoETBTrigs;Vineglimmer Snarl|NoETBTrigs;Vineglimmer Snarl|NoETBTrigs;Shipwreck Marsh|NoETBTrigs;Shipwreck Marsh|NoETBTrigs
+ailibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+aibattlefield=Cogwork Archivist
+aiprecast=Starnheim Unleashed;Starnheim Unleashed
+removesummoningsickness=true

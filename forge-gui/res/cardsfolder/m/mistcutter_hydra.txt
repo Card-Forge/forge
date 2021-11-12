@@ -2,7 +2,7 @@ Name:Mistcutter Hydra
 ManaCost:X G
 Types:Creature Hydra
 PT:0/0
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 K:Haste
 K:Protection from blue
 K:etbCounter:P1P1:X

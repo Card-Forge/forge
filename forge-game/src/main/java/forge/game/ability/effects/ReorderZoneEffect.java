@@ -34,8 +34,7 @@ public class ReorderZoneEffect extends SpellAbilityEffect {
                 if (shuffle) {
                     Collections.shuffle(list, MyRandom.getRandom());
                     p.getZone(zone).setCards(list);
-                }
-                else {
+                } else {
                     p.getController().orderMoveToZoneList(list, zone, sa);
                 }
             }

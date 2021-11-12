@@ -497,8 +497,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         }
     }
 
-
-
     protected void addLowCMCCard(){
         final Iterable<PaperCard> nonLands = Iterables.filter(rankedColorList,
                 Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, PaperCard.FN_GET_RULES));
@@ -692,7 +690,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             }
         }
 
-
         // do not update landsNeeded until after the loop, because the
         // calculation involves landsNeeded
         for (int i = 0; i < 5; i++) {
@@ -845,7 +842,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         rankedColorList.removeAll(landsToAdd);
     }
 
-
     /**
      * Add random cards to the deck.
      *
@@ -929,8 +925,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             aiPlayables.removeAll(keyCardList);
             rankedColorList.removeAll(keyCardList);
         }*/
-
-
 
         final Map<Integer, Integer> creatureCosts = new HashMap<>();
         for (int i = 1; i < 7; i++) {

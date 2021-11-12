@@ -24,6 +24,7 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.keyword.Keyword;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerPredicates;
@@ -64,7 +65,7 @@ public class ChooseCardAi extends SpellAbilityAi {
         if (sa.hasParam("ChoiceZone")) {
             choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
         }
-        CardCollectionView choices = ai.getGame().getCardsIn(choiceZone);
+        CardCollectionView choices = game.getCardsIn(choiceZone);
         if (sa.hasParam("Choices")) {
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host, sa);
         }
@@ -101,7 +102,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             final int loyalty = host.getCounters(CounterEnumType.LOYALTY) - 1;
             for (int i = loyalty; i >= 0; i--) {
                 sa.setXManaCostPaid(i);
-                choices = ai.getGame().getCardsIn(choiceZone);
+                choices = game.getCardsIn(choiceZone);
                 choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host, sa);
                 if (!choices.isEmpty()) {
                     return true;
@@ -146,6 +147,16 @@ public class ChooseCardAi extends SpellAbilityAi {
         return checkApiLogic(ai, sa);
     }
 
+    protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
+        String aiLogic = sa.getParamOrDefault("AILogic", "");
+
+        if (aiLogic.equals("AtOppEOT")) {
+            return ph.getNextTurn().equals(ai) && ph.is(PhaseType.END_OF_TURN);
+        }
+
+        return super.checkPhaseRestrictions(ai, sa, ph);
+    }
+
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityAi#chooseSingleCard(forge.card.spellability.SpellAbility, java.util.List, boolean)
      */
@@ -167,7 +178,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             }
             choice = ComputerUtilCard.getBestAI(ownChoices);
         } else if (logic.equals("BestBlocker")) {
-            if (!CardLists.filter(options, Presets.UNTAPPED).isEmpty()) {
+            if (Iterables.any(options, Presets.UNTAPPED)) {
                 options = CardLists.filter(options, Presets.UNTAPPED);
             }
             choice = ComputerUtilCard.getBestCreatureAI(options);
@@ -191,7 +202,7 @@ public class ChooseCardAi extends SpellAbilityAi {
         } else if (logic.equals("NeedsPrevention")) {
             final Game game = ai.getGame();
             final Combat combat = game.getCombat();
-            CardCollectionView better =  CardLists.filter(options, new Predicate<Card>() {
+            CardCollectionView better = CardLists.filter(options, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     if (combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {

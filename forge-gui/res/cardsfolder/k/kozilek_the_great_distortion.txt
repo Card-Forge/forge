@@ -3,7 +3,7 @@ ManaCost:8 C C
 Types:Legendary Creature Eldrazi
 PT:12/12
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDraw | CheckSVar$ Y | SVarCompare$ LT7 | TriggerDescription$ When you cast this spell, if you have fewer than seven cards in hand, draw cards equal to the difference.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ Difference
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ Difference
 SVar:Y:Count$InYourHand
 SVar:Difference:Number$7/Minus.Y
 K:Menace

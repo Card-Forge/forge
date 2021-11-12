@@ -2,7 +2,7 @@
 Code=PUST
 Date=2017-12-08
 Name=Unstable Promos
-Type=Promo
+Type=Funny
 Border=Silver
 ScryfallCode=PUST
 

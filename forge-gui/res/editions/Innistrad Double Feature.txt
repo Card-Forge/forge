@@ -1,0 +1,12 @@
+[metadata]
+Code=DBL
+Date=2022-01-28
+Name=Innistrad: Double Feature
+Type=Draft
+ScryfallCode=DBL
+
+[cards]
+72 C Revenge of the Drowned @Chris Cold
+398 M Sorin the Mirthless @Martina Fackova
+516 R Torens, Fist of the Angels @Justine Cruz
+535 R Endless Ranks of the Dead @Ryan Yee

@@ -17,8 +17,7 @@
  */
 package forge.game.card;
 
-import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
+import forge.card.ColorSet;
 
 /**
  * <p>
@@ -39,15 +38,8 @@ public class CardColor  {
         return this.additional;
     }
 
-    private final long timestamp;
-    public final long getTimestamp() {
-        return this.timestamp;
-    }
-
-    CardColor(final String colors, final boolean addToColors, final long timestamp) {
-        final ManaCost mc = new ManaCost(new ManaCostParser(colors));
-        this.colorMask = mc.getColorProfile();
+    CardColor(final ColorSet colors, final boolean addToColors) {
+        this.colorMask = colors.getColor();
         this.additional = addToColors;
-        this.timestamp = timestamp;
     }
 }

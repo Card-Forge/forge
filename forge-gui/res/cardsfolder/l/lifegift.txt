@@ -2,6 +2,6 @@ Name:Lifegift
 ManaCost:2 G
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ Whenever a land enters the battlefield, you may gain 1 life.
-SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lifegift.jpg
 Oracle:Whenever a land enters the battlefield, you may gain 1 life.

@@ -144,7 +144,7 @@ public class ProtectAi extends SpellAbilityAi {
                 if (ph.getPlayerTurn() == ai && ph.getPhase() == PhaseType.MAIN1) {
                     AiAttackController aiAtk = new AiAttackController(ai, c);
                     String s = aiAtk.toProtectAttacker(sa);
-                    if (s==null) {
+                    if (s == null) {
                         return false;
                     } else {
                     	Player opponent = ai.getWeakestOpponent();
@@ -175,7 +175,7 @@ public class ProtectAi extends SpellAbilityAi {
                 return false;
             } else if (cards.size() == 1) {
                 // Affecting single card
-                return (getProtectCreatures(ai, sa)).contains(cards.get(0));
+                return getProtectCreatures(ai, sa).contains(cards.get(0));
             }
             /*
              * when this happens we need to expand AI to consider if its ok
@@ -230,7 +230,7 @@ public class ProtectAi extends SpellAbilityAi {
             return mandatory && protectMandatoryTarget(ai, sa, mandatory);
         }
 
-        while (sa.getTargets().size() < tgt.getMaxTargets(source, sa)) {
+        while (sa.canAddMoreTarget()) {
             Card t = null;
             // boolean goodt = false;
 
@@ -260,7 +260,7 @@ public class ProtectAi extends SpellAbilityAi {
         final Game game = ai.getGame();
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard(), sa);
+        CardCollection list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
 
         if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             sa.resetTargets();
@@ -289,37 +289,23 @@ public class ProtectAi extends SpellAbilityAi {
         final List<Card> forced = CardLists.filterControlledBy(list, ai);
         final Card source = sa.getHostCard();
 
-        while (sa.getTargets().size() < tgt.getMaxTargets(source, sa)) {
+        while (sa.canAddMoreTarget()) {
             if (pref.isEmpty()) {
                 break;
             }
 
-            Card c;
-            if (CardLists.getNotType(pref, "Creature").size() == 0) {
-                c = ComputerUtilCard.getBestCreatureAI(pref);
-            } else {
-                c = ComputerUtilCard.getMostExpensivePermanentAI(pref, sa, true);
-            }
-
+            Card c = ComputerUtilCard.getBestAI(list);
             pref.remove(c);
-
             sa.getTargets().add(c);
         }
 
-        while (sa.getTargets().size() < tgt.getMaxTargets(source, sa)) {
+        while (sa.canAddMoreTarget()) {
             if (pref2.isEmpty()) {
                 break;
             }
 
-            Card c;
-            if (CardLists.getNotType(pref2, "Creature").size() == 0) {
-                c = ComputerUtilCard.getBestCreatureAI(pref2);
-            } else {
-                c = ComputerUtilCard.getMostExpensivePermanentAI(pref2, sa, true);
-            }
-
+            Card c = ComputerUtilCard.getBestAI(list);
             pref2.remove(c);
-
             sa.getTargets().add(c);
         }
 
@@ -332,11 +318,9 @@ public class ProtectAi extends SpellAbilityAi {
             if (CardLists.getNotType(forced, "Creature").size() == 0) {
                 c = ComputerUtilCard.getWorstCreatureAI(forced);
             } else {
-                c = ComputerUtilCard.getCheapestPermanentAI(forced, sa, true);
+                c = ComputerUtilCard.getCheapestPermanentAI(forced, sa, false);
             }
-
             forced.remove(c);
-
             sa.getTargets().add(c);
         }
 
@@ -350,7 +334,7 @@ public class ProtectAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        if (sa.getTargetRestrictions() == null) {
+        if (!sa.usesTargeting()) {
             if (mandatory) {
                 return true;
             }

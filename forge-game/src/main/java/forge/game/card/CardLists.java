@@ -169,7 +169,6 @@ public class CardLists {
         Collections.sort(list, Collections.reverseOrder(PowerComparator));
     }
 
-
     /**
      * 
      * Given a CardCollection c, return a CardCollection that contains a random amount of cards from c.

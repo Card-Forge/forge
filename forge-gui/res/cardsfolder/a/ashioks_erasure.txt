@@ -5,7 +5,7 @@ K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target spell.
 S:Mode$ CantBeCast | ValidCard$ Card.nonLand+sharesNameWith Remembered.ExiledWithSource | Caster$ Opponent | Description$ Your opponents can't cast spells with the same name as the card exiled by CARDNAME.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigBounce | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled card to its owner's hand.
-SVar:TrigExile:DB$ChangeZone | TargetType$ Spell | ValidTgts$ Card | TgtZone$ Stack | Origin$ Stack | Fizzle$ True | Mandatory$ True | Destination$ Exile | IsCurse$ True | TgtPrompt$ Choose target spell | RememberChanged$ True
-SVar:TrigBounce:DB$ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:TrigExile:DB$ ChangeZone | TargetType$ Spell | ValidTgts$ Card | TgtZone$ Stack | Origin$ Stack | Fizzle$ True | Mandatory$ True | Destination$ Exile | IsCurse$ True | TgtPrompt$ Choose target spell | RememberChanged$ True
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Flash\nWhen Ashiok's Erasure enters the battlefield, exile target spell.\nYour opponents can't cast spells with the same name as the exiled card.\nWhen Ashiok's Erasure leaves the battlefield, return the exiled card to its owner's hand.

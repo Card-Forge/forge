@@ -25,8 +25,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
-        // based on what
-        // the expected targets could be
+        // based on what the expected targets could be
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
         List<Card> hList;
@@ -38,7 +37,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
         final boolean curse = sa.isCurse();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        if ("OwnCreatsAndOtherPWs".equals(sa.getParam("AILogic"))) {
+        if ("OwnCreatsAndOtherPWs".equals(logic)) {
             hList = CardLists.getValidCards(ai.getWeakestOpponent().getCardsIn(ZoneType.Battlefield), "Creature.YouCtrl,Planeswalker.YouCtrl+Other", source.getController(), source, sa);
             cList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), "Creature.YouCtrl,Planeswalker.YouCtrl+Other", source.getController(), source, sa);
         } else {
@@ -87,7 +86,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
             amount = ComputerUtilCost.getMaxXValue(sa, ai);
             sa.setXManaCostPaid(amount);
         } else {
-            amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
+            amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }
 
         // prevent run-away activations - first time will always return true
@@ -170,7 +169,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
             }
 
             for (final Player p : players) {
-                if (p.canBeTargetedBy(sa) && sa.canTarget(p)) {
+                if (sa.canTarget(p)) {
                     boolean preferred = false;
                     preferred = (sa.isCurse() && p.isOpponentOf(aiPlayer)) || (!sa.isCurse() && p == aiPlayer);
                     sa.resetTargets();

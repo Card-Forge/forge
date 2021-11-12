@@ -48,6 +48,15 @@ public class Tracker {
         delayedPropChanges.clear();
     }
 
+    public void flush() {
+        // unfreeze and refreeze the tracker in order to flush current pending properties
+        if (!isFrozen()) {
+            return;
+        }
+        unfreeze();
+        freeze();
+    }
+
     public void addDelayedPropChange(final TrackableObject object, final TrackableProperty prop, final Object value) {
         delayedPropChanges.add(new DelayedPropChange(object, prop, value));
     }

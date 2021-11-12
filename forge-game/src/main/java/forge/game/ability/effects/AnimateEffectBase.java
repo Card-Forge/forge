@@ -23,6 +23,7 @@ import com.google.common.collect.Lists;
 
 import forge.GameCommand;
 import forge.card.CardType;
+import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.Game;
@@ -42,7 +43,7 @@ import forge.game.trigger.TriggerHandler;
 
 public abstract class AnimateEffectBase extends SpellAbilityEffect {
     public static void doAnimate(final Card c, final SpellAbility sa, final Integer power, final Integer toughness,
-            final CardType addType, final CardType removeType, final String colors,
+            final CardType addType, final CardType removeType, final ColorSet colors,
             final List<String> keywords, final List<String> removeKeywords, final List<String> hiddenKeywords,
             List<String> abilities, final List<String> triggers, final List<String> replacements, final List<String> stAbs,
             final long timestamp) {
@@ -89,25 +90,25 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         }
 
         if ((power != null) || (toughness != null)) {
-            c.addNewPT(power, toughness, timestamp);
+            c.addNewPT(power, toughness, timestamp, 0);
         }
 
         if (!addType.isEmpty() || !removeType.isEmpty() || removeCreatureTypes) {
             c.addChangedCardTypes(addType, removeType, removeSuperTypes, removeCardTypes, removeSubTypes,
-                    removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes, timestamp, true, false);
+                    removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes, timestamp, 0, true, false);
         }
 
-        c.addChangedCardKeywords(keywords, removeKeywords, removeAll, removeLandTypes, timestamp);
+        c.addChangedCardKeywords(keywords, removeKeywords, removeAll, timestamp, 0);
 
         if (sa.hasParam("CantHaveKeyword")) {
             c.addCantHaveKeyword(timestamp, Keyword.setValueOf(sa.getParam("CantHaveKeyword")));
         }
 
-        for (final String k : hiddenKeywords) {
-            c.addHiddenExtrinsicKeyword(k);
+        if (!hiddenKeywords.isEmpty()) {
+            c.addHiddenExtrinsicKeywords(timestamp, 0, hiddenKeywords);
         }
 
-        c.addColor(colors, !sa.hasParam("OverwriteColors"), timestamp, false);
+        c.addColor(colors, !sa.hasParam("OverwriteColors"), timestamp, 0, false);
 
         if (sa.hasParam("LeaveBattlefield")) {
             addLeaveBattlefieldReplacement(c, sa, sa.getParam("LeaveBattlefield"));
@@ -157,9 +158,9 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
             @Override
             public void run() {
-                doUnanimate(c, sa, hiddenKeywords, timestamp);
+                doUnanimate(c, timestamp);
 
-                c.removeChangedName(timestamp);
+                c.removeChangedName(timestamp, 0);
                 c.updateStateForView();
 
                 game.fireEvent(new GameEventCardStatsChanged(c));
@@ -188,7 +189,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
                 || !addedAbilities.isEmpty() || !removedAbilities.isEmpty() || !addedTriggers.isEmpty()
                 || !addedReplacements.isEmpty() || !addedStaticAbilities.isEmpty()) {
             c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements,
-                    addedStaticAbilities, removeAll, false, removeLandTypes, timestamp);
+                    addedStaticAbilities, removeAll, false, timestamp, 0);
         }
 
         if (!"Permanent".equals(sa.getParam("Duration"))) {
@@ -217,23 +218,19 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
      * @param timestamp
      *            a long.
      */
-    static void doUnanimate(final Card c, SpellAbility sa,
-            final List<String> hiddenKeywords, final long timestamp) {
+    static void doUnanimate(final Card c, final long timestamp) {
+        c.removeNewPT(timestamp, 0);
 
-        c.removeNewPT(timestamp);
+        c.removeChangedCardKeywords(timestamp, 0);
 
-        c.removeChangedCardKeywords(timestamp);
+        c.removeChangedCardTypes(timestamp, 0);
+        c.removeColor(timestamp, 0);
 
-        c.removeChangedCardTypes(timestamp);
-        c.removeColor(timestamp);
-
-        c.removeChangedCardTraits(timestamp);
+        c.removeChangedCardTraits(timestamp, 0);
 
         c.removeCantHaveKeyword(timestamp);
 
-        for (final String k : hiddenKeywords) {
-            c.removeHiddenExtrinsicKeyword(k);
-        }
+        c.removeHiddenExtrinsicKeywords(timestamp, 0);
 
         // any other unanimate cleanup
         if (!c.isCreature()) {

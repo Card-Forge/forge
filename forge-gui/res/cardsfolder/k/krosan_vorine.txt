@@ -3,6 +3,5 @@ ManaCost:3 G
 Types:Creature Cat Beast
 PT:3/2
 K:Provoke
-K:CantBeBlockedByAmount GT1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_vorine.jpg
+S:Mode$ MinMaxBlocker | ValidCard$ Card.Self | Max$ 1 | Description$ CARDNAME can't be blocked by more than one creature.
 Oracle:Provoke (Whenever this creature attacks, you may have target creature defending player controls untap and block it if able.)\nKrosan Vorine can't be blocked by more than one creature.

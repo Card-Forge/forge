@@ -3,7 +3,7 @@ ManaCost:2 G U R
 Types:Legendary Planeswalker Sarkhan
 Loyalty:4
 A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Defined$ You | SubAbility$ DBMana | Planeswalker$ True | SpellDescription$ Draw a card, then add one mana of any color.
-SVar:DBMana:DB$Mana | Produced$ Any | AILogic$ MostProminentInComputerHand
+SVar:DBMana:DB$ Mana | Produced$ Any | AILogic$ MostProminentInComputerHand
 A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | TokenAmount$ 1 | TokenScript$ r_4_4_dragon_flying | TokenOwner$ You | LegacyImage$ r 4 4 dragon flying dtk | Planeswalker$ True | SpellDescription$ Create a 4/4 red Dragon creature token with flying.
 A:AB$ ChangeZone | Cost$ SubCounter<8/LOYALTY> | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.Dragon | ChangeNum$ XFetch | Planeswalker$ True | Ultimate$ True | StackDescription$ SpellDescription | SpellDescription$ Search your library for any number of Dragon creature cards, put them onto the battlefield, then shuffle.
 SVar:XFetch:Count$TypeInYourLibrary.Dragon

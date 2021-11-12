@@ -3,7 +3,7 @@ ManaCost:R W
 Types:Creature Human Archer
 PT:1/1
 A:AB$ DealDamage | Cost$ 1 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ DBTap | SpellDescription$ CARDNAME deals 1 damage to target creature. Tap that creature.
-SVar:DBTap:DB$Tap | Defined$ Targeted
+SVar:DBTap:DB$ Tap | Defined$ Targeted
 SVar:NonCombatPriority:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stun_sniper.jpg
 Oracle:{1}, {T}: Stun Sniper deals 1 damage to target creature. Tap that creature.

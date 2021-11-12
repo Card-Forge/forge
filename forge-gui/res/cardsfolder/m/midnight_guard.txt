@@ -3,6 +3,6 @@ ManaCost:2 W
 Types:Creature Human Soldier
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever another creature enters the battlefield, untap CARDNAME.
-SVar:TrigUntap:DB$Untap | Defined$ Self
+SVar:TrigUntap:DB$ Untap | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/midnight_guard.jpg
 Oracle:Whenever another creature enters the battlefield, untap Midnight Guard.

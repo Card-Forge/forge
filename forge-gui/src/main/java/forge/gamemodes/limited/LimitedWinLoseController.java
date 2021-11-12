@@ -33,8 +33,7 @@ public abstract class LimitedWinLoseController {
 
         if (lastGame.isWinner(GamePlayerUtil.getGuiPlayer())) {
             gauntlet.addWin();
-        }
-        else {
+        } else {
             gauntlet.addLoss();
         }
 
@@ -56,12 +55,10 @@ public abstract class LimitedWinLoseController {
                         view.getBtnContinue().setEnabled(true);
                         showTournamentInfo(localizer.getMessage("btnWonRound") + gauntlet.getCurrentRound() + "/"
                                 + gauntlet.getRounds());
-                    }
-                    else {
+                    } else {
                         showTournamentInfo(localizer.getMessage("btnWonTournament"));
                     }
-                }
-                else {
+                } else {
                     view.getBtnContinue().setVisible(false);
                     showTournamentInfo(localizer.getMessage("btnLoseRound") + gauntlet.getCurrentRound() + "/"
                             + gauntlet.getRounds());

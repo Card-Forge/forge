@@ -5,7 +5,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigChooseOneToDestroy:DB$ ChooseCard | Choices$ Creature.leastPower+withoutIndestructible | Mandatory$ True | SubAbility$ DBDestroy
 SVar:DBDestroy:DB$ Destroy | Defined$ ChosenCard | NoRegen$ True
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Creature | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When there are no creatures on the battlefield, sacrifice CARDNAME.
-SVar:TrigSac:DB$Sacrifice | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:NeedsToPlay:Creature.YouDontCtrl+leastPower
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drop_of_honey.jpg

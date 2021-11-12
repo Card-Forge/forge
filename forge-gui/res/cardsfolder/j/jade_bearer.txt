@@ -3,7 +3,7 @@ ManaCost:G
 Types:Creature Merfolk Shaman
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on another target Merfolk you control.
-SVar:TrigPut:DB$PutCounter | ValidTgts$ Merfolk.Other+YouCtrl | TgtPrompt$ Select another target Merfolk you control | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Merfolk.Other+YouCtrl | TgtPrompt$ Select another target Merfolk you control | CounterType$ P1P1 | CounterNum$ 1
 DeckHints:Type$Merfolk
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jade_bearer.jpg
 Oracle:When Jade Bearer enters the battlefield, put a +1/+1 counter on another target Merfolk you control.

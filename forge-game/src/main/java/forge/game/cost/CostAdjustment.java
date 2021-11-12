@@ -274,7 +274,7 @@ public class CostAdjustment {
             sa.addTappedForConvoke(conv.getKey());
             cost.decreaseShard(conv.getValue(), 1);
             if (!test) {
-                conv.getKey().tap();
+                conv.getKey().tap(true);
                 if (!improvise) {
                     sa.getHostCard().addConvoked(conv.getKey());
                 }
@@ -284,12 +284,10 @@ public class CostAdjustment {
 
     private static void adjustCostByOffering(final ManaCostBeingPaid cost, final SpellAbility sa) {
         String offeringType = "";
-        for (KeywordInterface inst : sa.getHostCard().getKeywords()) {
+        for (KeywordInterface inst : sa.getHostCard().getKeywords(Keyword.OFFERING)) {
             final String kw = inst.getOriginal();
-            if (kw.endsWith(" offering")) {
-                offeringType = kw.split(" ")[0];
-                break;
-            }
+            offeringType = kw.split(" ")[0];
+            break;
         }
 
         Card toSac = null;

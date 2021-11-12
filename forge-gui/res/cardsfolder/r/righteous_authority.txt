@@ -6,6 +6,6 @@ A:SP$ Attach | Cost$ 3 W U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +1/+1 for each card in its controller's hand.
 SVar:X:Count$InEnchantedHand
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of the draw step of enchanted creature's controller, that player draws an additional card.
-SVar:TrigDraw:DB$Draw | NumCards$ 1 | Defined$ TriggeredPlayer
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredPlayer
 SVar:Picture:http://www.wizards.com/global/images/magic/general/righteous_authority.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 for each card in its controller's hand.\nAt the beginning of the draw step of enchanted creature's controller, that player draws an additional card.

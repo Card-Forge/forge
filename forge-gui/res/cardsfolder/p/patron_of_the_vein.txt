@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ Whenever a creature an opponent controls dies, exile it and put a +1/+1 counter on each Vampire you control.
 SVar:TrigChange:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBPutCounterAll
-SVar:DBPutCounterAll:DB$PutCounterAll | ValidCards$ Vampire.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Vampire.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
 SVar:PlayMain1:TRUE
 DeckHints:Type$Vampire
 Oracle:Flying\nWhen Patron of the Vein enters the battlefield, destroy target creature an opponent controls.\nWhenever a creature an opponent controls dies, exile it and put a +1/+1 counter on each Vampire you control.

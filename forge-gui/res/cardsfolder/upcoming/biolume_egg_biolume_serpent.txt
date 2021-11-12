@@ -1,0 +1,25 @@
+Name:Biolume Egg
+ManaCost:2 U
+Types:Creature Serpent Egg
+PT:0/4
+K:Defender
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 2.
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Card.Self | Execute$ TrigDelay | TriggerZones$ Battlefield | TriggerDescription$ When you sacrifice CARDNAME, return it to the battlefield transformed under its owner's control at the beginning of the next end step.
+SVar:TrigDelay:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ TriggeredCard | TriggerDescription$ Return CARDNAME to the battlefield transformed under its owner's control at the beginning of the next end step.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Graveyard | Destination$ Battlefield | Transformed$ True
+AlternateMode:DoubleFaced
+DeckNeeds:Ability$Sacrifice
+SVar:SacMe:5
+Oracle:Defender\nWhen Biolume Egg enters the battlefield, scry 2.\nWhen you sacrifice Biolume Egg, return it to the battlefield transformed under its owner's control at the beginning of the next end step.
+
+ALTERNATE
+
+Name:Biolume Serpent
+ManaCost:no cost
+Colors:blue
+Types:Creature Serpent
+PT:4/4
+A:AB$ Pump | Cost$ Sac<2/Island> | Defined$ Self | KW$ HIDDEN Unblockable | StackDescription$ SpellDescription | SpellDescription$ CARDNAME can't be blocked this turn.
+DeckHas:Ability$Sacrifice
+Oracle:Sacrifice two Islands: Biolume Serpent can't be blocked this turn.

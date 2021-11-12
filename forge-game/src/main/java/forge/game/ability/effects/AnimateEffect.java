@@ -6,10 +6,10 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import forge.card.CardType;
+import forge.card.ColorSet;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
@@ -100,17 +100,15 @@ public class AnimateEffect extends AnimateEffectBase {
         }
 
         // colors to be added or changed to
-        String tmpDesc = "";
+        ColorSet finalColors = ColorSet.getNullColor();
         if (sa.hasParam("Colors")) {
             final String colors = sa.getParam("Colors");
             if (colors.equals("ChosenColor")) {
-
-                tmpDesc = CardUtil.getShortColorsString(source.getChosenColors());
+                finalColors = ColorSet.fromNames(source.getChosenColors());
             } else {
-                tmpDesc = CardUtil.getShortColorsString(Arrays.asList(colors.split(",")));
+                finalColors = ColorSet.fromNames(Arrays.asList(colors.split(",")));
             }
         }
-        final String finalDesc = tmpDesc;
 
         // abilities to add to the animated being
         final List<String> abilities = Lists.newArrayList();
@@ -156,12 +154,12 @@ public class AnimateEffect extends AnimateEffectBase {
         }
 
         for (final Card c : tgts) {
-            doAnimate(c, sa, power, toughness, types, removeTypes, finalDesc,
+            doAnimate(c, sa, power, toughness, types, removeTypes, finalColors,
                     keywords, removeKeywords, hiddenKeywords,
                     abilities, triggers, replacements, stAbs, timestamp);
 
             if (sa.hasParam("Name")) {
-                c.addChangedName(sa.getParam("Name"), timestamp);
+                c.addChangedName(sa.getParam("Name"), false, timestamp, 0);
             }
 
             // give sVars

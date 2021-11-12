@@ -3,6 +3,6 @@ ManaCost:4 U
 Types:Creature Vedalken Artificer
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target artifact to its owner's hand.
-SVar:TrigChangeZone:DB$ChangeZone | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Origin$ Battlefield | Destination$ Hand
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Origin$ Battlefield | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dispersal_technician.jpg
 Oracle:When Dispersal Technician enters the battlefield, you may return target artifact to its owner's hand.

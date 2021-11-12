@@ -5,7 +5,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME attacks each combat if able. | Description$ Enchanted creature attacks each combat if able. 
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigChangeZone | TriggerDescription$ When enchanted creature dies, return CARDNAME to the battlefield transformed under your control.
-SVar:TrigChangeZone:DB$ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Transformed$ True | GainControl$ True | Defined$ CorrectedSelf
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Transformed$ True | GainControl$ True | Defined$ CorrectedSelf
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skin_invasion.jpg
 Oracle:Enchant creature\nEnchanted creature attacks each combat if able.\nWhen enchanted creature dies, return Skin Invasion to the battlefield transformed under your control.

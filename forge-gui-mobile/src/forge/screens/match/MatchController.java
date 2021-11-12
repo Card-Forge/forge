@@ -51,7 +51,6 @@ import forge.player.PlayerZoneUpdates;
 import forge.screens.match.views.VAssignCombatDamage;
 import forge.screens.match.views.VAssignGenericAmount;
 import forge.screens.match.views.VPhaseIndicator;
-import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
 import forge.screens.match.views.VPlayerPanel;
 import forge.screens.match.views.VPlayerPanel.InfoTab;
 import forge.screens.match.views.VPrompt;
@@ -178,7 +177,8 @@ public class MatchController extends AbstractGuiGame {
         }
 
         actuateMatchPreferences();
-
+        //reset daytime every match
+        updateDayTime(null);
         Forge.openScreen(view);
     }
 
@@ -210,28 +210,36 @@ public class MatchController extends AbstractGuiGame {
     public void alertUser() {
         //TODO
     }
-
+    private PlayerView lastPlayer;
     @Override
     public void updatePhase(boolean saveState) {
-        final PlayerView p = getGameView().getPlayerTurn();
         final PhaseType ph = getGameView().getPhase();
-
-        PhaseLabel lbl = null;
-
-        if(ph!=null) {
-            lbl = p == null ? null : view.getPlayerPanel(p).getPhaseIndicator().getLabel(ph);
-        } else {
-            System.err.println("getGameView().getPhase() returned 'null'");
+        if (ph != null) {
+            if (ph.isBefore(PhaseType.END_OF_TURN))
+                lastPlayer = getGameView().getPlayerTurn();
+            //reset phase labels
+            view.resetAllPhaseButtons();
+            if (lastPlayer != null && PhaseType.CLEANUP.equals(ph)) {
+                //set phaselabel
+                final VPhaseIndicator.PhaseLabel phaseLabel = view.getPlayerPanel(lastPlayer).getPhaseIndicator().getLabel(ph);
+                if (phaseLabel != null)
+                    phaseLabel.setActive(true);
+                if (GuiBase.isNetworkplay())
+                    getGameView().updateNeedsPhaseRedrawn(lastPlayer, PhaseType.CLEANUP);
+            } else if (getGameView().getPlayerTurn() != null) {
+                //set phaselabel
+                final VPhaseIndicator.PhaseLabel phaseLabel = view.getPlayerPanel(getGameView().getPlayerTurn()).getPhaseIndicator().getLabel(ph);
+                if (phaseLabel != null)
+                    phaseLabel.setActive(true);
+                if (GuiBase.isNetworkplay())
+                    getGameView().updateNeedsPhaseRedrawn(getGameView().getPlayerTurn(), ph);
+            }
         }
 
-        view.resetAllPhaseButtons();
-        if (lbl != null) {
-            lbl.setActive(true);
-        }
         if(GuiBase.isNetworkplay())
             checkStack();
 
-        if (saveState && ph.isMain()) {
+        if (ph != null && saveState && ph.isMain()) {
             phaseGameState = new GameState() {
                 @Override //todo get specific card edition for this function?
                 public IPaperCard getPaperCard(final String cardName) {
@@ -240,7 +248,8 @@ public class MatchController extends AbstractGuiGame {
             };
             try {
                 phaseGameState.initFromGame(getGameView().getGame());
-            } catch (Exception e) {}
+            } catch (Exception e) {
+            }
         }
     }
 
@@ -352,8 +361,7 @@ public class MatchController extends AbstractGuiGame {
                         final VPlayerPanel playerPanel = view.getPlayerPanel(player);
                         playersWithTargetables.put(player, playerPanel.getSelectedTab()); //backup selected tab before changing it
                         final InfoTab zoneTab = playerPanel.getZoneTab(zoneType);
-                        ZoneType previousZone = playerPanel.getZoneByInfoTab(playerPanel.getSelectedTab());
-                        updates.add(new PlayerZoneUpdate(player, previousZone));
+                        updates.add(new PlayerZoneUpdate(player, zoneType));
                         if (zoneTab != null) {
                             playerPanel.setSelectedTab(zoneTab);
                         }
@@ -483,7 +491,7 @@ public class MatchController extends AbstractGuiGame {
     @Override
     public void afterGameEnd() {
         super.afterGameEnd();
-        Forge.back();
+        Forge.back(true);
         //view = null;
     }
 

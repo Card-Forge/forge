@@ -3,7 +3,7 @@ ManaCost:7 R R R
 Types:Legendary Creature Spirit
 PT:7/4
 T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromHand+Self | Destination$ Battlefield | Static$ True | Execute$ ETBCounter | TriggerDescription$ CARDNAME enters the battlefield with a divinity counter on it if you cast it from your hand.
-SVar:ETBCounter:DB$PutCounter | Defined$ Self | CounterType$ DIVINITY | CounterNum$ 1
+SVar:ETBCounter:DB$ PutCounter | Defined$ Self | CounterType$ DIVINITY | CounterNum$ 1
 S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_DIVINITY | AddKeyword$ Indestructible | Description$ CARDNAME has indestructible as long as it has a divinity counter on it.
 A:AB$ DestroyAll | Cost$ SubCounter<1/DIVINITY> | ValidCards$ Land | SpellDescription$ Destroy all lands.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myojin_of_infinite_rage.jpg

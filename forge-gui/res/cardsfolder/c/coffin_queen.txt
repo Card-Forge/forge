@@ -7,8 +7,8 @@ A:AB$ ChangeZone | Cost$ 2 B T | Origin$ Graveyard | Destination$ Battlefield | 
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExile | CheckSVar$ X | SVarCompare$ GE1 | Secondary$ True | TriggerDescription$ When CARDNAME becomes untapped, exile creature controlled by CARDNAME.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigExile | CheckSVar$ X | SVarCompare$ GE1 | Secondary$ True | TriggerDescription$ When you lose control of CARDNAME, exile creature controlled by CARDNAME.
 T:Mode$ ChangesController | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExile | CheckSVar$ X | SVarCompare$ GE1 | Secondary$ True | TriggerDescription$ When you lose control of CARDNAME, exile creature controlled by CARDNAME.
-SVar:TrigExile:DB$ChangeZoneAll | ChangeType$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:TrigExile:DB$ ChangeZoneAll | ChangeType$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:AIUntapPreference:NothingRemembered
 # Clear tracking effect if the creature put onto the battlefield leaves the battlefield, as per Oracle ruling
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.IsRemembered | Execute$ DBCleanup | Secondary$ True | Static$ True | TriggerDescription$ Clear tracking effect if the creature put onto the battlefield leaves the battlefield, as per Oracle ruling.

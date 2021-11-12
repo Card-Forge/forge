@@ -4,7 +4,7 @@ Types:Creature Elemental
 PT:2/1
 A:AB$ TapOrUntap | Cost$ U T | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | SpellDescription$ You may tap or untap another target creature.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, you may untap CARDNAME.
-SVar:TrigUntap:DB$Untap | Defined$ Self
+SVar:TrigUntap:DB$ Untap | Defined$ Self
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Tideforce_Elemental.jpg
 Oracle:{U}, {T}: You may tap or untap another target creature.\nLandfall — Whenever a land enters the battlefield under your control, you may untap Tideforce Elemental.

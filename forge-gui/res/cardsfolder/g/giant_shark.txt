@@ -7,6 +7,6 @@ T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creatur
 SVar:TrigPumpShark:DB$ Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 0 | KW$ Trample
 S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Description$ CARDNAME can't attack unless defending player controls an Island.
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Islands, sacrifice CARDNAME.
-SVar:TrigSac:DB$Sacrifice | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:NeedsToPlay:Island.YouCtrl
 Oracle:Giant Shark can't attack unless defending player controls an Island.\nWhenever Giant Shark blocks or becomes blocked by a creature that has been dealt damage this turn, Giant Shark gets +2/+0 and gains trample until end of turn.\nWhen you control no Islands, sacrifice Giant Shark.

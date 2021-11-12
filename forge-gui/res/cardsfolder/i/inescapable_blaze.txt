@@ -1,6 +1,6 @@
 Name:Inescapable Blaze
 ManaCost:4 R R
 Types:Instant
-K:CARDNAME can't be countered.
+K:This spell can't be countered.
 A:SP$ DealDamage | Cost$ 4 R R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 6 | SpellDescription$ CARDNAME deals 6 damage to any target.
 Oracle:This spell can't be countered.\nInescapable Blaze deals 6 damage to any target.

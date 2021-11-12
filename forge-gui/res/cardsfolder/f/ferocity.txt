@@ -5,7 +5,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ AttackerBlocked | ValidCard$ Card.AttachedBy | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked, you may put a +1/+1 counter on it.
 T:Mode$ Blocks | ValidCard$ Card.AttachedBy | Execute$ TrigPutCounter2 | OptionalDecider$ You | Secondary$ True | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked, you may put a +1/+1 counter on it.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ TriggeredAttackerLKICopy | CounterType$ P1P1 | CounterNum$ 1
-SVar:TrigPutCounter2:DB$PutCounter | Defined$ TriggeredBlockerLKICopy | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredAttackerLKICopy | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter2:DB$ PutCounter | Defined$ TriggeredBlockerLKICopy | CounterType$ P1P1 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ferocity.jpg
 Oracle:Enchant creature\nWhenever enchanted creature blocks or becomes blocked, you may put a +1/+1 counter on it.

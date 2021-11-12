@@ -169,7 +169,7 @@ public class PlayerProperty {
                 return false;
             }
         }  else if (property.equals("Defending")) {
-            if (!player.getGame().getCombat().getAttackersAndDefenders().values().contains(player)) {
+            if (!game.getCombat().getAttackersAndDefenders().values().contains(player)) {
                 return false;
             }
         } else if (property.equals("wasDealtCombatDamageThisTurn")) {
@@ -215,6 +215,10 @@ public class PlayerProperty {
             if (!player.isEnchantedBy(source)) {
                 return false;
             }
+        } else if (property.equals("NotEnchantedBy")) {
+            if (player.isEnchantedBy(source)) {
+                return false;
+            }
         } else if (property.equals("EnchantedController")) {
             Card enchanting = source.getEnchantingCard();
             if (enchanting != null && !player.equals(enchanting.getController())) {
@@ -238,8 +242,8 @@ public class PlayerProperty {
         } else if (property.startsWith("controls")) {
             final String[] type = property.substring(8).split("_");
             final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type[0], sourceController, source, spellAbility);
-            String comparator = type[1];
-            int y = AbilityUtils.calculateAmount(source, comparator.substring(2), spellAbility);
+            String comparator = type.length > 1 ? type[1] : "GE";
+            int y = type.length > 1 ? AbilityUtils.calculateAmount(source, comparator.substring(2), spellAbility) : 1;
             if (!Expressions.compare(list.size(), comparator, y)) {
                 return false;
             }

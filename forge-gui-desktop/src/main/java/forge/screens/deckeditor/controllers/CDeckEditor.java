@@ -38,7 +38,7 @@ public abstract class CDeckEditor<TModel extends DeckBase> extends ACEditorBase<
         return result;
     }
 
-    protected Boolean isSectionImportable(DeckSection section) {
+    public Boolean isSectionImportable(DeckSection section) {
         return section == DeckSection.Main;
     }
 

@@ -1,0 +1,19 @@
+Name:Shady Traveler
+ManaCost:2 B
+Types:Creature Human Werewolf
+PT:2/3
+K:Menace
+K:Daybound
+AlternateMode:DoubleFaced
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Stalking Predator
+ManaCost:no cost
+Colors:black
+Types:Creature Werewolf
+PT:4/4
+K:Menace
+K:Nightbound
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

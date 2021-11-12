@@ -5,6 +5,6 @@ K:Enchant permanent
 A:SP$ Attach | Cost$ 3 R | ValidTgts$ Permanent | AILogic$ Curse
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Execute$ TrigGainControl | Origin$ Any | Destination$ Battlefield | TriggerDescription$ When CARDNAME enters the battlefield or at the beginning of your upkeep, gain control of enchanted permanent until end of turn. Untap that permanent. It gains haste until end of turn.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainControl | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or at the beginning of your upkeep, gain control of enchanted permanent until end of turn. Untap that permanent. It gains haste until end of turn.
-SVar:TrigGainControl:DB$GainControl | Defined$ Enchanted | Untap$ True | AddKWs$ Haste | LoseControl$ EOT
+SVar:TrigGainControl:DB$ GainControl | Defined$ Enchanted | Untap$ True | AddKWs$ Haste | LoseControl$ EOT
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frenzied_fugue.jpg
 Oracle:Enchant permanent\nWhen Frenzied Fugue enters the battlefield or at the beginning of your upkeep, gain control of enchanted permanent until end of turn. Untap that permanent. It gains haste until end of turn.

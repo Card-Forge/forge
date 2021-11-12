@@ -95,7 +95,7 @@ public class PlayerControllerAi extends PlayerController {
         brains = new AiController(p, game);
     }
 
-    public void allowCheatShuffle(boolean value){
+    public void allowCheatShuffle(boolean value) {
         brains.allowCheatShuffle(value);
     }
 
@@ -220,16 +220,16 @@ public class PlayerControllerAi extends PlayerController {
         if (delayedReveal != null) {
             reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
         }
-	FCollection<T> remaining = new FCollection<>(optionList);
-	List<T> selecteds = new ArrayList<>();
-	T selected;
-	do {
-	    selected = chooseSingleEntityForEffect(remaining, null, sa, title, selecteds.size()>=min, targetedPlayer, params);
-	    if ( selected != null ) {
-		remaining.remove(selected);
-		selecteds.add(selected);
-	    }
-	} while ( (selected != null ) && (selecteds.size() < max) );
+        FCollection<T> remaining = new FCollection<>(optionList);
+        List<T> selecteds = new ArrayList<>();
+        T selected;
+        do {
+            selected = chooseSingleEntityForEffect(remaining, null, sa, title, selecteds.size()>=min, targetedPlayer, params);
+            if ( selected != null ) {
+                remaining.remove(selected);
+                selecteds.add(selected);
+            }
+        } while ( (selected != null ) && (selecteds.size() < max) );
         return selecteds;
     }
 
@@ -288,9 +288,9 @@ public class PlayerControllerAi extends PlayerController {
         // Store/replace target choices more properly to get this SA cleared.
         TargetChoices tc = null;
         TargetChoices subtc = null;
-        boolean storeChoices = sa.getTargetRestrictions() != null;
+        boolean storeChoices = sa.usesTargeting();
         final SpellAbility sub = sa.getSubAbility();
-        boolean storeSubChoices = sub != null && sub.getTargetRestrictions() != null;
+        boolean storeSubChoices = sub != null && sub.usesTargeting();
         boolean ret = true;
 
         if (storeChoices) {
@@ -361,8 +361,7 @@ public class PlayerControllerAi extends PlayerController {
         for (Card c: topN) {
             if (ComputerUtil.scryWillMoveCardToBottomOfLibrary(player, c)) {
                 toBottom.add(c);
-            }
-            else {
+            } else {
                 toTop.add(c);
             }
         }
@@ -525,8 +524,7 @@ public class PlayerControllerAi extends PlayerController {
             if (copySA instanceof Spell) {
                 Spell spell = (Spell) copySA;
                 ((PlayerControllerAi) player.getController()).getAi().canPlayFromEffectAI(spell, true, true);
-            }
-            else {
+            } else {
                 getAi().canPlaySa(copySA);
             }
         }
@@ -568,7 +566,6 @@ public class PlayerControllerAi extends PlayerController {
         return getAi().getCardsToDiscard(num, null, sa);
     }
 
-
     @Override
     public Mana chooseManaFromPool(List<Mana> manaChoices) {
         return manaChoices.get(0); // no brains used
@@ -581,7 +578,6 @@ public class PlayerControllerAi extends PlayerController {
             chosen = validTypes.iterator().next();
             System.err.println("AI has no idea how to choose " + kindOfType +", defaulting to arbitrary element: chosen");
         }
-        getGame().getAction().notifyOfValue(sa, player, chosen, player);
         return chosen;
     }
 
@@ -779,7 +775,6 @@ public class PlayerControllerAi extends PlayerController {
         return allTargets.get(0);
     }
 
-
     @Override
     public void notifyOfValue(SpellAbility saSource, GameObject realtedTarget, String value) {
         // AI should take into consideration creature types, numbers and other information (mostly choices) arriving through this channel
@@ -885,9 +880,8 @@ public class PlayerControllerAi extends PlayerController {
         byte chosenColorMask = MagicColor.fromName(c);
         if ((colors.getColor() & chosenColorMask) != 0) {
             return chosenColorMask;
-        } else {
-            return Iterables.getFirst(colors, (byte)0);
         }
+        return Iterables.getFirst(colors, (byte)0);
     }
 
     @Override
@@ -906,9 +900,7 @@ public class PlayerControllerAi extends PlayerController {
         if ((colors.getColor() & chosenColorMask) != 0) {
             return chosenColorMask;
         }
-        else {
-            return Iterables.getFirst(colors, MagicColor.WHITE);
-        }
+        return Iterables.getFirst(colors, MagicColor.WHITE);
     }
 
     @Override
@@ -1292,6 +1284,27 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public Card chooseDungeon(Player ai, List<PaperCard> dungeonCards, String message) {
+        // TODO: improve the conditions that define which dungeon is a viable option to choose
+        List<String> dungeonNames = Lists.newArrayList();
+        for (PaperCard pc : dungeonCards) {
+            dungeonNames.add(pc.getName());
+        }
+
+        // Don't choose Tomb of Annihilation when life in danger unless we can win right away or can't lose for 0 life
+        if (ai.getController().isAI()) { // FIXME: is this needed? Can simulation ever run this for a non-AI player?
+            int lifeInDanger = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD));
+            if ((ai.getLife() <= lifeInDanger && !ai.cantLoseForZeroOrLessLife())
+                    && !(ai.getLife() > 1 && ai.getWeakestOpponent().getLife() == 1)) {
+                dungeonNames.remove("Tomb of Annihilation");
+            }
+        }
+
+        int i = MyRandom.getRandom().nextInt(dungeonNames.size());
+        return Card.fromPaperCard(dungeonCards.get(i), ai);
+    }
+
+    @Override
     public List<Card> chooseCardsForSplice(SpellAbility sa, List<Card> cards) {
         // sort from best to worst
         CardLists.sortByCmcDesc(cards);
@@ -1350,8 +1363,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt,
-            int max) {
+    public int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt, int max) {
         // TODO: improve the logic depending on the keyword and the playability of the cost-modified SA (enough targets present etc.)
         int chosenAmount = 0;
 

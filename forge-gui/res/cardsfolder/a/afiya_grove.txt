@@ -5,7 +5,7 @@ K:etbCounter:P1P1:3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMoveCounter | TriggerDescription$ At the beginning of your upkeep, move a +1/+1 counter from CARDNAME onto target creature.
 SVar:TrigMoveCounter:DB$ MoveCounter | Source$ Self | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_EQ0_P1P1 | Execute$ TrigSac | TriggerDescription$ When CARDNAME has no +1/+1 counters on it, sacrifice it.
-SVar:TrigSac:DB$Sacrifice | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:NeedsToPlay:Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/afiya_grove.jpg
 Oracle:Afiya Grove enters the battlefield with three +1/+1 counters on it.\nAt the beginning of your upkeep, move a +1/+1 counter from Afiya Grove onto target creature.\nWhen Afiya Grove has no +1/+1 counters on it, sacrifice it.

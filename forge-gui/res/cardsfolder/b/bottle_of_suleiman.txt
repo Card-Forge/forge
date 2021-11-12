@@ -2,7 +2,7 @@ Name:Bottle of Suleiman
 ManaCost:4
 Types:Artifact
 A:AB$ FlipACoin | Cost$ 1 Sac<1/CARDNAME> | WinSubAbility$ DBToken | LoseSubAbility$ DBDamage | SpellDescription$ Flip a coin. If you win the flip, create a 5/5 colorless Djinn artifact creature token with flying. If you lose the flip, Bottle of Suleiman deals 5 damage to you.
-SVar:DBDamage:DB$DealDamage | Defined$ You | NumDmg$ 5
-SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenScript$ c_5_5_a_djinn_flying | TokenOwner$ You | LegacyImage$ c 5 5 a djinn flying arn
+SVar:DBDamage:DB$ DealDamage | Defined$ You | NumDmg$ 5
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_5_5_a_djinn_flying | TokenOwner$ You | LegacyImage$ c 5 5 a djinn flying arn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bottle_of_suleiman.jpg
 Oracle:{1}, Sacrifice Bottle of Suleiman: Flip a coin. If you win the flip, create a 5/5 colorless Djinn artifact creature token with flying. If you lose the flip, Bottle of Suleiman deals 5 damage to you.

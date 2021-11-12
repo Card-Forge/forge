@@ -14,6 +14,7 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
 
 import forge.Singletons;
+import forge.control.FControl;
 import forge.gui.GuiChoose;
 import forge.gui.MouseUtil;
 import forge.gui.framework.FScreen;
@@ -119,7 +120,14 @@ public final class LayoutMenu {
                 final boolean isVisible = menuItem.getState();
                 prefs.setPref(FPref.UI_MATCH_IMAGE_VISIBLE, isVisible);
                 if (isVisible) {
-                    FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_MATCH));
+                    if (FControl.instance.getCurrentScreen().getDaytime() == null)
+                        FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_MATCH), true);
+                    else {
+                        if ("Day".equals(FControl.instance.getCurrentScreen().getDaytime()))
+                            FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_DAY), true);
+                        else
+                            FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_NIGHT), true);
+                    }
                 } else {
                     FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage((Image)null);
                 }
@@ -205,7 +213,7 @@ public final class LayoutMenu {
     private static ActionListener getSetWindowSizeAction() {
         return new ActionListener() {
             @Override public void actionPerformed(final ActionEvent e) {
-                final String[] options = {"800x600", "1024x768", "1280x720"};
+                final String[] options = {"800x600", "1024x768", "1280x720", "1600x900", "1920x1080", "2560x1440", "3840x2160"};
                 final Localizer localizer = Localizer.getInstance();
                 final String choice = GuiChoose.oneOrNone(localizer.getMessage("lblChooseNewWindowSize"), options);
                 if (choice != null) {

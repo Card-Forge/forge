@@ -5,7 +5,7 @@ PT:5/4
 K:Flying
 K:Haste
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerZones$ Stack | TriggerDescription$ When you cast CARDNAME, return all cards named Demigod of Revenge from your graveyard to the battlefield.
-SVar:TrigReturn:DB$ChangeZoneAll | ChangeType$ Creature.namedDemigod of Revenge | Origin$ Graveyard | Destination$ Battlefield
+SVar:TrigReturn:DB$ ChangeZoneAll | ChangeType$ Creature.namedDemigod of Revenge | Origin$ Graveyard | Destination$ Battlefield
 DeckHints:Name$Demigod of Revenge
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demigod_of_revenge.jpg
 Oracle:When you cast this spell, return all cards named Demigod of Revenge from your graveyard to the battlefield.\nFlying, haste

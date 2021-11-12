@@ -2,6 +2,8 @@ package forge.ai.ability;
 
 import java.util.List;
 
+import com.google.common.collect.Iterables;
+
 import forge.ai.AiAttackController;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -44,13 +46,13 @@ public class DigUntilAi extends SpellAbilityAi {
                 return false;
             }
             if ("Land.Basic".equals(sa.getParam("Valid"))
-                    && !CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS_PRODUCING_MANA).isEmpty()) {
+                    && Iterables.any(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS_PRODUCING_MANA)) {
                 // We already have a mana-producing land in hand, so bail
                 // until opponent's end of turn phase!
                 // But we still want more (and want to fill grave) if nothing better to do then
                 // This is important for Replenish/Living Death type decks
-                if (!((ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN))
-                        && (!ai.getGame().getPhaseHandler().isPlayerTurn(ai)))) {
+                if (!ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)
+                        && !ai.getGame().getPhaseHandler().isPlayerTurn(ai)) {
                     return false;
                 }
             }
@@ -73,7 +75,7 @@ public class DigUntilAi extends SpellAbilityAi {
         }
 
         final String num = sa.getParam("Amount");
-        if ((num != null) && num.equals("X") && sa.getSVar(num).equals("Count$xPaid")) {
+        if (num != null && num.equals("X") && sa.getSVar(num).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             SpellAbility root = sa.getRootAbility();
             if (root.getXManaCostPaid() == null) {

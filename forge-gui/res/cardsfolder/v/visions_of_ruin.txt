@@ -1,0 +1,12 @@
+Name:Visions of Ruin
+ManaCost:3 R
+Types:Sorcery
+A:SP$ Sacrifice | Defined$ Player.Opponent | SacValid$ Artifact | SacMessage$ artifact | SubAbility$ DBToken | RememberSacrificed$ True | StackDescription$ SpellDescription | SpellDescription$ Each opponent sacrifices an artifact.
+SVar:DBToken:DB$ Token | TokenAmount$ Y | TokenScript$ c_a_treasure_sac | SubAbility$ DBCleanup | SpellDescription$ For each artifact sacrificed this way, you create a Treasure token.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:Count$RememberedSize
+K:Flashback:8 R R:ReduceCost$ X:This spell costs {X} less to cast this way, where X is the greatest mana value of a commander you own on the battlefield or in the command zone.
+SVar:X:Count$HighestCMC_Card.IsCommander+YouOwn+inZoneBattlefield,Card.IsCommander+YouOwn+inZoneCommand
+DeckHas:Ability$Token & Ability$Sacrifice
+AI:RemoveDeck:Random
+Oracle:Each opponent sacrifices an artifact. For each artifact sacrificed this way, you create a Treasure token.\nFlashback {8}{R}{R}. This spell costs {X} less to cast this way, where X is the greatest mana value of a commander you own on the battlefield or in the command zone. (You may cast this card from your graveyard for its flashback cost. Then exile it.)

@@ -79,7 +79,7 @@ public abstract class ImageFetcher {
                 return;
 
             final boolean backFace = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
-            String filename = ImageUtil.getImageKey(paperCard, backFace, true);
+            String filename = backFace ? paperCard.getCardAltImageKey() : paperCard.getCardImageKey();
             if (useArtCrop) {
                 filename = TextUtil.fastReplace(filename, ".full", ".artcrop");
             }
@@ -126,6 +126,11 @@ public abstract class ImageFetcher {
         if (destFile.exists()) {
             // TODO: Figure out why this codepath gets reached.
             //  Ideally, fetchImage() wouldn't be called if we already have the image.
+            if (prefix.equals(ImageKeys.CARD_PREFIX)) {
+                PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
+                if (paperCard != null)
+                    paperCard.hasImage(true);
+            }
             return;
         }
 

@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Creature Insect
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on target creature.
-SVar:TrigPut:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ironshell_beetle.jpg
 Oracle:When Ironshell Beetle enters the battlefield, put a +1/+1 counter on target creature.

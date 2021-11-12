@@ -78,6 +78,11 @@ public enum TrackableProperty {
     GainControlTargets(TrackableTypes.CardViewCollectionType),
     CloneOrigin(TrackableTypes.CardViewType),
     ExiledWith(TrackableTypes.CardViewType),
+    WasDestroyed(TrackableTypes.BooleanType),
+    CrackOverlay(TrackableTypes.IntegerType),
+    NeedsTransformAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
+    NeedsUntapAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
+    NeedsTapAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
 
     ImprintedCards(TrackableTypes.CardViewCollectionType),
     HauntedBy(TrackableTypes.CardViewCollectionType),
@@ -111,6 +116,18 @@ public enum TrackableProperty {
     HasChangedColors(TrackableTypes.BooleanType),
     ChangedTypes(TrackableTypes.StringMapType),
 
+    //check produce mana for BG
+    OrigProduceManaR(TrackableTypes.BooleanType),
+    OrigProduceManaG(TrackableTypes.BooleanType),
+    OrigProduceManaB(TrackableTypes.BooleanType),
+    OrigProduceManaU(TrackableTypes.BooleanType),
+    OrigProduceManaW(TrackableTypes.BooleanType),
+    OrigProduceManaC(TrackableTypes.BooleanType),
+    OrigProduceAnyMana(TrackableTypes.BooleanType),
+    CountOrigProduceColoredMana(TrackableTypes.IntegerType),
+    //number of basic landtypes
+    CountBasicLandTypes(TrackableTypes.IntegerType),
+
     KeywordKey(TrackableTypes.StringType),
     HasDeathtouch(TrackableTypes.BooleanType),
     HasDevoid(TrackableTypes.BooleanType),
@@ -132,6 +149,7 @@ public enum TrackableProperty {
     HasTrample(TrackableTypes.BooleanType),
     HasVigilance(TrackableTypes.BooleanType),
     HasLandwalk(TrackableTypes.BooleanType),
+    HasAftermath(TrackableTypes.BooleanType),
     //protectionkey
     ProtectionKey(TrackableTypes.StringType),
     //hexproofkey
@@ -184,8 +202,10 @@ public enum TrackableProperty {
     Mana(TrackableTypes.ManaMapType, FreezeMode.IgnoresFreeze),
     IsExtraTurn(TrackableTypes.BooleanType),
     ExtraTurnCount(TrackableTypes.IntegerType),
-    HasPriority(TrackableTypes.BooleanType),
+    HasPriority(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
     HasDelirium(TrackableTypes.BooleanType),
+    AvatarLifeDifference(TrackableTypes.IntegerType, FreezeMode.IgnoresFreeze),
+    HasLost(TrackableTypes.BooleanType),
 
     //SpellAbility
     HostCard(TrackableTypes.CardViewType),
@@ -234,8 +254,9 @@ public enum TrackableProperty {
     GameOver(TrackableTypes.BooleanType),
     PoisonCountersToLose(TrackableTypes.IntegerType),
     GameLog(TrackableTypes.StringType),
-    PlayerTurn(TrackableTypes.PlayerViewType),
-    Phase(TrackableTypes.EnumType(PhaseType.class));
+    NeedsPhaseRedrawn(TrackableTypes.BooleanType),
+    PlayerTurn(TrackableTypes.PlayerViewType, FreezeMode.IgnoresFreeze),
+    Phase(TrackableTypes.EnumType(PhaseType.class), FreezeMode.IgnoresFreeze);
 
     public enum FreezeMode {
         IgnoresFreeze,

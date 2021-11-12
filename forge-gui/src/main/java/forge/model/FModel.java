@@ -64,9 +64,7 @@ import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 
 import java.io.File;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * The default Model implementation for Forge.
@@ -103,7 +101,9 @@ public final class FModel {
     private static IStorage<ConquestPlane> planes;
     private static IStorage<QuestWorld> worlds;
     private static GameFormat.Collection formats;
-    private static ItemPool<PaperCard> uniqueCardsNoAlt, allCardsNoAlt, planechaseCards, archenemyCards, brawlCommander, oathbreakerCommander, tinyLeadersCommander, commanderPool, avatarPool, conspiracyPool;
+    private static ItemPool<PaperCard> uniqueCardsNoAlt, allCardsNoAlt, planechaseCards, archenemyCards,
+            brawlCommander, oathbreakerCommander, tinyLeadersCommander, commanderPool,
+            avatarPool, conspiracyPool, dungeonPool;
 
     public static void initialize(final IProgressBar progressBar, Function<ForgePreferences, Void> adjustPrefs) {
         //init version to log
@@ -217,6 +217,10 @@ public final class FModel {
         magicDb.setMulliganRule(MulliganDefs.MulliganRule.valueOf(preferences.getPref(FPref.MULLIGAN_RULE)));
 
         blocks = new StorageBase<>("Block definitions", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "blocks.txt", magicDb.getEditions()));
+        //setblockLands
+        for (final CardBlock b : blocks) {
+            magicDb.getBlockLands().add(b.getLandSet().getCode());
+        }
         questPreferences = new QuestPreferences();
         conquestPreferences = new ConquestPreferences();
         fantasyBlocks = new StorageBase<>("Custom blocks", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "fantasyblocks.txt", magicDb.getEditions()));
@@ -373,6 +377,12 @@ public final class FModel {
         if (conspiracyPool == null)
             return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_CONSPIRACY, PaperCard.FN_GET_RULES)), PaperCard.class);
         return conspiracyPool;
+    }
+
+    public static ItemPool<PaperCard> getDungeonPool() {
+        if (dungeonPool == null)
+            return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_DUNGEON, PaperCard.FN_GET_RULES)), PaperCard.class);
+        return dungeonPool;
     }
 
     private static boolean keywordsLoaded = false;

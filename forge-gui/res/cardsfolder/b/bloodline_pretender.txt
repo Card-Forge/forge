@@ -6,6 +6,6 @@ K:Changeling
 K:ETBReplacement:Other:ChooseCT
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+ChosenType+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature of the chosen type enters the battlefield under your control, put a +1/+1 counter on CARDNAME.
-SVar:TrigPutCounter:DB$PutCounter | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters
 Oracle:Changeling (This card is every creature type.)\nAs Bloodline Pretender enters the battlefield, choose a creature type.\nWhenever another creature of the chosen type enters the battlefield under your control, put a +1/+1 counter on Bloodline Pretender.

@@ -3,6 +3,6 @@ ManaCost:3 R
 Types:Creature Elemental
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDealDamage | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, you may have CARDNAME deal 1 damage to target player or planeswalker.
-SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cosis_ravager.jpg
 Oracle:Landfall — Whenever a land enters the battlefield under your control, you may have Cosi's Ravager deal 1 damage to target player or planeswalker.

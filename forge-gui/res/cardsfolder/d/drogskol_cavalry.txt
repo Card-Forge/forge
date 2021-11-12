@@ -4,7 +4,7 @@ Types:Creature Spirit Knight
 PT:4/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Spirit.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another Spirit enters the battlefield under your control, you gain 2 life.
-SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 A:AB$ Token | Cost$ 3 W | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | LegacyImage$ w 1 1 spirit flying soi | SpellDescription$ Create a 1/1 white Spirit creature token with flying.
 DeckHints:Type$Spirit
 DeckHas:Ability$Token & Ability$LifeGain

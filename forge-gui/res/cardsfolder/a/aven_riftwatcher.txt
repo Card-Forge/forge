@@ -6,6 +6,6 @@ PT:2/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters or leaves the battlefield, you gain 2 life.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigGainLife | Secondary$ True | TriggerDescription$ When CARDNAME enters or leaves the battlefield, you gain 2 life.
-SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_riftwatcher.jpg
 Oracle:Flying\nVanishing 3 (This creature enters the battlefield with three time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhen Aven Riftwatcher enters or leaves the battlefield, you gain 2 life.

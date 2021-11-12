@@ -2,7 +2,7 @@ Name:Jace's Defeat
 ManaCost:1 U
 Types:Instant
 A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target Blue spell | ValidTgts$ Card.Blue | SubAbility$ DBScry | SpellDescription$ Counter target blue spell. If it was a Jace planeswalker spell, scry 2.
-SVar:DBScry:DB$Scry | ScryNum$ 2 | ConditionDefined$ Targeted | ConditionPresent$ Planeswalker.Jace
+SVar:DBScry:DB$ Scry | ScryNum$ 2 | ConditionDefined$ Targeted | ConditionPresent$ Planeswalker.Jace
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jaces_defeat.jpg
 Oracle:Counter target blue spell. If it was a Jace planeswalker spell, scry 2.

@@ -1,9 +1,8 @@
 Name:Jeska's Will
 ManaCost:2 R
 Types:Sorcery
-A:SP$ Charm | Cost$ 2 R | MinCharmNum$ 1 | CharmNum$ X | Choices$ DBHandTarget,DBExile | AdditionalDescription$ If you control a commander as you cast this spell, you may choose both.
-SVar:DBHandTarget:DB$ Pump | ValidTgts$ Opponent | SubAbility$ DBMana | SpellDescription$ Add {R} for each card in target opponent's hand.
-SVar:DBMana:DB$ Mana | Produced$ R | Amount$ Z | StackDescription$ None
+A:SP$ Charm | Cost$ 2 R | MinCharmNum$ 1 | CharmNum$ X | Choices$ DBMana,DBExile | AdditionalDescription$ If you control a commander as you cast this spell, you may choose both.
+SVar:DBMana:DB$ Mana | Defined$ You | ValidTgts$ Opponent | AILogic$ ManaRitual | Produced$ R | Amount$ Z | SpellDescription$ Add {R} for each card in target opponent's hand.
 SVar:DBExile:DB$ Dig | Defined$ You | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top three cards of your library. You may play them this turn.
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
 SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled cards this turn.

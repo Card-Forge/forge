@@ -1784,4 +1784,47 @@
 2021-08-11 Pauper League (22 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-08-11-pauper-league.zip
 2021-08-15 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-08-15-pauper-challenge.zip
 2021-08-16 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-08-16-pauper-challenge.zip
-Pauper League (20 decks) | https://downloads.cardforge.org/decks/archive/pauper/pauper-league.zip
+2021-08-18 Pauper League (22 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-08-18-pauper-league.zip
+2021-08-20 Pauper Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-08-20-pauper-preliminary.zip
+2021-08-22 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-08-22-pauper-challenge.zip
+2021-08-23 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-08-23-pauper-challenge.zip
+2021-08-25 Pauper League (20 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-08-25-pauper-league.zip
+2021-08-29 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-08-29-pauper-challenge.zip
+2021-08-30 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-08-30-pauper-challenge.zip
+2021-09-01 Pauper League (21 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-09-01-pauper-league.zip
+2021-09-03 Pauper Preliminary (3 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-09-03-pauper-preliminary.zip
+2021-09-05 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-09-05-pauper-challenge.zip
+2021-09-06 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-09-06-pauper-challenge.zip
+2021-09-08 Pauper League (17 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-09-08-pauper-league.zip
+2021-09-12 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-09-12-pauper-challenge.zip
+2021-09-13 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-09-13-pauper-challenge.zip
+2021-09-15 Pauper League (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-09-15-pauper-league.zip
+2021-09-19 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-09-19-pauper-challenge.zip
+2021-09-19 Pauper Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-09-19-pauper-showcase-challenge.zip
+2021-09-20 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-09-20-pauper-challenge.zip
+2021-09-22 Pauper League (30 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-09-22-pauper-league.zip
+2021-09-26 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-09-26-pauper-challenge.zip
+2021-09-27 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-09-27-pauper-challenge.zip
+2021-09-29 Pauper League (31 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-09-29-pauper-league.zip
+2021-10-03 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-10-03-pauper-challenge.zip
+2021-10-03 Pauper Super Qualifier (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-10-03-pauper-super-qualifier.zip
+2021-10-04 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-10-04-pauper-challenge.zip
+2021-10-06 Pauper League (29 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-10-06-pauper-league.zip
+2021-10-10 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-10-10-pauper-challenge.zip
+2021-10-10 Pauper Premier (16 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-10-10-pauper-premier.zip
+2021-10-11 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-10-11-pauper-challenge.zip
+2021-10-13 Pauper League (30 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-10-13-pauper-league.zip
+2021-10-17 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-10-17-pauper-challenge.zip
+2021-10-18 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-10-18-pauper-challenge.zip
+2021-10-20 Pauper League (25 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-10-20-pauper-league.zip
+2021-10-24 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-10-24-pauper-challenge.zip
+2021-10-25 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-10-25-pauper-challenge.zip
+2021-10-27 Pauper League (29 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-10-27-pauper-league.zip
+2021-10-31 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-10-31-pauper-challenge.zip
+2021-11-01 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-11-01-pauper-challenge.zip
+2021-11-03 Pauper League (26 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-11-03-pauper-league.zip
+2021-11-03 Pauper Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-11-03-pauper-preliminary.zip
+2021-11-07 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-11-07-pauper-challenge.zip
+2021-11-07 Pauper Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-11-07-pauper-showcase-challenge.zip
+2021-11-08 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-11-08-pauper-challenge.zip
+2021-11-10 Pauper League (25 decks) | https://downloads.cardforge.org/decks/archive/pauper/2021-11-10-pauper-league.zip

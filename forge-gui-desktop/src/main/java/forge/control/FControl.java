@@ -17,10 +17,7 @@
  */
 package forge.control;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.KeyEventDispatcher;
-import java.awt.KeyboardFocusManager;
+import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.InputEvent;
@@ -333,9 +330,20 @@ public enum FControl implements KeyEventDispatcher {
 
         if (screen.isMatchScreen()) {
             if (isMatchBackgroundImageVisible()) {
-                FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_MATCH));
+                if (screen.getDaytime() == null)
+                    FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_MATCH), true);
+                else {
+                    if ("Day".equals(screen.getDaytime()))
+                        FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_DAY), true);
+                    else
+                        FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_NIGHT), true);
+                }
+            } else {
+                FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage((Image)null);
             }
             //SOverlayUtils.showTargetingOverlay();
+        } else {
+            FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage((Image)null);
         }
 
         Singletons.getView().getNavigationBar().updateSelectedTab();

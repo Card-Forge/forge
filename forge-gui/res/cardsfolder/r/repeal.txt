@@ -2,7 +2,7 @@ Name:Repeal
 ManaCost:X U
 Types:Instant
 A:SP$ ChangeZone | Cost$ X U | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Choose target nonland permanent | ValidTgts$ Permanent.nonLand+cmcEQX | SubAbility$ DBDraw | SpellDescription$ Return target nonland permanent with mana value X to its owner's hand. Draw a card.
-SVar:DBDraw:DB$Draw | NumCards$ 1
+SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/repeal.jpg
 Oracle:Return target nonland permanent with mana value X to its owner's hand.\nDraw a card.

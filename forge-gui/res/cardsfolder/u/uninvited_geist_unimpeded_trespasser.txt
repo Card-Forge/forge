@@ -4,7 +4,7 @@ Types:Creature Spirit
 PT:2/2
 K:Skulk
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigTransform | CombatDamage$ True | TriggerDescription$ When CARDNAME deals combat damage to a player, transform it.
-SVar:TrigTransform:DB$SetState | Defined$ Self | Mode$ Transform
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uninvited_geist.jpg
 Oracle:Skulk (This creature can't be blocked by creatures with greater power.)\nWhen Uninvited Geist deals combat damage to a player, transform it.

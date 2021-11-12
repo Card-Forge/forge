@@ -1,18 +1,11 @@
 package forge;
 
-import java.io.File;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
-
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Clipboard;
-
 import forge.animation.ForgeAnimation;
 import forge.assets.AssetsDownloader;
 import forge.assets.FSkin;
@@ -34,21 +27,19 @@ import forge.screens.home.NewGameMenu;
 import forge.screens.match.MatchController;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
-import forge.toolbox.FContainer;
-import forge.toolbox.FDisplayObject;
-import forge.toolbox.FGestureAdapter;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.FOverlay;
-import forge.util.Callback;
-import forge.util.CardTranslation;
-import forge.util.FileUtil;
-import forge.util.Localizer;
-import forge.util.Utils;
+import forge.toolbox.*;
+import forge.util.*;
+
+import java.io.File;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.List;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.6.44.001";
+    public static final String CURRENT_VERSION = "1.6.45.001";
 
-    private static final ApplicationListener app = new Forge();
+    private static ApplicationListener app = null;
     private static Clipboard clipboard;
     private static IDeviceAdapter deviceAdapter;
     private static int screenWidth;
@@ -56,7 +47,7 @@ public class Forge implements ApplicationListener {
     private static Graphics graphics;
     private static FrameRate frameRate;
     private static FScreen currentScreen;
-    private static SplashScreen splashScreen;
+    protected static SplashScreen splashScreen;
     private static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
     private static int continuousRenderingCount = 1; //initialize to 1 since continuous rendering is the default
@@ -67,8 +58,10 @@ public class Forge implements ApplicationListener {
     public static float heigtModifier = 0.0f;
     private static boolean isloadingaMatch = false;
     public static boolean showFPS = false;
+    public static boolean allowCardBG = false;
     public static boolean altPlayerLayout = false;
     public static boolean altZoneTabs = false;
+    public static boolean animatedCardTapUntap = false;
     public static String enableUIMask = "Crop";
     public static boolean enablePreloadExtendedArt = false;
     public static boolean isTabletDevice = false;
@@ -84,8 +77,12 @@ public class Forge implements ApplicationListener {
     public static boolean autoCache = false;
     public static int lastButtonIndex = 0;
     public static String CJK_Font = "";
+    public static int hoveredCount = 0;
+    public static boolean afterDBloaded = false;
+    public static int mouseButtonID = 0;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
+        app = new Forge();
         if (GuiBase.getInterface() == null) {
             clipboard = clipboard0;
             deviceAdapter = deviceAdapter0;
@@ -100,7 +97,21 @@ public class Forge implements ApplicationListener {
         GuiBase.setDeviceInfo(deviceName, AndroidRelease, AndroidAPI, totalRAM);
         return app;
     }
-
+    protected Forge(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
+        if (GuiBase.getInterface() == null) {
+            clipboard = clipboard0;
+            deviceAdapter = deviceAdapter0;
+            GuiBase.setUsingAppDirectory(assetDir0.contains("forge.app")); //obb directory on android uses the package name as entrypoint
+            GuiBase.setInterface(new GuiMobile(assetDir0));
+            GuiBase.enablePropertyConfig(value);
+            isPortraitMode = androidOrientation;
+            totalDeviceRAM = totalRAM;
+            isTabletDevice = isTablet;
+            androidVersion = AndroidAPI;
+        }
+        GuiBase.setDeviceInfo(deviceName, AndroidRelease, AndroidAPI, totalRAM);
+        app=this;
+    }
     private Forge() {
     }
 
@@ -110,6 +121,13 @@ public class Forge implements ApplicationListener {
         ExceptionHandler.registerErrorHandling();
 
         GuiBase.setIsAndroid(Gdx.app.getType() == Application.ApplicationType.Android);
+
+        if (!GuiBase.isAndroid() || (androidVersion > 28 && totalDeviceRAM > 7000)) {
+            allowCardBG = true;
+        } else {
+            // don't allow to read and process
+            ForgeConstants.SPRITE_CARDBG_FILE = "";
+        }
 
         graphics = new Graphics();
         splashScreen = new SplashScreen();
@@ -138,6 +156,7 @@ public class Forge implements ApplicationListener {
         showFPS = prefs.getPrefBoolean(FPref.UI_SHOW_FPS);
         altPlayerLayout = prefs.getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
         altZoneTabs = prefs.getPrefBoolean(FPref.UI_ALT_PLAYERZONETABS);
+        animatedCardTapUntap = prefs.getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);
         enableUIMask = prefs.getPref(FPref.UI_ENABLE_BORDER_MASKING);
         if (prefs.getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("true")) //override old settings if not updated
             enableUIMask = "Full";
@@ -203,7 +222,7 @@ public class Forge implements ApplicationListener {
     }
 
     private void preloadExtendedArt() {
-        if (!enablePreloadExtendedArt)
+        if (!enablePreloadExtendedArt||!enableUIMask.equals("Full"))
             return;
         List<String> borderlessCardlistkeys = FileUtil.readFile(ForgeConstants.BORDERLESS_CARD_LIST_FILE);
         if(borderlessCardlistkeys.isEmpty())
@@ -218,12 +237,22 @@ public class Forge implements ApplicationListener {
             ImageCache.preloadCache(filteredkeys);
     }
 
-    public static void openHomeScreen(int index) {
+    public static void openHomeScreen(int index, FScreen lastMatch) {
         openScreen(HomeScreen.instance);
         HomeScreen.instance.openMenu(index);
+        if (lastMatch != null) {
+            try {
+                Dscreens.remove(lastMatch);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        //check
+        /*for (FScreen fScreen : Dscreens)
+            System.out.println(fScreen.toString());*/
     }
 
-    private void afterDbLoaded() {
+    protected void afterDbLoaded() {
         stopContinuousRendering(); //save power consumption by disabling continuous rendering once assets loaded
 
         FSkin.loadFull(splashScreen);
@@ -231,8 +260,9 @@ public class Forge implements ApplicationListener {
         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
         destroyThis = false; //Allow back()
         Gdx.input.setCatchKey(Keys.MENU, true);
-        openHomeScreen(-1); //default for startup
+        openHomeScreen(-1, null); //default for startup
         splashScreen = null;
+        afterDBloaded = true;
 
         boolean isLandscapeMode = isLandscapeMode();
         if (isLandscapeMode) { //open preferred new game screen by default if landscape mode
@@ -306,6 +336,10 @@ public class Forge implements ApplicationListener {
     }
 
     public static void back() {
+        back(false);
+    }
+    public static void back(boolean clearlastMatch) {
+        FScreen lastMatch = currentScreen;
         if(destroyThis && isLandscapeMode())
             return;
         if (Dscreens.size() < 2 || (currentScreen == HomeScreen.instance && Forge.isPortraitMode)) {
@@ -318,6 +352,16 @@ public class Forge implements ApplicationListener {
                 if (result) {
                     Dscreens.pollFirst();
                     setCurrentScreen(Dscreens.peekFirst());
+                    if (clearlastMatch) {
+                        try {
+                            Dscreens.remove(lastMatch);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        //check
+                        /*for (FScreen fScreen : Dscreens)
+                            System.out.println(fScreen.toString());*/
+                    }
                 }
             }
         });
@@ -452,25 +496,9 @@ public class Forge implements ApplicationListener {
         try {
             endKeyInput(); //end key input before switching screens
             ForgeAnimation.endAll(); //end all active animations before switching screens
-
             currentScreen = screen0;
             currentScreen.setSize(screenWidth, screenHeight);
             currentScreen.onActivate();
-            /*keep Dscreens growing
-            if (Dscreens.size() > 3) {
-                for(int x = Dscreens.size(); x > 3; x--) {
-                    Dscreens.removeLast();
-                }
-            }*/
-            /* for checking only
-            if (!Dscreens.isEmpty()) {
-                int x = 0;
-                for(FScreen fScreen : Dscreens) {
-                    System.out.println("Screen ["+x+"]: "+fScreen.toString());
-                    x++;
-                }
-                System.out.println("---------------");
-            }*/
         }
         catch (Exception ex) {
             graphics.end();
@@ -753,6 +781,7 @@ public class Forge implements ApplicationListener {
                     }
                 }
             }
+            mouseButtonID = button;
             return super.touchDown(x, y, pointer, button);
         }
 
@@ -905,11 +934,24 @@ public class Forge implements ApplicationListener {
 
         //mouseMoved and scrolled events for desktop version
         private int mouseMovedX, mouseMovedY;
-
         @Override
-        public boolean mouseMoved(int x, int y) {
-            mouseMovedX = x;
-            mouseMovedY = y;
+        public boolean mouseMoved(int screenX, int screenY) {
+            mouseMovedX = screenX;
+            mouseMovedY = screenY;
+            //todo: mouse listener for android?
+            if (GuiBase.isAndroid())
+                return true;
+            hoveredCount = 0;
+            //reset
+            try {
+                for (FDisplayObject listener : potentialListeners) {
+                    listener.setHovered(false);
+                }
+            }
+            catch (Exception ex) {
+                BugReporter.reportException(ex);
+            }
+            updatePotentialListeners(screenX, screenY);
             return true;
         }
 

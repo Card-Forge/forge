@@ -5,9 +5,9 @@ PT:4/4
 A:AB$ Pump | Cost$ G | KW$ Trample | Defined$ Self | SubAbility$ DBToken | SpellDescription$ CARDNAME gains trample until end of turn. Target opponent creates a 1/1 green Hippo creature token.
 A:AB$ Pump | Cost$ W | KW$ Flying | Defined$ Self | SubAbility$ DBGain | SpellDescription$ CARDNAME gains flying until end of turn. Target opponent gains 2 life.
 A:AB$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return CARDNAME to its owner's hand. Target opponent may draw a card.
-SVar:DBToken:DB$Token | ValidTgts$ Opponent | TokenAmount$ 1 | TokenScript$ g_1_1_hippo | TokenOwner$ Opponent | LegacyImage$ g 1 1 hippo all
-SVar:DBGain:DB$GainLife | LifeAmount$ 2 | ValidTgts$ Opponent
-SVar:DBDraw:DB$Draw | NumCards$ 1 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | OptionalDecider$ Opponent
+SVar:DBToken:DB$ Token | ValidTgts$ Opponent | TokenAmount$ 1 | TokenScript$ g_1_1_hippo | TokenOwner$ Opponent | LegacyImage$ g 1 1 hippo all
+SVar:DBGain:DB$ GainLife | LifeAmount$ 2 | ValidTgts$ Opponent
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | OptionalDecider$ Opponent
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phelddagrif.jpg
 Oracle:{G}: Phelddagrif gains trample until end of turn. Target opponent creates a 1/1 green Hippo creature token.\n{W}: Phelddagrif gains flying until end of turn. Target opponent gains 2 life.\n{U}: Return Phelddagrif to its owner's hand. Target opponent may draw a card.

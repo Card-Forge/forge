@@ -37,20 +37,20 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
         Card source = sa.getHostCard();
         final boolean rememberRevealed = sa.hasParam("RememberRevealed");
         final boolean imprintRevealed = sa.hasParam("ImprintRevealed");
-        String revealValid = sa.hasParam("RevealValid") ? sa.getParam("RevealValid") : "Card";
-        String peekAmount = sa.hasParam("PeekAmount") ? sa.getParam("PeekAmount") : "1";
+        String revealValid = sa.getParamOrDefault("RevealValid", "Card");
+        String peekAmount = sa.getParamOrDefault("PeekAmount", "1");
         int numPeek = AbilityUtils.calculateAmount(sa.getHostCard(), peekAmount, sa);
         
         // Right now, this is only used on your own library.
         List<Player> libraryPlayers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
         Player peekingPlayer = sa.getActivatingPlayer();
         
-        for(Player libraryToPeek : libraryPlayers) {
+        for (Player libraryToPeek : libraryPlayers) {
             final PlayerZone library = libraryToPeek.getZone(ZoneType.Library);
             numPeek = Math.min(numPeek, library.size());
 
             CardCollection peekCards = new CardCollection();
-            for(int i = 0; i < numPeek; i++) {
+            for (int i = 0; i < numPeek; i++) {
                 peekCards.add(library.get(i));
             }
 
@@ -60,28 +60,27 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
                 peekingPlayer.getController().reveal(peekCards, ZoneType.Library, peekingPlayer, CardTranslation.getTranslatedName(source.getName()) + " - " + Localizer.getInstance().getMessage("lblRevealingCardFrom") + " ");
             }
             
-            if( doReveal && sa.hasParam("RevealOptional") )
+            if (doReveal && sa.hasParam("RevealOptional"))
                 doReveal = peekingPlayer.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblRevealCardToOtherPlayers"));
             
             if (doReveal) {
                 peekingPlayer.getGame().getAction().reveal(revealableCards, peekingPlayer);
 
-                // Singletons.getModel().getGameAction().revealCardsToOtherPlayers(peekingPlayer, revealableCards);
                 if (rememberRevealed) {
                     Map<Integer, Card> cachedMap = Maps.newHashMap();
-                    for(Card c : revealableCards) {
+                    for (Card c : revealableCards) {
                         source.addRemembered(CardUtil.getLKICopy(c, cachedMap));
                     }
                 }
                 if (imprintRevealed) {
                     Map<Integer, Card> cachedMap = Maps.newHashMap();
-                    for(Card c : revealableCards) {
+                    for (Card c : revealableCards) {
                         source.addImprintedCard(CardUtil.getLKICopy(c, cachedMap));
                     }
                 }
             } else if (sa.hasParam("RememberPeeked")) {
                 Map<Integer, Card> cachedMap = Maps.newHashMap();
-                for(Card c : revealableCards) {
+                for (Card c : revealableCards) {
                     source.addRemembered(CardUtil.getLKICopy(c, cachedMap));
                 }
             }

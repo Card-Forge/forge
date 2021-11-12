@@ -1,0 +1,14 @@
+Name:Necrosynthesis
+ManaCost:1 B
+Types:Enchantment Aura
+K:Enchant creature
+Oracle:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | TgtPrompt$ Select creature to enchant | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ DiesTrig | Description$ Enchanted creature has "Whenever another creature dies, put a +1/+1 counter on this creature."
+SVar:DiesTrig:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature dies, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.EnchantedBy | Execute$ TrigDig | TriggerDescription$ When enchanted creature dies, look at the top X cards of your library, where X is its power. Put one of those cards into your hand and the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ X | RestRandomOrder$ True
+SVar:X:TriggeredCard$CardPower
+DeckHas:Ability$Counters
+Oracle:Enchant creature\nEnchanted creature has "Whenever another creature dies, put a +1/+1 counter on this creature."\nWhen enchanted creature dies, look at the top X cards of your library, where X is its power. Put one of those cards into your hand and the rest on the bottom of your library in a random order.

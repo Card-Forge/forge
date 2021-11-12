@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may put a ki counter on CARDNAME.
 A:AB$ Token | Cost$ 2 T SubCounter<1/KI> | TokenAmount$ 1 | TokenScript$ c_1_1_spirit | LegacyImage$ c 1 1 spirit bok | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Spirit creature token.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ KI | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ KI | CounterNum$ 1
 AI:RemoveDeck:Random
 DeckHints:Type$Spirit|Arcane
 SVar:Picture:http://www.wizards.com/global/images/magic/general/baku_altar.jpg

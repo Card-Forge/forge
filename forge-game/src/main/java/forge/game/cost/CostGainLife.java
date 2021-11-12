@@ -63,13 +63,11 @@ public class CostGainLife extends CostPart {
         sb.append("Have an opponent gain ").append(this.getAmount()).append(" life");
         return sb.toString();
     }
-    
-    public List<Player> getPotentialTargets(final Player payer, final Card source)
-    {
+
+    public List<Player> getPotentialTargets(final Player payer, final Card source) {
         List<Player> res = new ArrayList<>();
-        for(Player p : payer.getGame().getPlayers())
-        {
-            if(p.isValid(getType(), payer, source, null))
+        for (Player p : payer.getGame().getPlayers()) {
+            if (p.isValid(getType(), payer, source, null))
                 res.add(p);
         }
         return res;
@@ -85,7 +83,7 @@ public class CostGainLife extends CostPart {
     @Override
     public final boolean canPay(final SpellAbility ability, final Player payer) {
         final Integer amount = this.convertAmount();
-        if ( amount == null ) return false;
+        if (amount == null) return false;
 
         int cntAbleToGainLife = 0;
         List<Player> possibleTargets = getPotentialTargets(payer, ability.getHostCard());
@@ -123,7 +121,6 @@ public class CostGainLife extends CostPart {
         return true;
     }
 
-    
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }

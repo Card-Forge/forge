@@ -22,7 +22,7 @@ public class CountersRemoveAllEffect extends SpellAbilityEffect {
 
         final CounterType cType = CounterType.getType(sa.getParam("CounterType"));
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
-        final String zone = sa.hasParam("ValidZone") ? sa.getParam("ValidZone") : "Battlefield";
+        final String zone = sa.getParamOrDefault("ValidZone", "Battlefield");
         String amountString = Integer.toString(amount);
 
         if (sa.hasParam("AllCounters")) {
@@ -62,7 +62,7 @@ public class CountersRemoveAllEffect extends SpellAbilityEffect {
         int numberRemoved = 0;
         for (final Card tgtCard : cards) {
             if (sa.hasParam("AllCounterTypes")) {
-                for(Map.Entry<CounterType, Integer> e : Lists.newArrayList(tgtCard.getCounters().entrySet())) {
+                for (Map.Entry<CounterType, Integer> e : Lists.newArrayList(tgtCard.getCounters().entrySet())) {
                     numberRemoved += e.getValue();
                     tgtCard.subtractCounter(e.getKey(), e.getValue());
                 }

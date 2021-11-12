@@ -2,6 +2,6 @@ Name:Convalescence
 ManaCost:1 W
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | LifeTotal$ You | LifeAmount$ LE10 | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, if you have 10 life or less, you gain 1 life.
-SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/convalescence.jpg
 Oracle:At the beginning of your upkeep, if you have 10 or less life, you gain 1 life.

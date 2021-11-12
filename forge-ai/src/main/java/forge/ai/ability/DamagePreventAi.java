@@ -42,8 +42,7 @@ public class DamagePreventAi extends SpellAbilityAi {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
-            // As far as I can tell these Defined Cards will only have one of
-            // them
+            // As far as I can tell these Defined Cards will only have one of them
             final List<GameObject> objects = AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam("Defined"), sa);
 
             // react to threats on the stack
@@ -60,12 +59,12 @@ public class DamagePreventAi extends SpellAbilityAi {
                     boolean flag = false;
                     for (final Object o : objects) {
                         if (o instanceof Card) {
-                            flag |= ComputerUtilCombat.combatantWouldBeDestroyed(ai, (Card) o, combat);
+                            flag = flag || ComputerUtilCombat.combatantWouldBeDestroyed(ai, (Card) o, combat);
                         } else if (o instanceof Player) {
                             // Don't need to worry about Combat Damage during AI's turn
                             final Player p = (Player) o;
                             if (!handler.isPlayerTurn(p)) {
-                                flag |= (p == ai && ((ComputerUtilCombat.wouldLoseLife(ai, combat) && sa
+                                flag = flag || (p == ai && ((ComputerUtilCombat.wouldLoseLife(ai, combat) && sa
                                         .isAbility()) || ComputerUtilCombat.lifeInDanger(ai, combat)));
                             }
                         }
@@ -113,6 +112,8 @@ public class DamagePreventAi extends SpellAbilityAi {
         	final TargetChoices tcs = sa.getTargets();
             if (sa.canTarget(ai) && ComputerUtilCombat.wouldLoseLife(ai, combat)
                     && (ComputerUtilCombat.lifeInDanger(ai, combat) || sa.isAbility() || sa.isTrigger())
+                    // check if any of the incoming dmg is even preventable:
+                    && (ComputerUtilCombat.sumDamageIfUnblocked(combat.getAttackers(), ai, true) > ai.getPreventNextDamageTotalShields())
                     && game.getPhaseHandler().getPlayerTurn().isOpponentOf(ai)) {
             	tcs.add(ai);
                 chance = true;

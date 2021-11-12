@@ -1,5 +1,6 @@
 package forge.game.ability;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -126,7 +127,7 @@ public abstract class SpellAbilityEffect {
             int amount = AbilityUtils.calculateAmount(sa.getHostCard(), svar, sa);
             sb.append(" ");
             sb.append(TextUtil.enclosedParen(TextUtil.concatNoSpace(svar,"=",String.valueOf(amount))));
-        } else{
+        } else {
             if (sa.costHasManaX()) {
                 int amount = sa.getXManaCostPaid() == null ? 0 : sa.getXManaCostPaid();
                 sb.append(" ");
@@ -198,13 +199,19 @@ public abstract class SpellAbilityEffect {
     // Players
     protected final static PlayerCollection getTargetPlayers(final SpellAbility sa) {                                       return getPlayers(false, "Defined",    sa); }
     protected final static PlayerCollection getTargetPlayers(final SpellAbility sa, final String definedParam) {            return getPlayers(false, definedParam, sa); }
-    protected final static PlayerCollection getDefinedPlayersOrTargeted(final SpellAbility sa) {                           return getPlayers(true,  "Defined",    sa); }
+    protected final static PlayerCollection getDefinedPlayersOrTargeted(final SpellAbility sa) {                            return getPlayers(true,  "Defined",    sa); }
     protected final static PlayerCollection getDefinedPlayersOrTargeted(final SpellAbility sa, final String definedParam) { return getPlayers(true,  definedParam, sa); }
 
     private static PlayerCollection getPlayers(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
         final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
-        return useTargets ? new PlayerCollection(sa.getTargets().getTargetPlayers())
+        PlayerCollection players = useTargets ? new PlayerCollection(sa.getTargets().getTargetPlayers())
                 : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam(definedParam), sa);
+        // try sort in APNAP order
+        int indexAP = players.indexOf(sa.getHostCard().getGame().getPhaseHandler().getPlayerTurn());
+        if (indexAP != -1) {
+            Collections.rotate(players, - indexAP);
+        }
+        return players;
     }
 
     // Spells
@@ -219,8 +226,8 @@ public abstract class SpellAbilityEffect {
     }
 
     // Targets of card or player type
-    protected final static List<GameEntity> getTargetEntities(final SpellAbility sa) {                                return getEntities(false, "Defined",    sa); }
-    protected final static List<GameEntity> getTargetEntities(final SpellAbility sa, final String definedParam) {     return getEntities(false, definedParam, sa); }
+    protected final static List<GameEntity> getTargetEntities(final SpellAbility sa) {                                 return getEntities(false, "Defined",    sa); }
+    protected final static List<GameEntity> getTargetEntities(final SpellAbility sa, final String definedParam) {      return getEntities(false, definedParam, sa); }
     protected final static List<GameEntity> getDefinedEntitiesOrTargeted(SpellAbility sa, final String definedParam) { return getEntities(true,  definedParam, sa); }
 
     private static List<GameEntity> getEntities(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
@@ -254,7 +261,7 @@ public abstract class SpellAbilityEffect {
         boolean your = location.startsWith("Your");
         boolean combat = location.endsWith("Combat");
 
-        String desc = sa.hasParam("AtEOTDesc") ? sa.getParam("AtEOTDesc") : "";
+        String desc = sa.getParamOrDefault("AtEOTDesc", "");
 
         if (your) {
             location = location.substring("Your".length());
@@ -426,11 +433,10 @@ public abstract class SpellAbilityEffect {
             eff.copyChangedTextFrom(card);
         }
 
-        eff.updateStateForView();
-
         // TODO: Add targeting to the effect so it knows who it's dealing with
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         game.getAction().moveTo(ZoneType.Command, eff, sa);
+        eff.updateStateForView();
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }
 
@@ -456,7 +462,7 @@ public abstract class SpellAbilityEffect {
         final Card eff = new Card(game.nextCardId(), game);
         eff.setTimestamp(game.getNextTimestamp());
         eff.setName(name);
-        eff.setColor(hostCard.determineColor().getColor());
+        eff.setColor(hostCard.getColor().getColor());
         // if name includes emblem then it should be one
         if (name.startsWith("Emblem")) {
             eff.setEmblem(true);
@@ -515,7 +521,7 @@ public abstract class SpellAbilityEffect {
 
             String repeffstr = "Event$ Moved | ValidCard$ " + valid +
                     "| Origin$ Battlefield | Destination$ Graveyard " +
-                    "| Description$ If the creature would die this turn, exile it instead.";
+                    "| Description$ If that permanent would die this turn, exile it instead.";
             String effect = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ " + zone;
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
@@ -545,11 +551,10 @@ public abstract class SpellAbilityEffect {
 
             game.getEndOfTurn().addUntil(endEffect);
 
-            eff.updateStateForView();
-
             // TODO: Add targeting to the effect so it knows who it's dealing with
             game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
             game.getAction().moveTo(ZoneType.Command, eff, sa);
+            eff.updateStateForView();
             game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         }
     }
@@ -570,14 +575,14 @@ public abstract class SpellAbilityEffect {
             FCollection<GameEntity> defs = null;
             // important to update defenders here, maybe some PW got removed
             combat.initConstraints();
-            if ("True".equalsIgnoreCase(attacking)) {
-                defs = (FCollection<GameEntity>) combat.getDefenders();
-            } else if (sa.hasParam("ChoosePlayerOrPlaneswalker")) {
+            if (sa.hasParam("ChoosePlayerOrPlaneswalker")) {
                 PlayerCollection defendingPlayers = AbilityUtils.getDefinedPlayers(host, attacking, sa);
                 defs = new FCollection<>();
                 for (Player p : defendingPlayers) {
                     defs.addAll(game.getCombat().getDefendersControlledBy(p));
                 }
+            } else if ("True".equalsIgnoreCase(attacking)) {
+                defs = (FCollection<GameEntity>) combat.getDefenders();
             } else {
                 defs = AbilityUtils.getDefinedEntities(host, attacking, sa);
             }
@@ -588,8 +593,7 @@ public abstract class SpellAbilityEffect {
                 Player chooser;
                 if (sa.hasParam("Chooser")) {
                     chooser = Iterables.getFirst(AbilityUtils.getDefinedPlayers(host, sa.getParam("Chooser"), sa), null);
-                }
-                else {
+                } else {
                     chooser = controller;
                 }
                 defender = chooser.getController().chooseSingleEntityForEffect(defs, sa,

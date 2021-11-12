@@ -465,19 +465,23 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return null;
         }
 
+        String announceTitle = ability.getParamOrDefault("AnnounceTitle", announce);
         if (cost.isMandatory()) {
-            return chooseNumber(ability, localizer.getMessage("lblChooseAnnounceForCard", announce,
+            return chooseNumber(ability, localizer.getMessage("lblChooseAnnounceForCard", announceTitle,
                     CardTranslation.getTranslatedName(ability.getHostCard().getName())) , min, max);
-        } else {
-            return getGui().getInteger(localizer.getMessage("lblChooseAnnounceForCard", announce,
-                    CardTranslation.getTranslatedName(ability.getHostCard().getName())) , min, max, min + 9);
         }
+        if ("NumTimes".equals(announce)) {
+            return getGui().getInteger(localizer.getMessage("lblHowManyTimesToPay", ability.getPayCosts().getTotalMana(),
+                    CardTranslation.getTranslatedName(ability.getHostCard().getName())), min, max, min + 9);
+        }
+        return getGui().getInteger(localizer.getMessage("lblChooseAnnounceForCard", announceTitle,
+                CardTranslation.getTranslatedName(ability.getHostCard().getName())), min, max, min + 9);
     }
 
     @Override
     public CardCollectionView choosePermanentsToSacrifice(final SpellAbility sa, final int min, final int max,
             final CardCollectionView valid, final String message) {
-        return choosePermanentsTo(min, max, valid, message, localizer.getMessage("lblSacrifice"), sa);
+        return choosePermanentsTo(min, max, valid, message, localizer.getMessage("lblSacrifice").toLowerCase(), sa);
     }
 
     @Override
@@ -1187,6 +1191,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     for (String part : splitUTypes) {
                         if (c.getType().hasStringType(part)) {
                             return true;
+                        } else if (part.equals("Basic Land")) {
+                            if (c.isBasicLand()) {
+                                return true;
+                            }
                         }
                     }
                 }
@@ -1197,9 +1205,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         StringBuilder promptType = new StringBuilder();
         for (String part : splitUTypes) {
             if (n==1) {
-                promptType.append(part);
+                promptType.append(part.toLowerCase());
             } else {
-                promptType.append(" or ").append(part);
+                promptType.append(" or ").append(part.toLowerCase());
             }
             n++;
         }
@@ -1570,7 +1578,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             labels = ImmutableList.of(localizer.getMessage("lblHeads"), localizer.getMessage("lblTails"));
             break;
         case TapOrUntap:
-            labels = ImmutableList.of(localizer.getMessage("lblTap"), localizer.getMessage("lblUntap"));
+            labels = ImmutableList.of(StringUtils.capitalize(localizer.getMessage("lblTap")),
+                    localizer.getMessage("lblUntap"));
             break;
         case OddsOrEvens:
             labels = ImmutableList.of(localizer.getMessage("lblOdds"), localizer.getMessage("lblEvens"));
@@ -2492,7 +2501,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             } else {
                 card.addCounter(counter, count, card.getController(), null, false, null);
             }
-
         }
 
         /*
@@ -2514,7 +2522,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     inp.showAndWait();
                     if (!inp.hasCancelled()) {
                         for (final Card c : inp.getSelected()) {
-                            c.tap();
+                            c.tap(true);
                         }
                     }
                 }
@@ -2540,7 +2548,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     inp.showAndWait();
                     if (!inp.hasCancelled()) {
                         for (final Card c : inp.getSelected()) {
-                            c.untap();
+                            c.untap(true);
                         }
                     }
                 }
@@ -2761,7 +2769,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                             if (finalC.getRules().getType().isLand()) {
                                 // this is needed to ensure land abilities fire
                                 getGame().getAction().moveToHand(forgeCard, null);
-                                getGame().getAction().moveToPlay(forgeCard, null);
+                                getGame().getAction().moveToPlay(forgeCard, null, null);
                                 // ensure triggered abilities fire
                                 getGame().getTriggerHandler().runWaitingTriggers();
                             } else {
@@ -3233,6 +3241,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public String chooseCardName(SpellAbility sa, List<ICardFace> faces, String message) {
         ICardFace face = getGui().one(message, faces);
         return face == null ? "" : face.getName();
+    }
+
+    @Override
+    public Card chooseDungeon(Player player, List<PaperCard> dungeonCards, String message) {
+        PaperCard dungeon = getGui().one(message, dungeonCards);
+        return Card.fromPaperCard(dungeon, player);
     }
 
     @Override

@@ -598,6 +598,7 @@ public class QuestUtil {
         rules.setGamesPerMatch(qData.getMatchLength());
         rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
         rules.setCanCloneUseTargetsImage(FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));
+        rules.setUseGrayText(FModel.getPreferences().getPrefBoolean(FPref.UI_GRAY_INACTIVE_TEXT));
 
         final TreeSet<GameType> variant = new TreeSet<>();
         if(FModel.getQuest().getDeckConstructionRules() == DeckConstructionRules.Commander){

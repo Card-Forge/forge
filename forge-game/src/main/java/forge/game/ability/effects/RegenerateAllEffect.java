@@ -26,17 +26,13 @@ public class RegenerateAllEffect extends RegenerateBaseEffect {
     public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
-        String valid = "";
-
-        if (sa.hasParam("ValidCards")) {
-            valid = sa.getParam("ValidCards");
-        }
+        final String valid = sa.getParamOrDefault("ValidCards", "");
 
         CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
         list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard, sa);
 
         // create Effect for Regeneration
         createRegenerationEffect(sa, list);
-    } // regenerateAllResolve
+    }
 
 }

@@ -4,6 +4,6 @@ Types:Creature Bat Imp
 PT:1/1
 K:Flying
 A:AB$ LoseLife | Cost$ 7 B T Sac<1/CARDNAME> | ValidTgts$ Opponent | LifeAmount$ 4 | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses 4 life and you gain 4 life.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 4
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blight_keeper.jpg
 Oracle:Flying\n{7}{B}, {T}, Sacrifice Blight Keeper: Target opponent loses 4 life and you gain 4 life.

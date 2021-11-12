@@ -38,9 +38,4 @@ public class RestartGameAi extends SpellAbilityAi {
         return false;
     }
 
-    @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        // This trigger AI is completely unused, but return true just in case
-        return true;
-    }
 }

@@ -308,9 +308,8 @@ public class AbilityManaPart implements java.io.Serializable {
             if (restriction.equals("CumulativeUpkeep")) {
                 if (sa.isCumulativeupkeep()) {
                     return true;
-                } else {
-                    continue;
                 }
+                continue;
             }
 
             if (restriction.startsWith("CostContainsX")) {
@@ -319,13 +318,20 @@ public class AbilityManaPart implements java.io.Serializable {
                 }
                 continue;
             }
+
+            if (restriction.equals("Disturb")) {
+                if (sa.isDisturb()) {
+                    return true;
+                }
+                continue;
+            }
+
             if (restriction.equals("MorphOrManifest")) {
                 if ((sa.isSpell() && sa.getHostCard().isCreature() && sa.isCastFaceDown())
                         || sa.isManifestUp() || sa.isMorphUp()) {
                     return true;
-                } else {
-                    continue;
                 }
+                continue;
             }
 
             if (sa.isValid(restriction, this.getSourceCard().getController(), this.getSourceCard(), null)) {
@@ -339,12 +345,10 @@ public class AbilityManaPart implements java.io.Serializable {
             if (sa.isAbility()) {
                 if (restriction.startsWith("Activated")) {
                     restriction = TextUtil.fastReplace(restriction, "Activated", "Card");
-                }
-                else {
+                } else {
                     continue;
                 }
             }
-
 
             if (sa.getHostCard() != null) {
                 if (sa.getHostCard().isValid(restriction, this.getSourceCard().getController(), this.getSourceCard(), null)) {
@@ -578,7 +582,6 @@ public class AbilityManaPart implements java.io.Serializable {
     public Card getSourceCard() {
         return sourceCard;
     }
-
     public void setSourceCard(final Card host) {
         sourceCard = host;
     }
@@ -633,8 +636,7 @@ public class AbilityManaPart implements java.io.Serializable {
                     return true;
                 }
             }
-        }
-        else {
+        } else {
             // treat special mana if it always can be paid
             if (isSpecialMana()) {
                 return true;
@@ -649,5 +651,4 @@ public class AbilityManaPart implements java.io.Serializable {
         return false;
     }
 
-} // end class AbilityMana
-
+}

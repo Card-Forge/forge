@@ -17,8 +17,7 @@
  */
 package forge.screens.match;
 
-import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -401,8 +400,7 @@ public final class CMatchUI
                     selectedDocBeforeCombat = combatDoc.getParentCell().getSelected();
                     if (selectedDocBeforeCombat != combatDoc) {
                         SDisplayUtil.showTab(combatDoc);
-                    }
-                    else {
+                    } else {
                         selectedDocBeforeCombat = null; //don't need to cache combat doc this way
                     }
                 }
@@ -415,6 +413,19 @@ public final class CMatchUI
         cCombat.setModel(combat);
         cCombat.update();
     } // showCombat(CombatView)
+
+    @Override
+    public void updateDayTime(String daytime) {
+        super.updateDayTime(daytime);
+        if ("Day".equals(daytime)) {
+            FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_DAY), true);
+            getScreen().setDaytime("Day");
+        } else {
+            FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_NIGHT), true);
+            getScreen().setDaytime("Night");
+        }
+        FView.SINGLETON_INSTANCE.getPnlInsets().repaint();
+    }
 
     @Override
     public void updateZones(final Iterable<PlayerZoneUpdate> zonesToUpdate) {
@@ -744,8 +755,6 @@ public final class CMatchUI
         //else if (toFocus == btn1)
         //btn2.setFocusable(false);
 
-
-
         final Runnable focusRoutine = new Runnable() {
             @Override
             public final void run() {
@@ -754,11 +763,11 @@ public final class CMatchUI
                 // and then using the keyboard to try to select it
                 btn1.setEnabled(enable1);
                 btn2.setEnabled(enable2);
-                btn1.setFocusable(enable1 && focus1 );
+                btn1.setFocusable(enable1 && focus1);
                 btn2.setFocusable(enable2 && !focus1);
                 // ensure we don't steal focus from an overlay
                 if (toFocus != null && !FNetOverlay.SINGLETON_INSTANCE.getTxtInput().hasFocus() ) {
-                    toFocus.requestFocus();  // focus here even if another window has focus - shouldn't have to do it this way but some popups grab window focus
+                    toFocus.requestFocus(); // focus here even if another window has focus - shouldn't have to do it this way but some popups grab window focus
                 }
             }
             };
@@ -1067,6 +1076,12 @@ public final class CMatchUI
         SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
 
         SOverlayUtils.hideOverlay();
+        //reset every match
+        getScreen().setDaytime(null);
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_MATCH_IMAGE_VISIBLE))
+            FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_MATCH), true);
+        else
+            FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage((Image)null);
     }
 
     @Override
@@ -1364,7 +1379,6 @@ public final class CMatchUI
             }
             // In any case, I have to increase the counter
             nextNotifiableStackIndex++;
-
         } else {
             // Not yet time to show the modal - schedule the method again, and try again later
             Runnable tryAgainThread = new Runnable() {

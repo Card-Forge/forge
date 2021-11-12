@@ -4,7 +4,7 @@ Types:Legendary Creature Angel
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigGainLife | CheckSVar$ X | SVarCompare$ GTZ | TriggerDescription$ When CARDNAME enters the battlefield, if an opponent has more life than you, you gain 5 life.
-SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ 5
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigToken | CheckSVar$ W | SVarCompare$ GTY | TriggerDescription$ When CARDNAME enters the battlefield, if an opponent controls more creatures than you, create a 3/3 white Angel creature token with flying.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_3_3_angel_flying | TokenOwner$ You | LegacyImage$ w 3 3 angel flying ogw
 SVar:X:PlayerCountOpponents$HighestLifeTotal

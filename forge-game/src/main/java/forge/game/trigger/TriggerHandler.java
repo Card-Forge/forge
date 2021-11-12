@@ -336,7 +336,7 @@ public class TriggerHandler {
     }
 
     public void resetTurnTriggerState() {
-        for(final Trigger t : activeTriggers) {
+        for (final Trigger t : activeTriggers) {
             t.resetTurnState();
         }
         for (final Trigger t : delayedTriggers) {

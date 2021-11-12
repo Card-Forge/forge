@@ -1,0 +1,10 @@
+Name:Locked in the Cemetery
+ManaCost:1 U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ KeepTapped
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | IsPresent$ Card.YouCtrl | PresentCompare$ GE5 | PresentZone$ Graveyard | TriggerDescription$ When CARDNAME enters the battlefield, if there are five or more cards in your graveyard, tap enchanted creature.
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted
+S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
+DeckHas:Ability$Graveyard
+Oracle:Enchant creature\nWhen Locked in the Cemetery enters the battlefield, if there are five or more cards in your graveyard, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.

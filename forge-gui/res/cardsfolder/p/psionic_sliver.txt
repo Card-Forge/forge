@@ -4,6 +4,6 @@ Types:Creature Sliver
 PT:2/2
 S:Mode$ Continuous | Affected$ Sliver | AddAbility$ DamageOther | AddSVar$ DBDamageSelf | Description$ All Sliver creatures have "{T}: This creature deals 2 damage to any target and 3 damage to itself."
 SVar:DamageOther:AB$DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SubAbility$ DBDamageSelf | SpellDescription$ This creature deals 2 damage to any target and 3 damage to itself.
-SVar:DBDamageSelf:DB$DealDamage | NumDmg$ 3 | Defined$ Self
+SVar:DBDamageSelf:DB$ DealDamage | NumDmg$ 3 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psionic_sliver.jpg
 Oracle:All Sliver creatures have "{T}: This creature deals 2 damage to any target and 3 damage to itself."

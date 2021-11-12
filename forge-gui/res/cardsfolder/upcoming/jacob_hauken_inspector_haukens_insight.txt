@@ -1,0 +1,32 @@
+Name:Jacob Hauken, Inspector
+ManaCost:1 U
+Types:Legendary Creature Human Advisor
+PT:1/2
+A:AB$ Draw | Cost$ T | NumCards$ 1 | SubAbility$ DBExile | StackDescription$ {p:You} draws a card, | SpellDescription$ Draw a card,
+SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | ExileFaceDown$ True | Imprint$ True | Mandatory$ True | SubAbility$ DBEffect | StackDescription$ then exiles a card from their hand face down. | SpellDescription$ then exile a card from your hand face down.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Imprinted | StaticAbilities$ STLook | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBTransform | SpellDescription$ You may look at that card for as long as it remains exiled.
+SVar:STLook:Mode$ Continuous | MayLookAt$ You | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at this card for as long as it remains exiled.
+SVar:DBTransform:DB$ SetState | UnlessCost$ 4 U U | UnlessSwitched$ True | UnlessPayer$ You | Defined$ Self | Mode$ Transform | StackDescription$ SpellDescription | SpellDescription$ You may pay {4}{U}{U}. If you do, transform CARDNAME.
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted | Execute$ DBForget
+SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetImprinted$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+AlternateMode:DoubleFaced
+Oracle:{T}: Draw a card, then exile a card from your hand face down. You may look at that card for as long as it remains exiled. You may pay {4}{U}{U}. If you do, transform Jacob Hauken, Inspector.
+
+ALTERNATE
+
+Name:Hauken's Insight
+ManaCost:no cost
+Colors:blue
+Types:Legendary Enchantment
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigExile | TriggerDescription$ At the beginning of your upkeep, exile the top card of your library face down. You may look at that card for as long as it remains exiled.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | Imprint$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Imprinted | StaticAbilities$ STLook | Duration$ Permanent | ForgetOnMoved$ Exile
+SVar:STLook:Mode$ Continuous | MayLookAt$ You | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at this card for as long as it remains exiled.
+S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Card.IsImprinted+ExiledWithSource | AffectedZone$ Exile | MayPlay$ True | MayPlayLimit$ 1 | MayPlayWithoutManaCost$ True | Description$ Once during each of your turns, you may play a land or cast a spell from among the cards exiled with this permanent without paying its mana cost.
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted | Execute$ DBForget
+SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetImprinted$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+Oracle:At the beginning of your upkeep, exile the top card of your library face down. You may look at that card for as long as it remains exiled.\nOnce during each of your turns, you may play a land or cast a spell from among the cards exiled with this permanent without paying its mana cost.

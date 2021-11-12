@@ -5,7 +5,7 @@ PT:3/3
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack. | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME can't attack unless you control a creature with power 4 or greater.
 SVar:X:Count$Valid Creature.YouCtrl+powerGE4
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
-SVar:TrigTransform:DB$SetState | Defined$ Self | Mode$ Transform
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lambholt_pacifist.jpg
 Oracle:Lambholt Pacifist can't attack unless you control a creature with power 4 or greater.\nAt the beginning of each upkeep, if no spells were cast last turn, transform Lambholt Pacifist.
@@ -18,7 +18,7 @@ Colors:green
 Types:Creature Werewolf
 PT:4/4
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
-SVar:TrigTransform:DB$SetState | Defined$ Self | Mode$ Transform
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lambholt_butcher.jpg
 Oracle:At the beginning of each upkeep, if a player cast two or more spells last turn, transform Lambholt Butcher. 
 

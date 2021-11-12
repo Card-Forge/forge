@@ -1,0 +1,6 @@
+Name:Path of Peril
+ManaCost:1 B B
+Types:Sorcery
+A:SP$ DestroyAll | ValidCards$ Creature.cmcLE2 | SpellDescription$ Destroy all creatures [with mana value 2 or less].
+A:SP$ DestroyAll | Cost$ 4 W B | ValidCards$ Creature | PrecostDesc$ Cleave | CostDesc$ {4}{W}{B} | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its cleave cost. If you do, remove the words in square brackets.) | StackDescription$ Destroy all creatures.
+Oracle:Cleave {4}{W}{B} (You may cast this spell for its cleave cost. If you do, remove the words in square brackets.)\nDestroy all creatures [with mana value 2 or less].

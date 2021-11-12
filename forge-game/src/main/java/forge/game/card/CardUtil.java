@@ -64,7 +64,7 @@ public final class CardUtil {
             "Affinity", "Entwine", "Splice", "Ninjutsu", "Presence",
             "Transmute", "Replicate", "Recover", "Suspend", "Aura swap",
             "Fortify", "Transfigure", "Champion", "Evoke", "Prowl", "IfReach",
-            "Reinforce", "Unearth", "Level up", "Miracle", "Overload",
+            "Reinforce", "Unearth", "Level up", "Miracle", "Overload", "Cleave",
             "Scavenge", "Encore", "Bestow", "Outlast", "Dash", "Surge", "Emerge", "Hexproof:",
             "etbCounter", "Reflect", "Ward").build();
     /** List of keyword endings of keywords that could be modified by text changes. */
@@ -83,10 +83,6 @@ public final class CardUtil {
             }
         }
         return false;
-    }
-
-    public static ColorSet getColors(final Card c) {
-        return c.determineColor();
     }
 
     public static boolean isStackingKeyword(final String keyword) {
@@ -123,8 +119,7 @@ public final class CardUtil {
             for (Player p : game.getRegisteredPlayers()) {
                 res.addAll(p.getZone(to).getCardsAddedThisTurn(from));
             }
-        }
-        else {
+        } else {
             res.addAll(game.getStackZone().getCardsAddedThisTurn(from));
         }
         return CardLists.getValidCardsAsList(res, valid, src.getController(), src, ctb);
@@ -159,7 +154,6 @@ public final class CardUtil {
 
     public static List<Card> getLastTurnCast(final String valid, final Card src, final CardTraitBase ctb) {
         return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, src.getController(), src, ctb);
-
     }
 
     public static List<Card> getLKICopyList(final Iterable<Card> in, Map<Integer, Card> cachedMap) {
@@ -253,7 +247,7 @@ public final class CardUtil {
 
         newCopy.setCounters(Maps.newHashMap(in.getCounters()));
 
-        newCopy.setColor(in.determineColor().getColor());
+        newCopy.setColor(in.getColor().getColor());
         newCopy.setPhasedOut(in.isPhasedOut());
 
         newCopy.setReceivedDamageFromThisTurn(in.getReceivedDamageFromThisTurn());
@@ -282,11 +276,11 @@ public final class CardUtil {
 
         newCopy.setUnearthed(in.isUnearthed());
 
-        newCopy.setChangedCardColors(in.getChangedCardColorsMap());
-        newCopy.setChangedCardColorsCharacterDefining(in.getChangedCardColorsCharacterDefiningMap());
+        newCopy.setChangedCardColors(in.getChangedCardColorsTable());
+        newCopy.setChangedCardColorsCharacterDefining(in.getChangedCardColorsCharacterDefiningTable());
         newCopy.setChangedCardKeywords(in.getChangedCardKeywords());
-        newCopy.setChangedCardTypes(in.getChangedCardTypesMap());
-        newCopy.setChangedCardTypesCharacterDefining(in.getChangedCardTypesCharacterDefiningMap());
+        newCopy.setChangedCardTypes(in.getChangedCardTypesTable());
+        newCopy.setChangedCardTypesCharacterDefining(in.getChangedCardTypesCharacterDefiningTable());
         newCopy.setChangedCardNames(in.getChangedCardNames());
         newCopy.setChangedCardTraits(in.getChangedCardTraits());
 
@@ -344,7 +338,7 @@ public final class CardUtil {
 
         byte combinedColor = 0;
         for (Card tgt : tgts) {
-            ColorSet cs = CardUtil.getColors(tgt);
+            ColorSet cs = tgt.getColor();
             for (byte color : MagicColor.WUBRG) {
                 if(!cs.hasAnyColor(color))
                     continue;
@@ -355,7 +349,7 @@ public final class CardUtil {
             if ((combinedColor & color) == 0) {
                 continue;
             }
-            for(final Card c : game.getColoredCardsInPlay(MagicColor.toLongString(color))) {
+            for (final Card c : game.getColoredCardsInPlay(MagicColor.toLongString(color))) {
                 if (!res.contains(c) && !tgts.contains(c) && c.isValid(valid, source.getController(), source, targetSA)) {
                     res.add(c);
                 }
@@ -368,7 +362,7 @@ public final class CardUtil {
     public static ColorSet getColorsYouCtrl(final Player p) {
         byte b = 0;
         for (Card c : p.getCardsIn(ZoneType.Battlefield)) {
-            b |= c.determineColor().getColor();
+            b |= c.getColor().getColor();
         }
         return ColorSet.fromMask(b);
     }
@@ -376,7 +370,6 @@ public final class CardUtil {
     public static CardState getFaceDownCharacteristic(Card c) {
         return getFaceDownCharacteristic(c, CardStateName.FaceDown);
     }
-
     public static CardState getFaceDownCharacteristic(Card c, CardStateName state) {
         final CardType type = new CardType(false);
         type.add("Creature");
@@ -401,7 +394,6 @@ public final class CardUtil {
     public static Set<String> getReflectableManaColors(final SpellAbility sa) {
         return getReflectableManaColors(sa, sa, Sets.newHashSet(), new CardCollection());
     }
-
     private static Set<String> getReflectableManaColors(final SpellAbility abMana, final SpellAbility sa,
             Set<String> colors, final CardCollection parents) {
         // Here's the problem with reflectable Mana. If more than one is out,

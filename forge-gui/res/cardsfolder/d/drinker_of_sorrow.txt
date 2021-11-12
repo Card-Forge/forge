@@ -4,6 +4,6 @@ Types:Creature Horror
 PT:5/3
 K:CARDNAME can't block.
 T:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME deals combat damage, sacrifice a permanent.
-SVar:TrigSac:DB$Sacrifice | Defined$ You | SacValid$ Permanent
+SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Permanent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drinker_of_sorrow.jpg
 Oracle:Drinker of Sorrow can't block.\nWhenever Drinker of Sorrow deals combat damage, sacrifice a permanent.
