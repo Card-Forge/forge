@@ -1343,7 +1343,7 @@ public class CardFactoryUtil {
             triggers.add(gainControlTrigger);
 
             // when the card with hideaway leaves the battlefield, forget all exiled cards
-            final Trigger changeZoneTrigger = TriggerHandler.parseTrigger("Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | TriggerZone$ Battlefield | Static$ True", card, intrinsic);
+            final Trigger changeZoneTrigger = TriggerHandler.parseTrigger("Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | TriggerZones$ Battlefield | Static$ True", card, intrinsic);
             String cleanupStr = "DB$ Cleanup | ClearRemembered$ True";
             changeZoneTrigger.setOverridingAbility(AbilityFactory.getAbility(cleanupStr, card));
             triggers.add(changeZoneTrigger);
