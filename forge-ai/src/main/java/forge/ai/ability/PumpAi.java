@@ -70,10 +70,6 @@ public class PumpAi extends PumpAiBase {
             return SpecialAiLogic.doAristocratLogic(ai, sa);
         } else if (aiLogic.startsWith("AristocratCounters")) {
             return SpecialAiLogic.doAristocratWithCountersLogic(ai, sa);
-        } else if ("RiskFactor".equals(aiLogic)) {
-            if (ai.getCardsIn(ZoneType.Hand).size() + 3 >= ai.getMaxHandSize()) {
-                return false;
-            }
         } else if (aiLogic.equals("SwitchPT")) {
             // Some more AI would be even better, but this is a good start to prevent spamming
             if (sa.isAbility() && sa.getActivationsThisTurn() > 0 && !sa.usesTargeting()) {
