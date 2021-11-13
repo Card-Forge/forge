@@ -1,5 +1,5 @@
 Name:Fearful Villager
-ManaCost:2 R R
+ManaCost:2 R
 Types:Creature Human Werewolf
 PT:2/3
 K:Menace

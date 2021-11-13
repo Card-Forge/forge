@@ -1,0 +1,12 @@
+Name:Hollowhenge Overlord
+ManaCost:4 G G
+Types:Creature Wolf
+PT:4/4
+K:Flash
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, for each creature you control that's a Wolf or a Werewolf, create a 2/2 green Wolf creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_2_2_wolf
+SVar:X:Count$Valid Creature.Wolf+YouCtrl,Creature.Werewolf+YouCtrl
+DeckHints:Type$Wolf|Werewolf
+DeckHas:Ability$Token
+SVar:BuffedBy:Wolf,Werewolf
+Oracle:Flash\nAt the beginning of your upkeep, for each creature you control that’s a Wolf or a Werewolf, create a 2/2 green Wolf creature token.

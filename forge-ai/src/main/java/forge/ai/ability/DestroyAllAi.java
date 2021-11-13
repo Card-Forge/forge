@@ -66,7 +66,32 @@ public class DestroyAllAi extends SpellAbilityAi {
         if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;
         }
-        
+
+        final String aiLogic = sa.getParamOrDefault("AILogic", "");
+
+        if ("FellTheMighty".equals(aiLogic)) {
+            CardCollection aiList = ai.getCreaturesInPlay();
+            if (aiList.isEmpty()) {
+                return false;
+            }
+            CardLists.sortByPowerAsc(aiList);
+            Card lowest = aiList.get(0);
+            if (!sa.canTarget(lowest)) {
+                return false;
+            }
+
+            CardCollection oppList = CardLists.filter(ai.getGame().getCardsIn(ZoneType.Battlefield),
+                    CardPredicates.Presets.CREATURES, CardPredicates.isControlledByAnyOf(ai.getOpponents()));
+
+            oppList = CardLists.filterPower(oppList, lowest.getNetPower() + 1);
+            if (ComputerUtilCard.evaluateCreatureList(oppList) > 200) {
+                sa.resetTargets();
+                sa.getTargets().add(lowest);
+                return true;
+            }
+            return false;
+        } 
+
         return doMassRemovalLogic(ai, sa);
     }
 
