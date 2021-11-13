@@ -1,7 +1,7 @@
 Name:Overcharged Amalgam
 ManaCost:2 U U
 Types:Creature Zombie Horror
-PT:2/2
+PT:3/3
 K:Flash
 K:Flying
 K:Exploit

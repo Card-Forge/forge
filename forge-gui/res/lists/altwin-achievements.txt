@@ -29,6 +29,7 @@ Near-Death Experience|The Edge|Phew... I thought I was going to die!
 Phage the Untouchable|The Untouchable|None are immune to her deadly touch!
 Revel in Riches|The Dead Man's Chest|Yo-ho-ho, and a bottle of rum!
 Simic Ascendancy|The Ascension|As you can see, we are going through a period of unprecedented growth.
+Sinner's Judgment|The Final Judgment|Your appeal has been denied.
 Strixhaven Stadium|The Mage Tower|And that's game, set, and match!
 Test of Endurance|The Test|So... did I pass?
 Thassa's Oracle|The Prophecy of Victory|I see... nothing. We must've won.
