@@ -2,13 +2,7 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-
-import forge.ai.AiBlockController;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.card.MagicColor;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -70,27 +64,8 @@ public class DestroyAllAi extends SpellAbilityAi {
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
 
         if ("FellTheMighty".equals(aiLogic)) {
-            CardCollection aiList = ai.getCreaturesInPlay();
-            if (aiList.isEmpty()) {
-                return false;
-            }
-            CardLists.sortByPowerAsc(aiList);
-            Card lowest = aiList.get(0);
-            if (!sa.canTarget(lowest)) {
-                return false;
-            }
-
-            CardCollection oppList = CardLists.filter(ai.getGame().getCardsIn(ZoneType.Battlefield),
-                    CardPredicates.Presets.CREATURES, CardPredicates.isControlledByAnyOf(ai.getOpponents()));
-
-            oppList = CardLists.filterPower(oppList, lowest.getNetPower() + 1);
-            if (ComputerUtilCard.evaluateCreatureList(oppList) > 200) {
-                sa.resetTargets();
-                sa.getTargets().add(lowest);
-                return true;
-            }
-            return false;
-        } 
+            return SpecialCardAi.FellTheMighty.consider(ai, sa);
+        }
 
         return doMassRemovalLogic(ai, sa);
     }

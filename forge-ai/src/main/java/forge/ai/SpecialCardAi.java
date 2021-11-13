@@ -545,6 +545,32 @@ public class SpecialCardAi {
         }
     }
 
+    // Fell the Mighty
+    public static class FellTheMighty {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            CardCollection aiList = ai.getCreaturesInPlay();
+            if (aiList.isEmpty()) {
+                return false;
+            }
+            CardLists.sortByPowerAsc(aiList);
+            Card lowest = aiList.get(0);
+            if (!sa.canTarget(lowest)) {
+                return false;
+            }
+
+            CardCollection oppList = CardLists.filter(ai.getGame().getCardsIn(ZoneType.Battlefield),
+                    CardPredicates.Presets.CREATURES, CardPredicates.isControlledByAnyOf(ai.getOpponents()));
+
+            oppList = CardLists.filterPower(oppList, lowest.getNetPower() + 1);
+            if (ComputerUtilCard.evaluateCreatureList(oppList) > 200) {
+                sa.resetTargets();
+                sa.getTargets().add(lowest);
+                return true;
+            }
+            return false;
+        }
+    }
+
     // Force of Will
     public static class ForceOfWill {
         public static boolean consider(final Player ai, final SpellAbility sa) {
