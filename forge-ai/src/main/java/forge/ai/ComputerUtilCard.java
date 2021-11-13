@@ -1326,7 +1326,7 @@ public class ComputerUtilCard {
         // will the creature attack (only relevant for sorcery speed)?
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && phase.isPlayerTurn(ai)
-                && SpellAbilityAi.isSorcerySpeed(sa) || main1Preferred
+                && (SpellAbilityAi.isSorcerySpeed(sa) || main1Preferred)
                 && power > 0
                 && doesCreatureAttackAI(ai, c)) {
             return true;

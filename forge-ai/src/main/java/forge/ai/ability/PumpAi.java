@@ -388,8 +388,9 @@ public class PumpAi extends PumpAiBase {
                         return true;
                     } else if (containsUsefulKeyword(ai, keywords, card, sa, attack)) {
                         Card pumped = ComputerUtilCard.getPumpedCreature(ai, sa, card, 0, 0, keywords);
-                        if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai)
-                                || game.getPhaseHandler().is(PhaseType.COMBAT_BEGIN, ai)) {
+                        if (game.getPhaseHandler().isPreCombatMain() && SpellAbilityAi.isSorcerySpeed(sa) ||
+                                game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai) ||
+                                game.getPhaseHandler().is(PhaseType.COMBAT_BEGIN, ai)) {
                             return ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped);
                         }
 
