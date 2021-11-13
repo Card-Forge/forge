@@ -1,32 +1,12 @@
 package forge.ai.ability;
 
-import java.util.*;
-
-import forge.game.card.*;
-import forge.game.keyword.Keyword;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
-import forge.ai.AiAttackController;
-import forge.ai.AiCardMemory;
-import forge.ai.AiController;
-import forge.ai.AiProps;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpecialAiLogic;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
-import forge.ai.SpellApiToAi;
+import forge.ai.*;
+import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -35,12 +15,14 @@ import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPutCounter;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -50,8 +32,12 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.collect.FCollection;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
 
 public class ChangeZoneAi extends SpellAbilityAi {
     /*
@@ -1540,11 +1526,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         if ("DeathgorgeScavenger".equals(logic)) {
             return SpecialCardAi.DeathgorgeScavenger.consider(ai, sa);
-        }
-        if ("ExtraplanarLens".equals(logic)) {
+        } else if ("ExtraplanarLens".equals(logic)) {
             return SpecialCardAi.ExtraplanarLens.consider(ai, sa);
-        }
-        if ("ExileCombatThreat".equals(logic)) {
+        } else if ("ExileCombatThreat".equals(logic)) {
             return doExileCombatThreatLogic(ai, sa);
         }
 
@@ -1570,7 +1554,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return null;
         }
         if (sa.hasParam("AILogic")) {
-            String logic = sa.getParam("AILogic");
+            String logic = sa.getParamOrDefault("AILogic", "");
             if ("NeverBounceItself".equals(logic)) {
                 Card source = sa.getHostCard();
                 if (fetchList.contains(source) && (fetchList.size() > 1 || !sa.getRootAbility().isMandatory())) {
@@ -1593,6 +1577,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     multipleCardsToChoose.remove(0);
                     return choice;
                 }
+            } else if (logic.startsWith("ExilePreference")) {
+                return doExilePreferenceLogic(decider, sa, fetchList);
             }
         }
         if (fetchList.isEmpty()) {
@@ -2027,6 +2013,121 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return true;
         }
         return false;
+    }
+
+    public static Card doExilePreferenceLogic(final Player aiPlayer, final SpellAbility sa, CardCollection fetchList) {
+        if (fetchList.isEmpty()) {
+            return null; // there was nothing to choose at all
+        }
+
+        final Card host = sa.getHostCard();
+        final String logic = sa.getParamOrDefault("AILogic", "");
+        final String valid = logic.split(":")[1];
+        final boolean isCurse = logic.contains("Curse");
+        final boolean isOwnOnly = logic.contains("OwnOnly");
+        final boolean isWorstChoice = logic.contains("Worst");
+        final boolean isRandomChoice = logic.contains("Random");
+
+        if (logic.endsWith("HighestCMC")) {
+            return ComputerUtilCard.getMostExpensivePermanentAI(fetchList);
+        } else if (logic.contains("MostProminent")) {
+            CardCollection scanList = new CardCollection();
+            if (logic.endsWith("OwnType")) {
+                scanList.addAll(aiPlayer.getCardsIn(ZoneType.Library));
+                scanList.addAll(aiPlayer.getCardsIn(ZoneType.Hand));
+            } else if (logic.endsWith("OppType")) {
+                // this assumes that the deck list is known to the AI before the match starts,
+                // so it's possible to figure out what remains in library/hand if you know what's
+                // in graveyard, exile, etc.
+                scanList.addAll(aiPlayer.getOpponents().getCardsIn(ZoneType.Library));
+                scanList.addAll(aiPlayer.getOpponents().getCardsIn(ZoneType.Hand));
+            }
+
+            if (logic.contains("NonLand")) {
+                scanList = CardLists.filter(scanList, Predicates.not(Presets.LANDS));
+            }
+
+            if (logic.contains("NonExiled")) {
+                scanList = CardLists.filter(scanList, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(Card card) {
+                        CardCollectionView imprinted = host.getImprintedCards();
+                        if (imprinted.isEmpty()) {
+                            return true;
+                        }
+                        for (Card c : imprinted) {
+                            return !c.getType().sharesCardTypeWith(card.getType());
+                        }
+                        return true;
+                    }
+                });
+            }
+
+            final Map<CardType.CoreType, Integer> typesInDeck = Maps.newHashMap();
+            for (final Card c : scanList) {
+                for (CardType.CoreType ct : c.getType().getCoreTypes()) {
+                    Integer count = typesInDeck.get(ct);
+                    if (count == null) {
+                        count = 0;
+                    }
+                    typesInDeck.put(ct, count + 1);
+                }
+            }
+            int max = 0;
+            CardType.CoreType maxType = CardType.CoreType.Land;
+
+            for (final Map.Entry<CardType.CoreType, Integer> entry : typesInDeck.entrySet()) {
+                final CardType.CoreType type = entry.getKey();
+
+                if (max < entry.getValue()) {
+                    max = entry.getValue();
+                    maxType = type;
+                }
+            }
+
+            final CardType.CoreType determinedMaxType = maxType;
+            CardCollection preferredList = CardLists.filter(fetchList, new Predicate<Card>() {
+                @Override
+                public boolean apply(Card card) {
+                    return card.getType().hasType(determinedMaxType);
+                }
+            });
+
+            return preferredList.isEmpty() ? Aggregates.random(fetchList) : Aggregates.random(preferredList);
+        }
+
+        // Filter by preference. If nothing is preferred, choose the best/worst/random target for the opponent
+        // or for the AI depending on the settings. This logic must choose at least something if at all possible,
+        // since it's called from chooseSingleCard.
+        CardCollection preferredList = CardLists.filter(fetchList, new Predicate<Card>() {
+            @Override
+            public boolean apply(Card card) {
+                boolean playerPref = true;
+                if (isCurse) {
+                    playerPref = card.getController().isOpponentOf(aiPlayer);
+                } else if (isOwnOnly) {
+                    playerPref = card.getController().equals(aiPlayer) || !card.getController().isOpponentOf(aiPlayer);
+                }
+
+                if (!playerPref) {
+                    return false;
+                }
+
+                return card.isValid(valid, aiPlayer, host, sa); // for things like ExilePreference:Land.Basic
+            }
+        });
+
+        if (!preferredList.isEmpty()) {
+            if (isRandomChoice) {
+                return Aggregates.random(preferredList);
+            }
+            return isWorstChoice ? ComputerUtilCard.getWorstAI(preferredList) : ComputerUtilCard.getBestAI(preferredList);
+        } else {
+            if (isRandomChoice) {
+                return Aggregates.random(preferredList);
+            }
+            return isWorstChoice ? ComputerUtilCard.getWorstAI(fetchList) : ComputerUtilCard.getBestAI(fetchList);
+        }
     }
 
     private static CardCollection getSafeTargetsIfUnlessCostPaid(Player ai, SpellAbility sa, Iterable<Card> potentialTgts) {

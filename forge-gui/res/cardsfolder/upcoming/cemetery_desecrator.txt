@@ -4,7 +4,7 @@ Types:Creature Zombie
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield or dies, exile another card from a graveyard.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or dies, exile another card from a graveyard.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Hidden$ True | RememberChanged$ True | ChangeType$ Card.Other | ChangeNum$ 1 | Mandatory$ True | SubAbility$ DBImmediateTrigger
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Hidden$ True | RememberChanged$ True | ChangeType$ Card.Other | ChangeNum$ 1 | Mandatory$ True | AILogic$ ExilePreference:HighestCMC | SubAbility$ DBImmediateTrigger
 SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | Execute$ TrigCharm | TriggerDescription$ When you do, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBRemoveCounter,DBPump
 SVar:DBRemoveCounter:DB$ RemoveCounter | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | CounterType$ Any | CounterNum$ X | SubAbility$ DBCleanup | SpellDescription$ Remove X counters from target permanent, where X is the mana value of the exiled card.
