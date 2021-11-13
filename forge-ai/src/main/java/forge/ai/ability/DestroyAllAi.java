@@ -2,7 +2,6 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-
 import forge.ai.*;
 import forge.card.MagicColor;
 import forge.game.card.Card;
