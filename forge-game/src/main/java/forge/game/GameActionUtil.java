@@ -175,11 +175,15 @@ public final class GameActionUtil {
                     final String keyword = inst.getOriginal();
 
                     if (keyword.startsWith("Disturb")) {
+                        if (!source.isInZone(ZoneType.Graveyard)) {
+                            continue;
+                        }
+
                         final String[] k = keyword.split(":");
                         final Cost disturbCost = new Cost(k[1], true);
 
                         SpellAbility newSA;
-                        if (source.getAlternateState() != null && source.getAlternateState().getType().hasSubtype("Aura")) {
+                        if (source.getAlternateState().getType().hasSubtype("Aura")) {
                             newSA = source.getAlternateState().getFirstAbility().copyWithManaCostReplaced(activator,
                                     disturbCost);
                         } else {
@@ -203,6 +207,10 @@ public final class GameActionUtil {
 
                         alternatives.add(newSA);
                     } else if (keyword.startsWith("Escape")) {
+                        if (!source.isInZone(ZoneType.Graveyard)) {
+                            continue;
+                        }
+
                         final String[] k = keyword.split(":");
                         final Cost escapeCost = new Cost(k[1], true);
 
@@ -224,6 +232,10 @@ public final class GameActionUtil {
 
                         alternatives.add(newSA);
                     } else if (keyword.startsWith("Flashback")) {
+                        if (!source.isInZone(ZoneType.Graveyard)) {
+                            continue;
+                        }
+
                         // if source has No Mana cost, and flashback doesn't have own one,
                         // flashback can't work
                         if (keyword.equals("Flashback") && source.getManaCost().isNoCost()) {
