@@ -1,9 +1,8 @@
 Name:Sylvan Library
 ManaCost:1 G
 Types:Enchantment
-T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You |TriggerDescription$ At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.
-SVar:TrigDraw:DB$ Draw | Defined$ TriggeredPlayer | NumCards$ 2 | SubAbility$ ChooseDrawn
-SVar:ChooseDrawn:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.YouOwn+DrawnThisTurn | Amount$ 2 | RememberChosen$ True | Mandatory$ True | AILogic$ Worst | SubAbility$ DBPayOrReturn | NoReveal$ True
+T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.
+SVar:TrigDraw:AB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.YouOwn+DrawnThisTurn | Cost$ Draw<2/You> | Amount$ 2 | RememberChosen$ True | Mandatory$ True | AILogic$ Worst | SubAbility$ DBPayOrReturn | NoReveal$ True
 SVar:DBPayOrReturn:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.IsRemembered | Zone$ Hand | RepeatSubAbility$ DBReplace | SubAbility$ DBCleanup | NoReveal$ True | ChooseOrder$ True
 SVar:DBReplace:DB$ ChangeZone | Origin$ Hand | Destination$ Library | ChangeType$ Card.IsImprinted | UnlessCost$ PayLife<4> | Mandatory$ True | StackDescription$ Put {c:Imprinted} on top of your library | UnlessPayer$ TriggeredPlayer | SubAbility$ DBCleanup | NoReveal$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

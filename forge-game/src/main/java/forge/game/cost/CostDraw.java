@@ -17,11 +17,10 @@
  */
 package forge.game.cost;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 
 /**
@@ -63,11 +62,17 @@ public class CostDraw extends CostPart {
      * @param payer
      * @param source
      */
-    private List<Player> getPotentialPlayers(final Player payer, final Card source) {
-        List<Player> res = new ArrayList<>();
+    public PlayerCollection getPotentialPlayers(final Player payer, final SpellAbility ability) {
+        PlayerCollection res = new PlayerCollection();
         String type = this.getType();
+        final Card source = ability.getHostCard();
+        Integer c = convertAmount();
+        if (c == null) {
+            c = AbilityUtils.calculateAmount(source, getAmount(), ability);
+        }
+
         for (Player p : payer.getGame().getPlayers()) {
-            if (p.isValid(type, payer, source, null) && p.canDraw()) {
+            if (p.isValid(type, payer, source, ability) && p.canDrawAmount(c)) {
                 res.add(p);
             }
         }
@@ -83,8 +88,7 @@ public class CostDraw extends CostPart {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Player payer) {
-        List<Player> potentials = getPotentialPlayers(payer, ability.getHostCard());
-        return !potentials.isEmpty();
+        return !getPotentialPlayers(payer, ability).isEmpty();
     }
 
     /*
@@ -95,7 +99,7 @@ public class CostDraw extends CostPart {
      */
     @Override
     public final boolean payAsDecided(final Player ai, final PaymentDecision decision, SpellAbility ability) {
-        for (final Player p : getPotentialPlayers(ai, ability.getHostCard())) {
+        for (final Player p : decision.players) {
             p.drawCards(decision.c, ability);
         }
         return true;

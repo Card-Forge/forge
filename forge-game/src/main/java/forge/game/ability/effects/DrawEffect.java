@@ -8,7 +8,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
+import forge.game.staticability.StaticAbilityCantDraw;
 import forge.util.Lang;
 import forge.util.Localizer;
 
@@ -21,7 +21,7 @@ public class DrawEffect extends SpellAbilityEffect {
 
         if (!tgtPlayers.isEmpty()) {
             int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
-            
+
             sb.append(Lang.joinHomogenous(tgtPlayers));
 
             if (tgtPlayers.size() > 1) {
@@ -40,19 +40,34 @@ public class DrawEffect extends SpellAbilityEffect {
         final Card source = sa.getHostCard();
         final int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-
-        final boolean optional = sa.hasParam("OptionalDecider");
         final boolean upto = sa.hasParam("Upto");
+        final boolean optional = sa.hasParam("OptionalDecider") || upto;
 
         for (final Player p : getDefinedPlayersOrTargeted(sa)) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) 
-                if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantDrawCards", Lang.nounWithAmount(numCards, " card"))))
-                    continue;
+            // TODO can this be removed?
+            if (sa.usesTargeting() && !p.canBeTargetedBy(sa)) {
+                continue;
+            }
 
-            int actualNum = numCards; 
+            // it is optional, not upto and player can't choose to draw that many cards
+            if (optional && !upto && !p.canDrawAmount(numCards)) {
+                continue;
+            }
+
+            if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantDrawCards", Lang.nounWithAmount(numCards, " card")))) {
+                continue;
+            }
+
+            int actualNum = numCards;
+
+            if (upto) { // if it is upto, player can only choose how many cards they can draw
+                actualNum = StaticAbilityCantDraw.canDrawAmount(p, actualNum);
+            }
+            if (actualNum <= 0) {
+                continue;
+            }
             if (upto) {
-                actualNum = p.getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblHowManyCardDoYouWantDraw"), 0, numCards);
+                actualNum = p.getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblHowManyCardDoYouWantDraw"), 0, actualNum);
             }
 
             final CardCollectionView drawn = p.drawCards(actualNum, sa);
@@ -68,6 +83,7 @@ public class DrawEffect extends SpellAbilityEffect {
                     source.addRemembered(c);
                 }
             }
+            sa.setSVar("AFNotDrawnNum_" + p.getId(), "Number$" + drawn.size());
         }
     }
 }

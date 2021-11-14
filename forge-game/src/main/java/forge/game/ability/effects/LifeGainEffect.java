@@ -36,15 +36,25 @@ public class LifeGainEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        final int lifeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("LifeAmount"), sa);
-
         List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
         if (tgtPlayers.isEmpty()) {
             tgtPlayers.add(sa.getActivatingPlayer());
         }
+        String amount = sa.getParam("LifeAmount");
+        boolean variableAmount = amount.equals("AFNotDrawnNum");
+        int lifeAmount = 0;
+        if (variableAmount) {
+            amount = "X";
+        } else {
+            lifeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), amount, sa);
+        }
 
         for (final Player p : tgtPlayers) {
             if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
+                if (variableAmount) {
+                    sa.setSVar("AFNotDrawnNum", sa.getSVar("AFNotDrawnNum_" + p.getId()));
+                    lifeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), amount, sa);
+                }
                 p.gainLife(lifeAmount, sa.getHostCard(), sa);
             }
         }
