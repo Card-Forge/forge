@@ -2016,6 +2016,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
     }
 
     public static Card doExilePreferenceLogic(final Player aiPlayer, final SpellAbility sa, CardCollection fetchList) {
+        // Filter by preference. If nothing is preferred, choose the best/worst/random target for the opponent
+        // or for the AI depending on the settings. This logic must choose at least something if at all possible,
+        // since it's called from chooseSingleCard.
         if (fetchList.isEmpty()) {
             return null; // there was nothing to choose at all
         }
@@ -2048,14 +2051,19 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
 
             if (logic.contains("NonExiled")) {
+                CardCollection exiledBy = new CardCollection();
+                for (Card exiled : aiPlayer.getGame().getCardsIn(ZoneType.Exile)) {
+                    if (exiled.getExiledWith() != null && exiled.getExiledWith().getName().equals(host.getName())) {
+                        exiledBy.add(exiled);
+                    }
+                }
                 scanList = CardLists.filter(scanList, new Predicate<Card>() {
                     @Override
                     public boolean apply(Card card) {
-                        CardCollectionView imprinted = host.getImprintedCards();
-                        if (imprinted.isEmpty()) {
+                        if (exiledBy.isEmpty()) {
                             return true;
                         }
-                        for (Card c : imprinted) {
+                        for (Card c : exiledBy) {
                             return !c.getType().sharesCardTypeWith(card.getType());
                         }
                         return true;
@@ -2063,14 +2071,24 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 });
             }
 
+            CardCollectionView graveyardList = aiPlayer.getGame().getCardsIn(ZoneType.Graveyard);
+            Set<CardType.CoreType> presentTypes = new HashSet<>();
+            for (Card inGrave : graveyardList) {
+                for(CardType.CoreType type : inGrave.getType().getCoreTypes()) {
+                    presentTypes.add(type);
+                }
+            }
+
             final Map<CardType.CoreType, Integer> typesInDeck = Maps.newHashMap();
             for (final Card c : scanList) {
                 for (CardType.CoreType ct : c.getType().getCoreTypes()) {
-                    Integer count = typesInDeck.get(ct);
-                    if (count == null) {
-                        count = 0;
+                    if (presentTypes.contains(ct)) {
+                        Integer count = typesInDeck.get(ct);
+                        if (count == null) {
+                            count = 0;
+                        }
+                        typesInDeck.put(ct, count + 1);
                     }
-                    typesInDeck.put(ct, count + 1);
                 }
             }
             int max = 0;
@@ -2092,13 +2110,17 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     return card.getType().hasType(determinedMaxType);
                 }
             });
+            CardCollection preferredOppList = CardLists.filter(preferredList, CardPredicates.isControlledByAnyOf(aiPlayer.getOpponents()));
 
-            return preferredList.isEmpty() ? Aggregates.random(fetchList) : Aggregates.random(preferredList);
+            if (!preferredOppList.isEmpty()) {
+                return Aggregates.random(preferredOppList);
+            } else if (!preferredList.isEmpty()) {
+                return Aggregates.random(preferredList);
+            }
+
+            return Aggregates.random(fetchList);
         }
 
-        // Filter by preference. If nothing is preferred, choose the best/worst/random target for the opponent
-        // or for the AI depending on the settings. This logic must choose at least something if at all possible,
-        // since it's called from chooseSingleCard.
         CardCollection preferredList = CardLists.filter(fetchList, new Predicate<Card>() {
             @Override
             public boolean apply(Card card) {
