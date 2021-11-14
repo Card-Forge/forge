@@ -89,7 +89,6 @@ public class PaymentDecision {
     }
 
     public static PaymentDecision players(List<Player> players) {
-        // TODO Auto-generated method stub
         return new PaymentDecision(null, null, players, null, null);
     }
 

@@ -145,13 +145,20 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostDraw cost) {
+        if (!cost.canPay(ability, player)) {
+            return null;
+        }
         Integer c = cost.convertAmount();
 
         if (c == null) {
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
 
-        return PaymentDecision.number(c);
+        List<Player> res = cost.getPotentialPlayers(player, ability);
+
+        PaymentDecision decision = PaymentDecision.players(res);
+        decision.c = c;
+        return decision;
     }
 
     @Override

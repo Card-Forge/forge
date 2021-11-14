@@ -141,7 +141,7 @@ public class CostPayment extends ManaConversionMatrix {
 
             PaymentDecision pd = part.accept(decisionMaker);
 
-            // RIght before we start paying as decided, we need to transfer the CostPayments matrix over?
+            // Right before we start paying as decided, we need to transfer the CostPayments matrix over?
             if (part instanceof CostPartMana) {
                 ((CostPartMana)part).setCardMatrix(this);
             }

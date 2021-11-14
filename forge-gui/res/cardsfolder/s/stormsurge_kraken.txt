@@ -4,8 +4,8 @@ Types:Creature Kraken
 PT:5/5
 K:Hexproof
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddTrigger$ TrigBlocked | AddSVar$ StormsurgeKrakenDraw | CheckSVar$ X | SVarCompare$ GE1 | Description$ Lieutenant — As long as you control your commander, CARDNAME gets +2/+2 and has "Whenever CARDNAME becomes blocked, you may draw two cards."
-SVar:TrigBlocked:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ StormsurgeKrakenDraw | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME becomes blocked, you may draw two cards.
-SVar:StormsurgeKrakenDraw:DB$ Draw | NumCards$ 2
+SVar:TrigBlocked:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ StormsurgeKrakenDraw | TriggerDescription$ Whenever CARDNAME becomes blocked, you may draw two cards.
+SVar:StormsurgeKrakenDraw:DB$ Draw | NumCards$ 2 | OptionalDecider$ You
 SVar:X:Count$Valid Card.IsCommander+YouOwn+YouCtrl
 SVar:BuffedBy:Card.IsCommander
 AI:RemoveDeck:Random

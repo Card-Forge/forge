@@ -262,55 +262,30 @@ public class HumanPlay {
             }
         }
 
-        final HumanCostDecision hcd = new HumanCostDecision(controller, p, sourceAbility, source);
+        final HumanCostDecision hcd = new HumanCostDecision(controller, p, sourceAbility, source, orString);
         boolean mandatory = cost.isMandatory();
 
         //the following costs do not need inputs
         for (CostPart part : parts) {
+            // early bail to check if the part can be paid
+            if (!part.canPay(sourceAbility, p)) {
+                return false;
+            }
+
             boolean mayRemovePart = true;
 
-            if (part instanceof CostPayLife) {
-                final int amount = getAmountFromPart(part, source, sourceAbility);
-                if (!p.canPayLife(amount)) {
-                    return false;
-                }
-
-                if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantPayNLife", String.valueOf(amount)) + orString, sourceAbility)) {
-                    return false;
-                }
-
-                p.payLife(amount, null);
-            }
-            else if (part instanceof CostDraw) {
-                final int amount = getAmountFromPart(part, source, sourceAbility);
-                List<Player> res = new ArrayList<>();
-                String type = part.getType();
-                for (Player player : p.getGame().getPlayers()) {
-                    if (player.isValid(type, p, source, sourceAbility) && player.canDraw()) {
-                        res.add(player);
-                    }
-                }
-
-                if (res.isEmpty()) {
-                    return false;
-                }
-
-                String message = null;
-                if (res.contains(p)) {
-                    message = Localizer.getInstance().getMessage("lblDoYouWantLetThatPlayerDrawNCardOrDoAction", String.valueOf(amount), orString);
-                } else {
-                    message = Localizer.getInstance().getMessage("lblDoYouWantDrawNCardOrDoAction", String.valueOf(amount), orString);
-                }
-
-                if (!p.getController().confirmPayment(part, message, sourceAbility)) {
-                    return false;
-                }
-
-                for (Player player : res) {
-                    player.drawCards(amount, sourceAbility);
-                }
-            }
-            else if (part instanceof CostGainLife) {
+            // simplified costs that can use the HCD
+            if (part instanceof CostPayLife
+                    || part instanceof CostDraw
+                    || part instanceof CostGainLife
+                    || part instanceof CostFlipCoin
+                    || part instanceof CostRollDice
+                    || part instanceof CostDamage
+                    || part instanceof CostPutCounter
+                    || part instanceof CostRemoveCounter
+                    || part instanceof CostRemoveAnyCounter
+                    || part instanceof CostMill
+                    || part instanceof CostSacrifice) {
                 PaymentDecision pd = part.accept(hcd);
 
                 if (pd == null) {
@@ -325,81 +300,6 @@ public class HumanPlay {
                 if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoyouWantTo") + " " + desc + "?" + orString, sourceAbility)) {
                     return false;
                 }
-                PaymentDecision pd = part.accept(hcd);
-
-                if (pd == null) {
-                    return false;
-                }
-                part.payAsDecided(p, pd, sourceAbility);
-            }
-            else if (part instanceof CostMill) {
-                final int amount = getAmountFromPart(part, source, sourceAbility);
-                final CardCollectionView list = p.getCardsIn(ZoneType.Library);
-                if (list.size() < amount) { return false; }
-                if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantMillNCardsOrDoAction", String.valueOf(amount), orString), sourceAbility)) {
-                    return false;
-                }
-                CardCollectionView listmill = p.getCardsIn(ZoneType.Library, amount);
-                ((CostMill) part).payAsDecided(p, PaymentDecision.card(listmill), sourceAbility);
-            }
-            else if (part instanceof CostFlipCoin) {
-                if (!part.canPay(sourceAbility, p)) {
-                    return false;
-                }
-
-                PaymentDecision pd = part.accept(hcd);
-
-                if (pd == null) {
-                    return false;
-                }
-                part.payAsDecided(p, pd, sourceAbility);
-            }
-            else if (part instanceof CostRollDice) {
-                if (!part.canPay(sourceAbility, p)) {
-                    return false;
-                }
-
-                PaymentDecision pd = part.accept(hcd);
-
-                if (pd == null) {
-                    return false;
-                }
-                part.payAsDecided(p, pd, sourceAbility);
-            }
-            else if (part instanceof CostDamage) {
-                if (!part.canPay(sourceAbility, p)) {
-                    return false;
-                }
-
-                // not a pay life but damage!
-                PaymentDecision pd = part.accept(hcd);
-
-                if (pd == null) {
-                    return false;
-                }
-                part.payAsDecided(p, pd, sourceAbility);
-            }
-            else if (part instanceof CostPutCounter) {
-                if (!part.canPay(sourceAbility, p)) {
-                    return false;
-                }
-
-                PaymentDecision pd = part.accept(hcd);
-
-                if (pd == null) {
-                    return false;
-                }
-                part.payAsDecided(p, pd, sourceAbility);
-            }
-            else if (part instanceof CostRemoveCounter) {
-                PaymentDecision pd = part.accept(hcd);
-
-                if (pd == null) {
-                    return false;
-                }
-                part.payAsDecided(p, pd, sourceAbility);
-            }
-            else if (part instanceof CostRemoveAnyCounter) {
                 PaymentDecision pd = part.accept(hcd);
 
                 if (pd == null) {
@@ -553,13 +453,6 @@ public class HumanPlay {
                 }
                 return true;
             }
-            else if (part instanceof CostSacrifice) {
-                PaymentDecision pd = part.accept(hcd);
-                if (pd == null) {
-                    return false;
-                }
-                part.payAsDecided(p, pd, sourceAbility);
-            }
             else if (part instanceof CostGainControl) {
                 int amount = Integer.parseInt(part.getAmount());
                 CardCollectionView list = CardLists.getValidCards(p.getGame().getCardsIn(ZoneType.Battlefield), part.getType(), p, source, sourceAbility);
@@ -581,7 +474,7 @@ public class HumanPlay {
 
                     ((CostDiscard)part).payAsDecided(p, PaymentDecision.card(p.getCardsIn(ZoneType.Hand)), sourceAbility);
                 } else if ("Random".equals(part.getType())) {
-                    if (!part.canPay(sourceAbility, p) || !p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblWouldYouLikeRandomDiscardTargetCard", amount), sourceAbility)) {
+                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblWouldYouLikeRandomDiscardTargetCard", amount), sourceAbility)) {
                         return false;
                     }
 
@@ -614,10 +507,6 @@ public class HumanPlay {
             else if (part instanceof CostPayEnergy) {
                 CounterType counterType = CounterType.get(CounterEnumType.ENERGY);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
-
-                if (!part.canPay(sourceAbility, p)) {
-                    return false;
-                }
 
                 if (!mandatory && !p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantSpendNTargetTypeCounter", String.valueOf(amount), counterType.getName()), sourceAbility)) {
                     return false;
@@ -676,7 +565,6 @@ public class HumanPlay {
 
         return true;
     }
-
 
     private static boolean handleOfferingConvokeAndDelve(final SpellAbility ability, CardCollection cardsToDelve, boolean manaInputCancelled) {
         Card hostCard = ability.getHostCard();
