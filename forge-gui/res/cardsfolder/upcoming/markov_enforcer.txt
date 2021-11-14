@@ -1,0 +1,12 @@
+Name:Markov Enforcer
+ManaCost:4 R R
+Types:Creature Vampire Soldier
+PT:6/6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Vampire.Other+YouCtrl | Execute$ TrigFight | TriggerDescription$ Whenever CARDNAME or another Vampire enters the battlefield under your control, CARDNAME fights up to one target creature an opponent controls.
+SVar:TrigFight:DB$ Fight | Defined$ Self | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select up to one target creature an opponent controls
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a creature dealt damage by CARDNAME this turn dies, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_blood_draw
+SVar:BuffedBy:Creature.Vampire
+DeckHints:Type$Vampire
+DeckHas:Ability$Token & Ability$Sacrifice & Type$Blood
+Oracle:Whenever Markov Enforcer or another Vampire enters the battlefield under your control, Markov Enforcer fights up to one target creature an opponent controls.\nWhenever a creature dealt damage by Markov Enforcer this turn dies, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
