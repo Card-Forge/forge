@@ -122,6 +122,12 @@ public class DigAi extends SpellAbilityAi {
     }
 
     @Override
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+        // TODO: improve this check in ways that may be specific to a subability
+        return canPlayAI(aiPlayer, sa);
+    }
+
+    @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final SpellAbility root = sa.getRootAbility();
         PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
