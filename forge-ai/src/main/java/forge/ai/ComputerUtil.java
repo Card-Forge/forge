@@ -1044,8 +1044,7 @@ public class ComputerUtil {
         if (ai.getManaPool().willManaBeLostAtEndOfPhase()) {
             boolean canUseToPayCost = false;
             for (byte color : MagicColor.WUBRGC) {
-                if (ai.getManaPool().getAmountOfColor(color) > 0
-                        && ((card.getManaCost().getColorProfile() & color) == color)) {
+                if (ai.getManaPool().getAmountOfColor(color) > 0 && card.getManaCost().canBePaidWithAvailable(color)) {
                     canUseToPayCost = true;
                     break;
                 }
