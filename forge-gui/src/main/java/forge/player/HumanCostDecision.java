@@ -48,12 +48,17 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     private final PlayerControllerHuman controller;
     private final SpellAbility ability;
     private final Card source;
+    private String orString = null;
 
     public HumanCostDecision(final PlayerControllerHuman controller, final Player p, final SpellAbility sa, final Card source) {
+        this(controller, p, sa, source, null);
+    }
+    public HumanCostDecision(final PlayerControllerHuman controller, final Player p, final SpellAbility sa, final Card source, final String orString) {
         super(p);
         this.controller = controller;
         ability = sa;
         this.source = source;
+        this.orString = orString;
     }
 
     @Override
@@ -201,18 +206,35 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(final CostDraw cost) {
-        final String amount = cost.getAmount();
-
-        Integer c = cost.convertAmount();
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, amount, ability);
-        }
-
-        if (!controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblDrawNCardsConfirm", String.valueOf(c)), ability)) {
+        if (!cost.canPay(ability, player)) {
             return null;
         }
 
-        return PaymentDecision.number(c);
+        Integer c = cost.convertAmount();
+        if (c == null) {
+            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
+        }
+
+        List<Player> res = cost.getPotentialPlayers(player, ability);
+
+        String message = null;
+        if (orString != null && !orString.isEmpty()) {
+            if (res.contains(player)) {
+                message = Localizer.getInstance().getMessage("lblDoYouWantLetThatPlayerDrawNCardOrDoAction", String.valueOf(c), orString);
+            } else {
+                message = Localizer.getInstance().getMessage("lblDoYouWantDrawNCardOrDoAction", String.valueOf(c), orString);
+            }
+        } else {
+            message = Localizer.getInstance().getMessage("lblDrawNCardsConfirm", String.valueOf(c));
+        }
+
+        if (!controller.confirmPayment(cost, message, ability)) {
+            return null;
+        }
+
+        PaymentDecision decision = PaymentDecision.players(res);
+        decision.c = c;
+        return decision;
     }
 
     @Override
@@ -556,7 +578,14 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
-        if (!controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblMillNCardsFromYourLibraryConfirm", String.valueOf(c)), ability)) {
+        String message = null;
+        if (orString != null && !orString.isEmpty()) {
+            message = Localizer.getInstance().getMessage("lblDoYouWantMillNCardsOrDoAction", String.valueOf(amount), orString);
+        } else {
+            message = Localizer.getInstance().getMessage("lblMillNCardsFromYourLibraryConfirm", String.valueOf(c));
+        }
+
+        if (!controller.confirmPayment(cost, message, ability)) {
             return null;
         }
         return PaymentDecision.number(c);
@@ -571,8 +600,19 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
+        if (ability.getPayCosts().isMandatory()) {
+            return PaymentDecision.number(c);
+        }
+
+        String message = null;
+        if (orString != null && !orString.isEmpty()) {
+            message = Localizer.getInstance().getMessage("lblDoYouWantPayNLife", String.valueOf(amount), orString);
+        } else {
+            message = Localizer.getInstance().getMessage("lblPayNLifeConfirm", String.valueOf(c));
+        }
+
         // for costs declared mandatory, this is only reachable with a valid amount
-        if (ability.getPayCosts().isMandatory() || (player.canPayLife(c) && controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblPayNLifeConfirm", String.valueOf(c)), ability))) {
+        if (player.canPayLife(c) && controller.confirmPayment(cost, message, ability)) {
             return PaymentDecision.number(c);
         }
         return null;

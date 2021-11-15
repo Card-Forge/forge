@@ -662,7 +662,7 @@ public class ComputerUtilCost {
             }
         } else if ("RiskFactor".equals(aiLogic)) {
             final Player activator = sa.getActivatingPlayer();
-            if (!activator.canDraw() || activator.hasKeyword("You can't draw more than one card each turn.")) {
+            if (!activator.canDraw()) {
                 return false;
             }
         } else if ("MorePowerful".equals(aiLogic)) {

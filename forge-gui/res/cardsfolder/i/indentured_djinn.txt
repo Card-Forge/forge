@@ -4,7 +4,5 @@ Types:Creature Djinn
 PT:4/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, each other player may draw up to three cards.
-SVar:TrigDraw:DB$ RepeatEach | RepeatPlayers$ Player.Other | RepeatSubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | Defined$ Player.IsRemembered | NumCards$ 3 | Upto$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/indentured_djinn.jpg
+SVar:TrigDraw:DB$ Draw | Defined$ Player.Other | NumCards$ 3 | Upto$ True | AILogic$ OptionalDraw
 Oracle:Flying\nWhen Indentured Djinn enters the battlefield, each other player may draw up to three cards.

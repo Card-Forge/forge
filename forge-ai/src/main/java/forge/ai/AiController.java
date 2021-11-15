@@ -1929,9 +1929,13 @@ public class AiController {
             int cardsInPlay = player.getCardsIn(ZoneType.Battlefield).size();
             return Math.min(chosenMax, cardsInPlay);
         } else if ("OptionalDraw".equals(logic)) {
+            int cardsInLib = player.getCardsIn(ZoneType.Library).size();
+            if (cardsInLib >= max && player.isCardInPlay("Laboratory Maniac")) {
+                return max;
+            }
             int cardsInHand = player.getCardsIn(ZoneType.Hand).size();
             int maxDraw = Math.min(player.getMaxHandSize() + 2 - cardsInHand, max);
-            int maxCheckLib = Math.min(maxDraw, player.getCardsIn(ZoneType.Library).size());
+            int maxCheckLib = Math.min(maxDraw, cardsInLib);
             return Math.max(min, maxCheckLib);
         } else if ("RepeatDraw".equals(logic)) {
             int remaining = player.getMaxHandSize() - player.getCardsIn(ZoneType.Hand).size()
