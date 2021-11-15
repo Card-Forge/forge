@@ -1,0 +1,11 @@
+Name:Thundering Mightmare
+ManaCost:4 G
+Types:Creature Horse Spirit
+PT:3/3
+K:Soulbond
+S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddTrigger$ CastTrigger | Description$ As long as CARDNAME is paired with another creature, each of those creatures has "Whenever an opponent casts a spell, put a +1/+1 counter on this creature."
+SVar:CastTrigger:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever an opponent casts a spell, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+SVar:BuffedBy:Creature
+Oracle:Soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)\nAs long as Thundering Mightmare is paired with another creature, each of those creatures has "Whenever an opponent casts a spell, put a +1/+1 counter on this creature."

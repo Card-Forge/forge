@@ -1,0 +1,10 @@
+Name:Spectral Arcanist
+ManaCost:3 U
+Types:Creature Spirit Wizard
+PT:3/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, you may cast an instant or sorcery spell with mana value less than or equal to the number of Spirits you control from a graveyard without paying its mana cost. If that spell would be put into a graveyard, exile it instead.
+SVar:TrigChangeZone:DB$ Play | ValidZone$ Graveyard | Valid$ Card.YouOwn | ValidSA$ Instant.cmcLEX,Sorcery.cmcLEX | WithoutManaCost$ True | Optional$ True | ReplaceGraveyard$ Exile
+SVar:X:Count$Valid Spirit.YouCtrl
+DeckHints:Type$Spirit|Instant|Sorcery
+Oracle:Flying\nWhen Spectral Arcanist enters the battlefield, you may cast an instant or sorcery spell with mana value less than or equal to the number of Spirits you control from a graveyard without paying its mana cost. If that spell would be put into a graveyard, exile it instead.
