@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>forge</artifactId>
 		<groupId>forge</groupId>
-		<version>1.6.46-SNAPSHOT</version>
+		<version>1.6.47-SNAPSHOT</version>
 	</parent>
 
     <artifactId>forge-gui-desktop</artifactId>
@@ -546,8 +546,8 @@
                                             <fileset dir="${project.build.directory}" includes="${project.build.finalName}-jar-with-dependencies.jar" />
                                             <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure.exe" />
                                             <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-java8.exe" />
-                                            <fileset dir="${project.build.directory}/../../forge-adventure/target"  includes="forge-adventure.sh" />
-                                            <fileset dir="${project.build.directory}/../../forge-adventure/target"  includes="forge-adventure.command" />
+                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure.sh" />
+                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure.command" />
                                             <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-${project.version}-jar-with-dependencies.jar" />
                                         </copy>
                                         <mkdir dir="${project.build.directory}/${project.build.finalName}/res/cardsfolder" />
