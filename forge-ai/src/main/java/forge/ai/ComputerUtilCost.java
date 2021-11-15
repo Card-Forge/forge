@@ -20,6 +20,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
@@ -590,7 +591,7 @@ public class ComputerUtilCost {
         }
 
         // Ward - will be accounted for when rechecking a targeted ability
-        if (sa.usesTargeting()) {
+        if (!(sa instanceof WrappedAbility) && sa.usesTargeting()) {
             for (Card tgt : sa.getTargets().getTargetCards()) {
                 if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(sa.getHostCard().getController())) {
                     Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
