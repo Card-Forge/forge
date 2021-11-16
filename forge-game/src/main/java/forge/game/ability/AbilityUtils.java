@@ -3590,6 +3590,16 @@ public class AbilityUtils {
             }
         }
 
+        if (string.startsWith("GreatestPower")) {
+            int highest = 0;
+            for (final Card crd : paidList) {
+                if (crd.getNetPower() > highest) {
+                    highest = crd.getNetPower();
+                }
+            }
+            return highest;
+        }
+
         if (string.startsWith("DifferentCMC")) {
             final Set<Integer> diffCMC = new HashSet<>();
             for (final Card card : paidList) {
