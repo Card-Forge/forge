@@ -20,6 +20,8 @@ import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityPredicates;
+import forge.game.trigger.Trigger;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
@@ -379,6 +381,15 @@ public class CardProperty {
 
             if (!card.equals(source.getEffectSource())) {
                 return false;
+            }
+        } else if (property.equals("withoutManaAbility")) {
+            if (Iterables.any(card.getSpellAbilities(), SpellAbilityPredicates.isManaAbility())) {
+                return false;
+            }
+            for (final Trigger trig : card.getTriggers()) {
+                if (trig.getOverridingAbility() != null && !trig.getOverridingAbility().isManaAbility()) {
+                    return false;
+                }
             }
         } else if (property.equals("CanBeSacrificedBy") && spellAbility instanceof SpellAbility) {
             if (!card.canBeSacrificedBy((SpellAbility) spellAbility)) {

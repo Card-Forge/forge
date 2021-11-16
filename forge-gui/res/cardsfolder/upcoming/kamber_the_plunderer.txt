@@ -1,0 +1,13 @@
+Name:Kamber, the Plunderer
+ManaCost:3 B
+Types:Legendary Creature Vampire Rogue
+PT:3/4
+K:Partner:Laurine, the Diversion
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature an opponent controls dies, you gain 1 life and create a Blood token.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_blood_draw | TokenOwner$ You
+SVar:PlayMain1:TRUE
+DeckHints:Name$Laurine, the Diversion
+DeckHas:Ability$Token & Ability$Sacrifice & Type$Blood & Ability$LifeGain
+Oracle:Partner with Laurine, the Diversion (When this creature enters the battlefield, target player may put Laurine into their hand from their library, then shuffle.)\nLifelink\nWhenever a creature an opponent controls dies, you gain 1 life and create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")

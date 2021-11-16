@@ -4,7 +4,7 @@
 
 Dev instructions here: [Getting Started](https://git.cardforge.org/core-developers/forge/-/wikis/(SM-autoconverted)-how-to-get-started-developing-forge) (Somewhat outdated)
 
-Discord channel [here](https://discordapp.com/channels/267367946135928833/267742313390931968)
+Discord channel [here](https://discord.gg/fWfNgCUNRq)
 
 ## Requirements / Tools
 

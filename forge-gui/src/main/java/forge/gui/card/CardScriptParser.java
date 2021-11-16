@@ -442,7 +442,7 @@ public final class CardScriptParser {
             "HasDevoured", "HasNotDevoured", "IsMonstrous", "IsNotMonstrous",
             "CostsPhyrexianMana", "IsRemembered", "IsNotRemembered",
             "IsImprinted", "IsNotImprinted", "hasActivatedAbilityWithTapCost",
-            "hasActivatedAbility", "hasManaAbility",
+            "hasActivatedAbility", "hasManaAbility", "withoutManaAbility",
             "hasNonManaActivatedAbility", "NoAbilities", "HasCounters",
             "wasNotCast", "ChosenType", "IsNotChosenType", "IsCommander",
             "IsNotCommander","IsRenowned", "IsNotRenowned");
