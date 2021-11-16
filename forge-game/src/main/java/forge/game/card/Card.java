@@ -1981,17 +1981,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbLong.append(k).append("\r\n");
                 } else if (keyword.startsWith("Ripple")) {
                     sbLong.append(TextUtil.fastReplace(keyword, ":", " ")).append("\r\n");
-                } else if (keyword.startsWith("Madness")) {
-                    String[] parts = keyword.split(":");
-                    // If no colon exists in Madness keyword, it must have been granted and assumed the cost from host
-                    if (parts.length < 2) {
-                        sbLong.append(parts[0]).append(" ").append(this.getManaCost()).append("\r\n");
-                    } else {
-                        sbLong.append(parts[0]).append(" ").append(ManaCostParser.parse(parts[1])).append("\r\n");
-                    }
                 } else if (keyword.startsWith("Morph") || keyword.startsWith("Megamorph")
                         || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")
-                        || keyword.startsWith("Disturb")) {
+                        || keyword.startsWith("Disturb") || keyword.startsWith("Madness:")){
                     String[] k = keyword.split(":");
                     sbLong.append(k[0]);
                     if (k.length > 1) {
@@ -2009,6 +2001,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         sbLong.append(" (").append(inst.getReminderText()).append(")");
                         sbLong.append("\r\n");
                     }
+                } else if (keyword.startsWith("Madness")) {
+                    // If no colon exists in Madness keyword, it must have been granted and assumed the cost from host
+                    sbLong.append("Madness ").append(this.getManaCost()).append(" (").append(inst.getReminderText());
+                    sbLong.append(")").append("\r\n");
                 } else if (keyword.startsWith("Emerge") || keyword.startsWith("Reflect")) {
                     final String[] k = keyword.split(":");
                     sbLong.append(k[0]).append(" ").append(ManaCostParser.parse(k[1]));
