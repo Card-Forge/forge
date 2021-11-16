@@ -2627,7 +2627,7 @@ public class AbilityUtils {
         }
 
         if (sq[0].contains("CardTypes")) {
-            return doXMath(getCardTypesFromList(game.getCardsIn(ZoneType.smartValueOf(sq[1]))), expr, c, ctb);
+            return doXMath(getCardTypesFromList(getDefinedCards(c, sq[1], ctb)), expr, c, ctb);
         }
 
         if (sq[0].equals("TotalTurns")) {
@@ -3588,6 +3588,16 @@ public class AbilityUtils {
             } else {
                 return size;
             }
+        }
+
+        if (string.startsWith("GreatestPower")) {
+            int highest = 0;
+            for (final Card crd : paidList) {
+                if (crd.getNetPower() > highest) {
+                    highest = crd.getNetPower();
+                }
+            }
+            return highest;
         }
 
         if (string.startsWith("DifferentCMC")) {
