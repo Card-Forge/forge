@@ -564,17 +564,19 @@ public class AbilityManaPart implements java.io.Serializable {
             return TextUtil.fastReplace(origProduced, "Combo ", "");
         }
         // ColorIdentity
-        List<Card> commanders = getSourceCard().getController().getCommanders();
-        if (commanders.isEmpty()) {
-            return "";
-        }
         StringBuilder sb = new StringBuilder();
-        ColorSet identity = getSourceCard().getController().getCommanderColorID();
-        if (identity.hasWhite()) { sb.append("W "); }
-        if (identity.hasBlue())  { sb.append("U "); }
-        if (identity.hasBlack()) { sb.append("B "); }
-        if (identity.hasRed())   { sb.append("R "); }
-        if (identity.hasGreen()) { sb.append("G "); }
+        if (getSourceCard().getController() != null) {
+            List<Card> commanders = getSourceCard().getController().getCommanders();
+            if (commanders.isEmpty()) {
+                return "";
+            }
+            ColorSet identity = getSourceCard().getController().getCommanderColorID();
+            if (identity.hasWhite()) { sb.append("W "); }
+            if (identity.hasBlue())  { sb.append("U "); }
+            if (identity.hasBlack()) { sb.append("B "); }
+            if (identity.hasRed())   { sb.append("R "); }
+            if (identity.hasGreen()) { sb.append("G "); }
+        }
         // TODO: Add support for {C}.
         return sb.length() == 0 ? "" : sb.substring(0, sb.length() - 1);
     }
