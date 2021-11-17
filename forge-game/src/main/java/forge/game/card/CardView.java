@@ -1428,42 +1428,86 @@ public class CardView extends GameEntityView {
                     if (sa.getManaPart().isAnyMana()) {
                         anyMana = true;
                     }
-                    switch (sa.getManaPart().getOrigProduced()) {
-                        case "R":
-                            if (!rMana) {
-                                count += 1;
-                                rMana = true;
+                    if (sa.getManaPart().isComboMana()) {
+                        String[] colorsProduced = sa.getManaPart().getComboColors().split(" ");
+                        //todo improve this
+                        for (final String s : colorsProduced) {
+                            switch (s.toUpperCase()) {
+                                case "R":
+                                    if (!rMana) {
+                                        count += 1;
+                                        rMana = true;
+                                    }
+                                    break;
+                                case "G":
+                                    if (!gMana) {
+                                        count += 1;
+                                        gMana = true;
+                                    }
+                                    break;
+                                case "B":
+                                    if (!bMana) {
+                                        count += 1;
+                                        bMana = true;
+                                    }
+                                    break;
+                                case "U":
+                                    if (!uMana) {
+                                        count += 1;
+                                        uMana = true;
+                                    }
+                                    break;
+                                case "W":
+                                    if (!wMana) {
+                                        count += 1;
+                                        wMana = true;
+                                    }
+                                    break;
+                                case "C":
+                                    if (!cMana) {
+                                        cMana = true;
+                                    }
+                                    break;
                             }
-                            break;
-                        case "G":
-                            if (!gMana) {
-                                count += 1;
-                                gMana = true;
-                            }
-                            break;
-                        case "B":
-                            if (!bMana) {
-                                count += 1;
-                                bMana = true;
-                            }
-                            break;
-                        case "U":
-                            if (!uMana) {
-                                count += 1;
-                                uMana = true;
-                            }
-                            break;
-                        case "W":
-                            if (!wMana) {
-                                count += 1;
-                                wMana = true;
-                            }
-                            break;
-                        case "C":
-                            if (!cMana) {
-                                cMana = true;
-                            }
-                            break;
+                        }
+                    } else {
+                        switch (sa.getManaPart().getOrigProduced()) {
+                            case "R":
+                                if (!rMana) {
+                                    count += 1;
+                                    rMana = true;
+                                }
+                                break;
+                            case "G":
+                                if (!gMana) {
+                                    count += 1;
+                                    gMana = true;
+                                }
+                                break;
+                            case "B":
+                                if (!bMana) {
+                                    count += 1;
+                                    bMana = true;
+                                }
+                                break;
+                            case "U":
+                                if (!uMana) {
+                                    count += 1;
+                                    uMana = true;
+                                }
+                                break;
+                            case "W":
+                                if (!wMana) {
+                                    count += 1;
+                                    wMana = true;
+                                }
+                                break;
+                            case "C":
+                                if (!cMana) {
+                                    cMana = true;
+                                }
+                                break;
+                        }
                     }
                 }
             }
