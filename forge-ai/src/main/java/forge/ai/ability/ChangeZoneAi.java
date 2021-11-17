@@ -1764,7 +1764,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
     @Override
     public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
         // Called when attaching Aura to player or adding creature to combat
-        if (params.containsKey("Attacker")) {
+        if (params != null && params.containsKey("Attacker")) {
             return (Player) ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), new FCollection<GameEntity>(options));
         }
         return AttachAi.attachToPlayerAIPreferences(ai, sa, true, (List<Player>)options);
@@ -1772,7 +1772,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
     @Override
     protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options, Map<String, Object> params) {
-        if (params.containsKey("Attacker")) {
+        if (params != null && params.containsKey("Attacker")) {
             return ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), new FCollection<GameEntity>(options));
         }
         // should not be reached
