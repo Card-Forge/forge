@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
-A:AB$ Pump | Cost$ 1 Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable | AITgts$ Vampire | SubAbility$ DBPump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target creature can't be blocked this turn. If it's a Vampire, it also gains lifelink until end of turn.
+A:AB$ Pump | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable | AITgts$ Vampire | SubAbility$ DBPump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target creature can't be blocked this turn. If it's a Vampire, it also gains lifelink until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted.Vampire | KW$ Lifelink | StackDescription$ If it's a Vampire, it also gains lifelink until end of turn.
 DeckHints:Type$Vampire
 DeckHas:Ability$LifeGain
