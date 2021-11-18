@@ -200,6 +200,7 @@ b_2_2_zombie
 b_2_2_zombie_decayed
 c_0_1_eldrazi_spawn_sac
 c_a_clue_draw
+c_a_treasure_sac
 g_1_1_snake
 g_1_2_spider_reach
 g_2_2_wolf
