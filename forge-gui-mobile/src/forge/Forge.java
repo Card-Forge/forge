@@ -48,7 +48,7 @@ public class Forge implements ApplicationListener {
     private static FrameRate frameRate;
     private static FScreen currentScreen;
     protected static SplashScreen splashScreen;
-    private static KeyInputAdapter keyInputAdapter;
+    public static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
     private static int continuousRenderingCount = 1; //initialize to 1 since continuous rendering is the default
     private static final Deque<FScreen> Dscreens = new ArrayDeque<>();

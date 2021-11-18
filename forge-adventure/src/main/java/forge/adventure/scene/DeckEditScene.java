@@ -26,8 +26,8 @@ import java.util.Map;
  */
 public class DeckEditScene extends ForgeScene {
     public class AdventureDeckEditor extends FDeckEditor {
-        public AdventureDeckEditor(boolean commander) {
-            super(commander ? EditorType.QuestCommander : EditorType.Quest, "", false, new FEvent.FEventHandler() {
+        public AdventureDeckEditor( ) {
+            super( EditorType.Quest, "", false, new FEvent.FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     AdventureApplicationAdapter.instance.switchToLast();
@@ -41,22 +41,34 @@ public class DeckEditScene extends ForgeScene {
         }
 
         @Override
+        protected boolean allowDelete() {
+            return false;
+        }
+        @Override
+        protected boolean allowsSave() {
+            return false;
+        }
+        @Override
+        protected boolean allowsAddBasic() {
+            return false;
+        }
+        @Override
+        protected boolean allowRename() {
+            return false;
+        }
+        @Override
+        protected boolean isLimitedEditor() {
+            return true;
+        }
+
+        @Override
         protected Map<ColumnDef, ItemColumn> getColOverrides(ItemManagerConfig config) {
             Map<ColumnDef, ItemColumn> colOverrides = new HashMap<>();
-            switch (config) {
-                case QUEST_EDITOR_POOL:
-                    ItemColumn.addColOverride(config, colOverrides, ColumnDef.NEW, FModel.getQuest().getCards().getFnNewCompare(), FModel.getQuest().getCards().getFnNewGet());
-                    break;
-                case QUEST_DECK_EDITOR:
-                    ItemColumn.addColOverride(config, colOverrides, ColumnDef.NEW, FModel.getQuest().getCards().getFnNewCompare(), FModel.getQuest().getCards().getFnNewGet());
-                    ItemColumn.addColOverride(config, colOverrides, ColumnDef.DECKS, QuestSpellShop.fnDeckCompare, QuestSpellShop.fnDeckGet);
-                    break;
-                default:
-                    colOverrides = null; //shouldn't happen
-                    break;
-            }
+            ItemColumn.addColOverride(config, colOverrides, ColumnDef.NEW, FModel.getQuest().getCards().getFnNewCompare(), FModel.getQuest().getCards().getFnNewGet());
+            ItemColumn.addColOverride(config, colOverrides, ColumnDef.DECKS, QuestSpellShop.fnDeckCompare, QuestSpellShop.fnDeckGet);
             return colOverrides;
         }
+
 
         public void refresh() {
             for(TabPage page:tabPages)
@@ -96,7 +108,7 @@ public class DeckEditScene extends ForgeScene {
             FModel.getQuest().getCards().addSingleCard(card.getKey(), card.getValue());
 
 
-        Deck deck = AdventurePlayer.current().getDeck();
+        Deck deck = AdventurePlayer.current().getSelectedDeck();
         getScreen();
         screen.getEditorType().getController().setDeck(deck);
         screen.refresh();
@@ -112,7 +124,7 @@ public class DeckEditScene extends ForgeScene {
 
     @Override
     public FScreen getScreen() {
-        return screen==null?screen = new AdventureDeckEditor(false):screen;
+        return screen==null?screen = new AdventureDeckEditor():screen;
     }
 
 }

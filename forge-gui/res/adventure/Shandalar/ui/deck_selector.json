@@ -1,0 +1,51 @@
+{
+    "width": 480,
+    "height": 270, 
+    "yDown": true, 
+    "elements":[     
+    {
+      "type" : "Image",      
+      "image":"ui/title_bg.png",
+      "width": 480,
+      "height": 270
+    }    , 
+            
+    {
+      "type" : "Scroll",                
+      "name": "deckSlots",
+      "x": 10, 
+      "y": 10 ,
+      "width": 344,
+      "height": 235
+    } ,
+    {
+         "type" : "TextButton",     
+         "name" : "return" ,             
+         "text" : "Back" ,       
+         "width": 96,
+          "height": 16,     
+          "x": 15, 
+          "y": 250 
+    }         ,
+    {
+         "type" : "TextButton",     
+         "name" : "rename" ,             
+         "text" : "Rename Deck" ,       
+         "width": 96,
+          "height": 16,     
+          "x": 115, 
+          "y": 250 
+    }               ,
+    {
+         "type" : "TextButton",     
+         "name" : "edit" ,             
+         "text" : "Edit Deck" ,       
+         "width": 96,
+          "height": 16,     
+          "x": 215, 
+          "y": 250 
+    }   
+    ]
+
+
+}

@@ -47,13 +47,14 @@ public class DuelScene extends ForgeScene {
 
 
     public void GameEnd() {
+        boolean winner=humanPlayer == hostedMatch.getGame().getMatch().getWinner();
         Gdx.app.postRunnable(() -> {
             SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
             Scene last= AdventureApplicationAdapter.instance.switchToLast();
 
             if(last instanceof HudScene)
             {
-                ((HudScene)last).stage.setWinner(humanPlayer == hostedMatch.getGame().getMatch().getWinner());
+                ((HudScene)last).stage.setWinner(winner);
             }
         });
 
@@ -66,7 +67,7 @@ public class DuelScene extends ForgeScene {
         appliedVariants.add(GameType.Constructed);
 
         List<RegisteredPlayer> players = new ArrayList<>();
-        Deck playerDeck=(Deck)AdventurePlayer.current().getDeck().copyTo("PlayerDeckCopy");
+        Deck playerDeck=(Deck)AdventurePlayer.current().getSelectedDeck().copyTo("PlayerDeckCopy");
         int missingCards= Config.instance().getConfigData().minDeckSize-playerDeck.getMain().countAll();
         if(missingCards>0)
             playerDeck.getMain().add("Wastes",missingCards);

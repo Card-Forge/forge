@@ -353,12 +353,19 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             editorType.getController().load(editDeckPath, editDeckName);
         }
 
-        btnSave.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                save(null);
-            }
-        });
+        if(allowsSave())
+        {
+            btnSave.setCommand(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    save(null);
+                }
+            });
+        }
+        else
+        {
+         btnSave.setVisible(false);
+        }
         btnMoreOptions.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
@@ -367,38 +374,39 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     protected void buildMenu() {
                         final Localizer localizer = Localizer.getInstance();
 
-                        addItem(new FMenuItem(localizer.getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, new FEventHandler() {
-                            @Override
-                            public void handleEvent(FEvent e) {
-                                CardEdition defaultLandSet;
-                                switch (editorType) {
-                                case Draft:
-                                case Sealed:
-                                case QuestDraft:
-                                    //suggest a random set from the ones used in the limited card pool that have all basic lands
-                                    Set<CardEdition> availableEditionCodes = new HashSet<>();
-                                    for (PaperCard p : deck.getAllCardsInASinglePool().toFlatList()) {
-                                        availableEditionCodes.add(FModel.getMagicDb().getEditions().get(p.getEdition()));
+                        if (allowsAddBasic())
+                            addItem(new FMenuItem(localizer.getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, new FEventHandler() {
+                                @Override
+                                public void handleEvent(FEvent e) {
+                                    CardEdition defaultLandSet;
+                                    switch (editorType) {
+                                    case Draft:
+                                    case Sealed:
+                                    case QuestDraft:
+                                        //suggest a random set from the ones used in the limited card pool that have all basic lands
+                                        Set<CardEdition> availableEditionCodes = new HashSet<>();
+                                        for (PaperCard p : deck.getAllCardsInASinglePool().toFlatList()) {
+                                            availableEditionCodes.add(FModel.getMagicDb().getEditions().get(p.getEdition()));
+                                        }
+                                        defaultLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditionCodes);
+                                        break;
+                                    case Quest:
+                                        defaultLandSet = FModel.getQuest().getDefaultLandSet();
+                                        break;
+                                    default:
+                                        defaultLandSet = DeckProxy.getDefaultLandSet(deck);
+                                        break;
                                     }
-                                    defaultLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditionCodes);
-                                    break;
-                                case Quest:
-                                    defaultLandSet = FModel.getQuest().getDefaultLandSet();
-                                    break;
-                                default:
-                                    defaultLandSet = DeckProxy.getDefaultLandSet(deck);
-                                    break;
+                                    AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet, new Callback<CardPool>() {
+                                        @Override
+                                        public void run(CardPool landsToAdd) {
+                                            getMainDeckPage().addCards(landsToAdd);
+                                        }
+                                    });
+                                    dialog.show();
+                                    setSelectedPage(getMainDeckPage()); //select main deck page if needed so main deck is visible below dialog
                                 }
-                                AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet, new Callback<CardPool>() {
-                                    @Override
-                                    public void run(CardPool landsToAdd) {
-                                        getMainDeckPage().addCards(landsToAdd);
-                                    }
-                                });
-                                dialog.show();
-                                setSelectedPage(getMainDeckPage()); //select main deck page if needed so main deck is visible below dialog
-                            }
-                        }));
+                            }));
                         if (!isLimitedEditor()) {
                             addItem(new FMenuItem(localizer.getMessage("lblImportFromClipboard"), Forge.hdbuttons ? FSkinImage.HDIMPORT : FSkinImage.OPEN, new FEventHandler() {
                                 @Override
@@ -655,7 +663,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         return null; //never use backdrop for editor
     }
 
-    private boolean isLimitedEditor() {
+    protected boolean allowsSave() {
+        return true;
+    }
+    protected boolean allowsAddBasic() {
+        return true;
+    }
+    protected boolean isLimitedEditor() {
         switch (editorType) {
         case Draft:
         case Sealed:
@@ -1819,7 +1833,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     final Localizer localizer = Localizer.getInstance();
                     name = "[" + localizer.getMessage("lblNewDeck") + "]";
                 }
-                if (!saved) {
+                if (!saved && editor.allowsSave()) {
                     name = "*" + name;
                 }
                 editor.lblName.setText(name);

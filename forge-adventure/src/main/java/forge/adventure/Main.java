@@ -23,7 +23,7 @@ import java.nio.file.Paths;
  * Wrapper to start forge first (splash screen and resources loading)
  *
  */
-class StartAdventure extends AdventureApplicationAdapter {
+ class StartAdventure extends AdventureApplicationAdapter {
 
 
     public StartAdventure(  ) {

@@ -83,7 +83,7 @@
 	"spawnRate": 0.1,
 	"difficulty": 0.1,
 	"speed": 30,
-	"life": 1,
+	"life": 13,
 	"rewards": [
 		{
 			"type": "randomCard",
@@ -99,12 +99,18 @@
 	"spawnRate": 0.1,
 	"difficulty": 0.1,
 	"speed": 25,
-	"life": 1,
+	"life": 11,
 	"rewards": [
 		{
 			"type": "randomCard",
 			"count": 2,
 			"addMaxCount": 8
+		},
+		{
+			"type": "gold",
+			"probability": 0.6,
+			"count": 7,
+			"addMaxCount": 32
 		}
 	]
 },

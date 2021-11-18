@@ -107,7 +107,7 @@ public class GameHUD extends Stage {
 
     private Object openDeck() {
 
-        AdventureApplicationAdapter.instance.switchScene(SceneType.DeckEditScene.instance);
+        AdventureApplicationAdapter.instance.switchScene(SceneType.DeckSelectScene.instance);
         return null;
     }
 

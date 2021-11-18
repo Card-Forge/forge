@@ -55,8 +55,10 @@ public class StartScene extends UIScene {
     @Override
     public void enter() {
 
-
-        saveButton.setVisible(WorldSave.getCurrentSave().getWorld().getData() != null);
+        boolean hasSaveButton=WorldSave.getCurrentSave().getWorld().getData() != null;
+        if(hasSaveButton)
+            hasSaveButton=!((TileMapScene)SceneType.TileMapScene.instance).currentMap().isInMap();
+        saveButton.setVisible(hasSaveButton);
         resumeButton.setVisible(WorldSave.getCurrentSave().getWorld().getData() != null);
         Gdx.input.setInputProcessor(stage); //Start taking input from the ui
     }
