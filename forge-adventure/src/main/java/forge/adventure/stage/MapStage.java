@@ -20,6 +20,7 @@ import forge.adventure.scene.DuelScene;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.util.Config;
+import forge.adventure.util.Current;
 import forge.adventure.util.Reward;
 import forge.adventure.world.PointOfInterestChanges;
 import forge.adventure.world.WorldSave;
@@ -42,6 +43,7 @@ public class MapStage extends GameStage {
     private float tileWidth;
     private float width;
     private float height;
+    private boolean isInMap=false;
     MapLayer spriteLayer;
     private PointOfInterestChanges changes;
     private EnemySprite currentMob;
@@ -49,6 +51,7 @@ public class MapStage extends GameStage {
     private final Vector2 oldPosition2=new Vector2();
     private final Vector2 oldPosition3=new Vector2();
     private final Vector2 oldPosition4=new Vector2();
+
 
     public MapLayer getSpriteLayer()
     {
@@ -148,6 +151,8 @@ public class MapStage extends GameStage {
 
     }
     public void loadMap(TiledMap map,String sourceMap) {
+
+        isInMap=true;
         this.map=map;
         for (MapActor actor : new Array.ArrayIterator<>(actors)) {
             actor.remove();
@@ -284,6 +289,7 @@ public class MapStage extends GameStage {
 
     public boolean exit() {
 
+        isInMap=false;
         AdventureApplicationAdapter.instance.switchScene(SceneType.GameScene.instance);
         return true;
     }
@@ -306,6 +312,7 @@ public class MapStage extends GameStage {
                 player.setAnimation(CharacterSprite.AnimationTypes.Idle);
                 currentMob.setAnimation(CharacterSprite.AnimationTypes.Idle);
                 player.setPosition(oldPosition4);
+                Current.player().defeated();
                 stop();
                 currentMob=null;
             });
@@ -365,4 +372,9 @@ public class MapStage extends GameStage {
 
         changes =change;
     }
+
+    public boolean isInMap() {
+        return isInMap;
+    }
+
 }

@@ -13,6 +13,7 @@ import forge.adventure.character.MapActor;
 import forge.adventure.character.PlayerSprite;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
+import forge.adventure.scene.TileMapScene;
 import forge.adventure.world.WorldSave;
 
 /**
@@ -163,15 +164,21 @@ public abstract class GameStage extends Stage {
         }
         if (keycode == Input.Keys.F5)//todo config
         {
-            GetPlayer().storePos();
-            WorldSave.getCurrentSave().header.createPreview();
-            WorldSave.getCurrentSave().quickSave();
+            if(!((TileMapScene)SceneType.TileMapScene.instance).currentMap().isInMap())
+            {
+                GetPlayer().storePos();
+                WorldSave.getCurrentSave().header.createPreview();
+                WorldSave.getCurrentSave().quickSave();
+            }
 
         }
         if (keycode == Input.Keys.F8)//todo config
         {
-            WorldSave.getCurrentSave().quickLoad();
-            enter();
+            if(!((TileMapScene)SceneType.TileMapScene.instance).currentMap().isInMap())
+            {
+                WorldSave.getCurrentSave().quickLoad();
+                enter();
+            }
         }
         if (keycode == Input.Keys.F12)
         {

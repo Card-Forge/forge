@@ -27,6 +27,11 @@ public class TileMapScene extends HudScene {
         tiledMapRenderer = new PointOfInterestMapRenderer((MapStage)stage);
     }
 
+    public MapStage currentMap()
+    {
+        return (MapStage)stage;
+    }
+
     @Override
     public void dispose() {
         if (map != null)
