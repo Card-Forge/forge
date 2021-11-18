@@ -194,3 +194,16 @@ ScryfallCode=VOC
 186 R Temple of Malice @Jonas De Ro
 187 U Temple of the False God @James Zapata
 188 U Unclaimed Territory @Dimitar Marinski
+
+[tokens]
+b_1_1_bat_flying
+c_1_1_a_thopter_flying
+c_1_1_spirit
+c_a_blood_draw
+c_a_clue_draw
+c_a_treasure_sac
+g_2_2_wolf
+w_1_1_spirit_flying
+w_3_3_spirit_flying
+w_4_4_angel_flying
+wb_1_1_vampire_lifelink

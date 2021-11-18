@@ -287,6 +287,8 @@ Prerelease=6 Boosters, 1 RareMythic+
 275 L Mountain @Daria Khlebnikova
 276 L Forest @Pig Hands
 277 L Forest @Indra Nugroho
+
+[borderless]
 278 M Sorin the Mirthless @Justyna Gil
 279 M Chandra, Dressed to Kill @Ekaterina Burmak
 280 M Kaya, Geist Hunter @Raymond Swanland
@@ -295,6 +297,8 @@ Prerelease=6 Boosters, 1 RareMythic+
 283 R Shattered Sanctum @Donato Giancola
 284 R Stormcarved Coast @Jokubas Uogintas
 285 R Sundown Pass @Johannes Voss
+
+[showcase]
 286 C Unholy Officiant @Jason A. Engle
 287 R Welcoming Vampire @Christian Angel
 288 C Bloodcrazed Socialite @Samuel Araya
@@ -355,6 +359,8 @@ Prerelease=6 Boosters, 1 RareMythic+
 343 M Olivia, Crimson Bride @Bastien L. Deharme
 344 R Torens, Fist of the Angels @Greg Staples
 345 R Investigator's Journal @Alix Branwyn
+
+[extended art]
 346 R By Invitation Only @Micah Epstein
 347 M Cemetery Protector @Chris Rallis
 348 M Faithbound Judge @Svetlin Velinov
@@ -412,7 +418,11 @@ Prerelease=6 Boosters, 1 RareMythic+
 400 L Swamp @Sam White
 401 L Mountain @Sam White
 402 L Forest @Sam White
+
+[buy a box]
 403 R Voldaren Estate @Cliff Childs
+
+[promo]
 404 R Sigarda's Summons @Wisnu Tan
 405 U Geistlight Snare @Anato Finnstark
 406 U Fell Stinger @Lars Grant-West
@@ -431,11 +441,14 @@ c_a_blood_draw
 c_a_treasure_sac
 g_1_1_insect
 g_2_2_wolf
+g_3_1_boar
 gw_1_1_human_soldier_training
 r_1_1_human
+r_3_2_wolf
 r_x_x_dragon_illusion_flying_haste
 u_x_x_zombie
 w_1_1_human
 w_1_1_spirit_flying
 w_4_4_spirit_flying
 w_x_x_spirit_cleric_total_spirits
+wb_1_1_vampire_lifelink
