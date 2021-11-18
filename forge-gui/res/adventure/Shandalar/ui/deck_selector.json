@@ -22,7 +22,7 @@
          "type" : "TextButton",     
          "name" : "return" ,             
          "text" : "Back" ,       
-         "width": 48,
+         "width": 96,
           "height": 16,     
           "x": 15, 
           "y": 250 
@@ -31,7 +31,7 @@
          "type" : "TextButton",     
          "name" : "rename" ,             
          "text" : "Rename Deck" ,       
-         "width": 48,
+         "width": 96,
           "height": 16,     
           "x": 115, 
           "y": 250 
@@ -40,7 +40,7 @@
          "type" : "TextButton",     
          "name" : "edit" ,             
          "text" : "Edit Deck" ,       
-         "width": 48,
+         "width": 96,
           "height": 16,     
           "x": 215, 
           "y": 250 
