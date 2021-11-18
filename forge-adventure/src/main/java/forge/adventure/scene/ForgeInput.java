@@ -23,7 +23,6 @@ public class ForgeInput extends FGestureAdapter {
     private static char lastKeyTyped;
     private static boolean keyTyped, shiftKeyDown;
     private final ForgeScene forgeScene;
-    private final Forge.KeyInputAdapter keyInputAdapter = null;
     //mouseMoved and scrolled events for desktop version
     private int mouseMovedX, mouseMovedY;
 
@@ -67,7 +66,7 @@ public class ForgeInput extends FGestureAdapter {
                 back();
         }
         */
-        if (keyInputAdapter == null) {
+        if (Forge.keyInputAdapter == null) {
             if (Forge.KeyInputAdapter.isModifierKey(keyCode)) {
                 return false; //don't process modifiers keys for unknown adapter
             }
@@ -81,7 +80,7 @@ public class ForgeInput extends FGestureAdapter {
             }
             return container.keyDown(keyCode);
         }
-        return keyInputAdapter.keyDown(keyCode);
+        return Forge.keyInputAdapter.keyDown(keyCode);
     }
 
     @Override
@@ -90,21 +89,21 @@ public class ForgeInput extends FGestureAdapter {
         if (keyCode == Input.Keys.SHIFT_LEFT || keyCode == Input.Keys.SHIFT_RIGHT) {
             shiftKeyDown = false;
         }
-        if (keyInputAdapter != null) {
-            return keyInputAdapter.keyUp(keyCode);
+        if (Forge.keyInputAdapter != null) {
+            return Forge.keyInputAdapter.keyUp(keyCode);
         }
         return false;
     }
 
     @Override
     public boolean keyTyped(char ch) {
-        if (keyInputAdapter != null) {
+        if (Forge.keyInputAdapter != null) {
             if (ch >= ' ' && ch <= '~') { //only process this event if character is printable
                 //prevent firing this event more than once for the same character on the same key down, otherwise it fires too often
                 if (lastKeyTyped != ch || !keyTyped) {
                     keyTyped = true;
                     lastKeyTyped = ch;
-                    return keyInputAdapter.keyTyped(ch);
+                    return Forge.keyInputAdapter.keyTyped(ch);
                 }
             }
         }
@@ -130,8 +129,8 @@ public class ForgeInput extends FGestureAdapter {
     public boolean touchDown(int x, int y, int pointer, int button) {
         if (pointer == 0) { //don't change listeners when second finger goes down for zoom
             updatePotentialListeners(x, y);
-            if (keyInputAdapter != null) {
-                if (!keyInputAdapter.allowTouchInput() || !potentialListeners.contains(keyInputAdapter.getOwner())) {
+            if (Forge.keyInputAdapter != null) {
+                if (!Forge.keyInputAdapter.allowTouchInput() || !potentialListeners.contains(Forge.keyInputAdapter.getOwner())) {
                     //endKeyInput(); //end key input if needed
                 }
             }

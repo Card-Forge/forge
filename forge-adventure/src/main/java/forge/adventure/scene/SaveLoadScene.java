@@ -95,7 +95,7 @@ public class SaveLoadScene extends UIScene {
 
     public void loadSave() {
         if (save) {
-            textInput.setText("Save Game " + currentSlot);
+            textInput.setText(buttons.get(currentSlot).getText().toString());
             dialog.show(stage);
             stage.setKeyboardFocus(textInput);
         } else {

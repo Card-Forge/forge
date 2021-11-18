@@ -13,7 +13,8 @@ public enum SceneType {
     DeckEditScene(new forge.adventure.scene.DeckEditScene()),
     TileMapScene(new forge.adventure.scene.TileMapScene()),
     RewardScene(new forge.adventure.scene.RewardScene()),
-    InnScene(new forge.adventure.scene.InnScene());
+    InnScene(new forge.adventure.scene.InnScene()),
+    DeckSelectScene(new forge.adventure.scene.DeckSelectScene());
 
 
     public final forge.adventure.scene.Scene instance;
