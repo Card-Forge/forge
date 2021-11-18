@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Innistrad: Midnight Hunt #04
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/11/187.-MID4-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Remember that your solution must account for all possible blocking decisions your opponent could make.
+[state]
+humanlife=20
+ailife=4
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=True Polymorph;Silver Bolt;Team Pennant;Hallowed Respite
+humanbattlefield=Enduring Angel;Valkyrie Harbinger;Plains;Plains;Island;Island;Deserted Beach|NoETBTrigs;Deserted Beach|NoETBTrigs
+aibattlefield=Liesa, Forgotten Archangel;Myriad Construct
