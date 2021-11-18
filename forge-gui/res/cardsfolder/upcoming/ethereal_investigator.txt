@@ -1,0 +1,12 @@
+Name:Ethereal Investigator
+ManaCost:3 U
+Types:Creature Spirit
+PT:2/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerDescription$ When CARDNAME enters the battlefield, investigate X times, where X is the number of opponents you have. (To investigate, create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate | Num$ X
+SVar:X:PlayerCountOpponents$Amount
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you draw your second card each turn, put a +1/+1 counter on CARDNAME.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying
+DeckHas:Ability$Token & Ability$Sacrifice
+Oracle:Flying\nWhen Ethereal Investigator enters the battlefield, investigate X times, where X is the number of opponents you have. (To investigate, create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")\nWhenever you draw your second card each turn, create a 1/1 white Spirit creature token with flying.

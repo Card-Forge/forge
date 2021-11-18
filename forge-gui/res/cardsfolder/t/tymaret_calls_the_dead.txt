@@ -2,11 +2,8 @@ Name:Tymaret Calls the Dead
 ManaCost:2 B
 Types:Enchantment Saga
 K:Saga:3:DBMill,DBMill,DBGainLife
-SVar:DBMill:DB$ Mill | Defined$ You | NumCards$ 3 | SubAbility$ DBChooseCard | SpellDescription$ Mill three cards. Then you may exile a creature or enchantment card from your graveyard. If you do, create a 2/2 black Zombie creature token.
-SVar:DBChooseCard:DB$ ChooseCard | Choices$ Creature.YouCtrl,Enchantment.YouCtrl | Optional$ Yes | ChoiceTitle$ Choose a creature or enchantment to exile | ChoiceZone$ Graveyard | Amount$ 1 | AILogic$ WorstCard | SubAbility$ DBChangeZone
-SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ ChosenCard | RememberChanged$ True | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
+SVar:DBMill:DB$ Mill | Defined$ You | NumCards$ 3 | SubAbility$ DBToken | SpellDescription$ Mill three cards. Then you may exile a creature or enchantment card from your graveyard. If you do, create a 2/2 black Zombie creature token.
+SVar:DBToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ 1 | UnlessCost$ ExileFromGrave<1/Creature;Enchantment/creature or enchantment card> | UnlessSwitched$ True | UnlessPayer$ You
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBScry | SpellDescription$ You gain X life and scry X, where X is the number of Zombies you control.
 SVar:DBScry:DB$ Scry | ScryNum$ X
 SVar:X:Count$Valid Zombie.YouCtrl

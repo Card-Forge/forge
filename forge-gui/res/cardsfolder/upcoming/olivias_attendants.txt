@@ -1,0 +1,11 @@
+Name:Olivia's Attendants
+ManaCost:4 R R
+Types:Creature Vampire
+PT:6/6
+K:Menace
+T:Mode$ DamageDone | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME deals damage, create that many Blood tokens. (They're artifacts with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_blood_draw
+SVar:X:TriggerCount$DamageAmount
+A:AB$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+DeckHas:Ability$Token & Ability$Sacrifice & Type$Blood
+Oracle:Menace\nWhenever Olivia's Attendants deals damage, create that many Blood tokens. (They're artifacts with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")\n{2}{R}: Olivia's Attendants deals 1 damage to any target.

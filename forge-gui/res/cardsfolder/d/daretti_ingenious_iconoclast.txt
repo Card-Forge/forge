@@ -3,9 +3,7 @@ ManaCost:1 B R
 Types:Legendary Planeswalker Daretti
 Loyalty:3
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ c_1_1_a_construct_defender | TokenOwner$ You | LegacyImage$ c 1 1 a construct defender cn2 | SpellDescription$ Create a 1/1 colorless Construct artifact creature token with defender.
-A:AB$ Sacrifice | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | Defined$ You | Amount$ 1 | SacValid$ Artifact | RememberSacrificed$ True | Optional$ True | SubAbility$ DBDestroy | SpellDescription$ You may sacrifice an artifact. If you do, destroy target artifact or creature. | StackDescription$ SpellDescription
-SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Destroy | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | UnlessCost$ Sac<1/Artifact> | UnlessSwitched$ True | UnlessPayer$ You | SpellDescription$ You may sacrifice an artifact. If you do, destroy target artifact or creature. | StackDescription$ SpellDescription
 A:AB$ CopyPermanent | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Artifact | TgtZone$ Battlefield,Graveyard | TgtPrompt$ Select an artifact in graveyard or the battlefield | NumCopies$ 3 | SpellDescription$ Choose target artifact card in a graveyard or artifact on the battlefield. Create three tokens that are copies of it.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daretti_ingenious_iconoclast.jpg
 Oracle:[+1]: Create a 1/1 colorless Construct artifact creature token with defender.\n[−1]: You may sacrifice an artifact. If you do, destroy target artifact or creature.\n[−6]: Choose target artifact card in a graveyard or artifact on the battlefield. Create three tokens that are copies of it.

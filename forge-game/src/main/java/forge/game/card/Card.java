@@ -56,6 +56,7 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
+import forge.game.staticability.StaticAbilityCantPutCounter;
 import forge.game.staticability.StaticAbilityCantTransform;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -1364,13 +1365,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     @Override
     public final boolean canReceiveCounters(final CounterType type) {
-        // CantPutCounter static abilities
-        for (final Card ca : getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (stAb.applyAbility("CantPutCounter", this, type)) {
-                    return false;
-                }
-            }
+        if (StaticAbilityCantPutCounter.anyCantPutCounter(this, type)) {
+            return false;
         }
         return true;
     }
@@ -1915,7 +1911,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 sbLong.append(p[2]).append("\r\n");
             } else if (keyword.equals("Unblockable")) {
                 sbLong.append(getName()).append(" can't be blocked.\r\n");
-                sbLong.append(getName()).append(" has all names of nonlegendary creature cards.\r\n");
             } else if (keyword.startsWith("IfReach")) {
                 String[] k = keyword.split(":");
                 sbLong.append(getName()).append(" can block ")
@@ -1986,17 +1981,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbLong.append(k).append("\r\n");
                 } else if (keyword.startsWith("Ripple")) {
                     sbLong.append(TextUtil.fastReplace(keyword, ":", " ")).append("\r\n");
-                } else if (keyword.startsWith("Madness")) {
-                    String[] parts = keyword.split(":");
-                    // If no colon exists in Madness keyword, it must have been granted and assumed the cost from host
-                    if (parts.length < 2) {
-                        sbLong.append(parts[0]).append(" ").append(this.getManaCost()).append("\r\n");
-                    } else {
-                        sbLong.append(parts[0]).append(" ").append(ManaCostParser.parse(parts[1])).append("\r\n");
-                    }
                 } else if (keyword.startsWith("Morph") || keyword.startsWith("Megamorph")
                         || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")
-                        || keyword.startsWith("Disturb")) {
+                        || keyword.startsWith("Disturb") || keyword.startsWith("Madness:")){
                     String[] k = keyword.split(":");
                     sbLong.append(k[0]);
                     if (k.length > 1) {
@@ -2014,6 +2001,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         sbLong.append(" (").append(inst.getReminderText()).append(")");
                         sbLong.append("\r\n");
                     }
+                } else if (keyword.startsWith("Madness")) {
+                    // If no colon exists in Madness keyword, it must have been granted and assumed the cost from host
+                    sbLong.append("Madness ").append(this.getManaCost()).append(" (").append(inst.getReminderText());
+                    sbLong.append(")").append("\r\n");
                 } else if (keyword.startsWith("Emerge") || keyword.startsWith("Reflect")) {
                     final String[] k = keyword.split(":");
                     sbLong.append(k[0]).append(" ").append(ManaCostParser.parse(k[1]));
@@ -2079,7 +2070,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbLong.append(((Companion)inst).getDescription());
                 } else if (keyword.startsWith("Presence") || keyword.startsWith("MayFlash")) {
                     // Pseudo keywords, only print Reminder
-                    sbLong.append(inst.getReminderText());
+                    sbLong.append(inst.getReminderText()).append("\r\n");
                 } else if (keyword.contains("At the beginning of your upkeep, ")
                         && keyword.contains(" unless you pay")) {
                     sbLong.append(keyword).append("\r\n");

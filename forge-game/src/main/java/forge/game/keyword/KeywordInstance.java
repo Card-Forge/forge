@@ -73,7 +73,6 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     protected abstract void parse(String details);
     protected abstract String formatReminderText(String reminderText);
 
-
     /*
      * (non-Javadoc)
      * @see forge.game.keyword.KeywordInterface#createTraits(forge.game.card.Card, boolean)

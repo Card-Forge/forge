@@ -3,6 +3,6 @@ ManaCost:UR UR
 Types:Creature Orc Wizard
 PT:3/3
 K:Defender
-T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, CARDNAME can attack this turn as though it didn’t have defender.
+T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, CARDNAME can attack this turn as though it didn't have defender.
 SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME can attack as though it didn't have defender.
 Oracle:Defender\nMagecraft — Whenever you cast or copy an instant or sorcery spell, Prismari Pledgemage can attack this turn as though it didn't have defender.

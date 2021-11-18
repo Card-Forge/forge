@@ -1,0 +1,9 @@
+Name:Falkenrath Celebrants
+ManaCost:4 R
+Types:Creature Vampire
+PT:4/4
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two Blood tokens. (They're artifacts with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_blood_draw
+DeckHas:Ability$Token & Ability$Sacrifice & Type$ Blood
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhen Falkenrath Celebrants enters the battlefield, create two Blood tokens. (They're artifacts with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")

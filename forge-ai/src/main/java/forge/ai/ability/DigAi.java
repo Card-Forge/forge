@@ -122,6 +122,12 @@ public class DigAi extends SpellAbilityAi {
     }
 
     @Override
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+        // TODO: improve this check in ways that may be specific to a subability
+        return canPlayAI(aiPlayer, sa);
+    }
+
+    @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final SpellAbility root = sa.getRootAbility();
         PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
@@ -183,7 +189,7 @@ public class DigAi extends SpellAbilityAi {
      */
     @Override
     public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
-        if (params.containsKey("Attacker")) {
+        if (params != null && params.containsKey("Attacker")) {
             return (Player) ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), new FCollection<GameEntity>(options));
         }
         // an opponent choose a card from
@@ -192,7 +198,7 @@ public class DigAi extends SpellAbilityAi {
 
     @Override
     protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options, Map<String, Object> params) {
-        if (params.containsKey("Attacker")) {
+        if (params != null && params.containsKey("Attacker")) {
             return ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), new FCollection<GameEntity>(options));
         }
         // should not be reached

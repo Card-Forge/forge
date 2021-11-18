@@ -224,7 +224,7 @@ public class DrawAi extends SpellAbilityAi {
         final Game game = ai.getGame();
         final String logic = sa.getParamOrDefault("AILogic", "");
         final boolean considerPrimary = logic.equals("ConsiderPrimary");
-        final boolean drawback = (sa.getParent() != null) && !considerPrimary;
+        final boolean drawback = sa.getParent() != null && !considerPrimary;
         boolean assumeSafeX = false; // if true, the AI will assume that the X value has been set to a value that is safe to draw
 
         int computerHandSize = ai.getCardsIn(ZoneType.Hand).size();
@@ -266,7 +266,7 @@ public class DrawAi extends SpellAbilityAi {
                         // [Necrologia, Pay X Life : Draw X Cards]
                         // Don't draw more than what's "safe" and don't risk a near death experience
                         boolean aggroAI = (((PlayerControllerAi) ai.getController()).getAi()).getBooleanProperty(AiProps.PLAY_AGGRO);
-                        while ((ComputerUtil.aiLifeInDanger(ai, aggroAI, numCards) && (numCards > 0))) {
+                        while (ComputerUtil.aiLifeInDanger(ai, aggroAI, numCards) && numCards > 0) {
                             numCards--;
                         }
                     }
@@ -310,8 +310,20 @@ public class DrawAi extends SpellAbilityAi {
             PlayerCollection opps = players.filter(PlayerPredicates.isOpponentOf(ai));
 
             for (Player oppA : opps) {
+                if (sa.isCurse() && ai.canDraw() && oppA.canLoseLife()) { // Risk Factor
+                    if (numCards >= computerLibrarySize - 3) {
+                        if (ai.isCardInPlay("Laboratory Maniac")) {
+                            sa.getTargets().add(oppA);
+                            return true;
+                        }
+                    } else if (computerHandSize + numCards <= computerMaxHandSize) {
+                        sa.getTargets().add(oppA);
+                        return true;
+                    }
+                }
+
                 // try to kill opponent
-                if (oppA.cantLose()) {
+                if (oppA.cantLose() || !oppA.canDraw()) {
                     continue;
                 }
 
@@ -376,7 +388,7 @@ public class DrawAi extends SpellAbilityAi {
             boolean aiTarget = sa.canTarget(ai);
             // checks what the ai prevent from casting it on itself
             // if spell is not mandatory
-            if (aiTarget && !ai.cantLose()) {
+            if (aiTarget && !ai.cantLose() && ai.canDraw()) {
                 if (numCards >= computerLibrarySize - 3) {
                     if (xPaid) {
                         numCards = computerLibrarySize - 1;
@@ -436,7 +448,7 @@ public class DrawAi extends SpellAbilityAi {
             // try to benefit ally
             for (Player ally : ai.getAllies()) {
                 // try to select ally to help
-                if (!sa.canTarget(ally)) {
+                if (!sa.canTarget(ally) || !ally.canDraw()) {
                     continue;
                 }
 
@@ -489,18 +501,19 @@ public class DrawAi extends SpellAbilityAi {
                 return true;
             }
         } else if (!mandatory) {
+            // ability is not targeted
+
             // TODO: consider if human is the defined player
 
-            // ability is not targeted
+            if ((numCards == 0 || !ai.canDraw()) && !drawback) {
+                return false;
+            }
+
             if (numCards >= computerLibrarySize - 3) {
                 if (ai.isCardInPlay("Laboratory Maniac")) {
                     return true;
                 }
                 // Don't deck yourself
-                return false;
-            }
-
-            if (numCards == 0 && !drawback) {
                 return false;
             }
 
@@ -526,7 +539,6 @@ public class DrawAi extends SpellAbilityAi {
         return targetAI(ai, sa, mandatory);
     }
 
-    
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
      */

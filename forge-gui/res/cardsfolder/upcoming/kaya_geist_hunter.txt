@@ -1,0 +1,15 @@
+Name:Kaya, Geist Hunter
+ManaCost:1 W B
+Types:Legendary Planeswalker Kaya
+Loyalty:3
+A:AB$ PumpAll | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidCards$ Creature.YouCtrl | KW$ Deathtouch | SubAbility$ DBPutCounter | SpellDescription$ Creatures you control gain deathtouch until end of turn.
+SVar:DBPutCounter:DB$ PutCounter | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.token+YouCtrl | TgtPrompt$ Select up to one target creature token you control | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on up to one target creature token you control.
+A:AB$ Effect | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ReplacementEffects$ TokenReplace | SpellDescription$ Until end of turn, if one or more tokens would be created under your control, twice that many of those tokens are created instead.
+SVar:TokenReplace:Event$ CreateToken | ActiveZones$ Battlefield | ValidToken$ Card.YouCtrl | ReplaceWith$ DoubleToken | Description$ If one or more tokens would be created under your control, twice that many of those tokens are created instead.
+SVar:DoubleToken:DB$ ReplaceToken | Type$ Amount | ValidCard$ Card.YouCtrl
+A:AB$ ChangeZoneAll | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | ChangeType$ Card | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBToken | SpellDescription$ Exile all cards from all graveyards, then create a 1/1 white Spirit creature token with flying for each card exiled this way.
+SVar:DBToken:DB$ Token | TokenScript$ w_1_1_spirit_flying | TokenAmount$ X
+SVar:X:Remembered$Amount
+DeckHas:Ability$Counters & Ability$Token & Type$Spirit
+DeckHints:Ability$Token
+Oracle:[+1]: Creatures you control gain deathtouch until end of turn. Put a +1/+1 counter on up to one target creature token you control.\n[−2]: Until end of turn, if one or more tokens would be created under your control, twice that many of those tokens are created instead.\n[−6]: Exile all cards from all graveyards, then create a 1/1 white Spirit creature token with flying for each card exiled this way.

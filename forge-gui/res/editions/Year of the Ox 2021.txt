@@ -10,6 +10,7 @@ ScryfallCode=PL21
 1★ R Sethron, Hurloon General @Fiona Hsieh
 2 M Ox of Agonas @Lie Setiawan
 3★ M Angrath, the Flame-Chained @Song Qijin
+4 R Tahngarth, First Mate @Song Qijin
 
 [tokens]
 r_2_3_minotaur

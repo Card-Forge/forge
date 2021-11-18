@@ -1,0 +1,9 @@
+Name:Imposing Grandeur
+ManaCost:4 R
+Types:Sorcery
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBDraw | SpellDescription$ Each player may discard their hand and draw cards equal to the greatest mana value of a commander they own on the battlefield or in the command zone.
+SVar:DBDraw:DB$ Draw | UnlessCost$ Discard<1/Hand> | UnlessPayer$ Remembered | UnlessSwitched$ True | Defined$ Remembered | NumCards$ X
+SVar:X:Count$HighestCMC_Card.IsCommander+YouOwn+inZoneBattlefield,Card.IsCommander+YouOwn+inZoneCommand
+DeckHas:Ability$Discard
+AI:RemoveDeck:NonCommander
+Oracle:Each player may discard their hand and draw cards equal to the greatest mana value of a commander they own on the battlefield or in the command zone.

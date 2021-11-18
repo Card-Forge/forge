@@ -2365,6 +2365,20 @@ public class AbilityUtils {
             return doXMath(getCardTypesFromList(oppCards), expr, c, ctb);
         }
 
+        //Count$TypesSharedWith [defined]
+        if (sq[0].startsWith("TypesSharedWith")) {
+            Set<CardType.CoreType> thisTypes = Sets.newHashSet(c.getType().getCoreTypes());
+            Set<CardType.CoreType> matches = new HashSet<>();
+            for (Card c1 : AbilityUtils.getDefinedCards(ctb.getHostCard(), l[0].split(" ")[1], ctb)) {
+                for (CardType.CoreType type : Sets.newHashSet(c1.getType().getCoreTypes())) {
+                    if (thisTypes.contains(type)) {
+                        matches.add(type);
+                    }
+                }
+            }
+            return matches.size();
+        }
+
         // Count$TopOfLibraryCMC
         if (sq[0].equals("TopOfLibraryCMC")) {
             int cmc = player.getCardsIn(ZoneType.Library).isEmpty() ? 0 :
@@ -2429,6 +2443,19 @@ public class AbilityUtils {
                 list = CardLists.getValidCardsAsList(list, restrictions, player, c, ctb);
             }
             return doXMath(list.size(), expr, c, ctb);
+        }
+
+        if (sq[0].contains("AbilityYouCtrl")) {
+            CardCollection all = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), "Creature", player,
+                    c, ctb);
+            int count = 0;
+            for (String ab : sq[0].substring(15).split(",")) {
+                CardCollection found = CardLists.getValidCards(all, "Creature.with" + ab, player, c, ctb);
+                if (!found.isEmpty()) {
+                    count++;
+                }
+            }
+            return doXMath(count, expr, c, ctb);
         }
 
         if (sq[0].contains("Party")) {
@@ -2600,7 +2627,7 @@ public class AbilityUtils {
         }
 
         if (sq[0].contains("CardTypes")) {
-            return doXMath(getCardTypesFromList(game.getCardsIn(ZoneType.smartValueOf(sq[1]))), expr, c, ctb);
+            return doXMath(getCardTypesFromList(getDefinedCards(c, sq[1], ctb)), expr, c, ctb);
         }
 
         if (sq[0].equals("TotalTurns")) {
@@ -3561,6 +3588,16 @@ public class AbilityUtils {
             } else {
                 return size;
             }
+        }
+
+        if (string.startsWith("GreatestPower")) {
+            int highest = 0;
+            for (final Card crd : paidList) {
+                if (crd.getNetPower() > highest) {
+                    highest = crd.getNetPower();
+                }
+            }
+            return highest;
         }
 
         if (string.startsWith("DifferentCMC")) {

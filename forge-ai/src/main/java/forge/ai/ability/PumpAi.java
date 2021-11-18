@@ -36,16 +36,7 @@ public class PumpAi extends PumpAiBase {
     
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        if ("FellTheMighty".equals(aiLogic)) {
-            CardCollection aiList = ai.getCreaturesInPlay();
-            if (aiList.isEmpty()) {
-                return false;
-            }
-            CardLists.sortByPowerAsc(aiList);
-            if (!sa.canTarget(aiList.get(0))) {
-                return false;
-            }
-        } else if ("MoveCounter".equals(aiLogic)) {
+        if ("MoveCounter".equals(aiLogic)) {
             final Game game = ai.getGame();
             List<Card> tgtCards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield),
                     CardPredicates.isTargetableBy(sa));
@@ -70,10 +61,6 @@ public class PumpAi extends PumpAiBase {
             return SpecialAiLogic.doAristocratLogic(ai, sa);
         } else if (aiLogic.startsWith("AristocratCounters")) {
             return SpecialAiLogic.doAristocratWithCountersLogic(ai, sa);
-        } else if ("RiskFactor".equals(aiLogic)) {
-            if (ai.getCardsIn(ZoneType.Hand).size() + 3 >= ai.getMaxHandSize()) {
-                return false;
-            }
         } else if (aiLogic.equals("SwitchPT")) {
             // Some more AI would be even better, but this is a good start to prevent spamming
             if (sa.isAbility() && sa.getActivationsThisTurn() > 0 && !sa.usesTargeting()) {
@@ -262,20 +249,6 @@ public class PumpAi extends PumpAiBase {
                 }
 
             }
-        } else if ("FellTheMighty".equals(aiLogic)) {
-            CardCollection aiList = ai.getCreaturesInPlay();
-            CardLists.sortByPowerAsc(aiList);
-            Card lowest = aiList.get(0);
-
-            CardCollection oppList = CardLists.filter(game.getCardsIn(ZoneType.Battlefield),
-                    CardPredicates.Presets.CREATURES, CardPredicates.isControlledByAnyOf(ai.getOpponents()));
-
-            oppList = CardLists.filterPower(oppList, lowest.getNetPower() + 1);
-            if (ComputerUtilCard.evaluateCreatureList(oppList) > 200) {
-                sa.resetTargets();
-                sa.getTargets().add(lowest);
-                return true;
-            }
         } else if (aiLogic.startsWith("Donate")) {
             // Donate step 1 - try to target an opponent, preferably one who does not have a donate target yet
             return SpecialCardAi.Donate.considerTargetingOpponent(ai, sa);
@@ -391,9 +364,10 @@ public class PumpAi extends PumpAiBase {
                     if (ComputerUtilCard.shouldPumpCard(ai, sa, card, defense, attack, keywords, false)) {
                         return true;
                     } else if (containsUsefulKeyword(ai, keywords, card, sa, attack)) {
-                        Card pumped = ComputerUtilCard.getPumpedCreature(ai, sa, card, 0, 0, keywords);
-                        if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai)
-                                || game.getPhaseHandler().is(PhaseType.COMBAT_BEGIN, ai)) {
+                        if (game.getPhaseHandler().isPreCombatMain() && SpellAbilityAi.isSorcerySpeed(sa) ||
+                                game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai) ||
+                                game.getPhaseHandler().is(PhaseType.COMBAT_BEGIN, ai)) {
+                            Card pumped = ComputerUtilCard.getPumpedCreature(ai, sa, card, 0, 0, keywords);
                             return ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped);
                         }
 

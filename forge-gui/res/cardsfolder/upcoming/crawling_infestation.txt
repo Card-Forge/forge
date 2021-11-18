@@ -1,0 +1,9 @@
+Name:Crawling Infestation
+ManaCost:2 G
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigMill | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may mill two cards. (You may put the top two cards of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You
+T:Mode$ ChangesZoneAll | ValidCards$ Creature.YouOwn+nonToken | Origin$ Any | Destination$ Graveyard | TriggerZones$ Battlefield | ActivationLimit$ 1 | PlayerTurn$ True | Execute$ TrigToken | TriggerDescription$ Whenever one or more creature cards are put into your graveyard from anywhere during your turn, create a 1/1 green Insect creature token. This ability triggers only once each turn.
+SVar:TrigToken:DB$ Token | TokenScript$ g_1_1_insect
+DeckHas:Ability$Mill & Ability$Token
+Oracle:At the beginning of your upkeep, you may mill two cards. (You may put the top two cards of your library into your graveyard.)\nWhenever one or more creature cards are put into your graveyard from anywhere during your turn, create a 1/1 green Insect creature token. This ability triggers only once each turn.

@@ -1,0 +1,11 @@
+Name:Laurine, the Diversion
+ManaCost:2 R
+Types:Legendary Creature Human Rogue
+PT:3/3
+K:Partner:Kamber, the Plunderer
+K:First strike
+A:AB$ Goad | Cost$ 2 Sac<1/Artifact;Creature/artifact or creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature SpellDescription$ Goad target creature.
+SVar:AIPreference:SacCost$Artifact.token+nonCreature,Creature.token+powerLE1,Creature.cmcLE1+powerLE1
+DeckHints:Name$Kamber, the Plunderer
+DeckHas:Ability$Sacrifice
+Oracle:Partner with Kamber, the Plunderer (When this creature enters the battlefield, target player may put Kamber into their hand from their library, then shuffle.)\nFirst strike\n{2}, Sacrifice an artifact or creature: Goad target creature. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)

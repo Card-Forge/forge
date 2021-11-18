@@ -3,5 +3,5 @@ Name:Standard
 Order:101
 Subtype:Standard
 Type:Sanctioned
-Sets:ZNR, KHM, STX, AFR, MID
+Sets:ZNR, KHM, STX, AFR, MID, VOW
 Banned:Omnath, Locus of Creation

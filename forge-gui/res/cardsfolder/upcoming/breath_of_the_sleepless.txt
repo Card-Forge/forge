@@ -1,0 +1,9 @@
+Name:Breath of the Sleepless
+ManaCost:3 U
+Types:Enchantment
+S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Spirit.nonToken+YouCtrl | MayPlay$ True | MayPlayPlayer$ CardOwner | MayPlayWithFlash$ True | MayPlayDontGrantZonePermissions$ True | AffectedZone$ Hand,Graveyard,Library,Exile | Description$ You may cast Spirit spells this turn as though they had flash.
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OpponentTurn$ True | Execute$ TrigTap | TriggerDescription$ Whenever you cast a creature spell during an opponent's turn, tap up to one target creature.
+SVar:TrigTap:DB$ Tap | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature
+DeckHints:Type$Spirit
+SVar:BuffedBy:Creature.withFlash
+Oracle:You may cast Spirit spells as though they had flash.\nWhenever you cast a creature spell during an opponent's turn, tap up to one target creature.

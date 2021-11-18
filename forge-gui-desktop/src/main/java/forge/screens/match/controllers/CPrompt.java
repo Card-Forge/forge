@@ -32,7 +32,6 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.JButton;
 
-import forge.control.FControl;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.gui.FThreads;
@@ -43,7 +42,6 @@ import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FSkin;
-import forge.util.Localizer;
 
 /**
  * Controls the prompt panel in the match UI.
@@ -157,9 +155,7 @@ public class CPrompt implements ICDoc {
         matchUI.getGameController().selectButtonCancel();
     }
 
-    public void setMessage(final String s0) {
-        String header = FControl.instance.getCurrentScreen().getDaytime() != null ? "[" + Localizer.getInstance().getMessage("lbl"+FControl.instance.getCurrentScreen().getDaytime()) + "]\n\n" : "";
-        header += s0;
+    public void setMessage(final String header) {
         view.getTarMessage().setText(FSkin.encodeSymbols(header, false));
         view.setCardView(null);
     }

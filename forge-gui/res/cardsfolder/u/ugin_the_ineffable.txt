@@ -10,7 +10,7 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:TrigLeavesBattlefield:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ DBReturn | TriggerZones$ Command | TriggerDescription$ When that token leaves the battlefield, put the exiled card into your hand.
 SVar:DBReturn:DB$ ChangeZone | Defined$ RememberedLKI | Origin$ Exile | Destination$ Hand  | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:MayLook:Mode$ Continuous | MayLookAt$ You | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at the exiled face-down card again any time you wish. If another player gains control of the Spirit token, that player can’t look at the exiled card.
+SVar:MayLook:Mode$ Continuous | MayLookAt$ You | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at the exiled face-down card again any time you wish. If another player gains control of the Spirit token, that player can't look at the exiled card.
 A:AB$ Destroy | Cost$ SubCounter<3/LOYALTY> | ValidTgts$ Permanent.nonColorless | TgtPrompt$ Select target permanent that's one or more colors | Planeswalker$ True | SpellDescription$ Destroy target permanent that's one or more colors.
 DeckHas:Ability$Token
 DeckHints:Color$Colorless

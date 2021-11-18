@@ -3,7 +3,7 @@ ManaCost:4 G G
 Types:Legendary Planeswalker Arlinn
 Loyalty:7
 K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.Wolf+YouCtrl,Creature.Werewolf+YouCtrl
-SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$Each creature you control that's a Wolf or a Werewolf enters the battlefield with an additional +1/+1 counter on it.
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Each creature you control that's a Wolf or a Werewolf enters the battlefield with an additional +1/+1 counter on it.
 SVar:PlayMain1:TRUE
 A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | TokenOwner$ You | LegacyImage$ g 2 2 wolf war | SpellDescription$ Create a 2/2 green Wolf creature token.
 DeckHints:Type$Wolf & Type$Werewolf

@@ -1,32 +1,12 @@
 package forge.ai.ability;
 
-import java.util.*;
-
-import forge.game.card.*;
-import forge.game.keyword.Keyword;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
-import forge.ai.AiAttackController;
-import forge.ai.AiCardMemory;
-import forge.ai.AiController;
-import forge.ai.AiProps;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpecialAiLogic;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
-import forge.ai.SpellApiToAi;
+import forge.ai.*;
+import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -35,12 +15,14 @@ import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPutCounter;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -50,8 +32,12 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.collect.FCollection;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
 
 public class ChangeZoneAi extends SpellAbilityAi {
     /*
@@ -1211,7 +1197,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     if (choice == null) { // Could not find a creature.
                         if (ai.getLife() <= 5) { // Desperate?
                             // Get something AI can cast soon.
-                            System.out.println("5 Life or less, trying to find something castable.");
                             CardLists.sortByCmcDesc(nonLands);
                             for (Card potentialCard : nonLands) {
                                if (ComputerUtilMana.hasEnoughManaSourcesToCast(potentialCard.getFirstSpellAbility(), ai)) {
@@ -1221,7 +1206,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                             }
                         } else {
                             // Get the best card in there.
-                            System.out.println("No creature and lots of life, finding something good.");
                             choice = ComputerUtilCard.getBestAI(nonLands);
                         }
                     }
@@ -1487,7 +1471,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     if (choice == null) { // Could not find a creature.
                         if (ai.getLife() <= 5) { // Desperate?
                             // Get something AI can cast soon.
-                            System.out.println("5 Life or less, trying to find something castable.");
                             CardLists.sortByCmcDesc(nonLands);
                             for (Card potentialCard : nonLands) {
                                if (ComputerUtilMana.hasEnoughManaSourcesToCast(potentialCard.getFirstSpellAbility(), ai)) {
@@ -1497,7 +1480,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                             }
                         } else {
                             // Get the best card in there.
-                            System.out.println("No creature and lots of life, finding something good.");
                             choice = ComputerUtilCard.getBestAI(nonLands);
                         }
                     }
@@ -1544,11 +1526,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         if ("DeathgorgeScavenger".equals(logic)) {
             return SpecialCardAi.DeathgorgeScavenger.consider(ai, sa);
-        }
-        if ("ExtraplanarLens".equals(logic)) {
+        } else if ("ExtraplanarLens".equals(logic)) {
             return SpecialCardAi.ExtraplanarLens.consider(ai, sa);
-        }
-        if ("ExileCombatThreat".equals(logic)) {
+        } else if ("ExileCombatThreat".equals(logic)) {
             return doExileCombatThreatLogic(ai, sa);
         }
 
@@ -1574,7 +1554,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return null;
         }
         if (sa.hasParam("AILogic")) {
-            String logic = sa.getParam("AILogic");
+            String logic = sa.getParamOrDefault("AILogic", "");
             if ("NeverBounceItself".equals(logic)) {
                 Card source = sa.getHostCard();
                 if (fetchList.contains(source) && (fetchList.size() > 1 || !sa.getRootAbility().isMandatory())) {
@@ -1597,6 +1577,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     multipleCardsToChoose.remove(0);
                     return choice;
                 }
+            } else if (logic.startsWith("ExilePreference")) {
+                return doExilePreferenceLogic(decider, sa, fetchList);
             }
         }
         if (fetchList.isEmpty()) {
@@ -1680,12 +1662,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     canCastSomething = canCastSomething || ComputerUtilMana.hasEnoughManaSourcesToCast(cardInHand.getFirstSpellAbility(), decider);
                 }
                 if (!canCastSomething) {
-                    System.out.println("Pulling a land as there are none in hand, less than 4 on the board, and nothing in hand is castable.");
                     c = basicManaFixing(decider, fetchList);
                 }
             }
             if (c == null) {
-                System.out.println("Don't need a land or none available; trying for a creature.");
                 fetchList = CardLists.getNotType(fetchList, "Land");
                 // Prefer to pull a creature, generally more useful for AI.
                 c = chooseCreature(decider, CardLists.filter(fetchList, CardPredicates.Presets.CREATURES));
@@ -1693,7 +1673,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (c == null) { // Could not find a creature.
                 if (decider.getLife() <= 5) { // Desperate?
                     // Get something AI can cast soon.
-                    System.out.println("5 Life or less, trying to find something castable.");
                     CardLists.sortByCmcDesc(fetchList);
                     for (Card potentialCard : fetchList) {
                        if (ComputerUtilMana.hasEnoughManaSourcesToCast(potentialCard.getFirstSpellAbility(), decider)) {
@@ -1703,7 +1682,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                 } else {
                     // Get the best card in there.
-                    System.out.println("No creature and lots of life, finding something good.");
                     c = ComputerUtilCard.getBestAI(fetchList);
                 }
             }
@@ -1786,7 +1764,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
     @Override
     public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
         // Called when attaching Aura to player or adding creature to combat
-        if (params.containsKey("Attacker")) {
+        if (params != null && params.containsKey("Attacker")) {
             return (Player) ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), new FCollection<GameEntity>(options));
         }
         return AttachAi.attachToPlayerAIPreferences(ai, sa, true, (List<Player>)options);
@@ -1794,7 +1772,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
     @Override
     protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options, Map<String, Object> params) {
-        if (params.containsKey("Attacker")) {
+        if (params != null && params.containsKey("Attacker")) {
             return ComputerUtilCombat.addAttackerToCombat(sa, (Card) params.get("Attacker"), new FCollection<GameEntity>(options));
         }
         // should not be reached
@@ -2035,6 +2013,143 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return true;
         }
         return false;
+    }
+
+    public static Card doExilePreferenceLogic(final Player aiPlayer, final SpellAbility sa, CardCollection fetchList) {
+        // Filter by preference. If nothing is preferred, choose the best/worst/random target for the opponent
+        // or for the AI depending on the settings. This logic must choose at least something if at all possible,
+        // since it's called from chooseSingleCard.
+        if (fetchList.isEmpty()) {
+            return null; // there was nothing to choose at all
+        }
+
+        final Card host = sa.getHostCard();
+        final String logic = sa.getParamOrDefault("AILogic", "");
+        final String valid = logic.split(":")[1];
+        final boolean isCurse = logic.contains("Curse");
+        final boolean isOwnOnly = logic.contains("OwnOnly");
+        final boolean isWorstChoice = logic.contains("Worst");
+        final boolean isRandomChoice = logic.contains("Random");
+
+        if (logic.endsWith("HighestCMC")) {
+            return ComputerUtilCard.getMostExpensivePermanentAI(fetchList);
+        } else if (logic.contains("MostProminent")) {
+            CardCollection scanList = new CardCollection();
+            if (logic.endsWith("OwnType")) {
+                scanList.addAll(aiPlayer.getCardsIn(ZoneType.Library));
+                scanList.addAll(aiPlayer.getCardsIn(ZoneType.Hand));
+            } else if (logic.endsWith("OppType")) {
+                // this assumes that the deck list is known to the AI before the match starts,
+                // so it's possible to figure out what remains in library/hand if you know what's
+                // in graveyard, exile, etc.
+                scanList.addAll(aiPlayer.getOpponents().getCardsIn(ZoneType.Library));
+                scanList.addAll(aiPlayer.getOpponents().getCardsIn(ZoneType.Hand));
+            }
+
+            if (logic.contains("NonLand")) {
+                scanList = CardLists.filter(scanList, Predicates.not(Presets.LANDS));
+            }
+
+            if (logic.contains("NonExiled")) {
+                CardCollection exiledBy = new CardCollection();
+                for (Card exiled : aiPlayer.getGame().getCardsIn(ZoneType.Exile)) {
+                    if (exiled.getExiledWith() != null && exiled.getExiledWith().getName().equals(host.getName())) {
+                        exiledBy.add(exiled);
+                    }
+                }
+                scanList = CardLists.filter(scanList, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(Card card) {
+                        if (exiledBy.isEmpty()) {
+                            return true;
+                        }
+                        for (Card c : exiledBy) {
+                            return !c.getType().sharesCardTypeWith(card.getType());
+                        }
+                        return true;
+                    }
+                });
+            }
+
+            CardCollectionView graveyardList = aiPlayer.getGame().getCardsIn(ZoneType.Graveyard);
+            Set<CardType.CoreType> presentTypes = new HashSet<>();
+            for (Card inGrave : graveyardList) {
+                for(CardType.CoreType type : inGrave.getType().getCoreTypes()) {
+                    presentTypes.add(type);
+                }
+            }
+
+            final Map<CardType.CoreType, Integer> typesInDeck = Maps.newHashMap();
+            for (final Card c : scanList) {
+                for (CardType.CoreType ct : c.getType().getCoreTypes()) {
+                    if (presentTypes.contains(ct)) {
+                        Integer count = typesInDeck.get(ct);
+                        if (count == null) {
+                            count = 0;
+                        }
+                        typesInDeck.put(ct, count + 1);
+                    }
+                }
+            }
+            int max = 0;
+            CardType.CoreType maxType = CardType.CoreType.Land;
+
+            for (final Map.Entry<CardType.CoreType, Integer> entry : typesInDeck.entrySet()) {
+                final CardType.CoreType type = entry.getKey();
+
+                if (max < entry.getValue()) {
+                    max = entry.getValue();
+                    maxType = type;
+                }
+            }
+
+            final CardType.CoreType determinedMaxType = maxType;
+            CardCollection preferredList = CardLists.filter(fetchList, new Predicate<Card>() {
+                @Override
+                public boolean apply(Card card) {
+                    return card.getType().hasType(determinedMaxType);
+                }
+            });
+            CardCollection preferredOppList = CardLists.filter(preferredList, CardPredicates.isControlledByAnyOf(aiPlayer.getOpponents()));
+
+            if (!preferredOppList.isEmpty()) {
+                return Aggregates.random(preferredOppList);
+            } else if (!preferredList.isEmpty()) {
+                return Aggregates.random(preferredList);
+            }
+
+            return Aggregates.random(fetchList);
+        }
+
+        CardCollection preferredList = CardLists.filter(fetchList, new Predicate<Card>() {
+            @Override
+            public boolean apply(Card card) {
+                boolean playerPref = true;
+                if (isCurse) {
+                    playerPref = card.getController().isOpponentOf(aiPlayer);
+                } else if (isOwnOnly) {
+                    playerPref = card.getController().equals(aiPlayer) || !card.getController().isOpponentOf(aiPlayer);
+                }
+
+                if (!playerPref) {
+                    return false;
+                }
+
+                return card.isValid(valid, aiPlayer, host, sa); // for things like ExilePreference:Land.Basic
+            }
+        });
+
+        if (!preferredList.isEmpty()) {
+            if (isRandomChoice) {
+                return Aggregates.random(preferredList);
+            }
+            return isWorstChoice ? ComputerUtilCard.getWorstAI(preferredList) : ComputerUtilCard.getBestAI(preferredList);
+        } else {
+            if (isRandomChoice) {
+                return Aggregates.random(preferredList);
+            }
+            return isWorstChoice ? ComputerUtilCard.getWorstAI(fetchList) : ComputerUtilCard.getBestAI(fetchList);
+        }
     }
 
     private static CardCollection getSafeTargetsIfUnlessCostPaid(Player ai, SpellAbility sa, Iterable<Card> potentialTgts) {

@@ -1,0 +1,9 @@
+Name:Nature's Embrace
+ManaCost:2 G
+Types:Enchantment Aura
+K:Enchant creature or land
+A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature,Land | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ As long as enchanted permanent is a creature, it gets +2/+2.
+S:Mode$ Continuous | Affected$ Land.EnchantedBy | AddAbility$ DBMana | Description$ As long as enchanted permanent is a land, it has "{T}: Add two mana of any one color."
+SVar:DBMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | SpellDescription$ Add two mana of any one color.
+Oracle:Enchant creature or land\nAs long as enchanted permanent is a creature, it gets +2/+2.\nAs long as enchanted permanent is a land, it has "{T}: Add two mana of any one color."

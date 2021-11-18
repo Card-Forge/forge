@@ -1,0 +1,7 @@
+Name:Wanderlight Spirit
+ManaCost:2 U
+Types:Creature Spirit
+PT:2/3
+K:Flying
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
+Oracle:Flying\nWanderlight Spirit can block only creatures with flying.

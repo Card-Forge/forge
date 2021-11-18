@@ -4,8 +4,8 @@ Types:Enchantment Saga
 K:Saga:3:DBToken,DBEffect,DBWish
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_bird_flying | TokenOwner$ You | SubAbility$ DBGainLife | SpellDescription$ Create a 1/1 blue Bird creature token with flying. You gain 2 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
-SVar:DBEffect:DB$ Effect | Triggers$ TrigDamage | SpellDescription$ Whenever one or more creatures you control with flying deal combat damage to a player this turn, look at that player’s hand and draw a card.
-SVar:TrigDamage:Mode$ DamageDoneOnce | ValidSource$ Creature.YouCtrl+withFlying | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPeek | TriggerDescription$ Whenever one or more creatures you control with flying deal combat damage to a player this turn, look at that player’s hand and draw a card.
+SVar:DBEffect:DB$ Effect | Triggers$ TrigDamage | SpellDescription$ Whenever one or more creatures you control with flying deal combat damage to a player this turn, look at that player's hand and draw a card.
+SVar:TrigDamage:Mode$ DamageDoneOnce | ValidSource$ Creature.YouCtrl+withFlying | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPeek | TriggerDescription$ Whenever one or more creatures you control with flying deal combat damage to a player this turn, look at that player's hand and draw a card.
 SVar:TrigPeek:DB$ RevealHand | Defined$ TriggeredTarget | SubAbility$ DBDraw | SpellDescription$ Look at that player's hand.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:DBWish:DB$ ChangeZone | Origin$ Sideboard | Destination$ Library | OptionalDecider$ You | ChangeType$ Card.YouOwn | ChangeNum$ 1 | Optional$ True | Hidden$ True | SpellDescription$ You may put a card you own from outside the game on top of your library.

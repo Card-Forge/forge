@@ -3,7 +3,7 @@ ManaCost:U
 Types:Instant
 A:SP$ NameCard | Defined$ You | AILogic$ MostProminentInHumanDeck | SubAbility$ DBTarget | SpellDescription$ Choose a card name,
 SVar:DBTarget:DB$ Pump | TargetType$ Spell | ValidTgts$ Card | TgtZone$ Stack | SubAbility$ DBRevealHand | SpellDescription$ None
-SVar:DBRevealHand:DB$ RevealHand | Defined$ TargetedController | RememberRevealed$ True | SubAbility$ DBCounter | SpellDescription$ then target spell’s controller reveals their hand.
+SVar:DBRevealHand:DB$ RevealHand | Defined$ TargetedController | RememberRevealed$ True | SubAbility$ DBCounter | SpellDescription$ then target spell's controller reveals their hand.
 SVar:DBCounter:DB$ Counter | Defined$ Targeted | ConditionDefined$ Remembered | ConditionPresent$ Card.NamedCard | ConditionCompare$ GE1 | SubAbility$ DBCleanup | SpellDescription$ If a card with the chosen name is revealed this way, counter that spell.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Choose a card name, then target spell's controller reveals their hand. If a card with the chosen name is revealed this way, counter that spell.

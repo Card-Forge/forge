@@ -982,7 +982,7 @@ public class CardFactoryUtil {
             inst.addTrigger(trigger);
         } else if (keyword.equals("Daybound")) {
             // Set Day when it's Neither
-            final String setDayTrig = "Mode$ Always | TriggerZones$ Battlefield | Static$ True | DayTime$ Neither | Secondary$ True | TriggerDescription$ Any time a player controls a permanent with daybound, if it’s neither day nor night, it becomes day.";
+            final String setDayTrig = "Mode$ Always | TriggerZones$ Battlefield | Static$ True | DayTime$ Neither | Secondary$ True | TriggerDescription$ Any time a player controls a permanent with daybound, if it's neither day nor night, it becomes day.";
             String setDayEff = "DB$ DayTime | Value$ Day";
 
             Trigger trigger = TriggerHandler.parseTrigger(setDayTrig, card, intrinsic);
@@ -1343,7 +1343,7 @@ public class CardFactoryUtil {
             triggers.add(gainControlTrigger);
 
             // when the card with hideaway leaves the battlefield, forget all exiled cards
-            final Trigger changeZoneTrigger = TriggerHandler.parseTrigger("Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | TriggerZone$ Battlefield | Static$ True", card, intrinsic);
+            final Trigger changeZoneTrigger = TriggerHandler.parseTrigger("Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | TriggerZones$ Battlefield | Static$ True", card, intrinsic);
             String cleanupStr = "DB$ Cleanup | ClearRemembered$ True";
             changeZoneTrigger.setOverridingAbility(AbilityFactory.getAbility(cleanupStr, card));
             triggers.add(changeZoneTrigger);
@@ -1528,7 +1528,7 @@ public class CardFactoryUtil {
             inst.addTrigger(parsedTrigger);
         } else if (keyword.equals("Nightbound")) {
             // Set Night when it's Neither
-            final String setDayTrig = "Mode$ Always | TriggerZones$ Battlefield | Static$ True | DayTime$ Neither | IsPresent$ Card.Daybound | PresentCompare$ EQ0 | Secondary$ True | TriggerDescription$ Any time a player controls a permanent with nightbound, if it’s neither day nor night and there are no permanents with daybound on the battlefield, it becomes night.";
+            final String setDayTrig = "Mode$ Always | TriggerZones$ Battlefield | Static$ True | DayTime$ Neither | IsPresent$ Card.Daybound | PresentCompare$ EQ0 | Secondary$ True | TriggerDescription$ Any time a player controls a permanent with nightbound, if it's neither day nor night and there are no permanents with daybound on the battlefield, it becomes night.";
             String setDayEff = "DB$ DayTime | Value$ Night";
 
             Trigger trigger = TriggerHandler.parseTrigger(setDayTrig, card, intrinsic);
@@ -2875,7 +2875,7 @@ public class CardFactoryUtil {
                     Player activator = this.getActivatingPlayer();
                     final Game game = activator.getGame();
 
-                    if (!activator.hasKeyword("Foretell on any player’s turn") && !game.getPhaseHandler().isPlayerTurn(activator)) {
+                    if (!activator.hasKeyword("Foretell on any player's turn") && !game.getPhaseHandler().isPlayerTurn(activator)) {
                         return false;
                     }
 
@@ -3480,7 +3480,7 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Dash")) {
             effect = "Mode$ Continuous | Affected$ Card.Self+dashed | AddKeyword$ Haste";
         } else if (keyword.equals("Daybound")) {
-            effect = "Mode$ CantTransform | ValidCard$ Creature.Self | ExceptCause$ SpellAbility.Daybound | Secondary$ True | Description$ This permanent can’t be transformed except by its daybound ability.";
+            effect = "Mode$ CantTransform | ValidCard$ Creature.Self | ExceptCause$ SpellAbility.Daybound | Secondary$ True | Description$ This permanent can't be transformed except by its daybound ability.";
         } else if (keyword.equals("Decayed")) {
             effect = "Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't block. | " +
                     "Secondary$ True";
@@ -3534,7 +3534,7 @@ public class CardFactoryUtil {
             effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonArtifact+notSharesColorWith | Secondary$ True " +
                     " | Description$ Intimidate ( " + inst.getReminderText() + ")";
         } else if (keyword.equals("Nightbound")) {
-            effect = "Mode$ CantTransform | ValidCard$ Creature.Self | ExceptCause$ SpellAbility.Nightbound | Secondary$ True | Description$ This permanent can’t be transformed except by its nightbound ability.";
+            effect = "Mode$ CantTransform | ValidCard$ Creature.Self | ExceptCause$ SpellAbility.Nightbound | Secondary$ True | Description$ This permanent can't be transformed except by its nightbound ability.";
         } else if (keyword.startsWith("Protection")) {
             String valid = getProtectionValid(keyword, false);
             effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self ";

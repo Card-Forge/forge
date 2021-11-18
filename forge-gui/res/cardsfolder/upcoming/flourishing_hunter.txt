@@ -1,0 +1,9 @@
+Name:Flourishing Hunter
+ManaCost:4 G G
+Types:Creature Wolf Spirit
+PT:6/6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain life equal to the greatest toughness among other creatures you control.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X
+SVar:X:Count$GreatestToughness_Creature.YouCtrl+Other
+DeckHas:Ability$LifeGain
+Oracle:When Flourishing Hunter enters the battlefield, you gain life equal to the greatest toughness among other creatures you control.

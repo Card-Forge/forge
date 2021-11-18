@@ -1,0 +1,12 @@
+Name:Doom Weaver
+ManaCost:4 B B
+Types:Creature Spider Horror
+PT:1/8
+K:Reach
+K:Soulbond
+S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddTrigger$ DiesTrigger | Description$ As long as CARDNAME is paired with another creature, each of those creatures has "When this creature dies, draw cards equal to its power."
+SVar:DiesTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When this creature dies, draw cards equal to its power.
+SVar:TrigDraw:DB$ Draw | NumCards$ XPower
+SVar:XPower:TriggeredCard$CardPower
+SVar:BuffedBy:Creature
+Oracle:Reach\nSoulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)\nAs long as Doom Weaver is paired with another creature, each of those creatures has "When this creature dies, draw cards equal to its power."

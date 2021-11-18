@@ -2,6 +2,5 @@ Name:Risk Factor
 ManaCost:2 R
 Types:Instant
 K:Jump-start
-A:SP$ Pump | StackDescription$ {p:Targeted} may have CARDNAME deal 4 damage to them. If {p:Targeted} doesn't, | Cost$ 2 R | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | UnlessCost$ DamageYou<4> | UnlessPayer$ Targeted | UnlessResolveSubs$ WhenNotPaid | AILogic$ RiskFactor | UnlessAI$ RiskFactor | SubAbility$ DBDraw | IsCurse$ True | SpellDescription$ Target opponent may have CARDNAME deal 4 damage to them. If that player doesn't, you draw three cards.
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 3
+A:SP$ Draw | Defined$ You | NumCards$ 3 | StackDescription$ {p:Targeted} may have CARDNAME deal 4 damage to them. If {p:Targeted} doesn't, {p:You} draws three cards. | Cost$ 2 R | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | UnlessCost$ DamageYou<4> | UnlessPayer$ Targeted | UnlessAI$ RiskFactor | IsCurse$ True | SpellDescription$ Target opponent may have CARDNAME deal 4 damage to them. If that player doesn't, you draw three cards.
 Oracle:Target opponent may have Risk Factor deal 4 damage to them. If that player doesn't, you draw three cards.\nJump-start (You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card.)

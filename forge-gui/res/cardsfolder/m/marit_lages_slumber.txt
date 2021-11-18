@@ -3,10 +3,8 @@ ManaCost:1 U
 Types:Legendary Snow Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Permanent.Snow+Other+YouCtrl | Execute$ TrigScry | TriggerDescription$ Whenever CARDNAME or another snow permanent enters the battlefield under your control, scry 1.
 SVar:TrigScry:DB$ Scry | ScryNum$ 1 | SpellDescription$ Scry 1.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Permanent.Snow+YouCtrl | PresentCompare$ GE10 | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, if you control ten or more snow permanents, sacrifice CARDNAME. If you do, create Marit Lage, a legendary 20/20 black Avatar creature token with flying and indestructible.
-SVar:TrigSac:DB$ Sacrifice | RememberSacrificed$ True | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ marit_lage | TokenOwner$ You | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Permanent.Snow+YouCtrl | PresentCompare$ GE10 | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, if you control ten or more snow permanents, sacrifice CARDNAME. If you do, create Marit Lage, a legendary 20/20 black Avatar creature token with flying and indestructible.
+SVar:TrigToken:AB$ Token | TokenAmount$ 1 | TokenScript$ marit_lage | TokenOwner$ You | Cost$ Mandatory Sac<1/CARDNAME>
 DeckHas:Ability$Token
 DeckNeeds:Type$Snow
 Oracle:Whenever Marit Lage's Slumber or another snow permanent enters the battlefield under your control, scry 1.\nAt the beginning of your upkeep, if you control ten or more snow permanents, sacrifice Marit Lage's Slumber. If you do, create Marit Lage, a legendary 20/20 black Avatar creature token with flying and indestructible.

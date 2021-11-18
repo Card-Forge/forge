@@ -2138,3 +2138,13 @@
 2021-10-24 Legacy Premier (16 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-10-24-legacy-premier.zip
 2021-10-25 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-10-25-legacy-challenge.zip
 2021-10-26 Legacy Preliminary (3 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-10-26-legacy-preliminary.zip
+2021-10-30 Legacy League (46 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-10-30-legacy-league.zip
+2021-10-30 Legacy Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-10-30-legacy-preliminary.zip
+2021-11-01 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-11-01-legacy-challenge.zip
+2021-11-02 Legacy Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-11-02-legacy-preliminary.zip
+2021-11-03 Legacy Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-11-03-legacy-preliminary.zip
+2021-11-04 Legacy Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-11-04-legacy-preliminary.zip
+2021-11-06 Legacy League (44 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-11-06-legacy-league.zip
+2021-11-06 Legacy Preliminary (3 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-11-06-legacy-preliminary.zip
+2021-11-08 Legacy Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-11-08-legacy-showcase-challenge.zip
+2021-11-10 Legacy Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2021-11-10-legacy-preliminary.zip

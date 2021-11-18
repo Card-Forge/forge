@@ -141,7 +141,7 @@ public class CostPayment extends ManaConversionMatrix {
 
             PaymentDecision pd = part.accept(decisionMaker);
 
-            // RIght before we start paying as decided, we need to transfer the CostPayments matrix over?
+            // Right before we start paying as decided, we need to transfer the CostPayments matrix over?
             if (part instanceof CostPartMana) {
                 ((CostPartMana)part).setCardMatrix(this);
             }
@@ -187,9 +187,10 @@ public class CostPayment extends ManaConversionMatrix {
 
         for (final CostPart part : parts) {
             PaymentDecision decision = part.accept(decisionMaker);
+            if (null == decision) return false;
+
             // the AI will try to exile the same card repeatedly unless it does it immediately
             final boolean payImmediately = part instanceof CostExile && ((CostExile) part).from == ZoneType.Library;
-            if (null == decision) return false;
 
             // wrap the payment and push onto the cost stack
             game.costPaymentStack.push(part, this);

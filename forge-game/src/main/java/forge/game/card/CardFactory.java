@@ -134,9 +134,21 @@ public class CardFactory {
             c.removeType(CardType.Supertype.Legendary);
         }
 
+        if (sourceSA.hasParam("CopySetPower")) {
+            c.setBasePower(Integer.parseInt(sourceSA.getParam("CopySetPower")));
+        }
+
+        if (sourceSA.hasParam("CopySetToughness")) {
+            c.setBaseToughness(Integer.parseInt(sourceSA.getParam("CopySetToughness")));
+        }
+
+        if (sourceSA.hasParam("CopyAddTypes")) {
+            c.addType(Arrays.asList(sourceSA.getParam("CopyAddTypes").split(" & ")));
+        }
+
         // change the color of the copy (eg: Fork)
         if (sourceSA.hasParam("CopyIsColor")) {
-            ColorSet finalColors = ColorSet.getNullColor();
+            ColorSet finalColors;
             final String newColor = sourceSA.getParam("CopyIsColor");
             if (newColor.equals("ChosenColor")) {
                 finalColors = ColorSet.fromNames(source.getChosenColors());

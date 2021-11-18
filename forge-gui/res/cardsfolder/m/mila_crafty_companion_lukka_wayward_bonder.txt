@@ -2,7 +2,7 @@ Name:Mila, Crafty Companion
 ManaCost:1 W W
 Types:Legendary Creature Fox
 PT:2/3
-T:Mode$ AttackersDeclared | AttackedTarget$ Planeswalker.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigWalkerPump | TriggerDescription$ Whenever an opponent attacks a planeswalker you control, put a loyalty counter on each planeswalker you control.
+T:Mode$ AttackersDeclared | AttackedTarget$ Planeswalker.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigWalkerPump | TriggerDescription$ Whenever an opponent attacks one or more planeswalkers you control, put a loyalty counter on each planeswalker you control.
 SVar:TrigWalkerPump:DB$ PutCounterAll | ValidCards$ Planeswalker.YouCtrl | CounterType$ LOYALTY | CounterNum$ 1
 T:Mode$ BecomesTarget | ValidSource$ Card.OppCtrl | ValidTarget$ Permanent.YouCtrl+inZoneBattlefield | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You
@@ -15,10 +15,10 @@ Name:Lukka, Wayward Bonder
 ManaCost:4 R R
 Types:Legendary Planeswalker Lukka
 Loyalty:5
-A:AB$ Discard | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 1 | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ You may discard a card. If you do, draw a card. If a creature card was discarded this way, draw an additional card.
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBDraw2
-SVar:DBDraw2:DB$ Draw | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ1 | StackDescription$ None | SubAbility$ DBCleanup
-A:AB$ ChangeZone | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl | GainControl$ True | SubAbility$ DBPump | RememberChanged$ True | AILogic$ BeforeCombat | SpellDescription$ Return target creature card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step.
+A:AB$ Discard | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 1 | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ You may discard a card. If you do, draw a card. If a creature card was discarded this way, draw two cards instead.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card.nonCreature | ConditionCompare$ GE1 | SubAbility$ DBDraw2
+SVar:DBDraw2:DB$ Draw | NumCards$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ GE1 | StackDescription$ None | SubAbility$ DBCleanup
+A:AB$ ChangeZone | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl | GainControl$ True | SubAbility$ DBPump | RememberChanged$ True | AILogic$ BeforeCombat | SpellDescription$ Return target creature card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of your next upkeep.
 SVar:DBPump:DB$ Animate | Keywords$ Haste | Defined$ Remembered | Duration$ Permanent | AtEOT$ Exile | SubAbility$ DBCleanup
 A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Lukka, Wayward Bonder | Image$ emblem_lukka_wayward_bonder | Triggers$ LukkaCreatureETB | SVars$ LukkaDmg | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever a creature enters the battlefield under your control, it deals damage equal to its power to any target."
 SVar:LukkaCreatureETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Command | Execute$ LukkaDmg | TriggerDescription$ Whenever a creature enters the battlefield under your control, it deals damage equal to its power to any target.

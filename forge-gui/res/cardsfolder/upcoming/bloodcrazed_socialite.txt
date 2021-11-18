@@ -1,0 +1,13 @@
+Name:Bloodcrazed Socialite
+ManaCost:3 B
+Types:Creature Vampire
+PT:3/3
+K:Menace
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBToken | TriggerDescription$ When CARDNAME enters the battlefield, create a Blood token.
+SVar:DBToken:DB$ Token | TokenScript$ c_a_blood_draw
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, you may sacrifice a Blood token. If you do, it gets +2/+2 until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ Sac<1/Blood.token/Blood token> | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+DeckHas:Ability$Token & Ability$Sacrifice & Type$Blood
+DeckHints:Type$Blood
+SVar:HasAttackEffect:TRUE
+Oracle:Menace\nWhen Bloodcrazed Socialite enters the battlefield, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")\nWhenever Bloodcrazed Socialite attacks, you may sacrifice a Blood token. If you do, it gets +2/+2 until end of turn.

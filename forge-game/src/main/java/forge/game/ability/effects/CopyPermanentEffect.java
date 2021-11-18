@@ -60,11 +60,10 @@ public class CopyPermanentEffect extends TokenEffectBase {
         final Game game = host.getGame();
 
         if (sa.hasParam("Optional") && !activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblCopyPermanentConfirm"))) {
-                return;
+            return;
         }
 
-        final int numCopies = sa.hasParam("NumCopies") ? AbilityUtils.calculateAmount(host,
-                sa.getParam("NumCopies"), sa) : 1;
+        final int numCopies = sa.hasParam("NumCopies") ? AbilityUtils.calculateAmount(host, sa.getParam("NumCopies"), sa) : 1;
 
         Player controller = null;
         if (sa.hasParam("Controller")) {

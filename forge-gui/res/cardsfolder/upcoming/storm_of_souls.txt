@@ -1,0 +1,11 @@
+Name:Storm of Souls
+ManaCost:4 W W
+Types:Sorcery
+A:SP$ ChangeZoneAll | ChangeType$ Creature.YouOwn | Origin$ Graveyard | Destination$ Battlefield | RememberChanged$ True | SubAbility$ DBAnimate | SpellDescription$ Return all creature cards from your graveyard to the battlefield.
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Power$ 1 | Toughness$ 1 | Types$ Spirit | Duration$ Permanent | Keywords$ Flying | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ Each of them is a 1/1 Spirit with flying in addition to its other types.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SpellDescription$ Exile CARDNAME.
+DeckHas:Ability$Graveyard & Type$Spirit
+SVar:X:Count$TypeInYourYard.Creature
+SVar:NeedsToPlayVar:X GE4
+Oracle:Return all creature cards from your graveyard to the battlefield. Each of them is a 1/1 Spirit with flying in addition to its other types. Exile Storm of Souls.

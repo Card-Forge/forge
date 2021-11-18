@@ -407,6 +407,8 @@ public class DeckImportController {
             boolean isExpansionTheMajorityInThePool = (cardArtReferencePool.getTheMostFrequentEditionType() == CardEdition.Type.EXPANSION);
             boolean isPoolModernFramed = cardArtReferencePool.isModern();
             CardEdition pivotEdition = cardArtReferencePool.getPivotCardEdition(isCardArtPreferenceLatestArt);
+            if (pivotEdition == null)
+                continue;
             Date releaseDatePivotEdition = pivotEdition.getDate();
 
             List<Token> tokensToOptimise = tokensPerSectionWithNoSet.get(section);

@@ -4,7 +4,7 @@ Types:Enchantment Saga
 K:Saga:3:TrigToken1,TrigToken2,DBCopy
 SVar:TrigToken1:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human_warrior | TokenOwner$ You | SpellDescription$ Create a 1/1 white Human Warrior creature token.
 SVar:TrigToken2:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You | SpellDescription$ Create a 1/1 green Elf Warrior creature token.
-SVar:DBCopy:DB$ CopyPermanent | Choices$ Artifact.token+YouCtrl,Creature.token+YouCtrl | WithDifferentNames$ True | SpellDescription$ Choose any number of artifact tokens and/or creature tokens you control with different names. For each of them, create a token that’s a copy of it.
+SVar:DBCopy:DB$ CopyPermanent | Choices$ Artifact.token+YouCtrl,Creature.token+YouCtrl | WithDifferentNames$ True | SpellDescription$ Choose any number of artifact tokens and/or creature tokens you control with different names. For each of them, create a token that's a copy of it.
 DeckHas:Ability$Token
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Create a 1/1 white Human Warrior creature token.\nII — Create a 1/1 green Elf Warrior creature token.\nIII — Choose any number of artifact tokens and/or creature tokens you control with different names. For each of them, create a token that's a copy of it.
 

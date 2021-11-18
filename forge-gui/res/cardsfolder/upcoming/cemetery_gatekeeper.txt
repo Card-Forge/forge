@@ -1,0 +1,12 @@
+Name:Cemetery Gatekeeper
+ManaCost:1 R
+Types:Creature Vampire
+PT:2/1
+K:First strike
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile a card from a graveyard.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | SelectPrompt$ Select a card from a graveyard | Mandatory$ True | Hidden$ True | Imprint$ True | AILogic$ ExilePreference:MostProminentOppType
+T:Mode$ LandPlayed | ValidCard$ Land.sharesCardTypeWith Imprinted.ExiledWithSource | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a player plays a land or casts a spell, if it shares a card type with the exiled card, Cemetery Gatekeeper deals 2 damage to that player.
+T:Mode$ SpellCast | ValidCard$ Card.sharesCardTypeWith Imprinted.ExiledWithSource | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDamage | Secondary$ True | TriggerDescription$ Whenever a player plays a land or casts a spell, if it shares a card type with the exiled card, Cemetery Gatekeeper deals 2 damage to that player.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ TriggeredCardController
+SVar:AICastPreference:NeverCastIfLifeBelow$ 8
+Oracle:First strike\nWhen Cemetery Gatekeeper enters the battlefield, exile a card from a graveyard.\nWhenever a player plays a land or casts a spell, if it shares a card type with the exiled card, Cemetery Gatekeeper deals 2 damage to that player.

@@ -104,6 +104,8 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantBeCast;
+import forge.game.staticability.StaticAbilityCantDraw;
+import forge.game.staticability.StaticAbilityCantPutCounter;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
@@ -862,13 +864,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean canReceiveCounters(final CounterType type) {
-        // CantPutCounter static abilities
-        for (final Card ca : getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (stAb.applyAbility("CantPutCounter", this, type)) {
-                    return false;
-                }
-            }
+        if (StaticAbilityCantPutCounter.anyCantPutCounter(this, type)) {
+            return false;
         }
         return true;
     }
@@ -1284,13 +1281,11 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean canDraw() {
-        if (hasKeyword("You can't draw cards.")) {
-            return false;
-        }
-        if (hasKeyword("You can't draw more than one card each turn.")) {
-            return numDrawnThisTurn < 1;
-        }
-        return true;
+        return canDrawAmount(1);
+    }
+    
+    public final boolean canDrawAmount(int amount) {
+        return StaticAbilityCantDraw.canDrawThisAmount(this, amount);
     }
 
     public final CardCollectionView drawCard() {
@@ -1302,6 +1297,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final CardCollectionView drawCards(final int n, SpellAbility cause) {
         final CardCollection drawn = new CardCollection();
+        if (n <= 0) {
+            return drawn;
+        }
 
         // Replacement effects
         final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(this);
@@ -3129,7 +3127,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 moved += " | Destination$ Graveyard,Exile,Hand,Library | Description$ If a commander would be exiled or put into hand, graveyard, or library from anywhere, that player may put it into the command zone instead.";
             } else {
             	// rule 903.9b
-                moved += " | Destination$ Hand,Library | Description$ If a commander would be put into its owner’s hand or library from anywhere, its owner may put it into the command zone instead.";
+                moved += " | Destination$ Hand,Library | Description$ If a commander would be put into its owner's hand or library from anywhere, its owner may put it into the command zone instead.";
             }
             eff.addReplacementEffect(ReplacementHandler.parseReplacement(moved, eff, true));
         }

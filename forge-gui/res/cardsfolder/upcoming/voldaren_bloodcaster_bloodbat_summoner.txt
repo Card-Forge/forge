@@ -5,7 +5,7 @@ PT:2/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Creature.Other+nonToken+YouCtrl | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another nontoken creature you control dies, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
 SVar:TrigToken:DB$ Token | TokenScript$ c_a_blood_draw
-T:Mode$ TokenCreated | ValidPlayer$ You | ValidToken$ Blood | IsPresent$ Blood.token+YouCtrl | PresentCompare$ GE5 | Execute$ TrigTransform | TriggerZone$ Battlefield | TriggerDescription$ Whenever you create a Blood token, if you control five or more Blood tokens, transform CARDNAME.
+T:Mode$ TokenCreated | ValidPlayer$ You | ValidToken$ Blood | IsPresent$ Blood.token+YouCtrl | PresentCompare$ GE5 | Execute$ TrigTransform | TriggerZones$ Battlefield | TriggerDescription$ Whenever you create a Blood token, if you control five or more Blood tokens, transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 DeckHas:Ability$Token & Ability$Sacrifice & Type$Blood

@@ -388,6 +388,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             // == Get the most representative (Pivot) Edition in the Pool
             // Note: Card Art Updates (if any) will be determined based on the Pivot Edition.
             CardEdition pivotEdition = pool.getPivotCardEdition(isCardArtPreferenceLatestArt);
+            if (pivotEdition == null)
+                continue;
 
             // == Inspect and Update the Pool
             Date releaseDatePivotEdition = pivotEdition.getDate();

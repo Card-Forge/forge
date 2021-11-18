@@ -51,6 +51,8 @@ public enum CounterEnumType {
 
     BLOOD("BLOOD", 255, 108, 111),
 
+    BLOODLINE("BLDLN", 224, 44, 44),
+
     BOUNTY("BOUNT", 255, 158, 0),
 
     BRIBERY("BRIBE", 172, 201, 235),

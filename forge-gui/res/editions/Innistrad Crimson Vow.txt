@@ -6,6 +6,8 @@ Code2=VOW
 MciCode=vow
 Type=Expansion
 ScryfallCode=VOW
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+Prerelease=6 Boosters, 1 RareMythic+
 
 [cards]
 1 C Adamant Will @Irina Nordsol
@@ -415,6 +417,11 @@ ScryfallCode=VOW
 405 U Geistlight Snare @Anato Finnstark
 406 U Fell Stinger @Lars Grant-West
 407 R Dominating Vampire @PINDURSKI
+408 L Plains @Daria Khlebnikova
+409 L Island @Rio Krisma
+410 L Swamp @Kerby Rosanes
+411 L Mountain @Daria Khlebnikova
+412 L Forest @Pig Hands
 
 [tokens]
 b_1_1_slug

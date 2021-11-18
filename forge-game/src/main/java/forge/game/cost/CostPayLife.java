@@ -29,7 +29,6 @@ public class CostPayLife extends CostPart {
      * Serializables need a version ID.
      */
     private static final long serialVersionUID = 1L;
-    int paidAmount = 0;
 
     /**
      * Instantiates a new cost pay life.
@@ -92,7 +91,7 @@ public class CostPayLife extends CostPart {
             return false;
         }
 
-        if (payer.hasKeyword("You can't pay life to cast spells or activate abilities.")) {
+        if (!ability.isTrigger() && payer.hasKeyword("You can't pay life to cast spells or activate abilities.")) {
             return false;
         }
 
@@ -101,9 +100,7 @@ public class CostPayLife extends CostPart {
 
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
-        // TODO Auto-generated method stub
-        paidAmount = decision.c;
-        return ai.payLife(paidAmount, null);
+        return ai.payLife(decision.c, null);
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {

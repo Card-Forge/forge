@@ -1,0 +1,7 @@
+Name:Hungry Ridgewolf
+ManaCost:1 R
+Types:Creature Wolf
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddKeyword$ Trample | IsPresent$ Wolf.Other+YouCtrl,Werewolf.Other+YouCtrl | Description$ As long as you control another Wolf or Werewolf, CARDNAME gets +1/+0 and has trample.
+DeckHints:Type$Wolf|Werewolf
+Oracle:As long as you control another Wolf or Werewolf, Hungry Ridgewolf gets +1/+0 and has trample.

@@ -1,0 +1,8 @@
+Name:Estwald Shieldbasher
+ManaCost:3 W
+Types:Creature Human Soldier
+PT:4/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, you may pay {1}. If you do, it gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
+SVar:TrigPump:AB$ Pump | Cost$ 1 | Defined$ Self | KW$ Indestructible
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Estwald Shieldbasher attacks, you may pay {1}. If you do, it gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
