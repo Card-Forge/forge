@@ -438,20 +438,21 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                     setSelectedPage(getMainDeckPage()); //select main deck page if needed so main deck if visible below dialog
                                 }
                             }));
-                            addItem(new FMenuItem(localizer.getMessage("lblSaveAs"), Forge.hdbuttons ? FSkinImage.HDSAVEAS : FSkinImage.SAVEAS, new FEventHandler() {
-                                @Override
-                                public void handleEvent(FEvent e) {
-                                    String defaultName = editorType.getController().getNextAvailableName();
-                                    FOptionPane.showInputDialog(localizer.getMessage("lblNameNewCopyDeck"), defaultName, new Callback<String>() {
-                                        @Override
-                                        public void run(String result) {
-                                            if (!StringUtils.isEmpty(result)) {
-                                                editorType.getController().saveAs(result);
+                            if(allowsSave())
+                                addItem(new FMenuItem(localizer.getMessage("lblSaveAs"), Forge.hdbuttons ? FSkinImage.HDSAVEAS : FSkinImage.SAVEAS, new FEventHandler() {
+                                    @Override
+                                    public void handleEvent(FEvent e) {
+                                        String defaultName = editorType.getController().getNextAvailableName();
+                                        FOptionPane.showInputDialog(localizer.getMessage("lblNameNewCopyDeck"), defaultName, new Callback<String>() {
+                                            @Override
+                                            public void run(String result) {
+                                                if (!StringUtils.isEmpty(result)) {
+                                                    editorType.getController().saveAs(result);
+                                                }
                                             }
-                                        }
-                                    });
-                                }
-                            }));
+                                        });
+                                    }
+                                }));
                         }
                         if (allowRename()) {
                             addItem(new FMenuItem(localizer.getMessage("lblRenameDeck"), Forge.hdbuttons ? FSkinImage.HDEDIT : FSkinImage.EDIT, new FEventHandler() {
@@ -767,7 +768,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         protected void initialize() {
-            cardManager.setup(config, parentScreen.getColOverrides(config));
+            cardManager.setup(config);
         }
 
         protected boolean canAddCards() {
@@ -1255,6 +1256,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     });
                 }
             }
+
 
             addCommanderItems(menu, card, true, true);
 

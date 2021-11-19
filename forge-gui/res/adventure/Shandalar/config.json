@@ -19,18 +19,21 @@
      "name":"Easy",     
      "startingLife":16,
      "staringMoney":200,      
-     "enemyLifeFactor":0.8 
+     "enemyLifeFactor":0.8   ,      
+     "sellFactor":0.5 
     },{
      "name":"Normal",     
      "startingLife":12,
      "staringMoney":100,          
      "startingDifficulty":true,      
-     "enemyLifeFactor":1.0 
+     "enemyLifeFactor":1.0  ,      
+     "sellFactor":0.2 
     },{
      "name":"Hard",     
      "startingLife":8,
      "staringMoney":10,      
-     "enemyLifeFactor":1.5 
+     "enemyLifeFactor":1.5 ,      
+     "sellFactor":0.1 
     }
     ]
 }

@@ -22,12 +22,21 @@
     }     ,
     {
          "type" : "TextButton",     
+         "name" : "sell" ,             
+         "text" : "Sell cards" ,       
+         "width": 48,
+          "height": 16,     
+          "x": 420, 
+          "y": 34 
+    }    ,
+    {
+         "type" : "TextButton",     
          "name" : "done" ,             
          "text" : "Leave" ,       
          "width": 48,
           "height": 16,     
           "x": 420, 
-          "y": 34 
+          "y": 58 
     }   
     ]
 
