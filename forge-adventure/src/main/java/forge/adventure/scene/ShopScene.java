@@ -7,12 +7,12 @@ import forge.screens.FScreen;
  * DeckEditScene
  * scene class that contains the Deck editor
  */
-public class DeckEditScene extends ForgeScene {
+public class ShopScene extends ForgeScene {
 
     AdventureDeckEditor screen;
     Stage stage;
 
-    public DeckEditScene() {
+    public ShopScene() {
 
     }
 
@@ -30,7 +30,7 @@ public class DeckEditScene extends ForgeScene {
         screen.refresh();
         super.enter();
 
-    }
+    } 
     @Override
     public FScreen getScreen() {
         return screen==null?screen = new AdventureDeckEditor(true):screen;

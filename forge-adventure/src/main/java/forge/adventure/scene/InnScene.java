@@ -35,7 +35,12 @@ public class InnScene extends UIScene  {
         super.resLoaded();
         ui.onButtonPress("done",()->done());
         ui.onButtonPress("heal",()->heal());
+        ui.onButtonPress("sell",()->sell());
         TextButton doneButton = ui.findActor("done");
+    }
+
+    private void sell() {
+        AdventureApplicationAdapter.instance.switchScene(SceneType.ShopScene.instance);
     }
 
     @Override

@@ -11,5 +11,6 @@ public class DifficultyData {
     public int staringMoney=10;
     public float enemyLifeFactor=1;
     public boolean startingDifficulty;
+    public float sellFactor=0.2f;
 
 }
