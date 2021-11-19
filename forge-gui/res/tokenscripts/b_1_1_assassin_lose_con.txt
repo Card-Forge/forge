@@ -1,4 +1,4 @@
-Name:Assassin
+Name:Assassin Token
 ManaCost:no cost
 Types:Creature Assassin
 Colors:black

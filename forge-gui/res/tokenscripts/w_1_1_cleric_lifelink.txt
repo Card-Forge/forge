@@ -1,4 +1,4 @@
-Name:Cleric
+Name:Cleric Token
 ManaCost:no cost
 Types:Creature Cleric
 Colors:white

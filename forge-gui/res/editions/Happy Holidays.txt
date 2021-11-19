@@ -8,4 +8,18 @@ ScryfallCode=HHO
 
 [cards]
 6 R Fruitcake Elemental @Darrell Riche
+7 R Gifts Given @Jason Chan
+8 R Evil Presents @Paul Bonner
 9 R Season's Beatings @Kev Walker
+10 R Snow Mercy @rk post
+11 R Yule Ooze @Steve Prescott
+12 R Naughty // Nice @Greg Staples
+13 R Stocking Tiger @Terese Nielsen
+14 M Mishra's Toy Workshop @Jung Park
+15 M Goblin Sleigh Ride @Mark Zug
+16 M Thopter Pie Network @Victor Adame Minguez
+17 M Some Disassembly Required @Dmitry Burmak
+18 M Bog Humbugs @Kieran Yanner
+19 M Decorated Knight @Zoltan Boros
+20 M Topdeck the Halls @Kieran Yanner
+21 M Last-Minute Chopping @Marta Nael

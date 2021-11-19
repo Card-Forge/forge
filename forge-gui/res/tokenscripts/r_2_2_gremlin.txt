@@ -1,4 +1,4 @@
-Name:Gremlin
+Name:Gremlin Token
 ManaCost:no cost
 PT:2/2
 Colors:red

@@ -1,4 +1,4 @@
-Name:Zombie Wizard
+Name:Zombie Wizard Token
 ManaCost:no cost
 Types:Creature Zombie Wizard
 Colors:blue,black

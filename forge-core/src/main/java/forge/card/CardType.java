@@ -722,7 +722,12 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
                 return CardType.isALandType(input);
             }
         };
-
+        public static Predicate<String> IS_BASIC_LAND_TYPE = new Predicate<String>() {
+            @Override
+            public boolean apply(String input) {
+                return CardType.isABasicLandType(input);
+            }
+        };
         public static Predicate<String> IS_ARTIFACT_TYPE = new Predicate<String>() {
             @Override
             public boolean apply(String input) {

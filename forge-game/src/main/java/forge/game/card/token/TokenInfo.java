@@ -185,11 +185,9 @@ public class TokenInfo {
             }
         }
         if (!typeMap.isEmpty()) {
-            String oldName = result.getName();
 
             CardType type = new CardType(result.getType());
-            String joinedName = StringUtils.join(type.getSubtypes(), " ");
-            final boolean nameGenerated = oldName.equals(joinedName);
+            final boolean nameGenerated = result.getName().endsWith(" Token");
             boolean typeChanged = false;
 
             if (!Iterables.isEmpty(type.getSubtypes())) {
@@ -207,7 +205,7 @@ public class TokenInfo {
 
                 // update generated Name
                 if (nameGenerated) {
-                    result.setName(StringUtils.join(type.getSubtypes(), " "));
+                    result.setName(StringUtils.join(type.getSubtypes(), " ") + " Token");
                 }
             }
         }

@@ -1,4 +1,4 @@
-Name:Soldier Ally
+Name:Soldier Ally Token
 ManaCost:no cost
 Types:Creature Soldier Ally
 Colors:white

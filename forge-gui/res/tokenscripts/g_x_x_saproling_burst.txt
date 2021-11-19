@@ -1,4 +1,4 @@
-Name:Saproling
+Name:Saproling Token
 ManaCost:no cost
 Types:Creature Saproling
 Colors:green

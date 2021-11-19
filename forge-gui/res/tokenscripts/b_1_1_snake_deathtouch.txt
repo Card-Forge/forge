@@ -1,4 +1,4 @@
-Name:Snake
+Name:Snake Token
 ManaCost:no cost
 Types:Creature Snake
 Colors:black

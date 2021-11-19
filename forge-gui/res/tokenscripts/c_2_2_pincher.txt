@@ -1,4 +1,4 @@
-Name:Pincher
+Name:Pincher Token
 ManaCost:no cost
 PT:2/2
 Types:Creature Pincher

@@ -1,4 +1,4 @@
-Name:Inkling
+Name:Inkling Token
 ManaCost:no cost
 Types:Creature Inkling
 Colors:white,black

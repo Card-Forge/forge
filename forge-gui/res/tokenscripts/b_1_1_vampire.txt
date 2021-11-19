@@ -1,4 +1,4 @@
-Name:Vampire
+Name:Vampire Token
 ManaCost:no cost
 Types:Creature Vampire
 Colors:black

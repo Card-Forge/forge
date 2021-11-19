@@ -1,4 +1,4 @@
-Name:Starfish
+Name:Starfish Token
 ManaCost:no cost
 Types:Creature Starfish
 Colors:blue

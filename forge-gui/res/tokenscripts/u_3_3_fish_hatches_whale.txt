@@ -1,4 +1,4 @@
-Name:Fish
+Name:Fish Token
 ManaCost:no cost
 Types:Creature Fish
 Colors:blue

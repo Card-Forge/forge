@@ -1,4 +1,4 @@
-Name:Fractal
+Name:Fractal Token
 Colors:green,blue
 ManaCost:no cost
 Types:Creature Fractal

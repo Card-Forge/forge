@@ -1,4 +1,4 @@
-Name:Monk
+Name:Monk Token
 ManaCost:no cost
 Types:Creature Monk
 Colors:white

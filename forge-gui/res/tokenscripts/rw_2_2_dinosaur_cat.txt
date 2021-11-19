@@ -1,4 +1,4 @@
-Name:Dinosaur Cat
+Name:Dinosaur Cat Token
 Types:Creature Dinosaur Cat
 Colors:red,white
 ManaCost:no cost

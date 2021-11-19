@@ -1,4 +1,4 @@
-Name:Bird Soldier
+Name:Bird Soldier Token
 ManaCost:no cost
 Types:Creature Bird Soldier
 Colors:white

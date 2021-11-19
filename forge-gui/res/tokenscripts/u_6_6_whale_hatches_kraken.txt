@@ -1,4 +1,4 @@
-Name:Whale
+Name:Whale Token
 ManaCost:no cost
 Types:Creature Whale
 Colors:blue

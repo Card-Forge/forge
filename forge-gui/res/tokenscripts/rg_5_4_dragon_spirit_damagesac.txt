@@ -1,4 +1,4 @@
-Name:Dragon Spirit
+Name:Dragon Spirit Token
 ManaCost:no cost
 Types:Creature Dragon Spirit
 Colors:red,green

@@ -1,4 +1,4 @@
-Name:Eldrazi Spawn
+Name:Eldrazi Spawn Token
 ManaCost:no cost
 PT:0/1
 Types:Creature Eldrazi Spawn

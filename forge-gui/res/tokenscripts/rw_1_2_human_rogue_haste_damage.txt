@@ -1,4 +1,4 @@
-Name:Human Rogue
+Name:Human Rogue Token
 Types:Creature Human Rogue
 Colors:red,white
 ManaCost:no cost

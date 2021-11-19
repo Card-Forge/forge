@@ -1,4 +1,4 @@
-Name:Antelope
+Name:Antelope Token
 ManaCost:no cost
 Types:Creature Antelope
 Colors:green

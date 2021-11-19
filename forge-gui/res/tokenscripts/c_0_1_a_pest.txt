@@ -1,4 +1,4 @@
-Name:Pest
+Name:Pest Token
 ManaCost:no cost
 PT:0/1
 Types:Artifact Creature Pest

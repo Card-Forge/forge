@@ -1,4 +1,4 @@
-Name:Wurm
+Name:Wurm Token
 Colors:green
 ManaCost:no cost
 PT:5/5

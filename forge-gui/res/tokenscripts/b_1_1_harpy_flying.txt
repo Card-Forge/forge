@@ -1,4 +1,4 @@
-Name:Harpy
+Name:Harpy Token
 ManaCost:no cost
 Types:Creature Harpy
 Colors:black

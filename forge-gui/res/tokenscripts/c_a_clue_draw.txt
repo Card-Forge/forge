@@ -1,4 +1,4 @@
-Name:Clue
+Name:Clue Token
 ManaCost:no cost
 Types:Artifact Clue
 A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME/this artifact> | NumCards$ 1 | SpellDescription$ Draw a card.

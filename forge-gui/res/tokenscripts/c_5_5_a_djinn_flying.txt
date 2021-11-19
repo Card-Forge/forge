@@ -1,4 +1,4 @@
-Name:Djinn
+Name:Djinn Token
 Types:Artifact Creature Djinn
 ManaCost:no cost
 K:Flying

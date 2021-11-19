@@ -1,4 +1,4 @@
-Name:Zombie
+Name:Zombie Token
 ManaCost:no cost
 Types:Enchantment Creature Zombie
 Colors:black

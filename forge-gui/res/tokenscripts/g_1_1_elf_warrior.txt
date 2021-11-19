@@ -1,4 +1,4 @@
-Name:Elf Warrior
+Name:Elf Warrior Token
 ManaCost:no cost
 Types:Creature Elf Warrior
 Colors:green

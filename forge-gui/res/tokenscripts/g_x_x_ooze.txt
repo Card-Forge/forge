@@ -1,4 +1,4 @@
-Name:Ooze
+Name:Ooze Token
 ManaCost:no cost
 Types:Creature Ooze
 Colors:green

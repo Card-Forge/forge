@@ -1,4 +1,4 @@
-Name:Rogue
+Name:Rogue Token
 ManaCost:no cost
 Types:Creature Rogue
 Colors:black

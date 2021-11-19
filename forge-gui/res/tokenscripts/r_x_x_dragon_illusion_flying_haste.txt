@@ -1,4 +1,4 @@
-Name:Dragon Illusion
+Name:Dragon Illusion Token
 ManaCost:no cost
 Types:Creature Dragon Illusion
 Colors:red

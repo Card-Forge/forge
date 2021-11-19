@@ -1,4 +1,4 @@
-Name:Cat
+Name:Cat Token
 ManaCost:no cost
 PT:1/1
 Colors:white

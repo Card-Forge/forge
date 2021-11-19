@@ -1,4 +1,4 @@
-Name:Ox
+Name:Ox Token
 ManaCost:no cost
 PT:2/4
 Colors:white

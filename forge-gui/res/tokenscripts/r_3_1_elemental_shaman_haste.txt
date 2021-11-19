@@ -1,4 +1,4 @@
-Name:Elemental Shaman
+Name:Elemental Shaman Token
 ManaCost:no cost
 Types:Creature Elemental Shaman
 Colors:red

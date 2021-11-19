@@ -1,4 +1,4 @@
-Name:Worm
+Name:Worm Token
 ManaCost:no cost
 Types:Creature Worm
 Colors:black,green

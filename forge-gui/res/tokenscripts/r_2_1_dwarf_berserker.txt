@@ -1,4 +1,4 @@
-Name:Dwarf Berserker
+Name:Dwarf Berserker Token
 ManaCost:no cost
 Types:Creature Dwarf Berserker
 Colors:red

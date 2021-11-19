@@ -1,4 +1,4 @@
-Name:Wizard
+Name:Wizard Token
 ManaCost:no cost
 Types:Creature Wizard
 Colors:blue

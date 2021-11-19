@@ -1,4 +1,4 @@
-Name:Zombie Giant
+Name:Zombie Giant Token
 ManaCost:no cost
 Types:Creature Zombie Giant
 Colors:black

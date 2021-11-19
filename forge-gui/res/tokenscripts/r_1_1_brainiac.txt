@@ -1,4 +1,4 @@
-Name:Brainiac
+Name:Brainiac Token
 ManaCost:no cost
 Types:Creature Brainiac
 Colors:red

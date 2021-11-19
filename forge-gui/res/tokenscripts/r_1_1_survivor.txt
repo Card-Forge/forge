@@ -1,4 +1,4 @@
-Name:Survivor
+Name:Survivor Token
 ManaCost:no cost
 Types:Creature Survivor
 Colors:red

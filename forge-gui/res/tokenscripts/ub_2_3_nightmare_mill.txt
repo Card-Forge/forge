@@ -1,4 +1,4 @@
-Name:Nightmare
+Name:Nightmare Token
 ManaCost:no cost
 Types:Creature Nightmare
 Colors:blue,black

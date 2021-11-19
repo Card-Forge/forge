@@ -1,4 +1,4 @@
-Name:Demon Berserker
+Name:Demon Berserker Token
 ManaCost:no cost
 Types:Creature Demon Berserker
 Colors:red

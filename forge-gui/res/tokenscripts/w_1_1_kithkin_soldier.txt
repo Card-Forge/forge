@@ -1,4 +1,4 @@
-Name:Kithkin Soldier
+Name:Kithkin Soldier Token
 ManaCost:no cost
 Types:Creature Kithkin Soldier
 Colors:white

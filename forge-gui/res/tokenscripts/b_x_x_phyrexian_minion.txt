@@ -1,4 +1,4 @@
-Name:Phyrexian Minion
+Name:Phyrexian Minion Token
 ManaCost:no cost
 Types:Creature Phyrexian Minion
 PT:*/*

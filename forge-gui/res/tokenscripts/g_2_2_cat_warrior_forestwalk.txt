@@ -1,4 +1,4 @@
-Name:Cat Warrior
+Name:Cat Warrior Token
 ManaCost:no cost
 Types:Creature Cat Warrior
 Colors:green

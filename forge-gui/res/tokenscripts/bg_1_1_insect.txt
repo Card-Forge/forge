@@ -1,4 +1,4 @@
-Name:Insect
+Name:Insect Token
 ManaCost:no cost
 Types:Creature Insect
 Colors:black,green

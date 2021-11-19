@@ -1,4 +1,4 @@
-Name:Thopter
+Name:Thopter Token
 ManaCost:no cost
 Types:Artifact Creature Thopter
 Colors:colorless

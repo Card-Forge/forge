@@ -1,4 +1,4 @@
-Name:Drake
+Name:Drake Token
 ManaCost:no cost
 Types:Creature Drake
 Colors:blue

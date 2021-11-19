@@ -1,4 +1,4 @@
-Name:Elf
+Name:Elf Token
 ManaCost:no cost
 Types:Creature Elf
 Colors:green

@@ -1,4 +1,4 @@
-Name:Tetravite
+Name:Tetravite Token
 ManaCost:no cost
 Types:Token Artifact Creature Tetravite
 PT:1/1

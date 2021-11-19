@@ -1,4 +1,4 @@
-Name:Thrull
+Name:Thrull Token
 ManaCost:no cost
 Types:Creature Thrull
 Colors:black

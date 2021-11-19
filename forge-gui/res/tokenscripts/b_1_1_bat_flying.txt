@@ -1,4 +1,4 @@
-Name:Bat
+Name:Bat Token
 ManaCost:no cost
 Types:Creature Bat
 Colors:black

@@ -1,4 +1,4 @@
-Name:Skeleton
+Name:Skeleton Token
 ManaCost:no cost
 Types:Creature Skeleton
 Colors:black

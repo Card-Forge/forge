@@ -1,4 +1,4 @@
-Name:Elf Druid
+Name:Elf Druid Token
 ManaCost:no cost
 Types:Creature Elf Druid
 Colors:green

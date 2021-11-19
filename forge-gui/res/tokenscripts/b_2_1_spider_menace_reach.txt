@@ -1,4 +1,4 @@
-Name:Spider
+Name:Spider Token
 ManaCost:no cost
 Types:Creature Spider
 Colors:black

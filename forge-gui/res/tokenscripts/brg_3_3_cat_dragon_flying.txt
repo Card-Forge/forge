@@ -1,4 +1,4 @@
-Name:Cat Dragon
+Name:Cat Dragon Token
 ManaCost:no cost
 Types:Creature Cat Dragon
 Colors:black,red,green

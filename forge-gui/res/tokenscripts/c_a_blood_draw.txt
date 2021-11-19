@@ -1,4 +1,4 @@
-Name:Blood
+Name:Blood Token
 ManaCost:no cost
 Types:Artifact Blood
 A:AB$ Draw | Cost$ 1 T Discard<1/Card> Sac<1/CARDNAME/this artifact> | NumCards$ 1 | SpellDescription$ Draw a card.
