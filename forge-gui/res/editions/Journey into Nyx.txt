@@ -178,16 +178,16 @@ ScryfallCode=JOU
 165 R Temple of Malady @James Paick
 
 [tokens]
-gold
-w_1_1_soldier
-w_1_1_soldier
-w_1_1_soldier
+b_x_x_zombie
+bg_1_1_e_snake_deathtouch
+c_a_gold_draw
+g_1_3_e_spider_reach
+g_x_x_hydra
+r_2_3_minotaur_haste
+r_2_3_minotaur_haste
+rg_2_2_satyr_haste
 u_2_2_e_bird_flying
 u_4_4_sphinx_flying
-b_x_x_zombie
-r_2_3_minotaur_haste
-r_2_3_minotaur_haste
-g_x_x_hydra
-g_1_3_e_spider_reach
-rg_2_2_satyr_haste
-bg_1_1_e_snake_deathtouch
+w_1_1_soldier
+w_1_1_soldier
+w_1_1_soldier

@@ -655,10 +655,11 @@ Unknown Shores|THB|1
 [tokens]
 b_2_2_zombie
 c_0_4_a_wall_defender
+c_a_gold_draw
 g_1_2_spider_reach
 g_2_2_wolf
-r_x_1_elemental_trample_haste
 r_1_1_satyr_noblock
+r_x_1_elemental_trample_haste
 u_1_1_tentacle
 u_3_2_reflection
 u_8_8_kraken_hexproof
@@ -666,4 +667,3 @@ ub_2_3_nightmare_mill
 w_0_1_goat
 w_1_1_human_soldier
 w_2_2_pegasus_flying
-gold
