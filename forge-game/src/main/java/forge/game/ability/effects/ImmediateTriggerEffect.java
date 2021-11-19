@@ -28,7 +28,6 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
         }
 
         return "";
-
     }
 
     @Override
