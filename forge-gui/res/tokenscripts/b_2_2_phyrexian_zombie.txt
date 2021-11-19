@@ -1,4 +1,4 @@
-Name:Phyrexian Zombie
+Name:Phyrexian Zombie Token
 ManaCost:no cost
 Types:Creature Phyrexian Zombie
 Colors:black

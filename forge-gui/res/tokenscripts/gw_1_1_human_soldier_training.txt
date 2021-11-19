@@ -1,4 +1,4 @@
-Name:Human Soldier
+Name:Human Soldier Token
 ManaCost:no cost
 Types:Creature Human Soldier
 Colors:white,green

@@ -1,4 +1,4 @@
-Name:Gold
+Name:Gold Token
 ManaCost:no cost
 Types:Artifact Gold
 A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color.

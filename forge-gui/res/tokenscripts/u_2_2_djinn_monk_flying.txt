@@ -1,4 +1,4 @@
-Name:Djinn Monk
+Name:Djinn Monk Token
 ManaCost:no cost
 Types:Creature Djinn Monk
 Colors:blue

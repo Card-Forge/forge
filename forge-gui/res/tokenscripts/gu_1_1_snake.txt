@@ -1,4 +1,4 @@
-Name:Snake
+Name:Snake Token
 Colors:green,blue
 ManaCost:no cost
 PT:1/1

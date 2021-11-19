@@ -1,4 +1,4 @@
-Name:Sheep
+Name:Sheep Token
 ManaCost:no cost
 PT:0/1
 Colors:green

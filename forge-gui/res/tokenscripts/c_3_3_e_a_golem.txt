@@ -1,4 +1,4 @@
-Name:Golem
+Name:Golem Token
 ManaCost:no cost
 PT:3/3
 Types:Enchantment Artifact Creature Golem

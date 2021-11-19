@@ -1,4 +1,4 @@
-Name:Cat Soldier
+Name:Cat Soldier Token
 ManaCost:no cost
 Types:Creature Cat Soldier
 Colors:white

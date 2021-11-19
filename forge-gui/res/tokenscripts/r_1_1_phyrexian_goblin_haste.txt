@@ -1,4 +1,4 @@
-Name:Phyrexian Goblin
+Name:Phyrexian Goblin Token
 ManaCost:no cost
 Types:Creature Phyrexian Goblin
 Colors:red

@@ -1,4 +1,4 @@
-Name:Pest
+Name:Pest Token
 ManaCost:no cost
 Types:Creature Pest
 Colors:black,green

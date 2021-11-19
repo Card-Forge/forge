@@ -1,4 +1,4 @@
-Name:Hellion
+Name:Hellion Token
 ManaCost:no cost
 Types:Creature Hellion
 Colors:red

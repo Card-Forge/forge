@@ -1,4 +1,4 @@
-Name:Zombie Warrior
+Name:Zombie Warrior Token
 ManaCost:no cost
 Types:Creature Zombie Warrior
 Colors:black

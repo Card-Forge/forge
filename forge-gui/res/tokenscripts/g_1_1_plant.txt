@@ -1,4 +1,4 @@
-Name:Plant
+Name:Plant Token
 ManaCost:no cost
 Types:Creature Plant
 Colors:green

@@ -1,4 +1,4 @@
-Name:Wurm
+Name:Wurm Token
 ManaCost:no cost
 Types:Creature Wurm
 Colors:black

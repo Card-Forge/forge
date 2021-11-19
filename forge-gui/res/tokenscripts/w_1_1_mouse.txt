@@ -1,4 +1,4 @@
-Name:Mouse
+Name:Mouse Token
 ManaCost:no cost
 Types:Creature Mouse
 Colors:white

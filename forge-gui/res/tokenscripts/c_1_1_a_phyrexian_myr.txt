@@ -1,4 +1,4 @@
-Name:Phyrexian Myr
+Name:Phyrexian Myr Token
 ManaCost:no cost
 PT:1/1
 Types:Artifact Creature Phyrexian Myr

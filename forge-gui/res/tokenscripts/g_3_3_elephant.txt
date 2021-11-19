@@ -1,4 +1,4 @@
-Name:Elephant
+Name:Elephant Token
 Colors:green
 ManaCost:no cost
 PT:3/3

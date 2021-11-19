@@ -1,4 +1,4 @@
-Name:Spider
+Name:Spider Token
 ManaCost:no cost
 Types:Creature Spider
 PT:1/2

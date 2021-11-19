@@ -1,4 +1,4 @@
-Name:Elemental Cat
+Name:Elemental Cat Token
 ManaCost:no cost
 Types:Creature Elemental Cat
 Colors:red

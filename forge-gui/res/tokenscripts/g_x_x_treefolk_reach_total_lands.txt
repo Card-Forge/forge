@@ -1,4 +1,4 @@
-Name:Treefolk
+Name:Treefolk Token
 ManaCost:no cost
 Types:Creature Treefolk
 Colors:green

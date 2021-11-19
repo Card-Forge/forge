@@ -1,4 +1,4 @@
-Name:Spirit
+Name:Spirit Token
 ManaCost:no cost
 Types:Creature Spirit
 Colors:blue

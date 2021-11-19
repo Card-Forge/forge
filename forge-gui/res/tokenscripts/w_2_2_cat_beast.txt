@@ -1,4 +1,4 @@
-Name:Cat Beast
+Name:Cat Beast Token
 ManaCost:no cost
 Types:Creature Cat Beast
 Colors:white

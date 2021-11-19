@@ -1,4 +1,4 @@
-Name:Giant Wizard
+Name:Giant Wizard Token
 ManaCost:no cost
 Types:Creature Giant Wizard
 Colors:blue

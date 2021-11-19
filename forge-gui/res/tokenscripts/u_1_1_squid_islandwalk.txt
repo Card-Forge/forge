@@ -1,4 +1,4 @@
-Name:Squid
+Name:Squid Token
 ManaCost:no cost
 Types:Creature Squid
 Colors:blue

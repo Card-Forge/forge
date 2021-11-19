@@ -1,4 +1,4 @@
-Name:Crab
+Name:Crab Token
 ManaCost:no cost
 Types:Creature Crab
 Colors:blue

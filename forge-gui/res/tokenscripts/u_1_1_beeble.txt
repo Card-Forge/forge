@@ -1,4 +1,4 @@
-Name:Beeble
+Name:Beeble Token
 ManaCost:no cost
 Types:Creature Beeble
 Colors:blue

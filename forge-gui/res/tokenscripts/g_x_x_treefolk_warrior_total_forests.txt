@@ -1,4 +1,4 @@
-Name:Treefolk Warrior
+Name:Treefolk Warrior Token
 ManaCost:no cost
 Types:Creature Treefolk Warrior
 Colors:green

@@ -48,7 +48,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertEquals(1, heraldCopy.getToughnessBonusFromCounters());
         assertEquals(1, heraldCopy.getPowerBonusFromCounters());
 
-        Card warriorToken = findCardWithName(simGame, "Warrior");
+        Card warriorToken = findCardWithName(simGame, "Warrior Token");
         assertNotNull(warriorToken);
         assertTrue(warriorToken.isSick());
         assertEquals(1, warriorToken.getCurrentPower());
@@ -233,7 +233,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         GameSimulator sim = createSimulator(game, p);
         sim.simulateSpellAbility(minusTwo);
         Game simGame = sim.getSimulatedGameState();
-        Card vampireToken = findCardWithName(simGame, "Vampire");
+        Card vampireToken = findCardWithName(simGame, "Vampire Token");
         assertNotNull(vampireToken);
 
         Player simP = simGame.getPlayers().get(1);
@@ -599,7 +599,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertTrue(score > 0);
         Game simGame = sim.getSimulatedGameState();
 
-        Card scion = findCardWithName(simGame, "Eldrazi Scion");
+        Card scion = findCardWithName(simGame, "Eldrazi Scion Token");
         assertNotNull(scion);
         assertEquals(1, scion.getNetPower());
         assertEquals(1, scion.getNetToughness());
@@ -608,7 +608,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         GameCopier copier = new GameCopier(simGame);
         Game copy = copier.makeCopy();
-        Card scionCopy = findCardWithName(copy, "Eldrazi Scion");
+        Card scionCopy = findCardWithName(copy, "Eldrazi Scion Token");
         assertNotNull(scionCopy);
         assertEquals(1, scionCopy.getNetPower());
         assertEquals(1, scionCopy.getNetToughness());
@@ -1288,7 +1288,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertTrue(score > 0);
         Game simGame = sim.getSimulatedGameState();
 
-        int numZombies = countCardsWithName(simGame, "Zombie");
+        int numZombies = countCardsWithName(simGame, "Zombie Token");
         assertEquals(2, numZombies);
     }
 
@@ -1323,11 +1323,11 @@ public class GameSimulatorTest extends SimulationTestCase {
         GameSimulator sim = createSimulator(game, p);
         int score = sim.simulateSpellAbility(fatalPushSA).value;
         assertTrue(score > 0);
-        assertEquals(2, countCardsWithName(sim.getSimulatedGameState(), "Zombie"));
+        assertEquals(2, countCardsWithName(sim.getSimulatedGameState(), "Zombie Token"));
 
         score = sim.simulateSpellAbility(electrifySA).value;
         assertTrue(score > 0);
-        assertEquals(countCardsWithName(sim.getSimulatedGameState(), "Zombie"), 4);
+        assertEquals(4, countCardsWithName(sim.getSimulatedGameState(), "Zombie Token"));
     }
 
     public void testPlayerXCount() {
@@ -1564,7 +1564,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertTrue(score > 0);
         Game simGame = sim.getSimulatedGameState();
 
-        int numZombies = countCardsWithName(simGame, "Zombie");
+        int numZombies = countCardsWithName(simGame, "Zombie Token");
         assertEquals(4, numZombies);
     }
 
@@ -1592,7 +1592,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertTrue(score > 0);
         Game simGame = sim.getSimulatedGameState();
 
-        int numZombies = countCardsWithName(simGame, "Zombie");
+        int numZombies = countCardsWithName(simGame, "Zombie Token");
         assertEquals(3, numZombies);
     }
 

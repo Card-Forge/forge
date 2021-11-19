@@ -1,4 +1,4 @@
-Name:Golem
+Name:Golem Token
 Types:Artifact Creature Golem
 Colors:red,white
 ManaCost:no cost

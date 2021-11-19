@@ -1,4 +1,4 @@
-Name:Pentavite
+Name:Pentavite Token
 ManaCost:no cost
 Types:Token Artifact Creature Pentavite
 PT:1/1

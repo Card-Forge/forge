@@ -1,4 +1,4 @@
-Name:Elemental Bird
+Name:Elemental Bird Token
 ManaCost:no cost
 Types:Creature Elemental Bird
 Colors:blue

@@ -1,4 +1,4 @@
-Name:Sphinx
+Name:Sphinx Token
 ManaCost:no cost
 Types:Creature Sphinx
 Colors:white,blue

@@ -1,4 +1,4 @@
-Name:Angel
+Name:Angel Token
 ManaCost:no cost
 Types:Creature Angel
 Colors:black

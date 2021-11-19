@@ -1,4 +1,4 @@
-Name:Gargoyle
+Name:Gargoyle Token
 Types:Artifact Creature Gargoyle
 ManaCost:no cost
 K:Flying

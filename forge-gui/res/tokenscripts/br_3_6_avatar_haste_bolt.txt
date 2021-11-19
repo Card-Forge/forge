@@ -1,4 +1,4 @@
-Name:Avatar
+Name:Avatar Token
 ManaCost:no cost
 Types:Creature Avatar
 Colors:black,red

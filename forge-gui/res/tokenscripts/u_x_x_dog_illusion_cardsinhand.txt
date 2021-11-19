@@ -1,4 +1,4 @@
-Name:Dog Illusion
+Name:Dog Illusion Token
 ManaCost:no cost
 Types:Creature Dog Illusion
 Colors:blue

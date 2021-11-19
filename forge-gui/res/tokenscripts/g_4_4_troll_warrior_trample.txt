@@ -1,4 +1,4 @@
-Name:Troll Warrior
+Name:Troll Warrior Token
 Colors:green
 ManaCost:no cost
 PT:4/4

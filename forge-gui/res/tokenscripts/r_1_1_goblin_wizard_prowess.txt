@@ -1,4 +1,4 @@
-Name:Goblin Wizard
+Name:Goblin Wizard Token
 ManaCost:no cost
 Types:Creature Goblin Wizard
 Colors:red

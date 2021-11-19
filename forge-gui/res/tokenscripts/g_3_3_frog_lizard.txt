@@ -1,4 +1,4 @@
-Name:Frog Lizard
+Name:Frog Lizard Token
 Colors:green
 ManaCost:no cost
 PT:3/3

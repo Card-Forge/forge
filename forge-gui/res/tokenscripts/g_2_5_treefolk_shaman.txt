@@ -1,4 +1,4 @@
-Name:Treefolk Shaman
+Name:Treefolk Shaman Token
 ManaCost:no cost
 PT:2/5
 Colors:green
