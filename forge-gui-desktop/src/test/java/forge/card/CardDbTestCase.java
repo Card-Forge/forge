@@ -2101,7 +2101,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
     @Test
     public void testMaxArtCountForBasicLand(){
         int maxArtIndex = this.cardDb.getMaxArtIndex("Island");
-        assertEquals(maxArtIndex, 13);
+        assertTrue(maxArtIndex >= 14);
     }
 
     @Test
