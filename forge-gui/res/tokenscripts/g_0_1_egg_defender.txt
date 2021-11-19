@@ -1,4 +1,4 @@
-Name:Egg
+Name:Egg Token
 ManaCost:no cost
 Types:Creature Egg
 Colors:green

@@ -1,4 +1,4 @@
-Name:Aura Curse
+Name:Aura Curse Token
 ManaCost:no cost
 Types:Enchantment Aura Curse
 Colors:black

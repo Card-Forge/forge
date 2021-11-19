@@ -1,4 +1,4 @@
-Name:Kor Soldier
+Name:Kor Soldier Token
 ManaCost:no cost
 Types:Creature Kor Soldier
 Colors:white

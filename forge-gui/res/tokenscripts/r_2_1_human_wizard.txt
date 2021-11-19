@@ -1,4 +1,4 @@
-Name:Human Wizard
+Name:Human Wizard Token
 ManaCost:no cost
 Types:Creature Human Wizard
 Colors:red

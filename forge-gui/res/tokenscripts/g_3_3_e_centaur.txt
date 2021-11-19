@@ -1,4 +1,4 @@
-Name:Centaur
+Name:Centaur Token
 ManaCost:no cost
 Types:Enchantment Creature Centaur
 Colors:green

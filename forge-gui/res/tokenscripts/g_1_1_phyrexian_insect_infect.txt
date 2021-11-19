@@ -1,4 +1,4 @@
-Name:Phyrexian Insect
+Name:Phyrexian Insect Token
 ManaCost:no cost
 PT:1/1
 Colors:green

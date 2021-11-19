@@ -1,4 +1,4 @@
-Name:Orb
+Name:Orb Token
 ManaCost:no cost
 Types:Creature Orb
 Colors:blue

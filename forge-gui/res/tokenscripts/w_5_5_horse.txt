@@ -1,4 +1,4 @@
-Name:Horse
+Name:Horse Token
 ManaCost:no cost
 PT:5/5
 Colors:white

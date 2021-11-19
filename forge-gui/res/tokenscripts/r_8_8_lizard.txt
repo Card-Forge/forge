@@ -1,4 +1,4 @@
-Name:Lizard
+Name:Lizard Token
 ManaCost:no cost
 Types:Creature Lizard
 Colors:red

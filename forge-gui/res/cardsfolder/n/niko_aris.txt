@@ -3,7 +3,7 @@ ManaCost:X W U U
 Types:Legendary Planeswalker Niko
 Loyalty:3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create X Shard tokens. (They're enchantments with "{2}, Sacrifice this enchantment: Scry 1, then draw a card.")
-SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ shard | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_e_shard_draw | TokenOwner$ You
 SVar:X:Count$xPaid
 A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Name$ Niko Aris Effect | Planeswalker$ True | Triggers$ Trig | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | RememberObjects$ Targeted | SubAbility$ DBPump | SpellDescription$ Up to one target creature you control can't be blocked this turn. Whenever that creature deals damage this turn, return it to its owner's hand.
 SVar:DBPump:DB$ Pump | KW$ HIDDEN Unblockable | Defined$ Targeted
@@ -11,6 +11,6 @@ SVar:Trig:Mode$ DamageDealtOnce | ValidSource$ Creature.IsRemembered | Execute$ 
 SVar:Eff:DB$ ChangeZone | ValidTgts$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Hand
 A:AB$ DealDamage | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.tapped | NumDmg$ Y | TgtPrompt$ Select target tapped creature | SpellDescription$ CARDNAME deals 2 damage to target tapped creature for each card you've drawn this turn.
 SVar:Y:Count$YouDrewThisTurn/Twice
-A:AB$ Token | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ shard | TokenOwner$ You | SpellDescription$ Create a Shard token.
+A:AB$ Token | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ c_e_shard_draw | TokenOwner$ You | SpellDescription$ Create a Shard token.
 DeckHas:Ability$Token & Ability$Sacrifice
 Oracle:When Niko Aris enters the battlefield, create X Shard tokens. (They're enchantments with "{2}, Sacrifice this enchantment: Scry 1, then draw a card.")\n[+1]: Up to one target creature you control can't be blocked this turn. Whenever that creature deals damage this turn, return it to its owner's hand.\n[−1]: Niko Aris deals 2 damage to target tapped creature for each card you've drawn this turn.\n[−1]: Create a Shard token.

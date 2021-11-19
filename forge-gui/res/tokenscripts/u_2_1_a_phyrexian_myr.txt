@@ -1,4 +1,4 @@
-Name:Phyrexian Myr
+Name:Phyrexian Myr Token
 ManaCost:no cost
 Types:Artifact Creature Phyrexian Myr
 Colors:blue

@@ -1,4 +1,4 @@
-Name:Minion
+Name:Minion Token
 ManaCost:no cost
 Types:Creature Minion
 Colors:black

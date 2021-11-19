@@ -1,4 +1,4 @@
-Name:Shapeshifter
+Name:Shapeshifter Token
 ManaCost:no cost
 Types:Creature Shapeshifter
 PT:2/2

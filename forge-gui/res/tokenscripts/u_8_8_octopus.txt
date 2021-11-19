@@ -1,4 +1,4 @@
-Name:Octopus
+Name:Octopus Token
 ManaCost:no cost
 Types:Creature Octopus
 Colors:blue

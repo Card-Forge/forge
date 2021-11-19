@@ -1,4 +1,4 @@
-Name:Elemental
+Name:Elemental Token
 Colors:green
 ManaCost:no cost
 PT:4/4

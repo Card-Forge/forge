@@ -1,4 +1,4 @@
-Name:Ogre
+Name:Ogre Token
 ManaCost:no cost
 Types:Creature Ogre
 Colors:red

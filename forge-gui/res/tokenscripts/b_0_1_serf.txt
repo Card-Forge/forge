@@ -1,4 +1,4 @@
-Name:Serf
+Name:Serf Token
 ManaCost:no cost
 Types:Creature Serf
 Colors:black

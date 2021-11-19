@@ -1,4 +1,4 @@
-Name:Beast
+Name:Beast Token
 Colors:green
 ManaCost:no cost
 PT:4/4

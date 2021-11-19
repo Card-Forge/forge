@@ -1,4 +1,4 @@
-Name:Griffin
+Name:Griffin Token
 ManaCost:no cost
 Types:Creature Griffin
 Colors:white

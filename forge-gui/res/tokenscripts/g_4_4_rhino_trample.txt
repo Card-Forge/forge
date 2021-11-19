@@ -1,4 +1,4 @@
-Name:Rhino
+Name:Rhino Token
 Colors:green
 ManaCost:no cost
 PT:4/4

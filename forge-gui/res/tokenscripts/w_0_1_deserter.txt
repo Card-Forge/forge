@@ -1,4 +1,4 @@
-Name:Deserter
+Name:Deserter Token
 ManaCost:no cost
 Types:Creature Deserter
 Colors:white

@@ -1,4 +1,4 @@
-Name:Bird Illusion
+Name:Bird Illusion Token
 ManaCost:no cost
 Types:Creature Bird Illusion
 Colors:blue

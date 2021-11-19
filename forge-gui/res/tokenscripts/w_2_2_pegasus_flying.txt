@@ -1,4 +1,4 @@
-Name:Pegasus
+Name:Pegasus Token
 ManaCost:no cost
 Types:Creature Pegasus
 Colors:white

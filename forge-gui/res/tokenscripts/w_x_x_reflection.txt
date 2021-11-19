@@ -1,4 +1,4 @@
-Name:Reflection
+Name:Reflection Token
 ManaCost:no cost
 PT:*/*
 Colors:white

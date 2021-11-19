@@ -1,4 +1,4 @@
-Name:Unicorn
+Name:Unicorn Token
 ManaCost:no cost
 Types:Creature Unicorn
 Colors:white

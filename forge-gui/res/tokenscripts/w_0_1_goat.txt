@@ -1,4 +1,4 @@
-Name:Goat
+Name:Goat Token
 ManaCost:no cost
 Types:Creature Goat
 Colors:white

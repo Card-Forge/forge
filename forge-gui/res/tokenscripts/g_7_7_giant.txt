@@ -1,4 +1,4 @@
-Name:Giant
+Name:Giant Token
 Colors:green
 ManaCost:no cost
 PT:7/7

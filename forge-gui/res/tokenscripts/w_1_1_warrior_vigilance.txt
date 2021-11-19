@@ -1,4 +1,4 @@
-Name:Warrior
+Name:Warrior Token
 ManaCost:no cost
 Types:Creature Warrior
 Colors:white

@@ -1,4 +1,4 @@
-Name:Zombie Knight
+Name:Zombie Knight Token
 ManaCost:no cost
 Types:Creature Zombie Knight
 Colors:black

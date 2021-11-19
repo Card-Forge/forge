@@ -1,4 +1,4 @@
-Name:Homunculus
+Name:Homunculus Token
 ManaCost:no cost
 Types:Artifact Creature Homunculus
 Colors:blue

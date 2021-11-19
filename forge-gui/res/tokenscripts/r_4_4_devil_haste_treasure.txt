@@ -1,4 +1,4 @@
-Name:Devil
+Name:Devil Token
 ManaCost:no cost
 Types:Creature Devil
 Colors:red

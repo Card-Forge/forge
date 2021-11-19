@@ -1,4 +1,4 @@
-Name:Dwarf
+Name:Dwarf Token
 ManaCost:no cost
 Types:Creature Dwarf
 Colors:red

@@ -1,4 +1,4 @@
-Name:Elemental
+Name:Elemental Token
 ManaCost:no cost
 Types:Creature Elemental
 Colors:white

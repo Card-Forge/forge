@@ -1,4 +1,4 @@
-Name:Boar
+Name:Boar Token
 ManaCost:no cost
 Types:Creature Boar
 Colors:green

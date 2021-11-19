@@ -1,4 +1,4 @@
-Name:Caribou
+Name:Caribou Token
 ManaCost:no cost
 Types:Creature Caribou
 Colors:white

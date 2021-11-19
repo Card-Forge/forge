@@ -1,4 +1,4 @@
-Name:Triskelavite
+Name:Triskelavite Token
 ManaCost:no cost
 Types:Artifact Creature Triskelavite
 K:Flying

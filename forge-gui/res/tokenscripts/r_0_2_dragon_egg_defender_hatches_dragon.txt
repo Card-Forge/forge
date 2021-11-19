@@ -1,4 +1,4 @@
-Name:Dragon Egg
+Name:Dragon Egg Token
 ManaCost:no cost
 Types:Creature Dragon Egg
 Colors:red

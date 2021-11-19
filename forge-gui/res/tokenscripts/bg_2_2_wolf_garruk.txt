@@ -1,4 +1,4 @@
-Name:Wolf
+Name:Wolf Token
 ManaCost:no cost
 Types:Creature Wolf
 Colors:black,green

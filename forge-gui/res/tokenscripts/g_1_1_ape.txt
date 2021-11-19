@@ -1,4 +1,4 @@
-Name:Ape
+Name:Ape Token
 ManaCost:no cost
 Types:Creature Ape
 Colors:green

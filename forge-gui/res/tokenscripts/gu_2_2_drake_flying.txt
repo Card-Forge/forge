@@ -1,4 +1,4 @@
-Name:Drake
+Name:Drake Token
 Colors:green,blue
 ManaCost:no cost
 PT:2/2

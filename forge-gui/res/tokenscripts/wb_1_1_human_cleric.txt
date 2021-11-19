@@ -1,4 +1,4 @@
-Name:Human Cleric
+Name:Human Cleric Token
 ManaCost:no cost
 Types:Creature Human Cleric
 Colors:white,black

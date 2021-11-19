@@ -1,4 +1,4 @@
-Name:Satyr
+Name:Satyr Token
 ManaCost:no cost
 Types:Creature Satyr
 Colors:red

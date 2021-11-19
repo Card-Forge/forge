@@ -1,4 +1,4 @@
-Name:Wall
+Name:Wall Token
 ManaCost:no cost
 Types:Creature Wall
 Colors:white

@@ -1,4 +1,4 @@
-Name:Eldrazi Scion
+Name:Eldrazi Scion Token
 ManaCost:no cost
 PT:1/1
 Types:Creature Eldrazi Scion

@@ -1,4 +1,4 @@
-Name:Angel Warrior
+Name:Angel Warrior Token
 ManaCost:no cost
 Types:Creature Angel Warrior
 Colors:white

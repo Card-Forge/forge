@@ -1,4 +1,4 @@
-Name:Graveborn
+Name:Graveborn Token
 ManaCost:no cost
 Types:Creature Graveborn
 Colors:black,red
