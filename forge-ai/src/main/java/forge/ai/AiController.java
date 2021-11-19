@@ -737,7 +737,7 @@ public class AiController {
         }
 
         int oldCMC = -1;
-        boolean xCost = sa.getPayCosts().hasXInAnyCostPart() || sa.getHostCard().hasStartOfKeyword("Strive");
+        boolean xCost = sa.costHasX() || sa.getHostCard().hasStartOfKeyword("Strive");
         if (!xCost) {
             if (!ComputerUtilCost.canPayCost(sa, player)) {
                 // for most costs, it's OK to check if they can be paid early in order to avoid running a heavy API check
