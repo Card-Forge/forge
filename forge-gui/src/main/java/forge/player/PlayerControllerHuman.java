@@ -270,7 +270,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public SpellAbility getAbilityToPlay(final Card hostCard, final List<SpellAbility> abilities,
             final ITriggerEvent triggerEvent) {
         // make sure another human player can't choose opponents cards just because he might see them
-        if (triggerEvent != null && !hostCard.isInZone(ZoneType.Battlefield) && !hostCard.getOwner().equals(player) &&
+        if (triggerEvent != null && !hostCard.isInPlay() && !hostCard.getOwner().equals(player) &&
                 !hostCard.getController().equals(player) &&
                 // If player cast Shaman's Trance, they can play spells from any Graveyard (if other effects allow it to be cast)
                 (!player.hasKeyword("Shaman's Trance") || !hostCard.isInZone(ZoneType.Graveyard))) {

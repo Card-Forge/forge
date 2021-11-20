@@ -96,7 +96,7 @@ public final class GameActionUtil {
         Card source = sa.getHostCard();
         final Game game = source.getGame();
 
-        if (sa.isSpell() && !source.isInZone(ZoneType.Battlefield)) {
+        if (sa.isSpell() && !source.isInPlay()) {
             boolean lkicheck = false;
 
             Card newHost = ((Spell)sa).getAlternateHost(source);

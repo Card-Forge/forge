@@ -87,12 +87,12 @@ public class SetStateEffect extends SpellAbilityEffect {
 
             // Cards which are not on the battlefield should not be able to transform.
             // TurnFace should be allowed in other zones like Exile too
-            if (!"TurnFace".equals(mode) && !gameCard.isInZone(ZoneType.Battlefield) && !sa.hasParam("ETB")) {
+            if (!"TurnFace".equals(mode) && !gameCard.isInPlay() && !sa.hasParam("ETB")) {
                 continue;
             }
 
             // facedown cards that are not Permanent, can't turn faceup there
-            if ("TurnFace".equals(mode) && gameCard.isFaceDown() && gameCard.isInZone(ZoneType.Battlefield)) {
+            if ("TurnFace".equals(mode) && gameCard.isFaceDown() && gameCard.isInPlay()) {
                 if (gameCard.hasMergedCard()) {
                     boolean hasNonPermanent = false;
                     Card nonPermanentCard = null;
@@ -119,7 +119,7 @@ public class SetStateEffect extends SpellAbilityEffect {
             }
 
             // Merged faceup permanent that have double faced cards can't turn face down
-            if ("TurnFace".equals(mode) && !gameCard.isFaceDown() && gameCard.isInZone(ZoneType.Battlefield)
+            if ("TurnFace".equals(mode) && !gameCard.isFaceDown() && gameCard.isInPlay()
                     && gameCard.hasMergedCard()) {
                 boolean hasBackSide = false;
                 for (final Card c : gameCard.getMergedCards()) {

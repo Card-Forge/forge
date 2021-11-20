@@ -24,6 +24,8 @@ import org.apache.commons.lang3.StringUtils;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 
 /**
@@ -38,7 +40,8 @@ public class AddTurnAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final Player opp = ai.getWeakestOpponent();
+        PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
+        Player opp = targetableOpps.min(PlayerPredicates.compareByLife());
 
         if (sa.usesTargeting()) {
             sa.resetTargets();

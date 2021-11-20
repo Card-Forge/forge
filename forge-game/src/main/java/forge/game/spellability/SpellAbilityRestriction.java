@@ -207,7 +207,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         // for Bestow need to check the animated State
         if (sa.isSpell() && sa.isBestow()) {
             // already bestowed or in battlefield, no need to check for spell
-            if (c.isInZone(ZoneType.Battlefield)) {
+            if (c.isInPlay()) {
                 return false;
             }
 
@@ -480,7 +480,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         // 702.36e
         // If the permanent wouldn’t have a morph cost if it were face up, it can’t be turned face up this way.
-        if (sa.isMorphUp() && c.isInZone(ZoneType.Battlefield)) {
+        if (sa.isMorphUp() && c.isInPlay()) {
             Card cp = c;
             if (!c.isLKI()) {
                 cp = CardUtil.getLKICopy(c);
