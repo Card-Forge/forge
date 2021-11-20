@@ -49,7 +49,7 @@ public class AddPhaseEffect extends SpellAbilityEffect {
             extraPhaseList.addAll(PhaseType.PHASE_GROUPS.get(0));
         } else if (extra.equals("Combat")) {
             extraPhaseList.addAll(PhaseType.PHASE_GROUPS.get(2));
-        } else {    // Currently no effect will add End Phase
+        } else { // Currently no effect will add End Phase
             extraPhaseList.add(PhaseType.smartValueOf(extra));
         }
 
