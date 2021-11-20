@@ -263,6 +263,9 @@ public class TokenAi extends SpellAbilityAi {
             sa.resetTargets();
             if (tgt.canOnlyTgtOpponent()) {
                 PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
+                if (mandatory && targetableOpps.isEmpty()) {
+                    return false;
+                }
                 Player opp = targetableOpps.min(PlayerPredicates.compareByLife());
                 sa.getTargets().add(opp);
             } else {
