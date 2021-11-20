@@ -566,7 +566,7 @@ public class DamageDealAi extends DamageAiBase {
         TargetChoices tcs = sa.getTargets();
 
         // Do not use if would kill self
-        if (("SelfDamage".equals(logic)) && (ai.getLife() <= Integer.parseInt(source.getSVar("SelfDamageAmount")))) {
+        if ("SelfDamage".equals(logic) && ai.getLife() <= Integer.parseInt(source.getSVar("SelfDamageAmount"))) {
             return false;
         }
 

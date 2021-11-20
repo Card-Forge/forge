@@ -216,8 +216,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             System.out.println("Post more creatures and spells : " + deckList.size());
         }
 
-        // 5. If there are still on-color cards, and the average cmc is low, add
-        // extras.
+        // 5. If there are still on-color cards, and the average cmc is low, add extras.
         double avCMC = getAverageCMC(deckList);
         //calculated required lands based on https://www.channelfireball.com/articles/how-many-lands-do-you-need-to-consistently-hit-your-land-drops/
         float baseLandParameter = 16f;
@@ -326,14 +325,12 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             aiPlayables.remove(sbCard);
             rankedColorList.remove(sbCard);
 
-
             ++i;
         }
         if (logToConsole) {
             debugFinalDeck();
         }
         return result;
-
     }
 
     //Extend to playsets for non land cards to fill out deck for when no other suitable cards are available
@@ -714,7 +711,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         while (deckList.size() > targetSize) {
             deckList.remove(deckList.size() - 1);
         }
-
     }
 
     /**
@@ -872,9 +868,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         Collections.shuffle(possibleList);
         //addManaCurveCards(CardRanker.rankCardsInDeck(possibleList.subList(0, targetSize*3 <= possibleList.size() ? targetSize*3 : possibleList.size())),
                 //num, "Random Card");
-        addManaCurveCards(possibleList,
-                num, "Random Card");
-        
+        addManaCurveCards(possibleList, num, "Random Card");
     }
 
     /**
