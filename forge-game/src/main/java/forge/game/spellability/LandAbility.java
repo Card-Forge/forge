@@ -26,7 +26,6 @@ import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
-import forge.game.zone.ZoneType;
 
 public class LandAbility extends Ability {
 
@@ -78,7 +77,7 @@ public class LandAbility extends Ability {
             getMayPlay().incMayPlayTurn();
         }
         // if land isn't in battlefield try to reset the card state
-        if (result != null && !result.isInZone(ZoneType.Battlefield)) {
+        if (result != null && !result.isInPlay()) {
             result.setState(CardStateName.Original, true);
         }
     }

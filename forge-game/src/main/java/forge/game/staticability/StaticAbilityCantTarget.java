@@ -61,7 +61,7 @@ public class StaticAbilityCantTarget {
                 return false;
             }
         } else { // default zone is battlefield
-            if (!card.isInZone(ZoneType.Battlefield)) {
+            if (!card.isInPlay()) {
                 return false;
             }
         }

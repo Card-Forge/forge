@@ -23,7 +23,6 @@ import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
-import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -72,7 +71,7 @@ public class Mana {
     public Mana(final byte color, final Card source, final AbilityManaPart manaAbility) {
         this.color = color;
         this.manaAbility = manaAbility;
-        this.sourceCard = source.isInZone(ZoneType.Battlefield) ? CardUtil.getLKICopy(source) : source.getGame().getChangeZoneLKIInfo(source);
+        this.sourceCard = source.isInPlay() ? CardUtil.getLKICopy(source) : source.getGame().getChangeZoneLKIInfo(source);
     }
 
     @Override

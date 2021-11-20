@@ -355,7 +355,7 @@ public class GameAction {
             ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.Moved, repParams);
             if (repres != ReplacementResult.NotReplaced) {
                 // reset failed manifested Cards back to original
-                if (c.isManifested() && !c.isInZone(ZoneType.Battlefield)) {
+                if (c.isManifested() && !c.isInPlay()) {
                     c.forceTurnFaceUp();
                 }
 
@@ -373,7 +373,7 @@ public class GameAction {
                 }
 
                 // was replaced with another Zone Change
-                if (toBattlefield && !c.isInZone(ZoneType.Battlefield)) {
+                if (toBattlefield && !c.isInPlay()) {
                     if (c.removeChangedState()) {
                         c.updateStateForView();
                     }
@@ -1171,7 +1171,7 @@ public class GameAction {
                 }
                 if (c.isCreature() && c.isPaired()) {
                     Card partner = c.getPairedWith();
-                    if (!partner.isCreature() || c.getController() != partner.getController() || !c.isInZone(ZoneType.Battlefield)) {
+                    if (!partner.isCreature() || c.getController() != partner.getController() || !c.isInPlay()) {
                         c.setPairedWith(null);
                         partner.setPairedWith(null);
                         affectedCards.add(c);

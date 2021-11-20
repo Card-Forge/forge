@@ -127,7 +127,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
         }
 
         // check for lose control criteria right away
-        if (lose != null && lose.contains("LeavesPlay") && !source.isInZone(ZoneType.Battlefield)) {
+        if (lose != null && lose.contains("LeavesPlay") && !source.isInPlay()) {
             return;
         }
         if (lose != null && lose.contains("Untap") && !source.isTapped()) {
