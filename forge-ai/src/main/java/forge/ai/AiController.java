@@ -294,8 +294,9 @@ public class AiController {
             // These checks only work if the Executing SpellAbility is an Ability_Sub.
             if (exSA instanceof AbilitySub && !doTrigger(exSA, false)) {
                 // AI would not run this trigger if given the chance
-                if (api == null && card.isCreature() && exSA.usesTargeting() && !exSA.getTargetRestrictions().hasCandidates(exSA) && ComputerUtil.aiLifeInDanger(activatingPlayer, true, 0)) {
-                    // trigger will not run due to lack of targets and we desperately need a creature
+                if (api == null && card.isCreature() && !ComputerUtilAbility.isFullyTargetable(exSA) &&
+                        (ComputerUtil.aiLifeInDanger(activatingPlayer, true, 0) || "BadETB".equals(tr.getParam("AILogic")))) {
+                    // trigger will not run due to lack of targets and we 1. desperately need a creature or 2. are happy about that
                     continue;
                 }
                 return false;

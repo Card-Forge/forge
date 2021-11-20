@@ -176,7 +176,7 @@ public class DrawAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        return targetAI(ai, sa, sa.isTrigger() && !sa.getRootAbility().isOptionalTrigger());
+        return targetAI(ai, sa, sa.isTrigger() && sa.getHostCard().isInZone(ZoneType.Battlefield));
     }
 
     /**
