@@ -21,12 +21,11 @@ public class DamageEachAi extends DamageAiBase {
         Player weakestOpp = targetableOpps.min(PlayerPredicates.compareByLife());
 
         if (sa.usesTargeting() && weakestOpp != null) {
+            if ("MadSarkhanUltimate".equals(logic) && !SpecialCardAi.SarkhanTheMad.considerUltimate(ai, sa, weakestOpp)) {
+                return false;
+            }
             sa.resetTargets();
             sa.getTargets().add(weakestOpp);
-        }
-
-        if ("MadSarkhanUltimate".equals(logic)) {
-            return SpecialCardAi.SarkhanTheMad.considerUltimate(ai, sa, weakestOpp);
         }
         
         final String damage = sa.getParam("NumDmg");

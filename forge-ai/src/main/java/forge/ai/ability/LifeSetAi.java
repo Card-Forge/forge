@@ -1,15 +1,21 @@
 package forge.ai.ability;
 
+import com.google.common.collect.Iterables;
+
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardPredicates;
 import forge.game.card.CounterEnumType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 public class LifeSetAi extends SpellAbilityAi {
@@ -17,13 +23,10 @@ public class LifeSetAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final int myLife = ai.getLife();
-        final Player opponent = ai.getStrongestOpponent();
-        final int hlife = opponent.getLife();
+        final PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
+        final Player opponent = targetableOpps.max(PlayerPredicates.compareByLife());
+        final int hlife = opponent == null ? 0 : opponent.getLife();
         final String amountStr = sa.getParam("LifeAmount");
-
-        if (!ai.canGainLife()) {
-            return false;
-        }
 
         // Don't use setLife before main 2 if possible
         if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
@@ -55,20 +58,20 @@ public class LifeSetAi extends SpellAbilityAi {
         if (tgt != null) {
             sa.resetTargets();
             if (tgt.canOnlyTgtOpponent()) {
-                sa.getTargets().add(opponent);
                 // if we can only target the human, and the Human's life
                 // would go up, don't play it.
                 // possibly add a combo here for Magister Sphinx and
                 // Higedetsu's (sp?) Second Rite
-                if ((amount > hlife) || !opponent.canLoseLife()) {
+                if (opponent == null || amount > hlife || !opponent.canLoseLife()) {
                     return false;
                 }
+                sa.getTargets().add(opponent);
             } else {
-                if ((amount > myLife) && (myLife <= 10)) {
+                if (amount > myLife && myLife <= 10 && ai.canGainLife()) {
                     sa.getTargets().add(ai);
                 } else if (hlife > amount) {
                     sa.getTargets().add(opponent);
-                } else if (amount > myLife) {
+                } else if (amount > myLife && ai.canGainLife()) {
                     sa.getTargets().add(ai);
                 } else {
                     return false;
@@ -90,18 +93,19 @@ public class LifeSetAi extends SpellAbilityAi {
         }
 
         // if life is in danger, always activate
-        if ((myLife < 3) && (amount > myLife)) {
+        if (myLife < 3 && amount > myLife && ai.canGainLife()) {
             return true;
         }
 
-        return ((MyRandom.getRandom().nextFloat() < .6667) && chance);
+        return MyRandom.getRandom().nextFloat() < .6667 && chance;
     }
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final int myLife = ai.getLife();
-        final Player opponent = ai.getStrongestOpponent();
-        final int hlife = opponent.getLife();
+        final PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
+        final Player opponent = targetableOpps.max(PlayerPredicates.compareByLife());
+        final int hlife = opponent == null ? 0 : opponent.getLife();
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
 
@@ -118,13 +122,13 @@ public class LifeSetAi extends SpellAbilityAi {
         }
 
         // special cases when amount can't be calculated without targeting first
-        if (amount == 0 && "TargetedPlayer$StartingLife/HalfDown".equals(source.getSVar(amountStr))) {
+        if (amount == 0 && opponent != null && "TargetedPlayer$StartingLife/HalfDown".equals(source.getSVar(amountStr))) {
             // e.g. Torgaar, Famine Incarnate
             return doHalfStartingLifeLogic(ai, opponent, sa);
         }
 
         if (sourceName.equals("Eternity Vessel")
-                && (opponent.isCardInPlay("Vampire Hexmage") || (source.getCounters(CounterEnumType.CHARGE) == 0))) {
+                && (Iterables.any(ai.getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Vampire Hexmage")) || (source.getCounters(CounterEnumType.CHARGE) == 0))) {
             return false;
         }
 
@@ -134,13 +138,16 @@ public class LifeSetAi extends SpellAbilityAi {
         if (tgt != null) {
             sa.resetTargets();
             if (tgt.canOnlyTgtOpponent()) {
+                if (opponent == null) {
+                    return false;
+                }
                 sa.getTargets().add(opponent);
             } else {
                 if (amount > myLife && myLife <= 10) {
                     sa.getTargets().add(ai);
                 } else if (hlife > amount) {
                     sa.getTargets().add(opponent);
-                } else if (amount > myLife) {
+                } else if (amount > myLife || mandatory) {
                     sa.getTargets().add(ai);
                 } else {
                     return false;

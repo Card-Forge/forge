@@ -138,12 +138,11 @@ public class RegenerateAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         boolean chance = false;
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt == null) {
+        if (sa.usesTargeting()) {
+            chance = regenMandatoryTarget(ai, sa, mandatory);
+        } else {
             // If there's no target on the trigger, just say yes.
             chance = true;
-        } else {
-            chance = regenMandatoryTarget(ai, sa, mandatory);
         }
 
         return chance;
@@ -164,7 +163,7 @@ public class RegenerateAi extends SpellAbilityAi {
             return false;
         }
 
-        if (!mandatory && (compTargetables.size() == 0)) {
+        if (!mandatory && compTargetables.size() == 0) {
             return false;
         }
 

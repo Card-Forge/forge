@@ -54,7 +54,7 @@ public class AddTurnAi extends SpellAbilityAi {
                     	break;
                     }
             	}
-                if (!sa.getTargetRestrictions().isMinTargetsChosen(sa.getHostCard(), sa) && sa.canTarget(opp)) {
+                if (!sa.getTargetRestrictions().isMinTargetsChosen(sa.getHostCard(), sa) && opp != null) {
                     sa.getTargets().add(opp);
                 } else {
                     return false;

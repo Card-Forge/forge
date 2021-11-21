@@ -16,6 +16,8 @@ import forge.game.card.CardPredicates;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -101,10 +103,14 @@ public class TapAllAi extends SpellAbilityAi {
         CardCollectionView validTappables = getTapAllTargets(valid, source, sa);
 
         if (sa.usesTargeting()) {
+            final PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
+            Player target = targetableOpps.max(PlayerPredicates.compareByLife());
+            if (target == null && mandatory) {
+                target = ai;
+            }
             sa.resetTargets();
-            Player opp = ai.getStrongestOpponent();
-            sa.getTargets().add(opp);
-            validTappables = opp.getCardsIn(ZoneType.Battlefield);
+            sa.getTargets().add(target);
+            validTappables = target.getCardsIn(ZoneType.Battlefield);
         }
 
         if (mandatory) {

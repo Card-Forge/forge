@@ -1,8 +1,9 @@
 package forge.ai.ability;
 
-import forge.ai.AiAttackController;
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.util.MyRandom;
 
@@ -18,13 +19,14 @@ public class LifeExchangeAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        final int myLife = aiPlayer.getLife();
-        Player opponent = AiAttackController.choosePreferredDefenderPlayer(aiPlayer);
-        final int hLife = opponent.getLife();
-
         if (!aiPlayer.canGainLife()) {
             return false;
         }
+
+        final int myLife = aiPlayer.getLife();
+        final PlayerCollection targetableOpps = aiPlayer.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
+        final Player opponent = targetableOpps.max(PlayerPredicates.compareByLife());
+        final int hLife = opponent == null ? 0 : opponent.getLife();
 
         // prevent run-away activations - first time will always return true
         boolean chance = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
@@ -36,24 +38,23 @@ public class LifeExchangeAi extends SpellAbilityAi {
          */
         if (sa.usesTargeting()) {
             sa.resetTargets();
-            if (opponent.canBeTargetedBy(sa)) {
+            if (opponent != null && opponent.canLoseLife()) {
                 // never target self, that would be silly for exchange
                 sa.getTargets().add(opponent);
-                if (!opponent.canLoseLife()) {
-                    return false;
-                }
+            } else {
+                return false;
             }
         }
 
         // if life is in danger, always activate
-        if ((myLife < 5) && (hLife > myLife)) {
+        if (myLife < 5 && hLife > myLife) {
             return true;
         }
 
         // cost includes sacrifice probably, so make sure it's worth it
         chance &= (hLife > (myLife + 8));
 
-        return ((MyRandom.getRandom().nextFloat() < .6667) && chance);
+        return MyRandom.getRandom().nextFloat() < .6667 && chance;
     }
 
     /**
@@ -70,13 +71,16 @@ public class LifeExchangeAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa,
-    final boolean mandatory) {
-        Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
+    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
+        PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
+        Player opp = targetableOpps.max(PlayerPredicates.compareByLife());
         if (sa.usesTargeting()) {
             sa.resetTargets();
             if (sa.canTarget(opp) && (mandatory || ai.getLife() < opp.getLife())) {
                 sa.getTargets().add(opp);
+                if (sa.canAddMoreTarget()) {
+                    sa.getTargets().add(ai);
+                }
             } else {
                 return false;
             }

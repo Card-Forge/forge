@@ -218,7 +218,7 @@ public class ComputerUtilAbility {
     public static boolean isFullyTargetable(SpellAbility sa) {
         SpellAbility sub = sa;
         while (sub != null) {
-            if (sub.usesTargeting() && !sub.getTargetRestrictions().hasCandidates(sub)) {
+            if (sub.usesTargeting() && sub.getTargetRestrictions().getNumCandidates(sub, true) < sub.getMinTargets()) {
                 return false;
             }
             sub = sub.getSubAbility();
