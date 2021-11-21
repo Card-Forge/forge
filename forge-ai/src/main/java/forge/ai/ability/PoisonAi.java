@@ -25,8 +25,7 @@ public class PoisonAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
-        return !ph.getPhase().isBefore(PhaseType.MAIN2)
-                || sa.hasParam("ActivationPhases");
+        return !ph.getPhase().isBefore(PhaseType.MAIN2) || sa.hasParam("ActivationPhases");
     }
 
     /*

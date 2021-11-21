@@ -47,7 +47,7 @@ public class DigAi extends SpellAbilityAi {
 
         if (sa.usesTargeting()) {
             sa.resetTargets();
-            if (!opp.canBeTargetedBy(sa)) {
+            if (!sa.canTarget(opp)) {
                 return false;
             }
             sa.getTargets().add(opp);
