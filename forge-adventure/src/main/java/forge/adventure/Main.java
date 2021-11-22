@@ -37,6 +37,7 @@ import java.nio.file.Paths;
         isPortraitMode = true;
         totalDeviceRAM = 0;
         GuiBase.setDeviceInfo("", "", 0, 0);
+        GuiBase.setIsAdventureMode(true);
 
     }
 
