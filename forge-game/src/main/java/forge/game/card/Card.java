@@ -3533,12 +3533,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return getType(currentState);
     }
     public final CardTypeView getType(CardState state) {
-        if (changedCardTypes.isEmpty() && changedCardTypesCharacterDefining.isEmpty()) {
+        final Iterable<CardChangedType> changedCardTypes = getChangedCardTypes();
+        if (Iterables.isEmpty(changedCardTypes)) {
             return state.getType();
         }
         // CR 506.4 attacked planeswalkers leave combat
         boolean checkCombat = state.getType().isPlaneswalker() && game.getCombat() != null && !game.getCombat().getAttackersOf(this).isEmpty();
-        CardTypeView types = state.getType().getTypeWithChanges(getChangedCardTypes());
+        CardTypeView types = state.getType().getTypeWithChanges(changedCardTypes);
         if (checkCombat && !types.isPlaneswalker()) {
             game.getCombat().removeFromCombat(this);
         }
@@ -3548,14 +3549,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final CardTypeView getOriginalType() {
         return getOriginalType(currentState);
     }
-
     public final  CardTypeView getOriginalType(CardState state) {
         return state.getType();
     }
 
     // TODO add changed type by card text
     public Iterable<CardChangedType> getChangedCardTypes() {
-
         Iterable<CardChangedType> byText = changedTypeByText == null ? ImmutableList.of() : ImmutableList.of(this.changedTypeByText);
 
         return Iterables.unmodifiableIterable(Iterables.concat(
@@ -3563,7 +3562,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 byText, // Layer 3 by Word Changes,
                 changedCardTypesCharacterDefining.values(), // Layer 4
                 changedCardTypes.values() // Layer 6
-        ));
+                ));
     }
 
     public Table<Long, Long, CardChangedType> getChangedCardTypesTable() {
@@ -4474,7 +4473,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         final List<KeywordInterface> addKeywords = Lists.newArrayList();
         final List<KeywordInterface> removeKeywords = Lists.newArrayList();
         // Text Change for intrinsic keywords
-        for(KeywordInterface kw : beforeKeywords) {
+        for (KeywordInterface kw : beforeKeywords) {
             String oldtxt = kw.getOriginal();
             final String newtxt = AbilityUtils.applyKeywordTextChangeEffects(oldtxt, this);
             if (!newtxt.equals(oldtxt)) {
