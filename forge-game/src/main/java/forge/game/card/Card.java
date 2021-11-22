@@ -3533,12 +3533,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return getType(currentState);
     }
     public final CardTypeView getType(CardState state) {
-        if (changedCardTypes.isEmpty() && changedCardTypesCharacterDefining.isEmpty() && changedTypeByText == null) {
+        final Iterable<CardChangedType> changedCardTypes = getChangedCardTypes();
+        if (Iterables.isEmpty(changedCardTypes)) {
             return state.getType();
         }
         // CR 506.4 attacked planeswalkers leave combat
         boolean checkCombat = state.getType().isPlaneswalker() && game.getCombat() != null && !game.getCombat().getAttackersOf(this).isEmpty();
-        CardTypeView types = state.getType().getTypeWithChanges(getChangedCardTypes());
+        CardTypeView types = state.getType().getTypeWithChanges(changedCardTypes);
         if (checkCombat && !types.isPlaneswalker()) {
             game.getCombat().removeFromCombat(this);
         }
