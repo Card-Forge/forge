@@ -61,7 +61,6 @@ public final class EncodeAi extends SpellAbilityAi {
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         return true;
     }
-    
 
     /*
      * (non-Javadoc)

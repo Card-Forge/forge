@@ -981,15 +981,15 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public final boolean isFirstCombat() {
-        return (nCombatsThisTurn == 1);
+        return nCombatsThisTurn == 1;
     }
 
     public final boolean isFirstUpkeep() {
-        return is(PhaseType.UPKEEP) && (nUpkeepsThisTurn == 0);
+        return is(PhaseType.UPKEEP) && nUpkeepsThisTurn == 0;
     }
 
     public final boolean isFirstUpkeepThisGame() {
-        return is(PhaseType.UPKEEP) && (nUpkeepsThisGame == 0);
+        return is(PhaseType.UPKEEP) && nUpkeepsThisGame == 0;
     }
 
     public final boolean isPreCombatMain() {
@@ -998,7 +998,7 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public final boolean beforeFirstPostCombatMainEnd() {
-        return (nMain2sThisTurn == 0);
+        return nMain2sThisTurn == 0;
     }
 
     private final static boolean DEBUG_PHASES = false;

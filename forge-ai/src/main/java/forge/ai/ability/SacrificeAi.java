@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import java.util.Collections;
 import java.util.List;
 
 import forge.ai.ComputerUtilCard;
@@ -15,6 +16,8 @@ import forge.game.card.CardPredicates;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.player.PlayerCollection;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -22,14 +25,14 @@ public class SacrificeAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        return sacrificeTgtAI(ai, sa);
+        return sacrificeTgtAI(ai, sa, false);
     }
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         // AI should only activate this during Human's turn
 
-        return sacrificeTgtAI(ai, sa);
+        return sacrificeTgtAI(ai, sa, false);
     }
 
     @Override
@@ -48,21 +51,24 @@ public class SacrificeAi extends SpellAbilityAi {
         // Eventually, we can call the trigger of ETB abilities with not
         // mandatory as part of the checks to cast something
 
-        return sacrificeTgtAI(ai, sa) || mandatory;
+        return sacrificeTgtAI(ai, sa, mandatory) || mandatory;
     }
 
-    private boolean sacrificeTgtAI(final Player ai, final SpellAbility sa) {
+    private boolean sacrificeTgtAI(final Player ai, final SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
         final boolean destroy = sa.hasParam("Destroy");
-
-        Player opp = ai.getStrongestOpponent();
+        final PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
+        final Player opp = Collections.max(targetableOpps, PlayerPredicates.compareByLife());
 
         if (sa.usesTargeting()) {
-            sa.resetTargets();
-            if (!opp.canBeTargetedBy(sa)) {
+            if (opp == null) {
                 return false;
             }
+            sa.resetTargets();
             sa.getTargets().add(opp);
+            if (mandatory) {
+                return true;
+            }
             final String valid = sa.getParam("SacValid");
             String num = sa.getParamOrDefault("Amount" , "1");
             final int amount = AbilityUtils.calculateAmount(source, num, sa);
@@ -79,7 +85,7 @@ public class SacrificeAi extends SpellAbilityAi {
 
             for (Card c : list) {
                 if (c.hasSVar("SacMe") && Integer.parseInt(c.getSVar("SacMe")) > 3) {
-                	return false;
+                    return false;
                 }
             }
             if (!destroy) {
@@ -131,7 +137,7 @@ public class SacrificeAi extends SpellAbilityAi {
 
             List<Card> humanList = null;
             try {
-                humanList = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), source, sa);
+                humanList = CardLists.getValidCards(ai.getStrongestOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), source, sa);
             } catch (NullPointerException e) {
                 return false;
             } finally {

@@ -797,7 +797,7 @@ public class PlayerControllerAi extends PlayerController {
                                 return true;
                             } else {
                                 Card rem = (Card) source.getFirstRemembered();
-                                if (!rem.isInZone(ZoneType.Battlefield)) {
+                                if (!rem.isInPlay()) {
                                     return true;
                                 }
                             }
@@ -806,7 +806,7 @@ public class PlayerControllerAi extends PlayerController {
                             if (source.getRememberedCount() > 0) {
                                 Card rem = (Card) source.getFirstRemembered();
                                 //  avoid pumping opponent creature
-                                if (!rem.isInZone(ZoneType.Battlefield) || rem.getController().isOpponentOf(source.getController())) {
+                                if (!rem.isInPlay() || rem.getController().isOpponentOf(source.getController())) {
                                     return true;
                                 }
                                 for (Card c : source.getController().getCreaturesInPlay()) {

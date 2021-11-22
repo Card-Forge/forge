@@ -33,6 +33,8 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.player.PlayerCollection;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -260,7 +262,12 @@ public class TokenAi extends SpellAbilityAi {
         if (tgt != null) {
             sa.resetTargets();
             if (tgt.canOnlyTgtOpponent()) {
-                sa.getTargets().add(ai.getWeakestOpponent());
+                PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
+                if (mandatory && targetableOpps.isEmpty()) {
+                    return false;
+                }
+                Player opp = targetableOpps.min(PlayerPredicates.compareByLife());
+                sa.getTargets().add(opp);
             } else {
                 sa.getTargets().add(ai);
             }

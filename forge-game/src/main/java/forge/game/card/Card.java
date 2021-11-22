@@ -2408,7 +2408,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         // CantBlockBy static abilities
-        if (game != null && isCreature() && isInZone(ZoneType.Battlefield)) {
+        if (game != null && isCreature() && isInPlay()) {
             for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
                 if (equals(ca)) {
                     continue;
@@ -2453,7 +2453,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             sb.append(linebreak);
             // Currently the maximum levels of all Class cards are all 3
             for (int level = 1; level <= 3; ++level) {
-                boolean disabled = level > getClassLevel() && isInZone(ZoneType.Battlefield);
+                boolean disabled = level > getClassLevel() && isInPlay();
                 // Class second part is a static ability that grants the other abilities
                 for (final StaticAbility st : state.getStaticAbilities()) {
                     if (st.isClassLevelNAbility(level) && !st.isSecondary()) {
@@ -2880,7 +2880,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         // add Facedown abilities from Original state but only if this state is face down
         // need CardStateView#getState or might crash in StackOverflow
-        if (isInZone(ZoneType.Battlefield)) {
+        if (isInPlay()) {
             if ((null == mana || false == mana) && isFaceDown() && state.getView().getState() == CardStateName.FaceDown) {
                 for (SpellAbility sa : getState(CardStateName.Original).getNonManaAbilities()) {
                     if (sa.isManifestUp() || sa.isMorphUp()) {
@@ -3009,7 +3009,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     // is this "Card" supposed to be a token?
     public final boolean isToken() {
-        if (isInZone(ZoneType.Battlefield) && hasMergedCard()) {
+        if (isInPlay() && hasMergedCard()) {
             return getTopMergedCard().token;
         }
         return token;
@@ -3027,7 +3027,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean isTokenCard() {
-        if (isInZone(ZoneType.Battlefield) && hasMergedCard()) {
+        if (isInPlay() && hasMergedCard()) {
             return getTopMergedCard().tokenCard;
         }
         return tokenCard;
@@ -4660,7 +4660,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean isPermanent() {
-        return !isImmutable() && (isInZone(ZoneType.Battlefield) || getType().isPermanent());
+        return !isImmutable() && (isInPlay() || getType().isPermanent());
     }
 
     public final boolean isSpell() {
@@ -5744,7 +5744,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         // Protection only works on the Battlefield
-        if (!isInZone(ZoneType.Battlefield)) {
+        if (!isInPlay()) {
             return false;
         }
 
@@ -5970,7 +5970,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         // keywords don't work outside battlefield
-        if (!isInZone(ZoneType.Battlefield)) {
+        if (!isInPlay()) {
             return true;
         }
 
@@ -6319,7 +6319,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public boolean isCommander() {
         if (this.getMeldedWith() != null && this.getMeldedWith().isCommander())
             return true;
-        if (isInZone(ZoneType.Battlefield) && hasMergedCard()) {
+        if (isInPlay() && hasMergedCard()) {
             for (final Card c : getMergedCards())
                 if (c.isCommander) return true;
         }
@@ -6341,7 +6341,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return this;
         if (this.getMeldedWith() != null && this.getMeldedWith().isCommander())
             return this.getMeldedWith();
-        if (isInZone(ZoneType.Battlefield) && hasMergedCard()) {
+        if (isInPlay() && hasMergedCard()) {
             for (final Card c : getMergedCards())
                 if (c.isCommander) return c;
         }

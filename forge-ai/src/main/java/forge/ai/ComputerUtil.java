@@ -1504,7 +1504,7 @@ public class ComputerUtil {
             }
 
             // Triggered abilities
-            if (c.isCreature() && c.isInZone(ZoneType.Battlefield) && CombatUtil.canAttack(c)) {
+            if (c.isCreature() && c.isInPlay() && CombatUtil.canAttack(c)) {
                 for (final Trigger t : c.getTriggers()) {
                     if (TriggerType.Attacks.equals(t.getMode())) {
                         SpellAbility sa = t.ensureAbility();
@@ -2451,7 +2451,7 @@ public class ComputerUtil {
                 return opponent ? "Feather" : "Quill";
             }
             // if source is not on the battlefield anymore, choose +1/+1 ones
-            if (!game.getCardState(source).isInZone(ZoneType.Battlefield)) {
+            if (!game.getCardState(source).isInPlay()) {
                 return opponent ? "Feather" : "Quill";
             }
             // if no hand cards, try to mill opponent
@@ -2483,7 +2483,7 @@ public class ComputerUtil {
             }
 
             // if source is not on the battlefield anymore
-            if (!game.getCardState(source).isInZone(ZoneType.Battlefield)) {
+            if (!game.getCardState(source).isInPlay()) {
                 return opponent ? "Strength" : "Numbers";
             }
 
@@ -2529,7 +2529,7 @@ public class ComputerUtil {
             }
 
             // if source is not on the battlefield anymore
-            if (!game.getCardState(source).isInZone(ZoneType.Battlefield)) {
+            if (!game.getCardState(source).isInPlay()) {
                 return opponent ? "Sprout" : "Harvest";
             }
             // TODO add Lifegain to +1/+1 counters trigger

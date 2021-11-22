@@ -149,8 +149,7 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa,
-    final boolean mandatory) {
+    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
         Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         if (sa.usesTargeting()) {
             sa.resetTargets();
