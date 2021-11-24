@@ -148,7 +148,7 @@ public class DestroyAllAi extends SpellAbilityAi {
                 for (Card att : opponent.getCreaturesInPlay()) {
                     if (ComputerUtilCombat.canAttackNextTurn(att, ai)) {
                         combat.addAttacker(att, ai);
-                        containsAttacker = containsAttacker | opplist.contains(att);
+                        containsAttacker = containsAttacker || opplist.contains(att);
                     }
                 }
                 if (!containsAttacker) {

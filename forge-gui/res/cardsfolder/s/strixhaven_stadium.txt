@@ -1,7 +1,7 @@
 Name:Strixhaven Stadium
 ManaCost:3
 Types:Artifact
-A:AB$ Mana | Cost$ T | Produced$ C | SubAbility$ DBPutCounter | SpellDescription$ Add {C}. Put a point counter on CARDNAME.
+A:AB$ Mana | Cost$ T | Produced$ C | SubAbility$ DBPutCounter | AILogic$ AtOppEOT | SpellDescription$ Add {C}. Put a point counter on CARDNAME.
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ POINT | CounterNum$ 1
 T:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ You | CombatDamage$ True | Execute$ TrigRemove | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature deals combat damage to you, remove a point counter from CARDNAME.
 SVar:TrigRemove:DB$ RemoveCounter | Defined$ Self | CounterType$ POINT | CounterNum$ 1
