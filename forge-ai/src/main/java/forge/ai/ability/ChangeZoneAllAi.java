@@ -392,12 +392,16 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                         PlayerPredicates.isTargetableBy(sa)));
 
                 if (oppList.isEmpty()) {
+                    if (mandatory && !sa.isTargetNumberValid() && sa.canTarget(ai)) {
+                        sa.resetTargets();
+                        sa.getTargets().add(ai);
+                        return true;
+                    }
                     return false;
                 }
 
                 // get the one with the most handsize
-                Player oppTarget = Collections.max(oppList,
-                        PlayerPredicates.compareByZoneSize(origin));
+                Player oppTarget = Collections.max(oppList, PlayerPredicates.compareByZoneSize(origin));
 
                 // set the target
                 if (!oppTarget.getCardsIn(ZoneType.Hand).isEmpty() || mandatory) {
@@ -434,7 +438,12 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                         PlayerPredicates.isTargetableBy(sa)));
 
                 if (oppList.isEmpty()) {
-                    return mandatory && sa.isTargetNumberValid();
+                    if (mandatory && !sa.isTargetNumberValid() && sa.canTarget(ai)) {
+                        sa.resetTargets();
+                        sa.getTargets().add(ai);
+                        return true;
+                    }
+                    return sa.isTargetNumberValid();
                 }
 
                 // get the one with the most in graveyard
@@ -443,11 +452,11 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                         AiPlayerPredicates.compareByZoneValue(sa.getParam("ChangeType"), origin, sa));
 
                 // set the target
-                if (!oppTarget.getCardsIn(ZoneType.Graveyard).isEmpty()) {
+                if (!oppTarget.getCardsIn(ZoneType.Graveyard).isEmpty() || mandatory) {
                     sa.resetTargets();
                     sa.getTargets().add(oppTarget);
                 } else {
-                    return mandatory && sa.isTargetNumberValid();
+                    return false;
                 }
             }
         } else if (origin.equals(ZoneType.Exile)) {

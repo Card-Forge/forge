@@ -108,7 +108,7 @@ public class ChooseTypeAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        boolean isCurse = sa.hasParam("IsCurse");
+        boolean isCurse = sa.isCurse();
 
         if (sa.usesTargeting()) {
             final List<Player> oppList = Lists.newArrayList(Iterables.filter(

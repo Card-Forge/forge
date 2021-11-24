@@ -139,7 +139,7 @@ public class FightAi extends SpellAbilityAi {
         List<Card> humCreatures = ai.getOpponents().getCreaturesInPlay();
         humCreatures = CardLists.getTargetableCards(humCreatures, sa);
         if (humCreatures.isEmpty()) {
-            return sa.isTargetNumberValid();
+            return false;
         }
         //assumes the triggered card belongs to the ai
         if (sa.hasParam("Defined")) {

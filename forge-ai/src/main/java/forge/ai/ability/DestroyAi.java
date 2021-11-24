@@ -325,7 +325,7 @@ public class DestroyAi extends SpellAbilityAi {
             CardCollection list = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
 
             if (list.isEmpty() || list.size() < sa.getMinTargets()) {
-                return sa.isTargetNumberValid() && mandatory;
+                return false;
             }
 
             // Try to avoid targeting creatures that are dead on board

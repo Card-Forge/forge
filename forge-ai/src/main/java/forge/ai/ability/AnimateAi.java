@@ -231,7 +231,7 @@ public class AnimateAi extends SpellAbilityAi {
             sa.resetTargets();
             List<Card> list = CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa);
             if (list.isEmpty()) {
-                return sa.isTargetNumberValid();
+                return false;
             }
             Card toAnimate = ComputerUtilCard.getWorstAI(list);
             rememberAnimatedThisTurn(aiPlayer, toAnimate);
