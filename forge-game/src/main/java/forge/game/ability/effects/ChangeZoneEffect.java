@@ -451,9 +451,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             sb.append(sa.getParam("AlternativeDestinationMessage"));
             Player alterDecider = player;
             if (sa.hasParam("AlternativeDecider")) {
-                alterDecider = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("AlternativeDecider"), sa).get(0);
+                PlayerCollection deciders = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("AlternativeDecider"), sa);
+                alterDecider = deciders.isEmpty() ? null : deciders.get(0);
             }
-            if (!alterDecider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneToAltDestination, sb.toString())) {
+            if (alterDecider != null && !alterDecider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneToAltDestination, sb.toString())) {
                 destination = ZoneType.smartValueOf(sa.getParam("DestinationAlternative"));
                 altDest = true;
             }

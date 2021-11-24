@@ -284,7 +284,7 @@ public class ControlGainAi extends SpellAbilityAi {
 
                 List<Card> list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
                 if (list.isEmpty()) {
-                    return false;
+                    return sa.isTargetNumberValid();
                 }
                 sa.getTargets().add(ComputerUtilCard.getWorstAI(list));
             }

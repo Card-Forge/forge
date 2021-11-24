@@ -1544,7 +1544,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         } else if (isPreferredTarget(ai, sa, mandatory, true)) {
             // do nothing
-        } else return isUnpreferredTarget(ai, sa, mandatory);
+        } else return isUnpreferredTarget(ai, sa, mandatory) || (sa.isTargetNumberValid() && mandatory);
 
         return true;
     }

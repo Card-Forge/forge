@@ -122,9 +122,9 @@ public class LifeSetAi extends SpellAbilityAi {
         }
 
         // special cases when amount can't be calculated without targeting first
-        if (amount == 0 && opponent != null && "TargetedPlayer$StartingLife/HalfDown".equals(source.getSVar(amountStr))) {
+        if (amount == 0 && "TargetedPlayer$StartingLife/HalfDown".equals(source.getSVar(amountStr))) {
             // e.g. Torgaar, Famine Incarnate
-            return doHalfStartingLifeLogic(ai, opponent, sa);
+            return doHalfStartingLifeLogic(ai, opponent, sa) || mandatory;
         }
 
         if (sourceName.equals("Eternity Vessel")
@@ -160,9 +160,9 @@ public class LifeSetAi extends SpellAbilityAi {
 
     private boolean doHalfStartingLifeLogic(Player ai, Player opponent, SpellAbility sa) {
         int aiAmount = ai.getStartingLife() / 2;
-        int oppAmount = opponent.getStartingLife() / 2;
+        int oppAmount = opponent == null ? 0 : opponent.getStartingLife() / 2;
         int aiLife = ai.getLife();
-        int oppLife = opponent.getLife();
+        int oppLife = opponent == null ? 0 : opponent.getLife();
 
         sa.resetTargets();
 

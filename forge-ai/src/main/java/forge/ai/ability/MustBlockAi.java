@@ -97,7 +97,7 @@ public class MustBlockAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             final List<Card> list = determineGoodBlockers(definedAttacker, ai, ai.getWeakestOpponent(), sa, true,true);
             if (list.isEmpty()) {
-                return false;
+                return sa.isTargetNumberValid();
             }
             final Card blocker = ComputerUtilCard.getBestCreatureAI(list);
             if (blocker == null) {

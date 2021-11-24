@@ -400,7 +400,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                         PlayerPredicates.compareByZoneSize(origin));
 
                 // set the target
-                if (!oppTarget.getCardsIn(ZoneType.Hand).isEmpty()) {
+                if (!oppTarget.getCardsIn(ZoneType.Hand).isEmpty() || mandatory) {
                     sa.resetTargets();
                     sa.getTargets().add(oppTarget);
                 } else {
@@ -434,7 +434,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                         PlayerPredicates.isTargetableBy(sa)));
 
                 if (oppList.isEmpty()) {
-                    return false;
+                    return mandatory && sa.isTargetNumberValid();
                 }
 
                 // get the one with the most in graveyard
@@ -447,7 +447,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                     sa.resetTargets();
                     sa.getTargets().add(oppTarget);
                 } else {
-                    return false;
+                    return mandatory && sa.isTargetNumberValid();
                 }
             }
         } else if (origin.equals(ZoneType.Exile)) {

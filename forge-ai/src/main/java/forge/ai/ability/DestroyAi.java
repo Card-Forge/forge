@@ -325,7 +325,7 @@ public class DestroyAi extends SpellAbilityAi {
             CardCollection list = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
 
             if (list.isEmpty() || list.size() < sa.getMinTargets()) {
-                return false;
+                return sa.isTargetNumberValid() && mandatory;
             }
 
             // Try to avoid targeting creatures that are dead on board
@@ -371,7 +371,7 @@ public class DestroyAi extends SpellAbilityAi {
                             break;
                         }
                     } else {
-                        break;
+                        return true;
                     }
                 } else {
                     Card c = ComputerUtilCard.getBestAI(preferred);
@@ -380,7 +380,7 @@ public class DestroyAi extends SpellAbilityAi {
                 }
             }
 
-            while (sa.canAddMoreTarget()) {
+            while (!sa.isMinTargetChosen()) {
                 if (list.isEmpty()) {
                     break;
                 } else {
