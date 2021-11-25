@@ -58,8 +58,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
             }
         }
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             // Filter AI-specific targets if provided
             if ("OnlyOwned".equals(sa.getParam("AITgts"))) {
                 if (!top.getActivatingPlayer().equals(aiPlayer)) {

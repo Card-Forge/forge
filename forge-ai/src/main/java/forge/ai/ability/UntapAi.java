@@ -125,11 +125,11 @@ public class UntapAi extends SpellAbilityAi {
     private static boolean untapPrefTargeting(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getHostCard();
 
-        Player targetController = ai;
-
+        final PlayerCollection targetController = new PlayerCollection();
         if (sa.isCurse()) {
-            // TODO search through all opponents, may need to check if different controllers allowed
-            targetController = AiAttackController.choosePreferredDefenderPlayer(ai);
+            targetController.addAll(ai.getOpponents());
+        } else {
+            targetController.add(ai);
         }
 
         CardCollection list = CardLists.getTargetableCards(targetController.getCardsIn(ZoneType.Battlefield), sa);

@@ -28,8 +28,7 @@ public class TwoPilesAi extends SpellAbilityAi {
 
         final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             sa.resetTargets();
             if (sa.canTarget(opp)) {
                 sa.getTargets().add(opp);

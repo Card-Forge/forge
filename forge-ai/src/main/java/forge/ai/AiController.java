@@ -1622,6 +1622,7 @@ public class AiController {
                     Map<String, String> params = t.getMapParams();
                     if ("ChangesZone".equals(params.get("Mode"))
                             && params.containsKey("ValidCard")
+                            && (!params.containsKey("AILogic") || !params.get("AILogic").equals("SafeToHold"))
                             && !params.get("ValidCard").contains("nonLand")
                             && ((params.get("ValidCard").contains("Land")) || (params.get("ValidCard").contains("Permanent")))
                             && "Battlefield".equals(params.get("Destination"))) {

@@ -14,8 +14,7 @@ public class ChooseEvenOddAi extends SpellAbilityAi {
         if (!sa.hasParam("AILogic")) {
             return false;
         }
-        TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             sa.resetTargets();
             Player opp = AiAttackController.choosePreferredDefenderPlayer(aiPlayer);
             if (sa.canTarget(opp)) {
@@ -34,4 +33,3 @@ public class ChooseEvenOddAi extends SpellAbilityAi {
     }
 
 }
-

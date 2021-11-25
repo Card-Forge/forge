@@ -9,7 +9,7 @@ SVar:DBShuffle:DB$ Shuffle | Defined$ ParentTarget | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TargetedPlayer$CardsInLibrary
 SVar:Y:Remembered$Valid Card.NamedCard
-SVar:Z:Number$ChosenNumber
+SVar:Z:Count$ChosenNumber
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindblaze.jpg

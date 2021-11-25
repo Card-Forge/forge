@@ -48,7 +48,6 @@ public class UnattachAllAi extends SpellAbilityAi {
         return chance;
     }
 
-
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
@@ -57,8 +56,7 @@ public class UnattachAllAi extends SpellAbilityAi {
         final Card card = sa.getHostCard();
         // Check if there are any valid targets
         List<GameObject> targets = new ArrayList<>();
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt == null) {
+        if (!sa.usesTargeting()) {
             targets = AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam("Defined"), sa);
         }
 

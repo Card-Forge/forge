@@ -1689,10 +1689,6 @@ public class AbilityUtils {
         // accept straight numbers
         if (l[0].startsWith("Number$")) {
             final String number = l[0].substring(7);
-            if (number.equals("ChosenNumber")) { // TODO remove in favor of Count ChosenNumber
-                int x = c.getChosenNumber() == null ? 0 : c.getChosenNumber();
-                return doXMath(x, expr, c, ctb);
-            }
             return doXMath(Integer.parseInt(number), expr, c, ctb);
         }
 

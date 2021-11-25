@@ -29,7 +29,7 @@ public class TapAllAi extends SpellAbilityAi {
         // or during upkeep/begin combat?
 
         final Card source = sa.getHostCard();
-        final Player opp = ai.getWeakestOpponent();
+        final Player opp = ai.getStrongestOpponent();
         final Game game = ai.getGame();
 
         if (game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN)) {
