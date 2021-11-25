@@ -171,23 +171,6 @@ public class StaticAbilityCantBeCast {
             return false;
         }
 
-        // TODO refactor this ones using ValidSA above
-        if (stAb.hasParam("NonMana") && (spellAbility.isManaAbility())) {
-            return false;
-        }
-
-        if (stAb.hasParam("NonLoyalty") && spellAbility.isPwAbility()) {
-            return false;
-        }
-
-        if (stAb.hasParam("Loyalty") && !spellAbility.isPwAbility()) {
-            return false;
-        }
-
-        if (stAb.hasParam("TapAbility") && !(spellAbility.getPayCosts().hasTapCost())) {
-            return false;
-        }
-
         if (stAb.hasParam("NonActivatorTurn") && (activator != null)
                 && activator.getGame().getPhaseHandler().isPlayerTurn(activator)) {
             return false;
