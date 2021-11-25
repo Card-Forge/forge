@@ -1871,7 +1871,7 @@ public class ComputerUtilCard {
             return oppCards;
         }
 
-        CardCollection aiCreats = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+        CardCollection aiCreats = ai.getCreaturesInPlay();
         if (temporary) {
             // Pump effects that add "CARDNAME can't attack" and similar things. Only do it if something is untapped.
             oppCards = CardLists.filter(oppCards, CardPredicates.Presets.UNTAPPED);

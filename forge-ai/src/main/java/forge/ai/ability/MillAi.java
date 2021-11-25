@@ -146,13 +146,13 @@ public class MillAi extends SpellAbilityAi {
 
             // can't target opponent?
             if (list.isEmpty()) {
-                if (mandatory && sa.canTarget(ai)) {
+                if (mandatory && !sa.isTargetNumberValid() && sa.canTarget(ai)) {
                     sa.getTargets().add(ai);
                     return true;
                 }
                 // TODO Obscure case when you know what your top card is so you might?
                 // want to mill yourself here
-                return false;
+                return sa.isTargetNumberValid();
             }
 
             // select Player which would cause the most damage

@@ -66,7 +66,7 @@ public class FightAi extends SpellAbilityAi {
                 }
             }
             if (fighter1List.isEmpty()) {
-                return true; // FIXME: shouldn't this return "false" if nothing found?
+                return false;
             }
             Card fighter1 = fighter1List.get(0);
             for (Card humanCreature : humCreatures) {

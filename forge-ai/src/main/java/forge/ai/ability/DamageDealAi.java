@@ -448,7 +448,8 @@ public class DamageDealAi extends DamageAiBase {
 
         // We can hurt a planeswalker, so rank the one which is the best target
         if (!hPlay.isEmpty() && pl.isOpponentOf(ai) && activator.equals(ai)) {
-            return ComputerUtilCard.getBestPlaneswalkerToDamage(hPlay);
+            Card pw = ComputerUtilCard.getBestPlaneswalkerToDamage(hPlay);
+            return pw == null && mandatory ? hPlay.get(0) : pw;
         }
 
         return null;
@@ -713,7 +714,7 @@ public class DamageDealAi extends DamageAiBase {
                     }
                 }
 
-                if (freePing && sa.canTarget(enemy) && (!avoidTargetP(ai, sa))) {
+                if (freePing && sa.canTarget(enemy) && !avoidTargetP(ai, sa)) {
                     tcs.add(enemy);
                     if (divided) {
                         sa.addDividedAllocation(enemy, dmg);

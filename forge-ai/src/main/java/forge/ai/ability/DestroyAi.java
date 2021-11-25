@@ -371,7 +371,7 @@ public class DestroyAi extends SpellAbilityAi {
                             break;
                         }
                     } else {
-                        break;
+                        return true;
                     }
                 } else {
                     Card c = ComputerUtilCard.getBestAI(preferred);
@@ -380,7 +380,7 @@ public class DestroyAi extends SpellAbilityAi {
                 }
             }
 
-            while (sa.canAddMoreTarget()) {
+            while (!sa.isMinTargetChosen()) {
                 if (list.isEmpty()) {
                     break;
                 } else {
