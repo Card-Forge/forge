@@ -52,8 +52,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
             }
         }
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             sa.resetTargets();
             Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
             if (sa.canTarget(opp)) {

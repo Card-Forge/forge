@@ -44,8 +44,7 @@ public class ChooseNumberAi extends SpellAbilityAi {
             return ownCreatureCount > oppMaxCreatureCount + 2 || ownCreatureCount < Math.min(oppMaxCreatureCount, maxChoiceLimit);
         }
 
-        TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             sa.resetTargets();
             Player opp = AiAttackController.choosePreferredDefenderPlayer(aiPlayer);
             if (sa.canTarget(opp)) {

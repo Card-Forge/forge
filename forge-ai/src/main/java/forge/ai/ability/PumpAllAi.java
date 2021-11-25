@@ -57,19 +57,20 @@ public class PumpAllAi extends PumpAiBase {
             }
         }
         
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Player opp = ai.getStrongestOpponent();
 
-        if (tgt != null && sa.canTarget(opp) && sa.isCurse()) {
-            sa.resetTargets();
-            sa.getTargets().add(opp);
-            return true;
-        }
-        
-        if (tgt != null && sa.canTarget(ai) && !sa.isCurse()) {
-            sa.resetTargets();
-            sa.getTargets().add(ai);
-            return true;
+        if (sa.usesTargeting()) {
+            if (sa.canTarget(opp) && sa.isCurse()) {
+                sa.resetTargets();
+                sa.getTargets().add(opp);
+                return true;
+            }
+
+            if (sa.canTarget(ai) && !sa.isCurse()) {
+                sa.resetTargets();
+                sa.getTargets().add(ai);
+                return true;
+            }
         }
 
         final int power = AbilityUtils.calculateAmount(source, sa.getParam("NumAtt"), sa);
