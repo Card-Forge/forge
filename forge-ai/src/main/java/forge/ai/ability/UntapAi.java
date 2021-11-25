@@ -6,7 +6,6 @@ import java.util.Map;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
-import forge.ai.AiAttackController;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
