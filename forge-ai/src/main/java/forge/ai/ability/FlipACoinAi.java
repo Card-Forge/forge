@@ -54,7 +54,7 @@ public class FlipACoinAi extends SpellAbilityAi {
             	return false;
             }
         }
-        return true;
+        return sa.isTargetNumberValid();
     }
 
     @Override

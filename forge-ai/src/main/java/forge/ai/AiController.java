@@ -901,7 +901,7 @@ public class AiController {
             return canPlayFromEffectAI((SpellPermanent)sa, false, true);
         }
         if (sa.usesTargeting()) {
-            if (!sa.isTargetNumberValid() && !sa.getTargetRestrictions().hasCandidates(sa)) {
+            if (!sa.isTargetNumberValid() && sa.getTargetRestrictions().getNumCandidates(sa, true) == 0) {
                 return AiPlayDecision.TargetingFailed;
             }
             if (!StaticAbilityMustTarget.meetsMustTargetRestriction(sa)) {
