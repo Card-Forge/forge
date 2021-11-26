@@ -6,7 +6,6 @@ import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.util.MyRandom;
 
 public class ChooseNumberAi extends SpellAbilityAi {
@@ -44,8 +43,7 @@ public class ChooseNumberAi extends SpellAbilityAi {
             return ownCreatureCount > oppMaxCreatureCount + 2 || ownCreatureCount < Math.min(oppMaxCreatureCount, maxChoiceLimit);
         }
 
-        TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             sa.resetTargets();
             Player opp = AiAttackController.choosePreferredDefenderPlayer(aiPlayer);
             if (sa.canTarget(opp)) {

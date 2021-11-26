@@ -442,7 +442,7 @@ public class CountersPutAi extends CountersAi {
             }
         }
 
-        if ("AlwaysAtOppEOT".equals(logic)) {
+        if ("AtOppEOT".equals(logic)) {
             if (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai)) {
                 return true;
             }

@@ -23,7 +23,6 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
 public class PumpAllAi extends PumpAiBase {
@@ -57,19 +56,20 @@ public class PumpAllAi extends PumpAiBase {
             }
         }
         
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Player opp = ai.getStrongestOpponent();
 
-        if (tgt != null && sa.canTarget(opp) && sa.isCurse()) {
-            sa.resetTargets();
-            sa.getTargets().add(opp);
-            return true;
-        }
-        
-        if (tgt != null && sa.canTarget(ai) && !sa.isCurse()) {
-            sa.resetTargets();
-            sa.getTargets().add(ai);
-            return true;
+        if (sa.usesTargeting()) {
+            if (sa.canTarget(opp) && sa.isCurse()) {
+                sa.resetTargets();
+                sa.getTargets().add(opp);
+                return true;
+            }
+
+            if (sa.canTarget(ai) && !sa.isCurse()) {
+                sa.resetTargets();
+                sa.getTargets().add(ai);
+                return true;
+            }
         }
 
         final int power = AbilityUtils.calculateAmount(source, sa.getParam("NumAtt"), sa);

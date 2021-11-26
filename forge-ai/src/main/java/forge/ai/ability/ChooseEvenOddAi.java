@@ -4,7 +4,6 @@ import forge.ai.AiAttackController;
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.util.MyRandom;
 
 public class ChooseEvenOddAi extends SpellAbilityAi {
@@ -14,8 +13,7 @@ public class ChooseEvenOddAi extends SpellAbilityAi {
         if (!sa.hasParam("AILogic")) {
             return false;
         }
-        TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             sa.resetTargets();
             Player opp = AiAttackController.choosePreferredDefenderPlayer(aiPlayer);
             if (sa.canTarget(opp)) {
@@ -34,4 +32,3 @@ public class ChooseEvenOddAi extends SpellAbilityAi {
     }
 
 }
-

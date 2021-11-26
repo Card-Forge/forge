@@ -162,21 +162,21 @@ public abstract class SpellAbilityAi {
      */
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
         if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false;   // prevent infinite loop
+            return false; // prevent infinite loop
         }
         return MyRandom.getRandom().nextFloat() < .8f; // random success
     }
     
     public final boolean doTriggerAI(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
+        // this evaluation order is currently intentional as it does more stuff that helps avoiding some crashes
         if (!ComputerUtilCost.canPayCost(sa, aiPlayer) && !mandatory) {
             return false;
         }
 
         // a mandatory SpellAbility with targeting but without candidates,
         // does not need to go any deeper
-        if (sa.usesTargeting() && mandatory && !sa.isTargetNumberValid()
-                && !sa.getTargetRestrictions().hasCandidates(sa)) {
-            return false;
+        if (sa.usesTargeting() && mandatory && sa.getTargetRestrictions().getNumCandidates(sa, true) == 0) {
+            return sa.isTargetNumberValid();
         }
 
         return doTriggerNoCostWithSubs(aiPlayer, sa, mandatory);

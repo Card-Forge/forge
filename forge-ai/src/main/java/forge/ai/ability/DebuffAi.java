@@ -91,8 +91,7 @@ public class DebuffAi extends SpellAbilityAi {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         if (!sa.usesTargeting()) {
-            // TODO - copied from AF_Pump.pumpDrawbackAI() - what should be
-            // here?
+            // TODO - copied from AF_Pump.pumpDrawbackAI() - what should be here?
         } else {
             return debuffTgtAI(ai, sa, sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : null, false);
         }

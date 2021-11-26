@@ -15,6 +15,7 @@ import forge.ai.SpellAbilityAi;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
+import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -79,6 +80,8 @@ public class ManaEffectAi extends SpellAbilityAi {
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph, String logic) {
         if (logic.startsWith("ManaRitual")) {
              return ph.is(PhaseType.MAIN2, ai) || ph.is(PhaseType.MAIN1, ai);
+        } else if ("AtOppEOT".equals(logic)) {
+            return !ai.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.manaBurn) && ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai;
         }
         return super.checkPhaseRestrictions(ai, sa, ph, logic);
     }

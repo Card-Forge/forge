@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import java.util.Collections;
 import java.util.List;
 
 import forge.ai.ComputerUtilCard;
@@ -57,13 +56,13 @@ public class SacrificeAi extends SpellAbilityAi {
     private boolean sacrificeTgtAI(final Player ai, final SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
         final boolean destroy = sa.hasParam("Destroy");
-        final PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
-        final Player opp = Collections.max(targetableOpps, PlayerPredicates.compareByLife());
 
         if (sa.usesTargeting()) {
-            if (opp == null) {
+            final PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
+            if (targetableOpps.isEmpty()) {
                 return false;
             }
+            final Player opp = targetableOpps.max(PlayerPredicates.compareByLife());
             sa.resetTargets();
             sa.getTargets().add(opp);
             if (mandatory) {

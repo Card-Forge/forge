@@ -76,8 +76,8 @@ public abstract class DamageAiBase extends SpellAbilityAi {
         Card hostcard = sa.getHostCard();
         for (Trigger trig : hostcard.getTriggers()) {
             if (trig.getMode() == TriggerType.DamageDone) {
-                if (("Opponent".equals(trig.getParam("ValidTarget")))
-                        && (!"True".equals(trig.getParam("CombatDamage")))) {
+                if ("Opponent".equals(trig.getParam("ValidTarget"))
+                        && !"True".equals(trig.getParam("CombatDamage"))) {
                     return true;
                 }
             }

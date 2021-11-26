@@ -26,7 +26,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
@@ -52,8 +51,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
             }
         }
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             sa.resetTargets();
             Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
             if (sa.canTarget(opp)) {

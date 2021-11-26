@@ -63,7 +63,7 @@ public class PhasesAi extends SpellAbilityAi {
             return true;
         } else if (mandatory) {
             // not enough preferred targets, but mandatory so keep going:
-            return phasesUnpreferredTargeting(aiPlayer.getGame(), sa, mandatory);
+            return sa.isTargetNumberValid() || phasesUnpreferredTargeting(aiPlayer.getGame(), sa, mandatory);
         }
 
         return false;

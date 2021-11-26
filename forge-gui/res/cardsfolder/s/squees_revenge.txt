@@ -10,7 +10,7 @@ SVar:IncrementLoss:DB$ StoreSVar | SVar$ Loss | Type$ CountSVar | Expression$ Lo
 SVar:SetFilpsDone:DB$ StoreSVar | SVar$ FlipsDone | Type$ CountSVar | Expression$ TimesToFlip
 # Draw Cards
 SVar:DrawIfWin:DB$ Draw | Defined$ You | NumCards$ CardsToDraw | ConditionCheckSVar$ Loss | ConditionSVarCompare$ EQ0
-SVar:TimesToFlip:Number$ChosenNumber
+SVar:TimesToFlip:Count$ChosenNumber
 SVar:FlipsDone:Number$0
 SVar:Loss:Number$0
 SVar:CardsToDraw:Count$ChosenNumber/Times.2

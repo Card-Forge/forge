@@ -10,7 +10,6 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollection;
 
@@ -28,8 +27,7 @@ public class TwoPilesAi extends SpellAbilityAi {
 
         final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             sa.resetTargets();
             if (sa.canTarget(opp)) {
                 sa.getTargets().add(opp);

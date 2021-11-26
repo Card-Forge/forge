@@ -1699,19 +1699,21 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 if (card.isToken()) {
                     return false;
                 }
-
                 if (card.isCreature() && ComputerUtilCard.isUselessCreature(decider, card)) {
                     return true;
-                } else if (card.isEquipped()) {
+                }
+                if (card.isEquipped()) {
                     return false;
-                } else if (card.isEnchanted()) {
+                }
+                if (card.isEnchanted()) {
                     for (Card enc : card.getEnchantedBy()) {
                         if (enc.getOwner().isOpponentOf(decider)) {
                             return true;
                         }
                     }
                     return false;
-                } else if (card.hasCounters()) {
+                }
+                if (card.hasCounters()) {
                     if (card.isPlaneswalker()) {
                         int maxLoyaltyToConsider = 2;
                         int loyaltyDiff = 2;

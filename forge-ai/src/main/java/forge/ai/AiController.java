@@ -901,7 +901,7 @@ public class AiController {
             return canPlayFromEffectAI((SpellPermanent)sa, false, true);
         }
         if (sa.usesTargeting()) {
-            if (!sa.isTargetNumberValid() && !sa.getTargetRestrictions().hasCandidates(sa)) {
+            if (!sa.isTargetNumberValid() && sa.getTargetRestrictions().getNumCandidates(sa, true) == 0) {
                 return AiPlayDecision.TargetingFailed;
             }
             if (!StaticAbilityMustTarget.meetsMustTargetRestriction(sa)) {
@@ -1622,6 +1622,7 @@ public class AiController {
                     Map<String, String> params = t.getMapParams();
                     if ("ChangesZone".equals(params.get("Mode"))
                             && params.containsKey("ValidCard")
+                            && (!params.containsKey("AILogic") || !params.get("AILogic").equals("SafeToHold"))
                             && !params.get("ValidCard").contains("nonLand")
                             && ((params.get("ValidCard").contains("Land")) || (params.get("ValidCard").contains("Permanent")))
                             && "Battlefield".equals(params.get("Destination"))) {

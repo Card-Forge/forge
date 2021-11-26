@@ -27,7 +27,6 @@ import forge.game.cost.CostSacrifice;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
@@ -63,8 +62,7 @@ public class CounterAi extends SpellAbilityAi {
             }
         }
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             final SpellAbility topSA = ComputerUtilAbility.getTopSpellAbilityOnStack(game, sa);
             if (!CardFactoryUtil.isCounterableBy(topSA.getHostCard(), sa) || topSA.getActivatingPlayer() == ai
                     || ai.getAllies().contains(topSA.getActivatingPlayer())) {
@@ -246,10 +244,9 @@ public class CounterAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Game game = ai.getGame();
 
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             if (game.getStack().isEmpty()) {
                 return false;
             }

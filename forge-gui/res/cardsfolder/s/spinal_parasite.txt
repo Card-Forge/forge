@@ -4,8 +4,6 @@ Types:Artifact Creature Insect
 PT:-1/-1
 K:Sunburst
 A:AB$ RemoveCounter | Cost$ SubCounter<2/P1P1> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | CounterType$ Any | CounterNum$ 1 | SpellDescription$ Remove a counter from target permanent.
-#TODO: For some reason the AI removes beneficial counters from its own permanents with this card.
-AI:RemoveDeck:All
 AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:Z GE3
 SVar:NoZeroToughnessAI:True
