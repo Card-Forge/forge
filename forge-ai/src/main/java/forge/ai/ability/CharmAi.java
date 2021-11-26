@@ -69,6 +69,9 @@ public class CharmAi extends SpellAbilityAi {
             if (timingRight) {
                 // Set minimum choices for triggers where chooseMultipleOptionsAi() returns null
                 chosenList = chooseOptionsAi(choices, ai, true, num, min, sa.hasParam("CanRepeatModes"));
+                if (chosenList.isEmpty() && min != 0) {
+                    return false;
+                }
             } else {
                 return false;
             }
