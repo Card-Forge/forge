@@ -56,11 +56,7 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("RememberObjects")) {
             for (final String rem : sa.getParam("RememberObjects").split(",")) {
-                for (final Object o : AbilityUtils.getDefinedObjects(sa.getHostCard(), rem, sa)) {
-                    if (o instanceof SpellAbility) {
-                        // "RememberObjects$ Remembered" don't remember spellability 
-                        continue;
-                    }
+                for (final Object o : AbilityUtils.getDefinedEntities(sa.getHostCard(), rem, sa)) {
                     delTrig.addRemembered(o);
                 }
             }

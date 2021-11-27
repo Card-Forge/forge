@@ -855,11 +855,7 @@ public final class StaticAbilityContinuous {
                         if (params.containsKey("TriggerRememberDefined")) {
                             String triggerRemembered = (params.get("TriggerRememberDefined"));
                             for (final String rem : triggerRemembered.split(",")) {
-                                for (final Object o : AbilityUtils.getDefinedObjects(hostCard, rem, stAb)) {
-                                    if (o instanceof SpellAbility) {
-                                        // "RememberObjects$ Remembered" don't remember spellability
-                                        continue;
-                                    }
+                                for (final Object o : AbilityUtils.getDefinedEntities(hostCard, rem, stAb)) {
                                     actualTrigger.addRemembered(o);
                                 }
                             }

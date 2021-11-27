@@ -81,7 +81,7 @@ public class EffectEffect extends SpellAbilityEffect {
         if (sa.hasParam("RememberObjects")) {
             rememberList = new FCollection<>();
             for (final String rem : sa.getParam("RememberObjects").split(",")) {
-                rememberList.addAll(AbilityUtils.getDefinedObjects(hostCard, rem, sa));
+                rememberList.addAll(AbilityUtils.getDefinedEntities(hostCard, rem, sa));
             }
 
             if (sa.hasParam("ForgetCounter")) {
