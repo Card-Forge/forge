@@ -272,18 +272,33 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         float x = PADDING;
         float y = startY + PADDING;
         float fieldHeight = cbPlayerCount.getHeight();
-        lblVariants.setBounds(x, y, lblVariants.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
-        x += lblVariants.getWidth();
-        cbVariants.setBounds(x, y, width - (x + lblGamesInMatch.getAutoSizeBounds().width + PADDING/2
-                + lblPlayers.getAutoSizeBounds().width + (Utils.AVG_FINGER_WIDTH + PADDING)*2), fieldHeight);
-        x += cbVariants.getWidth();
-        lblPlayers.setBounds(x, y, lblPlayers.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
-        x += lblPlayers.getWidth();
-        cbPlayerCount.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
-        x += cbPlayerCount.getWidth() + PADDING;
-        lblGamesInMatch.setBounds(x, y, lblGamesInMatch.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
-        x += lblGamesInMatch.getWidth();
-        cbGamesInMatch.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
+        if (Forge.isLandscapeMode()) {
+            lblVariants.setBounds(x, y, lblVariants.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
+            x += lblVariants.getWidth();
+            cbVariants.setBounds(x, y, width - (x + lblGamesInMatch.getAutoSizeBounds().width + PADDING/2
+                    + lblPlayers.getAutoSizeBounds().width + (Utils.AVG_FINGER_WIDTH + PADDING)*2), fieldHeight);
+            x += cbVariants.getWidth();
+            lblPlayers.setBounds(x, y, lblPlayers.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
+            x += lblPlayers.getWidth();
+            cbPlayerCount.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
+            x += cbPlayerCount.getWidth() + PADDING;
+            lblGamesInMatch.setBounds(x, y, lblGamesInMatch.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
+            x += lblGamesInMatch.getWidth();
+            cbGamesInMatch.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
+        } else {
+            lblVariants.setBounds(x, y, lblVariants.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
+            x += lblVariants.getWidth();
+            cbVariants.setBounds(x, y, width - x - PADDING, fieldHeight);
+            x = PADDING;
+            y += cbVariants.getHeight() + PADDING;
+            lblPlayers.setBounds(x, y, lblPlayers.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
+            x += lblPlayers.getWidth();
+            cbPlayerCount.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
+            x += cbPlayerCount.getWidth() + PADDING;
+            lblGamesInMatch.setBounds(x, y, lblGamesInMatch.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
+            x += lblGamesInMatch.getWidth();
+            cbGamesInMatch.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
+        }
         y += cbPlayerCount.getHeight() + PADDING;
         playersScroll.setBounds(0, y, width, height - y);
     }
