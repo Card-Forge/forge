@@ -31,7 +31,7 @@ public class GameSimulator {
     public GameSimulator(SimulationController controller, Game origGame, Player origAiPlayer, PhaseType advanceToPhase) {
         this.controller = controller;
         copier = new GameCopier(origGame);
-        simGame = copier.makeCopy(advanceToPhase);
+        simGame = copier.makeCopy(advanceToPhase, origAiPlayer);
 
         aiPlayer = (Player) copier.find(origAiPlayer);
         eval = new GameStateEvaluator();
@@ -117,7 +117,7 @@ public class GameSimulator {
         if (debugPrint) {
             System.out.println(str);
         }
-        if (debugLines!=null) {
+        if (debugLines != null) {
             debugLines.add(str);
         }
     }
@@ -230,7 +230,7 @@ public class GameSimulator {
         return score;
     }
 
-    private static void resolveStack(final Game game, final Player opponent) {
+    public static void resolveStack(final Game game, final Player opponent) {
         // TODO: This needs to set an AI controller for all opponents, in case of multiplayer.
         opponent.runWithController(new Runnable() {
             @Override

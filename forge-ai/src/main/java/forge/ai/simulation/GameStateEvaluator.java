@@ -24,7 +24,7 @@ public class GameStateEvaluator {
         public GameCopier copier;
         public Game gameCopy;
     }
-    private CombatSimResult simulateUpcomingCombatThisTurn(final Game evalGame) {
+    private CombatSimResult simulateUpcomingCombatThisTurn(final Game evalGame, final Player aiPlayer) {
         PhaseType phase = evalGame.getPhaseHandler().getPhase();
         if (phase.isAfter(PhaseType.COMBAT_DAMAGE) || evalGame.isGameOver()) {
             return null;
@@ -38,7 +38,12 @@ public class GameStateEvaluator {
         }
         GameCopier copier = new GameCopier(evalGame);
         Game gameCopy = copier.makeCopy();
-        gameCopy.getPhaseHandler().devAdvanceToPhase(PhaseType.COMBAT_DAMAGE);
+        gameCopy.getPhaseHandler().devAdvanceToPhase(PhaseType.COMBAT_DAMAGE, new Runnable() {
+            @Override
+            public void run() {
+                GameSimulator.resolveStack(gameCopy, aiPlayer.getWeakestOpponent());
+            }
+        });
         CombatSimResult result = new CombatSimResult();
         result.copier = copier;
         result.gameCopy = gameCopy;
@@ -67,7 +72,7 @@ public class GameStateEvaluator {
             return getScoreForGameOver(game, aiPlayer);
         }
         
-        CombatSimResult result = simulateUpcomingCombatThisTurn(game);
+        CombatSimResult result = simulateUpcomingCombatThisTurn(game, aiPlayer);
         if (result != null) {
             Player aiPlayerCopy = (Player) result.copier.find(aiPlayer);
             if (result.gameCopy.isGameOver()) {

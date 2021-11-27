@@ -54,19 +54,19 @@ public class GameCopier {
     public GameCopier(Game origGame) {
         this.origGame = origGame;
     }
-    
+
     public Game getOriginalGame() {
         return origGame;
     }
-    
+
     public Game getCopiedGame() {
         return gameObjectMap.getGame();
     }
-    
+
     public Game makeCopy() {
-        return makeCopy(null);
+        return makeCopy(null, null);
     }
-    public Game makeCopy(PhaseType advanceToPhase) {
+    public Game makeCopy(PhaseType advanceToPhase, Player aiPlayer) {
         List<RegisteredPlayer> origPlayers = origGame.getMatch().getPlayers();
         List<RegisteredPlayer> newPlayers = new ArrayList<>();
         for (RegisteredPlayer p : origPlayers) {
@@ -99,7 +99,7 @@ public class GameCopier {
         for (Player p : newGame.getPlayers()) {
             ((PlayerZoneBattlefield) p.getZone(ZoneType.Battlefield)).setTriggers(false);
         }
-        
+
         copyGameState(newGame);
 
         for (Player p : newGame.getPlayers()) {
@@ -149,9 +149,14 @@ public class GameCopier {
         }
 
         if (advanceToPhase != null) {
-            newGame.getPhaseHandler().devAdvanceToPhase(advanceToPhase);
+            newGame.getPhaseHandler().devAdvanceToPhase(advanceToPhase, new Runnable() {
+                @Override
+                public void run() {
+                    GameSimulator.resolveStack(newGame, aiPlayer.getWeakestOpponent());
+                }
+            });
         }
-        
+
         return newGame;
     }
 
@@ -358,7 +363,7 @@ public class GameCopier {
             zoneOwner.getZone(zone).add(newCard);
         }
     }
-    
+
     private static SpellAbility findSAInCard(SpellAbility sa, Card c) {
         String saDesc = sa.getDescription();
         for (SpellAbility cardSa : c.getAllSpellAbilities()) {
@@ -386,7 +391,7 @@ public class GameCopier {
             return find(o);
         }
     }
- 
+
     public GameObject find(GameObject o) {
         GameObject result = cardMap.get(o);
         if (result != null)
