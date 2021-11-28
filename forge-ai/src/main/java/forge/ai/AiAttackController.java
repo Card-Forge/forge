@@ -358,7 +358,7 @@ public class AiAttackController {
         opponentsAttackers = CardLists.filter(opponentsAttackers, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return ComputerUtilCombat.canAttackNextTurn(c) && c.getNetCombatDamage() > 0;
+                return c.getNetCombatDamage() > 0 && ComputerUtilCombat.canAttackNextTurn(c);
             }
         });
         for (final Card c : this.myList) {
@@ -422,7 +422,7 @@ public class AiAttackController {
                 int humanBasePower = ComputerUtilCombat.getAttack(this.oppList.get(0)) + humanExaltedBonus;
                 if (finestHour) {
                     // For Finest Hour, one creature could attack and get the bonus TWICE
-                    humanBasePower = humanBasePower + humanExaltedBonus;
+                    humanBasePower += humanExaltedBonus;
                 }
                 final int totalExaltedAttack = opp.isCardInPlay("Rafiq of the Many") ? 2 * humanBasePower
                         : humanBasePower;
@@ -470,7 +470,7 @@ public class AiAttackController {
         if (totalAttack > 0 && ai.getLife() <= totalAttack && !ai.cantLoseForZeroOrLessLife()) {
             return true;
         }
-        return ai.canReceiveCounters(CounterEnumType.POISON) && ai.getPoisonCounters() + totalPoison > 9;
+        return ai.getPoisonCounters() + totalPoison > 9 && ai.canReceiveCounters(CounterEnumType.POISON);
     }
 
     private boolean doAssault(final Player ai) {
@@ -879,7 +879,7 @@ public class AiAttackController {
 
         for (final Card pCard : categorizedOppList) {
             // if the creature can attack next turn add it to counter attackers list
-            if (ComputerUtilCombat.canAttackNextTurn(pCard) && pCard.getNetCombatDamage() > 0) {
+            if (pCard.getNetCombatDamage() > 0 && ComputerUtilCombat.canAttackNextTurn(pCard)) {
                 nextTurnAttackers.add(pCard);
                 candidateCounterAttackDamage += pCard.getNetCombatDamage();
                 humanForces += 1; // player forces they might use to attack
@@ -1364,6 +1364,11 @@ public class AiAttackController {
                 continue;
             }
 
+            if (!shouldExert) {
+                // TODO Improve when the AI wants to use Exert powers
+                shouldExert = aggression > 3;
+            }
+
             // A specific AI condition for Exert: if specified on the card, the AI will always
             // exert creatures that meet this condition
             if (!shouldExert && c.hasSVar("AIExertCondition")) {
@@ -1379,11 +1384,6 @@ public class AiAttackController {
                         shouldExert = true;
                     }
                 }
-            }
-
-            if (!shouldExert) {
-                // TODO Improve when the AI wants to use Exert powers
-                shouldExert = aggression > 3;
             }
 
             if (shouldExert) {

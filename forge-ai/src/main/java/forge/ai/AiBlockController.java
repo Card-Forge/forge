@@ -854,7 +854,7 @@ public class AiBlockController {
     }
 
     private void makeChumpBlocksToSavePW(Combat combat) {
-        if (ComputerUtilCombat.lifeInDanger(ai, combat) || ai.getLife() <= ai.getStartingLife() / 5) {
+        if (ai.getLife() <= ai.getStartingLife() / 5 || ComputerUtilCombat.lifeInDanger(ai, combat)) {
             // most likely not worth trying to protect planeswalkers when at threateningly low life or in
             // dangerous combat which threatens lethal or severe damage to face
             return;
@@ -1145,7 +1145,7 @@ public class AiBlockController {
 
         // check to see if it's possible to defend a Planeswalker under attack with a chump block,
         // unless life is low enough to be more worried about saving preserving the life total
-        if (ai.getController().isAI() && !ComputerUtilCombat.lifeInDanger(ai, combat)) {
+        if (ai.getController().isAI()) {
             makeChumpBlocksToSavePW(combat);
         }
 
@@ -1206,7 +1206,7 @@ public class AiBlockController {
         final CardCollection result = new CardCollection();
         boolean newBlockerIsAdded = false;
         // The new blocker comes right after this one
-        final Card newBlockerRightAfter = (newBlockerIndex == 0 ? null : allBlockers.get(newBlockerIndex - 1));
+        final Card newBlockerRightAfter = newBlockerIndex == 0 ? null : allBlockers.get(newBlockerIndex - 1);
         if (newBlockerRightAfter == null
                 && damage >= ComputerUtilCombat.getEnoughDamageToKill(blocker, damage, attacker, true)) {
             result.add(blocker);

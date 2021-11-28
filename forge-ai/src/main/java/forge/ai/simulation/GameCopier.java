@@ -150,6 +150,8 @@ public class GameCopier {
         if (GameSimulator.COPY_STACK)
             copyStack(origGame, newGame, gameObjectMap);
 
+        // TODO update thisTurnCast
+
         if (advanceToPhase != null) {
             newGame.getPhaseHandler().devAdvanceToPhase(advanceToPhase, new Runnable() {
                 @Override
