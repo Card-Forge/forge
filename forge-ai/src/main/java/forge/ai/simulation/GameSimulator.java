@@ -74,6 +74,8 @@ public class GameSimulator {
             eval.getScoreForGameState(origGame, origAiPlayer);
             // Print debug info.
             printDiff(origLines, simLines);
+            // make sure it gets printed
+            System.out.flush();
             throw new RuntimeException("Game copy error. See diff output above for details.");
         }
         eval.setDebugging(false);
@@ -83,7 +85,7 @@ public class GameSimulator {
         this.interceptor = interceptor;
         ((PlayerControllerAi) aiPlayer.getController()).getAi().getSimulationPicker().setInterceptor(interceptor);
     }
- 
+
     private void printDiff(List<String> lines1, List<String> lines2) {
         int i = 0;
         int j = 0;
@@ -121,7 +123,7 @@ public class GameSimulator {
             debugLines.add(str);
         }
     }
-    
+
     private SpellAbility findSaInSimGame(SpellAbility sa) {
         // is already an ability from sim game
         if (sa.getHostCard().getGame().equals(this.simGame)) {
@@ -232,6 +234,8 @@ public class GameSimulator {
 
     public static void resolveStack(final Game game, final Player opponent) {
         // TODO: This needs to set an AI controller for all opponents, in case of multiplayer.
+        PlayerControllerAi sim = new PlayerControllerAi(game, opponent, opponent.getLobbyPlayer());
+        sim.setUseSimulation(true);
         opponent.runWithController(new Runnable() {
             @Override
             public void run() {
@@ -259,9 +263,9 @@ public class GameSimulator {
                     // Continue until stack is empty.
                 }
             }
-        }, new PlayerControllerAi(game, opponent, opponent.getLobbyPlayer()));
+        }, sim);
     }
-    
+
     public Game getSimulatedGameState() {
         return simGame;
     }
@@ -269,7 +273,7 @@ public class GameSimulator {
     public Score getScoreForOrigGame() {
         return origScore;
     }
-    
+
     public GameCopier getGameCopier() {
         return copier;
     }

@@ -101,7 +101,7 @@ public class SpellAbilityPicker {
     }
 
     public SpellAbility chooseSpellAbilityToPlay(SimulationController controller) {
-        printOutput = (controller == null);
+        printOutput = controller == null;
 
         // Pass if top of stack is owned by me.
         if (!game.getStack().isEmpty() && game.getStack().peekAbility().getActivatingPlayer().equals(player)) {

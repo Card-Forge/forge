@@ -8,8 +8,10 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 import forge.LobbyPlayer;
+import forge.ai.AIOption;
 import forge.ai.LobbyPlayerAi;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -190,7 +192,8 @@ public class GameCopier {
         RegisteredPlayer clone = new RegisteredPlayer(p.getDeck());
         LobbyPlayer lp = p.getPlayer();
         if (!(lp instanceof LobbyPlayerAi)) {
-            lp = new LobbyPlayerAi(p.getPlayer().getName(), null);
+            // TODO should probably also override them if they're normal AI
+            lp = new LobbyPlayerAi(p.getPlayer().getName(), Sets.newHashSet(AIOption.USE_SIMULATION));
         }
         clone.setPlayer(lp);
         return clone;
@@ -294,6 +297,8 @@ public class GameCopier {
             newCard.setChangedCardTypesCharacterDefining(c.getChangedCardTypesCharacterDefiningTable());
             newCard.setChangedCardKeywords(c.getChangedCardKeywords());
             newCard.setChangedCardNames(c.getChangedCardNames());
+
+            newCard.updateKeywordsCache(newCard.getCurrentState());
 
             // TODO: Is this correct? Does it not duplicate keywords from enchantments and such?
             //for (KeywordInterface kw : c.getHiddenExtrinsicKeywords())
