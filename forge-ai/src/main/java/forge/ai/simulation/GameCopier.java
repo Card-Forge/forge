@@ -27,7 +27,6 @@ import forge.game.card.CardFactory;
 import forge.game.card.CounterType;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
-import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -86,8 +85,7 @@ public class GameCopier {
             newPlayer.setActivateLoyaltyAbilityThisTurn(origPlayer.getActivateLoyaltyAbilityThisTurn());
             for (int j = 0; j < origPlayer.getSpellsCastThisTurn(); j++)
                 newPlayer.addSpellCastThisTurn();
-            for (int j = 0; j < origPlayer.getLandsPlayedThisTurn(); j++)
-                newPlayer.addLandPlayedThisTurn();
+            newPlayer.setLandsPlayedThisTurn(origPlayer.getLandsPlayedThisTurn());
             newPlayer.setCounters(Maps.newHashMap(origPlayer.getCounters()));
             newPlayer.setLifeLostLastTurn(origPlayer.getLifeLostLastTurn());
             newPlayer.setLifeLostThisTurn(origPlayer.getLifeLostThisTurn());
@@ -142,15 +140,15 @@ public class GameCopier {
             effect.removeMapped(gameObjectMap);
         }
 
+        if (origPhaseHandler.getCombat() != null) {
+            newGame.getPhaseHandler().setCombat(new Combat(origPhaseHandler.getCombat(), gameObjectMap));
+        }
+
         newGame.getAction().checkStateEffects(true); //ensure state based effects and triggers are updated
         newGame.getTriggerHandler().resetActiveTriggers();
 
         if (GameSimulator.COPY_STACK)
             copyStack(origGame, newGame, gameObjectMap);
-
-        if (origPhaseHandler.getCombat() != null) {
-            newGame.getPhaseHandler().setCombat(new Combat(origPhaseHandler.getCombat(), gameObjectMap));
-        }
 
         if (advanceToPhase != null) {
             newGame.getPhaseHandler().devAdvanceToPhase(advanceToPhase, new Runnable() {
@@ -207,6 +205,7 @@ public class GameCopier {
             for (Card card : origGame.getCardsIn(zone)) {
                 addCard(newGame, zone, card);
             }
+            // TODO CardsAddedThisTurn is now messed up
         }
         gameObjectMap = new CopiedGameObjectMap(newGame);
 
@@ -291,7 +290,7 @@ public class GameCopier {
 
             newCard.setPTTable(c.getSetPTTable());
             newCard.setPTCharacterDefiningTable(c.getSetPTCharacterDefiningTable());
-            
+
             newCard.setPTBoost(c.getPTBoostTable());
             newCard.setDamage(c.getDamage());
 

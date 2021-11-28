@@ -35,7 +35,7 @@ public class GameSimulator {
 
         aiPlayer = (Player) copier.find(origAiPlayer);
         eval = new GameStateEvaluator();
-        
+
         origLines = new ArrayList<>();
         debugLines = origLines;
 
