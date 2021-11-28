@@ -338,7 +338,7 @@ public class SpellAbilityPicker {
             return AiPlayDecision.CantPlaySa;
         }
 
-        // Note: Can'tjust check condition on the top ability, because it may have
+        // Note: Can't just check condition on the top ability, because it may have
         // sub-abilities without conditions (e.g. wild slash's main ability has a
         // main ability with conditions but the burn sub-ability has none).
         if (!atLeastOneConditionMet(sa)) {

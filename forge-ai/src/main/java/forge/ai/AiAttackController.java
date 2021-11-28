@@ -672,9 +672,9 @@ public class AiAttackController {
      *
      * @return a {@link forge.game.combat.Combat} object.
      */
-    public final void declareAttackers(final Combat combat) {
+    public final int declareAttackers(final Combat combat) {
         if (this.attackers.isEmpty()) {
-            return;
+            return aiAggression;
         }
 
         // Aggro options
@@ -716,7 +716,7 @@ public class AiAttackController {
 
         if (attackMax == 0) {
             // can't attack anymore
-            return;
+            return aiAggression;
         }
 
         // Attackers that don't really have a choice
@@ -753,7 +753,7 @@ public class AiAttackController {
                 }
             }
             if (attackersLeft.isEmpty()) {
-                return;
+                return aiAggression;
             }
         }
 
@@ -763,7 +763,7 @@ public class AiAttackController {
         }
         // Revenge of Ravens: make sure the AI doesn't kill itself and doesn't damage itself unnecessarily
         if (!doRevengeOfRavensAttackLogic(ai, defender, attackersLeft, numForcedAttackers, attackMax)) {
-            return;
+            return aiAggression;
         }
 
         if (bAssault && defender == this.defendingOpponent) { // in case we are forced to attack someone else
@@ -773,14 +773,14 @@ public class AiAttackController {
             for (Card attacker : attackersLeft) {
                 // reached max, breakup
                 if (attackMax != -1 && combat.getAttackers().size() >= attackMax)
-                    return;
+                    return aiAggression;
 
                 if (canAttackWrapper(attacker, defender) && isEffectiveAttacker(ai, attacker, combat, defender)) {
                     combat.addAttacker(attacker, defender);
                 }
             }
             // no more creatures to attack
-            return;
+            return aiAggression;
         }
 
         // Cards that are remembered to attack anyway (e.g. temporarily stolen creatures)
@@ -818,7 +818,7 @@ public class AiAttackController {
                 for (Card attacker : this.attackers) {
                     if (canAttackWrapper(attacker, defender) && shouldAttack(ai, attacker, this.blockers, combat, defender)) {
                         combat.addAttacker(attacker, defender);
-                        return;
+                        return aiAggression;
                     }
                 }
             }
@@ -837,7 +837,7 @@ public class AiAttackController {
                 }
             }
             // no more creatures to attack
-            return;
+            return aiAggression;
         }
 
         // *******************
@@ -1110,6 +1110,8 @@ public class AiAttackController {
                 defender = pwNearUlti != null ? pwNearUlti : ComputerUtilCard.getBestPlaneswalkerAI(pwDefending);
             }
         }
+
+        return aiAggression;
     }
 
     /**
@@ -1135,8 +1137,7 @@ public class AiAttackController {
         int numberOfPossibleBlockers = 0;
 
         // Is it a creature that has a more valuable ability with a tap cost than what it can do by attacking?
-        if ((attacker.hasSVar("NonCombatPriority"))
-                && (!attacker.hasKeyword(Keyword.VIGILANCE))) {
+        if (attacker.hasSVar("NonCombatPriority") && !attacker.hasKeyword(Keyword.VIGILANCE)) {
             // For each level of priority, enemy has to have life as much as the creature's power
             // so a priority of 4 means the creature will not attack unless it can defeat that player in 4 successful attacks.
             // the lower the priroity, the less willing the AI is to use the creature for attacking.
@@ -1161,8 +1162,7 @@ public class AiAttackController {
         }
         boolean hasAttackEffect = attacker.getSVar("HasAttackEffect").equals("TRUE") || attacker.hasStartOfKeyword("Annihilator");
         // is there a gain in attacking even when the blocker is not killed (Lifelink, Wither,...)
-        boolean hasCombatEffect = attacker.getSVar("HasCombatEffect").equals("TRUE")
-        		|| "Blocked".equals(attacker.getSVar("HasAttackEffect"));
+        boolean hasCombatEffect = attacker.getSVar("HasCombatEffect").equals("TRUE") || "Blocked".equals(attacker.getSVar("HasAttackEffect"));
 
         // contains only the defender's blockers that can actually block the attacker
         CardCollection validBlockers = CardLists.filter(defenders, new Predicate<Card>() {
@@ -1320,7 +1320,7 @@ public class AiAttackController {
         return false; // don't attack
     }
 
-    public static List<Card> exertAttackers(List<Card> attackers) {
+    public static List<Card> exertAttackers(List<Card> attackers, int aggression) {
         List<Card> exerters = Lists.newArrayList();
         for (Card c : attackers) {
             boolean shouldExert = false;
@@ -1366,7 +1366,7 @@ public class AiAttackController {
 
             // A specific AI condition for Exert: if specified on the card, the AI will always
             // exert creatures that meet this condition
-            if (c.hasSVar("AIExertCondition")) {
+            if (!shouldExert && c.hasSVar("AIExertCondition")) {
                 if (!c.getSVar("AIExertCondition").isEmpty()) {
                     final String needsToExert = c.getSVar("AIExertCondition");
                     String sVar = needsToExert.split(" ")[0];
@@ -1381,9 +1381,9 @@ public class AiAttackController {
                 }
             }
 
-            if (!shouldExert && MyRandom.getRandom().nextBoolean()) {
+            if (!shouldExert) {
                 // TODO Improve when the AI wants to use Exert powers
-                shouldExert = true;
+                shouldExert = aggression > 3;
             }
 
             if (shouldExert) {
