@@ -281,10 +281,13 @@ public class GameCopier {
         cardMap.put(c, newCard);
 
         Player zoneOwner = owner;
+        // everything the CreatureEvaluator checks must be set here
         if (zone == ZoneType.Battlefield) {
             // TODO: Controllers' list with timestamps should be copied.
             zoneOwner = playerMap.get(c.getController());
             newCard.setController(zoneOwner, 0);
+
+            newCard.setCameUnderControlSinceLastUpkeep(c.cameUnderControlSinceLastUpkeep());
 
             newCard.setPTTable(c.getSetPTTable());
             newCard.setPTCharacterDefiningTable(c.getSetPTCharacterDefiningTable());
