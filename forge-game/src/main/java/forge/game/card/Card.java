@@ -4559,6 +4559,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final Iterable<String> getHiddenExtrinsicKeywords() {
         return Iterables.concat(this.hiddenExtrinsicKeywords.values());
     }
+    public final Table<Long, Long, List<String>> getHiddenExtrinsicKeywordsTable() {
+        return hiddenExtrinsicKeywords;
+    }
 
     public final void addHiddenExtrinsicKeywords(long timestamp, long staticId, Iterable<String> keywords) {
         // TODO if some keywords aren't removed anymore, then no need for extra Array List

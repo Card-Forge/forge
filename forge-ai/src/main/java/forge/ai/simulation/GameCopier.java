@@ -9,6 +9,7 @@ import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.common.collect.Table;
 
 import forge.LobbyPlayer;
 import forge.ai.AIOption;
@@ -26,6 +27,7 @@ import forge.game.card.CardFactory;
 import forge.game.card.CounterType;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
+import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -298,11 +300,11 @@ public class GameCopier {
             newCard.setChangedCardKeywords(c.getChangedCardKeywords());
             newCard.setChangedCardNames(c.getChangedCardNames());
 
+            for (Table.Cell<Long, Long, List<String>> kw : c.getHiddenExtrinsicKeywordsTable().cellSet()) {
+                newCard.addHiddenExtrinsicKeywords(kw.getRowKey(), kw.getColumnKey(), kw.getValue());
+            }
             newCard.updateKeywordsCache(newCard.getCurrentState());
 
-            // TODO: Is this correct? Does it not duplicate keywords from enchantments and such?
-            //for (KeywordInterface kw : c.getHiddenExtrinsicKeywords())
-            //    newCard.addHiddenExtrinsicKeyword(kw);
             if (c.isTapped()) {
                 newCard.setTapped(true);
             }
