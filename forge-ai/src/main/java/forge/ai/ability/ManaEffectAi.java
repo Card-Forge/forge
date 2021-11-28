@@ -62,6 +62,9 @@ public class ManaEffectAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
+        if (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai && !ai.getManaPool().willManaBeLostAtEndOfPhase()) {
+            return true;
+        }
         if (!ph.is(PhaseType.MAIN2) || !ComputerUtil.activateForCost(sa, ai)) {
             return false;
         }
@@ -98,9 +101,14 @@ public class ManaEffectAi extends SpellAbilityAi {
             return true; // handled elsewhere, does not meet the standard requirements
         }
 
+        PhaseHandler ph = ai.getGame().getPhaseHandler();
+        boolean moreManaNextTurn = false;
+        if (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai && !ai.getManaPool().willManaBeLostAtEndOfPhase()) {
+            moreManaNextTurn = true;
+        }
+
         return sa.getPayCosts().hasNoManaCost() && sa.getPayCosts().isReusuableResource()
-                && sa.getSubAbility() == null && ComputerUtil.playImmediately(ai, sa);
-        // return super.checkApiLogic(ai, sa);
+                && sa.getSubAbility() == null && (ComputerUtil.playImmediately(ai, sa) || moreManaNextTurn);
     }
 
     /**
