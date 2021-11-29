@@ -684,9 +684,11 @@ public class AiAttackController {
         int extraChanceIfOppHasMana = 0;
         boolean tradeIfLowerLifePressure = false;
         boolean predictEvasion = false;
+        boolean simAI = false;
         if (ai.getController().isAI()) {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-            if (!aic.usesSimulation()) {
+            simAI = aic.usesSimulation();
+            if (!simAI) {
                 playAggro = aic.getBooleanProperty(AiProps.PLAY_AGGRO);
                 chanceToAttackToTrade = aic.getIntProperty(AiProps.CHANCE_TO_ATTACK_INTO_TRADE);
                 tradeIfTappedOut = aic.getBooleanProperty(AiProps.ATTACK_INTO_TRADE_WHEN_TAPPED_OUT);
@@ -837,6 +839,18 @@ public class AiAttackController {
                 }
             }
             // no more creatures to attack
+            return aiAggression;
+        }
+
+        if (simAI && ai.isCardInPlay("Reconnaissance")) {
+            for (Card attacker : attackersLeft) {
+                if (canAttackWrapper(attacker, defender)) {
+                    // simulation will decide if attacker stays in combat based on blocks
+                    combat.addAttacker(attacker, defender);
+                }
+            }
+            // safe to exert
+            this.aiAggression = 6;
             return aiAggression;
         }
 
