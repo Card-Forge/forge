@@ -110,7 +110,7 @@ public class InputPassPriority extends InputSyncronizedBase {
                         public void run() {
                             Localizer localizer = Localizer.getInstance();
                             String message = localizer.getMessage("lblYouHaveManaFloatingInYourManaPoolCouldBeLostIfPassPriority");
-                            if (FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN)) {
+                            if (player.getManaPool().hasBurn()) {
                                 message += " " + localizer.getMessage("lblYouWillTakeManaBurnDamageEqualAmountFloatingManaLostThisWay");
                             }
                             if (getController().getGui().showConfirmDialog(message, localizer.getMessage("lblManaFloating"), localizer.getMessage("lblOk"), localizer.getMessage("lblCancel"))) {
