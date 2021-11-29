@@ -916,7 +916,7 @@ public class AttachAi extends SpellAbilityAi {
             prefList = CardLists.filter(prefList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return ComputerUtilCombat.canAttackNextTurn(c) && c.getNetPower() > 0;
+                    return c.getNetPower() > 0 && ComputerUtilCombat.canAttackNextTurn(c);
                 }
             });
         }
@@ -1278,7 +1278,7 @@ public class AttachAi extends SpellAbilityAi {
                     	if (!c.isCreature()) {
                     		return true;
                     	}
-                        return ComputerUtilCombat.canAttackNextTurn(c) && powerBonus + c.getNetPower() > 0;
+                        return powerBonus + c.getNetPower() > 0 && ComputerUtilCombat.canAttackNextTurn(c);
                     }
                 });
             }
@@ -1588,8 +1588,8 @@ public class AttachAi extends SpellAbilityAi {
 
         if (evasive) {
             return card.getNetCombatDamage() + powerBonus > 0
-                    && ComputerUtilCombat.canAttackNextTurn(card)
-                    && canBeBlocked;
+                    && canBeBlocked
+                    && ComputerUtilCombat.canAttackNextTurn(card);
         } else if (keyword.equals("Haste")) {
             return card.hasSickness() && ph.isPlayerTurn(sa.getActivatingPlayer()) && !card.isTapped()
                     && card.getNetCombatDamage() + powerBonus > 0
@@ -1609,8 +1609,8 @@ public class AttachAi extends SpellAbilityAi {
                     && (ComputerUtilCombat.canAttackNextTurn(card) || CombatUtil.canBlock(card, true));
         } else if (keyword.startsWith("Flanking")) {
             return card.getNetCombatDamage() + powerBonus > 0
-                    && ComputerUtilCombat.canAttackNextTurn(card)
-                    && canBeBlocked;
+                    && canBeBlocked
+                    && ComputerUtilCombat.canAttackNextTurn(card);
         } else if (keyword.startsWith("Bushido")) {
             return (canBeBlocked && ComputerUtilCombat.canAttackNextTurn(card))
                     || CombatUtil.canBlock(card, true);
@@ -1652,9 +1652,9 @@ public class AttachAi extends SpellAbilityAi {
 
         if (keyword.endsWith("CARDNAME can't attack.") || keyword.equals("Defender")
                 || keyword.endsWith("CARDNAME can't attack or block.")) {
-            return ComputerUtilCombat.canAttackNextTurn(card) && card.getNetCombatDamage() >= 1;
+            return card.getNetCombatDamage() >= 1 && ComputerUtilCombat.canAttackNextTurn(card);
         } else if (keyword.endsWith("CARDNAME attacks each turn if able.") || keyword.endsWith("CARDNAME attacks each combat if able.")) {
-            return ComputerUtilCombat.canAttackNextTurn(card) && CombatUtil.canBlock(card, true) && !ai.getCreaturesInPlay().isEmpty();
+            return !ai.getCreaturesInPlay().isEmpty() && ComputerUtilCombat.canAttackNextTurn(card) && CombatUtil.canBlock(card, true);
         } else if (keyword.endsWith("CARDNAME can't block.")) {
             return CombatUtil.canBlock(card, true);
         } else if (keyword.endsWith("CARDNAME's activated abilities can't be activated.")) {
@@ -1665,10 +1665,10 @@ public class AttachAi extends SpellAbilityAi {
             }
             return false;
         } else if (keyword.endsWith("Prevent all combat damage that would be dealt by CARDNAME.")) {
-            return ComputerUtilCombat.canAttackNextTurn(card) && card.getNetCombatDamage() >= 1;
+            return card.getNetCombatDamage() >= 1 && ComputerUtilCombat.canAttackNextTurn(card);
         } else if (keyword.endsWith("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")
                 || keyword.endsWith("Prevent all damage that would be dealt to and dealt by CARDNAME.")) {
-            return ComputerUtilCombat.canAttackNextTurn(card) && card.getNetCombatDamage() >= 2;
+            return card.getNetCombatDamage() >= 2 && ComputerUtilCombat.canAttackNextTurn(card);
         } else if (keyword.endsWith("CARDNAME doesn't untap during your untap step.")) {
             return !card.isUntapped();
         }
