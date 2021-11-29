@@ -68,9 +68,14 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     }
 
     public void addMana(final Mana mana) {
+        addMana(mana, true);
+    }
+    public void addMana(final Mana mana, boolean updateView) {
         floatingMana.put(mana.getColor(), mana);
-        owner.updateManaForView();
-        owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Added, mana));
+        if (updateView) {
+            owner.updateManaForView();
+            owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Added, mana));
+        }
     }
 
     public final void add(final Iterable<Mana> manaList) {
@@ -173,8 +178,11 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         owner.updateManaForView();
     }
 
-    private boolean removeMana(final Mana mana) {
-        if (floatingMana.remove(mana.getColor(), mana)) {
+    public boolean removeMana(final Mana mana) {
+        return removeMana(mana, true);
+    }
+    public boolean removeMana(final Mana mana, boolean updateView) {
+        if (floatingMana.remove(mana.getColor(), mana) && updateView) {
             owner.updateManaForView();
             owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Removed, mana));
             return true;
@@ -333,7 +341,6 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
 
         return shard.canBePaidWithManaOfColor((byte)0);
     }
-
 
     @Override
     public Iterator<Mana> iterator() {
