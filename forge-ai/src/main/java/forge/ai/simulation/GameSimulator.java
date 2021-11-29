@@ -188,7 +188,7 @@ public class GameSimulator {
             final SpellAbility playingSa = sa;
 
             simGame.copyLastState();
-            ComputerUtil.handlePlayingSpellAbility(aiPlayer, sa, simGame, new Runnable() {
+            boolean success = ComputerUtil.handlePlayingSpellAbility(aiPlayer, sa, simGame, new Runnable() {
                 @Override
                 public void run() {
                     if (interceptor != null) {
@@ -196,6 +196,9 @@ public class GameSimulator {
                     }
                 }
             });
+            if (!success) {
+                return new Score(Integer.MIN_VALUE);
+            }
         }
 
         // TODO: Support multiple opponents.

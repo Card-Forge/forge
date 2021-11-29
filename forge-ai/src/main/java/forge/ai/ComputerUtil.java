@@ -137,6 +137,9 @@ public class ComputerUtil {
         }
         if (chooseTargets != null) {
             chooseTargets.run();
+            if (!sa.isTargetNumberValid()) {
+                return false;
+            }
         }
 
         final Cost cost = sa.getPayCosts();
