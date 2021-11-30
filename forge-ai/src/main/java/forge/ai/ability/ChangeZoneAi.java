@@ -379,7 +379,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 list = CardLists.getValidCards(list, type, source.getController(), source, sa);
             }
 
-            if (!activateForCost || list.isEmpty()) {
+            if (!activateForCost && list.isEmpty()) {
                 return false;
             }
             if ("Atarka's Command".equals(sourceName)
