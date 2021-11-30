@@ -34,6 +34,7 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -298,6 +299,14 @@ public class ComputerUtilMana {
                         }
                     });
                     saList = filteredList;
+                    break;
+                case "NotSameCard":
+                    saList = Lists.newArrayList(Iterables.filter(filteredList, new Predicate<SpellAbility>() {
+                        @Override
+                        public boolean apply(final SpellAbility saPay) {
+                            return !saPay.getHostCard().getName().equals(sa.getHostCard().getName());
+                        }
+                    }));
                     break;
                 default:
                     break;
@@ -1229,15 +1238,14 @@ public class ComputerUtilMana {
             return false;
         }
 
-        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        int chanceToReserve = aic.getIntProperty(AiProps.RESERVE_MANA_FOR_MAIN2_CHANCE);
-
         // Mana reserved for spell synchronization
         if (AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL)) {
             return true;
         }
 
         PhaseType curPhase = ai.getGame().getPhaseHandler().getPhase();
+        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+        int chanceToReserve = aic.getIntProperty(AiProps.RESERVE_MANA_FOR_MAIN2_CHANCE);
 
         // For combat tricks, always obey mana reservation
         if (curPhase == PhaseType.COMBAT_DECLARE_BLOCKERS || curPhase == PhaseType.CLEANUP) {

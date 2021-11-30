@@ -198,7 +198,7 @@ public class ComputerUtil {
         // Consider the costs here for relative "scoring"
         if (hasDiscardHandCost(cost)) {
             // Null Brooch aid
-            restrict -= (ai.getCardsIn(ZoneType.Hand).size() * 20);
+            restrict -= ai.getCardsIn(ZoneType.Hand).size() * 20;
         }
 
         // Abilities before Spells (card advantage)
@@ -237,7 +237,7 @@ public class ComputerUtil {
         // (Spell,Ability,Triggered)
         final String tgtType = sa.getParam("TargetType");
         if (tgtType != null) {
-            restrict -= (5 * tgtType.split(",").length);
+            restrict -= 5 * tgtType.split(",").length;
         }
         return restrict;
     }

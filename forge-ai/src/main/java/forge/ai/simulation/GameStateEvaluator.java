@@ -86,6 +86,7 @@ public class GameStateEvaluator {
     private Score getScoreForGameStateImpl(Game game, Player aiPlayer) {
         int score = 0;
         // TODO: more than 2 players
+        // TODO: try and reuse evaluateBoardPosition
         int myCards = 0;
         int theirCards = 0;
         for (Card c : game.getCardsIn(ZoneType.Hand)) {
