@@ -1323,7 +1323,7 @@ public class ComputerUtil {
         } else if (sa.isPwAbility() && ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
             for (final CostPart part : abCost.getCostParts()) {
                 if (part instanceof CostPutCounter) {
-                    return true;
+                    return part.convertAmount() == null || part.convertAmount() > 0 || ai.isCardInPlay("Carth the Lion");
                 }
             }
         }
