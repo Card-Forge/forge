@@ -1,0 +1,35 @@
+[metadata]
+Code=UNF
+Date=2022-04-01
+Name=Unfinity
+MciCode=unf
+Type=Funny
+ScryfallCode=UNF
+
+[cards]
+3 U Assembled Ensemble @
+88 R Saw in Half @
+145 M Killer Cosplay @
+179 U The Space Family Goblinson @
+235 L Plains @
+236 L Island @
+237 L Swamp @
+238 L Mountain @
+239 L Forest @
+240 L Plains @
+241 L Island @
+242 L Swamp @
+243 L Mountain @
+244 L Forest @
+270 U The Space Family Goblinson @
+277 R Hallowed Fountain @
+278 R Watery Grave @
+279 R Blood Crypt @
+280 R Stomping Ground @
+281 R Temple Garden @
+282 R Godless Shrine @
+283 R Steam Vents @
+284 R Overgrown Tomb @
+285 R Sacred Foundry @
+286 R Breeding Pool @
+538 C Water Gun Balloon Game @
