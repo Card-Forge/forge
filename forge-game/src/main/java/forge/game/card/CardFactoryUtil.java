@@ -1859,7 +1859,7 @@ public class CardFactoryUtil {
             inst.addTrigger(parsedPlayTrigger);
         } else if (keyword.equals("Training")) {
             final String trigStr = "Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True | " +
-                    "IsPresent$ Creature.attacking+Other+powerGTX | TriggerDescription$ Training (" +
+                    "IsPresent$ Creature.attacking+Other+powerGTX | NoResolvingCheck$ True | TriggerDescription$ Training (" +
                     inst.getReminderText() + ")";
 
             final String effect = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | Defined$ Self | Training$ True";
@@ -1871,7 +1871,6 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(sa);
 
             inst.addTrigger(trigger);
-
         } else if (keyword.startsWith("Tribute")) {
             // use hardcoded ability name
             final String abStr = "TrigNotTribute";
