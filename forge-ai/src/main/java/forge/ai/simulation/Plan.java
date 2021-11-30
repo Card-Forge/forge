@@ -102,6 +102,7 @@ public class Plan {
         final Score initialScore;
 
         final SpellAbilityRef saRef;
+        Integer xMana;
         MultiTargetSelector.Targets targets;
         List<String> choices;
         int[] modes;
@@ -144,7 +145,11 @@ public class Plan {
             if (modesStr != null) {
                 sb.append(modesStr);
             } else {
-                sb.append(saRef.toString(showHostCard));
+                String sa = saRef.toString(showHostCard);
+                if (xMana != null) {
+                    sa = sa.replace("(X=0)", "(X=" + xMana + ")");
+                }
+                sb.append(sa);
             }
             if (targets != null) {
                 sb.append(" (targets: ").append(targets).append(")");

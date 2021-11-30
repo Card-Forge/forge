@@ -53,7 +53,7 @@ public class SimulationController {
         return bestScore.value != Integer.MAX_VALUE && getRecursionDepth() < MAX_DEPTH;
     }
 
-    private Plan.Decision getLastDecision() {
+    public Plan.Decision getLastDecision() {
         if (currentStack.isEmpty()) {
             return null;
         }
@@ -155,6 +155,7 @@ public class SimulationController {
         }
         merged.modes = modes;
         merged.modesStr = modesStr;
+        merged.xMana = d.xMana;
         return merged;
     }
 

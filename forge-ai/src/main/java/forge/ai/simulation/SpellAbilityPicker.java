@@ -263,6 +263,9 @@ public class SpellAbilityPicker {
                 return null;
             }
         }
+        if (decision.xMana != null) {
+            sa.setXManaCostPaid(decision.xMana);
+        }
         print("Planned decision " + plan.getNextDecisionIndex() + ": " + decision);
         return sa;
     }
