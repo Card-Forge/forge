@@ -20,6 +20,7 @@ import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 
 public class PumpAllEffect extends SpellAbilityEffect {
+
     private static void applyPumpAll(final SpellAbility sa,
             final Iterable<Card> list, final int a, final int d,
             final List<String> keywords, final List<ZoneType> affectedZones) {

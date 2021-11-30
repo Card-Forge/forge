@@ -69,6 +69,9 @@ public class CharmAi extends SpellAbilityAi {
             if (timingRight) {
                 // Set minimum choices for triggers where chooseMultipleOptionsAi() returns null
                 chosenList = chooseOptionsAi(choices, ai, true, num, min, sa.hasParam("CanRepeatModes"));
+                if (chosenList.isEmpty() && min != 0) {
+                    return false;
+                }
             } else {
                 return false;
             }
@@ -251,4 +254,23 @@ public class CharmAi extends SpellAbilityAi {
     public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> opponents, Map<String, Object> params) {
         return Aggregates.random(opponents);
     }
+
+    @Override
+    protected boolean doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
+        // already done by chooseOrderOfSimultaneousStackEntry
+        if (sa.getChosenList() != null) {
+            return true;
+        }
+        return super.doTriggerAINoCost(aiPlayer, sa, mandatory);
+    }
+
+    @Override
+    public boolean chkDrawbackWithSubs(Player aiPlayer, AbilitySub ab) {
+        // choices were already targeted
+        if (ab.getRootAbility().getChosenList() != null) {
+            return true;
+        }
+        return super.chkDrawbackWithSubs(aiPlayer, ab);
+    }
+
 }

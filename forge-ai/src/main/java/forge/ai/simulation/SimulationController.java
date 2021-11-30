@@ -48,30 +48,30 @@ public class SimulationController {
     private int getRecursionDepth() {
         return scoreStack.size() - 1;
     }
-    
+
     public boolean shouldRecurse() {
         return bestScore.value != Integer.MAX_VALUE && getRecursionDepth() < MAX_DEPTH;
     }
-    
+
     private Plan.Decision getLastDecision() {
         if (currentStack.isEmpty()) {
             return null;
         }
         return currentStack.get(currentStack.size() - 1);
     }
-    
+
     private Score getCurrentScore() {
         return scoreStack.get(scoreStack.size() - 1);
     }
-    
+
     public void evaluateSpellAbility(List<SpellAbility> saList, int saIndex) {
         currentStack.add(new Plan.Decision(getCurrentScore(), getLastDecision(), new Plan.SpellAbilityRef(saList, saIndex)));
     }
-    
+
     public void evaluateCardChoice(Card choice) {
         currentStack.add(new Plan.Decision(getCurrentScore(), getLastDecision(), choice));
     }
-    
+
     public void evaluateChosenModes(int[] chosenModes, String modesStr) {
         currentStack.add(new Plan.Decision(getCurrentScore(), getLastDecision(), chosenModes, modesStr));
     }
@@ -87,11 +87,11 @@ public class SimulationController {
         }
         currentStack.remove(currentStack.size() - 1);
     }
-    
+
     public Score getBestScore() {
         return bestScore;
     }
-    
+
     public Plan getBestPlan() {
         if (!currentStack.isEmpty()) {
             throw new RuntimeException("getBestPlan() expects currentStack to be empty!");

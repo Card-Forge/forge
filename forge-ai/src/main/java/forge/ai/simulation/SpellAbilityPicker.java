@@ -101,7 +101,7 @@ public class SpellAbilityPicker {
     }
 
     public SpellAbility chooseSpellAbilityToPlay(SimulationController controller) {
-        printOutput = (controller == null);
+        printOutput = controller == null;
 
         // Pass if top of stack is owned by me.
         if (!game.getStack().isEmpty() && game.getStack().peekAbility().getActivatingPlayer().equals(player)) {
@@ -338,7 +338,7 @@ public class SpellAbilityPicker {
             return AiPlayDecision.CantPlaySa;
         }
 
-        // Note: Can'tjust check condition on the top ability, because it may have
+        // Note: Can't just check condition on the top ability, because it may have
         // sub-abilities without conditions (e.g. wild slash's main ability has a
         // main ability with conditions but the burn sub-ability has none).
         if (!atLeastOneConditionMet(sa)) {

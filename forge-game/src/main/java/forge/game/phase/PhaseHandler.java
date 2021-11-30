@@ -478,9 +478,7 @@ public class PhaseHandler implements java.io.Serializable {
         for (Player p : game.getPlayers()) {
             int burn = p.getManaPool().clearPool(true).size();
 
-            boolean manaBurns = game.getRules().hasManaBurn() ||
-                    (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.manaBurn));
-            if (manaBurns) {
+            if (p.getManaPool().hasBurn()) {
                 p.loseLife(burn, false, true);
             }
         }
@@ -1164,10 +1162,16 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public final boolean devAdvanceToPhase(PhaseType targetPhase) {
+        return devAdvanceToPhase(targetPhase, null);
+    }
+    public final boolean devAdvanceToPhase(PhaseType targetPhase, Runnable resolver) {
         boolean isTopsy = playerTurn.getAmountOfKeyword("The phases of your turn are reversed.") % 2 == 1;
         while (phase.isBefore(targetPhase, isTopsy)) {
             if (checkStateBasedEffects()) {
                 return false;
+            }
+            if (resolver != null) {
+                resolver.run();
             }
             onPhaseEnd();
             advanceToNextPhase();

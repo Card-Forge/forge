@@ -583,3 +583,78 @@ F567 R Puresteel Angel @Lukas Litzsinger
 575 U Karoo @Zina Saunders
 576 U Orzhova, the Church of Deals @Martina Pilcerova
 577 R Unholy Grotto @John Avon
+578 C Benediction of Moons @Matt Cavotta
+579 C Late to Dinner @Kev Walker
+580 U Light of Day @Drew Tucker
+581 R Odric, Master Tactician @Michael Komarck
+582 C Sacred Rites @Bradley Williams
+583 R Sanguine Sacrament @Bastien L. Deharme
+584 R Second Sunrise @Greg Staples
+585 U Skymarcher Aspirant @Winona Nelson
+586 U Starnheim Aspirant @Kieran Yanner
+587 R Thalia's Lieutenant @Johannes Voss
+588 S Baral, Chief of Compliance @Wesley Burt
+589 U Brinelin, the Moon Kraken @Adam Paquette
+590 M Day's Undoing @Jonas De Ro
+591 C Floodhound @Lius Lasahido
+592 R Profaner of the Dead @Vincent Proce
+593 U Silumgar Sorcerer @Jeff Simpson
+594 R Bad Moon @Gary Leach
+595 R Bloodchief Ascension @Adi Granov
+596 C Blood Pet @Brom
+597 M Cavalier of Night @Viktor Titov
+598 R Exquisite Blood @Cynthia Sheppard
+599 R Geralf's Messenger @Kev Walker
+600 R Guul Draz Assassin @James Ryman
+601 R Sign in Blood @Alan Pollack
+602 M Sorin Markov @Michael Komarck
+603 R Sorin's Vengeance @Jana Schirmer
+604 M Twilight Prophet @Seb McKinnon
+605 U Vampiric Feast @D. Alexander Gregory
+606 M Vampiric Tutor @Raymond Swanland
+607 U Wall of Blood @Tony Szczudlo
+608 R Blood Moon @Franz Vohwinkel
+609 U Blood Rites @Raymond Swanland
+610 C Boiling Blood @Cliff Nielsen
+611 C Ceremonial Guard @Daren Bader
+612 M Chandra Nalaar @Aleksi Briclot
+613 U Crimson Muckwader @Steven Belledin
+614 U Vow of Lightning @Randy Vargas
+615 U Assault Formation @Kieran Yanner
+616 C Commencement of Festivities @Zack Stella
+617 U Cult of the Waxing Moon @Anastasia Ovchinnikova
+618 R Deathcoil Wurm @Rebecca Guay
+619 U Exuberant Wolfbear @Jesper Ejsing
+620 R Gutter Grime @Erica Yang
+621 U Joraga Treespeaker @Cyril Van Der Haegen
+622 R Mongrel Pack @Jeff Miracola
+623 U Noxious Revival @Matt Stewart
+624 R Pir's Whim @Jakub Kasper
+625 U Song of Freyalise @Min Yum
+626 U Strangleroot Geist @Erica Yang
+627 R Witchstalker @Christopher Moeller
+628 U Belligerent Brontodon @Dan Scott
+629 U Cruel Celebrant @Bastien L. Deharme
+630 M Gisa and Geralf @Karla Ortiz
+631 M Karador, Ghost Chieftain @Todd Lockwood
+632 M Vela the Night-Clad @Allen Williams
+633 R Witch-Maw Nephilim @Greg Staples
+634 U Dryad Militant @Ryan Pancoast
+635 U Mistmeadow Witch @Greg Staples
+636 U Moonhold @Mike Dringenberg
+637 R Murkfiend Liege @Carl Critchlow
+638 R Wheel of Sun and Moon @Zoltan Boros
+639 R Flesh // Blood @Lucas Graciano
+640 R Blood Clock @Keith Garletts
+641 R Howling Mine @Ralph Horsley
+642 R Jet Medallion @Sue Ellen Brown
+643 R Juntu Stakes @Mark Brill
+644 U Lunar Avenger @Paolo Parente
+645 U Perpetual Timepiece @Cliff Childs
+646 C Training Drone @Matt Cavotta
+647 R Unwinding Clock @Mike Bierek
+648 U Witches' Eye @Daniel Ljunggren
+649 C Wooden Stake @David Palumbo
+650 R Blood Crypt @Rob Alexander
+651 R Shinka, the Bloodsoaked Keep @Thomas M. Baxa
+652 R Shivan Gorge @John Matson

@@ -81,11 +81,9 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     public final void add(final Card c) {
         add(c, null);
     }
-
     public final void add(final Card c, final Integer index) {
         add(c, index, null);
     }
-
     public void add(final Card c, Integer index, final Card latestState) {
         if (index != null && cardList.isEmpty() && index.intValue() > 0) {
             // something went wrong, most likely the method fired when the game was in an unexpected state

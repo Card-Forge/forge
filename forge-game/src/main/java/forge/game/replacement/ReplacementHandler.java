@@ -403,7 +403,6 @@ public class ReplacementHandler {
         if ("True".equals(replacementEffect.getParam("Skip"))) {
             return ReplacementResult.Skipped; // Event is skipped.
         }
-
         Player player = host.getController();
 
         if (effectSA != null) {
@@ -420,6 +419,10 @@ public class ReplacementHandler {
             if (apiType == ApiType.ReplaceToken || apiType == ApiType.ReplaceEffect || apiType == ApiType.ReplaceMana) {
                 runParams.put(AbilityKey.ReplacementResult, ReplacementResult.Updated);
             }
+        }
+
+        if ("Replaced".equals(replacementEffect.getParam("ReplacementResult"))) {
+            return ReplacementResult.Replaced; // Event is replaced without SA.
         }
 
         // if the spellability is a replace effect then its some new logic

@@ -3617,7 +3617,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public Iterable<KeywordsChange> getChangedCardKeywordsList() {
-
         return Iterables.concat(
             changedCardKeywordsByText.values(), // Layer 3
             ImmutableList.of(new KeywordsChange(ImmutableList.<String>of(), null, this.hasRemoveIntrinsic())), // Layer 4
@@ -3628,7 +3627,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public Table<Long, Long, KeywordsChange> getChangedCardKeywords() {
         return changedCardKeywords;
     }
-
 
     public Table<Long, Long, CardColor> getChangedCardColorsTable() {
         return changedCardColors;
@@ -4560,6 +4558,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     // Hidden Keywords will be returned without the indicator HIDDEN
     public final Iterable<String> getHiddenExtrinsicKeywords() {
         return Iterables.concat(this.hiddenExtrinsicKeywords.values());
+    }
+    public final Table<Long, Long, List<String>> getHiddenExtrinsicKeywordsTable() {
+        return hiddenExtrinsicKeywords;
     }
 
     public final void addHiddenExtrinsicKeywords(long timestamp, long staticId, Iterable<String> keywords) {

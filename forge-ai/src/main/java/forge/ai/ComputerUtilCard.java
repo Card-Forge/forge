@@ -109,7 +109,7 @@ public class ComputerUtilCard {
         // get biggest Artifact
         return Aggregates.itemWithMax(all, CardPredicates.Accessors.fnGetCmc);
     }
-    
+
     /**
      * Returns the best Planeswalker from a given list
      * @param list list of cards to evaluate
@@ -211,7 +211,7 @@ public class ComputerUtilCard {
                 }
             });
         }
-    
+
         // get biggest Enchantment
         return Aggregates.itemWithMax(all, CardPredicates.Accessors.fnGetCmc);
     }
@@ -229,7 +229,7 @@ public class ComputerUtilCard {
         if (land.isEmpty()) {
             return null;
         }
-    
+
         // prefer to target non basic lands
         final List<Card> nbLand = CardLists.filter(land, Predicates.not(CardPredicates.Presets.BASIC_LANDS));
     
@@ -237,7 +237,7 @@ public class ComputerUtilCard {
             // TODO - Rank non basics?
             return Aggregates.random(nbLand);
         }
-    
+
         // if no non-basic lands, target the least represented basic land type
         String sminBL = "";
         int iminBL = Integer.MAX_VALUE;
@@ -257,13 +257,14 @@ public class ComputerUtilCard {
             }
             return land.get(0);
         }
-    
+
         final List<Card> bLand = CardLists.getType(land, sminBL);
 
         for (Card ut : Iterables.filter(bLand, CardPredicates.Presets.UNTAPPED)) {
             return ut;
         }
-    
+
+        // TODO potentially risky if simulation mode currently able to reach this from triggers
         return Aggregates.random(bLand); // random tapped land of least represented type
     }
 
@@ -348,7 +349,7 @@ public class ComputerUtilCard {
         if (Iterables.isEmpty(all)) {
             return null;
         }
-    
+
         // get cheapest card:
         Card cheapest = null;
     
@@ -357,7 +358,7 @@ public class ComputerUtilCard {
                 cheapest = c;
             }
         }
-    
+
         return cheapest;
     }
 
@@ -475,12 +476,12 @@ public class ComputerUtilCard {
         if (Iterables.isEmpty(list)) {
             return null;
         }
-        
+
         final boolean hasEnchantmants = Iterables.any(list, CardPredicates.Presets.ENCHANTMENTS);
         if (biasEnch && hasEnchantmants) {
             return getCheapestPermanentAI(CardLists.filter(list, CardPredicates.Presets.ENCHANTMENTS), null, false);
         }
-    
+
         final boolean hasArtifacts = Iterables.any(list, CardPredicates.Presets.ARTIFACTS); 
         if (biasArt && hasArtifacts) {
             return getCheapestPermanentAI(CardLists.filter(list, CardPredicates.Presets.ARTIFACTS), null, false);
@@ -489,17 +490,17 @@ public class ComputerUtilCard {
         if (biasLand && Iterables.any(list, CardPredicates.Presets.LANDS)) {
             return getWorstLand(CardLists.filter(list, CardPredicates.Presets.LANDS));
         }
-    
+
         final boolean hasCreatures = Iterables.any(list, CardPredicates.Presets.CREATURES);
         if (biasCreature && hasCreatures) {
             return getWorstCreatureAI(CardLists.filter(list, CardPredicates.Presets.CREATURES));
         }
-    
+
         List<Card> lands = CardLists.filter(list, CardPredicates.Presets.LANDS);
         if (lands.size() > 6) {
             return getWorstLand(lands);
         }
-    
+
         if (hasEnchantmants || hasArtifacts) {
             final List<Card> ae = CardLists.filter(list, Predicates.and(Predicates.or(CardPredicates.Presets.ARTIFACTS, CardPredicates.Presets.ENCHANTMENTS), new Predicate<Card>() {
                 @Override
@@ -509,11 +510,11 @@ public class ComputerUtilCard {
             }));
             return getCheapestPermanentAI(ae, null, false);
         }
-    
+
         if (hasCreatures) {
             return getWorstCreatureAI(CardLists.filter(list, CardPredicates.Presets.CREATURES));
         }
-    
+
         // Planeswalkers fall through to here, lands will fall through if there aren't very many
         return getCheapestPermanentAI(list, null, false);
     }
@@ -644,7 +645,7 @@ public class ComputerUtilCard {
     	}
     	return false;
     }
-    
+
     /**
      * Create a mock combat where ai is being attacked and returns the list of likely blockers. 
      * @param ai blocking player
@@ -675,7 +676,7 @@ public class ComputerUtilCard {
         }
         return combat.getAllBlockers();
     }
-    
+
     /**
      * Decide if a creature is going to be used as a blocker.
      * @param ai controller of creature 
@@ -701,7 +702,7 @@ public class ComputerUtilCard {
         aiBlk.assignBlockersGivenAttackers(combat, attackers);
         return ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, combat);
     }
-    
+
     /**
      * getMostExpensivePermanentAI.
      * 
@@ -711,24 +712,24 @@ public class ComputerUtilCard {
      */
     public static Card getMostExpensivePermanentAI(final Iterable<Card> all) {
         Card biggest = null;
-    
+
         int bigCMC = -1;
         for (final Card card : all) {
             // TODO when PlayAi can consider MDFC this should also look at the back face (if not on stack or battlefield)
             int curCMC = card.getCMC();
-    
+
             // Add all cost of all auras with the same controller
             if (card.isEnchanted()) {
                 final List<Card> auras = CardLists.filterControlledBy(card.getEnchantedBy(), card.getController());
                 curCMC += Aggregates.sum(auras, CardPredicates.Accessors.fnGetCmc) + auras.size();
             }
-    
+
             if (curCMC >= bigCMC) {
                 bigCMC = curCMC;
                 biggest = card;
             }
         }
-    
+
         return biggest;
     }
 
@@ -736,21 +737,21 @@ public class ComputerUtilCard {
         if (list.size() == 0) {
             return "";
         }
-    
+
         final Map<String, Integer> map = Maps.newHashMap();
     
         for (final Card c : list) {
             final String name = c.getName();
             Integer currentCnt = map.get(name);
             map.put(name, currentCnt == null ? Integer.valueOf(1) : Integer.valueOf(1 + currentCnt));
-        } // for
-    
+        }
+
         int max = 0;
         String maxName = "";
-    
+
         for (final Entry<String, Integer> entry : map.entrySet()) {
             final String type = entry.getKey();
-    
+
             if (max < entry.getValue()) {
                 max = entry.getValue();
                 maxName = type;
@@ -857,7 +858,7 @@ public class ComputerUtilCard {
 
         int max = 0;
         String maxType = "";
-    
+
         for (final Entry<String, Integer> entry : typesInDeck.entrySet()) {
             final String type = entry.getKey();
 
@@ -866,7 +867,7 @@ public class ComputerUtilCard {
                 maxType = type;
             }
         }
-    
+
         return maxType;
     }
 
@@ -918,7 +919,7 @@ public class ComputerUtilCard {
                 return o2.getValue() - o1.getValue();
             }
         });
-    
+
         // will this part be once dropped?
         List<String> result = new ArrayList<>(cntColors);
         for (Pair<Byte, Integer> idx : map) { // fetch color names in the same order
@@ -948,7 +949,7 @@ public class ComputerUtilCard {
         Player opp = ai.getWeakestOpponent();
         if (sa.hasParam("AILogic")) {
             final String logic = sa.getParam("AILogic");
-             
+
             if (logic.equals("MostProminentInHumanDeck")) {
                 chosen.add(getMostProminentColor(CardLists.filterControlledBy(game.getCardsInGame(), opp), colorChoices));
             }
@@ -1047,7 +1048,7 @@ public class ComputerUtilCard {
         }
         return chosen;
     }
-    
+
     public static boolean useRemovalNow(final SpellAbility sa, final Card c, final int dmg, ZoneType destination) {
         final Player ai = sa.getActivatingPlayer();
         final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
@@ -1058,16 +1059,16 @@ public class ComputerUtilCard {
 
         final int costRemoval = sa.getHostCard().getCMC();
         final int costTarget = c.getCMC();
-        
+
         if (!sa.isSpell()) {
         	return true;
         }
-        
+
         //Check for cards that profit from spells - for example Prowess or Threshold
         if (phaseType == PhaseType.MAIN1 && ComputerUtil.castSpellInMain1(ai, sa)) {
             return true;
         }
-        
+
         //interrupt 1: Check whether a possible blocker will be killed for the AI to make a bigger attack
         if (ph.is(PhaseType.MAIN1) && ph.isPlayerTurn(ai) && c.isCreature()) {
             AiAttackController aiAtk = new AiAttackController(ai);
@@ -1107,7 +1108,7 @@ public class ComputerUtilCard {
                 }
             }
         }
-        
+
         // interrupt 3:  two for one = good
         if (c.isEnchanted()) {
             boolean myEnchants = false;
@@ -1121,7 +1122,7 @@ public class ComputerUtilCard {
                 return true;    //card advantage > tempo
             }
         }
-        
+
         //interrupt 4: opponent pumping target (only works if the pump target is the chosen best target to begin with)
         final MagicStack stack = game.getStack();
         if (!stack.isEmpty()) {
@@ -1130,7 +1131,7 @@ public class ComputerUtilCard {
             	return true;
             }
         }
-        
+
         //burn and curse spells
         float valueBurn = 0;
         if (dmg > 0) {
@@ -1146,7 +1147,7 @@ public class ComputerUtilCard {
             	return true;
             }
         }
-        
+
         //evaluate tempo gain
         float valueTempo = Math.max(0.1f * costTarget / costRemoval, valueBurn);
         if (c.isEquipped()) {
@@ -1177,7 +1178,7 @@ public class ComputerUtilCard {
         if (valueTempo >= 0.8 && ph.getPhase().isBefore(PhaseType.COMBAT_END)) {
         	return true;
         }
-        
+
         //evaluate threat of targeted card
         float threat = 0;
         if (c.isCreature()) {
@@ -1260,7 +1261,7 @@ public class ComputerUtilCard {
         if (!c.getManaAbilities().isEmpty()) {
             threat += 0.5f * costTarget / opp.getLandsInPlay().size();   //set back opponent's mana
         }
-        
+
         final float valueNow = Math.max(valueTempo, threat);
         if (valueNow < 0.2) { //hard floor to reduce ridiculous odds for instants over time
             return false;
@@ -1296,13 +1297,17 @@ public class ComputerUtilCard {
         boolean combatTrick = false;
         boolean holdCombatTricks = false;
         int chanceToHoldCombatTricks = -1;
+        boolean simAI = false;
 
         if (ai.getController().isAI()) {
-            AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-            holdCombatTricks = aic.getBooleanProperty(AiProps.TRY_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK);
-            chanceToHoldCombatTricks = aic.getIntProperty(AiProps.CHANCE_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK);
+            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+            simAI = aic.usesSimulation();
+            if (!simAI) {
+                holdCombatTricks = aic.getBooleanProperty(AiProps.TRY_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK);
+                chanceToHoldCombatTricks = aic.getIntProperty(AiProps.CHANCE_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK);
+            }
         }
-        
+
         if (!c.canBeTargetedBy(sa)) {
             return false;
         }
@@ -1349,7 +1354,7 @@ public class ComputerUtilCard {
         Card pumped = getPumpedCreature(ai, sa, c, toughness, power, keywords);
         List<Card> oppCreatures = opp.getCreaturesInPlay();
         float chance = 0;
-        
+
         //create and buff attackers
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai) && opp.getLife() > 0) {
             //1. become attacker for whatever reason
@@ -1385,7 +1390,7 @@ public class ComputerUtilCard {
                     }
                 }
             }
-            
+
             //2. grant haste
             if (keywords.contains("Haste") && c.hasSickness() && !c.isTapped()) {
                 double nonCombatChance = 0.0f;
@@ -1405,7 +1410,7 @@ public class ComputerUtilCard {
                 }
                 chance += nonCombatChance + combatChance;
             }
-            
+
             //3. grant evasive
             if (Iterables.any(oppCreatures, CardPredicates.possibleBlockers(c))) {
                 if (!Iterables.any(oppCreatures, CardPredicates.possibleBlockers(pumped))
@@ -1414,7 +1419,7 @@ public class ComputerUtilCard {
                 }
             }
         }
-        
+
         //combat trickery
         if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             //clunky code because ComputerUtilCombat.combatantWouldBeDestroyed() does not work for this sort of artificial combat
@@ -1444,7 +1449,7 @@ public class ComputerUtilCard {
                     pumpedWillDie = true;
                 }
             }
-            
+
             //1. save combatant
             if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) && !pumpedWillDie 
                     && !c.hasKeyword(Keyword.INDESTRUCTIBLE)) {
@@ -1452,7 +1457,7 @@ public class ComputerUtilCard {
                 // does not check for Indestructible when computing lethal damage
                 return true;
             }
-            
+
             //2. kill combatant
             boolean survivor = false;
             for (Card o : opposing) {
@@ -1477,7 +1482,7 @@ public class ComputerUtilCard {
                     }
                 }
             }
-            
+
             //3. buff attacker
             if (combat.isAttacking(c) && opp.getLife() > 0) {
                 int dmg = ComputerUtilCombat.damageIfUnblocked(c, opp, combat, true);
@@ -1551,7 +1556,7 @@ public class ComputerUtilCard {
                 }
                 chance += value;
             }
-            
+
             //4. lifelink
             if (ai.canGainLife() && ai.getLife() > 0 && !c.hasKeyword(Keyword.LIFELINK) && keywords.contains("Lifelink")
                     && (combat.isAttacking(c) || combat.isBlocking(c))) {
@@ -1560,7 +1565,7 @@ public class ComputerUtilCard {
                 //and trample damage (if any)
                 chance += 1.0f * dmg / ai.getLife();
             }
-            
+
             //5. if the life of the computer is in danger, try to pump blockers blocking Tramplers
             if (combat.isBlocking(c) && toughness > 0 ) {
                 List<Card> blockedBy = combat.getAttackersBlockedBy(c);
@@ -1629,7 +1634,7 @@ public class ComputerUtilCard {
            }
         }
 
-        return MyRandom.getRandom().nextFloat() < chance;
+        return simAI || MyRandom.getRandom().nextFloat() < chance;
     }
     
     /**
@@ -1710,7 +1715,7 @@ public class ComputerUtilCard {
         applyStaticContPT(ai.getGame(), pumped, new CardCollection(c));
         return pumped;
     }
-    
+
     /**
      * Applies static continuous Power/Toughness effects to a (virtual) creature.
      * @param game game instance to work with 
@@ -1757,7 +1762,7 @@ public class ComputerUtilCard {
             }
         }
     }
-    
+
     /**
      * Evaluate if the ability can save a target against removal
      * @param ai casting player

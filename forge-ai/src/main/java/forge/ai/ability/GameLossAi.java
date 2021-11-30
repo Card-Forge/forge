@@ -17,11 +17,10 @@ public class GameLossAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             sa.resetTargets();
             sa.getTargets().add(opp);
+            return true;
         }
 
-        // In general, don't return true.
-        // But this card wins the game, I can make an exception for that
-        return true;
+        return false;
     }
 
     @Override
@@ -35,7 +34,7 @@ public class GameLossAi extends SpellAbilityAi {
             loser = ai.getGame().getCombat().getDefenderPlayerByAttacker(sa.getHostCard());
         }
 
-        if (!mandatory && loser.cantLose()) {
+        if (!mandatory && (loser == ai || loser.cantLose())) {
             return false;
         }
 

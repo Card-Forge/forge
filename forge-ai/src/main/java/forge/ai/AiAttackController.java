@@ -358,7 +358,7 @@ public class AiAttackController {
         opponentsAttackers = CardLists.filter(opponentsAttackers, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return ComputerUtilCombat.canAttackNextTurn(c) && c.getNetCombatDamage() > 0;
+                return c.getNetCombatDamage() > 0 && ComputerUtilCombat.canAttackNextTurn(c);
             }
         });
         for (final Card c : this.myList) {
@@ -422,7 +422,7 @@ public class AiAttackController {
                 int humanBasePower = ComputerUtilCombat.getAttack(this.oppList.get(0)) + humanExaltedBonus;
                 if (finestHour) {
                     // For Finest Hour, one creature could attack and get the bonus TWICE
-                    humanBasePower = humanBasePower + humanExaltedBonus;
+                    humanBasePower += humanExaltedBonus;
                 }
                 final int totalExaltedAttack = opp.isCardInPlay("Rafiq of the Many") ? 2 * humanBasePower
                         : humanBasePower;
@@ -470,7 +470,7 @@ public class AiAttackController {
         if (totalAttack > 0 && ai.getLife() <= totalAttack && !ai.cantLoseForZeroOrLessLife()) {
             return true;
         }
-        return ai.canReceiveCounters(CounterEnumType.POISON) && ai.getPoisonCounters() + totalPoison > 9;
+        return ai.getPoisonCounters() + totalPoison > 9 && ai.canReceiveCounters(CounterEnumType.POISON);
     }
 
     private boolean doAssault(final Player ai) {
@@ -672,9 +672,9 @@ public class AiAttackController {
      *
      * @return a {@link forge.game.combat.Combat} object.
      */
-    public final void declareAttackers(final Combat combat) {
+    public final int declareAttackers(final Combat combat) {
         if (this.attackers.isEmpty()) {
-            return;
+            return aiAggression;
         }
 
         // Aggro options
@@ -684,14 +684,18 @@ public class AiAttackController {
         int extraChanceIfOppHasMana = 0;
         boolean tradeIfLowerLifePressure = false;
         boolean predictEvasion = false;
+        boolean simAI = false;
         if (ai.getController().isAI()) {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-            playAggro = aic.getBooleanProperty(AiProps.PLAY_AGGRO);
-            chanceToAttackToTrade = aic.getIntProperty(AiProps.CHANCE_TO_ATTACK_INTO_TRADE);
-            tradeIfTappedOut = aic.getBooleanProperty(AiProps.ATTACK_INTO_TRADE_WHEN_TAPPED_OUT);
-            extraChanceIfOppHasMana = aic.getIntProperty(AiProps.CHANCE_TO_ATKTRADE_WHEN_OPP_HAS_MANA);
-            tradeIfLowerLifePressure = aic.getBooleanProperty(AiProps.RANDOMLY_ATKTRADE_ONLY_ON_LOWER_LIFE_PRESSURE);
-            predictEvasion = aic.getBooleanProperty(AiProps.COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION);
+            simAI = aic.usesSimulation();
+            if (!simAI) {
+                playAggro = aic.getBooleanProperty(AiProps.PLAY_AGGRO);
+                chanceToAttackToTrade = aic.getIntProperty(AiProps.CHANCE_TO_ATTACK_INTO_TRADE);
+                tradeIfTappedOut = aic.getBooleanProperty(AiProps.ATTACK_INTO_TRADE_WHEN_TAPPED_OUT);
+                extraChanceIfOppHasMana = aic.getIntProperty(AiProps.CHANCE_TO_ATKTRADE_WHEN_OPP_HAS_MANA);
+                tradeIfLowerLifePressure = aic.getBooleanProperty(AiProps.RANDOMLY_ATKTRADE_ONLY_ON_LOWER_LIFE_PRESSURE);
+                predictEvasion = aic.getBooleanProperty(AiProps.COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION);
+            }
         }
 
         final boolean bAssault = doAssault(ai);
@@ -714,7 +718,7 @@ public class AiAttackController {
 
         if (attackMax == 0) {
             // can't attack anymore
-            return;
+            return aiAggression;
         }
 
         // Attackers that don't really have a choice
@@ -751,7 +755,7 @@ public class AiAttackController {
                 }
             }
             if (attackersLeft.isEmpty()) {
-                return;
+                return aiAggression;
             }
         }
 
@@ -761,7 +765,7 @@ public class AiAttackController {
         }
         // Revenge of Ravens: make sure the AI doesn't kill itself and doesn't damage itself unnecessarily
         if (!doRevengeOfRavensAttackLogic(ai, defender, attackersLeft, numForcedAttackers, attackMax)) {
-            return;
+            return aiAggression;
         }
 
         if (bAssault && defender == this.defendingOpponent) { // in case we are forced to attack someone else
@@ -771,14 +775,14 @@ public class AiAttackController {
             for (Card attacker : attackersLeft) {
                 // reached max, breakup
                 if (attackMax != -1 && combat.getAttackers().size() >= attackMax)
-                    return;
+                    return aiAggression;
 
                 if (canAttackWrapper(attacker, defender) && isEffectiveAttacker(ai, attacker, combat, defender)) {
                     combat.addAttacker(attacker, defender);
                 }
             }
             // no more creatures to attack
-            return;
+            return aiAggression;
         }
 
         // Cards that are remembered to attack anyway (e.g. temporarily stolen creatures)
@@ -816,7 +820,7 @@ public class AiAttackController {
                 for (Card attacker : this.attackers) {
                     if (canAttackWrapper(attacker, defender) && shouldAttack(ai, attacker, this.blockers, combat, defender)) {
                         combat.addAttacker(attacker, defender);
-                        return;
+                        return aiAggression;
                     }
                 }
             }
@@ -835,7 +839,19 @@ public class AiAttackController {
                 }
             }
             // no more creatures to attack
-            return;
+            return aiAggression;
+        }
+
+        if (simAI && ai.isCardInPlay("Reconnaissance")) {
+            for (Card attacker : attackersLeft) {
+                if (canAttackWrapper(attacker, defender)) {
+                    // simulation will decide if attacker stays in combat based on blocks
+                    combat.addAttacker(attacker, defender);
+                }
+            }
+            // safe to exert
+            this.aiAggression = 6;
+            return aiAggression;
         }
 
         // *******************
@@ -877,7 +893,7 @@ public class AiAttackController {
 
         for (final Card pCard : categorizedOppList) {
             // if the creature can attack next turn add it to counter attackers list
-            if (ComputerUtilCombat.canAttackNextTurn(pCard) && pCard.getNetCombatDamage() > 0) {
+            if (pCard.getNetCombatDamage() > 0 && ComputerUtilCombat.canAttackNextTurn(pCard)) {
                 nextTurnAttackers.add(pCard);
                 candidateCounterAttackDamage += pCard.getNetCombatDamage();
                 humanForces += 1; // player forces they might use to attack
@@ -1108,6 +1124,8 @@ public class AiAttackController {
                 defender = pwNearUlti != null ? pwNearUlti : ComputerUtilCard.getBestPlaneswalkerAI(pwDefending);
             }
         }
+
+        return aiAggression;
     }
 
     /**
@@ -1133,8 +1151,7 @@ public class AiAttackController {
         int numberOfPossibleBlockers = 0;
 
         // Is it a creature that has a more valuable ability with a tap cost than what it can do by attacking?
-        if ((attacker.hasSVar("NonCombatPriority"))
-                && (!attacker.hasKeyword(Keyword.VIGILANCE))) {
+        if (attacker.hasSVar("NonCombatPriority") && !attacker.hasKeyword(Keyword.VIGILANCE)) {
             // For each level of priority, enemy has to have life as much as the creature's power
             // so a priority of 4 means the creature will not attack unless it can defeat that player in 4 successful attacks.
             // the lower the priroity, the less willing the AI is to use the creature for attacking.
@@ -1159,8 +1176,7 @@ public class AiAttackController {
         }
         boolean hasAttackEffect = attacker.getSVar("HasAttackEffect").equals("TRUE") || attacker.hasStartOfKeyword("Annihilator");
         // is there a gain in attacking even when the blocker is not killed (Lifelink, Wither,...)
-        boolean hasCombatEffect = attacker.getSVar("HasCombatEffect").equals("TRUE")
-        		|| "Blocked".equals(attacker.getSVar("HasAttackEffect"));
+        boolean hasCombatEffect = attacker.getSVar("HasCombatEffect").equals("TRUE") || "Blocked".equals(attacker.getSVar("HasAttackEffect"));
 
         // contains only the defender's blockers that can actually block the attacker
         CardCollection validBlockers = CardLists.filter(defenders, new Predicate<Card>() {
@@ -1318,7 +1334,7 @@ public class AiAttackController {
         return false; // don't attack
     }
 
-    public static List<Card> exertAttackers(List<Card> attackers) {
+    public static List<Card> exertAttackers(List<Card> attackers, int aggression) {
         List<Card> exerters = Lists.newArrayList();
         for (Card c : attackers) {
             boolean shouldExert = false;
@@ -1362,9 +1378,14 @@ public class AiAttackController {
                 continue;
             }
 
+            if (!shouldExert) {
+                // TODO Improve when the AI wants to use Exert powers
+                shouldExert = aggression > 3;
+            }
+
             // A specific AI condition for Exert: if specified on the card, the AI will always
             // exert creatures that meet this condition
-            if (c.hasSVar("AIExertCondition")) {
+            if (!shouldExert && c.hasSVar("AIExertCondition")) {
                 if (!c.getSVar("AIExertCondition").isEmpty()) {
                     final String needsToExert = c.getSVar("AIExertCondition");
                     String sVar = needsToExert.split(" ")[0];
@@ -1377,11 +1398,6 @@ public class AiAttackController {
                         shouldExert = true;
                     }
                 }
-            }
-
-            if (!shouldExert && MyRandom.getRandom().nextBoolean()) {
-                // TODO Improve when the AI wants to use Exert powers
-                shouldExert = true;
             }
 
             if (shouldExert) {

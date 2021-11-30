@@ -22,7 +22,7 @@ public class Plan {
         this.decisions = decisions;
         this.finalScore = finalScore;
     }
-    
+
     public Score getFinalScore() {
         return finalScore;
     }
@@ -112,14 +112,14 @@ public class Plan {
             this.prevDecision = prevDecision;
             this.saRef = saRef;
         }
-        
+
         public Decision(Score initialScore, Decision prevDecision, MultiTargetSelector.Targets targets) {
             this.initialScore = initialScore;
             this.prevDecision = prevDecision;
             this.saRef = null;
             this.targets = targets;
         }
-        
+
         public Decision(Score initialScore, Decision prevDecision, Card choice) {
             this.initialScore = initialScore;
             this.prevDecision = prevDecision;
