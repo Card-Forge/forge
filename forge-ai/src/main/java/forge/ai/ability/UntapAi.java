@@ -69,7 +69,6 @@ public class UntapAi extends SpellAbilityAi {
         } else {
             return untapPrefTargeting(ai, sa, false);
         }
-
     }
 
     @Override

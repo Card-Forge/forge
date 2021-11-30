@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCost;
 import forge.ai.PlayerControllerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
