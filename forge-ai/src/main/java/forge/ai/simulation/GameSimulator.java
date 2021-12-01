@@ -156,7 +156,7 @@ public class GameSimulator {
             sa = findSaInSimGame(origSa);
             if (sa == null) {
                 System.err.println("Simulation: SA not found! " + origSa);
-                return new Score(Integer.MIN_VALUE, Integer.MIN_VALUE);
+                return new Score(Integer.MIN_VALUE);
             }
 
             debugPrint("Found SA " + sa + " on host card " + sa.getHostCard() + " with owner:"+ sa.getHostCard().getOwner());
@@ -192,6 +192,7 @@ public class GameSimulator {
                 @Override
                 public void run() {
                     if (interceptor != null) {
+                        interceptor.announceX(playingSa);
                         interceptor.chooseTargets(playingSa, GameSimulator.this);
                     }
                 }

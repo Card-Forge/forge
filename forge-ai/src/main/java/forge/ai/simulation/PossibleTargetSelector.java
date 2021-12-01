@@ -167,6 +167,7 @@ public class PossibleTargetSelector {
     private void selectTargetsByIndexImpl(int index) {
         targetingSa.resetTargets();
 
+        // TODO this currently checks from max amount to just one but it doesn't check all combinations
         while (targetingSa.getTargets().size() < maxTargets && index < validTargets.size()) {
             targetingSa.getTargets().add(validTargets.get(index++));
         }

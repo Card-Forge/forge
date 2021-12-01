@@ -59,10 +59,12 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
+import forge.game.cost.CostTap;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
+import forge.game.phase.Untap;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementEffect;
@@ -2204,8 +2206,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         int score = 0;
         if (manaPart == null) {
             score++; //Assume a mana ability can generate at least 1 mana if the amount of mana can't be determined now.
-        }
-        else {
+        } else {
             String mana = manaPart.mana();
             if (!mana.equals("Any")) {
                 score += mana.length();
@@ -2213,8 +2214,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                     // Producing colorless should produce a slightly lower score
                     score += 1;
                 }
-            }
-            else {
+            } else {
                 score += 7;
             }
         }
@@ -2226,6 +2226,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
             if (!costPart.isRenewable()) {
                 score += 3;
+            }
+            if (costPart instanceof CostTap && !Untap.canUntap(getHostCard())) {
+                score += 10;
             }
             // Increase score by 1 for each costpart in general
             score++;

@@ -657,12 +657,11 @@ public class AiController {
         return null;
     }
 
-    public boolean reserveManaSourcesForNextSpell(SpellAbility sa, SpellAbility exceptForSa) {
-        return reserveManaSources(sa, null, false, true, exceptForSa);
-    }
-
     public boolean reserveManaSources(SpellAbility sa) {
         return reserveManaSources(sa, PhaseType.MAIN2, false, false, null);
+    }
+    public boolean reserveManaSourcesForNextSpell(SpellAbility sa, SpellAbility exceptForSa) {
+        return reserveManaSources(sa, null, false, true, exceptForSa);
     }
     public boolean reserveManaSources(SpellAbility sa, PhaseType phaseType, boolean enemy) {
         return reserveManaSources(sa, phaseType, enemy, true, null);
@@ -2021,8 +2020,7 @@ public class AiController {
                     Card bestCreature = ComputerUtilCard.getBestCreatureAI(rightToughness.isEmpty() ? pool : rightToughness);
                     if (bestCreature != null) {
                         result.add(bestCreature);
-                    } else {
-                        result.add(Aggregates.random(pool)); // should ideally never get here
+                        break;
                     }
                 } else {
                     CardCollectionView viableOptions = CardLists.filter(pool, Predicates.and(CardPredicates.isControlledByAnyOf(sa.getActivatingPlayer().getOpponents())),
@@ -2033,22 +2031,22 @@ public class AiController {
                                 }
                             });
                     Card best = ComputerUtilCard.getBestAI(viableOptions);
-                    if (best == null) {
-                        best = Aggregates.random(pool); // should ideally never get here either
+                    if (best != null) {
+                        result.add(best);
+                        break;
                     }
-                    result.add(best);
                 }
+                result.add(Aggregates.random(pool)); // should ideally never get here
                 break;
             default:
                 CardCollection editablePool = new CardCollection(pool);
                 for (int i = 0; i < max; i++) {
                     Card c = player.getController().chooseSingleEntityForEffect(editablePool, sa, null, isOptional, params);
-                    if (c != null) {
-                        result.add(c);
-                        editablePool.remove(c);
-                    } else {
+                    if (c == null) {
                         break;
                     }
+                    result.add(c);
+                    editablePool.remove(c);
 
                     // Special case for Bow to My Command which simulates a complex tap cost via ChooseCard
                     // TODO: consider enhancing support for tapXType<Any/...> in UnlessCost to get rid of this hack

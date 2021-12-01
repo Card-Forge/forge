@@ -8,6 +8,7 @@ import java.util.NoSuchElementException;
 
 import org.apache.commons.math3.util.CombinatoricsUtils;
 
+import forge.ai.ComputerUtilCost;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -218,6 +219,16 @@ public class SpellAbilityChoicesIterator {
             modes.add(choices.get(modeIndex));
         }
         return modes;
+    }
+
+    public void announceX(SpellAbility sa) {
+        // TODO this should also iterate over all possible values
+        // (currently no additional complexity to keep performance reasonable)
+        if (sa.costHasManaX()) {
+            Integer x = ComputerUtilCost.getMaxXValue(sa, sa.getActivatingPlayer());
+            sa.setXManaCostPaid(x);
+            controller.getLastDecision().xMana = x;
+        }
     }
 
     private static class AllowRepeatModesIterator implements Iterator<int[]> {

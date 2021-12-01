@@ -86,6 +86,7 @@ public class GameStateEvaluator {
     private Score getScoreForGameStateImpl(Game game, Player aiPlayer) {
         int score = 0;
         // TODO: more than 2 players
+        // TODO: try and reuse evaluateBoardPosition
         int myCards = 0;
         int theirCards = 0;
         for (Card c : game.getCardsIn(ZoneType.Hand)) {
@@ -97,7 +98,7 @@ public class GameStateEvaluator {
         }
         debugPrint("My cards in hand: " + myCards);
         debugPrint("Their cards in hand: " + theirCards);
-        if (myCards > aiPlayer.getMaxHandSize()) {
+        if (!aiPlayer.isUnlimitedHandSize() && myCards > aiPlayer.getMaxHandSize()) {
             // Count excess cards for less.
             score += myCards - aiPlayer.getMaxHandSize();
             myCards = aiPlayer.getMaxHandSize();
@@ -107,12 +108,10 @@ public class GameStateEvaluator {
         score += 2 * aiPlayer.getLife();
         int opponentIndex = 1;
         int opponentLife = 0;
-        for (Player opponent : game.getPlayers()) {
-            if (opponent != aiPlayer) {
+        for (Player opponent : aiPlayer.getOpponents()) {
                 debugPrint("  Opponent " + opponentIndex + " life: -" + opponent.getLife());
                 opponentLife += opponent.getLife();
                 opponentIndex++;
-            }
         }
         score -= 2* opponentLife / (game.getPlayers().size() - 1);
         int summonSickScore = score;
