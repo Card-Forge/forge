@@ -1338,9 +1338,9 @@ public class ComputerUtilCard {
         }
 
         // buff attacker/blocker using triggered pump (unless it's lethal and we don't want to be reckless)
-        if (immediately && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && !loseCardAtEOT) {
+        if (immediately && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS) && !loseCardAtEOT) {
             if (phase.isPlayerTurn(ai)) {
-                if (CombatUtil.canAttack(c)) {
+                if (CombatUtil.canAttack(c) || (game.getCombat() != null && c.isAttacking())) {
                     return true;
                 }
             } else {
