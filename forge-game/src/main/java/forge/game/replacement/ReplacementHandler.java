@@ -278,9 +278,6 @@ public class ReplacementHandler {
         // Log there
         String message = chosenRE.getDescription();
         if (!StringUtils.isEmpty(message)) {
-            if (chosenRE.getHostCard() != null) {
-                message = TextUtil.fastReplace(message, "CARDNAME", chosenRE.getHostCard().getName());
-            }
             game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, message);
         }
 
@@ -365,17 +362,17 @@ public class ReplacementHandler {
         // Decider gets to choose whether or not to apply the replacement.
         if (replacementEffect.hasParam("Optional")) {
             Player optDecider = decider;
-            if (replacementEffect.hasParam("OptionalDecider") && (effectSA != null)) {
+            if (replacementEffect.hasParam("OptionalDecider") && effectSA != null) {
                 effectSA.setActivatingPlayer(host.getController());
                 optDecider = AbilityUtils.getDefinedPlayers(host,
                         replacementEffect.getParam("OptionalDecider"), effectSA).get(0);
             }
 
-            Card cardForUi = host.getCardForUi();
-            String effectDesc = TextUtil.fastReplace(replacementEffect.getDescription(), "CARDNAME", CardTranslation.getTranslatedName(cardForUi.getName()));
+            String name = CardTranslation.getTranslatedName(host.getCardForUi().getName());
+            String effectDesc = TextUtil.fastReplace(replacementEffect.getDescription(), "CARDNAME", name);
             final String question = replacementEffect instanceof ReplaceDiscard
-                ? Localizer.getInstance().getMessage("lblApplyCardReplacementEffectToCardConfirm", CardTranslation.getTranslatedName(cardForUi.getName()), runParams.get(AbilityKey.Card).toString(), effectDesc)
-                : Localizer.getInstance().getMessage("lblApplyReplacementEffectOfCardConfirm", CardTranslation.getTranslatedName(cardForUi.getName()), effectDesc);
+                ? Localizer.getInstance().getMessage("lblApplyCardReplacementEffectToCardConfirm", name, runParams.get(AbilityKey.Card).toString(), effectDesc)
+                : Localizer.getInstance().getMessage("lblApplyReplacementEffectOfCardConfirm", name, effectDesc);
             GameEntity affected = (GameEntity) runParams.get(AbilityKey.Affected);
             boolean confirmed = optDecider.getController().confirmReplacementEffect(replacementEffect, effectSA, affected, question);
             if (!confirmed) {

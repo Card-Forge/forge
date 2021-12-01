@@ -135,9 +135,9 @@ public abstract class SpellAbilityEffect {
             }
         }
 
-        String currentName = (sa.getHostCard().getName());
-        String substitutedDesc = TextUtil.fastReplace(sb.toString(), "CARDNAME", CardTranslation.getTranslatedName(currentName));
-        substitutedDesc = TextUtil.fastReplace(substitutedDesc, "NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
+        String currentName = CardTranslation.getTranslatedName(sa.getHostCard().getName());
+        String substitutedDesc = TextUtil.fastReplace(sb.toString(), "CARDNAME", currentName);
+        substitutedDesc = TextUtil.fastReplace(substitutedDesc, "NICKNAME", Lang.getInstance().getNickName(currentName));
         return substitutedDesc;
     }
 

@@ -111,7 +111,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
 
         String desc = "";
         if (sa.hasParam("SpellDescription")) {
-            desc = TextUtil.fastReplace(sa.getParam("SpellDescription"), "CARDNAME", sa.getHostCard().getName());
+            desc = sa.getParam("SpellDescription");
         }
 
         sb.append(desc);

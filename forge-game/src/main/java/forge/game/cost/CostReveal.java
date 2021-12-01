@@ -77,7 +77,6 @@ public class CostReveal extends CostPartWithList {
         return handList.size();
     }
 
-
     @Override
     public final boolean canPay(final SpellAbility ability, final Player payer) {
         final Card source = ability.getHostCard();

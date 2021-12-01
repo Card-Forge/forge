@@ -110,6 +110,6 @@ public class RestartGameEffect extends SpellAbilityEffect {
             desc = "Restart the game.";
         }
 
-        return TextUtil.fastReplace(desc, "CARDNAME", sa.getHostCard().getName());
+        return desc;
     }
 }
