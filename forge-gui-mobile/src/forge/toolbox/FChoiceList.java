@@ -518,10 +518,14 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
             //should fix NPE ie Thief of Sanity, Gonti... etc
-            CardView cv = ((IHasCardView)value).getCardView();
-            if (cv != null) {
-                boolean showAlternate = showAlternate(cv, value.toString());
-                CardRenderer.drawCardWithOverlays(g, cv, x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT, CardStackPosition.Top, false, showAlternate, true);
+            try {
+                CardView cv = ((IHasCardView) value).getCardView();
+                if (cv != null) {
+                    boolean showAlternate = showAlternate(cv, value.toString());
+                    CardRenderer.drawCardWithOverlays(g, cv, x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT, CardStackPosition.Top, false, showAlternate, true);
+                }
+            } catch (Exception e) {
+                //fixme: java.lang.ClassCastException for cards like Subtlety which should be cancelable instead...
             }
 
             float dx = VStack.CARD_WIDTH + FList.PADDING;
