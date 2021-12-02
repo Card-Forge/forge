@@ -66,11 +66,9 @@ public class StaticAbilityCantTarget {
             }
         }
 
-
         if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
         }
-
 
         if (stAb.hasParam("Hexproof") && (activator != null)) {
             for (KeywordInterface kw : activator.getKeywords()) {

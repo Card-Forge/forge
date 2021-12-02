@@ -221,7 +221,7 @@ public class WrappedAbility extends Ability {
     public String toUnsuppressedString() {
         String desc = this.getStackDescription(); /* use augmented stack description as string for wrapped things */
         String card = getHostCard().toString();
-        if ( !desc.contains(card) && desc.contains(" this ")) { /* a hack for Evolve and similar that don't have CARDNAME */
+        if (!desc.contains(card) && desc.contains(" this ")) { /* a hack for Evolve and similar that don't have CARDNAME */
                 return card + ": " + desc;
         } else return desc;
     }

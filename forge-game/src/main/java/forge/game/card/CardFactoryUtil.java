@@ -718,8 +718,7 @@ public class CardFactoryUtil {
         return validSource;
     }
 
-    public static ReplacementEffect makeEtbCounter(final String kw, final CardState card, final boolean intrinsic)
-    {
+    public static ReplacementEffect makeEtbCounter(final String kw, final CardState card, final boolean intrinsic) {
         String parse = kw;
 
         String[] splitkw = parse.split(":");
@@ -3598,7 +3597,7 @@ public class CardFactoryUtil {
         }
         altCostSA.setRestrictions(restriction);
 
-        String costDescription = TextUtil.fastReplace(params.get("Description"),"CARDNAME", card.getName());
+        String costDescription = TextUtil.fastReplace(params.get("Description"), "CARDNAME", card.getName());
         if (costDescription == null || costDescription.isEmpty()) {
             costDescription = TextUtil.concatWithSpace("You may", abCost.toStringAlt(), "rather than pay", TextUtil.addSuffix(card.getName(), "'s mana cost."));
         }

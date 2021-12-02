@@ -23,7 +23,6 @@ public class StaticAbilityAdapt {
         }
         return false;
     }
-    
 
     public static boolean applyWithAdapt(final StaticAbility stAb, final SpellAbility sa, final Card card) {
         if (!stAb.matchesValidParam("ValidCard", card)) {

@@ -52,7 +52,6 @@ public class PlayerZoneBattlefield extends PlayerZone {
         meldedCards.remove(c);
     }
 
-
     /** {@inheritDoc} */
     @Override
     public final void add(final Card c, final Integer position, final Card latestState) {
