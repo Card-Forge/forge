@@ -78,7 +78,6 @@ public class AiAttackController {
     private int aiAggression = 0; // added by Masher, how aggressive the ai is attack will be depending on circumstances
     private final boolean nextTurn;
 
-
     /**
      * <p>
      * Constructor for ComputerUtil_Attack2.
@@ -1261,7 +1260,7 @@ public class AiAttackController {
             canBeKilledByOne = true;
             isWorthLessThanAllKillers = false;
             hasCombatEffect = false;
-        } else if ((canKillAllDangerous || !canBeKilled) && ComputerUtilCard.canBeBlockedProfitably(defendingOpponent, attacker)) {
+        } else if ((canKillAllDangerous || !canBeKilled) && ComputerUtilCard.canBeBlockedProfitably(defendingOpponent, attacker, true)) {
             canKillAllDangerous = false;
             canBeKilled = true;
         }

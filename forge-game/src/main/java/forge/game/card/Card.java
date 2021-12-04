@@ -4664,7 +4664,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean isSpell() {
-        return (isInstant() || isSorcery() || (isAura() && !isInZone((ZoneType.Battlefield))));
+        return isInstant() || isSorcery() || (isAura() && !isInZone((ZoneType.Battlefield)));
     }
 
     public final boolean isLand()       { return getType().isLand(); }

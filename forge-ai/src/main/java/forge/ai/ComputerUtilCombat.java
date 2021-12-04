@@ -2510,10 +2510,10 @@ public class ComputerUtilCombat {
             }
             // 2. Otherwise, go through the list of options one by one, choose the first one that can't be blocked profitably.
             for (GameEntity p : defenders) {
-                if (p instanceof Player && !ComputerUtilCard.canBeBlockedProfitably((Player)p, attacker)) {
+                if (p instanceof Player && !ComputerUtilCard.canBeBlockedProfitably((Player)p, attacker, true)) {
                     return p;
                 }
-                if (p instanceof Card && !ComputerUtilCard.canBeBlockedProfitably(((Card)p).getController(), attacker)) {
+                if (p instanceof Card && !ComputerUtilCard.canBeBlockedProfitably(((Card)p).getController(), attacker, true)) {
                     return p;
                 }
             }

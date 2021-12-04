@@ -653,7 +653,7 @@ public class ComputerUtilCard {
      * @return list of creatures assigned to block in the simulation
      */
     public static CardCollectionView getLikelyBlockers(final Player ai, final CardCollectionView blockers) {
-        AiBlockController aiBlk = new AiBlockController(ai);
+        AiBlockController aiBlk = new AiBlockController(ai, false);
         final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         Combat combat = new Combat(opp);
         //Use actual attackers if available, else consider all possible attackers
@@ -693,12 +693,11 @@ public class ComputerUtilCard {
      * @param attacker attacking creature to evaluate
      * @return attacker will die
      */
-    public static boolean canBeBlockedProfitably(final Player ai, Card attacker) {
-        AiBlockController aiBlk = new AiBlockController(ai);
+    public static boolean canBeBlockedProfitably(final Player ai, Card attacker, boolean checkingOther) {
+        AiBlockController aiBlk = new AiBlockController(ai, checkingOther);
         Combat combat = new Combat(ai);
         combat.addAttacker(attacker, ai);
-        final List<Card> attackers = new ArrayList<>();
-        attackers.add(attacker);
+        final List<Card> attackers = Lists.newArrayList(attacker);
         aiBlk.assignBlockersGivenAttackers(combat, attackers);
         return ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, combat);
     }

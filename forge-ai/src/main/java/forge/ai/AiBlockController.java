@@ -73,7 +73,11 @@ public class AiBlockController {
 
     private boolean lifeInDanger = false;
 
-    public AiBlockController(Player aiPlayer) {
+    // set to true when AI is predicting a blocking for another player so it doesn't use hidden information
+    private boolean checkingOther = false;
+
+    public AiBlockController(Player aiPlayer, boolean checkingOther) {
+        this.checkingOther = checkingOther;
         ai = aiPlayer;
     }
 
@@ -295,7 +299,7 @@ public class AiBlockController {
                 combat.addBlocker(attacker, blocker);
             }
         }
-        attackersLeft = (new ArrayList<>(currentAttackers));
+        attackersLeft = new ArrayList<>(currentAttackers);
 
         // 6. Blockers that don't survive until the next turn anyway
         for (final Card attacker : attackersLeft) {
@@ -322,7 +326,7 @@ public class AiBlockController {
                 combat.addBlocker(attacker, blocker);
             }
         }
-        attackersLeft = (new ArrayList<>(currentAttackers));
+        attackersLeft = new ArrayList<>(currentAttackers);
     }
 
     private Predicate<Card> rampagesOrNeedsManyToBlock(final Combat combat) {
@@ -421,7 +425,7 @@ public class AiBlockController {
             }
         }
 
-        attackersLeft = (new ArrayList<>(currentAttackers));
+        attackersLeft = new ArrayList<>(currentAttackers);
         currentAttackers = new ArrayList<>(attackersLeft);
 
         boolean considerTripleBlock = true;
@@ -560,7 +564,7 @@ public class AiBlockController {
             }
         }
 
-        attackersLeft = (new ArrayList<>(currentAttackers));
+        attackersLeft = new ArrayList<>(currentAttackers);
     }
 
     private void makeGangNonLethalBlocks(final Combat combat) {
@@ -608,7 +612,7 @@ public class AiBlockController {
             }
         }
 
-        attackersLeft = (new ArrayList<>(currentAttackers));
+        attackersLeft = new ArrayList<>(currentAttackers);
     }
 
     // Bad Trade Blocks (should only be made if life is in danger)
@@ -653,7 +657,7 @@ public class AiBlockController {
                 }
             }
         }
-        attackersLeft = (new ArrayList<>(currentAttackers));
+        attackersLeft = new ArrayList<>(currentAttackers);
     }
 
     // Chump Blocks (should only be made if life is in danger)
@@ -1045,7 +1049,7 @@ public class AiBlockController {
         makeGangBlocks(combat);
 
         // When the AI holds some Fog effect, don't bother about lifeInDanger
-        if (!ComputerUtil.hasAFogEffect(ai)) {
+        if (!ComputerUtil.hasAFogEffect(ai, checkingOther)) {
             lifeInDanger = ComputerUtilCombat.lifeInDanger(ai, combat);
             makeTradeBlocks(combat); // choose necessary trade blocks
 

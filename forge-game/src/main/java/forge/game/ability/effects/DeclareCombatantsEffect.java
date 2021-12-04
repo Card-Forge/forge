@@ -32,18 +32,18 @@ public class DeclareCombatantsEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
-        
+
         final boolean attackers = sa.hasParam("DeclareAttackers");
         final boolean blockers = sa.hasParam("DeclareBlockers");
-        
+
         String until = sa.getParam("Until");
         boolean untilEoT = "EndOfTurn".equals(until);
-        
+
         for (Player p : tgtPlayers) { // Obviously the last player will be applied
             final PhaseHandler ph = p.getGame().getPhaseHandler();
             if (attackers) ph.setPlayerDeclaresAttackers(p);
             if (blockers) ph.setPlayerDeclaresBlockers(p);
-            
+
             GameCommand removeOverrides = new GameCommand() {
                 private static final long serialVersionUID = -8064627517852651016L;
 
@@ -53,7 +53,7 @@ public class DeclareCombatantsEffect extends SpellAbilityEffect {
                     if (blockers) ph.setPlayerDeclaresBlockers(null);
                 }
             };
-            
+
             if (untilEoT)
                 p.getGame().getEndOfTurn().addUntil(removeOverrides);
             else
