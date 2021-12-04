@@ -1327,7 +1327,7 @@ public class AiBlockController {
             chance = Math.max(0, chance - chanceModForEmbalm);
         }
 
-        if (blocker.isFaceDown() && blocker.getState(CardStateName.Original).getType().isCreature()) {
+        if (blocker.isFaceDown() && !checkingOther && blocker.getState(CardStateName.Original).getType().isCreature()) {
             // if the blocker is a face-down creature (e.g. cast via Morph, Manifest), evaluate it
             // in relation to the original state, not to the Morph state
             evalBlk = ComputerUtilCard.evaluateCreature(Card.fromPaperCard(blocker.getPaperCard(), ai), false, true);
@@ -1336,7 +1336,7 @@ public class AiBlockController {
         boolean powerParityOrHigher = blocker.getNetPower() <= attacker.getNetPower();
         boolean creatureParityOrAllowedDiff = aiCreatureCount
                 + (randomTradeIfBehindOnBoard ? maxCreatDiff : 0) >= oppCreatureCount;
-        boolean wantToTradeWithCreatInHand = randomTradeIfCreatInHand
+        boolean wantToTradeWithCreatInHand = !checkingOther && randomTradeIfCreatInHand
                 && Iterables.any(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.CREATURES)
                 && aiCreatureCount + maxCreatDiffWithRepl >= oppCreatureCount;
         boolean wantToSavePlaneswalker = MyRandom.percentTrue(chanceToSavePW)

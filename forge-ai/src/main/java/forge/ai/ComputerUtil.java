@@ -2968,8 +2968,8 @@ public class ComputerUtil {
             }
         };
 
-        int numInHand = CardLists.filter(inHand, markedAsReanimator).size();
-        int numInDeck = CardLists.filter(inDeck, markedAsReanimator).size();
+        int numInHand = CardLists.count(inHand, markedAsReanimator);
+        int numInDeck = CardLists.count(inDeck, markedAsReanimator);
 
         return numInHand > 0 || numInDeck >= 3;
     }

@@ -33,6 +33,7 @@ public class SetStateAi extends SpellAbilityAi {
         final String mode = sa.getParam("Mode");
 
         // turning face is most likely okay
+        // TODO only do this at beneficial moment (e.g. surprise during combat or morph trigger), might want to reserve mana to protect them from easy removal
         if ("TurnFace".equals(mode)) {
             return true;
         }
