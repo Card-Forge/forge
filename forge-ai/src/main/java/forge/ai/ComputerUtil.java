@@ -1748,7 +1748,7 @@ public class ComputerUtil {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     final boolean canRemove = (c.getNetToughness() <= dmg)
-                            || (!c.hasKeyword(Keyword.INDESTRUCTIBLE) && c.getShieldCount() == 0 && (dmg >= ComputerUtilCombat.getDamageToKill(c, false)));
+                            || (!c.hasKeyword(Keyword.INDESTRUCTIBLE) && c.getShieldCount() == 0 && dmg >= ComputerUtilCombat.getDamageToKill(c, false));
                     if (!canRemove) {
                         continue;
                     }
@@ -1770,7 +1770,7 @@ public class ComputerUtil {
                     }
 
                     if (saviourApi == ApiType.Protection) {
-                        if (!topStack.usesTargeting() || (ProtectAi.toProtectFrom(source, saviour) == null)) {
+                        if (!topStack.usesTargeting() || ProtectAi.toProtectFrom(source, saviour) == null) {
                             continue;
                         }
                     }
@@ -1813,7 +1813,7 @@ public class ComputerUtil {
                         }
                     }
                     if (saviourApi == ApiType.Protection) {
-                        if (!topStack.usesTargeting() || (ProtectAi.toProtectFrom(source, saviour) == null)) {
+                        if (!topStack.usesTargeting() || ProtectAi.toProtectFrom(source, saviour) == null) {
                             continue;
                         }
                     }
@@ -1846,7 +1846,7 @@ public class ComputerUtil {
                         continue;
                     }
                     if (saviourApi == ApiType.Protection) {
-                        if (!topStack.usesTargeting() || (ProtectAi.toProtectFrom(source, saviour) == null)) {
+                        if (!topStack.usesTargeting() || ProtectAi.toProtectFrom(source, saviour) == null) {
                             continue;
                         }
                     }
@@ -1870,11 +1870,11 @@ public class ComputerUtil {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     // give Shroud to targeted creatures
-                    if ((saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll && !topStack.usesTargeting()) && !grantShroud) {
+                    if ((saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) && (!topStack.usesTargeting() || !grantShroud)) {
                         continue;
                     }
                     if (saviourApi == ApiType.Protection) {
-                        if (!topStack.usesTargeting() || (ProtectAi.toProtectFrom(source, saviour) == null)) {
+                        if (!topStack.usesTargeting() || ProtectAi.toProtectFrom(source, saviour) == null) {
                             continue;
                         }
                     }
@@ -1883,7 +1883,9 @@ public class ComputerUtil {
             }
         }
         //Generic curse auras
-        else if ((threatApi == ApiType.Attach && (topStack.isCurse() || "Curse".equals(topStack.getParam("AILogic"))))) {
+        else if ((threatApi == ApiType.Attach && (topStack.isCurse() || "Curse".equals(topStack.getParam("AILogic"))))
+                && (saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll
+                || saviourApi == ApiType.Protection || saviourApi == null)) {
             AiController aic = aiPlayer.isAI() ? ((PlayerControllerAi)aiPlayer.getController()).getAi() : null;
             boolean enableCurseAuraRemoval = aic != null ? aic.getBooleanProperty(AiProps.ACTIVELY_DESTROY_IMMEDIATELY_UNBLOCKABLE) : false;
             if (enableCurseAuraRemoval) {
@@ -1891,7 +1893,7 @@ public class ComputerUtil {
                     if (o instanceof Card) {
                         final Card c = (Card) o;
                         // give Shroud to targeted creatures
-                        if ((saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll && !topStack.usesTargeting()) && !grantShroud) {
+                        if ((saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) && (!topStack.usesTargeting() || !grantShroud)) {
                             continue;
                         }
                         if (saviourApi == ApiType.Protection) {
