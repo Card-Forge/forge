@@ -46,7 +46,7 @@ public class SpellAbilityPicker {
     public void setInterceptor(SpellAbilityChoicesIterator in) {
         this.interceptor = in;
     }
-    
+
     private void print(String str) {
         if (printOutput) {
             System.out.println(str);
@@ -60,7 +60,7 @@ public class SpellAbilityPicker {
         }
         print("---- choose ability  (phase = " + phaseStr + ")");
     }
-    
+
     private List<SpellAbility> getCandidateSpellsAndAbilities() {
         CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
@@ -85,12 +85,12 @@ public class SpellAbilityPicker {
                 continue;
             }
             sa.setActivatingPlayer(player);
-            
+
             AiPlayDecision opinion = canPlayAndPayForSim(sa);
             // print("  " + opinion + ": " + sa);
             // PhaseHandler ph = game.getPhaseHandler();
             // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
-            
+
             if (opinion != AiPlayDecision.WillPlay)
                 continue;
             candidateSAs.set(writeIndex,  sa);
@@ -269,7 +269,7 @@ public class SpellAbilityPicker {
         print("Planned decision " + plan.getNextDecisionIndex() + ": " + decision);
         return sa;
     }
- 
+
     public Score getScoreForChosenAbility() {
         return bestScore;
     }
@@ -397,7 +397,7 @@ public class SpellAbilityPicker {
         }
         return null;
     }
-    
+
     private Card getPlannedChoice(CardCollection fetchList) {
         // TODO: Make the below more robust?
         if (plan != null && plan.getSelectedDecision() != null) {

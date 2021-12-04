@@ -83,7 +83,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                             }
 
                             // something you can't block, try to reduce its attack
-                            if (!ComputerUtilCard.canBeBlockedProfitably(ai, cpy)) {
+                            if (!ComputerUtilCard.canBeBlockedProfitably(ai, cpy, false)) {
                                 return true;
                             }
                         }

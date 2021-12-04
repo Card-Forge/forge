@@ -295,7 +295,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             // if host would put into the battlefield attacking
             if (combat != null && combat.isAttacking(host)) {
                 final Player defender = combat.getDefenderPlayerByAttacker(host);
-                if (defender.canLoseLife() && !ComputerUtilCard.canBeBlockedProfitably(defender, copy)) {
+                if (defender.canLoseLife() && !ComputerUtilCard.canBeBlockedProfitably(defender, copy, true)) {
                     return counterSA;
                 }
                 return tokenSA;
@@ -306,7 +306,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
                 for (final Player opp : player.getOpponents()) {
                     if (CombatUtil.canAttack(copy, opp) &&
                             opp.canLoseLife() &&
-                            !ComputerUtilCard.canBeBlockedProfitably(opp, copy))
+                            !ComputerUtilCard.canBeBlockedProfitably(opp, copy, true))
                         return counterSA;
                 }
             }

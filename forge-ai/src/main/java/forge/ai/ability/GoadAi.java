@@ -65,7 +65,7 @@ public class GoadAi extends SpellAbilityAi {
                             return false;
                         }
                         // select only creatures AI can block
-                        return ComputerUtilCard.canBeBlockedProfitably(ai, c);
+                        return ComputerUtilCard.canBeBlockedProfitably(ai, c, false);
                     }
                 });
 

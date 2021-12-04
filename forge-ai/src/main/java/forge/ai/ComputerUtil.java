@@ -1445,11 +1445,13 @@ public class ComputerUtil {
         return false;
     }
 
-    public static boolean hasAFogEffect(final Player ai) {
+    public static boolean hasAFogEffect(final Player ai, boolean checkingOther) {
         final CardCollection all = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
 
         all.addAll(ai.getCardsActivableInExternalZones(true));
-        all.addAll(ai.getCardsIn(ZoneType.Hand));
+        if (!checkingOther || ai.hasKeyword("Play with your hand revealed.")) {
+            all.addAll(ai.getCardsIn(ZoneType.Hand));
+        }
 
         for (final Card c : all) {
             for (final SpellAbility sa : c.getSpellAbilities()) {
@@ -1460,6 +1462,10 @@ public class ComputerUtil {
                 // Avoid re-entry for cards already being considered (e.g. in case the AI is considering
                 // Convoke or Improvise for a Fog-like effect)
                 if (c.hasKeyword("Convoke") || c.hasKeyword("Improvise")) {
+                    // TODO skipping for now else this will lead to GUI interaction
+                    if (!c.getController().isAI()) {
+                        continue;
+                    }
                     if (AiCardMemory.isRememberedCard(ai, c, AiCardMemory.MemorySet.MARKED_TO_AVOID_REENTRY)) {
                         continue;
                     }
@@ -1742,7 +1748,7 @@ public class ComputerUtil {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     final boolean canRemove = (c.getNetToughness() <= dmg)
-                            || (!c.hasKeyword(Keyword.INDESTRUCTIBLE) && c.getShieldCount() == 0 && (dmg >= ComputerUtilCombat.getDamageToKill(c, false)));
+                            || (!c.hasKeyword(Keyword.INDESTRUCTIBLE) && c.getShieldCount() == 0 && dmg >= ComputerUtilCombat.getDamageToKill(c, false));
                     if (!canRemove) {
                         continue;
                     }
@@ -1764,7 +1770,7 @@ public class ComputerUtil {
                     }
 
                     if (saviourApi == ApiType.Protection) {
-                        if (!topStack.usesTargeting() || (ProtectAi.toProtectFrom(source, saviour) == null)) {
+                        if (!topStack.usesTargeting() || ProtectAi.toProtectFrom(source, saviour) == null) {
                             continue;
                         }
                     }
@@ -1807,7 +1813,7 @@ public class ComputerUtil {
                         }
                     }
                     if (saviourApi == ApiType.Protection) {
-                        if (!topStack.usesTargeting() || (ProtectAi.toProtectFrom(source, saviour) == null)) {
+                        if (!topStack.usesTargeting() || ProtectAi.toProtectFrom(source, saviour) == null) {
                             continue;
                         }
                     }
@@ -1840,7 +1846,7 @@ public class ComputerUtil {
                         continue;
                     }
                     if (saviourApi == ApiType.Protection) {
-                        if (!topStack.usesTargeting() || (ProtectAi.toProtectFrom(source, saviour) == null)) {
+                        if (!topStack.usesTargeting() || ProtectAi.toProtectFrom(source, saviour) == null) {
                             continue;
                         }
                     }
@@ -1864,11 +1870,11 @@ public class ComputerUtil {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     // give Shroud to targeted creatures
-                    if ((saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll && !topStack.usesTargeting()) && !grantShroud) {
+                    if ((saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) && (!topStack.usesTargeting() || !grantShroud)) {
                         continue;
                     }
                     if (saviourApi == ApiType.Protection) {
-                        if (!topStack.usesTargeting() || (ProtectAi.toProtectFrom(source, saviour) == null)) {
+                        if (!topStack.usesTargeting() || ProtectAi.toProtectFrom(source, saviour) == null) {
                             continue;
                         }
                     }
@@ -1877,7 +1883,9 @@ public class ComputerUtil {
             }
         }
         //Generic curse auras
-        else if ((threatApi == ApiType.Attach && (topStack.isCurse() || "Curse".equals(topStack.getParam("AILogic"))))) {
+        else if ((threatApi == ApiType.Attach && (topStack.isCurse() || "Curse".equals(topStack.getParam("AILogic"))))
+                && (saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll
+                || saviourApi == ApiType.Protection || saviourApi == null)) {
             AiController aic = aiPlayer.isAI() ? ((PlayerControllerAi)aiPlayer.getController()).getAi() : null;
             boolean enableCurseAuraRemoval = aic != null ? aic.getBooleanProperty(AiProps.ACTIVELY_DESTROY_IMMEDIATELY_UNBLOCKABLE) : false;
             if (enableCurseAuraRemoval) {
@@ -1885,11 +1893,11 @@ public class ComputerUtil {
                     if (o instanceof Card) {
                         final Card c = (Card) o;
                         // give Shroud to targeted creatures
-                        if ((saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll && !topStack.usesTargeting()) && !grantShroud) {
+                        if ((saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) && (!topStack.usesTargeting() || !grantShroud)) {
                             continue;
                         }
                         if (saviourApi == ApiType.Protection) {
-                            if (!topStack.usesTargeting() || (ProtectAi.toProtectFrom(source, saviour) == null)) {
+                            if (!topStack.usesTargeting() || ProtectAi.toProtectFrom(source, saviour) == null) {
                                 continue;
                             }
                         }
@@ -2962,8 +2970,8 @@ public class ComputerUtil {
             }
         };
 
-        int numInHand = CardLists.filter(inHand, markedAsReanimator).size();
-        int numInDeck = CardLists.filter(inDeck, markedAsReanimator).size();
+        int numInHand = CardLists.count(inHand, markedAsReanimator);
+        int numInDeck = CardLists.count(inDeck, markedAsReanimator);
 
         return numInHand > 0 || numInDeck >= 3;
     }
@@ -3032,7 +3040,7 @@ public class ComputerUtil {
             if (!containsAttacker) {
                 continue;
             }
-            AiBlockController block = new AiBlockController(ai);
+            AiBlockController block = new AiBlockController(ai, false);
             block.assignBlockersForCombat(combat);
 
             // TODO predict other, noncombat sources of damage and add them to the "payment" variable.

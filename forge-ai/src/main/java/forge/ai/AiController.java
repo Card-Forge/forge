@@ -756,14 +756,15 @@ public class AiController {
         }
 
         // state needs to be switched here so API checks evaluate the right face
-        if (sa.getCardState() != null && !sa.getHostCard().isInPlay() && sa.getCardState().getStateName() == CardStateName.Modal) {
-            sa.getHostCard().setState(CardStateName.Modal, false);
+        CardStateName currentState = sa.getCardState() != null && sa.getHostCard().getCurrentStateName() != sa.getCardState().getStateName() && !sa.getHostCard().isInPlay() ? sa.getHostCard().getCurrentStateName() : null;
+        if (currentState != null) {
+            sa.getHostCard().setState(sa.getCardState().getStateName(), false);
         }
 
         AiPlayDecision canPlay = canPlaySa(sa); // this is the "heaviest" check, which also sets up targets, defines X, etc.
 
-        if (sa.getCardState() != null && !sa.getHostCard().isInPlay() && sa.getCardState().getStateName() == CardStateName.Modal) {
-            sa.getHostCard().setState(CardStateName.Original, false);
+        if (currentState != null) {
+            sa.getHostCard().setState(currentState, false);
         }
 
         if (canPlay != AiPlayDecision.WillPlay) {
@@ -1441,7 +1442,7 @@ public class AiController {
 
     // declares blockers for given defender in a given combat
     public void declareBlockersFor(Player defender, Combat combat) {
-        AiBlockController block = new AiBlockController(defender);
+        AiBlockController block = new AiBlockController(defender, defender != player);
         // When player != defender, AI should declare blockers for its benefit.
         block.assignBlockersForCombat(combat);
     }
