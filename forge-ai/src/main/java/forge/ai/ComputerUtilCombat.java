@@ -457,8 +457,12 @@ public class ComputerUtilCombat {
             }
         }
 
-        int threshold = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD));
-        int maxTreshold = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_MAX_THRESHOLD)) - threshold;
+        int threshold = 0;
+        int maxTreshold = 0;
+        if (ai.getController().isAI()) {
+            threshold = ((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD);
+            maxTreshold = ((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_MAX_THRESHOLD) - threshold;
+        }
 
         int chance = MyRandom.getRandom().nextInt(80) + 5;
         while (maxTreshold > 0) {
