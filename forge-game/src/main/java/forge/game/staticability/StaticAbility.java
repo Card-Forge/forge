@@ -148,6 +148,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         }
 
         if (hasParam("AddType") || hasParam("RemoveType")
+                || hasParam("AddAllCreatureTypes")
                 || hasParam("RemoveCardTypes") || hasParam("RemoveSubTypes")
                 || hasParam("RemoveSuperTypes") || hasParam("RemoveLandTypes")
                 || hasParam("RemoveCreatureTypes") || hasParam("RemoveArtifactTypes")

@@ -755,12 +755,9 @@ public class CardProperty {
             }
         } else if (property.startsWith("MostProminentCreatureTypeInLibrary")) {
             final CardCollectionView list = sourceController.getCardsIn(ZoneType.Library);
-            String[] type = CardFactoryUtil.getMostProminentCreatureType(list);
-            if (type != null) {
-                for (String s : type) {
-                    if (!card.getType().hasCreatureType(s)) {
-                        return false;
-                    }
+            for (String s : CardFactoryUtil.getMostProminentCreatureType(list)) {
+                if (!card.getType().hasCreatureType(s)) {
+                    return false;
                 }
             }
         } else if (property.startsWith("sharesCreatureTypeWith")) {

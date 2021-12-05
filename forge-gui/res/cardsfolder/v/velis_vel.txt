@@ -4,7 +4,6 @@ Types:Plane Lorwyn
 S:Mode$ Continuous | Affected$ Creature | AddPower$ AffectedX | AddToughness$ AffectedX | EffectZone$ Command | Description$ Each creature gets +1/+1 for each other creature on the battlefield that shares at least one creature type with it. (For example, if two Elemental Shamans and an Elemental Spirit are on the battlefield, each gets +2/+2.)
 SVar:AffectedX:Count$Valid Creature.sharesCreatureTypeWith+Other
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, target creature gains all creature types until end of turn.
-SVar:RolledChaos:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Types$ AllCreatureTypes
-SVar:Picture:http://www.wizards.com/global/images/magic/general/velis_vel.jpg
+SVar:RolledChaos:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | AddAllCreatureTypes$ True
 SVar:AIRollPlanarDieParams:Mode$ Always | HasCreatureInPlay$ True
 Oracle:Each creature gets +1/+1 for each other creature on the battlefield that shares at least one creature type with it. (For example, if two Elemental Shamans and an Elemental Spirit are on the battlefield, each gets +2/+2.)\nWhenever you roll {CHAOS}, target creature gains all creature types until end of turn.

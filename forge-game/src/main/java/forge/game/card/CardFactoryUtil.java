@@ -38,6 +38,7 @@ import com.google.common.collect.Sets;
 
 import forge.card.CardStateName;
 import forge.card.CardType;
+import forge.card.CardTypeView;
 import forge.card.ColorSet;
 import forge.card.ICardFace;
 import forge.card.MagicColor;
@@ -448,12 +449,14 @@ public class CardFactoryUtil {
         final Map<String, Integer> map = Maps.newHashMap();
         for (final Card c : list) {
             // Remove Duplicated types
-            final Set<String> creatureTypes = c.getType().getCreatureTypes();
-            if (creatureTypes.contains(CardType.AllCreatureTypes)) {
+            CardTypeView type = c.getType();
+            if (type.hasAllCreatureTypes() && Iterables.isEmpty(type.getExcludedCreatureSubTypes())) {
                 allCreatureType++;
                 continue;
             }
-            for (String creatureType : creatureTypes) {
+            // if something has all creature types, but some are excluded, the count might be messed up
+
+            for (String creatureType : type.getCreatureTypes()) {
                 Integer count = map.get(creatureType);
                 map.put(creatureType, count == null ? 1 : count + 1);
             }
@@ -477,16 +480,15 @@ public class CardFactoryUtil {
      *            a {@link forge.game.card.CardCollection} object.
      * @return a string.
      */
-    public static String[] getMostProminentCreatureType(final CardCollectionView list) {
+    public static Iterable<String> getMostProminentCreatureType(final CardCollectionView list) {
         if (list.isEmpty()) {
-            return null;
+            return ImmutableList.of();
         }
 
         final Map<String, Integer> map = Maps.newHashMap();
         for (final Card c : list) {
             // Remove Duplicated types
-            final Set<String> creatureTypes = c.getType().getCreatureTypes();
-            for (String creatureType : creatureTypes) {
+            for (String creatureType : c.getType().getCreatureTypes()) {
                 Integer count = map.get(creatureType);
                 map.put(creatureType, count == null ? 1 : count + 1);
             }
@@ -499,16 +501,16 @@ public class CardFactoryUtil {
             }
         }
         if (max == 0) {
-            return null;
+            return ImmutableList.of();
         }
-        StringBuilder sb = new StringBuilder();
+        List<String> result = Lists.newArrayList();
         for (final Entry<String, Integer> entry : map.entrySet()) {
             if (max == entry.getValue()) {
-                sb.append(entry.getKey()).append(",");
+                result.add(entry.getKey());
             }
         }
 
-        return sb.toString().split(",");
+        return result;
     }
 
     /**
@@ -3420,7 +3422,7 @@ public class CardFactoryUtil {
             svars.put("AffinityX", "Count$Valid " + t + ".YouCtrl");
         } else if (keyword.equals("Changeling")) {
             effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self" +
-                    " | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Secondary$ True" +
+                    " | CharacteristicDefining$ True | AddAllCreatureTypes$ True | Secondary$ True" +
                     " | Description$ Changeling (" + inst.getReminderText() + ")";
         } else if (keyword.equals("Cipher")) {
             StringBuilder sb = new StringBuilder();
