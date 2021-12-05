@@ -119,7 +119,7 @@ public abstract class DamageAiBase extends SpellAbilityAi {
             PhaseHandler phase = game.getPhaseHandler();
             // If this is a spell, cast it instead of discarding
             if ((phase.is(PhaseType.END_OF_TURN) || phase.is(PhaseType.MAIN2))
-                    && phase.isPlayerTurn(comp) && (hand.size() > comp.getMaxHandSize())) {
+                    && phase.isPlayerTurn(comp) && hand.size() > comp.getMaxHandSize()) {
                 return true;
             }
 

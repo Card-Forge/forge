@@ -233,7 +233,7 @@ public class AttachAi extends SpellAbilityAi {
 
         boolean hasFloatMana = ai.getManaPool().totalMana() > 0;
         boolean willDiscardNow = game.getPhaseHandler().is(PhaseType.END_OF_TURN, ai)
-                && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize();
+                && !ai.isUnlimitedHandSize() && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize();
         boolean willDieNow = combat != null && ComputerUtilCombat.lifeInSeriousDanger(ai, combat);
         boolean willRespondToStack = canRespondToStack && MyRandom.percentTrue(chanceToRespondToStack);
         boolean willCastEarly = MyRandom.percentTrue(chanceToCastEarly);
