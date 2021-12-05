@@ -2467,11 +2467,11 @@ public class AbilityUtils {
 
             // Figure out how to count each class separately.
             for (Card card : adventurers) {
+                // cards with all creature types will just return full list
                 Set<String> creatureTypes = card.getType().getCreatureTypes();
-                boolean anyType = creatureTypes.contains(CardType.AllCreatureTypes);
                 creatureTypes.retainAll(partyTypes);
 
-                if (anyType || creatureTypes.size() == 4) {
+                if (creatureTypes.size() == 4) {
                     wildcard.add(card);
 
                     if (wildcard.size() >= 4) {
@@ -2570,8 +2570,7 @@ public class AbilityUtils {
                 Iterables.addAll(creatTypes, card.getType().getCreatureTypes());
             }
             // filter out fun types?
-            int n = creatTypes.contains(CardType.AllCreatureTypes) ? CardType.getAllCreatureTypes().size() : creatTypes.size();
-            return doXMath(n, expr, c, ctb);
+            return doXMath(creatTypes.size(), expr, c, ctb);
         }
 
         // Count$Chroma.<color name>
@@ -2878,8 +2877,7 @@ public class AbilityUtils {
             for (Card card : cards) {
                 Iterables.addAll(creatTypes, card.getType().getCreatureTypes());
             }
-            int n = creatTypes.contains(CardType.AllCreatureTypes) ? CardType.getAllCreatureTypes().size() : creatTypes.size();
-            return doXMath(n, expr, c, ctb);
+            return doXMath(creatTypes.size(), expr, c, ctb);
         }
         // Complex counting methods
         CardCollectionView someCards = getCardListForXCount(c, player, sq, ctb);

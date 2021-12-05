@@ -12,13 +12,18 @@ public interface CardTypeView extends Iterable<String>, Serializable {
     Iterable<CoreType> getCoreTypes();
     Iterable<Supertype> getSupertypes();
     Iterable<String> getSubtypes();
+    Iterable<String> getExcludedCreatureSubTypes();
+
     Set<String> getCreatureTypes();
     Set<String> getLandTypes();
+
+
     boolean hasStringType(String t);
     boolean hasType(CoreType type);
     boolean hasSupertype(Supertype supertype);
     boolean hasSubtype(String subtype);
     boolean hasCreatureType(String creatureType);
+    boolean hasAllCreatureTypes();
 
     public boolean sharesCreaturetypeWith(final CardTypeView ctOther);
     public boolean sharesLandTypeWith(final CardTypeView ctOther);

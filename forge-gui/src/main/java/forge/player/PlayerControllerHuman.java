@@ -1272,7 +1272,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 continue;
             }
             // same is true if it somehow has all creature types
-            if (c.getType().hasSubtype(CardType.AllCreatureTypes)) {
+            if (c.getType().hasAllCreatureTypes()) {
                 continue;
             }
             // ignore cards that does enter the battlefield as clones

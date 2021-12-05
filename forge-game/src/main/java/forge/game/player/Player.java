@@ -2147,9 +2147,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasProwl(final String type) {
-        if (prowl.contains(CardType.AllCreatureTypes)) {
-            return true;
-        }
         return prowl.contains(type);
     }
     public final void addProwlType(final String type) {

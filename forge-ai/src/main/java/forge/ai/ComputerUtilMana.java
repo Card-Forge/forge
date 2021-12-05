@@ -371,7 +371,7 @@ public class ComputerUtilMana {
             // Exception: when paying generic mana with Cavern of Souls, prefer the colored mana producing ability
             // to attempt to make the spell uncounterable when possible.
             if (ComputerUtilAbility.getAbilitySourceName(ma).equals("Cavern of Souls")
-                    && saHost.getType().getCreatureTypes().contains(ma.getHostCard().getChosenType())) {
+                    && saHost.getType().hasCreatureType(ma.getHostCard().getChosenType())) {
                 if (toPay == ManaCostShard.COLORLESS && cost.getUnpaidShards().contains(ManaCostShard.GENERIC)) {
                     // Deprioritize Cavern of Souls, try to pay generic mana with it instead to use the NoCounter ability
                     continue;

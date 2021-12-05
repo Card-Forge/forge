@@ -816,7 +816,7 @@ public class CardFactory {
                 if (sa.hasParam("SetCreatureTypes")) {
                     // currently only Changeling and similar should be affected by that
                     // other cards using AddType$ ChosenType should not
-                    if (sta.hasParam("AddType") && CardType.AllCreatureTypes.equals(sta.getParam("AddType"))) {
+                    if (sta.hasParam("AddAllCreatureTypes")) {
                         state.removeStaticAbility(sta);
                     }
                 }
