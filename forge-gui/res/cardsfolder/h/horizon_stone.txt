@@ -1,5 +1,5 @@
 Name:Horizon Stone
 ManaCost:5
 Types:Artifact
-R:Event$ LoseMana | ValidPlayer$ You | ReplacementResult$ Replaced | Description$ If you would lose unspent mana, that mana becomes colorless instead.
+R:Event$ LoseMana | ValidPlayer$ You | ReplacementResult$ Replaced | ActiveZones$ Battlefield | Description$ If you would lose unspent mana, that mana becomes colorless instead.
 Oracle:If you would lose unspent mana, that mana becomes colorless instead.
