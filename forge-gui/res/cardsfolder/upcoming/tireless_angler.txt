@@ -1,0 +1,10 @@
+Name:Tireless Angler
+ManaCost:2 U
+Types:Creature Human Rogue
+PT:1/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Island.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraft | TriggerDescription$ Whenever an Island enters the battlefield under your control, draft a card from CARDNAME's spellbook.
+SVar:TrigDraft:DB$ NameCard | Draft$ True | Defined$ You | ChooseFromList$ Fleet Swallower,Moat Piranhas,Mystic Skyfish,Nadir Kraken,Pouncing Shoreshark,Sea-Dasher Octopus,Spined Megalodon,Stinging Lionfish,Voracious Greatshark,Archipelagore,Serpent of Yawning Depths,Wormhole Serpent,Sigiled Starfish,Riptide Turtle,Ruin Crab | SubAbility$ DBMakeCard
+SVar:DBMakeCard:DB$ MakeCard | Name$ ChosenName | Zone$ Hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearNamedCard$ True
+SVar:BuffedBy:Island
+Oracle:Whenever an Island enters the battlefield under your control, draft a card from Tireless Angler's spellbook.
