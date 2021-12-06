@@ -1967,7 +1967,6 @@ public class GameAction {
                 }
 
                 // If pl has Backup Plan as a Conspiracy draw that many extra hands
-
             }
 
             // Choose starting hand for each player with multiple hands

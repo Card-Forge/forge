@@ -69,7 +69,6 @@ public class MustBlockEffect extends SpellAbilityEffect {
                 }
             }
         }
-
     } // mustBlockResolve()
 
     @Override

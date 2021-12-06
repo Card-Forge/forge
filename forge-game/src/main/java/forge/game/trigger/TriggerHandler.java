@@ -93,6 +93,10 @@ public class TriggerHandler {
         playerDefinedDelayedTriggers.put(player, trig);
     }
 
+    public final void clearPlayerDefinedDelayedTrigger() {
+        playerDefinedDelayedTriggers.clear();
+    }
+
     public final void handlePlayerDefinedDelTriggers(final Player player) {
         delayedTriggers.addAll(playerDefinedDelayedTriggers.removeAll(player));
     }
