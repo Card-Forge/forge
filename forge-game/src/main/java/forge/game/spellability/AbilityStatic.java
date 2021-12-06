@@ -60,7 +60,7 @@ public abstract class AbilityStatic extends Ability implements Cloneable {
 
         return this.getRestrictions().canPlay(c, this);
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public final Object clone() {

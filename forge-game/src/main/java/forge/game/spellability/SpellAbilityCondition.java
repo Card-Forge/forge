@@ -230,7 +230,6 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (params.containsKey("ConditionTargetsSingleTarget")) {
             this.setTargetsSingleTarget(true);
         }
-
     } // setConditions
 
     /**
@@ -390,8 +389,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             int life = 1;
             if (this.getLifeTotal().equals("OpponentSmallest")) {
                 life = activator.getOpponentsSmallestLifeTotal();
-            }
-            else {
+            } else {
                 life = AbilityUtils.getDefinedPlayers(host, this.getLifeTotal(), sa).getFirst().getLife();
             }
 
@@ -432,7 +430,6 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (matchTgt == null || matchTgt.getFirstTargetedSpell() == null
             		|| matchTgt.getFirstTargetedSpell().getTargets() == null) {
                 return false;
-
             }
 
             Set<GameObject> targets = new HashSet<>();
