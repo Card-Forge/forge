@@ -41,7 +41,6 @@ import forge.ai.GameState;
 import forge.ai.PlayerControllerAi;
 import forge.card.CardDb;
 import forge.card.CardStateName;
-import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.ICardFace;
 import forge.card.MagicColor;

@@ -139,7 +139,7 @@ public class ComputerUtilCost {
                     if (source.getAbilityText().contains("Bloodrush")) {
                         continue;
                     } else if (ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN, ai)
-                            && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize()) {
+                            && !ai.isUnlimitedHandSize() && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize()) {
                         // Better do something than just discard stuff
                         return true;
                     }

@@ -309,6 +309,7 @@ public class PhaseHandler implements java.io.Serializable {
                     break;
 
                 case COMBAT_BEGIN:
+                    nCombatsThisTurn++;
                     combat = new Combat(playerTurn);
                     //PhaseUtil.verifyCombat();
                     break;
@@ -603,7 +604,6 @@ public class PhaseHandler implements java.io.Serializable {
             return;
         }
 
-        nCombatsThisTurn++;
         // Reset all active Triggers
         game.getTriggerHandler().resetActiveTriggers();
 
@@ -980,6 +980,9 @@ public class PhaseHandler implements java.io.Serializable {
 
     public final boolean isFirstCombat() {
         return nCombatsThisTurn == 1;
+    }
+    public final int getNumCombat() {
+        return nCombatsThisTurn;
     }
 
     public final boolean isFirstUpkeep() {

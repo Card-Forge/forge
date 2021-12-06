@@ -140,7 +140,7 @@ public class PermanentCreatureAi extends PermanentAi {
         boolean hasAmbushAI = card.hasSVar("AmbushAI");
         boolean defOnlyAmbushAI = hasAmbushAI && "BlockOnly".equals(card.getSVar("AmbushAI"));
         boolean hasFloatMana = ai.getManaPool().totalMana() > 0;
-        boolean willDiscardNow = isOwnEOT && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize();
+        boolean willDiscardNow = isOwnEOT && !ai.isUnlimitedHandSize() && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize();
         boolean willDieNow = combat != null && ComputerUtilCombat.lifeInSeriousDanger(ai, combat);
         boolean wantToCastInMain1 = ph.is(PhaseType.MAIN1, ai) && ComputerUtil.castPermanentInMain1(ai, sa);
         boolean isCommander = card.isCommander();

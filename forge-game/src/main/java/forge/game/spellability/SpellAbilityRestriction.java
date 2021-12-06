@@ -134,6 +134,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setPhases(PhaseType.parseRange(params.get("ActivationPhases")));
         }
 
+        if (params.containsKey("ActivationFirstCombat")) {
+            this.setFirstCombatOnly(true);
+        }
+
         if (params.containsKey("ActivationGameTypes")) {
             this.setGameTypes(GameType.listValueOf(params.get("ActivationGameTypes")));
         }
@@ -316,6 +320,12 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         if (this.getPhases().size() > 0) {
             if (!this.getPhases().contains(game.getPhaseHandler().getPhase())) {
+                return false;
+            }
+        }
+
+        if (this.getFirstCombatOnly()) {
+            if (game.getPhaseHandler().getNumCombat() > 1) {
                 return false;
             }
         }
