@@ -1,6 +1,8 @@
 package forge.adventure.world;
 
 import forge.adventure.data.DifficultyData;
+import forge.adventure.player.AdventurePlayer;
+import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.Config;
 import forge.adventure.util.SaveFileData;
@@ -26,7 +28,7 @@ public class WorldSave {
     public WorldSaveHeader header = new WorldSaveHeader();
     private final AdventurePlayer player=new AdventurePlayer();
     private final World world=new World();
-    private final HashMap<String,PointOfInterestChanges> pointOfInterestChanges=new HashMap<>();
+    private final HashMap<String, PointOfInterestChanges> pointOfInterestChanges=new HashMap<>();
 
 
     private final SignalList onLoadList=new SignalList();

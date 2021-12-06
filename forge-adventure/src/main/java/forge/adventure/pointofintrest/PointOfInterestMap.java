@@ -1,4 +1,4 @@
-package forge.adventure.world;
+package forge.adventure.pointofintrest;
 
 import forge.adventure.util.SaveFileContent;
 import forge.adventure.util.SaveFileData;
@@ -17,7 +17,7 @@ public class PointOfInterestMap implements SaveFileContent {
     int chunkSize;
     private List<PointOfInterest>[][] mapObjects;
 
-    PointOfInterestMap(int chunkSize, int tiles, int numberOfChunksX, int numberOfChunksY) {
+    public PointOfInterestMap(int chunkSize, int tiles, int numberOfChunksX, int numberOfChunksY) {
         this.tileSize = tiles;
         this.chunkSize = chunkSize;
         this.numberOfChunksX = numberOfChunksX;

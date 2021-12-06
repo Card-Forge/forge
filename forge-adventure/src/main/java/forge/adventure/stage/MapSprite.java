@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import forge.adventure.data.BiomeSpriteData;
-import forge.adventure.world.PointOfInterest;
+import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.world.WorldSave;
 import org.apache.commons.lang3.tuple.Pair;
 

@@ -7,7 +7,7 @@ import forge.adventure.stage.MapStage;
 import forge.adventure.stage.PointOfInterestMapRenderer;
 import forge.adventure.util.Config;
 import forge.adventure.util.TemplateTmxMapLoader;
-import forge.adventure.world.PointOfInterest;
+import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.world.WorldSave;
 
 /**

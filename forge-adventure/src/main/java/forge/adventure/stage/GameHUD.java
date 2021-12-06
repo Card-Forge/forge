@@ -15,7 +15,7 @@ import forge.adventure.scene.SceneType;
 import forge.adventure.util.Current;
 import forge.adventure.util.Config;
 import forge.adventure.util.UIActor;
-import forge.adventure.world.AdventurePlayer;
+import forge.adventure.player.AdventurePlayer;
 import forge.adventure.world.WorldSave;
 
 /**
@@ -47,6 +47,7 @@ public class GameHUD extends Stage {
 
         avatar = ui.findActor("avatar");
         ui.onButtonPress("menu", () -> menu());
+        ui.onButtonPress("statistic",()-> AdventureApplicationAdapter.instance.switchScene(SceneType.PlayerStatisticScene.instance));
         ui.onButtonPress("deck", () -> openDeck());
         lifePoints = ui.findActor("lifePoints");
         lifePoints.setText("20/20");
@@ -58,6 +59,10 @@ public class GameHUD extends Stage {
         addActor(ui);
         addActor(miniMapPlayer);
         WorldSave.getCurrentSave().onLoad(() -> enter());
+    }
+
+    private void statistic() {
+
     }
 
     public static GameHUD getInstance() {

@@ -7,7 +7,7 @@ import forge.adventure.character.EnemySprite;
 import forge.adventure.character.PlayerSprite;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
-import forge.adventure.world.AdventurePlayer;
+import forge.adventure.player.AdventurePlayer;
 import forge.assets.FSkin;
 import forge.deck.Deck;
 import forge.game.GameRules;
@@ -48,12 +48,14 @@ public class DuelScene extends ForgeScene {
 
     public void GameEnd() {
         boolean winner=humanPlayer == hostedMatch.getGame().getMatch().getWinner();
+        String enemyName=enemy.getData().name;
         Gdx.app.postRunnable(() -> {
             SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
             Scene last= AdventureApplicationAdapter.instance.switchToLast();
 
             if(last instanceof HudScene)
             {
+                Current.player().getStatistic().setResult(enemyName,winner);
                 ((HudScene)last).stage.setWinner(winner);
             }
         });

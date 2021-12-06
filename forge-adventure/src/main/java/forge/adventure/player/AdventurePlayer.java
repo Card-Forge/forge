@@ -1,4 +1,4 @@
-package forge.adventure.world;
+package forge.adventure.player;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -6,6 +6,7 @@ import com.google.common.collect.Lists;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.data.HeroListData;
 import forge.adventure.util.*;
+import forge.adventure.world.WorldSave;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -31,8 +32,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private int maxLife=20;
     private int life=20;
     private int selectedDeckIndex=0;
+    private PlayerStatistic statistic=new PlayerStatistic();
     private  Deck[] decks=new Deck[NUMBER_OF_DECKS];
     private final DifficultyData difficultyData=new DifficultyData();
+
+
     public AdventurePlayer()
     {
 
@@ -41,9 +45,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             decks[i]=new Deck("Empty Deck");
         }
     }
+
+    public PlayerStatistic getStatistic(){return statistic;}
+
     static public AdventurePlayer current()
     {
-        return WorldSave.currentSave.getPlayer();
+        return WorldSave.getCurrentSave().getPlayer();
     }
     private final CardPool cards=new CardPool();
     private final ItemPool<InventoryItem> newCards=new ItemPool<>(InventoryItem.class);
@@ -67,6 +74,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         heroRace = race;
         isFemale = !male;
         name = n;
+        statistic.clear();
         newCards.clear();
         onGoldChangeList.emit();
         onLifeTotalChangeList.emit();
@@ -118,6 +126,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     @Override
     public void load(SaveFileData data) {
 
+
+        this.statistic.load(data.readSubData("statistic"));
         this.difficultyData.startingLife=data.readInt("startingLife");
         this.difficultyData.staringMoney=data.readInt("staringMoney");
         this.difficultyData.startingDifficulty=data.readBool("startingDifficulty");
@@ -174,6 +184,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         SaveFileData data= new SaveFileData();
 
 
+        data.store("statistic",this.statistic.save());
         data.store("startingLife",this.difficultyData.startingLife);
         data.store("staringMoney",this.difficultyData.staringMoney);
         data.store("startingDifficulty",this.difficultyData.startingDifficulty);

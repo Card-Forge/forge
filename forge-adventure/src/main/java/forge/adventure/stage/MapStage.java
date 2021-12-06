@@ -22,7 +22,7 @@ import forge.adventure.scene.SceneType;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.util.Reward;
-import forge.adventure.world.PointOfInterestChanges;
+import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.world.WorldSave;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package forge.adventure.world;
+package forge.adventure.pointofintrest;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;

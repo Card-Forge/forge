@@ -66,19 +66,28 @@
          "name" : "deck" ,             
          "text" : "Deck",
           "width": 32,
-          "height": 32,      
+          "height": 24,
           "x": 432, 
           "y": 176 
     } ,
     {
-         "type" : "TextButton",     
-         "name" : "menu" ,             
-         "text" : "Menu",
+         "type" : "TextButton",
+        "name" : "statistic" ,
+        "text" : "Status",
           "width": 32,
-          "height": 32,      
+          "height": 24,
           "x": 432, 
-          "y": 224 
-    }  
+          "y": 204
+    }  ,
+      {
+        "type" : "TextButton",
+        "name" : "menu" ,
+        "text" : "Menu",
+        "width": 32,
+        "height": 24,
+        "x": 432,
+        "y": 232
+      }
     ]
 
 

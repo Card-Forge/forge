@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
-import forge.adventure.world.PointOfInterest;
+import forge.adventure.pointofintrest.PointOfInterest;
 
 /**
  * MapSprite for points of interest to add a bounding rect for collision detection

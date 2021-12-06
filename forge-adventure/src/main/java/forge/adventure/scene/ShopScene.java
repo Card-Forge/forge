@@ -1,6 +1,5 @@
 package forge.adventure.scene;
 
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import forge.screens.FScreen;
 
 /**
@@ -10,7 +9,6 @@ import forge.screens.FScreen;
 public class ShopScene extends ForgeScene {
 
     AdventureDeckEditor screen;
-    Stage stage;
 
     public ShopScene() {
 
@@ -18,8 +16,6 @@ public class ShopScene extends ForgeScene {
 
     @Override
     public void dispose() {
-        if (stage != null)
-            stage.dispose();
     }
 
 

@@ -6,7 +6,7 @@ import com.google.common.base.Function;
 import forge.Forge;
 import forge.Graphics;
 import forge.adventure.AdventureApplicationAdapter;
-import forge.adventure.world.AdventurePlayer;
+import forge.adventure.player.AdventurePlayer;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;

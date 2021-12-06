@@ -9,6 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Json;
 import forge.adventure.data.*;
+import forge.adventure.pointofintrest.PointOfInterest;
+import forge.adventure.pointofintrest.PointOfInterestMap;
 import forge.adventure.scene.Scene;
 import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
@@ -375,7 +377,7 @@ public class World implements  Disposable, SaveFileContent {
 
                 if(i==j||usedEdges.contains((long)i|((long)j<<32)))
                     continue;
-                float dist = current.position.dst(towns.get(j).position);
+                float dist = current.getPosition().dst(towns.get(j).getPosition());
                 if (dist < smallestDistance) {
                     smallestDistance = dist;
                     smallestIndex = j;
