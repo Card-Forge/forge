@@ -1,4 +1,4 @@
-Name:Homunculus
+Name:Homunculus Token
 ManaCost:no cost
 PT:2/2
 Types:Creature Homunculus

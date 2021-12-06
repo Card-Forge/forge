@@ -61,16 +61,14 @@ public class StaticAbilityCantTarget {
                 return false;
             }
         } else { // default zone is battlefield
-            if (!card.isInZone(ZoneType.Battlefield)) {
+            if (!card.isInPlay()) {
                 return false;
             }
         }
 
-
         if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
         }
-
 
         if (stAb.hasParam("Hexproof") && (activator != null)) {
             for (KeywordInterface kw : activator.getKeywords()) {

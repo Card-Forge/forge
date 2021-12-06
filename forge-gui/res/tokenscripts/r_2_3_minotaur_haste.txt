@@ -1,4 +1,4 @@
-Name:Minotaur
+Name:Minotaur Token
 ManaCost:no cost
 Types:Creature Minotaur
 Colors:red

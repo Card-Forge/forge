@@ -1,4 +1,4 @@
-Name:Faerie Dragon
+Name:Faerie Dragon Token
 ManaCost:no cost
 Types:Creature Faerie Dragon
 Colors:blue

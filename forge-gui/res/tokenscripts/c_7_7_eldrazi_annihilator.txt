@@ -1,4 +1,4 @@
-Name:Eldrazi
+Name:Eldrazi Token
 ManaCost:no cost
 Types:Creature Eldrazi
 PT:7/7

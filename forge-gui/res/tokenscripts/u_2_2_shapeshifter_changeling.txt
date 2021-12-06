@@ -1,4 +1,4 @@
-Name:Shapeshifter
+Name:Shapeshifter Token
 Colors:blue
 ManaCost:no cost
 Types:Creature Shapeshifter

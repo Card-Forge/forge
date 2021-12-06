@@ -17,9 +17,9 @@ import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.TextUtil;
 
 public class PumpAllEffect extends SpellAbilityEffect {
+
     private static void applyPumpAll(final SpellAbility sa,
             final Iterable<Card> list, final int a, final int d,
             final List<String> keywords, final List<ZoneType> affectedZones) {
@@ -110,7 +110,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
 
         String desc = "";
         if (sa.hasParam("SpellDescription")) {
-            desc = TextUtil.fastReplace(sa.getParam("SpellDescription"), "CARDNAME", sa.getHostCard().getName());
+            desc = sa.getParam("SpellDescription");
         }
 
         sb.append(desc);

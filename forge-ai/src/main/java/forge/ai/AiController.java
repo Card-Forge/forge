@@ -88,6 +88,7 @@ public class AiController {
     private boolean cheatShuffle;
     private boolean useSimulation;
     private SpellAbilityPicker simPicker;
+    private int lastAttackAggression;
 
     public boolean canCheatShuffle() {
         return cheatShuffle;
@@ -102,6 +103,10 @@ public class AiController {
     }
     public void setUseSimulation(boolean value) {
         this.useSimulation = value;
+    }
+
+    public int getAttackAggression() {
+        return lastAttackAggression;
     }
 
     public SpellAbilityPicker getSimulationPicker() {
@@ -294,8 +299,9 @@ public class AiController {
             // These checks only work if the Executing SpellAbility is an Ability_Sub.
             if (exSA instanceof AbilitySub && !doTrigger(exSA, false)) {
                 // AI would not run this trigger if given the chance
-                if (api == null && card.isCreature() && exSA.usesTargeting() && !exSA.getTargetRestrictions().hasCandidates(exSA) && ComputerUtil.aiLifeInDanger(activatingPlayer, true, 0)) {
-                    // trigger will not run due to lack of targets and we desperately need a creature
+                if (api == null && card.isCreature() && !ComputerUtilAbility.isFullyTargetable(exSA) &&
+                        (ComputerUtil.aiLifeInDanger(activatingPlayer, true, 0) || "BadETB".equals(tr.getParam("AILogic")))) {
+                    // trigger will not run due to lack of targets and we 1. desperately need a creature or 2. are happy about that
                     continue;
                 }
                 return false;
@@ -651,12 +657,11 @@ public class AiController {
         return null;
     }
 
-    public boolean reserveManaSourcesForNextSpell(SpellAbility sa, SpellAbility exceptForSa) {
-        return reserveManaSources(sa, null, false, true, exceptForSa);
-    }
-
     public boolean reserveManaSources(SpellAbility sa) {
         return reserveManaSources(sa, PhaseType.MAIN2, false, false, null);
+    }
+    public boolean reserveManaSourcesForNextSpell(SpellAbility sa, SpellAbility exceptForSa) {
+        return reserveManaSources(sa, null, false, true, exceptForSa);
     }
     public boolean reserveManaSources(SpellAbility sa, PhaseType phaseType, boolean enemy) {
         return reserveManaSources(sa, phaseType, enemy, true, null);
@@ -737,7 +742,7 @@ public class AiController {
         }
 
         int oldCMC = -1;
-        boolean xCost = sa.getPayCosts().hasXInAnyCostPart() || sa.getHostCard().hasStartOfKeyword("Strive");
+        boolean xCost = sa.costHasX() || sa.getHostCard().hasStartOfKeyword("Strive");
         if (!xCost) {
             if (!ComputerUtilCost.canPayCost(sa, player)) {
                 // for most costs, it's OK to check if they can be paid early in order to avoid running a heavy API check
@@ -751,14 +756,15 @@ public class AiController {
         }
 
         // state needs to be switched here so API checks evaluate the right face
-        if (sa.getCardState() != null && !sa.getHostCard().isInPlay() && sa.getCardState().getStateName() == CardStateName.Modal) {
-            sa.getHostCard().setState(CardStateName.Modal, false);
+        CardStateName currentState = sa.getCardState() != null && sa.getHostCard().getCurrentStateName() != sa.getCardState().getStateName() && !sa.getHostCard().isInPlay() ? sa.getHostCard().getCurrentStateName() : null;
+        if (currentState != null) {
+            sa.getHostCard().setState(sa.getCardState().getStateName(), false);
         }
 
         AiPlayDecision canPlay = canPlaySa(sa); // this is the "heaviest" check, which also sets up targets, defines X, etc.
 
-        if (sa.getCardState() != null && !sa.getHostCard().isInPlay() && sa.getCardState().getStateName() == CardStateName.Modal) {
-            sa.getHostCard().setState(CardStateName.Original, false);
+        if (currentState != null) {
+            sa.getHostCard().setState(currentState, false);
         }
 
         if (canPlay != AiPlayDecision.WillPlay) {
@@ -900,7 +906,7 @@ public class AiController {
             return canPlayFromEffectAI((SpellPermanent)sa, false, true);
         }
         if (sa.usesTargeting()) {
-            if (!sa.isTargetNumberValid() && !sa.getTargetRestrictions().hasCandidates(sa)) {
+            if (!sa.isTargetNumberValid() && sa.getTargetRestrictions().getNumCandidates(sa, true) == 0) {
                 return AiPlayDecision.TargetingFailed;
             }
             if (!StaticAbilityMustTarget.meetsMustTargetRestriction(sa)) {
@@ -1436,7 +1442,7 @@ public class AiController {
 
     // declares blockers for given defender in a given combat
     public void declareBlockersFor(Player defender, Combat combat) {
-        AiBlockController block = new AiBlockController(defender);
+        AiBlockController block = new AiBlockController(defender, defender != player);
         // When player != defender, AI should declare blockers for its benefit.
         block.assignBlockersForCombat(combat);
     }
@@ -1444,7 +1450,7 @@ public class AiController {
     public void declareAttackers(Player attacker, Combat combat) {
         // 12/2/10(sol) the decision making here has moved to getAttackers()
         AiAttackController aiAtk = new AiAttackController(attacker); 
-        aiAtk.declareAttackers(combat);
+        lastAttackAggression = aiAtk.declareAttackers(combat);
 
         // if invalid: just try an attack declaration that we know to be legal
         if (!CombatUtil.validateAttackers(combat)) {
@@ -1621,6 +1627,7 @@ public class AiController {
                     Map<String, String> params = t.getMapParams();
                     if ("ChangesZone".equals(params.get("Mode"))
                             && params.containsKey("ValidCard")
+                            && (!params.containsKey("AILogic") || !params.get("AILogic").equals("SafeToHold"))
                             && !params.get("ValidCard").contains("nonLand")
                             && ((params.get("ValidCard").contains("Land")) || (params.get("ValidCard").contains("Permanent")))
                             && "Battlefield".equals(params.get("Destination"))) {
@@ -2014,8 +2021,7 @@ public class AiController {
                     Card bestCreature = ComputerUtilCard.getBestCreatureAI(rightToughness.isEmpty() ? pool : rightToughness);
                     if (bestCreature != null) {
                         result.add(bestCreature);
-                    } else {
-                        result.add(Aggregates.random(pool)); // should ideally never get here
+                        break;
                     }
                 } else {
                     CardCollectionView viableOptions = CardLists.filter(pool, Predicates.and(CardPredicates.isControlledByAnyOf(sa.getActivatingPlayer().getOpponents())),
@@ -2026,22 +2032,22 @@ public class AiController {
                                 }
                             });
                     Card best = ComputerUtilCard.getBestAI(viableOptions);
-                    if (best == null) {
-                        best = Aggregates.random(pool); // should ideally never get here either
+                    if (best != null) {
+                        result.add(best);
+                        break;
                     }
-                    result.add(best);
                 }
+                result.add(Aggregates.random(pool)); // should ideally never get here
                 break;
             default:
                 CardCollection editablePool = new CardCollection(pool);
                 for (int i = 0; i < max; i++) {
                     Card c = player.getController().chooseSingleEntityForEffect(editablePool, sa, null, isOptional, params);
-                    if (c != null) {
-                        result.add(c);
-                        editablePool.remove(c);
-                    } else {
+                    if (c == null) {
                         break;
                     }
+                    result.add(c);
+                    editablePool.remove(c);
 
                     // Special case for Bow to My Command which simulates a complex tap cost via ChooseCard
                     // TODO: consider enhancing support for tapXType<Any/...> in UnlessCost to get rid of this hack

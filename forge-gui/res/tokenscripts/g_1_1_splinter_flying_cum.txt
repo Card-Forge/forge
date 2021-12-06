@@ -1,4 +1,4 @@
-Name:Splinter
+Name:Splinter Token
 ManaCost:no cost
 Colors:green
 Types:Creature Splinter

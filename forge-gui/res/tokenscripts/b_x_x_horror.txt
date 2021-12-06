@@ -1,4 +1,4 @@
-Name:Horror
+Name:Horror Token
 ManaCost:no cost
 Colors:black
 Types:Creature Horror

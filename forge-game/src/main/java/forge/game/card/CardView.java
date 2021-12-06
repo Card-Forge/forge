@@ -874,7 +874,7 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Modal, c.isModal());
 
         //backside
-        if (c.getAlternateState()!=null)
+        if (c.getAlternateState() != null)
             updateBackSide(c.getAlternateState().getName(), c.hasBackSide());
 
         final Card cloner = c.getCloner();

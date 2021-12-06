@@ -1,4 +1,4 @@
-Name:Human
+Name:Human Token
 ManaCost:no cost
 Types:Creature Human
 Colors:white

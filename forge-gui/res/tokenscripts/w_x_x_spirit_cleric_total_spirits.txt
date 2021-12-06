@@ -1,4 +1,4 @@
-Name:Spirit Cleric
+Name:Spirit Cleric Token
 ManaCost:no cost
 Types:Creature Spirit Cleric
 PT:*/*

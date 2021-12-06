@@ -1,4 +1,4 @@
-Name:Knight
+Name:Knight Token
 ManaCost:no cost
 Colors:white
 Types:Creature Knight

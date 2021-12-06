@@ -14,7 +14,9 @@ import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
+import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -25,6 +27,8 @@ import forge.game.card.CounterType;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostRemoveCounter;
 import forge.game.keyword.Keyword;
+import forge.game.mana.Mana;
+import forge.game.mana.ManaPool;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -61,6 +65,9 @@ public class ManaEffectAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
+        if (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai && canRampPool(ai, sa.getHostCard())) {
+            return true;
+        }
         if (!ph.is(PhaseType.MAIN2) || !ComputerUtil.activateForCost(sa, ai)) {
             return false;
         }
@@ -79,6 +86,8 @@ public class ManaEffectAi extends SpellAbilityAi {
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph, String logic) {
         if (logic.startsWith("ManaRitual")) {
              return ph.is(PhaseType.MAIN2, ai) || ph.is(PhaseType.MAIN1, ai);
+        } else if ("AtOppEOT".equals(logic)) {
+            return !ai.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.manaBurn) && ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai;
         }
         return super.checkPhaseRestrictions(ai, sa, ph, logic);
     }
@@ -95,9 +104,14 @@ public class ManaEffectAi extends SpellAbilityAi {
             return true; // handled elsewhere, does not meet the standard requirements
         }
 
+        PhaseHandler ph = ai.getGame().getPhaseHandler();
+        boolean moreManaNextTurn = false;
+        if (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai && canRampPool(ai, sa.getHostCard())) {
+            moreManaNextTurn = true;
+        }
+
         return sa.getPayCosts().hasNoManaCost() && sa.getPayCosts().isReusuableResource()
-                && sa.getSubAbility() == null && ComputerUtil.playImmediately(ai, sa);
-        // return super.checkApiLogic(ai, sa);
+                && sa.getSubAbility() == null && (ComputerUtil.playImmediately(ai, sa) || moreManaNextTurn);
     }
 
     /**
@@ -243,5 +257,19 @@ public class ManaEffectAi extends SpellAbilityAi {
 
         // TODO: this will probably still waste the card from time to time. Somehow improve detection of castable material.
         return castableSpells.size() > 0;
+    }
+
+    private boolean canRampPool(Player ai, Card source) {
+        ManaPool mp = ai.getManaPool();
+        Mana test = null;
+        if (mp.isEmpty()) {
+            test = new Mana((byte) ManaAtom.COLORLESS, source, null);
+            mp.addMana(test, false);
+        }
+        boolean lose = mp.willManaBeLostAtEndOfPhase();
+        if (test != null) {
+            mp.removeMana(test, false);
+        }
+        return !lose;
     }
 }

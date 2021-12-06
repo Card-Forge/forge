@@ -160,7 +160,7 @@ public class ComputerUtilCombat {
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return CombatUtil.canBlock(att, c) && (c.hasFirstStrike() || c.hasDoubleStrike());
+                return (c.hasFirstStrike() || c.hasDoubleStrike()) && CombatUtil.canBlock(att, c);
             }
         });
 
@@ -324,12 +324,12 @@ public class ComputerUtilCombat {
             for (final Card attacker : attackers) {
                 final List<Card> blockers = combat.getBlockers(attacker);
 
-                if ((blockers.size() == 0)
+                if (blockers.size() == 0
                         || attacker.hasKeyword("You may have CARDNAME assign its combat damage "
                                 + "as though it weren't blocked.")) {
                     unblocked.add(attacker);
                 } else if (attacker.hasKeyword(Keyword.TRAMPLE)
-                        && (getAttack(attacker) > totalShieldDamage(attacker, blockers))) {
+                        && getAttack(attacker) > totalShieldDamage(attacker, blockers)) {
                     if (!attacker.hasKeyword(Keyword.INFECT)) {
                         damage += getAttack(attacker) - totalShieldDamage(attacker, blockers);
                     }
@@ -366,12 +366,12 @@ public class ComputerUtilCombat {
         for (final Card attacker : attackers) {
             final List<Card> blockers = combat.getBlockers(attacker);
 
-            if ((blockers.size() == 0)
+            if (blockers.size() == 0
                     || attacker.hasKeyword("You may have CARDNAME assign its combat damage"
                             + " as though it weren't blocked.")) {
                 unblocked.add(attacker);
             } else if (attacker.hasKeyword(Keyword.TRAMPLE)
-                    && (getAttack(attacker) > totalShieldDamage(attacker, blockers))) {
+                    && getAttack(attacker) > totalShieldDamage(attacker, blockers)) {
                 int trampleDamage = getAttack(attacker) - totalShieldDamage(attacker, blockers);
                 if (attacker.hasKeyword(Keyword.INFECT)) {
                     poison += trampleDamage;
@@ -431,7 +431,7 @@ public class ComputerUtilCombat {
         // check for creatures that must be blocked
         final List<Card> attackers = combat.getAttackersOf(ai);
 
-        final List<Card> threateningCommanders = getLifeThreateningCommanders(ai,combat);
+        final List<Card> threateningCommanders = getLifeThreateningCommanders(ai, combat);
 
         for (final Card attacker : attackers) {
             final List<Card> blockers = combat.getBlockers(attacker);
@@ -457,8 +457,12 @@ public class ComputerUtilCombat {
             }
         }
 
-        int threshold = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD));
-        int maxTreshold = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_MAX_THRESHOLD)) - threshold;
+        int threshold = 0;
+        int maxTreshold = 0;
+        if (ai.getController().isAI()) {
+            threshold = ((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD);
+            maxTreshold = ((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_MAX_THRESHOLD) - threshold;
+        }
 
         int chance = MyRandom.getRandom().nextInt(80) + 5;
         while (maxTreshold > 0) {
@@ -617,7 +621,7 @@ public class ComputerUtilCombat {
             if (flankingMagnitude >= defender.getNetToughness()) {
                 return 0;
             }
-            if (flankingMagnitude >= (defender.getNetToughness() - defender.getDamage())
+            if (flankingMagnitude >= defender.getNetToughness() - defender.getDamage()
                     && !defender.hasKeyword(Keyword.INDESTRUCTIBLE)) {
                 return 0;
             }
@@ -1660,7 +1664,7 @@ public class ComputerUtilCombat {
      */
     public static boolean combatantCantBeDestroyed(Player ai, final Card combatant) {
         // either indestructible or may regenerate
-        if (combatant.hasKeyword(Keyword.INDESTRUCTIBLE) || (ComputerUtil.canRegenerate(ai, combatant))) {
+        if (combatant.hasKeyword(Keyword.INDESTRUCTIBLE) || ComputerUtil.canRegenerate(ai, combatant)) {
             return true;
         }
 
@@ -1715,7 +1719,7 @@ public class ComputerUtilCombat {
             if (flankingMagnitude >= blocker.getNetToughness()) {
                 return false;
             }
-            if ((flankingMagnitude >= (blocker.getNetToughness() - blocker.getDamage()))
+            if (flankingMagnitude >= blocker.getNetToughness() - blocker.getDamage()
                     && !blocker.hasKeyword(Keyword.INDESTRUCTIBLE)) {
                 return false;
             }
@@ -2510,10 +2514,10 @@ public class ComputerUtilCombat {
             }
             // 2. Otherwise, go through the list of options one by one, choose the first one that can't be blocked profitably.
             for (GameEntity p : defenders) {
-                if (p instanceof Player && !ComputerUtilCard.canBeBlockedProfitably((Player)p, attacker)) {
+                if (p instanceof Player && !ComputerUtilCard.canBeBlockedProfitably((Player)p, attacker, true)) {
                     return p;
                 }
-                if (p instanceof Card && !ComputerUtilCard.canBeBlockedProfitably(((Card)p).getController(), attacker)) {
+                if (p instanceof Card && !ComputerUtilCard.canBeBlockedProfitably(((Card)p).getController(), attacker, true)) {
                     return p;
                 }
             }

@@ -1,4 +1,4 @@
-Name:Weird
+Name:Weird Token
 ManaCost:no cost
 Types:Creature Weird
 Colors:blue

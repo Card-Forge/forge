@@ -1,4 +1,4 @@
-Name:Faerie
+Name:Faerie Token
 ManaCost:no cost
 Types:Creature Faerie
 Colors:blue

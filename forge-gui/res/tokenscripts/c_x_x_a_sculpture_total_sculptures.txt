@@ -1,4 +1,4 @@
-Name:Sculpture
+Name:Sculpture Token
 ManaCost:no cost
 Types:Artifact Creature Sculpture
 PT:*/*

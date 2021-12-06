@@ -26,7 +26,6 @@ public class ProtectAllAi extends SpellAbilityAi {
         return false;
     } // protectAllCanPlayAI()
 
-
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return true;

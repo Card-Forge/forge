@@ -454,22 +454,22 @@ ScryfallCode=KHM
 2 Woodland Chasm|KHM
 
 [tokens]
-w_4_4_angel_warrior_flying_vigilance
-w_1_1_human_warrior
-w_1_1_spirit_flying
-u_1_1_bird_flying
-u_4_4_giant_wizard
-komas_coil
-u_2_2_shapeshifter_changeling
 b_2_2_zombie_berserker
-r_2_3_demon_berserker_menace
-r_5_5_dragon_flying
-r_2_1_dwarf_berserker
+c_a_treasure_sac
+c_e_shard_draw
+g_1_1_elf_warrior
 g_2_2_bear
 g_2_2_cat
-g_1_1_elf_warrior
 g_4_4_troll_warrior_trample
-c_a_treasure_sac
 icy_manalith
+komas_coil
+r_2_1_dwarf_berserker
+r_2_3_demon_berserker_menace
+r_5_5_dragon_flying
 replicated_ring
-shard
+u_1_1_bird_flying
+u_2_2_shapeshifter_changeling
+u_4_4_giant_wizard
+w_1_1_human_warrior
+w_1_1_spirit_flying
+w_4_4_angel_warrior_flying_vigilance

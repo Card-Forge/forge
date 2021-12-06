@@ -1,4 +1,4 @@
-Name:Zombie Berserker
+Name:Zombie Berserker Token
 ManaCost:no cost
 Types:Creature Zombie Berserker
 Colors:black

@@ -214,4 +214,15 @@ public class ComputerUtilAbility {
 
         return targeted;
     }
+
+    public static boolean isFullyTargetable(SpellAbility sa) {
+        SpellAbility sub = sa;
+        while (sub != null) {
+            if (sub.usesTargeting() && sub.getTargetRestrictions().getNumCandidates(sub, true) < sub.getMinTargets()) {
+                return false;
+            }
+            sub = sub.getSubAbility();
+        }
+        return true;
+    }
 }

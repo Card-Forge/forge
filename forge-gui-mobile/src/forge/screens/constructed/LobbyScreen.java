@@ -70,6 +70,10 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     private final FLabel lblVariants = new FLabel.Builder().text(localizer.getMessage("lblVariants") + ":").font(VARIANTS_FONT).build();
     private final FComboBox<Object> cbVariants = new FComboBox<>();
 
+    // Max games in a match frame and variables
+    private final FLabel lblGamesInMatch = new FLabel.Builder().text(localizer.getMessage("lblMatch") + ":").font(VARIANTS_FONT).build();
+    private final FComboBox<String> cbGamesInMatch = new FComboBox<>();
+
     private final List<PlayerPanel> playerPanels = new ArrayList<>(MAX_PLAYERS);
     private final FScrollPane playersScroll = new FScrollPane() {
         @Override
@@ -126,6 +130,20 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         });
 
         initLobby(lobby0);
+
+        add(lblGamesInMatch);
+        add(cbGamesInMatch);
+        cbGamesInMatch.setFont(VARIANTS_FONT);
+        cbGamesInMatch.addItem("1");
+        cbGamesInMatch.addItem("3");
+        cbGamesInMatch.addItem("5");
+        cbGamesInMatch.setSelectedItem(FModel.getPreferences().getPref((FPref.UI_MATCHES_PER_GAME)));
+        cbGamesInMatch.setChangedHandler(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                FModel.getPreferences().setPref(FPref.UI_MATCHES_PER_GAME, cbGamesInMatch.getSelectedItem());
+            }
+        });
 
         add(lblVariants);
         add(cbVariants);
@@ -207,6 +225,8 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         btnStart.setEnabled(hasControl);
         lblVariants.setEnabled(hasControl);
         cbVariants.setEnabled(hasControl);
+        lblGamesInMatch.setEnabled(hasControl);
+        cbGamesInMatch.setEnabled(hasControl);
         lblPlayers.setEnabled(hasControl);
         cbPlayerCount.setEnabled(hasControl);
         while (lobby.getNumberOfSlots() < getNumPlayers()){
@@ -255,19 +275,29 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         if (Forge.isLandscapeMode()) {
             lblVariants.setBounds(x, y, lblVariants.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
             x += lblVariants.getWidth();
-            cbVariants.setBounds(x, y, width - (x + lblPlayers.getAutoSizeBounds().width + PADDING/2 + Utils.AVG_FINGER_WIDTH + PADDING), fieldHeight);
+            cbVariants.setBounds(x, y, width - (x + lblGamesInMatch.getAutoSizeBounds().width + PADDING/2
+                    + lblPlayers.getAutoSizeBounds().width + (Utils.AVG_FINGER_WIDTH + PADDING)*2), fieldHeight);
             x += cbVariants.getWidth();
             lblPlayers.setBounds(x, y, lblPlayers.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
             x += lblPlayers.getWidth();
             cbPlayerCount.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
+            x += cbPlayerCount.getWidth() + PADDING;
+            lblGamesInMatch.setBounds(x, y, lblGamesInMatch.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
+            x += lblGamesInMatch.getWidth();
+            cbGamesInMatch.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
         } else {
+            lblVariants.setBounds(x, y, lblVariants.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
+            x += lblVariants.getWidth();
+            cbVariants.setBounds(x, y, width - x - PADDING, fieldHeight);
+            x = PADDING;
+            y += cbVariants.getHeight() + PADDING;
             lblPlayers.setBounds(x, y, lblPlayers.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
             x += lblPlayers.getWidth();
             cbPlayerCount.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
             x += cbPlayerCount.getWidth() + PADDING;
-            lblVariants.setBounds(x, y, lblVariants.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
-            x += lblVariants.getWidth();
-            cbVariants.setBounds(x, y, width - x - PADDING, fieldHeight);
+            lblGamesInMatch.setBounds(x, y, lblGamesInMatch.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
+            x += lblGamesInMatch.getWidth();
+            cbGamesInMatch.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
         }
         y += cbPlayerCount.getHeight() + PADDING;
         playersScroll.setBounds(0, y, width, height - y);

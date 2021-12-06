@@ -1,4 +1,4 @@
-Name:Sand
+Name:Sand Token
 ManaCost:no cost
 Types:Creature Sand
 PT:1/1

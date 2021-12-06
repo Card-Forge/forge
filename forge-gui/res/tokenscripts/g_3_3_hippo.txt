@@ -1,4 +1,4 @@
-Name:Hippo
+Name:Hippo Token
 ManaCost:no cost
 Types:Creature Hippo
 Colors:green

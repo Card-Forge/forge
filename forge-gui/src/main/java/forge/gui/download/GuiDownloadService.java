@@ -145,7 +145,11 @@ public abstract class GuiDownloadService implements Runnable {
     }
 
     private void readyToStart() {
-        if (files.isEmpty()) {
+        if (files == null) {
+            progressBar.setDescription("Connection error?");
+            btnStart.setText("OK");
+            btnStart.setCommand(cmdClose);
+        } else if (files.isEmpty()) {
             progressBar.setDescription("All items have been downloaded.");
             btnStart.setText("OK");
             btnStart.setCommand(cmdClose);

@@ -16,7 +16,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 
 public class RestartGameEffect extends SpellAbilityEffect {
@@ -110,6 +109,6 @@ public class RestartGameEffect extends SpellAbilityEffect {
             desc = "Restart the game.";
         }
 
-        return TextUtil.fastReplace(desc, "CARDNAME", sa.getHostCard().getName());
+        return desc;
     }
 }

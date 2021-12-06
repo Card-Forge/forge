@@ -1,4 +1,4 @@
-Name:Goblin Scout
+Name:Goblin Scout Token
 ManaCost:no cost
 Types:Creature Goblin Scout
 Colors:red

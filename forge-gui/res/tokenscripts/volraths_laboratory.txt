@@ -1,4 +1,4 @@
-Name:ChosenType
+Name:ChosenType Token
 ManaCost:no cost
 Types:Creature
 PT:2/2

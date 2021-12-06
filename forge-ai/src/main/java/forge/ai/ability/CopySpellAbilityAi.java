@@ -16,7 +16,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.util.MyRandom;
 
 public class CopySpellAbilityAi extends SpellAbilityAi {
@@ -58,8 +57,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
             }
         }
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             // Filter AI-specific targets if provided
             if ("OnlyOwned".equals(sa.getParam("AITgts"))) {
                 if (!top.getActivatingPlayer().equals(aiPlayer)) {

@@ -73,7 +73,11 @@ public class AiBlockController {
 
     private boolean lifeInDanger = false;
 
-    public AiBlockController(Player aiPlayer) {
+    // set to true when AI is predicting a blocking for another player so it doesn't use hidden information
+    private boolean checkingOther = false;
+
+    public AiBlockController(Player aiPlayer, boolean checkingOther) {
+        this.checkingOther = checkingOther;
         ai = aiPlayer;
     }
 
@@ -295,7 +299,7 @@ public class AiBlockController {
                 combat.addBlocker(attacker, blocker);
             }
         }
-        attackersLeft = (new ArrayList<>(currentAttackers));
+        attackersLeft = new ArrayList<>(currentAttackers);
 
         // 6. Blockers that don't survive until the next turn anyway
         for (final Card attacker : attackersLeft) {
@@ -322,7 +326,7 @@ public class AiBlockController {
                 combat.addBlocker(attacker, blocker);
             }
         }
-        attackersLeft = (new ArrayList<>(currentAttackers));
+        attackersLeft = new ArrayList<>(currentAttackers);
     }
 
     private Predicate<Card> rampagesOrNeedsManyToBlock(final Combat combat) {
@@ -421,7 +425,7 @@ public class AiBlockController {
             }
         }
 
-        attackersLeft = (new ArrayList<>(currentAttackers));
+        attackersLeft = new ArrayList<>(currentAttackers);
         currentAttackers = new ArrayList<>(attackersLeft);
 
         boolean considerTripleBlock = true;
@@ -457,7 +461,7 @@ public class AiBlockController {
                         return false;
                     }
                     final boolean randomTrade = wouldLikeToRandomlyTrade(attacker, c, combat);
-                    return lifeInDanger || ComputerUtilCard.evaluateCreature(c) + diff < ComputerUtilCard.evaluateCreature(attacker) || randomTrade;
+                    return lifeInDanger || randomTrade || ComputerUtilCard.evaluateCreature(c) + diff < ComputerUtilCard.evaluateCreature(attacker);
                 }
             });
             if (usableBlockers.size() < 2) {
@@ -560,7 +564,7 @@ public class AiBlockController {
             }
         }
 
-        attackersLeft = (new ArrayList<>(currentAttackers));
+        attackersLeft = new ArrayList<>(currentAttackers);
     }
 
     private void makeGangNonLethalBlocks(final Combat combat) {
@@ -608,7 +612,7 @@ public class AiBlockController {
             }
         }
 
-        attackersLeft = (new ArrayList<>(currentAttackers));
+        attackersLeft = new ArrayList<>(currentAttackers);
     }
 
     // Bad Trade Blocks (should only be made if life is in danger)
@@ -653,7 +657,7 @@ public class AiBlockController {
                 }
             }
         }
-        attackersLeft = (new ArrayList<>(currentAttackers));
+        attackersLeft = new ArrayList<>(currentAttackers);
     }
 
     // Chump Blocks (should only be made if life is in danger)
@@ -854,7 +858,7 @@ public class AiBlockController {
     }
 
     private void makeChumpBlocksToSavePW(Combat combat) {
-        if (ComputerUtilCombat.lifeInDanger(ai, combat) || ai.getLife() <= ai.getStartingLife() / 5) {
+        if (ai.getLife() <= ai.getStartingLife() / 5 || ComputerUtilCombat.lifeInDanger(ai, combat)) {
             // most likely not worth trying to protect planeswalkers when at threateningly low life or in
             // dangerous combat which threatens lethal or severe damage to face
             return;
@@ -1045,7 +1049,7 @@ public class AiBlockController {
         makeGangBlocks(combat);
 
         // When the AI holds some Fog effect, don't bother about lifeInDanger
-        if (!ComputerUtil.hasAFogEffect(ai)) {
+        if (!ComputerUtil.hasAFogEffect(ai, checkingOther)) {
             lifeInDanger = ComputerUtilCombat.lifeInDanger(ai, combat);
             makeTradeBlocks(combat); // choose necessary trade blocks
 
@@ -1145,7 +1149,7 @@ public class AiBlockController {
 
         // check to see if it's possible to defend a Planeswalker under attack with a chump block,
         // unless life is low enough to be more worried about saving preserving the life total
-        if (ai.getController().isAI() && !ComputerUtilCombat.lifeInDanger(ai, combat)) {
+        if (ai.getController().isAI()) {
             makeChumpBlocksToSavePW(combat);
         }
 
@@ -1206,7 +1210,7 @@ public class AiBlockController {
         final CardCollection result = new CardCollection();
         boolean newBlockerIsAdded = false;
         // The new blocker comes right after this one
-        final Card newBlockerRightAfter = (newBlockerIndex == 0 ? null : allBlockers.get(newBlockerIndex - 1));
+        final Card newBlockerRightAfter = newBlockerIndex == 0 ? null : allBlockers.get(newBlockerIndex - 1);
         if (newBlockerRightAfter == null
                 && damage >= ComputerUtilCombat.getEnoughDamageToKill(blocker, damage, attacker, true)) {
             result.add(blocker);
@@ -1274,16 +1278,19 @@ public class AiBlockController {
         int oppCreatureCount = 0;
         if (ai.getController().isAI()) {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-            enableRandomTrades = aic.getBooleanProperty(AiProps.ENABLE_RANDOM_FAVORABLE_TRADES_ON_BLOCK);
-            randomTradeIfBehindOnBoard = aic.getBooleanProperty(AiProps.RANDOMLY_TRADE_EVEN_WHEN_HAVE_LESS_CREATS);
-            randomTradeIfCreatInHand = aic.getBooleanProperty(AiProps.ALSO_TRADE_WHEN_HAVE_A_REPLACEMENT_CREAT);
-            minRandomTradeChance = aic.getIntProperty(AiProps.MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
-            maxRandomTradeChance = aic.getIntProperty(AiProps.MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
-            chanceModForEmbalm = aic.getIntProperty(AiProps.CHANCE_DECREASE_TO_TRADE_VS_EMBALM);
-            maxCreatDiff = aic.getIntProperty(AiProps.MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE);
-            maxCreatDiffWithRepl = aic.getIntProperty(AiProps.MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE_WITH_REPL);
-            chanceToTradeToSaveWalker = aic.getIntProperty(AiProps.CHANCE_TO_TRADE_TO_SAVE_PLANESWALKER);
-            chanceToTradeDownToSaveWalker = aic.getIntProperty(AiProps.CHANCE_TO_TRADE_DOWN_TO_SAVE_PLANESWALKER);
+            // simulation must get same results or it may crash
+            if (!aic.usesSimulation()) {
+                enableRandomTrades = aic.getBooleanProperty(AiProps.ENABLE_RANDOM_FAVORABLE_TRADES_ON_BLOCK);
+                randomTradeIfBehindOnBoard = aic.getBooleanProperty(AiProps.RANDOMLY_TRADE_EVEN_WHEN_HAVE_LESS_CREATS);
+                randomTradeIfCreatInHand = aic.getBooleanProperty(AiProps.ALSO_TRADE_WHEN_HAVE_A_REPLACEMENT_CREAT);
+                minRandomTradeChance = aic.getIntProperty(AiProps.MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
+                maxRandomTradeChance = aic.getIntProperty(AiProps.MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
+                chanceModForEmbalm = aic.getIntProperty(AiProps.CHANCE_DECREASE_TO_TRADE_VS_EMBALM);
+                maxCreatDiff = aic.getIntProperty(AiProps.MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE);
+                maxCreatDiffWithRepl = aic.getIntProperty(AiProps.MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE_WITH_REPL);
+                chanceToTradeToSaveWalker = aic.getIntProperty(AiProps.CHANCE_TO_TRADE_TO_SAVE_PLANESWALKER);
+                chanceToTradeDownToSaveWalker = aic.getIntProperty(AiProps.CHANCE_TO_TRADE_DOWN_TO_SAVE_PLANESWALKER);
+            }
         }
 
         if (!enableRandomTrades) {
@@ -1320,7 +1327,7 @@ public class AiBlockController {
             chance = Math.max(0, chance - chanceModForEmbalm);
         }
 
-        if (blocker.isFaceDown() && blocker.getState(CardStateName.Original).getType().isCreature()) {
+        if (blocker.isFaceDown() && !checkingOther && blocker.getState(CardStateName.Original).getType().isCreature()) {
             // if the blocker is a face-down creature (e.g. cast via Morph, Manifest), evaluate it
             // in relation to the original state, not to the Morph state
             evalBlk = ComputerUtilCard.evaluateCreature(Card.fromPaperCard(blocker.getPaperCard(), ai), false, true);
@@ -1329,7 +1336,7 @@ public class AiBlockController {
         boolean powerParityOrHigher = blocker.getNetPower() <= attacker.getNetPower();
         boolean creatureParityOrAllowedDiff = aiCreatureCount
                 + (randomTradeIfBehindOnBoard ? maxCreatDiff : 0) >= oppCreatureCount;
-        boolean wantToTradeWithCreatInHand = randomTradeIfCreatInHand
+        boolean wantToTradeWithCreatInHand = !checkingOther && randomTradeIfCreatInHand
                 && Iterables.any(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.CREATURES)
                 && aiCreatureCount + maxCreatDiffWithRepl >= oppCreatureCount;
         boolean wantToSavePlaneswalker = MyRandom.percentTrue(chanceToSavePW)

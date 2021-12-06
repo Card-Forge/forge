@@ -148,6 +148,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         }
 
         if (hasParam("AddType") || hasParam("RemoveType")
+                || hasParam("AddAllCreatureTypes")
                 || hasParam("RemoveCardTypes") || hasParam("RemoveSubTypes")
                 || hasParam("RemoveSuperTypes") || hasParam("RemoveLandTypes")
                 || hasParam("RemoveCreatureTypes") || hasParam("RemoveArtifactTypes")
@@ -208,8 +209,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             String currentName;
             if (this.isIntrinsic() && cardState != null && cardState.getCard() == getHostCard()) {
                 currentName = cardState.getName();
-            }
-            else {
+            } else {
                 currentName = getHostCard().getName();
             }
             String desc = CardTranslation.translateSingleDescriptionText(getParam("Description"), currentName);
@@ -432,7 +432,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
                 }
             }
         } else if (!hasParam("CharacteristicDefining")) {
-            if (!getHostCard().isInZone(ZoneType.Battlefield)) { // default
+            if (!getHostCard().isInPlay()) { // default
                 return false;
             }
         }

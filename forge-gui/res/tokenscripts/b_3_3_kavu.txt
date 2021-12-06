@@ -1,4 +1,4 @@
-Name:Kavu
+Name:Kavu Token
 ManaCost:no cost
 Types:Creature Kavu
 Colors:black

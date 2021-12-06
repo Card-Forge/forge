@@ -1,4 +1,4 @@
-Name:Slug
+Name:Slug Token
 ManaCost:no cost
 Types:Creature Slug
 Colors:black

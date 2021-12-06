@@ -1,4 +1,4 @@
-Name:Spider
+Name:Spider Token
 ManaCost:no cost
 Types:Enchantment Creature Spider
 PT:1/3

@@ -1,4 +1,4 @@
-Name:Beast
+Name:Beast Token
 Types:Creature Beast
 Colors:red,green,white
 ManaCost:no cost

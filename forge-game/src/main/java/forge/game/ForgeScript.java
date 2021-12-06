@@ -156,6 +156,8 @@ public class ForgeScript {
             return sa.isKicked();
         } else if (property.equals("Loyalty")) {
             return sa.isPwAbility();
+        } else if (property.equals("nonLoyalty")) {
+            return !sa.isPwAbility();
         } else if (property.equals("Aftermath")) {
             return sa.isAftermath();
         } else if (property.equals("MorphUp")) {

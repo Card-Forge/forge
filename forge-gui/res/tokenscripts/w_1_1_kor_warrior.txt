@@ -1,4 +1,4 @@
-Name:Kor Warrior
+Name:Kor Warrior Token
 ManaCost:no cost
 Types:Creature Kor Warrior
 Colors:white

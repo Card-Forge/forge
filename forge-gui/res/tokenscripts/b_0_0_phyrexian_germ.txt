@@ -1,4 +1,4 @@
-Name:Phyrexian Germ
+Name:Phyrexian Germ Token
 ManaCost:no cost
 Types:Creature Phyrexian Germ
 Colors:black

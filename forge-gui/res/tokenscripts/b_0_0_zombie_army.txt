@@ -1,4 +1,4 @@
-Name:Zombie Army
+Name:Zombie Army Token
 ManaCost:no cost
 Types:Creature Zombie Army
 Colors:black

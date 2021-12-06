@@ -1,4 +1,4 @@
-Name:Camarid
+Name:Camarid Token
 ManaCost:no cost
 Types:Creature Camarid
 Colors:blue

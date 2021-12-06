@@ -299,6 +299,14 @@ public class ComputerUtilMana {
                     });
                     saList = filteredList;
                     break;
+                case "NotSameCard":
+                    saList = Lists.newArrayList(Iterables.filter(filteredList, new Predicate<SpellAbility>() {
+                        @Override
+                        public boolean apply(final SpellAbility saPay) {
+                            return !saPay.getHostCard().getName().equals(sa.getHostCard().getName());
+                        }
+                    }));
+                    break;
                 default:
                     break;
             }
@@ -363,7 +371,7 @@ public class ComputerUtilMana {
             // Exception: when paying generic mana with Cavern of Souls, prefer the colored mana producing ability
             // to attempt to make the spell uncounterable when possible.
             if (ComputerUtilAbility.getAbilitySourceName(ma).equals("Cavern of Souls")
-                    && saHost.getType().getCreatureTypes().contains(ma.getHostCard().getChosenType())) {
+                    && saHost.getType().hasCreatureType(ma.getHostCard().getChosenType())) {
                 if (toPay == ManaCostShard.COLORLESS && cost.getUnpaidShards().contains(ManaCostShard.GENERIC)) {
                     // Deprioritize Cavern of Souls, try to pay generic mana with it instead to use the NoCounter ability
                     continue;
@@ -1229,15 +1237,14 @@ public class ComputerUtilMana {
             return false;
         }
 
-        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        int chanceToReserve = aic.getIntProperty(AiProps.RESERVE_MANA_FOR_MAIN2_CHANCE);
-
         // Mana reserved for spell synchronization
         if (AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL)) {
             return true;
         }
 
         PhaseType curPhase = ai.getGame().getPhaseHandler().getPhase();
+        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+        int chanceToReserve = aic.getIntProperty(AiProps.RESERVE_MANA_FOR_MAIN2_CHANCE);
 
         // For combat tricks, always obey mana reservation
         if (curPhase == PhaseType.COMBAT_DECLARE_BLOCKERS || curPhase == PhaseType.CLEANUP) {

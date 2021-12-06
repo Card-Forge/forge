@@ -130,7 +130,6 @@ public abstract class Trigger extends TriggerReplacementBase {
 
     public String toString(boolean active) {
         if (hasParam("TriggerDescription") && !this.isSuppressed()) {
-
             StringBuilder sb = new StringBuilder();
             String currentName;
             if (this.isIntrinsic() && cardState != null && cardState.getCard() == getHostCard()) {

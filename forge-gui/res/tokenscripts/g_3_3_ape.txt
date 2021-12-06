@@ -1,4 +1,4 @@
-Name:Ape
+Name:Ape Token
 Colors:green
 ManaCost:no cost
 PT:3/3

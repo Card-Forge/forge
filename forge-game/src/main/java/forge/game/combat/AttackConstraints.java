@@ -47,7 +47,7 @@ public class AttackConstraints {
 
     public AttackConstraints(final Combat combat) {
         final Game game = combat.getAttackingPlayer().getGame();
-        possibleAttackers = CardLists.filter(combat.getAttackingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+        possibleAttackers = combat.getAttackingPlayer().getCreaturesInPlay();
         possibleDefenders = combat.getDefenders();
         globalRestrictions = GlobalAttackRestrictions.getGlobalRestrictions(combat.getAttackingPlayer(), possibleDefenders);
 

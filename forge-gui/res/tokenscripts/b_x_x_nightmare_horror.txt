@@ -1,4 +1,4 @@
-Name:Nightmare Horror
+Name:Nightmare Horror Token
 ManaCost:no cost
 Colors:black
 Types:Creature Nightmare Horror

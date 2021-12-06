@@ -272,8 +272,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             sb.append(".");
         } else if (origin.equals("Battlefield")) {
             // TODO Expand on this Description as more cards use it
-            // for the non-targeted SAs when you choose what is returned on
-            // resolution
+            // for the non-targeted SAs when you choose what is returned on resolution
             sb.append("Return ").append(num).append(" ").append(type).append(" card(s) ");
             sb.append(" to your ").append(destination);
         }
@@ -361,8 +360,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     sb.append(fromGraveyard);
                 }
 
-                // this needs to be zero indexed. Top = 0, Third = 2, -1 =
-                // Bottom
+                // this needs to be zero indexed. Top = 0, Third = 2, -1 = Bottom
                 final int libraryPosition = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(host, sa.getParam("LibraryPosition"), sa) : 0;
 
                 if (libraryPosition == -1) {
@@ -451,9 +449,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             sb.append(sa.getParam("AlternativeDestinationMessage"));
             Player alterDecider = player;
             if (sa.hasParam("AlternativeDecider")) {
-                alterDecider = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("AlternativeDecider"), sa).get(0);
+                PlayerCollection deciders = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("AlternativeDecider"), sa);
+                alterDecider = deciders.isEmpty() ? null : deciders.get(0);
             }
-            if (!alterDecider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneToAltDestination, sb.toString())) {
+            if (alterDecider != null && !alterDecider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneToAltDestination, sb.toString())) {
                 destination = ZoneType.smartValueOf(sa.getParam("DestinationAlternative"));
                 altDest = true;
             }

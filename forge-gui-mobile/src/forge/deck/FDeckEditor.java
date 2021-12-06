@@ -16,6 +16,7 @@ import forge.deck.io.DeckPreferences;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.planarconquest.ConquestUtil;
 import forge.gui.FThreads;
+import forge.gui.GuiBase;
 import forge.gui.card.CardPreferences;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
@@ -768,7 +769,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         protected void initialize() {
-            cardManager.setup(config);
+            if (GuiBase.isAdventureMode())
+                cardManager.setup(config);
+            else //fix planar conquest deck editor and maybe others...
+                cardManager.setup(config, parentScreen.getColOverrides(config));
         }
 
         protected boolean canAddCards() {

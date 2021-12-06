@@ -1,0 +1,35 @@
+[metadata]
+Code=UNF
+Date=2022-04-01
+Name=Unfinity
+MciCode=unf
+Type=Funny
+ScryfallCode=UNF
+
+[cards]
+3 U Assembled Ensemble @Jakub Kasper
+88 R Saw in Half @Sebastian Giacobino
+143 M Killer Cosplay @Leonardo Santanna
+179 U The Space Family Goblinson @Armand Baltazar
+235 L Plains @Adam Paquette
+236 L Island @Adam Paquette
+237 L Swamp @Adam Paquette
+238 L Mountain @Adam Paquette
+239 L Forest @Adam Paquette
+240 L Plains @Adam Paquette
+241 L Island @Adam Paquette
+242 L Swamp @Adam Paquette
+243 L Mountain @Adam Paquette
+244 L Forest @Adam Paquette
+270 U The Space Family Goblinson @David Semple
+277 R Hallowed Fountain @Piotr Dura
+278 R Watery Grave @Chris Ostrowski
+279 R Blood Crypt @Chris Ostrowski
+280 R Stomping Ground @Bruce Brenneise
+281 R Temple Garden @Piotr Dura
+282 R Godless Shrine @Bruce Brenneise
+283 R Steam Vents @Piotr Dura
+284 R Overgrown Tomb @Cliff Childs
+285 R Sacred Foundry @Cliff Childs
+286 R Breeding Pool @Bruce Brenneise
+538 R Water Gun Balloon Game @Ralph Horsley

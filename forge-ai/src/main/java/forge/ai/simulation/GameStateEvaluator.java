@@ -15,16 +15,16 @@ public class GameStateEvaluator {
     public void setDebugging(boolean debugging) {
         this.debugging = debugging;
     }
-    
+
     private static void debugPrint(String s) {
         GameSimulator.debugPrint(s);
     }
-    
+
     private static class CombatSimResult {
         public GameCopier copier;
         public Game gameCopy;
     }
-    private CombatSimResult simulateUpcomingCombatThisTurn(final Game evalGame) {
+    private CombatSimResult simulateUpcomingCombatThisTurn(final Game evalGame, final Player aiPlayer) {
         PhaseType phase = evalGame.getPhaseHandler().getPhase();
         if (phase.isAfter(PhaseType.COMBAT_DAMAGE) || evalGame.isGameOver()) {
             return null;
@@ -38,7 +38,12 @@ public class GameStateEvaluator {
         }
         GameCopier copier = new GameCopier(evalGame);
         Game gameCopy = copier.makeCopy();
-        gameCopy.getPhaseHandler().devAdvanceToPhase(PhaseType.COMBAT_DAMAGE);
+        gameCopy.getPhaseHandler().devAdvanceToPhase(PhaseType.COMBAT_DAMAGE, new Runnable() {
+            @Override
+            public void run() {
+                GameSimulator.resolveStack(gameCopy, aiPlayer.getWeakestOpponent());
+            }
+        });
         CombatSimResult result = new CombatSimResult();
         result.copier = copier;
         result.gameCopy = gameCopy;
@@ -61,13 +66,13 @@ public class GameStateEvaluator {
 
         return new Score(Integer.MIN_VALUE);
     }
-    
+
     public Score getScoreForGameState(Game game, Player aiPlayer) {
         if (game.isGameOver()) {
             return getScoreForGameOver(game, aiPlayer);
         }
-        
-        CombatSimResult result = simulateUpcomingCombatThisTurn(game);
+
+        CombatSimResult result = simulateUpcomingCombatThisTurn(game, aiPlayer);
         if (result != null) {
             Player aiPlayerCopy = (Player) result.copier.find(aiPlayer);
             if (result.gameCopy.isGameOver()) {
@@ -81,6 +86,7 @@ public class GameStateEvaluator {
     private Score getScoreForGameStateImpl(Game game, Player aiPlayer) {
         int score = 0;
         // TODO: more than 2 players
+        // TODO: try and reuse evaluateBoardPosition
         int myCards = 0;
         int theirCards = 0;
         for (Card c : game.getCardsIn(ZoneType.Hand)) {
@@ -92,7 +98,7 @@ public class GameStateEvaluator {
         }
         debugPrint("My cards in hand: " + myCards);
         debugPrint("Their cards in hand: " + theirCards);
-        if (myCards > aiPlayer.getMaxHandSize()) {
+        if (!aiPlayer.isUnlimitedHandSize() && myCards > aiPlayer.getMaxHandSize()) {
             // Count excess cards for less.
             score += myCards - aiPlayer.getMaxHandSize();
             myCards = aiPlayer.getMaxHandSize();
@@ -102,12 +108,10 @@ public class GameStateEvaluator {
         score += 2 * aiPlayer.getLife();
         int opponentIndex = 1;
         int opponentLife = 0;
-        for (Player opponent : game.getPlayers()) {
-            if (opponent != aiPlayer) {
+        for (Player opponent : aiPlayer.getOpponents()) {
                 debugPrint("  Opponent " + opponentIndex + " life: -" + opponent.getLife());
                 opponentLife += opponent.getLife();
                 opponentIndex++;
-            }
         }
         score -= 2* opponentLife / (game.getPlayers().size() - 1);
         int summonSickScore = score;
@@ -138,7 +142,7 @@ public class GameStateEvaluator {
         debugPrint("Score = " + score);
         return new Score(score, summonSickScore);
     }
-    
+
     public int evalCard(Game game, Player aiPlayer, Card c) {
         // TODO: These should be based on other considerations - e.g. in relation to opponents state.
         if (c.isCreature()) {
@@ -178,12 +182,12 @@ public class GameStateEvaluator {
             this.value = value;
             this.summonSickValue = value;
         }
-        
+
         public Score(int value, int summonSickValue) {
             this.value = value;
             this.summonSickValue = summonSickValue;
         }
-        
+
         public boolean equals(Score other) {
             if (other == null)
                 return false;

@@ -1,4 +1,4 @@
-Name:Rat
+Name:Rat Token
 ManaCost:no cost
 Types:Creature Rat
 Colors:black

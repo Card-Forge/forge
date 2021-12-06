@@ -1,4 +1,4 @@
-Name:Food
+Name:Food Token
 ManaCost:no cost
 Types:Artifact Food
 A:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME> | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.

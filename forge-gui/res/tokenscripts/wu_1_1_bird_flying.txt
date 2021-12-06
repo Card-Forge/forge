@@ -1,4 +1,4 @@
-Name:Bird
+Name:Bird Token
 ManaCost:no cost
 Types:Creature Bird
 Colors:white,blue

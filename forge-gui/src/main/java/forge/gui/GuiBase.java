@@ -7,6 +7,7 @@ public class GuiBase {
     private static boolean propertyConfig = true;
     private static boolean networkplay = false;
     private static boolean isAndroidport = false;
+    private static boolean isAdventureMode = false;
     private static boolean interrupted = false;
     private static String deviceName = "";
     private static String androidRelease = "";
@@ -19,6 +20,9 @@ public class GuiBase {
 
     public static void setIsAndroid(boolean value) { isAndroidport = value; }
     public static boolean isAndroid() { return isAndroidport; }
+
+    public static void setIsAdventureMode(boolean value) { isAdventureMode = value; }
+    public static boolean isAdventureMode() { return isAdventureMode; }
 
     public static void setUsingAppDirectory(boolean value) { usingAppDirectory = value; }
     public static boolean isUsingAppDirectory() { return usingAppDirectory; }

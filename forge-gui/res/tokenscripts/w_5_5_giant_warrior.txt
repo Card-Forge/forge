@@ -1,4 +1,4 @@
-Name:Giant Warrior
+Name:Giant Warrior Token
 ManaCost:no cost
 PT:5/5
 Colors:white

@@ -1,4 +1,4 @@
-Name:Hydra
+Name:Hydra Token
 Colors:green
 ManaCost:no cost
 PT:0/0

@@ -1,4 +1,4 @@
-Name:Citizen
+Name:Citizen Token
 ManaCost:no cost
 Types:Creature Citizen
 Colors:white

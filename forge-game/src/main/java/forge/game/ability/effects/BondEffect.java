@@ -17,7 +17,7 @@ public class BondEffect extends SpellAbilityEffect {
         CardCollectionView trigCards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
 
         // Check that this card hasn't already become paired by an earlier trigger
-        if (trigCards.getFirst().isPaired() || !trigCards.getFirst().isInZone(ZoneType.Battlefield)) {
+        if (trigCards.getFirst().isPaired() || !trigCards.getFirst().isInPlay()) {
             return;
         }
 

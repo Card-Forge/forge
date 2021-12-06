@@ -28,8 +28,8 @@ public abstract class AbstractTournament implements Serializable {
     protected final List<TournamentPairing> completedPairings = new ArrayList<>();
     protected final List<TournamentPairing> activePairings = new ArrayList<>();
 
-    public List<TournamentPairing> getCompletedPairings() {     return completedPairings;   }
-    public List<TournamentPairing> getActivePairings() {     return activePairings;   }
+    public List<TournamentPairing> getCompletedPairings() { return completedPairings; }
+    public List<TournamentPairing> getActivePairings() { return activePairings; }
 
     public AbstractTournament(int ttlRnds) {
         activeRound = 0;
@@ -60,13 +60,13 @@ public abstract class AbstractTournament implements Serializable {
     public int getActiveRound() { return activeRound; }
     public int getTotalRounds() { return totalRounds; }
 
-    public boolean isContinualPairing() {   return continualPairing;    }
+    public boolean isContinualPairing() { return continualPairing; }
 
-    public void setContinualPairing(boolean continualPairing) { this.continualPairing = continualPairing;   }
+    public void setContinualPairing(boolean continualPairing) { this.continualPairing = continualPairing; }
 
     public boolean isInitialized() { return initialized; }
 
-    public void setInitialized(boolean initialized) {   this.initialized = initialized; }
+    public void setInitialized(boolean initialized) { this.initialized = initialized; }
 
     public boolean isPlayerRemaining(TournamentPlayer player) {
         return remainingPlayers.contains(player);
@@ -144,7 +144,7 @@ public abstract class AbstractTournament implements Serializable {
         }
     }
 
-    public List<TournamentPlayer> getAllPlayers(){
+    public List<TournamentPlayer> getAllPlayers() {
         return allPlayers;
     }
 

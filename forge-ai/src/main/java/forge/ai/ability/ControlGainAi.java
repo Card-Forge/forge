@@ -272,7 +272,16 @@ public class ControlGainAi extends SpellAbilityAi {
                 return true;
             }
         } else {
-            if(sa.hasParam("TargetingPlayer") || (!this.canPlayAI(ai, sa) && mandatory)) {
+            if (sa.hasParam("TargetingPlayer") || (!this.canPlayAI(ai, sa) && mandatory)) {
+                if (sa.getTargetRestrictions().canOnlyTgtOpponent()) {
+                    List<Player> oppList = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
+                    if (oppList.isEmpty()) {
+                        return false;
+                    }
+                    sa.getTargets().add(Aggregates.random(oppList));
+                    return true;
+                }
+
                 List<Card> list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
                 if (list.isEmpty()) {
                     return false;

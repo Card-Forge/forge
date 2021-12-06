@@ -5,5 +5,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ Trig1Damage | Tri
 SVar:Trig1Damage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 1
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ Trig5Damage | HasNoManaCost$ True | TriggerDescription$ Whenever a player casts a spell, if no mana was spent to cast that spell, CARDNAME deals 5 damage to that player.
 SVar:Trig5Damage:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 5
-A:AB$ Pump | Cost$ R | KW$ You can't gain life. | Defined$ Player.Opponent | StackDescription$ SpellDescription | SpellDescription$ Your opponents can't gain life this turn.
+A:AB$ Effect | Cost$ R | Name$ Atarka's Command Effect | StaticAbilities$ STCantGain | AILogic$ NoGain | SpellDescription$ Your opponents can't gain life this turn.
+SVar:STCantGain:Mode$ CantGainLife | ValidPlayer$ Player.Opponent | Description$ Your opponents can't gain life this turn.
 Oracle:At the beginning of each player's upkeep, Roiling Vortex deals 1 damage to them.\nWhenever a player casts a spell, if no mana was spent to cast that spell, Roiling Vortex deals 5 damage to that player.\n{R}: Your opponents can't gain life this turn.

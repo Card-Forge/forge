@@ -130,8 +130,7 @@ public class DigUntilAi extends SpellAbilityAi {
             if ("OathOfDruids".equals(logic)) {
                 final List<Card> creaturesInLibrary =
                         CardLists.filter(player.getCardsIn(ZoneType.Library), CardPredicates.Presets.CREATURES);
-                final List<Card> creaturesInBattlefield =
-                        CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+                final List<Card> creaturesInBattlefield = player.getCreaturesInPlay();
                 // if there are at least 3 creatures in library,
                 // or none in play with one in library, oath
                 return creaturesInLibrary.size() > 2

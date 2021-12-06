@@ -1,4 +1,4 @@
-Name:Human Warrior
+Name:Human Warrior Token
 Types:Creature Human Warrior
 Colors:red,white
 ManaCost:no cost

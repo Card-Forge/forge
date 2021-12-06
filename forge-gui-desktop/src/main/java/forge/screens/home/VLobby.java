@@ -11,11 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.ListSelectionModel;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -84,6 +80,8 @@ public class VLobby implements ILobbyView {
 
     private final StartButton btnStart  = new StartButton();
     private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
+    private final JComboBox gamesInMatch = new JComboBox(new String[] {"1","3","5"});
+    private final JPanel gamesInMatchFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
     private final JPanel constructedFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2")); // Main content frame
 
     // Variants frame and variables
@@ -212,11 +210,19 @@ public class VLobby implements ILobbyView {
                 public final void actionPerformed(final ActionEvent arg0) {
                     Runnable startGame = lobby.startGame();
                     if (startGame != null) {
+                        if (!gamesInMatch.getSelectedItem().equals(ForgePreferences.FPref.UI_MATCHES_PER_GAME)) {
+                            FModel.getPreferences().setPref(FPref.UI_MATCHES_PER_GAME, (String) gamesInMatch.getSelectedItem());
+                        }
                         startGame.run();
                     }
                 }
             });
         }
+        gamesInMatchFrame.add(newLabel(localizer.getMessage("lblGamesInMatch")), "w 150px!, h 30px!");
+        gamesInMatchFrame.add(gamesInMatch, "w 50px!, h 30px!");
+        gamesInMatchFrame.setOpaque(false);
+        gamesInMatch.setSelectedItem("3");
+        pnlStart.add(gamesInMatchFrame);
     }
 
     public void updateDeckPanel() {

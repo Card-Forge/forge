@@ -3,7 +3,7 @@ ManaCost:1
 Types:Artifact
 T:Mode$ CounterAddedOnce | ValidCard$ Permanent.YouCtrl | TriggerZones$ Battlefield | CounterType$ P1P1 | Execute$ TrigToken | TriggerDescription$ Whenever one or more +1/+1 counters are put on a permanent you control, you may pay {1}. If you do, create a 1/1 colorless Servo artifact creature token.
 SVar:TrigToken:AB$ Token | Cost$ 1 | TokenAmount$ 1 | TokenScript$ c_1_1_a_servo | TokenOwner$ You | LegacyImage$ c 1 1 a servo kld
-A:AB$ PutCounter | Cost$ 3 T | ValidTgts$ Permanent,Player | TgtPrompt$ Select target player or permanent | CounterType$ ExistingCounter | CounterNum$ 1 | AILogic$ AlwaysAtOppEOT | SpellDescription$ Choose a counter on target permanent or player. Give that permanent or player another counter of that kind.
+A:AB$ PutCounter | Cost$ 3 T | ValidTgts$ Permanent,Player | TgtPrompt$ Select target player or permanent | CounterType$ ExistingCounter | CounterNum$ 1 | AILogic$ AtOppEOT | SpellDescription$ Choose a counter on target permanent or player. Give that permanent or player another counter of that kind.
 DeckHints:Ability$Counters
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/animation_module.jpg

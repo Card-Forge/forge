@@ -1,4 +1,4 @@
-Name:Goblin Rogue
+Name:Goblin Rogue Token
 ManaCost:no cost
 Types:Creature Goblin Rogue
 Colors:black

@@ -1,4 +1,4 @@
-Name:Gorilla
+Name:Gorilla Token
 ManaCost:no cost
 PT:2/2
 Colors:green

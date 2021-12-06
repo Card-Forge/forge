@@ -178,14 +178,14 @@ ScryfallCode=BNG
 165 R Temple of Plenty @Noah Bradley
 
 [tokens]
-gold
+b_2_2_e_zombie
+c_a_gold_draw
+g_2_2_wolf
+g_3_3_e_centaur
+r_3_1_e_elemental_haste
+u_2_2_e_bird_flying
+u_9_9_kraken
 w_1_1_bird_flying
 w_1_1_cat_soldier_vigilance
 w_1_1_e_soldier
 w_1_1_e_soldier
-u_2_2_e_bird_flying
-u_9_9_kraken
-b_2_2_e_zombie
-r_3_1_e_elemental_haste
-g_3_3_e_centaur
-g_2_2_wolf

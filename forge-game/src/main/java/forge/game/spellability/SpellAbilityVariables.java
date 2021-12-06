@@ -58,6 +58,7 @@ public class SpellAbilityVariables implements Cloneable {
     public void setVariables(SpellAbilityVariables sav) {
         this.zone = sav.getZone();
         this.phases = Sets.newEnumSet(sav.getPhases(), PhaseType.class);
+        this.firstCombatOnly = sav.getFirstCombatOnly();
         this.gameTypes = Sets.newEnumSet(sav.getGameTypes(), GameType.class);
         this.sorcerySpeed = sav.isSorcerySpeed();
         this.instantSpeed = sav.isInstantSpeed();
@@ -103,6 +104,8 @@ public class SpellAbilityVariables implements Cloneable {
 
     /** The phases. */
     private Set<PhaseType> phases = EnumSet.noneOf(PhaseType.class);
+
+    private boolean firstCombatOnly = false;
 
     /** The GameTypes */
     private Set<GameType> gameTypes = EnumSet.noneOf(GameType.class);
@@ -696,9 +699,21 @@ public class SpellAbilityVariables implements Cloneable {
     }
 
     /**
+     * Gets the first combat.
+     *
+     * @return first combat
+     */
+    public final boolean getFirstCombatOnly() {
+        return this.firstCombatOnly;
+    }
+    public final boolean setFirstCombatOnly(boolean first) {
+        return this.firstCombatOnly = first;
+    }
+
+    /**
      * Gets the game types.
      *
-     * @return the phases
+     * @return the game types
      */
     public final Set<GameType> getGameTypes() {
         return this.gameTypes;

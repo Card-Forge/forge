@@ -1,4 +1,4 @@
-Name:Vampire Knight
+Name:Vampire Knight Token
 ManaCost:no cost
 Types:Creature Vampire Knight
 Colors:black

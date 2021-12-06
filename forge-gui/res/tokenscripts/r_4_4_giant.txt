@@ -1,4 +1,4 @@
-Name:Giant
+Name:Giant Token
 ManaCost:no cost
 Types:Creature Giant
 Colors:red

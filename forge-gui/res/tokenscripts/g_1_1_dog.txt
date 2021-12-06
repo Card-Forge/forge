@@ -1,4 +1,4 @@
-Name:Dog
+Name:Dog Token
 ManaCost:no cost
 PT:1/1
 Colors:green

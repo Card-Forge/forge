@@ -29,6 +29,7 @@ public class CardChangedType {
     // takes care of individual card types
     private final CardType addType;
     private final CardType removeType;
+    private final boolean addAllCreatureTypes;
     private final boolean removeSuperTypes;
     private final boolean removeCardTypes;
     private final boolean removeSubTypes;
@@ -37,12 +38,12 @@ public class CardChangedType {
     private final boolean removeArtifactTypes;
     private final boolean removeEnchantmentTypes;
 
-    public CardChangedType(final CardType addType0, final CardType removeType0, final boolean removeSuperType0,
-            final boolean removeCardType0, final boolean removeSubType0, final boolean removeLandType0,
-            final boolean removeCreatureType0, final boolean removeArtifactType0,
-            final boolean removeEnchantmentTypes0) {
+    public CardChangedType(final CardType addType0, final CardType removeType0, final boolean addAllCreatureTypes0,
+            final boolean removeSuperType0, final boolean removeCardType0, final boolean removeSubType0,
+            final boolean removeLandType0, final boolean removeCreatureType0, final boolean removeArtifactType0, final boolean removeEnchantmentTypes0) {
         addType = addType0;
         removeType = removeType0;
+        addAllCreatureTypes = addAllCreatureTypes0;
         removeSuperTypes = removeSuperType0;
         removeCardTypes = removeCardType0;
         removeSubTypes = removeSubType0;
@@ -58,6 +59,10 @@ public class CardChangedType {
 
     public final CardType getRemoveType() {
         return removeType;
+    }
+
+    public final boolean isAddAllCreatureTypes() {
+        return addAllCreatureTypes;
     }
 
     public final boolean isRemoveSuperTypes() {

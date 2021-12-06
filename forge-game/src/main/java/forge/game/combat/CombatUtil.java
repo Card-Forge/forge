@@ -1036,7 +1036,7 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static boolean canBlock(final Card attacker, final Card blocker, final boolean nextTurn) {
-        if ((attacker == null) || (blocker == null)) {
+        if (attacker == null || blocker == null) {
             return false;
         }
 

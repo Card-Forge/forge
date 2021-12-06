@@ -33,17 +33,18 @@ public class CharmEffect extends SpellAbilityEffect {
             }
         }
 
-        int indx = 0;
         List<AbilitySub> choices = Lists.newArrayList(sa.getAdditionalAbilityList("Choices"));
-        if (restriction != null) {
-            List<AbilitySub> toRemove = Lists.newArrayList();
-            for (AbilitySub ch : choices) {
-                if (restriction.contains(ch.getDescription())) {
-                    toRemove.add(ch);
-                }
+        List<AbilitySub> toRemove = Lists.newArrayList();
+        for (AbilitySub ch : choices) {
+            // 603.3c If one of the modes would be illegal, that mode can't be chosen.
+            if ((ch.usesTargeting() && ch.isTrigger() && ch.getTargetRestrictions().getNumCandidates(ch, true) == 0) ||
+                    (restriction != null && restriction.contains(ch.getDescription()))) {
+                toRemove.add(ch);
             }
-            choices.removeAll(toRemove);
         }
+        choices.removeAll(toRemove);
+
+        int indx = 0;
         // set CharmOrder
         for (AbilitySub sub : choices) {
             sub.setSVar("CharmOrder", Integer.toString(indx));

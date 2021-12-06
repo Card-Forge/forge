@@ -50,6 +50,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
 
+        boolean addAllCreatureTypes = false;
         boolean removeSuperTypes = false;
         boolean removeCardTypes = false;
         boolean removeSubTypes = false;
@@ -59,6 +60,10 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         boolean removeEnchantmentTypes = false;
 
         boolean removeAll = sa.hasParam("RemoveAllAbilities");
+
+        if (sa.hasParam("AddAllCreatureTypes")) {
+            addAllCreatureTypes = true;
+        }
 
         if (sa.hasParam("RemoveSuperTypes")) {
             removeSuperTypes = true;
@@ -93,8 +98,9 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             c.addNewPT(power, toughness, timestamp, 0);
         }
 
-        if (!addType.isEmpty() || !removeType.isEmpty() || removeCreatureTypes) {
-            c.addChangedCardTypes(addType, removeType, removeSuperTypes, removeCardTypes, removeSubTypes,
+        if (!addType.isEmpty() || !removeType.isEmpty() || addAllCreatureTypes || removeSuperTypes
+                || removeCardTypes || removeSubTypes || removeLandTypes || removeCreatureTypes || removeArtifactTypes || removeEnchantmentTypes) {
+            c.addChangedCardTypes(addType, removeType, addAllCreatureTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
                     removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes, timestamp, 0, true, false);
         }
 

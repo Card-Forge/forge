@@ -1,4 +1,4 @@
-Name:Elephant
+Name:Elephant Token
 ManaCost:no cost
 Types:Creature Elephant
 Colors:green

@@ -1,4 +1,4 @@
-Name:Shark
+Name:Shark Token
 ManaCost:no cost
 Types:Creature Shark
 Colors:blue

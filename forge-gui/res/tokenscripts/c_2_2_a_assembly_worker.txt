@@ -1,4 +1,4 @@
-Name:Assembly-Worker
+Name:Assembly-Worker Token
 ManaCost:no cost
 PT:2/2
 Types:Artifact Creature Assembly-Worker

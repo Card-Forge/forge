@@ -1,4 +1,4 @@
-Name:Fungus Beast
+Name:Fungus Beast Token
 Colors:green
 ManaCost:no cost
 PT:4/4

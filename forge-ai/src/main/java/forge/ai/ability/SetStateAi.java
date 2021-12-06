@@ -33,6 +33,7 @@ public class SetStateAi extends SpellAbilityAi {
         final String mode = sa.getParam("Mode");
 
         // turning face is most likely okay
+        // TODO only do this at beneficial moment (e.g. surprise during combat or morph trigger), might want to reserve mana to protect them from easy removal
         if ("TurnFace".equals(mode)) {
             return true;
         }
@@ -208,8 +209,8 @@ public class SetStateAi extends SpellAbilityAi {
 
             // if an opponent can't block it, no need to transform (back)
             for (Player opp : ai.getOpponents()) {
-                boolean attackCard = !ComputerUtilCard.canBeBlockedProfitably(opp, original);
-                boolean attackTransformed = !ComputerUtilCard.canBeBlockedProfitably(opp, copy);
+                boolean attackCard = !ComputerUtilCard.canBeBlockedProfitably(opp, original, true);
+                boolean attackTransformed = !ComputerUtilCard.canBeBlockedProfitably(opp, copy, true);
 
                 // both forms can attack, try to use the one with better value 
                 if (attackCard && attackTransformed) {

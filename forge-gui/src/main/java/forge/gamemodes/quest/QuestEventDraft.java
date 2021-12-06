@@ -446,13 +446,15 @@ public class QuestEventDraft implements IQuestEvent {
     private void awardSelectedRare(final QuestDraftPrizes prizes) {
 
         final List<PaperCard> possibleCards = new ArrayList<>();
+        final List<String> cardNames = new ArrayList<>();
 
         for (final CardEdition edition : getAllEditions()) {
-            for (final CardInSet card : edition.getCards()) {
+            for (final CardInSet card : edition.getAllCardsInSet()) {
                 if (card.rarity == CardRarity.Rare || card.rarity == CardRarity.MythicRare) {
                     final PaperCard cardToAdd = FModel.getMagicDb().getCommonCards().getCard(card.name, edition.getCode());
-                    if (cardToAdd != null) {
+                    if (cardToAdd != null && !cardNames.contains(cardToAdd.getName())) {
                         possibleCards.add(cardToAdd);
+                        cardNames.add(cardToAdd.getName());
                     }
                 }
             }
@@ -470,13 +472,16 @@ public class QuestEventDraft implements IQuestEvent {
 
         final CardEdition randomEdition = getRandomEdition();
         final List<CardInSet> cardsInEdition = new ArrayList<>();
+        final List<String> cardNames = new ArrayList<>();
 
-        for (final CardInSet card : randomEdition.getCards()) {
+        for (final CardInSet card : randomEdition.getAllCardsInSet()) {
             if (card.rarity == CardRarity.Rare || card.rarity == CardRarity.MythicRare) {
-                cardsInEdition.add(card);
+                if (!cardNames.contains(card.name)) {
+                    cardsInEdition.add(card);
+                    cardNames.add(card.name);
+                }
             }
         }
-
 
         CardInSet randomCard;
         PaperCard promo = null;

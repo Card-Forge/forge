@@ -1,6 +1,6 @@
-Name:Shard
+Name:Shard Token
 ManaCost:no cost
-Types:Enchantment
+Types:Enchantment Shard
 A:AB$ Scry | Cost$ 2 Sac<1/CARDNAME> | CostDesc$ {2}, Sacrifice this enchantment: | ScryNum$ 1 | SubAbility$ DBDraw | StackDescription$ SpellDescription | SpellDescription$ Scry 1, then draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | StackDescription$ None
 Oracle:{2}, Sacrifice this enchantment: Scry 1, then draw a card.

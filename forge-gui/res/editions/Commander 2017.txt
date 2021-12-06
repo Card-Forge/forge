@@ -319,14 +319,14 @@ ScryfallCode=C17
 309 L Forest @Kev Walker
 
 [tokens]
-gold
-c_0_1_eldrazi_spawn_sac
-w_2_2_cat
 b_1_1_bat_flying
 b_1_1_rat_deathtouch
 b_1_1_vampire
 b_2_2_zombie
+brg_3_3_cat_dragon_flying
+c_0_1_eldrazi_spawn_sac
+c_a_gold_draw
+g_2_2_cat_warrior_forestwalk
 r_4_4_dragon_flying
 r_6_6_dragon_flying
-g_2_2_cat_warrior_forestwalk
-brg_3_3_cat_dragon_flying
+w_2_2_cat

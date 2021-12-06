@@ -1,4 +1,4 @@
-Name:Tentacle
+Name:Tentacle Token
 ManaCost:no cost
 Types:Creature Tentacle
 Colors:blue

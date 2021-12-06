@@ -134,6 +134,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setPhases(PhaseType.parseRange(params.get("ActivationPhases")));
         }
 
+        if (params.containsKey("ActivationFirstCombat")) {
+            this.setFirstCombatOnly(true);
+        }
+
         if (params.containsKey("ActivationGameTypes")) {
             this.setGameTypes(GameType.listValueOf(params.get("ActivationGameTypes")));
         }
@@ -207,7 +211,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         // for Bestow need to check the animated State
         if (sa.isSpell() && sa.isBestow()) {
             // already bestowed or in battlefield, no need to check for spell
-            if (c.isInZone(ZoneType.Battlefield)) {
+            if (c.isInPlay()) {
                 return false;
             }
 
@@ -316,6 +320,12 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         if (this.getPhases().size() > 0) {
             if (!this.getPhases().contains(game.getPhaseHandler().getPhase())) {
+                return false;
+            }
+        }
+
+        if (this.getFirstCombatOnly()) {
+            if (game.getPhaseHandler().getNumCombat() > 1) {
                 return false;
             }
         }
@@ -480,7 +490,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         // 702.36e
         // If the permanent wouldn’t have a morph cost if it were face up, it can’t be turned face up this way.
-        if (sa.isMorphUp() && c.isInZone(ZoneType.Battlefield)) {
+        if (sa.isMorphUp() && c.isInPlay()) {
             Card cp = c;
             if (!c.isLKI()) {
                 cp = CardUtil.getLKICopy(c);

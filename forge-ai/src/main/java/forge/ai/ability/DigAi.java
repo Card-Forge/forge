@@ -47,7 +47,7 @@ public class DigAi extends SpellAbilityAi {
 
         if (sa.usesTargeting()) {
             sa.resetTargets();
-            if (!opp.canBeTargetedBy(sa)) {
+            if (!sa.canTarget(opp)) {
                 return false;
             }
             sa.getTargets().add(opp);
@@ -61,7 +61,7 @@ public class DigAi extends SpellAbilityAi {
 
         if ("Never".equals(sa.getParam("AILogic"))) {
             return false;
-        } else if ("AtOppEndOfTurn".equals(sa.getParam("AILogic"))) {
+        } else if ("AtOppEOT".equals(sa.getParam("AILogic"))) {
             if (!(game.getPhaseHandler().getNextTurn() == ai && game.getPhaseHandler().is(PhaseType.END_OF_TURN))) {
                 return false;
             }

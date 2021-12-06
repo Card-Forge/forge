@@ -1,4 +1,4 @@
-Name:Soldier
+Name:Soldier Token
 ManaCost:no cost
 Types:Creature Soldier
 Colors:white

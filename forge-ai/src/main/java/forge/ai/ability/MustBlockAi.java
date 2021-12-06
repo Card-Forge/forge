@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 
 import forge.ai.AiCardMemory;
 import forge.ai.ComputerUtilCard;
@@ -15,14 +14,12 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.zone.ZoneType;
 
 public class MustBlockAi extends SpellAbilityAi {
 
@@ -76,7 +73,7 @@ public class MustBlockAi extends SpellAbilityAi {
             return false;
         }
 
-        Card attacker = null;
+        Card attacker = source;
         if (sa.hasParam("DefinedAttacker")) {
             final List<Card> cards = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedAttacker"), sa);
             if (cards.isEmpty()) {
@@ -86,18 +83,12 @@ public class MustBlockAi extends SpellAbilityAi {
             attacker = cards.get(0);
         }
 
-        if (attacker == null) {
-            attacker = source;
-        }
-
-        final Card definedAttacker = attacker;
-
         boolean chance = false;
 
         if (sa.usesTargeting()) {
-            final List<Card> list = determineGoodBlockers(definedAttacker, ai, ai.getWeakestOpponent(), sa, true,true);
+            final List<Card> list = determineGoodBlockers(attacker, ai, ai.getWeakestOpponent(), sa, true, true);
             if (list.isEmpty()) {
-                return false;
+                return sa.isTargetNumberValid();
             }
             final Card blocker = ComputerUtilCard.getBestCreatureAI(list);
             if (blocker == null) {
@@ -160,8 +151,7 @@ public class MustBlockAi extends SpellAbilityAi {
 
     private List<Card> determineGoodBlockers(final Card attacker, final Player ai, Player defender, SpellAbility sa,
             final boolean onlyLethal, final boolean testTapped) {
-        List<Card> list = Lists.newArrayList();
-        list = CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+        List<Card> list = defender.getCreaturesInPlay();
 
         if (sa.usesTargeting()) {
             list = CardLists.getTargetableCards(list, sa);
@@ -187,7 +177,7 @@ public class MustBlockAi extends SpellAbilityAi {
         List<Card> better = determineBlockerFromList(attacker, ai, options, sa, false, false);
 
         if (!better.isEmpty()) {
-            return Iterables.getFirst(options, null);
+            return Iterables.getFirst(better, null);
         }
 
         return Iterables.getFirst(options, null);

@@ -1478,7 +1478,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             long timestamp = game.getNextTimestamp();
             counterTypeTimestamps.put(counterType, timestamp);
             // becomes land in instead of other card types
-            addChangedCardTypes(new CardType(ImmutableList.of("Land"), false), null, false, true, true, false, false, false, false, timestamp, 0, updateView, false);
+            addChangedCardTypes(new CardType(ImmutableList.of("Land"), false), null, false, false, true, true, false, false, false, false, timestamp, 0, updateView, false);
 
             String abStr = "AB$ ManaReflected | Cost$ T | Valid$ Defined.Self | ColorOrType$ Color | ReflectProperty$ Is | SpellDescription$ Add one mana of any of this card's colors.";
 
@@ -2408,7 +2408,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         // CantBlockBy static abilities
-        if (game != null && isCreature() && isInZone(ZoneType.Battlefield)) {
+        if (game != null && isCreature() && isInPlay()) {
             for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
                 if (equals(ca)) {
                     continue;
@@ -2453,7 +2453,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             sb.append(linebreak);
             // Currently the maximum levels of all Class cards are all 3
             for (int level = 1; level <= 3; ++level) {
-                boolean disabled = level > getClassLevel() && isInZone(ZoneType.Battlefield);
+                boolean disabled = level > getClassLevel() && isInPlay();
                 // Class second part is a static ability that grants the other abilities
                 for (final StaticAbility st : state.getStaticAbilities()) {
                     if (st.isClassLevelNAbility(level) && !st.isSecondary()) {
@@ -2880,7 +2880,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         // add Facedown abilities from Original state but only if this state is face down
         // need CardStateView#getState or might crash in StackOverflow
-        if (isInZone(ZoneType.Battlefield)) {
+        if (isInPlay()) {
             if ((null == mana || false == mana) && isFaceDown() && state.getView().getState() == CardStateName.FaceDown) {
                 for (SpellAbility sa : getState(CardStateName.Original).getNonManaAbilities()) {
                     if (sa.isManifestUp() || sa.isMorphUp()) {
@@ -3009,7 +3009,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     // is this "Card" supposed to be a token?
     public final boolean isToken() {
-        if (isInZone(ZoneType.Battlefield) && hasMergedCard()) {
+        if (isInPlay() && hasMergedCard()) {
             return getTopMergedCard().token;
         }
         return token;
@@ -3027,7 +3027,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean isTokenCard() {
-        if (isInZone(ZoneType.Battlefield) && hasMergedCard()) {
+        if (isInPlay() && hasMergedCard()) {
             return getTopMergedCard().tokenCard;
         }
         return tokenCard;
@@ -3533,12 +3533,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return getType(currentState);
     }
     public final CardTypeView getType(CardState state) {
-        if (changedCardTypes.isEmpty() && changedCardTypesCharacterDefining.isEmpty()) {
+        final Iterable<CardChangedType> changedCardTypes = getChangedCardTypes();
+        if (Iterables.isEmpty(changedCardTypes)) {
             return state.getType();
         }
         // CR 506.4 attacked planeswalkers leave combat
         boolean checkCombat = state.getType().isPlaneswalker() && game.getCombat() != null && !game.getCombat().getAttackersOf(this).isEmpty();
-        CardTypeView types = state.getType().getTypeWithChanges(getChangedCardTypes());
+        CardTypeView types = state.getType().getTypeWithChanges(changedCardTypes);
         if (checkCombat && !types.isPlaneswalker()) {
             game.getCombat().removeFromCombat(this);
         }
@@ -3548,14 +3549,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final CardTypeView getOriginalType() {
         return getOriginalType(currentState);
     }
-
     public final  CardTypeView getOriginalType(CardState state) {
         return state.getType();
     }
 
     // TODO add changed type by card text
     public Iterable<CardChangedType> getChangedCardTypes() {
-
         Iterable<CardChangedType> byText = changedTypeByText == null ? ImmutableList.of() : ImmutableList.of(this.changedTypeByText);
 
         return Iterables.unmodifiableIterable(Iterables.concat(
@@ -3563,7 +3562,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 byText, // Layer 3 by Word Changes,
                 changedCardTypesCharacterDefining.values(), // Layer 4
                 changedCardTypes.values() // Layer 6
-        ));
+                ));
     }
 
     public Table<Long, Long, CardChangedType> getChangedCardTypesTable() {
@@ -3618,7 +3617,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public Iterable<KeywordsChange> getChangedCardKeywordsList() {
-
         return Iterables.concat(
             changedCardKeywordsByText.values(), // Layer 3
             ImmutableList.of(new KeywordsChange(ImmutableList.<String>of(), null, this.hasRemoveIntrinsic())), // Layer 4
@@ -3629,7 +3627,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public Table<Long, Long, KeywordsChange> getChangedCardKeywords() {
         return changedCardKeywords;
     }
-
 
     public Table<Long, Long, CardColor> getChangedCardColorsTable() {
         return changedCardColors;
@@ -3646,7 +3643,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final void addChangedCardTypesByText(final CardType addType, final long timestamp, final long staticId, final boolean updateView) {
-        changedCardTypesByText.put(timestamp, staticId, new CardChangedType(addType, null, true, true, true, false, false, false, false));
+        changedCardTypesByText.put(timestamp, staticId, new CardChangedType(addType, null, false, true, true, true, false, false, false, false));
 
         // setting card type via text, does overwrite any other word change effects?
         this.changedTextColors.addEmpty(timestamp, staticId);
@@ -3657,20 +3654,20 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
     }
 
-    public final void addChangedCardTypes(final CardType addType, final CardType removeType,
+    public final void addChangedCardTypes(final CardType addType, final CardType removeType, final boolean addAllCreatureTypes,
             final boolean removeSuperTypes, final boolean removeCardTypes, final boolean removeSubTypes,
             final boolean removeLandTypes, final boolean removeCreatureTypes, final boolean removeArtifactTypes,
             final boolean removeEnchantmentTypes,
             final long timestamp, final long staticId, final boolean updateView, final boolean cda) {
         (cda ? changedCardTypesCharacterDefining : changedCardTypes).put(timestamp, staticId, new CardChangedType(
-                addType, removeType, removeSuperTypes, removeCardTypes, removeSubTypes,
+                addType, removeType, addAllCreatureTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
                 removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes));
         if (updateView) {
             updateTypesForView();
         }
     }
 
-    public final void addChangedCardTypes(final Iterable<String> types, final Iterable<String> removeTypes,
+    public final void addChangedCardTypes(final Iterable<String> types, final Iterable<String> removeTypes, final boolean addAllCreatureTypes,
             final boolean removeSuperTypes, final boolean removeCardTypes, final boolean removeSubTypes,
             final boolean removeLandTypes, final boolean removeCreatureTypes, final boolean removeArtifactTypes,
             final boolean removeEnchantmentTypes,
@@ -3685,7 +3682,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             removeType = new CardType(removeTypes, true);
         }
 
-        addChangedCardTypes(addType, removeType, removeSuperTypes, removeCardTypes, removeSubTypes,
+        addChangedCardTypes(addType, removeType, addAllCreatureTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
                 removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes,
                 timestamp, staticId, updateView, cda);
     }
@@ -4457,7 +4454,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         }
 
-        this.changedTypeByText = new CardChangedType(new CardType(toAdd, true), new CardType(toRemove, true), false, false, false, false, false, false, false);
+        this.changedTypeByText = new CardChangedType(new CardType(toAdd, true), new CardType(toRemove, true), false, false, false, false, false, false, false, false);
 
         currentState.updateChangedText();
 
@@ -4474,7 +4471,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         final List<KeywordInterface> addKeywords = Lists.newArrayList();
         final List<KeywordInterface> removeKeywords = Lists.newArrayList();
         // Text Change for intrinsic keywords
-        for(KeywordInterface kw : beforeKeywords) {
+        for (KeywordInterface kw : beforeKeywords) {
             String oldtxt = kw.getOriginal();
             final String newtxt = AbilityUtils.applyKeywordTextChangeEffects(oldtxt, this);
             if (!newtxt.equals(oldtxt)) {
@@ -4561,6 +4558,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     // Hidden Keywords will be returned without the indicator HIDDEN
     public final Iterable<String> getHiddenExtrinsicKeywords() {
         return Iterables.concat(this.hiddenExtrinsicKeywords.values());
+    }
+    public final Table<Long, Long, List<String>> getHiddenExtrinsicKeywordsTable() {
+        return hiddenExtrinsicKeywords;
     }
 
     public final void addHiddenExtrinsicKeywords(long timestamp, long staticId, Iterable<String> keywords) {
@@ -4660,11 +4660,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean isPermanent() {
-        return !isImmutable() && (isInZone(ZoneType.Battlefield) || getType().isPermanent());
+        return !isImmutable() && (isInPlay() || getType().isPermanent());
     }
 
     public final boolean isSpell() {
-        return (isInstant() || isSorcery() || (isAura() && !isInZone((ZoneType.Battlefield))));
+        return isInstant() || isSorcery() || (isAura() && !isInZone((ZoneType.Battlefield)));
     }
 
     public final boolean isLand()       { return getType().isLand(); }
@@ -5139,12 +5139,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean hasABasicLandType() {
-        for (final String type : getType().getSubtypes()) {
-            if (forge.card.CardType.isABasicLandType(type)) {
-                return true;
-            }
-        }
-        return false;
+        return Iterables.any(getType().getSubtypes(), CardType.Predicates.IS_BASIC_LAND_TYPE);
     }
 
     public final boolean isUsedToPay() {
@@ -5639,7 +5634,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         bestowTimestamp = getGame().getNextTimestamp();
         addChangedCardTypes(new CardType(Collections.singletonList("Aura"), true),
                 new CardType(Collections.singletonList("Creature"), true),
-                false, false, false, false, false, false, true, bestowTimestamp, 0, updateView, false);
+                false, false, false, false, false, false, false, true, bestowTimestamp, 0, updateView, false);
         addChangedCardKeywords(Collections.singletonList("Enchant creature"), Lists.newArrayList(),
                 false, bestowTimestamp, 0, updateView);
     }
@@ -5749,7 +5744,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         // Protection only works on the Battlefield
-        if (!isInZone(ZoneType.Battlefield)) {
+        if (!isInPlay()) {
             return false;
         }
 
@@ -5975,7 +5970,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         // keywords don't work outside battlefield
-        if (!isInZone(ZoneType.Battlefield)) {
+        if (!isInPlay()) {
             return true;
         }
 
@@ -6324,7 +6319,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public boolean isCommander() {
         if (this.getMeldedWith() != null && this.getMeldedWith().isCommander())
             return true;
-        if (isInZone(ZoneType.Battlefield) && hasMergedCard()) {
+        if (isInPlay() && hasMergedCard()) {
             for (final Card c : getMergedCards())
                 if (c.isCommander) return true;
         }
@@ -6346,7 +6341,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return this;
         if (this.getMeldedWith() != null && this.getMeldedWith().isCommander())
             return this.getMeldedWith();
-        if (isInZone(ZoneType.Battlefield) && hasMergedCard()) {
+        if (isInPlay() && hasMergedCard()) {
             for (final Card c : getMergedCards())
                 if (c.isCommander) return c;
         }

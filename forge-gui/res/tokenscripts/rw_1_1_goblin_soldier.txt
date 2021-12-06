@@ -1,4 +1,4 @@
-Name:Goblin Soldier
+Name:Goblin Soldier Token
 Types:Creature Goblin Soldier
 Colors:red,white
 ManaCost:no cost

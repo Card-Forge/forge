@@ -56,7 +56,7 @@ public class PlayerZone extends Zone {
                 return true;
             }
 
-            if (c.isLand() && (!c.mayPlay(c.getController()).isEmpty())) {
+            if (c.isLand() && !c.mayPlay(c.getController()).isEmpty()) {
                 return true;
             }
 

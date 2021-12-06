@@ -1,4 +1,4 @@
-Name:Goblin Construct
+Name:Goblin Construct Token
 ManaCost:no cost
 PT:0/1
 Types:Artifact Creature Goblin Construct

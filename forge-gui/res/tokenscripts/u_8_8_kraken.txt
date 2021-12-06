@@ -1,4 +1,4 @@
-Name:Kraken
+Name:Kraken Token
 ManaCost:no cost
 Types:Creature Kraken
 Colors:blue

@@ -1,4 +1,4 @@
-Name:Fighter
+Name:Fighter Token
 ManaCost:no cost
 Types:Creature Fighter
 Colors:red

@@ -1,4 +1,4 @@
-Name:Salamander Warrior
+Name:Salamander Warrior Token
 ManaCost:no cost
 Types:Creature Salamander Warrior
 Colors:blue

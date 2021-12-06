@@ -5,6 +5,5 @@ PT:2/2
 K:Wither
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigEffect | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to a player, that player can't gain life for the rest of the game.
 SVar:TrigEffect:DB$ Effect | Name$ Stigma Lasher Effect | StaticAbilities$ CantGainLife | Duration$ Permanent | RememberObjects$ TriggeredTarget
-SVar:CantGainLife:Mode$ Continuous | EffectZone$ Command | Affected$ Player.IsRemembered | AddKeyword$ You can't gain life. | Description$ The damaged player can't gain life for the rest of the game.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stigma_lasher.jpg
+SVar:CantGainLife:Mode$ CantGainLife | ValidPlayer$ Player.IsRemembered | Description$ The damaged player can't gain life for the rest of the game.
 Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\nWhenever Stigma Lasher deals damage to a player, that player can't gain life for the rest of the game.

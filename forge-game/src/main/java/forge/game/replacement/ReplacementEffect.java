@@ -223,8 +223,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             String currentName;
             if (this.isIntrinsic() && cardState != null && cardState.getCard() == getHostCard()) {
                 currentName = cardState.getName();
-            }
-            else {
+            } else {
                 currentName = getHostCard().getName();
             }
             desc = CardTranslation.translateSingleDescriptionText(desc, currentName);

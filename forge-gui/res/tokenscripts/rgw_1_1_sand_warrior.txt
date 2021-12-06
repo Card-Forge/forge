@@ -1,4 +1,4 @@
-Name:Sand Warrior
+Name:Sand Warrior Token
 Types:Creature Sand Warrior
 Colors:red,green,white
 ManaCost:no cost

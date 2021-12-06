@@ -1,4 +1,4 @@
-Name:Gnome
+Name:Gnome Token
 ManaCost:no cost
 PT:1/1
 Types:Artifact Creature Gnome

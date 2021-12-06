@@ -1,4 +1,4 @@
-Name:Goblin
+Name:Goblin Token
 ManaCost:no cost
 Types:Creature Goblin
 Colors:red

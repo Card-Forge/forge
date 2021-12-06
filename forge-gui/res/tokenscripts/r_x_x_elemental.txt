@@ -1,4 +1,4 @@
-Name:Elemental
+Name:Elemental Token
 Colors:red
 ManaCost:no cost
 PT:*/*

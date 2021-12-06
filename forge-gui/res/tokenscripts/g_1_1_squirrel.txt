@@ -1,4 +1,4 @@
-Name:Squirrel
+Name:Squirrel Token
 ManaCost:no cost
 Types:Creature Squirrel
 PT:1/1

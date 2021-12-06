@@ -140,6 +140,7 @@ public final class StaticAbilityContinuous {
         String[] addStatics = null;
         boolean removeAllAbilities = false;
         boolean removeNonMana = false;
+        boolean addAllCreatureTypes = false;
         boolean removeSuperTypes = false;
         boolean removeCardTypes = false;
         boolean removeSubTypes = false;
@@ -425,6 +426,9 @@ public final class StaticAbilityContinuous {
                         return false;
                     }
                 });
+            }
+            if (params.containsKey("AddAllCreatureTypes")) {
+                addAllCreatureTypes = true;
             }
             if (params.containsKey("RemoveSuperTypes")) {
                 removeSuperTypes = true;
@@ -855,11 +859,7 @@ public final class StaticAbilityContinuous {
                         if (params.containsKey("TriggerRememberDefined")) {
                             String triggerRemembered = (params.get("TriggerRememberDefined"));
                             for (final String rem : triggerRemembered.split(",")) {
-                                for (final Object o : AbilityUtils.getDefinedObjects(hostCard, rem, stAb)) {
-                                    if (o instanceof SpellAbility) {
-                                        // "RememberObjects$ Remembered" don't remember spellability
-                                        continue;
-                                    }
+                                for (final Object o : AbilityUtils.getDefinedEntities(hostCard, rem, stAb)) {
                                     actualTrigger.addRemembered(o);
                                 }
                             }
@@ -895,10 +895,11 @@ public final class StaticAbilityContinuous {
             }
 
             // add Types
-            if ((addTypes != null) || (removeTypes != null)) {
-                affectedCard.addChangedCardTypes(addTypes, removeTypes, removeSuperTypes, removeCardTypes,
-                        removeSubTypes, removeLandTypes, removeCreatureTypes, removeArtifactTypes,
-                        removeEnchantmentTypes, hostCard.getTimestamp(), stAb.getId(), true, stAb.hasParam("CharacteristicDefining"));
+            if ((addTypes != null) || (removeTypes != null) || addAllCreatureTypes
+                    || removeSuperTypes || removeCardTypes || removeLandTypes || removeCreatureTypes || removeArtifactTypes || removeEnchantmentTypes) {
+                affectedCard.addChangedCardTypes(addTypes, removeTypes, addAllCreatureTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
+                        removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes,
+                        hostCard.getTimestamp(), stAb.getId(), true, stAb.hasParam("CharacteristicDefining"));
             }
 
             // add colors

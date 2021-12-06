@@ -53,7 +53,7 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
             PlayerCollection targetableOpps = aiPlayer.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
             Player opp = targetableOpps.min(PlayerPredicates.compareByLife());
             final boolean canTgtAI = sa.canTarget(aiPlayer);
-            final boolean canTgtHuman = opp != null && sa.canTarget(opp);
+            final boolean canTgtHuman = sa.canTarget(opp);
 
             if (canTgtHuman && canTgtAI) {
                 // TODO: maybe some other consideration rather than random?

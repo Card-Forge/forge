@@ -309,6 +309,7 @@ public class PhaseHandler implements java.io.Serializable {
                     break;
 
                 case COMBAT_BEGIN:
+                    nCombatsThisTurn++;
                     combat = new Combat(playerTurn);
                     //PhaseUtil.verifyCombat();
                     break;
@@ -478,9 +479,7 @@ public class PhaseHandler implements java.io.Serializable {
         for (Player p : game.getPlayers()) {
             int burn = p.getManaPool().clearPool(true).size();
 
-            boolean manaBurns = game.getRules().hasManaBurn() ||
-                    (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.manaBurn));
-            if (manaBurns) {
+            if (p.getManaPool().hasBurn()) {
                 p.loseLife(burn, false, true);
             }
         }
@@ -605,7 +604,6 @@ public class PhaseHandler implements java.io.Serializable {
             return;
         }
 
-        nCombatsThisTurn++;
         // Reset all active Triggers
         game.getTriggerHandler().resetActiveTriggers();
 
@@ -981,15 +979,18 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public final boolean isFirstCombat() {
-        return (nCombatsThisTurn == 1);
+        return nCombatsThisTurn == 1;
+    }
+    public final int getNumCombat() {
+        return nCombatsThisTurn;
     }
 
     public final boolean isFirstUpkeep() {
-        return is(PhaseType.UPKEEP) && (nUpkeepsThisTurn == 0);
+        return is(PhaseType.UPKEEP) && nUpkeepsThisTurn == 0;
     }
 
     public final boolean isFirstUpkeepThisGame() {
-        return is(PhaseType.UPKEEP) && (nUpkeepsThisGame == 0);
+        return is(PhaseType.UPKEEP) && nUpkeepsThisGame == 0;
     }
 
     public final boolean isPreCombatMain() {
@@ -998,7 +999,7 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public final boolean beforeFirstPostCombatMainEnd() {
-        return (nMain2sThisTurn == 0);
+        return nMain2sThisTurn == 0;
     }
 
     private final static boolean DEBUG_PHASES = false;
@@ -1164,10 +1165,16 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public final boolean devAdvanceToPhase(PhaseType targetPhase) {
+        return devAdvanceToPhase(targetPhase, null);
+    }
+    public final boolean devAdvanceToPhase(PhaseType targetPhase, Runnable resolver) {
         boolean isTopsy = playerTurn.getAmountOfKeyword("The phases of your turn are reversed.") % 2 == 1;
         while (phase.isBefore(targetPhase, isTopsy)) {
             if (checkStateBasedEffects()) {
                 return false;
+            }
+            if (resolver != null) {
+                resolver.run();
             }
             onPhaseEnd();
             advanceToNextPhase();
