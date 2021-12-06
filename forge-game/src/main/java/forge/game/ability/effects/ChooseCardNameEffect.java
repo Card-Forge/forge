@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -61,6 +62,8 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
         if (!randomChoice) {
             if (sa.hasParam("SelectPrompt")) {
                 message = sa.getParam("SelectPrompt");
+            } else if (sa.hasParam("Draft")) {
+                message = Localizer.getInstance().getMessage("lblChooseCardDraft");
             } else if (null == validDesc) {
                 message = Localizer.getInstance().getMessage("lblChooseACardName");
             } else {
@@ -105,8 +108,16 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                     chosen = p.getController().chooseCardName(sa, faces, message);
                 } else if (chooseFromList) {
                     String [] names = sa.getParam("ChooseFromList").split(",");
+                    if (sa.hasParam("Draft")) {
+                        List<String> options = Arrays.asList(names);
+                        Collections.shuffle(options);
+                        List<String> draftChoices = options.subList(0,3);
+                        names = draftChoices.toArray(new String[0]);
+                    }
                     List<ICardFace> faces = new ArrayList<>();
                     for (String name : names) {
+                        // Cardnames that include "," must use ";" instead in ChooseFromList$ (i.e. Tovolar; Dire Overlord)
+                        name = name.replace(";", ",");
                         faces.add(StaticData.instance().getCommonCards().getFaceByName(name));
                     }
                     if (randomChoice) {
