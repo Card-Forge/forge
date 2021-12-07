@@ -275,6 +275,7 @@ public class GameAction {
                     copied.setChangedCardTypesCharacterDefining(c.getChangedCardTypesCharacterDefiningTable());
                     copied.setChangedCardNames(c.getChangedCardNames());
                     copied.setChangedCardTraits(c.getChangedCardTraits());
+                    copied.setDrawnThisTurn(c.getDrawnThisTurn());
 
                     copied.copyChangedTextFrom(c);
                     copied.setTimestamp(c.getTimestamp());
