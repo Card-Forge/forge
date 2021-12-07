@@ -51,6 +51,14 @@ public class Phase implements java.io.Serializable {
     private final HashMap<Player, ArrayList<GameCommand>> untilEndMap = new HashMap<>();
     private final HashMap<Player, ArrayList<GameCommand>> registerMap = new HashMap<>();
 
+    public void clearCommands() {
+        at.clear();
+        until.clear();
+        untilMap.clear();
+        untilEndMap.clear();
+        registerMap.clear();
+    }
+
     /**
      * <p>
      * Add a hardcoded trigger that will execute "at <phase>".

@@ -102,7 +102,7 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
     public void resolve() {
         effect.resolve(this);
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public final Object clone() {

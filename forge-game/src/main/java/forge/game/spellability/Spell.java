@@ -132,7 +132,6 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     @Override
     public boolean isAbility() { return false; }
 
-
     /**
      * @return the castFaceDown
      */
