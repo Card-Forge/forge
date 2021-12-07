@@ -7,12 +7,28 @@
     ],
     "file.lastUsedOpenFilter": "Alle Dateien (*)",
     "fileStates": {
+        "map/cave_1.tmx": {
+            "scale": 3.8134072580645157,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 232.07592059002357,
+                "y": 136.0987602104206
+            }
+        },
+        "map/cave_2.tmx": {
+            "scale": 3.8134072580645157,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 231.8136879113908,
+                "y": 135.8365275317878
+            }
+        },
         "map/crypt.tmx": {
             "scale": 3.8134072580645157,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 231.8136879113908,
-                "y": 136.0987602104206
+                "x": 232.07592059002357,
+                "y": 136.36099288905336
             }
         },
         "map/forest_town.tmx": {
@@ -59,8 +75,8 @@
             "scale": 1.7753124999999998,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 240.52103502904419,
-                "y": 135.75074810772753
+                "x": 239.957753916564,
+                "y": 136.31402922020771
             }
         },
         "map/waste_town.tmx": {

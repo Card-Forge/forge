@@ -1,62 +1,39 @@
 package forge.itemmanager.views;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
-
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
 import forge.ImageKeys;
-import forge.assets.FImage;
-import forge.assets.FImageComplex;
-import forge.assets.FSkin;
-import forge.assets.FSkinColor;
+import forge.assets.*;
 import forge.assets.FSkinColor.Colors;
-import forge.assets.FSkinFont;
-import forge.assets.FSkinImage;
-import forge.assets.ImageCache;
 import forge.card.*;
 import forge.card.CardRenderer.CardStackPosition;
-import forge.deck.ArchetypeDeckGenerator;
-import forge.deck.CardThemedDeckGenerator;
-import forge.deck.CommanderDeckGenerator;
-import forge.deck.DeckProxy;
-import forge.deck.FDeckViewer;
+import forge.deck.*;
 import forge.deck.io.DeckPreferences;
 import forge.game.card.CardView;
 import forge.gamemodes.planarconquest.ConquestCommander;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
-import forge.itemmanager.ColumnDef;
-import forge.itemmanager.GroupDef;
-import forge.itemmanager.ItemColumn;
-import forge.itemmanager.ItemManager;
-import forge.itemmanager.ItemManagerConfig;
-import forge.itemmanager.ItemManagerModel;
-import forge.itemmanager.SItemManagerUtil;
+import forge.itemmanager.*;
 import forge.itemmanager.filters.ItemFilter;
-import forge.toolbox.FCardPanel;
-import forge.toolbox.FComboBox;
-import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
+import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FLabel;
-import forge.toolbox.FScrollPane;
-import forge.toolbox.FTextField;
 import forge.util.ImageUtil;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
 public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final float PADDING = Utils.scale(5);
@@ -584,7 +561,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private ItemInfo getItemAtPoint(float x, float y) {
         //check selected items first since they appear on top
         for (int i = selectedIndices.size() - 1; i >= 0; i--) {
-            ItemInfo item = orderedItems.get(selectedIndices.get(i));
+            int currentIndex=selectedIndices.get(i);
+            if(currentIndex<0||orderedItems.size()<=currentIndex)
+                continue;
+            ItemInfo item = orderedItems.get(currentIndex);
             float relX = x + item.group.getScrollLeft() - item.group.getLeft();
             float relY = y + getScrollValue();
             if (item.contains(relX, relY)) {
@@ -760,16 +740,20 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     @Override
     public void scrollSelectionIntoView() {
         if (selectedIndices.isEmpty()) { return; }
+        int index=selectedIndices.get(0);
+        if(index<0||orderedItems.size()<=index) { return ; }
 
-        ItemInfo itemInfo = orderedItems.get(selectedIndices.get(0));
+        ItemInfo itemInfo = orderedItems.get(index);
         getScroller().scrollIntoView(itemInfo);
     }
 
     @Override
     public Rectangle getSelectionBounds() {
-        if (selectedIndices.isEmpty()) { return null; }
+        if (selectedIndices.isEmpty()) { return new Rectangle(); }
 
-        ItemInfo itemInfo = orderedItems.get(selectedIndices.get(0));
+        int index=selectedIndices.get(0);
+        if(index<0||orderedItems.size()<=index) { return new Rectangle(); }
+        ItemInfo itemInfo = orderedItems.get(index);
         Vector2 relPos = itemInfo.group.getChildRelativePosition(itemInfo);
         return new Rectangle(itemInfo.group.screenPos.x + relPos.x - SEL_BORDER_SIZE + itemInfo.group.getLeft(),
                 itemInfo.group.screenPos.y + relPos.y - SEL_BORDER_SIZE,

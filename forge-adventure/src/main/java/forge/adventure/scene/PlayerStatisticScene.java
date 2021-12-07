@@ -79,11 +79,11 @@ public class PlayerStatisticScene  extends UIScene {
             enemyImage.setSize(8,8);
             Label name = Controls.newLabel(data.name);
 
-            enemiesGroup.add(enemyImage).align(Align.left).space(2);
-            enemiesGroup.add((data.name)).align(Align.left).space(2);
-            enemiesGroup.add((entry.getValue().getLeft().toString())).align(Align.right).space(2);
-            enemiesGroup.add(("/")).align(Align.right).space(2);
-            enemiesGroup.add((entry.getValue().getRight().toString())).align(Align.right).space(2);
+            enemiesGroup.add(enemyImage).align(Align.left).space(5);
+            enemiesGroup.add((data.name)).align(Align.left).space(5);
+            enemiesGroup.add((entry.getValue().getLeft().toString())).align(Align.right).space(5);
+            enemiesGroup.add(("/")).align(Align.right).space(5);
+            enemiesGroup.add((entry.getValue().getRight().toString())).align(Align.right).space(5);
             enemiesGroup.row().space(5);
         }
 

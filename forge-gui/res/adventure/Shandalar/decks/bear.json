@@ -6,7 +6,7 @@
    "colors":["Green"],
    "tribe":"Bear",        
    "tribeCards":1.0,
-   "tribeSynergyCards":0.2
-   "rares":0.8
+   "tribeSynergyCards":0.2,
+   "rares":0.4
   }
 }

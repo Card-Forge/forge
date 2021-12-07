@@ -33,7 +33,10 @@ WasteTown
   size: 48, 48      
 Gate 
   xy: 384, 128
-  size: 64, 48              
+  size: 64, 48    
+Cave
+  xy: 192, 272
+  size: 32, 32               
 Monestory 
   xy: 384, 592
   size: 64, 64      

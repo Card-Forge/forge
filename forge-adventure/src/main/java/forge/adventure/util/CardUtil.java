@@ -255,6 +255,8 @@ public class CardUtil {
     }
     public static int getCardPrice(PaperCard card)
     {
+        if(card==null)
+            return 0;
         switch (card.getRarity())
         {
             case BasicLand:

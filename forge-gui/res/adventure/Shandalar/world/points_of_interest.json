@@ -54,5 +54,21 @@
   "spriteAtlas":"maps/tileset/buildings.atlas",
   "sprite":"Graveyard",
   "map":  "maps/map/graveyard.tmx"
-}
+},
+  {
+    "name":"Cave_1",
+    "count":20,
+    "radiusFactor":0.8,
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"Cave",
+    "map":  "maps/map/cave_1.tmx"
+  },
+  {
+    "name":"Cave_2",
+    "count":20,
+    "radiusFactor":0.8,
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"Cave",
+    "map":  "maps/map/cave_2.tmx"
+  }
 ]
