@@ -53,6 +53,14 @@ public class PlayerStatisticScene  extends UIScene {
     public void enter() {
         super.enter();
         enemiesGroup.clear();
+
+        enemiesGroup.add("Avatar").align(Align.center).space(3,10,3,10);
+        enemiesGroup.add("Name").fillX().align(Align.center).fillX().space(3,10,3,60);
+        enemiesGroup.add(("Win")).align(Align.center).space(3,5,3,5);
+        enemiesGroup.add(("/")).align(Align.center).space(3,5,3,5);
+        enemiesGroup.add("Loss").align(Align.center).space(3,5,3,5);
+        enemiesGroup.row().space(8);
+
         if(avatar!=null)
         {
             avatar.setDrawable(new TextureRegionDrawable(Current.player().avatar()));
@@ -77,14 +85,13 @@ public class PlayerStatisticScene  extends UIScene {
             Image enemyImage=new Image();
             enemyImage.setDrawable(new TextureRegionDrawable(new EnemySprite(data).getAvatar()));
             enemyImage.setSize(8,8);
-            Label name = Controls.newLabel(data.name);
 
-            enemiesGroup.add(enemyImage).align(Align.left).space(5);
-            enemiesGroup.add((data.name)).align(Align.left).space(5);
-            enemiesGroup.add((entry.getValue().getLeft().toString())).align(Align.right).space(5);
-            enemiesGroup.add(("/")).align(Align.right).space(5);
-            enemiesGroup.add((entry.getValue().getRight().toString())).align(Align.right).space(5);
-            enemiesGroup.row().space(5);
+            enemiesGroup.add(enemyImage).align(Align.center).space(3,10,3,10);
+            enemiesGroup.add((data.name)).fillX().align(Align.center).fillX().space(3,10,3,10);
+            enemiesGroup.add((entry.getValue().getLeft().toString())).space(3,2,3,2);
+            enemiesGroup.add(("/")).align(Align.center).space(3,2,3,2);
+            enemiesGroup.add((entry.getValue().getRight().toString())).align(Align.center).space(0,2,0,2);
+            enemiesGroup.row().space(8);
         }
 
     }
@@ -92,7 +99,6 @@ public class PlayerStatisticScene  extends UIScene {
     public void resLoaded() {
         super.resLoaded();
         enemiesGroup = new Table(Controls.GetSkin());
-
 
         enemiesGroup.row();
         ui.onButtonPress("return", () -> back());
@@ -104,6 +110,7 @@ public class PlayerStatisticScene  extends UIScene {
 
         ScrollPane scrollPane = ui.findActor("enemies");
         scrollPane.setActor(enemiesGroup);
+        enemiesGroup.setFillParent(true);
     }
 
     @Override

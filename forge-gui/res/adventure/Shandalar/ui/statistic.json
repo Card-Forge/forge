@@ -13,9 +13,9 @@
     {
       "type" : "Scroll",
       "name": "enemies",
-      "x": 116,
+      "x": 206,
       "y": 10 ,
-      "width": 344,
+      "width": 256,
       "height": 235
     } ,
     {

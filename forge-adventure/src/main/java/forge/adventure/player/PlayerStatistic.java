@@ -45,7 +45,10 @@ public class PlayerStatistic implements SaveFileContent {
     @Override
     public void load(SaveFileData data) {
 
-        winLossRecord = (HashMap<String, Pair<Integer, Integer>>) data.readObject("winLossRecord");
+        if(data!=null&&data.containsKey("winLossRecord"))
+            winLossRecord = (HashMap<String, Pair<Integer, Integer>>) data.readObject("winLossRecord");
+        else
+            winLossRecord.clear();
     }
 
     public void setResult(String enemy,boolean win)
