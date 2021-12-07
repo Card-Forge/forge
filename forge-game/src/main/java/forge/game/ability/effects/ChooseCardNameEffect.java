@@ -55,6 +55,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
         }
 
         boolean randomChoice = sa.hasParam("AtRandom");
+        boolean draft = sa.hasParam("Draft"); //for digital "draft from spellbook" mechanic
         boolean chooseFromDefined = sa.hasParam("ChooseFromDefinedCards");
         boolean chooseFromList = sa.hasParam("ChooseFromList");
         boolean chooseFromOneTimeList = sa.hasParam("ChooseFromOneTimeList");
@@ -62,7 +63,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
         if (!randomChoice) {
             if (sa.hasParam("SelectPrompt")) {
                 message = sa.getParam("SelectPrompt");
-            } else if (sa.hasParam("Draft")) {
+            } else if (draft) {
                 message = Localizer.getInstance().getMessage("lblChooseCardDraft");
             } else if (null == validDesc) {
                 message = Localizer.getInstance().getMessage("lblChooseACardName");
@@ -153,8 +154,10 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
 
                 host.setNamedCard(chosen);
                 if (!randomChoice) {
-                    p.getGame().getAction().notifyOfValue(sa, host, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), chosen), p);
                     p.setNamedCard(chosen);
+                    if (!draft) { //drafting is secret
+                        p.getGame().getAction().notifyOfValue(sa, host, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), chosen), p);
+                    }
                 }
                 if (sa.hasParam("NoteFor")) {
                     p.addNoteForName(sa.getParam("NoteFor"), "Name:" + chosen);
