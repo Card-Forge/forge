@@ -67,6 +67,7 @@ public class LandAbility extends Ability {
 
         return p.canPlayLand(land, false, this);
     }
+
     @Override
     public void resolve() {
         getHostCard().setSplitStateToPlayAbility(this);
@@ -81,6 +82,7 @@ public class LandAbility extends Ability {
             result.setState(CardStateName.Original, true);
         }
     }
+
     @Override
     public String toUnsuppressedString() {
         StringBuilder sb = new StringBuilder("Play land");

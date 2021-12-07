@@ -32,7 +32,7 @@ public class SkipTurnEffect extends SpellAbilityEffect {
         sb.append("skips his/her next ").append(numTurns).append(" turn(s).");
         return sb.toString();
     }
-    
+
     @Override
     public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getHostCard();

@@ -57,7 +57,6 @@ public class SpellPermanent extends SpellApiBased {
         if (this.getPayCosts().getTotalMana().countX() > 0 && StringUtils.isNotBlank(getHostCard().getSVar("X"))) {
             this.setSVar("X", this.getHostCard().getSVar("X"));
         }
-
     } // Spell_Permanent()
 
 }

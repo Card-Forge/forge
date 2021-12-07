@@ -60,7 +60,7 @@ public class SkipPhaseEffect extends SpellAbilityEffect {
         final String name = hostCard.getName() + "'s Effect";
         final String image = hostCard.getImageKey();
         final boolean isNextThisTurn = duration != null && duration.equals("NextThisTurn");
-        
+
         final Card eff = createEffect(sa, player, name, image);
 
         final StringBuilder sb = new StringBuilder();
@@ -89,7 +89,7 @@ public class SkipPhaseEffect extends SpellAbilityEffect {
                 sb.append(" of your next turn.");
             }
         }
-        
+
         final String repeffstr = sb.toString();
         ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
         // Set to layer to Control so it will be applied before "would begin your X phase/step" replacement effects

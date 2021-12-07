@@ -38,17 +38,26 @@ public class RestartGameEffect extends SpellAbilityEffect {
         forge.game.trigger.Trigger.resetIDs();
         TriggerHandler trigHandler = game.getTriggerHandler();
         trigHandler.clearDelayedTrigger();
+        trigHandler.clearPlayerDefinedDelayedTrigger();
         trigHandler.suppressMode(TriggerType.ChangesZone);
         // Avoid Psychic Surgery trigger in new game
         trigHandler.suppressMode(TriggerType.Shuffled);
 
         game.getPhaseHandler().resetExtra();
+        game.getPhaseHandler().setPlayerDeclaresAttackers(null);
+        game.getPhaseHandler().setPlayerDeclaresBlockers(null);
+        game.getUntap().clearCommands();
+        game.getUpkeep().clearCommands();
+        game.getEndOfCombat().clearCommands();
+        game.getEndOfTurn().clearCommands();
+        game.getCleanup().clearCommands();
 
         game.getStack().reset();
         game.clearCounterAddedThisTurn();
         game.resetPlayersAttackedOnNextTurn();
         game.resetPlayersAttackedOnNextTurn();
         game.setMonarch(null);
+        game.setDayTime(null);
         GameAction action = game.getAction();
 
         for (Player p: players) {
@@ -57,9 +66,13 @@ public class RestartGameEffect extends SpellAbilityEffect {
             p.resetSpellCastThisGame();
             p.onCleanupPhase();
             p.setLandsPlayedLastTurn(0);
+            p.setSpellsCastLastTurn(0);
+            p.setLifeLostLastTurn(0);
             p.resetCommanderStats();
             p.resetCompletedDungeons();
             p.setBlessing(false);
+            p.clearController();
+            p.setMustAttackEntity(null);
 
             CardCollection newLibrary = new CardCollection(p.getCardsIn(restartZones, false));
             List<Card> filteredCards = null;
