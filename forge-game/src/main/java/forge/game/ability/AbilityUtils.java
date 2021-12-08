@@ -1521,8 +1521,7 @@ public class AbilityUtils {
         else if (unlessCost.equals("ChosenManaCost")) {
             if (!source.hasChosenCard()) {
                 cost = new Cost(ManaCost.ZERO, true);
-            }
-            else {
+            } else {
                 cost = new Cost(Iterables.getFirst(source.getChosenCards(), null).getManaCost(), true);
             }
         }
