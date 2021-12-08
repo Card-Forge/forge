@@ -243,10 +243,15 @@ public class HumanPlay {
         if (!parts.isEmpty()) {
             costPart = parts.get(0);
         }
-        String orString = prompt == null ? sourceAbility.getStackDescription().trim() : "";
+        String orString;
+        if (sourceAbility.hasParam("OrString")) {
+            orString = sourceAbility.getParam("OrString");
+        } else {
+            orString = prompt == null ? sourceAbility.getStackDescription().trim() : "";
+        }
         if (!orString.isEmpty()) {
             if (sourceAbility.hasParam("UnlessSwitched")) {
-                orString = TextUtil.concatWithSpace(" (" + Localizer.getInstance().getMessage("lblIfYouDo") + ":", orString, ")");
+a                orString = TextUtil.concatWithSpace(" (" + Localizer.getInstance().getMessage("lblIfYouDo") + ":", orString + ")");
             } else {
                 orString = TextUtil.concatWithSpace(" (" + Localizer.getInstance().getMessage("lblOr") + ":", orString, ")");
             }
