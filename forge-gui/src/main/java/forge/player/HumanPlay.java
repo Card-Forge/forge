@@ -243,10 +243,15 @@ public class HumanPlay {
         if (!parts.isEmpty()) {
             costPart = parts.get(0);
         }
-        String orString = prompt == null ? sourceAbility.getStackDescription().trim() : "";
+        String orString;
+        if (sourceAbility.hasParam("OrString")) {
+            orString = sourceAbility.getParam("OrString");
+        } else {
+            orString = prompt == null ? sourceAbility.getStackDescription().trim() : "";
+        }
         if (!orString.isEmpty()) {
             if (sourceAbility.hasParam("UnlessSwitched")) {
-                orString = TextUtil.concatWithSpace(" (" + Localizer.getInstance().getMessage("lblIfYouDo") + ":", orString, ")");
+a                orString = TextUtil.concatWithSpace(" (" + Localizer.getInstance().getMessage("lblIfYouDo") + ":", orString + ")");
             } else {
                 orString = TextUtil.concatWithSpace(" (" + Localizer.getInstance().getMessage("lblOr") + ":", orString, ")");
             }
@@ -553,7 +558,8 @@ public class HumanPlay {
         if (list.size() < amount) { return false; } // unable to pay (not enough cards)
 
         InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, amount, amount, list, sourceAbility);
-        inp.setMessage(Localizer.getInstance().getMessage("lblSelectNSpecifyTypeCardsToAction", cpl.getDescriptiveType(), actionName));
+        String cardDesc = cpl.getDescriptiveType().equalsIgnoreCase("Card") ? "" : cpl.getDescriptiveType();
+        inp.setMessage(Localizer.getInstance().getMessage("lblSelectNSpecifyTypeCardsToAction", cardDesc, actionName));
         inp.setCancelAllowed(true);
 
         inp.showAndWait();
