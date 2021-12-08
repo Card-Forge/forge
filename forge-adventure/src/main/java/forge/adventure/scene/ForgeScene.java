@@ -71,6 +71,7 @@ public abstract  class ForgeScene extends Scene implements IUpdateable {
 
     @Override
     public void enter() {
+        FOverlay.hideAll();
         if(getScreen()!=null)
             getScreen().setSize(AdventureApplicationAdapter.instance.getCurrentWidth(), AdventureApplicationAdapter.instance.getCurrentHeight());
 
