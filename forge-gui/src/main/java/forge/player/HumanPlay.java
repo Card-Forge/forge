@@ -558,7 +558,8 @@ a                orString = TextUtil.concatWithSpace(" (" + Localizer.getInstanc
         if (list.size() < amount) { return false; } // unable to pay (not enough cards)
 
         InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, amount, amount, list, sourceAbility);
-        inp.setMessage(Localizer.getInstance().getMessage("lblSelectNSpecifyTypeCardsToAction", cpl.getDescriptiveType(), actionName));
+        String cardDesc = cpl.getDescriptiveType().equalsIgnoreCase("Card") ? "" : cpl.getDescriptiveType();
+        inp.setMessage(Localizer.getInstance().getMessage("lblSelectNSpecifyTypeCardsToAction", cardDesc, actionName));
         inp.setCancelAllowed(true);
 
         inp.showAndWait();
