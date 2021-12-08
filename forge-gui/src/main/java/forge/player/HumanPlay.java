@@ -251,7 +251,7 @@ public class HumanPlay {
         }
         if (!orString.isEmpty()) {
             if (sourceAbility.hasParam("UnlessSwitched")) {
-a                orString = TextUtil.concatWithSpace(" (" + Localizer.getInstance().getMessage("lblIfYouDo") + ":", orString + ")");
+                orString = TextUtil.concatWithSpace(" (" + Localizer.getInstance().getMessage("lblIfYouDo") + ":", orString + ")");
             } else {
                 orString = TextUtil.concatWithSpace(" (" + Localizer.getInstance().getMessage("lblOr") + ":", orString, ")");
             }
