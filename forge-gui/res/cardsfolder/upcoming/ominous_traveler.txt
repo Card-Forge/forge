@@ -1,0 +1,13 @@
+Name:Ominous Traveler
+ManaCost:2
+Types:Creature Human
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraft | TriggerDescription$ When CARDNAME enters the battlefield, draft a card from CARDNAME's spellbook. That card perpetually gains "You may spend mana as though it were mana of any color to cast this spell" and "When you cast this spell, return a card named Ominous Traveler you control to its owner's hand."
+SVar:TrigDraft:DB$ NameCard | Draft$ True | Defined$ You | ChooseFromList$ Dominating Vampire,Vampire Socialite,Stromkirk Bloodthief,Falkenrath Pit Fighter,Wolfkin Outcast,Howlpack Piper,Tovolar; Dire Overlord,Patrician Geist,Shipwreck Sifters,Steelclad Spirit,Heron-Blessed Geist,Archghoul of Thraben,Champion of the Perished,Headless Rider,Bladestitched Skaab | SubAbility$ DBMakeCard
+SVar:DBMakeCard:DB$ MakeCard | Name$ ChosenName | Zone$ Hand | RememberMade$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | Triggers$ CastTrigger | StaticAbilities$ SpendAnyMana | Duration$ Permanent | Name$ Ominous Traveler's Perpetual Effect | SubAbility$ DBCleanup
+SVar:SpendAnyMana:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | AddHiddenKeyword$ May spend mana as though it were mana of any color to cast CARDNAME | Description$ You may spend mana as though it were mana of any color to cast this spell.
+SVar:CastTrigger:Mode$ SpellCast | ValidCard$ Card.IsRemembered | Execute$ TrigReturn | TriggerDescription$ When you cast this spell, return a card named Ominous Traveler you control to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | ChangeType$ Card.namedOminous Traveler+YouCtrl | ChangeNum$ 1 | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearNamedCard$ True
+Oracle:When Ominous Traveler enters the battlefield, draft a card from Ominous Traveler's spellbook. That card perpetually gains "You may spend mana as though it were mana of any color to cast this spell" and "When you cast this spell, return a card named Ominous Traveler you control to its owner's hand."
