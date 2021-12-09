@@ -166,7 +166,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
 
                 if (foundDest != null) {
                     // Allow ordering of found cards
-                    if ((foundDest.isKnown()) && found.size() >= 2 && !foundDest.equals(ZoneType.Exile)) {
+                    if (foundDest.isKnown() && found.size() >= 2 && !foundDest.equals(ZoneType.Exile)) {
                         found = (CardCollection)p.getController().orderMoveToZoneList(found, foundDest, sa);
                     }
 
@@ -218,8 +218,8 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 }
 
                 if (sa.hasParam("NoneFoundDestination") && found.size() < untilAmount) {
-                 // Allow ordering the revealed cards
-                    if ((noneFoundDest.isKnown()) && revealed.size() >= 2) {
+                    // Allow ordering the revealed cards
+                    if (noneFoundDest.isKnown() && revealed.size() >= 2) {
                         revealed = (CardCollection)p.getController().orderMoveToZoneList(revealed, noneFoundDest, sa);
                     }
                     if (noneFoundDest == ZoneType.Library && !shuffle
@@ -237,8 +237,8 @@ public class DigUntilEffect extends SpellAbilityEffect {
                         }
                     }
                 } else {
-                 // Allow ordering the rest of the revealed cards
-                    if (revealedDest.isKnown() && revealed.size() >= 2 && !sa.hasParam("NoReordering")) {
+                    // Allow ordering the rest of the revealed cards
+                    if (revealedDest.isKnown() && revealed.size() >= 2 && !sa.hasParam("SkipReorder")) {
                         revealed = (CardCollection)p.getController().orderMoveToZoneList(revealed, revealedDest, sa);
                     }
                     if (revealedDest == ZoneType.Library && !shuffle
