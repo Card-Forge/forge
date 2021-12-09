@@ -3171,7 +3171,7 @@ public class CardFactoryUtil {
             final String delTrigStr = "DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | RememberObjects$ Imprinted " +
                     "| StackDescription$ None | TriggerDescription$ Sacrifice them at the beginning of the next end step.";
 
-            final String sacStr = "DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI";
+            final String sacStr = "DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI | Controller$ You";
 
             final String cleanupStr = "DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True";
 
