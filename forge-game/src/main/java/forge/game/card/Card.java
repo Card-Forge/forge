@@ -1038,6 +1038,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         rememberedObjects.clear();
         view.updateRemembered(this);
     }
+    public final void updateRemembered() {
+        view.updateRemembered(this);
+    }
 
     public final CardCollectionView getImprintedCards() {
         return CardCollection.getView(imprintedCards);

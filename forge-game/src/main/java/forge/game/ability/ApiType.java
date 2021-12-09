@@ -188,7 +188,8 @@ public enum ApiType {
     ChangeZoneResolve (ChangeZoneResolveEffect.class),
     InternalEtbReplacement (ETBReplacementEffect.class),
     InternalLegendaryRule (CharmEffect.class),
-    InternalIgnoreEffect (CharmEffect.class);
+    InternalIgnoreEffect (CharmEffect.class),
+    UpdateRemember (UpdateRememberEffect.class);
 
 
     private final SpellAbilityEffect instanceEffect;
