@@ -6,7 +6,7 @@ import com.google.common.base.Function;
 import forge.Forge;
 import forge.Graphics;
 import forge.adventure.AdventureApplicationAdapter;
-import forge.adventure.world.AdventurePlayer;
+import forge.adventure.player.AdventurePlayer;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -25,10 +25,7 @@ import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
 import forge.screens.TabPageScreen;
-import forge.toolbox.FContainer;
-import forge.toolbox.FEvent;
-import forge.toolbox.FLabel;
-import forge.toolbox.GuiChoose;
+import forge.toolbox.*;
 import forge.util.Callback;
 import forge.util.ItemPool;
 import forge.util.Localizer;
@@ -44,7 +41,6 @@ import java.util.Map;
         private static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
 
         private static ItemPool<InventoryItem> decksUsingMyCards=new ItemPool<>(InventoryItem.class);
-
 
         @Override
         public void onActivate() {

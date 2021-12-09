@@ -14,8 +14,8 @@ import forge.adventure.util.CardUtil;
 import forge.adventure.util.Current;
 import forge.adventure.util.Reward;
 import forge.adventure.util.RewardActor;
-import forge.adventure.world.AdventurePlayer;
-import forge.adventure.world.PointOfInterestChanges;
+import forge.adventure.player.AdventurePlayer;
+import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.world.WorldSave;
 
 /**

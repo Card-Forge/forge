@@ -1,4 +1,4 @@
-package forge.adventure.world;
+package forge.adventure.pointofintrest;
 
 import java.util.HashMap;
 import java.util.HashSet;

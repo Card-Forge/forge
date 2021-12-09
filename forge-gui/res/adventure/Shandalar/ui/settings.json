@@ -12,7 +12,7 @@
             
     {
       "type" : "Scroll",                
-      "name": "settings"
+      "name": "settings",
       "x": 10, 
       "y": 10 ,
       "width": 450,

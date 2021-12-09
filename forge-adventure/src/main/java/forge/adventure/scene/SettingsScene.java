@@ -221,10 +221,4 @@ public class SettingsScene extends UIScene {
     public void create() {
 
     }
-
-    enum ControlTypes {
-        CheckBox,
-        Slider,
-        Resolution
-    }
 }

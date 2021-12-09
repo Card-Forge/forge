@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.IntMap;
 import forge.adventure.AdventureApplicationAdapter;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
-import forge.adventure.world.AdventurePlayer;
+import forge.adventure.player.AdventurePlayer;
 
 public class DeckSelectScene extends UIScene {
     private final IntMap<TextButton> buttons = new IntMap<>();

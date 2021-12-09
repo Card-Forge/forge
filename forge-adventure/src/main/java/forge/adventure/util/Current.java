@@ -1,6 +1,6 @@
 package forge.adventure.util;
 
-import forge.adventure.world.AdventurePlayer;
+import forge.adventure.player.AdventurePlayer;
 import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
 /**

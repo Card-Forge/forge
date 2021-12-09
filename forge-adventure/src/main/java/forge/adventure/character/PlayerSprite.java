@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import forge.adventure.stage.GameStage;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
-import forge.adventure.world.AdventurePlayer;
+import forge.adventure.player.AdventurePlayer;
 
 /**
  * Class that will represent the player sprite on the map
