@@ -431,14 +431,13 @@ public class CardDetailUtil {
             }
             area.append("(chosen cards: ");
             if (card.isImmutable() && card.getName().contains("Perpetual Effect")) {
-                FCollectionView<CardView> chosenCards = card.getChosenCards();
-                StringBuilder chosenToShow = new StringBuilder();
-                for (CardView cc : chosenCards) {
-                    if (cc.getZone() != ZoneType.Hand) {
-                        chosenToShow.append(cc);
+                List<CardView> chosenToShow = new ArrayList<>();
+                for (CardView cc : card.getChosenCards()) {
+                    if (!cc.getZone().isHidden()) {
+                        chosenToShow.add(cc);
                     }
                 }
-                area.append(chosenToShow.toString());
+                area.append(Lang.joinHomogenous(chosenToShow));
             } else {
                 area.append(Lang.joinHomogenous(card.getChosenCards()));
             }
