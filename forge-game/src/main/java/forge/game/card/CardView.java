@@ -444,7 +444,7 @@ public class CardView extends GameEntityView {
             if (o != null) {
                 if (o instanceof Card && c.isImmutable() && c.getName().contains("Perpetual Effect")) {
                     Card rc = (Card) o;
-                    if (!rc.getZone().getZoneType().isHidden()) {
+                    if (!rc.getGame().getCardState(rc).getZone().getZoneType().isHidden()) {
                         sb.append(o.toString());
                         sb.append("\r\n");
                     }
