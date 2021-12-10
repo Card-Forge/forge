@@ -3610,6 +3610,10 @@ public class CardFactoryUtil {
             altCostSA.setStackDescription(params.get("StackDescription"));
         }
 
+        if (params.containsKey("AlternateX")) {
+            altCostSA.setSVar("AlternateX", params.get("AlternateX"));
+        }
+
         return altCostSA;
     }
 

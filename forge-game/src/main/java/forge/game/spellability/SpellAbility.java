@@ -2339,6 +2339,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public Integer getXManaCostPaid() {
+        if (hasSVar("AlternateX")) {
+            return AbilityUtils.calculateAmount(getHostCard(), getHostCard().getSVar(getSVar("AlternateX")), this);
+        }
         return xManaCostPaid;
     }
     public void setXManaCostPaid(final Integer n) {
