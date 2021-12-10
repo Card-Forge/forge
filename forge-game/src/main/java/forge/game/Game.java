@@ -127,6 +127,7 @@ public class Game {
 
     private Player monarch = null;
     private Player monarchBeginTurn = null;
+    private Player startingPlayer;
 
     private Direction turnOrder = Direction.getDefaultDirection();
 
@@ -149,6 +150,14 @@ public class Game {
      */
     public int getId() {
         return this.id;
+    }
+
+    public Player getStartingPlayer() {
+        return startingPlayer;
+    }
+
+    public void setStartingPlayer(final Player p) {
+        startingPlayer = p;
     }
 
     public Player getMonarch() {

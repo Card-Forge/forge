@@ -1990,6 +1990,7 @@ public class GameAction {
             game.getTriggerHandler().runTrigger(TriggerType.NewGame, AbilityKey.newMap(), true);
             //</THIS CODE WILL WORK WITH PHASE = NULL>
 
+            game.setStartingPlayer(first);
             game.getPhaseHandler().startFirstTurn(first, startGameHook);
             //after game ends, ensure Auto-Pass canceled for all players so it doesn't apply to next game
             for (Player p : game.getRegisteredPlayers()) {

@@ -2236,6 +2236,9 @@ public class AbilityUtils {
         if (sq[0].equals("Monarch")) {
             return doXMath(calculateAmount(c, sq[player.isMonarch() ? 1 : 2], ctb), expr, c, ctb);
         }
+        if (sq[0].equals("StartingPlayer")) {
+            return doXMath(calculateAmount(c, sq[player.isStartingPlayer() ? 1: 2], ctb), expr, c, ctb);
+        }
         if (sq[0].equals("Blessing")) {
             return doXMath(calculateAmount(c, sq[player.hasBlessing() ? 1 : 2], ctb), expr, c, ctb);
         }

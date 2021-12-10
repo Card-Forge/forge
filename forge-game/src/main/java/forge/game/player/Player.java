@@ -3187,6 +3187,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         paidForStack.clear();
     }
 
+    public boolean isStartingPlayer() {
+        return equals(game.getStartingPlayer());
+    }
+
     public boolean isMonarch() {
         return equals(game.getMonarch());
     }
