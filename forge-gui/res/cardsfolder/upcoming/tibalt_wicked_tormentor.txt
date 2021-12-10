@@ -1,4 +1,4 @@
-Name:Tibalt, Wicked Tormenter
+Name:Tibalt, Wicked Tormentor
 ManaCost:3 R R
 Types:Legendary Planeswalker Tibalt
 Loyalty:3
@@ -13,4 +13,4 @@ SVar:DBDiscardDraw:DB$ Draw | NumCards$ 1 | UnlessCost$ Discard<1/Card> | Unless
 A:AB$ Token | Cost$ SubCounter<X/LOYALTY> | Planeswalker$ True | TokenAmount$ X | TokenScript$ r_1_1_devil_burn | SpellDescription$ Create X 1/1 red Devil creature tokens with "When this creature dies, it deals 1 damage to any target."
 SVar:X:Count$xPaid
 DeckHas:Ability$Discard & Ability$Token
-Oracle:[+1]: Add {R}{R}. Draft a card from Tibalt, Wicked Tormenter's spellbook, then exile it. Until end of turn, you may cast that card.\n[+1]: Tibalt, Wicked Tormenter deals 3 damage to target creature or planeswalker unless its controller has Tibalt deal 3 damage to them. If they do, you may discard a card. If you do, draw card.\n[−X]: Create X 1/1 red Devil creature tokens with "When this creature dies, it deals 1 damage to any target."
+Oracle:[+1]: Add {R}{R}. Draft a card from Tibalt, Wicked Tormentor's spellbook, then exile it. Until end of turn, you may cast that card.\n[+1]: Tibalt, Wicked Tormentor deals 3 damage to target creature or planeswalker unless its controller has Tibalt deal 3 damage to them. If they do, you may discard a card. If you do, draw card.\n[−X]: Create X 1/1 red Devil creature tokens with "When this creature dies, it deals 1 damage to any target."
