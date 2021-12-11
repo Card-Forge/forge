@@ -15,7 +15,7 @@ allJsonUrl = 'http://mtgjson.com/json/AllCards.json'
 def initializeEditions():
 	ignoredTypes = [ "From_the_Vault", "Duel_Decks", "Online", "Premium_Deck_Series" , "Funny" , "Promos"]
 	ignoredBorders = [ "Silver" ]
-	editionSections = [ "[cards]", "[precon product]", "[borderless]", "[showcase]", "[extended art]", "[buy a box]", "[promo]" ]
+	editionSections = [ "[cards]", "[precon product]", "[borderless]", "[showcase]", "[extended art]", "[buy a box]", "[promo]", "[rebalanced]" ]
 
 	print("Parsing Editions folder")
 	for root, dirnames, filenames in os.walk(editionsDir):

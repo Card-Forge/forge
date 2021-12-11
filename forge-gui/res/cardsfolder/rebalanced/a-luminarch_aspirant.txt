@@ -1,0 +1,8 @@
+Name:A-Luminarch Aspirant
+ManaCost:1 W
+Types:Creature Human Cleric
+PT:1/1
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:At the beginning of your end step, put a +1/+1 counter on target creature you control.

@@ -417,6 +417,11 @@ ScryfallCode=ZNR
 390 U Roiling Regrowth @Jonas De Ro
 391 U Kargan Warleader @Colin Boyer
 
+[rebalanced]
+A24 R A-Luminarch Aspirant @Mads Ahm
+A232 M A-Omnath, Locus of Creation @Chris Rahn
+A234 R A-Phylath, World Sculptor @Victor Adame Minguez
+
 [ModalDoubleFaceCards]
 1 Agadeem's Awakening|ZNR
 1 Emeria's Call|ZNR
