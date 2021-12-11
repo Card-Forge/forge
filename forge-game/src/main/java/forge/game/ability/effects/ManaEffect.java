@@ -18,7 +18,6 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
-import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
@@ -170,10 +169,7 @@ public class ManaEffect extends SpellAbilityEffect {
                     final StringBuilder sb = new StringBuilder();
                     int nMana = 0;
                     for (Object o : card.getRemembered()) {
-                        if (o instanceof Mana) {
-                            if (nMana > 0) {
-                                sb.append(" ");
-                            }
+                        if (o instanceof String) {
                             sb.append(o.toString());
                             nMana++;
                         }

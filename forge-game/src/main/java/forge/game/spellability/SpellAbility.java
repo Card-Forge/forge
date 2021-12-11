@@ -594,6 +594,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public List<Mana> getPayingMana() {
         return payingMana;
     }
+    public void setPayingMana(List<Mana> paying) {
+        payingMana = Lists.newArrayList(paying);
+    }
     public final void clearManaPaid() {
         payingMana.clear();
     }

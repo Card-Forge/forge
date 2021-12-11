@@ -24,6 +24,7 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
@@ -35,6 +36,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
+import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
@@ -78,9 +80,8 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
     // private String adjustedManaCost = "";
 
     // Paid Mana Cost
-    // private ArrayList<Mana> payingMana = new ArrayList<Mana>();
-    // private ArrayList<AbilityMana> paidAbilities = new
-    // ArrayList<AbilityMana>();
+    private List<Mana> payingMana;
+    // private ArrayList<AbilityMana> paidAbilities = new ArrayList<AbilityMana>();
     private Integer xManaPaid = null;
 
     // Other Paid things
@@ -112,6 +113,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         splicedCards = sa.getSplicedCards();
 
         xManaPaid = sa.getXManaCostPaid();
+        payingMana = Lists.newArrayList(sa.getPayingMana());
 
         // Triggering info
         triggeringObjects = sa.getTriggeringObjects();
@@ -181,6 +183,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
             ability.setPaidHash(paidHash);
             ability.setSplicedCards(splicedCards);
             ability.setXManaCostPaid(xManaPaid);
+            ability.setPayingMana(payingMana);
 
             // Triggered
             ability.setTriggeringObjects(triggeringObjects);
@@ -343,6 +346,10 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         if (activatingPlayer == activatingPlayer0) { return; }
         activatingPlayer = activatingPlayer0;
         view.updateActivatingPlayer(this);
+    }
+
+    public List<Mana> getPayingMana() {
+        return payingMana;
     }
 
     @Override
