@@ -24,6 +24,7 @@ A12 R Xathrid Necromancer @Maciej Kuciara
 49 R Curator of Mysteries @Christine Choi
 100 R Etali, Primal Storm @Raymond Swanland
 123 R Beast Whisperer @Matt Stewart
+124 R End-Raze Forerunners @Mathias Kollros
 127 R Vito, Thorn of the Dusk Rose @Lie Setiawan
 133 R Opportunistic Dragon @Chris Rahn
 140 R Neheb, Dreadhorde Champion @Igor Kieryluk
