@@ -442,8 +442,16 @@ public class CardView extends GameEntityView {
         sb.append("\r\nRemembered: \r\n");
         for (final Object o : c.getRemembered()) {
             if (o != null) {
-                sb.append(o.toString());
-                sb.append("\r\n");
+                if (o instanceof Card && c.isImmutable() && c.getName().contains("Perpetual Effect")) {
+                    Card rc = (Card) o;
+                    if (!rc.getGame().getCardState(rc).getZone().getZoneType().isHidden()) {
+                        sb.append(o.toString());
+                        sb.append("\r\n");
+                    }
+                } else {
+                    sb.append(o.toString());
+                    sb.append("\r\n");
+                }
             }
         }
         set(TrackableProperty.Remembered, sb.toString());

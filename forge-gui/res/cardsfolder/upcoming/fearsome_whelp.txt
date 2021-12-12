@@ -1,0 +1,13 @@
+Name:Fearsome Whelp
+ManaCost:1 R
+Types:Creature Dragon
+PT:1/1
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ At the beginning of your end step, each Dragon card in your hand perpetually gains "This spell costs {1} less to cast."
+SVar:TrigEffect:DB$ Effect | RememberObjects$ ValidHand Dragon.YouOwn | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Triggers$ Update | Name$ Fearsome Whelp's Perpetual Effect
+SVar:PerpetualAbility:Mode$ Continuous | Affected$ Card.IsRemembered | AddStaticAbility$ DragonReduceCost | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Each Dragon card in your hand perpetually gains "This spell costs {1} less to cast."
+SVar:DragonReduceCost:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} less to cast.
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+DeckHints:Type$Dragon
+Oracle:Flying\nAt the beginning of your end step, each Dragon card in your hand perpetually gains "This spell costs {1} less to cast.

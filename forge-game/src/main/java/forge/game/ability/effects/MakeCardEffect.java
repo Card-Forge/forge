@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import forge.StaticData;
 import forge.game.Game;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -13,6 +14,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         for (final Player player : getTargetPlayers(sa)) {
+            final Card source = sa.getHostCard();
             final Game game = player.getGame();
 
             String name = sa.getParamOrDefault("Name", "");
@@ -22,7 +24,9 @@ public class MakeCardEffect extends SpellAbilityEffect {
                 } else {
                     continue;
                 }
-
+            }
+            if (sa.hasParam("DefinedName")) {
+                name = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedName"), sa).getFirst().getName();
             }
             final ZoneType zone = ZoneType.smartValueOf(sa.getParamOrDefault("Zone", "Library"));
             int amount = sa.hasParam("Amount") ? Integer.parseInt(sa.getParam("Amount")) : 1;
