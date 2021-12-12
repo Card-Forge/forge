@@ -3,6 +3,7 @@ package forge.game.staticability;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 public class StaticAbilityCantGainLosePayLife {
@@ -51,7 +52,7 @@ public class StaticAbilityCantGainLosePayLife {
         return false;
     }
 
-    public static boolean anyCantPayLife(final Player player, final boolean effect)  {
+    public static boolean anyCantPayLife(final Player player, final boolean effect, final SpellAbility cause)  {
         final Game game = player.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
@@ -67,6 +68,10 @@ public class StaticAbilityCantGainLosePayLife {
                     if ("True".equalsIgnoreCase(stAb.getParam("ForCost")) == effect) {
                         continue;
                     }
+                }
+
+                if (!stAb.matchesValidParam("ValidCause", cause)) {
+                    return false;
                 }
 
                 if (applyCommonAbility(stAb, player)) {

@@ -551,7 +551,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         // for costs declared mandatory, this is only reachable with a valid amount
-        if (player.canPayLife(c, isEffect()) && controller.confirmPayment(cost, message, ability)) {
+        if (player.canPayLife(c, isEffect(), ability) && controller.confirmPayment(cost, message, ability)) {
             return PaymentDecision.number(c);
         }
         return null;

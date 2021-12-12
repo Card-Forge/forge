@@ -62,7 +62,7 @@ public class CostPayLife extends CostPart {
 
     @Override
     public Integer getMaxAmountX(SpellAbility ability, Player payer, final boolean effect) {
-        if (!payer.canPayLife(1, effect)) {
+        if (!payer.canPayLife(1, effect, ability)) {
             return 0;
         }
         return payer.getLife();
@@ -70,7 +70,7 @@ public class CostPayLife extends CostPart {
 
     @Override
     public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
-        if (!payer.canPayLife(this.getAbilityAmount(ability), effect)) {
+        if (!payer.canPayLife(this.getAbilityAmount(ability), effect, ability)) {
             return false;
         }
 

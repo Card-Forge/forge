@@ -299,7 +299,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
     @Override
     public PaymentDecision visit(CostPayLife cost) {
         int c = cost.getAbilityAmount(ability);
-        if (!player.canPayLife(c, isEffect())) {
+        if (!player.canPayLife(c, isEffect(), ability)) {
             return null;
         }
         // activator.payLife(c, null);

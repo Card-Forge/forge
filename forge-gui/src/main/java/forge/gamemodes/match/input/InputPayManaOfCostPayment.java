@@ -33,7 +33,7 @@ public class InputPayManaOfCostPayment extends InputPayMana {
     @Override
     protected final void onPlayerSelected(Player selected, final ITriggerEvent triggerEvent) {
         if (player == selected) {
-            if (player.canPayLife(this.phyLifeToLose + 2, this.effect)) {
+            if (player.canPayLife(this.phyLifeToLose + 2, this.effect, saPaidFor)) {
                 if (manaCost.payPhyrexian()) {
                     this.phyLifeToLose += 2;
                 } else {
