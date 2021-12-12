@@ -79,7 +79,7 @@ public class CostPayLife extends CostPart {
 
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability, final boolean effect) {
-        return ai.payLife(decision.c, null, effect);
+        return ai.payLife(decision.c, ability, effect);
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {

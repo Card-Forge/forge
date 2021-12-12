@@ -816,7 +816,7 @@ public class ComputerUtilMana {
                 }
 
                 if (!test) {
-                    ai.payLife(2, sa.getHostCard(), false);
+                    ai.payLife(2, sa, false);
                 }
                 continue;
             }

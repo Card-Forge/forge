@@ -619,8 +619,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         return (lifePayment <= 0) || !StaticAbilityCantGainLosePayLife.anyCantPayLife(this, effect, cause);
     }
 
-    public final boolean payLife(final int lifePayment, final Card source, final boolean effect) {
-        if (!canPayLife(lifePayment, effect, null)) {
+    public final boolean payLife(final int lifePayment, final SpellAbility cause, final boolean effect) {
+        if (!canPayLife(lifePayment, effect, cause)) {
             return false;
         }
 

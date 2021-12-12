@@ -50,9 +50,8 @@ public class InputPayManaOfCostPayment extends InputPayMana {
 
     @Override
     protected void done() {
-        final Card source = saPaidFor.getHostCard();
         if (this.phyLifeToLose > 0) {
-            player.payLife(this.phyLifeToLose, source, this.effect);
+            player.payLife(this.phyLifeToLose, saPaidFor, this.effect);
         }
     }
 
