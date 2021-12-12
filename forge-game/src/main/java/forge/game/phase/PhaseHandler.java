@@ -399,7 +399,7 @@ public class PhaseHandler implements java.io.Serializable {
                         final CardCollection discarded = new CardCollection();
                         boolean firstDiscarded = playerTurn.getNumDiscardedThisTurn() == 0;
                         for (Card c : playerTurn.getController().chooseCardsToDiscardToMaximumHandSize(numDiscard)) {
-                            if (playerTurn.discard(c, null, table) != null) {
+                            if (playerTurn.discard(c, null, false, table) != null) {
                                 discarded.add(c);
                             }
                         }

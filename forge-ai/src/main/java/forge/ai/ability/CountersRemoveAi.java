@@ -149,7 +149,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
             int amount;
             boolean xPay = false;
             if (amountStr.equals("X") && sa.getSVar("X").equals("Count$xPaid")) {
-                final int manaLeft = ComputerUtilCost.getMaxXValue(sa, ai);
+                final int manaLeft = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
 
                 if (manaLeft == 0) {
                     return false;
@@ -301,7 +301,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
             boolean xPay = false;
             // Timecrafting has X R
             if (amountStr.equals("X") && sa.getSVar("X").equals("Count$xPaid")) {
-                final int manaLeft = ComputerUtilCost.getMaxXValue(sa, ai);
+                final int manaLeft = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
 
                 if (manaLeft == 0) {
                     return false;

@@ -82,7 +82,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
 
         if (sa.costHasManaX() && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value. (Osgir)
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, aiPlayer);
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, aiPlayer, sa.isTrigger());
 
             sa.setXManaCostPaid(xPay);
         }

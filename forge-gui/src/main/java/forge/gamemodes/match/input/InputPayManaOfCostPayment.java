@@ -14,8 +14,9 @@ import forge.util.ITriggerEvent;
 import forge.util.Localizer;
 
 public class InputPayManaOfCostPayment extends InputPayMana {
-    public InputPayManaOfCostPayment(final PlayerControllerHuman controller, ManaCostBeingPaid cost, SpellAbility spellAbility, Player payer, ManaConversionMatrix matrix) {
-        super(controller, spellAbility, payer);
+
+    public InputPayManaOfCostPayment(final PlayerControllerHuman controller, ManaCostBeingPaid cost, SpellAbility spellAbility, Player payer, ManaConversionMatrix matrix, boolean effect) {
+        super(controller, spellAbility, payer, effect);
         manaCost = cost;
         extraMatrix = matrix;
         applyMatrix();
@@ -32,7 +33,7 @@ public class InputPayManaOfCostPayment extends InputPayMana {
     @Override
     protected final void onPlayerSelected(Player selected, final ITriggerEvent triggerEvent) {
         if (player == selected) {
-            if (player.canPayLife(this.phyLifeToLose + 2)) {
+            if (player.canPayLife(this.phyLifeToLose + 2, this.effect)) {
                 if (manaCost.payPhyrexian()) {
                     this.phyLifeToLose += 2;
                 } else {
@@ -51,7 +52,7 @@ public class InputPayManaOfCostPayment extends InputPayMana {
     protected void done() {
         final Card source = saPaidFor.getHostCard();
         if (this.phyLifeToLose > 0) {
-            player.payLife(this.phyLifeToLose, source);
+            player.payLife(this.phyLifeToLose, source, this.effect);
         }
     }
 

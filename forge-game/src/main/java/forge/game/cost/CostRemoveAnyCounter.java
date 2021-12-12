@@ -61,7 +61,7 @@ public class CostRemoveAnyCounter extends CostPart {
     public int paymentOrder() { return 8; }
 
     @Override
-    public Integer getMaxAmountX(final SpellAbility ability, final Player payer) {
+    public Integer getMaxAmountX(final SpellAbility ability, final Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
 
         CardCollectionView validCards = CardLists.getValidCards(payer.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), payer, source, ability);
@@ -86,8 +86,8 @@ public class CostRemoveAnyCounter extends CostPart {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer) {
-        return AbilityUtils.calculateAmount(ability.getHostCard(), this.getAmount(), ability) <= getMaxAmountX(ability, payer);
+    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
+        return AbilityUtils.calculateAmount(ability.getHostCard(), this.getAmount(), ability) <= getMaxAmountX(ability, payer, effect);
     }
 
     /*
@@ -111,7 +111,7 @@ public class CostRemoveAnyCounter extends CostPart {
     }
 
     @Override
-    public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
+    public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability, final boolean effect) {
         int removed = 0;
         for (Entry<GameEntity, Map<CounterType, Integer>> e : decision.counterTable.row(Optional.absent()).entrySet()) {
             for (Entry<CounterType, Integer> v : e.getValue().entrySet()) {

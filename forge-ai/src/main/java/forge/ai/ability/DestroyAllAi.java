@@ -85,7 +85,7 @@ public class DestroyAllAi extends SpellAbilityAi {
 
         if (valid.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
             sa.setXManaCostPaid(xPay);
             valid = valid.replace("X", Integer.toString(xPay));
         }

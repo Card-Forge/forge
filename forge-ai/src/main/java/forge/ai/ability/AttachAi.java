@@ -114,7 +114,7 @@ public class AttachAi extends SpellAbilityAi {
 
         if (abCost.getTotalMana().countX() > 0 && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value. (Endless Scream and Venarian Gold)
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
 
             if (xPay == 0) {
                 return false;
@@ -353,14 +353,14 @@ public class AttachAi extends SpellAbilityAi {
             public boolean apply(final Card c) {
                 //Check for cards that can be sacrificed in response
                 for (final SpellAbility ability : c.getAllSpellAbilities()) {
-                    if (ability.isAbility()) {
+                    if (ability.isActivatedAbility()) {
                         final Cost cost = ability.getPayCosts();
                         for (final CostPart part : cost.getCostParts()) {
                             if (!(part instanceof CostSacrifice)) {
                                 continue;
                             }
                             CostSacrifice sacCost = (CostSacrifice) part;
-                            if (sacCost.payCostFromSource() && ComputerUtilCost.canPayCost(ability, c.getController())) {
+                            if (sacCost.payCostFromSource() && ComputerUtilCost.canPayCost(ability, c.getController(), false)) {
                                 return false;
                             }
                         }

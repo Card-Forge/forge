@@ -221,6 +221,6 @@ public class MillAi extends SpellAbilityAi {
             cardsToDiscard = Math.min(ai.getCardsIn(ZoneType.Library).size() - 5, cardsToDiscard);
         }
 
-        return Math.min(ComputerUtilCost.getMaxXValue(sa, ai), cardsToDiscard);
+        return Math.min(ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger()), cardsToDiscard);
     }
 }

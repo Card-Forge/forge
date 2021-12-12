@@ -292,7 +292,7 @@ public class CostAdjustment {
 
         Card toSac = null;
         CardCollectionView canOffer = CardLists.filter(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield),
-                CardPredicates.isType(offeringType), CardPredicates.canBeSacrificedBy(sa));
+                CardPredicates.isType(offeringType), CardPredicates.canBeSacrificedBy(sa, false));
 
         final CardCollectionView toSacList = sa.getHostCard().getController().getController().choosePermanentsToSacrifice(sa, 0, 1, canOffer, offeringType);
 
@@ -309,7 +309,7 @@ public class CostAdjustment {
 
     private static void adjustCostByEmerge(final ManaCostBeingPaid cost, final SpellAbility sa) {
         Card toSac = null;
-        CardCollectionView canEmerge = CardLists.filter(sa.getActivatingPlayer().getCreaturesInPlay(), CardPredicates.canBeSacrificedBy(sa));
+        CardCollectionView canEmerge = CardLists.filter(sa.getActivatingPlayer().getCreaturesInPlay(), CardPredicates.canBeSacrificedBy(sa, false));
 
         final CardCollectionView toSacList = sa.getHostCard().getController().getController().choosePermanentsToSacrifice(sa, 0, 1, canEmerge, "Creature");
 

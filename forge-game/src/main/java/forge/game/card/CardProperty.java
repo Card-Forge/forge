@@ -392,7 +392,8 @@ public class CardProperty {
                 }
             }
         } else if (property.equals("CanBeSacrificedBy") && spellAbility instanceof SpellAbility) {
-            if (!card.canBeSacrificedBy((SpellAbility) spellAbility)) {
+            // used for Emerge and Offering, these are SpellCost, not effect
+            if (!card.canBeSacrificedBy((SpellAbility) spellAbility, false)) {
                 return false;
             }
         } else if (property.startsWith("AttachedBy")) {

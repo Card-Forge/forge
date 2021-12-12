@@ -9,9 +9,6 @@ import forge.game.spellability.SpellAbility;
  */
 public class CostRollDice extends CostPart {
 
-    /**
-     * Serializables need a version ID.
-     */
     private static final long serialVersionUID = 1L;
 
     private final String resultSVar;
@@ -27,15 +24,8 @@ public class CostRollDice extends CostPart {
         this.resultSVar = resultSVar;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.Player, forge.card.cost.Cost)
-     */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer) {
+    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         return true;
     }
 
@@ -55,7 +45,7 @@ public class CostRollDice extends CostPart {
     }
 
     @Override
-    public boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa) {
+    public boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa, final boolean effect) {
         int sides = Integer.parseInt(getType());
         int result = RollDiceEffect.rollDiceForPlayer(sa, payer, pd.c, sides);
         sa.setSVar(resultSVar, Integer.toString(result));

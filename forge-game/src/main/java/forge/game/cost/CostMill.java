@@ -17,13 +17,10 @@
  */
 package forge.game.cost;
 
-import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 
 /**
@@ -59,17 +56,8 @@ public class CostMill extends CostPart {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer) {
-        final Card source = ability.getHostCard();
-        final PlayerZone zone = payer.getZone(ZoneType.Library);
-
-        Integer i = this.convertAmount();
-
-        if (i == null) {
-            i = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-        }
-
-        return i < zone.size();
+    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
+        return getAbilityAmount(ability) < payer.getZone(ZoneType.Library).size();
     }
 
     /*
@@ -98,7 +86,7 @@ public class CostMill extends CostPart {
     }
 
     @Override
-    public final boolean payAsDecided(final Player ai, final PaymentDecision decision, SpellAbility ability) {
+    public final boolean payAsDecided(final Player ai, final PaymentDecision decision, SpellAbility ability, final boolean effect) {
         CardZoneTable table = new CardZoneTable();
         ability.getPaidHash().put("Milled", (CardCollection) ai.mill(decision.c, ZoneType.Graveyard, false, ability, table));
         table.triggerChangesZoneAll(ai.getGame(), ability);

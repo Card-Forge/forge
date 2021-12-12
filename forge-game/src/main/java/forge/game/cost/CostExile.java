@@ -18,7 +18,6 @@
 package forge.game.cost;
 
 import forge.game.Game;
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
@@ -61,7 +60,7 @@ public class CostExile extends CostPartWithList {
     }
 
     @Override
-    public Integer getMaxAmountX(SpellAbility ability, Player payer) {
+    public Integer getMaxAmountX(SpellAbility ability, Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
         final Game game = source.getGame();
 
@@ -126,7 +125,7 @@ public class CostExile extends CostPartWithList {
     }
 
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer) {
+    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
         final Game game = source.getGame();
 
@@ -153,22 +152,18 @@ public class CostExile extends CostPartWithList {
             list = CardLists.getValidCards(list, type.split(";"), payer, source, ability);
         }
 
-        Integer amount = this.convertAmount();
-
-        if (amount == null) { // try to calculate when it's defined.
-            amount = AbilityUtils.calculateAmount(ability.getHostCard(), getAmount(), ability);
-        }
+        int amount = this.getAbilityAmount(ability);
 
         // for cards like Allosaurus Rider, do not count it
         if (this.from == ZoneType.Hand && source.isInZone(ZoneType.Hand) && list.contains(source)) {
             amount++;
         }
 
-        if (amount != null && list.size() < amount) {
+        if (list.size() < amount) {
             return false;
         }
 
-        if (this.sameZone && amount != null) {
+        if (this.sameZone) {
             boolean foundPayable = false;
             FCollectionView<Player> players = game.getPlayers();
             for (Player p : players) {
@@ -183,7 +178,7 @@ public class CostExile extends CostPartWithList {
     }
 
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard) {
+    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
         final Game game = targetCard.getGame();
         Card newCard = game.getAction().exile(targetCard, null);
         newCard.setExiledWith(ability.getHostCard());

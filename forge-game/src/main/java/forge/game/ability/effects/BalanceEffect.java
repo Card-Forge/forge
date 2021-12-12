@@ -61,13 +61,13 @@ public class BalanceEffect extends SpellAbilityEffect {
             } else { // Battlefield
                 for (Card card : p.getController().choosePermanentsToSacrifice(sa, numToBalance, numToBalance,  validCards.get(i), valid)) {
                     if ( null == card ) continue; 
-                    game.getAction().sacrifice(card, sa, table, params);
+                    game.getAction().sacrifice(card, sa, true, table, params);
                 }
             }
         }
 
         if (zone.equals(ZoneType.Hand)) {
-            discard(sa, table, discardedMap);
+            discard(sa, table, true, discardedMap);
         }
 
         table.triggerChangesZoneAll(game, sa);

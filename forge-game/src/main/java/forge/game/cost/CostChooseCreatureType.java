@@ -48,12 +48,12 @@ public class CostChooseCreatureType extends CostPart {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer) {
+    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         return true;
     }
 
     @Override
-    public boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa) {
+    public boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa, final boolean effect) {
         sa.getHostCard().setChosenType(pd.type);
         return true;
     }

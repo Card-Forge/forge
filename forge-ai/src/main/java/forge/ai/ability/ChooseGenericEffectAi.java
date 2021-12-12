@@ -121,7 +121,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
                 SpellAbility paycost = new SpellAbility.EmptySa(sa.getHostCard(), player);
                 paycost.setPayCosts(unless);
                 if (ComputerUtilCost.willPayUnlessCost(sp, player, unless, false, new FCollection<>(player))
-                        && ComputerUtilCost.canPayCost(paycost, player)) {
+                        && ComputerUtilCost.canPayCost(paycost, player, true)) {
                     return sp;
                 }
             }

@@ -43,7 +43,6 @@ import forge.game.ability.ApiType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatLki;
 import forge.game.cost.Cost;
-import forge.game.cost.CostSacrifice;
 import forge.game.event.*;
 import forge.game.event.GameEventCardDamaged.DamageType;
 import forge.game.keyword.*;
@@ -57,6 +56,7 @@ import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.staticability.StaticAbilityCantPutCounter;
+import forge.game.staticability.StaticAbilityCantSacrifice;
 import forge.game.staticability.StaticAbilityCantTransform;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -5946,10 +5946,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return isInPlay() && !isPhasedOut() && (!hasKeyword(Keyword.INDESTRUCTIBLE) || (isCreature() && getNetToughness() <= 0));
     }
 
-    public final boolean canBeSacrificed() {
-        return isInPlay() && !isPhasedOut() && !hasKeyword("CARDNAME can't be sacrificed.");
-    }
-
     @Override
     public final boolean canBeTargetedBy(final SpellAbility sa) {
         if (getOwner().hasLost()) {
@@ -6284,29 +6280,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return this.lkiCMC >= 0;
     }
 
-    public final boolean canBeSacrificedBy(final SpellAbility source) {
+    public final boolean canBeSacrificedBy(final SpellAbility source, final boolean effect) {
         if (isImmutable()) {
             System.out.println("Trying to sacrifice immutables: " + this);
             return false;
         }
-        if (!canBeSacrificed()) {
+        if (!isInPlay() || isPhasedOut()) {
             return false;
         }
 
-        if (source == null) {
-            return true;
-        }
-
-        if ((source.isSpell() || source.isActivatedAbility()) && source.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
-            if (isCreature() && source.getActivatingPlayer().hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
-                return false;
-            }
-
-            if (isPermanent() && !isLand() && source.getActivatingPlayer().hasKeyword("You can't sacrifice nonland permanents to cast spells or activate abilities.")) {
-                return false;
-            }
-        }
-        return getController().canSacrificeBy(source);
+        return !StaticAbilityCantSacrifice.cantSacrifice(this, source, effect);
     }
 
     public CardRules getRules() {
@@ -6828,12 +6811,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return n;
     }
 
-    public boolean canBeDiscardedBy(SpellAbility sa) {
+    public boolean canBeDiscardedBy(SpellAbility sa, final boolean effect) {
         if (!isInZone(ZoneType.Hand)) {
             return false;
         }
 
-        return getOwner().canDiscardBy(sa);
+        return getOwner().canDiscardBy(sa, effect);
     }
 
     public void addAbilityActivated(SpellAbility ability) {

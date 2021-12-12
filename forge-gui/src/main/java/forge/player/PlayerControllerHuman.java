@@ -443,7 +443,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 max = Math.min(max, AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("XMaxLimit"), ability));
             }
             if (cost != null) {
-                Integer costX = cost.getMaxForNonManaX(ability, player);
+                Integer costX = cost.getMaxForNonManaX(ability, player, false);
                 if (costX != null) {
                     max = Math.min(max, costX);
                 }
@@ -2083,8 +2083,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean payManaCost(final ManaCost toPay, final CostPartMana costPartMana, final SpellAbility sa,
-                               final String prompt, ManaConversionMatrix matrix, final boolean isActivatedSa) {
-        return HumanPlay.payManaCost(this, toPay, costPartMana, sa, player, prompt, matrix, isActivatedSa);
+                               final String prompt, ManaConversionMatrix matrix, final boolean effect) {
+        return HumanPlay.payManaCost(this, toPay, costPartMana, sa, player, prompt, matrix, effect);
     }
 
     @Override

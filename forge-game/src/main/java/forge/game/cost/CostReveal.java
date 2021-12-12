@@ -64,7 +64,7 @@ public class CostReveal extends CostPartWithList {
     }
 
     @Override
-    public Integer getMaxAmountX(SpellAbility ability, Player payer) {
+    public Integer getMaxAmountX(SpellAbility ability, Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
         CardCollectionView handList = payer.getCardsIn(revealFrom);
         if (ability.isSpell()) {
@@ -78,20 +78,17 @@ public class CostReveal extends CostPartWithList {
     }
 
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer) {
+    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
 
         CardCollectionView handList = payer.getCardsIn(revealFrom);
-        final Integer amount = this.convertAmount();
+        final int amount = this.getAbilityAmount(ability);
 
         if (this.payCostFromSource()) {
             return revealFrom.contains(source.getLastKnownZone().getZoneType());
         } else if (this.getType().equals("Hand")) {
             return true;
         } else if (this.getType().equals("SameColor")) {
-            if (amount == null) {
-                return false;
-            }
             for (final Card card : handList) {
                 if (CardLists.filter(handList, new Predicate<Card>() {
                     @Override
@@ -104,7 +101,7 @@ public class CostReveal extends CostPartWithList {
             }
             return false;
         } else {
-            return (amount == null) || (amount <= getMaxAmountX(ability, payer));
+            return amount <= getMaxAmountX(ability, payer, effect);
         }
 
     }
@@ -151,7 +148,7 @@ public class CostReveal extends CostPartWithList {
     }
 
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard) {
+    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
         targetCard.getGame().getAction().reveal(new CardCollection(targetCard), ability.getActivatingPlayer());
         StringBuilder sb = new StringBuilder();
         sb.append(ability.getActivatingPlayer());
@@ -172,7 +169,7 @@ public class CostReveal extends CostPartWithList {
     }
 
     @Override
-    protected CardCollectionView doListPayment(SpellAbility ability, CardCollectionView targetCards) {
+    protected CardCollectionView doListPayment(SpellAbility ability, CardCollectionView targetCards, final boolean effect) {
         ability.getActivatingPlayer().getGame().getAction().reveal(targetCards, ability.getActivatingPlayer());
         return targetCards;
     }

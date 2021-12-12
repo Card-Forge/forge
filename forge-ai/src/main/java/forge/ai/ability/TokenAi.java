@@ -98,7 +98,7 @@ public class TokenAi extends SpellAbilityAi {
             }
             if (sa.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                x = ComputerUtilCost.getMaxXValue(sa, ai);
+                x = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
                 sa.getRootAbility().setXManaCostPaid(x);
             }
             if (x <= 0) {
@@ -243,13 +243,13 @@ public class TokenAi extends SpellAbilityAi {
         final int nToSac = AbilityUtils.calculateAmount(topStack.getHostCard(), num, topStack);
         CardCollection list = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","),
         		ai.getWeakestOpponent(), topStack.getHostCard(), sa);
-        list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
+        list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack, true));
         // only care about saving single creature for now
         if (!list.isEmpty() && nTokens > 0 && list.size() == nToSac) {
             ComputerUtilCard.sortByEvaluateCreature(list);
             list.add(token);
             list = CardLists.getValidCards(list, valid.split(","), ai.getWeakestOpponent(), topStack.getHostCard(), sa);
-            list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
+            list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack, true));
             return ComputerUtilCard.evaluateCreature(token) < ComputerUtilCard.evaluateCreature(list.get(0))
                     && list.contains(token);
         }
@@ -284,7 +284,7 @@ public class TokenAi extends SpellAbilityAi {
             if (sa.getSVar("X").equals("Count$xPaid")) {
                 if (x == 0) { // already paid outside trigger
                     // Set PayX here to maximum value.
-                    x = ComputerUtilCost.getMaxXValue(sa, ai);
+                    x = ComputerUtilCost.getMaxXValue(sa, ai, true);
                     sa.setXManaCostPaid(x);
                 }
             }

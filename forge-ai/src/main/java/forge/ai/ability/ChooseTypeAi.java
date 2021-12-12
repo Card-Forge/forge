@@ -59,7 +59,7 @@ public class ChooseTypeAi extends SpellAbilityAi {
             return false;
         }
 
-        int maxX = ComputerUtilMana.determineLeftoverMana(sa, aiPlayer);
+        int maxX = ComputerUtilMana.determineLeftoverMana(sa, aiPlayer, false);
         int avgPower = 0;
         
         // predict the opposition

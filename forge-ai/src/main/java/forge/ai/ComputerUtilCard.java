@@ -618,32 +618,32 @@ public class ComputerUtilCard {
     }
 
     public static boolean canBeKilledByRoyalAssassin(final Player ai, final Card card) {
-    	boolean wasTapped = card.isTapped();
-    	for (Player opp : ai.getOpponents()) {
-    		for (Card c : opp.getCardsIn(ZoneType.Battlefield)) {
-    			for (SpellAbility sa : c.getSpellAbilities()) {
+        boolean wasTapped = card.isTapped();
+        for (Player opp : ai.getOpponents()) {
+            for (Card c : opp.getCardsIn(ZoneType.Battlefield)) {
+                for (SpellAbility sa : c.getSpellAbilities()) {
                     if (sa.getApi() != ApiType.Destroy) {
                         continue;
                     }
-                    if (!ComputerUtilCost.canPayCost(sa, opp)) {
+                    if (!ComputerUtilCost.canPayCost(sa, opp, sa.isTrigger())) {
                         continue;
                     }
                     sa.setActivatingPlayer(opp);
                     if (sa.canTarget(card)) {
-                    	continue;
+                        continue;
                     }
                     // check whether the ability can only target tapped creatures
-                	card.setTapped(true);
+                    card.setTapped(true);
                     if (!sa.canTarget(card)) {
-                    	card.setTapped(wasTapped);
-                    	continue;
+                        card.setTapped(wasTapped);
+                        continue;
                     }
-                	card.setTapped(wasTapped);
+                    card.setTapped(wasTapped);
                     return true;
-    			}
-    		}
-    	}
-    	return false;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -1398,7 +1398,7 @@ public class ComputerUtilCard {
                 for (SpellAbility ab : c.getSpellAbilities()) {
                     Cost abCost = ab.getPayCosts();
                     if (abCost != null && abCost.hasTapCost()
-                            && (!abCost.hasManaCost() || ComputerUtilMana.canPayManaCost(ab, ai, 0))) {
+                            && (!abCost.hasManaCost() || ComputerUtilMana.canPayManaCost(ab, ai, 0, false))) {
                         nonCombatChance += 0.5f;
                         break;
                     }

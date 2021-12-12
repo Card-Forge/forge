@@ -104,6 +104,7 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantBeCast;
+import forge.game.staticability.StaticAbilityCantDiscard;
 import forge.game.staticability.StaticAbilityCantDraw;
 import forge.game.staticability.StaticAbilityCantGainLosePayLife;
 import forge.game.staticability.StaticAbilityCantPutCounter;
@@ -608,18 +609,18 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean canLoseLife() {
-        return !hasLost() && !StaticAbilityCantGainLosePayLife.anyCantLosePayLife(this);
+        return !hasLost() && !StaticAbilityCantGainLosePayLife.anyCantLoseLife(this);
     }
 
-    public final boolean canPayLife(final int lifePayment) {
+    public final boolean canPayLife(final int lifePayment, final boolean effect) {
         if (lifePayment > 0 && life < lifePayment) {
             return false;
         }
-        return (lifePayment <= 0) || !StaticAbilityCantGainLosePayLife.anyCantLosePayLife(this);
+        return (lifePayment <= 0) || !StaticAbilityCantGainLosePayLife.anyCantPayLife(this, effect);
     }
 
-    public final boolean payLife(final int lifePayment, final Card source) {
-        if (!canPayLife(lifePayment)) {
+    public final boolean payLife(final int lifePayment, final Card source, final boolean effect) {
+        if (!canPayLife(lifePayment, effect)) {
             return false;
         }
 
@@ -1519,11 +1520,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         return numDrawnThisDrawStep;
     }
 
-    public final Card discard(final Card c, final SpellAbility sa, CardZoneTable table) {
-        return discard(c, sa , table, null);
+    public final Card discard(final Card c, final SpellAbility sa, final boolean effect, CardZoneTable table) {
+        return discard(c, sa, effect, table, null);
     }
-    public final Card discard(final Card c, final SpellAbility sa, CardZoneTable table, Map<AbilityKey, Object> params) {
-        if (!c.canBeDiscardedBy(sa)) {
+    public final Card discard(final Card c, final SpellAbility sa, final boolean effect, CardZoneTable table, Map<AbilityKey, Object> params) {
+        if (!c.canBeDiscardedBy(sa, effect)) {
             return null;
         }
 
@@ -3335,20 +3336,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         return CardLists.count(getAttachedCards(), CardPredicates.Presets.CURSE) > 0;
     }
 
-    public boolean canDiscardBy(SpellAbility sa) {
+    public boolean canDiscardBy(SpellAbility sa, final boolean effect) {
         if (sa == null) {
             return true;
         }
 
-        return !isOpponentOf(sa.getActivatingPlayer()) || !hasKeyword("Spells and abilities your opponents control can't cause you to discard cards.");
-    }
-
-    public boolean canSacrificeBy(SpellAbility sa) {
-        if (sa == null) {
-            return true;
-        }
-
-        return !isOpponentOf(sa.getActivatingPlayer()) || !hasKeyword("Spells and abilities your opponents control can't cause you to sacrifice permanents.");
+        return !StaticAbilityCantDiscard.cantDiscard(this, sa, effect);
     }
 
     public boolean canSearchLibraryWith(SpellAbility sa, Player targetPlayer) {
@@ -3546,7 +3539,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             table.put(ZoneType.Sideboard, ZoneType.Hand, moved);
         } else if (c.isInZone(ZoneType.Hand)) { // Discard and Draw
             boolean firstDiscard = getNumDiscardedThisTurn() == 0;
-            if (discard(c, sa, table) != null) {
+            if (discard(c, sa, true, table) != null) {
                 // Change this if something would make multiple player learn at the same time
 
                 // Discard Trigger outside Effect

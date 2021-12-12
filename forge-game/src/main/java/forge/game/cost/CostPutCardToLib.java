@@ -18,7 +18,6 @@
 package forge.game.cost;
 
 import forge.game.Game;
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
@@ -119,15 +118,11 @@ public class CostPutCardToLib extends CostPartWithList {
     }
 
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer) {
+    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
         final Game game = source.getGame();
 
-        Integer i = convertAmount();
-
-        if (i == null) {
-            i = AbilityUtils.calculateAmount(source, getAmount(), ability);
-        }
+        int i = getAbilityAmount(ability);
 
         CardCollectionView typeList;
         if (sameZone) {
@@ -162,7 +157,7 @@ public class CostPutCardToLib extends CostPartWithList {
     }
 
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard) {
+    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
         return targetCard.getGame().getAction().moveToLibrary(targetCard, Integer.parseInt(getLibPos()),null);
     }
 

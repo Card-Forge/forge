@@ -198,7 +198,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
             // check if Spell with Strive is still playable
             if (sa.isSpell() && sa.getHostCard().hasStartOfKeyword("Strive")) {
                 // if not remove target again and break list
-                if (!ComputerUtilCost.canPayCost(sa, ai)) {
+                if (!ComputerUtilCost.canPayCost(sa, ai, false)) {
                     sa.getTargets().remove(c);
                     break;
                 }

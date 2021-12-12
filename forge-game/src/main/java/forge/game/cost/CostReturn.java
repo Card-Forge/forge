@@ -53,7 +53,7 @@ public class CostReturn extends CostPartWithList {
     public int paymentOrder() { return 10; }
 
     @Override
-    public Integer getMaxAmountX(SpellAbility ability, Player payer) {
+    public Integer getMaxAmountX(SpellAbility ability, Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
 
         CardCollectionView typeList = payer.getCardsIn(ZoneType.Battlefield);
@@ -102,21 +102,20 @@ public class CostReturn extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer) {
+    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
         if (payCostFromSource()) {
             return source.isInPlay();
         }
 
-        final Integer amount = this.convertAmount();
-        return amount == null || getMaxAmountX(ability, payer) >= amount;
+        return getMaxAmountX(ability, payer, effect) >= getAbilityAmount(ability);
     }
 
     /* (non-Javadoc)
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard) {
+    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
         return targetCard.getGame().getAction().moveToHand(targetCard, null);
     }
 

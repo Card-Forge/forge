@@ -373,7 +373,7 @@ public class CountersPutAi extends CountersAi {
         if (amountStr.equals("X")) {
             if (sa.getSVar(amountStr).equals("Count$xPaid")) {
                 // By default, set PayX here to maximum value (used for most SAs of this type).
-                amount = ComputerUtilCost.getMaxXValue(sa, ai);
+                amount = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
 
                 if (isClockwork) {
                     // Clockwork Avian and other similar cards: do not tap all mana for X,
@@ -769,7 +769,7 @@ public class CountersPutAi extends CountersAi {
                 }
 
                 // Spend all remaining mana to add X counters (eg. Hero of Leina Tower)
-                int payX = ComputerUtilCost.getMaxXValue(sa, ai);
+                int payX = ComputerUtilCost.getMaxXValue(sa, ai, true);
 
                 // Account for the possible presence of additional glyphs in cost (e.g. Mikaeus, the Lunarch; Primordial Hydra)
                 payX -= nonXGlyphs;

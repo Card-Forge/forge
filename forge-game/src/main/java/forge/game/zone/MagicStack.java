@@ -318,7 +318,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
 
             // Run AbilityCast triggers
-            if (sp.isAbility() && !sp.isTrigger()) {
+            if (sp.isActivatedAbility()) {
                 game.getTriggerHandler().runTrigger(TriggerType.AbilityCast, runParams, true);
             }
 
@@ -462,7 +462,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             thisTurnCast.add(CardUtil.getLKICopy(sp.getHostCard()));
             sp.getActivatingPlayer().addSpellCastThisTurn();
         }
-        if (sp.isAbility() && sp.isPwAbility()) {
+        if (sp.isActivatedAbility() && sp.isPwAbility()) {
             sp.getActivatingPlayer().setActivateLoyaltyAbilityThisTurn(true);
         }
         game.updateStackForView();
