@@ -118,7 +118,7 @@ public class TokenAi extends SpellAbilityAi {
         boolean haste = actualToken.hasKeyword(Keyword.HASTE);
         boolean oneShot = sa.getSubAbility() != null
                 && sa.getSubAbility().getApi() == ApiType.DelayedTrigger;
-        boolean isCreature = actualToken.getType().isCreature();
+        boolean isCreature = actualToken.isCreature();
 
         // Don't generate tokens without haste before main 2 if possible
         if (ph.getPhase().isBefore(PhaseType.MAIN2) && ph.isPlayerTurn(ai) && !haste && !sa.hasParam("ActivationPhases")

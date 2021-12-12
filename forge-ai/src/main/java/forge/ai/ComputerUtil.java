@@ -2028,7 +2028,7 @@ public class ComputerUtil {
             @Override
             public boolean apply(final Card c) {
                 return c.getManaCost().getCMC() <= 0 && !c.hasSVar("NeedsToPlay")
-                        && (c.getType().isLand() || c.getType().isArtifact());
+                        && (c.isLand() || c.isArtifact());
             }
         });
 
