@@ -1,0 +1,10 @@
+Name:Brittle Blast
+ManaCost:2 R
+Types:Instant
+A:SP$ Effect | RememberObjects$ Valid Creature.OppCtrl,Valid Planeswalker.OppCtrl | StaticAbilities$ MakeBrittle | Duration$ Permanent | Name$ Brittle Blast's Perpetual Effect | SubAbility$ DBDamage | SpellDescription$ Creatures and planeswalkers your opponents control perpetually gain "If this permanent would die, exile it instead."
+SVar:MakeBrittle:Mode$ Continuous | Affected$ Card.IsRemembered | AddReplacementEffects$ BrittleExile | AddSVar$ BrittleRep | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Creatures and planeswalkers your opponents control perpetually gain "If this permanent would die, exile it instead."
+SVar:BrittleExile:Event$ Moved | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | ReplaceWith$ BrittleRep | Description$ If this permanent would die, exile it instead.
+SVar:BrittleRep:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature or planeswalker.
+SVar:PlayMain1:TRUE
+Oracle:Creatures and planeswalkers your opponents control perpetually gain "If this permanent would die, exile it instead." Brittle Blast deals 5 damage to target creature or planeswalker.
