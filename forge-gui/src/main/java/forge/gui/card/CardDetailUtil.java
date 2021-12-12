@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import forge.game.card.*;
-import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Sets;

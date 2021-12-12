@@ -1627,7 +1627,25 @@ public class AbilityUtils {
 
         if (sa.hasParam("RememberCostMana")) {
             host.clearRemembered();
-            host.addRemembered(sa.getPayingMana());
+            ManaCostBeingPaid activationMana = new ManaCostBeingPaid(sa.getPayCosts().getTotalMana());
+            if (sa.getXManaCostPaid() != null) {
+                activationMana.setXManaCostPaid(sa.getXManaCostPaid(), null);
+            }
+            int activationShards = activationMana.getConvertedManaCost();
+            List<Mana> payingMana = sa.getPayingMana();
+            // even if the cost was raised, we only care about mana from activation part
+            // let's just assume the first shards spent are that for easy handling
+            List<Mana> activationPaid = payingMana.subList(payingMana.size() - activationShards, payingMana.size());
+            StringBuilder sb = new StringBuilder();
+            int nMana = 0;
+            for (Mana m : activationPaid) {
+                if (nMana > 0) {
+                    sb.append(" ");
+                }
+                sb.append(m.toString());
+                nMana++;
+            }
+            host.addRemembered(sb.toString());
         }
 
         if (sa.hasParam("RememberCostCards") && !sa.getPaidHash().isEmpty()) {
