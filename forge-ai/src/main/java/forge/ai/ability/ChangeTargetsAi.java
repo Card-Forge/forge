@@ -81,7 +81,7 @@ public class ChangeTargetsAi extends SpellAbilityAi {
             // e.g. Spellskite or a creature receiving its ability that requires Phyrexian mana P/U
             int potentialDmg = ComputerUtil.predictDamageFromSpell(topSa, aiPlayer);
             ManaCost normalizedMana = manaCost.getNormalizedMana();
-            boolean canPay = ComputerUtilMana.canPayManaCost(new ManaCostBeingPaid(normalizedMana), sa, aiPlayer);
+            boolean canPay = ComputerUtilMana.canPayManaCost(new ManaCostBeingPaid(normalizedMana), sa, aiPlayer, false);
             if (potentialDmg != -1 && potentialDmg <= payDamage && !canPay
                     && topTargets.contains(aiPlayer)) {
                 // do not pay Phyrexian mana if the spell is a damaging one but it deals less damage or the same damage as we'll pay life

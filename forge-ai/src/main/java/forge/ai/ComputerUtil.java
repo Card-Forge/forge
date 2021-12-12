@@ -149,13 +149,13 @@ public class ComputerUtil {
 
         // TODO: update mana color conversion for Daxos of Meletis
         if (cost == null) {
-            if (ComputerUtilMana.payManaCost(ai, sa)) {
+            if (ComputerUtilMana.payManaCost(ai, sa, false)) {
                 game.getStack().addAndUnfreeze(sa);
                 return true;
             }
         } else {
             final CostPayment pay = new CostPayment(cost, sa);
-            if (pay.payComputerCosts(new AiCostDecision(ai, sa))) {
+            if (pay.payComputerCosts(new AiCostDecision(ai, sa, false))) {
                 game.getStack().addAndUnfreeze(sa);
                 if (sa.getSplicedCards() != null && !sa.getSplicedCards().isEmpty()) {
                     game.getAction().reveal(sa.getSplicedCards(), ai, true, "Computer reveals spliced cards from ");
@@ -202,7 +202,7 @@ public class ComputerUtil {
         }
 
         // Abilities before Spells (card advantage)
-        if (sa.isAbility()) {
+        if (sa.isActivatedAbility()) {
             restrict += 40;
         }
 
@@ -245,7 +245,7 @@ public class ComputerUtil {
     // this is used for AI's counterspells
     public static final boolean playStack(SpellAbility sa, final Player ai, final Game game) {
         sa.setActivatingPlayer(ai);
-        if (!ComputerUtilCost.canPayCost(sa, ai))
+        if (!ComputerUtilCost.canPayCost(sa, ai, false))
             return false;
 
         final Card source = sa.getHostCard();
@@ -257,11 +257,11 @@ public class ComputerUtil {
 
         final Cost cost = sa.getPayCosts();
         if (cost == null) {
-            ComputerUtilMana.payManaCost(ai, sa);
+            ComputerUtilMana.payManaCost(ai, sa, false);
             game.getStack().add(sa);
         } else {
             final CostPayment pay = new CostPayment(cost, sa);
-            if (pay.payComputerCosts(new AiCostDecision(ai, sa))) {
+            if (pay.payComputerCosts(new AiCostDecision(ai, sa, false))) {
                 game.getStack().add(sa);
             }
         }
@@ -284,7 +284,7 @@ public class ComputerUtil {
         SpellAbility newSA = sa.copyWithNoManaCost();
         newSA.setActivatingPlayer(ai);
 
-        if (!CostPayment.canPayAdditionalCosts(newSA.getPayCosts(), newSA) || !ComputerUtilMana.canPayManaCost(newSA, ai, 0)) {
+        if (!CostPayment.canPayAdditionalCosts(newSA.getPayCosts(), newSA) || !ComputerUtilMana.canPayManaCost(newSA, ai, 0, false)) {
             return false;
         }
 
@@ -302,16 +302,16 @@ public class ComputerUtil {
         }
 
         final CostPayment pay = new CostPayment(newSA.getPayCosts(), newSA);
-        pay.payComputerCosts(new AiCostDecision(ai, newSA));
+        pay.payComputerCosts(new AiCostDecision(ai, newSA, false));
 
         game.getStack().add(newSA);
         return true;
     }
 
-    public static final void playNoStack(final Player ai, SpellAbility sa, final Game game) {
+    public static final void playNoStack(final Player ai, SpellAbility sa, final Game game, final boolean effect) {
         sa.setActivatingPlayer(ai);
         // TODO: We should really restrict what doesn't use the Stack
-        if (ComputerUtilCost.canPayCost(sa, ai)) {
+        if (ComputerUtilCost.canPayCost(sa, ai, effect)) {
             final Card source = sa.getHostCard();
             if (sa.isSpell() && !source.isCopiedSpell()) {
                 sa.setHostCard(game.getAction().moveToStack(source, sa));
@@ -321,10 +321,10 @@ public class ComputerUtil {
 
             final Cost cost = sa.getPayCosts();
             if (cost == null) {
-                ComputerUtilMana.payManaCost(ai, sa);
+                ComputerUtilMana.payManaCost(ai, sa, effect);
             } else {
                 final CostPayment pay = new CostPayment(cost, sa);
-                pay.payComputerCosts(new AiCostDecision(ai, sa));
+                pay.payComputerCosts(new AiCostDecision(ai, sa, effect));
             }
 
             AbilityUtils.resolve(sa);
@@ -564,7 +564,7 @@ public class ComputerUtil {
         return -1;
     }
 
-    public static CardCollection chooseSacrificeType(final Player ai, final String type, final SpellAbility ability, final Card target, final int amount, final CardCollectionView exclude) {
+    public static CardCollection chooseSacrificeType(final Player ai, final String type, final SpellAbility ability, final Card target, final boolean effect, final int amount, final CardCollectionView exclude) {
         final Card source = ability.getHostCard();
         CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, ability);
 
@@ -572,7 +572,7 @@ public class ComputerUtil {
             typeList.removeAll(exclude);
         }
 
-        typeList = CardLists.filter(typeList, CardPredicates.canBeSacrificedBy(ability));
+        typeList = CardLists.filter(typeList, CardPredicates.canBeSacrificedBy(ability, effect));
 
         // don't sacrifice the card we're pumping
         typeList = ComputerUtilCost.paymentChoicesWithoutTargets(typeList, ability, ai);
@@ -927,11 +927,11 @@ public class ComputerUtil {
                 // This try/catch should fix the "computer is thinking" bug
                 try {
 
-                    if (!sa.isAbility() || sa.getApi() != ApiType.Regenerate) {
+                    if (!sa.isActivatedAbility() || sa.getApi() != ApiType.Regenerate) {
                         continue; // Not a Regenerate ability
                     }
                     sa.setActivatingPlayer(controller);
-                    if (!(sa.canPlay() && ComputerUtilCost.canPayCost(sa, controller))) {
+                    if (!(sa.canPlay() && ComputerUtilCost.canPayCost(sa, controller, false))) {
                         continue; // Can't play ability
                     }
 
@@ -983,12 +983,12 @@ public class ComputerUtil {
                 // if SA is from AF_Counter don't add to getPlayable
                 // This try/catch should fix the "computer is thinking" bug
                 try {
-                    if (sa.getApi() == null || !sa.isAbility()) {
+                    if (sa.getApi() == null || !sa.isActivatedAbility()) {
                         continue;
                     }
 
                     if (sa.getApi() == ApiType.PreventDamage && sa.canPlay()
-                            && ComputerUtilCost.canPayCost(sa, controller)) {
+                            && ComputerUtilCost.canPayCost(sa, controller, false)) {
                         if (AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).contains(card)) {
                             prevented += AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
                         }
@@ -1472,7 +1472,7 @@ public class ComputerUtil {
                     AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.MARKED_TO_AVOID_REENTRY);
                 }
 
-                if (!ComputerUtilCost.canPayCost(sa, ai)) {
+                if (!ComputerUtilCost.canPayCost(sa, ai, false)) {
                     continue;
                 }
                 return true;
@@ -1504,7 +1504,7 @@ public class ComputerUtil {
                 if (!sa.canTarget(enemy)) {
                     continue;
                 }
-                if (!ComputerUtilCost.canPayCost(sa, ai)) {
+                if (!ComputerUtilCost.canPayCost(sa, ai, false)) {
                     continue;
                 }
                 if (!GameActionUtil.getOptionalCostValues(sa).isEmpty()) {
@@ -2918,7 +2918,7 @@ public class ComputerUtil {
                     // only API-based SAs are supported, other things may lead to a NPE (e.g. Ancestral Vision Suspend SA)
                     continue;
                 } else if (ab.getApi() == ApiType.Mana && "ManaRitual".equals(ab.getParam("AILogic"))) {
-                    // Mana Ritual cards are too complex for the AI to consider casting through a spell effect and will
+                    // TODO Mana Ritual cards are too complex for the AI to consider casting through a spell effect and will
                     // lead to a stack overflow. Consider improving.
                     continue;
                 }
@@ -2926,7 +2926,7 @@ public class ComputerUtil {
                 // at this point, we're assuming that card will be castable from whichever zone it's in by the AI player.
                 abTest.setActivatingPlayer(ai);
                 abTest.getRestrictions().setZone(c.getZone().getZoneType());
-                if (AiPlayDecision.WillPlay == aic.canPlaySa(abTest) && ComputerUtilCost.canPayCost(abTest, ai)) {
+                if (AiPlayDecision.WillPlay == aic.canPlaySa(abTest) && ComputerUtilCost.canPayCost(abTest, ai, false)) {
                     targets.add(c);
                 }
             }

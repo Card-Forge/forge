@@ -103,7 +103,7 @@ public class DrawAi extends SpellAbilityAi {
         }
 
         if (!ComputerUtilCost.checkDiscardCost(ai, cost, source,sa)) {
-            AiCostDecision aiDecisions = new AiCostDecision(ai, sa);
+            AiCostDecision aiDecisions = new AiCostDecision(ai, sa, false);
             for (final CostPart part : cost.getCostParts()) {
                 if (part instanceof CostDiscard) {
                     PaymentDecision decision = part.accept(aiDecisions);
@@ -255,7 +255,7 @@ public class DrawAi extends SpellAbilityAi {
                 if (drawback && root.getXManaCostPaid() != null) {
                     numCards = root.getXManaCostPaid();
                 } else {
-                    numCards = ComputerUtilCost.getMaxXValue(sa, ai);
+                    numCards = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
                     // try not to overdraw
                     int safeDraw = Math.abs(Math.min(computerMaxHandSize - computerHandSize, computerLibrarySize - 3));
                     if (source.isInstant() || source.isSorcery()) { safeDraw++; } // card will be spent

@@ -71,14 +71,14 @@ public class AnimateAi extends SpellAbilityAi {
                 final int nToSac = AbilityUtils.calculateAmount(topStack.getHostCard(), num, topStack);
                 CardCollection list = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","),
                 		ai.getWeakestOpponent(), topStack.getHostCard(), topStack);
-                list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
+                list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack, true));
                 ComputerUtilCard.sortByEvaluateCreature(list);
-                if (!list.isEmpty() && list.size() == nToSac && ComputerUtilCost.canPayCost(sa, ai)) {
+                if (!list.isEmpty() && list.size() == nToSac && ComputerUtilCost.canPayCost(sa, ai, sa.isTrigger())) {
                     Card animatedCopy = becomeAnimated(source, sa);
                     list.add(animatedCopy);
                     list = CardLists.getValidCards(list, valid.split(","), ai.getWeakestOpponent(), topStack.getHostCard(),
                             topStack);
-                    list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
+                    list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack, true));
                     if (ComputerUtilCard.evaluateCreature(animatedCopy) < ComputerUtilCard.evaluateCreature(list.get(0))
                             && list.contains(animatedCopy)) {
                         return true;
@@ -137,7 +137,7 @@ public class AnimateAi extends SpellAbilityAi {
 
         if (sa.costHasManaX() && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, aiPlayer);
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, aiPlayer, sa.isTrigger());
 
             sa.setXManaCostPaid(xPay);
         }
@@ -343,7 +343,7 @@ public class AnimateAi extends SpellAbilityAi {
                 if (worst.isLand()) {
                     // e.g. Clan Guildmage, make sure we're not using the same land we want to animate to activate the ability
                     holdAnimatedTillMain2(ai, worst);
-                    if (!ComputerUtilMana.canPayManaCost(sa, ai, 0)) {
+                    if (!ComputerUtilMana.canPayManaCost(sa, ai, 0, sa.isTrigger())) {
                         releaseHeldTillMain2(ai, worst);
                         return false;
                     }

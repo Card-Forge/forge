@@ -267,13 +267,13 @@ public class HumanPlay {
             }
         }
 
-        final HumanCostDecision hcd = new HumanCostDecision(controller, p, sourceAbility, source, orString);
+        final HumanCostDecision hcd = new HumanCostDecision(controller, p, sourceAbility, true, source, orString);
         boolean mandatory = cost.isMandatory();
 
         //the following costs do not need inputs
         for (CostPart part : parts) {
             // early bail to check if the part can be paid
-            if (!part.canPay(sourceAbility, p)) {
+            if (!part.canPay(sourceAbility, p, hcd.isEffect())) {
                 return false;
             }
 
@@ -296,7 +296,7 @@ public class HumanPlay {
                 if (pd == null) {
                     return false;
                 }
-                part.payAsDecided(p, pd, sourceAbility);
+                part.payAsDecided(p, pd, sourceAbility, hcd.isEffect());
             }
             else if (part instanceof CostAddMana) {
                 String desc = part.toString();
@@ -310,7 +310,7 @@ public class HumanPlay {
                 if (pd == null) {
                     return false;
                 }
-                part.payAsDecided(p, pd, sourceAbility);
+                part.payAsDecided(p, pd, sourceAbility, hcd.isEffect());
             }
             else if (part instanceof CostExile) {
                 CostExile costExile = (CostExile) part;
@@ -321,7 +321,7 @@ public class HumanPlay {
                         return false;
                     }
 
-                    costExile.payAsDecided(p, PaymentDecision.card(p.getCardsIn(ZoneType.Graveyard)), sourceAbility);
+                    costExile.payAsDecided(p, PaymentDecision.card(p.getCardsIn(ZoneType.Graveyard)), sourceAbility, hcd.isEffect());
                 } else {
                     from = costExile.getFrom();
                     CardCollection list = CardLists.getValidCards(p.getCardsIn(from), part.getType().split(";"), p, source, sourceAbility);
@@ -334,7 +334,7 @@ public class HumanPlay {
                             return false;
                         }
                         list = list.subList(0, nNeeded);
-                        costExile.payAsDecided(p, PaymentDecision.card(list), sourceAbility);
+                        costExile.payAsDecided(p, PaymentDecision.card(list), sourceAbility, hcd.isEffect());
                     } else {
                         // replace this with input
                         CardCollection newList = new CardCollection();
@@ -351,7 +351,7 @@ public class HumanPlay {
                             }
                             newList.add(gameCacheList.remove(cv));
                         }
-                        costExile.payAsDecided(p, PaymentDecision.card(newList), sourceAbility);
+                        costExile.payAsDecided(p, PaymentDecision.card(newList), sourceAbility, hcd.isEffect());
                     }
                 }
             }
@@ -401,7 +401,7 @@ public class HumanPlay {
                     }
                 }
 
-                costExile.payAsDecided(p, PaymentDecision.spellabilities(payList), sourceAbility);
+                costExile.payAsDecided(p, PaymentDecision.spellabilities(payList), sourceAbility, hcd.isEffect());
             }
             else if (part instanceof CostPutCardToLib) {
                 int amount = Integer.parseInt(part.getAmount());
@@ -451,7 +451,7 @@ public class HumanPlay {
                     }
                 }
                 else { // Tainted Specter, Gurzigost, etc.
-                    boolean hasPaid = payCostPart(controller, p, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblPutIntoLibrary") + orString);
+                    boolean hasPaid = payCostPart(controller, p, sourceAbility, hcd.isEffect(), (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblPutIntoLibrary") + orString);
                     if (!hasPaid) {
                         return false;
                     }
@@ -461,13 +461,13 @@ public class HumanPlay {
             else if (part instanceof CostGainControl) {
                 int amount = Integer.parseInt(part.getAmount());
                 CardCollectionView list = CardLists.getValidCards(p.getGame().getCardsIn(ZoneType.Battlefield), part.getType(), p, source, sourceAbility);
-                boolean hasPaid = payCostPart(controller, p, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblGainControl") + orString);
+                boolean hasPaid = payCostPart(controller, p, sourceAbility, hcd.isEffect(), (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblGainControl") + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostReturn) {
                 CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source, sourceAbility);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
-                boolean hasPaid = payCostPart(controller, p, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblReturnToHand") + orString);
+                boolean hasPaid = payCostPart(controller, p, sourceAbility, hcd.isEffect(), (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblReturnToHand") + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostDiscard) {
@@ -477,16 +477,16 @@ public class HumanPlay {
                         return false;
                     }
 
-                    ((CostDiscard)part).payAsDecided(p, PaymentDecision.card(p.getCardsIn(ZoneType.Hand)), sourceAbility);
+                    ((CostDiscard)part).payAsDecided(p, PaymentDecision.card(p.getCardsIn(ZoneType.Hand)), sourceAbility, true);
                 } else if ("Random".equals(part.getType())) {
                     if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblWouldYouLikeRandomDiscardTargetCard", amount), sourceAbility)) {
                         return false;
                     }
 
-                    ((CostDiscard)part).payAsDecided(p, PaymentDecision.card(Aggregates.random(p.getCardsIn(ZoneType.Hand), amount, new CardCollection())), sourceAbility);
+                    ((CostDiscard)part).payAsDecided(p, PaymentDecision.card(Aggregates.random(p.getCardsIn(ZoneType.Hand), amount, new CardCollection())), sourceAbility, true);
                 } else {
                     CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source, sourceAbility);
-                    boolean hasPaid = payCostPart(controller, p, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lbldiscard") + orString);
+                    boolean hasPaid = payCostPart(controller, p, sourceAbility, hcd.isEffect(), (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lbldiscard") + orString);
                     if (!hasPaid) { return false; }
                 }
             }
@@ -494,14 +494,14 @@ public class HumanPlay {
                 CostReveal costReveal = (CostReveal) part;
                 CardCollectionView list = CardLists.getValidCards(p.getCardsIn(costReveal.getRevealFrom()), part.getType(), p, source, sourceAbility);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
-                boolean hasPaid = payCostPart(controller, p, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblReveal") + orString);
+                boolean hasPaid = payCostPart(controller, p, sourceAbility, hcd.isEffect(), (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblReveal") + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostTapType) {
                 CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source, sourceAbility);
                 list = CardLists.filter(list, Presets.UNTAPPED);
                 int amount = getAmountFromPartX(part, source, sourceAbility);
-                boolean hasPaid = payCostPart(controller, p, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblTap") + orString);
+                boolean hasPaid = payCostPart(controller, p, sourceAbility, hcd.isEffect(), (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblTap") + orString);
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostPartMana) {
@@ -547,14 +547,14 @@ public class HumanPlay {
         }
 
         sourceAbility.clearManaPaid();
-        boolean paid = p.getController().payManaCost(cost.getCostMana(), sourceAbility, prompt, false);
+        boolean paid = p.getController().payManaCost(cost.getCostMana(), sourceAbility, prompt, hcd.isEffect());
         if (!paid) {
             p.getManaPool().refundManaPaid(sourceAbility);
         }
         return paid;
     }
 
-    private static boolean payCostPart(final PlayerControllerHuman controller, Player p, SpellAbility sourceAbility, CostPartWithList cpl, int amount, CardCollectionView list, String actionName) {
+    private static boolean payCostPart(final PlayerControllerHuman controller, Player p, SpellAbility sourceAbility, boolean effect, CostPartWithList cpl, int amount, CardCollectionView list, String actionName) {
         if (list.size() < amount) { return false; } // unable to pay (not enough cards)
 
         InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, amount, amount, list, sourceAbility);
@@ -567,7 +567,7 @@ public class HumanPlay {
             return false;
         }
 
-        cpl.payAsDecided(p, PaymentDecision.card(inp.getSelected()), sourceAbility);
+        cpl.payAsDecided(p, PaymentDecision.card(inp.getSelected()), sourceAbility, effect);
 
         return true;
     }
@@ -591,7 +591,7 @@ public class HumanPlay {
             final Card offering = ability.getSacrificedAsOffering();
             offering.setUsedToPay(false);
             if (!manaInputCancelled) {
-                game.getAction().sacrifice(offering, ability, table, null);
+                game.getAction().sacrifice(offering, ability, false, table, null);
             }
             ability.resetSacrificedAsOffering();
         }
@@ -599,7 +599,7 @@ public class HumanPlay {
             final Card emerge = ability.getSacrificedAsEmerge();
             emerge.setUsedToPay(false);
             if (!manaInputCancelled) {
-                game.getAction().sacrifice(emerge, ability, table, null);
+                game.getAction().sacrifice(emerge, ability, false, table, null);
             }
             ability.resetSacrificedAsEmerge();
         }
@@ -618,7 +618,7 @@ public class HumanPlay {
         return !manaInputCancelled;
     }
 
-    public static boolean payManaCost(final PlayerControllerHuman controller, final ManaCost realCost, final CostPartMana mc, final SpellAbility ability, final Player activator, String prompt, ManaConversionMatrix matrix, boolean isActivatedSa) {
+    public static boolean payManaCost(final PlayerControllerHuman controller, final ManaCost realCost, final CostPartMana mc, final SpellAbility ability, final Player activator, String prompt, ManaConversionMatrix matrix, boolean effect) {
         final Card source = ability.getHostCard();
         ManaCostBeingPaid toPay = new ManaCostBeingPaid(realCost, mc.getRestriction());
 
@@ -653,7 +653,7 @@ public class HumanPlay {
         }
 
         CardCollection cardsToDelve = new CardCollection();
-        if (isActivatedSa) {
+        if (!effect) {
             CostAdjustment.adjust(toPay, ability, cardsToDelve, false);
         }
 
@@ -677,7 +677,7 @@ public class HumanPlay {
         }
         if (!toPay.isPaid()) {
             // Input is somehow clearing out the offering card?
-            inpPayment = new InputPayManaOfCostPayment(controller, toPay, ability, activator, matrix);
+            inpPayment = new InputPayManaOfCostPayment(controller, toPay, ability, activator, matrix, effect);
             inpPayment.setMessagePrefix(prompt);
             inpPayment.showAndWait();
             if (!inpPayment.isPaid()) {
@@ -695,7 +695,7 @@ public class HumanPlay {
             if (ability.getSacrificedAsOffering() != null) {
                 System.out.println("Finishing up Offering");
                 offering.setUsedToPay(false);
-                activator.getGame().getAction().sacrifice(offering, ability, null, null);
+                activator.getGame().getAction().sacrifice(offering, ability, false, null, null);
                 ability.resetSacrificedAsOffering();
             }
         }
@@ -706,7 +706,7 @@ public class HumanPlay {
             if (ability.getSacrificedAsEmerge() != null) {
                 System.out.println("Finishing up Emerge");
                 emerge.setUsedToPay(false);
-                activator.getGame().getAction().sacrifice(emerge, ability, null, null);
+                activator.getGame().getAction().sacrifice(emerge, ability, false, null, null);
                 ability.resetSacrificedAsEmerge();
             }
         }

@@ -48,23 +48,23 @@ import java.util.*;
 public class ComputerUtilMana {
     private final static boolean DEBUG_MANA_PAYMENT = false;
 
-    public static boolean canPayManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai) {
+    public static boolean canPayManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean effect) {
         cost = new ManaCostBeingPaid(cost); //check copy of cost so it doesn't modify the exist cost being paid
-        return payManaCost(cost, sa, ai, true, true);
+        return payManaCost(cost, sa, ai, true, true, effect);
     }
-    public static boolean canPayManaCost(final SpellAbility sa, final Player ai, final int extraMana) {
-        return payManaCost(sa, ai, true, extraMana, true);
+    public static boolean canPayManaCost(final SpellAbility sa, final Player ai, final int extraMana, final boolean effect) {
+        return payManaCost(sa, ai, true, extraMana, true, effect);
     }
 
-    public static boolean payManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai) {
-        return payManaCost(cost, sa, ai, false, true);
+    public static boolean payManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean effect) {
+        return payManaCost(cost, sa, ai, false, true, effect);
     }
-    public static boolean payManaCost(final Player ai, final SpellAbility sa) {
-        return payManaCost(sa, ai, false, 0, true);
+    public static boolean payManaCost(final Player ai, final SpellAbility sa, final boolean effect) {
+        return payManaCost(sa, ai, false, 0, true, effect);
     }
-    private static boolean payManaCost(final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable) {
+    private static boolean payManaCost(final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable, final boolean effect) {
         ManaCostBeingPaid cost = calculateManaCost(sa, test, extraMana);
-        return payManaCost(cost, sa, ai, test, checkPlayable);
+        return payManaCost(cost, sa, ai, test, checkPlayable, effect);
     }
 
     private static void refundMana(List<Mana> manaSpent, Player ai, SpellAbility sa) {
@@ -82,7 +82,7 @@ public class ComputerUtilMana {
      */
     public static int getConvergeCount(final SpellAbility sa, final Player ai) {
         ManaCostBeingPaid cost = calculateManaCost(sa, true, 0);
-        if (payManaCost(cost, sa, ai, true, true)) {
+        if (payManaCost(cost, sa, ai, true, true, false)) {
             return cost.getSunburst();
         }
         return 0;
@@ -93,7 +93,7 @@ public class ComputerUtilMana {
         if (ai == null || sa == null)
             return false;
         sa.setActivatingPlayer(ai);
-        return payManaCost(sa, ai, true, 0, false);
+        return payManaCost(sa, ai, true, 0, false, false);
     }
 
     private static Integer scoreManaProducingCard(final Card card) {
@@ -326,7 +326,7 @@ public class ComputerUtilMana {
                     continue;
                 }
                 
-                if (!ComputerUtilCost.checkForManaSacrificeCost(ai, ma.getPayCosts(), ma.getHostCard(), ma)) {
+                if (!ComputerUtilCost.checkForManaSacrificeCost(ai, ma.getPayCosts(), ma.getHostCard(), ma, ma.isTrigger())) {
                     continue;
                 }
 
@@ -642,7 +642,7 @@ public class ComputerUtilMana {
             SpellAbility saPayment = chooseManaAbility(cost, sa, ai, toPay, saList, true);
             if (saPayment == null) {
                 boolean lifeInsteadOfBlack = toPay.isBlack() && ai.hasKeyword("PayLifeInsteadOf:B");
-                if ((!toPay.isPhyrexian() && !lifeInsteadOfBlack) || !ai.canPayLife(2)) {
+                if ((!toPay.isPhyrexian() && !lifeInsteadOfBlack) || !ai.canPayLife(2, false)) {
                     break; // cannot pay
                 }
 
@@ -673,7 +673,7 @@ public class ComputerUtilMana {
         return manaSources;
     } // getManaSourcesToPayCost()
 
-    private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable) {
+    private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable, boolean effect) {
         AiCardMemory.clearMemorySet(ai, MemorySet.PAYS_TAP_COST);
         AiCardMemory.clearMemorySet(ai, MemorySet.PAYS_SAC_COST);
         adjustManaCostToAvoidNegEffects(cost, sa.getHostCard(), ai);
@@ -793,7 +793,7 @@ public class ComputerUtilMana {
             }
 
             if (saPayment == null) {
-                if ((!toPay.isPhyrexian() && !lifeInsteadOfBlack) || !ai.canPayLife(2)
+                if ((!toPay.isPhyrexian() && !lifeInsteadOfBlack) || !ai.canPayLife(2, false)
                         || (ai.getLife() <= 2 && !ai.cantLoseForZeroOrLessLife())) {
                     break; // cannot pay
                 }
@@ -816,7 +816,7 @@ public class ComputerUtilMana {
                 }
 
                 if (!test) {
-                    ai.payLife(2, sa.getHostCard());
+                    ai.payLife(2, sa.getHostCard(), false);
                 }
                 continue;
             }
@@ -852,7 +852,7 @@ public class ComputerUtilMana {
                 Iterables.removeIf(sourcesForShards.values(), CardTraitPredicates.isHostCard(saPayment.getHostCard()));
             } else {
                 final CostPayment pay = new CostPayment(saPayment.getPayCosts(), saPayment);
-                if (!pay.payComputerCosts(new AiCostDecision(ai, saPayment))) {
+                if (!pay.payComputerCosts(new AiCostDecision(ai, saPayment, effect))) {
                     saList.remove(saPayment);
                     continue;
                 }
@@ -1547,7 +1547,7 @@ public class ComputerUtilMana {
             for (int i = 0; i < 10; i++) {
                 mCost = ManaCost.combine(mCost, mkCost);
                 ManaCostBeingPaid mcbp = new ManaCostBeingPaid(mCost);
-                if (!canPayManaCost(mcbp, sa, sa.getActivatingPlayer())) {
+                if (!canPayManaCost(mcbp, sa, sa.getActivatingPlayer(), true)) {
                     sa.getHostCard().setSVar("NumTimes", "Number$" + i);
                     break;
                 }
@@ -1866,9 +1866,9 @@ public class ComputerUtilMana {
      * @return a int.
      * @since 1.0.15
      */
-    public static int determineLeftoverMana(final SpellAbility sa, final Player player) {
+    public static int determineLeftoverMana(final SpellAbility sa, final Player player, final boolean effect) {
         for (int i = 1; i < 100; i++) {
-            if (!canPayManaCost(sa.getRootAbility(), player, i)) {
+            if (!canPayManaCost(sa.getRootAbility(), player, i, effect)) {
                 return i - 1;
             }
         }
@@ -1889,13 +1889,13 @@ public class ComputerUtilMana {
      * @return a int.
      * @since 1.5.59
      */
-    public static int determineLeftoverMana(final SpellAbility sa, final Player player, final String shardColor) {
+    public static int determineLeftoverMana(final SpellAbility sa, final Player player, final String shardColor, final boolean effect) {
         ManaCost origCost = sa.getRootAbility().getPayCosts().getTotalMana();
 
         String shardSurplus = shardColor;
         for (int i = 1; i < 100; i++) {
             ManaCost extra = new ManaCost(new ManaCostParser(shardSurplus));
-            if (!canPayManaCost(new ManaCostBeingPaid(ManaCost.combine(origCost, extra)), sa, player)) {
+            if (!canPayManaCost(new ManaCostBeingPaid(ManaCost.combine(origCost, extra)), sa, player, effect)) {
                 return i - 1;
             }
             shardSurplus += " " + shardColor;
@@ -1941,7 +1941,7 @@ public class ComputerUtilMana {
             final Card offering = sa.getSacrificedAsOffering();
             offering.setUsedToPay(false);
             if (costIsPaid && !test) {
-                sa.getHostCard().getGame().getAction().sacrifice(offering, sa, null, null);
+                sa.getHostCard().getGame().getAction().sacrifice(offering, sa, false, null, null);
             }
             sa.resetSacrificedAsOffering();
         }
@@ -1949,7 +1949,7 @@ public class ComputerUtilMana {
             final Card emerge = sa.getSacrificedAsEmerge();
             emerge.setUsedToPay(false);
             if (costIsPaid && !test) {
-                sa.getHostCard().getGame().getAction().sacrifice(emerge, sa, null, null);
+                sa.getHostCard().getGame().getAction().sacrifice(emerge, sa, false, null, null);
             }
             sa.resetSacrificedAsEmerge();
         }

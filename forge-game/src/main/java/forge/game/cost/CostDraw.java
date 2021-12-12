@@ -17,7 +17,6 @@
  */
 package forge.game.cost;
 
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -27,9 +26,7 @@ import forge.game.spellability.SpellAbility;
  * The Class CostDraw.
  */
 public class CostDraw extends CostPart {
-    /**
-     * Serializables need a version ID.
-     */
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -66,10 +63,8 @@ public class CostDraw extends CostPart {
         PlayerCollection res = new PlayerCollection();
         String type = this.getType();
         final Card source = ability.getHostCard();
-        Integer c = convertAmount();
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, getAmount(), ability);
-        }
+
+        int c = this.getAbilityAmount(ability);
 
         for (Player p : payer.getGame().getPlayers()) {
             if (p.isValid(type, payer, source, ability) && p.canDrawAmount(c)) {
@@ -87,7 +82,7 @@ public class CostDraw extends CostPart {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer) {
+    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         return !getPotentialPlayers(payer, ability).isEmpty();
     }
 
@@ -98,7 +93,7 @@ public class CostDraw extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payAsDecided(final Player ai, final PaymentDecision decision, SpellAbility ability) {
+    public final boolean payAsDecided(final Player ai, final PaymentDecision decision, SpellAbility ability, final boolean effect) {
         for (final Player p : decision.players) {
             p.drawCards(decision.c, ability);
         }

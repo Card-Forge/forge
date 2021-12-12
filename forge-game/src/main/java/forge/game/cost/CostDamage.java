@@ -60,12 +60,12 @@ public class CostDamage extends CostPart {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer) {
+    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         return true;
     }
     
     @Override
-    public boolean payAsDecided(Player payer, PaymentDecision decision, SpellAbility sa) {
+    public boolean payAsDecided(Player payer, PaymentDecision decision, SpellAbility sa, final boolean effect) {
         final Card source = sa.getHostCard();
         CardDamageMap damageMap = new CardDamageMap();
         CardDamageMap preventMap = new CardDamageMap();

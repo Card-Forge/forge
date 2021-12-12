@@ -1452,14 +1452,15 @@ public class GameAction {
         if (!c.getType().hasSubtype("Saga")) {
             return false;
         }
-        if (!c.canBeSacrificed()) {
+        if (!c.canBeSacrificedBy(null, true)) {
             return false;
         }
         if (c.getCounters(CounterEnumType.LORE) < c.getFinalChapterNr()) {
             return false;
         }
         if (!game.getStack().hasSourceOnStack(c, SpellAbilityPredicates.isChapter())) {
-            sacrifice(c, null, table, null);
+            // needs to be effect, because otherwise it might be a cost?
+            sacrifice(c, null, true, table, null);
             checkAgain = true;
         }
         return checkAgain;
@@ -1759,8 +1760,8 @@ public class GameAction {
         return true;
     }
 
-    public final Card sacrifice(final Card c, final SpellAbility source, CardZoneTable table, Map<AbilityKey, Object> params) {
-        if (!c.canBeSacrificedBy(source)) {
+    public final Card sacrifice(final Card c, final SpellAbility source, final boolean effect, CardZoneTable table, Map<AbilityKey, Object> params) {
+        if (!c.canBeSacrificedBy(source, effect)) {
             return null;
         }
 

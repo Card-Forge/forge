@@ -127,7 +127,7 @@ public class HumanPlaySpellAbility {
             payment.setSnowForColor(true);
         }
 
-        if (ability.isAbility() && ability.isActivatedAbility()) {
+        if (ability.isActivatedAbility()) {
             final Map<String, String> params = Maps.newHashMap();
 
             for (KeywordInterface inst : c.getKeywords()) {
@@ -155,7 +155,7 @@ public class HumanPlaySpellAbility {
                 && (!mayChooseTargets || ability.setupTargets()) // if you can choose targets, then do choose them.
                 && ability.canCastTiming(human)
                 && ability.checkRestrictions(human)
-                && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, ability.getHostCard())));
+                && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, false, ability.getHostCard())));
 
         if (!prerequisitesMet) {
             if (!ability.isTrigger()) {

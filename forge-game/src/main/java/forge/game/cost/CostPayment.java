@@ -92,7 +92,7 @@ public class CostPayment extends ManaConversionMatrix {
         }
 
         cost = CostAdjustment.adjust(cost, ability);
-        return cost.canPay(ability);
+        return cost.canPay(ability, false);
     }
 
     /**
@@ -146,7 +146,7 @@ public class CostPayment extends ManaConversionMatrix {
                 ((CostPartMana)part).setCardMatrix(this);
             }
 
-            if (pd == null || !part.payAsDecided(decisionMaker.getPlayer(), pd, ability)) {
+            if (pd == null || !part.payAsDecided(decisionMaker.getPlayer(), pd, ability, decisionMaker.isEffect())) {
                 if (part instanceof CostPartMana) {
                     ((CostPartMana)part).setCardMatrix(null);
                 }
@@ -194,7 +194,7 @@ public class CostPayment extends ManaConversionMatrix {
 
             // wrap the payment and push onto the cost stack
             game.costPaymentStack.push(part, this);
-            if ((decisionMaker.paysRightAfterDecision() || payImmediately) && !part.payAsDecided(decisionMaker.getPlayer(), decision, ability)) {
+            if ((decisionMaker.paysRightAfterDecision() || payImmediately) && !part.payAsDecided(decisionMaker.getPlayer(), decision, ability, decisionMaker.isEffect())) {
                 game.costPaymentStack.pop(); // cost is resolved
                 return false;
             }
@@ -207,7 +207,7 @@ public class CostPayment extends ManaConversionMatrix {
             // wrap the payment and push onto the cost stack
             game.costPaymentStack.push(part, this);
 
-            if (!part.payAsDecided(decisionMaker.getPlayer(), decisions.get(part), this.ability)) {
+            if (!part.payAsDecided(decisionMaker.getPlayer(), decisions.get(part), this.ability, decisionMaker.isEffect())) {
                 game.costPaymentStack.pop(); // cost is resolved
                 return false;
             }

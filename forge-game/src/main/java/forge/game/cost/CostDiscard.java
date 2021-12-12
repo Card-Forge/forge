@@ -44,9 +44,6 @@ public class CostDiscard extends CostPartWithList {
 
     protected boolean firstTime = false;
 
-    /**
-     * Serializables need a version ID.
-     */
     private static final long serialVersionUID = 1L;
 
     /**
@@ -66,10 +63,10 @@ public class CostDiscard extends CostPartWithList {
     public int paymentOrder() { return 10; }
 
     @Override
-    public Integer getMaxAmountX(SpellAbility ability, Player payer) {
+    public Integer getMaxAmountX(SpellAbility ability, Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
         String type = this.getType();
-        CardCollectionView handList = payer.canDiscardBy(ability) ? payer.getCardsIn(ZoneType.Hand) : CardCollection.EMPTY;
+        CardCollectionView handList = payer.canDiscardBy(ability, effect) ? payer.getCardsIn(ZoneType.Hand) : CardCollection.EMPTY;
 
         if (!type.equals("Random")) {
             handList = CardLists.getValidCards(handList, type.split(";"), payer, source, ability);
@@ -128,19 +125,23 @@ public class CostDiscard extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer) {
+    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
 
-        CardCollectionView handList = payer.canDiscardBy(ability) ? payer.getCardsIn(ZoneType.Hand) : CardCollection.EMPTY;
+        CardCollectionView handList = payer.canDiscardBy(ability, effect) ? payer.getCardsIn(ZoneType.Hand) : CardCollection.EMPTY;
         String type = this.getType();
-        final Integer amount = this.convertAmount();
+        final int amount = getAbilityAmount(ability);
 
         if (this.payCostFromSource()) {
-            return source.canBeDiscardedBy(ability);
+            return source.canBeDiscardedBy(ability, effect);
         }
         else {
             if (type.equals("Hand")) {
-                return payer.canDiscardBy(ability);
+                // trying to discard an empty hand always work even with Tamiyo
+                if (payer.getZone(ZoneType.Hand).isEmpty()) {
+                    return true;
+                }
+                return payer.canDiscardBy(ability, effect);
                 // this will always work
             }
             else if (type.equals("LastDrawn")) {
@@ -152,7 +153,7 @@ public class CostDiscard extends CostPartWithList {
                for (Card c : handList) {
                    cardNames.add(c.getName());
                }
-               return amount != null && cardNames.size() >= amount;
+               return cardNames.size() >= amount;
             }
             else {
                 boolean sameName = false;
@@ -180,7 +181,7 @@ public class CostDiscard extends CostPartWithList {
                     }
                 }
 
-                if ((amount != null) && (amount > handList.size() - adjustment)) {
+                if (amount > handList.size() - adjustment) {
                     // not enough cards in hand to pay
                     return false;
                 }
@@ -193,7 +194,7 @@ public class CostDiscard extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard) {
+    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         if (ability.isCycling() && targetCard.equals(ability.getHostCard())) {
             // discard itself for cycling cost
@@ -201,7 +202,7 @@ public class CostDiscard extends CostPartWithList {
         }
         // if this is caused by 118.12 it's also an effect
         SpellAbility cause = targetCard.getGame().getStack().isResolving(ability.getHostCard()) ? ability : null;
-        return targetCard.getController().discard(targetCard, cause, null, runParams);
+        return targetCard.getController().discard(targetCard, cause, effect, null, runParams);
     }
 
     /* (non-Javadoc)

@@ -91,7 +91,7 @@ public class DamageDealAi extends DamageAiBase {
                 }
 
                 // Set PayX here to maximum value.
-                dmg = ComputerUtilCost.getMaxXValue(sa, ai);
+                dmg = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
                 sa.setXManaCostPaid(dmg);
             } else if (sa.getSVar(damage).equals("Count$CardsInYourHand") && source.isInZone(ZoneType.Hand)) {
                 dmg--; // the card will be spent casting the spell, so actual damage is 1 less
@@ -111,7 +111,7 @@ public class DamageDealAi extends DamageAiBase {
 
         if (damage.equals("X")) {
             if (sa.getSVar(damage).equals("Count$xPaid") || sourceName.equals("Crater's Claws")) {
-                dmg = ComputerUtilCost.getMaxXValue(sa, ai);
+                dmg = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
 
                 // Try not to waste spells like Blaze or Fireball on early targets, try to do more damage with them if possible
                 if (ai.getController().isAI()) {
@@ -959,7 +959,7 @@ public class DamageDealAi extends DamageAiBase {
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            dmg = ComputerUtilCost.getMaxXValue(sa, ai);
+            dmg = ComputerUtilCost.getMaxXValue(sa, ai, true);
             sa.setXManaCostPaid(dmg);
         }
 
@@ -1007,9 +1007,9 @@ public class DamageDealAi extends DamageAiBase {
         Player opponent = ai.getWeakestOpponent();
 
         // TODO: somehow account for the possible cost reduction?
-        int dmg = ComputerUtilMana.determineLeftoverMana(sa, ai, saTgt.getParam("XColor"));
+        int dmg = ComputerUtilMana.determineLeftoverMana(sa, ai, saTgt.getParam("XColor"), false);
 
-        while (!ComputerUtilMana.canPayManaCost(sa, ai, dmg) && dmg > 0) {
+        while (!ComputerUtilMana.canPayManaCost(sa, ai, dmg, false) && dmg > 0) {
             // TODO: ideally should never get here, currently put here as a precaution for complex mana base cases where the miscalculation might occur. Will remove later if it proves to never trigger.
             dmg--;
             System.out.println("Warning: AI could not pay mana cost for a XLifeDrain logic spell. Reducing X value to "+dmg);
@@ -1019,7 +1019,7 @@ public class DamageDealAi extends DamageAiBase {
         // TODO: somehow generalize this calculation to allow other potential similar cards to function in the future
         if ("Soul Burn".equals(sourceName)) {
             Map<String, Integer> xByColor = Maps.newHashMap();
-            xByColor.put("B", dmg - ComputerUtilMana.determineLeftoverMana(sa, ai, "R"));
+            xByColor.put("B", dmg - ComputerUtilMana.determineLeftoverMana(sa, ai, "R", false));
             source.setXManaCostPaidByColor(xByColor);
         }
 
@@ -1123,7 +1123,7 @@ public class DamageDealAi extends DamageAiBase {
                                 ManaCost total = ManaCost.combine(costSa, costAb);
                                 SpellAbility combinedAb = ab.copyWithDefinedCost(new Cost(total, false));
                                 // can we pay both costs?
-                                if (ComputerUtilMana.canPayManaCost(combinedAb, ai, 0)) {
+                                if (ComputerUtilMana.canPayManaCost(combinedAb, ai, 0, false)) {
                                     return Pair.of(ab, Integer.parseInt(dmgDef));
                                 }
                             }

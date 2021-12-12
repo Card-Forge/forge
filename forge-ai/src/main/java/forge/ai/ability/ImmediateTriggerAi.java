@@ -39,7 +39,7 @@ public class ImmediateTriggerAi extends SpellAbilityAi {
         }
 
         if (logic.equals("MaxX")) {
-            sa.setXManaCostPaid(ComputerUtilCost.getMaxXValue(sa, ai));
+            sa.setXManaCostPaid(ComputerUtilCost.getMaxXValue(sa, ai, true));
         }
 
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();

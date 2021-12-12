@@ -67,7 +67,7 @@ public class PermanentCreatureAi extends PermanentAi {
             if (ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 if (game.getReplacementHandler().wouldPhaseBeSkipped(ai, "BeginCombat"))
                     return false;
-                if (ComputerUtilCost.canPayCost(sa.getHostCard().getSpellPermanent(), ai)) {
+                if (ComputerUtilCost.canPayCost(sa.getHostCard().getSpellPermanent(), ai, false)) {
                     //do not dash if creature can be played normally
                     return false;
                 }

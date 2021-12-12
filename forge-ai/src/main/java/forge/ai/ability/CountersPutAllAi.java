@@ -83,7 +83,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
         final int amount;
         if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            amount = ComputerUtilCost.getMaxXValue(sa, ai);
+            amount = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
             sa.setXManaCostPaid(amount);
         } else {
             amount = AbilityUtils.calculateAmount(source, amountStr, sa);

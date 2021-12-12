@@ -123,7 +123,7 @@ public class EffectAi extends SpellAbilityAi {
             } else if (logic.equals("WillCastCreature") && ai.isAI()) {
                 AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
                 SpellAbility saCreature = aic.predictSpellToCastInMain2(ApiType.PermanentCreature);
-                randomReturn = saCreature != null && ComputerUtilMana.canPayManaCost(saCreature, ai, 0);
+                randomReturn = saCreature != null && ComputerUtilMana.canPayManaCost(saCreature, ai, 0, false);
             } else if (logic.equals("Always")) {
                 randomReturn = true;
             } else if (logic.equals("Main1")) {

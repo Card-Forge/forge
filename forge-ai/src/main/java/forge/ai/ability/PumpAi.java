@@ -63,7 +63,7 @@ public class PumpAi extends PumpAiBase {
             return SpecialAiLogic.doAristocratWithCountersLogic(ai, sa);
         } else if (aiLogic.equals("SwitchPT")) {
             // Some more AI would be even better, but this is a good start to prevent spamming
-            if (sa.isAbility() && sa.getActivationsThisTurn() > 0 && !sa.usesTargeting()) {
+            if (sa.isActivatedAbility() && sa.getActivationsThisTurn() > 0 && !sa.usesTargeting()) {
                 // Will prevent flipping back and forth
                 return false;
             }
@@ -253,7 +253,7 @@ public class PumpAi extends PumpAiBase {
             // Donate step 1 - try to target an opponent, preferably one who does not have a donate target yet
             return SpecialCardAi.Donate.considerTargetingOpponent(ai, sa);
         } else if (aiLogic.equals("InfernoOfTheStarMounts")) {
-            int numRedMana = ComputerUtilMana.determineLeftoverMana(sa, ai, "R");
+            int numRedMana = ComputerUtilMana.determineLeftoverMana(sa, ai, "R", false);
             int currentPower = source.getNetPower();
             if (currentPower < 20 && currentPower + numRedMana >= 20) {
                 return true;
@@ -284,7 +284,7 @@ public class PumpAi extends PumpAiBase {
         int defense;
         if (numDefense.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+            int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
             if (sourceName.equals("Necropolis Fiend")) {
             	xPay = Math.min(xPay, sa.getActivatingPlayer().getCardsIn(ZoneType.Graveyard).size());
                 sa.setSVar("X", Integer.toString(xPay));
@@ -305,7 +305,7 @@ public class PumpAi extends PumpAiBase {
         if (numAttack.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             if (root.getXManaCostPaid() == null) {
-                final int xPay = ComputerUtilCost.getMaxXValue(root, ai);
+                final int xPay = ComputerUtilCost.getMaxXValue(root, ai, sa.isTrigger());
                 root.setXManaCostPaid(xPay);
                 attack = xPay;
             } else {
@@ -531,7 +531,7 @@ public class PumpAi extends PumpAiBase {
                 @Override
                 public boolean apply(Card card) {
                     for (SpellAbility sa : card.getSpellAbilities()) {
-                        if (sa.isAbility()) {
+                        if (sa.isActivatedAbility()) {
                             return true;
                         }
                     }
@@ -681,7 +681,7 @@ public class PumpAi extends PumpAiBase {
         if (numDefense.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             if (root.getXManaCostPaid() == null) {
-                final int xPay = ComputerUtilCost.getMaxXValue(root, ai);
+                final int xPay = ComputerUtilCost.getMaxXValue(root, ai, true);
                 root.setXManaCostPaid(xPay);
                 defense = xPay;
             } else {
@@ -695,7 +695,7 @@ public class PumpAi extends PumpAiBase {
         if (numAttack.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             if (root.getXManaCostPaid() == null) {
-                final int xPay = ComputerUtilCost.getMaxXValue(root, ai);
+                final int xPay = ComputerUtilCost.getMaxXValue(root, ai, true);
                 root.setXManaCostPaid(xPay);
                 attack = xPay;
             } else {
@@ -750,7 +750,7 @@ public class PumpAi extends PumpAiBase {
         if (numAttack.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             if (root.getXManaCostPaid() == null) {
                 // X is not set yet
-                final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+                final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
                 root.setXManaCostPaid(xPay);
                 attack = xPay;
             } else {
@@ -764,7 +764,7 @@ public class PumpAi extends PumpAiBase {
         if (numDefense.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             if (root.getXManaCostPaid() == null) {
                 // X is not set yet
-                final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+                final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
                 root.setXManaCostPaid(xPay);
                 defense = xPay;
             } else {

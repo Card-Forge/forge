@@ -43,6 +43,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     protected final Game game;
     protected ManaCostBeingPaid manaCost;
     protected final SpellAbility saPaidFor;
+    protected boolean effect;
     private final boolean wasFloatingMana;
     private final Queue<Card> delaySelectCards = new LinkedList<>();
 
@@ -51,11 +52,12 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     private boolean locked = false;
 
-    protected InputPayMana(final PlayerControllerHuman controller, final SpellAbility saPaidFor0, final Player player0) {
+    protected InputPayMana(final PlayerControllerHuman controller, final SpellAbility saPaidFor0, final Player player0, final boolean effect) {
         super(controller);
         player = player0;
         game = player.getGame();
         saPaidFor = saPaidFor0;
+        this.effect = effect;
 
         //if player is floating mana, show mana pool to make it easier to use that mana
         wasFloatingMana = !player.getManaPool().isEmpty();
@@ -388,7 +390,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             final Runnable proc = new Runnable() {
                 @Override
                 public void run() {
-                    ComputerUtilMana.payManaCost(manaCost, saPaidFor, player);
+                    ComputerUtilMana.payManaCost(manaCost, saPaidFor, player, effect);
                 }
             };
             //must run in game thread as certain payment actions can only be automated there
@@ -421,7 +423,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 Evaluator<Boolean> proc = new Evaluator<Boolean>() {
                     @Override
                     public Boolean evaluate() {
-                        return ComputerUtilMana.canPayManaCost(manaCost, saPaidFor, player);
+                        return ComputerUtilMana.canPayManaCost(manaCost, saPaidFor, player, effect);
                     }
                 };
                 runAsAi(proc);
