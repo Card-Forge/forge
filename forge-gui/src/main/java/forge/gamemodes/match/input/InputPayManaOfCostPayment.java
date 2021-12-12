@@ -2,7 +2,6 @@ package forge.gamemodes.match.input;
 
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
-import forge.game.card.Card;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
@@ -33,7 +32,7 @@ public class InputPayManaOfCostPayment extends InputPayMana {
     @Override
     protected final void onPlayerSelected(Player selected, final ITriggerEvent triggerEvent) {
         if (player == selected) {
-            if (player.canPayLife(this.phyLifeToLose + 2, this.effect)) {
+            if (player.canPayLife(this.phyLifeToLose + 2, this.effect, saPaidFor)) {
                 if (manaCost.payPhyrexian()) {
                     this.phyLifeToLose += 2;
                 } else {
@@ -50,9 +49,8 @@ public class InputPayManaOfCostPayment extends InputPayMana {
 
     @Override
     protected void done() {
-        final Card source = saPaidFor.getHostCard();
         if (this.phyLifeToLose > 0) {
-            player.payLife(this.phyLifeToLose, source, this.effect);
+            player.payLife(this.phyLifeToLose, saPaidFor, this.effect);
         }
     }
 

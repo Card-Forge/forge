@@ -699,7 +699,7 @@ public class ComputerUtilCost {
                 if (part instanceof CostPayLife) {
                     final CostPayLife lifeCost = (CostPayLife) part;
                     Integer amount = lifeCost.convertAmount();
-                    if (payer.getLife() > (amount + 1) && payer.canPayLife(amount, true)) {
+                    if (payer.getLife() > (amount + 1) && payer.canPayLife(amount, true, sa)) {
                         final int landsize = payer.getLandsInPlay().size() + 1;
                         for (Card c : payer.getCardsIn(ZoneType.Hand)) {
                             // Check if the AI has enough lands to play the card

@@ -642,7 +642,7 @@ public class ComputerUtilMana {
             SpellAbility saPayment = chooseManaAbility(cost, sa, ai, toPay, saList, true);
             if (saPayment == null) {
                 boolean lifeInsteadOfBlack = toPay.isBlack() && ai.hasKeyword("PayLifeInsteadOf:B");
-                if ((!toPay.isPhyrexian() && !lifeInsteadOfBlack) || !ai.canPayLife(2, false)) {
+                if ((!toPay.isPhyrexian() && !lifeInsteadOfBlack) || !ai.canPayLife(2, false, sa)) {
                     break; // cannot pay
                 }
 
@@ -793,7 +793,7 @@ public class ComputerUtilMana {
             }
 
             if (saPayment == null) {
-                if ((!toPay.isPhyrexian() && !lifeInsteadOfBlack) || !ai.canPayLife(2, false)
+                if ((!toPay.isPhyrexian() && !lifeInsteadOfBlack) || !ai.canPayLife(2, false, sa)
                         || (ai.getLife() <= 2 && !ai.cantLoseForZeroOrLessLife())) {
                     break; // cannot pay
                 }
@@ -816,7 +816,7 @@ public class ComputerUtilMana {
                 }
 
                 if (!test) {
-                    ai.payLife(2, sa.getHostCard(), false);
+                    ai.payLife(2, sa, false);
                 }
                 continue;
             }
