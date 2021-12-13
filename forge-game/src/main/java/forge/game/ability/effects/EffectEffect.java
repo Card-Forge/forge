@@ -260,6 +260,10 @@ public class EffectEffect extends SpellAbilityEffect {
                 eff.setNamedCard(hostCard.getNamedCard());
             }
 
+            if (sa.hasParam("CopySVar")) {
+                eff.setSVar(sa.getParam("CopySVar"), sa.getHostCard().getSVar(sa.getParam("CopySVar")));
+            }
+
             // Copy text changes
             if (sa.isIntrinsic()) {
                 eff.copyChangedTextFrom(hostCard);
