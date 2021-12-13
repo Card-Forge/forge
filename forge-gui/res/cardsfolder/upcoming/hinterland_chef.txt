@@ -1,0 +1,16 @@
+Name:Hinterland Chef
+ManaCost:2 G
+Types:Creature Human Scout
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraft | TriggerDescription$ When CARDNAME enters the battlefield, draft a card from CARDNAME's spellbook. It perpetually becomes a Food artifact in addition to its other types and perpetually gains "{2}, {T}, Sacrifice this creature: You gain 3 life."
+SVar:TrigDraft:DB$ NameCard | Draft$ True | Defined$ You | ChooseFromList$ Almighty Brushwagg,Frilled Sandwalla,Moss Viper,Brushstrider,Highland Game,Ironshell Beetle,Lotus Cobra,Kazandu Nectarpot,Gilded Goose,Nessian Hornbeetle,Scurrid Colony,Territorial Boar,Deathbonnet Sprout,Spore Crawler,Moldgraf Millipede | SubAbility$ DBMakeCard
+SVar:DBMakeCard:DB$ MakeCard | Name$ ChosenName | Zone$ Hand | RememberMade$ True | SubAbility$ DBClearName
+SVar:DBClearName:DB$ Cleanup | ClearNamedCard$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Triggers$ Update | Name$ Hinterland Chef's Perpetual Effect | SubAbility$ DBCleanup
+SVar:PerpetualAbility:Mode$ Continuous | AddAbility$ FoodSac | AddType$ Food & Artifact | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The conjured card perpetually becomes a Food artifact in addition to its other types and perpetually gains "{2}, {T}, Sacrifice this creature: You gain 3 life."
+SVar:FoodSac:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME/this creature> | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+DeckHas:Ability$Sacrifice & Type$Food
+Oracle:When Hinterland Chef enters the battlefield, draft a card from Hinterland Chef's spellbook. It perpetually becomes a Food artifact in addition to its other types and perpetually gains "{2}, {T}, Sacrifice this creature: You gain 3 life."

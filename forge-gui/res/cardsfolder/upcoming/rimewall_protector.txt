@@ -1,0 +1,12 @@
+Name:Rimewall Protector
+ManaCost:1 U U
+Types:Creature Giant Wizard
+PT:3/4
+K:Ward:1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When CARDNAME enters the battlefield, each other Giant or Wizard you control and each Giant or Wizard card in your hand perpetually gains ward {1}.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ Valid Giant.YouCtrl+Other,Valid Wizard.YouCtrl+Other,ValidHand Giant.YouCtrl+Other,ValidHand Wizard.YouCtrl+Other | StaticAbilities$ PerpetualWard | Triggers$ Update | Duration$ Permanent | Name$ Rimewall Protector's Perpetual Effect
+SVar:PerpetualWard:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Ward:1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Each other Giant or Wizard you control and each Giant or Wizard card in your hand perpetually gains ward {1}.
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+DeckHints:Type$Giant|Wizard
+Oracle:Ward {1}\nWhen Rimewall Protector enters the battlefield, each other Giant or Wizard you control and each Giant or Wizard card in your hand perpetually gains ward {1}.
