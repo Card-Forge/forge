@@ -1,0 +1,14 @@
+Name:Puppet Raiser
+ManaCost:3 B
+Types:Creature Zombie Wizard
+PT:3/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Creature+YouOwn | PresentZone$ Graveyard | PresentCompare$ GE1 | Execute$ TrigExile | TriggerDescription$ At the beginning of your end step, exile up to one target creature card from your graveyard. If you do, seek a creature card with mana value equal to the mana value of that card plus one. That card perpetually gains menace.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select up to one target creature card in your graveyard | TargetMin$ 0 | TargetMax$ 1 | RememberChanged$ True | SubAbility$ DBSeek
+SVar:DBSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Creature.cmcEQX | ChangeNum$ 1 | Imprint$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Imprinted | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Name$ Puppet Raiser's Perpetual Effect | SubAbility$ DBCleanup
+SVar:PerpetualAbility:Mode$ Continuous | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | AddKeyword$ Menace | Triggers$ Update | Description$ That card perpetually gains menace.
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:X:Remembered$CardManaCost/Plus.1
+Oracle:At the beginning of your end step, exile up to one target creature card from your graveyard. If you do, seek a creature card with mana value equal to the mana value of that card plus one. That card perpetually gains menace.
