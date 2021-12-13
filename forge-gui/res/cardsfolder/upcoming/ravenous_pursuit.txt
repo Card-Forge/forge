@@ -1,0 +1,11 @@
+Name:Ravenous Pursuit
+ManaCost:1 G
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ DBDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to target creature.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | AILogic$ PowerDmg | NumDmg$ Y | ExcessSVar$ Excess | DamageSource$ ParentTarget | SubAbility$ DBChooseCard
+SVar:Y:ParentTargeted$CardPower
+SVar:DBChooseCard:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Creature.YouOwn | ChoiceTitle$ Choose a creature card in your hand | Amount$ 1 | SubAbility$ DBEffect | SpellDescription$ Choose a creature card in your hand. | StackDescription$ SpellDescription
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualPXPX | CopySVar$ Excess | Name$ Ravenous Pursuit's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup | SpellDescription$ It perpetually gets +X/+X, where X is the amount of excess damage dealt this way.
+SVar:PerpetualPXPX:Mode$ Continuous | Affected$ Card.ChosenCard | AddPower$ Excess | AddToughness$ Excess | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The chosen card perpetually gets +X/+X, where X is the amount of excess damage dealt.
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+Oracle:Target creature you control deals damage equal to its power to target creature you don't control. Choose a creature card in your hand. It perpetually gets +X/+X, where X is the amount of excess damage dealt this way.
