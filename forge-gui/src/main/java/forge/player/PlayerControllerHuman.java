@@ -554,6 +554,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return singleChosen == null ? CardCollection.EMPTY : new CardCollection(singleChosen);
         }
 
+        final CardCollection choices = new CardCollection();
+        if (sourceList.isEmpty()) {
+            return choices;
+        }
+
         getGui().setPanelSelection(CardView.get(sa.getHostCard()));
 
         if (useSelectCardsInput(sourceList)) {
@@ -571,7 +576,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         List<CardView> views = getGui().many(title, localizer.getMessage("lblChosenCards"), min, max,
                 gameCachechoose.getTrackableKeys(), CardView.get(sa.getHostCard()));
         endTempShowCards();
-        final CardCollection choices = new CardCollection();
         gameCachechoose.addToList(views, choices);
         return choices;
     }
