@@ -333,7 +333,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().runTrigger(TriggerType.SetInMotion, runParams, false);
     }
 
-
     /**
      * returns all opponents.
      * Should keep player relations somewhere in the match structure
@@ -533,8 +532,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             game.getTriggerHandler().runTrigger(TriggerType.LifeGained, runParams, false);
 
             game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));
-        }
-        else {
+        } else {
             System.out.println("Player - trying to gain negative or 0 life");
         }
         return newLifeSet;
@@ -616,7 +614,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (lifePayment > 0 && life < lifePayment) {
             return false;
         }
-        return (lifePayment <= 0) || !StaticAbilityCantGainLosePayLife.anyCantPayLife(this, effect, cause);
+        return lifePayment <= 0 || !StaticAbilityCantGainLosePayLife.anyCantPayLife(this, effect, cause);
     }
 
     public final boolean payLife(final int lifePayment, final SpellAbility cause, final boolean effect) {
@@ -2019,7 +2017,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean cantLoseForZeroOrLessLife() {
-        return (hasKeyword("You don't lose the game for having 0 or less life."));
+        return hasKeyword("You don't lose the game for having 0 or less life.");
     }
 
     public final boolean cantWin() {

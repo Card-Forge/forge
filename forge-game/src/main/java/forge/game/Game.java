@@ -955,7 +955,6 @@ public class Game {
         Multimap<Player, Card> anteed = ArrayListMultimap.create();
 
         if (matchRarity) {
-
             boolean onePlayerHasTimeShifted = false;
 
             List<CardRarity> validRarities = new ArrayList<>(Arrays.asList(CardRarity.values()));
@@ -1018,7 +1017,6 @@ public class Game {
                 } else {
                     chooseRandomCardsForAnte(player, anteed);
                 }
-
             }
         }
         else {

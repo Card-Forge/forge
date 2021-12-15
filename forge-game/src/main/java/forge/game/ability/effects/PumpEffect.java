@@ -324,9 +324,7 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("RememberObjects")) {
-            for (final Object o : AbilityUtils.getDefinedObjects(host, sa.getParam("RememberObjects"), sa)) {
-                host.addRemembered(o);
-            }
+            host.addRemembered(AbilityUtils.getDefinedObjects(host, sa.getParam("RememberObjects"), sa));
         }
 
         if (sa.hasParam("NoteCardsFor")) {
@@ -338,21 +336,15 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("ForgetObjects")) {
-            for (final Object o : AbilityUtils.getDefinedObjects(host, sa.getParam("ForgetObjects"), sa)) {
-                host.removeRemembered(o);
-            }
+            host.removeRemembered(AbilityUtils.getDefinedObjects(host, sa.getParam("ForgetObjects"), sa));
         }
 
         if (sa.hasParam("ImprintCards")) {
-            for (final Card c : AbilityUtils.getDefinedCards(host, sa.getParam("ImprintCards"), sa)) {
-                host.addImprintedCard(c);
-            }
+            host.addImprintedCards(AbilityUtils.getDefinedCards(host, sa.getParam("ImprintCards"), sa));
         }
 
         if (sa.hasParam("ForgetImprinted")) {
-            for (final Card c : AbilityUtils.getDefinedCards(host, sa.getParam("ForgetImprinted"), sa)) {
-                host.removeImprintedCard(c);
-            }
+            host.removeImprintedCards(AbilityUtils.getDefinedCards(host, sa.getParam("ForgetImprinted"), sa));
         }
 
         final ZoneType pumpZone = sa.hasParam("PumpZone") ? ZoneType.smartValueOf(sa.getParam("PumpZone"))

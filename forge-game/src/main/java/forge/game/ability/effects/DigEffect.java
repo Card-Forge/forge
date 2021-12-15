@@ -177,14 +177,10 @@ public class DigEffect extends SpellAbilityEffect {
                 }
 
                 if (sa.hasParam("RememberRevealed") && !sa.hasParam("RevealValid") && hasRevealed) {
-                    for (final Card one : top) {
-                        host.addRemembered(one);
-                    }
+                    host.addRemembered(top);
                 }
                 if (sa.hasParam("ImprintRevealed") && hasRevealed) {
-                    for (final Card one : top) {
-                        host.addImprintedCard(one);
-                    }
+                    host.addImprintedCards(top);
                 }
                 if (sa.hasParam("Choser")) {
                     final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(host, sa.getParam("Choser"), sa);
