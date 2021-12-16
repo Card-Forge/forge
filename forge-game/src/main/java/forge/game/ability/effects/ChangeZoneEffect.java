@@ -1066,6 +1066,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (sa.hasParam("Unimprint")) {
                 source.clearImprintedCards();
             }
+            if (sa.hasParam("ForgetOtherRemembered")) {
+                source.clearRemembered();
+            }
 
             String selectPrompt = sa.hasParam("SelectPrompt") ? sa.getParam("SelectPrompt") : MessageUtil.formatMessage(Localizer.getInstance().getMessage("lblSelectCardFromPlayerZone", "{player's}", Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME).toLowerCase()), decider, player);
             final String totalcmc = sa.getParam("WithTotalCMC");
