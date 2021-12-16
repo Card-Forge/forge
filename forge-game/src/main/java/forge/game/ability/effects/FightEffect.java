@@ -53,10 +53,7 @@ public class FightEffect extends DamageBaseEffect {
         }
 
         if (sa.hasParam("RememberObjects")) {
-            final String remembered = sa.getParam("RememberObjects");
-            for (final Object o : AbilityUtils.getDefinedObjects(host, remembered, sa)) {
-                host.addRemembered(o);
-            }
+            host.addRemembered(AbilityUtils.getDefinedObjects(host, sa.getParam("RememberObjects"), sa));
         }
 
         Player controller = host.getController();

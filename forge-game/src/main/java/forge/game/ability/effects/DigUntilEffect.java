@@ -204,14 +204,10 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 }
 
                 if (sa.hasParam("RememberRevealed")) {
-                    for (final Card c : revealed) {
-                        host.addRemembered(c);
-                    }
+                    host.addRemembered(revealed);
                 }
                 if (sa.hasParam("ImprintRevealed")) {
-                    for (final Card c : revealed) {
-                        host.addImprintedCard(c);
-                    }
+                    host.addImprintedCards(revealed);
                 }
                 if (sa.hasParam("RevealRandomOrder")) {
                     Collections.shuffle(revealed, MyRandom.getRandom());

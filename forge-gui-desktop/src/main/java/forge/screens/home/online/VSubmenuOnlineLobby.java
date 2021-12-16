@@ -51,10 +51,11 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
     }
 
     public void reset() {
-        onClosing(null);
-        this.client = null;
-        this.lobby = null;
-        populate();
+        if (onClosing(null)) {
+            this.client = null;
+            this.lobby = null;
+            populate();
+        }
     }
 
     public void setClient(final FGameClient client) {

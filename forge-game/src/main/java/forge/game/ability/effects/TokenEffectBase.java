@@ -203,10 +203,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                     moved.addRemembered(host);
                 }
                 if (sa.hasParam("TokenRemembered")) {
-                    final String remembered = sa.getParam("TokenRemembered");
-                    for (final Object o : AbilityUtils.getDefinedObjects(host, remembered, sa)) {
-                        moved.addRemembered(o);
-                    }
+                    moved.addRemembered(AbilityUtils.getDefinedObjects(host, sa.getParam("TokenRemembered"), sa));
                 }
                 allTokens.add(moved);
             }
