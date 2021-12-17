@@ -21,6 +21,7 @@ ScryfallCode=NEO
 300 L Mountain @Ayami Nakashima
 301 L Forest @EZOI
 302 L Forest @EZOI
+305 M Kaito Shizuki @Hara Tetsuo
 350 M Kaito Shizuki @Kaoru Hagiya
 378 R Hidetsugu, Devouring Chaos @SENNSU
 410 M Atsushi, the Blazing Sky @Toshiaki Takayama
