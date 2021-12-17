@@ -1,9 +1,11 @@
 [metadata]
-Code=PWP21
+Code=PW21
 Date=2021-06-18
 Name=Wizards Play Network 2021
+Code2=PWP21
+Alias=PWP21
 Type=Promo
-ScryfallCode=PWP21
+ScryfallCode=PW21
 
 [cards]
 1 R Arbor Elf @Rk Post

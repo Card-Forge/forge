@@ -11,18 +11,18 @@ ScryfallCode=NEO
 99 R Hidetsugu, Devouring Chaos @Isis
 134 M Atsushi, the Blazing Sky @Victor Adame Minguez
 226 M Kaito Shizuki @Yongjae Choi
-293 L Plains @AMAYAGIDO
-294 L Plains @TOMOHITO
-295 L Island @AMAYAGIDO
-296 L Island @Aoji Maiko
-297 L Swamp @Aoji Maiko
+293 L Plains @Amayagido
+294 L Plains @Tomohito
+295 L Island @Amayagido
+296 L Island @Maiko Aoji
+297 L Swamp @Maiko Aoji
 298 L Swamp @Shie Nanahara
 299 L Mountain @Ayami Nakashima
 300 L Mountain @Ayami Nakashima
-301 L Forest @EZOI
-302 L Forest @EZOI
+301 L Forest @Ezoi
+302 L Forest @Ezoi
 305 M Kaito Shizuki @Hara Tetsuo
-350 M Kaito Shizuki @Kaoru Hagiya
+350 M Kaito Shizuki @Hagiya Kaoru
 378 R Hidetsugu, Devouring Chaos @SENNSU
 410 M Atsushi, the Blazing Sky @Toshiaki Takayama
 429 R Hidetsugu, Devouring Chaos @SENNSU

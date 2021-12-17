@@ -1,9 +1,11 @@
 [metadata]
-Code=PWP10
+Code=PW10
 Date=2010-01-01
 Name=Wizards Play Network 2010
+Code2=PWP10
+Alias=PWP10
 Type=Promo
-ScryfallCode=PWP10
+ScryfallCode=PW10
 
 [cards]
 36 R Kor Firewalker @Alex Horley-Orlandelli

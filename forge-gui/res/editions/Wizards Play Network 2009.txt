@@ -1,9 +1,11 @@
 [metadata]
-Code=PWP09
+Code=PW09
 Date=2009-01-01
 Name=Wizards Play Network 2009
+Code2=PWP09
+Alias=PWP09
 Type=Promo
-ScryfallCode=PWP09
+ScryfallCode=PW09
 
 [cards]
 24 R Path to Exile @Rebecca Guay
