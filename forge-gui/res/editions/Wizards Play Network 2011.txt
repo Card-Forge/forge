@@ -1,9 +1,11 @@
 [metadata]
-Code=PWP11
+Code=PW11
 Date=2011-01-01
 Name=Wizards Play Network 2011
+Code2=PWP11
+Alias=PWP11
 Type=Promo
-ScryfallCode=PWP11
+ScryfallCode=PW11
 
 [cards]
 64 R Master's Call @Erica Yang

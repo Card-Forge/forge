@@ -1,9 +1,11 @@
 [metadata]
-Code=PWP12
+Code=PW12
 Date=2012-01-01
 Name=Wizards Play Network 2012
+Code2=PWP12
+Alias=PWP12
 Type=Promo
-ScryfallCode=PWP12
+ScryfallCode=PW12
 
 [cards]
 79 R Gather the Townsfolk @Bud Cook
