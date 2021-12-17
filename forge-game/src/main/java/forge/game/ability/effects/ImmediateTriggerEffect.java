@@ -59,7 +59,9 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("RememberObjects")) {
             for (final String rem : sa.getParam("RememberObjects").split(",")) {
-                immediateTrig.addRemembered(AbilityUtils.getDefinedEntities(sa.getHostCard(), rem, sa));
+                for (final Object o : AbilityUtils.getDefinedEntities(sa.getHostCard(), rem, sa)) {
+                    immediateTrig.addRemembered(o);
+                }
             }
         }
 
