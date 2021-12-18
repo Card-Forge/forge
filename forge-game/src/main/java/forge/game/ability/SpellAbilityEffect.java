@@ -660,6 +660,9 @@ public abstract class SpellAbilityEffect {
                 if (untilCards.isEmpty()) {
                     return;
                 }
+                Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
+                moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateGraveyard());
                 for (Table.Cell<ZoneType, ZoneType, CardCollection> cell : triggerList.cellSet()) {
                     for (Card c : cell.getValue()) {
                         // check if card is still in the until host leaves play list
@@ -672,7 +675,7 @@ public abstract class SpellAbilityEffect {
                             continue;
                         }
                         // no cause there?
-                        Card movedCard = game.getAction().moveTo(cell.getRowKey(), newCard, null);
+                        Card movedCard = game.getAction().moveTo(cell.getRowKey(), newCard, 0, null, moveParams);
                         untilTable.put(cell.getColumnKey(), cell.getRowKey(), movedCard);
                     }
                 }
