@@ -1,0 +1,13 @@
+Name:Hidetsugu, Devouring Chaos
+ManaCost:3 B
+Types:Legendary Creature Ogre Demon
+PT:4/4
+A:AB$ Scry | Cost$ B Sac<1/Creature> | ScryNum$ 2 | SpellDescription$ Scry 2.
+A:AB$ Dig | Cost$ 2 R T | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | AILogic$ ExileAndPlayUntilEOT | StackDescription$ SpellDescription | SpellDescription$ Exile the top card of your library. You may play that card this turn. When you exile a nonland card this way, CARDNAME deals damage equal to the exiled card's mana value to any target.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBImmediateTrigger | ExileOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play this card this turn.
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | Execute$ TrigDealDamage | RememberObjects$ RememberedCard | SubAbility$ DBCleanup
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
+SVar:X:Remembered$CardManaCost
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:{B}, Sacrifice a creature: Scry 2.\n{2}{R}, {T}, Exile the top card of your library. You may play that card this turn. When you exile a nonland card this way, Hidetsugu, Devouring Chaos deals damage equal to the exiled card's mana value to any target.

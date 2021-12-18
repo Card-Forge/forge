@@ -1,0 +1,15 @@
+Name:Kaito Shizuki
+ManaCost:1 U B
+Types:Legendary Planeswalker Kaito
+Loyalty:3
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Card.Self+ThisTurnEntered | Execute$ TrigPhase | TriggerDescription$ At the beginning of your end step, if CARDNAME entered the battlefield this turn, he phases out.
+SVar:TrigPhase:DB$ Phases | Defined$ Self
+A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 1 |  SubAbility$ DBDiscard | AILogic$ Main2 | StackDescription$ SpellDescription | SpellDescription$ Draw a card. Then discard a card unless you attacked this turn.
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | ConditionCheckSVar$ RaidTest | ConditionSVarCompare$ EQ0 | StackDescription$ None
+SVar:RaidTest:Count$AttackersDeclared
+A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | TokenScript$ u_1_1_ninja_unblockable | SpellDescription$ Create a 1/1 blue Ninja creature token with "This creature can't be blocked."
+A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Stackable$ False | Name$ Emblem - Kaito Shizuki | Image$ emblem_kaito_shizuki | Triggers$ TrigDamage | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever a creature you control deals combat damage to a player, search your library for a blue or black creature card, put it onto the battlefield, then shuffle."
+SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ EmblemTrigChangeZone | TriggerZones$ Command | TriggerDescription$ Whenever a creature you control deals combat damage to a player, search your library for a blue or black creature card, put it onto the battlefield, then shuffle.
+SVar:EmblemTrigChangeZone:DB$ ChangeZone | ChangeType$ Creature.Blue,Creature.Black | ChangeNum$ 1 | Origin$ Library | Destination$ Battlefield | ShuffleNonMandatory$ True
+DeckHas:Ability$Token
+Oracle:At the beginning of your end step, if Kaito Shizuki entered the battlefield this turn, he phases out.\n+1: Draw a card. Then discard a card unless you attacked this turn.\n−2: Create a 1/1 blue Ninja creature token with "This creature can't be blocked."\n−7: You get an emblem with "Whenever a creature you control deals combat damage to a player, search your library for a blue or black creature card, put it onto the battlefield, then shuffle."
