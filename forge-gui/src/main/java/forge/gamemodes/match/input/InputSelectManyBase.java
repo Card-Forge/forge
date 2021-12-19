@@ -7,6 +7,8 @@ import com.google.common.collect.Iterables;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardView;
+import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
@@ -110,12 +112,18 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
         if (c instanceof Card) {
             getController().getGui().setUsedToPay(CardView.get((Card) c), newState); // UI supports card highlighting though this abstraction-breaking mechanism
         }
+        else if (c instanceof Player) {
+            getController().getGui().setHighlighted(PlayerView.get((Player) c), newState);
+        }
     }
 
     private void resetUsedToPay() {
         for (final GameEntity c : getSelected()) {
             if (c instanceof Card) {
                 getController().getGui().setUsedToPay(CardView.get((Card) c), false);
+            }
+            else if (c instanceof Player) {
+                getController().getGui().setHighlighted(PlayerView.get((Player) c), false);
             }
         }
     }

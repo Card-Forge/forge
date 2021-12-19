@@ -385,10 +385,10 @@ public class DrawAi extends SpellAbilityAi {
                 }
             }
             
-            boolean aiTarget = sa.canTarget(ai);
+            boolean aiTarget = sa.canTarget(ai) && (mandatory || ai.canDraw());
             // checks what the ai prevent from casting it on itself
             // if spell is not mandatory
-            if (aiTarget && !ai.cantLose() && ai.canDraw()) {
+            if (aiTarget && !ai.cantLose()) {
                 if (numCards >= computerLibrarySize - 3) {
                     if (xPaid) {
                         numCards = computerLibrarySize - 1;
@@ -426,7 +426,7 @@ public class DrawAi extends SpellAbilityAi {
             }
 
             if (aiTarget) {
-                if (computerHandSize + numCards > computerMaxHandSize && game.getPhaseHandler().isPlayerTurn(ai)) {
+                if (!ai.isCardInPlay("Laboratory Maniac") && computerHandSize + numCards > computerMaxHandSize && game.getPhaseHandler().isPlayerTurn(ai)) {
                     if (xPaid) {
                         numCards = computerMaxHandSize - computerHandSize;
                         if (source.isInZone(ZoneType.Hand)) {
@@ -472,10 +472,8 @@ public class DrawAi extends SpellAbilityAi {
                 }
 
                 // ally would lose because of poison
-                if (getPoison != null && ally.canReceiveCounters(CounterType.get(CounterEnumType.POISON))) {
-                    if (ally.getPoisonCounters() + numCards > 9) {
+                if (getPoison != null && ally.canReceiveCounters(CounterType.get(CounterEnumType.POISON)) && ally.getPoisonCounters() + numCards > 9) {
                         continue;
-                    }
                 }
 
                 sa.getTargets().add(ally);

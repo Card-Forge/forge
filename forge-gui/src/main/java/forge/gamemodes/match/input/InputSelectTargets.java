@@ -17,6 +17,7 @@ import forge.game.card.Card;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardView;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.gui.FThreads;
@@ -356,6 +357,9 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             getController().getGui().setUsedToPay(CardView.get((Card) ge), true);
             lastTarget = (Card) ge;
         }
+        else if (ge instanceof Player) {
+            getController().getGui().setHighlighted(PlayerView.get((Player) ge), true);
+        }
         final Integer val = targetDepth.get(ge);
         targetDepth.put(ge, val == null ? Integer.valueOf(1) : Integer.valueOf(val.intValue() + 1) );
 
@@ -376,6 +380,9 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         for (final GameEntity c : targetDepth.keySet()) {
             if (c instanceof Card) {
                 getController().getGui().setUsedToPay(CardView.get((Card) c), false);
+            }
+            else if (c instanceof Player) {
+                getController().getGui().setHighlighted(PlayerView.get((Player) c), false);
             }
         }
 
