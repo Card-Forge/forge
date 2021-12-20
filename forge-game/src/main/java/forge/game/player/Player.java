@@ -174,6 +174,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int numForetoldThisTurn = 0;
     private int numCardsInHandStartedThisTurnWith = 0;
 
+    private int simultaneousDamage = 0;
+
     private int lastTurnNr = 0;
 
     private final Map<String, FCollection<String>> notes = Maps.newHashMap();
@@ -671,7 +673,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         else if (!hasKeyword("Damage doesn't cause you to lose life.")) {
             // rule 118.2. Damage dealt to a player normally causes that player to lose that much life.
-            loseLife(amount, true, false);
+            if (isCombat) {
+                simultaneousDamage += amount;
+            } else {
+                loseLife(amount, true, false);
+            }
         }
 
         //Oathbreaker, Tiny Leaders, and Brawl ignore commander damage rule
@@ -710,7 +716,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         runParams.put(AbilityKey.IsCombatDamage, isCombat);
         // Defending player at the time the damage was dealt
         runParams.put(AbilityKey.DefendingPlayer, game.getCombat() != null ? game.getCombat().getDefendingPlayerRelatedTo(source) : null);
-        game.getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
+        game.getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, isCombat);
 
         game.fireEvent(new GameEventPlayerDamaged(this, source, amount, isCombat, infect));
 
@@ -808,6 +814,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         return restDamage;
+    }
+
+    public final void dealCombatDamage() {
+        loseLife(simultaneousDamage, true, false);
+        simultaneousDamage = 0;
     }
 
     public final void clearAssignedDamage() {

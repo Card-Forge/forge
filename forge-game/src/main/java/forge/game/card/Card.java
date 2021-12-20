@@ -5269,8 +5269,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         Log.debug(this + " - was assigned " + assignedDamage0 + " damage, by " + sourceCard);
         if (!assignedDamageMap.containsKey(sourceCard)) {
             assignedDamageMap.put(sourceCard, assignedDamage0);
-        }
-        else {
+        } else {
             assignedDamageMap.put(sourceCard, assignedDamageMap.get(sourceCard) + assignedDamage0);
         }
         if (assignedDamage0 > 0) {
