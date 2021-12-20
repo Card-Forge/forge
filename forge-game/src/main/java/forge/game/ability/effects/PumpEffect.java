@@ -179,7 +179,7 @@ public class PumpEffect extends SpellAbilityEffect {
             final int atk = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumAtt"), sa, true);
             final int def = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumDef"), sa, true);
 
-            boolean gets = (sa.hasParam("NumAtt") || sa.hasParam("NumDef"));
+            boolean gets = sa.hasParam("NumAtt") || sa.hasParam("NumDef");
             boolean gains = !keywords.isEmpty();
 
             if (gets) {

@@ -1459,6 +1459,12 @@ public class AttachAi extends SpellAbilityAi {
      */
     public static Card attachGeneralAI(final Player ai, final SpellAbility sa, final List<Card> list, final boolean mandatory,
             final Card attachSource, final String logic) {
+        // AI logic types that do not require a prefList and that evaluate the
+        // usefulness of attach action autonomously
+        if ("InstantReequipPowerBuff".equals(logic)) {
+            return attachAIInstantReequipPreference(sa, attachSource);
+        }
+
         Player prefPlayer;
         if ("Pump".equals(logic) || "Animate".equals(logic) || "Curiosity".equals(logic) || "MoveTgtAura".equals(logic)
                 || "MoveAllAuras".equals(logic)) {
@@ -1466,6 +1472,7 @@ public class AttachAi extends SpellAbilityAi {
         } else {
             prefPlayer = AiAttackController.choosePreferredDefenderPlayer(ai);
         }
+
         // Some ChangeType cards are beneficial, and PrefPlayer should be
         // changed to represent that
         final List<Card> prefList;
@@ -1477,14 +1484,8 @@ public class AttachAi extends SpellAbilityAi {
             prefList = CardLists.filterControlledBy(list, prefPlayer);
         }
 
-        // AI logic types that do not require a prefList and that evaluate the
-        // usefulness of attach action autonomously
-        if ("InstantReequipPowerBuff".equals(logic)) {
-            return attachAIInstantReequipPreference(sa, attachSource);
-        }
-
         // If there are no preferred cards, and not mandatory bail out
-        if (prefList.isEmpty()) {
+        if (logic == null || prefList.isEmpty()) {
             return chooseUnpreferred(mandatory, list);
         }
 
@@ -1741,7 +1742,7 @@ public class AttachAi extends SpellAbilityAi {
         if (sa.isTrigger() && sa.usesTargeting()) {
             CardCollection targetables = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
             CardCollection source = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Object"), sa);
-            Card tgt = attachGeneralAI(ai, sa, targetables, true, source.getFirst(), null);
+            Card tgt = attachGeneralAI(ai, sa, targetables, !sa.getRootAbility().isOptionalTrigger(), source.getFirst(), null);
             if (tgt != null) {
                 sa.resetTargets();
                 sa.getTargets().add(tgt);

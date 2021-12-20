@@ -255,10 +255,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private final Set<PlayerView> highlightedPlayers = Sets.newHashSet();
     @Override
     public void setHighlighted(final PlayerView pv, final boolean b) {
-        if (b) {
-            highlightedPlayers.add(pv);
-        } else {
-            highlightedPlayers.remove(pv);
+        final boolean hasChanged = b ? highlightedPlayers.add(pv) : highlightedPlayers.remove(pv);
+        if (hasChanged) {
+            updateLives(Collections.singleton(pv));
         }
     }
 
