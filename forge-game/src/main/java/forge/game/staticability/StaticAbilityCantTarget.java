@@ -17,8 +17,10 @@
  */
 package forge.game.staticability;
 
+import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.card.Card;
-import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -27,6 +29,40 @@ import forge.game.zone.ZoneType;
  * The Class StaticAbilityCantTarget.
  */
 public class StaticAbilityCantTarget {
+
+    static String MODE = "CantTarget";
+
+    public static boolean cantTarget(final Card card, final SpellAbility spellAbility)  {
+        final Game game = card.getGame();
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (!stAb.getParam("Mode").equals(MODE) || stAb.isSuppressed() || !stAb.checkConditions()) {
+                    continue;
+                }
+
+                if (applyCantTargetAbility(stAb, card, spellAbility)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean cantTarget(final Player player, final SpellAbility spellAbility)  {
+        final Game game = player.getGame();
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (!stAb.getParam("Mode").equals(MODE) || stAb.isSuppressed() || !stAb.checkConditions()) {
+                    continue;
+                }
+
+                if (applyCantTargetAbility(stAb, player, spellAbility)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     /**
      * Apply can't target ability.
@@ -41,8 +77,6 @@ public class StaticAbilityCantTarget {
      */
     public static boolean applyCantTargetAbility(final StaticAbility stAb, final Card card,
             final SpellAbility spellAbility) {
-        final Card source = spellAbility.getHostCard();
-        final Player activator = spellAbility.getActivatingPlayer();
 
         if (stAb.hasParam("ValidPlayer")) {
             return false;
@@ -70,36 +104,10 @@ public class StaticAbilityCantTarget {
             return false;
         }
 
-        if (stAb.hasParam("Hexproof") && (activator != null)) {
-            for (KeywordInterface kw : activator.getKeywords()) {
-                String k = kw.getOriginal();
-                if (k.startsWith("IgnoreHexproof")) {
-                    String[] m = k.split(":");
-                    if (card.isValid(m[1].split(","), activator, source, null)) {
-                        return false;
-                    }
-                }
-            }
-        }
-        if (stAb.hasParam("Shroud") && (activator != null)) {
-            for (KeywordInterface kw : activator.getKeywords()) {
-                String k = kw.getOriginal();
-                if (k.startsWith("IgnoreShroud")) {
-                    String[] m = k.split(":");
-                    if (card.isValid(m[1].split(","), activator, source, null)) {
-                        return false;
-                    }
-                }
-            }
-        }
-
-        return common(stAb, spellAbility);
+        return common(stAb, card, spellAbility);
     }
 
-    public static boolean applyCantTargetAbility(final StaticAbility stAb, final Player player,
-            final SpellAbility spellAbility) {
-        final Card source = spellAbility.getHostCard();
-        final Player activator = spellAbility.getActivatingPlayer();
+    public static boolean applyCantTargetAbility(final StaticAbility stAb, final Player player, final SpellAbility spellAbility) {
 
         if (stAb.hasParam("ValidCard") || stAb.hasParam("AffectedZone")) {
             return false;
@@ -109,24 +117,20 @@ public class StaticAbilityCantTarget {
             return false;
         }
 
-        if (stAb.hasParam("Hexproof") && (activator != null)) {
-            for (KeywordInterface kw : activator.getKeywords()) {
-                String k = kw.getOriginal();
-                if (k.startsWith("IgnoreHexproof")) {
-                    String[] m = k.split(":");
-                    if (player.isValid(m[1].split(","), activator, source, null)) {
-                        return false;
-                    }
-                }
-            }
-        }
-
-        return common(stAb, spellAbility);
+        return common(stAb, player, spellAbility);
     }
 
-    protected static boolean common(final StaticAbility stAb, final SpellAbility spellAbility) {
+    protected static boolean common(final StaticAbility stAb, GameEntity entity, final SpellAbility spellAbility) {
         final Card source = spellAbility.getHostCard();
         final Player activator = spellAbility.getActivatingPlayer();
+
+        if (stAb.hasParam("Hexproof") && StaticAbilityIgnoreHexproofShroud.ignore(entity, spellAbility, Keyword.HEXPROOF)) {
+            return false;
+        }
+
+        if (stAb.hasParam("Shroud") && StaticAbilityIgnoreHexproofShroud.ignore(entity, spellAbility, Keyword.SHROUD)) {
+            return false;
+        }
 
         if (!stAb.matchesValidParam("ValidSA", spellAbility)) {
             return false;
