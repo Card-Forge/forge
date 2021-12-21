@@ -663,7 +663,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (amount <= 0 || hasLost()) {
             return 0;
         }
-        //String additionalLog = "";
 
         boolean infect = source.hasKeyword(Keyword.INFECT)
                 || hasKeyword("All damage is dealt to you as though its source had infect.");
@@ -674,6 +673,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         else if (!hasKeyword("Damage doesn't cause you to lose life.")) {
             // rule 118.2. Damage dealt to a player normally causes that player to lose that much life.
             if (isCombat) {
+                // currently all abilities treat is as single event
                 simultaneousDamage += amount;
             } else {
                 loseLife(amount, true, false);
