@@ -108,6 +108,7 @@ import forge.game.staticability.StaticAbilityCantDiscard;
 import forge.game.staticability.StaticAbilityCantDraw;
 import forge.game.staticability.StaticAbilityCantGainLosePayLife;
 import forge.game.staticability.StaticAbilityCantPutCounter;
+import forge.game.staticability.StaticAbilityCantTarget;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
@@ -1139,12 +1140,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // CantTarget static abilities
-        for (final Card ca : getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (stAb.applyAbility("CantTarget", this, sa)) {
-                    return false;
-                }
-            }
+        if (StaticAbilityCantTarget.cantTarget(this, sa)) {
+            return false;
         }
 
         return !hasProtectionFrom(sa.getHostCard());

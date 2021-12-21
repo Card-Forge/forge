@@ -57,6 +57,7 @@ import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.staticability.StaticAbilityCantPutCounter;
 import forge.game.staticability.StaticAbilityCantSacrifice;
+import forge.game.staticability.StaticAbilityCantTarget;
 import forge.game.staticability.StaticAbilityCantTransform;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -5960,12 +5961,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         // CantTarget static abilities
-        for (final Card ca : getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (stAb.applyAbility("CantTarget", this, sa)) {
-                    return false;
-                }
-            }
+        if (StaticAbilityCantTarget.cantTarget(this, sa)) {
+            return false;
         }
 
         // keywords don't work outside battlefield
