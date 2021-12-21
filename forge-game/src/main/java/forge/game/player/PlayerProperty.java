@@ -392,6 +392,10 @@ public class PlayerProperty {
             if (player.getCreaturesAttackedThisTurn().isEmpty()) {
                 return false;
             }
+        } else if (property.equals("VenturedThisTurn")) {
+            if (player.getVenturedThisTurn() < 1) {
+                return false;
+            }
         }
         return true;
     }
