@@ -59,6 +59,12 @@ public class SacrificeAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             final PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
             if (targetableOpps.isEmpty()) {
+                // TODO also check if own SacMe makes this a reasonable (or even better) choice
+                if (mandatory && sa.canTarget(ai)) {
+                    sa.resetTargets();
+                    sa.getTargets().add(ai);
+                    return true;
+                }
                 return false;
             }
             final Player opp = targetableOpps.max(PlayerPredicates.compareByLife());

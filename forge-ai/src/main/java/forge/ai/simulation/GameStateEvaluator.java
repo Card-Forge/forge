@@ -155,6 +155,7 @@ public class GameStateEvaluator {
             // on something that already has lifelink is a net win.
             return 0;
         } else {
+            // TODO treat cards like Captive Audience negative
             // e.g. a 5 CMC permanent results in 200, whereas a 5/5 creature is ~225
             int value = 50 + 30 * c.getCMC();
             if (c.isPlaneswalker()) {

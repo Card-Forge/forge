@@ -617,8 +617,8 @@ public class ReplacementHandler {
 
             Map<String, String> mapParams = re.getMapParams();
             boolean isPrevention = (mapParams.containsKey("Prevent") && mapParams.get("Prevent").equals("True")) || mapParams.containsKey("PreventionEffect");
-            boolean executePerSource = (mapParams.containsKey("ExecuteMode") && mapParams.get("ExecuteMode").equals("PerSource"));
-            boolean executePerTarget = (mapParams.containsKey("ExecuteMode") && mapParams.get("ExecuteMode").equals("PerTarget"));
+            boolean executePerSource = mapParams.containsKey("ExecuteMode") && mapParams.get("ExecuteMode").equals("PerSource");
+            boolean executePerTarget = mapParams.containsKey("ExecuteMode") && mapParams.get("ExecuteMode").equals("PerTarget");
 
             while (!executedParamList.isEmpty()) {
                 Map<AbilityKey, Object> runParams = AbilityKey.newMap();
@@ -660,8 +660,8 @@ public class ReplacementHandler {
                 }
 
                 if (damageSum > 0) {
-                    runParams.put(AbilityKey.DamageSource, (damageSourceList.size() > 1 ? damageSourceList : damageSourceList.get(0)));
-                    runParams.put(AbilityKey.Affected, (affectedList.size() > 1 ? affectedList : affectedList.get(0)));
+                    runParams.put(AbilityKey.DamageSource, damageSourceList.size() > 1 ? damageSourceList : damageSourceList.get(0));
+                    runParams.put(AbilityKey.Affected, affectedList.size() > 1 ? affectedList : affectedList.get(0));
                     runParams.put(AbilityKey.DamageAmount, damageSum);
 
                     re.setReplacingObjects(runParams, re.getOverridingAbility());
