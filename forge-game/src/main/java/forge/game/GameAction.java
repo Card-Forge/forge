@@ -2268,6 +2268,14 @@ public class GameAction {
             }
         }
 
+        // lose life simultaneously
+        if (isCombat) {
+            for (Player p : game.getPlayers()) {
+                p.dealCombatDamage();
+            }
+            game.getTriggerHandler().runWaitingTriggers();
+        }
+
         if (cause != null) {
             // Remember objects as needed
             final Card sourceLKI = game.getChangeZoneLKIInfo(cause.getHostCard());

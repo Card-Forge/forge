@@ -808,9 +808,6 @@ public class AbilityUtils {
                     if (parent != null) {
                         list = parent.findTargetedCards();
                     }
-                    else {
-                        list = null;
-                    }
                 }
                 else if (calcX[0].startsWith("TriggerRemembered")) {
                     final SpellAbility root = sa.getRootAbility();
