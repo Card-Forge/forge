@@ -392,7 +392,7 @@ public class ComputerUtil {
             // search for permanents with SacMe. priority 1 is the lowest, priority 5 the highest
             for (int ip = 0; ip < 6; ip++) {
                 final int priority = 6 - ip;
-                if (priority == 2  && ai.isCardInPlay("Crucible of Worlds")) {
+                if (priority == 2 && ai.isCardInPlay("Crucible of Worlds")) {
                     CardCollection landsInPlay = CardLists.getType(typeList, "Land");
                     if (!landsInPlay.isEmpty()) {
                         // Don't need more land.
@@ -402,7 +402,7 @@ public class ComputerUtil {
                 final CardCollection sacMeList = CardLists.filter(typeList, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        return c.hasSVar("SacMe") && (Integer.parseInt(c.getSVar("SacMe")) == priority);
+                        return c.hasSVar("SacMe") && Integer.parseInt(c.getSVar("SacMe")) == priority;
                     }
                 });
                 if (!sacMeList.isEmpty()) {
