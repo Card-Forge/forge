@@ -1095,7 +1095,7 @@ public class DamageDealAi extends DamageAiBase {
                     }
                     // currently works only with cards that don't have additional costs (only mana is supported)
                     if (ab.getPayCosts().hasNoManaCost() || ab.getPayCosts().hasOnlySpecificCostType(CostPartMana.class)) {
-                        String dmgDef = "0";
+                        String dmgDef = "";
                         if (ab.getApi() == ApiType.DealDamage) {
                             dmgDef = ab.getParamOrDefault("NumDmg", "0");
                         } else if (ab.getApi() == ApiType.Pump) {
