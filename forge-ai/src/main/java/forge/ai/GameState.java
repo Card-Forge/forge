@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.StaticData;
 import forge.card.CardStateName;
 import forge.card.MagicColor;
+import forge.card.mana.ManaAtom;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -153,7 +154,7 @@ public abstract class GameState {
             sb.append(TextUtil.concatNoSpace("humanmanapool=", humanManaPool, "\n"));
         }
         if (!computerManaPool.isEmpty()) {
-            sb.append(TextUtil.concatNoSpace("aimanapool=", humanManaPool, "\n"));
+            sb.append(TextUtil.concatNoSpace("aimanapool=", computerManaPool, "\n"));
         }
 
         sb.append(TextUtil.concatNoSpace("activeplayer=", tChangePlayer, "\n"));
@@ -710,7 +711,7 @@ public abstract class GameState {
 
     private String processManaPool(ManaPool manaPool) {
         StringBuilder mana = new StringBuilder();
-        for (final byte c : MagicColor.WUBRGC) {
+        for (final byte c : ManaAtom.MANATYPES) {
             int amount = manaPool.getAmountOfColor(c);
             for (int i = 0; i < amount; i++) {
                 mana.append(MagicColor.toShortString(c)).append(" ");

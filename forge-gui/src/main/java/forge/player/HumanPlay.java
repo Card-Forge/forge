@@ -677,7 +677,6 @@ public class HumanPlay {
         }
         if (!toPay.isPaid()) {
             // Input is somehow clearing out the offering card?
-
             inpPayment = new InputPayManaOfCostPayment(controller, toPay, ability, activator, matrix, effect);
             inpPayment.setMessagePrefix(prompt);
             inpPayment.showAndWait();
