@@ -1,7 +1,12 @@
 package forge.gamemodes.match.input;
 
+import java.util.ArrayList;
+
+import forge.ai.ComputerUtilMana;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
+import forge.game.cost.CostPayment;
+import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
@@ -14,12 +19,17 @@ import forge.util.Localizer;
 
 public class InputPayManaOfCostPayment extends InputPayMana {
 
-    public InputPayManaOfCostPayment(final PlayerControllerHuman controller, ManaCostBeingPaid cost, SpellAbility spellAbility, Player payer, ManaConversionMatrix matrix, boolean effect, boolean mandatory) {
+    public InputPayManaOfCostPayment(final PlayerControllerHuman controller, ManaCostBeingPaid cost, SpellAbility spellAbility, Player payer, ManaConversionMatrix matrix, boolean effect) {
         super(controller, spellAbility, payer, effect);
         manaCost = cost;
         extraMatrix = matrix;
-        this.mandatory = mandatory;
         applyMatrix();
+
+        // CR 118.3c forced cast must use pool mana
+        // TODO this introduces a small risk to lock up the GUI if the human "wastes" enough mana for abilities like Doubling Cube
+        if (spellAbility.getPayCosts().isMandatory()) {
+            mandatory = ComputerUtilMana.payManaCostFromPool(new ManaCostBeingPaid(cost), spellAbility, payer, true, new ArrayList<Mana>());
+        }
 
         // Set Mana cost being paid for SA to be able to reference it later
         player.pushPaidForSA(saPaidFor);

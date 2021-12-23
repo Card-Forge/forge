@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.ImageKeys;
-import forge.ai.ComputerUtilMana;
 import forge.game.cost.*;
 import forge.game.spellability.SpellAbilityStackInstance;
 import org.apache.commons.lang3.StringUtils;
@@ -31,7 +30,6 @@ import forge.game.card.CardView;
 import forge.game.card.CardZoneTable;
 import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
-import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
@@ -680,14 +678,7 @@ public class HumanPlay {
         if (!toPay.isPaid()) {
             // Input is somehow clearing out the offering card?
 
-            // forced cast must use pool mana
-            // TODO this introduces a small risk to lock up the GUI if the human "wastes" enough mana for abilities like Doubling Cube
-            boolean mandatory = false;
-            if (matrix instanceof CostPayment && ((CostPayment) matrix).getCost().isMandatory()) {
-                mandatory = ComputerUtilMana.payManaCostFromPool(new ManaCostBeingPaid(toPay), ability, activator, true, new ArrayList<Mana>());
-            }
-
-            inpPayment = new InputPayManaOfCostPayment(controller, toPay, ability, activator, matrix, effect, mandatory);
+            inpPayment = new InputPayManaOfCostPayment(controller, toPay, ability, activator, matrix, effect);
             inpPayment.setMessagePrefix(prompt);
             inpPayment.showAndWait();
             if (!inpPayment.isPaid()) {

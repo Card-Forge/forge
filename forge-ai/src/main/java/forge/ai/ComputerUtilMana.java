@@ -998,11 +998,12 @@ public class ComputerUtilMana {
             }
         }
 
+        // refund any mana taken from mana pool when test
+        if (test) {
+            refundMana(manaSpentToPay, ai, sa);
+        }
+
         if (cost.isPaid()) {
-            // refund any mana taken from mana pool when test
-            if (test) {
-                refundMana(manaSpentToPay, ai, sa);
-            }
             handleOfferingsAI(sa, test, cost.isPaid());
             return true;
         }
@@ -1953,7 +1954,6 @@ public class ComputerUtilMana {
             sa.resetSacrificedAsEmerge();
         }
     }
-
 
     /**
      * Matches list of creatures to shards in mana cost for convoking.
