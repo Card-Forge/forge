@@ -23,9 +23,11 @@ import java.util.Map;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.mana.ManaConversionMatrix;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -179,8 +181,19 @@ public class CostPayment extends ManaConversionMatrix {
         }
 
         Map<CostPart, PaymentDecision> decisions = Maps.newHashMap();
-        
-        List<CostPart> parts = CostAdjustment.adjust(cost, ability).getCostParts();
+        Cost adjustedCost = CostAdjustment.adjust(cost, ability);
+        List<CostPart> parts = adjustedCost.getCostParts();
+
+        // For Trinisphere
+        if (!adjustedCost.hasManaCost()) {
+            ManaCostBeingPaid mc = new ManaCostBeingPaid(ManaCost.ZERO);
+            CostAdjustment.adjust(mc, ability, null, false);
+            if (mc.getConvertedManaCost() > 0) {
+                // add placeholder so AI will calculate it
+                parts.add(new CostPartMana(ManaCost.ZERO, null));
+            }
+        }
+
         // Set all of the decisions before attempting to pay anything
 
         final Game game = decisionMaker.getPlayer().getGame();
