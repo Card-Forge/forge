@@ -14,10 +14,11 @@ import forge.util.Localizer;
 
 public class InputPayManaOfCostPayment extends InputPayMana {
 
-    public InputPayManaOfCostPayment(final PlayerControllerHuman controller, ManaCostBeingPaid cost, SpellAbility spellAbility, Player payer, ManaConversionMatrix matrix, boolean effect) {
+    public InputPayManaOfCostPayment(final PlayerControllerHuman controller, ManaCostBeingPaid cost, SpellAbility spellAbility, Player payer, ManaConversionMatrix matrix, boolean effect, boolean mandatory) {
         super(controller, spellAbility, payer, effect);
         manaCost = cost;
         extraMatrix = matrix;
+        this.mandatory = mandatory;
         applyMatrix();
 
         // Set Mana cost being paid for SA to be able to reference it later

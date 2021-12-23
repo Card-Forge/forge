@@ -186,6 +186,9 @@ public class Cost implements Serializable {
     public final boolean isMandatory() {
         return this.isMandatory;
     }
+    public final void setMandatory(boolean b) {
+        isMandatory = b;
+    }
 
     public final boolean isAbility() {
         return this.isAbility;

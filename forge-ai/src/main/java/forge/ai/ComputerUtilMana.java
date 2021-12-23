@@ -977,7 +977,7 @@ public class ComputerUtilMana {
      * @param manaSpentToPay list of mana spent
      * @return whether the floating mana is sufficient to pay the cost fully
      */
-    private static boolean payManaCostFromPool(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai,
+    public static boolean payManaCostFromPool(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai,
             final boolean test, List<Mana> manaSpentToPay) {
         final boolean hasConverge = sa.getHostCard().hasConverge();
         List<ManaCostShard> unpaidShards = cost.getUnpaidShards();

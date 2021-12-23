@@ -44,6 +44,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     protected ManaCostBeingPaid manaCost;
     protected final SpellAbility saPaidFor;
     protected boolean effect;
+    protected boolean mandatory = false;
     private final boolean wasFloatingMana;
     private final Queue<Card> delaySelectCards = new LinkedList<>();
 
@@ -406,9 +407,9 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     protected void updateButtons() {
         if (supportAutoPay()) {
-            getController().getGui().updateButtons(getOwner(), Localizer.getInstance().getMessage("lblAuto"), Localizer.getInstance().getMessage("lblCancel"), false, true, false);
+            getController().getGui().updateButtons(getOwner(), Localizer.getInstance().getMessage("lblAuto"), Localizer.getInstance().getMessage("lblCancel"), false, !mandatory, false);
         } else {
-            getController().getGui().updateButtons(getOwner(), "", Localizer.getInstance().getMessage("lblCancel"), false, true, false);
+            getController().getGui().updateButtons(getOwner(), "", Localizer.getInstance().getMessage("lblCancel"), false, !mandatory, false);
         }
     }
 
@@ -430,7 +431,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 canPayManaCost = proc.getResult();
             }
             if (canPayManaCost) { //enabled Auto button if mana cost can be paid
-                getController().getGui().updateButtons(getOwner(), Localizer.getInstance().getMessage("lblAuto"), Localizer.getInstance().getMessage("lblCancel"), true, true, true);
+                getController().getGui().updateButtons(getOwner(), Localizer.getInstance().getMessage("lblAuto"), Localizer.getInstance().getMessage("lblCancel"), true, !mandatory, true);
             }
         }
         showMessage(getMessage(), saPaidFor.getView());
@@ -447,8 +448,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         if (isAlreadyPaid()) {
             done();
             stop();
-        }
-        else {
+        } else {
             FThreads.invokeInEdtNowOrLater(new Runnable() {
                 @Override
                 public void run() {
