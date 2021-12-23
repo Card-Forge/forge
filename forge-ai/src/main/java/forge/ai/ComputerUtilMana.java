@@ -679,8 +679,13 @@ public class ComputerUtilMana {
         adjustManaCostToAvoidNegEffects(cost, sa.getHostCard(), ai);
 
         List<Mana> manaSpentToPay = test ? new ArrayList<>() : sa.getPayingMana();
+        List<SpellAbility> paymentList = Lists.newArrayList();
+
+        if (payManaCostFromPool(cost, sa, ai, test, manaSpentToPay)) {
+            return true;    // paid all from floating mana
+        }
+
         boolean purePhyrexian = cost.containsOnlyPhyrexianMana();
-        int testEnergyPool = ai.getCounters(CounterEnumType.ENERGY);
 
         boolean ignoreColor = false, ignoreType = false;
         StaticAbility mayPlay = sa.getMayPlay();
@@ -691,13 +696,6 @@ public class ComputerUtilMana {
                 ignoreType = true;
             }
         }
-
-        List<SpellAbility> paymentList = Lists.newArrayList();
-
-        if (payManaCostFromPool(cost, sa, ai, test, manaSpentToPay)) {
-            return true;    // paid all from floating mana
-        }
-
         boolean hasConverge = sa.getHostCard().hasConverge();
         ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = getSourcesForShards(cost, sa, ai, test,
                 checkPlayable, manaSpentToPay, hasConverge, ignoreColor, ignoreType);
@@ -706,6 +704,7 @@ public class ComputerUtilMana {
             return false;    // no mana abilities to use for paying
         }
 
+        int testEnergyPool = ai.getCounters(CounterEnumType.ENERGY);
         final ManaPool manapool = ai.getManaPool();
         ManaCostShard toPay = null;
         List<SpellAbility> saExcludeList = new ArrayList<>();
