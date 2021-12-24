@@ -1,0 +1,10 @@
+Name:Obsessive Collector
+ManaCost:3 U
+Types:Creature Spirit
+PT:4/3
+K:Flying
+K:Ward:2
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigSeek | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, seek a card with mana value equal to the number of cards in your hand.
+SVar:TrigSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.cmcEQX | ChangeNum$ 1
+SVar:X:Count$InYourHand
+Oracle:Flying\nWard {2}\nWhenever Obsessive Collector deals combat damage to a player, seek a card with mana value equal to the number of cards in your hand.
