@@ -1,0 +1,10 @@
+Name:Predatory Sludge
+ManaCost:2 B
+Types:Creature Ooze
+PT:3/3
+K:Menace
+K:ETBReplacement:Other:ChooseC
+SVar:ChooseC:DB$ ChooseCard | Defined$ You | Choices$ Permanent.YouDontCtrl | AILogic$ AtLeast1 | Mandatory$ True | SubAbility$ DBDelayTrig | SpellDescription$ As CARDNAME enters the battlefield, choose a permanent you don't control. When the chosen permanent is put into a graveyard from the battlefield, conjure a card named Predatory Sludge into your hand.
+SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ ChosenCard | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigConjure | TriggerDescription$ When the chosen permanent is put into a graveyard from the battlefield, conjure a card named Predatory Sludge into your hand.
+SVar:TrigConjure:DB$ MakeCard | Name$ Predatory Sludge | Zone$ Hand
+Oracle:Menace\nAs Predatory Sludge enters the battlefield, choose a permanent you don't control. When the chosen permanent is put into a graveyard from the battlefield, conjure a card named Predatory Sludge into your hand.
