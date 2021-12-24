@@ -1,0 +1,16 @@
+Name:Grizzled Huntmaster
+ManaCost:1 G G
+Types:Creature Human Warrior
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may exile a creature card from your hand. If you do, search your hand and library for any number of cards with the same name, exile them, then shuffle. Choose a creature card you own from outside the game. Conjure a duplicate of that card into your hand for each card exiled from your hand this way.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card.Creature | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ ExileHand
+SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ You | ChangeType$ Remembered.sameName | ChangeNum$ NumInHand | Chooser$ You | Imprint$ True | SubAbility$ ExileLib | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ You | ChangeType$ Remembered.sameName | ChangeNum$ NumInLib | Chooser$ You | Shuffle$ True | SubAbility$ DBChooseSb | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:DBChooseSb:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Card.Creature+YouOwn | ChoiceZone$ Sideboard | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | DefinedName$ ChosenCard | Zone$ Hand | Amount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True | ClearChosenCard$ True
+SVar:NumInLib:Count$InYourLibrary
+SVar:NumInHand:Count$InYourHand
+SVar:X:Count$RememberedSize/Plus.Y
+SVar:Y:Count$ImprintedSize
+Oracle:When Grizzled Huntmaster enters the battlefield, you may exile a creature card from your hand. If you do, search your hand and library for any number of cards with the same name, exile them, then shuffle. Choose a creature card you own from outside the game. Conjure a duplicate of that card into your hand for each card exiled from your hand this way.
