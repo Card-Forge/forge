@@ -36,16 +36,14 @@ import forge.game.zone.ZoneType;
 public class CostAdjustment {
 
     public static Cost adjust(final Cost cost, final SpellAbility sa) {
-        final Player player = sa.getActivatingPlayer();
-        final Card host = sa.getHostCard();
-        final Game game = player.getGame();
-
         if (sa.isTrigger() || cost == null) {
             return cost;
         }
 
+        final Player player = sa.getActivatingPlayer();
+        final Card host = sa.getHostCard();
+        final Game game = player.getGame();
         Cost result = cost.copy();
-
         boolean isStateChangeToFaceDown = false;
 
         if (sa.isSpell()) {
@@ -158,14 +156,14 @@ public class CostAdjustment {
     // If cardsToDelveOut is null, will immediately exile the delved cards and remember them on the host card.
     // Otherwise, will return them in cardsToDelveOut and the caller is responsible for doing the above.
     public static final void adjust(ManaCostBeingPaid cost, final SpellAbility sa, CardCollection cardsToDelveOut, boolean test) {
-        final Game game = sa.getActivatingPlayer().getGame();
-        final Card originalCard = sa.getHostCard();
-
         if (sa.isTrigger()) {
             return;
         }
 
+        final Game game = sa.getActivatingPlayer().getGame();
+        final Card originalCard = sa.getHostCard();
         boolean isStateChangeToFaceDown = false;
+
         if (sa.isSpell()) {
             if (sa.isCastFaceDown()) {
                 // Turn face down to apply cost modifiers correctly

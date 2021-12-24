@@ -179,8 +179,9 @@ public class CostPayment extends ManaConversionMatrix {
         }
 
         Map<CostPart, PaymentDecision> decisions = Maps.newHashMap();
-        
-        List<CostPart> parts = CostAdjustment.adjust(cost, ability).getCostParts();
+        // for Trinisphere make sure to include Zero
+        List<CostPart> parts = CostAdjustment.adjust(cost, ability).getCostPartsWithZeroMana();
+
         // Set all of the decisions before attempting to pay anything
 
         final Game game = decisionMaker.getPlayer().getGame();
