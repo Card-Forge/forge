@@ -1,0 +1,8 @@
+Name:Hollowhenge Wrangler
+ManaCost:3 G G
+Types:Creature Elemental
+PT:6/6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSeek | TriggerDescription$ When CARDNAME enters the battlefield, seek a land card.
+SVar:TrigSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Land | ChangeNum$ 1
+A:AB$ MakeCard | Cost$ Discard<1/Land/land> | Name$ Hollowhenge Beast | Zone$ Hand | AdditionalActivationZone$ Graveyard | StackDescription$ Conjure a card named Hollowhenge Beast into your hand. | SpellDescription$ Conjure a card named Hollowhenge Beast into your hand. You may also activate this ability while CARDNAME is in your graveyard.
+Oracle:When Hollowhenge Wrangler enters the battlefield, seek a land card.\nDiscard a land card: Conjure a card named Hollowhenge Beast into your hand. You may also activate this ability while Hollowhenge Wrangler is in your graveyard.
