@@ -154,6 +154,7 @@ public class DiscardAi extends SpellAbilityAi {
             } else if (!opp.canDiscardBy(sa, true)) { // e.g. Tamiyo, Collector of Tales
                 continue;
             }
+            // TODO when DiscardValid is used and opponent plays with hand revealed, check if he has matching cards
             if (sa.usesTargeting()) {
                 if (sa.canTarget(opp)) {
                     sa.resetTargets();

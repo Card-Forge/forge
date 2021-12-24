@@ -48,6 +48,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     private final SpellAbility ability;
     private final Card source;
     private String orString = null;
+    private boolean mandatory;
 
     public HumanCostDecision(final PlayerControllerHuman controller, final Player p, final SpellAbility sa, final boolean effect, final Card source) {
         this(controller, p, sa, effect, source, null);
@@ -56,6 +57,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         super(p, effect);
         this.controller = controller;
         ability = sa;
+        mandatory = sa.getPayCosts().isMandatory();
         this.source = source;
         this.orString = orString;
     }
@@ -84,7 +86,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         if (discardType.equals("Hand")) {
-            if (!controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblDoYouWantDiscardYourHand"), ability)) {
+            if (!mandatory && !controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblDoYouWantDiscardYourHand"), ability)) {
                 return null;
             }
             if (hand.size() > 1 && ability.getActivatingPlayer() != null) {
@@ -167,7 +169,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, hand, ability);
         inp.setMessage(Localizer.getInstance().getMessage("lblSelectNMoreTargetTypeCardToDiscard", "%d", cost.getDescriptiveType()));
-        inp.setCancelAllowed(true);
+        inp.setCancelAllowed(!mandatory);
         inp.showAndWait();
         if (inp.hasCancelled() || inp.getSelected().size() != c) {
             return null;
@@ -258,7 +260,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (cost.from == ZoneType.Battlefield || cost.from == ZoneType.Hand) {
             final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, list, ability);
             inp.setMessage(Localizer.getInstance().getMessage("lblExileNCardsFromYourZone", "%d", cost.getFrom().getTranslatedName()));
-            inp.setCancelAllowed(true);
+            inp.setCancelAllowed(!mandatory);
             inp.showAndWait();
             return inp.hasCancelled() ? null : PaymentDecision.card(inp.getSelected());
         }
@@ -379,7 +381,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         origin.add(cost.from);
         final CardCollection exiled = new CardCollection();
 
-        final List<Card> chosen = controller.chooseCardsForZoneChange(ZoneType.Exile, origin, sa, typeList, 0,
+        final List<Card> chosen = controller.chooseCardsForZoneChange(ZoneType.Exile, origin, sa, typeList, mandatory ? nNeeded : 0,
                 nNeeded, null, cost.toString(), null);
 
         exiled.addAll(chosen);
@@ -539,7 +541,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     public PaymentDecision visit(final CostPayLife cost) {
         Integer c = cost.getAbilityAmount(ability);
 
-        if (ability.getPayCosts().isMandatory()) {
+        if (mandatory) {
             return PaymentDecision.number(c);
         }
 
@@ -671,7 +673,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, typeList, ability);
         inp.setMessage(Localizer.getInstance().getMessage("lblPutNTypeCounterOnTarget", String.valueOf(c), cost.getCounter().getName(), cost.getDescriptiveType()));
-        inp.setCancelAllowed(true);
+        inp.setCancelAllowed(!mandatory);
         inp.showAndWait();
 
         if (inp.hasCancelled()) {
@@ -695,7 +697,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                     cost.getType().split(";"), player, source, ability);
 
             final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, validCards, ability);
-            inp.setCancelAllowed(true);
+            inp.setCancelAllowed(!mandatory);
             inp.setMessage(Localizer.getInstance().getMessage("lblNTypeCardsToHand", "%d", cost.getDescriptiveType()));
             inp.showAndWait();
             if (inp.hasCancelled()) {
@@ -765,7 +767,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             inp = new InputSelectCardsFromList(controller, num, num, hand, ability);
             inp.setMessage(Localizer.getInstance().getMessage("lblSelectNMoreTypeCardsTpReveal", "%d", cost.getDescriptiveType()));
         }
-        inp.setCancelAllowed(true);
+        inp.setCancelAllowed(!mandatory);
         inp.showAndWait();
         if (inp.hasCancelled()) {
             return null;
@@ -981,7 +983,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         if (cost.payCostFromSource()) {
             if (source.getController() == ability.getActivatingPlayer() && source.isInPlay()) {
-                return ability.getPayCosts().isMandatory() || controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblSacrificeCardConfirm", CardTranslation.getTranslatedName(source.getName())), ability) ? PaymentDecision.card(source) : null;
+                return mandatory || controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblSacrificeCardConfirm", CardTranslation.getTranslatedName(source.getName())), ability) ? PaymentDecision.card(source) : null;
             }
             return null;
         }
@@ -1007,7 +1009,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, list, ability);
         inp.setMessage(Localizer.getInstance().getMessage("lblSelectATargetToSacrifice", cost.getDescriptiveType(), "%d"));
-        inp.setCancelAllowed(true);
+        inp.setCancelAllowed(!mandatory);
         inp.showAndWait();
         if (inp.hasCancelled()) {
             return null;
@@ -1116,7 +1118,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, typeList, ability);
-        inp.setCancelAllowed(true);
+        inp.setCancelAllowed(!mandatory);
         inp.setMessage(Localizer.getInstance().getMessage("lblSelectATargetToTap", cost.getDescriptiveType(), "%d"));
         inp.showAndWait();
         if (inp.hasCancelled()) {
