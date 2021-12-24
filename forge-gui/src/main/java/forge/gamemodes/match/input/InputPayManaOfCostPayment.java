@@ -1,14 +1,14 @@
 package forge.gamemodes.match.input;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import forge.ai.ComputerUtilMana;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
-import forge.game.cost.CostPayment;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
+import forge.game.mana.ManaPool;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.localinstance.properties.ForgePreferences;
@@ -28,7 +28,9 @@ public class InputPayManaOfCostPayment extends InputPayMana {
         // CR 118.3c forced cast must use pool mana
         // TODO this introduces a small risk to lock up the GUI if the human "wastes" enough mana for abilities like Doubling Cube
         if (spellAbility.getPayCosts().isMandatory()) {
-            mandatory = ComputerUtilMana.payManaCostFromPool(new ManaCostBeingPaid(cost), spellAbility, payer, true, new ArrayList<Mana>());
+            List<Mana> refund = new ArrayList<>();
+            mandatory = ManaPool.payManaCostFromPool(new ManaCostBeingPaid(cost), spellAbility, payer, true, refund);
+            ManaPool.refundMana(refund, payer, spellAbility);
         }
 
         // Set Mana cost being paid for SA to be able to reference it later
