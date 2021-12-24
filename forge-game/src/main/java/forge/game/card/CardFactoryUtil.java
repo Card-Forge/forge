@@ -26,6 +26,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import forge.game.event.GameEventCardForetold;
+import forge.game.trigger.TriggerType;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -2892,6 +2893,7 @@ public class CardFactoryUtil {
                     final Game game = getHostCard().getGame();
                     final Card c = game.getAction().exile(getHostCard(), this);
                     c.setForetold(true);
+                    game.getTriggerHandler().runTrigger(TriggerType.IsForetold, AbilityKey.mapFromCard(c), false);
                     c.setForetoldThisTurn(true);
                     c.turnFaceDown(true);
                     // look at the exiled card
