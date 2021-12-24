@@ -1,0 +1,8 @@
+Name:Suntail Squadron
+ManaCost:2 W W
+Types:Instant
+A:SP$ MakeCard | Name$ Suntail Hawk | Zone$ Hand | SubAbility$ DBRepeat
+SVar:DBRepeat:DB$ Repeat | RepeatSubAbility$ DBConjure | RepeatCheckSVar$ X | RepeatSVarCompare$ LT7
+SVar:DBConjure:DB$ MakeCard | Name$ Suntail Hawk | Zone$ Hand
+SVar:X:Count$InYourHand
+Oracle:Conjure a card named Suntail Hawk into your hand. If you have fewer than 7 cards in hand, repeat this process.
