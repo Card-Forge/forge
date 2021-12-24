@@ -1,0 +1,14 @@
+Name:Electrostatic Blast
+ManaCost:1 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SubAbility$ DBDelayTrigger | SpellDescription$ CARDNAME deals 2 damage to any target. When you cast your next instant or sorcery spell, exile the top three cards of your library. You may play one of those cards until end of turn.
+SVar:DBDelayTrigger:DB$ DelayedTrigger | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ TrigExile | TriggerDescription$ When you cast your next instant or sorcery spell, exile the top three cards of your library. You may play one of those cards until end of turn.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | Triggers$ Play1,Play2 | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Exile | Affected$ Card.IsRemembered | MayPlay$ True | Description$ You may play one of those cards until end of turn.
+SVar:Play1:Mode$ SpellCast | ValidCard$ Card.IsRemembered | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ ExileSelf | Static$ True
+SVar:Play2:Mode$ LandPlayed | ValidCard$ Land.IsRemembered | TriggerZones$ Command | Execute$ ExileSelf | Static$ True
+SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Type$Instant|Sorcery
+Oracle:Electrostatic Blast deals 2 damage to any target. When you cast your next instant or sorcery spell, exile the top three cards of your library. You may play one of those cards until end of turn.
