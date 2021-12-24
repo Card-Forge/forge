@@ -26,7 +26,7 @@ public class InputPayManaOfCostPayment extends InputPayMana {
         applyMatrix();
 
         // CR 118.3c forced cast must use pool mana
-        // TODO this introduces a small risk to lock up the GUI if the human "wastes" enough mana for abilities like Doubling Cube
+        // TODO this introduces a small risk for illegal payments if the human "wastes" enough mana for abilities like Doubling Cube
         if (spellAbility.getPayCosts().isMandatory()) {
             List<Mana> refund = new ArrayList<>();
             mandatory = ManaPool.payManaCostFromPool(new ManaCostBeingPaid(cost), spellAbility, payer, true, refund);
@@ -39,7 +39,6 @@ public class InputPayManaOfCostPayment extends InputPayMana {
     }
 
     private static final long serialVersionUID = 3467312982164195091L;
-    //private int phyLifeToLose = 0;
     private ManaConversionMatrix extraMatrix;
 
     @Override
