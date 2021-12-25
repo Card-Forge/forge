@@ -1462,13 +1462,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         //External activatables from all opponents
-        for (final Player opponent : getOpponents()) {
-            cl.addAll(opponent.getZone(ZoneType.Exile).getCardsPlayerCanActivate(this));
-            cl.addAll(opponent.getZone(ZoneType.Graveyard).getCardsPlayerCanActivate(this));
-            cl.addAll(opponent.getZone(ZoneType.Library).getCardsPlayerCanActivate(this));
-            if (opponent.hasKeyword("Play with your hand revealed.")) {
-                cl.addAll(opponent.getZone(ZoneType.Hand).getCardsPlayerCanActivate(this));
-            }
+        for (final Player other : getAllOtherPlayers()) {
+            cl.addAll(other.getZone(ZoneType.Exile).getCardsPlayerCanActivate(this));
+            cl.addAll(other.getZone(ZoneType.Graveyard).getCardsPlayerCanActivate(this));
+            cl.addAll(other.getZone(ZoneType.Library).getCardsPlayerCanActivate(this));
+            cl.addAll(other.getZone(ZoneType.Hand).getCardsPlayerCanActivate(this));
         }
         cl.addAll(getGame().getCardsPlayerCanActivateInStack());
         return cl;

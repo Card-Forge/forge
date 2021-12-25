@@ -517,10 +517,10 @@ public class CardView extends GameEntityView {
             }
             break;
         case Hand:
-            if (controller.hasKeyword("Play with your hand revealed.")) {
+            if (controller == viewer) {
                 return true;
             }
-            //$FALL-THROUGH$
+            break;
         case Sideboard:
             //face-up cards in these zones are hidden to opponents unless they specify otherwise
             if (controller.isOpponentOf(viewer) && !mayPlayerLook(viewer)) {
