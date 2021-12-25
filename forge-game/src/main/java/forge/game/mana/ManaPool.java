@@ -291,12 +291,12 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         return true;
     }
 
-    public static void refundMana(List<Mana> manaSpent, Player ai, SpellAbility sa) {
+    public static void refundMana(List<Mana> manaSpent, Player player, SpellAbility sa) {
         if (sa.getHostCard() != null) {
             sa.getHostCard().setCanCounter(true);
         }
         for (final Mana m : manaSpent) {
-            ai.getManaPool().addMana(m);
+            player.getManaPool().addMana(m);
         }
         manaSpent.clear();
     }
@@ -358,12 +358,12 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
      * Checks if the given mana cost can be paid from floating mana.
      * @param cost mana cost to pay for
      * @param sa ability to pay for
-     * @param ai activating player
+     * @param player activating player
      * @param test actual payment is made if this is false
      * @param manaSpentToPay list of mana spent
      * @return whether the floating mana is sufficient to pay the cost fully
      */
-    public static boolean payManaCostFromPool(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai,
+    public static boolean payManaCostFromPool(final ManaCostBeingPaid cost, final SpellAbility sa, final Player player,
             final boolean test, List<Mana> manaSpentToPay) {
         final boolean hasConverge = sa.getHostCard().hasConverge();
         List<ManaCostShard> unpaidShards = cost.getUnpaidShards();
@@ -375,9 +375,9 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
                 }
 
                 // get a mana of this type from floating, bail if none available
-                final Mana mana = CostPayment.getMana(ai, part, sa, cost.getSourceRestriction(), hasConverge ? cost.getColorsPaid() : -1, cost.getXManaCostPaidByColor());
+                final Mana mana = CostPayment.getMana(player, part, sa, cost.getSourceRestriction(), hasConverge ? cost.getColorsPaid() : -1, cost.getXManaCostPaidByColor());
                 if (mana != null) {
-                    if (ai.getManaPool().tryPayCostWithMana(sa, cost, mana, test)) {
+                    if (player.getManaPool().tryPayCostWithMana(sa, cost, mana, test)) {
                         manaSpentToPay.add(0, mana);
                     }
                 }
@@ -387,7 +387,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         if (cost.isPaid()) {
             // refund any mana taken from mana pool when test
             if (test) {
-                refundMana(manaSpentToPay, ai, sa);
+                refundMana(manaSpentToPay, player, sa);
             }
             CostPayment.handleOfferings(sa, test, cost.isPaid());
             return true;

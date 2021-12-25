@@ -241,9 +241,9 @@ public class CostPayment extends ManaConversionMatrix {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a {@link forge.game.mana.Mana} object.
      */
-    public static Mana getMana(final Player ai, final ManaCostShard shard, final SpellAbility saBeingPaidFor,
+    public static Mana getMana(final Player player, final ManaCostShard shard, final SpellAbility saBeingPaidFor,
             String restriction, final byte colorsPaid, Map<String, Integer> xManaCostPaidByColor) {
-        final List<Pair<Mana, Integer>> weightedOptions = selectManaToPayFor(ai.getManaPool(), shard,
+        final List<Pair<Mana, Integer>> weightedOptions = selectManaToPayFor(player.getManaPool(), shard,
             saBeingPaidFor, restriction, colorsPaid, xManaCostPaidByColor);
 
         // Exclude border case
@@ -284,12 +284,12 @@ public class CostPayment extends ManaConversionMatrix {
         }
 
         // if we are simulating mana payment for the human controller, use the first mana available (and avoid prompting the human player)
-        if (!ai.getController().isAI()) {
+        if (!player.getController().isAI()) {
             return manaChoices.get(0);
         }
 
         // Let them choose then
-        return ai.getController().chooseManaFromPool(manaChoices);
+        return player.getController().chooseManaFromPool(manaChoices);
     }
 
     private static List<Pair<Mana, Integer>> selectManaToPayFor(final ManaPool manapool, final ManaCostShard shard,
