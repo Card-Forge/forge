@@ -1086,6 +1086,9 @@ public class DamageDealAi extends DamageAiBase {
             cards.addAll(ai.getCardsIn(ZoneType.Battlefield));
             cards.addAll(ai.getCardsActivableInExternalZones(true));
             for (Card c : cards) {
+                if (c.getZone().getPlayer() != null && c.getZone().getPlayer() != ai && c.mayPlay(ai).isEmpty()) {
+                    continue;
+                }
                 for (SpellAbility ab : c.getSpellAbilities()) {
                     if (ab.equals(sa) || ab.getSubAbility() != null) { // decisions for complex SAs with subs are not supported yet
                         continue;

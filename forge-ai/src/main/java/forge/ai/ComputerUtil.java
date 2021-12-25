@@ -1414,6 +1414,9 @@ public class ComputerUtil {
         all.addAll(ai.getCardsIn(ZoneType.Hand));
 
         for (final Card c : all) {
+            if (c.getZone().getPlayer() != null && c.getZone().getPlayer() != ai && c.mayPlay(ai).isEmpty()) {
+                continue;
+            }
             for (final SpellAbility sa : c.getSpellAbilities()) {
                 if (sa.getApi() == ApiType.Pump && sa.hasParam("KW") && sa.getParam("KW").contains("Haste")) {
                     return true;
@@ -1449,11 +1452,17 @@ public class ComputerUtil {
         final CardCollection all = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
 
         all.addAll(ai.getCardsActivableInExternalZones(true));
-        if (!checkingOther || ai.hasKeyword("Play with your hand revealed.")) {
+        // TODO check if cards can be viewed instead
+        if (!checkingOther) {
             all.addAll(ai.getCardsIn(ZoneType.Hand));
         }
 
         for (final Card c : all) {
+            // check if card is at least available to be played
+            // further improvements might consider if AI has options to steal the spell by making it playable first
+            if (c.getZone().getPlayer() != null && c.getZone().getPlayer() != ai && c.mayPlay(ai).isEmpty()) {
+                continue;
+            }
             for (final SpellAbility sa : c.getSpellAbilities()) {
                 if (sa.getApi() != ApiType.Fog) {
                     continue;
@@ -1461,7 +1470,7 @@ public class ComputerUtil {
 
                 // Avoid re-entry for cards already being considered (e.g. in case the AI is considering
                 // Convoke or Improvise for a Fog-like effect)
-                if (c.hasKeyword("Convoke") || c.hasKeyword("Improvise")) {
+                if (c.hasKeyword(Keyword.CONVOKE) || c.hasKeyword(Keyword.IMPROVISE)) {
                     // TODO skipping for now else this will lead to GUI interaction
                     if (!c.getController().isAI()) {
                         continue;
@@ -1488,6 +1497,9 @@ public class ComputerUtil {
         all.addAll(CardLists.filter(ai.getCardsIn(ZoneType.Hand), Predicates.not(Presets.PERMANENTS)));
 
         for (final Card c : all) {
+            if (c.getZone().getPlayer() != null && c.getZone().getPlayer() != ai && c.mayPlay(ai).isEmpty()) {
+                continue;
+            }
             for (final SpellAbility sa : c.getSpellAbilities()) {
                 if (sa.getApi() != ApiType.DealDamage) {
                     continue;
