@@ -41,7 +41,6 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 
@@ -65,16 +64,6 @@ public class ComputerUtilMana {
     private static boolean payManaCost(final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable, final boolean effect) {
         ManaCostBeingPaid cost = calculateManaCost(sa, test, extraMana);
         return payManaCost(cost, sa, ai, test, checkPlayable, effect);
-    }
-
-    private static void refundMana(List<Mana> manaSpent, Player ai, SpellAbility sa) {
-        if (sa.getHostCard() != null) {
-            sa.getHostCard().setCanCounter(true);
-        }
-        for (final Mana m : manaSpent) {
-            ai.getManaPool().addMana(m);
-        }
-        manaSpent.clear();
     }
 
     /**
@@ -598,7 +587,7 @@ public class ComputerUtilMana {
                 }
 
                 // get a mana of this type from floating, bail if none available
-                final Mana mana = getMana(ai, part, sa, cost.getSourceRestriction(), (byte) -1, cost.getXManaCostPaidByColor());
+                final Mana mana = CostPayment.getMana(ai, part, sa, cost.getSourceRestriction(), (byte) -1, cost.getXManaCostPaidByColor());
                 if (mana != null) {
                     if (ai.getManaPool().tryPayCostWithMana(sa, cost, mana, false)) {
                         manaSpentToPay.add(0, mana);
@@ -609,18 +598,16 @@ public class ComputerUtilMana {
 
         if (cost.isPaid()) {
             // refund any mana taken from mana pool when test
-            refundMana(manaSpentToPay, ai, sa);
-
-            handleOfferingsAI(sa, true, cost.isPaid());
+            ManaPool.refundMana(manaSpentToPay, ai, sa);
+            CostPayment.handleOfferings(sa, true, cost.isPaid());
             return manaSources;
         }
 
         // arrange all mana abilities by color produced.
         final ListMultimap<Integer, SpellAbility> manaAbilityMap = groupSourcesByManaColor(ai, true);
         if (manaAbilityMap.isEmpty()) {
-            refundMana(manaSpentToPay, ai, sa);
-
-            handleOfferingsAI(sa, true, cost.isPaid());
+            ManaPool.refundMana(manaSpentToPay, ai, sa);
+            CostPayment.handleOfferings(sa, true, cost.isPaid());
             return manaSources;
         }
 
@@ -666,9 +653,8 @@ public class ComputerUtilMana {
             Iterables.removeIf(sourcesForShards.values(), CardTraitPredicates.isHostCard(saPayment.getHostCard()));
         }
 
-        handleOfferingsAI(sa, true, cost.isPaid());
-
-        refundMana(manaSpentToPay, ai, sa);
+        CostPayment.handleOfferings(sa, true, cost.isPaid());
+        ManaPool.refundMana(manaSpentToPay, ai, sa);
 
         return manaSources;
     } // getManaSourcesToPayCost()
@@ -681,7 +667,7 @@ public class ComputerUtilMana {
         List<Mana> manaSpentToPay = test ? new ArrayList<>() : sa.getPayingMana();
         List<SpellAbility> paymentList = Lists.newArrayList();
 
-        if (payManaCostFromPool(cost, sa, ai, test, manaSpentToPay)) {
+        if (ManaPool.payManaCostFromPool(cost, sa, ai, test, manaSpentToPay)) {
             return true;    // paid all from floating mana
         }
 
@@ -870,7 +856,7 @@ public class ComputerUtilMana {
             }
         }
 
-        handleOfferingsAI(sa, test, cost.isPaid());
+        CostPayment.handleOfferings(sa, test, cost.isPaid());
 
 //        if (DEBUG_MANA_PAYMENT) {
 //            System.err.printf("%s > [%s] payment has %s (%s +%d) for (%s) %s:%n\t%s%n%n",
@@ -880,7 +866,7 @@ public class ComputerUtilMana {
 
         // The cost is still unpaid, so refund the mana and report
         if (!cost.isPaid()) {
-            refundMana(manaSpentToPay, ai, sa);
+            ManaPool.refundMana(manaSpentToPay, ai, sa);
             if (test) {
                 resetPayment(paymentList);
                 return false;
@@ -891,7 +877,7 @@ public class ComputerUtilMana {
         }
 
         if (test) {
-            refundMana(manaSpentToPay, ai, sa);
+            ManaPool.refundMana(manaSpentToPay, ai, sa);
             resetPayment(paymentList);
         }
 
@@ -929,8 +915,8 @@ public class ComputerUtilMana {
         final ListMultimap<Integer, SpellAbility> manaAbilityMap = groupSourcesByManaColor(ai, checkPlayable);
         if (manaAbilityMap.isEmpty()) {
             // no mana abilities, bailing out
-            refundMana(manaSpentToPay, ai, sa);
-            handleOfferingsAI(sa, test, cost.isPaid());
+            ManaPool.refundMana(manaSpentToPay, ai, sa);
+            CostPayment.handleOfferings(sa, test, cost.isPaid());
             return null;
         }
         if (DEBUG_MANA_PAYMENT) {
@@ -966,156 +952,6 @@ public class ComputerUtilMana {
             System.out.println("DEBUG_MANA_PAYMENT: sourcesForShards = " + sourcesForShards);
         }
         return sourcesForShards;
-    }
-
-    /**
-     * Checks if the given mana cost can be paid from floating mana.
-     * @param cost mana cost to pay for
-     * @param sa ability to pay for
-     * @param ai activating player
-     * @param test actual payment is made if this is false
-     * @param manaSpentToPay list of mana spent
-     * @return whether the floating mana is sufficient to pay the cost fully
-     */
-    private static boolean payManaCostFromPool(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai,
-            final boolean test, List<Mana> manaSpentToPay) {
-        final boolean hasConverge = sa.getHostCard().hasConverge();
-        List<ManaCostShard> unpaidShards = cost.getUnpaidShards();
-        Collections.sort(unpaidShards); // most difficult shards must come first
-        for (ManaCostShard part : unpaidShards) {
-            if (part != ManaCostShard.X) {
-                if (cost.isPaid()) {
-                    continue;
-                }
-
-                // get a mana of this type from floating, bail if none available
-                final Mana mana = getMana(ai, part, sa, cost.getSourceRestriction(), hasConverge ? cost.getColorsPaid() : -1, cost.getXManaCostPaidByColor());
-                if (mana != null) {
-                    if (ai.getManaPool().tryPayCostWithMana(sa, cost, mana, test)) {
-                        manaSpentToPay.add(0, mana);
-                    }
-                }
-            }
-        }
-
-        if (cost.isPaid()) {
-            // refund any mana taken from mana pool when test
-            if (test) {
-                refundMana(manaSpentToPay, ai, sa);
-            }
-            handleOfferingsAI(sa, test, cost.isPaid());
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * <p>
-     * getManaFrom.
-     * </p>
-     *
-     * @param saBeingPaidFor
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @return a {@link forge.game.mana.Mana} object.
-     */
-    private static Mana getMana(final Player ai, final ManaCostShard shard, final SpellAbility saBeingPaidFor,
-            String restriction, final byte colorsPaid, Map<String, Integer> xManaCostPaidByColor) {
-        final List<Pair<Mana, Integer>> weightedOptions = selectManaToPayFor(ai.getManaPool(), shard,
-            saBeingPaidFor, restriction, colorsPaid, xManaCostPaidByColor);
-
-        // Exclude border case
-        if (weightedOptions.isEmpty()) {
-            return null; // There is no matching mana in the pool
-        }
-
-        // select equal weight possibilities
-        List<Mana> manaChoices = new ArrayList<>();
-        int bestWeight = Integer.MIN_VALUE;
-        for (Pair<Mana, Integer> option : weightedOptions) {
-            int thisWeight = option.getRight();
-            Mana thisMana = option.getLeft();
-
-            if (thisWeight > bestWeight) {
-                manaChoices.clear();
-                bestWeight = thisWeight;
-            }
-
-            if (thisWeight == bestWeight) {
-                // add only distinct Mana-s
-                boolean haveDuplicate = false;
-                for (Mana m : manaChoices) {
-                    if (m.equals(thisMana)) {
-                        haveDuplicate = true;
-                        break;
-                    }
-                }
-                if (!haveDuplicate) {
-                    manaChoices.add(thisMana);
-                }
-            }
-        }
-
-        // got an only one best option?
-        if (manaChoices.size() == 1) {
-            return manaChoices.get(0);
-        }
-
-        // if we are simulating mana payment for the human controller, use the first mana available (and avoid prompting the human player)
-        if (!(ai.getController() instanceof PlayerControllerAi)) {
-            return manaChoices.get(0);
-        }
-
-        // Let them choose then
-        return ai.getController().chooseManaFromPool(manaChoices);
-    }
-
-    private static List<Pair<Mana, Integer>> selectManaToPayFor(final ManaPool manapool, final ManaCostShard shard,
-            final SpellAbility saBeingPaidFor, String restriction, final byte colorsPaid, Map<String, Integer> xManaCostPaidByColor) {
-        final List<Pair<Mana, Integer>> weightedOptions = new ArrayList<>();
-        for (final Mana thisMana : manapool) {
-            if (shard == ManaCostShard.COLORED_X && !ManaCostBeingPaid.canColoredXShardBePaidByColor(MagicColor.toShortString(thisMana.getColor()), xManaCostPaidByColor)) {
-                continue;
-            }
-
-            if (!manapool.canPayForShardWithColor(shard, thisMana.getColor())) {
-                continue;
-            }
-
-            if (thisMana.getManaAbility() != null && !thisMana.getManaAbility().meetsSpellAndShardRestrictions(saBeingPaidFor, shard, thisMana.getColor())) {
-                continue;
-            }
-
-            boolean canPay = manapool.canPayForShardWithColor(shard, thisMana.getColor());
-            if (!canPay || (shard.isSnow() && !thisMana.isSnow())) {
-                continue;
-            }
-
-            if (StringUtils.isNotBlank(restriction) && !thisMana.getSourceCard().getType().hasStringType(restriction)) {
-                continue;
-            }
-
-            int weight = 0;
-            if (colorsPaid == -1) {
-                // prefer colorless mana to spend
-                weight += thisMana.isColorless() ? 5 : 0;
-            } else {
-                // get more colors for converge
-                weight += (thisMana.getColor() | colorsPaid) != colorsPaid ? 5 : 0;
-            }
-
-            // prefer restricted mana to spend
-            if (thisMana.isRestricted()) {
-                weight += 2;
-            }
-
-            // Spend non-snow mana first
-            if (!thisMana.isSnow()) {
-                weight += 1;
-            }
-
-            weightedOptions.add(Pair.of(thisMana, weight));
-        }
-        return weightedOptions;
     }
 
     private static void setExpressColorChoice(final SpellAbility sa, final Player ai, ManaCostBeingPaid cost,
@@ -1934,26 +1770,6 @@ public class ComputerUtilMana {
         }
         return res;
     }
-
-    private static void handleOfferingsAI(final SpellAbility sa, boolean test, boolean costIsPaid) {
-        if (sa.isOffering() && sa.getSacrificedAsOffering() != null) {
-            final Card offering = sa.getSacrificedAsOffering();
-            offering.setUsedToPay(false);
-            if (costIsPaid && !test) {
-                sa.getHostCard().getGame().getAction().sacrifice(offering, sa, false, null, null);
-            }
-            sa.resetSacrificedAsOffering();
-        }
-        if (sa.isEmerge() && sa.getSacrificedAsEmerge() != null) {
-            final Card emerge = sa.getSacrificedAsEmerge();
-            emerge.setUsedToPay(false);
-            if (costIsPaid && !test) {
-                sa.getHostCard().getGame().getAction().sacrifice(emerge, sa, false, null, null);
-            }
-            sa.resetSacrificedAsEmerge();
-        }
-    }
-
 
     /**
      * Matches list of creatures to shards in mana cost for convoking.
