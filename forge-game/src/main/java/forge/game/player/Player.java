@@ -105,10 +105,12 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantBeCast;
 import forge.game.staticability.StaticAbilityCantDiscard;
+import forge.game.staticability.StaticAbilityCantBecomeMonarch;
 import forge.game.staticability.StaticAbilityCantDraw;
 import forge.game.staticability.StaticAbilityCantGainLosePayLife;
 import forge.game.staticability.StaticAbilityCantPutCounter;
 import forge.game.staticability.StaticAbilityCantTarget;
+import forge.game.staticability.StaticAbilityCantSetSchemesInMotion;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
@@ -313,10 +315,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public void setSchemeInMotion() {
-        for (final Player p : game.getPlayers()) {
-            if (p.hasKeyword("Schemes can't be set in motion this turn.")) {
-                return;
-            }
+        if (StaticAbilityCantSetSchemesInMotion.any(getGame())) {
+            return;
         }
 
         // Replacement effects
@@ -1041,40 +1041,6 @@ public class Player extends GameEntity implements Comparable<Player> {
      */
     public final void addKeyword(final String keyword) {
         addChangedKeywords(ImmutableList.of(keyword), ImmutableList.of(), getGame().getNextTimestamp(), 0);
-    }
-
-    /**
-     * Remove all keyword changes which grant this {@link Player} the specified
-     * keyword.
-     * @param keyword the keyword to remove.
-     */
-    public final void removeKeyword(final String keyword) {
-        removeKeyword(keyword, true);
-    }
-    public final void removeKeyword(final String keyword, final boolean allInstances) {
-        boolean keywordRemoved = false;
-
-        for (final KeywordsChange ck : changedKeywords.values()) {
-            if (ck.removeKeywordfromAdd(keyword)) {
-                keywordRemoved = true;
-                if (!allInstances) {
-                    break;
-                }
-            }
-        }
-
-        // Remove the empty changes
-        for (final Table.Cell<Long, Long, KeywordsChange> ck : ImmutableList.copyOf(changedKeywords.cellSet())) {
-            if (ck.getValue().isEmpty() && changedKeywords.remove(ck.getRowKey(), ck.getColumnKey()) != null) {
-                keywordRemoved = true;
-                getKeywordCard().removeChangedCardTraits(ck.getRowKey(), ck.getColumnKey());
-            }
-        }
-
-        if (keywordRemoved) {
-            updateKeywords();
-            game.fireEvent(new GameEventPlayerStatsChanged(this, true));
-        }
     }
 
     @Override
@@ -2536,8 +2502,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         setLibrarySearched(0);
         setNumManaConversion(0);
 
-        removeKeyword("Schemes can't be set in motion this turn.");
-
         // set last turn nr
         if (game.getPhaseHandler().isPlayerTurn(this)) {
             this.lastTurnNr = game.getPhaseHandler().getTurn();
@@ -3249,6 +3213,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             com.remove(monarchEffect);
             this.updateZoneForView(com);
         }
+    }
+    public boolean canBecomeMonarch() {
+        return !StaticAbilityCantBecomeMonarch.anyCantBecomeMonarch(this);
     }
 
     public void updateKeywordCardAbilityText() {

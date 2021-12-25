@@ -2134,11 +2134,17 @@ public class GameAction {
 
     public void becomeMonarch(final Player p, final String set) {
         final Player previous = game.getMonarch();
-        if (p == null || p.equals(previous))
+        if (p == null || p.equals(previous)) {
             return;
+        }
 
         if (previous != null)
             previous.removeMonarchEffect();
+
+        // by Monarch losing, its a way to make the game lose the monarch
+        if (!p.canBecomeMonarch()) {
+            return;
+        }
 
         p.createMonarchEffect(set);
         game.setMonarch(p);

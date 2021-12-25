@@ -10,6 +10,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityCantSetSchemesInMotion;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
@@ -35,10 +36,8 @@ public class SetInMotionEffect extends SpellAbilityEffect {
                 // Set the current scheme in motion again
                 Game game = controller.getGame();
 
-                for (final Player p : game.getPlayers()) {
-                    if (p.hasKeyword("Schemes can't be set in motion this turn.")) {
-                        return;
-                    }
+                if (StaticAbilityCantSetSchemesInMotion.any(game)) {
+                    return;
                 }
 
                 game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);

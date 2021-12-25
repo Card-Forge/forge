@@ -38,9 +38,8 @@ public class ExtraTurn {
 
     private Player player = null;
     private List<Trigger> delTrig = Collections.synchronizedList(new ArrayList<>());
-    private boolean skipUntap = false;
     private SpellAbility skipUntapSA;
-    private boolean cantSetSchemesInMotion = false;
+    private SpellAbility cantSetSchemesInMotionSA;
     /**
      * TODO: Write javadoc for Constructor.
      * @param player the player
@@ -81,14 +80,7 @@ public class ExtraTurn {
      * @return the skipUntap
      */
     public boolean isSkipUntap() {
-        return skipUntap;
-    }
-
-    /**
-     * @param skipUntap the skipUntap to set
-     */
-    public void setSkipUntap(boolean skipUntap) {
-        this.skipUntap = skipUntap;
+        return skipUntapSA != null;
     }
 
     /**
@@ -105,18 +97,16 @@ public class ExtraTurn {
         this.skipUntapSA = skipUntapSA;
     }
 
-    /**
-     * @return true if Schemes can't be played during the extra turn
-     */
     public boolean isCantSetSchemesInMotion() {
-        return cantSetSchemesInMotion;
+        return cantSetSchemesInMotionSA != null;
     }
 
-    /**
-     * @param noSchemes set boolean if schemes can't be played this extra turn
-     */
-    public void setCantSetSchemesInMotion(boolean noSchemes) {
-        this.cantSetSchemesInMotion = noSchemes;
+    public SpellAbility getCantSetSchemesInMotionSA() {
+        return cantSetSchemesInMotionSA;
+    }
+
+    public void setCantSetSchemesInMotionSA(SpellAbility cantSetSchemesInMotionSA) {
+        this.cantSetSchemesInMotionSA = cantSetSchemesInMotionSA;
     }
 
 }
