@@ -233,10 +233,13 @@ public class GameCopier {
             if (card.isPaired()) {
                 otherCard.setPairedWith(cardMap.get(card.getPairedWith()));
             }
+            if (card.getCopiedPermanent() != null) {
+                otherCard.setCopiedPermanent(CardFactory.copyCard(card.getCopiedPermanent(), false));
+            }
             // TODO: Verify that the above relationships are preserved bi-directionally or not.
         }
     }
-    
+
     private static final boolean USE_FROM_PAPER_CARD = true;
     private Card createCardCopy(Game newGame, Player newOwner, Card c) {
         if (c.isToken() && !c.isImmutable()) {
