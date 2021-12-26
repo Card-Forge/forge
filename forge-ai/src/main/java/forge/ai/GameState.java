@@ -1195,7 +1195,7 @@ public abstract class GameState {
         String[] allCounterStrings = counterString.split(",");
         for (final String counterPair : allCounterStrings) {
             String[] pair = counterPair.split("=", 2);
-            entity.addCounter(CounterType.getType(pair[0]), Integer.parseInt(pair[1]), null, null, false, false, null);
+            entity.addCounterInternal(CounterType.getType(pair[0]), Integer.parseInt(pair[1]), null, false, null);
         }
     }
 

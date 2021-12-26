@@ -95,7 +95,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
 
         if (!type.equals("Any") && !type.equals("All")) {
             try {
-                counterType = AbilityUtils.getCounterType(type, sa);
+                counterType = CounterType.getType(type);
             } catch (Exception e) {
                 System.out.println("Counter type doesn't match, nor does an SVar exist with the type name.");
                 return;

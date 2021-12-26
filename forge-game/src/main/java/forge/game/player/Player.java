@@ -669,7 +669,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 || hasKeyword("All damage is dealt to you as though its source had infect.");
 
         if (infect) {
-            addPoisonCounters(amount, source, counterTable);
+            addPoisonCounters(amount, source.getController(), counterTable);
         }
         else if (!hasKeyword("Damage doesn't cause you to lose life.")) {
             // rule 118.2. Damage dealt to a player normally causes that player to lose that much life.
@@ -882,57 +882,31 @@ public class Player extends GameEntity implements Comparable<Player> {
         return true;
     }
 
-    public final int addCounter(final CounterType counterType, final int n, final Player source, final SpellAbility cause, final boolean applyMultiplier, GameEntityCounterTable table) {
-        return addCounter(counterType, n, source, cause, applyMultiplier, true, table);
-    }
-    @Override
-    public int addCounter(CounterType counterType, int n, final Player source, final SpellAbility cause, boolean applyMultiplier, boolean fireEvents, GameEntityCounterTable table) {
+    public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table) {
         int addAmount = n;
         if (addAmount <= 0 || !canReceiveCounters(counterType)) {
-            // Can't add negative or 0 counters, bail out now
-            return 0;
-        }
-
-        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
-        repParams.put(AbilityKey.Source, source);
-        repParams.put(AbilityKey.Cause, cause);
-        repParams.put(AbilityKey.CounterType, counterType);
-        repParams.put(AbilityKey.CounterNum, addAmount);
-        repParams.put(AbilityKey.EffectOnly, applyMultiplier);
-
-        switch (getGame().getReplacementHandler().run(ReplacementType.AddCounter, repParams)) {
-            case NotReplaced:
-                break;
-            case Updated: {
-                addAmount = (int) repParams.get(AbilityKey.CounterNum);
-                break;
-            }
-            default:
-                return 0;
-        }
-        if (addAmount <= 0) {
-            // Can't add negative or 0 counters, bail out now
-            return 0;
+            // As per rule 107.1b
+            return;
         }
 
         final int oldValue = getCounters(counterType);
         final int newValue = addAmount + oldValue;
         this.setCounters(counterType, newValue, fireEvents);
 
-        final Map<AbilityKey, Object> runParams = Maps.newHashMap();
-        runParams.put(AbilityKey.Player, this);
-        runParams.put(AbilityKey.Source, this);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
+        runParams.put(AbilityKey.Source, source);
         runParams.put(AbilityKey.CounterType, counterType);
         for (int i = 0; i < addAmount; i++) {
+            runParams.put(AbilityKey.CounterAmount, oldValue + i + 1);
             getGame().getTriggerHandler().runTrigger(TriggerType.CounterAdded, AbilityKey.newMap(runParams), false);
         }
         if (addAmount > 0) {
+            runParams.put(AbilityKey.CounterAmount, addAmount);
             getGame().getTriggerHandler().runTrigger(TriggerType.CounterAddedOnce, AbilityKey.newMap(runParams), false);
         }
         if (table != null) {
             table.put(source, this, counterType, addAmount);
         }
-        return addAmount;
     }
 
     @Override
@@ -988,20 +962,20 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final int getPoisonCounters() {
         return getCounters(CounterEnumType.POISON);
     }
-    public final void setPoisonCounters(final int num, Card source) {
+    public final void setPoisonCounters(final int num, Player source) {
         int oldPoison = getCounters(CounterEnumType.POISON);
         setCounters(CounterEnumType.POISON, num, true);
         game.fireEvent(new GameEventPlayerPoisoned(this, source, oldPoison, num));
     }
-    public final void addPoisonCounters(final int num, final Card source, GameEntityCounterTable table) {
+    public final void addPoisonCounters(final int num, final Player source, GameEntityCounterTable table) {
         int oldPoison = getCounters(CounterEnumType.POISON);
-        addCounter(CounterEnumType.POISON, num, source.getController(), null, false, true, table);
+        addCounter(CounterEnumType.POISON, num, source, table);
 
         if (oldPoison != getCounters(CounterEnumType.POISON)) {
             game.fireEvent(new GameEventPlayerPoisoned(this, source, oldPoison, num));
         }
     }
-    public final void removePoisonCounters(final int num, final Card source) {
+    public final void removePoisonCounters(final int num, final Player source) {
         int oldPoison = getCounters(CounterEnumType.POISON);
         subtractCounter(CounterEnumType.POISON, num);
 

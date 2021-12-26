@@ -3,7 +3,7 @@ ManaCost:4 G
 Types:Enchantment
 R:Event$ CreateToken | ActiveZones$ Battlefield | ValidToken$ Card.YouCtrl | ReplaceWith$ DoubleToken | EffectOnly$ True | Description$ If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.
 SVar:DoubleToken:DB$ ReplaceToken | Type$ Amount | ValidCard$ Card.YouCtrl
-R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Permanent.YouCtrl | EffectOnly$ True | ReplaceWith$ DoubleCounters | Description$ If an effect would put one or more counters on a permanent you control, it puts twice that many of those counters on that permanent instead.
-SVar:DoubleCounters:DB$ ReplaceEffect | VarName$ CounterNum | VarValue$ Y
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Permanent.YouCtrl+inZoneBattlefield | EffectOnly$ True | ReplaceWith$ DoubleCounters | Description$ If an effect would put one or more counters on a permanent you control, it puts twice that many of those counters on that permanent instead.
+SVar:DoubleCounters:DB$ ReplaceCounter | Amount$ Y
 SVar:Y:ReplaceCount$CounterNum/Twice
 Oracle:If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.\nIf an effect would put one or more counters on a permanent you control, it puts twice that many of those counters on that permanent instead.

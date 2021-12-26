@@ -340,8 +340,7 @@ public class DigEffect extends SpellAbilityEffect {
                                 }
                             } else if (destZone1.equals(ZoneType.Exile)) {
                                 if (sa.hasParam("ExileWithCounter")) {
-                                    c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")),
-                                            1, player, sa, true, counterTable);
+                                    c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")), 1, player, counterTable);
                                 }
                                 c.setExiledWith(effectHost);
                                 c.setExiledBy(effectHost.getController());
@@ -410,8 +409,7 @@ public class DigEffect extends SpellAbilityEffect {
                             }
                             if (destZone2 == ZoneType.Exile) {
                                 if (sa.hasParam("ExileWithCounter")) {
-                                    c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")),
-                                            1, player, sa, true, counterTable);
+                                    c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")), 1, player, counterTable);
                                 }
                                 c.setExiledWith(effectHost);
                                 c.setExiledBy(effectHost.getController());
@@ -430,7 +428,7 @@ public class DigEffect extends SpellAbilityEffect {
         }
         //table trigger there
         table.triggerChangesZoneAll(game, sa);
-        counterTable.triggerCountersPutAll(game);
+        counterTable.replaceCounterEffect(game, sa, true);
     }
 
     // TODO This should be somewhere else, maybe like CardUtil or something like that

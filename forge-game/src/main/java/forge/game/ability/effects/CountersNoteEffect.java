@@ -33,7 +33,7 @@ public class CountersNoteEffect extends SpellAbilityEffect {
                 loadCounters(c, source, p, sa, table);
             }
         }
-        table.triggerCountersPutAll(game);
+        table.replaceCounterEffect(game, sa, false);
     }
 
     private void noteCounters(Card notee, Card source) {
@@ -50,7 +50,7 @@ public class CountersNoteEffect extends SpellAbilityEffect {
             if (key.startsWith(NOTE_COUNTERS)) {
                 notee.addCounter(
                         CounterType.getType(key.substring(NOTE_COUNTERS.length())),
-                        Integer.parseInt(svar.getValue()), p, sa, false, table);
+                        Integer.parseInt(svar.getValue()), p, table);
             }
             // TODO Probably should "remove" the svars that were temporarily used
         }

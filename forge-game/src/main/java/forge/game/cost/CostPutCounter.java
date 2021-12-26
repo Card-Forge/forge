@@ -166,14 +166,14 @@ public class CostPutCounter extends CostPartWithList {
         } else {
             executePayment(ai, ability, decision.cards, effect);
         }
-        triggerCounterPutAll(ability);
+        triggerCounterPutAll(ability, effect);
         return true;
     }
 
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
         final int i = this.getAbilityAmount(ability);
-        targetCard.addCounter(this.getCounter(), i, ability.getActivatingPlayer(), null, effect, counterTable);
+        targetCard.addCounter(this.getCounter(), i, ability.getActivatingPlayer(), counterTable);
         return targetCard;
     }
 
@@ -190,14 +190,14 @@ public class CostPutCounter extends CostPartWithList {
         return visitor.visit(this);
     }
 
-    protected void triggerCounterPutAll(final SpellAbility ability) {
+    protected void triggerCounterPutAll(final SpellAbility ability, final boolean effect) {
         if (counterTable.isEmpty()) {
             return;
         }
 
         GameEntityCounterTable tempTable = new GameEntityCounterTable();
         tempTable.putAll(counterTable);
-        tempTable.triggerCountersPutAll(ability.getHostCard().getGame());
+        tempTable.replaceCounterEffect(ability.getHostCard().getGame(), ability, effect);
     }
 
     /* (non-Javadoc)
