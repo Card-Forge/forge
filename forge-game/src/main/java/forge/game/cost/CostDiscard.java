@@ -135,56 +135,54 @@ public class CostDiscard extends CostPartWithList {
         if (this.payCostFromSource()) {
             return source.canBeDiscardedBy(ability, effect);
         }
+        else if (type.equals("Hand")) {
+            // trying to discard an empty hand always work even with Tamiyo
+            if (payer.getZone(ZoneType.Hand).isEmpty()) {
+                return true;
+            }
+            return payer.canDiscardBy(ability, effect);
+            // this will always work
+        }
+        else if (type.equals("LastDrawn")) {
+            final Card c = payer.getLastDrawnCard();
+            return handList.contains(c);
+        }
+        else if (type.equals("DifferentNames")) {
+            Set<String> cardNames = Sets.newHashSet();
+            for (Card c : handList) {
+                cardNames.add(c.getName());
+            }
+            return cardNames.size() >= amount;
+        }
         else {
-            if (type.equals("Hand")) {
-                // trying to discard an empty hand always work even with Tamiyo
-                if (payer.getZone(ZoneType.Hand).isEmpty()) {
-                    return true;
-                }
-                return payer.canDiscardBy(ability, effect);
-                // this will always work
+            boolean sameName = false;
+            if (type.contains("+WithSameName")) {
+                sameName = true;
+                type = TextUtil.fastReplace(type, "+WithSameName", "");
             }
-            else if (type.equals("LastDrawn")) {
-                final Card c = payer.getLastDrawnCard();
-                return handList.contains(c);
+            if (!type.equals("Random") && !type.contains("X")) {
+                // Knollspine Invocation fails to activate without the above conditional
+                handList = CardLists.getValidCards(handList, type.split(";"), payer, source, ability);
             }
-            else if (type.equals("DifferentNames")) {
-               Set<String> cardNames = Sets.newHashSet();
-               for (Card c : handList) {
-                   cardNames.add(c.getName());
-               }
-               return cardNames.size() >= amount;
-            }
-            else {
-                boolean sameName = false;
-                if (type.contains("+WithSameName")) {
-                    sameName = true;
-                    type = TextUtil.fastReplace(type, "+WithSameName", "");
-                }
-                if (!type.equals("Random") && !type.contains("X")) {
-                    // Knollspine Invocation fails to activate without the above conditional
-                    handList = CardLists.getValidCards(handList, type.split(";"), payer, source, ability);
-                }
-                if (sameName) {
-                    for (Card c : handList) {
-                        if (CardLists.filter(handList, CardPredicates.nameEquals(c.getName())).size() > 1) {
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-                int adjustment = 0;
-                if (source.isInZone(ZoneType.Hand) && payer.equals(source.getOwner())) {
-                    // If this card is in my hand, I can't use it to pay for it's own cost
-                    if (handList.contains(source)) {
-                        adjustment = 1;
+            if (sameName) {
+                for (Card c : handList) {
+                    if (CardLists.filter(handList, CardPredicates.nameEquals(c.getName())).size() > 1) {
+                        return true;
                     }
                 }
+                return false;
+            }
+            int adjustment = 0;
+            if (source.isInZone(ZoneType.Hand) && payer.equals(source.getOwner())) {
+                // If this card is in my hand, I can't use it to pay for it's own cost
+                if (handList.contains(source)) {
+                    adjustment = 1;
+                }
+            }
 
-                if (amount > handList.size() - adjustment) {
-                    // not enough cards in hand to pay
-                    return false;
-                }
+            if (amount > handList.size() - adjustment) {
+                // not enough cards in hand to pay
+                return false;
             }
         }
         return true;

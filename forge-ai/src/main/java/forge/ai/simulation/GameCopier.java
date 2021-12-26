@@ -234,6 +234,7 @@ public class GameCopier {
                 otherCard.setPairedWith(cardMap.get(card.getPairedWith()));
             }
             if (card.getCopiedPermanent() != null) {
+                // TODO would it be safe to simply reuse the prototype?
                 otherCard.setCopiedPermanent(CardFactory.copyCard(card.getCopiedPermanent(), false));
             }
             // TODO: Verify that the above relationships are preserved bi-directionally or not.

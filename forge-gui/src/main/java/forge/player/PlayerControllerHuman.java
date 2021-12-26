@@ -386,9 +386,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 .hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
             return InputConfirm.confirm(this, CardView.get(attacker),
                     localizer.getMessage("lblAssignCombatDamageWerentBlocked"));
-        } else {
-            return false;
         }
+        return false;
     }
 
     @Override

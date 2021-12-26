@@ -514,9 +514,8 @@ public class AiAttackController {
                 if (Iterables.any(oppBattlefield, Predicates.and(CardPredicates.Presets.UNTAPPED, CardPredicates.Presets.LANDS))) {
                     maxBlockersAfterCrew = Integer.MAX_VALUE;
                     break;
-                } else {
-                    maxBlockersAfterCrew--;
                 }
+                maxBlockersAfterCrew--;
             } else if (cardType.hasSubtype("Vehicle") && !cardType.isCreature()) {
                 maxBlockersAfterCrew--;
             }

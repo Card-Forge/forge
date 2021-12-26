@@ -306,51 +306,49 @@ public class ComputerUtilMana {
                 continue;
             }
 
-            if (saHost != null) {
-                if (ma.getPayCosts().hasTapCost() && AiCardMemory.isRememberedCard(ai, ma.getHostCard(), MemorySet.PAYS_TAP_COST)) {
+            if (ma.getPayCosts().hasTapCost() && AiCardMemory.isRememberedCard(ai, ma.getHostCard(), MemorySet.PAYS_TAP_COST)) {
+                continue;
+            }
+
+            if (!ComputerUtilCost.checkTapTypeCost(ai, ma.getPayCosts(), ma.getHostCard(), sa)) {
+                continue;
+            }
+
+            if (!ComputerUtilCost.checkForManaSacrificeCost(ai, ma.getPayCosts(), ma.getHostCard(), ma, ma.isTrigger())) {
+                continue;
+            }
+
+            if (sa.getApi() == ApiType.Animate) {
+                // For abilities like Genju of the Cedars, make sure that we're not activating the aura ability by tapping the enchanted card for mana
+                if (saHost.isAura() && "Enchanted".equals(sa.getParam("Defined"))
+                        && ma.getHostCard() == saHost.getEnchantingCard()
+                        && ma.getPayCosts().hasTapCost()) {
                     continue;
                 }
 
-                if (!ComputerUtilCost.checkTapTypeCost(ai, ma.getPayCosts(), ma.getHostCard(), sa)) {
+                // If a manland was previously animated this turn, do not tap it to animate another manland
+                if (saHost.isLand() && ma.getHostCard().isLand()
+                        && ai.getController().isAI()
+                        && AnimateAi.isAnimatedThisTurn(ai, ma.getHostCard())) {
                     continue;
                 }
-                
-                if (!ComputerUtilCost.checkForManaSacrificeCost(ai, ma.getPayCosts(), ma.getHostCard(), ma, ma.isTrigger())) {
+            } else if (sa.getApi() == ApiType.Pump) {
+                if ((saHost.isInstant() || saHost.isSorcery())
+                        && ma.getHostCard().isCreature()
+                        && ai.getController().isAI()
+                        && ma.getPayCosts().hasTapCost()
+                        && sa.getTargets().getTargetCards().contains(ma.getHostCard())) {
+                    // do not activate pump instants/sorceries targeting creatures by tapping targeted
+                    // creatures for mana (for example, Servant of the Conduit)
                     continue;
                 }
-
-                if (sa.getApi() == ApiType.Animate) {
-                    // For abilities like Genju of the Cedars, make sure that we're not activating the aura ability by tapping the enchanted card for mana
-                    if (saHost.isAura() && "Enchanted".equals(sa.getParam("Defined"))
-                            && ma.getHostCard() == saHost.getEnchantingCard()
-                            && ma.getPayCosts().hasTapCost()) {
+            } else if (sa.getApi() == ApiType.Attach
+                    && "AvoidPayingWithAttachTarget".equals(saHost.getSVar("AIPaymentPreference"))) {
+                // For cards like Genju of the Cedars, make sure we're not attaching to the same land that will
+                // be tapped to pay its own cost if there's another untapped land like that available
+                if (ma.getHostCard().equals(sa.getTargetCard())) {
+                    if (CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.nameEquals(ma.getHostCard().getName()), CardPredicates.Presets.UNTAPPED)).size() > 1) {
                         continue;
-                    }
-
-                    // If a manland was previously animated this turn, do not tap it to animate another manland
-                    if (saHost.isLand() && ma.getHostCard().isLand()
-                            && ai.getController().isAI()
-                            && AnimateAi.isAnimatedThisTurn(ai, ma.getHostCard())) {
-                        continue;
-                    }
-                } else if (sa.getApi() == ApiType.Pump) {
-                    if ((saHost.isInstant() || saHost.isSorcery())
-                            && ma.getHostCard().isCreature()
-                            && ai.getController().isAI()
-                            && ma.getPayCosts().hasTapCost()
-                            && sa.getTargets().getTargetCards().contains(ma.getHostCard())) {
-                        // do not activate pump instants/sorceries targeting creatures by tapping targeted
-                        // creatures for mana (for example, Servant of the Conduit)
-                        continue;
-                    }
-                } else if (sa.getApi() == ApiType.Attach
-                        && "AvoidPayingWithAttachTarget".equals(saHost.getSVar("AIPaymentPreference"))) {
-                    // For cards like Genju of the Cedars, make sure we're not attaching to the same land that will
-                    // be tapped to pay its own cost if there's another untapped land like that available
-                    if (ma.getHostCard().equals(sa.getTargetCard())) {
-                        if (CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.nameEquals(ma.getHostCard().getName()), CardPredicates.Presets.UNTAPPED)).size() > 1) {
-                            continue;
-                        }
                     }
                 }
             }

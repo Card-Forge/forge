@@ -1023,9 +1023,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                             }
                             if (blink) {
                                 return c.isToken();
-                            } else {
-                                return c.isToken() || c.getCMC() > 0;
                             }
+                            return c.isToken() || c.getCMC() > 0;
                         }
                     });
                 }

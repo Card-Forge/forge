@@ -1422,7 +1422,7 @@ public class AbilityUtils {
 
         // do blessing there before condition checks
         if (sa.isSpell() && sa.isBlessing() && !sa.getHostCard().isPermanent()) {
-            if (pl != null && pl.getZone(ZoneType.Battlefield).size() >= 10) {
+            if (pl.getZone(ZoneType.Battlefield).size() >= 10) {
                 pl.setBlessing(true);
             }
         }
@@ -1871,9 +1871,8 @@ public class AbilityUtils {
                     list = CardLists.getValidCards(list, k[1].split(","), sa.getActivatingPlayer(), c, sa);
                     if (k[0].contains("TotalToughness")) {
                         return doXMath(Aggregates.sum(list, CardPredicates.Accessors.fnGetNetToughness), expr, c, ctb);
-                    } else {
-                        return doXMath(list.size(), expr, c, ctb);
                     }
+                    return doXMath(list.size(), expr, c, ctb);
                 }
 
                 if (sq[0].startsWith("LastStateGraveyard")) {
@@ -3208,9 +3207,8 @@ public class AbilityUtils {
         } else if (s[0].contains("DivideEvenlyDown")) {
             if (secondaryNum == 0) {
                 return 0;
-            } else {
-                return num / secondaryNum;
             }
+            return num / secondaryNum;
         } else if (s[0].contains("Mod")) {
             return num % secondaryNum;
         } else if (s[0].contains("Abs")) {
@@ -3218,15 +3216,13 @@ public class AbilityUtils {
         } else if (s[0].contains("LimitMax")) {
             if (num < secondaryNum) {
                 return num;
-            } else {
-                return secondaryNum;
             }
+            return secondaryNum;
         } else if (s[0].contains("LimitMin")) {
             if (num > secondaryNum) {
                 return num;
-            } else {
-                return secondaryNum;
             }
+            return secondaryNum;
 
         } else {
             return num;

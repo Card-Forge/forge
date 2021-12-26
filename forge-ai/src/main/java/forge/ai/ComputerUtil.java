@@ -2436,7 +2436,7 @@ public class ComputerUtil {
             CardCollection cardsInPlay = CardLists.getNotType(game.getCardsIn(ZoneType.Battlefield), "Land");
             CardCollection humanlist = CardLists.filterControlledBy(cardsInPlay, ai.getOpponents());
             CardCollection computerlist = ai.getCreaturesInPlay();
-            return (ComputerUtilCard.evaluatePermanentList(computerlist) + 3) < ComputerUtilCard.evaluatePermanentList(humanlist) ? "Carnage" : "Homage";
+            return ComputerUtilCard.evaluatePermanentList(computerlist) + 3 < ComputerUtilCard.evaluatePermanentList(humanlist) ? "Carnage" : "Homage";
         case "Judgment":
             if (votes.isEmpty()) {
                 CardCollection list = new CardCollection();
@@ -2446,9 +2446,8 @@ public class ComputerUtil {
                     }
                 }
                 return ComputerUtilCard.getBestAI(list);
-            } else {
-                return Iterables.getFirst(votes.keySet(), null);
             }
+            return Iterables.getFirst(votes.keySet(), null);
         case "Protection":
             if (votes.isEmpty()) {
                 List<String> restrictedToColors = Lists.newArrayList();
@@ -2459,9 +2458,8 @@ public class ComputerUtil {
                     }
                 CardCollection lists = CardLists.filterControlledBy(game.getCardsInGame(), ai.getOpponents());
                 return StringUtils.capitalize(ComputerUtilCard.getMostProminentColor(lists, restrictedToColors));
-            } else {
-                return Iterables.getFirst(votes.keySet(), null);
             }
+            return Iterables.getFirst(votes.keySet(), null);
         case "FeatherOrQuill":
             // try to mill opponent with Quill vote
             if (opponent && !controller.cantLose()) {

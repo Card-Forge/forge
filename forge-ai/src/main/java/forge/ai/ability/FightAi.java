@@ -286,12 +286,11 @@ public class FightAi extends SpellAbilityAi {
     private static boolean shouldFight(Card fighter, Card opponent, int pumpAttack, int pumpDefense) {
     	if (canKill(fighter, opponent, pumpAttack)) {
     		if (!canKill(opponent, fighter, -pumpDefense)) { // can survive
-    			return true;
-    		} else {
-                if (MyRandom.getRandom().nextInt(20) < (opponent.getCMC() - fighter.getCMC())) { // trade
-                    return true;
-                }
-            }
+    		    return true;
+    		}
+    		if (MyRandom.getRandom().nextInt(20) < (opponent.getCMC() - fighter.getCMC())) { // trade
+    		    return true;
+    		}
     	}
     	return false;
     }

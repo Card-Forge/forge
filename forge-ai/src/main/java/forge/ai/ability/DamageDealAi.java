@@ -811,9 +811,8 @@ public class DamageDealAi extends DamageAiBase {
                 if (!c.hasKeyword(Keyword.INDESTRUCTIBLE) && ComputerUtilCombat.getDamageToKill(c, false) <= restDamage) {
                     if (c.getController().equals(ai)) {
                         return false;
-                    } else {
-                        urgent = true;
                     }
+                    urgent = true;
                 }
                 if (c.getController().isOpponentOf(ai) ^ c.getName().equals("Stuffy Doll")) {
                     positive = true;

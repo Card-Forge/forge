@@ -371,8 +371,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return false;
     }
 
-    public long getTransformedTimestamp() {  return transformedTimestamp; }
-    public void incrementTransformedTimestamp() {  this.transformedTimestamp++;  }
+    public long getTransformedTimestamp() { return transformedTimestamp; }
+    public void incrementTransformedTimestamp() { this.transformedTimestamp++; }
 
     public CardState getCurrentState() {
         return currentState;
@@ -3037,7 +3037,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return tokenCard;
     }
     public final void setTokenCard(boolean tokenC) {
-        if (tokenCard = tokenC) { return; }
+        if (tokenCard == tokenC) { return; }
         tokenCard = tokenC;
         view.updateTokenCard(this);
     }
@@ -5232,9 +5232,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     // this is the amount of damage a creature needs to receive before it dies
     public final int getLethal() {
         if (hasKeyword("Lethal damage dealt to CARDNAME is determined by its power rather than its toughness.")) {
-            return getNetPower(); }
-        else {
-            return getNetToughness(); }
+            return getNetPower();
+        }
+        return getNetToughness();
     }
 
     // this is the minimal damage a trampling creature has to assign to a blocker

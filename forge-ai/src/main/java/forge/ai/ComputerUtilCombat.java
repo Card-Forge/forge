@@ -2292,9 +2292,8 @@ public class ComputerUtilCombat {
         }
         if (!withoutAbilities) {
             return canGainKeyword(combatant, Lists.newArrayList(keyword), combat);
-        } else {
-            return false;
         }
+        return false;
     }
 
     public final static boolean canGainKeyword(final Card combatant, final List<String> keywords, final Combat combat) {

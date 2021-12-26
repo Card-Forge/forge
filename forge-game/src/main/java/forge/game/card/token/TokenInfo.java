@@ -185,7 +185,6 @@ public class TokenInfo {
             }
         }
         if (!typeMap.isEmpty()) {
-
             CardType type = new CardType(result.getType());
             final boolean nameGenerated = result.getName().endsWith(" Token");
             boolean typeChanged = false;
