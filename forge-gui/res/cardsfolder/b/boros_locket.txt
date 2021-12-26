@@ -1,8 +1,7 @@
 Name:Boros Locket
 ManaCost:3
 Types:Artifact
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Mana | Cost$ T | Produced$ Combo R W | SpellDescription$ Add {R} or {W}.
 AI:RemoveDeck:Random
 DeckNeeds:Color$White | White
 A:AB$ Draw | Cost$ RW RW RW RW T Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.

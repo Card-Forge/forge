@@ -2,8 +2,5 @@ Name:Savage Lands
 ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_lands.jpg
+A:AB$ Mana | Cost$ T | Produced$ Combo B R G | SpellDescription$ Add {B}, {R}, or {G}.
 Oracle:Savage Lands enters the battlefield tapped.\n{T}: Add {B}, {R}, or {G}.

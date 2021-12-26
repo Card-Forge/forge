@@ -1,10 +1,8 @@
 Name:Rakdos Keyrune
 ManaCost:3
 Types:Artifact
-A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Mana | Cost$ T | Produced$ Combo B R | SpellDescription$ Add {B} or {R}.
 A:AB$ Animate | Cost$ B R | Defined$ Self | Power$ 3 | Toughness$ 1 | Types$ Artifact,Creature,Devil | Colors$ Black,Red | Keywords$ First Strike | SpellDescription$ CARDNAME becomes a 3/1 black and red Devil artifact creature with first strike until end of turn.
 AI:RemoveDeck:Random
 DeckNeeds:Color$Black|Red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_keyrune.jpg
 Oracle:{T}: Add {B} or {R}.\n{B}{R}: Rakdos Keyrune becomes a 3/1 black and red Devil artifact creature with first strike until end of turn.

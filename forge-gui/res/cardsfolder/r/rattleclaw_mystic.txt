@@ -3,10 +3,7 @@ ManaCost:1 G
 Types:Creature Human Shaman
 PT:2/1
 K:Morph:2
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Mana | Cost$ T | Produced$ Combo G U R | SpellDescription$ Add {G}, {U}, or {R}.
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigMana | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, add {G}{U}{R}.
 SVar:TrigMana:DB$ Mana | Produced$ G U R
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rattleclaw_mystic.jpg
 Oracle:{T}: Add {G}, {U}, or {R}.\nMorph {2} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Rattleclaw Mystic is turned face up, add {G}{U}{R}.

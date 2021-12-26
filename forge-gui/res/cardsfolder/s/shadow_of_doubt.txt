@@ -5,5 +5,4 @@ A:SP$ Effect | Cost$ UB UB | StaticAbilities$ STCantSearch | SubAbility$ DBDraw 
 SVar:STCantSearch:Mode$ Continuous | Affected$ Player | EffectZone$ Command | AddKeyword$ CantSearchLibrary | Description$ Players can't search libraries.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shadow_of_doubt.jpg
 Oracle:({U/B} can be paid with either {U} or {B}.)\nPlayers can't search libraries this turn.\nDraw a card.

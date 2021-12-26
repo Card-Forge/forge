@@ -1,8 +1,7 @@
 Name:Simic Locket
 ManaCost:3
 Types:Artifact
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ T | Produced$ Combo G U | SpellDescription$ Add {G} or {U}.
 AI:RemoveDeck:Random
 DeckNeeds:Color$Green | Blue
 A:AB$ Draw | Cost$ GU GU GU GU T Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.

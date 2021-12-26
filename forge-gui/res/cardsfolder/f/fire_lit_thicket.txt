@@ -2,9 +2,6 @@ Name:Fire-Lit Thicket
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Mana | Cost$ RG T | Produced$ R | Amount$ 2 | SpellDescription$ Add {R}{R}.
-A:AB$ Mana | Cost$ RG T | Produced$ R G | SpellDescription$ Add {R}{G}.
-A:AB$ Mana | Cost$ RG T | Produced$ G | Amount$ 2 | SpellDescription$ Add {G}{G}.
+A:AB$ Mana | Cost$ RG T | Produced$ Combo R G | Amount$ 2 | SpellDescription$ Add {R}{R}, {R}{G}, or {G}{G}.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_lit_thicket.jpg
 Oracle:{T}: Add {C}.\n{R/G}, {T}: Add {R}{R}, {R}{G}, or {G}{G}.

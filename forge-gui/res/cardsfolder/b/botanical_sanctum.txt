@@ -4,7 +4,5 @@ Types:Land
 K:ETBReplacement:Other:LandTapped
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar2 | ConditionSVarCompare$ GT2 | SpellDescription$ CARDNAME enters the battlefield tapped unless you control two or fewer other lands.
 SVar:ETBCheckSVar2:Count$LastStateBattlefield Land.YouCtrl
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/botanical_sanctum.jpg
+A:AB$ Mana | Cost$ T | Produced$ Combo G U | SpellDescription$ Add {G} or {U}.
 Oracle:Botanical Sanctum enters the battlefield tapped unless you control two or fewer other lands.\n{T}: Add {G} or {U}.

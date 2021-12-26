@@ -2,7 +2,5 @@ Name:Shivan Oasis
 ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_oasis.jpg
+A:AB$ Mana | Cost$ T | Produced$ Combo R G | SpellDescription$ Add {R} or {G}.
 Oracle:Shivan Oasis enters the battlefield tapped.\n{T}: Add {R} or {G}.

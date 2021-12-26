@@ -6,5 +6,4 @@ SVar:TrigGorgonEffect:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | This
 SVar:TrigRem:DB$ Pump | RememberObjects$ DelayTriggerRemembered | SubAbility$ TrigGorgonDestroy
 SVar:TrigGorgonDestroy:DB$ DestroyAll | ValidCards$ Creature.blockedRemembered,Creature.blockedByRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gaze_of_the_gorgon.jpg
 Oracle:({B/G} can be paid with either {B} or {G}.)\nRegenerate target creature. At this turn's next end of combat, destroy all creatures that blocked or were blocked by it this turn.

@@ -1,5 +1,4 @@
 Name:Bayou
 ManaCost:no cost
 Types:Land Swamp Forest
-SVar:Picture:http://resources.wizards.com/magic/cards/1e/en-us/card280.jpg
 Oracle:({T}: Add {B} or {G}.)

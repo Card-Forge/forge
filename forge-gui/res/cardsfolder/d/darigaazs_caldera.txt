@@ -1,11 +1,8 @@
 Name:Darigaaz's Caldera
 ManaCost:no cost
 Types:Land Lair
-A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ T | Produced$ Combo B R G | SpellDescription$ Add {B}, {R}, or {G}.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you return a non-Lair land you control to its owner's hand.
 SVar:TrigSacUnless:DB$ Sacrifice | Defined$ Self | UnlessCost$ Return<1/Land.nonLair/non-Lair land> | UnlessPayer$ You
 SVar:NeedsToPlay:Land.nonLair+YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/darigaazs_caldera.jpg
 Oracle:When Darigaaz's Caldera enters the battlefield, sacrifice it unless you return a non-Lair land you control to its owner's hand.\n{T}: Add {B}, {R}, or {G}.

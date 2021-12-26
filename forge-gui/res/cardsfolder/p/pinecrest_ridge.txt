@@ -2,7 +2,6 @@ Name:Pinecrest Ridge
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Mana | Cost$ T | Produced$ R | SubAbility$ DBStayTapped | SpellDescription$ Add {R}. CARDNAME doesn't untap during your next untap step.
-A:AB$ Mana | Cost$ T | Produced$ G | SubAbility$ DBStayTapped | SpellDescription$ Add {G}. CARDNAME doesn't untap during your next untap step.
+A:AB$ Mana | Cost$ T | Produced$ Combo R G | SubAbility$ DBStayTapped | SpellDescription$ Add {R} or {G}. CARDNAME doesn't untap during your next untap step.
 SVar:DBStayTapped:DB$ Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Duration$ Permanent
 Oracle:{T}: Add {C}.\n{T}: Add {R} or {G}. Pinecrest Ridge doesn't untap during your next untap step.

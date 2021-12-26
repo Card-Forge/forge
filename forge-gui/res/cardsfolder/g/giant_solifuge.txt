@@ -5,5 +5,4 @@ PT:4/1
 K:Trample
 K:Haste
 K:Shroud
-SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_solifuge.jpg
 Oracle:({R/G} can be paid with either {R} or {G}.)\nTrample; haste; shroud (This creature can't be the target of spells or abilities.)

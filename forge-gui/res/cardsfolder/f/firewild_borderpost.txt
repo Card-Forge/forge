@@ -3,6 +3,5 @@ ManaCost:1 R G
 Types:Artifact
 SVar:AltCost:Cost$ 1 Return<1/Land.Basic> | Description$ You may pay {1} and return a basic land you control to its owner's hand rather than pay this spell's mana cost.
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ T | Produced$ Combo R G | SpellDescription$ Add {R} or {G}.
 Oracle:You may pay {1} and return a basic land you control to its owner's hand rather than pay this spell's mana cost.\nFirewild Borderpost enters the battlefield tapped.\n{T}: Add {R} or {G}.

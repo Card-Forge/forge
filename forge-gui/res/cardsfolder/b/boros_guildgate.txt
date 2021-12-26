@@ -2,7 +2,5 @@ Name:Boros Guildgate
 ManaCost:no cost
 Types:Land Gate
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_guildgate.jpg
+A:AB$ Mana | Cost$ T | Produced$ Combo R W | SpellDescription$ Add {R} or {W}.
 Oracle:Boros Guildgate enters the battlefield tapped.\n{T}: Add {R} or {W}.

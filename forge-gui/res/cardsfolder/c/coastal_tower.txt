@@ -2,7 +2,5 @@ Name:Coastal Tower
 ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/coastal_tower.jpg
+A:AB$ Mana | Cost$ T | Produced$ Combo W U | SpellDescription$ Add {W} or {U}.
 Oracle:Coastal Tower enters the battlefield tapped.\n{T}: Add {W} or {U}.
