@@ -153,10 +153,9 @@ public abstract class DamageAiBase extends SpellAbilityAi {
                 }
                 if (value < 0.2f) { //hard floor to reduce ridiculous odds for instants over time
                     return false;
-                } else {
-                    final float chance = MyRandom.getRandom().nextFloat();
-                    return chance < value;
                 }
+                final float chance = MyRandom.getRandom().nextFloat();
+                return chance < value;
             }
         }
 

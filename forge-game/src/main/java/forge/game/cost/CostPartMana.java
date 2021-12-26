@@ -148,13 +148,12 @@ public class CostPartMana extends CostPart {
             int timesToPay = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getSVar("NumTimes"), sa);
             if (timesToPay == 0) {
                 return null;
-            } else {
-                ManaCostBeingPaid totalMana = new ManaCostBeingPaid(getManaToPay());
-                for (int i = 1; i < timesToPay; i++) {
-                    totalMana.addManaCost(getManaToPay());
-                }
-                return totalMana.toManaCost();
             }
+            ManaCostBeingPaid totalMana = new ManaCostBeingPaid(getManaToPay());
+            for (int i = 1; i < timesToPay; i++) {
+                totalMana.addManaCost(getManaToPay());
+            }
+            return totalMana.toManaCost();
         }
         return getManaToPay();
     }
