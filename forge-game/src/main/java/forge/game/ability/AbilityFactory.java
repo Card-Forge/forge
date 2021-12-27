@@ -301,15 +301,7 @@ public final class AbilityFactory {
                     : spellAbility.getHostCard().getName();
             spellAbility.setDescription(desc);
         } else if (mapParams.containsKey("SpellDescription")) {
-            final StringBuilder sb = new StringBuilder();
-
-            if (type != AbilityRecordType.SubAbility) {
-                // SubAbilities don't have Costs or Cost descriptors
-                sb.append(spellAbility.getCostDescription());
-            }
-
-            sb.append(mapParams.get("SpellDescription"));
-            spellAbility.setDescription(sb.toString());
+            spellAbility.rebuiltDescription();
         } else if (api == ApiType.Charm) {
             spellAbility.setDescription(CharmEffect.makeFormatedDescription(spellAbility));
         } else {

@@ -139,9 +139,6 @@ public class HumanPlay {
      * @return an ArrayList<SpellAbility>.
      */
     static SpellAbility chooseOptionalAdditionalCosts(Player p, final SpellAbility original) {
-        if (!original.isSpell()) {
-            return original;
-        }
 
         PlayerController c = p.getController();
 
