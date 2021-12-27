@@ -42,7 +42,6 @@ import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
@@ -1691,10 +1690,7 @@ public class ComputerUtilCard {
         if (!hiddenKws.isEmpty()) {
             pumped.addHiddenExtrinsicKeywords(timestamp, 0, hiddenKws);
         }
-        Set<CounterType> types = c.getCounters().keySet();
-        for (CounterType ct : types) {
-            pumped.addCounterFireNoEvents(ct, c.getCounters(ct), ai, sa, true, null);
-        }
+        pumped.setCounters(c.getCounters());
         //Copies tap-state and extra keywords (auras, equipment, etc.) 
         if (c.isTapped()) {
             pumped.setTapped(true);

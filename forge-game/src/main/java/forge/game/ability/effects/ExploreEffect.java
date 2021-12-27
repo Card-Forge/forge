@@ -83,14 +83,14 @@ public class ExploreEffect extends SpellAbilityEffect {
                 // if the card is not more in the game anymore
                 // this might still return true but its no problem
                 if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.equalsWithTimestamp(c)) {
-                    c.addCounter(CounterEnumType.P1P1, 1, pl, sa, true, table);
+                    c.addCounter(CounterEnumType.P1P1, 1, pl, table);
                 }
             }
 
             // a creature does explore even if it isn't on the battlefield anymore
             game.getTriggerHandler().runTrigger(TriggerType.Explores, AbilityKey.mapFromCard(c), false);
         }
-        table.triggerCountersPutAll(game);
+        table.replaceCounterEffect(game, sa, true);
         triggerList.triggerChangesZoneAll(game, sa);
     }
 

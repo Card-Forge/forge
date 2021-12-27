@@ -306,7 +306,6 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     abstract public void setCounters(final Map<CounterType, Integer> allCounters);
 
     abstract public boolean canReceiveCounters(final CounterType type);
-    abstract public int addCounter(final CounterType counterType, final int n, final Player source, final SpellAbility cause, final boolean applyMultiplier, final boolean fireEvents, GameEntityCounterTable table);
     abstract public void subtractCounter(final CounterType counterName, final int n);
     abstract public void clearCounters();
 
@@ -314,11 +313,27 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         return canReceiveCounters(CounterType.get(type));
     }
 
-    public int addCounter(final CounterEnumType counterType, final int n, final Player source, final SpellAbility cause, final boolean applyMultiplier, final boolean fireEvents, GameEntityCounterTable table) {
-        return addCounter(CounterType.get(counterType), n, source, cause, applyMultiplier, fireEvents, table);
+    public final void addCounter(final CounterType counterType, final int n, final Player source, GameEntityCounterTable table) {
+        if (n <= 0 || !canReceiveCounters(counterType)) {
+            // As per rule 107.1b
+            return;
+        }
+        // doesn't really add counters, but is just a telper to add them to the Table
+        // so the Table can handle the Replacement Effect
+        table.put(source, this, counterType, n);
     }
+
+    public final void addCounter(final CounterEnumType counterType, final int n, final Player source, GameEntityCounterTable table) {
+        addCounter(CounterType.get(counterType), n, source, table);
+    }
+
     public void subtractCounter(final CounterEnumType counterName, final int n) {
         subtractCounter(CounterType.get(counterName), n);
+    }
+
+    abstract public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table);
+    public void addCounterInternal(final CounterEnumType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table) {
+        addCounterInternal(CounterType.get(counterType), n, source, fireEvents, table);
     }
 
     @Override

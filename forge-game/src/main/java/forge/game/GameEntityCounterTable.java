@@ -14,6 +14,8 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementType;
+import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 
 public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, GameEntity, Map<CounterType, Integer>> {
@@ -116,5 +118,41 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Objects, this);
         game.getTriggerHandler().runTrigger(TriggerType.CounterAddedAll, runParams, false);
+    }
+
+    @SuppressWarnings("unchecked")
+    public void replaceCounterEffect(final Game game, final SpellAbility cause, final boolean effect) {
+        if (isEmpty()) {
+            return;
+        }
+        GameEntityCounterTable result = new GameEntityCounterTable();
+        for (Map.Entry<GameEntity, Map<Optional<Player>, Map<CounterType, Integer>>> gm : columnMap().entrySet()) {
+
+            Map<Optional<Player>, Map<CounterType, Integer>> values = gm.getValue();
+
+            final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(gm.getKey());
+            repParams.put(AbilityKey.Cause, cause);
+            repParams.put(AbilityKey.EffectOnly, effect);
+            repParams.put(AbilityKey.CounterMap, values);
+
+            switch (game.getReplacementHandler().run(ReplacementType.AddCounter, repParams)) {
+            case NotReplaced:
+                break;
+            case Updated: {
+                values = (Map<Optional<Player>, Map<CounterType, Integer>>) repParams.get(AbilityKey.CounterMap);
+                break;
+            }
+            default:
+                continue;
+            }
+
+            // Apply counter after replacement effect
+            for (Map.Entry<Optional<Player>, Map<CounterType, Integer>> e : values.entrySet()) {
+                for (Map.Entry<CounterType, Integer> ec : e.getValue().entrySet()) {
+                    gm.getKey().addCounterInternal(ec.getKey(), ec.getValue(), e.getKey().orNull(), effect, result);
+                }
+            }
+        }
+        result.triggerCountersPutAll(game);
     }
 }

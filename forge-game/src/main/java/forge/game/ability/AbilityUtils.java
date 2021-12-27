@@ -80,30 +80,6 @@ import io.sentry.event.BreadcrumbBuilder;
 public class AbilityUtils {
     private final static ImmutableList<String> cmpList = ImmutableList.of("LT", "LE", "EQ", "GE", "GT", "NE");
 
-    public static CounterType getCounterType(String name, SpellAbility sa) throws Exception {
-        CounterType counterType;
-        if ("ReplacedCounterType".equals(name)) {
-            name = (String) sa.getReplacingObject(AbilityKey.CounterType);
-        }
-        //try {
-            counterType = CounterType.getType(name);
-        /*
-        } catch (Exception e) {
-            String type = sa.getSVar(name);
-            if (type.equals("")) {
-                type = sa.getHostCard().getSVar(name);
-            }
-
-            if (type.equals("")) {
-                throw new Exception("Counter type doesn't match, nor does an SVar exist with the type name.");
-            }
-            counterType = CounterType.getType(type);
-        }
-        //*/
-
-        return counterType;
-    }
-
     // should the three getDefined functions be merged into one? Or better to
     // have separate?
     // If we only have one, each function needs to Cast the Object to the

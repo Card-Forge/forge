@@ -3,9 +3,8 @@ ManaCost:2 G
 Types:Legendary Creature Human
 PT:1/1
 K:Partner:Toothy, Imaginary Friend:Toothy
-R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Permanent.YourTeamCtrl | ReplaceWith$ AddOneMoreCounters | Description$ If one or more counters would be put on a permanent your team controls, that many plus one of each of those kinds of counters are put on that permanent instead.
-SVar:AddOneMoreCounters:DB$ ReplaceEffect | VarName$ CounterNum | VarValue$ X
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Permanent.YourTeamCtrl+inZoneBattlefield | ReplaceWith$ AddOneMoreCounters | Description$ If one or more counters would be put on a permanent your team controls, that many plus one of each of those kinds of counters are put on that permanent instead.
+SVar:AddOneMoreCounters:DB$ ReplaceCounter | ChooseCounter$ True | Amount$ X
 SVar:X:ReplaceCount$CounterNum/Plus.1
 DeckNeeds:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pir_imaginative_rascal.jpg
 Oracle:Partner with Toothy, Imaginary Friend (When this creature enters the battlefield, target player may put Toothy into their hand from their library, then shuffle.)\nIf one or more counters would be put on a permanent your team controls, that many plus one of each of those kinds of counters are put on that permanent instead.

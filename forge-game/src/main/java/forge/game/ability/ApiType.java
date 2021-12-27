@@ -144,6 +144,7 @@ public enum ApiType {
     ReorderZone (ReorderZoneEffect.class),
     Repeat (RepeatEffect.class),
     RepeatEach (RepeatEachEffect.class),
+    ReplaceCounter (ReplaceCounterEffect.class),
     ReplaceEffect (ReplaceEffect.class),
     ReplaceMana (ReplaceManaEffect.class),
     ReplaceDamage (ReplaceDamageEffect.class),

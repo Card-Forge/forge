@@ -2,20 +2,24 @@ package forge.game.replacement;
 
 import java.util.Map;
 
+import org.apache.commons.lang3.ObjectUtils;
+
+import com.google.common.base.Optional;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
  *
  */
 public class ReplaceAddCounter extends ReplacementEffect {
 
     /**
-     * 
+     *
      * ReplaceProduceMana.
      * @param mapParams &emsp; HashMap<String, String>
      * @param host &emsp; Card
@@ -29,10 +33,6 @@ public class ReplaceAddCounter extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
-        if (((int) runParams.get(AbilityKey.CounterNum)) <= 0) {
-            return false;
-        }
-
         if (hasParam("EffectOnly")) {
             final Boolean effectOnly = (Boolean) runParams.get(AbilityKey.EffectOnly);
             if (!effectOnly) {
@@ -50,19 +50,12 @@ public class ReplaceAddCounter extends ReplacementEffect {
             return false;
         }
 
-        if (!matchesValidParam("ValidSource", runParams.get(AbilityKey.Source))) {
-            return false;
-        }
-
         if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
             return false;
         }
 
-        if (hasParam("ValidCounterType")) {
-            String type = getParam("ValidCounterType");
-            if (CounterType.getType(type) != runParams.get(AbilityKey.CounterType)) {
-                return false;
-            }
+        if (!hasAnyInCounterMap(runParams)) {
+            return false;
         }
 
         return true;
@@ -73,8 +66,7 @@ public class ReplaceAddCounter extends ReplacementEffect {
      */
     @Override
     public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
-        sa.setReplacingObject(AbilityKey.CounterNum, runParams.get(AbilityKey.CounterNum));
-        sa.setReplacingObject(AbilityKey.CounterType, ((CounterType) runParams.get(AbilityKey.CounterType)).getName());
+        sa.setReplacingObject(AbilityKey.CounterMap, runParams.get(AbilityKey.CounterMap));
         Object o = runParams.get(AbilityKey.Affected);
         if (o instanceof Card) {
             sa.setReplacingObject(AbilityKey.Card, o);
@@ -84,4 +76,27 @@ public class ReplaceAddCounter extends ReplacementEffect {
         sa.setReplacingObject(AbilityKey.Object, o);
     }
 
+    public boolean hasAnyInCounterMap(Map<AbilityKey, Object> runParams) {
+
+        @SuppressWarnings("unchecked")
+        Map<Optional<Player>, Map<CounterType, Integer>> counterMap = (Map<Optional<Player>, Map<CounterType, Integer>>) runParams.get(AbilityKey.CounterMap);
+
+        for (Map.Entry<Optional<Player>, Map<CounterType, Integer>> e : counterMap.entrySet()) {
+            if (!matchesValidParam("ValidSource", e.getKey().orNull())) {
+                continue;
+            }
+            if (hasParam("ValidCounterType")) {
+                CounterType ct = CounterType.getType(getParam("ValidCounterType"));
+                if (!e.getValue().containsKey(ct)) {
+                    continue;
+                }
+                if (0 >= ObjectUtils.defaultIfNull(e.getValue().get(ct), 0)) {
+                    continue;
+                }
+            }
+            return true;
+        }
+
+        return false;
+    }
 }

@@ -16,12 +16,10 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
-import forge.game.zone.Zone;
-import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
 
-/** 
+/**
  * API for adding to or subtracting from existing counters on a target.
  *
  */
@@ -58,7 +56,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
         if (sa.hasParam("CounterType")) {
             ctype = CounterType.getType(sa.getParam("CounterType"));
         }
-        
+
         GameEntityCounterTable table = new GameEntityCounterTable();
 
         for (final Card tgtCard : getDefinedCardsOrTargeted(sa)) {
@@ -78,11 +76,10 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
                     } else {
                         addOrRemoveCounter(sa, gameCard, ctype, counterAmount, table);
                     }
-                    game.updateLastStateForCard(gameCard);
                 }
             }
         }
-        table.triggerCountersPutAll(game);
+        table.replaceCounterEffect(game, sa, true);
     }
 
     private void addOrRemoveCounter(final SpellAbility sa, final Card tgtCard, CounterType ctype,
@@ -106,12 +103,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
         Boolean putCounter = pc.chooseBinary(sa, prompt, BinaryChoiceType.AddOrRemove, params);
 
         if (putCounter) {
-            // Put another of the chosen counter on card
-            final Zone zone = tgtCard.getGame().getZoneOf(tgtCard);
-            
-            boolean apply = zone == null || zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack);
-
-            tgtCard.addCounter(chosenType, counterAmount, pl, sa, apply, table);
+            tgtCard.addCounter(chosenType, counterAmount, pl, table);
         } else {
             tgtCard.subtractCounter(chosenType, counterAmount);
         }

@@ -103,7 +103,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
     private CounterType getCounterType(SpellAbility sa) {
         if (sa.hasParam("CounterType")) {
             try {
-                return AbilityUtils.getCounterType(sa.getParam("CounterType"), sa);
+                return CounterType.getType(sa.getParam("CounterType"));
             } catch (Exception e) {
                 System.out.println("Counter type doesn't match, nor does an SVar exist with the type name.");
                 return null;

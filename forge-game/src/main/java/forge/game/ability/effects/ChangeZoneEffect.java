@@ -734,7 +734,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("WithCountersType")) {
                         CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
                         int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
-                        movedCard.addCounter(cType, cAmount, player, sa, true, counterTable);
+                        movedCard.addCounter(cType, cAmount, player, counterTable);
                     }
 
                     if (sa.hasParam("ExileFaceDown") || sa.hasParam("FaceDown")) {
@@ -820,7 +820,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         triggerList.triggerChangesZoneAll(game, sa);
-        counterTable.triggerCountersPutAll(game);
+        counterTable.replaceCounterEffect(game, sa, true);
 
         if (sa.hasParam("AtEOT") && !triggerList.isEmpty()) {
             registerDelayedTrigger(sa, sa.getParam("AtEOT"), triggerList.allCards());

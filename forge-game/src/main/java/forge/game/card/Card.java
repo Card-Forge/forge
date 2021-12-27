@@ -1375,69 +1375,36 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return true;
     }
 
-    public final int addCounter(final CounterType counterType, final int n, final Player source, final SpellAbility cause, final boolean applyMultiplier, GameEntityCounterTable table) {
-        return addCounter(counterType, n, source, cause, applyMultiplier, true, table);
-    }
-    public final int addCounterFireNoEvents(final CounterType counterType, final int n, final Player source, final SpellAbility cause, final boolean applyMultiplier, GameEntityCounterTable table) {
-        return addCounter(counterType, n, source, cause, applyMultiplier, false, table);
-    }
-    public final int addCounter(final CounterEnumType counterType, final int n, final Player source, final SpellAbility cause, final boolean applyMultiplier, GameEntityCounterTable table) {
-        return addCounter(counterType, n, source, cause, applyMultiplier, true, table);
-    }
-    public final int addCounterFireNoEvents(final CounterEnumType counterType, final int n, final Player source, final SpellAbility cause, final boolean applyMultiplier, GameEntityCounterTable table) {
-        return addCounter(counterType, n, source, cause, applyMultiplier, false, table);
-    }
-
     @Override
-    public int addCounter(final CounterType counterType, final int n, final Player source, final SpellAbility cause, final boolean applyMultiplier, final boolean fireEvents, GameEntityCounterTable table) {
+    public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table) {
         int addAmount = n;
         if (addAmount <= 0 || !canReceiveCounters(counterType)) {
             // As per rule 107.1b
-            return 0;
-        }
-        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
-        repParams.put(AbilityKey.Source, source);
-        repParams.put(AbilityKey.Cause, cause);
-        repParams.put(AbilityKey.CounterType, counterType);
-        repParams.put(AbilityKey.CounterNum, addAmount);
-        repParams.put(AbilityKey.EffectOnly, applyMultiplier);
-
-        switch (getGame().getReplacementHandler().run(ReplacementType.AddCounter, repParams)) {
-        case NotReplaced:
-            break;
-        case Updated: {
-            addAmount = (int) repParams.get(AbilityKey.CounterNum);
-            break;
-        }
-        default:
-            return 0;
+            return;
         }
 
-        if (addAmount <= 0) {
-            return 0;
-        }
-
-        final Integer oldValue = getCounters(counterType);
-        final Integer newValue = addAmount + (oldValue == null ? 0 : oldValue);
+        final int oldValue = getCounters(counterType);
+        final int newValue = addAmount + oldValue;
         if (fireEvents) {
+            getGame().updateLastStateForCard(this);
+
             // Not sure why firing events wraps EVERYTHING ins
-            if (!newValue.equals(oldValue)) {
-                final int powerBonusBefore = getPowerBonusFromCounters();
-                final int toughnessBonusBefore = getToughnessBonusFromCounters();
-                final int loyaltyBefore = getCurrentLoyalty();
 
-                setCounters(counterType, newValue);
-                getGame().addCounterAddedThisTurn(source, counterType, this, addAmount);
-                view.updateCounters(this);
+            final int powerBonusBefore = getPowerBonusFromCounters();
+            final int toughnessBonusBefore = getToughnessBonusFromCounters();
+            final int loyaltyBefore = getCurrentLoyalty();
 
-                //fire card stats changed event if p/t bonuses or loyalty changed from added counters
-                if (powerBonusBefore != getPowerBonusFromCounters() || toughnessBonusBefore != getToughnessBonusFromCounters() || loyaltyBefore != getCurrentLoyalty()) {
-                    getGame().fireEvent(new GameEventCardStatsChanged(this));
-                }
+            setCounters(counterType, newValue);
+            getGame().addCounterAddedThisTurn(source, counterType, this, addAmount);
+            view.updateCounters(this);
 
-                // play the Add Counter sound
-                getGame().fireEvent(new GameEventCardCounters(this, counterType, oldValue == null ? 0 : oldValue, newValue));
+            //fire card stats changed event if p/t bonuses or loyalty changed from added counters
+            if (powerBonusBefore != getPowerBonusFromCounters() || toughnessBonusBefore != getToughnessBonusFromCounters() || loyaltyBefore != getCurrentLoyalty()) {
+                getGame().fireEvent(new GameEventCardStatsChanged(this));
             }
+
+            // play the Add Counter sound
+            getGame().fireEvent(new GameEventCardCounters(this, counterType, oldValue, newValue));
 
             // Run triggers
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
@@ -1461,15 +1428,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         if (newValue <= 0) {
             removeCounterTimestamp(counterType);
-        } else {
-            if (addCounterTimestamp(counterType)) {
-                updateAbilityTextForView();
-            }
+        } else if (addCounterTimestamp(counterType)) {
+            updateAbilityTextForView();
         }
         if (table != null) {
             table.put(source, this, counterType, addAmount);
         }
-        return addAmount;
     }
 
     public boolean addCounterTimestamp(CounterType counterType) {
@@ -5441,7 +5405,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     || source.hasKeyword(Keyword.WITHER) || source.hasKeyword(Keyword.INFECT);
 
             if (wither) { // 120.3d
-                addCounter(CounterType.get(CounterEnumType.M1M1), damageIn, source.getController(), null, true, counterTable);
+                addCounter(CounterEnumType.M1M1, damageIn, source.getController(), counterTable);
                 damageType = DamageType.M1M1Counters;
             }
             else { // 120.3e
@@ -6783,20 +6747,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return etbCounters.cellSet();
     }
 
-    public final boolean putEtbCounters(GameEntityCounterTable table) {
-        boolean changed = false;
+    public final void putEtbCounters(GameEntityCounterTable table) {
         for (Table.Cell<Player, CounterType, Integer> e : etbCounters.cellSet()) {
             CounterType ct = e.getColumnKey();
             if (this.isLKI()) {
                 if (canReceiveCounters(ct)) {
                     setCounters(ct, getCounters(ct) + e.getValue());
-                    changed = true;
                 }
             } else {
-                changed |= addCounter(ct, e.getValue(), e.getRowKey(), null, true, table) > 0;
+                addCounter(ct, e.getValue(), e.getRowKey(), table);
             }
         }
-        return changed;
     }
 
     public final int getFinalChapterNr() {

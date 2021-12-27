@@ -572,7 +572,7 @@ public class GameAction {
         game.getTriggerHandler().registerActiveLTBTrigger(lastKnownInfo);
         game.getTriggerHandler().registerActiveTrigger(copied, false);
 
-        table.triggerCountersPutAll(game);
+        table.replaceCounterEffect(game, null, true);
 
         // play the change zone sound
         game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
@@ -1299,8 +1299,8 @@ public class GameAction {
                     int loyal = c.getCounters(CounterEnumType.LOYALTY);
                     if (loyal < beeble) {
                         GameEntityCounterTable counterTable = new GameEntityCounterTable();
-                        c.addCounter(CounterEnumType.LOYALTY, beeble - loyal, c.getController(), null, false, counterTable);
-                        counterTable.triggerCountersPutAll(game);
+                        c.addCounter(CounterEnumType.LOYALTY, beeble - loyal, c.getController(), counterTable);
+                        counterTable.replaceCounterEffect(game, null, false);
                     } else if (loyal > beeble) {
                         c.subtractCounter(CounterEnumType.LOYALTY, loyal - beeble);
                     }
@@ -2304,7 +2304,7 @@ public class GameAction {
         damageMap.triggerDamageDoneOnce(isCombat, game);
         damageMap.clear();
 
-        counterTable.triggerCountersPutAll(game);
+        counterTable.replaceCounterEffect(game, cause, !isCombat);
         counterTable.clear();
     }
 

@@ -2501,7 +2501,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (subtract) {
                 card.subtractCounter(counter, count);
             } else {
-                card.addCounter(counter, count, card.getController(), null, false, null);
+                card.addCounterInternal(counter, count, card.getController(), false, null);
             }
         }
 
