@@ -483,14 +483,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         return gainLife(lifeGain, source, null);
     }
     public final boolean gainLife(int lifeGain, final Card source, final SpellAbility sa) {
+        if (!canGainLife()) {
+            return false;
+        }
+
         // Run any applicable replacement effects.
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
         repParams.put(AbilityKey.LifeGained, lifeGain);
         repParams.put(AbilityKey.Source, source);
-
-        if (!canGainLife()) {
-            return false;
-        }
 
         switch (getGame().getReplacementHandler().run(ReplacementType.GainLife, repParams)) {
         case NotReplaced:

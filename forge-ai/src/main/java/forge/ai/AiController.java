@@ -2146,10 +2146,10 @@ public class AiController {
         return library;
     } // smoothComputerManaCurve()
 
-    public int chooseNumber(SpellAbility sa, String title,List<Integer> options, Player relatedPlayer) {
+    public int chooseNumber(SpellAbility sa, String title, List<Integer> options, Player relatedPlayer) {
         switch(sa.getApi())
         {
-            case SetLife:
+            case SetLife: // Reverse the Sands
                 if (relatedPlayer.equals(sa.getHostCard().getController())) {
                     return Collections.max(options);
                 } else if (relatedPlayer.isOpponentOf(sa.getHostCard().getController())) {
