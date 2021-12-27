@@ -452,7 +452,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final boolean setLife(final int newLife, final Card source) {
         boolean change = false;
-        // rule 118.5
+        // rule 119.5
         if (life > newLife) {
             change = loseLife(life - newLife, false, false) > 0;
         }
