@@ -2350,6 +2350,10 @@ public class AbilityUtils {
             return doXMath(player.getTurn(), expr, c, ctb);
         }
 
+        if (sq[0].equals("NotedNumber")) {
+            return doXMath(player.getNotedNumberForName(c.getName()), expr, c, ctb);
+        }
+
         if (sq[0].startsWith("OppTypesInGrave")) {
             final PlayerCollection opponents = player.getOpponents();
             CardCollection oppCards = new CardCollection();
