@@ -517,7 +517,7 @@ public class CardView extends GameEntityView {
             }
             break;
         case Hand:
-            if (controller == viewer) {
+            if (controller.equals(viewer)) {
                 return true;
             }
             break;
