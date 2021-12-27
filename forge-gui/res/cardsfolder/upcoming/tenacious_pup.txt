@@ -1,0 +1,14 @@
+Name:Tenacious Pup
+ManaCost:G
+Types:Creature Wolf
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 1 life. When you cast your next creature spell, that creature enters the battlefield with an additional +1/+1 counter, trample counter, and vigilance counter on it.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1 | SubAbility$ DBDelayedTrigger
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Execute$ TrigAddAPI | Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerDescription$ When you cast your next creature spell, that creature enters the battlefield with an additional +1/+1 counter, trample counter, and vigilance counter on it.
+SVar:TrigAddAPI:DB$ Animate | Defined$ TriggeredCard | sVars$ AddExtraCounter,DBTrample,DBVigilance | SubAbility$ DBAddETBRep
+SVar:DBAddETBRep:DB$ Animate | Defined$ TriggeredCard | Keywords$ ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Card.Self
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBTrample
+SVar:DBTrample:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ Trample | CounterNum$ 1 | SubAbility$ DBVigilance
+SVar:DBVigilance:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ Vigilance | CounterNum$ 1
+DeckHas:Ability$LifeGain & Ability$Counters
+Oracle:When Tenacious Pup enters the battlefield, you gain 1 life. When you cast your next creature spell, that creature enters the battlefield with an additional +1/+1 counter, trample counter, and vigilance counter on it.
