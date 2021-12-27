@@ -1,0 +1,10 @@
+Name:Saw in Half
+ManaCost:2 B
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBCopy | RememberLKI$ True | SpellDescription$ Destroy target creature.
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | NumCopies$ 2 | Controller$ TargetedController | SetPower$ dX | SetToughness$ dY | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ If that creature dies this way, its controller creates two tokens that are copies of that creature, except their base power is half that creature's power and their base toughness is half that creature's toughness. Round up each time.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+SVar:dX:RememberedLKI$CardPower/HalfUp
+SVar:dY:RememberedLKI$CardToughness/HalfUp
+Oracle:Destroy target creature. If that creature dies this way, its controller creates two tokens that are copies of that creature, except their base power is half that creature's power and their base toughness is half that creature's toughness. Round up each time.
