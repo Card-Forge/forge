@@ -182,6 +182,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int lastTurnNr = 0;
 
     private final Map<String, FCollection<String>> notes = Maps.newHashMap();
+    private final Map<String, Integer> notedNum = Maps.newHashMap();
 
     private boolean revolt = false;
 
@@ -1610,6 +1611,16 @@ public class Player extends GameEntity implements Comparable<Player> {
             notes.put(notedFor, new FCollection<>());
         }
         return notes.get(notedFor);
+    }
+
+    public void noteNumberForName(String notedFor, int noted) {
+        notedNum.put(notedFor, noted);
+    }
+    public int getNotedNumberForName(String notedFor) {
+        if (!notedNum.containsKey(notedFor)) {
+            return 0;
+        }
+        return notedNum.get(notedFor);
     }
 
     public final CardCollectionView mill(int n, final ZoneType destination,
