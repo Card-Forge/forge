@@ -234,6 +234,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             if (cardZone != null && cardZone.is(ZoneType.Command) && sa.hasParam("HiddenAgenda")) {
                 return true;
             }
+            if (sa.hasParam("AdditionalActivationZone")) {
+                if (cardZone != null && cardZone.is(ZoneType.valueOf(sa.getParam("AdditionalActivationZone")))) {
+                    return true;
+                }
+            }
             // Not a Spell, or on Battlefield, return false
             if (!sa.isSpell() || (cardZone != null && ZoneType.Battlefield.equals(cardZone.getZoneType()))
                     || (this.getZone() != null && !this.getZone().equals(ZoneType.Hand))) {
