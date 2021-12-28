@@ -66,7 +66,7 @@ public class ManifestAi extends SpellAbilityAi {
                 if (!buff) {
                     return false;
                 }
-            } else if (!SpellAbilityAi.isSorcerySpeed(sa)) {
+            } else if (!SpellAbilityAi.isSorcerySpeed(sa, ai)) {
                 return false;
             }
         } else {

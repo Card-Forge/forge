@@ -479,11 +479,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (sa.isPwAbility()) {
-            if (!c.hasKeyword("CARDNAME's loyalty abilities can be activated at instant speed.")
-                    && !activator.canCastSorcery()) {
-                return false;
-            }
-
             final int initialLimit = c.hasKeyword("CARDNAME's loyalty abilities can be activated twice each turn rather than only once") ? 1 : 0;
             final int limits = c.getAmountOfKeyword("May activate CARDNAME's loyalty abilities once") + initialLimit;
 

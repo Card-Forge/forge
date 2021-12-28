@@ -1151,7 +1151,7 @@ public class ComputerUtilCard {
         if (c.isEquipped()) {
             valueTempo *= 2;
         }
-        if (SpellAbilityAi.isSorcerySpeed(sa)) {
+        if (SpellAbilityAi.isSorcerySpeed(sa, ai)) {
             valueTempo *= 2;    //sorceries have less usage opportunities
         }
         if (!c.canBeDestroyed()) {
@@ -1329,7 +1329,7 @@ public class ComputerUtilCard {
         // will the creature attack (only relevant for sorcery speed)?
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && phase.isPlayerTurn(ai)
-                && (SpellAbilityAi.isSorcerySpeed(sa) || main1Preferred)
+                && (SpellAbilityAi.isSorcerySpeed(sa, ai) || main1Preferred)
                 && power > 0
                 && doesCreatureAttackAI(ai, c)) {
             return true;

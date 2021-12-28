@@ -2393,8 +2393,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
 
         if (isActivatedAbility()) {
-            // Activated Abillties are instant speed per default
-            return !getRestrictions().isSorcerySpeed();
+            // Activated Abilities are instant speed per default, except Planeswalker abilities
+            return !isPwAbility() && !getRestrictions().isSorcerySpeed();
         }
         return true;
     }
@@ -2403,10 +2403,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (getRestrictions().isInstantSpeed()) {
             return true;
         }
-        if (isSpell()) {
-            if (hasSVar("IsCastFromPlayEffect") || host.isInstant() || host.hasKeyword(Keyword.FLASH)) {
-                return true;
-            }
+        if (isSpell() && (hasSVar("IsCastFromPlayEffect") || host.isInstant() || host.hasKeyword(Keyword.FLASH))) {
+            return true;
         }
 
         return StaticAbilityCastWithFlash.anyWithFlash(this, host, activator);
