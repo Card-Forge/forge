@@ -87,7 +87,7 @@ public class AnimateAi extends SpellAbilityAi {
             }
         }
         // Don't use instant speed animate abilities before AI's COMBAT_BEGIN
-        if (!ph.is(PhaseType.COMBAT_BEGIN) && ph.isPlayerTurn(ai) && !SpellAbilityAi.isSorcerySpeed(sa)
+        if (!ph.is(PhaseType.COMBAT_BEGIN) && ph.isPlayerTurn(ai) && !SpellAbilityAi.isSorcerySpeed(sa, ai)
                 && !sa.hasParam("ActivationPhases") && !"Permanent".equals(sa.getParam("Duration"))) {
             return false;
         }
@@ -175,7 +175,7 @@ public class AnimateAi extends SpellAbilityAi {
                     }
                 }
 
-                if (!SpellAbilityAi.isSorcerySpeed(sa) && !"Permanent".equals(sa.getParam("Duration"))) {
+                if (!SpellAbilityAi.isSorcerySpeed(sa, aiPlayer) && !"Permanent".equals(sa.getParam("Duration"))) {
                     if (sa.hasParam("Crew") && c.isCreature()) {
                         // Do not try to crew a vehicle which is already a creature
                         return false;

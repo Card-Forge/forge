@@ -83,7 +83,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
                 if (ph.getPhase().isBefore(PhaseType.MAIN2) && !ComputerUtil.castSpellInMain1(ai, sa)) {
                     return false;
                 }
-                if (ph.isPlayerTurn(ai) && !isSorcerySpeed(sa)) {
+                if (ph.isPlayerTurn(ai) && !isSorcerySpeed(sa, ai)) {
                     return false;
                 }
             }

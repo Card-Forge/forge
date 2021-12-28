@@ -18,7 +18,7 @@ public class TapAi extends TapAiBase {
         if (turn.isOpponentOf(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             // Tap things down if it's Human's turn
         } else if (turn.equals(ai)) {
-            if (SpellAbilityAi.isSorcerySpeed(sa) && phase.getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
+            if (SpellAbilityAi.isSorcerySpeed(sa, ai) && phase.getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
                 // Cast it if it's a sorcery.
             } else if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 // Aggro Brains are willing to use TapEffects aggressively instead of defensively

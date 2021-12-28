@@ -251,11 +251,11 @@ public abstract class SpellAbilityAi {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    protected static boolean isSorcerySpeed(final SpellAbility sa) {
+    protected static boolean isSorcerySpeed(final SpellAbility sa, Player ai) {
         return (sa.getRootAbility().isSpell() && sa.getHostCard().isSorcery())
             || (sa.getRootAbility().isActivatedAbility() && sa.getRestrictions().isSorcerySpeed())
             || (sa.getRootAbility().isAdventure() && sa.getHostCard().getState(CardStateName.Adventure).getType().isSorcery())
-            || (sa.isPwAbility() && !sa.getHostCard().hasKeyword("CARDNAME's loyalty abilities can be activated at instant speed."));
+            || (sa.isPwAbility() && !sa.withFlash(sa.getHostCard(), ai));
     }
 
     /**

@@ -126,7 +126,7 @@ public abstract class DamageAiBase extends SpellAbilityAi {
             // chance to burn player based on current hand size
             if (hand.size() > 2) {
                 float value = 0;
-                if (SpellAbilityAi.isSorcerySpeed(sa)) {
+                if (SpellAbilityAi.isSorcerySpeed(sa, comp)) {
                     //lower chance for sorcery as other spells may be cast in main2
                     if (phase.isPlayerTurn(comp) && phase.is(PhaseType.MAIN2)) {
                         value = 1.0f * restDamage / enemy.getLife();

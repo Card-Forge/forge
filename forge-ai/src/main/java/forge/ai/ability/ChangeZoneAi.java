@@ -1059,7 +1059,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
                 if (!immediately && (!game.getPhaseHandler().getNextTurn().equals(ai)
                             || game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
-                        && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)
+                        && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa, ai)
                         && !ComputerUtil.activateForCost(sa, ai)) {
                     return false;
                 }

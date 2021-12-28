@@ -81,7 +81,7 @@ public class PumpAi extends PumpAiBase {
                 return true;
             }
 
-            return SpellAbilityAi.isSorcerySpeed(sa) || (ph.getNextTurn().equals(ai) && !ph.getPhase().isBefore(PhaseType.END_OF_TURN));
+            return SpellAbilityAi.isSorcerySpeed(sa, ai) || (ph.getNextTurn().equals(ai) && !ph.getPhase().isBefore(PhaseType.END_OF_TURN));
         } else if (logic.equals("Aristocrat")) {
             final boolean isThreatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(sa.getHostCard());
             if (!ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && !isThreatened) {
@@ -112,7 +112,7 @@ public class PumpAi extends PumpAiBase {
                 || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
-            return sa.isCurse() || SpellAbilityAi.isSorcerySpeed(sa) || main1Preferred;
+            return sa.isCurse() || SpellAbilityAi.isSorcerySpeed(sa, ai) || main1Preferred;
         }
         return true;
     }
@@ -364,7 +364,7 @@ public class PumpAi extends PumpAiBase {
                     if (ComputerUtilCard.shouldPumpCard(ai, sa, card, defense, attack, keywords, false)) {
                         return true;
                     } else if (containsUsefulKeyword(ai, keywords, card, sa, attack)) {
-                        if (game.getPhaseHandler().isPreCombatMain() && SpellAbilityAi.isSorcerySpeed(sa) ||
+                        if (game.getPhaseHandler().isPreCombatMain() && SpellAbilityAi.isSorcerySpeed(sa, ai) ||
                                 game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai) ||
                                 game.getPhaseHandler().is(PhaseType.COMBAT_BEGIN, ai)) {
                             Card pumped = ComputerUtilCard.getPumpedCreature(ai, sa, card, 0, 0, keywords);
