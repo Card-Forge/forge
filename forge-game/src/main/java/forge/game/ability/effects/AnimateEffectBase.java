@@ -50,45 +50,16 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
 
-        boolean addAllCreatureTypes = false;
-        boolean removeSuperTypes = false;
-        boolean removeCardTypes = false;
-        boolean removeSubTypes = false;
-        boolean removeLandTypes = false;
-        boolean removeCreatureTypes = false;
-        boolean removeArtifactTypes = false;
-        boolean removeEnchantmentTypes = false;
-
+        boolean addAllCreatureTypes = sa.hasParam("AddAllCreatureTypes");
+        boolean removeSuperTypes = sa.hasParam("RemoveSuperTypes");
+        boolean removeCardTypes = sa.hasParam("RemoveCardTypes");
+        boolean removeSubTypes = sa.hasParam("RemoveSubTypes");
+        boolean removeLandTypes = sa.hasParam("RemoveLandTypes");
+        boolean removeCreatureTypes = sa.hasParam("RemoveCreatureTypes");
+        boolean removeArtifactTypes = sa.hasParam("RemoveArtifactTypes");
+        boolean removeEnchantmentTypes = sa.hasParam("RemoveEnchantmentTypes");
+        boolean removeNonManaAbilities = sa.hasParam("RemoveNonManaAbilities");
         boolean removeAll = sa.hasParam("RemoveAllAbilities");
-
-        if (sa.hasParam("AddAllCreatureTypes")) {
-            addAllCreatureTypes = true;
-        }
-
-        if (sa.hasParam("RemoveSuperTypes")) {
-            removeSuperTypes = true;
-        }
-
-        if (sa.hasParam("RemoveCardTypes")) {
-            removeCardTypes = true;
-        }
-
-        if (sa.hasParam("RemoveSubTypes")) {
-            removeSubTypes = true;
-        }
-
-        if (sa.hasParam("RemoveLandTypes")) {
-            removeLandTypes = true;
-        }
-        if (sa.hasParam("RemoveCreatureTypes")) {
-            removeCreatureTypes = true;
-        }
-        if (sa.hasParam("RemoveArtifactTypes")) {
-            removeArtifactTypes = true;
-        }
-        if (sa.hasParam("RemoveEnchantmentTypes")) {
-            removeEnchantmentTypes = true;
-        }
 
         if (sa.hasParam("RememberAnimated")) {
             source.addRemembered(c);
@@ -195,7 +166,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
                 || !addedAbilities.isEmpty() || !removedAbilities.isEmpty() || !addedTriggers.isEmpty()
                 || !addedReplacements.isEmpty() || !addedStaticAbilities.isEmpty()) {
             c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements,
-                    addedStaticAbilities, removeAll, false, timestamp, 0);
+                    addedStaticAbilities, removeAll, removeNonManaAbilities, timestamp, 0);
         }
 
         if (!"Permanent".equals(sa.getParam("Duration"))) {
