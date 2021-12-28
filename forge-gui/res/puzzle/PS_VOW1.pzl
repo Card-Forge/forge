@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Innistrad: Crimson Vow #01
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/11/188.-VOW1-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Your opponent has four untapped lands and no cards in hand.
+[state]
+humanlife=5
+ailife=5
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Lantern Bearer;By Invitation Only;Dreamshackle Geist;Spectral Adversary
+humanbattlefield=Wizard Class|Counters:LEVEL=3;Shipwreck Sifters|Counters:P1P1=2;Katilda, Dawnhart Martyr;Selhoff Entomber;Island;Island;Island;Island;Plains;Plains
+aibattlefield=Anje, Maid of Dishonor;Courier Bat;Courier Bat;Mountain;Mountain;Swamp;Swamp
