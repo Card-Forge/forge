@@ -2162,6 +2162,10 @@ public class AbilityUtils {
             return doXMath(c.getRememberedCount(), expr, c, ctb);
         }
 
+        if (sq[0].startsWith("ImprintedSize")) {
+            return doXMath(c.getImprintedCards().size(), expr, c, ctb);
+        }
+
         if (sq[0].startsWith("RememberedNumber")) {
             int num = 0;
             for (final Object o : c.getRemembered()) {

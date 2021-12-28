@@ -1,0 +1,15 @@
+Name:Unexpected Conversion
+ManaCost:2 U
+Types:Sorcery
+A:SP$ Draw | NumCards$ 2 | SubAbility$ DBExile | SpellDescription$ Draw two cards.
+SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | Hidden$ True | ChangeType$ Instant,Sorcery | SelectPrompt$ Select an instant or sorcery card from your hand | RememberChanged$ True | SubAbility$ ExileHand | StackDescription$ SpellDescription | SpellDescription$ Then you may exile an instant or sorcery card from your hand.
+SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ You | ChangeType$ Remembered.sameName | ChangeNum$ NumInHand | Chooser$ You | Imprint$ True | SubAbility$ ExileLib | StackDescription$ SpellDescription | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SpellDescription$ If you do, search your hand
+SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ You | ChangeType$ Remembered.sameName | ChangeNum$ NumInLib | Chooser$ You | Shuffle$ True | StackDescription$ SpellDescription | SubAbility$ DBSeek | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SpellDescription$ and library for any number of cards with the same name, exile them, then shuffle.
+SVar:DBSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | NoLooking$ True | NoReveal$ True | ChangeNum$ X | ChangeType$ Instant,Sorcery | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ Seek an instant or sorcery card for each card exiled from your hand this way.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:NumInLib:Count$InYourLibrary
+SVar:NumInHand:Count$InYourHand
+SVar:X:Count$RememberedSize/Plus.Y
+SVar:Y:Count$ImprintedSize
+DeckHints:Type$Instant|Sorcery
+Oracle:Draw two cards. Then you may exile an instant or sorcery card from your hand. If you do, search your hand and library for any number of cards with the same name, exile them, then shuffle. Seek an instant or sorcery card for each card exiled from your hand this way.
