@@ -333,6 +333,13 @@ public class PumpEffect extends SpellAbilityEffect {
             }
         }
 
+        if (sa.hasParam("NoteNumber")) {
+            int num = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NoteNumber"), sa);
+            for (Player p : tgtPlayers) {
+                p.noteNumberForName(host.getName(), num);
+            }
+        }
+
         if (sa.hasParam("ForgetObjects")) {
             host.removeRemembered(AbilityUtils.getDefinedObjects(host, sa.getParam("ForgetObjects"), sa));
         }
