@@ -2266,6 +2266,10 @@ public class AbilityUtils {
             return doXMath(player.getNumDrawnThisTurn(), expr, c, ctb);
         }
 
+        if (sq[0].equals("YouRollThisTurn")) {
+            return doXMath(player.getNumRollsThisTurn(), expr, c, ctb);
+        }
+
         if (sq[0].equals("YouSurveilThisTurn")) {
             return doXMath(player.getSurveilThisTurn(), expr, c, ctb);
         }
