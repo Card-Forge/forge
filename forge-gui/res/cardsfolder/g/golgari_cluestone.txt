@@ -1,10 +1,8 @@
 Name:Golgari Cluestone
 ManaCost:3
 Types:Artifact
-A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ T | Produced$ Combo B G | SpellDescription$ Add {B} or {G}.
 A:AB$ Draw | Cost$ B G T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 AI:RemoveDeck:Random
 DeckNeeds:Color$Black|Green
-SVar:Picture:http://www.wizards.com/global/images/magic/general/golgari_cluestone.jpg
 Oracle:{T}: Add {B} or {G}.\n{B}{G}, {T}, Sacrifice Golgari Cluestone: Draw a card.

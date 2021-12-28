@@ -2,7 +2,5 @@ Name:Arctic Flats
 ManaCost:no cost
 Types:Snow Land
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/arctic_flats.jpg
+A:AB$ Mana | Cost$ T | Produced$ Combo W G | SpellDescription$ Add {W} or {G}.
 Oracle:Arctic Flats enters the battlefield tapped.\n{T}: Add {G} or {W}.

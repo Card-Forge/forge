@@ -1,8 +1,6 @@
 Name:Savai Crystal
 ManaCost:3
 Types:Artifact
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ Mana | Cost$ T | Produced$ Combo R W B | SpellDescription$ Add {R}, {W}, or {B}.
 K:Cycling:2
 Oracle:{T}: Add {R}, {W}, or {B}.\nCycling {2} ({2}, Discard this card: Draw a card.)

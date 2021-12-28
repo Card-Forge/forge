@@ -2,7 +2,5 @@ Name:Stone Quarry
 ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_quarry.jpg
+A:AB$ Mana | Cost$ T | Produced$ Combo R W | SpellDescription$ Add {R} or {W}.
 Oracle:Stone Quarry enters the battlefield tapped.\n{T}: Add {R} or {W}.

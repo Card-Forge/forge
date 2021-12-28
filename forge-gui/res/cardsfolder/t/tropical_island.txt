@@ -1,5 +1,4 @@
 Name:Tropical Island
 ManaCost:no cost
 Types:Land Forest Island
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tropical_island.jpg
 Oracle:({T}: Add {G} or {U}.)

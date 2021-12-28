@@ -2,9 +2,6 @@ Name:Noble Hierarch
 ManaCost:G
 Types:Creature Human Druid
 PT:0/1
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 K:Exalted
-SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_hierarch.jpg
+A:AB$ Mana | Cost$ T | Produced$ Combo W U G | SpellDescription$ Add {W}, {U}, {G}.
 Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\n{T}: Add {G}, {W}, or {U}.

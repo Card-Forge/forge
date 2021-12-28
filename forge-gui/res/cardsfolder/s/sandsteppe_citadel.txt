@@ -2,8 +2,5 @@ Name:Sandsteppe Citadel
 ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sandsteppe_citadel.jpg
+A:AB$ Mana | Cost$ T | Produced$ Combo W B G | SpellDescription$ Add {W}, {B}, or {G}.
 Oracle:Sandsteppe Citadel enters the battlefield tapped.\n{T}: Add {W}, {B}, or {G}.

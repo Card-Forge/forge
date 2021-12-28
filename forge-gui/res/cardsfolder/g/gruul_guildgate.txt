@@ -2,7 +2,5 @@ Name:Gruul Guildgate
 ManaCost:no cost
 Types:Land Gate
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_guildgate.jpg
+A:AB$ Mana | Cost$ T | Produced$ Combo R G | SpellDescription$ Add {R} or {G}.
 Oracle:Gruul Guildgate enters the battlefield tapped.\n{T}: Add {R} or {G}.

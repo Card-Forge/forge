@@ -1,11 +1,8 @@
 Name:Abzan Banner
 ManaCost:3
 Types:Artifact
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ T | Produced$ Combo W B G | SpellDescription$ Add {W}, {B} or {G}.
 A:AB$ Draw | Cost$ W B G T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 AI:RemoveDeck:Random
 DeckNeeds:Color$White|Black|Green
-SVar:Picture:http://www.wizards.com/global/images/magic/general/abzan_banner.jpg
 Oracle:{T}: Add {W}, {B}, or {G}.\n{W}{B}{G}, {T}, Sacrifice Abzan Banner: Draw a card.

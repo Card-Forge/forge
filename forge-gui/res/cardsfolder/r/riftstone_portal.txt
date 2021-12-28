@@ -2,8 +2,6 @@ Name:Riftstone Portal
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-S:Mode$ Continuous | EffectZone$ Graveyard | Affected$ Land.YouCtrl | AddAbility$ ManaG & ManaW | Description$ As long as Riftstone Portal is in your graveyard, lands you control have "{T}: Add {G} or {W}."
-SVar:ManaG:AB$Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-SVar:ManaW:AB$Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/riftstone_portal.jpg
+S:Mode$ Continuous | EffectZone$ Graveyard | Affected$ Land.YouCtrl | AddAbility$ AddMana | Description$ As long as Riftstone Portal is in your graveyard, lands you control have "{T}: Add {G} or {W}."
+SVar:AddMana:AB$ Mana | Cost$ T | Produced$ Combo G W | SpellDescription$ Add {G} or {W}.
 Oracle:{T}: Add {C}.\nAs long as Riftstone Portal is in your graveyard, lands you control have "{T}: Add {G} or {W}."

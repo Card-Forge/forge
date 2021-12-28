@@ -2,9 +2,6 @@ Name:Rugged Prairie
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Mana | Cost$ RW T | Produced$ W | Amount$ 2 | SpellDescription$ Add {W}{W}.
-A:AB$ Mana | Cost$ RW T | Produced$ R W | SpellDescription$ Add {R}{W}.
-A:AB$ Mana | Cost$ RW T | Produced$ R | Amount$ 2 | SpellDescription$ Add {R}{R}.
+A:AB$ Mana | Cost$ RW T | Produced$ Combo R W | Amount$ 2 | SpellDescription$ Add {R}{R}, {R}{W}, or {W}{W}.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rugged_prairie.jpg
 Oracle:{T}: Add {C}.\n{R/W}, {T}: Add {R}{R}, {R}{W}, or {W}{W}.

@@ -2,8 +2,5 @@ Name:Opulent Palace
 ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/opulent_palace.jpg
+A:AB$ Mana | Cost$ T | Produced$ Combo B G U | SpellDescription$ Add {B}, {G}, or {U}.
 Oracle:Opulent Palace enters the battlefield tapped.\n{T}: Add {B}, {G}, or {U}.

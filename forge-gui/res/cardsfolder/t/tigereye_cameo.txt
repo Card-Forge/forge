@@ -1,9 +1,7 @@
 Name:Tigereye Cameo
 ManaCost:3
 Types:Artifact
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ T | Produced$ Combo G W | SpellDescription$ Add {G} or {W}.
 AI:RemoveDeck:Random
 DeckNeeds:Color$Green|White
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tigereye_cameo.jpg
 Oracle:{T}: Add {G} or {W}.

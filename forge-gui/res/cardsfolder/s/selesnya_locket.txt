@@ -1,8 +1,7 @@
 Name:Selesnya Locket
 ManaCost:3
 Types:Artifact
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ T | Produced$ Combo G W | SpellDescription$ Add {G} or {W}.
 AI:RemoveDeck:Random
 DeckNeeds:Color$Green | White
 A:AB$Draw | Cost$ GW GW GW GW T Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.

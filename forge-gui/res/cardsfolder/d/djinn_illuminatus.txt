@@ -5,5 +5,4 @@ PT:3/5
 K:Flying
 S:Mode$ Continuous | AddKeyword$ Replicate:CardManaCost | Affected$ Instant.YouCtrl,Sorcery.YouCtrl | AffectedZone$ Stack | EffectZone$ Battlefield | Description$ Each instant and sorcery spell you cast has replicate. The replicate cost is equal to its mana cost. (When you cast it, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/djinn_illuminatus.jpg
 Oracle:({U/R} can be paid with either {U} or {R}.)\nFlying\nEach instant and sorcery spell you cast has replicate. The replicate cost is equal to its mana cost. (When you cast it, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)

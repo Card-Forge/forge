@@ -2,9 +2,7 @@ Name:Tournament Grounds
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Mana | Cost$ T | Produced$ R | RestrictValid$ Card.Knight,Card.Equipment | SpellDescription$ Add {R}. Spend this mana only to cast a Knight or Equipment spell.
-A:AB$ Mana | Cost$ T | Produced$ W | RestrictValid$ Card.Knight,Card.Equipment | SpellDescription$ Add {W}. Spend this mana only to cast a Knight or Equipment spell.
-A:AB$ Mana | Cost$ T | Produced$ B | RestrictValid$ Card.Knight,Card.Equipment | SpellDescription$ Add {B}. Spend this mana only to cast a Knight or Equipment spell.
+A:AB$ Mana | Cost$ T | Produced$ Combo R W B | RestrictValid$ Spell.Knight,Spell.Equipment | SpellDescription$ Add {R}, {W}, or {B}. Spend this mana only to cast a Knight or Equipment spell.
 DeckNeeds:Type$Knight
 AI:RemoveDeck:Random
 Oracle:{T}: Add {C}.\n{T}: Add {R}, {W}, or {B}. Spend this mana only to cast a Knight or Equipment spell.

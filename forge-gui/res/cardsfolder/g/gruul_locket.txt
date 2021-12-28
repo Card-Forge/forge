@@ -1,8 +1,7 @@
 Name:Gruul Locket
 ManaCost:3
 Types:Artifact
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ T | Produced$ Combo R G | SpellDescription$ Add {R} or {G}.
 AI:RemoveDeck:Random
 DeckNeeds:Color$Red | Green
 A:AB$ Draw | Cost$ RG RG RG RG T Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.

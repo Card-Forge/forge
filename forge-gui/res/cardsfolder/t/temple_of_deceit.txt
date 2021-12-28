@@ -4,7 +4,5 @@ Types:Land
 K:CARDNAME enters the battlefield tapped.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 1.
 SVar:TrigScry:DB$ Scry | ScryNum$ 1
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
-A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/temple_of_deceit.jpg
+A:AB$ Mana | Cost$ T | Produced$ Combo U B | SpellDescription$ Add {U} or {B}.
 Oracle:Temple of Deceit enters the battlefield tapped.\nWhen Temple of Deceit enters the battlefield, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)\n{T}: Add {U} or {B}.
