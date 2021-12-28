@@ -6,6 +6,7 @@ import java.util.Map;
 import com.google.common.collect.ImmutableList;
 
 import forge.game.ability.AbilityKey;
+import forge.game.event.GameEventRollDie;
 import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
 
@@ -18,10 +19,12 @@ public enum PlanarDice {
     Chaos,
     Blank;
 
-    public static PlanarDice roll(Player roller, PlanarDice riggedResult)
-    {
+    public static PlanarDice roll(Player roller, PlanarDice riggedResult) {
         PlanarDice res = Blank;
         int i = forge.util.MyRandom.getRandom().nextInt(6);
+        // Play the die roll sound
+        roller.getGame().fireEvent(new GameEventRollDie());
+        roller.roll();
         if (riggedResult != null)
             res = riggedResult;
         else if (i == 0)

@@ -78,6 +78,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
             int roll = MyRandom.getRandom().nextInt(sides) + 1;
             // Play the die roll sound
             player.getGame().fireEvent(new GameEventRollDie());
+            player.roll();
             rolls.add(roll);
             total += roll;
         }
