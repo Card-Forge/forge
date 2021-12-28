@@ -1,0 +1,7 @@
+Name:Settle the Wilds
+ManaCost:1 G G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | SubAbility$ DBSeek | StackDescription$ SpellDescription | SpellDescription$ Seek a basic land card and put it onto the battlefield tapped.
+SVar:DBSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Permanent.cmcEQX | ChangeNum$ 1 | StackDescription$ SpellDescription | SpellDescription$ Then seek a permanent card with mana value equal to the number of lands you control.
+SVar:X:Count$Valid Land.YouCtrl
+Oracle:Seek a basic land card and put it onto the battlefield tapped. Then seek a permanent card with mana value equal to the number of lands you control.
