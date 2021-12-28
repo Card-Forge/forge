@@ -776,7 +776,6 @@ public class Cost implements Serializable {
             cost.append("0");
         }
 
-        cost.append(": ");
         return cost.toString();
     }
 

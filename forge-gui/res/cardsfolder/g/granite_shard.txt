@@ -1,7 +1,5 @@
 Name:Granite Shard
 ManaCost:3
 Types:Artifact
-A:AB$ DealDamage | Cost$ 3 T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
-A:AB$ DealDamage | Cost$ R T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/granite_shard.jpg
+A:AB$ DealDamage | Cost$ 3 T | AlternateCost$ R T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 Oracle:{3}, {T} or {R}, {T}: Granite Shard deals 1 damage to any target.
