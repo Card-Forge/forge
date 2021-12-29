@@ -154,19 +154,19 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
      */
     private float getOrderWeight() {
         float res = this.countColors();
-        if(hasWhite()) {
+        if (hasWhite()) {
             res += 0.0005f;
         }
-        if(hasBlue()) {
+        if (hasBlue()) {
             res += 0.0020f;
         }
-        if(hasBlack()) {
+        if (hasBlack()) {
             res += 0.0080f;
         }
-        if(hasRed()) {
+        if (hasRed()) {
             res += 0.0320f;
         }
-        if(hasGreen()) {
+        if (hasGreen()) {
             res += 0.1280f;
         }
         return res;

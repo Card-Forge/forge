@@ -149,7 +149,7 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
             // Apply counter after replacement effect
             for (Map.Entry<Optional<Player>, Map<CounterType, Integer>> e : values.entrySet()) {
                 for (Map.Entry<CounterType, Integer> ec : e.getValue().entrySet()) {
-                    gm.getKey().addCounterInternal(ec.getKey(), ec.getValue(), e.getKey().orNull(), effect, result);
+                    gm.getKey().addCounterInternal(ec.getKey(), ec.getValue(), e.getKey().orNull(), true, result);
                 }
             }
         }

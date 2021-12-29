@@ -318,7 +318,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             // As per rule 107.1b
             return;
         }
-        // doesn't really add counters, but is just a telper to add them to the Table
+        // doesn't really add counters, but is just a helper to add them to the Table
         // so the Table can handle the Replacement Effect
         table.put(source, this, counterType, n);
     }
