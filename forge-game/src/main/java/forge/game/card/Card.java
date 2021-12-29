@@ -2225,8 +2225,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         if (type.hasSubtype("Saga")) {
-            sb.append("(As this Saga enters and after your draw step, add a lore counter. Sacrifice after ");
-            sb.append(TextUtil.toRoman(getFinalChapterNr())).append(".)").append(linebreak);
+            sb.append("(As this Saga enters and after your draw step, add a lore counter.");
+            if (!state.getCard().isDoubleFaced()) {
+                sb.append(" Sacrifice after ").append(TextUtil.toRoman(getFinalChapterNr())).append(".");
+            }
+            sb.append(")").append(linebreak);
         }
 
         // add As an additional cost to Permanent spells
