@@ -904,7 +904,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (StringUtils.isBlank(message)) {
             message = localizer.getMessage("lblLookCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
         } else {
-            message += localizer.getMessage("lblPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
+            message += " " + localizer.getMessage("lblPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
         }
         final String fm = MessageUtil.formatMessage(message, getLocalPlayerView(), owner);
         if (!cards.isEmpty()) {
