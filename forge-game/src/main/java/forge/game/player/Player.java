@@ -172,6 +172,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private String namedCard2 = "";
     private int numDrawnThisTurn = 0;
     private int numDrawnThisDrawStep = 0;
+    private int numRollsThisTurn = 0;
     private int numDiscardedThisTurn = 0;
     private int numTokenCreatedThisTurn = 0;
     private int numForetoldThisTurn = 0;
@@ -1465,6 +1466,18 @@ public class Player extends GameEntity implements Comparable<Player> {
         return numDrawnThisDrawStep;
     }
 
+    public final void resetNumRollsThisTurn() {
+        numRollsThisTurn = 0;
+    }
+
+    public final int getNumRollsThisTurn() {
+        return numRollsThisTurn;
+    }
+
+    public void roll() {
+        numRollsThisTurn++;
+    }
+
     public final Card discard(final Card c, final SpellAbility sa, final boolean effect, CardZoneTable table) {
         return discard(c, sa, effect, table, null);
     }
@@ -2455,6 +2468,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             pz.resetCardsAddedThisTurn();
         }
         resetNumDrawnThisTurn();
+        resetNumRollsThisTurn();
         resetNumDiscardedThisTurn();
         resetNumForetoldThisTurn();
         resetNumTokenCreatedThisTurn();
