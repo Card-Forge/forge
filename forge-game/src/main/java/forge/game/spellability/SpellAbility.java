@@ -511,6 +511,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return this.hasParam("Boast");
     }
 
+    public boolean isNinjutsu() {
+        return this.hasParam("Ninjutsu");
+    }
+
     // If this is not null, then ability was made in a factory
     public ApiType getApi() {
         return api;

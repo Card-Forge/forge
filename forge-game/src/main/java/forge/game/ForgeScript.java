@@ -170,6 +170,8 @@ public class ForgeScript {
             return sa.isBoast();
         } else if (property.equals("Mutate")) {
             return sa.isMutate();
+        } else if (property.equals("Ninjutsu")) {
+            return sa.isNinjutsu();
         } else if (property.equals("Foretelling")) {
             return sa.isForetelling();
         } else if (property.equals("Foretold")) {
