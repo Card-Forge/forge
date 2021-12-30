@@ -36,7 +36,7 @@ public class CountersNoteEffect extends SpellAbilityEffect {
         table.replaceCounterEffect(game, sa, false);
     }
 
-    private void noteCounters(Card notee, Card source) {
+    public static void noteCounters(Card notee, Card source) {
         for (Entry<CounterType, Integer> counter : notee.getCounters().entrySet()) {
             StringBuilder sb = new StringBuilder();
             sb.append(NOTE_COUNTERS).append(counter.getKey().getName());

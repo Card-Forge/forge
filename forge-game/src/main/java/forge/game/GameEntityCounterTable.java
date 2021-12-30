@@ -127,7 +127,6 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
         }
         GameEntityCounterTable result = new GameEntityCounterTable();
         for (Map.Entry<GameEntity, Map<Optional<Player>, Map<CounterType, Integer>>> gm : columnMap().entrySet()) {
-
             Map<Optional<Player>, Map<CounterType, Integer>> values = gm.getValue();
 
             final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(gm.getKey());
