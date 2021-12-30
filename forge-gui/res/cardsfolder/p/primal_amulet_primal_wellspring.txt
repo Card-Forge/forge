@@ -21,6 +21,6 @@ Name:Primal Wellspring
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ Any | TriggersWhenSpent$ TrigCopy | SpellDescription$ Add one mana of any color. When that mana is spent to cast an instant or sorcery spell, copy that spell and you may choose new targets for the copy.
-SVar:TrigCopy:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | OneOff$ True | Execute$ TrigCopyMain | TriggerDescription$ When that mana is spent to cast an instant or sorcery spell, copy that spell and you may choose new targets for the copy.
+SVar:TrigCopy:Mode$ SpellCast | ValidCard$ Instant,Sorcery | OneOff$ True | Execute$ TrigCopyMain | TriggerDescription$ When that mana is spent to cast an instant or sorcery spell, copy that spell and you may choose new targets for the copy.
 SVar:TrigCopyMain:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
 Oracle:(Transforms from Primal Amulet.)\n{T}: Add one mana of any color. When that mana is spent to cast an instant or sorcery spell, copy that spell and you may choose new targets for the copy.
