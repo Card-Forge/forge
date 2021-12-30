@@ -40,6 +40,7 @@ import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.mana.ManaAtom;
 import forge.game.CardTraitPredicates;
 import forge.game.Game;
 import forge.game.GameActionUtil;
@@ -1046,7 +1047,7 @@ public class ComputerUtil {
         // if we have non-persistent mana in our pool, would be good to try to use it and not waste it
         if (ai.getManaPool().willManaBeLostAtEndOfPhase()) {
             boolean canUseToPayCost = false;
-            for (byte color : MagicColor.WUBRGC) {
+            for (byte color : ManaAtom.MANATYPES) {
                 if (ai.getManaPool().getAmountOfColor(color) > 0 && card.getManaCost().canBePaidWithAvailable(color)) {
                     canUseToPayCost = true;
                     break;
