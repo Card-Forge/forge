@@ -99,7 +99,7 @@ public class StaticData {
 
                 final String cardName = card.getName();
 
-                if (!loadNonLegalCards && !card.getType().isBasicLand() && funnyCards.contains(cardName))
+                if (!loadNonLegalCards && !card.getType().isLand() && funnyCards.contains(cardName))
                     filtered.add(cardName);
 
                 if (card.isVariant()) {
