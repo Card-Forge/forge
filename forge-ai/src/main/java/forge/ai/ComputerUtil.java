@@ -1048,6 +1048,7 @@ public class ComputerUtil {
         if (ai.getManaPool().willManaBeLostAtEndOfPhase()) {
             boolean canUseToPayCost = false;
             for (byte color : ManaAtom.MANATYPES) {
+                // tries to reuse any amount of colorless if cost only has generic
                 if (ai.getManaPool().getAmountOfColor(color) > 0 && card.getManaCost().canBePaidWithAvailable(color)) {
                     canUseToPayCost = true;
                     break;
