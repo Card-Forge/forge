@@ -528,7 +528,17 @@ public class TargetRestrictions {
      * @return a int.
      */
     public final int getNumCandidates(final SpellAbility sa, final boolean isTargeted) {
-        return getAllCandidates(sa, isTargeted).size();
+        int num = 0;
+        if (this.tgtZone.contains(ZoneType.Stack)) {
+            for (final SpellAbilityStackInstance si : sa.getHostCard().getGame().getStack()) {
+                SpellAbility abilityOnStack = si.getSpellAbility(false);
+                if (sa.canTargetSpellAbility(abilityOnStack)) {
+                    num++;
+                }
+            }
+
+        }
+        return num + getAllCandidates(sa, isTargeted).size();
     }
 
     /**
