@@ -77,7 +77,6 @@ public class ReplaceAddCounter extends ReplacementEffect {
     }
 
     public boolean hasAnyInCounterMap(Map<AbilityKey, Object> runParams) {
-
         @SuppressWarnings("unchecked")
         Map<Optional<Player>, Map<CounterType, Integer>> counterMap = (Map<Optional<Player>, Map<CounterType, Integer>>) runParams.get(AbilityKey.CounterMap);
 
