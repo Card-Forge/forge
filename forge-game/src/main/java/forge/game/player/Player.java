@@ -529,8 +529,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
 
             // Run triggers
-            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-            runParams.put(AbilityKey.Player, this);
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
             runParams.put(AbilityKey.LifeAmount, lifeGain);
             runParams.put(AbilityKey.Source, source);
             runParams.put(AbilityKey.SourceSA, sa);
@@ -602,8 +601,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         lifeLostThisTurn += toLose;
 
         // Run triggers
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Player, this);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.LifeAmount, toLose);
         runParams.put(AbilityKey.FirstTime, firstLost);
         game.getTriggerHandler().runTrigger(TriggerType.LifeLost, runParams, false);
@@ -630,8 +628,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         loseLife(lifePayment, false, false);
 
         // Run triggers
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Player, this);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.LifeAmount, lifePayment);
         game.getTriggerHandler().runTrigger(TriggerType.PayLife, runParams, false);
 
@@ -1212,8 +1209,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         getGame().fireEvent(new GameEventSurveil(this, numToTop, numToGrave));
 
         surveilThisTurn++;
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Player, this);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.NumThisTurn, surveilThisTurn);
         getGame().getTriggerHandler().runTrigger(TriggerType.Surveil, runParams, false);
     }
@@ -1329,7 +1325,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
                 view.updateNumDrawnThisTurn(this);
 
-                final Map<AbilityKey, Object> runParams = Maps.newHashMap();
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
 
                 // CR 121.8 card was drawn as part of another sa (e.g. paying with Chromantic Sphere), hide it temporarily
                 if (game.getTopLibForPlayer(this) != null && getPaidForSA() != null && cause != null && getPaidForSA() != cause.getRootAbility()) {
@@ -1341,7 +1337,6 @@ public class Player extends GameEntity implements Comparable<Player> {
                 // Run triggers
                 runParams.put(AbilityKey.Card, c);
                 runParams.put(AbilityKey.Number, numDrawnThisTurn);
-                runParams.put(AbilityKey.Player, this);
                 game.getTriggerHandler().runTrigger(TriggerType.Drawn, runParams, false);
             }
         }
@@ -1545,8 +1540,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
             }
         }
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Player, this);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.Card, c);
         runParams.put(AbilityKey.Cause, cause);
         runParams.put(AbilityKey.IsMadness, discardMadness);
@@ -1564,8 +1558,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final void addTokensCreatedThisTurn(Card token) {
         numTokenCreatedThisTurn++;
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Player, this);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.Num, numTokenCreatedThisTurn);
         runParams.put(AbilityKey.Card, token);
         game.getTriggerHandler().runTrigger(TriggerType.TokenCreated, runParams, false);
@@ -1581,8 +1574,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final void addForetoldThisTurn() {
         numForetoldThisTurn++;
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Player, this);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.Num, numForetoldThisTurn);
         game.getTriggerHandler().runTrigger(TriggerType.Foretell, runParams, false);
     }
@@ -1717,8 +1709,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         getZone(ZoneType.Library).setCards(getController().cheatShuffle(list));
 
         // Run triggers
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Player, this);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.Source, sa);
         game.getTriggerHandler().runTrigger(TriggerType.Shuffled, runParams, false);
 
@@ -2244,8 +2235,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void addInvestigatedThisTurn() {
         investigatedThisTurn++;
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Player, this);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.Num, investigatedThisTurn);
         game.getTriggerHandler().runTrigger(TriggerType.Investigated, runParams, false);
     }
@@ -2265,10 +2255,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         sacrificedThisTurn.add(cpy);
 
         // Run triggers
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         // use a copy that preserves last known information about the card (e.g. for Savra, Queen of the Golgari + Painter's Servant)
         runParams.put(AbilityKey.Card, cpy);
-        runParams.put(AbilityKey.Player, this);
         runParams.put(AbilityKey.Cause, source);
         runParams.put(AbilityKey.CostStack, game.costPaymentStack);
         runParams.put(AbilityKey.IndividualCostPaymentInstance, game.costPaymentStack.peek());
@@ -3513,8 +3502,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 // Change this if something would make multiple player learn at the same time
 
                 // Discard Trigger outside Effect
-                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                runParams.put(AbilityKey.Player, this);
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
                 runParams.put(AbilityKey.Cards, new CardCollection(c));
                 runParams.put(AbilityKey.Cause, sa);
                 runParams.put(AbilityKey.FirstTime, firstDiscard);
