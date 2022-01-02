@@ -234,6 +234,12 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         this(parseParams(params, host), host, state);
     }
 
+    public static StaticAbility create(final String params, final Card host, CardState state, boolean intrinsic) {
+        StaticAbility st = new StaticAbility(params, state.getCard(), state);
+        st.setIntrinsic(intrinsic);
+        return st;
+    }
+
     /**
      * Instantiates a new static ability.
      *
@@ -325,8 +331,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             return StaticAbilityCantAttackBlock.applyCantAttackAbility(this, card, target);
         } else if (mode.equals("CantBlockBy") && target instanceof Card) {
             return StaticAbilityCantAttackBlock.applyCantBlockByAbility(this, card, (Card)target);
-        } else if (mode.equals("CantAttach")) {
-            return StaticAbilityCantAttach.applyCantAttachAbility(this, card, target);
         } else if (mode.equals("CanAttackIfHaste")) {
             return StaticAbilityCantAttackBlock.applyCanAttackHasteAbility(this, card, target);
         }

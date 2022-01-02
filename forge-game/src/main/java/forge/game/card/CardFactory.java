@@ -745,9 +745,7 @@ public class CardFactory {
                 for (final String s : str.split(",")) {
                     if (origSVars.containsKey(s)) {
                         final String actualStatic = origSVars.get(s);
-                        final StaticAbility grantedStatic = new StaticAbility(actualStatic, out, sa.getCardState());
-                        grantedStatic.setIntrinsic(true);
-                        state.addStaticAbility(grantedStatic);
+                        state.addStaticAbility(StaticAbility.create(actualStatic, out, sa.getCardState(), true));
                     }
                 }
             }

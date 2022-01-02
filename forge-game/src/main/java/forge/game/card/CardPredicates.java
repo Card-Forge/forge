@@ -224,15 +224,6 @@ public final class CardPredicates {
         };
     }
 
-    public static final Predicate<Card> isProtectedFrom(final Card source) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.hasProtectionFrom(source);
-            }
-        };
-    }
-
     public static final Predicate<Card> restriction(final String[] restrictions, final Player sourceController, final Card source, final CardTraitBase spellAbility) {
         return new Predicate<Card>() {
             @Override
