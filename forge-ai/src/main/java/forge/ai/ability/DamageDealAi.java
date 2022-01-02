@@ -598,9 +598,9 @@ public class DamageDealAi extends DamageAiBase {
                     lastTgt = humanCreature;
                     dmg -= assignedDamage;
                 }
-                if (!source.hasProtectionFrom(humanCreature)) {
-                    dmgTaken += humanCreature.getNetPower();
-                }
+                // protection is already checked by target above
+                dmgTaken += humanCreature.getNetPower();
+
                 if (dmg == 0) {
                     return true;
                 }

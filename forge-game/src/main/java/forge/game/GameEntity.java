@@ -39,7 +39,7 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityCantAttach;
 import forge.game.zone.ZoneType;
 
 public abstract class GameEntity extends GameObject implements IIdentifiable {
@@ -222,15 +222,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             return false;
         }
 
-        // CantTarget static abilities
-        for (final Card ca : getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (stAb.applyAbility("CantAttach", attach, this)) {
-                    return false;
-                }
-            }
-        }
-
+        // check for rules
         if (attach.isAura() && !canBeEnchantedBy(attach)) {
             return false;
         }
@@ -241,8 +233,13 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             return false;
         }
 
+        // check for can't attach static
+        if (StaticAbilityCantAttach.cantAttach(this, attach, checkSBA)) {
+            return false;
+        }
+
         // true for all
-        return !hasProtectionFrom(attach, checkSBA);
+        return true;
     }
 
     protected boolean canBeEquippedBy(final Card aura) {
@@ -260,6 +257,8 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
 
     protected boolean canBeEnchantedBy(final Card aura) {
+        // TODO need to check for multiple Enchant Keywords
+
         SpellAbility sa = aura.getFirstAttachSpell();
         TargetRestrictions tgt = null;
         if (sa != null) {
@@ -268,11 +267,6 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
 
         return !((tgt != null) && !isValid(tgt.getValidTgts(), aura.getController(), aura, sa));
     }
-
-    public boolean hasProtectionFrom(final Card source) {
-        return hasProtectionFrom(source, false);
-    }
-    public abstract boolean hasProtectionFrom(final Card source, final boolean checkSBA);
 
     // Counters!
     public boolean hasCounters() {

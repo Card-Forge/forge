@@ -875,9 +875,7 @@ public final class StaticAbilityContinuous {
                             s = TextUtil.fastReplace(s, "ConvertedManaCost", costcmc);
                         }
 
-                        StaticAbility stat = new StaticAbility(s, affectedCard, stAb.getCardState());
-                        stat.setIntrinsic(false);
-                        addedStaticAbility.add(stat);
+                        addedStaticAbility.add(StaticAbility.create(s, affectedCard, stAb.getCardState(), false));
                     }
                 }
 

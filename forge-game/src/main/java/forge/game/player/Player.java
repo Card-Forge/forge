@@ -1094,70 +1094,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return false;
         }
 
-        return !hasProtectionFrom(sa.getHostCard());
-    }
-
-    public boolean hasProtectionFromDamage(final Card source) {
-        return hasProtectionFrom(source, false, true);
-    }
-
-    @Override
-    public boolean hasProtectionFrom(final Card source, final boolean checkSBA) {
-        return hasProtectionFrom(source, checkSBA, false);
-    }
-    public boolean hasProtectionFrom(final Card source, final boolean checkSBA, final boolean damageSource) {
-        final boolean colorlessDamage = damageSource && source.hasKeyword("Colorless Damage Source");
-        for (KeywordInterface ki : keywords) {
-            String kw = ki.getOriginal();
-            if (kw.startsWith("Protection")) {
-                if (kw.startsWith("Protection:")) { // uses isValid
-                    final String characteristic = kw.split(":")[1];
-                    if (characteristic.startsWith("Player")) {
-                        // Protection:PlayerUID
-                        if (source.getController().isValid(characteristic, this, null, null)) {
-                            return true;
-                        }
-                    } else {
-                        final String[] characteristics = characteristic.split(",");
-                        if (source.isValid(characteristics, this, null, null)) {
-                            return true;
-                        }
-                    }
-                } else if (kw.equals("Protection from white")) {
-                    if (source.isWhite() && !colorlessDamage) {
-                        return true;
-                    }
-                } else if (kw.equals("Protection from blue")) {
-                    if (source.isBlue() && !colorlessDamage) {
-                        return true;
-                    }
-                } else if (kw.equals("Protection from black")) {
-                    if (source.isBlack() && !colorlessDamage) {
-                        return true;
-                    }
-                } else if (kw.equals("Protection from red")) {
-                    if (source.isRed() && !colorlessDamage) {
-                        return true;
-                    }
-                } else if (kw.equals("Protection from green")) {
-                    if (source.isGreen() && !colorlessDamage) {
-                        return true;
-                    }
-                } else if (kw.equals("Protection from all colors")) {
-                    if (!source.isColorless() && !colorlessDamage) {
-                        return true;
-                    }
-                } else if (kw.equals("Protection from everything")) {
-                    return true;
-                } else if (kw.startsWith("Protection from ")) {
-                    final String protectType = CardType.getSingularType(kw.substring("Protection from ".length()));
-                    if (source.getType().hasStringType(protectType)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+        return true;
     }
 
     public void surveil(int num, SpellAbility cause, CardZoneTable table) {

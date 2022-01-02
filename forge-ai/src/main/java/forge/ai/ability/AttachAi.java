@@ -125,15 +125,8 @@ public class AttachAi extends SpellAbilityAi {
 
         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Chained to the Rocks")) {
             final SpellAbility effectExile = AbilityFactory.getAbility(source.getSVar("TrigExile"), source);
-            final ZoneType origin = ZoneType.listValueOf(effectExile.getParam("Origin")).get(0);
             final TargetRestrictions exile_tgt = effectExile.getTargetRestrictions();
-            final CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(origin), exile_tgt.getValidTgts(), ai, source, effectExile);
-            final CardCollection targets = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return !(c.hasProtectionFrom(source) || c.hasKeyword(Keyword.SHROUD) || c.hasKeyword(Keyword.HEXPROOF));
-                }
-            });
+            final CardCollection targets = CardLists.filter(CardUtil.getValidCardsToTarget(exile_tgt, effectExile), CardPredicates.canBeAttached(source));
             return !targets.isEmpty();
         }
 
@@ -1325,8 +1318,7 @@ public class AttachAi extends SpellAbilityAi {
 
         // Is a SA that moves target attachment
         if ("MoveTgtAura".equals(sa.getParam("AILogic"))) {
-            CardCollection list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource, sa);
-            list = CardLists.filter(list, Predicates.not(CardPredicates.isProtectedFrom(attachSource)));
+            CardCollection list = new CardCollection(CardUtil.getValidCardsToTarget(tgt, sa));
             list = CardLists.filter(list, Predicates.or(CardPredicates.isControlledByAnyOf(aiPlayer.getOpponents()), new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card card) {
@@ -1336,7 +1328,7 @@ public class AttachAi extends SpellAbilityAi {
 
             return !list.isEmpty() ? ComputerUtilCard.getBestAI(list) : null;
         } else if ("Unenchanted".equals(sa.getParam("AILogic"))) {
-            CardCollection list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource, sa);
+            CardCollection list = new CardCollection(CardUtil.getValidCardsToTarget(tgt, sa));
             CardCollection preferred = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card card) {
@@ -1361,18 +1353,7 @@ public class AttachAi extends SpellAbilityAi {
         if (tgt == null) {
             list = AbilityUtils.getDefinedCards(attachSource, sa.getParam("Defined"), sa);
         } else {
-            list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource, sa);
-            list = CardLists.filter(list, CardPredicates.canBeAttached(attachSource));
-
-            // TODO If Attaching without casting, don't need to actually target.
-            // I believe this is the only case where mandatory will be true, so just
-            // check that when starting that work
-            // But we shouldn't attach to things with Protection
-            if (!mandatory) {
-                list = CardLists.getTargetableCards(list, sa);
-            } else {
-                list = CardLists.filter(list, Predicates.not(CardPredicates.isProtectedFrom(attachSource)));
-            }
+            list = CardLists.filter(CardUtil.getValidCardsToTarget(tgt, sa), CardPredicates.canBeAttached(attachSource));
         }
 
         if (list.isEmpty()) {
