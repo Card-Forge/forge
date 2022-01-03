@@ -18,7 +18,7 @@ public class RevealAi extends RevealAiBase {
     @Override
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
         // we can reuse this function here...
-        final boolean bFlag = revealHandTargetAI(ai, sa/* , true, false */);
+        final boolean bFlag = revealHandTargetAI(ai, sa, false);
 
         if (!bFlag) {
             return false;
@@ -80,7 +80,7 @@ public class RevealAi extends RevealAiBase {
 
         }
 
-        if (!revealHandTargetAI(ai, sa/*, false, mandatory*/)) {
+        if (!revealHandTargetAI(ai, sa, mandatory)) {
             return false;
         }
 

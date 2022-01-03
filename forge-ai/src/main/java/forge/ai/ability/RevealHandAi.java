@@ -12,7 +12,7 @@ public class RevealHandAi extends RevealAiBase {
      */
     @Override
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
-        final boolean bFlag = revealHandTargetAI(ai, sa/*, true, false*/);
+        final boolean bFlag = revealHandTargetAI(ai, sa, false);
 
         if (!bFlag) {
             return false;
@@ -29,8 +29,7 @@ public class RevealHandAi extends RevealAiBase {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-
-        return revealHandTargetAI(ai, sa/*, false, mandatory*/);
+        return revealHandTargetAI(ai, sa, mandatory);
     }
 
 }
