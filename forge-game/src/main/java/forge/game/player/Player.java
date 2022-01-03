@@ -1935,12 +1935,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return getOutcome().lossState != null;
         }
 
-        // Rule 704.5a -  If a player has 0 or less life, he or she loses the game.
-        final boolean hasNoLife = getLife() <= 0;
-        if (hasNoLife && !cantLoseForZeroOrLessLife()) {
-            return loseConditionMet(GameLossReason.LifeReachedZero, null);
-        }
-
+        // check this first because of Lich's Mirror (704.7)
         // Rule 704.5b - If a player attempted to draw a card from a library with no cards in it
         //               since the last time state-based actions were checked, he or she loses the game.
         if (triedToDrawFromEmptyLibrary) {
@@ -1949,6 +1944,12 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (!hasKeyword("You don't lose the game for drawing from an empty library.")) {
                 return loseConditionMet(GameLossReason.Milled, null);
             }
+        }
+
+        // Rule 704.5a -  If a player has 0 or less life, he or she loses the game.
+        final boolean hasNoLife = getLife() <= 0;
+        if (hasNoLife && !cantLoseForZeroOrLessLife()) {
+            return loseConditionMet(GameLossReason.LifeReachedZero, null);
         }
 
         // Rule 704.5c - If a player has ten or more poison counters, he or she loses the game.

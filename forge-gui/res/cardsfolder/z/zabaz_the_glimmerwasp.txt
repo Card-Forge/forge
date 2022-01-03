@@ -3,7 +3,7 @@ ManaCost:1
 Types:Legendary Artifact Creature Insect
 PT:0/0
 K:Modular:1
-R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCause$ Triggered.Modular | ValidCard$ Creature.YouCtrl+InZoneBattlefield | ValidCounterType$ P1P1 | ReplaceWith$ AddOneMoreCounter | Description$ If a modular triggered ability would put one or more +1/+1 counters on a creature you control, that many plus one +1/+1 counters are put on it instead.
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCause$ Triggered.Modular | ValidCard$ Creature.YouCtrl+inZoneBattlefield | ValidCounterType$ P1P1 | ReplaceWith$ AddOneMoreCounter | Description$ If a modular triggered ability would put one or more +1/+1 counters on a creature you control, that many plus one +1/+1 counters are put on it instead.
 SVar:AddOneMoreCounter:DB$ ReplaceCounter | ValidCounterType$ P1P1 | ChooseCounter$ True | Amount$ X
 SVar:X:ReplaceCount$CounterNum/Plus.1
 A:AB$ Destroy | Cost$ R | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Choose target artifact you control | SpellDescription$ Destroy target artifact you control.

@@ -2968,7 +2968,7 @@ public class CardFactoryUtil {
             final String manacost = k[1];
 
             StringBuilder sb = new StringBuilder();
-            sb.append("AB$ PutCounter| Cost$ ").append(manacost);
+            sb.append("AB$ PutCounter | Cost$ ").append(manacost);
             sb.append(" | PrecostDesc$ Level Up | CostDesc$ ").append(ManaCostParser.parse(manacost));
             sb.append(" | SorcerySpeed$ True | LevelUp$ True | CounterNum$ 1 | CounterType$ LEVEL");
             if (card.hasSVar("maxLevel")) {

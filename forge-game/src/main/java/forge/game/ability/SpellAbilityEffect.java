@@ -519,7 +519,7 @@ public abstract class SpellAbilityEffect {
 
             String valid = sa.getParamOrDefault("ReplaceDyingValid", "Card.IsRemembered");
 
-            String repeffstr = "Event$ Moved | ValidCard$ " + valid +
+            String repeffstr = "Event$ Moved | ValidLKI$ " + valid +
                     "| Origin$ Battlefield | Destination$ Graveyard " +
                     "| Description$ If that permanent would die this turn, exile it instead.";
             String effect = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ " + zone;
