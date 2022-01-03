@@ -3,7 +3,7 @@ ManaCost:4 B B
 Types:Creature Horror
 PT:4/5
 K:Trample
-R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | ReplaceWith$ Exile | Description$ If another creature would die, exile it instead.
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidLKI$ Creature.Other | ReplaceWith$ Exile | Description$ If another creature would die, exile it instead.
 SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard | SubAbility$ DBRemember | RememberChanged$ True
 SVar:DBRemember:DB$ Pump | ConditionDefined$ Remembered | ConditionPresent$ Card.inZoneExile | ConditionCompare$ GE1
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
