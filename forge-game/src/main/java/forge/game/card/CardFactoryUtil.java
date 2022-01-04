@@ -1293,13 +1293,12 @@ public class CardFactoryUtil {
                 triggers.add(haunterETB);
             }
 
-            // First, create trigger that runs when the haunter goes to the
-            // graveyard
+            // First, create trigger that runs when the haunter goes to the graveyard
             final StringBuilder sbHaunter = new StringBuilder();
             sbHaunter.append("Mode$ ChangesZone | Origin$ ");
-            sbHaunter.append(card.isCreature() ? "Battlefield" : "Stack");
+            sbHaunter.append(card.isCreature() ? "Battlefield" : "Stack | ResolvedCard$ True");
             sbHaunter.append(" | Destination$ Graveyard | ValidCard$ Card.Self");
-            sbHaunter.append(" | Static$ True | Secondary$ True | TriggerDescription$ Blank");
+            sbHaunter.append(" | Secondary$ True | TriggerDescription$ " + inst.getReminderText());
 
             final Trigger haunterDies = TriggerHandler.parseTrigger(sbHaunter.toString(), card, intrinsic);
 
