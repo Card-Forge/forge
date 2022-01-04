@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="60">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJw7x8LAcG4Uj+JRPIpH8SgexSMCAwCNIqJs
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNlEsKwjAURW/9YIvNKlyGTi3SNYk70an1syt/nTsVMZeXR1txYIkNFi6EJuS+8z7JEiD7Y+1j4GB1jJvrrn0fKTAZAye7vljdR7Lu0pt89JoDWBrxV+U/zOV7Dq9Wu1gY19Z7g8rXl1mZePfKyH31enKP3zQCZpGc4dmt3Ss9WBeJxM9c8q4iFsZ6PZVR/frWe2j8csxc3pzKD/8YAz0z+DN+q2cqzPSrx9W1tAa/6N02/U1W7bUQbwU5tYe0z0Iwa1+VSTVLZO559nAbDUxzts5Ood5p5h5ulvQNC5F7+nKGc1eHItAsK68v4wslRMd7
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="209" y="282">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="51" template="../obj/treasure.tx" x="175.25" y="45.0833"/>
+  <object id="53" template="../obj/gold.tx" x="249.5" y="64.0833"/>
+  <object id="55" template="../obj/treasure.tx" x="42.4167" y="115"/>
+  <object id="56" template="../obj/enemy.tx" x="166.833" y="144.5">
+   <properties>
+    <property name="enemy" value="Demon"/>
+   </properties>
+  </object>
+  <object id="57" template="../obj/enemy.tx" x="200.167" y="229.083">
+   <properties>
+    <property name="enemy" value="Devil"/>
+   </properties>
+  </object>
+  <object id="58" template="../obj/enemy.tx" x="183.417" y="198.167">
+   <properties>
+    <property name="enemy" value="Devil"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="54">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxr42RgaBvFo3gUj+JRPIpH8YjAAIblHPI=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxz42RgcBvFo3gE4lUcDAxrOOhvrwcQP+akr90gvz4F0iAAsns1jf0Osm811E5RBgRgY6Ct30Fh6wnFdbwQOooBIeZFI/8+A+LnQLySA2EXAx3sRbYfZPdyaDjXAP2+HMh/QWN7ke0GAXrZCcPu0HB2paOdsHQGArSOV1rZCwDMGKdq
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="209" y="282">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="53" template="../obj/enemy.tx" x="199.333" y="178.333">
+   <properties>
+    <property name="enemy" value="Dino"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

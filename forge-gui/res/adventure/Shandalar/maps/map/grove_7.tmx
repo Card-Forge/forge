@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="68">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Hidden Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJztlFEKgzAQRPff9QTFi7VniT1XTHq3WraDY+iamoJQcGBJ4s7mDSiKLLr1IpOKXHvb81r29wh3eLOD2npR22ONajPc32JMuq6ky0w5+/InhwuhH4vczEpOpk9cZn6rqHVWjTvsZLbo5P4HN8/eR0POX7n4lxzNbdXJte/k3h3P9dhhPo/v8nKxZ8vnccHmOzKdvVxZ17nxzgLlYF/JHbt6MTsUudBHds7DPjx/AkyWQsw=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyrZWFgqB3Fo3gUj+JRPIpH8YjAADIiAQ4=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJydlUFOAzEMRSMNRUmuUKBcrhsWLLsrVFxu2qp3gAEOwliTr/4YxzNgKarUxnnO93cawv9inUP4jiHsUr0+47L8h9z+rR/PODnnaDaYc3kSst9iS+5zmlbrDJwv/C/a0+Up79a5E2o9pPr7mK/ccznzffzcjN8Psa7Likv0a7a4zJS1yhPzMV/1GRbo0fq9j7+521QzcVfdy4PaZ4XovVJaQyfN7XJ9Tw5h35V1rzTxeqmZ4Grvo07RdnB8Kfsuht6S92HkPlGd1rwhT/r52tBQ8y0f6FzW0gr08oU8JOHNZFd0fqPegcvzDI109MpHoof0Eh732HxX5KGn2iuayR5ZF/+gzrm52ae/MyW2M/7kPnpc0RdnnWe8pu/U6r1XO+YMGt3QXtSk30Vmg486Nw7rVN7MY7nHsdED9L3F1QF/Wv8d+j3lxbPMXlsa/D7yTHlMzcYbx/EDwm18rg==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJydVVFOwzAMtZD4aqVxhxaKENyCv92kB4FJDO6UDQacA86A+INYzVNfXaeZ9iSrSez42bGTtiLSy4D7s2EMeahELmuRqyhdPep5/VRRX0I8QjEo9tHmNcpbPeghlrdJdpC2wAv041ACxdDLPDad7w0P4oLtR4EbfjlXYDdfmgC5c8wH0i1x85415ZZDKRYAPZLjtvHafBTXji44PIpO5n3icdv8vPM+FYjX60Mbaw6tM27S9/d8ahtI/5nGlhf53h6Zw9dK5Ht1pHHEjfj5cm3fZZhz79g++lPOi3HO8eJdYeC+eLy6bvuE6841v0vfVqb4cfYxcufs9axCa94467D3dAC/gZZ3E9dfqqkPL/8Scj2p3Np33nse6oE7d49F5vcLcXnnyjGr3quv5bZ13UZ5rkYd+DG2euyHnea6Lfy/wA2/ar9LOvhemzOAv6dqembobfaxJCHVfOPYd/T/0n5+NDaIG2/vEuc/pxBxqw==
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="209" y="271.5">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../obj/treasure.tx" x="208.167" y="130.25"/>
+  <object id="54" template="../obj/enemy.tx" x="317.916" y="201.333">
+   <properties>
+    <property name="enemy" value="Snake"/>
+   </properties>
+  </object>
+  <object id="55" template="../obj/enemy.tx" x="207.834" y="111.416">
+   <properties>
+    <property name="enemy" value="Green Wiz1"/>
+   </properties>
+  </object>
+  <object id="56" template="../obj/enemy.tx" x="208.833" y="226">
+   <properties>
+    <property name="enemy" value="Snake"/>
+   </properties>
+  </object>
+  <object id="62" template="../obj/enemy.tx" x="223" y="134.25">
+   <properties>
+    <property name="enemy" value="Snake"/>
+   </properties>
+  </object>
+  <object id="63" template="../obj/gold.tx" x="194.333" y="130.667"/>
+  <object id="64" template="../obj/enemy.tx" x="222.75" y="112.5">
+   <properties>
+    <property name="enemy" value="Snake"/>
+   </properties>
+  </object>
+  <object id="65" template="../obj/enemy.tx" x="191.25" y="112.5">
+   <properties>
+    <property name="enemy" value="Snake"/>
+   </properties>
+  </object>
+  <object id="66" template="../obj/enemy.tx" x="175.5" y="113">
+   <properties>
+    <property name="enemy" value="Snake"/>
+   </properties>
+  </object>
+  <object id="67" template="../obj/enemy.tx" x="176.25" y="133.75">
+   <properties>
+    <property name="enemy" value="Snake"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

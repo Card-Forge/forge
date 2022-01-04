@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="54">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYMANonkZGHbxkIejePEYTADI8pCvdycZdsP8uZsCe0FAmkT9lPhz1F7627uTxPRNLXuRATF+H7V31N5Reym3dy9QTR03Atdz08deYupXWJhIk1AnIwMAhyEnfQ==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzdld0OgyAMhZvoXO2D6uaLyuYeShslqQaQsrqLXZxwQdIPevrTtQBdod4I8GzTqgjgg/q4U0JnTK9BybxRfuyYxiUO0j5uTXHu40vekck8zne/3cW4vQF3EF5x7thrn0P+cx3w3iLHkpNTdxZM6/f9m16KvtSK69vhyrjTXuwvn9Z82VPco1f2kfyjnB2/4GJgNjWJedUY1bV2J3i2C/g8Yr7/JfvoyHfCK40PVWQmlqjEf7kPZyTs4rw=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJydVVFuwjAMdWFQUO/AzxCdhrQTIL52GOjEP+IA/HIDNmmTEMcoH0N0uwA34ZNGTRTXdZzQJ1lx6tgvdpwGwI1ZB+AzaifzjhCYINfjNqn0K/HNBL+T1j9KWZWy7jb586Yrm+OmK+8T7+MnqcZD6XeMLD/duwuh6zBOzLdhyZ1Ej/OaWNPY2rCucNbjd9KMY/Jum+8l5vVQtOVdDAB2/Ur+Pby4Hqkeuf6SeH/1/BXZaL607lI9VNzUbRbronJ/Y+qekzlF5olreN+FNSZ2yvBchB508U6Qnd7vqaO3JF6sh+ZL4YpHeYvY9mA28MeV7C9Q7+kl0v8QD8cVwjsh9rHD/9azuquP8DmZM+LOD0PdN3PXtuQ/RP+HBcmXE1MDX50zsHfd96Zx+Y6e6vNnCOPF/Ao5sw8lX1HFuw98j+nbdgehNWrz
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzT5mFg0AFiWoAsKFYFmq8HxPpA3MYNETsJZJ+ikb0wcBho/hkgPgvEPUB7O7hpax8yAPkTZOchoN1qPKji2EC8EANDghCErSzIwKAiSLmdajQOX2SgimQnte21Y8EuDvIvKI6PIGFygSowvNXIDPMs8q0lC+BKQ9QE+pwMDAac2OWI8a8xHwODCR9VnUR3gB7O9Ixneti1HOi/FVjSEszf9E7X9AbI8ZsDxLl0th8UvlyMDAzcjAg+vQAAOR0c4w==
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFyMBZiIHBRQjCZhdkYOAQHFj3DCawgJn2dnACw5trNMzhYCIHA8MkDvL1i/MxMEjwUc89pAI9zoGze6gATm5gmuceaFeMgpEEAFIgA5M=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="240" y="272"/>
+  <object id="41" template="../obj/shop.tx" x="128" y="65"/>
+  <object id="42" template="../obj/shop.tx" x="303.5" y="96"/>
+  <object id="43" template="../obj/shop.tx" x="352.5" y="144"/>
+  <object id="44" template="../obj/shop.tx" x="176" y="64.5"/>
+  <object id="45" template="../obj/shop.tx" x="240" y="112"/>
+  <object id="46" template="../obj/shop.tx" x="383" y="208"/>
+  <object id="47" template="../obj/inn.tx" x="143.5" y="160.5"/>
+  <object id="48" template="../obj/enemy.tx" x="259.5" y="190">
+   <properties>
+    <property name="enemy" value="Elf"/>
+   </properties>
+  </object>
+  <object id="49" template="../obj/enemy.tx" x="215.5" y="230.5">
+   <properties>
+    <property name="enemy" value="Elf"/>
+   </properties>
+  </object>
+  <object id="50" template="../obj/enemy.tx" x="318" y="219">
+   <properties>
+    <property name="enemy" value="Elf"/>
+   </properties>
+  </object>
+  <object id="51" template="../obj/enemy.tx" x="215" y="173.5">
+   <properties>
+    <property name="enemy" value="Elf warrior"/>
+   </properties>
+  </object>
+  <object id="52" template="../obj/enemy.tx" x="326.5" y="135.5">
+   <properties>
+    <property name="enemy" value="Elf warrior"/>
+   </properties>
+  </object>
+  <object id="53" template="../obj/enemy.tx" x="194.5" y="109.5">
+   <properties>
+    <property name="enemy" value="High Elf"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

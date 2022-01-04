@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="69">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Hidden Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJztkWEKwyAMhfO/6QlGL9adRXcua3u3KRr6FpraMdiPYiAk6ku+BxLt8RyJFiaax9Jj1e/fhOywZicu9cGllxqqHt/PGHk/ZuR9Rs9mfTS4eJcjKN/IioanIy4yrQhqZ+A2q8WdLsz9Gp3buZ17L+6W+tfwf67Fdunsa1q+UHOms7jCxh0rnC1fK3/6lj9z4AN1muuHdiLbKV/yLt7RD+rk/g0bmEEi
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyrZWFgqB3Fo3gUj+JRPIpH8YjAADIiAQ4=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJydlUFOwzAQRS2FItscoZRyuW66YMkOiFhwtbRV70ADPQgZxV/+GexJ4EtWpMYzb/xnnDr3P62jc1fv3HOYri+/LP4h1t91Q46jkUezwZyLE8l+sD/u8lNin8K4ajmQX/jftKeJY9ytcSbU2obMlOVj5p5Szs/huR1+7/20rpLO3q5Zc0XMlLWKI/MxZn/6BX7U3nf+N3cXpkycVfeyVftKEr9Xymv4pLlNnJ6TJez7tDbKE6uXmgmuzOGG4lCneNsbcyn7zgW/Je5SiN1TnaX7hjjp51vFQ80vzYGOZS9LQi9faYZE1p1skl/v1Dtw+T7DI61OzRF6gBm32HxWxKGnelY0k2dkHXPf2aMa+yX8nSnazcwn99Hiir/IdZqZNX2mWu+t2nHP4NEN7UVNbSWvsMFHnVuDdUzfzEM6x6HSA/S9xtXCfJb+t/T3lBffZZ61peLvI98pi6nZ+MaxfgC4a38Z
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJytlV1OhUAMhRsTn2AXoBiju9AnXQkL0Zt4r3uC6/VnRz5Kw3yh1DIY4kkaZqZlzum0DLWItDLi7mwcY0+FyEUpcjlYU45zjPWtplxieMRoUByHmLfBTuXki3irFIfVK7yglTnIq00avKaj4zml80Dv5wp3tC/ozVjjvs8nTV4beDe6c9z2nQdzvlvw6HS2mbzRa3MAjK8Cjs7N0d/I75pE3DY/zu2/gN6oD9GqviazRy1TTnV6VulJ3UFn/F9p7HnJ92ZLQn/AtcT52r76kHFu+7iXGNTD6uXeseB7iXh13feJrzu4Tc9a5rhf0AeWzjnqWYXWvArWiY98Fmj2vLth/bWY7xHlv4alnuS+ie7zrhy5fW0i3QBd0T1jNas/qq/n9nXdD3YoJh/8jL2f94nTXPcr/y+42Vfj++Q7mHpYXez3UszPjN62e+SsSzXfBfGN+X9pPz+7GHRz9+Y4fwB/lnBz
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="209" y="271.5">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../obj/treasure.tx" x="178.834" y="30.5833"/>
+  <object id="63" template="../obj/gold.tx" x="194.333" y="28.667"/>
+  <object id="65" template="../obj/enemy.tx" x="207.25" y="229.833">
+   <properties>
+    <property name="enemy" value="Hydra"/>
+   </properties>
+  </object>
+  <object id="66" template="../obj/enemy.tx" x="190.833" y="72.6667">
+   <properties>
+    <property name="enemy" value="Hydra"/>
+   </properties>
+  </object>
+  <object id="68" template="../obj/gold.tx" x="178.667" y="45.6667"/>
+ </objectgroup>
+</map>
