@@ -1,0 +1,9 @@
+Name:The Space Family Goblinson
+ManaCost:2 R G
+Types:Legendary Creature Goblin Guest
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Trample | CheckSVar$ X | SVarCompare$ GE3 | Description$ CARDNAME has trample as you've rolled three or more dice this turn.
+SVar:X:Count$YouRollThisTurn
+T:Mode$ RolledDie | Execute$ TrigPutCounter | ValidPlayer$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you roll a die, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:The Space Family Goblinson has trample as long as you've rolled three or more dice this turn.\nWhenever you roll a die, put a +1/+1 counter on The Space Family Goblinson.

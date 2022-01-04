@@ -6,7 +6,6 @@ import com.google.common.base.Predicates;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -40,7 +39,7 @@ public class LifeLoseAi extends SpellAbilityAi {
                 amount = root.getXManaCostPaid();
             } else if (root.getPayCosts() != null && root.getPayCosts().hasXInAnyCostPart()) {
                 // Set PayX here to maximum value.
-                final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+                final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
                 root.setXManaCostPaid(xPay);
                 amount = xPay;
             }
@@ -73,7 +72,7 @@ public class LifeLoseAi extends SpellAbilityAi {
 
         if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            amount = ComputerUtilMana.determineLeftoverMana(sa, ai);
+            amount = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
         } else {
             amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }
@@ -107,7 +106,7 @@ public class LifeLoseAi extends SpellAbilityAi {
 
         if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            amount = ComputerUtilCost.getMaxXValue(sa, ai);
+            amount = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
             sa.setXManaCostPaid(amount);
         } else {
             amount = AbilityUtils.calculateAmount(source, amountStr, sa);
@@ -145,7 +144,7 @@ public class LifeLoseAi extends SpellAbilityAi {
             return false;
         }
 
-        if (SpellAbilityAi.isSorcerySpeed(sa) || sa.hasParam("ActivationPhases") || SpellAbilityAi.playReusable(ai, sa)
+        if (SpellAbilityAi.isSorcerySpeed(sa, ai) || sa.hasParam("ActivationPhases") || SpellAbilityAi.playReusable(ai, sa)
                 || ComputerUtil.activateForCost(sa, ai)) {
             return true;
         }
@@ -173,7 +172,7 @@ public class LifeLoseAi extends SpellAbilityAi {
         int amount = 0;
         if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, true);
             sa.setXManaCostPaid(xPay);
             amount = xPay;
         } else {

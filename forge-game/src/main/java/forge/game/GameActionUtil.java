@@ -482,40 +482,62 @@ public final class GameActionUtil {
 
     public static List<SpellAbility> getAdditionalCostSpell(final SpellAbility sa) {
         final List<SpellAbility> abilities = Lists.newArrayList(sa);
-        if (!sa.isSpell()) {
-            return abilities;
-        }
-        final Card source = sa.getHostCard();
-        for (KeywordInterface inst : source.getKeywords()) {
-            final String keyword = inst.getOriginal();
-            if (keyword.startsWith("AlternateAdditionalCost")) {
-                final List<SpellAbility> newAbilities = Lists.newArrayList();
-                String[] costs = TextUtil.split(keyword, ':');
+        if (sa.isSpell()) {
+            final Card source = sa.getHostCard();
+            for (KeywordInterface inst : source.getKeywords()) {
+                final String keyword = inst.getOriginal();
+                if (keyword.startsWith("AlternateAdditionalCost")) {
+                    final List<SpellAbility> newAbilities = Lists.newArrayList();
+                    String[] costs = TextUtil.split(keyword, ':');
 
-                final SpellAbility newSA = sa.copy();
-                newSA.setBasicSpell(false);
+                    final SpellAbility newSA = sa.copy();
+                    newSA.setBasicSpell(false);
 
-                final Cost cost1 = new Cost(costs[1], false);
-                newSA.setDescription(sa.getDescription() + " (Additional cost " + cost1.toSimpleString() + ")");
-                newSA.setPayCosts(cost1.add(sa.getPayCosts()));
-                if (newSA.canPlay()) {
-                    newAbilities.add(newSA);
+                    final Cost cost1 = new Cost(costs[1], false);
+                    newSA.setDescription(sa.getDescription() + " (Additional cost " + cost1.toSimpleString() + ")");
+                    newSA.setPayCosts(cost1.add(sa.getPayCosts()));
+                    if (newSA.canPlay()) {
+                        newAbilities.add(newSA);
+                    }
+
+                    //second option
+                    final SpellAbility newSA2 = sa.copy();
+                    newSA2.setBasicSpell(false);
+
+                    final Cost cost2 = new Cost(costs[2], false);
+                    newSA2.setDescription(sa.getDescription() + " (Additional cost " + cost2.toSimpleString() + ")");
+                    newSA2.setPayCosts(cost2.add(sa.getPayCosts()));
+                    if (newSA2.canPlay()) {
+                        newAbilities.add(newSA2);
+                    }
+
+                    abilities.clear();
+                    abilities.addAll(newAbilities);
                 }
-
-                //second option
-                final SpellAbility newSA2 = sa.copy();
-                newSA2.setBasicSpell(false);
-
-                final Cost cost2 = new Cost(costs[2], false);
-                newSA2.setDescription(sa.getDescription() + " (Additional cost " + cost2.toSimpleString() + ")");
-                newSA2.setPayCosts(cost2.add(sa.getPayCosts()));
-                if (newSA2.canPlay()) {
-                    newAbilities.add(newSA2);
-                }
-
-                abilities.clear();
-                abilities.addAll(newAbilities);
             }
+        } else if (sa.isActivatedAbility() && sa.hasParam("AlternateCost")) {
+            // need to be handled there because it needs to rebuilt the description for the original ability
+
+            final List<SpellAbility> newAbilities = Lists.newArrayList();
+
+            SpellAbility newSA = sa.copy();
+            newSA.removeParam("AlternateCost");
+            newSA.rebuiltDescription();
+            if (newSA.canPlay()) {
+                newAbilities.add(newSA);
+            }
+
+            // set the cost to this directly to bypass non mana cost
+            Cost alternateCost = new Cost(sa.getParam("AlternateCost"), sa.isAbility());
+            SpellAbility newSA2 = sa.copyWithDefinedCost(alternateCost);
+            newSA2.removeParam("AlternateCost");
+            newSA2.rebuiltDescription();
+            if (newSA2.canPlay()) {
+                newAbilities.add(newSA2);
+            }
+
+            abilities.clear();
+            abilities.addAll(newAbilities);
         }
         return abilities;
     }

@@ -218,7 +218,7 @@ public class SpecialCardAi {
 
             Card animated = AnimateAi.becomeAnimated(sa.getHostCard(), sa.getSubAbility());
             if (sa.getHostCard().canReceiveCounters(CounterEnumType.P1P1)) {
-                animated.addCounter(CounterEnumType.P1P1, 2, ai, sa.getSubAbility(), false, null);
+                animated.addCounterInternal(CounterEnumType.P1P1, 2, ai, false, null);
             }
             boolean isOppEOT = ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai;
             boolean isValuableAttacker = ph.is(PhaseType.MAIN1, ai) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animated);
@@ -647,7 +647,7 @@ public class SpecialCardAi {
     public static class GoblinPolkaBand {
         public static boolean consider(final Player ai, final SpellAbility sa) {
             int maxPotentialTgts = Lists.newArrayList(Iterables.filter(ai.getOpponents().getCreaturesInPlay(), CardPredicates.Presets.UNTAPPED)).size();
-            int maxPotentialPayment = ComputerUtilMana.determineLeftoverMana(sa, ai, "R");
+            int maxPotentialPayment = ComputerUtilMana.determineLeftoverMana(sa, ai, "R", false);
 
             int numTgts = Math.min(maxPotentialPayment, maxPotentialTgts);
             if (numTgts == 0) {
@@ -924,7 +924,7 @@ public class SpecialCardAi {
         public static Card considerCardFromList(final CardCollection fetchList) {
             for (Card c : CardLists.filter(fetchList, Predicates.or(CardPredicates.Presets.ARTIFACTS, CardPredicates.Presets.CREATURES))) {
                 for (SpellAbility ab : c.getSpellAbilities()) {
-                    if (ab.isAbility() && !ab.isTrigger()) {
+                    if (ab.isActivatedAbility()) {
                         Player controller = c.getController();
                         boolean wasCaged = false;
                         for (Card caged : CardLists.filter(controller.getCardsIn(ZoneType.Exile),
@@ -994,7 +994,7 @@ public class SpecialCardAi {
             }
 
             // Set PayX here to maximum value.
-            int tokenSize = ComputerUtilCost.getMaxXValue(sa, ai);
+            int tokenSize = ComputerUtilCost.getMaxXValue(sa, ai, false);
 
             // Some basic strategy for Momir
             if (tokenSize < 2) {
@@ -1014,7 +1014,7 @@ public class SpecialCardAi {
     // Multiple Choice
     public static class MultipleChoice {
         public static boolean consider(final Player ai, final SpellAbility sa) {
-            int maxX = ComputerUtilCost.getMaxXValue(sa, ai);
+            int maxX = ComputerUtilCost.getMaxXValue(sa, ai, false);
 
             if (maxX == 0) {
                 return false;
@@ -1604,7 +1604,7 @@ public class SpecialCardAi {
                 if (topGY == null
                         || !topGY.isCreature()
                         || ComputerUtilCard.evaluateCreature(creatHand) > ComputerUtilCard.evaluateCreature(topGY) + 80) {
-                    return numCreatsInHand > 1 || !ComputerUtilMana.canPayManaCost(creatHand.getSpellPermanent(), ai, 0);
+                    return numCreatsInHand > 1 || !ComputerUtilMana.canPayManaCost(creatHand.getSpellPermanent(), ai, 0, false);
                 }
             }
 
@@ -1769,7 +1769,7 @@ public class SpecialCardAi {
                     int CMC = ab.getPayCosts().getTotalMana() != null ? ab.getPayCosts().getTotalMana().getCMC() : 0;
                     int Xcount = ab.getPayCosts().getTotalMana() != null ? ab.getPayCosts().getTotalMana().countX() : 0;
 
-                    if ((Xcount == 0 && CMC == 0) || ComputerUtilMana.canPayManaCost(ab, ai, selfCMC + minManaAdj)) {
+                    if ((Xcount == 0 && CMC == 0) || ComputerUtilMana.canPayManaCost(ab, ai, selfCMC + minManaAdj, false)) {
                         if (src.isInstant() || src.isSorcery()) {
                             // instants and sorceries are one-shot, so only treat them as 1/2 value for the purpose of meeting minimum 
                             // castable cards in graveyard requirements 

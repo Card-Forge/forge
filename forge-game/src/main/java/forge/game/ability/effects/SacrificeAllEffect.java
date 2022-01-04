@@ -68,7 +68,7 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
             // gameCard is LKI in that case, the card is not in game anymore
             // or the timestamp did change
             // this should check Self too
-            if (gameCard == null || !sac.equalsWithTimestamp(gameCard) || !gameCard.canBeSacrificedBy(sa)) {
+            if (gameCard == null || !sac.equalsWithTimestamp(gameCard) || !gameCard.canBeSacrificedBy(sa, true)) {
                 continue;
             }
             gameList.add(gameCard);
@@ -92,7 +92,7 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
 
         for (Card sac : list) {
             final Card lKICopy = CardUtil.getLKICopy(sac, cachedMap);
-            if (game.getAction().sacrifice(sac, sa, table, params) != null) {
+            if (game.getAction().sacrifice(sac, sa, true, table, params) != null) {
                 if (remSacrificed) {
                     card.addRemembered(lKICopy);
                 }

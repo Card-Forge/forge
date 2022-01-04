@@ -73,6 +73,7 @@ public enum TriggerType {
     Foretell(TriggerForetell.class),
     Immediate(TriggerImmediate.class),
     Investigated(TriggerInvestigated.class),
+    IsForetold(TriggerIsForetold.class),
     LandPlayed(TriggerLandPlayed.class),
     LifeGained(TriggerLifeGained.class),
     LifeLost(TriggerLifeLost.class),

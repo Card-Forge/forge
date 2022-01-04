@@ -72,7 +72,7 @@ public class CostRemoveCounter extends CostPart {
     public int paymentOrder() { return 8; }
 
     @Override
-    public Integer getMaxAmountX(final SpellAbility ability, final Player payer) {
+    public Integer getMaxAmountX(final SpellAbility ability, final Player payer, final boolean effect) {
         final CounterType cntrs = this.counter;
         final Card source = ability.getHostCard();
         final String type = this.getType();
@@ -107,12 +107,12 @@ public class CostRemoveCounter extends CostPart {
             sb.append("-").append(this.getAmount());
         } else {
             sb.append("Remove ");
-            final Integer i = this.convertAmount();
             if (this.getAmount().equals("X")) {
                 sb.append("any number of counters");
             } else if (this.getAmount().equals("All")) {
                 sb.append("all ").append(this.counter.getName().toLowerCase()).append(" counters");
             } else {
+                final Integer i = this.convertAmount();
                 sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(),
                         this.counter.getName().toLowerCase() + " counter"));
             }
@@ -137,20 +137,20 @@ public class CostRemoveCounter extends CostPart {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer) {
+    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         final CounterType cntrs = this.counter;
         final Card source = ability.getHostCard();
         final String type = this.getType();
 
-        final Integer amount;
+        final int amount;
         if (getAmount().equals("All")) {
             amount = source.getCounters(cntrs);
         }
         else {
-            amount = this.convertAmount();
+            amount = getAbilityAmount(ability);
         }
         if (this.payCostFromSource()) {
-            return (amount == null) || ((source.getCounters(cntrs) - amount) >= 0);
+            return (source.getCounters(cntrs) - amount) >= 0;
         }
         else {
             List<Card> typeList;
@@ -159,22 +159,20 @@ public class CostRemoveCounter extends CostPart {
             } else {
                 typeList = CardLists.getValidCards(payer.getCardsIn(this.zone), type.split(";"), payer, source, ability);
             }
-            if (amount != null) {
-                // (default logic) remove X counters from a single permanent
-                for (Card c : typeList) {
-                    if (c.getCounters(cntrs) - amount >= 0) {
-                        return true;
-                    }
+
+            // (default logic) remove X counters from a single permanent
+            for (Card c : typeList) {
+                if (c.getCounters(cntrs) - amount >= 0) {
+                    return true;
                 }
-                return false;
             }
         }
 
-        return true;
+        return false;
     }
 
     @Override
-    public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
+    public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability, final boolean effect) {
         int removed = 0;
         final int toRemove = decision.c;
 

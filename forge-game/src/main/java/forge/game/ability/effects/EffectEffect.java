@@ -2,7 +2,6 @@ package forge.game.ability.effects;
 
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Map;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -228,7 +227,7 @@ public class EffectEffect extends SpellAbilityEffect {
             // Note counters on defined
             if (noteCounterDefined != null) {
                 for (final Card c : AbilityUtils.getDefinedCards(hostCard, noteCounterDefined, sa)) {
-                    noteCounters(c, eff);
+                    CountersNoteEffect.noteCounters(c, eff);
                 }
             }
 
@@ -258,6 +257,10 @@ public class EffectEffect extends SpellAbilityEffect {
             // Set Chosen name
             if (!hostCard.getNamedCard().isEmpty()) {
                 eff.setNamedCard(hostCard.getNamedCard());
+            }
+
+            if (sa.hasParam("CopySVar")) {
+                eff.setSVar(sa.getParam("CopySVar"), sa.getHostCard().getSVar(sa.getParam("CopySVar")));
             }
 
             // Copy text changes
@@ -326,14 +329,6 @@ public class EffectEffect extends SpellAbilityEffect {
             //if (effectTriggers != null) {
             //    game.getTriggerHandler().registerActiveTrigger(cmdEffect, false);
             //}
-        }
-    }
-
-    private void noteCounters(Card notee, Card source) {
-        for (Map.Entry<CounterType, Integer> counter : notee.getCounters().entrySet()) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("NoteCounters").append(counter.getKey().getName());
-            source.setSVar(sb.toString(), counter.getValue().toString());
         }
     }
 

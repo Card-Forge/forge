@@ -122,7 +122,7 @@ public class CostPartMana extends CostPart {
     }
 
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer) {
+    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         // For now, this will always return true. But this should probably be
         // checked at some point
         return true;
@@ -148,13 +148,12 @@ public class CostPartMana extends CostPart {
             int timesToPay = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getSVar("NumTimes"), sa);
             if (timesToPay == 0) {
                 return null;
-            } else {
-                ManaCostBeingPaid totalMana = new ManaCostBeingPaid(getManaToPay());
-                for (int i = 1; i < timesToPay; i++) {
-                    totalMana.addManaCost(getManaToPay());
-                }
-                return totalMana.toManaCost();
             }
+            ManaCostBeingPaid totalMana = new ManaCostBeingPaid(getManaToPay());
+            for (int i = 1; i < timesToPay; i++) {
+                totalMana.addManaCost(getManaToPay());
+            }
+            return totalMana.toManaCost();
         }
         return getManaToPay();
     }
@@ -170,11 +169,11 @@ public class CostPartMana extends CostPart {
     }
 
     @Override
-    public boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa) {
+    public boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa, final boolean effect) {
         sa.clearManaPaid();
 
         // decision not used here, the whole payment is interactive!
-        return payer.getController().payManaCost(this, sa, null, cardMatrix, true);
+        return payer.getController().payManaCost(this, sa, null, cardMatrix, effect);
     }
 
 }

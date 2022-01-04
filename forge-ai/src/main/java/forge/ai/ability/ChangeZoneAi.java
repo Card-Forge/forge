@@ -347,7 +347,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (type != null) {
             if (type.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+                final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
                 sa.setXManaCostPaid(xPay);
                 type = type.replace("X", Integer.toString(xPay));
             }
@@ -392,7 +392,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (num != null) {
                 if (num.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
                     // Set PayX here to maximum value.
-                    int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+                    int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
                     if (xPay == 0) return false;
                     xPay = Math.min(xPay, list.size());
                     sa.setXManaCostPaid(xPay);
@@ -502,7 +502,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final String type = sa.getParam("ChangeType");
         if (type != null && type.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
             sa.setXManaCostPaid(xPay);
         }
 
@@ -870,7 +870,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // X controls the minimum targets
         if ("X".equals(sa.getTargetRestrictions().getMinTargets()) && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+            int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
 
             // TODO need to set XManaCostPaid for targets, maybe doesn't need PayX anymore?
             sa.setXManaCostPaid(xPay);
@@ -1023,9 +1023,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                             }
                             if (blink) {
                                 return c.isToken();
-                            } else {
-                                return c.isToken() || c.getCMC() > 0;
                             }
+                            return c.isToken() || c.getCMC() > 0;
                         }
                     });
                 }
@@ -1060,7 +1059,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
                 if (!immediately && (!game.getPhaseHandler().getNextTurn().equals(ai)
                             || game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
-                        && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)
+                        && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa, ai)
                         && !ComputerUtil.activateForCost(sa, ai)) {
                     return false;
                 }
@@ -2171,7 +2170,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 boolean setPayX = false;
                 if (unlessCost.equals("X") && sa.getSVar(unlessCost).equals("Count$xPaid")) {
                     setPayX = true;
-                    toPay = ComputerUtilCost.getMaxXValue(sa, ai);
+                    toPay = ComputerUtilCost.getMaxXValue(sa, ai, true);
                 } else {
                     toPay = AbilityUtils.calculateAmount(source, unlessCost, sa);
                 }

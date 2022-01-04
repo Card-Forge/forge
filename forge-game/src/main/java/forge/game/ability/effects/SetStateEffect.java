@@ -181,8 +181,8 @@ public class SetStateEffect extends SpellAbilityEffect {
                     }
                 }
                 game.fireEvent(new GameEventCardStatsChanged(gameCard));
-                if (sa.hasParam("Mega")) {
-                    gameCard.addCounter(CounterEnumType.P1P1, 1, p, sa, true, table);
+                if (sa.hasParam("Mega")) { // TODO move Megamorph into an Replacement Effect
+                    gameCard.addCounter(CounterEnumType.P1P1, 1, p, table);
                 }
                 if (remChanged) {
                     host.addRemembered(gameCard);
@@ -191,7 +191,7 @@ public class SetStateEffect extends SpellAbilityEffect {
                     transformedCards.add(gameCard);
             }
         }
-        table.triggerCountersPutAll(game);
+        table.replaceCounterEffect(game, sa, true);
         if (!transformedCards.isEmpty()) {
             game.getAction().reveal(transformedCards, p, true, "Transformed cards in ");
         }

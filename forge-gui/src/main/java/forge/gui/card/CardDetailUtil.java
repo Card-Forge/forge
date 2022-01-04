@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import forge.game.card.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Sets;
@@ -16,7 +17,6 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.game.GameView;
-import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.zone.ZoneType;
@@ -429,7 +429,17 @@ public class CardDetailUtil {
                 area.append("\n");
             }
             area.append("(chosen cards: ");
-            area.append(Lang.joinHomogenous(card.getChosenCards()));
+            if (card.isImmutable() && card.getName().contains("Perpetual Effect")) {
+                List<CardView> chosenToShow = new ArrayList<>();
+                for (CardView cc : card.getChosenCards()) {
+                    if (!cc.getZone().isHidden()) {
+                        chosenToShow.add(cc);
+                    }
+                }
+                area.append(Lang.joinHomogenous(chosenToShow));
+            } else {
+                area.append(Lang.joinHomogenous(card.getChosenCards()));
+            }
             area.append(")");
         }
 

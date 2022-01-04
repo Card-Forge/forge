@@ -2,7 +2,5 @@ Name:Highland Lake
 ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/highland_lake.jpg
+A:AB$ Mana | Cost$ T | Produced$ Combo U R | SpellDescription$ Add {U} or {R}.
 Oracle:Highland Lake enters the battlefield tapped.\n{T}: Add {U} or {R}.

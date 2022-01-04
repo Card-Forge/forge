@@ -68,14 +68,10 @@ public class MillEffect extends SpellAbilityEffect {
                     }
                 }
                 if (sa.hasParam("RememberMilled")) {
-                    for (final Card c : milled) {
-                        source.addRemembered(c);
-                    }
+                    source.addRemembered(milled);
                 }
                 if (sa.hasParam("Imprint")) {
-                    for (final Card c : milled) {
-                        source.addImprintedCard(c);
-                    }
+                    source.addImprintedCards(milled);
                 }
             }
         }

@@ -23,11 +23,11 @@ public final class PlayerPredicates {
         };
     }
 
-    public static final Predicate<Player> canDiscardBy(final SpellAbility source) {
+    public static final Predicate<Player> canDiscardBy(final SpellAbility source, final boolean effect) {
         return new Predicate<Player>() {
             @Override
             public boolean apply(final Player p) {
-                return p.canDiscardBy(source);
+                return p.canDiscardBy(source, effect);
             }
         };
     }

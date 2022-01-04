@@ -126,7 +126,7 @@ public class DestroyEffect extends SpellAbilityEffect {
             card.addRemembered(gameCard.getAttachedCards());
         }
         if (sac) {
-            destroyed = game.getAction().sacrifice(gameCard, sa, table, params) != null;
+            destroyed = game.getAction().sacrifice(gameCard, sa, true, table, params) != null;
         } else {
             destroyed = game.getAction().destroy(gameCard, sa, !noRegen, table, params);
         }

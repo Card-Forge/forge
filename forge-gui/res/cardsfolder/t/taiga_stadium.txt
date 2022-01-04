@@ -3,6 +3,5 @@ ManaCost:no cost
 Types:Land
 K:ETBReplacement:Other:LandTapped
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Permanent.White+YouCtrl,Permanent.Blue+YouCtrl,Permanent.Black+YouCtrl | ConditionCompare$ EQ0 | SpellDescription$ CARDNAME enters the battlefield tapped unless you control a white, blue, or black permanent.
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ T | Produced$ Combo R G | SpellDescription$ Add {R} or {G}.
 Oracle:Taiga Stadium enters the battlefield tapped unless you control a white, blue, or black permanent.\n{T}: Add {R} or {G}.

@@ -91,7 +91,7 @@ public class DamageDealAi extends DamageAiBase {
                 }
 
                 // Set PayX here to maximum value.
-                dmg = ComputerUtilCost.getMaxXValue(sa, ai);
+                dmg = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
                 sa.setXManaCostPaid(dmg);
             } else if (sa.getSVar(damage).equals("Count$CardsInYourHand") && source.isInZone(ZoneType.Hand)) {
                 dmg--; // the card will be spent casting the spell, so actual damage is 1 less
@@ -111,7 +111,7 @@ public class DamageDealAi extends DamageAiBase {
 
         if (damage.equals("X")) {
             if (sa.getSVar(damage).equals("Count$xPaid") || sourceName.equals("Crater's Claws")) {
-                dmg = ComputerUtilCost.getMaxXValue(sa, ai);
+                dmg = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
 
                 // Try not to waste spells like Blaze or Fireball on early targets, try to do more damage with them if possible
                 if (ai.getController().isAI()) {
@@ -598,9 +598,9 @@ public class DamageDealAi extends DamageAiBase {
                     lastTgt = humanCreature;
                     dmg -= assignedDamage;
                 }
-                if (!source.hasProtectionFrom(humanCreature)) {
-                    dmgTaken += humanCreature.getNetPower();
-                }
+                // protection is already checked by target above
+                dmgTaken += humanCreature.getNetPower();
+
                 if (dmg == 0) {
                     return true;
                 }
@@ -761,7 +761,7 @@ public class DamageDealAi extends DamageAiBase {
             // TODO: Improve Damage, we shouldn't just target the player just because we can
             if (sa.canTarget(enemy) && tcs.size() < tgt.getMaxTargets(source, sa)) {
                 if (((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
-                        || (SpellAbilityAi.isSorcerySpeed(sa) && phase.is(PhaseType.MAIN2))
+                        || (SpellAbilityAi.isSorcerySpeed(sa, ai) && phase.is(PhaseType.MAIN2))
                         || ("PingAfterAttack".equals(logic) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai))
                         || immediately || shouldTgtP(ai, sa, dmg, noPrevention)) &&
                         (!avoidTargetP(ai, sa))) {
@@ -811,9 +811,8 @@ public class DamageDealAi extends DamageAiBase {
                 if (!c.hasKeyword(Keyword.INDESTRUCTIBLE) && ComputerUtilCombat.getDamageToKill(c, false) <= restDamage) {
                     if (c.getController().equals(ai)) {
                         return false;
-                    } else {
-                        urgent = true;
                     }
+                    urgent = true;
                 }
                 if (c.getController().isOpponentOf(ai) ^ c.getName().equals("Stuffy Doll")) {
                     positive = true;
@@ -959,7 +958,7 @@ public class DamageDealAi extends DamageAiBase {
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            dmg = ComputerUtilCost.getMaxXValue(sa, ai);
+            dmg = ComputerUtilCost.getMaxXValue(sa, ai, true);
             sa.setXManaCostPaid(dmg);
         }
 
@@ -1007,9 +1006,9 @@ public class DamageDealAi extends DamageAiBase {
         Player opponent = ai.getWeakestOpponent();
 
         // TODO: somehow account for the possible cost reduction?
-        int dmg = ComputerUtilMana.determineLeftoverMana(sa, ai, saTgt.getParam("XColor"));
+        int dmg = ComputerUtilMana.determineLeftoverMana(sa, ai, saTgt.getParam("XColor"), false);
 
-        while (!ComputerUtilMana.canPayManaCost(sa, ai, dmg) && dmg > 0) {
+        while (!ComputerUtilMana.canPayManaCost(sa, ai, dmg, false) && dmg > 0) {
             // TODO: ideally should never get here, currently put here as a precaution for complex mana base cases where the miscalculation might occur. Will remove later if it proves to never trigger.
             dmg--;
             System.out.println("Warning: AI could not pay mana cost for a XLifeDrain logic spell. Reducing X value to "+dmg);
@@ -1019,7 +1018,7 @@ public class DamageDealAi extends DamageAiBase {
         // TODO: somehow generalize this calculation to allow other potential similar cards to function in the future
         if ("Soul Burn".equals(sourceName)) {
             Map<String, Integer> xByColor = Maps.newHashMap();
-            xByColor.put("B", dmg - ComputerUtilMana.determineLeftoverMana(sa, ai, "R"));
+            xByColor.put("B", dmg - ComputerUtilMana.determineLeftoverMana(sa, ai, "R", false));
             source.setXManaCostPaidByColor(xByColor);
         }
 
@@ -1086,6 +1085,9 @@ public class DamageDealAi extends DamageAiBase {
             cards.addAll(ai.getCardsIn(ZoneType.Battlefield));
             cards.addAll(ai.getCardsActivableInExternalZones(true));
             for (Card c : cards) {
+                if (c.getZone().getPlayer() != null && c.getZone().getPlayer() != ai && c.mayPlay(ai).isEmpty()) {
+                    continue;
+                }
                 for (SpellAbility ab : c.getSpellAbilities()) {
                     if (ab.equals(sa) || ab.getSubAbility() != null) { // decisions for complex SAs with subs are not supported yet
                         continue;
@@ -1095,7 +1097,7 @@ public class DamageDealAi extends DamageAiBase {
                     }
                     // currently works only with cards that don't have additional costs (only mana is supported)
                     if (ab.getPayCosts().hasNoManaCost() || ab.getPayCosts().hasOnlySpecificCostType(CostPartMana.class)) {
-                        String dmgDef = "0";
+                        String dmgDef = "";
                         if (ab.getApi() == ApiType.DealDamage) {
                             dmgDef = ab.getParamOrDefault("NumDmg", "0");
                         } else if (ab.getApi() == ApiType.Pump) {
@@ -1123,7 +1125,7 @@ public class DamageDealAi extends DamageAiBase {
                                 ManaCost total = ManaCost.combine(costSa, costAb);
                                 SpellAbility combinedAb = ab.copyWithDefinedCost(new Cost(total, false));
                                 // can we pay both costs?
-                                if (ComputerUtilMana.canPayManaCost(combinedAb, ai, 0)) {
+                                if (ComputerUtilMana.canPayManaCost(combinedAb, ai, 0, false)) {
                                     return Pair.of(ab, Integer.parseInt(dmgDef));
                                 }
                             }

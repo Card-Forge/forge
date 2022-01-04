@@ -50,7 +50,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         	dmg = ComputerUtilMana.getConvergeCount(sa, ai);
         }
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
-            x = ComputerUtilCost.getMaxXValue(sa, ai);
+            x = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
         }
         if (x == -1) {
             if (determineOppToKill(ai, sa, source, dmg) != null) {
@@ -197,7 +197,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         int dmg;
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            dmg = ComputerUtilCost.getMaxXValue(sa, ai);
+            dmg = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
             sa.setXManaCostPaid(dmg);
         } else {
             dmg = AbilityUtils.calculateAmount(source, damage, sa);
@@ -276,7 +276,7 @@ public class  DamageAllAi extends SpellAbilityAi {
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            dmg = ComputerUtilCost.getMaxXValue(sa, ai);
+            dmg = ComputerUtilCost.getMaxXValue(sa, ai, true);
             sa.setXManaCostPaid(dmg);
         } else {
             dmg = AbilityUtils.calculateAmount(source, damage, sa);

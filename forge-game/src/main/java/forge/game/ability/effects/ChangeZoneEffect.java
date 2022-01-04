@@ -17,6 +17,7 @@ import forge.GameCommand;
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
@@ -487,6 +488,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         final boolean optional = sa.hasParam("Optional");
+        final boolean shuffle = sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle"));
         final long ts = game.getNextTimestamp();
         boolean combatChanged = false;
 
@@ -497,6 +499,15 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
         CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
+
+        // CR 401.4
+        if (destination.equals(ZoneType.Library) && !shuffle) {
+            if (sa.hasParam("Chooser")) {
+                tgtCards = chooser.getController().orderMoveToZoneList(new CardCollection(tgtCards), destination, sa);
+            } else {
+                tgtCards = GameActionUtil.orderCardsByTheirOwners(game, new CardCollection(tgtCards), destination, sa);
+            }
+        }
 
         for (final Card tgtC : tgtCards) {
             final Card gameCard = game.getCardState(tgtC, null);
@@ -723,7 +734,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("WithCountersType")) {
                         CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
                         int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
-                        movedCard.addCounter(cType, cAmount, player, sa, true, counterTable);
+                        movedCard.addCounter(cType, cAmount, player, counterTable);
                     }
 
                     if (sa.hasParam("ExileFaceDown") || sa.hasParam("FaceDown")) {
@@ -809,7 +820,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         triggerList.triggerChangesZoneAll(game, sa);
-        counterTable.triggerCountersPutAll(game);
+        counterTable.replaceCounterEffect(game, sa, true);
 
         if (sa.hasParam("AtEOT") && !triggerList.isEmpty()) {
             registerDelayedTrigger(sa, sa.getParam("AtEOT"), triggerList.allCards());
@@ -819,7 +830,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         // for things like Gaea's Blessing
-        if (destination.equals(ZoneType.Library) && sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle"))) {
+        if (destination.equals(ZoneType.Library) && shuffle) {
             PlayerCollection pl = new PlayerCollection();
             // use defined controller. it does need to work even without Targets.
             if (sa.hasParam("TargetsWithDefinedController")) {
@@ -1055,6 +1066,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (sa.hasParam("Unimprint")) {
                 source.clearImprintedCards();
             }
+            if (sa.hasParam("ForgetOtherRemembered")) {
+                source.clearRemembered();
+            }
 
             String selectPrompt = sa.hasParam("SelectPrompt") ? sa.getParam("SelectPrompt") : MessageUtil.formatMessage(Localizer.getInstance().getMessage("lblSelectCardFromPlayerZone", "{player's}", Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME).toLowerCase()), decider, player);
             final String totalcmc = sa.getParam("WithTotalCMC");
@@ -1205,7 +1219,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 Card movedCard = null;
                 final Zone originZone = game.getZoneOf(c);
                 Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
-                moveParams.put(AbilityKey.FoundSearchingLibrary,  searchedLibrary);
+                moveParams.put(AbilityKey.FoundSearchingLibrary, searchedLibrary);
                 moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
                 moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
                 if (destination.equals(ZoneType.Library)) {

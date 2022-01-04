@@ -3,7 +3,5 @@ ManaCost:no cost
 Types:Land
 K:ETBReplacement:Other:LandTapped
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Forest.YouCtrl,Plains.YouCtrl | ConditionCompare$ EQ0 | SpellDescription$ CARDNAME enters the battlefield tapped unless you control a Forest or a Plains.
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sunpetal_grove.jpg
+A:AB$ Mana | Cost$ T | Produced$ Combo G W | SpellDescription$ Add {G} or {W}.
 Oracle:Sunpetal Grove enters the battlefield tapped unless you control a Forest or a Plains.\n{T}: Add {G} or {W}.

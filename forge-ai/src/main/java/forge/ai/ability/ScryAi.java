@@ -55,7 +55,7 @@ public class ScryAi extends SpellAbilityAi {
         // even if there's no mana cost.
         if (sa.getPayCosts().hasTapCost()
                 && (sa.getPayCosts().hasManaCost() || (sa.getHostCard() != null && sa.getHostCard().isCreature()))
-                && !SpellAbilityAi.isSorcerySpeed(sa)) {
+                && !SpellAbilityAi.isSorcerySpeed(sa, ai)) {
             return ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN);
         }
 
@@ -67,7 +67,7 @@ public class ScryAi extends SpellAbilityAi {
 
         // in the playerturn Scry should only be done in Main1 or in upkeep if able
         if (ph.isPlayerTurn(ai)) {
-            if (SpellAbilityAi.isSorcerySpeed(sa)) {
+            if (SpellAbilityAi.isSorcerySpeed(sa, ai)) {
                 return ph.is(PhaseType.MAIN1) || sa.isPwAbility();
             } else {
                 return ph.is(PhaseType.UPKEEP);
@@ -119,7 +119,7 @@ public class ScryAi extends SpellAbilityAi {
         }
 
         double chance = .4; // 40 percent chance of milling with instant speed stuff
-        if (SpellAbilityAi.isSorcerySpeed(sa)) {
+        if (SpellAbilityAi.isSorcerySpeed(sa, ai)) {
             chance = .667; // 66.7% chance for sorcery speed (since it will never activate EOT)
         }
         boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);

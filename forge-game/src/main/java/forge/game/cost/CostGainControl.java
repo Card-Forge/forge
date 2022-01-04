@@ -17,7 +17,6 @@
  */
 package forge.game.cost;
 
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
@@ -74,23 +73,19 @@ public class CostGainControl extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer) {
+    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
         CardCollectionView typeList = payer.getGame().getCardsIn(ZoneType.Battlefield);
         typeList = CardLists.getValidCards(typeList, this.getType().split(";"), payer, source, ability);
 
-        Integer amount = this.convertAmount();
-        if (amount == null) {
-            amount = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-        }
-        return typeList.size() >= amount;
+        return typeList.size() >= getAbilityAmount(ability);
     }
 
     /* (non-Javadoc)
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard) {
+    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
         targetCard.addTempController(ability.getActivatingPlayer(), ability.getActivatingPlayer().getGame().getNextTimestamp());
         return targetCard;
     }

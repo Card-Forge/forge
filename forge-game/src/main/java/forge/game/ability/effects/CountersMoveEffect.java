@@ -89,7 +89,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
         CounterType cType = null;
         if (!counterName.matches("Any") && !counterName.matches("All")) {
             try {
-                cType = AbilityUtils.getCounterType(counterName, sa);
+                cType = CounterType.getType(counterName);
             } catch (Exception e) {
                 System.out.println("Counter type doesn't match, nor does an SVar exist with the type name.");
                 return;
@@ -162,11 +162,11 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                 }
             }
             for (Map.Entry<CounterType, Integer> e : countersToAdd.entrySet()) {
-                dest.addCounter(e.getKey(), e.getValue(), player, sa, true, table);
+                dest.addCounter(e.getKey(), e.getValue(), player, table);
             }
 
             game.updateLastStateForCard(dest);
-            table.triggerCountersPutAll(game);
+            table.replaceCounterEffect(game, sa, true);
             return;
         } else if (sa.hasParam("ValidDefined")) {
             // one Source to many Targets
@@ -223,7 +223,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
 
                 if (cnum > 0) {
                     source.subtractCounter(cType, cnum);
-                    cur.addCounter(cType, cnum, player, sa, true, table);
+                    cur.addCounter(cType, cnum, player, table);
                     game.updateLastStateForCard(cur);
                     updateSource = true;
                 }
@@ -231,7 +231,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             if (updateSource) {
                 // update source
                 game.updateLastStateForCard(source);
-                table.triggerCountersPutAll(game);
+                table.replaceCounterEffect(game, sa, true);
             }
             return;
         } else {
@@ -308,15 +308,14 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                     }
 
                     for (Map.Entry<CounterType, Integer> e : countersToAdd.entrySet()) {
-                        cur.addCounter(e.getKey(), e.getValue(), player, sa, true, table);
+                        cur.addCounter(e.getKey(), e.getValue(), player, table);
                     }
-                    game.updateLastStateForCard(cur);
                 }
             }
             // update source
             game.updateLastStateForCard(source);
         }
-        table.triggerCountersPutAll(game);
+        table.replaceCounterEffect(game, sa, true);
     } // moveCounterResolve
 
     protected void removeCounter(SpellAbility sa, final Card src, final Card dest, CounterType cType, String counterNum, Map<CounterType, Integer> countersToAdd) {

@@ -29,9 +29,7 @@ import forge.game.zone.ZoneType;
  * The Class CostUntapType.
  */
 public class CostUntapType extends CostPartWithList {
-    /**
-     * Serializables need a version ID.
-     */
+
     private static final long serialVersionUID = 1L;
     public final boolean canUntapSource;
 
@@ -77,7 +75,7 @@ public class CostUntapType extends CostPartWithList {
     }
 
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer) {
+    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         final Player activator = ability.getActivatingPlayer();
         final Card source = ability.getHostCard();
 
@@ -88,12 +86,12 @@ public class CostUntapType extends CostPartWithList {
         }
         typeList = CardLists.filter(typeList, Presets.TAPPED);
 
-        final Integer amount = convertAmount();
-        return (typeList.size() != 0) && ((amount == null) || (typeList.size() >= amount));
+        final int amount = this.getAbilityAmount(ability);
+        return (typeList.size() != 0) && (typeList.size() >= amount);
     }
 
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard) {
+    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
         targetCard.untap(true);
         return targetCard;
     }

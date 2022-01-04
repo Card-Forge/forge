@@ -60,7 +60,7 @@ public abstract class SpellAbilityAi {
 
         if (sa.hasParam("AICheckCanPlayWithDefinedX")) {
             // FIXME: can this somehow be simplified without the need for an extra AI hint?
-            sa.setXManaCostPaid(ComputerUtilCost.getMaxXValue(sa, ai));
+            sa.setXManaCostPaid(ComputerUtilCost.getMaxXValue(sa, ai, false));
         }
 
         if (!checkConditions(ai, sa, sa.getConditions())) {
@@ -104,7 +104,7 @@ public abstract class SpellAbilityAi {
         if (!con.getManaSpent().isEmpty()) {
             // need to use ManaCostBeingPaid check, can't use Cost#canPay
             ManaCostBeingPaid paid = new ManaCostBeingPaid(new ManaCost(new ManaCostParser(con.getManaSpent())));
-            if (ComputerUtilMana.canPayManaCost(paid, sa, ai)) {
+            if (ComputerUtilMana.canPayManaCost(paid, sa, ai, sa.isTrigger())) {
                 con.setManaSpent("");
             }
         }
@@ -169,7 +169,7 @@ public abstract class SpellAbilityAi {
     
     public final boolean doTriggerAI(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         // this evaluation order is currently intentional as it does more stuff that helps avoiding some crashes
-        if (!ComputerUtilCost.canPayCost(sa, aiPlayer) && !mandatory) {
+        if (!ComputerUtilCost.canPayCost(sa, aiPlayer, true) && !mandatory) {
             return false;
         }
 
@@ -251,11 +251,11 @@ public abstract class SpellAbilityAi {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    protected static boolean isSorcerySpeed(final SpellAbility sa) {
+    protected static boolean isSorcerySpeed(final SpellAbility sa, Player ai) {
         return (sa.getRootAbility().isSpell() && sa.getHostCard().isSorcery())
-            || (sa.getRootAbility().isAbility() && sa.getRestrictions().isSorcerySpeed())
+            || (sa.getRootAbility().isActivatedAbility() && sa.getRestrictions().isSorcerySpeed())
             || (sa.getRootAbility().isAdventure() && sa.getHostCard().getState(CardStateName.Adventure).getType().isSorcery())
-            || (sa.isPwAbility() && !sa.getHostCard().hasKeyword("CARDNAME's loyalty abilities can be activated at instant speed."));
+            || (sa.isPwAbility() && !sa.withFlash(sa.getHostCard(), ai));
     }
 
     /**

@@ -144,6 +144,7 @@ public enum ApiType {
     ReorderZone (ReorderZoneEffect.class),
     Repeat (RepeatEffect.class),
     RepeatEach (RepeatEachEffect.class),
+    ReplaceCounter (ReplaceCounterEffect.class),
     ReplaceEffect (ReplaceEffect.class),
     ReplaceMana (ReplaceManaEffect.class),
     ReplaceDamage (ReplaceDamageEffect.class),
@@ -188,7 +189,8 @@ public enum ApiType {
     ChangeZoneResolve (ChangeZoneResolveEffect.class),
     InternalEtbReplacement (ETBReplacementEffect.class),
     InternalLegendaryRule (CharmEffect.class),
-    InternalIgnoreEffect (CharmEffect.class);
+    InternalIgnoreEffect (CharmEffect.class),
+    UpdateRemember (UpdateRememberEffect.class);
 
 
     private final SpellAbilityEffect instanceEffect;

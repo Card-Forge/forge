@@ -26,6 +26,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import forge.game.event.GameEventCardForetold;
+import forge.game.trigger.TriggerType;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -676,13 +677,13 @@ public class CardFactoryUtil {
     }
 
     public static String getProtectionValid(final String kw, final boolean damage) {
-        String validSource = "Card."; // TODO extend for Emblem too
+        String validSource = "";
 
         if (kw.startsWith("Protection:")) {
             final String[] kws = kw.split(":");
             String characteristic = kws[1];
             if (characteristic.startsWith("Player")) {
-                validSource += "ControlledBy " + characteristic;
+                validSource = "ControlledBy " + characteristic;
             } else {
                 if (damage && (characteristic.endsWith("White") || characteristic.endsWith("Blue")
                     || characteristic.endsWith("Black") || characteristic.endsWith("Red")
@@ -690,34 +691,37 @@ public class CardFactoryUtil {
                     || characteristic.endsWith("MonoColor") || characteristic.endsWith("MultiColor"))) {
                     characteristic += "Source";
                 }
-                validSource = characteristic;
+                return characteristic;
             }
         } else if (kw.startsWith("Protection from ")) {
             String protectType = kw.substring("Protection from ".length());
             if (protectType.equals("white")) {
-                validSource += "White" + (damage ? "Source" : "");
+                validSource = "White" + (damage ? "Source" : "");
             } else if (protectType.equals("blue")) {
-                validSource += "Blue" + (damage ? "Source" : "");
+                validSource = "Blue" + (damage ? "Source" : "");
             } else if (protectType.equals("black")) {
-                validSource += "Black" + (damage ? "Source" : "");
+                validSource = "Black" + (damage ? "Source" : "");
             } else if (protectType.equals("red")) {
-                validSource += "Red" + (damage ? "Source" : "");
+                validSource = "Red" + (damage ? "Source" : "");
             } else if (protectType.equals("green")) {
-                validSource += "Green" + (damage ? "Source" : "");
+                validSource = "Green" + (damage ? "Source" : "");
             } else if (protectType.equals("colorless")) {
-                validSource += "Colorless" + (damage ? "Source" : "");
+                validSource = "Colorless" + (damage ? "Source" : "");
             } else if (protectType.equals("all colors")) {
-                validSource += "nonColorless" + (damage ? "Source" : "");
+                validSource = "nonColorless" + (damage ? "Source" : "");
             } else if (protectType.equals("everything")) {
-                validSource = "";
+                return "";
             } else if (protectType.startsWith("opponent of ")) {
                 final String playerName = protectType.substring("opponent of ".length());
-                validSource += "ControlledBy Player.OpponentOf PlayerNamed_" + playerName;
+                validSource = "ControlledBy Player.OpponentOf PlayerNamed_" + playerName;
             } else {
                 validSource = CardType.getSingularType(protectType);
             }
         }
-        return validSource;
+        if (validSource.isEmpty()) {
+            return validSource;
+        }
+        return "Card." + validSource + ",Emblem." + validSource;
     }
 
     public static ReplacementEffect makeEtbCounter(final String kw, final CardState card, final boolean intrinsic) {
@@ -1289,13 +1293,12 @@ public class CardFactoryUtil {
                 triggers.add(haunterETB);
             }
 
-            // First, create trigger that runs when the haunter goes to the
-            // graveyard
+            // First, create trigger that runs when the haunter goes to the graveyard
             final StringBuilder sbHaunter = new StringBuilder();
             sbHaunter.append("Mode$ ChangesZone | Origin$ ");
-            sbHaunter.append(card.isCreature() ? "Battlefield" : "Stack");
+            sbHaunter.append(card.isCreature() ? "Battlefield" : "Stack | ResolvedCard$ True");
             sbHaunter.append(" | Destination$ Graveyard | ValidCard$ Card.Self");
-            sbHaunter.append(" | Static$ True | Secondary$ True | TriggerDescription$ Blank");
+            sbHaunter.append(" | Secondary$ True | TriggerDescription$ " + inst.getReminderText());
 
             final Trigger haunterDies = TriggerHandler.parseTrigger(sbHaunter.toString(), card, intrinsic);
 
@@ -2892,6 +2895,7 @@ public class CardFactoryUtil {
                     final Game game = getHostCard().getGame();
                     final Card c = game.getAction().exile(getHostCard(), this);
                     c.setForetold(true);
+                    game.getTriggerHandler().runTrigger(TriggerType.IsForetold, AbilityKey.mapFromCard(c), false);
                     c.setForetoldThisTurn(true);
                     c.turnFaceDown(true);
                     // look at the exiled card
@@ -2963,7 +2967,7 @@ public class CardFactoryUtil {
             final String manacost = k[1];
 
             StringBuilder sb = new StringBuilder();
-            sb.append("AB$ PutCounter| Cost$ ").append(manacost);
+            sb.append("AB$ PutCounter | Cost$ ").append(manacost);
             sb.append(" | PrecostDesc$ Level Up | CostDesc$ ").append(ManaCostParser.parse(manacost));
             sb.append(" | SorcerySpeed$ True | LevelUp$ True | CounterNum$ 1 | CounterType$ LEVEL");
             if (card.hasSVar("maxLevel")) {
@@ -3171,7 +3175,7 @@ public class CardFactoryUtil {
             final String delTrigStr = "DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | RememberObjects$ Imprinted " +
                     "| StackDescription$ None | TriggerDescription$ Sacrifice them at the beginning of the next end step.";
 
-            final String sacStr = "DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI";
+            final String sacStr = "DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI | Controller$ You";
 
             final String cleanupStr = "DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True";
 
@@ -3253,8 +3257,8 @@ public class CardFactoryUtil {
 
                     int counters = AbilityUtils.calculateAmount(c, k[1], this);
                     GameEntityCounterTable table = new GameEntityCounterTable();
-                    c.addCounter(CounterEnumType.TIME, counters, getActivatingPlayer(), this, true, table);
-                    table.triggerCountersPutAll(game);
+                    c.addCounter(CounterEnumType.TIME, counters, getActivatingPlayer(), table);
+                    table.replaceCounterEffect(game, this, false); // this is a special Action, not an Effect
 
                     String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(),"has suspended", c.getName(), "with", String.valueOf(counters),"time counters on it.");
                     game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
@@ -3396,8 +3400,6 @@ public class CardFactoryUtil {
 
     public static void addStaticAbility(final KeywordInterface inst, final CardState state, final boolean intrinsic) {
         String keyword = inst.getOriginal();
-        String effect = null;
-        Map<String, String> svars = Maps.newHashMap();
 
         if (keyword.startsWith("Affinity")) {
             final String[] k = keyword.split(":");
@@ -3417,20 +3419,24 @@ public class CardFactoryUtil {
             sb.append("Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ AffinityX | EffectZone$ All");
             sb.append("| Description$ Affinity for ").append(desc);
             sb.append(" (").append(inst.getReminderText()).append(")");
-            effect = sb.toString();
+            String effect = sb.toString();
 
-            svars.put("AffinityX", "Count$Valid " + t + ".YouCtrl");
+            StaticAbility st = StaticAbility.create(effect, state.getCard(), state, intrinsic);
+
+            st.setSVar("AffinityX", "Count$Valid " + t + ".YouCtrl");
+            inst.addStaticAbility(st);
         } else if (keyword.equals("Changeling")) {
-            effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self" +
+            String effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self" +
                     " | CharacteristicDefining$ True | AddAllCreatureTypes$ True | Secondary$ True" +
                     " | Description$ Changeling (" + inst.getReminderText() + ")";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Cipher")) {
             StringBuilder sb = new StringBuilder();
             sb.append("Mode$ Continuous | EffectZone$ Exile | Affected$ Card.EncodedWithSource");
             sb.append(" | AddTrigger$ CipherTrigger");
             sb.append(" | Description$ Cipher (").append(inst.getReminderText()).append(")");
 
-            effect = sb.toString();
+            String effect = sb.toString();
 
             sb = new StringBuilder();
 
@@ -3443,8 +3449,12 @@ public class CardFactoryUtil {
 
             String ab = "DB$ Play | Defined$ OriginalHost | WithoutManaCost$ True | CopyCard$ True";
 
-            svars.put("CipherTrigger", trig);
-            svars.put("PlayEncoded", ab);
+            StaticAbility st = StaticAbility.create(effect, state.getCard(), state, intrinsic);
+
+            st.setSVar("CipherTrigger", trig);
+            st.setSVar("PlayEncoded", ab);
+
+            inst.addStaticAbility(st);
         } else if (keyword.startsWith("Class")) {
             final String[] k = keyword.split(":");
             final String level = k[1];
@@ -3473,24 +3483,32 @@ public class CardFactoryUtil {
                 }
             }
 
-            effect = "Mode$ Continuous | Affected$ Card.Self | ClassLevel$ " + level + " | " + params;
+            String effect = "Mode$ Continuous | Affected$ Card.Self | ClassLevel$ " + level + " | " + params;
             if (descAdded) {
                 effect += " | Description$ " + desc.toString();
             }
+
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.startsWith("Dash")) {
-            effect = "Mode$ Continuous | Affected$ Card.Self+dashed | AddKeyword$ Haste";
+            String effect = "Mode$ Continuous | Affected$ Card.Self+dashed | AddKeyword$ Haste";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Daybound")) {
-            effect = "Mode$ CantTransform | ValidCard$ Creature.Self | ExceptCause$ SpellAbility.Daybound | Secondary$ True | Description$ This permanent can't be transformed except by its daybound ability.";
+            String effect = "Mode$ CantTransform | ValidCard$ Creature.Self | ExceptCause$ SpellAbility.Daybound | Secondary$ True | Description$ This permanent can't be transformed except by its daybound ability.";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Decayed")) {
-            effect = "Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't block. | " +
+            String effect = "Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't block. | " +
                     "Secondary$ True";
-            svars.put("SacrificeEndCombat", "True");
+            StaticAbility st = StaticAbility.create(effect, state.getCard(), state, intrinsic);
+            st.setSVar("SacrificeEndCombat", "True");
+            inst.addStaticAbility(st);
         } else if (keyword.equals("Defender")) {
-            effect = "Mode$ CantAttack | ValidCard$ Card.Self | DefenderKeyword$ True | Secondary$ True";
+            String effect = "Mode$ CantAttack | ValidCard$ Card.Self | DefenderKeyword$ True | Secondary$ True";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Devoid")) {
-            effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self" +
+            String effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self" +
                     " | CharacteristicDefining$ True | SetColor$ Colorless | Secondary$ True" +
                     " | Description$ Devoid (" + inst.getReminderText() + ")";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.startsWith("Escalate")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
@@ -3504,15 +3522,18 @@ public class CardFactoryUtil {
             }
             sb.append(cost.toSimpleString());
 
-            effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Secondary$ True"
+            String effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Secondary$ True"
                     + " | Amount$ Escalate | Cost$ "+ manacost +" | EffectZone$ All"
                     + " | Description$ " + sb.toString() + " (" + inst.getReminderText() + ")";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Fear")) {
-            effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonArtifact+nonBlack | Secondary$ True " +
+            String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonArtifact+nonBlack | Secondary$ True " +
                     " | Description$ Fear ( " + inst.getReminderText() + ")";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Flying")) {
-            effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutFlying+withoutReach | Secondary$ True " +
+            String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutFlying+withoutReach | Secondary$ True " +
                     " | Description$ Flying ( " + inst.getReminderText() + ")";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.startsWith("Hexproof")) {
             final StringBuilder sbDesc = new StringBuilder("Hexproof");
             final StringBuilder sbValid = new StringBuilder();
@@ -3524,55 +3545,84 @@ public class CardFactoryUtil {
                 sbValid.append("| ValidSource$ ").append(k[1]);
             }
 
-            effect = "Mode$ CantTarget | Hexproof$ True | ValidCard$ Card.Self | Secondary$ True"
+            String effect = "Mode$ CantTarget | Hexproof$ True | ValidCard$ Card.Self | Secondary$ True"
                     + sbValid.toString() + " | Activator$ Opponent | Description$ "
                     + sbDesc.toString() + " (" + inst.getReminderText() + ")";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Horsemanship")) {
-            effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutHorsemanship | Secondary$ True " +
+            String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutHorsemanship | Secondary$ True " +
                     " | Description$ Horsemanship ( " + inst.getReminderText() + ")";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Intimidate")) {
-            effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonArtifact+notSharesColorWith | Secondary$ True " +
+            String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonArtifact+notSharesColorWith | Secondary$ True " +
                     " | Description$ Intimidate ( " + inst.getReminderText() + ")";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Nightbound")) {
-            effect = "Mode$ CantTransform | ValidCard$ Creature.Self | ExceptCause$ SpellAbility.Nightbound | Secondary$ True | Description$ This permanent can't be transformed except by its nightbound ability.";
+            String effect = "Mode$ CantTransform | ValidCard$ Creature.Self | ExceptCause$ SpellAbility.Nightbound | Secondary$ True | Description$ This permanent can't be transformed except by its nightbound ability.";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.startsWith("Protection")) {
             String valid = getProtectionValid(keyword, false);
-            effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self ";
+
+            // Block
+            String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Secondary$ True ";
+            String desc = "Protection ( " + inst.getReminderText() + ")";
             if (!valid.isEmpty()) {
                 effect += "| ValidBlocker$ " + valid;
             }
-            effect += " | Secondary$ True | Description$ Protection ( " + inst.getReminderText() + ")";
+            effect += " | Description$ " + desc;
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
+
+            // Target
+            effect = "Mode$ CantTarget | Protection$ True | ValidCard$ Card.Self | Secondary$ True ";
+            if (!valid.isEmpty()) {
+                effect += "| ValidSource$ " + valid;
+            }
+            effect += " | Description$ " + desc;
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
+
+            // Attach
+            effect = "Mode$ CantAttach | Protection$ True | Target$ Card.Self | Secondary$ True ";
+            if (!valid.isEmpty()) {
+                effect += "| ValidCard$ " + valid;
+            }
+            // This effect doesn't remove something
+            if (keyword.startsWith("Protection:")) {
+                final String[] kws = keyword.split(":");
+                if (kws.length > 3) {
+                    effect += "| Exceptions$ " + kws[3];
+                }
+            }
+            effect += " | Description$ " + desc;
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Shroud")) {
-            effect = "Mode$ CantTarget | Shroud$ True | ValidCard$ Card.Self | Secondary$ True"
+            String effect = "Mode$ CantTarget | Shroud$ True | ValidCard$ Card.Self | Secondary$ True"
                     + " | Description$ Shroud (" + inst.getReminderText() + ")";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Skulk")) {
-            effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerGTX | Secondary$ True " +
+            String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerGTX | Secondary$ True " +
                     " | Description$ Skulk ( " + inst.getReminderText() + ")";
-            svars.put("X", "Count$CardPower");
+            StaticAbility st = StaticAbility.create(effect, state.getCard(), state, intrinsic);
+            st.setSVar("X", "Count$CardPower");
+            inst.addStaticAbility(st);
         } else if (keyword.startsWith("Strive")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
 
-            effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Strive | Cost$ "+ manacost +" | EffectZone$ All" +
+            String effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Strive | Cost$ "+ manacost +" | EffectZone$ All" +
                     " | Description$ Strive - " + inst.getReminderText();
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Unleash")) {
-            effect = "Mode$ Continuous | Affected$ Card.Self+counters_GE1_P1P1 | AddHiddenKeyword$ CARDNAME can't block.";
+            String effect = "Mode$ Continuous | Affected$ Card.Self+counters_GE1_P1P1 | AddHiddenKeyword$ CARDNAME can't block.";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Undaunted")) {
-            effect = "Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Secondary$ True"
+            String effect = "Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Secondary$ True"
                     + "| Amount$ Undaunted | EffectZone$ All | Description$ Undaunted (" + inst.getReminderText() + ")";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("MayFlashSac")) {
-            effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | Secondary$ True | MayPlay$ True"
+            String effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | Secondary$ True | MayPlay$ True"
                 + " | MayPlayNotSorcerySpeed$ True | MayPlayWithFlash$ True | MayPlayText$ Sacrifice at the next cleanup step"
                 + " | AffectedZone$ Exile,Graveyard,Hand,Library,Stack | Description$ " + inst.getReminderText();
-        }
-
-        if (effect != null) {
-            StaticAbility st = new StaticAbility(effect, state.getCard(), state);
-            st.setIntrinsic(intrinsic);
-            for (Map.Entry<String, String> e : svars.entrySet()) {
-                st.setSVar(e.getKey(), e.getValue());
-            }
-            inst.addStaticAbility(st);
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         }
     }
 
@@ -3608,6 +3658,10 @@ public class CardFactoryUtil {
 
         if (params.containsKey("StackDescription")) {
             altCostSA.setStackDescription(params.get("StackDescription"));
+        }
+
+        if (params.containsKey("Announce")) {
+            altCostSA.addAnnounceVar(params.get("Announce"));
         }
 
         return altCostSA;

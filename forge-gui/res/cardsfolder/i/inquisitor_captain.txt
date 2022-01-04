@@ -1,0 +1,15 @@
+Name:Inquisitor Captain
+ManaCost:3 W
+Types:Creature Human Cleric
+PT:3/3
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ Z | SVarCompare$ GE20 | Execute$ TrigSeek | TriggerDescription$ When CARDNAME enters the battlefield, if there are twenty or more creature cards with mana value 3 or less among cards in your graveyard, hand, and library, seek two creature cards with mana value 3 or less. Put one of them onto the battlefield and shuffle the other into your library.
+SVar:TrigSeek:DB$ ChangeZone | Origin$ Library | Destination$ Library | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Creature.YouOwn+cmcLE3 | ChangeNum$ 2 | RememberChanged$ True | SubAbility$ DBChangeZone1
+SVar:DBChangeZone1:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.IsRemembered | ChangeNum$ 1 | Mandatory$ True | NoLooking$ True | SelectPrompt$ Select a card for the battlefield | Shuffle$ True | SubAbility$ DBChangeZone2 | StackDescription$ None
+SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Library | Destination$ Library | ChangeType$ Creature.IsRemembered | Mandatory$ True | NoLooking$ True | StackDescription$ None | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$ValidGraveyard Creature.YouOwn+cmcLE3
+SVar:Y:Count$ValidLibrary Creature.YouOwn+cmcLE3/Plus.X
+SVar:Z:Count$ValidHand Creature.YouOwn+cmcLE3/Plus.Y
+DeckNeeds:Type$Creature
+Oracle:Vigilance\nWhen Inquisitor Captain enters the battlefield, if there are twenty or more creature cards with mana value 3 or less among cards in your graveyard, hand, and library, seek two creature cards with mana value 3 or less. Put one of them onto the battlefield and shuffle the other into your library.

@@ -1,8 +1,6 @@
 Name:Zagoth Crystal
 ManaCost:3
 Types:Artifact
-A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ Mana | Cost$ T | Produced$ Combo B G U | SpellDescription$ Add {B}, {G}, or {U}.
 K:Cycling:2
 Oracle:{T}: Add {B}, {G}, or {U}.\nCycling {2} ({2}, Discard this card: Draw a card.)

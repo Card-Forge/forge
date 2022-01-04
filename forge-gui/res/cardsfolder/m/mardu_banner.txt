@@ -1,11 +1,8 @@
 Name:Mardu Banner
 ManaCost:3
 Types:Artifact
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ Mana | Cost$ T | Produced$ Combo R W B | SpellDescription$ Add {R}, {W}, or {B}.
 A:AB$ Draw | Cost$ R W B T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 AI:RemoveDeck:Random
 DeckNeeds:Color$Red|White|Black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mardu_banner.jpg
 Oracle:{T}: Add {R}, {W}, or {B}.\n{R}{W}{B}, {T}, Sacrifice Mardu Banner: Draw a card.

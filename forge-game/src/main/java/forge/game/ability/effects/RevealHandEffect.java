@@ -3,8 +3,7 @@ package forge.game.ability.effects;
 import java.util.List;
 
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -45,17 +44,16 @@ public class RevealHandEffect extends SpellAbilityEffect {
                 if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantRevealYourHand"))) {
                     continue;
                 }
-                final CardCollectionView hand = p.getCardsIn(ZoneType.Hand);
+                CardCollectionView hand = p.getCardsIn(ZoneType.Hand);
+                if (sa.hasParam("RevealType")) {
+                    hand = CardLists.filter(hand, CardPredicates.isType(sa.getParam("RevealType")));
+                }
                 sa.getActivatingPlayer().getController().reveal(hand, ZoneType.Hand, p);
                 if (sa.hasParam("RememberRevealed")) {
-                    for (final Card c : hand) {
-                        host.addRemembered(c);
-                    }
+                    host.addRemembered(hand);
                 }
                 if (sa.hasParam("ImprintRevealed")) {
-                    for (final Card c : hand) {
-                        host.addImprintedCard(c);
-                    }
+                    host.addImprintedCards(hand);
                 }
                 if (sa.hasParam("RememberRevealedPlayer")) {
                     host.addRemembered(p);

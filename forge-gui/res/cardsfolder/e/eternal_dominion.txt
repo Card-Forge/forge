@@ -2,7 +2,7 @@ Name:Eternal Dominion
 ManaCost:7 U U U
 Types:Sorcery
 K:Epic
-A:SP$ ChangeZone | Cost$ 7 U U U | Origin$ Library | Destination$ Battlefield | ValidTgts$ Opponent | ChangeType$ Artifact,Creature,Enchantment,Land | ChangeNum$ 1 | GainControl$ True | IsCurse$ True | StackDescription$ SpellDescription | SpellDescription$ Search target opponent's library for a creature card and put that card onto the battlefield under your control. Then that player shuffles their library.
+A:SP$ ChangeZone | Cost$ 7 U U U | Origin$ Library | Destination$ Battlefield | ValidTgts$ Opponent | ChangeType$ Artifact,Creature,Enchantment,Land | ChangeNum$ 1 | GainControl$ True | IsCurse$ True | StackDescription$ SpellDescription | SpellDescription$ Search target opponent's library for an artifact, creature, enchantment, or land card. Put that card onto the battlefield under your control. Then that player shuffles.
 #TODO: Tutoring in general can be improved to make this card work better for the AI. Currently the AI will grab the most expensive targets in the opponent's library (which is not necessarily a bad thing in itself, but not always optimal).
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eternal_dominion.jpg

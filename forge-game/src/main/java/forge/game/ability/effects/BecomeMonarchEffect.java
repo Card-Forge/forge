@@ -7,7 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 
 public class BecomeMonarchEffect extends SpellAbilityEffect {
 
@@ -25,13 +24,12 @@ public class BecomeMonarchEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         // TODO: improve ai and fix corner cases
         final String set = sa.getHostCard().getSetCode();
 
         for (final Player p : getTargetPlayers(sa)) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                if (!p.hasKeyword("You can't become the monarch this turn.")) {
+            if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
+                if (p.canBecomeMonarch()) {
                     p.getGame().getAction().becomeMonarch(p, set);
                 }
             }

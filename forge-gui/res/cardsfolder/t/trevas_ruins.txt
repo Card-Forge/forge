@@ -1,11 +1,8 @@
 Name:Treva's Ruins
 ManaCost:no cost
 Types:Land Lair
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ Mana | Cost$ T | Produced$ Combo G W U | SpellDescription$ Add {G}, {W}, or {U}.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you return a non-Lair land you control to its owner's hand.
 SVar:TrigSacUnless:DB$ Sacrifice | Defined$ Self | UnlessCost$ Return<1/Land.nonLair/non-Lair land> | UnlessPayer$ You
 SVar:NeedsToPlay:Land.nonLair+YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/trevas_ruins.jpg
 Oracle:When Treva's Ruins enters the battlefield, sacrifice it unless you return a non-Lair land you control to its owner's hand.\n{T}: Add {G}, {W}, or {U}.

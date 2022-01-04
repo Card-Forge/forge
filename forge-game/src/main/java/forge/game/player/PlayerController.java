@@ -245,14 +245,14 @@ public abstract class PlayerController {
 
     public abstract void resetAtEndOfTurn(); // currently used by the AI to perform card memory cleanup
 
-    public final boolean payManaCost(CostPartMana costPartMana, SpellAbility sa, String prompt, boolean isActivatedAbility) {
-        return payManaCost(costPartMana, sa, prompt, null, isActivatedAbility);
+    public final boolean payManaCost(CostPartMana costPartMana, SpellAbility sa, String prompt, boolean effect) {
+        return payManaCost(costPartMana, sa, prompt, null, effect);
     }
 
-    public final boolean payManaCost(CostPartMana costPartMana, SpellAbility sa, String prompt, ManaConversionMatrix matrix, boolean isActivatedAbility) {
-        return payManaCost(costPartMana.getManaCostFor(sa), costPartMana, sa, prompt, matrix, isActivatedAbility);
+    public final boolean payManaCost(CostPartMana costPartMana, SpellAbility sa, String prompt, ManaConversionMatrix matrix, boolean effect) {
+        return payManaCost(costPartMana.getManaCostFor(sa), costPartMana, sa, prompt, matrix, effect);
     }
-    public abstract boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt, ManaConversionMatrix matrix, boolean isActivatedAbility);
+    public abstract boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt, ManaConversionMatrix matrix, boolean effect);
 
     public abstract Map<Card, ManaCostShard> chooseCardsForConvokeOrImprovise(SpellAbility sa, ManaCost manaCost, CardCollectionView untappedCards, boolean improvise);
 

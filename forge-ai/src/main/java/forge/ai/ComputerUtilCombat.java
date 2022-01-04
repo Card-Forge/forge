@@ -1020,7 +1020,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
 
-                if (ComputerUtilCost.canPayCost(ability, blocker.getController())) {
+                if (ComputerUtilCost.canPayCost(ability, blocker.getController(), false)) {
                     int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("NumAtt"), ability);
                     if (pBonus > 0) {
                         power += pBonus;
@@ -1039,7 +1039,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
 
-                if (ComputerUtilCost.canPayCost(ability, blocker.getController())) {
+                if (ComputerUtilCost.canPayCost(ability, blocker.getController(), false)) {
                     int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
                     if (pBonus > 0) {
                         power += pBonus;
@@ -1155,7 +1155,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
 
-                if (ComputerUtilCost.canPayCost(ability, blocker.getController())) {
+                if (ComputerUtilCost.canPayCost(ability, blocker.getController(), false)) {
                     int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("NumDef"), ability);
                     if (tBonus > 0) {
                         toughness += tBonus;
@@ -1174,7 +1174,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
 
-                if (ComputerUtilCost.canPayCost(ability, blocker.getController())) {
+                if (ComputerUtilCost.canPayCost(ability, blocker.getController(), false)) {
                     int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
                     if (tBonus > 0) {
                         toughness += tBonus;
@@ -1352,7 +1352,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
 
-                if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
+                if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController(), false)) {
                     int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("NumAtt"), ability);
                     if (pBonus > 0) {
                         power += pBonus;
@@ -1371,7 +1371,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
 
-                if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
+                if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController(), false)) {
                     int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
                     if (pBonus > 0) {
                         power += pBonus;
@@ -1570,7 +1570,7 @@ public class ComputerUtilCombat {
             if (ability.getPayCosts().hasTapCost() && !attacker.hasKeyword(Keyword.VIGILANCE)) {
                 continue;
             }
-            if (!ComputerUtilCost.canPayCost(ability, attacker.getController())) {
+            if (!ComputerUtilCost.canPayCost(ability, attacker.getController(), false)) {
                 continue;
             }
 
@@ -2292,9 +2292,8 @@ public class ComputerUtilCombat {
         }
         if (!withoutAbilities) {
             return canGainKeyword(combatant, Lists.newArrayList(keyword), combat);
-        } else {
-            return false;
         }
+        return false;
     }
 
     public final static boolean canGainKeyword(final Card combatant, final List<String> keywords, final Combat combat) {
@@ -2312,7 +2311,7 @@ public class ComputerUtilCombat {
 	                continue;
 	            }
 	
-	            if (!ability.hasParam("KW") || !ComputerUtilCost.canPayCost(ability, controller)) {
+	            if (!ability.hasParam("KW") || !ComputerUtilCost.canPayCost(ability, controller, false)) {
 	                continue;
 	            }
 	            if (c != combatant) {
@@ -2346,7 +2345,7 @@ public class ComputerUtilCombat {
     private final static Card canTransform(Card original) {
         if (original.isDoubleFaced() && !original.isInAlternateState()) {
             for (SpellAbility sa : original.getSpellAbilities()) {
-                if (sa.getApi() == ApiType.SetState && ComputerUtilCost.canPayCost(sa, original.getController())) {
+                if (sa.getApi() == ApiType.SetState && ComputerUtilCost.canPayCost(sa, original.getController(), false)) {
                     Card transformed = CardUtil.getLKICopy(original);
                     transformed.getCurrentState().copyFrom(original.getAlternateState(), true);
                     transformed.updateStateForView();

@@ -3,7 +3,5 @@ ManaCost:no cost
 Types:Land
 K:ETBReplacement:Other:LandTapped
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Island.YouCtrl,Mountain.YouCtrl | ConditionCompare$ EQ0 | SpellDescription$ CARDNAME enters the battlefield tapped unless you control an Island or a Mountain.
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sulfur_falls.jpg
+A:AB$ Mana | Cost$ T | Produced$ Combo U R | SpellDescription$ Add {U} or {R}.
 Oracle:Sulfur Falls enters the battlefield tapped unless you control an Island or a Mountain.\n{T}: Add {U} or {R}.

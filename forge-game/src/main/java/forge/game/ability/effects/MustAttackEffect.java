@@ -86,7 +86,6 @@ public class MustAttackEffect extends SpellAbilityEffect {
                 }
             }
         }
-
     } // mustAttackResolve()
 
 }

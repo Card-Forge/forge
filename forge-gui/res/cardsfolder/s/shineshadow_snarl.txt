@@ -3,6 +3,5 @@ ManaCost:no cost
 Types:Land
 K:ETBReplacement:Other:DBTap
 SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Plains,Swamp/Plains or Swamp> | UnlessPayer$ You | StackDescription$ enters the battlefield tapped. | SpellDescription$ As CARDNAME enters the battlefield, you may reveal a Plains or Swamp card from your hand. If you don't, CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ Mana | Cost$ T | Produced$ Combo W B | SpellDescription$ Add {W} or {B}.
 Oracle:As Shineshadow Snarl enters the battlefield, you may reveal a Plains or Swamp card from your hand. If you don't, Shineshadow Snarl enters the battlefield tapped.\n{T}: Add {W} or {B}.

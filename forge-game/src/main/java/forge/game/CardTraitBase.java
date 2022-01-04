@@ -64,7 +64,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
      * Keys that should not changed
      */
     private static final ImmutableList<String> noChangeKeys = ImmutableList.<String>builder()
-            .add("TokenScript", "LegacyImage", "TokenImage", "NewName").build();
+            .add("TokenScript", "LegacyImage", "TokenImage", "NewName", "ChooseFromList").build();
 
     /**
      * <p>
@@ -91,6 +91,9 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
     }
     public String putParam(String key, String value) {
         return mapParams.put(key, value);
+    }
+    public void removeParam(String key) {
+        mapParams.remove(key);
     }
     /**
      * <p>
@@ -547,9 +550,8 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
     public String getSVar(final String name) {
         if (sVars.containsKey(name)) {
             return sVars.get(name);
-        } else {
-            return getSVarFallback().getSVar(name);
         }
+        return getSVarFallback().getSVar(name);
     }
 
     @Override

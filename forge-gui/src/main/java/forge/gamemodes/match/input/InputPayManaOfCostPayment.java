@@ -1,10 +1,14 @@
 package forge.gamemodes.match.input;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
-import forge.game.card.Card;
+import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
+import forge.game.mana.ManaPool;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.localinstance.properties.ForgePreferences;
@@ -14,11 +18,20 @@ import forge.util.ITriggerEvent;
 import forge.util.Localizer;
 
 public class InputPayManaOfCostPayment extends InputPayMana {
-    public InputPayManaOfCostPayment(final PlayerControllerHuman controller, ManaCostBeingPaid cost, SpellAbility spellAbility, Player payer, ManaConversionMatrix matrix) {
-        super(controller, spellAbility, payer);
+
+    public InputPayManaOfCostPayment(final PlayerControllerHuman controller, ManaCostBeingPaid cost, SpellAbility spellAbility, Player payer, ManaConversionMatrix matrix, boolean effect) {
+        super(controller, spellAbility, payer, effect);
         manaCost = cost;
         extraMatrix = matrix;
         applyMatrix();
+
+        // CR 118.3c forced cast must use pool mana
+        // TODO this introduces a small risk for illegal payments if the human "wastes" enough mana for abilities like Doubling Cube
+        if (spellAbility.getPayCosts().isMandatory()) {
+            List<Mana> refund = new ArrayList<>();
+            mandatory = ManaPool.payManaCostFromPool(new ManaCostBeingPaid(cost), spellAbility, payer, true, refund);
+            ManaPool.refundMana(refund, payer, spellAbility);
+        }
 
         // Set Mana cost being paid for SA to be able to reference it later
         player.pushPaidForSA(saPaidFor);
@@ -26,13 +39,12 @@ public class InputPayManaOfCostPayment extends InputPayMana {
     }
 
     private static final long serialVersionUID = 3467312982164195091L;
-    //private int phyLifeToLose = 0;
     private ManaConversionMatrix extraMatrix;
 
     @Override
     protected final void onPlayerSelected(Player selected, final ITriggerEvent triggerEvent) {
         if (player == selected) {
-            if (player.canPayLife(this.phyLifeToLose + 2)) {
+            if (player.canPayLife(this.phyLifeToLose + 2, this.effect, saPaidFor)) {
                 if (manaCost.payPhyrexian()) {
                     this.phyLifeToLose += 2;
                 } else {
@@ -49,9 +61,8 @@ public class InputPayManaOfCostPayment extends InputPayMana {
 
     @Override
     protected void done() {
-        final Card source = saPaidFor.getHostCard();
         if (this.phyLifeToLose > 0) {
-            player.payLife(this.phyLifeToLose, source);
+            player.payLife(this.phyLifeToLose, saPaidFor, this.effect);
         }
     }
 

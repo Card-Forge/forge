@@ -1318,7 +1318,6 @@ public class AiBlockController {
         }
 
         int evalAtk = ComputerUtilCard.evaluateCreature(attacker, true, false);
-        int evalBlk = ComputerUtilCard.evaluateCreature(blocker, true, false);
         boolean atkEmbalm = (attacker.hasStartOfKeyword("Embalm") || attacker.hasStartOfKeyword("Eternalize")) && !attacker.isToken();
         boolean blkEmbalm = (blocker.hasStartOfKeyword("Embalm") || blocker.hasStartOfKeyword("Eternalize")) && !blocker.isToken();
 
@@ -1327,10 +1326,13 @@ public class AiBlockController {
             chance = Math.max(0, chance - chanceModForEmbalm);
         }
 
-        if (blocker.isFaceDown() && !checkingOther && blocker.getState(CardStateName.Original).getType().isCreature()) {
+        int evalBlk;
+        if (blocker.isFaceDown() && blocker.getView().canFaceDownBeShownTo(ai.getView(), false) && blocker.getState(CardStateName.Original).getType().isCreature()) {
             // if the blocker is a face-down creature (e.g. cast via Morph, Manifest), evaluate it
             // in relation to the original state, not to the Morph state
             evalBlk = ComputerUtilCard.evaluateCreature(Card.fromPaperCard(blocker.getPaperCard(), ai), false, true);
+        } else {
+            evalBlk = ComputerUtilCard.evaluateCreature(blocker, true, false);
         }
         int chanceToSavePW = chanceToTradeDownToSaveWalker > 0 && evalAtk + 1 < evalBlk ? chanceToTradeDownToSaveWalker : chanceToTradeToSaveWalker;
         boolean powerParityOrHigher = blocker.getNetPower() <= attacker.getNetPower();

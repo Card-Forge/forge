@@ -138,13 +138,11 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         final CoreType ct = CoreType.getEnum(t);
         if (ct != null) {
             changed = coreTypes.add(ct);
-        }
-        else {
+        } else {
             final Supertype st = Supertype.getEnum(t);
             if (st != null) {
                 changed = supertypes.add(st);
-            }
-            else {
+            } else {
                 // If not recognized by super- and core- this must be subtype
                 changed = subtypes.add(t);
             }
@@ -346,9 +344,9 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         }
         return subtypes.contains(subtype);
     }
+
     @Override
     public boolean hasCreatureType(String creatureType) {
-        if (subtypes.isEmpty()) { return false; }
         if (!isCreature() && !isTribal()) { return false; }
 
         creatureType = toMixedCase(creatureType);

@@ -1,21 +1,18 @@
 package forge.ai.ability;
 
 import java.util.List;
-import java.util.Map;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
-import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
@@ -263,15 +260,13 @@ public class FightAi extends SpellAbilityAi {
         for (Trigger t : aiCreature.getTriggers()) {
             if (t.getMode() == TriggerType.SpellCast) {
                 SpellAbility sa = t.ensureAbility();
-                final Map<String, String> params = t.getMapParams();
                 if (sa == null) {
                     continue;
                 }
                 if (ApiType.PutCounter.equals(sa.getApi())) {
-                    if ("Card.Self".equals(params.get("TargetsValid")) && "You".equals(params.get("ValidActivatingPlayer"))) {
-                        SpellAbility heroic = AbilityFactory.getAbility(aiCreature.getSVar(params.get("Execute")),aiCreature);
-                        if ("Self".equals(heroic.getParam("Defined")) && "P1P1".equals(heroic.getParam("CounterType"))) {
-                            return AbilityUtils.calculateAmount(aiCreature, heroic.getParam("CounterNum"), heroic);
+                    if ("Card.Self".equals(t.getParam("TargetsValid")) && "You".equals(t.getParam("ValidActivatingPlayer"))) {
+                        if ("Self".equals(sa.getParam("Defined")) && "P1P1".equals(sa.getParam("CounterType"))) {
+                            return AbilityUtils.calculateAmount(aiCreature, sa.getParam("CounterNum"), sa);
                         }
                         break;
                     }
@@ -286,12 +281,11 @@ public class FightAi extends SpellAbilityAi {
     private static boolean shouldFight(Card fighter, Card opponent, int pumpAttack, int pumpDefense) {
     	if (canKill(fighter, opponent, pumpAttack)) {
     		if (!canKill(opponent, fighter, -pumpDefense)) { // can survive
-    			return true;
-    		} else {
-                if (MyRandom.getRandom().nextInt(20) < (opponent.getCMC() - fighter.getCMC())) { // trade
-                    return true;
-                }
-            }
+    		    return true;
+    		}
+    		if (MyRandom.getRandom().nextInt(20) < (opponent.getCMC() - fighter.getCMC())) { // trade
+    		    return true;
+    		}
     	}
     	return false;
     }
@@ -300,12 +294,14 @@ public class FightAi extends SpellAbilityAi {
         if (opponent.getSVar("Targeting").equals("Dies")) {
             return true;
         }
-        if (opponent.hasProtectionFrom(fighter) || !opponent.canBeDestroyed() || opponent.getShieldCount() > 0
-                || ComputerUtil.canRegenerate(opponent.getController(), opponent)) {
+        // the damage prediction is later
+        int damage = fighter.getNetPower() + pumpAttack;
+        if (damage <= 0 || opponent.getShieldCount() > 0 || ComputerUtil.canRegenerate(opponent.getController(), opponent)) {
             return false;
         }
-        if (fighter.hasKeyword(Keyword.DEATHTOUCH)
-                || ComputerUtilCombat.getDamageToKill(opponent, true) <= fighter.getNetPower() + pumpAttack) {
+        // try to predict the damage that fighter would deal to opponent
+        // this should also handle if the opponents creature can be destroyed or not
+        if (ComputerUtilCombat.getEnoughDamageToKill(opponent, damage, fighter, false) <= damage) {
             return true;
         }
         return false;

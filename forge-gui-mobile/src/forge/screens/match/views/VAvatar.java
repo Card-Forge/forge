@@ -166,5 +166,9 @@ public class VAvatar extends FDisplayObject {
             g.drawRect(w / 16f, Color.LIME, 0, 0, w, h);
             g.setAlphaComposite(oldAlpha);
         }
+        //highlighted
+        if (MatchController.instance.isHighlighted(player)) {
+            g.drawRect(w / 16f, Color.MAGENTA, 0, 0, w, h);
+        }
     }
 }

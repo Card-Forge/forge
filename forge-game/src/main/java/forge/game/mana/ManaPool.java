@@ -18,6 +18,7 @@
 package forge.game.mana;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,7 @@ import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityKey;
+import forge.game.cost.CostPayment;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventManaPool;
 import forge.game.event.GameEventZone;
@@ -289,6 +291,16 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         return true;
     }
 
+    public static void refundMana(List<Mana> manaSpent, Player player, SpellAbility sa) {
+        if (sa.getHostCard() != null) {
+            sa.getHostCard().setCanCounter(true);
+        }
+        for (final Mana m : manaSpent) {
+            player.getManaPool().addMana(m);
+        }
+        manaSpent.clear();
+    }
+
     public final void refundManaPaid(final SpellAbility sa) {
         // Send all mana back to your mana pool, before accounting for it.
         final List<Mana> manaPaid = sa.getPayingMana();
@@ -340,6 +352,47 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         }
 
         return shard.canBePaidWithManaOfColor((byte)0);
+    }
+
+    /**
+     * Checks if the given mana cost can be paid from floating mana.
+     * @param cost mana cost to pay for
+     * @param sa ability to pay for
+     * @param player activating player
+     * @param test actual payment is made if this is false
+     * @param manaSpentToPay list of mana spent
+     * @return whether the floating mana is sufficient to pay the cost fully
+     */
+    public static boolean payManaCostFromPool(final ManaCostBeingPaid cost, final SpellAbility sa, final Player player,
+            final boolean test, List<Mana> manaSpentToPay) {
+        final boolean hasConverge = sa.getHostCard().hasConverge();
+        List<ManaCostShard> unpaidShards = cost.getUnpaidShards();
+        Collections.sort(unpaidShards); // most difficult shards must come first
+        for (ManaCostShard part : unpaidShards) {
+            if (part != ManaCostShard.X) {
+                if (cost.isPaid()) {
+                    continue;
+                }
+
+                // get a mana of this type from floating, bail if none available
+                final Mana mana = CostPayment.getMana(player, part, sa, cost.getSourceRestriction(), hasConverge ? cost.getColorsPaid() : -1, cost.getXManaCostPaidByColor());
+                if (mana != null) {
+                    if (player.getManaPool().tryPayCostWithMana(sa, cost, mana, test)) {
+                        manaSpentToPay.add(0, mana);
+                    }
+                }
+            }
+        }
+
+        if (cost.isPaid()) {
+            // refund any mana taken from mana pool when test
+            if (test) {
+                refundMana(manaSpentToPay, player, sa);
+            }
+            CostPayment.handleOfferings(sa, test, cost.isPaid());
+            return true;
+        }
+        return false;
     }
 
     @Override

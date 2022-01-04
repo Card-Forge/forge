@@ -10,6 +10,7 @@ SVar:LifePact:DB$ SetLife | Defined$ You | LifeAmount$ 4 | SpellDescription$ You
 SVar:DiscardPact:DB$ Discard | Defined$ You | Mode$ Hand | SpellDescription$ Discard your hand.
 SVar:ZombiesPact:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ MakeZombies | ChangeZoneTable$ True | SpellDescription$ Each opponent creates five 2/2 black Zombie creature tokens.
 SVar:MakeZombies:DB$ Token | LegacyImage$ b 2 2 zombie rna | TokenAmount$ 5 | TokenScript$ b_2_2_zombie | TokenOwner$ Remembered | SpellDescription$ Each opponent creates five 2/2 black Zombie creature tokens.
+SVar:SacMe:6
 AI:RemoveDeck:Random
 DeckHas:Ability$Token
 Oracle:Captive Audience enters the battlefield under the control of an opponent of your choice.\nAt the beginning of your upkeep, choose one that hasn't been chosen —\n• Your life total becomes 4.\n• Discard your hand.\n• Each opponent creates five 2/2 black Zombie creature tokens.

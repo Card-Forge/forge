@@ -1,0 +1,9 @@
+Name:Begin Anew
+ManaCost:G G W W
+Types:Sorcery
+A:SP$ DestroyAll | ValidCards$ Creature | SubAbility$ DBEffect | SpellDescription$ Destroy all creatures.
+SVar:DBEffect:DB$ Effect | RememberObjects$ ValidHand Creature.YouOwn | StaticAbilities$ PerpetualP1P1 | Duration$ Permanent | Triggers$ Update | Name$ Begin Anew's Perpetual Effect | SpellDescription$ Creature cards in your hand perpetually get +1/+1.
+SVar:PerpetualP1P1:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Creature cards in your hand perpetually get +1/+1.
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+Oracle:Destroy all creatures. Creature cards in your hand perpetually get +1/+1.

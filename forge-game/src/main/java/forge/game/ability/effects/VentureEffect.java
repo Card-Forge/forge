@@ -17,6 +17,7 @@ import forge.game.card.CounterType;
 import forge.game.event.GameEventCardCounters;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityCantVenture;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
@@ -85,7 +86,7 @@ public class VentureEffect  extends SpellAbilityEffect {
     }
 
     private void ventureIntoDungeon(SpellAbility sa, Player player) {
-        if (player.getVenturedThisTurn() >= 1 && player.hasKeyword("You can't venture into the dungeon more than once each turn.")) {
+        if (StaticAbilityCantVenture.cantVenture(player)) {
             return;
         }
 

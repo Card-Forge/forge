@@ -5,10 +5,9 @@ PT:5/4
 K:Trample
 T:Mode$ Phase | Phase$ BeginCombat | Static$ True | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ CleanupAndRemember
 SVar:CleanupAndRemember:DB$ Cleanup | ClearRemembered$ True | SubAbility$ RememberTargets
-SVar:RememberTargets:DB$ PumpAll | PumpZone$ Graveyard | ValidCards$ Creature,Planeswalker | RememberAllPumped$ True
+SVar:RememberTargets:DB$ PumpAll | PumpZone$ Graveyard | ValidCards$ Creature.YouOwn,Planeswalker.YouOwn | RememberAllPumped$ True
 T:Mode$ Phase | Phase$ EndCombat | Static$ True | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ JustCleanup
-SVar:JustCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ RememberTargets
-SVar:RememberTargets:DB$ PumpAll | PumpZone$ Graveyard | ValidCards$ Creature,Planeswalker | RememberAllPumped$ True
+SVar:JustCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Planeswalker | CombatDamage$ True | Execute$ TrigChange | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player or planeswalker, return to your hand target creature or planeswalker card in your graveyard that wasn't put there this combat.
-SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn+IsRemembered,Planeswalker.YouOwn+IsRemembered
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.IsRemembered,Planeswalker.IsRemembered
 Oracle:Trample\nWhenever Storrev, Devkarin Lich deals combat damage to a player or planeswalker, return to your hand target creature or planeswalker card in your graveyard that wasn't put there this combat.

@@ -16,7 +16,6 @@ import com.google.common.collect.Lists;
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -40,8 +39,8 @@ public class AiCostDecision extends CostDecisionMakerBase {
     private final CardCollection discarded;
     private final CardCollection tapped;
 
-    public AiCostDecision(Player ai0, SpellAbility sa) {
-        super(ai0);
+    public AiCostDecision(Player ai0, SpellAbility sa, final boolean effect) {
+        super(ai0, effect);
         ability = sa;
         source = ability.getHostCard();
 
@@ -51,11 +50,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostAddMana cost) {
-        Integer c = cost.convertAmount();
-
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
-        }
+        int c = cost.getAbilityAmount(ability);
 
         return PaymentDecision.number(c);
     }
@@ -93,10 +88,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         if (type.contains("WithSameName")) {
             return null;
         }
-        Integer c = cost.convertAmount();
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
-        }
+        int c = cost.getAbilityAmount(ability);
 
         if (type.equals("Random")) {
             CardCollectionView randomSubset = CardLists.getRandomSubList(new CardCollection(hand), c);
@@ -134,25 +126,17 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostDamage cost) {
-        Integer c = cost.convertAmount();
-
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
-        }
+        int c = cost.getAbilityAmount(ability);
 
         return PaymentDecision.number(c);
     }
 
     @Override
     public PaymentDecision visit(CostDraw cost) {
-        if (!cost.canPay(ability, player)) {
+        if (!cost.canPay(ability, player, isEffect())) {
             return null;
         }
-        Integer c = cost.convertAmount();
-
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
-        }
+        int c = cost.getAbilityAmount(ability);
 
         List<Player> res = cost.getPotentialPlayers(player, ability);
 
@@ -174,10 +158,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
-        Integer c = cost.convertAmount();
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
-        }
+        int c = cost.getAbilityAmount(ability);
 
         if (cost.getFrom().equals(ZoneType.Library)) {
             return PaymentDecision.card(player.getCardsIn(ZoneType.Library, c));
@@ -193,10 +174,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostExileFromStack cost) {
-        Integer c = cost.convertAmount();
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
-        }
         List<SpellAbility> chosen = Lists.newArrayList();
         for (SpellAbilityStackInstance si :source.getGame().getStack()) {
             SpellAbility sp = si.getSpellAbility(true).getRootAbility();
@@ -209,12 +186,9 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostExiledMoveToGrave cost) {
-        Integer c = cost.convertAmount();
         CardCollection chosen = new CardCollection();
 
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
-        }
+        int c = cost.getAbilityAmount(ability);
 
         CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Exile), cost.getType().split(";"), player, source, ability);
 
@@ -238,10 +212,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.card(source);
         }
 
-        Integer c = cost.convertAmount();
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
-        }
+        int c = cost.getAbilityAmount(ability);
 
         final CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), player, source, ability);
 
@@ -260,19 +231,13 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostFlipCoin cost) {
-        Integer c = cost.convertAmount();
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
-        }
+        int c = cost.getAbilityAmount(ability);
         return PaymentDecision.number(c);
     }
 
     @Override
     public PaymentDecision visit(CostRollDice cost) {
-        Integer c = cost.convertAmount();
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
-        }
+        int c = cost.getAbilityAmount(ability);
         return PaymentDecision.number(c);
     }
 
@@ -282,10 +247,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.card(source);
         }
 
-        Integer c = cost.convertAmount();
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
-        }
+        int c = cost.getAbilityAmount(ability);
 
         final CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), player, source, ability);
 
@@ -302,12 +264,11 @@ public class AiCostDecision extends CostDecisionMakerBase {
         return res.isEmpty() ? null : PaymentDecision.card(res);
     }
 
-
     @Override
     public PaymentDecision visit(CostGainLife cost) {
         final List<Player> oppsThatCanGainLife = Lists.newArrayList();
 
-        for (final Player opp : cost.getPotentialTargets(player, source)) {
+        for (final Player opp : cost.getPotentialTargets(player, ability)) {
             if (opp.canGainLife()) {
                 oppsThatCanGainLife.add(opp);
             }
@@ -320,13 +281,9 @@ public class AiCostDecision extends CostDecisionMakerBase {
         return PaymentDecision.players(oppsThatCanGainLife);
     }
 
-
     @Override
     public PaymentDecision visit(CostMill cost) {
-        Integer c = cost.convertAmount();
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
-        }
+        int c = cost.getAbilityAmount(ability);
 
         CardCollectionView topLib = player.getCardsIn(ZoneType.Library, c);
         return topLib.size() < c ? null : PaymentDecision.number(c);
@@ -339,12 +296,8 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostPayLife cost) {
-        Integer c = cost.convertAmount();
-        if (c == null) {
-            // Generalize cost
-            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
-        }
-        if (!player.canPayLife(c)) {
+        int c = cost.getAbilityAmount(ability);
+        if (!player.canPayLife(c, isEffect(), ability)) {
             return null;
         }
         // activator.payLife(c, null);
@@ -353,10 +306,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostPayEnergy cost) {
-        Integer c = cost.convertAmount();
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
-        }
+        int c = cost.getAbilityAmount(ability);
         if (!player.canPayEnergy(c)) {
             return null;
         }
@@ -368,7 +318,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
         if (cost.payCostFromSource()) {
             return PaymentDecision.card(source);
         }
-        Integer c = cost.convertAmount();
         final Game game = player.getGame();
         CardCollection chosen = new CardCollection();
         CardCollectionView list;
@@ -379,9 +328,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             list = new CardCollection(player.getCardsIn(cost.getFrom()));
         }
 
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
-        }
+        int c = cost.getAbilityAmount(ability);
 
         list = CardLists.getValidCards(list, cost.getType().split(";"), player, source, ability);
 
@@ -430,17 +377,12 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostTapType cost) {
-        final String amount = cost.getAmount();
-        Integer c = cost.convertAmount();
         String type = cost.getType();
         boolean isVehicle = type.contains("+withTotalPowerGE");
 
         CardCollection exclude = new CardCollection();
         exclude.addAll(tapped);
 
-        if (c == null && !isVehicle) {
-            c = AbilityUtils.calculateAmount(source, amount, ability);
-        }
         if (type.contains("sharesCreatureTypeWith")) {
             return null;
         }
@@ -470,6 +412,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             type = TextUtil.fastReplace(type, "+withTotalPowerGE", "");
             totap = ComputerUtil.chooseTapTypeAccumulatePower(player, type, ability, !cost.canTapSource, Integer.parseInt(totalP), exclude);
         } else {
+            int c = cost.getAbilityAmount(ability);
             totap = ComputerUtil.chooseTapType(player, type, source, !cost.canTapSource, c, exclude, ability);
         }
 
@@ -494,14 +437,10 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
-        final String amount = cost.getAmount();
-        Integer c = cost.convertAmount();
+        int c = cost.getAbilityAmount(ability);
 
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, amount, ability);
-        }
         final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
-        CardCollectionView list = aic.chooseSacrificeType(cost.getType(), ability, c, null);
+        CardCollectionView list = aic.chooseSacrificeType(cost.getType(), ability, isEffect(), c, null);
         return PaymentDecision.card(list);
     }
 
@@ -510,10 +449,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         if (cost.payCostFromSource())
             return PaymentDecision.card(source);
 
-        Integer c = cost.convertAmount();
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
-        }
+        int c = cost.getAbilityAmount(ability);
 
         CardCollectionView res = ComputerUtil.chooseReturnType(player, cost.getType(), source, ability.getTargetCard(), c, ability);
         return res.isEmpty() ? null : PaymentDecision.card(res);
@@ -544,10 +480,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.card(getBestCreatureAI(hand));
         }
 
-        Integer c = cost.convertAmount();
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
-        }
+        int c = cost.getAbilityAmount(ability);
 
         final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
         return PaymentDecision.card(aic.getCardsToDiscard(c, type.split(";"), ability));
@@ -580,8 +513,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostRemoveAnyCounter cost) {
-        final String amount = cost.getAmount();
-        final int c = AbilityUtils.calculateAmount(source, amount, ability);
+        final int c = cost.getAbilityAmount(ability);
         final Card originalHost = ObjectUtils.defaultIfNull(ability.getOriginalHost(), source);
 
         if (c <= 0) {
@@ -747,7 +679,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
             toRemove += removeCounter(table, prefs, CounterEnumType.LORE, c - toRemove);
         }
 
-
         // TODO add logic to remove positive counters?
         if (c > toRemove && cost.counter != null) {
             // TODO add logic for Ooze Flux, should probably try to make a token as big as possible
@@ -785,25 +716,24 @@ public class AiCostDecision extends CostDecisionMakerBase {
     @Override
     public PaymentDecision visit(CostRemoveCounter cost) {
         final String amount = cost.getAmount();
-        Integer c = cost.convertAmount();
         final String type = cost.getType();
 
-        if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            if (amount.equals("All")) {
-                c = source.getCounters(cost.counter);
-            } else if (sVar.equals("Targeted$CardManaCost")) {
-                c = 0;
-                if (ability.getTargets().size() > 0) {
-                    for (Card tgt : ability.getTargets().getTargetCards()) {
-                        if (tgt.getManaCost() != null) {
-                            c += tgt.getManaCost().getCMC();
-                        }
+        int c;
+
+        final String sVar = ability.getSVar(amount);
+        if (amount.equals("All")) {
+            c = source.getCounters(cost.counter);
+        } else if (sVar.equals("Targeted$CardManaCost")) {
+            c = 0;
+            if (ability.getTargets().size() > 0) {
+                for (Card tgt : ability.getTargets().getTargetCards()) {
+                    if (tgt.getManaCost() != null) {
+                        c += tgt.getManaCost().getCMC();
                     }
                 }
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
             }
+        } else {
+            c = cost.getAbilityAmount(ability);
         }
 
         if (!cost.payCostFromSource()) {
@@ -831,11 +761,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostUntapType cost) {
-        final String amount = cost.getAmount();
-        Integer c = cost.convertAmount();
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, amount, ability);
-        }
+        int c = cost.getAbilityAmount(ability);
 
         CardCollectionView list = ComputerUtil.chooseUntapType(player, cost.getType(), source, cost.canUntapSource, c, ability);
 

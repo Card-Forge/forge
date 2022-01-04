@@ -4,7 +4,6 @@ import java.util.List;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -60,6 +59,12 @@ public class SacrificeAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             final PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
             if (targetableOpps.isEmpty()) {
+                // TODO also check if own SacMe makes this a reasonable (or even better) choice
+                if (mandatory && sa.canTarget(ai)) {
+                    sa.resetTargets();
+                    sa.getTargets().add(ai);
+                    return true;
+                }
                 return false;
             }
             final Player opp = targetableOpps.max(PlayerPredicates.compareByLife());
@@ -88,7 +93,7 @@ public class SacrificeAi extends SpellAbilityAi {
                 }
             }
             if (!destroy) {
-                list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(sa));
+                list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(sa, true));
             } else {
                 if (!CardLists.getKeyword(list, Keyword.INDESTRUCTIBLE).isEmpty()) {
                     // human can choose to destroy indestructibles
@@ -102,7 +107,7 @@ public class SacrificeAi extends SpellAbilityAi {
 
             if (num.equals("X") && sa.getSVar(num).equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                sa.setXManaCostPaid(Math.min(ComputerUtilCost.getMaxXValue(sa, ai), amount));
+                sa.setXManaCostPaid(Math.min(ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger()), amount));
             }
 
             final int half = (amount / 2) + (amount % 2); // Half of amount rounded up
@@ -131,7 +136,7 @@ public class SacrificeAi extends SpellAbilityAi {
 
             if (num.equals("X") && sa.getSVar(num).equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                amount = Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai), amount);
+                amount = Math.min(ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger()), amount);
             }
 
             List<Card> humanList = null;
@@ -183,7 +188,7 @@ public class SacrificeAi extends SpellAbilityAi {
             if (!targetable.isEmpty()) {
                 CardCollection priorityTgts = new CardCollection();
                 if (p.isOpponentOf(ai)) {
-                    priorityTgts.addAll(CardLists.filter(targetable, CardPredicates.canBeSacrificedBy(sa)));
+                    priorityTgts.addAll(CardLists.filter(targetable, CardPredicates.canBeSacrificedBy(sa, true)));
                     if (!priorityTgts.isEmpty()) {
                         sa.getTargets().add(ComputerUtilCard.getBestAI(priorityTgts));
                     } else {
@@ -191,7 +196,7 @@ public class SacrificeAi extends SpellAbilityAi {
                     }
                 } else {
                     for (Card c : targetable) {
-                        if (c.canBeSacrificedBy(sa) && (c.hasSVar("SacMe") || (c.isCreature() && ComputerUtilCard.evaluateCreature(c) <= 135)) && !c.equals(sa.getHostCard())) {
+                        if (c.canBeSacrificedBy(sa, true) && (c.hasSVar("SacMe") || (c.isCreature() && ComputerUtilCard.evaluateCreature(c) <= 135)) && !c.equals(sa.getHostCard())) {
                             priorityTgts.add(c);
                         }
                     }

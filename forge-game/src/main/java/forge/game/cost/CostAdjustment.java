@@ -36,16 +36,14 @@ import forge.game.zone.ZoneType;
 public class CostAdjustment {
 
     public static Cost adjust(final Cost cost, final SpellAbility sa) {
-        final Player player = sa.getActivatingPlayer();
-        final Card host = sa.getHostCard();
-        final Game game = player.getGame();
-
         if (sa.isTrigger() || cost == null) {
             return cost;
         }
 
+        final Player player = sa.getActivatingPlayer();
+        final Card host = sa.getHostCard();
+        final Game game = player.getGame();
         Cost result = cost.copy();
-
         boolean isStateChangeToFaceDown = false;
 
         if (sa.isSpell()) {
@@ -158,14 +156,14 @@ public class CostAdjustment {
     // If cardsToDelveOut is null, will immediately exile the delved cards and remember them on the host card.
     // Otherwise, will return them in cardsToDelveOut and the caller is responsible for doing the above.
     public static final void adjust(ManaCostBeingPaid cost, final SpellAbility sa, CardCollection cardsToDelveOut, boolean test) {
-        final Game game = sa.getActivatingPlayer().getGame();
-        final Card originalCard = sa.getHostCard();
-
         if (sa.isTrigger()) {
             return;
         }
 
+        final Game game = sa.getActivatingPlayer().getGame();
+        final Card originalCard = sa.getHostCard();
         boolean isStateChangeToFaceDown = false;
+
         if (sa.isSpell()) {
             if (sa.isCastFaceDown()) {
                 // Turn face down to apply cost modifiers correctly
@@ -292,7 +290,7 @@ public class CostAdjustment {
 
         Card toSac = null;
         CardCollectionView canOffer = CardLists.filter(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield),
-                CardPredicates.isType(offeringType), CardPredicates.canBeSacrificedBy(sa));
+                CardPredicates.isType(offeringType), CardPredicates.canBeSacrificedBy(sa, false));
 
         final CardCollectionView toSacList = sa.getHostCard().getController().getController().choosePermanentsToSacrifice(sa, 0, 1, canOffer, offeringType);
 
@@ -309,7 +307,7 @@ public class CostAdjustment {
 
     private static void adjustCostByEmerge(final ManaCostBeingPaid cost, final SpellAbility sa) {
         Card toSac = null;
-        CardCollectionView canEmerge = CardLists.filter(sa.getActivatingPlayer().getCreaturesInPlay(), CardPredicates.canBeSacrificedBy(sa));
+        CardCollectionView canEmerge = CardLists.filter(sa.getActivatingPlayer().getCreaturesInPlay(), CardPredicates.canBeSacrificedBy(sa, false));
 
         final CardCollectionView toSacList = sa.getHostCard().getController().getController().choosePermanentsToSacrifice(sa, 0, 1, canEmerge, "Creature");
 

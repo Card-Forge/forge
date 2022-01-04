@@ -154,9 +154,9 @@ public class SpellAbilityPicker {
             return !sa.withFlash(sa.getHostCard(), player);
         }
         if (sa.isPwAbility()) {
-            return !sa.getHostCard().hasKeyword("CARDNAME's loyalty abilities can be activated at instant speed.");
+            return !sa.withFlash(sa.getHostCard(), player);
         }
-        return sa.isAbility() && sa.getRestrictions().isSorcerySpeed();
+        return sa.isActivatedAbility() && sa.getRestrictions().isSorcerySpeed();
     }
 
     private void createNewPlan(Score origGameScore, List<SpellAbility> candidateSAs) {
@@ -348,7 +348,7 @@ public class SpellAbilityPicker {
             return AiPlayDecision.CantPlaySa;
         }
 
-        if (!ComputerUtilCost.canPayCost(sa, player)) {
+        if (!ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
             return AiPlayDecision.CantAfford;
         }
 
@@ -434,11 +434,11 @@ public class SpellAbilityPicker {
         }
     }
 
-    public CardCollectionView chooseSacrificeType(String type, SpellAbility ability, int amount, final CardCollectionView exclude) {
+    public CardCollectionView chooseSacrificeType(String type, SpellAbility ability, final boolean effect, int amount, final CardCollectionView exclude) {
         if (amount == 1) {
             Card source = ability.getHostCard();
             CardCollection cardList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, null);
-            cardList = CardLists.filter(cardList, CardPredicates.canBeSacrificedBy(ability));
+            cardList = CardLists.filter(cardList, CardPredicates.canBeSacrificedBy(ability, effect));
             if (cardList.size() >= 2) {
                 if (interceptor != null) {
                     return new CardCollection(interceptor.chooseCard(cardList));
@@ -450,7 +450,7 @@ public class SpellAbilityPicker {
                 }
             }
         }
-        return ComputerUtil.chooseSacrificeType(player, type, ability, ability.getTargetCard(), amount, exclude);
+        return ComputerUtil.chooseSacrificeType(player, type, ability, ability.getTargetCard(), effect, amount, exclude);
     }
 
     public static class PlayLandAbility extends LandAbility {

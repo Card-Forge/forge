@@ -1,8 +1,7 @@
 Name:Rakdos Locket
 ManaCost:3
 Types:Artifact
-A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Mana | Cost$ T | Produced$ Combo B R | SpellDescription$ Add {B} or {R}.
 AI:RemoveDeck:Random
 DeckNeeds:Color$Black | Red
 A:AB$ Draw | Cost$ BR BR BR BR T Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.

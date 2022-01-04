@@ -134,10 +134,6 @@ public class KeywordsChange implements Cloneable {
         }
     }
 
-    public final boolean removeKeywordfromAdd(final String keyword) {
-        return keywords.remove(keyword);
-    }
-
     public void setHostCard(final Card host) {
         keywords.setHostCard(host);
         for (KeywordInterface k : removeKeywordInterfaces) {

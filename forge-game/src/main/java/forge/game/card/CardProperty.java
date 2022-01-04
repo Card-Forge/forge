@@ -2,6 +2,7 @@ package forge.game.card;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.ColorSet;
@@ -21,6 +22,7 @@ import forge.game.player.Player;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.Trigger;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -33,6 +35,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public class CardProperty {
 
@@ -392,7 +395,8 @@ public class CardProperty {
                 }
             }
         } else if (property.equals("CanBeSacrificedBy") && spellAbility instanceof SpellAbility) {
-            if (!card.canBeSacrificedBy((SpellAbility) spellAbility)) {
+            // used for Emerge and Offering, these are SpellCost, not effect
+            if (!card.canBeSacrificedBy((SpellAbility) spellAbility, false)) {
                 return false;
             }
         } else if (property.startsWith("AttachedBy")) {
@@ -711,11 +715,14 @@ public class CardProperty {
                         }
                         break;
                     case "ActivationColor":
-                        SpellAbility castSA = source.getCastSA();
+                        SpellAbilityStackInstance castSA = game.getStack().getInstanceFromSpellAbility((SpellAbility) spellAbility);
                         if (castSA == null) {
                             return false;
                         }
-                        if (!card.getColor().hasAnyColor(castSA.getPayingColors().getColor())) {
+                        List<Mana> payingMana = castSA.getPayingMana();
+                        // even if the cost was raised, we only care about mana from activation part
+                        // since this can only be 1 currently with Protective Sphere, let's just assume it's the first shard spent for easy handling
+                        if (!card.getColor().hasAnyColor(payingMana.get(payingMana.size() - 1).getColor())) {
                             return false;
                         }
                         break;
@@ -760,6 +767,17 @@ public class CardProperty {
                     return false;
                 }
             }
+        } else if (property.equals("Party")) {
+            boolean isParty = false;
+            Set<String> partyTypes = Sets.newHashSet("Cleric", "Rogue", "Warrior", "Wizard");
+            Set<String> cTypes = card.getType().getCreatureTypes();
+            for (String t : partyTypes) {
+                if (cTypes.contains(t)) {
+                    isParty = true;
+                    break;
+                }
+            }
+            return isParty;
         } else if (property.startsWith("sharesCreatureTypeWith")) {
             if (property.equals("sharesCreatureTypeWith")) {
                 if (!card.sharesCreatureTypeWith(source)) {

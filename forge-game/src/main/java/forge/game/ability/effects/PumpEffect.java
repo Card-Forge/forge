@@ -179,7 +179,7 @@ public class PumpEffect extends SpellAbilityEffect {
             final int atk = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumAtt"), sa, true);
             final int def = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumDef"), sa, true);
 
-            boolean gets = (sa.hasParam("NumAtt") || sa.hasParam("NumDef"));
+            boolean gets = sa.hasParam("NumAtt") || sa.hasParam("NumDef");
             boolean gains = !keywords.isEmpty();
 
             if (gets) {
@@ -263,8 +263,6 @@ public class PumpEffect extends SpellAbilityEffect {
             String replaced = "";
             if (defined.equals("ChosenType")) {
                 replaced = host.getChosenType();
-            } else if (defined.equals("CardUIDSource")) {
-                replaced = "CardUID_" + host.getId();
             } else if (defined.equals("ActivatorName")) {
                 replaced = sa.getActivatingPlayer().getName();
             } else if (defined.equals("ChosenPlayer")) {
@@ -324,9 +322,7 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("RememberObjects")) {
-            for (final Object o : AbilityUtils.getDefinedObjects(host, sa.getParam("RememberObjects"), sa)) {
-                host.addRemembered(o);
-            }
+            host.addRemembered(AbilityUtils.getDefinedObjects(host, sa.getParam("RememberObjects"), sa));
         }
 
         if (sa.hasParam("NoteCardsFor")) {
@@ -337,22 +333,23 @@ public class PumpEffect extends SpellAbilityEffect {
             }
         }
 
-        if (sa.hasParam("ForgetObjects")) {
-            for (final Object o : AbilityUtils.getDefinedObjects(host, sa.getParam("ForgetObjects"), sa)) {
-                host.removeRemembered(o);
+        if (sa.hasParam("NoteNumber")) {
+            int num = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NoteNumber"), sa);
+            for (Player p : tgtPlayers) {
+                p.noteNumberForName(host.getName(), num);
             }
+        }
+
+        if (sa.hasParam("ForgetObjects")) {
+            host.removeRemembered(AbilityUtils.getDefinedObjects(host, sa.getParam("ForgetObjects"), sa));
         }
 
         if (sa.hasParam("ImprintCards")) {
-            for (final Card c : AbilityUtils.getDefinedCards(host, sa.getParam("ImprintCards"), sa)) {
-                host.addImprintedCard(c);
-            }
+            host.addImprintedCards(AbilityUtils.getDefinedCards(host, sa.getParam("ImprintCards"), sa));
         }
 
         if (sa.hasParam("ForgetImprinted")) {
-            for (final Card c : AbilityUtils.getDefinedCards(host, sa.getParam("ForgetImprinted"), sa)) {
-                host.removeImprintedCard(c);
-            }
+            host.removeImprintedCards(AbilityUtils.getDefinedCards(host, sa.getParam("ForgetImprinted"), sa));
         }
 
         final ZoneType pumpZone = sa.hasParam("PumpZone") ? ZoneType.smartValueOf(sa.getParam("PumpZone"))

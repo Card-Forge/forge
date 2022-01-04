@@ -1,10 +1,8 @@
 Name:Kolaghan Monument
 ManaCost:3
 Types:Artifact
-A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Mana | Cost$ T | Produced$ Combo B R | SpellDescription$ Add {B} or {R}.
 A:AB$ Animate | Cost$ 4 B R | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Artifact,Creature,Dragon | Colors$ Black,Red | Keywords$ Flying | SpellDescription$ CARDNAME becomes a 4/4 black and red Dragon artifact creature with flying until end of turn.
 AI:RemoveDeck:Random
 DeckNeeds:Color$Black|Red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kolaghan_monument.jpg
 Oracle:{T}: Add {B} or {R}.\n{4}{B}{R}: Kolaghan Monument becomes a 4/4 black and red Dragon artifact creature with flying until end of turn.

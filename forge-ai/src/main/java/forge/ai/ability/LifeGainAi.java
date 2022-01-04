@@ -111,7 +111,7 @@ public class LifeGainAi extends SpellAbilityAi {
 
         return lifeCritical || activateForCost
                 || (ph.getNextTurn().equals(ai) && !ph.getPhase().isBefore(PhaseType.END_OF_TURN))
-                || sa.hasParam("PlayerTurn") || SpellAbilityAi.isSorcerySpeed(sa);
+                || sa.hasParam("PlayerTurn") || SpellAbilityAi.isSorcerySpeed(sa, ai);
     }
 
     /*
@@ -131,7 +131,7 @@ public class LifeGainAi extends SpellAbilityAi {
         boolean activateForCost = ComputerUtil.activateForCost(sa, ai);
         if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
             sa.setXManaCostPaid(xPay);
             lifeAmount = xPay;
         } else {
@@ -180,7 +180,7 @@ public class LifeGainAi extends SpellAbilityAi {
             return true;
         }
 
-        if (SpellAbilityAi.isSorcerySpeed(sa)
+        if (SpellAbilityAi.isSorcerySpeed(sa, ai)
                 || sa.getSubAbility() != null || SpellAbilityAi.playReusable(ai, sa)) {
             return true;
         }
@@ -218,7 +218,7 @@ public class LifeGainAi extends SpellAbilityAi {
         final String amountStr = sa.getParam("LifeAmount");
         if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, true);
             sa.setXManaCostPaid(xPay);
         }
 

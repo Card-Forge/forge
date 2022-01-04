@@ -114,7 +114,7 @@ public class AttachAi extends SpellAbilityAi {
 
         if (abCost.getTotalMana().countX() > 0 && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value. (Endless Scream and Venarian Gold)
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
 
             if (xPay == 0) {
                 return false;
@@ -125,15 +125,8 @@ public class AttachAi extends SpellAbilityAi {
 
         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Chained to the Rocks")) {
             final SpellAbility effectExile = AbilityFactory.getAbility(source.getSVar("TrigExile"), source);
-            final ZoneType origin = ZoneType.listValueOf(effectExile.getParam("Origin")).get(0);
             final TargetRestrictions exile_tgt = effectExile.getTargetRestrictions();
-            final CardCollection list = CardLists.getValidCards(ai.getGame().getCardsIn(origin), exile_tgt.getValidTgts(), ai, source, effectExile);
-            final CardCollection targets = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return !(c.hasProtectionFrom(source) || c.hasKeyword(Keyword.SHROUD) || c.hasKeyword(Keyword.HEXPROOF));
-                }
-            });
+            final CardCollection targets = CardLists.filter(CardUtil.getValidCardsToTarget(exile_tgt, effectExile), CardPredicates.canBeAttached(source));
             return !targets.isEmpty();
         }
 
@@ -353,14 +346,14 @@ public class AttachAi extends SpellAbilityAi {
             public boolean apply(final Card c) {
                 //Check for cards that can be sacrificed in response
                 for (final SpellAbility ability : c.getAllSpellAbilities()) {
-                    if (ability.isAbility()) {
+                    if (ability.isActivatedAbility()) {
                         final Cost cost = ability.getPayCosts();
                         for (final CostPart part : cost.getCostParts()) {
                             if (!(part instanceof CostSacrifice)) {
                                 continue;
                             }
                             CostSacrifice sacCost = (CostSacrifice) part;
-                            if (sacCost.payCostFromSource() && ComputerUtilCost.canPayCost(ability, c.getController())) {
+                            if (sacCost.payCostFromSource() && ComputerUtilCost.canPayCost(ability, c.getController(), false)) {
                                 return false;
                             }
                         }
@@ -1325,8 +1318,7 @@ public class AttachAi extends SpellAbilityAi {
 
         // Is a SA that moves target attachment
         if ("MoveTgtAura".equals(sa.getParam("AILogic"))) {
-            CardCollection list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource, sa);
-            list = CardLists.filter(list, Predicates.not(CardPredicates.isProtectedFrom(attachSource)));
+            CardCollection list = new CardCollection(CardUtil.getValidCardsToTarget(tgt, sa));
             list = CardLists.filter(list, Predicates.or(CardPredicates.isControlledByAnyOf(aiPlayer.getOpponents()), new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card card) {
@@ -1336,7 +1328,7 @@ public class AttachAi extends SpellAbilityAi {
 
             return !list.isEmpty() ? ComputerUtilCard.getBestAI(list) : null;
         } else if ("Unenchanted".equals(sa.getParam("AILogic"))) {
-            CardCollection list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource, sa);
+            CardCollection list = new CardCollection(CardUtil.getValidCardsToTarget(tgt, sa));
             CardCollection preferred = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card card) {
@@ -1361,18 +1353,7 @@ public class AttachAi extends SpellAbilityAi {
         if (tgt == null) {
             list = AbilityUtils.getDefinedCards(attachSource, sa.getParam("Defined"), sa);
         } else {
-            list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource, sa);
-            list = CardLists.filter(list, CardPredicates.canBeAttached(attachSource));
-
-            // TODO If Attaching without casting, don't need to actually target.
-            // I believe this is the only case where mandatory will be true, so just
-            // check that when starting that work
-            // But we shouldn't attach to things with Protection
-            if (!mandatory) {
-                list = CardLists.getTargetableCards(list, sa);
-            } else {
-                list = CardLists.filter(list, Predicates.not(CardPredicates.isProtectedFrom(attachSource)));
-            }
+            list = CardLists.filter(CardUtil.getValidCardsToTarget(tgt, sa), CardPredicates.canBeAttached(attachSource));
         }
 
         if (list.isEmpty()) {
@@ -1459,6 +1440,12 @@ public class AttachAi extends SpellAbilityAi {
      */
     public static Card attachGeneralAI(final Player ai, final SpellAbility sa, final List<Card> list, final boolean mandatory,
             final Card attachSource, final String logic) {
+        // AI logic types that do not require a prefList and that evaluate the
+        // usefulness of attach action autonomously
+        if ("InstantReequipPowerBuff".equals(logic)) {
+            return attachAIInstantReequipPreference(sa, attachSource);
+        }
+
         Player prefPlayer;
         if ("Pump".equals(logic) || "Animate".equals(logic) || "Curiosity".equals(logic) || "MoveTgtAura".equals(logic)
                 || "MoveAllAuras".equals(logic)) {
@@ -1466,6 +1453,7 @@ public class AttachAi extends SpellAbilityAi {
         } else {
             prefPlayer = AiAttackController.choosePreferredDefenderPlayer(ai);
         }
+
         // Some ChangeType cards are beneficial, and PrefPlayer should be
         // changed to represent that
         final List<Card> prefList;
@@ -1477,14 +1465,8 @@ public class AttachAi extends SpellAbilityAi {
             prefList = CardLists.filterControlledBy(list, prefPlayer);
         }
 
-        // AI logic types that do not require a prefList and that evaluate the
-        // usefulness of attach action autonomously
-        if ("InstantReequipPowerBuff".equals(logic)) {
-            return attachAIInstantReequipPreference(sa, attachSource);
-        }
-
         // If there are no preferred cards, and not mandatory bail out
-        if (prefList.isEmpty()) {
+        if (logic == null || prefList.isEmpty()) {
             return chooseUnpreferred(mandatory, list);
         }
 
@@ -1741,7 +1723,7 @@ public class AttachAi extends SpellAbilityAi {
         if (sa.isTrigger() && sa.usesTargeting()) {
             CardCollection targetables = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
             CardCollection source = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Object"), sa);
-            Card tgt = attachGeneralAI(ai, sa, targetables, true, source.getFirst(), null);
+            Card tgt = attachGeneralAI(ai, sa, targetables, !sa.getRootAbility().isOptionalTrigger(), source.getFirst(), null);
             if (tgt != null) {
                 sa.resetTargets();
                 sa.getTargets().add(tgt);

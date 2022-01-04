@@ -27,6 +27,7 @@ import forge.card.mana.ManaCost;
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityUtils;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementHandler;
@@ -689,10 +690,10 @@ public class CardFactory {
             }
 
             if (sa.hasParam("SetPower")) {
-                state.setBasePower(Integer.parseInt(sa.getParam("SetPower")));
+                state.setBasePower(AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("SetPower"), sa));
             }
             if (sa.hasParam("SetToughness")) {
-                state.setBaseToughness(Integer.parseInt(sa.getParam("SetToughness")));
+                state.setBaseToughness(AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("SetToughness"), sa));
             }
             if (sa.hasParam("SetLoyalty")) {
                 state.setBaseLoyalty(String.valueOf(sa.getParam("SetLoyalty")));
@@ -744,9 +745,7 @@ public class CardFactory {
                 for (final String s : str.split(",")) {
                     if (origSVars.containsKey(s)) {
                         final String actualStatic = origSVars.get(s);
-                        final StaticAbility grantedStatic = new StaticAbility(actualStatic, out, sa.getCardState());
-                        grantedStatic.setIntrinsic(true);
-                        state.addStaticAbility(grantedStatic);
+                        state.addStaticAbility(StaticAbility.create(actualStatic, out, sa.getCardState(), true));
                     }
                 }
             }

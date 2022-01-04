@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Innistrad: Crimson Vow #03
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/12/latest-1-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Remember that your solution must satisfy all possible blocking options. You have a Defenestrate in your graveyard.
+[state]
+humanlife=20
+ailife=13
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Skaab Wrangler;Bladestitched Skaab;Lithoform Engine;Repository Skaab;Undying Malice
+humangraveyard=Defenestrate
+humanbattlefield=Rot-Tide Gargantua;Skull Skaab;Champion of the Perished;Island;Island;Island;Island;Swamp;Swamp;Swamp;Swamp
+aibattlefield=Vampire Socialite;Florian, Voldaren Scion|Counters:P1P1=1

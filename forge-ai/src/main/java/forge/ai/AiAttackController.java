@@ -131,7 +131,7 @@ public class AiAttackController {
             }
             for (SpellAbility sa : c.getSpellAbilities()) {
                 if (sa.getApi() == ApiType.Animate) {
-                    if (ComputerUtilCost.canPayCost(sa, defender)
+                    if (ComputerUtilCost.canPayCost(sa, defender, false)
                             && sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
                         Card animatedCopy = AnimateAi.becomeAnimated(c, sa);
                         defenders.add(animatedCopy);
@@ -514,9 +514,8 @@ public class AiAttackController {
                 if (Iterables.any(oppBattlefield, Predicates.and(CardPredicates.Presets.UNTAPPED, CardPredicates.Presets.LANDS))) {
                     maxBlockersAfterCrew = Integer.MAX_VALUE;
                     break;
-                } else {
-                    maxBlockersAfterCrew--;
                 }
+                maxBlockersAfterCrew--;
             } else if (cardType.hasSubtype("Vehicle") && !cardType.isCreature()) {
                 maxBlockersAfterCrew--;
             }
@@ -1159,8 +1158,8 @@ public class AiAttackController {
                 // Check if the card actually has an ability the AI can and wants to play, if not, attacking is fine!
                 for (SpellAbility sa : attacker.getSpellAbilities()) {
                     // Do not attack if we can afford using the ability.
-                    if (sa.isAbility()) {
-                        if (ComputerUtilCost.canPayCost(sa, ai)) {
+                    if (sa.isActivatedAbility()) {
+                        if (ComputerUtilCost.canPayCost(sa, ai, false)) {
                             return false;
                         }
                         // TODO Eventually The Ai will need to learn to predict if they have any use for the ability before next untap or not.

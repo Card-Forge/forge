@@ -1,7 +1,5 @@
 Name:Pearl Shard
 ManaCost:3
 Types:Artifact
-A:AB$ PreventDamage | Cost$ 3 T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | Amount$ 2 | SpellDescription$ Prevent the next 2 damage that would be dealt to any target this turn.
-A:AB$ PreventDamage | Cost$ W T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | Amount$ 2 | SpellDescription$ Prevent the next 2 damage that would be dealt to any target this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pearl_shard.jpg
+A:AB$ PreventDamage | Cost$ 3 T | AlternateCost$ W T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | Amount$ 2 | SpellDescription$ Prevent the next 2 damage that would be dealt to any target this turn.
 Oracle:{3}, {T} or {W}, {T}: Prevent the next 2 damage that would be dealt to any target this turn.

@@ -74,7 +74,7 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
         return this.amount;
     }
 
-    public Integer getMaxAmountX(final SpellAbility ability, final Player payer) {
+    public Integer getMaxAmountX(final SpellAbility ability, final Player payer, final boolean effect) {
         return null;
     }
     /**
@@ -145,6 +145,10 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
         return StringUtils.isNumeric(amount) ? Integer.parseInt(amount) : null;
     }
 
+    public final int getAbilityAmount(SpellAbility ability) {
+        return AbilityUtils.calculateAmount(ability.getHostCard(), getAmount(), ability);
+    }
+
     /**
      * Can pay.
      *
@@ -153,7 +157,7 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
      * @param payer
      * @return true, if successful
      */
-    public abstract boolean canPay(SpellAbility ability, Player payer);
+    public abstract boolean canPay(SpellAbility ability, Player payer, boolean effect);
 
     public abstract <T> T accept(final ICostVisitor<T> visitor);
 
@@ -191,7 +195,7 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
         this.typeDescription = AbilityUtils.applyDescriptionTextChangeEffects(this.originalTypeDescription, trait);
     }
 
-    public abstract boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa);
+    public abstract boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa, final boolean effect);
 
     public int paymentOrder() { return 5; }
 

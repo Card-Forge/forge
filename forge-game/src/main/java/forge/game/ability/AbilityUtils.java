@@ -80,30 +80,6 @@ import io.sentry.event.BreadcrumbBuilder;
 public class AbilityUtils {
     private final static ImmutableList<String> cmpList = ImmutableList.of("LT", "LE", "EQ", "GE", "GT", "NE");
 
-    public static CounterType getCounterType(String name, SpellAbility sa) throws Exception {
-        CounterType counterType;
-        if ("ReplacedCounterType".equals(name)) {
-            name = (String) sa.getReplacingObject(AbilityKey.CounterType);
-        }
-        //try {
-            counterType = CounterType.getType(name);
-        /*
-        } catch (Exception e) {
-            String type = sa.getSVar(name);
-            if (type.equals("")) {
-                type = sa.getHostCard().getSVar(name);
-            }
-
-            if (type.equals("")) {
-                throw new Exception("Counter type doesn't match, nor does an SVar exist with the type name.");
-            }
-            counterType = CounterType.getType(type);
-        }
-        //*/
-
-        return counterType;
-    }
-
     // should the three getDefined functions be merged into one? Or better to
     // have separate?
     // If we only have one, each function needs to Cast the Object to the
@@ -808,9 +784,6 @@ public class AbilityUtils {
                     if (parent != null) {
                         list = parent.findTargetedCards();
                     }
-                    else {
-                        list = null;
-                    }
                 }
                 else if (calcX[0].startsWith("TriggerRemembered")) {
                     final SpellAbility root = sa.getRootAbility();
@@ -1425,7 +1398,7 @@ public class AbilityUtils {
 
         // do blessing there before condition checks
         if (sa.isSpell() && sa.isBlessing() && !sa.getHostCard().isPermanent()) {
-            if (pl != null && pl.getZone(ZoneType.Battlefield).size() >= 10) {
+            if (pl.getZone(ZoneType.Battlefield).size() >= 10) {
                 pl.setBlessing(true);
             }
         }
@@ -1521,8 +1494,7 @@ public class AbilityUtils {
         else if (unlessCost.equals("ChosenManaCost")) {
             if (!source.hasChosenCard()) {
                 cost = new Cost(ManaCost.ZERO, true);
-            }
-            else {
+            } else {
                 cost = new Cost(Iterables.getFirst(source.getChosenCards(), null).getManaCost(), true);
             }
         }
@@ -1628,7 +1600,25 @@ public class AbilityUtils {
 
         if (sa.hasParam("RememberCostMana")) {
             host.clearRemembered();
-            host.addRemembered(sa.getPayingMana());
+            ManaCostBeingPaid activationMana = new ManaCostBeingPaid(sa.getPayCosts().getTotalMana());
+            if (sa.getXManaCostPaid() != null) {
+                activationMana.setXManaCostPaid(sa.getXManaCostPaid(), null);
+            }
+            int activationShards = activationMana.getConvertedManaCost();
+            List<Mana> payingMana = sa.getPayingMana();
+            // even if the cost was raised, we only care about mana from activation part
+            // let's just assume the first shards spent are that for easy handling
+            List<Mana> activationPaid = payingMana.subList(payingMana.size() - activationShards, payingMana.size());
+            StringBuilder sb = new StringBuilder();
+            int nMana = 0;
+            for (Mana m : activationPaid) {
+                if (nMana > 0) {
+                    sb.append(" ");
+                }
+                sb.append(m.toString());
+                nMana++;
+            }
+            host.addRemembered(sb.toString());
         }
 
         if (sa.hasParam("RememberCostCards") && !sa.getPaidHash().isEmpty()) {
@@ -1857,9 +1847,8 @@ public class AbilityUtils {
                     list = CardLists.getValidCards(list, k[1].split(","), sa.getActivatingPlayer(), c, sa);
                     if (k[0].contains("TotalToughness")) {
                         return doXMath(Aggregates.sum(list, CardPredicates.Accessors.fnGetNetToughness), expr, c, ctb);
-                    } else {
-                        return doXMath(list.size(), expr, c, ctb);
                     }
+                    return doXMath(list.size(), expr, c, ctb);
                 }
 
                 if (sq[0].startsWith("LastStateGraveyard")) {
@@ -2173,6 +2162,10 @@ public class AbilityUtils {
             return doXMath(c.getRememberedCount(), expr, c, ctb);
         }
 
+        if (sq[0].startsWith("ImprintedSize")) {
+            return doXMath(c.getImprintedCards().size(), expr, c, ctb);
+        }
+
         if (sq[0].startsWith("RememberedNumber")) {
             int num = 0;
             for (final Object o : c.getRemembered()) {
@@ -2237,6 +2230,9 @@ public class AbilityUtils {
         if (sq[0].equals("Monarch")) {
             return doXMath(calculateAmount(c, sq[player.isMonarch() ? 1 : 2], ctb), expr, c, ctb);
         }
+        if (sq[0].equals("StartingPlayer")) {
+            return doXMath(calculateAmount(c, sq[player.isStartingPlayer() ? 1: 2], ctb), expr, c, ctb);
+        }
         if (sq[0].equals("Blessing")) {
             return doXMath(calculateAmount(c, sq[player.hasBlessing() ? 1 : 2], ctb), expr, c, ctb);
         }
@@ -2272,6 +2268,10 @@ public class AbilityUtils {
 
         if (sq[0].equals("YouDrewThisTurn")) {
             return doXMath(player.getNumDrawnThisTurn(), expr, c, ctb);
+        }
+
+        if (sq[0].equals("YouRollThisTurn")) {
+            return doXMath(player.getNumRollsThisTurn(), expr, c, ctb);
         }
 
         if (sq[0].equals("YouSurveilThisTurn")) {
@@ -2352,6 +2352,10 @@ public class AbilityUtils {
 
         if (sq[0].equals("YourTurns")) {
             return doXMath(player.getTurn(), expr, c, ctb);
+        }
+
+        if (sq[0].equals("NotedNumber")) {
+            return doXMath(player.getNotedNumberForName(c.getName()), expr, c, ctb);
         }
 
         if (sq[0].startsWith("OppTypesInGrave")) {
@@ -3191,9 +3195,8 @@ public class AbilityUtils {
         } else if (s[0].contains("DivideEvenlyDown")) {
             if (secondaryNum == 0) {
                 return 0;
-            } else {
-                return num / secondaryNum;
             }
+            return num / secondaryNum;
         } else if (s[0].contains("Mod")) {
             return num % secondaryNum;
         } else if (s[0].contains("Abs")) {
@@ -3201,15 +3204,13 @@ public class AbilityUtils {
         } else if (s[0].contains("LimitMax")) {
             if (num < secondaryNum) {
                 return num;
-            } else {
-                return secondaryNum;
             }
+            return secondaryNum;
         } else if (s[0].contains("LimitMin")) {
             if (num > secondaryNum) {
                 return num;
-            } else {
-                return secondaryNum;
             }
+            return secondaryNum;
 
         } else {
             return num;

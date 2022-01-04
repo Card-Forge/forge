@@ -1,0 +1,10 @@
+Name:Discover the Formula
+ManaCost:4 U U
+Types:Instant
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeNum$ 3 | ChangeType$ Card.nonLand | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Seek three nonland cards, then nonland cards in your hand perpetually gain "This spell costs {1} less to cast."
+SVar:DBEffect:DB$ Effect | RememberObjects$ ValidHand Card.nonLand+YouOwn | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Triggers$ Update | Name$ Discover the Formula's Perpetual Effect
+SVar:PerpetualAbility:Mode$ Continuous | Affected$ Card.IsRemembered | AddStaticAbility$ ReduceCost | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Each nonland card in your hand perpetually gains "This spell costs {1} less to cast."
+SVar:ReduceCost:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} less to cast.
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+Oracle:Seek three nonland cards, then nonland cards in your hand perpetually gain "This spell costs {1} less to cast."

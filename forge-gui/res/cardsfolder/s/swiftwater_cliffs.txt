@@ -1,10 +1,9 @@
 Name:Swiftwater Cliffs
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+K:CARDNAME enters the battlefield tapped.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
-K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ Combo U R | SpellDescription$ Add {U} or {R}.
 DeckHas:Ability$LifeGain
 Oracle:Swiftwater Cliffs enters the battlefield tapped.\nWhen Swiftwater Cliffs enters the battlefield, you gain 1 life.\n{T}: Add {U} or {R}.

@@ -127,7 +127,7 @@ public class HumanPlaySpellAbility {
             payment.setSnowForColor(true);
         }
 
-        if (ability.isAbility() && ability.isActivatedAbility()) {
+        if (ability.isActivatedAbility()) {
             final Map<String, String> params = Maps.newHashMap();
 
             for (KeywordInterface inst : c.getKeywords()) {
@@ -155,7 +155,7 @@ public class HumanPlaySpellAbility {
                 && (!mayChooseTargets || ability.setupTargets()) // if you can choose targets, then do choose them.
                 && ability.canCastTiming(human)
                 && ability.checkRestrictions(human)
-                && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, ability.getHostCard())));
+                && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, false, ability.getHostCard())));
 
         if (!prerequisitesMet) {
             if (!ability.isTrigger()) {
@@ -216,6 +216,7 @@ public class HumanPlaySpellAbility {
             oldCard.getZone().remove(oldCard);
             fromZone.add(oldCard, zonePosition >= 0 ? Integer.valueOf(zonePosition) : null);
             ability.setHostCard(oldCard);
+            ability.setXManaCostPaid(null);
             // better safe than sorry approach in case rolled back ability was copy (from addExtraKeywordCost)
             for (SpellAbility sa : oldCard.getSpells()) {
                 sa.setHostCard(oldCard);
@@ -251,21 +252,23 @@ public class HumanPlaySpellAbility {
             for (final String aVar : announce.split(",")) {
                 final String varName = aVar.trim();
 
-                final boolean isX = "X".equalsIgnoreCase(varName);
-                if (isX) { needX = false; }
-
                 final Integer value = controller.announceRequirements(ability, varName);
                 if (value == null) {
                     return false;
                 }
 
-                ability.setSVar(varName, value.toString());
-                if ("Multikicker".equals(varName)) {
-                    card.setKickerMagnitude(value);
-                } else if ("Pseudo-multikicker".equals(varName)) {
-                    card.setPseudoMultiKickerMagnitude(value);
+                if ("X".equalsIgnoreCase(varName)) {
+                    needX = false;
+                    ability.setXManaCostPaid(value);
                 } else {
-                    card.setSVar(varName, value.toString());
+                    ability.setSVar(varName, value.toString());
+                    if ("Multikicker".equals(varName)) {
+                        card.setKickerMagnitude(value);
+                    } else if ("Pseudo-multikicker".equals(varName)) {
+                        card.setPseudoMultiKickerMagnitude(value);
+                    } else {
+                        card.setSVar(varName, value.toString());
+                    }
                 }
             }
         }

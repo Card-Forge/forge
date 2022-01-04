@@ -17,7 +17,6 @@
  */
 package forge.game.cost;
 
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
@@ -43,7 +42,7 @@ public class CostExiledMoveToGrave extends CostPartWithList {
     public int paymentOrder() { return 15; }
 
     @Override
-    public Integer getMaxAmountX(SpellAbility ability, Player payer) {
+    public Integer getMaxAmountX(SpellAbility ability, Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
         CardCollectionView typeList = payer.getGame().getCardsIn(ZoneType.Exile);
 
@@ -76,20 +75,15 @@ public class CostExiledMoveToGrave extends CostPartWithList {
     }
 
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer) {
-        final Card source = ability.getHostCard();
+    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
 
-        Integer i = convertAmount();
+        int i = getAbilityAmount(ability);
 
-        if (i == null) {
-            i = AbilityUtils.calculateAmount(source, getAmount(), ability);
-        }
-
-        return getMaxAmountX(ability, payer) >= i;
+        return getMaxAmountX(ability, payer, effect) >= i;
     }
 
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard) {
+    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
         return targetCard.getGame().getAction().moveToGraveyard(targetCard, null);
     }
 

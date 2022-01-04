@@ -553,7 +553,7 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public void playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory) {
         prepareSingleSa(host, wrapperAbility, isMandatory);
-        ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, getGame());
+        ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, getGame(), true);
     }
 
     @Override
@@ -607,10 +607,10 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt /* ai needs hints as well */, ManaConversionMatrix matrix, boolean isActivatedSa) {
+    public boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt /* ai needs hints as well */, ManaConversionMatrix matrix, boolean effect) {
         // TODO Auto-generated method stub
         ManaCostBeingPaid cost = new ManaCostBeingPaid(toPay);
-        return ComputerUtilMana.payManaCost(cost, sa, player);
+        return ComputerUtilMana.payManaCost(cost, sa, player, effect);
     }
 
     @Override

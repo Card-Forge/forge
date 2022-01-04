@@ -54,7 +54,7 @@ public class CostTapType extends CostPartWithList {
     }
 
     @Override
-    public Integer getMaxAmountX(SpellAbility ability, Player payer) {
+    public Integer getMaxAmountX(SpellAbility ability, Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
 
         // extend if cards use X with different conditions
@@ -126,7 +126,7 @@ public class CostTapType extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer) {
+    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
 
         String type = this.getType();
@@ -169,15 +169,15 @@ public class CostTapType extends CostPartWithList {
             return CardLists.getTotalPower(typeList, true, ability.hasParam("Crew")) >= i;
         }
 
-        final Integer amount = this.convertAmount();
-        return (typeList.size() != 0) && ((amount == null) || (typeList.size() >= amount));
+        final int amount = this.getAbilityAmount(ability);
+        return (typeList.size() != 0) && (typeList.size() >= amount);
     }
 
     /* (non-Javadoc)
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard) {
+    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
         targetCard.tap(true);
         return targetCard;
     }

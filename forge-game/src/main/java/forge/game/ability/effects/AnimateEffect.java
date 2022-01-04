@@ -176,16 +176,12 @@ public class AnimateEffect extends AnimateEffectBase {
 
             // give Remembered
             if (animateRemembered != null) {
-                for (final Object o : AbilityUtils.getDefinedObjects(source, animateRemembered, sa)) {
-                    c.addRemembered(o);
-                }
+                c.addRemembered(AbilityUtils.getDefinedObjects(source, animateRemembered, sa));
             }
 
             // give Imprinted
             if (animateImprinted != null) {
-                for (final Card imprintedCard : AbilityUtils.getDefinedCards(source, animateImprinted, sa)) {
-                    c.addImprintedCard(imprintedCard);
-                }
+                c.addImprintedCards(AbilityUtils.getDefinedCards(source, animateImprinted, sa));
             }
 
             game.fireEvent(new GameEventCardStatsChanged(c));

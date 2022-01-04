@@ -125,10 +125,15 @@ public class StaticAbilityCantBeCast {
             return false;
         }
 
-        if (stAb.hasParam("cmcGT") && (activator != null)
-                && (card.getCMC() <= CardLists.getType(activator.getCardsIn(ZoneType.Battlefield),
-                        stAb.getParam("cmcGT")).size())) {
-            return false;
+        if (stAb.hasParam("cmcGT") && (activator != null)) {
+            if (stAb.getParam("cmcGT").equals("Turns")) {
+                if (card.getCMC() <= activator.getTurn()) {
+                    return false;
+                }
+            } else if (card.getCMC() <= CardLists.getType(activator.getCardsIn(ZoneType.Battlefield),
+                    stAb.getParam("cmcGT")).size()) {
+                return false;
+            }
         }
 
         if (stAb.hasParam("NumLimitEachTurn") && activator != null) {

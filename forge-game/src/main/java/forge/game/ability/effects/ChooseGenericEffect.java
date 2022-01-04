@@ -9,6 +9,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
+import forge.game.cost.Cost;
 import forge.game.event.GameEventCardModeChosen;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -52,17 +53,10 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                 if (!saChoice.getRestrictions().checkOtherRestrictions(host, saChoice, sa.getActivatingPlayer()) ) {
                     saToRemove.add(saChoice);
                 } else if (saChoice.hasParam("UnlessCost")) {
-                    String unlessCost = saChoice.getParam("UnlessCost");
-                    // Sac a permanent in presence of Sigarda, Host of Herons
-                    // TODO: generalize this by testing if the unless cost can be paid
-                    if (unlessCost.startsWith("Sac<")) {
-                        if (!p.canSacrificeBy(saChoice)) {
-                            saToRemove.add(saChoice);
-                        }
-                    } else if (unlessCost.startsWith("Discard<")) {
-                        if (!p.canDiscardBy(sa)) {
-                            saToRemove.add(saChoice);
-                        }
+                    // generic check for if the cost can be paid
+                    Cost unlessCost = new Cost(saChoice.getParam("UnlessCost"), false);
+                    if (!unlessCost.canPay(sa, p, true)) {
+                        saToRemove.add(saChoice);
                     }
                 }
             }

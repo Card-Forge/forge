@@ -1,0 +1,14 @@
+Name:Bloodrage Alpha
+ManaCost:3 R
+Types:Creature Wolf
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBTarget,DBDelayTrig
+SVar:DBTarget:DB$ Pump | ValidTgts$ Wolf.Other+YouCtrl,Werewolf.Other+YouCtrl | AILogic$ Fight | TgtPrompt$ Select another target Wolf or Werewolf you control | SubAbility$ DBFight | StackDescription$ {c:ThisTargetedCard} | SpellDescription$ Another target Wolf or Werewolf you control fights target creature you don't control.
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | StackDescription$ fights {c:ThisTargetedCard}.
+SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ SpellCast | ValidCard$ Wolf,Werewolf | ValidActivatingPlayer$ You | Execute$ TrigAnimate | SpellDescription$ When you cast your next Wolf or Werewolf spell, it gains "When this creature enters the battlefield, it fights up to one target creature you don't control."
+SVar:TrigAnimate:DB$ Animate | Defined$ TriggeredCard | Duration$ Permanent | Triggers$ ETBFight
+SVar:ETBFight:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | TriggerDescription$ When this creature enters the battlefield, it fights up to one target creature you don't control.
+SVar:TrigFight:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select up to one target creature you don't control | TargetMin$ 0 | TargetMax$ 1
+DeckHints:Type$Wolf|Werewolf
+Oracle:When Bloodrage Alpha enters the battlefield, choose one —\n• Another target Wolf or Werewolf you control fights target creature you don't control.\n• When you cast your next Wolf or Werewolf spell, it gains "When this creature enters the battlefield, it fights up to one target creature you don't control."

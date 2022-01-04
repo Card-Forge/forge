@@ -104,7 +104,7 @@ public class PermanentAi extends SpellAbilityAi {
         ManaCost mana = sa.getPayCosts().getTotalMana();
         if (mana.countX() > 0) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, false);
             final Card source = sa.getHostCard();
             if (source.hasConverge()) {
                 int nColors = ComputerUtilMana.getConvergeCount(sa, ai);
@@ -141,7 +141,7 @@ public class PermanentAi extends SpellAbilityAi {
 
             int generic = paidCost.getGenericManaAmount();
             // Set PayX here to maximum value.
-            int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+            int xPay = ComputerUtilCost.getMaxXValue(sa, ai, false);
             // currently cards with SacToReduceCost reduce by 2 generic
             xPay = Math.min(xPay, generic / 2);
             sa.setXManaCostPaid(xPay);
@@ -155,7 +155,7 @@ public class PermanentAi extends SpellAbilityAi {
             for (int i = 0; i < 10; i++) {
                 mCost = ManaCost.combine(mCost, mkCost);
                 ManaCostBeingPaid mcbp = new ManaCostBeingPaid(mCost);
-                if (!ComputerUtilMana.canPayManaCost(mcbp, sa, ai)) {
+                if (!ComputerUtilMana.canPayManaCost(mcbp, sa, ai, false)) {
                     card.setKickerMagnitude(i);
                     sa.setSVar("Multikicker", String.valueOf(i));
                     break;
@@ -181,7 +181,7 @@ public class PermanentAi extends SpellAbilityAi {
                 emptyAbility.setTargetRestrictions(sa.getTargetRestrictions());
 
                 emptyAbility.setActivatingPlayer(ai);
-                if (!ComputerUtilCost.canPayCost(emptyAbility, ai)) {
+                if (!ComputerUtilCost.canPayCost(emptyAbility, ai, true)) {
                     // AiPlayDecision.AnotherTime
                     return false;
                 }

@@ -44,7 +44,7 @@ public class ChooseColorAi extends SpellAbilityAi {
                 return false;
             }
             // Set PayX here to maximum value.
-            sa.setXManaCostPaid(ComputerUtilCost.getMaxXValue(sa, ai));
+            sa.setXManaCostPaid(ComputerUtilCost.getMaxXValue(sa, ai, false));
             return true;
         }
 

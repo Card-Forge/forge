@@ -298,7 +298,8 @@ public class CounterEffect extends SpellAbilityEffect {
     private static void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, CardZoneTable triggerList) {
         final Game game = tgtSA.getActivatingPlayer().getGame();
         Card movedCard = null;
-        final Zone originZone = tgtSA.getHostCard().getZone();
+        final Card c = tgtSA.getHostCard();
+        final Zone originZone = c.getZone();
 
         // Run any applicable replacement effects. 
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(tgtSA.getHostCard());
@@ -310,8 +311,8 @@ public class CounterEffect extends SpellAbilityEffect {
         game.getStack().remove(si);
 
         // if the target card on stack was a spell with Bestow, then unbestow it
-        if (tgtSA.getHostCard() != null && tgtSA.getHostCard().isBestowed()) {
-            tgtSA.getHostCard().unanimateBestow(true);
+        if (c.isBestowed()) {
+            c.unanimateBestow(true);
         }
 
         Map<AbilityKey, Object> params = AbilityKey.newMap();
@@ -327,33 +328,32 @@ public class CounterEffect extends SpellAbilityEffect {
             // For Ability-targeted counterspells - do not move it anywhere,
             // even if Destination$ is specified.
         } else if (destination.equals("Graveyard")) {
-            movedCard = game.getAction().moveToGraveyard(tgtSA.getHostCard(), srcSA, params);
+            movedCard = game.getAction().moveToGraveyard(c, srcSA, params);
         } else if (destination.equals("Exile")) {
-            movedCard = game.getAction().exile(tgtSA.getHostCard(), srcSA, params);
+            movedCard = game.getAction().exile(c, srcSA, params);
         } else if (destination.equals("TopOfLibrary")) {
-            movedCard = game.getAction().moveToLibrary(tgtSA.getHostCard(), srcSA, params);
+            movedCard = game.getAction().moveToLibrary(c, srcSA, params);
         } else if (destination.equals("Hand")) {
-            movedCard = game.getAction().moveToHand(tgtSA.getHostCard(), srcSA, params);
+            movedCard = game.getAction().moveToHand(c, srcSA, params);
         } else if (destination.equals("Battlefield")) {
             if (tgtSA instanceof SpellPermanent) {
-                Card c = tgtSA.getHostCard();
                 c.setController(srcSA.getActivatingPlayer(), 0);
                 movedCard = game.getAction().moveToPlay(c, srcSA.getActivatingPlayer(), srcSA, params);
             } else {
-                movedCard = game.getAction().moveToPlay(tgtSA.getHostCard(), srcSA.getActivatingPlayer(), srcSA, params);
+                movedCard = game.getAction().moveToPlay(c, srcSA.getActivatingPlayer(), srcSA, params);
                 movedCard.setController(srcSA.getActivatingPlayer(), 0);
             }
         } else if (destination.equals("BottomOfLibrary")) {
-            movedCard = game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard(), srcSA, params);
+            movedCard = game.getAction().moveToBottomOfLibrary(c, srcSA, params);
         } else if (destination.equals("ShuffleIntoLibrary")) {
-            movedCard = game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard(), srcSA, params);
-            tgtSA.getHostCard().getController().shuffle(srcSA);
+            movedCard = game.getAction().moveToBottomOfLibrary(c, srcSA, params);
+            c.getController().shuffle(srcSA);
         } else {
             throw new IllegalArgumentException("AbilityFactory_CounterMagic: Invalid Destination argument for card "
                     + srcSA.getHostCard().getName());
         }
         // Run triggers
-        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(tgtSA.getHostCard());
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
         runParams.put(AbilityKey.Player, tgtSA.getActivatingPlayer());
         runParams.put(AbilityKey.Cause, srcSA.getHostCard());
         runParams.put(AbilityKey.CounteredSA, tgtSA);

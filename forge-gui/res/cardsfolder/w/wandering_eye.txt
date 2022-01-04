@@ -3,7 +3,6 @@ ManaCost:2 U
 Types:Creature Illusion
 PT:1/3
 K:Flying
-S:Mode$ Continuous | Affected$ Player | AddKeyword$ Play with your hand revealed. | Description$ Players play with their hands revealed.
+S:Mode$ Continuous | AffectedZone$ Hand | MayLookAt$ Player | Description$ Players play with their hands revealed.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wandering_eye.jpg
 Oracle:Flying\nPlayers play with their hands revealed.

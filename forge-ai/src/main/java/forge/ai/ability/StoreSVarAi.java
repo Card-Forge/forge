@@ -30,7 +30,7 @@ public class StoreSVarAi extends SpellAbilityAi {
         if (sa.hasParam("AILogic")) {
             if (sa.getPayCosts().getTotalMana().countX() > 0 && source.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to half the remaining mana to allow for Main 2 and other combat shenanigans.
-                final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai) / 2;
+                final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai, sa.isTrigger()) / 2;
                 if (xPay == 0) { return false; }
                 sa.setXManaCostPaid(xPay);
             }

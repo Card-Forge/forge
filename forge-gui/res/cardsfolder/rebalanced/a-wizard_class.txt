@@ -1,0 +1,12 @@
+Name:A-Wizard Class
+ManaCost:U
+Types:Enchantment Class
+S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
+K:Class:2:2 U:AddTrigger$ TriggerClassLevel
+SVar:TriggerClassLevel:Mode$ ClassLevelGained | ClassLevel$ 2 | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ When this Class becomes level 2, draw two cards.
+SVar:TrigDraw:DB$ Draw | NumCards$ 2
+K:Class:3:2 U:AddTrigger$ TriggerDrawn
+SVar:TriggerDrawn:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever you draw a card, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:(Gain the next level as a sorcery to add its ability.)\nYou have no maximum hand size.\n{2}{U}: Level 2\nWhen this Class becomes level 2, draw two cards.\n{2}{U}: Level 3\nWhenever you draw a card, put a +1/+1 counter on target creature you control.

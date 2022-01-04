@@ -53,7 +53,7 @@ public class MillAi extends SpellAbilityAi {
             return (ph.is(PhaseType.MAIN1) || ph.is(PhaseType.MAIN2)) && ph.isPlayerTurn(ai); // Chandra, Torch of Defiance and similar
         }
         if (!sa.isPwAbility()) { // Planeswalker abilities are only activated at sorcery speed
-            if ("You".equals(sa.getParam("Defined")) && !(!SpellAbilityAi.isSorcerySpeed(sa) && ph.is(PhaseType.END_OF_TURN)
+            if ("You".equals(sa.getParam("Defined")) && !(!SpellAbilityAi.isSorcerySpeed(sa, ai) && ph.is(PhaseType.END_OF_TURN)
                     && ph.getNextTurn().equals(ai))) {
                 return false; // only self-mill at opponent EOT
             }
@@ -221,6 +221,6 @@ public class MillAi extends SpellAbilityAi {
             cardsToDiscard = Math.min(ai.getCardsIn(ZoneType.Library).size() - 5, cardsToDiscard);
         }
 
-        return Math.min(ComputerUtilCost.getMaxXValue(sa, ai), cardsToDiscard);
+        return Math.min(ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger()), cardsToDiscard);
     }
 }

@@ -386,9 +386,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 .hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
             return InputConfirm.confirm(this, CardView.get(attacker),
                     localizer.getMessage("lblAssignCombatDamageWerentBlocked"));
-        } else {
-            return false;
         }
+        return false;
     }
 
     @Override
@@ -443,7 +442,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 max = Math.min(max, AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("XMaxLimit"), ability));
             }
             if (cost != null) {
-                Integer costX = cost.getMaxForNonManaX(ability, player);
+                Integer costX = cost.getMaxForNonManaX(ability, player, false);
                 if (costX != null) {
                     max = Math.min(max, costX);
                 }
@@ -554,6 +553,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return singleChosen == null ? CardCollection.EMPTY : new CardCollection(singleChosen);
         }
 
+        final CardCollection choices = new CardCollection();
+        if (sourceList.isEmpty()) {
+            return choices;
+        }
+
         getGui().setPanelSelection(CardView.get(sa.getHostCard()));
 
         if (useSelectCardsInput(sourceList)) {
@@ -571,7 +575,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         List<CardView> views = getGui().many(title, localizer.getMessage("lblChosenCards"), min, max,
                 gameCachechoose.getTrackableKeys(), CardView.get(sa.getHostCard()));
         endTempShowCards();
-        final CardCollection choices = new CardCollection();
         gameCachechoose.addToList(views, choices);
         return choices;
     }
@@ -901,7 +904,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (StringUtils.isBlank(message)) {
             message = localizer.getMessage("lblLookCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
         } else {
-            message += localizer.getMessage("lblPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
+            message += " " + localizer.getMessage("lblPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
         }
         final String fm = MessageUtil.formatMessage(message, getLocalPlayerView(), owner);
         if (!cards.isEmpty()) {
@@ -2083,8 +2086,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean payManaCost(final ManaCost toPay, final CostPartMana costPartMana, final SpellAbility sa,
-                               final String prompt, ManaConversionMatrix matrix, final boolean isActivatedSa) {
-        return HumanPlay.payManaCost(this, toPay, costPartMana, sa, player, prompt, matrix, isActivatedSa);
+                               final String prompt, ManaConversionMatrix matrix, final boolean effect) {
+        return HumanPlay.payManaCost(this, toPay, costPartMana, sa, player, prompt, matrix, effect);
     }
 
     @Override
@@ -2498,7 +2501,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (subtract) {
                 card.subtractCounter(counter, count);
             } else {
-                card.addCounter(counter, count, card.getController(), null, false, null);
+                card.addCounterInternal(counter, count, card.getController(), false, null);
             }
         }
 

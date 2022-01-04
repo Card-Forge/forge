@@ -48,13 +48,9 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
         GameEntityCounterTable table = new GameEntityCounterTable();
         for (final GameEntity ge : result) {
             for (final CounterType ct : ge.getCounters().keySet()) {
-                ge.addCounter(ct, 1, p, sa, true, true, table);
-            }
-            if (ge instanceof Card) {
-                Card c = (Card) ge;
-                game.updateLastStateForCard(c);
+                ge.addCounter(ct, 1, p, table);
             }
         }
-        table.triggerCountersPutAll(game);
+        table.replaceCounterEffect(game, sa, true);
     }
 }

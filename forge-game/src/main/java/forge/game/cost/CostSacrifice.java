@@ -21,7 +21,6 @@ import org.apache.commons.lang3.ObjectUtils;
 
 import com.google.common.collect.Iterables;
 
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
@@ -58,11 +57,11 @@ public class CostSacrifice extends CostPartWithList {
     public int paymentOrder() { return 15; }
 
     @Override
-    public Integer getMaxAmountX(SpellAbility ability, Player payer) {
+    public Integer getMaxAmountX(SpellAbility ability, Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
         CardCollectionView typeList = payer.getCardsIn(ZoneType.Battlefield);
         typeList = CardLists.getValidCards(typeList, getType().split(";"), payer, source, ability);
-        typeList = CardLists.filter(typeList, CardPredicates.canBeSacrificedBy(ability));
+        typeList = CardLists.filter(typeList, CardPredicates.canBeSacrificedBy(ability, effect));
         return typeList.size();
     }
 
@@ -101,38 +100,35 @@ public class CostSacrifice extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player activator) {
+    public final boolean canPay(final SpellAbility ability, final Player activator, final boolean effect) {
         final Card source = ability.getHostCard();
 
         if (getType().equals("OriginalHost")) {
             Card originalEquipment = ability.getOriginalHost();
-            return originalEquipment.isEquipping();
+            return originalEquipment.isEquipping() && originalEquipment.canBeSacrificedBy(ability, effect);
         }
         else if (!payCostFromSource()) { // You can always sac all
             if ("All".equalsIgnoreCase(getAmount())) {
                 CardCollectionView typeList = activator.getCardsIn(ZoneType.Battlefield);
                 typeList = CardLists.getValidCards(typeList, getType().split(";"), activator, source, ability);
                 // it needs to check if everything can be sacrificed
-                return Iterables.all(typeList, CardPredicates.canBeSacrificedBy(ability));
+                return Iterables.all(typeList, CardPredicates.canBeSacrificedBy(ability, effect));
             }
 
-            Integer amount = this.convertAmount();
-            if (amount == null) {
-                amount = AbilityUtils.calculateAmount(source, getAmount(), ability);
-            }
+            int amount = getAbilityAmount(ability);
 
-            return getMaxAmountX(ability, activator) >= amount;
+            return getMaxAmountX(ability, activator, effect) >= amount;
             // If amount is null, it's either "ALL" or "X"
             // if X is defined, it needs to be calculated and checked, if X is
             // choice, it can be Paid even if it's 0
         }
-        else return source.canBeSacrificedBy(ability);
+        else return source.canBeSacrificedBy(ability, effect);
     }
 
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard) {
+    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
         // no table there, it is already handled by CostPartWithList
-        return targetCard.getGame().getAction().sacrifice(targetCard, ability, null, null);
+        return targetCard.getGame().getAction().sacrifice(targetCard, ability, effect, null, null);
     }
 
     /* (non-Javadoc)

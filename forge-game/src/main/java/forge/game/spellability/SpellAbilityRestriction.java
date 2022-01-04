@@ -234,6 +234,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             if (cardZone != null && cardZone.is(ZoneType.Command) && sa.hasParam("HiddenAgenda")) {
                 return true;
             }
+            if (sa.hasParam("AdditionalActivationZone")) {
+                if (cardZone != null && cardZone.is(ZoneType.valueOf(sa.getParam("AdditionalActivationZone")))) {
+                    return true;
+                }
+            }
             // Not a Spell, or on Battlefield, return false
             if (!sa.isSpell() || (cardZone != null && ZoneType.Battlefield.equals(cardZone.getZoneType()))
                     || (this.getZone() != null && !this.getZone().equals(ZoneType.Hand))) {
@@ -474,11 +479,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (sa.isPwAbility()) {
-            if (!c.hasKeyword("CARDNAME's loyalty abilities can be activated at instant speed.")
-                    && !activator.canCastSorcery()) {
-                return false;
-            }
-
             final int initialLimit = c.hasKeyword("CARDNAME's loyalty abilities can be activated twice each turn rather than only once") ? 1 : 0;
             final int limits = c.getAmountOfKeyword("May activate CARDNAME's loyalty abilities once") + initialLimit;
 

@@ -6,6 +6,8 @@ import java.util.Map;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 
+import forge.game.player.Player;
+
 /**
  * Keys for Ability parameter maps.
  */
@@ -171,6 +173,13 @@ public enum AbilityKey {
         final Map<AbilityKey, Object> runParams = newMap();
 
         runParams.put(Card, card);
+        return runParams;
+    }
+
+    public static Map<AbilityKey, Object> mapFromPlayer(Player player) {
+        final Map<AbilityKey, Object> runParams = newMap();
+
+        runParams.put(Player, player);
         return runParams;
     }
 

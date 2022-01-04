@@ -29,9 +29,6 @@ import forge.game.zone.ZoneType;
  */
 public class CostExert extends CostPartWithList {
 
-    /**
-     * Serializables need a version ID.
-     */
     private static final long serialVersionUID = 1L;
 
     /**
@@ -81,7 +78,7 @@ public class CostExert extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer) {
+    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
 
         if (!this.payCostFromSource()) {
@@ -89,17 +86,17 @@ public class CostExert extends CostPartWithList {
 
             CardCollectionView typeList = payer.getCardsIn(ZoneType.Battlefield);
             typeList = CardLists.getValidCards(typeList, this.getType().split(";"), payer, source, ability);
-            final Integer amount = this.convertAmount();
+            final int amount = this.getAbilityAmount(ability);
 
 
-            return needsAnnoucement || (amount == null) || (typeList.size() >= amount);
+            return needsAnnoucement || (typeList.size() >= amount);
         }
 
         return true;
     }
 
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard) {
+    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
     	targetCard.exert();
         return targetCard;
     }

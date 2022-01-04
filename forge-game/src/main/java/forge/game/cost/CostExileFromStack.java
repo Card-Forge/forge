@@ -32,9 +32,6 @@ import forge.game.zone.ZoneType;
 public class CostExileFromStack extends CostPart {
     // ExileFromStack<Num/Type{/TypeDescription}>
 
-    /**
-     * Serializables need a version ID.
-     */
     private static final long serialVersionUID = 1L;
 
     /**
@@ -81,7 +78,7 @@ public class CostExileFromStack extends CostPart {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer) {
+    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
 
         String type = this.getType();
@@ -93,8 +90,8 @@ public class CostExileFromStack extends CostPart {
 
         list = CardLists.getValidCards(list, type.split(";"), payer, source, ability);
 
-        final Integer amount = this.convertAmount();
-        return (amount == null) || (list.size() >= amount);
+        final int amount = this.getAbilityAmount(ability);
+        return list.size() >= amount;
     }
 
     /*
@@ -104,7 +101,7 @@ public class CostExileFromStack extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payAsDecided(final Player ai, final PaymentDecision decision, SpellAbility ability) {
+    public final boolean payAsDecided(final Player ai, final PaymentDecision decision, SpellAbility ability, final boolean effect) {
         Game game = ai.getGame();
         for (final SpellAbility sa : decision.sp) {
             SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(sa);

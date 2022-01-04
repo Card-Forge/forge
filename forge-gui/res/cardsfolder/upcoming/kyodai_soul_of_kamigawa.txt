@@ -1,0 +1,11 @@
+Name:Kyodai, Soul of Kamigawa
+ManaCost:3 W
+Types:Legendary Creature Dragon Spirit
+PT:3/3
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, another target permanent gains indestructible for as long as you control NICKNAME.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Permanent.Other | TgtPrompt$ Select another target permanent | KW$ Indestructible | Duration$ UntilLoseControlOfHost
+A:AB$ Pump | Cost$ W U B R G | NumAtt$ +5 | NumDef$ +5 | SpellDescription$ NICKNAME gets +5/+5 until end of turn.
+SVar:PlayMain1:TRUE
+Oracle:Flash\nFlying\nWhen Kyodai, Soul of Kamigawa enters the battlefield, another target permanent gains indestructible for as long as you control Kyodai.\n{W}{U}{B}{R}{G}: Kyodai gets +5/+5 until end of turn.

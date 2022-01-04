@@ -212,19 +212,13 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         }
         host.setChosenCards(chosen);
         if (sa.hasParam("RememberChosen")) {
-            for (final Card rem : chosen) {
-                host.addRemembered(rem);
-            }
+            host.addRemembered(chosen);
         }
         if (sa.hasParam("ForgetChosen")) {
-            for (final Card rem : chosen) {
-                host.removeRemembered(rem);
-            }
+            host.removeRemembered(chosen);
         }
         if (sa.hasParam("ImprintChosen")) {
-            for (final Card imp : chosen) {
-                host.addImprintedCard(imp);
-            }
+            host.addImprintedCards(chosen);
         }
     }
 }

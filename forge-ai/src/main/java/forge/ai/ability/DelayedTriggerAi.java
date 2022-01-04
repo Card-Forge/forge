@@ -85,7 +85,7 @@ public class DelayedTriggerAi extends SpellAbilityAi {
                             ManaCost total = ManaCost.combine(costSa, costAb);
                             SpellAbility combinedAb = ab.copyWithDefinedCost(new Cost(total, false));
                             // can we pay both costs?
-                            if (ComputerUtilMana.canPayManaCost(combinedAb, ai, 0)) {
+                            if (ComputerUtilMana.canPayManaCost(combinedAb, ai, 0, true)) {
                                 return true;
                             }
                         }
@@ -123,7 +123,7 @@ public class DelayedTriggerAi extends SpellAbilityAi {
                         }
                         AiPlayDecision decision = ((PlayerControllerAi) ai.getController()).getAi().canPlaySa(ab);
                         if (decision == AiPlayDecision.WillPlay || decision == AiPlayDecision.WaitForMain2) {
-                            if (ComputerUtilMana.canPayManaCost(ab, ai, 0)) {
+                            if (ComputerUtilMana.canPayManaCost(ab, ai, 0, true)) {
                                 return true;
                             }
                         }

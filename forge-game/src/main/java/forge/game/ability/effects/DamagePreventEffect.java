@@ -68,10 +68,10 @@ public class DamagePreventEffect extends DamagePreventEffectBase {
         final List<GameObject> tgts = getTargets(sa);
         final CardCollection untargetedCards = CardUtil.getRadiance(sa);
 
-        final boolean targeted = (sa.usesTargeting());
+        final boolean targeted = sa.usesTargeting();
 
         for (final GameObject o : tgts) {
-            numDam = (sa.usesTargeting() && sa.isDividedAsYouChoose()) ? sa.getDividedValue(o) : numDam;
+            numDam = targeted && sa.isDividedAsYouChoose() ? sa.getDividedValue(o) : numDam;
             if (o instanceof Card) {
                 final Card c = (Card) o;
                 if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {

@@ -367,7 +367,7 @@ public class UntapAi extends SpellAbilityAi {
                         // can ideally be improved to work by color.
                         ManaCostBeingPaid reduced = new ManaCostBeingPaid(ab.getPayCosts().getCostMana().getManaCostFor(ab), ab.getPayCosts().getCostMana().getRestriction());
                         reduced.decreaseShard(ManaCostShard.GENERIC, untappingCards.size());
-                        if (ComputerUtilMana.canPayManaCost(reduced, ab, ai)) {
+                        if (ComputerUtilMana.canPayManaCost(reduced, ab, ai, false)) {
                             CardCollection manaLandsTapped = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
                                     Predicates.and(Presets.LANDS_PRODUCING_MANA, Presets.TAPPED));
                             manaLandsTapped = CardLists.filter(manaLandsTapped, new Predicate<Card>() {
@@ -400,7 +400,7 @@ public class UntapAi extends SpellAbilityAi {
                             Card landToPool = manaLands.getFirst();
                             SpellAbility manaAb = landToPool.getManaAbilities().getFirst();
 
-                            ComputerUtil.playNoStack(ai, manaAb, game);
+                            ComputerUtil.playNoStack(ai, manaAb, game, false);
 
                             return true;
                         }

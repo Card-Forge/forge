@@ -4,7 +4,7 @@
     <artifactId>forge</artifactId>
     <packaging>pom</packaging>
     <name>Forge Parent</name>
-    <version>1.6.47-SNAPSHOT</version>
+    <version>1.6.48-SNAPSHOT</version>
 
     <description>
         Forge lets you play the card game Magic: The Gathering against a computer opponent using all of the rules.
@@ -312,4 +312,18 @@
 
     </build>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>1.2.9</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>1.2.9</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

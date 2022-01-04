@@ -519,7 +519,7 @@ public abstract class SpellAbilityEffect {
 
             String valid = sa.getParamOrDefault("ReplaceDyingValid", "Card.IsRemembered");
 
-            String repeffstr = "Event$ Moved | ValidCard$ " + valid +
+            String repeffstr = "Event$ Moved | ValidLKI$ " + valid +
                     "| Origin$ Battlefield | Destination$ Graveyard " +
                     "| Description$ If that permanent would die this turn, exile it instead.";
             String effect = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ " + zone;
@@ -660,6 +660,9 @@ public abstract class SpellAbilityEffect {
                 if (untilCards.isEmpty()) {
                     return;
                 }
+                Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
+                moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateGraveyard());
                 for (Table.Cell<ZoneType, ZoneType, CardCollection> cell : triggerList.cellSet()) {
                     for (Card c : cell.getValue()) {
                         // check if card is still in the until host leaves play list
@@ -672,7 +675,7 @@ public abstract class SpellAbilityEffect {
                             continue;
                         }
                         // no cause there?
-                        Card movedCard = game.getAction().moveTo(cell.getRowKey(), newCard, null);
+                        Card movedCard = game.getAction().moveTo(cell.getRowKey(), newCard, 0, null, moveParams);
                         untilTable.put(cell.getColumnKey(), cell.getRowKey(), movedCard);
                     }
                 }
@@ -682,13 +685,13 @@ public abstract class SpellAbilityEffect {
         };
     }
 
-    protected static void discard(SpellAbility sa, CardZoneTable table, Map<Player, CardCollectionView> discardedMap) {
+    protected static void discard(SpellAbility sa, CardZoneTable table, final boolean effect, Map<Player, CardCollectionView> discardedMap) {
         Set<Player> discarders = discardedMap.keySet();
         for (Player p : discarders) {
             final CardCollection discardedByPlayer = new CardCollection();
             for (Card card : Lists.newArrayList(discardedMap.get(p))) { // without copying will get concurrent modification exception
                 if (card == null) { continue; }
-                if (p.discard(card, sa, table) != null) {
+                if (p.discard(card, sa, effect, table) != null) {
                     discardedByPlayer.add(card);
 
                     if (sa.hasParam("RememberDiscarded")) {

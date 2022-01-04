@@ -43,7 +43,6 @@ public class GameView extends TrackableObject {
 
         set(TrackableProperty.GameLog, game.getGameLog());
         set(TrackableProperty.NumPlayedGamesInMatch, game.getMatch().getOutcomes().size());
-
     }
 
     public Match getMatch() {

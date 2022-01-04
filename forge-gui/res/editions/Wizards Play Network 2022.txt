@@ -1,0 +1,11 @@
+[metadata]
+Code=PW22
+Date=2022-03-05
+Name=Wizards Play Network 2022
+Type=Promo
+ScryfallCode=PW22
+
+[cards]
+1 R Consider @Zezhou Chen
+2 R Fateful Absence @Eric Deschamps
+3 M Atsushi, the Blazing Sky @Victor Adame Minguez

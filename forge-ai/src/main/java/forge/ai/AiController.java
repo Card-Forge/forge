@@ -276,7 +276,7 @@ public class AiController {
                 }
                 rightapi = true;
                 if (!(exSA instanceof AbilitySub)) {
-                    if (!ComputerUtilCost.canPayCost(exSA, player)) {
+                    if (!ComputerUtilCost.canPayCost(exSA, player, true)) {
                         return false;
                     }
                 }
@@ -648,7 +648,7 @@ public class AiController {
             // Ideally this should cast canPlaySa to determine that the AI is truly able/willing to cast a spell,
             // but that is currently difficult to implement due to various side effects leading to stack overflow.
             Card host = sa.getHostCard();
-            if (!ComputerUtil.castPermanentInMain1(player, sa) && host != null && !host.isLand() && ComputerUtilCost.canPayCost(sa, player)) {
+            if (!ComputerUtil.castPermanentInMain1(player, sa) && host != null && !host.isLand() && ComputerUtilCost.canPayCost(sa, player, false)) {
                 if (sa instanceof SpellPermanent) {
                     return sa;
                 }
@@ -744,7 +744,7 @@ public class AiController {
         int oldCMC = -1;
         boolean xCost = sa.costHasX() || sa.getHostCard().hasStartOfKeyword("Strive");
         if (!xCost) {
-            if (!ComputerUtilCost.canPayCost(sa, player)) {
+            if (!ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
                 // for most costs, it's OK to check if they can be paid early in order to avoid running a heavy API check
                 // when the AI won't even be able to play the spell in the first place (even if it could afford it)
                 return AiPlayDecision.CantAfford;
@@ -782,7 +782,7 @@ public class AiController {
                     Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
                     if (wardCost.hasManaCost()) {
                         amount = wardCost.getTotalMana().getCMC();
-                        if (amount > 0 && !ComputerUtilCost.canPayCost(sa, player)) {
+                        if (amount > 0 && !ComputerUtilCost.canPayCost(sa, player, true)) {
                             return AiPlayDecision.CantAfford;
                         }
                     }
@@ -808,7 +808,7 @@ public class AiController {
             }
         }
 
-        if (xCost && !ComputerUtilCost.canPayCost(sa, player)) {
+        if (xCost && !ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
             // for dependent costs with X, e.g. Repeal, which require a valid target to be specified before a decision can be made
             // on whether the cost can be paid, this can only be checked late after canPlaySa has been run (or the AI will misplay)
             return AiPlayDecision.CantAfford;
@@ -871,7 +871,7 @@ public class AiController {
                 if (mana != null) {
                     if (mana.countX() > 0) {
                         // Set PayX here to maximum value.
-                        final int xPay = ComputerUtilCost.getMaxXValue(sa, player);
+                        final int xPay = ComputerUtilCost.getMaxXValue(sa, player, sa.isTrigger());
                         if (xPay <= 0) {
                             return AiPlayDecision.CantAffordX;
                         }
@@ -2146,10 +2146,10 @@ public class AiController {
         return library;
     } // smoothComputerManaCurve()
 
-    public int chooseNumber(SpellAbility sa, String title,List<Integer> options, Player relatedPlayer) {
+    public int chooseNumber(SpellAbility sa, String title, List<Integer> options, Player relatedPlayer) {
         switch(sa.getApi())
         {
-            case SetLife:
+            case SetLife: // Reverse the Sands
                 if (relatedPlayer.equals(sa.getHostCard().getController())) {
                     return Collections.max(options);
                 } else if (relatedPlayer.isOpponentOf(sa.getHostCard().getController())) {
@@ -2310,11 +2310,11 @@ public class AiController {
         return null;
     }
 
-    public CardCollectionView chooseSacrificeType(String type, SpellAbility ability, int amount, final CardCollectionView exclude) {
+    public CardCollectionView chooseSacrificeType(String type, SpellAbility ability, boolean effect, int amount, final CardCollectionView exclude) {
         if (simPicker != null) {
-            return simPicker.chooseSacrificeType(type, ability, amount, exclude);
+            return simPicker.chooseSacrificeType(type, ability, effect, amount, exclude);
         }
-        return ComputerUtil.chooseSacrificeType(player, type, ability, ability.getTargetCard(), amount, exclude);
+        return ComputerUtil.chooseSacrificeType(player, type, ability, ability.getTargetCard(), effect, amount, exclude);
     }
 
     private boolean checkAiSpecificRestrictions(final SpellAbility sa) {

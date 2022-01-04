@@ -93,14 +93,14 @@ public class ForgeScript {
             return !cardState.getTypeWithChanges().hasSubtype(subType);
         } else if (property.equals("hasActivatedAbilityWithTapCost")) {
             for (final SpellAbility sa : cardState.getSpellAbilities()) {
-                if (sa.isAbility() && sa.getPayCosts().hasTapCost()) {
+                if (sa.isActivatedAbility() && sa.getPayCosts().hasTapCost()) {
                     return true;
                 }
             }
             return false;
         } else if (property.equals("hasActivatedAbility")) {
             for (final SpellAbility sa : cardState.getSpellAbilities()) {
-                if (sa.isAbility()) {
+                if (sa.isActivatedAbility()) {
                     return true;
                 }
             }
@@ -116,8 +116,8 @@ public class ForgeScript {
             }
             return false;
         } else if (property.equals("hasNonManaActivatedAbility")) {
-            for (final SpellAbility sa : cardState.getSpellAbilities()) {
-                if (sa.isAbility() && !sa.isManaAbility()) {
+            for (final SpellAbility sa : cardState.getNonManaAbilities()) {
+                if (sa.isActivatedAbility()) {
                     return true;
                 }
             }
@@ -170,6 +170,8 @@ public class ForgeScript {
             return sa.isBoast();
         } else if (property.equals("Mutate")) {
             return sa.isMutate();
+        } else if (property.equals("Ninjutsu")) {
+            return sa.isNinjutsu();
         } else if (property.equals("Foretelling")) {
             return sa.isForetelling();
         } else if (property.equals("Foretold")) {

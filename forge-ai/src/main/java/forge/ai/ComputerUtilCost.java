@@ -73,7 +73,7 @@ public class ComputerUtilCost {
         if (cost == null) {
             return true;
         }
-        final AiCostDecision decision = new AiCostDecision(sa.getActivatingPlayer(), sa);
+        final AiCostDecision decision = new AiCostDecision(sa.getActivatingPlayer(), sa, false);
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostRemoveCounter) {
                 final CostRemoveCounter remCounter = (CostRemoveCounter) part;
@@ -233,7 +233,7 @@ public class ComputerUtilCost {
         return true;
     }
 
-    public static boolean checkForManaSacrificeCost(final Player ai, final Cost cost, final Card source, final SpellAbility sourceAbility) {
+    public static boolean checkForManaSacrificeCost(final Player ai, final Cost cost, final Card source, final SpellAbility sourceAbility, final boolean effect) {
         // TODO cheating via autopay can still happen, need to get the real ai player from controlledBy
         if (cost == null || !ai.isAI()) {
             return true;
@@ -260,7 +260,7 @@ public class ComputerUtilCost {
                         c = AbilityUtils.calculateAmount(source, amount, sourceAbility);
                     }
                     final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-                    CardCollectionView choices = aic.chooseSacrificeType(part.getType(), sourceAbility, c, exclude);
+                    CardCollectionView choices = aic.chooseSacrificeType(part.getType(), sourceAbility, effect, c, exclude);
                     if (choices != null) {
                         list.addAll(choices);
                     }
@@ -523,7 +523,7 @@ public class ComputerUtilCost {
      *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
-    public static boolean canPayCost(final SpellAbility sa, final Player player) {
+    public static boolean canPayCost(final SpellAbility sa, final Player player, final boolean effect) {
         if (sa.getActivatingPlayer() == null) {
             sa.setActivatingPlayer(player); // complaints on NPE had came before this line was added.
         }
@@ -585,7 +585,7 @@ public class ComputerUtilCost {
         if (sa.hasParam("Crew")) {  // put under checkTapTypeCost?
             for (final CostPart part : sa.getPayCosts().getCostParts()) {
                 if (part instanceof CostTapType && part.getType().contains("+withTotalPowerGE")) {
-                    return new AiCostDecision(player, sa).visit((CostTapType)part) != null;
+                    return new AiCostDecision(player, sa, false).visit((CostTapType)part) != null;
                 }
             }
         }
@@ -632,7 +632,7 @@ public class ComputerUtilCost {
             }
         }
 
-        return ComputerUtilMana.canPayManaCost(sa, player, extraManaNeeded)
+        return ComputerUtilMana.canPayManaCost(sa, player, extraManaNeeded, effect)
                 && CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa);
     } // canPayCost()
 
@@ -699,7 +699,7 @@ public class ComputerUtilCost {
                 if (part instanceof CostPayLife) {
                     final CostPayLife lifeCost = (CostPayLife) part;
                     Integer amount = lifeCost.convertAmount();
-                    if (payer.getLife() > (amount + 1) && payer.canPayLife(amount)) {
+                    if (payer.getLife() > (amount + 1) && payer.canPayLife(amount, true, sa)) {
                         final int landsize = payer.getLandsInPlay().size() + 1;
                         for (Card c : payer.getCardsIn(ZoneType.Hand)) {
                             // Check if the AI has enough lands to play the card
@@ -767,7 +767,7 @@ public class ComputerUtilCost {
         return false;
     }
 
-    public static int getMaxXValue(SpellAbility sa, Player ai) {
+    public static int getMaxXValue(SpellAbility sa, Player ai, final boolean effect) {
         final Card source = sa.getHostCard();
         SpellAbility root = sa.getRootAbility();
         final Cost abCost = root.getPayCosts();
@@ -779,7 +779,7 @@ public class ComputerUtilCost {
         Integer val = null;
 
         if (root.costHasManaX()) {
-            val = ComputerUtilMana.determineLeftoverMana(root, ai);
+            val = ComputerUtilMana.determineLeftoverMana(root, ai, effect);
         }
 
         if (sa.usesTargeting()) {
@@ -795,7 +795,7 @@ public class ComputerUtilCost {
             }
         }
 
-        val = ObjectUtils.min(val, abCost.getMaxForNonManaX(root, ai));
+        val = ObjectUtils.min(val, abCost.getMaxForNonManaX(root, ai, false));
 
         if (val != null && val > 0) {
             // filter cost parts for preferences, don't choose X > than possible preferences

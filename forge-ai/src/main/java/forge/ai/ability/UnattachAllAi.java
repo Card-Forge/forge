@@ -30,7 +30,7 @@ public class UnattachAllAi extends SpellAbilityAi {
         }
 
         if (sa.getSVar("X").equals("Count$xPaid")) {
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
 
             if (xPay == 0) {
                 return false;

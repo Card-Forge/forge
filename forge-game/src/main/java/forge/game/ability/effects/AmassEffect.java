@@ -79,14 +79,13 @@ public class AmassEffect extends TokenEffectBase {
 
         GameEntityCounterTable table = new GameEntityCounterTable();
         for (final Card tgtCard : tgtCards) {
-            tgtCard.addCounter(CounterEnumType.P1P1, amount, activator, sa, true, table);
-            game.updateLastStateForCard(tgtCard);
+            tgtCard.addCounter(CounterEnumType.P1P1, amount, activator, table);
 
             if (remember) {
                 card.addRemembered(tgtCard);
             }
         }
-        table.triggerCountersPutAll(game);
+        table.replaceCounterEffect(game, sa, true);
     }
 
 }

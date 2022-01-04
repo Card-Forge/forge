@@ -434,8 +434,8 @@ public class ReplacementHandler {
     private void getPossibleReplaceDamageList(PlayerCollection players, final boolean isCombat, final CardDamageMap damageMap, final SpellAbility cause) {
         for (Map.Entry<GameEntity, Map<Card, Integer>> et : damageMap.columnMap().entrySet()) {
             final GameEntity target = et.getKey();
-            int playerIndex = (target instanceof Player ? players.indexOf(((Player) target)) :
-                                players.indexOf(((Card) target).getController()));
+            int playerIndex = target instanceof Player ? players.indexOf(((Player) target)) :
+                                players.indexOf(((Card) target).getController());
             if (playerIndex == -1) continue;
             Map<ReplacementEffect, List<Map<AbilityKey, Object>>> replaceCandidateMap = replaceDamageList.get(playerIndex);
             for (Map.Entry<Card, Integer> e : et.getValue().entrySet()) {
@@ -501,8 +501,8 @@ public class ReplacementHandler {
                 Map<ReplacementEffect, List<Map<AbilityKey, Object>>> newReplaceCandidateMap = replaceCandidateMap;
                 if (!target.equals(newTarget)) {
                     PlayerCollection players = game.getPlayersInTurnOrder();
-                    int playerIndex = (newTarget instanceof Player ? players.indexOf(((Player) newTarget)) :
-                                       players.indexOf(((Card) newTarget).getController()));
+                    int playerIndex = newTarget instanceof Player ? players.indexOf(((Player) newTarget)) :
+                                       players.indexOf(((Card) newTarget).getController());
                     newReplaceCandidateMap = replaceDamageList.get(playerIndex);
                 }
 
@@ -617,8 +617,8 @@ public class ReplacementHandler {
 
             Map<String, String> mapParams = re.getMapParams();
             boolean isPrevention = (mapParams.containsKey("Prevent") && mapParams.get("Prevent").equals("True")) || mapParams.containsKey("PreventionEffect");
-            boolean executePerSource = (mapParams.containsKey("ExecuteMode") && mapParams.get("ExecuteMode").equals("PerSource"));
-            boolean executePerTarget = (mapParams.containsKey("ExecuteMode") && mapParams.get("ExecuteMode").equals("PerTarget"));
+            boolean executePerSource = mapParams.containsKey("ExecuteMode") && mapParams.get("ExecuteMode").equals("PerSource");
+            boolean executePerTarget = mapParams.containsKey("ExecuteMode") && mapParams.get("ExecuteMode").equals("PerTarget");
 
             while (!executedParamList.isEmpty()) {
                 Map<AbilityKey, Object> runParams = AbilityKey.newMap();
@@ -660,8 +660,8 @@ public class ReplacementHandler {
                 }
 
                 if (damageSum > 0) {
-                    runParams.put(AbilityKey.DamageSource, (damageSourceList.size() > 1 ? damageSourceList : damageSourceList.get(0)));
-                    runParams.put(AbilityKey.Affected, (affectedList.size() > 1 ? affectedList : affectedList.get(0)));
+                    runParams.put(AbilityKey.DamageSource, damageSourceList.size() > 1 ? damageSourceList : damageSourceList.get(0));
+                    runParams.put(AbilityKey.Affected, affectedList.size() > 1 ? affectedList : affectedList.get(0));
                     runParams.put(AbilityKey.DamageAmount, damageSum);
 
                     re.setReplacingObjects(runParams, re.getOverridingAbility());

@@ -1,8 +1,7 @@
 Name:Dimir Locket
 ManaCost:3
 Types:Artifact
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
-A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ Mana | Cost$ T | Produced$ Combo U B | SpellDescription$ Add {U} or {B}.
 DeckNeeds:Color$Blue | Black
 A:AB$ Draw | Cost$ UB UB UB UB T Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.
 AI:RemoveDeck:Random

@@ -425,6 +425,11 @@ FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 401 U Magic Missile @PINDURSKI
 402 U Prosperous Innkeeper @Eric Deschamps
 
+[rebalanced]
+A53 M A-Demilich @Daniel Zrom
+A81 U A-Wizard Class @Marta Nael
+A180 U A-Druid Class @Svetlin Velinov
+
 [dungeons]
 S Dungeon of the Mad Mage
 S Lost Mine of Phandelver

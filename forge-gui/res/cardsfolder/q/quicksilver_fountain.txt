@@ -8,4 +8,5 @@ SVar:FountainStatic:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRe
 T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Land.nonIsland | PresentCompare$ EQ0 | TriggerZones$ Battlefield | Execute$ TrigRemoveAll | TriggerDescription$ At the beginning of each end step, if all lands on the battlefield are Islands, remove all flood counters from them.
 SVar:TrigRemoveAll:DB$ RemoveCounterAll | ValidCards$ Land | CounterType$ FLOOD | AllCounters$ True
 AI:RemoveDeck:Random
+DeckHints:Color$Blue
 Oracle:At the beginning of each player's upkeep, that player puts a flood counter on target non-Island land they control of their choice. That land is an Island for as long as it has a flood counter on it.\nAt the beginning of each end step, if all lands on the battlefield are Islands, remove all flood counters from them.

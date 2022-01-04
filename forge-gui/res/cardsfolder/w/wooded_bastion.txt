@@ -2,9 +2,6 @@ Name:Wooded Bastion
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Mana | Cost$ GW T | Produced$ W | Amount$ 2 | SpellDescription$ Add {W}{W}.
-A:AB$ Mana | Cost$ GW T | Produced$ G W | SpellDescription$ Add {G}{W}.
-A:AB$ Mana | Cost$ GW T | Produced$ G | Amount$ 2 | SpellDescription$ Add {G}{G}.
+A:AB$ Mana | Cost$ GW T | Produced$ Combo G W | Amount$ 2 | SpellDescription$ Add {G}{G}, {G}{W}, or {W}{W}.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wooded_bastion.jpg
 Oracle:{T}: Add {C}.\n{G/W}, {T}: Add {G}{G}, {G}{W}, or {W}{W}.

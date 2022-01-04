@@ -124,7 +124,7 @@ public class DestroyAi extends SpellAbilityAi {
             // If there's X in payment costs and it's tied to targeting, make sure we set the XManaCostPaid first
             // (e.g. Heliod's Intervention)
             if ("X".equals(sa.getTargetRestrictions().getMinTargets()) && sa.getSVar("X").equals("Count$xPaid")) {
-                int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+                int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
                 sa.getRootAbility().setXManaCostPaid(xPay);
             }
 
@@ -139,7 +139,7 @@ public class DestroyAi extends SpellAbilityAi {
 
             if (sa.getRootAbility().costHasManaX()) {
                 // TODO: currently the AI will maximize mana spent on X, trying to maximize damage. This may need improvement.
-                maxTargets = ComputerUtilCost.getMaxXValue(sa, ai);
+                maxTargets = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
                 // need to set XPaid to get the right number for
                 sa.getRootAbility().setXManaCostPaid(maxTargets);
                 // need to check for maxTargets
@@ -179,14 +179,14 @@ public class DestroyAi extends SpellAbilityAi {
                     public boolean apply(final Card c) {
                         //Check for cards that can be sacrificed in response
                         for (final SpellAbility ability : c.getAllSpellAbilities()) {
-                            if (ability.isAbility()) {
+                            if (ability.isActivatedAbility()) {
                                 final Cost cost = ability.getPayCosts();
                                 for (final CostPart part : cost.getCostParts()) {
                                     if (!(part instanceof CostSacrifice)) {
                                         continue;
                                     }
                                     CostSacrifice sacCost = (CostSacrifice) part;
-                                    if (sacCost.payCostFromSource() && ComputerUtilCost.canPayCost(ability, c.getController())) {
+                                    if (sacCost.payCostFromSource() && ComputerUtilCost.canPayCost(ability, c.getController(), false)) {
                                         return false;
                                     }
                                 }

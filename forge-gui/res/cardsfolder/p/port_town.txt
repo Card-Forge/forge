@@ -1,9 +1,7 @@
 Name:Port Town
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ Mana | Cost$ T | Produced$ Combo W U | SpellDescription$ Add {W} or {U}.
 K:ETBReplacement:Other:DBTap
 SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Plains,Island/Plains or Island> | UnlessPayer$ You | StackDescription$ enters the battlefield tapped. | SpellDescription$ As CARDNAME enters the battlefield, you may reveal a Plains or Island card from your hand. If you don't, CARDNAME enters the battlefield tapped.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/port_town.jpg
 Oracle:As Port Town enters the battlefield, you may reveal a Plains or Island card from your hand. If you don't, Port Town enters the battlefield tapped.\n{T}: Add {W} or {U}.

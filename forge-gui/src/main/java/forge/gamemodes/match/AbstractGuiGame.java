@@ -156,8 +156,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (gameController == null) {
             if (originalGameControllers.containsKey(player)) {
                 gameControllers.put(player, originalGameControllers.get(player));
-            }
-            else {
+            } else {
                 gameControllers.remove(player);
                 autoPassUntilEndOfTurn.remove(player);
                 final PlayerView currentPlayer = getCurrentPlayer();
@@ -255,10 +254,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private final Set<PlayerView> highlightedPlayers = Sets.newHashSet();
     @Override
     public void setHighlighted(final PlayerView pv, final boolean b) {
-        if (b) {
-            highlightedPlayers.add(pv);
-        } else {
-            highlightedPlayers.remove(pv);
+        final boolean hasChanged = b ? highlightedPlayers.add(pv) : highlightedPlayers.remove(pv);
+        if (hasChanged) {
+            updateLives(Collections.singleton(pv));
         }
     }
 
@@ -764,19 +762,18 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             final String yesButtonText, final String noButtonText) {
         return showConfirmDialog(message, title, yesButtonText, noButtonText, true);
     }
-    
+
     @Override
     public void notifyStackAddition(GameEventSpellAbilityCast event) { 
     }
-    
+
     @Override
     public void notifyStackRemoval(GameEventSpellRemovedFromStack event) {
     }
     
     @Override
     public void handleLandPlayed(Card land) {
-    }  
-
+    }
 
     @Override
     public void afterGameEnd() {

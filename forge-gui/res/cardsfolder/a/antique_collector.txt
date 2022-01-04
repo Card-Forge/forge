@@ -1,0 +1,16 @@
+Name:Antique Collector
+ManaCost:1 G
+Types:Creature Human Rogue
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When CARDNAME enters the battlefield, creatures you control perpetually gain "When this creature dies, you may shuffle it into its owner's library if it's in your graveyard. If you do, investigate."
+SVar:TrigEffect:DB$ Effect | RememberObjects$ Valid Creature.YouCtrl | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Triggers$ Update | Name$ Antique Collector's Perpetual Effect
+SVar:PerpetualAbility:Mode$ Continuous | Affected$ Card.IsRemembered | AddTrigger$ DiesTrigger | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Creatures you control perpetually gain "When this creature dies, you may shuffle it into its owner's library if it's in your graveyard. If you do, investigate."
+SVar:DiesTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigShuffle | OptionalDecider$ You | TriggerDescription$ When this creature dies, you may shuffle it into its owner's library if it's in your graveyard. If you do, investigate.
+SVar:TrigShuffle:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ TriggeredNewCardLKICopy | RememberChanged$ True | SubAbility$ DBInvestigate
+SVar:DBInvestigate:DB$ Investigate | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+DeckHas:Ability$Investigate & Ability$Token
+Oracle:Antique Collector can't be blocked by creatures with power 2 or less.\nWhen Antique Collector enters the battlefield, creatures you control perpetually gain "When this creature dies, you may shuffle it into its owner's library if it's in your graveyard. If you do, investigate."

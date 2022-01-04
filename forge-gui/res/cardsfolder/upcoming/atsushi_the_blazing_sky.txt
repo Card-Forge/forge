@@ -1,0 +1,15 @@
+Name:Atsushi, the Blazing Sky
+ManaCost:2 R R
+Types:Legendary Creature Dragon Spirit
+PT:4/4
+K:Flying
+K:Trample
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ ExileTwo,CreateTreasure
+SVar:ExileTwo:DB$ Dig | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | Imprint$ True | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Exile the top two cards of your library.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn | StackDescription$ SpellDescription | SpellDescription$ Until the end of your next turn, you may play those cards.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play the exiled cards.
+SVar:CreateTreasure:DB$ Token | TokenAmount$ 3 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Create three Treasure tokens.
+DeckHas:Ability$Token
+Oracle:Flying, trample\nWhen Atsushi, the Blazing Sky dies, choose one —\n• Exile the top two cards of your library. Until the end of your next turn, you may play those cards.\n• Create three Treasure tokens.

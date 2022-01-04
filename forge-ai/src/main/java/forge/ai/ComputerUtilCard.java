@@ -42,7 +42,6 @@ import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
@@ -618,32 +617,32 @@ public class ComputerUtilCard {
     }
 
     public static boolean canBeKilledByRoyalAssassin(final Player ai, final Card card) {
-    	boolean wasTapped = card.isTapped();
-    	for (Player opp : ai.getOpponents()) {
-    		for (Card c : opp.getCardsIn(ZoneType.Battlefield)) {
-    			for (SpellAbility sa : c.getSpellAbilities()) {
+        boolean wasTapped = card.isTapped();
+        for (Player opp : ai.getOpponents()) {
+            for (Card c : opp.getCardsIn(ZoneType.Battlefield)) {
+                for (SpellAbility sa : c.getSpellAbilities()) {
                     if (sa.getApi() != ApiType.Destroy) {
                         continue;
                     }
-                    if (!ComputerUtilCost.canPayCost(sa, opp)) {
+                    if (!ComputerUtilCost.canPayCost(sa, opp, sa.isTrigger())) {
                         continue;
                     }
                     sa.setActivatingPlayer(opp);
                     if (sa.canTarget(card)) {
-                    	continue;
+                        continue;
                     }
                     // check whether the ability can only target tapped creatures
-                	card.setTapped(true);
+                    card.setTapped(true);
                     if (!sa.canTarget(card)) {
-                    	card.setTapped(wasTapped);
-                    	continue;
+                        card.setTapped(wasTapped);
+                        continue;
                     }
-                	card.setTapped(wasTapped);
+                    card.setTapped(wasTapped);
                     return true;
-    			}
-    		}
-    	}
-    	return false;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -1152,7 +1151,7 @@ public class ComputerUtilCard {
         if (c.isEquipped()) {
             valueTempo *= 2;
         }
-        if (SpellAbilityAi.isSorcerySpeed(sa)) {
+        if (SpellAbilityAi.isSorcerySpeed(sa, ai)) {
             valueTempo *= 2;    //sorceries have less usage opportunities
         }
         if (!c.canBeDestroyed()) {
@@ -1330,7 +1329,7 @@ public class ComputerUtilCard {
         // will the creature attack (only relevant for sorcery speed)?
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && phase.isPlayerTurn(ai)
-                && (SpellAbilityAi.isSorcerySpeed(sa) || main1Preferred)
+                && (SpellAbilityAi.isSorcerySpeed(sa, ai) || main1Preferred)
                 && power > 0
                 && doesCreatureAttackAI(ai, c)) {
             return true;
@@ -1398,7 +1397,7 @@ public class ComputerUtilCard {
                 for (SpellAbility ab : c.getSpellAbilities()) {
                     Cost abCost = ab.getPayCosts();
                     if (abCost != null && abCost.hasTapCost()
-                            && (!abCost.hasManaCost() || ComputerUtilMana.canPayManaCost(ab, ai, 0))) {
+                            && (!abCost.hasManaCost() || ComputerUtilMana.canPayManaCost(ab, ai, 0, false))) {
                         nonCombatChance += 0.5f;
                         break;
                     }
@@ -1691,10 +1690,7 @@ public class ComputerUtilCard {
         if (!hiddenKws.isEmpty()) {
             pumped.addHiddenExtrinsicKeywords(timestamp, 0, hiddenKws);
         }
-        Set<CounterType> types = c.getCounters().keySet();
-        for (CounterType ct : types) {
-            pumped.addCounterFireNoEvents(ct, c.getCounters(ct), ai, sa, true, null);
-        }
+        pumped.setCounters(c.getCounters());
         //Copies tap-state and extra keywords (auras, equipment, etc.) 
         if (c.isTapped()) {
             pumped.setTapped(true);

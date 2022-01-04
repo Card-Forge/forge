@@ -315,7 +315,6 @@ public class ControlGainAi extends SpellAbilityAi {
         } else {
             return this.canPlayAI(ai, sa);
         }
-
     } // pumpDrawbackAI()
 
     @Override

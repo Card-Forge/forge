@@ -30,6 +30,7 @@ import forge.game.GameStage;
 import forge.game.GameType;
 import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityKey;
+import forge.game.ability.effects.AddTurnEffect;
 import forge.game.ability.effects.SkipPhaseEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -301,10 +302,10 @@ public class PhaseHandler implements java.io.Serializable {
                         // all Saga get Lore counter at the begin of pre combat
                         for (Card c : playerTurn.getCardsIn(ZoneType.Battlefield)) {
                             if (c.getType().hasSubtype("Saga")) {
-                                c.addCounter(CounterEnumType.LORE, 1, playerTurn, null, false, table);
+                                c.addCounter(CounterEnumType.LORE, 1, playerTurn, table);
                             }
                         }
-                        table.triggerCountersPutAll(game);
+                        table.replaceCounterEffect(game, null, false);
                     }
                     break;
 
@@ -399,7 +400,7 @@ public class PhaseHandler implements java.io.Serializable {
                         final CardCollection discarded = new CardCollection();
                         boolean firstDiscarded = playerTurn.getNumDiscardedThisTurn() == 0;
                         for (Card c : playerTurn.getController().chooseCardsToDiscardToMaximumHandSize(numDiscard)) {
-                            if (playerTurn.discard(c, null, table) != null) {
+                            if (playerTurn.discard(c, null, false, table) != null) {
                                 discarded.add(c);
                             }
                         }
@@ -429,6 +430,7 @@ public class PhaseHandler implements java.io.Serializable {
                     for (Player player : game.getPlayers()) {
                         player.getController().autoPassCancel(); // autopass won't wrap to next turn
                     }
+                    // TODO can probably be removed now that onCleanupPhase is done for all Registered
                     for (Player player : game.getLostPlayers()) {
                         player.clearAssignedDamage();
                     }
@@ -898,7 +900,7 @@ public class PhaseHandler implements java.io.Serializable {
                 SkipPhaseEffect.createSkipPhaseEffect(extraTurn.getSkipUntapSA(), nextPlayer, null, null, "Untap");
             }
             if (extraTurn.isCantSetSchemesInMotion()) {
-                nextPlayer.addKeyword("Schemes can't be set in motion this turn.");
+                AddTurnEffect.createCantSetSchemesInMotionEffect(extraTurn.getCantSetSchemesInMotionSA());
             }
         }
         return nextPlayer;

@@ -94,7 +94,7 @@ public class DigAi extends SpellAbilityAi {
                     manaToSave = Integer.parseInt(TextUtil.split(sa.getParam("AILogic"), '.')[1]);
                 }
 
-                int numCards = ComputerUtilCost.getMaxXValue(sa, ai) - manaToSave;
+                int numCards = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger()) - manaToSave;
                 if (numCards <= 0) {
                     return false;
                 }
@@ -108,7 +108,7 @@ public class DigAi extends SpellAbilityAi {
 
         if ((!game.getPhaseHandler().getNextTurn().equals(ai)
                 || game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
-            && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)
+            && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa, ai)
             && (ai.getCardsIn(ZoneType.Hand).size() > 1 || game.getPhaseHandler().getPhase().isBefore(PhaseType.DRAW))
             && !ComputerUtil.activateForCost(sa, ai)) {
         	return false;
@@ -144,7 +144,7 @@ public class DigAi extends SpellAbilityAi {
         // Triggers that ask to pay {X} (e.g. Depala, Pilot Exemplar).
         if (sa.hasParam("AILogic") && sa.getParam("AILogic").startsWith("PayXButSaveMana")) {
             int manaToSave = Integer.parseInt(TextUtil.split(sa.getParam("AILogic"), '.')[1]);
-            int numCards = ComputerUtilCost.getMaxXValue(sa, ai) - manaToSave;
+            int numCards = ComputerUtilCost.getMaxXValue(sa, ai, true) - manaToSave;
             if (numCards <= 0) {
                 return mandatory;
             }

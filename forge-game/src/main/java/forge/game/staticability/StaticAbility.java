@@ -41,7 +41,6 @@ import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
@@ -235,6 +234,12 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         this(parseParams(params, host), host, state);
     }
 
+    public static StaticAbility create(final String params, final Card host, CardState state, boolean intrinsic) {
+        StaticAbility st = new StaticAbility(params, state.getCard(), state);
+        st.setIntrinsic(intrinsic);
+        return st;
+    }
+
     /**
      * Instantiates a new static ability.
      *
@@ -284,51 +289,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         return getParam("Mode").equals("Continuous") && layers.contains(layer) && !isSuppressed() && checkConditions() && (previousRun || getHostCard().getStaticAbilities().contains(this));
     }
 
-    /**
-     * Apply ability.
-     *
-     * @param mode
-     *            the mode
-     * @param card
-     *            the card
-     * @param spellAbility
-     *            the ability
-     * @return true, if successful
-     */
-    public final boolean applyAbility(final String mode, final Card card, final SpellAbility spellAbility) {
-        // don't apply the ability if it hasn't got the right mode
-        if (!getParam("Mode").equals(mode)) {
-            return false;
-        }
-
-        if (this.isSuppressed() || !this.checkConditions()) {
-            return false;
-        }
-
-        if (mode.equals("CantTarget")) {
-            return StaticAbilityCantTarget.applyCantTargetAbility(this, card, spellAbility);
-        }
-
-        return false;
-    }
-
-    public final boolean applyAbility(final String mode, final Player player, final SpellAbility spellAbility) {
-        // don't apply the ability if it hasn't got the right mode
-        if (!getParam("Mode").equals(mode)) {
-            return false;
-        }
-
-        if (this.isSuppressed() || !this.checkConditions()) {
-            return false;
-        }
-
-        if (mode.equals("CantTarget")) {
-            return StaticAbilityCantTarget.applyCantTargetAbility(this, player, spellAbility);
-        }
-
-        return false;
-    }
-
     public final boolean applyAbility(final String mode, final Card card, final boolean isCombat) {
         // don't apply the ability if it hasn't got the right mode
         if (!getParam("Mode").equals(mode)) {
@@ -371,8 +331,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             return StaticAbilityCantAttackBlock.applyCantAttackAbility(this, card, target);
         } else if (mode.equals("CantBlockBy") && target instanceof Card) {
             return StaticAbilityCantAttackBlock.applyCantBlockByAbility(this, card, (Card)target);
-        } else if (mode.equals("CantAttach")) {
-            return StaticAbilityCantAttach.applyCantAttachAbility(this, card, target);
         } else if (mode.equals("CanAttackIfHaste")) {
             return StaticAbilityCantAttackBlock.applyCanAttackHasteAbility(this, card, target);
         }

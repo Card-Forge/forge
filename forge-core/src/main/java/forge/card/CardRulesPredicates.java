@@ -42,8 +42,7 @@ public final class CardRulesPredicates {
         }
     };
 
-    // Static builder methods - they choose concrete implementation by
-    // themselves
+    // Static builder methods - they choose concrete implementation by themselves
     /**
      * Cmc.
      *

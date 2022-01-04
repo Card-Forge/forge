@@ -1,9 +1,6 @@
 package forge.game.staticability;
 
-import com.google.common.collect.Iterables;
-
 import forge.game.Game;
-import forge.game.GameObjectPredicates;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.player.Player;
@@ -72,7 +69,6 @@ public class StaticAbilityCastWithFlash {
     }
 
     public static boolean applyWithFlashAbility(final StaticAbility stAb, final SpellAbility sa, final Card card, final Player activator) {
-        final Card hostCard = stAb.getHostCard();
 
         if (!commonParts(stAb, sa, card, activator)) {
             return false;
@@ -83,8 +79,7 @@ public class StaticAbilityCastWithFlash {
                 return false;
             }
 
-            String[] valids = stAb.getParam("Targeting").split(",");
-            if (!Iterables.any(sa.getTargets(), GameObjectPredicates.restriction(valids, hostCard.getController(), hostCard, stAb))) {
+            if (!stAb.matchesValidParam("Targeting", sa.getTargets())) {
                 return false;
             }
         }

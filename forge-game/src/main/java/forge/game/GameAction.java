@@ -162,10 +162,10 @@ public class GameAction {
             if (Iterables.any(game.getPlayers(), PlayerPredicates.canBeAttached(c))) {
                 found = true;
             }
-            if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateBattlefield), CardPredicates.canBeAttached(c))) {
+            else if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateBattlefield), CardPredicates.canBeAttached(c))) {
                 found = true;
             }
-            if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateGraveyard), CardPredicates.canBeAttached(c))) {
+            else if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateGraveyard), CardPredicates.canBeAttached(c))) {
                 found = true;
             }
             if (!found) {
@@ -275,6 +275,7 @@ public class GameAction {
                     copied.setChangedCardTypesCharacterDefining(c.getChangedCardTypesCharacterDefiningTable());
                     copied.setChangedCardNames(c.getChangedCardNames());
                     copied.setChangedCardTraits(c.getChangedCardTraits());
+                    copied.setDrawnThisTurn(c.getDrawnThisTurn());
 
                     copied.copyChangedTextFrom(c);
                     copied.setTimestamp(c.getTimestamp());
@@ -571,7 +572,7 @@ public class GameAction {
         game.getTriggerHandler().registerActiveLTBTrigger(lastKnownInfo);
         game.getTriggerHandler().registerActiveTrigger(copied, false);
 
-        table.triggerCountersPutAll(game);
+        table.replaceCounterEffect(game, null, true);
 
         // play the change zone sound
         game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
@@ -698,15 +699,35 @@ public class GameAction {
     public final Card moveTo(final Zone zoneTo, Card c, SpellAbility cause) {
         return moveTo(zoneTo, c, cause, null);
     }
-
-    public final Card moveTo(final Zone zoneTo, Card c, Integer position, SpellAbility cause) {
-        return moveTo(zoneTo, c, position, cause, null);
-    }
-
     public final Card moveTo(final Zone zoneTo, Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
         // FThreads.assertExecutedByEdt(false); // This code must never be executed from EDT,
         // use FThreads.invokeInNewThread to run code in a pooled thread
         return moveTo(zoneTo, c, null, cause, params);
+    }
+    public final Card moveTo(final Zone zoneTo, Card c, Integer position, SpellAbility cause) {
+        return moveTo(zoneTo, c, position, cause, null);
+    }
+
+    public final Card moveTo(final ZoneType name, final Card c, SpellAbility cause) {
+        return moveTo(name, c, 0, cause);
+    }
+    public final Card moveTo(final ZoneType name, final Card c, final int libPosition, SpellAbility cause) {
+        return moveTo(name, c, libPosition, cause, null);
+    }
+    public final Card moveTo(final ZoneType name, final Card c, final int libPosition, SpellAbility cause, Map<AbilityKey, Object> params) {
+        // Call specific functions to set PlayerZone, then move onto moveTo
+        switch(name) {
+            case Hand:          return moveToHand(c, cause, params);
+            case Library:       return moveToLibrary(c, libPosition, cause, params);
+            case Battlefield:   return moveToPlay(c, c.getController(), cause, params);
+            case Graveyard:     return moveToGraveyard(c, cause, params);
+            case Exile:         return exile(c, cause, params);
+            case Stack:         return moveToStack(c, cause, params);
+            case PlanarDeck:    return moveToVariantDeck(c, ZoneType.PlanarDeck, libPosition, cause, params);
+            case SchemeDeck:    return moveToVariantDeck(c, ZoneType.SchemeDeck, libPosition, cause, params);
+            default: // sideboard will also get there
+                return moveTo(c.getOwner().getZone(name), c, cause);
+        }
     }
 
     private Card moveTo(final Zone zoneTo, Card c, Integer position, SpellAbility cause, Map<AbilityKey, Object> params) {
@@ -786,6 +807,161 @@ public class GameAction {
         return c;
     }
 
+    public final Card moveToStack(final Card c, SpellAbility cause) {
+        return moveToStack(c, cause, null);
+    }
+    public final Card moveToStack(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
+        Card result = moveTo(game.getStackZone(), c, cause, params);
+        if (cause != null && cause.isSpell() && result.equals(cause.getHostCard())) {
+            result.setSplitStateToPlayAbility(cause);
+
+            // CR 112.2 A spell’s controller is, by default, the player who put it on the stack.
+            result.setController(cause.getActivatingPlayer(), 0);
+            // for triggers like from Wild-Magic Sorcerer
+            game.getAction().checkStaticAbilities(false);
+            game.getTriggerHandler().resetActiveTriggers();
+        }
+        return result;
+    }
+
+    public final Card moveToGraveyard(final Card c, SpellAbility cause) {
+        return moveToGraveyard(c, cause, null);
+    }
+    public final Card moveToGraveyard(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
+        final PlayerZone grave = c.getOwner().getZone(ZoneType.Graveyard);
+        // must put card in OWNER's graveyard not controller's
+        return moveTo(grave, c, cause, params);
+    }
+
+    public final Card moveToHand(final Card c, SpellAbility cause) {
+        return moveToHand(c, cause, null);
+    }
+    public final Card moveToHand(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
+        final PlayerZone hand = c.getOwner().getZone(ZoneType.Hand);
+        return moveTo(hand, c, cause, params);
+    }
+
+    public final Card moveToPlay(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
+        return moveToPlay(c, c.getController(), cause, params);
+    }
+    public final Card moveToPlay(final Card c, final Player p, SpellAbility cause, Map<AbilityKey, Object> params) {
+        // move to a specific player's Battlefield
+        final PlayerZone play = p.getZone(ZoneType.Battlefield);
+        return moveTo(play, c, cause, params);
+    }
+
+    public final Card moveToBottomOfLibrary(final Card c, SpellAbility cause) {
+        return moveToBottomOfLibrary(c, cause, null);
+    }
+    public final Card moveToBottomOfLibrary(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
+        return moveToLibrary(c, -1, cause, params);
+    }
+
+    public final Card moveToLibrary(final Card c, SpellAbility cause) {
+        return moveToLibrary(c, cause, null);
+    }
+    public final Card moveToLibrary(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
+        return moveToLibrary(c, 0, cause, params);
+    }
+    public final Card moveToLibrary(Card c, int libPosition, SpellAbility cause) {
+        return moveToLibrary(c, libPosition, cause, null);
+    }
+    public final Card moveToLibrary(Card c, int libPosition, SpellAbility cause, Map<AbilityKey, Object> params) {
+        final PlayerZone library = c.getOwner().getZone(ZoneType.Library);
+        if (libPosition == -1 || libPosition > library.size()) {
+            libPosition = library.size();
+        }
+        return changeZone(game.getZoneOf(c), library, c, libPosition, cause, params);
+    }
+
+    public final Card moveToVariantDeck(Card c, ZoneType zone, int deckPosition, SpellAbility cause) {
+        return moveToVariantDeck(c, zone, deckPosition, cause, null);
+    }
+    public final Card moveToVariantDeck(Card c, ZoneType zone, int deckPosition, SpellAbility cause, Map<AbilityKey, Object> params) {
+        final PlayerZone deck = c.getOwner().getZone(zone);
+        if (deckPosition == -1 || deckPosition > deck.size()) {
+            deckPosition = deck.size();
+        }
+        return changeZone(game.getZoneOf(c), deck, c, deckPosition, cause, params);
+    }
+
+    public final Card exile(final Card c, SpellAbility cause) {
+        if (c == null) {
+            return null;
+        }
+        return exile(new CardCollection(c), cause).get(0);
+    }
+    public final CardCollection exile(final CardCollection cards, SpellAbility cause) {
+        CardZoneTable table = new CardZoneTable();
+        CardCollection result = new CardCollection();
+        for (Card card : cards) {
+            if (cause != null) {
+                table.put(card.getZone().getZoneType(), ZoneType.Exile, card);
+            }
+            result.add(exile(card, cause, null));
+        }
+        if (cause != null) {
+            table.triggerChangesZoneAll(game, cause);
+        }
+        return result;
+    }
+    public final Card exile(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
+        if (game.isCardExiled(c)) {
+            return c;
+        }
+
+        final Zone origin = c.getZone();
+        final PlayerZone removed = c.getOwner().getZone(ZoneType.Exile);
+        final Card copied = moveTo(removed, c, cause, params);
+
+        // Run triggers
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
+        runParams.put(AbilityKey.Cause, cause);
+        if (origin != null) { // is generally null when adding via dev mode
+            runParams.put(AbilityKey.Origin, origin.getZoneType().name());
+        }
+        if (params != null) {
+            runParams.putAll(params);
+        }
+
+        game.getTriggerHandler().runTrigger(TriggerType.Exiled, runParams, false);
+
+        return copied;
+    }
+
+    public void ceaseToExist(Card c, boolean skipTrig) {
+        if (c.isInZone(ZoneType.Stack)) {
+            c.getGame().getStack().remove(c);
+        }
+        c.getZone().remove(c);
+
+        // CR 603.6c other players LTB triggers should work
+        if (!skipTrig) {
+            game.addChangeZoneLKIInfo(c);
+            CardCollectionView lastBattlefield = game.getLastStateBattlefield();
+            int idx = lastBattlefield.indexOf(c);
+            Card lki = null;
+            if (idx != -1) {
+                lki = lastBattlefield.get(idx);
+            }
+            if (lki == null) {
+                lki = CardUtil.getLKICopy(c);
+            }
+            if (game.getCombat() != null) {
+                game.getCombat().removeFromCombat(c);
+                game.getCombat().saveLKI(lki);
+            }
+            // again, make sure no triggers run from cards leaving controlled by loser
+            if (!lki.getController().equals(lki.getOwner())) {
+                game.getTriggerHandler().registerActiveLTBTrigger(lki);
+            }
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
+            runParams.put(AbilityKey.CardLKI, lki);
+            runParams.put(AbilityKey.Origin, c.getZone().getZoneType().name());
+            game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, false);
+        }
+    }
+
     public final void controllerChangeZoneCorrection(final Card c) {
         System.out.println("Correcting zone for " + c.toString());
         final Zone oldBattlefield = game.getZoneOf(c);
@@ -840,193 +1016,6 @@ public class GameAction {
             ((PlayerZoneBattlefield) p.getZone(ZoneType.Battlefield)).setTriggers(true);
         }
         c.runChangeControllerCommands();
-    }
-
-    public final Card moveToStack(final Card c, SpellAbility cause) {
-        return moveToStack(c, cause, null);
-    }
-
-    public final Card moveToStack(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
-        Card result = moveTo(game.getStackZone(), c, cause, params);
-        if (cause != null && cause.isSpell() && result.equals(cause.getHostCard())) {
-            result.setSplitStateToPlayAbility(cause);
-
-            // CR 112.2 A spell’s controller is, by default, the player who put it on the stack.
-            result.setController(cause.getActivatingPlayer(), 0);
-            // for triggers like from Wild-Magic Sorcerer
-            game.getAction().checkStaticAbilities(false);
-            game.getTriggerHandler().resetActiveTriggers();
-        }
-        return result;
-    }
-
-    public final Card moveToGraveyard(final Card c, SpellAbility cause) {
-        return moveToGraveyard(c, cause, null);
-    }
-    public final Card moveToGraveyard(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
-        final PlayerZone grave = c.getOwner().getZone(ZoneType.Graveyard);
-        // must put card in OWNER's graveyard not controller's
-        return moveTo(grave, c, cause, params);
-    }
-
-    public final Card moveToHand(final Card c, SpellAbility cause) {
-        return moveToHand(c, cause, null);
-    }
-
-    public final Card moveToHand(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
-        final PlayerZone hand = c.getOwner().getZone(ZoneType.Hand);
-        return moveTo(hand, c, cause, params);
-    }
-
-    public final Card moveToPlay(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
-        return moveToPlay(c, c.getController(), cause, params);
-    }
-
-    public final Card moveToPlay(final Card c, final Player p, SpellAbility cause, Map<AbilityKey, Object> params) {
-        // move to a specific player's Battlefield
-        final PlayerZone play = p.getZone(ZoneType.Battlefield);
-        return moveTo(play, c, cause, params);
-    }
-
-    public final Card moveToBottomOfLibrary(final Card c, SpellAbility cause) {
-        return moveToBottomOfLibrary(c, cause, null);
-    }
-
-    public final Card moveToBottomOfLibrary(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
-        return moveToLibrary(c, -1, cause, params);
-    }
-
-    public final Card moveToLibrary(final Card c, SpellAbility cause) {
-        return moveToLibrary(c, cause, null);
-    }
-
-    public final Card moveToLibrary(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
-        return moveToLibrary(c, 0, cause, params);
-    }
-
-    public final Card moveToLibrary(Card c, int libPosition, SpellAbility cause) {
-        return moveToLibrary(c, libPosition, cause, null);
-    }
-
-    public final Card moveToLibrary(Card c, int libPosition, SpellAbility cause, Map<AbilityKey, Object> params) {
-        final PlayerZone library = c.getOwner().getZone(ZoneType.Library);
-        if (libPosition == -1 || libPosition > library.size()) {
-            libPosition = library.size();
-        }
-        return changeZone(game.getZoneOf(c), library, c, libPosition, cause, params);
-    }
-
-    public final Card moveToVariantDeck(Card c, ZoneType zone, int deckPosition, SpellAbility cause) {
-        return moveToVariantDeck(c, zone, deckPosition, cause, null);
-    }
-
-    public final Card moveToVariantDeck(Card c, ZoneType zone, int deckPosition, SpellAbility cause, Map<AbilityKey, Object> params) {
-        final PlayerZone deck = c.getOwner().getZone(zone);
-        if (deckPosition == -1 || deckPosition > deck.size()) {
-            deckPosition = deck.size();
-        }
-        return changeZone(game.getZoneOf(c), deck, c, deckPosition, cause, params);
-    }
-
-    public final Card exile(final Card c, SpellAbility cause) {
-        if (c == null) {
-            return null;
-        }
-        return exile(new CardCollection(c), cause).get(0);
-    }
-    public final CardCollection exile(final CardCollection cards, SpellAbility cause) {
-        CardZoneTable table = new CardZoneTable();
-        CardCollection result = new CardCollection();
-        for (Card card : cards) {
-            if (cause != null) {
-                table.put(card.getZone().getZoneType(), ZoneType.Exile, card);
-            }
-            result.add(exile(card, cause, null));
-        }
-        if (cause != null) {
-            table.triggerChangesZoneAll(game, cause);
-        }
-        return result;
-    }
-    public final Card exile(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
-        if (game.isCardExiled(c)) {
-            return c;
-        }
-
-        final Zone origin = c.getZone();
-        final PlayerZone removed = c.getOwner().getZone(ZoneType.Exile);
-        final Card copied = moveTo(removed, c, cause, params);
-
-        // Run triggers
-        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
-        runParams.put(AbilityKey.Cause, cause);
-        if (origin != null) { // is generally null when adding via dev mode
-            runParams.put(AbilityKey.Origin, origin.getZoneType().name());
-        }
-        if (params != null) {
-            runParams.putAll(params);
-        }
-
-        game.getTriggerHandler().runTrigger(TriggerType.Exiled, runParams, false);
-
-        return copied;
-    }
-
-    public final Card moveTo(final ZoneType name, final Card c, SpellAbility cause) {
-        return moveTo(name, c, 0, cause);
-    }
-
-    public final Card moveTo(final ZoneType name, final Card c, final int libPosition, SpellAbility cause) {
-        return moveTo(name, c, libPosition, cause, null);
-    }
-
-    public final Card moveTo(final ZoneType name, final Card c, final int libPosition, SpellAbility cause, Map<AbilityKey, Object> params) {
-        // Call specific functions to set PlayerZone, then move onto moveTo
-        switch(name) {
-            case Hand:          return moveToHand(c, cause, params);
-            case Library:       return moveToLibrary(c, libPosition, cause, params);
-            case Battlefield:   return moveToPlay(c, c.getController(), cause, params);
-            case Graveyard:     return moveToGraveyard(c, cause, params);
-            case Exile:         return exile(c, cause, params);
-            case Stack:         return moveToStack(c, cause, params);
-            case PlanarDeck:    return moveToVariantDeck(c, ZoneType.PlanarDeck, libPosition, cause, params);
-            case SchemeDeck:    return moveToVariantDeck(c, ZoneType.SchemeDeck, libPosition, cause, params);
-            default: // sideboard will also get there
-                return moveTo(c.getOwner().getZone(name), c, cause);
-        }
-    }
-
-    public void ceaseToExist(Card c, boolean skipTrig) {
-        if (c.isInZone(ZoneType.Stack)) {
-            c.getGame().getStack().remove(c);
-        }
-        c.getZone().remove(c);
-
-        // CR 603.6c other players LTB triggers should work
-        if (!skipTrig) {
-            game.addChangeZoneLKIInfo(c);
-            CardCollectionView lastBattlefield = game.getLastStateBattlefield();
-            int idx = lastBattlefield.indexOf(c);
-            Card lki = null;
-            if (idx != -1) {
-                lki = lastBattlefield.get(idx);
-            }
-            if (lki == null) {
-                lki = CardUtil.getLKICopy(c);
-            }
-            if (game.getCombat() != null) {
-                game.getCombat().removeFromCombat(c);
-                game.getCombat().saveLKI(lki);
-            }
-            // again, make sure no triggers run from cards leaving controlled by loser
-            if (!lki.getController().equals(lki.getOwner())) {
-                game.getTriggerHandler().registerActiveLTBTrigger(lki);
-            }
-            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
-            runParams.put(AbilityKey.CardLKI, lki);
-            runParams.put(AbilityKey.Origin, c.getZone().getZoneType().name());
-            game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, false);
-        }
     }
 
     // Temporarily disable (if mode = true) actively checking static abilities.
@@ -1310,8 +1299,8 @@ public class GameAction {
                     int loyal = c.getCounters(CounterEnumType.LOYALTY);
                     if (loyal < beeble) {
                         GameEntityCounterTable counterTable = new GameEntityCounterTable();
-                        c.addCounter(CounterEnumType.LOYALTY, beeble - loyal, c.getController(), null, false, counterTable);
-                        counterTable.triggerCountersPutAll(game);
+                        c.addCounter(CounterEnumType.LOYALTY, beeble - loyal, c.getController(), counterTable);
+                        counterTable.replaceCounterEffect(game, null, false);
                     } else if (loyal > beeble) {
                         c.subtractCounter(CounterEnumType.LOYALTY, loyal - beeble);
                     }
@@ -1451,14 +1440,15 @@ public class GameAction {
         if (!c.getType().hasSubtype("Saga")) {
             return false;
         }
-        if (!c.canBeSacrificed()) {
+        if (!c.canBeSacrificedBy(null, true)) {
             return false;
         }
         if (c.getCounters(CounterEnumType.LORE) < c.getFinalChapterNr()) {
             return false;
         }
         if (!game.getStack().hasSourceOnStack(c, SpellAbilityPredicates.isChapter())) {
-            sacrifice(c, null, table, null);
+            // needs to be effect, because otherwise it might be a cost?
+            sacrifice(c, null, true, table, null);
             checkAgain = true;
         }
         return checkAgain;
@@ -1758,8 +1748,8 @@ public class GameAction {
         return true;
     }
 
-    public final Card sacrifice(final Card c, final SpellAbility source, CardZoneTable table, Map<AbilityKey, Object> params) {
-        if (!c.canBeSacrificedBy(source)) {
+    public final Card sacrifice(final Card c, final SpellAbility source, final boolean effect, CardZoneTable table, Map<AbilityKey, Object> params) {
+        if (!c.canBeSacrificedBy(source, effect)) {
             return null;
         }
 
@@ -1989,6 +1979,7 @@ public class GameAction {
             game.getTriggerHandler().runTrigger(TriggerType.NewGame, AbilityKey.newMap(), true);
             //</THIS CODE WILL WORK WITH PHASE = NULL>
 
+            game.setStartingPlayer(first);
             game.getPhaseHandler().startFirstTurn(first, startGameHook);
             //after game ends, ensure Auto-Pass canceled for all players so it doesn't apply to next game
             for (Player p : game.getRegisteredPlayers()) {
@@ -2143,11 +2134,17 @@ public class GameAction {
 
     public void becomeMonarch(final Player p, final String set) {
         final Player previous = game.getMonarch();
-        if (p == null || p.equals(previous))
+        if (p == null || p.equals(previous)) {
             return;
+        }
 
         if (previous != null)
             previous.removeMonarchEffect();
+
+        // by Monarch losing, its a way to make the game lose the monarch
+        if (!p.canBecomeMonarch()) {
+            return;
+        }
 
         p.createMonarchEffect(set);
         game.setMonarch(p);
@@ -2277,6 +2274,14 @@ public class GameAction {
             }
         }
 
+        // lose life simultaneously
+        if (isCombat) {
+            for (Player p : game.getPlayers()) {
+                p.dealCombatDamage();
+            }
+            game.getTriggerHandler().runWaitingTriggers();
+        }
+
         if (cause != null) {
             // Remember objects as needed
             final Card sourceLKI = game.getChangeZoneLKIInfo(cause.getHostCard());
@@ -2299,7 +2304,7 @@ public class GameAction {
         damageMap.triggerDamageDoneOnce(isCombat, game);
         damageMap.clear();
 
-        counterTable.triggerCountersPutAll(game);
+        counterTable.replaceCounterEffect(game, cause, !isCombat);
         counterTable.clear();
     }
 

@@ -58,9 +58,9 @@ public class SacrificeEffect extends SpellAbilityEffect {
             }
         } else if (sa.hasParam("CumulativeUpkeep")) {
             GameEntityCounterTable table = new GameEntityCounterTable();
-            card.addCounter(CounterEnumType.AGE, 1, activator, sa, true, table);
+            card.addCounter(CounterEnumType.AGE, 1, activator, table);
 
-            table.triggerCountersPutAll(game);
+            table.replaceCounterEffect(game, sa, true);
 
             Cost cumCost = new Cost(sa.getParam("CumulativeUpkeep"), true);
             Cost payCost = new Cost(ManaCost.ZERO, true);
@@ -109,7 +109,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
             if (game.getZoneOf(card).is(ZoneType.Battlefield)) {
                 if (!optional || activator.getController().confirmAction(sa, null,
                         Localizer.getInstance().getMessage("lblDoYouWantSacrificeThis", card.getName()))) {
-                    if (game.getAction().sacrifice(card, sa, table, params) != null) {
+                    if (game.getAction().sacrifice(card, sa, true, table, params) != null) {
                         if (remSacrificed) {
                             card.addRemembered(card);
                         }
@@ -126,7 +126,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
                     List<CardCollection> validTargetsList = new ArrayList<>(validArray.length);
                     for (String subValid : validArray) {
                         CardCollectionView validTargets = AbilityUtils.filterListByType(battlefield, subValid, sa);
-                        validTargets = CardLists.filter(validTargets, CardPredicates.canBeSacrificedBy(sa));
+                        validTargets = CardLists.filter(validTargets, CardPredicates.canBeSacrificedBy(sa, true));
                         validTargetsList.add(new CardCollection(validTargets));
                     }
                     CardCollection chosenCards = new CardCollection();
@@ -146,7 +146,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
                 } else {
                     CardCollectionView validTargets = AbilityUtils.filterListByType(battlefield, valid, sa);
                     if (!destroy) {
-                        validTargets = CardLists.filter(validTargets, CardPredicates.canBeSacrificedBy(sa));
+                        validTargets = CardLists.filter(validTargets, CardPredicates.canBeSacrificedBy(sa, true));
                     }
 
                     if (sa.hasParam("Random")) {
@@ -175,13 +175,13 @@ public class SacrificeEffect extends SpellAbilityEffect {
                 Map<Integer, Card> cachedMap = Maps.newHashMap();
                 for (Card sac : choosenToSacrifice) {
                     final Card lKICopy = CardUtil.getLKICopy(sac, cachedMap);
-                    boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa, table, params) != null;
+                    boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa, true, table, params) != null;
                     boolean wasDestroyed = destroy && game.getAction().destroy(sac, sa, true, table, params);
                     // Run Devour Trigger
                     if (devour) {
                         card.addDevoured(lKICopy);
                         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                        runParams.put(AbilityKey.Devoured, sac);
+                        runParams.put(AbilityKey.Devoured, lKICopy);
                         game.getTriggerHandler().runTrigger(TriggerType.Devoured, runParams, false);
                     }
                     if (exploit) {

@@ -1,10 +1,9 @@
 Name:Tranquil Cove
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+K:CARDNAME enters the battlefield tapped.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
-K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ Combo W U | SpellDescription$ Add {W} or {U}.
 DeckHas:Ability$LifeGain
 Oracle:Tranquil Cove enters the battlefield tapped.\nWhen Tranquil Cove enters the battlefield, you gain 1 life.\n{T}: Add {W} or {U}.

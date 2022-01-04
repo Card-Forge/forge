@@ -170,7 +170,7 @@ public class PlayerControllerAi extends PlayerController {
                         payingPlayer = ability.getHostCard().getEnchantingCard().getController();
                     }
 
-                    int number = ComputerUtilMana.determineLeftoverMana(ability, player);
+                    int number = ComputerUtilMana.determineLeftoverMana(ability, player, false);
 
                     if (logic.startsWith("MaxMana.") || logic.startsWith("PowerLeakMaxMana.")) {
                         number = Math.min(number, Integer.parseInt(logic.substring(logic.indexOf(".") + 1)));
@@ -535,7 +535,7 @@ public class PlayerControllerAi extends PlayerController {
     public void playSpellAbilityNoStack(SpellAbility effectSA, boolean canSetupTargets) {
         if (canSetupTargets)
             brains.doTrigger(effectSA, true); // first parameter does not matter, since return value won't be used
-        ComputerUtil.playNoStack(player, effectSA, getGame());
+        ComputerUtil.playNoStack(player, effectSA, getGame(), true);
     }
 
     @Override
@@ -692,6 +692,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean payManaOptional(Card c, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose) {
+        // TODO replace with EmptySa
         final Ability ability = new AbilityStatic(c, cost, null) { @Override public void resolve() {} };
         ability.setActivatingPlayer(c.getController());
 
@@ -713,8 +714,8 @@ public class PlayerControllerAi extends PlayerController {
         }
         // - End of hack for Exile a card from library Cumulative Upkeep -
 
-        if (ComputerUtilCost.canPayCost(ability, c.getController())) {
-            ComputerUtil.playNoStack(c.getController(), ability, getGame());
+        if (ComputerUtilCost.canPayCost(ability, c.getController(), true)) {
+            ComputerUtil.playNoStack(c.getController(), ability, getGame(), true);
             return true;
         }
         return false;
@@ -1009,13 +1010,14 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, FCollectionView<Player> allPayers) {
         final Card source = sa.getHostCard();
+        // TODO replace with EmptySa
         final Ability emptyAbility = new AbilityStatic(source, cost, sa.getTargetRestrictions()) { @Override public void resolve() { } };
         emptyAbility.setActivatingPlayer(player);
         emptyAbility.setTriggeringObjects(sa.getTriggeringObjects());
         emptyAbility.setSVars(sa.getSVars());
         emptyAbility.setXManaCostPaid(sa.getRootAbility().getXManaCostPaid());
-        if (ComputerUtilCost.willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers) && ComputerUtilCost.canPayCost(emptyAbility, player)) {
-            ComputerUtil.playNoStack(player, emptyAbility, getGame()); // AI needs something to resolve to pay that cost
+        if (ComputerUtilCost.willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers) && ComputerUtilCost.canPayCost(emptyAbility, player, true)) {
+            ComputerUtil.playNoStack(player, emptyAbility, getGame(), true); // AI needs something to resolve to pay that cost
             return true;
         }
         return false;
@@ -1069,7 +1071,7 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public void playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory) {
         if (prepareSingleSa(host, wrapperAbility, isMandatory)) {
-            ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, getGame());
+            ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, getGame(), true);
         }
     }
 
@@ -1079,6 +1081,7 @@ public class PlayerControllerAi extends PlayerController {
         boolean noManaCost = tgtSA.hasParam("WithoutManaCost");
         if (tgtSA instanceof Spell) { // Isn't it ALWAYS a spell?
             Spell spell = (Spell) tgtSA;
+            // TODO if mandatory AI is only forced to use mana when it's already in the pool
             if (tgtSA.checkRestrictions(brains.getPlayer()) && (brains.canPlayFromEffectAI(spell, !optional, noManaCost) == AiPlayDecision.WillPlay || !optional)) {
                 if (noManaCost) {
                     return ComputerUtil.playSpellAbilityWithoutPayingManaCost(player, tgtSA, getGame());
@@ -1138,10 +1141,10 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt /* ai needs hints as well */, ManaConversionMatrix matrix, boolean isActivatedSa) {
+    public boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt /* ai needs hints as well */, ManaConversionMatrix matrix, boolean effect) {
         // TODO Auto-generated method stub
-        ManaCostBeingPaid cost = isActivatedSa ? ComputerUtilMana.calculateManaCost(sa, false, 0) : new ManaCostBeingPaid(toPay);
-        return ComputerUtilMana.payManaCost(cost, sa, player);
+        ManaCostBeingPaid cost = !effect ? ComputerUtilMana.calculateManaCost(sa, false, 0) : new ManaCostBeingPaid(toPay);
+        return ComputerUtilMana.payManaCost(cost, sa, player, effect);
     }
 
     @Override
@@ -1347,7 +1350,7 @@ public class PlayerControllerAi extends PlayerController {
                 }
             }
 
-            if (ComputerUtilCost.canPayCost(fullCostSa, player)) {
+            if (ComputerUtilCost.canPayCost(fullCostSa, player, false)) {
                 chosenOptCosts.add(opt);
                 costSoFar.add(opt.getCost());
             }
@@ -1372,7 +1375,7 @@ public class PlayerControllerAi extends PlayerController {
         for (int i = 0; i < max; i++) {
             costSoFar.add(cost);
             SpellAbility fullCostSa = sa.copyWithDefinedCost(costSoFar);
-            if (ComputerUtilCost.canPayCost(fullCostSa, player)) {
+            if (ComputerUtilCost.canPayCost(fullCostSa, player, sa.isTrigger())) {
                 chosenAmount++;
             } else {
                 break;

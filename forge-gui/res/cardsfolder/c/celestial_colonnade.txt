@@ -2,8 +2,6 @@ Name:Celestial Colonnade
 ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ Mana | Cost$ T | Produced$ Combo W U | SpellDescription$ Add {W} or {U}.
 A:AB$ Animate | Cost$ 3 W U | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Creature,Elemental | Colors$ White,Blue | Keywords$ Flying & Vigilance | SpellDescription$ Until end of turn, CARDNAME becomes a 4/4 white and blue Elemental creature with flying and vigilance. It's still a land.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_colonnade.jpg
 Oracle:Celestial Colonnade enters the battlefield tapped.\n{T}: Add {W} or {U}.\n{3}{W}{U}: Until end of turn, Celestial Colonnade becomes a 4/4 white and blue Elemental creature with flying and vigilance. It's still a land.

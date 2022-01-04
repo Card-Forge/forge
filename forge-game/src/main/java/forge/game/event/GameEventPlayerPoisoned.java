@@ -1,6 +1,5 @@
 package forge.game.event;
 
-import forge.game.card.Card;
 import forge.game.player.Player;
 
 /** 
@@ -9,11 +8,11 @@ import forge.game.player.Player;
  */
 public class GameEventPlayerPoisoned extends GameEvent {
     public final Player receiver;
-    public final Card source;
+    public final Player source;
     public final int oldValue;
     public final int amount;
 
-    public GameEventPlayerPoisoned(Player recv, Card src, int old, int num) {
+    public GameEventPlayerPoisoned(Player recv, Player src, int old, int num) {
         receiver = recv;
         source = src;
         oldValue = old;

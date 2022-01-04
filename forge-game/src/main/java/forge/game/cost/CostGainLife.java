@@ -17,10 +17,10 @@
  */
 package forge.game.cost;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import forge.game.card.Card;
+import com.google.common.collect.Lists;
+
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -28,9 +28,7 @@ import forge.game.spellability.SpellAbility;
  * The Class CostGainLife.
  */
 public class CostGainLife extends CostPart {
-    /**
-     * Serializables need a version ID.
-     */
+
     private static final long serialVersionUID = 1L;
     private final int cntPlayers; // MAX_VALUE means ALL/EACH PLAYERS
 
@@ -64,29 +62,19 @@ public class CostGainLife extends CostPart {
         return sb.toString();
     }
 
-    public List<Player> getPotentialTargets(final Player payer, final Card source) {
-        List<Player> res = new ArrayList<>();
+    public List<Player> getPotentialTargets(final Player payer, final SpellAbility ability) {
+        List<Player> res = Lists.newArrayList();
         for (Player p : payer.getGame().getPlayers()) {
-            if (p.isValid(getType(), payer, source, null))
+            if (p.isValid(getType(), payer, ability.getHostCard(), ability))
                 res.add(p);
         }
         return res;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.Player, forge.card.cost.Cost)
-     */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer) {
-        final Integer amount = this.convertAmount();
-        if (amount == null) return false;
-
+    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         int cntAbleToGainLife = 0;
-        List<Player> possibleTargets = getPotentialTargets(payer, ability.getHostCard());
+        List<Player> possibleTargets = getPotentialTargets(payer, ability);
 
         for (final Player opp : possibleTargets) {
             if (opp.canGainLife()) {
@@ -97,15 +85,9 @@ public class CostGainLife extends CostPart {
         return cntAbleToGainLife >= cntPlayers || cntPlayers == Integer.MAX_VALUE && cntAbleToGainLife == possibleTargets.size();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
     @Override
-    public final boolean payAsDecided(final Player ai, final PaymentDecision decision, SpellAbility ability) {
-        Integer c = this.convertAmount();
+    public final boolean payAsDecided(final Player ai, final PaymentDecision decision, SpellAbility ability, final boolean effect) {
+        Integer c = this.getAbilityAmount(ability);
         
         int playersLeft = cntPlayers;
         for (final Player opp : decision.players) {

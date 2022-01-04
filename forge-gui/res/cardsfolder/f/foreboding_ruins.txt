@@ -1,9 +1,7 @@
 Name:Foreboding Ruins
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Mana | Cost$ T | Produced$ Combo B R | SpellDescription$ Add {B} or {R}.
 K:ETBReplacement:Other:DBTap
 SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Swamp,Mountain/Swamp or Mountain> | UnlessPayer$ You | StackDescription$ enters the battlefield tapped. | SpellDescription$ As CARDNAME enters the battlefield, you may reveal a Swamp or Mountain card from your hand. If you don't, CARDNAME enters the battlefield tapped.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/foreboding_ruins.jpg
 Oracle:As Foreboding Ruins enters the battlefield, you may reveal a Swamp or Mountain card from your hand. If you don't, Foreboding Ruins enters the battlefield tapped.\n{T}: Add {B} or {R}.

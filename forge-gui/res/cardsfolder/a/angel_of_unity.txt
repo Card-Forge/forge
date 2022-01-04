@@ -1,0 +1,16 @@
+Name:Angel of Unity
+ManaCost:1 W
+Types:Creature Angel Cleric
+PT:1/3
+K:Flying
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ Whenever CARDNAME enters the battlefield or you cast a party spell, choose a party creature card in your hand. It perpetually gets +1/+1. (A party card or spell is a Cleric, Rogue, Warrior, or Wizard.)
+T:Mode$ SpellCast | ValidCard$ Card.Party | ValidActivatingPlayer$ You | Execute$ TrigChoose | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or you cast a party spell, choose a party creature card in your hand. It perpetually gets +1/+1. (A party card or spell is a Cleric, Rogue, Warrior, or Wizard.)
+SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Creature.Party+YouOwn | ChoiceTitle$ Choose a party creature card in your hand | Amount$ 1 | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualP1P1 | Name$ Angel of Unity's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualP1P1:Mode$ Continuous | Affected$ Card.ChosenCard | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The chosen card perpetually gets +1/+1.
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+DeckHas:Ability$Party & Ability$LifeGain
+SVar:BuffedBy:Cleric,Rogue,Warrior,Wizard
+DeckHints:Type$Rogue|Warrior|Wizard
+Oracle:Flying, lifelink\nWhenever Angel of Unity enters the battlefield or you cast a party spell, choose a party creature card in your hand. It perpetually gets +1/+1. (A party card or spell is a Cleric, Rogue, Warrior, or Wizard.)

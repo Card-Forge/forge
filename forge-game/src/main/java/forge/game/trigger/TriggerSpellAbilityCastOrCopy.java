@@ -107,7 +107,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             }
             if (hasParam("ActivatorThisTurnCast")) {
                 final String compare = getParam("ActivatorThisTurnCast");
-                final String valid = hasParam("ValidCard") ? getParam("ValidCard") : "Card";
+                final String valid = getParamOrDefault("ValidCard", "Card");
                 List<Card> thisTurnCast = CardUtil.getThisTurnCast(valid, getHostCard(), this);
                 thisTurnCast = CardLists.filterControlledBy(thisTurnCast, si.getSpellAbility(true).getActivatingPlayer());
                 int left = thisTurnCast.size();

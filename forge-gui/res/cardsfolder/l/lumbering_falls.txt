@@ -2,8 +2,6 @@ Name:Lumbering Falls
 ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ Mana | Cost$ T | Produced$ Combo G U | SpellDescription$ Add {G} or {U}.
 A:AB$ Animate | Cost$ 2 G U | Defined$ Self | Power$ 3 | Toughness$ 3 | Types$ Creature,Elemental | Colors$ Green,Blue | Keywords$ Hexproof | SpellDescription$ CARDNAME becomes a 3/3 green and blue Elemental creature with hexproof until end of turn. It's still a land.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lumbering_falls.jpg
 Oracle:Lumbering Falls enters the battlefield tapped.\n{T}: Add {G} or {U}.\n{2}{G}{U}: Lumbering Falls becomes a 3/3 green and blue Elemental creature with hexproof until end of turn. It's still a land.

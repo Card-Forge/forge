@@ -186,6 +186,9 @@ public class Cost implements Serializable {
     public final boolean isMandatory() {
         return this.isMandatory;
     }
+    public final void setMandatory(boolean b) {
+        isMandatory = b;
+    }
 
     public final boolean isAbility() {
         return this.isAbility;
@@ -773,7 +776,6 @@ public class Cost implements Serializable {
             cost.append("0");
         }
 
-        cost.append(": ");
         return cost.toString();
     }
 
@@ -939,12 +941,12 @@ public class Cost implements Serializable {
         }
     }
 
-    public boolean canPay(SpellAbility sa) {
-        return canPay(sa, sa.getActivatingPlayer());
+    public boolean canPay(SpellAbility sa, final boolean effect) {
+        return canPay(sa, sa.getActivatingPlayer(), effect);
     }
-    public boolean canPay(SpellAbility sa, Player payer) {
+    public boolean canPay(SpellAbility sa, Player payer, final boolean effect) {
         for (final CostPart part : this.getCostParts()) {
-            if (!part.canPay(sa, payer)) {
+            if (!part.canPay(sa, payer, effect)) {
                 return false;
             }
         }
@@ -968,14 +970,14 @@ public class Cost implements Serializable {
         return xCost;
     }
 
-    public Integer getMaxForNonManaX(final SpellAbility ability, final Player payer) {
+    public Integer getMaxForNonManaX(final SpellAbility ability, final Player payer, final boolean effect) {
         Integer val = null;
         for (CostPart p : getCostParts()) {
             if (!p.getAmount().equals("X")) {
                 continue;
             }
 
-            val = ObjectUtils.min(val, p.getMaxAmountX(ability, payer));
+            val = ObjectUtils.min(val, p.getMaxAmountX(ability, payer, effect));
         }
         // extra 0 check
         if (val != null && val <= 0 && hasManaCost() && !getCostMana().canXbe0()) {

@@ -17,7 +17,6 @@
  */
 package forge.game.cost;
 
-import forge.game.ability.AbilityUtils;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -62,36 +61,16 @@ public class CostPayLife extends CostPart {
     }
 
     @Override
-    public Integer getMaxAmountX(SpellAbility ability, Player payer) {
-        if (!payer.canPayLife(1)) {
+    public Integer getMaxAmountX(SpellAbility ability, Player payer, final boolean effect) {
+        if (!payer.canPayLife(1, effect, ability)) {
             return 0;
         }
         return payer.getLife();
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.Player, forge.card.cost.Cost)
-     */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer) {
-        Integer amount = this.convertAmount();
-        if (amount == null) { // try to calculate when it's defined.
-            amount = AbilityUtils.calculateAmount(ability.getHostCard(), getAmount(), ability);
-            // CR 107.1b
-            if (getAmount().contains("/Half")) {
-                amount = Math.max(amount, 0);
-            }
-        }
-
-        if (amount != null && !payer.canPayLife(amount)) {
-            return false;
-        }
-
-        if (!ability.isTrigger() && payer.hasKeyword("You can't pay life to cast spells or activate abilities.")) {
+    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
+        if (!payer.canPayLife(this.getAbilityAmount(ability), effect, ability)) {
             return false;
         }
 
@@ -99,8 +78,8 @@ public class CostPayLife extends CostPart {
     }
 
     @Override
-    public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
-        return ai.payLife(decision.c, null);
+    public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability, final boolean effect) {
+        return ai.payLife(decision.c, ability, effect);
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {

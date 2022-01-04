@@ -97,7 +97,7 @@ public class NetGuiGame extends AbstractGuiGame {
     @Override
     public void updatePhase(boolean saveState) {
         updateGameView();
-        send(ProtocolMethod.updatePhase);
+        send(ProtocolMethod.updatePhase, saveState);
     }
 
     @Override

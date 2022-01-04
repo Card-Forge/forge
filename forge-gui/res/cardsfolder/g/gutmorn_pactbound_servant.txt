@@ -1,0 +1,20 @@
+Name:Gutmorn, Pactbound Servant
+ManaCost:2 B
+Types:Legendary Creature Demon
+PT:1/3
+K:Flying
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBDiscard | TriggerDescription$ Whenever CARDNAME enters the battlefield, each player discards a nonland card.
+SVar:DBDiscard:DB$ Discard | Defined$ Player | DiscardValid$ Card.nonLand | Mode$ TgtChoose | AILogic$ DiscardUncastableAndExcess
+T:Mode$ Discarded | TriggerZones$ Battlefield | Execute$ TrigChoosePlayer | PlayerTurn$ True | TriggerController$ TriggeredCardController | TriggerDescription$ Whenever a player discards a card during your turn, they choose another player. That player conjures a duplicate of that card into their hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
+SVar:TrigChoosePlayer:DB$ ChoosePlayer | Defined$ TriggeredCardOwner | Choices$ Player.Other | ChoiceTitle$ Choose another player | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | Defined$ ChosenPlayer | DefinedName$ TriggeredCard | Zone$ Hand | RememberMade$ True | SubAbility$ DBClearChosen
+SVar:DBClearChosen:DB$ Cleanup | ClearChosenPlayer$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Triggers$ Update | Name$ Gutmorn, Pactbound Servant's Perpetual Effect | SubAbility$ DBCleanup
+SVar:PerpetualAbility:Mode$ Continuous | AddStaticAbility$ SpendAnyMana | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The conjured card perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
+SVar:SpendAnyMana:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | AffectedZone$ Stack | AddHiddenKeyword$ May spend mana as though it were mana of any color to cast CARDNAME | Description$ You may spend mana as though it were mana of any color to cast this spell.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+DeckHas:Ability$Discard
+Oracle:Flying, deathtouch\nWhenever Gutmorn, Pactbound Servant enters the battlefield, each player discards a nonland card.\nWhenever a player discards a card during your turn, they choose another player. That player conjures a duplicate of that card into their hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."

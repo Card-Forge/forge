@@ -1,8 +1,7 @@
 Name:Rugged Highlands
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ T | Produced$ Combo R G | SpellDescription$ Add {R} or {G}.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
 K:CARDNAME enters the battlefield tapped.

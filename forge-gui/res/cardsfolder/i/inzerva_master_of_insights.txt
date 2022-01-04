@@ -8,7 +8,7 @@ A:AB$ RepeatEach | Cost$ SubCounter<2/LOYALTY> | RepeatPlayers$ Opponent | Repea
 SVar:DBDig:DB$ Dig | Defined$ Remembered | DigNum$ 2 | AnyNumber$ True | DestinationZone$ Library | LibraryPosition2$ 0
 SVar:DBScry:DB$ Scry | ScryNum$ 2
 A:AB$ Effect | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | Name$ Emblem - Inzerva, Master of Insights | Ultimate$ True | Stackable$ True | Duration$ Permanent | StaticAbilities$ STReveal | Triggers$ TrigDraw | SpellDescription$ You get an emblem with "Your opponents play with their hands revealed" and "Whenever an opponent draws a card, this emblem deals 1 damage to them."
-SVar:STReveal:Mode$ Continuous | EffectZone$ Command | Affected$ Opponent | AddKeyword$ Play with your hand revealed. | Description$ Your opponents play with their hands revealed.
+SVar:STReveal:Mode$ Continuous | AffectedZone$ Hand | Affected$ Card.OppOwn | MayLookAt$ Player | Description$ Your opponents play with their hands revealed.
 SVar:TrigDraw:Mode$ Drawn | ValidCard$ Card.OppOwn | TriggerZones$ Command | Execute$ DBDamage | TriggerDescription$ Whenever an opponent draws a card, CARDNAME deals 1 damage to that player.
 SVar:DBDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 1
 Oracle:[+2]: Draw two cards, then discard a card.\n[−2]: Look at the top two cards of each other player's library, then put any number of them on the bottom of that library and the rest on top in any order. Scry 2.\n[−4]: You get an emblem with "Your opponents play with their hands revealed" and "Whenever an opponent draws a card, this emblem deals 1 damage to them."

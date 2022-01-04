@@ -83,7 +83,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
                 if (ph.getPhase().isBefore(PhaseType.MAIN2) && !ComputerUtil.castSpellInMain1(ai, sa)) {
                     return false;
                 }
-                if (ph.isPlayerTurn(ai) && !isSorcerySpeed(sa)) {
+                if (ph.isPlayerTurn(ai) && !isSorcerySpeed(sa, ai)) {
                     return false;
                 }
             }
@@ -103,7 +103,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
     private CounterType getCounterType(SpellAbility sa) {
         if (sa.hasParam("CounterType")) {
             try {
-                return AbilityUtils.getCounterType(sa.getParam("CounterType"), sa);
+                return CounterType.getType(sa.getParam("CounterType"));
             } catch (Exception e) {
                 System.out.println("Counter type doesn't match, nor does an SVar exist with the type name.");
                 return null;
@@ -198,7 +198,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
             // check if Spell with Strive is still playable
             if (sa.isSpell() && sa.getHostCard().hasStartOfKeyword("Strive")) {
                 // if not remove target again and break list
-                if (!ComputerUtilCost.canPayCost(sa, ai)) {
+                if (!ComputerUtilCost.canPayCost(sa, ai, false)) {
                     sa.getTargets().remove(c);
                     break;
                 }

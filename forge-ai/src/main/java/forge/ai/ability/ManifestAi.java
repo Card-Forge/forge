@@ -66,7 +66,7 @@ public class ManifestAi extends SpellAbilityAi {
                 if (!buff) {
                     return false;
                 }
-            } else if (!SpellAbilityAi.isSorcerySpeed(sa)) {
+            } else if (!SpellAbilityAi.isSorcerySpeed(sa, ai)) {
                 return false;
             }
         } else {
@@ -79,7 +79,7 @@ public class ManifestAi extends SpellAbilityAi {
         if (sa.getSVar("X").equals("Count$xPaid")) {
             // Handle either Manifest X cards, or Manifest 1 card and give it X P1P1s
             // Set PayX here to maximum value.
-            int x = ComputerUtilCost.getMaxXValue(sa, ai);
+            int x = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
             sa.setXManaCostPaid(x);
             if (x <= 0) {
                 return false;

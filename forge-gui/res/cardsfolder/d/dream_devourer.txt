@@ -3,6 +3,6 @@ ManaCost:1 B
 Types:Creature Demon Cleric
 PT:0/3
 S:Mode$ Continuous | Affected$ Card.nonLand+YouOwn+withoutForetell | AffectedZone$ Hand | AddKeyword$ Foretell | Description$ Each nonland card in your hand without foretell has foretell. Its foretell cost is equal to its mana cost reduced by {2}. (During your turn, you may pay {2} and exile it from your hand face down. Cast it on a later turn for its foretell cost.)
-T:Mode$ Foretell | ValidPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$Whenever you foretell a card, CARDNAME gets +2/+0 until end of turn.
+T:Mode$ Foretell | ValidPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you foretell a card, CARDNAME gets +2/+0 until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2
 Oracle:Each nonland card in your hand without foretell has foretell. Its foretell cost is equal to its mana cost reduced by {2}. (During your turn, you may pay {2} and exile it from your hand face down. Cast it on a later turn for its foretell cost.)\nWhenever you foretell a card, Dream Devourer gets +2/+0 until end of turn.

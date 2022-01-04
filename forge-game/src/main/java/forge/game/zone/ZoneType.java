@@ -28,7 +28,7 @@ public enum ZoneType {
     Subgame(true, "lblSubgameZone"),
     None(true, "lblNoneZone");
 
-    public static final List<ZoneType> STATIC_ABILITIES_SOURCE_ZONES = Arrays.asList(Battlefield, Graveyard, Exile, Command/*, Hand*/);
+    public static final List<ZoneType> STATIC_ABILITIES_SOURCE_ZONES = Arrays.asList(Battlefield, Graveyard, Exile, Command, Stack/*, Hand*/);
 
     private final boolean holdsHiddenInfo;
     private final String zoneName;

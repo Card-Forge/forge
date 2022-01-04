@@ -19,7 +19,6 @@ package forge.game.cost;
 
 import com.google.common.base.Strings;
 
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
 import forge.game.player.Player;
@@ -47,7 +46,8 @@ public class CostPayEnergy extends CostPart {
     @Override
     public int paymentOrder() { return 7; }
 
-    public Integer getMaxAmountX(final SpellAbility ability, final Player payer) {
+    @Override
+    public Integer getMaxAmountX(final SpellAbility ability, final Player payer, final boolean effect) {
         return payer.getCounters(CounterEnumType.ENERGY);
     }
 
@@ -83,17 +83,12 @@ public class CostPayEnergy extends CostPart {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer) {
-        Integer amount = this.convertAmount();
-        if (amount == null) { // try to calculate when it's defined.
-                amount = AbilityUtils.calculateAmount(ability.getHostCard(), getAmount(), ability);
-        }
-
-        return payer.getCounters(CounterEnumType.ENERGY) >= amount;
+    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
+        return payer.getCounters(CounterEnumType.ENERGY) >= this.getAbilityAmount(ability);
     }
 
     @Override
-    public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
+    public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability, final boolean effect) {
         paidAmount = decision.c;
         return ai.payEnergy(paidAmount, null);
     }

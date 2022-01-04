@@ -23,9 +23,6 @@ import forge.game.spellability.SpellAbility;
 
 public class CostRevealChosenPlayer extends CostPart {
 
-    /**
-     * Serializables need a version ID.
-     */
     private static final long serialVersionUID = 1L;
 
     public CostRevealChosenPlayer() { }
@@ -40,22 +37,15 @@ public class CostRevealChosenPlayer extends CostPart {
         return "Reveal the player you chose";
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.Player, forge.card.cost.Cost)
-     */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player activator) {
+    public final boolean canPay(final SpellAbility ability, final Player activator, final boolean effect) {
         final Card source = ability.getHostCard();
 
         return source.getChosenPlayer() != null && source.getTurnInController().equals(activator);
     }
 
     @Override
-    public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
+    public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability, final boolean effect) {
         ability.getHostCard().revealChosenPlayer();
         return true;
     }

@@ -123,7 +123,7 @@ public class EffectAi extends SpellAbilityAi {
             } else if (logic.equals("WillCastCreature") && ai.isAI()) {
                 AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
                 SpellAbility saCreature = aic.predictSpellToCastInMain2(ApiType.PermanentCreature);
-                randomReturn = saCreature != null && ComputerUtilMana.canPayManaCost(saCreature, ai, 0);
+                randomReturn = saCreature != null && ComputerUtilMana.canPayManaCost(saCreature, ai, 0, false);
             } else if (logic.equals("Always")) {
                 randomReturn = true;
             } else if (logic.equals("Main1")) {
@@ -198,7 +198,7 @@ public class EffectAi extends SpellAbilityAi {
                 final Card host = saTop.getHostCard();
                 if (saTop.getActivatingPlayer() != ai // from opponent
                         && host.canDamagePrevented(false) // no prevent damage
-                        && host != null && (host.isInstant() || host.isSorcery())
+                        && (host.isInstant() || host.isSorcery())
                         && !host.hasKeyword("Prevent all damage that would be dealt by CARDNAME.")) { // valid target
                     final ApiType type = saTop.getApi();
                     if (type == ApiType.DealDamage || type == ApiType.DamageAll) { // burn spell

@@ -67,6 +67,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 55 C Galedrifter @Daniel Ljunggren
 56 C Geistwave @Olena Richards
 57 R Grafted Identity @Manuel Castañón
+57† R Grafted Identity @Manuel Castañón
 58 C Larder Zombie @E. M. Gist
 59 M Lier, Disciple of the Drowned @Ekaterina Burmak
 60 C Locked in the Cemetery @Tran Nguyen

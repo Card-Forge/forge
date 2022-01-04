@@ -103,7 +103,7 @@ public class DrawAi extends SpellAbilityAi {
         }
 
         if (!ComputerUtilCost.checkDiscardCost(ai, cost, source,sa)) {
-            AiCostDecision aiDecisions = new AiCostDecision(ai, sa);
+            AiCostDecision aiDecisions = new AiCostDecision(ai, sa, false);
             for (final CostPart part : cost.getCostParts()) {
                 if (part instanceof CostDiscard) {
                     PaymentDecision decision = part.accept(aiDecisions);
@@ -166,7 +166,7 @@ public class DrawAi extends SpellAbilityAi {
     @Override
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph, String logic) {
         if ((!ph.getNextTurn().equals(ai) || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
-                && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)
+                && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa, ai)
                 && ai.getCardsIn(ZoneType.Hand).size() > 1 && !ComputerUtil.activateForCost(sa, ai)
                 && !"YawgmothsBargain".equals(logic)) {
             return false;
@@ -255,7 +255,7 @@ public class DrawAi extends SpellAbilityAi {
                 if (drawback && root.getXManaCostPaid() != null) {
                     numCards = root.getXManaCostPaid();
                 } else {
-                    numCards = ComputerUtilCost.getMaxXValue(sa, ai);
+                    numCards = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
                     // try not to overdraw
                     int safeDraw = Math.abs(Math.min(computerMaxHandSize - computerHandSize, computerLibrarySize - 3));
                     if (source.isInstant() || source.isSorcery()) { safeDraw++; } // card will be spent
@@ -385,10 +385,10 @@ public class DrawAi extends SpellAbilityAi {
                 }
             }
             
-            boolean aiTarget = sa.canTarget(ai);
+            boolean aiTarget = sa.canTarget(ai) && (mandatory || ai.canDraw());
             // checks what the ai prevent from casting it on itself
             // if spell is not mandatory
-            if (aiTarget && !ai.cantLose() && ai.canDraw()) {
+            if (aiTarget && !ai.cantLose()) {
                 if (numCards >= computerLibrarySize - 3) {
                     if (xPaid) {
                         numCards = computerLibrarySize - 1;
@@ -426,7 +426,7 @@ public class DrawAi extends SpellAbilityAi {
             }
 
             if (aiTarget) {
-                if (computerHandSize + numCards > computerMaxHandSize && game.getPhaseHandler().isPlayerTurn(ai)) {
+                if (!ai.isCardInPlay("Laboratory Maniac") && computerHandSize + numCards > computerMaxHandSize && game.getPhaseHandler().isPlayerTurn(ai)) {
                     if (xPaid) {
                         numCards = computerMaxHandSize - computerHandSize;
                         if (source.isInZone(ZoneType.Hand)) {
@@ -472,10 +472,8 @@ public class DrawAi extends SpellAbilityAi {
                 }
 
                 // ally would lose because of poison
-                if (getPoison != null && ally.canReceiveCounters(CounterType.get(CounterEnumType.POISON))) {
-                    if (ally.getPoisonCounters() + numCards > 9) {
+                if (getPoison != null && ally.canReceiveCounters(CounterType.get(CounterEnumType.POISON)) && ally.getPoisonCounters() + numCards > 9) {
                         continue;
-                    }
                 }
 
                 sa.getTargets().add(ally);

@@ -1,9 +1,6 @@
 #Add one announcement per line
 Get in the discord if you aren't yet. https://discord.gg/3v9JCVr
-A new game mode is now available as a separate executable - Forge Adventure, a Shandalar-like overworld adventure. This game mode is currently in its early stage of development, expect improvements and fixes in the future releases.
-Forge now supports 100% of core and expansion set cards from Limited Edition Alpha to Innistrad: Midnight Hunt. This includes Equinox, Chaos Orb, and Falling Star.
-Planar Conquest now features a new plane - Forgotten Realms, based on the AFR and AFC sets.
-Several planes are now available in Planar Conquest in their Classic form, as originally intended by the author, without support for the newer sets and with the original events not modified with newer cards. These planes are available in addition to the contemporary versions of the planes and are marked as "Classic".
-Sound sets are now configurable - you can place your sound sets under "sound" in your Forge cache (as subfolders) and then select them with the "Sound set" option.
-Music sets are now configurable - you can place your music sets under "music" in your Forge cache (as subfolders) and then select them with the "Music set" option. The music set folder must have the same structure as "res/music", with "match" and "menus" subfolders containing relevant music tracks.
+All new Alchemy: Innistrad cards (Y22) have been implemented in Forge. Happy brewing!
+Support for rebalanced Arena cards (separate from the original implementations) is implemented.
+It's now possible to choose to play Constructed matches in the best of 1, 3, and 5 formats.
 *** Android 7 & 8 support is now deprecated. Support will be dropped in an upcoming release. ***

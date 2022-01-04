@@ -79,9 +79,7 @@ public class DrawEffect extends SpellAbilityEffect {
                 }
             }
             if (sa.hasParam("RememberDrawn")) {
-                for (final Card c : drawn) {
-                    source.addRemembered(c);
-                }
+                source.addRemembered(drawn);
             }
             sa.setSVar("AFNotDrawnNum_" + p.getId(), "Number$" + drawn.size());
         }

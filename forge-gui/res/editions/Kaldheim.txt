@@ -431,6 +431,13 @@ ScryfallCode=KHM
 404 C Frost Bite @Caio Monteiro
 405 C Masked Vandal @Jason A. Engle
 
+[rebalanced]
+A41 M A-Alrund's Epiphany @Kieran Yanner
+A139 M A-Goldspan Dragon @Andrew Mar
+A169 R A-Esika's Chariot @Raoul Vitale
+A237 R A-Cosmos Elixir @Volkan Baǵa
+A255 R A-Faceless Haven @Titus Lunter
+
 [Snow Lands]
 5 Snow-Covered Plains|KHM|1
 5 Snow-Covered Plains|KHM|2

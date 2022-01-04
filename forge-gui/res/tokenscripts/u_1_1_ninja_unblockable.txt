@@ -1,0 +1,7 @@
+Name:Ninja Token
+ManaCost:no cost
+Types:Creature Ninja
+Colors:blue
+PT:1/1
+K:Unblockable
+Oracle:This creature can't be blocked.

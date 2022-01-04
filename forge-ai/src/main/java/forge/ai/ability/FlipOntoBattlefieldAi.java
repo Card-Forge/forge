@@ -18,7 +18,7 @@ public class FlipOntoBattlefieldAi extends SpellAbilityAi {
         PhaseHandler ph = sa.getHostCard().getGame().getPhaseHandler();
         String logic = sa.getParamOrDefault("AILogic", "");
 
-        if (!SpellAbilityAi.isSorcerySpeed(sa) && sa.getPayCosts().hasManaCost()) {
+        if (!SpellAbilityAi.isSorcerySpeed(sa, aiPlayer) && sa.getPayCosts().hasManaCost()) {
             return ph.is(PhaseType.END_OF_TURN);
         }
 

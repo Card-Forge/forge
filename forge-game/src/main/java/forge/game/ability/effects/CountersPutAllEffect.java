@@ -50,7 +50,7 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         if (counterAmount <= 0) {
             return;
         }
-        
+
         CardCollectionView cards = game.getCardsIn(zone);
         cards = CardLists.getValidCards(cards, valid, host.getController(), host, sa);
 
@@ -67,15 +67,13 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
 
         GameEntityCounterTable table = new GameEntityCounterTable();
         for (final Card tgtCard : cards) {
-            boolean inBattlefield = game.getZoneOf(tgtCard).is(ZoneType.Battlefield);
             if (etbcounter) {
                 tgtCard.addEtbCounter(CounterType.getType(type), counterAmount, placer);
             } else {
-                tgtCard.addCounter(CounterType.getType(type), counterAmount, placer, sa, inBattlefield, table);
+                tgtCard.addCounter(CounterType.getType(type), counterAmount, placer, table);
             }
-            game.updateLastStateForCard(tgtCard);
         }
-        table.triggerCountersPutAll(game);
+        table.replaceCounterEffect(game, sa, true);
     }
 
 }

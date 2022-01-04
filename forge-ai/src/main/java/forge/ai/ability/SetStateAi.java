@@ -44,7 +44,7 @@ public class SetStateAi extends SpellAbilityAi {
         }
 
         if (sa.getSVar("X").equals("Count$xPaid")) {
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, aiPlayer);
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, aiPlayer, sa.isTrigger());
             sa.setXManaCostPaid(xPay);
         }
 

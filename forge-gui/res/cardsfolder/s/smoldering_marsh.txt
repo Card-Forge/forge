@@ -5,5 +5,4 @@ R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ 
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar | ConditionSVarCompare$ LE1 | SubAbility$ MoveToPlay
 SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
 SVar:ETBCheckSVar:Count$LastStateBattlefield Land.Basic+YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/smoldering_marsh.jpg
 Oracle:({T}: Add {B} or {R}.)\nSmoldering Marsh enters the battlefield tapped unless you control two or more basic lands.
