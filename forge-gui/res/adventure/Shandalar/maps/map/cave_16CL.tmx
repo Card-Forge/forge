@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="84">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzz42Rg8BvFo3gUj+JRPIpH8YjAAAvyrVM=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy9VEEKhDAM7LFln+FblMWPitv91aL1GbZo2DGYSiVWCKWQZDKZqZ0zpiuIjzXma/9nSe3dSFhTPH9uO/uKmPQN8b5UwJ1jjHbDbF56XBMfvwfp55mGb+CrhYs9ST/enzjjjnFePqfEy9tjzwC7xBmoF2ncu+Od53P8s7ycjrwX1baCz7CO5sW8lBN2fpKHgsCf60C9lpOd8bwS/0szIF7OK7m8O28p52ecVeONo1bot6cD93fFWTNwz7X+k3zPbSXMEl89ha3h0xVTgsj4
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFhAD7ANj5egDspBVAD7+5/PS1v46XNPXUjO/vRJpHrBspdVsUkep+UGgPJWAg8ttwA74DYOeyAbBzFJAHAOVFBhQ=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="73" template="../obj/door_left.tx" x="464" y="114">
+   <properties>
+    <property name="teleport" value="maps/map/cave_16C.tmx"/>
+    <property name="teleportObjectId" value="65"/>
+   </properties>
+  </object>
+  <object id="74" template="../obj/enemy.tx" x="135.5" y="136.833">
+   <properties>
+    <property name="enemy" value="Black Wiz1"/>
+   </properties>
+  </object>
+  <object id="75" template="../obj/enemy.tx" x="199.5" y="104">
+   <properties>
+    <property name="enemy" value="Zombie Lord"/>
+   </properties>
+  </object>
+  <object id="76" template="../obj/enemy.tx" x="207" y="185">
+   <properties>
+    <property name="enemy" value="Big Zombie"/>
+   </properties>
+  </object>
+  <object id="77" template="../obj/enemy.tx" x="296" y="114.5">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="78" template="../obj/enemy.tx" x="381.5" y="154">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="79" template="../obj/treasure.tx" x="58" y="93.5"/>
+  <object id="80" template="../obj/treasure.tx" x="200" y="33.5"/>
+  <object id="81" template="../obj/treasure.tx" x="207.5" y="268"/>
+  <object id="82" template="../obj/gold.tx" x="41" y="91.5"/>
+  <object id="83" template="../obj/gold.tx" x="232.5" y="40"/>
+ </objectgroup>
+</map>

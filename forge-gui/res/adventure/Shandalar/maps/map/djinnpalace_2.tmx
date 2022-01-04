@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="68">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgaQJYHQkvzYMphEyMV7AGasReLObS2N4qXgSGal/724gL47N0JFNsFxaNgFIyCUTAKqA928eDG5KjDBgCzzxE7
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyLZWFgiB3Fo3gUD3tcwM7AMI0VFdPDXnQ7h7u9o3gUD3YMAB9sxIE=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzbwcPAsIMOWAYNY1MTzcvAsIuHfBzFS569skBMCZAm07+j9o7aO2rvqL2j9g5Oe/cCcR03dlzPDTG7Foc8CO8h0158emBhIU2iOej2AgABTq2x
+  </data>
+ </layer>
+ <layer id="8" name="Walls Supplementary" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFIPCZl4HhCy+muBgbhP7Gjl3ffT7K7OUH6hfAYkYJ1C0ibNj1/abQXlyAmRlCO/HQxvxRAAFrOBHsSzjSFrWBIyMDgwsSdmKkrX0wfz1Es+cxje2FgftAexqYEPgB1F7ksKcFGIi4HQWjgBQAAE1xEUY=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="208.333" y="270.665">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="66" template="../obj/gold.tx" x="208.046" y="41.5369"/>
+  <object id="67" template="../obj/enemy.tx" x="207.979" y="57.637">
+   <properties>
+    <property name="enemy" value="Djinn"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

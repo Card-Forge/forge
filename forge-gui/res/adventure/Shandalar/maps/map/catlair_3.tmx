@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="56">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyL5mVg2MVDXxwFtFMWSNMbSPOM2kuMHlg8ketmUuzdhUcdPjlK7UXWQ0//DrS91ABDwd6BTlfUAKP24gfo8UhqvJJrL7UAchlALIa5kxy9yBgAQ0U6kg==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzr42Rg6MOC25AwNnl86onB1DJnqNtLrt3E6hu1d9TeUXtH7R3q9pJjJ6nuG6z20qL+BQDfkyFi
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy1VUkSwjAM84lJ4G0U/sZDwvYVXtHS9sKd+uDBceU0bJrhgBtLTiK1RETXQNTE/HeeahrjVLutiHaRIIapfgrz+ujwMdo4173H+Rqez9Y1dxNxHWkibcSNkEKuqflrNLU20mR+dIbbwr20b+4BQWbvAUdX4P5Gk6HvAGl/AnR+CNrzveNdD3xPR7Ne8wyFvSDP12ingM/Kcnn5ZKCcL2mPZr1o232UvCAZ1uv3C/fNPZfw6tO+l2e1/hP9mmzqniV+L6//hLyDfpWXWrzzfvP6eWbvO1HStJ5Ppv+xzv9rfuu7mqyjHplF9x42+Uz6Ocp5jXYHsmLPXOuKt4U7gYwj7SelS3er
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9VTkSwjAMTEsR4FfxTPgPOR5pfkCdtNDREA3ZyUYj2U7DNtg6bHm1KFW14XH6/c5ki4ZtqPf+YNgFo9rzHZ5fA/d2FNvm04rQGLaSmgSoq1/jb+seXER6Z1B7neMhFNp7VbPugwb83IvneVtLrcwD+3JgnUy05rsYn8TZ7MO5OAccaC2wTri/s4rj/WvJedcbL90BPrVe7kYszmOf1H9Z3nc9wK3A0qzWQ07DrDvOnZWfObLeBQzqXYyUdixfdHSSgpUD7VhzS3y6xymI5lpaT0aM1lcOzBn6ZfW2BE2V7vlYODstTvAunBGcWO4768vjxZoHVm1evthLvjcc72kY/fRm1D+R+i95s8biDbbofG+/XkBHzQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="208" y="281">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../obj/enemy.tx" x="232.333" y="95.1667">
+   <properties>
+    <property name="enemy" value="Cat"/>
+   </properties>
+  </object>
+  <object id="51" template="../obj/treasure.tx" x="216.333" y="98.5"/>
+  <object id="53" template="../obj/enemy.tx" x="207.833" y="225.167">
+   <properties>
+    <property name="enemy" value="Cat"/>
+   </properties>
+  </object>
+  <object id="54" template="../obj/enemy.tx" x="200.167" y="95.6663">
+   <properties>
+    <property name="enemy" value="Cat"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

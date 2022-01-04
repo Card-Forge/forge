@@ -24,6 +24,5 @@
 	"color": "110903",
 	"spriteNames":[ "SwampTree","SwampTree2","DarkGras","Skull","SwampRock","DarkWood","Reed","Waterlily","Shroom","Shroom2"]   ,
 	"enemies":[ "Zombie","Skeleton","Vampire","High Vampire","Zombie Lord","Big Zombie","Demon","Black Wiz1"] ,
-	"pointsOfInterest":[ "Graveyard","Swamp Town","Cave_1","Cave_2"]
-
+	"pointsOfInterest":[ "Swamp Town","Graveyard","EvilGrove","VampireCastle","SkullCave","Cave" ]
 }

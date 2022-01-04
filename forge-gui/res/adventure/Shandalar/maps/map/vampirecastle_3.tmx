@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="66">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AU0APs4kFgYsRHwSggBIhNM0MtbSHnCfT8QWw+wmfGSAcA6CgUHQ==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJybxsnAMG0Uj+JRPIpH8SgexSMCAwDOljzS
+  </data>
+ </layer>
+ <layer id="2" name="Floor" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyT4WFgkCGAdxCBCZlBDo7mZWDYxYMbR/HSxl5ZIF7BiRtL08i/IHvxgZFsLzXT3V4gruOG4HpuiF213AixPTTyLza/UytsseUVWP5AltvNA0nDOwmoIzaPYYtDaSQ5YvIRPjNIsRfmp90E0hU+deTYW4uWlnABfOrIsRdf+BGrjpC9yHkFPX8Qm4/wmTHY8tFgtxcUlskclIcfAB+Qd4w=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF2AArlD4lwMBwWmBAnQIGrISVDFnABqWHsx+HO8CXT5aQaAYbYaVgYE+kOhC4S4JaYgEu+7HZhU0tKe4HAeRwIRSmxIQhsfEy2AGp4TgKGBgAbRMKKA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="208" y="260">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../obj/treasure.tx" x="375.809" y="183.982"/>
+  <object id="50" template="../obj/enemy.tx" x="207.735" y="118.369">
+   <properties>
+    <property name="enemy" value="High Vampire"/>
+   </properties>
+  </object>
+  <object id="62" template="../obj/gold.tx" x="217.161" y="49.644"/>
+  <object id="63" template="../obj/treasure.tx" x="38.5" y="184"/>
+  <object id="64" template="../obj/enemy.tx" x="305" y="184">
+   <properties>
+    <property name="enemy" value="Vampire"/>
+   </properties>
+  </object>
+  <object id="65" template="../obj/enemy.tx" x="110" y="184">
+   <properties>
+    <property name="enemy" value="Vampire"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

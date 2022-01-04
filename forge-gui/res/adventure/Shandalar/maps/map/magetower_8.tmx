@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="82">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBj8QJaHgUGaB8KWRmIPV3ujeBkYonkR9sLYtAY7gXbt5sFkj4JRMApGwSgYGLCLB4GJEScGAADolQpX
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJybzMnAMHkUj+JRPIpH8SgexSMCAwDxIjbY
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzt1FsKgCAQBVD/zRVoG6u1WNuy194yYkik8s4QfUTCRVDGM4IYKqXCC3FZkJrWKDVW12nMcy7tb+YU57sxADbnvoiJ2qjLMREbcSVmyUbcWmjSsML7/u633SWm1zLTx7pZ6DqhTebZuZx/kmPfmdx/ErVLJtdN7U7voR68PtZKpsTNa+itW0H/aVYIl805
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBj8YA8/BKOzh6u9vAIMDHwCmGxags/spImPAuIAcviRyh4FpIEF/OSzRwF5AFcYjobt4AYAEOASbg==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="208.333" y="270.665">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../obj/enemy.tx" x="207.402" y="69.0586">
+   <properties>
+    <property name="enemy" value="Red Wiz1"/>
+   </properties>
+  </object>
+  <object id="65" template="../obj/treasure.tx" x="208" y="47.5"/>
+  <object id="66" template="../obj/door_up.tx" x="160" y="176">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_8.tmx"/>
+    <property name="teleportObjectId" value="73"/>
+   </properties>
+  </object>
+  <object id="67" template="../obj/door_up.tx" x="111" y="175.5">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_8.tmx"/>
+    <property name="teleportObjectId" value="73"/>
+   </properties>
+  </object>
+  <object id="69" template="../obj/door_up.tx" x="207.5" y="175">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_8.tmx"/>
+    <property name="teleportObjectId" value="73"/>
+   </properties>
+  </object>
+  <object id="70" template="../obj/door_up.tx" x="256.5" y="175.5">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_8.tmx"/>
+    <property name="teleportObjectId" value="73"/>
+   </properties>
+  </object>
+  <object id="71" template="../obj/door_up.tx" x="303.5" y="176.5">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_8.tmx"/>
+    <property name="teleportObjectId" value="73"/>
+   </properties>
+  </object>
+  <object id="72" template="../obj/door_up.tx" x="160.5" y="223.5">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_8.tmx"/>
+    <property name="teleportObjectId" value="73"/>
+   </properties>
+  </object>
+  <object id="73" template="../obj/door_up.tx" x="257" y="80">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_8.tmx"/>
+    <property name="teleportObjectId" value="73"/>
+   </properties>
+  </object>
+  <object id="74" template="../obj/door_up.tx" x="143.5" y="127.5">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_8.tmx"/>
+    <property name="teleportObjectId" value="73"/>
+   </properties>
+  </object>
+  <object id="75" template="../obj/door_up.tx" x="191.5" y="128.5">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_8.tmx"/>
+    <property name="teleportObjectId" value="73"/>
+   </properties>
+  </object>
+  <object id="76" template="../obj/door_up.tx" x="240.5" y="128">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_8.tmx"/>
+    <property name="teleportObjectId" value="73"/>
+   </properties>
+  </object>
+  <object id="77" template="../obj/door_up.tx" x="288.5" y="128.5">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_8.tmx"/>
+    <property name="teleportObjectId" value="73"/>
+   </properties>
+  </object>
+  <object id="79" template="../obj/door_up.tx" x="96" y="128">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_8.tmx"/>
+    <property name="teleportObjectId" value="73"/>
+   </properties>
+  </object>
+  <object id="80" template="../obj/door_up.tx" x="161" y="79">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_8.tmx"/>
+    <property name="teleportObjectId" value="73"/>
+   </properties>
+  </object>
+  <object id="81" template="../obj/door_up.tx" x="256.5" y="225.5">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_8.tmx"/>
+    <property name="teleportObjectId" value="73"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

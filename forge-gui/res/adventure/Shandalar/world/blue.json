@@ -24,5 +24,5 @@
 		"color": "10a2e0",
     "spriteNames":["IslandTree","Coral","Shell"]       ,
     "enemies":[ "Merfolk","Merfolk warrior","Merfolk Avatar","Djinn","Blue Wiz1"]  ,
-    "pointsOfInterest":[ "Island Town","Cave_1","Cave_2"]
+    "pointsOfInterest":[ "Island Town","MageTower","MerfolkPool","DjinnPalace","Cave" ]
 }

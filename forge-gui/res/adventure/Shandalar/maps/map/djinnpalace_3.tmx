@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="56">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJx7ws7A8GQUj+JRPIpH8SgexSMCAwBnNdQ6
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzt1FsKgCAQBVD/zRVoG6u1WNuy194yYkik8s4QfUTCRVDGM4IYKqXCC3FZkJrWKDVW12nMcy7tb+YU57sxADbnvoiJ2qjLMREbcSVmyUbcWmjSsML7/u633SWm1zLTx7pZ6DqhTebZuZx/kmPfmdx/ErVLJtdN7U7voR68PtZKpsTNa+itW0H/aVYIl805
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFhMA39oF2wSgYBaNgFIyCUUAdAADHzwD+
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="207.632" y="272.303"/>
+  <object id="49" template="../obj/entry_down.tx" x="208.488" y="52.2237">
+   <properties>
+    <property name="teleport" value="maps/map/djinnpalace_3B.tmx"/>
+   </properties>
+  </object>
+  <object id="55" template="../obj/gold.tx" x="208.948" y="37.2155"/>
+ </objectgroup>
+</map>

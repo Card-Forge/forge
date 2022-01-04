@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="77">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzz42Rg8BvFo3gUjwi8gGHg3TCKR/EoHlgMADJSrZw=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJztVEkOwjAM9C3Jw1oh/gmIlF9VUJ5BLHWE6zoLOcAFS5bSJJ4ZL+kYiMa//8SjJ7r57+HwvSn5Pa3n0M8tcYaG+4fksBRmcpdykHwwxpgqeTOvo63JuLhiHht0a5xcTBQ6z7Q35sf5kMlb8p6MeCtnGWNpvqSYq99q0FiP8L5jmcUNXh3GfEs6e653vLFf0u+Vfl1vaHUFXJlPS48ts+IYdwl2HnoGMG9yVqOaZaJ9ryzc1nfmFC40SE7ZL6xzNaq5nhvURu7p91Orcet/iHNi7CGjR849vku9+zRfay6BXZuTHkePe2sGfwEsNbJD
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2DoAFtB0vXU8VLXPnsS3fCDfOuHHKAkrEfBKBgF9AEAyOIC+w==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="71" template="../obj/door_up.tx" x="208.638" y="271.962">
+   <properties>
+    <property name="teleport" value="maps/map/cave_16BL2.tmx"/>
+    <property name="teleportObjectId" value="76"/>
+   </properties>
+  </object>
+  <object id="72" template="../obj/enemy.tx" x="157" y="138">
+   <properties>
+    <property name="enemy" value="Vampire"/>
+   </properties>
+  </object>
+  <object id="73" template="../obj/enemy.tx" x="272" y="216.5">
+   <properties>
+    <property name="enemy" value="High Vampire"/>
+   </properties>
+  </object>
+  <object id="74" template="../obj/treasure.tx" x="440" y="170"/>
+  <object id="75" template="../obj/gold.tx" x="375" y="74.5"/>
+  <object id="76" template="../obj/treasure.tx" x="42" y="151.5"/>
+ </objectgroup>
+</map>
