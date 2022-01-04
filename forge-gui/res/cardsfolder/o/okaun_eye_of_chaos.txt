@@ -6,7 +6,7 @@ K:Partner:Zndrsplt, Eye of Wisdom:Zndrsplt
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigFlip | TriggerDescription$ At the beginning of combat on your turn, flip a coin until you lose a flip.
 SVar:TrigFlip:DB$ FlipACoin | FlipUntilYouLose$ True
 T:Mode$ FlippedCoin | ValidResult$ Win | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a player wins a coin flip, double CARDNAME's power and toughness until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | NumDef$ +Y
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | NumDef$ +Y | Double$ True
 SVar:X:Count$CardPower
 SVar:Y:Count$CardToughness
 SVar:Picture:http://www.wizards.com/global/images/magic/general/okaun_eye_of_chaos.jpg

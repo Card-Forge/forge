@@ -3,8 +3,7 @@ ManaCost:6 G
 Types:Enchantment Creature Giant
 PT:6/6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Enchantment.Other+YouCtrl | Execute$ TrigPump | TriggerDescription$ Constellation Whenever CARDNAME or another enchantment enters the battlefield under your control, double target creature's power and toughness until end of turn.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +Y | RememberTargets$ True | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$CardPower
-SVar:Y:Remembered$CardToughness
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +Y | Double$ True
+SVar:X:Targeted$CardPower
+SVar:Y:Targeted$CardToughness
 Oracle:Constellation — Whenever Nylea's Colossus or another enchantment enters the battlefield under your control, double target creature's power and toughness until end of turn.
