@@ -18,7 +18,7 @@ public class ReplaceDamageAi extends SpellAbilityAi {
             if (c.hasSVar("MustBeBlocked")) {
                 return c;
             }
-            // TODO check if target can receive counters
+            // TODO check if target can receive counters + sort these to the front if that can prevent loss
             if (c.hasKeyword(Keyword.INFECT)) {
                 return c;
             }
