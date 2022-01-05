@@ -187,7 +187,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
                 }
 
                 if (choice == null) { // can't find anything left
-                    if (!sa.isTargetNumberValid() || (sa.getTargets().size() == 0)) {
+                    if (!sa.isTargetNumberValid() || sa.getTargets().size() == 0) {
                         sa.resetTargets();
                         return false;
                     } else {

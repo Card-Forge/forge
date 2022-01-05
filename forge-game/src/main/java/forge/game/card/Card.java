@@ -1912,9 +1912,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         for (KeywordInterface inst : keywords) {
             String keyword = inst.getOriginal();
             try {
-                if (keyword.startsWith("SpellCantTarget")) {
-                    continue;
-                }
                 if (keyword.startsWith("CantBeCounteredBy")) {
                     final String[] p = keyword.split(":");
                     sbLong.append(p[2]).append("\r\n");
@@ -4596,8 +4593,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final StaticAbility addStaticAbility(final String s) {
         if (!s.trim().isEmpty()) {
-            final StaticAbility stAb = new StaticAbility(s, this, currentState);
-            stAb.setIntrinsic(true);
+            final StaticAbility stAb = StaticAbility.create(s, this, currentState, true);
             currentState.addStaticAbility(stAb);
             return stAb;
         }
@@ -5693,103 +5689,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public Card getMeldedWith() { return meldedWith; }
     public void setMeldedWith(Card meldedWith) { this.meldedWith = meldedWith; }
 
-    public boolean hasProtectionFrom(final Card source) {
-        return hasProtectionFrom(source, false, false);
-    }
-
-    @Override
-    public boolean hasProtectionFrom(final Card source, final boolean checkSBA) {
-        return hasProtectionFrom(source, checkSBA, false);
-    }
-    public boolean hasProtectionFrom(final Card source, final boolean checkSBA, final boolean damageSource) {
-        if (source == null) {
-            return false;
-        }
-
-        if (isImmutable()) {
-            return true;
-        }
-
-        // Protection only works on the Battlefield
-        if (!isInPlay()) {
-            return false;
-        }
-
-        final boolean colorlessDamage = damageSource && source.hasKeyword("Colorless Damage Source");
-
-        for (final KeywordInterface inst : getKeywords(Keyword.PROTECTION)) {
-            String kw = inst.getOriginal();
-            if (kw.equals("Protection from white")) {
-                if (source.isWhite() && !colorlessDamage) {
-                    return true;
-                }
-            } else if (kw.equals("Protection from blue")) {
-                if (source.isBlue() && !colorlessDamage) {
-                    return true;
-                }
-            } else if (kw.equals("Protection from black")) {
-                if (source.isBlack() && !colorlessDamage) {
-                    return true;
-                }
-            } else if (kw.equals("Protection from red")) {
-                if (source.isRed() && !colorlessDamage) {
-                    return true;
-                }
-            } else if (kw.equals("Protection from green")) {
-                if (source.isGreen() && !colorlessDamage) {
-                    return true;
-                }
-            } else if (kw.equals("Protection from all colors")) {
-                if (!source.isColorless() && !colorlessDamage) {
-                    return true;
-                }
-            } else if (kw.equals("Protection from colorless")) {
-                if (source.isColorless() || colorlessDamage) {
-                    return true;
-                }
-            } else if (kw.equals("Protection from everything")) {
-                return true;
-            } else if (kw.startsWith("Protection:")) { // uses isValid; Protection:characteristic:desc:exception
-                final String[] kws = kw.split(":");
-                String characteristic = kws[1];
-
-                if (characteristic.startsWith("Player")) {
-                    // TODO need to handle that better in CardProperty
-                    if (source.getController().isValid(characteristic.split(","), getController(), this, null)) {
-                        return true;
-                    }
-                } else {
-                    // if damageSource then it does only check damage color..
-                    if (damageSource) {
-                        if (characteristic.endsWith("White") || characteristic.endsWith("Blue")
-                            || characteristic.endsWith("Black") || characteristic.endsWith("Red")
-                            || characteristic.endsWith("Green") || characteristic.endsWith("Colorless")
-                            || characteristic.endsWith("MonoColor") || characteristic.endsWith("MultiColor")) {
-                            characteristic += "Source";
-                        }
-                    }
-
-                    final String[] characteristics = characteristic.split(",");
-                    final String[] exceptions = kws.length > 3 ? kws[3].split(",") : null; // check "This effect cannot remove sth"
-                    if (source.isValid(characteristics, getController(), this, null)
-                            && (!checkSBA || exceptions == null || !source.isValid(exceptions, getController(), this, null))) {
-                        return true;
-                    }
-                }
-            } else if (kw.startsWith("Protection from opponent of ")) {
-                final String playerName = kw.substring("Protection from opponent of ".length());
-                if (source.getController().isOpponentOf(playerName)) {
-                    return true;
-                }
-            } else if (kw.startsWith("Protection from ")) {
-                final String protectType = CardType.getSingularType(kw.substring("Protection from ".length()));
-                if (source.getType().hasStringType(protectType)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
     public String getProtectionKey() {
         String protectKey = "";
         boolean pR = false; boolean pG = false; boolean pB = false; boolean pU = false; boolean pW = false;
@@ -5933,30 +5832,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return true;
         }
 
-        if (hasProtectionFrom(sa.getHostCard())) {
-            return false;
-        }
-
         if (isPhasedOut()) {
             return false;
         }
 
-        final Card source = sa.getHostCard();
-
-        if (sa.isSpell()) {
-            // TODO replace with Static Ability
-            for (KeywordInterface inst : source.getKeywords()) {
-                String kw = inst.getOriginal();
-                if (!kw.startsWith("SpellCantTarget")) {
-                    continue;
-                }
-                final String[] k = kw.split(":");
-                final String[] restrictions = k[1].split(",");
-                if (isValid(restrictions, source.getController(), source, null)) {
-                    return false;
-                }
-            }
-        }
         return true;
     }
 

@@ -30,7 +30,7 @@ public class GoadAi extends SpellAbilityAi {
             if (list.isEmpty())
                 return false;
 
-            if (game.getPlayers().size() >= 2) {
+            if (game.getPlayers().size() > 2) {
                 // use this part only in multiplayer
                 CardCollection betterList = CardLists.filter(list, new Predicate<Card>() {
                     @Override
@@ -79,10 +79,43 @@ public class GoadAi extends SpellAbilityAi {
 
             // AI does not find a good creature to goad.
             // because if it would goad a creature it would attack AI.
-            // AI might not have enough infomation to block it
+            // AI might not have enough information to block it
             return false;
         }
         return true;
+    }
+
+    @Override
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        if (checkApiLogic(ai, sa)) {
+            return true;
+        }
+        if (!mandatory) {
+            return false;
+        }
+        if (sa.usesTargeting()) {
+            if (sa.getTargetRestrictions().canTgtPlayer()) {
+                for (Player opp : ai.getOpponents()) {
+                    if (sa.canTarget(opp)) {
+                        sa.getTargets().add(opp);
+                        return true;
+                    }
+                }
+                if (sa.canTarget(ai)) {
+                    sa.getTargets().add(ai);
+                    return true;
+                }
+            } else {
+                List<Card> list = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
+
+                if (list.isEmpty())
+                    return false;
+
+                sa.getTargets().add(ComputerUtilCard.getWorstCreatureAI(list));
+                return true;
+            }
+        }
+        return false;
     }
 
 }

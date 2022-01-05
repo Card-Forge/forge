@@ -127,7 +127,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         // itself a static ability)
         final List<StaticAbility> addedStaticAbilities = Lists.newArrayList();
         for (final String s : stAbs) {
-            addedStaticAbilities.add(new StaticAbility(AbilityUtils.getSVar(sa, s), c, sa.getCardState()));
+            addedStaticAbilities.add(StaticAbility.create(AbilityUtils.getSVar(sa, s), c, sa.getCardState(), false));
         }
 
         final GameCommand unanimate = new GameCommand() {

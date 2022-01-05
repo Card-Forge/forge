@@ -24,7 +24,6 @@ public class ReplaceCounterEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-
         final Card card = sa.getHostCard();
 
         // outside of Replacement Effect, unwanted result
@@ -64,8 +63,6 @@ public class ReplaceCounterEffect extends SpellAbilityEffect {
                     counterTable.get(p).put(e.getKey(), value);
                 }
             }
-
-
         } else {
             for (Map.Entry<Optional<Player>, Map<CounterType, Integer>> e : counterTable.entrySet()) {
                 if (!sa.matchesValidParam("ValidSource", e.getKey().orNull())) {

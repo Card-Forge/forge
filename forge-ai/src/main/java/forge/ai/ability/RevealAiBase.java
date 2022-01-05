@@ -15,7 +15,7 @@ import forge.game.zone.ZoneType;
 
 public abstract class RevealAiBase extends SpellAbilityAi {
 
-    protected  boolean revealHandTargetAI(final Player ai, final SpellAbility sa) {
+    protected  boolean revealHandTargetAI(final Player ai, final SpellAbility sa, boolean mandatory) {
         if (sa.usesTargeting()) {
             // ability is targeted
             sa.resetTargets();
@@ -29,7 +29,7 @@ public abstract class RevealAiBase extends SpellAbilityAi {
 
             Player p = Collections.max(opps, PlayerPredicates.compareByZoneSize(ZoneType.Hand));
 
-            if (p.getCardsIn(ZoneType.Hand).isEmpty()) {
+            if (!mandatory && p.getCardsIn(ZoneType.Hand).isEmpty()) {
                 return false;
             }
             sa.getTargets().add(p);
@@ -45,7 +45,7 @@ public abstract class RevealAiBase extends SpellAbilityAi {
      */
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        revealHandTargetAI(ai, sa);
+        revealHandTargetAI(ai, sa, false);
         return true;
     }
 }

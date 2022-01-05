@@ -562,7 +562,7 @@ public class CardView extends GameEntityView {
         });
     }
 
-    private boolean canFaceDownBeShownTo(final PlayerView viewer, boolean skip) {
+    public boolean canFaceDownBeShownTo(final PlayerView viewer, boolean skip) {
         if (!isFaceDown()) {
             return true;
         }

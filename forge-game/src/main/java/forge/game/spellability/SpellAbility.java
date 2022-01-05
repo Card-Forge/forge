@@ -504,7 +504,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isCycling() {
-        return this.isAlternativeCost(AlternativeCost.Cycling);
+        return isAlternativeCost(AlternativeCost.Cycling);
     }
 
     public boolean isBoast() {
@@ -513,6 +513,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public boolean isNinjutsu() {
         return this.hasParam("Ninjutsu");
+    }
+
+    public boolean isEpic() {
+        AbilitySub sub = this.getSubAbility();
+        while (sub != null && !sub.hasParam("Epic")) {
+            sub = sub.getSubAbility();
+        }
+        return sub != null && sub.hasParam("Epic");
     }
 
     // If this is not null, then ability was made in a factory
@@ -777,7 +785,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public void resetOnceResolved() {
         //resetPaidHash(); // FIXME: if uncommented, breaks Dragon Presence, e.g. Orator of Ojutai + revealing a Dragon from hand.
                            // Is it truly necessary at this point? The paid hash seems to be reset on all SA instance operations.
-        resetTargets();
+        // Epic spell keeps original targets
+        if (!isEpic()) {
+            resetTargets();
+        }
         resetTriggeringObjects();
         resetTriggerRemembered();
 

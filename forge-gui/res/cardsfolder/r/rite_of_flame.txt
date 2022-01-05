@@ -1,7 +1,7 @@
 Name:Rite of Flame
 ManaCost:R
 Types:Sorcery
-A:SP$ Mana | Produced$ R | Amount$ 2 | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R}{R}, then add {R} for each card named CARDNAME in each graveyard.
+A:SP$ Mana | Produced$ R | Amount$ 2 | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SubAbility$ SubMana | SpellDescription$ Add {R}{R}, then add {R} for each card named CARDNAME in each graveyard.
 SVar:SubMana:DB$ Mana | Produced$ R | Amount$ X
 SVar:X:Count$NamedInAllYards.Rite of Flame
 DeckHints:Name$Rite of Flame

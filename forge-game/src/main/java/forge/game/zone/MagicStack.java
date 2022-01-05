@@ -253,7 +253,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         }
 
-        if (!sp.isCopied() && !hasLegalTargeting(sp, source)) {
+        if (!sp.isCopied() && !hasLegalTargeting(sp)) {
             String str = source + " - [Couldn't add to stack, failed to target] - " + sp.getDescription();
             System.err.println(str + sp.getAllTargetChoices());
             game.getGameLog().add(GameLogEntryType.STACK_ADD, str);
@@ -604,14 +604,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
     }
 
-    public final boolean hasLegalTargeting(final SpellAbility sa, final Card source) {
+    public final boolean hasLegalTargeting(final SpellAbility sa) {
         if (sa == null) {
             return true;
         }
         if (!sa.isTargetNumberValid()) {
             return false;
         }
-        return hasLegalTargeting(sa.getSubAbility(), source);
+        return hasLegalTargeting(sa.getSubAbility());
     }
 
     private final boolean hasFizzled(final SpellAbility sa, final Card source, final Boolean parentFizzled) {

@@ -130,6 +130,12 @@ public class TriggerChangesZone extends Trigger {
             }
         }
 
+        if (hasParam("ResolvedCard")) {
+            if (!runParams.containsKey(AbilityKey.Fizzle)) {
+                return false;
+            }
+        }
+
         // Check number of lands ETB this turn on triggered card's controller
         if (hasParam("CheckOnTriggeredCard")) {
             final String[] condition = getParam("CheckOnTriggeredCard").split(" ", 2);

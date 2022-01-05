@@ -11,7 +11,7 @@ public class PlayerFactoryUtil {
 
     public static void addStaticAbility(final KeywordInterface inst, final Player player) {
         String keyword = inst.getOriginal();
-        String effect = null;
+
         if (keyword.startsWith("Hexproof")) {
             final StringBuilder sbDesc = new StringBuilder("Hexproof");
             final StringBuilder sbValid = new StringBuilder();
@@ -23,18 +23,40 @@ public class PlayerFactoryUtil {
                 sbValid.append("| ValidSource$ ").append(k[1]);
             }
 
-            effect = "Mode$ CantTarget | Hexproof$ True | ValidPlayer$ Player.You | Secondary$ True "
+            String effect = "Mode$ CantTarget | Hexproof$ True | ValidPlayer$ Player.You | Secondary$ True "
                     + sbValid.toString() + " | Activator$ Opponent | EffectZone$ Command | Description$ "
                     + sbDesc.toString() + " (" + inst.getReminderText() + ")";
-        } else if (keyword.equals("Shroud")) {
-            effect = "Mode$ CantTarget | Shroud$ True | ValidPlayer$ Player.You | Secondary$ True "
-                    + "| EffectZone$ Command | Description$ Shroud (" + inst.getReminderText() + ")";
-        }
-        if (effect != null) {
+
             final Card card = player.getKeywordCard();
-            StaticAbility st = new StaticAbility(effect, card, card.getCurrentState());
-            st.setIntrinsic(false);
-            inst.addStaticAbility(st);
+            inst.addStaticAbility(StaticAbility.create(effect, card, card.getCurrentState(), false));
+        } else if (keyword.equals("Shroud")) {
+            String effect = "Mode$ CantTarget | Shroud$ True | ValidPlayer$ Player.You | Secondary$ True "
+                    + "| EffectZone$ Command | Description$ Shroud (" + inst.getReminderText() + ")";
+
+            final Card card = player.getKeywordCard();
+            inst.addStaticAbility(StaticAbility.create(effect, card, card.getCurrentState(), false));
+        } else if (keyword.startsWith("Protection")) {
+            String valid = CardFactoryUtil.getProtectionValid(keyword, false);
+            String effect = "Mode$ CantTarget | Protection$ True | ValidCard$ Player.You | Secondary$ True ";
+            if (!valid.isEmpty()) {
+                effect += "| ValidSource$ " + valid;
+            }
+            final Card card = player.getKeywordCard();
+            inst.addStaticAbility(StaticAbility.create(effect, card, card.getCurrentState(), false));
+
+            // Attach
+            effect = "Mode$ CantAttach | Protection$ True | Target$ Player.You | Secondary$ True ";
+            if (!valid.isEmpty()) {
+                effect += "| ValidCard$ " + valid;
+            }
+            // This effect doesn't remove something
+            if (keyword.startsWith("Protection:")) {
+                final String[] kws = keyword.split(":");
+                if (kws.length > 3) {
+                    effect += "| Exceptions$ " + kws[3];
+                }
+            }
+            inst.addStaticAbility(StaticAbility.create(effect, card, card.getCurrentState(), false));
         }
     }
 

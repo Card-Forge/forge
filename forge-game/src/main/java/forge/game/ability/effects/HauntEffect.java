@@ -9,13 +9,13 @@ public class HauntEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        Card card = sa.getHostCard();
-        final Game game = card.getGame();
-        card = game.getCardState(card, null);
+        Card host = sa.getHostCard();
+        final Game game = host.getGame();
+        Card card = game.getCardState(host, null);
         if (card == null) {
             return;
-        } else if (sa.usesTargeting() && !card.isToken()) {
-            // haunt target but only if card is no token
+        } else if (sa.usesTargeting() && !card.isToken() && host.equalsWithTimestamp(card)) {
+            // haunt target but only if card is no token and still in grave
             final Card copy = game.getAction().exile(card, sa);
             sa.getTargets().getFirstTargetedCard().addHauntedBy(copy);
         } else if (!sa.usesTargeting() && card.getHaunting() != null) {
