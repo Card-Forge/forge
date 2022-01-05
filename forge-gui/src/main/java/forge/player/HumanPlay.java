@@ -139,7 +139,6 @@ public class HumanPlay {
      * @return an ArrayList<SpellAbility>.
      */
     static SpellAbility chooseOptionalAdditionalCosts(Player p, final SpellAbility original) {
-
         PlayerController c = p.getController();
 
         // choose alternative additional cost
