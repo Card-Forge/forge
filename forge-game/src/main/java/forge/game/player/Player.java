@@ -1636,16 +1636,12 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void shuffle(final SpellAbility sa) {
         final CardCollection list = new CardCollection(getCardsIn(ZoneType.Library));
 
-        if (list.size() <= 1) {
-            return;
-        }
-
         // Note: Shuffling once is sufficient.
         Collections.shuffle(list, MyRandom.getRandom());
 
         getZone(ZoneType.Library).setCards(getController().cheatShuffle(list));
 
-        // Run triggers
+        // Always Run triggers (701.20e)
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.Source, sa);
         game.getTriggerHandler().runTrigger(TriggerType.Shuffled, runParams, false);
