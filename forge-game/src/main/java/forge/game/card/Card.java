@@ -5503,7 +5503,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         view.updateExertedThisTurn(this, getExertedThisTurn() > 0);
     }
 
-    protected void resetExtertedThisTurn() {
+    protected void resetExertedThisTurn() {
         exertThisTurn = 0;
         view.updateExertedThisTurn(this, false);
     }
@@ -6012,7 +6012,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         clearBlockedByThisTurn();
         clearBlockedThisTurn();
         resetMayPlayTurn();
-        resetExtertedThisTurn();
+        resetExertedThisTurn();
         resetChosenModeTurn();
         resetAbilityResolvedThisTurn();
     }
