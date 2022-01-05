@@ -6,13 +6,40 @@ filter: Nearest,Nearest
 repeat: none               
 IslandTown 
   xy: 144, 0
-  size: 48, 48       
+  size: 48, 48
+IslandTown 
+  xy: 144, 0
+  size: 48, 48
+IslandTown 
+  xy: 144, 0
+  size: 48, 48  
+IslandTown 
+  xy: 128, 528
+  size: 64, 64
+IslandTown 
+  xy: 128, 592
+  size: 64, 64  
 MountainTown 
   xy: 48, 0
-  size: 48, 48       
+  size: 48, 48
+MountainTown 
+  xy: 0, 658
+  size: 64, 64
+MountainTown 
+  xy: 128, 656
+  size: 64, 64
+MountainTown 
+  xy: 128, 720
+  size: 64, 64  
 SwampTown 
   xy: 0, 0
-  size: 48, 48   
+  size: 48, 48
+SwampTown 
+  xy: 97, 336
+  size: 32, 32
+SwampTown 
+  xy: 0, 527
+  size: 64, 64  
 ForestTown 
   xy: 352, 496
   size: 32, 32        
@@ -21,34 +48,34 @@ ForestTown
   size: 32, 32         
 ForestTown 
   xy: 416, 496
-  size: 32, 32   
+  size: 32, 32
+ForestTown 
+  xy: 64, 659
+  size: 64, 64
+ForestTown 
+  xy: 0, 48
+  size: 32, 32  
 PlainsTown 
   xy: 96, 0
-  size: 48, 48      
+  size: 48, 48
+PlainsTown 
+  xy: 0, 464
+  size: 64, 64
+PlainsTown 
+  xy: 64, 464
+  size: 64, 64
+PlainsTown 
+  xy: 160, 272
+  size: 32, 32  
 WasteTown 
   xy: 272, 128
   size: 48, 48      
 WasteTown 
   xy: 320, 128
-  size: 48, 48      
+  size: 48, 48
 Gate 
   xy: 384, 128
-  size: 64, 48    
-Cave
-  xy: 192, 272
-  size: 32, 32               
-Monestory 
-  xy: 384, 592
-  size: 64, 64      
-Castle 
-  xy: 0, 464
-  size: 64, 64      
-Castle 
-  xy: 64, 464
-  size: 64, 64     
-Graveyard           
-  xy: 368, 96
-  size: 48, 32     
+  size: 64, 48
 InstantShop
   xy: 304, 704
   size: 16, 16       
@@ -123,4 +150,184 @@ ElfShop
   size: 16, 16    
 MerfolkShop
   xy: 369, 768
-  size: 16, 16     
+  size: 16, 16
+Cave
+  xy: 192, 272
+  size: 32, 32  
+Cave
+  xy: 192, 272
+  size: 32, 32
+Cave
+  xy: 192, 272
+  size: 32, 32  
+Cave
+  xy: 288, 0
+  size: 32, 32
+Cave
+  xy: 256, 704
+  size: 32, 32
+Cave 
+  xy: 256, 768
+  size: 32, 32
+Cave 
+  xy: 288, 465
+  size: 32, 32
+Factory 
+  xy: 288, 433
+  size: 32, 32
+Factory 
+  xy: 0, 146
+  size: 32, 30  
+Factory 
+  xy: 192, 240
+  size: 32, 32
+Fort 
+  xy: 160, 274
+  size: 32, 32
+Fort 
+  xy: 224, 368
+  size: 32, 32
+Fort 
+  xy: 320, 368
+  size: 32, 32  
+Monastery 
+  xy: 384, 592
+  size: 64, 64
+Monastery 
+  xy: 352, 367
+  size: 32, 32  
+Castle 
+  xy: 0, 464
+  size: 64, 64      
+Castle 
+  xy: 64, 464
+  size: 64, 64
+Castle 
+  xy: 160, 274
+  size: 32, 32
+Castle 
+  xy: 224, 368
+  size: 32, 32
+Castle 
+  xy: 320, 368
+  size: 32, 32
+CatLair 
+  xy: 161, 49
+  size: 32, 32
+CatLair 
+  xy: 351, 209
+  size: 32, 16
+CatLair 
+  xy: 351, 209
+  size: 32, 16
+CatLair 
+  xy: 96, 81
+  size: 32, 32
+CatLair 
+  xy: 96, 81
+  size: 32, 32 
+MageTower
+  xy:  289, 32
+  size: 32, 32
+MageTower
+  xy:  32, 304
+  size: 32, 32
+MageTower
+  xy:  0, 240
+  size: 32, 32
+MageTower
+  xy:  64, 304
+  size: 32, 32
+DjinnPalace 
+  xy: 128, 528
+  size: 64, 64
+DjinnPalace 
+  xy: 128, 592
+  size: 64, 64
+DjinnPalace 
+  xy: 128, 272
+  size: 32, 32
+MerfolkPool  
+  xy: 320, 208
+  size: 32, 16
+MerfolkPool  
+  xy: 64, 112
+  size: 32, 32
+MerfolkPool  
+  xy: 352, 32
+  size: 32, 32  
+Graveyard           
+  xy: 368, 96
+  size: 48, 32
+Graveyard           
+  xy: 256, 464
+  size: 32, 32
+Graveyard           
+  xy: 192, 400
+  size: 32, 32
+Graveyard           
+  xy: 32, 272
+  size: 32, 32
+EvilGrove 
+  xy: 256, 768
+  size: 32, 32
+EvilGrove 
+  xy: 96, 274
+  size: 32, 32
+VampireCastle 
+  xy: 416, 336
+  size: 32, 32
+VampireCastle 
+  xy: 416, 464
+  size: 32, 32  
+SkullCave 
+  xy: 64, 272
+  size: 32, 32
+SkullCave 
+  xy: 240, 0
+  size: 48, 48
+SkullCave 
+  xy: 256, 336
+  size: 32, 32
+SkullCave 
+  xy: 352, 336
+  size: 32, 32  
+BarbarianCamp 
+  xy: 0, 401
+  size: 64, 64
+BarbarianCamp 
+  xy: 64, 400
+  size: 64, 64
+BarbarianCamp 
+  xy: 351, 209
+  size: 32, 16
+BarbarianCamp 
+  xy: 96, 81
+  size: 32, 32
+Maze 
+  xy: 0, 336
+  size: 32, 32
+Maze 
+  xy: 272, 96
+  size: 48, 32
+Maze 
+  xy: 320, 336
+  size: 32, 32
+YuleTown 
+  xy: 352, 592
+  size: 32, 32  
+Grove 
+  xy: 416, 496
+  size: 32, 32 
+Grove 
+  xy: 256, 768
+  size: 32, 32 
+Grove 
+  xy: 224, 208
+  size: 32, 16
+Grove 
+  xy: 256, 208
+  size: 32, 16
+WurmPond 
+  xy: 224, 400
+  size: 32, 32      

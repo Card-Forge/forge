@@ -13,6 +13,7 @@ public class PointOfInterestMapRenderer extends OrthogonalTiledMapRenderer {
     public PointOfInterestMapRenderer(MapStage stage) {
         super(null,stage.getBatch());
         this.stage = stage;
+
     }
 
     @Override

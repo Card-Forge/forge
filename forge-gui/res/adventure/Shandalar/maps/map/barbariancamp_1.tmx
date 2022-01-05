@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="60">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNlW8KgCAMxfuenUDqYHWW6lz98W5t1Og1KCua9OBhyOTn5rSmyLKGPLp9/NJ1sVrPlW41Mycav9YAbDbLGzNFHmrJbA/MQO5zO27Y8hqgziypt4WExWoptxlYuAdLMdOr+lqesQj7OSTgobCfU3Ot79AZN0Uv/Ylr+V5ccccHbL7zEoffV/EduXLHuRn+ETG2fmfu1ErykjWaGWNjPHJj+0XuGfOuNfetFxEYXq4=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyL5GRgiBzFo3gUD2l8kXng3TCKR/FIxFeGYN4DAL0FxCQ=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyllV9Kw0AQxkOK0uSh19BD+KdUL6AViw9Wr1ErPYGiULyMCKJ4CSGCL75q2yehKs5ndsy3k2wsODBkszvMb2ayM5nGUTR1+iraT3y9aPxP38h/lYJ5KXYPzYJ5LKqyE+fPQRpFHdnPRB9F35eKs0jOXpbzJfYh45oYwLxq5HbzxOf++iR5dtwnikuZR0nZXuMeE1uZ6h9xImf40Ng5fhXkPEzz9S3ZQ++a5Tpx/mDPKB/2/SF+Pyn2dVlv0vtKK4pWW8V7iFslE2GepvU2GvMozWur7C1hbldw74mJWK1/+AK39J2ccO4Dx1TdTPzzw6Tgco00VstWbha4Cyx8jzNTc82Xc7X2mhviZa71ExL1tcj3Yfsh2TOX93E/v2riOEl9e0gobuTdNnNAue2k3CeoWx2bBfdnbYGaIR/cdXDbAVudW2DD1salovuD1O9nKz997GYLuGfSxwdx9Vzi+fFXT3JOPG94fz/J797EzSxl25zm1B+h+Welyl5zvRbmrqzPG8WMVradS5Ce7HdF96gmG85Oa2VnJUT94AzMnmGq2j5H/myrM3VEc0Tj1XxumkUfd9x/BXULMVUz6s+usZ3FPhOqteq7eT53z27sq2V+A4PU0bw=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYEAF/cyomJ7gBytl+v9ykqb+FQ9l9qHrf02hecjAEM0v5Jr9iQlCBzJhlyfFXHzxg+5emL0wPejytAKfkPxJjN80GfHL4wo3bPYSoxabfUu4ibMDW/h/ItJ9pAJCYUeMf2H5Q0kQQn9mR8jh8jMhM2nlXxjAVSaA7IWFCXpajsOStnexQWiY36kNqFXWEGsOqWUlvfI7MgjCkjZgeQZWNxBTx4QBzYkkIZ19ILHMIWR3MBSTYm8wEyomBACCWyub
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="209" y="271.5">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../obj/treasure.tx" x="15" y="75.75"/>
+  <object id="50" template="../obj/enemy.tx" x="208" y="225">
+   <properties>
+    <property name="enemy" value="Goblin"/>
+   </properties>
+  </object>
+  <object id="51" template="../obj/treasure.tx" x="432.333" y="59.3333"/>
+  <object id="52" template="../obj/gold.tx" x="401.083" y="257.75"/>
+  <object id="53" template="../obj/enemy.tx" x="350.333" y="78.6667">
+   <properties>
+    <property name="enemy" value="Goblin"/>
+   </properties>
+  </object>
+  <object id="54" template="../obj/enemy.tx" x="15.8333" y="103.333">
+   <properties>
+    <property name="enemy" value="Goblin Warrior"/>
+   </properties>
+  </object>
+  <object id="55" template="../obj/enemy.tx" x="421.167" y="229.333">
+   <properties>
+    <property name="enemy" value="Goblin Warrior"/>
+   </properties>
+  </object>
+  <object id="56" template="../obj/enemy.tx" x="213.667" y="137.667">
+   <properties>
+    <property name="enemy" value="Goblin"/>
+   </properties>
+  </object>
+  <object id="57" template="../obj/enemy.tx" x="430.333" y="90.3337">
+   <properties>
+    <property name="enemy" value="Goblin Chief"/>
+   </properties>
+  </object>
+  <object id="58" template="../obj/enemy.tx" x="190" y="175.667">
+   <properties>
+    <property name="enemy" value="Goblin"/>
+   </properties>
+  </object>
+  <object id="59" template="../obj/enemy.tx" x="237" y="168">
+   <properties>
+    <property name="enemy" value="Goblin"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

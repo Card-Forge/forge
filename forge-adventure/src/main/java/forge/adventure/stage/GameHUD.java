@@ -1,7 +1,6 @@
 package forge.adventure.stage;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -10,12 +9,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import forge.adventure.AdventureApplicationAdapter;
+import forge.adventure.player.AdventurePlayer;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
-import forge.adventure.util.Current;
 import forge.adventure.util.Config;
+import forge.adventure.util.Current;
 import forge.adventure.util.UIActor;
-import forge.adventure.player.AdventurePlayer;
 import forge.adventure.world.WorldSave;
 
 /**
@@ -39,10 +38,8 @@ public class GameHUD extends Stage {
         UIActor ui = new UIActor(Config.instance().getFile("ui/hud.json"));
         miniMap = ui.findActor("map");
 
-        Pixmap player = new Pixmap(3, 3, Pixmap.Format.RGB888);
-        player.setColor(1.0f, 0.0f, 0.0f, 1.0f);
-        player.fill();
-        miniMapPlayer = new Image(new Texture(player));
+
+        miniMapPlayer = new Image(new Texture(Config.instance().getFile("ui/minimap_player.png")));
 
 
         avatar = ui.findActor("avatar");
@@ -94,7 +91,7 @@ public class GameHUD extends Stage {
         super.draw(); //draw the Hud
         int xPosMini = (int) (((float) xPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getWidthInTiles()) * miniMap.getWidth());
         int yPosMini = (int) (((float) yPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getHeightInTiles()) * miniMap.getHeight());
-        miniMapPlayer.setPosition(miniMap.getX() + xPosMini - 1, miniMap.getY() + yPosMini - 1);
+        miniMapPlayer.setPosition(miniMap.getX() + xPosMini - miniMapPlayer.getWidth()/2, miniMap.getY() + yPosMini -  miniMapPlayer.getHeight()/2);
     }
 
     Texture miniMapTexture;

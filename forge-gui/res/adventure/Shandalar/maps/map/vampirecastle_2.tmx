@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="63">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKhD3bxQDC11Y5UAAsjdIxNHpc+Ys0aBfQFANVAEQU=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJybxsnAMG0Uj+JRPIpH8SgexSMCAwDOljzS
+  </data>
+ </layer>
+ <layer id="2" name="Floor" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyT4WFgkBnFo5gGOJqXgWEXDyqO4sUvT4paZHlkLAvE6EAaTX4FJ26MrhafWaTaiw9Q096dSOG0m4C9hNSSYm8tNwNDHRTXc+O3l5DaoRDO9LB3Lw8inGB4Dw55WDjWEqEWmzy5GOYfXH6gFR5p9oLiL5mD8jgDALvRYyQ=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2D4gTYobU+iPgcizaUWIMZ9pPiBVP9S0z58+kDh9pqXgeENL3luImQ3IXCXSmYixz8utdjswqYWWYza6WokAWqk+ZEGAMfFCb0=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="208" y="260">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../obj/treasure.tx" x="384.309" y="152.982"/>
+  <object id="50" template="../obj/enemy.tx" x="207.735" y="215.869">
+   <properties>
+    <property name="enemy" value="High Vampire"/>
+   </properties>
+  </object>
+  <object id="62" template="../obj/gold.tx" x="32.661" y="152.644"/>
+ </objectgroup>
+</map>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="62">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Hidden Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJztkdENgzAMRP2PmQCxWDtL6FwhsFup0hOHhUnpBx8oliw78TnvpIis8WxFRhV5tLnnaudnAm94u73m2mnuUaPmHZ4fMUbdZtJ1x+5+9MnhIjCPxjezkuNpj8vMXyNqmVXi9ieZ/0TlVm7l3os7L/2ruZ7rscNyHr7p+WLNkc7jgs1vTHT2fE269Y0/C+SDdZY7NOVkdjC+MId39sM63L8BHw1AbA==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyrZWFgqB3Fo3gUj+JRPIpH8YjAADIiAQ4=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJydlUFOAzEMRSMNRUmu0EK5HBsWLLsrVFxu2qp3gGk5CGNNvvrzSdIBS1GlSexnfzupc/+zZXTu2zu3Cfk6+3n+j7G+148xDo04ygbzlp+ZnS+xzfc1TKsWA/GNf6EzXZz87hs1IdddyL/7eOUeU8zP8Xc9fh98nlfJTr6dc4nLTFuLODGf4lWfYYYetf3e/+Y+h5yJWrcyPzs5VzLTeyFaQyfldjGvE6YzpNxWL5UJrs4+8jRtB9pjtnHt3Kmgt/l9ia/ZC+VZum/ws36+i4aY3QeqDxrpHKgva1ky1PVGM2TWupNdyuODegcu32dopNb7nH1OtWHGW2yuFX7oqc6XMnlGjA09WaMaexv+zjTjO1SaT+5ji2v6ItbxxqxpTbXet3I3fVak0R2dRU76LjIbfOS5brAO6c3cpzr2lR6g7zWuGuaz9N+h7ykvvss8a3ON3wq+Uy2msldJf7YfvxiB8g==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJydVVFOwzAMtZCQNrW3aKETQoJD7DQ9CExiIMGNuo2O3YhPYjWPPoyTMJ5krbM9v2fHa1oR6WXC+mJ6hj1UIle1yHWwrp7j7P+vaS2JPKPMgH8fcg7B3uuJD2Z5m5gHawu8QE+cQ+wJftamfv2+NzzQhdyPAjfXtdj57m+gd9Y8UizH3ZtaKQ3nAjuS4kYOa1U09Lxy6g7m+zF+djKfkUL78Lj/0p+dCYM5LFaUY/eQ63aZ+i09vy5E3hZpXZiFzuwUny0v+r3NcGL+0HW3FLlfZn5AuEnwstZj1F7aY443yawZ2pvHq367J965W5937ql9Sc3Z21lF6sxT+VYX9s7yboL/JcZ4Zrb/EnI7+Xnpv8+HeuI+5/8CXd5cWbPGvfO13FxHubbBnqvfsVQcOdCpvW4L9xe4oVPzdzGG2qPhRb2n6ufMcGdyjZwN8cw3Tn5H95e+Rx5NDnTjrshxfgEAQ2tW
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="209" y="271.5">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

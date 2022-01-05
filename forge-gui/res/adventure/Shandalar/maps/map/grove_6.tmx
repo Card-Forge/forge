@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="63">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Hidden Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJztktENgzAMRP2PmaBiMTpL6FwhsBtU6YnDqgnwQVWJkyw72M47KYgsetYivYq0da452/4R4Q5vt9GcH5pr5Kh5h/tbjF7XkXTZsbvv+eRwIfSj8c2s5Hj6xmXmXkUts0rc5iDzjG7u/3DxP13NPaOb+zvuONev6nquxw7zufuE54tntuY8Lth8x0Bnz9ega994s0A+eM5yu6oczA7GF/rwzn54Dt8nUmdB+A==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyrZWFgqB3Fo3gUj+JRPIpH8YjAADIiAQ4=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJydlVFuwjAMhiN1TEmuwBi7HC888MjbNsTlCog7bIUdZLWaX/1jErebpahSG/uzfzupc/+zZXTuxzu3D/m6+Xn+r7H+re1jnI04mg3mlJ+Y7C+xxXcXhlWLgfjCv9OeJg5+z0ZNyPUQ8vc+jtxLivnVP9f9+87neZXs6u2cS1xmylrEgfkWR326GXrUvrf+kbsJORO16l4e1L6Sid4LpTV00twm5nWyCfslrZXSxOqlZoKrZx95iradMZey71rQW/y+C75byrN03uAn/fysaLii+qCRngPty1qWDL38oBkSs85kk/I4Uu/A5fMMjbS1ao5ED6kNM26xuVb4oad6VjSTZ2QZRz1Zoxr7PfydKbaZmE/uo8UVfRHrMjFruqZa763ccc6g0RPtRU76XmQ2+MhzbbDO6c48pTpOlR6g7zWuNsxn6d+h71NefJZ51uYa3498piymZuOOY/sFXnJ81Q==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJydVUtOAzEMtRCsZm7RgUF8bsGuN+lBoBKFO6WFFvZdlIsgluQpedR1naTiSdYktuNnj52ZQURmkvBwltaUx07kshe5ijL2e7vW/1cQSzLPWvagfhV93qK894mPYnkn2Y8yNHiJmeIMuSbqdW7QY78yPMyLvh8Nbh3XYumr/8Dadc5rZatx6zPTSg6n5kJwRkrc9CnVA1w7tmD2m/wc1TkAdXjctj59poW7hp35enMIsN6xEmNw1pOCb1D2z7y2vKy3lTtxG2V3LvIVZXuC/4349ereokfY69nx5kjrdL78rmjwvni80Ns58eYafPeS6hyM7btyDii9Z29mAfTc6yP9Sz0G+J3xeOdR/9odxvDqb6E0k+D+ufC/56FP3KV7LHJ8v5iX9151zrB7/bXcOg64FlFeumNbyU4f5olaF43/F7mZJ/yX2cbYU8PLeM/d4TvjbOsYNQm553PHf1T/L8zzk/Fh3vxX1Dh/Ac6ecO8=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="209" y="271.5">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../obj/treasure.tx" x="400.5" y="193.917"/>
+  <object id="54" template="../obj/enemy.tx" x="243.833" y="158.333">
+   <properties>
+    <property name="enemy" value="Bear"/>
+   </properties>
+  </object>
+  <object id="55" template="../obj/enemy.tx" x="215.834" y="120.499">
+   <properties>
+    <property name="enemy" value="Green Wiz1"/>
+   </properties>
+  </object>
+  <object id="56" template="../obj/enemy.tx" x="190.833" y="161.333">
+   <properties>
+    <property name="enemy" value="Bear"/>
+   </properties>
+  </object>
+  <object id="62" template="../obj/enemy.tx" x="374" y="173">
+   <properties>
+    <property name="enemy" value="Bear"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

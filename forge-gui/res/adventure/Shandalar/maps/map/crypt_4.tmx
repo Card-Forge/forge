@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="73">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJybxsnAMG0Uj+JRPIpH8SgexSMCAwDOljzS
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyT4WFgkCEBR/MyMOwC0lG8pOmjFMsCMQhI09FOetoLC1cY3g21dycPqji1w30vENdxI3A9N8TeWm5U8T3DJJxH43c0fkfjd+iG82CyV4WR/vbC4pvS+AQAqxJtZQ==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFhEAd70C7YOBA5EA7gA7g7kA7gI7g+wDbP5LzEi3BYMinDgPtgFFANAAACPUD3Q==
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="208" y="260">
+   <properties>
+    <property name="teleport" value="maps/map/graveyard_4.tmx"/>
+   </properties>
+  </object>
+  <object id="48" template="../obj/treasure.tx" x="208.333" y="23.8333"/>
+  <object id="50" template="../obj/enemy.tx" x="208.402" y="40.5586">
+   <properties>
+    <property name="enemy" value="Skeleton"/>
+   </properties>
+  </object>
+  <object id="62" template="../obj/enemy.tx" x="245.75" y="73.5">
+   <properties>
+    <property name="enemy" value="Skeleton"/>
+   </properties>
+  </object>
+  <object id="63" template="../obj/enemy.tx" x="246.25" y="137.5">
+   <properties>
+    <property name="enemy" value="Skeleton"/>
+   </properties>
+  </object>
+  <object id="64" template="../obj/enemy.tx" x="247.5" y="201.75">
+   <properties>
+    <property name="enemy" value="Skeleton"/>
+   </properties>
+  </object>
+  <object id="65" template="../obj/enemy.tx" x="169.75" y="201.5">
+   <properties>
+    <property name="enemy" value="Skeleton"/>
+   </properties>
+  </object>
+  <object id="66" template="../obj/enemy.tx" x="172" y="138">
+   <properties>
+    <property name="enemy" value="Skeleton"/>
+   </properties>
+  </object>
+  <object id="67" template="../obj/enemy.tx" x="171" y="75.75">
+   <properties>
+    <property name="enemy" value="Skeleton"/>
+   </properties>
+  </object>
+  <object id="68" template="../obj/treasure.tx" x="139" y="138.5"/>
+  <object id="69" template="../obj/treasure.tx" x="277.5" y="75"/>
+  <object id="70" template="../obj/treasure.tx" x="276.75" y="202.75"/>
+  <object id="71" template="../obj/gold.tx" x="135.25" y="201"/>
+  <object id="72" template="../obj/gold.tx" x="136" y="72.75"/>
+ </objectgroup>
+</map>

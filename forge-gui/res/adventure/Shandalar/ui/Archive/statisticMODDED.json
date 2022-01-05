@@ -1,0 +1,106 @@
+{
+  "width": 480,
+  "height": 270,
+  "yDown": true,
+  "elements":[
+    {
+      "type" : "Image",
+      "image":"ui/title_bg.png",
+      "width": 480,
+      "height": 270
+    }   ,
+
+    {
+      "type" : "Scroll",
+      "name": "enemies",
+      "font" : "default" ,
+      "x": 206,
+      "y": 10 ,
+      "width": 256,
+      "height": 235
+    } ,
+    {
+      "type" : "Image",
+      "name": "avatar",
+      "font" : "default" ,
+      "x": 10,
+      "y": 10 ,
+      "width": 64,
+      "height": 64
+    } ,
+    {
+      "type" : "Label",
+      "name": "totalWins",
+      "font" : "black" ,
+      "x": 90,
+      "y": 84 ,
+      "width": 80,
+      "height": 24
+    } ,
+    {
+      "type" : "Label",
+      "text": "Win:",
+      "font" : "black" ,
+      "x": 10,
+      "y": 84 ,
+      "width": 80,
+      "height": 24
+    } ,
+    {
+      "type" : "Label",
+      "name": "totalLoss",
+      "font" : "black" ,
+      "x": 90,
+      "y": 104 ,
+      "width": 80,
+      "height": 24
+    } ,
+    {
+      "type" : "Label",
+      "text": "Loss:",
+      "font" : "black" ,
+      "x": 10,
+      "y": 104 ,
+      "width": 80,
+      "height": 24
+    } ,
+    {
+      "type" : "Label",
+      "name": "lossWinRatio",
+      "font" : "black" ,
+      "x": 90,
+      "y": 124 ,
+      "width": 80,
+      "height": 24
+    } ,
+    {
+      "type" : "Label",
+      "text": "Win Loss Ratio:",
+      "font" : "black" ,
+      "x": 10,
+      "y": 124 ,
+      "width": 80,
+      "height": 24
+    } ,
+    {
+      "type" : "Image",
+      "image" : "ui/avatarhud.png" ,
+      "font" : "default" ,
+      "x": 10,
+      "y": 10 ,
+      "width": 64,
+      "height": 64
+    }  ,
+    {
+      "type" : "TextButton",
+      "name" : "return" ,
+      "text" : "Back" ,
+      "width": 48,
+      "height": 16,
+      "x": 15,
+      "y": 250
+    }
+  ]
+
+
+}

@@ -21,8 +21,8 @@
     ],
 		"width": 0.7,
 		"height": 0.7,
-		"color": "e53b28",
+		"color": "b63729",
     "spriteNames":[ "MountainTree","MountainTree2","MountainRock","LargeMountainRock","Gravel"]    ,
     "enemies":[ "Goblin","Goblin Warrior","Goblin Chief","Minotaur","Devil","Red Wiz1"]    ,
-    "pointsOfInterest":[ "Mountain Town","Cave_1","Cave_2"]
+    "pointsOfInterest":[ "Mountain Town","Maze","BarbarianCamp","SkullCave","YuleTown","Cave" ]
 }

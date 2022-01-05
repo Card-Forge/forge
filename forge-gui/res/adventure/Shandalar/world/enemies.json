@@ -1048,7 +1048,7 @@
 	]
 },
 {
-	"name": "White Wiz1",
+	"name": "Red Wiz1",
 	"sprite": "sprites/enchanter.atlas",
 	"deck": "decks/red_bad.json",
 	"spawnRate": 0.2,

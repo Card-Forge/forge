@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="58">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="7" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDATw4mRgWMUx0K6gD6jjZmDYw8PAsJeHvvbuAtoXxcvAEM1LX3sHGkjzQPw+CkYBNgAA4BQFog==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJybwsnAMGUUj+JRPIpH8SgexSMCAwDlnjjW
+  </data>
+ </layer>
+ <layer id="6" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxbzMDAsHgUj+JRPIpH8SgexSMCAwCydETK
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzVlEsKgDAMRLNMD2YVLyp+biVWj2EKBmLX8sDAkOVjptPkJJJ/oEVFVtOmLHcw1Rlhv87dE+e5ZnzYnmyfti/Ia/8wKV7kkvnGjP1tqU4X06zyGqrTLZvKPGZNem79Ut2Ofsn/5LeKvpMx5w7kRs/0/fgq6xs5R6qp
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgxUsAWJWOttJb/tgYMkA2TuS/MuKg00v8JaXgeEdL/39zsnHwMDFR187Byo9DwQYqDw00GAg45jSMAcA5rAGIA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="209" y="282">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="51" template="../obj/treasure.tx" x="216.917" y="46.4167"/>
+  <object id="53" template="../obj/enemy.tx" x="208.5" y="198.167">
+   <properties>
+    <property name="enemy" value="Black Wiz1"/>
+   </properties>
+  </object>
+  <object id="54" template="../obj/enemy.tx" x="242" y="170">
+   <properties>
+    <property name="enemy" value="Black Wiz1"/>
+   </properties>
+  </object>
+  <object id="55" template="../obj/enemy.tx" x="202.833" y="146.667">
+   <properties>
+    <property name="enemy" value="Black Wiz1"/>
+   </properties>
+  </object>
+  <object id="56" template="../obj/treasure.tx" x="200" y="47"/>
+  <object id="57" template="../obj/gold.tx" x="233.75" y="74"/>
+ </objectgroup>
+</map>

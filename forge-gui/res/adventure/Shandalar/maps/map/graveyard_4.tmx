@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="55">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy11DsOgkAQBuBJFBYoNXoBExNbD+CxjDZ7Ay/gA+NlrOmMHkbciWwYBhYGVou/QCLfzgMyAMhI5gnAPvbLYQyg2W9rqGaaVN1X5O/quO5yG6+t7TLx/PQ6bQivtcmltvTsWui6/sPdZdC/b12upNf3QG77zp26NwVwUjL7V6Z1L6qs+9Gxz22z6+OidyxcPMPW3J843mHt6fL52qA7E3w3fGZtXdtjDM559ec5Wxf7ivY7LP0+O9ZVO58JdXNjnlnddseeLXtmn8m/Z5IdzMPqjKkNJjthHZIdpPt8Vc0utdtqlvaXu9jfhTE20Tepqu/aaIDd5eKz0+K9peH20Lpd+QBPIgVh
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJytlTFOxDAQRR2SaJ1wg11AaWhooEWiQVQcgNOsBA3n4ASIGlFyDxR2lQ7RIWryZb48nh0vQfAlK9msZ17+eBw7l2q/dX9W7527L5xbjdeH8friw4DkvWY+Vs4t/nE8VZFncamrOt5347scqBrcNZuDPjsxd+U382nuYpx/sRPnHRfhmRTzkHVYpFzm0THIh3e6bn72e1SFIfPQd86vxcbaIR+e5bjwe1qEeeezMGQe2XNnbRyWEIP5yCH9kp3zSy4H2Yh/9bHmWsvdcJWx0u9vuFSv5ufYFhcaxvnr7zrfVjZ3irbtdYvL2oP7VqbzT4z1pRA3+O3MeRvroLmQ7qvep/vNqrPls1drjXebtzG29zaXMazBFK5kQvq7wjjwWT/mJlfHkMt463/JhNaqv+izEz5umpQLPas+Irechb7XfSuZ1jrjf1kn6Vfqskxz637Wnrkmud4aVC1y++O9THN/1NPOGHiacnZ91mGtl43Nt+rJbxPPDNaPHuTelOccfu8JL+xz6gv4jna+
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1lUtOwzAQhqeARE0dmi1C7NnxqkRZcwVWoHIAKnULqdRUQlwAwRl4rFjzOgQgluEszCi2PHHGJlnwSSN7nHF+j59FF6BA8xmy+iwpy28v5lroQzFnxr/vADwYe0RTaCvGioBuiFkPIBds3ov3o7Fw3TbkmPe6BjjB8kU7O0Z/Q1djt4V/h3QPF6r+ZqdeJ11fg7dJfWK6/tqFII137eaV5v3NG8t5H+CiX++76ukOTLufr8SzmdtXtEVV9S03qHkr6D6hXjewvmtLZbmj4mMPkSdV/9LzlaD7IfwnNHZO0WA89mxJujGmKUCGdrRc+lQnTlPn2xjLPHHzZuG6X83lGzMMtIXyHbA63+NZ6nIiRixPgtop9xHLV4Lr7gnff9gd1vSMxThArTGWE4ivL+laI6apy8n6RMbKjH3fanFfEXytP6Hd3f0Xbe5nyvcqicdIe2hX1dvofdKernR2/4Om55fvb5p3/82V4Pnvg7szaF/dGd1ffrJFmw==
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="239" y="273"/>
+  <object id="49" template="../obj/entry_down.tx" x="240.5" y="64">
+   <properties>
+    <property name="teleport" value="maps/map/crypt_4.tmx"/>
+   </properties>
+  </object>
+  <object id="52" template="../obj/enemy.tx" x="239.909" y="91.5375">
+   <properties>
+    <property name="enemy" value="Skeleton"/>
+   </properties>
+  </object>
+  <object id="53" template="../obj/enemy.tx" x="238.667" y="247.333">
+   <properties>
+    <property name="enemy" value="Skeleton"/>
+   </properties>
+  </object>
+  <object id="54" template="../obj/gold.tx" x="268.167" y="66.1667"/>
+ </objectgroup>
+</map>

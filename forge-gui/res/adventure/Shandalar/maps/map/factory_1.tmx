@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="72">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Hidden Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy1VMENwyAM5B9nAsRizSy0czVNdmtRZOVkzkDU1pIVBJizL2cnCWGZQ1jF95tz3orDGHuvnCU5vGXRwXo14jBG398+312Os0T27brcu0+HsxxXqddPqfMrdZa8La7u2zV74xuzuL8y5Uo5UsfzEZ4zxD6mUJnlmWkxwp00yDPTSM9UE6hFtat63uFunmoe0Tc5uS0xVqfJ+RfsDcwROfBc603i8zfiDLc3Owq2rWsj77J3VCPLfOJqb43ODutoWo/dv9q/OJdKfWxOMtwRy42+wrnEZlx06vUwEEc5bOVp/wXyYHGZtlXPUWpd9XoBc0Ue0Hp6ZrijfdDi+V+4rI/eYfy+yg==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzbwcPAsGMUj+JRPIpH8SgexSMCAwAeeYaI
+  </data>
+ </layer>
+ <layer id="7" name="Floor" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxTZWdgUB1API8TN6a1vYTYw83e0XAevuE8ikfxKB7FxGIAZfNnhA==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzFVEEOwjAM6zjvCX3GxFMHT+EdwIPYDpai4KRuhIQla9XWxGsSt6+tvS5jPtZvqjHsWz/eX49nhi3Iocb4/FtBd7QXeJr/exd1sxwVqLoV7EtrN0fgXCu6Nsd9yfcCtjcgcK7V/nZxL9P1czgzz16X1dFzNM+jePTD6rI6Rox0Z+h1lbsjOwcYxXtdeCvzVVaT6DwWVf9mNVF0GXbBV9BV+st0mX+jnBZRL5ju7DwrXvA1+cU8/8tHClkNPqeiocM=
+  </data>
+ </layer>
+ <layer id="8" name="Walls Supplementary" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYGBgMGNiwAtMcMjj04esB10dLvPwAWQzrpChfxTQHsxgZGCYxkhe/FICQGmDnnbC0iIoHV6isd3EmE1u/h1IQEzZQUy5gc0ckDoZHvLdNlCAGuXkcAOkxi+hvDASAbZ0BQA3HQoF
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBhYEEeiODJ4woedjQ5+8jMw/OLHFJdnZ2BQYMdkEwT8ONhoQFSAgUFMAFN8L9CefeyY7MEC0MMePZwj2CGYWECtcCbV3oEIZ1LSMzFpHB185WVg+MZLhkYKgSAw3oXw5LHBDCgpY/CBYGB6ioayY4nU48CDYIexQzC54A+Z+si19xcQazNC2DFY5NHDM4gduzg6YAXmbTY85SitgCLQTiU620tK+UVLAAChuhu3
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="208.333" y="270.665">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../obj/enemy.tx" x="156.735" y="81.7253">
+   <properties>
+    <property name="enemy" value="ClayGolem"/>
+   </properties>
+  </object>
+  <object id="62" template="../obj/gold.tx" x="456" y="154.333"/>
+  <object id="65" template="../obj/gold.tx" x="459.333" y="268"/>
+  <object id="66" template="../obj/gold.tx" x="20.6667" y="81.3333"/>
+  <object id="67" template="../obj/enemy.tx" x="94" y="210.667">
+   <properties>
+    <property name="enemy" value="ClayGolem"/>
+   </properties>
+  </object>
+  <object id="68" template="../obj/enemy.tx" x="370" y="232">
+   <properties>
+    <property name="enemy" value="Golem"/>
+   </properties>
+  </object>
+  <object id="69" template="../obj/enemy.tx" x="440" y="96.6667">
+   <properties>
+    <property name="enemy" value="Golem"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
