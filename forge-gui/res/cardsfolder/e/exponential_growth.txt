@@ -2,7 +2,7 @@ Name:Exponential Growth
 ManaCost:X X G G
 Types:Sorcery
 A:SP$ Repeat | Cost$ X X G G | ValidTgts$ Creature | TgtPrompt$ Select target creature | RepeatSubAbility$ DBPump | MaxRepeat$ X | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, double target creature's power X times.
-SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +Y | SpellDescription$ Double the power of target creature X times until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +Y | Double$ True | SpellDescription$ Double the power of target creature X times until end of turn.
 SVar:X:Count$xPaid
 SVar:Y:Targeted$CardPower
 AI:RemoveDeck:All

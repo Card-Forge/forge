@@ -1298,7 +1298,7 @@ public class CardFactoryUtil {
             sbHaunter.append("Mode$ ChangesZone | Origin$ ");
             sbHaunter.append(card.isCreature() ? "Battlefield" : "Stack | ResolvedCard$ True");
             sbHaunter.append(" | Destination$ Graveyard | ValidCard$ Card.Self");
-            sbHaunter.append(" | Secondary$ True | TriggerDescription$ " + inst.getReminderText());
+            sbHaunter.append(" | Secondary$ True | TriggerDescription$ Haunt (").append(inst.getReminderText()).append(")");
 
             final Trigger haunterDies = TriggerHandler.parseTrigger(sbHaunter.toString(), card, intrinsic);
 
@@ -2198,7 +2198,6 @@ public class CardFactoryUtil {
             final String[] s = k[0].split(" ");
             if (s.length > 1) {
                 valid = s[1].substring(0, 1).toUpperCase() + s[1].substring(1);
-                final StringBuilder d = new StringBuilder();
             }
 
             String sacrificeStr = "DB$ Sacrifice | Defined$ You | Amount$ DevourSacX | SacValid$ " + valid +
@@ -2385,6 +2384,7 @@ public class CardFactoryUtil {
             paySA.setAdditionalAbility("Execute", copySA);
 
             ReplacementEffect cardre = createETBReplacement(card, ReplacementLayer.Other, repeatSA, false, true, intrinsic, "Card.Self", "");
+
             inst.addReplacement(cardre);
         } else if (keyword.startsWith("Riot")) {
             final String choose = "DB$ GenericChoice | AILogic$ Riot | SpellDescription$ Riot";
@@ -3005,7 +3005,6 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
-
         } else if (keyword.startsWith("Morph")) {
             final String[] k = keyword.split(":");
 
