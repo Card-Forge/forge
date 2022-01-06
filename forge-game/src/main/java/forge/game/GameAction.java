@@ -2216,7 +2216,7 @@ public class GameAction {
             // publicize the decision
             game.fireEvent(new GameEventScry(p, numToTop, numToBottom));
         }
-        // do the moves after all the decisions (maybe not necesssary, but let's
+        // do the moves after all the decisions (maybe not necessary, but let's
         // do it the official way)
         for (Map.Entry<Player, ImmutablePair<CardCollection, CardCollection>> e : decisions.entrySet()) {
             // no good iterate simultaneously in Java
