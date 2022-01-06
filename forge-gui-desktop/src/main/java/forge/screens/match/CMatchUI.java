@@ -1056,7 +1056,6 @@ public final class CMatchUI
         return result.get();
     }
 
-
     @Override
     public void openView(final TrackableCollection<PlayerView> myPlayers) {
         final GameView gameView = getGameView();
