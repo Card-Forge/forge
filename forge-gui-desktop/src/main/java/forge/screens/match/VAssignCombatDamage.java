@@ -283,7 +283,7 @@ public class VAssignCombatDamage {
      * @param isLMB
      */
     private void assignDamageTo(CardView source, final boolean meta, final boolean isAdding) {
-        if ( !damage.containsKey(source) )
+        if (!damage.containsKey(source))
             source = null;
 
         // If trying to assign to the defender, follow the normal assignment rules
@@ -391,7 +391,6 @@ public class VAssignCombatDamage {
         dt.damage = Math.max(0, addedDamage + dt.damage);
     }
 
-
     /**
      * TODO: Write javadoc for this method.
      * @return
@@ -410,8 +409,7 @@ public class VAssignCombatDamage {
         int damageLeft = totalDamageToAssign;
         boolean allHaveLethal = true;
 
-        for (DamageTarget dt : defenders)
-        {
+        for (DamageTarget dt : defenders) {
             int dmg = dt.damage;
             damageLeft -= dmg;
             int lethal = getDamageToKill(dt.card);

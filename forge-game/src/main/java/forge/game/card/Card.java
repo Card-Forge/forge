@@ -5199,6 +5199,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     // this is the minimal damage a trampling creature has to assign to a blocker
     public final int getLethalDamage() {
+        // CR 702.2c
+        for (Card c : getAssignedDamageMap().keySet()) {
+            if (c.hasKeyword(Keyword.DEATHTOUCH)) {
+                return 0;
+            }
+        }
         return getLethal() - getDamage() - getTotalAssignedDamage();
     }
 
@@ -5224,8 +5230,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final void addAssignedDamage(int assignedDamage0, final Card sourceCard) {
-        if (assignedDamage0 < 0) {
-            assignedDamage0 = 0;
+        // 510.1a Creatures that would assign 0 or less damage don’t assign combat damage at all.
+        if (assignedDamage0 <= 0) {
+            return;
         }
         Log.debug(this + " - was assigned " + assignedDamage0 + " damage, by " + sourceCard);
         if (!assignedDamageMap.containsKey(sourceCard)) {
