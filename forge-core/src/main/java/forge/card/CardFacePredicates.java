@@ -98,7 +98,18 @@ public final class CardFacePredicates {
             }
             if (k.length > 1) {
                 for (final String m : k[1].split("\\+")) {
-                    if (!hasProperty(input, m)) {
+                    if (m.contains("cmc")) {
+                        if (m.startsWith("cmcEQ")) {
+                            String numS = m.substring(m.length()-1);
+                            int x = Integer.parseInt(numS);
+                            if (!hasCMC(input, x)) {
+                                return false;
+                            }
+                        } else {
+                            System.err.println("CardFacePredicates needs additional code to support this cmc " +
+                                    "calculation");
+                        }
+                    } else if (!hasProperty(input, m)) {
                         return false;
                     }
                 }
@@ -112,6 +123,12 @@ public final class CardFacePredicates {
                 return !hasProperty(input, v.substring(3));
             } else return input.getType().hasStringType(v);
         }
+
+        static protected boolean hasCMC(ICardFace input, final int value) {
+            ManaCost cost = input.getManaCost();
+            return cost != null && cost.getCMC() == value;
+        }
+
     }
 
     public static Predicate<ICardFace> valid(final String val) {
