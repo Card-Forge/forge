@@ -677,7 +677,7 @@ public class PhaseHandler implements java.io.Serializable {
             for (Card blocker : CardLists.filterControlledBy(combat.getAllBlockers(), p)) {
                 final List<Card> attackers = Lists.newArrayList(combat.getAttackersBlockedBy(blocker));
                 for (Card attacker : attackers) {
-                    boolean hasPaid = payRequiredBlockCosts(game, blocker, attacker);
+                    boolean hasPaid = CombatUtil.payRequiredBlockCosts(game, blocker, attacker);
 
                     if (!hasPaid) {
                         combat.removeBlockAssignment(attacker, blocker);
@@ -819,23 +819,6 @@ public class PhaseHandler implements java.io.Serializable {
 
         game.updateCombatForView();
         game.fireEvent(new GameEventCombatChanged());
-    }
-
-    private static boolean payRequiredBlockCosts(Game game, Card blocker, Card attacker) {
-        Cost blockCost = new Cost(ManaCost.ZERO, true);
-        // Sort abilities to apply them in proper order
-        boolean noCost = true;
-        for (Card card : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final StaticAbility stAb : card.getStaticAbilities()) {
-                Cost c1 = stAb.getBlockCost(blocker, attacker);
-                if (c1 != null) {
-                    blockCost.add(c1);
-                    noCost = false;
-                }
-            }
-        }
-        SpellAbility fakeSA = new SpellAbility.EmptySa(blocker, blocker.getController());
-        return noCost || blocker.getController().getController().payManaOptional(blocker, blockCost, fakeSA, "Pay cost to declare " + blocker + " a blocker. ", ManaPaymentPurpose.DeclareBlocker);
     }
 
     public void resetExtra() {
