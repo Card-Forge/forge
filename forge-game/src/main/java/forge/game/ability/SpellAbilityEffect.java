@@ -760,6 +760,7 @@ public abstract class SpellAbilityEffect {
         } else if ("UntilUntaps".equals(duration)) {
             host.addUntapCommand(until);
         } else if ("UntilUnattached".equals(duration)) {
+            host.addLeavesPlayCommand(until); //if it leaves play, it's unattached
             host.addUnattachCommand(until);
         } else if ("UntilFacedown".equals(duration)) {
             host.addFacedownCommand(until);
