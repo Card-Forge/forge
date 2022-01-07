@@ -5240,9 +5240,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         } else {
             assignedDamageMap.put(sourceCard, assignedDamageMap.get(sourceCard) + assignedDamage0);
         }
-        if (assignedDamage0 > 0) {
-            view.updateAssignedDamage(this);
-        }
+        view.updateAssignedDamage(this);
     }
     public final void clearAssignedDamage() {
         if (assignedDamageMap.isEmpty()) { return; }

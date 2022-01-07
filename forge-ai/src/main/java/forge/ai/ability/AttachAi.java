@@ -1554,11 +1554,11 @@ public class AttachAi extends SpellAbilityAi {
             }
         }
 
-        final boolean evasive = (keyword.equals("Unblockable") || keyword.equals("Fear")
+        final boolean evasive = keyword.equals("Unblockable") || keyword.equals("Fear")
                 || keyword.equals("Intimidate") || keyword.equals("Shadow")
                 || keyword.equals("Flying") || keyword.equals("Horsemanship")
                 || keyword.endsWith("walk") || keyword.startsWith("CantBeBlockedBy")
-                || keyword.equals("All creatures able to block CARDNAME do so."));
+                || keyword.equals("All creatures able to block CARDNAME do so.");
         // give evasive keywords to creatures that can attack and deal damage
 
         boolean canBeBlocked = false;

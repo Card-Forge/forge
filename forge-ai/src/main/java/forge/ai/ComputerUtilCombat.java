@@ -691,7 +691,7 @@ public class ComputerUtilCombat {
             if (flankingMagnitude >= blocker.getNetToughness()) {
                 return 0;
             }
-            if ((flankingMagnitude >= (blocker.getNetToughness() - blocker.getDamage()))
+            if (flankingMagnitude >= blocker.getNetToughness() - blocker.getDamage()
                     && !blocker.hasKeyword(Keyword.INDESTRUCTIBLE)) {
                 return 0;
             }
@@ -914,13 +914,6 @@ public class ComputerUtilCombat {
     public static int predictPowerBonusOfBlocker(final Card attacker, final Card blocker, boolean withoutAbilities) {
         int power = 0;
 
-        // Apparently, Flanking is predicted below from a trigger, so using the code below results in double
-        // application of power bonus. A bit more testing may be needed though, so commenting out for now.
-        /*
-        if (attacker.hasKeyword("Flanking") && !blocker.hasKeyword("Flanking")) {
-            power -= attacker.getAmountOfKeyword("Flanking");
-        }*/
-
         // Serene Master switches power with attacker
         if (blocker.getName().equals("Serene Master")) {
             power += attacker.getNetPower() - blocker.getNetPower();
@@ -992,7 +985,7 @@ public class ComputerUtilCombat {
 
             String defined = sa.getParam("Defined");
             final List<Card> list = AbilityUtils.getDefinedCards(source, defined, sa);
-            if ("TriggeredBlocker".equals(defined)) {
+            if (defined != null && defined.startsWith("TriggeredBlocker")) {
                 list.add(blocker);
             }
             if (!list.contains(blocker)) {
@@ -1067,10 +1060,6 @@ public class ComputerUtilCombat {
     public static int predictToughnessBonusOfBlocker(final Card attacker, final Card blocker, boolean withoutAbilities) {
         int toughness = 0;
 
-        if (attacker.hasKeyword(Keyword.FLANKING) && !blocker.hasKeyword(Keyword.FLANKING)) {
-            toughness -= attacker.getAmountOfKeyword(Keyword.FLANKING);
-        }
-
         if (blocker.getName().equals("Shape Stealer")) {
             toughness += attacker.getNetToughness() - blocker.getNetToughness();
         }
@@ -1096,9 +1085,11 @@ public class ComputerUtilCombat {
                 continue;
             }
 
+            final String defined = sa.getParam("Defined");
+
             // DealDamage triggers
             if (ApiType.DealDamage.equals(sa.getApi())) {
-                if (!"TriggeredBlocker".equals(sa.getParam("Defined"))) {
+                if (defined == null || !defined.startsWith("TriggeredBlocker")) {
                     continue;
                 }
                 int damage = AbilityUtils.calculateAmount(source, sa.getParam("NumDmg"), sa);
@@ -1107,7 +1098,7 @@ public class ComputerUtilCombat {
 
             // -1/-1 PutCounter triggers
             if (ApiType.PutCounter.equals(sa.getApi())) {
-                if (!"TriggeredBlocker".equals(sa.getParam("Defined"))) {
+                if (defined == null || !defined.startsWith("TriggeredBlocker")) {
                     continue;
                 }
                 if (!"M1M1".equals(sa.getParam("CounterType"))) {
@@ -1121,8 +1112,8 @@ public class ComputerUtilCombat {
                 if (sa.usesTargeting()) {
                     continue; // targeted pumping not supported
                 }
-                final List<Card> list = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), null);
-                if ("TriggeredBlocker".equals(sa.getParam("Defined"))) {
+                final List<Card> list = AbilityUtils.getDefinedCards(source, defined, null);
+                if (defined != null && defined.startsWith("TriggeredBlocker")) {
                     list.add(blocker);
                 }
                 if (list.isEmpty() || !list.contains(blocker)) {
@@ -1292,7 +1283,7 @@ public class ComputerUtilCombat {
             if (!sa.hasParam("ValidCards")) {
                 list = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), null);
             }
-            if (sa.hasParam("Defined") && sa.getParam("Defined").equals("TriggeredAttacker")) {
+            if (sa.hasParam("Defined") && sa.getParam("Defined").startsWith("TriggeredAttacker")) {
                 list.add(attacker);
             }
             if (sa.hasParam("ValidCards")) {
@@ -1496,8 +1487,9 @@ public class ComputerUtilCombat {
                 if (!sa.hasParam("NumDef")) {
                     continue;
                 }
-                CardCollection list = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
-                if ("TriggeredAttacker".equals(sa.getParam("Defined"))) {
+                final String defined = sa.getParam("Defined");
+                CardCollection list = AbilityUtils.getDefinedCards(source, defined, sa);
+                if (defined != null && defined.startsWith("TriggeredAttacker")) {
                     list.add(attacker);
                 }
                 if (!list.contains(attacker)) {
@@ -1637,7 +1629,7 @@ public class ComputerUtilCombat {
                 if (!sa.hasParam("Defined")) {
                     continue;
                 }
-                if (sa.getParam("Defined").equals("TriggeredAttacker")) {
+                if (sa.getParam("Defined").startsWith("TriggeredAttacker")) {
                     return true;
                 }
                 if (sa.getParam("Defined").equals("Self") && source.equals(attacker)) {
@@ -1891,7 +1883,7 @@ public class ComputerUtilCombat {
                 if (!sa.hasParam("Defined")) {
                     continue;
                 }
-                if (sa.getParam("Defined").equals("TriggeredBlocker")) {
+                if (sa.getParam("Defined").startsWith("TriggeredBlocker")) {
                     return true;
                 }
                 if (sa.getParam("Defined").equals("Self") && source.equals(blocker)) {
@@ -1940,10 +1932,10 @@ public class ComputerUtilCombat {
 
         if (((blocker.hasKeyword(Keyword.INDESTRUCTIBLE) || (ComputerUtil.canRegenerate(ai, blocker) && !withoutAbilities)) && !(attacker
                 .hasKeyword(Keyword.WITHER) || attacker.hasKeyword(Keyword.INFECT)))
-                || (blocker.hasKeyword(Keyword.PERSIST) && !blocker.canReceiveCounters(CounterEnumType.M1M1) && (blocker
-                        .getCounters(CounterEnumType.M1M1) == 0))
-                || (blocker.hasKeyword(Keyword.UNDYING) && !blocker.canReceiveCounters(CounterEnumType.P1P1) && (blocker
-                        .getCounters(CounterEnumType.P1P1) == 0))) {
+                || (blocker.hasKeyword(Keyword.PERSIST) && !blocker.canReceiveCounters(CounterEnumType.M1M1) && blocker
+                        .getCounters(CounterEnumType.M1M1) == 0)
+                || (blocker.hasKeyword(Keyword.UNDYING) && !blocker.canReceiveCounters(CounterEnumType.P1P1) && blocker
+                        .getCounters(CounterEnumType.P1P1) == 0)) {
             return false;
         }
 
@@ -2396,9 +2388,9 @@ public class ComputerUtilCombat {
 
         for (Card atk : attackers) {
             if (atk.hasKeyword(Keyword.FLYING) || atk.hasKeyword(Keyword.SHADOW)
-                    || atk.hasKeyword(Keyword.HORSEMANSHIP) || (atk.hasKeyword(Keyword.FEAR)
+                    || atk.hasKeyword(Keyword.HORSEMANSHIP) || atk.hasKeyword(Keyword.FEAR)
                     || atk.hasKeyword(Keyword.INTIMIDATE) || atk.hasKeyword(Keyword.SKULK)
-                    || atk.hasKeyword(Keyword.PROTECTION))) {
+                    || atk.hasKeyword(Keyword.PROTECTION)) {
                 withEvasion.add(atk);
             } else {
                 withoutEvasion.add(atk);
