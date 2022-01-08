@@ -909,7 +909,6 @@ public class CombatUtil {
         for (final Card attacker : attackersWithLure) {
             if (canBeBlocked(attacker, combat, defender) && canBlock(attacker, blocker)) {
                 boolean canBe = true;
-
                 Player defendingPlayer = combat.getDefenderPlayerByAttacker(attacker);
 
                 if (getMinNumBlockersForAttacker(attacker, defendingPlayer) > 1) {
@@ -934,6 +933,7 @@ public class CombatUtil {
                     && combat.isAttacking(attacker)) {
                 boolean canBe = true;
                 Player defendingPlayer = combat.getDefenderPlayerByAttacker(attacker);
+
                 if (getMinNumBlockersForAttacker(attacker, defendingPlayer) > 1) {
                     final List<Card> blockers = freeBlockers != null ? new CardCollection(freeBlockers) : defendingPlayer.getCreaturesInPlay();
                     blockers.remove(blocker);
