@@ -18,7 +18,7 @@ ManaCost:no cost
 Colors:red
 Types:Creature Werewolf
 PT:3/3
-K:First strike
+K:First Strike
 K:Ward:PayLife<3>
 K:Nightbound
 Oracle:First strike\nWard—Pay 3 life.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

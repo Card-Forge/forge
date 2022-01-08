@@ -2,7 +2,7 @@ Name:Twinblade Geist
 ManaCost:1 W
 Types:Creature Spirit Warrior
 PT:1/1
-K:Double strike
+K:Double Strike
 K:Disturb:2 W
 AlternateMode:DoubleFaced
 DeckHas:Ability$Graveyard
