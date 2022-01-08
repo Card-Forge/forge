@@ -3365,7 +3365,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final void unEquipAllCards() {
         if (isEquipped()) {
-            for (Card c : Lists.newArrayList(getEquippedBy())) {
+            for (Card c : getEquippedBy()) {
                 c.unattachFromEntity(this);
             }
         }

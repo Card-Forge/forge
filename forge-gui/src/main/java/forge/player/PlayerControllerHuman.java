@@ -375,7 +375,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     }
                 }
             } else {
-                map.put(blockers.get(0), damageDealt);
+                map.put(blockers.isEmpty() ? null : blockers.get(0), damageDealt);
             }
         }
         return map;
