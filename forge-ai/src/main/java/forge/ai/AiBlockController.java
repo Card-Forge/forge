@@ -1132,7 +1132,7 @@ public class AiBlockController {
                             && (CombatUtil.mustBlockAnAttacker(blocker, combat, null)
                                     || blocker.hasKeyword("CARDNAME blocks each combat if able."))) {
                         combat.addBlocker(attacker, blocker);
-                        if (blocker.getMustBlockCards() != null) {
+                        if (!blocker.getMustBlockCards().isEmpty()) {
                             int mustBlockAmt = blocker.getMustBlockCards().size();
                             final CardCollectionView blockedSoFar = combat.getAttackersBlockedBy(blocker);
                             boolean canBlockAnother = CombatUtil.canBlockMoreCreatures(blocker, blockedSoFar);
