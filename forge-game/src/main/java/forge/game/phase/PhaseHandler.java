@@ -22,7 +22,6 @@ import java.util.*;
 import com.google.common.collect.*;
 import org.apache.commons.lang3.time.StopWatch;
 
-import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
@@ -40,7 +39,6 @@ import forge.game.card.CardZoneTable;
 import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
-import forge.game.cost.Cost;
 import forge.game.event.GameEventAttackersDeclared;
 import forge.game.event.GameEventBlockersDeclared;
 import forge.game.event.GameEventCardStatsChanged;
@@ -55,12 +53,10 @@ import forge.game.event.GameEventTurnEnded;
 import forge.game.event.GameEventTurnPhase;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
-import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.LandAbility;
 import forge.game.spellability.SpellAbility;
-import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
@@ -675,9 +671,9 @@ public class PhaseHandler implements java.io.Serializable {
 
             // Handles removing cards like Mogg Flunkies from combat if group block didn't occur
             for (Card blocker : CardLists.filterControlledBy(combat.getAllBlockers(), p)) {
-                final List<Card> attackers = Lists.newArrayList(combat.getAttackersBlockedBy(blocker));
+                final List<Card> attackers = combat.getAttackersBlockedBy(blocker);
                 for (Card attacker : attackers) {
-                    boolean hasPaid = payRequiredBlockCosts(game, blocker, attacker);
+                    boolean hasPaid = CombatUtil.payRequiredBlockCosts(game, blocker, attacker);
 
                     if (!hasPaid) {
                         combat.removeBlockAssignment(attacker, blocker);
@@ -819,23 +815,6 @@ public class PhaseHandler implements java.io.Serializable {
 
         game.updateCombatForView();
         game.fireEvent(new GameEventCombatChanged());
-    }
-
-    private static boolean payRequiredBlockCosts(Game game, Card blocker, Card attacker) {
-        Cost blockCost = new Cost(ManaCost.ZERO, true);
-        // Sort abilities to apply them in proper order
-        boolean noCost = true;
-        for (Card card : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final StaticAbility stAb : card.getStaticAbilities()) {
-                Cost c1 = stAb.getBlockCost(blocker, attacker);
-                if (c1 != null) {
-                    blockCost.add(c1);
-                    noCost = false;
-                }
-            }
-        }
-        SpellAbility fakeSA = new SpellAbility.EmptySa(blocker, blocker.getController());
-        return noCost || blocker.getController().getController().payManaOptional(blocker, blockCost, fakeSA, "Pay cost to declare " + blocker + " a blocker. ", ManaPaymentPurpose.DeclareBlocker);
     }
 
     public void resetExtra() {

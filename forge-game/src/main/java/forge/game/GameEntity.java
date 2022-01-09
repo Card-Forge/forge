@@ -20,7 +20,6 @@ package forge.game;
 import java.util.Map;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.game.ability.AbilityUtils;
@@ -208,7 +207,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
 
     public final void unAttachAllCards() {
-        for (Card c : Lists.newArrayList(getAttachedCards())) {
+        for (Card c : getAttachedCards()) {
             c.unattachFromEntity(this);
         }
     }

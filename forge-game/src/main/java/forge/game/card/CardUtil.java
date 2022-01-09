@@ -141,8 +141,7 @@ public final class CardUtil {
             for (Player p : game.getPlayers()) {
                 res.addAll(p.getZone(to).getCardsAddedLastTurn(from));
             }
-        }
-        else {
+        } else {
             res.addAll(game.getStackZone().getCardsAddedLastTurn(from));
         }
         return CardLists.getValidCardsAsList(res, valid, src.getController(), src, ctb);

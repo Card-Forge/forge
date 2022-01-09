@@ -3473,11 +3473,7 @@ public class AbilityUtils {
         }
 
         if (value.contains("DamageToOppsThisTurn")) {
-            int oppDmg = 0;
-            for (Player opp : player.getOpponents()) {
-                oppDmg += opp.getAssignedDamage();
-            }
-            return doXMath(oppDmg, m, source, ctb);
+            return doXMath(player.getOpponentsAssignedDamage(), m, source, ctb);
         }
 
         if (value.contains("NonCombatDamageDealtThisTurn")) {
