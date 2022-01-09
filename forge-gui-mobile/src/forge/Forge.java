@@ -185,6 +185,7 @@ public class Forge implements ApplicationListener {
                 AssetsDownloader.checkForUpdates(splashScreen);
                 if (exited) { return; } //don't continue if user chose to exit or couldn't download required assets
 
+                ImageKeys.setIsLibGDXPort(GuiBase.getInterface().isLibgdxPort());
                 FModel.initialize(splashScreen.getProgressBar(), null);
 
                 splashScreen.getProgressBar().setDescription(localizer.getMessage("lblLoadingFonts"));
