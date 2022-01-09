@@ -702,14 +702,31 @@ public class Combat {
                 Player attackingPlayer = getAttackingPlayer();
                 Player assigningPlayer = blocker.getController();
 
+                Player defender = null;
+                boolean divideCombatDamageAsChoose = blocker.hasKeyword("You may assign CARDNAME's combat damage divided as you choose among " +
+                                "defending player and/or any number of creatures they control.")
+                        && blocker.getController().getController().confirmAction(null, null,
+                        Localizer.getInstance().getMessage("lblAssignCombatDamageAsChoose",
+                                CardTranslation.getTranslatedName(blocker.getName())));
+                // choose defending player
+                if (divideCombatDamageAsChoose) {
+                    defender = blocker.getController().getController().chooseSingleEntityForEffect(attackingPlayer.getOpponents(), null, Localizer.getInstance().getMessage("lblChoosePlayer"), null);
+                    attackers = defender.getCreaturesInPlay();
+                }
+
                 if (AttackingBand.isValidBand(attackers, true))
                     assigningPlayer = attackingPlayer;
 
                 assignedDamage = true;
-                Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(blocker, attackers, damage, null, assigningPlayer != blocker.getController());
+                Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(blocker, attackers, damage, defender, divideCombatDamageAsChoose || assigningPlayer != blocker.getController());
                 for (Entry<Card, Integer> dt : map.entrySet()) {
-                    dt.getKey().addAssignedDamage(dt.getValue(), blocker);
-                    damageMap.put(blocker, dt.getKey(), dt.getValue());
+                    // Butcher Orgg
+                    if (dt.getKey() == null && dt.getValue() > 0) {
+                        damageMap.put(blocker, defender, dt.getValue());
+                    } else {
+                        dt.getKey().addAssignedDamage(dt.getValue(), blocker);
+                        damageMap.put(blocker, dt.getKey(), dt.getValue());
+                    }
                 }
             }
         }
@@ -744,21 +761,21 @@ public class Combat {
                 continue;
             }
 
-            boolean divideCombatDamageAsChoose = (getDefendersCreatures().size() > 0 &&
+            boolean divideCombatDamageAsChoose = getDefendersCreatures().size() > 0 &&
                     attacker.hasKeyword("You may assign CARDNAME's combat damage divided as you choose among " +
                             "defending player and/or any number of creatures they control.")
                     && attacker.getController().getController().confirmAction(null, null,
                     Localizer.getInstance().getMessage("lblAssignCombatDamageAsChoose",
-                            CardTranslation.getTranslatedName(attacker.getName()))));
+                            CardTranslation.getTranslatedName(attacker.getName())));
             boolean trampler = attacker.hasKeyword(Keyword.TRAMPLE);
             orderedBlockers = blockersOrderedForDamageAssignment.get(attacker);
-            boolean assignCombatDamageToCreature = ((orderedBlockers == null || orderedBlockers.isEmpty()) &&
+            boolean assignCombatDamageToCreature = (orderedBlockers == null || orderedBlockers.isEmpty()) &&
                     getDefendersCreatures().size() > 0 &&
                     attacker.hasKeyword("If CARDNAME is unblocked, you may have it assign its combat damage to " +
                             "a creature defending player controls.") &&
                     attacker.getController().getController().confirmAction(null, null,
                     Localizer.getInstance().getMessage("lblAssignCombatDamageToCreature",
-                            CardTranslation.getTranslatedName(attacker.getName()))));
+                            CardTranslation.getTranslatedName(attacker.getName())));
             if (divideCombatDamageAsChoose) {
                 if (orderedBlockers == null || orderedBlockers.isEmpty()) {
                     orderedBlockers = getDefendersCreatures();

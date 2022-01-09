@@ -182,7 +182,7 @@ public class AttackRequirement {
         }
 
         // now, count everything else
-        violations += defenderSpecific.countAll() - (isAttacking ? (defenderSpecific.count(defender)) : 0);
+        violations += defenderSpecific.countAll() - (isAttacking ? defenderSpecific.count(defender) : 0);
         if (isAttacking) {
             for (final Map.Entry<Card, Integer> mustAttack : causesToAttack.entrySet()) {
                 // only count violations if the forced creature can actually attack and has no cost incurred for doing so

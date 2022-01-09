@@ -726,7 +726,7 @@ public class CombatUtil {
                 boolean blockChange = blockedAttackers.isEmpty();
                 for (Card attacker : blockedAttackers) {
                     // check if we could unblock something
-                    List<Card> blockersReduced = Lists.newArrayList(combat.getBlockers(attacker));
+                    List<Card> blockersReduced = combat.getBlockers(attacker);
                     blockersReduced.remove(blocker);
                     if (canBlockMoreCreatures(blocker, blockedAttackers) || canBeBlocked(attacker, blockersReduced, combat)) {
                         blockChange = true;
