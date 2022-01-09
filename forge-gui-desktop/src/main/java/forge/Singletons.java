@@ -19,6 +19,7 @@ package forge;
 
 import forge.control.FControl;
 import forge.gui.FThreads;
+import forge.gui.GuiBase;
 import forge.model.FModel;
 import forge.view.FView;
 
@@ -51,6 +52,7 @@ public final class Singletons {
             view = FView.SINGLETON_INSTANCE;
         }
 
+        ImageKeys.setIsLibGDXPort(GuiBase.getInterface().isLibgdxPort());
         FModel.initialize(view == null ? null : view.getSplash().getProgressBar(), null);
 
         if (withUi) {

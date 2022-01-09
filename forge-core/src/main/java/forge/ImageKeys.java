@@ -31,12 +31,17 @@ public final class ImageKeys {
 
     private static Map<String, Boolean> editionImageLookup = new HashMap<>();
 
+    private static boolean isLibGDXPort = false;
+
     /**
      * Private constructor to prevent instantiation.
      */
     private ImageKeys() {
     }
 
+    public static void setIsLibGDXPort(boolean value) {
+        isLibGDXPort = value;
+    }
     public static void initializeDirs(String cards, Map<String, String> cardsSub, String tokens, String icons, String boosters,
             String fatPacks, String boosterBoxes, String precons, String tournamentPacks) {
         CACHE_CARD_PICS_DIR = cards;
@@ -244,8 +249,9 @@ public final class ImageKeys {
         }
 
         // System.out.println("File not found, no image created: " + key);
-        //add missing cards
-        missingCards.add(filename);
+        //add missing cards - disable for desktop version for compatibility reasons with autodownloader
+        if (isLibGDXPort)
+            missingCards.add(filename);
         return null;
     }
 
