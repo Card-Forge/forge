@@ -1176,6 +1176,13 @@ public class AiAttackController {
         // is there a gain in attacking even when the blocker is not killed (Lifelink, Wither,...)
         boolean hasCombatEffect = attacker.getSVar("HasCombatEffect").equals("TRUE") || "Blocked".equals(attacker.getSVar("HasAttackEffect"));
 
+        if (!hasCombatEffect) {
+            if (attacker.hasKeyword(Keyword.WITHER) || attacker.hasKeyword(Keyword.INFECT)
+                    || attacker.hasKeyword(Keyword.LIFELINK) || attacker.hasKeyword(Keyword.AFFLICT)) {
+                hasCombatEffect = true;
+            }
+        }
+
         // contains only the defender's blockers that can actually block the attacker
         CardCollection validBlockers = CardLists.filter(defenders, new Predicate<Card>() {
             @Override
@@ -1193,13 +1200,6 @@ public class AiAttackController {
 
         // total power of the defending creatures, used in predicting whether a gang block can kill the attacker
         int defPower = CardLists.getTotalPower(validBlockers, true, false);
-
-        if (!hasCombatEffect) {
-            if (attacker.hasKeyword(Keyword.WITHER) || attacker.hasKeyword(Keyword.INFECT)
-                    || attacker.hasKeyword(Keyword.LIFELINK) || attacker.hasKeyword(Keyword.AFFLICT)) {
-                hasCombatEffect = true;
-            }
-        }
 
         // look at the attacker in relation to the blockers to establish a
         // number of factors about the attacking context that will be relevant

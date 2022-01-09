@@ -1073,7 +1073,6 @@ public class GameAction {
             }
         });
 
-
         final Comparator<StaticAbility> comp = new Comparator<StaticAbility>() {
             @Override
             public int compare(final StaticAbility a, final StaticAbility b) {
