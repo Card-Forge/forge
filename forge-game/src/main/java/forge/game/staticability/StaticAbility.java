@@ -235,7 +235,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     }
 
     public static StaticAbility create(final String params, final Card host, CardState state, boolean intrinsic) {
-        StaticAbility st = new StaticAbility(params, state.getCard(), state);
+        StaticAbility st = new StaticAbility(params, host, state);
         st.setIntrinsic(intrinsic);
         return st;
     }
