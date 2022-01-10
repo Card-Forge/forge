@@ -161,6 +161,8 @@ public class PlayEffect extends SpellAbilityEffect {
                 Card gameCard = game.getCardState(c, null);
                 if (c.equalsWithTimestamp(gameCard)) {
                     tgtCards.add(gameCard);
+                } else if (sa.hasParam("ZoneRegardless")) {
+                    tgtCards.add(c);
                 }
             }
         }
