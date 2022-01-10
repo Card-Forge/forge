@@ -146,11 +146,10 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                     // use CardFace because you might name a alternate names
                     Predicate<ICardFace> cpp = Predicates.alwaysTrue();
                     if (sa.hasParam("ValidCards")) {
-                        //Calculating/replacing X must happen before before running valid in CardFacePredicates
-                        if (valid.endsWith("X")) { //for now, only works for X and valid must end with X
-                            int num = AbilityUtils.calculateAmount(host, "X", sa);
-                            String str = Integer.toString(num);
-                            valid = valid.replace("X", str);
+                        //Calculating/replacing this must happen before running valid in CardFacePredicates
+                        if (valid.contains("ManaCost=Equipped")) {
+                            String s = host.getEquipping().getManaCost().getShortString();
+                            valid = valid.replace("=Equipped", s);
                         }
                         cpp = CardFacePredicates.valid(valid);
                     }
