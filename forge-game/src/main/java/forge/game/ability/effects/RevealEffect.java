@@ -70,18 +70,22 @@ public class RevealEffect extends SpellAbilityEffect {
                     if (valid.isEmpty())
                         continue;
 
-                    if (cnt > valid.size())
-                        cnt = valid.size();
+                    if (sa.hasParam("RevealAll")) { //for when cards to reveal are not in hand
+                        revealed.addAll(valid);
+                    } else {
+                        if (cnt > valid.size())
+                            cnt = valid.size();
 
-                    int min = cnt;
-                    if (anyNumber) {
-                        cnt = valid.size();
-                        min = 0;
-                    } else if (optional) {
-                        min = 0;
+                        int min = cnt;
+                        if (anyNumber) {
+                            cnt = valid.size();
+                            min = 0;
+                        } else if (optional) {
+                            min = 0;
+                        }
+
+                        revealed.addAll(p.getController().chooseCardsToRevealFromHand(min, cnt, valid));
                     }
-
-                    revealed.addAll(p.getController().chooseCardsToRevealFromHand(min, cnt, valid));
                 }
 
                 game.getAction().reveal(revealed, p);
