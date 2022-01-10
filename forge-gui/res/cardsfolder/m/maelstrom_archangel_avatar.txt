@@ -14,8 +14,8 @@ SVar:TrigRepeatEach:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.Note
 SVar:DBCopyRandom:DB$ NameCard | Defined$ You | AtRandom$ True | ValidCards$ Card.ManaCost=Imprinted | SubAbility$ DBMake
 SVar:DBMake:DB$ MakeCard | Name$ ChosenName | Zone$ None | RememberMade$ True | SubAbility$ DBClearNamed
 SVar:DBClearNamed:DB$ Cleanup | ClearNamedCard$ True
-SVar:DBReveal:DB$ Reveal | Defined$ You | RevealDefined$ Remembered | SubAbility$ DBChoose
-SVar:DBChoose:DB$ ChooseCard | UnlessCost$ 3 | UnlessPayer$ You | UnlessSwitched$ True | Choices$ Card.IsRemembered | ChoiceZone$ None | SubAbility$ DBCopyPerm | SpellDescription$
+SVar:DBReveal:DB$ Reveal | Defined$ You | RevealAll$ True | RevealDefined$ Remembered | RevealToAll$ True | RevealTitle$ OVERRIDE Cards created by Maelstrom Archangel Avatar | SubAbility$ DBChoose
+SVar:DBChoose:DB$ ChooseCard | UnlessCost$ 3 | UnlessPayer$ You | UnlessSwitched$ True | Choices$ Card.IsRemembered | ChoiceZone$ None | SubAbility$ DBCopyPerm | SpellDescription$ You may pay {3}. If you do, choose one of those copies. If a copy of a permanent card is chosen, you may create a token that's a copy of that card. If a copy of an instant or sorcery card is chosen, you may cast the copy without paying its mana cost.
 SVar:DBCopyPerm:DB$ CopyPermanent | Optional$ True | Defined$ ChosenCard | ConditionDefined$ ChosenCard | ConditionPresent$ Permanent | ConditionCompare$ GE1 | SubAbility$ DBCastSp
 SVar:DBCastSp:DB$ Play | Defined$ ChosenCard | ZoneRegardless$ True | Optional$ True | WithoutManaCost$ True | ValidSA$ Spell | ConditionDefined$ ChosenCard | ConditionPresent$ Permanent | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
