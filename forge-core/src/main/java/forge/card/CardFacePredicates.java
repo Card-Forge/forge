@@ -98,16 +98,10 @@ public final class CardFacePredicates {
             }
             if (k.length > 1) {
                 for (final String m : k[1].split("\\+")) {
-                    if (m.contains("cmc")) {
-                        if (m.startsWith("cmcEQ")) {
-                            String numS = m.substring(m.length()-1);
-                            int x = Integer.parseInt(numS);
-                            if (!hasCMC(input, x)) {
-                                return false;
-                            }
-                        } else {
-                            System.err.println("CardFacePredicates needs additional code to support this cmc " +
-                                    "calculation");
+                    if (m.contains("ManaCost")) {
+                        String manaCost = m.substring(8);
+                        if (!hasManaCost(input, manaCost)) {
+                            return false;
                         }
                     } else if (!hasProperty(input, m)) {
                         return false;
@@ -124,9 +118,8 @@ public final class CardFacePredicates {
             } else return input.getType().hasStringType(v);
         }
 
-        static protected boolean hasCMC(ICardFace input, final int value) {
-            ManaCost cost = input.getManaCost();
-            return cost != null && cost.getCMC() == value;
+        static protected boolean hasManaCost(ICardFace input, final String mC) {
+            return mC.equals(input.getManaCost().getShortString());
         }
 
     }
