@@ -1,13 +1,12 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.CardFacePredicates;
 import forge.card.CardRules;
@@ -147,14 +146,24 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                     Predicate<ICardFace> cpp = Predicates.alwaysTrue();
                     if (sa.hasParam("ValidCards")) {
                         //Calculating/replacing this must happen before running valid in CardFacePredicates
-                        if (valid.contains("ManaCost=Equipped")) {
-                            String s = host.getEquipping().getManaCost().getShortString();
-                            valid = valid.replace("=Equipped", s);
+                        if (valid.contains("ManaCost=")) {
+                            if (valid.contains("ManaCost=Equipped")) {
+                                String s = host.getEquipping().getManaCost().getShortString();
+                                valid = valid.replace("=Equipped", s);
+                            } else if (valid.contains("ManaCost=Imprinted")) {
+                                String s = host.getImprintedCards().getFirst().getManaCost().getShortString();
+                                valid = valid.replace("=Imprinted", s);
+                            }
                         }
                         cpp = CardFacePredicates.valid(valid);
                     }
-
-                    chosen = p.getController().chooseCardName(sa, cpp, valid, message);
+                    if (randomChoice) {
+                        final Iterable<ICardFace> cardsFromDb = StaticData.instance().getCommonCards().getAllFaces();
+                        final List<ICardFace> cards = Lists.newArrayList(Iterables.filter(cardsFromDb, cpp));
+                        chosen = Aggregates.random(cards).getName();
+                    } else {
+                        chosen = p.getController().chooseCardName(sa, cpp, valid, message);
+                    }
                 }
 
                 host.setNamedCard(chosen);
