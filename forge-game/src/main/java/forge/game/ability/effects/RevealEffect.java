@@ -88,7 +88,12 @@ public class RevealEffect extends SpellAbilityEffect {
                     }
                 }
 
-                game.getAction().reveal(revealed, p);
+                if (sa.hasParam("RevealToAll")) {
+                    game.getAction().reveal(revealed, p, false,
+                            sa.getParamOrDefault("RevealTitle", ""));
+                } else {
+                    game.getAction().reveal(revealed, p);
+                }
                 for (final Card c : revealed) {
                     game.getTriggerHandler().runTrigger(TriggerType.Revealed, AbilityKey.mapFromCard(c), false);
                     if (sa.hasParam("RememberRevealed")) {
