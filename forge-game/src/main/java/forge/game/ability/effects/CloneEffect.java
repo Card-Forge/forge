@@ -7,6 +7,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.GameCommand;
+import forge.StaticData;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -98,6 +99,9 @@ public class CloneEffect extends SpellAbilityEffect {
             }
         } else if (sa.usesTargeting()) {
             cardToCopy = sa.getTargets().getFirstTargetedCard();
+        } else if (sa.hasParam("CopyFromChosenName")) {
+            String name = host.getChosenName();
+            cardToCopy = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(name), activator);
         }
         if (cardToCopy == null) {
             return;

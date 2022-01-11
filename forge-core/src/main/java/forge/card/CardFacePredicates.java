@@ -98,7 +98,12 @@ public final class CardFacePredicates {
             }
             if (k.length > 1) {
                 for (final String m : k[1].split("\\+")) {
-                    if (!hasProperty(input, m)) {
+                    if (m.contains("ManaCost")) {
+                        String manaCost = m.substring(8);
+                        if (!hasManaCost(input, manaCost)) {
+                            return false;
+                        }
+                    } else if (!hasProperty(input, m)) {
                         return false;
                     }
                 }
@@ -112,6 +117,11 @@ public final class CardFacePredicates {
                 return !hasProperty(input, v.substring(3));
             } else return input.getType().hasStringType(v);
         }
+
+        static protected boolean hasManaCost(ICardFace input, final String mC) {
+            return mC.equals(input.getManaCost().getShortString());
+        }
+
     }
 
     public static Predicate<ICardFace> valid(final String val) {
