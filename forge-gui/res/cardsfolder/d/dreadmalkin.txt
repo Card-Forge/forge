@@ -3,7 +3,7 @@ ManaCost:B
 Types:Creature Zombie Cat
 PT:1/1
 K:Menace
-A:AB$ PutCounter | Cost$ 2 B Sac<1/Creature.Other,Planeswalker.Other/another creature or planeswalker> | CounterType$ P1P1 | CounterNum$ 2 | AILogic$ AristocratCounters | SpellDescription$ Put two +1/+1 counters on CARDNAME.
+A:AB$ PutCounter | Cost$ 2 B Sac<1/Creature.Other;Planeswalker.Other/another creature or planeswalker> | CounterType$ P1P1 | CounterNum$ 2 | AILogic$ AristocratCounters | SpellDescription$ Put two +1/+1 counters on CARDNAME.
 DeckHas:Ability$Counters
 SVar:AIPreference:SacCost$Creature.Other
 Oracle:Menace (This creature can't be blocked except by two or more creatures.)\n{2}{B}, Sacrifice another creature or planeswalker: Put two +1/+1 counters on Dreadmalkin.

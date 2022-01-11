@@ -103,7 +103,7 @@ public class TriggerAttacks extends Trigger {
                 @SuppressWarnings("unchecked")
                 List<GameEntity> list = (List<GameEntity>) runParams.get(AbilityKey.Defenders);
                 for (GameEntity e : list) {
-                    if ((e instanceof Player) && !e.equals(attacked)) {
+                    if (e instanceof Player && !e.equals(attacked)) {
                         found = true;
                         break;
                     }
