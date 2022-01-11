@@ -1,0 +1,9 @@
+Name:Light-Paws, Emperor's Voice
+ManaCost:1 W
+Types:Legendary Creature Fox Advisor
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Aura.YouCtrl+wasCast | TriggerZones$ Battlefield | Execute$ TrigSearch | OptionalDecider$ You | TriggerDescription$ Whenever an Aura enters the battlefield under your control, if you cast it, you may search your library for an Aura card with mana value less than or equal to that Aura and with a different name than each Aura you control, put that card on the battlefield attached to CARDNAME, then shuffle.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Aura.CanEnchantSource+cmcLEX+DifferentName_Aura.YouCtrl | ChangeNum$ 1 | ShuffleNonMandatory$ True | AttachedTo$ Self
+SVar:X:TriggeredCard$CardManaCost
+DeckHints:Type$Aura
+Oracle:Whenever an Aura enters the battlefield under your control, if you cast it, you may search your library for an Aura card with mana value less than or equal to that Aura and with a different name than each Aura you control, put that card on the battlefield attached to Light-Paws, Emperor's Voice, then shuffle.
