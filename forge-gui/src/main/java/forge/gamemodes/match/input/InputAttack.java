@@ -153,8 +153,7 @@ public class InputAttack extends InputSyncronizedBase {
     protected final void onPlayerSelected(Player selected, final ITriggerEvent triggerEvent) {
         if (defenders.contains(selected)) {
             setCurrentDefender(selected);
-        }
-        else {
+        } else {
             getController().getGui().flashIncorrectAction(); // cannot attack that player
         }
     }

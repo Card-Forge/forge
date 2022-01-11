@@ -384,7 +384,14 @@ public class CombatUtil {
             runParams.put(AbilityKey.OtherAttackers, otherAttackers);
             runParams.put(AbilityKey.Attacked, combat.getDefenderByAttacker(c));
             runParams.put(AbilityKey.DefendingPlayer, combat.getDefenderPlayerByAttacker(c));
-            runParams.put(AbilityKey.Defenders, combat.getDefenders());
+            // only add defenders that were attacked
+            final FCollection<GameEntity> defenders = new FCollection<>();
+            for (GameEntity e : combat.getDefenders()) {
+                if (!combat.getAttackersOf(e).isEmpty()) {
+                    defenders.add(e);
+                }
+            }
+            runParams.put(AbilityKey.Defenders, defenders);
             game.getTriggerHandler().runTrigger(TriggerType.Attacks, runParams, false);
         }
 
