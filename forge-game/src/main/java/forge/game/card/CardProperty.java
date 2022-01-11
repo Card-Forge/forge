@@ -92,6 +92,16 @@ public class CardProperty {
                     }
                 }
             }
+        } else if (property.startsWith("DifferentName_")) {
+            Set<String> names = Sets.newHashSet();
+            for (final Card c : CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), property.substring(14),
+                    sourceController, source, spellAbility)) {
+                names.add(c.getName());
+            }
+            if (names.contains(card.getName())) {
+                return false;
+            }
+
         } else if (property.startsWith("BorderColor")) {
             if (!property.toUpperCase().contains(card.borderColor().toString())) {
                 return false;
