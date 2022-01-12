@@ -75,7 +75,7 @@ public class VAssignCombatDamage {
     private final int totalDamageToAssign;
 
     private boolean attackerHasDeathtouch = false;
-    private boolean attackerHasDivideDamage = false;
+    private boolean attackerHasDivideDamage = false; // Creatures with this can assign to defender
     private boolean attackerHasTrample = false;
     private boolean attackerHasInfect = false;
     private boolean overrideCombatantOrder = false;
@@ -183,7 +183,7 @@ public class VAssignCombatDamage {
         // Defenders area
         final JPanel pnlDefenders = new JPanel();
         pnlDefenders.setOpaque(false);
-        int cols = ((attackerHasTrample) || (attackerHasDivideDamage && overrideCombatantOrder)) ? blockers.size() + 1 : blockers.size();
+        int cols = attackerHasTrample || (attackerHasDivideDamage && overrideCombatantOrder) ? blockers.size() + 1 : blockers.size();
         final String wrap = "wrap " + cols;
         pnlDefenders.setLayout(new MigLayout("insets 0, gap 0, ax center, " + wrap));
 
@@ -197,7 +197,7 @@ public class VAssignCombatDamage {
             addPanelForDefender(pnlDefenders, c);
         }
 
-        if ((attackerHasTrample) || (attackerHasDivideDamage && overrideCombatantOrder)) {
+        if (attackerHasTrample || (attackerHasDivideDamage && overrideCombatantOrder)) {
             final DamageTarget dt = new DamageTarget(null, new FLabel.Builder().text("0").fontSize(18).fontAlign(SwingConstants.CENTER).build());
             damage.put(null, dt);
             defenders.add(dt);
@@ -288,11 +288,9 @@ public class VAssignCombatDamage {
 
         // If trying to assign to the defender, follow the normal assignment rules
         // No need to check for "active" creature assignee when overriding combatant order
-        if (!attackerHasDivideDamage) { // Creatures with this can assign to defender
-            if ((source == null || source == defender || !overrideCombatantOrder) && isAdding &&
-                    !VAssignCombatDamage.this.canAssignTo(source)) {
-                return;
-            }
+        if (!attackerHasDivideDamage && (source == null || source == defender || !overrideCombatantOrder) && isAdding &&
+                !VAssignCombatDamage.this.canAssignTo(source)) {
+            return;
         }
 
         // If lethal damage has already been assigned just act like it's 0.

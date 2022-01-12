@@ -97,6 +97,10 @@ public class AttackConstraints {
         }
     }
 
+    public Map<Card, AttackRestriction> getRestrictions() {
+        return restrictions;
+    }
+
     /**
      * Get a set of legal attackers.
      * 
@@ -190,7 +194,6 @@ public class AttackConstraints {
         return new FCollection<>
                 (collectLegalAttackers(Collections.emptyMap(), deepClone(reqs), new CardCollection(), maximum));
     }
-
     private final List<Map<Card, GameEntity>> collectLegalAttackers(final Map<Card, GameEntity> attackers, final List<Attack> reqs, final CardCollection reserved, final int maximum) {
         final List<Map<Card, GameEntity>> result = Lists.newLinkedList();
 

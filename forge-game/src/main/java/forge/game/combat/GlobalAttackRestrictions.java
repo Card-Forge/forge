@@ -37,11 +37,11 @@ public class GlobalAttackRestrictions {
     }
 
     public boolean isLegal(final Map<Card, GameEntity> attackers, final CardCollection possibleAttackers) {
-        return !getViolations(attackers, possibleAttackers,true).isViolated();
+        return !getViolations(attackers, possibleAttackers, true).isViolated();
     }
 
     public GlobalAttackRestrictionViolations getViolations(final Map<Card, GameEntity> attackers, final CardCollection possibleAttackers) {
-        return getViolations(attackers, possibleAttackers,false);
+        return getViolations(attackers, possibleAttackers, false);
     }
     private GlobalAttackRestrictionViolations getViolations(final Map<Card, GameEntity> attackers, final CardCollection possibleAttackers, final boolean returnQuickly) {
         final int nTooMany = max < 0 ? 0 : attackers.size() - max;
