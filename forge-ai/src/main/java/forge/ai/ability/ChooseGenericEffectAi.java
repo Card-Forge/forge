@@ -171,7 +171,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
                     loyalty = sp;
                 }
             }
-            if (sa.getParent().getTargetCard() != null && sa.getParent().getTargetCard().getType().isPlaneswalker()) {
+            if (sa.getParent().getTargetCard() != null && sa.getParent().getTargetCard().isPlaneswalker()) {
                 return loyalty;
             } else {
                 return p1p1;
