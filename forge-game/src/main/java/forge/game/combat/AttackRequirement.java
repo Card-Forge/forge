@@ -184,10 +184,20 @@ public class AttackRequirement {
         // now, count everything else
         violations += defenderSpecific.countAll() - (isAttacking ? defenderSpecific.count(defender) : 0);
         if (isAttacking) {
-            for (final Map.Entry<Card, Integer> mustAttack : causesToAttack.entrySet()) {
-                // only count violations if the forced creature can actually attack and has no cost incurred for doing so
-                if (CombatUtil.canAttack(mustAttack.getKey()) && !attackers.containsKey(mustAttack.getKey()) && CombatUtil.getAttackCost(defender.getGame(), mustAttack.getKey(), defender) == null) {
-                    violations += mustAttack.getValue().intValue();
+            final Combat combat = defender.getGame().getCombat();
+            final Map<Card, AttackRestriction> constraints = combat.getAttackConstraints().getRestrictions();
+
+            // check if a restriction will apply such that the requirement is no longer relevant
+            if (attackers.size() != 1 || !constraints.get(attackers.entrySet().iterator().next().getKey()).getTypes().contains(AttackRestrictionType.ONLY_ALONE)) {
+                for (final Map.Entry<Card, Integer> mustAttack : causesToAttack.entrySet()) {
+                    if (constraints.get(mustAttack.getKey()).getTypes().contains(AttackRestrictionType.ONLY_ALONE)) continue;
+                    int max = GlobalAttackRestrictions.getGlobalRestrictions(mustAttack.getKey().getController(), combat.getDefenders()).getMax();
+                    if (max == -1) max = Integer.MAX_VALUE;
+
+                    // only count violations if the forced creature can actually attack and has no cost incurred for doing so
+                    if (attackers.size() < max && !attackers.containsKey(mustAttack.getKey()) && CombatUtil.canAttack(mustAttack.getKey()) && CombatUtil.getAttackCost(defender.getGame(), mustAttack.getKey(), defender) == null) {
+                        violations += mustAttack.getValue().intValue();
+                    }
                 }
             }
         }
