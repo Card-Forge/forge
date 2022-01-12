@@ -123,6 +123,8 @@ public class VAssignCombatDamage {
             if (panel instanceof CardPanel) {
                 source = ((CardPanel)panel).getCard();
             }
+            if (!damage.containsKey(source))
+                source = null;
 
             final FSkin.Colors brdrColor = VAssignCombatDamage.this.canAssignTo(source) ? FSkin.Colors.CLR_ACTIVE : FSkin.Colors.CLR_INACTIVE;
             panel.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(brdrColor), 2));
@@ -453,7 +455,7 @@ public class VAssignCombatDamage {
             }
         } else {
             lethalDamage = Math.max(0, card.getLethalDamage());
-            if (card.getCurrentState().getType().isPlaneswalker()) {
+            if (card.getCurrentState().isPlaneswalker()) {
                 lethalDamage = Integer.valueOf(card.getCurrentState().getLoyalty());
             } else if (attackerHasDeathtouch) {
                 lethalDamage = Math.min(lethalDamage, 1);
