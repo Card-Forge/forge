@@ -332,6 +332,11 @@ public class PumpEffect extends SpellAbilityEffect {
                 }
             }
         }
+        if (sa.hasParam("ClearNotedCardsFor")) {
+            for (Player p : tgtPlayers) {
+                p.clearNotesForName(sa.getParam("ClearNotedCardsFor"));
+            }
+        }
 
         if (sa.hasParam("NoteNumber")) {
             int num = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NoteNumber"), sa);

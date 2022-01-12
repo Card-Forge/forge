@@ -70,21 +70,30 @@ public class RevealEffect extends SpellAbilityEffect {
                     if (valid.isEmpty())
                         continue;
 
-                    if (cnt > valid.size())
-                        cnt = valid.size();
+                    if (sa.hasParam("RevealAll")) { //for when cards to reveal are not in hand
+                        revealed.addAll(valid);
+                    } else {
+                        if (cnt > valid.size())
+                            cnt = valid.size();
 
-                    int min = cnt;
-                    if (anyNumber) {
-                        cnt = valid.size();
-                        min = 0;
-                    } else if (optional) {
-                        min = 0;
+                        int min = cnt;
+                        if (anyNumber) {
+                            cnt = valid.size();
+                            min = 0;
+                        } else if (optional) {
+                            min = 0;
+                        }
+
+                        revealed.addAll(p.getController().chooseCardsToRevealFromHand(min, cnt, valid));
                     }
-
-                    revealed.addAll(p.getController().chooseCardsToRevealFromHand(min, cnt, valid));
                 }
 
-                game.getAction().reveal(revealed, p);
+                if (sa.hasParam("RevealToAll")) {
+                    game.getAction().reveal(revealed, p, false,
+                            sa.getParamOrDefault("RevealTitle", ""));
+                } else {
+                    game.getAction().reveal(revealed, p);
+                }
                 for (final Card c : revealed) {
                     game.getTriggerHandler().runTrigger(TriggerType.Revealed, AbilityKey.mapFromCard(c), false);
                     if (sa.hasParam("RememberRevealed")) {

@@ -1554,6 +1554,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         return notes.get(notedFor);
     }
+    public void clearNotesForName(String notedFor) {
+        if (notes.containsKey(notedFor)) {
+            notes.get(notedFor).clear();
+        }
+    }
 
     public void noteNumberForName(String notedFor, int noted) {
         notedNum.put(notedFor, noted);
