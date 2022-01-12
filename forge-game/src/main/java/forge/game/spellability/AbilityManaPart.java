@@ -421,6 +421,7 @@ public class AbilityManaPart implements java.io.Serializable {
             if (this.getSourceCard() != null && this.getSourceCard().hasChosenColor()) {
                 return MagicColor.toShortString(this.getSourceCard().getChosenColor());
             }
+            return "";
         }
         return this.getOrigProduced();
     }
