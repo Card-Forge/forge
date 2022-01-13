@@ -457,7 +457,9 @@ public final class StaticAbilityContinuous {
             if (params.containsKey("AddColor")) {
                 final String colors = params.get("AddColor");
                 if (colors.equals("ChosenColor")) {
-                    addColors = ColorSet.fromNames(hostCard.getChosenColors());
+                    if (hostCard.hasChosenColor()) {
+                        addColors = ColorSet.fromNames(hostCard.getChosenColors());
+                    }
                 } else if (colors.equals("All")) {
                     addColors = ColorSet.ALL_COLORS;
                 } else {
@@ -468,7 +470,9 @@ public final class StaticAbilityContinuous {
             if (params.containsKey("SetColor")) {
                 final String colors = params.get("SetColor");
                 if (colors.equals("ChosenColor")) {
-                    addColors = ColorSet.fromNames(hostCard.getChosenColors());
+                    if (hostCard.hasChosenColor()) {
+                        addColors = ColorSet.fromNames(hostCard.getChosenColors());
+                    }
                 } else if (colors.equals("All")) {
                     addColors = ColorSet.ALL_COLORS;
                 } else {
