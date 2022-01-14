@@ -17,7 +17,6 @@ public class EnumMapOfLists<K extends Enum<K>, V> extends EnumMap<K, Collection<
         this.factory = factory;
     }
 
-
     public EnumMapOfLists(EnumMap<K, ? extends List<V>> m, Supplier<? extends Collection<V>> factory) {
         super(m);
         this.factory = factory;
@@ -41,7 +40,6 @@ public class EnumMapOfLists<K extends Enum<K>, V> extends EnumMap<K, Collection<
     public void add(K key, V element) {
         ensureCollectionFor(key).add(element);
     }
-
 
     @Override
     public void addAll(K key, Collection<V> elements) {

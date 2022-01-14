@@ -2706,9 +2706,6 @@ public class AbilityUtils {
             String validFilter = workingCopy[hasFrom ? 4 : 2] ;
 
             final List<Card> res = CardUtil.getThisTurnEntered(destination, origin, validFilter, c, ctb);
-            if (origin == null) { // Remove cards on the battlefield that changed controller
-                res.removeAll(CardUtil.getThisTurnEntered(destination, destination, validFilter, c, ctb));
-            }
             return doXMath(res.size(), expr, c, ctb);
         }
 
@@ -2722,9 +2719,6 @@ public class AbilityUtils {
             String validFilter = workingCopy[hasFrom ? 4 : 2] ;
 
             final List<Card> res = CardUtil.getLastTurnEntered(destination, origin, validFilter, c, ctb);
-            if (origin == null) { // Remove cards on the battlefield that changed controller
-                res.removeAll(CardUtil.getLastTurnEntered(destination, destination, validFilter, c, ctb));
-            }
             return doXMath(res.size(), expr, c, ctb);
         }
 

@@ -528,7 +528,7 @@ public class GameAction {
                     if (repres != ReplacementResult.NotReplaced) continue;
                 }
                 if (card == c) {
-                    zoneTo.add(copied, position, lastKnownInfo); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
+                    zoneTo.add(copied, position, toBattlefield ? null : lastKnownInfo); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
                 } else {
                     zoneTo.add(card, position, CardUtil.getLKICopy(card));
                 }
@@ -537,7 +537,7 @@ public class GameAction {
         } else {
             // "enter the battlefield as a copy" - apply code here
             // but how to query for input here and continue later while the callers assume synchronous result?
-            zoneTo.add(copied, position, lastKnownInfo); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
+            zoneTo.add(copied, position, toBattlefield ? null : lastKnownInfo); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
             c.setZone(zoneTo);
         }
 
@@ -568,6 +568,12 @@ public class GameAction {
 
         // Need to apply any static effects to produce correct triggers
         checkStaticAbilities();
+
+        // CR 603.6b
+        if (toBattlefield) {
+            zoneTo.saveLKI(copied, lastKnownInfo);
+        }
+
         game.getTriggerHandler().clearActiveTriggers(copied, null);
         game.getTriggerHandler().registerActiveLTBTrigger(lastKnownInfo);
         game.getTriggerHandler().registerActiveTrigger(copied, false);
