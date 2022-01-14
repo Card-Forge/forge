@@ -44,7 +44,7 @@ public class LoadGameMenu extends FPopupMenu {
         private void initializeScreen() {
             if (screen == null) { //don't initialize screen until it's opened the first time
                 try {
-                    screen = screenClass.newInstance();
+                    screen = screenClass.getConstructor().newInstance();
                     screen.setHeaderCaption(Localizer.getInstance().getMessage("lblLoadGame") + " - " + item.getText());
                 }
                 catch (Exception e) {
@@ -59,7 +59,8 @@ public class LoadGameMenu extends FPopupMenu {
         }
         private void open(boolean replaceBackScreen) {
             initializeScreen();
-            Forge.openScreen(screen, replaceBackScreen);
+            if (screen != null)
+                Forge.openScreen(screen, replaceBackScreen);
         }
 
         public void setAsBackScreen(boolean replace) {
