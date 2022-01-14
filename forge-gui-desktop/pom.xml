@@ -47,7 +47,7 @@
                 </executions>
                 <configuration>
                     <basedir>${basedir}/${configSourceDirectory}</basedir>
-                    <filesToInclude>forge.sh, forge.command</filesToInclude>
+                    <filesToInclude>forge.sh, forge.command, forge.cmd</filesToInclude>
                     <outputBasedir>${project.build.directory}</outputBasedir>
                     <outputDir>.</outputDir>
                     <regex>false</regex>
@@ -313,6 +313,7 @@
                                         <copy todir="${project.build.directory}/${project.build.finalName}">
                                             <fileset dir="${project.build.directory}" includes="forge.sh" />
                                             <fileset dir="${project.build.directory}" includes="forge.command" />
+                                            <fileset dir="${project.build.directory}" includes="forge.cmd" />
                                             <fileset dir="${basedir}/../forge-gui/" includes="forge.profile.properties.example" />
                                             <fileset dir="${basedir}/" includes="sentry.properties" />
                                             <fileset dir="${basedir}/../forge-gui/" includes="LICENSE.txt" />
@@ -330,12 +331,14 @@
                                         <zip destfile="${project.build.directory}/${project.build.finalName}/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/../forge-gui/res/cardsfolder" level="1" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.sh" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.command" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge.cmd" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-java8.exe" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.exe" perm="a+rx" />
                                         <tar destfile="${project.build.directory}/${project.build.finalName}.tar.bz2" compression="bzip2">
                                             <tarfileset filemode="755" dir="${project.build.directory}/${project.build.finalName}">
                                                 <include name="forge.sh" />
                                                 <include name="forge.command" />
+                                                <include name="forge.cmd" />
                                                 <include name="forge.exe" />
                                                 <include name="forge-java8.exe" />
                                             </tarfileset>
@@ -343,6 +346,7 @@
                                                 <include name="**" />
                                                 <exclude name="forge.sh" />
                                                 <exclude name="forge.command" />
+                                                 <exclude name="forge.cmd" />
                                                 <exclude name="forge.exe" />
                                                 <exclude name="forge-java8.exe" />
                                             </tarfileset>
@@ -529,6 +533,7 @@
                                         <copy todir="${project.build.directory}/${project.build.finalName}">
                                             <fileset dir="${project.build.directory}" includes="forge.sh" />
                                             <fileset dir="${project.build.directory}" includes="forge.command" />
+                                            <fileset dir="${project.build.directory}" includes="forge.cmd" />
                                             <fileset dir="${basedir}/../forge-gui/" includes="forge.profile.properties.example" />
                                             <fileset dir="${basedir}/" includes="sentry.properties" />
                                             <fileset dir="${basedir}/../forge-gui/" includes="LICENSE.txt" />
@@ -548,14 +553,17 @@
                                             <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-java8.exe" />
                                             <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure.sh" />
                                             <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure.command" />
+                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure.cmd" />
                                             <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-${project.version}-jar-with-dependencies.jar" />
                                         </copy>
                                         <mkdir dir="${project.build.directory}/${project.build.finalName}/res/cardsfolder" />
                                         <zip destfile="${project.build.directory}/${project.build.finalName}/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/../forge-gui/res/cardsfolder" level="1" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.sh" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.command" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge.cmd" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.sh" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.command" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.cmd" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-java8.exe" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.exe" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.exe" perm="a+rx" />
@@ -564,6 +572,7 @@
                                             <tarfileset filemode="755" dir="${project.build.directory}/${project.build.finalName}">
                                                 <include name="forge.sh" />
                                                 <include name="forge.command" />
+                                                <include name="forge.cmd" />
                                                 <include name="forge-java8.exe" />
                                                 <include name="forge.exe" />
                                             </tarfileset>
@@ -571,6 +580,7 @@
                                                 <include name="**" />
                                                 <exclude name="forge.sh" />
                                                 <exclude name="forge.command" />
+                                                <exclude name="forge.cmd" />
                                                 <exclude name="forge-java8.exe" />
                                                 <exclude name="forge.exe" />
                                             </tarfileset>
