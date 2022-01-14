@@ -50,7 +50,7 @@ public class NewGameMenu extends FPopupMenu {
         private void initializeScreen() {
             if (screen == null) { //don't initialize screen until it's opened the first time
                 try {
-                    screen = screenClass.newInstance();
+                    screen = screenClass.getConstructor().newInstance();
                     screen.setHeaderCaption(localizer.getMessageorUseDefault("lblNewGame", "New Game") + " - " + item.getText());
                 }
                 catch (Exception e) {
@@ -65,7 +65,8 @@ public class NewGameMenu extends FPopupMenu {
         }
         private void open(boolean replaceBackScreen) {
             initializeScreen();
-            Forge.openScreen(screen, replaceBackScreen);
+            if (screen != null)
+                Forge.openScreen(screen, replaceBackScreen);
         }
 
         public void setAsBackScreen(boolean replace) {
@@ -83,10 +84,11 @@ public class NewGameMenu extends FPopupMenu {
             preferredScreen = NewGameScreen.valueOf(prefs.getPref(FPref.NEW_GAME_SCREEN));
         }
         catch (Exception ex) {
-            ex.printStackTrace();
-            preferredScreen = NewGameScreen.Constructed;
-            prefs.setPref(FPref.NEW_GAME_SCREEN, preferredScreen.name());
-            prefs.save();
+            if (NewGameScreen.Constructed != null) { //if this is null it means newgamescreen is not initialized
+                preferredScreen = NewGameScreen.Constructed;
+                prefs.setPref(FPref.NEW_GAME_SCREEN, preferredScreen.name());
+                prefs.save();
+            }
         }
     }
 
