@@ -1397,10 +1397,18 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("cmcNotChosenEvenOdd")) {
-            if (source.hasChosenEvenOdd()) {
-                if ((card.getCMC() % 2 == 0) == (source.getChosenEvenOdd() == EvenOdd.Even)) {
-                    return false;
-                }
+            if (!source.hasChosenEvenOdd()) {
+                return false;
+            }
+            if ((card.getCMC() % 2 == 0) == (source.getChosenEvenOdd() == EvenOdd.Even)) {
+                return false;
+            }
+        } else if (property.equals("cmcChosen")) {
+            if (!source.hasChosenNumber()) {
+                return false;
+            }
+            if (card.getCMC() != source.getChosenNumber()) {
+                return false;
             }
         } else if (property.startsWith("power") || property.startsWith("toughness")
                 || property.startsWith("cmc") || property.startsWith("totalPT")) {

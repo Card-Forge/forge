@@ -53,7 +53,7 @@ public class CloneAi extends SpellAbilityAi {
 
             boolean bFlag = false;
             for (final Card c : defined) {
-                bFlag |= (!c.isCreature() && !c.isTapped() && !(c.getTurnInZone() == phase.getTurn()));
+                bFlag |= !c.isCreature() && !c.isTapped() && !(c.getTurnInZone() == phase.getTurn());
 
                 // for creatures that could be improved (like Figure of Destiny)
                 if (c.isCreature() && (!sa.hasParam("Duration") || (!c.isTapped() && !c.isSick()))) {
