@@ -1050,10 +1050,10 @@ public class ComputerUtilCard {
     public static boolean useRemovalNow(final SpellAbility sa, final Card c, final int dmg, ZoneType destination) {
         final Player ai = sa.getActivatingPlayer();
         final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        final Player opp = ai.getWeakestOpponent();
         final Game game = ai.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
         final PhaseType phaseType = ph.getPhase();
+        final Player opp = ph.getPlayerTurn().isOpponentOf(ai) ? ph.getPlayerTurn() : ai.getStrongestOpponent();
 
         final int costRemoval = sa.getHostCard().getCMC();
         final int costTarget = c.getCMC();
@@ -1184,7 +1184,7 @@ public class ComputerUtilCard {
         	threat += (-1 + 1.0f * evaluateCreature(c) / 100) / costRemoval;
         	if (ai.getLife() > 0 && ComputerUtilCombat.canAttackNextTurn(c)) {
         		Combat combat = game.getCombat();
-        		threat += 1.0f * ComputerUtilCombat.damageIfUnblocked(c, opp, combat, true) / ai.getLife();
+        		threat += 1.0f * ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) / ai.getLife();
         		//TODO:add threat from triggers and other abilities (ie. Master of Cruelties)
         	}
         	if (ph.isPlayerTurn(ai) && phaseType.isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
