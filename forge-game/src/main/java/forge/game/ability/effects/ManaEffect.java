@@ -54,7 +54,7 @@ public class ManaEffect extends SpellAbilityEffect {
                 int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(card, sa.getParam("Amount"), sa) : 1;
 
                 String express = abMana.getExpressChoice();
-                String[] colorsProduced = abMana.getComboColors().split(" ");
+                String[] colorsProduced = abMana.getComboColors(sa).split(" ");
 
                 final StringBuilder choiceString = new StringBuilder();
                 ColorSet colorOptions = ColorSet.fromNames(colorsProduced);

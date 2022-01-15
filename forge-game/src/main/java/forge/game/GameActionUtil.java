@@ -733,7 +733,7 @@ public final class GameActionUtil {
         } else if (abMana.isSpecialMana()) {
             baseMana = abMana.getExpressChoice();
         } else {
-            baseMana = abMana.mana();
+            baseMana = abMana.mana(sa);
         }
 
         if (sa.getSubAbility() != null) {
