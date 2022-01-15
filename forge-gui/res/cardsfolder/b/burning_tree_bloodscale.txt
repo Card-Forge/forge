@@ -3,7 +3,7 @@ ManaCost:2 R G
 Types:Creature Viashino Berserker
 PT:2/2
 K:Bloodthirst:1
-A:AB$ Effect | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature that can't block this creature this turn | IsCurse$ True | RememberObjects$ TargetedCard | ForgetOnMoved$ Battlefield | StaticAbilities$ KWPump | Duration$ UntilHostLeavesPlayOrEOT | StackDescription$ {c:Targeted} can't block CARDNAME this turn. | SpellDescription$ Target creature can't block CARDNAME this turn.
+A:AB$ Effect | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature that can't block this creature this turn | IsCurse$ True | RememberObjects$ ThisTargetedCard | ForgetOnMoved$ Battlefield | StaticAbilities$ KWPump | Duration$ UntilHostLeavesPlayOrEOT | StackDescription$ {c:Targeted} can't block CARDNAME this turn. | SpellDescription$ Target creature can't block CARDNAME this turn.
 SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.EffectSource | ValidBlocker$ Creature.IsRemembered | Description$ {c:Remembered} can't block EFFECTSOURCE this turn.
 A:AB$ MustBlock | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature that must block this creature this turn | SpellDescription$ Target creature blocks CARDNAME this turn if able.
 AI:RemoveDeck:All

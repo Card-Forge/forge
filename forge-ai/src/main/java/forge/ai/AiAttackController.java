@@ -93,15 +93,14 @@ public class AiAttackController {
         this.defendingOpponent = choosePreferredDefenderPlayer(ai);
         this.oppList = getOpponentCreatures(this.defendingOpponent);
         this.myList = ai.getCreaturesInPlay();
+        this.nextTurn = nextTurn;
         this.attackers = new ArrayList<>();
         for (Card c : myList) {
-            if (nextTurn && CombatUtil.canAttackNextTurn(c, this.defendingOpponent) ||
-                    CombatUtil.canAttack(c, this.defendingOpponent)) {
+            if (canAttackWrapper(c, this.defendingOpponent)) {
                 attackers.add(c);
             }
         }
-        this.blockers = getPossibleBlockers(oppList, this.attackers);
-        this.nextTurn = nextTurn;
+        this.blockers = getPossibleBlockers(oppList, this.attackers, this.nextTurn);
     } // overloaded constructor to evaluate attackers that should attack next turn
 
     public AiAttackController(final Player ai, Card attacker) {
@@ -109,12 +108,12 @@ public class AiAttackController {
         this.defendingOpponent = choosePreferredDefenderPlayer(ai);
         this.oppList = getOpponentCreatures(this.defendingOpponent);
         this.myList = ai.getCreaturesInPlay();
+        this.nextTurn = false;
         this.attackers = new ArrayList<>();
         if (CombatUtil.canAttack(attacker, this.defendingOpponent)) {
             attackers.add(attacker);
         }
-        this.blockers = getPossibleBlockers(oppList, this.attackers);
-        this.nextTurn = false;
+        this.blockers = getPossibleBlockers(oppList, this.attackers, this.nextTurn);
     } // overloaded constructor to evaluate single specified attacker
 
     public static List<Card> getOpponentCreatures(final Player defender) {
@@ -273,28 +272,19 @@ public class AiAttackController {
         return false;
     }
 
-    public final static List<Card> getPossibleBlockers(final List<Card> blockers, final List<Card> attackers) {
+    public final static List<Card> getPossibleBlockers(final List<Card> blockers, final List<Card> attackers, final boolean nextTurn) {
         List<Card> possibleBlockers = new ArrayList<>(blockers);
         possibleBlockers = CardLists.filter(possibleBlockers, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return canBlockAnAttacker(c, attackers, false);
+                return canBlockAnAttacker(c, attackers, nextTurn);
             }
         });
         return possibleBlockers;
     }
 
     public final static boolean canBlockAnAttacker(final Card c, final List<Card> attackers, final boolean nextTurn) {
-        final List<Card> attackerList = new ArrayList<>(attackers);
-        if (!c.isCreature()) {
-            return false;
-        }
-        for (final Card attacker : attackerList) {
-            if (CombatUtil.canBlock(attacker, c, nextTurn)) {
-                return true;
-            }
-        }
-        return false;
+        return getCardCanBlockAnAttacker(c, attackers, nextTurn) != null;
     }
 
     public final static Card getCardCanBlockAnAttacker(final Card c, final List<Card> attackers, final boolean nextTurn) {
@@ -383,7 +373,7 @@ public class AiAttackController {
         int blockersNeeded = opponentsAttackers.size();
 
         // don't hold back creatures that can't block any of the human creatures
-        final List<Card> list = getPossibleBlockers(attackers, opponentsAttackers);
+        final List<Card> list = getPossibleBlockers(attackers, opponentsAttackers, nextTurn);
 
         //Calculate the amount of creatures necessary
         for (int i = 0; i < list.size(); i++) {
@@ -1413,11 +1403,11 @@ public class AiAttackController {
      */
     public String toProtectAttacker(SpellAbility sa) {
         //AiAttackController is created with the selected attacker as the only entry in "attackers"
-        if (sa.getApi() != ApiType.Protection || oppList.isEmpty() || getPossibleBlockers(oppList, attackers).isEmpty()) {
+        if (sa.getApi() != ApiType.Protection || oppList.isEmpty() || getPossibleBlockers(oppList, attackers, nextTurn).isEmpty()) {
             return null; //not protection sa or attacker is already unblockable
         }
         final List<String> choices = ProtectEffect.getProtectionList(sa);
-        String color = ComputerUtilCard.getMostProminentColor(getPossibleBlockers(oppList, attackers)), artifact = null;
+        String color = ComputerUtilCard.getMostProminentColor(getPossibleBlockers(oppList, attackers, nextTurn)), artifact = null;
         if (choices.contains("artifacts")) {
             artifact = "artifacts"; //flag to indicate that protection from artifacts is available
         }
