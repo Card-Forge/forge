@@ -416,14 +416,15 @@ public class AbilityManaPart implements java.io.Serializable {
      *
      * @return a {@link java.lang.String} object.
      */
-    public final String mana() {
-        if (this.getOrigProduced().contains("Chosen")) {
-            if (this.getSourceCard() != null && this.getSourceCard().hasChosenColor()) {
-                return MagicColor.toShortString(this.getSourceCard().getChosenColor());
-            }
-            return "";
+    public final String mana(SpellAbility sa) {
+        if (isComboMana()) { // when asking combo, just go there
+            return getComboColors(sa);
         }
-        return this.getOrigProduced();
+        String produced = this.getOrigProduced();
+        if (produced.contains("Chosen")) {
+            produced = produced.replace("Chosen", this.getChosenColor(sa));
+        }
+        return produced;
     }
 
     /**
@@ -488,7 +489,7 @@ public class AbilityManaPart implements java.io.Serializable {
     }
 
     public boolean isComboMana() {
-        return this.getOrigProduced().contains("Combo");
+        return this.getOrigProduced().startsWith("Combo");
     }
 
     public boolean isSpecialMana() {
@@ -506,22 +507,13 @@ public class AbilityManaPart implements java.io.Serializable {
      */
     public final boolean canProduce(final String s, final SpellAbility sa) {
         // TODO: need to handle replacement effects like 106.7
-        
+
         // Any mana never means Colorless?
         if (isAnyMana() && !s.equals("C")) {
             return true;
         }
 
-        String origProduced = getOrigProduced();
-        if (origProduced.contains("Chosen") && sourceCard != null ) {
-            if (getSourceCard().hasChosenColor() && MagicColor.toShortString(getSourceCard().getChosenColor()).contains(s)) {
-                return true;
-            }
-        }
-        if (isComboMana()) {
-            return getComboColors().contains(s);
-        }
-        return origProduced.contains(s);
+        return mana(sa).contains(s);
     }
 
     /** {@inheritDoc} */
@@ -553,13 +545,17 @@ public class AbilityManaPart implements java.io.Serializable {
     /**
      * @return the color available in combination mana
      */
-    public String getComboColors() {
+    public String getComboColors(SpellAbility sa) {
         String origProduced = getOrigProduced();
-        if (!origProduced.contains("Combo")) {
+        if (!origProduced.startsWith("Combo")) {
             return "";
         }
         if (origProduced.contains("Any")) {
             return "W U B R G";
+        }
+        // replace Chosen for Combo colors
+        if (origProduced.contains("Chosen")) {
+            origProduced = origProduced.replace("Chosen", getChosenColor(sa));
         }
         if (!origProduced.contains("ColorIdentity")) {
             return TextUtil.fastReplace(origProduced, "Combo ", "");
@@ -580,6 +576,17 @@ public class AbilityManaPart implements java.io.Serializable {
         }
         // TODO: Add support for {C}.
         return sb.length() == 0 ? "" : sb.substring(0, sb.length() - 1);
+    }
+
+    public String getChosenColor(SpellAbility sa) {
+        if (sa == null) {
+            return "";
+        }
+        Card card = sa.getHostCard();
+        if (card != null && card.hasChosenColor()) {
+            return MagicColor.toShortString(card.getChosenColor());
+        }
+        return "";
     }
 
     public Card getSourceCard() {
@@ -644,7 +651,7 @@ public class AbilityManaPart implements java.io.Serializable {
             if (isSpecialMana()) {
                 return true;
             }
-            String colorsProduced = isComboMana() ? getComboColors() : mana();
+            String colorsProduced = mana(am);
             for (final String color : colorsProduced.split(" ")) {
                 if (0 != (neededColor & ManaAtom.fromName(color))) {
                     return true;

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
@@ -1429,57 +1430,19 @@ public class CardView extends GameEntityView {
             boolean cMana = false;
             int count = 0;
             int basicLandTypes = 0;
-            if (!state.getManaAbilities().isEmpty()) {
-                for (SpellAbility sa : state.getManaAbilities()) {
-                    if (sa == null || sa.getManaPart() == null)
-                        continue;
-                    if (sa.getManaPart().isAnyMana()) {
+            for (SpellAbility sa : state.getManaAbilities()) {
+                if (sa == null)
+                    continue;
+                for (AbilityManaPart mp : sa.getAllManaParts()) {
+                    if (mp.isAnyMana()) {
                         anyMana = true;
                     }
-                    if (sa.getManaPart().isComboMana()) {
-                        String[] colorsProduced = sa.getManaPart().getComboColors().split(" ");
-                        //todo improve this
-                        for (final String s : colorsProduced) {
-                            switch (s.toUpperCase()) {
-                                case "R":
-                                    if (!rMana) {
-                                        count += 1;
-                                        rMana = true;
-                                    }
-                                    break;
-                                case "G":
-                                    if (!gMana) {
-                                        count += 1;
-                                        gMana = true;
-                                    }
-                                    break;
-                                case "B":
-                                    if (!bMana) {
-                                        count += 1;
-                                        bMana = true;
-                                    }
-                                    break;
-                                case "U":
-                                    if (!uMana) {
-                                        count += 1;
-                                        uMana = true;
-                                    }
-                                    break;
-                                case "W":
-                                    if (!wMana) {
-                                        count += 1;
-                                        wMana = true;
-                                    }
-                                    break;
-                                case "C":
-                                    if (!cMana) {
-                                        cMana = true;
-                                    }
-                                    break;
-                            }
-                        }
-                    } else {
-                        switch (sa.getManaPart().getOrigProduced()) {
+
+                    String[] colorsProduced = mp.mana(sa).split(" ");
+
+                    //todo improve this
+                    for (final String s : colorsProduced) {
+                        switch (s.toUpperCase()) {
                             case "R":
                                 if (!rMana) {
                                     count += 1;

@@ -311,7 +311,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 result += amount;
             } else {
                 // For cards that produce like {C}{R} vs cards that produce {R}{R}.
-                result += mp.mana().split(" ").length * amount;
+                result += mp.mana(this).split(" ").length * amount;
             }
         }
         return result;
@@ -2246,7 +2246,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (manaPart == null) {
             score++; //Assume a mana ability can generate at least 1 mana if the amount of mana can't be determined now.
         } else {
-            String mana = manaPart.mana();
+            String mana = manaPart.mana(this);
             if (!mana.equals("Any")) {
                 score += mana.length();
                 if (!canProduce("C")) {
