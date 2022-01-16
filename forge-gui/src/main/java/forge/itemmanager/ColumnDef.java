@@ -249,7 +249,7 @@ public enum ColumnDef {
                     IPaperCard cp = (IPaperCard) i;
                     CardAiHints ai = cp.getRules().getAiHints();
 
-                    return ai.getRemAIDecks() ? (ai.getRemRandomDecks() ? "AI ?" : "AI")
+                    return ai.getRemAIDecks() ? (ai.getRemRandomDecks() ? "X?" : "X")
                             : (ai.getRemRandomDecks() ? "?" : "");
                 }
             }),
@@ -459,6 +459,19 @@ public enum ColumnDef {
                     return null;
                 }
             }),
+    DECK_AI("lblAI", "lblAIStatus", 38, true, SortState.DESC,
+        new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+            @Override
+            public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+                return toDeck(from.getKey()).getAI() ? Integer.valueOf(1) : Integer.valueOf(-1);
+            }
+        },
+        new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+            @Override
+            public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+                return toDeck(from.getKey()).getAI()? "" : "X";
+            }
+        }),
     /**
      * The main library size column.
      */
