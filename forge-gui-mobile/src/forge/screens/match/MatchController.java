@@ -394,11 +394,11 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public Map<CardView, Integer> assignCombatDamage(final CardView attacker, final List<CardView> blockers, final int damage, final GameEntityView defender, final boolean overrideOrder) {
+    public Map<CardView, Integer> assignCombatDamage(final CardView attacker, final List<CardView> blockers, final int damage, final GameEntityView defender, final boolean overrideOrder, final boolean maySkip) {
         return new WaitCallback<Map<CardView, Integer>>() {
             @Override
             public void run() {
-                final VAssignCombatDamage v = new VAssignCombatDamage(attacker, blockers, damage, defender, overrideOrder, this);
+                final VAssignCombatDamage v = new VAssignCombatDamage(attacker, blockers, damage, defender, overrideOrder, maySkip, this);
                 v.show();
             }
         }.invokeAndWait();

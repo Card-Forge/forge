@@ -68,7 +68,7 @@ public interface IGuiGame {
     void updateLives(Iterable<PlayerView> livesUpdate);
     void setPanelSelection(CardView hostCard);
     SpellAbilityView getAbilityToPlay(CardView hostCard, List<SpellAbilityView> abilities, ITriggerEvent triggerEvent);
-    Map<CardView, Integer> assignCombatDamage(CardView attacker, List<CardView> blockers, int damage, GameEntityView defender, boolean overrideOrder);
+    Map<CardView, Integer> assignCombatDamage(CardView attacker, List<CardView> blockers, int damage, GameEntityView defender, boolean overrideOrder, boolean maySkip);
     // The Object passed should be GameEntityView for most case. Can be Byte for "generate mana of any combination" effect
     Map<Object, Integer> assignGenericAmount(CardView effectSource, Map<Object, Integer> target, int amount, final boolean atLeastOne, final String amountLabel);
 
