@@ -65,6 +65,7 @@ public class VAssignCombatDamage extends FDialog {
     private boolean attackerHasTrample = false;
     private boolean attackerHasInfect = false;
     private boolean overrideCombatantOrder = false;
+    private boolean skip = false;
 
     private final GameEntityView defender;
 
@@ -96,7 +97,7 @@ public class VAssignCombatDamage extends FDialog {
      * @param defender GameEntity that's bein attacked
      * @param overrideOrder override combatant order
      */
-    public VAssignCombatDamage(final CardView attacker, final List<CardView> blockers, final int damage0, final GameEntityView defender0, boolean overrideOrder, final WaitCallback<Map<CardView, Integer>> waitCallback) {
+    public VAssignCombatDamage(final CardView attacker, final List<CardView> blockers, final int damage0, final GameEntityView defender0, boolean overrideOrder, boolean maySkip, final WaitCallback<Map<CardView, Integer>> waitCallback) {
         super(Localizer.getInstance().getMessage("lbLAssignDamageDealtBy").replace("%s",CardTranslation.getTranslatedName(attacker.getName())) , 3);
 
         callback = waitCallback;
@@ -132,6 +133,15 @@ public class VAssignCombatDamage extends FDialog {
                 initialAssignDamage(false);
             }
         });
+        if (maySkip) {
+            initButton(2, Localizer.getInstance().getMessage("lblSkip"), new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    skip = true;
+                    finish();
+                }
+            });
+        }
 
         initialAssignDamage(false);
     }
@@ -440,7 +450,7 @@ public class VAssignCombatDamage extends FDialog {
     // assigned dynamically, the cards die off and further damage to them can't
     // be modified.
     private void finish() {
-        if (getRemainingDamage() > 0) {
+        if (!skip && getRemainingDamage() > 0) {
             return;
         }
         hide();
@@ -471,6 +481,10 @@ public class VAssignCombatDamage extends FDialog {
     }
 
     public Map<CardView, Integer> getDamageMap() {
+        if (skip) {
+            return null;
+        }
+
         Map<CardView, Integer> result = new HashMap<>();
         for (DamageTarget dt : defenders) {
             result.put(dt.card, dt.damage);

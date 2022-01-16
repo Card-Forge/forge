@@ -79,6 +79,7 @@ public class VAssignCombatDamage {
     private boolean attackerHasTrample = false;
     private boolean attackerHasInfect = false;
     private boolean overrideCombatantOrder = false;
+    private boolean skip = false;
 
     private final GameEntityView defender;
 
@@ -88,6 +89,7 @@ public class VAssignCombatDamage {
     private final FButton btnOK    = new FButton(localizer.getMessage("lblOk"));
     private final FButton btnReset = new FButton(localizer.getMessage("lblReset"));
     private final FButton btnAuto  = new FButton(localizer.getMessage("lblAuto"));
+    private final FButton btnSkip  = new FButton(localizer.getMessage("lblSkip"));
 
 
     private static class DamageTarget {
@@ -152,7 +154,7 @@ public class VAssignCombatDamage {
         }
     };
 
-    public VAssignCombatDamage(final CMatchUI matchUI, final CardView attacker, final List<CardView> blockers, final int damage0, final GameEntityView defender0, boolean overrideOrder) {
+    public VAssignCombatDamage(final CMatchUI matchUI, final CardView attacker, final List<CardView> blockers, final int damage0, final GameEntityView defender0, boolean overrideOrder, boolean maySkip) {
         this.matchUI = matchUI;
         String s  = localizer.getMessage("lbLAssignDamageDealtBy");
         dlg.setTitle(s.replace("%s",attacker.toString()));
@@ -234,7 +236,13 @@ public class VAssignCombatDamage {
         pnlButtons.add(btnOK, "w 110px!, h 30px!, gap 0 10px 0 0");
         pnlButtons.add(btnReset, "w 110px!, h 30px!");
 
-        pnlMain.add(pnlButtons, "ax center, w 350px!, gap 10px 10px 10px 10px, span 2");
+        if (maySkip) {
+            pnlButtons.add(btnSkip, "gap 0 10px 0 0, w 110px!, h 30px!");
+            btnSkip.addActionListener(new ActionListener() {
+                @Override public void actionPerformed(ActionEvent arg0) { skip = true; finish(); } });
+        }
+
+        pnlMain.add(pnlButtons, "ax center, w 500px!, gap 10px 10px 10px 10px, span 2");
         overlay.add(pnlMain);
 
         pnlMain.getRootPane().setDefaultButton(btnOK);
@@ -435,7 +443,7 @@ public class VAssignCombatDamage {
     // assigned dynamically, the cards die off and further damage to them can't
     // be modified.
     private void finish() {
-        if (getRemainingDamage() > 0)
+        if (!skip && getRemainingDamage() > 0)
             return;
 
         dlg.dispose();
@@ -465,6 +473,10 @@ public class VAssignCombatDamage {
     }
 
     public Map<CardView, Integer> getDamageMap() {
+        if (skip) {
+            return null;
+        }
+
         Map<CardView, Integer> result = Maps.newHashMapWithExpectedSize(defenders.size());
         for (DamageTarget dt : defenders)
             result.put(dt.card, dt.damage);

@@ -211,7 +211,7 @@ public class DamageDealEffect extends DamageBaseEffect {
                 CardCollection assigneeCards = new CardCollection(Iterables.filter(tgts, Card.class));
 
                 Player assigningPlayer = players.get(0);
-                Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(sourceLKI, assigneeCards, dmg, null, true);
+                Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(sourceLKI, assigneeCards, null, dmg, null, true);
                 for (Entry<Card, Integer> dt : map.entrySet()) {
                     damageMap.put(sourceLKI, dt.getKey(), dt.getValue());
                 }

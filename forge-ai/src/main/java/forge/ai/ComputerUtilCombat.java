@@ -2052,9 +2052,10 @@ public class ComputerUtilCombat {
      * @param defender
      * @param overrideOrder overriding combatant order
      */
-    public static Map<Card, Integer> distributeAIDamage(final Card attacker, final CardCollectionView block, int dmgCanDeal, GameEntity defender, boolean overrideOrder) {
+    public static Map<Card, Integer> distributeAIDamage(final Card attacker, final CardCollectionView block, final CardCollectionView remaining, int dmgCanDeal, GameEntity defender, boolean overrideOrder) {
         // TODO: Distribute defensive Damage (AI controls how damage is dealt to own cards) for Banding and Defensive Formation
         Map<Card, Integer> damageMap = Maps.newHashMap();
+        Combat combat = attacker.getGame().getCombat();
 
         boolean isAttacking = defender != null;
 
@@ -2065,6 +2066,23 @@ public class ComputerUtilCombat {
         }
 
         final boolean hasTrample = attacker.hasKeyword(Keyword.TRAMPLE);
+
+        if (combat != null && hasTrample && attacker.isAttacking()) {
+            // if attacker has trample and some of its blockers are also blocking others it's generally a good idea
+            // to assign those without trample first so we can maximize the damage to the defender
+            for (final Card c : remaining) {
+                if (c == attacker || c.hasKeyword(Keyword.TRAMPLE)) {
+                    continue;
+                }
+                final CardCollection sharedBlockers = new CardCollection(block);
+                sharedBlockers.retainAll(combat.getBlockers(c));
+                if (!sharedBlockers.isEmpty()) {
+                    // signal skip for now
+                    return null;
+                }
+            }
+            // TODO sort remaining tramplers for DamageDone triggers
+        }
 
         if (block.size() == 1) {
             final Card blocker = block.getFirst();

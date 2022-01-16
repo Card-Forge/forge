@@ -718,7 +718,7 @@ public class Combat {
                     assigningPlayer = attackingPlayer;
 
                 assignedDamage = true;
-                Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(blocker, attackers, damage, defender, divideCombatDamageAsChoose || assigningPlayer != blocker.getController());
+                Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(blocker, attackers, null, damage, defender, divideCombatDamageAsChoose || assigningPlayer != blocker.getController());
                 for (Entry<Card, Integer> dt : map.entrySet()) {
                     // Butcher Orgg
                     if (dt.getKey() == null && dt.getValue() > 0) {
@@ -738,8 +738,10 @@ public class Combat {
         CardCollection orderedBlockers = null;
         final CardCollection attackers = getAttackers();
         boolean assignedDamage = false;
-        for (final Card attacker : attackers) {
+        while (!attackers.isEmpty()) {
+            final Card attacker = attackers.getFirst();
             if (!dealDamageThisPhase(attacker, firstStrikeDamage)) {
+                attackers.remove(attacker);
                 continue;
             }
 
@@ -753,11 +755,13 @@ public class Combat {
             // If potential damage is 0, continue along
             final int damageDealt = attacker.getNetCombatDamage();
             if (damageDealt <= 0) {
+                attackers.remove(attacker);
                 continue;
             }
 
             AttackingBand band = getBandOfAttacker(attacker);
             if (band == null) {
+                attackers.remove(attacker);
                 continue;
             }
 
@@ -801,6 +805,7 @@ public class Combat {
                 defender = getDefenderPlayerByAttacker(attacker);
             }
             if (orderedBlockers == null || orderedBlockers.isEmpty()) {
+                attackers.remove(attacker);
                 if (assignCombatDamageToCreature) {
                     Card chosen = attacker.getController().getController().chooseCardsForEffect(getDefendersCreatures(),
                             null, Localizer.getInstance().getMessage("lblChooseCreature"), 1, 1, false, null).get(0);
@@ -822,8 +827,16 @@ public class Combat {
                     assigningPlayer = orderedBlockers.get(0).getController();
                 }
 
-                Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(attacker, orderedBlockers,
+                Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(attacker, orderedBlockers, attackers,
                         damageDealt, defender, divideCombatDamageAsChoose || getAttackingPlayer() != assigningPlayer);
+
+                attackers.remove(attacker);
+                // player wants to assign another first
+                if (map == null) {
+                    attackers.add(attacker);
+                    continue;
+                }
+
                 for (Entry<Card, Integer> dt : map.entrySet()) {
                     if (dt.getKey() == null) {
                         if (dt.getValue() > 0) {
