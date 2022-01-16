@@ -159,7 +159,7 @@
                 </executions>
                 <configuration>
                     <basedir>${basedir}/${configSourceDirectory}</basedir>
-                    <filesToInclude>forge-adventure.sh, forge-adventure.command</filesToInclude>
+                    <filesToInclude>forge-adventure.sh, forge-adventure.command, forge-adventure.cmd</filesToInclude>
                     <outputBasedir>${project.build.directory}</outputBasedir>
                     <outputDir>.</outputDir>
                     <regex>false</regex>
