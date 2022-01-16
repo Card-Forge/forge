@@ -220,6 +220,7 @@ public final class SColumnUtil {
         colDefs.add(ColumnDef.DECK_EDITION);
         colDefs.add(ColumnDef.DECK_MAIN);
         colDefs.add(ColumnDef.DECK_SIDE);
+        colDefs.add(ColumnDef.DECK_AI);
 
         Map<ColumnDef, ItemColumnConfig> columns = getColumns(colDefs);
         columns.get(ColumnDef.DECK_FAVORITE).setSortPriority(1);

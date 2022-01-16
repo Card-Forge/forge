@@ -172,7 +172,7 @@ public final class SItemManagerUtil {
                                                             ColumnDef.SET, ColumnDef.COLLECTOR_ORDER};
     private static final ColumnDef[] DECK_PILEBY_OPTIONS = {ColumnDef.DECK_COLOR, ColumnDef.DECK_FOLDER,
                                                             ColumnDef.NAME, ColumnDef.DECK_FORMAT,
-                                                            ColumnDef.DECK_EDITION};
+                                                            ColumnDef.DECK_EDITION, ColumnDef.DECK_AI};
 
     public static void populateImageViewOptions(final IItemManager<?> itemManager, final IComboBox<Object> cbGroupByOptions, final IComboBox<Object> cbPileByOptions) {
         final boolean isDeckManager = itemManager.getGenericType().equals(DeckProxy.class);
