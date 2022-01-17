@@ -93,6 +93,8 @@ public class NewGameMenu extends FPopupMenu {
     }
 
     public static NewGameScreen getPreferredScreen() {
+        if (preferredScreen == null) //shouldn't happen but we return constructed as default
+            return NewGameScreen.Constructed;
         return preferredScreen;
     }
     public static void setPreferredScreen(NewGameScreen preferredScreen0) {
