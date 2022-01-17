@@ -67,7 +67,7 @@ public class OnlineMenu extends FPopupMenu {
         private void initializeScreen() {
             if (screen == null) { //don't initialize screen until it's opened the first time
                 try {
-                    screen = screenClass.newInstance();
+                    screen = screenClass.getConstructor().newInstance();
                     screen.setHeaderCaption(Localizer.getInstance().getMessage("lblPlayOnline") + " - " + item.getText());
                 }
                 catch (Exception e) {
