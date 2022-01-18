@@ -2,7 +2,7 @@ Name:Sanguine Sacrament
 ManaCost:X W W
 Types:Instant
 A:SP$ GainLife | Cost$ X W W | LifeAmount$ XX | Defined$ You | SubAbility$ DBPutOnBottom | SpellDescription$ You gain twice X life. Put CARDNAME on the bottom of its owner's library.
-SVar:DBPutOnBottom:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Library | LibraryPosition$ -1
+SVar:DBPutOnBottom:DB$ ChangeZone | Defined$ Parent | Origin$ Stack | Destination$ Library | LibraryPosition$ -1
 SVar:X:Count$xPaid
 SVar:XX:SVar$X/Twice
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanguine_sacrament.jpg
