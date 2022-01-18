@@ -579,7 +579,7 @@ public abstract class SpellAbilityEffect {
                 PlayerCollection defendingPlayers = AbilityUtils.getDefinedPlayers(host, attacking, sa);
                 defs = new FCollection<>();
                 for (Player p : defendingPlayers) {
-                    defs.addAll(game.getCombat().getDefendersControlledBy(p));
+                    defs.addAll(combat.getDefendersControlledBy(p));
                 }
             } else if ("True".equalsIgnoreCase(attacking)) {
                 defs = (FCollection<GameEntity>) combat.getDefenders();

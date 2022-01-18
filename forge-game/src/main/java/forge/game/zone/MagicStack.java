@@ -766,6 +766,15 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return null;
     }
 
+    public final SpellAbility getSpellMatchingHost(final Card host) {
+        for (final SpellAbilityStackInstance si : stack) {
+            if (si.isSpell() && host.equals(si.getSpellAbility(false).getHostCard())) {
+                return si.getSpellAbility(false);
+            }
+        }
+        return null;
+    }
+
     public final boolean hasSimultaneousStackEntries() {
         return !simultaneousStackEntryList.isEmpty();
     }

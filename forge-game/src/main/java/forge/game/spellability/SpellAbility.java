@@ -2102,7 +2102,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isCumulativeupkeep() {
         return cumulativeupkeep;
     }
-
     public void setCumulativeupkeep(boolean cumulativeupkeep0) {
         cumulativeupkeep = cumulativeupkeep0;
     }
