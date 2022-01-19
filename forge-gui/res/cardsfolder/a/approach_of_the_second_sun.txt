@@ -6,7 +6,7 @@ SVar:ApproachingSuns:DB$ Effect | Name$ ApproachingSuns | Duration$ Permanent
 A:SP$ Branch | Cost$ 6 W | BranchConditionSVar$ X | BranchConditionSVarCompare$ EQ3 | TrueSubAbility$ WinGame | FalseSubAbility$ GainLife | SpellDescription$ If this spell was cast from your hand and you've cast another spell named Approach of the Second Sun this game, you win the game. Otherwise, put CARDNAME into its owner's library seventh from the top and you gain 7 life.
 SVar:WinGame:DB$ WinsGame | Defined$ You
 SVar:GainLife:DB$ GainLife | LifeAmount$ 7 | Defined$ You | SubAbility$ Reapproach
-SVar:Reapproach:DB$ ChangeZone | Origin$ Stack | Destination$ Library | LibraryPosition$ 6 | Defined$ Self
+SVar:Reapproach:DB$ ChangeZone | Origin$ Stack | Destination$ Library | LibraryPosition$ 6 | Defined$ Parent
 SVar:Y:Count$ValidCommand Effect.YouCtrl+namedApproachingSuns/LimitMax.2
 SVar:Z:Count$ValidStack Card.wasCastFromHand+Self/LimitMax.1
 SVar:X:SVar$Y/Plus.Z
