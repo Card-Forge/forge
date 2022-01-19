@@ -9,4 +9,3 @@ SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
 DeckHints:Type$Pirate
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forerunner_of_the_coalition.jpg
 Oracle:When Forerunner of the Coalition enters the battlefield, you may search your library for a Pirate card, reveal it, then shuffle and put that card on top.\nWhenever another Pirate enters the battlefield under your control, each opponent loses 1 life.
-

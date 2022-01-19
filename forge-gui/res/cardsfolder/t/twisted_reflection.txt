@@ -1,6 +1,6 @@
 Name:Twisted Reflection
-Types:Instant
 ManaCost:1 U
+Types:Instant
 K:Entwine:B
 A:SP$ Charm | Cost$ 1 U | Choices$ DBCurse,DBSwitch
 SVar:DBCurse:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to get -6/-0 | NumAtt$ -6 | IsCurse$ True | SpellDescription$ Target creature gets -6/-0 until end of turn.

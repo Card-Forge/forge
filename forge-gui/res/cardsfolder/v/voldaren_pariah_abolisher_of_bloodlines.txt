@@ -19,4 +19,3 @@ K:Flying
 T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigSacrifice | TriggerDescription$ When this creature transforms into CARDNAME, target opponent sacrifices three creatures.
 SVar:TrigSacrifice:DB$ Sacrifice | ValidTgts$ Opponent | SacValid$ Creature | Amount$ 3 | SacMessage$ Creature
 Oracle:Flying\nWhen this creature transforms into Abolisher of Bloodlines, target opponent sacrifices three creatures.
-

@@ -2,7 +2,7 @@ Name:Elvish Eulogist
 ManaCost:G
 Types:Creature Elf Shaman
 PT:1/1
-A:AB$ GainLife | Cost$ Sac<1/CARDNAME>| LifeAmount$ X | SpellDescription$ You gain 1 life for each Elf card in your graveyard.
+A:AB$ GainLife | Cost$ Sac<1/CARDNAME> | LifeAmount$ X | SpellDescription$ You gain 1 life for each Elf card in your graveyard.
 SVar:X:Count$TypeInYourYard.Elf
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_eulogist.jpg
 Oracle:Sacrifice Elvish Eulogist: You gain 1 life for each Elf card in your graveyard.

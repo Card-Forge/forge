@@ -10,4 +10,4 @@ SVar:TrigPumpBlocker:DB$ Pump | Defined$ TriggeredBlocker | KW$ Wither
 SVar:TrigRemoveCounter:DB$ RemoveCounter | CounterType$ M1M1 | CounterNum$ All
 SVar:All:Count$CardCounters.M1M1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/witherscale_wurm.jpg
-Oracle:Whenever Witherscale Wurm blocks or becomes blocked by a creature, that creature gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)\nWhenever Witherscale Wurm deals damage to an opponent, remove all -1/-1 counters from it. 
+Oracle:Whenever Witherscale Wurm blocks or becomes blocked by a creature, that creature gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)\nWhenever Witherscale Wurm deals damage to an opponent, remove all -1/-1 counters from it.

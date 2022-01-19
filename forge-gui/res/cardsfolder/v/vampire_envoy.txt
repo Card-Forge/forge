@@ -7,4 +7,4 @@ T:Mode$ Taps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigG
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 DeckHas:Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_envoy.jpg
-Oracle:Flying\nWhenever Vampire Envoy becomes tapped, you gain 1 life. 
+Oracle:Flying\nWhenever Vampire Envoy becomes tapped, you gain 1 life.

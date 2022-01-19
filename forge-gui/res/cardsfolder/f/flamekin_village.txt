@@ -1,4 +1,5 @@
 Name:Flamekin Village
+ManaCost:no cost
 Types:Land
 K:ETBReplacement:Other:DBTap
 SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Elemental> | UnlessPayer$ You | StackDescription$ enters the battlefield tapped. | SpellDescription$ As CARDNAME enters the battlefield, you may reveal an Elemental card from your hand. If you don't, CARDNAME enters the battlefield tapped.

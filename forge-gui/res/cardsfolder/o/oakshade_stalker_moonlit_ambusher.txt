@@ -16,4 +16,3 @@ Types:Creature Werewolf
 PT:6/3
 K:Nightbound
 Oracle:Nightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)
-

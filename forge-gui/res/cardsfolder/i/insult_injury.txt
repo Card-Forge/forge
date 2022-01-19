@@ -6,8 +6,7 @@ A:SP$ Effect | Cost$ 2 R | Name$ Insult Effect | StaticAbilities$ STCantPrevent 
 SVar:STCantPrevent:Mode$ CantPreventDamage | EffectZone$ Command | Description$ Damage can't be prevented.
 SVar:InsultDamageEvent:Event$ DamageDone | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ReplaceWith$ DmgTwice | Description$ If a source you control would deal damage this turn, it deals double that damage instead.
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
-
-SVar:X:ReplaceCount$DamageAmount/Twice 
+SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:Picture:http://www.wizards.com/global/images/magic/general/insult_injury.jpg
 Oracle:Damage can't be prevented this turn. If a source you control would deal damage this turn, it deals double that damage instead.
 

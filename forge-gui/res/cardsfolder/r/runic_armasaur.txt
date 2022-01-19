@@ -1,7 +1,7 @@
 Name:Runic Armasaur
 ManaCost:1 G G
 Types:Creature Dinosaur
+PT:2/5
 T:Mode$ AbilityCast | ValidActivatingPlayer$ Opponent | ValidCard$ Creature.inZoneBattlefield,Land.inZoneBattlefield | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent activates an ability of a creature or land that isn't a mana ability, you may draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 Oracle:Whenever an opponent activates an ability of a creature or land that isn't a mana ability, you may draw a card.
-PT:2/5

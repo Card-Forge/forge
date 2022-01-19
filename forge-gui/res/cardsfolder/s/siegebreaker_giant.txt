@@ -1,7 +1,7 @@
 Name:Siegebreaker Giant
 ManaCost:3 R R
 Types:Creature Giant Warrior
+PT:6/3
 K:Trample
 A:AB$ Pump | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
 Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\n{3}{R}: Target creature can't block this turn.
-PT:6/3

@@ -1,4 +1,4 @@
-Name:Sarkhan's Unsealing 
+Name:Sarkhan's Unsealing
 ManaCost:3 R
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Creature.powerGE4+powerLE6 | ValidActivatingPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell with power 4, 5, or 6, Sarkhan's Unsealing deals 4 damage to any target.

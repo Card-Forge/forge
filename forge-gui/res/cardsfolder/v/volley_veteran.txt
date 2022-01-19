@@ -1,9 +1,9 @@
 Name:Volley Veteran
 ManaCost:3 R
 Types:Creature Goblin Warrior
+PT:4/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals damage to target creature an opponent controls equal to the number of Goblins you control.
 SVar:TrigDealDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
 SVar:X:Count$Valid Goblin.YouCtrl
 DeckHints:Type$Goblin
 Oracle:When Volley Veteran enters the battlefield, it deals damage to target creature an opponent controls equal to the number of Goblins you control.
-PT:4/2

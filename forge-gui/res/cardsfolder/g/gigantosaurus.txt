@@ -1,5 +1,5 @@
 Name:Gigantosaurus
 ManaCost:G G G G G
 Types:Creature Dinosaur
-Oracle:
 PT:10/10
+Oracle:

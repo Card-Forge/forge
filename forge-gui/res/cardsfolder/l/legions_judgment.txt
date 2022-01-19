@@ -3,4 +3,4 @@ ManaCost:2 W
 Types:Sorcery
 A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/legions_judgment.jpg
-Oracle:Destroy target creature with power 4 or greater. 
+Oracle:Destroy target creature with power 4 or greater.

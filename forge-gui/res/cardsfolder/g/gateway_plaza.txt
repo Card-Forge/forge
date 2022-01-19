@@ -1,4 +1,5 @@
 Name:Gateway Plaza
+ManaCost:no cost
 Types:Land Gate
 K:CARDNAME enters the battlefield tapped.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you pay {1}.

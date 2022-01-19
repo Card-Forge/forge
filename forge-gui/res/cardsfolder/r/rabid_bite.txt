@@ -5,4 +5,4 @@ A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPr
 SVar:SoulsDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you don't control | NumDmg$ X | DamageSource$ ParentTarget
 SVar:X:ParentTargeted$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rabid_bite.jpg
-Oracle:Target creature you control deals damage equal to its power to target creature you don't control. 
+Oracle:Target creature you control deals damage equal to its power to target creature you don't control.

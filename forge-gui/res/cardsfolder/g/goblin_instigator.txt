@@ -1,8 +1,8 @@
 Name:Goblin Instigator
 ManaCost:1 R
 Types:Creature Goblin Rogue
+PT:1/1
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 red Goblin creature token. | Execute$ TrigToken
 SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ r_1_1_goblin | LegacyImage$ r 1 1 goblin m19
 DeckHas:Ability$Token
 Oracle:When Goblin Instigator enters the battlefield, create a 1/1 red Goblin creature token.
-PT:1/1

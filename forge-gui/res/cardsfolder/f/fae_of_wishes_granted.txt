@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Creature Faerie Wizard
 PT:1/4
 K:Flying
-A:AB$ ChangeZone | Cost$ 1 U Discard<2/Card> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand. 
+A:AB$ ChangeZone | Cost$ 1 U Discard<2/Card> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 Oracle:Flying\n{1}{U}, Discard two cards: Return Fae of Wishes to its owner's hand.
 AlternateMode:Adventure
 

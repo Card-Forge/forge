@@ -8,4 +8,3 @@ SVar:X:Count$CountersAddedThisTurn P1P1 You Creature.YouCtrl
 DeckNeeds:Ability$Counters
 DeckHas:Ability$Counters
 Oracle:At the beginning of your end step, create a 1/1 green Insect creature token for each +1/+1 counter you've put on creatures under your control this turn.
-

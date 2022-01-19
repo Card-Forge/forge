@@ -23,8 +23,8 @@ ALTERNATE
 
 Name:Tibalt, Cosmic Impostor
 ManaCost:5 B R
-Loyalty:5
 Types:Legendary Planeswalker Tibalt
+Loyalty:5
 K:ETBReplacement:Other:Emblem
 SVar:Emblem:DB$ Effect | Name$ Emblem - Tibalt, Cosmic Impostor | Image$ emblem_tibalt_cosmic_impostor | StaticAbilities$ PlayExile | Duration$ Permanent | SpellDescription$ As NICKNAME enters the battlefield, you get an emblem with "You may play cards exiled with CARDNAME, and you may spend mana as though it were mana of any color to cast those spells."
 SVar:PlayExile:Mode$ Continuous | MayPlayIgnoreType$ True | MayPlayIgnoreColor$ True | MayPlay$ True | Affected$ Card.ExiledWithEffectSource | AffectedZone$ Exile | Description$ You may play cards exiled with EFFECTSOURCE, and you may spend mana as though it were mana of any color to cast those spells.

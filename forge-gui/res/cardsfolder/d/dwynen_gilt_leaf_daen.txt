@@ -7,7 +7,7 @@ S:Mode$ Continuous | Affected$ Creature.Elf+Other+YouCtrl | AddPower$ 1 | AddTou
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME attacks, you gain 1 life for each attacking Elf you control.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Creature.YouCtrl+Elf+attacking
-SVar:HasAttackEffect:TRUE 
+SVar:HasAttackEffect:TRUE
 DeckHints:Type$Elf
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwynen_gilt_leaf_daen.jpg

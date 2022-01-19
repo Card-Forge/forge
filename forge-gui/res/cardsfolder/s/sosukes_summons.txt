@@ -6,4 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand
 DeckHints:Type$Snake
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sosukes_summons.jpg
-Oracle:Create two 1/1 green Snake creature tokens.\nWhenever a nontoken Snake enters the battlefield under your control, you may return Sosuke's Summons from your graveyard to your hand. 
+Oracle:Create two 1/1 green Snake creature tokens.\nWhenever a nontoken Snake enters the battlefield under your control, you may return Sosuke's Summons from your graveyard to your hand.

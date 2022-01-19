@@ -9,4 +9,3 @@ SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
 SVar:X:Count$AttackersDeclared
 SVar:Picture:http://www.wizards.com/global/images/magic/general/see_red.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+1 and has first strike.\nAt the beginning of your end step, if you didn't attack with a creature this turn, sacrifice See Red.
-

@@ -1,7 +1,7 @@
 Name:Asmoranomardicadaistinaculdacar
 ManaCost:no cost
-Types:Legendary Creature Human Wizard
 Colors:black,red
+Types:Legendary Creature Human Wizard
 PT:3/3
 SVar:AltCost:Cost$ BR | CheckSVar$ X | Description$ As long as you've discarded a card this turn, you may pay {B/R} to cast this spell.
 SVar:X:PlayerCountPropertyYou$CardsDiscardedThisTurn

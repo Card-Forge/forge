@@ -15,6 +15,7 @@ Oracle:{T}: Add {C}.\n{R}, {T}: Target creature gains haste until end of turn.\n
 ALTERNATE
 
 Name:Hanweir, the Writhing Township
+ManaCost:no cost
 Types:Legendary Creature Eldrazi Ooze
 PT:7/4
 K:Trample

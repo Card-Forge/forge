@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant land
 A:SP$ Attach | Cost$ 4 W | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ DPTapCreature | Description$ Enchanted land has "{T}: Tap target creature."
-SVar:DPTapCreature:AB$ Tap | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Choose target creature.| SpellDescription$ Tap target creature.
+SVar:DPTapCreature:AB$ Tap | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Choose target creature. | SpellDescription$ Tap target creature.
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/debtors_pulpit.jpg
 Oracle:Enchant land\nEnchanted land has "{T}: Tap target creature."

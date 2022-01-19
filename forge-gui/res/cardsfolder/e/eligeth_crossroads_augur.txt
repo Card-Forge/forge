@@ -8,4 +8,3 @@ R:Event$ Scry | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ Draw 
 SVar:Draw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:ReplaceCount$Num
 Oracle:Flying\nIf you would scry a number of cards, draw that many cards instead.\nPartner (You can have two commanders if both have partner.)
-

@@ -21,4 +21,3 @@ SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Opponent | TgtPrompt$ Select target opp
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wayward_disciple.jpg
 Oracle:Whenever Wayward Disciple or another creature you control dies, target opponent loses 1 life and you gain 1 life.
-

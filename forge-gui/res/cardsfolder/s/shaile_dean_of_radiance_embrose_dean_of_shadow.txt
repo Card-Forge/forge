@@ -20,4 +20,3 @@ SVar:DBDmg:DB$ DealDamage | Defined$ ParentTarget | NumDmg$ 2 | StackDescription
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+counters_GE1_P1P1 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control with a +1/+1 counter on it dies, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 Oracle:{T}: Put a +1/+1 counter on another target creature, then Embrose, Dean of Shadow deals 2 damage to that creature.\nWhenever a creature you control with a +1/+1 counter on it dies, draw a card.
-

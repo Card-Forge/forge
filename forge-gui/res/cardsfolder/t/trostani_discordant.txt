@@ -6,5 +6,5 @@ S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ 1 | AddToughne
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 white Soldier creature tokens with lifelink.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_soldier_lifelink | LegacyImage$ w 1 1 soldier lifelink grn
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainControl | TriggerDescription$ At the beginning of your end step, each player gains control of all creatures they own.
-SVar:TrigGainControl:DB$ GainControlVariant | AILogic$ GainControlOwns | AllValid$ Creature | ChangeController$ CardOwner | 
+SVar:TrigGainControl:DB$ GainControlVariant | AILogic$ GainControlOwns | AllValid$ Creature | ChangeController$ CardOwner
 Oracle:Other creatures you control get +1/+1.\nWhen Trostani Discordant enters the battlefield, create two 1/1 white Soldier creature tokens with lifelink.\nAt the beginning of your end step, each player gains control of all creatures they own.

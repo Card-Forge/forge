@@ -24,4 +24,3 @@ A:AB$ Token | Cost$ 2 T Sac<1/Creature.nonEldrazi/non-Eldrazi creature> | TokenO
 SVar:AIPreference:SacCost$Creature.token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/extricator_of_flesh.jpg
 Oracle:Eldrazi you control have vigilance.\n{2}, {T}, Sacrifice a non-Eldrazi creature: Create a 3/2 colorless Eldrazi Horror creature token.
-

@@ -3,4 +3,3 @@ ManaCost:no cost
 Types:Snow Land Swamp Mountain
 K:CARDNAME enters the battlefield tapped.
 Oracle:({T}: Add {B} or {R}.)\nSulfurous Mire enters the battlefield tapped.
-

@@ -1,8 +1,8 @@
 Name:Trusty Packbeast
 ManaCost:2 W
 Types:Creature Beast
+PT:2/3
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target artifact card from your graveyard to your hand.
 SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Artifact.YouCtrl | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target artifact from your graveyard
 DeckHints:Type$Artifact
 Oracle:When Trusty Packbeast enters the battlefield, return target artifact card from your graveyard to your hand.
-PT:2/3

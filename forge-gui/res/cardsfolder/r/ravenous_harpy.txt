@@ -1,8 +1,8 @@
 Name:Ravenous Harpy
 ManaCost:2 B
 Types:Creature Harpy
-K:Flying
 PT:1/2
+K:Flying
 A:AB$ PutCounter | Cost$ 1 Sac<1/Creature> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 DeckHas:Ability$Counters
 Oracle:Flying\n{1}, Sacrifice another creature: Put a +1/+1 counter on Ravenous Harpy.

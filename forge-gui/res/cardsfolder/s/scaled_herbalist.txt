@@ -1,4 +1,4 @@
-Name:Scaled Herbalist 
+Name:Scaled Herbalist
 ManaCost:1 G
 Types:Creature Lizard Druid
 PT:1/3

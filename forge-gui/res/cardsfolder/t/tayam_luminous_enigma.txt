@@ -9,4 +9,3 @@ SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Mandatory$ True | ChangeType$ 
 DeckHas:Ability$Counters
 SVar:AIRemoveCounterCostPriority:Vigilance
 Oracle:Each other creature you control enters the battlefield with an additional vigilance counter on it.\n{3}, Remove three counters from among creatures you control: Mill three cards, then return a permanent card with mana value 3 or less from your graveyard to the battlefield.
-

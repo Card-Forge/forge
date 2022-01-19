@@ -1,4 +1,5 @@
 Name:Guildmages' Forum
+ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Mana | Cost$ 1 T | Produced$ Any | AddsCounters$ Card.Creature+MultiColor_P1P1_1 | SpellDescription$ Add one mana of any color. If that mana is spent on a multicolored creature spell, that creature enters the battlefield with an additional +1/+1 counter on it.

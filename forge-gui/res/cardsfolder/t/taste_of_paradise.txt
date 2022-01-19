@@ -1,7 +1,7 @@
 Name:Taste of Paradise
 ManaCost:3 G
 Types:Sorcery
-Text:As an additional cost to cast Taste of Paradise, you may pay {1}{G} any number of times. 
+Text:As an additional cost to cast Taste of Paradise, you may pay {1}{G} any number of times.
 K:Multikicker:1 G:Generic
 A:SP$ GainLife | Cost$ 3 G | Defined$ You | LifeAmount$ Y | SpellDescription$ You gains 3 life plus an additional 3 life for each additional {1}{G} you paid.
 SVar:Y:SVar$X/Plus.3

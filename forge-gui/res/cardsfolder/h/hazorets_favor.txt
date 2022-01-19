@@ -3,6 +3,6 @@ ManaCost:2 R
 Types:Enchantment
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, you may have target creature you control get +2/+0 and gain haste until end of turn. If you do, sacrifice it at the beginning of the next end step.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ 2 | KW$ Haste | AtEOT$ Sacrifice
-SVar:PlayMain1:TRUE 
+SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hazorets_favor.jpg
 Oracle:At the beginning of combat on your turn, you may have target creature you control get +2/+0 and gain haste until end of turn. If you do, sacrifice it at the beginning of the next end step.

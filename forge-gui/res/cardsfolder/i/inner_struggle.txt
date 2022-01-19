@@ -5,4 +5,4 @@ A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:X:Targeted$CardPower
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inner_struggle.jpg
-Oracle:Target creature deals damage to itself equal to its power. 
+Oracle:Target creature deals damage to itself equal to its power.

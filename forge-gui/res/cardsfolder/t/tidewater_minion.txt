@@ -4,7 +4,7 @@ Types:Creature Elemental Minion
 PT:4/4
 K:Defender
 A:AB$ Debuff | Cost$ 4 | Keywords$ Defender | Defined$ Self | SpellDescription$ CARDNAME loses defender until end of turn.
-A:AB$ Untap | Cost$ T | ValidTgts$ Permanent | TgtPrompt$ Select target permanent| SpellDescription$ Untap target permanent.
+A:AB$ Untap | Cost$ T | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Untap target permanent.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidewater_minion.jpg
 Oracle:Defender (This creature can't attack.)\n{4}: Tidewater Minion loses defender until end of turn.\n{T}: Untap target permanent.

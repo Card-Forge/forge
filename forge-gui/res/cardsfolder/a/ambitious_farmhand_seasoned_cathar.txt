@@ -13,8 +13,8 @@ ALTERNATE
 
 Name:Seasoned Cathar
 ManaCost:no cost
-Types:Creature Human Knight
 Colors:white
+Types:Creature Human Knight
 PT:3/3
 K:Lifelink
 Oracle:Lifelink

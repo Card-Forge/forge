@@ -2,5 +2,5 @@ Name:Stirring Address
 ManaCost:1 W
 Types:Instant
 A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature you control gets +2/+2 until end of turn.
-A:SP$ PumpAll | Cost$ 5 W | PrecostDesc$ Overload | CostDesc$ {5}{W} | NonBasicSpell$ True | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | SpellDescription$  (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.") | StackDescription$ Each creature you control gets +2/+2 until end of turn.
+A:SP$ PumpAll | Cost$ 5 W | PrecostDesc$ Overload | CostDesc$ {5}{W} | NonBasicSpell$ True | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.") | StackDescription$ Each creature you control gets +2/+2 until end of turn.
 Oracle:Target creature you control gets +2/+2 until end of turn.\nOverload {5}{W} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")

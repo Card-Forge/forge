@@ -6,9 +6,7 @@ A:AB$SetState | Cost$ 4 G | Defined$ Self | Mode$ Transform | SpellDescription$ 
 AlternateMode:DoubleFaced
 Oracle:{4}{G}: Transform Kessig Prowler.
 
-
 ALTERNATE
-
 
 Name:Sinuous Predator
 ManaCost:no cost

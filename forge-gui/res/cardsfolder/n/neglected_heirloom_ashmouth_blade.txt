@@ -18,4 +18,3 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$
 K:Equip:3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashmouth_blade.jpg
 Oracle:Equipped creature gets +3/+3 and has first strike.\nEquip {3}
-

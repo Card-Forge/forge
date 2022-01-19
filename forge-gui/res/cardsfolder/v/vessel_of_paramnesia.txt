@@ -2,5 +2,5 @@ Name:Vessel of Paramnesia
 ManaCost:1 U
 Types:Enchantment
 A:AB$ Mill | Cost$ U Sac<1/CARDNAME> | NumCards$ 3 | ValidTgts$ Player | SubAbility$ DBDraw | TgtPrompt$ Select target player | SpellDescription$ Target player mills three cards. Draw a card.
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 Oracle:{U}, Sacrifice Vessel of Paramnesia: Target player mills three cards. Draw a card.

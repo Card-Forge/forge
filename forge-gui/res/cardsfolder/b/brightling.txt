@@ -4,7 +4,7 @@ Types:Creature Shapeshifter
 PT:3/3
 A:AB$ Pump | Cost$ W | KW$ Vigilance | Defined$ Self | SpellDescription$ CARDNAME gains vigilance until end of turn.
 A:AB$ Pump | Cost$ W | KW$ Lifelink | Defined$ Self | SpellDescription$ CARDNAME gains lifelink until end of turn.
-A:AB$ ChangeZone | Cost$ W | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand. 
+A:AB$ ChangeZone | Cost$ W | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 A:AB$ Pump | Cost$ 1 | Subability$ ABChoice | SpellDescription$ CARDNAME gets +1/-1 or -1/+1 until end of turn.
 SVar:ABChoice:DB$ GenericChoice | Defined$ You | Choices$ ABPump1,ABPump2
 SVar:ABPump1:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ +1/-1

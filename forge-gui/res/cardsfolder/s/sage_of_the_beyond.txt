@@ -1,5 +1,5 @@
 Name:Sage of the Beyond
-ManaCost:5 U U 
+ManaCost:5 U U
 Types:Creature Spirit Giant
 PT:5/5
 K:Flying

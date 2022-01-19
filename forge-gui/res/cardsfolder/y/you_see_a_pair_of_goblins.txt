@@ -1,4 +1,4 @@
-Name:You See a Pair of Goblins 
+Name:You See a Pair of Goblins
 ManaCost:2 R
 Types:Instant
 A:SP$ Charm | Cost$ 2 R | Choices$ ChargeThem,BefriendThem

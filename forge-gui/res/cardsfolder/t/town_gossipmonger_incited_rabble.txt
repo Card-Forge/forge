@@ -15,7 +15,6 @@ Colors:red
 Types:Creature Human
 PT:2/3
 K:CARDNAME attacks each combat if able.
-A:AB$ Pump | Cost$ 2 | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn. 
+A:AB$ Pump | Cost$ 2 | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/incited_rabble.jpg
 Oracle:Incited Rabble attacks each combat if able.\n{2}: Incited Rabble gets +1/+0 until end of turn.
-

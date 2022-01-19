@@ -1,7 +1,7 @@
 Name:Rhox Oracle
 ManaCost:4 G
 Types:Creature Rhino Monk
+PT:4/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 Oracle:When Rhox Oracle enters the battlefield, draw a card.
-PT:4/2

@@ -3,4 +3,4 @@ ManaCost:R
 Types:Instant
 A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +1 | KW$ Trample | SpellDescription$ Target creature gets +2/+1 and gains trample until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rush_of_adrenaline.jpg
-Oracle:Target creature gets +2/+1 and gains trample until end of turn. 
+Oracle:Target creature gets +2/+1 and gains trample until end of turn.

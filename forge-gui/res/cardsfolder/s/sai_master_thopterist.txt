@@ -1,10 +1,10 @@
 Name:Sai, Master Thopterist
 ManaCost:2 U
 Types:Legendary Creature Human Artificer
+PT:1/4
 T:Mode$ SpellCast | ValidActivatingPlayer$ You | ValidCard$ Artifact | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an artifact spell, create a 1/1 colorless Thopter artifact creature token with flying.
 SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ c_1_1_a_thopter_flying | LegacyImage$ c 1 1 a thopter flying m19
 A:AB$ Draw | Cost$ 1 U Sac<2/Artifact> | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
 DeckHints:Type$Artifact
 DeckHas:Ability$Token
 Oracle:Whenever you cast an artifact spell, create a 1/1 colorless Thopter artifact creature token with flying.\n{1}{U}, Sacrifice two artifacts: Draw a card.
-PT:1/4

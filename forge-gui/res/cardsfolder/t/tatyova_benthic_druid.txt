@@ -2,7 +2,7 @@ Name:Tatyova, Benthic Druid
 ManaCost:3 G U
 Types:Legendary Creature Merfolk Druid
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigGainLife | TriggerDescription$ Whenever a land enters the battlefield under your control, you gain 1 life and draw a card. 
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigGainLife | TriggerDescription$ Whenever a land enters the battlefield under your control, you gain 1 life and draw a card.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
-Oracle:Whenever a land enters the battlefield under your control, you gain 1 life and draw a card. 
+Oracle:Whenever a land enters the battlefield under your control, you gain 1 life and draw a card.

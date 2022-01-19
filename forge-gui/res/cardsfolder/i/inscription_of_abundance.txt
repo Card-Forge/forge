@@ -11,4 +11,3 @@ SVar:X:Count$Kicked.0.1
 SVar:Y:Count$Kicked.3.1
 SVar:Z:Count$GreatestPower_Creature.TargetedPlayerCtrl
 Oracle:Kicker {2}{G}\nChoose one. If this spell was kicked, choose any number instead.\n• Put two +1/+1 counters on target creature.\n• Target player gains X life, where X is the greatest power among creatures they control.\n• Target creature you control fights target creature you don't control.
-

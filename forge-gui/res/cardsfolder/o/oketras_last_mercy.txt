@@ -5,7 +5,7 @@ A:SP$ SetLife | Cost$ 1 W W | Defined$ You | LifeAmount$ X | SubAbility$ DBNoUnt
 SVar:DBNoUntap:DB$ Effect | StaticAbilities$ DontUntap | Triggers$ RemoveEffect | Duration$ Permanent | Name$ Oketra's Last Mercy Effect | SpellDescription$ Lands you control don't untap during your next untap step.
 SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Land.YouCtrl | AddHiddenKeyword$ This card doesn't untap during your next untap step.
 SVar:RemoveEffect:Mode$ Phase | Phase$ Untap | ValidPlayer$ You | TriggerZones$ Command | Static$ True | Execute$ ExileEffect
-SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile 
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:X:Count$YourStartingLife
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oketras_last_mercy.jpg
 Oracle:Your life total becomes equal to your starting life total. Lands you control don't untap during your next untap step.

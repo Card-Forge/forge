@@ -2,7 +2,7 @@ Name:Latulla, Keldon Overseer
 ManaCost:3 R R
 Types:Legendary Creature Human Spellshaper
 PT:3/3
-A:AB$ DealDamage | Cost$ X R T Discard<2/Card>| ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to any target.
+A:AB$ DealDamage | Cost$ X R T Discard<2/Card> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to any target.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/latulla_keldon_overseer.jpg

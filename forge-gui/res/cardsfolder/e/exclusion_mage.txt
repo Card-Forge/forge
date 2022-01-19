@@ -1,7 +1,7 @@
 Name:Exclusion Mage
 ManaCost:2 U
 Types:Creature Human Wizard
+PT:2/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigBounce | TriggerDescription$ When CARDNAME enters the battlefield, return target creature an opponent controls to its owner's hand.
 SVar:TrigBounce:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select target creature an opponent controls
 Oracle:When Exclusion Mage enters the battlefield, return target creature an opponent controls to its owner's hand.
-PT:2/2

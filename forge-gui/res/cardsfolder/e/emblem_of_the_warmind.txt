@@ -3,6 +3,6 @@ ManaCost:1 R
 Types:Enchantment Aura
 K:Enchant creature you control
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature.YouCtrl | AILogic$ Pump | TgtPrompt$ Select target you control
-S:Mode$ Continuous | Affected$ Creature.YouCtrl| AddKeyword$ Haste | Description$ Creatures you control have haste.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emblem_of_the_warmind.jpg
 Oracle:Enchant creature you control\nCreatures you control have haste.

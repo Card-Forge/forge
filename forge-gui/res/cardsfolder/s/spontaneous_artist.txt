@@ -4,6 +4,6 @@ Types:Creature Human Rogue
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E} (an energy counter).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 1
-A:AB$ Pump | Cost$ PayEnergy<1> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn. 
+A:AB$ Pump | Cost$ PayEnergy<1> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn.
 SVar:Picture:Picture:http://www.wizards.com/global/images/magic/general/spontaneous_artist.jpg
 Oracle:When Spontaneous Artist enters the battlefield, you get {E} (an energy counter).\nPay {E}: Target creature gains haste until end of turn.

@@ -2,7 +2,7 @@ Name:Voice of the Woods
 ManaCost:3 G G
 Types:Creature Elf
 PT:2/2
-A:AB$ Token | Cost$ tapXType<5/Elf> | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ g_7_7_elemental_trample | LegacyImage$ g 7 7 elemental trample ons |SpellDescription$ Create a 7/7 green Elemental creature token with trample.
+A:AB$ Token | Cost$ tapXType<5/Elf> | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ g_7_7_elemental_trample | LegacyImage$ g 7 7 elemental trample ons | SpellDescription$ Create a 7/7 green Elemental creature token with trample.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voice_of_the_woods.jpg
 Oracle:Tap five untapped Elves you control: Create a 7/7 green Elemental creature token with trample.

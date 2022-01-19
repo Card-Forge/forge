@@ -1,8 +1,8 @@
 Name:Riddlemaster Sphinx
 ManaCost:4 U U
 Types:Creature Sphinx
+PT:5/5
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigBounce | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target creature an opponent controls to its owner's hand.
 SVar:TrigBounce:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select target creature an opponent controls
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen Riddlemaster Sphinx enters the battlefield, you may return target creature an opponent controls to its owner's hand.
-PT:5/5

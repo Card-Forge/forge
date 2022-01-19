@@ -5,6 +5,6 @@ K:Enchant land
 A:SP$ Attach | Cost$ G | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ UnbridledGrowthTap | Description$ Enchanted land has "{T}: Add one mana of any color."
 SVar:UnbridledGrowthTap:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
-A:AB$ Draw | Cost$ Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card. 
+A:AB$ Draw | Cost$ Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unbridled_growth.jpg
 Oracle:Enchant land\nEnchanted land has "{T}: Add one mana of any color."\nSacrifice Unbridled Growth: Draw a card.

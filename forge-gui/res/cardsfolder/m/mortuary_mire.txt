@@ -1,4 +1,4 @@
-Name:Mortuary Mire 
+Name:Mortuary Mire
 ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.

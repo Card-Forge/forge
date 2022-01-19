@@ -10,7 +10,6 @@ Oracle:Tangleclaw Werewolf can block an additional creature each combat.\n{6}{G}
 
 ALTERNATE
 
-
 Name:Fibrous Entangler
 ManaCost:no cost
 Types:Creature Eldrazi Werewolf

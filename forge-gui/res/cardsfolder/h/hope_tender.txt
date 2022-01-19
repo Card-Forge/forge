@@ -2,7 +2,7 @@ Name:Hope Tender
 ManaCost:1 G
 Types:Creature Human Druid
 PT:2/2
-A:AB$ Untap | Cost$ 1 T | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Untap target land. 
+A:AB$ Untap | Cost$ 1 T | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Untap target land.
 A:AB$ Untap | Cost$ 1 T Exert<1/CARDNAME> | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Untap two target lands. (An exerted creature won't untap during your next untap step.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hope_tender.jpg
 Oracle:{1}, {T}: Untap target land.\n{1}, {T}, Exert Hope Tender: Untap two target lands. (An exerted creature won't untap during your next untap step.)

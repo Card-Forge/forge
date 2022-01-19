@@ -2,7 +2,7 @@ Name:Rhythm of the Wild
 ManaCost:1 R G
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Stack | AddHiddenKeyword$ CARDNAME can't be countered. | Description$ Creature spells you control can't be countered.
-S:Mode$ Continuous | Affected$ Creature.nonToken+YouCtrl | AddKeyword$ Riot| Description$ Nontoken creatures you control have riot. (They enter the battlefield with your choice of a +1/+1 counter or haste.)
+S:Mode$ Continuous | Affected$ Creature.nonToken+YouCtrl | AddKeyword$ Riot | Description$ Nontoken creatures you control have riot. (They enter the battlefield with your choice of a +1/+1 counter or haste.)
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Counters
 Oracle:Creature spells you control can't be countered.\nNontoken creatures you control have riot. (They enter the battlefield with your choice of a +1/+1 counter or haste.)

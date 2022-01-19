@@ -1,6 +1,6 @@
 Name:Goblin Motivator
 ManaCost:R
 Types:Creature Goblin Warrior
+PT:1/1
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn.
 Oracle:{T}: Target creature gains haste until end of turn. (It can attack and {T} this turn.)
-PT:1/1

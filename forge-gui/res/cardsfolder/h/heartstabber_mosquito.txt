@@ -9,4 +9,4 @@ SVar:TrigKicker:DB$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target cre
 SVar:PlayMain1:TRUE
 SVar:NeedsToPlayKicked:Creature.OppCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Heartstabber_Mosquito.jpg
-Oracle:Kicker {2}{B} (You may pay an additional {2}{B} as you cast this spell.)\nFlying\nWhen Heartstabber Mosquito enters the battlefield, if it was kicked, destroy target creature. 
+Oracle:Kicker {2}{B} (You may pay an additional {2}{B} as you cast this spell.)\nFlying\nWhen Heartstabber Mosquito enters the battlefield, if it was kicked, destroy target creature.

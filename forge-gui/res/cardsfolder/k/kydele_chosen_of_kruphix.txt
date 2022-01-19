@@ -3,7 +3,7 @@ ManaCost:2 G U
 Types:Legendary Creature Human Wizard
 PT:2/3
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ X | SpellDescription$ Add {C} for each card you've drawn this turn.
-SVar:X:Count$YouDrewThisTurn 
+SVar:X:Count$YouDrewThisTurn
 K:Partner
 DeckHas:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kydele_chosen_of_kruphix.jpg

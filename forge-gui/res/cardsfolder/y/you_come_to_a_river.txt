@@ -1,4 +1,4 @@
-Name:You Come to a River 
+Name:You Come to a River
 ManaCost:1 U
 Types:Instant
 A:SP$ Charm | Cost$ 1 U | Choices$ FightTheCurrent,FindACrossing

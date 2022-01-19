@@ -1,6 +1,6 @@
 Name:Ripjaw Raptor
 ManaCost:2 G G
-Types:Creature Dinosaur 
+Types:Creature Dinosaur
 PT:4/5
 T:Mode$ DamageDoneOnce | Execute$ TrigDraw | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1

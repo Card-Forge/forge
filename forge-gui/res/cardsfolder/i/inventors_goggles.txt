@@ -1,7 +1,7 @@
 Name:Inventor's Goggles
 ManaCost:1
 Types:Artifact Equipment
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 2 | Description$ Equipped creature gets +1/+2. 
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 2 | Description$ Equipped creature gets +1/+2.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.Artificer+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigAttach | OptionalDecider$ You | TriggerDescription$ Whenever an Artificer enters the battlefield under your control, you may attach CARDNAME to it.
 SVar:TrigAttach:DB$ Attach | Defined$ TriggeredCard
 K:Equip:2

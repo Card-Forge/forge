@@ -3,6 +3,6 @@ ManaCost:3 B B
 Types:Creature Dragon Skeleton
 PT:5/4
 K:Flying
-A:AB$ ChangeZone | Cost$ 3 B B ExileFromGrave<7/Card.Other> |  Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped.
+A:AB$ ChangeZone | Cost$ 3 B B ExileFromGrave<7/Card.Other> | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped.
 SVar:AIPreference:ExileFromGraveCost$Land.Basic,Land,Card
 Oracle:Flying\n{3}{B}{B}, Exile seven other cards from your graveyard: Return Bone Dragon from your graveyard to the battlefield tapped.

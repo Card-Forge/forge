@@ -6,7 +6,7 @@ SVar:RevealCard:DB$ Reveal | RevealDefined$ Self | SubAbility$ SetLifeOnUpkeep |
 SVar:SetLifeOnUpkeep:DB$ Effect | Triggers$ TrigSetLife | Name$ Providence effect | SpellDescription$ You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, your life total becomes 26.
 SVar:TrigSetLife:Mode$ Phase | Phase$ Upkeep | Execute$ EffSetLife | TriggerDescription$ At the beginning of the first upkeep, your life total becomes 26.
 SVar:EffSetLife:DB$ SetLife | LifeAmount$ 26 | Defined$ You | SubAbility$ RemoveMe
-SVar:RemoveMe:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile 
+SVar:RemoveMe:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 A:SP$ SetLife | Cost$ 5 W W | LifeAmount$ 26 | Defined$ You | SpellDescription$ Your life total becomes 26.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/providence.jpg
 Oracle:You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, your life total becomes 26.\nYour life total becomes 26.

@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 1 B B | ValidTgts$ Creature | TgtPrompt$ Select target cre
 SVar:DBScry:DB$ Scry | ScryNum$ 2 | Condition$ Foretold
 K:Foretell:1 B
 Oracle:Destroy target creature. If this spell was foretold, scry 2.\nForetell {1}{B} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)
-

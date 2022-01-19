@@ -12,6 +12,7 @@ Oracle:At the beginning of combat on your turn, if you both own and control Graf
 ALTERNATE
 
 Name:Chittering Host
+ManaCost:no cost
 Types:Creature Eldrazi Horror
 PT:5/6
 K:Haste

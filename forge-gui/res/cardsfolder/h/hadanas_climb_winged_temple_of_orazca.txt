@@ -18,4 +18,3 @@ A:AB$ Pump | Cost$ 1 G U T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select tar
 SVar:X:Targeted$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/winged_temple_of_orazca.jpg
 Oracle:(Transforms from Hadana's Climb.)\n{T}: Add one mana of any color.\n{1}{G}{U}, {T}: Target creature you control gains flying and gets +X/+X until end of turn, where X is its power.
-

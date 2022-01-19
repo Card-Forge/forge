@@ -1,8 +1,8 @@
 Name:Novice Knight
 ManaCost:W
 Types:Creature Human Knight
+PT:2/3
 K:Defender
 S:Mode$ Continuous | Affected$ Card.Self+enchanted,Card.Self+equipped | AddHiddenKeyword$ CARDNAME can attack as though it didn't have defender. | Description$ As long as CARDNAME is enchanted or equipped, it can attack as though it didn't have defender.
 SVar:EnchantMe:Once
 Oracle:Defender (This creature can't attack.)\nAs long as Novice Knight is enchanted or equipped, it can attack as though it didn't have defender.
-PT:2/3

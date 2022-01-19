@@ -20,4 +20,3 @@ T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDeci
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demon_possessed_witch.jpg
 Oracle:When this creature transforms into Demon-Possessed Witch, you may destroy target creature.
-

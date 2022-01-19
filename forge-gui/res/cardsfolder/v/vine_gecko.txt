@@ -8,4 +8,3 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | Counter
 SVar:BuffedBy:Card.withKicker,Card.withMultikicker
 DeckHas:Ability$Counters
 Oracle:The first kicked spell you cast each turn costs {1} less to cast.\nWhenever you cast a kicked spell, put a +1/+1 counter on Vine Gecko.
-

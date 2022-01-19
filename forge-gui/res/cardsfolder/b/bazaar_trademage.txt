@@ -1,8 +1,8 @@
 Name:Bazaar Trademage
 ManaCost:2 U
 Types:Creature Human Wizard
-K:Flying
 PT:3/4
+K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw two cards, then discard three cards.
 SVar:TrigDraw:DB$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards, then discard three cards. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 3 | Mode$ TgtChoose

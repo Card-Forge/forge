@@ -13,8 +13,8 @@ ALTERNATE
 
 Name:Covetous Geist
 ManaCost:no cost
-Types:Creature Spirit Rogue
 Colors:black
+Types:Creature Spirit Rogue
 PT:2/2
 K:Flying
 K:Deathtouch

@@ -3,4 +3,4 @@ ManaCost:2 W
 Types:Sorcery
 A:SP$ PumpAll | Cost$ 2 W | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +1 | SpellDescription$ Creatures you control get +2/+1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ethereal_guidance.jpg
-Oracle:Creatures you control get +2/+1 until end of turn. 
+Oracle:Creatures you control get +2/+1 until end of turn.

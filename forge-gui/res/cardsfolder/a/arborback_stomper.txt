@@ -1,4 +1,4 @@
-Name:Arborback Stomper 
+Name:Arborback Stomper
 ManaCost:3 G G
 Types:Creature Beast
 PT:5/4
