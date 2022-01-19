@@ -2,8 +2,7 @@ Name:Pashalik Mons
 ManaCost:2 R
 Types:Legendary Creature Goblin Warrior
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ DBDamage | TriggerController$ TriggeredCardController | TriggerDescription$ Whenever CARDNAME or another Goblin you control dies, CARDNAME deals 1 damage to any target.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Goblin.Other+YouCtrl | Execute$ DBDamage | TriggerZones$ Battlefield | TriggerController$ TriggeredCardController | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Goblin you control dies, CARDNAME deals 1 damage to any target.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Goblin.Other+YouCtrl | Execute$ DBDamage | TriggerController$ TriggeredCardController | TriggerDescription$ Whenever CARDNAME or another Goblin you control dies, CARDNAME deals 1 damage to any target.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
 A:AB$ Token | Cost$ 3 R Sac<1/Goblin> | TokenAmount$ 2 | TokenScript$ r_1_1_goblin | TokenOwner$ You | SpellDescription$ Create two 1/1 red Goblin creature tokens.
 SVar:AIPreference:SacCost$Goblin.token+powerLE1,Goblin.cmcLE1+powerLE1
