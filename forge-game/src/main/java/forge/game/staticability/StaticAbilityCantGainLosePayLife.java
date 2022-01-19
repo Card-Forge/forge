@@ -16,10 +16,11 @@ public class StaticAbilityCantGainLosePayLife {
         final Game game = player.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (stAb.isSuppressed() || !stAb.checkConditions()) {
+                if (!(stAb.getParam("Mode").equals(MODE_CANT_GAIN_LIFE) || stAb.getParam("Mode").equals(MODE_CANT_CHANGE_LIFE))) {
                     continue;
                 }
-                if (!(stAb.getParam("Mode").equals(MODE_CANT_GAIN_LIFE) || stAb.getParam("Mode").equals(MODE_CANT_CHANGE_LIFE))) {
+
+                if (stAb.isSuppressed() || !stAb.checkConditions()) {
                     continue;
                 }
 
@@ -35,11 +36,11 @@ public class StaticAbilityCantGainLosePayLife {
         final Game game = player.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (stAb.isSuppressed() || !stAb.checkConditions()) {
+                if (!stAb.getParam("Mode").equals(MODE_CANT_CHANGE_LIFE)) {
                     continue;
                 }
 
-                if (!stAb.getParam("Mode").equals(MODE_CANT_CHANGE_LIFE)) {
+                if (stAb.isSuppressed() || !stAb.checkConditions()) {
                     continue;
                 }
 
@@ -56,11 +57,11 @@ public class StaticAbilityCantGainLosePayLife {
         final Game game = player.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (stAb.isSuppressed() || !stAb.checkConditions()) {
+                if (!(stAb.getParam("Mode").equals(MODE_CANT_PAY_LIFE) || stAb.getParam("Mode").equals(MODE_CANT_CHANGE_LIFE))) {
                     continue;
                 }
 
-                if (!(stAb.getParam("Mode").equals(MODE_CANT_PAY_LIFE) || stAb.getParam("Mode").equals(MODE_CANT_CHANGE_LIFE))) {
+                if (stAb.isSuppressed() || !stAb.checkConditions()) {
                     continue;
                 }
 
