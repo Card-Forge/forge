@@ -68,7 +68,6 @@ public class ReplaceToken extends ReplacementEffect {
         sa.setReplacingObject(AbilityKey.Player, runParams.get(AbilityKey.Affected));
     }
 
-    
     public int filterAmount(final TokenCreateTable table) {
         return table.getFilterAmount(getParamOrDefault("ValidPlayer", null), getParamOrDefault("ValidToken", null), this);
     }

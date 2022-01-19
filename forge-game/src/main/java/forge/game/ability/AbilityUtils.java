@@ -1325,7 +1325,10 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("SourceFirstSpell")) {
-            sas.add(card.getFirstSpellAbility());
+            SpellAbility spell = game.getStack().getSpellMatchingHost(card);
+            if (spell != null) {
+                sas.add(spell);
+            }
         }
         else if (defined.startsWith("Triggered") && sa instanceof SpellAbility) {
             final SpellAbility root = ((SpellAbility)sa).getRootAbility();
@@ -1362,8 +1365,7 @@ public class AbilityUtils {
                         if (instanceSA != null) {
                             sas.add(instanceSA);
                         }
-                    }
-                    else {
+                    } else {
                         sas.add(targetSpell);
                     }
                 }
