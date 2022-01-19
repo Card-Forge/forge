@@ -1,7 +1,7 @@
 Name:Rograkh, Son of Rohgahh
 ManaCost:0
-Types:Legendary Creature Kobold Warrior
 Colors:red
+Types:Legendary Creature Kobold Warrior
 PT:0/1
 K:First Strike
 K:Menace

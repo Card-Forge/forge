@@ -9,4 +9,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Deathtouch | D
 S:Mode$ Continuous | Affected$ Equipment.EnchantedBy | AddStaticAbility$ RuneMortalityST | Description$ As long as enchanted permanent is an Equipment, it has "Equipped creature has deathtouch."
 SVar:RuneMortalityST:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Deathtouch | Description$ Equipped creature has deathtouch.
 Oracle:Enchant permanent\nWhen Rune of Mortality enters the battlefield, draw a card.\nAs long as enchanted permanent is a creature, it has deathtouch.\nAs long as enchanted permanent is an Equipment, it has "Equipped creature has deathtouch."
-

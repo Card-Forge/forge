@@ -4,7 +4,7 @@ Types:Legendary Planeswalker Kaito
 Loyalty:3
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Card.Self+ThisTurnEntered | Execute$ TrigPhase | TriggerDescription$ At the beginning of your end step, if CARDNAME entered the battlefield this turn, he phases out.
 SVar:TrigPhase:DB$ Phases | Defined$ Self
-A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 1 |  SubAbility$ DBDiscard | AILogic$ Main2 | StackDescription$ SpellDescription | SpellDescription$ Draw a card. Then discard a card unless you attacked this turn.
+A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 1 | SubAbility$ DBDiscard | AILogic$ Main2 | StackDescription$ SpellDescription | SpellDescription$ Draw a card. Then discard a card unless you attacked this turn.
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | ConditionCheckSVar$ RaidTest | ConditionSVarCompare$ EQ0 | StackDescription$ None
 SVar:RaidTest:Count$AttackersDeclared
 A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | TokenScript$ u_1_1_ninja_unblockable | SpellDescription$ Create a 1/1 blue Ninja creature token with "This creature can't be blocked."

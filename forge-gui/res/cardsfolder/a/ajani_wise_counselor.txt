@@ -1,6 +1,7 @@
 Name:Ajani, Wise Counselor
-Types:Legendary Planeswalker Ajani
 ManaCost:3 W W
+Types:Legendary Planeswalker Ajani
+Loyalty:5
 A:AB$ GainLife | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Defined$ You | LifeAmount$ Y | SpellDescription$ You gain 1 life for each creature you control.
 SVar:Y:Count$Valid Creature.YouCtrl
 A:AB$ PumpAll | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Creatures you control get +2/+2 until end of turn.
@@ -9,4 +10,3 @@ A:AB$ PutCounter | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | Ultimate$ 
 SVar:X:Count$YourLifeTotal
 DeckHas:Ability$Counters
 Oracle:[+2]: You gain 1 life for each creature you control.\n[−3]: Creatures you control get +2/+2 until end of turn.\n[−9]: Put X +1/+1 counters on target creature, where X is your life total.
-Loyalty:5

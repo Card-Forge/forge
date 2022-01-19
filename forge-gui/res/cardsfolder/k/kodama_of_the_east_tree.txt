@@ -8,4 +8,3 @@ SVar:TrigChange:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Chang
 SVar:X:TriggeredCard$CardManaCost
 K:Partner
 Oracle:Reach\nWhenever another permanent enters the battlefield under your control, if it wasn't put onto the battlefield with this ability, you may put a permanent card with equal or lesser mana value from your hand onto the battlefield.\nPartner (You can have two commanders if both have partner.)
-

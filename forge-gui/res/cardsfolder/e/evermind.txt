@@ -1,7 +1,7 @@
 Name:Evermind
 ManaCost:no cost
-Types:Instant Arcane
 Colors:blue
+Types:Instant Arcane
 K:Splice:Arcane:1 U
 A:SP$ Draw | Cost$ 0 | NumCards$ 1 | ActivationLimit$ 0 | SpellDescription$ Draw a card.
 AI:RemoveDeck:Random

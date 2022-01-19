@@ -1,7 +1,7 @@
 Name:Hypergenesis
 ManaCost:no cost
-Types:Sorcery
 Colors:green
+Types:Sorcery
 K:Suspend:3:1 G G
 A:SP$ Repeat | Cost$ 0 | RepeatSubAbility$ ResetCheck | RepeatCheckSVar$ NumPlayerGiveup | RepeatSVarCompare$ LTTotalPlayer | SubAbility$ FinalReset | StackDescription$ SpellDescription | SpellDescription$ Starting with you, each player may put an artifact, creature, enchantment, or land card from their hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.
 SVar:ResetCheck:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ Number | Expression$ 0 | SubAbility$ DBRepeatChoice

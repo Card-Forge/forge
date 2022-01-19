@@ -1,6 +1,6 @@
 Name:Amateur Auteur
-Types:Creature Human
 ManaCost:1 W
+Types:Creature Human
 PT:2/2
 A:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 Oracle:Sacrifice Amateur Auteur: Destroy target enchantment.

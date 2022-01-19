@@ -9,4 +9,4 @@ SVar:X:Count$Valid Creature.Wolf+YouCtrl,Creature.Werewolf+YouCtrl
 DeckHints:Type$Wolf|Werewolf
 DeckHas:Ability$Token
 SVar:BuffedBy:Wolf,Werewolf
-Oracle:Flash\nAt the beginning of your upkeep, for each creature you control that’s a Wolf or a Werewolf, create a 2/2 green Wolf creature token.
+Oracle:Flash\nAt the beginning of your upkeep, for each creature you control that's a Wolf or a Werewolf, create a 2/2 green Wolf creature token.

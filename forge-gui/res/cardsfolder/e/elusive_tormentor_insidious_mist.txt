@@ -22,7 +22,6 @@ K:Indestructible
 K:CARDNAME can't block.
 K:Unblockable
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may pay {2}{B}. If you do, transform it.
-SVar:TrigTransform:AB$SetState | Cost$ 2 B | Defined$ Self | Mode$ Transform 
+SVar:TrigTransform:AB$SetState | Cost$ 2 B | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/insidious_mist.jpg
 Oracle:Hexproof, indestructible\nInsidious Mist can't block and can't be blocked.\nWhenever Insidious Mist attacks and isn't blocked, you may pay {2}{B}. If you do, transform it.
-

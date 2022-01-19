@@ -1,4 +1,4 @@
-Name:Watchers of the Dead 
+Name:Watchers of the Dead
 ManaCost:2
 Types:Artifact Creature Cat
 PT:2/2

@@ -5,7 +5,7 @@ PT:4/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Wizard.YouCtrl+nonToken+Other | TriggerZones$ Command | PresentZone$ Command | Execute$ TrigCopyPermanent | TriggerDescription$ Eminence — Whenever another nontoken Wizard enters the battlefield under your control, if CARDNAME is in the command zone or on the battlefield, you may pay {1}. If you do, create a token that's a copy of that Wizard. The token gains haste. Exile it at the beginning of the next end step.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Wizard.YouCtrl+nonToken+Other | TriggerZones$ Battlefield | PresentZone$ Battlefield | Execute$ TrigCopyPermanent | Secondary$ True | TriggerDescription$ Eminence — Whenever another nontoken Wizard enters the battlefield under your control, if CARDNAME is in the command zone or on the battlefield, you may pay {1}. If you do, create a token that's a copy of that Wizard. The token gains haste. Exile it at the beginning of the next end step.
 SVar:TrigCopyPermanent:AB$ CopyPermanent | Cost$ 1 | Defined$ TriggeredCard | NumCopies$ 1 | PumpKeywords$ Haste | AtEOT$ Exile
-A:AB$ LoseLife | Cost$ tapXType<5/Wizard> | ValidTgts$ Player | TgtPrompt$ Select a player to lose 7 life | LifeAmount$ 7 | SpellDescription$ Target player loses 7 life. 
+A:AB$ LoseLife | Cost$ tapXType<5/Wizard> | ValidTgts$ Player | TgtPrompt$ Select a player to lose 7 life | LifeAmount$ 7 | SpellDescription$ Target player loses 7 life.
 SVar:BuffedBy:Wizard
 DeckHints:Type$Wizard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inalla_archmage_ritualist.jpg

@@ -6,4 +6,4 @@ K:Haste
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 SVar:NonCombatPriority:1
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card51177.jpg
-Oracle:Haste\n{T}: Vulshok Sorcerer deals 1 damage to any target. 
+Oracle:Haste\n{T}: Vulshok Sorcerer deals 1 damage to any target.

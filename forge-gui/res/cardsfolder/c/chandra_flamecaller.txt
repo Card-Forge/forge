@@ -6,7 +6,7 @@ A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 2 
 A:AB$ Discard | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | Defined$ You | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Discard all the cards in your hand, then draw that many cards plus one.
 SVar:DBDraw:DB$ Draw | NumCards$ Y | Defined$ You | SubAbility$ DBCleanup
 SVar:Y:Remembered$Amount.Plus.1
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ DamageAll | Cost$ SubCounter<X/LOYALTY> | NumDmg$ X | ValidCards$ Creature | Planeswalker$ True | Ultimate$ True | ValidDescription$ each creature. | SpellDescription$ CARDNAME deals X damage to each creature.
 SVar:X:Count$xPaid
 DeckHas:Ability$Token

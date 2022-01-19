@@ -26,4 +26,3 @@ SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Power$ 6 | Toughness$ 6 | Typ
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nissa_sage_animist.jpg
 Oracle:[+1]: Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand.\n[−2]: Create Ashaya, the Awoken World, a legendary 4/4 green Elemental creature token.\n[−7]: Untap up to six target lands. They become 6/6 Elemental creatures. They're still lands.
-

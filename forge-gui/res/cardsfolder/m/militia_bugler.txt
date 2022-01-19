@@ -1,8 +1,8 @@
 Name:Militia Bugler
 ManaCost:2 W
 Types:Creature Human Soldier
+PT:2/3
 K:Vigilance
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top four cards of your library. You may reveal a creature card with power 2 or less from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
 SVar:TrigDig:DB$ Dig | DigNum$ 4 | Optional$ True | ForceRevealToController$ True | ChangeNum$ 1 | ChangeValid$ Creature.powerLE2 | DestinationZone$ Hand | DestinationZone2$ Library | LibraryPosition$ -1 | RestRandomOrder$ True
 Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nWhen Militia Bugler enters the battlefield, look at the top four cards of your library. You may reveal a creature card with power 2 or less from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
-PT:2/3

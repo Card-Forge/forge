@@ -7,4 +7,4 @@ SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
 AI:RemoveDeck:All
 DeckHints:Type$Ally
 SVar:Picture:http://www.wizards.com/global/images/magic/general/malakir_soothsayer.jpg
-Oracle:Cohort — {T}, Tap an untapped Ally you control: You draw a card and you lose 1 life. 
+Oracle:Cohort — {T}, Tap an untapped Ally you control: You draw a card and you lose 1 life.

@@ -12,6 +12,7 @@ Oracle:Whenever one or more creatures you control deal combat damage to a player
 ALTERNATE
 
 Name:Vault of Catlacan
+ManaCost:no cost
 Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
 A:AB$ Mana | Cost$ T | Produced$ U | Amount$ X | SpellDescription$ Add {U} for each artifact you control.

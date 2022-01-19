@@ -4,7 +4,7 @@ Types:Creature Demon
 PT:*/*
 K:Kicker:4 B
 T:Mode$ SpellCast | ValidCard$ Card.Self+kicked | Execute$ TrigLoseLife | TriggerDescription$ When you cast CARDNAME, if it was kicked, each player loses half their life, rounded up.
-SVar:TrigLoseLife:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBLoseLife | AILifeThreshold$ 1 |
+SVar:TrigLoseLife:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBLoseLife | AILifeThreshold$ 1
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ HalfUp
 SVar:HalfUp:PlayerCountRemembered$LifeTotal/HalfUp
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to 20 minus the highest life total among players.

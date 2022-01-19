@@ -6,6 +6,6 @@ K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E} (two energy counters).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your end step, sacrifice CARDNAME unless you pay {E}{E}.
-SVar:TrigSac:DB$ Sacrifice | UnlessCost$ PayEnergy<2> | UnlessPayer$ You | SacValid$ Self 
+SVar:TrigSac:DB$ Sacrifice | UnlessCost$ PayEnergy<2> | UnlessPayer$ You | SacValid$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lathnu_hellion.jpg
 Oracle:Haste\nWhen Lathnu Hellion enters the battlefield, you get {E}{E} (two energy counters).\nAt the beginning of your end step, sacrifice Lathnu Hellion unless you pay {E}{E}.

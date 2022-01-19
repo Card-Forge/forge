@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Instant
 A:SP$ Effect | Cost$ 1 W | ReplacementEffects$ ReplaceExile | SubAbility$ DBDraw | SpellDescription$ Until end of turn, if a creature would enter the battlefield and it wasn't cast, exile it instead. Draw a card.
 SVar:ReplaceExile:Event$ Moved | ActiveZones$ Command | Destination$ Battlefield | ValidCard$ Creature.wasNotCast | ReplaceWith$ DBExile | Description$ If a creature would enter the battlefield and it wasn't cast, exile it instead.
-SVar:DBExile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard 
+SVar:DBExile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hallowed_moonlight.jpg

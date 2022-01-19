@@ -5,4 +5,4 @@ PT:1/2
 A:AB$ Tap | Cost$ 1 T | ValidTgts$ Creature.nonHuman | TgtPrompt$ Select target non-Human creature | SpellDescription$ Tap target non-Human creature.
 SVar:NonCombatPriority:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigardian_priest.jpg
-Oracle:{1}, {T}: Tap target non-Human creature. 
+Oracle:{1}, {T}: Tap target non-Human creature.

@@ -1,8 +1,8 @@
 Name:Scholar of Stars
 ManaCost:3 U
 Types:Creature Human Artificer
+PT:3/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, if you control an artifact, draw a card.
 SVar:TrigDraw:DB$ Draw | ConditionPresent$ Artifact.YouCtrl | ConditionCompare$ GE1 | Defined$ You | NumCards$ 1
 DeckHints:Type$Artifact
 Oracle:When Scholar of Stars enters the battlefield, if you control an artifact, draw a card.
-PT:3/2

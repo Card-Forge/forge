@@ -16,6 +16,7 @@ Oracle:Flying, first strike, lifelink\nAt the beginning of your end step, if you
 ALTERNATE
 
 Name:Brisela, Voice of Nightmares
+ManaCost:no cost
 Types:Legendary Creature Eldrazi Angel
 PT:9/10
 K:Flying

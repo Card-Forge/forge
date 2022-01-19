@@ -19,4 +19,3 @@ T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/branded_howler.jpg
 Oracle:At the beginning of each upkeep, if a player cast two or more spells last turn, transform Branded Howler.
-

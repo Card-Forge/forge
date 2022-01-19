@@ -1,7 +1,7 @@
 Name:Dismissive Pyromancer
 ManaCost:1 R
 Types:Creature Human Wizard
+PT:2/2
 A:AB$ Draw | Defined$ You | Cost$ R T Discard<1/Card> | NumCards$ 1 | SpellDescription$ Draw a card.
 A:AB$ DealDamage | Cost$ 2 R T Sac<1/CARDNAME> | NumDmg$ 4 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ CARDNAME deals 4 damage to target creature.
 Oracle:{R}, {T}, Discard a card: Draw a card.\n{2}{R}, {T}, Sacrifice Dismissive Pyromancer: It deals 4 damage to target creature.
-PT:2/2

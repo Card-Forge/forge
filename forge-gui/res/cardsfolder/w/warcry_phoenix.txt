@@ -4,7 +4,7 @@ Types:Creature Phoenix
 PT:2/2
 K:Flying
 K:Haste
-T:Mode$ AttackersDeclared | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigReturn |  NoResolvingCheck$ True | TriggerZones$ Graveyard | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with three or more creatures, you may pay {2}{R}. If you do, return Warcry Phoenix from your graveyard to the battlefield tapped and attacking.
+T:Mode$ AttackersDeclared | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigReturn | NoResolvingCheck$ True | TriggerZones$ Graveyard | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with three or more creatures, you may pay {2}{R}. If you do, return Warcry Phoenix from your graveyard to the battlefield tapped and attacking.
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 2 R | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | Attacking$ True
 SVar:X:Count$Valid Creature.attacking
 Oracle:Flying, haste\nWhenever you attack with three or more creatures, you may pay {2}{R}. If you do, return Warcry Phoenix from your graveyard to the battlefield tapped and attacking.

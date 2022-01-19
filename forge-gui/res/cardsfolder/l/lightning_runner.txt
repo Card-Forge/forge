@@ -8,5 +8,5 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescriptio
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2 | SubAbility$ DBUntapAll
 SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl | SubAbility$ DBAddCombat | UnlessCost$ PayEnergy<8> | UnlessPayer$ You | UnlessSwitched$ True | UnlessResolveSubs$ WhenPaid | SubAbility$ DBAddCombat
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat
-SVar:PlayMain1:TRUE 
+SVar:PlayMain1:TRUE
 Oracle:Double strike, haste\nWhenever Lightning Runner attacks, you get {E}{E} (two energy counters), then you may pay {E}{E}{E}{E}{E}{E}{E}{E}. If you pay, untap all creatures you control, and after this phase, there is an additional combat phase.

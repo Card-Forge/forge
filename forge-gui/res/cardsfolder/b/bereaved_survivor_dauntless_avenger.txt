@@ -11,8 +11,8 @@ ALTERNATE
 
 Name:Dauntless Avenger
 ManaCost:no cost
-Types:Creature Human Soldier
 Colors:white
+Types:Creature Human Soldier
 PT:3/2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, return target creature card with mana value 2 or less from your graveyard to the battlefield tapped and attacking.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl+cmcLE2 | Tapped$ True | Attacking$ True

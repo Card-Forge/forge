@@ -1,8 +1,8 @@
 Name:Youthful Valkyrie
 ManaCost:1 W
 Types:Creature Angel
-K:Flying
 PT:1/3
+K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Angel.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another Angel enters the battlefield under your control, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters

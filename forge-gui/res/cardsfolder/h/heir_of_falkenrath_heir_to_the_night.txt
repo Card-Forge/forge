@@ -20,4 +20,3 @@ PT:3/2
 K:Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heir_to_the_night.jpg
 Oracle:Flying
-

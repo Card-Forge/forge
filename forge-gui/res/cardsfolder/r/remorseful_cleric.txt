@@ -1,7 +1,7 @@
 Name:Remorseful Cleric
 ManaCost:1 W
 Types:Creature Spirit Cleric
+PT:2/1
 K:Flying
 A:AB$ ChangeZoneAll | Cost$ Sac<1/CARDNAME> | ValidTgts$ Player | Origin$ Graveyard | ChangeType$ Card | IsCurse$ True | Destination$ Exile | TgtPrompt$ Select target player | SpellDescription$ Exile all cards from target player's graveyard.
 Oracle:Flying\nSacrifice Remorseful Cleric: Exile all cards from target player's graveyard.
-PT:2/1

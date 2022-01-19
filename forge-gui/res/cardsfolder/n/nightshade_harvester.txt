@@ -2,7 +2,7 @@ Name:Nightshade Harvester
 ManaCost:3 B
 Types:Creature Elf Shaman
 PT:2/2
-T:Mode$ ChangesZone | ValidCard$ Land.OppCtrl | TriggerZones$ Battlefield | Origin$ Any | Destination$ Battlefield | Execute$ TrigLoseLife |TriggerDescription$ Whenever a land enters the battlefield under an opponent's control, that player loses 1 life. Put a +1/+1 counter on CARDNAME.
+T:Mode$ ChangesZone | ValidCard$ Land.OppCtrl | TriggerZones$ Battlefield | Origin$ Any | Destination$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a land enters the battlefield under an opponent's control, that player loses 1 life. Put a +1/+1 counter on CARDNAME.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ 1 | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters

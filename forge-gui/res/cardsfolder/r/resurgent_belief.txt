@@ -1,7 +1,7 @@
 Name:Resurgent Belief
 ManaCost:no cost
-Types:Sorcery
 Colors:white
+Types:Sorcery
 K:Suspend:2:1 W
 A:SP$ ChangeZoneAll | ChangeType$ Enchantment.YouOwn | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return all enchantment cards from your graveyard to the battlefield. (Auras with nothing to enchant remain in your graveyard.)
 DeckNeeds:Type$Enchantment

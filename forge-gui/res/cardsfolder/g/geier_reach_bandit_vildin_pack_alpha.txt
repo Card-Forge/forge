@@ -22,4 +22,3 @@ T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones
 SVar:TrigTransform2:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vildin_pack_alpha.jpg
 Oracle:Whenever a Werewolf enters the battlefield under your control, you may transform it.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Vildin-Pack Alpha.
-

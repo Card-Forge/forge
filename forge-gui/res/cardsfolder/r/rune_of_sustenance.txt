@@ -9,4 +9,3 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Lifelink | Des
 S:Mode$ Continuous | Affected$ Equipment.EnchantedBy | AddStaticAbility$ RuneSustenanceST | Description$ As long as enchanted permanent is an Equipment, it has "Equipped creature has lifelink."
 SVar:RuneSustenanceST:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Lifelink | Description$ Equipped creature has lifelink.
 Oracle:Enchant permanent\nWhen Rune of Sustenance enters the battlefield, draw a card.\nAs long as enchanted permanent is a creature, it has lifelink.\nAs long as enchanted permanent is an Equipment, it has "Equipped creature has lifelink."
-

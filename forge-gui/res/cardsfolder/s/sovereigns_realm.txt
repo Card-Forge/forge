@@ -1,4 +1,5 @@
 Name:Sovereign's Realm
+ManaCost:no cost
 Types:Conspiracy
 Text:(Start the game with this conspiracy face up in the command zone.)
 K:Your deck can't have basic land cards.

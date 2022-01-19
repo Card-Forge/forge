@@ -13,4 +13,3 @@ SVar:DBDraw:DB$ Draw | NumCards$ X
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azor_the_lawbringer.jpg
 Oracle:Flying\nWhen Azor, the Lawbringer enters the battlefield, each opponent can't cast instant or sorcery spells during that player's next turn.\nWhenever Azor attacks, you may pay {X}{W}{U}{U}. If you do, you gain X life and draw X cards.
-

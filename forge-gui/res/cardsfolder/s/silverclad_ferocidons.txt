@@ -5,5 +5,5 @@ PT:8/5
 T:Mode$ DamageDoneOnce | Execute$ TrigSac | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, each opponent sacrifices a permanent.
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Permanent | Defined$ Player.Opponent
 SVar:HasCombatEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/silverclad_ferocidons.jpg 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/silverclad_ferocidons.jpg
 Oracle:Enrage — Whenever Silverclad Ferocidons is dealt damage, each opponent sacrifices a permanent.

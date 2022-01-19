@@ -5,7 +5,7 @@ A:SP$ DealDamage | Cost$ 2 R R | ValidTgts$ Creature,Player,Planeswalker | TgtPr
 SVar:DBDiscard:DB$ Discard | Defined$ You | RememberDiscarded$ True | Mode$ Hand | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$CardsInYourHand 
-SVar:Y:Remembered$Amount 
+SVar:X:Count$CardsInYourHand
+SVar:Y:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fateful_showdown.jpg
 Oracle:Fateful Showdown deals damage to any target equal to the number of cards in your hand. Discard all the cards in your hand, then draw that many cards.

@@ -13,8 +13,8 @@ ALTERNATE
 
 Name:Depraved Harvester
 ManaCost:no cost
-Types:Creature Human Knight
 Colors:black
+Types:Creature Human Knight
 PT:4/3
 K:Lifelink
 DeckHas:Ability$LifeGain

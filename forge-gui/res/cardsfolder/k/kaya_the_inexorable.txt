@@ -14,4 +14,3 @@ SVar:TrigCast:DB$ Play | Valid$ Card.Legendary+YouOwn | ValidZone$ Hand,Graveyar
 DeckHas:Ability$Token & Ability$Counters
 DeckHints:Type$Legendary
 Oracle:[+1]: Put a ghostform counter on up to one target nontoken creature. It gains "When this creature dies or is put into exile, return it to its owner's hand and create a 1/1 white Spirit creature token with flying."\n[−3]: Exile target nonland permanent.\n[−7]: You get an emblem with "At the beginning of your upkeep, you may cast a legendary spell from your hand, from your graveyard, or from among cards you own in exile without paying its mana cost."
-

@@ -1,6 +1,6 @@
 Name:Kaya's Guile
-Types:Instant
 ManaCost:1 W B
+Types:Instant
 K:Entwine:3
 A:SP$ Charm | Cost$ 1 W B | Choices$ DBSac,DBExile,DBSpirit,DBGain | CharmNum$ 2
 SVar:DBSac:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature | SacMessage$ creature | SpellDescription$ Each opponent sacrifices a creature.

@@ -4,5 +4,5 @@ Types:Creature Human Pirate
 PT:2/2
 K:Haste
 K:Unblockable
-SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_fleet_sprinter.jpg 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_fleet_sprinter.jpg
 Oracle:Haste\nStorm Fleet Sprinter can't be blocked.

@@ -17,4 +17,3 @@ PT:4/2
 K:Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonewing_antagonizer.jpg
 Oracle:Flying
-

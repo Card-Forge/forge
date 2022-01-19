@@ -3,5 +3,5 @@ ManaCost:3 G G
 Types:Creature Pangolin Beast
 PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on each other creature you control.
-SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.Other+YouCtrl | CounterType$ P1P1 | CounterNum$ 1 
+SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.Other+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
 Oracle:When Ridgescale Tusker enters the battlefield, put a +1/+1 counter on each other creature you control.

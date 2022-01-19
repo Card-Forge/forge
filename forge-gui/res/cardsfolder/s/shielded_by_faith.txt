@@ -8,4 +8,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigAttach:DB$ Attach | Defined$ TriggeredCard
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shielded_by_faith.jpg
-Oracle:Enchant creature\nEnchanted creature has indestructible.\nWhenever a creature enters the battlefield, you may attach Shielded by Faith to that creature. 
+Oracle:Enchant creature\nEnchanted creature has indestructible.\nWhenever a creature enters the battlefield, you may attach Shielded by Faith to that creature.

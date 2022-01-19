@@ -11,8 +11,8 @@ ALTERNATE
 
 Name:Hook-Haunt Drifter
 ManaCost:no cost
-Types:Creature Spirit
 Colors:blue
+Types:Creature Spirit
 PT:1/2
 K:Flying
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.

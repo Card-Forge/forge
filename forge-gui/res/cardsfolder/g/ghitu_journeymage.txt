@@ -2,7 +2,7 @@ Name:Ghitu Journeymage
 ManaCost:2 R
 Types:Creature Human Wizard
 PT:3/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Wizard.Other+YouCtrl | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, if you control another Wizard, CARDNAME deals 2 damage to each opponent. 
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Wizard.Other+YouCtrl | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, if you control another Wizard, CARDNAME deals 2 damage to each opponent.
 SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2
 DeckHints:Type$Wizard
-Oracle:When Ghitu Journeymage enters the battlefield, if you control another Wizard, Ghitu Journeymage deals 2 damage to each opponent. 
+Oracle:When Ghitu Journeymage enters the battlefield, if you control another Wizard, Ghitu Journeymage deals 2 damage to each opponent.

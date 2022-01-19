@@ -15,8 +15,8 @@ ALTERNATE
 
 Name:Poppet Factory
 ManaCost:no cost
-Types:Artifact
 Colors:blue
+Types:Artifact
 S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | SetPower$ 3 | SetToughness$ 3 | RemoveAllAbilities$ True | Description$ Creature tokens you control lose all abilities and have base power and toughness 3/3.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform

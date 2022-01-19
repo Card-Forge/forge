@@ -1,7 +1,7 @@
 Name:Crookshank Kobolds
 ManaCost:0
-Types:Creature Kobold
 Colors:red
+Types:Creature Kobold
 PT:0/1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crookshank_kobolds.jpg
 Oracle:

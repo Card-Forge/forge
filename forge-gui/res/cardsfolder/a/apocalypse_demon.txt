@@ -5,7 +5,7 @@ PT:*/*
 K:Flying
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in your graveyard.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ At the beginning of your upkeep, tap CARDNAME unless you sacrifice another creature.
-SVar:TrigTap:DB$ Tap | UnlessCost$ Sac<1/Creature.Other/another creature> | UnlessPayer$ You | Defined$ Self 
+SVar:TrigTap:DB$ Tap | UnlessCost$ Sac<1/Creature.Other/another creature> | UnlessPayer$ You | Defined$ Self
 SVar:X:Count$InYourYard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apocalypse_demon.jpg
 Oracle:Flying\nApocalypse Demon's power and toughness are each equal to the number of cards in your graveyard.\nAt the beginning of your upkeep, tap Apocalypse Demon unless you sacrifice another creature.

@@ -1,11 +1,11 @@
 Name:Jackknight
 ManaCost:1 W
 Types:Artifact Creature Cyborg Knight
+PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigCounters | TriggerDescription$ Whenever another artifact enters the battlefield under your control, put a +1/+1 counter on CARDNAME. If that artifact is a Contraption, Jackknight gains lifelink until end of turn.
 SVar:TrigCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | ConditionDefined$ TriggeredCard | ConditionPresent$ Contraption | Defined$ Self |KW$ Lifelink
+SVar:DBPump:DB$ Pump | ConditionDefined$ TriggeredCard | ConditionPresent$ Contraption | Defined$ Self | KW$ Lifelink
 DeckHas:Ability$ Counters
 DeckHints:Type$ Contraption
 SVar:RemRandomDeck:True
 Oracle:Whenever another artifact enters the battlefield under your control, put a +1/+1 counter on Jackknight. If that artifact is a Contraption, Jackknight gains lifelink until end of turn.
-PT:1/1

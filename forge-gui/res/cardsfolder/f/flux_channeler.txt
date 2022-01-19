@@ -1,7 +1,7 @@
 Name:Flux Channeler
 ManaCost:2 U
-PT:2/2
 Types:Creature Human Wizard
+PT:2/2
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigProliferate | TriggerDescription$ Whenever you cast a noncreature spell, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
 SVar:TrigProliferate:DB$ Proliferate
 DeckHas:Ability$Proliferate

@@ -17,7 +17,7 @@ ManaCost:no cost
 Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
 A:AB$ DamageAll | Cost$ 1 R T | ValidPlayers$ Opponent | ValidDescription$ each opponent. | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to each opponent.
-A:AB$ ChooseCard| Cost$ 2 W T | AtRandom$ True | Choices$ Creature.attackedThisTurn | SubAbility$ DBDestroy | SpellDescription$ Choose a creature at random that attacked this turn. Destroy that creature.
+A:AB$ ChooseCard | Cost$ 2 W T | AtRandom$ True | Choices$ Creature.attackedThisTurn | SubAbility$ DBDestroy | SpellDescription$ Choose a creature at random that attacked this turn. Destroy that creature.
 SVar:DBDestroy:DB$ Destroy | Defined$ ChosenCard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/metzali_tower_of_triumph.jpg
 Oracle:(Transforms from Path of Mettle.)\n{T}: Add one mana of any color.\n{1}{R}, {T}: Metzali, Tower of Triumph deals 2 damage to each opponent.\n{2}{W}, {T}: Choose a creature at random that attacked this turn. Destroy that creature.

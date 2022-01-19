@@ -4,4 +4,4 @@ Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
 A:AB$ Token | Cost$ 3 W T Sac<1/CARDNAME> | TokenOwner$ You | TokenAmount$ 2 | TokenScript$ w_1_1_soldier | LegacyImage$ w 1 1 soldier dom | SpellDescription$ Create two 1/1 white Soldier creature tokens.
-Oracle:Memorial to Glory enters the battlefield tapped.\n{T}: Add {W}.\n{3}{W}, {T}, Sacrifice Memorial to Glory: Create two 1/1 white Soldier creature tokens. 
+Oracle:Memorial to Glory enters the battlefield tapped.\n{T}: Add {W}.\n{3}{W}, {T}, Sacrifice Memorial to Glory: Create two 1/1 white Soldier creature tokens.

@@ -2,7 +2,7 @@ Name:The Ur-Dragon
 ManaCost:4 W U B R G
 Types:Legendary Creature Dragon Avatar
 PT:10/10
-S:Mode$ ReduceCost | EffectZone$ Battlefield,Command | ValidCard$ Dragon.Other | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Eminence — As long as CARDNAME is in the command zone or on the battlefield, other Dragon spells you cast cost {1} less to cast. 
+S:Mode$ ReduceCost | EffectZone$ Battlefield,Command | ValidCard$ Dragon.Other | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Eminence — As long as CARDNAME is in the command zone or on the battlefield, other Dragon spells you cast cost {1} less to cast.
 K:Flying
 T:Mode$ AttackersDeclared | ValidAttackers$ Dragon.YouCtrl | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more Dragons you control attack, draw that many cards, then you may put a permanent card from your hand onto the battlefield.
 SVar:TrigDraw:DB$ Draw | NumCards$ X | SubAbility$ DBChangeZone

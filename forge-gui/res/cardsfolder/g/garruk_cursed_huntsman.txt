@@ -1,6 +1,6 @@
 Name:Garruk, Cursed Huntsman
-Types:Legendary Planeswalker Garruk
 ManaCost:4 B G
+Types:Legendary Planeswalker Garruk
 Loyalty:5
 A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | LegacyImage$ bg 2 2 wolf garruk eld | TokenAmount$ 2 | TokenScript$ bg_2_2_wolf_garruk | TokenOwner$ You | SpellDescription$ Create two 2/2 black and green Wolf creature tokens with "When this creature dies, put a loyalty counter on each Garruk you control."
 A:AB$ Destroy | Cost$ SubCounter<3/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Planeswalker$ True | SubAbility$ DBDraw | SpellDescription$ Destroy target creature. Draw a card.

@@ -20,4 +20,3 @@ Types:Creature Insect Horror
 PT:5/4
 K:Flying
 Oracle:Flying
-

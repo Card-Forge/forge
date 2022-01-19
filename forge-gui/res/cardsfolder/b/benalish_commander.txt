@@ -1,8 +1,8 @@
 Name:Benalish Commander
 ManaCost:3 W
 Types:Creature Human Soldier
-Text:X can't be 0.
 PT:*/*
+Text:X can't be 0.
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | Description$ CARDNAME's power and toughness are each equal to the number of Soldiers you control.
 K:Suspend:X:XCantBe0 X W W
 T:Mode$ CounterRemoved | ValidCard$ Card.Self | TriggerZones$ Exile | CounterType$ TIME | Execute$ TrigToken | TriggerDescription$ Whenever a time counter is removed from CARDNAME while it's exiled, create a 1/1 white Soldier creature token.

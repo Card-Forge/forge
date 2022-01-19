@@ -9,7 +9,7 @@ T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Indestructible
 T:Mode$ ChangesZone | ValidCard$ Creature.nonAngel+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDelayTransform | TriggerZones$ Battlefield | TriggerDescription$ When a non-Angel creature you control dies, transform CARDNAME at the beginning of the next upkeep.
 SVar:TrigDelayTransform:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | Execute$ TrigTransform | TriggerDescription$ CARDNAME - Transform it at the beginning of the next end step.
-SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform 
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archangel_avacyn.jpg
 AlternateMode:DoubleFaced
 Oracle:Flash\nFlying, vigilance\nWhen Archangel Avacyn enters the battlefield, creatures you control gain indestructible until end of turn.\nWhen a non-Angel creature you control dies, transform Archangel Avacyn at the beginning of the next upkeep.

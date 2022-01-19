@@ -1,5 +1,5 @@
 Name:Vampire Sovereign
-ManaCost:3 B B 
+ManaCost:3 B B
 Types:Creature Vampire Noble
 PT:3/4
 K:Flying

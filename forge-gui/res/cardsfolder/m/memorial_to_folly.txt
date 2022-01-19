@@ -4,4 +4,4 @@ Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
 A:AB$ ChangeZone | Cost$ 2 B T Sac<1/CARDNAME> | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target creature card from your graveyard to your hand.
-Oracle:Memorial to Folly enters the battlefield tapped.\n{T}: Add {B}.\n{2}{B}, {T}, Sacrifice Memorial to Folly: Return target creature card from your graveyard to your hand. 
+Oracle:Memorial to Folly enters the battlefield tapped.\n{T}: Add {B}.\n{2}{B}, {T}, Sacrifice Memorial to Folly: Return target creature card from your graveyard to your hand.

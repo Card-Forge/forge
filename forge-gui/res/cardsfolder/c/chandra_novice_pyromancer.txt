@@ -1,6 +1,6 @@
 Name:Chandra, Novice Pyromancer
-Types:Legendary Planeswalker Chandra
 ManaCost:3 R
+Types:Legendary Planeswalker Chandra
 Loyalty:5
 A:AB$ PumpAll | Cost$ AddCounter<1/LOYALTY> | ValidCards$ Elemental.YouCtrl | NumAtt$ +2 | NumDef$ +0 | Planeswalker$ True | AILogic$ Always | SpellDescription$ Elementals you control get +2/+0 until end of turn.
 A:AB$ Mana | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | Produced$ R | Amount$ 2 | SpellDescription$ Add {R}{R}.

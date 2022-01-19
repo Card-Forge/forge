@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Instant
 K:Buyback:2
 A:SP$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.TopGraveyardCreature+YouCtrl | Hidden$ True | Mandatory$ True | RememberChanged$ True | SubAbility$ DBPump | SpellDescription$ Return the top creature card of your graveyard to the battlefield. That creature gains haste until end of turn. Exile it at the beginning of the next end step.
-SVar:DBPump:DB$ Animate | Keywords$ Haste  | Defined$ Remembered | AtEOT$ Exile | SubAbility$ DBCleanup
+SVar:DBPump:DB$ Animate | Keywords$ Haste | Defined$ Remembered | AtEOT$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NeedsOrderedGraveyard:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corpse_dance.jpg

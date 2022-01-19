@@ -1,6 +1,6 @@
 Name:Chandra, Acolyte of Flame
-Types:Legendary Planeswalker Chandra
 ManaCost:1 R R
+Types:Legendary Planeswalker Chandra
 Loyalty:4
 A:AB$ PutCounterAll | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | ValidCards$ Planeswalker.YouCtrl+Red | CounterType$ LOYALTY | CounterNum$ 1 | SpellDescription$ Put a loyalty counter on each red planeswalker you control.
 A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | TokenAmount$ 2 | TokenScript$ r_1_1_elemental | TokenOwner$ You | LegacyImage$ r 1 1 elemental m20 | AtEOT$ Sacrifice | RememberTokens$ True | SubAbility$ DBPump | SpellDescription$ Create two 1/1 red Elemental creature tokens. They gain haste. Sacrifice them at the beginning of the next end step.

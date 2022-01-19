@@ -4,4 +4,4 @@ Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 A:AB$ Draw | Cost$ 4 U T Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.
-Oracle:Memorial to Genius enters the battlefield tapped.\n{T}: Add {U}.\n{4}{U}, {T}, Sacrifice Memorial to Genius: Draw two cards. 
+Oracle:Memorial to Genius enters the battlefield tapped.\n{T}: Add {U}.\n{4}{U}, {T}, Sacrifice Memorial to Genius: Draw two cards.

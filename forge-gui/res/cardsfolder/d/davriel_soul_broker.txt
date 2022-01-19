@@ -21,7 +21,7 @@ SVar:CostBLess:Mode$ ReduceCost | ValidCard$ Card | Activator$ You | Type$ Spell
 SVar:EmblemDavrielPW:DB$ Effect | Name$ Emblem - Davriel, Soul Broker (Offer 7) | StaticAbilities$ AddP2Ab | Duration$ Permanent | SpellDescription$ You get an emblem with "Davriel planeswalkers you control have '[+2]: Draw a card.'"
 SVar:AddP2Ab:Mode$ Continuous | Affected$ Planeswalker.Davriel+YouCtrl | AddAbility$ ABDraw | Description$ Davriel planeswalkers you control have "[+2]: Draw a card."
 SVar:ABDraw:AB$ Draw | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:EmblemDrawGain:DB$ Effect | Name$ Emblem - Davriel, Soul Broker (Offer 8) | Triggers$ DrawGainTrig | Duration$ Permanent | SpellDescription$ You get an emblem with “Whenever you draw a card, you gain 2 life.”
+SVar:EmblemDrawGain:DB$ Effect | Name$ Emblem - Davriel, Soul Broker (Offer 8) | Triggers$ DrawGainTrig | Duration$ Permanent | SpellDescription$ You get an emblem with "Whenever you draw a card, you gain 2 life."
 SVar:DrawGainTrig:Mode$ Drawn | ValidCard$ Card.YouOwn | TriggerZones$ Command | Execute$ TrigGainLife | TriggerDescription$ Whenever you draw a card, you gain 2 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 SVar:DBCondition:DB$ GenericChoice | ChoicePrompt$ Choose a condition | NumRandomChoices$ 3 | Choices$ Lose6,Exile2,Sac2,PerpetualBuffTheirs,EmblemDebuff,EmblemRaiseCost,EmblemDrawExile,EmblemUpkeepLose | StackDescription$ None

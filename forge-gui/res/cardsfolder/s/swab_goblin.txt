@@ -1,5 +1,5 @@
 Name:Swab Goblin
 ManaCost:1 R
 Types:Creature Goblin Pirate
-Oracle:
 PT:2/2
+Oracle:

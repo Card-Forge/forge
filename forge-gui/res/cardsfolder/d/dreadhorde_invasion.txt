@@ -1,7 +1,7 @@
 Name:Dreadhorde Invasion
 ManaCost:1 B
 Types:Enchantment
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You |TriggerZones$ Battlefield | Execute$ DBLife | TriggerDescription$ At the beginning of your upkeep, you lose 1 life and amass 1. (Put a +1/+1 counter on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBLife | TriggerDescription$ At the beginning of your upkeep, you lose 1 life and amass 1. (Put a +1/+1 counter on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
 SVar:DBLife:DB$ LoseLife | LifeAmount$ 1 | SubAbility$ DBAmass
 SVar:DBAmass:DB$ Amass | Num$ 1
 T:Mode$ Attacks | ValidCard$ Creature.Zombie+token+YouCtrl+powerGE6 | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a Zombie token you control with power 6 or greater attacks, it gains lifelink until end of turn.

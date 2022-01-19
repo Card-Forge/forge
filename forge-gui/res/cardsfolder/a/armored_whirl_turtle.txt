@@ -1,5 +1,5 @@
 Name:Armored Whirl Turtle
 ManaCost:2 U
 Types:Creature Turtle
-Oracle:
 PT:0/5
+Oracle:
