@@ -4,5 +4,6 @@ Types:Enchantment Aura Curse
 K:Enchant player
 A:SP$ Attach | ValidTgts$ Player | AILogic$ Curse
 T:Mode$ AttackersDeclared | ValidCard$ Creature | AttackedTarget$ Player.EnchantedBy | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted player is attacked, create a 2/2 black Zombie creature token. Each opponent attacking that player does the same.
-SVar:TrigToken:DB$ Token | TokenOwner$ TriggeredAttackingPlayer=OpponentAndYou | TokenScript$ b_2_2_zombie
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenOwner$ TriggeredAttackingPlayer=Opponent | TokenScript$ b_2_2_zombie
 Oracle:Enchant player\nWhenever enchanted player is attacked, create a 2/2 black Zombie creature token. Each opponent attacking that player does the same.
