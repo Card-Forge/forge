@@ -1096,7 +1096,7 @@ public class AbilityUtils {
                     o = ((CardCollection) c).get(0).getController();
                 }
             }
-            else if (defParsed.endsWith("Opponent") && !defParsed.endsWith("=Opponent")) {
+            else if (defParsed.endsWith("Opponent") && !defParsed.endsWith("IfOpponent")) {
                 String triggeringType = defParsed.substring(9);
                 triggeringType = triggeringType.substring(0, triggeringType.length() - 8);
                 final Object c = root.getTriggeringObject(AbilityKey.fromString(triggeringType));
@@ -1127,8 +1127,8 @@ public class AbilityUtils {
                 String triggeringType = defParsed.substring(9);
                 String filter = null;
                 if (triggeringType.contains("=")) {
-                    filter = triggeringType.split("=")[1];
-                    triggeringType = triggeringType.split("=")[0];
+                    filter = triggeringType.split("If")[1];
+                    triggeringType = triggeringType.split("If")[0];
                 }
                 o = root.getTriggeringObject(AbilityKey.fromString(triggeringType));
                 if (filter != null) {
