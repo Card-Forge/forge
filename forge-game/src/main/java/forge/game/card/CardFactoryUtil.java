@@ -3177,14 +3177,9 @@ public class CardFactoryUtil {
                     "| AtEOT$ Sacrifice | PrecostDesc$ Encore | CostDesc$ " + ManaCostParser.parse(manacost) +
                     "| SpellDescription$ (" + inst.getReminderText() + ")";
 
-            final String cleanupStr = "DB$ Cleanup | ClearRemembered$ True";
-
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
-
-            AbilitySub cleanupSA = (AbilitySub) AbilityFactory.getAbility(cleanupStr, card);
-            //sa.setSubAbility(cleanupSA);
         } else if (keyword.startsWith("Spectacle")) {
             final String[] k = keyword.split(":");
             final Cost cost = new Cost(k[1], false);
@@ -3192,8 +3187,7 @@ public class CardFactoryUtil {
 
             newSA.setAlternativeCost(AlternativeCost.Spectacle);
 
-            String desc = "Spectacle " + cost.toSimpleString() + " (" + inst.getReminderText()
-                    + ")";
+            String desc = "Spectacle " + cost.toSimpleString() + " (" + inst.getReminderText() + ")";
             newSA.setDescription(desc);
 
             newSA.setIntrinsic(intrinsic);
