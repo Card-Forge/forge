@@ -99,9 +99,16 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
         }
         tokenTable.rowKeySet().removeAll(toRemove);
 
-        final List<String> pumpKeywords = Lists.newArrayList();
+        final List<String> kws = Lists.newArrayList();
+        final List<String> hiddenkws = Lists.newArrayList();
         if (sa.hasParam("PumpKeywords")) {
-            pumpKeywords.addAll(Arrays.asList(sa.getParam("PumpKeywords").split(" & ")));
+            for (String kw : sa.getParam("PumpKeywords").split(" & ")) {
+                if (kw.startsWith("HIDDEN")) {
+                    hiddenkws.add(kw.substring(7));
+                } else {
+                    kws.add(kw);
+                }
+            }
         }
         List<Card> allTokens = Lists.newArrayList();
 
@@ -117,6 +124,8 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
             Player creator = c.getRowKey();
             Player controller = prototype.getController();
             int cellAmount = c.getValue();
+            String cleanupForEach = sa.getParamOrDefault("CleanupForEach", "");
+
             for (int i = 0; i < cellAmount; i++) {
                 Card tok = CardFactory.copyCard(prototype, true);
                 // Crafty Cutpurse would change under which control it does enter,
@@ -174,9 +183,15 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 if (clone) {
                     moved.setCloneOrigin(host);
                 }
-                if (!pumpKeywords.isEmpty()) {
-                    moved.addChangedCardKeywords(pumpKeywords, Lists.newArrayList(), false, timestamp, 0);
-                    addPumpUntil(sa, moved, timestamp);
+                if (!kws.isEmpty()) {
+                    moved.addChangedCardKeywords(kws, Lists.newArrayList(), false, timestamp, 0);
+                    addPumpUntil(sa, moved, timestamp, cleanupForEach.equals("EOT") ? prototype.getRemembered() : null);
+                }
+                if (!hiddenkws.isEmpty()) {
+                    moved.addHiddenExtrinsicKeywords(timestamp, 0, hiddenkws);
+                    if (kws.isEmpty()) {
+                        addPumpUntil(sa, moved, timestamp, cleanupForEach.equals("EOT") ? prototype.getRemembered() : null);
+                    }
                 }
 
                 if (sa.hasParam("AtEOTTrig")) {
@@ -206,6 +221,10 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                     moved.addRemembered(AbilityUtils.getDefinedObjects(host, sa.getParam("TokenRemembered"), sa));
                 }
                 allTokens.add(moved);
+
+                if (cleanupForEach.equals("Immediately")) {
+                    moved.removeRemembered(prototype.getRemembered());
+                }
             }
         }
 
@@ -259,7 +278,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
         return false;
     }
 
-    protected void addPumpUntil(SpellAbility sa, final Card c, long timestamp) {
+    protected void addPumpUntil(SpellAbility sa, final Card c, long timestamp, final Iterable<Object> forEachRemembered) {
         if (!sa.hasParam("PumpDuration")) {
             return;
         }
@@ -272,6 +291,10 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
             @Override
             public void run() {
                 c.removeChangedCardKeywords(timestamp, 0);
+                c.removeHiddenExtrinsicKeywords(timestamp, 0);
+                if (forEachRemembered != null) {
+                    c.removeRemembered(forEachRemembered);
+                }
                 game.fireEvent(new GameEventCardStatsChanged(c));
             }
         };

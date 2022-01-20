@@ -3171,47 +3171,20 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
 
-            String effect = "AB$ RepeatEach | Cost$ " + manacost + " ExileFromGrave<1/CARDNAME> " +
-                    "| ActivationZone$ Graveyard | ClearRememberedBeforeLoop$ True | RepeatPlayers$ Opponent" +
-                    "| PrecostDesc$ Encore | CostDesc$ " + ManaCostParser.parse(manacost) +
+            final String effect = "AB$ CopyPermanent | Cost$ " + manacost + " ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard" +
+                    "| Defined$ Self | PumpKeywords$ HIDDEN CARDNAME attacks specific player each combat if able:Remembered | PumpDuration$ EOT" +
+                    "| AddKeywords$ Haste | ForEach$ Opponent | CleanupForEach$ EOT | TokenRemembered$ Player.IsRemembered" +
+                    "| AtEOT$ Sacrifice | PrecostDesc$ Encore | CostDesc$ " + ManaCostParser.parse(manacost) +
                     "| SpellDescription$ (" + inst.getReminderText() + ")";
 
-            final String copyStr = "DB$ CopyPermanent | Defined$ Self | ImprintTokens$ True " +
-                    "| AddKeywords$ Haste | RememberTokens$ True | TokenRemembered$ Player.IsRemembered";
-
-            final String pumpStr = "DB$ PumpAll | ValidCards$ Creature.IsRemembered " +
-                    "| KW$ HIDDEN CARDNAME attacks specific player each combat if able:Remembered";
-
-            final String pumpcleanStr = "DB$ Cleanup | ForgetDefined$ RememberedCard";
-
-            final String delTrigStr = "DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | RememberObjects$ Imprinted " +
-                    "| StackDescription$ None | TriggerDescription$ Sacrifice them at the beginning of the next end step.";
-
-            final String sacStr = "DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI | Controller$ You";
-
-            final String cleanupStr = "DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True";
+            final String cleanupStr = "DB$ Cleanup | ClearRemembered$ True";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
 
-            AbilitySub copySA = (AbilitySub) AbilityFactory.getAbility(copyStr, card);
-            sa.setAdditionalAbility("RepeatSubAbility", copySA);
-
-            AbilitySub pumpSA = (AbilitySub) AbilityFactory.getAbility(pumpStr, card);
-            copySA.setSubAbility(pumpSA);
-
-            AbilitySub pumpcleanSA = (AbilitySub) AbilityFactory.getAbility(pumpcleanStr, card);
-            pumpSA.setSubAbility(pumpcleanSA);
-
-            AbilitySub delTrigSA = (AbilitySub) AbilityFactory.getAbility(delTrigStr, card);
-            sa.setSubAbility(delTrigSA);
-
-            AbilitySub sacSA = (AbilitySub) AbilityFactory.getAbility(sacStr, card);
-            delTrigSA.setAdditionalAbility("Execute", sacSA);
-
             AbilitySub cleanupSA = (AbilitySub) AbilityFactory.getAbility(cleanupStr, card);
-            delTrigSA.setSubAbility(cleanupSA);
+            //sa.setSubAbility(cleanupSA);
         } else if (keyword.startsWith("Spectacle")) {
             final String[] k = keyword.split(":");
             final Cost cost = new Cost(k[1], false);

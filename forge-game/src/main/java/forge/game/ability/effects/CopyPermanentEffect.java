@@ -183,7 +183,15 @@ public class CopyPermanentEffect extends TokenEffectBase {
             if (sa.usesTargeting() && !sa.getTargetRestrictions().canTgtPlayer() && !c.canBeTargetedBy(sa)) {
                 continue;
             }
-            tokenTable.put(controller, getProtoType(sa, c, controller), numCopies);
+            if (sa.hasParam("ForEach")) {
+                for (Player p : AbilityUtils.getDefinedPlayers(host, sa.getParam("ForEach"), sa)) {
+                    Card proto = getProtoType(sa, c, controller);
+                    proto.addRemembered(p);
+                    tokenTable.put(controller, proto, numCopies);
+                }
+            } else {
+                tokenTable.put(controller, getProtoType(sa, c, controller), numCopies);
+            }
         } // end foreach Card
 
         makeTokenTable(tokenTable, true, triggerList, combatChanged, sa);
