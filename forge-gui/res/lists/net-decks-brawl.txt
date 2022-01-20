@@ -2,6 +2,7 @@ Card Preview | https://downloads.cardforge.org/decks/cardpreview-brawl.zip
 Commander Clash | https://downloads.cardforge.org/decks/commanderclash-brawl.zip
 Commander VS | https://downloads.cardforge.org/decks/commandervs-brawl.zip
 Current Brawl Metagame | https://downloads.cardforge.org/decks/currentbrawlmetagame.zip
+Current Historic Brawl Metagame | https://downloads.cardforge.org/decks/currenthistoricbrawlmetagame.zip
 Dear Azami | https://downloads.cardforge.org/decks/dearazami-brawl.zip
 EDHREC Columms | https://downloads.cardforge.org/decks/edhrec-brawl.zip
 Feature Article | https://downloads.cardforge.org/decks/feature-brawl.zip
