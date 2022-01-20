@@ -13,6 +13,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardFactory;
 import forge.game.card.TokenCreateTable;
 import forge.game.card.token.TokenInfo;
 import forge.game.player.Player;
@@ -81,7 +82,7 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
             long timestamp = game.getNextTimestamp();
 
             Map<Player, Integer> toInsertMap = Maps.newHashMap();
-            Map<Player, Iterable<Object>> toRememberMap = Maps.newHashMap();
+            Map<Player, Card> oldTokenMap = Maps.newHashMap();
             Set<Card> toRemoveSet = Sets.newHashSet();
             for (Map.Entry<Card, Integer> e : table.row(affected).entrySet()) {
                 if (!sa.matchesValidParam("ValidCard", e.getKey())) {
@@ -90,7 +91,7 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
                 Player controller = e.getKey().getController();
                 int old = ObjectUtils.defaultIfNull(toInsertMap.get(controller), 0);
                 toInsertMap.put(controller, old + e.getValue());
-                toRememberMap.put(controller, e.getKey().getRemembered());
+                oldTokenMap.put(controller, e.getKey());
                 toRemoveSet.add(e.getKey());
             }
             // remove replaced tokens
@@ -109,9 +110,15 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
                     }
 
                     token.setController(pe.getKey(), timestamp);
+
+                    // reapply state to new token
+                    final Card newToken = CardFactory.copyCard(token, true);
+                    newToken.setStates(CardFactory.getCloneStates(token, newToken, (SpellAbility) originalParams.get(AbilityKey.SourceSA)));
+                    // force update the now set State
+                    newToken.setState(newToken.getCurrentStateName(), true, true);
                     // if token is created from ForEach keep that
-                    token.addRemembered(toRememberMap.get(pe.getKey()));
-                    table.put(affected, token, pe.getValue());
+                    newToken.addRemembered(oldTokenMap.get(pe.getKey()).getRemembered());
+                    table.put(affected, newToken, pe.getValue());
                 }
             }
         } else if ("ReplaceController".equals(sa.getParam("Type"))) {
