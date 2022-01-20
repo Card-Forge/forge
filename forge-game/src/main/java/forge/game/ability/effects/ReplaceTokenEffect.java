@@ -81,6 +81,7 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
             long timestamp = game.getNextTimestamp();
 
             Map<Player, Integer> toInsertMap = Maps.newHashMap();
+            Map<Player, Iterable<Object>> toRememberMap = Maps.newHashMap();
             Set<Card> toRemoveSet = Sets.newHashSet();
             for (Map.Entry<Card, Integer> e : table.row(affected).entrySet()) {
                 if (!sa.matchesValidParam("ValidCard", e.getKey())) {
@@ -89,6 +90,7 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
                 Player controller = e.getKey().getController();
                 int old = ObjectUtils.defaultIfNull(toInsertMap.get(controller), 0);
                 toInsertMap.put(controller, old + e.getValue());
+                toRememberMap.put(controller, e.getKey().getRemembered());
                 toRemoveSet.add(e.getKey());
             }
             // remove replaced tokens
@@ -107,6 +109,8 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
                     }
 
                     token.setController(pe.getKey(), timestamp);
+                    // if token is created from ForEach keep that
+                    token.addRemembered(toRememberMap.get(pe.getKey()));
                     table.put(affected, token, pe.getValue());
                 }
             }
