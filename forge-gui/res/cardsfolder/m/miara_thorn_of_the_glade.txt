@@ -3,8 +3,7 @@ ManaCost:1 B
 Types:Legendary Creature Elf Scout
 PT:1/2
 K:Partner
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ Whenever CARDNAME or another Elf you control dies, you may pay {1} and 1 life. If you do, draw a card.
-T:Mode$ ChangesZone | ValidCard$ Elf.Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDraw | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Elf you control dies, you may pay {1} and 1 life. If you do, draw a card.
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Elf.Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ Whenever CARDNAME or another Elf you control dies, you may pay {1} and 1 life. If you do, draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ 1 PayLife<1> | Defined$ You | NumCards$ 1
 DeckNeeds:Type$Elf
 Oracle:Whenever Miara, Thorn of the Glade or another Elf you control dies, you may pay {1} and 1 life. If you do, draw a card.\nPartner (You can have two commanders if both have partner.)
