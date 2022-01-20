@@ -2,9 +2,9 @@ Name:Curse of Vitality
 ManaCost:2 W
 Types:Enchantment Aura Curse
 K:Enchant player
-A:SP$ Attach | Cost$ 2 W | ValidTgts$ Player | AILogic$ Curse
-T:Mode$ AttackersDeclared | ValidCard$ Creature | AttackedTarget$ Player.EnchantedBy | Execute$ TrigRepeat | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted player is attacked, you gain 2 life. Each opponent attacking that player does the same.
-SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ TriggeredAttackingPlayerAndYou | RepeatSubAbility$ TrigGainLife
-SVar:TrigGainLife:DB$ GainLife | Defined$ Player.IsRemembered | LifeAmount$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_vitality.jpg
+A:SP$ Attach | ValidTgts$ Player | AILogic$ Curse
+T:Mode$ AttackersDeclared | ValidCard$ Creature | AttackedTarget$ Player.EnchantedBy | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted player is attacked, you gain 2 life. Each opponent attacking that player does the same.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ TriggeredAttackingPlayerIfOpponent | LifeAmount$ 2
+DeckHas:Ability$LifeGain
 Oracle:Enchant player\nWhenever enchanted player is attacked, you gain 2 life. Each opponent attacking that player does the same.

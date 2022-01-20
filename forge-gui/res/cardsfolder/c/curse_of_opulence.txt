@@ -5,5 +5,5 @@ K:Enchant player
 A:SP$ Attach | ValidTgts$ Player | AILogic$ Curse
 T:Mode$ AttackersDeclared | ValidCard$ Creature | AttackedTarget$ Player.EnchantedBy | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted player is attacked, create a Gold token. Each opponent attacking that player does the same. (A Gold token is an artifact with "Sacrifice this artifact: Add one mana of any color.")
 SVar:TrigToken:DB$ Token | TokenScript$ c_a_gold_draw | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenOwner$ TriggeredAttackingPlayer=Opponent | TokenScript$ c_a_gold_draw
+SVar:DBToken:DB$ Token | TokenOwner$ TriggeredAttackingPlayerIfOpponent | TokenScript$ c_a_gold_draw
 Oracle:Enchant player\nWhenever enchanted player is attacked, create a Gold token. Each opponent attacking that player does the same. (A Gold token is an artifact with "Sacrifice this artifact: Add one mana of any color.")
