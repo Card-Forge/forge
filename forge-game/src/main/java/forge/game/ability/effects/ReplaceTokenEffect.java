@@ -157,6 +157,7 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
             return in;
         }
         // we can merge the amounts without losing information
+        // which avoids creating identical prototypes for performance
         List<Integer> result = Lists.newArrayList();
         int sum = 0;
         for (int e : in) {
