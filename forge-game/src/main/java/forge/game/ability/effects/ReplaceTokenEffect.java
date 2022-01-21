@@ -125,7 +125,7 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
 
                         // reapply state to new token
                         final Card newToken = CardFactory.copyCard(token, true);
-                        newToken.setStates(CardFactory.getCloneStates(token, newToken, sourceSA));
+                        newToken.setStates(CardFactory.getCloneStates(token, newToken, sourceSA, true));
                         // force update the now set State
                         newToken.setState(newToken.getCurrentStateName(), true, true);
                         // if token is created from ForEach keep that

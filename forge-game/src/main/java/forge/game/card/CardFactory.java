@@ -586,6 +586,9 @@ public class CardFactory {
     }
 
     public static CardCloneStates getCloneStates(final Card in, final Card out, final CardTraitBase sa) {
+        return getCloneStates(in, out, sa, false);
+    }
+    public static CardCloneStates getCloneStates(final Card in, final Card out, final CardTraitBase sa, boolean creatureReplacement) {
         final Card host = sa.getHostCard();
         final Map<String,String> origSVars = host.getSVars();
         final List<String> types = Lists.newArrayList();
@@ -670,7 +673,7 @@ public class CardFactory {
                 state.addColor(shortColors);
             }
 
-            if (sa.hasParam("SetColor")) {
+            if (!creatureReplacement && sa.hasParam("SetColor")) {
                 state.setColor(shortColors);
             }
 
@@ -680,7 +683,7 @@ public class CardFactory {
 
             state.addType(types);
 
-            if (creatureTypes != null) {
+            if (!creatureReplacement && creatureTypes != null) {
                 state.setCreatureTypes(creatureTypes);
             }
 
@@ -689,12 +692,15 @@ public class CardFactory {
                 state.removeIntrinsicKeyword(kw);
             }
 
-            if (sa.hasParam("SetPower")) {
-                state.setBasePower(AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("SetPower"), sa));
+            if (!creatureReplacement) {
+                if (sa.hasParam("SetPower")) {
+                    state.setBasePower(AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("SetPower"), sa));
+                }
+                if (sa.hasParam("SetToughness")) {
+                    state.setBaseToughness(AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("SetToughness"), sa));
+                }
             }
-            if (sa.hasParam("SetToughness")) {
-                state.setBaseToughness(AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("SetToughness"), sa));
-            }
+
             if (sa.hasParam("SetLoyalty")) {
                 state.setBaseLoyalty(String.valueOf(sa.getParam("SetLoyalty")));
             }
@@ -750,7 +756,7 @@ public class CardFactory {
                 }
             }
 
-            if (sa.hasParam("GainThisAbility") && (sa instanceof SpellAbility)) {
+            if (sa.hasParam("GainThisAbility") && sa instanceof SpellAbility) {
                 SpellAbility root = ((SpellAbility) sa).getRootAbility();
 
                 if (root.isTrigger() && root.getTrigger() != null) {
@@ -804,11 +810,11 @@ public class CardFactory {
                     continue;
                 }
 
-                if (sa.hasParam("SetPower") || sa.hasParam("Eternalize")) {
+                if (sa.hasParam("SetPower") || sa.hasParam("Eternalize") || creatureReplacement) {
                     if (sta.hasParam("SetPower"))
                         state.removeStaticAbility(sta);
                 }
-                if (sa.hasParam("SetToughness") || sa.hasParam("Eternalize")) {
+                if (sa.hasParam("SetToughness") || sa.hasParam("Eternalize") || creatureReplacement) {
                     if (sta.hasParam("SetToughness"))
                         state.removeStaticAbility(sta);
                 }
@@ -819,7 +825,7 @@ public class CardFactory {
                         state.removeStaticAbility(sta);
                     }
                 }
-                if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize")) {
+                if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize") || creatureReplacement) {
                     if (sta.hasParam("SetColor")) {
                         state.removeStaticAbility(sta);
                     }
@@ -827,10 +833,10 @@ public class CardFactory {
             }
 
             // remove some keywords
-            if (sa.hasParam("SetCreatureTypes")) {
+            if (sa.hasParam("SetCreatureTypes") || creatureReplacement) {
                 state.removeIntrinsicKeyword("Changeling");
             }
-            if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize")) {
+            if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize") || creatureReplacement) {
                 state.removeIntrinsicKeyword("Devoid");
             }
         }
