@@ -1494,38 +1494,15 @@ public class CardFactoryUtil {
             final String actualTrigger = "Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True"
                     + " | TriggerDescription$ Myriad (" + inst.getReminderText() + ")";
 
-            final String repeatStr = "DB$ RepeatEach | RepeatPlayers$ OpponentsOtherThanDefendingPlayer | ChangeZoneTable$ True";
-
             final String copyStr = "DB$ CopyPermanent | Defined$ Self | TokenTapped$ True | Optional$ True | TokenAttacking$ Remembered"
-                    + " | ChoosePlayerOrPlaneswalker$ True | ImprintTokens$ True";
+                    + "| ForEach$ OpponentsOtherThanDefendingPlayer | ChoosePlayerOrPlaneswalker$ True | AtEOT$ ExileCombat | CleanupForEach$ Immediately";
 
-            final String delTrigStr = "DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | RememberObjects$ Imprinted"
-            + " | TriggerDescription$ Exile the tokens at end of combat.";
-
-            final String exileStr = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile";
-
-            final String cleanupStr = "DB$ Cleanup | ClearImprinted$ True";
-
-            SpellAbility repeatSA = AbilityFactory.getAbility(repeatStr, card);
-
-            AbilitySub copySA = (AbilitySub) AbilityFactory.getAbility(copyStr, card);
-            repeatSA.setAdditionalAbility("RepeatSubAbility", copySA);
-
-            AbilitySub delTrigSA = (AbilitySub) AbilityFactory.getAbility(delTrigStr, card);
-
-            AbilitySub exileSA = (AbilitySub) AbilityFactory.getAbility(exileStr, card);
-            delTrigSA.setAdditionalAbility("Execute", exileSA);
-
-            AbilitySub cleanupSA = (AbilitySub) AbilityFactory.getAbility(cleanupStr, card);
-            delTrigSA.setSubAbility(cleanupSA);
-
-            repeatSA.setSubAbility(delTrigSA);
+            final SpellAbility copySA = AbilityFactory.getAbility(copyStr, card);
+            copySA.setIntrinsic(intrinsic);
 
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, intrinsic);
+            parsedTrigger.setOverridingAbility(copySA);
 
-            repeatSA.setIntrinsic(intrinsic);
-
-            parsedTrigger.setOverridingAbility(repeatSA);
             inst.addTrigger(parsedTrigger);
         } else if (keyword.equals("Nightbound")) {
             // Set Night when it's Neither
