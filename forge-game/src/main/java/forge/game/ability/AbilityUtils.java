@@ -1096,7 +1096,7 @@ public class AbilityUtils {
                     o = ((CardCollection) c).get(0).getController();
                 }
             }
-            else if (defParsed.endsWith("Opponent")) {
+            else if (defParsed.endsWith("Opponent") && !defParsed.endsWith("IfOpponent")) {
                 String triggeringType = defParsed.substring(9);
                 triggeringType = triggeringType.substring(0, triggeringType.length() - 8);
                 final Object c = root.getTriggeringObject(AbilityKey.fromString(triggeringType));
@@ -1124,8 +1124,22 @@ public class AbilityUtils {
                 }
             }
             else {
-                final String triggeringType = defParsed.substring(9);
+                String triggeringType = defParsed.substring(9);
+                String filter = null;
+                if (triggeringType.contains("=")) {
+                    filter = triggeringType.split("If")[1];
+                    triggeringType = triggeringType.split("If")[0];
+                }
                 o = root.getTriggeringObject(AbilityKey.fromString(triggeringType));
+                if (filter != null) {
+                    if (filter.equals("Opponent")) {
+                        if (!(Player) o.isOpponentOf(((SpellAbility) sa).getActivatingPlayer())) {
+                            o = null;
+                        }
+                    } else {
+                        System.err.println("getDefinedPlayers needs additional code for =Filter");
+                    }
+                }
             }
             if (o != null) {
                 if (o instanceof Player) {

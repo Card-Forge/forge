@@ -2,9 +2,8 @@ Name:Curse of Bounty
 ManaCost:1 G
 Types:Enchantment Aura Curse
 K:Enchant player
-A:SP$ Attach | Cost$ 1 G | ValidTgts$ Player | AILogic$ Curse
-T:Mode$ AttackersDeclared | ValidCard$ Creature | AttackedTarget$ Player.EnchantedBy | Execute$ TrigRepeat | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted player is attacked, untap all nonland permanents you control. Each opponent attacking that player untaps all nonland permanents they control.
-SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ TriggeredAttackingPlayerAndYou | RepeatSubAbility$ TrigUntap
-SVar:TrigUntap:DB$ UntapAll | Defined$ Player.IsRemembered | ValidCards$ Permanent.nonLand | SpellDescription$ Whenever enchanted player is attacked, untap all nonland permanents you control. Each opponent attacking that player untaps all nonland permanents they control.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_vitality.jpg
+A:SP$ Attach | ValidTgts$ Player | AILogic$ Curse
+T:Mode$ AttackersDeclared | ValidCard$ Creature | AttackedTarget$ Player.EnchantedBy | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted player is attacked, untap all nonland permanents you control. Each opponent attacking that player untaps all nonland permanents they control.
+SVar:TrigUntap:DB$ UntapAll | Defined$ You | ValidCards$ Permanent.nonLand | SubAbility$ DBUntap
+SVar:DBUntap:DB$ UntapAll | Defined$ TriggeredAttackingPlayerIfOpponent | ValidCards$ Permanent.nonLand
 Oracle:Enchant player\nWhenever enchanted player is attacked, untap all nonland permanents you control. Each opponent attacking that player untaps all nonland permanents they control.
