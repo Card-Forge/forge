@@ -1133,7 +1133,7 @@ public class AbilityUtils {
                 o = root.getTriggeringObject(AbilityKey.fromString(triggeringType));
                 if (filter != null) {
                     if (filter.equals("Opponent")) {
-                        if (!(Player) o.isOpponentOf(((SpellAbility) sa).getActivatingPlayer())) {
+                        if (!((Player)o).isOpponentOf(((SpellAbility) sa).getActivatingPlayer())) {
                             o = null;
                         }
                     } else {
