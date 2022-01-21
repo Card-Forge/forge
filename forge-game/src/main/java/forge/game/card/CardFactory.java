@@ -798,7 +798,7 @@ public class CardFactory {
                 state.setImageKey(originalState.getImageKey());
             }
 
-            // remove some characteristic static abilties
+            // remove some characteristic static abilities
             for (StaticAbility sta : state.getStaticAbilities()) {
                 if (!sta.hasParam("CharacteristicDefining")) {
                     continue;

@@ -3173,7 +3173,7 @@ public class CardFactoryUtil {
 
             final String effect = "AB$ CopyPermanent | Cost$ " + manacost + " ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard" +
                     "| Defined$ Self | PumpKeywords$ HIDDEN CARDNAME attacks specific player each combat if able:Remembered | PumpDuration$ EOT" +
-                    "| AddKeywords$ Haste | ForEach$ Opponent | CleanupForEach$ EOT | TokenRemembered$ Player.IsRemembered" +
+                    "| AddKeywords$ Haste | ForEach$ Opponent | CleanupForEach$ EOT" +
                     "| AtEOT$ Sacrifice | PrecostDesc$ Encore | CostDesc$ " + ManaCostParser.parse(manacost) +
                     "| SpellDescription$ (" + inst.getReminderText() + ")";
 
