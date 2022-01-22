@@ -852,9 +852,6 @@ public class CardFactoryUtil {
             String pumpStr = "DB$ Pump | Defined$ Self | NumAtt$ " + n + " | NumDef$ " + n;
 
             SpellAbility pump = AbilityFactory.getAbility(pumpStr, card);
-            if ("X".equals(n)) {
-                pump.setSVar("X", "Count$Valid Creature.attacking");
-            }
 
             final Trigger bushidoTrigger1 = TriggerHandler.parseTrigger(trigBlock, card, intrinsic);
             final Trigger bushidoTrigger2 = TriggerHandler.parseTrigger(trigBlocked, card, intrinsic);
@@ -1793,10 +1790,6 @@ public class CardFactoryUtil {
                     + "| ValidTgts$ Spirit.YouOwn+cmcLE" + k[1];
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, intrinsic);
             final SpellAbility sp = AbilityFactory.getAbility(effect, card);
-            // Soulshift X
-            if (k[1].equals("X")) {
-                sp.setSVar("X", "Count$LastStateBattlefield " + k[3]);
-            }
 
             parsedTrigger.setOverridingAbility(sp);
 
