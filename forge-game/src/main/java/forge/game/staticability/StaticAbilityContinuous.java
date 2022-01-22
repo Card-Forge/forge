@@ -306,6 +306,9 @@ public final class StaticAbilityContinuous {
                             input = input.replaceAll("chosenEvenOdd", hostCard.getChosenEvenOdd().toString().toLowerCase());
                         }
                         input = input.replace("HostCardUID", hostCardUID);
+                        if (params.containsKey("CalcKeywordN")) {
+                            input = input.replace("N", String.valueOf(AbilityUtils.calculateAmount(hostCard, params.get("CalcKeywordN"), stAb)));
+                        }
                         return input;
                     }
 
