@@ -5,5 +5,5 @@ K:Enchant player
 A:SP$ Attach | ValidTgts$ Player | AILogic$ Curse
 T:Mode$ AttackersDeclared | ValidCard$ Creature | AttackedTarget$ Player.EnchantedBy | Execute$ TrigRepeat | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted player is attacked, draw a card. Each opponent attacking that player does the same.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredAttackingPlayerIfOpponent
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredAttackingPlayer.Opponent
 Oracle:Enchant player\nWhenever enchanted player is attacked, you draw a card. Each opponent attacking that player does the same.

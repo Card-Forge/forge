@@ -5,6 +5,7 @@ import java.util.Comparator;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
+import forge.game.CardTraitBase;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CounterEnumType;
@@ -125,6 +126,15 @@ public final class PlayerPredicates {
             @Override
             public boolean apply(final Player p) {
                 return p.canBeAttached(aura);
+            }
+        };
+    }
+
+    public static final Predicate<Player> restriction(final String[] restrictions, final Player sourceController, final Card source, final CardTraitBase spellAbility) {
+        return new Predicate<Player>() {
+            @Override
+            public boolean apply(final Player c) {
+                return c != null && c.isValid(restrictions, sourceController, source, spellAbility);
             }
         };
     }
