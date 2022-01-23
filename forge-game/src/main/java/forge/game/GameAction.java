@@ -1939,7 +1939,6 @@ public class GameAction {
     public void startGame(GameOutcome lastGameOutcome) {
         startGame(lastGameOutcome, null);
     }
-
     public void startGame(GameOutcome lastGameOutcome, Runnable startGameHook) {
         Player first = determineFirstTurnPlayer(lastGameOutcome);
 
