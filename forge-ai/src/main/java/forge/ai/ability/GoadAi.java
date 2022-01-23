@@ -39,6 +39,10 @@ public class GoadAi extends SpellAbilityAi {
                         if (ComputerUtilCard.isUselessCreature(ai, c)) {
                             return false;
                         }
+                        // useless
+                        if (c.isGoadedBy(ai)) {
+                            return false;
+                        }
                         // select creatures which can attack an Opponent other than ai
                         for (Player o : ai.getOpponents()) {
                             if (ComputerUtilCombat.canAttackNextTurn(c, o)) {
@@ -62,6 +66,10 @@ public class GoadAi extends SpellAbilityAi {
                     public boolean apply(Card c) {
                         // filter only creatures which can attack
                         if (ComputerUtilCard.isUselessCreature(ai, c)) {
+                            return false;
+                        }
+                        // useless
+                        if (c.isGoadedBy(ai)) {
                             return false;
                         }
                         // select only creatures AI can block

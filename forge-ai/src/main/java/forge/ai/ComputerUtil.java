@@ -3040,11 +3040,11 @@ public class ComputerUtil {
     public static boolean aiLifeInDanger(Player ai, boolean serious, int payment) {
         // TODO should also consider them as teams
         for (Player opponent: ai.getOpponents()) {
-            // test whether the human can kill the ai next turn
             Combat combat = new Combat(opponent);
             boolean containsAttacker = false;
+            boolean thisCombat = ai.getGame().getPhaseHandler().isPlayerTurn(opponent) && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN);
             for (Card att : opponent.getCreaturesInPlay()) {
-                if (ComputerUtilCombat.canAttackNextTurn(att, ai)) {
+                if ((thisCombat && CombatUtil.canAttack(att, ai)) || (!thisCombat && ComputerUtilCombat.canAttackNextTurn(att, ai))) {
                     combat.addAttacker(att, ai);
                     containsAttacker = true;
                 }
@@ -3052,6 +3052,8 @@ public class ComputerUtil {
             if (!containsAttacker) {
                 continue;
             }
+
+            // TODO if it's next turn ignore mustBlockCards
             AiBlockController block = new AiBlockController(ai, false);
             block.assignBlockersForCombat(combat);
 
