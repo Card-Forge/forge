@@ -476,10 +476,10 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
         // these trigger are one per counter
         for (int i = 0; i < added; i++) {
-            final Trigger trig = TriggerHandler.parseTrigger(delTrig.toString(), sa.getHostCard(), intrinsic);
+            final Trigger trig = TriggerHandler.parseTrigger(delTrig.toString(), host, intrinsic);
             trig.addRemembered(tgt);
 
-            final SpellAbility newSa = AbilityFactory.getAbility(trigSA, sa.getHostCard());
+            final SpellAbility newSa = AbilityFactory.getAbility(trigSA, host);
             newSa.setIntrinsic(intrinsic);
             trig.setOverridingAbility(newSa);
             sa.getActivatingPlayer().getGame().getTriggerHandler().registerDelayedTrigger(trig);

@@ -870,7 +870,7 @@ public final class StaticAbilityContinuous {
                         // but only do it if the trigger doesn't already have a overriding ability
                         addedTrigger.add(actualTrigger);
                         if (params.containsKey("TriggerRememberDefined")) {
-                            String triggerRemembered = (params.get("TriggerRememberDefined"));
+                            String triggerRemembered = params.get("TriggerRememberDefined");
                             for (final String rem : triggerRemembered.split(",")) {
                                 for (final Object o : AbilityUtils.getDefinedEntities(hostCard, rem, stAb)) {
                                     actualTrigger.addRemembered(o);
