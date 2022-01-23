@@ -263,7 +263,7 @@ public class TokenInfo {
     }
 
     static public Card getProtoType(final String script, final SpellAbility sa, final Player owner) {
-        return getProtoType(script, sa, owner, true);
+        return getProtoType(script, sa, owner, !sa.hasParam("LockTokenScript"));
     }
     static public Card getProtoType(final String script, final SpellAbility sa, final Player owner, boolean applyTextChange) {
         // script might be null, or sa might be null
