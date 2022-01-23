@@ -9,6 +9,7 @@ import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
 import forge.assets.TextRenderer;
 import forge.gui.UiCommand;
 import forge.gui.interfaces.IButton;
@@ -110,6 +111,7 @@ public class FLabel extends FDisplayObject implements IButton {
 
     private String text;
     private FImage icon;
+    private FSkinImage overlayIcon;
     private FSkinColor textColor, pressedColor;
     private FEventHandler command;
     private TextRenderer textRenderer;
@@ -171,6 +173,9 @@ public class FLabel extends FDisplayObject implements IButton {
     }
     public void setIcon(final FImage icon0) {
         icon = icon0;
+    }
+    public void setOverlayIcon(final FSkinImage overlayIcon0) {
+        overlayIcon = overlayIcon0;
     }
 
     public boolean getIconScaleAuto() {
@@ -321,81 +326,95 @@ public class FLabel extends FDisplayObject implements IButton {
     }
 
     protected void drawContent(Graphics g, float x, float y, float w, float h) {
-        if (icon != null) {
-            float textY = y;
-            float iconWidth = icon.getWidth();
-            float iconHeight = icon.getHeight();
-            float aspectRatio = iconWidth / iconHeight;
+        try {
+            if (icon != null) {
+                float textY = y;
+                float iconWidth = icon.getWidth();
+                float iconHeight = icon.getHeight();
+                float aspectRatio = iconWidth / iconHeight;
 
-            if (iconScaleWithFont) {
-                iconHeight = font.getLineHeight() * iconScaleFactor;
-                iconWidth = iconHeight * aspectRatio;
-            }
-            else if (iconInBackground || iconScaleAuto) {
-                iconHeight = h * iconScaleFactor;
-                iconWidth = iconHeight * aspectRatio;
-                if (iconWidth > w && iconInBackground) { //ensure background icon stays with label bounds
-                    iconWidth = w;
-                    iconHeight = iconWidth / aspectRatio;
+                if (iconScaleWithFont) {
+                    iconHeight = font.getLineHeight() * iconScaleFactor;
+                    iconWidth = iconHeight * aspectRatio;
                 }
-            }
-
-            float iconOffset = iconWidth + insets.x + getExtraGapBetweenIconAndText();
-
-            if (iconInBackground || text.isEmpty()) {
-                if (alignment == Align.center) {
-                    x += (w - iconWidth) / 2;
-                }
-                y += (h - iconHeight) / 2;
-            }
-            else {
-                if (alignment == Align.center) {
-                    float dx;
-                    while (true) {
-                        dx = (w - iconOffset - getTextWidth()) / 2;
-                        if (dx > 0) {
-                            x += dx;
-                            break;
-                        }
-                        if (!font.canShrink()) {
-                            break;
-                        }
-                        font = font.shrink();
+                else if (iconInBackground || iconScaleAuto) {
+                    iconHeight = h * iconScaleFactor;
+                    iconWidth = iconHeight * aspectRatio;
+                    if (iconWidth > w && iconInBackground) { //ensure background icon stays with label bounds
+                        iconWidth = w;
+                        iconHeight = iconWidth / aspectRatio;
                     }
                 }
-                else if (alignment == Align.right) {
-                    float dx;
-                    while (true) {
-                        dx = (w - iconWidth - getTextWidth() - insets.x);
-                        if (dx > 0) {
-                            x += dx;
-                            break;
-                        }
-                        if (!font.canShrink()) {
-                            break;
-                        }
-                        font = font.shrink();
-                    }
-                }
-                y += (h - iconHeight) / 2;
-            }
-            float mod = isHovered() && selectable ? iconWidth < iconHeight ? iconWidth/8f : iconHeight/8f : 0;
-            g.drawImage(icon, x-mod/2, y-mod/2, iconWidth+mod, iconHeight+mod);
 
-            if (!text.isEmpty()) {
-                x += iconOffset;
-                w -= iconOffset;
-                drawText(g, x, textY, w, h, Align.left);
+                float iconOffset = iconWidth + insets.x + getExtraGapBetweenIconAndText();
+
+                if (iconInBackground || text.isEmpty()) {
+                    if (alignment == Align.center) {
+                        x += (w - iconWidth) / 2;
+                    }
+                    y += (h - iconHeight) / 2;
+                }
+                else {
+                    if (alignment == Align.center) {
+                        float dx;
+                        while (true) {
+                            dx = (w - iconOffset - getTextWidth()) / 2;
+                            if (dx > 0) {
+                                x += dx;
+                                break;
+                            }
+                            if (!font.canShrink()) {
+                                break;
+                            }
+                            font = font.shrink();
+                        }
+                    }
+                    else if (alignment == Align.right) {
+                        float dx;
+                        while (true) {
+                            dx = (w - iconWidth - getTextWidth() - insets.x);
+                            if (dx > 0) {
+                                x += dx;
+                                break;
+                            }
+                            if (!font.canShrink()) {
+                                break;
+                            }
+                            font = font.shrink();
+                        }
+                    }
+                    y += (h - iconHeight) / 2;
+                }
+                float mod = isHovered() && selectable ? iconWidth < iconHeight ? iconWidth/8f : iconHeight/8f : 0;
+                //draw icon
+                g.drawImage(icon, x-mod/2, y-mod/2, iconWidth+mod, iconHeight+mod);
+                //draw overlay
+                if (overlayIcon != null) {
+                    float oldAlpha = g.getfloatAlphaComposite();
+                    float overlayWidth = isHovered() ? iconWidth/2.5f : iconWidth/3.5f;
+                    float overlayHeight = isHovered() ? iconHeight/2.5f : iconHeight/3.5f;
+                    if (!isHovered())
+                        g.setAlphaComposite(0.4f);
+                    g.drawImage(overlayIcon, iconWidth-overlayWidth+mod, iconHeight-overlayHeight+mod, overlayWidth, overlayHeight);
+                    g.setAlphaComposite(oldAlpha);
+                }
+                if (!text.isEmpty()) {
+                    x += iconOffset;
+                    w -= iconOffset;
+                    drawText(g, x, textY, w, h, Align.left);
+                }
             }
-        }
-        else if (!text.isEmpty()) {
-            float oldAlpha = g.getfloatAlphaComposite();
-            if (isHovered() && selectable) {
-                g.setAlphaComposite(0.4f);
-                g.fillRect(Color.GRAY, x, y, w, h);
-                g.setAlphaComposite(oldAlpha);
+            else if (!text.isEmpty()) {
+                float oldAlpha = g.getfloatAlphaComposite();
+                if (isHovered() && selectable) {
+                    g.setAlphaComposite(0.4f);
+                    g.fillRect(Color.GRAY, x, y, w, h);
+                    g.setAlphaComposite(oldAlpha);
+                }
+                drawText(g, x, y, w, h, alignment);
             }
-            drawText(g, x, y, w, h, alignment);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

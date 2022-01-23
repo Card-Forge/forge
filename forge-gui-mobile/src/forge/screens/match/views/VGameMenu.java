@@ -47,26 +47,6 @@ public class VGameMenu extends FDropDownMenu {
                 GameStateDeserializer.loadGameState(MatchUtil.getGame(), ForgeConstants.USER_GAMES_DIR + "GameSave.txt");
             }
         }));*/
-        addItem(new FMenuItem(localizer.getMessage("lblDeckList"), FSkinImage.DECKLIST, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                //pause game when spectating AI Match
-                if (!MatchController.instance.hasLocalPlayers()) {
-                    if(!MatchController.instance.isGamePaused())
-                        MatchController.instance.pauseMatch();
-                }
-
-                final Player player = MatchController.getHostedMatch().getGame().getPhaseHandler().getPlayerTurn();
-                if (player != null) {
-                    final Deck deck = player.getRegisteredPlayer().getDeck();
-                    if (deck != null) {
-                        FDeckViewer.show(deck);
-                        return;
-                    }
-                }
-                FOptionPane.showMessageDialog(localizer.getMessage("lblNoPlayerPriorityNoDeckListViewed"));
-            }
-        }));
         addItem(new FMenuItem(localizer.getMessage("lblAutoYields"), Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
