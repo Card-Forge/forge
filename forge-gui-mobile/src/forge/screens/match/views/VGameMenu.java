@@ -2,16 +2,12 @@ package forge.screens.match.views;
 
 import forge.Forge;
 import forge.assets.FSkinImage;
-import forge.deck.Deck;
-import forge.deck.FDeckViewer;
-import forge.game.player.Player;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.screens.match.MatchController;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
 import forge.util.ThreadUtil;
 
