@@ -116,8 +116,7 @@ public enum PhaseType {
                 String sTo = s.substring(idxArrow + 2);
                 PhaseType to = StringUtils.isBlank(sTo) ? PhaseType.CLEANUP : PhaseType.smartValueOf(sTo);
                 result.addAll(EnumSet.range(from, to));
-            }
-            else {
+            } else {
                 result.add(PhaseType.smartValueOf(s));
             }
         }

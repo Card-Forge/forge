@@ -4,9 +4,8 @@ Types:Creature Human Rogue
 PT:2/1
 K:Unblockable
 K:CARDNAME can't block.
-S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Graveyard | MayPlay$ True | IsPresent$ Permanent.Black+YouCtrl,Permanent.Green+YouCtrl | Description$ You may cast CARDNAME from you graveyard as long as you control a black or green permanent.
+S:Mode$ Continuous | Affected$ Card.Self | AffectedZone$ Graveyard | EffectZone$ Graveyard | MayPlay$ True | IsPresent$ Permanent.Black+YouCtrl,Permanent.Green+YouCtrl | Description$ You may cast CARDNAME from you graveyard as long as you control a black or green permanent.
 SVar:SacMe:3
 SVar:DiscardMe:3
 DeckHints:Color$Black|Green
-SVar:Picture:http://www.wizards.com/global/images/magic/general/marang_river_prowler.jpg
 Oracle:Marang River Prowler can't block and can't be blocked.\nYou may cast Marang River Prowler from your graveyard as long as you control a black or green permanent.
