@@ -906,7 +906,7 @@ public final class StaticAbilityContinuous {
             }
 
             // add Types
-            if ((addTypes != null) || (removeTypes != null) || addAllCreatureTypes
+            if (addTypes != null || removeTypes != null || addAllCreatureTypes
                     || removeSuperTypes || removeCardTypes || removeLandTypes || removeCreatureTypes || removeArtifactTypes || removeEnchantmentTypes) {
                 affectedCard.addChangedCardTypes(addTypes, removeTypes, addAllCreatureTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
                         removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes,
@@ -919,7 +919,7 @@ public final class StaticAbilityContinuous {
             }
 
             if (layer == StaticAbilityLayer.RULES) {
-                if (params.containsKey("Goad")) {
+                if (params.containsKey("Goad") && !affectedCard.isGoadedBy(hostCard.getController())) {
                     affectedCard.addGoad(se.getTimestamp(), hostCard.getController());
                 }
                 if (params.containsKey("CanBlockAny")) {
