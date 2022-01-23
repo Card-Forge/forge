@@ -1477,7 +1477,7 @@ public class CardFactoryUtil {
                     "TgtPrompt$ Select target artifact creature | CounterType$ P1P1 | CounterNum$ ModularX | Modular$ True";
 
             String trigStr = "Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard" +
-                    " | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController" +
+                    " | OptionalDecider$ TriggeredCardController" +
                     " | Secondary$ True | TriggerDescription$ When CARDNAME dies, " +
                     "you may put a +1/+1 counter on target artifact creature for each +1/+1 counter on CARDNAME";
 
@@ -1784,8 +1784,7 @@ public class CardFactoryUtil {
 
             final String actualTrigger = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard"
                     + "| Secondary$ True | OptionalDecider$ You | ValidCard$ Card.Self"
-                    + "| TriggerController$ TriggeredCardController | TriggerDescription$ " + k[0] + " " + k[1]
-                    + " (" + inst.getReminderText() + ")";
+                    + "| TriggerDescription$ " + k[0] + " " + k[1] + " (" + inst.getReminderText() + ")";
             final String effect = "DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand"
                     + "| ValidTgts$ Spirit.YouOwn+cmcLE" + k[1];
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, intrinsic);

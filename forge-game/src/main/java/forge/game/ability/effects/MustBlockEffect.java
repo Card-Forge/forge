@@ -65,7 +65,6 @@ public class MustBlockEffect extends SpellAbilityEffect {
                 } else {
                     final Card attacker = cards.get(0);
                     c.addMustBlockCard(attacker);
-                    System.out.println(c + " is adding " + attacker + " to mustBlockCards: " + c.getMustBlockCards());
                 }
             }
         }

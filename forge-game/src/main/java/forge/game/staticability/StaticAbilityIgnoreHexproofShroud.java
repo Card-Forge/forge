@@ -17,13 +17,13 @@ public class StaticAbilityIgnoreHexproofShroud {
         final Game game = entity.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (stAb.isSuppressed() || !stAb.checkConditions()) {
-                    continue;
-                }
                 if (keyword.equals(Keyword.HEXPROOF) && !stAb.getParam("Mode").equals(HEXPROOF_MODE)) {
                     continue;
                 }
                 if (keyword.equals(Keyword.SHROUD) && !stAb.getParam("Mode").equals(SHROUD_MODE)) {
+                    continue;
+                }
+                if (stAb.isSuppressed() || !stAb.checkConditions()) {
                     continue;
                 }
                 if (commonAbility(stAb, entity, spellAbility)) {
