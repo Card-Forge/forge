@@ -72,7 +72,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
             if (sa.hasParam("AtRandom")) {
                 random = true;
                 Aggregates.random(abilities, amount, chosenSAs);
-            } else {
+            } else if (!abilities.isEmpty()) {
                 chosenSAs = p.getController().chooseSpellAbilitiesForEffect(abilities, sa, prompt, amount, ImmutableMap.of());
             }
 
