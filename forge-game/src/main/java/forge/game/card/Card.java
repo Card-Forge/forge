@@ -6593,8 +6593,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return goad.containsValue(p);
     }
 
-    public final Collection<Player> getGoaded() {
-        return goad.values();
+    public final PlayerCollection getGoaded() {
+        return new PlayerCollection(goad.values()); // 701.38d
     }
 
     /**

@@ -22,16 +22,12 @@ public class GoadEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            // 701.38d
-            if (tgtC.isGoadedBy(player)) {
-                continue;
-            }
-
             // if pump is a target, make sure we can still target now
             if (sa.usesTargeting() && !sa.getTargetRestrictions().canTgtPlayer() && !tgtC.canBeTargetedBy(sa)) {
                 continue;
             }
 
+            // 701.38d is handled by getGoaded
             tgtC.addGoad(timestamp, player);
 
             final GameCommand untilEOT = new GameCommand() {

@@ -919,7 +919,7 @@ public final class StaticAbilityContinuous {
             }
 
             if (layer == StaticAbilityLayer.RULES) {
-                if (params.containsKey("Goad") && !affectedCard.isGoadedBy(hostCard.getController())) {
+                if (params.containsKey("Goad")) {
                     affectedCard.addGoad(se.getTimestamp(), hostCard.getController());
                 }
                 if (params.containsKey("CanBlockAny")) {
