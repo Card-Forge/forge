@@ -433,6 +433,9 @@ Prerelease=6 Boosters, 1 RareMythic+
 411 L Mountain @Daria Khlebnikova
 412 L Forest @Pig Hands
 
+[rebalanced]
+A63 R A-Hullbreaker Horror @Svetlin Velinov
+
 [tokens]
 b_1_1_slug
 b_2_2_zombie

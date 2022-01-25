@@ -1,0 +1,11 @@
+Name:A-Teferi, Time Raveler
+ManaCost:2 W U
+Types:Legendary Planeswalker Teferi
+Loyalty:5
+S:Mode$ CantBeCast | ValidCard$ Card | Condition$ PlayerTurn | Caster$ Opponent | Description$ Your opponents can't cast spells during your turn.
+A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | StaticAbilities$ STPlay | Duration$ UntilYourNextTurn | AILogic$ Main2 | SpellDescription$ Until your next turn, you may cast sorcery spells as though they had flash.
+SVar:STPlay:Mode$ CastWithFlash | ValidCard$ Sorcery | ValidSA$ Spell | EffectZone$ Command | Caster$ You | Description$ Until your next turn, you may cast sorcery spells as though they had flash.
+SVar:PlayMain1:TRUE
+A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Origin$ Battlefield | Destination$ Hand | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Artifact,Creature,Enchantment | TgtPrompt$ Select target artifact, creature, or enchantment | SpellDescription$ Return up to one target artifact, creature, or enchantment to its owner's hand. Draw a card. | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+Oracle:Your opponents can't cast spells during your turn.\n[+1]: Until your next turn, you may cast sorcery spells as though they had flash.\n[−3]: Return up to one target artifact, creature, or enchantment to its owner's hand. Draw a card.

@@ -413,6 +413,9 @@ Prerelease=6 Boosters, 1 RareMythic+
 390 U Play with Fire @Svetlin Velinov
 391 U Join the Dance @Raoul Vitale
 
+[rebalanced]
+A59 M A-Lier, Disciple of the Drowned @Ekaterina Burmak
+
 [tokens]
 b_1_1_bat_flying
 b_2_2_zombie_decayed
