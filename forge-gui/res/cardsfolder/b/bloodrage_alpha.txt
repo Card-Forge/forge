@@ -1,7 +1,7 @@
 Name:Bloodrage Alpha
 ManaCost:3 R
 Types:Creature Wolf
-PT:4/3
+PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBTarget,DBDelayTrig
 SVar:DBTarget:DB$ Pump | ValidTgts$ Wolf.Other+YouCtrl,Werewolf.Other+YouCtrl | AILogic$ Fight | TgtPrompt$ Select another target Wolf or Werewolf you control | SubAbility$ DBFight | StackDescription$ {c:ThisTargetedCard} | SpellDescription$ Another target Wolf or Werewolf you control fights target creature you don't control.
