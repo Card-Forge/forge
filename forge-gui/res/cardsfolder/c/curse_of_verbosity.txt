@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Enchantment Aura Curse
 K:Enchant player
 A:SP$ Attach | ValidTgts$ Player | AILogic$ Curse
-T:Mode$ AttackersDeclared | ValidCard$ Creature | AttackedTarget$ Player.EnchantedBy | Execute$ TrigRepeat | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted player is attacked, draw a card. Each opponent attacking that player does the same.
-SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You
+T:Mode$ AttackersDeclared | ValidCard$ Creature | AttackedTarget$ Player.EnchantedBy | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted player is attacked, draw a card. Each opponent attacking that player does the same.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredAttackingPlayer.Opponent
 Oracle:Enchant player\nWhenever enchanted player is attacked, you draw a card. Each opponent attacking that player does the same.
