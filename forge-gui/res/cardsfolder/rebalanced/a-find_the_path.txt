@@ -1,4 +1,4 @@
-Name:Find the Path
+Name:A-Find the Path
 ManaCost:2 G
 Types:Enchantment Aura
 K:Enchant land

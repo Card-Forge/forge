@@ -1,4 +1,4 @@
-Name:Hullbreaker Horror
+Name:A-Hullbreaker Horror
 ManaCost:5 U U
 Types:Creature Kraken Horror
 PT:7/8

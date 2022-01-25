@@ -1,4 +1,4 @@
-Name:Ellywick Tumblestrum
+Name:A-Ellywick Tumblestrum
 ManaCost:2 G G
 Types:Legendary Planeswalker Ellywick
 Loyalty:4

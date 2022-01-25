@@ -1,4 +1,4 @@
-Name:Cloister Gargoyle
+Name:A-Cloister Gargoyle
 ManaCost:1 W
 Types:Artifact Creature Gargoyle
 PT:0/3

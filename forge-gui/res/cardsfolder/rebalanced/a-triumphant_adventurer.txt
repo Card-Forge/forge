@@ -1,4 +1,4 @@
-Name:Triumphant Adventurer
+Name:A-Triumphant Adventurer
 ManaCost:W B
 Types:Creature Human Knight
 PT:2/1
