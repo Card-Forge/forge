@@ -2569,3 +2569,9 @@
 2022-01-10 Standard League (13 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-01-10-standard-league.zip
 2022-01-13 Standard League (7 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-01-13-standard-league.zip
 2022-01-16 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-01-16-standard-challenge.zip
+2022-01-17 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-01-17-standard-challenge.zip
+2022-01-17 Standard League (7 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-01-17-standard-league.zip
+2022-01-20 Standard League (10 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-01-20-standard-league.zip
+2022-01-23 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-01-23-standard-challenge.zip
+2022-01-24 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-01-24-standard-challenge.zip
+2022-01-24 Standard League (11 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-01-24-standard-league.zip
