@@ -3474,6 +3474,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         runUnattachCommands();
     }
 
+    public final boolean isModified() {
+        if (this.isEquipped() || this.hasCounters()) {
+            return true;
+        }
+        return Iterables.any(this.getEnchantedBy(), CardPredicates.isController(this.getController()));
+    }
+
     public final void setType(final CardType type0) {
         currentState.setType(type0);
     }

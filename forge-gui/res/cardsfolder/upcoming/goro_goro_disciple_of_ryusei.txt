@@ -1,0 +1,9 @@
+Name:Goro-Goro, Disciple of Ryusei
+ManaCost:1 R
+Types:Legendary Creature Samurai Goblin
+PT:2/2
+A:AB$ PumpAll | Cost$ R | ValidCards$ Creature.YouCtrl | KW$ Haste | SpellDescription$ Creatures you control gain haste until end of turn.
+A:AB$ Token | Cost$ 3 R R | TokenScript$ r_5_5_dragon_spirit_flying | IsPresent$ Creature.YouCtrl+attacking+modified | StackDescription$ Create a 5/5 red Dragon Spirit creature token with flying. | SpellDescription$ Create a 5/5 red Dragon Spirit creature token with flying. Activate only if you control an attacking modified creature.
+DeckHas:Ability$Token & Type$Dragon|Spirit
+DeckHints:Type$Equipment|Aura & Ability$Counters
+Oracle:{R}: Creatures you control gain haste until end of turn.\n{3}{R}{R}: Create a 5/5 red Dragon Spirit creature token with flying. Activate only if you control an attacking modified creature.
