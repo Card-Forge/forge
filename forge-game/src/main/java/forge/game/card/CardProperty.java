@@ -1328,6 +1328,10 @@ public class CardProperty {
             if (card.isEquipping()) {
                 return false;
             }
+        } else if (property.startsWith("modified")) {
+            if (!card.isModified()) {
+                return false;
+            }
         } else if (property.startsWith("token")) {
             if (!card.isToken() && !card.isTokenCard()) {
                 return false;

@@ -429,7 +429,7 @@ public final class CardScriptParser {
             "leastPower", "leastToughness", "greatestCMC",
             "greatestRememberedCMC", "lowestRememberedCMC", "lowestCMC",
             "enchanted", "unenchanted", "enchanting", "equipped", "unequipped",
-            "equipping", "token", "nonToken", "hasXCost", "suspended",
+            "equipping", "modified", "token", "nonToken", "hasXCost", "suspended",
             "delved", "attacking", "attackingYou", "notattacking",
             "attackedBySourceThisCombat", "blocking", "blockingSource",
             "blockingCreatureYouCtrl", "blockingRemembered",
