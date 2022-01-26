@@ -7,7 +7,7 @@ K:ETBReplacement:Other:DBRemoveCounterAll
 SVar:DBRemoveCounterAll:DB$ RemoveCounterAll | ValidCards$ Permanent | AllCounterTypes$ True | StackDescription$ SpellDescription | SubAbility$ DBPutCounters | RememberAmount$ True | SpellDescription$ As CARDNAME enters the battlefield, remove all counters from all permanents. CARDNAME enters the battlefield with a +1/+1 counter on it for each counter removed this way.
 SVar:DBPutCounters:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$ChosenNumber
+SVar:X:Count$RememberedNumber
 AI:RemoveDeck:Random
 DeckHas:Ability$Counters
 Oracle:Flying\nAs Thief of Blood enters the battlefield, remove all counters from all permanents. Thief of Blood enters the battlefield with a +1/+1 counter on it for each counter removed this way.

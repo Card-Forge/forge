@@ -408,6 +408,9 @@ ScryfallCode=STX
 381 U Rip Apart @Anna Podedworna
 382 U Decisive Denial @Lorenzo Mastroianni
 
+[rebalanced]
+A41 U A-Divide by Zero @Liiga Smilshkalne
+
 [lesson]
 2 Environmental Sciences
 2 Expanded Anatomy

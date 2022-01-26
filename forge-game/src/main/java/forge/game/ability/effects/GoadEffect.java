@@ -27,6 +27,7 @@ public class GoadEffect extends SpellAbilityEffect {
                 continue;
             }
 
+            // 701.38d is handled by getGoaded
             tgtC.addGoad(timestamp, player);
 
             final GameCommand untilEOT = new GameCommand() {

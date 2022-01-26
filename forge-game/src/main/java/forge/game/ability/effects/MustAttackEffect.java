@@ -67,9 +67,10 @@ public class MustAttackEffect extends SpellAbilityEffect {
             }
         }
 
+        // TODO these should not override but add another requirement
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                if (thisTurn) {
+                if (thisTurn || !p.getGame().getPhaseHandler().isPlayerTurn(p)) {
                     p.setMustAttackEntityThisTurn(entity);
                 } else {
                     p.setMustAttackEntity(entity);

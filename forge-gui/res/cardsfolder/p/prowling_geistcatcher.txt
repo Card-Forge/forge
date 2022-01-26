@@ -6,7 +6,7 @@ T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Creature.Other | TriggerZones
 SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Exile | SubAbility$ TokenPlus
 SVar:TokenPlus:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionDefined$ TriggeredCardLKICopy | ConditionPresent$ Creature.token
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return each card exiled with it to the battlefield under your control.
-SVar:TrigReturn:DB$ ChangeZoneAll | ChangeTypes$ Card.ExiledWithSource | Origin$ Exile | Destination$ Battlefield | GainControl$ True
+SVar:TrigReturn:DB$ ChangeZoneAll | ChangeType$ Card.ExiledWithSource | Origin$ Exile | Destination$ Battlefield | GainControl$ True
 DeckNeeds:Ability$Sacrifice
 DeckHas:Ability$Counters
 DeckHints:Ability$Token

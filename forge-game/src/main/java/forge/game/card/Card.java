@@ -3474,6 +3474,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         runUnattachCommands();
     }
 
+    public final boolean isModified() {
+        if (this.isEquipped() || this.hasCounters()) {
+            return true;
+        }
+        return Iterables.any(this.getEnchantedBy(), CardPredicates.isController(this.getController()));
+    }
+
     public final void setType(final CardType type0) {
         currentState.setType(type0);
     }
@@ -5419,6 +5426,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 damageType = DamageType.Deathtouch;
             }
 
+            // 704.8: if it looks like the creature might die from SBA make sure the LKI is refreshed
+            if (hasBeenDealtDeathtouchDamage() || (getDamage() > 0 && getLethal() <= getDamage())) {
+                game.updateLastStateForCard(this);
+            }
+
             // Play the Damage sound
             game.fireEvent(new GameEventCardDamaged(this, source, damageIn, damageType));
         }
@@ -6588,8 +6600,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return goad.containsValue(p);
     }
 
-    public final Collection<Player> getGoaded() {
-        return goad.values();
+    public final PlayerCollection getGoaded() {
+        return new PlayerCollection(goad.values()); // 701.38d
     }
 
     /**

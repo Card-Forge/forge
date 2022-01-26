@@ -4,9 +4,8 @@ ManaCost:3 B G
 Types:Legendary Creature Human Warrior
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters the battlefield, create two Walker tokens.
-SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ walker | TokenOwner$ You
-S:Mode$ Continuous | Affected$ Card.Self | CheckSVar$ Equipped | SVarCompare$ EQ1 | AddHiddenKeyword$ CARDNAME must be blocked if able. | Description$ As long as NICKNAME is equipped, she must be blocked if able.
-SVar:Equipped:Count$Valid Card.Self+equipped
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ walker | TokenOwner$ You | LockTokenScript$ True
+S:Mode$ Continuous | Affected$ Card.Self+equipped | AddHiddenKeyword$ CARDNAME must be blocked if able. | Description$ As long as NICKNAME is equipped, she must be blocked if able.
 SVar:EquipMe:Once
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | CheckSVar$ Zombies | NoResolvingCheck$ True | SVarCompare$ GE2 | Execute$ TrigPump | TriggerDescription$ Whenever NICKNAME and at least two Zombies attack, she gains indestructible until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Indestructible

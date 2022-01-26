@@ -852,9 +852,6 @@ public class CardFactoryUtil {
             String pumpStr = "DB$ Pump | Defined$ Self | NumAtt$ " + n + " | NumDef$ " + n;
 
             SpellAbility pump = AbilityFactory.getAbility(pumpStr, card);
-            if ("X".equals(n)) {
-                pump.setSVar("X", "Count$Valid Creature.attacking");
-            }
 
             final Trigger bushidoTrigger1 = TriggerHandler.parseTrigger(trigBlock, card, intrinsic);
             final Trigger bushidoTrigger2 = TriggerHandler.parseTrigger(trigBlocked, card, intrinsic);
@@ -1480,7 +1477,7 @@ public class CardFactoryUtil {
                     "TgtPrompt$ Select target artifact creature | CounterType$ P1P1 | CounterNum$ ModularX | Modular$ True";
 
             String trigStr = "Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard" +
-                    " | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController" +
+                    " | OptionalDecider$ TriggeredCardController" +
                     " | Secondary$ True | TriggerDescription$ When CARDNAME dies, " +
                     "you may put a +1/+1 counter on target artifact creature for each +1/+1 counter on CARDNAME";
 
@@ -1787,16 +1784,11 @@ public class CardFactoryUtil {
 
             final String actualTrigger = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard"
                     + "| Secondary$ True | OptionalDecider$ You | ValidCard$ Card.Self"
-                    + "| TriggerController$ TriggeredCardController | TriggerDescription$ " + k[0] + " " + k[1]
-                    + " (" + inst.getReminderText() + ")";
+                    + "| TriggerDescription$ " + k[0] + " " + k[1] + " (" + inst.getReminderText() + ")";
             final String effect = "DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand"
                     + "| ValidTgts$ Spirit.YouOwn+cmcLE" + k[1];
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, intrinsic);
             final SpellAbility sp = AbilityFactory.getAbility(effect, card);
-            // Soulshift X
-            if (k[1].equals("X")) {
-                sp.setSVar("X", "Count$LastStateBattlefield " + k[3]);
-            }
 
             parsedTrigger.setOverridingAbility(sp);
 
@@ -2004,8 +1996,8 @@ public class CardFactoryUtil {
                     + " | TriggerDescription$ If you cast it any time a sorcery couldn't have been cast, "
                     + " the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.";
 
-            final String strDelay = "DB$ DelayedTrigger | Mode$ Phase | Phase$ Cleanup | TriggerDescription$ At the beginning of the next cleanup step, sacrifice CARDNAME.";
-            final String strSac = "DB$ SacrificeAll | Defined$ Self";
+            final String strDelay = "DB$ DelayedTrigger | Mode$ Phase | Phase$ Cleanup | RememberObjects$ Self | TriggerDescription$ At the beginning of the next cleanup step, sacrifice CARDNAME.";
+            final String strSac = "DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI";
 
             SpellAbility saDelay = AbilityFactory.getAbility(strDelay, card);
             saDelay.setAdditionalAbility("Execute", (AbilitySub) AbilityFactory.getAbility(strSac, card));

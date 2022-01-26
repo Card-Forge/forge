@@ -3,8 +3,8 @@ ManaCost:2 R R
 Types:Creature Dragon
 PT:4/4
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ When CARDNAME enters the battlefield, target land you don't control loses all abilities except mana abilities and gains "At the beginning of your upkeep, this permanent deals 2 damage to you unless you sacrifice it."
-SVar:TrigAnimate:DB$ Animate | ValidTgts$ Land.YouDontCtrl | TgtPrompt$ Select target land you don't control | RemoveNonManaAbilities$ True | Triggers$ UpkeepShock | Duration$ Permanent
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ When CARDNAME enters the battlefield, target nonbasic land you don't control loses all abilities except mana abilities and gains "At the beginning of your upkeep, this permanent deals 2 damage to you unless you sacrifice it."
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Land.nonBasic+YouDontCtrl | TgtPrompt$ Select target nonbasic land you don't control | RemoveNonManaAbilities$ True | Triggers$ UpkeepShock | Duration$ Permanent
 SVar:UpkeepShock:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your upkeep, this permanent deals 2 damage to you unless you sacrifice it.
 SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ 2 | UnlessCost$ Sac<1/CARDNAME> | UnlessPayer$ TriggeredPlayer
-Oracle:Flying\nWhen Town-razer Tyrant enters the battlefield, target land you don't control loses all abilities except mana abilities and gains "At the beginning of your upkeep, this permanent deals 2 damage to you unless you sacrifice it."
+Oracle:Flying\nWhen Town-razer Tyrant enters the battlefield, target nonbasic land you don't control loses all abilities except mana abilities and gains "At the beginning of your upkeep, this permanent deals 2 damage to you unless you sacrifice it."

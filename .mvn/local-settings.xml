@@ -1,0 +1,15 @@
+<!--
+    Derived from: https://stackoverflow.com/a/67002852
+-->
+<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 http://maven.apache.org/xsd/settings-1.2.0.xsd">
+    <mirrors>
+        <mirror>
+            <id>4thline-repo-http-unblocker</id>
+            <mirrorOf>4thline-repo</mirrorOf>
+            <name></name>
+            <url>http://4thline.org/m2</url>
+        </mirror>
+    </mirrors>
+</settings>

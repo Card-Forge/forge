@@ -426,9 +426,17 @@ FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 402 U Prosperous Innkeeper @Eric Deschamps
 
 [rebalanced]
+A7 U A-Cloister Gargoyle @Mark Zug
 A53 M A-Demilich @Daniel Zrom
 A81 U A-Wizard Class @Marta Nael
+A87 M A-Acererak the Archlich @Andrey Kuzinskiy
+A102 C A-Fates' Reversal @Alix Branwyn
+A115 C A-Precipitous Drop @Gabor Szikszai
 A180 U A-Druid Class @Svetlin Velinov
+A181 M A-Ellywick Tumblestrum @Anna Steinbauer
+A183 C A-Find the Path @Lindsey Look
+A237 R A-Triumphant Adventurer @Alexander Mokhov
+A255 R A-Dungeon Descent @Kasia 'Kafis' Zielińska
 
 [dungeons]
 S Dungeon of the Mad Mage

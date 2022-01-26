@@ -992,12 +992,17 @@ public class AbilityUtils {
      */
     public static PlayerCollection getDefinedPlayers(final Card card, final String def, final CardTraitBase sa) {
         final PlayerCollection players = new PlayerCollection();
-        final String defined = (def == null) ? "You" : applyAbilityTextChangeEffects(def, sa);
+        String changedDef = (def == null) ? "You" : applyAbilityTextChangeEffects(def, sa); // default to Self
+        final String[] incR = changedDef.split("\\.", 2);
+        String defined = incR[0];
+
         final Game game = card == null ? null : card.getGame();
 
         final Player player = sa instanceof SpellAbility ? ((SpellAbility)sa).getActivatingPlayer() : card.getController();
 
-        if (defined.equals("TargetedOrController")) {
+        if (defined.equals("Self")) {
+            // do nothing, Self is for Cards, not Players
+        } else if (defined.equals("TargetedOrController")) {
             players.addAll(getDefinedPlayers(card, "Targeted", sa));
             players.addAll(getDefinedPlayers(card, "TargetedController", sa));
         }
@@ -1056,22 +1061,21 @@ public class AbilityUtils {
         else if (defined.startsWith("Remembered")) {
             addPlayer(card.getRemembered(), defined, players);
         }
+        else if (defined.startsWith("Imprinted")) {
+            addPlayer(Lists.newArrayList(card.getImprintedCards()), defined, players);
+        }
+        else if (defined.startsWith("EffectSource")) {
+            Card root = findEffectRoot(card);
+            if (root != null) {
+                addPlayer(Lists.newArrayList(root), defined, players);
+            }
+        }
         else if (defined.startsWith("DelayTriggerRemembered") && sa instanceof SpellAbility) {
             SpellAbility root = ((SpellAbility)sa).getRootAbility();
             if (root != null) {
                 addPlayer(root.getTriggerRemembered(), defined, players);
             } else {
                 System.err.println("Warning: couldn't find trigger SA in the chain of SpellAbility " + sa);
-            }
-        }
-        else if (defined.equals("ImprintedController")) {
-            for (final Card rem : card.getImprintedCards()) {
-                players.add(rem.getController());
-            }
-        }
-        else if (defined.equals("ImprintedOwner")) {
-            for (final Card rem : card.getImprintedCards()) {
-                players.add(rem.getOwner());
             }
         }
         else if (defined.startsWith("Triggered") && sa instanceof SpellAbility) {
@@ -1124,7 +1128,7 @@ public class AbilityUtils {
                 }
             }
             else {
-                final String triggeringType = defParsed.substring(9);
+                String triggeringType = defParsed.substring(9);
                 o = root.getTriggeringObject(AbilityKey.fromString(triggeringType));
             }
             if (o != null) {
@@ -1176,29 +1180,26 @@ public class AbilityUtils {
             players.addAll(game.getPlayersInTurnOrder());
             players.removeAll((FCollectionView<Player>)getDefinedPlayers(card, defined.substring(3), sa));
         }
-        else if (defined.equals("EnchantedController")) {
-            if (card.getEnchantingCard() == null) {
-                return players;
-            }
-            players.add(card.getEnchantingCard().getController());
-        }
-        else if (defined.equals("EnchantedOwner")) {
-            if (card.getEnchantingCard() == null) {
-                return players;
-            }
-            players.add(card.getEnchantingCard().getOwner());
-        }
         else if (defined.equals("EnchantedPlayer")) {
             final Object o = sa.getHostCard().getEntityAttachedTo();
             if (o instanceof Player) {
                 players.add((Player) o);
             }
         }
-        else if (defined.equals("AttackingPlayer")) {
-            if (!game.getPhaseHandler().inCombat()) {
-                return players;
+        else if (defined.startsWith("Enchanted")) {
+            if (card.getEntityAttachedTo() != null) {
+                addPlayer(Lists.newArrayList(card.getEntityAttachedTo()), defined, players);
             }
-            players.add(game.getCombat().getAttackingPlayer());
+        }
+        else if (defined.startsWith("Equipped")) {
+            if (card.getEquipping() != null) {
+                addPlayer(Lists.newArrayList(card.getEquipping()), defined, players);
+            }
+        }
+        else if (defined.equals("AttackingPlayer")) {
+            if (game.getPhaseHandler().inCombat()) {
+                players.add(game.getCombat().getAttackingPlayer());
+            }
         }
         else if (defined.equals("DefendingPlayer")) {
             players.add(game.getCombat().getDefendingPlayerRelatedTo(card));
@@ -1250,8 +1251,10 @@ public class AbilityUtils {
                 }
             }
         }
-        else if (defined.equals("Caster") && sa.getHostCard().wasCast()) {
-            players.add((sa.getHostCard().getCastSA().getActivatingPlayer()));
+        else if (defined.equals("Caster")) {
+            if (sa.getHostCard().wasCast()) {
+                players.add((sa.getHostCard().getCastSA().getActivatingPlayer()));
+            }
         }
         else if (defined.equals("ActivePlayer")) {
             players.add(game.getPhaseHandler().getPlayerTurn());
@@ -1267,11 +1270,17 @@ public class AbilityUtils {
             players.add(game.getNextPlayerAfter(player, dir));
         }
         else {
-            for (Player p : game.getPlayersInTurnOrder()) {
-                if (p.isValid(defined, player, card, sa)) {
-                    players.add(p);
-                }
+            // will be filtered below
+            players.addAll(game.getPlayersInTurnOrder());
+        }
+
+        if (incR.length > 1 && !players.isEmpty()) {
+            String[] valids = incR[1].split(",");
+            // need to add valids onto all of them
+            for (int i = 0; i < valids.length; i++) {
+                valids[i] = "Player." + valids[i];
             }
+            return players.filter(PlayerPredicates.restriction(valids, player, card, sa));
         }
         return players;
     }

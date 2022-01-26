@@ -35,10 +35,6 @@ public class AttackRequirement {
 
         this.causesToAttack = causesToAttack;
 
-        final GameEntity mustAttack = attacker.getController().getMustAttackEntity();
-        if (mustAttack != null) {
-            defenderSpecific.add(mustAttack);
-        }
         final GameEntity mustAttackThisTurn = attacker.getController().getMustAttackEntityThisTurn();
         if (mustAttackThisTurn != null) {
             defenderSpecific.add(mustAttackThisTurn);
@@ -47,6 +43,7 @@ public class AttackRequirement {
         int nAttackAnything = 0;
 
         if (attacker.isGoaded()) {
+            // Goad has two requirements but the other is handled by CombatUtil currently
             nAttackAnything += attacker.getGoaded().size();
         }
 
@@ -70,11 +67,7 @@ public class AttackRequirement {
                 nAttackAnything++;
             }
         }
-        
-        final GameEntity mustAttack3 = attacker.getMustAttackEntity();
-        if (mustAttack3 != null) {
-            defenderSpecific.add(mustAttack3);
-        }
+
         final GameEntity mustAttackThisTurn3 = attacker.getMustAttackEntityThisTurn();
         if (mustAttackThisTurn3 != null) {
             defenderSpecific.add(mustAttackThisTurn3);

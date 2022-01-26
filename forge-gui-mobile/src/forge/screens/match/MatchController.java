@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import forge.ai.GameState;
+import forge.deck.Deck;
+import forge.game.player.Player;
 import forge.item.IPaperCard;
 import org.apache.commons.lang3.StringUtils;
 
@@ -94,14 +96,26 @@ public class MatchController extends AbstractGuiGame {
         }
     }
 
+    public static Deck getPlayerDeck(final PlayerView playerView) {
+        try {
+            for (Player p : instance.getGameView().getGame().getPlayers()) {
+                if (p.getView() == playerView) {
+                    return p.getRegisteredPlayer().getDeck();
+                }
+            }
+        } catch (Exception e) {
+            return null;
+        }
+        return null;
+    }
+
     public static FImage getPlayerAvatar(final PlayerView p) {
         final String lp = p.getLobbyPlayerName();
         FImage avatar = avatarImages.get(lp);
         if (avatar == null) {
             if (StringUtils.isEmpty(p.getAvatarCardImageKey())) {
                 avatar = new FTextureRegionImage(FSkin.getAvatars().get(p.getAvatarIndex()));
-            }
-            else { //handle lobby players with art from cards
+            } else { //handle lobby players with art from cards
                 avatar = new CardAvatarImage(p.getAvatarCardImageKey());
             }
         }

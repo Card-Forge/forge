@@ -43,7 +43,7 @@ public class DamagePreventAi extends SpellAbilityAi {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
             // As far as I can tell these Defined Cards will only have one of them
-            final List<GameObject> objects = AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam("Defined"), sa);
+            final List<GameObject> objects = AbilityUtils.getDefinedObjects(hostCard, sa.getParam("Defined"), sa);
 
             // react to threats on the stack
             if (!game.getStack().isEmpty()) {
@@ -138,7 +138,7 @@ public class DamagePreventAi extends SpellAbilityAi {
             }
         }
         if (sa.usesTargeting() && sa.isDividedAsYouChoose() && !sa.getTargets().isEmpty()) {
-            sa.addDividedAllocation(sa.getTargets().get(0), AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa));
+            sa.addDividedAllocation(sa.getTargets().get(0), AbilityUtils.calculateAmount(hostCard, sa.getParam("Amount"), sa));
         }
 
         return chance;

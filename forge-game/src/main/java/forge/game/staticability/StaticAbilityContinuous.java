@@ -306,6 +306,9 @@ public final class StaticAbilityContinuous {
                             input = input.replaceAll("chosenEvenOdd", hostCard.getChosenEvenOdd().toString().toLowerCase());
                         }
                         input = input.replace("HostCardUID", hostCardUID);
+                        if (params.containsKey("CalcKeywordN")) {
+                            input = input.replace("N", String.valueOf(AbilityUtils.calculateAmount(hostCard, params.get("CalcKeywordN"), stAb)));
+                        }
                         return input;
                     }
 
@@ -867,7 +870,7 @@ public final class StaticAbilityContinuous {
                         // but only do it if the trigger doesn't already have a overriding ability
                         addedTrigger.add(actualTrigger);
                         if (params.containsKey("TriggerRememberDefined")) {
-                            String triggerRemembered = (params.get("TriggerRememberDefined"));
+                            String triggerRemembered = params.get("TriggerRememberDefined");
                             for (final String rem : triggerRemembered.split(",")) {
                                 for (final Object o : AbilityUtils.getDefinedEntities(hostCard, rem, stAb)) {
                                     actualTrigger.addRemembered(o);
@@ -903,7 +906,7 @@ public final class StaticAbilityContinuous {
             }
 
             // add Types
-            if ((addTypes != null) || (removeTypes != null) || addAllCreatureTypes
+            if (addTypes != null || removeTypes != null || addAllCreatureTypes
                     || removeSuperTypes || removeCardTypes || removeLandTypes || removeCreatureTypes || removeArtifactTypes || removeEnchantmentTypes) {
                 affectedCard.addChangedCardTypes(addTypes, removeTypes, addAllCreatureTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
                         removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes,

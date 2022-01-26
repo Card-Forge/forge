@@ -624,7 +624,7 @@ public class AiAttackController {
 
         // Attempt to see if there's a defined entity that must be attacked strictly this turn...
         GameEntity entity = ai.getMustAttackEntityThisTurn();
-        if (entity == null) {
+        if (nextTurn || entity == null) {
             // ...or during the attacking creature controller's turn
             entity = ai.getMustAttackEntity();
         }
@@ -720,6 +720,7 @@ public class AiAttackController {
                     continue;
                 }
                 boolean mustAttack = false;
+                // TODO for nextTurn check if it was temporary
                 if (attacker.isGoaded()) {
                     mustAttack = true;
                 } else if (attacker.getSVar("MustAttack").equals("True")) {
@@ -736,7 +737,7 @@ public class AiAttackController {
                         mustAttack = true;
                     }
                 }
-                if (mustAttack || attacker.getController().getMustAttackEntity() != null || attacker.getController().getMustAttackEntityThisTurn() != null) {
+                if (mustAttack || (attacker.getController().getMustAttackEntity() != null && nextTurn) || (attacker.getController().getMustAttackEntityThisTurn() != null && !nextTurn)) {
                     combat.addAttacker(attacker, defender);
                     attackersLeft.remove(attacker);
                     numForcedAttackers++;
