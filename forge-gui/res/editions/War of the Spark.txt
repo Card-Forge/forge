@@ -326,6 +326,9 @@ ScryfallCode=WAR
 235★ U Samut, Tyrant Smasher @Norikatsu Miyoshi
 236★ U Vraska, Swarm's Eminence @Ryota Murayama
 
+[rebalanced]
+A221 R A-Teferi, Time Raveler @Chris Rallis
+
 [tokens]
 wubrg_2_2_citizen
 b_0_0_zombie_army

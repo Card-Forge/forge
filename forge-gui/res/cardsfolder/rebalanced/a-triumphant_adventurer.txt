@@ -1,0 +1,10 @@
+Name:A-Triumphant Adventurer
+ManaCost:W B
+Types:Creature Human Knight
+PT:2/1
+K:Deathtouch
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ As long as it's your turn, CARDNAME has first strike.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBVenture | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks, venture into the dungeon.
+SVar:DBVenture:DB$ Venture | Defined$ You
+SVar:HasAttackEffect:TRUE
+Oracle:Deathtouch\nAs long as it's your turn, Triumphant Adventurer has first strike.\nWhenever Triumphant Adventurer attacks, venture into the dungeon.

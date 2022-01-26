@@ -1,0 +1,6 @@
+Name:A-Dungeon Descent
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Venture | Cost$ 1 T tapXType<1/Creature.Legendary/legendary creature> | SorcerySpeed$ True | SpellDescription$ Venture into the dungeon. Activate only as a sorcery.
+Oracle:{T}: Add {C}.\n{1}, {T}, Tap an untapped legendary creature you control: Venture into the dungeon. Activate only as a sorcery.
