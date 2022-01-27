@@ -17,6 +17,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.Range;
@@ -2085,6 +2086,34 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         for (final Player p : removedAnteCards.keySet()) {
             getGui().reveal(localizer.getMessage("lblActionFromPlayerDeck", message, Lang.getInstance().getPossessedObject(MessageUtil.mayBeYou(player, p), "")),
                     ImmutableList.copyOf(removedAnteCards.get(p)));
+        }
+    }
+
+    @Override
+    public void revealAISkipCards(final String message, final Map<Player, Map<DeckSection, List<? extends PaperCard>>> unplayable) {
+        for (Player p : unplayable.keySet()) {
+            final Map<DeckSection, List<? extends PaperCard>> removedUnplayableCards = unplayable.get(p);
+            final List<String> labels = new ArrayList<>();
+            for (final DeckSection s: removedUnplayableCards.keySet()) {
+                labels.add("=== " + getLocalizedDeckSection(s) + " ===");
+                labels.addAll(removedUnplayableCards.get(s).stream().map(a -> a.toString()).collect(Collectors.toList()));
+            }
+            getGui().reveal(localizer.getMessage("lblActionFromPlayerDeck", message, Lang.getInstance().getPossessedObject(MessageUtil.mayBeYou(player, p), "")),
+                    ImmutableList.copyOf(labels));
+        }
+    }
+
+    private String getLocalizedDeckSection(DeckSection d) {
+        switch (d) {
+            case Avatar: return localizer.getMessage("lblAvatar");
+            case Commander: return localizer.getMessage("lblCommanderDeck");
+            case Main: return localizer.getMessage("lblMainDeck");
+            case Sideboard: return localizer.getMessage("lblSideboard");
+            case Planes: return localizer.getMessage("lblPlanarDeck");
+            case Schemes: return localizer.getMessage("lblSchemeDeck");
+            case Conspiracy: return /* TODO localise */ "Conspiracy";
+            case Dungeon: return /* TODO localise */ "Dungeon";
+            default: return /* TODO better handling */ "UNKNOWN";
         }
     }
 

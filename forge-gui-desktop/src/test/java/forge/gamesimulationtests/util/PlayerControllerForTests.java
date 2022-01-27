@@ -19,6 +19,7 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -592,6 +593,11 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public void revealAnte(String message, Multimap<Player, PaperCard> removedAnteCards) {
         // test this!
+    }
+
+    @Override
+    public void revealAISkipCards(final String message, final Map<DeckSection, List<? extends PaperCard>> removedUnplayableCards) {
+        // TODO test this!
     }
 
     @Override

@@ -17,6 +17,7 @@ import forge.card.ICardFace;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -238,10 +239,11 @@ public abstract class PlayerController {
     public abstract boolean chooseCardsPile(SpellAbility sa, CardCollectionView pile1, CardCollectionView pile2, String faceUp);
 
     public abstract void revealAnte(String message, Multimap<Player, PaperCard> removedAnteCards);
+    public abstract void revealAISkipCards(String message, Map<Player, Map<DeckSection, List<? extends PaperCard>>> deckCards);
 
     // These 2 are for AI
     public CardCollectionView cheatShuffle(CardCollectionView list) { return list; }
-    public Collection<? extends PaperCard> complainCardsCantPlayWell(Deck myDeck) { return null; }
+    public Map<DeckSection, List<? extends PaperCard>> complainCardsCantPlayWell(Deck myDeck) { return null; }
 
     public abstract void resetAtEndOfTurn(); // currently used by the AI to perform card memory cleanup
 
