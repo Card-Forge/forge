@@ -216,7 +216,7 @@ public class Match {
         game.getTriggerHandler().clearDelayedTrigger();
 
         // friendliness
-        Multimap<Player, PaperCard> rAICards = HashMultimap.create();
+        Map<Player, Map<DeckSection, List<? extends PaperCard>>> rAICards = new HashMap<>();
         Multimap<Player, PaperCard> removedAnteCards = ArrayListMultimap.create();
 
         final FCollectionView<Player> players = game.getPlayers();
@@ -315,9 +315,9 @@ public class Match {
             player.shuffle(null);
 
             if (isFirstGame) {
-                Collection<? extends PaperCard> cardsComplained = player.getController().complainCardsCantPlayWell(myDeck);
-                if (null != cardsComplained) {
-                    rAICards.putAll(player, cardsComplained);
+                Map<DeckSection, List<? extends PaperCard>> cardsComplained = player.getController().complainCardsCantPlayWell(myDeck);
+                if (cardsComplained != null && !cardsComplained.isEmpty()) {
+                    rAICards.put(player, cardsComplained);
                 }
             } else {
                 //reset cards to fix weird issues on netplay nextgame client
@@ -334,7 +334,7 @@ public class Match {
 
         final Localizer localizer = Localizer.getInstance();
         if (!rAICards.isEmpty() && !rules.getGameType().isCardPoolLimited()) {
-            game.getAction().revealAnte(localizer.getMessage("lblAICantPlayCards"), rAICards);
+            game.getAction().revealUnplayableByAI(localizer.getMessage("lblAICantPlayCards"), rAICards);
         }
 
         if (!removedAnteCards.isEmpty()) {

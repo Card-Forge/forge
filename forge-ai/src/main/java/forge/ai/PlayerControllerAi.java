@@ -28,6 +28,7 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -1125,7 +1126,12 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Collection<? extends PaperCard> complainCardsCantPlayWell(Deck myDeck) {
+    public void revealAISkipCards(String message, Map<Player, Map<DeckSection, List<? extends PaperCard>>> deckCards) {
+        // Ai won't understand that anyway
+    }
+
+    @Override
+    public Map<DeckSection, List<? extends PaperCard>> complainCardsCantPlayWell(Deck myDeck) {
         return brains.complainCardsCantPlayWell(myDeck);
     }
 
