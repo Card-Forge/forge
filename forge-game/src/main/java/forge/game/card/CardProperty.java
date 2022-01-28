@@ -950,6 +950,10 @@ public class CardProperty {
                         }
                     }
                     return list.isEmpty();
+                } else {
+                    CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction,
+                            sourceController, source, spellAbility);
+                    return !Iterables.any(list, CardPredicates.sharesNameWith(card));
                 }
             }
         } else if (property.startsWith("sharesControllerWith")) {
