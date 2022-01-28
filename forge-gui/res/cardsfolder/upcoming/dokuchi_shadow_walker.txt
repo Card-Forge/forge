@@ -1,0 +1,6 @@
+Name:Dokuchi Shadow-Walker
+ManaCost:4 B B
+Types:Creature Ogre Ninja
+PT:5/5
+K:Ninjutsu:3 B
+Oracle:Ninjutsu {3}{B} ({3}{B}, Return an unblocked attacker you control to your hand: Put this card onto the battlefield from your hand tapped and attacking.)
