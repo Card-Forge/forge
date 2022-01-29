@@ -40,6 +40,7 @@ import com.google.common.collect.Sets;
 import forge.GameCommand;
 import forge.StaticData;
 import forge.card.CardStateName;
+import forge.deck.DeckSection;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -1875,7 +1876,15 @@ public class GameAction {
         }
     }
 
+    public void revealUnplayableByAI(String title, Map<Player, Map<DeckSection, List<? extends PaperCard>>> unplayableCards) {
+        // Notify both players
+        for (Player p : game.getPlayers()) {
+            p.getController().revealAISkipCards(title, unplayableCards);
+        }
+    }
+
     public void revealAnte(String title, Multimap<Player, PaperCard> removedAnteCards) {
+        // Notify both players
         for (Player p : game.getPlayers()) {
             p.getController().revealAnte(title, removedAnteCards);
         }

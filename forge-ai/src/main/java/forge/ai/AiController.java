@@ -2077,18 +2077,23 @@ public class AiController {
         return result;
     }
 
-    public Collection<? extends PaperCard> complainCardsCantPlayWell(Deck myDeck) {
-        List<PaperCard> result = Lists.newArrayList();
+    public Map<DeckSection, List<? extends PaperCard>> complainCardsCantPlayWell(Deck myDeck) {
+        Map<DeckSection, List<? extends PaperCard>> complaints = new HashMap<>();
         // When using simulation, AI should be able to figure out most cards.
         if (!useSimulation) {
             for (Entry<DeckSection, CardPool> ds : myDeck) {
+                List<PaperCard> result = Lists.newArrayList();
                 for (Entry<PaperCard, Integer> cp : ds.getValue()) {
-                    if (cp.getKey().getRules().getAiHints().getRemAIDecks())
+                    if (cp.getKey().getRules().getAiHints().getRemAIDecks()) {
                         result.add(cp.getKey());
+                    }
+                }
+                if (!result.isEmpty()) {
+                    complaints.put(ds.getKey(), result);
                 }
             }
         }
-        return result;
+        return complaints;
     }
 
     // this is where the computer cheats
