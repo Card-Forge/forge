@@ -54,7 +54,7 @@ public class CostAdjustment {
             }
 
             // Commander Tax there
-            if (host.isCommander() && ZoneType.Command.equals(host.getCastFrom())) {
+            if (host.isCommander() && host.getCastFrom() != null && ZoneType.Command.equals(host.getCastFrom().getZoneType())) {
                 int n = player.getCommanderCast(host) * 2;
                 if (n > 0) {
                     result.add(new Cost(ManaCost.get(n), false));

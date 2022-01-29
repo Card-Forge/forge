@@ -11,7 +11,7 @@ SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ Creature.IsRemembered | Val
 SVar:SelflessDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ EffectSource | VarType$ Card | SubAbility$ ExileEffect
 #Zone Change for the source of your choice
 SVar:OutOfSight:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Defined$ ChosenCard | Execute$ ExileEffect | Static$ True
-SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shaman_en_kor.jpg

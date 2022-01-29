@@ -1000,7 +1000,7 @@ public class AbilityUtils {
 
         final Player player = sa instanceof SpellAbility ? ((SpellAbility)sa).getActivatingPlayer() : card.getController();
 
-        if (defined.equals("Self")) {
+        if (defined.equals("Self") || defined.equals("ThisTargetedCard")) {
             // do nothing, Self is for Cards, not Players
         } else if (defined.equals("TargetedOrController")) {
             players.addAll(getDefinedPlayers(card, "Targeted", sa));
@@ -2104,7 +2104,18 @@ public class AbilityUtils {
 
         // Count$wasCastFrom<Zone>.<true>.<false>
         if (sq[0].startsWith("wasCastFrom")) {
-            boolean zonesMatch = c.getCastFrom() == ZoneType.smartValueOf(sq[0].substring(11));
+            boolean your = sq[0].contains("Your");
+            boolean byYou = sq[0].contains("ByYou");
+            String strZone = sq[0].substring(11);
+            if (your) {
+                strZone = strZone.substring(4);
+            }
+            if (byYou) {
+                strZone = strZone.substring(0, strZone.indexOf("ByYou", 0));
+            }
+            boolean zonesMatch = c.getCastFrom() != null && c.getCastFrom().getZoneType() == ZoneType.smartValueOf(strZone)
+                    && (!byYou || player.equals(c.getCastSA().getActivatingPlayer()))
+                    && (!your || c.getCastFrom().getPlayer().equals(player));
             return doXMath(calculateAmount(c, sq[zonesMatch ? 1 : 2], ctb), expr, c, ctb);
         }
 

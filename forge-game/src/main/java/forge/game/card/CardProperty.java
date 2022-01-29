@@ -1783,24 +1783,57 @@ public class CardProperty {
             if (!castSA.isValid(v, sourceController, source, spellAbility)) {
                 return false;
             }
-        } else if (property.equals("wasCast")) {
+        }else if (property.startsWith("wasCastFrom")) {
+            boolean byYou = property.contains("ByYou");
+            String strZone = property.substring(11);
+            Player zoneOwner = null;
+            if (property.contains("Your")) {
+                strZone = strZone.substring(4);
+                zoneOwner = sourceController;
+            }
+            if (property.contains("Their")) {
+                strZone = strZone.substring(5);
+                zoneOwner = controller;
+            }
+            if (byYou) {
+                strZone = strZone.substring(0, strZone.indexOf("ByYou", 0));
+            }
+            final ZoneType realZone = ZoneType.smartValueOf(strZone);
+            if (card.getCastFrom() == null || (zoneOwner != null && !card.getCastFrom().getPlayer().equals(zoneOwner))
+                    || (byYou && !controller.equals(card.getCastSA().getActivatingPlayer()))
+                    || realZone != card.getCastFrom().getZoneType()) {
+                return false;
+            }
+        } else if (property.startsWith("wasNotCastFrom")) {
+            boolean byYou = property.contains("ByYou");
+            String strZone = property.substring(14);
+            Player zoneOwner = null;
+            if (property.contains("Your")) {
+                strZone = strZone.substring(4);
+                zoneOwner = sourceController;
+            }
+            if (property.contains("Their")) {
+                strZone = strZone.substring(5);
+                zoneOwner = controller;
+            }
+            if (byYou) {
+                strZone = strZone.substring(0, strZone.indexOf("ByYou", 0));
+            }
+            final ZoneType realZone = ZoneType.smartValueOf(strZone);
+            if (card.getCastFrom() != null && (zoneOwner == null || card.getCastFrom().getPlayer().equals(zoneOwner))
+                    && (!byYou || controller.equals(card.getCastSA().getActivatingPlayer()))
+                    && realZone == card.getCastFrom().getZoneType()) {
+                return false;
+            }
+        }  else if (property.startsWith("wasCast")) {
             if (!card.wasCast()) {
+                return false;
+            }
+            if (property.contains("ByYou") && !controller.equals(card.getCastSA().getActivatingPlayer())) {
                 return false;
             }
         } else if (property.equals("wasNotCast")) {
             if (card.wasCast()) {
-                return false;
-            }
-        } else if (property.startsWith("wasCastFrom")) {
-            final String strZone = property.substring(11);
-            final ZoneType realZone = ZoneType.smartValueOf(strZone);
-            if (realZone != card.getCastFrom()) {
-                return false;
-            }
-        } else if (property.startsWith("wasNotCastFrom")) {
-            final String strZone = property.substring(14);
-            final ZoneType realZone = ZoneType.smartValueOf(strZone);
-            if (realZone == card.getCastFrom()) {
                 return false;
             }
         } else if (property.startsWith("set")) {

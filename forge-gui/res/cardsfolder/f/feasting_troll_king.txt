@@ -4,7 +4,7 @@ Types:Creature Troll Noble
 PT:7/6
 K:Vigilance
 K:Trample
-T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromHand+Self | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, create three Food tokens.
+T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromYourHandByYou+Self | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, create three Food tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ c_a_food_sac | TokenOwner$ You | LegacyImage$ c a food sac eld
 A:AB$ ChangeZone | Cost$ Sac<3/Food> | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | PlayerTurn$ True | SpellDescription$ Return CARDNAME from your graveyard to the battlefield. Activate only during your turn.
 SVar:DiscardMe:1

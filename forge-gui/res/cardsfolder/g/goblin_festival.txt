@@ -1,11 +1,10 @@
 Name:Goblin Festival
 ManaCost:1 R
 Types:Enchantment
-A:AB$ DealDamage | Cost$ 2 | NumDmg$ 1 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | SubAbility$ RememberActivator | SpellDescription$ CARDNAME deals 1 damage to any target. Flip a coin. If you lose the flip, choose one of your opponents. That player gains control of CARDNAME.
-SVar:RememberActivator:DB$ Pump | RememberObjects$ You | Static$ True | StackDescription$ None | SubAbility$ ControlFlip
-SVar:ControlFlip:DB$ FlipACoin | Defined$ Remembered | LoseSubAbility$ ChooseOpp | WinSubAbility$ DBCleanup
-SVar:ChooseOpp:DB$ ChoosePlayer | Defined$ Remembered | Choices$ RememberedOpponents | AILogic$ Curse | SubAbility$ LoseControl
+A:AB$ DealDamage | Cost$ 2 | NumDmg$ 1 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | SubAbility$ ControlFlip | SpellDescription$ CARDNAME deals 1 damage to any target. Flip a coin. If you lose the flip, choose one of your opponents. That player gains control of CARDNAME.
+SVar:ControlFlip:DB$ FlipACoin | Defined$ You | LoseSubAbility$ ChooseOpp
+SVar:ChooseOpp:DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | AILogic$ Curse | SubAbility$ LoseControl
 SVar:LoseControl:DB$ GainControl | Defined$ Self | NewController$ ChosenPlayer | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_festival.jpg
 Oracle:{2}: Goblin Festival deals 1 damage to any target. Flip a coin. If you lose the flip, choose one of your opponents. That player gains control of Goblin Festival.

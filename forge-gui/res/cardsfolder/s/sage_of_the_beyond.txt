@@ -3,6 +3,6 @@ ManaCost:5 U U
 Types:Creature Spirit Giant
 PT:5/5
 K:Flying
-S:Mode$ ReduceCost | ValidCard$ Card.wasNotCastFromHand | Activator$ You | Type$ Spell | Amount$ 2 | Description$ Spells you cast from anywhere other than your hand cost {2} less to cast
+S:Mode$ ReduceCost | ValidCard$ Card.wasNotCastFromYourHand | Activator$ You | Type$ Spell | Amount$ 2 | Description$ Spells you cast from anywhere other than your hand cost {2} less to cast
 K:Foretell:4 U
 Oracle:Flying\nSpells you cast from anywhere other than your hand cost {2} less to cast.\nForetell {4}{U} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

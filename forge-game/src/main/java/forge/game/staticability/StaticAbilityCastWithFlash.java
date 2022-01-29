@@ -69,7 +69,6 @@ public class StaticAbilityCastWithFlash {
     }
 
     public static boolean applyWithFlashAbility(final StaticAbility stAb, final SpellAbility sa, final Card card, final Player activator) {
-
         if (!commonParts(stAb, sa, card, activator)) {
             return false;
         }

@@ -62,7 +62,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     @Override
     public boolean canPlay() {
         Card card = this.getHostCard();
-        if (card.isInZone(ZoneType.Battlefield)) {
+        if (card.isInPlay()) {
             return false;
         }
 

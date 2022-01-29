@@ -5,6 +5,6 @@ PT:1/4
 K:Defender
 S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
 S:Mode$ Continuous | Affected$ Creature.TopLibrary+YouCtrl | AffectedZone$ Library | MayPlay$ True | Description$ You may cast creature spells from the top of your library.
-T:Mode$ SpellCast | ValidCard$ Creature.wasCastFromLibrary | ValidActivatingPlayer$ You | Execute$ TrigAnimate | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell from your library, it becomes a black Bird in addition to its other colors and types, has flying, and has base power and toughness 1/1.
+T:Mode$ SpellCast | ValidCard$ Creature.wasCastFromYourLibrary | ValidActivatingPlayer$ You | Execute$ TrigAnimate | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell from your library, it becomes a black Bird in addition to its other colors and types, has flying, and has base power and toughness 1/1.
 SVar:TrigAnimate:DB$ Animate | Defined$ TriggeredCard | Colors$ Black | Types$ Bird | Keywords$ Flying | Power$ 1 | Toughness$ 1 | Duration$ Permanent
 Oracle:Defender\nYou may look at the top card of your library any time.\nYou may cast creature spells from the top of your library.\nWhenever you cast a creature spell from your library, it becomes a black Bird in addition to its other colors and types, has flying, and has base power and toughness 1/1.

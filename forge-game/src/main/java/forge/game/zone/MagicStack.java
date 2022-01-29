@@ -309,7 +309,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             
             // Run SpellCast triggers
             if (sp.isSpell()) {
-                if (source.isCommander() && (ZoneType.Command == source.getCastFrom())
+                if (source.isCommander() && source.getCastFrom() != null && ZoneType.Command == source.getCastFrom().getZoneType()
                         && source.getOwner().equals(activator)) {
                     activator.incCommanderCast(source);
                 }

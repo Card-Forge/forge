@@ -2,8 +2,7 @@ Name:Zedruu the Greathearted
 ManaCost:1 U R W
 Types:Legendary Creature Minotaur Monk
 PT:2/4
-A:AB$ Pump | Cost$ U R W | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBPumpRemember | SpellDescription$ Target opponent gains control of target permanent you control. | StackDescription$ None
-SVar:DBPumpRemember:DB$ Pump | RememberObjects$ Targeted | Static$ True | SubAbility$ DBPumpPermanent | StackDescription$ None
+A:AB$ Pump | Cost$ U R W | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBPumpPermanent | RememberObjects$ Targeted | SpellDescription$ Target opponent gains control of target permanent you control. | StackDescription$ None
 SVar:DBPumpPermanent:DB$ Pump | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent that you control | SubAbility$ DBGainControl | StackDescription$ None
 SVar:DBGainControl:DB$ GainControl | Defined$ Targeted | NewController$ Remembered | SubAbility$ DBForgetRemembered
 SVar:DBForgetRemembered:DB$ Cleanup | ClearRemembered$ True

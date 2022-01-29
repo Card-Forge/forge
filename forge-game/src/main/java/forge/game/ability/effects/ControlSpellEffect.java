@@ -11,7 +11,6 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.zone.ZoneType;
 
 public class ControlSpellEffect extends SpellAbilityEffect {
     /* (non-Javadoc)
@@ -70,7 +69,7 @@ public class ControlSpellEffect extends SpellAbilityEffect {
                 GameObject obj = Iterables.getFirst(getDefinedOrTargeted(sa, "DefinedExchange"), null);
                 if (obj instanceof Card) {
                     Card c = (Card)obj;
-                    if (!(c.isInZone(ZoneType.Battlefield)) || si == null) {
+                    if (!c.isInPlay() || si == null) {
                         // Exchanging object isn't available, continue
                         continue;
                     }

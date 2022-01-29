@@ -2,11 +2,11 @@ Name:Fblthp, the Lost
 ManaCost:1 U
 Types:Legendary Creature Homunculus
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Hand,Graveyard,Exile,Stack | Destination$ Battlefield | ValidCard$ Card.Self+wasNotCastFromLibrary | Execute$ DBDraw | TriggerDescription$ Whenever CARDNAME enters the battlefield, draw a card. If it enters from your library or was cast from your library, draw two cards instead.
-T:Mode$ ChangesZone | Origin$ Library | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBDraw2 | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield, draw a card. If it enters from your library or was cast from your library, draw two cards instead.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+wasCastFromLibrary | Execute$ DBDraw2 | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield, draw a card. If it enters from your library or was cast from your library, draw two cards instead.
-SVar:DBDraw:DB$ Draw | NumCards$ 1
-SVar:DBDraw2:DB$ Draw | NumCards$ 2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBDraw | TriggerDescription$ Whenever CARDNAME enters the battlefield, draw a card. If it enters from your library or was cast from your library, draw two cards instead.
+SVar:DBDraw:DB$ Draw | NumCards$ DrawNum
+SVar:DrawNum:SVar$LibNum1/LimitMax.2
+SVar:LibNum1:Count$wasCastFromYourLibrary.2.1/Plus.LibNum2
+SVar:LibNum2:TriggeredCardLKI$Valid Card.inZoneLibrary
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | SourceType$ Spell | TriggerZones$ Battlefield | Execute$ TrigShuffle | TriggerDescription$ When CARDNAME becomes the target of a spell, shuffle CARDNAME into its owner's library.
 SVar:TrigShuffle:DB$ ChangeZone | Origin$ Battlefield | Destination$ Library | Shuffle$ True | Defined$ Self
 Oracle:When Fblthp, the Lost enters the battlefield, draw a card. If it entered from your library or was cast from your library, draw two cards instead.\nWhen Fblthp becomes the target of a spell, shuffle Fblthp into its owner's library.

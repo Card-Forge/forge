@@ -3,7 +3,7 @@ ManaCost:6
 Types:Artifact
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigKnowledgeExile | TriggerDescription$ Imprint — When CARDNAME enters the battlefield, each player exiles the top three cards of their library.
 SVar:TrigKnowledgeExile:DB$ Dig | DigNum$ 3 | ChangeNum$ All | Defined$ Player | DestinationZone$ Exile | Imprint$ True
-T:Mode$ SpellCast | ValidCard$ Card.wasCastFromHand | Execute$ TrigKnowledgeExileSpell | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell from their hand, that player exiles it. If the player does, they may cast a spell from among other cards exiled with CARDNAME without paying its mana cost.
+T:Mode$ SpellCast | ValidCard$ Card.wasCastFromTheirHand | Execute$ TrigKnowledgeExileSpell | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell from their hand, that player exiles it. If the player does, they may cast a spell from among other cards exiled with CARDNAME without paying its mana cost.
 SVar:TrigKnowledgeExileSpell:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Stack | Destination$ Exile | Imprint$ True | Fizzle$ True | SubAbility$ DBKnowledgePlaySpell | RememberChanged$ True
 SVar:DBKnowledgePlaySpell:DB$ Play | ValidZone$ Exile | Valid$ Card.IsImprinted+IsNotRemembered+nonLand | Controller$ TriggeredCardController | WithoutManaCost$ True | Optional$ True | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.IsRemembered | ConditionCompare$ EQ1 | SubAbility$ DBKnowledgeCleanup
 SVar:DBKnowledgeCleanup:DB$ Cleanup | ClearRemembered$ True
