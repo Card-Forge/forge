@@ -6,4 +6,5 @@ SVar:X:Count$xPaid
 SVar:DBTokenOpp:DB$ Token | TokenAmount$ Y | TokenOwner$ Opponent | TokenScript$ w_2_2_samurai_vigilance
 SVar:Y:SVar$X/Minus.1
 SVar:PlayMain1:TRUE
+DeckHas:Ability$Token & Type$Samurai
 Oracle:Create X 2/2 white Samurai creature tokens with vigilance. They gain menace and haste until end of turn.\nEach opponent creates X minus one 2/2 white Samurai creature tokens with vigilance.
