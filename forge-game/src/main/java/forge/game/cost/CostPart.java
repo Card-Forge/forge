@@ -92,7 +92,7 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
      * @return the this
      */
     public final boolean payCostFromSource() {
-        return this.getType().equals("CARDNAME");
+        return this.getType().equals("CARDNAME") || this.getType().equals("NICKNAME");
     }
 
     /**
