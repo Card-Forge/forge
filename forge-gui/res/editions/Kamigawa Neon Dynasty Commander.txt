@@ -1,0 +1,14 @@
+[metadata]
+Code=NEC
+Date=2022-02-18
+Name=Kamigawa: Neon Dynasty Commander
+Type=Commander
+ScryfallCode=NEC
+
+[cards]
+1 M Chishiro, the Shattered Blade @Lius Lasahido
+2 M Kotori, Pilot Prodigy @Aaron J. Riley
+3 M Kaima, the Fractured Calm @
+4 M Shorikai, Genesis Engine @
+77 M Chishiro, the Shattered Blade @Lius Lasahido
+78 M Kotori, Pilot Prodigy @Aaron J. Riley
