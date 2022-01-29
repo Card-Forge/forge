@@ -2089,6 +2089,36 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public void revealAISkipCards(final String message, final Map<Player, Map<DeckSection, List<? extends PaperCard>>> unplayable) {
+        for (Player p : unplayable.keySet()) {
+            final Map<DeckSection, List<? extends PaperCard>> removedUnplayableCards = unplayable.get(p);
+            final List<String> labels = new ArrayList<>();
+            for (final DeckSection s: removedUnplayableCards.keySet()) {
+                labels.add("=== " + getLocalizedDeckSection(s) + " ===");
+                for (PaperCard c: removedUnplayableCards.get(s)) {
+                    labels.add(c.toString());
+                }
+            }
+            getGui().reveal(localizer.getMessage("lblActionFromPlayerDeck", message, Lang.getInstance().getPossessedObject(MessageUtil.mayBeYou(player, p), "")),
+                    ImmutableList.copyOf(labels));
+        }
+    }
+
+    private String getLocalizedDeckSection(DeckSection d) {
+        switch (d) {
+            case Avatar: return localizer.getMessage("lblAvatar");
+            case Commander: return localizer.getMessage("lblCommanderDeck");
+            case Main: return localizer.getMessage("lblMainDeck");
+            case Sideboard: return localizer.getMessage("lblSideboard");
+            case Planes: return localizer.getMessage("lblPlanarDeck");
+            case Schemes: return localizer.getMessage("lblSchemeDeck");
+            case Conspiracy: return /* TODO localise */ "Conspiracy";
+            case Dungeon: return /* TODO localise */ "Dungeon";
+            default: return /* TODO better handling */ "UNKNOWN";
+        }
+    }
+
+    @Override
     public List<PaperCard> chooseCardsYouWonToAddToDeck(final List<PaperCard> losses) {
         return getGui().many(localizer.getMessage("lblSelectCardstoAddtoYourDeck"), localizer.getMessage("lblAddTheseToMyDeck"), 0, losses.size(), losses, null);
     }
