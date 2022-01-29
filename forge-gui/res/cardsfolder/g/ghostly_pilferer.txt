@@ -4,7 +4,7 @@ Types:Creature Spirit Rogue
 PT:2/1
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw1 | TriggerDescription$ Whenever CARDNAME becomes untapped, you may pay {2}. If you do, draw a card.
 SVar:TrigDraw1:AB$ Draw | Cost$ 2 | Defined$ You | NumCards$ 1
-T:Mode$ SpellCast | ValidCard$ Card.wasNotCastFromHand | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDraw2 | TriggerDescription$ Whenever an opponent casts a spell from anywhere other than their hand, draw a card.
+T:Mode$ SpellCast | ValidCard$ Card.wasNotCastFromTheirHand | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDraw2 | TriggerDescription$ Whenever an opponent casts a spell from anywhere other than their hand, draw a card.
 SVar:TrigDraw2:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:AIPreference:DiscardCost$Card.cmcLE2
 DeckHas:Ability$Discard

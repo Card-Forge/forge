@@ -2,7 +2,7 @@ Name:Phage the Untouchable
 ManaCost:3 B B B B
 Types:Legendary Creature Avatar Minion
 PT:4/4
-T:Mode$ ChangesZone | ValidCard$ Card.wasNotCastFromHand+Self | Destination$ Battlefield | Execute$ TrigYouLose | TriggerDescription$ When CARDNAME enters the battlefield, if you didn't cast it from your hand, you lose the game.
+T:Mode$ ChangesZone | ValidCard$ Card.wasNotCastFromYourHandByYou+Self | Destination$ Battlefield | Execute$ TrigYouLose | TriggerDescription$ When CARDNAME enters the battlefield, if you didn't cast it from your hand, you lose the game.
 SVar:TrigYouLose:DB$ LosesGame | Defined$ You
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, destroy that creature. It can't be regenerated.
 SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy | NoRegen$ True

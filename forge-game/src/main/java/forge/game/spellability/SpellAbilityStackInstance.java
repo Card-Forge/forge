@@ -346,6 +346,9 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         if (activatingPlayer == activatingPlayer0) { return; }
         activatingPlayer = activatingPlayer0;
         view.updateActivatingPlayer(this);
+        if (subInstance != null) {
+            subInstance.setActivatingPlayer(activatingPlayer0);
+        }
     }
 
     public List<Mana> getPayingMana() {

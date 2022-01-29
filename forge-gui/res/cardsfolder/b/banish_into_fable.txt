@@ -1,7 +1,7 @@
 Name:Banish into Fable
 ManaCost:4 W U
 Types:Instant
-T:Mode$ SpellCast | ValidCard$ Card.Self+wasCastFromHand | Execute$ TrigCopy | TriggerDescription$ When you cast this spell from your hand, copy it if you control an artifact, then copy it if you control an enchantment. You may choose new targets for the copies.
+T:Mode$ SpellCast | ValidCard$ Card.Self+wasCastFromYourHandByYou | Execute$ TrigCopy | TriggerDescription$ When you cast this spell from your hand, copy it if you control an artifact, then copy it if you control an enchantment. You may choose new targets for the copies.
 # TODO check ruling with Twinning Staff
 SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | ConditionPresent$ Artifact.YouCtrl | ConditionCompare$ GE1 | MayChooseTarget$ True | SubAbility$ DBCopy
 SVar:DBCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | ConditionPresent$ Enchantment.YouCtrl | ConditionCompare$ GE1 | MayChooseTarget$ True

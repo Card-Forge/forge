@@ -98,7 +98,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private CardState currentState;
     private CardStateName currentStateName = CardStateName.Original;
 
-    private ZoneType castFrom = null;
+    private Zone castFrom = null;
     private SpellAbility castSA = null;
 
     private CardDamageHistory damageHistory = new CardDamageHistory();
@@ -5956,10 +5956,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     /**
      * Returns what zone this card was cast from (from what zone it was moved to the stack).
      */
-    public ZoneType getCastFrom() {
+    public Zone getCastFrom() {
         return castFrom;
     }
-    public void setCastFrom(final ZoneType castFrom0) {
+    public void setCastFrom(final Zone castFrom0) {
         castFrom = castFrom0;
     }
     public boolean wasCast() {

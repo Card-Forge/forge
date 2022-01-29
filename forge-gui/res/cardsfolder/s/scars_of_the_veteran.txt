@@ -8,5 +8,5 @@ SVar:DelTrig:Mode$ Phase | Phase$ End of Turn | Execute$ DelayedScars | TriggerD
 SVar:DelayedScars:DB$ PutCounter | Defined$ Remembered | CounterType$ P0P1 | CounterNum$ PreventedDamage | SubAbility$ ExileEffect
 SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Permanent.IsRemembered | Execute$ ExileEffect | Static$ True
 SVar:NoCreatTgt:Mode$ Always | IsPresent$ Permanent.IsRemembered | PresentCompare$ EQ0 | Execute$ ExileEffect | Static$ True
-SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 Oracle:You may exile a white card from your hand rather than pay this spell's mana cost.\nPrevent the next 7 damage that would be dealt to any target this turn. If it's a creature, put a +0/+1 counter on it for each 1 damage prevented this way at the beginning of the next end step.

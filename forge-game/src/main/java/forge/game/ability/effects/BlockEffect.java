@@ -16,7 +16,6 @@ import forge.game.combat.Combat;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
-import forge.game.zone.ZoneType;
 import forge.util.Lang;
 
 public class BlockEffect extends SpellAbilityEffect {
@@ -38,7 +37,7 @@ public class BlockEffect extends SpellAbilityEffect {
         List<Card> blockers = new ArrayList<>();
         if (sa.hasParam("DefinedBlocker")) {
             for (final Card blocker : AbilityUtils.getDefinedCards(host, sa.getParam("DefinedBlocker"), sa)) {
-                if (blocker.isCreature() && blocker.isInZone(ZoneType.Battlefield))
+                if (blocker.isCreature() && blocker.isInPlay())
                     blockers.add(blocker);
             }
         }

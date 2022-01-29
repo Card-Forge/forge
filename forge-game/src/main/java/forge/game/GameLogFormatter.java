@@ -166,7 +166,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         } else {
             message = Localizer.getInstance().getMessage("lblLogPlayerControlledTargetPlayer", p.getName(), newLobbyPlayer.getName());
         }
-        return new GameLogEntry(GameLogEntryType.PLAYER_CONROL, message);
+        return new GameLogEntry(GameLogEntryType.PLAYER_CONTROL, message);
     }
 
     @Override

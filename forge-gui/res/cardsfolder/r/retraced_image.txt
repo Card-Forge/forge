@@ -2,7 +2,7 @@ Name:Retraced Image
 ManaCost:U
 Types:Sorcery
 # You can not clear a remembered object from a card on the stack, so this card is cleaned beforehand.
-A:SP$ Pump | Cost$ U | SubAbility$ DBCleanup | Static$ True | StackDescription$ None | SpellDescription$ Reveal a card in your hand, then put that card onto the battlefield if it has the same name as a permanent.
+A:SP$ Pump | Cost$ U | SubAbility$ DBCleanup | StackDescription$ None | SpellDescription$ Reveal a card in your hand, then put that card onto the battlefield if it has the same name as a permanent.
 SVar:DBReveal:DB$ Reveal | RememberRevealed$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Hand | Destination$ Battlefield | ConditionDefined$ Remembered | ConditionPresent$ Card.sharesNameWith Battlefield | ConditionCompare$ GE1
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBReveal

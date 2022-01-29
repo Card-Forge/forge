@@ -5,7 +5,7 @@ PT:9/9
 K:Vigilance
 K:Reach
 K:Trample
-T:Mode$ ChangesZone | ValidCard$ Card.wasCast+Self | Destination$ Battlefield | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, untap all lands you control.
+T:Mode$ ChangesZone | ValidCard$ Card.wasCastByYou+Self | Destination$ Battlefield | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, untap all lands you control.
 SVar:TrigUntap:DB$ UntapAll | ValidCards$ Land.YouCtrl
 A:AB$ DealDamage | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SpellDescription$ Zacama deals 3 damage to target creature.
 A:AB$ Destroy | Cost$ 2 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.

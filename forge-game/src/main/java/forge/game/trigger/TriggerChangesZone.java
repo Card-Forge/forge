@@ -206,7 +206,7 @@ public class TriggerChangesZone extends Trigger {
             sa.setTriggeringObject(AbilityKey.Card, runParams.get(AbilityKey.CardLKI));
             sa.setTriggeringObject(AbilityKey.NewCard, runParams.get(AbilityKey.Card));
         } else {
-            sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card);
+            sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.CardLKI);
         }
     }
 

@@ -50,7 +50,7 @@ public class StaticAbilityMustTarget {
                 isRestrictionsMet(restrictions, choices, currentAbility);
             }
             currentAbility = currentAbility.getSubAbility();
-        } while(currentAbility != null);
+        } while (currentAbility != null);
 
         return !usesTargeting || restrictions.isEmpty();
     }

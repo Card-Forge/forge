@@ -4,7 +4,7 @@ Types:Creature Human Peasant
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill two cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You
-T:Mode$ SpellCast | ValidCard$ Card.wasCastFromGraveyard | ValidActivatingPlayer$ You | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell from your graveyard, tap target creature you don't control.
+T:Mode$ SpellCast | ValidCard$ Card.wasCastFromYourGraveyardByYou | ValidActivatingPlayer$ You | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell from your graveyard, tap target creature you don't control.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control
 DeckHas:Ability$Mill & Ability$Graveyard
 K:Disturb:1 W U

@@ -794,7 +794,7 @@ public class GameAction {
             if (zoneFrom == null) {
                 c.setCastFrom(null);
             } else {
-                c.setCastFrom(zoneFrom.getZoneType());
+                c.setCastFrom(zoneFrom);
             }
             if (cause != null && cause.isSpell() && c.equals(cause.getHostCard()) && !c.isCopiedSpell()) {
                 c.setCastSA(cause);

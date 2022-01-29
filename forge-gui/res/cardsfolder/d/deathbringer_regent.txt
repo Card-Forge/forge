@@ -3,7 +3,7 @@ ManaCost:5 B B
 Types:Creature Dragon
 PT:5/6
 K:Flying
-T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromHand+Self | CheckSVar$ X | SVarCompare$ GE5 | Destination$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand and there are five or more other creatures on the battlefield, destroy all other creatures.
+T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromYourHandByYou+Self | CheckSVar$ X | SVarCompare$ GE5 | Destination$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand and there are five or more other creatures on the battlefield, destroy all other creatures.
 SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Creature.Other
 SVar:X:Count$Valid Creature.Other
 AI:RemoveDeck:Random

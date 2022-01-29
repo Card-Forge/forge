@@ -37,6 +37,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
@@ -1316,10 +1317,10 @@ public class ComputerUtilMana {
      */
     public static ManaCostBeingPaid calculateManaCost(final SpellAbility sa, final boolean test, final int extraMana) {
         Card card = sa.getHostCard();
-        ZoneType castFromBackup = null;
+        Zone castFromBackup = null;
         if (test && sa.isSpell()) {
             castFromBackup = card.getCastFrom();
-            sa.getHostCard().setCastFrom(card.getZone() != null ? card.getZone().getZoneType() : null);
+            sa.getHostCard().setCastFrom(card.getZone() != null ? card.getZone() : null);
         }
 
         Cost payCosts = CostAdjustment.adjust(sa.getPayCosts(), sa);
