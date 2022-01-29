@@ -119,7 +119,7 @@ public class CostRemoveCounter extends CostPart {
 
             sb.append(" from ");
 
-            if (this.getTypeDescription() == null && this.payCostFromSource()) {
+            if (this.payCostFromSource()) {
                 sb.append(this.getType());
             } else {
                 final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();

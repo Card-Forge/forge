@@ -3,7 +3,6 @@ ManaCost:3 G G
 Types:Legendary Creature Spirit
 PT:5/5
 A:AB$ DealDamage | Cost$ X G T | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target flying creature. | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature with flying.
-A:AB$ DamageAll | PrecostDesc$ Channel — | Cost$ X G G Discard<1/CARDNAME> | ActivationZone$ Hand | ValidCards$ Creature.withFlying | NumDmg$ X | ValidDescription$ each creature with flying. | SpellDescription$ CARDNAME deals X damage to each creature with flying.
+A:AB$ DamageAll | PrecostDesc$ Channel — | Cost$ X G G Discard<1/NICKNAME> | ActivationZone$ Hand | ValidCards$ Creature.withFlying | NumDmg$ X | ValidDescription$ each creature with flying. | SpellDescription$ NICKNAME deals X damage to each creature with flying.
 SVar:X:Count$xPaid
-SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card87333.jpg
 Oracle:{X}{G}, {T}: Arashi, the Sky Asunder deals X damage to target creature with flying.\nChannel — {X}{G}{G}, Discard Arashi: Arashi deals X damage to each creature with flying.
