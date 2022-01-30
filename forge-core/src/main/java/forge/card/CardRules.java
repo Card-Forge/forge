@@ -301,16 +301,6 @@ public final class CardRules implements ICardCharacteristics {
         this.deltaLife = Integer.parseInt(TextUtil.fastReplace(pt.substring(slashPos+1), "+", ""));
     }
 
-    // Downloadable image
-    private String dlUrl;
-    private String dlUrlOtherSide;
-
-    @Deprecated
-    public String getPictureUrl(boolean backface ) { return backface ? dlUrlOtherSide : dlUrl; }
-
-    @Deprecated
-    public void setDlUrls(String[] dlUrls) { this.dlUrl = dlUrls[0]; this.dlUrlOtherSide = dlUrls[1]; }
-
     public ColorSet getColorIdentity() {
         return colorIdentity;
     }
@@ -328,7 +318,6 @@ public final class CardRules implements ICardCharacteristics {
     public static class Reader {
         // fields to build
         private CardFace[] faces = new CardFace[] { null, null };
-        private String[] pictureUrl = new String[] { null, null };
         private int curFace = 0;
         private CardSplitType altMode = CardSplitType.None;
         private String meldWith = "";
@@ -351,8 +340,6 @@ public final class CardRules implements ICardCharacteristics {
             this.curFace = 0;
             this.faces[0] = null;
             this.faces[1] = null;
-            this.pictureUrl[0] = null;
-            this.pictureUrl[1] = null;
 
             this.handLife = null;
             this.altMode = CardSplitType.None;
@@ -382,7 +369,6 @@ public final class CardRules implements ICardCharacteristics {
             result.setNormalizedName(this.normalizedName);
             result.meldWith = this.meldWith;
             result.partnerWith = this.partnerWith;
-            result.setDlUrls(pictureUrl);
             if (StringUtils.isNotBlank(handLife))
                 result.setVanguardProperties(handLife);
             return result;
@@ -521,12 +507,7 @@ public final class CardRules implements ICardCharacteristics {
                         String variable = colonPos > 0 ? value.substring(0, colonPos) : value;
                         value = colonPos > 0 ? value.substring(1+colonPos) : null;
 
-                        if ("Picture".equals(variable)) {
-                            this.pictureUrl[this.curFace] = value;
-                        } else
-                            this.faces[curFace].addSVar(variable, value);
-                    } else if ("SetInfo".equals(key)) {
-                        // deprecated
+                        this.faces[curFace].addSVar(variable, value);
                     }
                     break;
 
