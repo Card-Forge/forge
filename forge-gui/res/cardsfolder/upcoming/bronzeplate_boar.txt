@@ -1,0 +1,8 @@
+Name:Bronzeplate Boar
+ManaCost:2 R
+Types:Artifact Creature Equipment Boar
+PT:3/2
+K:Trample
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 2 | AddKeyword$ Trample | Description$ Equipped creature gets +3/+2 and has trample.
+K:Reconfigure:5
+Oracle:Trample\nEquipped creature gets +3/+2 and has trample.\nReconfigure {5} ({5}: Attach to target creature you control; or unattach from a creature. Reconfigure only as a sorcery. While attached, this isn't a creature.)

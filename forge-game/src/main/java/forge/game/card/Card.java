@@ -1948,7 +1948,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbLong.append(TextUtil.fastReplace(keyword, ":", " ")).append("\r\n");
                 } else if (keyword.startsWith("Morph") || keyword.startsWith("Megamorph")
                         || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")
-                        || keyword.startsWith("Disturb") || keyword.startsWith("Madness:")){
+                        || keyword.startsWith("Disturb") || keyword.startsWith("Madness:")
+                        || keyword.startsWith("Reconfigure")) {
                     String[] k = keyword.split(":");
                     sbLong.append(k[0]);
                     if (k.length > 1) {

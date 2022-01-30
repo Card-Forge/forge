@@ -217,7 +217,8 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
     public boolean canBeAttached(final Card attach, boolean checkSBA) {
         // master mode
-        if (!attach.isAttachment() || attach.isCreature() || equals(attach)) {
+        if (!attach.isAttachment() || (attach.isCreature() && !attach.hasKeyword(Keyword.RECONFIGURE))
+                || equals(attach)) {
             return false;
         }
 
