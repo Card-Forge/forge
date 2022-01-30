@@ -30,5 +30,4 @@ SVar:DBGainLifeN:DB$ GainLife | ConditionDefined$ Remembered | ConditionPresent$
 SVar:X:Remembered$Valid Creature
 SVar:DBCleanupN:DB$ Cleanup | ClearRemembered$ True
 K:Nightbound
-DeckHas:Ability$Graveyard|LifeGain
 Oracle:Ward—Discard a card.\nWhenever Graveyard Glutton enters the battlefield or attacks, exile up to two target cards from graveyards. For each creature card exiled this way, each opponent loses 1 life and you gain 1 life.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

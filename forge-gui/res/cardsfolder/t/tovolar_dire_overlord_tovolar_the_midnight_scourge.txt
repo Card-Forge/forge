@@ -28,5 +28,4 @@ SVar:TrigDrawN:DB$ Draw | Defined$ You | NumCards$ 1
 A:AB$ Pump | Cost$ X R G | ValidTgts$ Wolf.YouCtrl,Werewolf.YouCtrl | TgtPrompt$ Select target Wolf or Werewolf you control | NumAtt$ X | KW$ Trample | SpellDescription$ Target Wolf or Werewolf you control gets +X/+0 and gains trample until end of turn.
 K:Nightbound
 SVar:X:Count$xPaid
-DeckHints:Type$Wolf|Werewolf
 Oracle:Whenever a Wolf or Werewolf you control deals combat damage to a player, draw a card.\n{X}{R}{G}: Target Wolf or Werewolf you control gets +X/+0 and gains trample until end of turn.\nNightbound

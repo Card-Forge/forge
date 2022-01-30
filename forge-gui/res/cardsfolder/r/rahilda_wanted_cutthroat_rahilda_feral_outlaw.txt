@@ -31,5 +31,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$CreaturesAttackedThisTurn Creature.Wolf+YouCtrl/Plus.Y
 SVar:Y:Count$CreaturesAttackedThisTurn Creature.Werewolf+YouCtrl
 K:Nightbound
-DeckHints:Type$Wolf|Werewolf
 Oracle:Double strike\nWhen Rahilda, Feral Outlaw deals combat damage to a player, exile a nonland card from their library at random. During any turn you attacked with a Wolf or Werewolf, you may cast that card and you may spend mana as though it were mana of any color to cast that spell.\nNightbound

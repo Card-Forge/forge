@@ -3,7 +3,6 @@ ManaCost:3 U R
 Types:Legendary Planeswalker Ral
 Loyalty:5
 A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | DigNum$ 2 | ChangeNum$ 1 | DestinationZone2$ Graveyard | SpellDescription$ Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
-DeckHas:Ability$Graveyard
 A:AB$ DealDamage | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature equal to the total number of instant and sorcery cards you own in exile and in your graveyard.
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn/Plus.Y
 SVar:Y:Count$ValidExile Instant.YouOwn,Sorcery.YouOwn

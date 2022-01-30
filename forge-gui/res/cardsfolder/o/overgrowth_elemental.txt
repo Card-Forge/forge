@@ -4,12 +4,11 @@ Types:Creature Elemental
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on another target Elemental you control.
 SVar:TrigPut:DB$ PutCounter | ValidTgts$ Elemental.Other+YouCtrl | TgtPrompt$ Select another target Elemental you control | CounterType$ P1P1 | CounterNum$ 1
-AI:RemoveDeck:Random
-SVar:PlayMain1:TRUE
-DeckHints:Type$Elemental
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature you control dies, you gain 1 life. If that creature was an Elemental, put a +1/+1 counter on CARDNAME.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionDefined$ TriggeredCardLKICopy | ConditionPresent$ Creature.Elemental
 DeckHas:Ability$Counters
 DeckHints:Type$Elemental
+AI:RemoveDeck:Random
+SVar:PlayMain1:TRUE
 Oracle:When Overgrowth Elemental enters the battlefield, put a +1/+1 counter on another target Elemental you control.\nWhenever another creature you control dies, you gain 1 life. If that creature was an Elemental, put a +1/+1 counter on Overgrowth Elemental.

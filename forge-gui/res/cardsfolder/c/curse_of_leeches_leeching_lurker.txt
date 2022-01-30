@@ -22,5 +22,4 @@ Types:Creature Leech Horror
 PT:4/4
 K:Lifelink
 K:Nightbound
-DeckHas:Ability$LifeGain
 Oracle:Lifelink\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

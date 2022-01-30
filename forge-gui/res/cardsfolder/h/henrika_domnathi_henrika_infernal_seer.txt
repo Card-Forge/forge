@@ -10,7 +10,7 @@ SVar:DrawDom:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife | Sp
 SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1 | StackDescription$ None
 SVar:TransDom:DB$ SetState | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
 AlternateMode:DoubleFaced
-DeckHas:Ability$Sacrifice
+DeckHas:Ability$Sacrifice|LifeGain
 Oracle:Flying\nAt the beginning of combat on your turn, choose one that hasn't been chosen –\n• Each player sacrifices a creature.\n• You draw a card and you lose 1 life.\n•Transform Henrika Domnathi.
 
 ALTERNATE
@@ -24,5 +24,4 @@ K:Flying
 K:Deathtouch
 K:Lifelink
 A:AB$ PumpAll | Cost$ 1 B B | ValidCards$ Creature.YouCtrl+withFlying,Creature.YouCtrl+withLifelink,Creature.YouCtrl+withDeathtouch | NumAtt$ +1 | SpellDescription$ Each creature you control with flying, deathtouch and/or lifelink gets +1/+0 until end of turn.
-DeckHas:Ability$LifeGain
 Oracle:Flying, deathtouch, lifelink\n{1}{B}{B}: Each creature you control with flying, deathtouch and/or lifelink gets +1/+0 until end of turn.

@@ -26,5 +26,4 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ JUDGMENT | Cou
 SVar:DBLose:DB$ LosesGame | Defined$ EnchantedPlayer | ConditionPresent$ Card.Self+counters_GE3_JUDGMENT
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
 SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
-DeckHas:Ability$Counters
 Oracle:Enchant player\nAt the beginning of your upkeep, put a judgment counter on Sinner's Judgment. Then if there are three or more judgment counters on it, enchanted player loses the game.\nIf Sinner's Judgment would be put into a graveyard from anywhere, exile it instead.
