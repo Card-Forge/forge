@@ -79,7 +79,7 @@
 {
 	"name": "Vampire",
 	"sprite": "sprites/vampire.atlas",
-	"deck": "decks/Vampire.dck",
+	"deck": "decks/vampire.dck",
 	"spawnRate": 0.1,
 	"difficulty": 0.1,
 	"speed": 30,
