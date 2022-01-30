@@ -2773,8 +2773,8 @@ public class CardFactoryUtil {
             String equipCost = k[1];
             String valid = k.length > 2 && !k[2].isEmpty() ? k[2] : "Creature.YouCtrl";
             String vstr = k.length > 3 && !k[3].isEmpty() ? k[3] : "creature";
-            String extra =  k.length > 4 ? k[4] : "";
-            String extraDesc =  k.length > 5 ? k[5] : "";
+            String extra = k.length > 4 ? k[4] : "";
+            String extraDesc = k.length > 5 ? k[5] : "";
             // Create attach ability string
             final StringBuilder abilityStr = new StringBuilder();
             abilityStr.append("AB$ Attach | Cost$ ");
@@ -3111,6 +3111,27 @@ public class CardFactoryUtil {
 
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
+        } else if (keyword.startsWith("Reconfigure")) {
+            if (!keyword.contains(":")) {
+                System.err.println("Malformed Reconfigure entry! - Card: " + card.toString());
+                return;
+            }
+            String[] k = keyword.split(":");
+            String bothStr = "| Cost$ " + k[1] + " | SorcerySpeed$ True | Reconfigure$ True | PrecostDesc$ Reconfigure ";
+            final StringBuilder attachStr = new StringBuilder();
+            attachStr.append("AB$ Attach | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select target creature you ");
+            attachStr.append("control | AILogic$ Pump | Secondary$ True | SpellDescription$ Attach ").append(bothStr);
+            final StringBuilder unattachStr = new StringBuilder();
+            unattachStr.append("AB$ Unattach | Defined$ Self | SpellDescription$ Unattach | Secondary$ True ");
+            unattachStr.append(bothStr);
+            // instantiate attach ability
+            SpellAbility attachSA = AbilityFactory.getAbility(attachStr.toString(), card);
+            attachSA.setIntrinsic(intrinsic);
+            inst.addSpellAbility(attachSA);
+            // instantiate unattach ability
+            SpellAbility unattachSA = AbilityFactory.getAbility(unattachStr.toString(), card);
+            unattachSA.setIntrinsic(intrinsic);
+            inst.addSpellAbility(unattachSA);
         } else if (keyword.startsWith("Reinforce")) {
             final String[] k = keyword.split(":");
             final String n = k[1];
@@ -3584,6 +3605,10 @@ public class CardFactoryUtil {
                 }
             }
             effect += " | Description$ " + desc;
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
+        } else if (keyword.startsWith("Reconfigure")) {
+            String effect = "Mode$ Continuous | Affected$ Card.Self | IsPresent$ Card.Self+AttachedTo Creature | "
+                    + "RemoveType$ Creature | Secondary$ True | Description$ Reconfigure (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Shroud")) {
             String effect = "Mode$ CantTarget | Shroud$ True | ValidCard$ Card.Self | Secondary$ True"
