@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ 3 U U | ValidTgts$ Creature | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigAttach | TriggerDescription$ Whenever a creature enters the battlefield under an opponent's control, attach CARDNAME to that creature.
 SVar:TrigAttach:DB$ Attach | Defined$ TriggeredCard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/illusory_gains.jpg
 Oracle:Enchant creature\nYou control enchanted creature.\nWhenever a creature enters the battlefield under an opponent's control, attach Illusory Gains to that creature.

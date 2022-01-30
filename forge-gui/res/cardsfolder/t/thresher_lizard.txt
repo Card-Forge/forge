@@ -4,5 +4,4 @@ Types:Creature Lizard
 PT:3/2
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 2 | CheckSVar$ X | SVarCompare$ LE1 | Description$ CARDNAME gets +1/+2 as long as you have one or fewer cards in hand.
 SVar:X:Count$InYourHand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thresher_lizard.jpg
 Oracle:Thresher Lizard gets +1/+2 as long as you have one or fewer cards in hand.

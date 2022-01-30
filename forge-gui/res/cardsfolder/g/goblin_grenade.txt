@@ -5,5 +5,4 @@ A:SP$ DealDamage | Cost$ R Sac<1/Goblin> | ValidTgts$ Creature,Player,Planeswalk
 SVar:AIPreference:SacCost$Creature.Goblin+cmcLE1
 AI:RemoveDeck:Random
 DeckNeeds:Type$Goblin
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_grenade.jpg
 Oracle:As an additional cost to cast this spell, sacrifice a Goblin.\nGoblin Grenade deals 5 damage to any target.

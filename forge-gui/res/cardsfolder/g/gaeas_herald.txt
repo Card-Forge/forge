@@ -3,5 +3,4 @@ ManaCost:1 G
 Types:Creature Elf
 PT:1/1
 S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ CARDNAME can't be countered. | AffectedZone$ Stack | Description$ Creature spells can't be countered.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gaeas_herald.jpg
 Oracle:Creature spells can't be countered.

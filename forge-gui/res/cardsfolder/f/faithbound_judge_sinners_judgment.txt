@@ -10,7 +10,7 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ JUDGMENT | Cou
 S:Mode$ Continuous | Affected$ Card.Self+counters_GE3_JUDGMENT | AddHiddenKeyword$ CARDNAME can attack as though it didn't have defender. | Description$ As long as CARDNAME has three or more judgment counters on it, it can attack as though it didn't have defender.
 K:Disturb:5 W W
 AlternateMode:DoubleFaced
-DeckHas:Ability$Graveyard & Ability$Counters
+DeckHas:Ability$Graveyard|Counters
 Oracle:Defender, flying, vigilance\nAt the beginning of your upkeep, if Faithbound Judge has two or fewer judgment counters on it, put a judgment counter on it.\nAs long as Faithbound Judge has three or more judgment counters on it, it can attack as though it didn't have defender.\nDisturb {5}{W}{W}
 
 ALTERNATE
@@ -26,5 +26,4 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ JUDGMENT | Cou
 SVar:DBLose:DB$ LosesGame | Defined$ EnchantedPlayer | ConditionPresent$ Card.Self+counters_GE3_JUDGMENT
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
 SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
-DeckHas:Ability$Counters
 Oracle:Enchant player\nAt the beginning of your upkeep, put a judgment counter on Sinner's Judgment. Then if there are three or more judgment counters on it, enchanted player loses the game.\nIf Sinner's Judgment would be put into a graveyard from anywhere, exile it instead.

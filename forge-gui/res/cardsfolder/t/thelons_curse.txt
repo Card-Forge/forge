@@ -9,5 +9,4 @@ SVar:UntapEach:DB$ Untap | Defined$ Remembered | UnlessCost$ U | UnlessPayer$ Re
 SVar:X:Count$Valid Creature.tapped+Blue+ActivePlayerCtrl
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thelons_curse.jpg
 Oracle:Blue creatures don't untap during their controllers' untap steps.\nAt the beginning of each player's upkeep, that player may choose any number of tapped blue creatures they control and pay {U} for each creature chosen this way. If the player does, untap those creatures.

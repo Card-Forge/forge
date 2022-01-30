@@ -4,5 +4,4 @@ Types:Creature Phyrexian Insect Horror
 PT:1/1
 K:Flying
 K:Infect
-SVar:Picture:http://www.wizards.com/global/images/magic/general/plague_stinger.jpg
 Oracle:Flying\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)

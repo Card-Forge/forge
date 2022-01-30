@@ -8,5 +8,4 @@ SVar:GainLife:AB$GainLife | Cost$ T Sac<1/Creature> | LifeAmount$ AnimalBoneyard
 SVar:AnimalBoneyardX:Sacrificed$CardToughness
 AI:RemoveDeck:All
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/animal_boneyard.jpg
 Oracle:Enchant land\nEnchanted land has "{T}, Sacrifice a creature: You gain life equal to the sacrificed creature's toughness."

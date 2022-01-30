@@ -4,5 +4,4 @@ Types:Creature Harpy
 PT:2/2
 K:Flying
 K:Lifelink
-SVar:Picture:http://www.wizards.com/global/images/magic/general/insatiable_harpy.jpg
 Oracle:Flying, lifelink

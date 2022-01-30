@@ -6,5 +6,4 @@ SVar:DBDraw:DB$ Draw | NumCards$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Permanent.nonLand+nonToken+YouCtrl
 SVar:Y:Remembered$Valid Card.YouOwn
-SVar:Picture:http://www.wizards.com/global/images/magic/general/paradoxical_outcome.jpg
 Oracle:Return any number of target nonland, nontoken permanents you control to their owners' hands. Draw a card for each card returned to your hand this way.

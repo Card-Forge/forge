@@ -14,5 +14,4 @@ SVar:SpellsNeedExtraManaEffect:1
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | Execute$ CounterSpellOpp | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent casts a spell, counter it unless that player pays {1}.
 SVar:CounterSpellOpp:DB$ Counter | Defined$ TriggeredSpellAbility | UnlessCost$ 1 | UnlessPayer$ TriggeredActivator
 SVar:AI_SpellsNeedExtraMana:1 Opponent
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chancellor_of_the_annex.jpg
 Oracle:You may reveal this card from your opening hand. If you do, when each opponent casts their first spell of the game, counter that spell unless that player pays {1}.\nFlying\nWhenever an opponent casts a spell, counter it unless that player pays {1}.

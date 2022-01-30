@@ -7,5 +7,4 @@ K:Protection from white
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target blue or red creature card from your graveyard to your hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.Blue+YouCtrl,Creature.Red+YouCtrl
 DeckHints:Color$Blue|Red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_angel.jpg
 Oracle:Flying, protection from white\nWhen Crypt Angel enters the battlefield, return target blue or red creature card from your graveyard to your hand.

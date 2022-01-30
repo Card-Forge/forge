@@ -4,5 +4,4 @@ Types:Creature Human Knight
 PT:3/3
 A:AB$ Destroy | Cost$ W W T | ValidTgts$ Permanent.Black | TgtPrompt$ Select target black permanent | SpellDescription$ Destroy target black permanent.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/northern_paladin.jpg
 Oracle:{W}{W}, {T}: Destroy target black permanent.

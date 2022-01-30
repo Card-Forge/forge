@@ -3,5 +3,4 @@ ManaCost:W W
 Types:Creature Human Soldier
 PT:2/2
 K:Vigilance
-SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6508.jpg
 Oracle:Vigilance

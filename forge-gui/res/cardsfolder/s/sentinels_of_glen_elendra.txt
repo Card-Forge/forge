@@ -4,5 +4,4 @@ Types:Creature Faerie Soldier
 PT:2/3
 K:Flash
 K:Flying
-SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card139426.jpg
 Oracle:Flash\nFlying

@@ -4,5 +4,4 @@ Types:Creature Centaur Archer
 PT:2/2
 K:Flanking
 K:Shroud
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jolraels_centaur.jpg
 Oracle:Shroud (This creature can't be the target of spells or abilities.)\nFlanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)

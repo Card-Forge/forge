@@ -10,5 +10,4 @@ T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | Comba
 SVar:TrigDealDamage:DB$ DealDamage | DamageSource$ TriggeredSource | NumDmg$ X | Defined$ ChosenPlayer
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/saskia_the_unyielding.jpg
 Oracle:Vigilance, haste\nAs Saskia the Unyielding enters the battlefield, choose a player.\nWhenever a creature you control deals combat damage to a player, it deals that much damage to the chosen player.

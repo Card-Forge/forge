@@ -5,5 +5,4 @@ PT:0/5
 K:Defender
 A:AB$ SetState | Cost$ 3 | Defined$ Self | Mode$ TurnFace | AILogic$ Never | SpellDescription$ Turn CARDNAME face down.
 K:Morph:U
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_deceit.jpg
 Oracle:Defender (This creature can't attack.)\n{3}: Turn Wall of Deceit face down.\nMorph {U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

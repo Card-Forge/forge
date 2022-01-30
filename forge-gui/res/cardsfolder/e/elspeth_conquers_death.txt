@@ -14,5 +14,5 @@ SVar:PlayMain1:TRUE
 SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$ValidGraveyard Creature.YouOwn/Plus.Y1
 SVar:Y1:Count$ValidGraveyard Planeswalker.YouOwn
-DeckHas:Ability$Counters & Ability$Sacrifice & Ability$Graveyard
+DeckHas:Ability$Counters|Sacrifice|Graveyard
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Exile target permanent an opponent controls with mana value 3 or greater.\nII — Noncreature spells your opponents cast cost {2} more to cast until your next turn.\nIII — Return target creature or planeswalker card from your graveyard to the battlefield. Put a +1/+1 counter or a loyalty counter on it.

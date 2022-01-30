@@ -8,5 +8,4 @@ SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterNum$ X | CounterType$ 
 SVar:DBDraw:DB$ Draw | Defined$ Player | NumCards$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Card.nonLand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/selvalas_enforcer.jpg
 Oracle:Parley — When Selvala's Enforcer enters the battlefield, each player reveals the top card of their library. For each nonland card revealed this way, put a +1/+1 counter on Selvala's Enforcer. Then each player draws a card.

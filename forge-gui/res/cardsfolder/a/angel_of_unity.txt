@@ -10,7 +10,7 @@ SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Creature.Party+YouO
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualP1P1 | Name$ Angel of Unity's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:PerpetualP1P1:Mode$ Continuous | Affected$ Card.ChosenCard | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The chosen card perpetually gets +1/+1.
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-DeckHas:Ability$Party & Ability$LifeGain
+DeckHas:Ability$Party|LifeGain
 SVar:BuffedBy:Cleric,Rogue,Warrior,Wizard
 DeckHints:Type$Rogue|Warrior|Wizard
 Oracle:Flying, lifelink\nWhenever Angel of Unity enters the battlefield or you cast a party spell, choose a party creature card in your hand. It perpetually gets +1/+1. (A party card or spell is a Cleric, Rogue, Warrior, or Wizard.)

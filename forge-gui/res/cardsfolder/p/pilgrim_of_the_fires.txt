@@ -4,5 +4,4 @@ Types:Artifact Creature Golem
 PT:6/4
 K:First Strike
 K:Trample
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pilgrim_of_the_fires.jpg
 Oracle:First strike, trample

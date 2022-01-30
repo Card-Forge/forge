@@ -5,5 +5,4 @@ A:SP$ Charm | Cost$ X W W | Choices$ DBGainLife,DBPreventDamage
 SVar:DBGainLife:DB$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ X | SpellDescription$ Target player gains X life.
 SVar:DBPreventDamage:DB$ PreventDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | Amount$ X | SpellDescription$ Prevent the next X damage that would be dealt to any target this turn.
 SVar:X:Count$xPaid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/alabaster_potion.jpg
 Oracle:Choose one —\n• Target player gains X life.\n• Prevent the next X damage that would be dealt to any target this turn.

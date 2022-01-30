@@ -4,5 +4,4 @@ Types:Artifact
 K:CARDNAME enters the battlefield tapped.
 A:AB$ ManaReflected | Cost$ T | ColorOrType$ Color | Valid$ Defined.ValidGraveyard Card.YouOwn | ReflectProperty$ Is | SpellDescription$ Choose a color of a card in your graveyard. Add one mana of that color.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/corrupted_grafstone.jpg
 Oracle:Corrupted Grafstone enters the battlefield tapped.\n{T}: Choose a color of a card in your graveyard. Add one mana of that color.

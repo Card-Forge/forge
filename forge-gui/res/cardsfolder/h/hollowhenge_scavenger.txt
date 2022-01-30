@@ -5,5 +5,4 @@ PT:4/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ Morbid | SVarCompare$ GE1 | Execute$ TrigGainLife | TriggerDescription$ Morbid — When CARDNAME enters the battlefield, if a creature died this turn, you gain 5 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 5
 SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hollowhenge_scavenger.jpg
 Oracle:Morbid — When Hollowhenge Scavenger enters the battlefield, if a creature died this turn, you gain 5 life.

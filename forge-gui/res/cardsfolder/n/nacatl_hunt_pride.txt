@@ -6,5 +6,4 @@ K:Vigilance
 A:AB$ Pump | Cost$ R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't block. | SpellDescription$ Target creature can't block this turn.
 A:AB$ Pump | Cost$ G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME blocks each combat if able. | SpellDescription$ Target creature blocks this turn if able.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nacatl_hunt_pride.jpg
 Oracle:Vigilance\n{R}, {T}: Target creature can't block this turn.\n{G}, {T}: Target creature blocks this turn if able.

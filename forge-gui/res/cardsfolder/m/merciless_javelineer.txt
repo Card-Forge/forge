@@ -5,5 +5,4 @@ PT:4/2
 A:AB$ PutCounter | Cost$ 2 Discard<1/Card> | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | CounterType$ M1M1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a -1/-1 counter on target creature. That creature can't block this turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | IsCurse$ True | KW$ HIDDEN CARDNAME can't block.
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/merciless_javelineer.jpg
 Oracle:{2}, Discard a card: Put a -1/-1 counter on target creature. That creature can't block this turn.

@@ -4,5 +4,4 @@ Types:Instant
 K:Strive:2 U
 A:SP$ Pump | Cost$ U | ValidTgts$ Creature | KW$ Flying | NumAtt$ +1 | NumDef$ +1 | TargetMin$ 0 | TargetMax$ MaxTargets | SpellDescription$ Any number of target creatures each get +1/+1 and gain flying until end of turn.
 SVar:MaxTargets:Count$Valid Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aerial_formation.jpg
 Oracle:Strive — This spell costs {2}{U} more to cast for each target beyond the first.\nAny number of target creatures each get +1/+1 and gain flying until end of turn.

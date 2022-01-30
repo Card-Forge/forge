@@ -3,5 +3,4 @@ ManaCost:4 U
 Types:Instant
 A:SP$ PumpAll | Cost$ 4 U | ValidCards$ Creature.OppCtrl | NumAtt$ -4 | NumDef$ 0 | SubAbility$ DBDraw | SpellDescription$ Creatures your opponents control get -4/-0 until end of turn.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blinding_spray.jpg
 Oracle:Creatures your opponents control get -4/-0 until end of turn.\nDraw a card.

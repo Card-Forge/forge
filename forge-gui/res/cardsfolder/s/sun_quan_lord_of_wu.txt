@@ -4,5 +4,4 @@ Types:Legendary Creature Human Soldier
 PT:4/4
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Horsemanship | Description$ Creatures you control have horsemanship.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sun_quan_lord_of_wu.jpg
 Oracle:Creatures you control have horsemanship. (They can't be blocked except by creatures with horsemanship.)

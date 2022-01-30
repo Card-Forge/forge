@@ -4,5 +4,4 @@ Types:Creature Viashino Skeleton
 PT:2/1
 A:AB$ Regenerate | Cost$ 1 B Discard<1/Card> | SpellDescription$ Regenerate CARDNAME.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_skeleton.jpg
 Oracle:{1}{B}, Discard a card: Regenerate Viashino Skeleton.

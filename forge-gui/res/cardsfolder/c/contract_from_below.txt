@@ -7,5 +7,4 @@ SVar:DBAnte:DB$ ChangeZone | Defined$ TopOfLibrary | Origin$ Library | Destinati
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 7
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/contract_from_below.jpg
 Oracle:Remove Contract from Below from your deck before playing if you're not playing for ante.\nDiscard your hand, ante the top card of your library, then draw seven cards.

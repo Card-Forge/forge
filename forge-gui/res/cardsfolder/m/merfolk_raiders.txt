@@ -4,5 +4,4 @@ Types:Creature Merfolk Soldier
 PT:2/3
 K:Islandwalk
 K:Phasing
-SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_raiders.jpg
 Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nPhasing (This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)

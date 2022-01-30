@@ -9,5 +9,4 @@ SVar:DBHandChoice:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | D
 SVar:DBTopLibChoice:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Top of the library
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Blessing.1.0
-SVar:Picture:http://www.wizards.com/global/images/magic/general/expel_from_orazca.jpg
 Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nReturn target nonland permanent to its owner's hand. If you have the city's blessing, you may put that permanent on top of its owner's library instead.

@@ -8,5 +8,4 @@ SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Referneces$ X | Description$ Enchanted creature gets +1/+1 for each aura you control that's attached to a creature.
 SVar:X:Count$Valid Aura.YouCtrl+AttachedTo Creature
 SVar:BuffedBy:Aura
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sages_reverie.jpg
 Oracle:Enchant creature\nWhen Sage's Reverie enters the battlefield, draw a card for each Aura you control that's attached to a creature.\nEnchanted creature gets +1/+1 for each Aura you control that's attached to a creature.

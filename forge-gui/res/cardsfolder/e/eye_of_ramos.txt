@@ -4,5 +4,4 @@ Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ U | SpellDescription$ Add {U}.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eye_of_ramos.jpg
 Oracle:{T}: Add {U}.\nSacrifice Eye of Ramos: Add {U}.

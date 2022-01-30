@@ -3,5 +3,4 @@ ManaCost:1 B
 Types:Creature Zombie Wizard
 PT:2/1
 S:Mode$ Continuous | Affected$ Card | AffectedZone$ Graveyard | RemoveAllAbilities$ True | Description$ Cards in graveyards lose all abilities.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/yixlid_jailer.jpg
 Oracle:Cards in graveyards lose all abilities.

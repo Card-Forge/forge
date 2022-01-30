@@ -11,5 +11,4 @@ SVar:BuffedBy:Permanent.Snow
 AI:RemoveDeck:Random
 DeckNeeds:Type$Snow
 SVar:NoZeroToughnessAI:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rimefeather_owl.jpg
 Oracle:Flying\nRimefeather Owl's power and toughness are each equal to the number of snow permanents on the battlefield.\n{1}{S}: Put an ice counter on target permanent.\nPermanents with ice counters on them are snow.

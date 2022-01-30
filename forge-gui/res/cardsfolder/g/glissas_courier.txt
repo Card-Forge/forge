@@ -3,5 +3,4 @@ ManaCost:1 G G
 Types:Creature Phyrexian Horror
 PT:2/3
 K:Mountainwalk
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glissas_courier.jpg
 Oracle:Mountainwalk (This creature can't be blocked as long as defending player controls a Mountain.)

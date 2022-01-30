@@ -7,5 +7,4 @@ K:Trample
 A:AB$ PutCounter | Cost$ T Sac<1/Creature.Other/another creature> | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ Put a number of +1/+1 counters on CARDNAME equal to the sacrificed creature's toughness.
 SVar:X:Sacrificed$CardToughness
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scourge_of_skola_vale.jpg
 Oracle:Trample\nScourge of Skola Vale enters the battlefield with two +1/+1 counters on it.\n{T}, Sacrifice another creature: Put a number of +1/+1 counters on Scourge of Skola Vale equal to the sacrificed creature's toughness.

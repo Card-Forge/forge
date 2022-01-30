@@ -7,5 +7,4 @@ SVar:TrigLoseLifeEachOpp:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | CheckSVar$ TrigHand | SVarCompare$ EQ0 | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of each opponent's upkeep, if that player has no cards in hand, they lose 2 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ 2
 SVar:TrigHand:Count$ValidHand Card.ActivePlayerCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hollowborn_barghest.jpg
 Oracle:At the beginning of your upkeep, if you have no cards in hand, each opponent loses 2 life.\nAt the beginning of each opponent's upkeep, if that player has no cards in hand, they lose 2 life.

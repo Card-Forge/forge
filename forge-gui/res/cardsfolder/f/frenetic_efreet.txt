@@ -6,5 +6,4 @@ K:Flying
 A:AB$ FlipACoin | Cost$ 0 | WinSubAbility$ DBPhase | LoseSubAbility$ DBSacrifice | AILogic$ PhaseOut | SpellDescription$ Flip a coin. If you win the flip, Frenetic Efreet phases out. If you lose the flip, sacrifice Frenetic Efreet. (While it's phased out, it's treated as though it doesn't exist. It phases in before you untap during your next untap step.)
 SVar:DBPhase:DB$ Phases | Defined$ Self
 SVar:DBSacrifice:DB$ Sacrifice | Defined$ Self
-SVar:Picture:http://www.wizards.com/global/images/magic/general/frenetic_efreet.jpg
 Oracle:Flying\n{0}: Flip a coin. If you win the flip, Frenetic Efreet phases out. If you lose the flip, sacrifice Frenetic Efreet. (While it's phased out, it's treated as though it doesn't exist. It phases in before you untap during your next untap step.)

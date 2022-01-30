@@ -5,5 +5,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 4 U | ValidTgts$ Creature | AILogic$ GainControl
 K:UpkeepCost:Return<1/Land>
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vapor_snare.jpg
 Oracle:Enchant creature\nYou control enchanted creature.\nAt the beginning of your upkeep, sacrifice Vapor Snare unless you return a land you control to its owner's hand.

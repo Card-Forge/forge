@@ -5,5 +5,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield 
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ X
 SVar:X:Count$ValidHand Card.ActivePlayerCtrl/NMinus.4
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_world.jpg
 Oracle:At the beginning of each player's upkeep, Storm World deals X damage to that player, where X is 4 minus the number of cards in their hand.

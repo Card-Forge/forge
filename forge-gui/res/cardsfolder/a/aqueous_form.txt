@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ Unblocka
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ DBScry | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature attacks, scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 SVar:AE:SVar:HasAttackEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aqueous_form.jpg
 Oracle:Enchant creature\nEnchanted creature can't be blocked.\nWhenever enchanted creature attacks, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

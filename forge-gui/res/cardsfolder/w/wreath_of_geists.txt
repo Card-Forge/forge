@@ -5,5 +5,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +X/+X, where X is the number of creature cards in your graveyard.
 SVar:X:Count$TypeInYourYard.Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wreath_of_geists.jpg
 Oracle:Enchant creature\nEnchanted creature gets +X/+X, where X is the number of creature cards in your graveyard.

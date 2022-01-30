@@ -3,5 +3,4 @@ ManaCost:1 U
 Types:Instant
 K:Flashback:2 U
 A:SP$ Draw | Cost$ 1 U | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/think_twice.jpg
 Oracle:Draw a card.\nFlashback {2}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

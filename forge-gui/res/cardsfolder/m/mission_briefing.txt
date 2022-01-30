@@ -9,6 +9,5 @@ SVar:ReplaceGraveyard:Event$ Moved | ValidCard$ Card.IsRemembered | Origin$ Stac
 SVar:MoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-DeckHas:Ability$Surveil & Ability$Graveyard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mission_briefing.jpg
+DeckHas:Ability$Surveil|Graveyard
 Oracle:Surveil 2, then choose an instant or sorcery card in your graveyard. You may cast it this turn. If that spell would be put into your graveyard this turn, exile it instead. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)

@@ -20,5 +20,5 @@ SVar:PlayMain1:TRUE
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ Whenever CARDNAME attacks, add {R} or {G}. Until end of turn, you don't lose this mana as steps and phases end.
 SVar:TrigMana:DB$ Mana | Amount$ 1 | Produced$ Combo R G | PersistentMana$ True
 K:Nightbound
-DeckHints:Type$Wolf & Type$Werewolf
+DeckHints:Type$Wolf|Werewolf
 Oracle:Other Wolves and Werewolves you control get +1/+1.\nWhenever Lord of the Ulvenwald attacks, add {R} or {G}. Until end of turn, you don't lose this mana as steps and phases end.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

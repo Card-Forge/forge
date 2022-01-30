@@ -5,5 +5,4 @@ PT:2/2
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ Whenever CARDNAME attacks, add R R.
 SVar:TrigMana:DB$ Mana | Produced$ R | Amount$ 2 | SpellDescription$ Add {R}{R}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/radha_heir_to_keld.jpg
 Oracle:Whenever Radha, Heir to Keld attacks, you may add {R}{R}.\n{T}: Add {G}.

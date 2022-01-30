@@ -4,5 +4,4 @@ Types:Creature Goblin Berserker
 PT:2/1
 K:First Strike
 K:CARDNAME attacks each combat if able.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/riot_piker.jpg
 Oracle:First strike\nRiot Piker attacks each combat if able.

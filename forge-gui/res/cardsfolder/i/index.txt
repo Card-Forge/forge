@@ -2,5 +2,4 @@ Name:Index
 ManaCost:U
 Types:Sorcery
 A:SP$ RearrangeTopOfLibrary | Cost$ U | Defined$ You | NumCards$ 5 | SpellDescription$ Look at the top five cards of your library, then put them back in any order.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/index.jpg
 Oracle:Look at the top five cards of your library, then put them back in any order.

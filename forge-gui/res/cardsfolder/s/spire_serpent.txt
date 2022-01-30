@@ -5,5 +5,4 @@ PT:3/5
 K:Defender
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddHiddenKeyword$ CARDNAME can attack as though it didn't have defender. | Condition$ Metalcraft | Description$ Metalcraft — As long as you control three or more artifacts, CARDNAME gets +2/+2 and can attack as though it didn't have defender.
 SVar:BuffedBy:Artifact
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spire_serpent.jpg
 Oracle:Defender\nMetalcraft — As long as you control three or more artifacts, Spire Serpent gets +2/+2 and can attack as though it didn't have defender.

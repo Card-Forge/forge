@@ -7,5 +7,4 @@ K:Vigilance
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | IsPresent$ Card.Self+enchanted | TriggerDescription$ Whenever CARDNAME attacks, if it's enchanted, exile target permanent.
 SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Exile
 SVar:EnchantMe:Once
-SVar:Picture:http://www.wizards.com/global/images/magic/general/krond_the_dawn_clad.jpg
 Oracle:Flying, vigilance\nWhenever Krond the Dawn-Clad attacks, if it's enchanted, exile target permanent.

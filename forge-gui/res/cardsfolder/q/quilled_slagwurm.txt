@@ -2,5 +2,4 @@ Name:Quilled Slagwurm
 ManaCost:4 G G G
 Types:Creature Phyrexian Wurm
 PT:8/8
-SVar:Picture:http://www.wizards.com/global/images/magic/general/quilled_slagwurm.jpg
 Oracle:

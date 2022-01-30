@@ -6,5 +6,4 @@ SVar:BloomingLand:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 3 | Effect
 SVar:NeedsToPlayVar:LandInHand GE1
 SVar:LandInHand:Count$InYourHand.Land
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/summer_bloom.jpg
 Oracle:You may play up to three additional lands this turn.

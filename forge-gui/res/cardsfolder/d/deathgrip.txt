@@ -4,5 +4,4 @@ Types:Enchantment
 A:AB$ Counter | Cost$ B B | TargetType$ Spell | TgtPrompt$ Select target Green Spell | ValidTgts$ Card.Green | SpellDescription$ Counter target green spell.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deathgrip.jpg
 Oracle:{B}{B}: Counter target green spell.

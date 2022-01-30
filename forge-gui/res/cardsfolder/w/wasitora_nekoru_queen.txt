@@ -10,5 +10,4 @@ SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ brg_3_3_cat_dragon_flying
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:MustBeBlocked:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wasitora_nekoru_queen.jpg
 Oracle:Flying, trample\nWhenever Wasitora, Nekoru Queen deals combat damage to a player, that player sacrifices a creature. If the player can't, you create a 3/3 black, red, and green Cat Dragon creature token with flying.

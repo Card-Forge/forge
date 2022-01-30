@@ -4,5 +4,4 @@ Types:Creature Horse
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Creature.Other | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever another creature dies, tap CARDNAME.
 SVar:TrigTap:DB$ Tap | Defined$ Self
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fleshmad_steed.jpg
 Oracle:Whenever another creature dies, tap Fleshmad Steed.

@@ -2,5 +2,4 @@ Name:Zombie Goliath
 ManaCost:4 B
 Types:Creature Zombie Giant
 PT:4/3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_goliath.jpg
 Oracle:

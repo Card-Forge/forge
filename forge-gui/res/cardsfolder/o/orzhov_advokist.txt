@@ -11,5 +11,4 @@ SVar:DBRememberPlayer:DB$ Pump | RememberObjects$ RememberedController | SubAbil
 SVar:DBEffect:DB$ Effect | RememberObjects$ Player.IsRemembered | StaticAbilities$ STCantAttack | Duration$ UntilYourNextTurn | SubAbility$ DBCleanup
 SVar:STCantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.RememberedPlayerCtrl | Target$ You,Planeswalker.YouCtrl | Description$ Creatures that player controls can't attack you or planeswalkers you control until your next turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/orzhov_advokist.jpg
 Oracle:At the beginning of your upkeep, each player may put two +1/+1 counters on a creature they control. If a player does, creatures that player controls can't attack you or planeswalkers you control until your next turn.

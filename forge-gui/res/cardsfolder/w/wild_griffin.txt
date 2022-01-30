@@ -3,5 +3,4 @@ ManaCost:2 W
 Types:Creature Griffin
 PT:2/2
 K:Flying
-SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card129557.jpg
 Oracle:Flying

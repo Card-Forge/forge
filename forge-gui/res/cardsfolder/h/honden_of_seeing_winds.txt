@@ -5,5 +5,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:Count$TypeYouCtrl.Shrine
 DeckHints:Type$Shrine
-SVar:Picture:http://www.wizards.com/global/images/magic/general/honden_of_seeing_winds.jpg
 Oracle:At the beginning of your upkeep, draw a card for each Shrine you control.

@@ -2,5 +2,4 @@ Name:Extortion
 ManaCost:3 B B
 Types:Sorcery
 A:SP$ Discard | Cost$ 3 B B | ValidTgts$ Opponent | Mode$ RevealYouChoose | NumCards$ 2 | SpellDescription$ Look at target player's hand and choose up to two cards from it. That player discards those cards.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/extortion.jpg
 Oracle:Look at target player's hand and choose up to two cards from it. That player discards those cards.

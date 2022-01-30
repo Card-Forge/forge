@@ -6,5 +6,5 @@ K:Haste
 A:AB$ Effect | Cost$ 1 | StaticAbilities$ KWPump | SpellDescription$ CARDNAME can't be blocked this turn except by creatures with haste.
 SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.EffectSource | ValidBlocker$ Creature.withoutHaste | EffectZone$ Command | Description$ EFFECTSOURCE can't be blocked this turn except by creatures with haste.
 A:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME> | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
-DeckHas:Ability$LifeGain & Ability$Food
+DeckHas:Ability$LifeGain|Food
 Oracle:Haste\n{1}: Gingerbrute can't be blocked this turn except by creatures with haste.\n{2}, {T}, Sacrifice Gingerbrute: You gain 3 life.

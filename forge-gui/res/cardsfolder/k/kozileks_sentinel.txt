@@ -7,5 +7,4 @@ T:Mode$ SpellCast | ValidCard$ Card.Colorless | ValidActivatingPlayer$ You | Tri
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1
 SVar:BuffedBy:Card.Colorless
 DeckHints:Color$Colorless & Keyword$Devoid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kozileks_sentinel.jpg
 Oracle:Devoid (This card has no color.)\nWhenever you cast a colorless spell, Kozilek's Sentinel gets +1/+0 until end of turn.

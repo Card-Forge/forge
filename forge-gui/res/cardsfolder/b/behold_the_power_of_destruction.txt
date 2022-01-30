@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DarkEffect | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, destroy all nonland permanents target opponent controls.
 SVar:DarkEffect:DB$ DestroyAll | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ValidCards$ Permanent.nonLand
-SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/Behold the Power of Destruction.full.jpg
 Oracle:When you set this scheme in motion, destroy all nonland permanents target opponent controls.

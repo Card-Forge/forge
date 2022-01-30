@@ -5,5 +5,4 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 2 | AddKeyword$ Deat
 SVar:X:Count$Valid Creature.YouCtrl
 AI:RemoveDeck:All
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deadly_wanderings.jpg
 Oracle:As long as you control exactly one creature, that creature gets +2/+0 and has deathtouch and lifelink.

@@ -8,5 +8,4 @@ S:Mode$ CantAttack | DefenderNotNearestToYouInChosenDirection$ True | Descriptio
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_barrier.jpg
 Oracle:When Mystic Barrier enters the battlefield or at the beginning of your upkeep, choose left or right.\nEach player may attack only the nearest opponent in the last chosen direction and planeswalkers controlled by that opponent.

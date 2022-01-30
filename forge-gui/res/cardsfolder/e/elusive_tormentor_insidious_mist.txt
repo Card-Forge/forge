@@ -2,8 +2,7 @@ Name:Elusive Tormentor
 ManaCost:2 B B
 Types:Creature Vampire Wizard
 PT:4/4
-A:AB$SetState | Cost$ 1 Discard<1/Card> | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elusive_tormentor.jpg
+A:AB$ SetState | Cost$ 1 Discard<1/Card> | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
 AlternateMode:DoubleFaced
 AI:RemoveDeck:All
 DeckHas:Ability$Discard
@@ -23,5 +22,4 @@ K:CARDNAME can't block.
 K:Unblockable
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may pay {2}{B}. If you do, transform it.
 SVar:TrigTransform:AB$SetState | Cost$ 2 B | Defined$ Self | Mode$ Transform
-SVar:Picture:http://www.wizards.com/global/images/magic/general/insidious_mist.jpg
 Oracle:Hexproof, indestructible\nInsidious Mist can't block and can't be blocked.\nWhenever Insidious Mist attacks and isn't blocked, you may pay {2}{B}. If you do, transform it.

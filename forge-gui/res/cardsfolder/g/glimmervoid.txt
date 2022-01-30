@@ -6,5 +6,4 @@ T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Arti
 SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:NeedsToPlay:Artifact.YouCtrl
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glimmervoid.jpg
 Oracle:At the beginning of the end step, if you control no artifacts, sacrifice Glimmervoid.\n{T}: Add one mana of any color.

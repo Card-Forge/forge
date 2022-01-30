@@ -7,5 +7,4 @@ SVar:DBChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | SubAb
 SVar:DBUntap:DB$ UntapAll | ValidCards$ Permanent.nonLand+YouCtrl,Permanent.nonLand+ChosenCtrl
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/intellectual_offering.jpg
 Oracle:Choose an opponent. You and that player each draw three cards.\nChoose an opponent. Untap all nonland permanents you control and all nonland permanents that player controls.

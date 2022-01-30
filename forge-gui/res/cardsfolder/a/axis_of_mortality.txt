@@ -4,5 +4,4 @@ Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBExchangeLife | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may have two target players exchange life totals.
 SVar:DBExchangeLife:DB$ ExchangeLife | ValidTgts$ Player | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select target player | SpellDescription$ Two target players exchange life totals.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_conduit.jpg
 Oracle:At the beginning of your upkeep, you may have two target players exchange life totals.

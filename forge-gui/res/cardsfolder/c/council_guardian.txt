@@ -8,5 +8,4 @@ SVar:PumpRed:DB$ Pump | KW$ Protection from red | Duration$ Permanent | Defined$
 SVar:PumpGreen:DB$ Pump | KW$ Protection from green | Duration$ Permanent | Defined$ Self
 SVar:PumpBlack:DB$ Pump | KW$ Protection from black | Duration$ Permanent | Defined$ Self
 SVar:PumpBlue:DB$ Pump | KW$ Protection from blue | Duration$ Permanent | Defined$ Self
-SVar:Picture:http://www.wizards.com/global/images/magic/general/council_guardian.jpg
 Oracle:Will of the council — When Council Guardian enters the battlefield, starting with you, each player votes for blue, black, red, or green. Council Guardian gains protection from each color with the most votes or tied for most votes.

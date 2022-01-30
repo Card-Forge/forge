@@ -3,5 +3,4 @@ ManaCost:1 G
 Types:Enchantment
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.YouCtrl | ValidBlocker$ Creature.withFlying | Description$ Creatures with flying can't block creatures you control.
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bower_passage.jpg
 Oracle:Creatures with flying can't block creatures you control.

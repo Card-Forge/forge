@@ -4,5 +4,4 @@ Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Untap | Cost$ tapXType<1/Permanent.Legendary> | CostDesc$ Tap an untapped legendary permanent you control: | SpellDescription$ Untap CARDNAME.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/honor_worn_shaku.jpg
 Oracle:{T}: Add {C}.\nTap an untapped legendary permanent you control: Untap Honor-Worn Shaku.

@@ -5,5 +5,4 @@ A:SP$ Animate | Cost$ W | ValidTgts$ Creature | TargetMin$ 1 | TargetMax$ MaxTgt
 SVar:MaxTgts:Count$Valid Creature
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/heavens_gate.jpg
 Oracle:One or more target creatures become white until end of turn.

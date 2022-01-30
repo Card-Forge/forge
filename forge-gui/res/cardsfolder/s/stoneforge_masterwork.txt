@@ -6,5 +6,4 @@ SVar:AffectedX:Count$Valid Creature.sharesCreatureTypeWith+Other+YouCtrl
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:Random
 K:Equip:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stoneforge_masterwork.jpg
 Oracle:Equipped creature gets +1/+1 for each other creature you control that shares a creature type with it.\nEquip {2}

@@ -4,5 +4,4 @@ Types:Creature Human Wizard
 PT:1/2
 A:AB$ Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 SVar:NonCombatPriority:1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blinding_mage.jpg
 Oracle:{W}, {T}: Tap target creature.

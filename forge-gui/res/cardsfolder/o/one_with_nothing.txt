@@ -3,5 +3,4 @@ ManaCost:B
 Types:Instant
 A:SP$ Discard | Cost$ B | Mode$ Hand | SpellDescription$ Discard your hand.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/one_with_nothing.jpg
 Oracle:Discard your hand.

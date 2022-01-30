@@ -3,5 +3,4 @@ ManaCost:1 B B
 Types:Creature Human Mercenary
 PT:2/2
 K:Swampwalk
-SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card19598.jpg
 Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)

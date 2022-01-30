@@ -3,5 +3,4 @@ ManaCost:3 G
 Types:Creature Treefolk
 PT:3/5
 K:CARDNAME enters the battlefield tapped.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scarwood_treefolk.jpg
 Oracle:Scarwood Treefolk enters the battlefield tapped.

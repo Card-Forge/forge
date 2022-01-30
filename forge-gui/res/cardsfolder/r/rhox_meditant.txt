@@ -7,5 +7,4 @@ SVar:TrigDraw:DB$ Draw | NumCards$ 1
 AI:RemoveDeck:Random
 DeckNeeds:Color$Green
 DeckHints:Color$Green
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_meditant.jpg
 Oracle:When Rhox Meditant enters the battlefield, if you control a green permanent, draw a card.

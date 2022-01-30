@@ -4,5 +4,4 @@ Types:Sorcery
 A:SP$ Dig | Cost$ X U B | ValidTgts$ Opponent | DigNum$ X | ChangeNum$ 1 | DestinationZone$ Exile | LibraryPosition2$ 0 | SpellDescription$ Look at the top X cards of target opponent's library. Exile one of those cards and put the rest back on top of that player's library in any order.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sealed_fate.jpg
 Oracle:Look at the top X cards of target opponent's library. Exile one of those cards and put the rest back on top of that player's library in any order.

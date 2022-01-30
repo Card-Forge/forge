@@ -12,5 +12,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TriggerCount$DamageAmount
 SVar:Y:Remembered$Valid Creature
 SVar:Z:Remembered$Valid Card.nonCreature
-DeckHas:Ability$LifeGain & Ability$Counters
+DeckHas:Ability$LifeGain|Counters
 Oracle:Trample, haste\nWhenever Froghemoth deals combat damage to a player, exile up to that many target cards from their graveyard. Put a +1/+1 counter on Froghemoth for each creature card exiled this way. You gain 1 life for each noncreature card exiled this way.

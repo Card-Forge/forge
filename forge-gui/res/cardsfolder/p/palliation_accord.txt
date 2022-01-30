@@ -4,5 +4,4 @@ Types:Enchantment
 T:Mode$ Taps | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature an opponent controls becomes tapped, put a shield counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ SHIELD | CounterNum$ 1
 A:AB$ PreventDamage | Cost$ SubCounter<1/SHIELD> | Defined$ You | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to you this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/palliation_accord.jpg
 Oracle:Whenever a creature an opponent controls becomes tapped, put a shield counter on Palliation Accord.\nRemove a shield counter from Palliation Accord: Prevent the next 1 damage that would be dealt to you this turn.

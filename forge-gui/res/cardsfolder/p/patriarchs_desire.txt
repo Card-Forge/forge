@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ 3 B | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ -X | Description$ Enchanted creature gets +2/-2. Threshold — Enchanted creature gets an additional +2/-2 as long as seven or more cards are in your graveyard.
 SVar:X:Count$Threshold.4.2
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/patriarchs_desire.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/-2.\nThreshold — Enchanted creature gets an additional +2/-2 as long as seven or more cards are in your graveyard.

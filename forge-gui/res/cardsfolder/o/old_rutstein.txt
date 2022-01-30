@@ -9,5 +9,5 @@ SVar:Treasure:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Land 
 SVar:Insect:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Creature | TokenScript$ g_1_1_insect | SubAbility$ Blood
 SVar:Blood:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Card.nonCreature+nonLand | TokenScript$ c_a_blood_draw | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Mill & Ability$Token & Ability$Sacrifice & Type$Blood
+DeckHas:Ability$Mill|Token|Sacrifice & Type$Blood
 Oracle:When Old Rutstein enters the battlefield or at the beginning of your upkeep, mill a card. If a land card is milled this way, create a Treasure token. If a creature card is milled this way, create a 1/1 green Insect creature token. If a noncreature, nonland card is milled this way, create a Blood token.

@@ -2,5 +2,4 @@ Name:Aladdin's Ring
 ManaCost:8
 Types:Artifact
 A:AB$ DealDamage | Cost$ 8 T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aladdins_ring.jpg
 Oracle:{8}, {T}: Aladdin's Ring deals 4 damage to any target.

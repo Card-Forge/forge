@@ -4,5 +4,4 @@ Types:Creature Human Pirate
 PT:2/2
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Dinosaur | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME deals damage to a Dinosaur, destroy that creature.
 SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dinosaur_hunter.jpg
 Oracle:Whenever Dinosaur Hunter deals damage to a Dinosaur, destroy that creature.

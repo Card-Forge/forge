@@ -6,5 +6,4 @@ SVar:DBToken:DB$ Token | TokenScript$ b_x_x_zombie | TokenPower$ X | TokenToughn
 SVar:X:Remembered$CardPower
 SVar:Y:Remembered$CardToughness
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ritual_of_the_returned.jpg
 Oracle:Exile target creature card from your graveyard. Create a black Zombie creature token. Its power is equal to that card's power and its toughness is equal to that card's toughness.

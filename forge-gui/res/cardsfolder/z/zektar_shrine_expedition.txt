@@ -5,6 +5,5 @@ A:AB$ Token | Cost$ SubCounter<3/QUEST> Sac<1/CARDNAME> | TokenScript$ r_7_1_ele
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, you may put a quest counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
 SVar:MaxQuestEffect:3
-DeckHas:Ability$Counters & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/Zektar_Shrine_Expedition.jpg
+DeckHas:Ability$Counters|Token
 Oracle:Landfall — Whenever a land enters the battlefield under your control, you may put a quest counter on Zektar Shrine Expedition.\nRemove three quest counters from Zektar Shrine Expedition and sacrifice it: Create a 7/1 red Elemental creature token with trample and haste. Exile it at the beginning of the next end step.

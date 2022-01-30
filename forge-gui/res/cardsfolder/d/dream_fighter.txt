@@ -7,5 +7,4 @@ T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creatur
 SVar:TrigPhaseAttacker:DB$ Phases | Defined$ TriggeredAttacker | SubAbility$ DBPhaseSelf
 SVar:TrigPhaseBlocker:DB$ Phases | Defined$ TriggeredBlocker | SubAbility$ DBPhaseSelf
 SVar:DBPhaseSelf:DB$ Phases | Defined$ Self
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_fighter.jpg
 Oracle:Whenever Dream Fighter blocks or becomes blocked by a creature, Dream Fighter and that creature phase out. (While they're phased out, they're treated as though they don't exist. Each one phases in before its controller untaps during their next untap step.)

@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact
 A:AB$ Mana | Cost$ 1 T Sac<1/CARDNAME> | Produced$ Any | Amount$ 2 | SpellDescription$ Add two mana of any one color.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/implements_of_sacrifice.jpg
 Oracle:{1}, {T}, Sacrifice Implements of Sacrifice: Add two mana of any one color.

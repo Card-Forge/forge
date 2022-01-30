@@ -7,5 +7,4 @@ K:etbCounter:P1P1:4
 A:AB$ Pump | Cost$ 1 BG BG | ValidTgts$ Creature | TgtPrompt$ Select target creature to remove a +1/+1 counter from | AILogic$ MoveCounter | SubAbility$ DBMove | StackDescription$ None | SpellDescription$ Move a +1/+1 counter from target creature onto a second target creature.
 SVar:DBMove:DB$ MoveCounter | Source$ ParentTarget | ValidTgts$ Creature | TgtPrompt$ Select target creature to move a +1/+1 counter to | TargetUnique$ True | CounterType$ P1P1 | CounterNum$ 1
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/daghatar_the_adamant.jpg
 Oracle:Vigilance\nDaghatar the Adamant enters the battlefield with four +1/+1 counters on it.\n{1}{B/G}{B/G}: Move a +1/+1 counter from target creature onto a second target creature.

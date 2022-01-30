@@ -4,5 +4,4 @@ Types:Creature Insect
 PT:7/7
 K:UpkeepCost:Sac<1/Mountain>
 SVar:NeedsToPlay:Mountain.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lithophage.jpg
 Oracle:At the beginning of your upkeep, sacrifice Lithophage unless you sacrifice a Mountain.

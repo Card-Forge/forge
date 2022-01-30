@@ -10,5 +10,4 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigProliferate:DB$ Proliferate
 DeckHas:Ability$Proliferate
 DeckHints:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/atraxa_praetors_voice.jpg
 Oracle:Flying, vigilance, deathtouch, lifelink\nAt the beginning of your end step, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

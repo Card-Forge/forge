@@ -20,5 +20,4 @@ T:Mode$ Abandoned | ValidCard$ Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 SVar:NumCreatures:Count$Valid Creature.RememberedPlayerCtrl
 SVar:TappedCreaturePower:Count$SumPower_Card.IsRemembered
-SVar:Picture:https://downloads.cardforge.org/images/cards/E01/Bow to My Command.full.jpg
 Oracle:(An ongoing scheme remains face up until it's abandoned.)\nAs you set this scheme in motion, choose an opponent.\nCreatures the chosen player controls can't attack you or planeswalkers you control.\nAt the beginning of your opponents' end step, they may tap any number of untapped creatures they control with total power 8 or greater. If they do, abandon this scheme.

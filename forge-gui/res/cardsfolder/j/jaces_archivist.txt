@@ -7,5 +7,4 @@ SVar:WindfallDraw:DB$ Draw | Defined$ Player | NumCards$ X | SubAbility$ Windfal
 SVar:WindfallCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:PlayerCountPlayers$HighestValidGraveyard,Library,Exile Card.IsRemembered+YouOwn
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jaces_archivist.jpg
 Oracle:{U}, {T}: Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.

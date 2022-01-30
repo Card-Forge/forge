@@ -7,5 +7,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | CheckSVar$ 
 SVar:TrigBattalionDmg:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
 SVar:BattalionTest:Count$Valid Creature.attacking+Other
-SVar:Picture:http://www.wizards.com/global/images/magic/general/firemane_avenger.jpg
 Oracle:Flying\nBattalion — Whenever Firemane Avenger and at least two other creatures attack, Firemane Avenger deals 3 damage to any target and you gain 3 life.

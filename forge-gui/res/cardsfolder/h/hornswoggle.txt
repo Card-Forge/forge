@@ -3,5 +3,4 @@ ManaCost:2 U
 Types:Instant
 A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SubAbility$ DBTreasure | SpellDescription$ Counter target creature spell. You create a Treasure token.
 SVar:DBTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | LegacyImage$ c a treasure sac rix
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hornswoggle.jpg
 Oracle:Counter target creature spell. You create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

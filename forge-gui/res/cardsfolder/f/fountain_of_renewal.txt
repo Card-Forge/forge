@@ -5,5 +5,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 A:AB$ Draw | Cost$ 3 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 DeckHas:Ability$LifeGain
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fountain_of_renewal.jpg
 Oracle:At the beginning of your upkeep, you gain 1 life.\n{3}, Sacrifice Fountain of Renewal: Draw a card.

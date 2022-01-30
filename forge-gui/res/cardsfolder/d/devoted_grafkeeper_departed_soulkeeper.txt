@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You
 T:Mode$ SpellCast | ValidCard$ Card.wasCastFromYourGraveyardByYou | ValidActivatingPlayer$ You | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell from your graveyard, tap target creature you don't control.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control
-DeckHas:Ability$Mill & Ability$Graveyard
+DeckHas:Ability$Mill|Graveyard
 K:Disturb:1 W U
 AlternateMode:DoubleFaced
 Oracle:When Devoted Grafkeeper enters the battlefield, mill two cards.\nWhenever you cast a spell from your graveyard, tap target creature you don't control.\nDisturb {1}{W}{U} (You may cast this card from your graveyard transformed for its disturb cost.)

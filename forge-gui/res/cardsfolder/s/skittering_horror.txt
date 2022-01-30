@@ -5,5 +5,4 @@ PT:4/3
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When you cast a creature spell, sacrifice CARDNAME.
 SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skittering_horror.jpg
 Oracle:When you cast a creature spell, sacrifice Skittering Horror.

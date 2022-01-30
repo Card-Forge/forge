@@ -7,5 +7,4 @@ SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonLand+nonCreatu
 S:Mode$ CantBeCast | ValidCard$ Card.NamedCard | Caster$ Player.Opponent | Description$ Your opponents can't cast cards with the chosen name.
 S:Mode$ ReduceCost | ValidCard$ Card.NamedCard | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Spells with the chosen name you cast cost {2} less to cast.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/council_of_the_absolute.jpg
 Oracle:As Council of the Absolute enters the battlefield, choose a noncreature, nonland card name.\nYour opponents can't cast spells with the chosen name.\nSpells with the chosen name you cast cost {2} less to cast.

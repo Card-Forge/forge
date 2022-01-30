@@ -5,5 +5,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ RivalDamage | Che
 SVar:RivalDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ TriggeredPlayer
 SVar:ActiveLands:Count$Valid Land.ActivePlayerCtrl
 SVar:RivalLands:PlayerCountNonActive$HighestValid Land.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rivalry.jpg
 Oracle:At the beginning of each player's upkeep, if that player controls more lands than each other player, Rivalry deals 2 damage to them.

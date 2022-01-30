@@ -8,5 +8,4 @@ SVar:EachPlayLand:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ May
 SVar:MayPlayLand:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | DefinedPlayer$ Remembered | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DrawAbstainers
 SVar:DrawAbstainers:DB$ Draw | Defined$ Player.Opponent+IsRemembered | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Land.RememberedPlayerCtrl | ConditionCompare$ EQ0
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kynaios_and_tiro_of_meletis.jpg
 Oracle:At the beginning of your end step, draw a card. Each player may put a land card from their hand onto the battlefield, then each opponent who didn't draws a card.

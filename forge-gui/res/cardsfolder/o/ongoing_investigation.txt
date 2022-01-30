@@ -8,5 +8,5 @@ SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 SVar:PlayMain1:TRUE
 DeckNeeds:Color$Green
 DeckHints:Ability$Investigate
-DeckHas:Ability$Investigate & Ability$Token & Ability$LifeGain
+DeckHas:Ability$Investigate|Token|LifeGain
 Oracle:Whenever one or more creatures you control deal combat damage to a player, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")\n{1}{G}, Exile a creature card from your graveyard: Investigate. You gain 2 life.

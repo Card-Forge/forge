@@ -6,5 +6,4 @@ K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, untap another target creature you control.
 SVar:TrigTap:DB$ Untap | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Choose another target creature you control.
 SVar:AmbushAI:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/breaching_hippocamp.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Breaching Hippocamp enters the battlefield, untap another target creature you control.

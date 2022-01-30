@@ -8,5 +8,4 @@ SVar:TrigLose:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ X | 
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Y
 SVar:X:TriggeredCard$CardPower
 SVar:Y:TriggeredCard$CardToughness
-SVar:Picture:http://www.wizards.com/global/images/magic/general/death_watch.jpg
 Oracle:Enchant creature\nWhen enchanted creature dies, its controller loses life equal to its power and you gain life equal to its toughness.

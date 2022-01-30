@@ -4,5 +4,4 @@ Types:Enchantment
 A:AB$ GainLife | Cost$ Sac<1/Forest> | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 AI:RemoveDeck:All
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_heart_of_the_wood.jpg
 Oracle:Sacrifice a Forest: You gain 3 life.

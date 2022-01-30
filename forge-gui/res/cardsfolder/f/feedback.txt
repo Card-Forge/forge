@@ -5,5 +5,4 @@ K:Enchant enchantment
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Enchantment | AILogic$ Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the upkeep of enchanted enchantment's controller, CARDNAME deals 1 damage to that player.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/feedback.jpg
 Oracle:Enchant enchantment\nAt the beginning of the upkeep of enchanted enchantment's controller, Feedback deals 1 damage to that player.

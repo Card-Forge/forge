@@ -9,5 +9,4 @@ DeckNeeds:Type$Wizard
 DeckHas:Ability$Counters
 #TODO: The AI won't use the "draw a card" ability on this yet, needs some logic improvement. Otherwise, the AI uses this card fine
 #and it may be good in a Wizard-themed deck.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sage_of_fables.jpg
 Oracle:Each other Wizard creature you control enters the battlefield with an additional +1/+1 counter on it.\n{2}, Remove a +1/+1 counter from a creature you control: Draw a card.

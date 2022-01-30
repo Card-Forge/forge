@@ -10,5 +10,4 @@ SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ 
 SVar:NoCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card.sharesNameWith Remembered | Caster$ Opponent | Description$ Your opponents can't cast spells with the same name as the exiled card.
 SVar:PlayMain1:TRUE
 SVar:OblivionRing:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ixalans_binding.jpg
 Oracle:When Ixalan's Binding enters the battlefield, exile target nonland permanent an opponent controls until Ixalan's Binding leaves the battlefield.\nYour opponents can't cast spells with the same name as the exiled card.

@@ -14,5 +14,4 @@ SVar:HandX:Count$ValidHand Aura.CanEnchantSource+YouCtrl
 SVar:GraveX:Count$ValidGraveyard Aura.CanEnchantSource+YouCtrl
 SVar:HasAttackEffect:TRUE
 SVar:HasBlockEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bruna_light_of_alabaster.jpg
 Oracle:Flying, vigilance\nWhenever Bruna, Light of Alabaster attacks or blocks, you may attach to it any number of Auras on the battlefield and you may put onto the battlefield attached to it any number of Aura cards that could enchant it from your graveyard and/or hand.

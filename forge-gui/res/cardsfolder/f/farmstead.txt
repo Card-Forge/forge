@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ W W W | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddTrigger$ TriggerGainLife | AddSVar$ FarmsteadGainLife | Description$ Enchanted land has "At the beginning of your upkeep, you may pay {W}{W}. If you do, you gain 1 life."
 SVar:TriggerGainLife:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ FarmsteadGainLife | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Enchanted land has "At the beginning of your upkeep, you may pay {W}{W}. If you do, you gain 1 life."
 SVar:FarmsteadGainLife:AB$GainLife | Cost$ W W | Defined$ You | LifeAmount$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/farmstead.jpg
 Oracle:Enchant land\nEnchanted land has "At the beginning of your upkeep, you may pay {W}{W}. If you do, you gain 1 life."

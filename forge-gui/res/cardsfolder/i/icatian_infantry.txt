@@ -5,5 +5,4 @@ PT:1/1
 A:AB$ Pump | Cost$ 1 | Defined$ Self | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
 A:AB$ Pump | Cost$ 1 | Defined$ Self | KW$ Banding | SpellDescription$ CARDNAME gains banding until end of turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/icatian_infantry.jpg
 Oracle:{1}: Icatian Infantry gains first strike until end of turn.\n{1}: Icatian Infantry gains banding until end of turn. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)

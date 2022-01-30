@@ -4,5 +4,4 @@ Types:Creature Bird Scout
 PT:2/1
 K:Flying
 K:Prowess
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jeskai_windscout.jpg
 Oracle:Flying\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)

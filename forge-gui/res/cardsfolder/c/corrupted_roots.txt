@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ B | ValidTgts$ Forest,Plains | TgtPrompt$ Select target For
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigLose | TriggerDescription$ Whenever enchanted land becomes tapped, its controller loses 2 life.
 SVar:TrigLose:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ 2
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/corrupted_roots.jpg
 Oracle:Enchant Forest or Plains\nWhenever enchanted land becomes tapped, its controller loses 2 life.

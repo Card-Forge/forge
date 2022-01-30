@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ DealDamage | Cost$ 3 U R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SubAbility$ DB1 | SpellDescription$ CARDNAME deals 2 damage to target creature and 2 damage to target player or planeswalker. Draw a card.
 SVar:DB1:DB$ DealDamage | NumDmg$ 2 | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cunning_strike.jpg
 Oracle:Cunning Strike deals 2 damage to target creature and 2 damage to target player or planeswalker.\nDraw a card.

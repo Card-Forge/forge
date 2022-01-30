@@ -3,5 +3,4 @@ ManaCost:W
 Types:Creature Thrull
 PT:1/1
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dutiful_thrull.jpg
 Oracle:{B}: Regenerate Dutiful Thrull.

@@ -6,5 +6,4 @@ T:Mode$ DamageDoneOnce | Execute$ TrigToken | ValidTarget$ Card.Self | TriggerZo
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_insect | TokenOwner$ You | LegacyImage$ g 1 1 insect mmq
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/saber_ants.jpg
 Oracle:Whenever Saber Ants is dealt damage, you may create that many 1/1 green Insect creature tokens.

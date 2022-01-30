@@ -6,5 +6,4 @@ SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInHumanD
 R:Event$ DamageDone | ValidTarget$ You | ActiveZones$ Battlefield | ValidSource$ Instant.ChosenColor,Sorcery.ChosenColor | DamageTarget$ ReplacedSourceController | ReplaceWith$ HarshDmg | Description$ If an instant or sorcery spell of the chosen color would deal damage to you, it deals that damage to its controller instead.
 SVar:HarshDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ ReplacedSourceController | VarType$ Player
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/harsh_judgment.jpg
 Oracle:As Harsh Judgment enters the battlefield, choose a color.\nIf an instant or sorcery spell of the chosen color would deal damage to you, it deals that damage to its controller instead.

@@ -4,5 +4,4 @@ Types:Sorcery
 A:SP$ Token | Cost$ X G | TokenAmount$ 1 | TokenScript$ g_x_x_ooze | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | LegacyImage$ g x x ooze rtr | SpellDescription$ Create an X/X green Ooze creature token.
 SVar:X:Count$xPaid
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/slime_molding.jpg
 Oracle:Create an X/X green Ooze creature token.

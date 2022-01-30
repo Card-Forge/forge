@@ -3,5 +3,4 @@ ManaCost:1 U
 Types:Creature Human Pirate
 PT:2/1
 S:Mode$ Continuous | Affected$ Card.Self+attacking | AddKeyword$ Flying | Description$ CARDNAME has flying as long as it's attacking.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kitesail_corsair.jpg
 Oracle:Kitesail Corsair has flying as long as it's attacking.

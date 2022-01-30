@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | SpellDescription$ Target creature gets +2/+0 until end of turn. Regenerate it. You lose 2 life. | SubAbility$ DBRegen
 SVar:DBRegen:DB$ Regenerate | Defined$ ParentTarget | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ You
-SVar:Picture:http://www.wizards.com/global/images/magic/general/boon_of_erebos.jpg
 Oracle:Target creature gets +2/+0 until end of turn. Regenerate it. You lose 2 life.

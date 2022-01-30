@@ -4,5 +4,4 @@ Types:Enchantment
 T:Mode$ Countered | ValidCard$ Card | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBDraw | TriggerDescription$ Whenever a spell you've cast is countered, draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/multanis_presence.jpg
 Oracle:Whenever a spell you've cast is countered, draw a card.

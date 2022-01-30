@@ -4,5 +4,4 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.White,Creature.Blue | AddHiddenKeyword$ CARDNAME can't block. | Description$ White creatures and blue creatures can't block.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/magistrates_veto.jpg
 Oracle:White creatures and blue creatures can't block.

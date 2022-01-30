@@ -3,5 +3,4 @@ ManaCost:3 W
 Types:Creature Human Soldier
 PT:2/4
 S:Mode$ Continuous | Affected$ Card.Self | CanBlockAmount$ 1 | Description$ CARDNAME can block an additional creature each combat.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/foriysian_brigade.jpg
 Oracle:Foriysian Brigade can block an additional creature each combat.

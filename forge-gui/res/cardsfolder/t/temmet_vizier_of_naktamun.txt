@@ -7,5 +7,4 @@ SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.token+YouCtrl | TgtPrompt$ Select t
 K:Embalm:3 W U
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/temmet_vizier_of_naktamun.jpg
 Oracle:At the beginning of combat on your turn, target creature token you control gets +1/+1 until end of turn and can't be blocked this turn.\nEmbalm {3}{W}{U} ({3}{W}{U}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Human Cleric with no mana cost. Embalm only as a sorcery.)

@@ -9,5 +9,4 @@ SVar:GrabDmg:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPromp
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardPower
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grab_the_reins.jpg
 Oracle:Choose one —\n• Until end of turn, you gain control of target creature and it gains haste.\n• Sacrifice a creature. Grab the Reins deals damage equal to that creature's power to any target.\nEntwine {2}{R} (Choose both if you pay the entwine cost.)

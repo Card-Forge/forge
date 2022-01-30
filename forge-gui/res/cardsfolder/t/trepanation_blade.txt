@@ -7,5 +7,4 @@ SVar:TrigDig:DB$ DigUntil | Defined$ TriggeredDefendingPlayer | Valid$ Land | Va
 SVar:TrigPump:DB$ Pump | Defined$ Equipped | NumAtt$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/trepanation_blade.jpg
 Oracle:Whenever equipped creature attacks, defending player reveals cards from the top of their library until they reveal a land card. The creature gets +1/+0 until end of turn for each card revealed this way. That player puts the revealed cards into their graveyard.\nEquip {2}

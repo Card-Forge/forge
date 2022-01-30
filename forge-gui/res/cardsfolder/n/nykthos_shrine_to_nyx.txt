@@ -5,5 +5,4 @@ A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ ChooseColor | Cost$ 2 T | SubAbility$ DBMana | AILogic$ MostProminentComputerControls | AINoRecursiveCheck$ True | SpellDescription$ Choose a color. Add an amount of mana of that color equal to your devotion to that color. (Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)
 SVar:DBMana:DB$ Mana | Produced$ Chosen | Amount$ X
 SVar:X:Count$Devotion.Chosen
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nykthos_shrine_to_nyx.jpg
 Oracle:{T}: Add {C}.\n{2}, {T}: Choose a color. Add an amount of mana of that color equal to your devotion to that color. (Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)

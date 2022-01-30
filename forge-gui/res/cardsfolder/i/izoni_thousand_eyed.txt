@@ -7,5 +7,5 @@ SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenOwner$ You | LegacyImage$ bg 1 
 SVar:X:Count$TypeInYourYard.Creature
 A:AB$ GainLife | Cost$ B G Sac<1/Creature.Other/another creature> | Defined$ You | LifeAmount$ 1 | SubAbility$ DBDraw | SpellDescription$ You gain 1 life and draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
-DeckHas:Ability$Token & Ability$LifeGain
+DeckHas:Ability$Token|LifeGain
 Oracle:Undergrowth — When Izoni, Thousand-Eyed enters the battlefield, create a 1/1 black and green Insect creature token for each creature card in your graveyard.\n{B}{G}, Sacrifice another creature: You gain 1 life and draw a card.

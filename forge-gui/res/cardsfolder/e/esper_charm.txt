@@ -5,5 +5,4 @@ A:SP$ Charm | Cost$ W U B | Choices$ DBDestroy,DBDraw,DBDiscard
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment. | SpellDescription$ Destroy target enchantment.
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards.
 SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/esper_charm.jpg
 Oracle:Choose one —\n• Destroy target enchantment.\n• Draw two cards.\n• Target player discards two cards.

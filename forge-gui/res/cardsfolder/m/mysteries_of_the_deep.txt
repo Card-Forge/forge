@@ -3,5 +3,4 @@ ManaCost:4 U
 Types:Instant
 A:SP$ Draw | Cost$ 4 U | NumCards$ X | SpellDescription$ Draw two cards. Landfall — If you had a land enter the battlefield under your control this turn, draw three cards instead.
 SVar:X:Count$Landfall.3.2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mysteries_of_the_deep.jpg
 Oracle:Draw two cards.\nLandfall — If you had a land enter the battlefield under your control this turn, draw three cards instead.

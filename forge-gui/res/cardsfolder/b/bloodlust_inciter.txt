@@ -3,5 +3,4 @@ ManaCost:R
 Types:Creature Human Warrior
 PT:1/1
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodlust_inciter.jpg
 Oracle:{T}: Target creature gains haste until end of turn.

@@ -3,5 +3,4 @@ ManaCost:1
 Types:Artifact Equipment
 K:Equip:2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Deathtouch | Description$ Equipped creature has deathtouch.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gorgons_head.jpg
 Oracle:Equipped creature has deathtouch.\nEquip {2}

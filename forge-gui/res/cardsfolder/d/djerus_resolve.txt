@@ -3,6 +3,5 @@ ManaCost:W
 Types:Instant
 A:SP$ Untap | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPump | SpellDescription$ Untap target creature. Prevent all damage that would be dealt to it this turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Prevent all damage that would be dealt to CARDNAME.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/djerus_resolve.jpg
 K:Cycling:2
 Oracle:Untap target creature. Prevent all damage that would be dealt to it this turn.\nCycling {2} ({2}, Discard this card: Draw a card.)

@@ -8,5 +8,4 @@ SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredDefendingPlayer | Mode$ Hand | 
 SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ TriggeredDefendingPlayer | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/robber_fly.jpg
 Oracle:Flying\nWhenever Robber Fly becomes blocked, defending player discards all the cards in their hand, then draws that many cards.

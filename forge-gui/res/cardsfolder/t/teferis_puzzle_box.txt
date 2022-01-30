@@ -7,5 +7,4 @@ SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ TriggeredPlayer | SubAbility$ DBCl
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/teferis_puzzle_box.jpg
 Oracle:At the beginning of each player's draw step, that player puts the cards in their hand on the bottom of their library in any order, then draws that many cards.

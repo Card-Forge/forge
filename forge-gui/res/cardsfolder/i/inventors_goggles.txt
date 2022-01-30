@@ -5,5 +5,4 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.Artificer+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigAttach | OptionalDecider$ You | TriggerDescription$ Whenever an Artificer enters the battlefield under your control, you may attach CARDNAME to it.
 SVar:TrigAttach:DB$ Attach | Defined$ TriggeredCard
 K:Equip:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/inventors_goggles.jpg
 Oracle:Equipped creature gets +1/+2.\nWhenever an Artificer enters the battlefield under your control, you may attach Inventor's Goggles to it.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

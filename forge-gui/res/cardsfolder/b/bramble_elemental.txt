@@ -6,5 +6,4 @@ T:Mode$ Attached | ValidSource$ Aura | ValidTarget$ Card.Self | TriggerZones$ Ba
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenOwner$ TriggeredTargetController | TokenScript$ g_1_1_saproling | LegacyImage$ g 1 1 saproling rav
 SVar:EnchantMe:Multiple
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bramble_elemental.jpg
 Oracle:Whenever an Aura becomes attached to Bramble Elemental, create two 1/1 green Saproling creature tokens.

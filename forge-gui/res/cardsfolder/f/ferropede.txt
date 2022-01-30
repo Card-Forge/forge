@@ -5,5 +5,4 @@ PT:1/1
 K:Unblockable
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigRemoveCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may remove a counter from target permanent.
 SVar:TrigRemoveCounter:DB$ RemoveCounter | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | CounterType$ Any | CounterNum$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ferropede.jpg
 Oracle:Ferropede can't be blocked.\nWhenever Ferropede deals combat damage to a player, you may remove a counter from target permanent.

@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Enchanted creature can't attack or block.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ ABGainLife | Description$ Enchanted creature has "{2}, Sacrifice this creature: You gain 2 life."
 SVar:ABGainLife:AB$GainLife | Cost$ 2 Sac<1/CARDNAME> | LifeAmount$ 2 | Defined$ You | SpellDescription$ You gain 2 life.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/compulsory_rest.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack or block.\nEnchanted creature has "{2}, Sacrifice this creature: You gain 2 life."

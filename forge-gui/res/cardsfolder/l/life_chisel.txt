@@ -5,5 +5,4 @@ A:AB$ GainLife | Cost$ Sac<1/Creature> | LifeAmount$ X | PlayerTurn$ True | Acti
 SVar:X:Sacrificed$CardToughness
 AI:RemoveDeck:All
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/life_chisel.jpg
 Oracle:Sacrifice a creature: You gain life equal to the sacrificed creature's toughness. Activate only during your upkeep.

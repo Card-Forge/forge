@@ -5,5 +5,5 @@ PT:3/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ DBAmass | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, amass 2. (Put two +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
 SVar:DBAmass:DB$ Amass | Num$ 2
 DeckHints:Ability$Amass & Type$Zombie
-DeckHas:Ability$Amass & Ability$Counters & Ability$Token
+DeckHas:Ability$Amass|Counters|Token
 Oracle:When Herald of the Dreadhorde dies, amass 2. (Put two +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)

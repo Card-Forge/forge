@@ -6,5 +6,4 @@ SVar:CreatureSpell:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 AI:RemoveDeck:Random
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glimpse_of_nature.jpg
 Oracle:Whenever you cast a creature spell this turn, draw a card.

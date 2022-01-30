@@ -4,5 +4,4 @@ Types:Legendary Creature Human Cleric
 PT:2/2
 A:AB$ Regenerate | Cost$ G W U T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Regenerate target creature.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ragnar.jpg
 Oracle:{G}{W}{U}, {T}: Regenerate target creature.

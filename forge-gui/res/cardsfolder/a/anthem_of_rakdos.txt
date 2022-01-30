@@ -10,5 +10,4 @@ SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Card
 DeckHints:Ability$Discard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/anthem_of_rakdos.jpg
 Oracle:Whenever a creature you control attacks, it gets +2/+0 until end of turn and Anthem of Rakdos deals 1 damage to you.\nHellbent — As long as you have no cards in hand, if a source you control would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.

@@ -5,5 +5,4 @@ PT:5/4
 K:Protection from white
 K:UpkeepCost:Sac<1/Land>
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_elemental.jpg
 Oracle:Protection from white\nAt the beginning of your upkeep, sacrifice Bog Elemental unless you sacrifice a land.

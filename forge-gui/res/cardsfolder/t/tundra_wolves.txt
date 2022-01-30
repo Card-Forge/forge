@@ -3,5 +3,4 @@ ManaCost:W
 Types:Creature Wolf
 PT:1/1
 K:First Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tundra_wolves.jpg
 Oracle:First strike (This creature deals combat damage before creatures without first strike.)

@@ -2,5 +2,4 @@ Name:Fresh Volunteers
 ManaCost:1 W
 Types:Creature Human Rebel
 PT:2/2
-SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card19542.jpg
 Oracle:

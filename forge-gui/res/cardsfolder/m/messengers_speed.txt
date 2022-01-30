@@ -4,5 +4,4 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Trample & Haste | Description$ Enchanted creature has trample and haste.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/messengers_speed.jpg
 Oracle:Enchant creature\nEnchanted creature has trample and haste.

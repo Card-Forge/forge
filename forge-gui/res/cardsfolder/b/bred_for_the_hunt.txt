@@ -5,5 +5,4 @@ T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl+counters_GE1_P1P1 | ValidTarg
 SVar:TrigDraw:DB$ Draw | NumCards$ 1
 SVar:PlayMain1:TRUE
 DeckHints:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bred_for_the_hunt.jpg
 Oracle:Whenever a creature you control with a +1/+1 counter on it deals combat damage to a player, you may draw a card.

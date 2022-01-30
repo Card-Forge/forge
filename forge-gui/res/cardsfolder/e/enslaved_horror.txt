@@ -8,5 +8,4 @@ SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | 
 AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:Z EQ0
 SVar:Z:Count$ValidGraveyard Creature.OppOwn+powerGT4+toughnessGT4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/enslaved_horror.jpg
 Oracle:When Enslaved Horror enters the battlefield, each other player may return a creature card from their graveyard to the battlefield.

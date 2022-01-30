@@ -6,5 +6,4 @@ SVar:RepPutCounter:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | 
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, untap each creature you control.
 SVar:RolledChaos:DB$ UntapAll | ValidCards$ Creature.YouCtrl
 SVar:AIRollPlanarDieParams:Mode$ Always | HasCreatureInPlay$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/edge_of_malacol.jpg
 Oracle:If a creature you control would untap during your untap step, put two +1/+1 counters on it instead.\nWhenever you roll {CHAOS}, untap each creature you control.

@@ -6,5 +6,4 @@ S:Mode$ Continuous | Affected$ Creature.Sliver | AddTrigger$ VampiricSliverTrig 
 SVar:VampiricSliverTrig:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | TriggerZones$ Battlefield | Execute$ VampiricSliverCounters | TriggerDescription$ Whenever a creature dealt damage by CARDNAME this turn dies, put a +1/+1 counter on CARDNAME.
 SVar:VampiricSliverCounters:DB$ PutCounter | Defined$ Self | CounterNum$ 1 | CounterType$ P1P1
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vampiric_sliver.jpg
 Oracle:All Sliver creatures have "Whenever a creature dealt damage by this creature this turn dies, put a +1/+1 counter on this creature."

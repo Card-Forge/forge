@@ -5,5 +5,4 @@ PT:4/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | TriggerDescription$ When CARDNAME enters the battlefield, it fights target creature an opponent controls chosen at random.
 SVar:TrigFight:DB$ Fight | Defined$ Self | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls | TargetsAtRandom$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scab_clan_giant.jpg
 Oracle:When Scab-Clan Giant enters the battlefield, it fights target creature an opponent controls chosen at random.

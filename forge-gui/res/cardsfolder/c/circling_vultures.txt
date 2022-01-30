@@ -7,5 +7,4 @@ K:UpkeepCost:ExileFromGrave<1/Card.TopGraveyardCreature>
 A:ST$ Discard | Cost$ 0 | Mode$ Defined | DefinedCards$ Self | Optional$ True | DiscardMessage$ Do you want discard this card? | ActivationZone$ Hand | InstantSpeed$ True | SpellDescription$ You may discard CARDNAME any time you could cast an instant.
 AI:RemoveDeck:All
 SVar:NeedsOrderedGraveyard:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/circling_vultures.jpg
 Oracle:Flying\nYou may discard Circling Vultures any time you could cast an instant.\nAt the beginning of your upkeep, sacrifice Circling Vultures unless you exile the top creature card of your graveyard.

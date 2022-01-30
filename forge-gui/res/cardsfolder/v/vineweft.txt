@@ -5,5 +5,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
 A:AB$ ChangeZone | Cost$ 4 G | Origin$ Graveyard | Destination$ Hand | Defined$ Self | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vineweft.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1.\n{4}{G}: Return Vineweft from your graveyard to your hand.

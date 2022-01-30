@@ -6,5 +6,4 @@ SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Va
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Creature | SpellDescription$ Counter target creature spell.
 SVar:DBDraw:DB$ Draw | Defined$ You | AILogic$ Good | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ojutais_command.jpg
 Oracle:Choose two —\n• Return target creature card with mana value 2 or less from your graveyard to the battlefield.\n• You gain 4 life.\n• Counter target creature spell.\n• Draw a card.

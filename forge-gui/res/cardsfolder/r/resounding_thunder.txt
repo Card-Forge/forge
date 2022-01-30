@@ -5,5 +5,4 @@ K:Cycling:5 B R G
 A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When you cycle CARDNAME, it deals 6 damage to any target.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 6
-SVar:Picture:http://www.wizards.com/global/images/magic/general/resounding_thunder.jpg
 Oracle:Resounding Thunder deals 3 damage to any target.\nCycling {5}{B}{R}{G} ({5}{B}{R}{G}, Discard this card: Draw a card.)\nWhen you cycle Resounding Thunder, it deals 6 damage to any target.

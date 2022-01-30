@@ -8,5 +8,4 @@ SVar:SpongeFly:DB$ Animate | Defined$ Targeted | RemoveKeywords$ Flying | SpellD
 SVar:SpongeStrike:DB$ Animate | Defined$ Targeted | RemoveKeywords$ First Strike | SpellDescription$ Targeted creature loses first strike.
 SVar:SpongeTramp:DB$ Animate | Defined$ Targeted | RemoveKeywords$ Trample | SpellDescription$ Targeted creature loses trample.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/walking_sponge.jpg
 Oracle:{T}: Target creature loses your choice of flying, first strike, or trample until end of turn.

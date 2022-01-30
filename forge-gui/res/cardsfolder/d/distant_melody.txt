@@ -6,5 +6,4 @@ SVar:DBDraw:DB$ Draw | NumCards$ X
 SVar:X:Count$Valid Permanent.ChosenType+YouCtrl
 AI:RemoveDeck:Random
 SVar:NeedsToPlay:Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/distant_melody.jpg
 Oracle:Choose a creature type. Draw a card for each permanent you control of that type.

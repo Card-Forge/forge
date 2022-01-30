@@ -5,5 +5,5 @@ A:SP$ Token | Cost$ 2 W | TokenAmount$ 2 | TokenScript$ w_1_1_human | TokenOwner
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Y | ConditionCheckSVar$ X
 SVar:X:Count$Adamant.White.1.0
 SVar:Y:Count$Valid Creature.YouCtrl
-DeckHas:Ability$Token & Ability$LifeGain
+DeckHas:Ability$Token|LifeGain
 Oracle:Create two 1/1 white Human creature tokens.\nAdamant — If at least three white mana was spent to cast this spell, you gain 1 life for each creature you control.

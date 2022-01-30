@@ -8,5 +8,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigSurveil:DB$ Surveil | Defined$ You | Amount$ 4 | SubAbility$ TrigImmediate
 SVar:TrigImmediate:DB$ ImmediateTrigger | Execute$ TrigBounce | OptionalDecider$ You | TriggerDescription$ When you do, you may return target nonland permanent an opponent controls to its owner's hand.
 SVar:TrigBounce:DB$ ChangeZone | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls | Origin$ Battlefield | Destination$ Hand
-DeckHas:Ability$Surveil & Ability$Graveyard
+DeckHas:Ability$Surveil|Graveyard
 Oracle:Flash\nFlying\nWhen Dream Eater enters the battlefield, surveil 4. When you do, you may return target nonland permanent an opponent controls to its owner's hand. (To surveil 4, look at the top four cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)

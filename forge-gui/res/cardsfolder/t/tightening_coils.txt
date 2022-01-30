@@ -4,5 +4,4 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -6 | RemoveKeyword$ Flying | Description$ Enchanted creature gets -6/-0 and loses flying.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tightening_coils.jpg
 Oracle:Enchant creature\nEnchanted creature gets -6/-0 and loses flying.

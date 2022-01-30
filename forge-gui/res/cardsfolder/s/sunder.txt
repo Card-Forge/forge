@@ -2,5 +2,4 @@ Name:Sunder
 ManaCost:3 U U
 Types:Instant
 A:SP$ ChangeZoneAll | Cost$ 3 U U | ChangeType$ Land | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all lands to their owners' hands.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sunder.jpg
 Oracle:Return all lands to their owners' hands.

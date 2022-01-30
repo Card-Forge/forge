@@ -6,5 +6,4 @@ SVar:PumpAll:DB$ PumpAll | ValidCards$ Creature | NumAtt$ -2 | IsCurse$ True | S
 SVar:Tap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 SVar:Prevent:DB$ PreventDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to any target this turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ivory_charm.jpg
 Oracle:Choose one —\n• All creatures get -2/-0 until end of turn.\n• Tap target creature.\n• Prevent the next 1 damage that would be dealt to any target this turn.

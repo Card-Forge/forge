@@ -5,5 +5,4 @@ PT:2/2
 K:Double Strike
 K:Protection from black
 K:Protection from green
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mirran_crusader.jpg
 Oracle:Double strike, protection from black and from green

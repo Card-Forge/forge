@@ -3,5 +3,4 @@ ManaCost:R
 Types:Creature Goblin Warrior
 PT:1/2
 A:AB$ Pump | Cost$ 2 R | NumAtt$ 2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lavastep_raider.jpg
 Oracle:{2}{R}: Lavastep Raider gets +2/+0 until end of turn.

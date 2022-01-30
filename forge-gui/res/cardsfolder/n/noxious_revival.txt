@@ -2,5 +2,4 @@ Name:Noxious Revival
 ManaCost:PG
 Types:Instant
 A:SP$ ChangeZone | Cost$ PG | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0 | ValidTgts$ Card | AITgts$ Card.YouOwn | TgtPrompt$ Select target card from a graveyard | SpellDescription$ Put target card from a graveyard on top of its owner's library.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/noxious_revival.jpg
 Oracle:({G/P} can be paid with either {G} or 2 life.)\nPut target card from a graveyard on top of its owner's library.

@@ -4,5 +4,4 @@ Types:Enchantment
 K:Flash
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Creatures you control get +2/+2.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dictate_of_heliod.jpg
 Oracle:Flash\nCreatures you control get +2/+2.

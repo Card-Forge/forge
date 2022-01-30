@@ -7,5 +7,5 @@ T:Mode$ Discarded | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True 
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You | LegacyImage$ c a food sac eld
 SVar:SacMe:1
 SVar:DiscardMe:3
-DeckHas:Ability$Token & Ability$LifeGain & Ability$Food
+DeckHas:Ability$Token|LifeGain|Food
 Oracle:When Bartered Cow dies or when you discard it, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")

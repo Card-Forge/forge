@@ -7,5 +7,4 @@ SVar:TokenDragon:DB$ Token | TokenAmount$ 1 | TokenScript$ r_4_4_dragon_flying |
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:MaxTgts:Count$Valid Creature
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/descent_of_the_dragons.jpg
 Oracle:Destroy any number of target creatures. For each creature destroyed this way, its controller creates a 4/4 red Dragon creature token with flying.

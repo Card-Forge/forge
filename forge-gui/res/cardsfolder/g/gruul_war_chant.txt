@@ -3,5 +3,4 @@ ManaCost:2 R G
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+attacking | AddPower$ 1 | AddKeyword$ Menace | Description$ Attacking creatures you control get +1/+0 and have menace.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_war_chant.jpg
 Oracle:Attacking creatures you control get +1/+0 and have menace.

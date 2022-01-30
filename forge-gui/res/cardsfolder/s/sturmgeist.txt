@@ -8,5 +8,4 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You
 SVar:X:Count$InYourHand
 SVar:NeedsToPlayVar:X GE2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sturmgeist.jpg
 Oracle:Flying\nSturmgeist's power and toughness are each equal to the number of cards in your hand.\nWhenever Sturmgeist deals combat damage to a player, draw a card.

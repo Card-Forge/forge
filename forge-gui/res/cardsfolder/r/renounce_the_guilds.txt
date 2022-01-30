@@ -2,5 +2,4 @@ Name:Renounce the Guilds
 ManaCost:1 W
 Types:Instant
 A:SP$ Sacrifice | Cost$ 1 W | SacValid$ Permanent.MultiColor | Defined$ Player | SpellDescription$ Each player sacrifices a multicolored permanent.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/renounce_the_guilds.jpg
 Oracle:Each player sacrifices a multicolored permanent.

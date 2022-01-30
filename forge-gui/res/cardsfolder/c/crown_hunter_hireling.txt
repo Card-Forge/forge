@@ -5,5 +5,4 @@ PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
 SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
 S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefender$ isMonarch | Description$ CARDNAME can't attack unless defending player is the monarch.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crown_hunter_hireling.jpg
 Oracle:When Crown-Hunter Hireling enters the battlefield, you become the monarch.\nCrown-Hunter Hireling can't attack unless defending player is the monarch.

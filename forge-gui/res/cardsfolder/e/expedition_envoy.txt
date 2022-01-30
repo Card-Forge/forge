@@ -2,5 +2,4 @@ Name:Expedition Envoy
 ManaCost:W
 Types:Creature Human Scout Ally
 PT:2/1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/expedition_envoy.jpg
 Oracle:

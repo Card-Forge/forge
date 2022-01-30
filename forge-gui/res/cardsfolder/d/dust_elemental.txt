@@ -9,5 +9,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouCtrl | ChangeNum$ 3
 SVar:NeedsToPlayVar:Z GE3
 SVar:Z:Count$Valid Creature.cmcLE5+YouCtrl+inZoneBattlefield
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dust_elemental.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying; fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhen Dust Elemental enters the battlefield, return three creatures you control to their owner's hand.

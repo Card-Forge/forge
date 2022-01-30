@@ -2,5 +2,4 @@ Name:Molten Influence
 ManaCost:1 R
 Types:Instant
 A:SP$ Counter | Cost$ 1 R | TargetType$ Spell | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select target Instant or Sorcery Spell | UnlessCost$ DamageYou<4> | SpellDescription$ Counter target instant or sorcery spell unless its controller has CARDNAME deal 4 damage to them.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/molten_influence.jpg
 Oracle:Counter target instant or sorcery spell unless its controller has Molten Influence deal 4 damage to them.

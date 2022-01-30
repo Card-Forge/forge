@@ -8,5 +8,4 @@ SVar:GainLifeYou:DB$ GainLife | Defined$ You | LifeAmount$ X | ConditionCheckSVa
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:X:ReplaceCount$DamageAmount
 SVar:Y:ReplacedSource$Valid Card.BlackSource
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shadowbane.jpg
 Oracle:The next time a source of your choice would deal damage to you and/or creatures you control this turn, prevent that damage. If damage from a black source is prevented this way, you gain that much life.

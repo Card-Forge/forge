@@ -6,5 +6,4 @@ K:Prowess
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, draw a card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredCardController
 SVar:SacMe:1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jeskai_sage.jpg
 Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhen Jeskai Sage dies, draw a card.

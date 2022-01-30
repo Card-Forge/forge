@@ -4,5 +4,4 @@ Types:Creature Human Wizard
 PT:*/4
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of Swamps you control.
 SVar:X:Count$Valid Swamp.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dakmor_sorceress.jpg
 Oracle:Dakmor Sorceress's power is equal to the number of Swamps you control.

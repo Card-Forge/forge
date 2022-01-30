@@ -4,5 +4,4 @@ Types:Creature Vedalken Wizard
 PT:2/2
 A:AB$ Tap | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 A:AB$ Counter | Cost$ 2 U | TgtPrompt$ Select target Activated Ability | ValidTgts$ Card | TargetType$ Activated | SpellDescription$ Counter target activated ability.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/azorius_guildmage.jpg
 Oracle:{2}{W}: Tap target creature.\n{2}{U}: Counter target activated ability. (Mana abilities can't be targeted.)

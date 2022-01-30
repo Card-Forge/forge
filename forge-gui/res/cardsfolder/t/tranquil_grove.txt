@@ -4,5 +4,4 @@ Types:Enchantment
 A:AB$ DestroyAll | Cost$ 1 G G | ValidCards$ Enchantment.Other | SpellDescription$ Destroy all other enchantments.
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_grove.jpg
 Oracle:{1}{G}{G}: Destroy all other enchantments.

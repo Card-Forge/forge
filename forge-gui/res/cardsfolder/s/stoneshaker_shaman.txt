@@ -7,5 +7,4 @@ SVar:TrigSac:DB$ Sacrifice | SacValid$ Land.untapped | Defined$ TriggeredPlayer 
 S:Mode$ Continuous | Affected$ Land | AddSVar$ AITap
 SVar:AITap:SVar:AITapDown:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stoneshaker_shaman.jpg
 Oracle:At the beginning of each player's end step, that player sacrifices an untapped land.

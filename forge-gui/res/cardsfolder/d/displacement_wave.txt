@@ -3,5 +3,4 @@ ManaCost:X U U
 Types:Sorcery
 A:SP$ ChangeZoneAll | Cost$ X U U | ChangeType$ Permanent.nonLand+cmcLEX | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all nonland permanents with mana value X or less to their owners' hands.
 SVar:X:Count$xPaid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/displacement_wave.jpg
 Oracle:Return all nonland permanents with mana value X or less to their owners' hands.

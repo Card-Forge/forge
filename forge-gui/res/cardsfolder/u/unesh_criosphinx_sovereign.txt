@@ -11,5 +11,4 @@ SVar:DBHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination
 SVar:DBGrave:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Graveyard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:BuffedBy:Sphinx
-SVar:Picture:http://www.wizards.com/global/images/magic/general/unesh_criosphinx_sovereign.jpg
 Oracle:Flying\nSphinx spells you cast cost {2} less to cast.\nWhenever Unesh, Criosphinx Sovereign or another Sphinx enters the battlefield under your control, reveal the top four cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard.

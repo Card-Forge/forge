@@ -7,5 +7,4 @@ SVar:AntiBuffedBy:Creature
 SVar:NonStackingEffect:True
 SVar:AICastPreference:MaxControlledGlobally$ 1
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/concordant_crossroads.jpg
 Oracle:All creatures have haste.

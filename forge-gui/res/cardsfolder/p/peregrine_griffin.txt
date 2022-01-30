@@ -4,5 +4,4 @@ Types:Creature Griffin
 PT:2/4
 K:Flying
 K:First Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/peregrine_griffin.jpg
 Oracle:Flying\nFirst strike (This creature deals combat damage before creatures without first strike.)

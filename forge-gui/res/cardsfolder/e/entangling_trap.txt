@@ -7,5 +7,4 @@ SVar:TrigTapW2:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap
 T:Mode$ Clashed | ValidPlayer$ You | Won$ False | TriggerZones$ Battlefield | Execute$ TrigTapL | Secondary$ True | TriggerDescription$ Whenever you clash, tap target creature an opponent controls. If you won, that creature doesn't untap during its controller's next untap step. (This ability triggers after the clash ends.)
 SVar:TrigTapL:DB$ Tap | ValidTgts$ Creature.OppCtrl
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/entangling_trap.jpg
 Oracle:Whenever you clash, tap target creature an opponent controls. If you won, that creature doesn't untap during its controller's next untap step. (This ability triggers after the clash ends.)

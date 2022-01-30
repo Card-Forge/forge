@@ -2,5 +2,4 @@ Name:Lightning Blast
 ManaCost:3 R
 Types:Instant
 A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_blast.jpg
 Oracle:Lightning Blast deals 4 damage to any target.

@@ -4,5 +4,4 @@ Types:Creature Minotaur Shaman
 PT:3/3
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Inspired — Whenever CARDNAME becomes untapped, target creature you control gains intimidate until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Intimidate
-SVar:Picture:http://www.wizards.com/global/images/magic/general/warchanter_of_mogis.jpg
 Oracle:Inspired — Whenever Warchanter of Mogis becomes untapped, target creature you control gains intimidate until end of turn. (A creature with intimidate can't be blocked except by artifact creatures and/or creatures that share a color with it.)

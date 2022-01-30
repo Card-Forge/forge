@@ -3,5 +3,4 @@ ManaCost:4 W W W
 Types:Instant
 A:SP$ DestroyAll | Cost$ 4 W W W | ValidCards$ Creature,Planeswalker | SubAbility$ DBScry | SpellDescription$ Destroy all creatures and planeswalkers. If it's your turn, scry 2.
 SVar:DBScry:DB$ Scry | ScryNum$ 2 | ConditionPlayerTurn$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fated_retribution.jpg
 Oracle:Destroy all creatures and planeswalkers. If it's your turn, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)

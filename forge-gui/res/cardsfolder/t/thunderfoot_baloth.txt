@@ -8,5 +8,4 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddPower$ 2 | AddToughne
 SVar:X:Count$Valid Card.IsCommander+YouOwn+YouCtrl
 SVar:BuffedBy:Card.IsCommander
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderfoot_baloth.jpg
 Oracle:Trample\nLieutenant — As long as you control your commander, Thunderfoot Baloth gets +2/+2 and other creatures you control get +2/+2 and have trample.

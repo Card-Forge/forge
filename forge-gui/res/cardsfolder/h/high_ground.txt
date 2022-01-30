@@ -2,5 +2,4 @@ Name:High Ground
 ManaCost:W
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | CanBlockAmount$ 1 | Description$ Each creature you control can block an additional creature each combat.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/high_ground.jpg
 Oracle:Each creature you control can block an additional creature each combat.

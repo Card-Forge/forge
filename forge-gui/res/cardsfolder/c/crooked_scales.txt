@@ -9,5 +9,4 @@ SVar:DestroyOpp:DB$ Destroy | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DestroyYours:DB$ Destroy | Defined$ Imprinted | UnlessCost$ 3 | UnlessPayer$ You | SubAbility$ DBCleanup | UnlessResolveSubs$ WhenNotPaid
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crooked_scales.jpg
 Oracle:{4}, {T}: Flip a coin. If you win the flip, destroy target creature an opponent controls. If you lose the flip, destroy target creature you control unless you pay {3} and repeat this process.

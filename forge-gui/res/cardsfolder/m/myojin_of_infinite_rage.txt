@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromYourHand+Self | Destination$ Ba
 SVar:ETBCounter:DB$ PutCounter | Defined$ Self | CounterType$ DIVINITY | CounterNum$ 1
 S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_DIVINITY | AddKeyword$ Indestructible | Description$ CARDNAME has indestructible as long as it has a divinity counter on it.
 A:AB$ DestroyAll | Cost$ SubCounter<1/DIVINITY> | ValidCards$ Land | SpellDescription$ Destroy all lands.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/myojin_of_infinite_rage.jpg
 Oracle:Myojin of Infinite Rage enters the battlefield with a divinity counter on it if you cast it from your hand.\nMyojin of Infinite Rage has indestructible as long as it has a divinity counter on it.\nRemove a divinity counter from Myojin of Infinite Rage: Destroy all lands.

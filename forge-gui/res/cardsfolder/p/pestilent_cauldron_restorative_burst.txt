@@ -7,7 +7,7 @@ A:AB$ ChangeZone | Cost$ 4 T | TargetMin$ 4 | TargetMax$ 4 | TargetsFromSingleZo
 SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
 SVar:X:Count$LifeYouGainedThisTurn
 AlternateMode:Modal
-DeckHas:Ability$Discard & Ability$Token & Ability$LifeGain & Ability$Mill
+DeckHas:Ability$Discard|Token|LifeGain|Mill|Graveyard
 Oracle:{T}, Discard a card: Create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."\n{1}, {T}: Each opponent mills cards equal to the amount of life you gained this turn.\n{4}, {T}: Exile four target cards from a single graveyard. Draw a card.
 
 ALTERNATE
@@ -18,5 +18,4 @@ Types:Sorcery
 A:SP$ ChangeZone | TargetMin$ 0 | TargetMax$ 2 | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose up to two target creature, land, and/or planeswalker cards from your graveyard | ValidTgts$ Card.Creature+YouOwn,Card.Land+YouOwn,Card.Planeswalker+YouOwn | SubAbility$ DBGainLife | StackDescription$ {p:You} returns up to two target creature, land, and/or planeswalker cards from their graveyard to their hand. ({c:Targeted}) | SpellDescription$ Return up to two target creature, land, and/or planeswalker cards from your graveyard to your hand.
 SVar:DBGainLife:DB$ GainLife | Defined$ Player | LifeAmount$ 4 | SubAbility$ DBExile | StackDescription$ SpellDescription | SpellDescription$ Each player gains 4 life.
 SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SpellDescription$ Exile CARDNAME.
-DeckHas:Ability$Graveyard & Ability$LifeGain
 Oracle:Return up to two target creature, land, and/or planeswalker cards from your graveyard to your hand. Each player gains 4 life. Exile Restorative Burst.

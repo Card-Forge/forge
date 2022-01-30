@@ -7,5 +7,4 @@ SVar:AIPreference:DiscardCost$Card
 AI:RemoveDeck:Random
 DeckHas:Ability$Discard
 DeckHints:Keyword$Madness & Ability$Delirium
-SVar:Picture:http://www.wizards.com/global/images/magic/general/murderers_axe.jpg
 Oracle:Equipped creature gets +2/+2.\nEquip—Discard a card.

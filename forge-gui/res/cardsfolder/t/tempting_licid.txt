@@ -7,5 +7,4 @@ SVar:DBAttach:DB$ Attach | ValidTgts$ Creature | AILogic$ Pump
 SVar:SPAttach:SP$ Attach | Cost$ 0 | ValidTgts$ Creature
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ All creatures able to block CARDNAME do so. | Description$ All creatures able to block enchanted creature do so.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tempting_licid.jpg
 Oracle:{G}, {T}: Tempting Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {G} to end this effect.\nAll creatures able to block enchanted creature do so.

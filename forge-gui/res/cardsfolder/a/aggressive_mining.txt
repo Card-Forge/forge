@@ -4,5 +4,4 @@ Types:Enchantment
 S:Mode$ CantPlayLand | Player$ You | Description$ You can't play lands.
 A:AB$ Draw | Cost$ Sac<1/Land> | NumCards$ 2 | ActivationLimit$ 1 | SpellDescription$ Draw two cards. Activate only once each turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/aggressive_mining.jpg
 Oracle:You can't play lands.\nSacrifice a land: Draw two cards. Activate only once each turn.

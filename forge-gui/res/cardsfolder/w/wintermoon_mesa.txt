@@ -5,5 +5,4 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Tap | Cost$ 2 T Sac<1/CARDNAME> | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select target land | ValidTgts$ Land | SpellDescription$ Tap two target lands.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wintermoon_mesa.jpg
 Oracle:Wintermoon Mesa enters the battlefield tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice Wintermoon Mesa: Tap two target lands.

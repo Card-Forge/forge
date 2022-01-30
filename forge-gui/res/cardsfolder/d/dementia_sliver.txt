@@ -9,5 +9,4 @@ SVar:DBDementiaDiscard:DB$ Discard | DiscardValid$ Card.NamedCard+IsRemembered |
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dementia_sliver.jpg
 Oracle:All Slivers have "{T}: Choose a card name. Target opponent reveals a card at random from their hand. If that card has the chosen name, that player discards it. Activate only during your turn."

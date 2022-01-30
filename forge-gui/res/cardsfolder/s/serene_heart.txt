@@ -2,5 +2,4 @@ Name:Serene Heart
 ManaCost:1 G
 Types:Instant
 A:SP$ DestroyAll | Cost$ 1 G | ValidCards$ Aura | SpellDescription$ Destroy all Auras.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/serene_heart.jpg
 Oracle:Destroy all Auras.

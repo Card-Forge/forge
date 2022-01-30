@@ -4,5 +4,4 @@ Types:Creature Phyrexian Goblin Zombie
 PT:2/1
 K:Haste
 K:Infect
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blackcleave_goblin.jpg
 Oracle:Haste\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)

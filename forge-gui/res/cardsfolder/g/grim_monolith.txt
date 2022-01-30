@@ -5,5 +5,4 @@ K:CARDNAME doesn't untap during your untap step.
 A:AB$ Untap | Cost$ 4 | AILogic$ EOT | SpellDescription$ Untap CARDNAME.
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 3 | SpellDescription$ Add {C}{C}{C}.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grim_monolith.jpg
 Oracle:Grim Monolith doesn't untap during your untap step.\n{T}: Add {C}{C}{C}.\n{4}: Untap Grim Monolith.

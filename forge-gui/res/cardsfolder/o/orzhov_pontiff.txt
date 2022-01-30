@@ -7,5 +7,4 @@ SVar:TrigChoose:DB$ Charm | Choices$ DBPump,DBCurse | CharmNum$ 1
 SVar:DBPump:DB$ PumpAll | ValidCards$ Card.Creature+YouCtrl | NumAtt$ 1 | NumDef$ 1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
 SVar:DBCurse:DB$ PumpAll | ValidCards$ Card.Creature+YouDontCtrl | NumAtt$ -1 | NumDef$ -1 | SpellDescription$ Creatures you don't control get -1/-1 until end of turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/orzhov_pontiff.jpg
 Oracle:Haunt (When this creature dies, exile it haunting target creature.)\nWhen Orzhov Pontiff enters the battlefield or the creature it haunts dies, choose one —\n• Creatures you control get +1/+1 until end of turn.\n• Creatures you don't control get -1/-1 until end of turn.

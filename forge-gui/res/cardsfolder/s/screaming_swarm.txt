@@ -8,5 +8,5 @@ T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YouCtrl | TriggerZones$ Bat
 SVar:TrigMill:DB$ Mill | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player
 SVar:X:TriggerObjectsAttackers$Valid Creature.YouCtrl
 A:AB$ ChangeZone | Cost$ 2 U | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 1 | ActivationZone$ Graveyard | StackDescription$ SpellDescription | SpellDescription$ Put CARDNAME from your graveyard into your library second from the top.
-DeckHas:Ability$Mill & Ability$Graveyard
+DeckHas:Ability$Mill|Graveyard
 Oracle:Whenever you attack with one or more creatures, target player mills that many cards. (To mill a card, a player puts the top card of their library into their graveyard.)\n{2}{U}: Put Screaming Swarm from your graveyard into your library second from the top.

@@ -4,5 +4,4 @@ Types:Artifact Creature Berserker
 PT:3/1
 A:AB$ DealDamage | Cost$ 1 R Sac<1/CARDNAME> | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target player or planeswalker.
 DeckNeeds:Color$Red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vulshok_replica.jpg
 Oracle:{1}{R}, Sacrifice Vulshok Replica: It deals 3 damage to target player or planeswalker.

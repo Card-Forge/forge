@@ -4,6 +4,5 @@ Types:Plane Innistrad
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | AddKeyword$ Vigilance | Description$ All creatures have vigilance.
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, creatures you control gain indestructible until end of turn.
 SVar:RolledChaos:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Indestructible
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gavony.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always
 Oracle:All creatures have vigilance.\nWhenever you roll {CHAOS}, creatures you control gain indestructible until end of turn.

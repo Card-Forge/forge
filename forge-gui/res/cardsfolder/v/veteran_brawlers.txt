@@ -5,5 +5,4 @@ PT:4/4
 S:Mode$ CantAttack | ValidCard$ Card.Self | IfDefenderControls$ Land.untapped | Description$ CARDNAME can't attack if defending player controls an untapped land.
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't block. | CheckSVar$ Y | SVarCompare$ GE1 | Description$ CARDNAME can't block if you control an untapped land.
 SVar:Y:Count$Valid Land.YouCtrl+untapped
-SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_brawlers.jpg
 Oracle:Veteran Brawlers can't attack if defending player controls an untapped land.\nVeteran Brawlers can't block if you control an untapped land.

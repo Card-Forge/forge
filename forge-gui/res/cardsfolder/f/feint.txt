@@ -6,5 +6,4 @@ SVar:FeintPump:DB$ Pump | Defined$ Remembered | KW$ Prevent all combat damage th
 SVar:FeintPumpAll:DB$ Pump | Defined$ Valid Creature.blockingRemembered | KW$ Prevent all combat damage that would be dealt by CARDNAME. | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/feint.jpg
 Oracle:Tap all creatures blocking target attacking creature. Prevent all combat damage that would be dealt this turn by that creature and each creature blocking it.

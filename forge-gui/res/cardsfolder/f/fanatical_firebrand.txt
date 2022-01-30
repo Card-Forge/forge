@@ -4,5 +4,4 @@ Types:Creature Goblin Pirate
 PT:1/1
 K:Haste
 A:AB$ DealDamage | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fanatical_firebrand.jpg
 Oracle:Haste\n{T}, Sacrifice Fanatical Firebrand: It deals 1 damage to any target.

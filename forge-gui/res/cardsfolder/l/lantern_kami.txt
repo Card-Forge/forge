@@ -3,5 +3,4 @@ ManaCost:W
 Types:Creature Spirit
 PT:1/1
 K:Flying
-SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card75319.jpg
 Oracle:Flying

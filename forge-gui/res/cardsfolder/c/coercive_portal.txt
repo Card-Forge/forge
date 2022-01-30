@@ -6,5 +6,4 @@ SVar:TrigVote:DB$ Vote | Defined$ Player | VoteCarnage$ DBDestroyAll | VoteHomag
 SVar:DBDestroyAll:DB$ Sacrifice | SacValid$ Self | SubAbility$ DBDestroy
 SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Permanent.nonLand | ValidDesc$ all nonland permanents
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ You
-SVar:Picture:http://www.wizards.com/global/images/magic/general/coercive_portal.jpg
 Oracle:Will of the council — At the beginning of your upkeep, starting with you, each player votes for carnage or homage. If carnage gets more votes, sacrifice Coercive Portal and destroy all nonland permanents. If homage gets more votes or the vote is tied, draw a card.

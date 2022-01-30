@@ -3,5 +3,4 @@ ManaCost:4 G G
 Types:Creature Dinosaur
 PT:6/6
 K:Trample
-SVar:Picture:http://www.wizards.com/global/images/magic/general/colossal_dreadmaw.jpg
 Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)

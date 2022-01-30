@@ -3,7 +3,6 @@ ManaCost:3 U R
 Types:Legendary Planeswalker Ral
 Loyalty:5
 A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | DigNum$ 2 | ChangeNum$ 1 | DestinationZone2$ Graveyard | SpellDescription$ Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
-DeckHas:Ability$Graveyard
 A:AB$ DealDamage | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature equal to the total number of instant and sorcery cards you own in exile and in your graveyard.
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn/Plus.Y
 SVar:Y:Count$ValidExile Instant.YouOwn,Sorcery.YouOwn
@@ -14,4 +13,4 @@ SVar:EffDraw:DB$ Draw | Defined$ You | NumCards$ 2
 SVar:BuffedBy:Instant,Sorcery
 DeckHints:Type$Instant|Sorcery
 DeckHas:Ability$Graveyard
-Oracle:[+1]: Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.\n[−3]: Ral, Izzet Viceroy deals damage to target creature equal to the total number of instant and sorcery cards you own in exile and in your graveyard.\n[−8]: You get an emblem with "Whenever you cast an instant or sorcery spell, this emblem deals 4 damage to any target and you draw two cards."
+Oracle:[+1]: Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.\n[-3]: Ral, Izzet Viceroy deals damage to target creature equal to the total number of instant and sorcery cards you own in exile and in your graveyard.\n[-8]: You get an emblem with "Whenever you cast an instant or sorcery spell, this emblem deals 4 damage to any target and you draw two cards."

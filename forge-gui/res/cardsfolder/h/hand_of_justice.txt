@@ -3,5 +3,4 @@ ManaCost:5 W
 Types:Creature Avatar
 PT:2/6
 A:AB$ Destroy | Cost$ T tapXType<3/Creature.White> | ValidTgts$ Creature | TgtPrompt$ Select target creature | CostDesc$ {T}, Tap three untapped white creatures you control: | SpellDescription$ Destroy target creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hand_of_justice.jpg
 Oracle:{T}, Tap three untapped white creatures you control: Destroy target creature.

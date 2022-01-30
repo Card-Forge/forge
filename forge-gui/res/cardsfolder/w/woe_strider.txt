@@ -8,5 +8,5 @@ A:AB$ Scry | Cost$ Sac<1/Creature.Other/another creature> | ScryNum$ 1 | SpellDe
 K:Escape:3 B B ExileFromGrave<4/Card.Other/other>
 K:etbCounter:P1P1:2:ValidCard$ Card.Self+escaped:CARDNAME escapes with two +1/+1 counters on it.
 SVar:AIPreference:ExileFromGraveCost$Card.YouOwn+Other+inZoneGraveyard
-DeckHas:Ability$Token & Ability$Counters
+DeckHas:Ability$Token|Counters
 Oracle:When Woe Strider enters the battlefield, create a 0/1 white Goat creature token.\nSacrifice another creature: Scry 1.\nEscape—{3}{B}{B}, Exile four other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)\nWoe Strider escapes with two +1/+1 counters on it.

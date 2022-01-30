@@ -4,5 +4,4 @@ Types:Creature Angel
 PT:2/4
 K:Flying
 K:Lifelink
-SVar:Picture:http://www.wizards.com/global/images/magic/general/seraph_of_dawn.jpg
 Oracle:Flying, lifelink

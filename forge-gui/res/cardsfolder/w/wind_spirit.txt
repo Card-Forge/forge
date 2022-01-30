@@ -4,5 +4,4 @@ Types:Creature Elemental Spirit
 PT:3/2
 K:Flying
 K:Menace
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wind_spirit.jpg
 Oracle:Flying\nMenace (This creature can't be blocked except by two or more creatures.)

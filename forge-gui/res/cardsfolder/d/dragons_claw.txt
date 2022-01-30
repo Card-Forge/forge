@@ -5,5 +5,4 @@ T:Mode$ SpellCast | ValidCard$ Card.Red | TriggerZones$ Battlefield | OptionalDe
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 AI:RemoveDeck:Random
 DeckNeeds:Color$Red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dragons_claw.jpg
 Oracle:Whenever a player casts a red spell, you may gain 1 life.

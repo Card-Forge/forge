@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ G | ValidTgts$ Land | AILogic$ Pump
 T:Mode$ TapsForMana | ValidCard$ Card.AttachedBy | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever enchanted land is tapped for mana, its controller adds an additional {G}.
 SVar:TrigMana:DB$ Mana | Produced$ G | Amount$ 1 | Defined$ TriggeredCardController
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_growth.jpg
 Oracle:Enchant land\nWhenever enchanted land is tapped for mana, its controller adds an additional {G}.

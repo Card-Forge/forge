@@ -10,5 +10,5 @@ SVar:BuffedBy:Dwarf
 SVar:PlayMain1:TRUE
 DeckNeeds:Type$Dwarf
 DeckHints:Type$Dragon|Artifact
-DeckHas:Ability$Token & Ability$Sacrifice
+DeckHas:Ability$Token|Sacrifice
 Oracle:Other Dwarves you control get +1/+0.\nWhenever a Dwarf you control becomes tapped, create a Treasure token.\nSacrifice five Treasures: Search your library for an artifact or Dragon card, put that card onto the battlefield, then shuffle.

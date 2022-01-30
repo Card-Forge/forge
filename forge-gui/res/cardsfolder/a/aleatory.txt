@@ -7,5 +7,4 @@ SVar:AleatoryPump:DB$ Pump | Defined$ Targeted | NumAtt$ 1 | NumDef$ 1 | SubAbil
 SVar:DelTrigSlowtrip:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | TriggerDescription$ Draw a card.
 SVar:DrawSlowtrip:DB$ Draw | NumCards$ 1 | Defined$ You
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aleatory.jpg
 Oracle:Cast this spell only during combat after blockers are declared.\nFlip a coin. If you win the flip, target creature gets +1/+1 until end of turn.\nDraw a card at the beginning of the next turn's upkeep.

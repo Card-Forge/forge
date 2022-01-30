@@ -4,5 +4,4 @@ Types:Creature Spider
 PT:1/2
 K:Reach
 K:Deathtouch
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deadly_recluse.jpg
 Oracle:Reach (This creature can block creatures with flying.)\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)

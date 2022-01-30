@@ -6,5 +6,4 @@ K:Morph:U
 A:AB$ Pump | Cost$ U T | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBMustAttack | SpellDescription$ Target creature attacks target opponent this turn if able.
 SVar:DBMustAttack:DB$ MustAttack | ValidTgts$ Creature | TgtPrompt$ Select target creature | Defender$ ParentTarget | ThisTurn$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dulcet_sirens.jpg
 Oracle:{U}, {T}: Target creature attacks target opponent this turn if able.\nMorph {U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

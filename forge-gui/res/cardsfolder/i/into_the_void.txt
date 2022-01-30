@@ -2,5 +2,4 @@ Name:Into the Void
 ManaCost:3 U
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 3 U | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return up to two target creatures to their owners' hands.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/into_the_void.jpg
 Oracle:Return up to two target creatures to their owners' hands.

@@ -5,5 +5,4 @@ K:Equip:2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddAbility$ SirenSongTap | Description$ Equipped creature has "2, {T}: Tap target creature."
 SVar:SirenSongTap:AB$ Tap | Cost$ 2 T | ValidTgts$ Creature | SpellDescription$ Tap target creature.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/siren_song_lyre.jpg
 Oracle:Equipped creature has "{2}, {T}: Tap target creature."\nEquip {2}

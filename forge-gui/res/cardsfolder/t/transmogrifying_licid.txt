@@ -7,5 +7,4 @@ SVar:DBAttach:DB$ Attach | ValidTgts$ Creature | AILogic$ Pump
 SVar:SPAttach:SP$ Attach | Cost$ 0 | ValidTgts$ Creature
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddType$ Artifact | Description$ Enchanted creature gets +1/+1 and is an artifact in addition to its other types.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/transmogrifying_licid.jpg
 Oracle:{1}, {T}: Transmogrifying Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {1} to end this effect.\nEnchanted creature gets +1/+1 and is an artifact in addition to its other types.

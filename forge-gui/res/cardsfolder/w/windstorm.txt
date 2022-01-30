@@ -3,5 +3,4 @@ ManaCost:X G
 Types:Instant
 A:SP$ DamageAll | Cost$ X G | ValidCards$ Creature.withFlying | NumDmg$ X | ValidDescription$ each creature with flying. | SpellDescription$ CARDNAME deals X damage to each creature with flying.
 SVar:X:Count$xPaid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/windstorm.jpg
 Oracle:Windstorm deals X damage to each creature with flying.

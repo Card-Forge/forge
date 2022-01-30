@@ -8,5 +8,4 @@ SVar:X2:Count$Valid Creature.Merfolk+Other+YouCtrl
 SVar:TotalX:SVar$X1/Plus.X2
 SVar:BuffedBy:Island
 SVar:BuffedBy:Merfolk
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kumenas_speaker.jpg
 Oracle:Kumena's Speaker gets +1/+1 as long as you control another Merfolk or an Island.

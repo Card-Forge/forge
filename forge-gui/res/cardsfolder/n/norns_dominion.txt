@@ -7,5 +7,4 @@ SVar:DBRemove:DB$ RemoveCounterAll | ValidCards$ Permanent | CounterType$ FATE |
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | OptionalDecider$ You | TriggerDescription$ Whenever you roll {CHAOS}, you may put a fate counter on target permanent.
 SVar:RolledChaos:DB$ PutCounter | ValidTgts$ Permanent | CounterType$ FATE | CounterNum$ 1
 SVar:AIRollPlanarDieParams:Mode$ Always
-SVar:Picture:http://www.wizards.com/global/images/magic/general/norns_dominion.jpg
 Oracle:When you planeswalk away from Norn's Dominion, destroy each nonland permanent without a fate counter on it, then remove all fate counters from all permanents.\nWhenever you roll {CHAOS}, you may put a fate counter on target permanent.

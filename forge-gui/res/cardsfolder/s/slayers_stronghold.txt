@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Pump | Cost$ R W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | KW$ Vigilance & Haste | SpellDescription$ Target creature gets +2/+0 and gains vigilance and haste until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/slayers_stronghold.jpg
 Oracle:{T}: Add {C}.\n{R}{W}, {T}: Target creature gets +2/+0 and gains vigilance and haste until end of turn.

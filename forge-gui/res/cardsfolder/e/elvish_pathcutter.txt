@@ -4,5 +4,4 @@ Types:Creature Elf Scout
 PT:1/2
 A:AB$ Pump | Cost$ 2 G | ValidTgts$ Creature.Elf | TgtPrompt$ Select target Elf creature | KW$ Forestwalk | SpellDescription$ Target Elf creature gains forestwalk until end of turn. (It can't be blocked as long as defending player controls a Forest.)
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_pathcutter.jpg
 Oracle:{2}{G}: Target Elf creature gains forestwalk until end of turn. (It can't be blocked as long as defending player controls a Forest.)

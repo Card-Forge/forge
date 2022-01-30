@@ -5,5 +5,4 @@ K:Enchant player
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Player | AILogic$ Curse
 T:Mode$ Attacks | ValidCard$ Creature | Attacked$ Player.EnchantedBy | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature attacks enchanted player, its controller gains 1 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ TriggeredAttackerController | LifeAmount$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_the_forsaken.jpg
 Oracle:Enchant player\nWhenever a creature attacks enchanted player, its controller gains 1 life.

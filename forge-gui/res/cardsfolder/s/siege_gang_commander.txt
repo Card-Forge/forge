@@ -8,5 +8,4 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ r_1_1_goblin | LegacyIm
 SVar:AIPreference:SacCost$Creature.Goblin+token,Creature.Goblin+cmcLE1
 DeckHas:Ability$Token
 DeckHints:Type$Goblin
-SVar:Picture:http://www.wizards.com/global/images/magic/general/siege_gang_commander.jpg
 Oracle:When Siege-Gang Commander enters the battlefield, create three 1/1 red Goblin creature tokens.\n{1}{R}, Sacrifice a Goblin: Siege-Gang Commander deals 2 damage to any target.

@@ -7,6 +7,6 @@ SVar:TrigToken:DB$ Token | TokenScript$ gu_0_0_fractal | RememberTokens$ True | 
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ TriggerCount$CastSACMC | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Pump | Cost$ 3 U | KW$ HIDDEN Unblockable | TgtPrompt$ Select target creature token | ValidTgts$ Creature.token | SpellDescription$ Target creature token can't be blocked this turn.
-DeckHas:Ability$Token & Ability$Counters
+DeckHas:Ability$Token|Counters
 DeckNeeds:Type$Instant|Sorcery
 Oracle:Magecraft — Whenever you cast or copy an instant or sorcery spell, create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it, where X is that spell's mana value.\n{3}{U}: Target creature token can't be blocked this turn.

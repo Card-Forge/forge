@@ -4,5 +4,4 @@ Types:Creature Serpent
 PT:5/5
 K:Hexproof
 K:Cycling:U
-SVar:Picture:http://www.wizards.com/global/images/magic/general/striped_riverwinder.jpg
 Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nCycling {U} ({U}, Discard this card: Draw a card.)

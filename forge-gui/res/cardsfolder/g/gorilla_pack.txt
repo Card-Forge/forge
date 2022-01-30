@@ -6,5 +6,4 @@ S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Forest | Des
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Forest.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Forests, sacrifice CARDNAME.
 SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:NeedsToPlay:Forest.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gorilla_pack.jpg
 Oracle:Gorilla Pack can't attack unless defending player controls a Forest.\nWhen you control no Forests, sacrifice Gorilla Pack.

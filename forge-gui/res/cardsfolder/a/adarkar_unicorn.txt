@@ -6,5 +6,4 @@ A:AB$ Mana | Cost$ T | Produced$ C U | RestrictValid$ CumulativeUpkeep | SpellDe
 A:AB$ Mana | Cost$ T | Produced$ U | RestrictValid$ CumulativeUpkeep | SpellDescription$ Add {U}. Spend this mana only to pay cumulative upkeep costs.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/adarkar_unicorn.jpg
 Oracle:{T}: Add {U} or {C}{U}. Spend this mana only to pay cumulative upkeep costs.

@@ -5,5 +5,4 @@ A:AB$ DestroyAll | Cost$ X Sac<1/CARDNAME> | ValidCards$ Artifact.cmcLEX,Creatur
 SVar:X:Count$xPaid
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pernicious_deed.jpg
 Oracle:{X}, Sacrifice Pernicious Deed: Destroy each artifact, creature, and enchantment with mana value X or less.

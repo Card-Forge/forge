@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Creature Cat Beast
 PT:2/2
 A:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/felidar_cub.jpg
 Oracle:Sacrifice Felidar Cub: Destroy target enchantment.

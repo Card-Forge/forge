@@ -14,5 +14,4 @@ SVar:STMayPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembe
 SVar:PlayedExiled:Mode$ SpellCast | TriggerZones$ Command | ValidCard$ Card.IsRemembered | Static$ True | Execute$ ExileSelf
 SVar:ExiledLandPlayed:Mode$ LandPlayed | TriggerZones$ Command | ValidCard$ Card.IsRemembered | Static$ True | Execute$ ExileSelf
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/intet_the_dreamer.jpg
 Oracle:Flying\nWhenever Intet, the Dreamer deals combat damage to a player, you may pay {2}{U}. If you do, exile the top card of your library face down. You may look at that card for as long as it remains exiled. You may play that card without paying its mana cost for as long as Intet remains on the battlefield.

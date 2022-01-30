@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Creature Human
 PT:1/2
 K:Protection from red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/repentant_blacksmith.jpg
 Oracle:Protection from red

@@ -3,5 +3,4 @@ ManaCost:6
 Types:Artifact
 A:AB$ Draw | Cost$ 2 PayLife<2> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/book_of_rass.jpg
 Oracle:{2}, Pay 2 life: Draw a card.

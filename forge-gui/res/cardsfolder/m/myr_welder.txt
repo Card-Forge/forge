@@ -8,5 +8,4 @@ T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCar
 SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_welder.jpg
 Oracle:Imprint — {T}: Exile target artifact card from a graveyard.\nMyr Welder has all activated abilities of all cards exiled with it.

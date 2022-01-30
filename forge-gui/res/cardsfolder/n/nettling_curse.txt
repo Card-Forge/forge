@@ -9,5 +9,4 @@ T:Mode$ Blocks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execut
 SVar:TrigLoseLifeAttack:DB$ LoseLife | LifeAmount$ 3 | Defined$ TriggeredAttackerController
 SVar:TrigLoseLifeBlock:DB$ LoseLife | LifeAmount$ 3 | Defined$ TriggeredBlockerController
 DeckNeeds:Color$Red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nettling_curse.jpg
 Oracle:Enchant creature\nWhenever enchanted creature attacks or blocks, its controller loses 3 life.\n{1}{R}: Enchanted creature attacks this turn if able.

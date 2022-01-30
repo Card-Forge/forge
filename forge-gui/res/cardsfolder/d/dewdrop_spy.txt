@@ -6,5 +6,4 @@ K:Flash
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPeek | TriggerDescription$ When CARDNAME enters the battlefield, look at the top card of target player's library.
 SVar:TrigPeek:DB$ RearrangeTopOfLibrary | ValidTgts$ Player | TgtPrompt$ Choose target player. | NumCards$ 1 | SpellDescription$ Look at the top card of target player's library.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dewdrop_spy.jpg
 Oracle:Flash\nFlying\nWhen Dewdrop Spy enters the battlefield, look at the top card of target player's library.

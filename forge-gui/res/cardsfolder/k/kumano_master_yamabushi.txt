@@ -5,5 +5,4 @@ PT:4/4
 A:AB$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 R:Event$ Moved | ValidLKI$ Creature.DamagedBy | Destination$ Graveyard | ReplaceWith$ DBExile | ActiveZones$ Battlefield | Description$ If a creature dealt damage by CARDNAME this turn would die, exile it instead.
 SVar:DBExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ Exile
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kumano_master_yamabushi.jpg
 Oracle:{1}{R}: Kumano, Master Yamabushi deals 1 damage to any target.\nIf a creature dealt damage by Kumano this turn would die, exile it instead.

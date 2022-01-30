@@ -5,5 +5,4 @@ PT:1/1
 S:Mode$ Continuous | Affected$ Creature.Self+attacking | AddPower$ 2 | Description$ As long as CARDNAME is attacking, it gets +2/+0.
 A:AB$ Pump | Cost$ PayLife<4> | Defined$ Self | KW$ Indestructible | SpellDescription$ CARDNAME gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/adanto_vanguard.jpg
 Oracle:As long as Adanto Vanguard is attacking, it gets +2/+0.\nPay 4 life: Adanto Vanguard gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

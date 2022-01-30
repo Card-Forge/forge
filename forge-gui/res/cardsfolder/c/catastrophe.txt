@@ -4,5 +4,4 @@ Types:Sorcery
 A:SP$ GenericChoice | Cost$ 4 W W | Choices$ DBKillLand,DBKillCreatures | Defined$ You | AILogic$ BestOption | StackDescription$ SpellDescription | SpellDescription$ Destroy all lands or all creatures. Creatures destroyed this way can't be regenerated.
 SVar:DBKillLand:DB$ DestroyAll | ValidCards$ Land | SpellDescription$ Destroy all lands.
 SVar:DBKillCreatures:DB$ DestroyAll | ValidCards$ Creature | NoRegen$ True | SpellDescription$ Destroy all creatures. They can't be regenerated.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/catastrophe.jpg
 Oracle:Destroy all lands or all creatures. Creatures destroyed this way can't be regenerated.

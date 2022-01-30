@@ -6,5 +6,4 @@ A:SP$ GainLife | Cost$ 2 W | Defined$ You | LifeAmount$ 2 | SubAbility$ DoDraw |
 SVar:DoDraw:DB$ Draw | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GTY | NumCards$ 1
 SVar:X:Count$YourLifeTotal
 SVar:Y:PlayerCountOpponents$LowestLifeTotal
-SVar:Picture:http://www.wizards.com/global/images/magic/general/survival_cache.jpg
 Oracle:You gain 2 life. Then if you have more life than an opponent, draw a card.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)

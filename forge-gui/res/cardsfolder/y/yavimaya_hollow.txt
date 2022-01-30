@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Regenerate | Cost$ G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Regenerate target creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_hollow.jpg
 Oracle:{T}: Add {C}.\n{G}, {T}: Regenerate target creature.

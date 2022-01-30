@@ -8,5 +8,5 @@ SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ You | RememberMilled$ True | Sub
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Card.Creature
-DeckHas:Ability$Graveyard & Ability$LifeGain
+DeckHas:Ability$Graveyard|LifeGain
 Oracle:Flying\nWhen Gorging Vulture enters the battlefield, mill four cards. You gain 1 life for each creature card put into your graveyard this way.

@@ -4,5 +4,4 @@ Types:Artifact Creature Human Cleric
 PT:2/2
 S:Mode$ CantBeCast | ValidCard$ Card.nonArtifact | Caster$ Player | NumLimitEachTurn$ 1 | Description$ Each player who has cast a nonartifact spell this turn can't cast additional nonartifact spells.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ethersworn_canonist.jpg
 Oracle:Each player who has cast a nonartifact spell this turn can't cast additional nonartifact spells.

@@ -5,5 +5,4 @@ PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerLE2+YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigDraw | Optional$ True | TriggerDescription$ Whenever another creature with power 2 or less enters the battlefield under your control, you may pay {1}. If you do, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 1 | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mentor_of_the_meek.jpg
 Oracle:Whenever another creature with power 2 or less enters the battlefield under your control, you may pay {1}. If you do, draw a card.

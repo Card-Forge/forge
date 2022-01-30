@@ -7,5 +7,4 @@ SVar:PayB:DB$ Counter | Defined$ Targeted | UnlessCost$ B | SpellDescription$ Co
 SVar:Pay3:DB$ Counter | Defined$ Targeted | UnlessCost$ 3 | SpellDescription$ Counter spell unless you pay 3
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thrull_wizard.jpg
 Oracle:{1}{B}: Counter target black spell unless that spell's controller pays {B} or {3}.

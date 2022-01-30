@@ -3,5 +3,4 @@ ManaCost:1 G
 Types:Creature Naga Druid
 PT:1/2
 A:AB$ ManaReflected | Cost$ T | ColorOrType$ Type | Valid$ Land.YouCtrl | ReflectProperty$ Produce | SpellDescription$ Add one mana of any type that a land you control could produce.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/naga_vitalist.jpg
 Oracle:{T}: Add one mana of any type that a land you control could produce.

@@ -7,5 +7,4 @@ A:AB$ ChangeZone | Cost$ 1 T Sac<1/CARDNAME> | ValidTgts$ Ally.YouCtrl | TgtProm
 AI:RemoveDeck:Random
 DeckHas:Ability$Mana.Colorless
 DeckHints:Type$Ally
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ally_encampment.jpg
 Oracle:{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast an Ally spell.\n{1}, {T}, Sacrifice Ally Encampment: Return target Ally you control to its owner's hand.

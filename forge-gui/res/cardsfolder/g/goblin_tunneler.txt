@@ -3,5 +3,4 @@ ManaCost:1 R
 Types:Creature Goblin Rogue
 PT:1/1
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less. | KW$ HIDDEN Unblockable | SpellDescription$ Target creature with power 2 or less can't be blocked this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_tunneler.jpg
 Oracle:{T}: Target creature with power 2 or less can't be blocked this turn.

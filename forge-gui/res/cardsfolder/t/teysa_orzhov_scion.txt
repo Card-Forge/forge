@@ -6,5 +6,4 @@ A:AB$ ChangeZone | Cost$ Sac<3/Creature.White/white creature> | ValidTgts$ Creat
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Black+Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever another black creature you control dies, create a 1/1 white Spirit creature token with flying.
 SVar:TrigToken:DB$ Token | LegacyImage$ w 1 1 spirit flying gpt | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/teysa_orzhov_scion.jpg
 Oracle:Sacrifice three white creatures: Exile target creature.\nWhenever another black creature you control dies, create a 1/1 white Spirit creature token with flying.

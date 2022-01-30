@@ -3,5 +3,4 @@ ManaCost:3 W W W
 Types:Sorcery
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 3 | EffectZone$ All | IsPresent$ Permanent.nonLand | PresentCompare$ GE10 | Description$ This spell costs {3} less to cast if there are ten or more nonland permanents on the battlefield.
 A:SP$ DestroyAll | Cost$ 3 W W W | ValidCards$ Permanent.nonLand | SpellDescription$ Destroy all nonland permanents.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hour_of_revelation.jpg
 Oracle:This spell costs {3} less to cast if there are ten or more nonland permanents on the battlefield.\nDestroy all nonland permanents.

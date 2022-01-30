@@ -14,5 +14,4 @@ A:AB$ DealDamage | Cost$ SubCounter<11/LOYALTY> | Defined$ Player.Opponent | Num
 SVar:DBDrawSeven:DB$ Draw | NumCards$ 7
 SVar:AIPreference:SacCost$Permanent.nonLand | DiscardCost$Card
 DeckHints:Name$Visage of Bolas
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nicol_bolas_the_deceiver.jpg
-Oracle:[+3]: Each opponent loses 3 life unless that player sacrifices a nonland permanent or discards a card.\n[−3]: Destroy target creature. Draw a card.\n[−11]: Nicol Bolas, the Deceiver deals 7 damage to each opponent. You draw seven cards.
+Oracle:[+3]: Each opponent loses 3 life unless that player sacrifices a nonland permanent or discards a card.\n[-3]: Destroy target creature. Draw a card.\n[-11]: Nicol Bolas, the Deceiver deals 7 damage to each opponent. You draw seven cards.

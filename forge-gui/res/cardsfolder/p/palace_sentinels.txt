@@ -4,5 +4,4 @@ Types:Creature Human Soldier
 PT:2/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
 SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
-SVar:Picture:http://www.wizards.com/global/images/magic/general/palace_sentinels.jpg
 Oracle:When Palace Sentinels enters the battlefield, you become the monarch.

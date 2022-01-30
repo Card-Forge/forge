@@ -4,5 +4,4 @@ Types:Creature Wurm
 PT:1/1
 S:Mode$ Continuous | Affected$ Card.Self | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +0/+1 as long as an opponent controls an Island.
 SVar:X:Count$Valid Island.OppCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/water_wurm.jpg
 Oracle:Water Wurm gets +0/+1 as long as an opponent controls an Island.

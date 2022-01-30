@@ -4,5 +4,4 @@ Types:Artifact Creature Insect
 PT:2/2
 K:Flash
 K:Protection from artifacts
-SVar:Picture:http://www.wizards.com/global/images/magic/general/needlebug.jpg
 Oracle:Flash\nProtection from artifacts

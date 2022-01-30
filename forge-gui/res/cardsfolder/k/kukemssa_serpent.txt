@@ -8,5 +8,4 @@ T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | Present
 SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:NeedsToPlay:Island.YouCtrl
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kukemssa_serpent.jpg
 Oracle:Kukemssa Serpent can't attack unless defending player controls an Island.\n{U}, Sacrifice an Island: Target land an opponent controls becomes an Island until end of turn.\nWhen you control no Islands, sacrifice Kukemssa Serpent.

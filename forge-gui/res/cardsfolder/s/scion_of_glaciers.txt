@@ -3,5 +3,4 @@ ManaCost:2 U U
 Types:Creature Elemental
 PT:2/5
 A:AB$ Pump | Cost$ U | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scion_of_glaciers.jpg
 Oracle:{U}: Scion of Glaciers gets +1/-1 until end of turn.

@@ -7,5 +7,4 @@ SVar:TrigDmgOpp:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select targe
 SVar:DBDmgOpp:DB$ DealDamage | DamageSource$ Remembered | Defined$ RememberedController | NumDmg$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardPower
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dong_zhou_the_tyrant.jpg
 Oracle:When Dong Zhou, the Tyrant enters the battlefield, target creature an opponent controls deals damage equal to its power to that player.

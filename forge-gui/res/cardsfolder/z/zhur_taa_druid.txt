@@ -5,5 +5,4 @@ PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 T:Mode$ TapsForMana | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever you tap CARDNAME for mana, it deals 1 damage to each opponent.
 SVar:TrigDmg:DB$ DealDamage | NumDmg$ 1 | Defined$ Player.Opponent
-SVar:Picture:http://www.wizards.com/global/images/magic/general/zhur_taa_druid.jpg
 Oracle:{T}: Add {G}.\nWhenever you tap Zhur-Taa Druid for mana, it deals 1 damage to each opponent.

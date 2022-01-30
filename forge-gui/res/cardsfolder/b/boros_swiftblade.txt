@@ -3,5 +3,4 @@ ManaCost:R W
 Types:Creature Human Soldier
 PT:1/2
 K:Double Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_swiftblade.jpg
 Oracle:Double strike

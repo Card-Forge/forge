@@ -4,5 +4,4 @@ Types:Creature Wall
 PT:0/6
 K:Defender
 A:AB$ Pump | Cost$ 1 | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_opposition.jpg
 Oracle:Defender (This creature can't attack.)\n{1}: Wall of Opposition gets +1/+0 until end of turn.

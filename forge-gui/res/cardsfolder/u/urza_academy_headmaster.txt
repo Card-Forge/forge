@@ -109,5 +109,5 @@ SVar:LifeDrawPut20U:DB$ GainLife | LifeAmount$ 7 | SubAbility$ DBDraw20U | Spell
 SVar:DBDraw20U:DB$ Draw | NumCards$ 7 | SubAbility$ DBChangeZone20U
 SVar:DBChangeZone20U:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent | ChangeNum$ 7
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
-DeckHas:Ability$Counters & Ability$Token & Ability$LifeGain & Ability$Discard
+DeckHas:Ability$Counters|Token|LifeGain|Discard
 Oracle:[+1]: Head to AskUrza.com and click +1.\n[-1]: Head to AskUrza.com and click -1.\n[-6]: Head to AskUrza.com and click -6.

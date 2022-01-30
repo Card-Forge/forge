@@ -2,5 +2,4 @@ Name:Sonic Burst
 ManaCost:1 R
 Types:Instant
 A:SP$ DealDamage | Cost$ 1 R Discard<1/Random> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sonic_burst.jpg
 Oracle:As an additional cost to cast this spell, discard a card at random.\nSonic Burst deals 4 damage to any target.

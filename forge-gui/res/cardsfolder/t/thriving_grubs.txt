@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME attacks, you may pay {E}{E}. If you do, put a +1/+1 counter on it.
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ PayEnergy<2> | CounterType$ P1P1 | CounterNum$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thriving_grubs.jpg
 Oracle:When Thriving Grubs enters the battlefield, you get {E}{E} (two energy counters).\nWhenever Thriving Grubs attacks, you may pay {E}{E}. If you do, put a +1/+1 counter on it.

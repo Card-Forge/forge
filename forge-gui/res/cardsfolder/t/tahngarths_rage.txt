@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+attacking | AddPower$ 3 | Description$ Enchanted creature gets +3/+0 as long as it's attacking. Otherwise, it gets -2/-1.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+notattacking | AddPower$ -2 | AddToughness$ -1
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tahngarths_rage.jpg
 Oracle:Enchant creature\nEnchanted creature gets +3/+0 as long as it's attacking. Otherwise, it gets -2/-1.

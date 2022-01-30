@@ -7,5 +7,4 @@ A:AB$ ChangeZone | Cost$ 2 U Discard<2/Card> | Origin$ Graveyard | Destination$ 
 SVar:DiscardMe:2
 SVar:SacMe:1
 DeckHints:Ability$Discard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/advanced_stitchwing.jpg
 Oracle:Flying\n{2}{U}, Discard two cards: Return Advanced Stitchwing from your graveyard to the battlefield tapped.

@@ -3,5 +3,4 @@ ManaCost:1 U U
 Types:Instant
 A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell,Activated,Triggered | TgtPrompt$ Select target spell or ability | ValidTgts$ Card | SpellDescription$ Counter target spell, activated ability, or triggered ability.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/disallow.jpg
 Oracle:Counter target spell, activated ability, or triggered ability. (Mana abilities can't be targeted.)

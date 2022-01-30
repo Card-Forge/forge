@@ -7,7 +7,6 @@ K:Vigilance
 K:Lifelink
 K:Fabricate:2
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other creatures you control get +1/+1.
-DeckHas:Ability$Counters & Ability$Token
+DeckHas:Ability$Counters|Token
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/angel_of_invention.jpg
 Oracle:Flying, vigilance, lifelink\nFabricate 2 (When this creature enters the battlefield, put two +1/+1 counters on it or create two 1/1 colorless Servo artifact creature tokens.)\nOther creatures you control get +1/+1.

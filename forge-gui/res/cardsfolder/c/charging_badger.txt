@@ -3,5 +3,4 @@ ManaCost:G
 Types:Creature Badger
 PT:1/1
 K:Trample
-SVar:Picture:http://www.wizards.com/global/images/magic/general/charging_badger.jpg
 Oracle:Trample

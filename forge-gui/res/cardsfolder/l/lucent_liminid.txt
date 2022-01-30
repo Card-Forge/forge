@@ -3,5 +3,4 @@ ManaCost:3 W W
 Types:Enchantment Creature Elemental
 PT:3/3
 K:Flying
-SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130691.jpg
 Oracle:Flying

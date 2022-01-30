@@ -9,5 +9,4 @@ SVar:TrigSetLife:DB$ Pump | RememberObjects$ TriggeredSourceController | SubAbil
 SVar:DBSet:DB$ SetLife | Defined$ Remembered | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:PlayerCountRemembered$LifeTotal/Twice
-SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_mantle.jpg
 Oracle:Enchant creature\nEnchanted creature gets +3/+3.\nWhenever enchanted creature deals combat damage to a player, double its controller's life total.

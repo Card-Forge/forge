@@ -4,5 +4,4 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.withForestwalk | AddHiddenKeyword$ May be blocked as though it doesn't have Forestwalk. | Description$ Creatures with forestwalk can be blocked as though they didn't have forestwalk.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deadfall.jpg
 Oracle:Creatures with forestwalk can be blocked as though they didn't have forestwalk.

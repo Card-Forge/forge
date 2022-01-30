@@ -5,5 +5,4 @@ PT:3/3
 A:AB$ Pump | Cost$ T | ValidTgts$ Goblin.YouCtrl | TgtPrompt$ Select Goblin you control | NumAtt$ +1 | NumDef$ +0 | KW$ Flying | AtEOT$ Sacrifice | SpellDescription$ Target Goblin creature you control gets +1/+0 and gains flying until end of turn. Sacrifice that creature at the beginning of the next end step.
 DeckNeeds:Type$Goblin
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lowland_oaf.jpg
 Oracle:{T}: Target Goblin creature you control gets +1/+0 and gains flying until end of turn. Sacrifice that creature at the beginning of the next end step.

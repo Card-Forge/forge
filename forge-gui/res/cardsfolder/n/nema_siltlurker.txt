@@ -2,5 +2,4 @@ Name:Nema Siltlurker
 ManaCost:4 G
 Types:Creature Lizard
 PT:3/5
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nema_siltlurker.jpg
 Oracle:

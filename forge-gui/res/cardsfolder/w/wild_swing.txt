@@ -5,5 +5,4 @@ A:SP$ Pump | Cost$ 3 R | ValidTgts$ Permanent.nonEnchantment | TgtPrompt$ Select
 SVar:DBChooseRandom:DB$ ChooseCard | Defined$ You | Amount$ 1 | AtRandom$ True | Choices$ Card.IsRemembered | SubAbility$ DBDestroy
 SVar:DBDestroy:DB$ Destroy | Defined$ ChosenCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_swing.jpg
 Oracle:Choose three target nonenchantment permanents. Destroy one of them at random.

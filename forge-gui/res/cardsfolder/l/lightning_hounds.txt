@@ -3,5 +3,4 @@ ManaCost:2 R R
 Types:Creature Dog
 PT:3/2
 K:First Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_hounds.jpg
 Oracle:First strike

@@ -4,5 +4,4 @@ Types:Creature Goblin Rogue
 PT:1/1
 A:AB$ Shuffle | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player shuffles their library.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_forager.jpg
 Oracle:{R}, Sacrifice Boggart Forager: Target player shuffles their library.

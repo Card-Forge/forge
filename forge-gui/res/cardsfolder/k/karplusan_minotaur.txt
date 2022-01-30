@@ -8,5 +8,4 @@ SVar:TrigYouDmg:DB$ DealDamage | NumDmg$ 1 | ValidTgts$ Creature,Player,Planeswa
 T:Mode$ FlippedCoin | ValidPlayer$ You | ValidResult$ Lose | TriggerZones$ Battlefield | Execute$ TrigOppDmg | TriggerDescription$ Whenever you lose a coin flip, CARDNAME deals 1 damage to any target of an opponent's choice.
 SVar:TrigOppDmg:DB$ DealDamage | NumDmg$ 1 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | TargetingPlayer$ Opponent
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/karplusan_minotaur.jpg
 Oracle:Cumulative upkeep—Flip a coin. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhenever you win a coin flip, Karplusan Minotaur deals 1 damage to any target.\nWhenever you lose a coin flip, Karplusan Minotaur deals 1 damage to any target of an opponent's choice.

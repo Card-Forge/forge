@@ -9,4 +9,4 @@ SVar:DBDig:DB$ Dig | DigNum$ 4 | Reveal$ True | ChangeNum$ All | ChangeValid$ Ca
 A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target card from your graveyard to your hand.
 AI:RemoveDeck:All
 DeckHas:Ability$Graveyard
-Oracle:Spells and abilities your opponents control can't cause you to discard cards or sacrifice permanents.\n[+1]: Choose a nonland card name, then reveal the top four cards of your library. Put all cards with the chosen name from among them into your hand and the rest into your graveyard.\n[−3]: Return target card from your graveyard to your hand.
+Oracle:Spells and abilities your opponents control can't cause you to discard cards or sacrifice permanents.\n[+1]: Choose a nonland card name, then reveal the top four cards of your library. Put all cards with the chosen name from among them into your hand and the rest into your graveyard.\n[-3]: Return target card from your graveyard to your hand.

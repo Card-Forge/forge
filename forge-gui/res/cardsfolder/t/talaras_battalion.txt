@@ -5,5 +5,4 @@ PT:4/3
 K:Trample
 S:Mode$ CantBeCast | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ EQ0 | EffectZone$ All | Description$ Cast this spell only if you've cast another green spell this turn.
 SVar:X:Count$ThisTurnCast_Card.Green+Other+YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/talaras_battalion.jpg
 Oracle:Cast this spell only if you've cast another green spell this turn.\nTrample

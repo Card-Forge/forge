@@ -3,5 +3,4 @@ ManaCost:1 U
 Types:Creature Fish
 PT:3/3
 K:UpkeepCost:1 U
-SVar:Picture:http://www.wizards.com/global/images/magic/general/school_of_piranha.jpg
 Oracle:At the beginning of your upkeep, sacrifice School of Piranha unless you pay {1}{U}.

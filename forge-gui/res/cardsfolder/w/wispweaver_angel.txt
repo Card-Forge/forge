@@ -6,5 +6,4 @@ K:Flying
 T:Mode$ ChangesZone | ValidCard$ Creature.Self | Origin$ Any | Destination$ Battlefield | Execute$ RestorationExile | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may exile another target creature you control, then return that card to the battlefield under its owner's control.
 SVar:RestorationExile:DB$ ChangeZone | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ RestorationReturn
 SVar:RestorationReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wispweaver_angel.jpg
 Oracle:Flying\nWhen Wispweaver Angel enters the battlefield, you may exile another target creature you control, then return that card to the battlefield under its owner's control.

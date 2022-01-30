@@ -2,5 +2,4 @@ Name:Golgari Longlegs
 ManaCost:3 BG BG
 Types:Creature Insect
 PT:5/4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/golgari_longlegs.jpg
 Oracle:

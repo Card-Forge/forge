@@ -10,5 +10,4 @@ SVar:ChangePermanent:DB$ ChangeZoneAll | ChangeType$ Artifact.IsRemembered,Creat
 SVar:ChangeEnchantment:DB$ ChangeZoneAll | ChangeType$ Enchantment.IsRemembered | Origin$ Library | Destination$ Battlefield | ForgetChanged$ True | SubAbility$ GotoBottom
 SVar:GotoBottom:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/warp_world.jpg
 Oracle:Each player shuffles all permanents they own into their library, then reveals that many cards from the top of their library. Each player puts all artifact, creature, and land cards revealed this way onto the battlefield, then does the same for enchantment cards, then puts all cards revealed this way that weren't put onto the battlefield on the bottom of their library.

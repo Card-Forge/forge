@@ -5,5 +5,4 @@ PT:2/2
 A:AB$ PutCounter | Cost$ T | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | CounterType$ BOUNTY | CounterNum$ 1 | IsCurse$ True | SpellDescription$ Put a bounty counter on target nonblack creature.
 A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.counters_GE1_BOUNTY | TgtPrompt$ Select target creature with a bounty counter on it | SpellDescription$ Destroy target creature with a bounty counter on it.
 SVar:NonCombatPriority:5
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bounty_hunter.jpg
 Oracle:{T}: Put a bounty counter on target nonblack creature.\n{T}: Destroy target creature with a bounty counter on it.

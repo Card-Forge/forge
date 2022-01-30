@@ -3,5 +3,4 @@ ManaCost:5 W
 Types:Creature Rhino Cleric
 PT:4/4
 A:AB$ Pump | Cost$ 5 W | Defined$ Self | KW$ Lifelink & Vigilance | SpellDescription$ CARDNAME gains vigilance and lifelink until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stonehorn_chanter.jpg
 Oracle:{5}{W}: Stonehorn Chanter gains vigilance and lifelink until end of turn. (Attacking doesn't cause it to tap. Damage dealt by it also causes you to gain that much life.)

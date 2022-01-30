@@ -12,7 +12,6 @@ SVar:GalleonAttacked:DB$ StoreSVar | SVar$ CanFlip | Type$ Number | Expression$ 
 SVar:CanFlip:Number$0
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AlternateMode:DoubleFaced
-SVar:Picture:http://www.wizards.com/global/images/magic/general/conquerors_galleon.jpg
 Oracle:When Conqueror's Galleon attacks, exile it at end of combat, then return it to the battlefield transformed under your control.\nCrew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)
 
 ALTERNATE
@@ -25,5 +24,4 @@ A:AB$ Draw | Cost$ 2 T | NumCards$ 1 | SpellDescription$ Draw a card, then disca
 SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 A:AB$ Draw | Cost$ 4 T | NumCards$ 1 | SpellDescription$ Draw a card.
 A:AB$ ChangeZone | Cost$ 6 T | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Card.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target card from your graveyard to your hand.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/conquerors_foothold.jpg
 Oracle:(Transforms from Conqueror's Galleon.)\n{T}: Add {C}.\n{2}, {T}: Draw a card, then discard a card.\n{4}, {T}: Draw a card.\n{6}, {T}: Return target card from your graveyard to your hand.

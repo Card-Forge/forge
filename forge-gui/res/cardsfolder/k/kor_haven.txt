@@ -4,5 +4,4 @@ Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Pump | Cost$ 1 W T | KW$ Prevent all combat damage that would be dealt by CARDNAME. | IsCurse$ True | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SpellDescription$ Prevent all combat damage that would be dealt by target attacking creature this turn.
 DeckNeeds:Color$White
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_haven.jpg
 Oracle:{T}: Add {C}.\n{1}{W}, {T}: Prevent all combat damage that would be dealt by target attacking creature this turn.

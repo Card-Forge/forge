@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Trample | Desc
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 green Saproling creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling rav
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fists_of_ironwood.jpg
 Oracle:Enchant creature\nWhen Fists of Ironwood enters the battlefield, create two 1/1 green Saproling creature tokens.\nEnchanted creature has trample.

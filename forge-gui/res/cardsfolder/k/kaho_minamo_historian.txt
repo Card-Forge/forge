@@ -12,5 +12,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | Va
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kaho_minamo_historian.jpg
 Oracle:When Kaho, Minamo Historian enters the battlefield, search your library for up to three instant cards, exile them, then shuffle.\n{X}, {T}: You may cast a spell with mana value X from among cards exiled with Kaho without paying its mana cost.

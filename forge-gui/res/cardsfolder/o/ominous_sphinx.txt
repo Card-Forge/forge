@@ -5,5 +5,4 @@ PT:4/4
 K:Flying
 T:Mode$ Discarded | ValidCard$ Card.YouOwn | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cycle or discard a card, target creature an opponent controls gets -2/-0 until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -2 | IsCurse$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ominous_sphinx.jpg
 Oracle:Flying\nWhenever you cycle or discard a card, target creature an opponent controls gets -2/-0 until end of turn.

@@ -4,5 +4,4 @@ Types:Creature Human Soldier Archer
 PT:2/2
 K:First Strike
 K:Reach
-SVar:Picture:http://www.wizards.com/global/images/magic/general/longbow_archer.jpg
 Oracle:First strike; reach (This creature can block creatures with flying.)

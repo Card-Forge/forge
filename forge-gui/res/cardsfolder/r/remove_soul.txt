@@ -2,5 +2,4 @@ Name:Remove Soul
 ManaCost:1 U
 Types:Instant
 A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SpellDescription$ Counter target creature spell.
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83228.jpg
 Oracle:Counter target creature spell.

@@ -5,5 +5,4 @@ A:SP$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Hand | TgtPrompt
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card.Zombie | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHints:Type$Zombie
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cemetery_recruitment.jpg
 Oracle:Return target creature card from your graveyard to your hand. If it's a Zombie card, draw a card.

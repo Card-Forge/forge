@@ -3,5 +3,4 @@ ManaCost:2 G
 Types:Creature Human Nomad
 PT:1/1
 A:AB$ Pump | Cost$ 1 G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-0 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pradesh_gypsies.jpg
 Oracle:{1}{G}, {T}: Target creature gets -2/-0 until end of turn.

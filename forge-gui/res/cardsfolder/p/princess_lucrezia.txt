@@ -3,5 +3,4 @@ ManaCost:3 U U B
 Types:Legendary Creature Human Wizard
 PT:5/4
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
-SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1675.jpg
 Oracle:{T}: Add {U}.

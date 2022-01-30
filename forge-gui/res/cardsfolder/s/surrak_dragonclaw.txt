@@ -7,5 +7,4 @@ K:This spell can't be countered.
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Stack | AddHiddenKeyword$ This spell can't be countered. | Description$ Creature spells you control can't be countered.
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Trample | Description$ Other creatures you control have trample.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/surrak_dragonclaw.jpg
 Oracle:Flash\nThis spell can't be countered.\nCreature spells you control can't be countered.\nOther creatures you control have trample.

@@ -4,5 +4,4 @@ Types:Creature Demon
 PT:6/4
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of each end step, each player discards their hand.
 SVar:TrigDiscard:DB$ Discard | Defined$ Player | Mode$ Hand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sire_of_insanity.jpg
 Oracle:At the beginning of each end step, each player discards their hand.

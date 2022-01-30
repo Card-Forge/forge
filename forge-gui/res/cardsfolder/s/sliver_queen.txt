@@ -5,5 +5,4 @@ PT:7/7
 A:AB$ Token | Cost$ 2 | TokenAmount$ 1 | TokenScript$ c_1_1_sliver | TokenOwner$ You | LegacyImage$ c 1 1 sliver van | SpellDescription$ Create a 1/1 colorless Sliver creature token.
 DeckHints:Type$Sliver
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sliver_queen.jpg
 Oracle:{2}: Create a 1/1 colorless Sliver creature token.

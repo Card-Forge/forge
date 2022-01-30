@@ -7,5 +7,4 @@ T:Mode$ DamageDone | ValidSource$ Archer.YouCtrl | ValidTarget$ Creature | Trigg
 SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredTargetController | DamageSource$ TriggeredSource | NumDmg$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/greatbow_doyen.jpg
 Oracle:Other Archer creatures you control get +1/+1.\nWhenever an Archer you control deals damage to a creature, that Archer deals that much damage to that creature's controller.

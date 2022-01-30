@@ -7,5 +7,4 @@ R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ E
 SVar:ExileSetLife:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Self | SubAbility$ DBSetLife
 SVar:DBSetLife:DB$ SetLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$YourStartingLife
-SVar:Picture:http://www.wizards.com/global/images/magic/general/exquisite_archangel.jpg
 Oracle:Flying\nIf you would lose the game, instead exile Exquisite Archangel and your life total becomes equal to your starting life total.

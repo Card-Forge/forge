@@ -7,5 +7,4 @@ SVar:DBDeclined:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Desti
 SVar:DBHand:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Hand
 SVar:X:Remembered$Amount
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/whirlpool_whelm.jpg
 Oracle:Clash with an opponent, then return target creature to its owner's hand. If you win, you may put that creature on top of its owner's library instead. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)

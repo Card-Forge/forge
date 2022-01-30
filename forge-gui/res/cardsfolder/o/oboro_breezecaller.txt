@@ -5,5 +5,4 @@ PT:1/1
 K:Flying
 A:AB$ Untap | Cost$ 2 Return<1/Land> | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Untap target land.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/oboro_breezecaller.jpg
 Oracle:Flying\n{2}, Return a land you control to its owner's hand: Untap target land.

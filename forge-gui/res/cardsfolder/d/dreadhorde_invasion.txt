@@ -8,5 +8,5 @@ T:Mode$ Attacks | ValidCard$ Creature.Zombie+token+YouCtrl+powerGE6 | TriggerZon
 SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | KW$ Lifelink
 SVar:AICastPreference:NeverCastIfLifeBelow$ 4
 DeckHints:Ability$Amass & Type$Zombie
-DeckHas:Ability$Amass & Ability$Counters & Ability$Token
+DeckHas:Ability$Amass|Counters|Token
 Oracle:At the beginning of your upkeep, you lose 1 life and amass 1. (Put a +1/+1 counter on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)\nWhenever a Zombie token you control with power 6 or greater attacks, it gains lifelink until end of turn.

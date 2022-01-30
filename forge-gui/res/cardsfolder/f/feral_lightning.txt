@@ -3,5 +3,4 @@ ManaCost:3 R R R
 Types:Sorcery
 A:SP$ Token | Cost$ 3 R R R | TokenAmount$ 3 | TokenScript$ r_3_1_elemental_haste | LegacyImage$ r 3 1 elemental haste sok | AtEOT$ Exile | SpellDescription$ Create three 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card84373.jpg
 Oracle:Create three 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step.

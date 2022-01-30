@@ -9,5 +9,4 @@ A:AB$ Scry | Cost$ 1 B Sac<1/Creature.Other/another creature> | ScryNum$ 1 | Sub
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bontu_the_glorified.jpg
 Oracle:Menace, indestructible\nBontu the Glorified can't attack or block unless a creature died under your control this turn.\n{1}{B}, Sacrifice another creature: Scry 1. Each opponent loses 1 life and you gain 1 life.

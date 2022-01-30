@@ -3,5 +3,4 @@ ManaCost:2 G G
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a land enters the battlefield, its controller creates a 1/1 green Snake creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_snake | TokenOwner$ TriggeredCardController | LegacyImage$ g 1 1 snake sok
-SVar:Picture:http://www.wizards.com/global/images/magic/general/seed_the_land.jpg
 Oracle:Whenever a land enters the battlefield, its controller creates a 1/1 green Snake creature token.

@@ -6,4 +6,4 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddAbility$ 
 SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 DeckHas:Ability$Counters
 A:AB$ PutCounter | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
-Oracle:Each creature you control with a +1/+1 counter on it has "{T}: Add one mana of any color."\n[−1]: Put a +1/+1 counter on target creature.
+Oracle:Each creature you control with a +1/+1 counter on it has "{T}: Add one mana of any color."\n[-1]: Put a +1/+1 counter on target creature.

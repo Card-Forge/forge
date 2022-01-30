@@ -3,5 +3,4 @@ ManaCost:1 R
 Types:Creature Satyr
 PT:2/1
 K:Trample
-SVar:Picture:http://www.wizards.com/global/images/magic/general/satyr_rambler.jpg
 Oracle:Trample

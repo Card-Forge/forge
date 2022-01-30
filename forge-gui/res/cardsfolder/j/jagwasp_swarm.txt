@@ -3,5 +3,4 @@ ManaCost:3 B
 Types:Creature Insect
 PT:3/2
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jagwasp_swarm.jpg
 Oracle:Flying

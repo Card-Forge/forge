@@ -5,5 +5,4 @@ A:SP$ RepeatEach | Cost$ X B | RepeatCards$ Creature | Zone$ Battlefield | Repea
 SVar:DBSacUnless:DB$ Sacrifice | Defined$ Player | SacValid$ Remembered.Self | UnlessCost$ PayLife<X> | UnlessPayer$ RememberedController | Random$ True | StackDescription$ Sacrifice {c:Remembered}
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/killing_wave.jpg
 Oracle:For each creature, its controller sacrifices it unless they pay X life.

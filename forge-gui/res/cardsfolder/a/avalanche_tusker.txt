@@ -3,5 +3,5 @@ ManaCost:2 G U R
 Types:Creature Elephant Warrior
 PT:6/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCantBlock | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, target creature defending player controls blocks it this combat if able.
-SVar:TrigCantBlock:DB$ MustBlock | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature
+SVar:TrigCantBlock:DB$ MustBlock | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature | SpellDescription$ Target creature blocks CARDNAME this turn if able.
 Oracle:Whenever Avalanche Tusker attacks, target creature defending player controls blocks it this combat if able.

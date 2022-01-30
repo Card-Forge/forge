@@ -2,5 +2,4 @@ Name:Furious Resistance
 ManaCost:R
 Types:Instant
 A:SP$ Pump | Cost$ R | ValidTgts$ Creature.blocking | NumAtt$ +3 | KW$ First Strike | TgtPrompt$ Select target blocking creature | SpellDescription$ Target blocking creature gets +3/+0 and gains first strike until end a turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/furious_resistance.jpg
 Oracle:Target blocking creature gets +3/+0 and gains first strike until end of turn.

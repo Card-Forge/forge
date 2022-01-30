@@ -2,5 +2,4 @@ Name:Fugue
 ManaCost:3 B B
 Types:Sorcery
 A:SP$ Discard | Cost$ 3 B B | ValidTgts$ Player | NumCards$ 3 | Mode$ TgtChoose | SpellDescription$ Target player discards three cards.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fugue.jpg
 Oracle:Target player discards three cards.

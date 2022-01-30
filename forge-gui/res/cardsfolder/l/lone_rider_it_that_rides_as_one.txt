@@ -7,7 +7,6 @@ K:Lifelink
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ YouLifeGained | SVarCompare$ GE3 | Execute$ TrigTransform | TriggerDescription$ At the beginning of the end step, if you gained 3 or more life this turn, transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:YouLifeGained:Count$LifeYouGainedThisTurn
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lone_rider.jpg
 AlternateMode:DoubleFaced
 Oracle:First strike, lifelink\nAt the beginning of the end step, if you gained 3 or more life this turn, transform Lone Rider.
 
@@ -20,5 +19,4 @@ PT:4/4
 K:First Strike
 K:Trample
 K:Lifelink
-SVar:Picture:http://www.wizards.com/global/images/magic/general/it_that_rides_as_one.jpg
 Oracle:First strike, trample, lifelink

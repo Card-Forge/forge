@@ -7,5 +7,4 @@ T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | Present
 SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 SVar:NeedsToPlay:Island.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pirate_ship.jpg
 Oracle:Pirate Ship can't attack unless defending player controls an Island.\n{T}: Pirate Ship deals 1 damage to any target.\nWhen you control no Islands, sacrifice Pirate Ship.

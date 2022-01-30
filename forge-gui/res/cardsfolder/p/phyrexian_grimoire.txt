@@ -8,5 +8,4 @@ SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destina
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 SVar:NeedsOrderedGraveyard:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_grimoire.jpg
 Oracle:{4}, {T}: Target opponent chooses one of the top two cards of your graveyard. Exile that card and put the other one into your hand.

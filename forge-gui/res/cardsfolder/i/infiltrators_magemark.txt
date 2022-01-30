@@ -5,5 +5,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.enchanted+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control that are enchanted get +1/+1 and can't be blocked except by creatures with defender.
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.enchanted+YouCtrl | ValidBlocker$ Creature.withoutDefender | Secondary$ True | Description$ Creatures you control can't be blocked except by creatures with defender.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/infiltrators_magemark.jpg
 Oracle:Enchant creature\nCreatures you control that are enchanted get +1/+1 and can't be blocked except by creatures with defender.

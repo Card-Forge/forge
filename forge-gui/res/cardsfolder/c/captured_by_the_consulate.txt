@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ 3 W | ValidTgts$ Creature.YouDontCtrl | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Enchanted creature can't attack.
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | IsSingleTarget$ True | TriggerZones$ Battlefield | Execute$ TrigChangeTarget | TriggerDescription$ Whenever an opponent casts a spell, if it has a single target, change the target to enchanted creature if able.
 SVar:TrigChangeTarget:DB$ ChangeTargets | TargetType$ Spell | Defined$ TriggeredStackInstance | DefinedMagnet$ Enchanted
-SVar:Picture:http://www.wizards.com/global/images/magic/general/captured_by_the_consulate.jpg
 Oracle:Enchant creature you don't control\nEnchanted creature can't attack.\nWhenever an opponent casts a spell, if it has a single target, change the target to enchanted creature if able.

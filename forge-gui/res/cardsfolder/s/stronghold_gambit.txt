@@ -9,5 +9,4 @@ SVar:FilterCreature:DB$ Pump | ForgetObjects$ ValidHand Card.nonCreature+IsRemem
 SVar:MoveToPlay:DB$ ChangeZoneAll | ChangeType$ Card.lowestRememberedCMC | Origin$ Hand | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_gambit.jpg
 Oracle:Each player chooses a card in their hand. Then each player reveals their chosen card. The owner of each creature card revealed this way with the lowest mana value puts it onto the battlefield.

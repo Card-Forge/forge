@@ -8,5 +8,4 @@ SVar:TrigChooseOpp:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | 
 SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
 SVar:Y:Count$InYourHand
 SVar:X:Count$InChosenHand/Minus.Y
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sandstone_oracle.jpg
 Oracle:Flying\nWhen Sandstone Oracle enters the battlefield, choose an opponent. If that player has more cards in hand than you, draw cards equal to the difference.

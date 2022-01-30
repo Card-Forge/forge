@@ -4,5 +4,4 @@ Types:Creature Dryad Horror
 PT:1/2
 A:AB$ Mana | Cost$ T tapXType<1/Creature> | Produced$ Any | SpellDescription$ Add one mana of any color.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/loam_dryad.jpg
 Oracle:{T}, Tap an untapped creature you control: Add one mana of any color.

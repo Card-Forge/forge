@@ -4,5 +4,4 @@ Types:Creature Naga Druid
 PT:2/2
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
 DeckHas:Ability$Mana.Colorless
-SVar:Picture:http://www.wizards.com/global/images/magic/general/weaver_of_currents.jpg
 Oracle:{T}: Add {C}{C}.

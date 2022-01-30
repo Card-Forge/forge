@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact
 K:CARDNAME enters the battlefield tapped.
 A:AB$ ManaReflected | Cost$ T | ColorOrType$ Color | Valid$ Basic.YouCtrl | ReflectProperty$ Produce | SpellDescription$ Add one mana of any color a basic land you control could produce.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/star_compass.jpg
 Oracle:Star Compass enters the battlefield tapped.\n{T}: Add one mana of any color that a basic land you control could produce.

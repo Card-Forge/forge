@@ -5,5 +5,4 @@ A:SP$ ChangeZone | Cost$ 2 W | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/acrobatic_maneuver.jpg
 Oracle:Exile target creature you control, then return that card to the battlefield under its owner's control.\nDraw a card.

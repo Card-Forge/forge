@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You | LegacyImage$ c 1 1 a thopter ori
 A:AB$ DealDamage | Cost$ 2 R Sac<1/Artifact> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pia_and_kiran_nalaar.jpg
 Oracle:When Pia and Kiran Nalaar enters the battlefield, create two 1/1 colorless Thopter artifact creature tokens with flying.\n{2}{R}, Sacrifice an artifact: Pia and Kiran Nalaar deals 2 damage to any target.

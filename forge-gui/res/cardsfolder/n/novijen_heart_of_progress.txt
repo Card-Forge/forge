@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ PutCounterAll | Cost$ G U T | CounterType$ P1P1 | CounterNum$ 1 | ValidCards$ Creature.ThisTurnEntered | SpellDescription$ Put a +1/+1 counter on each creature that entered the battlefield this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/novijen_heart_of_progress.jpg
 Oracle:{T}: Add {C}.\n{G}{U}, {T}: Put a +1/+1 counter on each creature that entered the battlefield this turn.

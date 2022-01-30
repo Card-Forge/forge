@@ -4,5 +4,4 @@ Types:Creature Bird
 PT:0/1
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 K:Flying
-SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card83688.jpg
 Oracle:Flying\n{T}: Add one mana of any color.

@@ -1,7 +1,7 @@
 Name:Chaos Moon
 ManaCost:3 R
 Types:Enchantment
-T:Mode$Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigCount | TriggerDescription$ At the beginning of each upkeep, count the number of permanents. If the number is odd, until end of turn, red creatures get +1/+1 and whenever a player taps a Mountain for mana, that player adds an additional {R}. If the number is even, until end of turn, red creatures get -1/-1 and if a player taps a Mountain for mana, that Mountain produces colorless mana instead of any other type.
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigCount | TriggerDescription$ At the beginning of each upkeep, count the number of permanents. If the number is odd, until end of turn, red creatures get +1/+1 and whenever a player taps a Mountain for mana, that player adds an additional {R}. If the number is even, until end of turn, red creatures get -1/-1 and if a player taps a Mountain for mana, that Mountain produces colorless mana instead of any other type.
 SVar:TrigCount:DB$ Effect | Triggers$ TrigRamp | StaticAbilities$ STPump | ConditionCheckSVar$ X | ConditionSVarCompare$ M21 | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RepCurse | StaticAbilities$ STCurse | ConditionCheckSVar$ X | ConditionSVarCompare$ M20
 SVar:TrigRamp:Mode$ TapsForMana | ValidCard$ Mountain | Execute$ TrigMana | Static$ True | TriggerZones$ Command | TriggerDescription$ Whenever a player taps a Mountain for mana, that player adds {R}.
@@ -13,5 +13,4 @@ SVar:STCurse:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield 
 SVar:X:Count$Valid Permanent
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chaos_moon.jpg
 Oracle:At the beginning of each upkeep, count the number of permanents. If the number is odd, until end of turn, red creatures get +1/+1 and whenever a player taps a Mountain for mana, that player adds an additional {R}. If the number is even, until end of turn, red creatures get -1/-1 and if a player taps a Mountain for mana, that Mountain produces colorless mana instead of any other type.

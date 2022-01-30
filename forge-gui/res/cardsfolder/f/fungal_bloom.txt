@@ -5,5 +5,4 @@ A:AB$ PutCounter | Cost$ G G | ValidTgts$ Fungus | TgtPrompt$ Select target Fung
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
 DeckNeeds:Type$Fungus
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fungal_bloom.jpg
 Oracle:{G}{G}: Put a spore counter on target Fungus.

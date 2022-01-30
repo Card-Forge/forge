@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ b_1_1_goblin_rogue | TokenOwner$ You | LegacyImage$ b 1 1 goblin rogue lrw
 A:AB$ Animate | Cost$ Sac<1/Goblin> | Defined$ Self | Power$ 3 | Toughness$ 3 | SpellDescription$ CARDNAME has base power and toughness 3/3 until end of turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/marsh_flitter.jpg
 Oracle:Flying\nWhen Marsh Flitter enters the battlefield, create two 1/1 black Goblin Rogue creature tokens.\nSacrifice a Goblin: Marsh Flitter has base power and toughness 3/3 until end of turn.

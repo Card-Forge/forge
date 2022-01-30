@@ -5,6 +5,6 @@ PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create X Blood tokens, where X is the number of abilities from among flying, first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance found among creatures you control. (Count each ability only once.)
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_blood_draw
 SVar:X:Count$AbilityYouCtrl Flying,First Strike,Double Strike,Deathtouch,Haste,Hexproof,Indestructible,Lifelink,Menace,Reach,Trample,Vigilance
-DeckHas:Ability$Token & Ability$Sacrifice & Type$Blood
+DeckHas:Ability$Token|Sacrifice & Type$Blood
 SVar:BuffedBy:Creature.withFlying,Creature.withFirst Strike,Creature.withDouble Strike,Creature.withDeathtouch,Creature.withHaste,Creature.withHexproof,Creature.withIndestructible,Creature.withLifelink,Creature.withMenace,Creature.withReach,Creature.withTrample,Creature.withVigilance
 Oracle:When Odric, Blood-Cursed enters the battlefield, create X Blood tokens, where X is the number of abilities from among flying, first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance found among creatures you control. (Count each ability only once.)

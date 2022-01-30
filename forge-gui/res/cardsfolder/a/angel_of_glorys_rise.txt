@@ -6,5 +6,4 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ExileAll | TriggerDescription$ When CARDNAME enters the battlefield, exile all Zombies, then return all Human creature cards from your graveyard to the battlefield.
 SVar:ExileAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Zombie | SubAbility$ ReturnOfTheHumans
 SVar:ReturnOfTheHumans:DB$ ChangeZoneAll | ChangeType$ Creature.Human+YouCtrl | Origin$ Graveyard | Destination$ Battlefield
-SVar:Picture:http://www.wizards.com/global/images/magic/general/angel_of_glorys_rise.jpg
 Oracle:Flying\nWhen Angel of Glory's Rise enters the battlefield, exile all Zombies, then return all Human creature cards from your graveyard to the battlefield.

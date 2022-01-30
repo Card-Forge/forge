@@ -3,5 +3,4 @@ ManaCost:7
 Types:Artifact Creature Rhino
 PT:4/5
 K:Trample
-SVar:Picture:http://resources.wizards.com/magic/cards/hm/en-us/card2905.jpg
 Oracle:Trample

@@ -2,5 +2,4 @@ Name:Spontaneous Combustion
 ManaCost:1 B R
 Types:Instant
 A:SP$ DamageAll | Cost$ 1 B R Sac<1/Creature> | NumDmg$ 3 | ValidCards$ Creature | ValidDescription$ each creature. | SpellDescription$ CARDNAME deals 3 damage to each creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spontaneous_combustion.jpg
 Oracle:As an additional cost to cast this spell, sacrifice a creature.\nSpontaneous Combustion deals 3 damage to each creature.

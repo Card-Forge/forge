@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ PumpAll | Cost$ 1 G | ValidCards$ Creature.YouCtrl | KW$ Reach | CheckSVar$ X | SVarCompare$ GE1 | OpponentTurn$ True | ActivationPhases$ Declare Attackers | SpellDescription$ Cast this spell only during the declare attackers step and only if you've been attacked this step. Creatures you control gain reach until end of turn.
 SVar:X:Count$Valid Creature.attackingYou
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/treetop_defense.jpg
 Oracle:Cast this spell only during the declare attackers step and only if you've been attacked this step.\nCreatures you control gain reach until end of turn. (They can block creatures with flying.)

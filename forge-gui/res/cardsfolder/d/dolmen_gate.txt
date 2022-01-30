@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact
 R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Creature.attacking+YouCtrl | IsCombat$ True | Description$ Prevent all combat damage that would be dealt to attacking creatures you control.
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dolmen_gate.jpg
 Oracle:Prevent all combat damage that would be dealt to attacking creatures you control.

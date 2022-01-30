@@ -2,5 +2,4 @@ Name:Primeval Light
 ManaCost:3 G
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 3 G | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Enchantment | SpellDescription$ Destroy all Enchantments target player controls.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/primeval_light.jpg
 Oracle:Destroy all enchantments target player controls.

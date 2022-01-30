@@ -4,5 +4,4 @@ Types:Artifact Equipment
 K:Equip:2
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each card in your hand.
 SVar:X:Count$InYourHand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/empyrial_plate.jpg
 Oracle:Equipped creature gets +1/+1 for each card in your hand.\nEquip {2}

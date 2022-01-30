@@ -7,5 +7,4 @@ T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | Co
 SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBUntapAll
 SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Land.YouCtrl
 SVar:SwordOfFeastAndFamineCE:SVar:MustBeBlocked:AttackingPlayerConservative
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_feast_and_famine.jpg
 Oracle:Equipped creature gets +2/+2 and has protection from black and from green.\nWhenever equipped creature deals combat damage to a player, that player discards a card and you untap all lands you control.\nEquip {2}

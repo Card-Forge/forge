@@ -5,7 +5,6 @@ PT:1/1
 A:AB$ Discard | Cost$ 1 B T | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBFlip | SpellDescription$ Target opponent discards a card. Then if that player has no cards in hand, flip Nezumi Shortfang.
 SVar:DBFlip:DB$ SetState | Defined$ Self | ConditionCheckSVar$ A | ConditionSVarCompare$ EQ0 | Mode$ Flip
 SVar:A:TargetedPlayer$CardsInHand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nezumi_shortfang.jpg
 AlternateMode:Flip
 Oracle:{1}{B}, {T}: Target opponent discards a card. Then if that player has no cards in hand, flip Nezumi Shortfang.
 
@@ -19,5 +18,4 @@ PT:3/3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of each opponent's upkeep, that player loses 1 life for each card fewer than three in their hand.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ DiffX
 SVar:DiffX:TriggeredPlayer$CardsInHand/NMinus.3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stabwhisker_the_odious.jpg
 Oracle:At the beginning of each opponent's upkeep, that player loses 1 life for each card fewer than three in their hand.

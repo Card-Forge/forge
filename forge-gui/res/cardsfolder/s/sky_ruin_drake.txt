@@ -3,5 +3,4 @@ ManaCost:4 U
 Types:Creature Drake
 PT:2/5
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sky_ruin_drake.jpg
 Oracle:Flying

@@ -7,5 +7,4 @@ T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | TriggerZones$ Batt
 SVar:TrigSearch:DB$ Pump | RememberObjects$ TriggeredAttacker | SubAbility$ DBMoveAura
 SVar:DBMoveAura:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Aura.CanEnchantRemembered+YouCtrl | AttachedTo$ Remembered | ChangeNum$ 1 | Hidden$ True | ShuffleNonMandatory$ True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sovereigns_of_lost_alara.jpg
 Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\nWhenever a creature you control attacks alone, you may search your library for an Aura card that could enchant that creature, put it onto the battlefield attached to that creature, then shuffle.

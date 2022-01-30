@@ -3,5 +3,4 @@ ManaCost:2 G
 Types:Legendary Creature Human Monk
 PT:1/2
 S:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 2 | Description$ You may play two additional lands on each of your turns.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/azusa_lost_but_seeking.jpg
 Oracle:You may play two additional lands on each of your turns.

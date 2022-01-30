@@ -4,5 +4,4 @@ Types:Creature Human Soldier
 PT:3/3
 A:AB$ ChangeZone | Cost$ tapXType<5/Soldier> | ValidTgts$ Creature | TgtPrompt$ Select target Creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/catapult_master.jpg
 Oracle:Tap five untapped Soldiers you control: Exile target creature.

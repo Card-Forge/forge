@@ -3,5 +3,4 @@ ManaCost:1 U
 Types:Creature Spirit
 PT:0/5
 K:Defender
-SVar:Picture:http://www.wizards.com/global/images/magic/general/murmuring_phantasm.jpg
 Oracle:Defender

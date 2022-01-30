@@ -6,5 +6,4 @@ PT:0/2
 A:AB$ ChangeZone | Cost$ 1 U B | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DDCopy | SpellDescription$ Exile target creature card from a graveyard. CARDNAME becomes a copy of that card, except it has this ability.
 SVar:DDCopy:DB$ Clone | Defined$ Remembered | GainThisAbility$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dimir_doppelganger.jpg
 Oracle:{1}{U}{B}: Exile target creature card from a graveyard. Dimir Doppelganger becomes a copy of that card, except it has this ability.

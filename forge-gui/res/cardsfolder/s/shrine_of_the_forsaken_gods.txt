@@ -6,5 +6,4 @@ A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | IsPresent$ Land.YouCtrl | Prese
 AI:RemoveDeck:Random
 DeckHas:Ability$Mana.Colorless
 DeckHints:Color$Colorless & Keyword$Devoid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shrine_of_the_forsaken_gods.jpg
 Oracle:{T}: Add {C}.\n{T}: Add {C}{C}. Spend this mana only to cast colorless spells. Activate only if you control seven or more lands.

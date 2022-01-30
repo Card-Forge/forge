@@ -5,5 +5,4 @@ PT:5/2
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike & Trample | CheckSVar$ X | CheckSecondSVar$ Y | Description$ CARDNAME has first strike and trample as long as an instant card and a sorcery card are in your graveyard.
 SVar:X:Count$ValidGraveyard Instant.YouOwn
 SVar:Y:Count$ValidGraveyard Sorcery.YouOwn
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodfire_enforcers.jpg
 Oracle:Bloodfire Enforcers has first strike and trample as long as an instant card and a sorcery card are in your graveyard.

@@ -5,5 +5,4 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +2/+2 for each Equipment attached to it.
 SVar:X:Count$Valid Equipment.Attached/Times.2
 SVar:EquipMe:Multiple
-SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_punisher.jpg
 Oracle:Loxodon Punisher gets +2/+2 for each Equipment attached to it.

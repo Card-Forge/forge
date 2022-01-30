@@ -4,5 +4,4 @@ Types:Creature Nightstalker
 PT:*/3
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of creature cards in your graveyard.
 SVar:X:Count$TypeInYourYard.Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nightstalker_engine.jpg
 Oracle:Nightstalker Engine's power is equal to the number of creature cards in your graveyard.

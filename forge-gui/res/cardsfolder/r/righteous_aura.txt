@@ -8,5 +8,4 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/righteous_aura.jpg
 Oracle:{W}, Pay 2 life: The next time a source of your choice would deal damage to you this turn, prevent that damage.

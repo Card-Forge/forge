@@ -6,5 +6,4 @@ K:Defender
 T:Mode$ AttackerBlocked | ValidBlocker$ Card.Self | Execute$ DelTrig | TriggerDescription$ Whenever CARDNAME blocks a creature, that creature can't attack during its controller's next turn.
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Execute$ TrigPump | RememberObjects$ TriggeredAttacker | TriggerDescription$ Creatures blocked by CARDNAME can't attack this turn.
 SVar:TrigPump:DB$ Pump | IsCurse$ True | Defined$ DelayTriggerRemembered | KW$ HIDDEN CARDNAME can't attack.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_dust.jpg
 Oracle:Defender (This creature can't attack.)\nWhenever Wall of Dust blocks a creature, that creature can't attack during its controller's next turn.

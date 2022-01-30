@@ -6,5 +6,4 @@ SVar:DBChooseNumber:DB$ ChooseNumber | Max$ Max | ListTitle$ Pay Energy for Dama
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | UnlessCost$ PayEnergy<X> | UnlessPayer$ You | UnlessSwitched$ True | StackDescription$ CARDNAME deals that much damage to that creature.
 SVar:Max:Count$YourCountersEnergy
 SVar:X:Count$ChosenNumber
-SVar:Picture:http://www.wizards.com/global/images/magic/general/harnessed_lightning.jpg
 Oracle:Choose target creature. You get {E}{E}{E} (three energy counters), then you may pay any amount of {E}. Harnessed Lightning deals that much damage to that creature.

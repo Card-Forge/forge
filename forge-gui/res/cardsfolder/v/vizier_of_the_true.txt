@@ -6,5 +6,4 @@ K:You may exert CARDNAME as it attacks.
 T:Mode$ Exerted | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever you exert a creature, tap target creature an opponent controls.
 // This code presumes that you are only ever allowed to exert creatures you control. If this is changed in the future, it will need an update.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vizier_of_the_true.jpg
 Oracle:You may exert Vizier of the True as it attacks. (It won't untap during your next untap step.)\nWhenever you exert a creature, tap target creature an opponent controls.

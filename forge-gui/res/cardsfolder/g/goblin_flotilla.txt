@@ -9,5 +9,4 @@ SVar:AttackerBlocked:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | Val
 SVar:Blocks:Mode$ AttackerBlockedByCreature | ValidCard$ Card.EffectSource | ValidBlocker$ Creature | Execute$ PumpBlocker | TriggerDescription$ Whenever EFFECTSOURCE blocks or becomes blocked by a creature this combat, that creature gains first strike until end of turn.
 SVar:PumpAttacker:DB$ Pump | Defined$ TriggeredAttacker | KW$ First Strike
 SVar:PumpBlocker:DB$ Pump | Defined$ TriggeredBlocker | KW$ First Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_flotilla.jpg
 Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nAt the beginning of each combat, unless you pay {R}, whenever Goblin Flotilla blocks or becomes blocked by a creature this combat, that creature gains first strike until end of turn.

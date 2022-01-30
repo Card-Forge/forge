@@ -4,5 +4,4 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ GainLife | Cost$ T Sac<1/Creature> | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/high_market.jpg
 Oracle:{T}: Add {C}.\n{T}, Sacrifice a creature: You gain 1 life.

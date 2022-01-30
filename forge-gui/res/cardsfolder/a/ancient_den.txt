@@ -2,5 +2,4 @@ Name:Ancient Den
 ManaCost:no cost
 Types:Artifact Land
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_den.jpg
 Oracle:{T}: Add {W}.

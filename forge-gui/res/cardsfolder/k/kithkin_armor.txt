@@ -14,5 +14,4 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True | ClearChosenCard$ True
 AI:RemoveDeck:All
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kithkin_armor.jpg
 Oracle:Enchant creature\nEnchanted creature can't be blocked by creatures with power 3 or greater.\nSacrifice Kithkin Armor: The next time a source of your choice would deal damage to enchanted creature this turn, prevent that damage.

@@ -6,5 +6,4 @@ S:Mode$ Continuous | Affected$ Zombie.YouCtrl+Other | AddPower$ 1 | AddToughness
 A:AB$ PumpAll | Cost$ 1 B T | ValidCards$ Zombie | KW$ Menace | SpellDescription$ All Zombies gain menace until end of turn.
 SVar:PlayMain1:TRUE
 DeckHints:Type$Zombie
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_the_accursed.jpg
 Oracle:Other Zombies you control get +1/+1.\n{1}{B}, {T}: All Zombies gain menace until end of turn.

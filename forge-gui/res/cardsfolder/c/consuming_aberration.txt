@@ -8,5 +8,4 @@ SVar:Grind:DB$ DigUntil | Defined$ Player.Opponent | Amount$ 1 | Valid$ Land | V
 SVar:ConsumingPT:Count$ValidGraveyard Card.OppOwn
 SVar:NeedsToPlayVar:ConsumingPT GT 0
 SVar:BuffedBy:Card
-SVar:Picture:http://www.wizards.com/global/images/magic/general/consuming_aberration.jpg
 Oracle:Consuming Aberration's power and toughness are each equal to the number of cards in your opponents' graveyards.\nWhenever you cast a spell, each opponent reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard.

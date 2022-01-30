@@ -6,5 +6,4 @@ S:Mode$ Continuous | Affected$ Creature.Sliver | AddPower$ X | AddToughness$ X |
 SVar:X:Count$Valid Sliver.Other
 SVar:BuffedBy:Sliver
 SVar:PlayMain1:TRUE
-SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136146.jpg
 Oracle:All Sliver creatures get +1/+1 for each other Sliver on the battlefield.

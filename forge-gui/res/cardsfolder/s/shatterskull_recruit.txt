@@ -5,5 +5,4 @@ PT:4/4
 K:Menace
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Ally
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shatterskull_recruit.jpg
 Oracle:Menace (This creature can't be blocked except by two or more creatures.)

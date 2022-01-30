@@ -3,5 +3,4 @@ ManaCost:3 R
 Types:Sorcery
 A:SP$ GainControl | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
 K:Cycling:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/limits_of_solidarity.jpg
 Oracle:Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.\nCycling {2} ({2}, Discard this card: Draw a card.)

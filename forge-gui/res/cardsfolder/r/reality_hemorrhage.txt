@@ -3,5 +3,4 @@ ManaCost:1 R
 Types:Instant
 K:Devoid
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reality_hemorrhage.jpg
 Oracle:Devoid (This card has no color.)\nReality Hemorrhage deals 2 damage to any target.

@@ -4,5 +4,4 @@ Types:Creature Human Shaman
 PT:2/1
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an instant or sorcery spell, create a 1/1 red Elemental creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_elemental | LegacyImage$ r 1 1 elemental m14 | TokenOwner$ You
-SVar:Picture:http://www.wizards.com/global/images/magic/general/young_pyromancer.jpg
 Oracle:Whenever you cast an instant or sorcery spell, create a 1/1 red Elemental creature token.

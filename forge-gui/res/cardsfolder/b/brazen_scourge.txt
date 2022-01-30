@@ -3,5 +3,4 @@ ManaCost:1 R R
 Types:Creature Gremlin
 PT:3/3
 K:Haste
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brazen_scourge.jpg
 Oracle:Haste

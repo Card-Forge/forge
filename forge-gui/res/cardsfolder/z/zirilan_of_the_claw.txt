@@ -6,5 +6,4 @@ A:AB$ ChangeZone | Cost$ 1 R R T | Origin$ Library | Destination$ Battlefield | 
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste | AtEOT$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckNeeds:Type$Dragon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/zirilan_of_the_claw.jpg
 Oracle:{1}{R}{R}, {T}: Search your library for a Dragon permanent card, put that card onto the battlefield, then shuffle. That Dragon gains haste until end of turn. Exile it at the beginning of the next end step.

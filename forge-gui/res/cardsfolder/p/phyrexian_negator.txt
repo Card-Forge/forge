@@ -7,5 +7,4 @@ T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigSac | TriggerZone
 SVar:TrigSac:DB$ Sacrifice | Amount$ X | SacValid$ Permanent
 SVar:X:TriggerCount$DamageAmount
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_negator.jpg
 Oracle:Trample\nWhenever Phyrexian Negator is dealt damage, sacrifice that many permanents.

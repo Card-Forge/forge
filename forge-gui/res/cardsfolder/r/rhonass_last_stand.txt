@@ -7,5 +7,4 @@ SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefiel
 SVar:RemoveEffect:Mode$ Phase | Phase$ Untap | ValidPlayer$ You | TriggerZones$ Command | Static$ True | Execute$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rhonass_last_stand.jpg
 Oracle:Create a 5/4 green Snake creature token. Lands you control don't untap during your next untap step.

@@ -6,5 +6,4 @@ SVar:TrigAttacks:Mode$ Attacks | ValidCard$ Creature | Execute$ Pump | TriggerDe
 SVar:Pump:DB$ Pump | Defined$ TriggeredAttacker | KW$ Lifelink
 K:Awaken:4:4 W
 DeckHas:Ability$LifeGain
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ondu_rising.jpg
 Oracle:Whenever a creature attacks this turn, it gains lifelink until end of turn.\nAwaken 4—{4}{W} (If you cast this spell for {4}{W}, also put four +1/+1 counters on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land.)

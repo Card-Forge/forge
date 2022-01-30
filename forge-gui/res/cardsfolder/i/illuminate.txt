@@ -7,5 +7,4 @@ SVar:DmgController:DB$ DealDamage | Defined$ TargetedController | NumDmg$ X | Su
 SVar:DrawYou:DB$ Draw | NumCards$ X | Defined$ You | Condition$ Kicked 2 | SpellDescription$ If CARDNAME was kicked with its {3}{U} kicker, you draw X cards.
 SVar:X:Count$xPaid
 DeckHints:Color$Blue
-SVar:Picture:http://www.wizards.com/global/images/magic/general/illuminate.jpg
 Oracle:Kicker {2}{R} and/or {3}{U} (You may pay an additional {2}{R} and/or {3}{U} as you cast this spell.)\nIlluminate deals X damage to target creature. If this spell was kicked with its {2}{R} kicker, it deals X damage to that creature's controller. If this spell was kicked with its {3}{U} kicker, you draw X cards.

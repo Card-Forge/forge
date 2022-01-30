@@ -3,5 +3,4 @@ ManaCost:2 B
 Types:Creature Zombie
 PT:2/2
 K:Swampwalk
-SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5597.jpg
 Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)

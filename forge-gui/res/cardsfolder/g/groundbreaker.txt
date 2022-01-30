@@ -8,5 +8,4 @@ T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSa
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
 SVar:EndOfTurnLeavePlay:True
 SVar:PlayMain1:TRUE
-SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122429.jpg
 Oracle:Trample, haste\nAt the beginning of the end step, sacrifice Groundbreaker.

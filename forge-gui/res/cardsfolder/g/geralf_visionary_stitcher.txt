@@ -6,5 +6,5 @@ S:Mode$ Continuous | Affected$ Zombie.YouCtrl | AddKeyword$ Flying | Description
 A:AB$ Token | Cost$ U T Sac<1/Creature.nonToken+Other/another nontoken creature> | TokenScript$ u_x_x_zombie | TokenPower$ X | TokenToughness$ X | SpellDescription$ Create an X/X blue Zombie creature token, where X is the sacrificed creature's toughness.
 SVar:X:Sacrificed$CardToughness
 DeckHints:Type$Zombie
-DeckHas:Ability$Sacrifice & Ability$Token
+DeckHas:Ability$Sacrifice|Token
 Oracle:Zombies you control have flying.\n{U}, {T}, Sacrifice another nontoken creature: Create an X/X blue Zombie creature token, where X is the sacrificed creature's toughness.

@@ -4,5 +4,4 @@ Types:Artifact
 A:AB$ Pump | Cost$ 3 Discard<1/Random> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/coral_helm.jpg
 Oracle:{3}, Discard a card at random: Target creature gets +2/+2 until end of turn.

@@ -6,5 +6,4 @@ SVar:DBTap:DB$ Tap | TargetingPlayer$ Player.Opponent | TargetingPlayerControls$
 SVar:DBFight:DB$ Fight | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/arena.jpg
 Oracle:{3}, {T}: Tap target creature you control and target creature of an opponent's choice they control. Those creatures fight each other. (Each deals damage equal to its power to the other.)

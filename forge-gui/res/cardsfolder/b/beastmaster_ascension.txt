@@ -8,5 +8,4 @@ SVar:PlayMain1:TRUE
 SVar:MaxQuestEffect:7
 DeckHints:Ability$Token
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/beastmaster_ascension.jpg
 Oracle:Whenever a creature you control attacks, you may put a quest counter on Beastmaster Ascension.\nAs long as Beastmaster Ascension has seven or more quest counters on it, creatures you control get +5/+5.

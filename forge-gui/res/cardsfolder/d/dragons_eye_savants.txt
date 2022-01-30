@@ -5,5 +5,4 @@ PT:0/6
 K:Morph:Reveal<1/Card.Blue/blue>
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigLook | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, look at target opponent's hand.
 SVar:TrigLook:DB$ RevealHand | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dragons_eye_savants.jpg
 Oracle:Morph—Reveal a blue card in your hand. (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Dragon's Eye Savants is turned face up, look at target opponent's hand.

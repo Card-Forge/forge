@@ -5,5 +5,4 @@ PT:0/0
 K:Bestow:2 B B
 S:Mode$ Continuous | Affected$ Card.Self,Card.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ CARDNAME and enchanted creature each get +X/+X, where X is the number of creature cards in all graveyards.
 SVar:X:Count$TypeInAllYards.Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nighthowler.jpg
 Oracle:Bestow {2}{B}{B} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\nNighthowler and enchanted creature each get +X/+X, where X is the number of creature cards in all graveyards.

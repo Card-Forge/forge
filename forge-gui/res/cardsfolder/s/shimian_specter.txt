@@ -12,5 +12,4 @@ SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPla
 SVar:NumInHand:TriggeredTarget$CardsInHand
 SVar:NumInLib:TriggeredTarget$CardsInLibrary
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shimian_specter.jpg
 Oracle:Flying\nWhenever Shimian Specter deals combat damage to a player, that player reveals their hand. You choose a nonland card from it. Search that player's graveyard, hand, and library for all cards with the same name as that card and exile them. Then that player shuffles.

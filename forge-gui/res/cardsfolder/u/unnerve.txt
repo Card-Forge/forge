@@ -2,5 +2,4 @@ Name:Unnerve
 ManaCost:3 B
 Types:Sorcery
 A:SP$ Discard | Cost$ 3 B | Defined$ Player.Opponent | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Each opponent discards two cards.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/unnerve.jpg
 Oracle:Each opponent discards two cards.

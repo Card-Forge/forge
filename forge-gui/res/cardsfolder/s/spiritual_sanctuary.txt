@@ -3,5 +3,4 @@ ManaCost:2 W W
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | IsPresent$ Plains.ActivePlayerCtrl | PresentCompare$ GE1 | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, if that player controls a Plains, they gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ TriggeredPlayer | LifeAmount$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spiritual_sanctuary.jpg
 Oracle:At the beginning of each player's upkeep, if that player controls a Plains, they gain 1 life.

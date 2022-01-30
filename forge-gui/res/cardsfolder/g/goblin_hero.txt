@@ -2,5 +2,4 @@ Name:Goblin Hero
 ManaCost:2 R
 Types:Creature Goblin
 PT:2/2
-SVar:Picture:http://resources.wizards.com/magic/cards/p4/en-us/card25486.jpg
 Oracle:

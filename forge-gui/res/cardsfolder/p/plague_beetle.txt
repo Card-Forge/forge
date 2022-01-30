@@ -3,5 +3,4 @@ ManaCost:B
 Types:Creature Insect
 PT:1/1
 K:Swampwalk
-SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card129678.jpg
 Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)

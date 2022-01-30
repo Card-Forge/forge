@@ -6,5 +6,4 @@ SVar:AcolytesPrevention:DB$ PreventDamage | ValidTgts$ Creature | TgtPrompt$ Sel
 SVar:AcolytesRetribution:DB$ DealDamage | Defined$ ShieldEffectTarget | NumDmg$ PreventedDamage | SpellDescription$ CARDNAME deals damage to target creature or player for each damage prevented this way.
 SVar:X:Count$Devotion.White
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/acolytes_reward.jpg
 Oracle:Prevent the next X damage that would be dealt to target creature this turn, where X is your devotion to white. If damage is prevented this way, Acolyte's Reward deals that much damage to any target. (Each {W} in the mana costs of permanents you control counts toward your devotion to white.)

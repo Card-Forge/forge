@@ -7,5 +7,4 @@ SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | Unle
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/read_the_runes.jpg
 Oracle:Draw X cards. For each card drawn this way, discard a card unless you sacrifice a permanent.

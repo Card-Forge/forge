@@ -4,5 +4,4 @@ Types:Legendary Sorcery
 A:SP$ AddTurn | Cost$ 4 U U | ValidTgts$ Player | TgtPrompt$ Select target player to take an extra turn | NumTurns$ 1 | SubAbility$ DBReturn | SpellDescription$ Target player takes an extra turn after this one. Return up to one target nonland permanent to its owner's hand. Exile CARDNAME.
 SVar:DBReturn:DB$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent to return to hand | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
-SVar:Picture:http://www.wizards.com/global/images/magic/general/karns_temporal_sundering.jpg
 Oracle:(You may cast a legendary sorcery only if you control a legendary creature or planeswalker.)\nTarget player takes an extra turn after this one. Return up to one target nonland permanent to its owner's hand. Exile Karn's Temporal Sundering.

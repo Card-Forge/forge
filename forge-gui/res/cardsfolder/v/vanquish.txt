@@ -2,5 +2,4 @@ Name:Vanquish
 ManaCost:2 W
 Types:Instant
 A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Creature.blocking | TgtPrompt$ Select target blocking creature | SpellDescription$ Destroy target blocking creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vanquish.jpg
 Oracle:Destroy target blocking creature.

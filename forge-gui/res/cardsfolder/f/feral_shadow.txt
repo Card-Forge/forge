@@ -4,5 +4,4 @@ Types:Creature Nightstalker
 PT:2/1
 K:Flying
 DeckHints:Name$Breathstealer|Feral Shadow|Spirit of the Night|Urborg Panther
-SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20373.jpg
 Oracle:Flying

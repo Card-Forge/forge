@@ -5,5 +5,4 @@ PT:2/3
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Deathtouch | Description$ Creatures you control have deathtouch.
 S:Mode$ Continuous | Affected$ Creature.OppCtrl | RemoveKeyword$ Deathtouch | CantHaveKeyword$ Deathtouch | Description$ Creatures your opponents control lose deathtouch and can't have or gain deathtouch.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/archetype_of_finality.jpg
 Oracle:Creatures you control have deathtouch.\nCreatures your opponents control lose deathtouch and can't have or gain deathtouch.

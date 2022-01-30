@@ -7,6 +7,5 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ SPORE | Counte
 A:AB$ Token | Cost$ SubCounter<3/SPORE> | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling tsp | SpellDescription$ Create a 1/1 green Saproling creature token.
 A:AB$ Regenerate | Cost$ Sac<1/Saproling> | ValidTgts$ Fungus | TgtPrompt$ Select target fungus. | SpellDescription$ Regenerate target Fungus
 DeckHints:Type$Fungus
-DeckHas:Ability$Counters & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_thallid.jpg
+DeckHas:Ability$Counters|Token
 Oracle:At the beginning of your upkeep, put a spore counter on Savage Thallid.\nRemove three spore counters from Savage Thallid: Create a 1/1 green Saproling creature token.\nSacrifice a Saproling: Regenerate target Fungus.

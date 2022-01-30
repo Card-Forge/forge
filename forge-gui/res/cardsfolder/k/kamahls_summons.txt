@@ -10,5 +10,4 @@ SVar:X:Count$ValidHand Card.IsRemembered+RememberedPlayerCtrl
 SVar:NeedsToPlayVar:Y GE3
 SVar:Y:Count$ValidHand Creature.YouCtrl
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kamahls_summons.jpg
 Oracle:Each player may reveal any number of creature cards from their hand. Then each player creates a 2/2 green Bear creature token for each card they revealed this way.

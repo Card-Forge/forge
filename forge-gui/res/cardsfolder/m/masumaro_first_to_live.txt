@@ -5,5 +5,4 @@ PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to twice the number of cards in your hand.
 SVar:X:Count$InYourHand/Times.2
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/masumaro_first_to_live.jpg
 Oracle:Masumaro, First to Live's power and toughness are each equal to twice the number of cards in your hand.

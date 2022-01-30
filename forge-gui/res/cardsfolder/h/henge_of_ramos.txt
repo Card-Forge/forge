@@ -4,5 +4,4 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Mana | Cost$ 2 T | Produced$ Any | SpellDescription$ Add one mana of any color.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/henge_of_ramos.jpg
 Oracle:{T}: Add {C}.\n{2}, {T}: Add one mana of any color.

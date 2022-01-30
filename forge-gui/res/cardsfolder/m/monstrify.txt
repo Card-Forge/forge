@@ -3,5 +3,4 @@ ManaCost:3 G
 Types:Sorcery
 K:Retrace
 A:SP$ Pump | Cost$ 3 G | ValidTgts$ Creature | NumAtt$ +4 | NumDef$ +4 | SpellDescription$ Target creature gets +4/+4 until end of turn. | TgtPrompt$ Select target creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/monstrify.jpg
 Oracle:Target creature gets +4/+4 until end of turn.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)

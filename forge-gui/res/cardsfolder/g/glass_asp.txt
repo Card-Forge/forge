@@ -8,5 +8,4 @@ SVar:DrawTrig:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Comma
 SVar:Bleed:DB$ LoseLife | Defined$ You | LifeAmount$ 2 | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:PayUp:ST$ ChangeZone | Cost$ 2 | Defined$ Self | Origin$ Command | Destination$ Exile | ActivationZone$ Command | AILogic$ Always | SpellDescription$ Pay {2} to remove this effect.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glass_asp.jpg
 Oracle:Whenever Glass Asp deals combat damage to a player, that player loses 2 life at the beginning of their next draw step unless they pay {2} before that step.

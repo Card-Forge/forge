@@ -8,5 +8,4 @@ A:AB$ ChangeZone | Cost$ W Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Ha
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 DeckNeeds:Color$White
-SVar:Picture:http://www.wizards.com/global/images/magic/general/odunos_river_trawler.jpg
 Oracle:When Odunos River Trawler enters the battlefield, return target enchantment creature card from your graveyard to your hand.\n{W}, Sacrifice Odunos River Trawler: Return target enchantment creature card from your graveyard to your hand.

@@ -7,5 +7,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME
 A:AB$ ChangeZone | Cost$ 4 W | Defined$ Enchanted | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken | SpellDescription$ Exile enchanted creature.
 SVar:DBToken:DB$ Token | TokenScript$ c_a_blood_draw | SpellDescription$ Create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
 SVar:NonStackingAttachEffect:True
-DeckHas:Ability$Token & Ability$Sacrifice & Type$Blood
+DeckHas:Ability$Token|Sacrifice & Type$Blood
 Oracle:Enchant creature\nEnchanted creature can't attack or block.\n{4}{W}: Exile enchanted creature. Create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")

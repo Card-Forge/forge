@@ -5,6 +5,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Bat
 SVar:TrigCharm:DB$ Charm | Choices$ DBCounter,DBGainLife
 SVar:DBCounter:DB$ PutCounter | CounterType$ P1P1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
-DeckHas:Ability$Counters & Ability$LifeGain
-SVar:Picture:http://www.wizards.com/global/images/magic/general/retreat_to_kazandu.jpg
+DeckHas:Ability$Counters|LifeGain
 Oracle:Landfall — Whenever a land enters the battlefield under your control, choose one —\n• Put a +1/+1 counter on target creature.\n• You gain 2 life.

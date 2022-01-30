@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | LegacyImage$ w 1 1 spirit flying c14
 SVar:X:Count$TypeInYourYard.Creature
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hallowed_spiritkeeper.jpg
 Oracle:Vigilance\nWhen Hallowed Spiritkeeper dies, create X 1/1 white Spirit creature tokens with flying, where X is the number of creature cards in your graveyard.

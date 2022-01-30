@@ -2,5 +2,4 @@ Name:Desecration Plague
 ManaCost:3 G
 Types:Sorcery
 A:SP$ Destroy | Cost$ 3 G | ValidTgts$ Enchantment,Land | TgtPrompt$ Select target enchantment or land | SpellDescription$ Destroy target enchantment or land.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/desecration_plague.jpg
 Oracle:Destroy target enchantment or land.

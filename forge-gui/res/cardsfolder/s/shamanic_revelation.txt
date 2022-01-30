@@ -5,5 +5,4 @@ A:SP$ Draw | Cost$ 3 G G | NumCards$ X | SubAbility$ DBGainLife | SpellDescripti
 SVar:X:Count$TypeYouCtrl.Creature
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ Y
 SVar:Y:Count$Valid Creature.YouCtrl+powerGE4/Times.4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shamanic_revelation.jpg
 Oracle:Draw a card for each creature you control.\nFerocious — You gain 4 life for each creature you control with power 4 or greater.

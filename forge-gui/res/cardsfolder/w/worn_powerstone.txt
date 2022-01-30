@@ -3,5 +3,4 @@ ManaCost:3
 Types:Artifact
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/worn_powerstone.jpg
 Oracle:Worn Powerstone enters the battlefield tapped.\n{T}: Add {C}{C}.

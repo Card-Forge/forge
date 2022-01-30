@@ -4,5 +4,4 @@ Types:Creature Phyrexian Zombie
 PT:2/2
 A:AB$ Pump | Cost$ Sac<1/Creature> | NumAtt$ +2 | NumDef$ +2 | AILogic$ Aristocrat | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
 SVar:AIPreference:SacCost$Creature.Other
-SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_ghoul.jpg
 Oracle:Sacrifice a creature: Phyrexian Ghoul gets +2/+2 until end of turn.

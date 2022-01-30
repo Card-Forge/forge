@@ -4,5 +4,4 @@ Types:Land Desert
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ ChangeZoneAll | Cost$ 2 T Sac<1/Desert> | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | AILogic$ ExileGraveyards | SpellDescription$ Exile all cards from all graveyards.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scavenger_grounds.jpg
 Oracle:{T}: Add {C}.\n{2}, {T}, Sacrifice a Desert: Exile all cards from all graveyards.

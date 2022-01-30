@@ -3,5 +3,4 @@ ManaCost:2 U U U
 Types:Creature Human Wizard
 PT:2/3
 S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ Player | MayPlay$ True | Description$ Play with the top card of your library revealed. You may play lands and cast spells from the top of your library.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_future.jpg
 Oracle:Play with the top card of your library revealed.\nYou may play lands and cast spells from the top of your library.

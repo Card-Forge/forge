@@ -4,5 +4,4 @@ Types:Creature Sliver
 PT:1/1
 S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddKeyword$ Flying | Description$ Sliver creatures you control have flying.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/galerider_sliver.jpg
 Oracle:Sliver creatures you control have flying.

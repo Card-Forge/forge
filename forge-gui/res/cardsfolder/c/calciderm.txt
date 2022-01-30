@@ -4,5 +4,4 @@ Types:Creature Beast
 PT:5/5
 K:Vanishing:4
 K:Shroud
-SVar:Picture:http://www.wizards.com/global/images/magic/general/calciderm.jpg
 Oracle:Shroud (This creature can't be the target of spells or abilities.)\nVanishing 4 (This creature enters the battlefield with four time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)

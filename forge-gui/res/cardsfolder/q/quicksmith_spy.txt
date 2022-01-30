@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigAnimate:DB$ Animate | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Select target artifact you control | Abilities$ ABDraw | Duration$ UntilLoseControlOfHost
 SVar:ABDraw:AB$Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/quicksmith_spy.jpg
 Oracle:When Quicksmith Spy enters the battlefield, target artifact you control gains "{T}: Draw a card" for as long as you control Quicksmith Spy.

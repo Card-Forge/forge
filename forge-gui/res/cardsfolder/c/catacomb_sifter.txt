@@ -8,6 +8,5 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_eldrazi_scion_sac
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ Whenever another creature you control dies, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
 SVar:TrigScry:DB$ Scry | ScryNum$ 1
 DeckHints:Type$Eldrazi
-DeckHas:Ability$Mana.Colorless & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/catacomb_sifter.jpg
+DeckHas:Ability$Mana.Colorless|Token
 Oracle:Devoid (This card has no color.)\nWhen Catacomb Sifter enters the battlefield, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."\nWhenever another creature you control dies, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

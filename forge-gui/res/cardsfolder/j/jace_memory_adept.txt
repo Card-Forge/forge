@@ -7,4 +7,4 @@ SVar:DBMill:DB$ Mill | ValidTgts$ Player | TgtPrompt$ Select target player | Num
 A:AB$ Mill | Cost$ AddCounter<0/LOYALTY> | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 10 | Planeswalker$ True | SpellDescription$ Target player mills 10 cards.
 A:AB$ Draw | Cost$ SubCounter<7/LOYALTY> | ValidTgts$ Player | TgtPrompt$ Select target player | TargetMin$ 0 | TargetMax$ MaxTgt | NumCards$ 20 | Planeswalker$ True | Ultimate$ True | SpellDescription$ Any number of target players each draw 20 cards.
 SVar:MaxTgt:PlayerCountPlayers$Amount
-Oracle:[+1]: Draw a card. Target player mills a card.\n[0]: Target player mills ten cards.\n[−7]: Any number of target players each draw twenty cards.
+Oracle:[+1]: Draw a card. Target player mills a card.\n[0]: Target player mills ten cards.\n[-7]: Any number of target players each draw twenty cards.

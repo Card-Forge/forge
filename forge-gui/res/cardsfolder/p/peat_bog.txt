@@ -8,5 +8,4 @@ A:AB$ Mana | Cost$ T SubCounter<1/DEPLETION> | Produced$ B | SubAbility$ DBSac |
 SVar:DBSac:DB$ Sacrifice | SacValid$ Self | ConditionPresent$ Card.Self+counters_EQ0_DEPLETION
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://wizards.com/global/images/magic/general/peat_bog.jpg
 Oracle:Peat Bog enters the battlefield tapped with two depletion counters on it.\n{T}, Remove a depletion counter from Peat Bog: Add {B}{B}. If there are no depletion counters on Peat Bog, sacrifice it.

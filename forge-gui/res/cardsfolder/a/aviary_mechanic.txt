@@ -4,5 +4,4 @@ Types:Creature Dwarf Artificer
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return another permanent you control to its owner's hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | AILogic$ Never | Mandatory$ True | ChangeType$ Permanent.Other+YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aviary_mechanic.jpg
 Oracle:When Aviary Mechanic enters the battlefield, you may return another permanent you control to its owner's hand.

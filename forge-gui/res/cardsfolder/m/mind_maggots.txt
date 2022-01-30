@@ -13,5 +13,4 @@ SVar:ChosenMaggots:Count$ChosenNumber
 SVar:DiscardedMind:Remembered$Amount
 SVar:MindMaggotsCount:SVar$DiscardedMind/Times.2
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_maggots.jpg
 Oracle:When Mind Maggots enters the battlefield, discard any number of creature cards. For each card discarded this way, put two +1/+1 counters on Mind Maggots.

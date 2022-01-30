@@ -10,5 +10,4 @@ A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | Hidden$ True | Origin$ Library | 
 SVar:X:Remembered$Amount
 SVar:Y:Count$ValidGraveyard Creature.YouOwn
 DeckHints:Name$God-Pharaoh's Gift
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gate_to_the_afterlife.jpg
 Oracle:Whenever a nontoken creature you control dies, you gain 1 life. Then you may draw a card. If you do, discard a card.\n{2}, {T}, Sacrifice Gate to the Afterlife: Search your graveyard, hand, and/or library for a card named God-Pharaoh's Gift and put it onto the battlefield. If you search your library this way, shuffle. Activate only if there are six or more creature cards in your graveyard.

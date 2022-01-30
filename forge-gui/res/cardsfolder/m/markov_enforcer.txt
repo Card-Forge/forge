@@ -8,5 +8,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:DB$ Token | TokenScript$ c_a_blood_draw
 SVar:BuffedBy:Creature.Vampire
 DeckHints:Type$Vampire
-DeckHas:Ability$Token & Ability$Sacrifice & Type$Blood
+DeckHas:Ability$Token|Sacrifice & Type$Blood
 Oracle:Whenever Markov Enforcer or another Vampire enters the battlefield under your control, Markov Enforcer fights up to one target creature an opponent controls.\nWhenever a creature dealt damage by Markov Enforcer this turn dies, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")

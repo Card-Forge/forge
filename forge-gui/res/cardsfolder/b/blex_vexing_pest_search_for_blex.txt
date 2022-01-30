@@ -5,7 +5,7 @@ PT:3/2
 S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Pest.Other+YouCtrl,Bat.Other+YouCtrl,Insect.Other+YouCtrl,Snake.Other+YouCtrl,Spider.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Pests, Bats, Insects, Snakes, and Spiders you control get +1/+1.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME dies, you gain 4 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ TriggeredCardController | LifeAmount$ 4
-DeckHas:Ability$LifeGain
+DeckHas:Ability$LifeGain|Graveyard
 DeckHints:Type$Pest|Bat|Insect|Snake|Spider
 AlternateMode:Modal
 Oracle:Other Pests, Bats, Insects, Snakes, and Spiders you control get +1/+1.\nWhen Blex, Vexing Pest dies, you gain 4 life.
@@ -19,5 +19,4 @@ A:SP$ Dig | DigNum$ 5 | AnyNumber$ True | DestinationZone$ Hand | RememberChange
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ You | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ You lose 3 life for each card you put into your hand this way.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Card/Times.3
-DeckHas:Ability$Graveyard
 Oracle:Look at the top five cards of your library. You may put any number of them into your hand and the rest into your graveyard. You lose 3 life for each card you put into your hand this way.

@@ -5,5 +5,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$TypeYouCtrl.Shrine/Times.2
 DeckHints:Type$Shrine
-SVar:Picture:http://www.wizards.com/global/images/magic/general/honden_of_cleansing_fire.jpg
 Oracle:At the beginning of your upkeep, you gain 2 life for each Shrine you control.

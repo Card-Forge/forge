@@ -9,4 +9,4 @@ SVar:PlayMain1:TRUE
 A:AB$ PutCounter | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | Ultimate$ True | CounterNum$ X | CounterType$ P1P1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Put X +1/+1 counters on target creature, where X is your life total.
 SVar:X:Count$YourLifeTotal
 DeckHas:Ability$Counters
-Oracle:[+2]: You gain 1 life for each creature you control.\n[−3]: Creatures you control get +2/+2 until end of turn.\n[−9]: Put X +1/+1 counters on target creature, where X is your life total.
+Oracle:[+2]: You gain 1 life for each creature you control.\n[-3]: Creatures you control get +2/+2 until end of turn.\n[-9]: Put X +1/+1 counters on target creature, where X is your life total.

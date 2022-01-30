@@ -8,5 +8,4 @@ SVar:TrigEachOpp:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbil
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Creature.RememberedPlayerCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/netherborn_phalanx.jpg
 Oracle:When Netherborn Phalanx enters the battlefield, each opponent loses 1 life for each creature they control.\nTransmute {1}{B}{B} ({1}{B}{B}, Discard this card: Search your library for a card with the same mana value as this card, reveal it, put it into your hand, then then shuffle. Transmute only as a sorcery.)

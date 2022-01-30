@@ -4,5 +4,4 @@ Types:Creature Human Wizard
 PT:1/1
 K:Unblockable
 A:AB$ ChangeZone | Cost$ U Discard<1/Card> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/escape_artist.jpg
 Oracle:Escape Artist can't be blocked.\n{U}, Discard a card: Return Escape Artist to its owner's hand.

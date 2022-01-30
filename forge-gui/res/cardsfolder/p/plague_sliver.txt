@@ -5,5 +5,4 @@ PT:5/5
 S:Mode$ Continuous | Affected$ Sliver | AddTrigger$ TrigPhase | AddSVar$ PlagueTrigDamage | Description$ All Slivers have "At the beginning of your upkeep, this permanent deals 1 damage to you."
 SVar:TrigPhase:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ PlagueTrigDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, this permanent deals 1 damage to you.
 SVar:PlagueTrigDamage:DB$ DealDamage | NumDmg$ 1 | Defined$ You
-SVar:Picture:http://www.wizards.com/global/images/magic/general/plague_sliver.jpg
 Oracle:All Slivers have "At the beginning of your upkeep, this permanent deals 1 damage to you."

@@ -3,7 +3,6 @@ ManaCost:3 W
 AlternateMode: Split
 Types:Instant
 A:SP$ ChangeZone | Cost$ 3 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target attacking creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/order_chaos.jpg
 Oracle:Exile target attacking creature.
 
 ALTERNATE

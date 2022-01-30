@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ 2 B | ValidTgts$ Artifact | AILogic$ Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigPoison | TriggerDescription$ Whenever enchanted artifact becomes tapped, its controller gets a poison counter.
 SVar:TrigPoison:DB$ Poison | Defined$ TriggeredCardController | Num$ 1
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_putrescence.jpg
 Oracle:Enchant artifact\nWhenever enchanted artifact becomes tapped, its controller gets a poison counter.

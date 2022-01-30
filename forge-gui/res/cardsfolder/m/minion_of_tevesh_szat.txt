@@ -5,5 +5,4 @@ PT:4/4
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 2 damage to you unless you pay {B}{B}.
 SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ 2 | UnlessPayer$ You | UnlessCost$ B B
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ -2 | SpellDescription$ Target creature gets +3/-2 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/minion_of_tevesh_szat.jpg
 Oracle:At the beginning of your upkeep, Minion of Tevesh Szat deals 2 damage to you unless you pay {B}{B}.\n{T}: Target creature gets +3/-2 until end of turn.

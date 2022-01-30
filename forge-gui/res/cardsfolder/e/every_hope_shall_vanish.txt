@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DiscardHope | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, each opponent reveals their hand. Choose a nonland card from each of those hands. Those players discard those cards.
 SVar:DiscardHope:DB$ Discard | Defined$ Player.Opponent | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand | NumCards$ 1
-SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/Every Hope Shall Vanish.full.jpg
 Oracle:When you set this scheme in motion, each opponent reveals their hand. Choose a nonland card from each of those hands. Those players discard those cards.

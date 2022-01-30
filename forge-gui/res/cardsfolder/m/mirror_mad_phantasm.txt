@@ -8,5 +8,4 @@ SVar:DBDig:DB$ DigUntil | Cost$ G T | ConditionCheckSVar$ X | ConditionSVarCompa
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 DeckHints:Name$Mirror-Mad Phantasm
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_mad_phantasm.jpg
 Oracle:Flying\n{1}{U}: Mirror-Mad Phantasm's owner shuffles it into their library. If that player does, they reveal cards from the top of that library until a card named Mirror-Mad Phantasm is revealed. The player puts that card onto the battlefield and all other cards revealed this way into their graveyard.

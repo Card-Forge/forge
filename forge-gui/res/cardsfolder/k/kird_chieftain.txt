@@ -6,5 +6,4 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | Check
 SVar:X:Count$Valid Forest.YouCtrl
 A:AB$ Pump | Cost$ 4 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | SpellDescription$ Target creature gets +2/+2 and gains trample until end of turn.
 SVar:BuffedBy:Forest
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kird_chieftain.jpg
 Oracle:Kird Chieftain gets +1/+1 as long as you control a Forest.\n{4}{G}: Target creature gets +2/+2 and gains trample until end of turn. (It can deal excess combat damage to the player or planeswalker it's attacking.)

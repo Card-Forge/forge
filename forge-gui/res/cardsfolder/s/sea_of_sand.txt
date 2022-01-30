@@ -11,6 +11,5 @@ T:Mode$ Drawn | ValidCard$ Card.nonLand | TriggerZones$ Command | Execute$ TrigL
 SVar:TrigLose:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ 3
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, put target permanent on top of its owner's library.
 SVar:RolledChaos:DB$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_of_sand.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always
 Oracle:Players reveal each card they draw.\nWhenever a player draws a land card, that player gains 3 life.\nWhenever a player draws a nonland card, that player loses 3 life.\nWhenever you roll {CHAOS}, put target permanent on top of its owner's library.

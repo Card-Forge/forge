@@ -6,5 +6,4 @@ T:Mode$ DamageDoneOnce | Execute$ TrigGainLife | ValidTarget$ Card.Self | Trigge
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
 DeckHas:Ability$LifeGain
 SVar:HasCombatEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/imperial_ceratops.jpg
 Oracle:Enrage — Whenever Imperial Ceratops is dealt damage, you gain 2 life.

@@ -8,5 +8,4 @@ SVar:TrigSac:DB$ Sacrifice | SacValid$ Creature | Defined$ You | ConditionPresen
 AI:RemoveDeck:Random
 SVar:NeedsToPlay:Ogre.YouCtrl
 DeckHints:Type$Ogre
-SVar:Picture:http://www.wizards.com/global/images/magic/general/painwracker_oni.jpg
 Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nAt the beginning of your upkeep, sacrifice a creature if you don't control an Ogre.

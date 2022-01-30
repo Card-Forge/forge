@@ -3,5 +3,4 @@ ManaCost:1 G
 Types:Instant
 A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | KW$ Trample | SpellDescription$ Until end of turn, target creature gains trample and gets +X/+X, where X is the number of attacking creatures.
 SVar:X:Count$Valid Creature.attacking
-SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_in_numbers.jpg
 Oracle:Until end of turn, target creature gains trample and gets +X/+X, where X is the number of attacking creatures.

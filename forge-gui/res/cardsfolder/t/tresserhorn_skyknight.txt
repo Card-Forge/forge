@@ -4,5 +4,4 @@ Types:Creature Zombie Knight
 PT:5/3
 K:Flying
 R:Event$ DamageDone | Prevent$ True | ValidSource$ Creature.withFirst Strike | ValidTarget$ Creature.Self | Description$ Prevent all damage that would be dealt to CARDNAME by creatures with first strike.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tresserhorn_skyknight.jpg
 Oracle:Flying\nPrevent all damage that would be dealt to Tresserhorn Skyknight by creatures with first strike.

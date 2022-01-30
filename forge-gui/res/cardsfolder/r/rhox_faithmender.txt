@@ -8,5 +8,4 @@ SVar:GainDouble:DB$ ReplaceEffect | VarName$ LifeGained | VarValue$ X
 SVar:X:ReplaceCount$LifeGained/Twice
 SVar:PlayMain1:True
 DeckHints:Ability$LifeGain
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_faithmender.jpg
 Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)\nIf you would gain life, you gain twice that much life instead.

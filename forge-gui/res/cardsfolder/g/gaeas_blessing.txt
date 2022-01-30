@@ -7,5 +7,4 @@ SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 T:Mode$ ChangesZone | Origin$ Library | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME is put into your graveyard from your library, shuffle your graveyard into your library.
 SVar:TrigChange:DB$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Graveyard | Destination$ Library | Shuffle$ True | SpellDescription$ Shuffle your graveyard into your library.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gaeas_blessing.jpg
 Oracle:Target player shuffles up to three target cards from their graveyard into their library.\nDraw a card.\nWhen Gaea's Blessing is put into your graveyard from your library, shuffle your graveyard into your library.

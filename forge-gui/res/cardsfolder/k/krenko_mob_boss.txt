@@ -5,5 +5,4 @@ PT:3/3
 A:AB$ Token | Cost$ T | TokenAmount$ X | TokenScript$ r_1_1_goblin | TokenOwner$ You | LegacyImage$ r 1 1 goblin m13 | SpellDescription$ Create X 1/1 red Goblin creature tokens, where X is the number of Goblins you control.
 SVar:X:Count$TypeYouCtrl.Goblin
 DeckHints:Type$Goblin
-SVar:Picture:http://www.wizards.com/global/images/magic/general/krenko_mob_boss.jpg
 Oracle:{T}: Create X 1/1 red Goblin creature tokens, where X is the number of Goblins you control.

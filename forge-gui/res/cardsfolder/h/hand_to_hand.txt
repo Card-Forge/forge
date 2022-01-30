@@ -5,5 +5,4 @@ S:Mode$ CantBeCast | ValidCard$ Instant | Phases$ BeginCombat->EndCombat | Descr
 S:Mode$ CantBeActivated | ValidCard$ Card | Phases$ BeginCombat->EndCombat | ValidSA$ Activated.nonManaAbility
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hand_to_hand.jpg
 Oracle:During combat, players can't cast instant spells or activate abilities that aren't mana abilities.

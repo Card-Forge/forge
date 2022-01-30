@@ -6,5 +6,4 @@ T:Mode$ SpellCast | ValidCard$ Card.Colorless | ValidActivatingPlayer$ You | Tri
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
 SVar:BuffedBy:Card.Colorless
 DeckHints:Color$Colorless & Keyword$Devoid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/molten_nursery.jpg
 Oracle:Devoid (This card has no color.)\nWhenever you cast a colorless spell, Molten Nursery deals 1 damage to any target.

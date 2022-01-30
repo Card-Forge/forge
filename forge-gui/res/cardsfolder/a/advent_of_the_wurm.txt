@@ -3,5 +3,4 @@ ManaCost:1 G G W
 Types:Instant
 A:SP$ Token | Cost$ 1 G G W | LegacyImage$ g 5 5 wurm trample dgm | TokenScript$ g_5_5_wurm_trample | TokenOwner$ You | SpellDescription$ Create a 5/5 green Wurm creature token with trample.
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/advent_of_the_wurm.jpg
 Oracle:Create a 5/5 green Wurm creature token with trample.

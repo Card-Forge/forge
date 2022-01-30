@@ -5,5 +5,4 @@ A:AB$ Token | Cost$ 1 ExileSameGrave<2/Creature> | TokenAmount$ 1 | TokenScript$
 AI:RemoveDeck:All
 DeckHas:Ability$Token
 DeckHints:Type$Fungus
-SVar:Picture:http://www.wizards.com/global/images/magic/general/night_soil.jpg
 Oracle:{1}, Exile two creature cards from a single graveyard: Create a 1/1 green Saproling creature token.

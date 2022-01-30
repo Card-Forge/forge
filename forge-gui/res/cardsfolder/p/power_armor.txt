@@ -5,5 +5,4 @@ A:AB$ Pump | Cost$ 3 T | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:X:Count$Domain
 SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/power_armor.jpg
 Oracle:Domain — {3}, {T}: Target creature gets +1/+1 until end of turn for each basic land type among lands you control.

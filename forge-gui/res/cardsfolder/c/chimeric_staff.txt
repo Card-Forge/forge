@@ -4,5 +4,4 @@ Types:Artifact
 A:AB$ Animate | Cost$ X | Defined$ Self | Power$ X | Toughness$ X | Types$ Creature,Artifact,Construct | SpellDescription$ CARDNAME becomes an X/X Construct artifact creature until end of turn.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chimeric_staff.jpg
 Oracle:{X}: Chimeric Staff becomes an X/X Construct artifact creature until end of turn.

@@ -4,5 +4,4 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.withMountainwalk | AddHiddenKeyword$ May be blocked as though it doesn't have Mountainwalk. | Description$ Creatures with mountainwalk can be blocked as though they didn't have mountainwalk.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crevasse.jpg
 Oracle:Creatures with mountainwalk can be blocked as though they didn't have mountainwalk.

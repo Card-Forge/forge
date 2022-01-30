@@ -5,5 +5,4 @@ PT:2/2
 T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME attacks, put a lore counter on target Saga you control.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Saga.YouCtrl | TgtPrompt$ Select target Saga you control | CounterType$ LORE | CounterNum$ 1
 SVar:HasAttackEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_warcaller.jpg
 Oracle:Whenever Keldon Warcaller attacks, put a lore counter on target Saga you control.

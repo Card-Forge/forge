@@ -8,5 +8,4 @@ SVar:X:Count$Valid Elf
 SVar:BuffedBy:Permanent.Elf
 AI:RemoveDeck:Random
 SVar:NoZeroToughnessAI:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/heedless_one.jpg
 Oracle:Trample\nHeedless One's power and toughness are each equal to the number of Elves on the battlefield.

@@ -8,5 +8,4 @@ SVar:TrigSacrifice:DB$ SacrificeAll | ValidCards$ Dragon.YouCtrl | SubAbility$ D
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ r_5_5_dragon_flying | TokenOwner$ You | LegacyImage$ r 5 5 dragon flying scg
 SVar:DBReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | ChangeType$ Card.IsRemembered
 SVar:X:Remembered$Amount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/day_of_the_dragons.jpg
 Oracle:When Day of the Dragons enters the battlefield, exile all creatures you control. Then create that many 5/5 red Dragon creature tokens with flying.\nWhen Day of the Dragons leaves the battlefield, sacrifice all Dragons you control. Then return the exiled cards to the battlefield under your control.

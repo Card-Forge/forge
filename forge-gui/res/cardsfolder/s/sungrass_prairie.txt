@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ 1 T | Produced$ G W | SpellDescription$ Add {G}{W}.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sungrass_prairie.jpg
 Oracle:{1}, {T}: Add {G}{W}.

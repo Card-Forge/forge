@@ -3,6 +3,5 @@ ManaCost:3 G
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigExplore | TriggerController$ TriggeredCardController | TriggerDescription$ Whenever a creature enters the battlefield under your control, it explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on the creature, then put the card back or put it into your graveyard.)
 SVar:TrigExplore:DB$ Explore | Defined$ TriggeredCardLKICopy
-DeckHas:Ability$Counter
-SVar:Picture:http://www.wizards.com/global/images/magic/general/path_of_discovery.jpg
+DeckHas:Ability$Counters
 Oracle:Whenever a creature enters the battlefield under your control, it explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on the creature, then put the card back or put it into your graveyard.)

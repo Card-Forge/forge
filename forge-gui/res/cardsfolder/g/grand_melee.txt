@@ -3,5 +3,4 @@ ManaCost:3 R
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ CARDNAME blocks each combat if able. & CARDNAME attacks each combat if able. | Description$ All creatures attack each combat if able. All creatures block each combat if able.
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grand_melee.jpg
 Oracle:All creatures attack each combat if able.\nAll creatures block each combat if able.

@@ -3,5 +3,4 @@ ManaCost:2 B
 Types:Creature Aetherborn Rogue
 PT:2/3
 K:Menace
-SVar:Picture:http://www.wizards.com/global/images/magic/general/alley_strangler.jpg
 Oracle:Menace

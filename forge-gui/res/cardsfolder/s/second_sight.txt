@@ -5,5 +5,4 @@ K:Entwine:U
 A:SP$ Charm | Cost$ 2 U | Choices$ DBRearrange,DBRearrange2 | CharmNum$ 1
 SVar:DBRearrange:DB$ RearrangeTopOfLibrary | ValidTgts$ Opponent | TgtPrompt$ Choose target opponent. | NumCards$ 5 | SpellDescription$ Look at the top five cards of target opponent's library, then put them back in any order.
 SVar:DBRearrange2:DB$ RearrangeTopOfLibrary | Defined$ You | NumCards$ 5 | SpellDescription$ look at the top five cards of your library, then put them back in any order.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/second_sight.jpg
 Oracle:Choose one —\n• Look at the top five cards of target opponent's library, then put them back in any order.\n• Look at the top five cards of your library, then put them back in any order.\nEntwine {U} (Choose both if you pay the entwine cost.)

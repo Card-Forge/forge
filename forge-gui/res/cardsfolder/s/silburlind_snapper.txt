@@ -5,5 +5,4 @@ PT:6/6
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack. | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME can't attack unless you've cast a noncreature spell this turn.
 SVar:X:Count$ThisTurnCast_Card.nonCreature+YouCtrl
 SVar:BuffedBy:Card.nonCreature+nonLand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/silburlind_snapper.jpg
 Oracle:Silburlind Snapper can't attack unless you've cast a noncreature spell this turn.

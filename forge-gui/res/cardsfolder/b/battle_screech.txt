@@ -4,5 +4,4 @@ Types:Sorcery
 K:Flashback:tapXType<3/Creature.White/white creature>
 A:SP$ Token | Cost$ 2 W W | LegacyImage$ w 1 1 bird flying jud | TokenOwner$ You | TokenAmount$ 2 | TokenScript$ w_1_1_bird_flying | SpellDescription$ Create two 1/1 white Bird creature tokens with flying.
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_screech.jpg
 Oracle:Create two 1/1 white Bird creature tokens with flying.\nFlashback—Tap three untapped white creatures you control. (You may cast this card from your graveyard for its flashback cost. Then exile it.)

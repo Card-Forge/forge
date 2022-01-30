@@ -3,5 +3,4 @@ ManaCost:6 W
 Types:Sorcery
 K:Undaunted
 A:SP$ DestroyAll | Cost$ 6 W | ValidCards$ Creature | SpellDescription$ Destroy all creatures.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sublime_exhalation.jpg
 Oracle:Undaunted (This spell costs {1} less to cast for each opponent.)\nDestroy all creatures.

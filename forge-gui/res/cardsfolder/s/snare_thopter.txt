@@ -4,5 +4,4 @@ Types:Artifact Creature Thopter
 PT:3/2
 K:Flying
 K:Haste
-SVar:Picture:http://www.wizards.com/global/images/magic/general/snare_thopter.jpg
 Oracle:Flying, haste

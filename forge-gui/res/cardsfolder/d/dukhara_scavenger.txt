@@ -4,5 +4,4 @@ Types:Creature Crocodile
 PT:4/6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may put target artifact or creature card from your graveyard on top of your library.
 SVar:TrigChange:DB$ ChangeZone | TgtPrompt$ Choose target artifact or creature card in your graveyard | ValidTgts$ Artifact,Creature | TargetsWithDefinedController$ TriggeredCardController | Origin$ Graveyard | Destination$ Library
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dukhara_scavenger.jpg
 Oracle:When Dukhara Scavenger enters the battlefield, you may put target artifact or creature card from your graveyard on top of your library.

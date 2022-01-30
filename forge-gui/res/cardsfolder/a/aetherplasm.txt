@@ -9,5 +9,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 AI:RemoveDeck:All
 SVar:HasBlockEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aetherplasm.jpg
 Oracle:Whenever Aetherplasm blocks a creature, you may return Aetherplasm to its owner's hand. If you do, you may put a creature card from your hand onto the battlefield blocking that creature.

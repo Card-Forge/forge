@@ -3,5 +3,4 @@ ManaCost:G
 Types:Snow Creature Elf Druid
 PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121193.jpg
 Oracle:{T}: Add {C}.

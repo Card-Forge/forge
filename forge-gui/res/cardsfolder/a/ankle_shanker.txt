@@ -5,5 +5,4 @@ PT:2/2
 K:Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | NoResolvingCheck$ True | TriggerDescription$ Whenever CARDNAME attacks, creatures you control gain first strike and deathtouch until end of turn.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ First Strike & Deathtouch
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ankle_shanker.jpg
 Oracle:Haste\nWhenever Ankle Shanker attacks, creatures you control gain first strike and deathtouch until end of turn.

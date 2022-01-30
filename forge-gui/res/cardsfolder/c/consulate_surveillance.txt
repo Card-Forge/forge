@@ -7,5 +7,4 @@ A:AB$ ChooseSource | Cost$ PayEnergy<2> | Choices$ Card,Emblem | ChoiceTitle$ Ch
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPrevent | RememberObjects$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card,Emblem | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ You | ValidSource$ Card.IsRemembered,Emblem.IsRemembered | Description$ Prevent all damage that would be dealt to you this turn by a source of your choice.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/consulate_surveillance.jpg
 Oracle:When Consulate Surveillance enters the battlefield, you get {E}{E}{E}{E} (four energy counters).\nPay {E}{E}: Prevent all damage that would be dealt to you this turn by a source of your choice.

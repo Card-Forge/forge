@@ -6,5 +6,4 @@ T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigToken | TriggerDescr
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_kor_ally | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True | LegacyImage$ w 1 1 kor ally ogw
 K:Equip:1
 SVar:AE:SVar:HasAttackEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/captains_claws.jpg
 Oracle:Equipped creature gets +1/+0.\nWhenever equipped creature attacks, create a 1/1 white Kor Ally creature token that's tapped and attacking.\nEquip {1}

@@ -8,5 +8,4 @@ SVar:Z:Count$Valid Artifact.namedCrown of Empires+YouCtrl
 SVar:Y:Count$Valid Artifact.namedScepter of Empires+YouCtrl
 AI:RemoveDeck:Random
 DeckHints:Name$Scepter of Empires|Crown of Empires
-SVar:Picture:http://www.wizards.com/global/images/magic/general/throne_of_empires.jpg
 Oracle:{1}, {T}: Create a 1/1 white Soldier creature token. Create five of those tokens instead if you control artifacts named Crown of Empires and Scepter of Empires.

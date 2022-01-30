@@ -5,5 +5,4 @@ PT:4/4
 K:Flying
 S:Mode$ CantBeCast | ValidCard$ Card | Caster$ Player.attackedBySourceThisCombat | CheckSVar$ X | Description$ As long as CARDNAME is attacking, defending player can't cast spells.
 SVar:X:Count$Valid Card.Self+attacking
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wardscale_dragon.jpg
 Oracle:Flying\nAs long as Wardscale Dragon is attacking, defending player can't cast spells.

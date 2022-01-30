@@ -6,5 +6,4 @@ K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a green or white creature you control to its owner's hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.White+YouCtrl,Creature.Green+YouCtrl | AILogic$ NeverBounceItself
 SVar:NeedsToPlay:Creature.White+cmcLE3+YouCtrl+inZoneBattlefield,Creature.Green+cmcLE3+YouCtrl+inZoneBattlefield
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fleetfoot_panther.jpg
 Oracle:Flash\nWhen Fleetfoot Panther enters the battlefield, return a green or white creature you control to its owner's hand.

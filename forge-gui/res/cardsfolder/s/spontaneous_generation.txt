@@ -3,5 +3,4 @@ ManaCost:3 G
 Types:Sorcery
 A:SP$ Token | Cost$ 3 G | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling mmq | SpellDescription$ Create a 1/1 green Saproling creature token for each card in your hand.
 SVar:X:Count$InYourHand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spontaneous_generation.jpg
 Oracle:Create a 1/1 green Saproling creature token for each card in your hand.

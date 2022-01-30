@@ -2,5 +2,4 @@ Name:Great Furnace
 ManaCost:no cost
 Types:Artifact Land
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/great_furnace.jpg
 Oracle:{T}: Add {R}.

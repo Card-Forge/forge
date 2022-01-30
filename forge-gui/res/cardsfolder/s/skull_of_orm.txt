@@ -1,6 +1,5 @@
 Name:Skull of Orm
 ManaCost:3
 Types:Artifact
-A:AB$ ChangeZone | Cost$5 T | TgtPrompt$ Choose target enchantment in your graveyard | ValidTgts$ Enchantment.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target enchantment card from your graveyard to your hand.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skull_of_orm.jpg
+A:AB$ ChangeZone | Cost$ 5 T | TgtPrompt$ Choose target enchantment in your graveyard | ValidTgts$ Enchantment.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target enchantment card from your graveyard to your hand.
 Oracle:{5}, {T}: Return target enchantment card from your graveyard to your hand.

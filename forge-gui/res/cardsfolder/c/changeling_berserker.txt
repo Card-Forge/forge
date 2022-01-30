@@ -6,5 +6,4 @@ K:Changeling
 K:Haste
 K:Champion:Creature
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/changeling_berserker.jpg
 Oracle:Changeling (This card is every creature type.)\nHaste\nChampion a creature (When this enters the battlefield, sacrifice it unless you exile another creature you control. When this leaves the battlefield, that card returns to the battlefield.)

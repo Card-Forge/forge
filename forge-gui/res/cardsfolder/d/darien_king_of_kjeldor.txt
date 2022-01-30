@@ -5,5 +5,4 @@ PT:3/3
 T:Mode$ DamageDoneOnce | Execute$ TrigToken | ValidTarget$ You | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you're dealt damage, you may create that many 1/1 white Soldier creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_soldier | TokenOwner$ You | LegacyImage$ w 1 1 soldier csp
 SVar:X:TriggerCount$DamageAmount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/darien_king_of_kjeldor.jpg
 Oracle:Whenever you're dealt damage, you may create that many 1/1 white Soldier creature tokens.

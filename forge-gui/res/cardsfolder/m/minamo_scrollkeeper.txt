@@ -4,5 +4,4 @@ Types:Creature Human Wizard
 PT:2/3
 S:Mode$ Continuous | Affected$ You | RaiseMaxHandSize$ 1 | Description$ Your maximum hand size is increased by one.
 K:Defender
-SVar:Picture:http://www.wizards.com/global/images/magic/general/minamo_scrollkeeper.jpg
 Oracle:Defender\nYour maximum hand size is increased by one.

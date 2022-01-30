@@ -3,5 +3,4 @@ ManaCost:2 R
 Types:Creature Devil
 PT:2/2
 A:AB$ Pump | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME attacks each combat if able. | IsCurse$ True | SpellDescription$ Target creature attacks this turn if able.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/heckling_fiends.jpg
 Oracle:{2}{R}: Target creature attacks this turn if able.

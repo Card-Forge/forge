@@ -7,5 +7,4 @@ SVar:X:Count$ChosenNumber
 SVar:DBLoseHalfLife:DB$ LoseLife | Defined$ Remembered | LifeAmount$ Y
 SVar:Y:PlayerCountRemembered$LifeTotal/HalfUp
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_game.jpg
 Oracle:Each player hides at least one item, then all players reveal them simultaneously. Each player loses life equal to the number of items they revealed. The player who revealed the fewest items then loses half their life, rounded up. If two or more players are tied for fewest, each loses half their life, rounded up.

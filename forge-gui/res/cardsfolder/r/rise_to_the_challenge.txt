@@ -2,5 +2,4 @@ Name:Rise to the Challenge
 ManaCost:1 R
 Types:Instant
 A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | KW$ First Strike | SpellDescription$ Target creature gets +2/+0 and gains first strike until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rise_to_the_challenge.jpg
 Oracle:Target creature gets +2/+0 and gains first strike until end of turn.

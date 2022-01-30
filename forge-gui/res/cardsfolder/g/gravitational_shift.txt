@@ -5,5 +5,4 @@ S:Mode$ Continuous | Affected$ Creature.withFlying | AddPower$ 2 | Description$ 
 S:Mode$ Continuous | Affected$ Creature.withoutFlying | AddPower$ -2 | Description$ Creatures without flying get -2/-0.
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gravitational_shift.jpg
 Oracle:Creatures with flying get +2/+0.\nCreatures without flying get -2/-0.

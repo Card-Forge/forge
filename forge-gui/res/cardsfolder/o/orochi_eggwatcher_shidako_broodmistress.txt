@@ -5,7 +5,6 @@ PT:1/1
 A:AB$ Token | Cost$ 2 G T | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ g_1_1_snake | LegacyImage$ g 1 1 snake chk | SubAbility$ DBFlip | SpellDescription$ Create a 1/1 green Snake creature token. If you control ten or more creatures, flip CARDNAME.
 SVar:DBFlip:DB$ SetState | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10 | Mode$ Flip
 SVar:X:Count$Valid Creature.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/orochi_eggwatcher.jpg
 AlternateMode:Flip
 Oracle:{2}{G}, {T}: Create a 1/1 green Snake creature token. If you control ten or more creatures, flip Orochi Eggwatcher.
 
@@ -18,5 +17,4 @@ Types:Legendary Creature Snake Shaman
 PT:3/3
 A:AB$ Pump | Cost$ G Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 3 | NumDef$ 3 | SpellDescription$ Target creature gets +3/+3 until end of turn.
 SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shidako_broodmistress.jpg
 Oracle:{G}, Sacrifice a creature: Target creature gets +3/+3 until end of turn.

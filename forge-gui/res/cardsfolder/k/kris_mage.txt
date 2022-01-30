@@ -3,6 +3,5 @@ ManaCost:R
 Types:Creature Human Spellshaper
 PT:1/1
 A:AB$ DealDamage | Cost$ R T Discard<1/Card> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kris_mage.jpg
 AI:RemoveDeck:All
 Oracle:{R}, {T}, Discard a card: Kris Mage deals 1 damage to any target.

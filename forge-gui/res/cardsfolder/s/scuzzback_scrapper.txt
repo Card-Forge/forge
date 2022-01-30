@@ -3,5 +3,4 @@ ManaCost:RG
 Types:Creature Goblin Warrior
 PT:1/1
 K:Wither
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scuzzback_scrapper.jpg
 Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)

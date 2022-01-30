@@ -3,5 +3,4 @@ ManaCost:4
 Types:Artifact Creature Golem
 PT:3/1
 A:AB$ Regenerate | Cost$ 2 | SpellDescription$ Regenerate CARDNAME.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/clay_statue.jpg
 Oracle:{2}: Regenerate Clay Statue.

@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ Mana | Cost$ 1 RG | Produced$ Combo Any | Amount$ 2 | AILogic$ MostProminentInComputerHand | SubAbility$ DBDraw | SpellDescription$ Add two mana in any combination of colors. Draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/manamorphose.jpg
 Oracle:Add two mana in any combination of colors.\nDraw a card.

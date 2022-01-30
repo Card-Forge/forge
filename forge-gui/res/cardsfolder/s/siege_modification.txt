@@ -5,5 +5,4 @@ K:Enchant creature or Vehicle
 A:SP$ Attach | Cost$ 1 R R | ValidTgts$ Creature,Vehicle | AILogic$ Animate
 S:Mode$ Continuous | Affected$ Vehicle.AttachedBy | AddType$ Creature | Description$ As long as enchanted permanent is a Vehicle, it's a creature in addition to its other types.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddKeyword$ First Strike | Description$ Enchanted creature gets +3/+0 and has first strike.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/siege_modification.jpg
 Oracle:Enchant creature or Vehicle\nAs long as enchanted permanent is a Vehicle, it's a creature in addition to its other types.\nEnchanted creature gets +3/+0 and has first strike.

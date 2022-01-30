@@ -2,5 +2,4 @@ Name:Cylian Elf
 ManaCost:1 G
 Types:Creature Elf Scout
 PT:2/2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cylian_elf.jpg
 Oracle:

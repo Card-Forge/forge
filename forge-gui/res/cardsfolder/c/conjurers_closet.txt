@@ -7,5 +7,4 @@ SVar:ConjurerReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destina
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 #TODO: Improve the AI to make it bounce its own locked creatures (e.g. Arrest'ed) to remove debuffs.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/conjurers_closet.jpg
 Oracle:At the beginning of your end step, you may exile target creature you control, then return that card to the battlefield under your control.

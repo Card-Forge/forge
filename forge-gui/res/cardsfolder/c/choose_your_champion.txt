@@ -6,5 +6,4 @@ SVar:ChooseChampion:DB$ ChoosePlayer | ValidTgts$ Opponent | Choices$ Player | A
 SVar:PrepChamps:DB$ Effect | RememberObjects$ ChosenPlayer,You | Name$ Choose Your Champion Scheme | Duration$ UntilYourNextTurn | StaticAbilities$ RestrictAttackers,RestrictCasting
 SVar:RestrictAttackers:Mode$ Continuous | Affected$ Creature.nonRememberedPlayerCtrl | AddHiddenKeyword$ CARDNAME can't attack. | EffectZone$ Command | Description$ Until your next turn, only you and the chosen player can attack with creatures.
 SVar:RestrictCasting:Mode$ CantBeCast | ValidCard$ Card | Caster$ Player.IsNotRemembered | EffectZone$ Command | Description$ Until your next turn, only you and the chosen player can cast spells.
-SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/Choose Your Champion.full.jpg
 Oracle:When you set this scheme in motion, target opponent chooses a player. Until your next turn, only you and the chosen player can cast spells and attack with creatures.

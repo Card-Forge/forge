@@ -6,5 +6,4 @@ SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$
 S:Mode$ Continuous | Affected$ Creature.ChosenType | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures of the chosen type get +1/+1.
 AI:RemoveDeck:Random
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shared_triumph.jpg
 Oracle:As Shared Triumph enters the battlefield, choose a creature type.\nCreatures of the chosen type get +1/+1.

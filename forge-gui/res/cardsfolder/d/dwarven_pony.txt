@@ -3,5 +3,4 @@ ManaCost:R
 Types:Creature Horse
 PT:1/1
 A:AB$ Pump | Cost$ 1 R T | ValidTgts$ Creature.Dwarf | TgtPrompt$ Select target Dwarf creature | KW$ Mountainwalk | SpellDescription$ Target Dwarf creature gains mountainwalk until end of turn. (It can't be blocked as long as defending player controls a Mountain.)
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_pony.jpg
 Oracle:{1}{R}, {T}: Target Dwarf creature gains mountainwalk until end of turn. (It can't be blocked as long as defending player controls a Mountain.)

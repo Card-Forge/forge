@@ -5,5 +5,4 @@ PT:2/1
 T:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast an artifact spell, you may pay {1}. If you do, CARDNAME deals 1 damage to any target.
 SVar:TrigDamage:AB$DealDamage | Cost$ 1 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
 SVar:BuffedBy:Artifact
-SVar:Picture:http://www.wizards.com/global/images/magic/general/embersmith.jpg
 Oracle:Whenever you cast an artifact spell, you may pay {1}. If you do, Embersmith deals 1 damage to any target.

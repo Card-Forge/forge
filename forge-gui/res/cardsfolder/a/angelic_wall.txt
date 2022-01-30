@@ -4,5 +4,4 @@ Types:Creature Wall
 PT:0/4
 K:Flying
 K:Defender
-SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card129671.jpg
 Oracle:Defender (This creature can't attack.)\nFlying

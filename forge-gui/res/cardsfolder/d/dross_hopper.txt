@@ -3,5 +3,4 @@ ManaCost:1 B
 Types:Creature Phyrexian Insect Horror
 PT:2/1
 A:AB$ Pump | Cost$ Sac<1/Creature> | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dross_hopper.jpg
 Oracle:Sacrifice a creature: Dross Hopper gains flying until end of turn.

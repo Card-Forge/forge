@@ -7,5 +7,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBAttach | TriggerZones$ Battl
 SVar:DBAttach:DB$ Attach | ValidTgts$ Equipment | TargetMin$ 0 | TargetMax$ MaxTargets | Object$ Targeted | Defined$ Self
 SVar:MaxTargets:Count$Valid Equipment
 SVar:HasAttackEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/armory_automaton.jpg
 Oracle:Whenever Armory Automaton enters the battlefield or attacks, you may attach any number of target Equipment to it. (Control of the Equipment doesn't change.)

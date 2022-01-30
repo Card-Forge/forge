@@ -4,5 +4,4 @@ Types:Creature Merfolk Wizard
 PT:3/3
 K:Flash
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wind_strider.jpg
 Oracle:Flash\nFlying

@@ -5,5 +5,4 @@ PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, you may tap target creature.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_snarecaster.jpg
 Oracle:When Leonin Snarecaster enters the battlefield, you may tap target creature.

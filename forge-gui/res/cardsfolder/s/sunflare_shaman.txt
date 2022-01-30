@@ -7,5 +7,4 @@ SVar:DBDealDamage:DB$ DealDamage | NumDmg$ X | Defined$ Self | SubAbility$ DBDam
 SVar:DBDamageResolve:DB$ DamageResolve
 SVar:X:Count$TypeInYourYard.Elemental
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sunflare_shaman.jpg
 Oracle:{1}{R}, {T}: Sunflare Shaman deals X damage to any target and X damage to itself, where X is the number of Elemental cards in your graveyard.

@@ -5,5 +5,4 @@ PT:1/3
 K:Flying
 S:Mode$ Continuous | Affected$ Card.TopLibrary | AffectedZone$ Library | MayLookAt$ Player | Description$ Players play with the top card of their libraries revealed.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wizened_snitches.jpg
 Oracle:Flying\nPlayers play with the top card of their libraries revealed.

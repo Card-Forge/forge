@@ -7,5 +7,4 @@ K:Haste
 A:AB$ Pump | Cost$ Discard<1/Card.namedTarox Bladewing> | NumAtt$ +X | NumDef$ +X | CostDesc$ Grandeur — Discard another card named Tarox Bladewing: | SpellDescription$ Tarox Bladewing gets +X/+X until end of turn, where X is its power.
 SVar:X:Count$CardPower
 DeckHints:Name$Tarox Bladewing
-SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136139.jpg
 Oracle:Flying, haste\nGrandeur — Discard another card named Tarox Bladewing: Tarox Bladewing gets +X/+X until end of turn, where X is its power.

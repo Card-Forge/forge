@@ -5,5 +5,4 @@ A:SP$ AddTurn | Cost$ R R | NumTurns$ 1 | ExtraTurnDelayedTrigger$ DBDelTrig | E
 SVar:DBDelTrig:ThisTurn$ True | Mode$ Phase | Phase$ End of Turn | TriggerDescription$ At the beginning of that turn's end step, you lose the game.
 SVar:TrigLose:DB$ LosesGame | Defined$ You
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/final_fortune.jpg
 Oracle:Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.

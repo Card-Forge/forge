@@ -3,5 +3,4 @@ ManaCost:5 U
 Types:Creature Giant
 PT:4/5
 K:Hexproof
-SVar:Picture:http://www.wizards.com/global/images/magic/general/benthic_giant.jpg
 Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)

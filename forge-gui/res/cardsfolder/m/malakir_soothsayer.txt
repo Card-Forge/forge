@@ -6,5 +6,4 @@ A:AB$ Draw | Cost$ T tapXType<1/Ally> | NumCards$ 1 | PrecostDesc$ Cohort — | 
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
 AI:RemoveDeck:All
 DeckHints:Type$Ally
-SVar:Picture:http://www.wizards.com/global/images/magic/general/malakir_soothsayer.jpg
 Oracle:Cohort — {T}, Tap an untapped Ally you control: You draw a card and you lose 1 life.

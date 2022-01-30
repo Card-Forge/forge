@@ -7,5 +7,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigInvestigate:DB$ Investigate
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ WeirdingWoodTap | Description$ Enchanted land has "{T}: Add two mana of any one color."
 SVar:WeirdingWoodTap:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | SpellDescription$ Add two mana of any one color.
-DeckHas:Ability$Investigate & Ability$Token
+DeckHas:Ability$Investigate|Token
 Oracle:Enchant land\nWhen Weirding Wood enters the battlefield, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")\nEnchanted land has "{T}: Add two mana of any one color."

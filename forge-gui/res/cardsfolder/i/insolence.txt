@@ -5,5 +5,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever enchanted creature becomes tapped, CARDNAME deals 2 damage to that creature's controller.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/insolence.jpg
 Oracle:Enchant creature\nWhenever enchanted creature becomes tapped, Insolence deals 2 damage to that creature's controller.

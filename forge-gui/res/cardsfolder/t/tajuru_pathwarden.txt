@@ -4,5 +4,4 @@ Types:Creature Elf Warrior Ally
 PT:5/4
 K:Vigilance
 K:Trample
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tajuru_pathwarden.jpg
 Oracle:Vigilance, trample

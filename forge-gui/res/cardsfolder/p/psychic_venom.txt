@@ -5,5 +5,4 @@ K:Enchant land
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Land | AILogic$ Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever enchanted land becomes tapped, CARDNAME deals 2 damage to that land's controller.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_venom.jpg
 Oracle:Enchant land\nWhenever enchanted land becomes tapped, Psychic Venom deals 2 damage to that land's controller.

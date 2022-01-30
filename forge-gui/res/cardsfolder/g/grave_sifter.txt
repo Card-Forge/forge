@@ -8,5 +8,4 @@ SVar:DBChoose:DB$ ChooseType | Defined$ Player.IsRemembered | Type$ Creature | A
 SVar:DBReturn:DB$ ChangeZone | ChangeType$ Card.RememberedPlayerCtrl+ChosenType | Hidden$ True | Origin$ Graveyard | Destination$ Hand | DefinedPlayer$ Remembered | Chooser$ Remembered | ChangeNum$ X
 SVar:X:Count$ValidGraveyard Card.RememberedPlayerCtrl+ChosenType
 SVar:DBCleanup:DB$ Cleanup | ClearChosenType$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_sifter.jpg
 Oracle:When Grave Sifter enters the battlefield, each player chooses a creature type and returns any number of cards of that type from their graveyard to their hand.

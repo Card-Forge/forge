@@ -5,5 +5,4 @@ A:SP$ ChangeZoneAll | Cost$ 2 B | Origin$ Graveyard | Destination$ Exile | Valid
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Z
 SVar:Z:SVar$X/Thrice
 SVar:X:Remembered$Amount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_incursion.jpg
 Oracle:Exile all creature cards from target player's graveyard. You gain 3 life for each card exiled this way.

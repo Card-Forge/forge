@@ -4,5 +4,4 @@ Types:Creature Illusion
 PT:4/1
 K:Flying
 K:UpkeepCost:U
-SVar:Picture:http://www.wizards.com/global/images/magic/general/phantasmal_forces.jpg
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Phantasmal Forces unless you pay {U}.

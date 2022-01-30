@@ -8,5 +8,4 @@ A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add an amount
 SVar:X:Count$CardPower
 DeckHints:Type$Elf
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/marwyn_the_nurturer.jpg
 Oracle:Whenever another Elf enters the battlefield under your control, put a +1/+1 counter on Marwyn, the Nurturer.\n{T}: Add an amount of {G} equal to Marwyn's power.

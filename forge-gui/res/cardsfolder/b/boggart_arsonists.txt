@@ -5,5 +5,4 @@ PT:2/1
 K:Plainswalk
 A:AB$ Destroy | Cost$ 2 R Sac<1/CARDNAME> | ValidTgts$ Scarecrow,Plains | TgtPrompt$ Select target Scarecrow or Plains | SpellDescription$ Destroy target Scarecrow or Plains.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_arsonists.jpg
 Oracle:Plainswalk (This creature can't be blocked as long as defending player controls a Plains.)\n{2}{R}, Sacrifice Boggart Arsonists: Destroy target Scarecrow or Plains.

@@ -6,5 +6,4 @@ K:Trample
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, if you control an Ajani planeswalker, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
 SVar:X:Count$Valid Planeswalker.Ajani+YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ajanis_comrade.jpg
 Oracle:Trample\nAt the beginning of combat on your turn, if you control an Ajani planeswalker, put a +1/+1 counter on Ajani's Comrade.

@@ -7,5 +7,4 @@ SVar:DBDig:DB$ DigUntil | Defined$ TriggeredCardController | Valid$ Card.sharesC
 SVar:DBPlay:DB$ Play | Defined$ Remembered | Controller$ TriggeredCardController | WithoutManaCost$ True | Optional$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZoneAll | Origin$ Exile | ChangeType$ Card.IsRemembered,Card.IsImprinted | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBPossibilityCleanup
 SVar:DBPossibilityCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/possibility_storm.jpg
 Oracle:Whenever a player casts a spell from their hand, that player exiles it, then exiles cards from the top of their library until they exile a card that shares a card type with it. That player may cast that card without paying its mana cost. Then they put all cards exiled with Possibility Storm on the bottom of their library in a random order.

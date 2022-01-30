@@ -9,5 +9,4 @@ SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:X:Remembered$Amount/Minus.1
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flux.jpg
 Oracle:Each player discards any number of cards, then draws that many cards.\nDraw a card.

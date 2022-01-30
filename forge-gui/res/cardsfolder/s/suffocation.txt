@@ -12,5 +12,4 @@ SVar:DelTrigSlowtrip:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPla
 SVar:DrawSlowtrip:DB$ Draw | NumCards$ 1 | Defined$ You
 SVar:X:Count$RememberedSize
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/suffocation.jpg
 Oracle:Cast this spell only if you were dealt damage this turn by a red instant or sorcery spell.\nSuffocation deals 4 damage to the controller of the last red instant or sorcery spell that dealt damage to you this turn.\nDraw a card at the beginning of the next turn's upkeep.

@@ -4,5 +4,4 @@ Types:Creature Shapeshifter
 PT:1/1
 K:Changeling
 A:AB$ Pump | Cost$ tapXType<1/Creature> | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mothdust_changeling.jpg
 Oracle:Changeling (This card is every creature type.)\nTap an untapped creature you control: Mothdust Changeling gains flying until end of turn.

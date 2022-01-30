@@ -3,5 +3,4 @@ ManaCost:3
 Types:Artifact
 A:AB$ PutCounter | Cost$ 3 T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
 A:AB$ Token | Cost$ T SubCounter<3/CHARGE> | TokenAmount$ 1 | TokenScript$ c_9_9_a_golem | TokenOwner$ You | LegacyImage$ c 9 9 a golem mbs | SpellDescription$ Create a 9/9 colorless Golem artifact creature token.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/titan_forge.jpg
 Oracle:{3}, {T}: Put a charge counter on Titan Forge.\n{T}, Remove three charge counters from Titan Forge: Create a 9/9 colorless Golem artifact creature token.

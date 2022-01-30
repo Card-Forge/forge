@@ -6,5 +6,4 @@ SVar:X:Count$xPaid
 A:AB$ Pump | Cost$ 1 T SubCounter<1/GEM> | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | KW$ HIDDEN CARDNAME can't attack or block. | SpellDescription$ Target creature can't attack or block this turn.
 SVar:NeedsToPlayVar:Z GE4
 SVar:Z:Count$Valid Land.YouCtrl+untapped
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bribers_purse.jpg
 Oracle:Briber's Purse enters the battlefield with X gem counters on it.\n{1}, {T}, Remove a gem counter from Briber's Purse: Target creature can't attack or block this turn.

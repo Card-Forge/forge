@@ -5,5 +5,4 @@ A:AB$ GainLife | Cost$ 1 B Sac<1/Creature> | Defined$ You | LifeAmount$ 1 | SubA
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vampiric_rites.jpg
 Oracle:{1}{B}, Sacrifice a creature: You gain 1 life and draw a card.

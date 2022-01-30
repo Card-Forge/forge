@@ -5,5 +5,4 @@ A:SP$ Effect | Cost$ 1 W | ValidTgts$ Player | Name$ Abeyance Effect | StaticAbi
 SVar:STCantBeCast:Mode$ CantBeCast | ValidCard$ Instant,Sorcery | Caster$ Player.IsRemembered | EffectZone$ Command | Description$ Target player can't cast instant or sorcery spells, and that player can't activate abilities that aren't mana abilities.
 SVar:STCantBeActivated:Mode$ CantBeActivated | ValidCard$ Card | ValidSA$ Activated.nonManaAbility | Activator$ Player.IsRemembered | EffectZone$ Command
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/abeyance.jpg
 Oracle:Until end of turn, target player can't cast instant or sorcery spells, and that player can't activate abilities that aren't mana abilities.\nDraw a card.

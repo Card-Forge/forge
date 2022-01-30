@@ -5,5 +5,4 @@ K:Equip:4
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each creature you control.
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:BuffedBy:Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pennon_blade.jpg
 Oracle:Equipped creature gets +1/+1 for each creature you control.\nEquip {4} ({4}: Attach to target creature you control. Equip only as a sorcery.)

@@ -5,5 +5,4 @@ A:SP$ Token | Cost$ 2 R W | TokenAmount$ 2 | TokenScript$ w_1_1_soldier | TokenO
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Haste | NumAtt$ +1 | NumDef$ +1
 DeckHas:Ability$Token
 SVar:PlayMain1:TRUE
-SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/heroic_reinforcements.jpg
 Oracle:Create two 1/1 white Soldier creature tokens. Until end of turn, creatures you control get +1/+1 and gain haste. (They can attack and {T} this turn.)

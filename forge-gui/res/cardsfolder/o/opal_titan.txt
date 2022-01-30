@@ -8,5 +8,4 @@ SVar:DBOpalTitanProtectionBlue:DB$ Protection | Gains$ blue | ConditionDefined$ 
 SVar:DBOpalTitanProtectionBlack:DB$ Protection | Gains$ black | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.Black | ConditionCompare$ GE1 | SubAbility$ DBOpalTitanProtectionGreen | Duration$ Permanent
 SVar:DBOpalTitanProtectionGreen:DB$ Protection | Gains$ green | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.Green | ConditionCompare$ GE1 | SubAbility$ DBOpalTitanProtectionRed | Duration$ Permanent
 SVar:DBOpalTitanProtectionRed:DB$ Protection | Gains$ red | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.Red | ConditionCompare$ GE1 | Duration$ Permanent
-SVar:Picture:http://www.wizards.com/global/images/magic/general/opal_titan.jpg
 Oracle:When an opponent casts a creature spell, if Opal Titan is an enchantment, Opal Titan becomes a 4/4 Giant creature with protection from each of that spell's colors.

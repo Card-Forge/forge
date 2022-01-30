@@ -13,5 +13,4 @@ SVar:CreateLossEffect:DB$ Effect | Name$ Impulsive Maneuvers Loss Effect | Repla
 SVar:EventLossDamageDone:Event$ DamageDone | ValidSource$ Card.IsImprinted | ReplaceWith$ ExileEffect | PreventionEffect$ True | IsCombat$ True | Description$ The next time creature would deal combat damage this turn, prevent that damage.
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/impulsive_maneuvers.jpg
 Oracle:Whenever a creature attacks, flip a coin. If you win the flip, the next time that creature would deal combat damage this turn, it deals double that damage instead. If you lose the flip, the next time that creature would deal combat damage this turn, prevent that damage.

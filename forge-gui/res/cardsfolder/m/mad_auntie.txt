@@ -5,5 +5,4 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Goblin+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Goblin creatures you control get +1/+1.
 A:AB$ Regenerate | ValidTgts$ Goblin.Other | TgtPrompt$ Select another target Goblin | Cost$ T | SpellDescription$ Regenerate another target Goblin.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mad_auntie.jpg
 Oracle:Other Goblin creatures you control get +1/+1.\n{T}: Regenerate another target Goblin.

@@ -4,5 +4,4 @@ Types:Sorcery
 A:SP$ GainLife | Cost$ 1 W | LifeAmount$ X | SpellDescription$ You gain 2 life for each Mountain target opponent controls.
 SVar:X:Count$TypeOppCtrl.Mountain/Times.2
 AI:RemoveDeck:Random
-SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal/renewing_dawn.jpg
 Oracle:You gain 2 life for each Mountain target opponent controls.

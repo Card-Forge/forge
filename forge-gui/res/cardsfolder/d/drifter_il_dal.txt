@@ -4,5 +4,4 @@ Types:Creature Human Wizard
 PT:2/1
 K:UpkeepCost:U
 K:Shadow
-SVar:Picture:http://www.wizards.com/global/images/magic/general/drifter_il_dal.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nAt the beginning of your upkeep, sacrifice Drifter il-Dal unless you pay {U}.

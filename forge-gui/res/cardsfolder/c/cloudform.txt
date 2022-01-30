@@ -7,5 +7,4 @@ SVar:Aurify:DB$ Animate | IsPresent$ Card.Self | Types$ Aura | OverwriteSpells$ 
 SVar:NewAttach:SP$ Attach | Cost$ 1 U U | ValidTgts$ Creature | AILogic$ Pump
 SVar:RageformAttach:DB$ Attach | Defined$ Remembered | IsPresent$ Card.Self
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying & Hexproof | Description$ Enchanted creature has flying and hexproof.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudform.jpg
 Oracle:When Cloudform enters the battlefield, it becomes an Aura with enchant creature. Manifest the top card of your library and attach Cloudform to it. (To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)\nEnchanted creature has flying and hexproof.

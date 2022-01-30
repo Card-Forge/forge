@@ -5,5 +5,4 @@ A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player,Planeswalker | TgtProm
 T:Mode$ Discarded | ValidCard$ Card.Self | ValidCause$ Card.OppCtrl | Execute$ TrigDoubleDmg | TriggerDescription$ When a spell or ability an opponent controls causes you to discard CARDNAME, CARDNAME deals 4 damage to any target.
 SVar:TrigDoubleDmg:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 4
 SVar:DiscardMeByOpp:3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/guerrilla_tactics.jpg
 Oracle:Guerrilla Tactics deals 2 damage to any target.\nWhen a spell or ability an opponent controls causes you to discard Guerrilla Tactics, Guerrilla Tactics deals 4 damage to any target.

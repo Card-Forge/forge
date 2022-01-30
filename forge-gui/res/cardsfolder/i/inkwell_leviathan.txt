@@ -5,5 +5,4 @@ PT:7/11
 K:Islandwalk
 K:Trample
 K:Shroud
-SVar:Picture:http://www.wizards.com/global/images/magic/general/inkwell_leviathan.jpg
 Oracle:Trample\nIslandwalk (This creature can't be blocked as long as defending player controls an Island.)\nShroud (This creature can't be the target of spells or abilities.)

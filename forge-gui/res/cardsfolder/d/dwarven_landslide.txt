@@ -6,5 +6,4 @@ A:SP$ Destroy | Cost$ 3 R | ValidTgts$ Land | TargetMin$ X | TargetMax$ X | TgtP
 SVar:X:Count$Kicked.2.1
 SVar:NeedsToPlayKickedVar:Z GE2
 SVar:Z:Count$Valid Land.OppCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_landslide.jpg
 Oracle:Kicker—{2}{R}, Sacrifice a land. (You may pay {2}{R} and sacrifice a land in addition to any other costs as you cast this spell.)\nDestroy target land. If this spell was kicked, destroy another target land.

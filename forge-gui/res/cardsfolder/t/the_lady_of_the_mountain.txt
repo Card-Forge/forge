@@ -2,5 +2,4 @@ Name:The Lady of the Mountain
 ManaCost:4 R G
 Types:Legendary Creature Giant
 PT:5/5
-SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1689.jpg
 Oracle:

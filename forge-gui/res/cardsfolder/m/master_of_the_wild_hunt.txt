@@ -12,5 +12,4 @@ SVar:HuntedDamage:DB$ DealDamage | DamageSource$ ParentTarget | NumDmg$ Y | Divi
 SVar:DBDamageResolve:DB$ DamageResolve
 SVar:X:Imprinted$CardPower
 SVar:Y:Targeted$CardPower
-SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_the_wild_hunt.jpg
 Oracle:At the beginning of your upkeep, create a 2/2 green Wolf creature token.\n{T}: Tap all untapped Wolf creatures you control. Each Wolf tapped this way deals damage equal to its power to target creature. That creature deals damage equal to its power divided as its controller chooses among any number of those Wolves.

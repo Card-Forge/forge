@@ -4,5 +4,4 @@ Types:Creature Phyrexian Carrier
 PT:1/1
 A:AB$ Pump | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_denouncer.jpg
 Oracle:{T}, Sacrifice Phyrexian Denouncer: Target creature gets -1/-1 until end of turn.

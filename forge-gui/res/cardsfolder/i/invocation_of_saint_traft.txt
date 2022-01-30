@@ -8,5 +8,4 @@ SVar:SaintTraftTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ SaintTraftTo
 SVar:SaintTraftToken:DB$ Token | TokenScript$ w_4_4_angel_flying | LegacyImage$ w 4 4 angel flying soi | TokenTapped$ True | TokenAttacking$ True | AtEOT$ ExileCombat
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/invocation_of_saint_traft.jpg
 Oracle:Enchant creature\nEnchanted creature has "Whenever this creature attacks, create a 4/4 white Angel creature token with flying that's tapped and attacking. Exile that token at end of combat."

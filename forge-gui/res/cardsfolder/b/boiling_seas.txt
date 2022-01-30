@@ -3,5 +3,4 @@ ManaCost:3 R
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 3 R | ValidCards$ Island | SpellDescription$ Destroy all Islands.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/boiling_seas.jpg
 Oracle:Destroy all Islands.

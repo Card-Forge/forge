@@ -4,5 +4,4 @@ Types:Artifact Creature Construct
 PT:0/1
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 DeckHas:Ability$Mana.Colorless
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hedron_crawler.jpg
 Oracle:{T}: Add {C}. ({C} represents colorless mana.)

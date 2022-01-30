@@ -10,5 +10,4 @@ T:Mode$ DamageDoneOnce | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZ
 SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | Defined$ ChosenPlayer
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
-SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card116724.jpg
 Oracle:Indestructible\nAs Stuffy Doll enters the battlefield, choose a player.\nWhenever Stuffy Doll is dealt damage, it deals that much damage to the chosen player.\n{T}: Stuffy Doll deals 1 damage to itself.

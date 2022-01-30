@@ -9,5 +9,4 @@ SVar:EndlessReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield
 SVar:EndlessRemoveEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/endless_whispers.jpg
 Oracle:Each creature has "When this creature dies, choose target opponent. That player puts this card from its owner's graveyard onto the battlefield under their control at the beginning of the next end step."

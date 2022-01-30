@@ -8,5 +8,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize
 DeckHas:Ability$LifeGain
 DeckHints:Keyword$Persist
-SVar:Picture:http://www.wizards.com/global/images/magic/general/woeleecher.jpg
 Oracle:{W}, {T}: Remove a -1/-1 counter from target creature. If you do, you gain 2 life.

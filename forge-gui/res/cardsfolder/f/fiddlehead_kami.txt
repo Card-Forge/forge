@@ -6,5 +6,4 @@ T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | Trig
 SVar:TrigRegen:DB$ Regenerate | Defined$ Self
 SVar:BuffedBy:Arcane,Spirit
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fiddlehead_kami.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, regenerate Fiddlehead Kami.

@@ -7,5 +7,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SacX:Count$Valid Creature.YouCtrl
 SVar:DmgX:Remembered$Amount
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/last_ditch_effort.jpg
 Oracle:Sacrifice any number of creatures. Last-Ditch Effort deals that much damage to any target.

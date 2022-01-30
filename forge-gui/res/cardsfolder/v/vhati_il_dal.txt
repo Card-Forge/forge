@@ -5,5 +5,4 @@ PT:3/3
 A:AB$ GenericChoice | Cost$ T | Defined$ You | Choices$ ChangePower,ChangeToughness | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | SpellDescription$ Until end of turn, target creature has base power 1 or base toughness 1.
 SVar:ChangePower:DB$ Animate | Defined$ Targeted | Power$ 1 | SpellDescription$ Until end of turn, target creature has base power 1.
 SVar:ChangeToughness:DB$ Animate | Defined$ Targeted | Toughness$ 1 | SpellDescription$ Until end of turn, target creature has base toughness 1.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vhati_il_dal.jpg
 Oracle:{T}: Until end of turn, target creature has base power 1 or base toughness 1.

@@ -4,5 +4,4 @@ Types:Creature Griffin
 PT:2/2
 K:Flying
 K:First Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/razorfoot_griffin.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nFirst strike (This creature deals combat damage before creatures without first strike.)

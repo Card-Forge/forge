@@ -5,7 +5,6 @@ K:etbCounter:INTERVENTION:2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemoveCtr | TriggerDescription$ At the beginning of your upkeep, remove an intervention counter from CARDNAME. When you remove the last intervention counter from CARDNAME, the game is a draw.
 SVar:TrigRemoveCtr:DB$ RemoveCounter | Defined$ Self | CounterType$ INTERVENTION | CounterNum$ 1 | SubAbility$ GameIsADraw
 SVar:GameIsADraw:DB$ GameDrawn | ConditionPresent$ Card.Self+counters_EQ0_INTERVENTION
-SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_intervention.jpg
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
 Oracle:Divine Intervention enters the battlefield with two intervention counters on it.\nAt the beginning of your upkeep, remove an intervention counter from Divine Intervention.\nWhen you remove the last intervention counter from Divine Intervention, the game is a draw.

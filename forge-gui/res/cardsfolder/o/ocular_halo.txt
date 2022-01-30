@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Draw | Descrip
 A:AB$ Pump | Cost$ W | Defined$ Enchanted | KW$ Vigilance | SpellDescription$ Enchanted creature gains vigilance until end of turn.
 SVar:Draw:AB$Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ocular_halo.jpg
 Oracle:Enchant creature\nEnchanted creature has "{T}: Draw a card."\n{W}: Enchanted creature gains vigilance until end of turn.

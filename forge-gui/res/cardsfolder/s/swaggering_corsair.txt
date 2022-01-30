@@ -4,5 +4,4 @@ Types:Creature Human Pirate
 PT:2/2
 K:etbCounter:P1P1:1:CheckSVar$ RaidTest: Raid — CARDNAME enters the battlefield with a +1/+1 counter on it if you attacked this turn.
 SVar:RaidTest:Count$AttackersDeclared
-SVar:Picture:http://www.wizards.com/global/images/magic/general/swaggering_corsair.jpg
 Oracle:Raid — Swaggering Corsair enters the battlefield with a +1/+1 counter on it if you attacked this turn.

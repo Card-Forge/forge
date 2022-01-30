@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Land.EnchantedBy | AddKeyword$ Indestructible | D
 S:Mode$ CantAttach | ValidCard$ Aura.Other | Target$ Land.EnchantedBy | Description$ Enchanted land can't be enchanted by other Auras.
 AI:RemoveDeck:Random
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/consecrate_land.jpg
 Oracle:Enchant land\nEnchanted land has indestructible and can't be enchanted by other Auras.

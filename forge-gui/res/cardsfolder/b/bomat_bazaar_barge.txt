@@ -5,5 +5,4 @@ PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ FreeCard | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
 SVar:FreeCard:DB$ Draw | Defined$ You | NumCards$ 1
 K:Crew:3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bomat_bazaar_barge.jpg
 Oracle:When Bomat Bazaar Barge enters the battlefield, draw a card.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)

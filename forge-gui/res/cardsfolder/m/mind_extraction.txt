@@ -4,5 +4,4 @@ Types:Sorcery
 A:SP$ Discard | Cost$ 2 B Sac<1/Creature> | RememberCostCards$ True | ValidTgts$ Player | DiscardValid$ Card.SharesColorWith Remembered | Mode$ RevealDiscardAll | SubAbility$ DBCleanup | SpellDescription$ Target player reveals their hand and discards all cards of each of the sacrificed creature's colors.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_extraction.jpg
 Oracle:As an additional cost to cast this spell, sacrifice a creature.\nTarget player reveals their hand and discards all cards of each of the sacrificed creature's colors.

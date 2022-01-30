@@ -6,5 +6,4 @@ SVar:DBPlay:DB$ Play | Defined$ Remembered | ValidSA$ Spell | WithoutManaCost$ T
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Converge
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bring_to_light.jpg
 Oracle:Converge — Search your library for a creature, instant, or sorcery card with mana value less than or equal to the number of colors of mana spent to cast this spell, exile that card, then shuffle. You may cast that card without paying its mana cost.

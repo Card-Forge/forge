@@ -6,5 +6,4 @@ SVar:DismissTarget:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ 
 SVar:DismissSac:DB$ Sacrifice | Defined$ Self
 SVar:NonStackingEffect:True
 SVar:TargetingSac:SVar:Targeting:Dies
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dismiss_into_dream.jpg
 Oracle:Each creature your opponents control is an Illusion in addition to its other types and has "When this creature becomes the target of a spell or ability, sacrifice it."

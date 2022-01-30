@@ -5,5 +5,4 @@ PT:2/2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices an artifact, creature or land.
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Creature,Artifact,Land | Defined$ TriggeredPlayer | SpellDescription$ Sacrifice an artifact, creature or land.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/braids_cabal_minion.jpg
 Oracle:At the beginning of each player's upkeep, that player sacrifices an artifact, creature, or land.

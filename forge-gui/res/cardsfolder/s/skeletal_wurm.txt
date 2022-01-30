@@ -3,5 +3,4 @@ ManaCost:7 B
 Types:Creature Skeleton Wurm
 PT:7/6
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skeletal_wurm.jpg
 Oracle:{B}: Regenerate Skeletal Wurm.

@@ -4,5 +4,4 @@ Types:Creature Plant
 PT:0/13
 K:Defender
 A:AB$ ExchangeLifeVariant | Cost$ T | ConditionPresent$ Creature.StrictlySelf | ValidTgts$ Opponent | Mode$ Toughness | SpellDescription$ Exchange target opponent's life total with CARDNAME's toughness. | StackDescription$ SpellDescription
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tree_of_perdition.jpg
 Oracle:Defender\n{T}: Exchange target opponent's life total with Tree of Perdition's toughness.

@@ -9,5 +9,4 @@ SVar:X:Count$Valid Permanent.ActivePlayerCtrl+ChosenColor+nonToken
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ At the beginning of your upkeep, destroy CARDNAME unless you sacrifice two Islands.
 SVar:TrigDestroy:DB$ Destroy | Defined$ Self | UnlessPayer$ You | UnlessCost$ Sac<2/Island>
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_allergy.jpg
 Oracle:As Psychic Allergy enters the battlefield, choose a color.\nAt the beginning of each opponent's upkeep, Psychic Allergy deals X damage to that player, where X is the number of nontoken permanents of the chosen color they control.\nAt the beginning of your upkeep, destroy Psychic Allergy unless you sacrifice two Islands.

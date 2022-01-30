@@ -6,5 +6,4 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 white Vampire creature token with lifelink.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_vampire_lifelink | TokenOwner$ You | LegacyImage$ w 1 1 vampire lifelink rix
-SVar:Picture:http://www.wizards.com/global/images/magic/general/squires_devotion.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 and has lifelink.\nWhen Squire's Devotion enters the battlefield, create a 1/1 white Vampire creature token with lifelink.

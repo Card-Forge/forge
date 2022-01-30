@@ -5,5 +5,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Vigilance | Description$ Enchanted creature has vigilance.
 A:AB$ Regenerate | Cost$ Sac<1/CARDNAME> | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stamina.jpg
 Oracle:Enchant creature\nEnchanted creature has vigilance.\nSacrifice Stamina: Regenerate enchanted creature.

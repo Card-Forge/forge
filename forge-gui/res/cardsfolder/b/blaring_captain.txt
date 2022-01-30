@@ -6,5 +6,4 @@ K:Partner:Blaring Recruiter
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPumpAttack | TriggerDescription$ Whenever CARDNAME attacks, attacking Warriors get +1/+1 until end of turn.
 SVar:TrigPumpAttack:DB$ PumpAll | ValidCards$ Warrior.attacking | NumAtt$ 1 | NumDef$ 1
 DeckHints:Name$Blaring Recruiter & Type$Warrior
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blaring_captain.jpg
 Oracle:Partner with Blaring Recruiter (When this creature enters the battlefield, target player may put Blaring Recruiter into their hand from their library, then shuffle.)\nWhenever Blaring Captain attacks, attacking Warriors get +1/+1 until end of turn.

@@ -6,5 +6,4 @@ SVar:ValeTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ C
 SVar:ChooseOpp:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to give control to: | AILogic$ Curse | SubAbility$ DonateTheVale
 SVar:DonateTheVale:DB$ GainControl | Defined$ CorrectedSelf | NewController$ Player.Chosen
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rainbow_vale.jpg
 Oracle:{T}: Add one mana of any color. An opponent gains control of Rainbow Vale at the beginning of the next end step.

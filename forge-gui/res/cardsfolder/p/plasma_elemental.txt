@@ -3,5 +3,4 @@ ManaCost:5 U
 Types:Creature Elemental
 PT:4/1
 K:Unblockable
-SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73562.jpg
 Oracle:Plasma Elemental can't be blocked.

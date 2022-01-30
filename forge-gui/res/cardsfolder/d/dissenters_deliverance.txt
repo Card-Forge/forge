@@ -3,5 +3,4 @@ ManaCost:1 G
 Types:Instant
 A:SP$ Destroy | Cost$ 1 G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 K:Cycling:G
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dissenters_deliverance.jpg
 Oracle:Destroy target artifact.\nCycling {G} ({G}, Discard this card: Draw a card.)

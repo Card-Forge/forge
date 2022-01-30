@@ -5,5 +5,4 @@ PT:3/4
 A:AB$ Destroy | Cost$ T | ValidTgts$ Dragon.attacking,Dragon.blocking | NoRegen$ True | TgtPrompt$ Select target attacking or blocking Dragon | SubAbility$ DBGainLife | SpellDescription$ Destroy target attacking or blocking Dragon. It can't be regenerated. You gain life equal to its power.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:TargetedLKI$CardPower
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rashida_scalebane.jpg
 Oracle:{T}: Destroy target attacking or blocking Dragon. It can't be regenerated. You gain life equal to its power.

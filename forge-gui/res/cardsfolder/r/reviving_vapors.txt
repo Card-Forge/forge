@@ -8,5 +8,4 @@ SVar:X:Imprinted$CardManaCost
 SVar:DBMill:DB$ Mill | NumCards$ Y | SubAbility$ DBCleanup | StackDescription$ None
 SVar:Y:Count$RememberedSize/Minus.1
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reviving_vapors.jpg
 Oracle:Reveal the top three cards of your library and put one of them into your hand. You gain life equal to that card's mana value. Put all other cards revealed this way into your graveyard.

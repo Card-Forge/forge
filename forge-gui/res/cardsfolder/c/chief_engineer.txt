@@ -4,5 +4,4 @@ Types:Creature Vedalken Artificer
 PT:1/3
 S:Mode$ Continuous | Affected$ Card.Artifact+YouCtrl | AffectedZone$ Stack | AddKeyword$ Convoke | Description$ Artifact spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting an artifact spell pays for {1} or one mana of that creature's color.)
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chief_engineer.jpg
 Oracle:Artifact spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting an artifact spell pays for {1} or one mana of that creature's color.)

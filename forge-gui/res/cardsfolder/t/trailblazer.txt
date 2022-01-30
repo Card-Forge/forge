@@ -2,5 +2,4 @@ Name:Trailblazer
 ManaCost:2 G G
 Types:Instant
 A:SP$ Pump | Cost$ 2 G G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable | SpellDescription$ Target creature can't be blocked this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/trailblazer.jpg
 Oracle:Target creature can't be blocked this turn.

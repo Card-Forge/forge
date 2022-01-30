@@ -5,5 +5,4 @@ K:UpkeepCost:Sac<1/Land>
 S:Mode$ CantPlayLand | Description$ Players can't play lands.
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/territorial_dispute.jpg
 Oracle:At the beginning of your upkeep, sacrifice Territorial Dispute unless you sacrifice a land.\nPlayers can't play lands.

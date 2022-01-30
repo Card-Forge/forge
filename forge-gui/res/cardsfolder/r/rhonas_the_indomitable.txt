@@ -7,5 +7,4 @@ K:Indestructible
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack or block. | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME can't attack or block unless you control another creature with power 4 or greater.
 SVar:X:Count$Valid Creature.Other+YouCtrl+powerGE4
 A:AB$ Pump | Cost$ 2 G | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +0 | KW$ Trample | SpellDescription$ Another target creature gets +2/+0 and gains trample until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rhonas_the_indomitable.jpg
 Oracle:Deathtouch, indestructible\nRhonas the Indomitable can't attack or block unless you control another creature with power 4 or greater.\n{2}{G}: Another target creature gets +2/+0 and gains trample until end of turn.

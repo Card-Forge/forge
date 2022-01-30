@@ -7,5 +7,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X
 SVar:X:Count$GreatestPower_Creature.tapped+OppCtrl
 DeckHints:Name$Proud Mentor
-SVar:Picture:http://www.wizards.com/global/images/magic/general/impetuous_protege.jpg
 Oracle:Partner with Proud Mentor (When this creature enters the battlefield, target player may put Proud Mentor into their hand from their library, then shuffle.)\nWhenever Impetuous Protege attacks, it gets +X/+0 until end of turn, where X is the greatest power among tapped creatures your opponents control.

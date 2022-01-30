@@ -5,5 +5,4 @@ T:Mode$ SpellCast | ValidCard$ Creature.Eldrazi+cmcGE7 | ValidActivatingPlayer$ 
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2
 DeckNeeds:Type$Eldrazi
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/emrakuls_influence.jpg
 Oracle:Whenever you cast an Eldrazi creature spell with mana value 7 or greater, draw two cards.

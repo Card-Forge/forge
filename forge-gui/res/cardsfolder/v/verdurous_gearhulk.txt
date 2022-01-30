@@ -6,5 +6,4 @@ K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, distribute four +1/+1 counters among any number of target creatures you control.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to distribute counters to | CounterType$ P1P1 | CounterNum$ 4 | TargetMin$ 1 | TargetMax$ 4 | DividedAsYouChoose$ 4
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/verdurous_gearhulk.jpg
 Oracle:Trample\nWhen Verdurous Gearhulk enters the battlefield, distribute four +1/+1 counters among any number of target creatures you control.

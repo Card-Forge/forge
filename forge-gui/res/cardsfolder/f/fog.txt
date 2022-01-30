@@ -2,5 +2,4 @@ Name:Fog
 ManaCost:G
 Types:Instant
 A:SP$ Fog | Cost$ G | SpellDescription$ Prevent all combat damage that would be dealt this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fog.jpg
 Oracle:Prevent all combat damage that would be dealt this turn.

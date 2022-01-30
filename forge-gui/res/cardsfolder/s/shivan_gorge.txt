@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ DealDamage | Cost$ 2 R T | NumDmg$ 1 | Defined$ Player.Opponent | SpellDescription$ CARDNAME deals 1 damage to each opponent.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_gorge.jpg
 Oracle:{T}: Add {C}.\n{2}{R}, {T}: Shivan Gorge deals 1 damage to each opponent.

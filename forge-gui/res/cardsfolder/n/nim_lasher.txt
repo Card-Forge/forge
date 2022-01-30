@@ -6,5 +6,4 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME g
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:BuffedBy:Artifact
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nim_lasher.jpg
 Oracle:Nim Lasher gets +1/+0 for each artifact you control.

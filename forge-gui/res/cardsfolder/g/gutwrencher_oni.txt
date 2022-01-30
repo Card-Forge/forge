@@ -8,5 +8,4 @@ SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | Co
 AI:RemoveDeck:Random
 SVar:NeedsToPlay:Ogre.YouCtrl
 DeckHints:Type$Ogre
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gutwrencher_oni.jpg
 Oracle:Trample\nAt the beginning of your upkeep, discard a card if you don't control an Ogre.

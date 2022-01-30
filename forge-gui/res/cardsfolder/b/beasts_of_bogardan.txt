@@ -5,5 +5,4 @@ PT:3/3
 K:Protection from red
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as an opponent controls a nontoken white permanent.
 SVar:X:Count$Valid Permanent.White+OppCtrl+nonToken
-SVar:Picture:http://www.wizards.com/global/images/magic/general/beasts_of_bogardan.jpg
 Oracle:Protection from red\nBeasts of Bogardan gets +1/+1 as long as an opponent controls a nontoken white permanent.

@@ -23,6 +23,4 @@ SVar:X:Count$TypeInYourYard.Creature
 A:AB$ Pump | Cost$ 1 B Discard<1/Card> | Defined$ Self | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ CARDNAME gains indestructible until end of turn.
 SVar:DBTap:DB$ Tap | Defined$ Self | StackDescription$ SpellDescription | SpellDescription$ Tap it.
 SVar:AIPreference:DiscardCost$Creature
-DeckHints:Ability$Graveyard
-DeckHas:Ability$Discard
 Oracle:Bloodsworn Knight's power and toughness are each equal to the number of creature cards in your graveyard.\n{1}{B}, Discard a card: Bloodsworn Knight gains indestructible until end of turn. Tap it. (Damage and effects that say "destroy" don't destroy it.)

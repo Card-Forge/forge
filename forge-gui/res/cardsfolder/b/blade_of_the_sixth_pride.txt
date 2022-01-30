@@ -2,5 +2,4 @@ Name:Blade of the Sixth Pride
 ManaCost:1 W
 Types:Creature Cat Rebel
 PT:3/1
-SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130676.jpg
 Oracle:

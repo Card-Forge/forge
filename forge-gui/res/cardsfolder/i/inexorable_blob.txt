@@ -5,7 +5,6 @@ PT:3/3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Delirium$ True | TriggerDescription$ Delirium — Whenever CARDNAME attacks, if there are four or more card types among cards in your graveyard, create a 3/3 green Ooze creature token that's tapped and attacking.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_ooze | TokenOwner$ You | LegacyImage$ g 3 3 ooze soi | TokenTapped$ True | TokenAttacking$ True
 SVar:HasAttackEffect:TRUE
-DeckHints:Ability$Graveyard & Ability$Discard
+DeckHints:Ability$Graveyard|Discard
 DeckHas:Ability$Delirium
-SVar:Picture:http://www.wizards.com/global/images/magic/general/inexorable_blob.jpg
 Oracle:Delirium — Whenever Inexorable Blob attacks, if there are four or more card types among cards in your graveyard, create a 3/3 green Ooze creature token that's tapped and attacking.

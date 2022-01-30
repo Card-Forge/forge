@@ -3,5 +3,4 @@ ManaCost:2 R R
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 2 R R | ValidCards$ Permanent.White | SpellDescription$ Destroy all white permanents.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/anarchy.jpg
 Oracle:Destroy all white permanents.

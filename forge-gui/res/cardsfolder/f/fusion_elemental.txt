@@ -2,5 +2,4 @@ Name:Fusion Elemental
 ManaCost:W U B R G
 Types:Creature Elemental
 PT:8/8
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fusion_elemental.jpg
 Oracle:

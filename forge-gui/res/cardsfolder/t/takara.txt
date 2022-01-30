@@ -4,5 +4,4 @@ Types:Vanguard
 HandLifeModifier:+3/-8
 A:AB$ DealDamage | ActivationZone$ Command | Cost$ Sac<1/Creature> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 AI:RemoveDeck:All
-SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Takara.full.jpg
 Oracle:Hand +3, life -8\nSacrifice a creature: Takara deals 1 damage to any target.

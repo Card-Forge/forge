@@ -7,5 +7,4 @@ SVar:X:Count$xPaid
 A:AB$ PumpAll | Cost$ RW | ValidCards$ Creature.Red+YouCtrl,Creature.White+YouCtrl | KW$ First Strike | SpellDescription$ Red creatures and white creatures you control gain first strike until end of turn.
 SVar:NeedsToPlayVar:Z GE3
 SVar:Z:Count$Valid Card.canProduceMana+YouCtrl+inZoneBattlefield+untapped
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rise_of_the_hobgoblins.jpg
 Oracle:When Rise of the Hobgoblins enters the battlefield, you may pay {X}. If you do, create X 1/1 red and white Goblin Soldier creature tokens.\n{R/W}: Red creatures and white creatures you control gain first strike until end of turn.

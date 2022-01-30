@@ -6,5 +6,4 @@ T:Mode$ DamageDoneOnce | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZ
 SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spitemare.jpg
 Oracle:Whenever Spitemare is dealt damage, it deals that much damage to any target.

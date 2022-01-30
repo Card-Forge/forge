@@ -7,5 +7,4 @@ SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTa
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/protective_sphere.jpg
 Oracle:{1}, Pay 1 life: Prevent all damage that would be dealt to you this turn by a source of your choice that shares a color with the mana spent on this activation cost. (Colorless mana prevents no damage.)

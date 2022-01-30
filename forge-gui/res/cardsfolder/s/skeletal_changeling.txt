@@ -4,5 +4,4 @@ Types:Creature Shapeshifter
 PT:1/1
 K:Changeling
 A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skeletal_changeling.jpg
 Oracle:Changeling (This card is every creature type.)\n{1}{B}: Regenerate Skeletal Changeling.

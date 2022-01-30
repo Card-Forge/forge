@@ -5,5 +5,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ W W | ValidTgts$ Creature | AILogic$ Pump
 A:AB$ Pump | Cost$ W | Defined$ Enchanted | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Enchanted creature gets +1/+1 until end of turn.
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blessing.jpg
 Oracle:Enchant creature\n{W}: Enchanted creature gets +1/+1 until end of turn.

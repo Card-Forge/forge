@@ -9,5 +9,4 @@ SVar:DBCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | SpellDescrip
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_surveyor.jpg
 Oracle:Flying\nWhen Aven Surveyor enters the battlefield, choose one —\n• Put a +1/+1 counter on Aven Surveyor.\n• Return target creature to its owner's hand.

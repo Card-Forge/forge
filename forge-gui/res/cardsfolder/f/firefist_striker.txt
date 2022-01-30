@@ -5,5 +5,4 @@ PT:2/1
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | CheckSVar$ BattalionTest | NoResolvingCheck$ True | SVarCompare$ GE2 | TriggerDescription$ Battalion — Whenever CARDNAME and at least two other creatures attack, target creature can't block this turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
 SVar:BattalionTest:Count$Valid Creature.attacking+Other
-SVar:Picture:http://www.wizards.com/global/images/magic/general/firefist_striker.jpg
 Oracle:Battalion — Whenever Firefist Striker and at least two other creatures attack, target creature can't block this turn.

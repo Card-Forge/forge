@@ -7,5 +7,4 @@ SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X
 SVar:X:Count$Valid Vampire.YouCtrl
 DeckHints:Type$Vampire
-SVar:Picture:http://www.wizards.com/global/images/magic/general/champion_of_dusk.jpg
 Oracle:When Champion of Dusk enters the battlefield, you draw X cards and you lose X life, where X is the number of Vampires you control.

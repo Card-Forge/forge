@@ -5,5 +5,4 @@ PT:5/5
 T:Mode$ DamageDoneOnce | Execute$ TrigCopyPermanent | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, create a token that's a copy of Polyraptor.
 SVar:TrigCopyPermanent:DB$ CopyPermanent | Defined$ Self | NumCopies$ 1
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/polyraptor.jpg
 Oracle:Enrage — Whenever Polyraptor is dealt damage, create a token that's a copy of Polyraptor.

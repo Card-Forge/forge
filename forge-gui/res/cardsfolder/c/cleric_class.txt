@@ -15,5 +15,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Remembered$CardToughness
 SVar:PlayMain1:True
 DeckNeeds:Ability$LifeGain
-DeckHas:Ability$Counters & Ability$Graveyard
+DeckHas:Ability$Counters|Graveyard
 Oracle:(Gain the next level as a sorcery to add its ability.)\nIf you would gain life, you gain that much life plus 1 instead.\n{3}{W}: Level 2\nWhenever you gain life, put a +1/+1 counter on target creature you control.\n{4}{W}: Level 3\nWhen this Class becomes level 3, return target creature card from your graveyard to the battlefield. You gain life equal to its toughness.

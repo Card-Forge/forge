@@ -6,5 +6,4 @@ K:etbCounter:P1P1:4
 A:AB$ PutCounter | Cost$ 2 G G | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ Put X +1/+1 counters on CARDNAME, where X is its power.
 SVar:X:Count$CardPower
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/heroes_bane.jpg
 Oracle:Heroes' Bane enters the battlefield with four +1/+1 counters on it.\n{2}{G}{G}: Put X +1/+1 counters on Heroes' Bane, where X is its power.

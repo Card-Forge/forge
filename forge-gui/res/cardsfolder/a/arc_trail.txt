@@ -4,5 +4,4 @@ Types:Sorcery
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target (2 damage) | NumDmg$ 2 | DamageMap$ True | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 2 damage to any target and 1 damage to another target.
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target (1 damage) | TargetUnique$ True | NumDmg$ 1 | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
-SVar:Picture:http://www.wizards.com/global/images/magic/general/arc_trail.jpg
 Oracle:Arc Trail deals 2 damage to any target and 1 damage to another target.

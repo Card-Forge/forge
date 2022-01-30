@@ -11,5 +11,4 @@ A:AB$ DealDamage | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target cr
 A:AB$ Destroy | Cost$ 2 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 A:AB$ GainLife | Cost$ 2 W | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 DeckHints:Type$Dinosaur
-SVar:Picture:http://www.wizards.com/global/images/magic/general/zacama_primal_calamity.jpg
 Oracle:Vigilance, reach, trample\nWhen Zacama, Primal Calamity enters the battlefield, if you cast it, untap all lands you control.\n{2}{R}: Zacama deals 3 damage to target creature.\n{2}{G}: Destroy target artifact or enchantment.\n{2}{W}: You gain 3 life.

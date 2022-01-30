@@ -2,5 +2,4 @@ Name:Flesh to Dust
 ManaCost:3 B B
 Types:Instant
 A:SP$ Destroy | Cost$ 3 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NoRegen$ True | SpellDescription$ Destroy target creature. It can't be regenerated.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flesh_to_dust.jpg
 Oracle:Destroy target creature. It can't be regenerated.

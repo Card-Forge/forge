@@ -3,5 +3,4 @@ ManaCost:2 B
 Types:Enchantment
 A:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SpellDescription$ Destroy target nonblack creature. It can't be regenerated.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/seal_of_doom.jpg
 Oracle:Sacrifice Seal of Doom: Destroy target nonblack creature. It can't be regenerated.

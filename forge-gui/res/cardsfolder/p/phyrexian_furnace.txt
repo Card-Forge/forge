@@ -6,5 +6,4 @@ A:AB$ ChangeZone | Cost$ 1 Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Ex
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 AI:RemoveDeck:Random
 SVar:NeedsOrderedGraveyard:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_furnace.jpg
 Oracle:{T}: Exile the bottom card of target player's graveyard.\n{1}, Sacrifice Phyrexian Furnace: Exile target card from a graveyard. Draw a card.

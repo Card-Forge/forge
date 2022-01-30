@@ -6,5 +6,4 @@ SVar:DBDamage:DB$ DamageAll | NumDmg$ X | ValidCards$ Creature.OppCtrl | ValidDe
 SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
-SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_vision.jpg
 Oracle:Return target instant or sorcery card from your graveyard to your hand. Volcanic Vision deals damage equal to that card's mana value to each creature your opponents control. Exile Volcanic Vision.

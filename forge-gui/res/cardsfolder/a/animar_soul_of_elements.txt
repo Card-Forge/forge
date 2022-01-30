@@ -9,5 +9,4 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | Counter
 S:Mode$ ReduceCost | ValidCard$ Creature | Type$ Spell | Activator$ You | Amount$ X | Description$ Creature spells you cast cost 1 less to cast for each +1/+1 counter on CARDNAME.
 SVar:X:Count$CardCounters.P1P1
 SVar:BuffedBy:Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/animar_soul_of_elements.jpg
 Oracle:Protection from white and from black\nWhenever you cast a creature spell, put a +1/+1 counter on Animar, Soul of Elements.\nCreature spells you cast cost {1} less to cast for each +1/+1 counter on Animar.

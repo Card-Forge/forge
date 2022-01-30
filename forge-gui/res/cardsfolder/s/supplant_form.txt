@@ -5,5 +5,4 @@ A:SP$ ChangeZone | Cost$ 4 U U | ValidTgts$ Creature | TgtPrompt$ Select target 
 SVar:DBCopy:DB$ CopyPermanent | Defined$ DirectRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 # use DirectRemembered to copy the LKI
-SVar:Picture:http://www.wizards.com/global/images/magic/general/supplant_form.jpg
 Oracle:Return target creature to its owner's hand. You create a token that's a copy of that creature.

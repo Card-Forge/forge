@@ -2,5 +2,4 @@ Name:Natural Obsolescence
 ManaCost:1 G
 Types:Instant
 A:SP$ ChangeZone | Cost$ 1 G | ValidTgts$ Artifact | IsCurse$ True | TgtPrompt$ Select target artifact | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target artifact on the bottom of its owner's library.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/natural_obsolescence.jpg
 Oracle:Put target artifact on the bottom of its owner's library.

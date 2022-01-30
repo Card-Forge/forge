@@ -7,5 +7,4 @@ A:AB$ GenericChoice | Cost$ 2 | ValidTgts$ Creature.Artifact | TgtPrompt$ Select
 SVar:DBFlying:DB$ Pump | Defined$ Targeted | KW$ Flying | SpellDescription$ Target artifact creature gains flying until end of turn.
 SVar:DBTrample:DB$ Pump | Defined$ Targeted | KW$ Trample | SpellDescription$ Target artifact creature gains trample until end of turn.
 SVar:DBHaste:DB$ Pump | Defined$ Targeted | KW$ Haste | SpellDescription$ Target artifact creature gains haste until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/golem_artisan.jpg
 Oracle:{2}: Target artifact creature gets +1/+1 until end of turn.\n{2}: Target artifact creature gains your choice of flying, trample, or haste until end of turn.

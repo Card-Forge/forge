@@ -4,5 +4,4 @@ Types:Creature Human Monk
 PT:2/4
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a noncreature spell, you gain 2 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/student_of_ojutai.jpg
 Oracle:Whenever you cast a noncreature spell, you gain 2 life.

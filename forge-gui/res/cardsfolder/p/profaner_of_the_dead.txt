@@ -7,5 +7,4 @@ T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Card.Self | TriggerZones$
 SVar:TrigChangeZoneAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Hand | ChangeType$ Creature.toughnessLTX+OppCtrl | AbilityCount$ X
 SVar:X:TriggeredExploited$CardToughness
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/profaner_of_the_dead.jpg
 Oracle:Exploit (When this creature enters the battlefield, you may sacrifice a creature.)\nWhen Profaner of the Dead exploits a creature, return to their owners' hands all creatures your opponents control with toughness less than the exploited creature's toughness.

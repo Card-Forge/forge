@@ -2,5 +2,4 @@ Name:Scarwood Goblins
 ManaCost:R G
 Types:Creature Goblin
 PT:2/2
-SVar:Picture:http://resources.wizards.com/magic/cards/dk/en-us/card1822.jpg
 Oracle:

@@ -6,5 +6,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AITgts$ Creature.toughnessGE3 | AILogic$ Pump
 A:AB$ Pump | Cost$ T | Defined$ Enchanted | NumAtt$ +2 | NumDef$ -2 | SpellDescription$ Enchanted creature gets +2/-2 until end of turn.
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_embrace.jpg
 Oracle:Enchant creature\n{T}: Enchanted creature gets +2/-2 until end of turn.

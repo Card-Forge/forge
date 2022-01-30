@@ -5,5 +5,4 @@ PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 4/4 white Angel creature token with flying.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_4_4_angel_flying | TokenOwner$ You | LegacyImage$ w 4 4 angel flying gtc
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/urbis_protector.jpg
 Oracle:When Urbis Protector enters the battlefield, create a 4/4 white Angel creature token with flying.

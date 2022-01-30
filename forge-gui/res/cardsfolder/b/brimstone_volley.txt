@@ -3,5 +3,4 @@ ManaCost:2 R
 Types:Instant
 A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SpellDescription$ CARDNAME deals 3 damage to any target. Morbid — CARDNAME deals 5 damage instead if a creature died this turn.
 SVar:X:Count$Morbid.5.3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brimstone_volley.jpg
 Oracle:Brimstone Volley deals 3 damage to any target.\nMorbid — Brimstone Volley deals 5 damage instead if a creature died this turn.

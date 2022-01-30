@@ -2,5 +2,4 @@ Name:Obsianus Golem
 ManaCost:6
 Types:Artifact Creature Golem
 PT:4/6
-SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card15401.jpg
 Oracle:

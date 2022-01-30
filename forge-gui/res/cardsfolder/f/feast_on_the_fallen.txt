@@ -4,5 +4,4 @@ Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | CheckSVar$ X | SVarCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of each upkeep, if an opponent lost life last turn, put a +1/+1 counter on target creature you control.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
 SVar:X:PlayerCountOpponents$LifeLostLastTurn
-SVar:Picture:http://www.wizards.com/global/images/magic/general/feast_on_the_fallen.jpg
 Oracle:At the beginning of each upkeep, if an opponent lost life last turn, put a +1/+1 counter on target creature you control.

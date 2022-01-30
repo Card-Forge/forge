@@ -4,5 +4,4 @@ Types:Legendary Creature Human Shaman
 PT:2/2
 K:Haste
 A:AB$ Token | Cost$ R T | TokenAmount$ 1 | TokenScript$ r_3_1_elemental_haste | TokenOwner$ You | LegacyImage$ r 3 1 elemental haste cfx | SpellDescription$ Create a 3/1 red Elemental creature token with haste.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rakka_mar.jpg
 Oracle:Haste\n{R}, {T}: Create a 3/1 red Elemental creature token with haste.

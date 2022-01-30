@@ -4,5 +4,4 @@ Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
 K:Cycling:B
-SVar:Picture:http://www.wizards.com/global/images/magic/general/barren_moor.jpg
 Oracle:Barren Moor enters the battlefield tapped.\n{T}: Add {B}.\nCycling {B} ({B}, Discard this card: Draw a card.)

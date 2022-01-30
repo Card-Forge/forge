@@ -5,5 +5,4 @@ PT:6/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME attacks or blocks, sacrifice a land.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigSac | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, sacrifice a land.
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Land
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lesser_gargadon.jpg
 Oracle:Whenever Lesser Gargadon attacks or blocks, sacrifice a land.

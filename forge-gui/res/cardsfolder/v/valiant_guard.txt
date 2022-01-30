@@ -2,5 +2,4 @@ Name:Valiant Guard
 ManaCost:W
 Types:Creature Human Soldier
 PT:0/3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/valiant_guard.jpg
 Oracle:

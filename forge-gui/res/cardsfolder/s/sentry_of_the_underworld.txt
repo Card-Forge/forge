@@ -5,5 +5,4 @@ PT:3/3
 K:Flying
 K:Vigilance
 A:AB$ Regenerate | Cost$ W B PayLife<3> | SpellDescription$ Regenerate CARDNAME.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sentry_of_the_underworld.jpg
 Oracle:Flying, vigilance\n{W}{B}, Pay 3 life: Regenerate Sentry of the Underworld.

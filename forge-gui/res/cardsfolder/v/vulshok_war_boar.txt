@@ -5,5 +5,4 @@ PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you sacrifice an artifact.
 SVar:TrigSacUnless:DB$ Sacrifice | Defined$ Self | UnlessCost$ Sac<1/Artifact> | UnlessPayer$ You
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vulshok_war_boar.jpg
 Oracle:When Vulshok War Boar enters the battlefield, sacrifice it unless you sacrifice an artifact.

@@ -4,5 +4,4 @@ Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 K:Cycling:G
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_thicket.jpg
 Oracle:Tranquil Thicket enters the battlefield tapped.\n{T}: Add {G}.\nCycling {G} ({G}, Discard this card: Draw a card.)

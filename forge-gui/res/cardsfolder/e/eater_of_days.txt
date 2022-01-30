@@ -6,5 +6,4 @@ K:Flying
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ EatSomeDays | TriggerDescription$ When CARDNAME enters the battlefield, you skip your next two turns.
 SVar:EatSomeDays:DB$ SkipTurn | Defined$ You | NumTurns$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eater_of_days.jpg
 Oracle:Flying, trample\nWhen Eater of Days enters the battlefield, you skip your next two turns.

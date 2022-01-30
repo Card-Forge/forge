@@ -6,5 +6,4 @@ T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execut
 SVar:TrigDraw:DB$ Draw | NumCards$ 1
 SVar:YouCastThisTurn:Count$ThisTurnCast_Card.YouCtrl
 SVar:BuffedBy:Card
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jori_en_ruin_diver.jpg
 Oracle:Whenever you cast your second spell each turn, draw a card.

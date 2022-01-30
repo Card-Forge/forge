@@ -4,5 +4,4 @@ Types:Legendary Creature Human Warrior
 PT:4/4
 S:Mode$ Continuous | Affected$ Creature.withIslandwalk | AddHiddenKeyword$ May be blocked as though it doesn't have Islandwalk. | Description$ Creatures with islandwalk can be blocked as though they didn't have islandwalk.
 K:First Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gosta_dirk.jpg
 Oracle:First strike\nCreatures with islandwalk can be blocked as though they didn't have islandwalk.

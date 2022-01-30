@@ -3,5 +3,4 @@ ManaCost:1 B B
 Types:Creature Zombie
 PT:2/3
 K:Snow swampwalk
-SVar:Picture:http://www.wizards.com/global/images/magic/general/legions_of_lim_dul.jpg
 Oracle:Snow swampwalk (This creature can't be blocked as long as defending player controls a snow Swamp.)

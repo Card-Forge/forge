@@ -4,5 +4,4 @@ Types:Creature Human Wizard
 PT:2/2
 A:AB$ DealDamage | Cost$ T Discard<1/Random> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mage_il_vec.jpg
 Oracle:{T}, Discard a card at random: Mage il-Vec deals 1 damage to any target.

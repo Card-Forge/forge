@@ -5,5 +5,4 @@ PT:1/1
 K:Flying
 A:AB$ Mana | Cost$ G T | Produced$ R | SpellDescription$ Add {R}.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_sprites.jpg
 Oracle:Flying\n{G}, {T}: Add {R}.

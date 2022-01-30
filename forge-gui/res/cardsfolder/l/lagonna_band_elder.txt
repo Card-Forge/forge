@@ -4,5 +4,4 @@ Types:Creature Centaur Advisor
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Enchantment.YouCtrl | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, if you control an enchantment, you gain 3 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lagonna_band_elder.jpg
 Oracle:When Lagonna-Band Elder enters the battlefield, if you control an enchantment, you gain 3 life.

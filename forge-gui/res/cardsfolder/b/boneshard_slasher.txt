@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddTr
 SVar:SpellTarget:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ SlasherSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
 SVar:SlasherSac:DB$ Sacrifice | Defined$ Self
 SVar:SlasherTarget:Targeting:Dies
-SVar:Picture:http://www.wizards.com/global/images/magic/general/boneshard_slasher.jpg
 Oracle:Flying\nThreshold — As long as seven or more cards are in your graveyard, Boneshard Slasher gets +2/+2 and has "When Boneshard Slasher becomes the target of a spell or ability, sacrifice it."

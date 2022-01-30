@@ -3,5 +3,4 @@ ManaCost:3
 Types:Artifact Creature Soldier
 PT:1/4
 K:Vigilance
-SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card46026.jpg
 Oracle:Vigilance

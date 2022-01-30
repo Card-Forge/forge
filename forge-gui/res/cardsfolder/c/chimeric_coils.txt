@@ -4,5 +4,4 @@ Types:Artifact
 A:AB$ Animate | Cost$ X 1 | Defined$ Self | Power$ X | Toughness$ X | Types$ Creature,Artifact,Construct | AtEOT$ Sacrifice | Duration$ Permanent | SpellDescription$ CARDNAME becomes an X/X Construct artifact creature. Sacrifice it at the beginning of the next end step.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chimeric_coils.jpg
 Oracle:{X}{1}: Chimeric Coils becomes an X/X Construct artifact creature. Sacrifice it at the beginning of the next end step.

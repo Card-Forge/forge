@@ -9,5 +9,4 @@ SVar:X:Count$InYourHand
 SVar:NeedsToPlayVar:Y LE6
 SVar:Y:Count$CardsInYourHand
 SVar:BuffedBy:Card
-SVar:Picture:http://www.wizards.com/global/images/magic/general/geralfs_masterpiece.jpg
 Oracle:Flying\nGeralf's Masterpiece gets -1/-1 for each card in your hand.\n{3}{U}, Discard three cards: Return Geralf's Masterpiece from your graveyard to the battlefield tapped.

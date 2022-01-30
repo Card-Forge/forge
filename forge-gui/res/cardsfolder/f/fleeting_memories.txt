@@ -6,5 +6,5 @@ SVar:TrigInvestigate:DB$ Investigate
 T:Mode$ Sacrificed | ValidCard$ Clue.YouCtrl | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a Clue, target player mills three cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Select target player
 DeckHints:Ability$Investigate
-DeckHas:Ability$Investigate & Ability$Token
+DeckHas:Ability$Investigate|Token
 Oracle:When Fleeting Memories enters the battlefield, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")\nWhenever you sacrifice a Clue, target player mills three cards.

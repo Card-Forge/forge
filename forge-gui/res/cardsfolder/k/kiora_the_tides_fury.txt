@@ -8,6 +8,6 @@ SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Prevent all damage that would be 
 A:AB$ Sacrifice | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Optional$ True | SacValid$ Kraken | Amount$ 1 | RememberSacrificed$ True | SubAbility$ DBToken | StackDescription$ SpellDescription | SpellDescription$ You may sacrifice a Kraken. If you do, create an 8/8 blue Kraken creature token.
 SVar:DBToken:DB$ Token | TokenScript$ u_8_8_kraken | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Token & Ability$Sacrifice
+DeckHas:Ability$Token|Sacrifice
 DeckHints:Type$Kraken
 Oracle:[+1]: Conjure a Kraken Hatchling card into your hand.\n[+1]: Untap target creature or land. Prevent all damage that would be dealt to and dealt by that permanent until your next turn.\n[-3]: You may sacrifice a Kraken. If you do, create an 8/8 blue Kraken creature token.

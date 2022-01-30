@@ -4,5 +4,4 @@ Types:Enchantment
 S:Mode$ Continuous | GlobalRule$ No more than one creature can attack each combat. | Description$ No more than one creature can attack each combat.
 S:Mode$ Continuous | GlobalRule$ No more than one creature can block each combat. | Description$ No more than one creature can block each combat.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dueling_grounds.jpg
 Oracle:No more than one creature can attack each combat.\nNo more than one creature can block each combat.

@@ -4,5 +4,4 @@ Types:Instant
 K:Split second
 A:SP$ AnimateAll | Cost$ 1 B B | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | Power$ 0 | Toughness$ 2 | RemoveAllAbilities$ True | SpellDescription$ Until end of turn, creatures target player controls lose all abilities and have base power and toughness 0/2.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sudden_spoiling.jpg
 Oracle:Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nUntil end of turn, creatures target player controls lose all abilities and have base power and toughness 0/2.

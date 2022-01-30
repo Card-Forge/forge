@@ -7,5 +7,4 @@ K:Flying
 K:Trample
 T:Mode$ Drawn | ValidCard$ Card.YouOwn | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you draw a card, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/horizon_chimera.jpg
 Oracle:Flash\nFlying, trample\nWhenever you draw a card, you gain 1 life.

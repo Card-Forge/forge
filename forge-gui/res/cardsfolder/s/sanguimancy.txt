@@ -5,5 +5,4 @@ A:SP$ Draw | Cost$ 4 B | NumCards$ X | SubAbility$ DBLoseLife | SpellDescription
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X
 SVar:X:Count$Devotion.Black
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sanguimancy.jpg
 Oracle:You draw X cards and you lose X life, where X is your devotion to black. (Each {B} in the mana costs of permanents you control counts toward your devotion to black.)

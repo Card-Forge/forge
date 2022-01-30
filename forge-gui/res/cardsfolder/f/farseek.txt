@@ -4,5 +4,4 @@ Types:Sorcery
 A:SP$ ChangeZone | Cost$ 1 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Plains,Island,Swamp,Mountain | Tapped$ True | ChangeNum$ 1 | SpellDescription$ Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle.
 AI:RemoveDeck:Random
 DeckNeeds:Color$White|Blue|Black|Red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/farseek.jpg
 Oracle:Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle.

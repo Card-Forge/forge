@@ -2,5 +2,4 @@ Name:Commune with Nature
 ManaCost:G
 Types:Sorcery
 A:SP$ Dig | Cost$ G | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature | SpellDescription$ Look at the top five cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/commune_with_nature.jpg
 Oracle:Look at the top five cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in any order.

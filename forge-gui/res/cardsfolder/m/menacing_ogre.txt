@@ -10,5 +10,4 @@ SVar:DBLoseLife:DB$ LoseLife | Defined$ Remembered | LifeAmount$ X
 SVar:X:Count$ChosenNumber
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | ConditionPlayerDefined$ Remembered | ConditionPlayerContains$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/menacing_ogre.jpg
 Oracle:Trample, haste\nWhen Menacing Ogre enters the battlefield, each player secretly chooses a number. Then those numbers are revealed. Each player with the highest number loses that much life. If you are one of those players, put two +1/+1 counters on Menacing Ogre.

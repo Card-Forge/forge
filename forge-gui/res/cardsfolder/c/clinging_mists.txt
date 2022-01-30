@@ -5,5 +5,4 @@ A:SP$ Fog | Cost$ 2 G | SubAbility$ DBTapAll | SpellDescription$ Prevent all com
 SVar:DBTapAll:DB$ TapAll | Cost$ 1 G G | ValidCards$ Creature.attacking | SubAbility$ DBPumpAll | ConditionCheckSVar$ FatefulHour | ConditionSVarCompare$ LE5
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.attacking | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | ConditionCheckSVar$ FatefulHour | ConditionSVarCompare$ LE5
 SVar:FatefulHour:Count$YourLifeTotal
-SVar:Picture:http://www.wizards.com/global/images/magic/general/clinging_mists.jpg
 Oracle:Prevent all combat damage that would be dealt this turn.\nFateful hour — If you have 5 or less life, tap all attacking creatures. Those creatures don't untap during their controller's next untap step.

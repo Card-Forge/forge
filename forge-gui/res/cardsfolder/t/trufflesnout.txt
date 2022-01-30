@@ -6,5 +6,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigCharm:DB$ Charm | Choices$ DBCounter,DBGainLife
 SVar:DBCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
-DeckHas:Ability$Counters & Ability$LifeGain
+DeckHas:Ability$Counters|LifeGain
 Oracle:When Trufflesnout enters the battlefield, choose one —\n• Put a +1/+1 counter on Trufflesnout.\n• You gain 4 life.

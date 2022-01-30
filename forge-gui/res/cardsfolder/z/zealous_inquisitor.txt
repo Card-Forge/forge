@@ -6,5 +6,4 @@ A:AB$ Effect | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creatu
 SVar:Zealous:Event$ DamageDone | ValidTarget$ Creature.EffectSource | ReplaceWith$ ZealousDmg | DamageTarget$ Remembered | Description$ The next 1 damage that would be dealt to EFFECTSOURCE this turn is dealt to target creature instead.
 SVar:ZealousDmg:DB$ ReplaceSplitDamage | DamageTarget$ Remembered
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/zealous_inquisitor.jpg
 Oracle:{1}{W}: The next 1 damage that would be dealt to Zealous Inquisitor this turn is dealt to target creature instead.

@@ -3,5 +3,4 @@ ManaCost:X G
 Types:Sorcery
 A:SP$ GainLife | Cost$ X G | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ X | SpellDescription$ Target player gains X life.
 SVar:X:Count$xPaid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stream_of_life.jpg
 Oracle:Target player gains X life.

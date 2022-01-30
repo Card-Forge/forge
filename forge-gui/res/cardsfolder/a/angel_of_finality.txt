@@ -5,5 +5,4 @@ PT:3/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile all cards from target player's graveyard.
 SVar:TrigExile:DB$ ChangeZoneAll | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | IsCurse$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/angel_of_finality.jpg
 Oracle:Flying\nWhen Angel of Finality enters the battlefield, exile all cards from target player's graveyard.

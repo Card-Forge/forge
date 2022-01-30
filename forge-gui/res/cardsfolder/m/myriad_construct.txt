@@ -13,5 +13,5 @@ SVar:TrigSac:DB$ Destroy | Defined$ Self | Sacrifice$ True | RememberLKI$ True |
 SVar:DBToken:DB$ Token | TokenAmount$ Y | TokenScript$ c_1_1_a_construct | TokenOwner$ You | SubAbility$ DBCleanup
 SVar:Y:RememberedLKI$CardPower
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Token & Ability$Counters
+DeckHas:Ability$Token|Counters
 Oracle:Kicker {3}\nIf Myriad Construct was kicked, it enters the battlefield with a +1/+1 counter on it for each nonbasic land your opponents control.\nWhen Myriad Construct becomes the target of a spell, sacrifice it and create a number of 1/1 colorless Construct artifact creature tokens equal to its power.

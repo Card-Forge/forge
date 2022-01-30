@@ -3,5 +3,4 @@ ManaCost:2 G
 Types:Creature Spider
 PT:1/5
 K:Reach
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sporecap_spider.jpg
 Oracle:Reach

@@ -2,5 +2,4 @@ Name:Merfolk of the Pearl Trident
 ManaCost:U
 Types:Creature Merfolk
 PT:1/1
-SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card10810.jpg
 Oracle:

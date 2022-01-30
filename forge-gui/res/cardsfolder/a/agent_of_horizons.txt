@@ -3,5 +3,4 @@ ManaCost:2 G
 Types:Creature Human Rogue
 PT:3/2
 A:AB$ Pump | Cost$ 2 U | Defined$ Self | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/agent_of_horizons.jpg
 Oracle:{2}{U}: Agent of Horizons can't be blocked this turn.

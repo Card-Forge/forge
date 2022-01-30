@@ -4,5 +4,4 @@ Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigDmg | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, it deals 3 damage to up to one target creature. Create a 3/3 black Horror creature token.
 SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ 3 | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_3_3_horror | TokenOwner$ You | LegacyImage$ b 3 3 horror e01
-SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/There Is No Refuge.full.jpg
 Oracle:When you set this scheme in motion, it deals 3 damage to up to one target creature. Create a 3/3 black Horror creature token.

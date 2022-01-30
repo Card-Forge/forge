@@ -2,5 +2,4 @@ Name:River Kaijin
 ManaCost:2 U
 Types:Creature Spirit
 PT:1/4
-SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card78586.jpg
 Oracle:

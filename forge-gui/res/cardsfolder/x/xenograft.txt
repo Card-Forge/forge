@@ -6,5 +6,4 @@ SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddType$ ChosenType | Description$ Each creature you control is the chosen type in addition to its other types.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/xenograft.jpg
 Oracle:As Xenograft enters the battlefield, choose a creature type.\nEach creature you control is the chosen type in addition to its other types.

@@ -15,5 +15,4 @@ SVar:RemoveEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination
 # Remove Effect when the card is played
 SVar:TrigCast:Mode$ SpellCast | ValidCard$ Card.IsRemembered | Static$ True | TriggerZones$ Command | Execute$ RemoveEffect
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_theft.jpg
 Oracle:Target player reveals their hand. You choose an instant or sorcery card from it and exile that card. You may cast that card for as long as it remains exiled. At the beginning of the next end step, if you haven't cast the card, return it to its owner's hand.

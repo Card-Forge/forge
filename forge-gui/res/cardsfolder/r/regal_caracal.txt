@@ -8,5 +8,4 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_cat_lifelink | To
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Cat
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/regal_caracal.jpg
 Oracle:Other Cats you control get +1/+1 and have lifelink.\nWhen Regal Caracal enters the battlefield, create two 1/1 white Cat creature tokens with lifelink.

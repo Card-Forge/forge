@@ -15,5 +15,4 @@ SVar:DBAurora:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined
 SVar:HandSize:Count$ValidHand Land.RememberedPlayerCtrl
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ ExileAurora
 SVar:ExileAurora:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | Defined$ Self
-SVar:Picture:http://www.wizards.com/global/images/magic/general/the_great_aurora.jpg
 Oracle:Each player shuffles all cards from their hand and all permanents they own into their library, then draws that many cards. Each player may put any number of land cards from their hand onto the battlefield. Exile The Great Aurora.

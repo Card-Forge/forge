@@ -8,5 +8,4 @@ SVar:TrigSac:DB$ Sacrifice | SacValid$ Creature,Planeswalker | Defined$ Triggere
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 5 | Defined$ TriggeredPlayer | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cruel_reality.jpg
 Oracle:Enchant player\nAt the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, they lose 5 life.

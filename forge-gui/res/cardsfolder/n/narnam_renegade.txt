@@ -4,5 +4,4 @@ Types:Creature Elf Warrior
 PT:1/2
 K:Deathtouch
 K:etbCounter:P1P1:1:Revolt$ True:Revolt — CARDNAME enters the battlefield with a +1/+1 counter on it if a permanent you controlled left the battlefield this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/narnam_renegade.jpg
 Oracle:Deathtouch\nRevolt — Narnam Renegade enters the battlefield with a +1/+1 counter on it if a permanent you controlled left the battlefield this turn.

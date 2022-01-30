@@ -6,5 +6,4 @@ A:SP$ Charm | Cost$ 5 G | Choices$ DBToken,DBToken2 | CharmNum$ 1
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_5_5_beast | TokenOwner$ You | LegacyImage$ g 5 5 beast mrd | SpellDescription$ Create a 5/5 green Beast creature token.
 SVar:DBToken2:DB$ Token | TokenAmount$ 5 | TokenScript$ g_1_1_insect | TokenOwner$ You | LegacyImage$ g 1 1 insect mrd | SpellDescription$ Create five 1/1 green Insect creature tokens.
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/one_dozen_eyes.jpg
 Oracle:Choose one —\n• Create a 5/5 green Beast creature token.\n• Create five 1/1 green Insect creature tokens.\nEntwine {G}{G}{G} (Choose both if you pay the entwine cost.)

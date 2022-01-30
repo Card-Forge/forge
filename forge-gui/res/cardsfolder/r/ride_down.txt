@@ -5,5 +5,4 @@ A:SP$ Pump | Cost$ R W | ValidTgts$ Creature.blocking | RememberObjects$ Targete
 SVar:DBDestroy:DB$ Destroy | Defined$ Remembered | SubAbility$ DBPump | StackDescription$ None
 SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.blockedByRemembered | KW$ Trample | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ride_down.jpg
 Oracle:Destroy target blocking creature. Creatures that were blocked by that creature this combat gain trample until end of turn.

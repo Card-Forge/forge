@@ -2,5 +2,4 @@ Name:Revoke Existence
 ManaCost:1 W
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact or enchantment.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/revoke_existence.jpg
 Oracle:Exile target artifact or enchantment.

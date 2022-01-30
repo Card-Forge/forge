@@ -5,5 +5,4 @@ A:SP$ ChangeZone | Cost$ U | Origin$ Library | Destination$ Library | LibraryPos
 #TODO: The AI will currently search for the most expensive valid card in the library. This can be used to the AI's advantage with
 #careful deck design (which is why this card only works in properly designed AI decks). Consider improving tutoring logic with priorities.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mystical_tutor.jpg
 Oracle:Search your library for an instant or sorcery card, reveal it, then shuffle and put that card on top.

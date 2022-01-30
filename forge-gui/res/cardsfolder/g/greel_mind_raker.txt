@@ -5,5 +5,4 @@ PT:3/3
 A:AB$ Discard | Cost$ X B T Discard<2/Card> | ValidTgts$ Player | NumCards$ X | Mode$ Random | SpellDescription$ Target player discards X cards at random.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/greel_mind_raker.jpg
 Oracle:{X}{B}, {T}, Discard two cards: Target player discards X cards at random.

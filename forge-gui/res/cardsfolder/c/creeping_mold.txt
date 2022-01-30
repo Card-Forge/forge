@@ -2,5 +2,4 @@ Name:Creeping Mold
 ManaCost:2 G G
 Types:Sorcery
 A:SP$ Destroy | Cost$ 2 G G | ValidTgts$ Artifact,Enchantment,Land | TgtPrompt$ Select target artifact, enchantment or land | SpellDescription$ Destroy target artifact, enchantment or land.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/creeping_mold.jpg
 Oracle:Destroy target artifact, enchantment, or land.

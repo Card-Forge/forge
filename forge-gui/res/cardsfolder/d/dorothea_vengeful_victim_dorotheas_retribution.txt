@@ -10,7 +10,7 @@ SVar:TrigSacrifice:DB$ SacrificeAll | Defined$ Self | Controller$ You
 SVar:SacrificeEndCombat:True
 K:Disturb:1 W U
 AlternateMode:DoubleFaced
-DeckHas:Ability$Sacrifice & Ability$Graveyard
+DeckHas:Ability$Sacrifice|Graveyard|Token
 Oracle:Flying\nWhen Dorothea, Vengeful Victim attacks or blocks, sacrifice it at end of combat.\nDisturb {1}{W}{U} (You may cast this card from your graveyard transformed for its disturb cost.)
 
 ALTERNATE
@@ -27,5 +27,4 @@ SVar:TrigToken:DB$ Token | TokenScript$ w_4_4_spirit_flying | TokenTapped$ True 
 SVar:AE:SVar:HasAttackEffect:TRUE
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
 SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
-DeckHas:Ability$Token & Ability$Sacrifice
 Oracle:Enchant creature\nEnchanted creature has "Whenever this creature attacks, create a 4/4 white Spirit creature token with flying that's tapped and attacking. Sacrifice that token at end of combat."\nIf Dorothea's Retribution would be put into a graveyard from anywhere, exile it instead.

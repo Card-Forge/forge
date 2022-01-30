@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:PaymentCheck:DB$ Pump | UnlessCost$ Mandatory PayEnergy<2> | UnlessPayer$ You | UnlessResolveSubs$ WhenNotPaid | SubAbility$ DBReturnToHand
 SVar:DBReturnToHand:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Self | SubAbility$ GetEnergy
 SVar:GetEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/greenbelt_rampager.jpg
 Oracle:When Greenbelt Rampager enters the battlefield, pay {E}{E} (two energy counters). If you can't, return Greenbelt Rampager to its owner's hand and you get {E}.

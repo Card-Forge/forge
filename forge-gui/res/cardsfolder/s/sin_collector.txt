@@ -4,5 +4,4 @@ Types:Creature Human Cleric
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals their hand. You choose an instant or sorcery card from it and exile that card.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Chooser$ You | TgtPrompt$ Select target opponent | ChangeType$ Instant,Sorcery | ChangeNum$ 1 | IsCurse$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sin_collector.jpg
 Oracle:When Sin Collector enters the battlefield, target opponent reveals their hand. You choose an instant or sorcery card from it and exile that card.

@@ -7,6 +7,5 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ SPORE | Counte
 A:AB$ Token | Cost$ SubCounter<3/SPORE> | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling plc | SpellDescription$ Create a 1/1 green Saproling creature token.
 A:AB$ Draw | Cost$ 1 Sac<1/Saproling> | NumCards$ 1 | SpellDescription$ Draw a card.
 DeckHints:Type$Fungus
-DeckHas:Ability$Counters & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/psychotrope_thallid.jpg
+DeckHas:Ability$Counters|Token
 Oracle:At the beginning of your upkeep, put a spore counter on Psychotrope Thallid.\nRemove three spore counters from Psychotrope Thallid: Create a 1/1 green Saproling creature token.\n{1}, Sacrifice a Saproling: Draw a card.

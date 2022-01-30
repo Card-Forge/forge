@@ -2,5 +2,4 @@ Name:Bastion Enforcer
 ManaCost:2 W
 Types:Creature Dwarf Soldier
 PT:3/2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bastion_enforcer.jpg
 Oracle:

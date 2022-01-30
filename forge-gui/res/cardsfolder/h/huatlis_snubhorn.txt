@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Creature Dinosaur
 PT:2/2
 K:Vigilance
-SVar:Picture:http://www.wizards.com/global/images/magic/general/huatlis_snubhorn.jpg
 Oracle:Vigilance (Attacking doesn't cause this creature to tap.)

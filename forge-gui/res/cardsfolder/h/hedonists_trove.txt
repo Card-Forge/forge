@@ -9,5 +9,4 @@ T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCar
 SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hedonists_trove.jpg
 Oracle:When Hedonist's Trove enters the battlefield, exile all cards from target opponent's graveyard.\nYou may play lands from among cards exiled with Hedonist's Trove.\nYou may cast spells from among cards exiled with Hedonist's Trove. You can't cast more than one spell this way each turn.

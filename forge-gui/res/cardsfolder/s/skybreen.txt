@@ -6,6 +6,5 @@ S:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card.sharesCardTypeWith Ea
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, target player loses life equal to the number of cards in their hand.
 SVar:RolledChaos:DB$ LoseLife | ValidTgts$ Player | LifeAmount$ Y
 SVar:Y:TargetedPlayer$CardsInHand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skybreen.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | MaxRollsPerTurn$ 9
 Oracle:Players play with the top card of their libraries revealed.\nSpells that share a card type with the top card of a library can't be cast.\nWhenever you roll {CHAOS}, target player loses life equal to the number of cards in their hand.

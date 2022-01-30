@@ -2,5 +2,4 @@ Name:Gutter Skulk
 ManaCost:1 B
 Types:Creature Zombie Rat
 PT:2/2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gutter_skulk.jpg
 Oracle:

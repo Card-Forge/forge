@@ -4,5 +4,4 @@ Types:Enchantment
 A:AB$ Tap | Cost$ tapXType<2/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/diversionary_tactics.jpg
 Oracle:Tap two untapped creatures you control: Tap target creature.

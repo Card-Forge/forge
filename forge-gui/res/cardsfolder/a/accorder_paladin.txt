@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Creature Human Knight
 PT:3/1
 K:Battle cry
-SVar:Picture:http://www.wizards.com/global/images/magic/general/accorder_paladin.jpg
 Oracle:Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)

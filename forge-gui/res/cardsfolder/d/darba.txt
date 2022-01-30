@@ -3,5 +3,4 @@ ManaCost:3 G
 Types:Creature Bird Beast
 PT:5/4
 K:UpkeepCost:G G
-SVar:Picture:http://www.wizards.com/global/images/magic/general/darba.jpg
 Oracle:At the beginning of your upkeep, sacrifice Darba unless you pay {G}{G}.

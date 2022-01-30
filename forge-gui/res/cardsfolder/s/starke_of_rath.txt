@@ -5,5 +5,4 @@ PT:2/2
 A:AB$ Destroy | Cost$ T | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | SubAbility$ TrigControl | SpellDescription$ Destroy target artifact or creature.
 SVar:TrigControl:DB$ GainControl | Defined$ Self | NewController$ TargetedController | SpellDescription$ That permanent's controller gains control of CARDNAME. (This effect lasts indefinitely.)
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/starke_of_rath.jpg
 Oracle:{T}: Destroy target artifact or creature. That permanent's controller gains control of Starke of Rath. (This effect lasts indefinitely.)

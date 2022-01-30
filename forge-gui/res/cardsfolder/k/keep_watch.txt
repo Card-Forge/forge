@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ Draw | Cost$ 2 U | NumCards$ X | SpellDescription$ Draw a card for each attacking creature.
 SVar:X:Count$Valid Creature.attacking
 SVar:NeedsToPlay:Creature.attacking
-SVar:Picture:http://www.wizards.com/global/images/magic/general/keep_watch.jpg
 Oracle:Draw a card for each attacking creature.

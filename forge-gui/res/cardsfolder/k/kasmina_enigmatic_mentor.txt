@@ -8,4 +8,4 @@ SVar:DBDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 AI:RemoveDeck:Random
 DeckHas:Ability$Token
-Oracle:Spells your opponents cast that target a creature or planeswalker you control cost {2} more to cast.\n[−2]: Create a 2/2 blue Wizard creature token. Draw a card, then discard a card.
+Oracle:Spells your opponents cast that target a creature or planeswalker you control cost {2} more to cast.\n[-2]: Create a 2/2 blue Wizard creature token. Draw a card, then discard a card.

@@ -8,5 +8,4 @@ T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | Execute$ TrigToken | ValidTa
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling rav
 SVar:X:TriggerCount$DamageAmount
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pollenbright_wings.jpg
 Oracle:Enchant creature\nEnchanted creature has flying.\nWhenever enchanted creature deals combat damage to a player, create that many 1/1 green Saproling creature tokens.

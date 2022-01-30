@@ -6,5 +6,4 @@ SVar:DBDraw:DB$ Draw | ValidTgts$ Player | NumCards$ 2 | SpellDescription$ Targe
 SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
 #TODO: The AI will pretty much always use this to draw cards or to deck the opponent, but not to force the opponent to discard cards. Might need some improvement.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/consult_the_necrosages.jpg
 Oracle:Choose one —\n• Target player draws two cards.\n• Target player discards two cards.

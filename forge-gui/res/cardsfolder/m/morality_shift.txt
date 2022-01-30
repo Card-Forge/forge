@@ -5,5 +5,4 @@ A:SP$ ChangeZoneAll | Cost$ 5 B B | ChangeType$ Card.YouCtrl | Origin$ Library |
 SVar:GraveShift:DB$ ChangeZoneAll | ChangeType$ Card.YouCtrl+IsNotRemembered | Origin$ Graveyard | Destination$ Library | Shuffle$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/morality_shift.jpg
 Oracle:Exchange your graveyard and library. Then shuffle your library.

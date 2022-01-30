@@ -5,5 +5,4 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may put target creature card from your graveyard on top of your library.
 SVar:TrigChange:DB$ ChangeZone | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature | TargetsWithDefinedController$ TriggeredCardController | Origin$ Graveyard | Destination$ Library | SpellDescription$ You may put target creature card from your graveyard on top of your library.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mortuary_mire.jpg
 Oracle:Mortuary Mire enters the battlefield tapped.\nWhen Mortuary Mire enters the battlefield, you may put target creature card from your graveyard on top of your library.\n{T}: Add {B}.

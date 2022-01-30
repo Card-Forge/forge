@@ -2,5 +2,4 @@ Name:Vanquish the Weak
 ManaCost:2 B
 Types:Instant
 A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Creature.powerLE3 | TgtPrompt$ Select target creature with power 3 or less. | SpellDescription$ Destroy target creature with power 3 or less.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vanquish_the_weak.jpg
 Oracle:Destroy target creature with power 3 or less.

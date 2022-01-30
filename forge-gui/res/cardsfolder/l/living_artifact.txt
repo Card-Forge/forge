@@ -8,5 +8,4 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ VITALITY | Cou
 SVar:X:TriggerCount$DamageAmount
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | IsPresent$ Card.Self+counters_GE1_VITALITY | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may remove a vitality counter from CARDNAME. If you do, you gain 1 life.
 SVar:TrigGainLife:AB$ GainLife | Cost$ SubCounter<1/VITALITY> | Defined$ You | LifeAmount$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/living_artifact.jpg
 Oracle:Enchant artifact\nWhenever you're dealt damage, put that many vitality counters on Living Artifact.\nAt the beginning of your upkeep, you may remove a vitality counter from Living Artifact. If you do, you gain 1 life.

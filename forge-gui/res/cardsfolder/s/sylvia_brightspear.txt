@@ -6,5 +6,4 @@ K:Partner:Khorvath Brightflame:Khorvath
 K:Double Strike
 S:Mode$ Continuous | Affected$ Dragon.YourTeamCtrl | AddKeyword$ Double Strike | Description$ Dragons your team controls have double strike.
 DeckHints:Name$Khorvath Brightflame
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvia_brightspear.jpg
 Oracle:Partner with Khorvath Brightflame (When this creature enters the battlefield, target player may put Khorvath into their hand from their library, then shuffle.)\nDouble strike\nDragons your team controls have double strike.

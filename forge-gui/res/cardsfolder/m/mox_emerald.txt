@@ -3,5 +3,4 @@ ManaCost:0
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://resources.wizards.com/magic/cards/2u/en-us/card629.jpg
 Oracle:{T}: Add {G}.

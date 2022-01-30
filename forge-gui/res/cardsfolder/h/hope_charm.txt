@@ -5,5 +5,4 @@ A:SP$ Charm | Cost$ W | Choices$ DBPump,DBGainLife,DBDestroy | CharmNum$ 1
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | SpellDescription$ Target creature gains first strike until end of turn.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player gains 2 life.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Aura | TgtPrompt$ Select target Aura | SpellDescription$ Destroy target Aura.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hope_charm.jpg
 Oracle:Choose one —\n• Target creature gains first strike until end of turn.\n• Target player gains 2 life.\n• Destroy target Aura.

@@ -5,5 +5,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 0 | AddAbility$ Regenerate | Description$ Enchanted creature gets +2/+0 and has "{2}{B}: Regenerate this creature."
 SVar:Regenerate:AB$Regenerate | Cost$ 2 B | SpellDescription$ Regenerate this creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/molting_snakeskin.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+0 and has "{2}{B}: Regenerate this creature."

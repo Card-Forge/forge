@@ -5,5 +5,4 @@ PT:5/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Enchantment.Other+YouCtrl | Execute$ TrigDiscard | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, each opponent discards a card.
 SVar:TrigDiscard:DB$ Discard | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose
 SVar:BuffedBy:Enchantment
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtrender_lamia.jpg
 Oracle:Constellation — Whenever Thoughtrender Lamia or another enchantment enters the battlefield under your control, each opponent discards a card.

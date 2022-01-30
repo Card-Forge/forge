@@ -5,5 +5,4 @@ PT:0/3
 K:Defender
 K:Hexproof
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_caryatid.jpg
 Oracle:Defender, hexproof\n{T}: Add one mana of any color.

@@ -3,5 +3,4 @@ ManaCost:6
 Types:Artifact Creature Spider
 PT:2/6
 K:Reach
-SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card51230.jpg
 Oracle:Reach (This creature can block creatures with flying.)

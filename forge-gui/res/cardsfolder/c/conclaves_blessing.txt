@@ -2,8 +2,7 @@ Name:Conclave's Blessing
 ManaCost:3 W
 Types:Enchantment Aura
 K:Convoke
-A:SP$Attach | Cost$ 3 W | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | Cost$ 3 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.AttachedBy | AddToughness$ X | Description$ Enchanted creature gets +0/+2 for each other creature you control.
 SVar:X:Count$Valid Creature.NotEnchantedBy+YouCtrl/Twice
-SVar:Picture:http://www.wizards.com/global/images/magic/general/conclaves_blessing.jpg
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nEnchant creature\nEnchanted creature gets +0/+2 for each other creature you control.

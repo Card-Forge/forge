@@ -2,5 +2,4 @@ Name:Cyclops of One-Eyed Pass
 ManaCost:2 R R
 Types:Creature Cyclops
 PT:5/2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cyclops_of_one_eyed_pass.jpg
 Oracle:

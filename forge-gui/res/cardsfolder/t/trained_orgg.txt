@@ -2,5 +2,4 @@ Name:Trained Orgg
 ManaCost:6 R
 Types:Creature Orgg
 PT:6/6
-SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card21785.jpg
 Oracle:

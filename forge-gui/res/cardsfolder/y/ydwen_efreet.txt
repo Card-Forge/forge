@@ -6,5 +6,4 @@ T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ FlipCoin | TriggerDescription$ 
 SVar:FlipCoin:DB$ FlipACoin | LoseSubAbility$ DBRemoveFromCombat
 SVar:DBRemoveFromCombat:DB$ RemoveFromCombat | Defined$ Self | UnblockCreaturesBlockedOnlyBy$ Self | SubAbility$ DBCantBlock
 SVar:DBCantBlock:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME can't block.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ydwen_efreet.jpg
 Oracle:Whenever Ydwen Efreet blocks, flip a coin. If you lose the flip, remove Ydwen Efreet from combat and it can't block this turn. Creatures it was blocking that had become blocked by only Ydwen Efreet this combat become unblocked.

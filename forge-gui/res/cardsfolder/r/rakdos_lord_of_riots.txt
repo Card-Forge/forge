@@ -7,5 +7,4 @@ K:Trample
 S:Mode$ CantBeCast | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ EQ0 | EffectZone$ All | Description$ You can't cast this spell unless an opponent lost life this turn.
 S:Mode$ ReduceCost | ValidCard$ Creature | Type$ Spell | Activator$ You | Amount$ X | Description$ Creature spells you cast cost {1} less to cast for each 1 life your opponents have lost this turn.
 SVar:X:Count$LifeOppsLostThisTurn
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_lord_of_riots.jpg
 Oracle:You can't cast this spell unless an opponent lost life this turn.\nFlying, trample\nCreature spells you cast cost {1} less to cast for each 1 life your opponents have lost this turn.

@@ -4,5 +4,4 @@ Types:Creature Rhino Soldier
 PT:3/3
 K:Trample
 K:Exalted
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_charger.jpg
 Oracle:Trample\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)

@@ -8,5 +8,4 @@ SVar:DBBreak:DB$ DestroyAll | ValidCards$ Land.IsRemembered
 SVar:DBBend:DB$ TapAll | ValidCards$ Land.IsRemembered
 SVar:DBCleanupChosen:DB$ Cleanup | ClearChosenPlayer$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bend_or_break.jpg
 Oracle:Each player separates all nontoken lands they control into two piles. For each player, one of their piles is chosen by one of their opponents of their choice. Destroy all lands in the chosen piles. Tap all lands in the other piles.

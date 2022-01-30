@@ -4,5 +4,4 @@ Types:Creature Human Rogue
 PT:1/1
 K:Dethrone
 A:AB$ Pump | Cost$ 1 U R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Haste & HIDDEN Unblockable | SpellDescription$ Target creature you control gains haste until end of turn and can't be blocked this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/marchesas_smuggler.jpg
 Oracle:Dethrone (Whenever this creature attacks the player with the most life or tied for most life, put a +1/+1 counter on it.)\n{1}{U}{R}: Target creature you control gains haste until end of turn and can't be blocked this turn.

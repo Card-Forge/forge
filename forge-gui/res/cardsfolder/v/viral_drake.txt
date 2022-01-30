@@ -7,5 +7,4 @@ K:Infect
 A:AB$ Proliferate | Cost$ 3 U | SpellDescription$ Proliferate.
 DeckHas:Ability$Proliferate
 DeckNeeds:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/viral_drake.jpg
 Oracle:Flying\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\n{3}{U}: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

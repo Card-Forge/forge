@@ -4,5 +4,4 @@ Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 colorless Servo artifact creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_servo | TokenOwner$ You | LegacyImage$ c 1 1 a servo kld
 A:AB$ Token | Cost$ 1 W Sac<1/CARDNAME> | TokenAmount$ 1 | TokenScript$ c_1_1_a_servo | TokenOwner$ You | LegacyImage$ c 1 1 a servo kld | SpellDescription$ Create a 1/1 colorless Servo artifact creature token.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cogworkers_puzzleknot.jpg
 Oracle:When Cogworker's Puzzleknot enters the battlefield, create a 1/1 colorless Servo artifact creature token.\n{1}{W}, Sacrifice Cogworker's Puzzleknot: Create a 1/1 colorless Servo artifact creature token.

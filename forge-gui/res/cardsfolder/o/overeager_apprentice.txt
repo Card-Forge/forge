@@ -4,5 +4,4 @@ Types:Creature Human Minion
 PT:1/2
 A:AB$ Mana | Cost$ Discard<1/Card> Sac<1/CARDNAME> | Produced$ B | Amount$ 3 | SpellDescription$ Add {B}{B}{B}.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/overeager_apprentice.jpg
 Oracle:Discard a card, Sacrifice Overeager Apprentice: Add {B}{B}{B}.

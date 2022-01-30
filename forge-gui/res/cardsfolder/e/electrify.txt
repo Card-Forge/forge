@@ -2,5 +2,4 @@ Name:Electrify
 ManaCost:3 R
 Types:Instant
 A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/electrify.jpg
 Oracle:Electrify deals 4 damage to target creature.

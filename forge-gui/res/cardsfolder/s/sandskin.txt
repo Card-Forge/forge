@@ -5,5 +5,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Curse
 R:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidTarget$ Creature.EnchantedBy | Description$ Prevent all combat damage that would be dealt to and dealt by enchanted creature.
 R:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Creature.EnchantedBy | Secondary$ True | Description$ Prevent all combat damage that would be dealt to and dealt by enchanted creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sandskin.jpg
 Oracle:Enchant creature\nPrevent all combat damage that would be dealt to and dealt by enchanted creature.

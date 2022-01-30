@@ -5,5 +5,4 @@ HandLifeModifier:+0/-2
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Command | Execute$ SituationalEthics | OptionalDecider$ You | TriggerDescription$ At the beginning of your draw step, you may draw an additional card. If you do, put a card from your hand on the bottom of your library.
 SVar:SituationalEthics:DB$ Draw | NumCards$ 1 | Defined$ You | SubAbility$ Switch
 SVar:Switch:DB$ ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | ChangeNum$ 1 | Mandatory$ True
-SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Starke.full.jpg
 Oracle:Hand +0, life -2\nAt the beginning of your draw step, you may draw an additional card. If you do, put a card from your hand on the bottom of your library.

@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact
 S:Mode$ ReduceCost | ValidCard$ Creature | Type$ MorphDown | Activator$ You | Amount$ 1 | Description$ Face-down creature spells you cast cost {1} less to cast.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_chisel.jpg
 Oracle:Face-down creature spells you cast cost {1} less to cast.

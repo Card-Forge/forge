@@ -7,5 +7,5 @@ A:AB$ PutCounter | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target cr
 A:AB$ GainLife | Cost$ 2 W | LifeAmount$ 5 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player gains 5 life.
 A:AB$ Draw | Cost$ 3 U | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws a card.
 A:AB$ ChangeZone | Cost$ 4 B | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature | AITgts$ Creature.YouOwn | ChangeNum$ 1 | SpellDescription$ Put target creature card from a graveyard onto the battlefield under its owner's control.
-DeckHas:Ability$Counters & Ability$LifeGain
+DeckHas:Ability$Counters|LifeGain
 Oracle:{R}: All creatures gain trample and haste until end of turn.\n{1}{G}: Put a +1/+1 counter on target creature.\n{2}{W}: Target player gains 5 life.\n{3}{U}: Target player draws a card.\n{4}{B}: Put target creature card from a graveyard onto the battlefield under its owner's control.

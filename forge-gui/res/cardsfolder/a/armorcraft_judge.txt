@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:Count$Valid Creature.YouCtrl+counters_GE1_P1P1
 DeckHints:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/armorcraft_judge.jpg
 Oracle:When Armorcraft Judge enters the battlefield, draw a card for each creature you control with a +1/+1 counter on it.

@@ -4,5 +4,4 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Clone | Cost$ 2 T | ValidTgts$ Land | TgtPrompt$ Select target land to copy. | GainThisAbility$ True | SpellDescription$ CARDNAME becomes a copy of target land, except it has this ability.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thespians_stage.jpg
 Oracle:{T}: Add {C}.\n{2}, {T}: Thespian's Stage becomes a copy of target land, except it has this ability.

@@ -5,5 +5,4 @@ A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl,Land
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | GainControl$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostly_flicker.jpg
 Oracle:Exile two target artifacts, creatures, and/or lands you control, then return those cards to the battlefield under your control.

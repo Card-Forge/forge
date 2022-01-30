@@ -5,5 +5,4 @@ A:SP$ ChooseCard | Cost$ 2 R | ValidTgts$ Opponent | TgtPrompt$ Select target op
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.IsNotRemembered+TargetedPlayerCtrl | KW$ HIDDEN CARDNAME can't block. | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eunuchs_intrigues.jpg
 Oracle:Target opponent chooses a creature they control. Other creatures they control can't block this turn.

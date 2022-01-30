@@ -4,5 +4,4 @@ Types:Artifact
 A:AB$ Draw | Cost$ 1 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 A:AB$ GainLife | Cost$ W Sac<1/CARDNAME> | LifeAmount$ 5 | SpellDescription$ You gain 5 life.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sunbeam_spellbomb.jpg
 Oracle:{W}, Sacrifice Sunbeam Spellbomb: You gain 5 life.\n{1}, Sacrifice Sunbeam Spellbomb: Draw a card.

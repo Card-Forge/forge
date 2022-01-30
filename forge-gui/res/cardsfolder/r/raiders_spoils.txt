@@ -6,5 +6,4 @@ T:Mode$ DamageDone | ValidSource$ Creature.Warrior+YouCtrl | ValidTarget$ Player
 SVar:TrigDraw:AB$ Draw | Cost$ PayLife<1> | NumCards$ 1
 SVar:PlayMain1:TRUE
 DeckHints:Type$Warrior
-SVar:Picture:http://www.wizards.com/global/images/magic/general/raiders_spoils.jpg
 Oracle:Creatures you control get +1/+0.\nWhenever a Warrior you control deals combat damage to a player, you may pay 1 life. If you do, draw a card.

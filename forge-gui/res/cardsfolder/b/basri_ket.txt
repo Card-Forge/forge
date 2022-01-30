@@ -12,5 +12,5 @@ A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True
 SVar:EffPhase:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ EmblemTrigToken | TriggerDescription$ At the beginning of combat on your turn, create a 1/1 white Soldier creature token, then put a +1/+1 counter on each creature you control.
 SVar:EmblemTrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | SubAbility$ DBPutCounterAll
 SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
-DeckHas:Ability$Counters & Ability$Token
-Oracle:[+1]: Put a +1/+1 counter on up to one target creature. It gains indestructible until end of turn.\n[−2]: Whenever one or more nontoken creatures attack this turn, create that many 1/1 white Soldier creature tokens that are tapped and attacking.\n[−6]: You get an emblem with "At the beginning of combat on your turn, create a 1/1 white Soldier creature token, then put a +1/+1 counter on each creature you control."
+DeckHas:Ability$Counters|Token
+Oracle:[+1]: Put a +1/+1 counter on up to one target creature. It gains indestructible until end of turn.\n[-2]: Whenever one or more nontoken creatures attack this turn, create that many 1/1 white Soldier creature tokens that are tapped and attacking.\n[-6]: You get an emblem with "At the beginning of combat on your turn, create a 1/1 white Soldier creature token, then put a +1/+1 counter on each creature you control."

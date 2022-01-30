@@ -7,5 +7,4 @@ SVar:Dream:DB$ Discard | Defined$ Player.IsRemembered | Mode$ TgtChoose | NumCar
 SVar:Nightmare:DB$ Draw | NumCards$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Land.RememberedPlayerCtrl
-SVar:Picture:https://downloads.cardforge.org/images/cards/E01/Every Dream a Nightmare.full.jpg
 Oracle:When you set this scheme in motion, each opponent discards a card. You draw a card for each land card discarded this way.

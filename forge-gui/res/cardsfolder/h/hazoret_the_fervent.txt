@@ -7,5 +7,4 @@ K:Haste
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack or block. | CheckSVar$ X | SVarCompare$ GE2 | Description$ CARDNAME can't attack or block unless you have one or fewer cards in hand.
 SVar:X:Count$InYourHand
 A:AB$ DealDamage | Cost$ 2 R Discard<1/Card> | NumDmg$ 2 | Defined$ Player.Opponent | SpellDescription$ CARDNAME deals 2 damage to each opponent.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hazoret_the_fervent.jpg
 Oracle:Indestructible, haste\nHazoret the Fervent can't attack or block unless you have one or fewer cards in hand.\n{2}{R}, Discard a card: Hazoret deals 2 damage to each opponent.

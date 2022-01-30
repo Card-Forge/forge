@@ -5,5 +5,4 @@ PT:1/3
 A:AB$ Draw | Cost$ T | NumCards$ X | SpellDescription$ Draw a card for each Ally you control.
 SVar:X:Count$TypeYouCtrl.Ally
 SVar:BuffedBy:Ally
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_gate_loremaster.jpg
 Oracle:{T}: Draw a card for each Ally you control.

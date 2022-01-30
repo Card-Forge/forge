@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ 3 G U | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.AttachedBy | AddAbility$ Token | Description$ Enchanted land has "{G}{U}, {T}: Create a 2/2 green and blue Drake creature token with flying."
 SVar:Token:AB$Token | Cost$ G U T | TokenAmount$ 1 | TokenScript$ gu_2_2_drake_flying | TokenOwner$ You | LegacyImage$ gu 2 2 drake flying dis | SpellDescription$ Create a 2/2 green and blue Drake creature token with flying.
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/leafdrake_roost.jpg
 Oracle:Enchant land\nEnchanted land has "{G}{U}, {T}: Create a 2/2 green and blue Drake creature token with flying."

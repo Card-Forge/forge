@@ -8,5 +8,4 @@ SVar:TrigDraw:AB$ Draw | Cost$ PayLife<X> | NumCards$ X
 SVar:X:PlayerCountRegisteredOpponents$HasPropertywasDealtCombatDamageThisTurn
 K:Partner
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tymna_the_weaver.jpg
 Oracle:Lifelink\nAt the beginning of your postcombat main phase, you may pay X life, where X is the number of opponents that were dealt combat damage this turn. If you do, draw X cards.\nPartner (You can have two commanders if both have partner.)

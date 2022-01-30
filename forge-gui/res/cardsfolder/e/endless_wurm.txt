@@ -5,5 +5,4 @@ PT:9/9
 K:Trample
 K:UpkeepCost:Sac<1/Enchantment>
 SVar:NeedsToPlay:Enchantment.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/endless_wurm.jpg
 Oracle:Trample\nAt the beginning of your upkeep, sacrifice Endless Wurm unless you sacrifice an enchantment.

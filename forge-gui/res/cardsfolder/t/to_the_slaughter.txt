@@ -5,6 +5,6 @@ A:SP$ StoreSVar | Cost$ 2 B | SVar$ XDelirium | Type$ Count | Expression$ Deliri
 SVar:DBSacrifice:DB$ Sacrifice | ValidTgts$ Player | SacValid$ Creature,Planeswalker | SacMessage$ Creature or Planeswalker | ConditionCheckSVar$ XDelirium | ConditionSVarCompare$ EQ0 | SubAbility$ DBSacrificeBoth | StackDescription$
 SVar:DBSacrificeBoth:DB$ Sacrifice | Defined$ Targeted | SacValid$ Creature & Planeswalker | SacEachValid$ True | ConditionCheckSVar$ XDelirium | ConditionSVarCompare$ GE1 | StackDescription$
 SVar:XDelirium:Number$0
-DeckHints:Ability$Graveyard & Ability$Discard
+DeckHints:Ability$Graveyard|Discard
 DeckHas:Ability$Delirium
 Oracle:Target player sacrifices a creature or planeswalker.\nDelirium — If there are four or more card types among cards in your graveyard, instead that player sacrifices a creature and a planeswalker.

@@ -4,5 +4,4 @@ Types:Creature Phyrexian Elf Warrior
 PT:3/1
 K:Protection from artifacts
 K:Infect
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_fallen.jpg
 Oracle:Protection from artifacts\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)

@@ -3,5 +3,4 @@ ManaCost:U U
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ U U | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | SubAbility$ DBExile | SpellDescription$ Return target instant or sorcery card from your graveyard to your hand. Exile CARDNAME.
 SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flood_of_recollection.jpg
 Oracle:Return target instant or sorcery card from your graveyard to your hand. Exile Flood of Recollection.

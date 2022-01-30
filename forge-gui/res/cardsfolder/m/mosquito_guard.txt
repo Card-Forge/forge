@@ -6,5 +6,4 @@ K:First Strike
 K:Reinforce:1:1 W
 DeckHas:Ability$Counters
 DeckNeeds:Type$Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mosquito_guard.jpg
 Oracle:First strike\nReinforce 1—{1}{W} ({1}{W}, Discard this card: Put a +1/+1 counter on target creature.)

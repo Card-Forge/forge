@@ -3,5 +3,4 @@ ManaCost:3
 Types:Artifact Creature Snake
 PT:2/1
 K:First Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/coiled_tinviper.jpg
 Oracle:First strike

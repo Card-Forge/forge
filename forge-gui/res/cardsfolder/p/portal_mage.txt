@@ -6,5 +6,4 @@ K:Flash
 T:Mode$ ChangesZone | Phase$ Declare Attackers | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeAttacker | OptionalDecider$ You | TriggerDescription$ When Portal Mage enters the battlefield during the declare attackers step, you may reselect which player or planeswalker target attacking creature is attacking.
 SVar:TrigChangeAttacker:DB$ ChangeCombatants | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/portal_mage.jpg
 Oracle:Flash\nWhen Portal Mage enters the battlefield during the declare attackers step, you may reselect which player or planeswalker target attacking creature is attacking. (It can't attack its controller or its controller's planeswalkers.)

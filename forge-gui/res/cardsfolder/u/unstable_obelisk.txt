@@ -3,5 +3,4 @@ ManaCost:3
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Destroy | Cost$ 7 T Sac<1/CARDNAME> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Destroy target permanent.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/unstable_obelisk.jpg
 Oracle:{T}: Add {C}.\n{7}, {T}, Sacrifice Unstable Obelisk: Destroy target permanent.

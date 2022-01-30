@@ -5,5 +5,4 @@ A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenScript$ c_1_1_a_gnome | TokenOwn
 T:Mode$ Discarded | ValidCard$ Card.Self | ValidCause$ Card.OppCtrl | Execute$ TrigToken | TriggerDescription$ When a spell or ability an opponent controls causes you to discard CARDNAME, create four 1/1 colorless Gnome artifact creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 4 | TokenScript$ c_1_1_a_gnome | TokenOwner$ You | LegacyImage$ c 1 1 a gnome usg
 SVar:DiscardMeByOpp:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/metrognome.jpg
 Oracle:When a spell or ability an opponent controls causes you to discard Metrognome, create four 1/1 colorless Gnome artifact creature tokens.\n{4}, {T}: Create a 1/1 colorless Gnome artifact creature token.

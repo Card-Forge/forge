@@ -3,5 +3,5 @@ ManaCost:3 U
 Types:Sorcery
 A:SP$ Amass | Cost$ 3 U | Num$ 3 | SpellDescription$ Amass 3. (Put three +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
 DeckHints:Ability$Amass & Type$Zombie
-DeckHas:Ability$Amass & Ability$Counters & Ability$Token
+DeckHas:Ability$Amass|Counters|Token
 Oracle:Amass 3. (Put three +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)

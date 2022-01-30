@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ UCDraw | Descripti
 SVar:UCDraw:AB$ Draw | Cost$ T Discard<1/Card> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:NonStackingAttachEffect:True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tin_street_market.jpg
 Oracle:Enchant land\nEnchanted land has "{T}, Discard a card: Draw a card."

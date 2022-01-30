@@ -9,5 +9,4 @@ S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Trample | De
 A:AB$ Pump | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Permanent.Green
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nylea_god_of_the_hunt.jpg
 Oracle:Indestructible\nAs long as your devotion to green is less than five, Nylea isn't a creature. (Each {G} in the mana costs of permanents you control counts toward your devotion to green.)\nOther creatures you control have trample.\n{3}{G}: Target creature gets +2/+2 until end of turn.

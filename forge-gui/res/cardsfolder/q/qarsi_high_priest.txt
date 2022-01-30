@@ -3,5 +3,4 @@ ManaCost:B
 Types:Creature Human Cleric
 PT:0/2
 A:AB$ Manifest | Cost$ 1 B T Sac<1/Creature.Other/another creature> | Amount$ 1 | Defined$ TopOfLibrary | SpellDescription$ Manifest the top card of your library.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mastery_of_the_unseen.jpg
 Oracle:{1}{B}, {T}, Sacrifice another creature: Manifest the top card of your library. (Put that card onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)

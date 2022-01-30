@@ -5,5 +5,4 @@ A:AB$ ChangeZone | Cost$ 2 | Origin$ Graveyard | Destination$ Exile | ValidTgts$
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling ala
 AI:RemoveDeck:Random
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/necrogenesis.jpg
 Oracle:{2}: Exile target creature card from a graveyard. Create a 1/1 green Saproling creature token.

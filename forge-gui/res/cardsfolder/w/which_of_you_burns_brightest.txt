@@ -6,5 +6,4 @@ SVar:DarkEffect:AB$ DealDamage | Cost$ X | ValidTgts$ Opponent,Planeswalker | Tg
 SVar:DmgAll:DB$ DamageAll | NumDmg$ X | ValidCards$ Creature.ControlledBy TargetedOrController | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
 SVar:X:Count$xPaid
-SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/Which of You Burns Brightest.full.jpg
 Oracle:When you set this scheme in motion, you may pay {X}. If you do, this scheme deals X damage to target opponent or planeswalker and each creature that player or that planeswalker's controller controls.

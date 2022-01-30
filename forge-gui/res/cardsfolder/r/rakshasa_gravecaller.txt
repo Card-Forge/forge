@@ -5,5 +5,4 @@ PT:3/6
 K:Exploit
 T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME exploits a creature, create two 2/2 black Zombie creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ b_2_2_zombie | TokenOwner$ You | LegacyImage$ b 2 2 zombie dtk
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rakshasa_gravecaller.jpg
 Oracle:Exploit (When this creature enters the battlefield, you may sacrifice a creature.)\nWhen Rakshasa Gravecaller exploits a creature, create two 2/2 black Zombie creature tokens.

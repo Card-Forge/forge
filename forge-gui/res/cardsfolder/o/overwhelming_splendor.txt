@@ -5,5 +5,4 @@ K:Enchant player
 A:SP$ Attach | Cost$ 6 W W | ValidTgts$ Player | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedPlayerCtrl | SetPower$ 1 | SetToughness$ 1 | RemoveAllAbilities$ True | Description$ Creatures enchanted player controls lose all abilities and have base power and toughness 1/1.
 S:Mode$ CantBeActivated | Activator$ Player.EnchantedBy | ValidSA$ Activated.nonManaAbility+nonLoyalty | Description$ Enchanted player can't activate abilities that aren't mana abilities or loyalty abilities.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/overwhelming_splendor.jpg
 Oracle:Enchant player\nCreatures enchanted player controls lose all abilities and have base power and toughness 1/1.\nEnchanted player can't activate abilities that aren't mana abilities or loyalty abilities.

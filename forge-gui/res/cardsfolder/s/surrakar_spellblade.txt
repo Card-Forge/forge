@@ -8,5 +8,4 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | Count
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | OptionalDecider$ You
 SVar:X:Count$CardCounters.CHARGE
 SVar:BuffedBy:Instant,Sorcery
-SVar:Picture:http://www.wizards.com/global/images/magic/general/surrakar_spellblade.jpg
 Oracle:Whenever you cast an instant or sorcery spell, you may put a charge counter on Surrakar Spellblade.\nWhenever Surrakar Spellblade deals combat damage to a player, you may draw X cards, where X is the number of charge counters on it.

@@ -9,5 +9,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:CantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ Player.IsRemembered | Description$ Defending player can't cast spells.
 AI:RemoveDeck:Random
 SVar:HasAttackEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/xantid_swarm.jpg
 Oracle:Flying\nWhenever Xantid Swarm attacks, defending player can't cast spells this turn.

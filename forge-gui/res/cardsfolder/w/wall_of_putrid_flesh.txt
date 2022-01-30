@@ -5,5 +5,4 @@ PT:2/4
 K:Defender
 K:Protection from white
 R:Event$ DamageDone | Prevent$ True | ValidSource$ Creature.enchanted | ValidTarget$ Creature.Self | Description$ Prevent all damage that would be dealt to CARDNAME by enchanted creatures.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_putrid_flesh.jpg
 Oracle:Defender (This creature can't attack.)\nProtection from white\nPrevent all damage that would be dealt to Wall of Putrid Flesh by enchanted creatures.

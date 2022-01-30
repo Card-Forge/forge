@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact
 A:AB$ Tap | Cost$ T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Tap target artifact.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_barrier.jpg
 Oracle:{T}: Tap target artifact.

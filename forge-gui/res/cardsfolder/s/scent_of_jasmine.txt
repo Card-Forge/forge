@@ -6,5 +6,4 @@ SVar:DBScentOfJasmineLife:DB$ GainLife | LifeAmount$ ScentOfJasmineX | SubAbilit
 SVar:ScentOfJasmineX:Remembered$Amount.Twice
 SVar:DBScentOfJasmineCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scent_of_jasmine.jpg
 Oracle:Reveal any number of white cards in your hand. You gain 2 life for each card revealed this way.

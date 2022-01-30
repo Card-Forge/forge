@@ -3,5 +3,4 @@ ManaCost:2 G G
 Types:Instant
 A:SP$ CopyPermanent | Cost$ 2 G G | Defined$ Valid Permanent.token+YouCtrl | AILogic$ DuplicatePerms | SpellDescription$ For each token you control, create a token that's a copy of that permanent.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/second_harvest.jpg
 Oracle:For each token you control, create a token that's a copy of that permanent.

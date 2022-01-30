@@ -4,5 +4,4 @@ Types:Creature Human Knight
 PT:2/2
 K:First Strike
 K:Protection from white
-SVar:Picture:http://www.wizards.com/global/images/magic/general/black_knight.jpg
 Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nProtection from white (This creature can't be blocked, targeted, dealt damage, or enchanted by anything white.)

@@ -5,5 +5,4 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddToughness$ X | AddKeyword$ 
 SVar:X:Count$Valid Gate.YouCtrl
 SVar:PlayMain1:TRUE
 DeckNeeds:Type$Gate
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hold_the_gates.jpg
 Oracle:Creatures you control get +0/+1 for each Gate you control and have vigilance.

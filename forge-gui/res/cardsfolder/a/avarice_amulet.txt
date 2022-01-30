@@ -7,5 +7,4 @@ SVar:AvariceUpkeepTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZ
 SVar:AvariceUpkeepSVar:DB$ Draw | NumCards$ 1 | Defined$ You
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigGainControl | TriggerDescription$ When equipped creature dies, target opponent gains control of CARDNAME.
 SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Opponent | Defined$ Self
-SVar:Picture:http://www.wizards.com/global/images/magic/general/avarice_amulet.jpg
 Oracle:Equipped creature gets +2/+0 and has vigilance and "At the beginning of your upkeep, draw a card."\nWhenever equipped creature dies, target opponent gains control of Avarice Amulet.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

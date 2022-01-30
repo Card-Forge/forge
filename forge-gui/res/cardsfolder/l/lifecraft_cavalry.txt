@@ -5,5 +5,4 @@ PT:4/4
 K:Trample
 K:etbCounter:P1P1:2:CheckSVar$ Revolt:Revolt — CARDNAME enters the battlefield with two +1/+1 counters on it if a permanent you controlled left the battlefield this turn.
 SVar:Revolt:Count$Revolt.1.0
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lifecraft_cavalry.jpg
 Oracle:Trample\nRevolt — Lifecraft Cavalry enters the battlefield with two +1/+1 counters on it if a permanent you controlled left the battlefield this turn.

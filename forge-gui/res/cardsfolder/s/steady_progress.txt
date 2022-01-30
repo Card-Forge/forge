@@ -5,5 +5,4 @@ A:SP$ Proliferate | Cost$ 2 U | SpellDescription$ Proliferate. Draw a card. | Su
 SVar:DB:DB$ Draw | NumCards$ 1
 DeckHas:Ability$Proliferate
 DeckNeeds:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/steady_progress.jpg
 Oracle:Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)\nDraw a card.

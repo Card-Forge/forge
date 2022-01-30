@@ -1,5 +1,4 @@
 Name:Snow-Covered Forest
 ManaCost:no cost
 Types:Basic Snow Land Forest
-SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_forest.jpg
 Oracle:({T}: Add {G}.)

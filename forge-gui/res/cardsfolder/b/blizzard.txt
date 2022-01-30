@@ -6,5 +6,4 @@ S:Mode$ Continuous | Affected$ Creature.withFlying | AddHiddenKeyword$ CARDNAME 
 S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | CheckSVar$ X | SVarCompare$ EQ0 | Description$ Cast CARDNAME only if you control a snow land.
 SVar:X:Count$Valid Snow.Land+YouCtrl
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blizzard.jpg
 Oracle:Cast this spell only if you control a snow land.\nCumulative upkeep {2} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nCreatures with flying don't untap during their controllers' untap steps.

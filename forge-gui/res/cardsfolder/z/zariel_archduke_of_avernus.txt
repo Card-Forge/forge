@@ -10,4 +10,4 @@ SVar:TrigZarielCombat:DB$ Untap | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Selec
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Token
-Oracle:[+1]: Creatures you control get +1/+0 and gain haste until end of turn.\n[0]: Create a 1/1 red Devil creature token with "When this creature dies, it deals 1 damage to any target."\n[−6]: You get an emblem with "At the end of the first combat phase on your turn, untap target creature you control. After this phase, there is an additional combat phase."
+Oracle:[+1]: Creatures you control get +1/+0 and gain haste until end of turn.\n[0]: Create a 1/1 red Devil creature token with "When this creature dies, it deals 1 damage to any target."\n[-6]: You get an emblem with "At the end of the first combat phase on your turn, untap target creature you control. After this phase, there is an additional combat phase."

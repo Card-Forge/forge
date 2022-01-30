@@ -4,5 +4,4 @@ Types:Creature Satyr Rogue
 PT:2/1
 A:AB$ Pump | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME must be blocked if able. | AILogic$ Pump | SpellDescription$ Target creature must be blocked this turn if able.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/satyr_piper.jpg
 Oracle:{3}{G}: Target creature must be blocked this turn if able.

@@ -3,5 +3,4 @@ ManaCost:2 B
 Types:Instant
 A:SP$ Pump | Cost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Domain — Target creature gets -1/-1 until end of turn for each basic land type among lands you control.
 SVar:X:Count$Domain
-SVar:Picture:http://www.wizards.com/global/images/magic/general/drag_down.jpg
 Oracle:Domain — Target creature gets -1/-1 until end of turn for each basic land type among lands you control.

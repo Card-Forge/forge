@@ -3,5 +3,4 @@ ManaCost:1
 Types:Artifact Equipment
 K:ETBReplacement:Copy:DBCopy:Optional
 SVar:DBCopy:DB$ Clone | Choices$ Equipment.Other | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any Equipment on the battlefield.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/masterwork_of_ingenuity.jpg
 Oracle:You may have Masterwork of Ingenuity enter the battlefield as a copy of any Equipment on the battlefield.

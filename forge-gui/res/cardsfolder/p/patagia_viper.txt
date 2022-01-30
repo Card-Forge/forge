@@ -10,5 +10,4 @@ SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:ManaNeededToAvoidNegativeEffect:blue
 AI:RemoveDeck:Random
 DeckNeeds:Color$Blue
-SVar:Picture:http://www.wizards.com/global/images/magic/general/patagia_viper.jpg
 Oracle:Flying\nWhen Patagia Viper enters the battlefield, create two 1/1 green and blue Snake creature tokens.\nWhen Patagia Viper enters the battlefield, sacrifice it unless {U} was spent to cast it.

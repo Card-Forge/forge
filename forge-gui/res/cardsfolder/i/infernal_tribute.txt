@@ -4,5 +4,4 @@ Types:Enchantment
 A:AB$ Draw | Cost$ 2 Sac<1/Permanent.nonToken/nontoken permanent> | NumCards$ 1 | SpellDescription$ Draw a card.
 AI:RemoveDeck:All
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_tribute.jpg
 Oracle:{2}, Sacrifice a nontoken permanent: Draw a card.

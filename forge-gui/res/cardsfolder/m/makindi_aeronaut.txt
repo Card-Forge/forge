@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Creature Kor Scout Ally
 PT:1/3
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/makindi_aeronaut.jpg
 Oracle:Flying

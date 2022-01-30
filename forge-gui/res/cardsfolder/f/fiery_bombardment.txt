@@ -5,5 +5,4 @@ A:AB$ DealDamage | Cost$ 2 Sac<1/Creature> | ValidTgts$ Creature,Player,Planeswa
 SVar:X:Sacrificed$ChromaSource.Red
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_bombardment.jpg
 Oracle:Chroma — {2}, Sacrifice a creature: Fiery Bombardment deals damage to any target equal to the number of red mana symbols in the sacrificed creature's mana cost.

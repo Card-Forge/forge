@@ -5,7 +5,6 @@ Types:Instant
 A:SP$ DamageAll | Cost$ X G | ValidCards$ Creature.withFlying | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature with flying.
 SVar:X:Count$xPaid
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/heaven_earth.jpg
 Oracle:Heaven deals X damage to each creature with flying.
 
 ALTERNATE

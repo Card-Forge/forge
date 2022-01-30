@@ -6,5 +6,4 @@ SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSpellAbility | SubAbility$ DBSa
 SVar:DBSacrifice:DB$ Sacrifice
 AI:RemoveDeck:All
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hesitation.jpg
 Oracle:When a player casts a spell, sacrifice Hesitation and counter that spell.

@@ -3,5 +3,4 @@ ManaCost:3 G G
 Types:Creature Beast
 PT:4/4
 K:Trample
-SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card46115.jpg
 Oracle:Trample

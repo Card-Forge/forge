@@ -3,5 +3,4 @@ ManaCost:3
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 K:Indestructible
-SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_ingot.jpg
 Oracle:Indestructible\n{T}: Add one mana of any color.

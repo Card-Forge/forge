@@ -4,5 +4,4 @@ Types:Sorcery
 A:SP$ Token | Cost$ B G | TokenAmount$ 1 | TokenScript$ bg_x_x_spirit_warrior | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | LegacyImage$ bg x x spirit warrior ktk | SpellDescription$ Create an X/X black and green Spirit Warrior creature token, where X is the greatest toughness among creatures you control.
 SVar:X:Count$GreatestToughness_Creature.YouCtrl
 SVar:NeedsToPlay:Creature.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kin_tree_invocation.jpg
 Oracle:Create an X/X black and green Spirit Warrior creature token, where X is the greatest toughness among creatures you control.

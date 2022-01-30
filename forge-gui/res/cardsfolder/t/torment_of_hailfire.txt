@@ -10,5 +10,4 @@ SVar:SacNonland:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ 3 | Un
 SVar:LoseLifeFallback:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ 3
 SVar:X:Count$xPaid
 SVar:AIPreference:SacCost$Permanent.nonLand | DiscardCost$Card
-SVar:Picture:http://www.wizards.com/global/images/magic/general/torment_of_hailfire.jpg
 Oracle:Repeat the following process X times. Each opponent loses 3 life unless that player sacrifices a nonland permanent or discards a card.

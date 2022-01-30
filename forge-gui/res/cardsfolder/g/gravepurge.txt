@@ -5,5 +5,4 @@ A:SP$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Library | Target
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:X:Count$TypeInYourYard.Creature
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gravepurge.jpg
 Oracle:Put any number of target creature cards from your graveyard on top of your library.\nDraw a card.

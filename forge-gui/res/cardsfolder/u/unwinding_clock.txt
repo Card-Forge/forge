@@ -3,5 +3,4 @@ ManaCost:4
 Types:Artifact
 S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddHiddenKeyword$ CARDNAME untaps during each other player's untap step. | Description$ Untap all artifacts you control during each other player's untap step.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/unwinding_clock.jpg
 Oracle:Untap all artifacts you control during each other player's untap step.

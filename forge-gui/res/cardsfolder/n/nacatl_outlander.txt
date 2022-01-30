@@ -3,5 +3,4 @@ ManaCost:R G
 Types:Creature Cat Scout
 PT:2/2
 K:Protection from blue
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nacatl_outlander.jpg
 Oracle:Protection from blue

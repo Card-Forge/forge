@@ -2,5 +2,4 @@ Name:Geosurge
 ManaCost:R R R R
 Types:Sorcery
 A:SP$ Mana | Cost$ R R R R | Produced$ R | Amount$ 7 | RestrictValid$ Card.Artifact,Card.Creature | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R}{R}{R}{R}{R}{R}{R}. Spend this mana only to cast artifact or creature spells.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/geosurge.jpg
 Oracle:Add {R}{R}{R}{R}{R}{R}{R}. Spend this mana only to cast artifact or creature spells.

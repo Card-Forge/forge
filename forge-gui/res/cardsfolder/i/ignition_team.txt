@@ -6,5 +6,4 @@ K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with X +1/+1 co
 SVar:X:Count$Valid Land.tapped
 A:AB$ Animate | Cost$ 2 R SubCounter<1/P1P1> | ValidTgts$ Land | Power$ 4 | Toughness$ 4 | Types$ Creature,Elemental | Colors$ Red | SpellDescription$ Target land becomes a 4/4 red Elemental creature until end of turn. It's still a land.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ignition_team.jpg
 Oracle:Ignition Team enters the battlefield with X +1/+1 counters on it, where X is the number of tapped lands on the battlefield.\n{2}{R}, Remove a +1/+1 counter from Ignition Team: Target land becomes a 4/4 red Elemental creature until end of turn. It's still a land.

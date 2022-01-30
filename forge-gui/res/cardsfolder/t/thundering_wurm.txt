@@ -8,5 +8,4 @@ SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$TypeInYourHand.Land
 SVar:PlayMain1:TRUE
 SVar:PlayBeforeLandDrop:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thundering_wurm.jpg
 Oracle:When Thundering Wurm enters the battlefield, sacrifice it unless you discard a land card.

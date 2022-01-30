@@ -2,5 +2,4 @@ Name:Trained Armodon
 ManaCost:1 G G
 Types:Creature Elephant
 PT:3/3
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83303.jpg
 Oracle:

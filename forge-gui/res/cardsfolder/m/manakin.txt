@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact Creature Construct
 PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/manakin.jpg
 Oracle:{T}: Add {C}.

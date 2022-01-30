@@ -12,5 +12,5 @@ A:AB$ DealDamage | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$
 SVar:DBDiscardDraw:DB$ Draw | NumCards$ 1 | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | UnlessSwitched$ True | OrString$ Draw a card. | StackDescription$ SpellDescription | SpellDescription$ If they do, you may discard a card. If you do, draw card.
 A:AB$ Token | Cost$ SubCounter<X/LOYALTY> | Planeswalker$ True | TokenAmount$ X | TokenScript$ r_1_1_devil_burn | SpellDescription$ Create X 1/1 red Devil creature tokens with "When this creature dies, it deals 1 damage to any target."
 SVar:X:Count$xPaid
-DeckHas:Ability$Discard & Ability$Token
-Oracle:[+1]: Add {R}{R}. Draft a card from Tibalt, Wicked Tormentor's spellbook, then exile it. Until end of turn, you may cast that card.\n[+1]: Tibalt, Wicked Tormentor deals 3 damage to target creature or planeswalker unless its controller has Tibalt deal 3 damage to them. If they do, you may discard a card. If you do, draw card.\n[−X]: Create X 1/1 red Devil creature tokens with "When this creature dies, it deals 1 damage to any target."
+DeckHas:Ability$Discard|Token
+Oracle:[+1]: Add {R}{R}. Draft a card from Tibalt, Wicked Tormentor's spellbook, then exile it. Until end of turn, you may cast that card.\n[+1]: Tibalt, Wicked Tormentor deals 3 damage to target creature or planeswalker unless its controller has Tibalt deal 3 damage to them. If they do, you may discard a card. If you do, draw card.\n[-X]: Create X 1/1 red Devil creature tokens with "When this creature dies, it deals 1 damage to any target."

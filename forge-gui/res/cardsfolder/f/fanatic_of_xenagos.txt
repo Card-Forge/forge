@@ -7,5 +7,4 @@ K:Tribute:1
 SVar:TrigNotTribute:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | KW$ Haste | SpellDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, it gets +1/+1 and gains haste until end of turn.
 SVar:PlayMain1:ALWAYS
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fanatic_of_xenagos.jpg
 Oracle:Trample\nTribute 1 (As this creature enters the battlefield, an opponent of your choice may put a +1/+1 counter on it.)\nWhen Fanatic of Xenagos enters the battlefield, if tribute wasn't paid, it gets +1/+1 and gains haste until end of turn.

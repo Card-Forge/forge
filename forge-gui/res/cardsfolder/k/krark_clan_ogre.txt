@@ -4,5 +4,4 @@ Types:Creature Ogre
 PT:3/3
 A:AB$ Pump | Cost$ R Sac<1/Artifact> | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | KW$ HIDDEN CARDNAME can't block. | SpellDescription$ Target creature can't block this turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/krark_clan_ogre.jpg
 Oracle:{R}, Sacrifice an artifact: Target creature can't block this turn.

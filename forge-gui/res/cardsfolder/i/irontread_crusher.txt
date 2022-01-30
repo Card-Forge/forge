@@ -3,5 +3,4 @@ ManaCost:4
 Types:Artifact Vehicle
 PT:6/6
 K:Crew:3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/irontread_crusher.jpg
 Oracle:Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)

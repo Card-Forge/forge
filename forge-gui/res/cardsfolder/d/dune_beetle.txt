@@ -2,5 +2,4 @@ Name:Dune Beetle
 ManaCost:1 B
 Types:Creature Insect
 PT:1/4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dune_beetle.jpg
 Oracle:

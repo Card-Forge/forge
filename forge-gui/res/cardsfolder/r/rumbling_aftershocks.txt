@@ -5,5 +5,4 @@ T:Mode$ SpellCast | ValidCard$ Card.YouCtrl+kicked | TriggerZones$ Battlefield |
 SVar:DamageSomeone:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | NumDmg$ X | TgtPrompt$ Select any target
 SVar:X:TriggeredSpellAbility$Count$TimesKicked
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rumbling_aftershocks.jpg
 Oracle:Whenever you cast a kicked spell, you may have Rumbling Aftershocks deal damage to any target equal to the number of times that spell was kicked.

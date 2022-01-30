@@ -5,5 +5,4 @@ PT:2/5
 A:AB$ Effect | Cost$ T | Name$ Kjeldoran Royal Guard Effect | ReplacementEffects$ DamageEvent | AILogic$ Fog | SpellDescription$ All combat damage that would be dealt to you by unblocked creatures this turn is dealt to CARDNAME instead.
 SVar:DamageEvent:Event$ DamageDone | ValidSource$ Creature.unblocked | ValidTarget$ You | ReplaceWith$ DmgSelf | IsCombat$ True | DamageTarget$ EffectSource | Description$ All combat damage that would be dealt to you by unblocked creatures this turn is dealt to Kjeldoran Royal Guard instead.
 SVar:DmgSelf:DB$ ReplaceEffect | VarName$ Affected | VarValue$ EffectSource | VarType$ Card
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_royal_guard.jpg
 Oracle:{T}: All combat damage that would be dealt to you by unblocked creatures this turn is dealt to Kjeldoran Royal Guard instead.

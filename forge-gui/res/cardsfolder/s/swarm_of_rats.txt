@@ -5,5 +5,4 @@ PT:*/1
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of Rats you control.
 SVar:X:Count$Valid Rat.YouCtrl
 SVar:BuffedBy:Rat
-SVar:Picture:http://www.wizards.com/global/images/magic/general/swarm_of_rats.jpg
 Oracle:Swarm of Rats's power is equal to the number of Rats you control.

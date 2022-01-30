@@ -5,5 +5,4 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
 A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ G U | SpellDescription$ Add {G}{U}.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/irrigation_ditch.jpg
 Oracle:Irrigation Ditch enters the battlefield tapped.\n{T}: Add {W}.\n{T}, Sacrifice Irrigation Ditch: Add {G}{U}.

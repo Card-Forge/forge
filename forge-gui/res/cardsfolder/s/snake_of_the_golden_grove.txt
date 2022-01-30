@@ -6,5 +6,4 @@ K:Tribute:3
 SVar:TrigNotTribute:DB$ GainLife | LifeAmount$ 4 | SpellDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, you gain 4 life.
 SVar:TributeAILogic:Never
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/snake_of_the_golden_grove.jpg
 Oracle:Tribute 3 (As this creature enters the battlefield, an opponent of your choice may put three +1/+1 counters on it.)\nWhen Snake of the Golden Grove enters the battlefield, if tribute wasn't paid, you gain 4 life.

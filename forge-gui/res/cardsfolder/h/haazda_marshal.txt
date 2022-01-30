@@ -5,5 +5,5 @@ PT:1/1
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | CheckSVar$ AttackerTest | SVarCompare$ GE2 | NoResolvingCheck$ True | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME and at least two other creatures attack, create a 1/1 white Soldier creature token with lifelink.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_soldier_lifelink | LegacyImage$ w 1 1 soldier lifelink grn
 SVar:AttackerTest:Count$Valid Creature.attacking+Other
-DeckHas:Ability$Token & Ability$LifeGain
+DeckHas:Ability$Token|LifeGain
 Oracle:Whenever Haazda Marshal and at least two other creatures attack, create a 1/1 white Soldier creature token with lifelink.

@@ -6,5 +6,4 @@ SVar:DBChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ X | TargetsWithDefi
 SVar:X:Count$InAllYards
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/drafnas_restoration.jpg
 Oracle:Put any number of target artifact cards from target player's graveyard on top of their library in any order.

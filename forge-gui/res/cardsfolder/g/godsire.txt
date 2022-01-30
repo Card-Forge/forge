@@ -4,5 +4,4 @@ Types:Creature Beast
 PT:8/8
 K:Vigilance
 A:AB$ Token | Cost$ T | TokenAmount$ 1 | TokenScript$ rgw_8_8_beast | TokenOwner$ You | LegacyImage$ rgw 8 8 beast ala | SpellDescription$ Create an 8/8 Beast creature token that's red, green, and white.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/godsire.jpg
 Oracle:Vigilance\n{T}: Create an 8/8 Beast creature token that's red, green, and white.

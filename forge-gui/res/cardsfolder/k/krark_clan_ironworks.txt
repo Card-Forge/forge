@@ -3,5 +3,4 @@ ManaCost:4
 Types:Artifact
 A:AB$ Mana | Cost$ Sac<1/Artifact> | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/krark_clan_ironworks.jpg
 Oracle:Sacrifice an artifact: Add {C}{C}.

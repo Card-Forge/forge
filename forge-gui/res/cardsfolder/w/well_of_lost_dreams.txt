@@ -8,5 +8,4 @@ SVar:Y:TriggerCount$LifeAmount
 SVar:X:Count$ChosenNumber
 DeckNeeds:Ability$LifeGain
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/well_of_lost_dreams.jpg
 Oracle:Whenever you gain life, you may pay {X}, where X is less than or equal to the amount of life you gained. If you do, draw X cards.

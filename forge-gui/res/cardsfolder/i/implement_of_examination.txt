@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredCardController
 AI:RemoveDeck:Random
 DeckNeeds:Color$Blue
-SVar:Picture:http://www.wizards.com/global/images/magic/general/implement_of_examination.jpg
 Oracle:{U}, Sacrifice Implement of Examination: Draw a card.\nWhen Implement of Examination is put into a graveyard from the battlefield, draw a card.

@@ -2,5 +2,4 @@ Name:Take Up Arms
 ManaCost:4 W
 Types:Instant
 A:SP$ Token | Cost$ 4 W | TokenAmount$ 3 | TokenScript$ w_1_1_warrior | TokenOwner$ You | LegacyImage$ w 1 1 warrior ktk | SpellDescription$ Create three 1/1 white Warrior creature tokens.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/take_up_arms.jpg
 Oracle:Create three 1/1 white Warrior creature tokens.

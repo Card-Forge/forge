@@ -4,5 +4,4 @@ Types:Creature Spirit
 PT:1/1
 K:CARDNAME can't block.
 K:Unblockable
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tormented_soul.jpg
 Oracle:Tormented Soul can't block and can't be blocked.

@@ -7,5 +7,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigChoice:DB$ GenericChoice | ValidTgts$ Opponent | Choices$ DBPayLife,DBSacCreature | AILogic$ PayUnlessCost
 SVar:DBSacCreature:DB$ Draw | Defined$ You | UnlessCost$ Sac<1/Creature> | UnlessPayer$ Targeted | UnlessAI$ Never | SpellDescription$ That player draws a card unless You sacrifices a creature
 SVar:DBPayLife:DB$ Draw | Defined$ You | UnlessCost$ PayLife<3> | UnlessPayer$ Targeted | UnlessAI$ LowPriority | SpellDescription$ That player draws a card unless You pays 3 life.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/indulgent_tormentor.jpg
 Oracle:Flying\nAt the beginning of your upkeep, draw a card unless target opponent sacrifices a creature or pays 3 life.

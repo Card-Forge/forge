@@ -2,5 +2,4 @@ Name:Clone Legion
 ManaCost:7 U U
 Types:Sorcery
 A:SP$ CopyPermanent | Cost$ 7 U U | ValidTgts$ Player | Defined$ Valid Creature.TargetedPlayerCtrl | NumCopies$ 1 | AILogic$ DuplicatePerms | StackDescription$ SpellDescription | SpellDescription$ For each creature target player controls, create a token that's a copy of that creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/clone_legion.jpg
 Oracle:For each creature target player controls, create a token that's a copy of that creature.

@@ -11,5 +11,4 @@ SVar:NumInHand:TargetedPlayer$CardsInHand
 SVar:NumInYard:TargetedPlayer$CardsInGraveyard
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stain_the_mind.jpg
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nChoose a nonland card name. Search target player's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles.

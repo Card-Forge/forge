@@ -2,5 +2,4 @@ Name:Festergloom
 ManaCost:2 B
 Types:Sorcery
 A:SP$ PumpAll | Cost$ 2 B | ValidCards$ Creature.nonBlack | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Nonblack creatures get -1/-1 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/festergloom.jpg
 Oracle:Nonblack creatures get -1/-1 until end of turn.

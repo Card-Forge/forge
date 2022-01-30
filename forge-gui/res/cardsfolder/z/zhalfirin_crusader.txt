@@ -7,5 +7,4 @@ A:AB$ Effect | Cost$ 1 W | Name$ Zhalfirin Redirection | ValidTgts$ Creature,Pla
 SVar:Zhalfirin:Event$ DamageDone | ValidTarget$ Creature.EffectSource | ReplaceWith$ ZhalfirinDmg | DamageTarget$ Remembered | Description$ The next 1 damage that would be dealt to EFFECTSOURCE this turn is dealt to any target.
 SVar:ZhalfirinDmg:DB$ ReplaceSplitDamage | DamageTarget$ Remembered
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/zhalfirin_crusader.jpg
 Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\n{1}{W}: The next 1 damage that would be dealt to Zhalfirin Crusader this turn is dealt to any target instead.

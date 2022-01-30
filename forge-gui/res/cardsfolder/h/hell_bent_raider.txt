@@ -6,5 +6,4 @@ K:First Strike
 K:Haste
 A:AB$ Protection | Cost$ Discard<1/Random> | Gains$ white | SpellDescription$ CARDNAME gains protection from white until end of turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hell_bent_raider.jpg
 Oracle:First strike, haste\nDiscard a card at random: Hell-Bent Raider gains protection from white until end of turn.

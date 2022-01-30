@@ -3,5 +3,4 @@ ManaCost:1 R
 Types:Sorcery
 A:SP$ DamageAll | Cost$ 1 R | ValidCards$ Creature.OppCtrl | NumDmg$ 1 | SubAbility$ DBScry | SpellDescription$ CARDNAME deals 1 damage to each creature your opponents control. Scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scouring_sands.jpg
 Oracle:Scouring Sands deals 1 damage to each creature your opponents control. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

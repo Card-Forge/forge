@@ -6,4 +6,4 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | EffectZone$ Battlefield | AddK
 S:Mode$ ReduceCost | ValidCard$ Card | ValidSpell$ Activated.Equip | Activator$ You | Amount$ 1 | Condition$ PlayerTurn | Secondary$ True | Description$ Equip abilities you activate cost {1} less to activate.
 A:AB$ DealDamage | Cost$ SubCounter<X/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target tapped creature.
 SVar:X:Count$xPaid
-Oracle:As long as it's your turn, creatures you control have first strike and equip abilities you activate cost {1} less to activate.\n[−X]: Nahiri, Storm of Stone deals X damage to target tapped creature.
+Oracle:As long as it's your turn, creatures you control have first strike and equip abilities you activate cost {1} less to activate.\n[-X]: Nahiri, Storm of Stone deals X damage to target tapped creature.

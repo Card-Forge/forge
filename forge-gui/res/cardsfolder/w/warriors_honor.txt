@@ -2,5 +2,4 @@ Name:Warrior's Honor
 ManaCost:2 W
 Types:Instant
 A:SP$ PumpAll | Cost$ 2 W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/warriors_honor.jpg
 Oracle:Creatures you control get +1/+1 until end of turn.

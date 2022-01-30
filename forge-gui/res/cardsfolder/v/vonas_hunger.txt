@@ -8,5 +8,4 @@ SVar:DBSacrifice:DB$ Sacrifice | Amount$ Y | SacValid$ Creature | Defined$ Remem
 SVar:X:Count$Blessing.1.0
 SVar:Y:Count$Valid Creature.RememberedPlayerCtrl/HalfUp
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vonas_hunger.jpg
 Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nEach opponent sacrifices a creature. If you have the city's blessing, instead each opponent sacrifices half the creatures they control, rounded up.

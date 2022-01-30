@@ -3,5 +3,4 @@ ManaCost:5 W W
 Types:Sorcery
 A:SP$ Token | Cost$ 5 W W | TokenAmount$ X | TokenScript$ w_1_1_soldier | TokenOwner$ You | LegacyImage$ w 1 1 soldier c14 | SpellDescription$ Create X 1/1 white Soldier creature tokens, where X is the number of creatures on the battlefield.
 SVar:X:Count$TypeOnBattlefield.Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deploy_to_the_front.jpg
 Oracle:Create X 1/1 white Soldier creature tokens, where X is the number of creatures on the battlefield.

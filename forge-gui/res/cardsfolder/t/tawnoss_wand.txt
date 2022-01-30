@@ -2,5 +2,4 @@ Name:Tawnos's Wand
 ManaCost:4
 Types:Artifact
 A:AB$ Pump | Cost$ 2 T | ValidTgts$ Creature.powerLE2 | KW$ HIDDEN Unblockable | SpellDescription$ Target creature with power 2 or less can't be blocked this turn. | TgtPrompt$ Select target creature with power 2 or less.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tawnoss_wand.jpg
 Oracle:{2}, {T}: Target creature with power 2 or less can't be blocked this turn.

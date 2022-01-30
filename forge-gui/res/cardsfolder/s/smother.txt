@@ -2,5 +2,4 @@ Name:Smother
 ManaCost:1 B
 Types:Instant
 A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.cmcLE3 | TgtPrompt$ Select target creature with mana value 3 or less | NoRegen$ True | SpellDescription$ Destroy target creature with mana value 3 or less. It can't be regenerated.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/smother.jpg
 Oracle:Destroy target creature with mana value 3 or less. It can't be regenerated.

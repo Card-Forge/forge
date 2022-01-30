@@ -6,5 +6,4 @@ SVar:X:TargetedController$PoisonCounters
 SVar:NeedsToPlayVar:X GE1
 AI:RemoveDeck:Random
 DeckNeeds:Keyword$Infect
-SVar:Picture:http://www.wizards.com/global/images/magic/general/corrupted_resolve.jpg
 Oracle:Counter target spell if its controller is poisoned.

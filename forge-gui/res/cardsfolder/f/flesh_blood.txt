@@ -7,7 +7,6 @@ A:SP$ ChangeZone | Cost$ 3 B G | Origin$ Graveyard | Destination$ Exile | TgtPro
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature to put counters | CounterType$ P1P1 | CounterNum$ X
 SVar:X:ParentTargeted$CardPower
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flesh_blood.jpg
 Oracle:Exile target creature card from a graveyard. Put X +1/+1 counters on target creature, where X is the power of the card you exiled.\nFuse (You may cast one or both halves of this card from your hand.)
 
 ALTERNATE

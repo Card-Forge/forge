@@ -6,5 +6,4 @@ K:Defender
 K:Flying
 K:Cumulative upkeep:GainLife<1/Player.Opponent>:An opponent gains 1 life.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_shards.jpg
 Oracle:Defender, flying\nCumulative upkeep—An opponent gains 1 life. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)

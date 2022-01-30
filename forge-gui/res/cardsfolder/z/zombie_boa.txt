@@ -7,5 +7,4 @@ SVar:DBEffect:DB$ Effect | Name$ Zombie Boa Effect | Triggers$ TrigBlocked | Rem
 SVar:TrigBlocked:Mode$ AttackerBlockedByCreature | ValidCard$ Creature.IsRemembered | ValidBlocker$ Creature.ChosenColor | Execute$ ABDestroy | TriggerDescription$ Whenever Zombie Boa becomes blocked by a creature of the chosen color this turn, destroy that creature.
 SVar:ABDestroy:DB$ Destroy | Defined$ TriggeredBlockerLKICopy
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_boa.jpg
 Oracle:{1}{B}: Choose a color. Whenever Zombie Boa becomes blocked by a creature of that color this turn, destroy that creature. Activate only as a sorcery.

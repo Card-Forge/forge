@@ -8,5 +8,4 @@ SVar:DmgAll:DB$ DamageAll | NumDmg$ Y | ValidCards$ Creature.ControlledBy Target
 SVar:DBDamageResolve:DB$ DamageResolve
 SVar:X:TriggeredCard$CardCounters.AGE/Twice
 SVar:Y:SVar$X/Minus.2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_of_bogardan.jpg
 Oracle:Cumulative upkeep {2} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhen a player doesn't pay Heart of Bogardan's cumulative upkeep, Heart of Bogardan deals X damage to target player or planeswalker and each creature that player or that planeswalker's controller controls, where X is twice the number of age counters on Heart of Bogardan minus 2.

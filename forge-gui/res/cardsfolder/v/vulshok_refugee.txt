@@ -3,5 +3,4 @@ ManaCost:1 R R
 Types:Creature Human Warrior
 PT:3/2
 K:Protection from red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vulshok_refugee.jpg
 Oracle:Protection from red

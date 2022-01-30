@@ -7,6 +7,5 @@ SVar:DBDmg:DB$ DealDamage | Defined$ You | NumDmg$ Y
 SVar:Y:Count$CardCounters.FLAME
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, CARDNAME deals 3 damage to target player or planeswalker.
 SVar:RolledChaos:DB$ DealDamage | ValidTgts$ Player,Planeswalker | NumDmg$ 3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/naar_isle.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always
 Oracle:At the beginning of your upkeep, put a flame counter on Naar Isle, then Naar Isle deals damage to you equal to the number of flame counters on it.\nWhenever you roll {CHAOS}, Naar Isle deals 3 damage to target player or planeswalker.

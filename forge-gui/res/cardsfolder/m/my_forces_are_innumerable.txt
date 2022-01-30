@@ -8,5 +8,4 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Opponent | TriggerZones$ Comma
 # that several opponents may choose to sacrifice a total of two creatures, as opposed to two creatures by a single opponent.
 SVar:SacToAbandon:DB$ Abandon | UnlessPayer$ Opponent | UnlessCost$ Sac<2/Creature> | UnlessSwitched$ True
 SVar:AIPreference:SacCost$Creature
-SVar:Picture:https://downloads.cardforge.org/images/cards/E01/My Forces Are Innumerable.full.jpg
 Oracle:(An ongoing scheme remains face up until it's abandoned.)\nAt the beginning of your end step, create a 3/3 black Horror creature token.\nAt the beginning of your opponents' end step, they may sacrifice two creatures. If they do, abandon this scheme.

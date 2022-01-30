@@ -7,5 +7,4 @@ A:AB$ DealDamage | Cost$ 1 R T | ValidTgts$ Creature | TgtPrompt$ Select target 
 SVar:DamageThis:DB$ DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y
 SVar:X:Count$CardPower
 SVar:Y:Targeted$CardPower
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tahngarth_talruum_hero.jpg
 Oracle:Vigilance\n{1}{R}, {T}: Tahngarth, Talruum Hero deals damage equal to its power to target creature. That creature deals damage equal to its power to Tahngarth.

@@ -5,5 +5,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Bat
 SVar:TrigCharm:DB$ Charm | Choices$ DBTapOrUntap,DBScry
 SVar:DBTapOrUntap:DB$ TapOrUntap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ You may tap or untap target creature.
 SVar:DBScry:DB$ Scry | ScryNum$ 1 | SpellDescription$ Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
-SVar:Picture:http://www.wizards.com/global/images/magic/general/retreat_to_coralhelm.jpg
 Oracle:Landfall — Whenever a land enters the battlefield under your control, choose one —\n• You may tap or untap target creature.\n• Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

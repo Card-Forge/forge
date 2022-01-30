@@ -3,5 +3,4 @@ ManaCost:3 U
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a noncreature spell, you may pay {1}{U}. If you do, create a 2/2 blue Djinn Monk creature token with flying.
 SVar:TrigToken:AB$ Token | Cost$ 1 U | TokenAmount$ 1 | TokenScript$ u_2_2_djinn_monk_flying | LegacyImage$ u 2 2 djinn monk flying dtk | TokenOwner$ You
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skywise_teachings.jpg
 Oracle:Whenever you cast a noncreature spell, you may pay {1}{U}. If you do, create a 2/2 blue Djinn Monk creature token with flying.

@@ -2,5 +2,4 @@ Name:River's Rebuke
 ManaCost:4 U U
 Types:Sorcery
 A:SP$ ChangeZoneAll | Cost$ 4 U U | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Permanent.nonLand | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all nonland permanents target player controls to their owner's hand.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rivers_rebuke.jpg
 Oracle:Return all nonland permanents target player controls to their owner's hand.

@@ -2,5 +2,4 @@ Name:Hazardous Conditions
 ManaCost:2 B G
 Types:Sorcery
 A:SP$ PumpAll | Cost$ 2 B G | ValidCards$ Creature.NoCounters | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ Creatures with no counters on them get -2/-2 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hazardous conditions.jpg
 Oracle:Creatures with no counters on them get -2/-2 until end of turn.

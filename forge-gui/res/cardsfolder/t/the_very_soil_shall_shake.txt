@@ -4,5 +4,4 @@ Types:Ongoing Scheme
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | EffectZone$ Command | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Trample | Description$ Creatures you control get +2/+2 and have trample.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Command | Execute$ Abandon | TriggerDescription$ When a creature you control dies, abandon this scheme.
 SVar:Abandon:AB$ Abandon | Cost$ 0
-SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/The Very Soil Shall Shake.full.jpg
 Oracle:(An ongoing scheme remains face up until it's abandoned.)\nCreatures you control get +2/+2 and have trample.\nWhen a creature you control dies, abandon this scheme.

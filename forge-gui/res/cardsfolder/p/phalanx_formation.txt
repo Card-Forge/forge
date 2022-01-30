@@ -4,5 +4,4 @@ Types:Instant
 K:Strive:1 W
 A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature | KW$ Double Strike | TargetMin$ 0 | TargetMax$ MaxTargets | SpellDescription$ Any number of target creatures each gain double strike until end of turn.
 SVar:MaxTargets:Count$Valid Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/phalanx_formation.jpg
 Oracle:Strive — This spell costs {1}{W} more to cast for each target beyond the first.\nAny number of target creatures each gain double strike until end of turn. (They deal both first-strike and regular combat damage.)

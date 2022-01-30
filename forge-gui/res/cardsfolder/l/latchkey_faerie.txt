@@ -7,5 +7,4 @@ K:Prowl:2 U
 T:Mode$ ChangesZone | Origin$ Stack | Destination$ Battlefield | ValidCard$ Card.Self+prowled | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, if its prowl cost was paid, draw a card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1
 DeckNeeds:Type$Rogue
-SVar:Picture:http://www.wizards.com/global/images/magic/general/latchkey_faerie.jpg
 Oracle:Flying\nProwl {2}{U} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Faerie or Rogue.)\nWhen Latchkey Faerie enters the battlefield, if its prowl cost was paid, draw a card.

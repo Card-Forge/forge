@@ -13,5 +13,4 @@ SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ DBCleanup | Static$ True | Secondary$ True | TriggerDescription$ Forget all remembered cards.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Equip:3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/godsend.jpg
 Oracle:Equipped creature gets +3/+3.\nWhenever equipped creature blocks or becomes blocked by one or more creatures, you may exile one of those creatures.\nYour opponents can't cast spells with the same name as a card exiled with Godsend.\nEquip {3}

@@ -4,5 +4,4 @@ Types:Artifact
 A:AB$ Effect | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberObjects$ Targeted | Name$ Tower of Coireall Effect | StaticAbilities$ KWPump | SpellDescription$ Target creature can't be blocked by Walls this turn.
 SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.IsRemembered | ValidBlocker$ Creature.Wall | EffectZone$ Command | Description$ Remembered creature can't be blocked by Walls this turn.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_of_coireall.jpg
 Oracle:{T}: Target creature can't be blocked by Walls this turn.

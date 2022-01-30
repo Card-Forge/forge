@@ -8,5 +8,4 @@ SVar:DBAnimate:DB$ Animate | Defined$ Enchanted | Types$ ChosenType | RemoveCrea
 SVar:NonStackingAttachEffect:True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_mask.jpg
 Oracle:Enchant creature\n{1}: Enchanted creature becomes the creature type of your choice until end of turn.

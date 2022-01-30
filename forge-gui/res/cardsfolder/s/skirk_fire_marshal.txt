@@ -5,5 +5,4 @@ PT:2/2
 A:AB$ DamageAll | Cost$ tapXType<5/Goblin> | ValidCards$ Creature | ValidPlayers$ Player | NumDmg$ 10 | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 10 damage to each creature and each player.
 K:Protection from red
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skirk_fire_marshal.jpg
 Oracle:Protection from red\nTap five untapped Goblins you control: Skirk Fire Marshal deals 10 damage to each creature and each player.

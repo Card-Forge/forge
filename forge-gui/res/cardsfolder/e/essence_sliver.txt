@@ -7,5 +7,4 @@ SVar:TrigGain:DB$ GainLife | Defined$ TriggeredSourceController | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:PlayMain1:TRUE
 SVar:HasCombatEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_sliver.jpg
 Oracle:Whenever a Sliver deals damage, its controller gains that much life.

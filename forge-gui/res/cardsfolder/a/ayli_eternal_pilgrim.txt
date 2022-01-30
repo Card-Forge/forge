@@ -8,5 +8,4 @@ A:AB$ ChangeZone | Cost$ 1 W B Sac<1/Creature.Other/another creature> | CheckSVa
 SVar:Toughness:Sacrificed$CardToughness
 SVar:X:Count$YourLifeTotal
 SVar:Y:Count$YourStartingLife/Plus.10
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ayli_eternal_pilgrim.jpg
 Oracle:Deathtouch\n{1}, Sacrifice another creature: You gain life equal to the sacrificed creature's toughness.\n{1}{W}{B}, Sacrifice another creature: Exile target nonland permanent. Activate only if you have at least 10 life more than your starting life total.

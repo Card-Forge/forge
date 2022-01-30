@@ -7,5 +7,4 @@ SVar:Aurify:DB$ Animate | IsPresent$ Card.Self | Types$ Aura | OverwriteSpells$ 
 SVar:NewAttach:SP$ Attach | Cost$ 1 W W | ValidTgts$ Creature | AILogic$ Pump
 SVar:LightformAttach:DB$ Attach | Defined$ Remembered | IsPresent$ Card.Self
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Lifelink & Flying | Description$ Enchanted creature has flying and lifelink.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lightform.jpg
 Oracle:When Lightform enters the battlefield, it becomes an Aura with enchant creature. Manifest the top card of your library and attach Lightform to it. (To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)\nEnchanted creature has flying and lifelink.

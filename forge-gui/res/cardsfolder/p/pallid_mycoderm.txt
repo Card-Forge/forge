@@ -7,6 +7,5 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ SPORE | Counte
 A:AB$ Token | Cost$ SubCounter<3/SPORE> | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling plc | SpellDescription$ Create a 1/1 green Saproling creature token.
 A:AB$ PumpAll | Cost$ Sac<1/Saproling> | ValidCards$ Fungus.Creature+YouCtrl,Saproling.Creature+YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Each creature you control that's a Fungus or a Saproling gets +1/+1 until end of turn.
 DeckHints:Type$Fungus
-DeckHas:Ability$Counters & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pallid_mycoderm.jpg
+DeckHas:Ability$Counters|Token
 Oracle:At the beginning of your upkeep, put a spore counter on Pallid Mycoderm.\nRemove three spore counters from Pallid Mycoderm: Create a 1/1 green Saproling creature token.\nSacrifice a Saproling: Each creature you control that's a Fungus or a Saproling gets +1/+1 until end of turn.

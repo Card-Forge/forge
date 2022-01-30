@@ -7,5 +7,4 @@ SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatin
 SVar:Mastery:DB$ Pump | Defined$ TriggeredCard | KW$ HIDDEN CARDNAME can't be countered. | PumpZone$ Stack | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/overmaster.jpg
 Oracle:The next instant or sorcery spell you cast this turn can't be countered.\nDraw a card.

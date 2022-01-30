@@ -2,5 +2,4 @@ Name:Searing Wind
 ManaCost:8 R
 Types:Instant
 A:SP$ DealDamage | Cost$ 8 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 10 | SpellDescription$ CARDNAME deals 10 damage to any target.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/searing_wind.jpg
 Oracle:Searing Wind deals 10 damage to any target.

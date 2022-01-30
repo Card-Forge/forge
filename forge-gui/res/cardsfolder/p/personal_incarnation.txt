@@ -11,5 +11,4 @@ SVar:DBLoseLife:DB$ LoseLife | Defined$ Remembered | LifeAmount$ HavocX | SubAbi
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:HavocX:PlayerCountRemembered$LifeTotal/HalfUp
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/personal_incarnation.jpg
 Oracle:{0}: The next 1 damage that would be dealt to Personal Incarnation this turn is dealt to its owner instead. Only Personal Incarnation's owner may activate this ability.\nWhen Personal Incarnation dies, its owner loses half their life, rounded up.

@@ -3,5 +3,4 @@ ManaCost:G
 Types:Creature Cat
 PT:2/2
 K:Echo:G
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pouncing_jaguar.jpg
 Oracle:Echo {G} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)

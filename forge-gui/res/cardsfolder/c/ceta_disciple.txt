@@ -5,5 +5,4 @@ PT:1/1
 A:AB$ Pump | Cost$ R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | SpellDescription$ Target creature gets +2/+0 until end of turn.
 A:AB$ Mana | Cost$ G T | Produced$ Any | SpellDescription$ Add one mana of any color.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ceta_disciple.jpg
 Oracle:{R}, {T}: Target creature gets +2/+0 until end of turn.\n{G}, {T}: Add one mana of any color.

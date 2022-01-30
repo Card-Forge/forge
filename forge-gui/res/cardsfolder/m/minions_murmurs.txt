@@ -5,5 +5,4 @@ A:SP$ Draw | Cost$ 2 B B | NumCards$ X | SpellDescription$ You draw X cards and 
 SVar:DB1:DB$ LoseLife | LifeAmount$ X
 SVar:X:Count$TypeYouCtrl.Creature
 AI:RemoveDeck:All
-SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130316.jpg
 Oracle:You draw X cards and you lose X life, where X is the number of creatures you control.

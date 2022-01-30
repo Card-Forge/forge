@@ -10,5 +10,4 @@ SVar:NeedsToPlayVar:Z GE2
 SVar:Z:SVar$Z1/Plus.Z2
 SVar:Z1:Count$Valid Creature.nonArtifact+OppCtrl/LimitMax.1
 SVar:Z2:Count$Valid Creature.Artifact+OppCtrl/LimitMax.1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/perilous_predicament.jpg
 Oracle:Each opponent sacrifices an artifact creature and a nonartifact creature.

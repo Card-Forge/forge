@@ -7,5 +7,4 @@ K:Monstrosity:3:6 B B
 T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDestroyAll | TriggerDescription$ When CARDNAME becomes monstrous, destroy all non-Gorgon creatures.
 DeckHas:Ability$Counters
 SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Creature.nonGorgon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hythonia_the_cruel.jpg
 Oracle:Deathtouch\n{6}{B}{B}: Monstrosity 3. (If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)\nWhen Hythonia the Cruel becomes monstrous, destroy all non-Gorgon creatures.

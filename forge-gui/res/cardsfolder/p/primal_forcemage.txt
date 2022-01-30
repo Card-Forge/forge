@@ -5,5 +5,4 @@ PT:2/2
 T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever another creature enters the battlefield under your control, that creature gets +3/+3 until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ TriggeredCardLKICopy | NumAtt$ +3 | NumDef$ +3
 SVar:PlayMain1:ALWAYS
-SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_forcemage.jpg
 Oracle:Whenever another creature enters the battlefield under your control, that creature gets +3/+3 until end of turn.

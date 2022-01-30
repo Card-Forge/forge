@@ -5,5 +5,4 @@ PT:5/5
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, each opponent draws a card.
 SVar:TrigDraw:DB$ Draw | Defined$ Player.Opponent | NumCards$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_the_feast.jpg
 Oracle:Flying\nAt the beginning of your upkeep, each opponent draws a card.

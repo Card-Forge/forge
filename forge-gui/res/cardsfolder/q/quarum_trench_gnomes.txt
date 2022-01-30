@@ -7,5 +7,4 @@ SVar:QuarumReplacement:Event$ ProduceMana | ValidCard$ Card.IsRemembered | Repla
 SVar:QuarumProduce:DB$ ReplaceMana | ReplaceColor$ C | ReplaceOnly$ W
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/quarum_trench_gnomes.jpg
 Oracle:{T}: If target Plains is tapped for mana, it produces colorless mana instead of white mana. (This effect lasts indefinitely.)

@@ -10,5 +10,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$Valid Land.YouCtrl+untapped+inZoneBattlefield
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lotus_vale.jpg
 Oracle:If Lotus Vale would enter the battlefield, sacrifice two untapped lands instead. If you do, put Lotus Vale onto the battlefield. If you don't, put it into its owner's graveyard.\n{T}: Add three mana of any one color.

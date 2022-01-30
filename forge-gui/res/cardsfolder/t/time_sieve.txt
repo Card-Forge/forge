@@ -3,5 +3,4 @@ ManaCost:U B
 Types:Artifact
 A:AB$ AddTurn | Cost$ T Sac<5/Artifact> | NumTurns$ 1 | SpellDescription$ Take an extra turn after this one.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/time_sieve.jpg
 Oracle:{T}, Sacrifice five artifacts: Take an extra turn after this one.

@@ -7,5 +7,4 @@ SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ Player.IsRemembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$FilterControlledByRemembered_Number$1
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deadly_tempest.jpg
 Oracle:Destroy all creatures. Each player loses life equal to the number of creatures they controlled that were destroyed this way.

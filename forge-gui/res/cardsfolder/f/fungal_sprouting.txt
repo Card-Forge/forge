@@ -4,5 +4,4 @@ Types:Sorcery
 A:SP$ Token | Cost$ 3 G | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling m13 | SpellDescription$ Create X 1/1 green Saproling creature tokens, where X is the greatest power among creatures you control.
 SVar:X:Count$GreatestPower_Creature.YouCtrl
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fungal_sprouting.jpg
 Oracle:Create X 1/1 green Saproling creature tokens, where X is the greatest power among creatures you control.

@@ -4,5 +4,4 @@ Types:Creature Sliver
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddKeyword$ Double Strike | Description$ Sliver creatures you control have double strike.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bonescythe_sliver.jpg
 Oracle:Sliver creatures you control have double strike. (They deal both first-strike and regular combat damage.)

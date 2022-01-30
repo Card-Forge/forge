@@ -4,5 +4,4 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Untap | Cost$ G T | ValidTgts$ Elf | TgtPrompt$ Select target Elf | SpellDescription$ Untap target Elf.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_lodge.jpg
 Oracle:{T}: Add {C}.\n{G}, {T}: Untap target Elf.

@@ -3,5 +3,4 @@ ManaCost:3 U
 Types:Creature Zombie Horror
 PT:4/5
 A:SP$ PermanentCreature | Cost$ 3 U ExileFromGrave<1/Creature>
-SVar:Picture:http://www.wizards.com/global/images/magic/general/makeshift_mauler.jpg
 Oracle:As an additional cost to cast this spell, exile a creature card from your graveyard.

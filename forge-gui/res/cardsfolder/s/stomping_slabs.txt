@@ -6,5 +6,4 @@ SVar:DBDamage:DB$ DealDamage | NumDmg$ 7 | ValidTgts$ Creature,Player,Planeswalk
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random
 DeckNeeds:Name$Stomping Slabs
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stomping_slabs.jpg
 Oracle:Reveal the top seven cards of your library, then put those cards on the bottom of your library in any order. If a card named Stomping Slabs was revealed this way, Stomping Slabs deals 7 damage to any target.

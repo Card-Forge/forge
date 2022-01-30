@@ -7,5 +7,4 @@ SVar:DBLose:DB$ LoseLife | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ad_nauseam.jpg
 Oracle:Reveal the top card of your library and put that card into your hand. You lose life equal to its mana value. You may repeat this process any number of times.

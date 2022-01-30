@@ -6,5 +6,4 @@ A:AB$ Draw | Cost$ 1 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a ca
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:Random
 DeckNeeds:Color$Blue
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_spellbomb.jpg
 Oracle:{U}, Sacrifice Aether Spellbomb: Return target creature to its owner's hand.\n{1}, Sacrifice Aether Spellbomb: Draw a card.

@@ -3,5 +3,4 @@ ManaCost:2 R
 Types:Instant
 A:SP$ ChangeZoneAll | Cost$ 2 R | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Land | SpellDescription$ Target player exiles all land cards from their graveyard.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mudhole.jpg
 Oracle:Target player exiles all land cards from their graveyard.

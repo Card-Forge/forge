@@ -7,5 +7,4 @@ T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ 
 SVar:TrigDraw:AB$Draw | Cost$ G | NumCards$ 1
 AI:RemoveDeck:Random
 DeckNeeds:Color$Green
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lifecrafters_bestiary.jpg
 Oracle:At the beginning of your upkeep, scry 1.\nWhenever you cast a creature spell, you may pay {G}. If you do, draw a card.

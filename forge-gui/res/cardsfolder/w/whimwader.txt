@@ -3,5 +3,4 @@ ManaCost:4 U
 Types:Creature Elemental
 PT:6/4
 S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Permanent.Blue | Description$ CARDNAME can't attack unless defending player controls a blue permanent.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/whimwader.jpg
 Oracle:Whimwader can't attack unless defending player controls a blue permanent.

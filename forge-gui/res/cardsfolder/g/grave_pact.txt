@@ -3,5 +3,4 @@ ManaCost:1 B B B
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever a creature you control dies, each other player sacrifices a creature.
 SVar:TrigSac:DB$ Sacrifice | Defined$ Player.Other | SacValid$ Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_pact.jpg
 Oracle:Whenever a creature you control dies, each other player sacrifices a creature.

@@ -4,5 +4,4 @@ Types:Enchantment Aura
 K:Enchant Mountain
 A:SP$ Attach | Cost$ 1 R R R | ValidTgts$ Mountain | AILogic$ Animate
 S:Mode$ Continuous | Affected$ Land.AttachedBy | AddType$ Creature & Giant | SetColor$ Red | SetPower$ 7 | SetToughness$ 7 | AddKeyword$ Haste | Description$ Enchanted Mountain is a 7/7 red Giant creature with haste. It's still a land.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/awaken_the_ancient.jpg
 Oracle:Enchant Mountain\nEnchanted Mountain is a 7/7 red Giant creature with haste. It's still a land.

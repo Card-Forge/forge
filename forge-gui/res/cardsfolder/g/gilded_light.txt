@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ Pump | Cost$ 1 W | Defined$ You | KW$ Shroud | SpellDescription$ You gain shroud until end of turn. (You can't be the target of spells or abilities.)
 K:Cycling:2
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gilded_light.jpg
 Oracle:You gain shroud until end of turn. (You can't be the target of spells or abilities.)\nCycling {2} ({2}, Discard this card: Draw a card.)

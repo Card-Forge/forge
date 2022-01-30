@@ -6,5 +6,4 @@ SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/illusionists_stratagem.jpg
 Oracle:Exile up to two target creatures you control, then return those cards to the battlefield under their owner's control.\nDraw a card.

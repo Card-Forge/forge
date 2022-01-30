@@ -10,5 +10,4 @@ S:Mode$ Continuous | Affected$ Creature.White | AddPower$ 1 | AddToughness$ 1 | 
 T:Mode$ Always | CheckSVar$ X | SVarCompare$ LEY | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When the chosen color isn't the most common color among nontoken permanents the chosen player controls or is tied for most common, sacrifice CARDNAME.
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/call_to_arms.jpg
 Oracle:As Call to Arms enters the battlefield, choose a color and an opponent.\nWhite creatures get +1/+1 as long as the chosen color is the most common color among nontoken permanents the chosen player controls but isn't tied for most common.\nWhen the chosen color isn't the most common color among nontoken permanents the chosen player controls or is tied for most common, sacrifice Call to Arms.

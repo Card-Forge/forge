@@ -3,5 +3,4 @@ ManaCost:2 B B
 Types:Sorcery
 K:Flashback:5 B B
 A:SP$ Token | Cost$ 2 B B | LegacyImage$ b 2 2 zombie isd | TokenAmount$ 2 | TokenScript$ b_2_2_zombie | TokenOwner$ You | SpellDescription$ Create two 2/2 black Zombie creature tokens.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/moan_of_the_unhallowed.jpg
 Oracle:Create two 2/2 black Zombie creature tokens.\nFlashback {5}{B}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

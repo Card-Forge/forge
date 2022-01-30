@@ -6,5 +6,4 @@ K:Cycling:2 R
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalDecider$ You | TriggerDescription$ When you cycle CARDNAME or it dies, you may have it deal 1 damage to any target.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalDecider$ You | Secondary$ True | TriggerDescription$ When you cycle CARDNAME or it dies, you may have it deal 1 damage to any target.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jund_sojourners.jpg
 Oracle:When you cycle Jund Sojourners or it dies, you may have it deal 1 damage to any target.\nCycling {2}{R} ({2}{R}, Discard this card: Draw a card.)

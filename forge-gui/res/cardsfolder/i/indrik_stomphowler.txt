@@ -4,5 +4,4 @@ Types:Creature Beast
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target artifact or enchantment.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/indrik_stomphowler.jpg
 Oracle:When Indrik Stomphowler enters the battlefield, destroy target artifact or enchantment.

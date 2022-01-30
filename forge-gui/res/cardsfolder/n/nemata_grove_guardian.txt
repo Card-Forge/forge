@@ -7,5 +7,4 @@ A:AB$ PumpAll | Cost$ Sac<1/Saproling> | ValidCards$ Creature.Saproling | NumAtt
 AI:RemoveDeck:All
 DeckHints:Type$Fungus
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nemata_grove_guardian.jpg
 Oracle:{2}{G}: Create a 1/1 green Saproling creature token.\nSacrifice a Saproling: Saproling creatures get +1/+1 until end of turn.

@@ -3,5 +3,4 @@ ManaCost:1 G
 Types:Creature Dryad
 PT:2/1
 K:Forestwalk
-SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card136285.jpg
 Oracle:Forestwalk (This creature can't be blocked as long as defending player controls a Forest.)

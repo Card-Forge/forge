@@ -5,5 +5,4 @@ PT:5/5
 K:Trample
 K:Protection from blue
 K:Protection from red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sabertooth_nishoba.jpg
 Oracle:Trample, protection from blue and from red

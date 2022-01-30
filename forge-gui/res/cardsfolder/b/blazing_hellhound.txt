@@ -3,5 +3,4 @@ ManaCost:2 B R
 Types:Creature Elemental Dog
 PT:4/3
 A:AB$ DealDamage | Cost$ 1 Sac<1/Creature.Other/another creature> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blazing_hellhound.jpg
 Oracle:{1}, Sacrifice another creature: Blazing Hellhound deals 1 damage to any target.

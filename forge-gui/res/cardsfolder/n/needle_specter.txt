@@ -7,5 +7,4 @@ K:Wither
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player discards that many cards.
 SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ X | Mode$ TgtChoose
 SVar:X:TriggerCount$DamageAmount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/needle_specter.jpg
 Oracle:Flying\nWither (This deals damage to creatures in the form of -1/-1 counters.)\nWhenever Needle Specter deals combat damage to a player, that player discards that many cards.

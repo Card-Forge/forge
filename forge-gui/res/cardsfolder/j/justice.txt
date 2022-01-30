@@ -6,5 +6,4 @@ T:Mode$ DamageDealtOnce | ValidSource$ Card.Red | Execute$ TrigDamage | TriggerZ
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredSourceController | NumDmg$ X
 SVar:X:TriggerCount$DamageAmount
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/justice.jpg
 Oracle:At the beginning of your upkeep, sacrifice Justice unless you pay {W}{W}.\nWhenever a red creature or spell deals damage, Justice deals that much damage to that creature's or spell's controller.

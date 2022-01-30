@@ -5,5 +5,4 @@ PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 3 damage to target creature with flying.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ 3
 K:Cycling:RG
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deadshot_minotaur.jpg
 Oracle:When Deadshot Minotaur enters the battlefield, it deals 3 damage to target creature with flying.\nCycling {R/G} ({R/G}, Discard this card: Draw a card.)

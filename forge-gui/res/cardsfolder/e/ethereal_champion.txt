@@ -4,5 +4,4 @@ Types:Creature Avatar
 PT:3/4
 A:AB$ PreventDamage | Cost$ PayLife<1> | Defined$ Self | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to CARDNAME this turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ethereal_champion.jpg
 Oracle:Pay 1 life: Prevent the next 1 damage that would be dealt to Ethereal Champion this turn.

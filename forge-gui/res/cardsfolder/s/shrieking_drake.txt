@@ -6,5 +6,4 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a creature you control to its owner's hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouCtrl | AILogic$ NeverBounceItself
 SVar:NeedsToPlay:Creature.YouCtrl+token+powerLE2+inZoneBattlefield,Creature.YouCtrl+nonToken+cmcLE2+powerLE1+inZoneBattlefield
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shrieking_drake.jpg
 Oracle:Flying\nWhen Shrieking Drake enters the battlefield, return a creature you control to its owner's hand.

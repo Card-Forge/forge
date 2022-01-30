@@ -6,5 +6,4 @@ SVar:DBPay:DB$ RepeatEach | DefinedCards$ DirectRemembered | UseImprinted$ True 
 SVar:DBDmg:DB$ DealDamage | NumDmg$ 1 | Defined$ ImprintedController | UnlessCost$ 2 | UnlessPayer$ ImprintedController | ShowCurrentCard$ Imprinted
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stench_of_evil.jpg
 Oracle:Destroy all Plains. For each land destroyed this way, Stench of Evil deals 1 damage to that land's controller unless they pay {2}.

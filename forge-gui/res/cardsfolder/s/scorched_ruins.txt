@@ -11,5 +11,4 @@ SVar:X:Remembered$Amount
 SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$Valid Land.YouCtrl+untapped
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scorched_ruins.jpg
 Oracle:If Scorched Ruins would enter the battlefield, sacrifice two untapped lands instead. If you do, put Scorched Ruins onto the battlefield. If you don't, put it into its owner's graveyard.\n{T}: Add {C}{C}{C}{C}.

@@ -4,5 +4,4 @@ Types:Artifact Creature Wall
 PT:0/6
 K:Defender
 A:AB$ Pump | Cost$ G | KW$ Reach | Defined$ Self | SpellDescription$ CARDNAME gains reach until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_tanglecord.jpg
 Oracle:Defender\n{G}: Wall of Tanglecord gains reach until end of turn. (It can block creatures with flying.)

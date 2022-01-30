@@ -2,5 +2,4 @@ Name:Vodalian Soldiers
 ManaCost:1 U
 Types:Creature Merfolk Soldier
 PT:1/2
-SVar:Picture:http://resources.wizards.com/magic/cards/fe/en-us/card1901.jpg
 Oracle:

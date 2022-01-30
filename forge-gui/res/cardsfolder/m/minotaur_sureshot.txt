@@ -4,5 +4,4 @@ Types:Creature Minotaur Archer
 PT:2/3
 K:Reach
 A:AB$ Pump | Cost$ 1 R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/minotaur_sureshot.jpg
 Oracle:Reach (This creature can block creatures with flying.)\n{1}{R}: Minotaur Sureshot gets +1/+0 until end of turn.

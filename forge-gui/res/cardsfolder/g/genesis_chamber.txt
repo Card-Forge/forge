@@ -5,5 +5,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ TriggeredCardController | TokenScript$ c_1_1_a_myr | LegacyImage$ c 1 1 a myr dst | SpellDescription$ Create a 1/1 Myr artifact creature token.
 AI:RemoveDeck:Random
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/genesis_chamber.jpg
 Oracle:Whenever a nontoken creature enters the battlefield, if Genesis Chamber is untapped, that creature's controller creates a 1/1 colorless Myr artifact creature token.

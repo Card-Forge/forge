@@ -4,5 +4,4 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ U U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+untapped | AddKeyword$ Shroud | Description$ Enchanted creature has shroud as long as it's untapped. (It can't be the target of spells or abilities.)
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_cloak.jpg
 Oracle:Enchant creature\nEnchanted creature has shroud as long as it's untapped. (It can't be the target of spells or abilities.)

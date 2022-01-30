@@ -6,6 +6,5 @@ SVar:TrigPump:DB$ Pump | Defined$ TriggeredCard | KW$ Double Strike & Haste
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, exile target nontoken creature you control, then return it to the battlefield under your control.
 SVar:RolledChaos:DB$ ChangeZone | ValidTgts$ Creature.nonToken+YouCtrl | TgtPrompt$ Select target non-Token creature you control | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ RestorationReturn
 SVar:RestorationReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | GainControl$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodhill_bastion.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | MinTurn$ 3 | RollInMain1$ True
 Oracle:Whenever a creature enters the battlefield, it gains double strike and haste until end of turn.\nWhenever you roll {CHAOS}, exile target nontoken creature you control, then return it to the battlefield under your control.

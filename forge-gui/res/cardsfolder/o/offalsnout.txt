@@ -9,5 +9,4 @@ SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtProm
 AI:RemoveDeck:All
 SVar:NeedsToPlayEvokedVar:Z GE1
 SVar:Z:Count$ValidGraveyard Card.OppCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/offalsnout.jpg
 Oracle:Flash\nWhen Offalsnout leaves the battlefield, exile target card from a graveyard.\nEvoke {B} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)

@@ -2,5 +2,4 @@ Name:Seek the Wilds
 ManaCost:1 G
 Types:Sorcery
 A:SP$ Dig | Cost$ 1 G | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature,Land | ForceRevealToController$ True | SpellDescription$ Look at the top four cards of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/seek_the_wilds.jpg
 Oracle:Look at the top four cards of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in any order.

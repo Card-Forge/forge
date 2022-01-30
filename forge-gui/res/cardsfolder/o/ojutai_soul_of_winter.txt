@@ -9,5 +9,4 @@ SVar:TrigTap:DB$ Tap | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Choose 
 SVar:DBPump:DB$ Pump | Defined$ Targeted | Duration$ Permanent | KW$ HIDDEN This card doesn't untap during your next untap step.
 SVar:HasAttackEffect:TRUE
 DeckHints:Type$Dragon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ojutai_soul_of_winter.jpg
 Oracle:Flying, vigilance\nWhenever a Dragon you control attacks, tap target nonland permanent an opponent controls. That permanent doesn't untap during its controller's next untap step.

@@ -5,5 +5,4 @@ Text:Cast this spell only during the declare blockers step.
 A:SP$ RepeatEach | Cost$ 1 G | ActivationPhases$ Declare Blockers | RepeatSubAbility$ DBBecomeBlocked | RepeatCards$ Creature.attacking | SpellDescription$ Attacking creatures become blocked. (This spell works on creatures that can't be blocked.)
 SVar:DBBecomeBlocked:DB$ BecomesBlocked | Defined$ Remembered
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fog_patch.jpg
 Oracle:Cast this spell only during the declare blockers step.\nAttacking creatures become blocked. (This spell works on creatures that can't be blocked.)

@@ -10,5 +10,4 @@ T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCar
 SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kheru_mind_eater.jpg
 Oracle:Menace\nWhenever Kheru Mind-Eater deals combat damage to a player, that player exiles a card from their hand face down.\nYou may look at cards exiled with Kheru Mind-Eater, and you may play lands and cast spells from among those cards.

@@ -6,5 +6,4 @@ K:Echo:4 R R
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield or dies, create two 1/1 red Goblin creature tokens.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or dies, create two 1/1 red Goblin creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ r_1_1_goblin | TokenOwner$ You | LegacyImage$ r 1 1 goblin uds
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_marshal.jpg
 Oracle:Echo {4}{R}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Goblin Marshal enters the battlefield or dies, create two 1/1 red Goblin creature tokens.

@@ -7,5 +7,4 @@ A:AB$ Attach | Cost$ B B | AILogic$ InstantReequipPowerBuff | ValidTgts$ Creatur
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Artifact
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cranial_plating.jpg
 Oracle:Equipped creature gets +1/+0 for each artifact you control.\n{B}{B}: Attach Cranial Plating to target creature you control.\nEquip {1}

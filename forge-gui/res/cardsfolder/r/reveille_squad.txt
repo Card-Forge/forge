@@ -4,5 +4,4 @@ Types:Creature Human Rebel
 PT:3/3
 T:Mode$ AttackersDeclared | AttackedTarget$ You | TriggerZones$ Battlefield | Execute$ TrigUntapAll | IsPresent$ Card.untapped+Self | OptionalDecider$ You | TriggerDescription$ Whenever one or more creatures attack you, if CARDNAME is untapped, you may untap all creatures you control.
 SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reveille_squad.jpg
 Oracle:Whenever one or more creatures attack you, if Reveille Squad is untapped, you may untap all creatures you control.

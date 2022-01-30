@@ -5,5 +5,4 @@ K:Enchant permanent
 A:SP$ Attach | Cost$ 4 U U | ValidTgts$ Permanent | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | GainControl$ You | Description$ You control enchanted permanent.
 S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | AddType$ Legendary | Description$ Enchanted permanent is legendary.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/in_bolass_clutches.jpg
 Oracle:Enchant permanent\nYou control enchanted permanent.\nEnchanted permanent is legendary.

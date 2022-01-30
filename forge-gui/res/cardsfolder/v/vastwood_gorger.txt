@@ -2,5 +2,4 @@ Name:Vastwood Gorger
 ManaCost:5 G
 Types:Creature Wurm
 PT:5/6
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vastwood_gorger.jpg
 Oracle:

@@ -7,6 +7,6 @@ SVar:TrigDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose
 T:Mode$ Discarded | ValidCard$ Spirit.YouOwn,Card.YouOwn+withDisturb | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you discard a Spirit card or a card with disturb, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
-DeckHas:Ability$Discard & Ability$Counters
+DeckHas:Ability$Discard|Counters
 DeckHints:Type$Spirit & Keyword$Disturb
 Oracle:When Shipwreck Sifters enters the battlefield, draw a card, then discard a card.\nWhenever you discard a Spirit card or a card with disturb, put a +1/+1 counter on Shipwreck Sifters.

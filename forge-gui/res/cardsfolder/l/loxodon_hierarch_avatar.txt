@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+0/+12
 A:AB$ Regenerate | ActivationZone$ Command | Cost$ Sac<1/Permanent> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Regenerate target creature you control.
-SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Loxodon Hierarch Avatar.full.jpg
 Oracle:Hand +0, life +12\nSacrifice a permanent: Regenerate target creature you control.

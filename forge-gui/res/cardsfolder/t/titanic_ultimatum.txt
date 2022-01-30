@@ -2,5 +2,4 @@ Name:Titanic Ultimatum
 ManaCost:R R G G G W W
 Types:Sorcery
 A:SP$ PumpAll | Cost$ R R G G G W W | ValidCards$ Creature.YouCtrl | NumAtt$ +5 | NumDef$ +5 | KW$ First Strike & Trample & Lifelink | SpellDescription$ Until end of turn, creatures you control get +5/+5 and gain first strike, trample, and lifelink.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/titanic_ultimatum.jpg
 Oracle:Until end of turn, creatures you control get +5/+5 and gain first strike, trample, and lifelink.

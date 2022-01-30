@@ -4,6 +4,5 @@ Types:Sorcery
 A:SP$ Token | Cost$ 5 U | TokenAmount$ X | TokenScript$ b_2_2_zombie | TokenOwner$ You | LegacyImage$ b 2 2 zombie soi | TokenTapped$ True | SpellDescription$ Create a tapped 2/2 black Zombie creature token for each instant and sorcery card in your graveyard.
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
 SVar:BuffedBy:Instant,Sorcery
-DeckHints:Ability$Graveyard & Ability$Discard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rise_from_the_tides.jpg
+DeckHints:Ability$Graveyard|Discard
 Oracle:Create a tapped 2/2 black Zombie creature token for each instant and sorcery card in your graveyard.

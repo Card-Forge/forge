@@ -3,5 +3,4 @@ ManaCost:4 R R
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 4 R R | ValidCards$ Artifact,Creature,Land | NoRegen$ True | SpellDescription$ Destroy all artifacts, creatures, and lands. They can't be regenerated.
 AI:RemoveDeck:Random
-SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card14653.jpg
 Oracle:Destroy all artifacts, creatures, and lands. They can't be regenerated.

@@ -5,5 +5,4 @@ S:Mode$ Continuous | Affected$ Creature.Wall | AddHiddenKeyword$ CARDNAME can at
 SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rolling_stones.jpg
 Oracle:Wall creatures can attack as though they didn't have defender.

@@ -8,5 +8,4 @@ SVar:TrigLose:DB$ LoseLife | LifeAmount$ 2 | SubAbility$ DBSac
 SVar:DBSac:DB$ Sacrifice | Amount$ 2 | SacValid$ Creature | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | ValidTgts$ Opponent | NumCards$ 2
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_tresserhorn.jpg
 Oracle:When Lord of Tresserhorn enters the battlefield, you lose 2 life, you sacrifice two creatures, and target opponent draws two cards.\n{B}: Regenerate Lord of Tresserhorn.

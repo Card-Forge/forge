@@ -5,5 +5,4 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Banding | CheckSVar$ CheckPLAINS | SVarCompare$ GE1 | Description$ CARDNAME has banding as long as you control a Plains.
 SVar:CheckPLAINS:Count$Valid Plains.YouCtrl
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dire_wolves.jpg
 Oracle:Dire Wolves has banding as long as you control a Plains. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)

@@ -9,5 +9,4 @@ T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execut
 SVar:TrigTokenBlocking:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_cat_soldier_vigilance | TokenOwner$ You | LegacyImage$ w 1 1 cat soldier vigilance bng | TokenBlocking$ TriggeredAttacker
 SVar:HasAttackEffect:TRUE
 SVar:HasBlockEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brimaz_king_of_oreskos.jpg
 Oracle:Vigilance\nWhenever Brimaz, King of Oreskos attacks, create a 1/1 white Cat Soldier creature token with vigilance that's attacking.\nWhenever Brimaz blocks a creature, create a 1/1 white Cat Soldier creature token with vigilance that's blocking that creature.

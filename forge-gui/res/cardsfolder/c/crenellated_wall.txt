@@ -4,5 +4,4 @@ Types:Artifact Creature Wall
 PT:0/4
 K:Defender
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDef$ +4 | SpellDescription$ Target creature gets +0/+4 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crenellated_wall.jpg
 Oracle:Defender (This creature can't attack.)\n{T}: Target creature gets +0/+4 until end of turn.

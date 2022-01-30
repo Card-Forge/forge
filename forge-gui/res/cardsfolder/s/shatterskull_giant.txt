@@ -2,5 +2,4 @@ Name:Shatterskull Giant
 ManaCost:2 R R
 Types:Creature Giant Warrior
 PT:4/3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shatterskull_giant.jpg
 Oracle:

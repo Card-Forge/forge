@@ -5,5 +5,4 @@ T:Mode$ Always | CheckSVar$ X | SVarCompare$ EQ0 | TriggerZones$ Battlefield | E
 SVar:TrigVCAnimate:DB$ Animate | Types$ Creature,Crocodile | Power$ 4 | Toughness$ 4 | RemoveCardTypes$ True | Duration$ Permanent
 SVar:X:PlayerCountPlayers$LowestValidHand Card.YouOwn
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/veiled_crocodile.jpg
 Oracle:When a player has no cards in hand, if Veiled Crocodile is an enchantment, Veiled Crocodile becomes a 4/4 Crocodile creature.

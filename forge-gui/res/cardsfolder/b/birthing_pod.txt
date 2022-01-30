@@ -5,5 +5,4 @@ A:AB$ ChangeZone | Cost$ 1 PG T Sac<1/Creature> | Origin$ Library | Destination$
 SVar:X:Sacrificed$CardManaCost/Plus.1
 # AI Preference is needed to make the AI consider the ability. Further constraints are defined by AILogic SacAndUpgrade.
 SVar:AIPreference:SacCost$Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/birthing_pod.jpg
 Oracle:({G/P} can be paid with either {G} or 2 life.)\n{1}{G/P}, {T}, Sacrifice a creature: Search your library for a creature card with mana value equal to 1 plus the sacrificed creature's mana value, put that card onto the battlefield, then shuffle. Activate only as a sorcery.

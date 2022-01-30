@@ -2,5 +2,4 @@ Name:Disrupt Decorum
 ManaCost:2 R R
 Types:Sorcery
 A:SP$ Goad | Cost$ 2 R R | Defined$ Valid Creature.YouDontCtrl | SpellDescription$ Goad all creatures you don't control. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)
-SVar:Picture:http://www.wizards.com/global/images/magic/general/disrupt_decorum.jpg
 Oracle:Goad all creatures you don't control. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)

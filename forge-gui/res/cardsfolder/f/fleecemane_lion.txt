@@ -5,5 +5,4 @@ PT:3/3
 K:Monstrosity:1:3 G W
 S:Mode$ Continuous | Affected$ Card.Self+IsMonstrous | AddKeyword$ Hexproof & Indestructible | Description$ As long as CARDNAME is monstrous, it has hexproof and indestructible.
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fleecemane_lion.jpg
 Oracle:{3}{G}{W}: Monstrosity 1. (If this creature isn't monstrous, put a +1/+1 counter on it and it becomes monstrous.)\nAs long as Fleecemane Lion is monstrous, it has hexproof and indestructible.

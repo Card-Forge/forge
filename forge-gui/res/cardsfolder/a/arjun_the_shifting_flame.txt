@@ -8,5 +8,4 @@ SVar:TrigChangeZone:DB$ ChangeZoneAll | Origin$ Hand | Destination$ Library | Ch
 SVar:DBDraw:DB$ Draw | NumCards$ RemTossed | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemTossed:Remembered$Amount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/arjun_the_shifting_flame.jpg
 Oracle:Flying\nWhenever you cast a spell, put the cards in your hand on the bottom of your library in any order, then draw that many cards.

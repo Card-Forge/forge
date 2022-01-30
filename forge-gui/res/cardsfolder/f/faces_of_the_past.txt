@@ -4,5 +4,4 @@ Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Creature | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigTaporUntapAll | TriggerDescription$ Whenever a creature dies, tap all untapped creatures that share a creature type with it or untap all tapped creatures that share a creature type with it.
 SVar:TrigTaporUntapAll:DB$ TaporUntapAll | ValidCards$ TriggeredCard.sharesCreatureTypeWith | ValidMessage$ creatures that share a creature type with the triggered creature
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/faces_of_the_past.jpg
 Oracle:Whenever a creature dies, tap all untapped creatures that share a creature type with it or untap all tapped creatures that share a creature type with it.

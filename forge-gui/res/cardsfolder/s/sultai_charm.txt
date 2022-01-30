@@ -6,5 +6,4 @@ SVar:DBDestroyCreature:DB$ Destroy | ValidTgts$ Creature.MonoColor | TgtPrompt$ 
 SVar:DBDestroyArtEnc:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Choose target artifact or enchantment. | SpellDescription$ Destroy target artifact or enchantment.
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard a card.
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sultai_charm.jpg
 Oracle:Choose one —\n• Destroy target monocolored creature.\n• Destroy target artifact or enchantment.\n• Draw two cards, then discard a card.

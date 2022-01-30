@@ -10,5 +10,4 @@ SVar:SharesNameGrave:TriggeredCard$Valid Card.sharesNameWith Graveyard
 SVar:SharesNameBattlefield:TriggeredCard$Valid Card.sharesNameWith NonToken
 SVar:AICurseEffect:BazaarOfWonders
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bazaar_of_wonders.jpg
 Oracle:When Bazaar of Wonders enters the battlefield, exile all cards from all graveyards.\nWhenever a player casts a spell, counter it if a card with the same name is in a graveyard or a nontoken permanent with the same name is on the battlefield.

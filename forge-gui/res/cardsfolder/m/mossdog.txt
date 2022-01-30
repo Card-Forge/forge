@@ -4,5 +4,4 @@ Types:Creature Plant Dog
 PT:1/1
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ Card.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability an opponent controls, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterNum$ 1 | CounterType$ P1P1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mossdog.jpg
 Oracle:Whenever Mossdog becomes the target of a spell or ability an opponent controls, put a +1/+1 counter on Mossdog.

@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Draw | Cost$ T | NumCards$ 1 | ActivationCardsInHand$ 7 | SpellDescription$ Draw a card. Activate only if you have exactly seven cards in hand.
-SVar:Picture:http://resources.wizards.com/magic/cards/an/en-us/card990.jpg
 Oracle:{T}: Add {C}.\n{T}: Draw a card. Activate only if you have exactly seven cards in hand.

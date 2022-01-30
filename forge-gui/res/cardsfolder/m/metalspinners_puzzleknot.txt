@@ -5,5 +5,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
 A:AB$ Draw | Cost$ 2 B Sac<1/CARDNAME> | NumCards$ 1 | SubAbility$ DBLoseLife | SpellDescription$ You draw a card and you lose 1 life.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/metalspinners_puzleknot.jpg
 Oracle:When Metalspinner's Puzzleknot enters the battlefield, you draw a card and you lose 1 life.\n{2}{B}, Sacrifice Metalspinner's Puzzleknot: You draw a card and you lose 1 life.

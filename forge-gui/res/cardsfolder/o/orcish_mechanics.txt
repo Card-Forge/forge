@@ -4,5 +4,4 @@ Types:Creature Orc
 PT:1/1
 A:AB$ DealDamage | Cost$ T Sac<1/Artifact> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_mechanics.jpg
 Oracle:{T}, Sacrifice an artifact: Orcish Mechanics deals 2 damage to any target.

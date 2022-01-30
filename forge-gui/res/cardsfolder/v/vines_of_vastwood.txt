@@ -8,5 +8,4 @@ SVar:STCantTarget:Mode$ CantTarget | EffectZone$ Command | ValidCard$ Card.IsRem
 SVar:TrigCleanup:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Any | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ ChangeZone | Origin$ Command | Destination$ Exile
 SVar:X:Count$Kicked.4.0
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vines_of_vastwood.jpg
 Oracle:Kicker {G} (You may pay an additional {G} as you cast this spell.)\nTarget creature can't be the target of spells or abilities your opponents control this turn. If this spell was kicked, that creature gets +4/+4 until end of turn.

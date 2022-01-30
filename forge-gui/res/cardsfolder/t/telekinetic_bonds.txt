@@ -5,5 +5,4 @@ T:Mode$ Discarded | ValidPlayer$ Player | TriggerZones$ Battlefield | OptionalDe
 SVar:TrigTapOrUntap:AB$TapOrUntap | Cost$ 1 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/telekinetic_bonds.jpg
 Oracle:Whenever a player discards a card, you may pay {1}{U}. If you do, you may tap or untap target permanent.

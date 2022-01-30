@@ -8,5 +8,4 @@ SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 3 | ValidTg
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a land enters the battlefield under your control, you gain 3 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
 SVar:BuffedBy:nonCreature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/primeval_bounty.jpg
 Oracle:Whenever you cast a creature spell, create a 3/3 green Beast creature token.\nWhenever you cast a noncreature spell, put three +1/+1 counters on target creature you control.\nWhenever a land enters the battlefield under your control, you gain 3 life.

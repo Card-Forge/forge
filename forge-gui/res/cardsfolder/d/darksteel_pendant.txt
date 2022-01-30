@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact
 K:Indestructible
 A:AB$ Scry | Cost$ 1 T | ScryNum$ 1 | SpellDescription$ Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
-SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_pendant.jpg
 Oracle:Indestructible (Effects that say "destroy" don't destroy this artifact.)\n{1}, {T}: Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

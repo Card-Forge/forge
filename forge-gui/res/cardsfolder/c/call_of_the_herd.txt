@@ -3,5 +3,4 @@ ManaCost:2 G
 Types:Sorcery
 K:Flashback:3 G
 A:SP$ Token | Cost$ 2 G | TokenAmount$ 1 | TokenScript$ g_3_3_elephant | TokenOwner$ You | LegacyImage$ g 3 3 elephant ody | SpellDescription$ Create a 3/3 green Elephant creature token.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/call_of_the_herd.jpg
 Oracle:Create a 3/3 green Elephant creature token.\nFlashback {3}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

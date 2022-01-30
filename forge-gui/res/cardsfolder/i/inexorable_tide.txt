@@ -6,5 +6,4 @@ SVar:TrigProliferate:DB$ Proliferate
 SVar:BuffedBy:Card
 DeckHas:Ability$Proliferate
 DeckNeeds:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/inexorable_tide.jpg
 Oracle:Whenever you cast a spell, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

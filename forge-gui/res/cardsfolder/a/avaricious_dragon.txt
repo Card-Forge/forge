@@ -7,5 +7,4 @@ T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Battlefield | Exe
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of your end step, discard your hand.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1
 SVar:TrigDiscard:DB$ Discard | Mode$ Hand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/avaricious_dragon.jpg
 Oracle:Flying\nAt the beginning of your draw step, draw an additional card.\nAt the beginning of your end step, discard your hand.

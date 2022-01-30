@@ -3,5 +3,4 @@ ManaCost:3 RG
 Types:Legendary Creature Giant Shaman
 PT:4/4
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 4 | RestrictValid$ CostContainsX | SpellDescription$ Add {C}{C}{C}{C}. Spend this mana only on costs that contain {X}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rosheen_meanderer.jpg
 Oracle:{T}: Add {C}{C}{C}{C}. Spend this mana only on costs that contain {X}.

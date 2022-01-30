@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddKeyword$ Vigilance | IsPresent$ Permanent.Black+YouCtrl,Permanent.Green+YouCtrl | Description$ Enchanted creature has vigilance as long as you control a black or green permanent.
 SVar:BuffedBy:Permanent.Black,Permanent.Green
 DeckHints:Color$Black|Green
-SVar:Picture:http://www.wizards.com/global/images/magic/general/abzan_runemark.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2.\nEnchanted creature has vigilance as long as you control a black or green permanent.

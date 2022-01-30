@@ -5,5 +5,4 @@ T:Mode$ Sacrificed | ValidCard$ Land.YouOwn | ValidSourceController$ Player.Oppo
 T:Mode$ Destroyed | ValidCauser$ Player.Opponent | ValidCard$ Land.YouOwn | Execute$ TrigReturn | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever a spell or ability an opponent controls causes a land to be put into your graveyard from the battlefield, return that card to the battlefield.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Graveyard | Destination$ Battlefield
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sacred_ground.jpg
 Oracle:Whenever a spell or ability an opponent controls causes a land to be put into your graveyard from the battlefield, return that card to the battlefield.

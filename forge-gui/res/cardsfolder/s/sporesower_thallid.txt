@@ -6,6 +6,5 @@ A:AB$ Token | Cost$ SubCounter<3/SPORE> | TokenAmount$ 1 | TokenScript$ g_1_1_sa
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounters | TriggerDescription$ At the beginning of your upkeep, put a spore counter on each Fungus you control.
 SVar:TrigCounters:DB$ PutCounterAll | ValidCards$ Fungus.YouCtrl | CounterType$ SPORE | CounterNum$ 1
 DeckHints:Type$Fungus
-DeckHas:Ability$Counters & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sporesower_thallid.jpg
+DeckHas:Ability$Counters|Token
 Oracle:At the beginning of your upkeep, put a spore counter on each Fungus you control.\nRemove three spore counters from Sporesower Thallid: Create a 1/1 green Saproling creature token.

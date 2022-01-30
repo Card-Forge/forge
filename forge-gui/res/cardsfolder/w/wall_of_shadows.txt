@@ -6,5 +6,4 @@ K:Defender
 R:Event$ DamageDone | Prevent$ True | ValidSource$ Creature.blockedBySource | ValidTarget$ Creature.Self | Description$ Prevent all damage that would be dealt to CARDNAME by creatures it's blocking.
 S:Mode$ CantTarget | ValidCard$ Card.Self | SourceCanOnlyTarget$ Wall | Description$ CARDNAME can't be the target of spells that can target only Walls or of abilities that can target only Walls.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_shadows.jpg
 Oracle:Defender (This creature can't attack.)\nPrevent all damage that would be dealt to Wall of Shadows by creatures it's blocking.\nWall of Shadows can't be the target of spells that can target only Walls or of abilities that can target only Walls.

@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Pump | Cost$ 4 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable | SpellDescription$ Target creature can't be blocked this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rogues_passage.jpg
 Oracle:{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn.

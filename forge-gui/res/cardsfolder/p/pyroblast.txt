@@ -6,5 +6,4 @@ SVar:DBCounter:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell 
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent | AITgts$ Card.Blue | TgtPrompt$ Select target permanent | ConditionDefined$ Targeted | ConditionPresent$ Card.Blue | ConditionCompare$ GE1 | SpellDescription$ Destroy target permanent if it's blue.
 SVar:X:Targeted$Valid Card.Blue
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pyroblast.jpg
 Oracle:Choose one —\n• Counter target spell if it's blue.\n• Destroy target permanent if it's blue.

@@ -4,5 +4,4 @@ Types:Creature Spirit
 PT:1/3
 K:Unblockable
 K:Transmute:1 U B
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dimir_infiltrator.jpg
 Oracle:Dimir Infiltrator can't be blocked.\nTransmute {1}{U}{B} ({1}{U}{B}, Discard this card: Search your library for a card with the same mana value as this card, reveal it, put it into your hand, then shuffle. Transmute only as a sorcery.)

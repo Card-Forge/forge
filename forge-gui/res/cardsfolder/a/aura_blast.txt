@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Instant
 A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment. | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_blast.jpg
 Oracle:Destroy target enchantment.\nDraw a card.

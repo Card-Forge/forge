@@ -5,5 +5,4 @@ PT:3/2
 K:Morph:4 R
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, destroy target land.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shaleskin_plower.jpg
 Oracle:Morph {4}{R} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Shaleskin Plower is turned face up, destroy target land.

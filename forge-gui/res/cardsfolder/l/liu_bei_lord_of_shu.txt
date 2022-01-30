@@ -8,5 +8,4 @@ SVar:X:Count$NamedYouCtrl.Guan Yu, Sainted Warrior
 SVar:Y:Count$NamedYouCtrl.Zhang Fei, Fierce Warrior
 SVar:Z:SVar$X/Plus.Y
 DeckHints:Name$Guan Yu, Sainted Warrior|Zhang Fei, Fierce Warrior
-SVar:Picture:http://www.wizards.com/global/images/magic/general/liu_bei_lord_of_shu.jpg
 Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)\nLiu Bei, Lord of Shu gets +2/+2 as long as you control a permanent named Guan Yu, Sainted Warrior or a permanent named Zhang Fei, Fierce Warrior.

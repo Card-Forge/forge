@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Island
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 AI:RemoveDeck:Random
 DeckNeeds:Color$Blue
-SVar:Picture:http://www.wizards.com/global/images/magic/general/staff_of_the_mind_magus.jpg
 Oracle:Whenever you cast a blue spell or an Island enters the battlefield under your control, you gain 1 life.

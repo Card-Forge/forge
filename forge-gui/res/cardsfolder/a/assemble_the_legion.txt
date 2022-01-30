@@ -6,5 +6,4 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ MUSTER | Count
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ rw_1_1_soldier_haste | TokenOwner$ You | LegacyImage$ rw 1 1 soldier haste gtc
 SVar:X:Count$CardCounters.MUSTER
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/assemble_the_legion.jpg
 Oracle:At the beginning of your upkeep, put a muster counter on Assemble the Legion. Then create a 1/1 red and white Soldier creature token with haste for each muster counter on Assemble the Legion.

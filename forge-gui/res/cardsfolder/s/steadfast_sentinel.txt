@@ -5,5 +5,4 @@ PT:2/3
 K:Vigilance
 K:Eternalize:4 W W
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/steadfast_sentinel.jpg
 Oracle:Vigilance\nEternalize {4}{W}{W} ({4}{W}{W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie Human Cleric with no mana cost. Eternalize only as a sorcery.)

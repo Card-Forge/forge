@@ -7,5 +7,4 @@ SVar:UndyingDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | Tg
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:FlameX:Remembered$CardManaCost
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/undying_flames.jpg
 Oracle:Exile cards from the top of your library until you exile a nonland card. Undying Flames deals damage to any target equal to that card's mana value.\nEpic (For the rest of the game, you can't cast spells. At the beginning of each of your upkeeps, copy this spell except for its epic ability. You may choose a new target for the copy.)

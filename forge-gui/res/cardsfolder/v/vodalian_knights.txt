@@ -8,5 +8,4 @@ T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | Present
 SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 A:AB$ Pump | Cost$ U | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
 SVar:NeedsToPlay:Island.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vodalian_knights.jpg
 Oracle:First strike\nVodalian Knights can't attack unless defending player controls an Island.\nWhen you control no Islands, sacrifice Vodalian Knights.\n{U}: Vodalian Knights gains flying until end of turn.

@@ -6,5 +6,5 @@ K:Deathtouch
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill two cards and you gain 2 life.
 SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You | SubAbility$ DBLifeGain
 SVar:DBLifeGain:DB$ GainLife | Defined$ You | LifeAmount$ 2
-DeckHas:Ability$Graveyard & Ability$LifeGain
+DeckHas:Ability$Graveyard|LifeGain
 Oracle:Deathtouch\nWhen Mire Triton enters the battlefield, mill two cards and you gain 2 life.

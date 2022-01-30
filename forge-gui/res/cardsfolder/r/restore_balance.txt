@@ -7,5 +7,4 @@ A:SP$ Balance | Cost$ 0 | Valid$ Land | AILogic$ BalanceCreaturesAndLands | SubA
 SVar:BalanceCreatures:DB$ Balance | Valid$ Creature | SubAbility$ BalanceHands
 SVar:BalanceHands:DB$ Balance | Zone$ Hand
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/restore_balance.jpg
 Oracle:Suspend 6—{W}\nEach player chooses a number of lands they control equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players sacrifice creatures and discard cards the same way.

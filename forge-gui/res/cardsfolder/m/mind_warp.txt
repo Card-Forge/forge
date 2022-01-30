@@ -3,5 +3,4 @@ ManaCost:X 3 B
 Types:Sorcery
 A:SP$ Discard | Cost$ X 3 B | ValidTgts$ Player | Mode$ RevealYouChoose | NumCards$ X | SpellDescription$ Target player reveals their hand. You choose X cards from it. That player discards those cards.
 SVar:X:Count$xPaid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_warp.jpg
 Oracle:Look at target player's hand and choose X cards from it. That player discards those cards.

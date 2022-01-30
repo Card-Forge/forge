@@ -9,5 +9,4 @@ SVar:ChoosePW:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Planeswalker.
 SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Permanent.nonLand+IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tragic_arrogance.jpg
 Oracle:For each player, you choose from among the permanents that player controls an artifact, a creature, an enchantment, and a planeswalker. Then each player sacrifices all other nonland permanents they control.

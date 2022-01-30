@@ -6,5 +6,4 @@ K:Flying
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your end step, you gain 3 life if CARDNAME is untapped. Otherwise, each opponent loses 3 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 3 | ConditionPresent$ Card.Self+tapped | SubAbility$ DBGainLife | ConditionCompare$ EQ1
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3 | ConditionPresent$ Card.Self+untapped | ConditionCompare$ EQ1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinx_sovereign.jpg
 Oracle:Flying\nAt the beginning of your end step, you gain 3 life if Sphinx Sovereign is untapped. Otherwise, each opponent loses 3 life.

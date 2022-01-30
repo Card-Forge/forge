@@ -7,5 +7,4 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChao
 SVar:RolledChaos:DB$ RepeatEach | RepeatPlayers$ NonTargetedController | RepeatSubAbility$ DBCopy | ValidTgts$ Creature | TgtPrompt$ Select target creature | ChangeZoneTable$ True
 SVar:DBCopy:DB$ CopyPermanent | Defined$ ParentTarget | Controller$ Remembered
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glimmervoid_basin.jpg
 Oracle:Whenever a player casts an instant or sorcery spell with a single target, that player copies that spell for each other spell, permanent, card not on the battlefield, and/or player the spell could target. Each copy targets a different one of them.\nWhenever you roll {CHAOS}, choose target creature. Each player except that creature's controller creates a token that's a copy of that creature.

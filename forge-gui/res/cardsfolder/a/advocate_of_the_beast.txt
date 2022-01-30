@@ -5,5 +5,4 @@ PT:2/3
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, put a +1/+1 counter on target Beast creature you control.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Beast+YouCtrl | TgtPrompt$ Select target Beast creature you control | CounterType$ P1P1 | CounterNum$ 1
 DeckHints:Name$Marauding Maulhorn
-SVar:Picture:http://www.wizards.com/global/images/magic/general/advocate_of_the_beast.jpg
 Oracle:At the beginning of your end step, put a +1/+1 counter on target Beast creature you control.

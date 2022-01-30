@@ -16,5 +16,4 @@ SVar:SackedCMC:Number$0
 SVar:X:SVar$Y/Minus.SackedCMC
 AI:RemoveDeck:All
 #ChangeType$ Card.IsRemembered
-SVar:Picture:http://www.wizards.com/global/images/magic/general/transmute_artifact.jpg
 Oracle:Sacrifice an artifact. If you do, search your library for an artifact card. If that card's mana value is less than or equal to the sacrificed artifact's mana value, put it onto the battlefield. If it's greater, you may pay {X}, where X is the difference. If you do, put it onto the battlefield. If you don't, put it into its owner's graveyard. Then shuffle.

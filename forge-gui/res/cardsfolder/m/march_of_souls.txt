@@ -7,5 +7,4 @@ SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_spirit_flying | Tok
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$FilterControlledByRemembered_Number$1
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/march_of_souls.jpg
 Oracle:Destroy all creatures. They can't be regenerated. For each creature destroyed this way, its controller creates a 1/1 white Spirit creature token with flying.

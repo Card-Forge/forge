@@ -5,5 +5,4 @@ PT:2/2
 K:Cycling:2 G G
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When you cycle CARDNAME, Elf creatures get +2/+2 until end of turn.
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.Elf | NumAtt$ +2 | NumDef$ +2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gempalm_strider.jpg
 Oracle:Cycling {2}{G}{G} ({2}{G}{G}, Discard this card: Draw a card.)\nWhen you cycle Gempalm Strider, Elf creatures get +2/+2 until end of turn.

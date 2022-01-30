@@ -5,5 +5,4 @@ A:AB$ Draw | Cost$ 1 PayLife<1> | NumCards$ 1 | SpellDescription$ Draw a card, t
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 AI:RemoveDeck:All
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/unfulfilled_desires.jpg
 Oracle:{1}, Pay 1 life: Draw a card, then discard a card.

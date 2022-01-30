@@ -3,5 +3,4 @@ ManaCost:5 R R
 Types:Creature Beast
 PT:6/4
 K:Cycling:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ridge_rannet.jpg
 Oracle:Cycling {2} ({2}, Discard this card: Draw a card.)

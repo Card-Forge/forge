@@ -6,5 +6,4 @@ S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 3 | EffectZone
 SVar:X:Count$Morbid.1.0
 K:Flying
 K:Deathtouch
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_picker.jpg
 Oracle:This spell costs {3} less to cast if a creature died this turn.\nFlying, deathtouch

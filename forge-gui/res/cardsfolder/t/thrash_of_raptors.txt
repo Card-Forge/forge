@@ -5,5 +5,4 @@ PT:3/3
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddKeyword$ Trample | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as you control another Dinosaur, CARDNAME gets +2/+0 and has trample.
 SVar:X:Count$Valid Dinosaur.Other+YouCtrl
 SVar:BuffedBy:Dinosaur
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thrash_of_raptors.jpg
 Oracle:As long as you control another Dinosaur, Thrash of Raptors gets +2/+0 and has trample.

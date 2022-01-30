@@ -7,5 +7,4 @@ K:Monstrosity:1:5 B B
 T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME becomes monstrous, destroy target non-Gorgon creature an opponent controls.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.nonGorgon+OppCtrl | TgtPrompt$ Select target non-Gorgon creature an opponent controls
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/keepsake_gorgon.jpg
 Oracle:Deathtouch\n{5}{B}{B}: Monstrosity 1. (If this creature isn't monstrous, put a +1/+1 counter on it and it becomes monstrous.)\nWhen Keepsake Gorgon becomes monstrous, destroy target non-Gorgon creature an opponent controls.

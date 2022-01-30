@@ -3,5 +3,4 @@ ManaCost:4 U
 Types:Sorcery
 K:Rebound
 A:SP$ ChangeZone | Cost$ 4 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent to its owner's hand.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/void_squall.jpg
 Oracle:Return target nonland permanent to its owner's hand.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)

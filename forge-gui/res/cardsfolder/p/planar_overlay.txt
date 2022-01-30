@@ -11,5 +11,4 @@ SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Ba
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_overlay.jpg
 Oracle:Each player chooses a land they control of each basic land type. Return those lands to their owners' hands.

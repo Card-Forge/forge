@@ -4,5 +4,4 @@ Types:Creature Goblin
 PT:1/1
 K:Flying
 K:CARDNAME can't block.
-SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6584.jpg
 Oracle:Flying\nGoblin Glider can't block.

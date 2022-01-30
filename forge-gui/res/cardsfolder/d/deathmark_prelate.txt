@@ -4,5 +4,4 @@ Types:Creature Human Cleric
 PT:2/3
 A:AB$ Destroy | Cost$ 2 B T Sac<1/Zombie> | ValidTgts$ Creature.nonZombie | TgtPrompt$ Select target non-Zombie creature | SorcerySpeed$ True | NoRegen$ True | SpellDescription$ Destroy target non-Zombie creature. It can't be regenerated. Activate only as a sorcery.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deathmark_prelate.jpg
 Oracle:{2}{B}, {T}, Sacrifice a Zombie: Destroy target non-Zombie creature. It can't be regenerated. Activate only as a sorcery.

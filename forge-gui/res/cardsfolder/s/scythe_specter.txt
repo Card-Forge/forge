@@ -9,5 +9,4 @@ SVar:DBRepeatLoseLife:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.gr
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ ImprintedController
 SVar:X:Imprinted$CardManaCost
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scythe_specter.jpg
 Oracle:Flying\nWhenever Scythe Specter deals combat damage to a player, each opponent discards a card. Each player who discarded a card with the highest mana value among cards discarded this way loses life equal to that mana value.

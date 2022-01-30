@@ -7,5 +7,4 @@ K:Reinforce:1:1 R
 DeckHints:Type$Elemental|Warrior
 DeckHas:Ability$Counters
 DeckNeeds:Type$Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brighthearth_banneret.jpg
 Oracle:Elemental spells and Warrior spells you cast cost {1} less to cast.\nReinforce 1—{1}{R} ({1}{R}, Discard this card: Put a +1/+1 counter on target creature.)

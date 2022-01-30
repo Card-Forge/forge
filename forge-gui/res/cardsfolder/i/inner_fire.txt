@@ -3,5 +3,4 @@ ManaCost:3 R
 Types:Sorcery
 A:SP$ Mana | Cost$ 3 R | Produced$ R | Amount$ X | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R} for each card in your hand.
 SVar:X:Count$CardsInYourHand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/inner_fire.jpg
 Oracle:Add {R} for each card in your hand.

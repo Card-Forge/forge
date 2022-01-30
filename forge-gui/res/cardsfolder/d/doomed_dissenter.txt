@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:DB$ Token | LegacyImage$ b 2 2 zombie akh | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You
 SVar:SacMe:2
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/doomed_dissenter.jpg
 Oracle:When Doomed Dissenter dies, create a 2/2 black Zombie creature token.

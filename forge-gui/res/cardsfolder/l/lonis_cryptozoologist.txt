@@ -11,5 +11,5 @@ SVar:DBBottom:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Librar
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 DeckHints:Ability$Investigate
-DeckHas:Ability$Investigate & Ability$Token
+DeckHas:Ability$Investigate|Token
 Oracle:Whenever another nontoken creature enters the battlefield under your control, investigate.\n{T}, Sacrifice X Clues: Target opponent reveals the top X cards of their library. You may put a nonland permanent card with mana value X or less from among them onto the battlefield under your control. That player puts the rest on the bottom of their library in a random order.

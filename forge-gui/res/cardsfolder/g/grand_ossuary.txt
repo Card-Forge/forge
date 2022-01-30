@@ -13,5 +13,4 @@ SVar:WalkAway:DB$ Planeswalk | SubAbility$ ClearImprinted
 SVar:ClearImprinted:DB$ Cleanup | ClearImprinted$ True
 SVar:OsX:ImprintedLKI$FilterControlledByRemembered_CardPower
 SVar:AIRollPlanarDieParams:Mode$ Random | MinTurn$ 5
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grand_ossuary.jpg
 Oracle:Whenever a creature dies, its controller distributes a number of +1/+1 counters equal to its power among any number of target creatures they control.\nWhenever you roll {CHAOS}, each player exiles all creatures they control and creates X 1/1 green Saproling creature tokens, where X is the total power of the creatures they exiled this way. Then planeswalk.

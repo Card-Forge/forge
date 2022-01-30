@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ SetState | Cost$ 1 U | ValidTgts$ Creature.faceUp+withMorph,Creature.faceUp+withMegamorph | TgtPrompt$ Select target creature with morph. | Mode$ TurnFace | SpellDescription$ Turn target creature with a morph ability face down.
 K:Cycling:U
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/backslide.jpg
 Oracle:Turn target creature with a morph ability face down.\nCycling {U} ({U}, Discard this card: Draw a card.)

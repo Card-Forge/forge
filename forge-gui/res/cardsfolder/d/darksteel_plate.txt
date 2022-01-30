@@ -4,5 +4,4 @@ Types:Artifact Equipment
 K:Indestructible
 K:Equip:2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Indestructible | Description$ Equipped creature has indestructible.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_plate.jpg
 Oracle:Indestructible\nEquipped creature has indestructible.\nEquip {2}

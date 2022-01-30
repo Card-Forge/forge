@@ -4,5 +4,4 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.Black | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Black creatures can't attack or block.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/light_of_day.jpg
 Oracle:Black creatures can't attack or block.

@@ -5,5 +5,4 @@ PT:3/3
 A:AB$ DelayedTrigger | Cost$ G Sac<1/CARDNAME> | Mode$ Phase | Phase$ End of Turn | Execute$ TrigToken | SpellDescription$ Create a 1/1 green Insect creature token with flying named Butterfly at the beginning of the next end step.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ butterfly | TokenOwner$ You | LegacyImage$ butterfly vis
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_caterpillar.jpg
 Oracle:{G}, Sacrifice Giant Caterpillar: Create a 1/1 green Insect creature token with flying named Butterfly at the beginning of the next end step.

@@ -7,5 +7,4 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigCharm:DB$ Charm | Choices$ DBBounce,DBDiscard
 SVar:DBBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Permanent.DefenderCtrl | ChangeNum$ 1 | Chooser$ TriggeredTarget | Mandatory$ True | SpellDescription$ That player returns a permanent they control to its owner's hand.
 SVar:DBDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ That player discards a card.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blizzard_specter.jpg
 Oracle:Flying\nWhenever Blizzard Specter deals combat damage to a player, choose one —\n• That player returns a permanent they control to its owner's hand.\n• That player discards a card.

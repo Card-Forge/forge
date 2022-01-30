@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ ABScry | AddSV
 SVar:ABScry:AB$ Scry | Cost$ T | ScryNum$ 1 | SubAbility$ OraclesInsightDraw | SpellDescription$ Scry 1, then draw a card.
 SVar:OraclesInsightDraw:DB$ Draw | NumCards$ 1
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/oracles_insight.jpg
 Oracle:Enchant creature\nEnchanted creature has "{T}: Scry 1, then draw a card." (To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)

@@ -2,5 +2,4 @@ Name:Headwater Sentries
 ManaCost:3 U
 Types:Creature Merfolk Warrior
 PT:2/5
-SVar:Picture:http://www.wizards.com/global/images/magic/general/headwater_sentries.jpg
 Oracle:

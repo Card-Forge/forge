@@ -8,5 +8,4 @@ SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 5
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_x_x_demon_flying | TokenOwner$ You | LegacyImage$ b x x demon flying mrd | TokenPower$ X | TokenToughness$ X | SpellDescription$ Create an X/X black Demon creature token with flying, where X is the number of cards in your hand.
 SVar:X:Count$NumCardsInYourHand
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/promise_of_power.jpg
 Oracle:Choose one —\n• You draw five cards and you lose 5 life.\n• Create an X/X black Demon creature token with flying, where X is the number of cards in your hand.\nEntwine {4} (Choose both if you pay the entwine cost.)

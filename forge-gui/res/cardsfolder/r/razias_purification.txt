@@ -6,5 +6,4 @@ SVar:DBChooseSac:DB$ ChooseCard | Defined$ Remembered | Choices$ Permanent.Remem
 SVar:DBSac:DB$ SacrificeAll | ValidCards$ Permanent.IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/razias_purification.jpg
 Oracle:Each player chooses three permanents they control, then sacrifices the rest.

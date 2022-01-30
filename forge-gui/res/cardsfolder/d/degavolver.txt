@@ -13,5 +13,4 @@ SVar:VolverSpeed:DB$ Animate | Defined$ Self | Keywords$ First Strike | Duration
 AI:RemoveDeck:Random
 DeckNeeds:Color$Black|Red
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/degavolver.jpg
 Oracle:Kicker {1}{B} and/or {R} (You may pay an additional {1}{B} and/or {R} as you cast this spell.)\nIf Degavolver was kicked with its {1}{B} kicker, it enters the battlefield with two +1/+1 counters on it and with "Pay 3 life: Regenerate Degavolver."\nIf Degavolver was kicked with its {R} kicker, it enters the battlefield with a +1/+1 counter on it and with first strike.

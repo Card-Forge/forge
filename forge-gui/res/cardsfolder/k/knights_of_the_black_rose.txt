@@ -7,5 +7,4 @@ SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
 T:Mode$ BecomeMonarch | ValidPlayer$ Opponent | BeginTurn$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever an opponent becomes the monarch, if you were the monarch as the turn began, that player loses 2 life and you gain 2 life.
 SVar:TrigDrain:DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ 2 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/knights_of_the_black_rose.jpg
 Oracle:When Knights of the Black Rose enters the battlefield, you become the monarch.\nWhenever an opponent becomes the monarch, if you were the monarch as the turn began, that player loses 2 life and you gain 2 life.

@@ -4,5 +4,4 @@ Types:Creature Sliver
 PT:1/1
 S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Sliver creatures you control get +1/+1.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/predatory_sliver.jpg
 Oracle:Sliver creatures you control get +1/+1.

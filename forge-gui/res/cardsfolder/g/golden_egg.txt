@@ -5,5 +5,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:FreeCard:DB$ Draw | Defined$ You | NumCards$ 1
 A:AB$ Mana | Cost$ 1 T Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color.
 A:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME> | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
-DeckHas:Ability$LifeGain & Ability$Food
+DeckHas:Ability$LifeGain|Food
 Oracle:When Golden Egg enters the battlefield, draw a card.\n{1}, {T}, Sacrifice Golden Egg: Add one mana of any color.\n{2}, {T}, Sacrifice Golden Egg: You gain 3 life.

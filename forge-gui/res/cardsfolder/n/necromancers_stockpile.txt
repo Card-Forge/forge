@@ -6,5 +6,4 @@ SVar:DBToken:DB$ Token | TokenScript$ b_2_2_zombie | LegacyImage$ b 2 2 zombie m
 SVar:X:Discarded$Valid Card.Zombie
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/necromancers_stockpile.jpg
 Oracle:{1}{B}, Discard a creature card: Draw a card. If the discarded card was a Zombie card, create a tapped 2/2 black Zombie creature token.

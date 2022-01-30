@@ -4,5 +4,4 @@ Types:Creature Sphinx
 PT:4/4
 K:Flying
 K:Vigilance
-SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card125873.jpg
 Oracle:Flying, vigilance

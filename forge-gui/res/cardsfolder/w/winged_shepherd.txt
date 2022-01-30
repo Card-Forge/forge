@@ -5,5 +5,4 @@ PT:3/3
 K:Flying
 K:Vigilance
 K:Cycling:W
-SVar:Picture:http://www.wizards.com/global/images/magic/general/winged_shepherd.jpg
 Oracle:Flying, vigilance\nCycling {W} ({W}, Discard this card: Draw a card.)

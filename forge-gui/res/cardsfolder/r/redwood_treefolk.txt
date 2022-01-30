@@ -2,5 +2,4 @@ Name:Redwood Treefolk
 ManaCost:4 G
 Types:Creature Treefolk
 PT:3/6
-SVar:Picture:http://resources.wizards.com/magic/cards/wl/en-us/card4526.jpg
 Oracle:

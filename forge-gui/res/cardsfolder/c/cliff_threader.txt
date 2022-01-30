@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Creature Kor Scout
 PT:2/1
 K:Mountainwalk
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cliff_threader.jpg
 Oracle:Mountainwalk (This creature can't be blocked as long as defending player controls a Mountain.)

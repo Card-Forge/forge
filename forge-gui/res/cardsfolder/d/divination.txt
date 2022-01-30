@@ -2,5 +2,4 @@ Name:Divination
 ManaCost:2 U
 Types:Sorcery
 A:SP$ Draw | Cost$ 2 U | NumCards$ 2 | SpellDescription$ Draw two cards.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/divination.jpg
 Oracle:Draw two cards.

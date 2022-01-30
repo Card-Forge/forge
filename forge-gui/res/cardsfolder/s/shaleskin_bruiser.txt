@@ -6,5 +6,4 @@ K:Trample
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +3/+0 until end of turn for each other attacking Beast.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X
 SVar:X:Count$Valid Creature.Beast+Other+attacking/Times.3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shaleskin_bruiser.jpg
 Oracle:Trample\nWhenever Shaleskin Bruiser attacks, it gets +3/+0 until end of turn for each other attacking Beast.

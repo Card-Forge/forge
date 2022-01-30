@@ -5,5 +5,4 @@ T:Mode$ LifeGained | ValidPlayer$ You | OptionalDecider$ You | Execute$ TrigPutC
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ X
 SVar:X:TriggerCount$LifeAmount
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cradle_of_vitality.jpg
 Oracle:Whenever you gain life, you may pay {1}{W}. If you do, put a +1/+1 counter on target creature for each 1 life you gained.

@@ -2,5 +2,4 @@ Name:Desert Sandstorm
 ManaCost:2 R
 Types:Sorcery
 A:SP$ DamageAll | Cost$ 2 R | NumDmg$ 1 | ValidCards$ Creature | ValidDescription$ each creature. | SpellDescription$ CARDNAME deals 1 damage to each creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/desert_sandstorm.jpg
 Oracle:Desert Sandstorm deals 1 damage to each creature.

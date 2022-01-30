@@ -6,5 +6,4 @@ K:Flash
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME blocks, you get {E} (an energy counter).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 1
 A:AB$ Draw | Cost$ T PayEnergy<3> | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shielded_aether_thief.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhenever Shielded Aether Thief blocks, you get {E} (an energy counter).\n{T}, Pay {E}{E}{E}: Draw a card.

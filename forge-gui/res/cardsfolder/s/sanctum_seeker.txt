@@ -5,5 +5,4 @@ PT:3/4
 T:Mode$ Attacks | ValidCard$ Creature.Vampire+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a Vampire you control attacks, each opponent loses 1 life and you gain 1 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sanctum_seeker.jpg
 Oracle:Whenever a Vampire you control attacks, each opponent loses 1 life and you gain 1 life.

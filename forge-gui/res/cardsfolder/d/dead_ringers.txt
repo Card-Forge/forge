@@ -4,5 +4,4 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ 4 B | TargetMin$ 2 | TargetMax$ 2 | NoRegen$ True | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creatures | RememberOriginalTargets$ True | SubAbility$ DBCleanup | ConditionShareAllColors$ DirectRemembered | SpellDescription$ Destroy two target nonblack creatures unless either one is a color the other isn't. They can't be regenerated.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dead_ringers.jpg
 Oracle:Destroy two target nonblack creatures unless either one is a color the other isn't. They can't be regenerated.

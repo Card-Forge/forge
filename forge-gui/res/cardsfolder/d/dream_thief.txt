@@ -6,5 +6,4 @@ K:Flying
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card if you've cast another blue spell this turn.
 SVar:TrigDraw:DB$ Draw | Defined$ You | ConditionCheckSVar$ X
 SVar:X:Count$ThisTurnCast_Card.Other+Blue+YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_thief.jpg
 Oracle:Flying\nWhen Dream Thief enters the battlefield, draw a card if you've cast another blue spell this turn.

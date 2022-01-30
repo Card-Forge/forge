@@ -2,5 +2,4 @@ Name:Evacuation
 ManaCost:3 U U
 Types:Instant
 A:SP$ ChangeZoneAll | Cost$ 3 U U | ChangeType$ Creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all creatures to their owners' hands.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/evacuation.jpg
 Oracle:Return all creatures to their owners' hands.

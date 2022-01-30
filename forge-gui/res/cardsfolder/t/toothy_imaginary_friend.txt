@@ -9,5 +9,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:TriggeredCard$CardCounters.P1P1
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/toothy_imaginary_friend.jpg
 Oracle:Partner with Pir, Imaginative Rascal (When this creature enters the battlefield, target player may put Pir into their hand from their library, then shuffle.)\nWhenever you draw a card, put a +1/+1 counter on Toothy, Imaginary Friend.\nWhen Toothy leaves the battlefield, draw a card for each +1/+1 counter on it.

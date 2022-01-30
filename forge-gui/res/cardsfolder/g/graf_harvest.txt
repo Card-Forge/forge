@@ -6,5 +6,4 @@ A:AB$ Token | Cost$ 3 B ExileFromGrave<1/Creature> | TokenAmount$ 1 | TokenScrip
 SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
 DeckHints:Type$Zombie
-SVar:Picture:http://www.wizards.com/global/images/magic/general/graf_harvest.jpg
 Oracle:Zombies you control have menace. (They can't be blocked except by two or more creatures.)\n{3}{B}, Exile a creature card from your graveyard: Create a 2/2 black Zombie creature token.

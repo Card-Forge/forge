@@ -8,5 +8,4 @@ SVar:X:Count$Valid Creature.attacking+Other
 T:Mode$ Blocks | ValidCard$ Card.Self | Triggerzones$ Battlefield | Execute$ TrigPumpBlock | TriggerDescription$ Whenever Márton Stromgald blocks, other blocking creatures get +1/+1 until end of turn for each blocking creature other than Márton Stromgald.
 SVar:TrigPumpBlock:DB$ PumpAll | ValidCards$ Creature.blocking+Other | NumAtt$ Y | NumDef$ Y
 SVar:Y:Count$Valid Creature.blocking+Other
-SVar:Picture:http://www.wizards.com/global/images/magic/general/marton_stromgald.jpg
 Oracle:Whenever Márton Stromgald attacks, other attacking creatures get +1/+1 until end of turn for each attacking creature other than Márton Stromgald.\nWhenever Márton Stromgald blocks, other blocking creatures get +1/+1 until end of turn for each blocking creature other than Márton Stromgald.

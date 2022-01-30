@@ -3,5 +3,4 @@ ManaCost:2 U
 Types:Creature Human Pirate
 PT:3/3
 S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Description$ CARDNAME can't attack unless defending player controls an Island.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/steam_frigate.jpg
 Oracle:Steam Frigate can't attack unless defending player controls an Island.

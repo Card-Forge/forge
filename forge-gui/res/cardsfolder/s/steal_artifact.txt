@@ -4,5 +4,4 @@ Types:Enchantment Aura
 K:Enchant artifact
 A:SP$ Attach | Cost$ 2 U U | ValidTgts$ Artifact | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted artifact.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/steal_artifact.jpg
 Oracle:Enchant artifact\nYou control enchanted artifact.

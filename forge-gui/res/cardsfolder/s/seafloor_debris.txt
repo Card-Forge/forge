@@ -5,5 +5,4 @@ A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color.
 K:CARDNAME enters the battlefield tapped.
 DeckNeeds:Color$Blue
-SVar:Picture:http://www.wizards.com/global/images/magic/general/seafloor_debris.jpg
 Oracle:Seafloor Debris enters the battlefield tapped.\n{T}: Add {U}.\n{T}, Sacrifice Seafloor Debris: Add one mana of any color.

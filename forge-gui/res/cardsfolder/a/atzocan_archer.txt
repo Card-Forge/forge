@@ -5,5 +5,4 @@ PT:1/4
 K:Reach
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may have it fight another target creature. (Each deals damage equal to its power to the other.)
 SVar:TrigFight:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/atzocan_archer.jpg
 Oracle:Reach\nWhen Atzocan Archer enters the battlefield, you may have it fight another target creature. (Each deals damage equal to its power to the other.)

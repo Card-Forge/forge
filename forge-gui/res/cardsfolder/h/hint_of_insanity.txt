@@ -6,5 +6,4 @@ SVar:DBRepeat:DB$ RepeatEach | RepeatCards$ Card.IsRemembered+nonLand | Zone$ Ha
 SVar:DBDiscard:DB$ Discard | Mode$ Defined | Defined$ Remembered | DefinedCards$ ValidHand Card.sharesNameWith Imprinted+RememberedPlayerCtrl+IsNotImprinted
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hint_of_insanity.jpg
 Oracle:Target player reveals their hand. That player discards all nonland cards with the same name as another card in their hand.

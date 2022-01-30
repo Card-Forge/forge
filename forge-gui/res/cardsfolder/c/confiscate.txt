@@ -4,5 +4,4 @@ Types:Enchantment Aura
 K:Enchant permanent
 A:SP$ Attach | Cost$ 4 U U | ValidTgts$ Permanent | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | GainControl$ You | Description$ You control enchanted permanent.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/confiscate.jpg
 Oracle:Enchant permanent\nYou control enchanted permanent.

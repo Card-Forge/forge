@@ -5,5 +5,4 @@ PT:2/4
 K:Banding
 K:Cumulative upkeep:1
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/volunteer_reserves.jpg
 Oracle:Banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)\nCumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)

@@ -4,5 +4,4 @@ Types:Creature Angel
 PT:4/4
 K:Flying
 K:Protection from all colors
-SVar:Picture:http://www.wizards.com/global/images/magic/general/iridescent_angel.jpg
 Oracle:Flying, protection from all colors

@@ -11,5 +11,4 @@ SVar:TrigAddMana:DB$ Mana | Produced$ C | Amount$ X
 SVar:X:Count$TriggerRememberAmount
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pygmy_hippo.jpg
 Oracle:Whenever Pygmy Hippo attacks and isn't blocked, you may have defending player activate a mana ability of each land they control and lose all unspent mana. If you do, Pygmy Hippo assigns no combat damage this turn and at the beginning of your next main phase this turn, you add an amount of {C} equal to the amount of mana that player lost this way.

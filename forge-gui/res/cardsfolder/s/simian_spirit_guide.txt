@@ -3,5 +3,4 @@ ManaCost:2 R
 Types:Creature Ape Spirit
 PT:2/2
 A:AB$ Mana | Cost$ ExileFromHand<1/CARDNAME> | Produced$ R | ActivationZone$ Hand | SpellDescription$ Add {R}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/simian_spirit_guide.jpg
 Oracle:Exile Simian Spirit Guide from your hand: Add {R}.

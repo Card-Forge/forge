@@ -3,5 +3,4 @@ ManaCost:3 W
 Types:Instant
 A:SP$ Token | Cost$ 3 W | TokenAmount$ 2 | TokenScript$ w_1_1_soldier_ally | TokenOwner$ You | LegacyImage$ w 1 1 soldier ally wwk | SpellDescription$ Create two 1/1 white Soldier Ally creature tokens.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/join_the_ranks.jpg
 Oracle:Create two 1/1 white Soldier Ally creature tokens.

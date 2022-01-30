@@ -5,5 +5,4 @@ A:SP$ NameCard | Cost$ 1 B | Defined$ You | ValidCards$ Card.nonBasic | ValidDes
 SVar:DBDig:DB$ Dig | DigNum$ 7 | Reveal$ True | DestinationZone2$ Exile | ChangeValid$ Card.NamedCard | ChangeNum$ All
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/desperate_research.jpg
 Oracle:Choose a card name other than a basic land card name. Reveal the top seven cards of your library and put all of them with that name into your hand. Exile the rest.

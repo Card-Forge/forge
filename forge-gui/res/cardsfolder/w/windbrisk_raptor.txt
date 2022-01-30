@@ -5,5 +5,4 @@ PT:5/7
 K:Flying
 S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddKeyword$ Lifelink | Description$ Attacking creatures you control have lifelink.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/windbrisk_raptor.jpg
 Oracle:Flying\nAttacking creatures you control have lifelink.

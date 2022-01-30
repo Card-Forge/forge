@@ -4,5 +4,4 @@ Types:Sorcery
 A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumDmg$ 1 | SubAbility$ DBPump | SpellDescription$ CARDNAME deals 1 damage to target creature you control. That creature gains trample until end of turn. Draw a card.
 SVar:DBPump:DB$ Pump | Defined$ ParentTarget | KW$ Trample | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rile.jpg
 Oracle:Rile deals 1 damage to target creature you control. That creature gains trample until end of turn.\nDraw a card.

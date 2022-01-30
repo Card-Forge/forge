@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Sorcery
 A:SP$ ChangeZoneAll | Cost$ 1 W | ChangeType$ Card | Origin$ Graveyard | Destination$ Exile | AILogic$ ExileGraveyards | SpellDescription$ Exile all cards from all graveyards.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/morningtide.jpg
 Oracle:Exile all cards from all graveyards.

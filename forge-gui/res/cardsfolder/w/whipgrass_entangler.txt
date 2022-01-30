@@ -7,5 +7,4 @@ SVar:WhipgrassCantAttack:Mode$ CantAttackUnless | ValidCard$ Card.Self | Cost$ W
 SVar:WhipgrassCantBlock:Mode$ CantBlockUnless | ValidCard$ Card.Self | Cost$ WhipgrassClericNum
 SVar:WhipgrassClericNum:Count$Valid Cleric
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/whipgrass_entangler.jpg
 Oracle:{1}{W}: Until end of turn, target creature gains "This creature can't attack or block unless its controller pays {1} for each Cleric on the battlefield."

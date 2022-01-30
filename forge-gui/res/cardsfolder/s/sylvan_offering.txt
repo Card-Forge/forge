@@ -8,5 +8,4 @@ SVar:DBToken2:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_elf_warrior | Toke
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_offering.jpg
 Oracle:Choose an opponent. You and that player each create an X/X green Treefolk creature token.\nChoose an opponent. You and that player each create X 1/1 green Elf Warrior creature tokens.

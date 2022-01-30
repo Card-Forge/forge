@@ -10,5 +10,4 @@ A:AB$ Draw | Cost$ 3 U | NumCards$ 1 | Defined$ You | SubAbility$ DBChooseCard |
 SVar:DBChooseCard:DB$ ChooseCard | Choices$ Land.YouCtrl | ChoiceZone$ Battlefield | Amount$ 1 | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ ChosenCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kefnet_the_mindful.jpg
 Oracle:Flying, indestructible\nKefnet the Mindful can't attack or block unless you have seven or more cards in hand.\n{3}{U}: Draw a card, then you may return a land you control to its owner's hand.

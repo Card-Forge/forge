@@ -5,5 +5,4 @@ A:AB$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature.White+YouCtrl,Creature.Black+
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
 DeckHints:Color$White|Black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/escape_routes.jpg
 Oracle:{2}{U}: Return target white or black creature you control to its owner's hand.

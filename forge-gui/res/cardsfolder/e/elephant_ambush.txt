@@ -3,5 +3,4 @@ ManaCost:2 G G
 Types:Instant
 K:Flashback:6 G G
 A:SP$ Token | Cost$ 2 G G | TokenAmount$ 1 | TokenScript$ g_3_3_elephant | TokenOwner$ You | LegacyImage$ g 3 3 elephant ody | SpellDescription$ Create a 3/3 green Elephant creature token.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elephant_ambush.jpg
 Oracle:Create a 3/3 green Elephant creature token.\nFlashback {6}{G}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

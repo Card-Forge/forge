@@ -3,7 +3,6 @@ ManaCost:U
 AlternateMode: Split
 Types:Sorcery
 A:SP$ Scry | Cost$ U | ScryNum$ 3 | SpellDescription$ Scry 3.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reason_believe.jpg
 Oracle:Scry 3.
 
 ALTERNATE

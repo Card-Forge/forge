@@ -3,5 +3,4 @@ ManaCost:U
 Types:Creature Merfolk Warrior
 PT:1/1
 K:Unblockable
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mist_cloaked_herald.jpg
 Oracle:Mist-Cloaked Herald can't be blocked.

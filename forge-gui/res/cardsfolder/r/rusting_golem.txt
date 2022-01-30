@@ -5,5 +5,4 @@ PT:*/*
 K:Fading:5
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of fade counters on CARDNAME.
 SVar:X:Count$CardCounters.FADE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rusting_golem.jpg
 Oracle:Fading 5 (This creature enters the battlefield with five fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)\nRusting Golem's power and toughness are each equal to the number of fade counters on it.

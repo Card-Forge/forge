@@ -3,5 +3,4 @@ ManaCost:1 R R
 Types:Creature Dog
 PT:1/2
 K:Double Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/two_headed_cerberus.jpg
 Oracle:Double strike (This creature deals both first-strike and regular combat damage.)

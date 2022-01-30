@@ -4,5 +4,4 @@ Types:Legendary Artifact
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
 S:Mode$ Continuous | Affected$ Creature.ChosenColor+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control of the chosen color get +1/+1.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hall_of_triumph.jpg
 Oracle:As Hall of Triumph enters the battlefield, choose a color.\nCreatures you control of the chosen color get +1/+1.

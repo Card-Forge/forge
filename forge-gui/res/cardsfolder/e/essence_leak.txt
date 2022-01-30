@@ -8,5 +8,4 @@ SVar:TrigEssencePhase:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ 
 SVar:TrigEssenceLeak:DB$ Sacrifice | Defined$ Self | UnlessCost$ CardManaCost | UnlessPayer$ You
 AI:RemoveDeck:Random
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_leak.jpg
 Oracle:Enchant permanent\nAs long as enchanted permanent is red or green, it has "At the beginning of your upkeep, sacrifice this permanent unless you pay its mana cost."

@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+0/+8
 A:AB$ Token | ActivationZone$ Command | Cost$ 3 | TokenAmount$ 1 | TokenScript$ c_1_1_sliver | LegacyImage$ c 1 1 sliver van | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Sliver creature token.
-SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Sliver Queen, Brood Mother.full.jpg
 Oracle:Hand +0, life +8\n{3}: Create a 1/1 colorless Sliver creature token.

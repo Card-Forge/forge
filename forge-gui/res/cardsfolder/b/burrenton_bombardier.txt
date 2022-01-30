@@ -6,5 +6,4 @@ K:Flying
 K:Reinforce:2:2 W
 DeckHas:Ability$Counters
 DeckNeeds:Type$Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/burrenton_bombardier.jpg
 Oracle:Flying\nReinforce 2—{2}{W} ({2}{W}, Discard this card: Put two +1/+1 counters on target creature.)

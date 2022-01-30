@@ -5,5 +5,4 @@ A:SP$ DestroyAll | Cost$ 4 B B | ValidCards$ Creature | ValidTgts$ Opponent | Tg
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X
 SVar:X:Remembered$Amount.Twice
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_daggers.jpg
 Oracle:Destroy all creatures target opponent controls. You lose 2 life for each creature destroyed this way.

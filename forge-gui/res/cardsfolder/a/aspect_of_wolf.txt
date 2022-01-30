@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Card.AttachedBy | AddPower$ X | AddToughness$ Y |
 SVar:X:Count$TypeYouCtrl.Forest/HalfDown
 SVar:Y:Count$Valid Forest.YouCtrl/HalfUp
 SVar:BuffedBy:Forest
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aspect_of_wolf.jpg
 Oracle:Enchant creature\nEnchanted creature gets +X/+Y, where X is half the number of Forests you control, rounded down, and Y is half the number of Forests you control, rounded up.

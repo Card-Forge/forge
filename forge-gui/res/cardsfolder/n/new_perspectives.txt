@@ -5,5 +5,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 3
 S:Mode$ Continuous | Affected$ You | AddKeyword$ CyclingForZero | CheckSVar$ X | SVarCompare$ GE7 | Description$ As long as you have seven or more cards in hand, you may pay {0} rather than pay cycling costs.
 SVar:X:Count$InYourHand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/new_perspectives.jpg
 Oracle:When New Perspectives enters the battlefield, draw three cards.\nAs long as you have seven or more cards in hand, you may pay {0} rather than pay cycling costs.

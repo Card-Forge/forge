@@ -4,5 +4,4 @@ Types:Creature Spirit
 PT:2/4
 K:Flying
 A:AB$ Regenerate | Cost$ U U U | SpellDescription$ Regenerate CARDNAME.
-SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card107294.jpg
 Oracle:Flying\n{U}{U}{U}: Regenerate Ghost Ship.

@@ -5,5 +5,4 @@ PT:2/2
 A:AB$ DealDamage | Cost$ X R Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature.
 SVar:X:Count$xPaid
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pain_kami.jpg
 Oracle:{X}{R}, Sacrifice Pain Kami: It deals X damage to target creature.

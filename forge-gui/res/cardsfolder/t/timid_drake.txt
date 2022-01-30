@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
 SVar:AntiBuffedBy:Creature
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/timid_drake.jpg
 Oracle:Flying\nWhen another creature enters the battlefield, return Timid Drake to its owner's hand.

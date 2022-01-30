@@ -7,5 +7,4 @@ SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | C
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHints:Ability$Delirium
 DeckHas:Ability$Graveyard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fork_in_the_road.jpg
 Oracle:Search your library for up to two basic land cards and reveal them. Put one into your hand and the other into your graveyard. Then shuffle.

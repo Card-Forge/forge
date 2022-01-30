@@ -3,5 +3,4 @@ ManaCost:UB UB UB
 Types:Creature Faerie Soldier
 PT:3/2
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wasp_lancer.jpg
 Oracle:Flying

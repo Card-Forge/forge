@@ -4,5 +4,4 @@ Types:Enchantment Aura
 K:Enchant land
 A:SP$ Attach | Cost$ 3 R R | ValidTgts$ Land | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted land.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/conquer.jpg
 Oracle:Enchant land\nYou control enchanted land.

@@ -6,5 +6,4 @@ K:Defender
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME blocks, you gain 3 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
 SVar:HasBlockEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pride_guardian.jpg
 Oracle:Defender\nWhenever Pride Guardian blocks, you gain 3 life.

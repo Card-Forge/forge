@@ -5,5 +5,4 @@ PT:1/1
 K:Partner:Impetuous Protege
 A:AB$ Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 DeckHints:Name$Impetuous Protege
-SVar:Picture:http://www.wizards.com/global/images/magic/general/proud_mentor.jpg
 Oracle:Partner with Impetuous Protege (When this creature enters the battlefield, target player may put Impetuous Protege into their hand from their library, then shuffle.)\n{W}, {T}: Tap target creature.

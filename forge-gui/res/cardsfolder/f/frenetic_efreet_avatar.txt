@@ -6,5 +6,4 @@ S:Mode$ Continuous | EffectZone$ Command | Affected$ Permanent.YouCtrl | AddKeyw
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigFlip | TriggerDescription$ At the beginning of your end step, flip a coin. If you win the flip, take an extra turn after this one.
 SVar:TrigFlip:DB$ FlipACoin | Defined$ You | WinSubAbility$ DBAddTurn
 SVar:DBAddTurn:DB$ AddTurn | NumTurns$ 1
-SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Frenetic Efreet Avatar.full.jpg
 Oracle:Hand -1, life -3\nEach permanent you control has phasing. (It phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)\nAt the beginning of your end step, flip a coin. If you win the flip, take an extra turn after this one.

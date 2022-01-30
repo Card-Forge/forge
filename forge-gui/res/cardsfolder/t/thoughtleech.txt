@@ -4,5 +4,4 @@ Types:Enchantment
 T:Mode$ Taps | ValidCard$ Island.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | Optional$ True | TriggerDescription$ Whenever an Island an opponent controls becomes tapped, you may gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtleech.jpg
 Oracle:Whenever an Island an opponent controls becomes tapped, you may gain 1 life.

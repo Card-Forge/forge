@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact
 A:AB$ Untap | Cost$ 1 T | ValidTgts$ Creature.hasActivatedAbilityWithTapCost | TgtPrompt$ Select target creature that has an activated ability with Tap in its cost. | SpellDescription$ Untap target creature that has an activated ability with {T} in its cost.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/magewrights_stone.jpg
 Oracle:{1}, {T}: Untap target creature that has an activated ability with {T} in its cost.

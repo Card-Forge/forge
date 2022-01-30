@@ -7,5 +7,4 @@ A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add {G} for e
 SVar:X:Count$Valid Elf.YouCtrl
 DeckHints:Type$Elf
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_archdruid.jpg
 Oracle:Other Elf creatures you control get +1/+1.\n{T}: Add {G} for each Elf you control.

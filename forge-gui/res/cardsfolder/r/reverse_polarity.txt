@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ GainLife | Cost$ W W | Defined$ You | LifeAmount$ X | SpellDescription$ You gain X life, where X is twice the damage dealt to you so far this turn by artifacts.
 SVar:X:Count$YourTypeDamageThisTurn Artifact/Times.2
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reverse_polarity.jpg
 Oracle:You gain X life, where X is twice the damage dealt to you so far this turn by artifacts.

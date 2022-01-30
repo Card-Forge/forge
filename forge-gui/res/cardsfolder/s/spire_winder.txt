@@ -5,5 +5,4 @@ PT:2/3
 K:Flying
 K:Ascend
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | Condition$ Blessing | Description$ CARDNAME gets +1/+1 as long as you have the city's blessing.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spire_winder.jpg
 Oracle:Flying\nAscend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nSpire Winder gets +1/+1 as long as you have the city's blessing.

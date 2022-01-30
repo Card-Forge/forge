@@ -5,5 +5,4 @@ T:Mode$ ChangesZoneAll | Origin$ Graveyard | Destination$ Any | ValidCards$ Crea
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_bat_flying | LegacyImage$ b 1 1 bat flying m19 | TokenOwner$ You
 DeckHints:Ability$Graveyard
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/desecrated_tomb.jpg
 Oracle:Whenever one or more creature cards leave your graveyard, create a 1/1 black Bat creature token with flying.

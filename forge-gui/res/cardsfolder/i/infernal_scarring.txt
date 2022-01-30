@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddTrigger$ 
 SVar:TrigDraw:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ InfernalDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When this creature dies, draw a card.
 SVar:InfernalDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredCardController
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_scarring.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+0 and has "When this creature dies, draw a card."

@@ -7,5 +7,4 @@ SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:NeedsToPlay:Swamp.YouCtrl
 AI:RemoveDeck:Random
 DeckNeeds:Color$Black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/barbarian_outcast.jpg
 Oracle:When you control no Swamps, sacrifice Barbarian Outcast.

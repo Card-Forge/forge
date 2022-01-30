@@ -4,5 +4,4 @@ Types:Creature Human Wizard
 PT:1/1
 A:AB$ LoseLife | Cost$ B T | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 1 | SpellDescription$ Target player loses 1 life.
 A:AB$ Pump | Cost$ G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target creature gets +1/+1 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderscape_apprentice.jpg
 Oracle:{B}, {T}: Target player loses 1 life.\n{G}, {T}: Target creature gets +1/+1 until end of turn.

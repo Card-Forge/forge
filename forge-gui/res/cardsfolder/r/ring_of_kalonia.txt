@@ -8,5 +8,4 @@ SVar:KaloniaCounter:DB$ PutCounter | Defined$ Equipped | ConditionDefined$ Equip
 AI:RemoveDeck:Random
 SVar:AttachAi:AITgts$ Creature.Green
 DeckNeeds:Color$Green
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ring_of_kalonia.jpg
 Oracle:Equipped creature has trample. (It can deal excess combat damage to the player or planeswalker it's attacking.)\nAt the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's green.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

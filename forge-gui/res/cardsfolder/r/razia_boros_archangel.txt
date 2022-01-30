@@ -13,5 +13,4 @@ SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Val
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:X:Number$3
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/razia_boros_archangel.jpg
 Oracle:Flying, vigilance, haste\n{T}: The next 3 damage that would be dealt to target creature you control this turn is dealt to another target creature instead.

@@ -4,5 +4,4 @@ Types:Legendary Creature Spirit
 PT:6/4
 K:Trample
 K:Shroud
-SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card50488.jpg
 Oracle:Trample\nShroud (This creature can't be the target of spells or abilities.)

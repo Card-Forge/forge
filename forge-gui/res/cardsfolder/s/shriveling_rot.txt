@@ -11,5 +11,4 @@ SVar:Trig2:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | Va
 SVar:SVar2:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ X
 SVar:X:TriggeredCard$CardToughness
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shriveling_rot.jpg
 Oracle:Choose one —\n• Until end of turn, whenever a creature is dealt damage, destroy it.\n• Until end of turn, whenever a creature dies, that creature's controller loses life equal to its toughness.\nEntwine {2}{B} (Choose both if you pay the entwine cost.)

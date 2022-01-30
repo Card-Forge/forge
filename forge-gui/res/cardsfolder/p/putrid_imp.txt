@@ -5,5 +5,4 @@ PT:1/1
 A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddHiddenKeyword$ CARDNAME can't block. | Condition$ Threshold | Description$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME gets +1/+1 and can't block.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/putrid_imp.jpg
 Oracle:Discard a card: Putrid Imp gains flying until end of turn.\nThreshold — As long as seven or more cards are in your graveyard, Putrid Imp gets +1/+1 and can't block.

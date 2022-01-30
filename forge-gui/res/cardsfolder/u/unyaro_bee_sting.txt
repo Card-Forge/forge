@@ -2,5 +2,4 @@ Name:Unyaro Bee Sting
 ManaCost:3 G
 Types:Sorcery
 A:SP$ DealDamage | Cost$ 3 G | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/unyaro_bee_sting.jpg
 Oracle:Unyaro Bee Sting deals 2 damage to any target.

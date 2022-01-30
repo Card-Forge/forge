@@ -4,5 +4,4 @@ Types:Creature Human Barbarian
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | Threshold$ True | TriggerDescription$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME has "When CARDNAME enters the battlefield, it deals 3 damage to any target."
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pardic_arsonist.jpg
 Oracle:Threshold — As long as seven or more cards are in your graveyard, Pardic Arsonist has "When Pardic Arsonist enters the battlefield, it deals 3 damage to any target."

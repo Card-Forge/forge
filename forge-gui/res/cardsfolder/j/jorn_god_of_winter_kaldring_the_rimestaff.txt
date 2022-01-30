@@ -23,6 +23,4 @@ SVar:DBTap:DB$ Tap | Defined$ ReplacedCard | ETB$ True | SubAbility$ ToBattlefie
 SVar:ToBattlefield:DB$ InternalEtbReplacement | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:STTapped:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ CARDNAME enters the battlefield tapped.
-DeckNeeds:Type$Snow
-DeckHas:Ability$Graveyard
 Oracle:{T}: You may play target snow permanent card from your graveyard this turn. If you do, it enters the battlefield tapped.

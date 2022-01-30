@@ -4,5 +4,4 @@ Types:Creature Spirit
 PT:1/3
 K:Skulk
 K:Lifelink
-SVar:Picture:http://www.wizards.com/global/images/magic/general/farbog_revenant.jpg
 Oracle:Skulk (This creature can't be blocked by creatures with greater power.)\nLifelink (Damage dealt by this creature also causes you to gain that much life.)

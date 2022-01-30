@@ -5,5 +5,4 @@ PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.White+YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever another white creature enters the battlefield under your control, tap target creature an opponent controls.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls.
 SVar:BuffedBy:Creature.White
-SVar:Picture:http://www.wizards.com/global/images/magic/general/court_street_denizen.jpg
 Oracle:Whenever another white creature enters the battlefield under your control, tap target creature an opponent controls.

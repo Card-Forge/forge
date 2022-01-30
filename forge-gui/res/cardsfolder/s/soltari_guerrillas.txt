@@ -8,5 +8,4 @@ SVar:EventGuerrillasDamageDone:Event$ DamageDone | ValidSource$ Card.IsImprinted
 SVar:DamageGuerrillasCreature:DB$ DealDamage | CombatDamage$ True | NumDmg$ GuerrillasX | Defined$ Remembered | DamageSource$ Imprinted
 SVar:GuerrillasX:ReplaceCount$DamageAmount
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_guerrillas.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\n{0}: The next time Soltari Guerrillas would deal combat damage to an opponent this turn, it deals that damage to target creature instead.

@@ -4,5 +4,4 @@ Types:Legendary Enchantment
 S:Mode$ Continuous | Affected$ Creature | AddPower$ -X | Description$ All creatures get -X/-0, where X is the number of cards in your hand.
 SVar:X:Count$InYourHand
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/meishin_the_mind_cage.jpg
 Oracle:All creatures get -X/-0, where X is the number of cards in your hand.

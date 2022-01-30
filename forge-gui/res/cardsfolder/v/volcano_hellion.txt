@@ -11,5 +11,4 @@ SVar:DmgYou:DB$ DealDamage | Defined$ You | NumDmg$ Y | NoPrevention$ True
 SVar:X:Count$YourLifeTotal
 SVar:Y:Count$ChosenNumber
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/volcano_hellion.jpg
 Oracle:Volcano Hellion has echo {X}, where X is your life total. (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Volcano Hellion enters the battlefield, it deals an amount of damage of your choice to you and target creature. The damage can't be prevented.

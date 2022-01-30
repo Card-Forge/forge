@@ -8,5 +8,4 @@ SVar:X:Count$Valid Artifact.YouCtrl
 SVar:NeedsToPlayVar:X GE2
 AI:RemoveDeck:Random
 SVar:BuffedBy:Artifact
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nim_shrieker.jpg
 Oracle:Flying\nNim Shrieker gets +1/+0 for each artifact you control.

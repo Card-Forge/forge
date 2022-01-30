@@ -7,5 +7,4 @@ SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ Tr
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
 SVar:Cipher:DB$ Encode | Defined$ Self
 DeckNeeds:Type$Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/voidwalk.jpg
 Oracle:Exile target creature. Return it to the battlefield under its owner's control at the beginning of the next end step.\nCipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)

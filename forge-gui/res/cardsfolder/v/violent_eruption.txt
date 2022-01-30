@@ -3,5 +3,4 @@ ManaCost:1 R R R
 Types:Instant
 A:SP$ DealDamage | Cost$ 1 R R R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 4 | TargetMin$ 1 | TargetMax$ 4 | DividedAsYouChoose$ 4 | SpellDescription$ CARDNAME deals 4 damage divided as you choose among any number of targets.
 K:Madness:1 R R
-SVar:Picture:http://www.wizards.com/global/images/magic/general/violent_eruption.jpg
 Oracle:Violent Eruption deals 4 damage divided as you choose among any number of targets.\nMadness {1}{R}{R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

@@ -6,5 +6,4 @@ R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Creature.EquippedB
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Creature.EquippedBy | ValidSource$ Creature.Other | ReplaceWith$ DmgTwice | IsCombat$ True | Description$ If another creature would deal combat damage to equipped creature, it deals double that damage to equipped creature instead.
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
 SVar:X:ReplaceCount$DamageAmount/Twice
-SVar:Picture:http://www.wizards.com/global/images/magic/general/inquisitors_flail.jpg
 Oracle:If equipped creature would deal combat damage, it deals double that damage instead.\nIf another creature would deal combat damage to equipped creature, it deals double that damage to equipped creature instead.\nEquip {2}

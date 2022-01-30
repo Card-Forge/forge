@@ -7,7 +7,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:DBSacSelf:DB$ Sacrifice | Defined$ Self | UnlessCost$ Mandatory ExileFromGrave<2/Card> | UnlessPayer$ You | UnlessResolveSubs$ WhenNotPaid | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 AlternateMode:Modal
-DeckHints:Ability$Discard & Ability$Graveyard
+DeckHints:Ability$Discard|Graveyard
 Oracle:Deathtouch\nAt the beginning of your upkeep, exile two cards from your graveyard. If you can't, sacrifice Egon and draw a card.
 
 ALTERNATE

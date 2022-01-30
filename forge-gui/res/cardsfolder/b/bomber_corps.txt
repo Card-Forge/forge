@@ -5,5 +5,4 @@ PT:1/2
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDmg | CheckSVar$ BattalionTest | NoResolvingCheck$ True | SVarCompare$ GE2 | TriggerDescription$ Battalion — Whenever CARDNAME and at least two other creatures attack, CARDNAME deals 1 damage to any target.
 SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
 SVar:BattalionTest:Count$Valid Creature.attacking+Other
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bomber_corps.jpg
 Oracle:Battalion — Whenever Bomber Corps and at least two other creatures attack, Bomber Corps deals 1 damage to any target.

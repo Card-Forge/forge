@@ -9,5 +9,4 @@ SVar:DBSearch:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ X | KW$
 SVar:X:Count$xPaid
 #X Will get overwritten by Announce
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/profane_command.jpg
 Oracle:Choose two —\n• Target player loses X life.\n• Return target creature card with mana value X or less from your graveyard to the battlefield.\n• Target creature gets -X/-X until end of turn.\n• Up to X target creatures gain fear until end of turn. (They can't be blocked except by artifact creatures and/or black creatures.)

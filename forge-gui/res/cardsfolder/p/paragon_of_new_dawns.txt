@@ -5,5 +5,4 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Creature.White+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other white creatures you control get +1/+1.
 A:AB$ Pump | Cost$ W T | ValidTgts$ Creature.White+Other+YouCtrl | TgtPrompt$ Select target white creature | KW$ Vigilance | SpellDescription$ Another target white creature you control gains vigilance until end of turn.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/paragon_of_new_dawns.jpg
 Oracle:Other white creatures you control get +1/+1.\n{W}, {T}: Another target white creature you control gains vigilance until end of turn. (Attacking doesn't cause it to tap.)

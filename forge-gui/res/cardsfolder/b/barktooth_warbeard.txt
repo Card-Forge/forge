@@ -2,5 +2,4 @@ Name:Barktooth Warbeard
 ManaCost:4 B R R
 Types:Legendary Creature Human Warrior
 PT:6/5
-SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1647.jpg
 Oracle:

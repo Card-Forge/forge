@@ -8,5 +8,4 @@ SVar:NoCombat:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.cmcEQD
 SVar:X:Count$xPaid
 SVar:DroningX:Number$0
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/droning_bureaucrats.jpg
 Oracle:{X}, {T}: Each creature with mana value X can't attack or block this turn.

@@ -15,5 +15,4 @@ SVar:NeedsToPlayVar:Z GE3
 SVar:Z:SVar$Z1/Plus.Z2
 SVar:Z1:Count$Valid Creature.YourTeamCtrl+inZoneBattlefield
 SVar:Z2:Count$Valid Creature.OppCtrl+inZoneBattlefield+untapped
-SVar:Picture:http://www.wizards.com/global/images/magic/general/regna_sanction.jpg
 Oracle:For each player, choose friend or foe. Each friend puts a +1/+1 counter on each creature they control. Each foe chooses one untapped creature they control, then taps the rest.

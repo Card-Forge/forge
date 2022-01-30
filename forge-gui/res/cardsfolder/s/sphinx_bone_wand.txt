@@ -6,5 +6,4 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | Count
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
 SVar:X:Count$CardCounters.CHARGE
 SVar:BuffedBy:Instant,Sorcery
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinx_bone_wand.jpg
 Oracle:Whenever you cast an instant or sorcery spell, you may put a charge counter on Sphinx-Bone Wand. If you do, Sphinx-Bone Wand deals damage equal to the number of charge counters on it to any target.

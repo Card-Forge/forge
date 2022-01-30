@@ -5,5 +5,4 @@ S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Protection from CardColors
 SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/earnest_fellowship.jpg
 Oracle:Each creature has protection from its colors.

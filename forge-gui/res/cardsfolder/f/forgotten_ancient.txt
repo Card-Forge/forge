@@ -6,5 +6,4 @@ T:Mode$ SpellCast | ValidCard$ Card | TriggerZones$ Battlefield | OptionalDecide
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMoveCounter | TriggerDescription$ At the beginning of your upkeep, you may move any number of +1/+1 counters from CARDNAME onto other creatures.
 SVar:TrigMoveCounter:DB$ MoveCounter | Source$ Self | ValidDefined$ Creature.Other | CounterType$ P1P1 | CounterNum$ Any | AiLogic$ ToValid | StackDescription$ You may move any number of +1/+1 counters from CARDNAME onto other creatures.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/forgotten_ancient.jpg
 Oracle:Whenever a player casts a spell, you may put a +1/+1 counter on Forgotten Ancient.\nAt the beginning of your upkeep, you may move any number of +1/+1 counters from Forgotten Ancient onto other creatures.

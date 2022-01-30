@@ -7,5 +7,4 @@ T:Mode$ SpellCast | ValidCard$ Card | Execute$ TrigSac | TriggerZones$ Battlefie
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Creature
 AI:RemoveDeck:All
 SVar:AntiBuffedBy:Card
-SVar:Picture:http://www.wizards.com/global/images/magic/general/desecration_elemental.jpg
 Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhenever a player casts a spell, sacrifice a creature.

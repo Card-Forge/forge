@@ -3,5 +3,4 @@ ManaCost:GW GW GW
 Types:Creature Elf Knight
 PT:3/4
 K:Vigilance
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wilt_leaf_cavaliers.jpg
 Oracle:Vigilance

@@ -5,5 +5,4 @@ S:Mode$ Continuous | Affected$ Player | AddKeyword$ UntapAdjust:Land:1 | CheckSV
 SVar:X:Count$Valid Card.Self+untapped
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/winter_orb.jpg
 Oracle:As long as Winter Orb is untapped, players can't untap more than one land during their untap steps.

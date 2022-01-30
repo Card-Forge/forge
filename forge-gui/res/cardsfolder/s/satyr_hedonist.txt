@@ -3,5 +3,4 @@ ManaCost:1 G
 Types:Creature Satyr
 PT:2/1
 A:AB$ Mana | Cost$ R Sac<1/CARDNAME> | Produced$ R | Amount$ 3 | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R}{R}{R}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/satyr_hedonist.jpg
 Oracle:{R}, Sacrifice Satyr Hedonist: Add {R}{R}{R}.

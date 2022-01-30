@@ -8,5 +8,4 @@ SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target cr
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN CARDNAME doesn't untap during your untap step. | Duration$ UntilLoseControlOfHost
 S:Mode$ RaiseCost | ValidTarget$ Card.Self | Activator$ Opponent | Type$ Spell | Amount$ 2 | Description$ Spells your opponents cast that target CARDNAME cost {2} more to cast.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/icefall_regent.jpg
 Oracle:Flying\nWhen Icefall Regent enters the battlefield, tap target creature an opponent controls. That creature doesn't untap during its controller's untap step for as long as you control Icefall Regent.\nSpells your opponents cast that target Icefall Regent cost {2} more to cast.

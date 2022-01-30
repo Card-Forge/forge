@@ -3,5 +3,4 @@ ManaCost:3 B
 Types:Creature Zombie Beast
 PT:4/2
 K:Cycling:B
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lurching_rotbeast.jpg
 Oracle:Cycling {B} ({B}, Discard this card: Draw a card.)

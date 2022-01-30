@@ -7,5 +7,4 @@ K:Indestructible
 T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another creature you control attacks, it gains trample and indestructible until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | KW$ Trample & Indestructible
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stonehoof_chieftain.jpg
 Oracle:Trample, indestructible\nWhenever another creature you control attacks, it gains trample and indestructible until end of turn.

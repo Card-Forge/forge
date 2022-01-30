@@ -4,5 +4,4 @@ Types:Creature Soltari Knight
 PT:2/2
 K:Shadow
 S:Mode$ Continuous | Affected$ Card.Self+attacking | AddKeyword$ First Strike | Description$ CARDNAME has first strike as long as it's attacking.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_lancer.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nSoltari Lancer has first strike as long as it's attacking.

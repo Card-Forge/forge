@@ -4,5 +4,4 @@ Types:Artifact Creature Gargoyle
 PT:3/3
 K:Flying
 K:Indestructible
-SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card46136.jpg
 Oracle:Flying\nIndestructible (Damage and effects that say "destroy" don't destroy this creature.)

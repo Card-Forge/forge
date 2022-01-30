@@ -4,5 +4,4 @@ Types:Creature Spider
 PT:2/5
 K:First Strike
 K:Reach
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_spider.jpg
 Oracle:First strike; reach (This creature can block creatures with flying.)

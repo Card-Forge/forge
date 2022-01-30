@@ -6,5 +6,4 @@ A:SP$ Pump | Cost$ 2 B B | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTg
 SVar:DBExile:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered,Aura.AttachedTo Targeted | Origin$ Battlefield | Destination$ Exile | UseAllOriginZones$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:MaxTgts:Count$Valid Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/silence_the_believers.jpg
 Oracle:Strive — This spell costs {2}{B} more to cast for each target beyond the first.\nExile any number of target creatures and all Auras attached to them.

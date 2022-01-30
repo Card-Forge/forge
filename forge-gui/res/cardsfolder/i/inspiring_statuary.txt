@@ -2,5 +2,4 @@ Name:Inspiring Statuary
 ManaCost:3
 Types:Artifact
 S:Mode$ Continuous | Affected$ Card.nonArtifact+YouCtrl | AffectedZone$ Stack | AddKeyword$ Improvise | Description$ Nonartifact spells you cast have improvise. (Your artifacts can help cast those spells. Each artifact you tap after you're done activating mana abilities pays for {1}.)
-SVar:Picture:http://www.wizards.com/global/images/magic/general/inspiring_statuary.jpg
 Oracle:Nonartifact spells you cast have improvise. (Your artifacts can help cast those spells. Each artifact you tap after you're done activating mana abilities pays for {1}.)

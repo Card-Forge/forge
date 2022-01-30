@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Sorcery
 A:SP$ Token | Cost$ 1 W | TokenAmount$ X | TokenScript$ w_1_1_human | TokenOwner$ You | LegacyImage$ w 1 1 human dka | SpellDescription$ Create two 1/1 white Human creature tokens. Fateful hour — If you have 5 or less life, create five of those tokens instead.
 SVar:X:Count$FatefulHour.5.2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gather_the_townsfolk.jpg
 Oracle:Create two 1/1 white Human creature tokens.\nFateful hour — If you have 5 or less life, create five of those tokens instead.

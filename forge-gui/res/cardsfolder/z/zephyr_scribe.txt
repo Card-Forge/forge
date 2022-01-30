@@ -8,5 +8,4 @@ T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | T
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 SVar:BuffedBy:Card.nonLand+nonCreature
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/zephyr_scribe.jpg
 Oracle:{U}, {T}: Draw a card, then discard a card.\nWhenever you cast a noncreature spell, untap Zephyr Scribe.

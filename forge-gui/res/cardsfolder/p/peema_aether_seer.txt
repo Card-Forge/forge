@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ X
 SVar:X:Count$GreatestPower_Creature.YouCtrl
 A:AB$ Pump | Cost$ PayEnergy<3> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME blocks each combat if able. | SpellDescription$ Target creature blocks this turn if able.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/peema_aether_seer.jpg
 Oracle:When Peema Aether-Seer enters the battlefield, you get an amount of {E} (energy counters) equal to the greatest power among creatures you control.\nPay {E}{E}{E}: Target creature blocks this turn if able.

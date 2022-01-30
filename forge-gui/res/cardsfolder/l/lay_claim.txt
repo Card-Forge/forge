@@ -5,5 +5,4 @@ K:Enchant permanent
 A:SP$ Attach | Cost$ 5 U U | ValidTgts$ Permanent | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | GainControl$ You | Description$ You control enchanted permanent.
 K:Cycling:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lay_claim.jpg
 Oracle:Enchant permanent\nYou control enchanted permanent.\nCycling {2} ({2}, Discard this card: Draw a card.)

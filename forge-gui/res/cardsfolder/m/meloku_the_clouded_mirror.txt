@@ -5,5 +5,4 @@ PT:2/4
 K:Flying
 A:AB$ Token | Cost$ 1 Return<1/Land> | TokenAmount$ 1 | TokenScript$ u_1_1_illusion_flying | TokenOwner$ You | LegacyImage$ u 1 1 illusion flying chk | SpellDescription$ Create a 1/1 blue Illusion creature token with flying.
 AI:RemoveDeck:Random
-SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card75268.jpg
 Oracle:Flying\n{1}, Return a land you control to its owner's hand: Create a 1/1 blue Illusion creature token with flying.

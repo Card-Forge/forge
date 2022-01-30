@@ -6,5 +6,4 @@ SVar:DBVoidDestroyAll:DB$ DestroyAll | ValidCards$ Artifact.cmcEQX,Creature.cmcE
 SVar:DBVoidRevealDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ RevealDiscardAll | DiscardValid$ Card.nonLand+cmcEQX
 SVar:X:Count$ChosenNumber
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/void.jpg
 Oracle:Choose a number. Destroy all artifacts and creatures with mana value equal to that number. Then target player reveals their hand and discards all nonland cards with mana value equal to the number.

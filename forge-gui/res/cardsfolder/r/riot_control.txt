@@ -6,5 +6,4 @@ SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPrevent
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ You | Description$ Prevent all damage that would be dealt to you this turn.
 SVar:X:Count$Valid Creature.OppCtrl
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/riot_control.jpg
 Oracle:You gain 1 life for each creature your opponents control. Prevent all damage that would be dealt to you this turn.

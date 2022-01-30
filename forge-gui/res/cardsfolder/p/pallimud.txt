@@ -6,5 +6,4 @@ K:ETBReplacement:Other:ChooseP
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
 S:Mode$ Continuous | EffectZone$ Battlefield | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of tapped lands the chosen player controls.
 SVar:X:Count$Valid Land.tapped+ChosenCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pallimud.jpg
 Oracle:As Pallimud enters the battlefield, choose an opponent.\nPallimud's power is equal to the number of tapped lands the chosen player controls.

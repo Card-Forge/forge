@@ -2,5 +2,4 @@ Name:Devilthorn Fox
 ManaCost:1 W
 Types:Creature Fox
 PT:3/1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/devilthorn_fox.jpg
 Oracle:

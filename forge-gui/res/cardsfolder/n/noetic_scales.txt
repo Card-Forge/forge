@@ -6,5 +6,4 @@ SVar:TrigBounce:DB$ ChangeZoneAll | ChangeType$ Creature.ActivePlayerCtrl+powerG
 SVar:X:Count$ValidHand Card.ActivePlayerCtrl
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/noetic_scales.jpg
 Oracle:At the beginning of each player's upkeep, return to its owner's hand each creature that player controls with power greater than the number of cards in their hand.

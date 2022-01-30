@@ -3,7 +3,6 @@ ManaCost:R
 AlternateMode: Split
 Types:Sorcery
 A:SP$ DealDamage | Cost$ R | NumDmg$ 2 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | SpellDescription$ Assault deals 2 damage to any target.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/assault_battery.jpg
 Oracle:Assault deals 2 damage to any target.
 
 ALTERNATE

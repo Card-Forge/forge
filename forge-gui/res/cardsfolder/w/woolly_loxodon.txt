@@ -3,5 +3,4 @@ ManaCost:5 G G
 Types:Creature Elephant Warrior
 PT:6/7
 K:Morph:5 G
-SVar:Picture:http://www.wizards.com/global/images/magic/general/woolly_loxodon.jpg
 Oracle:Morph {5}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

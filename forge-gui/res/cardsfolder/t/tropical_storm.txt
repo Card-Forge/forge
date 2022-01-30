@@ -5,5 +5,4 @@ A:SP$ DamageAll | Cost$ X G | ValidCards$ Creature.withFlying | NumDmg$ X | SubA
 SVar:DBDamage:DB$ DamageAll | ValidCards$ Creature.Blue | NumDmg$ 1
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tropical_storm.jpg
 Oracle:Tropical Storm deals X damage to each creature with flying and 1 additional damage to each blue creature.

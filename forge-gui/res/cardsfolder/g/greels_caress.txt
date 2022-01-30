@@ -5,5 +5,4 @@ K:Flash
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -3 | Description$ Enchanted creature gets -3/-0.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/greels_caress.jpg
 Oracle:Flash\nEnchant creature\nEnchanted creature gets -3/-0.

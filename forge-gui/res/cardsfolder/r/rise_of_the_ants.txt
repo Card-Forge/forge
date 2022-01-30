@@ -4,5 +4,5 @@ Types:Sorcery
 A:SP$ Token | TokenAmount$ 2 | TokenScript$ g_3_3_insect | SubAbility$ DBGainLife | SpellDescription$ Create two 3/3 green Insect creature tokens.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
 K:Flashback:6 G G
-DeckHas:Ability$Token & Ability$LifeGain & Ability$Graveyard
+DeckHas:Ability$Token|LifeGain|Graveyard
 Oracle:Create two 3/3 green Insect creature tokens. You gain 2 life.\nFlashback {6}{G}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

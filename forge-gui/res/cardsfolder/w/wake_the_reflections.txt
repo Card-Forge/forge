@@ -3,5 +3,4 @@ ManaCost:W
 Types:Sorcery
 A:SP$ CopyPermanent | Cost$ W | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True | SpellDescription$ Populate. (Create a token that's a copy of a creature token you control.)
 DeckNeeds:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wake_the_reflections.jpg
 Oracle:Populate. (Create a token that's a copy of a creature token you control.)

@@ -4,5 +4,4 @@ Types:Land Desert
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 K:Cycling:1 G
-SVar:Picture:http://www.wizards.com/global/images/magic/general/desert_of_the_indomitable.jpg
 Oracle:Desert of the Indomitable enters the battlefield tapped.\n{T}: Add {G}.\nCycling {1}{G} ({1}{G}, Discard this card: Draw a card.)

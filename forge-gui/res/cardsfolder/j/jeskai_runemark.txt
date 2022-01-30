@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | IsPresent$ Permanent.Red+YouCtrl,Permanent.White+YouCtrl | Description$ Enchanted creature has flying as long as you control a red or white permanent.
 SVar:BuffedBy:Permanent.Red,Permanent.White
 DeckHints:Color$Red|White
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jeskai_runemark.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2.\nEnchanted creature has flying as long as you control a red or white permanent.

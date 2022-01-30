@@ -5,5 +5,4 @@ PT:5/5
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack or block. | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME can't attack or block can't attack or block unless a player has no cards in hand.
 SVar:X:PlayerCountPlayers$LowestValidHand Card.YouOwn
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lupine_prototype.jpg
 Oracle:Lupine Prototype can't attack or block unless a player has no cards in hand.

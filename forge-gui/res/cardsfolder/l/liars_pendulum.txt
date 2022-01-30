@@ -10,5 +10,4 @@ SVar:DBNotInHandDraw:DB$ Draw | Defined$ You | ConditionPlayerDefined$ Remembere
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ValidHand Card.NamedCard
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/liars_pendulum.jpg
 Oracle:{2}, {T}: Choose a card name. Target opponent guesses whether a card with that name is in your hand. You may reveal your hand. If you do and your opponent guessed wrong, draw a card.

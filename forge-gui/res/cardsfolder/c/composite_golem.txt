@@ -4,5 +4,4 @@ Types:Artifact Creature Golem
 PT:4/4
 A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ W U B R G | SpellDescription$ Add {W}{U}{B}{R}{G}.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/composite_golem.jpg
 Oracle:Sacrifice Composite Golem: Add {W}{U}{B}{R}{G}.

@@ -4,5 +4,4 @@ Types:Creature Bird Soldier
 PT:3/3
 K:Flying
 K:Protection from Dragons
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonstalker.jpg
 Oracle:Flying, protection from Dragons

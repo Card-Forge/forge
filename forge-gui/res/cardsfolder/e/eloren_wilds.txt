@@ -9,5 +9,4 @@ SVar:STCantCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caste
 SVar:TrigPlaneswalk:Mode$ PlaneswalkedFrom | Execute$ ExileSelf | Static$ True
 SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:AIRollPlanarDieParams:Mode$ Always
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eloren_wilds.jpg
 Oracle:Whenever a player taps a permanent for mana, that player adds one mana of any type that permanent produced.\nWhenever you roll {CHAOS}, target player can't cast spells until a player planeswalks.

@@ -7,5 +7,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:WinnowCheck:Count$Valid Permanent.sharesNameWith Remembered
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/winnow.jpg
 Oracle:Destroy target nonland permanent if another permanent with the same name is on the battlefield.\nDraw a card.

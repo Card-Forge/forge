@@ -8,5 +8,4 @@ SVar:TrigReturn:AB$ ChangeZone | Cost$ 1 B | Defined$ Self | Origin$ Graveyard |
 SVar:SacMe:1
 SVar:DiscardMe:1
 DeckHints:Type$Dragon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/boneyard_scourge.jpg
 Oracle:Flying\nWhenever a Dragon you control dies while Boneyard Scourge is in your graveyard, you may pay {1}{B}. If you do, return Boneyard Scourge from your graveyard to the battlefield.

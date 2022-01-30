@@ -4,5 +4,4 @@ Types:Instant
 K:Delve
 A:SP$ Token | Cost$ X X B B B B | LegacyImage$ b 2 2 zombie ktk | TokenAmount$ X | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenTapped$ True | SpellDescription$ Create X tapped 2/2 black Zombie creature tokens.
 SVar:X:Count$xPaid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/empty_the_pits.jpg
 Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nCreate X tapped 2/2 black Zombie creature tokens.

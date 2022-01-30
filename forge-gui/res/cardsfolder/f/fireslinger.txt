@@ -6,5 +6,4 @@ A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt
 SVar:DBDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1 | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
 SVar:SelfDamageAmount:1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fireslinger.jpg
 Oracle:{T}: Fireslinger deals 1 damage to any target and 1 damage to you.

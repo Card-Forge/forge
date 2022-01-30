@@ -3,5 +3,4 @@ ManaCost:1 G
 Types:Creature Human Warrior
 PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 0 | AddToughness$ 2 | Condition$ PlayerTurn | Description$ As long as it's your turn, CARDNAME gets +0/+2.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hardy_veteran.jpg
 Oracle:As long as it's your turn, Hardy Veteran gets +0/+2.

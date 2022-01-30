@@ -5,5 +5,4 @@ A:SP$ Token | Cost$ 2 G | TokenAmount$ 1 | TokenScript$ g_x_x_ooze | TokenOwner$
 SVar:X:Count$GreatestPower_Creature.YouCtrl
 SVar:NeedsToPlay:Creature.YouCtrl
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/miming_slime.jpg
 Oracle:Create an X/X green Ooze creature token, where X is the greatest power among creatures you control.

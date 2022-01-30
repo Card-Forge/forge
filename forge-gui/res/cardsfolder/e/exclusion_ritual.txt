@@ -8,5 +8,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ 
 T:Mode$ ChangesZone | ValidCard$ Card.IsImprinted+ExiledWithSource | Origin$ Exile | Execute$ DBForget | Static$ True
 SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/exclusion_ritual.jpg
 Oracle:Imprint — When Exclusion Ritual enters the battlefield, exile target nonland permanent.\nPlayers can't cast spells with the same name as the exiled card.

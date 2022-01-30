@@ -5,5 +5,4 @@ A:SP$ Token | Cost$ 7 G | TokenAmount$ 1 | TokenScript$ g_4_4_rhino_trample | To
 SVar:DBCopy:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True
 DeckHas:Ability$Token
 DeckHints:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/horncallers_chant.jpg
 Oracle:Create a 4/4 green Rhino creature token with trample, then populate. (Create a token that's a copy of a creature token you control.)

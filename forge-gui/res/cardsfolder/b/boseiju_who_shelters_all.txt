@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Legendary Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T PayLife<2> | Produced$ C | AddsNoCounter$ !Permanent | SpellDescription$ Add {C}. If that mana is spent on an instant or sorcery spell, that spell can't be countered.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/boseiju_who_shelters_all.jpg
 Oracle:Boseiju, Who Shelters All enters the battlefield tapped.\n{T}, Pay 2 life: Add {C}. If that mana is spent on an instant or sorcery spell, that spell can't be countered.

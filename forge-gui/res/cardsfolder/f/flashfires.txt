@@ -3,5 +3,4 @@ ManaCost:3 R
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 3 R | ValidCards$ Plains | SpellDescription$ Destroy all Plains.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flashfires.jpg
 Oracle:Destroy all Plains.

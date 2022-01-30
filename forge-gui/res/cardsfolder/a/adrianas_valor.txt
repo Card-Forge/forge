@@ -5,5 +5,4 @@ K:Hidden agenda
 T:Mode$ Attacks | ValidCard$ Creature.NamedCard+YouCtrl | Execute$ TrigPump | TriggerZones$ Command | TriggerDescription$ Whenever a creature you control with the chosen name attacks, you may pay {W}. If you do, that creature gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
 SVar:TrigPump:AB$ Pump | Cost$ W | Defined$ TriggeredAttacker | KW$ Indestructible
 SVar:AgendaLogic:BestCreatureInComputerDeck
-SVar:Picture:http://www.wizards.com/global/images/magic/general/adrianas_valor.jpg
 Oracle:Hidden agenda (Start the game with this conspiracy face down in the command zone and secretly choose a card name. You may turn this conspiracy face up any time and reveal that name.)\nWhenever a creature you control with the chosen name attacks, you may pay {W}. If you do, that creature gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

@@ -3,5 +3,4 @@ ManaCost:2 G
 Types:Creature Insect
 PT:3/1
 K:Trample
-SVar:Picture:http://resources.wizards.com/magic/cards/cg/en-us/card15223.jpg
 Oracle:Trample

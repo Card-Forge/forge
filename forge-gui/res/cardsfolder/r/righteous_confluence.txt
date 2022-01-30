@@ -5,6 +5,5 @@ A:SP$ Charm | Cost$ 3 W W | Choices$ DBToken,DBChangeZone,DBGainLife | CharmNum$
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | LegacyImage$ w 2 2 knight vigilance c15 | SpellDescription$ Create a 2/2 white Knight creature token with vigilance.
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Enchantment | TgtPrompt$ Choose target enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target enchantment.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 5 | SpellDescription$ You gain 5 life.
-DeckHints:Ability$LifeGain & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/righteous_confluence.jpg
+DeckHints:Ability$LifeGain|Token
 Oracle:Choose three. You may choose the same mode more than once.\n• Create a 2/2 white Knight creature token with vigilance.\n• Exile target enchantment.\n• You gain 5 life.

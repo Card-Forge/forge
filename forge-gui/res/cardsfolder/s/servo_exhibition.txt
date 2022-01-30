@@ -2,5 +2,4 @@ Name:Servo Exhibition
 ManaCost:1 W
 Types:Sorcery
 A:SP$ Token | Cost$ 1 W | TokenAmount$ 2 | TokenScript$ c_1_1_a_servo | TokenOwner$ You | LegacyImage$ c 1 1 a servo kld | SpellDescription$ Create two 1/1 colorless Servo artifact creature tokens.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/servo_exhibition.jpg
 Oracle:Create two 1/1 colorless Servo artifact creature tokens.

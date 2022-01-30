@@ -4,5 +4,4 @@ Types:Creature Centaur Shaman
 PT:2/1
 A:AB$ ChangeZone | Cost$ T | ValidTgts$ Card.OppOwn | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBPutCounter | SpellDescription$ Return target card from an opponent's graveyard to their hand. Put a +1/+1 counter on target creature.
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/forcemage_advocate.jpg
 Oracle:{T}: Return target card from an opponent's graveyard to their hand. Put a +1/+1 counter on target creature.

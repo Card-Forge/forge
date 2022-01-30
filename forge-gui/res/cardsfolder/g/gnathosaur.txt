@@ -4,5 +4,4 @@ Types:Creature Dinosaur
 PT:5/4
 A:AB$ Pump | Cost$ Sac<1/Artifact> | Defined$ Self | KW$ Trample | SpellDescription$ CARDNAME gains trample until end of turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gnathosaur.jpg
 Oracle:Sacrifice an artifact: Gnathosaur gains trample until end of turn.

@@ -6,5 +6,4 @@ K:Morph:4 G
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another creature you control is turned face up, untap that creature.
 T:Mode$ TurnFaceUp | ValidCard$ Creature.Other+YouCtrl | Execute$ TrigUntap | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another creature you control is turned face up, untap that creature.
 SVar:TrigUntap:DB$ Untap | Defined$ TriggeredCard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pine_walker.jpg
 Oracle:Morph {4}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhenever Pine Walker or another creature you control is turned face up, untap that creature.

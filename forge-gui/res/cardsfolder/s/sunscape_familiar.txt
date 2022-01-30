@@ -7,5 +7,4 @@ S:Mode$ ReduceCost | ValidCard$ Card.Blue,Card.Green | Type$ Spell | Activator$ 
 AI:RemoveDeck:Random
 DeckNeeds:Color$Green|Blue
 DeckHints:Color$Green|Blue
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sunscape_familiar.jpg
 Oracle:Defender (This creature can't attack.)\nGreen spells and blue spells you cast cost {1} less to cast.

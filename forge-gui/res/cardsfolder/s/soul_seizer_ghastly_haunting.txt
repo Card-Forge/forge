@@ -6,7 +6,6 @@ K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigTransform | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may transform it. If you do, attach it to target creature that player controls.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform | SubAbility$ DBAttach
 SVar:DBAttach:DB$ Attach | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature that damaged player controls | AILogic$ GainControl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_seizer.jpg
 AlternateMode:DoubleFaced
 Oracle:Flying\nWhen Soul Seizer deals combat damage to a player, you may transform it. If you do, attach it to target creature that player controls.
 
@@ -20,5 +19,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ghastly_haunting.jpg
 Oracle:Enchant creature\nYou control enchanted creature.

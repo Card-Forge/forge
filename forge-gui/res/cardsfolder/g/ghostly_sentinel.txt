@@ -4,5 +4,4 @@ Types:Creature Kor Spirit
 PT:3/3
 K:Flying
 K:Vigilance
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostly_sentinel.jpg
 Oracle:Flying, vigilance

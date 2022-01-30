@@ -4,5 +4,4 @@ Types:Creature Elemental Dog
 PT:3/3
 K:Haste
 K:Lifelink
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_ragemutt.jpg
 Oracle:Lifelink, haste

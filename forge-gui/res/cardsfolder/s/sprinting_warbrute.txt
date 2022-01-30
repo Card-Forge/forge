@@ -4,5 +4,4 @@ Types:Creature Ogre Berserker
 PT:5/4
 K:CARDNAME attacks each combat if able.
 K:Dash:3 R
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sprinting_warbrute.jpg
 Oracle:Sprinting Warbrute attacks each combat if able.\nDash {3}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)

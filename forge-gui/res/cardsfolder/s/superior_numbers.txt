@@ -5,5 +5,4 @@ A:SP$ Pump | Cost$ G G | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
 SVar:DBDealDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:X:Count$Valid Creature.YouCtrl/Minus.Y
 SVar:Y:Count$Valid Creature.TargetedPlayerCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/superior_numbers.jpg
 Oracle:Superior Numbers deals damage to target creature equal to the number of creatures you control in excess of the number of creatures target opponent controls.

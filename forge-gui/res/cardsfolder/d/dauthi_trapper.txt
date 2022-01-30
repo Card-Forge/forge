@@ -3,5 +3,4 @@ ManaCost:2 B
 Types:Creature Dauthi Minion
 PT:1/1
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Shadow | SpellDescription$ Target creature gains shadow until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_trapper.jpg
 Oracle:{T}: Target creature gains shadow until end of turn. (It can block or be blocked by only creatures with shadow.)

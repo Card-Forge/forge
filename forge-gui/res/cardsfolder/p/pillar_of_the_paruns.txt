@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Card.MultiColor | SpellDescription$ Add one mana of any color. Spend this mana only to cast a multicolored spell.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pillar_of_the_paruns.jpg
 Oracle:{T}: Add one mana of any color. Spend this mana only to cast a multicolored spell.

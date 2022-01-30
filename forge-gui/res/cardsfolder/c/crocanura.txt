@@ -5,5 +5,4 @@ PT:1/3
 K:Reach
 K:Evolve
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crocanura.jpg
 Oracle:Reach (This creature can block creatures with flying.)\nEvolve (Whenever a creature enters the battlefield under your control, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)

@@ -4,5 +4,4 @@ Types:Enchantment
 T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDamage | TriggerDescription$ Whenever you gain life, you may pay {2}. If you do, CARDNAME deals 2 damage to any target.
 SVar:TrigDamage:AB$DealDamage | Cost$ 2 | NumDmg$ 2 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/searing_meditation.jpg
 Oracle:Whenever you gain life, you may pay {2}. If you do, Searing Meditation deals 2 damage to any target.

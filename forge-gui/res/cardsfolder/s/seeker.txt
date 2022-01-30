@@ -4,5 +4,4 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 W W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.EnchantedBy | ValidBlocker$ Creature.nonArtifact+nonWhite | Description$ Enchanted creature can't be blocked except by artifact creatures and/or white creatures.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/seeker.jpg
 Oracle:Enchant creature\nEnchanted creature can't be blocked except by artifact creatures and/or white creatures.

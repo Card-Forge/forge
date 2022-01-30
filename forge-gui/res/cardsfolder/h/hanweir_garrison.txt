@@ -6,7 +6,6 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ r_1_1_human | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True | LegacyImage$ r 1 1 human emn
 SVar:HasAttackEffect:TRUE
 DeckHints:Name$Hanweir Battlements
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hanweir_garrison.jpg
 MeldPair:Hanweir Battlements
 AlternateMode:Meld
 Oracle:Whenever Hanweir Garrison attacks, create two 1/1 red Human creature tokens that are tapped and attacking.\n(Melds with Hanweir Battlements.)

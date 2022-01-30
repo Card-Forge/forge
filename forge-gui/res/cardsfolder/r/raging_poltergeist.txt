@@ -2,5 +2,4 @@ Name:Raging Poltergeist
 ManaCost:4 R
 Types:Creature Spirit
 PT:6/1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/raging_poltergeist.jpg
 Oracle:

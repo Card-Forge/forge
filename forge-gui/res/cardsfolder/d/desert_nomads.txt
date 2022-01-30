@@ -4,5 +4,4 @@ Types:Creature Human Nomad
 PT:2/2
 K:Desertwalk
 R:Event$ DamageDone | Prevent$ True | ValidSource$ Desert | ValidTarget$ Creature.Self | Description$ Prevent all damage that would be dealt to CARDNAME by Deserts.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/desert_nomads.jpg
 Oracle:Desertwalk\nPrevent all damage that would be dealt to Desert Nomads by Deserts.

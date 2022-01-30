@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigSacUnless:DB$ Sacrifice | Defined$ Self | UnlessCost$ Sac<3/Forest> | UnlessPayer$ You
 SVar:NeedsToPlayVar:Y GE3
 SVar:Y:Count$Valid Forest.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/primeval_force.jpg
 Oracle:When Primeval Force enters the battlefield, sacrifice it unless you sacrifice three Forests.

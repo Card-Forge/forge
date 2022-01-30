@@ -4,5 +4,4 @@ Types:Creature Beast
 PT:2/4
 S:Mode$ Continuous | Affected$ Artifact.nonCreature+YouCtrl | AddKeyword$ Indestructible | AddHiddenKeyword$ Other players can't gain control of CARDNAME. | IsPresent$ Card.Self+untapped | Description$ As long as CARDNAME is untapped, noncreature artifacts you control have indestructible, and other players can't gain control of them.
 S:Mode$ CantAttach | ValidCardToTarget$ Aura.NotAttachedTo | Target$ Artifact.nonCreature+YouCtrl | IsPresent$ Card.Self+untapped | Description$ As long as CARDNAME is untapped, noncreature artifacts you control can't be enchanted, This effect doesn't remove Auras already attached to those artifacts.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_beast.jpg
 Oracle:As long as Guardian Beast is untapped, noncreature artifacts you control can't be enchanted, they have indestructible, and other players can't gain control of them. This effect doesn't remove Auras already attached to those artifacts.

@@ -4,5 +4,4 @@ Types:Vanguard
 HandLifeModifier:+0/-5
 T:Mode$ NewGame | TriggerZones$ Command | Execute$ TrigToken | Static$ True | TriggerDescription$ You begin the game with a 1/1 green Elf creature token on the battlefield. It has "{T}: Add {G}."
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_elf_g | TokenOwner$ You
-SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Elvish Champion Avatar.full.jpg
 Oracle:Hand +0, life -5\nYou begin the game with a 1/1 green Elf creature token on the battlefield. It has "{T}: Add {G}."

@@ -4,5 +4,4 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Token | Cost$ 3 G W T tapXType<2/Creature> Sac<1/CARDNAME> | CostDesc$ {3}{G}{W}, {T}, Tap two untapped creatures you control, Sacrifice CARDNAME: | TokenAmount$ 1 | TokenScript$ gw_8_8_elemental_vigilance | TokenOwner$ You | LegacyImage$ gw 8 8 elemental vigilance rtr | SpellDescription$ Create an 8/8 green and white Elemental creature token with vigilance.
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grove_of_the_guardian.jpg
 Oracle:{T}: Add {C}.\n{3}{G}{W}, {T}, Tap two untapped creatures you control, Sacrifice Grove of the Guardian: Create an 8/8 green and white Elemental creature token with vigilance.

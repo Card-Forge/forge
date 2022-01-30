@@ -2,5 +2,4 @@ Name:Costly Plunder
 ManaCost:1 B
 Types:Instant
 A:SP$ Draw | Cost$ 1 B Sac<1/Artifact;Creature/artifact or creature> | NumCards$ 2 | SpellDescription$ Draw two cards.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/costly_plunder.jpg
 Oracle:As an additional cost to cast this spell, sacrifice an artifact or creature.\nDraw two cards.

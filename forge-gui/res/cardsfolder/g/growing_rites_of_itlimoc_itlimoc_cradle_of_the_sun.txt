@@ -7,7 +7,6 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:NumCres:Count$Valid Creature.YouCtrl+inZoneBattlefield
 AlternateMode:DoubleFaced
-SVar:Picture:http://www.wizards.com/global/images/magic/general/growing_rites_of_itlimoc.jpg
 Oracle:When Growing Rites of Itlimoc enters the battlefield, look at the top four cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in any order.\nAt the beginning of your end step, if you control four or more creatures, transform Growing Rites of Itlimoc.
 
 ALTERNATE
@@ -18,5 +17,4 @@ Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ G | Amount$ 1 | SpellDescription$ Add {G}.
 A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add {G} for each creature you control.
 SVar:X:Count$Valid Creature.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/itlimoc_cradle_of_the_sun.jpg
 Oracle:(Transforms from Growing Rites of Itlimoc.)\n{T}: Add {G}.\n{T}: Add {G} for each creature you control.

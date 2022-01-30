@@ -3,5 +3,4 @@ ManaCost:R
 Types:Sorcery
 K:Flashback:4 R
 A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
-SVar:Picture:http://resources.wizards.com/magic/cards/od/en-us/card30570.jpg
 Oracle:Firebolt deals 2 damage to any target.\nFlashback {4}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

@@ -4,5 +4,4 @@ Types:Sorcery
 A:SP$ RepeatEach | Cost$ 2 B | RepeatPlayers$ Player | RepeatSubAbility$ DeliriumDiscard | SpellDescription$ Each player discards three cards.
 SVar:DeliriumDiscard:DB$ Discard | Mode$ TgtChoose | Defined$ Remembered | NumCards$ 3
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/delirium_skeins.jpg
 Oracle:Each player discards three cards.

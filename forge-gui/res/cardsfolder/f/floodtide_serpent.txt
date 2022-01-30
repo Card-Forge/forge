@@ -7,5 +7,4 @@ SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$Valid Enchantment.YouCtrl
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/floodtide_serpent.jpg
 Oracle:Floodtide Serpent can't attack unless you return an enchantment you control to its owner's hand. (This cost is paid as attackers are declared.)

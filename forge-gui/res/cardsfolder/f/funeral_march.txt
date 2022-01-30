@@ -5,5 +5,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 B B | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.AttachedBy | Execute$ TrigSac | TriggerDescription$ When enchanted creature leaves the battlefield, its controller sacrifices a creature.
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Creature | Defined$ TriggeredCardController
-SVar:Picture:http://www.wizards.com/global/images/magic/general/funeral_march.jpg
 Oracle:Enchant creature\nWhen enchanted creature leaves the battlefield, its controller sacrifices a creature.

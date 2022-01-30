@@ -5,5 +5,4 @@ PT:1/2
 K:Flying
 A:AB$ Tap | Cost$ 2 Return<1/Land> | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Tap target land.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/floodbringer.jpg
 Oracle:Flying\n{2}, Return a land you control to its owner's hand: Tap target land.

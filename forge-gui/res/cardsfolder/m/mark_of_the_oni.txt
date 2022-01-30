@@ -10,5 +10,4 @@ SVar:PlayMain1:TRUE
 AI:RemoveDeck:Random
 SVar:NeedsToPlay:Demon.YouCtrl
 DeckHints:Type$Demon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mark_of_the_oni.jpg
 Oracle:Enchant creature\nYou control enchanted creature.\nAt the beginning of the end step, if you control no Demons, sacrifice Mark of the Oni.

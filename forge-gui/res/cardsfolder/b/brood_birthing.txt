@@ -5,6 +5,5 @@ A:SP$ Token | Cost$ 1 R | TokenAmount$ X | TokenScript$ c_0_1_eldrazi_spawn_sac 
 SVar:X:Count$Compare Y GE1.3.1
 SVar:Y:Count$Valid Card.YouCtrl+Eldrazi+Spawn
 DeckHints:Type$Eldrazi
-DeckHas:Ability$Mana.Colorless & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brood_birthing.jpg
+DeckHas:Ability$Mana.Colorless|Token
 Oracle:If you control an Eldrazi Spawn, create three 0/1 colorless Eldrazi Spawn creature tokens. They have "Sacrifice this creature: Add {C}." Otherwise, create one of those tokens.

@@ -4,5 +4,4 @@ Types:Creature Cat Monk
 PT:3/2
 T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, destroy target enchantment creature an opponent controls.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.Enchantment+OppCtrl | TgtPrompt$ Select target creature an opponent controls.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_iconoclast.jpg
 Oracle:Heroic — Whenever you cast a spell that targets Leonin Iconoclast, destroy target enchantment creature an opponent controls.

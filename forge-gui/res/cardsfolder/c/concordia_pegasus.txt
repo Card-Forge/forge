@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Creature Pegasus
 PT:1/3
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/concordia_pegasus.jpg
 Oracle:Flying

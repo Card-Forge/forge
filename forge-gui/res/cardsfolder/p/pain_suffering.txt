@@ -3,7 +3,6 @@ ManaCost:B
 AlternateMode: Split
 Types:Sorcery
 A:SP$ Discard | Cost$ B | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pain_suffering.jpg
 Oracle:Target player discards a card.
 
 ALTERNATE

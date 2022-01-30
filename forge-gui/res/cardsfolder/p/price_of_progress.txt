@@ -5,5 +5,4 @@ A:SP$ RepeatEach | Cost$ 1 R | RepeatPlayers$ Player | RepeatSubAbility$ DBDamag
 SVar:DBDamage:DB$ DealDamage | Defined$ Remembered | NumDmg$ X
 SVar:X:Count$Valid Land.nonBasic+RememberedPlayerCtrl/Times.2
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/price_of_progress.jpg
 Oracle:Price of Progress deals damage to each player equal to twice the number of nonbasic lands that player controls.

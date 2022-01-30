@@ -2,5 +2,4 @@ Name:Feral Krushok
 ManaCost:4 G
 Types:Creature Beast
 PT:5/4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/feral_krushok.jpg
 Oracle:

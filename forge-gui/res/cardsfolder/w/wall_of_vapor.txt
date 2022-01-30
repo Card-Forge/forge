@@ -5,5 +5,4 @@ PT:0/1
 K:Defender
 R:Event$ DamageDone | Prevent$ True | ValidSource$ Creature.blockedBySource | ValidTarget$ Creature.Self | Description$ Prevent all damage that would be dealt to CARDNAME by creatures it's blocking.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_vapor.jpg
 Oracle:Defender (This creature can't attack.)\nPrevent all damage that would be dealt to Wall of Vapor by creatures it's blocking.

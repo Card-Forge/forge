@@ -5,5 +5,4 @@ K:ETBReplacement:Other:DBNameCard
 SVar:DBNameCard:DB$ NameCard | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a card name.
 A:AB$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target spell with the chosen name. | ValidTgts$ Card.NamedCard | SpellDescription$ Counter target spell with the chosen name.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/declaration_of_naught.jpg
 Oracle:As Declaration of Naught enters the battlefield, choose a card name.\n{U}: Counter target spell with the chosen name.

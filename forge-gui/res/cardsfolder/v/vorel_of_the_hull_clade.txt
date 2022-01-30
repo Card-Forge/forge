@@ -4,5 +4,4 @@ Types:Legendary Creature Human Merfolk
 PT:1/4
 A:AB$ MultiplyCounter | Cost$ G U T | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | StackDescription$ SpellDescription | SpellDescription$ Double the number of each kind of counter on target artifact, creature, or land.
 DeckHints:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vorel_of_the_hull_clade.jpg
 Oracle:{G}{U}, {T}: Double the number of each kind of counter on target artifact, creature, or land.

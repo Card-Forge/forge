@@ -7,5 +7,4 @@ SVar:DBAddCounter:DB$ PutCounter | Defined$ Self | ETB$ True | CounterType$ DEPL
 A:AB$ Mana | Cost$ T SubCounter<1/DEPLETION> | Produced$ G | SubAbility$ DBSac | Amount$ 2 | SpellDescription$ Add {G}{G}. If there are no depletion counters on CARDNAME, sacrifice it.
 SVar:DBSac:DB$ Sacrifice | SacValid$ Self | ConditionPresent$ Card.Self+counters_EQ0_DEPLETION
 AI:RemoveDeck:Random
-SVar:Picture:http://wizards.com/global/images/magic/general/hickory_woodlot.jpg
 Oracle:Hickory Woodlot enters the battlefield tapped with two depletion counters on it.\n{T}, Remove a depletion counter from Hickory Woodlot: Add {G}{G}. If there are no depletion counters on Hickory Woodlot, sacrifice it.

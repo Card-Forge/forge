@@ -8,5 +8,4 @@ SVar:AFLifeLost:Number$0
 DeckHints:Name$Bogbrew Witch
 DeckNeeds:Name$Festering Newt
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bubbling_cauldron.jpg
 Oracle:{1}, {T}, Sacrifice a creature: You gain 4 life.\n{1}, {T}, Sacrifice a creature named Festering Newt: Each opponent loses 4 life. You gain life equal to the life lost this way.

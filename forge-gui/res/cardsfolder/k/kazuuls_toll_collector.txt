@@ -5,5 +5,4 @@ PT:3/2
 A:AB$ Pump | Cost$ 0 | ValidTgts$ Equipment.YouCtrl | AITgts$ Equipment.YouCtrl+notEquipping | TgtPrompt$ Select target Equipment you control | SubAbility$ KazuulAttach | SorcerySpeed$ True | StackDescription$ None | SpellDescription$ Attach target Equipment you control to Kazuul's Toll Collector.
 SVar:KazuulAttach:DB$ Attach | Object$ ParentTarget | Defined$ Self
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kazuuls_toll_collector.jpg
 Oracle:{0}: Attach target Equipment you control to Kazuul's Toll Collector. Activate only as a sorcery.

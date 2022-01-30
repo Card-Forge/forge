@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact
 A:AB$ Animate | Cost$ T | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Types$ Artifact | SpellDescription$ Target permanent becomes an artifact in addition to its other types until end of turn.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/liquimetal_coating.jpg
 Oracle:{T}: Target permanent becomes an artifact in addition to its other types until end of turn.

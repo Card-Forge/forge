@@ -7,5 +7,4 @@ SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select tar
 A:AB$ Destroy | Cost$ B Sac<1/CARDNAME> | ValidTgts$ Creature.counters_GE1_M1M1 | TgtPrompt$ Select target creature that has a -1/-1 counter on it. | SpellDescription$ Destroy target creature that has a -1/-1 counter on it.
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/banewhip_punisher.jpg
 Oracle:When Banewhip Punisher enters the battlefield, you may put a -1/-1 counter on target creature.\n{B}, Sacrifice Banewhip Punisher: Destroy target creature that has a -1/-1 counter on it.

@@ -3,5 +3,4 @@ ManaCost:3 W
 Types:Instant
 A:SP$ PumpAll | Cost$ 3 W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Lifelink | AILogic$ UntapCombatTrick | SubAbility$ DBUntapAll | SpellDescription$ Creatures you control get +1/+1 and gain lifelink until end of turn. Untap those creatures.
 SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tenacity.jpg
 Oracle:Creatures you control get +1/+1 and gain lifelink until end of turn. Untap those creatures.

@@ -8,5 +8,4 @@ SVar:TrigToken:DB$ Token | TokenScript$ g_2_2_wolf | LegacyImage$ g 2 2 wolf bng
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +1/+1 for each Wolf you control.
 SVar:X:Count$Valid Card.Wolf+YouCtrl
 SVar:BuffedBy:Wolf
-SVar:Picture:http://www.wizards.com/global/images/magic/general/raised_by_wolves.jpg
 Oracle:Enchant creature\nWhen Raised by Wolves enters the battlefield, create two 2/2 green Wolf creature tokens.\nEnchanted creature gets +1/+1 for each Wolf you control.

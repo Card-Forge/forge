@@ -5,5 +5,4 @@ PT:6/6
 T:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Card.Self | ValidTarget$ Creature.blocking | TriggerZones$ Battlefield | Execute$ TrigManifest | TriggerDescription$ Whenever CARDNAME deals combat damage to one or more blocking creatures, manifest the top card of your library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)
 SVar:TrigManifest:DB$ Manifest | Amount$ 1 | Defined$ TopOfLibrary
 SVar:HasAttackEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/arashin_war_beast.jpg
 Oracle:Whenever Arashin War Beast deals combat damage to one or more blocking creatures, manifest the top card of your library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)

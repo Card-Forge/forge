@@ -5,5 +5,4 @@ PT:1/1
 A:AB$ Pump | Cost$ R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | SpellDescription$ Target creature gains first strike until end of turn.
 A:AB$ Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 SVar:NonCombatPriority:1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thornscape_apprentice.jpg
 Oracle:{R}, {T}: Target creature gains first strike until end of turn.\n{W}, {T}: Tap target creature.

@@ -11,5 +11,4 @@ S:Mode$ CantAttackUnless | ValidCard$ Creature.Self | Target$ Player,Planeswalke
 SVar:NeedsToPlayVar:Y GE4
 SVar:Y:Count$Valid Island.YouCtrl
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/leviathan.jpg
 Oracle:Trample\nLeviathan enters the battlefield tapped and doesn't untap during your untap step.\nAt the beginning of your upkeep, you may sacrifice two Islands. If you do, untap Leviathan.\nLeviathan can't attack unless you sacrifice two Islands. (This cost is paid as attackers are declared.)

@@ -6,5 +6,4 @@ A:AB$ Animate | Cost$ 4 R | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Art
 S:Mode$ Continuous | Affected$ Creature.Self | CanBlockAmount$ 1 | Description$ As long as CARDNAME is a creature, it can block an additional creature each combat.
 DeckNeeds:Color$Red
 #TODO: The AI won't block multiple creatures yet, it seems. Can be improved.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/foriysian_totem.jpg
 Oracle:{T}: Add {R}.\n{4}{R}: Foriysian Totem becomes a 4/4 red Giant artifact creature with trample until end of turn.\nAs long as Foriysian Totem is a creature, it can block an additional creature each combat.

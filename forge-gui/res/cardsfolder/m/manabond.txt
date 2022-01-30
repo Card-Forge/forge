@@ -6,5 +6,4 @@ SVar:TrigChangeAll:DB$ ChangeZoneAll | ChangeType$ Land.YouCtrl | Origin$ Hand |
 SVar:DBDiscard:DB$ Discard | Mode$ Hand
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/manabond.jpg
 Oracle:At the beginning of your end step, you may reveal your hand and put all land cards from it onto the battlefield. If you do, discard your hand.

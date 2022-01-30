@@ -8,5 +8,4 @@ SVar:TrigCurseArtifactSacrifice:DB$ Sacrifice | Defined$ TriggeredPlayer | SacVa
 SVar:DBCurseArtifactDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCurseArtifactCleanup
 SVar:DBCurseArtifactCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_artifact.jpg
 Oracle:Enchant artifact\nAt the beginning of the upkeep of enchanted artifact's controller, Curse Artifact deals 2 damage to that player unless they sacrifice that artifact.

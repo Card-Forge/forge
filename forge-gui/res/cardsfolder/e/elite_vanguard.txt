@@ -2,5 +2,4 @@ Name:Elite Vanguard
 ManaCost:W
 Types:Creature Human Soldier
 PT:2/1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elite_vanguard.jpg
 Oracle:

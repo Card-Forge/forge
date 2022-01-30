@@ -4,5 +4,4 @@ Types:Creature Goblin Rogue
 PT:2/1
 K:Forestwalk
 A:AB$ Destroy | Cost$ 2 B Sac<1/CARDNAME> | ValidTgts$ Treefolk,Forest | TgtPrompt$ Select target Treefolk or Forest | SpellDescription$ Destroy target Treefolk or Forest.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_loggers.jpg
 Oracle:Forestwalk (This creature can't be blocked as long as defending player controls a Forest.)\n{2}{B}, Sacrifice Boggart Loggers: Destroy target Treefolk or Forest.

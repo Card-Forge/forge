@@ -4,5 +4,4 @@ Types:Creature Beast
 PT:5/4
 K:Affinity:Artifact
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/qumulox.jpg
 Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nFlying

@@ -5,5 +5,4 @@ PT:3/4
 K:Flying
 A:AB$ TapAll | Cost$ 3 U | ValidCards$ Creature.toughnessLE2 | SpellDescription$ Tap all creatures with toughness 2 or less.
 A:AB$ AnimateAll | Cost$ 3 U | ValidCards$ Creature.Other | RemoveKeywords$ Flying | SpellDescription$ All other creatures lose flying until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thundercloud_elemental.jpg
 Oracle:Flying\n{3}{U}: Tap all creatures with toughness 2 or less.\n{3}{U}: All other creatures lose flying until end of turn.

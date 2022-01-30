@@ -8,6 +8,5 @@ SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Manda
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$Valid Creature.White+YouCtrl+cmcLE4
 AI:RemoveDeck:Random
-DeckNeeds:Color$white
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eiganjo_free_riders.jpg
+DeckNeeds:Color$White
 Oracle:Flying\nAt the beginning of your upkeep, return a white creature you control to its owner's hand.

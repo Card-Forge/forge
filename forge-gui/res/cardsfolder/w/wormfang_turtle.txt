@@ -8,5 +8,4 @@ SVar:TrigChooseExile:DB$ ChooseCard | Choices$ Land.YouCtrl | Mandatory$ True | 
 SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ ChosenCard | RememberChanged$ True
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wormfang_turtle.jpg
 Oracle:When Wormfang Turtle enters the battlefield, exile a land you control.\nWhen Wormfang Turtle leaves the battlefield, return the exiled card to the battlefield under its owner's control.

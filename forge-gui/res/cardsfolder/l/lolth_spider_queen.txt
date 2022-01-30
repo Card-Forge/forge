@@ -13,4 +13,4 @@ SVar:LoseLife:DB$ LoseLife | Defined$ TriggeredTarget | LifeAmount$ Y | SubAbili
 SVar:Cleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TriggeredTarget$LifeLostThisTurn
 SVar:Y:SVar$X/NMinus.8
-Oracle:Whenever a creature you control dies, put a loyalty counter on Lolth, Spider Queen.\n[0]: You draw a card and you lose 1 life.\n[−3]: Create two 2/1 black Spider creature tokens with menace and reach.\n[−8]: You get an emblem with "Whenever an opponent is dealt combat damage by one or more creatures you control, if that player lost less than 8 life this turn, they lose life equal to the difference."
+Oracle:Whenever a creature you control dies, put a loyalty counter on Lolth, Spider Queen.\n[0]: You draw a card and you lose 1 life.\n[-3]: Create two 2/1 black Spider creature tokens with menace and reach.\n[-8]: You get an emblem with "Whenever an opponent is dealt combat damage by one or more creatures you control, if that player lost less than 8 life this turn, they lose life equal to the difference."

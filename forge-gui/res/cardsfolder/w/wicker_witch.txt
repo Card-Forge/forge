@@ -2,5 +2,4 @@ Name:Wicker Witch
 ManaCost:3
 Types:Artifact Creature Scarecrow
 PT:3/1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wicker_witch.jpg
 Oracle:

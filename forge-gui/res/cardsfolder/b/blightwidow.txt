@@ -4,5 +4,4 @@ Types:Creature Phyrexian Spider
 PT:2/4
 K:Reach
 K:Infect
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blightwidow.jpg
 Oracle:Reach (This creature can block creatures with flying.)\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)

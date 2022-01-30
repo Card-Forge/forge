@@ -8,5 +8,4 @@ SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Creature.blockedByRemembered | Sub
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glyph_of_doom.jpg
 Oracle:Choose target Wall creature. At this turn's next end of combat, destroy all creatures that were blocked by that creature this turn.

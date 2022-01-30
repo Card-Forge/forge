@@ -15,5 +15,4 @@ SVar:RolledChaos:DB$ Effect | Name$ Agyrem Effect - Can't Attack | StaticAbiliti
 SVar:STCantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature | Target$ You | Description$ Creatures can't attack you until a player planeswalks.
 SVar:TrigPlaneswalk:Mode$ PlaneswalkedFrom | Execute$ AgyremCleanup | Static$ True
 SVar:AIRollPlanarDieParams:Mode$ Always
-SVar:Picture:http://www.wizards.com/global/images/magic/general/agyrem.jpg
 Oracle:Whenever a white creature dies, return it to the battlefield under its owner's control at the beginning of the next end step.\nWhenever a nonwhite creature dies, return it to its owner's hand at the beginning of the next end step.\nWhenever you roll {CHAOS}, creatures can't attack you until a player planeswalks.

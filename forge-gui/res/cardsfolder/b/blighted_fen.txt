@@ -5,5 +5,4 @@ A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Sacrifice | Cost$ 4 B T Sac<1/CARDNAME> | ValidTgts$ Opponent | SacValid$ Creature | SacMessage$ Creature | Amount$ 1 | SpellDescription$ Target opponent sacrifices a creature.
 DeckHas:Ability$Mana.Colorless
 DeckNeeds:Color$Black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blighted_fen.jpg
 Oracle:{T}: Add {C}.\n{4}{B}, {T}, Sacrifice Blighted Fen: Target opponent sacrifices a creature.

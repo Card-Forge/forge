@@ -5,5 +5,4 @@ PT:1/1
 S:Mode$ Continuous | Affected$ Sliver | AddAbility$ AnyMana | Description$ All Slivers have "{T}: Add one mana of any color."
 SVar:AnyMana:AB$Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gemhide_sliver.jpg
 Oracle:All Slivers have "{T}: Add one mana of any color."

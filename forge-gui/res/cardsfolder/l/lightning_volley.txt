@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ AnimateAll | Cost$ 3 R | ValidCards$ Creature.YouCtrl | Abilities$ LVAbs | SpellDescription$ Until end of turn, creatures you control gain "{T}: This creature deals 1 damage to any target."
 SVar:LVAbs:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_volley.jpg
 Oracle:Until end of turn, creatures you control gain "{T}: This creature deals 1 damage to any target."

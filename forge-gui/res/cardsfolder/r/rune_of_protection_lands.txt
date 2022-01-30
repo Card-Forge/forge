@@ -8,5 +8,4 @@ SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.ChosenCard+Lan
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rune_of_protection_lands.jpg
 Oracle:{W}: The next time a land source of your choice would deal damage to you this turn, prevent that damage.\nCycling {2} ({2}, Discard this card: Draw a card.)

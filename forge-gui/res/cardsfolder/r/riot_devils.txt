@@ -2,5 +2,4 @@ Name:Riot Devils
 ManaCost:2 R
 Types:Creature Devil
 PT:2/3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/riot_devils.jpg
 Oracle:

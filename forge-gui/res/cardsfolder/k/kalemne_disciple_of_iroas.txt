@@ -9,5 +9,4 @@ SVar:TrigExperience:DB$ PutCounter | Defined$ You | CounterType$ Experience | Co
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each experience counter you have.
 SVar:X:Count$YourCountersExperience
 SVar:BuffedBy:Creature.cmcGE5
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kalemne_disciple_of_iroas.jpg
 Oracle:Double strike, vigilance\nWhenever you cast a creature spell with mana value 5 or greater, you get an experience counter.\nKalemne, Disciple of Iroas gets +1/+1 for each experience counter you have.

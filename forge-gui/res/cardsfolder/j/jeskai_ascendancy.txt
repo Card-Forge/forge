@@ -7,5 +7,4 @@ SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef
 SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl
 SVar:TrigLoot:AB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | Cost$ Draw<1/You>
 SVar:BuffedBy:Card.nonCreature+nonLand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jeskai_ascendancy.jpg
 Oracle:Whenever you cast a noncreature spell, creatures you control get +1/+1 until end of turn. Untap those creatures.\nWhenever you cast a noncreature spell, you may draw a card. If you do, discard a card.

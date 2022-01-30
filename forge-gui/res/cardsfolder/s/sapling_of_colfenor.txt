@@ -10,5 +10,4 @@ SVar:DBLose:DB$ LoseLife | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Remembered$CardToughness
 SVar:X:Remembered$CardPower
-SVar:Picture:http://www.wizards.com/global/images/magic/general/Sapling_of_Colfenor.jpg
 Oracle:Indestructible\nWhenever Sapling of Colfenor attacks, reveal the top card of your library. If it's a creature card, you gain life equal to that card's toughness, lose life equal to its power, then put it into your hand.

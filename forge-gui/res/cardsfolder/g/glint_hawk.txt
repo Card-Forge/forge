@@ -6,5 +6,4 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you return an artifact you control to its owner's hand.
 SVar:DBSac:DB$ Sacrifice | Defined$ Self | UnlessCost$ Return<1/Artifact> | UnlessPayer$ You
 SVar:NeedsToPlay:Artifact.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glint_hawk.jpg
 Oracle:Flying\nWhen Glint Hawk enters the battlefield, sacrifice it unless you return an artifact you control to its owner's hand.

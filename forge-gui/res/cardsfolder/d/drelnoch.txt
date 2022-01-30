@@ -5,5 +5,4 @@ PT:3/3
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME becomes blocked, you may draw two cards.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2 | OptionalDecider$ You
 SVar:HasAttackEffect:Blocked
-SVar:Picture:http://www.wizards.com/global/images/magic/general/drelnoch.jpg
 Oracle:Whenever Drelnoch becomes blocked, you may draw two cards.

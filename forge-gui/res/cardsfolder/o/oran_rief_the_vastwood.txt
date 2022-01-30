@@ -3,7 +3,6 @@ ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-A:AB$PutCounterAll | Cost$ T | ValidCards$ Creature.Green+ThisTurnEntered | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each green creature that entered the battlefield this turn.
+A:AB$ PutCounterAll | Cost$ T | ValidCards$ Creature.Green+ThisTurnEntered | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each green creature that entered the battlefield this turn.
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/oran_rief_the_vastwood.jpg
 Oracle:Oran-Rief, the Vastwood enters the battlefield tapped.\n{T}: Add {G}.\n{T}: Put a +1/+1 counter on each green creature that entered the battlefield this turn.

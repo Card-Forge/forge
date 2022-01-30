@@ -5,6 +5,5 @@ A:SP$ LoseLife | Cost$ 5 B | ValidTgts$ Player | TgtPrompt$ Select a player | Li
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3 | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ 3 | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You | LegacyImage$ c 0 1 eldrazi spawn sac roe
 DeckHints:Type$Eldrazi
-DeckHas:Ability$Mana.Colorless & Ability$Token & Ability$LifeGain
-SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_feed.jpg
+DeckHas:Ability$Mana.Colorless|Token|LifeGain
 Oracle:Target player loses 3 life. You gain 3 life and create three 0/1 colorless Eldrazi Spawn creature tokens. They have "Sacrifice this creature: Add {C}."

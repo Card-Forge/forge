@@ -4,5 +4,4 @@ Types:World Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, destroy target nonartifact creature that player controls of their choice. It can't be regenerated.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.nonArtifact+ActivePlayerCtrl | TgtPrompt$ Choose target nonartifact creature. | NoRegen$ True | TargetingPlayer$ TriggeredPlayer
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/the_abyss.jpg
 Oracle:At the beginning of each player's upkeep, destroy target nonartifact creature that player controls of their choice. It can't be regenerated.

@@ -8,5 +8,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature.nonZombie | SacMessage$ non-Zombie Creature | SubAbility$ MakeToken
 SVar:MakeToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ 1 | LegacyImage$ b 2 2 zombie ala
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/archdemon_of_unx.jpg
 Oracle:Flying, trample\nAt the beginning of your upkeep, sacrifice a non-Zombie creature, then create a 2/2 black Zombie creature token.

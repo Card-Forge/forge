@@ -5,5 +5,4 @@ PT:6/6
 A:AB$ DealDamage | Cost$ T X | XColor$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ Crimson Hellkite deals X damage to target creature. Spend only red mana on X.
 K:Flying
 SVar:X:Count$xPaid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crimson_hellkite.jpg
 Oracle:Flying\n{X}, {T}: Crimson Hellkite deals X damage to target creature. Spend only red mana on X.

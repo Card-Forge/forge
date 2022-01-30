@@ -5,5 +5,4 @@ PT:2/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerController$ TriggeredCardController | Desert$ True | TriggerDescription$ When CARDNAME dies, if you control a Desert or there is a Desert card in your graveyard, target player discards a card.
 SVar:TrigDiscard:DB$ Discard | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose
 DeckHints:Type$Desert
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wretched_camel.jpg
 Oracle:When Wretched Camel dies, if you control a Desert or there is a Desert card in your graveyard, target player discards a card.

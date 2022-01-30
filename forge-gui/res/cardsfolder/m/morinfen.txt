@@ -5,5 +5,4 @@ PT:5/4
 K:Flying
 K:Cumulative upkeep:PayLife<1>:Pay 1 life.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/morinfen.jpg
 Oracle:Flying\nCumulative upkeep—Pay 1 life. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)

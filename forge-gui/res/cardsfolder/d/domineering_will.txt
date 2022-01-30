@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ Pump | Cost$ 3 U | ValidTgts$ Player | StackDescription$ None | SubAbility$ DBGainControl | SpellDescription$ Target player gains control of up to three target nonattacking creatures until end of turn. Untap those creatures. They block this turn if able.
 SVar:DBGainControl:DB$ GainControl | ValidTgts$ Creature.notattacking | TgtPrompt$ Select target nonattacking creature | AddKWs$ HIDDEN CARDNAME blocks each combat if able. | LoseControl$ EOT | TargetMin$ 0 | TargetMax$ 3 | NewController$ ParentTarget | Untap$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/domineering_will.jpg
 Oracle:Target player gains control of up to three target nonattacking creatures until end of turn. Untap those creatures. They block this turn if able.

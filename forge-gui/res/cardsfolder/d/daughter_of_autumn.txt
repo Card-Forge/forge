@@ -7,5 +7,4 @@ SVar:DamageEvent:Event$ DamageDone | ValidTarget$ Creature.IsRemembered | Replac
 SVar:DamageEventDmg:DB$ ReplaceSplitDamage | DamageTarget$ EffectSource
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/daughter_of_autumn.jpg
 Oracle:{W}: The next 1 damage that would be dealt to target white creature this turn is dealt to Daughter of Autumn instead.

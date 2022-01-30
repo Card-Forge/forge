@@ -5,5 +5,4 @@ PT:2/3
 K:Deathtouch
 S:Mode$ Continuous | Affected$ Creature.Minotaur+Other+YouCtrl | AddKeyword$ Deathtouch | Description$ Other Minotaur creatures you control have deathtouch.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/felhide_petrifier.jpg
 Oracle:Deathtouch\nOther Minotaur creatures you control have deathtouch.

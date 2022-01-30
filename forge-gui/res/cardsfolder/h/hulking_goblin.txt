@@ -3,5 +3,4 @@ ManaCost:1 R
 Types:Creature Goblin
 PT:2/2
 K:CARDNAME can't block.
-SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20212.jpg
 Oracle:Hulking Goblin can't block.

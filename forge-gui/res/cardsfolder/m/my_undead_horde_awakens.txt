@@ -5,5 +5,4 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | 
 SVar:TrigNecromancy:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | RememberChanged$ True
 T:Mode$ ChangesZone | ValidCard$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigAbandon | TriggerZones$ Command | TriggerDescription$ When a creature put onto the battlefield with this scheme dies, abandon this scheme.
 SVar:TrigAbandon:AB$ Abandon | Cost$ 0
-SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/My Undead Horde Awakens.full.jpg
 Oracle:(An ongoing scheme remains face up until it's abandoned.)\nAt the beginning of your end step, you may put target creature card from an opponent's graveyard onto the battlefield under your control.\nWhen a creature put onto the battlefield with this scheme dies, abandon this scheme.

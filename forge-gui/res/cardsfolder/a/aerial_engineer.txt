@@ -5,5 +5,4 @@ PT:2/4
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddKeyword$ Flying | IsPresent$ Artifact.YouCtrl | Description$ As long as you control an artifact, CARDNAME gets +2/+0 and has flying.
 SVar:BuffedBy:Artifact
 DeckHints:Type$Artifact
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aerial_engineer.jpg
 Oracle:As long as you control an artifact, Aerial Engineer gets +2/+0 and has flying.

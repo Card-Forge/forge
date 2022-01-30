@@ -10,7 +10,6 @@ SVar:DBVoteQuill:DB$ Draw | NumCards$ VoteNumQuill | SubAbility$ DBDiscard | Rem
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ X | Mode$ TgtChoose | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-DeckHas:Ability$Counters & Ability$Discard
+DeckHas:Ability$Counters|Discard
 DeckHints:Keyword$Madness & Ability$Delirium
-SVar:Picture:http://www.wizards.com/global/images/magic/general/messenger_jays.jpg
 Oracle:Flying\nCouncil's dilemma — When Messenger Jays enters the battlefield, starting with you, each player votes for feather or quill. Put a +1/+1 counter on Messenger Jays for each feather vote and draw a card for each quill vote. For each card drawn this way, discard a card.

@@ -6,5 +6,4 @@ K:Flash
 K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with a +1/+1 counter on it for each creature that died this turn.
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 DeckHints:Ability$Graveyard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodcrazed_paladin.jpg
 Oracle:Flash\nBloodcrazed Paladin enters the battlefield with a +1/+1 counter on it for each creature that died this turn.

@@ -4,5 +4,4 @@ Types:Enchantment
 S:Mode$ CantTarget | ValidCard$ Creature | ValidSA$ Spell | Description$ Creatures can't be the target of spells.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dense_foliage.jpg
 Oracle:Creatures can't be the targets of spells.

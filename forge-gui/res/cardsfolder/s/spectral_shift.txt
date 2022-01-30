@@ -7,5 +7,4 @@ SVar:DBBasicLand:DB$ ChangeText | ValidTgts$ Card | TgtZone$ Stack,Battlefield |
 SVar:DBColor:DB$ ChangeText | ValidTgts$ Card | TgtZone$ Stack,Battlefield | TgtPrompt$ Choose target spell or permanent | ChangeColorWord$ Choose Choose | Duration$ Permanent | SpellDescription$ Change the text of target spell or permanent by replacing all instances of one color word with another. (This effect lasts indefinitely.)
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_shift.jpg
 Oracle:Choose one —\n• Change the text of target spell or permanent by replacing all instances of one basic land type with another. (This effect lasts indefinitely.)\n• Change the text of target spell or permanent by replacing all instances of one color word with another. (This effect lasts indefinitely.)\nEntwine {2} (Choose both if you pay the entwine cost.)

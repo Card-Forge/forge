@@ -4,5 +4,4 @@ Types:Artifact
 A:AB$ PutCounter | Cost$ 4 | CounterType$ PRESSURE | CounterNum$ 1 | SpellDescription$ Put a pressure counter on CARDNAME.
 A:AB$ DealDamage | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SpellDescription$ It deals damage equal to the number of pressure counters on it to any target.
 SVar:X:Count$CardCounters.PRESSURE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_mine.jpg
 Oracle:{4}: Put a pressure counter on Magma Mine.\n{T}, Sacrifice Magma Mine: It deals damage equal to the number of pressure counters on it to any target.

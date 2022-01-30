@@ -3,5 +3,4 @@ ManaCost:4 B
 Types:Creature Wraith
 PT:4/2
 K:Swampwalk
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_tatters.jpg
 Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)

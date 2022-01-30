@@ -5,5 +5,4 @@ A:SP$ RepeatEach | Cost$ 6 G G | RepeatPlayers$ Player | RepeatSubAbility$ DBSet
 SVar:DBSetLife:DB$ SetLife | Defined$ Player.IsRemembered | LifeAmount$ X
 SVar:X:Count$Valid Creature.RememberedPlayerCtrl
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/biorhythm.jpg
 Oracle:Each player's life total becomes the number of creatures they control.

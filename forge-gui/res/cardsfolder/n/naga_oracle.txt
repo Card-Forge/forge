@@ -4,5 +4,4 @@ Types:Creature Naga Cleric
 PT:2/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top three cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order.
 SVar:TrigDig:DB$ Dig | DigNum$ 3 | Defined$ You | AnyNumber$ | DestinationZone$ Graveyard | LibraryPosition2$ 0
-SVar:Picture:http://www.wizards.com/global/images/magic/general/naga_oracle.jpg
 Oracle:When Naga Oracle enters the battlefield, look at the top three cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order.

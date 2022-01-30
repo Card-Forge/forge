@@ -4,5 +4,4 @@ Types:Creature Human Druid
 PT:3/2
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ Aura | SourceType$ Spell | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME becomes the target of an Aura spell, you draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fugitive_druid.jpg
 Oracle:Whenever Fugitive Druid becomes the target of an Aura spell, you draw a card.

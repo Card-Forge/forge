@@ -3,5 +3,4 @@ ManaCost:4 R
 Types:Creature Badger Beast
 PT:3/3
 K:Mountainwalk
-SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card129715.jpg
 Oracle:Mountainwalk (This creature can't be blocked as long as defending player controls a Mountain.)

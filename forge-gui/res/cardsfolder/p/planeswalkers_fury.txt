@@ -7,5 +7,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 AI:RemoveDeck:All
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/planeswalkers_fury.jpg
 Oracle:{3}{R}: Target opponent reveals a card at random from their hand. Planeswalker's Fury deals damage equal to that card's mana value to that player. Activate only as a sorcery.

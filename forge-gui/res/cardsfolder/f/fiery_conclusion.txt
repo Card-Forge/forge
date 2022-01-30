@@ -2,5 +2,4 @@ Name:Fiery Conclusion
 ManaCost:1 R
 Types:Instant
 A:SP$ DealDamage | Cost$ 1 R Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_conclusion.jpg
 Oracle:As an additional cost to cast this spell, sacrifice a creature.\nFiery Conclusion deals 5 damage to target creature.

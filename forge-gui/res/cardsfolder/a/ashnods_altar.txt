@@ -4,5 +4,4 @@ Types:Artifact
 A:AB$ Mana | Cost$ Sac<1/Creature> | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ashnods_altar.jpg
 Oracle:Sacrifice a creature: Add {C}{C}.

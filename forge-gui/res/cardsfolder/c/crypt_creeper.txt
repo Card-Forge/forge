@@ -4,5 +4,4 @@ Types:Creature Zombie
 PT:2/1
 A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_creeper.jpg
 Oracle:Sacrifice Crypt Creeper: Exile target card from a graveyard.

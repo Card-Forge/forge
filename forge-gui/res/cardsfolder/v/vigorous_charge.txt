@@ -11,5 +11,4 @@ SVar:EndTrackingEffect:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 AI:RemoveDeck:Random
 DeckHints:Color$White
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vigorous_charge.jpg
 Oracle:Kicker {W} (You may pay an additional {W} as you cast this spell.)\nTarget creature gains trample until end of turn. Whenever that creature deals combat damage this turn, if this spell was kicked, you gain life equal to that damage.

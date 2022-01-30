@@ -4,5 +4,4 @@ Types:Creature Rat Warrior
 PT:1/1
 A:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Ninja | TgtPrompt$ Select target Ninja | SpellDescription$ Destroy target Ninja.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nezumi_shadow_watcher.jpg
 Oracle:Sacrifice Nezumi Shadow-Watcher: Destroy target Ninja.

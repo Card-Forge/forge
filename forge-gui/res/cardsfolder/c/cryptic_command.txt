@@ -6,5 +6,4 @@ SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | SpellDescript
 SVar:DBReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | AILogic$ Good | SpellDescription$ Return target permanent to its owner's hand.
 SVar:DBTapAll:DB$ TapAll | ValidCards$ Creature.OppCtrl | AILogic$ AtLeast3 | SpellDescription$ Tap all creatures your opponents control.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptic_command.jpg
 Oracle:Choose two —\n• Counter target spell.\n• Return target permanent to its owner's hand.\n• Tap all creatures your opponents control.\n• Draw a card.

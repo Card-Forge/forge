@@ -6,5 +6,4 @@ A:SP$ Untap | Cost$ 2 R | ValidTgts$ Creature.attacking | TgtPrompt$ Select targ
 SVar:DBGainControl:DB$ GainControl | Defined$ Targeted | LoseControl$ EOT | SubAbility$ RemCombat
 SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Targeted
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/disharmony.jpg
 Oracle:Cast this spell only during combat before blockers are declared.\nUntap target attacking creature and remove it from combat. Gain control of that creature until end of turn.

@@ -4,5 +4,4 @@ Types:Enchantment
 A:AB$ ManaReflected | Cost$ Sac<1/Land> | ColorOrType$ Type | Valid$ Defined.Sacrificed | ReflectProperty$ Produce | SpellDescription$ Add one mana of any type the sacrificed land could produce.
 AI:RemoveDeck:All
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/squandered_resources.jpg
 Oracle:Sacrifice a land: Add one mana of any type the sacrificed land could produce.

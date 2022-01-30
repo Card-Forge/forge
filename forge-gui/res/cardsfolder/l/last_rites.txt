@@ -6,5 +6,4 @@ SVar:DBLastRitesDiscard:DB$ Discard | Mode$ RevealYouChoose | NumCards$ X | Disc
 SVar:DBLastRitesCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/last_rites.jpg
 Oracle:Discard any number of cards. Target player reveals their hand, then you choose a nonland card from it for each card discarded this way. That player discards those cards.

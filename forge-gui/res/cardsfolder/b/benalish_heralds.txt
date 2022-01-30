@@ -3,5 +3,4 @@ ManaCost:3 W
 Types:Creature Human Soldier
 PT:2/4
 A:AB$ Draw | Cost$ 3 U T | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/benalish_heralds.jpg
 Oracle:{3}{U}, {T}: Draw a card.

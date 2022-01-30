@@ -6,5 +6,4 @@ K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, you may create a 1/1 white Spirit creature token with flying.
 SVar:TrigToken:DB$ Token | LegacyImage$ w 1 1 spirit flying mrd | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/luminous_angel.jpg
 Oracle:Flying\nAt the beginning of your upkeep, you may create a 1/1 white Spirit creature token with flying.

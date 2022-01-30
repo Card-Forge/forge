@@ -8,5 +8,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 SVar:PlayMain1:TRUE
 DeckHints:Type$Arcane
-SVar:Picture:http://www.wizards.com/global/images/magic/general/through_the_breach.jpg
 Oracle:You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice that creature at the beginning of the next end step.\nSplice onto Arcane {2}{R}{R} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)

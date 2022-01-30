@@ -3,5 +3,4 @@ ManaCost:GW
 Types:Creature Elf Shaman
 PT:1/1
 A:AB$ Destroy | Cost$ GW T Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_hexhunter.jpg
 Oracle:{G/W}, {T}, Sacrifice Elvish Hexhunter: Destroy target enchantment.

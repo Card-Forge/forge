@@ -6,5 +6,4 @@ K:First Strike
 K:Vigilance
 T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, creatures you control get +1/+1 and gain trample until end of turn.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Trample | NumAtt$ +1 | NumDef$ +1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/anax_and_cymede.jpg
 Oracle:First strike, vigilance\nHeroic — Whenever you cast a spell that targets Anax and Cymede, creatures you control get +1/+1 and gain trample until end of turn.

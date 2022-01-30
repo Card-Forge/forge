@@ -5,5 +5,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land |
 SVar:TrigTap:DB$ TapAll | ValidCards$ TriggeredCard.sharesControllerWith+Land
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tectonic_instability.jpg
 Oracle:Whenever a land enters the battlefield, tap all lands its controller controls.

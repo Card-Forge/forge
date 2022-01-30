@@ -6,5 +6,4 @@ SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInComput
 S:Mode$ Continuous | Affected$ Creature.ChosenColor | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures of the chosen color get +1/+1.
 T:Mode$ TapsForMana | ValidCard$ Land.Basic | Produced$ ChosenColor | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever a basic land is tapped for mana of the chosen color, its controller adds an additional one mana of that color.
 SVar:TrigMana:DB$ Mana | Produced$ Chosen | Amount$ 1 | Defined$ TriggeredPlayer
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gauntlet_of_power.jpg
 Oracle:As Gauntlet of Power enters the battlefield, choose a color.\nCreatures of the chosen color get +1/+1.\nWhenever a basic land is tapped for mana of the chosen color, its controller adds an additional one mana of that color.

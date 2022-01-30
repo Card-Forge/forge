@@ -5,5 +5,4 @@ A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature,Player,Planeswalker | TgtProm
 SVar:X:Count$TypeInYourYard.Arcane
 AI:RemoveDeck:Random
 DeckHints:Type$Arcane
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ire_of_kaminari.jpg
 Oracle:Ire of Kaminari deals damage to any target equal to the number of Arcane cards in your graveyard.

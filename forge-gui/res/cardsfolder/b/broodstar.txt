@@ -8,5 +8,4 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:NeedsToPlayVar:X GE3
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/broodstar.jpg
 Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nFlying\nBroodstar's power and toughness are each equal to the number of artifacts you control.

@@ -6,5 +6,4 @@ S:Mode$ Continuous | Affected$ Creature.Sliver | AddTrigger$ TrigFrenzy | AddSVa
 SVar:TrigFrenzy:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ FrenzyPump | TriggerZones$ Battlefield | TriggerDescription$ Frenzy 1 (Whenever CARDNAME attacks and isn't blocked, it gets +1/+0 until end of turn.)
 SVar:FrenzyPump:DB$ Pump | NumAtt$ +1 | Defined$ TriggeredAttacker
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/frenzy_sliver.jpg
 Oracle:All Sliver creatures have frenzy 1. (Whenever a Sliver attacks and isn't blocked, it gets +1/+0 until end of turn.)

@@ -8,5 +8,4 @@ T:Mode$ DamageDealtOnce | ValidSource$ Card.AttachedBy | Execute$ TrigGain | Tri
 SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:LikeLifeLink:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/armadillo_cloak.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has trample.\nWhenever enchanted creature deals damage, you gain that much life.

@@ -9,5 +9,5 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | Counter
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 A:AB$ Pump | Cost$ WU | ValidTgts$ Human | TgtPrompt$ Select target Human | KW$ Flying | SpellDescription$ Target Human gains flying until end of turn.
 DeckHints:Type$Human
-DeckHas:Ability$Counters & Ability$LifeGain
+DeckHas:Ability$Counters|LifeGain
 Oracle:Partner with Brallin, Skyshark Rider\nFlying\nWhenever you draw a card, put a +1/+1 counter on Shabraz, the Skyshark and you gain 1 life.\n{W/U}: Target Human gains flying until end of turn.

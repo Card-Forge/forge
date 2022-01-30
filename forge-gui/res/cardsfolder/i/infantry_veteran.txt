@@ -3,5 +3,4 @@ ManaCost:W
 Types:Creature Human Soldier
 PT:1/1
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature. | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target attacking creature gets +1/+1 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/infantry_veteran.jpg
 Oracle:{T}: Target attacking creature gets +1/+1 until end of turn.

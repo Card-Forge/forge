@@ -8,5 +8,4 @@ K:Haste
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ At the beginning of the end step, CARDNAME's owner shuffles it into their library.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Library | Shuffle$ True | Defined$ Self
 SVar:EndOfTurnLeavePlay:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_shrieker.jpg
 Oracle:Flying, trample, haste\nAt the beginning of the end step, Lightning Shrieker's owner shuffles it into their library.

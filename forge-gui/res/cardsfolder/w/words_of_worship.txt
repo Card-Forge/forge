@@ -7,5 +7,4 @@ SVar:WordLife:DB$ GainLife | LifeAmount$ 5 | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/words_of_worship.jpg
 Oracle:{1}: The next time you would draw a card this turn, you gain 5 life instead.

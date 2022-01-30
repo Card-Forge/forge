@@ -3,5 +3,4 @@ ManaCost:W
 Types:Creature Zombie
 PT:1/2
 A:AB$ Tap | Cost$ 2 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fan_bearer.jpg
 Oracle:{2}, {T}: Tap target creature.

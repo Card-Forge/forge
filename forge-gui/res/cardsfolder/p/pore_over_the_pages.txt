@@ -6,5 +6,4 @@ SVar:DBUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land | Amount$ 2 | SubAbil
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 DeckHas:Ability$Discard
 DeckHints:Keyword$Madness & Ability$Delirium
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pore_over_the_pages.jpg
 Oracle:Draw three cards, untap up to two lands, then discard a card.

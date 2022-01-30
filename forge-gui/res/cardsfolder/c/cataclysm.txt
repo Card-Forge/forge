@@ -9,5 +9,4 @@ SVar:ChooseLand:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Land
 SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Permanent.IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cataclysm.jpg
 Oracle:Each player chooses from among the permanents they control an artifact, a creature, an enchantment, and a land, then sacrifices the rest.

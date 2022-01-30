@@ -4,5 +4,4 @@ Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 A:AB$ Pump | Cost$ 1 T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | KW$ HIDDEN CARDNAME can't attack or block. | SpellDescription$ Target creature can't attack or block this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/alchemists_vial.jpg
 Oracle:When Alchemist's Vial enters the battlefield, draw a card.\n{1}, {T}, Sacrifice Alchemist's Vial: Target creature can't attack or block this turn.

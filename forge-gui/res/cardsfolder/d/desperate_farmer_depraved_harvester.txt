@@ -17,5 +17,4 @@ Colors:black
 Types:Creature Human Knight
 PT:4/3
 K:Lifelink
-DeckHas:Ability$LifeGain
 Oracle:Lifelink

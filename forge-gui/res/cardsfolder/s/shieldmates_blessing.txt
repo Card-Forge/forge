@@ -2,5 +2,4 @@ Name:Shieldmate's Blessing
 ManaCost:W
 Types:Instant
 A:SP$ PreventDamage | Cost$ W | ValidTgts$ Creature,Player,Planeswalker | Amount$ 3 | TgtPrompt$ Select any target | SpellDescription$ Prevent the next 3 damage that would be dealt to any target this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shieldmates_blessing.jpg
 Oracle:Prevent the next 3 damage that would be dealt to any target this turn.

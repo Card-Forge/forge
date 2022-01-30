@@ -8,5 +8,4 @@ SVar:TrigDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select target play
 SVar:ManaNeededToAvoidNegativeEffect:black
 AI:RemoveDeck:Random
 DeckNeeds:Color$Black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shrieking_grotesque.jpg
 Oracle:Flying\nWhen Shrieking Grotesque enters the battlefield, if {B} was spent to cast it, target player discards a card.

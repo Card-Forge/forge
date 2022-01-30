@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChooseColor:DB$ ChooseColor | Defined$ You | OrColors$ True | SubAbility$ Animate
 SVar:Animate:DB$ Animate | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Colors$ ChosenColor | OverwriteColors$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/prismwake_merrow.jpg
 Oracle:Flash\nWhen Prismwake Merrow enters the battlefield, target permanent becomes the color or colors of your choice until end of turn.

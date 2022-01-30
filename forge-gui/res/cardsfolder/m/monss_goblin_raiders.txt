@@ -2,5 +2,4 @@ Name:Mons's Goblin Raiders
 ManaCost:R
 Types:Creature Goblin
 PT:1/1
-SVar:Picture:http://resources.wizards.com/magic/cards/p4/en-us/card25491.jpg
 Oracle:

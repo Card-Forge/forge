@@ -8,5 +8,4 @@ SVar:Y:Count$Valid Creature.YouCtrl
 SVar:Z:Count$Valid Creature.OppCtrl
 SVar:NeedsToPlayVar:Y GTZ
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/standstill.jpg
 Oracle:When a player casts a spell, sacrifice Standstill. If you do, each of that player's opponents draws three cards.

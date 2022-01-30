@@ -6,5 +6,4 @@ A:SP$ GainOwnership | Cost$ B B B | ValidTgts$ Card | TgtZone$ Ante | SubAbility
 SVar:ExchangeAnte:DB$ ExchangeZone | Zone1$ Ante | Zone2$ Library | Object$ ParentTarget | ValidExchange$ Card.TopLibrary | Mandatory$ True | StackDescription$
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/darkpact.jpg
 Oracle:Remove Darkpact from your deck before playing if you're not playing for ante.\nYou own target card in the ante. Exchange that card with the top card of your library.

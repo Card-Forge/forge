@@ -5,5 +5,4 @@ A:SP$ ChooseColor | Cost$ U | Defined$ You | OrColors$ True | SubAbility$ Animat
 SVar:Animate:DB$ Animate | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Colors$ ChosenColor | OverwriteColors$ True | Duration$ Permanent
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/prismatic_lace.jpg
 Oracle:Target permanent becomes the color or colors of your choice. (This effect lasts indefinitely.)

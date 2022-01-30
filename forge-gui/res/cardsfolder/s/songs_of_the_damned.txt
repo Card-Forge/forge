@@ -3,5 +3,4 @@ ManaCost:B
 Types:Instant
 A:SP$ Mana | Cost$ B | Produced$ B | Amount$ X | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {B} for each creature card in your graveyard.
 SVar:X:Count$TypeInYourYard.Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/songs_of_the_damned.jpg
 Oracle:Add {B} for each creature card in your graveyard.

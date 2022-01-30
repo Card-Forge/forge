@@ -2,5 +2,4 @@ Name:Distress
 ManaCost:B B
 Types:Sorcery
 A:SP$ Discard | Cost$ B B | ValidTgts$ Player | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand | NumCards$ 1 | SpellDescription$ Target player reveals their hand. You choose a nonland card from it. That player discards that card.
-SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card135219.jpg
 Oracle:Target player reveals their hand. You choose a nonland card from it. That player discards that card.

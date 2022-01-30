@@ -8,5 +8,4 @@ SVar:TrigSetLife:DB$ SetLife | Defined$ You | LifeAmount$ Y
 SVar:X:Count$YourLifeTotal
 SVar:Y:Count$YourStartingLife
 SVar:NeedsToPlayVar:X LTY
-SVar:Picture:http://www.wizards.com/global/images/magic/general/resolute_archangel.jpg
 Oracle:Flying\nWhen Resolute Archangel enters the battlefield, if your life total is less than your starting life total, it becomes equal to your starting life total.

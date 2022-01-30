@@ -4,5 +4,4 @@ Types:Creature Devil
 PT:4/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBSacrifice | TriggerDescription$ When CARDNAME enters the battlefield, any opponent may have it deal 4 damage to them. If a player does, sacrifice CARDNAME.
 SVar:DBSacrifice:DB$ Sacrifice | Defined$ Self | UnlessCost$ DamageYou<4> | UnlessPayer$ Opponent | UnlessSwitched$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vexing_devil.jpg
 Oracle:When Vexing Devil enters the battlefield, any opponent may have it deal 4 damage to them. If a player does, sacrifice Vexing Devil.

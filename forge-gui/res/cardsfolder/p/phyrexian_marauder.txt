@@ -7,5 +7,4 @@ S:Mode$ CantAttackUnless | ValidCard$ Card.Self | Cost$ Y | Description$ CARDNAM
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
 SVar:Y:Count$CardCounters.P1P1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_marauder.jpg
 Oracle:Phyrexian Marauder enters the battlefield with X +1/+1 counters on it.\nPhyrexian Marauder can't block.\nPhyrexian Marauder can't attack unless you pay {1} for each +1/+1 counter on it.

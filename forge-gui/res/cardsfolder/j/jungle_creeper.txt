@@ -3,5 +3,4 @@ ManaCost:1 B G
 Types:Creature Elemental
 PT:3/3
 A:AB$ ChangeZone | Cost$ 3 B G | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jungle_creeper.jpg
 Oracle:{3}{B}{G}: Return Jungle Creeper from your graveyard to your hand.

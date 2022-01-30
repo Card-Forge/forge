@@ -6,5 +6,4 @@ SVar:DBShuffleElixir:DB$ ChangeZone | Origin$ Battlefield | Destination$ Library
 SVar:DBShuffleGrave:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Library | Shuffle$ False | RememberChanged$ True | ChangeType$ Card.YouCtrl | SubAbility$ DBShuffleChanged | StackDescription$ None
 SVar:DBShuffleChanged:DB$ Shuffle | Defined$ RememberedOwner | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elixir_of_immortality.jpg
 Oracle:{2}, {T}: You gain 5 life. Shuffle Elixir of Immortality and your graveyard into their owner's library.

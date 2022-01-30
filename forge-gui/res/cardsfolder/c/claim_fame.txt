@@ -3,7 +3,6 @@ ManaCost:B
 AlternateMode: Split
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature in your graveyard | ValidTgts$ Creature.YouCtrl+cmcLE2 | SpellDescription$ Return target creature card with mana value 2 or less from your graveyard to the battlefield.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/claim_fame.jpg
 Oracle:Return target creature card with mana value 2 or less from your graveyard to the battlefield.
 
 ALTERNATE

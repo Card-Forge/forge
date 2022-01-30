@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ AnimateAll | Cost$ 1 G | ValidCards$ Creature.YouCtrl | Abilities$ ABRegen | SpellDescription$ Until end of turn, creatures you control gain "{1}: Regenerate this creature."
 SVar:ABRegen:AB$Regenerate | Cost$ 1 | SpellDescription$ Regenerate this creature.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/resuscitate.jpg
 Oracle:Until end of turn, creatures you control gain "{1}: Regenerate this creature."

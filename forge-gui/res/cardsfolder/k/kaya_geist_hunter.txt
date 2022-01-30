@@ -10,6 +10,6 @@ SVar:DoubleToken:DB$ ReplaceToken | Type$ Amount | ValidCard$ Card.YouCtrl
 A:AB$ ChangeZoneAll | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | ChangeType$ Card | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBToken | SpellDescription$ Exile all cards from all graveyards, then create a 1/1 white Spirit creature token with flying for each card exiled this way.
 SVar:DBToken:DB$ Token | TokenScript$ w_1_1_spirit_flying | TokenAmount$ X
 SVar:X:Remembered$Amount
-DeckHas:Ability$Counters & Ability$Token & Type$Spirit
+DeckHas:Ability$Counters|Token & Type$Spirit
 DeckHints:Ability$Token
-Oracle:[+1]: Creatures you control gain deathtouch until end of turn. Put a +1/+1 counter on up to one target creature token you control.\n[−2]: Until end of turn, if one or more tokens would be created under your control, twice that many of those tokens are created instead.\n[−6]: Exile all cards from all graveyards, then create a 1/1 white Spirit creature token with flying for each card exiled this way.
+Oracle:[+1]: Creatures you control gain deathtouch until end of turn. Put a +1/+1 counter on up to one target creature token you control.\n[-2]: Until end of turn, if one or more tokens would be created under your control, twice that many of those tokens are created instead.\n[-6]: Exile all cards from all graveyards, then create a 1/1 white Spirit creature token with flying for each card exiled this way.

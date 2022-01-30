@@ -4,5 +4,4 @@ Types:Creature Efreet
 PT:3/3
 K:Flying
 K:UpkeepCost:B B
-SVar:Picture:http://www.wizards.com/global/images/magic/general/junun_efreet.jpg
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Junún Efreet unless you pay {B}{B}.

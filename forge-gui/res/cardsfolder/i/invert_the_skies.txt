@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ AnimateAll | Cost$ 3 GU | ValidCards$ Creature.OppCtrl | RemoveKeywords$ Flying | ConditionManaSpent$ G | SubAbility$ UPaid | SpellDescription$ Creatures your opponents control lose flying until end of turn if {G} was spent to cast this spell, and creatures you control gain flying until end of turn if {U} was spent to cast this spell. (Do both if {G}{U} was spent.)
 SVar:UPaid:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Flying | ConditionManaSpent$ U
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/invert_the_skies.jpg
 Oracle:Creatures your opponents control lose flying until end of turn if {G} was spent to cast this spell, and creatures you control gain flying until end of turn if {U} was spent to cast this spell. (Do both if {G}{U} was spent.)

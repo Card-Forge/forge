@@ -6,7 +6,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | O
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/arguels_blood_fast.jpg
 Oracle:{1}{B}, Pay 2 life: Draw a card.\nAt the beginning of your upkeep, if you have 5 or less life, you may transform Arguel's Blood Fast.
 
 ALTERNATE
@@ -17,5 +16,4 @@ Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ B | Amount$ 1 | SpellDescription$ Add {B}.
 A:AB$ GainLife | Cost$ T Sac<1/Creature> | LifeAmount$ X | SpellDescription$ You gain life equal to the sacrificed creature's toughness.
 SVar:X:Sacrificed$CardToughness
-SVar:Picture:http://www.wizards.com/global/images/magic/general/temple_of_aclazotz.jpg
 Oracle:(Transforms from Arguel's Blood Fast.)\n{T}: Add {B}.\n{T}, Sacrifice a creature: You gain life equal to the sacrificed creature's toughness.

@@ -8,5 +8,5 @@ SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ You | RememberMilled$ True | Sub
 SVar:DBLifeGain:DB$ GainLife | Defined$ You | LifeAmount$ 4 | ConditionDefined$ Remembered | ConditionPresent$ Angel | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHints:Type$Angel
-DeckHas:Ability$Mill & Ability$LifeGain
+DeckHas:Ability$Mill|LifeGain
 Oracle:Flying\nWhen Renegade Reaper enters the battlefield, mill four cards. If at least one Angel card is milled this way, you gain 4 life. (To mill a card, put the top card of your library into your graveyard.)

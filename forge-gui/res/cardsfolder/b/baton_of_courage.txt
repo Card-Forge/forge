@@ -8,5 +8,4 @@ AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:Z GE1
 SVar:Z:Count$UniqueManaColorsProduced.ByUntappedSources
 DeckHints:Ability$Proliferate
-SVar:Picture:http://www.wizards.com/global/images/magic/general/baton_of_courage.jpg
 Oracle:Flash\nSunburst (This enters the battlefield with a charge counter on it for each color of mana spent to cast it.)\nRemove a charge counter from Baton of Courage: Target creature gets +1/+1 until end of turn.

@@ -7,5 +7,4 @@ SVar:X:TriggeredCard$CardPower
 SVar:PlayMain1:TRUE
 SVar:AIPriorityModifier:9
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pandemonium.jpg
 Oracle:Whenever a creature enters the battlefield, that creature's controller may have it deal damage equal to its power to any target of their choice.

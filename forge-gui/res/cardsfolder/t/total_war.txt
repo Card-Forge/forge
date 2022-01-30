@@ -5,5 +5,4 @@ T:Mode$ AttackersDeclared | Execute$ TrigDestroy | TriggerZones$ Battlefield | A
 SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Creature.nonWall+notFirstTurnControlled+untapped+ActivePlayerCtrl+notattacking
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/total_war.jpg
 Oracle:Whenever a player attacks with one or more creatures, destroy all untapped non-Wall creatures that player controls that didn't attack, except for creatures the player hasn't controlled continuously since the beginning of the turn.

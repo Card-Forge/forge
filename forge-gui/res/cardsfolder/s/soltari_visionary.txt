@@ -5,5 +5,4 @@ PT:2/2
 K:Shadow
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to a player, destroy target enchantment that player controls.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Enchantment | TargetsWithDefinedController$ TriggeredTarget | TgtPrompt$ Select an enchantment that player controls.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_visionary.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhenever Soltari Visionary deals damage to a player, destroy target enchantment that player controls.

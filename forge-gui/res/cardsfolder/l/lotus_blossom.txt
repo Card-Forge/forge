@@ -6,5 +6,4 @@ A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ X | SpellDescript
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ PETAL | CounterNum$ 1
 SVar:X:Count$CardCounters.PETAL
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lotus_blossom.jpg
 Oracle:At the beginning of your upkeep, you may put a petal counter on Lotus Blossom.\n{T}, Sacrifice Lotus Blossom: Add X mana of any one color, where X is the number of petal counters on Lotus Blossom.

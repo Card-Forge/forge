@@ -3,5 +3,4 @@ ManaCost:3 G G
 Types:Sorcery
 K:Retrace
 A:SP$ Token | Cost$ 3 G G | TokenAmount$ 1 | TokenScript$ g_3_3_beast | TokenOwner$ You | LegacyImage$ g 3 3 beast eve | SpellDescription$ Create a 3/3 green Beast creature token.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_conception.jpg
 Oracle:Create a 3/3 green Beast creature token.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)

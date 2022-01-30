@@ -7,5 +7,4 @@ SVar:DBTop:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destinat
 SVar:DBBottom:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put that card on the bottom of library
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$Valid Creature.attacking+OppCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aetherspouts.jpg
 Oracle:For each attacking creature, its owner puts it on the top or bottom of their library.

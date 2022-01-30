@@ -10,5 +10,4 @@ SVar:X:Remembered$Amount.Minus.1
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 DeckHas:Ability$Graveyard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_deal.jpg
 Oracle:Each player discards all the cards in their hand, then draws that many cards minus one.

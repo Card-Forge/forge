@@ -3,5 +3,4 @@ ManaCost:U U
 Types:Creature Vedalken Wizard
 PT:1/2
 A:AB$ ChangeZone | Cost$ U T | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent you control to its owner's hand.
-SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card50834.jpg
 Oracle:{U}, {T}: Return target permanent you control to its owner's hand.

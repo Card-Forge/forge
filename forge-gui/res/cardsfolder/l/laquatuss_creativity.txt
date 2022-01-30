@@ -7,5 +7,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TargetedPlayer$CardsInHand
 SVar:Y:Remembered$Amount
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/laquatuss_creativity.jpg
 Oracle:Target player draws cards equal to the number of cards in their hand, then discards that many cards.

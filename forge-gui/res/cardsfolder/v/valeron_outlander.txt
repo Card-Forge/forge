@@ -3,5 +3,4 @@ ManaCost:G W
 Types:Creature Human Scout
 PT:2/2
 K:Protection from black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/valeron_outlander.jpg
 Oracle:Protection from black

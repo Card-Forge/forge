@@ -7,5 +7,4 @@ SVar:TrigDamage:DB$ DealDamage | NumDmg$ 2 | ValidTgts$ Creature,Player,Planeswa
 SVar:ManaNeededToAvoidNegativeEffect:red
 AI:RemoveDeck:Random
 DeckNeeds:Color$Red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/steamcore_weird.jpg
 Oracle:When Steamcore Weird enters the battlefield, if {R} was spent to cast it, it deals 2 damage to any target.

@@ -10,4 +10,4 @@ SVar:ReduceLoss:DB$ ReplaceEffect | VarName$ Result | VarValue$ X
 SVar:X:ReplaceCount$Result/NMinus.1
 SVar:YourLife:Count$YourLifeTotal
 DeckHas:Ability$Token
-Oracle:[+2]: Creatures you control with flying get +1/+1 until end of turn.\n[−3]: Create a 4/4 white Angel creature token with flying and vigilance.\n[−6]: You get an emblem with "If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead."
+Oracle:[+2]: Creatures you control with flying get +1/+1 until end of turn.\n[-3]: Create a 4/4 white Angel creature token with flying and vigilance.\n[-6]: You get an emblem with "If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead."

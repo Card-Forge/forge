@@ -9,5 +9,4 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 4 | TokenScript$ g_1_1_saproling | Token
 SVar:PlayMain1:TRUE
 DeckHints:Type$Fungus
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thelonite_hermit.jpg
 Oracle:All Saprolings get +1/+1.\nMorph {3}{G}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Thelonite Hermit is turned face up, create four 1/1 green Saproling creature tokens.

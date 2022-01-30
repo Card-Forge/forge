@@ -6,5 +6,4 @@ S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Des
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Islands, sacrifice Dandân.
 SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:NeedsToPlay:Island.YouCtrl
-SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card106631.jpg
 Oracle:Dandân can't attack unless defending player controls an Island.\nWhen you control no Islands, sacrifice Dandân.

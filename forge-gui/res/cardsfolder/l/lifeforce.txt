@@ -4,5 +4,4 @@ Types:Enchantment
 A:AB$ Counter | Cost$ G G | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card.Black | SpellDescription$ Counter target black spell.
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lifeforce.jpg
 Oracle:{G}{G}: Counter target black spell.

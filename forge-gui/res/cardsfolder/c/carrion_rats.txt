@@ -6,5 +6,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigNoCombatDamage | TriggerDe
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigNoCombatDamage | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, any player may exile a card from their graveyard. If a player does, CARDNAME assigns no combat damage this turn.
 SVar:TrigNoCombatDamage:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage | UnlessCost$ ExileFromGrave<1/Card> | UnlessPayer$ Player | UnlessSwitched$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/carrion_rats.jpg
 Oracle:Whenever Carrion Rats attacks or blocks, any player may exile a card from their graveyard. If a player does, Carrion Rats assigns no combat damage this turn.

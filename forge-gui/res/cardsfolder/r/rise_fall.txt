@@ -4,7 +4,6 @@ AlternateMode: Split
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ U B | ValidTgts$ Creature | TgtPrompt$ Select target creature in a graveyard | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBChangeZone | SpellDescription$ Return target creature card from a graveyard and target creature on the battlefield to their owners' hands.
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature on the battlefield | Origin$ Battlefield | Destination$ Hand | IsCurse$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/risefall.jpg
 Oracle:Return target creature card from a graveyard and target creature on the battlefield to their owners' hands.
 
 ALTERNATE

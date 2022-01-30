@@ -3,5 +3,4 @@ ManaCost:2 R
 Types:Creature Ogre
 PT:3/3
 K:CARDNAME can't block.
-SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20197.jpg
 Oracle:Hulking Ogre can't block.

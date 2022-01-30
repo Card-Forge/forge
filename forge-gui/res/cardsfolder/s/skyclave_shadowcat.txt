@@ -6,5 +6,5 @@ A:AB$ PutCounter | Cost$ 1 B Sac<1/Creature.Other/another creature> | CounterTyp
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+counters_GE1_P1P1 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control with a +1/+1 counter on it dies, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:PlayMain1:TRUE
-DeckHas:Ability$Sacrifice & Ability$Counters
+DeckHas:Ability$Sacrifice|Counters
 Oracle:{1}{B}, Sacrifice another creature: Put a +1/+1 counter on Skyclave Shadowcat.\nWhenever a creature you control with a +1/+1 counter on it dies, draw a card.

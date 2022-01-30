@@ -4,5 +4,4 @@ Types:Creature Phyrexian Vedalken Wizard
 PT:1/2
 A:AB$ PutCounter | Cost$ 2 U T | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | SubAbility$ DBTapOrUntap | IsCurse$ True | SpellDescription$ Put a -1/-1 counter on target creature. You may tap or untap that creature.
 SVar:DBTapOrUntap:DB$ TapOrUntap | Defined$ Targeted
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_anatomist.jpg
 Oracle:{2}{U}, {T}: Put a -1/-1 counter on target creature. You may tap or untap that creature.

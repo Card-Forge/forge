@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigManifest:DB$ Manifest | Amount$ 1 | Defined$ TopOfLibrary
 T:Mode$ TurnFaceUp | ValidCard$ Permanent.Creature+YouCtrl | Execute$ TrigFight | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever a permanent you control is turned face up, if it is a creature, you may have it fight target creature you don't control.
 SVar:TrigFight:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control
-SVar:Picture:http://www.wizards.com/global/images/magic/general/temur_war_shaman.jpg
 Oracle:When Temur War Shaman enters the battlefield, manifest the top card of your library. (Put that card onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)\nWhenever a permanent you control is turned face up, if it's a creature, you may have it fight target creature you don't control.

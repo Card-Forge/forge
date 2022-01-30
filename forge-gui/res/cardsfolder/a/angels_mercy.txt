@@ -2,5 +2,4 @@ Name:Angel's Mercy
 ManaCost:2 W W
 Types:Instant
 A:SP$ GainLife | Cost$ 2 W W | LifeAmount$ 7 | SpellDescription$ You gain 7 life.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/angels_mercy.jpg
 Oracle:You gain 7 life.

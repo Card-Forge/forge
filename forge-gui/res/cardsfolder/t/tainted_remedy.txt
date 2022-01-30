@@ -6,5 +6,4 @@ SVar:RLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ ReplacedPlayer
 SVar:X:ReplaceCount$LifeGained
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tainted_remedy.jpg
 Oracle:If an opponent would gain life, that player loses that much life instead.

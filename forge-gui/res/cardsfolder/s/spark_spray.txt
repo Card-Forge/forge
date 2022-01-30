@@ -3,5 +3,4 @@ ManaCost:R
 Types:Instant
 A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 K:Cycling:R
-SVar:Picture:http://resources.wizards.com/magic/cards/scg/en-us/card44484.jpg
 Oracle:Spark Spray deals 1 damage to any target.\nCycling {R} ({R}, Discard this card: Draw a card.)

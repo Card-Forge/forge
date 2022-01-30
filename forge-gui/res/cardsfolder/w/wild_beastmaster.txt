@@ -5,5 +5,4 @@ PT:1/1
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, each other creature you control gets +X/+X until end of turn, where X is CARDNAME's power.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl+Other | NumAtt$ X | NumDef$ X
 SVar:X:Count$CardPower
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_beastmaster.jpg
 Oracle:Whenever Wild Beastmaster attacks, each other creature you control gets +X/+X until end of turn, where X is Wild Beastmaster's power.

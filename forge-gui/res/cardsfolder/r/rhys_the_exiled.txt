@@ -9,5 +9,4 @@ SVar:X:Count$Valid Elf.YouCtrl
 # Explicit AI preference for SacCost is needed to avoid infinite recursion and stack overflow when AI is considering AB Regenerate with SacCost vs. trample creatures.
 SVar:AIPreference:SacCost$Creature.Elf
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rhys_the_exiled.jpg
 Oracle:Whenever Rhys the Exiled attacks, you gain 1 life for each Elf you control.\n{B}, Sacrifice an Elf: Regenerate Rhys the Exiled.

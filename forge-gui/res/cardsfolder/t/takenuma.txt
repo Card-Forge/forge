@@ -5,5 +5,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creatu
 SVar:TakenumaDraw:DB$ Draw | Defined$ TriggeredCardController | NumCards$ 1
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, return target creature you control to its owner's hand.
 SVar:RolledChaos:DB$ ChangeZone | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature to return to your hand | Origin$ Battlefield | Destination$ Hand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/takenuma.jpg
 Oracle:Whenever a creature leaves the battlefield, its controller draws a card.\nWhenever you roll {CHAOS}, return target creature you control to its owner's hand.

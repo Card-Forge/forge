@@ -8,5 +8,5 @@ SVar:DBHelix:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPromp
 SVar:DBGainLife:DB$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target player (to gain 3 life) | LifeAmount$ 3 | SpellDescription$ Target player gains 3 life.
 SVar:DBSacrifice:DB$ Sacrifice | Defined$ You | SacValid$ Permanent | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | SpellDescription$ Sacrifice a permanent,draw two cards.
-DeckHas:Ability$Token & Ability$LifeGain
+DeckHas:Ability$Token|LifeGain
 Oracle:Choose two —\n• Create a 3/2 red and white Spirit creature token.\n• Creatures you control get +1/+0 and gain indestructible and haste until end of turn.\n• Lorehold Command deals 3 damage to any target. Target player gains 3 life.\n• Sacrifice a permanent, then draw two cards.

@@ -5,5 +5,4 @@ K:Enchant player
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Player | AILogic$ Curse
 T:Mode$ AttackersDeclared | Execute$ TrigTapOrUntap | TriggerZones$ Battlefield | AttackedTarget$ Player.EnchantedBy | TriggerDescription$ Whenever a player attacks enchanted player with one or more creatures, that attacking player may tap or untap target permanent of their choice.
 SVar:TrigTapOrUntap:DB$ TapOrUntap | ValidTgts$ Permanent | TargetingPlayer$ TriggeredAttackingPlayer
-SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_inertia.jpg
 Oracle:Enchant player\nWhenever a player attacks enchanted player with one or more creatures, that attacking player may tap or untap target permanent of their choice.

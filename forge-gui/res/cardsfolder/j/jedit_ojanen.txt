@@ -2,5 +2,4 @@ Name:Jedit Ojanen
 ManaCost:4 W W U
 Types:Legendary Creature Cat Warrior
 PT:5/5
-SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1660.jpg
 Oracle:

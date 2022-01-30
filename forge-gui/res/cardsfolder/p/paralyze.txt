@@ -8,5 +8,4 @@ SVar:TrigTap:DB$ Tap | Defined$ Enchanted
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, that player may pay {4}. If the player does, untap the creature.
 SVar:TrigUntap:DB$ Untap | Defined$ Enchanted | UnlessCost$ 4 | UnlessPayer$ EnchantedController | UnlessSwitched$ True | UnlessAI$ Paralyze
-SVar:Picture:http://www.wizards.com/global/images/magic/general/paralyze.jpg
 Oracle:Enchant creature\nWhen Paralyze enters the battlefield, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.\nAt the beginning of the upkeep of enchanted creature's controller, that player may pay {4}. If the player does, untap the creature.

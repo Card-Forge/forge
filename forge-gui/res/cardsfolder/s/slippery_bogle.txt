@@ -3,5 +3,4 @@ ManaCost:GU
 Types:Creature Beast
 PT:1/1
 K:Hexproof
-SVar:Picture:http://www.wizards.com/global/images/magic/general/slippery_bogle.jpg
 Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)

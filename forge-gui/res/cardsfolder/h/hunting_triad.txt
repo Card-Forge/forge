@@ -3,7 +3,6 @@ ManaCost:3 G
 Types:Tribal Sorcery Elf
 A:SP$ Token | Cost$ 3 G | TokenAmount$ 3 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You | LegacyImage$ g 1 1 elf warrior mor | SpellDescription$ Create three 1/1 green Elf Warrior creature tokens.
 K:Reinforce:3:3 G
-DeckHas:Ability$Counters & Ability$Token
+DeckHas:Ability$Counters|Token
 DeckNeeds:Type$Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_triad.jpg
 Oracle:Create three 1/1 green Elf Warrior creature tokens.\nReinforce 3—{3}{G} ({3}{G}, Discard this card: Put three +1/+1 counters on target creature.)

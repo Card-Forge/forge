@@ -3,5 +3,4 @@ ManaCost:3 U
 Types:Creature Crab Beast
 PT:2/3
 K:Protection from red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/oraxid.jpg
 Oracle:Protection from red

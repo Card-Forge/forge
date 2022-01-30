@@ -5,5 +5,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Bat
 SVar:TrigCharm:DB$ Charm | Choices$ DBPump1,DBPump2
 SVar:DBPump1:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | SpellDescription$ Target creature gets +2/+0 until end of turn.
 SVar:DBPump2:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/retreat_to_valakut.jpg
 Oracle:Landfall — Whenever a land enters the battlefield under your control, choose one —\n• Target creature gets +2/+0 until end of turn.\n• Target creature can't block this turn.

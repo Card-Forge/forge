@@ -5,5 +5,4 @@ PT:4/4
 S:Mode$ Continuous | Affected$ Card.Self | AddToughness$ X | Description$ CARDNAME gets +0/+1 for each Mountain you control.
 SVar:X:Count$Valid Mountain.YouCtrl
 SVar:BuffedBy:Mountain
-SVar:Picture:http://www.wizards.com/global/images/magic/general/earth_servant.jpg
 Oracle:Earth Servant gets +0/+1 for each Mountain you control.

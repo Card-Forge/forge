@@ -5,5 +5,4 @@ T:Mode$ TapsForMana | ValidCard$ Land | Execute$ TrigDestroy | TriggerZones$ Bat
 SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredCardLKICopy
 SVar:AICurseEffect:NonActive
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/price_of_glory.jpg
 Oracle:Whenever a player taps a land for mana, if it's not that player's turn, destroy that land.

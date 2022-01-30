@@ -2,5 +2,4 @@ Name:Terror of the Fairgrounds
 ManaCost:3 R
 Types:Creature Gremlin
 PT:5/2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/terror_of_the_fairgrounds.jpg
 Oracle:

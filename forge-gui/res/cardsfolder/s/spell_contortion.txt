@@ -6,5 +6,4 @@ K:Multikicker:1 U
 SVar:DBDraw:DB$ Draw | NumCards$ X
 SVar:X:Count$TimesKicked
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_contortion.jpg
 Oracle:Multikicker {1}{U} (You may pay an additional {1}{U} any number of times as you cast this spell.)\nCounter target spell unless its controller pays {2}. Draw a card for each time Spell Contortion was kicked.

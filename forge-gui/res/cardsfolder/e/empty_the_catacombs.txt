@@ -3,5 +3,4 @@ ManaCost:3 B
 Types:Sorcery
 A:SP$ ChangeZoneAll | Cost$ 3 B | ChangeType$ Creature | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Each player returns all creature cards from their graveyard to their hand.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/empty_the_catacombs.jpg
 Oracle:Each player returns all creature cards from their graveyard to their hand.

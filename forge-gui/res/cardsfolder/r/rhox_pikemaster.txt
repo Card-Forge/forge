@@ -5,5 +5,4 @@ PT:3/3
 K:First Strike
 S:Mode$ Continuous | Affected$ Creature.Soldier+Other+YouCtrl | AddKeyword$ First Strike | Description$ Other Soldier creatures you control have first strike.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_pikemaster.jpg
 Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nOther Soldier creatures you control have first strike.

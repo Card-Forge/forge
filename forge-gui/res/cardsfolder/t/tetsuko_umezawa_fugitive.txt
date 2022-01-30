@@ -3,5 +3,4 @@ ManaCost:1 U
 Types:Legendary Creature Human Rogue
 PT:1/3
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+powerLE1,Creature.YouCtrl+toughnessLE1 | AddHiddenKeyword$ Unblockable | Description$ Creatures you control with power or toughness 1 or less can't be blocked.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tetsuko_umezawa_fugitive.jpg
 Oracle:Creatures you control with power or toughness 1 or less can't be blocked.

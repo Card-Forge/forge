@@ -5,5 +5,5 @@ PT:1/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters the battlefield, put a lifelink counter on target non-Human creature you control.
 SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature.nonHuman+YouCtrl | TgtPrompt$ Select target non-Human creature | CounterType$ Lifelink | CounterNum$ 1
 A:AB$ PutCounterAll | Cost$ 1 B T | ValidCards$ Creature.YouCtrl+withLifelink | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each creature you control with lifelink.
-DeckHas:Ability$Counters & Ability$LifeGain
+DeckHas:Ability$Counters|LifeGain
 Oracle:When Duskfang Mentor enters the battlefield, put a lifelink counter on target non-Human creature you control.\n{1}{B}, {T}: Put a +1/+1 counter on each creature you control with lifelink.

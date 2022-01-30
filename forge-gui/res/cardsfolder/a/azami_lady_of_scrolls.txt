@@ -5,5 +5,4 @@ PT:0/2
 A:AB$ Draw | Cost$ tapXType<1/Wizard> | NumCards$ 1 | AILogic$ AtOppEOT | SpellDescription$ Draw a card.
 AI:RemoveDeck:Random
 DeckHints:Type$Wizard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/azami_lady_of_scrolls.jpg
 Oracle:Tap an untapped Wizard you control: Draw a card.

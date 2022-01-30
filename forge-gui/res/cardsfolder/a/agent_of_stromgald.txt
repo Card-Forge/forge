@@ -4,5 +4,4 @@ Types:Creature Human Knight
 PT:1/1
 A:AB$ Mana | Cost$ R | Produced$ B | SpellDescription$ Add {B}.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/agent_of_stromgald.jpg
 Oracle:{R}: Add {B}.

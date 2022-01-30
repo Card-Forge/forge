@@ -3,5 +3,4 @@ ManaCost:R
 Types:Sorcery Arcane
 A:SP$ Sacrifice | Cost$ R | SacValid$ Permanent | Defined$ Player | SpellDescription$ Each player sacrifices a permanent.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crack_the_earth.jpg
 Oracle:Each player sacrifices a permanent.

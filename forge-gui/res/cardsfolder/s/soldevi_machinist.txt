@@ -4,5 +4,4 @@ Types:Creature Human Wizard Artificer
 PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | RestrictValid$ Activated.Artifact | SpellDescription$ Add {C}{C}. Spend this mana only to activate abilities of artifacts.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_machinist.jpg
 Oracle:{T}: Add {C}{C}. Spend this mana only to activate abilities of artifacts.

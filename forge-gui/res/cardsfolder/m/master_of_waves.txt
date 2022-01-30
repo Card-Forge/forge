@@ -11,5 +11,4 @@ SVar:PlayMain1:TRUE
 SVar:AIEvaluationModifier:SVar$AIElemPTBonus/Plus.AIElemTokenGenBonus
 SVar:AIElemPTBonus:Count$Valid Elemental.YouCtrl/Times.25
 SVar:AIElemTokenGenBonus:Count$Valid Elemental.token+YouCtrl/Times.15
-SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_waves.jpg
 Oracle:Protection from red\nElemental creatures you control get +1/+1.\nWhen Master of Waves enters the battlefield, create a number of 1/0 blue Elemental creature tokens equal to your devotion to blue. (Each {U} in the mana costs of permanents you control counts toward your devotion to blue.)

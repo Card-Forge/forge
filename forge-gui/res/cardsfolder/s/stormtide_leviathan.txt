@@ -5,5 +5,4 @@ PT:8/8
 K:Islandwalk
 S:Mode$ Continuous | Affected$ Land | AddType$ Island | Description$ All lands are Islands in addition to their other types.
 S:Mode$ Continuous | Affected$ Creature.withoutFlying+withoutIslandwalk | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Creatures without flying or islandwalk can't attack.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stormtide_leviathan.jpg
 Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nAll lands are Islands in addition to their other types.\nCreatures without flying or islandwalk can't attack.

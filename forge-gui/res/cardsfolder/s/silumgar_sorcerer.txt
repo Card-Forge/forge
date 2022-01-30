@@ -8,5 +8,4 @@ K:Exploit
 T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ When CARDNAME exploits a creature, counter target creature spell.
 SVar:TrigCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Creature | TgtPrompt$ Select target creature spell
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/silumgar_sorcerer.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying\nExploit (When this creature enters the battlefield, you may sacrifice a creature.)\nWhen Silumgar Sorcerer exploits a creature, counter target creature spell.

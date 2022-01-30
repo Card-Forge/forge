@@ -3,5 +3,4 @@ ManaCost:2 G G G
 Types:Instant
 K:Flashback:2 G G G
 A:SP$ Token | Cost$ 2 G G G | TokenAmount$ 1 | TokenScript$ g_4_4_beast | TokenOwner$ You | LegacyImage$ g 4 4 beast ody | SpellDescription$ Create a 4/4 green Beast creature token.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/beast_attack.jpg
 Oracle:Create a 4/4 green Beast creature token.\nFlashback {2}{G}{G}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

@@ -8,5 +8,4 @@ T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Tr
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Wizard.YouCtrl | NumAtt$ +1 | NumDef$ +1
 SVar:BuffedBy:Instant,Sorcery
 DeckHints:Type$Instant|Sorcery
-SVar:Picture:http://www.wizards.com/global/images/magic/general/adeliz_the_cinder_wind.jpg
 Oracle:Flying, haste\nWhenever you cast an instant or sorcery spell, Wizards you control get +1/+1 until end of turn.

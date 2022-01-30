@@ -4,5 +4,4 @@ Types:Creature Elemental Shaman
 PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ 2 | RestrictValid$ Card.Elemental,Activated.Elemental | AILogic$ MostProminentInComputerHand | SpellDescription$ Add two mana in any combination of colors. Spend this mana only to cast Elemental spells or activate abilities of Elementals.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/smokebraider.jpg
 Oracle:{T}: Add two mana in any combination of colors. Spend this mana only to cast Elemental spells or activate abilities of Elementals.

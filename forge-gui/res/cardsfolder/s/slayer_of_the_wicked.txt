@@ -5,5 +5,4 @@ PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may destroy target Vampire, Werewolf, or Zombie.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.Vampire,Creature.Werewolf,Creature.Zombie | TgtPrompt$ Select target Vampire, Werewolf, or Zombie
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/slayer_of_the_wicked.jpg
 Oracle:When Slayer of the Wicked enters the battlefield, you may destroy target Vampire, Werewolf, or Zombie.

@@ -2,5 +2,4 @@ Name:Mass Calcify
 ManaCost:5 W W
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 5 W W | ValidCards$ Creature.nonWhite | SpellDescription$ Destroy all nonwhite creatures.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mass_calcify.jpg
 Oracle:Destroy all nonwhite creatures.

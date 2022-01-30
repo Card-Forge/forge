@@ -4,5 +4,4 @@ Types:Creature Goblin Warrior
 PT:1/1
 S:Mode$ Continuous | Affected$ Creature.Red+YouCtrl | AddKeyword$ First Strike | Description$ Red creatures you control have first strike.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodmark_mentor.jpg
 Oracle:Red creatures you control have first strike.

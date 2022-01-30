@@ -7,5 +7,5 @@ S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Squirrel.Other+YouCtrl 
 T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Squirrellink (Damage dealt by this creature also causes you to create that many 1/1 green Squirrel creature tokens.)
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_squirrel | TokenOwner$ You
 SVar:X:TriggerCount$DamageAmount
-DeckHas:Ability$ Token
+DeckHas:Ability$Token
 Oracle:Squirrellink (Damage dealt by this creature also causes you to create that many 1/1 green Squirrel creature tokens.)\nCreature tokens you control are Squirrels in addition to their other creature types.\nOther Squirrels you control get +1/+1.

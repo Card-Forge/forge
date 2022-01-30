@@ -5,6 +5,5 @@ S:Mode$ Continuous | Affected$ Creature | EffectZone$ Command | AddAbility$ Pump
 SVar:Pump:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, create a 5/5 red Dragon creature token with flying.
 SVar:RolledChaos:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ r_5_5_dragon_flying | LegacyImage$ r 5 5 dragon flying hop
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shiv.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | MaxRollsPerTurn$ 9
 Oracle:All creatures have "{R}: This creature gets +1/+0 until end of turn."\nWhenever you roll {CHAOS}, create a 5/5 red Dragon creature token with flying.

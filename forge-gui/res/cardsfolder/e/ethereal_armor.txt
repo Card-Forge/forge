@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness
 SVar:X:Count$Valid Enchantment.YouCtrl
 SVar:BuffedBy:Enchantment
 DeckHints:Type$Enchantment
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ethereal_armor.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 for each enchantment you control and has first strike.

@@ -4,5 +4,4 @@ Types:Creature Zombie Drake
 PT:3/1
 K:Flying
 K:Haste
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sewn_eye_drake.jpg
 Oracle:Flying, haste

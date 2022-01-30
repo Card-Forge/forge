@@ -4,5 +4,4 @@ Types:Creature Vedalken Artificer
 PT:4/4
 K:Improvise
 K:Hexproof
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bastion_inventor.jpg
 Oracle:Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nHexproof (This creature can't be the target of spells or abilities your opponents control.)

@@ -8,5 +8,4 @@ SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 1 C | ValidTgts$ Opponent | SacValid$ C
 K:Flying
 K:CARDNAME can't block.
 DeckHints:Ability$Mana.Colorless
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bearer_of_silence.jpg
 Oracle:Devoid (This card has no color.)\nWhen you cast this spell, you may pay {1}{C}. If you do, target opponent sacrifices a creature. ({C} represents colorless mana.)\nFlying\nBearer of Silence can't block.

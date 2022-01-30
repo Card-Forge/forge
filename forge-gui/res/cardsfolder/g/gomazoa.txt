@@ -10,5 +10,4 @@ SVar:WobbleOppJelly:DB$ Shuffle | Defined$ RememberedOwner | SubAbility$ WobbleY
 SVar:WobbleYourJelly:DB$ Shuffle | Defined$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gomazoa.jpg
 Oracle:Defender, flying\n{T}: Put Gomazoa and each creature it's blocking on top of their owners' libraries, then those players shuffle.

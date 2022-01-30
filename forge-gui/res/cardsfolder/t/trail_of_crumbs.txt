@@ -5,6 +5,6 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You | LegacyImage$ c a food sac eld
 T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Food.YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a Food, you may pay {1}. If you do, look at the top two cards of your library. You may reveal a permanent card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
 SVar:TrigDig:AB$ Dig | Cost$ 1 | DigNum$ 2 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Permanent | ForceRevealToController$ True
-DeckHas:Ability$Token & Ability$LifeGain & Ability$Food
+DeckHas:Ability$Token|LifeGain|Food
 DeckHints:Ability$Food
 Oracle:When Trail of Crumbs enters the battlefield, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nWhenever you sacrifice a Food, you may pay {1}. If you do, look at the top two cards of your library. You may reveal a permanent card from among them and put it into your hand. Put the rest on the bottom of your library in any order.

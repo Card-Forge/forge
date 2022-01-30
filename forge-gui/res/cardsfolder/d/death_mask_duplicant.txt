@@ -9,5 +9,4 @@ SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigForget | Static$ True
 SVar:TrigForget:DB$ Cleanup | ClearImprinted$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/death_mask_duplicant.jpg
 Oracle:Imprint — {1}: Exile target creature card from your graveyard.\nAs long as a card exiled with Death-Mask Duplicant has flying, Death-Mask Duplicant has flying. The same is true for fear, first strike, double strike, haste, landwalk, protection, and trample.

@@ -8,6 +8,5 @@ A:AB$ ChangeZone | Cost$ 1 B Discard<2/Card> | Origin$ Graveyard | Destination$ 
 SVar:DiscardMe:2
 SVar:SacMe:1
 DeckHints:Ability$Discard
-DeckHas:Ability$Token & Ability$Discard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/haunted_dead.jpg
+DeckHas:Ability$Token|Discard
 Oracle:When Haunted Dead enters the battlefield, create a 1/1 white Spirit creature token with flying.\n{1}{B}, Discard two cards: Return Haunted Dead from your graveyard to the battlefield tapped.

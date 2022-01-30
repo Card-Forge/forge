@@ -9,5 +9,4 @@ S:Mode$ Continuous | Affected$ Angel.Other+YouCtrl | AddPower$ 1 | AddToughness$
 SVar:BuffedBy:Angel
 SVar:PlayMain1:TRUE
 DeckHints:Type$Angel
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lyra_dawnbringer.jpg
 Oracle:Flying, first strike, lifelink\nOther Angels you control get +1/+1 and have lifelink.

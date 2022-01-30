@@ -4,5 +4,4 @@ Types:Creature Lizard
 PT:1/1
 K:CARDNAME can't block.
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pygmy_pyrosaur.jpg
 Oracle:Pygmy Pyrosaur can't block.\n{R}: Pygmy Pyrosaur gets +1/+0 until end of turn.

@@ -8,5 +8,4 @@ SVar:SVar1:DB$ LoseLife | Defined$ Player | LifeAmount$ 1 | SpellDescription$ Ea
 SVar:SVar2:DB$ GainLife | Defined$ Player | LifeAmount$ 1 | SpellDescription$ Each player gains 1 life.
 AI:RemoveDeck:All
 DeckHas:Ability$LifeGain
-SVar:Picture:http://www.wizards.com/global/images/magic/general/putrid_warrior.jpg
 Oracle:Whenever Putrid Warrior deals damage, choose one —\n• Each player loses 1 life.\n• Each player gains 1 life.

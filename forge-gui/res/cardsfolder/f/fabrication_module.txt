@@ -5,5 +5,4 @@ T:Mode$ CounterAddedOnce | ValidPlayer$ You | TriggerZones$ Battlefield | Counte
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
 A:AB$ PutCounter | Cost$ 4 T | Defined$ You | CounterType$ ENERGY | CounterNum$ 1 | AILogic$ AtOppEOT | SpellDescription$ You get {E}.
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fabrication_module.jpg
 Oracle:Whenever you get one or more {E} (energy counters), put a +1/+1 counter on target creature you control.\n{4}, {T}: You get {E}.

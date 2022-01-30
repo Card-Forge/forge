@@ -4,5 +4,4 @@ Types:Snow Artifact Creature Phyrexian Construct
 PT:8/8
 K:Cumulative upkeep:Sac<1/Creature>:Sacrifice a creature.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_soulgorger.jpg
 Oracle:Cumulative upkeep—Sacrifice a creature. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)

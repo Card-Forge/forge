@@ -5,5 +5,4 @@ A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Remembered.sameName+Other | NumAtt$ -2 | NumDef$ -2 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card46176.jpg
 Oracle:Target creature and all other creatures with the same name as that creature get -2/-2 until end of turn.

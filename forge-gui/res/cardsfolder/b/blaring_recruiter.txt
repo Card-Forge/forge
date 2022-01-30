@@ -6,5 +6,4 @@ K:Partner:Blaring Captain
 A:AB$ Token | Cost$ 2 W | TokenAmount$ 1 | TokenScript$ w_1_1_warrior | TokenOwner$ You | LegacyImage$ w 1 1 warrior bbd | SpellDescription$ Create a 1/1 white Warrior creature token.
 DeckHints:Name$Blaring Captain
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blaring_recruiter.jpg
 Oracle:Partner with Blaring Captain (When this creature enters the battlefield, target player may put Blaring Captain into their hand from their library, then shuffle.)\n{2}{W}: Create a 1/1 white Warrior creature token.

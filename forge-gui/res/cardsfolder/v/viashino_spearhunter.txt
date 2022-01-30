@@ -3,5 +3,4 @@ ManaCost:2 R
 Types:Creature Viashino Warrior
 PT:2/1
 K:First Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_spearhunter.jpg
 Oracle:First strike (This creature deals combat damage before creatures without first strike.)

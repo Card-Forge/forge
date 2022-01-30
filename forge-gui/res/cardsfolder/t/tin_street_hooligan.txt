@@ -7,5 +7,4 @@ SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target ar
 SVar:ManaNeededToAvoidNegativeEffect:green
 AI:RemoveDeck:Random
 DeckNeeds:Color$Green
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tin_street_hooligan.jpg
 Oracle:When Tin Street Hooligan enters the battlefield, if {G} was spent to cast it, destroy target artifact.

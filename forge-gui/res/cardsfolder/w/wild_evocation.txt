@@ -7,5 +7,4 @@ SVar:DBEvokeLand:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defi
 SVar:DBEvokePlay:DB$ Play | ValidZone$ Hand | Controller$ TriggeredPlayer | Defined$ Remembered | WithoutManaCost$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_evocation.jpg
 Oracle:At the beginning of each player's upkeep, that player reveals a card at random from their hand. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.

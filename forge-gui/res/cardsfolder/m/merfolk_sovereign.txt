@@ -5,5 +5,4 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Merfolk+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Merfolk creatures you control get +1/+1.
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature.Merfolk | TgtPrompt$ Select target Merfolk creature | KW$ HIDDEN Unblockable | SpellDescription$ Target Merfolk creature can't be blocked this turn.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_sovereign.jpg
 Oracle:Other Merfolk creatures you control get +1/+1.\n{T}: Target Merfolk creature can't be blocked this turn.

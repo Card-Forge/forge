@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Creature Human Knight
 PT:2/1
 K:First Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/youthful_knight.jpg
 Oracle:First strike

@@ -9,6 +9,5 @@ SVar:TrigDig:DB$ Dig | DigNum$ 3 | Defined$ You
 SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:ManaNeededToAvoidNegativeEffect:white
 AI:RemoveDeck:Random
-DeckNeeds:Color$white
-SVar:Picture:http://www.wizards.com/global/images/magic/general/court_hussar.jpg
+DeckNeeds:Color$White
 Oracle:Vigilance\nWhen Court Hussar enters the battlefield, look at the top three cards of your library, then put one of them into your hand and the rest on the bottom of your library in any order.\nWhen Court Hussar enters the battlefield, sacrifice it unless {W} was spent to cast it.

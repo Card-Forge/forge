@@ -5,5 +5,4 @@ S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone
 SVar:Wizard:Count$Valid Wizard.YouCtrl
 A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
 DeckNeeds:Type$Wizard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wizards_retort.jpg
 Oracle:This spell costs {1} less to cast if you control a Wizard.\nCounter target spell.

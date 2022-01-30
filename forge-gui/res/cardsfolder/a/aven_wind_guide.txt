@@ -9,5 +9,4 @@ S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddKeyword$ Flying & Vig
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Token
 DeckHints:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_wind_guide.jpg
 Oracle:Flying, vigilance\nCreature tokens you control have flying and vigilance.\nEmbalm {4}{W}{U} ({4}{W}{U}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Bird Warrior with no mana cost. Embalm only as a sorcery.)

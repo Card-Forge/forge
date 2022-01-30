@@ -5,5 +5,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ ABLoseLife | Description$ Enchanted creature has "{1}{B}, {T}: Target player loses 2 life."
 SVar:ABLoseLife:AB$ LoseLife | Cost$ 1 B T | ValidTgts$ Player | LifeAmount$ 2 | SpellDescription$ Target player loses 2 life.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/claim_of_erebos.jpg
 Oracle:Enchant creature\nEnchanted creature has "{1}{B}, {T}: Target player loses 2 life."

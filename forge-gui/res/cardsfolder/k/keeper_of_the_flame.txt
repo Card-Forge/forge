@@ -3,5 +3,4 @@ ManaCost:R R
 Types:Creature Human Wizard
 PT:1/2
 A:AB$ DealDamage | Cost$ R T | ValidTgts$ Opponent.hasMoreLife | NumDmg$ 2 | SpellDescription$ Choose target opponent who had more life than you did as you activated this ability. CARDNAME deals 2 damage to that player.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/keeper_of_the_flame.jpg
 Oracle:{R}, {T}: Choose target opponent who had more life than you did as you activated this ability. Keeper of the Flame deals 2 damage to that player.

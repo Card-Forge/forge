@@ -3,5 +3,4 @@ ManaCost:U U
 Types:Creature Merfolk Assassin
 PT:1/2
 A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.withIslandwalk | TgtPrompt$ Select target creature with islandwalk | SpellDescription$ Destroy target creature with islandwalk.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_assassin.jpg
 Oracle:{T}: Destroy target creature with islandwalk.

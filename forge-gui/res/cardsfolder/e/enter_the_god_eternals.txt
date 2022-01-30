@@ -7,5 +7,5 @@ SVar:X:Count$TotalDamageDoneByThisTurn
 SVar:DBMill:DB$ Mill | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose target player | SubAbility$ DBAmass | StackDescription$ Target player mills four cards.
 SVar:DBAmass:DB$ Amass | Num$ 4
 DeckHints:Ability$Amass & Type$Zombie
-DeckHas:Ability$Amass & Ability$Counters & Ability$Token & Ability$LifeGain & Ability$Graveyard
+DeckHas:Ability$Amass|Counters|Token|LifeGain|Graveyard
 Oracle:Enter the God-Eternals deals 4 damage to target creature and you gain life equal to the damage dealt this way. Target player mills four cards. Amass 4. (Put four +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)

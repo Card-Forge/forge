@@ -5,5 +5,4 @@ PT:4/4
 K:First Strike
 K:Haste
 K:Cycling:3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/macetail_hystrodon.jpg
 Oracle:First strike, haste\nCycling {3} ({3}, Discard this card: Draw a card.)

@@ -4,5 +4,4 @@ Types:Artifact
 A:AB$ Draw | Cost$ 4 T Discard<1/Hand> | NumCards$ X | SpellDescription$ Draw a card for each creature you control.
 SVar:X:Count$TypeYouCtrl.Creature
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/slate_of_ancestry.jpg
 Oracle:{4}, {T}, Discard your hand: Draw a card for each creature you control.

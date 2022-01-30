@@ -3,5 +3,4 @@ ManaCost:4
 Types:Artifact Creature Gargoyle
 PT:2/2
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/millennial_gargoyle.jpg
 Oracle:Flying

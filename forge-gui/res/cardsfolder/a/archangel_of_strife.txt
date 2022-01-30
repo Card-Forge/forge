@@ -11,5 +11,4 @@ SVar:PeaceChoice:DB$ Effect | Name$ Archangel Peace Effect | StaticAbilities$ Pe
 SVar:WarPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddPower$ 3 | Description$ Creatures you control get +3/+0.
 SVar:PeacePump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddToughness$ 3 | Description$ Creatures you control get +0/+3.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/archangel_of_strife.jpg
 Oracle:Flying\nAs Archangel of Strife enters the battlefield, each player chooses war or peace.\nCreatures controlled by players who chose war get +3/+0.\nCreatures controlled by players who chose peace get +0/+3.

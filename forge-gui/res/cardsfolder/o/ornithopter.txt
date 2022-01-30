@@ -3,5 +3,4 @@ ManaCost:0
 Types:Artifact Creature Thopter
 PT:0/2
 K:Flying
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card95220.jpg
 Oracle:Flying

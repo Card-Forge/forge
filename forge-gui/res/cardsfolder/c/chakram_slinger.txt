@@ -5,5 +5,4 @@ PT:2/4
 K:Partner:Chakram Retriever
 A:AB$ DealDamage | Cost$ R T | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target player or planeswalker.
 DeckHints:Name$Chakram Retriever
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chakram_slinger.jpg
 Oracle:Partner with Chakram Retriever (When this creature enters the battlefield, target player may put Chakram Retriever into their hand from their library, then shuffle.)\n{R}, {T}: Chakram Slinger deals 2 damage to target player or planeswalker.

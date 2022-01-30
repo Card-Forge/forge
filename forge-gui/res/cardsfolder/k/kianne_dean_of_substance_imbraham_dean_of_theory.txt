@@ -10,7 +10,7 @@ A:AB$ Token | Cost$ 4 G | TokenScript$ gu_0_0_fractal | ImprintTokens$ True | Su
 SVar:DBRemember:DB$ PumpAll | ValidCards$ Card.YouOwn+nonLand+counters_GE1_STUDY | PumpZone$ Exile | RememberAllPumped$ True | StackDescription$ None | SubAbility$ DBCounters
 SVar:DBCounters:DB$ PutCounter | Defined$ Imprinted | CounterType$ P1P1 | CounterNum$ X | StackDescription$ None | SubAbility$ DBCleanup
 SVar:X:Remembered$DifferentCMC
-DeckHas:Ability$Counters & Ability$Token
+DeckHas:Ability$Counters|Token
 AlternateMode:Modal
 Oracle:{T}: Exile the top card of your library. If it's a land card, put it into your hand. Otherwise, put a study counter on it.\n{4}{G}: Create a 0/0 green and blue Fractal creature token. Put a +1/+1 counter on it for each different mana value among nonland cards you own in exile with study counters on them.
 

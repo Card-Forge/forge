@@ -8,5 +8,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Token
 DeckHints:Name$Gate to the Afterlife
-SVar:Picture:http://www.wizards.com/global/images/magic/general/god_pharaohs_gift.jpg
 Oracle:At the beginning of combat on your turn, you may exile a creature card from your graveyard. If you do, create a token that's a copy of that card, except it's a 4/4 black Zombie. It gains haste until end of turn.

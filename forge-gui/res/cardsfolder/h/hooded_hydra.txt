@@ -10,5 +10,4 @@ SVar:Y:TriggeredCard$CardCounters.P1P1
 K:Morph:3 G G
 R:Event$ TurnFaceUp | ValidCard$ Card.Self | ReplaceWith$ AddCounters | ActiveZones$ Battlefield | Description$ As CARDNAME is turned face up, put five +1/+1 counters on it.
 SVar:AddCounters:DB$ PutCounter | Defined$ Self | CounterNum$ 5 | CounterType$ P1P1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hooded_hydra.jpg
 Oracle:Hooded Hydra enters the battlefield with X +1/+1 counters on it.\nWhen Hooded Hydra dies, create a 1/1 green Snake creature token for each +1/+1 counter on it.\nMorph {3}{G}{G}\nAs Hooded Hydra is turned face up, put five +1/+1 counters on it.

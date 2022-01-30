@@ -5,5 +5,4 @@ T:Mode$ AttackersDeclared | Execute$ TrigDraw | CheckSVar$ OverwhelmInstinct | S
 SVar:TrigDraw:DB$ Draw | NumCards$ 1
 SVar:PlayMain1:TRUE
 SVar:OverwhelmInstinct:Count$Valid Creature.attacking+YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/military_intelligence.jpg
 Oracle:Whenever you attack with two or more creatures, draw a card.

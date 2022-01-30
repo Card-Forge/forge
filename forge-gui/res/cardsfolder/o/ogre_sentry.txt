@@ -3,5 +3,4 @@ ManaCost:1 R
 Types:Creature Ogre Warrior
 PT:3/3
 K:Defender
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_sentry.jpg
 Oracle:Defender

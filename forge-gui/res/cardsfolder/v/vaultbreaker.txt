@@ -6,5 +6,4 @@ K:Dash:2 R
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME attacks, you may discard a card. If you do, draw a card.
 SVar:TrigDiscard:AB$ Draw | Cost$ Discard<1/Card> | Defined$ You | NumCards$ 1
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/agrus_kos_wojek_veteran.jpg
 Oracle:Whenever Vaultbreaker attacks, you may discard a card. If you do, draw a card.\nDash {2}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)

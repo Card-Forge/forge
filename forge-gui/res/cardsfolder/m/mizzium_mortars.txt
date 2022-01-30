@@ -3,5 +3,4 @@ ManaCost:1 R
 Types:Sorcery
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature you don't control.
 A:SP$ DamageAll | Cost$ 3 R R R | ValidCards$ Creature.YouDontCtrl | ValidDescription$ each creature you don't control. | NumDmg$ 4 | PrecostDesc$ Overload | CostDesc$ {3}{R}{R}{R} | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mizzium_mortars.jpg
 Oracle:Mizzium Mortars deals 4 damage to target creature you don't control.\nOverload {3}{R}{R}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")

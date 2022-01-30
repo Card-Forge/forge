@@ -3,5 +3,4 @@ ManaCost:6
 Types:Artifact Creature Golem
 PT:5/3
 A:AB$ Pump | Cost$ 1 G | Defined$ Self | KW$ Trample | SpellDescription$ CARDNAME gains trample until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/malachite_golem.jpg
 Oracle:{1}{G}: Malachite Golem gains trample until end of turn.

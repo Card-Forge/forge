@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigTarget:DB$ Pump | ValidTgts$ Land.YouCtrl | TgtPrompt$ Choose target land you control | SubAbility$ DBExchange | SpellDescription$ Exchange control of target land you control and target land an opponent controls.
 SVar:DBExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Land.OppCtrl | TgtPrompt$ Choose target land an opponent controls
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_plotter.jpg
 Oracle:When Vedalken Plotter enters the battlefield, exchange control of target land you control and target land an opponent controls.

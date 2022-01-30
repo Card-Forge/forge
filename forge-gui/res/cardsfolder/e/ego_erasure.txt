@@ -4,5 +4,4 @@ Types:Tribal Instant Shapeshifter
 K:Changeling
 A:SP$ PumpAll | Cost$ 2 U | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -0 | IsCurse$ True | SubAbility$ DBAnimateAll | SpellDescription$ Creatures target player controls get -2/-0 and lose all creature types until end of turn.
 SVar:DBAnimateAll:DB$ AnimateAll | ValidCards$ Creature.TargetedPlayerCtrl | RemoveCreatureTypes$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ego_erasure.jpg
 Oracle:Changeling (This card is every creature type.)\nCreatures target player controls get -2/-0 and lose all creature types until end of turn.

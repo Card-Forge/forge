@@ -9,5 +9,4 @@ SVar:TrigToken:AB$ Token | Cost$ C | TokenAmount$ X | TokenScript$ c_1_1_eldrazi
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.nonToken+YouCtrl
 DeckHints:Ability$Mana.Colorless
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vile_redeemer.jpg
 Oracle:Devoid (This card has no color.)\nFlash\nWhen you cast this spell, you may pay {C}. If you do, create a 1/1 colorless Eldrazi Scion creature token for each nontoken creature that died under your control this turn. Those tokens have "Sacrifice this creature: Add {C}."

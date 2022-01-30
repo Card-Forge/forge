@@ -11,5 +11,4 @@ T:Mode$ CounterRemoved | ValidCard$ Card.Self | CounterType$ ORE | NewCounterAmo
 SVar:DBDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ EnchantedController | SubAbility$ DBDestroy
 SVar:DBDestroy:DB$ Destroy | Defined$ Enchanted
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_mine.jpg
 Oracle:Enchant land\nOrcish Mine enters the battlefield with three ore counters on it.\nAt the beginning of your upkeep or whenever enchanted land becomes tapped, remove an ore counter from Orcish Mine.\nWhen the last ore counter is removed from Orcish Mine, destroy enchanted land and Orcish Mine deals 2 damage to that land's controller.

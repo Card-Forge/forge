@@ -5,5 +5,5 @@ A:SP$ Destroy | Cost$ X X G | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Artifact,
 SVar:DBToken:DB$ Token | TokenAmount$ Y | TokenScript$ bg_1_1_pest_lifegain | TokenOwner$ You | SpellDescription$ Create twice X 1/1 black and green Pest creature tokens with "When this creature dies, you gain 1 life."
 SVar:X:Count$xPaid
 SVar:Y:SVar$X/Twice
-DeckHas:Ability$Token & Ability$LifeGain
+DeckHas:Ability$Token|LifeGain
 Oracle:Destroy up to X target artifacts and/or enchantments. Create twice X 1/1 black and green Pest creature tokens with "When this creature dies, you gain 1 life."

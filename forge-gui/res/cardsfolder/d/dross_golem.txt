@@ -5,5 +5,4 @@ PT:3/2
 K:Affinity:Swamp
 K:Fear
 DeckNeeds:Color$Black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dross_golem.jpg
 Oracle:Affinity for Swamps (This spell costs {1} less to cast for each Swamp you control.)\nFear (This creature can't be blocked except by artifact creatures and/or black creatures.)

@@ -6,5 +6,4 @@ A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | SpellDescription$ Add X mana 
 SVar:X:Count$Valid Elf
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_channeler.jpg
 Oracle:{T}: Add X mana of any one color, where X is the number of Elves on the battlefield.

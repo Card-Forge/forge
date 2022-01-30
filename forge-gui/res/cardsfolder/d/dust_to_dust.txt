@@ -2,5 +2,4 @@ Name:Dust to Dust
 ManaCost:1 W W
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 1 W W | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile two target artifacts.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dust_to_dust.jpg
 Oracle:Exile two target artifacts.

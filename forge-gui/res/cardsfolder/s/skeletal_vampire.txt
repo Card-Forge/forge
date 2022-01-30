@@ -8,5 +8,4 @@ SVar:TrigToken:DB$ Token | LegacyImage$ b 1 1 bat flying gpt | TokenScript$ b_1_
 A:AB$ Token | Cost$ 3 B B Sac<1/Bat> | TokenAmount$ 2 | LegacyImage$ b 1 1 bat flying gpt | TokenScript$ b_1_1_bat_flying | TokenOwner$ You | TokenSVars$ Sac | SpellDescription$ Create two 1/1 black Bat creature tokens with flying.
 A:AB$ Regenerate | Cost$ Sac<1/Bat> | SpellDescription$ Regenerate CARDNAME.
 SVar:Sac:SVar:SacMe:1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skeletal_vampire.jpg
 Oracle:Flying\nWhen Skeletal Vampire enters the battlefield, create two 1/1 black Bat creature tokens with flying.\n{3}{B}{B}, Sacrifice a Bat: Create two 1/1 black Bat creature tokens with flying.\nSacrifice a Bat: Regenerate Skeletal Vampire.

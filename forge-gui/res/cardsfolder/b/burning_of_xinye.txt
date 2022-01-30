@@ -5,5 +5,4 @@ A:SP$ Sacrifice | Defined$ You | Cost$ 4 R R | SacValid$ Land.withoutIndestructi
 SVar:DBSac:DB$ Sacrifice | ValidTgts$ Opponent | SacValid$ Land.withoutIndestructible | Amount$ 4 | Destroy$ True | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DamageAll | NumDmg$ 4 | ValidCards$ Creature
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/burning_of_xinye.jpg
 Oracle:You destroy four lands you control, then target opponent destroys four lands they control. Then Burning of Xinye deals 4 damage to each creature.

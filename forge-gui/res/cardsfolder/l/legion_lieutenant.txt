@@ -5,5 +5,4 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Vampire+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Vampires you control get +1/+1.
 DeckHints:Type$Vampire
 SVar:BuffedBy:Vampire
-SVar:Picture:http://www.wizards.com/global/images/magic/general/legion_lieutenant.jpg
 Oracle:Other Vampires you control get +1/+1.

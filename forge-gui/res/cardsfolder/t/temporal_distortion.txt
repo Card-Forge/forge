@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Permanent.counters_GE1_HOURGLASS | AddHiddenKeywo
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigRemoveCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, remove all hourglass counters from permanents that player controls.
 SVar:TrigRemoveCounter:DB$ RemoveCounterAll | CounterType$ HOURGLASS | AllCounters$ True | ValidCards$ Permanent.ActivePlayerCtrl
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_distortion.jpg
 Oracle:Whenever a creature or land becomes tapped, put an hourglass counter on it.\nEach permanent with an hourglass counter on it doesn't untap during its controller's untap step.\nAt the beginning of each player's upkeep, remove all hourglass counters from permanents that player controls.

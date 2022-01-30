@@ -3,5 +3,4 @@ ManaCost:4 W W W
 Types:Sorcery
 K:Convoke
 A:SP$ DestroyAll | Cost$ 4 W W W | ValidCards$ Creature.nonToken | SpellDescription$ Destroy all nontoken creatures.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hour_of_reckoning.jpg
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDestroy all nontoken creatures.

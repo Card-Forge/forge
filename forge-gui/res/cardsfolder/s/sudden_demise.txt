@@ -5,5 +5,4 @@ A:SP$ ChooseColor | Cost$ X R | AILogic$ MostProminentHumanCreatures | SubAbilit
 SVar:DBDmg:DB$ DamageAll | NumDmg$ X | ValidCards$ Creature.ChosenColor | ValidDescription$ each creature of the chosen color.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sudden_demise.jpg
 Oracle:Choose a color. Sudden Demise deals X damage to each creature of the chosen color.

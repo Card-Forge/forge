@@ -4,5 +4,4 @@ Types:Creature Dragon
 PT:6/6
 K:Flying
 K:Haste
-SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6605.jpg
 Oracle:Flying, haste

@@ -3,5 +3,4 @@ ManaCost:1 B
 Types:Creature Skeleton
 PT:1/1
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83061.jpg
 Oracle:{B}: Regenerate Drudge Skeletons. (The next time this creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)

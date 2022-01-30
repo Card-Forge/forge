@@ -6,5 +6,4 @@ K:Cumulative upkeep:U
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCL | TriggerDescription$ At the beginning of your upkeep, choose a land type. CARDNAME gains landwalk of the chosen type until end of turn. (It can't be blocked as long as defending player controls a land of that type.)
 SVar:TrigCL:DB$ ChooseType | Defined$ You | Type$ Land | AILogic$ ChosenLandwalk | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | KW$ ChosenTypewalk | Defined$ Self | DefinedKW$ ChosenType
-SVar:Picture:http://www.wizards.com/global/images/magic/general/illusionary_presence.jpg
 Oracle:Cumulative upkeep {U} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nAt the beginning of your upkeep, choose a land type. Illusionary Presence gains landwalk of the chosen type until end of turn. (It can't be blocked as long as defending player controls a land of that type.)

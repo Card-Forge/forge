@@ -6,5 +6,5 @@ SVar:DBToken:DB$ Token | LegacyImage$ wubrg 2 2 citizen war | TokenScript$ wubrg
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Choose target permanent in your graveyard. | SpellDescription$ Return target permanent from your graveyard to your hand.
 SVar:DBProliferate:DB$ Proliferate | SpellDescription$ Proliferate.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
-DeckHas:Ability$Proliferate & Ability$Token
+DeckHas:Ability$Proliferate|Token
 Oracle:Choose four. You may choose the same mode more than once.\n• Create a 2/2 Citizen creature token that's all colors.\n• Return target permanent card from your graveyard to your hand.\n• Proliferate.\n• You gain 4 life.

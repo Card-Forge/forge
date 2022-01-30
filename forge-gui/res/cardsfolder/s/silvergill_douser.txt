@@ -5,5 +5,4 @@ PT:1/1
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | NumAtt$ -X | SpellDescription$ Target creature gets -X/-0 until end of turn, where X is the number of Merfolk and/or Faeries you control
 SVar:X:Count$Valid Merfolk.YouCtrl,Faerie.YouCtrl
 DeckHints:Type$Merfolk|Faerie
-SVar:Picture:http://www.wizards.com/global/images/magic/general/silvergill_douser.jpg
 Oracle:{T}: Target creature gets -X/-0 until end of turn, where X is the number of Merfolk and/or Faeries you control.

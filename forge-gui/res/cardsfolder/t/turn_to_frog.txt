@@ -3,5 +3,4 @@ ManaCost:1 U
 Types:Instant
 A:SP$ Animate | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 1 | Toughness$ 1 | RemoveAllAbilities$ True | Colors$ Blue | OverwriteColors$ True | Types$ Frog | RemoveCreatureTypes$ True | IsCurse$ True | SpellDescription$ Until end of turn, target creature loses all abilities and becomes a blue Frog with base power and toughness 1/1.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/turn_to_frog.jpg
 Oracle:Until end of turn, target creature loses all abilities and becomes a blue Frog with base power and toughness 1/1.

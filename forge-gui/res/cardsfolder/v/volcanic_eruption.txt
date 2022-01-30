@@ -7,5 +7,4 @@ SVar:X:Count$xPaid
 SVar:Y:Count$ValidGraveyard Mountain.IsRemembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_eruption.jpg
 Oracle:Destroy X target Mountains. Volcanic Eruption deals damage to each creature and each player equal to the number of Mountains put into a graveyard this way.

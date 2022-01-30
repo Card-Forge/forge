@@ -4,7 +4,6 @@ AlternateMode: Split
 Types:Instant
 A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature equal to the number of lands you control.
 SVar:X:Count$TypeYouCtrl.Land
-SVar:Picture:http://www.wizards.com/global/images/magic/general/struggle_survive.jpg
 Oracle:Struggle deals damage to target creature equal to the number of lands you control.
 
 ALTERNATE

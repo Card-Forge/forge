@@ -3,5 +3,4 @@ ManaCost:B
 Types:Sorcery
 A:SP$ ChangeZoneAll | Cost$ B | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card.withFlashback | SpellDescription$ Target player exiles all cards with flashback from their graveyard.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tombfire.jpg
 Oracle:Target player exiles all cards with flashback from their graveyard.

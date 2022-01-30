@@ -3,5 +3,4 @@ ManaCost:4 G
 Types:Sorcery
 A:SP$ GainLife | Cost$ 4 G | LifeAmount$ X | SpellDescription$ You gain 1 life for each land you control.
 SVar:X:Count$TypeYouCtrl.Land
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bountiful_harvest.jpg
 Oracle:You gain 1 life for each land you control.

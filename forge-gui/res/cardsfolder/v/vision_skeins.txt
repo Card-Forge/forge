@@ -2,5 +2,4 @@ Name:Vision Skeins
 ManaCost:1 U
 Types:Instant
 A:SP$ Draw | Cost$ 1 U | Defined$ Player | NumCards$ 2 | SpellDescription$ Each player draws two cards.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vision_skeins.jpg
 Oracle:Each player draws two cards.

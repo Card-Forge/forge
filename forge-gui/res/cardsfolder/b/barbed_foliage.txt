@@ -5,5 +5,4 @@ T:Mode$ Attacks | ValidCard$ Creature | Attacked$ You | Execute$ TrigDebuff | Tr
 SVar:TrigDebuff:DB$ Debuff | Defined$ TriggeredAttacker | Keywords$ Flanking
 T:Mode$ Attacks | ValidCard$ Creature.withoutFlying | Attacked$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature without flying attacks you, CARDNAME deals 1 damage to it.
 SVar:TrigDamage:DB$ DealDamage | NumDmg$ 1 | Defined$ TriggeredAttacker
-SVar:Picture:http://www.wizards.com/global/images/magic/general/barbed_foliage.jpg
 Oracle:Whenever a creature attacks you, it loses flanking until end of turn.\nWhenever a creature without flying attacks you, Barbed Foliage deals 1 damage to it.

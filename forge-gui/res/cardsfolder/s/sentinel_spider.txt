@@ -4,5 +4,4 @@ Types:Creature Spider
 PT:4/4
 K:Vigilance
 K:Reach
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sentinel_spider.jpg
 Oracle:Vigilance, reach

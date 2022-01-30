@@ -10,5 +10,4 @@ SVar:Y:SVar$W/LimitMin.0
 SVar:W:SVar$Z/Minus.X
 SVar:Z:Count$Valid Permanent.TargetedPlayerCtrl
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/choice_of_damnations.jpg
 Oracle:Target opponent chooses a number. You may have that player lose that much life. If you don't, that player sacrifices all but that many permanents.

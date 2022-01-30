@@ -8,5 +8,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | TriggerZones$ Grave
 SVar:TrigReturn:AB$ ChangeZone | Cost$ G G | Defined$ Self | Origin$ Graveyard | Destination$ Hand
 SVar:X:Count$LastStateGraveyard Land
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_vinecrasher.jpg
 Oracle:Trample\nCentaur Vinecrasher enters the battlefield with a number of +1/+1 counters on it equal to the number of land cards in all graveyards.\nWhenever a land card is put into a graveyard from anywhere, you may pay {G}{G}. If you do, return Centaur Vinecrasher from your graveyard to your hand.

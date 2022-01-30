@@ -8,5 +8,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:DBVenture:DB$ Venture
 A:AB$ Venture | Cost$ W Discard<1/CARDNAME> | SubAbility$ DBGainLife | ActivationZone$ Hand | Defined$ You | SpellDescription$ Venture into the dungeon and you gain 3 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3 | StackDescription$ None
-DeckHas:Ability$LifeGain & Ability$Discard
+DeckHas:Ability$LifeGain|Discard
 Oracle:Flying, lifelink\nWhenever Radiant Solar or another nontoken creature enters the battlefield under your control, venture into the dungeon. (Enter the first room or advance to the next room.)\n{W}, Discard Radiant Solar: Venture into the dungeon and you gain 3 life.

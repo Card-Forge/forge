@@ -9,5 +9,4 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 AI:RemoveDeck:All
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/martyrs_cause.jpg
 Oracle:Sacrifice a creature: The next time a source of your choice would deal damage to any target this turn, prevent that damage.

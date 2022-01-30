@@ -9,5 +9,4 @@ SVar:Y:TriggeredCard$CardCounters.P1P1
 A:AB$ PutCounter | Cost$ 1 T | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 SVar:X:Count$xPaid
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hangarback_walker.jpg
 Oracle:Hangarback Walker enters the battlefield with X +1/+1 counters on it.\nWhen Hangarback Walker dies, create a 1/1 colorless Thopter artifact creature token with flying for each +1/+1 counter on Hangarback Walker.\n{1}, {T}: Put a +1/+1 counter on Hangarback Walker.

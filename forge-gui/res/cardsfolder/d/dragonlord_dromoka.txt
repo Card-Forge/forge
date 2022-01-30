@@ -6,5 +6,4 @@ K:This spell can't be countered.
 K:Flying
 K:Lifelink
 S:Mode$ CantBeCast | ValidCard$ Card | Condition$ PlayerTurn | Caster$ Opponent | Description$ Your opponents can't cast spells during your turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonlord_dromoka.jpg
 Oracle:This spell can't be countered.\nFlying, lifelink\nYour opponents can't cast spells during your turn.

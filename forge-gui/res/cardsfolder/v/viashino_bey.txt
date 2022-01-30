@@ -3,5 +3,4 @@ ManaCost:2 R R
 Types:Creature Viashino
 PT:4/3
 K:If CARDNAME attacks, all creatures you control attack if able.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_bey.jpg
 Oracle:If Viashino Bey attacks, all creatures you control attack if able.

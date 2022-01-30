@@ -7,5 +7,5 @@ SVar:ToHand:DB$ ChangeZone | Defined$ Targeted | Origin$ Graveyard | Destination
 SVar:HandAndLife:DB$ ChangeZone | Defined$ Targeted | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBGainLife | SpellDescription$ 15+ VERT Return those cards to your hand. You gain life equal to their total mana value.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Targeted$CardManaCost
-DeckHas:Ability$Graveyard & Ability$LifeGain
+DeckHas:Ability$Graveyard|LifeGain
 Oracle:Choose up to two target permanent cards in your graveyard. Roll a d20 and add the total mana value of those cards.\n1—14 | Return those cards to your hand.\n15+ | Return those cards to your hand. You gain life equal to their total mana value.

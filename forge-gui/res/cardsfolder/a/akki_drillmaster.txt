@@ -3,5 +3,4 @@ ManaCost:2 R
 Types:Creature Goblin Shaman
 PT:2/2
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn.
-SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card74393.jpg
 Oracle:{T}: Target creature gains haste until end of turn.

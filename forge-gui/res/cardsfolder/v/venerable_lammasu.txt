@@ -3,5 +3,4 @@ ManaCost:6 W
 Types:Creature Lammasu
 PT:5/4
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/venerable_lammasu.jpg
 Oracle:Flying

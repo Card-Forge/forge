@@ -6,5 +6,4 @@ SVar:DBNameCard:DB$ NameCard | Defined$ You | SpellDescription$ As CARDNAME ente
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Protection:ChosenName | Description$ You have protection from the chosen card name. (You can't be targeted, dealt damage, or enchanted by anything with that name.)
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/runed_halo.jpg
 Oracle:As Runed Halo enters the battlefield, choose a card name.\nYou have protection from the chosen card name. (You can't be targeted, dealt damage, or enchanted by anything with that name.)

@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
 K:CARDNAME enters the battlefield tapped.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/charcoal_diamond.jpg
 Oracle:Charcoal Diamond enters the battlefield tapped.\n{T}: Add {B}.

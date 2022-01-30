@@ -5,5 +5,4 @@ PT:0/4
 K:Defender
 K:Banding
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_shields.jpg
 Oracle:Defender (This creature can't attack.)\nBanding (If any creatures with banding you control are blocking a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by.)

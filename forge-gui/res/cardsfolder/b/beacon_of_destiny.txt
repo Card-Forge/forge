@@ -11,5 +11,4 @@ SVar:OutOfSight:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Defined$ Ch
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/beacon_of_destiny.jpg
 Oracle:{T}: The next time a source of your choice would deal damage to you this turn, that damage is dealt to Beacon of Destiny instead.

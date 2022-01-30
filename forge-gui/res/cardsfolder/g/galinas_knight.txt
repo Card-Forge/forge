@@ -3,5 +3,4 @@ ManaCost:W U
 Types:Creature Merfolk Knight
 PT:2/2
 K:Protection from red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/galinas_knight.jpg
 Oracle:Protection from red

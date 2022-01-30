@@ -5,5 +5,4 @@ K:ETBReplacement:Other:ChooseLT
 SVar:ChooseLT:DB$ ChooseType | Defined$ You | Type$ Land | SpellDescription$ As CARDNAME enters the battlefield, choose a land type.
 S:Mode$ Continuous | Affected$ Land.ChosenType | AddKeyword$ Phasing | Description$ Each land of the chosen type has phasing. (It phases in or out before its controller untaps during each of their untap steps. While it's phased out, it's treated as though it doesn't exist.)
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shimmer.jpg
 Oracle:As Shimmer enters the battlefield, choose a land type.\nEach land of the chosen type has phasing. (It phases in or out before its controller untaps during each of their untap steps. While it's phased out, it's treated as though it doesn't exist.)

@@ -5,5 +5,4 @@ T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBDraw | TriggerZones$ Com
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | Name$ This World Belongs to Me Effect | StaticAbilities$ Exploration | AILogic$ Always
 SVar:Exploration:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | EffectZone$ Command | Description$ You may play an additional land this turn.
-SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/This World Belongs to Me.full.jpg
 Oracle:When you set this scheme in motion, draw two cards. You may play an additional land this turn.

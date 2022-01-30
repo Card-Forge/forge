@@ -3,5 +3,4 @@ ManaCost:1 B
 Types:Enchantment
 A:AB$ Token | Cost$ Discard<2/Card> | LegacyImage$ b 2 2 zombie ody | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | SpellDescription$ Create a 2/2 black Zombie creature token.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_infestation.jpg
 Oracle:Discard two cards: Create a 2/2 black Zombie creature token.

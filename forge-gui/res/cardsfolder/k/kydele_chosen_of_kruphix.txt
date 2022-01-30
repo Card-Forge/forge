@@ -6,5 +6,4 @@ A:AB$ Mana | Cost$ T | Produced$ C | Amount$ X | SpellDescription$ Add {C} for e
 SVar:X:Count$YouDrewThisTurn
 K:Partner
 DeckHas:Ability$Mana.Colorless
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kydele_chosen_of_kruphix.jpg
 Oracle:{T}: Add {C} for each card you've drawn this turn.\nPartner (You can have two commanders if both have partner.)

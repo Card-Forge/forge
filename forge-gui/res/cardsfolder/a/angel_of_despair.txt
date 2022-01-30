@@ -5,5 +5,4 @@ PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target permanent.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent | TgtPrompt$ Select target permanent.
-SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card83869.jpg
 Oracle:Flying\nWhen Angel of Despair enters the battlefield, destroy target permanent.

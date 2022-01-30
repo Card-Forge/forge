@@ -3,5 +3,4 @@ ManaCost:4
 Types:Artifact Creature Spirit
 PT:1/5
 K:Flying
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84114.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)

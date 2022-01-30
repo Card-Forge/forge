@@ -3,5 +3,4 @@ ManaCost:1 G
 Types:Creature Cat Warrior
 PT:2/1
 K:Protection from artifacts
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nacatl_savage.jpg
 Oracle:Protection from artifacts

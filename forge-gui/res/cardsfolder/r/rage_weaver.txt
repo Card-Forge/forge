@@ -5,5 +5,4 @@ PT:2/1
 A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature.Black,Creature.Green | KW$ Haste | SpellDescription$ Target black or green creature gains haste until end of turn. | TgtPrompt$ Select target black or green creature.
 DeckHints:Color$Black|Green
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rage_weaver.jpg
 Oracle:{2}: Target black or green creature gains haste until end of turn. (It can attack and {T} this turn.)

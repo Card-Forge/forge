@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
 K:Madness:R
 DeckHints:Ability$Discard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_temper.jpg
 Oracle:Fiery Temper deals 3 damage to any target.\nMadness {R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

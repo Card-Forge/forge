@@ -5,5 +5,4 @@ PT:4/4
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Permanent.nonLand+YouCtrl | PresentCompare$ GE2 | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if you control another nonland permanent, sacrifice CARDNAME.
 SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reclusive_wight.jpg
 Oracle:At the beginning of your upkeep, if you control another nonland permanent, sacrifice Reclusive Wight.

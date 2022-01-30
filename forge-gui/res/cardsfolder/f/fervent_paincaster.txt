@@ -4,5 +4,4 @@ Types:Creature Human Wizard
 PT:3/1
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player or planeswalker.
 A:AB$ DealDamage | Cost$ T Exert<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature. (An exerted creature won't untap during your next untap step.)
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fervent_paincaster.jpg
 Oracle:{T}: Fervent Paincaster deals 1 damage to target player or planeswalker.\n{T}, Exert Fervent Paincaster: It deals 1 damage to target creature. (An exerted creature won't untap during your next untap step.)

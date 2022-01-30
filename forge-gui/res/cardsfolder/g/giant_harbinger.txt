@@ -5,5 +5,4 @@ PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a Giant card, reveal it, then shuffle and put that card on top.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Card.Giant | ChangeNum$ 1 | ShuffleNonMandatory$ True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_harbinger.jpg
 Oracle:When Giant Harbinger enters the battlefield, you may search your library for a Giant card, reveal it, then shuffle and put that card on top.

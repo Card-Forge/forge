@@ -3,5 +3,4 @@ ManaCost:4 B B
 Types:Sorcery
 A:SP$ Destroy | Cost$ 4 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDiscard | SpellDescription$ Destroy target creature. Its controller discards a card.
 SVar:DBDiscard:DB$ Discard | Defined$ TargetedController | NumCards$ 1 | Mode$ TgtChoose
-SVar:Picture:http://www.wizards.com/global/images/magic/general/assassins_strike.jpg
 Oracle:Destroy target creature. Its controller discards a card.

@@ -7,7 +7,6 @@ T:Mode$ AttackersDeclared | Execute$ DBTransform | CheckSVar$ NumAttackers | SVa
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:NumAttackers:Count$Valid Creature.attacking
 AlternateMode:DoubleFaced
-SVar:Picture:http://www.wizards.com/global/images/magic/general/legions_landing.jpg
 Oracle:When Legion's Landing enters the battlefield, create a 1/1 white Vampire creature token with lifelink.\nWhen you attack with three or more creatures, transform Legion's Landing.
 
 ALTERNATE
@@ -17,5 +16,4 @@ ManaCost:no cost
 Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ W | Amount$ 1 | SpellDescription$ Add {W}.
 A:AB$ Token | Cost$ 2 W T | TokenAmount$ 1 | LegacyImage$ w 1 1 vampire lifelink xln | TokenScript$ w_1_1_vampire_lifelink | TokenOwner$ You | SpellDescription$ Create a 1/1 white Vampire creature token with lifelink.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/adanto_the_first_fort.jpg
 Oracle:(Transforms from Legion's Landing.)\n{T}: Add {W}.\n{2}{W}, {T}: Create a 1/1 white Vampire creature token with lifelink.

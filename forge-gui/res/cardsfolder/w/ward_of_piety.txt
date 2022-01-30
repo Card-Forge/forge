@@ -7,5 +7,4 @@ A:AB$ Effect | Cost$ 1 W | Name$ Redirection Ward | ValidTgts$ Creature,Player,P
 SVar:WardDamage:Event$ DamageDone | ValidTarget$ Creature.IsImprinted | ReplaceWith$ WardDmg | DamageTarget$ Remembered | Description$ The next 1 damage that would be dealt to enchanted creature this turn is dealt to any target instead.
 SVar:WardDmg:DB$ ReplaceSplitDamage | DamageTarget$ Remembered
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ward_of_piety.jpg
 Oracle:Enchant creature\n{1}{W}: The next 1 damage that would be dealt to enchanted creature this turn is dealt to any target instead.

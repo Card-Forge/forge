@@ -8,5 +8,4 @@ SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature.withFlying | TgtPrompt$ Select t
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 SVar:DBGrave:DB$ ChangeZone | ValidTgts$ Card.YouOwn | TgtPrompt$ Select up to four target cards in your graveyard | TargetMin$ 0 | TargetMax$ 4 | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put up to four target cards from your graveyard on the bottom of your library in any order.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bow_of_nylea.jpg
 Oracle:Attacking creatures you control have deathtouch.\n{1}{G}, {T}: Choose one —\n• Put a +1/+1 counter on target creature.\n• Bow of Nylea deals 2 damage to target creature with flying.\n• You gain 3 life.\n• Put up to four target cards from your graveyard on the bottom of your library in any order.

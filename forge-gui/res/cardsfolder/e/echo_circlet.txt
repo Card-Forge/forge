@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact Equipment
 K:Equip:1
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | CanBlockAmount$ 1 | Description$ Equipped creature can block an additional creature each combat.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/echo_circlet.jpg
 Oracle:Equipped creature can block an additional creature each combat.\nEquip {1}

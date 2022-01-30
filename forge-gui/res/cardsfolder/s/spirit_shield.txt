@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddToughness$ 2
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ ClearRemembered | Static$ True
 SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
 SVar:AIUntapPreference:BetterTgtThanRemembered
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_shield.jpg
 Oracle:You may choose not to untap Spirit Shield during your untap step.\n{2}, {T}: Target creature gets +0/+2 for as long as Spirit Shield remains tapped.

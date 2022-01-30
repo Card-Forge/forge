@@ -5,5 +5,4 @@ A:SP$ RepeatEach | Cost$ R | RepeatCards$ Creature.blocking | Zone$ Battlefield 
 SVar:DBFlip:DB$ FlipACoin | WinSubAbility$ DBPreventDmg
 SVar:DBPreventDmg:DB$ Pump | Defined$ Remembered | KW$ Prevent all combat damage that would be dealt by CARDNAME.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fighting_chance.jpg
 Oracle:For each blocking creature, flip a coin. If you win the flip, prevent all combat damage that would be dealt by that creature this turn.

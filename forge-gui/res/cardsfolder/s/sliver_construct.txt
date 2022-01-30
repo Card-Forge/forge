@@ -2,5 +2,4 @@ Name:Sliver Construct
 ManaCost:3
 Types:Artifact Creature Sliver Construct
 PT:2/2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sliver_construct.jpg
 Oracle:

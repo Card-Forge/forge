@@ -5,5 +5,4 @@ PT:1/5
 T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME is dealt damage, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
 SVar:HasCombatEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dromad_purebred.jpg
 Oracle:Whenever Dromad Purebred is dealt damage, you gain 1 life.

@@ -6,5 +6,4 @@ K:Flying
 T:Mode$ BecomesTarget | ValidTarget$ Dragon.inZoneBattlefield+YouCtrl | ValidSource$ Card.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever a Dragon you control becomes the target of a spell or ability an opponent controls, destroy target nonland permanent that player controls.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.nonLand | TargetsWithDefinedController$ TriggeredSourceController | TgtPrompt$ Select target nonland permanent that player controls.
 DeckHints:Type$Dragon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scalelord_reckoner.jpg
 Oracle:Flying\nWhenever a Dragon you control becomes the target of a spell or ability an opponent controls, destroy target nonland permanent that player controls.

@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDraw:AB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 2 | Cost$ Draw<X/You>
 K:Eternalize:5 U U
 SVar:X:Count$CardPower
-SVar:Picture:http://www.wizards.com/global/images/magic/general/champion_of_wits.jpg
 Oracle:When Champion of Wits enters the battlefield, you may draw cards equal to its power. If you do, discard two cards.\nEternalize {5}{U}{U} ({5}{U}{U}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie Naga Wizard with no mana cost. Eternalize only as a sorcery.)

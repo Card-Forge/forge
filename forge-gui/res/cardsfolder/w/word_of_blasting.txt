@@ -5,5 +5,4 @@ A:SP$ Destroy | Cost$ 1 R | ValidTgts$ Wall | TgtPrompt$ Select target Wall | Su
 SVar:DBDamage:DB$ DealDamage | NumDmg$ X | Defined$ TargetedController
 SVar:X:Targeted$CardManaCost
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/word_of_blasting.jpg
 Oracle:Destroy target Wall. It can't be regenerated. Word of Blasting deals damage equal to that Wall's mana value to the Wall's controller.

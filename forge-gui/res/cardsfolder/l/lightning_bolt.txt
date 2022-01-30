@@ -2,5 +2,4 @@ Name:Lightning Bolt
 ManaCost:R
 Types:Instant
 A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
-SVar:Picture:http://resources.wizards.com/magic/cards/bd/en-us/card27255.jpg
 Oracle:Lightning Bolt deals 3 damage to any target.

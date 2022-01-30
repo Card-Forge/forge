@@ -4,5 +4,4 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ U U | ValidTgts$ Creature | AILogic$ Pump
 A:AB$ Untap | Cost$ 1 tapXType<1/Creature> | Defined$ Enchanted | CostDesc$ {1}, Tap an untapped creature you control: | SpellDescription$ Untap enchanted creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_of_dominion.jpg
 Oracle:Enchant creature\n{1}, Tap an untapped creature you control: Untap enchanted creature.

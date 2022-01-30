@@ -5,5 +5,4 @@ PT:2/2
 K:First Strike
 K:Renown:1
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/akroan_sergeant.jpg
 Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nRenown 1 (When this creature deals combat damage to a player, if it isn't renowned, put a +1/+1 counter on it and it becomes renowned.)

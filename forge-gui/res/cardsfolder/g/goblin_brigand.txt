@@ -3,5 +3,4 @@ ManaCost:1 R
 Types:Creature Goblin Warrior
 PT:2/2
 K:CARDNAME attacks each combat if able.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_brigand.jpg
 Oracle:Goblin Brigand attacks each combat if able.

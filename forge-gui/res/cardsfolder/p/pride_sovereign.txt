@@ -8,5 +8,4 @@ SVar:X:Count$Valid Cat.Other+YouCtrl
 SVar:BuffedBy:Cat
 DeckHas:Ability$Token
 DeckHints:Type$Cat
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pride_sovereign.jpg
 Oracle:Pride Sovereign gets +1/+1 for each other Cat you control.\n{W}, {T}, Exert Pride Sovereign: Create two 1/1 white Cat creature tokens with lifelink. (An exerted creature won't untap during your next untap step.)

@@ -2,5 +2,4 @@ Name:Ethereal Ambush
 ManaCost:3 G U
 Types:Instant
 A:SP$ Manifest | Cost$ 3 G U | Amount$ 2 | Defined$ TopOfLibrary | SpellDescription$ Manifest the top two cards of your library. (To manifst a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ethereal_ambush.jpg
 Oracle:Manifest the top two cards of your library. (To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)

@@ -6,5 +6,4 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you return another creature you control to its owner's hand.
 SVar:TrigSacUnless:DB$ Sacrifice | Defined$ Self | UnlessCost$ Return<1/Creature.Other/other creature> | UnlessPayer$ You
 SVar:NeedsToPlay:Creature.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_impostor.jpg
 Oracle:Flying\nWhen Faerie Impostor enters the battlefield, sacrifice it unless you return another creature you control to its owner's hand.

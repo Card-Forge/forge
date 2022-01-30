@@ -4,5 +4,4 @@ Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
 K:Cycling:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/drifting_meadow.jpg
 Oracle:Drifting Meadow enters the battlefield tapped.\n{T}: Add {W}.\nCycling {2} ({2}, Discard this card: Draw a card.)

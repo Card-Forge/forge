@@ -4,5 +4,4 @@ Types:Creature Hyena
 PT:3/2
 K:Vigilance
 K:CARDNAME can't attack alone.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/trusty_companion.jpg
 Oracle:Vigilance\nTrusty Companion can't attack alone.

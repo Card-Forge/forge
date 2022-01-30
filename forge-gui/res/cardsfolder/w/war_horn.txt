@@ -3,5 +3,4 @@ ManaCost:3
 Types:Artifact
 S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddPower$ 1 | Description$ Attacking creatures you control get +1/+0.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/war_horn.jpg
 Oracle:Attacking creatures you control get +1/+0.

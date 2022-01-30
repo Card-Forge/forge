@@ -7,5 +7,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerZones$ Batt
 SVar:TrigExile:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | SubAbility$ DelTrig
 SVar:DelTrig:DB$ DelayedTrigger | DelayedTriggerDefinedPlayer$ You | Mode$ Phase | Phase$ Declare Attackers | Execute$ TrigReturn | TriggerDescription$ Return CARDNAME to the battlefield tapped and attacking.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Exile | Destination$ Battlefield | Attacking$ True | Tapped$ True | GainControl$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/meandering_towershell.jpg
 Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nWhenever Meandering Towershell attacks, exile it. Return it to the battlefield under your control tapped and attacking at the beginning of the declare attackers step on your next turn.

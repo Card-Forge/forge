@@ -5,5 +5,4 @@ A:SP$ Token | Cost$ 3 W | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ w_1_1_
 SVar:DBCopy:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True
 DeckHas:Ability$Token
 DeckHints:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eyes_in_the_skies.jpg
 Oracle:Create a 1/1 white Bird creature token with flying, then populate. (Create a token that's a copy of a creature token you control.)

@@ -4,5 +4,4 @@ Types:Creature Bird
 PT:1/1
 S:Mode$ Continuous | Affected$ Card.Self+enchanted | AddKeyword$ Flying | Description$ CARDNAME has flying as long as it's enchanted.
 SVar:EnchantMe:Once
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fledgling_osprey.jpg
 Oracle:Fledgling Osprey has flying as long as it's enchanted.

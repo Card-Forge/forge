@@ -4,5 +4,4 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Protection from red | Description$ All creatures have protection from red.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/absolute_law.jpg
 Oracle:All creatures have protection from red.

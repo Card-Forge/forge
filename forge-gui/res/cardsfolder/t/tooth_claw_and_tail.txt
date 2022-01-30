@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Scheme
 T:Mode$ SetInMotion | Execute$ DarkEffect | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, destroy up to three target nonland permanents.
 SVar:DarkEffect:DB$ Destroy | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent
-SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/Tooth, Claw, and Tail.full.jpg
 Oracle:When you set this scheme in motion, destroy up to three target nonland permanents.

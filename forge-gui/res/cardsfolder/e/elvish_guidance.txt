@@ -7,5 +7,4 @@ T:Mode$ TapsForMana | ValidCard$ Card.AttachedBy | Execute$ TrigMana | Static$ T
 SVar:TrigMana:DB$ Mana | Produced$ G | Amount$ X | Defined$ TriggeredCardController
 SVar:X:Count$Valid Elf
 DeckNeeds:Type$Elf
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_guidance.jpg
 Oracle:Enchant land\nWhenever enchanted land is tapped for mana, its controller adds an additional {G} for each Elf on the battlefield.

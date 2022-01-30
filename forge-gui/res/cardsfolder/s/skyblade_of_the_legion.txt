@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Creature Vampire Soldier
 PT:1/3
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skyblade_of_the_legion.jpg
 Oracle:Flying

@@ -7,5 +7,4 @@ SVar:X:Count$Valid Card.Self+unequipped
 SVar:BuffedBy:Artifact.Equipment
 SVar:EquipMe:Once
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/training_drone.jpg
 Oracle:Training Drone can't attack or block unless it's equipped.

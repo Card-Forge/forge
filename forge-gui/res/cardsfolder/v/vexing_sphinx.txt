@@ -10,5 +10,4 @@ SVar:XLKI:TriggeredCard$CardCounters.AGE
 SVar:NeedsToPlayVar:Z GE3
 SVar:Z:Count$InYourHand
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vexing_sphinx.jpg
 Oracle:Flying\nCumulative upkeep—Discard a card. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhen Vexing Sphinx dies, draw a card for each age counter on it.

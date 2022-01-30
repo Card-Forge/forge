@@ -6,5 +6,4 @@ K:Flying
 K:Vigilance
 K:Indestructible
 S:Mode$ Continuous | Affected$ Permanent.Other+YouCtrl | AddKeyword$ Indestructible | Description$ Other permanents you control have indestructible.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/avacyn_angel_of_hope.jpg
 Oracle:Flying, vigilance, indestructible\nOther permanents you control have indestructible.

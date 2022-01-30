@@ -5,5 +5,4 @@ A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigLose | TriggerDescription$ When enchanted creature dies, that creature's controller loses life equal to its toughness.
 SVar:TrigLose:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ X
 SVar:X:TriggeredCard$CardToughness
-SVar:Picture:http://www.wizards.com/global/images/magic/general/banewasp_affliction.jpg
 Oracle:Enchant creature\nWhen enchanted creature dies, that creature's controller loses life equal to its toughness.

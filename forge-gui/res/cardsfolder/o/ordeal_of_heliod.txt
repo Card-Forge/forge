@@ -11,5 +11,5 @@ SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 10
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddSVar$ AE
 SVar:AE:SVar:HasAttackEffect:TRUE
 SVar:SacMe:4
-DeckHas:Ability$Counters & Ability$LifeGain
+DeckHas:Ability$Counters|LifeGain
 Oracle:Enchant creature\nWhenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more +1/+1 counters on it, sacrifice Ordeal of Heliod.\nWhen you sacrifice Ordeal of Heliod, you gain 10 life.

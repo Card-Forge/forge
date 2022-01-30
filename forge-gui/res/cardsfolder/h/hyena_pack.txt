@@ -2,5 +2,4 @@ Name:Hyena Pack
 ManaCost:2 R R
 Types:Creature Hyena
 PT:3/4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hyena_pack.jpg
 Oracle:

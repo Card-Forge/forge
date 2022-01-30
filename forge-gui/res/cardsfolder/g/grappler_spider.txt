@@ -3,5 +3,4 @@ ManaCost:1 G
 Types:Creature Spider
 PT:2/1
 K:Reach
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grappler_spider.jpg
 Oracle:Reach (This creature can block creatures with flying.)

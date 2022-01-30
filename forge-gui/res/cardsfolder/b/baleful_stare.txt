@@ -5,5 +5,4 @@ A:SP$ RevealHand | Cost$ 2 U | ValidTgts$ Opponent | TgtPrompt$ Select target op
 SVar:DBDraw:DB$ Draw | NumCards$ X
 SVar:X:Count$ValidHand Mountain.TargetedPlayerCtrl,Card.TargetedPlayerCtrl+Red
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/baleful_stare.jpg
 Oracle:Target opponent reveals their hand. You draw a card for each Mountain and red card in it.

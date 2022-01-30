@@ -3,5 +3,4 @@ ManaCost:3 R R
 Types:Creature Giant
 PT:4/3
 K:Haste
-SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card130381.jpg
 Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)

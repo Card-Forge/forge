@@ -3,5 +3,4 @@ ManaCost:1 G G
 Types:Instant
 A:SP$ UntapAll | Cost$ 1 G G | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Land.Basic | SpellDescription$ Target player untaps all basic lands they control.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/early_harvest.jpg
 Oracle:Target player untaps all basic lands they control.

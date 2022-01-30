@@ -6,7 +6,7 @@ K:Disturb:3 U U
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME dies, mill three cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You
 AlternateMode:DoubleFaced
-DeckHas:Ability$Mill & Ability$Graveyard
+DeckHas:Ability$Mill|Graveyard
 Oracle:When Covetous Castaway dies, mill three cards.\nDisturb {3}{U}{U} (You may cast this card from your graveyard transformed for its disturb cost.)
 
 ALTERNATE

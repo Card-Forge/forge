@@ -3,5 +3,4 @@ ManaCost:2 B
 Types:Creature Imp
 PT:2/1
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dusk_imp.jpg
 Oracle:Flying

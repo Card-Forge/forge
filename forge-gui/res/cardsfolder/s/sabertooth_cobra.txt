@@ -9,5 +9,4 @@ SVar:PoisonTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.IsRemembered |
 SVar:Bleed:DB$ Poison | Num$ 1 | Defined$ You | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:PayUp:ST$ ChangeZone | Cost$ 2 | Defined$ Self | Origin$ Command | Destination$ Exile | ActivationZone$ Command | AILogic$ Always | SpellDescription$ Pay {2} to remove this effect.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sabertooth_cobra.jpg
 Oracle:Whenever Sabertooth Cobra deals damage to a player, that player gets a poison counter. The player gets another poison counter at the beginning of their next upkeep unless they pay {2} before that step. (A player with ten or more poison counters loses the game.)

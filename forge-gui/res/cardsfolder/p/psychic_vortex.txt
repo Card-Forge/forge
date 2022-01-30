@@ -6,5 +6,4 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigSac | Trigg
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Land | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Mode$ Hand
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_vortex.jpg
 Oracle:Cumulative upkeep—Draw a card. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nAt the beginning of your end step, sacrifice a land and discard your hand.

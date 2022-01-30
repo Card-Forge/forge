@@ -8,5 +8,4 @@ A:AB$ PumpAll | Cost$ 4 W | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1
 SVar:BuffedBy:Plains
 AI:RemoveDeck:Random
 DeckNeeds:Color$White
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sunblade_elf.jpg
 Oracle:Sunblade Elf gets +1/+1 as long as you control a Plains.\n{4}{W}: Creatures you control get +1/+1 until end of turn.

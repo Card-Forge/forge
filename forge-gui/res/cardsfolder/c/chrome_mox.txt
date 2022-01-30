@@ -10,5 +10,4 @@ SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 SVar:NeedsToPlayVar:Z GE1
 SVar:Z:Count$ValidHand Card.nonArtifact+nonColorless+nonLand+YouOwn
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chrome_mox.jpg
 Oracle:Imprint — When Chrome Mox enters the battlefield, you may exile a nonartifact, nonland card from your hand.\n{T}: Add one mana of any of the exiled card's colors.

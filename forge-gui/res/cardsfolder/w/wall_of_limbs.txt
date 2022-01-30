@@ -9,5 +9,4 @@ A:AB$ LoseLife | Cost$ 5 B B Sac<1/CARDNAME> | LifeAmount$ X | ValidTgts$ Player
 SVar:X:Sacrificed$CardPower
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_limbs.jpg
 Oracle:Defender (This creature can't attack.)\nWhenever you gain life, put a +1/+1 counter on Wall of Limbs.\n{5}{B}{B}, Sacrifice Wall of Limbs: Target player loses X life, where X is Wall of Limbs's power.

@@ -7,5 +7,4 @@ T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Creature.Green | TriggerZones
 SVar:TrigSacrifice:AB$ Sacrifice | Cost$ PayLife<2> | Defined$ Player.Other | SacValid$ Creature | SacMessage$ Creature
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/savra_queen_of_the_golgari.jpg
 Oracle:Whenever you sacrifice a black creature, you may pay 2 life. If you do, each other player sacrifices a creature.\nWhenever you sacrifice a green creature, you may gain 2 life.

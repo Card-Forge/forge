@@ -5,5 +5,4 @@ HandLifeModifier:-2/+0
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ DrawLoselife | TriggerDescription$ At the beginning of your upkeep, you draw a card and you lose 1 life.
 SVar:DrawLoselife:DB$ Draw | NumCards$ 1 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
-SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Royal Assassin Avatar1.full.jpg
 Oracle:Hand -2, life +0\nAt the beginning of your upkeep, you draw a card and you lose 1 life.

@@ -2,5 +2,4 @@ Name:Canal Monitor
 ManaCost:4 B
 Types:Creature Lizard
 PT:5/3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/canal_monitor.jpg
 Oracle:

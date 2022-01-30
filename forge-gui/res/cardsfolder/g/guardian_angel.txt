@@ -6,5 +6,4 @@ SVar:GuardianEffect:DB$ Effect | Name$ Guardian Angel Effect | Abilities$ ABProt
 SVar:ABProtect:AB$ PreventDamage | ActivationZone$ Command | Cost$ 1 | InstantSpeed$ True | Defined$ Remembered | Amount$ 1 | SpellDescription$ You may pay 1 any time you could cast an instant. If you do, prevent the next 1 damage that would be dealt to that permanent or player this turn.
 AI:RemoveDeck:All
 SVar:X:Count$xPaid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_angel.jpg
 Oracle:Prevent the next X damage that would be dealt to any target this turn. Until end of turn, you may pay {1} any time you could cast an instant. If you do, prevent the next 1 damage that would be dealt to that permanent or player this turn.

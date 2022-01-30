@@ -10,5 +10,4 @@ S:Mode$ CantBeActivated | ValidCard$ Card.NamedCard | ValidSA$ Activated.nonMana
 AI:RemoveDeck:Random
 # TODO: Might improve AI logic to support it (the AI needs to pick cards that actually have activated nonmana abilities on them)
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sorcerous_spyglass.jpg
 Oracle:As Sorcerous Spyglass enters the battlefield, look at an opponent's hand, then choose any card name.\nActivated abilities of sources with the chosen name can't be activated unless they're mana abilities.

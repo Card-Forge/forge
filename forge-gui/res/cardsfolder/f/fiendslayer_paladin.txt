@@ -5,5 +5,4 @@ PT:2/2
 K:First Strike
 K:Lifelink
 S:Mode$ CantTarget | ValidCard$ Card.Self | ValidSource$ Card.Black,Card.Red | ValidSA$ Spell | Activator$ Opponent | Description$ CARDNAME can't be the target of black or red spells your opponents control.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fiendslayer_paladin.jpg
 Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nLifelink (Damage dealt by this creature also causes you to gain that much life.)\nFiendslayer Paladin can't be the target of black or red spells your opponents control.

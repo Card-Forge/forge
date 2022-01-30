@@ -3,5 +3,4 @@ ManaCost:R G
 Types:Creature Elf Barbarian
 PT:2/2
 K:Protection from blue
-SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_barbarian.jpg
 Oracle:Protection from blue

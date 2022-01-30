@@ -9,5 +9,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | LegacyImage$ w 2 2 knight vigilance rtr
 SVar:NonStackingAttachEffect:True
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/security_blockade.jpg
 Oracle:Enchant land\nWhen Security Blockade enters the battlefield, create a 2/2 white Knight creature token with vigilance.\nEnchanted land has "{T}: Prevent the next 1 damage that would be dealt to you this turn."

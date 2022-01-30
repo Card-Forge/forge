@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigExile:DB$ ChangeZone | Origin$ Hand,Graveyard | Destination$ Exile | ChangeType$ Artifact.YouCtrl,Creature.YouCtrl | SubAbility$ DBCounter | RememberChanged$ True | ChangeNum$ 1 | AILogic$ Mairsil
 SVar:DBCounter:DB$ PutCounter | CounterType$ CAGE | CounterNum$ 1 | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mairsil_the_pretender.jpg
 Oracle:When Mairsil, the Pretender enters the battlefield, you may exile an artifact or creature card from your hand or graveyard and put a cage counter on it.\nMairsil, the Pretender has all activated abilities of all cards you own in exile with cage counters on them. You may activate each of those abilities only once each turn.

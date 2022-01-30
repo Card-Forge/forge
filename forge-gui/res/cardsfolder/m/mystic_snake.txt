@@ -5,5 +5,4 @@ PT:2/2
 K:Flash
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigCounter | TriggerDescription$ When CARDNAME enters the battlefield, counter target spell.
 SVar:TrigCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_snake.jpg
 Oracle:Flash\nWhen Mystic Snake enters the battlefield, counter target spell.

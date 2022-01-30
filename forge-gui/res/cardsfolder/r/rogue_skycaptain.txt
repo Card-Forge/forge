@@ -12,5 +12,4 @@ SVar:DBReset:DB$ Cleanup | ClearChosenPlayer$ True
 SVar:X:Count$CardCounters.WAGE/Twice
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rogue_skycaptain.jpg
 Oracle:Flying\nAt the beginning of your upkeep, put a wage counter on Rogue Skycaptain. You may pay {2} for each wage counter on it. If you don't, remove all wage counters from Rogue Skycaptain and an opponent gains control of it.

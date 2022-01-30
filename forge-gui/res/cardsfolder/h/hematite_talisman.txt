@@ -4,5 +4,4 @@ Types:Artifact
 T:Mode$ SpellCast | ValidCard$ Card.Red | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever a player casts a red spell, you may pay {3}. If you do, untap target permanent.
 SVar:TrigUntap:AB$Untap | Cost$ 3 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hematite_talisman.jpg
 Oracle:Whenever a player casts a red spell, you may pay {3}. If you do, untap target permanent.

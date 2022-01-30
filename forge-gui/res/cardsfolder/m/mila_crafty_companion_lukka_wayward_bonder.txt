@@ -25,5 +25,5 @@ SVar:LukkaCreatureETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield
 SVar:LukkaDmg:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | DamageSource$ TriggeredCard
 SVar:X:TriggeredCard$CardPower
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Discard & Ability$Graveyard
-Oracle:[+1]: You may discard a card. If you do, draw a card. If a creature card was discarded this way, draw two cards instead.\n[−2]: Return target creature card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of your next upkeep.\n[−7]: You get an emblem with "Whenever a creature enters the battlefield under your control, it deals damage equal to its power to any target."
+DeckHas:Ability$Discard|Graveyard
+Oracle:[+1]: You may discard a card. If you do, draw a card. If a creature card was discarded this way, draw two cards instead.\n[-2]: Return target creature card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of your next upkeep.\n[-7]: You get an emblem with "Whenever a creature enters the battlefield under your control, it deals damage equal to its power to any target."

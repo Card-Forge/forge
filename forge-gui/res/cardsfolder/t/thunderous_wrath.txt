@@ -3,5 +3,4 @@ ManaCost:4 R R
 Types:Instant
 K:Miracle:R
 A:SP$ DealDamage | Cost$ 4 R R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to any target.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderous_wrath.jpg
 Oracle:Thunderous Wrath deals 5 damage to any target.\nMiracle {R} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)

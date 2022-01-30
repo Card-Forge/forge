@@ -8,5 +8,4 @@ SVar:DealDamage:DB$ DealDamage | Defined$ ReplacedSourceController | DamageSourc
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:X:ReplaceCount$DamageAmount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/honorable_passage.jpg
 Oracle:The next time a source of your choice would deal damage to any target this turn, prevent that damage. If damage from a red source is prevented this way, Honorable Passage deals that much damage to the source's controller.

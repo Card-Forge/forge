@@ -4,5 +4,4 @@ Types:Sorcery
 K:Flashback:3 G
 A:SP$ Token | Cost$ 6 G | TokenAmount$ 1 | TokenScript$ g_6_6_wurm | TokenOwner$ You | LegacyImage$ g 6 6 wurm ody | SpellDescription$ Create a 6/6 green Wurm creature token.
 SVar:DiscardMe:1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/roar_of_the_wurm.jpg
 Oracle:Create a 6/6 green Wurm creature token.\nFlashback {3}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

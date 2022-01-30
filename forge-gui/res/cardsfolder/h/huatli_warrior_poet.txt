@@ -9,5 +9,5 @@ A:AB$ DealDamage | Cost$ SubCounter<X/LOYALTY> | NumDmg$ X | Planeswalker$ True 
 SVar:DBNoBlock:DB$ Pump | KW$ HIDDEN CARDNAME can't block. | Defined$ Remembered | SubAbility$ DBCleanup | StackDescription$ Creatures dealt damage this way can't block this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
-DeckHas:Ability$LifeGain & Ability$Token
-Oracle:[+2]: You gain life equal to the greatest power among creatures you control.\n[0]: Create a 3/3 green Dinosaur creature token with trample.\n[−X]: Huatli, Warrior Poet deals X damage divided as you choose among any number of target creatures. Creatures dealt damage this way can't block this turn.
+DeckHas:Ability$LifeGain|Token
+Oracle:[+2]: You gain life equal to the greatest power among creatures you control.\n[0]: Create a 3/3 green Dinosaur creature token with trample.\n[-X]: Huatli, Warrior Poet deals X damage divided as you choose among any number of target creatures. Creatures dealt damage this way can't block this turn.

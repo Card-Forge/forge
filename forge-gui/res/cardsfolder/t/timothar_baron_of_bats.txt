@@ -11,5 +11,5 @@ SVar:CDTrigger:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player |
 SVar:TrigSac:DB$ Sacrifice | Defined$ Self | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Tapped$ True
 DeckNeeds:Type$Vampire
-DeckHas:Ability$Token & Ability$Sacrifice
+DeckHas:Ability$Token|Sacrifice
 Oracle:Ward—Discard a card.\nWhenever another nontoken Vampire you control dies, you may pay {1} and exile it. If you do, create a 1/1 black Bat creature token with flying. It gains "When this creature deals combat damage to a player, sacrifice it and return the exiled card to the battlefield tapped."

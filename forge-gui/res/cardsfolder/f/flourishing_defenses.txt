@@ -4,5 +4,4 @@ Types:Enchantment
 T:Mode$ CounterAdded | ValidCard$ Creature | TriggerZones$ Battlefield | CounterType$ M1M1 | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ Whenever a -1/-1 counter is put on a creature, create a 1/1 green Elf Warrior creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You | LegacyImage$ g 1 1 elf warrior shm
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flourishing_defenses.jpg
 Oracle:Whenever a -1/-1 counter is put on a creature, you may create a 1/1 green Elf Warrior creature token.

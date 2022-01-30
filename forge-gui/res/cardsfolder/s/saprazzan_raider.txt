@@ -4,5 +4,4 @@ Types:Creature Merfolk
 PT:1/2
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME becomes blocked, return it to its owner's hand.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/saprazzan_raider.jpg
 Oracle:When Saprazzan Raider becomes blocked, return it to its owner's hand.

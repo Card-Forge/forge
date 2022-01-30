@@ -8,5 +8,4 @@ T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.Enc
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.EnchantedBy | ValidBlocker$ Creature | Execute$ TrigPumpBlocker | Secondary$ True | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked by a creature, the other creature gains first strike until end of turn.
 SVar:TrigPumpAttacker:DB$ Pump | Defined$ TriggeredAttacker | KW$ First Strike
 SVar:TrigPumpBlocker:DB$ Pump | Defined$ TriggeredBlocker | KW$ First Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mammoth_harness.jpg
 Oracle:Enchant creature\nEnchanted creature loses flying.\nWhenever enchanted creature blocks or becomes blocked by a creature, the other creature gains first strike until end of turn.

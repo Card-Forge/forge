@@ -4,5 +4,4 @@ Types:Creature Salamander
 PT:1/1
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | AtEOT$ Sacrifice | SpellDescription$ CARDNAME gets +1/+0 until end of turn. Sacrifice CARDNAME at the beginning of the next end step.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pyric_salamander.jpg
 Oracle:{R}: Pyric Salamander gets +1/+0 until end of turn. Sacrifice Pyric Salamander at the beginning of the next end step.

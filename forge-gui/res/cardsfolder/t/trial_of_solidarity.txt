@@ -9,5 +9,4 @@ SVar:PlayMain1:TRUE
 SVar:NeedsToPlayVar:X GE2
 SVar:X:Count$Valid Creature.YouCtrl
 DeckHints:Type$Cartouche
-SVar:Picture:http://www.wizards.com/global/images/magic/general/trial_of_solidarity.jpg
 Oracle:When Trial of Solidarity enters the battlefield, creatures you control get +2/+1 and gain vigilance until end of turn.\nWhen a Cartouche enters the battlefield under your control, return Trial of Solidarity to its owner's hand.

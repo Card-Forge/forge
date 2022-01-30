@@ -5,5 +5,4 @@ PT:2/1
 K:Bestow:3 B
 K:CARDNAME can't block.
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 2 | AddToughness$ 1 | AddHiddenKeyword$ CARDNAME can't block. | Description$ Enchanted creature gets +2/+1 and can't block.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gnarled_scarhide.jpg
 Oracle:Bestow {3}{B} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\nGnarled Scarhide can't block.\nEnchanted creature gets +2/+1 and can't block.

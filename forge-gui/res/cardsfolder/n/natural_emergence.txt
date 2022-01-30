@@ -8,5 +8,4 @@ SVar:NeedsToPlay:Enchantment.Red+YouCtrl,Enchantment.Green+YouCtrl
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
 DeckNeeds:Type$Enchantment
-SVar:Picture:http://www.wizards.com/global/images/magic/general/natural_emergence.jpg
 Oracle:When Natural Emergence enters the battlefield, return a red or green enchantment you control to its owner's hand.\nLands you control are 2/2 creatures with first strike. They're still lands.

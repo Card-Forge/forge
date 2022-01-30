@@ -6,5 +6,4 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Deathtouch | De
 T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigLoseLifeOpp | TriggerDescription$ Whenever equipped creature deals combat damage to a player, that player loses half their life, rounded up.
 SVar:TrigLoseLifeOpp:DB$ LoseLife | Defined$ TriggeredTarget | LifeAmount$ QuietusX
 SVar:QuietusX:TriggeredTarget$LifeTotal/HalfUp
-SVar:Picture:http://www.wizards.com/global/images/magic/general/quietus_spike.jpg
 Oracle:Equipped creature has deathtouch.\nWhenever equipped creature deals combat damage to a player, that player loses half their life, rounded up.\nEquip {3}

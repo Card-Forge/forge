@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ Animate | Cost$ U | Colors$ Blue | OverwriteColors$ True | ValidTgts$ Card | TgtZone$ Stack,Battlefield | Duration$ Permanent | SpellDescription$ Target spell or permanent becomes blue. (Mana symbols on that permanent remain unchanged.)
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtlace.jpg
 Oracle:Target spell or permanent becomes blue. (Mana symbols on that permanent remain unchanged.)

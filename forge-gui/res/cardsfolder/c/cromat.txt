@@ -7,5 +7,4 @@ A:AB$ Pump | Cost$ U R | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME
 A:AB$ Regenerate | Cost$ B G | SpellDescription$ Regenerate CARDNAME.
 A:AB$ Pump | Cost$ R W | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 A:AB$ ChangeZone | Cost$ G U | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put CARDNAME on top of its owner's library.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cromat.jpg
 Oracle:{W}{B}: Destroy target creature blocking or blocked by Cromat.\n{U}{R}: Cromat gains flying until end of turn.\n{B}{G}: Regenerate Cromat.\n{R}{W}: Cromat gets +1/+1 until end of turn.\n{G}{U}: Put Cromat on top of its owner's library.

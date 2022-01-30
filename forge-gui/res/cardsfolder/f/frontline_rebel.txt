@@ -3,5 +3,4 @@ ManaCost:2 R
 Types:Creature Human Warrior
 PT:3/3
 K:CARDNAME attacks each combat if able.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/frontline_rebel.jpg
 Oracle:Frontline Rebel attacks each combat if able.

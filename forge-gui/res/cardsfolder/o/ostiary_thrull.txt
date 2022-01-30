@@ -4,6 +4,5 @@ Types:Creature Thrull
 PT:2/2
 A:AB$ Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 AI:RemoveDeck:Random
-DeckNeeds:Color$white
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ostiary_thrull.jpg
+DeckNeeds:Color$White
 Oracle:{W}, {T}: Tap target creature.

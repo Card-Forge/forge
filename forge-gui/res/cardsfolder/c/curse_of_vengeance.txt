@@ -9,5 +9,5 @@ T:Mode$ LosesGame | ValidPlayer$ Player.EnchantedBy | Execute$ TrigGainLife | Tr
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:Count$CardCounters.SPITE
-DeckHas:Ability$Counters & Ability$LifeGain
+DeckHas:Ability$Counters|LifeGain
 Oracle:Enchant player\nWhenever enchanted player casts a spell, put a spite counter on Curse of Vengeance.\nWhen enchanted player loses the game, you gain X life and draw X cards, where X is the number of spite counters on Curse of Vengeance.

@@ -4,5 +4,4 @@ Types:Creature Hippo
 PT:5/6
 K:Trample
 K:Cycling:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rampaging_hippo.jpg
 Oracle:Trample\nCycling {2} ({2}, Discard this card: Draw a card.)

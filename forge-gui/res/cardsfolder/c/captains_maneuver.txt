@@ -15,5 +15,4 @@ SVar:X:Count$xPaid
 #X Will get overwritten by Announce
 SVar:Y:Number$0
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/captains_maneuver.jpg
 Oracle:The next X damage that would be dealt to target creature, planeswalker, or player this turn is dealt to another target creature, planeswalker, or player instead.

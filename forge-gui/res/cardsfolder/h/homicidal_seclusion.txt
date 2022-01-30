@@ -5,5 +5,4 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 3 | AddToughness$ 1 
 SVar:X:Count$Valid Creature.YouCtrl
 AI:RemoveDeck:Random
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/homicidal_seclusion.jpg
 Oracle:As long as you control exactly one creature, that creature gets +3/+1 and has lifelink.

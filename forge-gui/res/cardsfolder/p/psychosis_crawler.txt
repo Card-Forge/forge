@@ -8,5 +8,4 @@ T:Mode$ Drawn | ValidCard$ Card.YouOwn | TriggerZones$ Battlefield | Execute$ Tr
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
 AI:RemoveDeck:All
 SVar:NeedsToPlayVar:X GE3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/psychosis_crawler.jpg
 Oracle:Psychosis Crawler's power and toughness are each equal to the number of cards in your hand.\nWhenever you draw a card, each opponent loses 1 life.

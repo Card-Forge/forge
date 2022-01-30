@@ -5,5 +5,4 @@ PT:3/1
 K:Flying
 S:Mode$ Continuous | Affected$ Vehicle.YouCtrl | AddKeyword$ Flying | Description$ Vehicles you control have flying.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aeronaut_admiral.jpg
 Oracle:Flying\nVehicles you control have flying.

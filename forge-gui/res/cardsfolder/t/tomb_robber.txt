@@ -6,5 +6,4 @@ K:Menace
 A:AB$ Explore | Cost$ 1 Discard<1/Card> | SpellDescription$ CARDNAME explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)
 DeckHas:Ability$Counters
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tomb_robber.jpg
 Oracle:Menace\n{1}, Discard a card: Tomb Robber explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)

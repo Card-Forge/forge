@@ -6,5 +6,4 @@ K:Moonfolk offering
 K:Flying
 A:AB$ ChangeZone | Cost$ 1 | ChangeNum$ 2 | Origin$ Hand | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.YouCtrl | SpellDescription$ Put up to two land cards from your hand onto the battlefield tapped.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/patron_of_the_moon.jpg
 Oracle:Moonfolk offering (You may cast this card any time you could cast an instant by sacrificing a Moonfolk and paying the difference in mana costs between this and the sacrificed Moonfolk. Mana cost includes color.)\nFlying\n{1}: Put up to two land cards from your hand onto the battlefield tapped.

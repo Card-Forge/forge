@@ -5,5 +5,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Triggered.SharesColorWith+Creature+Other | NoRegen$ True
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spreading_plague.jpg
 Oracle:Whenever a creature enters the battlefield, destroy all other creatures that share a color with it. They can't be regenerated.

@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBGainControl | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, gain control of target creature an opponent controls and untap it.
 SVar:DBGainControl:DB$ GainControl | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls. | Untap$ True
-SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/What's Yours Is Now Mine.full.jpg
 Oracle:When you set this scheme in motion, gain control of target creature an opponent controls and untap it.

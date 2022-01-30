@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Bat
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Self
 DeckHas:Ability$Token
 DeckHints:Type$Cartouche
-SVar:Picture:http://www.wizards.com/global/images/magic/general/trial_of_strength.jpg
 Oracle:When Trial of Strength enters the battlefield, create a 4/2 green Beast creature token.\nWhen a Cartouche enters the battlefield under your control, return Trial of Strength to its owner's hand.

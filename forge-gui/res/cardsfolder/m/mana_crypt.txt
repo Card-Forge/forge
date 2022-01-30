@@ -6,5 +6,4 @@ SVar:TrigFlip:DB$ FlipACoin | Defined$ You | LoseSubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | Defined$ You | NumDmg$ 3
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_crypt.jpg
 Oracle:At the beginning of your upkeep, flip a coin. If you lose the flip, Mana Crypt deals 3 damage to you.\n{T}: Add {C}{C}.

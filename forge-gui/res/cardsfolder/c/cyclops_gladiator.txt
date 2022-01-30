@@ -7,5 +7,4 @@ SVar:TrigExchangeDamage:DB$ DealDamage | ValidTgts$ Creature.ControlledBy Trigge
 SVar:ReturnDmg:DB$ DealDamage | DamageSource$ Targeted | NumDmg$ TheirX
 SVar:MyX:Count$CardPower
 SVar:TheirX:Targeted$CardPower
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cyclops_gladiator.jpg
 Oracle:Whenever Cyclops Gladiator attacks, you may have it deal damage equal to its power to target creature defending player controls. If you do, that creature deals damage equal to its power to Cyclops Gladiator.

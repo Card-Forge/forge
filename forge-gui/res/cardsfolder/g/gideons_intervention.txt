@@ -6,5 +6,4 @@ SVar:DBNameCard:DB$ NameCard | Defined$ You | SpellDescription$ As CARDNAME ente
 S:Mode$ CantBeCast | ValidCard$ Card.NamedCard+nonLand | Caster$ Opponent | Description$ Your opponents can't cast spells with the chosen name.
 R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ You,Permanent.YouCtrl | ValidSource$ Card.NamedCard | Description$ Prevent all damage that would be dealt to you and permanents you control by sources with the chosen name.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gideons_intervention.jpg
 Oracle:As Gideon's Intervention enters the battlefield, choose a card name.\nYour opponents can't cast spells with the chosen name.\nPrevent all damage that would be dealt to you and permanents you control by sources with the chosen name.

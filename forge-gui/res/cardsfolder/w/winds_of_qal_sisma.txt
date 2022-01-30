@@ -6,5 +6,4 @@ SVar:DBEffect:DB$ Effect | Name$ Winds of Qal Sisma Effect | ReplacementEffects$
 SVar:RPrevent1:Event$ DamageDone | Prevent$ True | IsCombat$ True | ActiveZones$ Command | Description$ Prevent all combat damage that would be dealt this turn.
 SVar:RPrevent2:Event$ DamageDone | Prevent$ True | ValidSource$ Creature.OppCtrl | IsCombat$ True | ActiveZones$ Command | Description$ Prevent all combat damage that would be dealt this turn by creatures your opponents control.
 SVar:X:Count$Valid Creature.YouCtrl+powerGE4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/winds_of_qal_sisma.jpg
 Oracle:Prevent all combat damage that would be dealt this turn.\nFerocious — If you control a creature with power 4 or greater, instead prevent all combat damage that would be dealt this turn by creatures your opponents control.

@@ -4,5 +4,4 @@ Types:Creature Elemental Beast
 PT:2/4
 T:Mode$ Phase | Phase$ EndCombat | TriggerZones$ Battlefield | ValidPlayer$ Player | Execute$ TrigDestroy | TriggerDescription$ At end of combat, destroy all creatures blocking or blocked by CARDNAME.
 SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Creature.blockingSource,Creature.blockedBySource
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_frostbeast.jpg
 Oracle:At end of combat, destroy all creatures blocking or blocked by Kjeldoran Frostbeast.

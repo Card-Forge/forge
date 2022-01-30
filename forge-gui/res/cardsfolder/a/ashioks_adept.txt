@@ -4,5 +4,4 @@ Types:Creature Human Wizard
 PT:1/3
 T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, each opponent discards a card.
 SVar:TrigDiscard:DB$ Discard | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ashioks_adept.jpg
 Oracle:Heroic — Whenever you cast a spell that targets Ashiok's Adept, each opponent discards a card.

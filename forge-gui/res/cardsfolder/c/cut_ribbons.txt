@@ -3,7 +3,6 @@ ManaCost:1 R
 AlternateMode: Split
 Types:Sorcery
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cut_ribbons.jpg
 Oracle:Cut deals 4 damage to target creature.
 
 ALTERNATE

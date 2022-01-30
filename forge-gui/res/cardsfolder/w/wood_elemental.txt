@@ -11,5 +11,4 @@ SVar:SacX:Count$Valid Forest.YouCtrl+untapped
 SVar:NeedsToPlayVar:SacX GE5
 SVar:X:Remembered$Amount
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wood_elemental.jpg
 Oracle:As Wood Elemental enters the battlefield, sacrifice any number of untapped Forests.\nWood Elemental's power and toughness are each equal to the number of Forests sacrificed as it entered the battlefield.

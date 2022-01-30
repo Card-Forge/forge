@@ -3,5 +3,4 @@ ManaCost:R
 Types:Creature Gremlin
 PT:1/1
 A:AB$ Destroy | Cost$ 2 R Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ruinous_gremlin.jpg
 Oracle:{2}{R}, Sacrifice Ruinous Gremlin: Destroy target artifact.

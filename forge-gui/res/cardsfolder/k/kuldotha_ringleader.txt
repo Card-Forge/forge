@@ -4,5 +4,4 @@ Types:Creature Giant Berserker
 PT:4/4
 K:Battle cry
 K:CARDNAME attacks each combat if able.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kuldotha_ringleader.jpg
 Oracle:Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)\nKuldotha Ringleader attacks each combat if able.

@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+1/+1
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddToughness$ 2 | Description$ Creatures you control get +0/+2.
-SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Serra.full.jpg
 Oracle:Hand +1, life +1\nCreatures you control get +0/+2.

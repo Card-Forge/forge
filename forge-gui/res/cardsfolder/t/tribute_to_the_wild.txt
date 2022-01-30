@@ -2,5 +2,4 @@ Name:Tribute to the Wild
 ManaCost:1 G
 Types:Instant
 A:SP$ Sacrifice | Cost$ 1 G | Defined$ Player.Opponent | SacValid$ Artifact,Enchantment | SacMessage$ artifact or enchantment | SpellDescription$ Each opponent sacrifices an artifact or enchantment.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tribute_to_the_wild.jpg
 Oracle:Each opponent sacrifices an artifact or enchantment.

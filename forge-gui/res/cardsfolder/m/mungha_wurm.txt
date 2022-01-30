@@ -3,5 +3,4 @@ ManaCost:2 G G
 Types:Creature Wurm
 PT:6/5
 S:Mode$ Continuous | Affected$ You | AddKeyword$ UntapAdjust:Land:1 | Description$ You can't untap more than one land during your untap step.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mungha_wurm.jpg
 Oracle:You can't untap more than one land during your untap step.

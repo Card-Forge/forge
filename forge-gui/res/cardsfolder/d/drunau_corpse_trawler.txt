@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | LegacyImage$ b 2 2 zombie soi
 A:AB$ Pump | Cost$ 2 B | ValidTgts$ Zombie | TgtPrompt$ Select target Zombie | KW$ Deathtouch | SpellDescription$ Target Zombie gains deathtouch until end of turn.
 DeckHints:Type$Zombie
-SVar:Picture:http://www.wizards.com/global/images/magic/general/drunau_corpse_trawler.jpg
 Oracle:When Drunau Corpse Trawler enters the battlefield, create a 2/2 black Zombie creature token.\n{2}{B}: Target Zombie gains deathtouch until end of turn.

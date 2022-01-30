@@ -5,5 +5,4 @@ PT:1/1
 S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Regen | Description$ All Slivers have "{T}, Regenerate target Sliver."
 SVar:Regen:AB$Regenerate | Cost$ T | ValidTgts$ Sliver | TgtPrompt$ Select a target Sliver. | SpellDescription$ Regenerate a target Sliver.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_sliver.jpg
 Oracle:All Slivers have "{T}: Regenerate target Sliver."

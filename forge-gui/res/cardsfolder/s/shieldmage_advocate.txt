@@ -8,5 +8,4 @@ SVar:DBEffect:DB$ Effect | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ 
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidSource$ Card.ChosenCard | ValidTarget$ Player.IsRemembered,Card.IsRemembered | Description$ Prevent all damage that would be dealt to any target this turn by a source of your choice.
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shieldmage_advocate.jpg
 Oracle:{T}: Return target card from an opponent's graveyard to their hand. Prevent all damage that would be dealt to any target this turn by a source of your choice.

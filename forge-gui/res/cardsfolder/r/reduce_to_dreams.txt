@@ -3,5 +3,4 @@ ManaCost:3 U U
 Types:Sorcery
 A:SP$ ChangeZoneAll | Cost$ 3 U U | ChangeType$ Artifact,Enchantment | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all artifacts and enchantments to their owners' hands.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reduce_to_dreams.jpg
 Oracle:Return all artifacts and enchantments to their owners' hands.

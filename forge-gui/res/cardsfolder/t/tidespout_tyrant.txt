@@ -6,5 +6,4 @@ K:Flying
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ Whenever you cast a spell, return target permanent to its owner's hand.
 SVar:TrigBounce:DB$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand
 SVar:BuffedBy:Card
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tidespout_tyrant.jpg
 Oracle:Flying\nWhenever you cast a spell, return target permanent to its owner's hand.

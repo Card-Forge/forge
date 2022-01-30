@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Intimidate | Description$ Enchanted creature has intimidate.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grisly_transformation.jpg
 Oracle:Enchant creature\nWhen Grisly Transformation enters the battlefield, draw a card.\nEnchanted creature has intimidate. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)

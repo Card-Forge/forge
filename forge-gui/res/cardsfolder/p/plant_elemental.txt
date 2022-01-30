@@ -5,5 +5,4 @@ PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you sacrifice a Forest.
 SVar:TrigSacUnless:DB$ Sacrifice | Defined$ Self | UnlessCost$ Sac<1/Forest> | UnlessPayer$ You
 SVar:NeedsToPlay:Forest.YouCtrl
-SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal/plant_elemental.jpg
 Oracle:When Plant Elemental enters the battlefield, sacrifice it unless you sacrifice a Forest.

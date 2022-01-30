@@ -6,5 +6,4 @@ S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library |
 S:Mode$ Continuous | Affected$ Land.TopLibrary+YouCtrl | AffectedZone$ Library | MayPlay$ True | Description$ You may play lands from the top of your library.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a land enters the battlefield under your control, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/courser_of_kruphix.jpg
 Oracle:Play with the top card of your library revealed.\nYou may play lands from the top of your library.\nWhenever a land enters the battlefield under your control, you gain 1 life.

@@ -4,5 +4,4 @@ Types:Creature Naga Warrior
 PT:3/2
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddKeyword$ Trample | Condition$ Desert | Description$ As long as you control a Desert or there is a Desert card in your graveyard, CARDNAME gets +1/+0 and has trample.
 DeckHints:Type$Desert
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sidewinder_naga.jpg
 Oracle:As long as you control a Desert or there is a Desert card in your graveyard, Sidewinder Naga gets +1/+0 and has trample.

@@ -5,5 +5,4 @@ A:SP$ Draw | Cost$ UB | NumCards$ X | Defined$ You | ValidTgts$ Opponent | Spell
 SVar:X:TargetedPlayer$CardsDiscardedThisTurn
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_salvage.jpg
 Oracle:Draw cards equal to the number of cards target opponent discarded this turn.

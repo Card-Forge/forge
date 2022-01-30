@@ -4,5 +4,4 @@ Types:Creature Human Knight
 PT:2/4
 K:Vigilance
 K:Lifelink
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dawnstrike_paladin.jpg
 Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nLifelink (Damage dealt by this creature also causes you to gain that much life.)

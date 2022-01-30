@@ -10,5 +10,4 @@ SVar:CantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card.IsRemem
 SVar:KWShow:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Hand | Affected$ Card.IsRemembered | MayLookAt$ Player | Description$ Play with rembembered card revealed.
 SVar:ComeBack:Mode$ ChangesZone | Origin$ Hand | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ ExileSelf | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True | TriggerDescription$ None
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
-SVar:Picture:http://www.wizards.com/global/images/magic/general/firestorm_phoenix.jpg
 Oracle:Flying\nIf Firestorm Phoenix would die, return it to its owner's hand instead. Until that player's next turn, that player plays with that card revealed in their hand and can't play it.

@@ -5,5 +5,4 @@ A:SP$ ChooseColor | Cost$ W | Defined$ You | AILogic$ MostProminentAttackers | S
 SVar:DBProtection:DB$ ProtectionAll | ValidCards$ Creature.White+YouCtrl | Gains$ ChosenColor
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brave_the_elements.jpg
 Oracle:Choose a color. White creatures you control gain protection from the chosen color until end of turn.

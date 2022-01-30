@@ -8,5 +8,4 @@ A:AB$ DealDamage | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$
 SVar:DmgAll:DB$ DamageAll | NumDmg$ 6 | ValidCards$ Creature.ControlledBy TargetedOrController | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
 DeckHints:Name$Liberating Combustion
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chandra_pyrogenius.jpg
-Oracle:[+2]: Chandra, Pyrogenius deals 2 damage to each opponent.\n[−3]: Chandra, Pyrogenius deals 4 damage to target creature.\n[−10]: Chandra, Pyrogenius deals 6 damage to target player or planeswalker and each creature that player or that planeswalker's controller controls.
+Oracle:[+2]: Chandra, Pyrogenius deals 2 damage to each opponent.\n[-3]: Chandra, Pyrogenius deals 4 damage to target creature.\n[-10]: Chandra, Pyrogenius deals 6 damage to target player or planeswalker and each creature that player or that planeswalker's controller controls.

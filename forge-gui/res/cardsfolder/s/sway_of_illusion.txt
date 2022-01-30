@@ -6,5 +6,4 @@ SVar:DBSwayAnimate:DB$ Animate | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:MaxTgts:Count$Valid Creature
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sway_of_illusion.jpg
 Oracle:Any number of target creatures become the color of your choice until end of turn.\nDraw a card.

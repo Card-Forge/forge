@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Instant.TopLibrary+YouCtrl,Sorcery.TopLibrary+You
 T:Mode$ SpellCast | ValidCard$ Instant.wasCastFromYourLibrary,Sorcery.wasCastFromYourLibrary | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell from your library, copy it. You may choose new targets for this copy.
 SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
 DeckNeeds:Type$Instant|Sorcery
-SVar:Picture:http://www.wizards.com/global/images/magic/general/melek_izzet_paragon.jpg
 Oracle:Play with the top card of your library revealed.\nYou may cast instant and sorcery spells from the top of your library.\nWhenever you cast an instant or sorcery spell from your library, copy it. You may choose new targets for the copy.

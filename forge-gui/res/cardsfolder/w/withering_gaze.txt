@@ -5,5 +5,4 @@ A:SP$ RevealHand | Cost$ 2 U | ValidTgts$ Opponent | TgtPrompt$ Select target op
 SVar:DBDraw:DB$ Draw | NumCards$ X
 SVar:X:Count$ValidHand Forest.TargetedPlayerCtrl,Card.Green+TargetedPlayerCtrl
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/withering_gaze.jpg
 Oracle:Target opponent reveals their hand. You draw a card for each Forest and green card in it.

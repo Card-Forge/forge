@@ -9,5 +9,4 @@ SVar:ReturnAll:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | Ch
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random
 SVar:IsReanimatorCard:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/living_end.jpg
 Oracle:Suspend 3—{2}{B}{B}\nEach player exiles all creature cards from their graveyard, then sacrifices all creatures they control, then puts all cards they exiled this way onto the battlefield.

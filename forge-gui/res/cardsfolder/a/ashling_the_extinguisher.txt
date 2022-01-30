@@ -5,5 +5,4 @@ PT:4/4
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDestroy | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, choose target creature that player controls. The player sacrifices that creature.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | Sacrifice$ True | TgtPrompt$ Select target creature defending player controls
 SVar:MustBeBlocked:True
-SVar:Picture:http://serv3.tcgimages.eu/img/cards/Eventide/ashling_the_extinguisher.jpg
 Oracle:Whenever Ashling, the Extinguisher deals combat damage to a player, choose target creature that player controls. The player sacrifices that creature.

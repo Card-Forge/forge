@@ -3,7 +3,6 @@ ManaCost:B
 AlternateMode: Split
 Types:Instant
 A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/night_day.jpg
 Oracle:Target creature gets -1/-1 until end of turn.
 
 ALTERNATE

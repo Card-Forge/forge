@@ -3,5 +3,4 @@ ManaCost:4 U U
 Types:Creature Serpent
 PT:6/6
 S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Description$ CARDNAME can't attack unless defending player controls an Island.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_monster.jpg
 Oracle:Sea Monster can't attack unless defending player controls an Island.

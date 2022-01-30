@@ -3,5 +3,4 @@ ManaCost:1 G
 Types:Creature Faerie
 PT:1/2
 K:Flying
-SVar:Picture:http://resources.wizards.com/magic/cards/hm/en-us/card2982.jpg
 Oracle:Flying

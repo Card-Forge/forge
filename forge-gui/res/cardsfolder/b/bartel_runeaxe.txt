@@ -4,5 +4,4 @@ Types:Legendary Creature Giant Warrior
 PT:6/5
 K:Vigilance
 S:Mode$ CantTarget | ValidCard$ Card.Self | ValidSource$ Aura | ValidSA$ Spell | Description$ CARDNAME can't be the target of Aura spells.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bartel_runeaxe.jpg
 Oracle:Vigilance\nBartel Runeaxe can't be the target of Aura spells.

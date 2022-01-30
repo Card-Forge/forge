@@ -5,5 +5,4 @@ S:Mode$ Continuous | Affected$ Enchantment.nonAura+Other | SetPower$ AffectedX |
 SVar:AffectedX:Count$CardManaCost
 SVar:PlayMain1:ALWAYS
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/opalescence.jpg
 Oracle:Each other non-Aura enchantment is a creature in addition to its other types and has base power and base toughness each equal to its mana value.

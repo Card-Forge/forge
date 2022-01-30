@@ -4,5 +4,4 @@ Types:Creature Jackal
 PT:1/1
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't be regenerated. | IsCurse$ True | SpellDescription$ Target creature can't be regenerated this turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hurr_jackal.jpg
 Oracle:{T}: Target creature can't be regenerated this turn.

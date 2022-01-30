@@ -5,5 +5,4 @@ A:SP$ Pump | Cost$ 3 G | ValidTgts$ Creature.nonToken | TgtPrompt$ Select target
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Targeted.Permanent+sameName | ChangeNum$ 1 | StackDescription$ Search your library for a permanent card with the same name as target nontoken creature, put that card onto the battlefield, then shuffle.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bifurcate.jpg
 Oracle:Search your library for a permanent card with the same name as target nontoken creature, put that card onto the battlefield, then shuffle.

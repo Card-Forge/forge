@@ -4,6 +4,5 @@ Types:Sorcery
 A:SP$ RepeatEach | Cost$ 2 U | RepeatPlayers$ Player | RepeatSubAbility$ DBRepeatCreature | SpellDescription$ For each creature, its controller sacrifices a permanent unless they pay {1}.
 SVar:DBRepeatCreature:DB$ RepeatEach | RepeatCards$ Creature.RememberedPlayerCtrl | Zone$ Battlefield | TargetControls$ True | RepeatSubAbility$ DBSac
 SVar:DBSac:DB$ Sacrifice | Defined$ Player.IsRemembered | SacValid$ Permanent | SacMessage$ permanent | UnlessCost$ 1 | UnlessPayer$ Player.IsRemembered
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fade_away.jpg
 AI:RemoveDeck:All
 Oracle:For each creature, its controller sacrifices a permanent unless they pay {1}.

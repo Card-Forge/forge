@@ -9,5 +9,4 @@ S:Mode$ Continuous | Affected$ Creature.Saproling+YouCtrl | AddPower$ 2 | AddTou
 SVar:PlayMain1:TRUE
 DeckHints:Type$Fungus
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tendershoot_dryad.jpg
 Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nAt the beginning of each upkeep, create a 1/1 green Saproling creature token.\nSaprolings you control get +2/+2 as long as you have the city's blessing.

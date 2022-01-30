@@ -4,5 +4,4 @@ Types:Creature Human Cleric
 PT:1/1
 A:AB$ PreventDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to any target this turn.
 SVar:NonCombatPriority:10
-SVar:Picture:http://www.wizards.com/global/images/magic/general/femeref_healer.jpg
 Oracle:{T}: Prevent the next 1 damage that would be dealt to any target this turn.

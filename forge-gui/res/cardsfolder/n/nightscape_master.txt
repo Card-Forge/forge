@@ -6,5 +6,4 @@ A:AB$ ChangeZone | Cost$ U U T | ValidTgts$ Creature | TgtPrompt$ Select target 
 A:AB$ DealDamage | Cost$ R R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature.
 AI:RemoveDeck:Random
 DeckNeeds:Color$Red|Blue
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nightscape_master.jpg
 Oracle:{U}{U}, {T}: Return target creature to its owner's hand.\n{R}{R}, {T}: Nightscape Master deals 2 damage to target creature.

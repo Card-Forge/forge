@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigCharm:DB$ Charm | Choices$ DBUntap,DBTap
 SVar:DBUntap:DB$ Untap | TgtPrompt$ Choose target permanent you control | ValidTgts$ Permanent.YouCtrl | SpellDescription$ Untap target permanent you control.
 SVar:DBTap:DB$ Tap | TgtPrompt$ Choose target permanent an opponent controls | ValidTgts$ Permanent.OppCtrl | SpellDescription$ Tap target permanent an opponent controls.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deceiver_exarch.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Deceiver Exarch enters the battlefield, choose one —\n• Untap target permanent you control.\n• Tap target permanent an opponent controls.

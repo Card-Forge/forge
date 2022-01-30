@@ -4,5 +4,4 @@ Types:Creature Beast Horror
 PT:2/3
 T:Mode$ Explores | Execute$ TrigDebuff | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control explores, target creature an opponent controls gets -2/-2 until end of turn.
 SVar:TrigDebuff:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lurking_chupacabra.jpg
 Oracle:Whenever a creature you control explores, target creature an opponent controls gets -2/-2 until end of turn.

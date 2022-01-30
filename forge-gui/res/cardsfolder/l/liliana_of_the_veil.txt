@@ -7,5 +7,4 @@ A:AB$ Sacrifice | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Player | SacValid$ Cr
 A:AB$ TwoPiles | Cost$ SubCounter<6/LOYALTY> | ValidTgts$ Player | TgtPrompt$ Select target player | Separator$ You | ChosenPile$ DBSacAll | ValidCards$ Permanent | Zone$ Battlefield | Planeswalker$ True | Ultimate$ True | AILogic$ Worst | SpellDescription$ Separate all permanents target player controls into two piles. That player sacrifices all permanents in the pile of their choice.
 SVar:DBSacAll:DB$ SacrificeAll | ValidCards$ Permanent.IsRemembered | SubAbility$ Cleanup
 SVar:Cleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/liliana_of_the_veil.jpg
-Oracle:[+1]: Each player discards a card.\n[−2]: Target player sacrifices a creature.\n[−6]: Separate all permanents target player controls into two piles. That player sacrifices all permanents in the pile of their choice.
+Oracle:[+1]: Each player discards a card.\n[-2]: Target player sacrifices a creature.\n[-6]: Separate all permanents target player controls into two piles. That player sacrifices all permanents in the pile of their choice.

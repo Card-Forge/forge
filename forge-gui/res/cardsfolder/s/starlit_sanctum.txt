@@ -7,5 +7,4 @@ SVar:X:Sacrificed$CardToughness
 A:AB$ LoseLife | Cost$ B T Sac<1/Creature.Cleric/Cleric creature> | ValidTgts$ Player | LifeAmount$ Y | TgtPrompt$ Select a player | SpellDescription$ Target player loses life equal to the sacrificed creature's power.
 SVar:Y:Sacrificed$CardPower
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/starlit_sanctum.jpg
 Oracle:{T}: Add {C}.\n{W}, {T}, Sacrifice a Cleric creature: You gain life equal to the sacrificed creature's toughness.\n{B}, {T}, Sacrifice a Cleric creature: Target player loses life equal to the sacrificed creature's power.

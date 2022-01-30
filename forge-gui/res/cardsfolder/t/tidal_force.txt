@@ -4,5 +4,4 @@ Types:Creature Elemental
 PT:7/7
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigTapOrUntap | TriggerDescription$ At the beginning of each upkeep, you may tap or untap target permanent.
 SVar:TrigTapOrUntap:DB$ TapOrUntap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tidal_force.jpg
 Oracle:At the beginning of each upkeep, you may tap or untap target permanent.

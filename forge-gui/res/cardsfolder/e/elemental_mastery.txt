@@ -8,5 +8,4 @@ SVar:Token:AB$ Token | Cost$ T | TokenAmount$ ElementalMasteryCount | TokenScrip
 SVar:ElementalMasteryCount:Count$CardPower
 SVar:NonStackingAttachEffect:True
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elemental_mastery.jpg
 Oracle:Enchant creature\nEnchanted creature has "{T}: Create X 1/1 red Elemental creature tokens with haste, where X is this creature's power. Exile them at the beginning of the next end step."

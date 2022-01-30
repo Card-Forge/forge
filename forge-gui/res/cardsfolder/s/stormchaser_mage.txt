@@ -5,5 +5,4 @@ PT:1/3
 K:Flying
 K:Haste
 K:Prowess
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stormchaser_mage.jpg
 Oracle:Flying, haste\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)

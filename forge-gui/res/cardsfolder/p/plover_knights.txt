@@ -4,5 +4,4 @@ Types:Creature Kithkin Knight
 PT:3/3
 K:Flying
 K:First Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/plover_knights.jpg
 Oracle:Flying, first strike

@@ -11,7 +11,7 @@ SVar:X:Count$Valid Spirit.YouCtrl,Enchantment.YouCtrl
 SVar:NeedsToPlayVar:X GE2
 SVar:BuffedBy:Enchantment,Spirit
 DeckHints:Type$Spirit|Enchantment
-DeckHas:Ability$LifeGain & Ability$Graveyard
+DeckHas:Ability$LifeGain|Graveyard
 AlternateMode:DoubleFaced
 Oracle:Flying, lifelink, protection from Vampires\nKatilda, Dawnhart Martyr's power and toughness are each equal to the number of permanents you control that are Spirits and/or enchantments.\nDisturb {3}{W}{W} (You may cast this card from your graveyard transformed for its disturb cost.)
 
@@ -28,5 +28,4 @@ SVar:X:Count$Valid Spirit.YouCtrl,Enchantment.YouCtrl
 SVar:BuffedBy:Enchantment,Spirit
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
 SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
-DeckHas:Ability$LifeGain
 Oracle:Enchant creature\nEnchanted creature has flying, lifelink, and protection from Vampires, and it gets +X/+X, where X is the number of permanents you control that are Spirits and/or enchantments.\nIf Katilda's Rising Dawn would be put into a graveyard from anywhere, exile it instead.

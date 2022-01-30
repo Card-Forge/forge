@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Sorcery
 A:SP$ PumpAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl | NumDef$ +3 | SpellDescription$ Creatures you control get +0/+3 until end of turn.
 AI:RemoveDeck:All
-SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/steadfastness.jpg
 Oracle:Creatures you control get +0/+3 until end of turn.

@@ -11,5 +11,4 @@ SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
 SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$ValidHand Permanent.nonLand+YouOwn
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/semblance_anvil.jpg
 Oracle:Imprint — When Semblance Anvil enters the battlefield, you may exile a nonland card from your hand.\nSpells you cast that share a card type with the exiled card cost {2} less to cast.

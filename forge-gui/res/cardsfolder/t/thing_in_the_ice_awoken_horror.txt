@@ -10,7 +10,6 @@ SVar:DBTransform:DB$ SetState | Defined$ Self | ConditionPresent$ Card.Self+coun
 DeckHints:Type$Horror
 DeckNeeds:Type$Instant|Sorcery
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thing_in_the_ice.jpg
 AlternateMode:DoubleFaced
 Oracle:Defender\nThing in the Ice enters the battlefield with four ice counters on it.\nWhenever you cast an instant or sorcery spell, remove an ice counter from Thing in the Ice. Then if it has no ice counters on it, transform it.
 
@@ -23,5 +22,4 @@ Types:Creature Kraken Horror
 PT:7/8
 T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ Whenever this creature transforms into CARDNAME, return all non-Horror creatures to their owner's hands.
 SVar:TrigChange:DB$ ChangeZoneAll | ChangeType$ Creature.nonHorror | Origin$ Battlefield | Destination$ Hand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/awoken_horror.jpg
 Oracle:When this creature transforms into Awoken Horror, return all non-Horror creatures to their owners' hands.

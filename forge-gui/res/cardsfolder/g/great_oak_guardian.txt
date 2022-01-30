@@ -7,5 +7,4 @@ K:Reach
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When Great Oak Guardian enters the battlefield, creatures target player controls get +2/+2 until end of turn. Untap them.
 SVar:TrigPumpAll:DB$ PumpAll | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBUntapAll
 SVar:DBUntapAll:DB$ UntapAll | Defined$ Targeted | ValidCards$ Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/great_oak_guardian.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nReach\nWhen Great Oak Guardian enters the battlefield, creatures target player controls get +2/+2 until end of turn. Untap them.

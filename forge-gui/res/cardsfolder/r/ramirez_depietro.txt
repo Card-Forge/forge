@@ -3,5 +3,4 @@ ManaCost:3 U B B
 Types:Legendary Creature Human Pirate
 PT:4/3
 K:First Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ramirez_depietro.jpg
 Oracle:First strike

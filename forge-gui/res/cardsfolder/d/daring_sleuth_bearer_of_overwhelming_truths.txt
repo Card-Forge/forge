@@ -5,7 +5,7 @@ PT:2/1
 T:Mode$ Sacrificed | ValidCard$ Clue.YouCtrl | Execute$ TrigTransform | TriggerZones$ Battlefield | TriggerDescription$ When you sacrifice a Clue, transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 DeckNeeds:Ability$Investigate
-DeckHas:Ability$Investigate & Ability$Token
+DeckHas:Ability$Investigate|Token
 AlternateMode:DoubleFaced
 Oracle:When you sacrifice a Clue, transform Daring Sleuth.
 

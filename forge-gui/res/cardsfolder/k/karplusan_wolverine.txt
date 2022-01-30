@@ -5,5 +5,4 @@ PT:1/1
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME becomes blocked, you may have it deal 1 damage to any target.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
 SVar:HasAttackEffect:Blocked
-SVar:Picture:http://www.wizards.com/global/images/magic/general/karplusan_wolverine.jpg
 Oracle:Whenever Karplusan Wolverine becomes blocked, you may have it deal 1 damage to any target.
