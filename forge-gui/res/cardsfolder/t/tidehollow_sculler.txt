@@ -2,8 +2,8 @@ Name:Tidehollow Sculler
 ManaCost:W B
 Types:Artifact Creature Zombie
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals their hand and you choose a nonland card from it. Exile that card. When CARDNAME leaves the battlefield, return the exiled card to its owner's hand.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigBounce | Secondary$ True | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals their hand and you choose a nonland card from it. Exile that card. When CARDNAME leaves the battlefield, return the exiled card to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals their hand and you choose a nonland card from it. Exile that card.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigBounce | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled card to its owner's hand.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Chooser$ You | TgtPrompt$ Select target opponent | ChangeType$ Card.nonLand | ChangeNum$ 1 | IsCurse$ True | RememberChanged$ True | ForgetOtherRemembered$ True
 SVar:TrigBounce:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
