@@ -4,7 +4,7 @@ Types:Legendary Planeswalker Domri
 Loyalty:3
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | Description$ Creatures you control get +1/+0.
 SVar:PlayMain1:TRUE
-A:AB$ Mana | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Produced$ Combo R G | Amount$ 1 | AILogic$ Always | SubAbility$ DBEffect | SpellDescription$ Add {R} or {G}. Creature spells you cast this turn can't be countered.
+A:AB$ Mana | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Produced$ Combo R G | Amount$ 1 | AILogic$ Always | SubAbility$ DBEffect | SpellDescription$ Add {R} or {G}.
 SVar:DBEffect:DB$ Effect | Name$ Domri, Anarch of Bolas Effect | StaticAbilities$ AntiMagic | SpellDescription$ Creature spells you cast this turn can't be countered
 SVar:AntiMagic:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Stack | EffectZone$ Command | AddHiddenKeyword$ CARDNAME can't be countered.
 A:AB$ Pump | Planeswalker$ True | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | AILogic$ Fight | SpellDescription$ Target creature you control fights target creature you don't control. | SubAbility$ DBFight

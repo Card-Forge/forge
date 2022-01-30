@@ -19,7 +19,7 @@ public class MillEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
-        final int numCards = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
+        final int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
         final boolean bottom = sa.hasParam("FromBottom");
         final boolean facedown = sa.hasParam("ExileFaceDown");
         final boolean reveal = !sa.hasParam("NoReveal");
@@ -84,7 +84,7 @@ public class MillEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final int numCards = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
+        final int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
 
         sb.append(Lang.joinHomogenous(getTargetPlayers(sa))).append(" ");
 
