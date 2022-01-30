@@ -79,7 +79,7 @@
 {
 	"name": "Vampire",
 	"sprite": "sprites/vampire.atlas",
-	"deck": "decks/Vampire.dck",
+	"deck": "decks/vampire.dck",
 	"spawnRate": 0.1,
 	"difficulty": 0.1,
 	"speed": 30,
@@ -252,7 +252,7 @@
 },
 {
 	"name": "Goblin Warrior",
-	"sprite": "sprites/wolf_Rider.atlas",
+	"sprite": "sprites/wolf_rider.atlas",
 	"deck": "decks/goblin_mid.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
@@ -286,7 +286,7 @@
 },
 {
 	"name": "Goblin Chief",
-	"sprite": "sprites/wolf_Rider_2.atlas",
+	"sprite": "sprites/wolf_rider_2.atlas",
 	"deck": "decks/goblin_good.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
@@ -912,7 +912,7 @@
 {
 	"name": "Djinn",
 	"sprite": "sprites/djinn.atlas",
-	"deck": "decks/Djinn.json",
+	"deck": "decks/djinn.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
 	"speed": 30,
