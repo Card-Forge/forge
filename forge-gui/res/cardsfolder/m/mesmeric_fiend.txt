@@ -2,10 +2,9 @@ Name:Mesmeric Fiend
 ManaCost:1 B
 Types:Creature Nightmare Horror
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMesmericExile | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals their hand and you choose a nonland card from it. Exile that card. When CARDNAME leaves the battlefield, return the exiled card to its owner's hand.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigMesmericBounce | Secondary$ True | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals their hand and you choose a nonland card from it. Exile that card. When CARDNAME leaves the battlefield, return the exiled card to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMesmericExile | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals their hand and you choose a nonland card from it. Exile that card.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigMesmericBounce | Secondary$ True | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled card to its owner's hand.
 SVar:TrigMesmericExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Chooser$ You | TgtPrompt$ Select target opponent | ChangeType$ Card.nonLand | ChangeNum$ 1 | IsCurse$ True | RememberChanged$ True
 SVar:TrigMesmericBounce:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ Remembered | SubAbility$ DBMesmericCleanup
 SVar:DBMesmericCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mesmeric_fiend.jpg
 Oracle:When Mesmeric Fiend enters the battlefield, target opponent reveals their hand and you choose a nonland card from it. Exile that card.\nWhen Mesmeric Fiend leaves the battlefield, return the exiled card to its owner's hand.
