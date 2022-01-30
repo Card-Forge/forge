@@ -9,5 +9,4 @@ SVar:AffectedX:Count$CardManaCost
 SVar:NonStackingEffect:True
 SVar:PlayMain1:ALWAYS
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/titanias_song.jpg
 Oracle:Each noncreature artifact loses all abilities and becomes an artifact creature with power and toughness each equal to its mana value. If Titania's Song leaves the battlefield, this effect continues until end of turn.

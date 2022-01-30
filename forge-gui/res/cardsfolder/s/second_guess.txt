@@ -2,5 +2,4 @@ Name:Second Guess
 ManaCost:1 U
 Types:Instant
 A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select second spell cast this turn. | ValidTgts$ Spell.SecondSpellCastThisTurn | SpellDescription$ Counter target spell that's the second spell cast this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/second_guess.jpg
 Oracle:Counter target spell that's the second spell cast this turn.

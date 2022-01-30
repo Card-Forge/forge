@@ -7,5 +7,4 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 1 | LegacyImage$ c 1 1 sliver lgn | Toke
 SVar:PlayMain1:TRUE
 DeckHints:Type$Sliver
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brood_sliver.jpg
 Oracle:Whenever a Sliver deals combat damage to a player, its controller may create a 1/1 colorless Sliver creature token.

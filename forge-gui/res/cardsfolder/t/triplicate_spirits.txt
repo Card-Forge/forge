@@ -4,5 +4,4 @@ Types:Sorcery
 K:Convoke
 A:SP$ Token | Cost$ 4 W W | TokenAmount$ 3 | LegacyImage$ w 1 1 spirit flying m15 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | SpellDescription$ Create three 1/1 white Spirit creature tokens with flying.
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/triplicate_spirits.jpg
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nCreate three 1/1 white Spirit creature tokens with flying. (They can't be blocked except by creatures with flying or reach.)

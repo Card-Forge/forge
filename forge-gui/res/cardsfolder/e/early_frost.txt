@@ -3,5 +3,4 @@ ManaCost:1 U
 Types:Instant
 A:SP$ Tap | Cost$ 1 U | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Choose target land | ValidTgts$ Land | SpellDescription$ Tap up to three target lands.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/early_frost.jpg
 Oracle:Tap up to three target lands.

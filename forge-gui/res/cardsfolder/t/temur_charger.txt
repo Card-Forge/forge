@@ -5,5 +5,4 @@ PT:3/1
 K:Morph:Reveal<1/Card.Green/green>
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, target creature gains trample until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Trample
-SVar:Picture:http://www.wizards.com/global/images/magic/general/temur_charger.jpg
 Oracle:Morph—Reveal a green card in your hand. (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Temur Charger is turned face up, target creature gains trample until end of turn.

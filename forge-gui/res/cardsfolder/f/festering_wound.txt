@@ -8,5 +8,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ INFECTION | CounterNum$ 1
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ X
 SVar:X:Count$CardCounters.INFECTION
-SVar:Picture:http://www.wizards.com/global/images/magic/general/festering_wound.jpg
 Oracle:Enchant creature\nAt the beginning of your upkeep, you may put an infection counter on Festering Wound.\nAt the beginning of the upkeep of enchanted creature's controller, Festering Wound deals X damage to that player, where X is the number of infection counters on Festering Wound.

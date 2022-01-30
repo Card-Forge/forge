@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Descr
 SVar:X:Count$Valid Land.YouCtrl+namedWastes
 DeckNeeds:Ability$Mana.Colorless
 DeckHints:Name$Wastes
-SVar:Picture:http://www.wizards.com/global/images/magic/general/walker_of_the_wastes.jpg
 Oracle:({C} represents colorless mana.)\nTrample\nWalker of the Wastes gets +1/+1 for each land you control named Wastes.

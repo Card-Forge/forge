@@ -5,7 +5,6 @@ Types:Sorcery
 K:Fuse
 A:SP$ Token | Cost$ 3 G | TokenAmount$ 1 | TokenScript$ g_3_3_centaur | TokenOwner$ You | LegacyImage$ g 3 3 centaur dgm | SpellDescription$ Create a 3/3 green Centaur creature token.
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/alive_well.jpg
 Oracle:Create a 3/3 green Centaur creature token.\nFuse (You may cast one or both halves of this card from your hand.)
 
 ALTERNATE

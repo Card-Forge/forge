@@ -7,5 +7,4 @@ T:Mode$ Phase | Phase$ Main2 | ValidPlayer$ You | TriggerZones$ Battlefield | Ex
 SVar:TrigMana:DB$ Mana | Produced$ R | Amount$ X
 SVar:X:Count$LifeOppsLostThisTurn
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/neheb_the_eternal.jpg
 Oracle:Afflict 3 (Whenever this creature becomes blocked, defending player loses 3 life.)\nAt the beginning of your postcombat main phase, add {R} for each 1 life your opponents have lost this turn.

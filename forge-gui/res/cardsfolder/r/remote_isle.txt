@@ -4,5 +4,4 @@ Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 K:Cycling:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/remote_isle.jpg
 Oracle:Remote Isle enters the battlefield tapped.\n{T}: Add {U}.\nCycling {2} ({2}, Discard this card: Draw a card.)

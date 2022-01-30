@@ -5,5 +5,4 @@ S:Mode$ Continuous | Affected$ Creature | AddTrigger$ TabernacleTrig | AddSVar$ 
 SVar:TabernacleTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TabernacleDestroy | TriggerDescription$ At the beginning of your upkeep, destroy CARDNAME unless you pay {1}.
 SVar:TabernacleDestroy:DB$ Destroy | Defined$ Self | UnlessPayer$ You | UnlessCost$ 1
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/the_tabernacle_at_pendrell_vale.jpg
 Oracle:All creatures have "At the beginning of your upkeep, destroy this creature unless you pay {1}."

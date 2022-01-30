@@ -4,5 +4,4 @@ Types:Creature Elf Assassin
 PT:1/1
 A:AB$ Pump | Cost$ T Discard<1/Card.Elf/Elf> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -X/-X until end of turn, where X is the number of Elves you control.
 SVar:X:Count$Valid Elf.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lys_alana_scarblade.jpg
 Oracle:{T}, Discard an Elf card: Target creature gets -X/-X until end of turn, where X is the number of Elves you control.

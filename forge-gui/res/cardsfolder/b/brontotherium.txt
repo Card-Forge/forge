@@ -4,5 +4,4 @@ Types:Creature Beast
 PT:5/3
 K:Trample
 K:Provoke
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brontotherium.jpg
 Oracle:Trample\nProvoke (Whenever this creature attacks, you may have target creature defending player controls untap and block it if able.)

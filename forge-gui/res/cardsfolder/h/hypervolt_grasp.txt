@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Damage | Descr
 A:AB$ ChangeZone | Cost$ 1 U | Defined$ Self | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:Damage:AB$DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hypervolt_grasp.jpg
 Oracle:Enchant creature\nEnchanted creature has "{T}: This creature deals 1 damage to any target."\n{1}{U}: Return Hypervolt Grasp to its owner's hand.

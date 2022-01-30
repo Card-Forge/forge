@@ -5,5 +5,4 @@ S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ CostReduction 
 A:SP$ Counter | Cost$ 7 | TargetType$ Spell,Activated,Triggered | TgtPrompt$ Select target spell or ability that targets a permanent you control | ValidTgts$ Card | TargetValidTargeting$ Permanent.YouCtrl+inZoneBattlefield | SpellDescription$ Counter target spell or ability that targets a permanent you control.
 SVar:CostReduction:Count$Compare CheckTgt GE1.7.0
 SVar:CheckTgt:TargetedByTarget$Valid Card.powerGE7+YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/not_of_this_world.jpg
 Oracle:Counter target spell or ability that targets a permanent you control.\nThis spell costs {7} less to cast if it targets a spell or ability that targets a creature you control with power 7 or greater.

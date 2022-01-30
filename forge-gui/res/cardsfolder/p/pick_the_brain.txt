@@ -9,6 +9,6 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NumInHand:TargetedPlayer$CardsInHand
 SVar:NumInLib:TargetedPlayer$CardsInLibrary
 SVar:NumInYard:TargetedPlayer$CardsInGraveyard
-DeckHints:Ability$Graveyard & Ability$Discard
+DeckHints:Ability$Graveyard|Discard
 DeckHas:Ability$Delirium
 Oracle:Target opponent reveals their hand. You choose a nonland card from it and exile that card.\nDelirium — If there are four or more card types among cards in your graveyard, search that player's graveyard, hand, and library for any number of cards with the same name as the exiled card, exile those cards, then that player shuffles.

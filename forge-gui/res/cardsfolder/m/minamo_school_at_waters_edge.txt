@@ -4,5 +4,4 @@ Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 A:AB$ Untap | Cost$ U T | ValidTgts$ Permanent.Legendary | TgtPrompt$ Select target legendary permanent | SpellDescription$ Untap target legendary permanent.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/minamo_school_at_waters_edge.jpg
 Oracle:{T}: Add {U}.\n{U}, {T}: Untap target legendary permanent.

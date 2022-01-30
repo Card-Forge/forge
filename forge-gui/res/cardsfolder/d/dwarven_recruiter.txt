@@ -7,5 +7,4 @@ SVar:TrigChangeZone:DB$ ChangeZone | ChangeNum$ X | ChangeType$ Dwarf | Origin$ 
 SVar:X:Count$InYourLibrary.Dwarf
 AI:RemoveDeck:All
 DeckNeeds:Type$Dwarf
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_recruiter.jpg
 Oracle:When Dwarven Recruiter enters the battlefield, search your library for any number of Dwarf cards, reveal them, then shuffle and put those cards on top in any order.

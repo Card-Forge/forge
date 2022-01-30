@@ -4,6 +4,5 @@ Types:Plane Zendikar
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.powerGE7 | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Creatures with power 7 or greater can't attack or block.
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, create a 7/7 colorless Eldrazi creature token with annihilator 1. (Whenever it attacks, defending player sacrifices a permanent.)
 SVar:RolledChaos:DB$ Token | TokenAmount$ 1 | TokenScript$ c_7_7_eldrazi_annihilator | TokenOwner$ You | LegacyImage$ c 7 7 eldrazi annihilator pc2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hedron_fields_of_agadeem.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | MaxRollsPerTurn$ 9
 Oracle:Creatures with power 7 or greater can't attack or block.\nWhenever you roll {CHAOS}, create a 7/7 colorless Eldrazi creature token with annihilator 1. (Whenever it attacks, defending player sacrifices a permanent.)

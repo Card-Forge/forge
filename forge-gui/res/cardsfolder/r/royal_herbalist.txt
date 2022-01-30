@@ -3,5 +3,4 @@ ManaCost:W
 Types:Creature Human Cleric
 PT:1/1
 A:AB$ GainLife | Cost$ 2 ExileFromTop<1/Card> | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/royal_herbalist.jpg
 Oracle:{2}, Exile the top card of your library: You gain 1 life.

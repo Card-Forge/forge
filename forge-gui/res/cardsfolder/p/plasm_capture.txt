@@ -6,5 +6,4 @@ SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | PreCombatMain$ True | ValidPla
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:AddMana:DB$ Mana | Produced$ Combo Any | Amount$ X | AILogic$ MostProminentInComputerHand
 SVar:X:Count$TriggerRememberAmount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/plasm_capture.jpg
 Oracle:Counter target spell. At the beginning of your next precombat main phase, add X mana in any combination of colors, where X is that spell's mana value.

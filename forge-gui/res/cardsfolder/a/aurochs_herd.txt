@@ -8,5 +8,4 @@ SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeTyp
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X
 SVar:X:Count$Valid Aurochs.attacking+Other
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aurochs_herd.jpg
 Oracle:Trample\nWhen Aurochs Herd enters the battlefield, you may search your library for an Aurochs card, reveal it, put it into your hand, then shuffle.\nWhenever Aurochs Herd attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.

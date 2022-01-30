@@ -5,5 +5,4 @@ PT:4/4
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ Whenever CARDNAME attacks, add {R}{R}{R}{G}{G}{G}. Until end of turn, you don't lose this mana as steps and phases end.
 SVar:TrigMana:DB$ Mana | Produced$ R R R G G G | PersistentMana$ True | SpellDescription$ Add {R}{R}{R}{G}{G}{G}. Until end of turn, you don't lose this mana as steps and phases end.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_ventmaw.jpg
 Oracle:Flying\nWhenever Savage Ventmaw attacks, add {R}{R}{R}{G}{G}{G}. Until end of turn, you don't lose this mana as steps and phases end.

@@ -7,5 +7,4 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$Valid Permanent.White+YouCtrl
 SVar:BuffedBy:Permanent.White
 SVar:NoZeroToughnessAI:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kithkin_rabble.jpg
 Oracle:Vigilance\nKithkin Rabble's power and toughness are each equal to the number of white permanents you control.

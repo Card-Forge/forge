@@ -7,5 +7,4 @@ SVar:DBSacCreature:DB$ Sacrifice | Amount$ X | SacValid$ Creature | Defined$ Pla
 SVar:DBSacLand:DB$ Sacrifice | Amount$ X | SacValid$ Land | Defined$ Player
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/death_cloud.jpg
 Oracle:Each player loses X life, discards X cards, sacrifices X creatures, then sacrifices X lands.

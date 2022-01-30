@@ -6,5 +6,5 @@ A:SP$ Destroy | Cost$ 3 B | ValidTgts$ Creature | SubAbility$ DBSurveil | TgtPro
 SVar:CostReduction:Count$Compare CheckTgt GE1.2.0
 SVar:CheckTgt:Targeted$Valid Creature.Legendary
 SVar:DBSurveil:DB$ Surveil | Amount$ 2
-DeckHas:Ability$Surveil & Ability$Graveyard
+DeckHas:Ability$Surveil|Graveyard
 Oracle:This spell costs {2} less to cast if it targets a legendary creature.\nDestroy target creature.\nSurveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)

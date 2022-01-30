@@ -3,5 +3,4 @@ ManaCost:1 B B
 Types:Instant
 A:SP$ DealDamage | Cost$ 1 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 3 damage to target creature and you gain 3 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
-SVar:Picture:http://resources.wizards.com/magic/cards/general/essence_extraction.jpg
 Oracle:Essence Extraction deals 3 damage to target creature and you gain 3 life.

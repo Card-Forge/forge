@@ -8,5 +8,4 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:BuffedBy:Creature
 SVar:NoZeroToughnessAI:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/seraph_of_the_masses.jpg
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nFlying\nSeraph of the Masses's power and toughness are each equal to the number of creatures you control.

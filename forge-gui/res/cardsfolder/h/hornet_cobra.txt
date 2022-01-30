@@ -3,5 +3,4 @@ ManaCost:1 G G
 Types:Creature Snake
 PT:2/1
 K:First Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hornet_cobra.jpg
 Oracle:First strike

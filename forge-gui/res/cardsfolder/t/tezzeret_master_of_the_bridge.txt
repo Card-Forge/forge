@@ -12,4 +12,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Artifact.YouCtrl
 DeckHints:Type$Artifact
 DeckHas:Ability$LifeGain
-Oracle:Creature and planeswalker spells you cast have affinity for artifacts. (They cost {1} less to cast for each artifact you control.)\n[+2]: Tezzeret, Master of the Bridge deals X damage to each opponent, where X is the number of artifacts you control. You gain X life.\n[−3]: Return target artifact card from your graveyard to your hand.\n[−8]: Exile the top ten cards of your library. Put all artifact cards from among them onto the battlefield.
+Oracle:Creature and planeswalker spells you cast have affinity for artifacts. (They cost {1} less to cast for each artifact you control.)\n[+2]: Tezzeret, Master of the Bridge deals X damage to each opponent, where X is the number of artifacts you control. You gain X life.\n[-3]: Return target artifact card from your graveyard to your hand.\n[-8]: Exile the top ten cards of your library. Put all artifact cards from among them onto the battlefield.

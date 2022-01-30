@@ -10,5 +10,4 @@ SVar:DBReset:DB$ StoreSVar | SVar$ Y | Type$ Number | Expression$ 0
 SVar:Y:Number$0
 SVar:X:Count$xPaid
 SVar:Z:SVar$X/Times.Y
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tempt_with_vengeance.jpg
 Oracle:Tempting offer — Create X 1/1 red Elemental creature tokens with haste. Each opponent may create X 1/1 red Elemental creature tokens with haste. For each opponent who does, create X 1/1 red Elemental creature tokens with haste.

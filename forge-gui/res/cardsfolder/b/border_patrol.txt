@@ -3,5 +3,4 @@ ManaCost:4 W
 Types:Creature Human Nomad
 PT:1/6
 K:Vigilance
-SVar:Picture:http://www.wizards.com/global/images/magic/general/border_patrol.jpg
 Oracle:Vigilance

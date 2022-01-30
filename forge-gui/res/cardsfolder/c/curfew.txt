@@ -5,5 +5,4 @@ A:SP$ RepeatEach | Cost$ U | RepeatPlayers$ Player | RepeatSubAbility$ PlayChoos
 SVar:PlayChoose:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.RememberedPlayerCtrl | Amount$ 1 | Mandatory$ True | AILogic$ WorstCard | ChoiceTitle$ Choose a creature you control | RememberChosen$ True
 SVar:BounceAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Hand | ChangeType$ Creature.IsRemembered
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/curfew.jpg
 Oracle:Each player returns a creature they control to its owner's hand.

@@ -3,5 +3,4 @@ ManaCost:2 U
 Types:Sorcery
 A:SP$ ChangeZoneAll | Cost$ 2 U | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | Random$ True | SubAbility$ DBDraw | UseAllOriginZones$ True | AILogic$ TimeTwister | SpellDescription$ Each player shuffles their graveyard and hand into their library, then draws seven cards.
 SVar:DBDraw:DB$ Draw | NumCards$ 7 | Defined$ Player
-SVar:Picture:http://www.wizards.com/global/images/magic/general/timetwister.jpg
 Oracle:Each player shuffles their hand and graveyard into their library, then draws seven cards. (Then put Timetwister into its owner's graveyard.)

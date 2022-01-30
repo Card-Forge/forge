@@ -8,7 +8,6 @@ SVar:TrigOppToken:DB$ Token | ValidTgts$ Opponent | TokenAmount$ 2 | LegacyImage
 T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ DBTransform | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may transform CARDNAME.
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | Optional$ True
 AlternateMode:DoubleFaced
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dowsing_dagger.jpg
 Oracle:When Dowsing Dagger enters the battlefield, target opponent creates two 0/2 green Plant creature tokens with defender.\nEquipped creature gets +2/+1.\nWhenever equipped creature deals combat damage to a player, you may transform Dowsing Dagger.\nEquip {2}
 
 ALTERNATE
@@ -17,5 +16,4 @@ Name:Lost Vale
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 3 | SpellDescription$ Add three mana of any one color.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lost_vale.jpg
 Oracle:(Transforms from Dowsing Dagger.)\n{T}: Add three mana of any one color.

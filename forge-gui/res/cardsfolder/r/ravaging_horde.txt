@@ -4,5 +4,4 @@ Types:Creature Human Soldier
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target land.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select a land.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ravaging_horde.jpg
 Oracle:When Ravaging Horde enters the battlefield, destroy target land.

@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Animate | Cost$ 4 | Defined$ Self | Power$ 4 | Toughness$ 2 | Types$ Creature,Artifact,Golem | SpellDescription$ CARDNAME becomes a 4/2 Golem artifact creature until end of turn. It's still a land.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_statuary.jpg
 Oracle:{T}: Add {C}.\n{4}: Dread Statuary becomes a 4/2 Golem artifact creature until end of turn. It's still a land.

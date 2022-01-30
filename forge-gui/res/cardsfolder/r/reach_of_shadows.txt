@@ -2,5 +2,4 @@ Name:Reach of Shadows
 ManaCost:4 B
 Types:Instant
 A:SP$ Destroy | Cost$ 4 B | ValidTgts$ Creature.nonColorless | TgtPrompt$ Select target creature that's one or more colors | SpellDescription$ Destroy target creature that's one or more colors.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reach_of_shadows.jpg
 Oracle:Destroy target creature that's one or more colors.

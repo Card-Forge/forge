@@ -6,5 +6,4 @@ K:Defender
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
 SVar:NoZeroToughnessAI:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shifting_wall.jpg
 Oracle:Defender (This creature can't attack.)\nShifting Wall enters the battlefield with X +1/+1 counters on it.

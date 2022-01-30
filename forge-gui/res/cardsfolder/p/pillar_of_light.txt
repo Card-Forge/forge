@@ -2,5 +2,4 @@ Name:Pillar of Light
 ManaCost:2 W
 Types:Instant
 A:SP$ ChangeZone | Cost$ 2 W | ValidTgts$ Creature.toughnessGE4 | TgtPrompt$ Choose target creature with toughness 4 or greater | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with toughness 4 or greater.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pillar_of_light.jpg
 Oracle:Exile target creature with toughness 4 or greater.

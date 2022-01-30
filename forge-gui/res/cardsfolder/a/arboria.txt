@@ -9,5 +9,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.A
 SVar:RememberController:DB$ Pump | Defined$ TriggeredCardController | RememberObjects$ TriggeredCardController
 T:Mode$ TurnBegin | ValidPlayer$ Player | Execute$ ClearActivePlayer | Static$ True
 SVar:ClearActivePlayer:DB$ Cleanup | ForgetDefinedPlayer$ ActivePlayer
-SVar:Picture:http://www.wizards.com/global/images/magic/general/arboria.jpg
 Oracle:Creatures can't attack a player unless that player cast a spell or put a nontoken permanent onto the battlefield during their last turn.

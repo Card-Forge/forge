@@ -3,5 +3,4 @@ ManaCost:4 U
 Types:Creature Elemental
 PT:3/3
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nimbus_of_the_isles.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)

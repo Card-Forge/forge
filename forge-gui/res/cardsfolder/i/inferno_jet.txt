@@ -3,5 +3,4 @@ ManaCost:5 R
 Types:Sorcery
 A:SP$ DealDamage | Cost$ 5 R | ValidTgts$ Opponent,Planeswalker | NumDmg$ 6 | SpellDescription$ CARDNAME deals 6 damage to target opponent or planeswalker.
 K:Cycling:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/inferno_jet.jpg
 Oracle:Inferno Jet deals 6 damage to target opponent or planeswalker.\nCycling {2} ({2}, Discard this card: Draw a card.)

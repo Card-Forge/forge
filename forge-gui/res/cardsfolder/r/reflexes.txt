@@ -4,5 +4,4 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ First Strike | Description$ Enchanted creature has first strike. (It deals combat damage before creatures without first strike.)
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reflexes.jpg
 Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nEnchanted creature has first strike. (It deals combat damage before creatures without first strike.)

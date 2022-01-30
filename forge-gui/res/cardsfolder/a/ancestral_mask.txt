@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness
 SVar:X:Count$Valid Enchantment.Other/Times.2
 AI:RemoveDeck:Random
 SVar:BuffedBy:Enchantment
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ancestral_mask.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 for each other enchantment on the battlefield.

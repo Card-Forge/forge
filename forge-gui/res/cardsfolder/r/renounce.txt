@@ -7,5 +7,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SacX:Count$Valid Permanent.YouCtrl
 SVar:LifeX:Remembered$Amount.Twice
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/renounce.jpg
 Oracle:Sacrifice any number of permanents. You gain 2 life for each permanent sacrificed this way.

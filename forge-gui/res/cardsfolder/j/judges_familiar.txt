@@ -4,5 +4,4 @@ Types:Creature Bird
 PT:1/1
 K:Flying
 A:AB$ Counter | Cost$ Sac<1/CARDNAME> | TargetType$ Spell | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select target Instant or Sorcery Spell | UnlessCost$ 1 | SpellDescription$ Counter target instant or sorcery spell unless its controller pays {1}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/judges_familiar.jpg
 Oracle:Flying\nSacrifice Judge's Familiar: Counter target instant or sorcery spell unless its controller pays {1}.

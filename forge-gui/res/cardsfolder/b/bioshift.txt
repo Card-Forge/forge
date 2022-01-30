@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ MoveCounter | Cost$ GU | ValidTgts$ Creature | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select target creatures to move +1/+1 counters | TargetsWithSameController$ True | CounterType$ P1P1 | CounterNum$ Any | StackDescription$ SpellDescription | SpellDescription$ Move any number of +1/+1 counters from target creature onto another target creature with the same controller.
 AI:RemoveDeck:All
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bioshift.jpg
 Oracle:Move any number of +1/+1 counters from target creature onto another target creature with the same controller.

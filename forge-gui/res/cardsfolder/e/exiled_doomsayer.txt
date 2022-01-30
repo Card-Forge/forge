@@ -4,5 +4,4 @@ Types:Creature Human Cleric
 PT:1/2
 S:Mode$ RaiseCost | ValidCard$ Creature.faceDown | Type$ MorphUp | Amount$ 2 | Description$ All morph costs cost {2} more. (This doesn't affect the cost to cast creature spells face down.)
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/exiled_doomsayer.jpg
 Oracle:All morph costs cost {2} more. (This doesn't affect the cost to cast creature spells face down.)

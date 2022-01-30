@@ -11,5 +11,4 @@ T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCar
 SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/muse_vessel.jpg
 Oracle:{3}, {T}: Target player exiles a card from their hand. Activate only as a sorcery.\n{1}: Choose a card exiled with Muse Vessel. You may play that card this turn.

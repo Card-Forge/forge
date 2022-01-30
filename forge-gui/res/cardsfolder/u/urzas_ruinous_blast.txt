@@ -2,5 +2,4 @@ Name:Urza's Ruinous Blast
 ManaCost:4 W
 Types:Legendary Sorcery
 A:SP$ ChangeZoneAll | Cost$ 4 W | UseAllOriginZones$ True | Origin$ Battlefield | Destination$ Exile | ChangeType$ Permanent.nonLand+nonLegendary | IsCurse$ True | SpellDescription$ Exile all nonland permanents that aren't legendary.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_ruinous_blast.jpg
 Oracle:(You may cast a legendary sorcery only if you control a legendary creature or planeswalker.)\nExile all nonland permanents that aren't legendary.

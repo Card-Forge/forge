@@ -6,5 +6,4 @@ K:Flanking
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {U}. If you don't, destroy target Knight and it can't be regenerated.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.Knight | TgtPrompt$ Select target Knight | NoRegen$ True | UnlessCost$ U | UnlessPayer$ You | UnlessAI$ DefinedTargetedController
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_the_mists.jpg
 Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\nWhen Knight of the Mists enters the battlefield, you may pay {U}. If you don't, destroy target Knight and it can't be regenerated.

@@ -6,5 +6,4 @@ A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 3 | TokenScript$ w_1_1_
 A:AB$ DestroyAll | Cost$ SubCounter<3/LOYALTY> | ValidCards$ Creature.powerGE4 | Planeswalker$ True | SpellDescription$ Destroy all creatures with power 4 or greater.
 A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Name$ Emblem - Elspeth, Sun's Champion | Image$ emblem_elspeth_suns_champion | StaticAbilities$ STFlying | Planeswalker$ True | Ultimate$ True | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Creatures you control get +2/+2 and have flying."
 SVar:STFlying:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddKeyword$ Flying | AddPower$ 2 | AddToughness$ 2 | Description$ Creatures you control get +2/+2 and have flying.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elspeth_suns_champion.jpg
-Oracle:[+1]: Create three 1/1 white Soldier creature tokens.\n[−3]: Destroy all creatures with power 4 or greater.\n[−7]: You get an emblem with "Creatures you control get +2/+2 and have flying."
+Oracle:[+1]: Create three 1/1 white Soldier creature tokens.\n[-3]: Destroy all creatures with power 4 or greater.\n[-7]: You get an emblem with "Creatures you control get +2/+2 and have flying."

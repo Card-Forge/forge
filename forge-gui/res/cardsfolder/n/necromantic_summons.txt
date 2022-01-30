@@ -5,5 +5,4 @@ A:SP$ ChangeZone | Cost$ 4 B | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 2 | Static$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | SubAbility$ DBCleanup
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/necromantic_summons.jpg
 Oracle:Put target creature card from a graveyard onto the battlefield under your control.\nSpell mastery — If there are two or more instant and/or sorcery cards in your graveyard, that creature enters the battlefield with two additional +1/+1 counters on it.

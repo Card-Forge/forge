@@ -2,5 +2,4 @@ Name:Break Through the Line
 ManaCost:1 R
 Types:Enchantment
 A:AB$ Pump | Cost$ R | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less | KW$ Haste & HIDDEN Unblockable | SpellDescription$ Target creature with power 2 or less gains haste until end of turn and can't be blocked this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/break_through_the_line.jpg
 Oracle:{R}: Target creature with power 2 or less gains haste until end of turn and can't be blocked this turn.

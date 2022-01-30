@@ -3,5 +3,4 @@ ManaCost:3 U
 Types:Creature Salamander Wizard
 PT:3/2
 A:AB$ Pump | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable | SpellDescription$ Target creature can't be blocked this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/amphin_pathmage.jpg
 Oracle:{2}{U}: Target creature can't be blocked this turn.

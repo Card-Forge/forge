@@ -3,5 +3,4 @@ ManaCost:3 R R R
 Types:Creature Giant
 PT:4/4
 K:Rampage:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/frost_giant.jpg
 Oracle:Rampage 2 (Whenever this creature becomes blocked, it gets +2/+2 until end of turn for each creature blocking it beyond the first.)

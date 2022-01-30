@@ -12,5 +12,4 @@ SVar:X:Remembered$Amount.Plus.1
 SVar:Y:Count$ValidHand Card.RememberedPlayerCtrl
 SVar:NeedsToPlayVar:Z GE4
 SVar:Z:Count$ValidHand Card.OppCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/khorvaths_fury.jpg
 Oracle:For each player, choose friend or foe. Each friend discards all cards from their hand, then draws that many cards plus one. Khorvath's Fury deals damage to each foe equal to the number of cards in their hand.

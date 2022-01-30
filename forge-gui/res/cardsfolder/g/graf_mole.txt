@@ -6,5 +6,4 @@ T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Clue | TriggerZones$ Battlefi
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
 AI:RemoveDeck:Random
 DeckHints:Ability$Investigate
-SVar:Picture:http://www.wizards.com/global/images/magic/general/graf_mole.jpg
 Oracle:Whenever you sacrifice a Clue, you gain 3 life.

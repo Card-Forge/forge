@@ -7,5 +7,4 @@ SVar:DBDiscard:DB$ Discard | DefinedCards$ ChosenCard | Defined$ Targeted | Mode
 SVar:DBDiscard2:DB$ Discard | Defined$ Targeted | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ EQ0 | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nightsnare.jpg
 Oracle:Target opponent reveals their hand. You may choose a nonland card from it. If you do, that player discards that card. If you don't, that player discards two cards.

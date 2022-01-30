@@ -9,5 +9,4 @@ SVar:PaySac:DB$ LoseLife | LifeAmount$ 3 | Defined$ TriggeredPlayer | UnlessCost
 SVar:PayDiscard:DB$ LoseLife | LifeAmount$ 3 | Defined$ TriggeredPlayer | UnlessCost$ Discard<1/Card> | UnlessPayer$ TriggeredPlayer | UnlessAI$ LifeLE3 | SpellDescription$ You lose 3 life unless you discard a card
 # TODO: Most likely the ChooseGenericEffect code can be simplified somehow to avoid the necessity of having a dedicated fallback ability
 SVar:LoseLifeFallback:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ 3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/torment_of_scarabs.jpg
 Oracle:Enchant player\nAt the beginning of enchanted player's upkeep, that player loses 3 life unless they sacrifice a nonland permanent or discard a card.

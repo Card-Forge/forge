@@ -5,5 +5,4 @@ A:SP$ ChangeZone | Cost$ 3 W B | Origin$ Graveyard | Destination$ Battlefield | 
 SVar:X:Count$ValidGraveyard Creature.Ally+YouCtrl
 AI:RemoveDeck:Random
 DeckNeeds:Type$Ally
-SVar:Picture:http://www.wizards.com/global/images/magic/general/march_from_the_tomb.jpg
 Oracle:Return any number of target Ally creature cards with total mana value 8 or less from your graveyard to the battlefield.

@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+2/-5
 S:Mode$ Continuous | EffectZone$ Command | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land on each of your turns.
-SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Titania.full.jpg
 Oracle:Hand +2, life -5\nYou may play an additional land on each of your turns.

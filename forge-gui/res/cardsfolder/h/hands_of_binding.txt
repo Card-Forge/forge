@@ -6,5 +6,4 @@ A:SP$ Tap | Cost$ 1 U | ValidTgts$ Creature.OppCtrl | SubAbility$ DBPump | Spell
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | SubAbility$ Cipher
 SVar:Cipher:DB$ Encode | Defined$ Self
 DeckNeeds:Type$Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hands_of_binding.jpg
 Oracle:Tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.\nCipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)

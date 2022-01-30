@@ -9,7 +9,7 @@ SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | De
 SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigToken | TriggerDescription$ If a nontoken creature an opponent controls would die, exile it instead. When you do, you may pay {2}. If you do, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
 SVar:TrigToken:AB$ Token | Cost$ 2 | TokenAmount$ 1 | TokenScript$ bg_1_1_pest_lifegain | TokenOwner$ You
 AlternateMode:Modal
-DeckHas:Ability$Token & Ability$LifeGain
+DeckHas:Ability$Token|LifeGain
 Oracle:Menace, lifelink\nIf a nontoken creature an opponent controls would die, exile it instead. When you do, you may pay {2}. If you do, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
 
 ALTERNATE

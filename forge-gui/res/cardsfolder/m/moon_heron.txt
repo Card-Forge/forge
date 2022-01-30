@@ -3,5 +3,4 @@ ManaCost:3 U
 Types:Creature Spirit Bird
 PT:3/2
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/moon_heron.jpg
 Oracle:Flying

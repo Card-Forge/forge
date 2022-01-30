@@ -6,5 +6,4 @@ K:Tribute:6
 SVar:TrigNotTribute:DB$ Fight | Defined$ Self | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | SpellDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, you may have CARDNAME fight another target creature.
 SVar:TributeAILogic:Never
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nessian_wilds_ravager.jpg
 Oracle:Tribute 6 (As this creature enters the battlefield, an opponent of your choice may put six +1/+1 counters on it.)\nWhen Nessian Wilds Ravager enters the battlefield, if tribute wasn't paid, you may have Nessian Wilds Ravager fight another target creature. (Each deals damage equal to its power to the other.)

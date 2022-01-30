@@ -3,5 +3,4 @@ ManaCost:3 R
 Types:Creature Minotaur Shaman
 PT:2/2
 A:AB$ DealDamage | Cost$ R T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/anaba_shaman.jpg
 Oracle:{R}, {T}: Anaba Shaman deals 1 damage to any target.

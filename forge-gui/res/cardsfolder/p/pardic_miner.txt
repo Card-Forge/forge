@@ -5,5 +5,4 @@ PT:1/1
 A:AB$ Effect | Cost$ Sac<1/CARDNAME> | ValidTgts$ Player | Name$ Pardic Miner Effect | StaticAbilities$ STCantPlayLand | RememberObjects$ Targeted | AILogic$ BeginningOfOppTurn | SpellDescription$ Target player can't play lands this turn.
 SVar:STCantPlayLand:Mode$ CantPlayLand | EffectZone$ Command | Player$ Player.IsRemembered | Description$ Target player can't play land cards this turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pardic_miner.jpg
 Oracle:Sacrifice Pardic Miner: Target player can't play lands this turn.

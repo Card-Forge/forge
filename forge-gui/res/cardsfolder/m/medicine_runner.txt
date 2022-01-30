@@ -4,5 +4,4 @@ Types:Creature Elf Cleric
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRemoveCounter | TriggerDescription$ When CARDNAME enters the battlefield, you may remove a counter from target permanent.
 SVar:TrigRemoveCounter:DB$ RemoveCounter | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | CounterType$ Any | CounterNum$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/medicine_runner.jpg
 Oracle:When Medicine Runner enters the battlefield, you may remove a counter from target permanent.

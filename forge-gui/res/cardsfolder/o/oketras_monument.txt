@@ -6,5 +6,4 @@ T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ 
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_warrior_vigilance | TokenOwner$ You | LegacyImage$ w 1 1 warrior vigilance akh
 DeckHas:Ability$Token
 DeckNeeds:Color$White
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kefnets_monument.jpg
 Oracle:White creature spells you cast cost {1} less to cast.\nWhenever you cast a creature spell, create a 1/1 white Warrior creature token with vigilance.

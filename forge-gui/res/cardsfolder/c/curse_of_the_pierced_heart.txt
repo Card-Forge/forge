@@ -8,5 +8,4 @@ SVar:DBChooseCard:DB$ ChooseCard | Choices$ Planeswalker.ControlledBy TriggeredP
 SVar:DBDamagePlayer:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 1 | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBDamageChosen
 SVar:DBDamageChosen:DB$ DealDamage | Defined$ ChosenCard | NumDmg$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_the_pierced_heart.jpg
 Oracle:Enchant player\nAt the beginning of enchanted player's upkeep, Curse of the Pierced Heart deals 1 damage to that player or a planeswalker that player controls.

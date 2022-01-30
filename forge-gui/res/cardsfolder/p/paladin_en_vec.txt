@@ -5,5 +5,4 @@ PT:2/2
 K:First Strike
 K:Protection from black
 K:Protection from red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/paladin_en_vec.jpg
 Oracle:First strike, protection from black and from red (This creature deals combat damage before creatures without first strike. It can't be blocked, targeted, dealt damage, or enchanted by anything black or red.)

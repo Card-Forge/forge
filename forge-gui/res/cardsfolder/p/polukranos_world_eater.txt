@@ -13,5 +13,4 @@ SVar:MonstrosityX:TriggerCount$MonstrosityAmount
 SVar:MaxTgts:Count$Valid Creature.OppCtrl
 SVar:MonstrosityAILogic:Polukranos
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/polukranos_world_eater.jpg
 Oracle:{X}{X}{G}: Monstrosity X. (If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstrous.)\nWhen Polukranos, World Eater becomes monstrous, it deals X damage divided as you choose among any number of target creatures your opponents control. Each of those creatures deals damage equal to its power to Polukranos.

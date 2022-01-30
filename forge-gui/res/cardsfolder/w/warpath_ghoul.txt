@@ -2,5 +2,4 @@ Name:Warpath Ghoul
 ManaCost:2 B
 Types:Creature Zombie
 PT:3/2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/warpath_ghoul.jpg
 Oracle:

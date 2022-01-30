@@ -4,6 +4,5 @@ Types:Creature Elf Artificer
 PT:3/3
 K:Trample
 K:Fabricate:1
-DeckHas:Ability$Counters & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/peema_outrider.jpg
+DeckHas:Ability$Counters|Token
 Oracle:Trample\nFabricate 1 (When this creature enters the battlefield, put a +1/+1 counter on it or create a 1/1 colorless Servo artifact creature token.)

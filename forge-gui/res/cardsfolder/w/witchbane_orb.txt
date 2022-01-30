@@ -5,5 +5,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Curse.AttachedTo You
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Hexproof | Description$ You have hexproof. (You can't be the target of spells or abilities your opponents control.)
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/witchbane_orb.jpg
 Oracle:When Witchbane Orb enters the battlefield, destroy all Curses attached to you.\nYou have hexproof. (You can't be the target of spells or abilities your opponents control, including Aura spells.)

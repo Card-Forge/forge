@@ -5,5 +5,4 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 2 | AddToughness$ 2 
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice all creatures you control.
 SVar:TrigSac:DB$ SacrificeAll | ValidCards$ Creature.YouCtrl
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/death_pit_offering.jpg
 Oracle:When Death Pit Offering enters the battlefield, sacrifice all creatures you control.\nCreatures you control get +2/+2.

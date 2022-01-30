@@ -10,5 +10,4 @@ SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Card.Red,Card.White
-SVar:Picture:http://www.wizards.com/global/images/magic/general/balefire_liege.jpg
 Oracle:Other red creatures you control get +1/+1.\nOther white creatures you control get +1/+1.\nWhenever you cast a red spell, Balefire Liege deals 3 damage to target player or planeswalker.\nWhenever you cast a white spell, you gain 3 life.

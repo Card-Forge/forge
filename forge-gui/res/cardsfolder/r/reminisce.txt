@@ -3,5 +3,4 @@ ManaCost:2 U
 Types:Sorcery
 A:SP$ ChangeZoneAll | Cost$ 2 U | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Library | ChangeType$ Card | Shuffle$ True | SpellDescription$ Target player shuffles their graveyard into their library.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reminisce.jpg
 Oracle:Target player shuffles their graveyard into their library.

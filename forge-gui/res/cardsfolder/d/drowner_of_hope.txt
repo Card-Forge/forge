@@ -7,6 +7,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You | LegacyImage$ c 1 1 eldrazi scion sac bfz
 A:AB$ Tap | Cost$ Sac<1/Card.Eldrazi+Scion> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature. | CostDesc$ Sacrifice an Eldrazi Scion:
 DeckHints:Type$Eldrazi
-DeckHas:Ability$Mana.Colorless & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/drowner_of_hope.jpg
+DeckHas:Ability$Mana.Colorless|Token
 Oracle:Devoid (This card has no color.)\nWhen Drowner of Hope enters the battlefield, create two 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: Add {C}."\nSacrifice an Eldrazi Scion: Tap target creature.

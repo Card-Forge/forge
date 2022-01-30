@@ -9,5 +9,4 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$ChosenNumber
 SVar:Y:Number$7/Minus.X
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shapeshifter.jpg
 Oracle:As Shapeshifter enters the battlefield, choose a number between 0 and 7.\nAt the beginning of your upkeep, you may choose a number between 0 and 7.\nShapeshifter's power is equal to the last chosen number and its toughness is equal to 7 minus that number.

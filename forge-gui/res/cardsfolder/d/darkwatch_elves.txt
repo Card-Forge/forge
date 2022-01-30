@@ -4,5 +4,4 @@ Types:Creature Elf
 PT:2/2
 K:Protection from black
 K:Cycling:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/darkwatch_elves.jpg
 Oracle:Protection from black\nCycling {2} ({2}, Discard this card: Draw a card.)

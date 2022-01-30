@@ -3,5 +3,4 @@ ManaCost:R
 Types:Creature Goat
 PT:1/1
 K:Mountainwalk
-SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card16442.jpg
 Oracle:Mountainwalk (This creature can't be blocked as long as defending player controls a Mountain.)

@@ -6,5 +6,4 @@ SVar:ReitoPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creatur
 SVar:X:Count$Valid Plains.YouCtrl
 SVar:Y:Remembered$Amount
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/plow_through_reito.jpg
 Oracle:Sweep — Return any number of Plains you control to their owner's hand. Target creature gets +1/+1 until end of turn for each Plains returned this way.

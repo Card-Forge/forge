@@ -8,5 +8,4 @@ SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME becomes blocked, you may untap it and remove it from combat.
 SVar:TrigUntap:DB$ Untap | Defined$ Self | SubAbility$ RemCombat
 SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Self
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gustcloak_cavalier.jpg
 Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\nWhenever Gustcloak Cavalier attacks, you may tap target creature.\nWhenever Gustcloak Cavalier becomes blocked, you may untap Gustcloak Cavalier and remove it from combat.

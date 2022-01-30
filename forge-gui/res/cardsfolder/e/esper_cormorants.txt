@@ -3,5 +3,4 @@ ManaCost:2 W U
 Types:Artifact Creature Bird
 PT:3/3
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/esper_cormorants.jpg
 Oracle:Flying

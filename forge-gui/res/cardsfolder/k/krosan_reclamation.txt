@@ -5,5 +5,4 @@ K:Flashback:1 G
 A:SP$ Pump | Cost$ 1 G | ValidTgts$ Player | TgtPrompt$ Select target Player | SubAbility$ DBChangeZone | IsCurse$ True | SpellDescription$ Target player shuffles up to two target cards from their graveyard into their library.
 SVar:DBChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 2 | TargetsWithDefinedController$ ParentTarget | Origin$ Graveyard | Destination$ Library | Shuffle$ True | TgtPrompt$ Choose target card | ValidTgts$ Card
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_reclamation.jpg
 Oracle:Target player shuffles up to two target cards from their graveyard into their library.\nFlashback {1}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

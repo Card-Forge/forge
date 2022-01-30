@@ -6,5 +6,4 @@ SVar:X:Count$Valid Card.Self+untapped
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/static_orb.jpg
 Oracle:As long as Static Orb is untapped, players can't untap more than two permanents during their untap steps.

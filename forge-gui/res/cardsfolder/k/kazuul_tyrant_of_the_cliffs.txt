@@ -4,5 +4,4 @@ Types:Legendary Creature Ogre Warrior
 PT:5/4
 T:Mode$ Attacks | ValidCard$ Creature.OppCtrl | Attacked$ You,Planeswalker.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a creature an opponent controls attacks, if you're the defending player, create a 3/3 red Ogre creature token unless that creature's controller pays {3}.
 SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ r_3_3_ogre | LegacyImage$ r 3 3 ogre wwk | UnlessCost$ 3 | UnlessPayer$ TriggeredAttackerController
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kazuul_tyrant_of_the_cliffs.jpg
 Oracle:Whenever a creature an opponent controls attacks, if you're the defending player, create a 3/3 red Ogre creature token unless that creature's controller pays {3}.

@@ -13,6 +13,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Regenerate | Cost$ Sac<1/Human> | SpellDescription$ Regenerate CARDNAME.
 AI:RemoveDeck:Random
 SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE1
-SVar:DeckNeeds:Type$Human
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fiend_of_the_shadows.jpg
+DeckNeeds:Type$Human
 Oracle:Flying\nWhenever Fiend of the Shadows deals combat damage to a player, that player exiles a card from their hand. You may play that card for as long as it remains exiled.\nSacrifice a Human: Regenerate Fiend of the Shadows.

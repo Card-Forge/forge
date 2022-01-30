@@ -3,5 +3,4 @@ ManaCost:2 G
 Types:Creature Elf Spirit
 PT:2/2
 A:AB$ Mana | Cost$ ExileFromHand<1/CARDNAME> | Produced$ G | ActivationZone$ Hand | SpellDescription$ Add {G}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_spirit_guide.jpg
 Oracle:Exile Elvish Spirit Guide from your hand: Add {G}.

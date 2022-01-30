@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact Equipment
 K:Equip:1
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Haste & Hexproof | Description$ Equipped creature has hexproof and haste.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/swiftfoot_boots.jpg
 Oracle:Equipped creature has hexproof and haste.\nEquip {1}

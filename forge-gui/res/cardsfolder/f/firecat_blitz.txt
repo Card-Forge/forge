@@ -7,5 +7,4 @@ SVar:X:Count$xPaid
 K:Flashback:R R Sac<X/Mountain>
 DeckHas:Ability$Token
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/firecat_blitz.jpg
 Oracle:Create X 1/1 red Elemental Cat creature tokens with haste. Exile them at the beginning of the next end step.\nFlashback—{R}{R}, Sacrifice X Mountains. (You may cast this card from your graveyard for its flashback cost. Then exile it.)

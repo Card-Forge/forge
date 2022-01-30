@@ -4,5 +4,4 @@ Types:Creature Human Artificer
 PT:2/1
 T:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ You | Execute$ TrigGainLife | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an artifact spell, you may pay {1}. If you do, you gain 3 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 1 | Defined$ You | LifeAmount$ 3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lifesmith.jpg
 Oracle:Whenever you cast an artifact spell, you may pay {1}. If you do, you gain 3 life.

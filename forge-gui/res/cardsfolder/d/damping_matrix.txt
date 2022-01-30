@@ -4,5 +4,4 @@ Types:Artifact
 S:Mode$ CantBeActivated | ValidCard$ Artifact,Creature | ValidSA$ Activated.nonManaAbility | AffectedZone$ Battlefield | Description$ Activated abilities of artifacts and creatures can't be activated unless they're mana abilities.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/damping_matrix.jpg
 Oracle:Activated abilities of artifacts and creatures can't be activated unless they're mana abilities.

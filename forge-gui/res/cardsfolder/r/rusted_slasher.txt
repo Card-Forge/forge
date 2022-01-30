@@ -5,5 +5,4 @@ PT:4/1
 A:AB$ Regenerate | Cost$ Sac<1/Artifact> | SpellDescription$ Regenerate CARDNAME.
 SVar:AIPreference:SacCost$Artifact.token,Artifact.cmcEQ1,Artifact.cmcEQ2
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rusted_slasher.jpg
 Oracle:Sacrifice an artifact: Regenerate Rusted Slasher.

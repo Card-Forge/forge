@@ -3,5 +3,4 @@ ManaCost:G W
 Types:Creature Elf Knight
 PT:2/2
 K:Protection from black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar_knight.jpg
 Oracle:Protection from black

@@ -6,6 +6,5 @@ A:AB$ Token | Cost$ 1 T Discard<1/Card> | TokenAmount$ 1 | TokenScript$ metallic
 AI:RemoveDeck:Random
 SVar:AIPreference:DiscardCost$Card
 DeckHints:Type$Sliver
-DeckHas:Ability$Discard & Ability$Token
-SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130329.jpg
+DeckHas:Ability$Discard|Token
 Oracle:{1}, {T}, Discard a card: Create a 1/1 colorless Sliver artifact creature token named Metallic Sliver.

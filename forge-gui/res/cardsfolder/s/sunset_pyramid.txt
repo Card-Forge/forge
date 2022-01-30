@@ -4,5 +4,4 @@ Types:Artifact
 K:etbCounter:BRICK:3
 A:AB$ Draw | Cost$ 2 T SubCounter<1/BRICK> | NumCards$ 1 | SpellDescription$ Draw a card.
 A:AB$ Scry | Cost$ 2 T | ScryNum$ 1 | SpellDescription$ Scry 1.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sunset_pyramid.jpg
 Oracle:Sunset Pyramid enters the battlefield with three brick counters on it.\n{2}, {T}, Remove a brick counter from Sunset Pyramid: Draw a card.\n{2}, {T}: Scry 1.

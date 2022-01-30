@@ -2,5 +2,4 @@ Name:Wretched Banquet
 ManaCost:B
 Types:Sorcery
 A:SP$ Destroy | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | ConditionDefined$ Targeted | ConditionPresent$ Creature.leastPower | ConditionCompare$ EQ1 | AITgts$ Card.leastPower | SpellDescription$ Destroy target creature if it has the least power or is tied for least power among creatures on the battlefield.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wretched_banquet.jpg
 Oracle:Destroy target creature if it has the least power or is tied for least power among creatures on the battlefield.

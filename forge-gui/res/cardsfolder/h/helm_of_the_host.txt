@@ -5,5 +5,4 @@ K:Equip:5
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, create a token that's a copy of equipped creature, except the token isn't legendary if equipped creature is legendary. That token gains haste.
 SVar:TrigCopy:DB$ CopyPermanent | Defined$ Equipped | AddKeywords$ Haste | NonLegendary$ True
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/helm_of_the_host.jpg
 Oracle:At the beginning of combat on your turn, create a token that's a copy of equipped creature, except the token isn't legendary if equipped creature is legendary. That token gains haste.\nEquip {5}

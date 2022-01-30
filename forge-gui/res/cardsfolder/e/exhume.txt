@@ -5,5 +5,4 @@ A:SP$ RepeatEach | Cost$ 1 B | RepeatSubAbility$ DBChangeZone | RepeatPlayers$ P
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.RememberedPlayerCtrl | DefinedPlayer$ Player.IsRemembered | Chooser$ Player.IsRemembered | ChangeNum$ 1 | Hidden$ True | Mandatory$ True
 SVar:X:Count$TypeInYourYard.Creature
 SVar:NeedsToPlayVar:X GE1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/exhume.jpg
 Oracle:Each player puts a creature card from their graveyard onto the battlefield.

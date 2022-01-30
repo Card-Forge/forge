@@ -4,5 +4,4 @@ Types:Creature Vampire Shaman
 PT:2/1
 K:First Strike
 A:AB$ RemoveCounter | Cost$ Sac<1/CARDNAME> | ValidTgts$ Permanent | CounterType$ All | CounterNum$ All | SpellDescription$ Remove all counters from target permanent.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_hexmage.jpg
 Oracle:First strike\nSacrifice Vampire Hexmage: Remove all counters from target permanent.

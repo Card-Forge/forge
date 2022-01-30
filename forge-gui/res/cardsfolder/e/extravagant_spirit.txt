@@ -6,5 +6,4 @@ K:Flying
 K:UpkeepCost:X:{1} for each card in your hand
 SVar:X:Count$InYourHand
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/extravagant_spirit.jpg
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Extravagant Spirit unless you pay {1} for each card in your hand.

@@ -5,9 +5,8 @@ PT:2/3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDelTrig | TriggerDescription$ Whenever CARDNAME attacks, add {R} at the beginning of your next main phase this turn.
 SVar:TrigDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Main1,Main2 | ThisTurn$ True | ValidPlayer$ You | Execute$ AddMana | TriggerDescription$ At the beginning of your next main phase this turn, add {R}.
 SVar:AddMana:DB$ Mana | Produced$ R
-A:AB$SetState | Cost$ 3 R R | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
+A:AB$ SetState | Cost$ 3 R R | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
 SVar:HasAttackEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/conduit_of_storms.jpg
 AlternateMode:DoubleFaced
 Oracle:Whenever Conduit of Storms attacks, add {R} at the beginning of your next main phase this turn.\n{3}{R}{R}: Transform Conduit of Storms.
 
@@ -21,5 +20,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDelTrig | TriggerDescripti
 SVar:TrigDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Main1,Main2 | ThisTurn$ True | ValidPlayer$ You | Execute$ AddMana | TriggerDescription$ At the beginning of your next main phase this turn, add {C}{C}.
 SVar:AddMana:DB$ Mana | Produced$ C C
 SVar:HasAttackEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/conduit_of_emrakul.jpg
 Oracle:Whenever Conduit of Emrakul attacks, add {C}{C} at the beginning of your next main phase this turn.

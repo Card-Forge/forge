@@ -19,5 +19,4 @@ SVar:RemoveEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination
 SVar:TrigLandPlayed:Mode$ LandPlayed | ValidCard$ Land.IsRemembered | Static$ True | TriggerZones$ Command | Execute$ RemoveEffect
 SVar:TrigCast:Mode$ SpellCast | ValidCard$ Card.IsRemembered | Static$ True | TriggerZones$ Command | Execute$ RemoveEffect
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grinning_totem.jpg
 Oracle:{2}, {T}, Sacrifice Grinning Totem: Search target opponent's library for a card and exile it. Then that player shuffles. Until the beginning of your next upkeep, you may play that card. At the beginning of your next upkeep, if you haven't played it, put it into its owner's graveyard.

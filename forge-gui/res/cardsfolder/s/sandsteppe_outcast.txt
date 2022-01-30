@@ -6,6 +6,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigCharm:DB$ Charm | Choices$ DBCounter,DBToken
 SVar:DBCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 SVar:DBToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | LegacyImage$ w 1 1 spirit flying frf | SpellDescription$ Create a 1/1 white Spirit creature token with flying.
-DeckHas:Ability$Counters & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sandsteppe_outcast.jpg
+DeckHas:Ability$Counters|Token
 Oracle:When Sandsteppe Outcast enters the battlefield, choose one —\n• Put a +1/+1 counter on Sandsteppe Outcast.\n• Create a 1/1 white Spirit creature token with flying.

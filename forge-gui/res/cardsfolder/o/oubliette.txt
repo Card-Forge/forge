@@ -8,5 +8,4 @@ SVar:TrigComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | V
 SVar:DBPhaseIn:DB$ Phases | Defined$ Remembered | Tapped$ True | PhaseInOrOut$ True | SubAbility$ DBExileSelf
 SVar:DBExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 AI:RemoveDeck:All
-SVar:Picture:http://resources.wizards.com/magic/cards/med/en-us/card159135.jpg
 Oracle:When Oubliette enters the battlefield, target creature phases out until Oubliette leaves the battlefield. Tap that creature as it phases in this way. (Auras and Equipment phase out with it. While permanents are phased out, they're treated as though they don't exist.)

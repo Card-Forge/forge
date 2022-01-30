@@ -5,5 +5,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetPower$ 0 | SetToughness$ 4 | AddType$ Treefolk | RemoveCreatureTypes$ True | RemoveAllAbilities$ True | Description$ Enchanted creature is a Treefolk with base power and toughness 0/4 and loses all abilities.
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lignify.jpg
 Oracle:Enchant creature\nEnchanted creature is a Treefolk with base power and toughness 0/4 and loses all abilities.

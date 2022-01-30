@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ TriggeredCardController | LegacyImage$ g 1 1 saproling dom
 SVar:SacMe:1
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brindle_shoat.jpg
 Oracle:When Deathbloom Thallid dies, create a 1/1 green Saproling creature token.

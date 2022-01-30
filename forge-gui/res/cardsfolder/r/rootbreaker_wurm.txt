@@ -3,5 +3,4 @@ ManaCost:5 G G
 Types:Creature Wurm
 PT:6/6
 K:Trample
-SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4785.jpg
 Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)

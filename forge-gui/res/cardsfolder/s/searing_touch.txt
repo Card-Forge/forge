@@ -3,5 +3,4 @@ ManaCost:R
 Types:Instant
 A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 K:Buyback:4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/searing_touch.jpg
 Oracle:Buyback {4} (You may pay an additional {4} as you cast this spell. If you do, put this card into your hand as it resolves.)\nSearing Touch deals 1 damage to any target.

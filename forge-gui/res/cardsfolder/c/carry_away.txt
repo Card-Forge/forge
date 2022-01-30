@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ U U | ValidTgts$ Equipment | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted Equipment.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUnattach | TriggerDescription$ When CARDNAME enters the battlefield, unattach enchanted Equipment.
 SVar:TrigUnattach:DB$ UnattachAll | Defined$ Valid Card.EquippedByEnchanted | UnattachValid$ Equipment.EnchantedBy
-SVar:Picture:http://www.wizards.com/global/images/magic/general/carry_away.jpg
 Oracle:Enchant Equipment\nWhen Carry Away enters the battlefield, unattach enchanted Equipment.\nYou control enchanted Equipment.

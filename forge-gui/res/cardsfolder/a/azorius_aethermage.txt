@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Hand | ValidCard$ Card.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Hand | ValidCard$ Card.YouOwn+Other | Execute$ TrigDraw | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever a permanent is returned to your hand, you may pay {1}. If you do, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 1 | Defined$ You | NumCards$ 1
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/azorius_aethermage.jpg
 Oracle:Whenever a permanent is returned to your hand, you may pay {1}. If you do, draw a card.

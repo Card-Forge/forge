@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact
 A:AB$ Mana | Cost$ 1 T | Produced$ B G | SpellDescription$ Add {B}{G}.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/golgari_signet.jpg
 Oracle:{1}, {T}: Add {B}{G}.

@@ -6,5 +6,4 @@ SVar:X:Discarded$CardManaCost
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 DeckHints:Type$Spirit|Arcane
-SVar:Picture:http://www.wizards.com/global/images/magic/general/slumbering_tora.jpg
 Oracle:{2}, Discard a Spirit or Arcane card: Slumbering Tora becomes an X/X Cat artifact creature until end of turn, where X is the discarded card's mana value.

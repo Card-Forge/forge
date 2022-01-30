@@ -7,5 +7,4 @@ SVar:X:Count$xPaid
 SVar:Y:Count$CardCounters.CHARGE
 SVar:NeedsToPlayVar:Z GE4
 SVar:Z:Count$Valid Card.canProduceMana
-SVar:Picture:http://www.wizards.com/global/images/magic/general/orochi_hatchery.jpg
 Oracle:Orochi Hatchery enters the battlefield with X charge counters on it.\n{5}, {T}: Create a 1/1 green Snake creature token for each charge counter on Orochi Hatchery.

@@ -12,5 +12,4 @@ SVar:DigNum:Number$0
 SVar:AIPlayForSub:True
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aladdins_lamp.jpg
 Oracle:{X}, {T}: The next time you would draw a card this turn, instead look at the top X cards of your library, put all but one of them on the bottom of your library in a random order, then draw a card. X can't be 0.

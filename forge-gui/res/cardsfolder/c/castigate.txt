@@ -2,5 +2,4 @@ Name:Castigate
 ManaCost:W B
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ W B | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | ValidTgts$ Opponent | Chooser$ You | ChangeType$ Card.nonLand | ChangeNum$ 1 | IsCurse$ True | Mandatory$ True | StackDescription$ SpellDescription | SpellDescription$ Target opponent reveals their hand. You choose a nonland card from it and exile that card.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/castigate.jpg
 Oracle:Target opponent reveals their hand. You choose a nonland card from it and exile that card.

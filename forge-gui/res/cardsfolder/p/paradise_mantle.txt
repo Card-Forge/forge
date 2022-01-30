@@ -5,5 +5,4 @@ K:Equip:1
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ AnyMana | Description$ Equipped creature has "{T}: Add one mana of any color."
 SVar:AnyMana:AB$Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/paradise_mantle.jpg
 Oracle:Equipped creature has "{T}: Add one mana of any color."\nEquip {1}

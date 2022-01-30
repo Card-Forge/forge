@@ -4,5 +4,4 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Enchantment.Other+YouCtrl | AddKeyword$ Shroud | Description$ Other enchantments you control have shroud.
 S:Mode$ Continuous | Affected$ Creature.enchanted+YouCtrl | AddKeyword$ Shroud | Description$ Enchanted creatures you control have shroud.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_auramancy.jpg
 Oracle:Other enchantments you control have shroud. (A permanent with shroud can't be the target of spells or abilities.)\nEnchanted creatures you control have shroud.

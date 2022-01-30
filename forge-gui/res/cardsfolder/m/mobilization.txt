@@ -3,5 +3,4 @@ ManaCost:2 W
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.Soldier | AddKeyword$ Vigilance | Description$ Soldier creatures have vigilance.
 A:AB$ Token | Cost$ 2 W | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ You | LegacyImage$ w 1 1 soldier ons | SpellDescription$ Create a 1/1 white Soldier creature token.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mobilization.jpg
 Oracle:Soldier creatures have vigilance.\n{2}{W}: Create a 1/1 white Soldier creature token.

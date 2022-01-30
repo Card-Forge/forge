@@ -4,5 +4,4 @@ Types:Artifact
 A:AB$ DealDamage | Cost$ 4 T Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
 SVar:AIPreference:SacCost$Creature.token+powerLE3+toughnessLE3,Creature.nonToken+cmcLE2+powerLE1+toughnessLE2
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fodder_cannon.jpg
 Oracle:{4}, {T}, Sacrifice a creature: Fodder Cannon deals 4 damage to target creature.

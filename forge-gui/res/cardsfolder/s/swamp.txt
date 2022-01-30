@@ -2,5 +2,4 @@ Name:Swamp
 ManaCost:no cost
 Types:Basic Land Swamp
 SVar:PicCount:4
-SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73973.jpg\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159290\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159291\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159292
 Oracle:({T}: Add {B}.)

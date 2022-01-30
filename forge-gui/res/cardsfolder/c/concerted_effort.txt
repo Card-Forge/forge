@@ -3,5 +3,4 @@ ManaCost:2 W W
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of each upkeep, creatures you control gain flying until end of turn if a creature you control has flying. The same is true for fear, first strike, double strike, landwalk, protection, trample, and vigilance.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Flying & Fear & First Strike & Double Strike & Landwalk & Protection & Trample & Vigilance | SharedKeywordsZone$ Battlefield | SharedRestrictions$ Creature.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/concerted_effort.jpg
 Oracle:At the beginning of each upkeep, creatures you control gain flying until end of turn if a creature you control has flying. The same is true for fear, first strike, double strike, landwalk, protection, trample, and vigilance.

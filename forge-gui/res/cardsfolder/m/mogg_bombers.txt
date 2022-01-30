@@ -5,5 +5,4 @@ PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When another creature enters the battlefield, sacrifice CARDNAME and it deals 3 damage to target player or planeswalker.
 SVar:TrigSac:DB$ Sacrifice | Defined$ Self | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker to deal 3 damage to | NumDmg$ 3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_bombers.jpg
 Oracle:When another creature enters the battlefield, sacrifice Mogg Bombers and it deals 3 damage to target player or planeswalker.

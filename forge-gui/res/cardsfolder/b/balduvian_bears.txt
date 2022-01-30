@@ -2,5 +2,4 @@ Name:Balduvian Bears
 ManaCost:1 G
 Types:Creature Bear
 PT:2/2
-SVar:Picture:http://resources.wizards.com/magic/cards/ia/en-us/card2550.jpg
 Oracle:

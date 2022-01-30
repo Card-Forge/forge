@@ -4,5 +4,4 @@ Types:Creature Elf Druid
 PT:2/1
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigMana | TriggerDescription$ When CARDNAME enters the battlefield, add one mana of any color.
 SVar:TrigMana:DB$ Mana | Produced$ Any | Amount$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/quirion_sentinel.jpg
 Oracle:When Quirion Sentinel enters the battlefield, add one mana of any color.

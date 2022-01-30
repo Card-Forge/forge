@@ -6,6 +6,5 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ DreampodsDig | Trigg
 SVar:DreampodsDig:DB$ DigUntil | Valid$ Creature | ValidDescription$ creature | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, return target creature card from your graveyard to the battlefield.
 SVar:RolledChaos:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grove_of_the_dreampods.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | MinTurn$ 3
 Oracle:When you planeswalk to Grove of the Dreampods or at the beginning of your upkeep, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and the rest on the bottom of your library in a random order.\nWhenever you roll {CHAOS}, return target creature card from your graveyard to the battlefield.

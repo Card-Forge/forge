@@ -3,5 +3,4 @@ ManaCost:1 G
 Types:Creature Human Monk
 PT:2/2
 K:Shroud
-SVar:Picture:http://www.wizards.com/global/images/magic/general/humble_budoka.jpg
 Oracle:Shroud (This creature can't be the target of spells or abilities.)

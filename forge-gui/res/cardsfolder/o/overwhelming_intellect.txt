@@ -5,5 +5,4 @@ A:SP$ Counter | Cost$ 4 U U | TargetType$ Spell | TgtPrompt$ Select target Creat
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedNumber
-SVar:Picture:http://www.wizards.com/global/images/magic/general/overwhelming_intellect.jpg
 Oracle:Counter target creature spell. Draw cards equal to that spell's mana value.

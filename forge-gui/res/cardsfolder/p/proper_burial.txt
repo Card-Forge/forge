@@ -5,5 +5,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:TriggeredCard$CardToughness
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/proper_burial.jpg
 Oracle:Whenever a creature you control dies, you gain life equal to that creature's toughness.

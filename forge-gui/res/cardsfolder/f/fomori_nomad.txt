@@ -2,5 +2,4 @@ Name:Fomori Nomad
 ManaCost:4 R
 Types:Creature Nomad Giant
 PT:4/4
-SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card126149.jpg
 Oracle:

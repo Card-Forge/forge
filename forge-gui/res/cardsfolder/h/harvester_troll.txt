@@ -5,5 +5,4 @@ PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, you may sacrifice a creature or land. If you do, put two +1/+1 counters on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ Sac<1/Creature;Land/creature or land> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
 SVar:AIPreference:SacCost$Creature.token,Land.Basic
-SVar:Picture:http://www.wizards.com/global/images/magic/general/harvester_troll.jpg
 Oracle:When Harvester Troll enters the battlefield, you may sacrifice a creature or land. If you do, put two +1/+1 counters on Harvester Troll.

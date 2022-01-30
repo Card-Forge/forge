@@ -10,5 +10,4 @@ T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSa
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
 SVar:EndOfTurnLeavePlay:True
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_serpent.jpg
 Oracle:Trample, haste\nLightning Serpent enters the battlefield with X +1/+0 counters on it.\nAt the beginning of the end step, sacrifice Lightning Serpent.

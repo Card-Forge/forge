@@ -4,5 +4,4 @@ Types:Creature Aetherborn Vampire
 PT:2/3
 K:Deathtouch
 K:Lifelink
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gifted_aetherborn.jpg
 Oracle:Deathtouch, lifelink

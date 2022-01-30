@@ -6,5 +6,4 @@ T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSa
 SVar:TrigSacrifice:DB$ RepeatEach | RepeatSubAbility$ DBSac | RepeatPlayers$ Player
 SVar:DBSac:DB$ Sacrifice | SacValid$ Permanent | Defined$ Player.IsRemembered | UnlessCost$ Discard<1/Card> | UnlessPayer$ Remembered
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/possessed_portal.jpg
 Oracle:If a player would draw a card, that player skips that draw instead.\nAt the beginning of each end step, each player sacrifices a permanent unless they discard a card.

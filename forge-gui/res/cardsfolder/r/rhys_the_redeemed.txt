@@ -4,5 +4,4 @@ Types:Legendary Creature Elf Warrior
 PT:1/1
 A:AB$ Token | Cost$ 2 GW T | TokenAmount$ 1 | TokenScript$ gw_1_1_elf_warrior | TokenOwner$ You | LegacyImage$ gw 1 1 elf warrior shm | SpellDescription$ Create a 1/1 green and white Elf Warrior creature token.
 A:AB$ CopyPermanent | Cost$ 4 GW GW T | AILogic$ DuplicatePerms | Defined$ Valid Creature.token+YouCtrl | SpellDescription$ For each creature token you control, create a token that's a copy of that creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rhys_the_redeemed.jpg
 Oracle:{2}{G/W}, {T}: Create a 1/1 green and white Elf Warrior creature token.\n{4}{G/W}{G/W}, {T}: For each creature token you control, create a token that's a copy of that creature.

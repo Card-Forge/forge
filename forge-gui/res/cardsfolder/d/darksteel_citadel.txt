@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Artifact Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 K:Indestructible
-SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_citadel.jpg
 Oracle:Indestructible\n{T}: Add {C}.

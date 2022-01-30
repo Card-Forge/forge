@@ -3,5 +3,4 @@ ManaCost:B
 Types:Creature Thrull
 PT:1/1
 A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ B | SpellDescription$ Add {B}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_pet.jpg
 Oracle:Sacrifice Blood Pet: Add {B}.

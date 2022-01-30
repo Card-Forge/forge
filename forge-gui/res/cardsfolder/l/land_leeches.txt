@@ -3,5 +3,4 @@ ManaCost:1 G G
 Types:Creature Leech
 PT:2/2
 K:First Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/land_leeches.jpg
 Oracle:First strike

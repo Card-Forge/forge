@@ -3,5 +3,4 @@ ManaCost:1 B
 Types:Creature Imp
 PT:1/1
 K:Flying
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83010.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)

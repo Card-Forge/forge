@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield,Hand
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/conspiracy.jpg
 Oracle:As Conspiracy enters the battlefield, choose a creature type.\nCreatures you control are the chosen type. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.

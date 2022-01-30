@@ -3,5 +3,4 @@ ManaCost:R G
 Types:Instant
 A:SP$ Destroy | Cost$ R G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBDealDamage | SpellDescription$ Destroy target artifact or enchantment. CARDNAME deals 2 damage to that permanent's controller.
 SVar:DBDealDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ TargetedController
-SVar:Picture:http://www.wizards.com/global/images/magic/general/destructive_revelry.jpg
 Oracle:Destroy target artifact or enchantment. Destructive Revelry deals 2 damage to that permanent's controller.

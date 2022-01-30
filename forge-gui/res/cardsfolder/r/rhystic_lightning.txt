@@ -8,5 +8,4 @@ SVar:DBReset:DB$ StoreSVar | SVar$ RhysticPaid | Type$ Number | Expression$ 1
 SVar:RhysticPaid:Number$1
 SVar:X:Count$Compare RhysticPaid EQ1.2.4
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rhystic_lightning.jpg
 Oracle:Rhystic Lightning deals 4 damage to any target unless that permanent's controller or that player pays {2}. If they do, Rhystic Lightning deals 2 damage to the permanent or player.

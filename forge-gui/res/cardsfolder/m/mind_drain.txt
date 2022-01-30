@@ -5,5 +5,5 @@ A:SP$ Discard | Cost$ 2 B | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose 
 SVar:DBMill:DB$ Mill | Defined$ Targeted | NumCards$ 1 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
-DeckHas:Ability$Mill & Ability$LifeGain
+DeckHas:Ability$Mill|LifeGain
 Oracle:Target opponent discards two cards, mills a card, and loses 1 life. You gain 1 life. (To mill a card, a player puts the top card of their library into their graveyard.)

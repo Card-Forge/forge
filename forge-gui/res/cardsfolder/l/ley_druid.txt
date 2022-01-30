@@ -3,5 +3,4 @@ ManaCost:2 G
 Types:Creature Human Druid
 PT:1/1
 A:AB$ Untap | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | AILogic$ PoolExtraMana | SpellDescription$ Untap target land.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ley_druid.jpg
 Oracle:{T}: Untap target land.

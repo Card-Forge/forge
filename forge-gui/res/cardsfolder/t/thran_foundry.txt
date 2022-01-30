@@ -3,5 +3,4 @@ ManaCost:1
 Types:Artifact
 A:AB$ ChangeZoneAll | Cost$ 1 T Exile<1/CARDNAME> | Origin$ Graveyard | Destination$ Library | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | Shuffle$ True | SpellDescription$ Target player shuffles their graveyard into their library.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_foundry.jpg
 Oracle:{1}, {T}, Exile Thran Foundry: Target player shuffles their graveyard into their library.

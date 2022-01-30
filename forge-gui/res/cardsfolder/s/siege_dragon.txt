@@ -8,5 +8,4 @@ SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Wall.OppCtrl
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDmg | IsPresent$ Wall.DefenderCtrl | PresentCompare$ EQ0 | TriggerDescription$ Whenever CARDNAME attacks, if defending player controls no Walls, it deals 2 damage to each creature without flying that player controls.
 SVar:TrigDmg:DB$ DamageAll | ValidCards$ Creature.withoutFlying+DefenderCtrl | NumDmg$ 2 | ValidDescription$ each creature without flying that player controls.
 SVar:HasAttackEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/siege_dragon.jpg
 Oracle:Flying\nWhen Siege Dragon enters the battlefield, destroy all Walls your opponents control.\nWhenever Siege Dragon attacks, if defending player controls no Walls, it deals 2 damage to each creature without flying that player controls.

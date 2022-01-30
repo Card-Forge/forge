@@ -6,5 +6,4 @@ A:AB$ Animate | Cost$ T | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target lan
 SVar:X:Count$Valid Ally.YouCtrl
 DeckNeeds:Type$Ally
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vastwood_animist.jpg
 Oracle:{T}: Target land you control becomes an X/X Elemental creature until end of turn, where X is the number of Allies you control. It's still a land.

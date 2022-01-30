@@ -2,5 +2,4 @@ Name:Orazca Frillback
 ManaCost:2 G
 Types:Creature Dinosaur
 PT:4/2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/orazca_frillback.jpg
 Oracle:

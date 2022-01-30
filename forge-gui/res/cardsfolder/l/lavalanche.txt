@@ -5,5 +5,4 @@ A:SP$ DealDamage | Cost$ X B R G | ValidTgts$ Player,Planeswalker | TgtPrompt$ S
 SVar:DmgAll:DB$ DamageAll | NumDmg$ X | ValidCards$ Creature.ControlledBy TargetedOrController | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
 SVar:X:Count$xPaid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lavalanche.jpg
 Oracle:Lavalanche deals X damage to target player or planeswalker and each creature that player or that planeswalker's controller controls.

@@ -3,5 +3,4 @@ ManaCost:2 R R
 Types:Creature Minotaur Berserker
 PT:3/3
 K:Haste
-SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card14624.jpg
 Oracle:Haste

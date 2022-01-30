@@ -4,5 +4,4 @@ Types:Enchantment
 S:Mode$ RaiseCost | ValidCard$ Artifact | Activator$ Player | Type$ Spell | Amount$ X | AffectedAmount$ True | Description$ Each artifact spell costs {1} more to cast for each artifact its controller controls.
 SVar:X:Count$Valid Artifact.YouCtrl
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hum_of_the_radix.jpg
 Oracle:Each artifact spell costs {1} more to cast for each artifact its controller controls.

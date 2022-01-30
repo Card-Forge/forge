@@ -4,5 +4,4 @@ Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Human.YouCtrl | TriggerZones$ Battlefield | Execute$ AndJusticeForAll | TriggerDescription$ Whenever a Human enters the battlefield under your control, CARDNAME deals 1 damage to any target.
 SVar:AndJusticeForAll:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vigilante_justice.jpg
 Oracle:Whenever a Human enters the battlefield under your control, Vigilante Justice deals 1 damage to any target.

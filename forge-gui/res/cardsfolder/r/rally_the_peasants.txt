@@ -3,5 +3,4 @@ ManaCost:2 W
 Types:Instant
 K:Flashback:2 R
 A:SP$ PumpAll | Cost$ 2 W | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SpellDescription$ Creatures you control get +2/+0 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rally_the_peasants.jpg
 Oracle:Creatures you control get +2/+0 until end of turn.\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

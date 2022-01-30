@@ -8,5 +8,4 @@ SVar:TrigReveal:DB$ Dig | DigNum$ 1 | Reveal$ True | Optional$ True | ChangeVali
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ MANIFESTATION | CounterNum$ 1 | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ Enchantment | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/arbiter_of_the_ideal.jpg
 Oracle:Flying\nInspired — Whenever Arbiter of the Ideal becomes untapped, reveal the top card of your library. If it's an artifact, creature, or land card, you may put it onto the battlefield with a manifestation counter on it. That permanent is an enchantment in addition to its other types.

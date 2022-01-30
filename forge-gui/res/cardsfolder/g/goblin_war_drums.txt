@@ -4,5 +4,4 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Menace | Description$ Creatures you control have menace.
 SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_war_drums.jpg
 Oracle:Creatures you control have menace. (They can't be blocked except by two or more creatures.)

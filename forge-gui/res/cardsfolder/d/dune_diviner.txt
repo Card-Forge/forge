@@ -3,5 +3,4 @@ ManaCost:2 G
 Types:Creature Naga Cleric
 PT:2/3
 A:AB$ GainLife | Cost$ 1 tapXType<1/Desert> | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dune_diviner.jpg
 Oracle:{1}, Tap an untapped Desert you control: You gain 1 life.

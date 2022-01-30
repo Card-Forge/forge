@@ -8,5 +8,4 @@ AI:RemoveDeck:Random
 AI:RemoveDeck:All
 DeckHints:Color$White
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/transluminant.jpg
 Oracle:{W}, Sacrifice Transluminant: Create a 1/1 white Spirit creature token with flying at the beginning of the next end step.

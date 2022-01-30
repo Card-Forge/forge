@@ -8,5 +8,4 @@ A:AB$ Mana | Cost$ T SubCounter<1/DEPLETION> | Produced$ U | SubAbility$ DBSac |
 SVar:DBSac:DB$ Sacrifice | SacValid$ Self | ConditionPresent$ Card.Self+counters_EQ0_DEPLETION
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://wizards.com/global/images/magic/general/saprazzan_skerry.jpg
 Oracle:Saprazzan Skerry enters the battlefield tapped with two depletion counters on it.\n{T}, Remove a depletion counter from Saprazzan Skerry: Add {U}{U}. If there are no depletion counters on Saprazzan Skerry, sacrifice it.

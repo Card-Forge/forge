@@ -3,5 +3,4 @@ ManaCost:B
 Types:Creature Devil
 PT:1/1
 K:First Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_throwing_devils.jpg
 Oracle:First strike

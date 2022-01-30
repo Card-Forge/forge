@@ -8,8 +8,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Delirium$ True | TriggerZones
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:AIPreference:SacCost$Creature.token
 DeckHints:Ability$Graveyard & Type$Eldrazi|Horror
-DeckHas:Ability$Token & Ability$Delirium
-SVar:Picture:http://www.wizards.com/global/images/magic/general/extricator_of_sin.jpg
+DeckHas:Ability$Token|Delirium
 AlternateMode:DoubleFaced
 Oracle:When Extricator of Sin enters the battlefield, you may sacrifice another permanent. If you do, create a 3/2 colorless Eldrazi Horror creature token.\nDelirium — At the beginning of your upkeep, if there are four or more card types among cards in your graveyard, transform Extricator of Sin.
 
@@ -22,5 +21,4 @@ PT:3/5
 S:Mode$ Continuous | Affected$ Card.Eldrazi+YouCtrl | AddKeyword$ Vigilance | Description$ Eldrazi you control have vigilance.
 A:AB$ Token | Cost$ 2 T Sac<1/Creature.nonEldrazi/non-Eldrazi creature> | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ c_3_2_eldrazi_horror | LegacyImage$ c 3 2 eldrazi horror emn | SpellDescription$ Create a 3/2 colorless Eldrazi Horror creature token.
 SVar:AIPreference:SacCost$Creature.token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/extricator_of_flesh.jpg
 Oracle:Eldrazi you control have vigilance.\n{2}, {T}, Sacrifice a non-Eldrazi creature: Create a 3/2 colorless Eldrazi Horror creature token.

@@ -2,5 +2,4 @@ Name:Roil's Retribution
 ManaCost:3 W W
 Types:Instant
 A:SP$ DealDamage | Cost$ 3 W W | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature to distribute damage to | NumDmg$ 5 | TargetMin$ 1 | TargetMax$ 5 | DividedAsYouChoose$ 5 | SpellDescription$ CARDNAME deals 5 damage divided as you choose among any number of target attacking or blocking creatures.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/roils_retribution.jpg
 Oracle:Roil's Retribution deals 5 damage divided as you choose among any number of target attacking or blocking creatures.

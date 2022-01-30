@@ -6,5 +6,4 @@ K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, each opponent loses 3 life and you gain 3 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 3 | SubAbility$ GainLife
 SVar:GainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/siege_rhino.jpg
 Oracle:Trample\nWhen Siege Rhino enters the battlefield, each opponent loses 3 life and you gain 3 life.

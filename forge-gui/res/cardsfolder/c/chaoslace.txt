@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ Animate | Cost$ R | Colors$ Red | OverwriteColors$ True | ValidTgts$ Card | TgtZone$ Stack,Battlefield | Duration$ Permanent | SpellDescription$ Target spell or permanent becomes red. (Mana symbols on that permanent remain unchanged.)
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chaoslace.jpg
 Oracle:Target spell or permanent becomes red. (Its mana symbols remain unchanged.)

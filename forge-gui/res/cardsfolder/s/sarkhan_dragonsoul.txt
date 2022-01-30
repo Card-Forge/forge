@@ -7,4 +7,4 @@ A:AB$ DealDamage | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$
 A:AB$ ChangeZone | Cost$ SubCounter<9/LOYALTY> | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.Dragon | ChangeNum$ XFetch | Planeswalker$ True | Ultimate$ True | StackDescription$ SpellDescription | SpellDescription$ Search your library for any number of Dragon creature cards, put them onto the battlefield, then shuffle.
 SVar:XFetch:Count$InYourLibrary.Creature.Dragon
 DeckHints:Type$Dragon
-Oracle:[+2]: Sarkhan, Dragonsoul deals 1 damage to each opponent and each creature your opponents control.\n[−3]: Sarkhan, Dragonsoul deals 4 damage to target player or planeswalker.\n[−9]: Search your library for any number of Dragon creature cards, put them onto the battlefield, then shuffle.
+Oracle:[+2]: Sarkhan, Dragonsoul deals 1 damage to each opponent and each creature your opponents control.\n[-3]: Sarkhan, Dragonsoul deals 4 damage to target player or planeswalker.\n[-9]: Search your library for any number of Dragon creature cards, put them onto the battlefield, then shuffle.

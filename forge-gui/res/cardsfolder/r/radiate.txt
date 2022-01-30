@@ -3,5 +3,4 @@ ManaCost:3 R R
 Types:Instant
 A:SP$ CopySpellAbility | Cost$ 3 R R | ValidTgts$ Instant,Sorcery | TargetType$ Spell | TargetsSingleTarget$ True | TargetValidTargeting$ Permanent,Player | Controller$ You | CopyForEachCanTarget$ True | CanTargetPlayer$ True | SpellDescription$ Choose target instant or sorcery spell that targets only a single permanent or player. Copy that spell for each other permanent or player the spell could target. Each copy targets a different one of those permanents and players.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/radiate.jpg
 Oracle:Choose target instant or sorcery spell that targets only a single permanent or player. Copy that spell for each other permanent or player the spell could target. Each copy targets a different one of those permanents and players.

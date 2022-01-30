@@ -10,5 +10,5 @@ SVar:CreaturesYou:Count$Valid Creature.YouCtrl
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionCheckSVar$ CardsThem | ConditionSVarCompare$ GTCardsYou | StackDescription$ SpellDescription | SpellDescription$ If an opponent has more cards in hand than you, draw a card.
 SVar:CardsThem:PlayerCountOpponents$HighestCardsInHand
 SVar:CardsYou:Count$CardsInYourHand
-DeckHas:Ability$LifeGain & Ability$Token
+DeckHas:Ability$LifeGain|Token
 Oracle:If an opponent has more life than you, you gain 4 life.\nIf an opponent controls more creatures than you, create two 1/1 white Human creature tokens.\nIf an opponent has more cards in hand than you, draw a card.

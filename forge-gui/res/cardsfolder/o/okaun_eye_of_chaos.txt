@@ -9,5 +9,4 @@ T:Mode$ FlippedCoin | ValidResult$ Win | TriggerZones$ Battlefield | Execute$ Tr
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | NumDef$ +Y | Double$ True
 SVar:X:Count$CardPower
 SVar:Y:Count$CardToughness
-SVar:Picture:http://www.wizards.com/global/images/magic/general/okaun_eye_of_chaos.jpg
 Oracle:Partner with Zndrsplt, Eye of Wisdom (When this creature enters the battlefield, target player may put Zndrsplt into their hand from their library, then shuffle.)\nAt the beginning of combat on your turn, flip a coin until you lose a flip.\nWhenever a player wins a coin flip, double Okaun's power and toughness until end of turn.

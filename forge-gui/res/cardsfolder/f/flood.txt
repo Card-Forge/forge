@@ -3,5 +3,4 @@ ManaCost:U
 Types:Enchantment
 A:AB$ Tap | Cost$ U U | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying | SpellDescription$ Tap target creature without flying.
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flood.jpg
 Oracle:{U}{U}: Tap target creature without flying.

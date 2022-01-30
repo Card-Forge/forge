@@ -5,5 +5,4 @@ PT:0/0
 K:etbCounter:P1P1:Y:no Condition:CARDNAME enters the battlefield with a number of +1/+1 counters on it equal to the number of creature cards in all graveyards.
 SVar:Y:Count$LastStateGraveyard Creature
 SVar:NeedsToPlayVar:Y GE4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/undergrowth_scavenger.jpg
 Oracle:Undergrowth Scavenger enters the battlefield with a number of +1/+1 counters on it equal to the number of creature cards in all graveyards.

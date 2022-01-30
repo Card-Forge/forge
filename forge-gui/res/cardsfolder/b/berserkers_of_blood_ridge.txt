@@ -3,5 +3,4 @@ ManaCost:4 R
 Types:Creature Human Berserker
 PT:4/4
 K:CARDNAME attacks each combat if able.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/berserkers_of_blood_ridge.jpg
 Oracle:Berserkers of Blood Ridge attacks each combat if able.

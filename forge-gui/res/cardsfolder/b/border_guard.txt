@@ -2,5 +2,4 @@ Name:Border Guard
 ManaCost:2 W
 Types:Creature Human Soldier
 PT:1/4
-SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20396.jpg
 Oracle:

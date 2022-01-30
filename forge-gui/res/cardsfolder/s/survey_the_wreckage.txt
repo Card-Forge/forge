@@ -4,5 +4,4 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ 4 R | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBGoblin | SpellDescription$ Destroy target land. Create a 1/1 red Goblin creature token.
 SVar:DBGoblin:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_goblin | TokenOwner$ You | LegacyImage$ r 1 1 goblin rtr
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/survey_the_wreckage.jpg
 Oracle:Destroy target land. Create a 1/1 red Goblin creature token.

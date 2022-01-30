@@ -5,5 +5,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigSacrifice:DB$ Sacrifice | SacValid$ Creature,Land | Defined$ TriggeredCardController
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tainted_aether.jpg
 Oracle:Whenever a creature enters the battlefield, its controller sacrifices a creature or land.

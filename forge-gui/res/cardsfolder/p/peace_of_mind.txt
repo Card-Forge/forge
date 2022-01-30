@@ -6,5 +6,4 @@ SVar:AIPreference:DiscardCost$Card
 DeckHints:Ability$Discard
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/peace_of_mind.jpg
 Oracle:{W}, Discard a card: You gain 3 life.

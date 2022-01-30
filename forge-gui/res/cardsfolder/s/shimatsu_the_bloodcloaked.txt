@@ -11,5 +11,4 @@ SVar:SacX:Count$Valid Permanent.YouCtrl
 SVar:X:Remembered$Amount
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shimatsu_the_bloodcloaked.jpg
 Oracle:As Shimatsu the Bloodcloaked enters the battlefield, sacrifice any number of permanents. Shimatsu enters the battlefield with that many +1/+1 counters on it.

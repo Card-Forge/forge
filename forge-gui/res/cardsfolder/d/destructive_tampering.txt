@@ -5,5 +5,4 @@ A:SP$ Charm | Cost$ 2 R | Choices$ DBDestroy,CantBlockEffect
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | SpellDescription$ Destroy target artifact.
 SVar:CantBlockEffect:DB$ Effect | Name$ Destructive Tampering Effect | StaticAbilities$ KWPump | AILogic$ Evasion | SpellDescription$ Creatures without flying can't block this turn.
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.withoutFlying | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures without flying can't block this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/destructive_tampering.jpg
 Oracle:Choose one —\n• Destroy target artifact.\n• Creatures without flying can't block this turn.

@@ -5,5 +5,4 @@ A:SP$ PumpAll | Cost$ 3 U | ValidCards$ Creature.OppCtrl | NumAtt$ -X | NumDef$ 
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:X:Count$Converge
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/roilmages_trick.jpg
 Oracle:Converge — Creatures your opponents control get -X/-0 until end of turn, where X is the number of colors of mana spent to cast this spell.\nDraw a card.

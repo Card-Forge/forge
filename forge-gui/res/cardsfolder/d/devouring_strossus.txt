@@ -8,5 +8,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature
 A:AB$ Regenerate | Cost$ Sac<1/Creature> | SpellDescription$ Regenerate CARDNAME.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/devouring_strossus.jpg
 Oracle:Flying, trample\nAt the beginning of your upkeep, sacrifice a creature.\nSacrifice a creature: Regenerate Devouring Strossus.

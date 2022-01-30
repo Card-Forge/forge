@@ -4,5 +4,4 @@ Types:Creature Vampire Dog
 PT:2/2
 A:AB$ Pump | Cost$ Discard<1/Creature> | NumAtt$ +2 | NumDef$ +2 | AILogic$ Aristocrat | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
 SVar:AIPreference:DiscardCost$Card
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_hounds.jpg
 Oracle:Discard a creature card: Vampire Hounds gets +2/+2 until end of turn.

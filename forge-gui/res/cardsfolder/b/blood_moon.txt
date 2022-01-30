@@ -4,5 +4,4 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Land.nonBasic | AddType$ Mountain | RemoveLandTypes$ True | Description$ Nonbasic lands are Mountains.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_moon.jpg
 Oracle:Nonbasic lands are Mountains.

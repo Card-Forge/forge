@@ -5,5 +5,4 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 T:Mode$ ChangesZone | ValidCard$ Artifact.Other+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigEnergy | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another artifact enters the battlefield under your control, you get {E}{E} (two energy counters).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
 A:AB$ AddTurn | Cost$ PayEnergy<8> Exile<1/CARDNAME> | NumTurns$ 1 | SpellDescription$ Take an extra turn after this one.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gontis_aether_heart.jpg
 Oracle:Whenever Gonti's Aether Heart or another artifact enters the battlefield under your control, you get {E}{E} (two energy counters).\nPay {E}{E}{E}{E}{E}{E}{E}{E}, Exile Gonti's Aether Heart: Take an extra turn after this one.

@@ -5,5 +5,4 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ X | SpellDescription$ Add {C} for each Locus on the battlefield.
 SVar:X:Count$Valid Locus
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudpost.jpg
 Oracle:Cloudpost enters the battlefield tapped.\n{T}: Add {C} for each Locus on the battlefield.

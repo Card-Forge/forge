@@ -9,5 +9,4 @@ SVar:X:Count$xPaid
 SVar:PaidNum:Number$0
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/war_cadence.jpg
 Oracle:{X}{R}: This turn, creatures can't block unless their controller pays {X} for each blocking creature they control.

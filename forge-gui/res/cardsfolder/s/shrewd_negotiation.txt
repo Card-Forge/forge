@@ -4,5 +4,4 @@ Types:Sorcery
 A:SP$ Pump | Cost$ 4 U | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Choose target artifact you control | SubAbility$ DBExchange | SpellDescription$ Exchange control of target artifact you control and target artifact or creature you don't control.
 SVar:DBExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Artifact.YouDontCtrl,Creature.YouDontCtrl | TgtPrompt$ Choose target artifact or creature you don't control
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shrewd_negotiation.jpg
 Oracle:Exchange control of target artifact you control and target artifact or creature you don't control.

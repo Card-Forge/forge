@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Land.EnchantedBy | AddKeyword$ Shroud | Descripti
 T:Mode$ TapsForMana | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever enchanted land is tapped for mana, its controller adds an additional one mana of any color.
 SVar:TrigMana:DB$ Mana | Produced$ Any | Defined$ TriggeredCardController
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/trace_of_abundance.jpg
 Oracle:Enchant land\nEnchanted land has shroud. (It can't be the target of spells or abilities.)\nWhenever enchanted land is tapped for mana, its controller adds an additional one mana of any color.

@@ -4,5 +4,4 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 T:Mode$ TapsForMana | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever you tap CARDNAME for mana, target opponent creates a 1/1 colorless Spirit creature token.
 SVar:TrigToken:DB$ Token | ValidTgts$ Opponent | TokenAmount$ 1 | TokenScript$ c_1_1_spirit | LegacyImage$ c 1 1 spirit chk | TokenOwner$ Targeted
-SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidden_orchard.jpg
 Oracle:{T}: Add one mana of any color.\nWhenever you tap Forbidden Orchard for mana, target opponent creates a 1/1 colorless Spirit creature token.

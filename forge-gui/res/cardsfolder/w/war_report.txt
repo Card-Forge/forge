@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ GainLife | Cost$ 3 W | LifeAmount$ X | SpellDescription$ You gain life equal to the number of creatures on the battlefield plus the number of artifacts on the battlefield.
 SVar:X:Count$Valid Creature/Plus.Y
 SVar:Y:Count$Valid Artifact
-SVar:Picture:http://www.wizards.com/global/images/magic/general/war_report.jpg
 Oracle:You gain life equal to the number of creatures on the battlefield plus the number of artifacts on the battlefield.

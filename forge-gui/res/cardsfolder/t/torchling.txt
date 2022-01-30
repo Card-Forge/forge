@@ -8,5 +8,4 @@ A:AB$ ChangeTargets | Cost$ R | TargetType$ Spell | ValidTgts$ Card | TargetsSin
 A:AB$ Pump | Cost$ 1 | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
 A:AB$ Pump | Cost$ 1 | NumAtt$ -1 | NumDef$ +1 | SpellDescription$ CARDNAME gets -1/+1 until end of turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/torchling.jpg
 Oracle:{R}: Untap Torchling.\n{R}: Target creature blocks Torchling this turn if able.\n{R}: Change the target of target spell that targets only Torchling.\n{1}: Torchling gets +1/-1 until end of turn.\n{1}: Torchling gets -1/+1 until end of turn.

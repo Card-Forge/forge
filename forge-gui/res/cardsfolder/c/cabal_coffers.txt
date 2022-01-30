@@ -4,5 +4,4 @@ Types:Land
 A:AB$ Mana | Cost$ 2 T | Produced$ B | Amount$ X | SpellDescription$ Add {B} for each Swamp you control.
 SVar:X:Count$Valid Swamp.YouCtrl
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_coffers.jpg
 Oracle:{2}, {T}: Add {B} for each Swamp you control.

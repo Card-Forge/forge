@@ -4,5 +4,4 @@ Types:Creature Human Knight
 PT:2/2
 K:Flash
 K:First Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/benalish_knight.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFirst strike (This creature deals combat damage before creatures without first strike.)

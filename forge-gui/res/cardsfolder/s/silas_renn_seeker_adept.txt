@@ -7,5 +7,4 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ Tri
 SVar:TrigEffect:DB$ Effect | Name$ Silas Renn, Seeker Adept Effect | ValidTgts$ Artifact.YouOwn | TgtZone$ Graveyard | TgtPrompt$ Select target artifact card in your graveyard | StaticAbilities$ STPlay | RememberObjects$ Targeted | ExileOnMoved$ Graveyard | SpellDescription$ You may cast target artifact card in your graveyard this turn.
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Graveyard | Description$ Until end of turn, you may cast an artifact card in a graveyard.
 K:Partner
-SVar:Picture:http://www.wizards.com/global/images/magic/general/silas_ren_seeker_adept.jpg
 Oracle:Deathtouch\nWhenever Silas Renn, Seeker Adept deals combat damage to a player, choose target artifact card in your graveyard. You may cast that card this turn.\nPartner (You can have two commanders if both have partner.)

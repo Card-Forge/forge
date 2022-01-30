@@ -4,5 +4,4 @@ Types:Creature Human Artificer
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever an artifact enters the battlefield under your control, CARDNAME gains flying until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/weldfast_wingsmith.jpg
 Oracle:Whenever an artifact enters the battlefield under your control, Weldfast Wingsmith gains flying until end of turn.

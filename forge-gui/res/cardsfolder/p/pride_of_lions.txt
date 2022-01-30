@@ -3,5 +3,4 @@ ManaCost:3 G G
 Types:Creature Cat
 PT:4/4
 K:You may have CARDNAME assign its combat damage as though it weren't blocked.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pride_of_lions.jpg
 Oracle:You may have Pride of Lions assign its combat damage as though it weren't blocked.

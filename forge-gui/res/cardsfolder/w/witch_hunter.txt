@@ -5,5 +5,4 @@ PT:1/1
 A:AB$ DealDamage | Cost$ T | NumDmg$ 1 | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | SpellDescription$ CARDNAME deals 1 damage to target player.
 A:AB$ ChangeZone | Cost$ 1 W W T | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature you don't control to its owner's hand.
 SVar:NonCombatPriority:1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/witch_hunter.jpg
 Oracle:{T}: Witch Hunter deals 1 damage to target player or planeswalker.\n{1}{W}{W}, {T}: Return target creature an opponent controls to its owner's hand.

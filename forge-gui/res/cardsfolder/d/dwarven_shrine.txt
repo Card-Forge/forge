@@ -7,5 +7,4 @@ SVar:DBDmg:DB$ DealDamage | Defined$ TriggeredActivator | NumDmg$ X | SubAbility
 SVar:X:Count$ValidGraveyard Card.sharesNameWith Remembered/Twice
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_shrine.jpg
 Oracle:Whenever a player casts a spell, Dwarven Shrine deals X damage to that player, where X is twice the number of cards in all graveyards with the same name as that spell.

@@ -4,5 +4,4 @@ Types:Creature Angel
 PT:5/5
 K:Flying
 K:Vigilance
-SVar:Picture:http://resources.wizards.com/magic/cards/vi/en-us/card3708.jpg
 Oracle:Flying, vigilance

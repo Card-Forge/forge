@@ -2,5 +2,4 @@ Name:Sandblast
 ManaCost:2 W
 Types:Instant
 A:SP$ DealDamage | Cost$ 2 W | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target attacking or blocking creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sandblast.jpg
 Oracle:Sandblast deals 5 damage to target attacking or blocking creature.

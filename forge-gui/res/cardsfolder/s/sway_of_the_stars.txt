@@ -5,5 +5,4 @@ A:SP$ ChangeZoneAll | Cost$ 8 U U | ChangeType$ Card | Origin$ Hand,Graveyard,Ba
 SVar:DBDraw:DB$ Draw | NumCards$ 7 | Defined$ Player | SubAbility$ DBSetLife | StackDescription$ None
 SVar:DBSetLife:DB$ SetLife | Defined$ Player | LifeAmount$ 7 | StackDescription$ None
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sway_of_the_stars.jpg
 Oracle:Each player shuffles their hand, graveyard, and all permanents they own into their library, then draws seven cards. Each player's life total becomes 7.

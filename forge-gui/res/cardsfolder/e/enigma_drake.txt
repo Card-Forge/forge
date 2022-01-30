@@ -5,6 +5,5 @@ PT:*/4
 K:Flying
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of instant and sorcery cards in your graveyard.
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
-SVar:Picture:http://www.wizards.com/global/images/magic/general/enigma_drake.jpg
 DeckHints:Type$Instant|Sorcery
 Oracle:Flying\nEnigma Drake's power is equal to the number of instant and sorcery cards in your graveyard.

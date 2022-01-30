@@ -11,5 +11,4 @@ A:AB$ ChooseColor | Cost$ 5 W W | Defined$ You | SubAbility$ DBEffect2 | SpellDe
 SVar:DBEffect2:DB$ Effect | ValidTgts$ Player,Planeswalker | Name$ Avacyn, Guardian Angel Effect 2 | ReplacementEffects$ RPreventPlayer | AILogic$ Fog | RememberObjects$ Targeted
 SVar:RPreventPlayer:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ Player.IsRemembered,Planeswalker.IsRemembered | ValidSource$ Card.ChosenColor | Description$ Prevent all damage that would be dealt to target player or planeswalker this turn by sources of the color of your choice.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/avacyn_guardian_angel.jpg
 Oracle:Flying, vigilance\n{1}{W}: Prevent all damage that would be dealt to another target creature this turn by sources of the color of your choice.\n{5}{W}{W}: Prevent all damage that would be dealt to target player or planeswalker this turn by sources of the color of your choice.

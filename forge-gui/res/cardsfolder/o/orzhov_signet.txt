@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact
 A:AB$ Mana | Cost$ 1 T | Produced$ W B | SpellDescription$ Add {W}{B}.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/orzhov_signet.jpg
 Oracle:{1}, {T}: Add {W}{B}.

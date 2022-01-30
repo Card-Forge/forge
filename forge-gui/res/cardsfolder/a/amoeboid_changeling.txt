@@ -6,5 +6,4 @@ K:Changeling
 A:AB$ Animate | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | AddAllCreatureTypes$ True | SpellDescription$ Target creature gains all creature types until end of turn.
 A:AB$ Animate | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Types$ Creature | RemoveCreatureTypes$ True | IsCurse$ True | SpellDescription$ Target creature loses all creature types until end of turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/amoeboid_changeling.jpg
 Oracle:Changeling (This card is every creature type.)\n{T}: Target creature gains all creature types until end of turn.\n{T}: Target creature loses all creature types until end of turn.

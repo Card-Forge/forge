@@ -8,5 +8,4 @@ SVar:TrigDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select target play
 SVar:DBDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hellhole_rats.jpg
 Oracle:Haste\nWhen Hellhole Rats enters the battlefield, target player discards a card. Hellhole Rats deals damage to that player equal to that card's mana value.

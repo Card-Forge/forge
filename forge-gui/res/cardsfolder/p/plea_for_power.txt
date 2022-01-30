@@ -7,5 +7,4 @@ SVar:DBDrawThree:DB$ Draw | Defined$ You | NumCards$ 3
 SVar:NeedsToPlayVar:Z LE6
 SVar:Z:Count$InYourHand
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/plea_for_power.jpg
 Oracle:Will of the council — Starting with you, each player votes for time or knowledge. If time gets more votes, take an extra turn after this one. If knowledge gets more votes or the vote is tied, draw three cards.

@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Swamp.YouCtrl | PresentCompare$ GE2 | OptionalDecider$ You | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, if you control two or more Swamps, you may put a -1/-1 counter on target creature.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_kithkin_soldier | TokenOwner$ You | LegacyImage$ w 1 1 kithkin soldier eve
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gwyllion_hedge_mage.jpg
 Oracle:When Gwyllion Hedge-Mage enters the battlefield, if you control two or more Plains, you may create a 1/1 white Kithkin Soldier creature token.\nWhen Gwyllion Hedge-Mage enters the battlefield, if you control two or more Swamps, you may put a -1/-1 counter on target creature.

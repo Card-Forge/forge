@@ -4,7 +4,6 @@ AlternateMode: Split
 Types:Sorcery
 A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | KW$ Trample | SpellDescription$ Until end of turn, target creature gains trample and gets +X/+X, where X is the number of creatures you control.
 SVar:X:Count$TypeYouCtrl.Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/appeal_authority.jpg
 Oracle:Until end of turn, target creature gains trample and gets +X/+X, where X is the number of creatures you control.
 
 ALTERNATE

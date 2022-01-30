@@ -4,5 +4,4 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddTrigger$ TrigBlocked | AddSVar$ RetaliationTrigPump | Description$ Creatures you control have "Whenever this creature becomes blocked by a creature, this creature gets +1/+1 until end of turn."
 SVar:TrigBlocked:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ RetaliationTrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, CARDNAME gets +1/+1 until end of turn.
 SVar:RetaliationTrigPump:DB$ Pump | NumAtt$ 1 | NumDef$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/retaliation.jpg
 Oracle:Creatures you control have "Whenever this creature becomes blocked by a creature, this creature gets +1/+1 until end of turn."

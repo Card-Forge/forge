@@ -4,5 +4,4 @@ Types:Creature Lizard
 PT:3/4
 K:Mountainwalk
 K:Echo:1 R R
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vug_lizard.jpg
 Oracle:Mountainwalk (This creature can't be blocked as long as defending player controls a Mountain.)\nEcho {1}{R}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)

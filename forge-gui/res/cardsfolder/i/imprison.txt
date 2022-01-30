@@ -15,5 +15,4 @@ SVar:DBTapBlocker:DB$ Tap | Defined$ TriggeredBlocker | SubAbility$ DBRemoveBloc
 SVar:DBRemoveAttacker:DB$ RemoveFromCombat | Defined$ TriggeredAttacker
 SVar:DBRemoveBlocker:DB$ RemoveFromCombat | Defined$ TriggeredBlocker | UnblockCreaturesBlockedOnlyBy$ TriggeredBlocker
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/imprison.jpg
 Oracle:Enchant creature\nWhenever a player activates an ability of enchanted creature with {T} in its activation cost that isn't a mana ability, you may pay {1}. If you do, counter that ability. If you don't, destroy Imprison.\nWhenever enchanted creature attacks or blocks, you may pay {1}. If you do, tap the creature, remove it from combat, and creatures it was blocking that had become blocked by only that creature this combat become unblocked. If you don't, destroy Imprison.

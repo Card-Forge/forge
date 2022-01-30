@@ -8,5 +8,5 @@ SVar:DBPutCounter:DB$ PutCounter | Defined$ Imprinted | CounterType$ P1P1 | Coun
 SVar:DBCleanImprinted:DB$ Cleanup | ClearImprinted$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$FilterControlledByRemembered_CardPower
-DeckHas:Ability$Token & Ability$Counters
+DeckHas:Ability$Token|Counters
 Oracle:Exile all creatures. Each player creates a 0/0 green and blue Fractal creature token and puts a number of +1/+1 counters on it equal to the total power of creatures they controlled that were exiled this way.

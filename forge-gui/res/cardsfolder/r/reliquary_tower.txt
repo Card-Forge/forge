@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Land
 S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reliquary_tower.jpg
 Oracle:You have no maximum hand size.\n{T}: Add {C}.

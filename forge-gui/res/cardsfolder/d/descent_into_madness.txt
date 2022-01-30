@@ -8,5 +8,4 @@ SVar:DBExile:DB$ ChangeZone | DefinedPlayer$ Player.IsRemembered | Chooser$ Play
 SVar:X:Count$CardCounters.DESPAIR
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/descent_into_madness.jpg
 Oracle:At the beginning of your upkeep, put a despair counter on Descent into Madness, then each player exiles X permanents they control and/or cards from their hand, where X is the number of despair counters on Descent into Madness.

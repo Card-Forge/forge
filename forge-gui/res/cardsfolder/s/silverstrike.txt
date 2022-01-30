@@ -3,5 +3,4 @@ ManaCost:3 W
 Types:Instant
 A:SP$ Destroy | Cost$ 3 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SubAbility$ DBGainLife | SpellDescription$ Destroy target attacking creature. You gain 3 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/silverstrike.jpg
 Oracle:Destroy target attacking creature. You gain 3 life.

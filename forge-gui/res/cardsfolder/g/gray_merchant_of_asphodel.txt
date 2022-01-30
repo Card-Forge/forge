@@ -8,5 +8,4 @@ SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost
 SVar:AFLifeLost:Number$0
 #AFLifeLost will be set by LoseLife
 SVar:X:Count$Devotion.Black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gray_merchant_of_asphodel.jpg
 Oracle:When Gray Merchant of Asphodel enters the battlefield, each opponent loses X life, where X is your devotion to black. You gain life equal to the life lost this way. (Each {B} in the mana costs of permanents you control counts toward your devotion to black.)

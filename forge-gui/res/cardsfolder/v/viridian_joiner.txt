@@ -5,5 +5,4 @@ PT:1/2
 A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add an amount of {G} equal to CARDNAME's power.
 SVar:X:Count$CardPower
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_joiner.jpg
 Oracle:{T}: Add an amount of {G} equal to Viridian Joiner's power.

@@ -6,5 +6,4 @@ T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidTarget$ Card.Self | Execute$ 
 SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pious_warrior.jpg
 Oracle:Whenever Pious Warrior is dealt combat damage, you gain that much life.

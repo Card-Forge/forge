@@ -2,5 +2,4 @@ Name:Puncturing Blow
 ManaCost:2 R R
 Types:Sorcery
 A:SP$ DealDamage | Cost$ 2 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 5 | ReplaceDyingDefined$ Targeted | SpellDescription$ CARDNAME deals 5 damage to target creature. If that creature would die this turn, exile it instead.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/puncturing_blow.jpg
 Oracle:Puncturing Blow deals 5 damage to target creature. If that creature would die this turn, exile it instead.

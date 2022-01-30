@@ -4,7 +4,7 @@ Types:Creature Human Peasant
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Plains.Basic | ChangeNum$ 1 | ShuffleNonMandatory$ True
-A:AB$SetState | Cost$ 1 W W | Defined$ Self | CheckSVar$ X | SVarCompare$ GE3 | Mode$ Transform | PrecostDesc$ Coven — | SpellDescription$ Transform CARDNAME. Activate only if you control three or more creatures with different powers.
+A:AB$ SetState | Cost$ 1 W W | Defined$ Self | CheckSVar$ X | SVarCompare$ GE3 | Mode$ Transform | PrecostDesc$ Coven — | SpellDescription$ Transform CARDNAME. Activate only if you control three or more creatures with different powers.
 SVar:X:Count$DifferentPower_Creature.YouCtrl
 AlternateMode:DoubleFaced
 Oracle:When Ambitious Farmhand enters the battlefield, you may search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.\nCoven — {1}{W}{W}: Transform Ambitious Farmhand. Activate only if you control three or more creatures with different powers.

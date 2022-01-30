@@ -13,5 +13,4 @@ SVar:ABRegen:AB$Regenerate | Cost$ PayLife<3> | SpellDescription$ Regenerate CAR
 AI:RemoveDeck:Random
 DeckNeeds:Color$Blue|Black
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/anavolver.jpg
 Oracle:Kicker {1}{U} and/or {B} (You may pay an additional {1}{U} and/or {B} as you cast this spell.)\nIf Anavolver was kicked with its {1}{U} kicker, it enters the battlefield with two +1/+1 counters on it and with flying.\nIf Anavolver was kicked with its {B} kicker, it enters the battlefield with a +1/+1 counter on it and with "Pay 3 life: Regenerate Anavolver."

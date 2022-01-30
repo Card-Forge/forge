@@ -3,5 +3,4 @@ ManaCost:2 RW G
 Types:Creature Cat Warrior
 PT:2/4
 K:Double Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/marisis_twinclaws.jpg
 Oracle:Double strike

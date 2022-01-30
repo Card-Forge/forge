@@ -8,5 +8,4 @@ T:Mode$ AbilityCast | ValidCard$ Creature.YouOwn | ValidActivatingPlayer$ You | 
 SVar:TrigDraw:DB$ Draw | NumCards$ 1
 AI:RemoveDeck:Random
 DeckNeeds:Keyword$Eternalize|Embalm
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vizier_of_the_anointed.jpg
 Oracle:When Vizier of the Anointed enters the battlefield, you may search your library for a creature card with eternalize or embalm, put that card into your graveyard, then shuffle.\nWhenever you activate an eternalize or embalm ability, draw a card.

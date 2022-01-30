@@ -9,5 +9,5 @@ SVar:DBGain2:DB$ GainLife | Defined$ You | LifeAmount$ 2
 SVar:LoseTrea:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGainTrea | SpellDescription$ 20 VERT Each opponent loses 2 life and you gain 2 life. Create two Treasure tokens. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")
 SVar:DBGainTrea:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SubAbility$ DBTreasure
 SVar:DBTreasure:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
-DeckHas:Ability$LifeGain & Ability$Token
+DeckHas:Ability$LifeGain|Token
 Oracle:Circle of Death — {5}{B}: Roll a d20.\n1—9 | Each opponent loses 2 life.\n10—19 | Each opponent loses 2 life and you gain 2 life.\n20 | Each opponent loses 2 life and you gain 2 life. Create two Treasure tokens. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")

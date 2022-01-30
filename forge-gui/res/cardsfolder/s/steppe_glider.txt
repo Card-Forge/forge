@@ -5,5 +5,4 @@ PT:2/4
 K:Flying
 K:Vigilance
 A:AB$ Pump | Cost$ 1 W | ValidTgts$ Creature.counters_GE1_P1P1 | TgtPrompt$ Select target creature with a +1/+1 counter | KW$ Flying & Vigilance | SpellDescription$ Target creature with a +1/+1 counter on it gains flying and vigilance until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/steppe_glider.jpg
 Oracle:Flying, vigilance\n{1}{W}: Target creature with a +1/+1 counter on it gains flying and vigilance until end of turn.

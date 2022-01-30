@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature,Land,Planeswalker | AILogic$ Curs
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetColor$ Colorless | AddType$ Land | RemoveCardTypes$ True | RemoveAllAbilities$ True | AddAbility$ ABMana | Description$ Enchanted permanent is a colorless land with "{T}: Add {C}" and loses all other card types and abilities.
 SVar:ABMana:AB$Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/imprisoned_in_the_moon.jpg
 Oracle:Enchant creature, land, or planeswalker\nEnchanted permanent is a colorless land with "{T}: Add {C}" and loses all other card types and abilities.

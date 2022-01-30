@@ -6,5 +6,4 @@ SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ +X | NumDef$ +X
 SVar:X:Count$TypeInYourYard.Creature
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Enchantment
-SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_from_the_fallen.jpg
 Oracle:Constellation — Whenever Strength from the Fallen or another enchantment enters the battlefield under your control, target creature gets +X/+X until end of turn, where X is the number of creature cards in your graveyard.

@@ -7,5 +7,4 @@ SVar:TrigToken:DB$ Token | LegacyImage$ b 2 2 zombie akh | TokenAmount$ 2 | Toke
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Zombie
 DeckHints:Type$Zombie
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lilianas_mastery.jpg
 Oracle:Zombies you control get +1/+1.\nWhen Liliana's Mastery enters the battlefield, create two 2/2 black Zombie creature tokens.

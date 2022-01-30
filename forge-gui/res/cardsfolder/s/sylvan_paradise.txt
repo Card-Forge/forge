@@ -5,5 +5,4 @@ A:SP$ Animate | Cost$ G | ValidTgts$ Creature | TargetMin$ 1 | TargetMax$ MaxTgt
 SVar:MaxTgts:Count$Valid Creature
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_paradise.jpg
 Oracle:One or more target creatures become green until end of turn.

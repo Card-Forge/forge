@@ -5,7 +5,7 @@ PT:2/3
 K:Lifelink
 K:Disturb:1 W
 AlternateMode:DoubleFaced
-DeckHas:Ability$LifeGain & Ability$Graveyard
+DeckHas:Ability$LifeGain|Graveyard
 Oracle:Lifelink\nDisturb {1}{W} (You may cast this card from your graveyard transformed for its disturb cost.)
 
 ALTERNATE

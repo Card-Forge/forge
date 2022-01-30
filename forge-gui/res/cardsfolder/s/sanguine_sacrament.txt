@@ -5,5 +5,4 @@ A:SP$ GainLife | Cost$ X W W | LifeAmount$ XX | Defined$ You | SubAbility$ DBPut
 SVar:DBPutOnBottom:DB$ ChangeZone | Defined$ Parent | Origin$ Stack | Destination$ Library | LibraryPosition$ -1
 SVar:X:Count$xPaid
 SVar:XX:SVar$X/Twice
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sanguine_sacrament.jpg
 Oracle:You gain twice X life. Put Sanguine Sacrament on the bottom of its owner's library.

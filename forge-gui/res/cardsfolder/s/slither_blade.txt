@@ -3,5 +3,4 @@ ManaCost:U
 Types:Creature Naga Rogue
 PT:1/2
 K:Unblockable
-SVar:Picture:http://www.wizards.com/global/images/magic/general/slither_blade.jpg
 Oracle:Slither Blade can't be blocked.

@@ -5,5 +5,4 @@ K:Enchant player
 A:SP$ Attach | Cost$ 2 G | ValidTgts$ Player | AILogic$ Curse
 T:Mode$ Attacks | ValidCard$ Creature | Attacked$ Player.EnchantedBy | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature attacks enchanted player, put a +1/+1 counter on it.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredAttackerLKICopy | CounterType$ P1P1 | CounterNum$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_predation.jpg
 Oracle:Enchant player\nWhenever a creature attacks enchanted player, put a +1/+1 counter on it.

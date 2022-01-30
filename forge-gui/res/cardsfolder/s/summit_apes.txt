@@ -6,5 +6,4 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Menace | CheckSVar$ X | S
 SVar:X:Count$Valid Mountain.YouCtrl
 SVar:BuffedBy:Mountain
 DeckHints:Color$Red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/summit_apes.jpg
 Oracle:As long as you control a Mountain, Summit Apes has menace. (It can't be blocked except by two or more creatures.)

@@ -3,5 +3,4 @@ ManaCost:U B
 Types:Creature Zombie Scout
 PT:2/2
 K:Protection from green
-SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_outlander.jpg
 Oracle:Protection from green

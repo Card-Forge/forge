@@ -5,5 +5,4 @@ A:SP$ Charm | Cost$ 4 G G | MinCharmNum$ 1 | CharmNum$ 3 | Choices$ DestroyArtif
 SVar:DestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 SVar:DestroyEnchantment:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 SVar:DestroyLand:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_thorns.jpg
 Oracle:Choose one or more —\n• Destroy target artifact.\n• Destroy target enchantment.\n• Destroy target land.

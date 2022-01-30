@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:ScoutSearch:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeNum$ 1 | ChangeType$ Creature.withDeathtouch+YouCtrl,Creature.withHexproof+YouCtrl,Creature.withReach+YouCtrl,Creature.withTrample+YouCtrl
 AI:RemoveDeck:Random
 DeckHints:Keyword$Deathtouch|Hexproof|Reach|Trample
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mwonvuli_beast_tracker.jpg
 Oracle:When Mwonvuli Beast Tracker enters the battlefield, search your library for a creature card with deathtouch, hexproof, reach, or trample and reveal it. Shuffle and put that card on top.

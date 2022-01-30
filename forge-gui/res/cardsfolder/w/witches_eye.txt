@@ -4,5 +4,4 @@ Types:Artifact Equipment
 K:Equip:1
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ WitchScry | Description$ Equipped creature has "{1}, {T}: Scry 1.".
 SVar:WitchScry:AB$ Scry | Cost$ 1 T | ScryNum$ 1 | SpellDescription$ Scry 1.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/witches_eye.jpg
 Oracle:Equipped creature has "{1}, {T}: Scry 1." (To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)\nEquip {1}

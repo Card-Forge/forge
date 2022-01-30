@@ -3,5 +3,4 @@ ManaCost:2 G
 Types:Creature Wolf
 PT:2/2
 K:You may have CARDNAME assign its combat damage as though it weren't blocked.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lone_wolf.jpg
 Oracle:You may have Lone Wolf assign its combat damage as though it weren't blocked.

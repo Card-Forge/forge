@@ -4,5 +4,4 @@ Types:Creature Beast
 PT:4/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | Desert$ True | TriggerDescription$ Whenever CARDNAME attacks, if you control a Desert or there is a Desert card in your graveyard, target creature can't block this turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | KW$ HIDDEN CARDNAME can't block.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gilded_cerodon.jpg
 Oracle:Whenever Gilded Cerodon attacks, if you control a Desert or there is a Desert card in your graveyard, target creature can't block this turn.

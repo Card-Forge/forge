@@ -8,6 +8,5 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChao
 SVar:RolledChaos:DB$ Dig | DigNum$ 1 | ValidTgts$ Player | NoMove$ True | Reveal$ True | RememberRevealed$ True | SubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$ True | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mirrored_depths.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always
 Oracle:Whenever a player casts a spell, that player flips a coin. If the player loses the flip, counter that spell.\nWhenever you roll {CHAOS}, target player reveals the top card of their library. If it's a nonland card, you may cast it without paying its mana cost.

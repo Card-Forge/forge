@@ -5,5 +5,4 @@ PT:1/3
 K:Flying
 A:AB$ GainLife | Cost$ 3 G U | LifeAmount$ 2 | SubAbility$ DBDraw | SpellDescription$ You gain 2 life and draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/river_hoopoe.jpg
 Oracle:Flying\n{3}{G}{U}: You gain 2 life and draw a card.

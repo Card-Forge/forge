@@ -7,5 +7,4 @@ SVar:DBIvyPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creatur
 SVar:IvyX:Remembered$Amount
 SVar:DBIvyCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ivy_seer.jpg
 Oracle:{2}{G}, {T}: Reveal any number of green cards in your hand. Target creature gets +X/+X until end of turn, where X is the number of cards revealed this way.

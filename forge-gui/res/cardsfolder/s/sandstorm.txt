@@ -2,5 +2,4 @@ Name:Sandstorm
 ManaCost:G
 Types:Instant
 A:SP$ DamageAll | Cost$ G | NumDmg$ 1 | ValidCards$ Creature.attacking | ValidDescription$ each attacking creature. | SpellDescription$ CARDNAME deals 1 damage to each attacking creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sandstorm.jpg
 Oracle:Sandstorm deals 1 damage to each attacking creature.

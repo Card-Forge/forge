@@ -6,5 +6,4 @@ SVar:DBGainLife:DB$ GainLife | LifeAmount$ XToughness
 SVar:XPower:Sacrificed$CardPower
 SVar:XToughness:Sacrificed$CardToughness
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/momentous_fall.jpg
 Oracle:As an additional cost to cast this spell, sacrifice a creature.\nYou draw cards equal to the sacrificed creature's power, then you gain life equal to its toughness.

@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddKeyword$ First Strike | IsPresent$ Permanent.White+YouCtrl,Permanent.Black+YouCtrl | Description$ Enchanted creature has first strike as long as you control a white or black permanent.
 SVar:BuffedBy:Permanent.White,Permanent.Black
 DeckHints:Color$White|Black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mardu_runemark.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2.\nEnchanted creature has first strike as long as you control a white or black permanent.

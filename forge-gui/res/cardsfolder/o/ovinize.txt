@@ -2,5 +2,4 @@ Name:Ovinize
 ManaCost:1 U
 Types:Instant
 A:SP$ Animate | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 0 | Toughness$ 1 | RemoveAllAbilities$ True | IsCurse$ True | SpellDescription$ Until end of turn, target creature loses all abilities and has base power and toughness 0/1.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ovinize.jpg
 Oracle:Until end of turn, target creature loses all abilities and has base power and toughness 0/1.

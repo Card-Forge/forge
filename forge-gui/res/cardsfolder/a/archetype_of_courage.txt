@@ -5,5 +5,4 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ First Strike | Description$ Creatures you control have first strike.
 S:Mode$ Continuous | Affected$ Creature.OppCtrl | RemoveKeyword$ First Strike | CantHaveKeyword$ First Strike | Description$ Creatures your opponents control lose first strike and can't have or gain first strike.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/archetype_of_courage.jpg
 Oracle:Creatures you control have first strike.\nCreatures your opponents control lose first strike and can't have or gain first strike.

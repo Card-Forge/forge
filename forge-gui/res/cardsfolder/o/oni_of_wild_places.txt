@@ -8,5 +8,4 @@ SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Manda
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$Valid Creature.Red+YouCtrl+inZoneBattlefield
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/oni_of_wild_places.jpg
 Oracle:Haste\nAt the beginning of your upkeep, return a red creature you control to its owner's hand.

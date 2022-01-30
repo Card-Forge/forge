@@ -8,5 +8,4 @@ SVar:TrigDamage2:DB$ DealDamage | Defined$ Enchanted | NumDmg$ 2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage4 | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 4 damage to enchanted creature.
 SVar:TrigDamage4:DB$ DealDamage | Defined$ Enchanted | NumDmg$ 4
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fatal_attraction.jpg
 Oracle:Enchant creature\nWhen Fatal Attraction enters the battlefield, it deals 2 damage to enchanted creature.\nAt the beginning of your upkeep, Fatal Attraction deals 4 damage to enchanted creature.

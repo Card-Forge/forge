@@ -4,6 +4,5 @@ Types:Plane Shandalar
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | SetColor$ Black | AddKeyword$ Deathtouch | Description$ All creatures are black and have deathtouch.
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, creatures you control get +1/+0 and gain first strike until end of turn.
 SVar:RolledChaos:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | KW$ First Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/onakke_catacomb.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | HasCreatureInPlay$ True | RollInMain1$ True
 Oracle:All creatures are black and have deathtouch.\nWhenever you roll {CHAOS}, creatures you control get +1/+0 and gain first strike until end of turn.

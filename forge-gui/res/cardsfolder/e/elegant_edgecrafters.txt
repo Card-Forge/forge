@@ -4,5 +4,5 @@ Types:Creature Elf Artificer
 PT:3/4
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
 K:Fabricate:2
-DeckHas:Ability$Counters & Ability$Token
+DeckHas:Ability$Counters|Token
 Oracle:Elegant Edgecrafters can't be blocked by creatures with power 2 or less.\nFabricate 2 (When this creature enters the battlefield, put two +1/+1 counters on it or create two 1/1 colorless Servo artifact creature tokens.)

@@ -5,5 +5,4 @@ A:SP$ Effect | Cost$ B | Name$ Bubbling Muck Effect | Triggers$ SwampTrigger | S
 SVar:SwampTrigger:Mode$ TapsForMana | ValidCard$ Swamp | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever a player taps a Swamp for mana, that player adds an additional {B}.
 SVar:TrigMana:DB$ Mana | Produced$ B | Amount$ 1 | Defined$ TriggeredPlayer
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bubbling_muck.jpg
 Oracle:Until end of turn, whenever a player taps a Swamp for mana, that player adds an additional {B}.

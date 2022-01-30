@@ -5,5 +5,4 @@ PT:4/4
 K:Trample
 R:Event$ DamageDone | Prevent$ True | ValidCause$ Spell.IsTargeting Self | ValidTarget$ Creature.Self | CauseIsSource$ True | IsPresent$ Creature.YouCtrl+Other | Description$ As long as you control another creature, prevent all damage that would be dealt to CARDNAME by spells that target it.
 SVar:BuffedBy:Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bronze_horse.jpg
 Oracle:Trample\nAs long as you control another creature, prevent all damage that would be dealt to Bronze Horse by spells that target it.

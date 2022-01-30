@@ -3,5 +3,4 @@ ManaCost:3 G G
 Types:Creature Beast
 PT:5/3
 K:Trample
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stomper_cub.jpg
 Oracle:Trample

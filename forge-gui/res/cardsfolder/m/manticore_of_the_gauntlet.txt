@@ -5,5 +5,4 @@ PT:5/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a -1/-1 counter on target creature you control. CARDNAME deals 3 damage to target opponent or planeswalker.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ M1M1 | IsCurse$ True | SubAbility$ DBDealDamage | CounterNum$ 1
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ 3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/manticore_of_the_gauntlet.jpg
 Oracle:When Manticore of the Gauntlet enters the battlefield, put a -1/-1 counter on target creature you control. Manticore of the Gauntlet deals 3 damage to target opponent or planeswalker.

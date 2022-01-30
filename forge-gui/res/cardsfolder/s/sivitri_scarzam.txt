@@ -2,5 +2,4 @@ Name:Sivitri Scarzam
 ManaCost:5 U B
 Types:Legendary Creature Human
 PT:6/4
-SVar:Picture:http://resources.wizards.com/magic/cards/ch/en-us/card2879.jpg
 Oracle:

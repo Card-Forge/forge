@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ ChangeTargets | Cost$ 1 R | TargetType$ Spell | Optional$ True | ValidTgts$ Card.Arcane | SpellDescription$ You may change any targets of target Arcane spell.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sideswipe.jpg
 Oracle:You may change any targets of target Arcane spell.

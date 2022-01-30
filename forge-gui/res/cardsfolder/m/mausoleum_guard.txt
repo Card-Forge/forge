@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:DB$ Token | LegacyImage$ w 1 1 spirit flying isd | TokenAmount$ 2 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
 SVar:SacMe:1
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mausoleum_guard.jpg
 Oracle:When Mausoleum Guard dies, create two 1/1 white Spirit creature tokens with flying.

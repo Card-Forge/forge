@@ -4,5 +4,4 @@ Types:Artifact Vehicle
 PT:8/6
 K:Menace
 K:Crew:4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aradara_express.jpg
 Oracle:Menace\nCrew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)

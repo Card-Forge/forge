@@ -4,5 +4,4 @@ Types:Creature Elemental
 PT:7/7
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of each upkeep, CARDNAME deals 3 damage to any target.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/magmatic_force.jpg
 Oracle:At the beginning of each upkeep, Magmatic Force deals 3 damage to any target.

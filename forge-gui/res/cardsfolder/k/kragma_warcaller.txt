@@ -7,5 +7,4 @@ T:Mode$ Attacks | ValidCard$ Minotaur.YouCtrl | TriggerZones$ Battlefield | Exec
 SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +2
 SVar:BuffedBy:Minotaur
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kragma_warcaller.jpg
 Oracle:Minotaur creatures you control have haste.\nWhenever a Minotaur you control attacks, it gets +2/+0 until end of turn.

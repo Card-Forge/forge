@@ -8,5 +8,4 @@ T:Mode$ SpellCast | ValidCard$ Card.Colorless | ValidActivatingPlayer$ You | Tri
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1
 SVar:BuffedBy:Card.Colorless
 DeckHints:Color$Colorless & Keyword$Devoid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sky_scourer.jpg
 Oracle:Devoid (This card has no color.)\nFlying\nWhenever you cast a colorless spell, Sky Scourer gets +1/+0 until end of turn.

@@ -11,5 +11,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:PlayerCountRemembered$Amount
 SVar:Y:SVar$X/Plus.1
 K:Friends forever
-DeckHas:Ability$Investigate & Ability$Token & Ability$Sacrifice
+DeckHas:Ability$Investigate|Token|Sacrifice
 Oracle:When Will the Wise enters or leaves the battlefield, each opponent may investigate. Each opponent who doesn't loses 1 life. You investigate X times, where X is one plus the number of opponents who investigated this way.\nFriends forever (You can have two commanders if both have friends forever.)

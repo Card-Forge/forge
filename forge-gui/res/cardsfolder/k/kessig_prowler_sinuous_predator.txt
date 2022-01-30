@@ -2,7 +2,7 @@ Name:Kessig Prowler
 ManaCost:G
 Types:Creature Werewolf Horror
 PT:2/1
-A:AB$SetState | Cost$ 4 G | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
+A:AB$ SetState | Cost$ 4 G | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
 AlternateMode:DoubleFaced
 Oracle:{4}{G}: Transform Kessig Prowler.
 

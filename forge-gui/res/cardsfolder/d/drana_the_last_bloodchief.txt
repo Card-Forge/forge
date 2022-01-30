@@ -7,6 +7,6 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescriptio
 SVar:TrigChoose:DB$ ChooseCard | Defined$ TriggeredDefendingPlayer | Choices$ Creature.YouOwn+nonLegendary | Mandatory$ True | ChoiceZone$ Graveyard | AILogic$ WorstCard | RememberChosen$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Graveyard | Destination$ Battlefield | WithCounters$ P1P1_1 | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ ChosenCard | Types$ Vampire | Duration$ Permanent
-DeckHas:Ability$Graveyard & Ability$Counters
+DeckHas:Ability$Graveyard|Counters
 DeckHints:Type$Vampire
 Oracle:Flying\nWhenever Drana, the Last Bloodchief attacks, defending player chooses a nonlegendary creature card in your graveyard. You return that card to the battlefield with an additional +1/+1 counter on it. The creature is a Vampire in addition to its other types.

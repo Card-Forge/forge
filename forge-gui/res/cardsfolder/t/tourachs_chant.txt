@@ -5,5 +5,4 @@ K:UpkeepCost:B
 T:Mode$ ChangesZone | ValidCard$ Forest | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever a player puts a Forest onto the battlefield, CARDNAME deals 3 damage to that player unless they put a -1/-1 counter on a creature they control.
 SVar:TrigDmg:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 3 | UnlessCost$ AddCounter<1/M1M1/Creature.YouCtrl/a creature you control> | UnlessPayer$ TriggeredCardController
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tourachs_chant.jpg
 Oracle:At the beginning of your upkeep, sacrifice Tourach's Chant unless you pay {B}.\nWhenever a player puts a Forest onto the battlefield, Tourach's Chant deals 3 damage to that player unless they put a -1/-1 counter on a creature they control.

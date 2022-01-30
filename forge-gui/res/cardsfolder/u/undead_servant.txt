@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ b_2_2_zombie | TokenOwner$ You | LegacyImage$ b 2 2 zombie ori
 SVar:X:Count$ValidGraveyard Card.YouOwn+namedUndead Servant
 DeckHints:Name$Undead Servant
-SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_servant.jpg
 Oracle:When Undead Servant enters the battlefield, create a 2/2 black Zombie creature token for each card named Undead Servant in your graveyard.

@@ -3,5 +3,4 @@ ManaCost:1
 Types:Artifact Creature Golem
 PT:1/2
 S:Mode$ Continuous | Affected$ Creature.faceDown+YouDontCtrl | AffectedZone$ Battlefield | MayLookAt$ You | Description$ You may look at face-down creatures you don't control any time.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/keeper_of_the_lens.jpg
 Oracle:You may look at face-down creatures you don't control any time.

@@ -10,5 +10,5 @@ SVar:PlayMain1:TRUE
 T:Mode$ SpellCast | ValidCard$ Artifact,Enchantment | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an artifact or enchantment spell, create a 1/1 blue Faerie creature token with flying.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_faerie_flying | TokenOwner$ You | LegacyImage$ u 1 1 faerie flying eld
 SVar:BuffedBy:Artifact,Enchantment
-DeckHints:Type$Artifact | Enchantment
+DeckHints:Type$Artifact|Enchantment
 Oracle:Flying, deathtouch, lifelink\nOther creatures you control with flying get +1/+0.\nWhenever you cast an artifact or enchantment spell, create a 1/1 blue Faerie creature token with flying.

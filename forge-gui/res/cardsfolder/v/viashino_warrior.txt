@@ -2,5 +2,4 @@ Name:Viashino Warrior
 ManaCost:3 R
 Types:Creature Viashino Warrior
 PT:4/2
-SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card12974.jpg
 Oracle:

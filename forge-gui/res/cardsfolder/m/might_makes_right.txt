@@ -7,5 +7,4 @@ SVar:X:Count$Valid Creature.greatestPower
 SVar:Y:Count$Valid Creature.greatestPower+YouCtrl
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/might_makes_right.jpg
 Oracle:At the beginning of combat on your turn, if you control each creature on the battlefield with the greatest power, gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn. (It can attack and {T} this turn.)

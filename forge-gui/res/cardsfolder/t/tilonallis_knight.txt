@@ -5,5 +5,4 @@ PT:2/2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | IsPresent$ Creature.Dinosaur+YouCtrl | PresentCompare$ GE1 | TriggerDescription$ Whenever CARDNAME attacks, if you control a Dinosaur, CARDNAME gets +1/+1 until end of turn.
 SVar:TrigPump:DB$ Pump | NumAtt$ +1 | NumDef$ +1 | Defined$ Self
 DeckHints:Type$Dinosaur
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tilonallis_knight.jpg
 Oracle:Whenever Tilonalli's Knight attacks, if you control a Dinosaur, Tilonalli's Knight gets +1/+1 until end of turn.

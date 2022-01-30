@@ -7,6 +7,5 @@ SVar:DBRandom:DB$ ChooseCard | Choices$ Card.YouOwn | ChoiceZone$ Graveyard | At
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ ChosenCard
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, return target card from your graveyard to your hand.
 SVar:RolledChaos:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Card.YouOwn
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nephalia.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | CardsInGraveyardGE$ 1
 Oracle:At the beginning of your end step, mill seven cards. Then return a card at random from your graveyard to your hand.\nWhenever you roll {CHAOS}, return target card from your graveyard to your hand.

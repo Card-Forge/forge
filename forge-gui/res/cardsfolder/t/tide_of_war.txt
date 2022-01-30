@@ -6,5 +6,4 @@ SVar:WarFlip:DB$ FlipACoin | Caller$ You | WinSubAbility$ SacBlockers | LoseSubA
 SVar:SacBlockers:DB$ SacrificeAll | Defined$ TriggeredBlockers
 SVar:SacAttackers:DB$ SacrificeAll | Defined$ TriggeredAttackers
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tide_of_war.jpg
 Oracle:Whenever one or more creatures block, flip a coin. If you win the flip, each blocking creature is sacrificed by its controller. If you lose the flip, each blocked creature is sacrificed by its controller.

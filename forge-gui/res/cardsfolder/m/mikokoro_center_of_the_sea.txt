@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Draw | Cost$ 2 T | NumCards$ 1 | Defined$ Player | SpellDescription$ Each player draws a card.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mikokoro_center_of_the_sea.jpg
 Oracle:{T}: Add {C}.\n{2}, {T}: Each player draws a card.

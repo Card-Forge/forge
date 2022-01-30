@@ -5,5 +5,4 @@ A:SP$ Destroy | Cost$ 2 GW | ValidTgts$ Creature | TgtPrompt$ Select target crea
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ gw_1_1_elf_warrior | LegacyImage$ gw 1 1 elf warrior shm | TokenOwner$ TargetedController | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardPower
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mercy_killing.jpg
 Oracle:Target creature's controller sacrifices it, then creates X 1/1 green and white Elf Warrior creature tokens, where X is that creature's power.

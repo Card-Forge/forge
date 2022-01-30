@@ -3,5 +3,4 @@ ManaCost:1 B B
 Types:Sorcery
 A:SP$ Destroy | Cost$ 1 B B | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ Destroy target creature or planeswalker.
 K:Awaken:4:5 B B
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ruinous_path.jpg
 Oracle:Destroy target creature or planeswalker.\nAwaken 4—{5}{B}{B} (If you cast this spell for {5}{B}{B}, also put four +1/+1 counters on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land.)

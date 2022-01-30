@@ -6,5 +6,4 @@ A:SP$ ChooseColor | Cost$ 2 W | Defined$ You | AILogic$ MostProminentInHumanDeck
 SVar:DBEffect:DB$ Effect | Name$ Prismatic Strands Effect | ReplacementEffects$ RPrevent | SpellDescription$ Prevent all damage that sources of the color of your choice would deal this turn.
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidSource$ Card.ChosenColor | Description$ Prevent all damage that sources of the chosen color would deal this turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/prismatic_strands.jpg
 Oracle:Prevent all damage that sources of the color of your choice would deal this turn.\nFlashback—Tap an untapped white creature you control. (You may cast this card from your graveyard for its flashback cost. Then exile it.)

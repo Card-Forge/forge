@@ -5,5 +5,4 @@ K:Devoid
 A:SP$ Charm | Cost$ 3 R | Choices$ ExileLandCreature,DealDmg | CharmNum$ 1
 SVar:ExileLandCreature:DB$ ChangeZone | ValidTgts$ Creature.Land | TgtPrompt$ Choose target land creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target land creature.
 SVar:DealDmg:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Choose player or planeswalker | AILogic$ ChoiceBurn | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target player or planeswalker.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/consuming_sinkhole.jpg
 Oracle:Devoid (This card has no color.)\nChoose one —\n• Exile target land creature.\n• Consuming Sinkhole deals 4 damage to target player or planeswalker.

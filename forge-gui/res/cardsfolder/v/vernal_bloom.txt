@@ -4,5 +4,4 @@ Types:Enchantment
 T:Mode$ TapsForMana | ValidCard$ Forest | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever a Forest is tapped for mana, its controller adds an additional {G}.
 SVar:TrigMana:DB$ Mana | Produced$ G | Amount$ 1 | Defined$ TriggeredPlayer
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vernal_bloom.jpg
 Oracle:Whenever a Forest is tapped for mana, its controller adds an additional {G}.

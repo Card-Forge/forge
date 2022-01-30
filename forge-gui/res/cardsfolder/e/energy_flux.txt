@@ -3,5 +3,4 @@ ManaCost:2 U
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Artifact | AddKeyword$ UpkeepCost:2 | Description$ All artifacts have "At the beginning of your upkeep, sacrifice this artifact unless you pay {2}."
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/energy_flux.jpg
 Oracle:All artifacts have "At the beginning of your upkeep, sacrifice this artifact unless you pay {2}."

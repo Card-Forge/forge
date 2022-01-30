@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromYourHandByYou+Self | Destinatio
 SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ w_1_1_bird_flying | LegacyImage$ w 1 1 bird flying dgm | SubAbility$ DBCopy
 SVar:DBCopy:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scion_of_vitu_ghazi.jpg
 Oracle:When Scion of Vitu-Ghazi enters the battlefield, if you cast it from your hand, create a 1/1 white Bird creature token with flying, then populate. (Create a token that's a copy of a creature token you control.)

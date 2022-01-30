@@ -8,7 +8,7 @@ SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:ClueResearch:Count$SacrificedThisTurn Clue
 AlternateMode:DoubleFaced
 DeckHints:Ability$Investigate
-DeckHas:Ability$Investigate & Ability$Token & Ability$Sacrifice
+DeckHas:Ability$Investigate|Token|Sacrifice
 Oracle:{T}: Add {C}.\n{4}, {T}: Investigate.\nAt the beginning of your end step, if you sacrificed three or more clues this turn, transform Hawkins National Laboratory.
 
 ALTERNATE

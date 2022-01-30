@@ -2,5 +2,4 @@ Name:Exploration
 ManaCost:G
 Types:Enchantment
 S:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land on each of your turns.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/exploration.jpg
 Oracle:You may play an additional land on each of your turns.

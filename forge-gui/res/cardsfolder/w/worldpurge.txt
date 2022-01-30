@@ -8,5 +8,4 @@ SVar:DBReturn:DB$ ChangeZone | Defined$ ValidHand Card.IsNotRemembered+Remembere
 SVar:DBEmpty:DB$ DrainMana | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/worldpurge.jpg
 Oracle:Return all permanents to their owners' hands. Each player chooses up to seven cards in their hand, then shuffles the rest into their library. Each player loses all unspent mana.

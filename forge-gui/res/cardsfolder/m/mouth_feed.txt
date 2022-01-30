@@ -4,7 +4,6 @@ AlternateMode: Split
 Types:Sorcery
 A:SP$ Token | Cost$ 2 G | TokenAmount$ 1 | TokenScript$ g_3_3_hippo | TokenOwner$ You | LegacyImage$ g 3 3 hippo akh | SpellDescription$ Create a 3/3 green Hippo creature token.
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mouth_feed.jpg
 Oracle:Create a 3/3 green Hippo creature token.
 
 ALTERNATE

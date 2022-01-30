@@ -2,5 +2,4 @@ Name:Dry Spell
 ManaCost:1 B
 Types:Sorcery
 A:SP$ DamageAll | Cost$ 1 B | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature and each player.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dry_spell.jpg
 Oracle:Dry Spell deals 1 damage to each creature and each player.

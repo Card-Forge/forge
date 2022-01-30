@@ -3,5 +3,4 @@ ManaCost:R
 Types:Enchantment
 A:AB$ DealDamage | Cost$ R Sac<1/Creature> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/barrage_of_expendables.jpg
 Oracle:{R}, Sacrifice a creature: Barrage of Expendables deals 1 damage to any target.

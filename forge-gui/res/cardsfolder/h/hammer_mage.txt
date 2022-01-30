@@ -5,5 +5,4 @@ PT:1/1
 A:AB$ DestroyAll | Cost$ X R T Discard<1/Card> | ValidCards$ Artifact.cmcLEX | SpellDescription$ Destroy all artifacts with mana value X or less.
 SVar:X:Count$xPaid
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hammer_mage.jpg
 Oracle:{X}{R}, {T}, Discard a card: Destroy all artifacts with mana value X or less.

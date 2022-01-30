@@ -8,5 +8,4 @@ T:Mode$ SpellCast | ValidCard$ Card.Green | ValidActivatingPlayer$ You | Trigger
 T:Mode$ SpellCast | ValidCard$ Card.Blue | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemoveCounter | TriggerDescription$ Whenever you cast a blue spell, remove a -1/-1 counter from CARDNAME.
 SVar:TrigRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ M1M1 | CounterNum$ 1
 SVar:BuffedBy:Card.Blue,Card.Green
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sturdy_hatchling.jpg
 Oracle:Sturdy Hatchling enters the battlefield with four -1/-1 counters on it.\n{G/U}: Sturdy Hatchling gains shroud until end of turn. (It can't be the target of spells or abilities.)\nWhenever you cast a green spell, remove a -1/-1 counter from Sturdy Hatchling.\nWhenever you cast a blue spell, remove a -1/-1 counter from Sturdy Hatchling.

@@ -7,5 +7,4 @@ SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STCant
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:STCantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.IsNotRemembered | Description$ Only creatures in the pile of their choice can attack this turn.
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fight_or_flight.jpg
 Oracle:At the beginning of combat on each opponent's turn, separate all creatures that player controls into two piles. Only creatures in the pile of their choice can attack this turn.

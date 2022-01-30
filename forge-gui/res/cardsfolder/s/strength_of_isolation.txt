@@ -5,5 +5,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 2 | AddKeyword$ Protection from black | Description$ Enchanted creature gets +1/+2 and has protection from black.
 K:Madness:W
-SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_isolation.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+2 and has protection from black.\nMadness {W} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

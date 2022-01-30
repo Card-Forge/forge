@@ -7,5 +7,4 @@ SVar:DBDmg:DB$ DamageAll | NumDmg$ X | ValidPlayers$ TargetedController | ValidC
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/friendly_fire.jpg
 Oracle:Target creature's controller reveals a card at random from their hand. Friendly Fire deals damage to that creature and that player equal to the revealed card's mana value.

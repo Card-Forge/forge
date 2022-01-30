@@ -3,5 +3,4 @@ ManaCost:2 B
 Types:Sorcery
 A:SP$ Discard | Cost$ 2 B | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
 DeckHas:Ability$Discard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_rot.jpg
 Oracle:Target player discards two cards.

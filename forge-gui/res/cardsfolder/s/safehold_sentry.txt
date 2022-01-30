@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Creature Elf Warrior
 PT:2/2
 A:AB$ Pump | Cost$ 2 W Untap | NumDef$ +2 | SpellDescription$ CARDNAME gets +0/+2 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/safehold_sentry.jpg
 Oracle:{2}{W}, {Q}: Safehold Sentry gets +0/+2 until end of turn. ({Q} is the untap symbol.)

@@ -3,5 +3,4 @@ ManaCost:1 G G
 Types:Legendary Creature Human Monk
 PT:2/2
 S:Mode$ CantBeCast | ValidCard$ Card | NonCasterTurn$ True | Description$ Players can cast spells only during their own turns.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dosan_the_falling_leaf.jpg
 Oracle:Players can cast spells only during their own turns.

@@ -8,5 +8,4 @@ SVar:X:Remembered$Amount.Plus.3
 SVar:NeedsToPlayVar:Y GE5
 SVar:Y:Count$YourLifeTotal
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hellfire.jpg
 Oracle:Destroy all nonblack creatures. Hellfire deals X plus 3 damage to you, where X is the number of creatures that died this way.

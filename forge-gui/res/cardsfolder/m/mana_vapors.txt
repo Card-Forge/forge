@@ -5,5 +5,4 @@ A:SP$ PumpAll | Cost$ 1 U | ValidTgts$ Player | IsCurse$ True | ValidCards$ Land
 #TODO: the AI doesn't really target the opponent with the tapped lands in a multiplayer game (not necessarily, anyway). Could use improvement before this card is marked AI playable.
 SVar:NeedsToPlay:Land.OppCtrl+tapped
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_vapors.jpg
 Oracle:Lands target player controls don't untap during their next untap step.

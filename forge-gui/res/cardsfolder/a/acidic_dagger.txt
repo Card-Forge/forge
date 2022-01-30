@@ -8,5 +8,4 @@ SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy
 SVar:TrigSac:DB$ SacrificeAll | Defined$ Imprinted | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/acidic_dagger.jpg
 Oracle:{4}, {T}: Whenever target creature deals combat damage to a non-Wall creature this turn, destroy that non-Wall creature. When the targeted creature leaves the battlefield this turn, sacrifice Acidic Dagger. Activate only before blockers are declared.

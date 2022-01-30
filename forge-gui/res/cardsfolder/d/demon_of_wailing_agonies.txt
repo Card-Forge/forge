@@ -9,5 +9,4 @@ SVar:TrigSac:DB$ Sacrifice | Defined$ TriggeredTarget | SacValid$ Creature
 SVar:X:Count$Valid Card.IsCommander+YouOwn+YouCtrl
 SVar:BuffedBy:Card.IsCommander
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/demon_of_wailing_agonies.jpg
 Oracle:Flying\nLieutenant — As long as you control your commander, Demon of Wailing Agonies gets +2/+2 and has "Whenever Demon of Wailing Agonies deals combat damage to a player, that player sacrifices a creature."

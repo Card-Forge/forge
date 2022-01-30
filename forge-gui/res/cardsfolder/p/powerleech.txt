@@ -5,5 +5,4 @@ T:Mode$ AbilityCast | NonTapCost$ True | ValidCard$ Artifact | ValidActivatingPl
 T:Mode$ Taps | ValidCard$ Artifact.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigGain | Secondary$ True | TriggerDescription$ Whenever an artifact an opponent controls becomes tapped or an opponent activates an artifact's ability without {T} in its activation cost, you gain 1 life.
 SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ 1
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/powerleech.jpg
 Oracle:Whenever an artifact an opponent controls becomes tapped or an opponent activates an artifact's ability without {T} in its activation cost, you gain 1 life.

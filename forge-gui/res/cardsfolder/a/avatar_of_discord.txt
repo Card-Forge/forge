@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:DBSacSelf:DB$ Sacrifice | Defined$ Self | UnlessCost$ Discard<2/Card> | UnlessPayer$ You
 SVar:NeedsToPlayVar:Y GE3
 SVar:Y:Count$InYourHand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_discord.jpg
 Oracle:({B/R} can be paid with either {B} or {R}.)\nFlying\nWhen Avatar of Discord enters the battlefield, sacrifice it unless you discard two cards.

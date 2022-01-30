@@ -7,5 +7,4 @@ SVar:DBAttach:DB$ Attach | ValidTgts$ Creature | AILogic$ Pump
 SVar:SPAttach:SP$ Attach | Cost$ 0 | ValidTgts$ Creature
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gliding_licid.jpg
 Oracle:{U}, {T}: Gliding Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {U} to end this effect.\nEnchanted creature has flying.

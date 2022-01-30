@@ -2,5 +2,4 @@ Name:Kraken Hatchling
 ManaCost:U
 Types:Creature Kraken
 PT:0/4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kraken_hatchling.jpg
 Oracle:

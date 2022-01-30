@@ -2,5 +2,4 @@ Name:Human Frailty
 ManaCost:B
 Types:Instant
 A:SP$ Destroy | Cost$ B | ValidTgts$ Creature.Human | TgtPrompt$ Choose target Human creature. | SpellDescription$ Destroy target Human creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/human_frailty.jpg
 Oracle:Destroy target Human creature.

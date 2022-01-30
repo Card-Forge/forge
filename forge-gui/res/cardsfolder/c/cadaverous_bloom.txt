@@ -5,5 +5,4 @@ A:AB$ Mana | Cost$ ExileFromHand<1/Card> | Produced$ B | Amount$ 2 | SpellDescri
 A:AB$ Mana | Cost$ ExileFromHand<1/Card> | Produced$ G | Amount$ 2 | SpellDescription$ Add {G}{G}.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cadaverous_bloom.jpg
 Oracle:Exile a card from your hand: Add {B}{B} or {G}{G}.

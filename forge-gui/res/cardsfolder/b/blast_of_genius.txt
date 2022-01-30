@@ -7,5 +7,4 @@ SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtProm
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blast_of_genius.jpg
 Oracle:Choose any target. Draw three cards, then discard a card. Blast of Genius deals damage equal to the discarded card's mana value to that permanent or player.

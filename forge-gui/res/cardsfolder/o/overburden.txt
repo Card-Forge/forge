@@ -4,5 +4,4 @@ Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.nonToken | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ Whenever a player puts a nontoken creature onto the battlefield, that player returns a land they control to its owner's hand.
 SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ChangeType$ Land | ChangeNum$ 1 | Mandatory$ True | DefinedPlayer$ TriggeredCardController | Chooser$ TriggeredCardController | Hidden$ True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/overburden.jpg
 Oracle:Whenever a player puts a nontoken creature onto the battlefield, that player returns a land they control to its owner's hand.

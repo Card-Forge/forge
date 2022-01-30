@@ -5,5 +5,4 @@ PT:5/5
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, untap up to seven lands.
 SVar:TrigUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land | Amount$ 7
 SVar:FreeSpellAI:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/great_whale.jpg
 Oracle:When Great Whale enters the battlefield, untap up to seven lands.

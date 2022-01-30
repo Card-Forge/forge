@@ -2,5 +2,4 @@ Name:Gilded Lotus
 ManaCost:5
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 3 | SpellDescription$ Add three mana of any one color.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gilded_lotus.jpg
 Oracle:{T}: Add three mana of any one color.

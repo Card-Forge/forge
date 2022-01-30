@@ -5,5 +5,4 @@ PT:4/6
 K:Unblockable
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, target opponent creates five 1/1 red Goblin creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 5 | TokenScript$ r_1_1_goblin | ValidTgts$ Opponent | TokenOwner$ Targeted | LegacyImage$ r 1 1 goblin rav
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hunted_phantasm.jpg
 Oracle:Hunted Phantasm can't be blocked.\nWhen Hunted Phantasm enters the battlefield, target opponent creates five 1/1 red Goblin creature tokens.

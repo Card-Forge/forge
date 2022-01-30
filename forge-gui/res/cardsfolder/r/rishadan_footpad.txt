@@ -7,5 +7,4 @@ SVar:RepeatEachOpp:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAb
 SVar:TrigSac:DB$ Sacrifice | Defined$ Remembered | SacValid$ Permanent | SacMessage$ Permanent | UnlessCost$ 2 | UnlessPayer$ Remembered
 SVar:NeedsToPlayVar:Z LE1
 SVar:Z:Count$Valid Card.canProduceMana+OppCtrl+untapped
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rishadan_footpad.jpg
 Oracle:When Rishadan Footpad enters the battlefield, each opponent sacrifices a permanent unless they pay {2}.

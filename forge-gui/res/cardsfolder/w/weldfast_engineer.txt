@@ -5,5 +5,4 @@ PT:3/3
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target artifact creature you control gets +2/+0 until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Artifact.Creature+YouCtrl | TgtPrompt$ Select target artiffact creature you control | NumAtt$ +2
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/weldfast_engineer.jpg
 Oracle:At the beginning of combat on your turn, target artifact creature you control gets +2/+0 until end of turn.

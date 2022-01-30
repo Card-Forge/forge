@@ -9,5 +9,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_vampire_lifelink | LegacyImage$ w 1 1 vampire lifelink rix | TokenOwner$ You
 SVar:X:TriggeredCard$CardPower
 DeckHints:Type$Vampire
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elenda_the_dusk_rose.jpg
 Oracle:Lifelink\nWhenever another creature dies, put a +1/+1 counter on Elenda, the Dusk Rose.\nWhen Elenda dies, create X 1/1 white Vampire creature tokens with lifelink, where X is Elenda's power.

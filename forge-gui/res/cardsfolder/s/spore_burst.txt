@@ -5,5 +5,4 @@ A:SP$ Token | Cost$ 3 G | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenO
 SVar:X:Count$Domain
 AI:RemoveDeck:Random
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spore_burst.jpg
 Oracle:Domain — Create a 1/1 green Saproling creature token for each basic land type among lands you control.

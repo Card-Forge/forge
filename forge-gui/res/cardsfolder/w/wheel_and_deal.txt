@@ -5,5 +5,4 @@ A:SP$ Discard | Cost$ 3 U | ValidTgts$ Opponent | TargetMin$ 0 | TargetMax$ MaxT
 SVar:DBDrawOpp:DB$ Draw | Defined$ Targeted | NumCards$ 7 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:MaxTgt:PlayerCountPlayers$Amount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wheel_and_deal.jpg
 Oracle:Any number of target opponents each discard their hands, then draw seven cards.\nDraw a card.

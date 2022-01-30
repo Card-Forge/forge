@@ -6,5 +6,4 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME g
 SVar:X:Count$Valid Equipment.YouCtrl
 SVar:BuffedBy:Equipment
 DeckHints:Type$Equipment
-SVar:Picture:http://www.wizards.com/global/images/magic/general/militant_inquisitor.jpg
 Oracle:Militant Inquisitor gets +1/+0 for each Equipment you control.

@@ -4,5 +4,4 @@ Types:Creature Shapeshifter
 PT:3/3
 K:Changeling
 A:AB$ Pump | Cost$ R | KW$ First Strike | Defined$ Self | SpellDescription$ CARDNAME gains first strike until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/war_spike_changeling.jpg
 Oracle:Changeling (This card is every creature type.)\n{R}: War-Spike Changeling gains first strike until end of turn.

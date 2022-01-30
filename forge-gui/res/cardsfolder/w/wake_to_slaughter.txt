@@ -9,6 +9,6 @@ SVar:DBChangeZone2:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | De
 SVar:DBAnimate:DB$ Animate | Keywords$ Haste | Defined$ Remembered | Duration$ Permanent | AtEOT$ Sacrifice | StackDescription$ None | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True | ClearChosenPlayer$ True
 K:Flashback:4 B R
-DeckHas:Ability$Graveyard & Ability$Sacrifice
+DeckHas:Ability$Graveyard|Sacrifice
 AI:RemoveDeck:All
 Oracle:Choose up to two target creature cards in your graveyard. An opponent chooses one of them. Return that card to your hand. Return the other to the battlefield under your control. It gains haste. Exile it at the beginning of the next end step.\nFlashback {4}{B}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

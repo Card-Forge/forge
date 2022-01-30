@@ -6,5 +6,4 @@ A:SP$ Charm | Cost$ 5 U U | Choices$ DBChangeZone,DBDraw | CharmNum$ 1
 SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | Random$ True | UseAllOriginZones$ True | SpellDescription$ Each player shuffles their hand and graveyard into their library.
 SVar:DBDraw:DB$ Draw | NumCards$ 7 | Defined$ Player | SpellDescription$ Each player draws seven cards.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_cascade.jpg
 Oracle:Choose one —\n• Each player shuffles their hand and graveyard into their library.\n• Each player draws seven cards.\nEntwine {2} (Choose both if you pay the entwine cost.)

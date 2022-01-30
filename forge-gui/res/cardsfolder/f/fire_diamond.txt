@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
 K:CARDNAME enters the battlefield tapped.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_diamond.jpg
 Oracle:Fire Diamond enters the battlefield tapped.\n{T}: Add {R}.

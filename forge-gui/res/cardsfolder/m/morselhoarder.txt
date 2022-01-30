@@ -4,5 +4,4 @@ Types:Creature Elemental
 PT:6/4
 K:etbCounter:M1M1:2
 A:AB$ Mana | Cost$ SubCounter<1/M1M1> | Produced$ Any | SpellDescription$ Add one mana of any color.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/morselhoarder.jpg
 Oracle:Morselhoarder enters the battlefield with two -1/-1 counters on it.\nRemove a -1/-1 counter from Morselhoarder: Add one mana of any color.

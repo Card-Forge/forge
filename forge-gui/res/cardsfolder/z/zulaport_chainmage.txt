@@ -4,5 +4,4 @@ Types:Creature Human Shaman Ally
 PT:4/2
 A:AB$ LoseLife | Cost$ T tapXType<1/Ally> | LifeAmount$ 2 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | PrecostDesc$ Cohort — | SpellDescription$ Target opponent loses 2 life.
 DeckHints:Type$Ally
-SVar:Picture:http://www.wizards.com/global/images/magic/general/zulaport_chainmage.jpg
 Oracle:Cohort — {T}, Tap an untapped Ally you control: Target opponent loses 2 life.

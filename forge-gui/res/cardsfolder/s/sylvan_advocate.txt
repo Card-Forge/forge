@@ -5,5 +5,4 @@ PT:2/3
 K:Vigilance
 S:Mode$ Continuous | Affected$ Card.Self,Creature.Land+YouCtrl | AddPower$ 2 | AddToughness$ 2 | CheckSVar$ X | SVarCompare$ GE6 | Description$ As long as you control six or more lands, Sylvan Advocate and land creatures you control get +2/+2.
 SVar:X:Count$Valid Land.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_advocate.jpg
 Oracle:Vigilance\nAs long as you control six or more lands, Sylvan Advocate and land creatures you control get +2/+2.

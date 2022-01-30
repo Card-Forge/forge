@@ -2,5 +2,4 @@ Name:Lay Bare the Heart
 ManaCost:1 B
 Types:Sorcery
 A:SP$ Discard | Cost$ 1 B | ValidTgts$ Opponent | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand+nonLegendary | NumCards$ 1 | SpellDescription$ Target opponent reveals their hand. You choose a nonlegendary, nonland card from it. That player discards that card.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lay_bare_the_heart.jpg
 Oracle:Target opponent reveals their hand. You choose a nonlegendary, nonland card from it. That player discards that card.

@@ -2,5 +2,4 @@ Name:Plague Wind
 ManaCost:7 B B
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 7 B B | ValidCards$ Creature.YouDontCtrl | NoRegen$ True | SpellDescription$ Destroy all creatures you don't control. They can't be regenerated.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/plague_wind.jpg
 Oracle:Destroy all creatures you don't control. They can't be regenerated.

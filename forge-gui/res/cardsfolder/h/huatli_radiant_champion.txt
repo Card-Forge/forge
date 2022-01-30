@@ -9,5 +9,4 @@ SVar:HuatliCreatureETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefiel
 SVar:HuatliDraw:DB$ Draw | NumCards$ 1
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/huatli_radiant_champion.jpg
-Oracle:[+1]: Put a loyalty counter on Huatli, Radiant Champion for each creature you control.\n[−1]: Target creature gets +X/+X until end of turn, where X is the number of creatures you control.\n[−8]: You get an emblem with "Whenever a creature enters the battlefield under your control, you may draw a card."
+Oracle:[+1]: Put a loyalty counter on Huatli, Radiant Champion for each creature you control.\n[-1]: Target creature gets +X/+X until end of turn, where X is the number of creatures you control.\n[-8]: You get an emblem with "Whenever a creature enters the battlefield under your control, you may draw a card."

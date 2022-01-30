@@ -3,5 +3,4 @@ ManaCost:1 G
 Types:Creature Snake Shaman
 PT:1/2
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card75403.jpg
 Oracle:{T}: Add {G}.

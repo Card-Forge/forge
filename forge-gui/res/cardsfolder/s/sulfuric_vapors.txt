@@ -6,5 +6,4 @@ SVar:DmgPlus1:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
 SVar:X:ReplaceCount$DamageAmount/Plus.1
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sulfuric_vapors.jpg
 Oracle:If a red spell would deal damage to a permanent or player, it deals that much damage plus 1 to that permanent or player instead.

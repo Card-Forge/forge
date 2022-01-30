@@ -5,5 +5,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ First Strike | Description$ Enchanted creature has first strike.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | Condition$ Threshold | Description$ Threshold — Enchanted creature gets +3/+0 as long as seven or more cards are in your graveyard.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kamahls_desire.jpg
 Oracle:Enchant creature\nEnchanted creature has first strike.\nThreshold — Enchanted creature gets +3/+0 as long as seven or more cards are in your graveyard.

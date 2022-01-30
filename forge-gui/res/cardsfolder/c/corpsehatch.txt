@@ -4,6 +4,5 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ 3 B B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Choose target nonblack creature. | SubAbility$ DBToken | SpellDescription$ Destroy target nonblack creature.
 SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You | LegacyImage$ c 0 1 eldrazi spawn sac roe | SpellDescription$ Create two 0/1 colorless Eldrazi Spawn creature tokens. They have "Sacrifice this creature: Add {C}."
 DeckHints:Type$Eldrazi
-DeckHas:Ability$Mana.Colorless & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/corpsehatch.jpg
+DeckHas:Ability$Mana.Colorless|Token
 Oracle:Destroy target nonblack creature. Create two 0/1 colorless Eldrazi Spawn creature tokens. They have "Sacrifice this creature: Add {C}."

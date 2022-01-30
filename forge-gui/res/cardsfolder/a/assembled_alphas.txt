@@ -9,5 +9,4 @@ SVar:TrigDamageBlocker:DB$ DealDamage | Defined$ TriggeredBlockerLKICopy | NumDm
 SVar:DBDamageAtk:DB$ DealDamage | Defined$ TriggeredAttackerController | NumDmg$ 3
 SVar:DBDamageBlk:DB$ DealDamage | Defined$ TriggeredBlockerController | NumDmg$ 3
 SVar:HasCombatEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/assembled_alphas.jpg
 Oracle:Whenever Assembled Alphas blocks or becomes blocked by a creature, Assembled Alphas deals 3 damage to that creature and 3 damage to that creature's controller.

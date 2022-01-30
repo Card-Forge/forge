@@ -5,5 +5,4 @@ K:ETBReplacement:Other:ChooseP
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
 S:Mode$ Continuous | Affected$ Player.Chosen | SetMaxHandSize$ 4 | Description$ The chosen player's maximum hand size is four.
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cursed_rack.jpg
 Oracle:As Cursed Rack enters the battlefield, choose an opponent.\nThe chosen player's maximum hand size is four.

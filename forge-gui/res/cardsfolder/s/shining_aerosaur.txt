@@ -3,5 +3,4 @@ ManaCost:4 W
 Types:Creature Dinosaur
 PT:3/4
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shining_aerosaur.jpg
 Oracle:Flying

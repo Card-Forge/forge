@@ -2,5 +2,4 @@ Name:Perilous Vault
 ManaCost:4
 Types:Artifact
 A:AB$ ChangeZoneAll | Cost$ 5 T Exile<1/CARDNAME> | UseAllOriginZones$ True | Origin$ Battlefield | Destination$ Exile | ChangeType$ Permanent.nonLand | IsCurse$ True | SpellDescription$ Exile all nonland permanents.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/perilous_vault.jpg
 Oracle:{5}, {T}, Exile Perilous Vault: Exile all nonland permanents.

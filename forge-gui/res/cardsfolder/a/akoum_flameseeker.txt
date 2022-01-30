@@ -5,5 +5,4 @@ PT:3/2
 A:AB$ Draw | Cost$ T tapXType<1/Ally> | NumCards$ 1 | UnlessCost$ Discard<1/Card> | UnlessSwitched$ True | UnlessPayer$ You | PrecostDesc$ Cohort — | SpellDescription$ Discard a card. If you do, draw a card.
 AI:RemoveDeck:All
 DeckHints:Type$Ally
-SVar:Picture:http://www.wizards.com/global/images/magic/general/akoum_flameseeker.jpg
 Oracle:Cohort — {T}, Tap an untapped Ally you control: Discard a card. If you do, draw a card.

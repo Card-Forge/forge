@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | LegacyImage$ w 2 2 knight vigilance dgm
 DeckHas:Ability$Token
 DeckHints:Type$Gate
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sunspire_gatekeepers.jpg
 Oracle:When Sunspire Gatekeepers enters the battlefield, if you control two or more Gates, create a 2/2 white Knight creature token with vigilance.

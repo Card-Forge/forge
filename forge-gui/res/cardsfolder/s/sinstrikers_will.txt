@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ TapDmg | AddSV
 SVar:TapDmg:AB$DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ SinstrikerCount | SpellDescription$ This creature deals damage equal to its power to target attacking or blocking creature.
 SVar:SinstrikerCount:Count$CardPower
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sinstrikers_will.jpg
 Oracle:Enchant creature\nEnchanted creature has "{T}: This creature deals damage equal to its power to target attacking or blocking creature."

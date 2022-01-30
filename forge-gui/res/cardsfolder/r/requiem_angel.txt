@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:DB$ Token | LegacyImage$ w 1 1 spirit flying dka | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
 DeckHas:Ability$Token
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/requiem_angel.jpg
 Oracle:Flying\nWhenever another non-Spirit creature you control dies, create a 1/1 white Spirit creature token with flying.

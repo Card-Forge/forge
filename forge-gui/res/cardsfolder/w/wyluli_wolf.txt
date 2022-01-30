@@ -3,5 +3,4 @@ ManaCost:1 G
 Types:Creature Wolf
 PT:1/1
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target creature gets +1/+1 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wyluli_wolf.jpg
 Oracle:{T}: Target creature gets +1/+1 until end of turn.

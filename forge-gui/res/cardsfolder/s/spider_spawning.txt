@@ -4,5 +4,4 @@ Types:Sorcery
 K:Flashback:6 B
 A:SP$ Token | Cost$ 4 G | LegacyImage$ g 1 2 spider reach isd | TokenAmount$ X | TokenScript$ g_1_2_spider_reach | TokenOwner$ You | SpellDescription$ Create a 1/2 green Spider creature token with reach for each creature card in your graveyard.
 SVar:X:Count$TypeInYourYard.Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spider_spawning.jpg
 Oracle:Create a 1/2 green Spider creature token with reach for each creature card in your graveyard.\nFlashback {6}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

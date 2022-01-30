@@ -5,5 +5,4 @@ PT:2/1
 K:Flying
 A:AB$ Pump | Cost$ 3 W | Defined$ Self | KW$ Prevent all combat damage that would be dealt to and dealt by CARDNAME. | SpellDescription$ Prevent all combat damage that would be dealt to and dealt by CARDNAME this turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/moonlight_geist.jpg
 Oracle:Flying\n{3}{W}: Prevent all combat damage that would be dealt to and dealt by Moonlight Geist this turn.

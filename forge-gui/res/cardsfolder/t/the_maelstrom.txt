@@ -7,5 +7,4 @@ SVar:TrigDig:DB$ Dig | DigNum$ 1 | Reveal$ True | Optional$ True | ChangeNum$ 1 
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, return target permanent card from your graveyard to the battlefield.
 SVar:RolledChaos:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target permanent card in your graveyard | ValidTgts$ Permanent.YouCtrl
 SVar:AIRollPlanarDieParams:Mode$ Always | CardsInGraveyardGE$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/the_maelstrom.jpg
 Oracle:When you planeswalk to The Maelstrom or at the beginning of your upkeep, you may reveal the top card of your library. If it's a permanent card, you may put it onto the battlefield. If you revealed a card but didn't put it onto the battlefield, put it on the bottom of your library.\nWhenever you roll {CHAOS}, return target permanent card from your graveyard to the battlefield.

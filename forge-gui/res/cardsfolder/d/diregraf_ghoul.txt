@@ -3,5 +3,4 @@ ManaCost:B
 Types:Creature Zombie
 PT:2/2
 K:CARDNAME enters the battlefield tapped.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/diregraf_ghoul.jpg
 Oracle:Diregraf Ghoul enters the battlefield tapped.

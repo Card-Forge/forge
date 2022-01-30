@@ -6,5 +6,4 @@ K:ETBReplacement:Other:ChooseP
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
 S:Mode$ Continuous | EffectZone$ Battlefield | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to 1 plus the number of creatures the chosen player controls.
 SVar:X:Count$Valid Creature.ChosenCtrl/Plus.1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lost_order_of_jarkeld.jpg
 Oracle:As Lost Order of Jarkeld enters the battlefield, choose an opponent.\nLost Order of Jarkeld's power and toughness are each equal to 1 plus the number of creatures the chosen player controls.

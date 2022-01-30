@@ -5,7 +5,6 @@ PT:1/1
 K:Haste
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigFlip | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, flip it.
 SVar:TrigFlip:DB$ SetState | Defined$ Self | Mode$ Flip
-SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_lavarunner.jpg
 AlternateMode:Flip
 Oracle:Haste\nWhenever Akki Lavarunner deals damage to an opponent, flip it.
 
@@ -20,5 +19,4 @@ K:Protection from red
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.RedSource | ValidTarget$ Player | ReplaceWith$ DmgPlus1 | Description$ If a red source would deal damage to a player, it deals that much damage plus 1 to that player instead.
 SVar:DmgPlus1:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
 SVar:X:ReplaceCount$DamageAmount/Plus.1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tok_tok_volcano_born.jpg
 Oracle:Protection from red\nIf a red source would deal damage to a player, it deals that much damage plus 1 to that player instead.

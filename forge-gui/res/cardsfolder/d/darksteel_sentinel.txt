@@ -5,5 +5,4 @@ PT:3/3
 K:Vigilance
 K:Indestructible
 K:Flash
-SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_sentinel.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nVigilance\nIndestructible (Damage and effects that say "destroy" don't destroy this creature. If its toughness is 0 or less, it's still put into its owner's graveyard.)

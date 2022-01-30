@@ -9,5 +9,4 @@ SVar:DBOgreMarauderCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:HasAttackEffect:TRUE
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_marauder.jpg
 Oracle:Whenever Ogre Marauder attacks, it gains "Ogre Marauder can't be blocked" until end of turn unless defending player sacrifices a creature.

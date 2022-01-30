@@ -5,5 +5,4 @@ PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
 SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
 S:Mode$ Continuous | Affected$ Card.Self | Condition$ Monarch | CanBlockAmount$ 1 | Description$ CARDNAME can block an additional creature each combat as long as you're the monarch.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/entourage_of_trest.jpg
 Oracle:When Entourage of Trest enters the battlefield, you become the monarch.\nEntourage of Trest can block an additional creature each combat as long as you're the monarch.

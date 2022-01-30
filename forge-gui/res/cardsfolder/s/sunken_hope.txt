@@ -4,5 +4,4 @@ Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigChangeZoneYou | TriggerDescription$ At the beginning of each player's upkeep, that player returns a creature they control to its owner's hand.
 SVar:TrigChangeZoneYou:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature | DefinedPlayer$ TriggeredPlayer | ChangeNum$ 1
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sunken_hope.jpg
 Oracle:At the beginning of each player's upkeep, that player returns a creature they control to its owner's hand.

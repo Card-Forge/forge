@@ -3,5 +3,4 @@ ManaCost:2 G
 Types:Sorcery
 A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Creature.withHorsemanship | TgtPrompt$ Select target creature with horsemanship | SpellDescription$ Destroy target creature with horsemanship.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/trip_wire.jpg
 Oracle:Destroy target creature with horsemanship.

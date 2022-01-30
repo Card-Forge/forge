@@ -2,5 +2,4 @@ Name:Counterspell
 ManaCost:U U
 Types:Instant
 A:SP$ Counter | Cost$ U U | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/counterspell.jpg
 Oracle:Counter target spell.

@@ -5,5 +5,4 @@ K:Enchant land
 A:SP$ Attach | Cost$ 2 G | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ AbundantGrowthTap | Description$ Enchanted land has "{T}: Add two mana of any one color."
 SVar:AbundantGrowthTap:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | SpellDescription$ Add two mana of any one color.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sheltered_aerie.jpg
 Oracle:Enchant land\nEnchanted land has "{T}: Add two mana of any one color."

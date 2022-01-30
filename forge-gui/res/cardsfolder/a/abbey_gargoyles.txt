@@ -4,5 +4,4 @@ Types:Creature Gargoyle
 PT:3/4
 K:Flying
 K:Protection from red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/abbey_gargoyles.jpg
 Oracle:Flying, protection from red

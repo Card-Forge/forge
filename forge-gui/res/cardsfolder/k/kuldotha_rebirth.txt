@@ -7,5 +7,4 @@ DeckNeeds:Type$Artifact
 SVar:AIPreference:SacCost$Artifact.token,Artifact.cmcEQ1
 DeckHas:Ability$Token
 DeckHints:Type$Goblin
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kuldotha_rebirth.jpg
 Oracle:As an additional cost to cast this spell, sacrifice an artifact.\nCreate three 1/1 red Goblin creature tokens.

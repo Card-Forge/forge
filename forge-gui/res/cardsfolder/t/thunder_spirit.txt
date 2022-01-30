@@ -4,5 +4,4 @@ Types:Creature Elemental Spirit
 PT:2/2
 K:Flying
 K:First Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thunder_spirit.jpg
 Oracle:Flying, first strike

@@ -3,5 +3,4 @@ ManaCost:1 G
 Types:Creature Plant
 PT:0/2
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84434.jpg
 Oracle:{T}: Add one mana of any color.

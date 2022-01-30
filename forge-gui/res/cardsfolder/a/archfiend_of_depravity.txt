@@ -7,5 +7,4 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Opponent | TriggerZones$ Battl
 SVar:TrigChoose:DB$ ChooseCard | Defined$ TriggeredPlayer | Amount$ 2 | TargetControls$ True | Choices$ Creature | ChoiceTitle$ Choose up to two creatures | SubAbility$ DBSacrificeAll | RememberChosen$ True
 SVar:DBSacrificeAll:DB$ SacrificeAll | ValidCards$ Creature.IsNotRemembered | Controller$ TriggeredPlayer | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/archfiend_of_depravity.jpg
 Oracle:Flying\nAt the beginning of each opponent's end step, that player chooses up to two creatures they control, then sacrifices the rest.

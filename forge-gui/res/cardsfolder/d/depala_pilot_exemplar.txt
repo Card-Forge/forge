@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Creature.Vehicle+YouCtrl | AddPower$ 1 | AddTough
 T:Mode$ Taps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME becomes tapped, you may pay {X}. If you do, reveal the top X cards of your library, put all Dwarf and Vehicle cards from among them into your hand, then put the rest on the bottom of your library in a random order.
 SVar:TrigDig:AB$Dig | Cost$ X | DigNum$ X | Reveal$ True | ChangeNum$ All | DestinationZone$ Hand | DestinationZone2$ Library | LibraryPosition$ -1 | RestRandomOrder$ True | ChangeValid$ Dwarf,Vehicle | AILogic$ PayXButSaveMana.3
 SVar:X:Count$xPaid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/depala_pilot_exemplar.jpg
 Oracle:Other Dwarves you control get +1/+1.\nEach Vehicle you control gets +1/+1 as long as it's a creature.\nWhenever Depala, Pilot Exemplar becomes tapped, you may pay {X}. If you do, reveal the top X cards of your library, put all Dwarf and Vehicle cards from among them into your hand, then put the rest on the bottom of your library in a random order.

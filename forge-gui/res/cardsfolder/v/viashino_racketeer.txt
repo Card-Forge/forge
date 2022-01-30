@@ -5,5 +5,4 @@ PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, you may discard a card. If you do, draw a card.
 SVar:TrigDiscard:AB$ Draw | NumCards$ 1 | Cost$ Discard<1/Card>
 SVar:X:Remembered$Amount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_racketeer.jpg
 Oracle:When Viashino Racketeer enters the battlefield, you may discard a card. If you do, draw a card.

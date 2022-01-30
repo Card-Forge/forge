@@ -8,5 +8,4 @@ SVar:DBCopy:DB$ CopyPermanent | NumCopies$ 1 | ValidSupportedCopy$ Creature.Sliv
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TriggeredCard$CardManaCost
 SVar:RememberedSize:Remembered$Amount
-SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Sliver Queen Avatar.full.jpg
 Oracle:Hand +0, life +7\nWhenever you cast a non-Sliver creature spell, exile that spell. If you do, create a token that's a copy of a random non-Shapeshifter Sliver creature card with the same mana value as that spell.

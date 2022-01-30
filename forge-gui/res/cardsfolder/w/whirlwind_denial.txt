@@ -3,5 +3,4 @@ ManaCost:2 U
 Types:Instant
 A:SP$ RepeatEach | Cost$ 2 U | RepeatSpellAbilities$ Card.OppCtrl,Spell.OppCtrl,Activated.OppCtrl,Triggered.OppCtrl | Zone$ Stack | RepeatSubAbility$ DBCounterUnless | SpellDescription$ For each spell and ability your opponents control, counter it unless its controller pays {4}.
 SVar:DBCounterUnless:DB$ Counter | Defined$ Remembered | UnlessCost$ 4 | UnlessPayer$ RememberedController | StackDescription$ Counter {c:Remembered}
-SVar:Picture:https://img.scryfall.com/cards/png/front/9/e/9e127856-bedd-40a9-9e8e-d1f9fbefe07d.png?1578326880
 Oracle:For each spell and ability your opponents control, counter it unless its controller pays {4}.

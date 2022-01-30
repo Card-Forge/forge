@@ -4,5 +4,4 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Land | RemoveType$ Snow | Description$ All lands are no longer snow.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/melting.jpg
 Oracle:All lands are no longer snow.

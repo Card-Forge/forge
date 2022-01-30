@@ -9,5 +9,4 @@ T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Cle
 SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
 DeckNeeds:Type$Goblin
 SVar:AIUntapPreference:BetterTgtThanRemembered
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flamestick_courier.jpg
 Oracle:You may choose not to untap Flamestick Courier during your untap step.\n{2}{R}, {T}: Target Goblin creature gets +2/+2 and has haste for as long as Flamestick Courier remains tapped.

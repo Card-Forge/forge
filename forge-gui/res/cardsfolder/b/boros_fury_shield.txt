@@ -5,5 +5,4 @@ A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature.attacking,Creature.blocking | TgtPr
 SVar:DBDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ X | ConditionManaSpent$ R
 SVar:X:Targeted$CardPower
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_fury_shield.jpg
 Oracle:Prevent all combat damage that would be dealt by target attacking or blocking creature this turn. If {R} was spent to cast this spell, Boros Fury-Shield deals damage to that creature's controller equal to the creature's power.

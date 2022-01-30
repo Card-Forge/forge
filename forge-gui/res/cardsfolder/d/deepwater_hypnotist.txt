@@ -4,5 +4,4 @@ Types:Creature Merfolk Wizard
 PT:2/1
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Inspired — Whenever CARDNAME becomes untapped, target creature an opponent controls gets -3/-0 until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -3 | IsCurse$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deepwater_hypnotist.jpg
 Oracle:Inspired — Whenever Deepwater Hypnotist becomes untapped, target creature an opponent controls gets -3/-0 until end of turn.

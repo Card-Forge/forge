@@ -11,5 +11,4 @@ AI:RemoveDeck:All
 SVar:NonStackingEffect:True
 SVar:NeedsToPlayVar:Creats GE4
 SVar:Creats:Count$Valid Creature.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hecatomb.jpg
 Oracle:When Hecatomb enters the battlefield, sacrifice Hecatomb unless you sacrifice four creatures.\nTap an untapped Swamp you control: Hecatomb deals 1 damage to any target.

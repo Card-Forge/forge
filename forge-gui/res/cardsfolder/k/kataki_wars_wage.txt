@@ -4,5 +4,4 @@ Types:Legendary Creature Spirit
 PT:2/1
 S:Mode$ Continuous | Affected$ Artifact | AddKeyword$ UpkeepCost:1 | Description$ All artifacts have "At the beginning of your upkeep, sacrifice this artifact unless you pay {1}."
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kataki_wars_wage.jpg
 Oracle:All artifacts have "At the beginning of your upkeep, sacrifice this artifact unless you pay {1}."

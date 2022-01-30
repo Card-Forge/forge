@@ -4,5 +4,4 @@ Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact.OppOwn | Execute$ TrigDraw | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever an artifact is put into an opponent's graveyard from the battlefield, you may draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_revel.jpg
 Oracle:Whenever an artifact is put into an opponent's graveyard from the battlefield, you may draw a card.

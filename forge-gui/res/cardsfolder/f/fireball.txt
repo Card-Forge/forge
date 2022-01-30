@@ -8,5 +8,4 @@ SVar:MaxTargets:SVar$Maxplayer/Plus.Maxcreatureorplaneswalker
 SVar:Maxplayer:PlayerCountPlayers$Amount
 SVar:Maxcreatureorplaneswalker:Count$Valid Creature,Planeswalker
 SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fireball.jpg
 Oracle:This spell costs {1} more to cast for each target beyond the first.\nFireball deals X damage divided evenly, rounded down, among any number of targets.

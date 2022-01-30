@@ -5,5 +5,4 @@ T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigPutFromHand | Trigg
 SVar:TrigPutFromHand:DB$ RepeatEach | StartingWithActivator$ True | RepeatPlayers$ Player | RepeatSubAbility$ DBChangeZone | SubAbility$ PWAway
 SVar:DBChangeZone:DB$ ChangeZone | DefinedPlayer$ Player.IsRemembered | Choser$ Player.IsRemembered | ChangeType$ Permanent | ChangeNum$ 1 | Origin$ Hand | Destination$ Battlefield
 SVar:PWAway:DB$ Planeswalk | Cost$ 0
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reality_shaping.jpg
 Oracle:When you encounter Reality Shaping, starting with you, each player may put a permanent card from their hand onto the battlefield. (Then planeswalk away from this phenomenon.)

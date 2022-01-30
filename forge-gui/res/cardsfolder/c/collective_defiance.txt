@@ -9,5 +9,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:DBDamage1:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature (to deal 4 damage) | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
 SVar:DBDamage2:DB$ DealDamage | ValidTgts$ Opponent,Planeswalker | AILogic$ ChoiceBurn | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target opponent or planeswalker.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/collective_defiance.jpg
 Oracle:Escalate {1} (Pay this cost for each mode chosen beyond the first.)\nChoose one or more —\n• Target player discards all the cards in their hand, then draws that many cards.\n• Collective Defiance deals 4 damage to target creature.\n• Collective Defiance deals 3 damage to target opponent or planeswalker.

@@ -3,5 +3,4 @@ ManaCost:G
 Types:Creature Elf
 PT:1/1
 K:Shroud
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_lookout.jpg
 Oracle:Shroud (This creature can't be the target of spells or abilities.)

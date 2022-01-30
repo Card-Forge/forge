@@ -4,7 +4,6 @@ AlternateMode: Split
 Types:Instant
 A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Select target permanent you own | TargetMin$ 0 | TargetMax$ X | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return any number of target permanents you own to your hand.
 SVar:X:Count$Valid Permanent.YouOwn
-SVar:Picture:http://www.wizards.com/global/images/magic/general/leave_chance.jpg
 Oracle:Return any number of target permanents you own to your hand.
 
 ALTERNATE

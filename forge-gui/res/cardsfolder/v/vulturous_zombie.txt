@@ -5,5 +5,4 @@ PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.nonToken+OppOwn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a card is put into an opponent's graveyard from anywhere, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vulturous_zombie.jpg
 Oracle:Flying\nWhenever a card is put into an opponent's graveyard from anywhere, put a +1/+1 counter on Vulturous Zombie.

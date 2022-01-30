@@ -9,5 +9,4 @@ T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Cle
 SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
 DeckNeeds:Type$Soldier
 SVar:AIUntapPreference:BetterTgtThanRemembered
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pearlspear_courier.jpg
 Oracle:You may choose not to untap Pearlspear Courier during your untap step.\n{2}{W}, {T}: Target Soldier creature gets +2/+2 and has vigilance for as long as Pearlspear Courier remains tapped.

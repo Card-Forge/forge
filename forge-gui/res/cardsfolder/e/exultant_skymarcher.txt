@@ -3,5 +3,4 @@ ManaCost:1 W W
 Types:Creature Vampire Soldier
 PT:2/3
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/exultant_skymarcher.jpg
 Oracle:Flying

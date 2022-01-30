@@ -7,5 +7,4 @@ A:AB$ LoseLife | Cost$ B B T | ValidTgts$ Player | TgtPrompt$ Select target play
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 AI:RemoveDeck:Random
 DeckNeeds:Color$Black|White
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stormscape_master.jpg
 Oracle:{W}{W}, {T}: Target creature gains protection from the color of your choice until end of turn.\n{B}{B}, {T}: Target player loses 2 life and you gain 2 life.

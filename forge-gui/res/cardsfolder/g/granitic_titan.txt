@@ -4,5 +4,4 @@ Types:Creature Elemental
 PT:5/4
 K:Menace
 K:Cycling:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/granitic_titan.jpg
 Oracle:Menace\nCycling {2} ({2}, Discard this card: Draw a card.)

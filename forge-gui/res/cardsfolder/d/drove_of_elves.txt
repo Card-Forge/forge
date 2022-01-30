@@ -7,5 +7,4 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$Valid Permanent.Green+YouCtrl
 SVar:BuffedBy:Permanent.Green
 SVar:NoZeroToughnessAI:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/drove_of_elves.jpg
 Oracle:Hexproof\nDrove of Elves's power and toughness are each equal to the number of green permanents you control.

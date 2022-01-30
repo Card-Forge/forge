@@ -6,5 +6,4 @@ SVar:X:Count$xPaid
 A:AB$ PutCounter | Cost$ 3 | CounterType$ ICE | CounterNum$ 1 | SpellDescription$ Put an ice counter on CARDNAME.
 A:AB$ Mana | Cost$ SubCounter<1/ICE> | Produced$ C | SpellDescription$ Add {C}.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/iceberg.jpg
 Oracle:Iceberg enters the battlefield with X ice counters on it.\n{3}: Put an ice counter on Iceberg.\nRemove an ice counter from Iceberg: Add {C}.

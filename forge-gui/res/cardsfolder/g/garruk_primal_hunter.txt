@@ -7,4 +7,4 @@ A:AB$ Draw | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Defined$ You | N
 SVar:X:Count$GreatestPower_Creature.YouCtrl
 A:AB$ Token | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | TokenAmount$ Y | TokenScript$ g_6_6_wurm | TokenOwner$ You | LegacyImage$ g 6 6 wurm m12 | SpellDescription$ Create a 6/6 green Wurm creature token for each land you control.
 SVar:Y:Count$Valid Land.YouCtrl
-Oracle:[+1]: Create a 3/3 green Beast creature token.\n[−3]: Draw cards equal to the greatest power among creatures you control.\n[−6]: Create a 6/6 green Wurm creature token for each land you control.
+Oracle:[+1]: Create a 3/3 green Beast creature token.\n[-3]: Draw cards equal to the greatest power among creatures you control.\n[-6]: Create a 6/6 green Wurm creature token for each land you control.

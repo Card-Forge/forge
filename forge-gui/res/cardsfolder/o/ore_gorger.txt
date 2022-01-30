@@ -6,5 +6,4 @@ T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | Trig
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land
 AI:RemoveDeck:Random
 DeckHints:Type$Spirit|Arcane
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ore_gorger.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, you may destroy target nonbasic land.

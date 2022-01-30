@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$
 SVar:DBToken:DB$ Token | TokenOwner$ You | TokenScript$ g_3_3_dinosaur_trample | LegacyImage$ g 3 3 dinosaur trample rix | TokenAmount$ 1
 DeckHas:Ability$Token
 DeckHints:Type$Dinosaur
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crested_herdcaller.jpg
 Oracle:Trample\nWhen Crested Herdcaller enters the battlefield, create a 3/3 green Dinosaur creature token with trample.

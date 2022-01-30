@@ -5,5 +5,4 @@ K:Haunt:TrigDestroy
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.nonWhite+nonBlack | TgtPrompt$ Select target nonwhite nonblack creature. | SubAbility$ DBSpirit | SpellDescription$ Destroy target nonwhite nonblack creature. Create a 1/1 white Spirit creature token with flying.
 SVar:DBSpirit:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | LegacyImage$ w 1 1 spirit gpt
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/seize_the_soul.jpg
 Oracle:Destroy target nonwhite, nonblack creature. Create a 1/1 white Spirit creature token with flying.\nHaunt (When this spell card is put into a graveyard after resolving, exile it haunting target creature.)\nWhen the creature Seize the Soul haunts dies, destroy target nonwhite, nonblack creature. Create a 1/1 white Spirit creature token with flying.

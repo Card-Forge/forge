@@ -8,5 +8,4 @@ T:Mode$ Attacks | ValidCard$ Dragon.YouCtrl | TriggerZones$ Battlefield | Execut
 SVar:TrigMassacre:DB$ PumpAll | NumAtt$ -1 | NumDef$ -1 | ValidCards$ TriggeredAttacker.Creature+ControlledBy TriggeredDefendingPlayer | IsCurse$ True
 SVar:BuffedBy:Dragon
 DeckHints:Type$Dragon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/silumgar_the_drifting_death.jpg
 Oracle:Flying, hexproof\nWhenever a Dragon you control attacks, creatures defending player controls get -1/-1 until end of turn.

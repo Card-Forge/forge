@@ -11,5 +11,4 @@ SVar:NeedsToPlayVar:Z GE2
 SVar:Z:SVar$Z1/Plus.Z2
 SVar:Z1:Count$ValidGraveyard Creature.YourTeamCtrl
 SVar:Z2:Count$Valid Creature.OppCtrl+inZoneBattlefield
-SVar:Picture:http://www.wizards.com/global/images/magic/general/virtuss_maneuver.jpg
 Oracle:For each player, choose friend or foe. Each friend returns a creature card from their graveyard to their hand. Each foe sacrifices a creature they control.

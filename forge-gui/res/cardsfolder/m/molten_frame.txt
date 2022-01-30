@@ -3,5 +3,4 @@ ManaCost:1 R
 Types:Instant
 A:SP$ Destroy | Cost$ 1 R | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature | SpellDescription$ Destroy target artifact creature.
 K:Cycling:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/molten_frame.jpg
 Oracle:Destroy target artifact creature.\nCycling {2} ({2}, Discard this card: Draw a card.)

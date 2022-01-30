@@ -7,5 +7,4 @@ SVar:DBExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Creatur
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, gain control of target creature you own.
 SVar:RolledChaos:DB$ GainControl | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature you own to gain control of
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glen_elendra.jpg
 Oracle:At end of combat, you may exchange control of target creature you control that dealt combat damage to a player this combat and target creature that player controls.\nWhenever you roll {CHAOS}, gain control of target creature you own.

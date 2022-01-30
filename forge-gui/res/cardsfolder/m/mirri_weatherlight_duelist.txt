@@ -7,5 +7,4 @@ S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Card.Self+tapped | AddK
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigLimitBlock | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, each opponent can't block with more than one creature this combat.
 SVar:TrigLimitBlock:DB$ Effect | Name$ Mirri, Weatherlight Duelist Effect | StaticAbilities$ STLimitBlock | Duration$ UntilEndOfCombat
 SVar:STLimitBlock:Mode$ Continuous | EffectZone$ Command | GlobalRule$ Each opponent can't block with more than one creature. | Description$ Each opponent can't block with more than one creature this combat.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mirri_weatherlight_duelist.jpg
 Oracle:First strike\nWhenever Mirri, Weatherlight Duelist attacks, each opponent can't block with more than one creature this combat.\nAs long as Mirri, Weatherlight Duelist is tapped, no more than one creature can attack you each combat.

@@ -5,5 +5,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever enchanted creature becomes tapped, CARDNAME deals 3 damage to that creature's controller unless that player pays {3}.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 3 | UnlessCost$ 3 | UnlessPayer$ TriggeredCardController
-SVar:Picture:http://www.wizards.com/global/images/magic/general/seizures.jpg
 Oracle:Enchant creature\nWhenever enchanted creature becomes tapped, Seizures deals 3 damage to that creature's controller unless that player pays {3}.

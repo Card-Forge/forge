@@ -3,5 +3,4 @@ ManaCost:4
 Types:Artifact Creature Frog
 PT:2/2
 K:Affinity:Artifact
-SVar:Picture:http://www.wizards.com/global/images/magic/general/frogmite.jpg
 Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)

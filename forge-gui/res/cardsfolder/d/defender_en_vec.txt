@@ -4,5 +4,4 @@ Types:Creature Human Cleric
 PT:2/4
 K:Fading:4
 A:AB$ PreventDamage | Cost$ SubCounter<1/FADE> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | Amount$ 2 | SpellDescription$ Prevent the next 2 damage that would be dealt to any target this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/defender_en_vec.jpg
 Oracle:Fading 4 (This creature enters the battlefield with four fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)\nRemove a fade counter from Defender en-Vec: Prevent the next 2 damage that would be dealt to any target this turn.

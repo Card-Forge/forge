@@ -2,5 +2,4 @@ Name:Mass of Ghouls
 ManaCost:3 B B
 Types:Creature Zombie Warrior
 PT:5/3
-SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card126158.jpg
 Oracle:

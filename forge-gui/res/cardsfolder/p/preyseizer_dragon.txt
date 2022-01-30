@@ -7,5 +7,4 @@ K:Devour:2
 T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals damage to any target equal to the number of +1/+1 counters on CARDNAME.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
 SVar:X:Count$CardCounters.P1P1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/preyseizer_dragon.jpg
 Oracle:Flying\nDevour 2 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with twice that many +1/+1 counters on it.)\nWhenever Preyseizer Dragon attacks, it deals damage to any target equal to the number of +1/+1 counters on Preyseizer Dragon.

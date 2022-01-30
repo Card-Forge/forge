@@ -5,5 +5,4 @@ A:SP$ MultiplePiles | Cost$ 5 R | Defined$ Player | Zone$ Battlefield | ValidCar
 SVar:DBSacrifice:DB$ SacrificeAll | ValidCards$ Card.IsRemembered
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/whims_of_the_fates.jpg
 Oracle:Starting with you, each player separates all permanents they control into three piles. Then each player chooses one of their piles at random and sacrifices those permanents. (Piles can be empty.)

@@ -3,5 +3,4 @@ ManaCost:R
 Types:Instant
 A:SP$ Destroy | Cost$ R | ValidTgts$ Wall | TgtPrompt$ Select target Wall | NoRegen$ True | SpellDescription$ Destroy target Wall. It can't be regenerated.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tunnel.jpg
 Oracle:Destroy target Wall. It can't be regenerated.

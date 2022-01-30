@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddKeyword$ Lifelink | AddTrig
 SVar:EternalChangeZone:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ EternalCounters | TriggerDescription$ Whenever a creature an opponent controls dies, put a +1/+1 counter on CARDNAME.
 SVar:EternalCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eternal_thirst.jpg
 Oracle:Enchant creature\nEnchanted creature has lifelink and "Whenever a creature an opponent controls dies, put a +1/+1 counter on this creature." (Damage dealt by a creature with lifelink also causes its controller to gain that much life.)

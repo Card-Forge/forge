@@ -4,5 +4,4 @@ Types:Sorcery
 K:Strive:2 R
 A:SP$ CopyPermanent | Cost$ 1 R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | TargetMin$ 0 | TargetMax$ MaxTargets | AddKeywords$ Haste | AtEOT$ Exile | SpellDescription$ Choose any number of target creatures you control. For each of them, create a token that's a copy of that creature, except it has haste. Exile those tokens at the beginning of the next end step.
 SVar:MaxTargets:Count$Valid Creature.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/twinflame.jpg
 Oracle:Strive — This spell costs {2}{R} more to cast for each target beyond the first.\nChoose any number of target creatures you control. For each of them, create a token that's a copy of that creature, except it has haste. Exile those tokens at the beginning of the next end step.

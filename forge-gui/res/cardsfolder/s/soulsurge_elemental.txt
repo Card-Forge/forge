@@ -5,5 +5,4 @@ PT:*/1
 K:First Strike
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soulsurge_elemental.jpg
 Oracle:First strike\nSoulsurge Elemental's power is equal to the number of creatures you control.

@@ -4,5 +4,4 @@ Types:Creature Wurm
 PT:6/6
 K:Bloodthirst:3
 K:Trample
-SVar:Picture:http://www.wizards.com/global/images/magic/general/carnage_wurm.jpg
 Oracle:Bloodthirst 3 (If an opponent was dealt damage this turn, this creature enters the battlefield with three +1/+1 counters on it.)\nTrample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)

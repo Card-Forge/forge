@@ -4,5 +4,4 @@ Types:Creature Giant
 PT:6/4
 K:Trample
 K:Rampage:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/craw_giant.jpg
 Oracle:Trample\nRampage 2 (Whenever this creature becomes blocked, it gets +2/+2 until end of turn for each creature blocking it beyond the first.)

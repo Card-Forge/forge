@@ -6,5 +6,4 @@ K:Graft:5
 K:CARDNAME can't attack or block.
 DeckNeeds:Ability$Counters
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vigean_hydropon.jpg
 Oracle:Graft 5 (This creature enters the battlefield with five +1/+1 counters on it. Whenever another creature enters the battlefield, you may move a +1/+1 counter from this creature onto it.)\nVigean Hydropon can't attack or block.

@@ -7,5 +7,4 @@ SVar:DBAttach:DB$ Attach | ValidTgts$ Creature | AILogic$ Pump
 SVar:SPAttach:SP$ Attach | Cost$ 0 | ValidTgts$ Creature
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ First Strike | Description$ Enchanted creature has first strike.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/quickening_licid.jpg
 Oracle:{1}{W}, {T}: Quickening Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {W} to end this effect.\nEnchanted creature has first strike.

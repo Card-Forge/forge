@@ -8,5 +8,4 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/penance.jpg
 Oracle:Put a card from your hand on top of your library: The next time a black or red source of your choice would deal damage this turn, prevent that damage.

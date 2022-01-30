@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Creature.Cat+YouCtrl | AddPower$ 2 | AddToughness
 SVar:X:Count$Valid Card.Self+equipped
 SVar:EquipMe:Once
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/raksha_golden_cub.jpg
 Oracle:Vigilance\nAs long as Raksha Golden Cub is equipped, Cat creatures you control get +2/+2 and have double strike.

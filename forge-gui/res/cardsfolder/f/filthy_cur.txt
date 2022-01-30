@@ -5,5 +5,4 @@ PT:2/2
 T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME is dealt damage, you lose that much life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/filthy_cur.jpg
 Oracle:Whenever Filthy Cur is dealt damage, you lose that much life.

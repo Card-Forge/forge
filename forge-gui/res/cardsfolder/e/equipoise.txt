@@ -23,5 +23,4 @@ SVar:OppCreature:Count$Valid Creature.RememberedPlayerCtrl
 SVar:YourCreature:Count$Valid Creature.YouCtrl
 SVar:ExcessCreature:SVar$OppCreature/Minus.YourCreature
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/equipoise.jpg
 Oracle:At the beginning of your upkeep, for each land target player controls in excess of the number you control, choose a land that player controls, then the chosen permanents phase out. Repeat this process for artifacts and creatures. (While they're phased out, they're treated as though they don't exist. They phase in before that player untaps during their next untap step.)

@@ -4,5 +4,4 @@ Types:Creature Cat Knight
 PT:1/3
 K:Flying
 K:Vigilance
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83412.jpg
 Oracle:Flying, vigilance (This creature can't be blocked except by creatures with flying or reach, and attacking doesn't cause this creature to tap.)

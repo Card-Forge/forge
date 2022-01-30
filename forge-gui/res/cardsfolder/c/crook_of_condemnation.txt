@@ -4,5 +4,4 @@ Types:Artifact
 A:AB$ ChangeZone | Cost$ 1 T | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
 A:AB$ ChangeZoneAll | Cost$ 1 Exile<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | AILogic$ ExileGraveyards | SpellDescription$ Exile all cards from all graveyards.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crook_of_condemnation.jpg
 Oracle:{1}, {T}: Exile target card from a graveyard.\n{1}, Exile Crook of Condemnation: Exile all cards from all graveyards.

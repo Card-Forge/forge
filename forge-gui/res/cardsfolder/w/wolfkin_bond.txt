@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenScript$ g_2_2_wolf | LegacyImage$ g 2 2 wolf emn | TokenOwner$ You | TokenAmount$ 1
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wolfkin_bond.jpg
 Oracle:Enchant creature\nWhen Wolfkin Bond enters the battlefield, create a 2/2 green Wolf creature token.\nEnchanted creature gets +2/+2.

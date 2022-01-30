@@ -4,5 +4,4 @@ Types:Creature Insect
 PT:1/1
 A:AB$ Untap | Cost$ Return<1/Elf> | ValidTgts$ Creature | AILogic$ Never | TgtPrompt$ Select target creature | ActivationLimit$ 1 | SpellDescription$ Untap target creature. Activate only once each turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_symbiote.jpg
 Oracle:Return an Elf you control to its owner's hand: Untap target creature. Activate only once each turn.

@@ -5,5 +5,4 @@ A:SP$ RepeatEach | Cost$ 1 G G | RepeatSubAbility$ DBToken | RepeatPlayers$ Play
 SVar:DBToken:DB$ Token | TokenAmount$ CountForest | TokenScript$ g_1_1_cat | TokenOwner$ Player.IsRemembered | LegacyImage$ g 1 1 cat mir
 SVar:CountForest:Count$Valid Forest.untapped+RememberedPlayerCtrl
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/waiting_in_the_weeds.jpg
 Oracle:Each player creates a 1/1 green Cat creature token for each untapped Forest they control.

@@ -3,5 +3,4 @@ ManaCost:B
 Types:Instant
 A:SP$ ChangeZone | Cost$ B | TargetMin$ 0 | TargetMax$ 3 | TargetsFromSingleZone$ True | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile up to three target cards from a single graveyard.
 K:Cycling:B
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scarab_feast.jpg
 Oracle:Exile up to three target cards from a single graveyard.\nCycling {B} ({B}, Discard this card: Draw a card.)

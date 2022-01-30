@@ -5,5 +5,4 @@ PT:3/4
 S:Mode$ Continuous | Affected$ Instant.YouCtrl,Sorcery.YouCtrl,Dragon.YouCtrl | AddHiddenKeyword$ CARDNAME can't be countered. | AffectedZone$ Stack | Description$ Instant, sorcery, and Dragon spells you control can't be countered.
 T:Mode$ SpellCast | ValidCard$ Instant.wasCastFromYourHand,Sorcery.wasCastFromYourHand | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+attackedThisTurn | Execute$ TrigRebound | TriggerDescription$ Whenever you cast an instant or sorcery spell from your hand, if CARDNAME attacked this turn, that spell gains rebound.
 SVar:TrigRebound:DB$ Pump | Defined$ TriggeredCard | KW$ Rebound | PumpZone$ Stack
-SVar:Picture:http://www.wizards.com/global/images/magic/general/taigam_ojutai_master.jpg
 Oracle:Instant, sorcery, and Dragon spells you control can't be countered.\nWhenever you cast an instant or sorcery spell from your hand, if Taigam, Ojutai Master attacked this turn, that spell gains rebound. (Exile the spell as it resolves. At the beginning of your next upkeep, you may cast that card from exile without paying its mana cost.)

@@ -3,5 +3,4 @@ ManaCost:4 W W
 Types:Creature Cat Rebel
 PT:4/7
 K:Vigilance
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jhovall_queen.jpg
 Oracle:Vigilance

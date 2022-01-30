@@ -2,5 +2,4 @@ Name:Horned Turtle
 ManaCost:2 U
 Types:Creature Turtle
 PT:1/4
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83125.jpg
 Oracle:

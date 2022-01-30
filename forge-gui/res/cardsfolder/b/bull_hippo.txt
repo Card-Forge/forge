@@ -3,5 +3,4 @@ ManaCost:3 G
 Types:Creature Hippo
 PT:3/3
 K:Islandwalk
-SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card13103.jpg
 Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)

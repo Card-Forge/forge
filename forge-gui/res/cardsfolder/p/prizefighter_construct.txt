@@ -2,5 +2,4 @@ Name:Prizefighter Construct
 ManaCost:5
 Types:Artifact Creature Construct
 PT:6/2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/prizefighter_construct.jpg
 Oracle:

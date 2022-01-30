@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Untap | Cost$ 1 T | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Untap target land.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deserted_temple.jpg
 Oracle:{T}: Add {C}.\n{1}, {T}: Untap target land.

@@ -4,5 +4,4 @@ Types:Creature Spirit
 PT:2/1
 K:Flying
 A:AB$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lantern_spirit.jpg
 Oracle:Flying\n{U}: Return Lantern Spirit to its owner's hand.

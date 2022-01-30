@@ -5,5 +5,4 @@ PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, target opponent loses life equal to the number of Elves you control.
 SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ X
 SVar:X:Count$Valid Elf.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shaman_of_the_pack.jpg
 Oracle:When Shaman of the Pack enters the battlefield, target opponent loses life equal to the number of Elves you control.

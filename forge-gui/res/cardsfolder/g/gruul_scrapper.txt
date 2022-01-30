@@ -8,5 +8,4 @@ SVar:ManaNeededToAvoidNegativeEffect:red
 AI:RemoveDeck:Random
 SVar:PlayMain1:ALWAYS
 DeckNeeds:Color$Red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_scrapper.jpg
 Oracle:When Gruul Scrapper enters the battlefield, if {R} was spent to cast it, it gains haste until end of turn.

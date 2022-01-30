@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ 2 B B | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, that player may pay {3}. If they don't, CARDNAME deals 2 damage to that player and you tap that creature.
 SVar:TrigDmg:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 2 | UnlessCost$ 3 | UnlessPayer$ TriggeredPlayer | UnlessResolveSubs$ WhenNotPaid | SubAbility$ DBTap
 SVar:DBTap:DB$ Tap | Defined$ Enchanted
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_whip.jpg
 Oracle:Enchant creature\nAt the beginning of the upkeep of enchanted creature's controller, that player may pay {3}. If they don't, Mind Whip deals 2 damage to that player and you tap that creature.

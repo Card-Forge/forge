@@ -5,5 +5,4 @@ PT:2/2
 K:Flash
 R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Battlefield | ValidCard$ Creature.nonToken+wasNotCast | ReplaceWith$ Exile | Description$ If a nontoken creature would enter the battlefield and it wasn't cast, exile it instead.
 SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/containment_priest.jpg
 Oracle:Flash\nIf a nontoken creature would enter the battlefield and it wasn't cast, exile it instead.

@@ -8,5 +8,4 @@ SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidde
 SVar:TrigSac:DB$ Sacrifice | Defined$ Player | SacValid$ Land
 AI:RemoveDeck:Random
 SVar:NeedsToPlay:Creature.Black+cmcLE3+YouCtrl+inZoneBattlefield,Creature.Red+cmcLE3+YouCtrl+inZoneBattlefield
-SVar:Picture:http://www.wizards.com/global/images/magic/general/razing_snidd.jpg
 Oracle:When Razing Snidd enters the battlefield, return a black or red creature you control to its owner's hand.\nWhen Razing Snidd enters the battlefield, each player sacrifices a land.

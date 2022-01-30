@@ -5,5 +5,4 @@ K:CARDNAME doesn't untap during your untap step.
 A:AB$ Untap | Cost$ 3 | AILogic$ EOT | AIManaPref$ NotSameCard | SpellDescription$ Untap CARDNAME.
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 3 | SpellDescription$ Add {C}{C}{C}.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/basalt_monolith.jpg
 Oracle:Basalt Monolith doesn't untap during your untap step.\n{T}: Add {C}{C}{C}.\n{3}: Untap Basalt Monolith.

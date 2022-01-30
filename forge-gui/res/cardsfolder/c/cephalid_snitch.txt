@@ -5,5 +5,4 @@ PT:1/1
 A:AB$ Debuff | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Protection from black | SpellDescription$ Target creature loses protection from black until end of turn.
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_snitch.jpg
 Oracle:Sacrifice Cephalid Snitch: Target creature loses protection from black until end of turn.

@@ -3,5 +3,4 @@ ManaCost:2 W
 Types:Sorcery
 A:SP$ Token | Cost$ 2 W | TokenAmount$ 2 | TokenScript$ w_1_1_vampire_lifelink | TokenOwner$ You | LegacyImage$ w 1 1 vampire lifelink xln | SpellDescription$ Create two 1/1 white Vampire creature tokens with lifelink.
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/queens_commission.jpg
 Oracle:Create two 1/1 white Vampire creature tokens with lifelink.

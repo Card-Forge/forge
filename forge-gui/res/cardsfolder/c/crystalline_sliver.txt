@@ -4,5 +4,4 @@ Types:Creature Sliver
 PT:2/2
 S:Mode$ Continuous | Affected$ Sliver | AddKeyword$ Shroud | Description$ All Slivers have shroud.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crystalline_sliver.jpg
 Oracle:All Slivers have shroud. (They can't be the targets of spells or abilities.)

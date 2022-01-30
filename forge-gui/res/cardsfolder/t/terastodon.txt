@@ -7,5 +7,4 @@ SVar:TrigDestroy:DB$ Destroy | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Permanen
 SVar:MakeTokens:DB$ RepeatEach | RepeatSubAbility$ DBToken | DefinedCards$ Targeted | ChangeZoneTable$ True
 SVar:DBToken:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Card.inRealZoneGraveyard | TokenAmount$ 1 | TokenScript$ g_3_3_elephant | TokenOwner$ RememberedController | LegacyImage$ g 3 3 elephant wwk
 DeckHints:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/terastodon.jpg
 Oracle:When Terastodon enters the battlefield, you may destroy up to three target noncreature permanents. For each permanent put into a graveyard this way, its controller creates a 3/3 green Elephant creature token.

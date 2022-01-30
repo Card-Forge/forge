@@ -5,5 +5,4 @@ PT:0/1
 K:Flying
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 K:Cascade
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kathari_remnant.jpg
 Oracle:Flying\n{B}: Regenerate Kathari Remnant.\nCascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)

@@ -6,5 +6,4 @@ SVar:Abandon:DB$ Abandon | Optional$ True | RememberAbandoned$ True | SubAbility
 SVar:DBSetInMotionAgain:DB$ SetInMotion | Again$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:Picture:https://downloads.cardforge.org/images/cards/E01/My Laughter Echoes.full.jpg
 Oracle:(An ongoing scheme remains face up until it's abandoned.)\nWhenever you set a non-ongoing scheme in motion, you may abandon this scheme. If you do, set that scheme in motion again.

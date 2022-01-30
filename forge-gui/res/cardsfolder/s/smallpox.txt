@@ -6,5 +6,4 @@ SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | Defined$ Player | S
 SVar:DBSacCreature:DB$ Sacrifice | SacValid$ Creature | Defined$ Player | SubAbility$ DBSacLand
 SVar:DBSacLand:DB$ Sacrifice | SacValid$ Land | Defined$ Player
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/smallpox.jpg
 Oracle:Each player loses 1 life, discards a card, sacrifices a creature, then sacrifices a land.

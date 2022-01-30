@@ -9,5 +9,4 @@ SVar:SVar2:DB$ Pump | Defined$ Self | KW$ First Strike | Duration$ UntilYourNext
 SVar:SVar3:DB$ Pump | Defined$ Self | KW$ Trample | Duration$ UntilYourNextUpkeep | SpellDescription$ Trample
 SVar:SVar4:DB$ Pump | Defined$ Self | KW$ Rampage:3 | Duration$ UntilYourNextUpkeep | SpellDescription$ Rampage 3
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gabriel_angelfire.jpg
 Oracle:At the beginning of your upkeep, choose flying, first strike, trample, or rampage 3. Gabriel Angelfire gains that ability until your next upkeep. (Whenever a creature with rampage 3 becomes blocked, it gets +3/+3 until end of turn for each creature blocking it beyond the first.)

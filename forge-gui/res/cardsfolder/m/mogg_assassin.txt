@@ -8,5 +8,4 @@ SVar:DBFlip:DB$ FlipACoin | WinSubAbility$ DestroyRemembered | LoseSubAbility$ D
 SVar:DestroyRemembered:DB$ Destroy | Defined$ Remembered
 SVar:DestroyImprinted:DB$ Destroy | Defined$ Imprinted
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_assassin.jpg
 Oracle:{T}: You choose target creature an opponent controls, and that opponent chooses target creature. Flip a coin. If you win the flip, destroy the creature you chose. If you lose the flip, destroy the creature your opponent chose.

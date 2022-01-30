@@ -7,5 +7,4 @@ SVar:ManaNeededToAvoidNegativeEffect:green
 AI:RemoveDeck:Random
 DeckNeeds:Color$Green
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/seed_spark.jpg
 Oracle:Destroy target artifact or enchantment. If {G} was spent to cast this spell, create two 1/1 green Saproling creature tokens.

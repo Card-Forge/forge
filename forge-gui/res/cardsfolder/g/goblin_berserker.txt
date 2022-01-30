@@ -4,5 +4,4 @@ Types:Creature Goblin Berserker
 PT:2/2
 K:First Strike
 K:Haste
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_berserker.jpg
 Oracle:First strike, haste

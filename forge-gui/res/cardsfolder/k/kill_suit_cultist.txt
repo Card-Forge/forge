@@ -8,5 +8,4 @@ SVar:SelfDamage:Event$ DamageDone | ValidTarget$ Creature.IsRemembered | Replace
 SVar:CultistDestroy:DB$ Destroy | Defined$ ReplacedTarget | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kill_suit_cultist.jpg
 Oracle:Kill-Suit Cultist attacks each combat if able.\n{B}, Sacrifice Kill-Suit Cultist: The next time damage would be dealt to target creature this turn, destroy that creature instead.

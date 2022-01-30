@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ I
 K:Equip:4
 DeckHints:Type$Equipment
 DeckHints:Name$Nazahn, Revered Bladesmith
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hammer_of_nazahn.jpg
 Oracle:Whenever Hammer of Nazahn or another Equipment enters the battlefield under your control, you may attach that Equipment to target creature you control.\nEquipped creature gets +2/+0 and has indestructible.\nEquip {4}

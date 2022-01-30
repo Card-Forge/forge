@@ -3,5 +3,4 @@ ManaCost:3 G
 Types:Creature Elephant
 PT:3/3
 K:Trample
-SVar:Picture:http://resources.wizards.com/magic/cards/mi/en-us/card3423.jpg
 Oracle:Trample

@@ -4,5 +4,4 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
 A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color.
 K:CARDNAME enters the battlefield tapped.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ravaged_highlands.jpg
 Oracle:Ravaged Highlands enters the battlefield tapped.\n{T}: Add {R}.\n{T}, Sacrifice Ravaged Highlands: Add one mana of any color.

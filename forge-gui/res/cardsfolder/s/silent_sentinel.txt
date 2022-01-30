@@ -6,5 +6,4 @@ K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME attacks, you may return target enchantment card from your graveyard to the battlefield.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Enchantment.YouOwn | TgtPrompt$ Select target enchantment card in your graveyard
 SVar:HasAttackEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/silent_sentinel.jpg
 Oracle:Flying\nWhenever Silent Sentinel attacks, you may return target enchantment card from your graveyard to the battlefield.

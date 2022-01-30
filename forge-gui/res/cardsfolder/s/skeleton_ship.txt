@@ -6,5 +6,4 @@ T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | Present
 SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 A:AB$ PutCounter | Cost$ T | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target Creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True | SpellDescription$ Put a -1/-1 counter on target creature.
 SVar:NeedsToPlay:Island.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skeleton_ship.jpg
 Oracle:When you control no Islands, sacrifice Skeleton Ship.\n{T}: Put a -1/-1 counter on target creature.

@@ -4,7 +4,6 @@ AlternateMode: Split
 Types:Sorcery
 K:Fuse
 A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | KW$ Double Strike | SpellDescription$ Target creature gets +1/+1 and gains double strike until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/armed_dangerous.jpg
 Oracle:Target creature gets +1/+1 and gains double strike until end of turn.\nFuse (You may cast one or both halves of this card from your hand.)
 
 ALTERNATE

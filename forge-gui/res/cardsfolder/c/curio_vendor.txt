@@ -2,5 +2,4 @@ Name:Curio Vendor
 ManaCost:1 U
 Types:Creature Vedalken
 PT:2/1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/curio_vendor.jpg
 Oracle:

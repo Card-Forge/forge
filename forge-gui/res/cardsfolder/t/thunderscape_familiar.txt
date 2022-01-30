@@ -7,5 +7,4 @@ S:Mode$ ReduceCost | ValidCard$ Card.Black,Card.Green | Type$ Spell | Activator$
 AI:RemoveDeck:Random
 DeckNeeds:Color$Green|Black
 DeckHints:Color$Green|Black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderscape_familiar.jpg
 Oracle:First strike\nBlack spells and green spells you cast cost {1} less to cast.

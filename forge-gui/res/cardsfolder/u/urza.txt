@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:-1/+10
 A:AB$ DealDamage | ActivationZone$ Command | Cost$ 3 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
-SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Urza.full.jpg
 Oracle:Hand -1, life +10\n{3}: Urza deals 1 damage to any target.

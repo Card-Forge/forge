@@ -3,5 +3,4 @@ ManaCost:3 W
 Types:Creature Spirit
 PT:2/2
 A:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blinking_spirit.jpg
 Oracle:{0}: Return Blinking Spirit to its owner's hand.

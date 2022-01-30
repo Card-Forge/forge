@@ -4,5 +4,4 @@ Types:Creature Zombie
 PT:3/1
 A:AB$ Regenerate | Cost$ ExileFromGrave<1/Card.TopGraveyardCreature> | CostDesc$ Exile the top creature card of your graveyard: | SpellDescription$ Regenerate CARDNAME.
 SVar:NeedsOrderedGraveyard:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_scavengers.jpg
 Oracle:Exile the top creature card of your graveyard: Regenerate Zombie Scavengers.

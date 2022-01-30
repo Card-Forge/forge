@@ -2,5 +2,4 @@ Name:Mana Confluence
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T PayLife<1> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_confluence.jpg
 Oracle:{T}, Pay 1 life: Add one mana of any color.

@@ -8,5 +8,4 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Arcane.YouCtrl
 DeckHints:Type$Arcane|Spirit
 DeckHints:Name$Peer Through Depths|Reach Through Mists|Sift Through Sands|The Unspeakable
-SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card78693.jpg
 Oracle:Flying, trample\nWhenever The Unspeakable deals combat damage to a player, you may return target Arcane card from your graveyard to your hand.

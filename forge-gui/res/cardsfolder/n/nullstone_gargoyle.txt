@@ -7,5 +7,4 @@ T:Mode$ SpellCast | ValidCard$ Card.nonCreature | CheckSVar$ X | SVarCompare$ EQ
 SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSpellAbility
 SVar:X:Count$ThisTurnCast_Card.nonCreature
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nullstone_gargoyle.jpg
 Oracle:Flying\nWhenever the first noncreature spell of a turn is cast, counter that spell.

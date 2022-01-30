@@ -9,5 +9,4 @@ S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Vigilance | 
 A:AB$ Token | Cost$ 2 W W | TokenAmount$ 1 | TokenScript$ w_2_1_e_cleric | TokenOwner$ You | LegacyImage$ w 2 1 e cleric ths | SpellDescription$ Create a 2/1 white Cleric enchantment creature token.
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Permanent.White
-SVar:Picture:http://www.wizards.com/global/images/magic/general/heliod_god_of_the_sun.jpg
 Oracle:Indestructible\nAs long as your devotion to white is less than five, Heliod isn't a creature. (Each {W} in the mana costs of permanents you control counts toward your devotion to white.)\nOther creatures you control have vigilance.\n{2}{W}{W}: Create a 2/1 white Cleric enchantment creature token.

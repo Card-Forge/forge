@@ -7,5 +7,4 @@ SVar:DBCounter:DB$ Counter | Defined$ TriggeredSpellAbility | UnlessCost$ X | Un
 SVar:X:Count$ValidGraveyard Card.sharesNameWith Remembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_shrine.jpg
 Oracle:Whenever a player casts a spell, counter that spell unless that player pays {X}, where X is the number of cards in all graveyards with the same name as the spell.

@@ -3,5 +3,4 @@ ManaCost:5 B
 Types:Instant
 K:Delve
 A:SP$ Destroy | Cost$ 5 B | ValidTgts$ Creature.nonGreen | TgtPrompt$ Select target non-green creature. | NoRegen$ True | SpellDescription$ Destroy target non-green creature. It can't be regenerated.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/death_rattle.jpg
 Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nDestroy target nongreen creature. It can't be regenerated.

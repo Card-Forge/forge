@@ -2,5 +2,4 @@ Name:Omega Myr
 ManaCost:2
 Types:Artifact Creature Myr
 PT:1/2
-SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card48605.jpg
 Oracle:

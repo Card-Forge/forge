@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Creature Unicorn
 PT:1/2
 A:AB$ Destroy | Cost$ 1 W T Sac<1/CARDNAME> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/capashen_unicorn.jpg
 Oracle:{1}{W}, {T}, Sacrifice Capashen Unicorn: Destroy target artifact or enchantment.

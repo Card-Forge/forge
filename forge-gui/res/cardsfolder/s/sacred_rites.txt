@@ -6,5 +6,4 @@ SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumDef$ +X | SubAbil
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sacred_rites.jpg
 Oracle:Discard any number of cards. Creatures you control get +0/+1 until end of turn for each card discarded this way.

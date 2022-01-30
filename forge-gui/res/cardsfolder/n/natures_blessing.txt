@@ -8,5 +8,4 @@ SVar:DBFirstStrike:DB$ Pump | Defined$ Targeted | KW$ First Strike | Duration$ P
 SVar:DBTrample:DB$ Pump | Defined$ Targeted | KW$ Trample | Duration$ Permanent | SpellDescription$ Target creature gains Trample
 AI:RemoveDeck:All
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_blessing.jpg
 Oracle:{G}{W}, Discard a card: Put a +1/+1 counter on target creature or that creature gains banding, first strike, or trample. (This effect lasts indefinitely. Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding a player controls are blocking or being blocked by a creature, that player divides that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)

@@ -6,5 +6,4 @@ SVar:SphereTapped:DB$ Tap | Defined$ Self | ETB$ True | SubAbility$ DBAddCounter
 SVar:DBAddCounter:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ CHARGE | CounterNum$ 3
 A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ Any | SpellDescription$ Add one mana of any color.
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sphere_of_the_suns.jpg
 Oracle:Sphere of the Suns enters the battlefield tapped and with three charge counters on it.\n{T}, Remove a charge counter from Sphere of the Suns: Add one mana of any color.

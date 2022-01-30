@@ -3,5 +3,4 @@ ManaCost:2 B
 Types:Tribal Enchantment Faerie
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OpponentTurn$ True | Execute$ TrigLoseLife | OptionalDecider$ You | TriggerDescription$ Whenever you cast a spell during an opponent's turn, you may have each opponent lose 1 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_tauntings.jpg
 Oracle:Whenever you cast a spell during an opponent's turn, you may have each opponent lose 1 life.

@@ -6,6 +6,5 @@ SVar:TrigVesuvaCopy:DB$ CopyPermanent | Defined$ TriggeredCard | Controller$ Tri
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, destroy target creature and all other creatures with the same name as that creature.
 SVar:RolledChaos:DB$ Destroy | ValidTgts$ Creature | SubAbility$ DestroyOtherAll
 SVar:DestroyOtherAll:DB$ DestroyAll | ValidCards$ Targeted.sameName+Other
-SVar:Picture:http://www.wizards.com/global/images/magic/general/isle_of_vesuva.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | OppHasCreatureInPlay$ True
 Oracle:Whenever a nontoken creature enters the battlefield, its controller creates a token that's a copy of that creature.\nWhenever you roll {CHAOS}, destroy target creature and all other creatures with the same name as that creature.

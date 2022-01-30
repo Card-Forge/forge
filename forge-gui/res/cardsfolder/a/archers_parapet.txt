@@ -4,5 +4,4 @@ Types:Creature Wall
 PT:0/5
 K:Defender
 A:AB$ LoseLife | Cost$ 1 B T | Defined$ Player.Opponent | LifeAmount$ 1 | SpellDescription$ Each Opponent Loses 1 life.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/archers_parapet.jpg
 Oracle:Defender\n{1}{B}, {T}: Each opponent loses 1 life.

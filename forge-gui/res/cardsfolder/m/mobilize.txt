@@ -2,5 +2,4 @@ Name:Mobilize
 ManaCost:G
 Types:Sorcery
 A:SP$ UntapAll | Cost$ G | ValidCards$ Creature.YouCtrl | SpellDescription$ Untap all creatures you control.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mobilize.jpg
 Oracle:Untap all creatures you control.

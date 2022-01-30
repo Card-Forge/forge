@@ -6,5 +6,4 @@ K:Flying
 T:Mode$ Attacks | ValidCard$ Dragon.YouCtrl | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever a dragon you control attacks, create a 6/6 red Dragon creature token with flying.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_6_6_dragon_flying | TokenOwner$ You | LegacyImage$ r 6 6 dragon flying rtr
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/utvara_hellkite.jpg
 Oracle:Flying\nWhenever a Dragon you control attacks, create a 6/6 red Dragon creature token with flying.

@@ -7,5 +7,4 @@ SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility
 SVar:DBDiscard:DB$ Discard | Defined$ Player.IsRemembered | Mode$ TgtChoose | NumCards$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Card.RememberedPlayerCtrl
-SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/Only Blood Ends Your Nightmares.full.jpg
 Oracle:When you set this scheme in motion, each opponent sacrifices a creature. Then each opponent who didn't sacrifice a creature discards two cards.

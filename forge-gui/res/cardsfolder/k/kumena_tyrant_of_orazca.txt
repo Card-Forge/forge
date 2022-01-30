@@ -7,5 +7,4 @@ A:AB$ Draw | Cost$ tapXType<3/Merfolk> | CostDesc$ Tap three untapped Merfolk yo
 A:AB$ PutCounterAll | Cost$ tapXType<5/Merfolk> | CostDesc$ Tap five untapped Merfolk you control: | ValidCards$ Merfolk.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ AtOppEOT | SpellDescription$ Put a +1/+1 counter on each Merfolk you control.
 DeckHints:Type$Merfolk
 SVar:BuffedBy:Merfolk
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kumena_tyrant_of_orazca.jpg
 Oracle:Tap another untapped Merfolk you control: Kumena, Tyrant of Orazca can't be blocked this turn.\nTap three untapped Merfolk you control: Draw a card.\nTap five untapped Merfolk you control: Put a +1/+1 counter on each Merfolk you control.

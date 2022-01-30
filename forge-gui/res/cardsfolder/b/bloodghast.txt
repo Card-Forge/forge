@@ -9,5 +9,4 @@ SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield
 SVar:X:PlayerCountOpponents$LowestLifeTotal
 SVar:SacMe:3
 SVar:DiscardMe:3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodghast.jpg
 Oracle:Bloodghast can't block.\nBloodghast has haste as long as an opponent has 10 or less life.\nLandfall — Whenever a land enters the battlefield under your control, you may return Bloodghast from your graveyard to the battlefield.

@@ -4,5 +4,4 @@ Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
 A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ W | SpellDescription$ Add {W}.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tooth_of_ramos.jpg
 Oracle:{T}: Add {W}.\nSacrifice Tooth of Ramos: Add {W}.

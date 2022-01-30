@@ -7,5 +7,4 @@ SVar:X:Count$Valid Land.YouCtrl
 SVar:Y:Count$Valid Land.YouDontCtrl
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sheltering_prayers.jpg
 Oracle:Basic lands each player controls have shroud as long as that player controls three or fewer lands. (They can't be the targets of spells or abilities.)

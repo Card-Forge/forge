@@ -6,6 +6,5 @@ SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ 
 A:AB$ Animate | Cost$ W | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Artifact,Creature,Bird | Keywords$ Flying | SpellDescription$ CARDNAME becomes a 2/2 Bird artifact creature with flying until end of turn.
 SVar:BuffedBy:Artifact
 AI:RemoveDeck:Random
-DeckNeeds:Color$white
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glint_hawk_idol.jpg
+DeckNeeds:Color$White
 Oracle:Whenever another artifact enters the battlefield under your control, you may have Glint Hawk Idol become a 2/2 Bird artifact creature with flying until end of turn.\n{W}: Glint Hawk Idol becomes a 2/2 Bird artifact creature with flying until end of turn.

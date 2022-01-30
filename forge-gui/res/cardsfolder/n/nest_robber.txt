@@ -3,5 +3,4 @@ ManaCost:1 R
 Types:Creature Dinosaur
 PT:2/1
 K:Haste
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nest_robber.jpg
 Oracle:Haste

@@ -3,5 +3,4 @@ ManaCost:1 W W
 Types:Creature Human Soldier
 PT:2/2
 K:Prevent all combat damage that would be dealt to CARDNAME.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/everdawn_champion.jpg
 Oracle:Prevent all combat damage that would be dealt to Everdawn Champion.

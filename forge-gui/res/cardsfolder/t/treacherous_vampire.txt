@@ -10,5 +10,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ 
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigSac | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, sacrifice it unless you exile a card from your graveyard.
 SVar:TrigSac:DB$ Sacrifice | Defined$ Self | UnlessCost$ ExileFromGrave<1/Card> | UnlessPayer$ You
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/treacherous_vampire.jpg
 Oracle:Flying\nWhenever Treacherous Vampire attacks or blocks, sacrifice it unless you exile a card from your graveyard.\nThreshold — As long as seven or more cards are in your graveyard, Treacherous Vampire gets +2/+2 and has "When Treacherous Vampire dies, you lose 6 life."

@@ -4,5 +4,4 @@ Types:Creature Siren
 PT:1/1
 A:AB$ MustAttack | Cost$ T | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls. | Defender$ You | ThisTurn$ True | SpellDescription$ Target creature an opponent controls attacks you this turn if able.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/alluring_siren.jpg
 Oracle:{T}: Target creature an opponent controls attacks you this turn if able.

@@ -7,5 +7,4 @@ SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card.Sorcery | TgtPr
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You | LegacyImage$ c 1 1 eldrazi scion sac ogw | SpellDescription$ Create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
 DeckNeeds:Ability$Mana.Colorless
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/warping_wail.jpg
 Oracle:({C} represents colorless mana.)\nChoose one —\n• Exile target creature with power or toughness 1 or less.\n• Counter target sorcery spell.\n• Create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."

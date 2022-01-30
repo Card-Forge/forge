@@ -3,6 +3,5 @@ ManaCost:2 R
 Types:Creature Human Wizard
 PT:1/1
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
-SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122338.jpg
 SVar:NonCombatPriority:1
 Oracle:{T}: Prodigal Pyromancer deals 1 damage to any target.

@@ -4,5 +4,4 @@ Types:Artifact
 A:AB$ Draw | Cost$ 2 T Sac<1/Creature> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:AIPreference:SacCost$Creature.cmcLE2
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_vault.jpg
 Oracle:{2}, {T}, Sacrifice a creature: Draw a card.

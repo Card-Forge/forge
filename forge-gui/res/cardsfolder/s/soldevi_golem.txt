@@ -7,5 +7,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | Execut
 SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature.OppCtrl+tapped | TgtPrompt$ Select target tapped creature an opponent controls | SubAbility$ DBUntap
 SVar:DBUntap:DB$ Untap | Defined$ Self
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_golem.jpg
 Oracle:Soldevi Golem doesn't untap during your untap step.\nAt the beginning of your upkeep, you may untap target tapped creature an opponent controls. If you do, untap Soldevi Golem.

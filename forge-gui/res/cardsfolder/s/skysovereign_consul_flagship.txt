@@ -8,5 +8,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBDmg | Secondary$ True | Trig
 SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select target creature or planeswalker an opponent controls | NumDmg$ 3
 SVar:HasAttackEffect:TRUE
 K:Crew:3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skysovereign_consul_flagship.jpg
 Oracle:Flying\nWhenever Skysovereign, Consul Flagship enters the battlefield or attacks, it deals 3 damage to target creature or planeswalker an opponent controls.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)

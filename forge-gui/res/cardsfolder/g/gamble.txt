@@ -6,5 +6,4 @@ SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ Random
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$InYourHand
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gamble.jpg
 Oracle:Search your library for a card, put that card into your hand, discard a card at random, then shuffle.

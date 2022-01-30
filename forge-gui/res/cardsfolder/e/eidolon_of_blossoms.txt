@@ -5,5 +5,4 @@ PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Enchantment.Other+YouCtrl | Execute$ TrigDraw | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:BuffedBy:Enchantment
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eidolon_of_blossoms.jpg
 Oracle:Constellation — Whenever Eidolon of Blossoms or another enchantment enters the battlefield under your control, draw a card.

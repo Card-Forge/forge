@@ -5,5 +5,4 @@ K:Enchant land
 A:SP$ Attach | Cost$ 6 G G | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ SpawningGroundsToken | Description$ Enchanted land has "{T}: Create a 5/5 green Beast creature token with trample."
 SVar:SpawningGroundsToken:AB$ Token | Cost$ T | TokenOwner$ You | TokenScript$ g_5_5_beast_trample | TokenAmount$ 1 | LegacyImage$ g 5 5 beast trample c13 | SpellDescription$ Create a 5/5 green Beast creature token with trample.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spawning_grounds.jpg
 Oracle:Enchant land\nEnchanted land has "{T}: Create a 5/5 green Beast creature token with trample."

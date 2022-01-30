@@ -2,5 +2,4 @@ Name:Rowan Treefolk
 ManaCost:3 G
 Types:Creature Treefolk
 PT:3/4
-SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4316.jpg
 Oracle:

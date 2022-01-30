@@ -4,5 +4,4 @@ Types:Creature Sphinx
 PT:3/3
 K:Surge:2 U
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jwar_isle_avenger.jpg
 Oracle:Surge {2}{U} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn.)\nFlying

@@ -8,5 +8,4 @@ SVar:X:Count$InYourHand/Times.4
 SVar:BuffedBy:Card
 SVar:NeedsToPlayVar:Y LE2
 SVar:Y:Count$CardsInYourHand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_slag.jpg
 Oracle:Trample\nDread Slag gets -4/-4 for each card in your hand.

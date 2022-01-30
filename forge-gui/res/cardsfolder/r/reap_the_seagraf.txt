@@ -3,5 +3,4 @@ ManaCost:2 B
 Types:Sorcery
 K:Flashback:4 U
 A:SP$ Token | Cost$ 2 B | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | LegacyImage$ b 2 2 zombie dka | SpellDescription$ Create a 2/2 black Zombie creature token.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reap_the_seagraf.jpg
 Oracle:Create a 2/2 black Zombie creature token.\nFlashback {4}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

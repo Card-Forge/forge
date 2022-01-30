@@ -6,5 +6,4 @@ SVar:DBEffect:DB$ Effect | Name$ Benefactor's Draught Effect | Triggers$ TrigBlo
 SVar:TrigBlock:Mode$ Blocks | ValidCard$ Creature.OppCtrl | Execute$ EffDraw | TriggerDescription$ Whenever a creature an opponent controls blocks, draw a card.
 SVar:EffDraw:DB$ Draw | NumCards$ 1
 SVar:DBDraw:DB$ Draw | NumCards$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/benefactors_draught.jpg
 Oracle:Untap all creatures. Until end of turn, whenever a creature an opponent controls blocks, draw a card.\nDraw a card.

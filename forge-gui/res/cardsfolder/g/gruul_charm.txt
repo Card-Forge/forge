@@ -6,5 +6,4 @@ SVar:CantBlockEffect:DB$ Effect | Name$ Gruul Charm Effect | StaticAbilities$ KW
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.withoutFlying | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures without flying can't block this turn.
 SVar:DBGainCtrl:DB$ GainControl | AllValid$ Permanent.YouOwn | SpellDescription$ Gain control of all permanents you own.
 SVar:DmgAll:DB$ DamageAll | NumDmg$ 3 | ValidCards$ Creature.withFlying | ValidDescription$ each creature with flying. | SpellDescription$ CARDNAME deals 3 damage to each creature with flying.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_charm.jpg
 Oracle:Choose one —\n• Creatures without flying can't block this turn.\n• Gain control of all permanents you own.\n• Gruul Charm deals 3 damage to each creature with flying.

@@ -4,5 +4,4 @@ Types:Sorcery
 A:SP$ Draw | Cost$ X U | Defined$ Player | NumCards$ X | SpellDescription$ Each player draws X cards.
 SVar:X:Count$xPaid
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/prosperity.jpg
 Oracle:Each player draws X cards.

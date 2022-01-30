@@ -11,5 +11,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.E
 SVar:DBRem:DB$ Pump | RememberObjects$ Self | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | NewController$ TriggeredCardController | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/traveling_plague.jpg
 Oracle:Enchant creature\nAt the beginning of each upkeep, put a plague counter on Traveling Plague.\nEnchanted creature gets -1/-1 for each plague counter on Traveling Plague.\nWhen enchanted creature leaves the battlefield, that creature's controller returns Traveling Plague from its owner's graveyard to the battlefield.

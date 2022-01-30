@@ -4,5 +4,4 @@ Types:Creature Merfolk Rogue
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Blue+YouCtrl | AddHiddenKeyword$ Unblockable | Description$ Blue creatures you control can't be blocked.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deepchannel_mentor.jpg
 Oracle:Blue creatures you control can't be blocked.

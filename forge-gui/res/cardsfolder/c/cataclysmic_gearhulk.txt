@@ -12,5 +12,4 @@ SVar:ChoosePW:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Planes
 SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Permanent.nonLand+IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cataclysmic_gearhulk.jpg
 Oracle:Vigilance\nWhen Cataclysmic Gearhulk enters the battlefield, each player chooses an artifact, a creature, an enchantment, and a planeswalker from among the nonland permanents they control, then sacrifices the rest.

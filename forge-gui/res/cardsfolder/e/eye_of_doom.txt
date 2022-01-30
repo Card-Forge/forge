@@ -6,5 +6,4 @@ SVar:TrigChoose:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBPut
 SVar:DBPutCounter:DB$ PutCounter | Chooser$ Remembered | Choices$ Permanent.nonLand | CounterType$ DOOM | CounterNum$ 1
 A:AB$ DestroyAll | Cost$ 2 T Sac<1/CARDNAME> | ValidCards$ Permanent.counters_GE1_DOOM | SpellDescription$ Destroy each permanent with a doom counter.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eye_of_doom.jpg
 Oracle:When Eye of Doom enters the battlefield, each player chooses a nonland permanent and puts a doom counter on it.\n{2}, {T}, Sacrifice Eye of Doom: Destroy each permanent with a doom counter on it.

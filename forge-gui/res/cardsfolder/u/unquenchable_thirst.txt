@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
 DeckHints:Type$Desert
-SVar:Picture:http://www.wizards.com/global/images/magic/general/unquenchable_thirst.jpg
 Oracle:Enchant creature\nWhen Unquenchable Thirst enters the battlefield, if you control a Desert or there is a Desert card in your graveyard, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.

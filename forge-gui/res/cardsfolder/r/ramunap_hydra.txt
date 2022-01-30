@@ -11,5 +11,4 @@ SVar:X:Count$Valid Desert.YouCtrl
 SVar:Y:Count$TypeInYourYard.Desert
 SVar:BuffedBy:Desert
 DeckHints:Type$Desert
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ramunap_hydra.jpg
 Oracle:Vigilance, reach, trample\nRamunap Hydra gets +1/+1 as long as you control a Desert.\nRamunap Hydra gets +1/+1 as long as there is a Desert card in your graveyard.

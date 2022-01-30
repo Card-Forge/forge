@@ -6,5 +6,4 @@ SVar:ReplaceExile:Event$ Moved | ActiveZones$ Command | Destination$ Battlefield
 SVar:DBExile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hallowed_moonlight.jpg
 Oracle:Until end of turn, if a creature would enter the battlefield and it wasn't cast, exile it instead.\nDraw a card.

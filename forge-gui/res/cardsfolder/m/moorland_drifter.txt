@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Creature Spirit
 PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | Condition$ Delirium | Description$ Delirium — CARDNAME has flying as long as there are four or more card types among cards in your graveyard.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/moorland_drifter.jpg
 Oracle:Delirium — Moorland Drifter has flying as long as there are four or more card types among cards in your graveyard.

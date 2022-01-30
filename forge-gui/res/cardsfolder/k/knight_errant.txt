@@ -2,5 +2,4 @@ Name:Knight Errant
 ManaCost:1 W
 Types:Creature Human Knight
 PT:2/2
-SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card13099.jpg
 Oracle:

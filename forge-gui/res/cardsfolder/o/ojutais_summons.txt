@@ -3,5 +3,4 @@ ManaCost:3 U U
 Types:Sorcery
 K:Rebound
 A:SP$ Token | Cost$ 3 U U | TokenAmount$ 1 | TokenScript$ u_2_2_djinn_monk_flying | TokenOwner$ You | LegacyImage$ u 2 2 djinn monk flying dtk | SpellDescription$ Create a 2/2 blue Djinn Monk creature token with flying.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ojutais_summons.jpg
 Oracle:Create a 2/2 blue Djinn Monk creature token with flying.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)

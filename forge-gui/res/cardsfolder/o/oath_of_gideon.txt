@@ -7,5 +7,4 @@ K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Planeswalker.YouCtr
 SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ LOYALTY | CounterNum$ 1 | SpellDescription$ Each planeswalker you control enters the battlefield with an additional loyalty counter on it.
 DeckHas:Ability$Token
 DeckHints:Type$Ally
-SVar:Picture:http://www.wizards.com/global/images/magic/general/oath_of_gideon.jpg
 Oracle:When Oath of Gideon enters the battlefield, create two 1/1 white Kor Ally creature tokens.\nEach planeswalker you control enters the battlefield with an additional loyalty counter on it.

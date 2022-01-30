@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:DB$ Token | LegacyImage$ w 1 1 spirit flying dka | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
 DeckHints:Type$Human
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/avacyns_collar.jpg
 Oracle:Equipped creature gets +1/+0 and has vigilance.\nWhenever equipped creature dies, if it was a Human, create a 1/1 white Spirit creature token with flying.\nEquip {2}

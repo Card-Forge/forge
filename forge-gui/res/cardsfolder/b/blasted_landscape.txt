@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 K:Cycling:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blasted_landscape.jpg
 Oracle:{T}: Add {C}.\nCycling {2} ({2}, Discard this card: Draw a card.)

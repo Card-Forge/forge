@@ -2,5 +2,4 @@ Name:Terrain Elemental
 ManaCost:1 G
 Types:Creature Elemental
 PT:3/2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/terrain_elemental.jpg
 Oracle:

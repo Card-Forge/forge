@@ -10,5 +10,4 @@ SVar:Buybacked:DB$ Effect | ReplacementEffects$ MoveToHandReplace | RememberObje
 SVar:MoveToHandReplace:Event$ Moved | ValidCard$ Card.IsRemembered | Origin$ Stack | Destination$ Graveyard | Fizzle$ False | ReplaceWith$ ReplaceHand | Description$ Put that card into your hand instead of into your graveyard as it resolves.
 SVar:ReplaceHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Stack | Destination$ Hand | SubAbility$ ExileSelf
 SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soulfire_grand_master.jpg
 Oracle:Lifelink\nInstant and sorcery spells you control have lifelink.\n{2}{U/R}{U/R}: The next time you cast an instant or sorcery spell from your hand this turn, put that card into your hand instead of into your graveyard as it resolves.

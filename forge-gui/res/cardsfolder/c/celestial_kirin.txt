@@ -9,5 +9,4 @@ SVar:X:TriggerCount$CastSACMC
 AI:RemoveDeck:All
 DeckHints:Type$Spirit|Arcane
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_kirin.jpg
 Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, destroy all permanents with that spell's mana value.

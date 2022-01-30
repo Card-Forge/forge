@@ -4,5 +4,4 @@ Types:Instant Arcane
 K:Splice:Arcane:1 R
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 DeckHints:Type$Arcane
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glacial_ray.jpg
 Oracle:Glacial Ray deals 2 damage to any target.\nSplice onto Arcane {1}{R} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)

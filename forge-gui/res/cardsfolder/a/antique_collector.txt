@@ -12,5 +12,5 @@ SVar:DBInvestigate:DB$ Investigate | ConditionDefined$ Remembered | ConditionPre
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
 SVar:DBUpdate:DB$ UpdateRemember
-DeckHas:Ability$Investigate & Ability$Token
+DeckHas:Ability$Investigate|Token
 Oracle:Antique Collector can't be blocked by creatures with power 2 or less.\nWhen Antique Collector enters the battlefield, creatures you control perpetually gain "When this creature dies, you may shuffle it into its owner's library if it's in your graveyard. If you do, investigate."

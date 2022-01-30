@@ -9,5 +9,4 @@ SVar:TrigRemoveCounter:DB$ RemoveCounter | CounterType$ M1M1 | CounterNum$ 1 | R
 SVar:DBGainLife:DB$ GainLife | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | LifeAmount$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize
-SVar:Picture:http://www.wizards.com/global/images/magic/general/exemplar_of_strength.jpg
 Oracle:When Exemplar of Strength enters the battlefield, put three -1/-1 counters on target creature you control.\nWhenever Exemplar of Strength attacks, remove a -1/-1 counter from it. If you do, you gain 1 life.

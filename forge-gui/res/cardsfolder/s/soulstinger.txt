@@ -7,5 +7,4 @@ SVar:TrigPutCounter1:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ S
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounter2 | TriggerController$ TriggeredCardController | OptionalDecider$ You | TriggerDescription$ When CARDNAME dies, you may put a -1/-1 counter on target creature for each -1/-1 counter on CARDNAME.
 SVar:TrigPutCounter2:DB$ PutCounter | ValidTgts$ Creature | CounterType$ M1M1 | IsCurse$ True | CounterNum$ X
 SVar:X:TriggeredCard$CardCounters.M1M1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soulstinger.jpg
 Oracle:When Soulstinger enters the battlefield, put two -1/-1 counters on target creature you control.\nWhen Soulstinger dies, you may put a -1/-1 counter on target creature for each -1/-1 counter on Soulstinger.

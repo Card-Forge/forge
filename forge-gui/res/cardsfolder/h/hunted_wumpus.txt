@@ -4,5 +4,4 @@ Types:Creature Beast
 PT:6/6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, each other player may put a creature card from their hand onto the battlefield.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | DefinedPlayer$ Player.Other | ChangeNum$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hunted_wumpus.jpg
 Oracle:When Hunted Wumpus enters the battlefield, each other player may put a creature card from their hand onto the battlefield.

@@ -4,5 +4,4 @@ Types:Creature Zombie
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, each player discards a card.
 SVar:TrigDiscard:DB$ Discard | Defined$ Player | NumCards$ 1 | Mode$ TgtChoose
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sibsig_icebreakers.jpg
 Oracle:When Sibsig Icebreakers enters the battlefield, each player discards a card.

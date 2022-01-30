@@ -5,5 +5,4 @@ HandLifeModifier:+0/-2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ Whenever a nontoken creature dies, create a 1/1 white Spirit creature token with flying.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | LegacyImage$ w 1 1 spirit flying van
 DeckHas:Ability$Token
-SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Teysa, Orzhov Scion Avatar.full.jpg
 Oracle:Hand +0, life -2\nWhenever a nontoken creature dies, create a 1/1 white Spirit creature token with flying.

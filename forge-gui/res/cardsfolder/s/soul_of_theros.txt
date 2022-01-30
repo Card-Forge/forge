@@ -5,5 +5,4 @@ PT:6/6
 K:Vigilance
 A:AB$ PumpAll | Cost$ 4 W W | ValidCards$ Creature.YouCtrl | KW$ First Strike & Lifelink | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Creatures you control get +2/+2 and gain first strike and lifelink until end of turn.
 A:AB$ PumpAll | Cost$ 4 W W ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidCards$ Creature.YouCtrl | KW$ First Strike & Lifelink | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Creatures you control get +2/+2 and gain first strike and lifelink until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_of_theros.jpg
 Oracle:Vigilance\n{4}{W}{W}: Creatures you control get +2/+2 and gain first strike and lifelink until end of turn.\n{4}{W}{W}, Exile Soul of Theros from your graveyard: Creatures you control get +2/+2 and gain first strike and lifelink until end of turn.

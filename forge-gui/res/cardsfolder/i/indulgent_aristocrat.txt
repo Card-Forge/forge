@@ -8,5 +8,4 @@ SVar:AIPreference:SacCost$Creature.token+nonVampire,Creature.nonVampire+cmcEQ1,C
 DeckHints:Type$Vampire
 # TODO: improve the logic when the AI wants to sac creatures
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/indulgent_aristocrat.jpg
 Oracle:Lifelink\n{2}, Sacrifice a creature: Put a +1/+1 counter on each Vampire you control.

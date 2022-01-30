@@ -7,5 +7,4 @@ SVar:DBAddCounter:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ CHAR
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ Any | SpellDescription$ Add one mana of any color.
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vivid_grove.jpg
 Oracle:Vivid Grove enters the battlefield tapped with two charge counters on it.\n{T}: Add {G}.\n{T}, Remove a charge counter from Vivid Grove: Add one mana of any color.

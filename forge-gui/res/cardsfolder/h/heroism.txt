@@ -6,5 +6,4 @@ SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Prevent all combat damage that 
 SVar:AIPreference:SacCost$Creature.token
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/heroism.jpg
 Oracle:Sacrifice a white creature: For each attacking red creature, prevent all combat damage that would be dealt by that creature this turn unless its controller pays {2}{R}.

@@ -3,5 +3,4 @@ ManaCost:W
 Types:Instant
 A:SP$ ChangeZone | Cost$ W | Origin$ Exile | Destination$ Graveyard | ValidTgts$ Card.faceUp | ChangeNum$ 1 | SpellDescription$ Put target face-up exiled card into its owner's graveyard.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pull_from_eternity.jpg
 Oracle:Put target face-up exiled card into its owner's graveyard.

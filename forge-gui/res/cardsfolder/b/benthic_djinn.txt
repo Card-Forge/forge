@@ -5,5 +5,4 @@ PT:5/3
 K:Islandwalk
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, you lose 2 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/benthic_djinn.jpg
 Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nAt the beginning of your upkeep, you lose 2 life.

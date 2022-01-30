@@ -10,5 +10,4 @@ SVar:NumInLib:TargetedController$CardsInLibrary
 SVar:NumInHand:TargetedController$CardsInHand
 SVar:NumInYard:TargetedController$CardsInGraveyard
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deicide.jpg
 Oracle:Exile target enchantment. If the exiled card is a God card, search its controller's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles.

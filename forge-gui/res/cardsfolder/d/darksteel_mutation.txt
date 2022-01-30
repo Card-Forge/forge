@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetPower$ 0 | SetToughness$ 1 | AddType$ Artifact & Creature & Insect | RemoveCreatureTypes$ True | RemoveCardTypes$ True | RemoveAllAbilities$ True | AddKeyword$ Indestructible | Description$ Enchanted creature is an Insect artifact creature with base power and toughness 0/1 and has indestructible, and it loses all other abilities, card types, and creature types.
 SVar:NonStackingAttachEffect:True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_mutation.jpg
 Oracle:Enchant creature\nEnchanted creature is an Insect artifact creature with base power and toughness 0/1 and has indestructible, and it loses all other abilities, card types, and creature types.

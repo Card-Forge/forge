@@ -6,6 +6,5 @@ SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ Y
 SVar:Y:ReplaceCount$DamageAmount/Twice
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, CARDNAME deals 1 damage to any target.
 SVar:RolledChaos:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_furnace.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | MaxRollsPerTurn$ 9
 Oracle:If a source would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.\nWhenever you roll {CHAOS}, Stronghold Furnace deals 1 damage to any target.

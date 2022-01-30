@@ -3,5 +3,4 @@ ManaCost:1 B
 Types:Creature Phyrexian Zombie Mercenary
 PT:2/2
 K:CARDNAME can't block.
-SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card129743.jpg
 Oracle:Spineless Thug can't block.

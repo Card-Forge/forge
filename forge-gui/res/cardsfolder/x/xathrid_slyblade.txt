@@ -6,5 +6,4 @@ K:Hexproof
 A:AB$ Debuff | Cost$ 3 B | Defined$ Self | Keywords$ Hexproof | SubAbility$ DBPump | SpellDescription$ Until end of turn, CARDNAME loses hexproof and gains first strike and deathtouch.
 SVar:DBPump:DB$ Pump | KW$ First Strike & Deathtouch | Defined$ Self
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/xathrid_slyblade.jpg
 Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\n{3}{B}: Until end of turn, Xathrid Slyblade loses hexproof and gains first strike and deathtouch. (It deals combat damage before creatures without first strike. Any amount of damage it deals to a creature is enough to destroy it.)

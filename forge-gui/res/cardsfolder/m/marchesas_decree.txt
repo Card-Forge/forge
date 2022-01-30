@@ -5,5 +5,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
 T:Mode$ Attacks | ValidCard$ Creature.YouDontCtrl | Attacked$ You,Planeswalker.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature attacks you or a planeswalker you control, that creature's controller loses 1 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredAttackerController | LifeAmount$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/marchesas_decree.jpg
 Oracle:When Marchesa's Decree enters the battlefield, you become the monarch.\nWhenever a creature attacks you or a planeswalker you control, that creature's controller loses 1 life.

@@ -3,5 +3,4 @@ ManaCost:2 W
 Types:Instant
 A:SP$ Token | Cost$ 2 W | TokenAmount$ 2 | TokenScript$ c_1_1_a_myr | TokenOwner$ You | LegacyImage$ c 1 1 a myr som | SpellDescription$ Create two 1/1 colorless Myr artifact creature tokens.
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/masters_call.jpg
 Oracle:Create two 1/1 colorless Myr artifact creature tokens.

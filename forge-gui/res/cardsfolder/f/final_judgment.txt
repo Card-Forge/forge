@@ -2,5 +2,4 @@ Name:Final Judgment
 ManaCost:4 W W
 Types:Sorcery
 A:SP$ ChangeZoneAll | Cost$ 4 W W | ChangeType$ Creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile all creatures.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/final_judgment.jpg
 Oracle:Exile all creatures.

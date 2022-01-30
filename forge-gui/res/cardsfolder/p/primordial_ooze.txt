@@ -9,5 +9,4 @@ SVar:DBTap:DB$ Tap | Defined$ Self | UnlessCost$ X | UnlessPayer$ You | UnlessRe
 SVar:DBDmg:DB$ DealDamage | NumDmg$ X | Defined$ You
 SVar:X:Count$CardCounters.P1P1
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/primordial_ooze.jpg
 Oracle:Primordial Ooze attacks each combat if able.\nAt the beginning of your upkeep, put a +1/+1 counter on Primordial Ooze. Then you may pay {X}, where X is the number of +1/+1 counters on it. If you don't, tap Primordial Ooze and it deals X damage to you.

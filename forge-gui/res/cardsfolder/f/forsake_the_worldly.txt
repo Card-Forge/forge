@@ -3,5 +3,4 @@ ManaCost:2 W
 Types:Instant
 A:SP$ ChangeZone | Cost$ 2 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact or enchantment.
 K:Cycling:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/forsake_the_worldly.jpg
 Oracle:Exile target artifact or enchantment.\nCycling {2} ({2}, Discard this card: Draw a card.)

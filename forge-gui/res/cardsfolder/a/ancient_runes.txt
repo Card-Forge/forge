@@ -5,5 +5,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigDamage | Trig
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ X
 SVar:X:Count$Valid Artifact.ActivePlayerCtrl
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_runes.jpg
 Oracle:At the beginning of each player's upkeep, Ancient Runes deals damage to that player equal to the number of artifacts they control.

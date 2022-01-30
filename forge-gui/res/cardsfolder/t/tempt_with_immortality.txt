@@ -9,5 +9,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$TypeInYourYard.Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tempt_with_immortality.jpg
 Oracle:Tempting offer — Return a creature card from your graveyard to the battlefield. Each opponent may return a creature card from their graveyard to the battlefield. For each opponent who does, return a creature card from your graveyard to the battlefield.

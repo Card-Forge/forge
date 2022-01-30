@@ -5,5 +5,4 @@ A:SP$ RepeatEach | Cost$ 2 R | RepeatPlayers$ Player | RepeatSubAbility$ DBDamag
 SVar:DBDamage:DB$ DealDamage | Defined$ Remembered | NumDmg$ X
 SVar:X:Count$Valid Land.RememberedPlayerCtrl
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/acidic_soil.jpg
 Oracle:Acidic Soil deals damage to each player equal to the number of lands they control.

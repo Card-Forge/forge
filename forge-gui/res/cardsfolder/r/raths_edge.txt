@@ -4,5 +4,4 @@ Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ DealDamage | Cost$ 4 T Sac<1/Land> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/raths_edge.jpg
 Oracle:{T}: Add {C}.\n{4}, {T}, Sacrifice a land: Rath's Edge deals 1 damage to any target.

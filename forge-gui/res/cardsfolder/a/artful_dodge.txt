@@ -3,5 +3,4 @@ ManaCost:U
 Types:Sorcery
 K:Flashback:U
 A:SP$ Pump | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable | SpellDescription$ Target creature can't be blocked this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/artful_dodge.jpg
 Oracle:Target creature can't be blocked this turn.\nFlashback {U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

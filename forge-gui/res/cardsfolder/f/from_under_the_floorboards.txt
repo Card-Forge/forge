@@ -7,5 +7,4 @@ SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Y
 SVar:X:Count$xPaid
 SVar:Y:Count$Madness.X.3
 DeckHints:Ability$Discard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/from_under_the_floorboards.jpg
 Oracle:Madness {X}{B}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)\nCreate three tapped 2/2 black Zombie creature tokens and you gain 3 life. If this spell's madness cost was paid, instead create X of those tokens and you gain X life.

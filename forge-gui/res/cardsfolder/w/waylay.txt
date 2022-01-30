@@ -5,5 +5,4 @@ A:SP$ Token | Cost$ 2 W | TokenAmount$ 3 | TokenScript$ w_2_2_knight | TokenOwne
 DeckHas:Ability$Token
 AI:RemoveDeck:All
 DeckHints:Type$Knight
-SVar:Picture:http://www.wizards.com/global/images/magic/general/waylay.jpg
 Oracle:Create three 2/2 white Knight creature tokens. Exile them at the beginning of the next cleanup step.

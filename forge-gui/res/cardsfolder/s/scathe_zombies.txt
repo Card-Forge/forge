@@ -2,5 +2,4 @@ Name:Scathe Zombies
 ManaCost:2 B
 Types:Creature Zombie
 PT:2/2
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83247.jpg
 Oracle:

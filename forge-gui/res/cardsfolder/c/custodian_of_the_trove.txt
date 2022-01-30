@@ -4,5 +4,4 @@ Types:Artifact Creature Golem
 PT:2/5
 K:Defender
 K:CARDNAME enters the battlefield tapped.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/custodian_of_the_trove.jpg
 Oracle:Defender\nCustodian of the Trove enters the battlefield tapped.

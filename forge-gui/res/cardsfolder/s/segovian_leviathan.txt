@@ -3,5 +3,4 @@ ManaCost:4 U
 Types:Creature Leviathan
 PT:3/3
 K:Islandwalk
-SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card14538.jpg
 Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)

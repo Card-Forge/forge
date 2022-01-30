@@ -3,5 +3,4 @@ ManaCost:3 B
 Types:Sorcery
 A:SP$ Discard | Cost$ 3 B | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target opponent discards two cards.
 K:Awaken:3:5 B
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mires_malice.jpg
 Oracle:Target opponent discards two cards.\nAwaken 3—{5}{B} (If you cast this spell for {5}{B}, also put three +1/+1 counters on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land.)

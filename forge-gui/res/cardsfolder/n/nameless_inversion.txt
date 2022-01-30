@@ -4,5 +4,4 @@ Types:Tribal Instant Shapeshifter
 K:Changeling
 A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ -3 | IsCurse$ True | SubAbility$ DBAnimate | SpellDescription$ Target creature gets +3/-3 and loses all creature types until end of turn.
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Creature | RemoveCreatureTypes$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nameless_inversion.jpg
 Oracle:Changeling (This card is every creature type.)\nTarget creature gets +3/-3 and loses all creature types until end of turn.

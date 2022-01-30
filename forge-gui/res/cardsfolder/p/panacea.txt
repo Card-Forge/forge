@@ -4,5 +4,4 @@ Types:Artifact
 A:AB$ PreventDamage | Cost$ X X T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | Amount$ X | SpellDescription$ Prevent the next X damage that would be dealt to any target this turn.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/panacea.jpg
 Oracle:{X}{X}, {T}: Prevent the next X damage that would be dealt to any target this turn.

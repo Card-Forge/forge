@@ -4,5 +4,4 @@ Types:Enchantment
 K:Cumulative upkeep:AddMana<1/R>:Add {R}.
 # The AI will use the upkeep mana for instants and stuff when able
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/braid_of_fire.jpg
 Oracle:Cumulative upkeep—Add {R}. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)

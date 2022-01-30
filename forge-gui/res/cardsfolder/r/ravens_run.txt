@@ -7,6 +7,5 @@ SVar:RolledChaos1:DB$ PutCounter | ValidTgts$ Creature | CounterType$ M1M1 | Cou
 SVar:RolledChaos2:DB$ PutCounter | ValidTgts$ Creature.IsNotRemembered | CounterType$ M1M1 | CounterNum$ 2 | RememberTargets$ True | SubAbility$ RolledChaos3
 SVar:RolledChaos3:DB$ PutCounter | ValidTgts$ Creature.IsNotRemembered | CounterType$ M1M1 | CounterNum$ 3 | SubAbility$ RolledChaosCleanup
 SVar:RolledChaosCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:https://downloads.cardforge.org/images/cards/HOP/Raven's Run.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | OppHasCreatureInPlay$ True
 Oracle:All creatures have wither. (They deal damage to creatures in the form of -1/-1 counters.)\nWhenever you roll {CHAOS}, put a -1/-1 counter on target creature, two -1/-1 counters on another target creature, and three -1/-1 counters on a third target creature.

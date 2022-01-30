@@ -5,5 +5,4 @@ K:Splice:Arcane:tapXType<1/Creature.White/white creature>
 A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | KW$ First Strike | SpellDescription$ Target creature gets +1/+0 and gains first strike until end of turn.
 AI:RemoveDeck:All
 DeckHints:Type$Arcane
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hundred_talon_strike.jpg
 Oracle:Target creature gets +1/+0 and gains first strike until end of turn.\nSplice onto Arcane—Tap an untapped white creature you control. (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)

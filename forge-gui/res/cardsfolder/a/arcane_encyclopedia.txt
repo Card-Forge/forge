@@ -2,5 +2,4 @@ Name:Arcane Encyclopedia
 ManaCost:3
 Types:Artifact
 A:AB$ Draw | Cost$ 3 T | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/arcane_encyclopedia.jpg
 Oracle:{3}, {T}: Draw a card.

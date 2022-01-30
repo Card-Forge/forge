@@ -5,5 +5,4 @@ PT:1/1
 A:AB$ GainLife | Cost$ T | LifeAmount$ X | SpellDescription$ You gain 1 life for each Elf on the battlefield.
 SVar:X:Count$TypeOnBattlefield.Elf
 SVar:BuffedBy:Elf
-SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39497.jpg
 Oracle:{T}: You gain 1 life for each Elf on the battlefield.

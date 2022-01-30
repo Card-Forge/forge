@@ -5,6 +5,5 @@ R:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Creature.non
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, each creature you control gets +2/+2, gains trample, and becomes a Werewolf in addition to its other types until end of turn.
 SVar:RolledChaos:DB$ AnimateAll | ValidCards$ Creature.YouCtrl | Types$ Werewolf | SubAbility$ DBPump
 SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Trample | NumAtt$ 2 | NumDef$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kessig.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | RollInMain1$ True | HasCreatureInPlay$ True
 Oracle:Prevent all combat damage that would be dealt by non-Werewolf creatures.\nWhenever you roll {CHAOS}, each creature you control gets +2/+2, gains trample, and becomes a Werewolf in addition to its other types until end of turn.

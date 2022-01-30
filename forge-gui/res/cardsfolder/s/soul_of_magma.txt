@@ -7,5 +7,4 @@ SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target 
 SVar:BuffedBy:Arcane,Spirit
 AI:RemoveDeck:Random
 DeckHints:Type$Spirit|Arcane
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_of_magma.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, Soul of Magma deals 1 damage to target creature.

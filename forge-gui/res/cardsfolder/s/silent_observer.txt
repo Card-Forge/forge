@@ -3,5 +3,4 @@ ManaCost:3 U
 Types:Creature Spirit
 PT:1/5
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/silent_observer.jpg
 Oracle:Flying

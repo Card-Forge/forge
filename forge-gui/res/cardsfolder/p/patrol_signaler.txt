@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Creature Kithkin Soldier
 PT:1/1
 A:AB$ Token | Cost$ 1 W Untap | TokenAmount$ 1 | TokenScript$ w_1_1_kithkin_soldier | TokenOwner$ You | LegacyImage$ w 1 1 kithkin soldier shm | SpellDescription$ Create a 1/1 white Kithkin Soldier creature token.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/patrol_signaler.jpg
 Oracle:{1}{W}, {Q}: Create a 1/1 white Kithkin Soldier creature token. ({Q} is the untap symbol.)

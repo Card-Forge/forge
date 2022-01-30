@@ -3,5 +3,4 @@ ManaCost:4 R R
 Types:Sorcery
 A:SP$ Destroy | Cost$ 4 R R | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
 K:Storm
-SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_awakening.jpg
 Oracle:Destroy target land.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)

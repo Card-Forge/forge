@@ -4,5 +4,4 @@ Types:Creature Minotaur Wizard
 PT:1/1
 A:AB$ PreventDamage | Cost$ W T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to any target this turn.
 A:AB$ Pump | Cost$ U T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/raka_disciple.jpg
 Oracle:{W}, {T}: Prevent the next 1 damage that would be dealt to any target this turn.\n{U}, {T}: Target creature gains flying until end of turn.

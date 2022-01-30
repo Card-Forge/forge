@@ -9,5 +9,4 @@ SVar:ChoseBlue:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_camarid | TokenOw
 SVar:ChoseBlack:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_thrull | TokenOwner$ You | LegacyImage$ b 1 1 thrull tsp | ConditionChosenColor$ black | SubAbility$ ChoseRed
 SVar:ChoseRed:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_goblin | TokenOwner$ You | ConditionChosenColor$ red | TokenImage$ r 1 1 goblin tsp | SubAbility$ ChoseGreen
 SVar:ChoseGreen:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling tsp | ConditionChosenColor$ green
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sarpadian_empires_vol_vii.jpg
 Oracle:As Sarpadian Empires, Vol. VII enters the battlefield, choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.\n{3}, {T}: Create a 1/1 creature token of the chosen color and type.

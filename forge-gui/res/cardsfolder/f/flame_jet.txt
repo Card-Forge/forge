@@ -3,5 +3,4 @@ ManaCost:1 R
 Types:Sorcery
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target player or planeswalker.
 K:Cycling:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flame_jet.jpg
 Oracle:Flame Jet deals 3 damage to target player or planeswalker.\nCycling {2} ({2}, Discard this card: Draw a card.)

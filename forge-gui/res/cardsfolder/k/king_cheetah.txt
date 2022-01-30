@@ -3,5 +3,4 @@ ManaCost:3 G
 Types:Creature Cat
 PT:3/2
 K:Flash
-SVar:Picture:http://www.wizards.com/global/images/magic/general/king_cheetah.jpg
 Oracle:Flash

@@ -6,5 +6,4 @@ A:SP$ Token | Cost$ 2 BG BG BG | TokenAmount$ X | TokenScript$ bg_1_1_worm | Tok
 SVar:X:Count$TypeInYourYard.Land
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$ValidGraveyard Land.YouOwn
-SVar:Picture:http://magiccards.info/scans/en/eve/131.jpg
 Oracle:Create a 1/1 black and green Worm creature token for each land card in your graveyard.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)

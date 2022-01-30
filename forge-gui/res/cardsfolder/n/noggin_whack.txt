@@ -4,5 +4,4 @@ Types:Tribal Sorcery Rogue
 K:Prowl:1 B
 A:SP$ Discard | Cost$ 2 B B | ValidTgts$ Player | Mode$ RevealYouChoose | RevealNumber$ 3 | NumCards$ 2 | SpellDescription$ Target player reveals three cards from their hand. You choose two of them. That player discards those cards.
 DeckNeeds:Type$Rogue
-SVar:Picture:http://www.wizards.com/global/images/magic/general/noggin_whack.jpg
 Oracle:Prowl {1}{B} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Rogue.)\nTarget player reveals three cards from their hand. You choose two of them. That player discards those cards.

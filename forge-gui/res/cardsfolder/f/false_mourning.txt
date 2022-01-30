@@ -2,5 +2,4 @@ Name:False Mourning
 ManaCost:G
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ G | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0 | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | SpellDescription$ Put target card from your graveyard on top of your library.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/false_mourning.jpg
 Oracle:Put target card from your graveyard on top of your library.

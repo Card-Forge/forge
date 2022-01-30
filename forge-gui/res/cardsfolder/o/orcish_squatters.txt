@@ -5,5 +5,4 @@ PT:2/3
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ TrigGainControl | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may gain control of target land defending player controls for as long as you control CARDNAME. If you do, CARDNAME assigns no combat damage this turn.
 SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Land.DefenderCtrl | TgtPrompt$ Select target land defending player controls | LoseControl$ LoseControl,LeavesPlay | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage
-SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_squatters.jpg
 Oracle:Whenever Orcish Squatters attacks and isn't blocked, you may gain control of target land defending player controls for as long as you control Orcish Squatters. If you do, Orcish Squatters assigns no combat damage this turn.

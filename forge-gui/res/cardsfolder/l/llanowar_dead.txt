@@ -3,5 +3,4 @@ ManaCost:B G
 Types:Creature Zombie Elf
 PT:2/2
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
-SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card26759.jpg
 Oracle:{T}: Add {B}.

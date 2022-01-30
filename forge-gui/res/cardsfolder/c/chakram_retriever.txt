@@ -6,5 +6,4 @@ K:Partner:Chakram Slinger
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | PlayerTurn$ True | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a spell during your turn, untap target creature.
 SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature | TgtPrompt$ Select target creature
 DeckHints:Name$Chakram Slinger
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chakram_retriever.jpg
 Oracle:Partner with Chakram Slinger (When this creature enters the battlefield, target player may put Chakram Slinger into their hand from their library, then shuffle.)\nWhenever you cast a spell during your turn, untap target creature.

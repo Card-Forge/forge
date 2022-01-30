@@ -7,5 +7,4 @@ A:SP$ EachDamage | Cost$ 4 W | ValidCards$ Creature | NumDmg$ X | DamageDesc$ da
 SVar:X:Count$CardPower
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wave_of_reckoning.jpg
 Oracle:Each creature deals damage to itself equal to its power.

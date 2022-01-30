@@ -5,5 +5,4 @@ A:SP$ Token | Cost$ 4 G W | TokenAmount$ 1 | TokenScript$ g_3_3_centaur | TokenO
 SVar:DBCopy:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True
 DeckHas:Ability$Token
 DeckHints:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/coursers_accord.jpg
 Oracle:Create a 3/3 green Centaur creature token, then populate. (Create a token that's a copy of a creature token you control.)

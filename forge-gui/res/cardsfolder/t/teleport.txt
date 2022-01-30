@@ -3,5 +3,4 @@ ManaCost:U U U
 Types:Instant
 A:SP$ Pump | Cost$ U U U | ActivationPhases$ Declare Attackers | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable | SpellDescription$ Cast this spell only during the declare attackers step. Target creature can't be blocked this turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/teleport.jpg
 Oracle:Cast this spell only during the declare attackers step.\nTarget creature can't be blocked this turn.

@@ -6,5 +6,4 @@ SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_soldier | TokenOwne
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardToughness
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/entrapment_maneuver.jpg
 Oracle:Target player sacrifices an attacking creature. You create X 1/1 white Soldier creature tokens, where X is that creature's toughness.

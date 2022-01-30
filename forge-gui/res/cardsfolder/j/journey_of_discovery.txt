@@ -7,5 +7,4 @@ SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeT
 SVar:DBEffect:DB$ Effect | Name$ Journey of Discovery Effect | StaticAbilities$ JourneyOfDis | AILogic$ Always | SpellDescription$ You may play up to two additional lands this turn.
 SVar:JourneyOfDis:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 2 | EffectZone$ Command | Description$ You may play two additional lands this turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/journey_of_discovery.jpg
 Oracle:Choose one —\n• Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle.\n• You may play up to two additional lands this turn.\nEntwine {2}{G} (Choose both if you pay the entwine cost.)

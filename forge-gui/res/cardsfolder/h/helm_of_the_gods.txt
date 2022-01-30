@@ -6,5 +6,4 @@ S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X |
 SVar:X:Count$Valid Enchantment.YouCtrl
 SVar:BuffedBy:Enchantment
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/helm_of_the_gods.jpg
 Oracle:Equipped creature gets +1/+1 for each enchantment you control.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

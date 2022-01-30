@@ -8,5 +8,4 @@ SVar:X:Count$Valid Creature.namedRelentless Rats+Other
 SVar:BuffedBy:Creature.namedRelentless Rats
 SVar:PlayMain1:TRUE
 DeckNeeds:Name$Relentless Rats
-SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73573.jpg
 Oracle:Relentless Rats gets +1/+1 for each other creature on the battlefield named Relentless Rats.\nA deck can have any number of cards named Relentless Rats.

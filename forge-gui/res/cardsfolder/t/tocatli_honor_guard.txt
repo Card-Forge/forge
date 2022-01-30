@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Creature Human Soldier
 PT:1/3
 S:Mode$ Continuous | GlobalRule$ Creatures entering the battlefield don't cause abilities to trigger. | Description$ Creatures entering the battlefield don't cause abilities to trigger.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tocatli_honor_guard.jpg
 Oracle:Creatures entering the battlefield don't cause abilities to trigger.

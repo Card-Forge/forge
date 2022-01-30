@@ -4,5 +4,4 @@ Types:Creature Human Beast Soldier
 PT:2/2
 A:AB$ Pump | Cost$ G | Defined$ Self | KW$ Banding | SpellDescription$ CARDNAME gains banding until end of turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/beast_walkers.jpg
 Oracle:{G}: Beast Walkers gains banding until end of turn. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)

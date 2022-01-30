@@ -9,5 +9,4 @@ SVar:EyeforEye:DB$ DealDamage | Defined$ ReplacedSourceController | DamageSource
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:X:ReplaceCount$DamageAmount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eye_for_an_eye.jpg
 Oracle:The next time a source of your choice would deal damage to you this turn, instead that source deals that much damage to you and Eye for an Eye deals that much damage to that source's controller.

@@ -4,5 +4,4 @@ Types:Legendary Creature Goblin Artificer
 PT:1/2
 A:AB$ Pump | Cost$ Sac<1/Artifact> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | KW$ Indestructible | SpellDescription$ Target artifact gains indestructible until end of turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/slobad_goblin_tinkerer.jpg
 Oracle:Sacrifice an artifact: Target artifact gains indestructible until end of turn.

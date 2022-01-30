@@ -3,5 +3,4 @@ ManaCost:0
 Types:Artifact
 A:AB$ GainLife | Cost$ Sac<1/Land> | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/zuran_orb.jpg
 Oracle:Sacrifice a land: You gain 2 life.

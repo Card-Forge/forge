@@ -7,5 +7,4 @@ A:AB$ ChangeZoneAll | Cost$ 5 Discard<1/Hand> Sac<1/CARDNAME> | ChangeType$ Card
 SVar:DBKyrenCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:AIPreference:DiscardCost$Card
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kyren_archive.jpg
 Oracle:At the beginning of your upkeep, you may exile the top card of your library face down.\n{5}, Discard your hand, Sacrifice Kyren Archive: Put all cards exiled with Kyren Archive into their owner's hand.

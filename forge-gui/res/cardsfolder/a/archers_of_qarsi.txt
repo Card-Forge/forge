@@ -4,5 +4,4 @@ Types:Creature Naga Archer
 PT:5/2
 K:Defender
 K:Reach
-SVar:Picture:http://www.wizards.com/global/images/magic/general/archers_of_qarsi.jpg
 Oracle:Defender\nReach (This creature can block creatures with flying.)

@@ -2,7 +2,7 @@ Name:Valki, God of Lies
 ManaCost:1 B
 Types:Legendary Creature God
 PT:2/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReveal | TriggerDescription$When NICKNAME enters the battlefield, each opponent reveals their hand. For each opponent, exile a creature card they revealed this way until NICKNAME leaves the battlefield.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReveal | TriggerDescription$ When NICKNAME enters the battlefield, each opponent reveals their hand. For each opponent, exile a creature card they revealed this way until NICKNAME leaves the battlefield.
 SVar:TrigReveal:DB$ RevealHand | Defined$ Player.Opponent | ImprintRevealed$ True | SubAbility$ DBRepeatEach
 SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBExile | SubAbility$ DBEffect
 SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Remembered | ChangeType$ Creature.IsImprinted | ChangeNum$ 1 | AlreadyRevealed$ True | Chooser$ You | RememberChanged$ True
@@ -32,4 +32,4 @@ A:AB$ Dig | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Defined$ Player |
 A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target artifact or creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact or creature.
 A:AB$ ChangeZoneAll | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | SubAbility$ DBMana | SpellDescription$ Exile all cards from all graveyards. Add {R}{R}{R}.
 SVar:DBMana:DB$ Mana | Produced$ R | Amount$ 3
-Oracle:As Tibalt enters the battlefield, you get an emblem with "You may play cards exiled with Tibalt, Cosmic Impostor, and you may spend mana as though it were mana of any color to cast those spells."\n[+2]: Exile the top card of each player's library.\n[−3]: Exile target artifact or creature.\n[−8]: Exile all cards from all graveyards. Add {R}{R}{R}.
+Oracle:As Tibalt enters the battlefield, you get an emblem with "You may play cards exiled with Tibalt, Cosmic Impostor, and you may spend mana as though it were mana of any color to cast those spells."\n[+2]: Exile the top card of each player's library.\n[-3]: Exile target artifact or creature.\n[-8]: Exile all cards from all graveyards. Add {R}{R}{R}.

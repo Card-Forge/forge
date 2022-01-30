@@ -5,5 +5,4 @@ PT:1/1
 A:AB$ GainLife | Cost$ 1 Sac<1/Creature> | Defined$ You | LifeAmount$ X | SpellDescription$ You gain life equal to the sacrificed creature's toughness.
 SVar:X:Sacrificed$CardToughness
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/disciple_of_griselbrand.jpg
 Oracle:{1}, Sacrifice a creature: You gain life equal to the sacrificed creature's toughness.

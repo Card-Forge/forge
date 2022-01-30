@@ -4,5 +4,4 @@ Types:Artifact
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ 2 | RestrictValid$ Card.wasCastFromGraveyard+withFlashback | SpellDescription$ Add two mana in any combination of colors. Spend this mana only to cast spells with flashback from a graveyard.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/altar_of_the_lost.jpg
 Oracle:Altar of the Lost enters the battlefield tapped.\n{T}: Add two mana in any combination of colors. Spend this mana only to cast spells with flashback from a graveyard.

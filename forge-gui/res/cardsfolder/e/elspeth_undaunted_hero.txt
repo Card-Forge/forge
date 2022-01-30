@@ -9,4 +9,4 @@ DeckHints:Name$Sunlit Hoplite
 A:AB$ PumpAll | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Creature.YouCtrl | NumAtt$ +X | NumDef$ +X | KW$ Flying | SpellDescription$ Until end of turn, creatures you control gain flying and get +X/+X, where X is your devotion to white.
 SVar:X:Count$Devotion.White
 DeckHas:Ability$Counters
-Oracle:[+2]: Put a +1/+1 counter on each of up to two target creatures.\n[−2]: Search your library and/or graveyard for a card named Sunlit Hoplite and put it onto the battlefield. If you search your library this way, shuffle.\n[−8]: Until end of turn, creatures you control gain flying and get +X/+X, where X is your devotion to white.
+Oracle:[+2]: Put a +1/+1 counter on each of up to two target creatures.\n[-2]: Search your library and/or graveyard for a card named Sunlit Hoplite and put it onto the battlefield. If you search your library this way, shuffle.\n[-8]: Until end of turn, creatures you control gain flying and get +X/+X, where X is your devotion to white.

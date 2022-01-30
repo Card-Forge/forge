@@ -3,5 +3,4 @@ ManaCost:2 U
 Types:Creature Human Spellshaper
 PT:2/2
 A:AB$ Pump | Cost$ U T Discard<1/Card> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/balloon_peddler.jpg
 Oracle:{U}, {T}, Discard a card: Target creature gains flying until end of turn.

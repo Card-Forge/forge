@@ -4,5 +4,4 @@ Types:Creature Human Rebel Rogue
 PT:1/2
 A:AB$ Tap | Cost$ B T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 SVar:NonCombatPriority:1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rathi_trapper.jpg
 Oracle:{B}, {T}: Tap target creature.

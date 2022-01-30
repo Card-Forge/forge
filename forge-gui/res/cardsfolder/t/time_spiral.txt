@@ -5,5 +5,4 @@ A:SP$ ChangeZoneAll | Cost$ 4 U U | ChangeType$ Card | Origin$ Hand,Graveyard | 
 SVar:DBDraw:DB$ Draw | NumCards$ 7 | Defined$ Player | SubAbility$ DBChange | StackDescription$ None
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SubAbility$ DBUntap | StackDescription$ None
 SVar:DBUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land | Amount$ 6 | StackDescription$ None
-SVar:Picture:http://www.wizards.com/global/images/magic/general/time_spiral.jpg
 Oracle:Exile Time Spiral. Each player shuffles their hand and graveyard into their library, then draws seven cards. You untap up to six lands.

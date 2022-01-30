@@ -4,5 +4,4 @@ Types:Artifact
 A:AB$ Draw | Cost$ 2 T | NumCards$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE7 | AILogic$ CheckCondition | SpellDescription$ Draw a card if you have seven or more cards in hand.
 SVar:X:Count$InYourHand
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scroll_of_origins.jpg
 Oracle:{2}, {T}: Draw a card if you have seven or more cards in hand.

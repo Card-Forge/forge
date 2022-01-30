@@ -7,5 +7,4 @@ SVar:TrigSac:DB$ Sacrifice | SacValid$ Self | UnlessCost$ Discard<1/Random> | Un
 SVar:X:Remembered$Amount
 SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$InYourHand
-SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/pillaging_horde.jpg
 Oracle:When Pillaging Horde enters the battlefield, sacrifice it unless you discard a card at random.

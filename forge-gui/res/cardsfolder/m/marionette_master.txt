@@ -6,7 +6,6 @@ K:Fabricate:3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever an artifact you control is put into a graveyard from the battlefield, target opponent loses life equal to CARDNAME's power.
 SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | TgtPrompt$ Choose target opponent | LifeAmount$ X
 SVar:X:Count$CardPower
-DeckHas:Ability$Counters & Ability$Token
+DeckHas:Ability$Counters|Token
 DeckHints:Type$Artifact
-SVar:Picture:http://www.wizards.com/global/images/magic/general/marionette_master.jpg
 Oracle:Fabricate 3 (When this creature enters the battlefield, put three +1/+1 counters on it or create three 1/1 colorless Servo artifact creature tokens.)\nWhenever an artifact you control is put into a graveyard from the battlefield, target opponent loses life equal to Marionette Master's power.

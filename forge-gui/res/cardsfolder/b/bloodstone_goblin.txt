@@ -4,5 +4,4 @@ Types:Creature Goblin Warrior
 PT:2/2
 T:Mode$ SpellCast | ValidCard$ Card.kicked | ValidActivatingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell, if that spell was kicked, CARDNAME gets +1/+1 and gains menace until end of turn. (It can't be blocked except by two or more creatures.)
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1 | KW$ Menace
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodstone_goblin.jpg
 Oracle:Whenever you cast a spell, if that spell was kicked, Bloodstone Goblin gets +1/+1 and gains menace until end of turn. (It can't be blocked except by two or more creatures.)

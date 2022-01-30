@@ -8,5 +8,4 @@ SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Manda
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$Valid Creature.Black+YouCtrl+inZoneBattlefield
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skull_collector.jpg
 Oracle:At the beginning of your upkeep, return a black creature you control to its owner's hand.\n{1}{B}: Regenerate Skull Collector.

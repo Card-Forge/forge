@@ -5,5 +5,4 @@ A:SP$ DealDamage | Cost$ 2 R | NumDmg$ 2 | DamageSource$ Valid Enchantment | Def
 SVar:DBAuraDmg:DB$ DealDamage | NumDmg$ 2 | DamageSource$ Valid Aura.AttachedTo Creature | Defined$ Enchanted | RelativeTarget$ True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_barbs.jpg
 Oracle:Each enchantment deals 2 damage to its controller, then each Aura attached to a creature deals 2 damage to the creature it's attached to.

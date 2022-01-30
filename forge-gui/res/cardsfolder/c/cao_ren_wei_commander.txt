@@ -5,5 +5,4 @@ PT:3/3
 K:Horsemanship
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, you lose 3 life.
 SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cao_ren_wei_commander.jpg
 Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)\nWhen Cao Ren, Wei Commander enters the battlefield, you lose 3 life.

@@ -8,5 +8,4 @@ SVar:DiscardMe:2
 SVar:SacMe:1
 DeckHas:Ability$Discard
 DeckHints:Keyword$Madness & Ability$Delirium
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stitchwing_skaab.jpg
 Oracle:Flying\n{1}{U}, Discard two cards: Return Stitchwing Skaab from your graveyard to the battlefield tapped.

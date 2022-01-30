@@ -6,5 +6,4 @@ SVar:TrigDealtDmg:Mode$ DamageDoneOnce | ValidTarget$ Card.IsRemembered | Execut
 SVar:DmgOther:DB$ DamageAll | ValidCards$ Creature.IsNotRemembered | ValidPlayers$ Player | NumDmg$ X | DamageSource$ Remembered
 SVar:X:TriggerCount$DamageAmount
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbond.jpg
 Oracle:Choose target creature. Whenever that creature is dealt damage this turn, it deals that much damage to each other creature and each player.

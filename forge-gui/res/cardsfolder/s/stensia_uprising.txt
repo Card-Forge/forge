@@ -7,5 +7,5 @@ SVar:DBSacrifice:DB$ Sacrifice | ConditionPresent$ Permanent.YouCtrl | Condition
 SVar:DBImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | Execute$ TrigDamage | SubAbility$ DBCleanup | TriggerDescription$ When you sacrifice CARDNAME, it deals 7 damage to any target.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 7
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Token & Ability$Sacrifice
+DeckHas:Ability$Token|Sacrifice
 Oracle:At the beginning of your end step, create a 1/1 red Human creature token. Then if you control exactly thirteen permanents, you may sacrifice Stensia Uprising. When you do, it deals 7 damage to any target.

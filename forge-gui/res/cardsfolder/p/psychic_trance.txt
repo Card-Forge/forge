@@ -6,5 +6,4 @@ SVar:Static:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield |
 SVar:Counter:AB$ Counter | Cost$ T | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_trance.jpg
 Oracle:Until end of turn, Wizards you control gain "{T}: Counter target spell."

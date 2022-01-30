@@ -6,5 +6,4 @@ K:Tribute:2
 SVar:TrigNotTribute:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 5 | SpellDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, CARDNAME deals 5 damage to each opponent.
 SVar:TributeAILogic:Always
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pharagax_giant.jpg
 Oracle:Tribute 2 (As this creature enters the battlefield, an opponent of your choice may put two +1/+1 counters on it.)\nWhen Pharagax Giant enters the battlefield, if tribute wasn't paid, Pharagax Giant deals 5 damage to each opponent.

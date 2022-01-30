@@ -4,5 +4,4 @@ Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever a land enters the battlefield under an opponent's control, that player loses 2 life and you gain 2 life.
 SVar:TrigDrain:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ 2 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/polluted_bonds.jpg
 Oracle:Whenever a land enters the battlefield under an opponent's control, that player loses 2 life and you gain 2 life.

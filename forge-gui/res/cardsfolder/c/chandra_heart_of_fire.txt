@@ -15,4 +15,4 @@ SVar:DBMana:DB$ Mana | Produced$ R | Amount$ 6 | SubAbility$ DBCleanup | StackDe
 SVar:X:Count$ValidGraveyard Instant.Red+YouOwn,Sorcery.Red+YouOwn
 SVar:Y:Count$ValidLibrary Instant.Red+YouOwn,Sorcery.Red+YouOwn
 SVar:Z:SVar$X/Plus.Y
-Oracle:[+1]: Discard your hand, then exile the top three cards of your library. Until end of turn, you may play cards exiled this way.\n[+1]: Chandra, Heart of Fire deals 2 damage to any target.\n[−9]: Search your graveyard and library for any number of red instant and/or sorcery cards, exile them, then shuffle. You may cast them this turn. Add six {R}.
+Oracle:[+1]: Discard your hand, then exile the top three cards of your library. Until end of turn, you may play cards exiled this way.\n[+1]: Chandra, Heart of Fire deals 2 damage to any target.\n[-9]: Search your graveyard and library for any number of red instant and/or sorcery cards, exile them, then shuffle. You may cast them this turn. Add six {R}.

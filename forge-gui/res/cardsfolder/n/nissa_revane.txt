@@ -10,5 +10,4 @@ SVar:XFetch:Count$TypeInYourLibrary.Elf
 AI:RemoveDeck:Random
 DeckHints:Name$Nissa's Chosen
 DeckHints:Type$Elf
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nissa_revane.jpg
-Oracle:[+1]: Search your library for a card named Nissa's Chosen, put it onto the battlefield, then shuffle.\n[+1]: You gain 2 life for each Elf you control.\n[−7]: Search your library for any number of Elf creature cards, put them onto the battlefield, then shuffle.
+Oracle:[+1]: Search your library for a card named Nissa's Chosen, put it onto the battlefield, then shuffle.\n[+1]: You gain 2 life for each Elf you control.\n[-7]: Search your library for any number of Elf creature cards, put them onto the battlefield, then shuffle.

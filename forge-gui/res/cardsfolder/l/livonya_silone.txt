@@ -4,5 +4,4 @@ Types:Legendary Creature Human Warrior
 PT:4/4
 K:First Strike
 K:Legendary landwalk
-SVar:Picture:http://www.wizards.com/global/images/magic/general/livonya_silone.jpg
 Oracle:First strike; legendary landwalk (This creature can't be blocked as long as defending player controls a legendary land.)

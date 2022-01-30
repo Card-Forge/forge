@@ -3,5 +3,4 @@ ManaCost:1 G
 Types:Instant
 A:SP$ Fog | Cost$ 1 G | SpellDescription$ Prevent all combat damage that would be dealt this turn.
 K:Cycling:3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/haze_of_pollen.jpg
 Oracle:Prevent all combat damage that would be dealt this turn.\nCycling {3} ({3}, Discard this card: Draw a card.)

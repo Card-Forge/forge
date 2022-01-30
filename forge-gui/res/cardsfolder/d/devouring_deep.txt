@@ -3,5 +3,4 @@ ManaCost:2 U
 Types:Creature Fish
 PT:1/2
 K:Islandwalk
-SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1476.jpg
 Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)

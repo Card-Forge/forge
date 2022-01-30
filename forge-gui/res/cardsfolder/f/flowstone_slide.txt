@@ -4,5 +4,4 @@ Types:Sorcery
 A:SP$ PumpAll | Cost$ X 2 R R | ValidCards$ Creature | IsCurse$ True | NumAtt$ +X | NumDef$ -X | SpellDescription$ All Creatures get +X/-X until end of turn.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_slide.jpg
 Oracle:All creatures get +X/-X until end of turn.

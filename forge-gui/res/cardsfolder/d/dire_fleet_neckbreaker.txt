@@ -6,5 +6,4 @@ S:Mode$ Continuous | Affected$ Pirate.attacking+YouCtrl | AddPower$ 2 | Descript
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Pirate
 DeckHints:Type$Pirate
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dire_fleet_neckbreaker.jpg
 Oracle:Attacking Pirates you control get +2/+0.

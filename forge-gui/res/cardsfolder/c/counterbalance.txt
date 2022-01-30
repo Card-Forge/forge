@@ -5,5 +5,4 @@ T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | Optional
 SVar:TrigReveal:DB$ Dig | DigNum$ 1 | Reveal$ True | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | SubAbility$ DBCounter
 SVar:DBCounter:DB$ Counter | Defined$ TriggeredSpellAbility | ConditionPresent$ Card.cmcEQX | ConditionDefined$ TriggeredCard | ConditionCompare$ GE1
 SVar:X:Count$TopOfLibraryCMC
-SVar:Picture:http://www.wizards.com/global/images/magic/general/counterbalance.jpg
 Oracle:Whenever an opponent casts a spell, you may reveal the top card of your library. If you do, counter that spell if it has the same mana value as the revealed card.

@@ -5,5 +5,4 @@ PT:13/13
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ -X | AddToughness$ -X | Description$ CARDNAME gets -X/-X, where X is your life total.
 SVar:X:Count$YourLifeTotal
 SVar:NeedsToPlayVar:X LE12
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deaths_shadow.jpg
 Oracle:Death's Shadow gets -X/-X, where X is your life total.

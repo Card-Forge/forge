@@ -3,5 +3,4 @@ ManaCost:2 W
 Types:Instant
 A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SubAbility$ DBGainLife | SpellDescription$ Destroy target enchantment. You gain 3 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ray_of_dissolution.jpg
 Oracle:Destroy target enchantment. You gain 3 life.

@@ -6,5 +6,4 @@ A:AB$ Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature 
 A:AB$ Tap | Cost$ W W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 2 | TargetMax$ 2 | CheckSVar$ X | SVarCompare$ GE7 | SpellDescription$ Tap two target creatures. Activate only if seven or more cards are in your graveyard. | PrecostDesc$ Threshold —
 SVar:X:Count$InYourYard
 SVar:NonCombatPriority:1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nomad_decoy.jpg
 Oracle:{W}, {T}: Tap target creature.\nThreshold — {W}{W}, {T}: Tap two target creatures. Activate only if seven or more cards are in your graveyard.

@@ -5,5 +5,4 @@ PT:2/2
 T:Mode$ SpellCast | ValidCard$ Card.Red | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpCurse | TriggerDescription$ Whenever you cast a red spell, target creature can't block this turn.
 SVar:TrigPumpCurse:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | KW$ HIDDEN CARDNAME can't block.
 SVar:BuffedBy:Card.Red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_battle_jester.jpg
 Oracle:Whenever you cast a red spell, target creature can't block this turn.

@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ AnyMana | Description$ Enchanted creature has "{T}: Add one mana of any color."
 SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/multanis_harmony.jpg
 Oracle:Enchant creature\nEnchanted creature has "{T}: Add one mana of any color."

@@ -3,5 +3,4 @@ ManaCost:4 R
 Types:Creature Boar
 PT:3/3
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ As long as it's your turn, CARDNAME gets +2/+0 and has first strike.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/prickleboar.jpg
 Oracle:As long as it's your turn, Prickleboar gets +2/+0 and has first strike. (It deals combat damage before creatures without first strike.)

@@ -11,7 +11,6 @@ SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 #TODO: update logic for the AI to play around this
 AI:RemoveDeck:All
 SVar:NeedsToPlayVar:X GE3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sage_of_ancient_lore.jpg
 AlternateMode:DoubleFaced
 Oracle:Sage of Ancient Lore's power and toughness are each equal to the number of cards in your hand.\nWhen Sage of Ancient Lore enters the battlefield, draw a card.\nAt the beginning of each upkeep, if no spells were cast last turn, transform Sage of Ancient Lore.
 
@@ -26,7 +25,6 @@ K:Vigilance
 K:Trample
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | Description$ CARDNAME's power and toughness are each equal to the total number of cards in all players' hands.
 SVar:Y:Count$NumInAllHands
-T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
-SVar:Picture:http://www.wizards.com/global/images/magic/general/werewolf_of_ancient_hunger.jpg
 Oracle:Vigilance, trample\nWerewolf of Ancient Hunger's power and toughness are each equal to the total number of cards in all players' hands.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Werewolf of Ancient Hunger.

@@ -5,5 +5,4 @@ T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigUntapAl
 SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Creature,Land | SpellDescription$ untap all creatures and lands.
 SVar:UntapsEachTurn:Creature,Land
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/awakening.jpg
 Oracle:At the beginning of each upkeep, untap all creatures and lands.

@@ -3,5 +3,4 @@ ManaCost:6
 Types:Artifact Creature Gargoyle
 PT:4/4
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lumengrid_gargoyle.jpg
 Oracle:Flying

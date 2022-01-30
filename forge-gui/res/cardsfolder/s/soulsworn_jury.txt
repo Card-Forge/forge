@@ -4,5 +4,4 @@ Types:Creature Spirit
 PT:1/4
 K:Defender
 A:AB$ Counter | Cost$ 1 U Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SpellDescription$ Counter target creature spell.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soulsworn_jury.jpg
 Oracle:Defender (This creature can't attack.)\n{1}{U}, Sacrifice Soulsworn Jury: Counter target creature spell.

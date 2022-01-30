@@ -4,5 +4,4 @@ Types:Artifact Creature Golem
 PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of differently named lands you control.
 SVar:X:Count$DifferentCardNames_Land.YouCtrl+inZoneBattlefield
-SVar:Picture:http://www.wizards.com/global/images/magic/general/awakened_amalgam.jpg
 Oracle:Awakened Amalgam's power and toughness are each equal to the number of differently named lands you control.

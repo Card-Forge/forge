@@ -5,5 +5,4 @@ PT:4/4
 K:Flying
 S:Mode$ Continuous | Affected$ Creature.IsCommander+YouCtrl | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Haste | Description$ Commander creatures you control get +2/+2 and have haste.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodsworn_steward.jpg
 Oracle:Flying\nCommander creatures you control get +2/+2 and have haste.

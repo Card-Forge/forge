@@ -5,5 +5,4 @@ A:SP$ Charm | Cost$ U B R | Choices$ DBChangeZone,DBDestroy,DBDestroy2
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SpellDescription$ Destroy target nonblack creature. It can't be regenerated.
 SVar:DBDestroy2:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crosiss_charm.jpg
 Oracle:Choose one —\n• Return target permanent to its owner's hand.\n• Destroy target nonblack creature. It can't be regenerated.\n• Destroy target artifact.

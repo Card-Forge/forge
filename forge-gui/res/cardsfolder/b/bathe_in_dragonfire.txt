@@ -2,5 +2,4 @@ Name:Bathe in Dragonfire
 ManaCost:2 R
 Types:Sorcery
 A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bathe_in_dragonfire.jpg
 Oracle:Bathe in Dragonfire deals 4 damage to target creature.

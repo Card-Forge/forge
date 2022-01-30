@@ -3,5 +3,4 @@ ManaCost:2 G G
 Types:Creature Dinosaur
 PT:3/4
 K:Reach
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grazing_whiptail.jpg
 Oracle:Reach

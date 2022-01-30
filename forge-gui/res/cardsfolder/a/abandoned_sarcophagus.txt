@@ -6,5 +6,4 @@ R:Event$ Moved | ValidCard$ Card.YouOwn+withCycling,Card.YouOwn+withTypeCycling 
 SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
 #TODO: Add Ability$Cycling to Cycling cards for the purpose of this and other similar cards for deck hints
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/abandoned_sarcophagus.jpg
 Oracle:You may cast spells that have a cycling ability from your graveyard.\nIf a card that has a cycling ability would be put into your graveyard from anywhere and it wasn't cycled, exile it instead.

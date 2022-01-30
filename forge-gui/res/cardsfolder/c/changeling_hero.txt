@@ -6,5 +6,4 @@ K:Changeling
 K:Lifelink
 K:Champion:Creature
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/changeling_hero.jpg
 Oracle:Changeling (This card is every creature type.)\nChampion a creature (When this enters the battlefield, sacrifice it unless you exile another creature you control. When this leaves the battlefield, that card returns to the battlefield.)\nLifelink (Damage dealt by this creature also causes you to gain that much life.)

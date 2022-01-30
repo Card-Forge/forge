@@ -6,5 +6,4 @@ K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, change the target of target spell that targets only a single creature to Muck Drubb.
 SVar:TrigChange:DB$ ChangeTargets | TargetType$ Spell | ValidTgts$ Card | DefinedMagnet$ Self | TargetsSingleTarget$ True | TargetValidTargeting$ Creature
 K:Madness:2 B
-SVar:Picture:http://www.wizards.com/global/images/magic/general/muck_drubb.jpg
 Oracle:Flash\nWhen Muck Drubb enters the battlefield, change the target of target spell that targets only a single creature to Muck Drubb.\nMadness {2}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

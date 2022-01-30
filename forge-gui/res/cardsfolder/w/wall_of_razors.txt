@@ -4,5 +4,4 @@ Types:Creature Wall
 PT:4/1
 K:Defender
 K:First Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_razors.jpg
 Oracle:Defender (This creature can't attack.)\nFirst strike

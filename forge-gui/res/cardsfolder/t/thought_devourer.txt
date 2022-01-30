@@ -5,5 +5,4 @@ PT:4/4
 S:Mode$ Continuous | Affected$ You | RaiseMaxHandSize$ -4 | Description$ Your maximum hand size is reduced by four.
 K:Flying
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_devourer.jpg
 Oracle:Flying\nYour maximum hand size is reduced by four.

@@ -2,5 +2,4 @@ Name:Volcanic Hammer
 ManaCost:1 R
 Types:Sorcery
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
-SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6593.jpg
 Oracle:Volcanic Hammer deals 3 damage to any target.

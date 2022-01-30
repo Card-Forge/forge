@@ -4,5 +4,4 @@ Types:Creature Illusion
 PT:6/6
 K:Flying
 A:AB$ ChangeZone | Cost$ 2 U Discard<1/Card> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/amugaba.jpg
 Oracle:Flying\n{2}{U}, Discard a card: Return Amugaba to its owner's hand.

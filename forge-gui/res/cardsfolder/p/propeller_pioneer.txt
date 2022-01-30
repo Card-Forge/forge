@@ -4,6 +4,5 @@ Types:Creature Human Artificer
 PT:2/1
 K:Flying
 K:Fabricate:1
-DeckHas:Ability$Counters & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/propeller_pioneer.jpg
+DeckHas:Ability$Counters|Token
 Oracle:Flying\nFabricate 1 (When this creature enters the battlefield, put a +1/+1 counter on it or create a 1/1 colorless Servo artifact creature token.)

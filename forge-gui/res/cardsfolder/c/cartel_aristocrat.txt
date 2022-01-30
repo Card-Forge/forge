@@ -4,5 +4,4 @@ Types:Creature Human Advisor
 PT:2/2
 A:AB$ Protection | Cost$ Sac<1/Creature.Other/another creature> | Gains$ Choice | Choices$ AnyColor | SpellDescription$ CARDNAME gains protection from the color of your choice until end of turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cartel_aristocrat.jpg
 Oracle:Sacrifice another creature: Cartel Aristocrat gains protection from the color of your choice until end of turn.

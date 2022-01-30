@@ -4,5 +4,4 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 2 | AddKeyword$ Reach | Description$ Enchanted creature gets +0/+2 and has reach. (It can block creatures with flying.)
-SVar:Picture:http://www.wizards.com/global/images/magic/general/web.jpg
 Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nEnchanted creature gets +0/+2 and has reach. (It can block creatures with flying.)

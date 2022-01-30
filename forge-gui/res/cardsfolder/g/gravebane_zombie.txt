@@ -4,5 +4,4 @@ Types:Creature Zombie
 PT:3/2
 R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | ReplaceWith$ ToLibrary | Description$ If CARDNAME would die, put CARDNAME on top of its owner's library instead.
 SVar:ToLibrary:DB$ ChangeZone | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | Defined$ ReplacedCard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gravebane_zombie.jpg
 Oracle:If Gravebane Zombie would die, put Gravebane Zombie on top of its owner's library instead.

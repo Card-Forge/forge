@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Creature.Red+YouCtrl,Creature.Green+YouCtrl | ChangeNum$ 1 | Mandatory$ True | AILogic$ NeverBounceItself
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1
 SVar:NeedsToPlay:Creature.Red+YouCtrl+cmcLE4+inZoneBattlefield,Creature.Green+YouCtrl+cmcLE4+inZoneBattlefield
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sparkcaster.jpg
 Oracle:When Sparkcaster enters the battlefield, return a red or green creature you control to its owner's hand.\nWhen Sparkcaster enters the battlefield, it deals 1 damage to target player or planeswalker.

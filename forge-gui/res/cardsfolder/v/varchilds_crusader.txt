@@ -5,5 +5,4 @@ PT:3/2
 A:AB$ Effect | Cost$ 0 | AtEOT$ Sacrifice | Name$ Varchild's Crusader Effect | StaticAbilities$ KWPump | SpellDescription$ CARDNAME can't be blocked this turn except by Walls. Sacrifice CARDNAME at the beginning of the next end step.
 SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.EffectSource | ValidBlocker$ Creature.nonWall | EffectZone$ Command | Description$ EFFECTSOURCE can't be blocked this turn except by Walls.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/varchilds_crusader.jpg
 Oracle:{0}: Varchild's Crusader can't be blocked this turn except by Walls. Sacrifice Varchild's Crusader at the beginning of the next end step.

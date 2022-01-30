@@ -4,5 +4,4 @@ Types:Creature Human Druid Knight
 PT:2/2
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 K:Vigilance
-SVar:Picture:http://www.wizards.com/global/images/magic/general/steward_of_valeron.jpg
 Oracle:Vigilance\n{T}: Add {G}.

@@ -8,5 +8,4 @@ SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature | TgtPrompt$ Choose target cr
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl+nonToken | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a nontoken creature an opponent controls dies, create a tapped 2/2 black Zombie creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | LegacyImage$ b 2 2 zombie c14 | TokenTapped$ True
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/overseer_of_the_damned.jpg
 Oracle:Flying\nWhen Overseer of the Damned enters the battlefield, you may destroy target creature.\nWhenever a nontoken creature an opponent controls dies, create a tapped 2/2 black Zombie creature token.

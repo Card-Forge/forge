@@ -4,5 +4,4 @@ Types:Creature Human Soldier Ally
 PT:3/2
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ Other creatures you control get +1/+0 as long as you control an Equipment.
 SVar:X:Count$Valid Card.Equipment+YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/weapons_trainer.jpg
 Oracle:Other creatures you control get +1/+0 as long as you control an Equipment.

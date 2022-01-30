@@ -4,5 +4,4 @@ Types:Tribal Enchantment Elemental
 T:Mode$ SpellCast | ValidCard$ Card.Blue | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | PlayerTurn$ True | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ Whenever an opponent casts a blue spell during your turn, you may create a 4/4 green Elemental creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_4_4_elemental | TokenOwner$ You | LegacyImage$ g 4 4 elemental lrw
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eyes_of_the_wisent.jpg
 Oracle:Whenever an opponent casts a blue spell during your turn, you may create a 4/4 green Elemental creature token.

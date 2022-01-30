@@ -4,5 +4,4 @@ Types:Instant Arcane
 K:Splice:Arcane:1 G
 A:SP$ GainLife | Cost$ 1 G | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 DeckHints:Type$Arcane
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vital_surge.jpg
 Oracle:You gain 3 life.\nSplice onto Arcane {1}{G} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)

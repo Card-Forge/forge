@@ -6,5 +6,5 @@ SVar:DBClone:DB$ CopyPermanent | Defined$ Remembered | SetPower$ 4 | SetToughnes
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
-DeckHas:Ability$Token & Ability$Graveyard
+DeckHas:Ability$Token|Graveyard
 Oracle:Exile X target creature cards from your graveyard. For each card exiled this way, create a token that's a copy of that card, except it's a 4/4 black Zombie.

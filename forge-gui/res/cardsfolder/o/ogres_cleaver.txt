@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact Equipment
 K:Equip:5
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 5 | Description$ Equipped creature gets +5/+0.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ogres_cleaver.jpg
 Oracle:Equipped creature gets +5/+0.\nEquip {5}

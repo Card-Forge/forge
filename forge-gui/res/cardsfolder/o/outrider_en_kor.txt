@@ -7,5 +7,4 @@ A:AB$ Effect | Cost$ 0 | Name$ en-Kor Redirection | ValidTgts$ Creature.YouCtrl 
 SVar:EnKor:Event$ DamageDone | ValidTarget$ Creature.EffectSource | ReplaceWith$ EnKorDmg | DamageTarget$ Remembered | Description$ The next 1 damage that would be dealt to EFFECTSOURCE this turn is dealt to target creature you control instead.
 SVar:EnKorDmg:DB$ ReplaceSplitDamage | DamageTarget$ Remembered
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/outrider_en_kor.jpg
 Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\n{0}: The next 1 damage that would be dealt to Outrider en-Kor this turn is dealt to target creature you control instead.

@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Card.Self | AffectedZone$ Graveyard | EffectZone$
 SVar:X:Count$LifeYouGainedThisTurn
 SVar:SacMe:3
 SVar:DiscardMe:3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/oathsworn_vampire.jpg
 Oracle:Oathsworn Vampire enters the battlefield tapped.\nYou may cast Oathsworn Vampire from your graveyard if you gained life this turn.

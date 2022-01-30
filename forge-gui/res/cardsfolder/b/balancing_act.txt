@@ -3,7 +3,6 @@ ManaCost:2 W W
 Types:Sorcery
 A:SP$ Balance | Cost$ 2 W W | Valid$ Permanent | AILogic$ BalancePermanents | SubAbility$ BalanceHands | SpellDescription$ Each player chooses a number of permanents they control equal to the number of permanents controlled by the player who controls the fewest, then sacrifices the rest. Each player discards cards the same way.
 SVar:BalanceHands:DB$ Balance | Zone$ Hand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/balancing_act.jpg
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 Oracle:Each player chooses a number of permanents they control equal to the number of permanents controlled by the player who controls the fewest, then sacrifices the rest. Each player discards cards the same way.

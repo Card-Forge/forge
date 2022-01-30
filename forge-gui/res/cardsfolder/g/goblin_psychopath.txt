@@ -11,5 +11,4 @@ SVar:DamageYou:DB$ ReplaceEffect | VarName$ Affected | VarValue$ You | VarType$ 
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:PsychoX:ReplaceCount$DamageAmount
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_psychopath.jpg
 Oracle:Whenever Goblin Psychopath attacks or blocks, flip a coin. If you lose the flip, the next time it would deal combat damage this turn, it deals that damage to you instead.

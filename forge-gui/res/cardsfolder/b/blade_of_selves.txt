@@ -5,5 +5,4 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Myriad | Descri
 K:Equip:4
 AI:RemoveDeck:Random
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blade_of_selves.jpg
 Oracle:Equipped creature has myriad. (Whenever it attacks, for each opponent other than defending player, you may create a token that's a copy of that creature that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)\nEquip {4}

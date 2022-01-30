@@ -5,5 +5,4 @@ A:AB$ DealDamage | Cost$ 3 Discard<1/Random> | ValidTgts$ Creature,Player,Planes
 SVar:X:Discarded$CardManaCost
 AI:RemoveDeck:All
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pyromancy.jpg
 Oracle:{3}, Discard a card at random: Pyromancy deals damage to any target equal to the mana value of the discarded card.

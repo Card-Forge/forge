@@ -9,5 +9,4 @@ SVar:DBToken:DB$ Token | ValidTgts$ Opponent | TokenAmount$ 1 | TokenScript$ g_1
 SVar:DBGain:DB$ GainLife | LifeAmount$ 2 | ValidTgts$ Opponent
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | OptionalDecider$ Opponent
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/questing_phelddagrif.jpg
 Oracle:{G}: Questing Phelddagrif gets +1/+1 until end of turn. Target opponent creates a 1/1 green Hippo creature token.\n{W}: Questing Phelddagrif gains protection from black and from red until end of turn. Target opponent gains 2 life.\n{U}: Questing Phelddagrif gains flying until end of turn. Target opponent may draw a card.

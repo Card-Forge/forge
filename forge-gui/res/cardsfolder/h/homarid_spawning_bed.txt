@@ -5,5 +5,4 @@ A:AB$ Token | Cost$ 1 U U Sac<1/Creature.Blue/blue creature> | LegacyImage$ u 1 
 SVar:X:Sacrificed$CardManaCost
 AI:RemoveDeck:All
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/homarid_spawning_bed.jpg
 Oracle:{1}{U}{U}, Sacrifice a blue creature: Create X 1/1 blue Camarid creature tokens, where X is the sacrificed creature's mana value.

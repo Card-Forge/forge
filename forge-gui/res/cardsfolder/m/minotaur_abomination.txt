@@ -2,5 +2,4 @@ Name:Minotaur Abomination
 ManaCost:4 B B
 Types:Creature Zombie Minotaur
 PT:4/6
-SVar:Picture:http://www.wizards.com/global/images/magic/general/minotaur_abomination.jpg
 Oracle:

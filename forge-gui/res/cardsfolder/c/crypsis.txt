@@ -3,5 +3,4 @@ ManaCost:1 U
 Types:Instant
 A:SP$ Pump | Cost$ 1 U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Protection:Creature.OppCtrl:Protection from creatures your opponents control | SubAbility$ DBUntap | SpellDescription$ Target creature you control gains protection from creatures your opponents control until end of turn. Untap it.
 SVar:DBUntap:DB$ Untap | Defined$ ParentTarget
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crypsis.jpg
 Oracle:Target creature you control gains protection from creatures your opponents control until end of turn. Untap it.

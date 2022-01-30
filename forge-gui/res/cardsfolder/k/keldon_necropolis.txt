@@ -4,5 +4,4 @@ Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ DealDamage | Cost$ 4 R T Sac<1/Creature> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_necropolis.jpg
 Oracle:{T}: Add {C}.\n{4}{R}, {T}, Sacrifice a creature: Keldon Necropolis deals 2 damage to any target.

@@ -3,5 +3,4 @@ ManaCost:4 U
 Types:Creature Human Wizard Mutant
 PT:3/3
 A:AB$ Pump | Cost$ 7 U | NumAtt$ +3 | NumDef$ +3 | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gets +3/+3 and gains flying until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glintwing_invoker.jpg
 Oracle:{7}{U}: Glintwing Invoker gets +3/+3 and gains flying until end of turn.

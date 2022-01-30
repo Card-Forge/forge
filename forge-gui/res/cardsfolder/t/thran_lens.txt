@@ -4,5 +4,4 @@ Types:Artifact
 S:Mode$ Continuous | Affected$ Permanent | SetColor$ Colorless | Description$ All permanents are colorless.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_lens.jpg
 Oracle:All permanents are colorless.

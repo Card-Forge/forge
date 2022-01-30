@@ -2,5 +2,4 @@ Name:Ancient Brontodon
 ManaCost:6 G G
 Types:Creature Dinosaur
 PT:9/9
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_brontodon.jpg
 Oracle:

@@ -8,5 +8,4 @@ SVar:DBTopLibChoice:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield |
 SVar:DBBottomLibChoice:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ If that creature is red, you may put it on the bottom of its owner's library instead.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Creature.IsRemembered+Red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ether_well.jpg
 Oracle:Put target creature on top of its owner's library. If that creature is red, you may put it on the bottom of its owner's library instead.

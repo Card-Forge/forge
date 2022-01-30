@@ -8,5 +8,4 @@ SVar:DestroyAttacker:DB$ Destroy | Defined$ TriggeredAttackerLKICopy
 SVar:AttackerPower:Count$ TriggeredAttacker.Power
 SVar:BlockerPower:Count$ TriggeredBlocker.Power
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/no_quarter.jpg
 Oracle:Whenever a creature becomes blocked by a creature with lesser power, destroy the blocking creature.\nWhenever a creature blocks a creature with lesser power, destroy the attacking creature.

@@ -5,5 +5,4 @@ PT:2/2
 A:AB$ Effect | Cost$ 6 T | Name$ Scarecrow Effect | ReplacementEffects$ RPrevent | SpellDescription$ Prevent all damage that would be dealt to you this turn by creatures with flying.
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ You | ValidSource$ Creature.withFlying | Description$ Prevent all damage that would be dealt to you this turn by creatures with flying.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scarecrow.jpg
 Oracle:{6}, {T}: Prevent all damage that would be dealt to you this turn by creatures with flying.

@@ -4,5 +4,4 @@ Types:Creature Human Knight
 PT:2/2
 K:First Strike
 K:Protection from red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/silver_knight.jpg
 Oracle:First strike, protection from red

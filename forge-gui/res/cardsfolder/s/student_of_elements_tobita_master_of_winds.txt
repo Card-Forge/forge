@@ -5,7 +5,6 @@ PT:1/1
 T:Mode$ Always | IsPresent$ Card.Self+withFlying | TriggerZones$ Battlefield | Execute$ TrigFlip | TriggerDescription$ When CARDNAME has flying, flip it.
 SVar:TrigFlip:DB$ SetState | Defined$ Self | Mode$ Flip
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/student_of_elements.jpg
 AlternateMode:Flip
 Oracle:When Student of Elements has flying, flip it.
 
@@ -16,6 +15,5 @@ ManaCost:1 U
 Colors:blue
 Types:Legendary Creature Human Wizard
 PT:3/3
-S:Mode$Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Flying | Description$ Creatures you control have flying.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tobita_master_of_winds.jpg
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Flying | Description$ Creatures you control have flying.
 Oracle:Creatures you control have flying.

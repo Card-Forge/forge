@@ -3,5 +3,4 @@ ManaCost:2 B B
 Types:Enchantment
 T:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ You | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature deals damage to you, destroy it.
 SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredSourceLKICopy
-SVar:Picture:http://www.wizards.com/global/images/magic/general/no_mercy.jpg
 Oracle:Whenever a creature deals damage to you, destroy it.

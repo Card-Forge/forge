@@ -8,5 +8,4 @@ SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ Creature.EffectSource,You |
 SVar:SelflessDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Remembered | VarType$ GameEntity | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glarecaster.jpg
 Oracle:Flying\n{5}{W}: The next time damage would be dealt to Glarecaster and/or you this turn, that damage is dealt to any target instead.

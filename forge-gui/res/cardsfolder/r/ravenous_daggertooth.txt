@@ -5,5 +5,4 @@ PT:3/2
 T:Mode$ DamageDoneOnce | Execute$ TrigGainLife | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, you gain 2 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
 SVar:HasCombatEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_daggertooth.jpg
 Oracle:Enrage — Whenever Ravenous Daggertooth is dealt damage, you gain 2 life.

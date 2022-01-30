@@ -15,5 +15,5 @@ A:AB$ Repeat | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True
 SVar:TrigDiscard:DB$ Discard | Defined$ Player.Opponent | Mode$ TgtChoose | Optional$ True | RememberDiscardingPlayers$ True | AILogic$ UnlessAtLife.6 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Opponent.IsNotRemembered | LifeAmount$ 3 | SubAbility$ DBCleanup
 DeckHints:Type$Instant|Sorcery
-DeckHas:Ability$Graveyard & Ability$LifeGain
-Oracle:Magecraft — Whenever you cast or copy an instant or sorcery spell, each opponent loses 2 life and you gain 2 life.\n[+1]: You lose 1 life. Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.\n[−3]: Each opponent sacrifices a creature with the greatest power among creatures that player controls.\n[−8]: Each opponent may discard a card. If they don't, they lose 3 life. Repeat this process six more times.
+DeckHas:Ability$Graveyard|LifeGain
+Oracle:Magecraft — Whenever you cast or copy an instant or sorcery spell, each opponent loses 2 life and you gain 2 life.\n[+1]: You lose 1 life. Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.\n[-3]: Each opponent sacrifices a creature with the greatest power among creatures that player controls.\n[-8]: Each opponent may discard a card. If they don't, they lose 3 life. Repeat this process six more times.

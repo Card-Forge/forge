@@ -8,5 +8,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, each creature you control gains "{T}: This creature deals 1 damage to target player or planeswalker" until end of turn.
 SVar:RolledChaos:DB$ AnimateAll | ValidCards$ Creature.YouCtrl | Abilities$ LVAbs | SpellDescription$ Until end of turn, creatures you control gain "{T}: This creature deals 1 damage to target player or planeswalker."
 SVar:LVAbs:AB$ DealDamage | Cost$ T | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player or planeswalker.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stensia.jpg
 Oracle:Whenever a creature deals damage to one or more players for the first time each turn, put a +1/+1 counter on it.\nWhenever you roll {CHAOS}, each creature you control gains "{T}: This creature deals 1 damage to target player or planeswalker" until end of turn.

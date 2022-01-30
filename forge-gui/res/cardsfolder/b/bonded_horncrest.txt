@@ -3,5 +3,4 @@ ManaCost:3 R
 Types:Creature Dinosaur
 PT:5/5
 K:CARDNAME can't attack or block alone.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bonded_horncrest.jpg
 Oracle:Bonded Horncrest can't attack or block alone.

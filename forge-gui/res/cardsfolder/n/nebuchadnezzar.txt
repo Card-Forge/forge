@@ -8,5 +8,4 @@ SVar:DBDiscard:DB$ Discard | DefinedCards$ ValidHand Card.IsRemembered+NamedCard
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nebuchadnezzar.jpg
 Oracle:{X}, {T}: Choose a card name. Target opponent reveals X cards at random from their hand. Then that player discards all cards with that name revealed this way. Activate only during your turn.

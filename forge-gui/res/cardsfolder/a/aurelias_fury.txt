@@ -11,5 +11,4 @@ SVar:Min:SVar$X/LimitMax.1
 SVar:NumCreatures:Count$Valid Creature,Planeswalker
 SVar:X:Count$xPaid
 #X Will get overwritten by Announce
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aurelias_fury.jpg
 Oracle:Aurelia's Fury deals X damage divided as you choose among any number of targets. Tap each creature dealt damage this way. Players dealt damage this way can't cast noncreature spells this turn.

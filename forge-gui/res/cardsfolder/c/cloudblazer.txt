@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2
 DeckHas:Ability$LifeGain
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudblazer.jpg
 Oracle:Flying\nWhen Cloudblazer enters the battlefield, you gain 2 life and draw two cards.

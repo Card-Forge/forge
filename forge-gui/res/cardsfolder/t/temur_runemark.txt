@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Trample | IsPresent$ Permanent.Blue+YouCtrl,Permanent.Red+YouCtrl | Description$ Enchanted creature has trample as long as you control a blue or red permanent.
 SVar:BuffedBy:Permanent.Blue,Permanent.Red
 DeckHints:Color$Blue|Red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/temur_runemark.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2.\nEnchanted creature has trample as long as you control a blue or red permanent.

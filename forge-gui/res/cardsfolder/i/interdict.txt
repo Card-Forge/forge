@@ -6,5 +6,4 @@ SVar:DBEffect:DB$ Effect | Name$ Interdict Effect | StaticAbilities$ STCantBeAct
 SVar:STCantBeActivated:Mode$ CantBeActivated | EffectZone$ Command | ValidCard$ Permanent.IsRemembered
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/interdict.jpg
 Oracle:Counter target activated ability from an artifact, creature, enchantment, or land. That permanent's activated abilities can't be activated this turn. (Mana abilities can't be targeted.)\nDraw a card.

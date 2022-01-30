@@ -5,5 +5,4 @@ PT:2/1
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has flying as long as you control another Merfolk.
 SVar:X:Count$Valid Merfolk.Other+YouCtrl
 SVar:BuffedBy:Merfolk
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shaper_apprentice.jpg
 Oracle:Shaper Apprentice has flying as long as you control another Merfolk.

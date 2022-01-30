@@ -5,5 +5,4 @@ PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Revolt$ True | Execute$ TrigMana | TriggerDescription$ Revolt — When CARDNAME enters the battlefield, if a permanent you controlled left the battlefield this turn, add {G}{G}.
 SVar:TrigMana:DB$ Mana | Produced$ G G
 SVar:FreeSpellAI:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hidden_herbalists.jpg
 Oracle:Revolt — When Hidden Herbalists enters the battlefield, if a permanent you controlled left the battlefield this turn, add {G}{G}.

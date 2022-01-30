@@ -12,5 +12,4 @@ SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:X:Count$ValidGraveyard Card.RememberedPlayerCtrl
 SVar:Y:Count$ChosenNumber
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_consequences.jpg
 Oracle:Each player may exile any number of cards from their graveyard. Then each player loses 1 life for each card in their graveyard.\nDraw a card.

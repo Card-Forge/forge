@@ -4,5 +4,4 @@ Types:Creature Human Shaman
 PT:2/2
 K:Soulbond
 S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddPower$ 1 | AddToughness$ 1 | Description$ As long as CARDNAME is paired with another creature, each of those creatures gets +1/+1.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/trusted_forcemage.jpg
 Oracle:Soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)\nAs long as Trusted Forcemage is paired with another creature, each of those creatures gets +1/+1.

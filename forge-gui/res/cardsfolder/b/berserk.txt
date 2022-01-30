@@ -5,5 +5,4 @@ A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigDestroy | RememberObjects$ Targeted | TriggerDescription$ At the beginning of the next end step, destroy that creature if it attacked this turn. | AILogic$ Always
 SVar:TrigDestroy:DB$ Destroy | Defined$ DelayTriggerRemembered | ConditionDefined$ DelayTriggerRemembered | ConditionPresent$ Card.attackedThisTurn | ConditionCompare$ GE1
 SVar:X:Targeted$CardPower
-SVar:Picture:http://www.wizards.com/global/images/magic/general/berserk.jpg
 Oracle:Cast this spell only before the combat damage step.\nTarget creature gains trample and gets +X/+0 until end of turn, where X is its power. At the beginning of the next end step, destroy that creature if it attacked this turn.

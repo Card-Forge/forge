@@ -6,5 +6,4 @@ K:Vigilance
 S:Mode$ Continuous | Affected$ Creature.Warrior+Other+YouCtrl | AddKeyword$ Vigilance | Description$ Other Warrior creatures you control have vigilance.
 SVar:PlayMain1:TRUE
 DeckHints:Type$Warrior
-SVar:Picture:http://www.wizards.com/global/images/magic/general/herald_of_dromoka.jpg
 Oracle:Vigilance\nOther Warrior creatures you control have vigilance.

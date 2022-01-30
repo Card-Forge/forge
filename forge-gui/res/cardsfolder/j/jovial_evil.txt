@@ -4,5 +4,4 @@ Types:Sorcery
 A:SP$ DealDamage | Cost$ 2 B | ValidTgts$ Opponent | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target opponent, where X is twice the number of white creatures that player controls.
 SVar:X:Count$Valid Creature.White+TargetedPlayerCtrl/Twice
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jovial_evil.jpg
 Oracle:Jovial Evil deals X damage to target opponent, where X is twice the number of white creatures that player controls.

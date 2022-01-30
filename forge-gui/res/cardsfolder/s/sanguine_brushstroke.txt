@@ -6,5 +6,5 @@ SVar:TrigToken:DB$ Token | TokenScript$ c_a_blood_draw | SubAbility$ DBMakeCard
 SVar:DBMakeCard:DB$ MakeCard | Name$ Blood Artist | Zone$ Battlefield
 T:Mode$ Sacrificed | ValidCard$ Blood.token+YouCtrl | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a Blood token, each opponent loses 1 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
-DeckHas:Ability$Token & Ability$Sacrifice & Type$Blood
+DeckHas:Ability$Token|Sacrifice|LifeGain & Type$Blood
 Oracle:When Sanguine Brushstroke enters the battlefield, create a Blood token and conjure a card named Blood Artist onto the battlefield.\nWhenever you sacrifice a Blood token, each opponent loses 1 life.

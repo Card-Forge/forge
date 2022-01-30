@@ -17,5 +17,4 @@ SVar:TrigReturn:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Trigger
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Graveyard | SubAbility$ RemoveEffect
 SVar:RemoveEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elkin_lair.jpg
 Oracle:At the beginning of each player's upkeep, that player exiles a card at random from their hand. The player may play that card this turn. At the beginning of the next end step, if the player hasn't played the card, they put it into their graveyard.

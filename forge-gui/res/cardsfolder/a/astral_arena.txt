@@ -5,6 +5,5 @@ S:Mode$ Continuous | EffectZone$ Command | GlobalRule$ No more than one creature
 S:Mode$ Continuous | EffectZone$ Command | GlobalRule$ No more than one creature can block each combat. | Description$ No more than one creature can block each combat.
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, CARDNAME deals 2 damage to each creature.
 SVar:RolledChaos:DB$ DamageAll | NumDmg$ 2 | ValidCards$ Creature | ValidDescription$ each creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/astral_arena.jpg
 SVar:AIRollPlanarDieParams:Mode$ Random | MinTurn$ 5
 Oracle:No more than one creature can attack each combat.\nNo more than one creature can block each combat.\nWhenever you roll {CHAOS}, Astral Arena deals 2 damage to each creature.

@@ -5,5 +5,4 @@ PT:3/3
 K:Protection from red
 A:AB$ DamageAll | Cost$ T | NumDmg$ 1 | ValidCards$ Creature.withoutFlying | ValidDescription$ each creature and without flying. | SpellDescription$ CARDNAME deals 1 damage to each creature without flying.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/subterranean_spirit.jpg
 Oracle:Protection from red\n{T}: Subterranean Spirit deals 1 damage to each creature without flying.

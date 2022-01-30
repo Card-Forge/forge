@@ -5,5 +5,4 @@ PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBounce | TriggerDescription$ When CARDNAME enters the battlefield, return target permanent to its owner's hand, then that player discards a card.
 SVar:TrigBounce:DB$ ChangeZone | ValidTgts$ Permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ TargetedOwner | NumCards$ 1 | Mode$ TgtChoose
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dinrova_horror.jpg
 Oracle:When Dinrova Horror enters the battlefield, return target permanent to its owner's hand, then that player discards a card.

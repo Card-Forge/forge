@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigScry:DB$ Scry | ScryNum$ 2
 T:Mode$ Crewed | ValidCrew$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME crews a Vehicle, that Vehicle gets +1/+1 until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ TriggeredVehicle | NumAtt$ 1 | NumDef$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_motorist.jpg
 Oracle:When Veteran Motorist enters the battlefield, scry 2.\nWhenever Veteran Motorist crews a Vehicle, that Vehicle gets +1/+1 until end of turn.

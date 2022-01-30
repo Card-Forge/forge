@@ -4,5 +4,4 @@ Types:Creature Wall
 PT:0/5
 K:Defender
 K:Protection from black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cemetery_gate.jpg
 Oracle:Defender (This creature can't attack.)\nProtection from black

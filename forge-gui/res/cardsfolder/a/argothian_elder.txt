@@ -3,5 +3,4 @@ ManaCost:3 G
 Types:Creature Elf Druid
 PT:2/2
 A:AB$ Untap | Cost$ T | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Untap two target lands.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/argothian_elder.jpg
 Oracle:{T}: Untap two target lands.

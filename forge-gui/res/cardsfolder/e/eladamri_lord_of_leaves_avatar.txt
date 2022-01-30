@@ -5,5 +5,4 @@ HandLifeModifier:-1/+2
 T:Mode$ Phase | PreCombatMain$ True | ValidPlayer$ Player | TriggerZones$ Command | Execute$ TrigAddMana | TriggerDescription$ At the beginning of each player's precombat main phase, that player adds {G}{G}.
 SVar:TrigAddMana:DB$ Mana | Produced$ G | Amount$ 2 | Defined$ TriggeredPlayer
 AI:RemoveDeck:Random
-SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Eladamri, Lord of Leaves Avatar.full.jpg
 Oracle:Hand -1, life +2\nAt the beginning of each player's precombat main phase, that player adds {G}{G}.

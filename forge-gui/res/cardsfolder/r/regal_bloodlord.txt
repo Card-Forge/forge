@@ -8,5 +8,4 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_bat_flying | Toke
 SVar:YouLifeGained:Count$LifeYouGainedThisTurn
 DeckHints:Ability$LifeGain
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/regal_bloodlord.jpg
 Oracle:Flying\nAt the beginning of each end step, if you gained life this turn, create a 1/1 black Bat creature token with flying.

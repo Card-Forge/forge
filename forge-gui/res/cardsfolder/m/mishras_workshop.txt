@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 3 | RestrictValid$ Artifact | SpellDescription$ Add {C}{C}{C}. Spend this mana only to cast artifact spells.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mishras_workshop.jpg
 Oracle:{T}: Add {C}{C}{C}. Spend this mana only to cast artifact spells.

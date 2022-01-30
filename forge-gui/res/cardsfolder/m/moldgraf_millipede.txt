@@ -7,5 +7,5 @@ SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 3 | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
 SVar:X:Count$ValidGraveyard Creature.YouCtrl
 SVar:NeedsToPlayVar:X GE3
-DeckHas:Ability$Mill & Ability$Counters
+DeckHas:Ability$Mill|Counters
 Oracle:When Moldgraf Millipede enters the battlefield, mill three cards, then put a +1/+1 counter on Moldgraf Millipede for each creature card in your graveyard. (To mill a card, put the top card of your library into your graveyard.)

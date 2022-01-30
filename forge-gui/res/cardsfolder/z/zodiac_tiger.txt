@@ -3,5 +3,4 @@ ManaCost:2 G G
 Types:Creature Cat
 PT:3/4
 K:Forestwalk
-SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10594.jpg
 Oracle:Forestwalk (This creature can't be blocked as long as defending player controls a Forest.)

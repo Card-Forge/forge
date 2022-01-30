@@ -3,5 +3,4 @@ ManaCost:4
 Types:Artifact Creature Golem
 PT:2/3
 A:AB$ Pump | Cost$ 3 | KW$ Flying | Defined$ Self | SpellDescription$ CARDNAME gains flying until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/patagia_golem.jpg
 Oracle:{3}: Patagia Golem gains flying until end of turn.

@@ -8,5 +8,4 @@ SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.Other | TgtPrompt$ Select ano
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardToughness
-SVar:Picture:http://www.wizards.com/global/images/magic/general/noxious_gearhulk.jpg
 Oracle:Menace\nWhen Noxious Gearhulk enters the battlefield, you may destroy another target creature. If a creature is destroyed this way, you gain life equal to its toughness.

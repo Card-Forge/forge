@@ -6,5 +6,4 @@ K:Flying
 # Note: The Executing Ability needs to be a Drawback for the AI to properly test it's conditions
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, you lose 2 life.
 SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 2
-SVar:Picture:http://resources.wizards.com/magic/cards/st/en-us/card5158.jpg
 Oracle:Flying\nWhen Foul Imp enters the battlefield, you lose 2 life.

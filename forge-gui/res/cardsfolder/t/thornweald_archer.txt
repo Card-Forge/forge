@@ -4,5 +4,4 @@ Types:Creature Elf Archer
 PT:2/1
 K:Deathtouch
 K:Reach
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thornweald_archer.jpg
 Oracle:Reach, deathtouch

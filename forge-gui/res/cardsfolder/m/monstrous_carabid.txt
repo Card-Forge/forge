@@ -4,5 +4,4 @@ Types:Creature Insect
 PT:4/4
 K:CARDNAME attacks each combat if able.
 K:Cycling:BR
-SVar:Picture:http://www.wizards.com/global/images/magic/general/monstrous_carabid.jpg
 Oracle:Monstrous Carabid attacks each combat if able.\nCycling {B/R} ({B/R}, Discard this card: Draw a card.)

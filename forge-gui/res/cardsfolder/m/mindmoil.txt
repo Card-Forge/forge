@@ -7,5 +7,4 @@ SVar:DBDraw:DB$ Draw | NumCards$ RemTossed | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Tossed:Count$InYourHand
 SVar:RemTossed:Remembered$Amount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mindmoil.jpg
 Oracle:Whenever you cast a spell, put the cards in your hand on the bottom of your library in any order, then draw that many cards.

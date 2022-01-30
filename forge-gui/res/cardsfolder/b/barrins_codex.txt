@@ -7,5 +7,4 @@ A:AB$ Draw | Cost$ 4 T Sac<1/CARDNAME> | NumCards$ X | SpellDescription$ Draw X 
 SVar:X:Count$CardCounters.PAGE
 # TODO: maybe improve the AI logic for the trigger so that the AI doesn't go too much higher than the max hand size here,
 # though realistically it happens very rarely, if ever (the AI would sac-draw before then).
-SVar:Picture:http://www.wizards.com/global/images/magic/general/Barrins_Codex.jpg
 Oracle:At the beginning of your upkeep, you may put a page counter on Barrin's Codex.\n{4}, {T}, Sacrifice Barrin's Codex: Draw X cards, where X is the number of page counters on Barrin's Codex.

@@ -2,5 +2,4 @@ Name:Armored Warhorse
 ManaCost:W W
 Types:Creature Horse
 PT:2/3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/armored_warhorse.jpg
 Oracle:

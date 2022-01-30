@@ -5,5 +5,4 @@ PT:4/5
 K:Flying
 S:Mode$ Continuous | Affected$ You,Human.YouCtrl | AddKeyword$ Hexproof | Description$ You and Humans you control have hexproof.
 A:AB$ Token | Cost$ 2 ExileFromGrave<1/Card> | TokenAmount$ 1 | TokenScript$ w_1_1_human_soldier | TokenOwner$ You | LegacyImage$ w 1 1 human soldier soi | SpellDescription$ Create a 1/1 white Human Soldier creature token.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sigarda_herons_grace.jpg
 Oracle:Flying\nYou and Humans you control have hexproof.\n{2}, Exile a card from your graveyard: Create a 1/1 white Human Soldier creature token.

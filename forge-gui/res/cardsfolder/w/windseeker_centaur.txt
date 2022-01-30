@@ -3,5 +3,4 @@ ManaCost:1 R R
 Types:Creature Centaur
 PT:2/2
 K:Vigilance
-SVar:Picture:http://www.wizards.com/global/images/magic/general/windseeker_centaur.jpg
 Oracle:Vigilance

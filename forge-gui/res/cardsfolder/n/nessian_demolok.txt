@@ -6,5 +6,4 @@ K:Tribute:3
 SVar:TrigNotTribute:DB$ Destroy | ValidTgts$ Permanent.nonCreature | TgtPrompt$ Select target noncreature permanent | SpellDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, destroy target noncreature permanent.
 SVar:TributeAILogic:Always
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nessian_demolok.jpg
 Oracle:Tribute 3 (As this creature enters the battlefield, an opponent of your choice may put three +1/+1 counters on it.)\nWhen Nessian Demolok enters the battlefield, if tribute wasn't paid, destroy target noncreature permanent.

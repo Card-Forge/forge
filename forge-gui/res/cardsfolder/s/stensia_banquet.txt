@@ -6,5 +6,4 @@ SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:X:Count$TypeYouCtrl.Vampire
 AI:RemoveDeck:Random
 DeckHints:Type$Vampire
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stensia_banquet.jpg
 Oracle:Stensia Banquet deals damage to target opponent or planeswalker equal to the number of Vampires you control.\nDraw a card.

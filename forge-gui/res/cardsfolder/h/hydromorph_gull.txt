@@ -5,5 +5,4 @@ PT:3/3
 K:Flying
 A:AB$ Counter | Cost$ U Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Creature.YouCtrl | SpellDescription$ Counter target spell that targets a creature you control.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hydromorph_gull.jpg
 Oracle:Flying\n{U}, Sacrifice Hydromorph Gull: Counter target spell that targets a creature you control.

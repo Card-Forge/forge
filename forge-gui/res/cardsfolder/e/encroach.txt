@@ -2,5 +2,4 @@ Name:Encroach
 ManaCost:B
 Types:Sorcery
 A:SP$ Discard | Cost$ B | ValidTgts$ Player | Mode$ RevealYouChoose | DiscardValid$ Land.nonBasic | NumCards$ 1 | SpellDescription$ Target player reveals their hand. You choose a nonbasic land card from it. That player discards that card.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/encroach.jpg
 Oracle:Target player reveals their hand. You choose a nonbasic land card from it. That player discards that card.

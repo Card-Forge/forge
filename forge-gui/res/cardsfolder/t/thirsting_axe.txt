@@ -5,5 +5,4 @@ K:Equip:2
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 4 | Description$ Equipped creature gets +4/+0.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | IsPresent$ Card.EquippedBy+notDealtCombatDamageThisTurn Creature | TriggerZones$ Battlefield | Execute$ SacrificeEquippee | TriggerDescription$ At the beginning of your end step, if equipped creature didn't deal combat damage to a creature this turn, sacrifice it.
 SVar:SacrificeEquippee:DB$ SacrificeAll | Defined$ Equipped
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thirsting_axe.jpg
 Oracle:Equipped creature gets +4/+0.\nAt the beginning of your end step, if equipped creature didn't deal combat damage to a creature this turn, sacrifice it.\nEquip {2}

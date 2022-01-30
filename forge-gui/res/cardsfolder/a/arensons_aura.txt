@@ -5,5 +5,4 @@ A:AB$ Destroy | Cost$ W Sac<1/Enchantment> | ValidTgts$ Enchantment | TgtPrompt$
 A:AB$ Counter | Cost$ 3 U U | TargetType$ Spell | TgtPrompt$ Select target Enchantment | ValidTgts$ Enchantment | SpellDescription$ Counter target enchantment spell.
 SVar:NonStackingEffect:True
 SVar:AIPreference:SacCost$Card.Self
-SVar:Picture:http://www.wizards.com/global/images/magic/general/arensons_aura.jpg
 Oracle:{W}, Sacrifice an enchantment: Destroy target enchantment.\n{3}{U}{U}: Counter target enchantment spell.

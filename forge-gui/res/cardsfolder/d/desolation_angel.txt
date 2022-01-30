@@ -9,6 +9,5 @@ SVar:TrigDestroyYourLand:DB$ DestroyAll | ValidCards$ Land.YouCtrl | SpellDescri
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Secondary$ True | Execute$ TrigKicker | TriggerDescription$ Kicker: If you paid the kicker cost, destroy all lands instead.
 SVar:TrigKicker:DB$ DestroyAll | ValidCards$ Land | SpellDescription$ CARDNAME destroys all land.
 AI:RemoveDeck:Random
-DeckNeeds:Color$white
-SVar:Picture:http://www.wizards.com/global/images/magic/general/desolation_angel.jpg
+DeckNeeds:Color$White
 Oracle:Kicker {W}{W} (You may pay an additional {W}{W} as you cast this spell.)\nFlying\nWhen Desolation Angel enters the battlefield, destroy all lands you control. If it was kicked, destroy all lands instead.

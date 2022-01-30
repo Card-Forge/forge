@@ -8,5 +8,4 @@ SVar:DBDiscard:DB$ Discard | Mode$ Hand | Defined$ Player | SubAbility$ DBEachDr
 SVar:DBEachDraw:DB$ Draw | Defined$ Player | NumCards$ 4 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sensation_gorger.jpg
 Oracle:Kinship — At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Sensation Gorger, you may reveal it. If you do, each player discards their hand, then draws four cards.

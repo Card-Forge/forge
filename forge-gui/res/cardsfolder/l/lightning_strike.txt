@@ -2,5 +2,4 @@ Name:Lightning Strike
 ManaCost:1 R
 Types:Instant
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_strike.jpg
 Oracle:Lightning Strike deals 3 damage to any target.

@@ -5,5 +5,4 @@ PT:3/3
 A:AB$ Sacrifice | Cost$ 2 B Sac<1/Creature> | Defined$ Player.Other | SacValid$ Creature | SpellDescription$ Each other player sacrifices a creature.
 A:AB$ Sacrifice | Cost$ 2 R Sac<1/Artifact> | Defined$ Player.Other | SacValid$ Artifact | SpellDescription$ Each other player sacrifices an artifact.
 A:AB$ Sacrifice | Cost$ 2 G Sac<1/Enchantment> | Defined$ Player.Other | SacValid$ Enchantment | SpellDescription$ Each other player sacrifices an enchantment
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shattergang_brothers.jpg
 Oracle:{2}{B}, Sacrifice a creature: Each other player sacrifices a creature.\n{2}{R}, Sacrifice an artifact: Each other player sacrifices an artifact.\n{2}{G}, Sacrifice an enchantment: Each other player sacrifices an enchantment.

@@ -5,5 +5,5 @@ PT:3/2
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When CARDNAME enters the battlefield, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
 SVar:TrigSurveil:DB$ Surveil | Amount$ 1
-DeckHas:Ability$Surveil & Ability$Graveyard
+DeckHas:Ability$Surveil|Graveyard
 Oracle:Flash\nWhen Whisper Agent enters the battlefield, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)

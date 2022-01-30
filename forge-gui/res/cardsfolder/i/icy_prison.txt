@@ -10,5 +10,4 @@ SVar:TrigSac:DB$ Sacrifice | Defined$ Self | UnlessCost$ 3 | UnlessPayer$ Player
 SVar:PlayMain1:TRUE
 SVar:NeedsToPlayVar:Y GE3
 SVar:Y:Count$Valid Land.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/icy_prison.jpg
 Oracle:When Icy Prison enters the battlefield, exile target creature.\nAt the beginning of your upkeep, sacrifice Icy Prison unless any player pays {3}.\nWhen Icy Prison leaves the battlefield, return the exiled card to the battlefield under its owner's control.

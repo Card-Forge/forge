@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigSac:DB$ Sacrifice | Defined$ Self | UnlessCost$ Sac<2/Creature> | UnlessPayer$ Player | UnlessSwitched$ True
 SVar:AIPreference:SacCost$Creature.token,Creature
 SVar:AIPreferenceParams:CreatureEvalThreshold$ 150 | MinCreaturesBelowThreshold$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/prowling_pangolin.jpg
 Oracle:When Prowling Pangolin enters the battlefield, any player may sacrifice two creatures. If a player does, sacrifice Prowling Pangolin.

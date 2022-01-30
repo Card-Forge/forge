@@ -8,5 +8,4 @@ S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't atta
 SVar:X:Count$Valid Creature.Other+YouCtrl
 A:AB$ Token | Cost$ 3 W | TokenAmount$ 1 | TokenScript$ w_1_1_warrior_vigilance | TokenOwner$ You | LegacyImage$ w 1 1 warrior vigilance akh | SpellDescription$ Create a 1/1 white Warrior creature token with vigilance.
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/oketra_the_true.jpg
 Oracle:Double strike, indestructible\nOketra the True can't attack or block unless you control at least three other creatures.\n{3}{W}: Create a 1/1 white Warrior creature token with vigilance.

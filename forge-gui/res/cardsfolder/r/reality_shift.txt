@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ ChangeZone | Cost$ 1 U | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | SubAbility$ DBManifest | RememberLKI$ True | AITgts$ Card.cmcGE3,Card.powerGE3 | SpellDescription$ Exile target creature. Its controller manifests the top card of their library. (That player puts the top card of their library onto the battlefield face down as a 2/2 creature. If it's a creature card, it can be turned face up any time for its mana cost.)
 SVar:DBManifest:DB$ Manifest | Amount$ 1 | Defined$ TopOfLibrary | DefinedPlayer$ RememberedController | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reality_shift.jpg
 Oracle:Exile target creature. Its controller manifests the top card of their library. (That player puts the top card of their library onto the battlefield face down as a 2/2 creature. If it's a creature card, it can be turned face up any time for its mana cost.)

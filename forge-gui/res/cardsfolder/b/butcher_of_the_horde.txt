@@ -7,5 +7,4 @@ A:AB$ GenericChoice | Cost$ Sac<1/Creature.Other/another creature> | Choices$ DB
 SVar:DBVigilance:DB$ Pump | Defined$ Self | KW$ Vigilance | SpellDescription$ CARDNAME gains vigilance until end of turn.
 SVar:DBLifelink:DB$ Pump | Defined$ Self | KW$ Lifelink | SpellDescription$ CARDNAME gains lifelink until end of turn.
 SVar:DBHaste:DB$ Pump | Defined$ Self | KW$ Haste | SpellDescription$ CARDNAME gains haste until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/butcher_of_the_horde.jpg
 Oracle:Flying\nSacrifice another creature: Butcher of the Horde gains your choice of vigilance, lifelink, or haste until end of turn.

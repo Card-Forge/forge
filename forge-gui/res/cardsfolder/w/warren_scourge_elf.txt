@@ -3,5 +3,4 @@ ManaCost:1 G
 Types:Creature Elf Warrior
 PT:1/1
 K:Protection from Goblins
-SVar:Picture:http://www.wizards.com/global/images/magic/general/warren_scourge_elf.jpg
 Oracle:Protection from Goblins

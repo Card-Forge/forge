@@ -5,5 +5,4 @@ PT:5/6
 S:Mode$ Continuous | Affected$ Creature.Human+YouCtrl | AddAbility$ Damage | Description$ Each Human creature you control has "{R}, {T}: This creature deals 1 damage to any target."
 SVar:Damage:AB$ DealDamage | Cost$ R T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 DeckHints:Type$Human
-SVar:Picture:http://www.wizards.com/global/images/magic/general/titan_of_eternal_fire.jpg
 Oracle:Each Human creature you control has "{R}, {T}: This creature deals 1 damage to any target."

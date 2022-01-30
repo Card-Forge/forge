@@ -3,5 +3,4 @@ ManaCost:2 W
 Types:Creature Human Soldier
 PT:1/4
 S:Mode$ Continuous | Affected$ Card.Self | CanBlockAny$ True | Description$ CARDNAME can block any number of creatures.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/palace_guard.jpg
 Oracle:Palace Guard can block any number of creatures.

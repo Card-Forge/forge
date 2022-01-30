@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact
 A:AB$ Tap | Cost$ T | ValidTgts$ Artifact.YouDontCtrl | TgtPrompt$ Select target artifact you don't control | SpellDescription$ Tap target artifact you don't control.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/touchstone.jpg
 Oracle:{T}: Tap target artifact you don't control.

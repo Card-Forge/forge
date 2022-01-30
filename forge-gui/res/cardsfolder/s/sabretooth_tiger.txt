@@ -3,5 +3,4 @@ ManaCost:2 R
 Types:Creature Cat
 PT:2/1
 K:First Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sabretooth_tiger.jpg
 Oracle:First strike

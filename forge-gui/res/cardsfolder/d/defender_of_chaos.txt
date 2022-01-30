@@ -4,5 +4,4 @@ Types:Creature Human Knight
 PT:2/1
 K:Flash
 K:Protection from white
-SVar:Picture:http://www.wizards.com/global/images/magic/general/defender_of_chaos.jpg
 Oracle:Flash\nProtection from white

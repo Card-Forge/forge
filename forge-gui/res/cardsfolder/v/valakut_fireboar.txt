@@ -5,5 +5,4 @@ PT:1/7
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, switch its power and toughness until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME's power and toughness are switched
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/valakut_fireboar.jpg
 Oracle:Whenever Valakut Fireboar attacks, switch its power and toughness until end of turn.

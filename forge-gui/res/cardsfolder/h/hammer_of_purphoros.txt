@@ -6,5 +6,4 @@ A:AB$ Token | Cost$ 2 R T Sac<1/Land> | TokenAmount$ 1 | TokenScript$ c_3_3_e_a_
 SVar:BuffedBy:Creature
 SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hammer_of_purphoros.jpg
 Oracle:Creatures you control have haste.\n{2}{R}, {T}, Sacrifice a land: Create a 3/3 colorless Golem enchantment artifact creature token.

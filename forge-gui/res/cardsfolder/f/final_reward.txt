@@ -2,5 +2,4 @@ Name:Final Reward
 ManaCost:4 B
 Types:Instant
 A:SP$ ChangeZone | Cost$ 4 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/final_reward.jpg
 Oracle:Exile target creature.

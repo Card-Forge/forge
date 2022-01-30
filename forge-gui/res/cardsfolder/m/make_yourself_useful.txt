@@ -6,5 +6,4 @@ SVar:MakeUseful:DB$ Destroy | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select ta
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardToughness
-SVar:Picture:https://downloads.cardforge.org/images/cards/E01/Make Yourself Useful.full.jpg
 Oracle:When you set this scheme in motion, destroy target creature an opponent controls. If a creature is destroyed this way, you gain life equal to its toughness.

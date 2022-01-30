@@ -5,5 +5,4 @@ PT:4/4
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has haste as long as you control another Dinosaur.
 SVar:X:Count$Valid Dinosaur.Other+YouCtrl
 DeckHints:Type$Dinosaur
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stampeding_horncrest.jpg
 Oracle:Stampeding Horncrest has haste as long as you control another Dinosaur.

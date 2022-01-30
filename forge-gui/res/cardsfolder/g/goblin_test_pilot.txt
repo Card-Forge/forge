@@ -6,5 +6,4 @@ K:Flying
 A:AB$ DealDamage | Cost$ T | NumDmg$ 2 | ValidTgts$ Creature,Player,Planeswalker | TargetsAtRandom$ True | SpellDescription$ CARDNAME deals 2 damage to any target chosen at random.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_test_pilot.jpg
 Oracle:Flying\n{T}: Goblin Test Pilot deals 2 damage to any target chosen at random.

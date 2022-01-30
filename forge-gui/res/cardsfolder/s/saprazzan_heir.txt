@@ -5,5 +5,4 @@ PT:1/1
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME becomes blocked, you may draw three cards.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 3 | OptionalDecider$ You
 SVar:HasAttackEffect:Blocked
-SVar:Picture:http://www.wizards.com/global/images/magic/general/saprazzan_heir.jpg
 Oracle:Whenever Saprazzan Heir becomes blocked, you may draw three cards.

@@ -6,5 +6,4 @@ A:AB$ Pump | Cost$ 0 | Defined$ Self | KW$ Flying | Duration$ Permanent | SpellD
 A:AB$ Debuff | Cost$ 0 | Defined$ Self | Keywords$ Flying | Duration$ Permanent | SpellDescription$ CARDNAME loses flying. (This effect lasts indefinitely.)
 A:AB$ Phases | Cost$ 3 U U | Defined$ Self | SpellDescription$ CARDNAME phases out.
 #TODO: the AI will currently not make Mist Dragon lose flying if it's threatened by something that targets a flying creature, might be improved. Otherwise the AI uses this card in full.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mist_dragon.jpg
 Oracle:{0}: Mist Dragon gains flying. (This effect lasts indefinitely.)\n{0}: Mist Dragon loses flying. (This effect lasts indefinitely.)\n{3}{U}{U}: Mist Dragon phases out. (While it's phased out, it's treated as though it doesn't exist. It phases in before you untap during your next untap step.)

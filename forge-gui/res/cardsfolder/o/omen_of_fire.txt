@@ -6,5 +6,4 @@ SVar:DBSac:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBSacEach
 SVar:DBSacEach:DB$ Sacrifice | Defined$ Player.IsRemembered | Amount$ OppX | SacValid$ Plains,Permanent.White
 SVar:OppX:Count$Valid Permanent.White+RememberedPlayerCtrl
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/omen_of_fire.jpg
 Oracle:Return all Islands to their owners' hands. Each player sacrifices a Plains or a white permanent for each white permanent they control.

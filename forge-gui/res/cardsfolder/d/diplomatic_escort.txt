@@ -3,5 +3,4 @@ ManaCost:1 U
 Types:Creature Human Spellshaper
 PT:1/1
 A:AB$ Counter | Cost$ U T Discard<1/Card> | TargetType$ Spell,Activated,Triggered | TgtPrompt$ Select target spell or ability | ValidTgts$ Card | TargetValidTargeting$ Creature.inZoneBattlefield | SpellDescription$ Counter target spell or ability that targets a creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/diplomatic_escort.jpg
 Oracle:{U}, {T}, Discard a card: Counter target spell or ability that targets a creature.

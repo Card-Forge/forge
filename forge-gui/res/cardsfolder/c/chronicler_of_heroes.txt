@@ -4,5 +4,4 @@ Types:Creature Centaur Wizard
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card if you control a creature with a +1/+1 counter on it.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionPresent$ Creature.YouCtrl+counters_GE1_P1P1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chronicler_of_heroes.jpg
 Oracle:When Chronicler of Heroes enters the battlefield, draw a card if you control a creature with a +1/+1 counter on it.

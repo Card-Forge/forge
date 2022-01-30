@@ -7,5 +7,4 @@ A:AB$ PumpAll | Cost$ G G T | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 AI:RemoveDeck:Random
 DeckNeeds:Color$Black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderscape_master.jpg
 Oracle:{B}{B}, {T}: Target player loses 2 life and you gain 2 life.\n{G}{G}, {T}: Creatures you control get +2/+2 until end of turn.

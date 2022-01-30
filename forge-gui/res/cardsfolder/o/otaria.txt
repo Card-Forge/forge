@@ -5,6 +5,5 @@ S:Mode$ Continuous | Affected$ Instant,Sorcery | EffectZone$ Command | AffectedZ
 S:Mode$ Continuous | Affected$ Instant.wasCastFromGraveyard,Sorcery.wasCastFromGraveyard | EffectZone$ Command | AffectedZone$ Stack | AddKeyword$ Flashback | Secondary$ True
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, take an extra turn after this one.
 SVar:RolledChaos:DB$ AddTurn | NumTurns$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/otaria.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always
 Oracle:Instant and sorcery cards in graveyards have flashback. The flashback cost is equal to the card's mana cost. (Its owner may cast the card from their graveyard for its mana cost. Then they exile it.)\nWhenever you roll {CHAOS}, take an extra turn after this one.

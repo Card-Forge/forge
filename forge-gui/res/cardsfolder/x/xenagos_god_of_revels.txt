@@ -10,5 +10,4 @@ SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select a
 SVar:Y:Targeted$CardPower
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Permanent.Red,Permanent.Green
-SVar:Picture:http://www.wizards.com/global/images/magic/general/xenagos_god_of_revels.jpg
 Oracle:Indestructible\nAs long as your devotion to red and green is less than seven, Xenagos isn't a creature.\nAt the beginning of combat on your turn, another target creature you control gains haste and gets +X/+X until end of turn, where X is that creature's power.

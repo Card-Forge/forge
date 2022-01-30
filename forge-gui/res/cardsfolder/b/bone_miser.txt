@@ -8,6 +8,6 @@ T:Mode$ Discarded | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execut
 SVar:TrigMana:DB$ Mana | Produced$ B | Amount$ 2 | Defined$ You
 T:Mode$ Discarded | ValidCard$ Card.nonLand+nonCreature+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you discard a noncreature, nonland card, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
-DeckHas:Ability$Token & Ability$Discard
+DeckHas:Ability$Token|Discard
 DeckHints:Ability$Discard
 Oracle:Whenever you discard a creature card, create a 2/2 black Zombie creature token.\nWhenever you discard a land card, add {B}{B}.\nWhenever you discard a noncreature, nonland card, draw a card.

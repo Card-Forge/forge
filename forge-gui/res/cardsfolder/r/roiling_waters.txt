@@ -3,5 +3,4 @@ ManaCost:5 U U
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 5 U U | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return up to two target creatures your opponents control to their owners' hands. Target player draws two cards.
 SVar:DBDraw:DB$ Draw | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/roiling_waters.jpg
 Oracle:Return up to two target creatures your opponents control to their owners' hands. Target player draws two cards.

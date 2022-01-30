@@ -5,5 +5,4 @@ PT:2/2
 K:Infect
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target creature card with infect from your graveyard to your hand.
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.withInfect+YouOwn | TgtPrompt$ Choose target creature with Infect in your graveyard.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/corpse_cur.jpg
 Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nWhen Corpse Cur enters the battlefield, you may return target creature card with infect from your graveyard to your hand.

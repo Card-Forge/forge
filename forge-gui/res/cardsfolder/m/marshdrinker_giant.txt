@@ -4,5 +4,4 @@ Types:Creature Giant Warrior
 PT:4/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target Island or Swamp an opponent controls.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Land.Island+OppCtrl,Land.Swamp+OppCtrl | TgtPrompt$ Select target Island or Swamp an opponent controls
-SVar:Picture:http://www.wizards.com/global/images/magic/general/marshdrinker_giant.jpg
 Oracle:When Marshdrinker Giant enters the battlefield, destroy target Island or Swamp an opponent controls.

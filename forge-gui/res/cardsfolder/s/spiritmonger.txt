@@ -8,5 +8,4 @@ A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 A:AB$ ChooseColor | Cost$ G | Defined$ You | SubAbility$ Animate | SpellDescription$ CARDNAME becomes the color of your choice until end of turn.
 SVar:Animate:DB$ Animate | Defined$ Self | Colors$ ChosenColor | OverwriteColors$ True
 SVar:HasCombatEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spiritmonger.jpg
 Oracle:Whenever Spiritmonger deals damage to a creature, put a +1/+1 counter on Spiritmonger.\n{B}: Regenerate Spiritmonger.\n{G}: Spiritmonger becomes the color of your choice until end of turn.

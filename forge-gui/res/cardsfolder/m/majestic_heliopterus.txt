@@ -6,5 +6,4 @@ K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target Dinosaur you control gains flying until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Permanent.Dinosaur+Other+YouCtrl | TgtPrompt$ Select another target Dinosaur you control | KW$ Flying
 DeckHints:Type$Dinosaur
-SVar:Picture:http://www.wizards.com/global/images/magic/general/majestic_heliopterus.jpg
 Oracle:Flying\nWhenever Majestic Heliopterus attacks, another target Dinosaur you control gains flying until end of turn.

@@ -5,5 +5,4 @@ A:SP$ DamageAll | Cost$ X R | ValidTgts$ Opponent | TgtPrompt$ Select a opponent
 SVar:X:Count$xPaid
 SVar:Y:Count$Valid Creature.TargetedPlayerCtrl
 SVar:Z:SVar$X/DivideEvenlyDown.Y
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_catapult.jpg
 Oracle:Dwarven Catapult deals X damage divided evenly, rounded down, among all creatures target opponent controls.

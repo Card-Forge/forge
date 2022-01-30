@@ -4,5 +4,4 @@ Types:Artifact
 A:AB$ ChangeZone | Cost$ 2 | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | Hidden$ True | Mandatory$ True | ChangeType$ Card.TopGraveyard+YouOwn | SpellDescription$ Put the top card of your graveyard on the bottom of your library. | StackDescription$ Put the top card of your graveyard on the bottom of your library.
 AI:RemoveDeck:All
 SVar:NeedsOrderedGraveyard:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_digger.jpg
 Oracle:{2}: Put the top card of your graveyard on the bottom of your library.

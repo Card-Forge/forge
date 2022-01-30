@@ -4,5 +4,4 @@ Types:Tribal Instant Shapeshifter
 K:Changeling
 A:SP$ Pump | Cost$ 1 R | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +2 | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SubAbility$ DBAnimate | SpellDescription$ Up to two target creatures each get +2/+0 and gain all creature types until end of turn.
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | AddAllCreatureTypes$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blades_of_velis_vel.jpg
 Oracle:Changeling (This card is every creature type.)\nUp to two target creatures each get +2/+0 and gain all creature types until end of turn.

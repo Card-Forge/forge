@@ -8,5 +8,4 @@ SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionCheckSVar$ X | ConditionSVarCompar
 SVar:DBGetMana:DB$ Mana | Produced$ C G U | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bounty_of_the_luxa.jpg
 Oracle:At the beginning of your precombat main phase, remove all flood counters from Bounty of the Luxa. If no counters were removed this way, put a flood counter on Bounty of the Luxa and draw a card. Otherwise, add {C}{G}{U}.

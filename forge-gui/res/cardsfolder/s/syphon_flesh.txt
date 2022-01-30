@@ -5,5 +5,4 @@ A:SP$ Sacrifice | Cost$ 4 B | Defined$ Player.Other | SacValid$ Creature | SacMe
 SVar:DBToken:DB$ Token | LegacyImage$ b 2 2 zombie cmd | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/syphon_flesh.jpg
 Oracle:Each other player sacrifices a creature. You create a 2/2 black Zombie creature token for each creature sacrificed this way.

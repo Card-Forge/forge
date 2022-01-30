@@ -4,5 +4,4 @@ Colors:blue
 Types:Sorcery
 K:Suspend:4:U
 A:SP$ Draw | Cost$ 0 | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws three cards. | ActivationLimit$ 0
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ancestral_vision.jpg
 Oracle:Suspend 4—{U} (Rather than cast this card from your hand, pay {U} and exile it with four time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)\nTarget player draws three cards.

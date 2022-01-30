@@ -4,5 +4,4 @@ Types:Creature Vampire
 PT:4/4
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has haste as long as an opponent controls a human.
 SVar:X:Count$Valid Human.OppCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/night_revelers.jpg
 Oracle:Night Revelers has haste as long as an opponent controls a Human.

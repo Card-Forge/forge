@@ -5,5 +5,4 @@ PT:2/1
 K:Flying
 T:Mode$ SpellCast | ValidCard$ Planeswalker.Bolas | ValidActivatingPlayer$ You | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a Bolas planeswalker spell, you may sacrifice CARDNAME. If you do, destroy target creature.
 SVar:TrigDestroy:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wasp_of_the_bitter_end.jpg
 Oracle:Flying\nWhenever you cast a Bolas planeswalker spell, you may sacrifice Wasp of the Bitter End. If you do, destroy target creature.

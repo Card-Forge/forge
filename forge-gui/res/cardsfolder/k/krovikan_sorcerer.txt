@@ -8,5 +8,4 @@ SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | DiscardValid$ Card
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 DeckHints:Color$Black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/krovikan_sorcerer.jpg
 Oracle:{T}, Discard a nonblack card: Draw a card.\n{T}, Discard a black card: Draw two cards, then discard one of them.

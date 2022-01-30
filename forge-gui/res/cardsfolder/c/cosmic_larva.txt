@@ -5,5 +5,4 @@ PT:7/6
 K:Trample
 K:UpkeepCost:Sac<2/Land>
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cosmic_larva.jpg
 Oracle:Trample\nAt the beginning of your upkeep, sacrifice Cosmic Larva unless you sacrifice two lands.

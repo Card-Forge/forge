@@ -8,5 +8,4 @@ S:Mode$ Continuous | Affected$ Creature.Legendary+Other+YouCtrl | AddPower$ 2 | 
 AI:RemoveDeck:Random
 SVar:PlayMain1:TRUE
 DeckHints:Type$Legendary
-SVar:Picture:http://www.wizards.com/global/images/magic/general/arvad_the_cursed.jpg
 Oracle:Deathtouch, lifelink\nOther legendary creatures you control get +2/+2.

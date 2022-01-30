@@ -9,5 +9,4 @@ T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Permanent.nontoken+Chose
 SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:X:Count$Valid Permanent.nontoken+ChosenColor+ChosenCtrl
 SVar:NeedsToPlay:Permanent.nonColorless+OppCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jihad.jpg
 Oracle:As Jihad enters the battlefield, choose a color and an opponent.\nWhite creatures get +2/+1 as long as the chosen player controls a nontoken permanent of the chosen color.\nWhen the chosen player controls no nontoken permanents of the chosen color, sacrifice Jihad.

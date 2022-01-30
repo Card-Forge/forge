@@ -6,5 +6,4 @@ S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You |
 T:Mode$ Countered | ValidCause$ Card.YouCtrl | ValidCard$ Card | ValidType$ Spell | TriggerZones$ Battlefield | Execute$ TrigLoot | TriggerDescription$ Whenever a spell or ability you control counters a spell, you may draw a card. If you do, discard a card.
 SVar:TrigLoot:AB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | Cost$ Draw<1/You>
 DeckHints:Type$Instant|Sorcery
-SVar:Picture:http://www.wizards.com/global/images/magic/general/baral_chief_of_compliance.jpg
 Oracle:Instant and sorcery spells you cast cost {1} less to cast.\nWhenever a spell or ability you control counters a spell, you may draw a card. If you do, discard a card.

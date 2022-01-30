@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact
 S:Mode$ RaiseCost | ValidCard$ Card.nonCreature | Type$ Spell | Amount$ 1 | Description$ Noncreature spells cost {1} more to cast.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thorn_of_amethyst.jpg
 Oracle:Noncreature spells cost {1} more to cast.

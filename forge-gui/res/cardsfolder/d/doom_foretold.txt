@@ -10,5 +10,5 @@ SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | Defined$ You | ConditionDefined$ 
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | LegacyImage$ w 2 2 knight vigilance eld | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBSac
 SVar:DBSac:DB$ SacrificeAll | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Token & Ability$LifeGain
+DeckHas:Ability$Token|LifeGain
 Oracle:At the beginning of each player's upkeep, that player sacrifices a nonland, nontoken permanent. If that player can't, they discard a card, they lose 2 life, you draw a card, you gain 2 life, you create a 2/2 white Knight creature token with vigilance, then you sacrifice Doom Foretold.

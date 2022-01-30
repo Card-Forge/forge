@@ -6,5 +6,4 @@ A:AB$ ChangeZone | Cost$ 1 Reveal<X/Card.Black> Sac<1/CARDNAME> | CostDesc$ {1},
 SVar:X:TargetedObjects$Amount
 SVar:Y:Count$ValidHand Card.Black+YouOwn
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/martyr_of_bones.jpg
 Oracle:{1}, Reveal X black cards from your hand, Sacrifice Martyr of Bones: Exile up to X target cards from a single graveyard.

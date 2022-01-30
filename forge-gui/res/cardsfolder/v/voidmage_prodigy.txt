@@ -5,5 +5,4 @@ PT:2/1
 K:Morph:U
 A:AB$ Counter | Cost$ U U Sac<1/Wizard> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/voidmage_prodigy.jpg
 Oracle:{U}{U}, Sacrifice a Wizard: Counter target spell.\nMorph {U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

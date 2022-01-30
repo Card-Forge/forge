@@ -8,5 +8,4 @@ SVar:TrigNotTribute:DB$ GainControl | TgtPrompt$ Choose target creature | ValidT
 SVar:PlayMain1:TRUE
 SVar:TributeAILogic:DontControlCreatures
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/siren_of_the_fanged_coast.jpg
 Oracle:Flying\nTribute 3 (As this creature enters the battlefield, an opponent of your choice may put three +1/+1 counters on it.)\nWhen Siren of the Fanged Coast enters the battlefield, if tribute wasn't paid, gain control of target creature.

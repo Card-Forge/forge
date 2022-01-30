@@ -5,5 +5,4 @@ PT:3/5
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | IsPresent$ Creature.YouCtrl+Blue | Description$ CARDNAME gets +2/+0 as long as you control a blue creature.
 SVar:BuffedBy:Creature.Blue
 DeckHints:Color$Blue
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gearsmith_guardian.jpg
 Oracle:Gearsmith Guardian gets +2/+0 as long as you control a blue creature.

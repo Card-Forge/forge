@@ -3,5 +3,4 @@ ManaCost:1 G G
 Types:Creature Boar
 PT:3/2
 K:Swampwalk
-SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card16458.jpg
 Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)

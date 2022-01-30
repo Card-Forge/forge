@@ -5,5 +5,4 @@ PT:2/2
 A:AB$ Animate | Cost$ U | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | Power$ X | Toughness$ X | Types$ Artifact,Creature | SpellDescription$ Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn.
 SVar:X:Targeted$CardManaCost
 A:AB$ Pump | Cost$ W B | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature | KW$ Deathtouch & Lifelink | SpellDescription$ Target artifact creature gains deathtouch and lifelink until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sydri_galvanic_genius.jpg
 Oracle:{U}: Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn.\n{W}{B}: Target artifact creature gains deathtouch and lifelink until end of turn.

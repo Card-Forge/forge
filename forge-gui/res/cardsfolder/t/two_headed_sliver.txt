@@ -4,5 +4,4 @@ Types:Creature Sliver
 PT:1/1
 S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Menace | Description$ Sliver creatures have menace.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/two_headed_sliver.jpg
 Oracle:All Sliver creatures have menace. (They can't be blocked except by two or more creatures.)

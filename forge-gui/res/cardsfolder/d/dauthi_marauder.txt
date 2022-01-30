@@ -3,5 +3,4 @@ ManaCost:2 B
 Types:Creature Dauthi Minion
 PT:3/1
 K:Shadow
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_marauder.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)

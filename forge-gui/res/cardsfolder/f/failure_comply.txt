@@ -3,7 +3,6 @@ ManaCost:1 U
 AlternateMode: Split
 Types:Instant
 A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Card | TgtZone$ Stack | Origin$ Stack | Fizzle$ True | Destination$ Hand | SpellDescription$ Return target spell to its owner's hand.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/failure_comply.jpg
 Oracle:Return target spell to its owner's hand.
 
 ALTERNATE

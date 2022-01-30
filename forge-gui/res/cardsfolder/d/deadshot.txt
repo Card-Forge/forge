@@ -5,5 +5,4 @@ A:SP$ Tap | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature 
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select another target creature to be dealt damage | DamageSource$ ParentTarget | NumDmg$ X | TargetUnique$ True
 SVar:X:ParentTargeted$CardPower
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deadshot.jpg
 Oracle:Tap target creature. It deals damage equal to its power to another target creature.

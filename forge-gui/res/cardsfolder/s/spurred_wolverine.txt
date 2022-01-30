@@ -5,5 +5,4 @@ PT:3/2
 A:AB$ Pump | Cost$ tapXType<2/Beast> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | SpellDescription$ Target creature gains first strike until end of turn.
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spurred_wolverine.jpg
 Oracle:Tap two untapped Beasts you control: Target creature gains first strike until end of turn.

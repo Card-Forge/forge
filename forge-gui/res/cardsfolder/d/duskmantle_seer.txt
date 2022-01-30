@@ -9,5 +9,4 @@ SVar:EachDig:DB$ Dig | Defined$ Remembered | DigNum$ 1 | Reveal$ True | ChangeNu
 SVar:EachLose:DB$ LoseLife | Defined$ Remembered | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 SVar:X:Imprinted$CardManaCost
-SVar:Picture:http://www.wizards.com/global/images/magic/general/duskmantle_seer.jpg
 Oracle:Flying\nAt the beginning of your upkeep, each player reveals the top card of their library, loses life equal to that card's mana value, then puts it into their hand.

@@ -7,5 +7,4 @@ SVar:DBDamage:DB$ DamageAll | ValidCards$ Creature.IsRemembered | NumDmg$ 1 | Su
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TargetedObjects$Amount
 SVar:Maxtgt:Count$Valid Creature.attacking
-SVar:Picture:http://www.wizards.com/global/images/magic/general/choking_vines.jpg
 Oracle:Cast this spell only during the declare blockers step.\nX target attacking creatures become blocked. Choking Vines deals 1 damage to each of those creatures. (This spell works on creatures that can't be blocked.)

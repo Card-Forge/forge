@@ -5,5 +5,4 @@ K:ETBReplacement:Other:ChooseCT
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentComputerControls | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type.
 A:AB$ Clone | Cost$ 1 | ValidTgts$ Creature.ChosenType+YouCtrl | TgtPrompt$ Select target creature you control of the chosen type | Duration$ UntilEndOfTurn | AddTypes$ Artifact | SpellDescription$ Until end of turn, CARDNAME becomes a copy of target creature you control of the chosen type, except it's an artifact in addition to its other types.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_of_the_forebears.jpg
 Oracle:As Mirror of the Forebears enters the battlefield, choose a creature type.\n{1}: Until end of turn, Mirror of the Forebears becomes a copy of target creature you control of the chosen type, except it's an artifact in addition to its other types.

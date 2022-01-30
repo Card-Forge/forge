@@ -6,5 +6,4 @@ K:Flying
 K:Morph:5 U U
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigChangeZoneAll | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, return all other tapped creatures to their owners' hands.
 SVar:TrigChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Creature.Other+tapped | Origin$ Battlefield | Destination$ Hand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thousand_winds.jpg
 Oracle:Flying\nMorph {5}{U}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Thousand Winds is turned face up, return all other tapped creatures to their owners' hands.

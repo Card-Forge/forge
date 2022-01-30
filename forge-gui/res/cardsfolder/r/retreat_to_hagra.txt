@@ -7,5 +7,4 @@ SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 1 life and you gain 1 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 DeckHas:Ability$LifeGain
-SVar:Picture:http://www.wizards.com/global/images/magic/general/retreat_to_hagra.jpg
 Oracle:Landfall — Whenever a land enters the battlefield under your control, choose one —\n• Target creature gets +1/+0 and gains deathtouch until end of turn.\n• Each opponent loses 1 life and you gain 1 life.

@@ -5,5 +5,4 @@ A:SP$ GainControl | Cost$ 4 U | ValidTgts$ Creature | TgtPrompt$ Select target c
 SVar:Y:Count$Converge
 SVar:X:Targeted$Valid Creature.powerLEY
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/exert_influence.jpg
 Oracle:Converge — Gain control of target creature if its power is less than or equal to the number of colors of mana spent to cast this spell.

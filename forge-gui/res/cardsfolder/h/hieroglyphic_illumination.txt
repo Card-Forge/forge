@@ -3,5 +3,4 @@ ManaCost:3 U
 Types:Instant
 A:SP$ Draw | Cost$ 3 U | NumCards$ 2 | SpellDescription$ Draw two cards.
 K:Cycling:U
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hieroglyphic_illumination.jpg
 Oracle:Draw two cards.\nCycling {U} ({U}, Discard this card: Draw a card.)

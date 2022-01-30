@@ -10,5 +10,4 @@ DeckNeeds:Type$Goblin
 AI:RemoveDeck:All
 SVar:NeedsToPlayVar:Z GE4
 SVar:Z:Count$Valid Land.YouCtrl+inZoneBattlefield
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_recruiter.jpg
 Oracle:When Goblin Recruiter enters the battlefield, search your library for any number of Goblin cards, reveal them, then shuffle and put those cards on top in any order.

@@ -7,5 +7,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | CheckSVar$ 
 SVar:TrigOdricEffect:DB$ DeclareCombatants | DeclareBlockers$ True
 SVar:OdricTest:Count$Valid Creature.attacking+Other
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/odric_master_tactician.jpg
 Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nWhenever Odric, Master Tactician and at least three other creatures attack, you choose which creatures block this combat and how those creatures block.

@@ -4,5 +4,4 @@ Types:Creature Elephant
 PT:3/2
 K:etbCounter:P1P1:1:CheckSVar$ Ferocious:Ferocious — CARDNAME enters the battlefield with a +1/+1 counter on it if you control a creature with power 4 or greater.
 SVar:Ferocious:Count$Valid Creature.YouCtrl+powerGE4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/frontier_mastodon.jpg
 Oracle:Ferocious — Frontier Mastodon enters the battlefield with a +1/+1 counter on it if you control a creature with power 4 or greater.

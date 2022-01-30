@@ -3,5 +3,4 @@ ManaCost:2 U
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Enchantment.Other | AddKeyword$ UpkeepCost:2 | Description$ Other enchantments have "At the beginning of your upkeep, sacrifice this enchantment unless you pay {2}."
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_flux.jpg
 Oracle:Other enchantments have "At the beginning of your upkeep, sacrifice this enchantment unless you pay {2}."

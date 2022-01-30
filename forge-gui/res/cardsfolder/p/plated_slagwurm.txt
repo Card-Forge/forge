@@ -3,5 +3,4 @@ ManaCost:4 G G G
 Types:Creature Wurm
 PT:8/8
 K:Hexproof
-SVar:Picture:http://www.wizards.com/global/images/magic/general/plated_slagwurm.jpg
 Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)

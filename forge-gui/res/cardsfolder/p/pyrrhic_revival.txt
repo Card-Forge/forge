@@ -3,5 +3,4 @@ ManaCost:3 WB WB WB
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 3 WB WB WB | Origin$ Graveyard | Destination$ Battlefield | WithCounters$ M1M1_1 | Defined$ ValidGraveyard Creature | AILogic$ ReanimateAll | SpellDescription$ Each player returns each creature card from their graveyard to the battlefield with an additional -1/-1 counter on it.
 SVar:IsReanimatorCard:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pyrrhic_revival.jpg
 Oracle:Each player returns each creature card from their graveyard to the battlefield with an additional -1/-1 counter on it.

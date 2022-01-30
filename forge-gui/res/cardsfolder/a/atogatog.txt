@@ -4,5 +4,4 @@ Types:Legendary Creature Atog
 PT:5/5
 A:AB$ Pump | Cost$ Sac<1/Creature.Atog/Atog creature> | Defined$ Self | NumAtt$ X | NumDef$ X | SpellDescription$ CARDNAME gets +X/+X until end of turn, where X is the sacrificed creature's power.
 SVar:X:Sacrificed$CardPower
-SVar:Picture:http://www.wizards.com/global/images/magic/general/atogatog.jpg
 Oracle:Sacrifice an Atog creature: Atogatog gets +X/+X until end of turn, where X is the sacrificed creature's power.

@@ -4,5 +4,4 @@ Types:Creature Shapeshifter
 PT:2/2
 K:Changeling
 K:Flying
-SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card145813.jpg
 Oracle:Changeling (This card is every creature type.)\nFlying

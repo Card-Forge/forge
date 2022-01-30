@@ -4,5 +4,4 @@ Types:Legendary Creature Snake Wizard
 PT:2/2
 A:AB$ Pump | Cost$ G U | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable | SubAbility$ DBPump | SpellDescription$ Target creature can't be blocked this turn. If that creature is a Snake, it gets +2/+2 until end of turn.
 SVar:DBPump:DB$ Pump | ConditionDefined$ Targeted | ConditionPresent$ Creature.Snake | ConditionCompare$ EQ1 | Defined$ Targeted | NumAtt$ +2 | NumDef$ +2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kaseto_orochi_archmage.jpg
 Oracle:{G}{U}: Target creature can't be blocked this turn. If that creature is a Snake, it gets +2/+2 until end of turn.

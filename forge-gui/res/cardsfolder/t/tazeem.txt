@@ -5,6 +5,5 @@ S:Mode$ Continuous | Affected$ Creature | EffectZone$ Command | AddHiddenKeyword
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, draw a card for each land you control.
 SVar:RolledChaos:DB$ Draw | NumCards$ Y | Defined$ You
 SVar:Y:Count$Valid Land.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tazeem.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always
 Oracle:Creatures can't block.\nWhenever you roll {CHAOS}, draw a card for each land you control.

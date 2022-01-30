@@ -8,5 +8,4 @@ SVar:X:Count$DevotionDual.Black.Red
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.Opponent | Execute$ TrigDmg | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's upkeep, CARDNAME deals 2 damage to that player unless they sacrifice a creature.
 SVar:TrigDmg:DB$ DealDamage | NumDmg$ 2 | Defined$ TriggeredPlayer | UnlessCost$ Sac<1/Creature> | UnlessAI$ LifeLE2 | UnlessPayer$ TriggeredPlayer
 SVar:BuffedBy:Permanent.Black,Permanent.Red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mogis_god_of_slaughter.jpg
 Oracle:Indestructible\nAs long as your devotion to black and red is less than seven, Mogis isn't a creature.\nAt the beginning of each opponent's upkeep, Mogis deals 2 damage to that player unless they sacrifice a creature.

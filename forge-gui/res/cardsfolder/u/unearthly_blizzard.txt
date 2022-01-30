@@ -3,5 +3,4 @@ ManaCost:2 R
 Types:Sorcery Arcane
 A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 3 | KW$ CARDNAME can't block. | IsCurse$ True | SpellDescription$ Up to three target creatures can't block this turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/unearthly_blizzard.jpg
 Oracle:Up to three target creatures can't block this turn.

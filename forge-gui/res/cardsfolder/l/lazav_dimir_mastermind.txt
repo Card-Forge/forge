@@ -5,5 +5,4 @@ PT:3/3
 K:Hexproof
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.nonToken+OppOwn | TriggerZones$ Battlefield | Execute$ LazavCopy | OptionalDecider$ You | TriggerDescription$ Whenever a creature card is put into an opponent's graveyard from anywhere, you may have Lazav, Dimir Mastermind become a copy of that card, except its name is Lazav, Dimir Mastermind, it's legendary in addition to its other types, and it has hexproof and this ability.
 SVar:LazavCopy:DB$ Clone | Defined$ TriggeredCard | NewName$ Lazav, Dimir Mastermind | AddTypes$ Legendary | AddKeywords$ Hexproof | GainThisAbility$ True | Optional$ True | AddSVars$ LazavCopy | AILogic$ IfDefinedCreatureIsBetter
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lazav_dimir_mastermind.jpg
 Oracle:Hexproof\nWhenever a creature card is put into an opponent's graveyard from anywhere, you may have Lazav, Dimir Mastermind become a copy of that card, except its name is Lazav, Dimir Mastermind, it's legendary in addition to its other types, and it has hexproof and this ability.

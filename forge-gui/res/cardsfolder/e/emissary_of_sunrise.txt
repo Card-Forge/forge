@@ -6,5 +6,4 @@ K:First Strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExplore | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME enters the battlefield, it explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back on top or into your graveyard.)
 SVar:TrigExplore:DB$ Explore
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/emissary_of_sunrise.jpg
 Oracle:First strike\nWhen Emissary of Sunrise enters the battlefield, it explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)

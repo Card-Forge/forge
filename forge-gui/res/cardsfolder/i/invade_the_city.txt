@@ -4,7 +4,7 @@ Types:Sorcery
 A:SP$ Amass | Cost$ 1 U R | Num$ X | SpellDescription$ Amass X, where X is the number of instant and sorcery cards in your graveyard. (Put X +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
 DeckNeeds:Type$Instant|Sorcery
 DeckHints:Ability$Amass & Type$Zombie
-DeckHas:Ability$Amass & Ability$Counters & Ability$Token
+DeckHas:Ability$Amass|Counters|Token
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
 SVar:NeedsToPlayVar:X GE1
 Oracle:Amass X, where X is the number of instant and sorcery cards in your graveyard. (Put X +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)

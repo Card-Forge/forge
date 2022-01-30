@@ -7,5 +7,4 @@ SVar:PumpSoldier:DB$ Pump | NumAtt$ +2 | NumDef$ +2 | ValidTgts$ Creature.Soldie
 SVar:PumpVigilance:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Vigilance | SpellDescription$ Creatures you control gain vigilance until end of turn.
 DeckHints:Type$Soldier
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/piety_charm.jpg
 Oracle:Choose one —\n• Destroy target Aura attached to a creature.\n• Target Soldier creature gets +2/+2 until end of turn.\n• Creatures you control gain vigilance until end of turn.

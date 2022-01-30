@@ -7,5 +7,4 @@ SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, you may pay {E}{E}. If you do, create a 1/1 colorless Servo artifact creature token.
 SVar:TrigToken:AB$ Token | Cost$ PayEnergy<2> | TokenAmount$ 1 | TokenScript$ c_1_1_a_servo | TokenOwner$ You | LegacyImage$ c 1 1 a servo aer
 SVar:HasAttackEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_herder.jpg
 Oracle:When Aether Herder enters the battlefield, you get {E}{E} (two energy counters).\nWhenever Aether Herder attacks, you may pay {E}{E}. If you do, create a 1/1 colorless Servo artifact creature token.

@@ -3,5 +3,4 @@ ManaCost:W
 Types:Enchantment
 A:AB$ PreventDamage | Cost$ 1 ExileFromGrave<1/Card.TopGraveyard> | ValidTgts$ Creature | Amount$ 1 | TgtPrompt$ Select target creature | CostDesc$ {1}, Exile the top card of your graveyard: | SpellDescription$ Prevent the next 1 damage that would be dealt to target creature this turn.
 SVar:NeedsOrderedGraveyard:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/alms.jpg
 Oracle:{1}, Exile the top card of your graveyard: Prevent the next 1 damage that would be dealt to target creature this turn.

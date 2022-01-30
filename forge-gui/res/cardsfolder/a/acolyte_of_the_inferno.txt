@@ -6,5 +6,4 @@ K:Renown:1
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, it deals 2 damage to that creature.
 SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredBlockerLKICopy | NumDmg$ 2
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/acolyte_of_the_inferno.jpg
 Oracle:Renown 1 (When this creature deals combat damage to a player, if it isn't renowned, put a +1/+1 counter on it and it becomes renowned.)\nWhenever Acolyte of the Inferno becomes blocked by a creature, it deals 2 damage to that creature.

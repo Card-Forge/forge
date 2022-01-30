@@ -2,5 +2,4 @@ Name:Sol Ring
 ManaCost:1
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sol_ring.jpg
 Oracle:{T}: Add {C}{C}.

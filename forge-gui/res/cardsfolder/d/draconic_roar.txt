@@ -5,5 +5,4 @@ K:Presence:Dragon
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SubAbility$ DBDamageController | SpellDescription$ CARDNAME deals 3 damage to target creature. If you revealed a Dragon card or controlled a Dragon as you cast this spell, CARDNAME deals 3 damage to that creature's controller. | StackDescription$ SpellDescription
 SVar:DBDamageController:DB$ DealDamage | Defined$ ParentTargetedController | NumDmg$ 3 | Presence$ Dragon | StackDescription$ None
 DeckHints:Type$Dragon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/draconic_roar.jpg
 Oracle:As an additional cost to cast this spell, you may reveal a Dragon card from your hand.\nDraconic Roar deals 3 damage to target creature. If you revealed a Dragon card or controlled a Dragon as you cast this spell, Draconic Roar deals 3 damage to that creature's controller.

@@ -5,5 +5,4 @@ A:SP$ RepeatEach | Cost$ 4 R R | RepeatPlayers$ Player | RepeatSubAbility$ DmgEa
 SVar:DmgEach:DB$ DamageAll | ValidPlayers$ Remembered | ValidCards$ Creature.RememberedPlayerCtrl | NumDmg$ X
 SVar:X:Count$Valid Creature.RememberedPlayerCtrl
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/incite_rebellion.jpg
 Oracle:For each player, Incite Rebellion deals damage to that player and each creature that player controls equal to the number of creatures they control.

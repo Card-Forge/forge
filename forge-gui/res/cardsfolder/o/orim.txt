@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+0/+12
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddKeyword$ Reach | Description$ Creatures you control have reach.
-SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Orim.full.jpg
 Oracle:Hand +0, life +12\nCreatures you control have reach.

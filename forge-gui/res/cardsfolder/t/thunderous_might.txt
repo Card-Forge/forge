@@ -7,5 +7,4 @@ T:Mode$ Attacks | ValidCard$ Card.EnchantedBy | Execute$ TrigPump | TriggerZones
 SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +X
 SVar:X:Count$Devotion.Red
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderous_might.jpg
 Oracle:Enchant creature\nWhenever enchanted creature attacks, it gets +X/+0 until end of turn, where X is your devotion to red. (Each {R} in the mana costs of permanents you control counts toward your devotion to red.)

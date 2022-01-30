@@ -4,5 +4,4 @@ Types:Enchantment
 T:Mode$ Cycled | ValidCard$ Card | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player cycles a card, you may pay {1}. If you do, CARDNAME deals 2 damage to any target.
 SVar:TrigDamage:AB$DealDamage | Cost$ 1 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_rift.jpg
 Oracle:Whenever a player cycles a card, you may pay {1}. If you do, Lightning Rift deals 2 damage to any target.

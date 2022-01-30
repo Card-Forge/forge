@@ -9,7 +9,7 @@ A:AB$ GenericChoice | Cost$ Sac<1/CARDNAME> | Choices$ PumpHexproof,PumpIndestru
 SVar:PumpHexproof:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Hexproof | SpellDescription$ Hexproof
 SVar:PumpIndestructible:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Indestructible | SpellDescription$ Indestructible
 SVar:X:Count$Party
-DeckHas:Ability$Party & Ability$Sacrifice
+DeckHas:Ability$Party|Sacrifice
 SVar:BuffedBy:Rogue,Warrior,Wizard
 DeckHints:Type$Rogue|Warrior|Wizard
 Oracle:Flying\nAt the beginning of combat on your turn, if you have a full party, choose target nonland permanent an opponent controls. Until your next turn, it can't attack or block, and its activated abilities can't be activated.\nSacrifice Linvala: Choose hexproof or indestructible. Creatures you control gain that ability until end of turn.

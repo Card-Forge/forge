@@ -4,7 +4,7 @@ Types:Sorcery
 AlternateMode:Split
 A:SP$ Surveil | Cost$ 1 U/B | Amount$ 2 | SubAbility$ DBDraw | SpellDescription$ Surveil 2, then draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
-DeckHas:Ability$Surveil & Ability$Graveyard
+DeckHas:Ability$Surveil|Graveyard
 Oracle:Surveil 2, then draw a card. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
 
 ALTERNATE

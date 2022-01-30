@@ -2,5 +2,4 @@ Name:Kindercatch
 ManaCost:3 G G G
 Types:Creature Spirit
 PT:6/6
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kindercatch.jpg
 Oracle:

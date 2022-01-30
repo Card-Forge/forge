@@ -7,5 +7,4 @@ T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ DBWeaverofLiesSetState | Tr
 SVar:DBWeaverofLiesSetState:DB$ SetState | ValidTgts$ Creature.withMorph+Other,Creature.withMegamorph+Other | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ WeaverofLiesX | Mode$ TurnFace | SpellDescription$ Turn CARDNAME face down.
 SVar:WeaverofLiesX:Count$Valid Creature.withMorph+Other,Creature.withMegamorph+Other
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/weaver_of_lies.jpg
 Oracle:Morph {4}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Weaver of Lies is turned face up, turn any number of target creatures with morph abilities other than Weaver of Lies face down.

@@ -4,5 +4,4 @@ Types:Creature Vampire Soldier
 PT:2/1
 K:Ascend
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | Condition$ Blessing | Description$ CARDNAME has flying as long as you have the city's blessing.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skymarcher_aspirant.jpg
 Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nSkymarcher Aspirant has flying as long as you have the city's blessing.

@@ -9,6 +9,6 @@ SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ You
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Delirium — At the beginning of your upkeep, you lose 4 life unless there are four or more card types among cards in your graveyard.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Delirium.0.4
-DeckHints:Ability$Graveyard & Ability$Discard
+DeckHints:Ability$Graveyard|Discard
 DeckHas:Ability$Delirium
 Oracle:Flying, trample\nWhen Mindwrack Demon enters the battlefield, mill four cards.\nDelirium — At the beginning of your upkeep, you lose 4 life unless there are four or more card types among cards in your graveyard.

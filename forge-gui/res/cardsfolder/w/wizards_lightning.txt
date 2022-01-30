@@ -5,5 +5,4 @@ S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone
 SVar:Wizard:Count$Valid Wizard.YouCtrl
 A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select target | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
 DeckNeeds:Type$Wizard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wizards_lightning.jpg
 Oracle:This spell costs {2} less to cast if you control a Wizard.\nWizard's Lightning deals 3 damage to any target.

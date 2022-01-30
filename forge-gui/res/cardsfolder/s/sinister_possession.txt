@@ -7,5 +7,4 @@ T:Mode$ Attacks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execu
 T:Mode$ Blocks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigLoseLifeBlock | Secondary$ True | TriggerDescription$ Whenever enchanted creature attacks or blocks, its controller loses 2 life.
 SVar:TrigLoseLifeAttack:DB$ LoseLife | Defined$ TriggeredAttackerController | LifeAmount$ 2
 SVar:TrigLoseLifeBlock:DB$ LoseLife | Defined$ TriggeredBlockerController | LifeAmount$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sinister_possession.jpg
 Oracle:Enchant creature\nWhenever enchanted creature attacks or blocks, its controller loses 2 life.

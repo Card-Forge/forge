@@ -9,5 +9,4 @@ SVar:X:Count$Valid Creature.YouCtrl
 SVar:Y:Remembered$Amount
 SVar:Z:SVar$Y/Times.4
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/harmony_of_nature.jpg
 Oracle:Tap any number of untapped creatures you control. You gain 4 life for each creature tapped this way.

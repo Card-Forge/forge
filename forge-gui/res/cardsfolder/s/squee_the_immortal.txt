@@ -3,5 +3,4 @@ ManaCost:1 R R
 Types:Legendary Creature Goblin
 PT:2/1
 S:Mode$ Continuous | Affected$ Card.Self | MayPlay$ True | AffectedZone$ Exile,Graveyard | EffectZone$ Exile,Graveyard | Description$ You may cast CARDNAME from your graveyard or from exile.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/squee_the_immortal.jpg
 Oracle:You may cast Squee, the Immortal from your graveyard or from exile.

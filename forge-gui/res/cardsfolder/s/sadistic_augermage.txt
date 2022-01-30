@@ -4,5 +4,4 @@ Types:Creature Human Wizard
 PT:3/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, each player puts a card from their hand on top of their library.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ 0 | Mandatory$ True | ChangeType$ Card | ChangeNum$ 1 | DefinedPlayer$ Player
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sadistic_augermage.jpg
 Oracle:When Sadistic Augermage dies, each player puts a card from their hand on top of their library.

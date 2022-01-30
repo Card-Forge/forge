@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigTapOrUntap | TriggerZones$ Battlefield | OptionalDecider$ You | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or a creature you control deals combat damage to a player, you may tap or untap target permanent.
 SVar:TrigTapOrUntap:DB$ TapOrUntap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
 A:AB$ ChangeZone | Cost$ 1 G W U | ActivationZone$ Command | Origin$ Command | Destination$ Battlefield | SpellDescription$ Put CARDNAME onto the battlefield from the command zone.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/derevi_empyrial_tactician.jpg
 Oracle:Flying\nWhenever Derevi, Empyrial Tactician enters the battlefield or a creature you control deals combat damage to a player, you may tap or untap target permanent.\n{1}{G}{W}{U}: Put Derevi onto the battlefield from the command zone.

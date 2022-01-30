@@ -3,5 +3,4 @@ ManaCost:X U B
 Types:Sorcery
 A:SP$ DigUntil | Cost$ XCantBe0 X U B | Defined$ Player.Opponent | Amount$ X | Valid$ Land | ValidDescription$ land | RevealedDestination$ Graveyard | SpellDescription$ Each opponent reveals cards from the top of their library until they reveal X land cards, then puts all cards revealed this way into their graveyard. X can't be 0.
 SVar:X:Count$xPaid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_grind.jpg
 Oracle:Each opponent reveals cards from the top of their library until they reveal X land cards, then puts all cards revealed this way into their graveyard. X can't be 0.

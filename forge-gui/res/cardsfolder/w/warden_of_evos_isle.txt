@@ -4,5 +4,4 @@ Types:Creature Bird Wizard
 PT:2/2
 K:Flying
 S:Mode$ ReduceCost | ValidCard$ Creature.withFlying | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Creature spells with flying you cast cost {1} less to cast.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/warden_of_evos_isle.jpg
 Oracle:Flying\nCreature spells with flying you cast cost {1} less to cast.

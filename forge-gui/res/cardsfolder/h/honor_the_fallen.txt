@@ -6,5 +6,4 @@ SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Remembered$Amount
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$ValidGraveyard Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/honor_the_fallen.jpg
 Oracle:Exile all creature cards from all graveyards. You gain 1 life for each card exiled this way.

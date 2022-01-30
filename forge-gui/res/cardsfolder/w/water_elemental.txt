@@ -2,5 +2,4 @@ Name:Water Elemental
 ManaCost:3 U U
 Types:Creature Elemental
 PT:5/4
-SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card21040.jpg
 Oracle:

@@ -6,5 +6,4 @@ S:Mode$ Continuous | Affected$ Creature.Pirate+Other+YouCtrl | AddPower$ 1 | Add
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainCtrl | TriggerDescription$ At the beginning of your end step, gain control of target nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn.
 SVar:TrigGainCtrl:DB$ GainControl | ValidTgts$ Permanent.nonLand+ControlledBy Player.wasDealtCombatDamageThisTurnBy Valid:Creature.Pirate_AtLeast3 | TgtPrompt$ Select target creature controlled by a player who was dealt damage by three or more Pirates this turn | SpellDescription$ Gain control of target nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn.
 DeckHints:Type$Pirate
-SVar:Picture:http://www.wizards.com/global/images/magic/general/admiral_beckett_brass.jpg
 Oracle:Other Pirates you control get +1/+1.\nAt the beginning of your end step, gain control of target nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn.

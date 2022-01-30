@@ -2,5 +2,4 @@ Name:Champion's Victory
 ManaCost:U
 Types:Instant
 A:SP$ ChangeZone | Cost$ U | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Hand | OpponentTurn$ True | ActivationPhases$ Declare Attackers | SpellDescription$ Cast CARDNAME only during the declare attackers step and only if you've been attacked this step. Return target attacking creature to its owner's hand.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/champions_victory.jpg
 Oracle:Cast this spell only during the declare attackers step and only if you've been attacked this step.\nReturn target attacking creature to its owner's hand.

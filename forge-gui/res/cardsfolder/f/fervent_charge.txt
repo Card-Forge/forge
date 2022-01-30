@@ -4,5 +4,4 @@ Types:Enchantment
 T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control attacks, it gets +2/+2 until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +2 | NumDef$ +2
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fervent_charge.jpg
 Oracle:Whenever a creature you control attacks, it gets +2/+2 until end of turn.

@@ -4,5 +4,4 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying | Description$ Enchanted creature gets +2/+2 and has flying.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/one_with_the_wind.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has flying.

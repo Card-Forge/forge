@@ -5,5 +5,4 @@ PT:2/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Gate.YouCtrl | PresentCompare$ GE2 | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, if you control two or more Gates, target creature an opponent controls gets -2/-2 until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True
 DeckHints:Type$Gate
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ubul_sar_gatekeepers.jpg
 Oracle:When Ubul Sar Gatekeepers enters the battlefield, if you control two or more Gates, target creature an opponent controls gets -2/-2 until end of turn.

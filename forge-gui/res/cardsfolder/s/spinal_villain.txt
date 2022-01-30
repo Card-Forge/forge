@@ -4,5 +4,4 @@ Types:Creature Beast
 PT:1/2
 A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.Blue | TgtPrompt$ Select target blue creature | SpellDescription$ Destroy target blue creature.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spinal_villain.jpg
 Oracle:{T}: Destroy target blue creature.

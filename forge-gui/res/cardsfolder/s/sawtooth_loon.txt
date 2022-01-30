@@ -10,5 +10,4 @@ SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | ChangeNum$ 2 | Mandatory$ True
 #TODO: The AI is bad with the "put two cards on the bottom of your library" thing, it'll put its best cards there because it thinks that it's as good as putting them on top.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sawtooth_loon.jpg
 Oracle:Flying\nWhen Sawtooth Loon enters the battlefield, return a white or blue creature you control to its owner's hand.\nWhen Sawtooth Loon enters the battlefield, draw two cards, then put two cards from your hand on the bottom of your library.

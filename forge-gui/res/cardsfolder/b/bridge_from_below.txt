@@ -9,5 +9,4 @@ SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile
 AI:RemoveDeck:Random
 SVar:DiscardMe:5
 SVar:SacMe:5
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bridge_from_below.jpg
 Oracle:Whenever a nontoken creature is put into your graveyard from the battlefield, if Bridge from Below is in your graveyard, create a 2/2 black Zombie creature token.\nWhen a creature is put into an opponent's graveyard from the battlefield, if Bridge from Below is in your graveyard, exile Bridge from Below.

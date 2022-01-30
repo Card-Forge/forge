@@ -4,5 +4,4 @@ Types:Creature Human Artificer
 PT:1/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever an artifact enters the battlefield under your control, CARDNAME deals 1 damage to each opponent.
 SVar:TrigDmg:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_fireweaver.jpg
 Oracle:Whenever an artifact enters the battlefield under your control, Reckless Fireweaver deals 1 damage to each opponent.

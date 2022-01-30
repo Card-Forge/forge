@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Legendary Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T PayLife<3> | Produced$ C | AddsKeywords$ Haste | AddsKeywordsType$ Creature | SpellDescription$ Add {C}. If that mana is spent on a creature spell, it gains haste.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hall_of_the_bandit_lord.jpg
 Oracle:Hall of the Bandit Lord enters the battlefield tapped.\n{T}, Pay 3 life: Add {C}. If that mana is spent on a creature spell, it gains haste.

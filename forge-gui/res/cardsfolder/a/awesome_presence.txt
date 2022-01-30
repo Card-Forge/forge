@@ -4,5 +4,4 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ CantBlockUnless | Attacker$ Creature.AttachedBy | Cost$ 3 | Description$ Enchanted creature can't be blocked unless defending player pays {3} for each creature they control that's blocking it.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/awesome_presence.jpg
 Oracle:Enchant creature\nEnchanted creature can't be blocked unless defending player pays {3} for each creature they control that's blocking it.

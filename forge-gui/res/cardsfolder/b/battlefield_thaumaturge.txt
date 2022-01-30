@@ -6,5 +6,4 @@ S:Mode$ ReduceCost | ValidCard$ Instant.YouCtrl,Sorcery.YouCtrl | Relative$ True
 SVar:ReduceCost:TargetedObjects$Valid Creature
 T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, CARDNAME gains hexproof until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Hexproof
-SVar:Picture:http://www.wizards.com/global/images/magic/general/battlefield_thaumaturge.jpg
 Oracle:Each instant and sorcery spell you cast costs {1} less to cast for each creature it targets.\nHeroic — Whenever you cast a spell that targets Battlefield Thaumaturge, Battlefield Thaumaturge gains hexproof until end of turn.

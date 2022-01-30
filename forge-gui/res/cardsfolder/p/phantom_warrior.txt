@@ -3,5 +3,4 @@ ManaCost:1 U U
 Types:Creature Illusion Warrior
 PT:2/2
 K:Unblockable
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83200.jpg
 Oracle:Phantom Warrior can't be blocked.

@@ -3,5 +3,4 @@ ManaCost:3 G
 Types:Creature Human Knight
 PT:2/4
 S:Mode$ ReduceCost | ValidCard$ Dinosaur | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Dinosaur spells you cast cost {2} less to cast.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_the_stampede.jpg
 Oracle:Dinosaur spells you cast cost {2} less to cast.

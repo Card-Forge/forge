@@ -4,5 +4,4 @@ Types:Creature Human Wizard
 PT:1/1
 A:AB$ PreventDamage | Cost$ W T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to any target this turn.
 A:AB$ Mana | Cost$ G T | Produced$ Any | SpellDescription$ Add one mana of any color.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/necra_disciple.jpg
 Oracle:{G}, {T}: Add one mana of any color.\n{W}, {T}: Prevent the next 1 damage that would be dealt to any target this turn.

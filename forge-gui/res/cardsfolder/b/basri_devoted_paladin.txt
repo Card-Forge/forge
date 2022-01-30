@@ -9,4 +9,4 @@ SVar:TrigAttack:Mode$ Attacks | ValidCard$ Creature | Execute$ TrigPutCounter | 
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredAttackerLKICopy | CounterType$ P1P1 | CounterNum$ 1
 A:AB$ PumpAll | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | KW$ Flying | SpellDescription$ Creatures you control get +2/+2 and gain flying until end of turn.
 DeckHas:Ability$Counters
-Oracle:[+1]: Put a +1/+1 counter on up to one target creature. It gains vigilance until end of turn.\n[−1]: Whenever a creature attacks this turn, put a +1/+1 counter on it.\n[−6]: Creatures you control get +2/+2 and gain flying until end of turn.
+Oracle:[+1]: Put a +1/+1 counter on up to one target creature. It gains vigilance until end of turn.\n[-1]: Whenever a creature attacks this turn, put a +1/+1 counter on it.\n[-6]: Creatures you control get +2/+2 and gain flying until end of turn.

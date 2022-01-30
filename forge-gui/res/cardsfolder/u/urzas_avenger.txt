@@ -9,5 +9,4 @@ SVar:DBBanding:DB$ Pump | KW$ Banding | Defined$ Self | SpellDescription$ Target
 SVar:DBFirstStrike:DB$ Pump | KW$ First Strike | Defined$ Self | SpellDescription$ Target creature gains First Strike until end of turn.
 SVar:DBTrample:DB$ Pump | KW$ Trample | Defined$ Self | SpellDescription$ Target creature gains Trample until end of turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_avenger.jpg
 Oracle:{0}: Urza's Avenger gets -1/-1 and gains your choice of banding, flying, first strike, or trample until end of turn. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)

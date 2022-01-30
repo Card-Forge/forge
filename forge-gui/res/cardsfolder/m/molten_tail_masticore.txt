@@ -3,10 +3,9 @@ ManaCost:4
 Types:Artifact Creature Masticore
 PT:4/4
 K:UpkeepCost:Discard<1/Card>
-A:AB$DealDamage | Cost$ 4 ExileFromGrave<1/Creature> | NumDmg$ 4 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | SpellDescription$ CARDNAME deals 4 damage to any target.
-A:AB$Regenerate | Cost$ 2 | SpellDescription$ Regenerate CARDNAME.
+A:AB$ DealDamage | Cost$ 4 ExileFromGrave<1/Creature> | NumDmg$ 4 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | SpellDescription$ CARDNAME deals 4 damage to any target.
+A:AB$ Regenerate | Cost$ 2 | SpellDescription$ Regenerate CARDNAME.
 SVar:NeedsToPlayVar:Z GE3
 SVar:Z:Count$InYourHand
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/molten_tail_masticore.jpg
 Oracle:At the beginning of your upkeep, sacrifice Molten-Tail Masticore unless you discard a card.\n{4}, Exile a creature card from your graveyard: Molten-Tail Masticore deals 4 damage to any target.\n{2}: Regenerate Molten-Tail Masticore.

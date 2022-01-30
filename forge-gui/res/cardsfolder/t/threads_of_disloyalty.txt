@@ -4,5 +4,4 @@ Types:Enchantment Aura
 A:SP$ Attach | Cost$ 1 U U | ValidTgts$ Creature.cmcLE2 | TgtPrompt$ Select target creature with mana value 2 or less | AILogic$ GainControl
 K:Enchant creature with mana value 2 or less
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/threads_of_disloyalty.jpg
 Oracle:Enchant creature with mana value 2 or less\nYou control enchanted creature.

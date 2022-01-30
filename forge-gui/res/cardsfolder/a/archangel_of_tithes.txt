@@ -7,5 +7,4 @@ S:Mode$ CantAttackUnless | CheckSVar$ X | SVarCompare$ EQ1 | ValidCard$ Creature
 SVar:X:Count$Valid Card.Self+untapped
 S:Mode$ CantBlockUnless | CheckSVar$ Y | SVarCompare$ EQ1 | ValidCard$ Creature | Cost$ 1 | Description$ As long as CARDNAME is attacking, creatures can't block unless their controller pays {1} for each of those creatures.
 SVar:Y:Count$Valid Card.Self+attacking
-SVar:Picture:http://www.wizards.com/global/images/magic/general/archangel_of_tithes.jpg
 Oracle:Flying\nAs long as Archangel of Tithes is untapped, creatures can't attack you or planeswalkers you control unless their controller pays {1} for each of those creatures.\nAs long as Archangel of Tithes is attacking, creatures can't block unless their controller pays {1} for each of those creatures.

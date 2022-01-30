@@ -6,5 +6,4 @@ K:ETBReplacement:Other:ChooseNumber
 SVar:ChooseNumber:DB$ ChooseNumber | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a number.
 S:Mode$ CantBeCast | ValidCard$ Card.nonCreature+cmcChosen | Description$ Noncreature spells with mana value equal to the chosen number can't be cast.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sanctum_prelate.jpg
 Oracle:As Sanctum Prelate enters the battlefield, choose a number.\nNoncreature spells with mana value equal to the chosen number can't be cast.

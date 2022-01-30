@@ -4,6 +4,5 @@ Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, you may create a 0/1 colorless Eldrazi Spawn creature token. It has "Sacrifice this creature: Add {C}."
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You | LegacyImage$ c 0 1 eldrazi spawn sac roe
 DeckHints:Type$Eldrazi
-DeckHas:Ability$Mana.Colorless & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/awakening_zone.jpg
+DeckHas:Ability$Mana.Colorless|Token
 Oracle:At the beginning of your upkeep, you may create a 0/1 colorless Eldrazi Spawn creature token. It has "Sacrifice this creature: Add {C}."

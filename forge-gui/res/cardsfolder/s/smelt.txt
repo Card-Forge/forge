@@ -2,5 +2,4 @@ Name:Smelt
 ManaCost:R
 Types:Instant
 A:SP$ Destroy | Cost$ R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/smelt.jpg
 Oracle:Destroy target artifact.

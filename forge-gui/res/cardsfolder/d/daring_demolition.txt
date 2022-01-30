@@ -2,5 +2,4 @@ Name:Daring Demolition
 ManaCost:2 B B
 Types:Sorcery
 A:SP$ Destroy | Cost$ 2 B B | ValidTgts$ Creature,Vehicle | TgtPrompt$ Select target creature or Vehicle | SpellDescription$ Destroy target creature or Vehicle.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/daring_demolition.jpg
 Oracle:Destroy target creature or Vehicle.

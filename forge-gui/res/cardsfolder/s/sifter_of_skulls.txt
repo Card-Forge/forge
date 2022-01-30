@@ -6,6 +6,5 @@ K:Devoid
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+nonToken+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever another nontoken creature you control dies, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}." ({C} represents colorless mana.)
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You | LegacyImage$ c 1 1 eldrazi scion sac ogw
 DeckHints:Type$Eldrazi
-DeckHas:Ability$Mana.Colorless & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sifter_of_skulls.jpg
+DeckHas:Ability$Mana.Colorless|Token
 Oracle:Devoid (This card has no color.)\nWhenever another nontoken creature you control dies, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}." ({C} represents colorless mana.)

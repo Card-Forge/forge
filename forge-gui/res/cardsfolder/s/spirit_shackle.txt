@@ -5,5 +5,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ B B | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever enchanted creature becomes tapped, put a -0/-2 counter on it.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ M0M2 | CounterNum$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_shackle.jpg
 Oracle:Enchant creature\nWhenever enchanted creature becomes tapped, put a -0/-2 counter on it.

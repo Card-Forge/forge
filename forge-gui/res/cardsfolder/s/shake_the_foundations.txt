@@ -3,5 +3,4 @@ ManaCost:2 R
 Types:Instant
 A:SP$ DamageAll | Cost$ 2 R | ValidCards$ Creature.withoutFlying | NumDmg$ 1 | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals 1 damage to each creature without flying. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shake_the_foundations.jpg
 Oracle:Shake the Foundations deals 1 damage to each creature without flying.\nDraw a card.

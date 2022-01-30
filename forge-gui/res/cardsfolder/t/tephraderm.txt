@@ -7,5 +7,4 @@ T:Mode$ DamageDone | ValidSource$ Instant,Sorcery | ValidTarget$ Card.Self | Exe
 SVar:TrigDealDamage1:DB$ DealDamage | Defined$ TriggeredSourceLKICopy | NumDmg$ X
 SVar:TrigDealDamage2:DB$ DealDamage | Defined$ TriggeredSourceController | NumDmg$ X
 SVar:X:TriggerCount$DamageAmount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tephraderm.jpg
 Oracle:Whenever a creature deals damage to Tephraderm, Tephraderm deals that much damage to that creature.\nWhenever a spell deals damage to Tephraderm, Tephraderm deals that much damage to that spell's controller.

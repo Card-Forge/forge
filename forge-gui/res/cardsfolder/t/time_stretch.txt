@@ -2,5 +2,4 @@ Name:Time Stretch
 ManaCost:8 U U
 Types:Sorcery
 A:SP$ AddTurn | Cost$ 8 U U | ValidTgts$ Player | TgtPrompt$ Select target player. | NumTurns$ 2 | SpellDescription$ Target player takes two extra turns after this one.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/time_stretch.jpg
 Oracle:Target player takes two extra turns after this one.

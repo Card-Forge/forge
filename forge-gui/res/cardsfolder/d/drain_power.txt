@@ -3,5 +3,4 @@ ManaCost:U U
 Types:Sorcery
 A:SP$ ActivateAbility | Cost$ U U | ValidTgts$ Player | Type$ Land | ManaAbility$ True | SubAbility$ DBDrainMana | SpellDescription$ Target player activates a mana ability of each land they control. Then that player loses all unspent mana and you add the mana lost this way.
 SVar:DBDrainMana:DB$ DrainMana | Defined$ Targeted | DrainMana$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/drain_power.jpg
 Oracle:Target player activates a mana ability of each land they control. Then that player loses all unspent mana and you add the mana lost this way.

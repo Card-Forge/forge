@@ -5,5 +5,4 @@ PT:2/2
 T:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ Opponent | CombatDamage$ True | OptionalDecider$ TriggeredSourceController | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature deals combat damage to one of your opponents, its controller may draw a card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredSourceController
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/edric_spymaster_of_trest.jpg
 Oracle:Whenever a creature deals combat damage to one of your opponents, its controller may draw a card.

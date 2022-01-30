@@ -5,5 +5,4 @@ PT:2/1
 K:Flying
 T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigAnimate | TriggerDescription$ Whenever CARDNAME attacks, target creature defending player controls loses all abilities and has base power and toughness 0/1 until end of turn.
 SVar:TrigAnimate:DB$ Animate | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature defending player controls | Power$ 0 | Toughness$ 1 | RemoveAllAbilities$ True | IsCurse$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/warkite_marauder.jpg
 Oracle:Flying\nWhenever Warkite Marauder attacks, target creature defending player controls loses all abilities and has base power and toughness 0/1 until end of turn.

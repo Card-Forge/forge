@@ -6,5 +6,4 @@ K:Flying
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 AI:RemoveDeck:Random
 DeckNeeds:Color$Black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tattered_drake.jpg
 Oracle:Flying\n{B}: Regenerate Tattered Drake.

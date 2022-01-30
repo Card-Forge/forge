@@ -3,5 +3,4 @@ ManaCost:1 G
 Types:Creature Human Shaman
 PT:2/2
 A:AB$ Pump | Cost$ 7 G T Sac<1/CARDNAME> | ValidTgts$ Creature | AITgts$ Creature.Other | TgtPrompt$ Select target creature | NumAtt$ +5 | NumDef$ +5 | KW$ Trample | SpellDescription$ Target creature gets +5/+5 and gains trample until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ixallis_keeper.jpg
 Oracle:{7}{G}, {T}, Sacrifice Ixalli's Keeper: Target creature gets +5/+5 and gains trample until end of turn.

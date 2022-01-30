@@ -5,6 +5,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.non
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardOwner | LifeAmount$ 1
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, each opponent discards a card.
 SVar:RolledChaos:DB$ Discard | Mode$ TgtChoose | Defined$ Player.Opponent | NumCards$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/the_dark_barony.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | MaxRollsPerTurn$ 9
 Oracle:Whenever a nonblack card is put into a player's graveyard from anywhere, that player loses 1 life.\nWhenever you roll {CHAOS}, each opponent discards a card.

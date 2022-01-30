@@ -4,5 +4,4 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Hexproof | Description$ Creatures you control have hexproof. (They can't be the targets of spells or abilities your opponents control.)
 A:AB$ Regenerate | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Regenerate target creature.
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/asceticism.jpg
 Oracle:Creatures you control have hexproof. (They can't be the targets of spells or abilities your opponents control.)\n{1}{G}: Regenerate target creature.

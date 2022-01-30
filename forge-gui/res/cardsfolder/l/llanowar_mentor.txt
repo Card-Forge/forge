@@ -3,5 +3,4 @@ ManaCost:G
 Types:Creature Elf Spellshaper
 PT:1/1
 A:AB$ Token | Cost$ G T Discard<1/Card> | TokenAmount$ 1 | TokenScript$ llanowar_elves | TokenOwner$ You | LegacyImage$ llanowar elves fut | SpellDescription$ Create a 1/1 green Elf Druid creature token named Llanowar Elves. It has "{T}: Add {G}."
-SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card126166.jpg
 Oracle:{G}, {T}, Discard a card: Create a 1/1 green Elf Druid creature token named Llanowar Elves. It has "{T}: Add {G}."

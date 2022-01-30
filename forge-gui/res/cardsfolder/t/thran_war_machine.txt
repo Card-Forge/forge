@@ -4,5 +4,4 @@ Types:Artifact Creature Construct
 PT:4/5
 K:CARDNAME attacks each combat if able.
 K:Echo:4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_war_machine.jpg
 Oracle:Echo {4} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nThran War Machine attacks each combat if able.

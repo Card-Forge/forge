@@ -7,5 +7,4 @@ SVar:DBEffect:DB$ Effect | Name$ Incite War Effect | ValidTgts$ Player | TgtProm
 SVar:MustAttack:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.RememberedPlayerCtrl | AddHiddenKeyword$ CARDNAME attacks each combat if able. | Description$ Creatures target player controls attack this turn if able.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ First Strike | SpellDescription$ Creatures you control gain first strike until end of turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/incite_war.jpg
 Oracle:Choose one —\n• Creatures target player controls attack this turn if able.\n• Creatures you control gain first strike until end of turn.\nEntwine {2} (Choose both if you pay the entwine cost.)

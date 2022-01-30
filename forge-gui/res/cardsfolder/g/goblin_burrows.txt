@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Pump | Cost$ 1 R T | ValidTgts$ Creature.Goblin | TgtPrompt$ Select target Goblin creature | NumAtt$ +2 | SpellDescription$ Target Goblin creature gets +2/+0 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_burrows.jpg
 Oracle:{T}: Add {C}.\n{1}{R}, {T}: Target Goblin creature gets +2/+0 until end of turn.

@@ -4,5 +4,4 @@ Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an noncreature spell you may pay {1}. If you do, create a 1/1 red Goblin creature token with haste.
 SVar:TrigToken:AB$ Token | Cost$ 1 | TokenAmount$ 1 | TokenScript$ r_1_1_goblin_haste | LegacyImage$ r 1 1 goblin haste ktk | TokenOwner$ You
 SVar:BuffedBy:Card.nonCreature+nonLand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblinslide.jpg
 Oracle:Whenever you cast a noncreature spell, you may pay {1}. If you do, create a 1/1 red Goblin creature token with haste.

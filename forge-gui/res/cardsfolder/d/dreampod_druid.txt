@@ -7,5 +7,4 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | Token
 SVar:EnchantMe:Once
 DeckHints:Type$Fungus
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dreampod_druid.jpg
 Oracle:At the beginning of each upkeep, if Dreampod Druid is enchanted, create a 1/1 green Saproling creature token.

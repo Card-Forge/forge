@@ -4,5 +4,4 @@ Types:Creature Elf Scout Ally
 PT:0/1
 K:etbCounter:P1P1:X:no Condition:Converge — CARDNAME enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.
 SVar:X:Count$Converge
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tajuru_beastmaster.jpg
 Oracle:Converge — Tajuru Stalwart enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.

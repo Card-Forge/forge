@@ -8,5 +8,4 @@ AI:RemoveDeck:All
 SVar:Maxtgt:Count$Valid Land
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deepwood_elder.jpg
 Oracle:{X}{G}{G}, {T}, Discard a card: X target lands become Forests until end of turn.

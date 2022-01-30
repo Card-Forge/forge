@@ -9,5 +9,4 @@ SVar:Pump:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:Random
 DeckNeeds:Color$Black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sedge_sliver.jpg
 Oracle:All Sliver creatures have "This creature gets +1/+1 as long as you control a Swamp."\nAll Slivers have "{B}: Regenerate this permanent." (The next time it would be destroyed, instead tap it, remove it from combat, and heal all damage on it.)

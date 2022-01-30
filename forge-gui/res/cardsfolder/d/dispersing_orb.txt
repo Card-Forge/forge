@@ -4,5 +4,4 @@ Types:Enchantment
 A:AB$ ChangeZone | Cost$ 3 U Sac<1/Permanent> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dispersing_orb.jpg
 Oracle:{3}{U}, Sacrifice a permanent: Return target permanent to its owner's hand.

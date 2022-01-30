@@ -6,5 +6,4 @@ K:Flying
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+0 as long as you control an artifact.
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:BuffedBy:Artifact
-SVar:Picture:http://www.wizards.com/global/images/magic/general/foundry_screecher.jpg
 Oracle:Flying\nFoundry Screecher gets +1/+0 as long as you control an artifact.

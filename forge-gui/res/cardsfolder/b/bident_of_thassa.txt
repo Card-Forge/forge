@@ -6,5 +6,4 @@ SVar:TrigDraw:DB$ Draw | NumCards$ 1
 A:AB$ Effect | Cost$ 1 U T | StaticAbilities$ MustAttack | SpellDescription$ Creatures your opponents control attack this turn if able.
 SVar:MustAttack:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.OppCtrl | AddHiddenKeyword$ CARDNAME attacks each combat if able. | Description$ Creatures your opponents control attack this turn if able.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bident_of_thassa.jpg
 Oracle:Whenever a creature you control deals combat damage to a player, you may draw a card.\n{1}{U}, {T}: Creatures your opponents control attack this turn if able.

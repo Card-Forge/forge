@@ -4,5 +4,4 @@ Types:Creature Bird
 PT:2/1
 K:Flying
 K:Vigilance
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eagle_of_the_watch.jpg
 Oracle:Flying, vigilance

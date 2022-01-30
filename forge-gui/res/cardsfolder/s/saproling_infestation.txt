@@ -6,5 +6,4 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | Token
 AI:RemoveDeck:Random
 DeckNeeds:Keyword$Kicker
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/saproling_infestation.jpg
 Oracle:Whenever a player kicks a spell, you create a 1/1 green Saproling creature token.

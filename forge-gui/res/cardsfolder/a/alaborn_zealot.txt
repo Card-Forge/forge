@@ -5,5 +5,4 @@ PT:1/1
 T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME blocks a creature, destroy that creature and CARDNAME.
 SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredAttackerLKICopy | SubAbility$ DestroySelf
 SVar:DestroySelf:DB$ Destroy | Defined$ Self
-SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Second_Age/alaborn_zealot.jpg
 Oracle:When Alaborn Zealot blocks a creature, destroy that creature and Alaborn Zealot.

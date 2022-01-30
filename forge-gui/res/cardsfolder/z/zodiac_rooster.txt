@@ -3,5 +3,4 @@ ManaCost:1 G
 Types:Creature Bird
 PT:2/1
 K:Plainswalk
-SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10506.jpg
 Oracle:Plainswalk (This creature can't be blocked as long as defending player controls a Plains.)

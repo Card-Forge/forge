@@ -5,5 +5,4 @@ A:SP$ Charm | Cost$ G | Choices$ DBToken,DBPump,DBReg
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_insect | TokenOwner$ You | LegacyImage$ g 1 1 insect ons | SpellDescription$ Create a 1/1 green Insect creature token.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ +1 | NumDef$ +1 | KW$ Trample | TgtPrompt$ Select target creature | SpellDescription$ Target creature gets +1/+1 and gains trample until end of turn.
 SVar:DBReg:DB$ Regenerate | ValidTgts$ Beast | TgtPrompt$ Select target Beast | SpellDescription$ Regenerate target Beast.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vitality_charm.jpg
 Oracle:Choose one —\n• Create a 1/1 green Insect creature token.\n• Target creature gets +1/+1 and gains trample until end of turn.\n• Regenerate target Beast.

@@ -7,5 +7,4 @@ SVar:DBRegenerate:DB$ Regenerate | Defined$ Remembered | ConditionCheckSVar$ X |
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardToughness
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gore_vassal.jpg
 Oracle:Sacrifice Gore Vassal: Put a -1/-1 counter on target creature. Then if that creature's toughness is 1 or greater, regenerate it.

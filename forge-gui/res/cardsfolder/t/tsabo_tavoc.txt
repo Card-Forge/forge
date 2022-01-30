@@ -5,5 +5,4 @@ PT:7/4
 K:First Strike
 K:Protection:Creature.Legendary:Protection from legendary creatures
 A:AB$ Destroy | Cost$ B B T | ValidTgts$ Creature.Legendary | TgtPrompt$ Select target legendary creature | NoRegen$ True | SpellDescription$ Destroy target legendary creature. It can't be regenerated.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tsabo_tavoc.jpg
 Oracle:First strike, protection from legendary creatures\n{B}{B}, {T}: Destroy target legendary creature. It can't be regenerated.

@@ -6,5 +6,4 @@ SVar:TrigEffect:DB$ Effect | Name$ Veilstone Amulet Effect | StaticAbilities$ Ca
 SVar:CantTarget:Mode$ CantTarget | EffectZone$ Command | ValidCard$ Creature.YouCtrl | Activator$ Opponent | Description$ Creatures you control can't be the targets of spells or abilities your opponents control
 SVar:BuffedBy:Card
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/veilstone_amulet.jpg
 Oracle:Whenever you cast a spell, creatures you control can't be the targets of spells or abilities your opponents control this turn.

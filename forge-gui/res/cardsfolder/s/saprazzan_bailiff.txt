@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigExile:DB$ ChangeZoneAll | ChangeType$ Artifact,Enchantment | Origin$ Graveyard | Destination$ Exile
 SVar:TrigReturn:DB$ ChangeZoneAll | ChangeType$ Artifact,Enchantment | Origin$ Graveyard | Destination$ Hand
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/saprazzan_bailiff.jpg
 Oracle:When Saprazzan Bailiff enters the battlefield, exile all artifact and enchantment cards from all graveyards.\nWhen Saprazzan Bailiff leaves the battlefield, return all artifact and enchantment cards from all graveyards to their owners' hands.

@@ -4,6 +4,5 @@ Types:Plane Dominaria
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | AddPower$ 2 | AddToughness$ 2 | Description$ All Creatures get +2/+2.
 T:Mode$ PlanarDice | Result$ Chaos | OptionalDecider$ You | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, you may add {W}{U}{B}{R}{G}.
 SVar:RolledChaos:DB$ Mana | Produced$ W U B R G
-SVar:Picture:http://www.wizards.com/global/images/magic/general/krosa.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | RollInMain1$ True
 Oracle:All creatures get +2/+2.\nWhenever you roll {CHAOS}, you may add {W}{U}{B}{R}{G}.

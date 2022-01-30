@@ -5,5 +5,4 @@ A:SP$ RepeatEach | Cost$ 1 W | RepeatPlayers$ Player.Opponent | NextTurnForEachP
 SVar:DBEffect:DB$ Effect | Name$ Sphinx's Decree Effect | StaticAbilities$ STCantBeCast | EffectOwner$ Remembered
 SVar:STCantBeCast:Mode$ CantBeCast | ValidCard$ Instant,Sorcery | Caster$ You | EffectZone$ Command | Description$ You can't cast instant or sorcery spells.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinxs_decree.jpg
 Oracle:Each opponent can't cast instant or sorcery spells during that player's next turn.

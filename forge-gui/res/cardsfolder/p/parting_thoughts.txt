@@ -6,5 +6,4 @@ SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardCounters.ALL
-SVar:Picture:http://www.wizards.com/global/images/magic/general/parting_thoughts.jpg
 Oracle:Destroy target creature. You draw X cards and you lose X life, where X is the number of counters on that creature.

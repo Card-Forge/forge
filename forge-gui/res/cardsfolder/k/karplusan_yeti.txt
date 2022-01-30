@@ -6,5 +6,4 @@ A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target crea
 SVar:DamageThis:DB$ DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y
 SVar:X:Count$CardPower
 SVar:Y:Targeted$CardPower
-SVar:Picture:http://www.wizards.com/global/images/magic/general/karplusan_yeti.jpg
 Oracle:{T}: Karplusan Yeti deals damage equal to its power to target creature. That creature deals damage equal to its power to Karplusan Yeti.

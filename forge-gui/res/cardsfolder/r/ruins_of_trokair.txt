@@ -5,5 +5,4 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
 A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ W | Amount$ 2 | SpellDescription$ Add {W}{W}.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ruins_of_trokair.jpg
 Oracle:Ruins of Trokair enters the battlefield tapped.\n{T}: Add {W}.\n{T}, Sacrifice Ruins of Trokair: Add {W}{W}.

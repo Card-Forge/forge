@@ -5,5 +5,4 @@ T:Mode$ TurnFaceUp | ValidCard$ Permanent.YouCtrl | Execute$ TrigGainLife | Trig
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Creature.YouCtrl
 A:AB$ Manifest | Cost$ 3 W | Amount$ 1 | Defined$ TopOfLibrary | SpellDescription$ Manifest the top card of your library.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mastery_of_the_unseen.jpg
 Oracle:Whenever a permanent you control is turned face up, you gain 1 life for each creature you control.\n{3}{W}: Manifest the top card of your library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)

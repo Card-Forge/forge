@@ -2,8 +2,7 @@ Name:Chosen of Markov
 ManaCost:2 B
 Types:Creature Human
 PT:2/2
-A:AB$SetState | Cost$ T tapXType<1/Vampire> | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chosen_of_markov.jpg
+A:AB$ SetState | Cost$ T tapXType<1/Vampire> | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
 AlternateMode:DoubleFaced
 Oracle:{T}, Tap an untapped Vampire you control: Transform Chosen of Markov.
 
@@ -14,5 +13,4 @@ ManaCost:no cost
 Colors:black
 Types:Creature Vampire
 PT:4/4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/markovs_servant.jpg
 Oracle:

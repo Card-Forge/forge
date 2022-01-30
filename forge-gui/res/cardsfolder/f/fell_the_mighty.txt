@@ -3,5 +3,4 @@ ManaCost:4 W
 Types:Sorcery
 A:SP$ DestroyAll | ValidCards$ Creature.powerGTX | Cost$ 4 W | ValidTgts$ Creature | AILogic$ FellTheMighty | SpellDescription$ Destroy all creatures with power greater than target creature's power.
 SVar:X:Targeted$CardPower
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fell_the_mighty.jpg
 Oracle:Destroy all creatures with power greater than target creature's power.

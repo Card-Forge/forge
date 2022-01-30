@@ -3,5 +3,4 @@ ManaCost:3 R
 Types:Creature Bird
 PT:3/3
 K:Flying
-SVar:Picture:http://resources.wizards.com/magic/cards/3e/en-us/card1313.jpg
 Oracle:Flying

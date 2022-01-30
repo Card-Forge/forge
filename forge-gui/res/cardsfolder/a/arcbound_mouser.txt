@@ -4,5 +4,5 @@ Types:Artifact Creature Cat
 PT:0/0
 K:Lifelink
 K:Modular:1
-DeckHas:Ability$Counters & Ability$LifeGain
+DeckHas:Ability$Counters|LifeGain
 Oracle:Lifelink\nModular 1 (This creature enters the battlefield with a +1/+1 counter on it. When it dies, you may put its +1/+1 counters on target artifact creature.)

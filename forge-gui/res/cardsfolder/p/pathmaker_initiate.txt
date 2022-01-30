@@ -3,5 +3,4 @@ ManaCost:1 R
 Types:Creature Human Wizard
 PT:2/1
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature.powerLE2 | KW$ HIDDEN Unblockable | SpellDescription$ Target creature with power 2 or less can't be blocked this turn. | TgtPrompt$ Select target creature with power 2 or less.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pathmaker_initiate.jpg
 Oracle:{T}: Target creature with power 2 or less can't be blocked this turn.

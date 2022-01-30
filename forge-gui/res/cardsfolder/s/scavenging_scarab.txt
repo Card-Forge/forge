@@ -3,5 +3,4 @@ ManaCost:3 B
 Types:Creature Insect
 PT:3/3
 K:CARDNAME can't block.
-SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card46093.jpg
 Oracle:Scavenging Scarab can't block.

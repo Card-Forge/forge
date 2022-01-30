@@ -8,5 +8,4 @@ SVar:SunbondTrig:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield
 SVar:SunbondPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ SunbondTriggerAmount
 SVar:SunbondTriggerAmount:TriggerCount$LifeAmount
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sunbond.jpg
 Oracle:Enchant creature\nEnchanted creature has "Whenever you gain life, put that many +1/+1 counters on this creature."

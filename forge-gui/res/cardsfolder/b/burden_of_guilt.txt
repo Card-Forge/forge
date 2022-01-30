@@ -3,8 +3,7 @@ ManaCost:W
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ KeepTapped
-A:AB$Tap | Cost$ 1 | Defined$ Enchanted | SpellDescription$ Tap enchanted creature.
+A:AB$ Tap | Cost$ 1 | Defined$ Enchanted | SpellDescription$ Tap enchanted creature.
 AI:RemoveDeck:All
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/burden_of_guilt.jpg
 Oracle:Enchant creature\n{1}: Tap enchanted creature.

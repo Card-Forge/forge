@@ -3,5 +3,4 @@ ManaCost:4 R R
 Types:Enchantment
 A:AB$ Token | Cost$ 5 R R | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ r_5_5_dragon_flying | LegacyImage$ r 5 5 dragon flying ons | SpellDescription$ Create a 5/5 red Dragon creature token with flying.
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_roost.jpg
 Oracle:{5}{R}{R}: Create a 5/5 red Dragon creature token with flying. (It can't be blocked except by creatures with flying or reach.)

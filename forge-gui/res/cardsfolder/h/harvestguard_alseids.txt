@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Prevent all damage that would be dealt to CARDNAME.
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Enchantment
-SVar:Picture:http://www.wizards.com/global/images/magic/general/harvestguard_alseids.jpg
 Oracle:Constellation — Whenever Harvestguard Alseids or another enchantment enters the battlefield under your control, prevent all damage that would be dealt to target creature this turn.

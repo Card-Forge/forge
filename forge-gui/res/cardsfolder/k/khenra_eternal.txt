@@ -3,5 +3,4 @@ ManaCost:1 B
 Types:Creature Zombie Jackal Warrior
 PT:2/2
 K:Afflict:1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/khenra_eternal.jpg
 Oracle:Afflict 1 (Whenever this creature becomes blocked, defending player loses 1 life.)

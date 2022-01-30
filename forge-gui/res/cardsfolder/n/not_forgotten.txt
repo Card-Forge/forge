@@ -6,5 +6,4 @@ SVar:DBTop:DB$ ChangeZone | Defined$ ParentTarget | Origin$ Graveyard | Destinat
 SVar:DBBottom:DB$ ChangeZone | Defined$ ParentTarget | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put it on the bottom of library. | StackDescription$ SpellDescription | SubAbility$ DBTrigToken
 SVar:DBTrigToken:DB$ Token | LegacyImage$ w 1 1 spirit flying soi | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | SpellDescription$ Create a 1/1 white Spirit creature token with flying. | StackDescription$ SpellDescription
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/not_forgotten.jpg
 Oracle:Put target card from a graveyard on the top or bottom of its owner's library. Create a 1/1 white Spirit creature token with flying.

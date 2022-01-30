@@ -5,5 +5,4 @@ PT:4/4
 T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ Traitor | TriggerZones$ Battlefield | TriggerDescription$ Whenever a source deals damage to CARDNAME, that source's controller gains control of CARDNAME.
 SVar:Traitor:DB$ GainControl | Defined$ Self | NewController$ TriggeredSourceController
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crag_saurian.jpg
 Oracle:Whenever a source deals damage to Crag Saurian, that source's controller gains control of Crag Saurian.

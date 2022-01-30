@@ -6,5 +6,4 @@ SVar:MoltenEffect:DB$ Effect | Name$ Molten Realm Effect | ReplacementEffects$ M
 SVar:MoltenRealm:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card,Emblem | ReplaceWith$ DmgTwice | Description$ Until your next turn, if a source would deal damage, it deals double that damage instead.
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ MoltenX
 SVar:MoltenX:ReplaceCount$DamageAmount/Twice
-SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/Approach My Molten Realm.full.jpg
 Oracle:When you set this scheme in motion, until your next turn, if a source would deal damage, it deals double that damage instead.

@@ -7,5 +7,4 @@ K:Tribute:2
 SVar:TrigNotTribute:DB$ Sacrifice | ValidTgts$ Opponent | SacValid$ Creature | Amount$ 1 | SpellDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, target opponent sacrifices a creature.
 SVar:TributeAILogic:DontControlCreatures
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shrike_harpy.jpg
 Oracle:Flying\nTribute 2 (As this creature enters the battlefield, an opponent of your choice may put two +1/+1 counters on it.)\nWhen Shrike Harpy enters the battlefield, if tribute wasn't paid, target opponent sacrifices a creature.

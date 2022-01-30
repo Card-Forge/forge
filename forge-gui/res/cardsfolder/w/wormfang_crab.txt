@@ -13,5 +13,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Remembered.ExiledWithSource | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wormfang_crab.jpg
 Oracle:Wormfang Crab can't be blocked.\nWhen Wormfang Crab enters the battlefield, an opponent chooses a permanent you control other than Wormfang Crab and exiles it.\nWhen Wormfang Crab leaves the battlefield, return the exiled card to the battlefield under its owner's control.

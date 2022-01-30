@@ -5,5 +5,4 @@ PT:5/5
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to each other creature.
 SVar:TrigDamageAll:DB$ DamageAll | ValidCards$ Creature.Other | NumDmg$ 1 | ValidDescription$ each other creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/raging_swordtooth.jpg
 Oracle:Trample\nWhen Raging Swordtooth enters the battlefield, it deals 1 damage to each other creature.

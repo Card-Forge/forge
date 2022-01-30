@@ -4,5 +4,4 @@ Types:Creature Human Artificer
 PT:1/2
 A:AB$ Draw | Cost$ T Sac<1/Artifact> | NumCards$ 1 | SpellDescription$ Draw a card.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sage_of_lat_nam.jpg
 Oracle:{T}, Sacrifice an artifact: Draw a card.

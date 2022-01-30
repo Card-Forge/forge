@@ -7,5 +7,4 @@ SVar:TrigToken:DB$ Token | LegacyImage$ w 1 1 spirit flying soi | TokenAmount$ 1
 K:Equip:3
 DeckHints:Type$Human
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/slayers_plate.jpg
 Oracle:Equipped creature gets +4/+2.\nWhenever equipped creature dies, if it was a Human, create a 1/1 white Spirit creature token with flying.\nEquip {3}

@@ -4,5 +4,4 @@ Types:Creature Naga Druid
 PT:2/4
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 A:AB$ Mana | Cost$ T Exert<1/CARDNAME> | Produced$ Any | Amount$ 2 | SpellDescription$ Add two mana of any one color. (An exerted creature won't untap during your next untap step.)
-SVar:Picture:http://www.wizards.com/global/images/magic/general/oasis_ritualist.jpg
 Oracle:{T}: Add one mana of any color.\n{T}, Exert Oasis Ritualist: Add two mana of any one color. (An exerted creature won't untap during your next untap step.)

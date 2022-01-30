@@ -5,5 +5,4 @@ A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Sel
 SVar:Y:Count$NamedInAllYards.Rune Snag/Times.2
 SVar:X:Number$2/Plus.Y
 DeckHints:Name$Rune Snag
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rune_snag.jpg
 Oracle:Counter target spell unless its controller pays {2} plus an additional {2} for each card named Rune Snag in each graveyard.

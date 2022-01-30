@@ -3,5 +3,4 @@ ManaCost:1 U U
 Types:Legendary Creature Human Advisor
 PT:1/1
 A:AB$ Pump | Cost$ T | KW$ HIDDEN Unblockable | ValidTgts$ Creature | TgtPrompt$ Select target creature | PlayerTurn$ True | ActivationPhases$ Upkeep->BeginCombat | SpellDescription$ Target creature can't be blocked this turn. Activate only during your turn, before attackers are declared.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/zhuge_jin_wu_strategist.jpg
 Oracle:{T}: Target creature can't be blocked this turn. Activate only during your turn, before attackers are declared.

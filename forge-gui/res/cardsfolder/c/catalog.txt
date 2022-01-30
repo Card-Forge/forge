@@ -5,5 +5,4 @@ A:SP$ Draw | Cost$ 2 U | NumCards$ 2 | SpellDescription$ Draw two cards, then di
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 DeckHas:Ability$Discard
 DeckHints:Keyword$Madness & Ability$Delirium
-SVar:Picture:http://www.wizards.com/global/images/magic/general/catalog.jpg
 Oracle:Draw two cards, then discard a card.

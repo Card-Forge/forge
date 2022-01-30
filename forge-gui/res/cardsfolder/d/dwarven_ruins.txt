@@ -5,5 +5,4 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
 A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ R | Amount$ 2 | SpellDescription$ Add {R}{R}.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_ruins.jpg
 Oracle:Dwarven Ruins enters the battlefield tapped.\n{T}: Add {R}.\n{T}, Sacrifice Dwarven Ruins: Add {R}{R}.

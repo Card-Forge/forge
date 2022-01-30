@@ -8,5 +8,4 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME
 T:Mode$ DamageDealtOnce | ValidSource$ Card.AttachedBy | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage, its controller loses that much life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredSourceController | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/visions_of_brutality.jpg
 Oracle:Devoid (This card has no color.)\nEnchant creature\nEnchanted creature can't block.\nWhenever enchanted creature deals damage, its controller loses that much life.

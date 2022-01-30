@@ -6,5 +6,4 @@ SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:X:Count$TypeInYourYard.Artifact
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/frantic_salvage.jpg
 Oracle:Put any number of target artifact cards from your graveyard on top of your library.\nDraw a card.

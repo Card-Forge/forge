@@ -3,5 +3,4 @@ ManaCost:4
 Types:Artifact
 A:AB$ FlipACoin | Cost$ T | WinSubAbility$ DBDestroyAll | SpellDescription$ Flip a coin. If you win the flip, destroy all nonland permanents.
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Permanent.nonLand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/boompile.jpg
 Oracle:{T}: Flip a coin. If you win the flip, destroy all nonland permanents.

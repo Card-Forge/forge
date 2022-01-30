@@ -8,5 +8,4 @@ SVar:DBMassShuffle:DB$ Shuffle | ConditionCheckSVar$ MassX | ConditionSVarCompar
 SVar:DBMassCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:MassX:Remembered$Amount
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/synthetic_destiny.jpg
 Oracle:Exile all creatures you control. At the beginning of the next end step, reveal cards from the top of your library until you reveal that many creature cards, put all creature cards revealed this way onto the battlefield, then shuffle the rest of the revealed cards into your library.

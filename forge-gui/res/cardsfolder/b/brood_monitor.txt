@@ -6,5 +6,4 @@ K:Devoid
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create three 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: Add {C}."
 SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You | LegacyImage$ c 1 1 eldrazi scion sac bfz
 DeckHas:Ability$Mana.Colorless
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brood_monitor.jpg
 Oracle:Devoid (This card has no color.)\nWhen Brood Monitor enters the battlefield, create three 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: Add {C}."

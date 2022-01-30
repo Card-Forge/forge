@@ -2,5 +2,4 @@ Name:Font of Fortunes
 ManaCost:1 U
 Types:Enchantment
 A:AB$ Draw | Cost$ 1 U Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/font_of_fortunes.jpg
 Oracle:{1}{U}, Sacrifice Font of Fortunes: Draw two cards.

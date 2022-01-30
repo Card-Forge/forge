@@ -5,5 +5,4 @@ PT:4/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ FlipCoin | TriggerDescription$ Whenever CARDNAME attacks, flip a coin. If you win the flip, CARDNAME gets +1/+1 and gains flying until end of turn.
 SVar:FlipCoin:DB$ FlipACoin | WinSubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1 | KW$ Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skyclaw_thrash.jpg
 Oracle:Whenever Skyclaw Thrash attacks, flip a coin. If you win the flip, Skyclaw Thrash gets +1/+1 and gains flying until end of turn.

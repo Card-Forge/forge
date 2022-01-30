@@ -3,5 +3,4 @@ ManaCost:3 W
 Types:Creature Angel
 PT:1/5
 K:Flying
-SVar:Picture:http://resources.wizards.com/magic/cards/cg/en-us/card18287.jpg
 Oracle:Flying

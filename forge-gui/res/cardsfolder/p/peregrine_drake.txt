@@ -6,5 +6,4 @@ K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, untap up to five lands.
 SVar:TrigUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land | Amount$ 5
 SVar:FreeSpellAI:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/peregrine_drake.jpg
 Oracle:Flying\nWhen Peregrine Drake enters the battlefield, untap up to five lands.

@@ -8,5 +8,4 @@ SVar:DBLibrary:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | Libra
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ battlefield | SubAbility$ DBCleanup | SpellDescription$ Then they put it onto the battlefield.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flicker.jpg
 Oracle:Exile target permanent, then put it into its owner's hand. That player discards that card, then puts it on top of their library. Then they put it onto the battlefield.

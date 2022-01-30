@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You | LegacyImage$ c 1 1 eldrazi scion sac bfz
 A:AB$ Pump | Cost$ B G Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn.
 DeckHints:Type$Eldrazi
-DeckHas:Ability$Mana.Colorless & Ability$Token
+DeckHas:Ability$Mana.Colorless|Token
 SVar:AIPreference:SacCost$Creature.token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brood_butcher.jpg
 Oracle:Devoid (This card has no color.)\nWhen Brood Butcher enters the battlefield, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."\n{B}{G}, Sacrifice a creature: Target creature gets -2/-2 until end of turn.

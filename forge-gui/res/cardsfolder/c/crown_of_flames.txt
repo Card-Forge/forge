@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 A:AB$ Pump | Cost$ R | Defined$ Enchanted | NumAtt$ +1 | SpellDescription$ Enchanted creature gets +1/+0 until end of turn.
 A:AB$ ChangeZone | Cost$ R | Origin$ Battlefield | Destination$ Hand | Defined$ Self | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crown_of_flames.jpg
 Oracle:Enchant creature\n{R}: Enchanted creature gets +1/+0 until end of turn.\n{R}: Return Crown of Flames to its owner's hand.

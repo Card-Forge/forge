@@ -13,5 +13,4 @@ SVar:TrigDraw:DB$ Draw | NumCards$ 1
 SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:BuffedBy:Permanent.Blue,Permanent.Red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/keranos_god_of_storms.jpg
 Oracle:Indestructible\nAs long as your devotion to blue and red is less than seven, Keranos isn't a creature.\nReveal the first card you draw on each of your turns. Whenever you reveal a land card this way, draw a card. Whenever you reveal a nonland card this way, Keranos deals 3 damage to any target.

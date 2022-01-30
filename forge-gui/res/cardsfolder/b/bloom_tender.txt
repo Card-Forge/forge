@@ -4,5 +4,4 @@ Types:Creature Elf Druid
 PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ Special EachColorAmong_Permanent.YouCtrl | SpellDescription$ For each color among permanents you control, add one mana of that color.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bloom_tender.jpg
 Oracle:{T}: For each color among permanents you control, add one mana of that color.

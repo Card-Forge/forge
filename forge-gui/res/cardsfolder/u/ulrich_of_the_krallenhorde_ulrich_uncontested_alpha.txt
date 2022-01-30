@@ -9,7 +9,6 @@ T:Mode$ Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:PlayMain1:TRUE
 AlternateMode:DoubleFaced
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ulrich_of_the_krallenhorde.jpg
 Oracle:Whenever this creature enters the battlefield or transforms into Ulrich of the Krallenhorde, target creature gets +4/+4 until end of turn.\nAt the beginning of each upkeep, if no spells were cast last turn, transform Ulrich of the Krallenhorde.
 
 ALTERNATE
@@ -23,5 +22,4 @@ T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigFight | OptionalDecide
 SVar:TrigFight:DB$ Fight | Defined$ Self | ValidTgts$ Creature.nonWerewolf+YouDontCtrl | TgtPrompt$ Choose target non-Werewolf creature you don't control
 T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ulrich_uncontested_alpha.jpg
 Oracle:Whenever this creature transforms into Ulrich, Uncontested Alpha, you may have it fight target non-Werewolf creature you don't control.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Ulrich, Uncontested Alpha.

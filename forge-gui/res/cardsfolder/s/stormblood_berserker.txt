@@ -4,5 +4,4 @@ Types:Creature Human Berserker
 PT:1/1
 K:Bloodthirst:2
 K:Menace
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stormblood_berserker.jpg
 Oracle:Bloodthirst 2 (If an opponent was dealt damage this turn, this creature enters the battlefield with two +1/+1 counters on it.)\nMenace (This creature can't be blocked except by two or more creatures.)

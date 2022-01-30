@@ -3,5 +3,4 @@ ManaCost:6
 Types:Artifact Creature Chimera
 PT:4/4
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gold_forged_sentinel.jpg
 Oracle:Flying

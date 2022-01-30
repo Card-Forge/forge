@@ -3,5 +3,4 @@ ManaCost:2 W
 Types:Creature Bird
 PT:2/2
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ghirapur_osprey.jpg
 Oracle:Flying

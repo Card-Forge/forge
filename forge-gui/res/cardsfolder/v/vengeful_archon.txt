@@ -8,5 +8,4 @@ SVar:ArchonPrevention:DB$ PreventDamage | Defined$ You | Amount$ X | PreventionS
 SVar:ArchonsVengeance:DB$ DealDamage | Defined$ ShieldEffectTarget | NumDmg$ PreventedDamage | SpellDescription$ CARDNAME deals that much damage to target player or planeswalker.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vengeful_archon.jpg
 Oracle:Flying\n{X}: Prevent the next X damage that would be dealt to you this turn. If damage is prevented this way, Vengeful Archon deals that much damage to target player or planeswalker.

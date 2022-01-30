@@ -3,5 +3,4 @@ ManaCost:3 U
 Types:Creature Drake
 PT:2/4
 K:Flying
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83084.jpg
 Oracle:Flying

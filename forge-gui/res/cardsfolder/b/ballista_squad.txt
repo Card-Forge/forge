@@ -5,5 +5,4 @@ PT:2/2
 A:AB$ DealDamage | Cost$ X W T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target attacking or blocking creature.
 SVar:X:Count$xPaid
 SVar:NonCombatPriority:4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ballista_squad.jpg
 Oracle:{X}{W}, {T}: Ballista Squad deals X damage to target attacking or blocking creature.

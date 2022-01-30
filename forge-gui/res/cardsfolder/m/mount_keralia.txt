@@ -10,5 +10,4 @@ SVar:RolledChaos:DB$ Effect | Name$ Mount Keralia Effect | ReplacementEffects$ R
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ Permanent.YouCtrl | ValidSource$ Plane.namedMount Keralia | Description$ Prevent all damage that planes named Mount Keralia would deal this game to permanents you control.
 SVar:KeraliaX:TriggeredCard$CardCounters.PRESSURE
 SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mount_keralia.jpg
 Oracle:At the beginning of your end step, put a pressure counter on Mount Keralia.\nWhen you planeswalk away from Mount Keralia, it deals damage equal to the number of pressure counters on it to each creature and each planeswalker.\nWhenever you roll {CHAOS}, prevent all damage that planes named Mount Keralia would deal this game to permanents you control.

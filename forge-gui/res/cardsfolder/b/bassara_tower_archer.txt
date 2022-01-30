@@ -4,5 +4,4 @@ Types:Creature Human Archer
 PT:2/1
 K:Hexproof
 K:Reach
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bassara_tower_archer.jpg
 Oracle:Hexproof, reach

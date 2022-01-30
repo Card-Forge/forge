@@ -4,5 +4,4 @@ Types:Vanguard
 HandLifeModifier:-1/-4
 A:AB$ ChangeZone | Cost$ 3 Sac<1/Creature/creature> | ActivationZone$ Command | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature in your graveyard | SpellDescription$ Return target creature card from your graveyard to the battlefield.
 AI:RemoveDeck:All
-SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Hell's Caretaker Avatar.full.jpg
 Oracle:Hand -1, life -4\n{3}, Sacrifice a creature: Return target creature card from your graveyard to the battlefield.

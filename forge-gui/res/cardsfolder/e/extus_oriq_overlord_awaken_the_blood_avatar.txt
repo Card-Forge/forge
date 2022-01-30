@@ -20,5 +20,5 @@ SVar:X:Count$xPaid
 SVar:Y:SVar$X/Times.2
 A:SP$ Sacrifice | Cost$ 6 B R Sac<X/Creature/any number of creatures> | AILogic$ SacToReduceCost | SacValid$ Creature | Defined$ Player.Opponent | SubAbility$ DBToken | SpellDescription$ Each opponent sacrifices a creature.
 SVar:DBToken:DB$ Token | TokenScript$ br_3_6_avatar_haste_bolt | StackDescription$ Create a 3/6 black and red Avatar creature token with haste and "Whenever this creature attacks, it deals 3 damage to each opponent."
-DeckHas:Ability$Sacrifice & Ability$Token
+DeckHas:Ability$Sacrifice|Token
 Oracle:As an additional cost to cast this spell, you may sacrifice any number of creatures. This spell costs {2} less to cast for each creature sacrificed this way.\nEach opponent sacrifices a creature. Create a 3/6 black and red Avatar creature token with haste and "Whenever this creature attacks, it deals 3 damage to each opponent."

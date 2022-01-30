@@ -4,5 +4,4 @@ Types:Creature Human Druid Ally
 PT:0/1
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | SpellDescription$ Add X mana of any one color, where X is the number of Allies you control.
 SVar:X:Count$Valid Ally.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/harabaz_druid.jpg
 Oracle:{T}: Add X mana of any one color, where X is the number of Allies you control.

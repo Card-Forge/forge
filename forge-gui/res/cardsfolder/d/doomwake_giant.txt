@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigMassacre:DB$ PumpAll | NumAtt$ -1 | NumDef$ -1 | ValidCards$ Creature.OppCtrl | IsCurse$ True
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Enchantment
-SVar:Picture:http://www.wizards.com/global/images/magic/general/doomwake_giant.jpg
 Oracle:Constellation — Whenever Doomwake Giant or another enchantment enters the battlefield under your control, creatures your opponents control get -1/-1 until end of turn.

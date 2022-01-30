@@ -4,5 +4,4 @@ Types:Enchantment
 T:Mode$ ChangesZone | ValidCard$ Card.Black+nonToken+OppOwn | Origin$ Any | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever a black card is put into an opponent's graveyard from anywhere, you may draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/compost.jpg
 Oracle:Whenever a black card is put into an opponent's graveyard from anywhere, you may draw a card.

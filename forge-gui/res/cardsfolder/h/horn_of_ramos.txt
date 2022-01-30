@@ -2,7 +2,6 @@ Name:Horn of Ramos
 ManaCost:3
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-A:AB$ Mana | Cost$Sac<1/CARDNAME> | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ G | SpellDescription$ Add {G}.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/horn_of_ramos.jpg
 Oracle:{T}: Add {G}.\nSacrifice Horn of Ramos: Add {G}.

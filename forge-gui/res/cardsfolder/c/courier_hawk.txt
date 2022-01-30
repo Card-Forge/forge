@@ -4,5 +4,4 @@ Types:Creature Bird
 PT:1/2
 K:Flying
 K:Vigilance
-SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87913.jpg
 Oracle:Flying, vigilance

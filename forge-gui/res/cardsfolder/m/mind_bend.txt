@@ -6,5 +6,4 @@ SVar:ChangeColor:DB$ ChangeText | Defined$ ParentTarget | ChangeColorWord$ Choos
 SVar:ChangeType:DB$ ChangeText | Defined$ ParentTarget | ChangeTypeWord$ ChooseBasicLandType ChooseBasicLandType | Duration$ Permanent | SpellDescription$ Change type
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_bend.jpg
 Oracle:Change the text of target permanent by replacing all instances of one color word with another or one basic land type with another. (For example, you may change "nonblack creature" to "nongreen creature" or "forestwalk" to "islandwalk." This effect lasts indefinitely.)

@@ -7,5 +7,4 @@ K:Vigilance
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | SetColor$ Black | AddTrigger$ TrigSacrificeCreature | AddKeyword$ Trample | Condition$ Threshold | Description$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME gets +3/+3, is black, has trample, and has "At the beginning of your upkeep, sacrifice a creature."
 SVar:TrigSacrificeCreature:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature.
 SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature | SacMessage$ Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wayward_angel.jpg
 Oracle:Flying, vigilance\nThreshold — As long as seven or more cards are in your graveyard, Wayward Angel gets +3/+3, is black, has trample, and has "At the beginning of your upkeep, sacrifice a creature."

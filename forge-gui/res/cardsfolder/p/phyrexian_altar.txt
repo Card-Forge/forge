@@ -3,5 +3,4 @@ ManaCost:3
 Types:Artifact
 A:AB$ Mana | Cost$ Sac<1/Creature> | Produced$ Any | SpellDescription$ Add one mana of any color.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_altar.jpg
 Oracle:Sacrifice a creature: Add one mana of any color.

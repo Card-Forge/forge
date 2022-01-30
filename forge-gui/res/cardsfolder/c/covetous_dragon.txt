@@ -7,5 +7,4 @@ T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Artifact.YouCtrl | Prese
 SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:NeedsToPlay:Artifact.YouCtrl
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/covetous_dragon.jpg
 Oracle:Flying\nWhen you control no artifacts, sacrifice Covetous Dragon.

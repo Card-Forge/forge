@@ -4,5 +4,4 @@ Types:Creature Zombie
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, untap target creature.
 SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature | TgtPrompt$ Choose target creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sparring_mummy.jpg
 Oracle:When Sparring Mummy enters the battlefield, untap target creature.

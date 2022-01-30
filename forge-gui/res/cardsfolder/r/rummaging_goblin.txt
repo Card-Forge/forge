@@ -3,5 +3,4 @@ ManaCost:2 R
 Types:Creature Goblin Rogue
 PT:1/1
 A:AB$ Draw | Cost$ T Discard<1/Card> | NumCards$ 1 | Defined$ You | SpellDescription$ Draw a card.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rummaging_goblin.jpg
 Oracle:{T}, Discard a card: Draw a card.

@@ -5,5 +5,4 @@ PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Draw | Cost$ T | NumCards$ 1 | ActivationCardsInHand$ 7 | SpellDescription$ Draw a card. Activate only if you have exactly seven cards in hand.
 AI:RemoveDeck:Random
-SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card134741.jpg
 Oracle:{T}: Add {C}.\n{T}: Draw a card. Activate only if you have exactly seven cards in hand.

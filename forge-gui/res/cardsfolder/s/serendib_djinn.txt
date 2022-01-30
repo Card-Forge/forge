@@ -11,5 +11,4 @@ T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Land.YouCtrl | PresentCo
 SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:NeedsToPlay:Island.YouCtrl
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/serendib_djinn.jpg
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice a land. If you sacrifice an Island this way, Serendib Djinn deals 3 damage to you.\nWhen you control no lands, sacrifice Serendib Djinn.

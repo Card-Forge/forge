@@ -7,5 +7,4 @@ SVar:X:TriggeredPlayer$NumPowerSurgeLands
 S:Mode$ Continuous | Affected$ Land | AddSVar$ AITap
 SVar:AITap:SVar:AITapDown:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/power_surge.jpg
 Oracle:At the beginning of each player's upkeep, Power Surge deals X damage to that player, where X is the number of untapped lands they controlled at the beginning of this turn.

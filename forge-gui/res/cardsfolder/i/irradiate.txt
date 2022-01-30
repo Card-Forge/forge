@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ Pump | Cost$ 3 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn for each artifact you control.
 SVar:X:Count$NumTypeYouCtrl.Artifact
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/irradiate.jpg
 Oracle:Target creature gets -1/-1 until end of turn for each artifact you control.

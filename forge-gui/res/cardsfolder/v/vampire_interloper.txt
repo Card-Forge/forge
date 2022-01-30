@@ -4,5 +4,4 @@ Types:Creature Vampire Scout
 PT:2/1
 K:Flying
 K:CARDNAME can't block.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_interloper.jpg
 Oracle:Flying\nVampire Interloper can't block.

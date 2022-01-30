@@ -3,5 +3,4 @@ ManaCost:W W
 Types:Creature Cat Knight
 PT:2/2
 K:Flying
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83416.jpg
 Oracle:Flying

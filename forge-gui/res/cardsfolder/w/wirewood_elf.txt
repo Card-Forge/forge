@@ -3,5 +3,4 @@ ManaCost:1 G
 Types:Creature Elf Druid
 PT:1/2
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39828.jpg
 Oracle:{T}: Add {G}.

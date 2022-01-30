@@ -4,5 +4,4 @@ Types:Land Desert
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 K:Cycling:1 U
-SVar:Picture:http://www.wizards.com/global/images/magic/general/desert_of_the_mindful.jpg
 Oracle:Desert of the Mindful enters the battlefield tapped.\n{T}: Add {U}.\nCycling {1}{U} ({1}{U}, Discard this card: Draw a card.)

@@ -8,6 +8,5 @@ SVar:RolledChaos:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBCh
 SVar:DBChoose:DB$ ChooseCard | Choices$ Card.RememberedPlayerCtrl+Blue | ChoiceZone$ Graveyard | Defined$ Player.IsRemembered | Amount$ 1 | RememberChosen$ True
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/minamo.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | HasColorInGraveyard$ U
 Oracle:Whenever a player casts a spell, that player may draw a card.\nWhenever you roll {CHAOS}, each player may return a blue card from their graveyard to their hand.

@@ -5,5 +5,4 @@ PT:2/4
 A:AB$ Tap | Cost$ T tapXType<1/Ally> | ValidTgts$ Creature | TgtPrompt$ Select target creature | PrecostDesc$ Cohort — | SpellDescription$ Tap target creature.
 AI:RemoveDeck:All
 DeckHints:Type$Ally
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spawnbinder_mage.jpg
 Oracle:Cohort — {T}, Tap an untapped Ally you control: Tap target creature.

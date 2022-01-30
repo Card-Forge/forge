@@ -5,5 +5,4 @@ PT:3/3
 K:Flying
 A:AB$ Dig | Cost$ 1 U | DigNum$ 1 | ValidTgts$ Player | TgtPrompt$ Select target player | Reveal$ True | NoMove$ True | SpellDescription$ Target player reveals the top card of their library.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_windreader.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\n{1}{U}: Target player reveals the top card of their library.

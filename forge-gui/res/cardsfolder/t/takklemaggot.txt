@@ -16,5 +16,4 @@ SVar:TrigUpkeep:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.IsRemembered |
 SVar:TrigDmg:DB$ DealDamage | Defined$ Remembered | NumDmg$ 1
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/takklemaggot.jpg
 Oracle:Enchant creature\nAt the beginning of the upkeep of enchanted creature's controller, put a -0/-1 counter on that creature.\nWhen enchanted creature dies, that creature's controller chooses a creature that Takklemaggot could enchant. If the player does, return Takklemaggot to the battlefield under your control attached to that creature. If they don't, return Takklemaggot to the battlefield under your control as a non-Aura enchantment. It loses "enchant creature" and gains "At the beginning of that player's upkeep, Takklemaggot deals 1 damage to that player."

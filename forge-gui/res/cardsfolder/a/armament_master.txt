@@ -5,5 +5,4 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Kor+Other+YouCtrl | AddPower$ X | AddToughness$ X | Description$ Other Kor creatures you control get +2/+2 for each Equipment attached to Armament Master.
 SVar:X:Count$Valid Equipment.Attached/Times.2
 SVar:EquipMe:Multiple
-SVar:Picture:http://www.wizards.com/global/images/magic/general/armament_master.jpg
 Oracle:Other Kor creatures you control get +2/+2 for each Equipment attached to Armament Master.

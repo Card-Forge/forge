@@ -3,5 +3,4 @@ ManaCost:2 R
 Types:Creature Human Bird
 PT:1/2
 K:Flying
-SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card4032.jpg
 Oracle:Flying

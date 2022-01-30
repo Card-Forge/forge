@@ -7,5 +7,5 @@ A:AB$ ChangeZone | Cost$ 3 G T | Origin$ Library | Destination$ Hand | ChangeTyp
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | ConditionDefined$ Remembered | ConditionPresent$ Card.Legendary | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$CardCounters.HARMONY
-DeckHas:Ability$Token & Ability$Counters
+DeckHas:Ability$Token|Counters
 Oracle:At the beginning of your upkeep, you may put a harmony counter on Instrument of the Bards.\n{3}{G}, {T}: Search your library for a creature card with mana value equal to the number of harmony counters on Instrument of the Bards, reveal it, and put it into your hand. If that card is legendary, create a Treasure token. Then shuffle.

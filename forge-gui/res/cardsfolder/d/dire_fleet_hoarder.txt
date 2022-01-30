@@ -5,5 +5,4 @@ PT:2/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a Treasure token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | LegacyImage$ c a treasure sac xln
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dire_fleet_hoarder.jpg
 Oracle:When Dire Fleet Hoarder dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

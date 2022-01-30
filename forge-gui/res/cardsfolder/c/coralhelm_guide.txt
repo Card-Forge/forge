@@ -3,5 +3,4 @@ ManaCost:1 U
 Types:Creature Merfolk Scout Ally
 PT:2/1
 A:AB$ Pump | Cost$ 4 U | ValidTgts$ Creature | KW$ HIDDEN Unblockable | SpellDescription$ Target creature can't be blocked this turn. | TgtPrompt$ Select target creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/coralhelm_guide.jpg
 Oracle:{4}{U}: Target creature can't be blocked this turn.

@@ -5,5 +5,4 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddToughness$ 1 | Description$ Sliver creatures you control get +0/+1.
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Sliver
-SVar:Picture:http://www.wizards.com/global/images/magic/general/steelform_sliver.jpg
 Oracle:Sliver creatures you control get +0/+1.

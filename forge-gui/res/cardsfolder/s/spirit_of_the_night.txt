@@ -8,5 +8,4 @@ K:Haste
 K:Protection from black
 S:Mode$ Continuous | Affected$ Card.Self+attacking | AddKeyword$ First Strike | Description$ CARDNAME has first strike as long as it's attacking.
 DeckHints:Name$Breathstealer|Feral Shadow|Spirit of the Night|Urborg Panther
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_of_the_night.jpg
 Oracle:Flying, trample, haste, protection from black\nSpirit of the Night has first strike as long as it's attacking.

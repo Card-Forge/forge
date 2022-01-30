@@ -12,5 +12,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigSacrifice:DB$ Destroy | Sacrifice$ True | Defined$ DirectRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -1 | Description$ Enchanted creature gets -1/-0.
-SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card3823.jpg
 Oracle:Enchant creature card in a graveyard\nWhen Animate Dead enters the battlefield, if it's on the battlefield, it loses "enchant creature card in a graveyard" and gains "enchant creature put onto the battlefield with Animate Dead." Return enchanted creature card to the battlefield under your control and attach Animate Dead to it. When Animate Dead leaves the battlefield, that creature's controller sacrifices it.\nEnchanted creature gets -1/-0.

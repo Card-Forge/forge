@@ -3,5 +3,4 @@ ManaCost:5 UR UR
 Types:Sorcery
 K:Retrace
 A:SP$ Token | Cost$ 5 UR UR | TokenAmount$ 1 | TokenScript$ ur_5_5_elemental_flying | TokenOwner$ You | LegacyImage$ ur 5 5 elemental flying eve | SpellDescription$ Create a 5/5 blue and red Elemental creature token with flying.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/call_the_skybreaker.jpg
 Oracle:Create a 5/5 blue and red Elemental creature token with flying.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)

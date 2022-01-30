@@ -4,5 +4,4 @@ Types:Land Desert
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
 K:Cycling:1 R
-SVar:Picture:http://www.wizards.com/global/images/magic/general/desert_of_the_fervent.jpg
 Oracle:Desert of the Fervent enters the battlefield tapped.\n{T}: Add {R}.\nCycling {1}{R} ({1}{R}, Discard this card: Draw a card.)

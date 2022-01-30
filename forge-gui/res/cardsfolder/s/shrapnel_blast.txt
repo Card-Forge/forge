@@ -2,5 +2,4 @@ Name:Shrapnel Blast
 ManaCost:1 R
 Types:Instant
 A:SP$ DealDamage | Cost$ 1 R Sac<1/Artifact> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select target | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to any target.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shrapnel_blast.jpg
 Oracle:As an additional cost to cast this spell, sacrifice an artifact.\nShrapnel Blast deals 5 damage to any target.

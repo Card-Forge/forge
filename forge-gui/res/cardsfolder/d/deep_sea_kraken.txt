@@ -6,5 +6,4 @@ K:Unblockable
 K:Suspend:9:2 U
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | Execute$ TrigRemoveCounter | TriggerZones$ Exile | IsPresent$ Card.Self+suspended | PresentZone$ Exile | TriggerDescription$ Whenever an opponent casts a spell, if CARDNAME is suspended, remove a time counter from it.
 SVar:TrigRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deep_sea_kraken.jpg
 Oracle:Deep-Sea Kraken can't be blocked.\nSuspend 9—{2}{U} (Rather than cast this card from your hand, you may pay {2}{U} and exile it with nine time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)\nWhenever an opponent casts a spell, if Deep-Sea Kraken is suspended, remove a time counter from it.

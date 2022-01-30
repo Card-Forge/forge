@@ -2,5 +2,4 @@ Name:Marble Chalice
 ManaCost:2 W
 Types:Artifact
 A:AB$ GainLife | Cost$ T | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/marble_chalice.jpg
 Oracle:{T}: You gain 1 life.

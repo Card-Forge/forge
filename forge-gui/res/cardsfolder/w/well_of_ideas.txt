@@ -6,5 +6,4 @@ SVar:TrigDraw1:DB$ Draw | Defined$ You | NumCards$ 2
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player.Other | TriggerZones$ Battlefield | Execute$ TrigDraw2 | TriggerDescription$ At the beginning of each other player's draw step, that player draws an additional card.
 SVar:TrigDraw2:DB$ Draw | NumCards$ 1 | Defined$ TriggeredPlayer
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw1 | TriggerDescription$ At the beginning of your draw step, draw two additional cards.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/well_of_ideas.jpg
 Oracle:When Well of Ideas enters the battlefield, draw two cards.\nAt the beginning of each other player's draw step, that player draws an additional card.\nAt the beginning of your draw step, draw two additional cards.

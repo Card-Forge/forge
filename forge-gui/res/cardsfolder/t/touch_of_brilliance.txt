@@ -2,5 +2,4 @@ Name:Touch of Brilliance
 ManaCost:3 U
 Types:Sorcery
 A:SP$ Draw | Cost$ 3 U | NumCards$ 2 | SpellDescription$ Draw two cards.
-SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal/touch_of_brilliance.jpg
 Oracle:Draw two cards.

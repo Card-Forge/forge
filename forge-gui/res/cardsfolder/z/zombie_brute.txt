@@ -4,5 +4,4 @@ Types:Creature Zombie
 PT:5/4
 K:Amplify:1:Zombie
 K:Trample
-SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_brute.jpg
 Oracle:Amplify 1 (As this creature enters the battlefield, put a +1/+1 counter on it for each Zombie card you reveal in your hand.)\nTrample

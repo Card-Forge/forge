@@ -6,5 +6,4 @@ K:CARDNAME enters the battlefield tapped.
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Menace | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has menace as long as you control an artifact.
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:BuffedBy:Artifact
-SVar:Picture:http://www.wizards.com/global/images/magic/general/embraal_bruiser.jpg
 Oracle:Embraal Bruiser enters the battlefield tapped.\nEmbraal Bruiser has menace as long as you control an artifact.

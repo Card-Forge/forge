@@ -5,5 +5,4 @@ A:AB$ ChooseColor | Cost$ T | Defined$ You | SubAbility$ Animate | SpellDescript
 SVar:Animate:DB$ Animate | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Colors$ ChosenColor | OverwriteColors$ True
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/distorting_lens.jpg
 Oracle:{T}: Target permanent becomes the color of your choice until end of turn.

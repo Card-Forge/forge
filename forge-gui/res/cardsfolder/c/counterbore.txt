@@ -7,5 +7,4 @@ SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlaye
 SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ TargetedCard.sameName | ChangeNum$ NumInLib | Chooser$ You | Search$ True | Shuffle$ True | StackDescription$ None
 SVar:NumInHand:TargetedController$CardsInHand
 SVar:NumInLib:TargetedController$CardsInLibrary
-SVar:Picture:http://www.wizards.com/global/images/magic/general/counterbore.jpg
 Oracle:Counter target spell. Search its controller's graveyard, hand, and library for all cards with the same name as that spell and exile them. Then that player shuffles.

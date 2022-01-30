@@ -11,5 +11,4 @@ SVar:C:PlayerCountRemembered$CardsInHand/ThirdUp
 SVar:E:PlayerCountRemembered$Valid Creature.RememberedPlayerCtrl/ThirdUp
 SVar:G:PlayerCountRemembered$Valid Land.RememberedPlayerCtrl/ThirdUp
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pox.jpg
 Oracle:Each player loses a third of their life, then discards a third of the cards in their hand, then sacrifices a third of the creatures they control, then sacrifices a third of the lands they control. Round up each time.

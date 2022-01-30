@@ -5,5 +5,4 @@ A:SP$ UntapAll | Cost$ 12 U U | ValidCards$ Artifact | SpellDescription$ Untap a
 K:Affinity:Artifact
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blinkmoth_infusion.jpg
 Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nUntap all artifacts.

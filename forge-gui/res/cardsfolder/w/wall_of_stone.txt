@@ -3,5 +3,4 @@ ManaCost:1 R R
 Types:Creature Wall
 PT:0/8
 K:Defender
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_stone.jpg
 Oracle:Defender (This creature can't attack.)

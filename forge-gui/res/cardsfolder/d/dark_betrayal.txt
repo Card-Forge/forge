@@ -3,5 +3,4 @@ ManaCost:B
 Types:Instant
 A:SP$ Destroy | Cost$ B | ValidTgts$ Creature.Black | TgtPrompt$ Select target black creature | SpellDescription$ Destroy target black creature.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_betrayal.jpg
 Oracle:Destroy target black creature.

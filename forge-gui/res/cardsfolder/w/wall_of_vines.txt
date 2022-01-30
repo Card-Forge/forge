@@ -4,5 +4,4 @@ Types:Creature Plant Wall
 PT:0/3
 K:Defender
 K:Reach
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_vines.jpg
 Oracle:Defender (This creature can't attack.)\nReach (This creature can block creatures with flying.)

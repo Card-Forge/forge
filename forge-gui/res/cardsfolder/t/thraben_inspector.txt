@@ -4,6 +4,5 @@ Types:Creature Human Soldier
 PT:1/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerDescription$ When CARDNAME enters the battlefield, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
 SVar:TrigInvestigate:DB$ Investigate
-DeckHas:Ability$Investigate & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thraben_inspector.jpg
+DeckHas:Ability$Investigate|Token
 Oracle:When Thraben Inspector enters the battlefield, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")

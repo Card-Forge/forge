@@ -10,5 +10,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBReinitialize
 SVar:DBReinitialize:DB$ StoreSVar | SVar$ WasPirate | Type$ Number | Expression$ 0
 SVar:WasPirate:Number$0
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sirens_ruse.jpg
 Oracle:Exile target creature you control, then return that card to the battlefield under its owner's control. If a Pirate was exiled this way, draw a card.

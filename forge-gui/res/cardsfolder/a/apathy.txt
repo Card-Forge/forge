@@ -9,5 +9,4 @@ SVar:ApathyDiscard:DB$ Discard | Defined$ TriggeredPlayer | NumCards$ 1 | Mode$ 
 SVar:ApathyUntap:DB$ Untap | Defined$ Enchanted | SpellDescription$ Untap enchanted creature | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/apathy.jpg
 Oracle:Enchant creature\nEnchanted creature doesn't untap during its controller's untap step.\nAt the beginning of the upkeep of enchanted creature's controller, that player may discard a card at random. If the player does, untap that creature.

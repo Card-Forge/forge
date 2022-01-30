@@ -8,9 +8,8 @@ SVar:TrigGainLife:DB$ GainLife | Defined$ TriggeredCardController | LifeAmount$ 
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ 20
 SVar:AICastPreference:MustHaveInHand$ Donate | MaxControlled$ 1 | NumManaSourcesNextTurn$ 5 | AlwaysCastIfLifeBelow$ 4
 AI:RemoveDeck:Random
-SVar:DeckNeeds:Name$Donate
+DeckNeeds:Name$Donate|Harmless Offering|Zedruu the Greathearted
 SVar:DonateMe:5
 SVar:PlayMain1:TRUE
 SVar:DoNotDiscardIfAble:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/illusions_of_grandeur.jpg
 Oracle:Cumulative upkeep {2} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhen Illusions of Grandeur enters the battlefield, you gain 20 life.\nWhen Illusions of Grandeur leaves the battlefield, you lose 20 life.

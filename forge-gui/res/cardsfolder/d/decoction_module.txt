@@ -4,5 +4,4 @@ Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Creature.YouCtrl | Execute$ TrigEnergy | TriggerDescription$ Whenever a creature enters the battlefield under your control, you get {E} (an energy counter).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 1
 A:AB$ ChangeZone | Cost$ 4 T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature you control to its owner's hand.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/decoction_module.jpg
 Oracle:Whenever a creature enters the battlefield under your control, you get {E} (an energy counter).\n{4}, {T}: Return target creature you control to its owner's hand.

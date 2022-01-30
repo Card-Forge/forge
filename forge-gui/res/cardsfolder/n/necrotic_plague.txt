@@ -12,5 +12,4 @@ SVar:DBChange:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ 
 SVar:NeedsToPlayVar:Z GE3
 SVar:Z:Count$Valid Creature.OppCtrl+inZoneBattlefield
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/necrotic_plague.jpg
 Oracle:Enchant creature\nEnchanted creature has "At the beginning of your upkeep, sacrifice this creature."\nWhen enchanted creature dies, its controller chooses target creature one of their opponents controls. Return Necrotic Plague from its owner's graveyard to the battlefield attached to that creature.

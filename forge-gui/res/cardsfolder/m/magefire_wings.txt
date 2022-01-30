@@ -4,5 +4,4 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ U R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddKeyword$ Flying | Description$ Enchanted creature gets +2/+0 and has flying.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/magefire_wings.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+0 and has flying.

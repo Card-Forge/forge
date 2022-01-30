@@ -4,5 +4,4 @@ Types:Creature Spider
 PT:1/5
 K:Reach
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/steam_spitter.jpg
 Oracle:Reach (This creature can block creatures with flying.)\n{R}: Steam Spitter gets +1/+0 until end of turn.

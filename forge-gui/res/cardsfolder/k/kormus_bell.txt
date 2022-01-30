@@ -4,5 +4,4 @@ Types:Artifact
 S:Mode$ Continuous | Affected$ Swamp | SetPower$ 1 | SetToughness$ 1 | AddType$ Creature | SetColor$ Black | Description$ All Swamps are 1/1 black creatures that are still lands.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kormus_bell.jpg
 Oracle:All Swamps are 1/1 black creatures that are still lands.

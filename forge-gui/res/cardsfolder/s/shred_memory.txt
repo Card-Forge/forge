@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ ChangeZone | Cost$ 1 B | TargetMin$ 0 | TargetMax$ 4 | TargetsFromSingleZone$ True | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile up to four target cards from a single graveyard.
 K:Transmute:1 B B
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shred_memory.jpg
 Oracle:Exile up to four target cards from a single graveyard.\nTransmute {1}{B}{B} ({1}{B}{B}, Discard this card: Search your library for a card with the same mana value as this card, reveal it, put it into your hand, then shuffle. Transmute only as a sorcery.)

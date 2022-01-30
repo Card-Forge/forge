@@ -5,5 +5,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigCopy | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature attacks, you may create a token that's a copy of that creature. Exile that token at end of combat.
 SVar:TrigCopy:DB$ CopyPermanent | Defined$ TriggeredAttacker | NumCopies$ 1 | AtEOT$ ExileCombat
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_mockery.jpg
 Oracle:Enchant creature\nWhenever enchanted creature attacks, you may create a token that's a copy of that creature. Exile that token at end of combat.

@@ -8,5 +8,4 @@ SVar:DBPay:DB$ ChooseNumber | Defined$ Player.IsRemembered | ChooseAnyNumber$ Tr
 # TODO: ideally the tokens should be created simultaneously after all the players have finished paying mana, but that's difficult to implement.
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_squirrel | TokenOwner$ Player.IsRemembered | LegacyImage$ g 1 1 squirrel wth | UnlessCost$ X | UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True
 SVar:X:Count$ChosenNumber
-SVar:Picture:http://www.wizards.com/global/images/magic/general/liege_of_the_hollows.jpg
 Oracle:When Liege of the Hollows dies, each player may pay any amount of mana. Then each player creates a number of 1/1 green Squirrel creature tokens equal to the amount of mana they paid this way.

@@ -4,5 +4,4 @@ Types:Creature Goblin
 PT:4/4
 K:CARDNAME can't attack unless a creature with greater power also attacks.
 K:CARDNAME can't block unless a creature with greater power also blocks.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/okk.jpg
 Oracle:Okk can't attack unless a creature with greater power also attacks.\nOkk can't block unless a creature with greater power also blocks.

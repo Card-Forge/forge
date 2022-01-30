@@ -4,5 +4,4 @@ Types:Creature Yeti
 PT:3/3
 K:Mountainwalk
 K:Protection from white
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mountain_yeti.jpg
 Oracle:Mountainwalk (This creature can't be blocked as long as defending player controls a Mountain.)\nProtection from white

@@ -6,6 +6,5 @@ T:Mode$ SpellCast | ValidCard$ Card.White,Card.Blue,Card.Black,Card.Red | ValidA
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:BuffedBy:Card.White,Card.Blue,Card.Black,Card.Red
 DeckHas:Ability$Counters
-DeckNeeds:Color$white|blue|black|red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/quirion_dryad.jpg
+DeckNeeds:Color$White|Blue|Black|Red
 Oracle:Whenever you cast a spell that's white, blue, black, or red, put a +1/+1 counter on Quirion Dryad.

@@ -9,5 +9,4 @@ SVar:DBGainControl:DB$ GainControl | Defined$ Self | NewController$ RememberedCo
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/act_of_authority.jpg
 Oracle:When Act of Authority enters the battlefield, you may exile target artifact or enchantment.\nAt the beginning of your upkeep, you may exile target artifact or enchantment. If you do, its controller gains control of Act of Authority.

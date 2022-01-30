@@ -5,5 +5,4 @@ T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execut
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2
 SVar:YouCastThisTurn:Count$ThisTurnCast_Card.YouCtrl
 SVar:BuffedBy:Card
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pyromancers_assault.jpg
 Oracle:Whenever you cast your second spell each turn, Pyromancer's Assault deals 2 damage to any target.

@@ -7,5 +7,4 @@ SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum
 A:AB$ PutCounter | Cost$ PayEnergy<2> | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ PayEnergyConservatively | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 DeckHints:Ability$Energy
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/longtusk_cub.jpg
 Oracle:Whenever Longtusk Cub deals combat damage to a player, you get {E}{E} (two energy counters).\nPay {E}{E}: Put a +1/+1 counter on Longtusk Cub.

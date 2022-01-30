@@ -4,7 +4,6 @@ AlternateMode: Split
 Types:Instant
 A:SP$ ChangeZone | Cost$ 3 U | TgtZone$ Stack,Battlefield | Origin$ Battlefield,Stack | Destination$ Library | ValidTgts$ Permanent.nonLand,Card.inZoneStack | LibraryPosition$ 1 | Fizzle$ True | SpellDescription$ Put target spell or nonland permanent into its owner's library second from the top.
 # Library Position is zero indexed. So 1 is second from the top
-SVar:Picture:http://www.wizards.com/global/images/magic/general/commit_memory.jpg
 Oracle:Put target spell or nonland permanent into its owner's library second from the top.
 
 ALTERNATE

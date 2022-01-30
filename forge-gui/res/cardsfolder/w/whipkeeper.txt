@@ -5,5 +5,4 @@ PT:1/1
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature equal to the damage already dealt to it this turn.
 SVar:X:Targeted$TotalDamageReceivedThisTurn
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/whipkeeper.jpg
 Oracle:{T}: Whipkeeper deals damage to target creature equal to the damage already dealt to it this turn.

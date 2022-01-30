@@ -5,5 +5,4 @@ PT:1/1
 K:Islandwalk
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigReveal | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player reveals a card at random from their hand.
 SVar:TrigReveal:DB$ Reveal | Random$ True | Defined$ TriggeredTarget
-SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_spy.jpg
 Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nWhenever Merfolk Spy deals combat damage to a player, that player reveals a card at random from their hand.

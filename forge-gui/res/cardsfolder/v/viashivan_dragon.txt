@@ -6,5 +6,4 @@ K:Flying
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 A:AB$ Pump | Cost$ G | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
 DeckNeeds:Name$Kyscu Drake|Spitting Drake
-SVar:Picture:http://www.wizards.com/global/images/magic/general/viashivan_dragon.jpg
 Oracle:Flying\n{R}: Viashivan Dragon gets +1/+0 until end of turn.\n{G}: Viashivan Dragon gets +0/+1 until end of turn.

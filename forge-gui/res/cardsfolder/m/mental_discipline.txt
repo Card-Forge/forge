@@ -4,5 +4,4 @@ Types:Enchantment
 A:AB$ Draw | Cost$ 1 U Discard<1/Card> | NumCards$ 1 | SpellDescription$ Draw a card.
 AI:RemoveDeck:All
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mental_discipline.jpg
 Oracle:{1}{U}, Discard a card: Draw a card.

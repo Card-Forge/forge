@@ -5,5 +5,4 @@ PT:3/4
 K:You may choose not to untap CARDNAME during your untap step.
 A:AB$ GainControl | Cost$ T | ValidTgts$ Dragon | TgtPrompt$ Select target Dragon. | LoseControl$ Untap,LeavesPlay,LoseControl | SpellDescription$ Gain control of target Dragon for as long as you control CARDNAME and CARDNAME remains tapped.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hivis_of_the_scale.jpg
 Oracle:You may choose not to untap Hivis of the Scale during your untap step.\n{T}: Gain control of target Dragon for as long as you control Hivis and Hivis remains tapped.

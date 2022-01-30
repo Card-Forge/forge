@@ -3,5 +3,4 @@ ManaCost:1 U
 Types:Instant
 A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays {1}.
 K:Cycling:U
-SVar:Picture:http://www.wizards.com/global/images/magic/general/censor.jpg
 Oracle:Counter target spell unless its controller pays {1}.\nCycling {U} ({U}, Discard this card: Draw a card.)

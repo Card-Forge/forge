@@ -14,4 +14,4 @@ SVar:DBDamage:DB$ DealDamage | Defined$ Player.Opponent | DamageSource$ Remember
 SVar:X:Remembered$CardManaCost/Plus.1
 SVar:Y:Remembered$CardPower
 SVar:NonStackingEffect:True
-Oracle:[+1]: Exile the top three cards of your library. Creature cards exiled this way gain "You may cast this card from exile as long as you control a Lukka planeswalker."\n[−2]: Exile target creature you control, then reveal cards from the top of your library until you reveal a creature card with higher mana value. Put that card onto the battlefield and the rest on the bottom of your library in a random order.\n[−7]: Each creature you control deals damage equal to its power to each opponent.
+Oracle:[+1]: Exile the top three cards of your library. Creature cards exiled this way gain "You may cast this card from exile as long as you control a Lukka planeswalker."\n[-2]: Exile target creature you control, then reveal cards from the top of your library until you reveal a creature card with higher mana value. Put that card onto the battlefield and the rest on the bottom of your library in a random order.\n[-7]: Each creature you control deals damage equal to its power to each opponent.

@@ -6,7 +6,6 @@ SVar:DBTransform:DB$ SetState | ConditionDefined$ Remembered | ConditionPresent$
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ DBCleanup | Static$ True | Secondary$ True | TriggerDescription$ Forget all remembered cards.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AlternateMode:DoubleFaced
-SVar:Picture:http://www.wizards.com/global/images/magic/general/profane_procession.jpg
 Oracle:{3}{W}{B}: Exile target creature. Then if there are three or more cards exiled with Profane Procession, transform it.
 
 ALTERNATE
@@ -17,5 +16,4 @@ Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
 A:AB$ ChooseCard | Cost$ 2 W B T | Choices$ Creature.IsRemembered+ExiledWithSource | ChoiceZone$ Exile | SubAbility$ DBChangeZone | AILogic$ AtLeast1 | Mandatory$ True | SpellDescription$ Put a creature card exiled with this permanent onto the battlefield under your control.
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Exile | Destination$ Battlefield | ChangeType$ Creature.IsRemembered+ExiledWithSource | ChangeNum$ 1 | GainControl$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tomb_of_the_dusk_rose.jpg
 Oracle:(Transforms from Profane Procession.)\n{T}: Add one mana of any color.\n{2}{W}{B}, {T}: Put a creature card exiled with this permanent onto the battlefield under your control.

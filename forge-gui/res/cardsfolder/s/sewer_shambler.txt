@@ -4,5 +4,4 @@ Types:Creature Zombie
 PT:2/1
 K:Swampwalk
 K:Scavenge:2 B
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sewer_shambler.jpg
 Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)\nScavenge {2}{B} ({2}{B}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)

@@ -5,5 +5,4 @@ A:AB$ TapOrUntap | Cost$ Discard<1/Card> | ValidTgts$ Artifact,Creature,Land | T
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_over_matter.jpg
 Oracle:Discard a card: You may tap or untap target artifact, creature, or land.

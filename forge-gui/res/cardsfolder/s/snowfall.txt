@@ -7,5 +7,4 @@ SVar:TrigMana:DB$ Mana | Produced$ U | Amount$ 1 | Defined$ TriggeredCardControl
 SVar:DBMana:DB$ Mana | Produced$ U | Amount$ 2 | Defined$ TriggeredCardController | RestrictValid$ CumulativeUpkeep | ConditionDefined$ TriggeredCard | ConditionPresent$ Land.Snow | ConditionCompare$ GE1
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/snowfall.jpg
 Oracle:Cumulative upkeep {U} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhenever an Island is tapped for mana, its controller may add an additional {U}. If that Island is snow, its controller may add an additional {U}{U} instead. Spend this mana only to pay cumulative upkeep costs.

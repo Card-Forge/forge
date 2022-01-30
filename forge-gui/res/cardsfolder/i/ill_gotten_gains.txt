@@ -6,5 +6,4 @@ SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SubAbility$ D
 SVar:DBChangeZoneChoose:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeNum$ 3 | ChangeType$ Card | DefinedPlayer$ Remembered | Hidden$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ill_gotten_gains.jpg
 Oracle:Exile Ill-Gotten Gains. Each player discards their hand, then returns up to three cards from their graveyard to their hand.

@@ -11,5 +11,4 @@ SVar:ABDealDamage:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswa
 SVar:X:Count$Valid Mountain.YouCtrl
 SVar:PlayMain1:ALWAYS
 DeckNeeds:Type$Mountain
-SVar:Picture:http://www.wizards.com/global/images/magic/general/koth_of_the_hammer.jpg
-Oracle:[+1]: Untap target Mountain. It becomes a 4/4 red Elemental creature until end of turn. It's still a land.\n[−2]: Add {R} for each Mountain you control.\n[−5]: You get an emblem with "Mountains you control have '{T}: This land deals 1 damage to any target.'"
+Oracle:[+1]: Untap target Mountain. It becomes a 4/4 red Elemental creature until end of turn. It's still a land.\n[-2]: Add {R} for each Mountain you control.\n[-5]: You get an emblem with "Mountains you control have '{T}: This land deals 1 damage to any target.'"

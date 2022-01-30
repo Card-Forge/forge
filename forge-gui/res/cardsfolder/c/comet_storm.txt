@@ -4,6 +4,5 @@ Types:Instant
 A:SP$ DealDamage | Cost$ X R R | Announce$ Multikicker,X | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | TargetMin$ TargetsNum | TargetMax$ TargetsNum | SpellDescription$ CARDNAME deals X damage to each targets.
 K:Multikicker:1
 SVar:TargetsNum:Count$TimesKicked/Plus.1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/comet_storm.jpg
 SVar:X:Count$xPaid
 Oracle:Multikicker {1} (You may pay an additional {1} any number of times as you cast this spell.)\nChoose any target, then choose another target for each time this spell was kicked. Comet Storm deals X damage to each of them.

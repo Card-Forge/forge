@@ -8,5 +8,4 @@ SVar:DBReveal:DB$ Dig | DigNum$ 1 | Reveal$ True | DestinationZone$ Library | Li
 SVar:DBPump:DB$ Pump | Defined$ TriggeredCard | NumAtt$ -X | NumDef$ -X
 SVar:X:Count$TopOfLibraryCMC
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/putrid_cyclops.jpg
 Oracle:When Putrid Cyclops enters the battlefield, scry 1, then reveal the top card of your library. Putrid Cyclops gets -X/-X until end of turn, where X is that card's mana value. (To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)

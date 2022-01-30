@@ -8,5 +8,4 @@ SVar:X:Count$TypeYouCtrl.Giant
 DeckNeeds:Type$Giant
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thundercloud_shaman.jpg
 Oracle:When Thundercloud Shaman enters the battlefield, it deals damage equal to the number of Giants you control to each non-Giant creature.

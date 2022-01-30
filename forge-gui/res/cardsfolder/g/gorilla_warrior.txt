@@ -2,5 +2,4 @@ Name:Gorilla Warrior
 ManaCost:2 G
 Types:Creature Ape Warrior
 PT:3/2
-SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5683.jpg
 Oracle:

@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Enchantment
 A:AB$ Token | Cost$ 2 W Sac<1/CARDNAME> | TokenOwner$ You | TokenAmount$ 2 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | LegacyImage$ w 1 1 spirit flying soi | SpellDescription$ Create two 1/1 white Spirit creature tokens with flying.
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vessel_of_ephemera.jpg
 Oracle:{2}{W}, Sacrifice Vessel of Ephemera: Create two 1/1 white Spirit creature tokens with flying.

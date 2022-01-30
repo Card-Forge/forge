@@ -8,5 +8,4 @@ SVar:X:Count$TypeYouCtrl.Rat
 SVar:AIPreference:SacCost$Creature.Rat+token,Creature.Rat+cmcLE3
 AI:RemoveDeck:Random
 DeckHints:Type$Rat
-SVar:Picture:http://www.wizards.com/global/images/magic/general/marrow_gnawer.jpg
 Oracle:All Rats have fear.\n{T}, Sacrifice a Rat: Create X 1/1 black Rat creature tokens, where X is the number of Rats you control.

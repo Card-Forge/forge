@@ -10,5 +10,4 @@ SVar:LoseLifeFallback:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters
 SVar:AIPreference:SacCost$Permanent.nonLand | DiscardCost$Card
-SVar:Picture:http://www.wizards.com/global/images/magic/general/torment_of_venom.jpg
 Oracle:Put three -1/-1 counters on target creature. Its controller loses 3 life unless they sacrifice another nonland permanent or discards a card.

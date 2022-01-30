@@ -4,5 +4,4 @@ Types:Enchantment
 A:AB$ DealDamage | Cost$ 2 R G Discard<2/Random> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/meteor_storm.jpg
 Oracle:{2}{R}{G}, Discard two cards at random: Meteor Storm deals 4 damage to any target.

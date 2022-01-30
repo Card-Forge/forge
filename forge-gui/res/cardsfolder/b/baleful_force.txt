@@ -5,5 +5,4 @@ PT:7/7
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of each upkeep, you draw a card and lose 1 life.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/baleful_force.jpg
 Oracle:At the beginning of each upkeep, you draw a card and you lose 1 life.

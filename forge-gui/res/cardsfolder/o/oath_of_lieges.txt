@@ -6,5 +6,4 @@ SVar:LiegesSearch:DB$ ChangeZone | TargetingPlayer$ TriggeredPlayer | ValidTgts$
 SVar:NeedsToPlayVar:Z GEY
 SVar:Z:Count$Valid Land.YouDontCtrl+inZoneBattlefield
 SVar:Y:Count$Valid Land.YouCtrl+inZoneBattlefield
-SVar:Picture:http://www.wizards.com/global/images/magic/general/oath_of_lieges.jpg
 Oracle:At the beginning of each player's upkeep, that player chooses target player who controls more lands than they do and is their opponent. The first player may search their library for a basic land card, put that card onto the battlefield, then shuffle.

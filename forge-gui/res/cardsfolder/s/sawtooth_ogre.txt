@@ -7,5 +7,4 @@ T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creatur
 SVar:DelTrigBlocked:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDamage | RememberObjects$ TriggeredAttacker | TriggerDescription$ CARDNAME deals 1 damage to blocked creature at end of combat.
 SVar:DelTrigBlocker:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDamage | RememberObjects$ TriggeredBlocker | TriggerDescription$ CARDNAME deals 1 damage to blocking creature at end of combat.
 SVar:TrigDamage:DB$ DealDamage | Defined$ DelayTriggerRemembered | NumDmg$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sawtooth_ogre.jpg
 Oracle:Whenever Sawtooth Ogre blocks or becomes blocked by a creature, Sawtooth Ogre deals 1 damage to that creature at end of combat.

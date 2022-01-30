@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Cleric
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 T:Mode$ LifeGained | TriggerZones$ Battlefield | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ EQ1 | NoResolvingCheck$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life for the first time each turn, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
-DeckHas:Ability$LifeGain & Ability$Counters
+DeckHas:Ability$LifeGain|Counters
 DeckHints:Type$Cleric
 SVar:X:Count$LifeYouGainedTimesThisTurn
 Oracle:Whenever another Cleric enters the battlefield under your control, you gain 1 life.\nWhenever you gain life for the first time each turn, put a +1/+1 counter on Cleric of Life's Bond.

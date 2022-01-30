@@ -6,6 +6,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
 A:AB$ Token | Cost$ 3 R Sac<1/Goblin> | TokenAmount$ 2 | TokenScript$ r_1_1_goblin | TokenOwner$ You | SpellDescription$ Create two 1/1 red Goblin creature tokens.
 SVar:AIPreference:SacCost$Goblin.token+powerLE1,Goblin.cmcLE1+powerLE1
-DeckHas:Ability$Token & Ability$Sacrifice
+DeckHas:Ability$Token|Sacrifice
 DeckHints:Type$Goblin
 Oracle:Whenever Pashalik Mons or another Goblin you control dies, Pashalik Mons deals 1 damage to any target.\n{3}{R}, Sacrifice a Goblin: Create two 1/1 red Goblin creature tokens.

@@ -7,5 +7,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigRetrieve | Trigg
 SVar:TrigRetrieve:DB$ ChangeZone | ChangeType$ Card.IsRemembered+YouOwn | ChangeNum$ 1 | Origin$ Exile | Destination$ Hand | Hidden$ True
 SVar:X:Count$TypeInYourLibrary.Plains
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/endless_horizons.jpg
 Oracle:When Endless Horizons enters the battlefield, search your library for any number of Plains cards, exile them, then shuffle.\nAt the beginning of your upkeep, you may put a card you own exiled with Endless Horizons into your hand.

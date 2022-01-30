@@ -6,5 +6,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenScript$ c_a_blood_draw
 T:Mode$ Sacrificed | ValidCard$ Blood.token+YouCtrl | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a Blood token, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
-DeckHas:Ability$Token & Ability$Sacrifice & Ability$LifeGain & Type$Blood
+DeckHas:Ability$Token|Sacrifice|LifeGain & Type$Blood
 Oracle:When Gluttonous Guest enters the battlefield, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")\nWhenever you sacrifice a Blood token, you gain 1 life.

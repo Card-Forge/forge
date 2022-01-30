@@ -3,5 +3,4 @@ ManaCost:W
 Types:Creature Fox Cleric
 PT:0/1
 A:AB$ Tap | Cost$ T | ValidTgts$ Spirit | TgtPrompt$ Select target Spirit | SpellDescription$ Tap target Spirit.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kitsune_diviner.jpg
 Oracle:{T}: Tap target Spirit.

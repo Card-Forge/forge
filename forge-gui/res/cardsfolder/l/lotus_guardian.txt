@@ -4,5 +4,4 @@ Types:Artifact Creature Dragon
 PT:4/4
 K:Flying
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
-SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card23233.jpg
 Oracle:Flying\n{T}: Add one mana of any color.

@@ -6,7 +6,6 @@ A:SP$ DestroyAll | Cost$ 2 W W | ValidCards$ Creature.powerGE3 | SpellDescriptio
 SVar:NeedsToPlayVar:Y GTZ
 SVar:Y:Count$Valid Creature.OppCtrl+powerGE3
 SVar:Z:Count$Valid Creature.YouCtrl+powerGE3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dusk_dawn.jpg
 Oracle:Destroy all creatures with power 3 or greater.
 
 ALTERNATE

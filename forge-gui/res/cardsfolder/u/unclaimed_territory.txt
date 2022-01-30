@@ -5,5 +5,4 @@ K:ETBReplacement:Other:ChooseCT
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type. | AILogic$ MostProminentInComputerDeck
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Creature.ChosenType | SpellDescription$ Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/unclaimed_territory.jpg
 Oracle:As Unclaimed Territory enters the battlefield, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type.

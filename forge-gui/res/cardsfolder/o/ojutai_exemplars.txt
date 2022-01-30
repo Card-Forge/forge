@@ -10,5 +10,4 @@ SVar:DBBlink:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | SubAbil
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Tapped$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:BuffedBy:Card.nonLand+nonCreature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ojutai_exemplars.jpg
 Oracle:Whenever you cast a noncreature spell, choose one —\n• Tap target creature.\n• Ojutai Exemplars gains first strike and lifelink until end of turn.\n• Exile Ojutai Exemplars, then return it to the battlefield tapped under its owner's control.

@@ -5,5 +5,4 @@ A:SP$ Animate | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creatur
 SVar:DBUntap:DB$ Untap | Defined$ Targeted | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cerulean_wisps.jpg
 Oracle:Target creature becomes blue until end of turn. Untap that creature.\nDraw a card.

@@ -4,5 +4,4 @@ Types:Creature Human
 PT:2/5
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Creature.unblocked | ValidTarget$ You | ReplaceWith$ DmgSelf | IsPresent$ Card.Self+untapped | DamageTarget$ Self | Description$ As long as CARDNAME is untapped, all damage that would be dealt to you by unblocked creatures is dealt to CARDNAME instead.
 SVar:DmgSelf:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Self | VarType$ Card
-SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_bodyguard.jpg
 Oracle:As long as Veteran Bodyguard is untapped, all damage that would be dealt to you by unblocked creatures is dealt to Veteran Bodyguard instead.

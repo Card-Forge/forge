@@ -8,5 +8,4 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/circle_of_protection_blue.jpg
 Oracle:{1}: The next time a blue source of your choice would deal damage to you this turn, prevent that damage.

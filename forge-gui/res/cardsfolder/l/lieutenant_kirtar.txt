@@ -5,5 +5,4 @@ PT:2/2
 K:Flying
 A:AB$ ChangeZone | Cost$ 1 W Sac<1/CARDNAME> | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking Creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target attacking creature.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lieutenant_kirtar.jpg
 Oracle:Flying\n{1}{W}, Sacrifice Lieutenant Kirtar: Exile target attacking creature.

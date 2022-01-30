@@ -3,9 +3,8 @@ ManaCost:2 B B
 Types:Creature Vampire
 PT:3/3
 K:Flying
-A:AB$Token | Cost$ T | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ b_2_2_vampire_flying | LegacyImage$ b 2 2 vampire flying isd | SpellDescription$ Create a 2/2 black Vampire creature token with flying.
-A:AB$SetState | Cost$ B | Defined$ Self | IsPresent$ Card.Vampire+YouCtrl | PresentCompare$ GE5 | Mode$ Transform | SpellDescription$ Transform CARDNAME.Activate only if you control five or more Vampires.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodline_keeper.jpg
+A:AB$ Token | Cost$ T | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ b_2_2_vampire_flying | LegacyImage$ b 2 2 vampire flying isd | SpellDescription$ Create a 2/2 black Vampire creature token with flying.
+A:AB$ SetState | Cost$ B | Defined$ Self | IsPresent$ Card.Vampire+YouCtrl | PresentCompare$ GE5 | Mode$ Transform | SpellDescription$ Transform CARDNAME.Activate only if you control five or more Vampires.
 AlternateMode:DoubleFaced
 Oracle:Flying\n{T}: Create a 2/2 black Vampire creature token with flying.\n{B}: Transform Bloodline Keeper. Activate only if you control five or more Vampires.
 
@@ -18,6 +17,5 @@ Types:Creature Vampire
 PT:5/5
 K:Flying
 S:Mode$ Continuous | Affected$ Creature.Vampire+Other+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Other Vampire creatures you control get +2/+2.
-A:AB$Token | Cost$ T | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ b_2_2_vampire_flying | LegacyImage$ b 2 2 vampire flying isd | SpellDescription$ Create a 2/2 black Vampire creature token with flying.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_lineage.jpg
+A:AB$ Token | Cost$ T | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ b_2_2_vampire_flying | LegacyImage$ b 2 2 vampire flying isd | SpellDescription$ Create a 2/2 black Vampire creature token with flying.
 Oracle:Flying\nOther Vampire creatures you control get +2/+2.\n{T}: Create a 2/2 black Vampire creature token with flying.

@@ -4,5 +4,4 @@ Types:Creature Zombie Wall
 PT:0/5
 K:Defender
 K:Cycling:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/moaning_wall.jpg
 Oracle:Defender\nCycling {2} ({2}, Discard this card: Draw a card.)

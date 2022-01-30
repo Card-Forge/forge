@@ -6,5 +6,4 @@ K:Unblockable
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a creature you control to its owner's hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouCtrl | AIlogic$ NeverBounceItself
 SVar:NeedsToPlay:Creature.YouCtrl+cmcLE4+inZoneBattlefield
-SVar:Picture:http://www.wizards.com/global/images/magic/general/keymaster_rogue.jpg
 Oracle:Keymaster Rogue can't be blocked.\nWhen Keymaster Rogue enters the battlefield, return a creature you control to its owner's hand.

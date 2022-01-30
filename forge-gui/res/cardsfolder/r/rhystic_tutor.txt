@@ -5,5 +5,4 @@ A:SP$ ChangeZone | Cost$ 2 B | Origin$ Library | Destination$ Hand | ChangeType$
 SVar:NeedsToPlayVar:Z LE1
 SVar:Z:Count$Valid Card.canProduceMana+OppCtrl+inZoneBattlefield+untapped
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rhystic_tutor.jpg
 Oracle:Unless any player pays {2}, search your library for a card, put that card into your hand, then shuffle.

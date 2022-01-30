@@ -6,5 +6,4 @@ SVar:DrawReplace:Event$ Draw | ValidPlayer$ You | ReplaceWith$ WildToken | Descr
 SVar:WildToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ g_2_2_bear | LegacyImage$ g 2 2 bear ons | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/words_of_wilding.jpg
 Oracle:{1}: The next time you would draw a card this turn, create a 2/2 green Bear creature token instead.

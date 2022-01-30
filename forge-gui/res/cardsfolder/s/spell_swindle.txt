@@ -6,5 +6,4 @@ SVar:DBTreasureTokens:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedNumber
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_swindle.jpg
 Oracle:Counter target spell. Create X Treasure tokens, where X is that spell's mana value. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")

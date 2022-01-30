@@ -7,5 +7,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
 SVar:PlayMain1:ALWAYS
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sneak_attack.jpg
 Oracle:{R}: You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice the creature at the beginning of the next end step.

@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_warrior_vigilance | TokenOwner$ You | LegacyImage$ w 1 1 warrior vigilance akh
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ First Strike | Description$ Enchanted creature gets +1/+1 and has first strike.
 DeckHints:Name$Trial of Solidarity
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cartouche_of_solidarity.jpg
 Oracle:Enchant creature you control\nWhen Cartouche of Solidarity enters the battlefield, create a 1/1 white Warrior creature token with vigilance.\nEnchanted creature gets +1/+1 and has first strike.

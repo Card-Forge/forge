@@ -5,5 +5,4 @@ PT:1/1
 S:Mode$ Continuous | Affected$ You | RaiseMaxHandSize$ -2 | Description$ Your maximum hand size is reduced by two.
 K:Flying
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_nibbler.jpg
 Oracle:Flying\nYour maximum hand size is reduced by two.

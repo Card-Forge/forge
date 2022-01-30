@@ -4,5 +4,4 @@ Types:Sorcery
 A:SP$ Vote | Cost$ 4 B B | Defined$ Player | StoreVoteNum$ True | VoteType$ Death,Taxes | SubAbility$ DBVoteDeath | AiLogic$ DeathOrTaxes | SpellDescription$ Council's dilemma — Starting with you, each player votes for death or taxes. Each opponent sacrifices a creature for each death vote and discards a card for each taxes vote.
 SVar:DBVoteDeath:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature | SacMessage$ Creature | Amount$ VoteNumDeath | SubAbility$ DBVoteTaxes
 SVar:DBVoteTaxes:DB$ Discard | Defined$ Player.Opponent | NumCards$ VoteNumTaxes | Mode$ TgtChoose
-SVar:Picture:http://www.wizards.com/global/images/magic/general/capital_punishment.jpg
 Oracle:Council's dilemma — Starting with you, each player votes for death or taxes. Each opponent sacrifices a creature for each death vote and discards a card for each taxes vote.

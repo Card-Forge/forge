@@ -9,5 +9,4 @@ SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destinati
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Count$CardPower
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grenzo_dungeon_warden.jpg
 Oracle:Grenzo, Dungeon Warden enters the battlefield with X +1/+1 counters on it.\n{2}: Put the bottom card of your library into your graveyard. If it's a creature card with power less than or equal to Grenzo's power, put it onto the battlefield.

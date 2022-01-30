@@ -8,5 +8,4 @@ SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Val
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Mandatory$ True | ChangeType$ Card.ChosenCtrl | Chooser$ ChosenPlayer | ChangeNum$ 1 | Origin$ Graveyard | Destination$ Hand | SubAbility$ Cleanup
 SVar:Cleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skullwinder.jpg
 Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhen Skullwinder enters the battlefield, return target card from your graveyard to your hand, then choose an opponent. That player returns a card from their graveyard to their hand.

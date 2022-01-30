@@ -3,5 +3,4 @@ ManaCost:6
 Types:Artifact
 A:AB$ Effect | Cost$ 4 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberObjects$ Targeted | Name$ Joven's Tools' Effect | StaticAbilities$ KWPump | SpellDescription$ Target creature can't be blocked this turn except by Walls.
 SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.IsRemembered | ValidBlocker$ Creature.nonWall | EffectZone$ Command | Description$ Remembered creature can't be blocked this turn except by Walls.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jovens_tools.jpg
 Oracle:{4}, {T}: Target creature can't be blocked this turn except by Walls.

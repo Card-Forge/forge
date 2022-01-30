@@ -5,5 +5,4 @@ PT:4/4
 K:Haste
 K:etbCounter:M1M1:2:CheckSVar$ OtherRedCast | SVarCompare$ EQ0:CARDNAME enters the battlefield with two -1/-1 counters on it unless you've cast another red spell this turn.
 SVar:OtherRedCast:Count$ThisTurnCast_Card.Red+Other+YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hotheaded_giant.jpg
 Oracle:Haste\nHotheaded Giant enters the battlefield with two -1/-1 counters on it unless you've cast another red spell this turn.

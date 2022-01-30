@@ -5,5 +5,4 @@ A:SP$ PutCounter | Cost$ 3 G G | ValidTgts$ Creature | TgtPrompt$ Select target 
 SVar:DBPutTwo:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select another target creature | TargetUnique$ True | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPutThree
 SVar:DBPutThree:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select a third target creature | TargetUnique$ True | CounterType$ P1P1 | CounterNum$ 3
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/incremental_growth.jpg
 Oracle:Put a +1/+1 counter on target creature, two +1/+1 counters on another target creature, and three +1/+1 counters on a third target creature.

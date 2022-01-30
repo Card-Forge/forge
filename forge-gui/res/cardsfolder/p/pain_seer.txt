@@ -7,5 +7,4 @@ SVar:SeerDig:DB$ Dig | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ 
 SVar:SeersCost:DB$ LoseLife | LifeAmount$ PainX | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PainX:Remembered$CardManaCost
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pain_seer.jpg
 Oracle:Inspired — Whenever Pain Seer becomes untapped, reveal the top card of your library and put that card into your hand. You lose life equal to that card's mana value.

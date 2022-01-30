@@ -7,5 +7,4 @@ SVar:TrigDraw:DB$ Draw | Defined$ TriggeredCardController | ValidTgts$ Player | 
 SVar:DBLoseLife:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ X
 SVar:X:TargetedPlayer$ValidGraveyard Creature.YouOwn
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/corpse_augur.jpg
 Oracle:When Corpse Augur dies, you draw X cards and you lose X life, where X is the number of creature cards in target player's graveyard.

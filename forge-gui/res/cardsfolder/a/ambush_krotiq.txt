@@ -6,5 +6,4 @@ K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return another creature you control to its owner's hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.Other+YouCtrl
 SVar:NeedsToPlay:Creature.YouCtrl+cmcLE5+inZoneBattlefield
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ambush_krotiq.jpg
 Oracle:Trample\nWhen Ambush Krotiq enters the battlefield, return another creature you control to its owner's hand.

@@ -2,5 +2,4 @@ Name:Iona's Judgment
 ManaCost:4 W
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 4 W | ValidTgts$ Creature,Enchantment | TgtPrompt$ Select target creature or enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature or enchantment.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ionas_judgment.jpg
 Oracle:Exile target creature or enchantment.

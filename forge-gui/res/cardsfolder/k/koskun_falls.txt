@@ -5,5 +5,4 @@ K:UpkeepCost:tapXType<1/Creature>
 S:Mode$ CantAttackUnless | ValidCard$ Creature | Target$ You | Cost$ 2 | Description$ Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you.
 SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$Valid Creature.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/koskun_falls.jpg
 Oracle:At the beginning of your upkeep, sacrifice Koskun Falls unless you tap an untapped creature you control.\nCreatures can't attack you unless their controller pays {2} for each creature they control that's attacking you.

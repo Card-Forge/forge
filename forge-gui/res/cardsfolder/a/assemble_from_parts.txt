@@ -6,5 +6,5 @@ SVar:Assembly:Mode$ Continuous | Affected$ Card.IsRemembered | AddAbility$ ABShu
 SVar:ABShuffle:AB$ ChangeZone | Cost$ 1 B B ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | Origin$ All | Destination$ Library | Shuffle$ True | Defined$ Self | SubAbility$ DBCopy | SorcerySpeed$ True | StackDescription$ Shuffle CARDNAME into your library. | SpellDescription$ Shuffle it into your library. Create a token that's a copy of it, except it's a 4/4 black Zombie in addition to its other types. Activate only as a sorcery.
 SVar:DBCopy:DB$ CopyPermanent | Defined$ Self | SetPower$ 4 | SetToughness$ 4 | AddTypes$ Zombie | SetColor$ Black | StackDescription$ Create a token that's a copy of it, except it's a 4/4 black Zombie in addition to its other types.
 SVar:AIPreference:ExileFromGraveCost$Creature.YouOwn+inZoneGraveyard
-DeckHas:Ability$Token & Ability$Graveyard
+DeckHas:Ability$Token|Graveyard
 Oracle:Target creature card in your graveyard perpetually gains "{1}{B}{B}, Exile this card from your graveyard: Shuffle it into your library. Create a token that's a copy of it, except it's a 4/4 black Zombie in addition to its other types. Activate only as a sorcery."

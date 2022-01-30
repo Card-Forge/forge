@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ Pump | Cost$ 3 W W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | IsCurse$ True | RememberTargets$ True | SubAbility$ DBChangeZoneAll | SpellDescription$ Exile target attacking creature and all Equipment attached to it.
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered,Equipment.AttachedTo Targeted | UseAllOriginZones$ True | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_nova.jpg
 Oracle:Exile target attacking creature and all Equipment attached to it.

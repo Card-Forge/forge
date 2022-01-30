@@ -4,5 +4,4 @@ Types:Creature Human Samurai
 PT:2/2
 K:Haste
 K:Bushido:1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ronin_houndmaster.jpg
 Oracle:Haste\nBushido 1 (Whenever this creature blocks or becomes blocked, it gets +1/+1 until end of turn.)

@@ -4,5 +4,4 @@ Types:Creature Sphinx
 PT:5/6
 K:Flying
 A:AB$ Draw | Cost$ Discard<2/Card.nonLand+WithSameName/nonland cards with the same name> | NumCards$ 4 | CostDesc$ Discard two nonland cards with the same name | SpellDescription$ Draw four cards.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinx_of_the_chimes.jpg
 Oracle:Flying\nDiscard two nonland cards with the same name: Draw four cards.

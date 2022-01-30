@@ -3,5 +3,4 @@ ManaCost:2 G
 Types:Creature Elf Archer
 PT:2/3
 A:AB$ DealDamage | Cost$ R W T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target attacking or blocking creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sacellum_archers.jpg
 Oracle:{R}{W}, {T}: Sacellum Archers deals 2 damage to target attacking or blocking creature.

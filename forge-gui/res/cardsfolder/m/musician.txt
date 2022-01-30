@@ -12,5 +12,4 @@ SVar:MusicX:Count$CardCounters.MUSIC
 SVar:NeedsToPlayVar:Z GE5
 SVar:Z:Count$Valid Land.YouCtrl+inZoneBattlefield
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/musician.jpg
 Oracle:Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\n{T}: Put a music counter on target creature. If it doesn't have "At the beginning of your upkeep, destroy this creature unless you pay {1} for each music counter on it," it gains that ability.

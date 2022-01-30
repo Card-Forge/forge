@@ -3,5 +3,4 @@ ManaCost:5 G W
 Types:Creature Elemental
 PT:8/8
 K:Vigilance
-SVar:Picture:http://www.wizards.com/global/images/magic/general/risen_sanctuary.jpg
 Oracle:Vigilance

@@ -5,5 +5,4 @@ A:SP$ ChangeZone | Cost$ W | Origin$ Graveyard | Destination$ Exile | TgtPrompt$
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ TargetedController | LegacyImage$ w 1 1 spirit flying jud | SpellDescription$ Its owner creates a 1/1 white Spirit creature token with flying.
 AI:RemoveDeck:All
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/funeral_pyre.jpg
 Oracle:Exile target card from a graveyard. Its owner creates a 1/1 white Spirit creature token with flying.

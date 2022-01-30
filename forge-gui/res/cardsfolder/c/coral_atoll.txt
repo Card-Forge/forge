@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigSacUnless:DB$ Sacrifice | Defined$ Self | UnlessCost$ Return<1/Island.untapped/untapped Island> | UnlessPayer$ You
 A:AB$ Mana | Cost$ T | Produced$ C U | SpellDescription$ Add {C}{U}.
 SVar:NeedsToPlay:Land.Island+YouCtrl+inZoneBattlefield+untapped
-SVar:Picture:http://www.wizards.com/global/images/magic/general/coral_atoll.jpg
 Oracle:Coral Atoll enters the battlefield tapped.\nWhen Coral Atoll enters the battlefield, sacrifice it unless you return an untapped Island you control to its owner's hand.\n{T}: Add {C}{U}.

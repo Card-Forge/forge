@@ -7,5 +7,4 @@ SVar:DBCounter:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brine_seer.jpg
 Oracle:{2}{U}, {T}: Reveal any number of blue cards in your hand. Counter target spell unless its controller pays {1} for each card revealed this way.

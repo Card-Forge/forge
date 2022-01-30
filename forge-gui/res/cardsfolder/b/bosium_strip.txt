@@ -7,5 +7,4 @@ SVar:REBosiumStrip:Event$ Moved | ValidLKI$ Card.CastSa Spell.MayPlaySource | Or
 SVar:MoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile
 SVar:NeedsOrderedGraveyard:TRUE
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bosium_strip.jpg
 Oracle:{3}, {T}: Until end of turn, you may cast instant and sorcery spells from the top of your graveyard. If a spell cast this way would be put into a graveyard this turn, exile it instead.

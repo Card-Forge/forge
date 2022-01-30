@@ -5,6 +5,5 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | 
 SVar:AcademicDraw:DB$ Draw | Defined$ You | NumCards$ 7
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, discard your hand.
 SVar:RolledChaos:DB$ Discard | Mode$ Hand | Defined$ You
-SVar:Picture:http://www.wizards.com/global/images/magic/general/academy_at_tolaria_west.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | CardsInHandLE$ 2
 Oracle:At the beginning of your end step, if you have no cards in hand, draw seven cards.\nWhenever you roll {CHAOS}, discard your hand.

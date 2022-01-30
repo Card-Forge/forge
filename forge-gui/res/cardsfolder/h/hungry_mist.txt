@@ -3,5 +3,4 @@ ManaCost:2 G G
 Types:Creature Elemental
 PT:6/2
 K:UpkeepCost:G G
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hungry_mist.jpg
 Oracle:At the beginning of your upkeep, sacrifice Hungry Mist unless you pay {G}{G}.

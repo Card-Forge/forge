@@ -8,5 +8,4 @@ K:Protection from white
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | AddPower$ 6 | AddToughness$ 6 | CheckSVar$ X | SVarCompare$ LE10 | CheckSecondSVar$ Y | SecondSVarCompare$ GE30 | Description$ As long as you have 30 or more life and an opponent has 10 or less life, CARDNAME gets +6/+6 and has flying.
 SVar:X:PlayerCountOpponents$LowestLifeTotal
 SVar:Y:Count$YourLifeTotal
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_baron_of_vizkopa.jpg
 Oracle:Lifelink, protection from white and from black\nAs long as you have 30 or more life and an opponent has 10 or less life, Blood Baron of Vizkopa gets +6/+6 and has flying.

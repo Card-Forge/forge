@@ -5,5 +5,4 @@ PT:1/1
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Double Strike | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has double strike as long as you control a Dinosaur.
 SVar:X:Count$Valid Creature.Dinosaur+YouCtrl
 DeckHints:Type$Dinosaur
-SVar:Picture:http://www.wizards.com/global/images/magic/general/imperial_lancer.jpg
 Oracle:Imperial Lancer has double strike as long as you control a Dinosaur.

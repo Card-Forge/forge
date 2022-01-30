@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 1 | AddToughness$ 1 
 SVar:TrigTap:Mode$ Attacks | ValidCard$ Card.Self | Execute$ HieroTap | TriggerDescription$ Whenever this creature attacks, tap target creature defending player controls.
 SVar:HieroTap:DB$ Tap | ValidTgts$ Creature.DefendingPlayerCtrl | TgtPrompt$ Select target creature defending player controls
 SVar:HasAttackEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grasp_of_the_hieromancer.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 and has "Whenever this creature attacks, tap target creature defending player controls."

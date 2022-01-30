@@ -9,5 +9,4 @@ SVar:Y:Count$CardCounters.CHARGE
 SVar:NeedsToPlayVar:Z GE4
 SVar:Z:Count$Valid Land.YouCtrl+inZoneBattlefield+untapped
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chimeric_mass.jpg
 Oracle:Chimeric Mass enters the battlefield with X charge counters on it.\n{1}: Until end of turn, Chimeric Mass becomes a Construct artifact creature with "This creature's power and toughness are each equal to the number of charge counters on it."

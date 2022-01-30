@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destina
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_soldier | TokenOwner$ You | LegacyImage$ w 1 1 soldier gtc
 SVar:X:TriggeredCard$CardPower
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/murder_investigation.jpg
 Oracle:Enchant creature you control\nWhen enchanted creature dies, create X 1/1 white Soldier creature tokens, where X is its power.

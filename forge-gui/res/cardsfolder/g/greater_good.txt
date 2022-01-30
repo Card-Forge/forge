@@ -6,5 +6,4 @@ SVar:DB:DB$ Discard | NumCards$ 3 | Mode$ TgtChoose
 SVar:X:Sacrificed$CardPower
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_good.jpg
 Oracle:Sacrifice a creature: Draw cards equal to the sacrificed creature's power, then discard three cards.

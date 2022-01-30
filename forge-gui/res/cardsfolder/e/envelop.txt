@@ -2,5 +2,4 @@ Name:Envelop
 ManaCost:U
 Types:Instant
 A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target Sorcery spell | ValidTgts$ Sorcery | SpellDescription$ Counter target sorcery spell.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/envelop.jpg
 Oracle:Counter target sorcery spell.

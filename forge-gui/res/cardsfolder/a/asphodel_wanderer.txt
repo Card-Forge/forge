@@ -3,5 +3,4 @@ ManaCost:B
 Types:Creature Skeleton Soldier
 PT:1/1
 A:AB$ Regenerate | Cost$ 2 B | SpellDescription$ Regenerate CARDNAME.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/asphodel_wanderer.jpg
 Oracle:{2}{B}: Regenerate Asphodel Wanderer.

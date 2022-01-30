@@ -3,5 +3,4 @@ ManaCost:R
 Types:Creature Goblin
 PT:1/1
 A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_fanatic.jpg
 Oracle:Sacrifice Mogg Fanatic: It deals 1 damage to any target.

@@ -3,5 +3,4 @@ ManaCost:3 G
 Types:Creature Insect
 PT:2/4
 K:Reach
-SVar:Picture:http://resources.wizards.com/magic/cards/mi/en-us/card3387.jpg
 Oracle:Reach (This creature can block creatures with flying.)

@@ -5,5 +5,4 @@ PT:5/5
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, each opponent may put a legendary creature card from their hand onto the battlefield.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Legendary | DefinedPlayer$ Player.Opponent | ChangeNum$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/iwamori_of_the_open_fist.jpg
 Oracle:Trample\nWhen Iwamori of the Open Fist enters the battlefield, each opponent may put a legendary creature card from their hand onto the battlefield.

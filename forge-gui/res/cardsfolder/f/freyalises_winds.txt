@@ -6,5 +6,4 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterType
 R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Permanent.counters_GE1_WIND | ReplaceWith$ RepRemoveCounter | UntapStep$ True | Description$ If a permanent with a wind counter on it would untap during its controller's untap step, remove all wind counters from it instead.
 SVar:RepRemoveCounter:DB$ RemoveCounter | Defined$ ReplacedCard | CounterType$ WIND | CounterNum$ All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/freyalises_winds.jpg
 Oracle:Whenever a permanent becomes tapped, put a wind counter on it.\nIf a permanent with a wind counter on it would untap during its controller's untap step, remove all wind counters from it instead.

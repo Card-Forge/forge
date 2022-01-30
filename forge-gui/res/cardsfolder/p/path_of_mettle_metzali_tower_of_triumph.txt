@@ -7,7 +7,6 @@ T:Mode$ AttackersDeclared | Execute$ TrigTransform | CheckSVar$ X | SVarCompare$
 SVar:X:Count$Valid Creature.attacking+YouCtrl+withFirst Strike,Creature.attacking+YouCtrl+withDouble Strike,Creature.attacking+YouCtrl+withVigilance,Creature.attacking+YouCtrl+withHaste
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
-SVar:Picture:http://www.wizards.com/global/images/magic/general/path_of_mettle.jpg
 Oracle:When Path of Mettle enters the battlefield, it deals 1 damage to each creature that doesn't have first strike, double strike, vigilance, or haste.\nWhenever you attack with at least two creatures that have first strike, double strike, vigilance, and/or haste, transform Path of Mettle.
 
 ALTERNATE
@@ -19,5 +18,4 @@ A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one man
 A:AB$ DamageAll | Cost$ 1 R T | ValidPlayers$ Opponent | ValidDescription$ each opponent. | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to each opponent.
 A:AB$ ChooseCard | Cost$ 2 W T | AtRandom$ True | Choices$ Creature.attackedThisTurn | SubAbility$ DBDestroy | SpellDescription$ Choose a creature at random that attacked this turn. Destroy that creature.
 SVar:DBDestroy:DB$ Destroy | Defined$ ChosenCard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/metzali_tower_of_triumph.jpg
 Oracle:(Transforms from Path of Mettle.)\n{T}: Add one mana of any color.\n{1}{R}, {T}: Metzali, Tower of Triumph deals 2 damage to each opponent.\n{2}{W}, {T}: Choose a creature at random that attacked this turn. Destroy that creature.

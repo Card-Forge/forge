@@ -7,5 +7,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each opponent's upkeep, that player sacrifices a creature.
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Creature | Defined$ TriggeredPlayer
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sheoldred_whispering_one.jpg
 Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)\nAt the beginning of your upkeep, return target creature card from your graveyard to the battlefield.\nAt the beginning of each opponent's upkeep, that player sacrifices a creature.

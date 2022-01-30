@@ -3,5 +3,4 @@ ManaCost:4 W
 Types:Creature Giant
 PT:1/5
 K:Lifelink
-SVar:Picture:http://www.wizards.com/global/images/magic/general/caravan_hurda.jpg
 Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)

@@ -5,5 +5,4 @@ PT:4/3
 A:AB$ ChangeZone | Cost$ 1 G | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Creature.YouCtrl+Other | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBPump | SpellDescription$ You may return another creature you control to its owner's hand. If you do, CARDNAME gains indestructible until end of turn. | StackDescription$ SpellDescription
 SVar:DBPump:DB$ Pump | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ1 | Defined$ Self | KW$ Indestructible | SubAbility$ Cleanup | StackDescription$ None
 SVar:Cleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/temur_sabertooth.jpg
 Oracle:{1}{G}: You may return another creature you control to its owner's hand. If you do, Temur Sabertooth gains indestructible until end of turn.

@@ -6,5 +6,4 @@ SVar:TrigToken:DB$ Token | LegacyImage$ u 1 1 merfolk hexproof xln | TokenAmount
 DeckHas:Ability$Token
 AI:RemoveDeck:Random
 DeckNeeds:Type$Merfolk
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deeproot_waters.jpg
 Oracle:Whenever you cast a Merfolk spell, create a 1/1 blue Merfolk creature token with hexproof. (A creature with hexproof can't be the target of spells or abilities your opponents control.)

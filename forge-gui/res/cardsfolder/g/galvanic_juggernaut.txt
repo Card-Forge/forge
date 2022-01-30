@@ -6,5 +6,4 @@ K:CARDNAME attacks each combat if able.
 K:CARDNAME doesn't untap during your untap step.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever another creature dies, untap CARDNAME
 SVar:TrigUntap:DB$ Untap | Defined$ Self
-SVar:Picture:http://www.wizards.com/global/images/magic/general/galvanic_juggernaut.jpg
 Oracle:Galvanic Juggernaut attacks each combat if able.\nGalvanic Juggernaut doesn't untap during your untap step.\nWhenever another creature dies, untap Galvanic Juggernaut.

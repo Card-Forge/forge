@@ -6,5 +6,4 @@ SVar:DBAnimate:DB$ Animate | Defined$ ParentTarget | Triggers$ HunterProwessTrig
 SVar:HunterProwessTrig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ HunterProwessX | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, draw that many cards.
 SVar:HunterProwessX:DB$ Draw | Defined$ You | NumCards$ HunterProwessY
 SVar:HunterProwessY:TriggerCount$DamageAmount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hunters_prowess.txt
 Oracle:Until end of turn, target creature gets +3/+3 and gains trample and "Whenever this creature deals combat damage to a player, draw that many cards."

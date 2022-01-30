@@ -7,5 +7,4 @@ SVar:TrigRipple:DB$ Dig | NoMove$ True | DigNum$ 4 | Reveal$ True | RememberReve
 SVar:DBThrummingRipple:DB$ Play | Valid$ Card.IsRemembered+sharesNameWith Imprinted | ValidZone$ Library | WithoutManaCost$ True | Optional$ True | Amount$ All | SubAbility$ ThrummingMoveToBottom
 SVar:ThrummingMoveToBottom:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | SubAbility$ ThrummingCleanup
 SVar:ThrummingCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thrumming_stone.jpg
 Oracle:Spells you cast have ripple 4. (Whenever you cast a spell, you may reveal the top four cards of your library. You may cast spells with the same name as that spell from among the revealed cards without paying their mana costs. Put the rest on the bottom of your library.)

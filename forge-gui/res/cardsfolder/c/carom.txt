@@ -9,5 +9,4 @@ SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Def
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/carom.jpg
 Oracle:The next 1 damage that would be dealt to target creature this turn is dealt to another target creature instead.\nDraw a card.

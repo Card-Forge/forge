@@ -6,5 +6,4 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a permanent you control to its owner's hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Permanent.YouCtrl | AIlogic$ NeverBounceItself
 SVar:NeedsToPlay:Creature.YouCtrl+cmcLE2+inZoneBattlefield,Permanent.nonLand+YouCtrl+cmcLE1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_skyfisher.jpg
 Oracle:Flying\nWhen Kor Skyfisher enters the battlefield, return a permanent you control to its owner's hand.

@@ -4,5 +4,4 @@ Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | RestrictValid$ Myr,Activated.Myr | SpellDescription$ Add {C}{C}. Spend this mana only to cast Myr spells or activate abilities of Myr.
 A:AB$ ChangeZone | Cost$ 3 T | TgtPrompt$ Choose target Myr card in your graveyard | ValidTgts$ Card.Myr+YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target Myr card from your graveyard to your hand.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_reservoir.jpg
 Oracle:{T}: Add {C}{C}. Spend this mana only to cast Myr spells or activate abilities of Myr.\n{3}, {T}: Return target Myr card from your graveyard to your hand.

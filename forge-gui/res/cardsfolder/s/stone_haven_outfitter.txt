@@ -6,5 +6,4 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl+equipped | AddPower$ 1 | AddToug
 T:Mode$ ChangesZone | ValidCard$ Creature.YouCtrl+equipped | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever an equipped creature you control dies, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_haven_outfitter.jpg
 Oracle:Equipped creatures you control get +1/+1.\nWhenever an equipped creature you control dies, draw a card.

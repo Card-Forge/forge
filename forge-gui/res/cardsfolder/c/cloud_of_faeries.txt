@@ -7,5 +7,4 @@ K:Cycling:2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, untap up to two lands.
 SVar:TrigUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land | Amount$ 2
 SVar:FreeSpellAI:True
-SVar:Picture:http://resources.wizards.com/magic/cards/gu/en-us/card11588.jpg
 Oracle:Flying\nWhen Cloud of Faeries enters the battlefield, untap up to two lands.\nCycling {2} ({2}, Discard this card: Draw a card.)

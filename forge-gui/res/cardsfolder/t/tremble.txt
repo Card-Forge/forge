@@ -3,5 +3,4 @@ ManaCost:1 R
 Types:Sorcery
 A:SP$ Sacrifice | Cost$ 1 R | SacValid$ Land | Defined$ Player | SpellDescription$ Each player sacrifices a land.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tremble.jpg
 Oracle:Each player sacrifices a land.

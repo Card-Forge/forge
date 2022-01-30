@@ -7,5 +7,4 @@ SVar:CountPowerAtCast:DB$ StoreSVar | SVar$ OrigPower | Type$ Count | Expression
 SVar:OrigPower:Count$GreatestPower_Creature.YouCtrl
 SVar:Min:SVar$OrigPower/LimitMax.1
 SVar:X:Count$GreatestPower_Creature.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/monstrous_onslaught.jpg
 Oracle:Monstrous Onslaught deals X damage divided as you choose among any number of target creatures, where X is the greatest power among creatures you control as you cast this spell.

@@ -6,5 +6,4 @@ R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ G
 SVar:Exile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ ReplacedCard
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target instant, sorcery, or creature card from your graveyard to your hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl,Creature.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/possessed_skaab.jpg
 Oracle:When Possessed Skaab enters the battlefield, return target instant, sorcery, or creature card from your graveyard to your hand.\nIf Possessed Skaab would die, exile it instead.

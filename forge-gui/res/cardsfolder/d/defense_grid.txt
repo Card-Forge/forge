@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact
 S:Mode$ RaiseCost | Activator$ Player | Type$ Spell | Amount$ 3 | NonActivatorTurn$ True | Description$ Each spell costs {3} more to cast except during its controller's turn.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/defense_grid.jpg
 Oracle:Each spell costs {3} more to cast except during its controller's turn.

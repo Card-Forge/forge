@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature other than CARDNAME | TargetMin$ 0 | TargetMax$ 2 | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters
 DeckHints:Name$Soulblade Renewer
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soulblade_renewer.jpg
 Oracle:Partner with Soulblade Corrupter (When this creature enters the battlefield, target player may put Soulblade Corrupter into their hand from their library, then shuffle.)\nWhen Soulblade Renewer enters the battlefield, support 2. (Put a +1/+1 counter on each of up to two other target creatures.)

@@ -6,5 +6,5 @@ A:SP$ Tap | Cost$ 3 U | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target c
 SVar:TrigPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | SubAbility$ DBToken | SpellDescription$ Those creatures don't untap during their controller's next untap step.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You | LegacyImage$ c 1 1 eldrazi scion sac bfz | SpellDescription$ Create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
 DeckHints:Type$Eldrazi
-DeckHas:Ability$Mana.Colorless & Ability$Token
+DeckHas:Ability$Mana.Colorless|Token
 Oracle:Devoid (This card has no color.)\nTap up to two target creatures. Those creatures don't untap during their controller's next untap step. Create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."

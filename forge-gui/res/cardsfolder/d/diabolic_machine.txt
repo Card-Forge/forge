@@ -3,5 +3,4 @@ ManaCost:7
 Types:Artifact Creature Construct
 PT:4/4
 A:AB$ Regenerate | Cost$ 3 | SpellDescription$ Regenerate CARDNAME.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/diabolic_machine.jpg
 Oracle:{3}: Regenerate Diabolic Machine.

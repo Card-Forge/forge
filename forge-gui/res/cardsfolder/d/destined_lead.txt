@@ -3,7 +3,6 @@ ManaCost:1 B
 AlternateMode: Split
 Types:Instant
 A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | KW$ Indestructible | SpellDescription$ Target creature gets +1/+0 and gains indestructible until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/destined_lead.jpg
 Oracle:Target creature gets +1/+0 and gains indestructible until end of turn.
 
 ALTERNATE

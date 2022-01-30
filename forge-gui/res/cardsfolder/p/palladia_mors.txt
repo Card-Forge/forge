@@ -5,5 +5,4 @@ PT:7/7
 K:Flying
 K:Trample
 K:UpkeepCost:R G W
-SVar:Picture:http://www.wizards.com/global/images/magic/general/palladia_mors.jpg
 Oracle:Flying, trample\nAt the beginning of your upkeep, sacrifice Palladia-Mors unless you pay {R}{G}{W}.

@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Haste | AddAbility$ Damage | Description$ Enchanted creature has haste and "{T}: This creature deals 1 damage to any target."
 SVar:Damage:AB$DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_prowess.jpg
 Oracle:Enchant creature\nEnchanted creature has haste and "{T}: This creature deals 1 damage to any target."

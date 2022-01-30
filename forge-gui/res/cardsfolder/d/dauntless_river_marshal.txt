@@ -6,5 +6,4 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | Check
 SVar:X:Count$Valid Island.YouCtrl
 SVar:BuffedBy:Island
 A:AB$ Tap | Cost$ 3 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dauntless_river_marshal.jpg
 Oracle:Dauntless River Marshal gets +1/+1 as long as you control an Island.\n{3}{U}: Tap target creature.

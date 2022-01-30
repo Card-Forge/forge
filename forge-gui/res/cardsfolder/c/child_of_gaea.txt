@@ -5,5 +5,4 @@ PT:7/7
 K:Trample
 K:UpkeepCost:G G
 A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_gaea.jpg
 Oracle:Trample\nAt the beginning of your upkeep, sacrifice Child of Gaea unless you pay {G}{G}.\n{1}{G}: Regenerate Child of Gaea.

@@ -7,5 +7,5 @@ SVar:TrigPut:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_goblin | TokenOwner$ You | LegacyImage$ r 1 1 goblin war | TokenAmount$ X
 SVar:X:Count$CardPower
 SVar:HasAttackEffect:TRUE
-DeckHas:Ability$Token & Ability$Counters
+DeckHas:Ability$Token|Counters
 Oracle:Whenever Krenko, Tin Street Kingpin attacks, put a +1/+1 counter on it, then create a number of 1/1 red Goblin creature tokens equal to Krenko's power.

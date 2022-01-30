@@ -3,5 +3,4 @@ ManaCost:W U
 Types:Artifact Creature Human Knight
 PT:1/3
 K:Exalted
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ethercaste_knight.jpg
 Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)

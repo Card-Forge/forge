@@ -2,5 +2,4 @@ Name:Extinguish All Hope
 ManaCost:4 B B
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 4 B B | ValidCards$ Creature.nonEnchantment | SpellDescription$ Destroy all nonenchantment creatures.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/extinguish_all_hope.jpg
 Oracle:Destroy all nonenchantment creatures.

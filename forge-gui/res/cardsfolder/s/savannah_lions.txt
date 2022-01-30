@@ -2,5 +2,4 @@ Name:Savannah Lions
 ManaCost:W
 Types:Creature Cat
 PT:2/1
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83246.jpg
 Oracle:

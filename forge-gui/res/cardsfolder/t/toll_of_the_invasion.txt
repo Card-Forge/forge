@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Sorcery
 A:SP$ Discard | Cost$ 2 B | ValidTgts$ Opponent | NumCards$ 1 | DiscardValid$ Card.nonLand | Mode$ RevealYouChoose | SubAbility$ DBAmass | SpellDescription$ Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.
 SVar:DBAmass:DB$ Amass | Num$ 1 | SpellDescription$ Amass 1. (Put a +1/+1 counter on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
-DeckHas:Ability$Amass & Ability$Counters & Ability$Token
+DeckHas:Ability$Amass|Counters|Token
 DeckHints:Ability$Amass & Type$Zombie
 Oracle:Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.\nAmass 1. (Put a +1/+1 counter on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)

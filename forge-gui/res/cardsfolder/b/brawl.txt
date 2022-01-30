@@ -5,5 +5,4 @@ A:SP$ AnimateAll | Cost$ 3 R R | ValidCards$ Creature | Abilities$ ThrowPunch | 
 SVar:ThrowPunch:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ BrawlX | SpellDescription$ This creature deals damage equal to its power to target creature.
 SVar:BrawlX:Count$CardPower
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brawl.jpg
 Oracle:Until end of turn, all creatures gain "{T}: This creature deals damage equal to its power to target creature."

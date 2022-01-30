@@ -2,5 +2,4 @@ Name:Felhide Minotaur
 ManaCost:2 B
 Types:Creature Minotaur
 PT:2/3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/felhide_minotaur.jpg
 Oracle:

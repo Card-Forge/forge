@@ -3,5 +3,4 @@ ManaCost:2 R
 Types:Creature Goat Beast
 PT:2/2
 K:Haste
-SVar:Picture:http://resources.wizards.com/magic/cards/cg/en-us/card15198.jpg
 Oracle:Haste

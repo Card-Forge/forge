@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | RememberAttached$ True | SubAbility$ ChompEquip | SpellDescription$ Destroy target creature with flying and all Equipment attached to that creature.
 SVar:ChompEquip:DB$ DestroyAll | ValidCards$ Remembered.Equipment | SpellDescription$ Destroy all Equipment attached to that creature. | SubAbility$ Cleanup
 SVar:Cleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eaten_by_spiders.jpg
 Oracle:Destroy target creature with flying and all Equipment attached to that creature.

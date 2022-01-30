@@ -2,5 +2,4 @@ Name:Disperse
 ManaCost:1 U
 Types:Instant
 A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent to its owner's hand.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/disperse.jpg
 Oracle:Return target nonland permanent to its owner's hand.

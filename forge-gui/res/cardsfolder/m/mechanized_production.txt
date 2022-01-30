@@ -7,5 +7,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigCopyPermanent:DB$ CopyPermanent | Defined$ Enchanted | NumCopies$ 1 | SubAbility$ DBWin
 SVar:DBWin:DB$ WinsGame | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE8
 SVar:X:Count$MostCardName Artifact.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mechanized_production.jpg
 Oracle:Enchant artifact you control\nAt the beginning of your upkeep, create a token that's a copy of enchanted artifact. Then if you control eight or more artifacts with the same name as one another, you win the game.

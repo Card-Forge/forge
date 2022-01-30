@@ -5,5 +5,4 @@ PT:6/6
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDmg | TriggerDescription$ Whenever CARDNAME attacks, it deals 1 damage to any target.
 SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to damage | NumDmg$ 1
 K:Crew:3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ballista_charger.jpg
 Oracle:Whenever Ballista Charger attacks, it deals 1 damage to any target.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)

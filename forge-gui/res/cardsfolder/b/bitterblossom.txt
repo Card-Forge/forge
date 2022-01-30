@@ -5,5 +5,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_faerie_rogue_flying | TokenOwner$ You | LegacyImage$ b 1 1 faerie rogue flying mor | SubAbility$ DB
 SVar:DB:DB$ LoseLife | LifeAmount$ 1
 SVar:AICastPreference:NeverCastIfLifeBelow$ 4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bitterblossom.jpg
 Oracle:At the beginning of your upkeep, you lose 1 life and create a 1/1 black Faerie Rogue creature token with flying.

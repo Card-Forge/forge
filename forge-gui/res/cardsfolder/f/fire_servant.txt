@@ -5,5 +5,4 @@ PT:4/3
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Instant.YouCtrl,Sorcery.YouCtrl | ReplaceWith$ DmgTwice | Description$ If a red instant or sorcery spell you control would deal damage, it deals double that damage instead.
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
 SVar:X:ReplaceCount$DamageAmount/Twice
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_servant.jpg
 Oracle:If a red instant or sorcery spell you control would deal damage, it deals double that damage instead.

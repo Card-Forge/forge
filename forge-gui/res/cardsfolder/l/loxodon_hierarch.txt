@@ -4,6 +4,5 @@ Types:Creature Elephant Cleric
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 4 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 4
-A:AB$RegenerateAll | Cost$ G W Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | SpellDescription$ Regenerate each creature you control.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_hierarch.jpg
+A:AB$ RegenerateAll | Cost$ G W Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | SpellDescription$ Regenerate each creature you control.
 Oracle:When Loxodon Hierarch enters the battlefield, you gain 4 life.\n{G}{W}, Sacrifice Loxodon Hierarch: Regenerate each creature you control.

@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigFlip:DB$ FlipACoin | FlipUntilYouLose$ True | SaveNumFlipsToSVar$ X | LoseSubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
 SVar:X:Number$0
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crazed_firecat.jpg
 Oracle:When Crazed Firecat enters the battlefield, flip a coin until you lose a flip. Put a +1/+1 counter on Crazed Firecat for each flip you won.

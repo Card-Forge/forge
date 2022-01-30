@@ -8,5 +8,4 @@ A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True
 SVar:BOTTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.Opponent | TriggerZones$ Command | Execute$ SorinSac | TriggerDescription$ At the beginning of each opponent's upkeep, that player sacrifices a creature.
 SVar:SorinSac:DB$ Sacrifice | SacValid$ Creature | Defined$ TriggeredPlayer
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sorin_solemn_visitor.jpg
-Oracle:[+1]: Until your next turn, creatures you control get +1/+0 and gain lifelink.\n[−2]: Create a 2/2 black Vampire creature token with flying.\n[−6]: You get an emblem with "At the beginning of each opponent's upkeep, that player sacrifices a creature."
+Oracle:[+1]: Until your next turn, creatures you control get +1/+0 and gain lifelink.\n[-2]: Create a 2/2 black Vampire creature token with flying.\n[-6]: You get an emblem with "At the beginning of each opponent's upkeep, that player sacrifices a creature."

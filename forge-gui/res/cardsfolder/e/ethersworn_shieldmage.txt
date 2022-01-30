@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigEffect:DB$ Effect | Name$ Ethersworn Shieldmage Effect | ReplacementEffects$ PreventArtifact | SpellDescription$ Prevent all damage that would be dealt to artifact creatures this turn.
 SVar:PreventArtifact:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ Creature.Artifact | Description$ Prevent all damage that would be dealt to artifact creatures this turn.
 SVar:AmbushAI:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ethersworn_shieldmage.jpg
 Oracle:Flash\nWhen Ethersworn Shieldmage enters the battlefield, prevent all damage that would be dealt to artifact creatures this turn.

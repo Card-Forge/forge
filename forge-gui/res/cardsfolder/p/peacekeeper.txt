@@ -5,5 +5,4 @@ PT:1/1
 K:UpkeepCost:1 W
 S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Creatures can't attack.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/peacekeeper.jpg
 Oracle:At the beginning of your upkeep, sacrifice Peacekeeper unless you pay {1}{W}.\nCreatures can't attack.

@@ -6,5 +6,4 @@ SVar:DBUntapAll:DB$ UntapAll | ConditionManaSpent$ W | ValidCards$ Creature.YouC
 SVar:X:Count$Valid Creature
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dryads_caress.jpg
 Oracle:You gain 1 life for each creature on the battlefield. If {W} was spent to cast this spell, untap all creatures you control.

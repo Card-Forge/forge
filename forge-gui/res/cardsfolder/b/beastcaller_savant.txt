@@ -4,5 +4,4 @@ Types:Creature Elf Shaman Ally
 PT:1/1
 K:Haste
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | RestrictValid$ Card.Creature | SpellDescription$ Add one mana of any color. Spend this mana only to cast a creature spell.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/beastcaller_expert.jpg
 Oracle:Haste\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell.

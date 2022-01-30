@@ -5,5 +5,4 @@ A:SP$ ChooseType | Cost$ W | Defined$ You | Type$ Creature | SubAbility$ DBDealD
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ X
 SVar:X:Count$Valid Permanent.ChosenType+YouCtrl
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/coordinated_barrage.jpg
 Oracle:Choose a creature type. Coordinated Barrage deals damage to target attacking or blocking creature equal to the number of permanents you control of the chosen type.

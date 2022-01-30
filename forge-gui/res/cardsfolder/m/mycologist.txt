@@ -6,6 +6,5 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ SPORE | CounterNum$ 1 | SpellDescription$ Put a spore counter on CARDNAME.
 A:AB$ Token | Cost$ SubCounter<3/SPORE> | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling plc | SpellDescription$ Create a 1/1 green Saproling creature token.
 A:AB$ GainLife | Cost$ Sac<1/Saproling> | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
-DeckHas:Ability$Counters & Ability$Token & Ability$LifeGain
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mycologist.jpg
+DeckHas:Ability$Counters|Token|LifeGain
 Oracle:At the beginning of your upkeep, put a spore counter on Mycologist.\nRemove three spore counters from Mycologist: Create a 1/1 green Saproling creature token.\nSacrifice a Saproling: You gain 2 life.

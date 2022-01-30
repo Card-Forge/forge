@@ -3,5 +3,4 @@ ManaCost:2 W W
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 2 W W | ValidCards$ Creature.Black | SpellDescription$ Destroy all black creatures.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cleanse.jpg
 Oracle:Destroy all black creatures.

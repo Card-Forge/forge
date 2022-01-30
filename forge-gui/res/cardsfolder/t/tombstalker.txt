@@ -4,5 +4,4 @@ Types:Creature Demon
 PT:5/5
 K:Flying
 K:Delve
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tombstalker.jpg
 Oracle:Flying\nDelve (Each card you exile from your graveyard while casting this spell pays for {1}.)

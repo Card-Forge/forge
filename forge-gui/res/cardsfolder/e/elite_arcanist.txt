@@ -12,5 +12,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | Va
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 #Amount$ All | CopyOnce$ True for Strionic Resonator
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elite_arcanist.jpg
 Oracle:When Elite Arcanist enters the battlefield, you may exile an instant card from your hand.\n{X}, {T}: Copy the exiled card. You may cast the copy without paying its mana cost. X is the mana value of the exiled card.

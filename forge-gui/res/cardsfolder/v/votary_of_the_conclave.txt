@@ -3,5 +3,4 @@ ManaCost:W
 Types:Creature Human Soldier
 PT:1/1
 A:AB$ Regenerate | Cost$ 2 G | SpellDescription$ Regenerate CARDNAME.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/votary_of_the_conclave.jpg
 Oracle:{2}{G}: Regenerate Votary of the Conclave.

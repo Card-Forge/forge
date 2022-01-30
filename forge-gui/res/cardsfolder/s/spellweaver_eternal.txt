@@ -4,5 +4,4 @@ Types:Creature Zombie Naga Wizard
 PT:2/1
 K:Prowess
 K:Afflict:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spellweaver_eternal.jpg
 Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nAfflict 2 (Whenever this creature becomes blocked, defending player loses 2 life.)

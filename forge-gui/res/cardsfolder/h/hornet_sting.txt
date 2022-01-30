@@ -2,5 +2,4 @@ Name:Hornet Sting
 ManaCost:G
 Types:Instant
 A:SP$ DealDamage | Cost$ G | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ Hornet Sting deals 1 damage to any target.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hornet_sting.jpg
 Oracle:Hornet Sting deals 1 damage to any target.

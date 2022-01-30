@@ -3,5 +3,4 @@ ManaCost:3 G
 Types:Creature Elf Shaman
 PT:1/1
 A:AB$ ChangeZone | Cost$ G T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ You may put a creature card from your hand onto the battlefield.
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83072.jpg
 Oracle:{G}, {T}: You may put a creature card from your hand onto the battlefield.

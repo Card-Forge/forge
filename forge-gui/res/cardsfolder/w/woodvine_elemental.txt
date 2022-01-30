@@ -9,5 +9,4 @@ SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.attacking+YouCtrl | NumAtt$ +X | 
 SVar:DBDraw:DB$ Draw | Defined$ Player | NumCards$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Card.nonLand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/woodvine_elemental.jpg
 Oracle:Trample\nParley — Whenever Woodvine Elemental attacks, each player reveals the top card of their library. For each nonland card revealed this way, attacking creatures you control get +1/+1 until end of turn. Then each player draws a card.

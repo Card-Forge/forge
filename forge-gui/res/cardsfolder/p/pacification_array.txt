@@ -2,5 +2,4 @@ Name:Pacification Array
 ManaCost:1
 Types:Artifact
 A:AB$ Tap | Cost$ 2 T | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact, creature, or land. | SpellDescription$ Tap target artifact or creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pacification_array.jpg
 Oracle:{2}, {T}: Tap target artifact or creature.

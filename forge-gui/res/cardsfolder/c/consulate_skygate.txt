@@ -4,5 +4,4 @@ Types:Artifact Creature Wall
 PT:0/4
 K:Defender
 K:Reach
-SVar:Picture:http://www.wizards.com/global/images/magic/general/consulate_skygate.jpg
 Oracle:Defender\nReach (This creature can block creatures with flying.)

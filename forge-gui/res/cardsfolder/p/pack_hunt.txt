@@ -5,5 +5,4 @@ A:SP$ Pump | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Targeted.sameName | ChangeNum$ 3 | StackDescription$ Search your library for up to three cards with the same name as target creature, reveal them, put them into your hand, then shuffle.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pack_hunt.jpg
 Oracle:Search your library for up to three cards with the same name as target creature, reveal them, put them into your hand, then shuffle.

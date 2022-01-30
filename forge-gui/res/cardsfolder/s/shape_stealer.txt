@@ -10,5 +10,4 @@ SVar:W:TriggeredAttacker$CardPower
 SVar:X:TriggeredAttacker$CardToughness
 SVar:Y:TriggeredBlocker$CardPower
 SVar:Z:TriggeredBlocker$CardToughness
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shape_stealer.jpg
 Oracle:Whenever Shape Stealer blocks or becomes blocked by a creature, change Shape Stealer's base power and toughness to that creature's power and toughness until end of turn.

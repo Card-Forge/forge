@@ -5,6 +5,5 @@ T:Mode$ SpellCast | OptionalDecider$ TriggeredPlayer | TriggerZones$ Command | E
 SVar:LifeSummer:DB$ GainLife | Defined$ TriggeredPlayer | LifeAmount$ 2
 T:Mode$ PlanarDice | Result$ Chaos | OptionalDecider$ You | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, you may gain 10 life.
 SVar:RolledChaos:DB$ GainLife | LifeAmount$ 10 | Defined$ You
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fields_of_summer.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | MaxRollsPerTurn$ 9
 Oracle:Whenever a player casts a spell, that player may gain 2 life.\nWhenever you roll {CHAOS}, you may gain 10 life.

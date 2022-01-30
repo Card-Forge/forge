@@ -7,5 +7,4 @@ T:Mode$ SpellCast | ValidCard$ Merfolk | ValidActivatingPlayer$ You | Execute$ T
 SVar:TrigTapOrUntap:DB$ TapOrUntap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Merfolk
-SVar:Picture:http://www.wizards.com/global/images/magic/general/merrow_reejerey.jpg
 Oracle:Other Merfolk creatures you control get +1/+1.\nWhenever you cast a Merfolk spell, you may tap or untap target permanent.

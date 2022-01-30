@@ -5,5 +5,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ CantTarget | ValidCard$ Creature.EnchantedBy | ValidSA$ Spell | Description$ Enchanted creature can't be the target of spells.
 S:Mode$ CantAttach | ValidCard$ Aura.Other | Target$ Creature.EnchantedBy | Description$ Enchanted creature can't be enchanted by other Auras.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/anti_magic_aura.jpg
 Oracle:Enchant creature\nEnchanted creature can't be the target of spells and can't be enchanted by other Auras.

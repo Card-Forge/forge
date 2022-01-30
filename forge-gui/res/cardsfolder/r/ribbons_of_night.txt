@@ -7,5 +7,4 @@ SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionManaSpent$ U
 SVar:ManaNeededToAvoidNegativeEffect:blue
 AI:RemoveDeck:Random
 DeckNeeds:Color$Blue
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ribbons_of_night.jpg
 Oracle:Ribbons of Night deals 4 damage to target creature and you gain 4 life. If {U} was spent to cast this spell, draw a card.

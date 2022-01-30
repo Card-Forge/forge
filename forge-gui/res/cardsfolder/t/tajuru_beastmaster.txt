@@ -7,5 +7,4 @@ SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Ally
 DeckHints:Type$Ally
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tajuru_beastmaster.jpg
 Oracle:Rally — Whenever Tajuru Beastmaster or another Ally enters the battlefield under your control, creatures you control get +1/+1 until end of turn.

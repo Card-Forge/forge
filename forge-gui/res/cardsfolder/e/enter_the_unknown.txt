@@ -7,5 +7,4 @@ SVar:Exploration:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | EffectZ
 SVar:NeedsToPlayVar:ZZ GE1
 SVar:ZZ:Count$ValidHand Land.YouOwn
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/enter the unknown.jpg
 Oracle:Target creature you control explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on the creature, then put the card back or put it into your graveyard.)\nYou may play an additional land this turn.

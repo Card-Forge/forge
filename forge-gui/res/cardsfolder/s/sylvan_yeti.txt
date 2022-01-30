@@ -5,5 +5,4 @@ PT:*/4
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of cards in your hand.
 SVar:X:Count$InYourHand
 AI:RemoveDeck:All
-SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal_Second_Age/sylvan_yeti.jpg
 Oracle:Sylvan Yeti's power is equal to the number of cards in your hand.

@@ -7,5 +7,4 @@ SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$
 S:Mode$ Continuous | Affected$ Sliver.YouCtrl | AddSVar$ AE
 SVar:AE:SVar:HasAttackEffect:TRUE
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/leeching_sliver.jpg
 Oracle:Whenever a Sliver you control attacks, defending player loses 1 life.

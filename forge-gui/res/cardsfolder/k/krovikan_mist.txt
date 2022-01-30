@@ -7,5 +7,4 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$Valid Illusion
 SVar:BuffedBy:Illusion
 SVar:NoZeroToughnessAI:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/krovikan_mist.jpg
 Oracle:Flying\nKrovikan Mist's power and toughness are each equal to the number of Illusions on the battlefield.

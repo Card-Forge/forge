@@ -7,5 +7,4 @@ SVar:TrigGetMana:DB$ Pump | ValidTgts$ Player | RememberObjects$ Targeted | SubA
 SVar:DBMana:DB$ Mana | Produced$ C | Amount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Land.RememberedPlayerCtrl
-SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Orcish Squatters Avatar.full.jpg
 Oracle:Hand -1, life -1\nAt the beginning of your precombat main phase, add {C} for each land target opponent controls.

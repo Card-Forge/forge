@@ -5,5 +5,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDestroy | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, destroy target nonblack creature.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chime_of_night.jpg
 Oracle:Enchant creature\nWhen Chime of Night is put into a graveyard from the battlefield, destroy target nonblack creature.

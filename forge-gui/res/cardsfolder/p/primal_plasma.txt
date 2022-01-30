@@ -9,5 +9,4 @@ SVar:AirPlasma:DB$ Animate | Defined$ Self | Duration$ Permanent | Power$ 2 | To
 SVar:WallPlasma:DB$ Animate | Defined$ Self | Duration$ Permanent | Power$ 1 | Toughness$ 6 | Keywords$ Defender | SpellDescription$ CARDNAME is 1/6 with defender | SubAbility$ DBMove
 SVar:DBMove:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ All | Destination$ Battlefield
 AI:RemoveDeck:All
-SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card124757.jpg
 Oracle:As Primal Plasma enters the battlefield, it becomes your choice of a 3/3 creature, a 2/2 creature with flying, or a 1/6 creature with defender.

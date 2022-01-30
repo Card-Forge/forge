@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Delirium$ True | Execute$ TrigPut | TriggerZones$ Battlefield | TriggerDescription$ Delirium — At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, put a +1/+1 counter on target creature.
 SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
 SVar:PlayMain1:TRUE
-DeckHints:Ability$Graveyard & Ability$Discard
+DeckHints:Ability$Graveyard|Discard
 DeckHas:Ability$Delirium
-SVar:Picture:http://www.wizards.com/global/images/magic/general/obsessive_skinner.jpg
 Oracle:When Obsessive Skinner enters the battlefield, put a +1/+1 counter on target creature.\nDelirium — At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, put a +1/+1 counter on target creature.

@@ -4,5 +4,4 @@ Types:Creature Elf Scout
 PT:1/1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigUntapAll | TriggerDescription$ Whenever CARDNAME attacks, untap each other creature you control.
 SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Creature.Other+YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/copperhorn_scout.jpg
 Oracle:Whenever Copperhorn Scout attacks, untap each other creature you control.

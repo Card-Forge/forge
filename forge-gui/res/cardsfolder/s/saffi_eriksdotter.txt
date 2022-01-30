@@ -6,5 +6,4 @@ A:AB$ Effect | Cost$ Sac<1/CARDNAME> | Name$ Saffi Eriksdotter | ValidTgts$ Crea
 SVar:TrigChangesZone:Mode$ ChangesZone | ValidCard$ Creature.IsRemembered+YouOwn | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigBounceMe | TriggerDescription$ If the targeted card of Saffi Eriksdotter is put into your graveyard from the battlefield this turn, return it to the battlefield.
 SVar:TrigBounceMe:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Battlefield
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/saffi_eriksdotter.jpg
 Oracle:Sacrifice Saffi Eriksdotter: When target creature is put into your graveyard this turn, return that card to the battlefield.

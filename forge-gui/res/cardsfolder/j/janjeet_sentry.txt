@@ -5,5 +5,4 @@ PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E} (two energy counters).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
 A:AB$ TapOrUntap | Cost$ T PayEnergy<2> | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | SpellDescription$ You may tap or untap target artifact or creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/janjeet_sentry.jpg
 Oracle:When Janjeet Sentry enters the battlefield, you get {E}{E} (two energy counters).\n{T}, Pay {E}{E}: You may tap or untap target artifact or creature.

@@ -2,5 +2,4 @@ Name:Canyon Minotaur
 ManaCost:3 R
 Types:Creature Minotaur Warrior
 PT:3/3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/canyon_minotaur.jpg
 Oracle:

@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Card.Zubera
 DeckHints:Type$Zubera
-SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80508.jpg
 Oracle:When Ember-Fist Zubera dies, it deals damage to any target equal to the number of Zubera that died this turn.

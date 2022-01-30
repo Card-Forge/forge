@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Artifact.EnchantedBy | AddTrigger$ TrigPhase | Ad
 SVar:TrigPhase:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDisruptionAura | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice this artifact unless you pay its mana cost.
 SVar:TrigDisruptionAura:DB$ Sacrifice | Defined$ Self | UnlessCost$ CardManaCost | UnlessPayer$ You
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/disruption_aura.jpg
 Oracle:Enchant artifact\nEnchanted artifact has "At the beginning of your upkeep, sacrifice this artifact unless you pay its mana cost."

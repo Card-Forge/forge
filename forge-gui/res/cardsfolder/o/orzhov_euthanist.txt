@@ -4,5 +4,4 @@ Types:Creature Human Assassin
 PT:2/2
 K:Haunt:TrigDestroy
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.wasDealtDamageThisTurn | TgtPrompt$ Select target creature that was dealt damage this turn. | SpellDescription$ Destroy target creature that was dealt damage this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/orzhov_euthanist.jpg
 Oracle:Haunt (When this creature dies, exile it haunting target creature.)\nWhen Orzhov Euthanist enters the battlefield or the creature it haunts dies, destroy target creature that was dealt damage this turn.

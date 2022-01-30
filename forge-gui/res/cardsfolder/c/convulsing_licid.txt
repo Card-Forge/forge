@@ -7,5 +7,4 @@ SVar:DBAttach:DB$ Attach | ValidTgts$ Creature | AILogic$ Curse
 SVar:SPAttach:SP$ Attach | Cost$ 0 | ValidTgts$ Creature
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't block. | Description$ Enchanted creature can't block.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/convulsing_licid.jpg
 Oracle:{R}, {T}: Convulsing Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {R} to end this effect.\nEnchanted creature can't block.

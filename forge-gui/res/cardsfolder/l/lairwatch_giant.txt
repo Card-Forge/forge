@@ -6,5 +6,4 @@ S:Mode$ Continuous | Affected$ Card.Self | CanBlockAmount$ 1 | Description$ CARD
 T:Mode$ Blocks | ValidCard$ Card.Self | CheckSVar$ X | NoResolvingCheck$ True | SVarCompare$ GE2 | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks two or more creatures, it gains first strike until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
 SVar:X:Count$Valid Creature.blockedBySource
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lairwatch_giant.jpg
 Oracle:Lairwatch Giant can block an additional creature each combat.\nWhenever Lairwatch Giant blocks two or more creatures, it gains first strike until end of turn.

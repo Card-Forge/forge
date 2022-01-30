@@ -4,5 +4,4 @@ Types:Instant
 K:Convoke
 A:SP$ Token | Cost$ 3 G G | TokenAmount$ 3 | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling rav | SpellDescription$ Create three 1/1 green Saproling creature tokens.
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scatter_the_seeds.jpg
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nCreate three 1/1 green Saproling creature tokens.

@@ -4,5 +4,4 @@ Types:Creature Eldrazi Drone
 PT:3/4
 K:Devoid
 K:Trample
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vestige_of_emrakul.jpg
 Oracle:Devoid (This card has no color.)\nTrample

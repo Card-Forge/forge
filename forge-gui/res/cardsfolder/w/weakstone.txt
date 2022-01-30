@@ -3,5 +3,4 @@ ManaCost:4
 Types:Artifact
 S:Mode$ Continuous | Affected$ Creature.attacking | AddPower$ -1 | Description$ Attacking creatures get -1/-0.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/weakstone.jpg
 Oracle:Attacking creatures get -1/-0.

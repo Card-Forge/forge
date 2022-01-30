@@ -9,5 +9,4 @@ SVar:DBEffect:DB$ Effect | RememberObjects$ ParentTarget | Triggers$ TrigChangeC
 SVar:TrigChangeController:Mode$ ChangesController | ValidCard$ Card.IsRemembered | ValidOriginalController$ You | TriggerZones$ Command | Execute$ TrigUnattach | TriggerDescription$ When you lose control of that Equipment, unattach it.
 SVar:TrigUnattach:DB$ Unattach | Defined$ Remembered | SubAbility$ ExileSelf
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_geargrabber.jpg
 Oracle:Whenever Ogre Geargrabber attacks, gain control of target Equipment an opponent controls until end of turn. Attach it to Ogre Geargrabber. When you lose control of that Equipment, unattach it.

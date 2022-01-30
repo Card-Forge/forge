@@ -6,5 +6,4 @@ A:AB$ GainLife | Cost$ 3 W T Sac<1/CARDNAME> | Defined$ You | LifeAmount$ X | Sp
 SVar:X:Count$TypeYouCtrl.Creature/Times.2
 DeckHas:Ability$Mana.Colorless
 DeckNeeds:Color$White
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blighted_steppe.jpg
 Oracle:{T}: Add {C}.\n{3}{W}, {T}, Sacrifice Blighted Steppe: You gain 2 life for each creature you control.

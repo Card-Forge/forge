@@ -3,5 +3,4 @@ ManaCost:U
 Types:Creature Crocodile
 PT:1/1
 K:Islandwalk
-SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87914.jpg
 Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)

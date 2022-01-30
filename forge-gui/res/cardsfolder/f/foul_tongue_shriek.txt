@@ -5,5 +5,4 @@ A:SP$ LoseLife | Cost$ B | ValidTgts$ Opponent | TgtPrompt$ Select target oppone
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Creature.attacking+YouCtrl
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/foul_tongue_shriek.jpg
 Oracle:Target opponent loses 1 life for each attacking creature you control. You gain that much life.

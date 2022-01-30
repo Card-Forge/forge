@@ -11,6 +11,6 @@ SVar:TrigChangeZone:AB$ ChangeZone | Cost$ Sac<2/Blood.token/Blood token> | Orig
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Indestructible | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:HasAttackEffect:TRUE
-DeckHas:Ability$Token & Ability$Sacrifice
+DeckHas:Ability$Token|Sacrifice
 DeckHints:Type$Vampire
 Oracle:Flying\nAt the beginning of your end step, create a Blood token for each player who lost life this turn.\nWhenever Strefan attacks, you may sacrifice two Blood tokens. If you do, you may put a Vampire card from your hand onto the battlefield tapped and attacking. It gains indestructible until end of turn.

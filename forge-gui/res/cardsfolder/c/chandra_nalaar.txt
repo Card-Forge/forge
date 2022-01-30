@@ -8,4 +8,4 @@ A:AB$ DealDamage | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ 
 SVar:DmgAll:DB$ DamageAll | NumDmg$ 10 | ValidCards$ Creature.ControlledBy TargetedOrController | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
 SVar:X:Count$xPaid
-Oracle:[+1]: Chandra Nalaar deals 1 damage to target player or planeswalker.\n[−X]: Chandra Nalaar deals X damage to target creature.\n[−8]: Chandra Nalaar deals 10 damage to target player or planeswalker and each creature that player or that planeswalker's controller controls.
+Oracle:[+1]: Chandra Nalaar deals 1 damage to target player or planeswalker.\n[-X]: Chandra Nalaar deals X damage to target creature.\n[-8]: Chandra Nalaar deals 10 damage to target player or planeswalker and each creature that player or that planeswalker's controller controls.

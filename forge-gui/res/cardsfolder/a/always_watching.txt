@@ -3,5 +3,4 @@ ManaCost:1 W W
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.nonToken+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Vigilance | Description$ Nontoken creatures you control get +1/+1 and have vigilance.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/always_watching.jpg
 Oracle:Nontoken creatures you control get +1/+1 and have vigilance.

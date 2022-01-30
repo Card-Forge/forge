@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_vampire_lifelink | TokenOwner$ You | LegacyImage$ w 1 1 vampire lifelink rix
 DeckHas:Ability$Token
 DeckHints:Type$Vampire
-SVar:Picture:http://www.wizards.com/global/images/magic/general/martyr_of_dusk.jpg
 Oracle:When Martyr of Dusk dies, create a 1/1 white Vampire creature token with lifelink.

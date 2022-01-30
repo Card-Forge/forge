@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:DBSacSelf:DB$ Sacrifice | Defined$ Self | UnlessCost$ Discard<1/Creature> | UnlessPayer$ You
 SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$TypeInYourHand.Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hidden_horror.jpg
 Oracle:When Hidden Horror enters the battlefield, sacrifice it unless you discard a creature card.

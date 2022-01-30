@@ -3,5 +3,4 @@ ManaCost:5
 Types:Artifact Creature Construct
 PT:3/3
 A:AB$ Pump | Cost$ 2 | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/narstad_scrapper.jpg
 Oracle:{2}: Narstad Scrapper gets +1/+0 until end of turn.

@@ -5,5 +5,4 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Zombie+Other+YouCtrl,Creature.Skeleton+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Deathtouch | Description$ Skeletons you control and other Zombies you control get +1/+1 and have deathtouch.
 SVar:PlayMain1:TRUE
 DeckHints:Type$Skeleton|Zombie
-SVar:Picture:http://www.wizards.com/global/images/magic/general/death_baron.jpg
 Oracle:Skeletons you control and other Zombies you control get +1/+1 and have deathtouch.

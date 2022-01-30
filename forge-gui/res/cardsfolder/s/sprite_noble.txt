@@ -6,5 +6,4 @@ K:Flying
 S:Mode$ Continuous | Affected$ Creature.withFlying+YouCtrl+Other | AddToughness$ 1 | Description$ Other creatures you control with flying get +0/+1.
 A:AB$ PumpAll | Cost$ T | ValidCards$ Creature.withFlying+Other+YouCtrl | NumAtt$ +1 | SpellDescription$ Other creatures you control with flying get +1/+0 until end of turn.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sprite_noble.jpg
 Oracle:Flying\nOther creatures you control with flying get +0/+1.\n{T}: Other creatures you control with flying get +1/+0 until end of turn.

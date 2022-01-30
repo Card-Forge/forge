@@ -4,5 +4,4 @@ Types:Creature Gorgon
 PT:4/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target creature or enchantment card from your graveyard to your hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl,Enchantment.YouCtrl | TgtPrompt$ Select target creature or enchantment card in your graveyard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pharikas_mender.jpg
 Oracle:When Pharika's Mender enters the battlefield, you may return target creature or enchantment card from your graveyard to your hand.

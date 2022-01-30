@@ -4,5 +4,4 @@ Types:Creature Human Monk
 PT:1/3
 K:Defender
 K:First Strike
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dragons_eye_sentry.jpg
 Oracle:Defender, first strike

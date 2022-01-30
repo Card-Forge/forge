@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ GainControl | Cost$ R | AllValid$ Permanent.YouOwn | SpellDescription$ Gain control of all permanents you own. (This effect lasts indefinitely.)
 K:Cycling:2
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brand.jpg
 Oracle:Gain control of all permanents you own. (This effect lasts indefinitely.)\nCycling {2} ({2}, Discard this card: Draw a card.)

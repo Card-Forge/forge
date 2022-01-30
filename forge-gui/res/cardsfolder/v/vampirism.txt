@@ -10,5 +10,4 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddPower$ -1 | AddToughness$ -1 | Description$ Other creatures you control get -1/-1.
 SVar:X:Count$Valid Creature.YouCtrl
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vampirism.jpg
 Oracle:Enchant creature\nWhen Vampirism enters the battlefield, draw a card at the beginning of the next turn's upkeep.\nEnchanted creature gets +1/+1 for each other creature you control.\nOther creatures you control get -1/-1.

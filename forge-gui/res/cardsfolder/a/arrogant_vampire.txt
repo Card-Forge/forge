@@ -3,5 +3,4 @@ ManaCost:3 B B
 Types:Creature Vampire
 PT:4/3
 K:Flying
-SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4207.jpg
 Oracle:Flying

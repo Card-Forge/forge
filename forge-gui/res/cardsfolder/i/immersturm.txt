@@ -9,5 +9,4 @@ SVar:RolledChaos:DB$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | De
 SVar:RestorationReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:AIRollPlanarDieParams:Mode$ Always | HasCreatureInPlay$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/immersturm.jpg
 Oracle:Whenever a creature enters the battlefield, that creature's controller may have it deal damage equal to its power to any target of their choice.\nWhenever you roll {CHAOS}, exile target creature, then return it to the battlefield under its owner's control.

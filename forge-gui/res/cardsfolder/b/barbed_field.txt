@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ 2 R R | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Land.EnchantedBy | AddAbility$ Damage | Description$ Enchanted land has "{T}: This land deals 1 damage to any target."
 SVar:Damage:AB$DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/barbed_field.jpg
 Oracle:Enchant land\nEnchanted land has "{T}: This land deals 1 damage to any target."

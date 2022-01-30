@@ -4,5 +4,4 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Artifact | AddHiddenKeyword$ CARDNAME's activated abilities can't be activated. | Description$ Activated abilities of artifacts can't be activated.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stony_silence.jpg
 Oracle:Activated abilities of artifacts can't be activated.

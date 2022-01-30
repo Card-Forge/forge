@@ -6,5 +6,4 @@ S:Mode$ CantBeCast | Caster$ You | ValidCard$ Card.Self | CheckSVar$ XJockey | S
 S:Mode$ CantPlayLand | Player$ You | CheckSVar$ RockyX | SVarCompare$ GE1 | Description$ You can't play lands if you've cast CARDNAME this turn.
 SVar:XJockey:Count$YourLandsPlayed
 SVar:RockyX:Count$ThisTurnCast_Card.Self
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rock_jockey.jpg
 Oracle:You can't cast this spell if you've played a land this turn.\nYou can't play lands if you've cast Rock Jockey this turn.

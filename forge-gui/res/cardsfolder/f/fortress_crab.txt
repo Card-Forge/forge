@@ -2,5 +2,4 @@ Name:Fortress Crab
 ManaCost:3 U
 Types:Creature Crab
 PT:1/6
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fortress_crab.jpg
 Oracle:

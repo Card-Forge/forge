@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddPower$ 2 | AddToughness$
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ At the beginning of your end step, if you didn't attack with a creature this turn, sacrifice CARDNAME.
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
 SVar:X:Count$AttackersDeclared
-SVar:Picture:http://www.wizards.com/global/images/magic/general/see_red.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+1 and has first strike.\nAt the beginning of your end step, if you didn't attack with a creature this turn, sacrifice See Red.

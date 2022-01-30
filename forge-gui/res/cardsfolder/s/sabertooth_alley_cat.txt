@@ -5,5 +5,4 @@ PT:2/1
 K:CARDNAME attacks each combat if able.
 A:AB$ Effect | Cost$ 1 R | Name$ Sabertooth Alley Cat's Effect | StaticAbilities$ KWPump | SpellDescription$ Creatures without defender can't block CARDNAME this turn.
 SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.EffectSource | ValidBlocker$ Creature.withoutDefender | EffectZone$ Command | Description$ Creatures without defender can't block EFFECTSOURCE this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sabertooth_alley_cat.jpg
 Oracle:Sabertooth Alley Cat attacks each combat if able.\n{1}{R}: Creatures without defender can't block Sabertooth Alley Cat this turn.

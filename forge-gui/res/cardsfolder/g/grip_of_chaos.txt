@@ -5,5 +5,4 @@ T:Mode$ SpellAbilityCopy | IsSingleTarget$ True | TriggerZones$ Battlefield | Ex
 T:Mode$ SpellAbilityCast | IsSingleTarget$ True | TriggerZones$ Battlefield | Execute$ TrigChangeTarget | TriggerDescription$ Whenever a spell or ability is put onto the stack, if it has a single target, reselect its target at random. (Select from among all legal targets.)
 SVar:TrigChangeTarget:DB$ ChangeTargets | Defined$ TriggeredSpellAbility | RandomTarget$ True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grip_of_chaos.jpg
 Oracle:Whenever a spell or ability is put onto the stack, if it has a single target, reselect its target at random. (Select from among all legal targets.)

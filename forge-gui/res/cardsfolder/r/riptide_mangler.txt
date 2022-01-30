@@ -6,5 +6,4 @@ A:AB$ Pump | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target Creature
 SVar:DBChangePower:DB$ Animate | Defined$ Self | Power$ X | Duration$ Permanent
 SVar:X:Targeted$CardPower
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide_mangler.jpg
 Oracle:{1}{U}: Change Riptide Mangler's base power to target creature's power. (This effect lasts indefinitely.)

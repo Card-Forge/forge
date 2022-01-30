@@ -4,5 +4,4 @@ Types:Creature Drake
 PT:3/4
 K:Flying
 K:Cycling:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shimmerscale_drake.jpg
 Oracle:Flying\nCycling {2} ({2}, Discard this card: Draw a card.)

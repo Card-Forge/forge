@@ -6,5 +6,5 @@ SVar:IgnitionDamage:DB$ DamageAll | ValidCards$ Creature.nonArmy | ValidDescript
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardPower
 DeckHints:Ability$Amass & Type$Zombie
-DeckHas:Ability$Amass & Ability$Counters & Ability$Token
+DeckHas:Ability$Amass|Counters|Token
 Oracle:Amass 2, then the Army you amassed deals damage equal to its power to each non-Army creature. (To amass 2, put two +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)

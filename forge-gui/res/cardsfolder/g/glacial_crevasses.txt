@@ -3,5 +3,4 @@ ManaCost:2 R
 Types:Enchantment
 A:AB$ Fog | Cost$ Sac<1/Mountain.Snow/snow Mountain> | SpellDescription$ Prevent all combat damage that would be dealt this turn.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glacial_crevasses.jpg
 Oracle:Sacrifice a snow Mountain: Prevent all combat damage that would be dealt this turn.

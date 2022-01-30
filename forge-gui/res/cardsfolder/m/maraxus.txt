@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+1/+2
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddPower$ 1 | Description$ Creatures you control get +1/+0.
-SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Maraxus.full.jpg
 Oracle:Hand +1, life +2\nCreatures you control get +1/+0.

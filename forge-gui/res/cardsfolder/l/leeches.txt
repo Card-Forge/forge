@@ -6,5 +6,4 @@ SVar:Unpoison:DB$ Poison | Defined$ ParentTarget | Num$ -X
 SVar:X:TargetedPlayer$PoisonCounters
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/leeches.jpg
 Oracle:Target player loses all poison counters. Leeches deals that much damage to that player.

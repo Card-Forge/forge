@@ -8,5 +8,4 @@ SVar:TrigMoveCounter:DB$ MoveCounter | ValidTgts$ Creature.Other | TgtPrompt$ Se
 DeckNeeds:Ability$Counters
 DeckHas:Ability$Counters
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scrounging_bandar.jpg
 Oracle:Scrounging Bandar enters the battlefield with two +1/+1 counters on it.\nAt the beginning of your upkeep, you may move any number of +1/+1 counters from Scrounging Bandar onto another target creature.

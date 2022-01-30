@@ -7,5 +7,4 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_5_5_demon_flying | To
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, you lose 2 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 2
 SVar:SacMe:4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/priest_of_the_blood_rite.jpg
 Oracle:When Priest of the Blood Rite enters the battlefield, create a 5/5 black Demon creature token with flying.\nAt the beginning of your upkeep, you lose 2 life.

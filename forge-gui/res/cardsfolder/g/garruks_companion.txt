@@ -3,5 +3,4 @@ ManaCost:G G
 Types:Creature Beast
 PT:3/2
 K:Trample
-SVar:Picture:http://www.wizards.com/global/images/magic/general/garruks_companion.jpg
 Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)

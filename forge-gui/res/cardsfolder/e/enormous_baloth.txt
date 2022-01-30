@@ -2,5 +2,4 @@ Name:Enormous Baloth
 ManaCost:6 G
 Types:Creature Beast
 PT:7/7
-SVar:Picture:http://resources.wizards.com/magic/cards/lgn/en-us/card44500.jpg
 Oracle:

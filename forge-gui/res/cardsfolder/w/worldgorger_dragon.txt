@@ -10,5 +10,4 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ 
 SVar:TrigReturn:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/worldgorger_dragon.jpg
 Oracle:Flying, trample\nWhen Worldgorger Dragon enters the battlefield, exile all other permanents you control.\nWhen Worldgorger Dragon leaves the battlefield, return the exiled cards to the battlefield under their owners' control.

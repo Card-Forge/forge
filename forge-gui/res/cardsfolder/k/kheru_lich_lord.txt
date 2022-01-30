@@ -8,5 +8,4 @@ SVar:DBUnearthed:DB$ Animate | Defined$ Remembered | Keywords$ Flying & Trample 
 SVar:KheruMustAttack:SVar:MustAttack:True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kheru_lich_lord.jpg
 Oracle:At the beginning of your upkeep, you may pay {2}{B}. If you do, return a creature card at random from your graveyard to the battlefield. It gains flying, trample, and haste. Exile that card at the beginning of your next end step. If it would leave the battlefield, exile it instead of putting it anywhere else.

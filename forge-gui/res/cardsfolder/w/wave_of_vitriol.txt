@@ -9,5 +9,4 @@ SVar:ShuffleSearched:DB$ Shuffle | Defined$ Player.IsRemembered | ConditionCheck
 SVar:X:Count$Valid Card.IsRemembered+RememberedPlayerCtrl
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wave_of_vitriol.jpg
 Oracle:Each player sacrifices all artifacts, enchantments, and nonbasic lands they control. For each land sacrificed this way, its controller may search their library for a basic land card and put it onto the battlefield tapped. Then each player who searched their library this way shuffles.

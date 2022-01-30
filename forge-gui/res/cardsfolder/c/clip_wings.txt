@@ -2,5 +2,4 @@ Name:Clip Wings
 ManaCost:1 G
 Types:Instant
 A:SP$ Sacrifice | Cost$ 1 G | Defined$ Player.Opponent | SacValid$ Creature.withFlying | SacMessage$ creature with flying | SpellDescription$ Each opponent sacrifices a creature with flying.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/clip_wings.jpg
 Oracle:Each opponent sacrifices a creature with flying.

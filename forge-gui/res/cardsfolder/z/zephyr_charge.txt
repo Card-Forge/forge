@@ -2,5 +2,4 @@ Name:Zephyr Charge
 ManaCost:1 U
 Types:Enchantment
 A:AB$ Pump | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/zephyr_charge.jpg
 Oracle:{1}{U}: Target creature gains flying until end of turn.

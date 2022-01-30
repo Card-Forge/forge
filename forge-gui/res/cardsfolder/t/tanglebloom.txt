@@ -2,5 +2,4 @@ Name:Tanglebloom
 ManaCost:1
 Types:Artifact
 A:AB$ GainLife | Cost$ 1 T | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card95221.jpg
 Oracle:{1}, {T}: You gain 1 life.

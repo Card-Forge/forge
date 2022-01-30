@@ -7,5 +7,4 @@ SVar:CastCard:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | ValidSA$ 
 SVar:MoveLand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Battlefield | ConditionDefined$ Remembered | Optional$ True | Imprint$ True | ConditionPresent$ Card.Land | ConditionCompare$ EQ1 | SubAbility$ MoveSelf
 SVar:MoveSelf:DB$ ChangeZone | Defined$ Parent | Origin$ Stack | Destination$ Hand | ConditionDefined$ Imprinted | ConditionPresent$ Card.Land | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/unexpected_results.jpg
 Oracle:Shuffle your library, then reveal the top card. If it's a nonland card, you may cast it without paying its mana cost. If it's a land card, you may put it onto the battlefield and return Unexpected Results to its owner's hand.

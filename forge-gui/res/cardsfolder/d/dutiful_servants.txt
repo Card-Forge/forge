@@ -2,5 +2,4 @@ Name:Dutiful Servants
 ManaCost:3 W
 Types:Creature Zombie
 PT:2/5
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dutiful_servants.jpg
 Oracle:

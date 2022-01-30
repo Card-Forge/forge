@@ -4,5 +4,4 @@ Types:Creature Human Spellshaper
 PT:2/2
 A:AB$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Cost$ G T Discard<1/Card> | SpellDescription$ Regenerate target creature.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rushwood_herbalist.jpg
 Oracle:{G}, {T}, Discard a card: Regenerate target creature.

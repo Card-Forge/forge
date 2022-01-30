@@ -6,7 +6,6 @@ K:Skulk
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigTransform | CombatDamage$ True | TriggerDescription$ When CARDNAME deals combat damage to a player, transform it.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
-SVar:Picture:http://www.wizards.com/global/images/magic/general/uninvited_geist.jpg
 Oracle:Skulk (This creature can't be blocked by creatures with greater power.)\nWhen Uninvited Geist deals combat damage to a player, transform it.
 
 ALTERNATE
@@ -17,5 +16,4 @@ Colors:blue
 Types:Creature Spirit
 PT:3/3
 K:Unblockable
-SVar:Picture:http://www.wizards.com/global/images/magic/general/unimpeded_trespasser.jpg
 Oracle:Unimpeded Trespasser can't be blocked.

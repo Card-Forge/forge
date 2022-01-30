@@ -6,5 +6,4 @@ K:Flying
 T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ Morbid | SVarCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Morbid — At the beginning of each end step, if a creature died this turn, destroy target non-demon creature.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.nonDemon | TgtPrompt$ Select target non-demon creature
 SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reaper_from_the_abyss.jpg
 Oracle:Flying\nMorbid — At the beginning of each end step, if a creature died this turn, destroy target non-Demon creature.

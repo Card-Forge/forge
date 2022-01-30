@@ -5,5 +5,4 @@ PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters the battlefield, tap all creatures target opponent controls.
 SVar:TrigTapAll:DB$ TapAll | ValidTgts$ Opponent | TgtPrompt$ Select target player | ValidCards$ Creature
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tempest_caller.jpg
 Oracle:When Tempest Caller enters the battlefield, tap all creatures target opponent controls.

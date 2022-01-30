@@ -3,5 +3,4 @@ ManaCost:2 W
 Types:Creature Kor Soldier Ally
 PT:3/2
 A:AB$ Pump | Cost$ 1 W | KW$ Flying | Defined$ Self | SpellDescription$ CARDNAME gains flying until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_sky_climber.jpg
 Oracle:{1}{W}: Kor Sky Climber gains flying until end of turn.

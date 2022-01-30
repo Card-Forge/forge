@@ -4,5 +4,4 @@ Types:Sorcery Arcane
 A:SP$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature in your graveyard | GainControl$ True | SubAbility$ DBPump | AILogic$ BeforeCombat | SpellDescription$ Return target creature card from your graveyard to the battlefield. Sacrifice that creature at the beginning of the next end step.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | AtEOT$ Sacrifice
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/footsteps_of_the_goryo.jpg
 Oracle:Return target creature card from your graveyard to the battlefield. Sacrifice that creature at the beginning of the next end step.

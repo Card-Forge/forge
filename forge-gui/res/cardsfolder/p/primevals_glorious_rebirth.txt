@@ -2,5 +2,4 @@ Name:Primevals' Glorious Rebirth
 ManaCost:5 W B
 Types:Legendary Sorcery
 A:SP$ ChangeZoneAll | Cost$ 5 W B | ChangeType$ Permanent.Legendary+YouCtrl | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return all legendary permanent cards from your graveyard to the battlefield.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/primevals_glorious_rebirth.jpg
 Oracle:(You may cast a legendary sorcery only if you control a legendary creature or planeswalker.)\nReturn all legendary permanent cards from your graveyard to the battlefield.

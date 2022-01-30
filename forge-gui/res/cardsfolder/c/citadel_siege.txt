@@ -9,5 +9,4 @@ SVar:Boost:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select targ
 SVar:Dragons:DB$ Animate | Defined$ Self | Triggers$ DragonsTrigger | Duration$ Permanent | SpellDescription$ Dragons
 SVar:DragonsTrigger:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | ValidPlayer$ Opponent | Execute$ TapCreature | TriggerDescription$ At the beginning of combat on each opponent's turn, tap target creature that player controls.
 SVar:TapCreature:DB$ Tap | ValidTgts$ Creature.ActivePlayerCtrl | TgtPrompt$ Choose target creature the active player controls.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/citadel_siege.jpg
 Oracle:As Citadel Siege enters the battlefield, choose Khans or Dragons.\n• Khans — At the beginning of combat on your turn, put two +1/+1 counters on target creature you control.\n• Dragons — At the beginning of combat on each opponent's turn, tap target creature that player controls.

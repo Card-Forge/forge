@@ -3,5 +3,4 @@ ManaCost:3
 Types:Artifact
 A:AB$ Destroy | Cost$ T Sac<1/CARDNAME> Sac<2/Land> | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SpellDescription$ Destroy target attacking creature.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sandstone_deadfall.jpg
 Oracle:{T}, Sacrifice two lands and Sandstone Deadfall: Destroy target attacking creature.

@@ -6,5 +6,4 @@ A:AB$ Animate | Cost$ T | Colors$ Colorless | OverwriteColors$ True | ValidTgts$
 A:AB$ Animate | Cost$ T | Colors$ Colorless | OverwriteColors$ True | ValidTgts$ Permanent | TgtPrompt$ Select target permanent to make colorless | SpellDescription$ Target permanent becomes colorless until end of turn.
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ersatz_gnomes.jpg
 Oracle:{T}: Target spell becomes colorless.\n{T}: Target permanent becomes colorless until end of turn.

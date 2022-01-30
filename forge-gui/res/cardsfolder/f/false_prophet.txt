@@ -5,5 +5,4 @@ PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSac | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, exile all creatures.
 SVar:TrigSac:DB$ ChangeZoneAll | ChangeType$ Creature | Origin$ Battlefield | Destination$ Exile
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/false_prophet.jpg
 Oracle:When False Prophet dies, exile all creatures.

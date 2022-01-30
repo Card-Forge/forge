@@ -3,5 +3,4 @@ ManaCost:3 W W
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an enchantment spell, create a 4/4 white Angel creature token with flying.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_4_4_angel_flying | TokenOwner$ You | LegacyImage$ w 4 4 angel flying cfx
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_of_the_empty_throne.jpg
 Oracle:Whenever you cast an enchantment spell, create a 4/4 white Angel creature token with flying.

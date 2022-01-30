@@ -5,5 +5,4 @@ A:SP$ Charm | Cost$ R | Choices$ DBCounter,DBDestroy | CharmNum$ 1
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card.Blue | SpellDescription$ Counter target blue spell.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent.Blue | TgtPrompt$ Select target blue permanent | SpellDescription$ Destroy target blue permanent.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/red_elemental_blast.jpg
 Oracle:Choose one —\n• Counter target blue spell.\n• Destroy target blue permanent.

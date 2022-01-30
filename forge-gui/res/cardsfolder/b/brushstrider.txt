@@ -3,5 +3,4 @@ ManaCost:1 G
 Types:Creature Beast
 PT:3/1
 K:Vigilance
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brushstrider.jpg
 Oracle:Vigilance

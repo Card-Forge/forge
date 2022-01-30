@@ -2,5 +2,4 @@ Name:False Defeat
 ManaCost:3 W
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 3 W | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to the battlefield.
-SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Three_Kingdoms/false_defeat.jpg
 Oracle:Return target creature card from your graveyard to the battlefield.

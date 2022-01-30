@@ -8,5 +8,4 @@ SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ AbundantGrowthTap | Description$ Enchanted land has "{T}: Add two mana of any one color."
 SVar:AbundantGrowthTap:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | SpellDescription$ Add two mana of any one color.
 DeckHas:Ability$LifeGain
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gift_of_paradise.jpg
 Oracle:Enchant land\nWhen Gift of Paradise enters the battlefield, you gain 3 life.\nEnchanted land has "{T}: Add two mana of any one color."

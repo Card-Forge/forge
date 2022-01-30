@@ -4,5 +4,4 @@ Types:Creature Human Mercenary Rebel
 PT:1/2
 S:Mode$ CantTarget | ValidCard$ Card.Self | ValidSource$ Card.White | Description$ CARDNAME can't be the target of white spells or abilities from white sources.
 A:AB$ ChangeZone | Cost$ 3 | ValidTgts$ Rebel.nonToken | IsCurse$ True | TgtPrompt$ Select target Rebel | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target nontoken Rebel on the bottom of its owner's library.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rebel_informer.jpg
 Oracle:Rebel Informer can't be the target of white spells or abilities from white sources.\n{3}: Put target nontoken Rebel on the bottom of its owner's library.

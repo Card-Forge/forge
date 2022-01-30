@@ -9,4 +9,4 @@ A:AB$ Pump | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Artif
 SVar:SaheeliCopy:DB$ Clone | CloneTarget$ ParentTarget | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl | TgtPrompt$ Select another target artifact or creature you control | AddTypes$ Artifact | Duration$ UntilEndOfTurn
 DeckHas:Ability$Token
 SVar:BuffedBy:Card.nonCreature+nonLand
-Oracle:Whenever you cast a noncreature spell, create a 1/1 colorless Servo artifact creature token.\n[−2]: Target artifact you control becomes a copy of another target artifact or creature you control until end of turn, except it's an artifact in addition to its other types.
+Oracle:Whenever you cast a noncreature spell, create a 1/1 colorless Servo artifact creature token.\n[-2]: Target artifact you control becomes a copy of another target artifact or creature you control until end of turn, except it's an artifact in addition to its other types.

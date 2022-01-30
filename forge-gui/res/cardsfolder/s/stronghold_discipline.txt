@@ -5,5 +5,4 @@ A:SP$ RepeatEach | Cost$ 2 B B | RepeatPlayers$ Player | RepeatSubAbility$ DBLos
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ X
 SVar:X:Count$Valid Creature.RememberedPlayerCtrl
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_discipline.jpg
 Oracle:Each player loses 1 life for each creature they control.

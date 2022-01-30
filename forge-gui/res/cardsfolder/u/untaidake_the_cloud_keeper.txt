@@ -5,5 +5,4 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T PayLife<2> | Produced$ C | Amount$ 2 | RestrictValid$ Card.Legendary | SpellDescription$ Add {C}{C}. Spend this mana only to cast legendary spells.
 AI:RemoveDeck:Random
 DeckHints:Type$Legendary
-SVar:Picture:http://www.wizards.com/global/images/magic/general/untaidake_the_cloud_keeper.jpg
 Oracle:Untaidake, the Cloud Keeper enters the battlefield tapped.\n{T}, Pay 2 life: Add {C}{C}. Spend this mana only to cast legendary spells.

@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ 2 W B | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. & CARDNAME's activated abilities can't be activated. | Description$ Enchanted creature can't attack or block and its activated abilities can't be activated.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, that player loses 1 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/one_thousand_lashes.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack or block, and its activated abilities can't be activated.\nAt the beginning of the upkeep of enchanted creature's controller, that player loses 1 life.

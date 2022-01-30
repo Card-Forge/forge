@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact Creature Myr
 PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/leaden_myr.jpg
 Oracle:{T}: Add {B}.

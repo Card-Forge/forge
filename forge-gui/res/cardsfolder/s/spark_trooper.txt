@@ -9,5 +9,4 @@ T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSa
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
 SVar:EndOfTurnLeavePlay:True
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spark_trooper.jpg
 Oracle:Trample, lifelink, haste\nAt the beginning of the end step, sacrifice Spark Trooper.

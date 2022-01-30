@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact
 K:Indestructible
 A:AB$ Animate | Cost$ 3 | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Creature,Artifact,Beast | SpellDescription$ CARDNAME becomes a 2/2 Beast artifact creature until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_brute.jpg
 Oracle:Indestructible (Damage and effects that say "destroy" don't destroy this artifact.)\n{3}: Darksteel Brute becomes a 2/2 Beast artifact creature until end of turn.

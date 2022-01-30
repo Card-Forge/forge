@@ -5,5 +5,4 @@ PT:6/3
 A:AB$ Regenerate | Cost$ B Sac<1/Creature> | SpellDescription$ Regenerate CARDNAME.
 SVar:AIPreferences:SacCost$Creature.token,Creature.cmcLE5+powerLE3+toughnessLE4
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/corrupted_harvester.jpg
 Oracle:{B}, Sacrifice a creature: Regenerate Corrupted Harvester.

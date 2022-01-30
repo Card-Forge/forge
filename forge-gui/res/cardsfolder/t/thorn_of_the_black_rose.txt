@@ -5,5 +5,4 @@ PT:1/3
 K:Deathtouch
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
 SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thorn_of_the_black_rose.jpg
 Oracle:Deathtouch\nWhen Thorn of the Black Rose enters the battlefield, you become the monarch.

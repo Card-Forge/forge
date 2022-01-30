@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ DealDamage | Cost$ R Sac<1/Creature> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
 SVar:AIPreference:SacCost$Creature.token+powerLE2+toughnessLE2,Creature.powerLE1+toughnessLE2+cmcLE2
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/collateral_damage.jpg
 Oracle:As an additional cost to cast this spell, sacrifice a creature.\nCollateral Damage deals 3 damage to any target.

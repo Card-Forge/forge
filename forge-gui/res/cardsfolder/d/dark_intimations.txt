@@ -11,5 +11,4 @@ SVar:DBExtraLoyaltyEffect:DB$ Effect | ReplacementEffects$ DBBoostLoyalty | Reme
 SVar:DBBoostLoyalty:Event$ Moved | ActiveZones$ Command | Destination$ Battlefield | ValidCard$ Card.IsRemembered | ReplaceWith$ AddExtraCounter | Description$ That planeswalker enters the battlefield with an additional loyalty counter on it.
 SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ LOYALTY | CounterNum$ 1 | SubAbility$ MoveToBattlefield
 SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_intimations.jpg
 Oracle:Each opponent sacrifices a creature or planeswalker, then discards a card. You return a creature or planeswalker card from your graveyard to your hand, then draw a card.\nWhen you cast a Bolas planeswalker spell, exile Dark Intimations from your graveyard. That planeswalker enters the battlefield with an additional loyalty counter on it.

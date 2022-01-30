@@ -5,5 +5,4 @@ K:Equip:3
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ Damage | Description$ Equipped creature has "{T}: This creature deals 1 damage to any target."
 SVar:Damage:AB$DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_longbow.jpg
 Oracle:Equipped creature has "{T}: This creature deals 1 damage to any target."\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)

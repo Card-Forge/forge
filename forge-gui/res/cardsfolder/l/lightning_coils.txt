@@ -9,5 +9,4 @@ SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ r_3_1_elemental_haste | L
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_coils.jpg
 Oracle:Whenever a nontoken creature you control dies, put a charge counter on Lightning Coils.\nAt the beginning of your upkeep, if Lightning Coils has five or more charge counters on it, remove all of them from it and create that many 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step.

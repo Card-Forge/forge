@@ -5,5 +5,4 @@ PT:6/5
 K:Flying
 K:Unleash
 S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_P1P1 | AddKeyword$ Trample | Description$ CARDNAME has trample as long as it has a +1/+1 counter on it.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chaos_imps.jpg
 Oracle:Flying\nUnleash (You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)\nChaos Imps has trample as long as it has a +1/+1 counter on it.

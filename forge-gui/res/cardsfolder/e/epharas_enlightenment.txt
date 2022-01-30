@@ -8,5 +8,4 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Enchanted | CounterType$ P1P1 | Co
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ Whenever a creature enters the battlefield under your control, you may return CARDNAME to its owner's hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/epharas_enlightenment.jpg
 Oracle:Enchant creature\nWhen Ephara's Enlightenment enters the battlefield, put a +1/+1 counter on enchanted creature.\nEnchanted creature has flying.\nWhenever a creature enters the battlefield under your control, you may return Ephara's Enlightenment to its owner's hand.

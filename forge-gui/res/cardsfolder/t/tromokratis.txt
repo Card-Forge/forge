@@ -5,5 +5,4 @@ PT:8/8
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Hexproof | CheckSVar$ X | Description$ CARDNAME has hexproof unless it's attacking or blocking.
 SVar:X:Count$Valid Card.Self+notattacking+notblocking
 K:CARDNAME can't be blocked unless all creatures defending player controls block it.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tromokratis.jpg
 Oracle:Tromokratis has hexproof unless it's attacking or blocking.\nTromokratis can't be blocked unless all creatures defending player controls block it. (If any creature that player controls doesn't block this creature, it can't be blocked.)

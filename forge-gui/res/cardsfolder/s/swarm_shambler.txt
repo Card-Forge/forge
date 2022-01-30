@@ -6,5 +6,5 @@ K:etbCounter:P1P1:1:no Condition:CARDNAME enters the battlefield with a +1/+1 co
 T:Mode$ BecomesTarget | ValidTarget$ Creature.YouCtrl+counters_GE1_P1P1 | ValidSource$ Spell.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a creature you control with a +1/+1 counter on it becomes the target of a spell an opponent controls, create a 1/1 green Insect creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_insect | TokenOwner$ You
 A:AB$ PutCounter | Cost$ 1 T | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
-DeckHas:Ability$Counters & Ability$Token
+DeckHas:Ability$Counters|Token
 Oracle:Swarm Shambler enters the battlefield with a +1/+1 counter on it.\nWhenever a creature you control with a +1/+1 counter on it becomes the target of a spell an opponent controls, create a 1/1 green Insect creature token.\n{1}, {T}: Put a +1/+1 counter on Swarm Shambler.

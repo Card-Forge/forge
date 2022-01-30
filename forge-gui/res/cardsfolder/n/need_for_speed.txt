@@ -4,5 +4,4 @@ Types:Enchantment
 A:AB$ Pump | Cost$ Sac<1/Land> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/need_for_speed.jpg
 Oracle:Sacrifice a land: Target creature gains haste until end of turn.

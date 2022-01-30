@@ -3,5 +3,4 @@ ManaCost:2 B
 Types:Creature Zombie
 PT:2/3
 K:Unleash
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dead_reveler.jpg
 Oracle:Unleash (You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)

@@ -5,7 +5,6 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$
 T:Mode$ Transformed | ValidCard$ Creature.EquippedBy | Execute$ TrigTransform | TriggerDescription$ When equipped creature transforms, transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 K:Equip:1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/neglected_heirloom.jpg
 AlternateMode:DoubleFaced
 Oracle:Equipped creature gets +1/+1.\nWhen equipped creature transforms, transform Neglected Heirloom.\nEquip {1}
 
@@ -16,5 +15,4 @@ ManaCost:no cost
 Types:Artifact Equipment
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ First Strike | Description$ Equipped creature gets +3/+3 and has first strike.
 K:Equip:3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ashmouth_blade.jpg
 Oracle:Equipped creature gets +3/+3 and has first strike.\nEquip {3}

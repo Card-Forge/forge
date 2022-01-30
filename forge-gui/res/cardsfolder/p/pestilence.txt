@@ -6,5 +6,4 @@ SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 A:AB$ DamageAll | Cost$ B | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | AILogic$ DmgAllCreaturesAndPlayers | SpellDescription$ CARDNAME deals 1 damage to each creature and each player.
 SVar:NeedsToPlay:Creature
 SVar:NonStackingEffect:True
-SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5619.jpg
 Oracle:At the beginning of the end step, if no creatures are on the battlefield, sacrifice Pestilence.\n{B}: Pestilence deals 1 damage to each creature and each player.

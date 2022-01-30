@@ -4,5 +4,4 @@ Types:Legendary Creature Elf Ally
 PT:4/4
 S:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land on each of your turns.
 A:AB$ Pump | Cost$ R G Return<1/Land> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Trample | SpellDescription$ Target creature gains trample until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mina_and_denn_wildborn.jpg
 Oracle:You may play an additional land on each of your turns.\n{R}{G}, Return a land you control to its owner's hand: Target creature gains trample until end of turn.

@@ -10,5 +10,4 @@ SVar:DamageEffectPlayer:DB$ DealDamage | Defined$ Remembered | DamageSource$ Eff
 SVar:DBDamageResolve:DB$ DamageResolve
 SVar:X:ReplaceCount$DamageAmount/HalfUp
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
-SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Stuffy Doll Avatar.full.jpg
 Oracle:Hand +0, life -6\n{0}: If damage would be dealt to you this turn by a source of your choice, prevent that damage. Stuffy Doll Avatar deals damage to you and target opponent or planeswalker equal to half the damage prevented this way, rounded up. Activate only once each turn.

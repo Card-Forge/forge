@@ -2,5 +2,4 @@ Name:Animate Land
 ManaCost:G
 Types:Instant
 A:SP$ Animate | Cost$ G | ValidTgts$ Land | TgtPrompt$ Select target land | Power$ 3 | Toughness$ 3 | Types$ Creature | SpellDescription$ Until end of turn, target land becomes a 3/3 creature that's still a land.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/animate_land.jpg
 Oracle:Until end of turn, target land becomes a 3/3 creature that's still a land.

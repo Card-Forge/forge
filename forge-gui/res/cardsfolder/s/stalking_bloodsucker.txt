@@ -5,5 +5,4 @@ PT:4/4
 K:Flying
 A:AB$ Pump | Cost$ 1 B Discard<1/Card> | NumAtt$ +2 | NumDef$ +2 | AILogic$ Aristocrat | SpellDescription$ Stalking Bloodsucker gets +2/+2 until end of turn.
 SVar:AIPreference:DiscardCost$Card
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stalking_bloodsucker.jpg
 Oracle:Flying\n{1}{B}, Discard a card: Stalking Bloodsucker gets +2/+2 until end of turn.

@@ -2,5 +2,5 @@ Name:Wolf's Quarry
 ManaCost:4 G G
 Types:Sorcery
 A:SP$ Token | Cost$ 4 G G | TokenAmount$ 3 | TokenScript$ g_1_1_boar_food | TokenOwner$ You | LegacyImage$ g 1 1 boar food eld | SpellDescription$ Create three 1/1 green Boar creature tokens with "When this creature dies, create a Food token." (A Food token is an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
-DeckHas:Ability$Token & Ability$LifeGain
+DeckHas:Ability$Token|LifeGain
 Oracle:Create three 1/1 green Boar creature tokens with "When this creature dies, create a Food token." (A Food token is an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")

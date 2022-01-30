@@ -4,5 +4,4 @@ Types:Enchantment
 T:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control deals combat damage, put a blaze counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ BLAZE | CounterNum$ 1
 A:AB$ DealDamage | Cost$ SubCounter<5/BLAZE> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to any target.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/five-alarm_fire.jpg
 Oracle:Whenever a creature you control deals combat damage, put a blaze counter on Five-Alarm Fire.\nRemove five blaze counters from Five-Alarm Fire: It deals 5 damage to any target.

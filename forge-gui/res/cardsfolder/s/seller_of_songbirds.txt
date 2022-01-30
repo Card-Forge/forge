@@ -5,5 +5,4 @@ PT:1/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 white Bird creature token with flying.
 SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ w_1_1_bird_flying | LegacyImage$ w 1 1 bird flying rtr
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/seller_of_songbirds.jpg
 Oracle:When Seller of Songbirds enters the battlefield, create a 1/1 white Bird creature token with flying.

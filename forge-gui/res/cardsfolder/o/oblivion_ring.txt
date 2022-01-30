@@ -7,5 +7,4 @@ SVar:TrigExile:DB$ ChangeZone | TargetMin$ 1 | IsCurse$ True | ValidTgts$ Perman
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
 SVar:PlayMain1:TRUE
 SVar:OblivionRing:TRUE
-SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card139414.jpg
 Oracle:When Oblivion Ring enters the battlefield, exile another target nonland permanent.\nWhen Oblivion Ring leaves the battlefield, return the exiled card to the battlefield under its owner's control.

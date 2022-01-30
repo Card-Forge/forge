@@ -7,5 +7,4 @@ SVar:X:Count$Valid Griffin.YouCtrl
 SVar:BuffedBy:Griffin
 AI:RemoveDeck:Random
 DeckHints:Type$Griffin
-SVar:Picture:http://www.wizards.com/global/images/magic/general/griffin_rider.jpg
 Oracle:As long as you control a Griffin creature, Griffin Rider gets +3/+3 and has flying.

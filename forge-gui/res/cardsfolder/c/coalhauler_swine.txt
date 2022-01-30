@@ -6,5 +6,4 @@ T:Mode$ DamageDoneOnce | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZ
 SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | Defined$ Player
 SVar:X:TriggerCount$DamageAmount
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/coalhauler_swine.jpg
 Oracle:Whenever Coalhauler Swine is dealt damage, it deals that much damage to each player.

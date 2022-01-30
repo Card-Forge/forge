@@ -7,5 +7,4 @@ SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ValidTgts$ O
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME leaves the battlefield, target opponent draws a card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1 | ValidTgts$ Opponent | TgtPrompt$ Choose an opponent
 DeckNeeds:Ability$Mana.Colorless
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_knot_seer.jpg
 Oracle:({C} represents colorless mana.)\nWhen Thought-Knot Seer enters the battlefield, target opponent reveals their hand. You choose a nonland card from it and exile that card.\nWhen Thought-Knot Seer leaves the battlefield, target opponent draws a card.

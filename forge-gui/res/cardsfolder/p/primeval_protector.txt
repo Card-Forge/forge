@@ -8,5 +8,4 @@ SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+Other | Co
 SVar:X:Count$Valid Creature.OppCtrl
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/primeval_protector.jpg
 Oracle:This spell costs {1} less to cast for each creature your opponents control.\nWhen Primeval Protector enters the battlefield, put a +1/+1 counter on each other creature you control.

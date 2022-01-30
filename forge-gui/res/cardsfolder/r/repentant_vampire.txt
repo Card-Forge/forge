@@ -8,5 +8,4 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | Counter
 S:Mode$ Continuous | Affected$ Card.Self | SetColor$ White | AddAbility$ Destroy | Condition$ Threshold | Description$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME is white and has "{T}: Destroy target black creature."
 SVar:Destroy:AB$ Destroy | Cost$ T | ValidTgts$ Creature.Black | TgtPrompt$ Select target black creature | SpellDescription$ Destroy target black creature.
 DeckHints:Ability$Graveyard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/repentant_vampire.jpg
 Oracle:Flying\nWhenever a creature dealt damage by Repentant Vampire this turn dies, put a +1/+1 counter on Repentant Vampire.\nThreshold — As long as seven or more cards are in your graveyard, Repentant Vampire is white and has "{T}: Destroy target black creature."

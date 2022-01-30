@@ -9,5 +9,4 @@ SVar:DBCopy:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$ 1 |
 SVar:BuffedBy:Creature
 SVar:NoZeroToughnessAI:True
 DeckHints:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wayfaring_temple.jpg
 Oracle:Wayfaring Temple's power and toughness are each equal to the number of creatures you control.\nWhenever Wayfaring Temple deals combat damage to a player, populate. (Create a token that's a copy of a creature token you control.)

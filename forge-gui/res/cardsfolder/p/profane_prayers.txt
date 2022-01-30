@@ -5,5 +5,4 @@ A:SP$ DealDamage | Cost$ 2 B B | ValidTgts$ Creature,Player,Planeswalker | TgtPr
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$TypeOnBattlefield.Cleric
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/profane_prayers.jpg
 Oracle:Profane Prayers deals X damage to any target and you gain X life, where X is the number of Clerics on the battlefield.

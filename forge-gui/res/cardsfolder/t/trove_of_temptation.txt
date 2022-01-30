@@ -5,5 +5,4 @@ K:Each opponent must attack you or a planeswalker you control with at least one 
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBTreasureToken | TriggerDescription$ At the beginning of your end step, create a Treasure token.
 SVar:DBTreasureToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | LegacyImage$ c a treasure sac xln
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/trove_of_temptation.jpg
 Oracle:Each opponent must attack you or a planeswalker you control with at least one creature each combat if able.\nAt the beginning of your end step, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

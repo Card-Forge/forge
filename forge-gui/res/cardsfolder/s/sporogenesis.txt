@@ -10,5 +10,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigRemove:DB$ RepeatEach | RepeatCards$ Creature | RepeatSubAbility$ DBRemoveFungus
 SVar:DBRemoveFungus:DB$ RemoveCounter | Defined$ Remembered | CounterType$ FUNGUS | CounterNum$ All
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sporogenesis.jpg
 Oracle:At the beginning of your upkeep, you may put a fungus counter on target nontoken creature.\nWhenever a creature with a fungus counter on it dies, create a 1/1 green Saproling creature token for each fungus counter on that creature.\nWhen Sporogenesis leaves the battlefield, remove all fungus counters from all creatures.

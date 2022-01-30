@@ -5,5 +5,4 @@ A:SP$ GainLife | Cost$ 1 B | Defined$ You | LifeAmount$ X | SubAbility$ Dmg | Sp
 SVar:Dmg:DB$ DealDamage | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumDmg$ X
 SVar:X:Count$YourDamageThisTurn
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/simulacrum.jpg
 Oracle:You gain life equal to the damage dealt to you this turn. Simulacrum deals damage to target creature you control equal to the damage dealt to you this turn.

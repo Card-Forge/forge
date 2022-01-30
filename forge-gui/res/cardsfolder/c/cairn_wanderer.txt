@@ -4,5 +4,4 @@ Types:Creature Shapeshifter
 PT:4/4
 K:Changeling
 S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Card.Self | CharacteristicDefining$ True | AddKeyword$ Flying & Fear & First Strike & Double Strike & Deathtouch & Haste & Landwalk & Lifelink & Protection & Reach & Trample & Shroud & Vigilance | SharedKeywordsZone$ Graveyard | SharedRestrictions$ Creature | Description$ As long as a creature card with flying is in a graveyard, CARDNAME has flying. The same is true for fear, first strike, double strike, deathtouch, haste, landwalk, lifelink, protection, reach, trample, shroud, and vigilance.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cairn_wanderer.jpg
 Oracle:Changeling (This card is every creature type.)\nAs long as a creature card with flying is in a graveyard, Cairn Wanderer has flying. The same is true for fear, first strike, double strike, deathtouch, haste, landwalk, lifelink, protection, reach, trample, shroud, and vigilance.

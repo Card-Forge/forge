@@ -3,8 +3,7 @@ ManaCost:1
 Types:Artifact Creature Gargoyle
 PT:2/2
 K:Defender
-A:AB$SetState | Cost$ 6 | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thraben_gargoyle.jpg
+A:AB$ SetState | Cost$ 6 | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
 AlternateMode:DoubleFaced
 Oracle:Defender\n{6}: Transform Thraben Gargoyle.
 
@@ -15,5 +14,4 @@ ManaCost:no cost
 Types:Artifact Creature Gargoyle Horror
 PT:4/2
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stonewing_antagonizer.jpg
 Oracle:Flying

@@ -6,5 +6,4 @@ SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentKeywordI
 S:Mode$ Continuous | Affected$ Permanent.nonLand | SetColor$ ChosenColor | Description$ All nonland permanents are the chosen color.
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shifting_sky.jpg
 Oracle:As Shifting Sky enters the battlefield, choose a color.\nAll nonland permanents are the chosen color.

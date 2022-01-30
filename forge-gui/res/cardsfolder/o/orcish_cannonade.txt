@@ -7,5 +7,4 @@ SVar:DBDamageResolve:DB$ DamageResolve | SubAbility$ DB2
 SVar:DB2:DB$ Draw | NumCards$ 1
 SVar:SelfDamageAmount:3
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_cannonade.jpg
 Oracle:Orcish Cannonade deals 2 damage to any target and 3 damage to you.\nDraw a card.

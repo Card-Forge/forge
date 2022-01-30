@@ -5,5 +5,4 @@ T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ ExileFlying | TriggerZones
 SVar:ExileFlying:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with Flying | SubAbility$ ExileWithoutFly
 SVar:ExileWithoutFly:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without Flying | SubAbility$ ExileAllYard
 SVar:ExileAllYard:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Opponent | ChangeType$ Card
-SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/Into the Earthen Maw.full.jpg
 Oracle:When you set this scheme in motion, exile up to one target creature with flying, up to one target creature without flying, and all cards from up to one target opponent's graveyard.

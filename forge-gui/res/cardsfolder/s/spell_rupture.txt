@@ -3,5 +3,4 @@ ManaCost:1 U
 Types:Instant
 A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | ValidTgts$ Card | UnlessCost$ X | UnlessPayer$ TargetedController | SpellDescription$ Counter target spell unless its controller pays {X}, where X is the greatest power among creatures you control.
 SVar:X:Count$GreatestPower_Creature.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_rupture.jpg
 Oracle:Counter target spell unless its controller pays {X}, where X is the greatest power among creatures you control.

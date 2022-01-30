@@ -7,5 +7,4 @@ SVar:AntagonismX:TriggeredPlayer$DamageToOppsThisTurn
 SVar:Check:PlayerCountOpponents$DamageToOppsThisTurn
 SVar:NeedsToPlayVar:Check GE1
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/antagonism.jpg
 Oracle:At the beginning of each player's end step, Antagonism deals 2 damage to that player unless one of their opponents was dealt damage this turn.

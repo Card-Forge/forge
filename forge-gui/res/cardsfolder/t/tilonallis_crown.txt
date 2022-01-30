@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to enchanted creature.
 SVar:TrigDealDamage:DB$ DealDamage | Defined$ Enchanted | NumDmg$ 1
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddKeyword$ Trample | Description$ Enchanted creature gets +3/+0 and has trample.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tilonallis_crown.jpg
 Oracle:Enchant creature\nWhen Tilonalli's Crown enters the battlefield, it deals 1 damage to enchanted creature.\nEnchanted creature gets +3/+0 and has trample.

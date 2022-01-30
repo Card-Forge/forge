@@ -5,5 +5,4 @@ PT:6/6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DamageAndMoreDamage | TriggerDescription$ Whenever CARDNAME enters the battlefield, it deals 3 damage to target opponent or planeswalker and 3 damage to up to one target creature.
 SVar:DamageAndMoreDamage:DB$ DealDamage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ 3 | SubAbility$ MoreDamage
 SVar:MoreDamage:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ 3 | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/burning_suns_avatar.jpg
 Oracle:When Burning Sun's Avatar enters the battlefield, it deals 3 damage to target opponent or planeswalker and 3 damage to up to one target creature.

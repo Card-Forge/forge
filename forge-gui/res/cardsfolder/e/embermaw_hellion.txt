@@ -6,5 +6,4 @@ K:Trample
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.RedSource+Other+YouCtrl | ValidTarget$ Permanent,Player | ReplaceWith$ DmgPlus1 | Description$ If another red source you control would deal damage to a permanent or player, it deals that much damage plus 1 to that permanent or player instead.
 SVar:DmgPlus1:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
 SVar:X:ReplaceCount$DamageAmount/Plus.1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/embermaw_hellion.jpg
 Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nIf another red source you control would deal damage to a permanent or player, it deals that much damage plus 1 to that permanent or player instead.

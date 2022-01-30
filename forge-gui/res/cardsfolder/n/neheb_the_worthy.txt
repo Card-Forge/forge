@@ -10,5 +10,4 @@ SVar:TrigDiscard:DB$ Discard | Defined$ Player | NumCards$ 1 | Mode$ TgtChoose
 SVar:X:Count$InYourHand
 SVar:PlayMain1:TRUE
 DeckHints:Type$Minotaur
-SVar:Picture:http://www.wizards.com/global/images/magic/general/neheb_the_worthy.jpg
 Oracle:First strike\nOther Minotaurs you control have first strike.\nAs long as you have one or fewer cards in hand, Minotaurs you control get +2/+0.\nWhenever Neheb, the Worthy deals combat damage to a player, each player discards a card.

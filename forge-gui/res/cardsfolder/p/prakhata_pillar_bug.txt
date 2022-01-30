@@ -4,5 +4,4 @@ Types:Artifact Creature Insect
 PT:2/3
 A:AB$ Pump | Cost$ B | KW$ Lifelink | Defined$ Self | SpellDescription$ CARDNAME gains lifelink until end of turn. (Damage dealt by this creature also causes you to gain that much life.)
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/prakhata_pillar_bug.jpg
 Oracle:{B}: Prakhata Pillar-Bug gains lifelink until end of turn. (Damage dealt by this creature also causes you to gain that much life.)

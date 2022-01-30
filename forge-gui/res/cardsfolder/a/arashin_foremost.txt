@@ -9,5 +9,4 @@ SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Warrior+YouCtrl+Other | TgtPrompt$ 
 SVar:HasAttackEffect:TRUE
 SVar:PlayMain1:TRUE
 DeckHints:Type$Warrior
-SVar:Picture:http://www.wizards.com/global/images/magic/general/arashin_foremost.jpg
 Oracle:Double strike\nWhenever Arashin Foremost enters the battlefield or attacks, another target Warrior creature you control gains double strike until end of turn.

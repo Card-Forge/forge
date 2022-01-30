@@ -9,7 +9,6 @@ SVar:DBUntap:DB$ Untap | Defined$ Self | ConditionDefined$ Remembered | Conditio
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 AlternateMode:DoubleFaced
-SVar:Picture:http://www.wizards.com/global/images/magic/general/civilized_scholar.jpg
 Oracle:{T}: Draw a card, then discard a card. If a creature card is discarded this way, untap Civilized Scholar, then transform it.
 
 ALTERNATE
@@ -22,5 +21,4 @@ PT:5/1
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | IsPresent$ Card.notAttackedThisTurn+Self | TriggerDescription$ At the beginning of your end step, if CARDNAME didn't attack this turn, tap CARDNAME, then transform it.
 SVar:TrigTap:DB$ Tap | Defined$ Self | SubAbility$ DBTransform2
 SVar:DBTransform2:DB$ SetState | Defined$ Self | Mode$ Transform
-SVar:Picture:http://www.wizards.com/global/images/magic/general/homicidal_brute.jpg
 Oracle:At the beginning of your end step, if Homicidal Brute didn't attack this turn, tap Homicidal Brute, then transform it.

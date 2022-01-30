@@ -6,5 +6,4 @@ A:AB$ Mana | Cost$ T | Produced$ Combo ColorIdentity | TriggersWhenSpent$ TrigSc
 SVar:TrigScry:Mode$ SpellCast | ValidCard$ Creature.sharesCreatureTypeWith Commander | OneOff$ True | Execute$ DBScry | TriggerDescription$ When mana produced by CARDNAME is spent to cast a creature spell that shares a creature type with your commander, scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 AI:RemoveDeck:NonCommander
-SVar:Picture:http://www.wizards.com/global/images/magic/general/command_tower.jpg
 Oracle:Path of Ancestry enters the battlefield tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

@@ -8,5 +8,4 @@ K:Monstrosity:3:4 R G
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | IsPresent$ Card.Self+IsMonstrous | Execute$ TrigDestroy | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, if CARDNAME is monstrous, destroy target enchantment that player controls.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment that player controls | TargetsWithDefinedController$ TriggeredTarget
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/polis_crusher.jpg
 Oracle:Trample, protection from enchantments\n{4}{R}{G}: Monstrosity 3. (If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)\nWhenever Polis Crusher deals combat damage to a player, if Polis Crusher is monstrous, destroy target enchantment that player controls.

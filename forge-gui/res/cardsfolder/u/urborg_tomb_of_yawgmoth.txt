@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Legendary Land
 S:Mode$ Continuous | Affected$ Land | AddType$ Swamp | Description$ Each land is a Swamp in addition to its other land types.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_tomb_of_yawgmoth.jpg
 Oracle:Each land is a Swamp in addition to its other land types.

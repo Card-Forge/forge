@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckDefinedPlayer$ You.isMonarch | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, if you're the monarch, create a 5/5 red Dragon creature token with flying.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_5_5_dragon_flying | TokenOwner$ You | LegacyImage$ r 5 5 dragon flying cn2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skyline_despot.jpg
 Oracle:Flying\nWhen Skyline Despot enters the battlefield, you become the monarch.\nAt the beginning of your upkeep, if you're the monarch, create a 5/5 red Dragon creature token with flying.

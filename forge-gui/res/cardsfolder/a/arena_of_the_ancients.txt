@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigTapAll:DB$ TapAll | ValidCards$ Creature.Legendary
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/arena_of_the_ancients.jpg
 Oracle:Legendary creatures don't untap during their controllers' untap steps.\nWhen Arena of the Ancients enters the battlefield, tap all legendary creatures.

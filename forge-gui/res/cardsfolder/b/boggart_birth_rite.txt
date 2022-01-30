@@ -3,5 +3,4 @@ ManaCost:B
 Types:Tribal Sorcery Goblin
 A:SP$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target Goblin card in your graveyard | ValidTgts$ Goblin.YouCtrl | SpellDescription$ Return target Goblin card from your graveyard to your hand.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_birth_rite.jpg
 Oracle:Return target Goblin card from your graveyard to your hand.

@@ -6,5 +6,4 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKe
 SVar:X:Count$Valid Permanent.Dragon+YouCtrl
 SVar:BuffedBy:Dragon
 DeckHints:Type$Dragon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonloft_idol.jpg
 Oracle:As long as you control a Dragon, Dragonloft Idol gets +1/+1 and has flying and trample.

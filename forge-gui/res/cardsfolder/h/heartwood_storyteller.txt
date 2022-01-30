@@ -5,5 +5,4 @@ PT:2/3
 T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Player | Execute$ TrigDraw | TriggerDescription$ Whenever a player casts a noncreature spell, each of that player's opponents may draw a card.
 SVar:TrigDraw:DB$ RepeatEach | RepeatPlayers$ TriggeredCardOpponent | RepeatSubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ Player.IsRemembered | NumCards$ 1 | OptionalDecider$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/heartwood_storyteller.jpg
 Oracle:Whenever a player casts a noncreature spell, each of that player's opponents may draw a card.

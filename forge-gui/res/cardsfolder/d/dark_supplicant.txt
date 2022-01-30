@@ -6,5 +6,4 @@ A:AB$ ChangeZone | Cost$ T Sac<3/Cleric> | Hidden$ True | Origin$ Library | Orig
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 DeckNeeds:Name$Scion of Darkness
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_supplicant.jpg
 Oracle:{T}, Sacrifice three Clerics: Search your graveyard, hand, and/or library for a card named Scion of Darkness and put it onto the battlefield. If you search your library this way, shuffle.

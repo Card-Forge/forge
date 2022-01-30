@@ -5,5 +5,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying & Prevent all combat damage that would be dealt to and dealt by CARDNAME. | Description$ Enchanted creature has flying. Prevent all combat damage that would be dealt to and dealt by enchanted creature.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostly_possession.jpg
 Oracle:Enchant creature\nEnchanted creature has flying.\nPrevent all combat damage that would be dealt to and dealt by enchanted creature.

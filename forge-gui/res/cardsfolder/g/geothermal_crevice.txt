@@ -5,5 +5,4 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
 A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ B G | SpellDescription$ Add {B}{G}.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/geothermal_crevice.jpg
 Oracle:Geothermal Crevice enters the battlefield tapped.\n{T}: Add {R}.\n{T}, Sacrifice Geothermal Crevice: Add {B}{G}.

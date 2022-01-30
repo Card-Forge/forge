@@ -2,6 +2,5 @@ Name:Makeshift Munitions
 ManaCost:1 R
 Types:Enchantment
 A:AB$ DealDamage | Cost$ 1 Sac<1/Artifact;Creature/artifact or creature> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/makeshift_munitions.jpg
 SVar:AIPreference:SacCost$Artifact.token+nonCreature,Creature.token+powerLE1,Creature.cmcLE1+powerLE1
 Oracle:{1}, Sacrifice an artifact or creature: Makeshift Munitions deals 1 damage to any target.

@@ -4,5 +4,4 @@ Types:Creature Illusion
 PT:3/4
 K:Flying
 K:Shroud
-SVar:Picture:http://www.wizards.com/global/images/magic/general/zephid.jpg
 Oracle:Flying\nShroud (This creature can't be the target of spells or abilities.)

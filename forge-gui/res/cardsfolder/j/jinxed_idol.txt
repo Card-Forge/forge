@@ -6,5 +6,4 @@ SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ 2
 A:AB$ GainControl | Cost$ Sac<1/Creature> | Defined$ Self | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SpellDescription$ Target opponent gains control of CARDNAME.
 SVar:SacMe:4
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jinxed_idol.jpg
 Oracle:At the beginning of your upkeep, Jinxed Idol deals 2 damage to you.\nSacrifice a creature: Target opponent gains control of Jinxed Idol.

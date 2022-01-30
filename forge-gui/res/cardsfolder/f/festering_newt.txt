@@ -8,5 +8,4 @@ SVar:DBPump:DB$ Pump | Defined$ ParentTarget | NumAtt$ -4 | NumDef$ -4 | Conditi
 SVar:BogbrewWitchPresent:Count$Valid Creature.YouCtrl+namedBogbrew Witch
 DeckNeeds:Name$Bogbrew Witch
 DeckHints:Name$Bubbling Cauldron
-SVar:Picture:http://www.wizards.com/global/images/magic/general/festering_newt.jpg
 Oracle:When Festering Newt dies, target creature an opponent controls gets -1/-1 until end of turn. That creature gets -4/-4 instead if you control a creature named Bogbrew Witch.

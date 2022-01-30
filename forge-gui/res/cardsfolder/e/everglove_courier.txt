@@ -9,5 +9,4 @@ T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Cle
 SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
 DeckNeeds:Type$Elf
 SVar:AIUntapPreference:BetterTgtThanRemembered
-SVar:Picture:http://www.wizards.com/global/images/magic/general/everglove_courier.jpg
 Oracle:You may choose not to untap Everglove Courier during your untap step.\n{2}{G}, {T}: Target Elf creature gets +2/+2 and has trample for as long as Everglove Courier remains tapped.

@@ -6,5 +6,4 @@ PT:1/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ CemeteryPucaCopy | TriggerDescription$ Whenever a creature dies, you may pay {1}. If you do, CARDNAME becomes a copy of that creature, except it has this ability.
 SVar:CemeteryPucaCopy:AB$ Clone | Cost$ 1 | Defined$ TriggeredCardLKICopy | GainThisAbility$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cemetery_puca.jpg
 Oracle:Whenever a creature dies, you may pay {1}. If you do, Cemetery Puca becomes a copy of that creature, except it has this ability.

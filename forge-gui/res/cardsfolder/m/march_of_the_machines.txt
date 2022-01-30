@@ -6,5 +6,4 @@ SVar:AffectedX:Count$CardManaCost
 SVar:NonStackingEffect:True
 SVar:PlayMain1:ALWAYS
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/march_of_the_machines.jpg
 Oracle:Each noncreature artifact is an artifact creature with power and toughness each equal to its mana value. (Equipment that's a creature can't equip a creature.)

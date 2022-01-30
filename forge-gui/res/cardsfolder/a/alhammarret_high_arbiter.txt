@@ -8,5 +8,4 @@ SVar:RevealHand:DB$ RevealHand | Defined$ Player.Opponent | RememberRevealed$ Tr
 SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonLand | ChooseFromDefinedCards$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 S:Mode$ CantBeCast | ValidCard$ Card.NamedCard | Caster$ Player.Opponent | Description$ Your opponents can't cast spells with the chosen name (as long as this creature is on the battlefield).
-SVar:Picture:http://www.wizards.com/global/images/magic/general/alhammarret_high_arbiter.jpg
 Oracle:Flying\nAs Alhammarret, High Arbiter enters the battlefield, each opponent reveals their hand. You choose the name of a nonland card revealed this way.\nYour opponents can't cast spells with the chosen name (as long as this creature is on the battlefield).

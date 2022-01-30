@@ -9,5 +9,4 @@ SVar:X:Remembered$Amount/Minus.1
 # Amount Minus 1 because the Player is also being remembered at this point
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/winds_of_change.jpg
 Oracle:Each player shuffles the cards from their hand into their library, then draws that many cards.

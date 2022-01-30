@@ -2,5 +2,4 @@ Name:Defiant Khenra
 ManaCost:1 R
 Types:Creature Jackal Warrior
 PT:2/2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/defiant_khenra.jpg
 Oracle:

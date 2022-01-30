@@ -8,5 +8,4 @@ SVar:ShapeTgt:DB$ Clone | Defined$ ChosenCard | CloneTarget$ Remembered | Durati
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:MaxTargets:Count$Valid Creature.YouCtrl
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/polymorphous_rush.jpg
 Oracle:Strive — This spell costs {1}{U} more to cast for each target beyond the first.\nChoose a creature on the battlefield. Any number of target creatures you control each become a copy of that creature until end of turn.

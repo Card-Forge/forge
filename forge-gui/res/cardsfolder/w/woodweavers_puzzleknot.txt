@@ -5,5 +5,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3 | SubAbility$ DBEnergy
 SVar:DBEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 3
 A:AB$ GainLife | Cost$ 2 G Sac<1/CARDNAME> | LifeAmount$ 3 | SubAbility$ DBEnergy | SpellDescription$ You gain 3 life and get {E}{E}{E}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/woodweavers_puzzleknot.jpg
 Oracle:When Woodweaver's Puzzleknot enters the battlefield, you gain 3 life and get {E}{E}{E} (three energy counters).\n{2}{G}, Sacrifice Woodweaver's Puzzleknot: You gain 3 life and get {E}{E}{E}.

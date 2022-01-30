@@ -5,5 +5,4 @@ PT:0/2
 A:AB$ Regenerate | Cost$ Sac<1/Goblin> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Regenerate target creature.
 SVar:AIPreference:SacCost$Creature.Goblin+cmcLE1+Other
 DeckNeeds:Type$Goblin
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_chirurgeon.jpg
 Oracle:Sacrifice a Goblin: Regenerate target creature.

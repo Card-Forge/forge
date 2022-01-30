@@ -2,5 +2,4 @@ Name:Silverback Ape
 ManaCost:3 G G
 Types:Creature Ape
 PT:5/5
-SVar:Picture:http://resources.wizards.com/magic/cards/8ed/en-us/card49056.jpg
 Oracle:

@@ -3,5 +3,4 @@ ManaCost:5 G W
 Types:Creature Dinosaur
 PT:4/6
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME assigns combat damage equal to its toughness rather than its power | Description$ Each creature you control assigns combat damage equal to its toughness rather than its power.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/belligerent_brontodon.jpg
 Oracle:Each creature you control assigns combat damage equal to its toughness rather than its power.

@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
 T:Mode$ BecomeMonarch | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever you become the monarch, target player sacrifices a creature.
 SVar:TrigSac:DB$ Sacrifice | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/custodi_lich.jpg
 Oracle:When Custodi Lich enters the battlefield, you become the monarch.\nWhenever you become the monarch, target player sacrifices a creature.

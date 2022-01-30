@@ -5,5 +5,4 @@ PT:2/2
 K:Vigilance
 A:AB$ Pump | Cost$ R W | Defined$ Self | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
 A:AB$ Pump | Cost$ R W | Defined$ Self | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/truefire_paladin.jpg
 Oracle:Vigilance\n{R}{W}: Truefire Paladin gets +2/+0 until end of turn.\n{R}{W}: Truefire Paladin gains first strike until end of turn.

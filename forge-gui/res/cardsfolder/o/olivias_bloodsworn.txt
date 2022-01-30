@@ -7,5 +7,4 @@ K:CARDNAME can't block.
 A:AB$ Pump | Cost$ R | ValidTgts$ Vampire | TgtPrompt$ Select target Vampire | KW$ Haste | SpellDescription$ Target Vampire gains haste until end of turn.
 SVar:PlayMain1:ALWAYS
 SVar:BuffedBy:Creature.Vampire
-SVar:Picture:http://www.wizards.com/global/images/magic/general/olivias_bloodsworn.jpg
 Oracle:Flying\nOlivia's Bloodsworn can't block.\n{R}: Target Vampire gains haste until end of turn.

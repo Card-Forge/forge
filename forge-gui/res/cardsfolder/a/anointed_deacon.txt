@@ -5,5 +5,4 @@ PT:3/3
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, you may have target Vampire get +2/+0 until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Vampire | TgtPrompt$ Select target Vampire | NumAtt$ 2
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/anointed_deacon.jpg
 Oracle:At the beginning of combat on your turn, you may have target Vampire get +2/+0 until end of turn.

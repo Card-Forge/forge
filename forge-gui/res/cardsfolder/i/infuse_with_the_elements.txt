@@ -5,5 +5,4 @@ A:SP$ PutCounter | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Trample
 SVar:X:Count$Converge
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/infuse_with_the_elements.jpg
 Oracle:Converge — Put X +1/+1 counters on target creature, where X is the number of colors of mana spent to cast this spell. That creature gains trample until end of turn.

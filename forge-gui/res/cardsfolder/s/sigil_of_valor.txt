@@ -7,5 +7,4 @@ SVar:TrigPump:DB$ Pump | RememberObjects$ TriggeredAttacker | SubAbility$ TrigPu
 SVar:TrigPump2:DB$ Pump | Defined$ Remembered | NumAtt$ X | NumDef$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Creature.YouCtrl+IsNotRemembered
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_of_valor.jpg
 Oracle:Whenever equipped creature attacks alone, it gets +1/+1 until end of turn for each other creature you control.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

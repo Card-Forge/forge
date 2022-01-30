@@ -4,5 +4,4 @@ Types:Artifact Creature Construct
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBScry | TriggerDescription$ When CARDNAME enters the battlefield, each player may scry 1. (To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)
 SVar:DBScry:DB$ Scry | ScryNum$ 1 | Defined$ Player | Optional$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eager_construct.jpg
 Oracle:When Eager Construct enters the battlefield, each player may scry 1. (To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)

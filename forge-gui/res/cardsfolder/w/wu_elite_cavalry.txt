@@ -3,5 +3,4 @@ ManaCost:3 U
 Types:Creature Human Soldier
 PT:2/3
 K:Horsemanship
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wu_elite_cavalry.jpg
 Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)

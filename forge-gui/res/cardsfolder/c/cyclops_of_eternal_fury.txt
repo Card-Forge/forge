@@ -5,5 +5,4 @@ PT:5/3
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste.
 SVar:BuffedBy:Creature
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cyclops_of_eternal_fury.jpg
 Oracle:Creatures you control have haste.

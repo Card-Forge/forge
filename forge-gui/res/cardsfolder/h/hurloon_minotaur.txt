@@ -2,5 +2,4 @@ Name:Hurloon Minotaur
 ManaCost:1 R R
 Types:Creature Minotaur
 PT:2/3
-SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card4061.jpg
 Oracle:

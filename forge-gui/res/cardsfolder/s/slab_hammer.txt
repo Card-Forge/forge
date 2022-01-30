@@ -5,5 +5,4 @@ K:Equip:2
 T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigPump | TriggerDescription$ Whenever equipped creature attacks, you may return a land you control to its owner's hand. If you do, the creature gets +2/+2 until end of turn.
 SVar:TrigPump:AB$ Pump | Cost$ Return<1/Land> | Defined$ TriggeredAttacker | NumAtt$ 2 | NumDef$ 2
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/slab_hammer.jpg
 Oracle:Whenever equipped creature attacks, you may return a land you control to its owner's hand. If you do, the creature gets +2/+2 until end of turn.\nEquip {2}

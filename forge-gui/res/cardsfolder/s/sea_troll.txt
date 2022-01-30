@@ -10,5 +10,4 @@ SVar:CheckSVar:Number$0
 T:Mode$ Phase | Phase$ Cleanup | TriggerZones$ Battlefield | Execute$ DBCleanup | Static$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ StoreSVar | SVar$ CheckActivation | Type$ Number | Expression$ 0
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_troll.jpg
 Oracle:{U}: Regenerate Sea Troll. Activate only if Sea Troll blocked or was blocked by a blue creature this turn.

@@ -5,5 +5,4 @@ T:Mode$ LandPlayed | ValidCard$ Land.Other+YouCtrl | TriggerZones$ Battlefield |
 SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/city_of_traitors.jpg
 Oracle:When you play another land, sacrifice City of Traitors.\n{T}: Add {C}{C}.

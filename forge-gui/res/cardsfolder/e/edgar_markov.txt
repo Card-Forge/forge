@@ -12,5 +12,4 @@ SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Vampire.YouCtrl | Counter
 SVar:HasAttackEffect:TRUE
 SVar:BuffedBy:Vampire
 DeckHints:Type$Vampire
-SVar:Picture:http://www.wizards.com/global/images/magic/general/edgar_markov.jpg
 Oracle:Eminence — Whenever you cast another Vampire spell, if Edgar Markov is in the command zone or on the battlefield, create a 1/1 black Vampire creature token.\nFirst strike, haste\nWhenever Edgar Markov attacks, put a +1/+1 counter on each Vampire you control.

@@ -4,5 +4,4 @@ Types:Creature Naga Warrior
 PT:2/1
 K:Embalm:3 U
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tah_crop_skirmisher.jpg
 Oracle:Embalm {3}{U} ({3}{U}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Naga Warrior with no mana cost. Embalm only as a sorcery.)

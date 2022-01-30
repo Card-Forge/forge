@@ -14,6 +14,6 @@ SVar:ChooseLand:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Land
 SVar:ChoosePW:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Planeswalker.RememberedPlayerCtrl | ChoiceTitle$ Choose a planeswalker to keep | RememberChosen$ True | Mandatory$ True
 SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Permanent.IsNotRemembered+OppCtrl | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Token & Ability$Sacrifice
+DeckHas:Ability$Token|Sacrifice
 SVar:PlayMain1:TRUE
-Oracle:Whenever a creature you control dies, draw a card.\n[+1]: Create a 2/2 black Zombie creature token.\n[−4]: Each player sacrifices two creatures.\n[−9]: Each opponent chooses a permanent they control of each permanent type and sacrifices the rest.
+Oracle:Whenever a creature you control dies, draw a card.\n[+1]: Create a 2/2 black Zombie creature token.\n[-4]: Each player sacrifices two creatures.\n[-9]: Each opponent chooses a permanent they control of each permanent type and sacrifices the rest.

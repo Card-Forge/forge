@@ -4,5 +4,4 @@ Types:Sorcery
 A:SP$ ChangeZoneAll | Cost$ 5 B B | SubAbility$ DBDestroy | ChangeType$ Permanent.Nightstalker+YouCtrl | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return all Nightstalker permanent cards from your graveyard to the battlefield. Then destroy all Swamps you control.
 SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Swamp.YouCtrl
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/return_of_the_nightstalkers.jpg
 Oracle:Return all Nightstalker permanent cards from your graveyard to the battlefield. Then destroy all Swamps you control.

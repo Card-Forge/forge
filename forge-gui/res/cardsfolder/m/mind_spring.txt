@@ -3,5 +3,4 @@ ManaCost:X U U
 Types:Sorcery
 A:SP$ Draw | Cost$ X U U | NumCards$ X | SpellDescription$ Draw X cards.
 SVar:X:Count$xPaid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_spring.jpg
 Oracle:Draw X cards.

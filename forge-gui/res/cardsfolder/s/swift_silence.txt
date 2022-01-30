@@ -6,5 +6,4 @@ SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/swift_silence.jpg
 Oracle:Counter all other spells. Draw a card for each spell countered this way.

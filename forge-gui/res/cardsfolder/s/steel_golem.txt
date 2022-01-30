@@ -4,5 +4,4 @@ Types:Artifact Creature Golem
 PT:3/4
 S:Mode$ CantBeCast | ValidCard$ Creature | Caster$ You | Description$ You can't cast creature spells.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/steel_golem.jpg
 Oracle:You can't cast creature spells.

@@ -8,5 +8,4 @@ SVar:Z:Count$Valid Artifact.namedCrown of Empires+YouCtrl
 SVar:Y:Count$Valid Artifact.namedThrone of Empires+YouCtrl
 AI:RemoveDeck:Random
 DeckHints:Name$Throne of Empires|Crown of Empires
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scepter_of_empires.jpg
 Oracle:{T}: Scepter of Empires deals 1 damage to target player or planeswalker. It deals 3 damage instead if you control artifacts named Crown of Empires and Throne of Empires.

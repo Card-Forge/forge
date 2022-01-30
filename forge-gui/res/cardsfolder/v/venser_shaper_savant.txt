@@ -5,5 +5,4 @@ PT:2/2
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ VensersBounce | TriggerDescription$ When CARDNAME enters the battlefield, return target spell or permanent to its owner's hand.
 SVar:VensersBounce:DB$ ChangeZone | ValidTgts$ Permanent,Card.inZoneStack | TgtZone$ Stack,Battlefield | Origin$ Battlefield,Stack | Fizzle$ True | Destination$ Hand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/venser_shaper_savant.jpg
 Oracle:Flash\nWhen Venser, Shaper Savant enters the battlefield, return target spell or permanent to its owner's hand.

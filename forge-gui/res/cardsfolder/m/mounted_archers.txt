@@ -4,5 +4,4 @@ Types:Creature Human Soldier Archer
 PT:2/3
 K:Reach
 A:AB$ Pump | Cost$ W | Defined$ Self | CanBlockAmount$ 1 | SpellDescription$ CARDNAME can block an additional creature this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mounted_archers.jpg
 Oracle:Reach (This creature can block creatures with flying.)\n{W}: Mounted Archers can block an additional creature this turn.

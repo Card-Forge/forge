@@ -3,5 +3,4 @@ ManaCost:3
 Types:Artifact Creature Assembly-Worker
 PT:2/3
 A:AB$ CopyPermanent | Cost$ 7 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | PumpKeywords$ Haste | AtEOT$ Exile | AILogic$ BeforeCombat | SpellDescription$ Create a token that's a copy of target artifact. That token gains haste. Exile it at the beginning of the next end step.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cogwork_assembler.jpg
 Oracle:{7}: Create a token that's a copy of target artifact. That token gains haste. Exile it at the beginning of the next end step.

@@ -7,5 +7,4 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ Tri
 SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Ninja | ChangeNum$ 1 | ShuffleNonMandatory$ True
 A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature.Ninja | KW$ HIDDEN Unblockable | SpellDescription$ Target Ninja creature can't be blocked this turn. | TgtPrompt$ Select target Ninja creature
 DeckHints:Type$Ninja
-SVar:Picture:http://www.wizards.com/global/images/magic/general/higure_the_still_wind.jpg
 Oracle:Ninjutsu {2}{U}{U} ({2}{U}{U}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever Higure, the Still Wind deals combat damage to a player, you may search your library for a Ninja card, reveal it, put it into your hand, then shuffle.\n{2}: Target Ninja creature can't be blocked this turn.

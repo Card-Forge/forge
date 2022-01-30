@@ -2,5 +2,4 @@ Name:Regrowth
 ManaCost:1 G
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 1 G | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Card.YouCtrl | SpellDescription$ Return target card from your graveyard to your hand.
-SVar:Picture:http://resources.wizards.com/magic/cards/1e/en-us/card170.jpg
 Oracle:Return target card from your graveyard to your hand.

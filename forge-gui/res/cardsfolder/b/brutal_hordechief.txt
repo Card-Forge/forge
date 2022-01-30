@@ -9,5 +9,4 @@ A:AB$ Effect | Cost$ 3 RW RW | Name$ Brutal Hordechief Effect | StaticAbilities$
 SVar:STBlock:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.OppCtrl | AddHiddenKeyword$ CARDNAME blocks each combat if able. | Description$ Creatures your opponents control block this turn if able.
 SVar:DBDeclareCombatants:DB$ DeclareCombatants | DeclareBlockers$ True | Until$ EndOfTurn
 SVar:HasAttackEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brutal_hordechief.jpg
 Oracle:Whenever a creature you control attacks, defending player loses 1 life and you gain 1 life.\n{3}{R/W}{R/W}: Creatures your opponents control block this turn if able, and you choose how those creatures block.

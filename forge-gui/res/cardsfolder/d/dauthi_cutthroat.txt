@@ -4,5 +4,4 @@ Types:Creature Dauthi Minion
 PT:1/1
 K:Shadow
 A:AB$ Destroy | Cost$ 1 B T | ValidTgts$ Creature.withShadow | TgtPrompt$ Select target creature with shadow | SpellDescription$ Destroy target creature with shadow.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_cutthroat.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\n{1}{B}, {T}: Destroy target creature with shadow.

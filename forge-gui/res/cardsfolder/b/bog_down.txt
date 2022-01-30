@@ -7,5 +7,4 @@ SVar:WasKicked:Count$Kicked.3.2
 SVar:NeedsToPlayKickedVar:Z GE3
 SVar:Z:Count$ValidHand Card.OppCtrl
 SVar:AIPreference:SacCost$Land.basic+YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_down.jpg
 Oracle:Kicker—Sacrifice two lands. (You may sacrifice two lands in addition to any other costs as you cast this spell.)\nTarget player discards two cards. If this spell was kicked, that player discards three cards instead.

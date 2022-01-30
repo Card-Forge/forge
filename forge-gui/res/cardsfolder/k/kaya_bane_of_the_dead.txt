@@ -5,4 +5,4 @@ Loyalty:7
 S:Mode$ IgnoreHexproof | Activator$ You | ValidEntity$ Permanent.OppCtrl,Opponent | Description$ Your opponents and permanents your opponents control with hexproof can be the targets of spells and abilities you control as though they didn't have hexproof.
 SVar:PlayMain1:TRUE
 A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ true | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature.
-Oracle:Your opponents and permanents your opponents control with hexproof can be the targets of spells and abilities you control as though they didn't have hexproof.\n[−3]: Exile target creature.
+Oracle:Your opponents and permanents your opponents control with hexproof can be the targets of spells and abilities you control as though they didn't have hexproof.\n[-3]: Exile target creature.

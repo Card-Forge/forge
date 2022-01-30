@@ -7,5 +7,4 @@ SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X | Defined$ You
 SVar:X:TriggerCount$DamageAmount
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glyph_of_life.jpg
 Oracle:Choose target Wall creature. Whenever that creature is dealt damage by an attacking creature this turn, you gain that much life.

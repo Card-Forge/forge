@@ -3,5 +3,4 @@ ManaCost:2 R
 Types:Creature Sliver
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddKeyword$ Menace | Description$ Sliver creatures you control have menace.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/belligerent_sliver.jpg
 Oracle:Sliver creatures you control have menace. (They can't be blocked except by two or more creatures.)

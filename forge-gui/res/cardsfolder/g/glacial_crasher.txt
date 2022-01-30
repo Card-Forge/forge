@@ -8,5 +8,4 @@ SVar:X:Count$Valid Mountain
 AI:RemoveDeck:Random
 DeckNeeds:Color$Red
 SVar:BuffedBy:Mountain
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glacial_crasher.jpg
 Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nGlacial Crasher can't attack unless there is a Mountain on the battlefield.

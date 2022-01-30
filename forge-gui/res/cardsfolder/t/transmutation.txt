@@ -3,5 +3,4 @@ ManaCost:1 B
 Types:Instant
 A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch target creature's power and toughness until end of turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/transmutation.jpg
 Oracle:Switch target creature's power and toughness until end of turn.

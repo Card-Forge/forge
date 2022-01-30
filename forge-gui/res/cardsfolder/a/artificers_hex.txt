@@ -8,5 +8,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.EnchantedBy+A
 SVar:TrigDestroy:DB$ Destroy | Defined$ Valid Card.EquippedByEnchanted
 SVar:SVarDontEquip:SVar:DontEquip:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/artificers_hex.jpg
 Oracle:Enchant Equipment\nAt the beginning of your upkeep, if enchanted Equipment is attached to a creature, destroy that creature.

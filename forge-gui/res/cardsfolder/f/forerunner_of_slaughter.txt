@@ -7,5 +7,4 @@ A:AB$ Pump | Cost$ 1 | ValidTgts$ Creature.Colorless | TgtPrompt$ Select target 
 SVar:PlayMain1:ALWAYS
 SVar:BuffedBy:Creature.Colorless
 DeckHints:Keyword$Devoid & Color$Colorless
-SVar:Picture:http://www.wizards.com/global/images/magic/general/forerunner_of_slaughter.jpg
 Oracle:Devoid (This card has no color.)\n{1}: Target colorless creature gains haste until end of turn.

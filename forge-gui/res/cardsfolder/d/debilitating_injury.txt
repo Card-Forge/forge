@@ -4,5 +4,4 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -2 | AddToughness$ -2 | Description$ Enchanted creature gets -2/-2.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/debilitating_injury.jpg
 Oracle:Enchant creature\nEnchanted creature gets -2/-2.

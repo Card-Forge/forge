@@ -3,5 +3,4 @@ ManaCost:G
 Types:Creature Cat
 PT:2/1
 K:CARDNAME can't block.
-SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4302.jpg
 Oracle:Jungle Lion can't block.

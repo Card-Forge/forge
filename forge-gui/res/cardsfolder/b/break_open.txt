@@ -3,5 +3,4 @@ ManaCost:1 R
 Types:Instant
 A:SP$ SetState | Cost$ 1 R | ValidTgts$ Creature.faceDown+OppCtrl | TgtPrompt$ Select target facedown creature you don't control. | Mode$ TurnFace | SpellDescription$ Turn target face-down creature an opponent controls face up.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/break_open.jpg
 Oracle:Turn target face-down creature an opponent controls face up.

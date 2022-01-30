@@ -6,5 +6,4 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, gain control of target creature for as long as CARDNAME remains on the battlefield.
 SVar:TrigChange:DB$ GainControl | TgtPrompt$ Choose target creature | ValidTgts$ Creature | LoseControl$ LeavesPlay | SpellDescription$ Gain control of target creature for as long as CARDNAME remains on the battlefield.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sower_of_temptation.jpg
 Oracle:Flying\nWhen Sower of Temptation enters the battlefield, gain control of target creature for as long as Sower of Temptation remains on the battlefield.

@@ -5,5 +5,4 @@ A:SP$ ChangeZone | Cost$ W | Origin$ Battlefield | Destination$ Library | ValidT
 # Library Position is zero indexed. So 1 is second from the top
 SVar:DBGainLife:DB$ GainLife | Defined$ RememberedController | LifeAmount$ 3 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/oust.jpg
 Oracle:Put target creature into its owner's library second from the top. Its controller gains 3 life.

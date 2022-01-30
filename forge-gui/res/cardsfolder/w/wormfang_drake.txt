@@ -9,5 +9,4 @@ SVar:ETBExileAbility:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile |
 SVar:ETBExileSacrifice:DB$ Sacrifice | Defined$ Card.Self | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0
 SVar:ETBExileReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ ETBExileCleanup
 SVar:ETBExileCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wormfang_drake.jpg
 Oracle:Flying\nWhen Wormfang Drake enters the battlefield, sacrifice it unless you exile a creature you control other than Wormfang Drake.\nWhen Wormfang Drake leaves the battlefield, return the exiled card to the battlefield under its owner's control.

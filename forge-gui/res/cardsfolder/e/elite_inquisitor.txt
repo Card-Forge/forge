@@ -7,5 +7,4 @@ K:Vigilance
 K:Protection from Vampires
 K:Protection from Werewolves
 K:Protection from Zombies
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elite_inquisitor.jpg
 Oracle:First strike, vigilance\nProtection from Vampires, from Werewolves, and from Zombies

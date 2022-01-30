@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Instant
 A:SP$ Token | Cost$ 1 W | TokenAmount$ 2 | TokenScript$ w_1_1_soldier | TokenOwner$ You | LegacyImage$ w 1 1 soldier mrd | SpellDescription$ Create two 1/1 white Soldier creature tokens.
 DeckHas:Ability$Token
-SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card48103.jpg
 Oracle:Create two 1/1 white Soldier creature tokens.

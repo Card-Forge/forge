@@ -5,5 +5,4 @@ A:SP$ RevealHand | Cost$ 2 B | ValidTgts$ Player | TgtPrompt$ Select target play
 SVar:Damage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X
 SVar:X:Remembered$Valid Card.White
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/inquisition.jpg
 Oracle:Target player reveals their hand. Inquisition deals damage to that player equal to the number of white cards in their hand.

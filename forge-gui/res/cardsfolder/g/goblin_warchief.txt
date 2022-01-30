@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Goblin.YouCtrl | AddKeyword$ Haste | Description$
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Goblin
 DeckNeeds:Type$Goblin
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_warchief.jpg
 Oracle:Goblin spells you cast cost {1} less to cast.\nGoblins you control have haste.

@@ -7,5 +7,4 @@ SVar:DrawSlowtrip:DB$ Draw | NumCards$ 1 | Defined$ DelayTriggerRemembered | Spe
 SVar:Pump:DB$ Pump | ValidTgts$ Creature | KW$ Flying | TgtPrompt$ Select target creature | SpellDescription$ Target creature gains flying until end of turn.
 SVar:Phases:DB$ Phases | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | SpellDescription$ Target creature an opponent controls phases out.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sapphire_charm.jpg
 Oracle:Choose one —\n• Target player draws a card at the beginning of the next turn's upkeep.\n• Target creature gains flying until end of turn.\n• Target creature an opponent controls phases out. (While it's phased out, it's treated as though it doesn't exist. It phases in before its controller untaps during their next untap step.)

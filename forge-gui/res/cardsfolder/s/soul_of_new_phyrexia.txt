@@ -5,5 +5,4 @@ PT:6/6
 K:Trample
 A:AB$ PumpAll | Cost$ 5 | ValidCards$ Permanent.YouCtrl | KW$ Indestructible | SpellDescription$ Permanents you control gain indestructible until end of turn.
 A:AB$ PumpAll | Cost$ 5 ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidCards$ Permanent.YouCtrl | KW$ Indestructible | SpellDescription$ Permanents you control gain indestructible until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_of_new_phyrexia.jpg
 Oracle:Trample\n{5}: Permanents you control gain indestructible until end of turn.\n{5}, Exile Soul of New Phyrexia from your graveyard: Permanents you control gain indestructible until end of turn.

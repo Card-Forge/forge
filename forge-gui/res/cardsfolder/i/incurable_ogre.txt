@@ -2,5 +2,4 @@ Name:Incurable Ogre
 ManaCost:3 R
 Types:Creature Ogre Mutant
 PT:5/1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/incurable_ogre.jpg
 Oracle:

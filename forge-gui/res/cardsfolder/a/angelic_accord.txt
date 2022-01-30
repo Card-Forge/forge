@@ -5,5 +5,4 @@ T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ YouL
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_4_4_angel_flying | TokenOwner$ You | LegacyImage$ w 4 4 angel flying m14
 SVar:YouLifeGained:Count$LifeYouGainedThisTurn
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_accord.jpg
 Oracle:At the beginning of each end step, if you gained 4 or more life this turn, create a 4/4 white Angel creature token with flying.

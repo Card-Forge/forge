@@ -5,5 +5,4 @@ A:SP$ Draw | Cost$ 3 U U | NumCards$ Y | Defined$ You | ValidTgts$ Opponent | Tg
 SVar:X:Count$InYourHand
 SVar:Y:TargetedPlayer$CardsInHand/Minus.X
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/balance_of_power.jpg
 Oracle:If target opponent has more cards in hand than you, draw cards equal to the difference.

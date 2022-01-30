@@ -6,5 +6,4 @@ A:AB$ DealDamage | Cost$ T Sac<1/Mountain> | ValidTgts$ Creature | TgtPrompt$ Se
 A:AB$ ChoosePlayer | Cost$ T Sac<1/Forest> | Defined$ You | SubAbility$ DBMana | SpellDescription$ Choose a player. That player adds {G}{G}{G}.
 SVar:DBMana:DB$ Mana | Produced$ G | Amount$ 3 | Defined$ ChosenPlayer
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/valleymaker.jpg
 Oracle:{T}, Sacrifice a Mountain: Valleymaker deals 3 damage to target creature.\n{T}, Sacrifice a Forest: Choose a player. That player adds {G}{G}{G}.

@@ -7,5 +7,4 @@ SVar:DamageShielded:Event$ DamageDone | IsCombat$ True | ValidSource$ Card.IsRem
 SVar:DmgSelf:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Remembered | VarType$ Card | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_dancer.jpg
 Oracle:{2}{W}: The next time target attacking creature would deal combat damage to Shield Dancer this turn, that creature deals that damage to itself instead.

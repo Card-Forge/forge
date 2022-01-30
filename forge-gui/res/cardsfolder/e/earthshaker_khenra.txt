@@ -8,5 +8,4 @@ SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.powerLEX | IsCurse$ True | KW$ HIDD
 K:Eternalize:4 R R
 SVar:X:Count$CardPower
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/earthshaker_khenra.jpg
 Oracle:Haste\nWhen Earthshaker Khenra enters the battlefield, target creature with power less than or equal to Earthshaker Khenra's power can't block this turn.\nEternalize {4}{R}{R} ({4}{R}{R}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie Jackal Warrior with no mana cost. Eternalize only as a sorcery.)

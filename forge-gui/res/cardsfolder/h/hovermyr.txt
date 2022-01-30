@@ -4,5 +4,4 @@ Types:Artifact Creature Myr
 PT:1/2
 K:Flying
 K:Vigilance
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hovermyr.jpg
 Oracle:Flying, vigilance

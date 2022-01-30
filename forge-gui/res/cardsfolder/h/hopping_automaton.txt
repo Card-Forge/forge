@@ -3,5 +3,4 @@ ManaCost:3
 Types:Artifact Creature Construct
 PT:2/2
 A:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ -1 | NumDef$ -1 | KW$ Flying | SpellDescription$ CARDNAME gets -1/-1 and gains flying until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hopping_automaton.jpg
 Oracle:{0}: Hopping Automaton gets -1/-1 and gains flying until end of turn.

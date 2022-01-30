@@ -4,5 +4,4 @@ Types:Vanguard
 HandLifeModifier:+0/+3
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ DjinnisGift | TriggerZones$ Command | TriggerDescription$ Whenever you cast a creature spell, create a 1/1 green Saproling creature token.
 SVar:DjinnisGift:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling van
-SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Erhnam Djinn Avatar1.full.jpg
 Oracle:Hand +0, life +3\nWhenever you cast a creature spell, create a 1/1 green Saproling creature token.

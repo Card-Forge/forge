@@ -8,5 +8,4 @@ SVar:AnyMana:AB$Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana 
 SVar:NonStackingAttachEffect:True
 #TODO: For AI, this acts as a curse spell to lock the opponent's creature while giving the opponent mana advantage (similar to Path to Exile). Could probably be improved to be used on own useless creatures instead when possible.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/utopia_vow.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack or block.\nEnchanted creature has "{T}: Add one mana of any color."

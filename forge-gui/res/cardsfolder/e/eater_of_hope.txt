@@ -7,5 +7,4 @@ A:AB$ Regenerate | Cost$ B Sac<1/Creature.Other/another creature> | SpellDescrip
 A:AB$ Destroy | Cost$ 2 B Sac<2/Creature.Other/other creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eater_of_hope.jpg
 Oracle:Flying\n{B}, Sacrifice another creature: Regenerate Eater of Hope.\n{2}{B}, Sacrifice two other creatures: Destroy target creature.

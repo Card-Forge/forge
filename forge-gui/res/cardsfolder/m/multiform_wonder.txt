@@ -12,5 +12,4 @@ A:AB$ Pump | Cost$ PayEnergy<1> | Subability$ ABChoice | SpellDescription$ CARDN
 SVar:ABChoice:DB$ GenericChoice | Defined$ You | Choices$ ABPump1,ABPump2
 SVar:ABPump1:DB$ Pump | Defined$ Self | NumAtt$ +2 | NumDef$ -2 | SpellDescription$ +2/-2
 SVar:ABPump2:DB$ Pump | Defined$ Self | NumAtt$ -2 | NumDef$ +2 | SpellDescription$ -2/+2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/multiform_wonder.jpg
 Oracle:When Multiform Wonder enters the battlefield, you get {E}{E}{E} (three energy counters).\nPay {E}: Multiform Wonder gains your choice of flying, vigilance, or lifelink until end of turn.\nPay {E}: Multiform Wonder gets +2/-2 or -2/+2 until end of turn.

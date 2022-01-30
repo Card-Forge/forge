@@ -4,5 +4,4 @@ Types:Instant
 K:Cycling:3
 A:SP$ DamageAll | Cost$ X R R | ValidCards$ Creature | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature.
 SVar:X:Count$xPaid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/starstorm.jpg
 Oracle:Starstorm deals X damage to each creature.\nCycling {3} ({3}, Discard this card: Draw a card.)

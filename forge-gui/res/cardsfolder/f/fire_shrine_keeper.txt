@@ -4,5 +4,4 @@ Types:Creature Elemental
 PT:1/1
 K:Menace
 A:AB$ DealDamage | Cost$ 7 R T Sac<1/CARDNAME> | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to each of up to two target creatures.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_shrine_keeper.jpg
 Oracle:Menace\n{7}{R}, {T}, Sacrifice Fire Shrine Keeper: It deals 3 damage to each of up to two target creatures.

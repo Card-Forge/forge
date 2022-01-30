@@ -6,5 +6,4 @@ A:AB$ DealDamage | Cost$ B T | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:DBTap:DB$ Tap | Defined$ Targeted
 SVar:X:Count$CardPower
 SVar:NonCombatPriority:4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/abyssal_hunter.jpg
 Oracle:{B}, {T}: Tap target creature. Abyssal Hunter deals damage equal to Abyssal Hunter's power to that creature.

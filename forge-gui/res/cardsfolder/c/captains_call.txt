@@ -2,5 +2,4 @@ Name:Captain's Call
 ManaCost:3 W
 Types:Sorcery
 A:SP$ Token | Cost$ 3 W | TokenAmount$ 3 | TokenScript$ w_1_1_soldier | TokenOwner$ You | LegacyImage$ w 1 1 soldier m13 | SpellDescription$ Create three 1/1 white Soldier creature tokens.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/captains_call.jpg
 Oracle:Create three 1/1 white Soldier creature tokens.

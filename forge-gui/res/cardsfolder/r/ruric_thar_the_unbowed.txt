@@ -9,5 +9,4 @@ T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Card.nonCreature | Va
 SVar:TrigDmg:DB$ DealDamage | Defined$ TriggeredActivator | NumDmg$ 6
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ruric_thar_the_unbowed.jpg
 Oracle:Vigilance, reach\nRuric Thar, the Unbowed attacks each combat if able.\nWhenever a player casts a noncreature spell, Ruric Thar deals 6 damage to that player.

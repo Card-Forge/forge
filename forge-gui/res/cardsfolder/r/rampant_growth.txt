@@ -2,5 +2,4 @@ Name:Rampant Growth
 ManaCost:1 G
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 1 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ChangeNum$ 1 | StackDescription$ Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle. | SpellDescription$ Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rampant_growth.jpg
 Oracle:Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.

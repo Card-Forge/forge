@@ -8,5 +8,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ NumCreats
 SVar:X:Count$InYourHand
 SVar:NumCreats:Count$Valid Creature.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tishana_voice_of_thunder.jpg
 Oracle:Tishana, Voice of Thunder's power and toughness are each equal to the number of cards in your hand.\nYou have no maximum hand size.\nWhen Tishana enters the battlefield, draw a card for each creature you control.

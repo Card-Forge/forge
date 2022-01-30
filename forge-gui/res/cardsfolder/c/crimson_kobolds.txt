@@ -3,5 +3,4 @@ ManaCost:0
 Colors:red
 Types:Creature Kobold
 PT:0/1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crimson_kobolds.jpg
 Oracle:

@@ -4,5 +4,4 @@ Types:Creature Eldrazi
 PT:4/4
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
 DeckHas:Ability$Mana.Colorless
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kozileks_channeler.jpg
 Oracle:{T}: Add {C}{C}.

@@ -4,5 +4,4 @@ Types:Creature Wurm
 PT:4/4
 K:Trample
 K:Madness:2 R
-SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card126818.jpg
 Oracle:Trample\nMadness {2}{R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

@@ -5,5 +5,4 @@ S:Mode$ CantAttack | ValidCard$ Creature.withFlying | Target$ You,Planeswalker.Y
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, create a 5/5 green Wurm creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_5_5_wurm | TokenOwner$ TriggeredPlayer | LegacyImage$ g 5 5 wurm akh
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sandwurm_convergence.jpg
 Oracle:Creatures with flying can't attack you or planeswalkers you control.\nAt the beginning of your end step, create a 5/5 green Wurm creature token.

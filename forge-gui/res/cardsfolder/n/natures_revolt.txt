@@ -4,5 +4,4 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Land | SetPower$ 2 | SetToughness$ 2 | AddType$ Creature | Description$ All lands are 2/2 creatures that are still lands.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_revolt.jpg
 Oracle:All lands are 2/2 creatures that are still lands.

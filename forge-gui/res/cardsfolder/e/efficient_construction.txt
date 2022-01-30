@@ -5,5 +5,4 @@ T:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ You | TriggerZo
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You | LegacyImage$ c 1 1 a thopter flying aer
 SVar:BuffedBy:Artifact
 DeckHints:Type$Artifact
-SVar:Picture:http://www.wizards.com/global/images/magic/general/efficient_construction.jpg
 Oracle:Whenever you cast an artifact spell, create a 1/1 colorless Thopter artifact creature token with flying.

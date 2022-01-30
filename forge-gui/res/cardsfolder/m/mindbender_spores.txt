@@ -11,5 +11,4 @@ SVar:FungalFunk:Mode$ Continuous | Affected$ Card.Self+counters_GE1_FUNGUS | Add
 SVar:TrigSporeUpkeep:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ LoseSpores | TriggerDescription$ At the beginning of your upkeep, remove a fungus counter from CARDNAME.
 SVar:LoseSpores:DB$ RemoveCounter | CounterType$ FUNGUS | CounterNum$ 1
 SVar:HasBlockEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mindbender_spores.jpg
 Oracle:Defender (This creature can't attack.)\nFlying\nWhenever Mindbender Spores blocks a creature, put four fungus counters on that creature. The creature gains "This creature doesn't untap during your untap step if it has a fungus counter on it" and "At the beginning of your upkeep, remove a fungus counter from this creature."

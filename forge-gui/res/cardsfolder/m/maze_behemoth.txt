@@ -5,5 +5,4 @@ PT:5/4
 K:Trample
 S:Mode$ Continuous | Affected$ Creature.MultiColor+YouCtrl | AddKeyword$ Trample | Description$ Multicolored creatures you control have trample.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/maze_behemoth.jpg
 Oracle:Trample\nMulticolored creatures you control have trample.

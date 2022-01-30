@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ Token | Cost$ 5 W W | TokenAmount$ 4 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | LegacyImage$ w 2 2 knight vigilance ori | SubAbility$ DBPumpAll | SpellDescription$ Create four 2/2 white Knight creature tokens with vigilance. Spell mastery — If there are two or more instant and/or sorcery cards in your graveyard, creatures you control gain indestructible until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Indestructible | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gideons_phalanx.jpg
 Oracle:Create four 2/2 white Knight creature tokens with vigilance.\nSpell mastery — If there are two or more instant and/or sorcery cards in your graveyard, creatures you control gain indestructible until end of turn.

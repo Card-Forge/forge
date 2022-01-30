@@ -9,5 +9,4 @@ SVar:STCantWin:Mode$ Continuous | EffectZone$ Command | Affected$ Player.Opponen
 SVar:TrigPlaneswalk:Mode$ PlaneswalkedFrom | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:AIRollPlanarDieParams:Mode$ Always
-SVar:Picture:http://www.wizards.com/global/images/magic/general/celestine_reef.jpg
 Oracle:Creatures without flying or islandwalk can't attack.\nWhenever you roll {CHAOS}, until a player planeswalks, you can't lose the game and your opponents can't win the game.

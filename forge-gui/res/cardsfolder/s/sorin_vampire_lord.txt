@@ -9,4 +9,4 @@ A:AB$ AnimateAll | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ 
 SVar:ABControl:AB$ GainControl | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Gain control of target creature.
 SVar:PlayMain1:TRUE
 DeckHints:Type$Vampire
-Oracle:[+1]: Up to one target creature gets +2/+0 until end of turn.\n[−2]: Sorin, Vampire Lord deals 4 damage to any target. You gain 4 life.\n[−8]: Until end of turn, each Vampire you control gains "{T}: Gain control of target creature."
+Oracle:[+1]: Up to one target creature gets +2/+0 until end of turn.\n[-2]: Sorin, Vampire Lord deals 4 damage to any target. You gain 4 life.\n[-8]: Until end of turn, each Vampire you control gains "{T}: Gain control of target creature."

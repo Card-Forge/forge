@@ -2,5 +2,4 @@ Name:Armored Cancrix
 ManaCost:4 U
 Types:Creature Crab
 PT:2/5
-SVar:Picture:http://www.wizards.com/global/images/magic/general/armored_cancrix.jpg
 Oracle:

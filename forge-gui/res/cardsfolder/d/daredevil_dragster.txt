@@ -8,5 +8,4 @@ SVar:DBSac:DB$ Sacrifice | SacValid$ Self | RememberSacrificed$ True | Condition
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Crew:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/daredevil_dragster.jpg
 Oracle:At end of combat, if Daredevil Dragster attacked or blocked this combat, put a velocity counter on it. Then if it has two or more velocity counters on it, sacrifice it and draw two cards.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)

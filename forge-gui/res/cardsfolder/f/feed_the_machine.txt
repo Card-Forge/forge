@@ -5,5 +5,4 @@ T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBChoose | TriggerZones$ C
 SVar:DBChoose:DB$ GenericChoice | ValidTgts$ Opponent | Choices$ Self,Others | AILogic$ SelfOthers
 SVar:Self:DB$ Sacrifice | SacValid$ Creature | Defined$ ParentTarget | Amount$ 2 | SpellDescription$ Self
 SVar:Others:DB$ Sacrifice | SacValid$ Creature | Defined$ OppNonParentTarget | Amount$ 1 | SpellDescription$ Others
-SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/Feed the Machine.full.jpg
 Oracle:When you set this scheme in motion, target opponent chooses self or others. If that player chooses self, the player sacrifices two creatures. If the player chooses others, each of your other opponents sacrifices a creature.

@@ -4,5 +4,4 @@ Types:Creature Whale
 PT:2/2
 K:First Strike
 K:Protection from red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/narwhal.jpg
 Oracle:First strike, protection from red

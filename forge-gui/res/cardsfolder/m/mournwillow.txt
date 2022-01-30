@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigEffect:DB$ Effect | Name$ Mournwillow Effect | StaticAbilities$ KWPump | SpellDescription$ Creatures with power 2 or less can't block this turn.
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.powerLE2 | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures with power 2 or less can't block this turn.
 SVar:PlayMain1:TRUE
-DeckHints:Ability$Graveyard & Ability$Discard
+DeckHints:Ability$Graveyard|Discard
 DeckHas:Ability$Delirium
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mournwillow.jpg
 Oracle:Haste\nDelirium — When Mournwillow enters the battlefield, if there are four or more card types among cards in your graveyard, creatures with power 2 or less can't block this turn.

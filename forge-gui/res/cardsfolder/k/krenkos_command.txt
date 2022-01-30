@@ -2,5 +2,4 @@ Name:Krenko's Command
 ManaCost:1 R
 Types:Sorcery
 A:SP$ Token | Cost$ 1 R | TokenAmount$ 2 | TokenScript$ r_1_1_goblin | TokenOwner$ You | LegacyImage$ r 1 1 goblin m13 | SpellDescription$ Create two 1/1 red Goblin creature tokens.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/krenkos_command.jpg
 Oracle:Create two 1/1 red Goblin creature tokens.

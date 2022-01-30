@@ -3,5 +3,4 @@ ManaCost:1
 Types:Artifact Equipment
 K:Equip:2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Flying | Description$ Equipped creature has flying.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/neurok_hoversail.jpg
 Oracle:Equipped creature has flying.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)

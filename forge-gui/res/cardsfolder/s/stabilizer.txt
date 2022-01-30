@@ -4,5 +4,4 @@ Types:Artifact
 S:Mode$ CantBeActivated | ValidSA$ Activated.Cycling | Description$ Players can't cycle cards.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stabilizer.jpg
 Oracle:Players can't cycle cards.

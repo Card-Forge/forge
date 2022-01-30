@@ -7,5 +7,4 @@ T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.Sel
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigBlocked | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature gets +1/+1 until end of turn.
 SVar:TrigBlocks:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +1 | NumDef$ +1
 SVar:TrigBlocked:DB$ Pump | Defined$ TriggeredBlocker | NumAtt$ +1 | NumDef$ +1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flailing_drake.jpg
 Oracle:Flying\nWhenever Flailing Drake blocks or becomes blocked by a creature, that creature gets +1/+1 until end of turn.

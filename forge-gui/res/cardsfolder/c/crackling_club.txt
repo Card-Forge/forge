@@ -5,5 +5,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | Description$ Enchanted creature gets +1/+0.
 A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crackling_club.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+0.\nSacrifice Crackling Club: It deals 1 damage to target creature.

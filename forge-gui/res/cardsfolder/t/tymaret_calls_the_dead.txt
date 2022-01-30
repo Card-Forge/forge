@@ -8,5 +8,5 @@ SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBScry | SpellDescrip
 SVar:DBScry:DB$ Scry | ScryNum$ X
 SVar:X:Count$Valid Zombie.YouCtrl
 DeckHints:Type$Zombie
-DeckHas:Ability$Token & Ability$Graveyard & Ability$LifeGain
+DeckHas:Ability$Token|Graveyard|LifeGain
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Mill three cards. Then you may exile a creature or enchantment card from your graveyard. If you do, create a 2/2 black Zombie creature token.\nIII — You gain X life and scry X, where X is the number of Zombies you control.

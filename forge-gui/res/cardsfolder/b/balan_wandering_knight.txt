@@ -8,5 +8,4 @@ A:AB$ RepeatEach | Cost$ 1 W | RepeatSubAbility$ DBAttach | RepeatCards$ Equipme
 SVar:DBAttach:DB$ Attach | Object$ Remembered | Defined$ Self
 SVar:X:Count$Valid Equipment.Attached
 SVar:EquipMe:Multiple
-SVar:Picture:http://www.wizards.com/global/images/magic/general/balan_wandering_knight.jpg
 Oracle:First strike\nBalan, Wandering Knight has double strike as long as two or more Equipment are attached to it.\n{1}{W}: Attach all Equipment you control to Balan.

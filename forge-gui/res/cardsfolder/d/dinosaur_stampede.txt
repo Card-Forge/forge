@@ -3,6 +3,5 @@ ManaCost:2 R
 Types:Instant
 A:SP$ PumpAll | Cost$ 2 R | ValidCards$ Creature.attacking | NumAtt$ 2 | SubAbility$ DBPump | SpellDescription$ Attacking creatures get +2/+0 until end of turn. Dinosaurs you control gain trample until end of turn.
 SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.Dinosaur+YouCtrl | KW$ Trample
-SVar:Picture:http://mythicspoiler.com/ixa/cards/dinosaurstampede.jpg
 DeckHints:Type$Dinosaur
 Oracle:Attacking creatures get +2/+0 until end of turn. Dinosaurs you control gain trample until end of turn.

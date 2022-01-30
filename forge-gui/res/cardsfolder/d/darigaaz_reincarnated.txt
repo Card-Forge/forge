@@ -11,5 +11,4 @@ SVar:DBAddCounter:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ EGG | Co
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Exile | IsPresent$ Card.Self+counters_GE1_EGG | PresentZone$ Exile | Execute$ DBRemoveCounter | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is exiled with an egg counter on it, remove an egg counter from it. Then if CARDNAME has no egg counters on it, return it to the battlefield.
 SVar:DBRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ EGG | CounterNum$ 1 | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Self | Origin$ Exile | Destination$ Battlefield | ConditionDefined$ Self | ConditionPresent$ Card.counters_EQ0_EGG
-SVar:Picture:http://www.wizards.com/global/images/magic/general/darigaaz_reincarnated.jpg
 Oracle:Flying, trample, haste\nIf Darigaaz Reincarnated would die, instead exile it with three egg counters on it.\nAt the beginning of your upkeep, if Darigaaz is exiled with an egg counter on it, remove an egg counter from it. Then if Darigaaz has no egg counters on it, return it to the battlefield.

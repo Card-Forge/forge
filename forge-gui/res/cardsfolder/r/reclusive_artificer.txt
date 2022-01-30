@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X
 SVar:X:Count$TypeYouCtrl.Artifact
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reclusive_artificer.jpg
 Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\nWhen Reclusive Artificer enters the battlefield, you may have it deal damage to target creature equal to the number of artifacts you control.

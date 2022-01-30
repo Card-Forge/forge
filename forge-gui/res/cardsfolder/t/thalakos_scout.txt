@@ -4,5 +4,4 @@ Types:Creature Thalakos Soldier Scout
 PT:2/1
 K:Shadow
 A:AB$ ChangeZone | Cost$ Discard<1/Card> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thalakos_scout.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nDiscard a card: Return Thalakos Scout to its owner's hand.

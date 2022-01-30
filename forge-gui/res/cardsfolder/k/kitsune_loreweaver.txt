@@ -4,5 +4,4 @@ Types:Creature Fox Cleric
 PT:2/1
 A:AB$ Pump | Cost$ 1 W | NumDef$ +X | SpellDescription$ Kitsune Loreweaver gets +0/+X until end of turn, where X is the number of cards in your hand.
 SVar:X:Count$NumCardsInYourHand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kitsune_loreweaver.jpg
 Oracle:{1}{W}: Kitsune Loreweaver gets +0/+X until end of turn, where X is the number of cards in your hand.

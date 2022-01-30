@@ -5,5 +5,4 @@ PT:2/2
 K:Deathtouch
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl+powerGE4 | Execute$ TrigPump | TriggerDescription$ Ferocious — When CARDNAME attacks, if you control a creature with power 4 or greater, CARDNAME gets +1/+1 until end of turn.
 SVar:TrigPump:DB$ Pump | NumAtt$ 1 | NumDef$ 1 | Defined$ Self
-SVar:Picture:http://www.wizards.com/global/images/magic/general/heir_of_the_wilds.jpg
 Oracle:Deathtouch\nFerocious — Whenever Heir of the Wilds attacks, if you control a creature with power 4 or greater, Heir of the Wilds gets +1/+1 until end of turn.

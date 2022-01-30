@@ -3,5 +3,4 @@ ManaCost:3 G
 Types:Creature Elf Archer
 PT:3/3
 K:Reach
-SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card21054.jpg
 Oracle:Reach (This creature can block creatures with flying.)

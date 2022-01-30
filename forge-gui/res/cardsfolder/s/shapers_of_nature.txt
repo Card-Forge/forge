@@ -4,5 +4,4 @@ Types:Creature Merfolk Shaman
 PT:3/3
 A:AB$ PutCounter | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
 A:AB$ Draw | Cost$ 2 U SubCounter<1/P1P1/Creature/a creature you control> | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shapers_of_the_nature.jpg
 Oracle:{3}{G}: Put a +1/+1 counter on target creature.\n{2}{U}, Remove a +1/+1 counter from a creature you control: Draw a card.

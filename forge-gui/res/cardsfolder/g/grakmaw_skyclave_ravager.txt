@@ -9,5 +9,5 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | Counter
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, create an X/X black and green Hydra creature token, where X is the number of +1/+1 counters on CARDNAME.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ bg_x_x_hydra | TokenOwner$ TriggeredCardController | TokenPower$ X | TokenToughness$ X
 SVar:X:TriggeredCard$CardCounters.P1P1
-DeckHas:Ability$Counters & Ability$Token
+DeckHas:Ability$Counters|Token
 Oracle:Grakmaw, Skyclave Ravager enters the battlefield with three +1/+1 counters on it.\nWhenever another creature you control dies, if it had a +1/+1 counter on it, put a +1/+1 counter on Grakmaw.\nWhen Grakmaw dies, create an X/X black and green Hydra creature token, where X is the number of +1/+1 counters on Grakmaw.

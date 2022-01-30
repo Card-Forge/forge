@@ -22,5 +22,5 @@ SVar:DBRemoveCounters:DB$ RemoveCounter | ConditionPresent$ Card.Self+counters_G
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | ConditionCheckSVar$ X | ConditionSVarCompare$ GE3 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize
-DeckHas:Ability$Token & Ability$LifeGain & Ability$Counters
+DeckHas:Ability$Token|LifeGain|Counters
 Oracle:At the beginning of your upkeep, create a 1/1 white and black Vampire creature token with lifelink and put a bloodline counter on Edgar Markov's Coffin. Then if there are three or more bloodline counters on it, remove those counters and transform it.

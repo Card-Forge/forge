@@ -6,5 +6,4 @@ SVar:DBDiscard1:DB$ Discard | ConditionDefined$ Remembered | ConditionPresent$ C
 SVar:DBDiscard2:DB$ Discard | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ EQ1 | Mode$ Defined | Defined$ ParentTarget | DefinedCards$ Remembered | UnlessCost$ PayLife<X> | UnlessPayer$ RememberedController | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wand_of_ith.jpg
 Oracle:{3}, {T}: Target player reveals a card at random from their hand. If it's a land card, that player discards it unless they pay 1 life. If it isn't a land card, the player discards it unless they pay life equal to its mana value. Activate only during your turn.

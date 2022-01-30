@@ -2,5 +2,4 @@ Name:Annul
 ManaCost:U
 Types:Instant
 A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target artifact or enchantment spell | ValidTgts$ Artifact,Enchantment | SpellDescription$ Counter target artifact or enchantment spell.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/annul.jpg
 Oracle:Counter target artifact or enchantment spell.

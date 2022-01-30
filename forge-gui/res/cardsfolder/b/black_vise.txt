@@ -6,5 +6,4 @@ SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | Choice
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.Chosen | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the chosen player's upkeep, CARDNAME deals X damage to that player, where X is the number of cards in their hand minus 4.
 SVar:TrigDamage:DB$ DealDamage | Defined$ ChosenPlayer | NumDmg$ X
 SVar:X:Count$InChosenHand/Minus.4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/black_vise.jpg
 Oracle:As Black Vise enters the battlefield, choose an opponent.\nAt the beginning of the chosen player's upkeep, Black Vise deals X damage to that player, where X is the number of cards in their hand minus 4.

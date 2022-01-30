@@ -4,5 +4,4 @@ Types:Creature Human Knight
 PT:2/2
 K:Haste
 K:Flanking
-SVar:Picture:http://www.wizards.com/global/images/magic/general/suqata_lancer.jpg
 Oracle:Haste\nFlanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)

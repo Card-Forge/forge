@@ -4,5 +4,4 @@ Types:Creature Kor Rebel
 PT:2/2
 A:AB$ ChangeZone | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.Black | TgtPrompt$ Select target black Creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target black creature.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lightbringer.jpg
 Oracle:{T}, Sacrifice Lightbringer: Exile target black creature.

@@ -3,5 +3,4 @@ ManaCost:2 R
 Types:Sorcery
 A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SubAbility$ DBToken | SpellDescription$ CARDNAME deals 1 damage to any target. Create a 1/1 red Devil creature token. It has "When this creature dies, it deals 1 damage to any target."
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_devil_burn | TokenOwner$ You | LegacyImage$ r 1 1 devil burn emn
-SVar:Picture:http://www.wizards.com/global/images/magic/general/make_mischief.jpg
 Oracle:Make Mischief deals 1 damage to any target. Create a 1/1 red Devil creature token. It has "When this creature dies, it deals 1 damage to any target."

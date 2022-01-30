@@ -8,5 +8,4 @@ S:Mode$ Continuous | Affected$ Creature.ChosenType+YouCtrl | AddPower$ 1 | AddTo
 S:Mode$ Continuous | Affected$ Creature.ChosenType+YouCtrl | AddKeyword$ Vigilance | Condition$ Blessing | Description$ As long as you have the city's blessing, they also have vigilance.
 AI:RemoveDeck:Random
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/radiant_destiny.jpg
 Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nAs Radiant Destiny enters the battlefield, choose a creature type.\nCreatures you control of the chosen type get +1/+1. As long as you have the city's blessing, they also have vigilance.

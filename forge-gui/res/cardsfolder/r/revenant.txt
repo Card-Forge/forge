@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Card.Self | CharacteristicDefining$ True | SetPow
 SVar:X:Count$TypeInYourYard.Creature
 AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:X GE3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/revenant.jpg
 Oracle:Flying\nRevenant's power and toughness are each equal to the number of creature cards in your graveyard.

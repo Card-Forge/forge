@@ -1,9 +1,8 @@
 Name:Glorious End
 ManaCost:2 R
 Types:Instant
-A:SP$EndTurn | Cost$ 2 R | SubAbility$ DelayedLoss | SpellDescription$ End the turn. At the beginning of your next end step, you lose the game.
+A:SP$ EndTurn | Cost$ 2 R | SubAbility$ DelayedLoss | SpellDescription$ End the turn. At the beginning of your next end step, you lose the game.
 SVar:DelayedLoss:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigLoseGame | TriggerDescription$ Lose the game.
 SVar:TrigLoseGame:DB$ LosesGame | Defined$ SourceController
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glorious_end.jpg
 Oracle:End the turn. (Exile all spells and abilities from the stack, including this card. The player whose turn it is discards down to their maximum hand size. Damage wears off, and "this turn" and "until end of turn" effects end.)\nAt the beginning of your next end step, you lose the game.

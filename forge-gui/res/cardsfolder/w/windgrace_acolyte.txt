@@ -6,5 +6,5 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill three cards and you gain 3 life.
 SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
-DeckHas:Ability$Graveyard & Ability$LifeGain
+DeckHas:Ability$Graveyard|LifeGain
 Oracle:Flying\nWhen Windgrace Acolyte enters the battlefield, mill three cards and you gain 3 life.

@@ -6,5 +6,4 @@ SVar:TrigDraw:DB$ Draw | NumCards$ 1
 A:AB$ ChooseType | Cost$ Sac<1/CARDNAME> | Type$ Basic Land | SubAbility$ DBAnimate | SpellDescription$ Choose a basic land type. Each land you control becomes that type until end of turn.
 SVar:DBAnimate:DB$ AnimateAll | ValidCards$ Land.YouCtrl | Types$ ChosenType | RemoveLandTypes$ True | RemoveIntrinsicAbilities$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elsewhere_flask.jpg
 Oracle:When Elsewhere Flask enters the battlefield, draw a card.\nSacrifice Elsewhere Flask: Choose a basic land type. Each land you control becomes that type until end of turn.

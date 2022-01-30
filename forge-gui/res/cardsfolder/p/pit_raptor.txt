@@ -5,5 +5,4 @@ PT:4/3
 K:Flying
 K:First Strike
 K:UpkeepCost:2 B B
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pit_raptor.jpg
 Oracle:Flying, first strike\nAt the beginning of your upkeep, sacrifice Pit Raptor unless you pay {2}{B}{B}.

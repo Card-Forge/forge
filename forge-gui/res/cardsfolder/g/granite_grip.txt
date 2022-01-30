@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | Description$ Enchanted creature gets +1/+0 for each Mountain you control.
 SVar:X:Count$Valid Mountain.YouCtrl/Times.1
 SVar:BuffedBy:Mountain
-SVar:Picture:http://www.wizards.com/global/images/magic/general/granite_grip.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+0 for each Mountain you control.

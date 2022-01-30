@@ -4,5 +4,4 @@ Types:Artifact Creature Scarecrow
 PT:2/1
 K:Flying
 S:Mode$ CantPutCounter | ValidCard$ Card.Self | Description$ CARDNAME can't have counters put on it.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tatterkite.jpg
 Oracle:Flying\nTatterkite can't have counters put on it.

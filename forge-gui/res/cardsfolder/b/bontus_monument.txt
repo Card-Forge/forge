@@ -7,5 +7,4 @@ SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbil
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 DeckHas:Ability$LifeGain
 DeckNeeds:Color$Black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bontus_monument.jpg
 Oracle:Black creature spells you cast cost {1} less to cast.\nWhenever you cast a creature spell, each opponent loses 1 life and you gain 1 life.

@@ -4,5 +4,4 @@ Types:Creature Hellion
 PT:6/6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerDescription$ When CARDNAME enters the battlefield, it deals 3 damage to each other creature.
 SVar:TrigDamageAll:DB$ DamageAll | ValidCards$ Creature.Other | NumDmg$ 3 | ValidDescription$ each other creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chaos_maw.jpg
 Oracle:When Chaos Maw enters the battlefield, it deals 3 damage to each other creature.

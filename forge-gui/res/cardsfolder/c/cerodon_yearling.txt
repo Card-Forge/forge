@@ -4,5 +4,4 @@ Types:Creature Beast
 PT:2/2
 K:Vigilance
 K:Haste
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cerodon_yearling.jpg
 Oracle:Vigilance, haste

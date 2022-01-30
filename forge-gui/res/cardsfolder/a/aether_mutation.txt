@@ -6,5 +6,4 @@ A:SP$ ChangeZone | Cost$ 3 G U | ValidTgts$ Creature | TgtPrompt$ Select target 
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling apc
 SVar:X:Targeted$CardManaCost
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_mutation.jpg
 Oracle:Return target creature to its owner's hand. Create X 1/1 green Saproling creature tokens, where X is that creature's mana value.

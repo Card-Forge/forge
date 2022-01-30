@@ -4,5 +4,4 @@ Types:Creature Beast Mutant
 PT:13/13
 K:UpkeepCost:G G
 K:Morph:7 G G
-SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_cloudscraper.jpg
 Oracle:At the beginning of your upkeep, sacrifice Krosan Cloudscraper unless you pay {G}{G}.\nMorph {7}{G}{G} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

@@ -3,5 +3,4 @@ ManaCost:2 G
 Types:Creature Naga Wizard
 PT:3/2
 A:AB$ Pump | Cost$ 4 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/devotee_of_strength.jpg
 Oracle:{4}{G}: Target creature gets +2/+2 until end of turn.

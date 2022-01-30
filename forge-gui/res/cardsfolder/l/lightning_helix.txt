@@ -3,5 +3,4 @@ ManaCost:R W
 Types:Instant
 A:SP$ DealDamage | Cost$ R W | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 3 damage to any target and you gain 3 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_helix.jpg
 Oracle:Lightning Helix deals 3 damage to any target and you gain 3 life.

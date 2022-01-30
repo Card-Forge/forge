@@ -4,5 +4,4 @@ Types:Creature Lizard
 PT:2/2
 K:Prowess
 S:Mode$ Continuous | Affected$ Card.Self+attacking | AddKeyword$ First Strike | Description$ CARDNAME has first strike as long as it's attacking.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thorned_moloch.jpg
 Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nThorned Moloch has first strike as long as it's attacking.

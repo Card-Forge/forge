@@ -8,5 +8,4 @@ SVar:TrigPrivateResearchPutCounter:DB$ PutCounter | Defined$ Self | CounterType$
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPrivateResearchDraw | TriggerDescription$ When enchanted creature dies, draw a card for each page counter on CARDNAME.
 SVar:TrigPrivateResearchDraw:DB$ Draw | NumCards$ PrivateResearchX
 SVar:PrivateResearchX:Count$CardCounters.PAGE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/private_research.jpg
 Oracle:Enchant creature\nAt the beginning of your upkeep, you may put a page counter on Private Research.\nWhen enchanted creature dies, draw a card for each page counter on Private Research.

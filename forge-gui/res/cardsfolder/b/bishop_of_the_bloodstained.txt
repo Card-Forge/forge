@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ X
 SVar:X:Count$Valid Creature.Vampire+YouCtrl+inZoneBattlefield
 DeckHints:Type$Vampire
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bishop_of_the_bloodstained.jpg
 Oracle:When Bishop of the Bloodstained enters the battlefield, target opponent loses 1 life for each Vampire you control.

@@ -4,5 +4,4 @@ Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ GetSaps | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, create five 1/1 green Saproling creature tokens.
 SVar:GetSaps:DB$ Token | TokenAmount$ 5 | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling arc
 DeckHas:Ability$Token
-SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=212602&type=card
 Oracle:When you set this scheme in motion, create five 1/1 green Saproling creature tokens.

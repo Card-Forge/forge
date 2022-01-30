@@ -3,5 +3,4 @@ ManaCost:1 G
 Types:Creature Bear
 PT:2/2
 K:Flash
-SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card114905.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)

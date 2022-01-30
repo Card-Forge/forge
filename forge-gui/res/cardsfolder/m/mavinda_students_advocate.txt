@@ -11,5 +11,5 @@ SVar:MoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ All | Destinatio
 SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Graveyard
-DeckNeeds:Types$Instant|Sorcery
+DeckNeeds:Type$Instant|Sorcery
 Oracle:Flying\n{0}: You may cast target instant or sorcery card from your graveyard this turn. If that spell doesn't target a creature you control, it costs {8} more to cast this way. If that spell would be put into your graveyard, exile it instead. Activate only once each turn. (You still pay the spell's costs. Timing rules for the spell still apply.)

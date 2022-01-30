@@ -8,5 +8,4 @@ T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ Tri
 SVar:TrigDraw:AB$ Draw | Cost$ 1 | NumCards$ 1 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | IsPresent$ Card.Self | PresentZone$ Command | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is in the command zone, you gain 2 life.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/oloro_ageless_ascetic.jpg
 Oracle:At the beginning of your upkeep, you gain 2 life.\nWhenever you gain life, you may pay {1}. If you do, draw a card and each opponent loses 1 life.\nAt the beginning of your upkeep, if Oloro, Ageless Ascetic is in the command zone, you gain 2 life.

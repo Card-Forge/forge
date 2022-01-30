@@ -8,5 +8,5 @@ SVar:DBBranch:DB$ Branch | BranchConditionSVar$ ReplicateTimer | TrueSubAbility$
 SVar:DBRemoveCtrs:DB$ RemoveCounter | Defined$ Self | CounterType$ NIGHT | CounterNum$ All | SubAbility$ DBToken
 SVar:ReplicateTimer:Count$Valid Card.Self+counters_GE8_NIGHT
 SVar:DBToken:DB$ Token | TokenAmount$ 8 | TokenScript$ replicated_ring | LegacyImage$ replicated ring khm
-DeckHas:Ability$Counters & Ability$Token
+DeckHas:Ability$Counters|Token
 Oracle:{T}: Add one mana of any color.\nAt the beginning of your upkeep, put a night counter on Replicating Ring. Then if it has eight or more night counters on it, remove all of them and create eight colorless snow artifact tokens named Replicated Ring with "{T}: Add one mana of any color."

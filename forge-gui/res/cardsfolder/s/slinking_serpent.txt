@@ -3,5 +3,4 @@ ManaCost:2 U B
 Types:Creature Serpent
 PT:2/3
 K:Forestwalk
-SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card23149.jpg
 Oracle:Forestwalk (This creature can't be blocked as long as defending player controls a Forest.)

@@ -4,5 +4,4 @@ Types:Creature Human Berserker
 PT:2/2
 K:Haste
 K:CARDNAME attacks each combat if able.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/valley_dasher.jpg
 Oracle:Haste\nValley Dasher attacks each combat if able.

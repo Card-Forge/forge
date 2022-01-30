@@ -5,5 +5,4 @@ S:Mode$ Continuous | Affected$ Creature.Legendary+YouCtrl | AddPower$ 2 | AddTou
 AI:RemoveDeck:Random
 SVar:PlayMain1:TRUE
 DeckHints:Type$Legendary
-SVar:Picture:http://www.wizards.com/global/images/magic/general/day_of_destiny.jpg
 Oracle:Legendary creatures you control get +2/+2.

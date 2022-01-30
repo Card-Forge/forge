@@ -8,5 +8,4 @@ SVar:DBDig:DB$ Dig | DigNum$ 1 | ChangeNum$ 1 | DestinationZone$ Graveyard | Opt
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SpellDescription$ Each opponent loses 1 life.
 AI:RemoveDeck:All
 DeckHas:Ability$LifeGain
-SVar:Picture:http://www.wizards.com/global/images/magic/general/etherwrought_page.jpg
 Oracle:At the beginning of your upkeep, choose one —\n• You gain 2 life.\n• Look at the top card of your library. You may put that card into your graveyard.\n• Each opponent loses 1 life.

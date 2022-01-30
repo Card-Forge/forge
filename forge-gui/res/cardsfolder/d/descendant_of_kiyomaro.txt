@@ -7,5 +7,4 @@ SVar:TriggerGainLife:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ C
 SVar:KiyomaroGainLife:DB$ GainLife | LifeAmount$ 3
 SVar:X:Count$InYourHand
 SVar:Y:PlayerCountOpponents$HighestCardsInHand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/descendant_of_kiyomaro.jpg
 Oracle:As long as you have more cards in hand than each opponent, Descendant of Kiyomaro gets +1/+2 and has "Whenever this creature deals combat damage, you gain 3 life."

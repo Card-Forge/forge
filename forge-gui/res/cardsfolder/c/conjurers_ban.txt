@@ -6,5 +6,4 @@ SVar:DBEffect:DB$ Effect | StaticAbilities$ STCantCast,STCantPlayLand | SubAbili
 SVar:STCantCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card.NamedCard | Description$ Spells with the chosen name can't be cast and lands with the chosen name can't be played.
 SVar:STCantPlayLand:Mode$ CantPlayLand | EffectZone$ Command | ValidCard$ Card.NamedCard
 SVar:DBDraw:DB$ Draw | NumCards$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/conjurers_ban.jpg
 Oracle:Choose a card name. Until your next turn, spells with the chosen name can't be cast and lands with the chosen name can't be played.\nDraw a card.

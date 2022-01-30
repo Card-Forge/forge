@@ -3,5 +3,4 @@ ManaCost:R
 Types:Creature Goblin
 PT:1/1
 A:AB$ Destroy | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Wall | TgtPrompt$ Select target Wall | SpellDescription$ Destroy target Wall.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_digging_team.jpg
 Oracle:{T}, Sacrifice Goblin Digging Team: Destroy target Wall.

@@ -5,5 +5,4 @@ T:Mode$ Discarded | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execut
 SVar:TrigToken:AB$ Token | Cost$ 1 | TokenAmount$ 1 | TokenScript$ u_2_2_drake_flying | TokenOwner$ You | LegacyImage$ u 2 2 drake flying akh
 DeckHas:Ability$Token
 DeckHints:Ability$Discard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/drake_haven.jpg
 Oracle:Whenever you cycle or discard a card, you may pay {1}. If you do, create a 2/2 blue Drake creature token with flying.

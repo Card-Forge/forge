@@ -7,5 +7,4 @@ A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
 A:AB$ Pump | Cost$ R | Defined$ Enchanted | NumAtt$ +1 | SpellDescription$ Enchanted creature gets +1/+0 until end of turn.
 A:AB$ ChangeZone | Cost$ R | Defined$ Self | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ghitu_firebreathing.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\n{R}: Enchanted creature gets +1/+0 until end of turn.\n{R}: Return Ghitu Firebreathing to its owner's hand.

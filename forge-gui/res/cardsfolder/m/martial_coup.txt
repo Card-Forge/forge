@@ -9,5 +9,4 @@ SVar:PayX:5
 SVar:NeedsToPlayVar:OwnCreats LEOppCreats
 SVar:OwnCreats:Count$SumPower_Creature.YouCtrl
 SVar:OppCreats:Count$SumPower_Creature.OppCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/martial_coup.jpg
 Oracle:Create X 1/1 white Soldier creature tokens. If X is 5 or more, destroy all other creatures.

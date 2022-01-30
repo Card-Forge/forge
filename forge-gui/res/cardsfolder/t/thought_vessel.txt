@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact
 S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_vessel.jpg
 Oracle:You have no maximum hand size.\n{T}: Add {C}.

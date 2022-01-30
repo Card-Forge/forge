@@ -11,5 +11,4 @@ SVar:TrigSac2:DB$ Sacrifice | Defined$ TriggeredTarget | Amount$ Y | SacValid$ P
 SVar:X:Count$Valid Permanent.nonDemon+YouCtrl/HalfUp
 SVar:Y:TriggeredTarget$Valid Permanent.nonDemon+YouCtrl/HalfUp
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_the_defiler.jpg
 Oracle:Flying, trample\nWhenever Rakdos the Defiler attacks, sacrifice half the non-Demon permanents you control, rounded up.\nWhenever Rakdos deals combat damage to a player, that player sacrifices half the non-Demon permanents they control, rounded up.

@@ -5,5 +5,4 @@ A:SP$ ChangeZone | Cost$ 1 G G Sac<1/Creature> | Origin$ Library | Destination$ 
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 SVar:X:Sacrificed$CardManaCost/Plus.2
 SVar:AIPreference:SacCost$Creature
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eldritch_evolution.jpg
 Oracle:As an additional cost to cast this spell, sacrifice a creature.\nSearch your library for a creature card with mana value X or less, where X is 2 plus the sacrificed creature's mana value. Put that card onto the battlefield, then shuffle. Exile Eldritch Evolution.

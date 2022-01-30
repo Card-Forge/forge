@@ -6,5 +6,4 @@ K:Vigilance
 K:Monstrosity:3:3 W W W
 S:Mode$ Continuous | Affected$ Card.Self+IsMonstrous | AddKeyword$ Reach | CanBlockAmount$ 99 | Description$ As long as CARDNAME is monstrous, it has reach and can block an additional ninety-nine creatures each combat.
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hundred_handed_one.jpg
 Oracle:Vigilance\n{3}{W}{W}{W}: Monstrosity 3. (If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)\nAs long as Hundred-Handed One is monstrous, it has reach and can block an additional ninety-nine creatures each combat.

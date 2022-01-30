@@ -5,5 +5,4 @@ K:No more than two creatures can attack each combat.
 S:Mode$ Continuous | GlobalRule$ No more than two creatures can block each combat. | Description$ No more than two creatures can block each combat.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/caverns_of_despair.jpg
 Oracle:No more than two creatures can attack each combat.\nNo more than two creatures can block each combat.

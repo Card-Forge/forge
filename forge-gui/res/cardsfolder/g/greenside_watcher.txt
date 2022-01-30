@@ -4,5 +4,4 @@ Types:Creature Elf Druid
 PT:2/1
 A:AB$ Untap | Cost$ T | ValidTgts$ Gate | TgtPrompt$ Select target gate | AILogic$ PoolExtraMana | SpellDescription$ Untap target Gate.
 DeckNeeds:Type$Gate
-SVar:Picture:http://www.wizards.com/global/images/magic/general/greenside_watcher.jpg
 Oracle:{T}: Untap target Gate.

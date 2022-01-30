@@ -7,5 +7,4 @@ SVar:DBDamage:DB$ DealDamage | Condition$ Kicked | ValidTgts$ Creature | TgtProm
 SVar:X:Count$Kicked.1.0
 SVar:NeedsToPlayKickedVar:Z GE2
 SVar:Z:Count$Valid Creature.OppCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jilt.jpg
 Oracle:Kicker {1}{R} (You may pay an additional {1}{R} as you cast this spell.)\nReturn target creature to its owner's hand. If this spell was kicked, it deals 2 damage to another target creature.

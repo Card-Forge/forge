@@ -8,5 +8,5 @@ SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature | TgtPrompt$ Select target creatu
 SVar:DBInvestigate:DB$ Investigate
 SVar:YouCastThisTurn:Count$ThisTurnCast_Card.YouCtrl
 K:Friends forever
-DeckHas:Ability$Investigate & Ability$Token & Ability$Sacrifice
+DeckHas:Ability$Investigate|Token|Sacrifice
 Oracle:Haste\nWhenever you cast your second spell each turn, untap target creature, then investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")\nFriends forever (You can have two commanders if both have friends forever.)

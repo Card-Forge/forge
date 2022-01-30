@@ -7,5 +7,4 @@ T:Mode$ DamageDealtOnce | ValidSource$ Card.AttachedBy | Execute$ TrigGain | Tri
 T:Mode$ DamageDoneOnce | ValidTarget$ Card.AttachedBy | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature is dealt damage, you gain that much life.
 SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_link.jpg
 Oracle:Enchant creature\nWhenever enchanted creature deals damage, you gain that much life.\nWhenever enchanted creature is dealt damage, you gain that much life.

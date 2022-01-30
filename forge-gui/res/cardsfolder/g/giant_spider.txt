@@ -3,5 +3,4 @@ ManaCost:3 G
 Types:Creature Spider
 PT:2/4
 K:Reach
-SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card129570.jpg
 Oracle:Reach (This creature can block creatures with flying.)

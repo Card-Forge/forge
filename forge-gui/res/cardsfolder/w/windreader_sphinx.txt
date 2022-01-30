@@ -6,5 +6,4 @@ K:Flying
 T:Mode$ Attacks | ValidCard$ Creature.withFlying | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever a creature with flying attacks, you may draw a card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/windreader_sphinx.jpg
 Oracle:Flying\nWhenever a creature with flying attacks, you may draw a card.

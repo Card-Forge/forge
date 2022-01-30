@@ -7,5 +7,4 @@ SVar:DBspeakerMana:DB$ Mana | Produced$ G | Amount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sacellum_godspeaker.jpg
 Oracle:{T}: Reveal any number of creature cards with power 5 or greater from your hand. Add {G} for each card revealed this way.

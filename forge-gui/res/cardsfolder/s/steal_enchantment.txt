@@ -5,5 +5,4 @@ K:Enchant enchantment
 A:SP$ Attach | Cost$ U U | ValidTgts$ Enchantment | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted enchantment.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/steal_enchantment.jpg
 Oracle:Enchant enchantment\nYou control enchanted enchantment.

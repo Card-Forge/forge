@@ -9,5 +9,4 @@ SVar:DBEffectSB:DB$ Effect | ValidTgts$ Creature | TgtPrompt$ Select target crea
 SVar:RPreventNextFromSourceSB:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ Card.IsImprinted | ReplaceWith$ ExileEffectSB | PreventionEffect$ True | Description$ The next time the chosen source deals damage to the targeted creature, prevent that damage.
 SVar:ExileEffectSB:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanupSB:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/samite_blessing.jpg
 Oracle:Enchant creature\nEnchanted creature has "{T}: The next time a source of your choice would deal damage to target creature this turn, prevent that damage."

@@ -4,5 +4,4 @@ Types:Legendary Creature Bird Soldier
 PT:2/4
 K:Flying
 K:Protection from creatures
-SVar:Picture:http://www.wizards.com/global/images/magic/general/commander_eesha.jpg
 Oracle:Flying, protection from creatures

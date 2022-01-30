@@ -7,5 +7,5 @@ K:Mentor
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+nonToken+HasCounters | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a nontoken creature you control dies, if it had counters on it, create X tapped 2/1 white and black Inkling creature tokens with flying, where X is the number of counters it had on it.
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ wb_2_1_inkling_flying | TokenTapped$ True
 SVar:X:TriggeredCard$CardCounters.ALL
-DeckHas:Ability$Token & Ability$Counters
+DeckHas:Ability$Token|Counters
 Oracle:Flying\nMentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)\nWhenever a nontoken creature you control dies, if it had counters on it, create X tapped 2/1 white and black Inkling creature tokens with flying, where X is the number of counters it had on it.

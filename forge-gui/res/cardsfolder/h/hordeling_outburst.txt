@@ -2,5 +2,4 @@ Name:Hordeling Outburst
 ManaCost:1 R R
 Types:Sorcery
 A:SP$ Token | Cost$ 1 R R | TokenAmount$ 3 | TokenScript$ r_1_1_goblin | TokenOwner$ You | LegacyImage$ r 1 1 goblin ktk | SpellDescription$ Create three 1/1 red Goblin creature tokens.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hordeling_outburst.jpg
 Oracle:Create three 1/1 red Goblin creature tokens.

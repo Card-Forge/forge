@@ -6,5 +6,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigToken | Trigg
 SVar:TrigToken:DB$ Token | TokenScript$ lightning_rager | LegacyImage$ lightning rager c15 | TokenOwner$ TriggeredPlayer
 DeckHas:Ability$Token
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rite_of_the_raging_storm.jpg
 Oracle:Creatures named Lightning Rager can't attack you or planeswalkers you control.\nAt the beginning of each player's upkeep, that player creates a 5/1 red Elemental creature token named Lightning Rager. It has trample, haste, and "At the beginning of the end step, sacrifice this creature."

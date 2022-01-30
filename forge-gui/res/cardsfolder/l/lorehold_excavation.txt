@@ -9,5 +9,5 @@ SVar:X:Remembered$Valid Land
 SVar:GainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:DealDamage:DB$ DamageAll | ValidPlayers$ Player.Opponent | NumDmg$ 1
 A:AB$ Token | Cost$ 5 ExileFromGrave<1/Creature/creature card> | TokenTapped$ True | TokenAmount$ 1 | TokenScript$ rw_3_2_spirit | TokenOwner$ You | SpellDescription$ Create a tapped 3/2 red and white Spirit creature token.
-DeckHas:Ability$Mill & Ability$Token & Ability$LifeGain
+DeckHas:Ability$Mill|Token|LifeGain
 Oracle:At the beginning of your end step, mill a card. If a land card was milled this way, you gain 1 life. Otherwise, Lorehold Excavation deals 1 damage to each opponent. (To mill a card, put the top card of your library into your graveyard.)\n{5}, Exile a creature card from your graveyard: Create a tapped 3/2 red and white Spirit creature token.

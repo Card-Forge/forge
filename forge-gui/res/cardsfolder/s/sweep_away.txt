@@ -8,5 +8,4 @@ SVar:DBTopLibChoice:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield |
 SVar:DBHandChoice:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Creature.IsRemembered+attacking
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sweep_away.jpg
 Oracle:Return target creature to its owner's hand. If that creature is attacking, you may put it on top of its owner's library instead.

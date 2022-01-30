@@ -4,5 +4,4 @@ Types:Creature Goblin Rogue
 PT:1/1
 K:First Strike
 K:Dethrone
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grenzos_cutthroat.jpg
 Oracle:First strike\nDethrone (Whenever this creature attacks the player with the most life or tied for most life, put a +1/+1 counter on it.)

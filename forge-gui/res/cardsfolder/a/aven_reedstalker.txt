@@ -4,5 +4,4 @@ Types:Creature Bird Warrior
 PT:2/3
 K:Flash
 K:Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_reedstalker.jpg
 Oracle:Flash\nFlying

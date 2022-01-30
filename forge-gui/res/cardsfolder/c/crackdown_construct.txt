@@ -4,5 +4,4 @@ Types:Artifact Creature Construct
 PT:2/2
 T:Mode$ AbilityCast | ValidCard$ Artifact,Creature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you activate an ability of an artifact or creature that isn't a mana ability, Crackdown Construct gets +1/+1 until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crackdown_construct.jpg
 Oracle:Whenever you activate an ability of an artifact or creature that isn't a mana ability, Crackdown Construct gets +1/+1 until end of turn.

@@ -6,5 +6,4 @@ K:Double Strike
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+withFirst Strike | AddKeyword$ Double Strike | Description$ Creatures you control with first strike have double strike.
 SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kwende_pride_of_femeref.jpg
 Oracle:Double strike\nCreatures you control with first strike have double strike.

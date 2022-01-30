@@ -10,5 +10,5 @@ SVar:DBPumpPhyrexian:DB$ Pump | Defined$ Self | NumAtt$ +3 | NumDef$ +2 | KW$ Tr
 SVar:DamageSac:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature is dealt damage, sacrifice that many permanents.
 SVar:TrigSac:DB$ Sacrifice | Amount$ X | SacValid$ Permanent
 SVar:X:TriggerCount$DamageAmount
-DeckHas:Ability$LifeGain & Ability$Sacrifice & Type$Cleric & Type$Phyrexian
+DeckHas:Ability$LifeGain|Sacrifice & Type$Cleric|Phyrexian
 Oracle:{2}, Pay 2 life: Choose one. Activate only once.\n• Subversive Acolyte becomes a Human Cleric. It gets +1/+1 and gains lifelink.\n•Subversive Acolyte becomes a Phyrexian. It gets +3/+2 and gains trample and "Whenever this creature is dealt damage, sacrifice that many permanents."

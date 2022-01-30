@@ -8,5 +8,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ 2
 SVar:NeedsToPlay:Creature.YouCtrl+toughnessGT3,Creature.YouCtrl+powerGE3
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sleeper_agent.jpg
 Oracle:When Sleeper Agent enters the battlefield, target opponent gains control of it.\nAt the beginning of your upkeep, Sleeper Agent deals 2 damage to you.

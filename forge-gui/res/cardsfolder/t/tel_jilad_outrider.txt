@@ -3,5 +3,4 @@ ManaCost:3 G
 Types:Creature Elf Warrior
 PT:3/1
 K:Protection from artifacts
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_outrider.jpg
 Oracle:Protection from artifacts

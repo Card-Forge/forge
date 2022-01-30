@@ -8,5 +8,4 @@ SVar:X:Count$xPaid
 SVar:HalfXDown:Count$xPaid/HalfDown
 SVar:HalfXUp:Count$xPaid/HalfUp
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/banshee.jpg
 Oracle:{X}, {T}: Banshee deals half X damage, rounded down, to any target, and half X damage, rounded up, to you.

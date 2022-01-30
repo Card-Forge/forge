@@ -3,5 +3,4 @@ ManaCost:1 R
 Types:Creature Goblin Warrior
 PT:2/2
 R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Creature.Snow | ValidSource$ Card.Self | Description$ Prevent all damage that CARDNAME would deal to snow creatures.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_furrier.jpg
 Oracle:Prevent all damage that Goblin Furrier would deal to snow creatures.

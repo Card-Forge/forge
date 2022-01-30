@@ -3,5 +3,4 @@ ManaCost:RG
 Types:Creature Goblin Warrior
 PT:2/1
 K:CARDNAME attacks each combat if able.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tattermunge_maniac.jpg
 Oracle:Tattermunge Maniac attacks each combat if able.

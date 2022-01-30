@@ -6,5 +6,4 @@ K:Flying
 A:AB$ ChooseType | Cost$ 1 | Defined$ You | Type$ Creature | SubAbility$ DBAnimate | SpellDescription$ CARDNAME becomes the creature type of your choice until end of turn.
 SVar:DBAnimate:DB$ Animate | Types$ ChosenType | RemoveCreatureTypes$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_dreamer.jpg
 Oracle:Flying\n{1}: Mistform Dreamer becomes the creature type of your choice until end of turn.

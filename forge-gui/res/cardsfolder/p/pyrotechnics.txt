@@ -2,5 +2,4 @@ Name:Pyrotechnics
 ManaCost:4 R
 Types:Sorcery
 A:SP$ DealDamage | Cost$ 4 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select target any target to distribute damage to | NumDmg$ 4 | TargetMin$ 1 | TargetMax$ 4 | DividedAsYouChoose$ 4 | SpellDescription$ CARDNAME deals 4 damage divided as you choose among any number of targets.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pyrotechnics.jpg
 Oracle:Pyrotechnics deals 4 damage divided as you choose among any number of targets.

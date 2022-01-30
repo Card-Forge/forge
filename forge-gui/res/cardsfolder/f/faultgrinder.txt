@@ -7,5 +7,4 @@ K:Evoke:4 R
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target land.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select a land.
 SVar:NeedsToPlayEvoked:Land.OppCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/faultgrinder.jpg
 Oracle:Trample\nWhen Faultgrinder enters the battlefield, destroy target land.\nEvoke {4}{R} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)

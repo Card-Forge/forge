@@ -5,5 +5,4 @@ A:SP$ RevealHand | Cost$ W U | ValidTgts$ Player | TgtPrompt$ Select target play
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$InTargetedHand
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/search_warrant.jpg
 Oracle:Target player reveals their hand. You gain life equal to the number of cards in that player's hand.

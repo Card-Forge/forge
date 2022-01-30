@@ -3,5 +3,4 @@ ManaCost:2 U U
 Types:Sorcery
 A:SP$ ChangeZoneAll | Cost$ 2 U U | ChangeType$ Creature.nonKraken+nonLeviathan+nonOctopus+nonSerpent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all creatures to their owners' hands except for Krakens, Leviathans, Octopuses and Serpents.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/whelming_wave.jpg
 Oracle:Return all creatures to their owners' hands except for Krakens, Leviathans, Octopuses, and Serpents.

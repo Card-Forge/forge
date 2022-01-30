@@ -5,5 +5,4 @@ PT:1/1
 K:Lifelink
 K:Embalm:W
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sacred_cat.jpg
 Oracle:Lifelink\nEmbalm {W} ({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)

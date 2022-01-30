@@ -8,5 +8,4 @@ SVar:NoZeroToughnessAI:True
 SVar:NeedsToPlayVar:Z GE1
 SVar:Z:Count$UniqueManaColorsProduced.ByUntappedSources
 DeckHints:Ability$Proliferate
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skyreach_manta.jpg
 Oracle:Sunburst (This enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.)\nFlying

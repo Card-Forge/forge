@@ -8,5 +8,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ w_1_1_soldier | TokenOwner$ You | LegacyImage$ w 1 1 soldier m10
 SVar:PlayMain1:TRUE
 DeckHints:Type$Soldier
-SVar:Picture:http://www.wizards.com/global/images/magic/general/captain_of_the_watch.jpg
 Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nOther Soldier creatures you control get +1/+1 and have vigilance.\nWhen Captain of the Watch enters the battlefield, create three 1/1 white Soldier creature tokens.

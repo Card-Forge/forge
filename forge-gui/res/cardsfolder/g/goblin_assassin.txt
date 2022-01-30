@@ -7,5 +7,4 @@ SVar:RepeatFlips:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ Assa
 SVar:AssassinsFlip:DB$ FlipACoin | Flipper$ Remembered | NoCall$ True | RememberResult$ True
 SVar:Assassination:DB$ Sacrifice | Defined$ FlippedTails | SacValid$ Creature | Amount$ 1 | SubAbility$ ResetFlips
 SVar:ResetFlips:DB$ Cleanup | ClearCoinFlips$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_assassin.jpg
 Oracle:Whenever Goblin Assassin or another Goblin enters the battlefield, each player flips a coin. Each player whose coin comes up tails sacrifices a creature.

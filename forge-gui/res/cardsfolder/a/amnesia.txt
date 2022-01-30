@@ -2,5 +2,4 @@ Name:Amnesia
 ManaCost:3 U U U
 Types:Sorcery
 A:SP$ Discard | Cost$ 3 U U U | ValidTgts$ Player | Mode$ RevealDiscardAll | DiscardValid$ Card.nonLand | SpellDescription$ Target player reveals their hand and discards all nonland cards.
-SVar:Picture:http://resources.wizards.com/magic/cards/dk/en-us/card1746.jpg
 Oracle:Target player reveals their hand and discards all nonland cards.

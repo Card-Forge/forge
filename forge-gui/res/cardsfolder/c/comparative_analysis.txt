@@ -3,5 +3,4 @@ ManaCost:3 U
 Types:Instant
 K:Surge:2 U
 A:SP$ Draw | Cost$ 3 U | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws two cards.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/comparative_analysis.jpg
 Oracle:Surge {2}{U} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn.)\nTarget player draws two cards.

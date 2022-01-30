@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Prevent all combat damage that would be dealt by CARDNAME. | SpellDescription$ Prevent all combat damage that would be dealt by target creature this turn.
 K:Cycling:2
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fend_off.jpg
 Oracle:Prevent all combat damage that would be dealt by target creature this turn.\nCycling {2} ({2}, Discard this card: Draw a card.)

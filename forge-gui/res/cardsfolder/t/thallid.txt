@@ -6,6 +6,5 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ SPORE | CounterNum$ 1 | SpellDescription$ Put a spore counter on CARDNAME.
 A:AB$ Token | Cost$ SubCounter<3/SPORE> | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling fem | SpellDescription$ Create a 1/1 green Saproling creature token.
 DeckHints:Type$Fungus
-DeckHas:Ability$Counters & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thallid.jpg
+DeckHas:Ability$Counters|Token
 Oracle:At the beginning of your upkeep, put a spore counter on Thallid.\nRemove three spore counters from Thallid: Create a 1/1 green Saproling creature token.

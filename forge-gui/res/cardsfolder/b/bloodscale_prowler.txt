@@ -3,5 +3,4 @@ ManaCost:2 R
 Types:Creature Viashino Warrior
 PT:3/1
 K:Bloodthirst:1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodscale_prowler.jpg
 Oracle:Bloodthirst 1 (If an opponent was dealt damage this turn, this creature enters the battlefield with a +1/+1 counter on it.)

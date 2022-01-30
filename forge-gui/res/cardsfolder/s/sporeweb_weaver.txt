@@ -8,5 +8,5 @@ T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigGainLife | Trigge
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1 | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You
 SVar:HasCombatEffect:TRUE
-DeckHas:Ability$Token & Ability$LifeGain
+DeckHas:Ability$Token|LifeGain
 Oracle:Reach, hexproof from blue\nWhenever Sporeweb Weaver is dealt damage, you gain 1 life and create a 1/1 green Saproling creature token.

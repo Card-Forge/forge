@@ -3,5 +3,4 @@ ManaCost:3 U
 Types:Creature Sliver
 PT:2/2
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.Sliver | ValidBlocker$ Creature.nonSliver | Description$ Slivers can't be blocked except by Slivers.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shifting_sliver.jpg
 Oracle:Slivers can't be blocked except by Slivers.

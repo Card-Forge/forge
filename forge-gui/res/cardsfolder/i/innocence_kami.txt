@@ -7,5 +7,4 @@ A:AB$ Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature 
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 AI:RemoveDeck:Random
 DeckHints:Type$Spirit|Arcane
-SVar:Picture:http://www.wizards.com/global/images/magic/general/innocence_kami.jpg
 Oracle:{W}, {T}: Tap target creature.\nWhenever you cast a Spirit or Arcane spell, untap Innocence Kami.

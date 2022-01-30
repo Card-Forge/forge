@@ -5,5 +5,4 @@ A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Graveyard | IsPresent$ Creature.YouOwn+DirectlyAbove | PresentZone$ Graveyard | PresentCompare$ EQ1 | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is in your graveyard with a creature card directly above it, you may pay {1}. If you do, return CARDNAME to your hand.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 1 | Defined$ Self | Origin$ Graveyard | Destination$ Hand
 SVar:NeedsOrderedGraveyard:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/death_spark.jpg
 Oracle:Death Spark deals 1 damage to any target.\nAt the beginning of your upkeep, if Death Spark is in your graveyard with a creature card directly above it, you may pay {1}. If you do, return Death Spark to your hand.

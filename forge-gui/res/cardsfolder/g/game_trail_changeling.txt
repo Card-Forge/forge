@@ -4,5 +4,4 @@ Types:Creature Shapeshifter
 PT:4/4
 K:Changeling
 K:Trample
-SVar:Picture:http://www.wizards.com/global/images/magic/general/game_trail_changeling.jpg
 Oracle:Changeling (This card is every creature type.)\nTrample

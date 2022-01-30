@@ -5,5 +5,4 @@ PT:4/4
 K:Flying
 K:Haunt:TrigAnimate
 SVar:TrigAnimate:DB$ AnimateAll | ValidCards$ Creature.Other | Power$ 1 | Toughness$ 1 | SpellDescription$ Each other creature has base power and toughness 1/1 until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/graven_dominator.jpg
 Oracle:Flying\nHaunt (When this creature dies, exile it haunting target creature.)\nWhen Graven Dominator enters the battlefield or the creature it haunts dies, each other creature has base power and toughness 1/1 until end of turn.

@@ -12,7 +12,7 @@ SVar:TrigTransform:AB$ SetState | Cost$ 4 B B | Defined$ Self | Mode$ Transform
 SVar:X:Count$YourLifeTotal
 AlternateMode:DoubleFaced
 DeckHints:Type$Human
-DeckHas:Ability$Token & Ability$LifeGain
+DeckHas:Ability$Token|LifeGain
 Oracle:Whenever Jerren, Corrupted Bishop enters the battlefield or another nontoken Human you control dies, you lose 1 life and create a 1/1 white Human creature token.\n{2}: Target Human you control gains lifelink until end of turn.\nAt the beginning of your end step, if you have exactly 13 life, you may pay {4}{B}{B}. If you do, transform Jerren.
 
 ALTERNATE
@@ -26,5 +26,5 @@ K:Flying
 K:Trample
 K:Lifelink
 A:AB$ Draw | Cost$ Sac<1/Creature.Other/another creature> | NumCards$ 1 | SpellDescription$ Draw a card.
-DeckHas:Ability$Sacrifice & Ability$LifeGain
+DeckHas:Ability$Sacrifice|LifeGain
 Oracle:Flying, trample, lifelink\nSacrifice another creature: Draw a card.

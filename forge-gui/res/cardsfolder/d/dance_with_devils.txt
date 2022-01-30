@@ -2,5 +2,4 @@ Name:Dance with Devils
 ManaCost:3 R
 Types:Instant
 A:SP$ Token | Cost$ 3 R | TokenAmount$ 2 | TokenScript$ r_1_1_devil_burn | TokenOwner$ You | LegacyImage$ r 1 1 devil burn soi | SpellDescription$ Create two 1/1 red Devil creature tokens. They have "When this creature dies, it deals 1 damage to any target."
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dance_with_devils.jpg
 Oracle:Create two 1/1 red Devil creature tokens. They have "When this creature dies, it deals 1 damage to any target."

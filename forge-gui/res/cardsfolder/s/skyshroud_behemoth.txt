@@ -4,5 +4,4 @@ Types:Creature Beast
 PT:10/10
 K:Fading:2
 K:CARDNAME enters the battlefield tapped.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_behemoth.jpg
 Oracle:Fading 2 (This creature enters the battlefield with two fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)\nSkyshroud Behemoth enters the battlefield tapped.

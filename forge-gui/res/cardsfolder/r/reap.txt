@@ -6,5 +6,4 @@ SVar:GraveReap:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMi
 SVar:NrBlackAtCasting:Count$Valid Permanent.Black+TargetedPlayerCtrl
 SVar:AIPlayForSub:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reap.jpg
 Oracle:Return up to X target cards from your graveyard to your hand, where X is the number of black permanents target opponent controls as you cast this spell.

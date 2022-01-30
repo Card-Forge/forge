@@ -7,5 +7,4 @@ A:AB$ ChangeZone | Cost$ 3 | ValidTgts$ Rebel.YouCtrl | Origin$ Graveyard | Dest
 SVar:X:Count$xPaid
 AI:RemoveDeck:Random
 SVar:NonCombatPriority:1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lin_sivvi_defiant_hero.jpg
 Oracle:{X}, {T}: Search your library for a Rebel permanent card with mana value X or less, put it onto the battlefield, then shuffle.\n{3}: Put target Rebel card from your graveyard on the bottom of your library.

@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ CantAttackUnless | ValidCard$ Creature.AttachedBy | Cost$ 3 | Description$ Enchanted creature can't attack or block unless its controller pays {3}.
 S:Mode$ CantBlockUnless | ValidCard$ Creature.AttachedBy | Cost$ 3
 S:Mode$ RaiseCost | ValidCard$ Creature.AttachedBy | Type$ Ability | Amount$ 3 | AffectedZone$ Battlefield | Description$ Activated abilities of enchanted creature cost {3} more to activate.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/oppressive_rays.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack or block unless its controller pays {3}.\nActivated abilities of enchanted creature cost {3} more to activate.

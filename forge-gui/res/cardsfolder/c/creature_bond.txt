@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDamage | TriggerDescription$ When enchanted creature dies, CARDNAME deals damage equal to that creature's toughness to the creature's controller.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ Y
 SVar:Y:TriggeredCard$CardToughness
-SVar:Picture:http://www.wizards.com/global/images/magic/general/creature_bond.jpg
 Oracle:Enchant creature\nWhen enchanted creature dies, Creature Bond deals damage equal to that creature's toughness to the creature's controller.

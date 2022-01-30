@@ -5,5 +5,4 @@ PT:1/1
 A:AB$ ChooseColor | Cost$ T | Defined$ You | SubAbility$ Animate | SpellDescription$ Target creature becomes the color of your choice until end of turn.
 SVar:Animate:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ ChosenColor | OverwriteColors$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tidal_visionary.jpg
 Oracle:{T}: Target creature becomes the color of your choice until end of turn.

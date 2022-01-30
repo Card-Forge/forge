@@ -9,5 +9,4 @@ SVar:DBChooseLand:DB$ ChooseCard | Defined$ Remembered | Choices$ Land.Controlle
 SVar:DBDestroy:DB$ Destroy | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grenzos_rebuttal.jpg
 Oracle:Create a 4/4 red Ogre creature token. Starting with you, each player chooses an artifact, a creature, and a land from among the permanents controlled by the player to their left. Destroy each permanent chosen this way.

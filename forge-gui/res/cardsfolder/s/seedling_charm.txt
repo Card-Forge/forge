@@ -6,5 +6,4 @@ SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Aura.AttachedTo Creature | TgtProm
 SVar:DBRegen:DB$ Regenerate | ValidTgts$ Creature.Green | TgtPrompt$ Select target green creature. | SpellDescription$ Regenerate target green creature.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Trample | SpellDescription$ Target creature gains trample until end of turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/seedling_charm.jpg
 Oracle:Choose one —\n• Return target Aura attached to a creature to its owner's hand.\n• Regenerate target green creature.\n• Target creature gains trample until end of turn.

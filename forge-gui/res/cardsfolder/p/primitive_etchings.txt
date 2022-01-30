@@ -6,5 +6,4 @@ SVar:DBReveal:DB$ Reveal | Defined$ You | RevealDefined$ TriggeredCard | Remembe
 SVar:DBTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature+YouCtrl | SubAbility$ DBCleanup | Execute$ TrigDraw | TriggerDescription$ Whenever you reveal a creature card this way, draw a card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/primitive_etchings.jpg
 Oracle:Reveal the first card you draw each turn. Whenever you reveal a creature card this way, draw a card.

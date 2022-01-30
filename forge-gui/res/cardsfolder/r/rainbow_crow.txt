@@ -6,5 +6,4 @@ K:Flying
 A:AB$ ChooseColor | Cost$ 1 | Defined$ You | SubAbility$ Animate | SpellDescription$ CARDNAME becomes the color of your choice until end of turn.
 SVar:Animate:DB$ Animate | Defined$ Self | Colors$ ChosenColor | OverwriteColors$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rainbow_crow.jpg
 Oracle:Flying\n{1}: Rainbow Crow becomes the color of your choice until end of turn.

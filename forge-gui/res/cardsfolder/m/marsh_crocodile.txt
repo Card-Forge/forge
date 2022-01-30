@@ -7,5 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.Black+YouCtrl,Creature.Blue+YouCtrl | AILogic$ NeverBounceItself
 SVar:TrigDiscard:DB$ Discard | Defined$ Player | NumCards$ 1 | Mode$ TgtChoose
 SVar:NeedsToPlay:Creature.Black+YouCtrl+cmcLE3+inZoneBattlefield,Creature.Blue+YouCtrl+cmcLE3+inZoneBattlefield
-SVar:Picture:http://www.wizards.com/global/images/magic/general/marsh_crocodile.jpg
 Oracle:When Marsh Crocodile enters the battlefield, return a blue or black creature you control to its owner's hand.\nWhen Marsh Crocodile enters the battlefield, each player discards a card.

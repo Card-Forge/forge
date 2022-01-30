@@ -5,5 +5,4 @@ A:AB$ Pump | Cost$ 2 ExileFromHand<1/Card> | RememberCostCards$ True | SubAbilit
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ ParentTarget | Origin$ Graveyard | Destination$ Hand | ConditionDefined$ ParentTarget | ConditionPresent$ Card.sharesCardTypeWith Remembered | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/holistic_wisdom.jpg
 Oracle:{2}, Exile a card from your hand: Return target card from your graveyard to your hand if it shares a card type with the card exiled this way. (Artifact, creature, enchantment, instant, land, planeswalker, sorcery, and tribal are card types.)

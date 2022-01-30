@@ -4,5 +4,4 @@ Types:Creature Snake
 PT:3/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, destroy target land.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land
-SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal/fire_snake.jpg
 Oracle:When Fire Snake dies, destroy target land.

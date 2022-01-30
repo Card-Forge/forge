@@ -5,5 +5,4 @@ A:SP$ Draw | Cost$ U | NumCards$ 1 | SpellDescription$ Draw a card.
 DeckNeeds:Type$Arcane
 DeckHints:Name$Peer Through Depths|Reach Through Mists|Sift Through Sands|The Unspeakable
 DeckHints:Type$Spirit
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reach_through_mists.jpg
 Oracle:Draw a card.

@@ -9,5 +9,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Equip:3
 AI:RemoveDeck:Random
 DeckNeeds:Color$Red|White
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sunforger.jpg
 Oracle:Equipped creature gets +4/+0.\n{R}{W}, Unattach Sunforger: Search your library for a red or white instant card with mana value 4 or less and cast that card without paying its mana cost. Then shuffle.\nEquip {3}

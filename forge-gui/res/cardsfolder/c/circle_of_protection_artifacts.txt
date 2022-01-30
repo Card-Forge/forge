@@ -7,5 +7,4 @@ SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.ChosenCard+Art
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/circle_of_protection_artifacts.jpg
 Oracle:{2}: The next time an artifact source of your choice would deal damage to you this turn, prevent that damage.

@@ -6,7 +6,6 @@ SVar:TrigDig:DB$ Dig | DigNum$ 1 | DestinationZone$ Graveyard | Optional$ True |
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | Optional$ True | ConditionCheckSVar$ GraveCount | ConditionSVarCompare$ GE7
 SVar:GraveCount:Count$ValidGraveyard Card.YouOwn
 AlternateMode:DoubleFaced
-SVar:Picture:http://www.wizards.com/global/images/magic/general/search_for_azcanta.jpg
 Oracle:At the beginning of your upkeep, look at the top card of your library. You may put it into your graveyard. Then if you have seven or more cards in your graveyard, you may transform Search for Azcanta.
 
 ALTERNATE
@@ -16,5 +15,4 @@ ManaCost:no cost
 Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ U | Amount$ 1 | SpellDescription$ Add {U}.
 A:AB$ Dig | Cost$ 2 U T | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Card.nonCreature+nonLand | SpellDescription$ Look at the top four cards of your library. You may reveal a noncreature, nonland card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/azcanta_the_sunken_ruin.jpg
 Oracle:(Transforms from Search for Azcanta.)\n{T}: Add {U}.\n{2}{U}, {T}: Look at the top four cards of your library. You may reveal a noncreature, nonland card from among them and put it into your hand. Put the rest on the bottom of your library in any order.

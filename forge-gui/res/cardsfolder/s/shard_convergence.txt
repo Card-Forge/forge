@@ -7,5 +7,4 @@ SVar:DBSwamp:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ 
 SVar:DBMountain:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Mountain | ChangeNum$ 1
 AI:RemoveDeck:Random
 DeckNeeds:Color$White|Blue|Black|Red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shard_convergence.jpg
 Oracle:Search your library for a Plains card, an Island card, a Swamp card, and a Mountain card. Reveal those cards, put them into your hand, then shuffle.

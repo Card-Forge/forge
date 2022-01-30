@@ -5,5 +5,4 @@ PT:3/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, each player sacrifices a creature.
 SVar:TrigSac:DB$ Sacrifice | Defined$ Player | SacValid$ Creature
 SVar:NeedsToPlay:Creature.YouDontCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fleshbag_marauder.jpg
 Oracle:When Fleshbag Marauder enters the battlefield, each player sacrifices a creature.

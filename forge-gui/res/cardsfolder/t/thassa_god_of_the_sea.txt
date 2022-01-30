@@ -10,5 +10,4 @@ SVar:TrigScry:DB$ Scry | ScryNum$ 1
 A:AB$ Pump | Cost$ 1 U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ HIDDEN Unblockable | SpellDescription$ Target creature you control can't be blocked this turn.
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Permanent.Blue
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thassa_god_of_the_sea.jpg
 Oracle:Indestructible\nAs long as your devotion to blue is less than five, Thassa isn't a creature. (Each {U} in the mana costs of permanents you control counts toward your devotion to blue.)\nAt the beginning of your upkeep, scry 1.\n{1}{U}: Target creature you control can't be blocked this turn.

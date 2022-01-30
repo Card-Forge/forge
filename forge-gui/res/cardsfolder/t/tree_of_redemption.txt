@@ -4,5 +4,4 @@ Types:Creature Plant
 PT:0/13
 K:Defender
 A:AB$ ExchangeLifeVariant | Cost$ T | ConditionPresent$ Creature.StrictlySelf | Defined$ You | Mode$ Toughness | SpellDescription$ Exchange your life total with CARDNAME's toughness.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tree_of_redemption.jpg
 Oracle:Defender\n{T}: Exchange your life total with Tree of Redemption's toughness.

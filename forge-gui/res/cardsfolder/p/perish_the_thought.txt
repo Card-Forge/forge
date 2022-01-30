@@ -3,5 +3,4 @@ ManaCost:2 B
 Types:Sorcery
 A:SP$ RevealHand | Cost$ 2 B | Defined$ Targeted | ValidTgts$ Opponent | SubAbility$ ShuffleCardtoLib | StackDescription$ SpellDescription | SpellDescription$ Target opponent reveals their hand.
 SVar:ShuffleCardtoLib:DB$ ChangeZone | Origin$ Hand | Destination$ Library | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card | ChangeNum$ 1 | IsCurse$ True | Shuffle$ True | Mandatory$ True | AlreadyRevealed$ True | StackDescription$ SpellDescription | SpellDescription$ You choose a card from it. That player shuffles that card into their library.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/perish_the_thought.jpg
 Oracle:Target opponent reveals their hand. You choose a card from it. That player shuffles that card into their library.

@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Token | Cost$ 5 T Sac<1/CARDNAME> | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ c_3_4_a_gargoyle_flying | LegacyImage$ c 3 4 a gargoyle flying m10 | SpellDescription$ Create a 3/4 colorless Gargoyle artifact creature token with flying.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gargoyle_castle.jpg
 Oracle:{T}: Add {C}.\n{5}, {T}, Sacrifice Gargoyle Castle: Create a 3/4 colorless Gargoyle artifact creature token with flying.

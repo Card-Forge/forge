@@ -3,5 +3,4 @@ ManaCost:3 B
 Types:Creature Wraith
 PT:3/3
 K:Swampwalk
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83011.jpg
 Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)

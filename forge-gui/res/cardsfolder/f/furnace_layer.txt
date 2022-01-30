@@ -8,6 +8,5 @@ SVar:DBLoseLife:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 3 | ConditionDefi
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | OptionalDecider$ You | TriggerDescription$ Whenever you roll {CHAOS}, you may destroy target nonland permanent.
 SVar:RolledChaos:DB$ Destroy | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent to destroy
-SVar:Picture:http://www.wizards.com/global/images/magic/general/furnace_layer.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | MinTurn$ 3 | LowPriority$ True | MaxRollsPerTurn$ 9
 Oracle:When you planeswalk to Furnace Layer or at the beginning of your upkeep, select target player at random. That player discards a card. If that player discards a land card this way, they lose 3 life.\nWhenever you roll {CHAOS}, you may destroy target nonland permanent.

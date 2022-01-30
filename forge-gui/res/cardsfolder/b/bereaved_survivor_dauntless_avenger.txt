@@ -2,7 +2,7 @@ Name:Bereaved Survivor
 ManaCost:2 W
 Types:Creature Human Peasant
 PT:2/1
-T:Mode$ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ When another creature you control dies, transform CARDNAME.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ When another creature you control dies, transform CARDNAME.
 SVar:TrigTransform:DB$SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 Oracle:When another creature you control dies, transform Bereaved Survivor.

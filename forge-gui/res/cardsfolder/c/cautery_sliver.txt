@@ -7,5 +7,4 @@ SVar:Damage:AB$ DealDamage | Cost$ 1 Sac<1/CARDNAME> | ValidTgts$ Creature,Playe
 S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Prevent | Description$ All Slivers have "{1}, Sacrifice this permanent: Prevent the next 1 damage that would be dealt to target player, planeswalker, or Sliver creature this turn."
 SVar:Prevent:AB$ PreventDamage | Cost$ 1 Sac<1/CARDNAME> | ValidTgts$ Creature.Sliver,Player,Planeswalker | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to target player, planeswalker, or Sliver creature this turn.
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cautery_sliver.jpg
 Oracle:All Slivers have "{1}, Sacrifice this permanent: This permanent deals 1 damage to any target."\nAll Slivers have "{1}, Sacrifice this permanent: Prevent the next 1 damage that would be dealt to target player, planeswalker, or Sliver creature this turn."

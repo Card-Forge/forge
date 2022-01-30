@@ -9,4 +9,4 @@ A:AB$ Destroy | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | ValidTgts$ C
 SVar:DBAddLoyalty:DB$ PutCounter | Defined$ Self | CounterType$ LOYALTY | CounterNum$ X
 SVar:X:TargetedLKI$CardToughness
 A:AB$ DestroyAll | Cost$ SubCounter<25/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Creature.YouDontCtrl | SpellDescription$ Destroy all creatures Garruk the Slayer doesn't control.
-Oracle:[0]: Put a 2/2 green Wolf creature token onto the battlefield.\n[+4]: Target Wolf creature gets +1/+0 and gains deathtouch until end of turn.\n[−10]: Destroy target creature. Put loyalty counters on Garruk the Slayer equal to that creature's toughness.\n[−25]: Destroy all creatures Garruk the Slayer doesn't control.
+Oracle:[0]: Put a 2/2 green Wolf creature token onto the battlefield.\n[+4]: Target Wolf creature gets +1/+0 and gains deathtouch until end of turn.\n[-10]: Destroy target creature. Put loyalty counters on Garruk the Slayer equal to that creature's toughness.\n[-25]: Destroy all creatures Garruk the Slayer doesn't control.

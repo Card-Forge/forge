@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Creature Human Soldier
 PT:2/2
 K:Vigilance
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sun_sentinel.jpg
 Oracle:Vigilance (Attacking doesn't cause this creature to tap.)

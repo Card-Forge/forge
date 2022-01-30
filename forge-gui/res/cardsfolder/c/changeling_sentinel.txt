@@ -4,5 +4,4 @@ Types:Creature Shapeshifter
 PT:3/2
 K:Changeling
 K:Vigilance
-SVar:Picture:http://www.wizards.com/global/images/magic/general/changeling_sentinel.jpg
 Oracle:Changeling (This card is every creature type.)\nVigilance

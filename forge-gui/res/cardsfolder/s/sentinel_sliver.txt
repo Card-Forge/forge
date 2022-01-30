@@ -5,5 +5,4 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddKeyword$ Vigilance | Description$ Sliver creatures you control have vigilance.
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Sliver
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sentinel_sliver.jpg
 Oracle:Sliver creatures you control have vigilance. (Attacking doesn't cause them to tap.)

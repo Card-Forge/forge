@@ -5,5 +5,4 @@ T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ Opponent | Trig
 A:AB$ Animate | Cost$ 0 | Defined$ Self | Types$ Enchantment | RemoveCardTypes$ True | Duration$ Permanent | SpellDescription$ CARDNAME becomes an enchantment.
 SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 2 | Toughness$ 4 | Types$ Creature,Soldier | RemoveCardTypes$ True | Duration$ Permanent
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/opal_acrolith.jpg
 Oracle:Whenever an opponent casts a creature spell, if Opal Acrolith is an enchantment, Opal Acrolith becomes a 2/4 Soldier creature.\n{0}: Opal Acrolith becomes an enchantment.

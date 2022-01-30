@@ -6,6 +6,5 @@ A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | RestrictValid$ Card.Sliver | 
 A:AB$ Token | Cost$ 5 T | IsPresent$ Sliver.YouCtrl | TokenAmount$ 1 | TokenScript$ c_1_1_sliver | TokenOwner$ You | LegacyImage$ c 1 1 sliver m15 | SpellDescription$ Create a 1/1 colorless Sliver creature token. Activate only if you control a Sliver.
 SVar:BuffedBy:Sliver
 DeckHints:Type$Sliver
-DeckHas:Ability$Mana.Colorless & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sliver_hive.jpg
+DeckHas:Ability$Mana.Colorless|Token
 Oracle:{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Sliver spell.\n{5}, {T}: Create a 1/1 colorless Sliver creature token. Activate only if you control a Sliver.

@@ -7,5 +7,4 @@ SVar:DBTopLibrary:DB$ LookAt | Defined$ ValidAll Card.TopLibrary+TargetedPlayerC
 SVar:DBFaceDown:DB$ LookAt | Defined$ Valid Creature.faceDown+TargetedPlayerCtrl | SubAbility$ DBRearrange | StackDescription$ None
 SVar:DBRearrange:DB$ RearrangeTopOfLibrary | Defined$ You | NumCards$ 4
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spy_network.jpg
 Oracle:Look at target player's hand, the top card of that player's library, and any face-down creatures they control. Look at the top four cards of your library, then put them back in any order.

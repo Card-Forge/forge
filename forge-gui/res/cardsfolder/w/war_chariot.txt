@@ -2,5 +2,4 @@ Name:War Chariot
 ManaCost:3
 Types:Artifact
 A:AB$ Pump | Cost$ 3 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Trample | SpellDescription$ Target creature gains trample until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/war_chariot.jpg
 Oracle:{3}, {T}: Target creature gains trample until end of turn.

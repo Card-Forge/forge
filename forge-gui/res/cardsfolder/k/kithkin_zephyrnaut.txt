@@ -7,5 +7,4 @@ SVar:TrigKinship:DB$ PeekAndReveal | PeekAmount$ 1 | RevealValid$ Card.sharesCre
 SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | KW$ Flying & Vigilance | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kithkin_zephyrnaut.jpg
 Oracle:Kinship — At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Kithkin Zephyrnaut, you may reveal it. If you do, Kithkin Zephyrnaut gets +2/+2 and gains flying and vigilance until end of turn.

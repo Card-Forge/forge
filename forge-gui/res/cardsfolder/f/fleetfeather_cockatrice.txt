@@ -7,5 +7,4 @@ K:Flying
 K:Deathtouch
 K:Monstrosity:3:5 G U
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fleetfeather_cockatrice.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying, deathtouch\n{5}{G}{U}: Monstrosity 3. (If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)

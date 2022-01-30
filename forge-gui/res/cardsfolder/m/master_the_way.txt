@@ -4,5 +4,4 @@ Types:Sorcery
 A:SP$ Draw | Cost$ 3 U R | NumCards$ 1 | SubAbility$ DBDamage | SpellDescription$ Draw a card. CARDNAME deals damage to any target equal to the number of cards in your hand.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | NumDmg$ X
 SVar:X:Count$CardsInYourHand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/master_the_way.jpg
 Oracle:Draw a card. Master the Way deals damage to any target equal to the number of cards in your hand.

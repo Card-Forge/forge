@@ -9,5 +9,4 @@ SVar:PayDiscard:DB$ LoseLife | LifeAmount$ 2 | Defined$ Targeted | UnlessCost$ D
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidden_ritual.jpg
 Oracle:Sacrifice a nontoken permanent. If you do, target opponent loses 2 life unless that player sacrifices a permanent or discards a card. You may repeat this process any number of times.

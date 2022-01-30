@@ -2,5 +2,4 @@ Name:Time Warp
 ManaCost:3 U U
 Types:Sorcery
 A:SP$ AddTurn | Cost$ 3 U U | ValidTgts$ Player | TgtPrompt$ Select target player | NumTurns$ 1 | SpellDescription$ Target player takes an extra turn after this one.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/time_warp.jpg
 Oracle:Target player takes an extra turn after this one.

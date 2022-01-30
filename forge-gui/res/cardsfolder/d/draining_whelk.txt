@@ -9,5 +9,4 @@ SVar:TrigCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ 
 SVar:DBPutcounter:DB$ PutCounter | CounterType$ P1P1 | Defined$ Self | CounterNum$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedNumber
-SVar:Picture:http://www.wizards.com/global/images/magic/general/draining_whelk.jpg
 Oracle:Flash\nFlying\nWhen Draining Whelk enters the battlefield, counter target spell. Put X +1/+1 counters on Draining Whelk, where X is that spell's mana value.

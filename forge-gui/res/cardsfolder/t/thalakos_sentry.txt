@@ -3,5 +3,4 @@ ManaCost:1 U
 Types:Creature Thalakos Soldier
 PT:1/2
 K:Shadow
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thalakos_sentry.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)

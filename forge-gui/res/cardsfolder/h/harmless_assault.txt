@@ -3,5 +3,4 @@ ManaCost:2 W W
 Types:Instant
 A:SP$ Effect | Cost$ 2 W W | Name$ Harmless Assault Effect | ReplacementEffects$ RPrevent | AILogic$ Fog | SpellDescription$ Prevent all combat damage that would be dealt this turn by attacking creatures.
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ActiveZones$ Command | ValidSource$ Creature.attacking | Description$ Prevent all combat damage that would be dealt this turn by attacking creatures.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/harmless_assault.jpg
 Oracle:Prevent all combat damage that would be dealt this turn by attacking creatures.

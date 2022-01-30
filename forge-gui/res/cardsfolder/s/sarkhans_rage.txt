@@ -3,5 +3,4 @@ ManaCost:4 R
 Types:Instant
 A:SP$ DealDamage | Cost$ 4 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 5 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 5 damage to any target. If you control no Dragons, CARDNAME deals 2 damage to you.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ You | ConditionPresent$ Dragon.YouCtrl | ConditionCompare$ EQ0 | NumDmg$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sarkhans_rage.jpg
 Oracle:Sarkhan's Rage deals 5 damage to any target. If you control no Dragons, Sarkhan's Rage deals 2 damage to you.

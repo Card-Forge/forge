@@ -5,7 +5,6 @@ Types:Instant
 K:Fuse
 A:SP$ PumpAll | Cost$ 1 G W | ValidCards$ Creature.YouCtrl | KW$ Indestructible | SubAbility$ DBUnTapAll | SpellDescription$ Creatures you control gain indestructible until end of turn. Untap each creature you control.
 SVar:DBUnTapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ready_willing.jpg
 Oracle:Creatures you control gain indestructible until end of turn. Untap each creature you control.\nFuse (You may cast one or both halves of this card from your hand.)
 
 ALTERNATE

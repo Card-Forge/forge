@@ -6,5 +6,4 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 A:AB$ PumpAll | Cost$ B Sac<1/CARDNAME> | ValidCards$ Creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ All creatures get -X/-X until end of turn, where X is the number of cards in your hand.
 SVar:X:Count$InYourHand
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kagemaro_first_to_suffer.jpg
 Oracle:Kagemaro, First to Suffer's power and toughness are each equal to the number of cards in your hand.\n{B}, Sacrifice Kagemaro: All creatures get -X/-X until end of turn, where X is the number of cards in your hand.

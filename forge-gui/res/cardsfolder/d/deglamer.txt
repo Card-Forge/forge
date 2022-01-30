@@ -2,5 +2,4 @@ Name:Deglamer
 ManaCost:1 G
 Types:Instant
 A:SP$ ChangeZone | Cost$ 1 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Origin$ Battlefield | Destination$ Library | Shuffle$ True | SpellDescription$ Choose target artifact or enchantment. Its owner shuffles it into their library.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deglamer.jpg
 Oracle:Choose target artifact or enchantment. Its owner shuffles it into their library.

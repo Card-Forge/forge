@@ -8,5 +8,5 @@ A:AB$ ChangeZone | Cost$ Discard<1/Card.namedLinessa, Zephyr Mage> | CostDesc$ G
 SVar:DBArtifact:DB$ ChangeZone | DefinedPlayer$ Remembered | ChangeType$ Artifact | Origin$ Battlefield | Destination$ Hand | Chooser$ Remembered | Mandatory$ True | Hidden$ True | SubAbility$ DBEnchant
 SVar:DBEnchant:DB$ ChangeZone | DefinedPlayer$ Remembered | ChangeType$ Enchantment | Origin$ Battlefield | Destination$ Hand | Chooser$ Remembered | Mandatory$ True | Hidden$ True | SubAbility$ DBLand
 SVar:DBLand:DB$ ChangeZone | DefinedPlayer$ Remembered | ChangeType$ Land | Origin$ Battlefield | Destination$ Hand | Chooser$ Remembered | Mandatory$ True | Hidden$ True
-DeckHints:Linessa, Zephyr Mage
+DeckHints:Name$Linessa, Zephyr Mage
 Oracle:{X}{U}{U}, {T}: Return target creature with mana value X to its owner's hand.\nGrandeur — Discard another card named Linessa, Zephyr Mage: Target player returns a creature they control to its owner's hand, then repeats this process for an artifact, an enchantment, and a land.

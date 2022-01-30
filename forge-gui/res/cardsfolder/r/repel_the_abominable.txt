@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ Effect | Cost$ 1 W | Name$ Repel the Abominable Effect | ReplacementEffects$ RPrevent | SpellDescription$ Prevent all damage that would be dealt this turn by non-Human sources.
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | ValidSource$ Card.nonHuman,Emblem | ActiveZones$ Command | Description$ Prevent all damage that would be dealt this turn by non-Human sources.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/repel_the_abominable.jpg
 Oracle:Prevent all damage that would be dealt this turn by non-Human sources.

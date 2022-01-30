@@ -8,5 +8,4 @@ S:Mode$ Continuous | Affected$ Zombie.YouCtrl | AddKeyword$ Lifelink | Descripti
 SVar:DBClearRemember:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/necromancers_covenant.jpg
 Oracle:When Necromancer's Covenant enters the battlefield, exile all creature cards from target player's graveyard, then create a 2/2 black Zombie creature token for each card exiled this way.\nZombies you control have lifelink.

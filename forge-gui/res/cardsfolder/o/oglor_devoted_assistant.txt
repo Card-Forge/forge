@@ -9,6 +9,6 @@ SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredCard | StaticAbilities$ P
 SVar:PerpetualAbility:Mode$ Continuous | AddTrigger$ LeavesGrave | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The card perpetually gains "When this card leaves your graveyard, create a 2/2 tapped black Zombie creature token."
 SVar:LeavesGrave:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this card leaves your graveyard, create a 2/2 tapped black Zombie creature token.
 SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenTapped$ True
-DeckHas:Ability$Graveyard & Ability$Token & Type$Zombie
-DeckHints:Ability$Graveyard & Ability$Mill & Keyword$Disturb & Keyword$Escape
+DeckHas:Ability$Graveyard|Token & Type$Zombie
+DeckHints:Ability$Graveyard|Mill & Keyword$Disturb|Escape
 Oracle:At the beginning of your upkeep, look at the top two cards of your library, then put one of them into your graveyard.\nWhenever a creature card is put into your graveyard from your library, it perpetually gains "When this card leaves your graveyard, create a 2/2 tapped black Zombie creature token."

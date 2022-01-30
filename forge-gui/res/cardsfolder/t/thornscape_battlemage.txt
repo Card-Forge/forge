@@ -9,5 +9,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigKicker2:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact
 SVar:PlayMain1:TRUE
 DeckHints:Color$Red|White
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thornscape_battlemage.jpg
 Oracle:Kicker {R} and/or {W} (You may pay an additional {R} and/or {W} as you cast this spell.)\nWhen Thornscape Battlemage enters the battlefield, if it was kicked with its {R} kicker, it deals 2 damage to any target.\nWhen Thornscape Battlemage enters the battlefield, if it was kicked with its {W} kicker, destroy target artifact.

@@ -7,5 +7,4 @@ SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 2 | ConditionCheckSV
 SVar:X:Count$Valid Pirate.Other+YouCtrl
 SVar:NeedsToPlay:Pirate.Other+YouCtrl
 DeckHints:Type$Pirate
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fathom_fleet_boarder.jpg
 Oracle:When Fathom Fleet Boarder enters the battlefield, you lose 2 life unless you control another Pirate.

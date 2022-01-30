@@ -8,5 +8,4 @@ SVar:ChooseArtifact:DB$ Phases | AllValid$ Artifact.nonToken | SpellDescription$
 SVar:ChooseLand:DB$ Phases | AllValid$ Land.nonToken | SpellDescription$ Land
 SVar:ChooseEnchant:DB$ Phases | AllValid$ Enchantment.nonAura+nonToken | SpellDescription$ non-Aura Enchantment
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/teferis_realm.jpg
 Oracle:At the beginning of each player's upkeep, that player chooses artifact, creature, land, or non-Aura enchantment. All nontoken permanents of that type phase out. (While they're phased out, they're treated as though they don't exist. Each one phases in before its controller untaps during their next untap step.)

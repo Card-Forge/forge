@@ -4,5 +4,4 @@ Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ ChangeZone | Cost$ 1 B T | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Library | SpellDescription$ Put target creature card from your graveyard on top of your library.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/volraths_stronghold.jpg
 Oracle:{T}: Add {C}.\n{1}{B}, {T}: Put target creature card from your graveyard on top of your library.

@@ -8,5 +8,4 @@ T:Mode$ Sacrificed | ValidCard$ Card.Self | WhileKeyword$ Emerge | Execute$ Trig
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_3_2_eldrazi_horror | TokenOwner$ You | LegacyImage$ c 3 2 eldrazi horror emn
 DeckHints:Type$Eldrazi|Horror & Keyword$Emerge
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/foul_emissary.jpg
 Oracle:When Foul Emissary enters the battlefield, look at the top four cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in any order.\nWhen you sacrifice Foul Emissary while casting a spell with emerge, create a 3/2 colorless Eldrazi Horror creature token.

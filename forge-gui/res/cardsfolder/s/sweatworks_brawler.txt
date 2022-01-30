@@ -4,5 +4,4 @@ Types:Creature Human Artificer
 PT:3/3
 K:Improvise
 K:Menace
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sweatworks_brawler.jpg
 Oracle:Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nMenace

@@ -5,5 +5,4 @@ PT:1/1
 T:Mode$ DamageDone | ValidSource$ Instant.YouCtrl,Sorcery.YouCtrl | ValidTarget$ Player.Opponent | Execute$ TrigDmg | TriggerZones$ Battlefield | TriggerDescription$ Whenever an instant or sorcery spell you control deals damage to an opponent, CARDNAME deals that much damage to target creature that player controls.
 SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Creature | TargetsWithDefinedController$ TriggeredTarget | NumDmg$ X
 SVar:X:TriggerCount$DamageAmount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/satyr_firedancer.jpg
 Oracle:Whenever an instant or sorcery spell you control deals damage to an opponent, Satyr Firedancer deals that much damage to target creature that player controls.

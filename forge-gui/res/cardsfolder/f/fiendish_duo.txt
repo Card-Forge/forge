@@ -8,5 +8,4 @@ SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
 SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:Random
-SVar:Picture://www.wizards.com/global/images/magic/general/fiendish_duo.jpg
 Oracle:First strike\nIf a source would deal damage to an opponent, it deals double that damage to that player instead.

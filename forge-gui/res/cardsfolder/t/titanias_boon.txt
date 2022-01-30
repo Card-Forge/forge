@@ -2,5 +2,4 @@ Name:Titania's Boon
 ManaCost:3 G
 Types:Sorcery
 A:SP$ PutCounterAll | Cost$ 3 G | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each creature you control.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/titanias_boon.jpg
 Oracle:Put a +1/+1 counter on each creature you control.

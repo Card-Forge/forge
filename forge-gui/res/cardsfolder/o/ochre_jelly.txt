@@ -9,5 +9,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDelayTrigger:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | RememberObjects$ TriggeredCardLKICopy | CopyTriggeringObjects$ True | Execute$ TrigCopy | TriggerDescription$ Create a token that's a copy of it at the beginning of the next end step. That token enters the battlefield with half that many +1/+1 counters on it, rounded down.
 SVar:TrigCopy:DB$ CopyPermanent | Defined$ DelayTriggerRememberedLKI | WithCountersType$ P1P1 | WithCountersAmount$ Y
 SVar:Y:TriggeredCard$CardCounters.P1P1/HalfDown
-DeckHas:Ability$Counters & Ability$Token
+DeckHas:Ability$Counters|Token
 Oracle:Trample\nOchre Jelly enters the battlefield with X +1/+1 counters on it.\nSplit — When Ochre Jelly dies, if it had two or more +1/+1 counters on it, create a token that's a copy of it at the beginning of the next end step. The token enters the battlefield with half that many +1/+1 counters on it, rounded down.

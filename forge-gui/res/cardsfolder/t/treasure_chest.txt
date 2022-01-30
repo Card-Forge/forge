@@ -11,5 +11,5 @@ SVar:DBChangeZone1:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Dest
 SVar:DBChangeZone2:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | SubAbility$ DBShuffle
 SVar:DBShuffle:DB$ Shuffle | Defined$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Token & Ability$Sacrifice & Ability$LifeGain
+DeckHas:Ability$Token|Sacrifice|LifeGain
 Oracle:{4}, Sacrifice Treasure Chest: Roll a d20.\n1 | Trapped! — You lose 3 life.\n2—9 | Create five Treasure tokens.\n10—19 | You gain 3 life and draw three cards.\n20 | Search your library for a card. If it's an artifact card, you may put it onto the battlefield. Otherwise, put that card into your hand. Then shuffle.

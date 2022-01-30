@@ -4,5 +4,4 @@ Types:Creature Ogre Warrior
 PT:5/5
 S:Mode$ CantAttackUnless | ValidCard$ Card.Self | Cost$ 2 | Description$ CARDNAME can't attack or block unless you pay {2}.
 S:Mode$ CantBlockUnless | ValidCard$ Card.Self | Cost$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/qal_sisma_behemoth.jpg
 Oracle:Qal Sisma Behemoth can't attack or block unless you pay {2}.

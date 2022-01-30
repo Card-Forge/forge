@@ -5,5 +5,4 @@ A:SP$ RemoveCounterAll | Cost$ 3 B B | ValidCards$ Permanent | AllCounterTypes$ 
 SVar:DBRemove:DB$ ChangeZoneAll | ChangeType$ Card.token | Origin$ Battlefield | Destination$ Exile
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_snap.jpg
 Oracle:Remove all counters from all permanents and exile all tokens.

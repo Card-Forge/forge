@@ -8,5 +8,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription
 SVar:TrigToken:DB$ Token | TokenScript$ ragavan | LegacyImage$ ragavan aer | TokenTapped$ True | TokenAttacking$ True | AtEOT$ ExileCombat
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kari_zev_skyship_raider.jpg
 Oracle:First strike, menace\nWhenever Kari Zev, Skyship Raider attacks, create Ragavan, a legendary 2/1 red Monkey creature token. Ragavan enters the battlefield tapped and attacking. Exile that token at end of combat.

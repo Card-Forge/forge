@@ -5,5 +5,4 @@ T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ GeniusLife | TriggerZones$
 SVar:GeniusLife:AB$ GainLife | Cost$ X | Defined$ You | LifeAmount$ X | SubAbility$ GeniusCards
 SVar:GeniusCards:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:Count$xPaid
-SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/My Genius Knows No Bounds.full.jpg
 Oracle:When you set this scheme in motion, you may pay {X}. If you do, you gain X life and draw X cards.

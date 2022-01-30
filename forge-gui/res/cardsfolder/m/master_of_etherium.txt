@@ -9,5 +9,4 @@ SVar:PlayMain1:TRUE
 SVar:BuffedBy:Artifact
 AI:RemoveDeck:Random
 SVar:NoZeroToughnessAI:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_etherium.jpg
 Oracle:Master of Etherium's power and toughness are each equal to the number of artifacts you control.\nOther artifact creatures you control get +1/+1.

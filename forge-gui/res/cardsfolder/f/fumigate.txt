@@ -5,5 +5,4 @@ A:SP$ DestroyAll | Cost$ 3 W W | ValidCards$ Creature | RememberDestroyed$ True 
 SVar:DBGainLife:DB$ GainLife | Defined$ You | SubAbility$ DBCleanup | LifeAmount$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fumigate.jpg
 Oracle:Destroy all creatures. You gain 1 life for each creature destroyed this way.

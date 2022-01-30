@@ -8,5 +8,4 @@ SVar:TrigRemoveCounter:DB$ RemoveCounter | CounterType$ P1P1 | CounterNum$ 1 | R
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | LegacyImage$ b 2 2 zombie emn | TokenOwner$ You | ConditionCheckSVar$ CounterX | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:CounterX:Count$RememberedSize
-SVar:Picture:http://www.wizards.com/global/images/magic/general/noosegraf_mob.jpg
 Oracle:Noosegraf Mob enters the battlefield with five +1/+1 counters on it.\nWhenever a player casts a spell, remove a +1/+1 counter from Noosegraf Mob. If you do, create a 2/2 black Zombie creature token.

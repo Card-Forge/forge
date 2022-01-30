@@ -8,5 +8,4 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.Black+YouCtrl,Creature.Blue+YouCtrl | AILogic$ NeverBounceItself
 SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ RevealYouChoose
 SVar:NeedsToPlay:Creature.Black+YouCtrl+cmcLE3+inZoneBattlefield,Creature.Blue+YouCtrl+cmcLE3+inZoneBattlefield
-SVar:Picture:http://www.wizards.com/global/images/magic/general/doomsday_specter.jpg
 Oracle:Flying\nWhen Doomsday Specter enters the battlefield, return a blue or black creature you control to its owner's hand.\nWhenever Doomsday Specter deals combat damage to a player, look at that player's hand and choose a card from it. The player discards that card.

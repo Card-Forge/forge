@@ -5,5 +5,4 @@ A:AB$ ChangeZone | Cost$ tapXType<2/Creature> | RememberCostCards$ True | Change
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptic_gateway.jpg
 Oracle:Tap two untapped creatures you control: You may put a creature card from your hand that shares a creature type with each creature tapped this way onto the battlefield.

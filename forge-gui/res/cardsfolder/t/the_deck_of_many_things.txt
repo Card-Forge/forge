@@ -14,5 +14,5 @@ SVar:TrigDie:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefi
 SVar:DBLose:DB$ LosesGame | Defined$ RememberedOwner | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
-DeckHas:Ability$Discard & Ability$Graveyard
+DeckHas:Ability$Discard|Graveyard
 Oracle:{2}, {T}: Roll a d20 and subtract the number of cards in your hand. If the result is 0 or less, discard your hand.\n1—9 | Return a card at random from your graveyard to your hand.\n10—19 | Draw two cards.\n20 | Put a creature card from any graveyard onto the battlefield under your control. When that creature dies, its owner loses the game.

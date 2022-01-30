@@ -5,5 +5,4 @@ PT:4/3
 A:AB$ Mana | Cost$ Sac<1/Creature> | Produced$ R | SpellDescription$ Add {R}.
 A:AB$ Pump | Cost$ S | KW$ Haste | Defined$ Self | SpellDescription$ CARDNAME gains haste until end of turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thermopod.jpg
 Oracle:{S}: Thermopod gains haste until end of turn. ({S} can be paid with one mana from a snow source.)\nSacrifice a creature: Add {R}.

@@ -9,5 +9,4 @@ SVar:TrigDealDamage:DB$ DamageAll | ValidCards$ Creature.Goblin | NumDmg$ 1
 SVar:X:Count$Valid Land.AttachedBy+Basic+Mountain
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_shrine.jpg
 Oracle:Enchant land\nAs long as enchanted land is a basic Mountain, Goblin creatures get +1/+0.\nWhen Goblin Shrine leaves the battlefield, it deals 1 damage to each Goblin creature.

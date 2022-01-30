@@ -5,5 +5,4 @@ PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl+Black | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another black creature enters the battlefield under your control, target creature gains intimidate until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to gain intimidate | KW$ Intimidate
 SVar:BuffedBy:Creature.Black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shadow_alley_denizen.jpg
 Oracle:Whenever another black creature enters the battlefield under your control, target creature gains intimidate until end of turn. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)

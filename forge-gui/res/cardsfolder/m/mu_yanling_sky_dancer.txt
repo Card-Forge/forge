@@ -10,4 +10,4 @@ SVar:STDraw:Mode$ Continuous | EffectZone$ Command | Affected$ Island.YouCtrl | 
 SVar:AnimateIsland:AB$ Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Token
-Oracle:[+2]: Until your next turn, up to one target creature gets -2/-0 and loses flying.\n[−3]: Create a 4/4 blue Elemental Bird creature token with flying.\n[−8]: You get an emblem with "Islands you control have '{T}: Draw a card.'"
+Oracle:[+2]: Until your next turn, up to one target creature gets -2/-0 and loses flying.\n[-3]: Create a 4/4 blue Elemental Bird creature token with flying.\n[-8]: You get an emblem with "Islands you control have '{T}: Draw a card.'"

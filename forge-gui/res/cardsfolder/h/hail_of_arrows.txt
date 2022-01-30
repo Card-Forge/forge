@@ -6,5 +6,4 @@ SVar:MaxTgts:Count$Valid Creature.attacking
 SVar:Min:SVar$X/LimitMax.1
 SVar:X:Count$xPaid
 #X Will get overwritten by Announce
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hail_of_arrows.jpg
 Oracle:Hail of Arrows deals X damage divided as you choose among any number of target attacking creatures.

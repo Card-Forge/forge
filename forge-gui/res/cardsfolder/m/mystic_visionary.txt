@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Creature Human Nomad Mystic
 PT:2/1
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | Condition$ Threshold | Description$ Threshold — CARDNAME has flying as long as seven or more cards are in your graveyard.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_visionary.jpg
 Oracle:Threshold — Mystic Visionary has flying as long as seven or more cards are in your graveyard.

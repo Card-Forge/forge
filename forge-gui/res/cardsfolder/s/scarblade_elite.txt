@@ -4,5 +4,4 @@ Types:Creature Elf Assassin
 PT:2/2
 A:AB$ Destroy | Cost$ T ExileFromGrave<1/Assassin> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scarblade_elite.jpg
 Oracle:{T}, Exile an Assassin card from your graveyard: Destroy target creature.

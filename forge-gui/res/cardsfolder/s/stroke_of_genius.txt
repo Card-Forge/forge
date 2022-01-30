@@ -3,5 +3,4 @@ ManaCost:X 2 U
 Types:Instant
 A:SP$ Draw | Cost$ X 2 U | ValidTgts$ Player | TgtPrompt$ Choose a player | NumCards$ X | SpellDescription$ Target player draws X cards.
 SVar:X:Count$xPaid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stroke_of_genius.jpg
 Oracle:Target player draws X cards.

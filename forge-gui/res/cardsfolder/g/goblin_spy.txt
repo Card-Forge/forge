@@ -3,5 +3,4 @@ ManaCost:R
 Types:Creature Goblin Rogue
 PT:1/1
 S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ Player | Description$ Play with the top card of your library revealed.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_spy.jpg
 Oracle:Play with the top card of your library revealed.

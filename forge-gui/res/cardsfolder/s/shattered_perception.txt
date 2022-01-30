@@ -7,5 +7,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 K:Flashback:5 R
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shattered_perception.jpg
 Oracle:Discard all the cards in your hand, then draw that many cards.\nFlashback {5}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

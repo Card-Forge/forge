@@ -3,5 +3,4 @@ ManaCost:G
 Types:Creature Frog
 PT:1/1
 A:AB$ Fog | Cost$ Sac<1/CARDNAME> | SpellDescription$ Prevent all combat damage that would be dealt this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spore_frog.jpg
 Oracle:Sacrifice Spore Frog: Prevent all combat damage that would be dealt this turn.

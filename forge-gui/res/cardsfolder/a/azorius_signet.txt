@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact
 A:AB$ Mana | Cost$ 1 T | Produced$ W U | SpellDescription$ Add {W}{U}.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/azorius_signet.jpg
 Oracle:{1}, {T}: Add {W}{U}.

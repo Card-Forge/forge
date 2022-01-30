@@ -4,5 +4,4 @@ Types:Artifact
 A:AB$ Pump | Cost$ 2 Sac<1/CARDNAME> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ DBFight | SpellDescription$ Target creature you control fights target creature an opponent controls. (Each deals damage equal to its power to the other.)
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/triangle_of_war.jpg
 Oracle:{2}, Sacrifice Triangle of War: Target creature you control fights target creature an opponent controls. (Each deals damage equal to its power to the other.)

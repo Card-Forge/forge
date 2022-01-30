@@ -5,5 +5,4 @@ PT:1/1
 K:Flying
 A:AB$ Effect | Cost$ Sac<1/CARDNAME> | ValidTgts$ Player.wasDealtCombatDamageThisTurnBy Self | Name$ Hope of Ghirapur Effect | StaticAbilities$ STCantBeCast | RememberObjects$ Targeted | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, target player who was dealt combat damage by Hope of Ghirapur can't cast noncreature spells.
 SVar:STCantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card.nonCreature | Caster$ Player.IsRemembered | Description$ Until your next turn, target player who was dealt combat damage by Hope of Ghirapur this turn can't cast noncreature spells.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hope_of_ghirapur.jpg
 Oracle:Flying\nSacrifice Hope of Ghirapur: Until your next turn, target player who was dealt combat damage by Hope of Ghirapur this turn can't cast noncreature spells.

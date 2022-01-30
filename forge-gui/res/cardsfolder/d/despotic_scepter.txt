@@ -3,5 +3,4 @@ ManaCost:1
 Types:Artifact
 A:AB$ Destroy | Cost$ T | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Select target permanent you own | NoRegen$ True | SpellDescription$ Destroy target permanent you own. It can't be regenerated.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/despotic_scepter.jpg
 Oracle:{T}: Destroy target permanent you own. It can't be regenerated.

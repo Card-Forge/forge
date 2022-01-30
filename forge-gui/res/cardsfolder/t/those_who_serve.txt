@@ -2,5 +2,4 @@ Name:Those Who Serve
 ManaCost:2 W
 Types:Creature Zombie
 PT:2/4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/those_who_serve.jpg
 Oracle:

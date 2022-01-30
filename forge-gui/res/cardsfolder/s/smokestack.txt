@@ -7,5 +7,4 @@ SVar:TrigSacrifice:DB$ Sacrifice | Defined$ TriggeredPlayer | Amount$ X | SacVal
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ SOOT | CounterNum$ 1
 SVar:X:Count$CardCounters.SOOT
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/smokestack.jpg
 Oracle:At the beginning of your upkeep, you may put a soot counter on Smokestack.\nAt the beginning of each player's upkeep, that player sacrifices a permanent for each soot counter on Smokestack.

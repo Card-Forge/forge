@@ -6,4 +6,4 @@ A:AB$ PumpAll | Cost$ AddCounter<2/LOYALTY> | ValidCards$ Creature.YouCtrl | KW$
 A:AB$ DealDamage | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
 A:AB$ PutCounterAll | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 3 | SubAbility$ DBPumpAll | SpellDescription$ Put three +1/+1 counters on each creature you control. Those creatures gain trample until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | KW$ Trample | ValidCards$ Creature.YouCtrl
-Oracle:[+2]: Creatures you control get +1/+1 and gain haste until end of turn.\n[−3]: Domri, City Smasher deals 3 damage to any target.\n[−8]: Put three +1/+1 counters on each creature you control. Those creatures gain trample until end of turn.
+Oracle:[+2]: Creatures you control get +1/+1 and gain haste until end of turn.\n[-3]: Domri, City Smasher deals 3 damage to any target.\n[-8]: Put three +1/+1 counters on each creature you control. Those creatures gain trample until end of turn.

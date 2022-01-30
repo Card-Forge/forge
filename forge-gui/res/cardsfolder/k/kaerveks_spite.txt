@@ -1,7 +1,6 @@
 Name:Kaervek's Spite
 ManaCost:B B B
 Types:Instant
-A:SP$LoseLife | Cost$ B B B Sac<All/Permanent> Discard<0/Hand> | ValidTgts$ Player | LifeAmount$ 5 | CostDesc$ As an additional cost to cast Kaervek's Spite, sacrifice all permanents you control and discard your hand. | SpellDescription$ Target player loses 5 life.
+A:SP$ LoseLife | Cost$ B B B Sac<All/Permanent> Discard<0/Hand> | ValidTgts$ Player | LifeAmount$ 5 | CostDesc$ As an additional cost to cast Kaervek's Spite, sacrifice all permanents you control and discard your hand. | SpellDescription$ Target player loses 5 life.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kaerveks_spite.jpg
 Oracle:As an additional cost to cast this spell, sacrifice all permanents you control and discard your hand.\nTarget player loses 5 life.

@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Creature Human Samurai
 PT:0/2
 K:Bushido:2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/inner_chamber_guard.jpg
 Oracle:Bushido 2 (Whenever this creature blocks or becomes blocked, it gets +2/+2 until end of turn.)

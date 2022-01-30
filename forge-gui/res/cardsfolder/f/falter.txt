@@ -5,5 +5,4 @@ A:SP$ Effect | Cost$ 1 R | Name$ Falter Effect | StaticAbilities$ KWPump | AILog
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.withoutFlying | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures without flying can't block this turn.
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/falter.jpg
 Oracle:Creatures without flying can't block this turn.

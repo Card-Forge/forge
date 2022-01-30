@@ -6,5 +6,4 @@ A:AB$ Mana | Cost$ T PayLife<1> | Produced$ Any | Amount$ 1 | RestrictValid$ Car
 AI:RemoveDeck:Random
 DeckHas:Ability$Mana.Colorless
 DeckNeeds:Keyword$Devoid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/corrupted_crossroads.jpg
 Oracle:{T}: Add {C}. ({C} represents colorless mana.)\n{T}, Pay 1 life: Add one mana of any color. Spend this mana only to cast a spell with devoid.

@@ -7,5 +7,4 @@ K:Cycling:1 U
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ When you cycle CARDNAME, untap target permanent.
 SVar:TrigUntap:DB$ Untap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vizier_of_tumbling_sands.jpg
 Oracle:{T}: Untap another target permanent.\nCycling {1}{U} ({1}{U}, Discard this card: Draw a card.)\nWhen you cycle Vizier of Tumbling Sands, untap target permanent.

@@ -2,5 +2,4 @@ Name:Heroic Intervention
 ManaCost:1 G
 Types:Instant
 A:SP$ PumpAll | Cost$ 1 G | ValidCards$ Permanent.YouCtrl | KW$ Hexproof & Indestructible | SpellDescription$ Permanents you control gain hexproof and indestructible until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/heroic_intervention.jpg
 Oracle:Permanents you control gain hexproof and indestructible until end of turn.

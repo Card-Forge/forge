@@ -3,5 +3,4 @@ ManaCost:X B
 Types:Sorcery
 A:SP$ Pump | Cost$ X B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | SpellDescription$ Target creature gets +X/+0 until end of turn.
 SVar:X:Count$xPaid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodcurdling_scream.jpg
 Oracle:Target creature gets +X/+0 until end of turn.

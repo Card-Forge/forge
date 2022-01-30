@@ -8,4 +8,4 @@ SVar:TailDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | AILogic$ Powe
 SVar:X:ParentTargeted$CardPower
 A:AB$ PumpAll | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Creature.YouCtrl | NumAtt$ +4 | NumDef$ +4 | KW$ Trample | SpellDescription$ Creatures you control get +4/+4 and gain trample until end of turn.
 DeckHas:Ability$Token
-Oracle:[+2]: Put two +1/+1 counters on up to one target creature.\n[−3]: Target creature you control deals damage equal to its power to target creature you don't control.\n[−9]: Creatures you control get +4/+4 and gain trample until end of turn.
+Oracle:[+2]: Put two +1/+1 counters on up to one target creature.\n[-3]: Target creature you control deals damage equal to its power to target creature you don't control.\n[-9]: Creatures you control get +4/+4 and gain trample until end of turn.

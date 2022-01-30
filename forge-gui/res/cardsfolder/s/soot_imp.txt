@@ -6,5 +6,4 @@ K:Flying
 T:Mode$ SpellCast | ValidCard$ Card.nonBlack | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a player casts a nonblack spell, that player loses 1 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredActivator | LifeAmount$ 1
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soot_imp.jpg
 Oracle:Flying\nWhenever a player casts a nonblack spell, that player loses 1 life.

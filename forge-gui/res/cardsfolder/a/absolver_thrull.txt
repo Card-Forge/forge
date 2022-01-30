@@ -4,5 +4,4 @@ Types:Creature Thrull Cleric
 PT:2/3
 K:Haunt:TrigDestroy
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Enchantment | SpellDescription$ Destroy target enchantment.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/absolver_thrull.jpg
 Oracle:Haunt (When this creature dies, exile it haunting target creature.)\nWhen Absolver Thrull enters the battlefield or the creature it haunts dies, destroy target enchantment.

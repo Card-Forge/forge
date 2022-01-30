@@ -7,5 +7,4 @@ SVar:YourPeerGroup:Count$Valid Creature.ChosenType+YouCtrl
 SVar:Y:PlayerCountOther$HighestValid Creature.ChosenType+YouCtrl
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/peer_pressure.jpg
 Oracle:Choose a creature type. If you control more creatures of that type than each other player, you gain control of all creatures of that type. (This effect lasts indefinitely.)

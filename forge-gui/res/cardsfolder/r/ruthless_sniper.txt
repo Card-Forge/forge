@@ -4,6 +4,5 @@ Types:Creature Human Archer
 PT:1/2
 T:Mode$ Discarded | ValidCard$ Card.YouOwn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cycle or discard a card, you may pay {1}. If you do, put a -1/-1 counter on target creature.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | CounterType$ M1M1 | CounterNum$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ruthless_sniper.jpg
 DeckHas:Ability$Counters
 Oracle:Whenever you cycle or discard a card, you may pay {1}. If you do, put a -1/-1 counter on target creature.

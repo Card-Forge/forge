@@ -4,5 +4,4 @@ Types:Creature Drake
 PT:2/2
 K:Flying
 K:Vigilance
-SVar:Picture:http://resources.wizards.com/magic/cards/vi/en-us/card3746.jpg
 Oracle:Flying, vigilance

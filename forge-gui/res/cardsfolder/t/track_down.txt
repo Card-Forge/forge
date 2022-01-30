@@ -1,7 +1,7 @@
 Name:Track Down
 ManaCost:1 G
 Types:Sorcery
-A:SP$Scry | Cost$ 1 G | ScryNum$ 3 | SubAbility$ DBReveal | SpellDescription$ Scry 3, then reveal the top card of your library. If it's a creature or land card, draw a card.
+A:SP$ Scry | Cost$ 1 G | ScryNum$ 3 | SubAbility$ DBReveal | SpellDescription$ Scry 3, then reveal the top card of your library. If it's a creature or land card, draw a card.
 SVar:DBReveal:DB$ Dig | DigNum$ 1 | Reveal$ True | RememberRevealed$ True | DestinationZone$ Library | LibraryPosition$ 0 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1
 SVar:X:Remembered$Valid Creature,Land

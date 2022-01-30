@@ -3,5 +3,4 @@ ManaCost:3
 Types:Artifact
 S:Mode$ ReduceCost | ValidCard$ Card | ValidSpell$ Spell.Buyback | Activator$ Player | Amount$ 2 | Description$ Buyback costs cost {2} less.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/memory_crystal.jpg
 Oracle:Buyback costs cost {2} less.

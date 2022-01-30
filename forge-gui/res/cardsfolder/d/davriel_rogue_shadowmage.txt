@@ -7,4 +7,4 @@ SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 2
 SVar:CardsInHand:Count$ValidHand Card.ActivePlayerCtrl
 A:AB$ Discard | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card.
 DeckHas:Ability$Discard
-Oracle:At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, Davriel, Rogue Shadowmage deals 2 damage to them.\n[−1]: Target player discards a card.
+Oracle:At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, Davriel, Rogue Shadowmage deals 2 damage to them.\n[-1]: Target player discards a card.

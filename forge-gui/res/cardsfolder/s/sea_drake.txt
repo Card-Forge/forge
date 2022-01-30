@@ -5,5 +5,4 @@ PT:4/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBounce | TriggerDescription$ When CARDNAME enters the battlefield, return two target lands you control to their owner's hand.
 SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | TargetMin$ 2 | TargetMax$ 2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_drake.jpg
 Oracle:Flying\nWhen Sea Drake enters the battlefield, return two target lands you control to their owner's hand.

@@ -9,5 +9,4 @@ SVar:TrigDestroyRem:DB$ Pump | RememberObjects$ TriggeredCard | SubAbility$ DBDe
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Permanent.IsNotRemembered+sharesNameWith Remembered | NoRegen$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eye_of_singularity.jpg
 Oracle:When Eye of Singularity enters the battlefield, destroy each permanent with the same name as another permanent, except for basic lands. They can't be regenerated.\nWhenever a permanent other than a basic land enters the battlefield, destroy all other permanents with that name. They can't be regenerated.

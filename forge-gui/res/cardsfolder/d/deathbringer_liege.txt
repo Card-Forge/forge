@@ -9,5 +9,4 @@ T:Mode$ SpellCast | ValidCard$ Card.White | ValidActivatingPlayer$ You | Trigger
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature to tap
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature to destroy | ConditionDefined$ Targeted | ConditionPresent$ Creature.tapped
 SVar:BuffedBy:Card.White,Card.Black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deathbringer_liege.jpg
 Oracle:Other white creatures you control get +1/+1.\nOther black creatures you control get +1/+1.\nWhenever you cast a white spell, you may tap target creature.\nWhenever you cast a black spell, you may destroy target creature if it's tapped.

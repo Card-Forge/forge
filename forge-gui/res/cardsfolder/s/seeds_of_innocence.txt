@@ -8,5 +8,4 @@ SVar:X:RememberedLKI$FilterControlledByRemembered_CardManaCost
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/seeds_of_innocence.jpg
 Oracle:Destroy all artifacts. They can't be regenerated. The controller of each of those artifacts gains life equal to its mana value.

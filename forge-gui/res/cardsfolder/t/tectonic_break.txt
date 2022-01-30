@@ -4,5 +4,4 @@ Types:Sorcery
 A:SP$ Sacrifice | Cost$ X R R | Amount$ X | SacValid$ Land | Defined$ Player | SpellDescription$ Each player sacrifices X lands.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tectonic_break.jpg
 Oracle:Each player sacrifices X lands.

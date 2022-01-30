@@ -4,6 +4,5 @@ Types:Creature Treefolk Cleric
 PT:2/3
 A:AB$ PreventDamage | Cost$ 2 W T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | Amount$ 2 | SpellDescription$ Prevent the next 2 damage that would be dealt to any target this turn.
 AI:RemoveDeck:Random
-DeckNeeds:Color$white
-SVar:Picture:http://www.wizards.com/global/images/magic/general/treefolk_healer.jpg
+DeckNeeds:Color$White
 Oracle:{2}{W}, {T}: Prevent the next 2 damage that would be dealt to any target this turn.

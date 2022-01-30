@@ -4,5 +4,4 @@ Types:Creature Kirin
 PT:2/3
 K:Flying
 K:Vigilance
-SVar:Picture:http://www.wizards.com/global/images/magic/general/alabaster_kirin.jpg
 Oracle:Flying, vigilance

@@ -8,5 +8,4 @@ SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPla
 SVar:NumInLib:TargetedPlayer$CardsInLibrary
 SVar:NumInHand:TargetedPlayer$CardsInHand
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80281.jpg
 Oracle:Choose a nonland card name. Search target player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles.

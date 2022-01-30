@@ -11,5 +11,4 @@ SVar:GainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ X
 SVar:X:Count$Valid Permanent.YouOwn+OwnerDoesntControl
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/zedruu_the_greathearted.jpg
 Oracle:At the beginning of your upkeep, you gain X life and draw X cards, where X is the number of permanents you own that your opponents control.\n{U}{R}{W}: Target opponent gains control of target permanent you control.

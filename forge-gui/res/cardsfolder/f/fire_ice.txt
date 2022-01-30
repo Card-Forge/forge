@@ -3,7 +3,6 @@ ManaCost:1 R
 AlternateMode: Split
 Types:Instant
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2 | SpellDescription$ Fire deals 2 damage divided as you choose among one or two targets.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_ice.jpg
 Oracle:Fire deals 2 damage divided as you choose among one or two targets.
 
 ALTERNATE

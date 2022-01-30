@@ -5,5 +5,4 @@ PT:1/1
 A:AB$ ChooseType | Cost$ B T | Defined$ You | Type$ Creature | SubAbility$ DBPumpAll | SpellDescription$ Creatures of the creature type of your choice attack this turn if able.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.ChosenType | IsCurse$ True | KW$ HIDDEN CARDNAME attacks each combat if able.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/walking_desecration.jpg
 Oracle:{B}, {T}: Creatures of the creature type of your choice attack this turn if able.

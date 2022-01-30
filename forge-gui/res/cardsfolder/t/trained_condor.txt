@@ -5,5 +5,4 @@ PT:2/1
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature you control gains flying until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | KW$ Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/trained_condor.jpg
 Oracle:Flying\nWhenever Trained Condor attacks, another target creature you control gains flying until end of turn.

@@ -4,5 +4,4 @@ Types:Creature Human Scout
 PT:1/1
 A:AB$ Tap | Cost$ W T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Tap target artifact.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_transfixer.jpg
 Oracle:{W}, {T}: Tap target artifact.

@@ -5,5 +5,4 @@ PT:1/1
 A:AB$ Regenerate | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Regenerate target creature.
 A:AB$ Counter | Cost$ W W T Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Enchantment.inZoneBattlefield | SpellDescription$ Counter target spell that targets an enchantment.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vigilant_martyr.jpg
 Oracle:Sacrifice Vigilant Martyr: Regenerate target creature.\n{W}{W}, {T}, Sacrifice Vigilant Martyr: Counter target spell that targets an enchantment.

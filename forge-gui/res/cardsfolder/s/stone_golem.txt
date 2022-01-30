@@ -2,5 +2,4 @@ Name:Stone Golem
 ManaCost:5
 Types:Artifact Creature Golem
 PT:4/4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_golem.jpg
 Oracle:

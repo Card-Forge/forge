@@ -3,5 +3,4 @@ ManaCost:4 W
 Types:Sorcery
 A:SP$ Token | Cost$ 4 W | TokenAmount$ 2 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | LegacyImage$ w 2 2 knight vigilance gtc | SpellDescription$ Create two 2/2 white Knight creature tokens with vigilance.
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_watch.jpg
 Oracle:Create two 2/2 white Knight creature tokens with vigilance.

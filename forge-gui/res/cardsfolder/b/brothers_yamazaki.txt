@@ -9,5 +9,4 @@ S:Mode$ Continuous | Affected$ Creature.Other+namedBrothers Yamazaki | AddPower$
 DeckHints:Name$Brothers Yamazaki
 SVar:AILegendaryException:TwoCopiesAllowed
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brothers_yamazaki.jpg
 Oracle:Bushido 1 (Whenever this creature blocks or becomes blocked, it gets +1/+1 until end of turn.)\nIf there are exactly two permanents named Brothers Yamazaki on the battlefield, the "legend rule" doesn't apply to them.\nEach other creature named Brothers Yamazaki gets +2/+2 and has haste.

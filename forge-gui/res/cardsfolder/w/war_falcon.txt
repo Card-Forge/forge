@@ -8,5 +8,4 @@ SVar:X:Count$Valid Knight.YouCtrl,Soldier.YouCtrl
 AI:RemoveDeck:Random
 DeckHints:Type$Knight|Soldier
 SVar:BuffedBy:Knight,Soldier
-SVar:Picture:http://www.wizards.com/global/images/magic/general/war_falcon.jpg
 Oracle:Flying\nWar Falcon can't attack unless you control a Knight or a Soldier.

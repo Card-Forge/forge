@@ -7,5 +7,4 @@ A:AB$ ChangeZone | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | Hidden$ Tr
 A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Ultimate$ True | TokenScript$ c_0_0_a_construct_total_artifacts | TokenOwner$ You | LegacyImage$ c 0 0 a construct total artifacts dom | SpellDescription$ Create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."
 SVar:BuffedBy:Artifact
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/karn_scion_of_urza.jpg
-Oracle:[+1]: Reveal the top two cards of your library. An opponent chooses one of them. Put that card into your hand and exile the other with a silver counter on it.\n[−1]: Put a card you own with a silver counter on it from exile into your hand.\n[−2]: Create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."
+Oracle:[+1]: Reveal the top two cards of your library. An opponent chooses one of them. Put that card into your hand and exile the other with a silver counter on it.\n[-1]: Put a card you own with a silver counter on it from exile into your hand.\n[-2]: Create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."

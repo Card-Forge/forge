@@ -4,5 +4,4 @@ Types:Land Desert
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
 K:Cycling:1 B
-SVar:Picture:http://www.wizards.com/global/images/magic/general/desert_of_the_glorified.jpg
 Oracle:Desert of the Glorified enters the battlefield tapped.\n{T}: Add {B}.\nCycling {1}{B} ({1}{B}, Discard this card: Draw a card.)

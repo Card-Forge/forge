@@ -3,5 +3,4 @@ ManaCost:5
 Types:Artifact Creature Construct
 PT:3/4
 A:AB$ Untap | Cost$ U | SpellDescription$ Untap CARDNAME.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soliton.jpg
 Oracle:{U}: Untap Soliton.

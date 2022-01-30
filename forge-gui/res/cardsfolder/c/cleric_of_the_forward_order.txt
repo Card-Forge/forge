@@ -6,5 +6,4 @@ T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Creature.YouCtrl+namedCleric of the Forward Order/Times.2
 DeckHints:Name$Cleric of the Forward Order
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cleric_of_the_forward_order.jpg
 Oracle:When Cleric of the Forward Order enters the battlefield, you gain 2 life for each creature you control named Cleric of the Forward Order.

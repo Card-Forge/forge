@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Descr
 SVar:X:SVar$Y/Times.3
 SVar:Y:PlayerCountOpponents$HasPropertyLessThanHalfStartingLifeTotal
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Indestructible | CheckSVar$ Y | Description$ As long as an opponent's life total is less than half their starting life total, CARDNAME has indestructible.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/anya_merciless_angel.jpg
 Oracle:Flying\nAnya, Merciless Angel gets +3/+3 for each opponent whose life total is less than half their starting life total.\nAs long as an opponent's life total is less than half their starting life total, Anya has indestructible.

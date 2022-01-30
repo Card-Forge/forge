@@ -5,5 +5,4 @@ PT:3/2
 K:Flying
 T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, scry 1.
 SVar:TrigScry:DB$ Scry | ScryNum$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chorus_of_the_tides.jpg
 Oracle:Flying\nHeroic — Whenever you cast a spell that targets Chorus of the Tides, scry 1. (To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)

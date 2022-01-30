@@ -7,5 +7,4 @@ K:ETBReplacement:Other:ChooseP
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to 1 plus the number of green creature cards in the chosen player's graveyard.
 SVar:X:Count$ValidGraveyard Creature.Green+ChosenCtrl/Plus.1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/haunting_apparition.jpg
 Oracle:Flying\nAs Haunting Apparition enters the battlefield, choose an opponent.\nHaunting Apparition's power is equal to 1 plus the number of green creature cards in the chosen player's graveyard.

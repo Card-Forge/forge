@@ -6,5 +6,4 @@ A:SP$ Reveal | Cost$ 4 R | Random$ True | RememberRevealed$ True | ValidTgts$ Pl
 SVar:DBDamage:DB$ DealDamage | NumDmg$ X | Defined$ Targeted | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ignite_memories.jpg
 Oracle:Target player reveals a card at random from their hand. Ignite Memories deals damage to that player equal to that card's mana value.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)

@@ -4,5 +4,4 @@ Types:Creature Vampire Soldier
 PT:1/2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME attacks, each opponent loses 1 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vicious_conquistador.jpg
 Oracle:Whenever Vicious Conquistador attacks, each opponent loses 1 life.

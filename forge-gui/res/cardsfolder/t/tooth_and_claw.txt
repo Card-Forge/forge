@@ -3,5 +3,4 @@ ManaCost:3 R
 Types:Enchantment
 A:AB$ Token | Cost$ Sac<2/Creature> | TokenAmount$ 1 | TokenScript$ carnivore | TokenOwner$ You | LegacyImage$ carnivore tmp | SpellDescription$ Create a 3/1 red Beast creature token named Carnivore.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tooth_and_claw.jpg
 Oracle:Sacrifice two creatures: Create a 3/1 red Beast creature token named Carnivore.

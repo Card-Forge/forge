@@ -4,5 +4,4 @@ Types:Creature Crocodile
 PT:4/4
 S:Mode$ Continuous | Affected$ Card.Self | CheckSVar$ X | SVarCompare$ GE1 | AddKeyword$ Vigilance & Deathtouch | Description$ As long as a creature has a -1/-1 counter on it, CARDNAME has vigilance and deathtouch.
 SVar:X:Count$Valid Creature.counters_GE1_M1M1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tenacious_hunter.jpg
 Oracle:As long as a creature has a -1/-1 counter on it, Tenacious Hunter has vigilance and deathtouch.

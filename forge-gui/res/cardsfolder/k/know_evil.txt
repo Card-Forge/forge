@@ -10,5 +10,4 @@ SVar:CantBeCastCreats:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card.C
 SVar:TrigEffect3:DB$ Effect | Name$ Know Evil Effect - No Spells | IsCurse$ True | StaticAbilities$ CantBeCastNonCreats | ValidTgts$ Opponent | RememberObjects$ ThisTargetedPlayer | TargetUnique$ True | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target opponent who can't cast noncreature spells | Duration$ UntilYourNextTurn | SubAbility$ DBCleanup | SpellDescription$ Up to one target opponent can't cast noncreature spells until your next turn.
 SVar:CantBeCastNonCreats:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card.nonCreature | Caster$ Player.IsRemembered | Description$ Target player can't cast noncreature spells until your next turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Picture:https://downloads.cardforge.org/images/cards/E01/Know Evil.full.jpg
 Oracle:When you set this scheme in motion, until your next turn, up to one target opponent can't attack with creatures, up to one target opponent can't cast creature spells, and up to one target opponent can't cast noncreature spells. You can't choose any player as a target more than once.

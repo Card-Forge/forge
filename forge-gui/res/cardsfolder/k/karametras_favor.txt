@@ -8,5 +8,4 @@ SVar:TrigDraw:DB$ Draw | NumCards$ 1
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ AnyMana | Description$ Enchanted creature has "{T}: Add one mana of any color."
 SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 SVar:NonStackingAttachEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/karametras_favor.jpg
 Oracle:Enchant creature\nWhen Karametra's Favor enters the battlefield, draw a card.\nEnchanted creature has "{T}: Add one mana of any color."

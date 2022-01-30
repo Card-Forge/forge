@@ -6,5 +6,4 @@ K:Defender
 T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigCopy | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME is dealt damage, you may create a token that's a copy of Sprouting CARDNAME.
 SVar:TrigCopy:DB$ CopyPermanent | Defined$ Self
 SVar:HasCombatEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sprouting_phytohydra.jpg
 Oracle:Defender (This creature can't attack.)\nWhenever Sprouting Phytohydra is dealt damage, you may create a token that's a copy of Sprouting Phytohydra.

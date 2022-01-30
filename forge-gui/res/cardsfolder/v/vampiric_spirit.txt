@@ -5,5 +5,4 @@ PT:4/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, you lose 4 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vampiric_spirit.jpg
 Oracle:Flying\nWhen Vampiric Spirit enters the battlefield, you lose 4 life.

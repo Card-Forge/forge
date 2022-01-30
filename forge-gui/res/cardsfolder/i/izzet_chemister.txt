@@ -11,5 +11,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | Va
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NumRemembered:Count$ValidExile Instant.YouOwn+ExiledWithSource,Sorcery.YouOwn+ExiledWithSource
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/izzet_chemister.jpg
 Oracle:Haste\n{R}, {T}: Exile target instant or sorcery card from your graveyard.\n{1}{R}, {T}, Sacrifice Izzet Chemister: Cast any number of cards exiled with Izzet Chemister without paying their mana costs.

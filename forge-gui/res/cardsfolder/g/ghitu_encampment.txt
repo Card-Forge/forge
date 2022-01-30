@@ -4,5 +4,4 @@ Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
 A:AB$ Animate | Cost$ 1 R | Defined$ Self | Power$ 2 | Toughness$ 1 | Types$ Creature,Warrior | Colors$ Red | Keywords$ First Strike | SpellDescription$ CARDNAME becomes a 2/1 red Warrior creature with first strike until end of turn. It's still a land. (It deals combat damage before creatures without first strike.)
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ghitu_encampment.jpg
 Oracle:Ghitu Encampment enters the battlefield tapped.\n{T}: Add {R}.\n{1}{R}: Ghitu Encampment becomes a 2/1 red Warrior creature with first strike until end of turn. It's still a land. (It deals combat damage before creatures without first strike.)

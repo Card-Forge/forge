@@ -6,5 +6,4 @@ T:Mode$ AttackersDeclared | ValidAttackers$ Vampire.nonToken+YouCtrl | Execute$ 
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | LegacyImage$ w 1 1 vampire lifelink xln | TokenScript$ w_1_1_vampire_lifelink | TokenOwner$ You
 DeckHints:Type$Vampire
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mavren_fein_dusk_apostle.jpg
 Oracle:Whenever one or more nontoken Vampires you control attack, create a 1/1 white Vampire creature token with lifelink.

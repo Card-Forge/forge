@@ -4,5 +4,4 @@ Types:Creature Human Spellshaper
 PT:1/1
 A:AB$ PumpAll | Cost$ 1 G T Discard<1/Card> | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Trample | SpellDescription$ Creatures you control get +1/+1 and gain trample until end of turn.
 SVar:AIPreference:DiscardCost$Card
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stampede_driver.jpg
 Oracle:{1}{G}, {T}, Discard a card: Creatures you control get +1/+1 and gain trample until end of turn.

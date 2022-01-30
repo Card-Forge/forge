@@ -2,5 +2,4 @@ Name:Goblin Roughrider
 ManaCost:2 R
 Types:Creature Goblin Knight
 PT:3/2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_roughrider.jpg
 Oracle:

@@ -9,5 +9,4 @@ SVar:TrigTap:DB$ TapAll | ValidCards$ Creature.blockedByRemembered | SubAbility$
 SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.blockedByRemembered | Duration$ Permanent | KW$ HIDDEN This card doesn't untap during your next untap step. | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/triton_tactics.jpg
 Oracle:Up to two target creatures each get +0/+3 until end of turn. Untap those creatures. At this turn's next end of combat, tap each creature that was blocked by one of those creatures this turn and it doesn't untap during its controller's next untap step.

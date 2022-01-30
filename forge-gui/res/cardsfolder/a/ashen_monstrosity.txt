@@ -4,5 +4,4 @@ Types:Creature Spirit
 PT:7/4
 K:Haste
 K:CARDNAME attacks each combat if able.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ashen_monstrosity.jpg
 Oracle:Haste\nAshen Monstrosity attacks each combat if able.

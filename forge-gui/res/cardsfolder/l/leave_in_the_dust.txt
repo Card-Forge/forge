@@ -3,5 +3,4 @@ ManaCost:3 U
 Types:Instant
 A:SP$ ChangeZone | Cost$ 3 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return target nonland permanent to its owner's hand. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/leave_in_the_dust.jpg
 Oracle:Return target nonland permanent to its owner's hand.\nDraw a card.

@@ -2,5 +2,4 @@ Name:Fatal Blow
 ManaCost:B
 Types:Instant
 A:SP$ Destroy | Cost$ B | ValidTgts$ Creature.wasDealtDamageThisTurn | NoRegen$ True | TgtPrompt$ Select target creature that was dealt damage this turn | SpellDescription$ Destroy target creature that was dealt damage this turn. It can't be regenerated.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fatal_blow.jpg
 Oracle:Destroy target creature that was dealt damage this turn. It can't be regenerated.

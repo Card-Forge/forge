@@ -4,5 +4,4 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
 R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Creature.EnchantedBy | Description$ Prevent all damage that would be dealt to enchanted creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/inviolability.jpg
 Oracle:Enchant creature\nPrevent all damage that would be dealt to enchanted creature.

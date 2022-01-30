@@ -5,5 +5,4 @@ PT:1/1
 A:AB$ ChangeZone | Cost$ W T | Origin$ Library | Destination$ Hand | ChangeType$ Land | ChangeNum$ 1 | CheckSVar$ X | SVarCompare$ GTY | SpellDescription$ Search your library for a land card, reveal it, put it into your hand, then shuffle. Activate only if an opponent controls more lands than you.
 SVar:X:PlayerCountOpponents$HighestValid Land.YouCtrl
 SVar:Y:Count$Valid Land.YouCtrl
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83311.jpg
 Oracle:{W}, {T}: Search your library for a land card, reveal it, put it into your hand, then shuffle. Activate only if an opponent controls more lands than you.

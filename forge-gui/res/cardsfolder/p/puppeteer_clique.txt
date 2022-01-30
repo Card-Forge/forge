@@ -9,5 +9,4 @@ SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.OppOwn | TgtPrompt$ Sel
 SVar:DBPump:DB$ Animate | Keywords$ Haste | Defined$ Remembered | Duration$ Permanent | AtEOT$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PlayMain1:ALWAYS
-SVar:Picture:http://www.wizards.com/global/images/magic/general/puppeteer_clique.jpg
 Oracle:Flying\nWhen Puppeteer Clique enters the battlefield, put target creature card from an opponent's graveyard onto the battlefield under your control. It gains haste. At the beginning of your next end step, exile it.\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)

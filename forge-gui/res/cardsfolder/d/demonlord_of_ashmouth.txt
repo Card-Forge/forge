@@ -7,5 +7,4 @@ K:Undying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExileUnless | TriggerDescription$ When CARDNAME enters the battlefield, exile it unless you sacrifice another creature.
 SVar:TrigExileUnless:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | UnlessCost$ Sac<1/Creature.Other/other creature> | UnlessPayer$ You
 SVar:NeedsToPlay:Creature.cmcLE2+YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/demonlord_of_ashmouth.jpg
 Oracle:Flying\nWhen Demonlord of Ashmouth enters the battlefield, exile it unless you sacrifice another creature.\nUndying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)

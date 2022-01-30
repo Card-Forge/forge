@@ -4,5 +4,4 @@ Types:Artifact
 K:No more than two creatures can attack you each combat.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crawlspace.jpg
 Oracle:No more than two creatures can attack you each combat.

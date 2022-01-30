@@ -4,5 +4,4 @@ Types:Creature Archon
 PT:5/6
 K:Flying
 S:Mode$ CantAttack | ValidCard$ Creature | Target$ You | Description$ Creatures can't attack you.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blazing_archon.jpg
 Oracle:Flying\nCreatures can't attack you.

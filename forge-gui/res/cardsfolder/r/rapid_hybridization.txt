@@ -3,5 +3,4 @@ ManaCost:U
 Types:Instant
 A:SP$ Destroy | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select a creature | AILogic$ Pongify | SubAbility$ DBToken | NoRegen$ True | SpellDescription$ Destroy target creature. It can't be regenerated. That creature's controller creates a 3/3 green Frog Lizard creature token.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_frog_lizard | TokenOwner$ TargetedController | LegacyImage$ g 3 3 frog lizard gtc
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rapid_hybridization.jpg
 Oracle:Destroy target creature. It can't be regenerated. That creature's controller creates a 3/3 green Frog Lizard creature token.

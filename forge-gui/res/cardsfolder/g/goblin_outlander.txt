@@ -3,5 +3,4 @@ ManaCost:B R
 Types:Creature Goblin Scout
 PT:2/2
 K:Protection from white
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_outlander.jpg
 Oracle:Protection from white

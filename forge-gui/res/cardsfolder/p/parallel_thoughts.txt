@@ -11,5 +11,4 @@ R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ RepPa
 SVar:RepParallelThoughts:DB$ ChangeZone | Defined$ FirstRemembered | Origin$ Exile | Destination$ Hand
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/parallel_thoughts.jpg
 Oracle:When Parallel Thoughts enters the battlefield, search your library for seven cards, exile them in a face-down pile, and shuffle that pile. Then shuffle your library.\nIf you would draw a card, you may instead put the top card of the pile you exiled into your hand.

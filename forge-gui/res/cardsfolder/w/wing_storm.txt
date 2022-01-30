@@ -5,5 +5,4 @@ A:SP$ RepeatEach | Cost$ 2 G | RepeatPlayers$ Player | RepeatSubAbility$ DBDamag
 SVar:DBDamage:DB$ DealDamage | Defined$ Remembered | NumDmg$ X
 SVar:X:Count$Valid Creature.withFlying+RememberedPlayerCtrl/Times.2
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wing_storm.jpg
 Oracle:Wing Storm deals damage to each player equal to twice the number of creatures with flying that player controls.

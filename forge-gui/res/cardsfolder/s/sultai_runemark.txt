@@ -7,5 +7,4 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddKeyword$ Deathtouch | IsPresent$ Permanent.Green+YouCtrl,Permanent.Blue+YouCtrl | Description$ Enchanted creature has deathtouch as long as you control a green or blue permanent.
 SVar:BuffedBy:Permanent.Green,Permanent.Blue
 DeckHints:Color$Green|Blue
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sultai_runemark.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2.\nEnchanted creature has deathtouch as long as you control a green or blue permanent. (Any amount of damage it deals to a creature is enough to destroy it.)

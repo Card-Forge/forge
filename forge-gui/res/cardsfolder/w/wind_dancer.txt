@@ -4,5 +4,4 @@ Types:Creature Faerie
 PT:1/1
 K:Flying
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wind_dancer.jpg
 Oracle:Flying\n{T}: Target creature gains flying until end of turn.

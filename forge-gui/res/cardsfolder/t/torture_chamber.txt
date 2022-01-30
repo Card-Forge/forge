@@ -9,5 +9,4 @@ SVar:TrigDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ X
 SVar:X:Count$CardCounters.PAIN
 SVar:Y:SVar$CostCountersRemoved
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/torture_chamber.jpg
 Oracle:At the beginning of your upkeep, put a pain counter on Torture Chamber.\nAt the beginning of your end step, Torture Chamber deals damage to you equal to the number of pain counters on it.\n{1}, {T}, Remove all pain counters from Torture Chamber: It deals damage to target creature equal to the number of pain counters removed this way.

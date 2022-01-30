@@ -3,5 +3,4 @@ ManaCost:4 R
 Types:Legendary Creature Human Rogue
 PT:3/3
 A:AB$ Destroy | Cost$ R R R T | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature | SpellDescription$ Destroy target artifact creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chandler.jpg
 Oracle:{R}{R}{R}, {T}: Destroy target artifact creature.

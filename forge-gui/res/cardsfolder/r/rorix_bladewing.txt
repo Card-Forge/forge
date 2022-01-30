@@ -4,5 +4,4 @@ Types:Legendary Creature Dragon
 PT:6/5
 K:Flying
 K:Haste
-SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39859.jpg
 Oracle:Flying, haste

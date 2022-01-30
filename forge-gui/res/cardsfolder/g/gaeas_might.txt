@@ -4,5 +4,4 @@ Types:Instant
 A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Domain — Target creature gets +1/+1 until end of turn for each basic land type among lands you control.
 SVar:X:Count$Domain
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gaeas_might.jpg
 Oracle:Domain — Target creature gets +1/+1 until end of turn for each basic land type among lands you control.

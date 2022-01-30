@@ -5,5 +5,4 @@ S:Mode$ Continuous | Affected$ Permanent.Snow | AddHiddenKeyword$ CARDNAME doesn
 K:Cumulative upkeep:2
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/freyalises_radiance.jpg
 Oracle:Cumulative upkeep {2} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nSnow permanents don't untap during their controllers' untap steps.

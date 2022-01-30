@@ -6,5 +6,4 @@ A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
 A:AB$ Mana | Cost$ 2 T | Produced$ B | Amount$ X | SpellDescription$ Add {B} for each black creature card in your graveyard.
 SVar:X:Count$ValidGraveyard Creature.Black+YouCtrl
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_of_agadeem.jpg
 Oracle:Crypt of Agadeem enters the battlefield tapped.\n{T}: Add {B}.\n{2}, {T}: Add {B} for each black creature card in your graveyard.

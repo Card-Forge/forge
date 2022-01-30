@@ -5,5 +5,4 @@ PT:2/2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, Warrior creatures you control gain menace until end of turn.
 SVar:TrigPump:DB$ PumpAll | Cost$ 3 R R | ValidCards$ Creature.Warrior+YouCtrl | KW$ Menace
 DeckHints:Type$Warrior
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_chin_rager.jpg
 Oracle:Whenever Blood-Chin Rager attacks, Warrior creatures you control gain menace until end of turn. (They can't be blocked except by two or more creatures.)

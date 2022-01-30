@@ -3,5 +3,4 @@ ManaCost:no cost
 Types:Land Creature Forest Dryad
 PT:1/1
 Colors:green
-SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136196.jpg
 Oracle:(Dryad Arbor isn't a spell, it's affected by summoning sickness, and it has "{T}: Add {G}.")

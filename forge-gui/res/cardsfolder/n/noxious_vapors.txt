@@ -12,5 +12,4 @@ SVar:DBDiscard:DB$ Discard | Mode$ Defined | Defined$ Player.IsRemembered | Defi
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/noxious_vapors.jpg
 Oracle:Each player reveals their hand, chooses one card of each color from it, then discards all other nonland cards.

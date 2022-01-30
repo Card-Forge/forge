@@ -4,5 +4,4 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ Unblockable | AddKeyword$ Shroud | Description$ Enchanted creature can't be blocked and has shroud.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/protective_bubble.jpg
 Oracle:Enchant creature\nEnchanted creature can't be blocked and has shroud. (It can't be the target of spells or abilities.)

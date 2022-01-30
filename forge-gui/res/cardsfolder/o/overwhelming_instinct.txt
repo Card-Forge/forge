@@ -4,5 +4,4 @@ Types:Enchantment
 T:Mode$ AttackersDeclared | Execute$ TrigDraw | CheckSVar$ OverwhelmInstinct | SVarCompare$ GE3 | NoResolvingCheck$ True | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with three or more creatures, draw a card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1
 SVar:OverwhelmInstinct:Count$Valid Creature.attacking
-SVar:Picture:http://www.wizards.com/global/images/magic/general/overwhelming_instinct.jpg
 Oracle:Whenever you attack with three or more creatures, draw a card.

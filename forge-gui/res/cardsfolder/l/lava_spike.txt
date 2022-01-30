@@ -2,5 +2,4 @@ Name:Lava Spike
 ManaCost:R
 Types:Sorcery Arcane
 A:SP$ DealDamage | Cost$ R | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target player or planeswalker.
-SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card79084.jpg
 Oracle:Lava Spike deals 3 damage to target player or planeswalker.

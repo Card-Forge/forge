@@ -4,5 +4,4 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME attacks each combat if able. | Description$ Enchanted creature attacks each combat if able.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodshed_fever.jpg
 Oracle:Enchant creature\nEnchanted creature attacks each combat if able.

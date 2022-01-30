@@ -8,5 +8,4 @@ SVar:TrigReturnOther:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select ta
 SVar:TrigReturnThis:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
 AI:RemoveDeck:Random
 SVar:NeedsToPlay:Creature.OppCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kiri_onna.jpg
 Oracle:When Kiri-Onna enters the battlefield, return target creature to its owner's hand.\nWhenever you cast a Spirit or Arcane spell, you may return Kiri-Onna to its owner's hand.

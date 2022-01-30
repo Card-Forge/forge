@@ -8,5 +8,4 @@ SVar:X:Count$Valid Rat.YouCtrl
 SVar:BuffedBy:Rat
 DeckHints:Type$Rat
 SVar:NoZeroToughnessAI:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pack_rat.jpg
 Oracle:Pack Rat's power and toughness are each equal to the number of Rats you control.\n{2}{B}, Discard a card: Create a token that's a copy of Pack Rat.

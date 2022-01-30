@@ -5,5 +5,5 @@ A:SP$ Token | Cost$ U B Sac<X/Creature/creature> | TokenScript$ ub_x_x_zombie_me
 K:Flashback:3 U B
 SVar:X:Count$xPaid
 SVar:Y:Sacrificed$CardPower
-DeckHas:Ability$Sacrifice & Ability$Token
+DeckHas:Ability$Sacrifice|Token
 Oracle:As an additional cost to cast this spell, sacrifice any number of creatures.\nCreate an X/X blue and black Zombie creature token with menace, where X is the total power of the sacrificed creatures.\nFlashback {3}{U}{B} (You may cast this card from your graveyard for its flashback cost and any additional costs. Then exile it.)

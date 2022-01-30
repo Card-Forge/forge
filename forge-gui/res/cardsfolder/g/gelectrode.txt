@@ -6,5 +6,4 @@ A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | OptionalDecider$ You | TriggerDescription$ Whenever you cast an instant or sorcery spell, you may untap CARDNAME.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 SVar:NonCombatPriority:1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gelectrode.jpg
 Oracle:{T}: Gelectrode deals 1 damage to any target.\nWhenever you cast an instant or sorcery spell, you may untap Gelectrode.

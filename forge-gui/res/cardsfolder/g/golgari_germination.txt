@@ -4,5 +4,4 @@ Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+nonToken | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a nontoken creature you control dies, create a 1/1 green Saproling creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | TokenImage$ g 1 1 saproling rav
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/golgari_germination.jpg
 Oracle:Whenever a nontoken creature you control dies, create a 1/1 green Saproling creature token.

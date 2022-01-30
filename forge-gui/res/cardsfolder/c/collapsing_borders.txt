@@ -6,5 +6,4 @@ SVar:TrigGainLife:DB$ GainLife | Defined$ TriggeredPlayer | LifeAmount$ DomainX 
 SVar:DBDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 3
 SVar:DomainX:Count$DomainActivePlayer
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/collapsing_borders.jpg
 Oracle:Domain — At the beginning of each player's upkeep, that player gains 1 life for each basic land type among lands they control. Then Collapsing Borders deals 3 damage to that player.

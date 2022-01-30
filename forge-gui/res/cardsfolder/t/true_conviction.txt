@@ -4,5 +4,4 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Double Strike & Lifelink | Description$ Creatures you control have double strike and lifelink.
 SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/true_conviction.jpg
 Oracle:Creatures you control have double strike and lifelink.

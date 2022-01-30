@@ -7,5 +7,4 @@ SVar:TypeChoice:DB$ GenericChoice | Choices$ SVar1,SVar2 | StackDescription$ Pla
 SVar:SVar1:DB$ Animate | Defined$ Targeted | Types$ Plains | RemoveLandTypes$ True | SpellDescription$ Targeted land becomes a Plains until end of turn.
 SVar:SVar2:DB$ Animate | Defined$ Targeted | Types$ Island | RemoveLandTypes$ True | SpellDescription$ Targeted land becomes an Island until end of turn.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tundra_kavu.jpg
 Oracle:{T}: Target land becomes a Plains or an Island until end of turn.

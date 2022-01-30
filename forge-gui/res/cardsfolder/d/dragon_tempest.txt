@@ -8,5 +8,4 @@ SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | NumDm
 SVar:NumDragons:Count$Valid Dragon.YouCtrl
 SVar:BuffedBy:Creature.withFlying
 DeckHints:Type$Dragon & Keyword$Flying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_tempest.jpg
 Oracle:Whenever a creature with flying enters the battlefield under your control, it gains haste until end of turn.\nWhenever a Dragon enters the battlefield under your control, it deals X damage to any target, where X is the number of Dragons you control.

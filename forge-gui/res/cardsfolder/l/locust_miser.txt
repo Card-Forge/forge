@@ -3,5 +3,4 @@ ManaCost:2 B B
 Types:Creature Rat Shaman
 PT:2/2
 S:Mode$ Continuous | Affected$ Opponent | RaiseMaxHandSize$ -2 | Description$ Each opponent's maximum hand size is reduced by two.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/locust_miser.jpg
 Oracle:Each opponent's maximum hand size is reduced by two.

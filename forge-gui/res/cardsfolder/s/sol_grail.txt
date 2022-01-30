@@ -4,5 +4,4 @@ Types:Artifact
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
 A:AB$ Mana | Cost$ T | Produced$ Chosen | SpellDescription$ Add one mana of the chosen color.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sol_grail.jpg
 Oracle:As Sol Grail enters the battlefield, choose a color.\n{T}: Add one mana of the chosen color.

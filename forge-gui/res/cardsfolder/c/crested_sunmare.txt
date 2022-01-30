@@ -10,5 +10,4 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_5_5_horse | TokenOwne
 SVar:YouLifeGained:Count$LifeYouGainedThisTurn
 SVar:AIEvaluationModifier:70
 DeckHints:Ability$LifeGain
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crested_sunmare.jpg
 Oracle:Other Horses you control have indestructible.\nAt the beginning of each end step, if you gained life this turn, create a 5/5 white Horse creature token.

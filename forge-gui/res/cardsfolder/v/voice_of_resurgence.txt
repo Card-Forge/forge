@@ -6,5 +6,4 @@ T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZ
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever an opponent casts a spell during your turn, or whenever CARDNAME dies, create a green and white Elemental creature token with "This creature's power and toughness are each equal to the number of creatures you control."
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ gw_x_x_elemental_total_creatures | TokenOwner$ You | LegacyImage$ gw x x elemental total creatures dgm
 SVar:SacMe:1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/voice_of_resurgence.jpg
 Oracle:Whenever an opponent casts a spell during your turn or when Voice of Resurgence dies, create a green and white Elemental creature token with "This creature's power and toughness are each equal to the number of creatures you control."

@@ -5,5 +5,4 @@ S:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Creature.nonArtifact 
 SVar:X:Count$Valid Creature.nonArtifact+SharesColorWith MostProminentColor
 SVar:Y:Count$Valid Creature.nonArtifact
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/common_cause.jpg
 Oracle:Nonartifact creatures get +2/+2 as long as they all share a color.

@@ -9,5 +9,4 @@ SVar:TrigExile:DB$ ChangeZone | TargetMin$ 1 | TargetMax$ 1 | IsCurse$ True | Va
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/slithery_stalker.jpg
 Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)\nWhen Slithery Stalker enters the battlefield, exile target green or white creature an opponent controls.\nWhen Slithery Stalker leaves the battlefield, return the exiled card to the battlefield under its owner's control.

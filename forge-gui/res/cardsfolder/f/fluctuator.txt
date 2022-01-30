@@ -3,5 +3,4 @@ ManaCost:2
 Types:Artifact
 S:Mode$ ReduceCost | ValidCard$ Card | ValidSpell$ Activated.Cycling | Activator$ You | Amount$ 2 | Description$ Cycling abilities you activate cost you up to {2} less to activate.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fluctuator.jpg
 Oracle:Cycling abilities you activate cost up to {2} less to activate.

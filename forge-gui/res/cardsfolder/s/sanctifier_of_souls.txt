@@ -7,5 +7,4 @@ SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1
 A:AB$ Token | Cost$ 2 W ExileFromGrave<1/Creature> | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | LegacyImage$ w 1 1 spirit flying emn | SpellDescription$ Create a 1/1 white Spirit creature token with flying.
 SVar:BuffedBy:Creature
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sanctifier_of_souls.jpg
 Oracle:Whenever another creature enters the battlefield under your control, Sanctifier of Souls gets +1/+1 until end of turn.\n{2}{W}, Exile a creature card from your graveyard: Create a 1/1 white Spirit creature token with flying.

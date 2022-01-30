@@ -8,5 +8,4 @@ SVar:X:Count$InYourLibrary.Artifact
 SVar:Y:Remembered$Amount
 DeckHints:Type$Myr
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_incubator.jpg
 Oracle:{6}, {T}, Sacrifice Myr Incubator: Search your library for any number of artifact cards, exile them, then create that many 1/1 colorless Myr artifact creature tokens. Then shuffle.

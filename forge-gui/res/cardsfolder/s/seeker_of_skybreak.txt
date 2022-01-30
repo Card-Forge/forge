@@ -3,5 +3,4 @@ ManaCost:1 G
 Types:Creature Elf
 PT:2/1
 A:AB$ Untap | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Untap target creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/seeker_of_skybreak.jpg
 Oracle:{T}: Untap target creature.

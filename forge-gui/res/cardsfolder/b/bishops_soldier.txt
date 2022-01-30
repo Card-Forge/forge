@@ -3,5 +3,4 @@ ManaCost:1 W
 Types:Creature Vampire Soldier
 PT:2/2
 K:Lifelink
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bishops_soldier.jpg
 Oracle:Lifelink

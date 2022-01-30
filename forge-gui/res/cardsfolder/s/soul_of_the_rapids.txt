@@ -4,5 +4,4 @@ Types:Creature Elemental
 PT:3/2
 K:Flying
 K:Hexproof
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_of_the_rapids.jpg
 Oracle:Flying\nHexproof (This creature can't be the target of spells or abilities your opponents control.)

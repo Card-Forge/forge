@@ -3,5 +3,4 @@ ManaCost:R
 Types:Creature Jackal
 PT:2/2
 K:CARDNAME can't attack or block alone.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jackal_familiar.jpg
 Oracle:Jackal Familiar can't attack or block alone.

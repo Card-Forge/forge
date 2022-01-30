@@ -8,5 +8,4 @@ SVar:GainLife:DB$ GainLife | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
 DeckHints:Color$White
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flash_conscription.jpg
 Oracle:Untap target creature and gain control of it until end of turn. That creature gains haste until end of turn. If {W} was spent to cast this spell, the creature gains "Whenever this creature deals combat damage, you gain that much life" until end of turn.

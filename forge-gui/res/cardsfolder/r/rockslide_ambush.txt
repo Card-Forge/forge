@@ -3,5 +3,4 @@ ManaCost:1 R
 Types:Sorcery
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of Mountains you control to target creature.
 SVar:X:Count$TypeYouCtrl.Mountain
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rockslide_ambush.jpg
 Oracle:Rockslide Ambush deals damage to target creature equal to the number of Mountains you control.

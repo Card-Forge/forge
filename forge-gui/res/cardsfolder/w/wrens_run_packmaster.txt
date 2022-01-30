@@ -6,5 +6,4 @@ K:Champion:Elf
 S:Mode$ Continuous | Affected$ Permanent.Wolf+YouCtrl | AddKeyword$ Deathtouch | Description$ Wolves you control have deathtouch.
 A:AB$ Token | Cost$ 2 G | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | TokenOwner$ You | LegacyImage$ g 2 2 wolf lrw | SpellDescription$ Create a 2/2 green Wolf creature token.
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wrens_run_packmaster.jpg
 Oracle:Champion an Elf (When this creature enters the battlefield, sacrifice it unless you exile another Elf you control. When this creature leaves the battlefield, that card returns to the battlefield.)\n{2}{G}: Create a 2/2 green Wolf creature token.\nWolves you control have deathtouch.

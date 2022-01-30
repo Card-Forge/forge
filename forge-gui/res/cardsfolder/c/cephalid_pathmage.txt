@@ -4,5 +4,4 @@ Types:Creature Cephalid Wizard
 PT:1/2
 K:Unblockable
 A:AB$ Pump | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable | SpellDescription$ Target creature can't be blocked this turn.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_pathmage.jpg
 Oracle:Cephalid Pathmage can't be blocked.\n{T}, Sacrifice Cephalid Pathmage: Target creature can't be blocked this turn.

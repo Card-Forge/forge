@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.enchanted+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control that are enchanted get +1/+1.
 R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.enchanted+YouCtrl | ReplaceWith$ ReturnToHand | Description$ If a creature you control that's enchanted would die, return it to its owner's hand instead.
 SVar:ReturnToHand:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ ReplacedCard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/necromancers_magemark.jpg
 Oracle:Enchant creature\nCreatures you control that are enchanted get +1/+1.\nIf a creature you control that's enchanted would die, return it to its owner's hand instead.

@@ -8,5 +8,4 @@ T:Mode$ AttackersDeclared | ValidAttackers$ Dragon.YouCtrl | Execute$ TrigDraw |
 SVar:TrigDraw:DB$ Draw | NumCards$ X | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent | ChangeNum$ 1
 SVar:X:TriggerObjectsAttackers$Valid Dragon.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/the_ur_dragon.jpg
 Oracle:Eminence — As long as The Ur-Dragon is in the command zone or on the battlefield, other Dragon spells you cast cost {1} less to cast.\nFlying\nWhenever one or more Dragons you control attack, draw that many cards, then you may put a permanent card from your hand onto the battlefield.

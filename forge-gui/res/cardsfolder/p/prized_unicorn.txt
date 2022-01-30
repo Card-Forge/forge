@@ -3,5 +3,4 @@ ManaCost:3 G
 Types:Creature Unicorn
 PT:2/2
 K:All creatures able to block CARDNAME do so.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/prized_unicorn.jpg
 Oracle:All creatures able to block Prized Unicorn do so.

@@ -6,5 +6,4 @@ SVar:DBCounter:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell 
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent | AITgts$ Card.Red | TgtPrompt$ Select target permanent | ConditionDefined$ Targeted | ConditionPresent$ Card.Red | ConditionCompare$ GE1 | SpellDescription$ Destroy target permanent if it's red.
 SVar:X:Targeted$Valid Card.Red
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hydroblast.jpg
 Oracle:Choose one —\n• Counter target spell if it's red.\n• Destroy target permanent if it's red.

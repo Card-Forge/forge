@@ -4,5 +4,4 @@ Types:Artifact
 S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ May be blocked as though it doesn't have landwalk. | Description$ Creatures with landwalk abilities can be blocked as though they didn't have those abilities.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/staff_of_the_ages.jpg
 Oracle:Creatures with landwalk abilities can be blocked as though they didn't have those abilities.

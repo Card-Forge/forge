@@ -6,5 +6,4 @@ SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 S:Mode$ Continuous | Affected$ Land | RemoveAllAbilities$ True | ExceptManaAbilities$ True | Description$ All lands lose all abilities except mana abilities.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_sun.jpg
 Oracle:When Blood Sun enters the battlefield, draw a card.\nAll lands lose all abilities except mana abilities.

@@ -4,5 +4,4 @@ Types:Artifact Creature Goblin
 PT:2/2
 A:AB$ Destroy | Cost$ 3 R Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 DeckNeeds:Color$Red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_replica.jpg
 Oracle:{3}{R}, Sacrifice Goblin Replica: Destroy target artifact.

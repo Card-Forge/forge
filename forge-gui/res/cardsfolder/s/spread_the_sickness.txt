@@ -5,5 +5,4 @@ A:SP$ Destroy | Cost$ 4 B | ValidTgts$ Creature | TgtPrompt$ Select target creat
 SVar:DBProliferate:DB$ Proliferate
 DeckHas:Ability$Proliferate
 DeckNeeds:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spread_the_sickness.jpg
 Oracle:Destroy target creature, then proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

@@ -9,5 +9,4 @@ SVar:X:TriggeredCard$CardCounters.P1P1
 K:Partner
 DeckHints:Ability$Counters
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reyhan_last_of_the_abzan.jpg
 Oracle:Reyhan, Last of the Abzan enters the battlefield with three +1/+1 counters on it.\nWhenever a creature you control dies or is put into the command zone, if it had one or more +1/+1 counters on it, you may put that many +1/+1 counters on target creature.\nPartner (You can have two commanders if both have partner.)

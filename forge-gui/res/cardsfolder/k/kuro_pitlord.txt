@@ -7,5 +7,4 @@ K:UpkeepCost:B B B B
 A:AB$ Pump | Cost$ PayLife<1> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn.
 SVar:NeedsToPlayVar:Z GE4
 SVar:Z:Count$Valid Card.YouCtrl+inZoneBattlefield+canProduceManaColor Black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kuro_pitlord.jpg
 Oracle:At the beginning of your upkeep, sacrifice Kuro, Pitlord unless you pay {B}{B}{B}{B}.\nPay 1 life: Target creature gets -1/-1 until end of turn.

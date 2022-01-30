@@ -3,5 +3,4 @@ ManaCost:2 R
 Types:Creature Troll
 PT:2/2
 A:AB$ Regenerate | Cost$ R | SpellDescription$ Regenerate CARDNAME.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/uthden_troll.jpg
 Oracle:{R}: Regenerate Uthden Troll.

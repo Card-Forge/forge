@@ -7,5 +7,4 @@ A:AB$ Effect | Cost$ 1 W B | Triggers$ VizkopaMageTrig | SpellDescription$ Whene
 SVar:VizkopaMageTrig:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Command | Execute$ VizkopaMageDrain | TriggerDescription$ Whenever you gain life, each opponent loses that much life.
 SVar:VizkopaMageDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ VizkopaMageX
 SVar:VizkopaMageX:TriggerCount$LifeAmount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vizkopa_guildmage.jpg
 Oracle:{1}{W}{B}: Target creature gains lifelink until end of turn.\n{1}{W}{B}: Whenever you gain life this turn, each opponent loses that much life.

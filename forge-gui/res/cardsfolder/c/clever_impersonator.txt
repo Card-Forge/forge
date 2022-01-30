@@ -4,5 +4,4 @@ Types:Creature Shapeshifter
 PT:0/0
 K:ETBReplacement:Copy:DBCopy:Optional
 SVar:DBCopy:DB$ Clone | Choices$ Permanent.nonLand+Other | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any nonland permanent on the battlefield.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/clever_impersonator.jpg
 Oracle:You may have Clever Impersonator enter the battlefield as a copy of any nonland permanent on the battlefield.

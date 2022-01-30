@@ -5,5 +5,4 @@ PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_warden.jpg
 Oracle:{T}: Add {G}.\n{2}, Sacrifice Heart Warden: Draw a card.

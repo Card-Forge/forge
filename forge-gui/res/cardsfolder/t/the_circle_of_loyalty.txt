@@ -10,5 +10,5 @@ A:AB$ Token | Cost$ 3 W T | TokenAmount$ 1 | TokenScript$ w_2_2_knight_vigilance
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Legendary
 DeckHas:Ability$Token
-DeckHints:Type$Knight & Type$Legendary
+DeckHints:Type$Knight|Legendary
 Oracle:This spell costs {1} less to cast for each Knight you control.\nCreatures you control get +1/+1.\nWhenever you cast a legendary spell, create a 2/2 white Knight creature token with vigilance.\n{3}{W}, {T}: Create a 2/2 white Knight creature token with vigilance.

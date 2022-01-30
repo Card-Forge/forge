@@ -6,5 +6,4 @@ K:CARDNAME can't block.
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Menace | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has menace as long as you control another Pirate.
 SVar:X:Count$Valid Pirate.Other+YouCtrl
 SVar:BuffedBy:Pirate
-SVar:Picture:http://www.wizards.com/global/images/magic/general/headstrong_brute.jpg
 Oracle:Headstrong Brute can't block.\nHeadstrong Brute has menace as long as you control another Pirate.

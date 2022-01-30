@@ -12,4 +12,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBEmblem
 SVar:DBEmblem:DB$ Effect | Name$ Emblem - Mordenkainen | Image$ emblem_mordenkainen | StaticAbilities$ UnlimitedHand | Stackable$ False | Duration$ Permanent | AILogic$ Always
 SVar:UnlimitedHand:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 DeckHas:Ability$Token
-Oracle:[+2]: Draw two cards, then put a card from your hand on the bottom of your library.\n[−2]: Create a blue Dog Illusion creature token with "This creature's power and toughness are each equal to twice the number of cards in your hand."\n[−10]: Exchange your hand and library, then shuffle. You get an emblem with "You have no maximum hand size."
+Oracle:[+2]: Draw two cards, then put a card from your hand on the bottom of your library.\n[-2]: Create a blue Dog Illusion creature token with "This creature's power and toughness are each equal to twice the number of cards in your hand."\n[-10]: Exchange your hand and library, then shuffle. You get an emblem with "You have no maximum hand size."

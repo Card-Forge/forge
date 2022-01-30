@@ -3,5 +3,4 @@ ManaCost:X R G
 Types:Sorcery
 A:SP$ DamageAll | Cost$ X R G | ValidCards$ Creature | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature.
 SVar:X:Count$xPaid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_twister.jpg
 Oracle:Savage Twister deals X damage to each creature.

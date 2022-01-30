@@ -4,5 +4,4 @@ Types:Creature Satyr
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, reveal the top four cards of your library. You may put a land card from among them into your hand. Put the rest into your graveyard.
 SVar:TrigDig:DB$ Dig | DigNum$ 4 | Reveal$ True | ChangeNum$ 1 | ChangeValid$ Land | DestinationZone2$ Graveyard | Optional$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/satyr_wayfinder.jpg
 Oracle:When Satyr Wayfinder enters the battlefield, reveal the top four cards of your library. You may put a land card from among them into your hand. Put the rest into your graveyard.

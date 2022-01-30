@@ -7,5 +7,4 @@ SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Creature,Player,Planeswa
 A:AB$ Pump | Cost$ RW | KW$ First Strike | Defined$ Self | SpellDescription$ CARDNAME gains first strike until end of turn.
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_reckoner.jpg
 Oracle:Whenever Boros Reckoner is dealt damage, it deals that much damage to any target.\n{R/W}: Boros Reckoner gains first strike until end of turn.

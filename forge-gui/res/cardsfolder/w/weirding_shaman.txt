@@ -3,5 +3,4 @@ ManaCost:1 B
 Types:Creature Goblin Shaman
 PT:2/1
 A:AB$ Token | Cost$ 3 B Sac<1/Goblin> | TokenAmount$ 2 | TokenScript$ b_1_1_goblin_rogue | TokenOwner$ You | LegacyImage$ b 1 1 goblin rogue mor | SpellDescription$ Create two 1/1 black Goblin Rogue creature tokens.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/weirding_shaman.jpg
 Oracle:{3}{B}, Sacrifice a Goblin: Create two 1/1 black Goblin Rogue creature tokens.

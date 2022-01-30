@@ -4,5 +4,4 @@ Types:Creature Human
 PT:2/1+*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughness$ X | Description$ CARDNAME's toughness is equal to 1 plus the number of green creatures on the battlefield.
 SVar:X:Count$Valid Creature.Green/Plus.1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/an_havva_constable.jpg
 Oracle:An-Havva Constable's toughness is equal to 1 plus the number of green creatures on the battlefield.

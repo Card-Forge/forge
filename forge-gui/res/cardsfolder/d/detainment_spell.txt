@@ -6,5 +6,4 @@ A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME's activated abilities can't be activated. | Description$ Enchanted creature's activated abilities can't be activated.
 A:AB$ Attach | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Curse | SpellDescription$ Attach CARDNAME to target creature.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/detainment_spell.jpg
 Oracle:Enchant creature\nEnchanted creature's activated abilities can't be activated.\n{1}{W}: Attach Detainment Spell to target creature.
