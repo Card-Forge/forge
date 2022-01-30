@@ -485,7 +485,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         // 1. First off, try using all possible search parameters, to narrow down the actual cards looked for.
         String reqEditionCode = request.edition;
         PaperCard result = null;
-        if ((reqEditionCode != null) && (reqEditionCode.length() > 0)) {
+        if (reqEditionCode != null && reqEditionCode.length() > 0) {
             // This get is robust even against expansion aliases (e.g. TE and TMP both valid for Tempest) -
             // MOST of the extensions have two short codes, 141 out of 221 (so far)
             // ALSO: Set Code are always UpperCase
@@ -548,8 +548,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             public boolean apply(PaperCard c) {
                 boolean artIndexFilter = true;
                 boolean collectorNumberFilter = true;
-                boolean setFilter = ((c.getEdition().equalsIgnoreCase(edition.getCode())) ||
-                        (c.getEdition().equalsIgnoreCase(edition.getCode2())));
+                boolean setFilter = c.getEdition().equalsIgnoreCase(edition.getCode()) ||
+                        c.getEdition().equalsIgnoreCase(edition.getCode2());
                 if (artIndex > 0)
                     artIndexFilter = (c.getArtIndex() == artIndex);
                 if ((collectorNumber != null) && (collectorNumber.length() > 0)
@@ -1019,7 +1019,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public StringBuilder appendCardToStringBuilder(PaperCard card, StringBuilder sb) {
-        final boolean hasBadSetInfo = (card.getEdition()).equals(CardEdition.UNKNOWN.getCode()) || StringUtils.isBlank(card.getEdition());
+        final boolean hasBadSetInfo = card.getEdition().equals(CardEdition.UNKNOWN.getCode()) || StringUtils.isBlank(card.getEdition());
         sb.append(card.getName());
         if (card.isFoil()) {
             sb.append(CardDb.foilSuffix);
