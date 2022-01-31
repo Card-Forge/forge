@@ -1065,6 +1065,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                                     g.drawImage(DeckPreferences.getPrefs(dp).getStarCount() > 0 ? FSkinImage.HDSTAR_FILLED : FSkinImage.HDSTAR_OUTLINE, x, y, symbolSize, symbolSize);
                                 else
                                     g.drawImage(DeckPreferences.getPrefs(dp).getStarCount() > 0 ? FSkinImage.STAR_FILLED : FSkinImage.STAR_OUTLINE, x, y, symbolSize, symbolSize);
+                                if (dp.getAI()) {
+                                    g.drawOutlinedText("AI", GROUP_HEADER_FONT, Color.GREEN, Color.BLACK, x+PADDING, y+symbolSize+PADDING, w, h, true, Align.left, false, false);
+                                }
                             }
                         }
                     }
