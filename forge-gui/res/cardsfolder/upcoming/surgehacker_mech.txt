@@ -1,0 +1,11 @@
+Name:Surgehacker Mech
+ManaCost:4
+Types:Artifact Vehicle
+PT:5/5
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals damage equal to twice the number of Vehicles you control to target creature or planeswalker an opponent controls.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select target creature or planeswalker an opponent controls | NumDmg$ X
+SVar:X:Count$Valid Vehicle.YouCtrl/Times.2
+K:Crew:4
+DeckHints:Type$Vehicle
+Oracle:Menace\nWhen Surgehacker Mech enters the battlefield, it deals damage equal to twice the number of Vehicles you control to target creature or planeswalker an opponent controls.\nCrew 4
