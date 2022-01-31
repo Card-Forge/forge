@@ -1,8 +1,7 @@
 Name:Necromantic Summons
 ManaCost:4 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 4 B | ValidTgts$ Creature | TgtPrompt$ Select target creature card in a graveyard | Origin$ Graveyard | Destination$ Battlefield | RememberTargets$ True | GainControl$ True | SubAbility$ DBCounter | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control. Spell mastery — If there are two or more instant and/or sorcery cards in your graveyard, that creature enters the battlefield with two additional +1/+1 counters on it.
-SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 2 | Static$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | SubAbility$ DBCleanup
+A:SP$ ChangeZone | Cost$ 4 B | ValidTgts$ Creature | TgtPrompt$ Select target creature card in a graveyard | Origin$ Graveyard | Destination$ Battlefield | WithCountersType$ P1P1 | WithCountersAmount$ Y | GainControl$ True | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control. Spell mastery — If there are two or more instant and/or sorcery cards in your graveyard, that creature enters the battlefield with two additional +1/+1 counters on it.
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:Count$Compare X GE2.2.0
 Oracle:Put target creature card from a graveyard onto the battlefield under your control.\nSpell mastery — If there are two or more instant and/or sorcery cards in your graveyard, that creature enters the battlefield with two additional +1/+1 counters on it.
