@@ -54,11 +54,13 @@ public class CardProperty {
         // by name can also have color names, so needs to happen before colors.
         if (property.startsWith("named")) {
             String name = TextUtil.fastReplace(property.substring(5), ";", ","); // workaround for card name with ","
+            name = TextUtil.fastReplace(name, "_", " ");
             if (!card.sharesNameWith(name)) {
                 return false;
             }
         } else if (property.startsWith("notnamed")) {
             String name = TextUtil.fastReplace(property.substring(8), ";", ","); // workaround for card name with ","
+            name = TextUtil.fastReplace(name, "_", " ");
             if (card.sharesNameWith(name)) {
                 return false;
             }

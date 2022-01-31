@@ -3,6 +3,6 @@ ManaCost:X B
 Types:Sorcery
 Text:X is the number of artifact and/or creature cards in an opponent's graveyard as you cast this spell.
 A:SP$ PutCounter | Cost$ X B | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ X | TargetMin$ 1 | TargetMax$ X | DividedAsYouChoose$ X | SpellDescription$ Distribute X +1/+1 counters among any number of target creatures.
-SVar:X:Count$ValidGraveyard Creature.OppCtrl,Artifact.OppCtrl
+SVar:X:Count$LastStateBattlefieldWithFallback Creature.OppCtrl,Artifact.OppCtrl
 AI:RemoveDeck:All
 Oracle:X is the number of artifact and/or creature cards in an opponent's graveyard as you cast this spell.\nDistribute X +1/+1 counters among any number of target creatures.

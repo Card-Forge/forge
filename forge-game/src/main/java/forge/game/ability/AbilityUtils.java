@@ -1849,11 +1849,14 @@ public class AbilityUtils {
 
                 if (sq[0].startsWith("LastStateBattlefield")) {
                     final String[] k = l[0].split(" ");
-                    CardCollectionView list = null;
-                    if (sa.getLastStateBattlefield() != null) {
-                        list = sa.getLastStateBattlefield();
-                    } else { // LastState is Empty
-                        return doXMath(0, expr, c, ctb);
+                    CardCollectionView list = sa.getLastStateBattlefield();
+                    if (list == null || list.isEmpty()) {
+                        // LastState is Empty
+                        if (sq[0].contains("WithFallback")) {
+                            list = game.getCardsIn(ZoneType.Battlefield);
+                        } else {
+                            return doXMath(0, expr, c, ctb);
+                        }
                     }
                     list = CardLists.getValidCards(list, k[1].split(","), sa.getActivatingPlayer(), c, sa);
                     if (k[0].contains("TotalToughness")) {
@@ -1864,11 +1867,14 @@ public class AbilityUtils {
 
                 if (sq[0].startsWith("LastStateGraveyard")) {
                     final String[] k = l[0].split(" ");
-                    CardCollectionView list = null;
-                    if (sa.getLastStateGraveyard() != null) {
-                        list = sa.getLastStateGraveyard();
-                    } else { // LastState is Empty
-                        return doXMath(0, expr, c, ctb);
+                    CardCollectionView list = sa.getLastStateGraveyard();
+                    if (sa.getLastStateGraveyard() == null || list.isEmpty()) {
+                        // LastState is Empty
+                        if (sq[0].contains("WithFallback")) {
+                            list = game.getCardsIn(ZoneType.Graveyard);
+                        } else {
+                            return doXMath(0, expr, c, ctb);
+                        }
                     }
                     list = CardLists.getValidCards(list, k[1].split(","), sa.getActivatingPlayer(), c, sa);
                     return doXMath(list.size(), expr, c, ctb);
@@ -2125,7 +2131,7 @@ public class AbilityUtils {
             boolean found = false;
             if (c.getCastFrom() != null && c.getCastSA() != null) {
                 int revealed = calculateAmount(c, "Revealed$Valid " + type, c.getCastSA());
-                int ctrl = calculateAmount(c, "Count$Valid " + type + ".inZoneBattlefield+YouCtrl", c.getCastSA());
+                int ctrl = calculateAmount(c, "Count$LastStateBattlefield " + type + ".YouCtrl", c.getCastSA());
                 if (revealed + ctrl >= 1) {
                     found = true;
                 }
