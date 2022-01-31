@@ -1,0 +1,8 @@
+Name:Enthusiastic Mechanaut
+ManaCost:U R
+Types:Artifact Creature Goblin Artificer
+PT:2/2
+K:Flying
+S:Mode$ ReduceCost | ValidCard$ Artifact | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Artifact spells you cast cost {1} less to cast.
+DeckHints:Type$Artifact
+Oracle:Flying\nArtifact spells you cast cost {1} less to cast.

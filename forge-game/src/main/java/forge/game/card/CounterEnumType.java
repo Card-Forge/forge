@@ -149,7 +149,9 @@ public enum CounterEnumType {
 
     HARMONY("HRMNY", 0, 230, 155),
 
-    HATCHLING("HATCH", 201, 199, 186),
+    HATCHING("HATCH", 204, 255, 204),
+
+    HATCHLING("HTCHL", 201, 199, 186),
 
     HEALING("HEAL", 255, 166, 236),
 

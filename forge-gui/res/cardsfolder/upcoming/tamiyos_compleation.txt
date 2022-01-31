@@ -1,0 +1,11 @@
+Name:Tamiyo's Compleation
+ManaCost:3 U
+Types:Enchantment Aura
+K:Flash
+K:Enchant artifact, creature, or planeswalker
+A:SP$ Attach | ValidTgts$ Artifact,Creature,Planeswalker | TgtPrompt$ Select target artifact, creature, or planeswalker | AILogic$ KeepTapped
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap enchanted permanent. If it's an Equipment, unattach it.
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted | SubAbility$ DBUnattach
+SVar:DBUnattach:DB$ Unattach | Defined$ Enchanted | ConditionDefined$ Enchanted | ConditionPresent$ Equipment
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | RemoveAllAbilities$ True | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted permanent loses all abilities and doesn't untap during its controller's untap step.
+Oracle:Flash\nEnchant artifact, creature, or planeswalker\nWhen Tamiyo's Compleation enters the battlefield, tap enchanted permanent. If it's an Equipment, unattach it.\nEnchanted permanent loses all abilities and doesn't untap during its controller's untap step.

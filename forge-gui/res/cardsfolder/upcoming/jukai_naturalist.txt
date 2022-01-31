@@ -1,0 +1,9 @@
+Name:Jukai Naturalist
+ManaCost:G W
+Types:Enchantment Creature Human Monk
+PT:2/2
+K:Lifelink
+S:Mode$ ReduceCost | ValidCard$ Enchantment | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Enchantment spells you cast cost {1} less to cast.
+DeckHas:Ability$LifeGain
+DeckHints:Type$Enchantment
+Oracle:Lifelink\nEnchantment spells you cast cost {1} less to cast.

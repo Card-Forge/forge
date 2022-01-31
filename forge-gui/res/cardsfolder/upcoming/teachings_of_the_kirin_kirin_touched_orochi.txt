@@ -1,0 +1,32 @@
+Name:Teachings of the Kirin
+ManaCost:1 G
+Types:Enchantment Saga
+K:Saga:3:DBMill,DBPutCounter,DBTransform
+SVar:DBMill:DB$ Mill | NumCards$ 3 | Defined$ You | SubAbility$ DBToken | SpellDescription$ Mill three cards. Create a 1/1 colorless Spirit creature token.
+SVar:DBToken:DB$ Token | TokenScript$ c_1_1_spirit
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature you control.
+SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AlternateMode:DoubleFaced
+DeckHas:Ability$Mill|Token|Counters & Type$Spirit
+Oracle:(As this Saga enters and after your draw step, add a lore counter.)\nI - Mill three cards. Create a 1/1 colorless Spirit creature token.\nII — Put a +1/+1 counter on target creature you control.\nIII — Exile this Saga, then return it to the battlefield transformed under your control.
+
+ALTERNATE
+
+Name:Kirin-Touched Orochi
+ManaCost:no cost
+Colors:green
+Types:Enchantment Creature Snake Monk
+PT:1/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ Whenever CARDNAME attacks, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBExileC,DBExileNonC
+SVar:DBExileC:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature card | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBImmediateTrig1 | SpellDescription$ Exile target creature card from a graveyard. When you do, create a 1/1 colorless Spirit creature token.
+SVar:DBImmediateTrig1:DB$ ImmediateTrigger | Execute$ TrigToken | TriggerDescription$ When you do, create a 1/1 colorless Spirit creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_spirit | SubAbility$ DBCleanup
+SVar:DBExileNonC:DB$ ChangeZone | ValidTgts$ Card.nonCreature | TgtPrompt$ Select target noncreature card | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBImmediateTrig2 | SpellDescription$ Exile target noncreature card from a graveyard. When you do, put a +1/+1 counter on target creature you control.
+SVar:DBImmediateTrig2:DB$ ImmediateTrigger | Execute$ TrigPutCounter | ConditionDefined$ Remembered | ConditionPresent$ Card | TriggerDescription$ When you do, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Kirin-Touched Orochi attacks, choose one —\n• Exile target creature card from a graveyard. When you do, create a 1/1 colorless Spirit creature token.\n• Exile target noncreature card from a graveyard. When you do, put a +1/+1 counter on target creature you control.
