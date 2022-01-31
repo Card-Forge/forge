@@ -4,5 +4,5 @@ Types:Creature Frog Beast
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, you may sacrifice a land. If you do, draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ Sac<1/Land> | Defined$ You | NumCards$ 1
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Vigilance | Condition$ Threshold | Description$ Threshold Whenver As long as seven or more cards are in your graveyard, CARDNAME gets +1/+1 and has vigilance.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Vigilance | Condition$ Threshold | Description$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME gets +1/+1 and has vigilance.
 Oracle:When Excavating Anurid enters the battlefield, you may sacrifice a land. If you do, draw a card.\nThreshold — As long as seven or more cards are in your graveyard, Excavating Anurid gets +1/+1 and has vigilance.
