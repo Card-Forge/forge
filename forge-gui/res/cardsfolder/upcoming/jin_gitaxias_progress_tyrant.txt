@@ -1,4 +1,4 @@
-Name:Jin Gitaxias, Progress Tyrant
+Name:Jin-Gitaxias, Progress Tyrant
 ManaCost:5 U U
 Types:Legendary Creature Phyrexian Praetor
 PT:5/5
