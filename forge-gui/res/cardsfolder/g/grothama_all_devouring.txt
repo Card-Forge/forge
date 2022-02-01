@@ -5,7 +5,7 @@ PT:10/8
 S:Mode$ Continuous | Affected$ Creature.Other | AddTrigger$ GrothamaAttack | AddSVar$ HasAttackEffect | Description$ Other creatures have "Whenever this creature attacks, you may have it fight CARDNAME."
 SVar:GrothamaAttack:Mode$ Attacks | ValidCard$ Card.Self | Execute$ GrothamaFight | OptionalDecider$ You | TriggerDescription$ Whenever this creature attacks, ABILITY.
 SVar:GrothamaFight:DB$ Fight | Defined$ TriggeredAttackerLKICopy | ExtraDefined$ OriginalHost | SpellDescription$ You may have it fight ORIGINALHOST
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, each player draws cards equal to the amount of damage dealt to Grothama this turn by sources they controlled.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ When CARDNAME leaves the battlefield, each player draws cards equal to the amount of damage dealt to Grothama this turn by sources they controlled.
 SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ TrigDraw
 SVar:TrigDraw:DB$ Draw | Defined$ Remembered | NumCards$ X
 SVar:X:TriggeredCard$DamageDoneByPlayerThisTurn.Remembered

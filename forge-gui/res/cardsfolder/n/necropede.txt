@@ -3,6 +3,6 @@ ManaCost:2
 Types:Artifact Creature Phyrexian Insect
 PT:1/1
 K:Infect
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ TriggeredCardController | Execute$ TrigPutCounter | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may put a -1/-1 counter on target creature.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ TriggeredCardController | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME dies, you may put a -1/-1 counter on target creature.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | IsCurse$ True | CounterNum$ 1
 Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nWhen Necropede dies, you may put a -1/-1 counter on target creature.

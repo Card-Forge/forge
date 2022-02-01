@@ -3,7 +3,7 @@ ManaCost:4 G
 Types:Enchantment
 K:Fading:7
 A:AB$ Token | Cost$ SubCounter<1/FADE> | TokenAmount$ 1 | TokenScript$ g_x_x_saproling_burst | TokenOwner$ You | LegacyImage$ g X X saproling burst nms | ImprintTokens$ True | RememberSource$ True | SpellDescription$ Create a green Saproling creature token. It has "This creature's power and toughness are each equal to the number of fade counters on Saproling Burst."
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ DestroyRemembered | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, destroy all tokens created with CARDNAME. They can't be regenerated.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ DestroyRemembered | TriggerDescription$ When CARDNAME leaves the battlefield, destroy all tokens created with CARDNAME. They can't be regenerated.
 SVar:DestroyRemembered:DB$ Destroy | Defined$ Imprinted | NoRegen$ True | SubAbility$ DBCleanUp
 SVar:DBCleanUp:DB$ Cleanup | ClearImprinted$ True
 AI:RemoveDeck:All

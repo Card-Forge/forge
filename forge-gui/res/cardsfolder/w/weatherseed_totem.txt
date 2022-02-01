@@ -3,6 +3,6 @@ ManaCost:3
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 A:AB$ Animate | Cost$ 2 G G G | Defined$ Self | Power$ 5 | Toughness$ 3 | Types$ Creature,Artifact,Treefolk | Colors$ Green | Keywords$ Trample | SpellDescription$ CARDNAME becomes a 5/3 green Treefolk artifact creature with trample until end of turn.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+Creature | TriggerController$ TriggeredCardController | Execute$ TrigChange | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, if it was a creature, return this card to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+Creature | Execute$ TrigChange | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, if it was a creature, return this card to its owner's hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredNewCardLKICopy
 Oracle:{T}: Add {G}.\n{2}{G}{G}{G}: Weatherseed Totem becomes a 5/3 green Treefolk artifact creature with trample until end of turn.\nWhen Weatherseed Totem is put into a graveyard from the battlefield, if it was a creature, return this card to its owner's hand.

@@ -6,7 +6,7 @@ K:Flying
 K:Trample
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile all other permanents you control.
 SVar:TrigExile:DB$ ChangeZoneAll | ChangeType$ Permanent.YouCtrl+Other | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ForgetOtherTargets$ True
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled cards to the battlefield under their owners' control.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigReturn | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled cards to the battlefield under their owners' control.
 SVar:TrigReturn:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All

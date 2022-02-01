@@ -2,7 +2,7 @@ Name:Maalfeld Twins
 ManaCost:5 B
 Types:Creature Zombie
 PT:4/4
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, create two 2/2 black Zombie creature tokens.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create two 2/2 black Zombie creature tokens.
 SVar:TrigToken:DB$ Token | LegacyImage$ b 2 2 zombie avr | TokenAmount$ 2 | TokenScript$ b_2_2_zombie | TokenOwner$ You
 SVar:SacMe:3
 Oracle:When Maalfeld Twins dies, create two 2/2 black Zombie creature tokens.

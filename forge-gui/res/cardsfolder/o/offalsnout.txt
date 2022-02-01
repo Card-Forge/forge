@@ -4,7 +4,7 @@ Types:Creature Elemental
 PT:2/2
 K:Flash
 K:Evoke:B
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigExile | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, exile target card from a graveyard.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME leaves the battlefield, exile target card from a graveyard.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card
 AI:RemoveDeck:All
 SVar:NeedsToPlayEvokedVar:Z GE1

@@ -2,6 +2,6 @@ Name:Fathom Fleet Cutthroat
 ManaCost:3 B
 Types:Creature Human Pirate
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME enters the battlefield, destroy target creature an opponent controls that was dealt damage this turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target creature an opponent controls that was dealt damage this turn.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl+wasDealtDamageThisTurn | TgtPrompt$ Select target creature an opponent controls that was dealt damage this turn.
 Oracle:When Fathom Fleet Cutthroat enters the battlefield, destroy target creature an opponent controls that was dealt damage this turn.

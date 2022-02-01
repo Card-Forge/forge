@@ -352,7 +352,7 @@ public class GameCopier {
             if (!counters.isEmpty()) {
                 newCard.setCounters(Maps.newHashMap(counters));
             }
-            if (c.getChosenPlayer() != null) {
+            if (c.hasChosenPlayer()) {
                 newCard.setChosenPlayer(playerMap.get(c.getChosenPlayer()));
             }
             if (!c.getChosenType().isEmpty()) {

@@ -4,7 +4,7 @@ Types:Creature Scorpion Demon
 PT:4/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter1 | TriggerDescription$ When CARDNAME enters the battlefield, put two -1/-1 counters on target creature you control.
 SVar:TrigPutCounter1:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ M1M1 | IsCurse$ True | CounterNum$ 2
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounter2 | TriggerController$ TriggeredCardController | OptionalDecider$ You | TriggerDescription$ When CARDNAME dies, you may put a -1/-1 counter on target creature for each -1/-1 counter on CARDNAME.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounter2 | OptionalDecider$ You | TriggerDescription$ When CARDNAME dies, you may put a -1/-1 counter on target creature for each -1/-1 counter on CARDNAME.
 SVar:TrigPutCounter2:DB$ PutCounter | ValidTgts$ Creature | CounterType$ M1M1 | IsCurse$ True | CounterNum$ X
 SVar:X:TriggeredCard$CardCounters.M1M1
 Oracle:When Soulstinger enters the battlefield, put two -1/-1 counters on target creature you control.\nWhen Soulstinger dies, you may put a -1/-1 counter on target creature for each -1/-1 counter on Soulstinger.

@@ -3,7 +3,7 @@ ManaCost:4 B B
 Types:Legendary Creature Dragon Spirit
 PT:5/5
 K:Flying
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, each opponent loses 5 life. You gain life equal to the life lost this way.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME dies, each opponent loses 5 life. You gain life equal to the life lost this way.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardOpponent | LifeAmount$ 5 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ TriggeredCardController | LifeAmount$ AFLifeLost
 SVar:AFLifeLost:Number$0

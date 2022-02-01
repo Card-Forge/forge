@@ -2,7 +2,7 @@ Name:Liege of the Hollows
 ManaCost:2 G G
 Types:Creature Spirit
 PT:3/4
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ RepeatPayment | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, each player may pay any amount of mana. Then each player creates a number of 1/1 green Squirrel creature tokens equal to the amount of mana they paid this way.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ RepeatPayment | TriggerDescription$ When CARDNAME dies, each player may pay any amount of mana. Then each player creates a number of 1/1 green Squirrel creature tokens equal to the amount of mana they paid this way.
 SVar:RepeatPayment:DB$ RepeatEach | RepeatPlayers$ Player | StartingWithActivator$ True | ChangeZoneTable$ True | RepeatSubAbility$ DBPay | StackDescription$ When CARDNAME dies, each player may pay any amount of mana. Then each player creates a number of 1/1 green Squirrel creature tokens equal to the amount of mana they paid this way.
 SVar:DBPay:DB$ ChooseNumber | Defined$ Player.IsRemembered | ChooseAnyNumber$ True | ListTitle$ Pay Any Mana | AILogic$ MaxForAnyController | SubAbility$ DBToken
 # TODO: ideally the tokens should be created simultaneously after all the players have finished paying mana, but that's difficult to implement.

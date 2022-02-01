@@ -5,6 +5,6 @@ A:SP$ Charm | Cost$ R G | Choices$ DBNoLife,DBDamage,DBLand,DBPumpAll | CharmNum
 SVar:DBNoLife:DB$ Effect | Name$ Atarka's Command Effect | StaticAbilities$ STCantGain | AILogic$ NoGain | SpellDescription$ Your opponents can't gain life this turn.
 SVar:STCantGain:Mode$ CantGainLife | ValidPlayer$ Player.Opponent | Description$ Your opponents can't gain life this turn.
 SVar:DBDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 3 | AILogic$ Good | SpellDescription$ CARDNAME deals 3 damage to each opponent.
-SVar:DBLand:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | Optional$ You | SpellDescription$ You may put a land card from your hand onto the battlefield.
+SVar:DBLand:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | Optional$ You | SpellDescription$ You may put a land card from your hand onto the battlefield.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Reach | SpellDescription$ Creatures you control get +1/+1 and gain reach until end of turn.
 Oracle:Choose two —\n• Your opponents can't gain life this turn.\n• Atarka's Command deals 3 damage to each opponent.\n• You may put a land card from your hand onto the battlefield.\n• Creatures you control get +1/+1 and gain reach until end of turn.

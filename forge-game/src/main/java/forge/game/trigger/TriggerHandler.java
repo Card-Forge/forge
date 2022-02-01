@@ -527,7 +527,7 @@ public class TriggerHandler {
                 }
 
                 sa = AbilityFactory.getAbility(host, name);
-                // need to set as Overriding Abiltiy so it can be copied better
+                // need to set as Overriding Ability so it can be copied better
                 regtrig.setOverridingAbility(sa);
             }
             sa.setActivatingPlayer(host.getController());

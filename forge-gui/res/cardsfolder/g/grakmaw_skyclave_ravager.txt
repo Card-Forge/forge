@@ -4,9 +4,9 @@ Types:Legendary Creature Hydra Horror
 PT:0/0
 K:etbCounter:P1P1:3
 SVar:WasKicked:Count$CardCounters.P1P1
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+Other+counters_GE1_P1P1 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerController$ TriggeredCardController | TriggerDescription$ Whenever another creature you control dies, if it had a +1/+1 counter on it, put a +1/+1 counter on CARDNAME.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+Other+counters_GE1_P1P1 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature you control dies, if it had a +1/+1 counter on it, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionPresent$ Card.StrictlySelf
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, create an X/X black and green Hydra creature token, where X is the number of +1/+1 counters on CARDNAME.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create an X/X black and green Hydra creature token, where X is the number of +1/+1 counters on CARDNAME.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ bg_x_x_hydra | TokenOwner$ TriggeredCardController | TokenPower$ X | TokenToughness$ X
 SVar:X:TriggeredCard$CardCounters.P1P1
 DeckHas:Ability$Counters|Token

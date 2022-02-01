@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Creature Phyrexian Horror
 PT:2/2
 K:Swampwalk
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is dies, each opponent loses 2 life.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME is dies, each opponent loses 2 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2
 Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)\nWhen Blistergrub dies, each opponent loses 2 life.

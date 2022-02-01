@@ -17,7 +17,6 @@ public class FogEffect extends SpellAbilityEffect {
         return sa.getHostCard().getController() + " prevents all combat damage this turn.";
     }
 
-
     @Override
     public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getHostCard();

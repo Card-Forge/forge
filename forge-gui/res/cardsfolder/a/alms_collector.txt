@@ -4,6 +4,6 @@ Types:Creature Cat Cleric
 PT:3/4
 K:Flash
 R:Event$ DrawCards | ActiveZones$ Battlefield | ValidPlayer$ Player.Opponent | Number$ GE2 | ReplaceWith$ DrawEach | Description$ If an opponent would draw two or more cards, instead you and that player each draw a card.
-SVar:DrawEach:DB$ Draw | NumCards$ 1 | SubAbility$ DBDraw
+SVar:DrawEach:DB$ Draw | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ ReplacedPlayer | NumCards$ 1
 Oracle:Flash\nIf an opponent would draw two or more cards, instead you and that player each draw a card.

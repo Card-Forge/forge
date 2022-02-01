@@ -4,6 +4,6 @@ Types:Legendary Creature Elemental
 PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, create a 5/5 red and green Elemental creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ rg_5_5_elemental | TokenOwner$ You | LegacyImage$ rg 5 5 elemental
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Elemental.Other+YouCtrl | Execute$ TrigDealDamage | TriggerController$ TriggeredCardController | TriggerDescription$ Whenever CARDNAME or another Elemental you control dies, CARDNAME deals 3 damage to any target.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Elemental.Other+YouCtrl | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME or another Elemental you control dies, CARDNAME deals 3 damage to any target.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3
 Oracle:Landfall — Whenever a land enters the battlefield under your control, create a 5/5 red and green Elemental creature token.\nWhenever Omnath, Locus of Rage or another Elemental you control dies, Omnath deals 3 damage to any target.

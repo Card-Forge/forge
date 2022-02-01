@@ -2,7 +2,7 @@ Name:Festering Mummy
 ManaCost:B
 Types:Creature Zombie
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ TriggeredCardController | Execute$ TrigPutCounter | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may put a -1/-1 counter on target creature.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ TriggeredCardController | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME dies, you may put a -1/-1 counter on target creature.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | IsCurse$ True | CounterNum$ 1
 DeckHas:Ability$Counters
 Oracle:When Festering Mummy dies, you may put a -1/-1 counter on target creature.

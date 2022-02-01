@@ -1555,7 +1555,7 @@ public class CardFactoryUtil {
 
             final String effect = "DB$ ChangeZone | ValidTgts$ Player | TgtPrompt$ Select target player" +
                     " | Origin$ Library | Destination$ Hand | ChangeType$ Card.named" + k[1] +
-                    " | ChangeNum$ 1 | Hidden$ True | Chooser$ Targeted | Optional$ Targeted";
+                    " | Hidden$ True | Chooser$ Targeted | Optional$ Targeted";
 
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
@@ -3300,7 +3300,7 @@ public class CardFactoryUtil {
             final String effect = "AB$ ChangeZone | Cost$ " + manacost + " Sac<1/CARDNAME>"
                     + " | PrecostDesc$ Transfigure | CostDesc$ " + ManaCostParser.parse(manacost)
                     + " | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.cmcEQTransfigureX"
-                    + " | ChangeNum$ 1 | SorcerySpeed$ True | StackDescription$ SpellDescription | SpellDescription$ ("
+                    + " | SorcerySpeed$ True | StackDescription$ SpellDescription | SpellDescription$ ("
                     + inst.getReminderText() + ")";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
@@ -3314,7 +3314,7 @@ public class CardFactoryUtil {
             final String effect = "AB$ ChangeZone | Cost$ " + manacost + " Discard<1/CARDNAME>"
                     + " | PrecostDesc$ Transmute | CostDesc$ " + ManaCostParser.parse(manacost) + " | ActivationZone$ Hand"
                     + " | Origin$ Library | Destination$ Hand | ChangeType$ Card.cmcEQTransmuteX"
-                    + " | ChangeNum$ 1 | SorcerySpeed$ True | StackDescription$ SpellDescription | SpellDescription$ ("
+                    + " | SorcerySpeed$ True | StackDescription$ SpellDescription | SpellDescription$ ("
                     + inst.getReminderText() + ")";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
