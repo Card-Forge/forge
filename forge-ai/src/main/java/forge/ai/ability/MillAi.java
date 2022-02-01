@@ -89,7 +89,7 @@ public class MillAi extends SpellAbilityAi {
             return false;
         }
 
-        if ((sa.getParam("NumCards").equals("X") || sa.getParam("NumCards").equals("Z"))
+        if (sa.hasParam("NumCards") && (sa.getParam("NumCards").equals("X") || sa.getParam("NumCards").equals("Z"))
                 && sa.getSVar("X").startsWith("Count$xPaid")) {
             // Set PayX here to maximum value.
             final int cardsToDiscard = getNumToDiscard(ai, sa);
@@ -110,14 +110,17 @@ public class MillAi extends SpellAbilityAi {
                     continue;
                 }
 
-                // need to set as target for some calcuate
-                sa.getTargets().add(o);
-                final int numCards = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
-                sa.getTargets().remove(o);
+                int numCards = 0;
+                if (sa.hasParam("NumCards")) {
+                    // need to set as target for some calculate
+                    sa.getTargets().add(o);
+                    numCards = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
+                    sa.getTargets().remove(o);
+                }
 
                 // if it would mill none, try other one
                 if (numCards <= 0) {
-                    if ((sa.getParam("NumCards").equals("X") || sa.getParam("NumCards").equals("Z"))) {
+                    if (sa.hasParam("NumCards") && (sa.getParam("NumCards").equals("X") || sa.getParam("NumCards").equals("Z"))) {
                         if (source.getSVar("X").startsWith("Count$xPaid")) {
                             // Spell is PayX based
                         } else if (source.getSVar("X").startsWith("Remembered$ChromaSource")) {
@@ -180,7 +183,7 @@ public class MillAi extends SpellAbilityAi {
             return false;
         }
 
-        if (sa.getParam("NumCards").equals("X") && sa.getSVar("X").equals("Count$xPaid")) {
+        if (sa.hasParam("NumCards") && (sa.getParam("NumCards").equals("X") && sa.getSVar("X").equals("Count$xPaid"))) {
             // Set PayX here to maximum value.
             sa.setXManaCostPaid(getNumToDiscard(aiPlayer, sa));
         }

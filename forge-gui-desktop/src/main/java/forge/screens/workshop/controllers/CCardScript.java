@@ -117,7 +117,7 @@ public enum CCardScript implements ICDoc {
     }
 
     public boolean hasChanges() {
-        return (currentScriptInfo != null && isTextDirty);
+        return currentScriptInfo != null && isTextDirty;
     }
 
     private static final ImmutableList<String> switchAwayOptions = ImmutableList.of(

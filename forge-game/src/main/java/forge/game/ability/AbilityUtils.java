@@ -3706,7 +3706,7 @@ public class AbilityUtils {
         }
 
         if (sq[0].contains("InChosenHand")) {
-            if (c.getChosenPlayer() != null) {
+            if (c.hasChosenPlayer()) {
                 someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Hand));
             }
         }
@@ -3723,7 +3723,7 @@ public class AbilityUtils {
         }
 
         if (sq[0].contains("InChosenYard")) {
-            if (c.getChosenPlayer() != null) {
+            if (c.hasChosenPlayer()) {
                 someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Graveyard));
             }
         }

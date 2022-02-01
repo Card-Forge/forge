@@ -13,10 +13,6 @@ import forge.util.Localizer;
 
 public class EndTurnEffect extends SpellAbilityEffect {
 
-    // *************************************************************************
-    // ************************* END TURN **************************************
-    // *************************************************************************
-
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
