@@ -1,0 +1,10 @@
+Name:Twinshot Sniper
+ManaCost:3 R
+Types:Artifact Creature Goblin Archer
+PT:2/3
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 2 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2
+A:AB$ DealDamage | Cost$ 1 R Discard<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | ActivationZone$ Hand | PrecostDesc$ Channel — | SpellDescription$ It deals 2 damage to any target.
+DeckHas:Ability$Discard
+Oracle:Reach\nWhen Twinshot Sniper enters the battlefield, it deals 2 damage to any target.\nChannel — {1}{R}, Discard Twinshot Sniper: It deals 2 damage to any target.

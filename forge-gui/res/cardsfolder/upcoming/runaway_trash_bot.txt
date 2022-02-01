@@ -1,0 +1,9 @@
+Name:Runaway Trash-Bot
+ManaCost:3
+Types:Artifact Creature Construct
+PT:0/4
+K:Trample
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each artifact and/or enchantment card in your graveyard.
+SVar:X:Count$ValidGraveyard Artifact.YouOwn,Enchantment.YouOwn
+DeckNeeds:Type$Artifact|Enchantment
+Oracle:Trample\nRunaway Trash-Bot gets +1/+0 for each artifact and/or enchantment card in your graveyard.

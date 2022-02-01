@@ -1,0 +1,8 @@
+Name:Invoke Calamity
+ManaCost:1 R R R R
+Types:Instant
+A:SP$ Play | Valid$ Instant.YouOwn,Sorcery.YouOwn | WithTotalCMC$ 6 | ValidZone$ Graveyard,Hand | Amount$ 2 | WithoutManaCost$ True | Optional$ True | ReplaceGraveyard$ Exile | SubAbility$ DBExile | StackDescription$ SpellDescription | SpellDescription$ You may cast up to two instant and/or sorcery spells with total mana value 6 or less from your graveyard and/or hand without paying their mana costs. If those spells would be put into your graveyard, exile them instead.
+SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SpellDescription$ Exile CARDNAME.
+DeckNeeds:Type$Instant|Sorcery
+DeckHas:Ability$Graveyard
+Oracle:You may cast up to two instant and/or sorcery spells with total mana value 6 or less from your graveyard and/or hand without paying their mana costs. If those spells would be put into your graveyard, exile them instead. Exile Invoke Calamity.

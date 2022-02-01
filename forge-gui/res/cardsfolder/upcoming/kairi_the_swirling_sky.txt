@@ -1,0 +1,15 @@
+Name:Kairi, the Swirling Sky
+ManaCost:4 U U
+Types:Legendary Creature Dragon Spirit
+PT:6/6
+K:Flying
+K:Ward:3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME dies, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ Return,Mill
+SVar:Return:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | TargetMin$ 0 | TargetMax$ X | MaxTotalTargetCMC$ 6 | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select any number of target nonland permanents with total mana value 6 or less | SpellDescription$ Return any number of target nonland permanents with total mana value 6 or less to their owners' hands.
+SVar:X:Count$Valid Permanent.nonLand
+SVar:Mill:DB$ Mill | NumCards$ 6 | Defined$ You | SubAbility$ DBReturn | SpellDescription$ Mill six cards, then return up to two instant and/or sorcery cards from your graveyard to your hand.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeNum$ 2 | ChangeType$ Instant.YouOwn,Sorcery.YouOwn | SelectPrompt$ Select up to two instant and/or sorcery cards from your graveyard to return to your hand | Hidden$ True
+DeckHas:Ability$Mill|Graveyard
+DeckHints:Type$Instant|Sorcery
+Oracle:Flying, ward {3}\nWhen Kairi, the Swirling Sky dies, choose one —\n• Return any number of target nonland permanents with total mana value 6 or less to their owners' hands.\n• Mill six cards, then return up to two instant and/or sorcery cards from your graveyard to your hand.

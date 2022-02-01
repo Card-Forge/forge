@@ -1,0 +1,11 @@
+Name:Go-Shintai of Shared Purpose
+ManaCost:3 W
+Types:Legendary Enchantment Creature Shrine
+PT:1/3
+K:Vigilance
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, you may pay {1}. If you do, create a 1/1 colorless Spirit creature token for each Shrine you control.
+SVar:TrigToken:AB$ Token | Cost$ 1 | TokenAmount$ X | TokenScript$ c_1_1_spirit
+SVar:X:Count$TypeYouCtrl.Shrine
+DeckHas:Ability$Token & Type$Spirit
+DeckHints:Type$Shrine
+Oracle:Vigilance\nAt the beginning of your end step, you may pay {1}. If you do, create a 1/1 colorless Spirit creature token for each Shrine you control.
