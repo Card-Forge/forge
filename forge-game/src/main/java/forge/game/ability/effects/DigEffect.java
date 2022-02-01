@@ -62,6 +62,7 @@ public class DigEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Player player = sa.getActivatingPlayer();
         final Game game = player.getGame();
+        final Player cont = host.getController();
         Player chooser = player;
         int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
 
@@ -105,6 +106,8 @@ public class DigEffect extends SpellAbilityEffect {
 
         boolean changeAll = false;
         boolean allButOne = false;
+        boolean totalCMC = (sa.hasParam("WithTotalCMC"));
+        int totcmc = AbilityUtils.calculateAmount(host, sa.getParam("WithTotalCMC"), sa);
 
         if (sa.hasParam("ChangeNum")) {
             if (sa.getParam("ChangeNum").equalsIgnoreCase("All")) {
@@ -156,9 +159,9 @@ public class DigEffect extends SpellAbilityEffect {
                 }
                 else if (sa.hasParam("RevealValid")) {
                     final String revealValid = sa.getParam("RevealValid");
-                    final CardCollection toReveal = CardLists.getValidCards(top, revealValid, host.getController(), host, sa);
+                    final CardCollection toReveal = CardLists.getValidCards(top, revealValid, cont, host, sa);
                     if (!toReveal.isEmpty()) {
-                        game.getAction().reveal(toReveal, host.getController());
+                        game.getAction().reveal(toReveal, cont);
                         if (sa.hasParam("RememberRevealed")) {
                             for (final Card one : toReveal) {
                                 host.addRemembered(one);
@@ -197,14 +200,17 @@ public class DigEffect extends SpellAbilityEffect {
                     CardCollection valid;
                     if (mitosis) {
                         valid = sharesNameWithCardOnBattlefield(game, top);
-                    }
-                    else if (!changeValid.isEmpty()) {
+                    } else if (!changeValid.isEmpty()) {
                         if (changeValid.contains("ChosenType")) {
                             changeValid = changeValid.replace("ChosenType", host.getChosenType());
                         }
-                        valid = CardLists.getValidCards(top, changeValid.split(","), host.getController(), host, sa);
-                    }
-                    else {
+                        valid = CardLists.getValidCards(top, changeValid.split(","), cont, host, sa);
+                        if (totalCMC) {
+                            valid = CardLists.getValidCards(valid, "Card.cmcLE" + totcmc, cont, host, sa);
+                        }
+                    } else if (totalCMC) {
+                        valid = CardLists.getValidCards(top, "Card.cmcLE" + totcmc, cont, host, sa);
+                    } else {
                         // If all the cards are valid choices, no need for a separate reveal dialog to the chooser. pfps??
                         if (p == chooser && destZone1ChangeNum > 1) {
                             delayedReveal = null;
@@ -228,19 +234,49 @@ public class DigEffect extends SpellAbilityEffect {
 
                     if (changeAll) {
                         movedCards = new CardCollection(valid);
-                    }
-                    else if (sa.hasParam("RandomChange")) {
+                    } else if (sa.hasParam("RandomChange")) {
                         int numChanging = Math.min(destZone1ChangeNum, valid.size());
                         movedCards = CardLists.getRandomSubList(valid, numChanging);
-                    }
-                    else if (sa.hasParam("ForEachColorPair")) {
+                    } else if (sa.hasParam("WithTotalCMC")) {
+                        movedCards = new CardCollection();
+                        if (p == chooser) {
+                            chooser.getController().tempShowCards(top);
+                        }
+                        if (valid.isEmpty()) {
+                            chooser.getController().notifyOfValue(sa, null,
+                                    Localizer.getInstance().getMessage("lblNoValidCards"));
+                        }
+                        boolean opt = false;
+                        if (anyNumber) {
+                            opt = true;
+                        }
+                        while (!valid.isEmpty()) {
+                            Card chosen = chooser.getController().chooseSingleEntityForEffect(valid, delayedReveal, sa,
+                                    Localizer.getInstance().getMessage("lblChooseOne"), opt, p, null);
+                            if (chosen != null) {
+                                movedCards.add(chosen);
+                                valid.remove(chosen);
+                                totcmc = totcmc - chosen.getCMC();
+                                valid = CardLists.getValidCards(valid, "Card.cmcLE" + totcmc, cont, host, sa);
+                            } else { //if they can and did choose nothing, we're done here
+                                break;
+                            }
+                        }
+                        chooser.getController().endTempShowCards();
+                        if (!movedCards.isEmpty()) {
+                            game.getAction().reveal(movedCards, chooser, true,
+                                    Localizer.getInstance().getMessage("lblPlayerPickedChosen",
+                                            chooser.getName(), ""));
+                        }
+                    } else if (sa.hasParam("ForEachColorPair")) {
                         movedCards = new CardCollection();
                         if (p == chooser) {
                             chooser.getController().tempShowCards(top);
                         }
                         for (final byte pair : MagicColor.COLORPAIR) {
-                            Card chosen = chooser.getController().chooseSingleEntityForEffect(CardLists.filter(valid, CardPredicates.isExactlyColor(pair)),
-                                    delayedReveal, sa, Localizer.getInstance().getMessage("lblChooseOne"), false, p, null);
+                            Card chosen = chooser.getController().chooseSingleEntityForEffect(CardLists.filter(valid,
+                                    CardPredicates.isExactlyColor(pair)), delayedReveal, sa,
+                                    Localizer.getInstance().getMessage("lblChooseOne"), false, p, null);
                             if (chosen != null) {
                                 movedCards.add(chosen);
                             }
@@ -249,14 +285,12 @@ public class DigEffect extends SpellAbilityEffect {
                         if (!movedCards.isEmpty()) {
                             game.getAction().reveal(movedCards, chooser, true, Localizer.getInstance().getMessage("lblPlayerPickedChosen", chooser.getName(), ""));
                         }
-                    }
-                    else if (allButOne) {
+                    } else if (allButOne) {
                         movedCards = new CardCollection(valid);
                         String prompt;
                         if (destZone2.equals(ZoneType.Library) && libraryPosition2 == 0) {
                             prompt = Localizer.getInstance().getMessage("lblChooseACardToLeaveTargetLibraryTop", p.getName());
-                        }
-                        else {
+                        } else {
                             prompt = Localizer.getInstance().getMessage("lblChooseACardLeaveTarget", p.getName(), destZone2.getTranslatedName());
                         }
 

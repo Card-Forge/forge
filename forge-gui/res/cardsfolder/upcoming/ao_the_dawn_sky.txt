@@ -1,0 +1,12 @@
+Name:Ao, the Dawn Sky
+ManaCost:3 W W
+Types:Legendary Creature Dragon Spirit
+PT:5/4
+K:Flying
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME dies, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ TrigDig,TrigPutCounterAll
+SVar:TrigDig:DB$ Dig | DigNum$ 7 | WithTotalCMC$ 4 | AnyNumber$ True | ChangeValid$ Card.Permanent+nonLand | DestinationZone$ Battlefield | DestinationZone2$ Library | RestRandomOrder$ True | SpellDescription$ Look at the top seven cards of your library. Put any number of nonland permanent cards with total mana value 4 or less from among them onto the battlefield. Put the rest on the bottom of your library in a a random order.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl,Vehicle.YouCtrl | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on each permanent you control that's a creature or a Vehicle.
+DeckHints:Type$Creature|Vehicle
+Oracle:Flying, vigilance\nWhen Ao, the Dawn Sky dies, choose one —\n• Look at the top seven cards of your library. Put any number of nonland permanent cards with total mana value 4 or less from among them onto the battlefield. Put the rest on the bottom of your library in a a random order.\n• Put two +1/+1 counters on each permanent you control that's a creature or a Vehicle.
