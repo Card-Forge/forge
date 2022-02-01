@@ -2,7 +2,7 @@ Name:Dunes of the Dead
 ManaCost:no cost
 Types:Land Desert
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, create a 2/2 black Zombie creature token.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, create a 2/2 black Zombie creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ TriggeredCardController | LegacyImage$ b 2 2 zombie hou
 SVar:SacMe:1
 DeckHas:Ability$Token

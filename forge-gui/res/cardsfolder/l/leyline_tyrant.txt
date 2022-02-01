@@ -4,7 +4,7 @@ Types:Creature Dragon
 PT:4/4
 K:Flying
 S:Mode$ UnspentMana | ValidPlayer$ You | ManaType$ Red | Description$ You don't lose unspent red mana as steps and phases end.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChooseX | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may pay any amount of {R}. When you do, it deals that much damage to any target.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChooseX | TriggerDescription$ When CARDNAME dies, you may pay any amount of {R}. When you do, it deals that much damage to any target.
 SVar:TrigChooseX:DB$ ChooseNumber | Defined$ You | ChooseAnyNumber$ True | ListTitle$ any amount of red mana | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to damage with CARDNAME | NumDmg$ X | UnlessCost$ X | UnlessXColor$ R | UnlessSwitched$ True | UnlessPayer$ You
 SVar:X:Count$ChosenNumber

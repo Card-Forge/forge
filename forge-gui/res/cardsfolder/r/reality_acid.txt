@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Enchant permanent
 K:Vanishing:3
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | AILogic$ Curse
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigSac | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, enchanted permanent's controller sacrifices it.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME leaves the battlefield, enchanted permanent's controller sacrifices it.
 SVar:TrigSac:DB$ Destroy | Sacrifice$ True | Defined$ AttachedBy TriggeredCardLKICopy
 Oracle:Enchant permanent\nVanishing 3 (This Aura enters the battlefield with three time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhen Reality Acid leaves the battlefield, enchanted permanent's controller sacrifices it.

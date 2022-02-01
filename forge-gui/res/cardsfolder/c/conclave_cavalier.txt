@@ -3,7 +3,7 @@ ManaCost:G G W W
 Types:Creature Centaur Knight
 PT:4/4
 K:Vigilance
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, create two green and green 2/2 Elf Knight creature tokens with vigilance.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create two green and green 2/2 Elf Knight creature tokens with vigilance.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ gw_2_2_elf_knight_vigilance | LegacyImage$ gw 2 2 elf knight vigilance grn
 DeckHas:Ability$Token
 SVar:SacMe:4

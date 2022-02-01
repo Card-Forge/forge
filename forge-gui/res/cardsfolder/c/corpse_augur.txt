@@ -2,7 +2,7 @@ Name:Corpse Augur
 ManaCost:3 B
 Types:Creature Zombie Wizard
 PT:4/2
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you draw X cards and you lose X life, where X is the number of creature cards in target player's graveyard.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME dies, you draw X cards and you lose X life, where X is the number of creature cards in target player's graveyard.
 SVar:TrigDraw:DB$ Draw | Defined$ TriggeredCardController | ValidTgts$ Player | TgtPrompt$ Choose target player | NumCards$ X | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ X
 SVar:X:TargetedPlayer$ValidGraveyard Creature.YouOwn

@@ -4,7 +4,7 @@ Types:Creature Vedalken Wizard
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 green Squirrel creature token and a 0/3 blue Crab creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_squirrel,u_0_3_crab | TokenOwner$ You
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, create a token that's a copy of target token you control.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ When CARDNAME dies, create a token that's a copy of target token you control.
 SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Permanent.token+YouCtrl | TgtPrompt$ Select target token you control
 DeckHas:Ability$Token
 Oracle:When Specimen Collector enters the battlefield, create a 1/1 green Squirrel creature token and a 0/3 blue Crab creature token.\nWhen Specimen Collector dies, create a token that's a copy of target token you control.

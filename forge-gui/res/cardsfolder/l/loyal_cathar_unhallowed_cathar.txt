@@ -3,7 +3,7 @@ ManaCost:W W
 Types:Creature Human Soldier
 PT:2/2
 K:Vigilance
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDelay | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, return it to the battlefield transformed under your control at the beginning of the next end step.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDelay | TriggerDescription$ When CARDNAME dies, return it to the battlefield transformed under your control at the beginning of the next end step.
 SVar:TrigDelay:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ TriggeredNewCardLKICopy | TriggerDescription$ return CARDNAME to the battlefield transformed
 SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Graveyard | Destination$ Battlefield | Transformed$ True | GainControl$ True
 AlternateMode:DoubleFaced

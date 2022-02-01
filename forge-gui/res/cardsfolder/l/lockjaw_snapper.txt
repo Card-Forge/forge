@@ -3,6 +3,6 @@ ManaCost:4
 Types:Artifact Creature Scarecrow
 PT:2/2
 K:Wither
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is dies, put a -1/-1 counter on each creature with a -1/-1 counter on it.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When CARDNAME is dies, put a -1/-1 counter on each creature with a -1/-1 counter on it.
 SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.counters_GE1_M1M1 | CounterType$ M1M1 | CounterNum$ 1
 Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\nWhen Lockjaw Snapper dies, put a -1/-1 counter on each creature with a -1/-1 counter on it.

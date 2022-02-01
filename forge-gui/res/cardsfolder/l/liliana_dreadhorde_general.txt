@@ -2,7 +2,7 @@ Name:Liliana, Dreadhorde General
 ManaCost:4 B B
 Types:Legendary Planeswalker Liliana
 Loyalty:6
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | TriggerController$ TriggeredCardController | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control dies, draw a card.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control dies, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | Planeswalker$ True | SpellDescription$ Create a 2/2 black Zombie creature token.
 A:AB$ Sacrifice | Cost$ SubCounter<4/LOYALTY> | Amount$ 2 | SacValid$ Creature | Defined$ Player | Planeswalker$ True | SpellDescription$ Each player sacrifices two creatures.

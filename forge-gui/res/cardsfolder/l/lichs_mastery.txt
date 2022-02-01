@@ -8,6 +8,6 @@ SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:TriggerCount$LifeAmount
 T:Mode$ LifeLost | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever you lose life, for each 1 life you lost, exile a permanent you control or a card from your hand or graveyard.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield,Hand,Graveyard | Destination$ Exile | ChangeType$ Card.YouCtrl | ChangeNum$ X | Mandatory$ True
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigLose | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, you lose the game.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigLose | TriggerDescription$ When CARDNAME leaves the battlefield, you lose the game.
 SVar:TrigLose:DB$ LosesGame | Defined$ You
 Oracle:Hexproof\nYou can't lose the game.\nWhenever you gain life, draw that many cards.\nWhenever you lose life, for each 1 life you lost, exile a permanent you control or a card from your hand or graveyard.\nWhen Lich's Mastery leaves the battlefield, you lose the game.

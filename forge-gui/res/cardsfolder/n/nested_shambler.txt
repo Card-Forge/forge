@@ -2,7 +2,7 @@ Name:Nested Shambler
 ManaCost:B
 Types:Creature Zombie
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, create X tapped 1/1 green Squirrel creature tokens, where X is CARDNAME's power.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create X tapped 1/1 green Squirrel creature tokens, where X is CARDNAME's power.
 SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenScript$ g_1_1_squirrel | TokenAmount$ X | TokenTapped$ True
 SVar:X:TriggeredCard$CardPower
 SVar:EquipMe:Once

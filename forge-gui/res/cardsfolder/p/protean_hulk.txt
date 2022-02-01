@@ -2,7 +2,7 @@ Name:Protean Hulk
 ManaCost:5 G G
 Types:Creature Beast
 PT:6/6
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, search your library for any number of creature cards with total mana value 6 or less, put them onto the battlefield, then shuffle.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME dies, search your library for any number of creature cards with total mana value 6 or less, put them onto the battlefield, then shuffle.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeNum$ X | WithTotalCMC$ 6 | ChangeType$ Creature.YouCtrl | Optional$ True
 SVar:X:Count$ValidLibrary Creature.YouCtrl
 SVar:SacMe:4

@@ -110,12 +110,14 @@ public class MillAi extends SpellAbilityAi {
                     continue;
                 }
 
-                int numCards = 0;
+                int numCards;
                 if (sa.hasParam("NumCards")) {
                     // need to set as target for some calculate
                     sa.getTargets().add(o);
                     numCards = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
                     sa.getTargets().remove(o);
+                } else {
+                    numCards = 1;
                 }
 
                 // if it would mill none, try other one
