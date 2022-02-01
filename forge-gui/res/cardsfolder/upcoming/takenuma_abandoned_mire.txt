@@ -6,4 +6,5 @@ A:AB$ Mill | PrecostDesc$ Channel — | Cost$ 3 B Discard<1/CARDNAME> | Activati
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.YouOwn,Planeswalker.YouOwn | ChangeNum$ 1 | Mandatory$ True | Hidden$ True
 SVar:X:Count$Valid Creature.Legendary+YouCtrl
 DeckHints:Type$Legendary
+DeckHas:Ability$Discard
 Oracle:{T}: Add {B}.\nChannel — {3}{B}, Discard Takenuma, Abandoned Mire: Mill three cards, then return a creature or planeswalker card from your graveyard to your hand. This ability costs {1} less to activate for each legendary creature you control.

@@ -5,4 +5,5 @@ A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
 A:AB$ DealDamage | PrecostDesc$ Channel — | Cost$ 2 W Discard<1/CARDNAME> | ActivationZone$ Hand | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 4 | ReduceCost$ X | SpellDescription$ CARDNAME deals 4 damage to target attacking or blocking creature. This ability costs {1} less to activate for each legendary creature you control.
 SVar:X:Count$Valid Creature.Legendary+YouCtrl
 DeckHints:Type$Legendary
+DeckHas:Ability$Discard
 Oracle:{T}: Add {W}.\nChannel — {2}{W}, Discard Eiganjo, Seat of the Empire: It deals 4 damage to target attacking or blocking creature. This ability costs {1} less to activate for each legendary creature you control.
