@@ -31,6 +31,7 @@ import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.staticability.StaticAbilityCrewValue;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
 
@@ -455,8 +456,13 @@ public class CardLists {
     public static int getTotalPower(Iterable<Card> cardList, boolean ignoreNegativePower, boolean crew) {
         int total = 0;
         for (final Card crd : cardList) {
-            if (crew && crd.hasKeyword("CARDNAME crews Vehicles using its toughness rather than its power.")) {
-                total += ignoreNegativePower ? Math.max(0, crd.getNetToughness()) : crd.getNetToughness();
+            if (crew && StaticAbilityCrewValue.hasAnyCrewValue(crd)) {
+                if (StaticAbilityCrewValue.crewsWithToughness(crd)) {
+                    total += ignoreNegativePower ? Math.max(0, crd.getNetToughness()) : crd.getNetToughness();
+                } else {
+                    int m = StaticAbilityCrewValue.getCrewMod(crd);
+                    total += ignoreNegativePower ? Math.max(0, crd.getNetPower() + m) : crd.getNetPower() + m;
+                }
             }
             else total += ignoreNegativePower ? Math.max(0, crd.getNetPower()) : crd.getNetPower();
         }
