@@ -4,7 +4,7 @@ Types:Legendary Planeswalker Aminatou
 Loyalty:3
 Text:CARDNAME can be your commander.
 A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | SubAbility$ DBTop | SpellDescription$ Draw a card, then put a card from your hand on top of your library.
-SVar:DBTop:DB$ ChangeZone | Origin$ Hand | Destination$ Library | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True
+SVar:DBTop:DB$ ChangeZone | Origin$ Hand | Destination$ Library | ChangeType$ Card | Mandatory$ True
 A:AB$ ChangeZone | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Permanent.Other+YouOwn | TgtPrompt$ Select another target permanent you own | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | SubAbility$ DBReturn | SpellDescription$ Exile another target permanent you own, then return it to the battlefield under your control.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | GainControl$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
