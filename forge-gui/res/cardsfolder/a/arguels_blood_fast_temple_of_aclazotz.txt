@@ -1,7 +1,7 @@
 Name:Arguel's Blood Fast
 ManaCost:1 B
 Types:Legendary Enchantment
-A:AB$ Draw | Cost$ 1 B PayLife<2> | NumCards$ 1 | SpellDescription$ Draw a card.
+A:AB$ Draw | Cost$ 1 B PayLife<2> | SpellDescription$ Draw a card.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ DBTransform | LifeTotal$ You | LifeAmount$ LE5 | TriggerDescription$ At the beginning of your upkeep, if you have 5 or less life, you may transform CARDNAME.
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced

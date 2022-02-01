@@ -5,7 +5,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step. At the beginning of the upkeep of enchanted creature's controller, that player may discard a card at random. If the player does, untap that creature.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | OptionalDecider$ EnchantedController | Execute$ ApathyDiscard | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, that player may discard a card at random. If the player does, untap that creature.
-SVar:ApathyDiscard:DB$ Discard | Defined$ TriggeredPlayer | NumCards$ 1 | Mode$ Random | RememberDiscarded$ True | SubAbility$ ApathyUntap
+SVar:ApathyDiscard:DB$ Discard | Defined$ TriggeredPlayer | Mode$ Random | RememberDiscarded$ True | SubAbility$ ApathyUntap
 SVar:ApathyUntap:DB$ Untap | Defined$ Enchanted | SpellDescription$ Untap enchanted creature | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount

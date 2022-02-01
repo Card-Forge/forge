@@ -2,5 +2,5 @@ Name:Annihilate
 ManaCost:3 B B
 Types:Instant
 A:SP$ Destroy | Cost$ 3 B B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SpellDescription$ Destroy target nonblack creature. It can't be regenerated. | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
 Oracle:Destroy target nonblack creature. It can't be regenerated.\nDraw a card.

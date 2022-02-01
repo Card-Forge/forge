@@ -2,7 +2,7 @@ Name:Aether Spellbomb
 ManaCost:1
 Types:Artifact
 A:AB$ ChangeZone | Cost$ U Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
-A:AB$ Draw | Cost$ 1 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+A:AB$ Draw | Cost$ 1 Sac<1/CARDNAME> | SpellDescription$ Draw a card.
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:Random
 DeckNeeds:Color$Blue

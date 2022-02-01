@@ -1,7 +1,7 @@
 Name:Autumnal Gloom
 ManaCost:2 G
 Types:Enchantment
-A:AB$ Mill | Cost$ B | Defined$ You | NumCards$ 1 | SpellDescription$ Mill a card.
+A:AB$ Mill | Cost$ B | Defined$ You | SpellDescription$ Mill a card.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Delirium$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ Delirium — At the beginning of your end step, if there are four or more card types among cards in your graveyard, transform Autumnal Gloom.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 DeckHints:Ability$Graveyard|Discard
