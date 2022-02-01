@@ -1,0 +1,10 @@
+Name:Prodigy's Prototype
+ManaCost:1 W U
+Types:Artifact Vehicle
+PT:3/4
+T:Mode$ AttackersDeclared | ValidAttackers$ Vehicle.YouCtrl | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more Vehicles you control attack, create a 1/1 colorless Pilot creature token with "This creature crews Vehicles as though its power were 2 greater."
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_pilot_crewbuff
+K:Crew:2
+DeckHints:Type$Vehicle
+DeckHas:Ability$Token & Type$Pilot
+Oracle:Whenever one or more Vehicles you control attack, create a 1/1 colorless Pilot creature token with "This creature crews Vehicles as though its power were 2 greater."\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
