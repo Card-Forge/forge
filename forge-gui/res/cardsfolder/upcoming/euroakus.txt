@@ -1,0 +1,12 @@
+Name:Euroakus
+ManaCost:4 G G
+Types:Legendary Creature Treefolk Wizard
+PT:6/6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME  enters the battlefield, create a number of 1/1 blue Human Wizard creature tokens equal to the number of differently named lands you control.
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ X | TokenScript$ u_1_1_human_wizard | LegacyImage$ u 1 1 human wizard emn | SpellDescription$ Create a number of 1/1 blue Human Wizard creature tokens equal to the number of differently named lands you control.
+SVar:X:Count$DifferentCardNames_Land.YouCtrl+inZoneBattlefield
+A:AB$ Draw | Cost$ 4 G U | NumCards$ Y | SubAbility$ PumpAll | SpellDescription$ Draw a card for each Wizard you control. They each get +1/+1 until end of turn for each card in your hand.
+SVar:Y:Count$Valid Wizard.YouCtrl
+SVar:PumpAll:DB$ PumpAll | ValidCards$ Wizard.YouCtrl | NumAtt$ Z | NumDef$ Z 
+SVar:Z:Count$CardsInYourHand
+Oracle:When Euroakus enters the battlefield, create a number of 1/1 blue Human Wizard creature tokens equal to the number of differently named lands you control.\n{4}{G}{U}: Draw a card for each Wizard you control. They each get +1/+1 until end of turn for each card in your hand.

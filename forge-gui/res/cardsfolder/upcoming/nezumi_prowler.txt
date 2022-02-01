@@ -1,0 +1,8 @@
+Name:Nezumi Prowler
+ManaCost:1 B
+Types:Artifact Creature Rat Ninja
+PT:3/1
+K:Ninjutsu:1 B
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature you control gains deathtouch and lifelink until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Deathtouch & Lifelink
+Oracle:Ninjutsu {1}{B}\nWhen Nezumi Prowler enters the battlefield, target creature you control gains deathtouch and lifelink until end of turn.
