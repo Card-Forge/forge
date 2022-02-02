@@ -1,0 +1,14 @@
+Name:Junji, the Midnight Sky
+ManaCost:3 B B
+Types:Legendary Creature Dragon Spirit
+PT:5/5
+K:Flying
+K:Menace
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DiscardTwo,ReviveCreature
+SVar:DiscardTwo:DB$ Discard | Defined$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBLoseLife | SpellDescription$ Each opponent discards two cards and loses 2 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ Opponent
+SVar:ReviveCreature:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target non-Dragon creature card in a graveyard | ValidTgts$ Creature.nonDragon | ChangeNum$ 1 | SubAbility$ DBReviveLife | SpellDescription$ Put target non-Dragon creature card from a graveyard onto the battlefield under your control. You lose 2 life.
+SVar:DBReviveLife:DB$ LoseLife | Defined$ You | LifeAmount$ 2
+DeckHas:Ability$Discard|Graveyard
+Oracle:Flying,menace\nWhen Junji, the Midnight Sky dies, choose one:\n• Each opponent discards two cards and loses 2 life.\n• Put target non-Dragon creature card from a graveyard onto the battlefield under your control. You lose 2 life.
