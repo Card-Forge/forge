@@ -4,7 +4,7 @@ Types:Tribal Sorcery Merfolk
 A:SP$ PutCounter | Cost$ U | ValidTgts$ Land | TgtPrompt$ Select target land | CounterType$ FLOOD | CounterNum$ 1 | SubAbility$ DBEffect | SpellDescription$ Put a flood counter on target land. That land is an island in addition to its other types for as long as it has a flood counter on it. If you control a Merfolk, draw a card.
 SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ FountainStatic | ForgetOnMoved$ Battlefield | ForgetCounter$ FLOOD | Duration$ Permanent | SubAbility$ DBDraw
 SVar:FountainStatic:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | AddType$ Island | Description$ That land is an island in addition to its other types for as long as it has a flood counter on it.
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionPresent$ Merfolk.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a Merfolk,
+SVar:DBDraw:DB$ Draw | ConditionPresent$ Merfolk.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a Merfolk,
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
 Oracle:Put a flood counter on target land. That land is an Island in addition to its other types for as long as it has a flood counter on it. If you control a Merfolk, draw a card.

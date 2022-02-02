@@ -242,7 +242,7 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             // Set Chosen Player
-            if (hostCard.getChosenPlayer() != null) {
+            if (hostCard.hasChosenPlayer()) {
                 eff.setChosenPlayer(hostCard.getChosenPlayer());
             }
 
@@ -274,7 +274,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
             // Duration
             final String duration = sa.getParam("Duration");
-            if ((duration == null) || !duration.equals("Permanent")) {
+            if (duration == null || !duration.equals("Permanent")) {
                 final GameCommand endEffect = new GameCommand() {
                     private static final long serialVersionUID = -5861759814760561373L;
 
@@ -284,7 +284,7 @@ public class EffectEffect extends SpellAbilityEffect {
                     }
                 };
 
-                if ((duration == null) || duration.equals("EndOfTurn")) {
+                if (duration == null || duration.equals("EndOfTurn")) {
                     game.getEndOfTurn().addUntil(endEffect);
                 } else if (duration.equals("UntilHostLeavesPlay")) {
                     hostCard.addLeavesPlayCommand(endEffect);

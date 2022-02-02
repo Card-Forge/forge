@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Creature Bird
 PT:1/1
 K:Flying
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, draw a card.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME dies, draw a card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredCardController
 SVar:SacMe:1
 Oracle:Flying\nWhen Palace Familiar dies, draw a card.

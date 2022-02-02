@@ -36,6 +36,7 @@ public class AttackRequirement {
         this.causesToAttack = causesToAttack;
 
         final GameEntity mustAttackThisTurn = attacker.getController().getMustAttackEntityThisTurn();
+        // TODO check if this always illegal (e.g. Taunt cast on self)
         if (mustAttackThisTurn != null) {
             defenderSpecific.add(mustAttackThisTurn);
         }

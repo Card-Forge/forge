@@ -2,7 +2,7 @@ Name:Angrath, the Flame-Chained
 ManaCost:3 B R
 Types:Legendary Planeswalker Angrath
 Loyalty:4
-A:AB$ Discard | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBLoseLife | SpellDescription$ Each opponent discards a card and loses 2 life.
+A:AB$ Discard | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ Player.Opponent | Mode$ TgtChoose | SubAbility$ DBLoseLife | SpellDescription$ Each opponent discards a card and loses 2 life.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ Player.Opponent
 A:AB$ GainControl | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DelTrig | SpellDescription$ Gain control of target creature until end of turn. Untap it. It gains haste until end of turn. Sacrifice it at the beginning of the next end step if it has mana value 3 or less.
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ TrigSac | RememberObjects$ Targeted | TriggerDescription$ Sacrifice that creature at the beginning of the next end step if it has mana value 3 or less.

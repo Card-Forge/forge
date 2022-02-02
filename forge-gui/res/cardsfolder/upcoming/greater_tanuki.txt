@@ -4,4 +4,5 @@ Types:Enchantment Creature Dog
 PT:6/5
 K:Trample
 A:AB$ ChangeZone | PrecostDesc$ Channel — | Cost$ 2 G Discard<1/CARDNAME> | ActivationZone$ Hand | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | StackDescription$ SpellDescription | SpellDescription$ Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+DeckHas:Ability$Discard
 Oracle:Trample\nChannel — {2}{G}, Discard Greater Tanuki: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.

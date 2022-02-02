@@ -2,6 +2,6 @@ Name:Undead Executioner
 ManaCost:3 B
 Types:Creature Zombie
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPump | TriggerController$ TriggeredCardController | OptionalDecider$ You | TriggerDescription$ When CARDNAME dies, you may have target creature get -2/-2 until end of turn.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPump | OptionalDecider$ You | TriggerDescription$ When CARDNAME dies, you may have target creature get -2/-2 until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True
 Oracle:When Undead Executioner dies, you may have target creature get -2/-2 until end of turn.

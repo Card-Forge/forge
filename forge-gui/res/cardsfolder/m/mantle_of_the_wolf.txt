@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 4 | AddToughness$ 4 | Description$ Enchanted creature gets +4/+4.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, create two 2/2 green Wolf creature tokens.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, create two 2/2 green Wolf creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_2_2_wolf | TokenOwner$ You | LegacyImage$ g 2 2 wolf thb
 DeckHas:Ability$Token
 Oracle:Enchant creature\nEnchanted creature gets +4/+4.\nWhen Mantle of the Wolf is put into a graveyard from the battlefield, create two 2/2 green Wolf creature tokens.

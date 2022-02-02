@@ -3,7 +3,7 @@ ManaCost:1 G G
 Types:Creature Insect
 PT:2/3
 A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPump | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, target creature gets +1/+1 until end of turn.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPump | TriggerDescription$ When CARDNAME dies, target creature gets +1/+1 until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1
 AI:RemoveDeck:All
 Oracle:When Marker Beetles dies, target creature gets +1/+1 until end of turn.\n{2}, Sacrifice Marker Beetles: Draw a card.

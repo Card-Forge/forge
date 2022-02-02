@@ -9,7 +9,7 @@ SVar:TrigCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ M1M1 | Coun
 S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step.
 T:Mode$ ChangesZone | TriggerZones$ Battlefield | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ ClearRemembered | Static$ True
 T:Mode$ Untaps | TriggerZones$ Battlefield | ValidCard$ Card.Self | Execute$ RemoveCounters | TriggerDescription$ When CARDNAME leaves the battlefield or becomes untapped, remove all -1/-1 counters from the creature.
-T:Mode$ ChangesZone | TriggerZones$ Battlefield | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ RemoveCounters | Secondary$ True | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield or becomes untapped, remove all -1/-1 counters from the creature.
+T:Mode$ ChangesZone | TriggerZones$ Battlefield | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ RemoveCounters | Secondary$ True | TriggerDescription$ When CARDNAME leaves the battlefield or becomes untapped, remove all -1/-1 counters from the creature.
 SVar:RemoveCounters:DB$ RemoveCounter | Defined$ Creature.IsRemembered | CounterType$ M1M1 | CounterNum$ All | SubAbility$ ClearRemembered
 SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All

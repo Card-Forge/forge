@@ -1,0 +1,10 @@
+Name:Thousand-Faced Shadow
+ManaCost:U
+Types:Creature Human Ninja
+PT:1/1
+K:Ninjutsu:2 U U
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self+attacking | Origin$ Hand | Destination$ Battlefield | Execute$ TrigCopy | TriggerDescription$ When CARDNAME enters the battlefield from your hand, if it's attacking, create a token that's a copy of another target attacking creature. The token enters the battlefield tapped and attacking.
+SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Creature.Other+attacking | TgtPrompt$ Select another target attacking creature | TokenTapped$ True | TokenAttacking$ True
+DeckHas:Ability$Token
+Oracle:Ninjutsu {2}{U}{U}\nFlying\nWhen Thousand-Faced Shadow enters the battlefield from your hand, if it's attacking, create a token that's a copy of another target attacking creature. The token enters the battlefield tapped and attacking.

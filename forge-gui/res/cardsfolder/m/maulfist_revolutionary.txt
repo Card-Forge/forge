@@ -4,7 +4,7 @@ Types:Creature Human Warrior
 PT:3/3
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigIncrementCounters | TriggerDescription$ When CARDNAME enters the battlefield or dies, for each kind of counter on target permanent or player, give that permanent or player another counter of that kind.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigIncrementCounters | TriggerController$ TriggeredCardController | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or dies, for each kind of counter on target permanent or player, give that permanent or player another counter of that kind.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigIncrementCounters | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or dies, for each kind of counter on target permanent or player, give that permanent or player another counter of that kind.
 SVar:TrigIncrementCounters:DB$ PutCounter | ValidTgts$ Permanent,Player | CounterType$ ExistingCounter | EachExistingCounter$ True | CounterNum$ 1
 DeckHints:Ability$Counters
 Oracle:Trample\nWhen Maulfist Revolutionary enters the battlefield or dies, for each kind of counter on target permanent or player, give that permanent or player another counter of that kind.

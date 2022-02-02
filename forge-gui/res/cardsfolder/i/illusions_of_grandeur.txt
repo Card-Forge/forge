@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Enchantment
 K:Cumulative upkeep:2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 20 life.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, you lose 20 life.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME leaves the battlefield, you lose 20 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ TriggeredCardController | LifeAmount$ 20
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ 20
 SVar:AICastPreference:MustHaveInHand$ Donate | MaxControlled$ 1 | NumManaSourcesNextTurn$ 5 | AlwaysCastIfLifeBelow$ 4

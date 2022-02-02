@@ -746,13 +746,13 @@ public class ComputerUtilCombat {
                     && !(defender.hasKeyword(Keyword.WITHER) || defender.hasKeyword(Keyword.INFECT))) {
                 return true;
             }
-            if (defender.hasKeyword(Keyword.FIRST_STRIKE) || defender.hasKeyword(Keyword.DOUBLE_STRIKE)) {
+            if (defender.hasFirstStrike() || defender.hasDoubleStrike()) {
                 firstStrikeBlockerDmg += defender.getNetCombatDamage();
             }
         }
 
         // Consider first strike and double strike
-        if (attacker.hasKeyword(Keyword.FIRST_STRIKE) || attacker.hasKeyword(Keyword.DOUBLE_STRIKE)) {
+        if (attacker.hasFirstStrike() || attacker.hasDoubleStrike()) {
             return firstStrikeBlockerDmg >= getDamageToKill(attacker, true);
         }
 
@@ -2277,7 +2277,7 @@ public class ComputerUtilCombat {
     }
 
     public final static boolean dealsFirstStrikeDamage(final Card combatant, final boolean withoutAbilities, final Combat combat) {
-        if (combatant.hasKeyword(Keyword.DOUBLE_STRIKE) || combatant.hasKeyword(Keyword.FIRST_STRIKE)) {
+        if (combatant.hasFirstStrike()|| combatant.hasDoubleStrike()) {
             return true;
         }
 

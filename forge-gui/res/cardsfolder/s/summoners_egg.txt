@@ -4,7 +4,7 @@ Types:Artifact Creature Egg
 PT:0/4
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Imprint — When CARDNAME enters the battlefield, you may exile a card from your hand face down.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | ExileFaceDown$ True | Imprint$ True
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigFaceUp | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, turn the exiled card face up. If it's a creature card, put it onto the battlefield under your control.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigFaceUp | TriggerDescription$ When CARDNAME dies, turn the exiled card face up. If it's a creature card, put it onto the battlefield under your control.
 SVar:TrigFaceUp:DB$ SetState | Defined$ Imprinted | SubAbility$ DBChangeZone | Mode$ TurnFace
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ Imprinted | Origin$ Exile | Destination$ Battlefield | ConditionDefined$ Imprinted | ConditionPresent$ Creature | GainControl$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True

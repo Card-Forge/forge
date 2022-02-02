@@ -1,0 +1,10 @@
+Name:Scrap Welder
+ManaCost:2 R
+Types:Creature Goblin Artificer
+PT:3/3
+A:AB$ ChangeZone | Cost$ T Sac<1/Artifact.cmcGTX/artifact with mana value X> | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Artifact.YouOwn | TgtPrompt$ Select target artifact card with mana value less than X | SubAbility$ DBPump | SpellDescription$ Return target artifact card with mana value less than X from your graveyard to the battlefield.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Haste | StackDescription$ SpellDescription | SpellDescription$ It gains haste until end of turn.
+SVar:X:Targeted$CardManaCost
+DeckHints:Type$Artifact
+DeckHas:Ability$Graveyard
+Oracle:{T}, Sacrifice an artifact with mana value X: Return target artifact card with mana value less than X from your graveyard to the battlefield. It gains haste until end of turn.

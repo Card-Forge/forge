@@ -7,7 +7,7 @@ SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBTok
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ tombspawn | TokenOwner$ Player.IsRemembered | LegacyImage$ tombspawn mir | RememberTokens$ True
 SVar:X:Count$ValidGraveyard Creature.RememberedPlayerCtrl
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ DestroyRemembered | TriggerDescription$ At the beginning of each end step or when CARDNAME leaves the battlefield, destroy all tokens created with CARDNAME. They can't be regenerated.
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ DestroyRemembered | Secondary$ True | TriggerController$ TriggeredCardController | TriggerDescription$ At the beginning of each end step or when CARDNAME leaves the battlefield, destroy all tokens created with CARDNAME. They can't be regenerated.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ DestroyRemembered | Secondary$ True | TriggerDescription$ At the beginning of each end step or when CARDNAME leaves the battlefield, destroy all tokens created with CARDNAME. They can't be regenerated.
 SVar:DestroyRemembered:DB$ DestroyAll | ValidCards$ Card.IsRemembered | NoRegen$ True | SubAbility$ DBCleanUp
 SVar:DBCleanUp:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random

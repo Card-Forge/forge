@@ -6,7 +6,7 @@ K:Flying
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put two +1/+1 counters on another target creature you control.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | CounterType$ P1P1 | CounterNum$ 2
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerController$ TriggeredCardController | Execute$ TrigProliferate | TriggerDescription$ When CARDNAME dies, proliferate, then proliferate again.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigProliferate | TriggerDescription$ When CARDNAME dies, proliferate, then proliferate again.
 SVar:TrigProliferate:DB$ Proliferate | SubAbility$ TrigProliferate2
 SVar:TrigProliferate2:DB$ Proliferate
 DeckHas:Ability$Proliferate|Counters

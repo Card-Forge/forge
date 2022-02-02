@@ -1,0 +1,19 @@
+Name:Tezzeret, Betrayer of Flesh
+ManaCost:2 U U
+Types:Legendary Planeswalker Tezzeret
+Loyalty:4
+T:Mode$ AbilityCast | ValidActivatingPlayer$ You | ValidCard$ Artifact | Static$ True | CheckSVar$ ArtAct | SVarCompare$ NE1 | Execute$ TrigStore
+SVar:TrigStore:DB$ Pump | NoteNumber$ 1
+SVar:ArtAct:Count$NotedNumber
+T:Mode$ TurnBegin | Execute$ TrigReset | Static$ True
+SVar:TrigReset:DB$ Pump | NoteNumber$ 0
+S:Mode$ ReduceCost | ValidCard$ Artifact.YouCtrl | Type$ Ability | Amount$ 2 | CheckSVar$ ArtAct | SVarCompare$ NE1 | AffectedZone$ Battlefield | Description$ The first activated ability of an artifact you activate each turn costs {2} less to activate.
+A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 2 | SpellDescription$ Draw two cards. Then discard two cards unless you discard an artifact card. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose | UnlessType$ Artifact
+A:AB$ Animate | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Artifact | Types$ Creature,Artifact | TgtPrompt$ Select target artifact | SubAbility$ NonVehicle | Duration$ Permanent | SpellDescription$ Target artifact becomes an artifact creature. If it isn't a vehicle, it has base power and toughness 4/4.
+SVar:NonVehicle:DB$ Animate | Defined$ Targeted.nonVehicle | Power$ 4 | Toughness$ 4 | Duration$ Permanent
+A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Tezzeret, Betrayer of Flesh | Image$ emblem_tezzeret_betrayer_of_flesh | Triggers$ ArtifactDraw | Stackable$ True | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever an artifact you control becomes tapped, draw a card."
+SVar:ArtifactDraw:Mode$ Taps | ValidActivatingPlayer$ You | ValidCard$ Artifact.YouCtrl | TriggerZones$ Command | Execute$ TrigDraw | TriggerDescription$ Whenever an artifact you control becomes tapped, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+DeckNeeds:Type$Artifact
+Oracle:The first activated ability of an artifact you activate each turn costs {2} less to activate.\n[+1]: Draw two cards. Then discard two cards unless you discard an artifact card.\n[-2]: Target artifact becomes an artifact creature. If it isn't a Vehicle, it has base power and toughness 4/4.\n[-6]: You get an emblem with "Whenever an artifact you control becomes tapped, draw a card."

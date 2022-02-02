@@ -2,7 +2,7 @@ Name:Servo Schematic
 ManaCost:2
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield or is put into a graveyard from the battlefield, create a 1/1 colorless Servo artifact creature token.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or is put into a graveyard from the battlefield, create a 1/1 colorless Servo artifact creature token.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or is put into a graveyard from the battlefield, create a 1/1 colorless Servo artifact creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_servo | TokenOwner$ You | LegacyImage$ c 1 1 a servo aer
 SVar:SacMe:5
 Oracle:When Servo Schematic enters the battlefield or is put into a graveyard from the battlefield, create a 1/1 colorless Servo artifact creature token.

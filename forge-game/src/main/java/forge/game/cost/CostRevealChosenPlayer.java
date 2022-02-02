@@ -41,7 +41,7 @@ public class CostRevealChosenPlayer extends CostPart {
     public final boolean canPay(final SpellAbility ability, final Player activator, final boolean effect) {
         final Card source = ability.getHostCard();
 
-        return source.getChosenPlayer() != null && source.getTurnInController().equals(activator);
+        return source.hasChosenPlayer() && source.getTurnInController().equals(activator);
     }
 
     @Override
