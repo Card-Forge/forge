@@ -1,0 +1,9 @@
+Name:Keimi
+ManaCost:no cost
+Colors:black,green
+Types:Legendary Creature Frog
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever you cast an enchantment spell, each opponent loses 1 life and you gain 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 1 | Defined$ Opponent | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1
+Oracle:Whenever you cast an enchantment spell, each opponent loses 1 life and you gain 1 life.
