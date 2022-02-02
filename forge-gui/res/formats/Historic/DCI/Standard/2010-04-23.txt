@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Rise of the Eldrazi
+Name:Standard (Rise of the Eldrazi)
 Type:Historic
 Subtype:Standard
 Effective:2010-04-23

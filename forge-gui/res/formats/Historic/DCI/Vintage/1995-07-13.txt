@@ -1,5 +1,5 @@
 [format]
-Name:Type I, July 13, 1995
+Name:Classic (1995-07-13)
 Type:Historic
 Subtype:Vintage
 Effective:1995-07-13

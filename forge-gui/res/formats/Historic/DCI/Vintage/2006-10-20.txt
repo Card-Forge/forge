@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Time Spiral
+Name:Vintage (Time Spiral)
 Type:Historic
 Subtype:Vintage
 Effective:2006-10-20

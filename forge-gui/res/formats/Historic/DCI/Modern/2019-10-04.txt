@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Throne of Eldraine
+Name:Modern (Throne of Eldraine)
 Type:Historic
 Subtype:Modern
 Effective:2019-10-04

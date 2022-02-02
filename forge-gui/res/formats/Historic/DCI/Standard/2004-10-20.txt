@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Champions of Kamigawa
+Name:Standard (Champions of Kamigawa)
 Type:Historic
 Subtype:Standard
 Effective:2004-10-20

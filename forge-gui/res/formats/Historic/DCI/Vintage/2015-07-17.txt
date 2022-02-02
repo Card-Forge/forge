@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Magic Origins
+Name:Vintage (Magic Origins)
 Type:Historic
 Subtype:Vintage
 Effective:2015-07-17

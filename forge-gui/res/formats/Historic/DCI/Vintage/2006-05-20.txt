@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Dissension
+Name:Vintage (Dissension)
 Type:Historic
 Subtype:Vintage
 Effective:2006-05-20

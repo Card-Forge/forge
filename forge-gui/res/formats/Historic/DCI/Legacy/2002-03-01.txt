@@ -1,5 +1,5 @@
 [format]
-Name:Type 1.5, Torment
+Name:Type 1.5 (Torment)
 Type:Historic
 Subtype:Legacy
 Effective:2002-03-01

@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Oath of the Gatewatch
+Name:Vintage (Oath of the Gatewatch)
 Type:Historic
 Subtype:Vintage
 Effective:2016-01-22

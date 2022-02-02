@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Khans of Tarkir
+Name:Modern (Khans of Tarkir)
 Type:Historic
 Subtype:Modern
 Effective:2014-09-26

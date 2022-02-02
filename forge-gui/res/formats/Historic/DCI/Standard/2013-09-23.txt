@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Theros
+Name:Standard (Theros)
 Type:Historic
 Subtype:Standard
 Effective:2013-09-23

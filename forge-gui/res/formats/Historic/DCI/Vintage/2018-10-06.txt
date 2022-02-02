@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Guilds of Ravnica
+Name:Vintage (Guilds of Ravnica)
 Type:Historic
 Subtype:Vintage
 Effective:2018-10-06

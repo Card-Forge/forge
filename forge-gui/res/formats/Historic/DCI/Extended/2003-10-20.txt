@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Mirrodin
+Name:Extended (Mirrodin)
 Type:Historic
 Subtype:Extended
 Effective:2003-10-20

@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Coldsnap
+Name:Extended (Coldsnap)
 Type:Historic
 Subtype:Extended
 Effective:2006-08-20

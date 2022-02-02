@@ -1,5 +1,5 @@
 [format]
-Name:Lorwyn Block, Lorwyn
+Name:Lorwyn Block (Lorwyn)
 Type:Historic
 Subtype:Block
 Effective:2007-10-20

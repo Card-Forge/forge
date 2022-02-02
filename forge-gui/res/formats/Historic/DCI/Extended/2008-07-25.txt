@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Eventide
+Name:Extended (Eventide)
 Type:Historic
 Subtype:Extended
 Effective:2008-07-25

@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Shadows over Innistrad
+Name:Legacy (Shadows over Innistrad)
 Type:Historic
 Subtype:Legacy
 Effective:2016-04-08

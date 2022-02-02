@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Apocalypse
+Name:Extended (Apocalypse)
 Type:Historic
 Subtype:Extended
 Effective:2001-07-01

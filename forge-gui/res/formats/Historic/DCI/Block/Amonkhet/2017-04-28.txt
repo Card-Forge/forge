@@ -1,5 +1,5 @@
 [format]
-Name:Amonkhet Block, Amonkhet
+Name:Amonkhet Block (Amonkhet)
 Type:Historic
 Subtype:Block
 Effective:2017-04-28

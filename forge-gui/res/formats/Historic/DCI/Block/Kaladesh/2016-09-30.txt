@@ -1,5 +1,5 @@
 [format]
-Name:Kaladesh Block, Kaladesh
+Name:Kaladesh Block (Kaladesh)
 Type:Historic
 Subtype:Block
 Effective:2016-09-30

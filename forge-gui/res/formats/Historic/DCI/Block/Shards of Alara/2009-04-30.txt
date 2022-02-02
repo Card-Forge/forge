@@ -1,5 +1,5 @@
 [format]
-Name:Shards of Alara Block, Alara Reborn
+Name:Shards of Alara Block (Alara Reborn)
 Type:Historic
 Subtype:Block
 Effective:2009-04-30

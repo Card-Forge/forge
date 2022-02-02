@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Dragon's Maze
+Name:Vintage (Dragon's Maze)
 Type:Historic
 Subtype:Vintage
 Effective:2013-05-03

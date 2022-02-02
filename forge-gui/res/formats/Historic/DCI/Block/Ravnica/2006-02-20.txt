@@ -1,5 +1,5 @@
 [format]
-Name:Ravnica Block, Guildpact
+Name:Ravnica Block (Guildpact)
 Type:Historic
 Subtype:Block
 Effective:2006-02-20

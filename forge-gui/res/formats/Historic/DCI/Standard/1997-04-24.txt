@@ -1,5 +1,5 @@
 [format]
-Name:Type II, Fifth Edition
+Name:Type II (Fifth Edition)
 Type:Historic
 Subtype:Standard
 Effective:1997-04-24

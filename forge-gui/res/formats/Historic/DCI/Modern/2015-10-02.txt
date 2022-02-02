@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Battle for Zendikar
+Name:Modern (Battle for Zendikar)
 Type:Historic
 Subtype:Modern
 Effective:2015-10-02

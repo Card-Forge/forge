@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Scourge
+Name:Extended (Scourge)
 Type:Historic
 Subtype:Extended
 Effective:2003-07-01

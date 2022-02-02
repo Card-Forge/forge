@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Saviors of Kamigawa
+Name:Standard (Saviors of Kamigawa)
 Type:Historic
 Subtype:Standard
 Effective:2005-06-20

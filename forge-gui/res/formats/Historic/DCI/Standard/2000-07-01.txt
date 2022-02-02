@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Prophecy
+Name:Standard (Prophecy)
 Type:Historic
 Subtype:Standard
 Effective:2000-07-01

@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Shadows over Innistrad
+Name:Vintage (Shadows over Innistrad)
 Type:Historic
 Subtype:Vintage
 Effective:2016-04-08

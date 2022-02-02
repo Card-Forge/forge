@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Kaladesh
+Name:Modern (Kaladesh)
 Type:Historic
 Subtype:Modern
 Effective:2016-09-30

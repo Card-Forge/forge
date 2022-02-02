@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Zendikar
+Name:Extended (Zendikar)
 Type:Historic
 Subtype:Extended
 Effective:2009-10-02

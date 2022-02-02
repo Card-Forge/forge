@@ -1,5 +1,5 @@
 [format]
-Name:Ice Age, Coldsnap
+Name:Ice Age (Coldsnap)
 Type:Historic
 Subtype:Block
 Effective:2006-08-20

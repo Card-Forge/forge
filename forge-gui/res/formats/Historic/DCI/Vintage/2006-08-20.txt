@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Coldsnap
+Name:Vintage (Coldsnap)
 Type:Historic
 Subtype:Vintage
 Effective:2006-08-20

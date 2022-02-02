@@ -1,5 +1,5 @@
 [format]
-Name:Classic-Restricted, 04/01/99
+Name:Classic-Restricted (1999-04-01)
 Type:Historic
 Subtype:Legacy
 Effective:1999-04-01

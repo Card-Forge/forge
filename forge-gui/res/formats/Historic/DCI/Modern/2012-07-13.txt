@@ -1,5 +1,5 @@
 [format]
-Name:Modern, 2013 Core Set
+Name:Modern (2013 Core Set)
 Type:Historic
 Subtype:Modern
 Effective:2012-07-13

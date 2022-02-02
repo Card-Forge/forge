@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Kaldheim
+Name:Modern (Kaldheim)
 Type:Historic
 Subtype:Modern
 Effective:2021-02-05

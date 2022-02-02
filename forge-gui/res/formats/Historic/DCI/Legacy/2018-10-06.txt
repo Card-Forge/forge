@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Guilds of Ravnica
+Name:Legacy (Guilds of Ravnica)
 Type:Historic
 Subtype:Legacy
 Effective:2018-10-06

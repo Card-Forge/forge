@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, New Phyrexia
+Name:Legacy (New Phyrexia)
 Type:Historic
 Subtype:Legacy
 Effective:2011-05-13

@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Commander 2014
+Name:Vintage (Commander 2014)
 Type:Historic
 Subtype:Vintage
 Effective:2014-11-07

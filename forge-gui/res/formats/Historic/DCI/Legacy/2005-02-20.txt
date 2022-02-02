@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Betrayers of Kamigawa
+Name:Legacy (Betrayers of Kamigawa)
 Type:Historic
 Subtype:Legacy
 Effective:2005-02-20

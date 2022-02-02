@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Fifth Dawn
+Name:Extended (Fifth Dawn)
 Type:Historic
 Subtype:Extended
 Effective:2004-06-20

@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Return to Ravnica
+Name:Modern (Return to Ravnica)
 Type:Historic
 Subtype:Modern
 Effective:2012-10-05

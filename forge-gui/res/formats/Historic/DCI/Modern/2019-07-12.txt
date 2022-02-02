@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Core Set 2020
+Name:Modern (Core Set 2020)
 Type:Historic
 Subtype:Modern
 Effective:2019-07-12

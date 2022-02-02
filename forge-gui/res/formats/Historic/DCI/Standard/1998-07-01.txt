@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Exodus
+Name:Standard (Exodus)
 Type:Historic
 Subtype:Standard
 Effective:1998-07-01

@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Gift Pack 2018
+Name:Vintage (Gift Pack 2018)
 Type:Historic
 Subtype:Vintage
 Effective:2018-11-16

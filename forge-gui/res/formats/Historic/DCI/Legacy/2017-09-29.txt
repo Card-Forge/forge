@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Ixalan
+Name:Legacy (Ixalan)
 Type:Historic
 Subtype:Legacy
 Effective:2017-09-29

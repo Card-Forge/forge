@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Rise of the Eldrazi
+Name:Vintage (Rise of the Eldrazi)
 Type:Historic
 Subtype:Vintage
 Effective:2010-04-23

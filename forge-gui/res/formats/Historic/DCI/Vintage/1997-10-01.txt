@@ -1,5 +1,5 @@
 [format]
-Name:Classic, 10/01/97
+Name:Classic (1997-10-01)
 Type:Historic
 Subtype:Vintage
 Effective:1997-10-01

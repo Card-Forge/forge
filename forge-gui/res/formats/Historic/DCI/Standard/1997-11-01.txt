@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Tempest
+Name:Standard (Tempest)
 Type:Historic
 Subtype:Standard
 Effective:1997-11-01

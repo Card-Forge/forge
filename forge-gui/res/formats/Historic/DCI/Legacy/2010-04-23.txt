@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Rise of the Eldrazi
+Name:Legacy (Rise of the Eldrazi)
 Type:Historic
 Subtype:Legacy
 Effective:2010-04-23

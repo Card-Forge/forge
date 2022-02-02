@@ -1,5 +1,5 @@
 [format]
-Name:Shards of Alara Block, Conflux
+Name:Shards of Alara Block (Conflux)
 Type:Historic
 Subtype:Block
 Effective:2009-02-06

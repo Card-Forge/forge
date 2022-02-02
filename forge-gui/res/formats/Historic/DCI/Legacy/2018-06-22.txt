@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Jiang Yanggu & Mu Yanling
+Name:Legacy (Jiang Yanggu & Mu Yanling)
 Type:Historic
 Subtype:Legacy
 Effective:2018-06-22

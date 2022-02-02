@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, War of the Spark
+Name:Legacy (War of the Spark)
 Type:Historic
 Subtype:Legacy
 Effective:2019-05-24

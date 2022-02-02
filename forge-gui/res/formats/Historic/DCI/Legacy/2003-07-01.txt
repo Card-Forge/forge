@@ -1,5 +1,5 @@
 [format]
-Name:Type 1.5, Scourge
+Name:Type 1.5 (Scourge)
 Type:Historic
 Subtype:Legacy
 Effective:2003-07-01

@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Tenth Edition
+Name:Standard (Tenth Edition)
 Type:Historic
 Subtype:Standard
 Effective:2007-07-20

@@ -1,5 +1,5 @@
 [format]
-Name:Khans of Tarkir Block, Dragons of Tarkir
+Name:Khans of Tarkir Block (Dragons of Tarkir)
 Type:Historic
 Subtype:Block
 Effective:2015-03-27

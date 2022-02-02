@@ -1,5 +1,5 @@
 [format]
-Name:Type 1, 01/01/02
+Name:Type 1 (2002-01-01)
 Type:Historic
 Subtype:Vintage
 Effective:2002-01-01

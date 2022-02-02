@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Ninth Edition
+Name:Legacy (Ninth Edition)
 Type:Historic
 Subtype:Legacy
 Effective:2005-08-20

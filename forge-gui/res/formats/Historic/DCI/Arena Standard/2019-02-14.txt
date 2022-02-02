@@ -1,5 +1,5 @@
 [format]
-Name:Arena Standard, 2/14/19
+Name:Arena Standard (2019-02-14)
 Type:Historic
 Subtype:Standard
 Effective:2019-02-14

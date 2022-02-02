@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Journey into Nyx
+Name:Modern (Journey into Nyx)
 Type:Historic
 Subtype:Modern
 Effective:2014-05-02

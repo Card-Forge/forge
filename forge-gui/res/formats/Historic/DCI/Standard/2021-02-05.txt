@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Kaldheim
+Name:Standard (Kaldheim)
 Type:Historic
 Subtype:Standard
 Effective:2021-02-05

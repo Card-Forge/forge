@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Shards of Alara
+Name:Legacy (Shards of Alara)
 Type:Historic
 Subtype:Legacy
 Effective:2008-10-03

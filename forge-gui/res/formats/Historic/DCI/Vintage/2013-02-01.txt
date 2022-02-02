@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Gatecrash
+Name:Vintage (Gatecrash)
 Type:Historic
 Subtype:Vintage
 Effective:2013-02-01

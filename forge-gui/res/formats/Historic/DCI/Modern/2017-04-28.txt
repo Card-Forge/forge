@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Amonkhet
+Name:Modern (Amonkhet)
 Type:Historic
 Subtype:Modern
 Effective:2017-04-28

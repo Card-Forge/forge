@@ -1,5 +1,5 @@
 [format]
-Name:Type I, Mirage
+Name:Classic (Mirage)
 Type:Historic
 Subtype:Vintage
 Effective:1996-11-08

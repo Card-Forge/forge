@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Classic Sixth Edition
+Name:Standard (Classic Sixth Edition)
 Type:Historic
 Subtype:Standard
 Effective:1999-06-01

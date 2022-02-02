@@ -1,5 +1,5 @@
 [format]
-Name:Type II, Visions
+Name:Type II (Visions)
 Type:Historic
 Subtype:Standard
 Effective:1997-03-03

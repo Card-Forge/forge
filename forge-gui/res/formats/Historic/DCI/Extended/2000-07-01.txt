@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Prophecy
+Name:Extended (Prophecy)
 Type:Historic
 Subtype:Extended
 Effective:2000-07-01

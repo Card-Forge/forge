@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Scars of Mirrodin
+Name:Standard (Scars of Mirrodin)
 Type:Historic
 Subtype:Standard
 Effective:2010-07-16

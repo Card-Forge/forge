@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Fate Reforged
+Name:Standard (Fate Reforged)
 Type:Historic
 Subtype:Standard
 Effective:2015-01-23

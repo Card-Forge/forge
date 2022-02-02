@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Alara Reborn
+Name:Standard (Alara Reborn)
 Type:Historic
 Subtype:Standard
 Effective:2009-04-30

@@ -1,5 +1,5 @@
 [format]
-Name:Classic-Restricted, Weatherlight
+Name:Classic-Restricted (Weatherlight)
 Type:Historic
 Subtype:Legacy
 Effective:1997-07-01

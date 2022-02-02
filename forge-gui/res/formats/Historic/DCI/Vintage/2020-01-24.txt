@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Theros Beyond Death
+Name:Vintage (Theros Beyond Death)
 Type:Historic
 Subtype:Vintage
 Effective:2020-01-24

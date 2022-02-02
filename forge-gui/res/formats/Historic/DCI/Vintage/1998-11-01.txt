@@ -1,5 +1,5 @@
 [format]
-Name:Classic, Urza's Saga
+Name:Classic (Urza's Saga)
 Type:Historic
 Subtype:Vintage
 Effective:1998-11-01

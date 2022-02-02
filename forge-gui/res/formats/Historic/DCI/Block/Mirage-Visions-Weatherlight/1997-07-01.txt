@@ -1,5 +1,5 @@
 [format]
-Name:Mirage/Visions/Weatherlight Block, Weatherlight
+Name:Mirage/Visions/Weatherlight Block (Weatherlight)
 Type:Historic
 Subtype:Block
 Effective:1997-07-01

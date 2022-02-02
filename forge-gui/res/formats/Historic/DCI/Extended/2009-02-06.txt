@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Conflux
+Name:Extended (Conflux)
 Type:Historic
 Subtype:Extended
 Effective:2009-02-06

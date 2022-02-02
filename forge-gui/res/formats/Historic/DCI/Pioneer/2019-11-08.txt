@@ -1,5 +1,5 @@
 [format]
-Name:Pioneer, 11/4/19
+Name:Pioneer (2019-11-04)
 Type:Historic
 Subtype:Pioneer
 Effective:2019-11-04

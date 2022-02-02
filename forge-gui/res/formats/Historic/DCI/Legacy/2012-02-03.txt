@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Dark Ascension
+Name:Legacy (Dark Ascension)
 Type:Historic
 Subtype:Legacy
 Effective:2012-02-03

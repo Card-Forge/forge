@@ -1,5 +1,5 @@
 [format]
-Name:Type 1.5, Seventh Edition
+Name:Type 1.5 (Seventh Edition)
 Type:Historic
 Subtype:Legacy
 Effective:2001-05-01

@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Theros
+Name:Vintage (Theros)
 Type:Historic
 Subtype:Vintage
 Effective:2013-09-23

@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Kaldheim
+Name:Vintage (Kaldheim)
 Type:Historic
 Subtype:Vintage
 Effective:2021-02-05

@@ -1,5 +1,5 @@
 [format]
-Name:Onslaught Block, Scourge
+Name:Onslaught Block (Scourge)
 Type:Historic
 Subtype:Block
 Effective:2003-07-01

@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Amonkhet
+Name:Vintage (Amonkhet)
 Type:Historic
 Subtype:Vintage
 Effective:2017-04-28

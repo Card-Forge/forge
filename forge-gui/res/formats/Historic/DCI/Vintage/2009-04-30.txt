@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Alara Reborn
+Name:Vintage (Alara Reborn)
 Type:Historic
 Subtype:Vintage
 Effective:2009-04-30

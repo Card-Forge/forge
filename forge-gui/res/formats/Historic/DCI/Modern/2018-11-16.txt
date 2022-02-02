@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Gift Pack 2018
+Name:Modern (Gift Pack 2018)
 Type:Historic
 Subtype:Modern
 Effective:2018-11-16

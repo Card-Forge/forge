@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Tenth Edition
+Name:Extended (Tenth Edition)
 Type:Historic
 Subtype:Extended
 Effective:2007-07-20

@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Dissension
+Name:Legacy (Dissension)
 Type:Historic
 Subtype:Legacy
 Effective:2006-05-20

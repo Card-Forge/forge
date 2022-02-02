@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Commander Legends
+Name:Vintage (Commander Legends)
 Type:Historic
 Subtype:Vintage
 Effective:2020-11-20

@@ -1,5 +1,5 @@
 [format]
-Name:Type II, Alliances
+Name:Type II (Alliances)
 Type:Historic
 Subtype:Standard
 Effective:1996-07-10

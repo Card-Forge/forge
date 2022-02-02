@@ -1,5 +1,5 @@
 [format]
-Name:Type 1.5, Mercadian Masques
+Name:Type 1.5 (Mercadian Masques)
 Type:Historic
 Subtype:Legacy
 Effective:1999-11-01

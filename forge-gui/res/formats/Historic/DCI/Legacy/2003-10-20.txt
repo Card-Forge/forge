@@ -1,5 +1,5 @@
 [format]
-Name:Type 1.5, Mirrodin
+Name:Type 1.5 (Mirrodin)
 Type:Historic
 Subtype:Legacy
 Effective:2003-10-20

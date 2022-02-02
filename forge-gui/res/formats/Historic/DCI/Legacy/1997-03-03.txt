@@ -1,5 +1,5 @@
 [format]
-Name:Type I.5, Visions
+Name:Type I.5 (Visions)
 Type:Historic
 Subtype:Legacy
 Effective:1997-03-03

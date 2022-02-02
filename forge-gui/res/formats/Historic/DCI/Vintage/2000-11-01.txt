@@ -1,5 +1,5 @@
 [format]
-Name:Type 1, Invasion
+Name:Type 1 (Invasion)
 Type:Historic
 Subtype:Vintage
 Effective:2000-11-01

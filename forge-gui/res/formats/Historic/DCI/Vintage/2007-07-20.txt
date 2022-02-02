@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Tenth Edition
+Name:Vintage (Tenth Edition)
 Type:Historic
 Subtype:Vintage
 Effective:2007-07-20

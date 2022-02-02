@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Kaldheim
+Name:Legacy (Kaldheim)
 Type:Historic
 Subtype:Legacy
 Effective:2021-02-05

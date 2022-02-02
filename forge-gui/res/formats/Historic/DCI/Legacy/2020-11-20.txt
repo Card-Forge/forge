@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Commander Legends
+Name:Legacy (Commander Legends)
 Type:Historic
 Subtype:Legacy
 Effective:2020-11-20

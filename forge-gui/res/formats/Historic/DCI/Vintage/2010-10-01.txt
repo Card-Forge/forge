@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Scars of Mirrodin
+Name:Vintage (Scars of Mirrodin)
 Type:Historic
 Subtype:Vintage
 Effective:2010-10-01

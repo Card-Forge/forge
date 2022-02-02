@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Urza's Legacy
+Name:Standard (Urza's Legacy)
 Type:Historic
 Subtype:Standard
 Effective:1999-03-01

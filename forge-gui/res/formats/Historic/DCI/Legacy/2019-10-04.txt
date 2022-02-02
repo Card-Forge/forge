@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Throne of Eldraine
+Name:Legacy (Throne of Eldraine)
 Type:Historic
 Subtype:Legacy
 Effective:2019-10-04

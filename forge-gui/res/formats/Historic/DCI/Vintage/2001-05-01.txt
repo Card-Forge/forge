@@ -1,5 +1,5 @@
 [format]
-Name:Type 1, Seventh Edition
+Name:Type 1 (Seventh Edition)
 Type:Historic
 Subtype:Vintage
 Effective:2001-05-01

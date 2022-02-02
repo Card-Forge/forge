@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Eldritch Moon
+Name:Legacy (Eldritch Moon)
 Type:Historic
 Subtype:Legacy
 Effective:2016-07-22

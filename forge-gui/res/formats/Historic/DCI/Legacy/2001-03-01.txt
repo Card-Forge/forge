@@ -1,5 +1,5 @@
 [format]
-Name:Type 1.5, Planeshift
+Name:Type 1.5 (Planeshift)
 Type:Historic
 Subtype:Legacy
 Effective:2001-03-01

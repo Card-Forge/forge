@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Dominaria
+Name:Standard (Dominaria)
 Type:Historic
 Subtype:Standard
 Effective:2018-04-27

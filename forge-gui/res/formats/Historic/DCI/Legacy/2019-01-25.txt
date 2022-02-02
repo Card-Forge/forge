@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Ravnica Allegiance
+Name:Legacy (Ravnica Allegiance)
 Type:Historic
 Subtype:Legacy
 Effective:2019-01-25

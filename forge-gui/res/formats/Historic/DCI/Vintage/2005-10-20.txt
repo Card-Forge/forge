@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Ravnica: City of Guilds
+Name:Vintage (Ravnica: City of Guilds)
 Type:Historic
 Subtype:Vintage
 Effective:2005-10-20

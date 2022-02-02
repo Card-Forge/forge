@@ -1,5 +1,5 @@
 [format]
-Name:Type II, 04/01/96
+Name:Type II (1996-04-01)
 Type:Historic
 Subtype:Standard
 Effective:1996-04-01

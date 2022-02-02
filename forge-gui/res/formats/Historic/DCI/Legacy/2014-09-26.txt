@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Khans of Tarkir
+Name:Legacy (Khans of Tarkir)
 Type:Historic
 Subtype:Legacy
 Effective:2014-09-26

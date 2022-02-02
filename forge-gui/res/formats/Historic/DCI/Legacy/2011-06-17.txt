@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Commander
+Name:Legacy (Commander)
 Type:Historic
 Subtype:Legacy
 Effective:2011-06-17

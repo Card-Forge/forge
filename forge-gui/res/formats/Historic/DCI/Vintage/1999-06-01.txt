@@ -1,5 +1,5 @@
 [format]
-Name:Classic, Classic Sixth Edition
+Name:Classic (Classic Sixth Edition)
 Type:Historic
 Subtype:Vintage
 Effective:1999-06-01

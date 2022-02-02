@@ -1,5 +1,5 @@
 [format]
-Name:Classic, Weatherlight
+Name:Classic (Weatherlight)
 Type:Historic
 Subtype:Vintage
 Effective:1997-07-01

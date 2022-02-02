@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Kaladesh
+Name:Legacy (Kaladesh)
 Type:Historic
 Subtype:Legacy
 Effective:2016-09-30

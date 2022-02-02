@@ -1,5 +1,5 @@
 [format]
-Name:Type I, Ice Age
+Name:Classic (Ice Age)
 Type:Historic
 Subtype:Vintage
 Effective:1995-06

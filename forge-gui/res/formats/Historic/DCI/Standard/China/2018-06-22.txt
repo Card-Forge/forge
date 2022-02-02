@@ -1,5 +1,5 @@
 [format]
-Name:China Standard, Jiang Yanggu & Mu Yanling
+Name:China Standard (Jiang Yanggu & Mu Yanling)
 Type:Historic
 Subtype:Standard
 Effective:2018-06-22

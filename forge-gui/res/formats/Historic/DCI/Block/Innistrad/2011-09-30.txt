@@ -1,5 +1,5 @@
 [format]
-Name:Innistrad Block, Innistrad
+Name:Innistrad Block (Innistrad)
 Type:Historic
 Subtype:Block
 Effective:2011-09-30

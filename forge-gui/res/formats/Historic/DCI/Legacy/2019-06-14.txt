@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Modern Horizons
+Name:Legacy (Modern Horizons)
 Type:Historic
 Subtype:Legacy
 Effective:2019-06-14

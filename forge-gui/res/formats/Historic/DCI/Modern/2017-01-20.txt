@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Aether Revolt
+Name:Modern (Aether Revolt)
 Type:Historic
 Subtype:Modern
 Effective:2017-01-20

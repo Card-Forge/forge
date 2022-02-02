@@ -1,5 +1,5 @@
 [format]
-Name:Extended, 2011 Core Set
+Name:Extended (2011 Core Set)
 Type:Historic
 Subtype:Extended
 Effective:2010-07-16

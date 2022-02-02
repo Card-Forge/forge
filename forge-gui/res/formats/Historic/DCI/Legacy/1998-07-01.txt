@@ -1,5 +1,5 @@
 [format]
-Name:Classic-Restricted, Exodus
+Name:Classic-Restricted (Exodus)
 Type:Historic
 Subtype:Legacy
 Effective:1998-07-01

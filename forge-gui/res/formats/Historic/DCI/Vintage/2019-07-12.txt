@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Core Set 2020
+Name:Vintage (Core Set 2020)
 Type:Historic
 Subtype:Vintage
 Effective:2019-07-12

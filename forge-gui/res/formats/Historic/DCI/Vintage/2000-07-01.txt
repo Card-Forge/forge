@@ -1,5 +1,5 @@
 [format]
-Name:Type 1, Prophecy
+Name:Type 1 (Prophecy)
 Type:Historic
 Subtype:Vintage
 Effective:2000-07-01

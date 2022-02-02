@@ -1,5 +1,5 @@
 [format]
-Name:Battle for Zendikar Block, Battle for Zendikar
+Name:Battle for Zendikar Block (Battle for Zendikar)
 Type:Historic
 Subtype:Block
 Effective:2015-10-02

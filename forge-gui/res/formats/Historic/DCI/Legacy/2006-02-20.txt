@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Guildpact
+Name:Legacy (Guildpact)
 Type:Historic
 Subtype:Legacy
 Effective:2006-02-20

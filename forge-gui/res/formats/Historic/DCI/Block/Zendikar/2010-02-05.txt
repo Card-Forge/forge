@@ -1,5 +1,5 @@
 [format]
-Name:Zendikar Block, Worldwake
+Name:Zendikar Block (Worldwake)
 Type:Historic
 Subtype:Block
 Effective:2010-02-05

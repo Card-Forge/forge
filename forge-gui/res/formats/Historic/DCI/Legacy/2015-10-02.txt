@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Battle for Zendikar
+Name:Legacy (Battle for Zendikar)
 Type:Historic
 Subtype:Legacy
 Effective:2015-10-02

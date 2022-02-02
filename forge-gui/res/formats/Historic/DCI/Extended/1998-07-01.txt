@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Exodus
+Name:Extended (Exodus)
 Type:Historic
 Subtype:Extended
 Effective:1998-07-01

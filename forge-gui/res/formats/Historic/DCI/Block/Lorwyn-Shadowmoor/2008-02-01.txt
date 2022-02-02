@@ -1,5 +1,5 @@
 [format]
-Name:Lorwyn Block, Morningtide
+Name:Lorwyn Block (Morningtide)
 Type:Historic
 Subtype:Block
 Effective:2008-02-01

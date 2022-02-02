@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Jiang Yanggu & Mu Yanling
+Name:Vintage (Jiang Yanggu & Mu Yanling)
 Type:Historic
 Subtype:Vintage
 Effective:2018-06-22

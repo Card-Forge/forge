@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Born of the Gods
+Name:Vintage (Born of the Gods)
 Type:Historic
 Subtype:Vintage
 Effective:2014-02-07

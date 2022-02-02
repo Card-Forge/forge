@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Shards of Alara
+Name:Vintage (Shards of Alara)
 Type:Historic
 Subtype:Vintage
 Effective:2008-10-03

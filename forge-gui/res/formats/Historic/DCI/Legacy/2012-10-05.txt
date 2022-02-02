@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Return to Ravnica
+Name:Legacy (Return to Ravnica)
 Type:Historic
 Subtype:Legacy
 Effective:2012-10-05

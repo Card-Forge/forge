@@ -1,5 +1,5 @@
 [format]
-Name:"Type 1.5", 09/20/04
+Name:"Type 1.5" (2004-09-20)
 Type:Historic
 Subtype:Legacy
 Effective:2004-09-20

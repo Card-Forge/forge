@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Fate Reforged
+Name:Vintage (Fate Reforged)
 Type:Historic
 Subtype:Vintage
 Effective:2015-01-23

@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Mercadian Masques
+Name:Extended (Mercadian Masques)
 Type:Historic
 Subtype:Extended
 Effective:1999-11-01

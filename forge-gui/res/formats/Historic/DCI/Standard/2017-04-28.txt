@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Amonkhet
+Name:Standard (Amonkhet)
 Type:Historic
 Subtype:Standard
 Effective:2017-04-28

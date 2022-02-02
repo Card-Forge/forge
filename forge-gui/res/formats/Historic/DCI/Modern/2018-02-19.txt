@@ -1,5 +1,5 @@
 [format]
-Name:Modern, 02/12/18
+Name:Modern (2018-02-12)
 Type:Historic
 Subtype:Modern
 Effective:2018-02-12

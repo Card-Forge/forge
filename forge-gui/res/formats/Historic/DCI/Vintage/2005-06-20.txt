@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Saviors of Kamigawa
+Name:Vintage (Saviors of Kamigawa)
 Type:Historic
 Subtype:Vintage
 Effective:2005-06-20

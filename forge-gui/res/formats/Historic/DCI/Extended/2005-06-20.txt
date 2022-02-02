@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Saviors of Kamigawa
+Name:Extended (Saviors of Kamigawa)
 Type:Historic
 Subtype:Extended
 Effective:2005-06-20

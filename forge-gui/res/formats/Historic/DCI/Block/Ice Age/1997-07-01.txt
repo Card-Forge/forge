@@ -1,5 +1,5 @@
 [format]
-Name:Ice Age/Homelands/Alliances, 07/01/97
+Name:Ice Age/Homelands/Alliances (1997-07-01)
 Type:Historic
 Subtype:Block
 Effective:1997-07-01

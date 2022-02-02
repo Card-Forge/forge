@@ -1,5 +1,5 @@
 [format]
-Name:Return to Ravnica Block, Gatecrash
+Name:Return to Ravnica Block (Gatecrash)
 Type:Historic
 Subtype:Block
 Effective:2013-02-01

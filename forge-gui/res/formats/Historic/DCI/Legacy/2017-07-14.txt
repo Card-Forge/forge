@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Hour of Devastation
+Name:Legacy (Hour of Devastation)
 Type:Historic
 Subtype:Legacy
 Effective:2017-07-14

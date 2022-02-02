@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Aether Revolt
+Name:Legacy (Aether Revolt)
 Type:Historic
 Subtype:Legacy
 Effective:2017-01-20

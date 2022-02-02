@@ -1,5 +1,5 @@
 [format]
-Name:Type 1.5, Apocalypse
+Name:Type 1.5 (Apocalypse)
 Type:Historic
 Subtype:Legacy
 Effective:2001-07-01

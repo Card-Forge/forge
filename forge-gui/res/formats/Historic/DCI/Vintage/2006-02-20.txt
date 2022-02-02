@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Guildpact
+Name:Vintage (Guildpact)
 Type:Historic
 Subtype:Vintage
 Effective:2006-02-20

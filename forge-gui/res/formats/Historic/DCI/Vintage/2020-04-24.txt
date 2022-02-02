@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Ikoria Lair of Behemoths
+Name:Vintage (Ikoria Lair of Behemoths)
 Type:Historic
 Subtype:Vintage
 Effective:2020-04-24

@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Throne of Eldraine
+Name:Vintage (Throne of Eldraine)
 Type:Historic
 Subtype:Vintage
 Effective:2019-10-04

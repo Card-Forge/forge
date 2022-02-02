@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Shadows over Innistrad
+Name:Standard (Shadows over Innistrad)
 Type:Historic
 Subtype:Standard
 Effective:2016-04-08

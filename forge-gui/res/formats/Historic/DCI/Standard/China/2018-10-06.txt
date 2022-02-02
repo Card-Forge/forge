@@ -1,5 +1,5 @@
 [format]
-Name:China Standard, Guilds of Ravnica
+Name:China Standard (Guilds of Ravnica)
 Type:Historic
 Subtype:Standard
 Effective:2018-10-06

@@ -1,5 +1,5 @@
 [format]
-Name:Classic-Restricted, Urza's Saga
+Name:Classic-Restricted (Urza's Saga)
 Type:Historic
 Subtype:Legacy
 Effective:1998-11-01

@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Zendikar Rising
+Name:Standard (Zendikar Rising)
 Type:Historic
 Subtype:Standard
 Effective:2020-09-25

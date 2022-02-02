@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Aether Revolt
+Name:Standard (Aether Revolt)
 Type:Historic
 Subtype:Standard
 Effective:2017-01-20

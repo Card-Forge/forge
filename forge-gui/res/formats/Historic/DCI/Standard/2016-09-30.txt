@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Kaladesh
+Name:Standard (Kaladesh)
 Type:Historic
 Subtype:Standard
 Effective:2016-09-30

@@ -1,5 +1,5 @@
 [format]
-Name:Invasion Block, Planeshift
+Name:Invasion Block (Planeshift)
 Type:Historic
 Subtype:Block
 Effective:2001-03-01

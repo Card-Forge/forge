@@ -1,5 +1,5 @@
 [format]
-Name:Ravnica Block, Ravnica: City of Guilds
+Name:Ravnica Block (Ravnica: City of Guilds)
 Type:Historic
 Subtype:Block
 Effective:2005-10-20

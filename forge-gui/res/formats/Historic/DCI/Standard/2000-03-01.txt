@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Nemesis
+Name:Standard (Nemesis)
 Type:Historic
 Subtype:Standard
 Effective:2000-03-01

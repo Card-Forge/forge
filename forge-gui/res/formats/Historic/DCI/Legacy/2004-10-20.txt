@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Champions of Kamigawa
+Name:Legacy (Champions of Kamigawa)
 Type:Historic
 Subtype:Legacy
 Effective:2004-10-20

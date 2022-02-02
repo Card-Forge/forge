@@ -1,5 +1,5 @@
 [format]
-Name:Type I, Alliances
+Name:Classic (Alliances)
 Type:Historic
 Subtype:Vintage
 Effective:1996-07-10

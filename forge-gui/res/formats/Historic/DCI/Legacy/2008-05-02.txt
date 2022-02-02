@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Shadowmoor
+Name:Legacy (Shadowmoor)
 Type:Historic
 Subtype:Legacy
 Effective:2008-05-02

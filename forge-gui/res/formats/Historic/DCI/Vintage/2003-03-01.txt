@@ -1,5 +1,5 @@
 [format]
-Name:Type 1, Legions
+Name:Type 1 (Legions)
 Type:Historic
 Subtype:Vintage
 Effective:2003-03-01

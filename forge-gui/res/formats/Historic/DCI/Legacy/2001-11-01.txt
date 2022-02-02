@@ -1,5 +1,5 @@
 [format]
-Name:Type 1.5, Odyssey
+Name:Type 1.5 (Odyssey)
 Type:Historic
 Subtype:Legacy
 Effective:2001-11-01

@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Magic Origins
+Name:Legacy (Magic Origins)
 Type:Historic
 Subtype:Legacy
 Effective:2015-07-17

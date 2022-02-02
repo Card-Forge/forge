@@ -1,5 +1,5 @@
 [format]
-Name:Type I.5, 07/01/96
+Name:Type I.5 (1996-07-01)
 Type:Historic
 Subtype:Legacy
 Effective:1996-07-01

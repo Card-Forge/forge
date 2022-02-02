@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Ravnica Allegiance
+Name:Modern (Ravnica Allegiance)
 Type:Historic
 Subtype:Modern
 Effective:2019-01-25

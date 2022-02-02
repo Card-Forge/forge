@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Dragons of Tarkir
+Name:Standard (Dragons of Tarkir)
 Type:Historic
 Subtype:Standard
 Effective:2015-03-23

@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, 2012 Core Set
+Name:Vintage (2012 Core Set)
 Type:Historic
 Subtype:Vintage
 Effective:2011-07-15

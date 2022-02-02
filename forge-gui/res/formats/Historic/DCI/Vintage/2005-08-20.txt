@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Ninth Edition
+Name:Vintage (Ninth Edition)
 Type:Historic
 Subtype:Vintage
 Effective:2005-08-20

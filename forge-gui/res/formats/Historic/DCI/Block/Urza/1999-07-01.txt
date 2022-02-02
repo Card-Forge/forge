@@ -1,5 +1,5 @@
 [format]
-Name:Urza Block, Urza's Destiny
+Name:Urza Block (Urza's Destiny)
 Type:Historic
 Subtype:Block
 Effective:1999-07-01

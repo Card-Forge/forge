@@ -1,5 +1,5 @@
 [format]
-Name:Classic, Urza's Destiny
+Name:Classic (Urza's Destiny)
 Type:Historic
 Subtype:Vintage
 Effective:1999-07-01

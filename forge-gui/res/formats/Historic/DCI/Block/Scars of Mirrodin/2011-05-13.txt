@@ -1,5 +1,5 @@
 [format]
-Name:Scars of Mirrodin Block, New Phyrexia
+Name:Scars of Mirrodin Block (New Phyrexia)
 Type:Historic
 Subtype:Block
 Effective:2011-05-13

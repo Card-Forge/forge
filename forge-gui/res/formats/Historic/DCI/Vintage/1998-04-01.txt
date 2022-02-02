@@ -1,5 +1,5 @@
 [format]
-Name:Classic, Stronghold
+Name:Classic (Stronghold)
 Type:Historic
 Subtype:Vintage
 Effective:1998-04-01

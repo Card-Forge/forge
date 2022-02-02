@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Darksteel
+Name:Extended (Darksteel)
 Type:Historic
 Subtype:Extended
 Effective:2004-02-20

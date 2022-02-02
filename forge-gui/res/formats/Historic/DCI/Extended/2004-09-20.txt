@@ -1,5 +1,5 @@
 [format]
-Name:Extended, 09/20/04
+Name:Extended (2004-09-20)
 Type:Historic
 Subtype:Extended
 Effective:2004-09-20

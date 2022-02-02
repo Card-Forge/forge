@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Aether Revolt
+Name:Vintage (Aether Revolt)
 Type:Historic
 Subtype:Vintage
 Effective:2017-01-20

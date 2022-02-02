@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Avacyn Restored
+Name:Legacy (Avacyn Restored)
 Type:Historic
 Subtype:Legacy
 Effective:2012-05-04

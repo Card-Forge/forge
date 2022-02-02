@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Oath of the Gatewatch
+Name:Legacy (Oath of the Gatewatch)
 Type:Historic
 Subtype:Legacy
 Effective:2016-01-22

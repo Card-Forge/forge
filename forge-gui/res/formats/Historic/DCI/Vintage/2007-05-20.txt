@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Future Sight
+Name:Vintage (Future Sight)
 Type:Historic
 Subtype:Vintage
 Effective:2007-05-20

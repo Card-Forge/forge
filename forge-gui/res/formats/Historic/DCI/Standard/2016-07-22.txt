@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Eldritch Moon
+Name:Standard (Eldritch Moon)
 Type:Historic
 Subtype:Standard
 Effective:2016-07-22

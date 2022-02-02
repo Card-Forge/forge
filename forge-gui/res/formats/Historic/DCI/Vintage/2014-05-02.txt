@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Journey into Nyx
+Name:Vintage (Journey into Nyx)
 Type:Historic
 Subtype:Vintage
 Effective:2014-05-02

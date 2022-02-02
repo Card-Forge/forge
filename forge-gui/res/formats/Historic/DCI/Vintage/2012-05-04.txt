@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Avacyn Restored
+Name:Vintage (Avacyn Restored)
 Type:Historic
 Subtype:Vintage
 Effective:2012-05-04

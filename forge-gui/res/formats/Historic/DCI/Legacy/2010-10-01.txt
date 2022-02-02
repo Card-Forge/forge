@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Scars of Mirrodin
+Name:Legacy (Scars of Mirrodin)
 Type:Historic
 Subtype:Legacy
 Effective:2010-07-16

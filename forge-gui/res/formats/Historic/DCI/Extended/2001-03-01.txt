@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Planeshift
+Name:Extended (Planeshift)
 Type:Historic
 Subtype:Extended
 Effective:2001-03-01

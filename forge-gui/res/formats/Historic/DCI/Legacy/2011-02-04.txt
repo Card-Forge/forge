@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Mirrodin Besieged
+Name:Legacy (Mirrodin Besieged)
 Type:Historic
 Subtype:Legacy
 Effective:2011-02-04

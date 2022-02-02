@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Stronghold
+Name:Extended (Stronghold)
 Type:Historic
 Subtype:Extended
 Effective:1998-04-01

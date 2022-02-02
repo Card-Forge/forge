@@ -1,5 +1,5 @@
 [format]
-Name:China Standard, Core Set 2019
+Name:China Standard (Core Set 2019)
 Type:Historic
 Subtype:Standard
 Effective:2018-07-14

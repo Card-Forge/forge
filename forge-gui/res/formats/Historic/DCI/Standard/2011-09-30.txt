@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Innistrad
+Name:Standard (Innistrad)
 Type:Historic
 Subtype:Standard
 Effective:2011-09-30

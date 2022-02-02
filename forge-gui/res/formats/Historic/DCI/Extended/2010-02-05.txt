@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Worldwake
+Name:Extended (Worldwake)
 Type:Historic
 Subtype:Extended
 Effective:2010-02-05

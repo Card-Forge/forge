@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Avacyn Restored
+Name:Modern (Avacyn Restored)
 Type:Historic
 Subtype:Modern
 Effective:2012-05-04

@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Return to Ravnica
+Name:Standard (Return to Ravnica)
 Type:Historic
 Subtype:Standard
 Effective:2012-10-05

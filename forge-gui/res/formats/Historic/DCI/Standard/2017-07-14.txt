@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Hour of Devastation
+Name:Standard (Hour of Devastation)
 Type:Historic
 Subtype:Standard
 Effective:2017-07-14

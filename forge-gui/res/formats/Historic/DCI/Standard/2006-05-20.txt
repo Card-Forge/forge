@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Dissension
+Name:Standard (Dissension)
 Type:Historic
 Subtype:Standard
 Effective:2006-05-20

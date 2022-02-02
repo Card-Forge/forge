@@ -1,5 +1,5 @@
 [format]
-Name:Classic-Restricted, Tempest
+Name:Classic-Restricted (Tempest)
 Type:Historic
 Subtype:Legacy
 Effective:1997-11-01

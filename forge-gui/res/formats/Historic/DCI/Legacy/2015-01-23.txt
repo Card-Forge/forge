@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Fate Reforged
+Name:Legacy (Fate Reforged)
 Type:Historic
 Subtype:Legacy
 Effective:2015-01-23

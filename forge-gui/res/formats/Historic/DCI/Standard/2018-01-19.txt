@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Rivals of Ixalan
+Name:Standard (Rivals of Ixalan)
 Type:Historic
 Subtype:Standard
 Effective:2018-01-19

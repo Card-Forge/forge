@@ -1,5 +1,5 @@
 [format]
-Name:Pauper, War of the Spark
+Name:Pauper (War of the Spark)
 Type:Historic
 Subtype:Custom
 Effective:2019-05-24

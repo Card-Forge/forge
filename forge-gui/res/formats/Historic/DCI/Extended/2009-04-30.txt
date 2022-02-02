@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Alara Reborn
+Name:Extended (Alara Reborn)
 Type:Historic
 Subtype:Extended
 Effective:2009-04-30

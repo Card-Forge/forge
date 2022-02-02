@@ -1,5 +1,5 @@
 [format]
-Name:Innistrad Block, Dark Ascension
+Name:Innistrad Block (Dark Ascension)
 Type:Historic
 Subtype:Block
 Effective:2012-02-03

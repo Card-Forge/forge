@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Dark Ascension
+Name:Vintage (Dark Ascension)
 Type:Historic
 Subtype:Vintage
 Effective:2012-02-03

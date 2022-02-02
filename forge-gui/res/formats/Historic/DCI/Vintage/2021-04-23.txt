@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Strixhaven School of Mages
+Name:Vintage (Strixhaven School of Mages)
 Type:Historic
 Subtype:Vintage
 Effective:2021-04-23

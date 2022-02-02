@@ -1,5 +1,5 @@
 [format]
-Name:Type 1, Nemesis
+Name:Type 1 (Nemesis)
 Type:Historic
 Subtype:Vintage
 Effective:2000-03-01

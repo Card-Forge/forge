@@ -1,5 +1,5 @@
 [format]
-Name:Pauper, 01/14/20
+Name:Pauper (2020-01-14)
 Type:Historic
 Subtype:Custom
 Effective:2020-01-14

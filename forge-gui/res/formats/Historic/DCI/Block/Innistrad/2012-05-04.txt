@@ -1,5 +1,5 @@
 [format]
-Name:Innistrad Block, Avacyn Restored
+Name:Innistrad Block (Avacyn Restored)
 Type:Historic
 Subtype:Block
 Effective:2012-05-04

@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Battle for Zendikar
+Name:Vintage (Battle for Zendikar)
 Type:Historic
 Subtype:Vintage
 Effective:2015-10-02

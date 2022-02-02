@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Eventide
+Name:Vintage (Eventide)
 Type:Historic
 Subtype:Vintage
 Effective:2008-07-25

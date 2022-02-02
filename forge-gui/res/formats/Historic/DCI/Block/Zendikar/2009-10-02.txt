@@ -1,5 +1,5 @@
 [format]
-Name:Zendikar Block, Zendikar
+Name:Zendikar Block (Zendikar)
 Type:Historic
 Subtype:Block
 Effective:2009-10-02

@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Magic Origins
+Name:Modern (Magic Origins)
 Type:Historic
 Subtype:Modern
 Effective:2015-07-17

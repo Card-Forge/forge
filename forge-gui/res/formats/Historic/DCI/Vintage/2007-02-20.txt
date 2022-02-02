@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Planar Chaos
+Name:Vintage (Planar Chaos)
 Type:Historic
 Subtype:Vintage
 Effective:2007-02-20

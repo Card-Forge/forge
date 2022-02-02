@@ -1,5 +1,5 @@
 [format]
-Name:China Standard, Gift Pack 2018
+Name:China Standard (Gift Pack 2018)
 Type:Historic
 Subtype:Standard
 Effective:2018-11-16

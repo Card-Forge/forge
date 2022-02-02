@@ -1,5 +1,5 @@
 [format]
-Name:Type 1, Eighth Edition
+Name:Type 1 (Eighth Edition)
 Type:Historic
 Subtype:Vintage
 Effective:2003-09-01

@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Urza's Destiny
+Name:Standard (Urza's Destiny)
 Type:Historic
 Subtype:Standard
 Effective:1999-07-01

@@ -1,5 +1,5 @@
 [format]
-Name:Type II, Mirage
+Name:Type II (Mirage)
 Type:Historic
 Subtype:Standard
 Effective:1996-11-08

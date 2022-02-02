@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, 06/20/07
+Name:Vintage (2007-06-20)
 Type:Historic
 Subtype:Vintage
 Effective:2007-06-20

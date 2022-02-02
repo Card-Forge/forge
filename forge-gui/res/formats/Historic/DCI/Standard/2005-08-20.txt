@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Ninth Edition
+Name:Standard (Ninth Edition)
 Type:Historic
 Subtype:Standard
 Effective:2005-08-20

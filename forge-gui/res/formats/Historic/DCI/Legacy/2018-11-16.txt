@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Gift Pack 2018
+Name:Legacy (Gift Pack 2018)
 Type:Historic
 Subtype:Legacy
 Effective:2018-16-16

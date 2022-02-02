@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Hour of Devastation
+Name:Vintage (Hour of Devastation)
 Type:Historic
 Subtype:Vintage
 Effective:2017-07-14

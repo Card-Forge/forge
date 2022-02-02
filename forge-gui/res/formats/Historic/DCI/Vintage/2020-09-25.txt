@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Zendikar Rising
+Name:Vintage (Zendikar Rising)
 Type:Historic
 Subtype:Vintage
 Effective:2020-09-25

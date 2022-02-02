@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, 09/01/17
+Name:Vintage (2017-09-01)
 Type:Historic
 Subtype:Vintage
 Effective:2017-09-01

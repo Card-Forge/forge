@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Morningtide
+Name:Legacy (Morningtide)
 Type:Historic
 Subtype:Legacy
 Effective:2008-02-01

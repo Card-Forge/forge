@@ -1,5 +1,5 @@
 [format]
-Name:Type I.5, Fifth Edition
+Name:Type I.5 (Fifth Edition)
 Type:Historic
 Subtype:Legacy
 Effective:1997-04-24

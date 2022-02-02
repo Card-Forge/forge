@@ -1,5 +1,5 @@
 [format]
-Name:Type 1, Mercadian Masques
+Name:Type 1 (Mercadian Masques)
 Type:Historic
 Subtype:Vintage
 Effective:1999-10-01

@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Champions of Kamigawa
+Name:Extended (Champions of Kamigawa)
 Type:Historic
 Subtype:Extended
 Effective:2004-10-20

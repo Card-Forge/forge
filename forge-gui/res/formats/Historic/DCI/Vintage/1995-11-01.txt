@@ -1,5 +1,5 @@
 [format]
-Name:Type I, 11/01/95
+Name:Classic (1995-11-01)
 Type:Historic
 Subtype:Vintage
 Effective:1995-11-01

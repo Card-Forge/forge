@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Rise of the Eldrazi
+Name:Extended (Rise of the Eldrazi)
 Type:Historic
 Subtype:Extended
 Effective:2010-04-23

@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Commander 2017
+Name:Legacy (Commander 2017)
 Type:Historic
 Subtype:Legacy
 Effective:2017-08-25

@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Time Spiral
+Name:Legacy (Time Spiral)
 Type:Historic
 Subtype:Legacy
 Effective:2006-10-20

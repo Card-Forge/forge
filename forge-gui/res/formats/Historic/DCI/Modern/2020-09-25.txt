@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Zendikar Rising
+Name:Modern (Zendikar Rising)
 Type:Historic
 Subtype:Modern
 Effective:2020-09-25

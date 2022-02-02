@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Jumpstart
+Name:Legacy (Jumpstart)
 Type:Historic
 Subtype:Legacy
 Effective:2020-07-17

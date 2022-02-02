@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Rivals of Ixalan
+Name:Modern (Rivals of Ixalan)
 Type:Historic
 Subtype:Modern
 Effective:2018-01-19

@@ -1,5 +1,5 @@
 [format]
-Name:Type 1, Apocalypse
+Name:Type 1 (Apocalypse)
 Type:Historic
 Subtype:Vintage
 Effective:2001-07-01

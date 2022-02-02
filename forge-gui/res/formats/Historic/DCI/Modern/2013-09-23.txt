@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Theros
+Name:Modern (Theros)
 Type:Historic
 Subtype:Modern
 Effective:2013-09-23

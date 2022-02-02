@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Modern Horizons
+Name:Vintage (Modern Horizons)
 Type:Historic
 Subtype:Vintage
 Effective:2019-06-14

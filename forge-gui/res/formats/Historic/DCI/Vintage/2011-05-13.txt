@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, New Phyrexia
+Name:Vintage (New Phyrexia)
 Type:Historic
 Subtype:Vintage
 Effective:2011-05-13

@@ -1,5 +1,5 @@
 [format]
-Name:Ixalan Block, Rivals of Ixalan
+Name:Ixalan Block (Rivals of Ixalan)
 Type:Historic
 Subtype:Block
 Effective:2018-01-19

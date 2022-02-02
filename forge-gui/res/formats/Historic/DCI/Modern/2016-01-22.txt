@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Oath of the Gatewatch
+Name:Modern (Oath of the Gatewatch)
 Type:Historic
 Subtype:Modern
 Effective:2016-01-22

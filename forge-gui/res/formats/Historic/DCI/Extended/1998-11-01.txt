@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Urza's Saga
+Name:Extended (Urza's Saga)
 Type:Historic
 Subtype:Extended
 Effective:1998-11-01

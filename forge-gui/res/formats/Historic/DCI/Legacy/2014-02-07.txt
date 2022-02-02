@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Born of the Gods
+Name:Legacy (Born of the Gods)
 Type:Historic
 Subtype:Legacy
 Effective:2014-02-07

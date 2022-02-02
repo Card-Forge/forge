@@ -1,5 +1,5 @@
 [format]
-Name:Modern, War of the Spark
+Name:Modern (War of the Spark)
 Type:Historic
 Subtype:Modern
 Effective:2019-05-24

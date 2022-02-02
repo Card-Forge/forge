@@ -1,5 +1,5 @@
 [format]
-Name:Type 1, Fifth Dawn
+Name:Type 1 (Fifth Dawn)
 Type:Historic
 Subtype:Vintage
 Effective:2004-06-20

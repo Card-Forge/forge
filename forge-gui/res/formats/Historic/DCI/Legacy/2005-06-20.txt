@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Saviors of Kamigawa
+Name:Legacy (Saviors of Kamigawa)
 Type:Historic
 Subtype:Legacy
 Effective:2005-06-20

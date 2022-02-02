@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Dragons of Tarkir
+Name:Vintage (Dragons of Tarkir)
 Type:Historic
 Subtype:Vintage
 Effective:2015-03-27

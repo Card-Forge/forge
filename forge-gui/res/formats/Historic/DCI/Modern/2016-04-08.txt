@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Shadows over Innistrad
+Name:Modern (Shadows over Innistrad)
 Type:Historic
 Subtype:Modern
 Effective:2016-04-08

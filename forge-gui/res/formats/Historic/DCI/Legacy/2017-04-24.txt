@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, 04/24/17
+Name:Legacy (2017-04-24)
 Type:Historic
 Subtype:Legacy
 Effective:2017-04-24

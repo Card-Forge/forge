@@ -1,5 +1,5 @@
 [format]
-Name:Type I.5, Mirage
+Name:Type I.5 (Mirage)
 Type:Historic
 Subtype:Legacy
 Effective:1996-11-08

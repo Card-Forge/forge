@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Innistrad
+Name:Legacy (Innistrad)
 Type:Historic
 Subtype:Legacy
 Effective:2011-09-30

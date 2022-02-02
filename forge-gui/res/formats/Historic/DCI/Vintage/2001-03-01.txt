@@ -1,5 +1,5 @@
 [format]
-Name:Type 1, Planeshift
+Name:Type 1 (Planeshift)
 Type:Historic
 Subtype:Vintage
 Effective:2001-03-01

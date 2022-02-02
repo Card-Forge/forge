@@ -1,5 +1,5 @@
 [format]
-Name:Type I, Visions
+Name:Classic (Visions)
 Type:Historic
 Subtype:Vintage
 Effective:1997-03-03

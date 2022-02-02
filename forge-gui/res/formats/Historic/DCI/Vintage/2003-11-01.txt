@@ -1,5 +1,5 @@
 [format]
-Name:Type 1, Mirrodin
+Name:Type 1 (Mirrodin)
 Type:Historic
 Subtype:Vintage
 Effective:2003-11-01

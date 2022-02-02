@@ -1,5 +1,5 @@
 [format]
-Name:Type 1.5, Legions
+Name:Type 1.5 (Legions)
 Type:Historic
 Subtype:Legacy
 Effective:2003-03-01

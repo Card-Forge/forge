@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Tenth Edition
+Name:Legacy (Tenth Edition)
 Type:Historic
 Subtype:Legacy
 Effective:2007-07-20

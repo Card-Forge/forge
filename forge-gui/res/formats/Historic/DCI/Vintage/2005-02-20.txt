@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Betrayers of Kamigawa
+Name:Vintage (Betrayers of Kamigawa)
 Type:Historic
 Subtype:Vintage
 Effective:2005-02-20

@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Dragon's Maze
+Name:Modern (Dragon's Maze)
 Type:Historic
 Subtype:Modern
 Effective:2013-05-03

@@ -1,5 +1,5 @@
 [format]
-Name:Scars of Mirrodin Block, Scars of Mirrodin
+Name:Scars of Mirrodin Block (Scars of Mirrodin)
 Type:Historic
 Subtype:Block
 Effective:2010-10-01

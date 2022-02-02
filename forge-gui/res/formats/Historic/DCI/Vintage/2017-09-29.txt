@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Ixalan
+Name:Vintage (Ixalan)
 Type:Historic
 Subtype:Vintage
 Effective:2017-09-29

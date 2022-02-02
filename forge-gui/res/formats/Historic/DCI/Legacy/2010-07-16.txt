@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, 2011 Core Set
+Name:Legacy (2011 Core Set)
 Type:Historic
 Subtype:Legacy
 Effective:2010-07-16

@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Morningtide
+Name:Vintage (Morningtide)
 Type:Historic
 Subtype:Vintage
 Effective:2008-02-01

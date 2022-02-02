@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Dark Ascension
+Name:Extended (Dark Ascension)
 Type:Historic
 Subtype:Extended
 Effective:2012-02-03

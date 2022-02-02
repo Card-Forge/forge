@@ -1,5 +1,5 @@
 [format]
-Name:Classic-Restricted, Stronghold
+Name:Classic-Restricted (Stronghold)
 Type:Historic
 Subtype:Legacy
 Effective:1998-04-01

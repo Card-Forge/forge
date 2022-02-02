@@ -1,5 +1,5 @@
 [format]
-Name:Type II, Fourth Edition
+Name:Type II (Fourth Edition)
 Type:Historic
 Subtype:Standard
 Effective:1995-01

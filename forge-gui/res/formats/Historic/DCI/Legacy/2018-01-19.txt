@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Rivals of Ixalan
+Name:Legacy (Rivals of Ixalan)
 Type:Historic
 Subtype:Legacy
 Effective:2018-01-19

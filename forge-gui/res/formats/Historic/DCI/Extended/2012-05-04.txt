@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Avacyn Restored
+Name:Extended (Avacyn Restored)
 Type:Historic
 Subtype:Extended
 Effective:2012-05-04

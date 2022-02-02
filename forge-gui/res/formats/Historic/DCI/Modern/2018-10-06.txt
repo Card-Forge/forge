@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Guilds of Ravnica
+Name:Modern (Guilds of Ravnica)
 Type:Historic
 Subtype:Modern
 Effective:2018-10-06

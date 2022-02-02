@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Shadowmoor
+Name:Standard (Shadowmoor)
 Type:Historic
 Subtype:Standard
 Effective:2008-05-02

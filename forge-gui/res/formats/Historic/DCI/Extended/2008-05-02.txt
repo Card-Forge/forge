@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Shadowmoor
+Name:Extended (Shadowmoor)
 Type:Historic
 Subtype:Extended
 Effective:2008-05-02

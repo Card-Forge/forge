@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Magic Origins
+Name:Standard (Magic Origins)
 Type:Historic
 Subtype:Standard
 Effective:2015-07-17

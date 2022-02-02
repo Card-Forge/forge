@@ -1,5 +1,5 @@
 [format]
-Name:Type 1, Onslaught
+Name:Type 1 (Onslaught)
 Type:Historic
 Subtype:Vintage
 Effective:2002-11-01

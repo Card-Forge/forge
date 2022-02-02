@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Worldwake
+Name:Standard (Worldwake)
 Type:Historic
 Subtype:Standard
 Effective:2010-02-05

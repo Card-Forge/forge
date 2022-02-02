@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Dissension
+Name:Extended (Dissension)
 Type:Historic
 Subtype:Extended
 Effective:2006-05-20

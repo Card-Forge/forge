@@ -1,5 +1,5 @@
 [format]
-Name:Official Tournament Rules, revised 5/94
+Name:Official Tournament Rules (1994-05)
 Type:Historic
 Subtype:Vintage
 Effective:1994-05

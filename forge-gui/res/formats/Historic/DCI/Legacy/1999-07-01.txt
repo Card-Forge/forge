@@ -1,5 +1,5 @@
 [format]
-Name:Classic-Restricted, Urza's Destiny
+Name:Classic-Restricted (Urza's Destiny)
 Type:Historic
 Subtype:Legacy
 Effective:1999-07-01

@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Dragons of Tarkir
+Name:Legacy (Dragons of Tarkir)
 Type:Historic
 Subtype:Legacy
 Effective:2015-03-27

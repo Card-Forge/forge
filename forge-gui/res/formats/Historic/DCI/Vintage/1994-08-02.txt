@@ -1,5 +1,5 @@
 [format]
-Name:Official Tournament Rules, 8/2/94 Version, give or take
+Name:Official Tournament Rules (1994-08-02)
 Type:Historic
 Subtype:Vintage
 Effective:1994-08-02

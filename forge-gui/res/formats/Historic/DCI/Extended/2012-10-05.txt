@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Return to Ravnica
+Name:Extended (Return to Ravnica)
 Type:Historic
 Subtype:Extended
 Effective:2012-10-05

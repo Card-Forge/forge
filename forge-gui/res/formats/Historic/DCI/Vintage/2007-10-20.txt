@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Lorwyn
+Name:Vintage (Lorwyn)
 Type:Historic
 Subtype:Vintage
 Effective:2007-10-20

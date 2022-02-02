@@ -1,5 +1,5 @@
 [format]
-Name:Type 1, Darksteel
+Name:Type 1 (Darksteel)
 Type:Historic
 Subtype:Vintage
 Effective:2004-03-01

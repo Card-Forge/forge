@@ -1,5 +1,5 @@
 [format]
-Name:Invasion Block, Apocalypse
+Name:Invasion Block (Apocalypse)
 Type:Historic
 Subtype:Block
 Effective:2001-07-01

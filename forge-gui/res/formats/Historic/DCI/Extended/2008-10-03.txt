@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Shards of Alara
+Name:Extended (Shards of Alara)
 Type:Historic
 Subtype:Extended
 Effective:2008-10-03

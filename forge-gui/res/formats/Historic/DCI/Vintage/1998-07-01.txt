@@ -1,5 +1,5 @@
 [format]
-Name:Classic, Exodus
+Name:Classic (Exodus)
 Type:Historic
 Subtype:Vintage
 Effective:1998-07-01

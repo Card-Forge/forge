@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Champions of Kamigawa
+Name:Vintage (Champions of Kamigawa)
 Type:Historic
 Subtype:Vintage
 Effective:2004-10-20

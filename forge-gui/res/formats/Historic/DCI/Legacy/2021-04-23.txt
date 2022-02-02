@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Strixhaven School of Mages
+Name:Legacy (Strixhaven School of Mages)
 Type:Historic
 Subtype:Legacy
 Effective:2021-04-23

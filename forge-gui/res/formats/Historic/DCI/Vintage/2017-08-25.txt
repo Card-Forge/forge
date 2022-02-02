@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Commander 2017
+Name:Vintage (Commander 2017)
 Type:Historic
 Subtype:Vintage
 Effective:2017-08-25

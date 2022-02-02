@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Kaladesh
+Name:Vintage (Kaladesh)
 Type:Historic
 Subtype:Vintage
 Effective:2016-09-30

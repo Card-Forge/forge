@@ -1,5 +1,5 @@
 [format]
-Name:Tempest Block, Tempest
+Name:Tempest Block (Tempest)
 Type:Historic
 Subtype:Block
 Effective:1997-11-01

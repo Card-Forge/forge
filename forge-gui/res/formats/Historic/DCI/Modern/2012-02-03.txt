@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Dark Ascension
+Name:Modern (Dark Ascension)
 Type:Historic
 Subtype:Modern
 Effective:2012-02-03

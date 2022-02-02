@@ -1,5 +1,5 @@
 [format]
-Name:Type 1, Torment
+Name:Type 1 (Torment)
 Type:Historic
 Subtype:Vintage
 Effective:2002-03-01

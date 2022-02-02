@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Ikoria Lair of Behemoths
+Name:Modern (Ikoria Lair of Behemoths)
 Type:Historic
 Subtype:Modern
 Effective:2020-04-24

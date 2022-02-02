@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Morningtide
+Name:Standard (Morningtide)
 Type:Historic
 Subtype:Standard
 Effective:2008-02-01

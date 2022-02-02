@@ -1,5 +1,5 @@
 [format]
-Name:Type 1, Judgment
+Name:Type 1 (Judgment)
 Type:Historic
 Subtype:Vintage
 Effective:2002-07-01

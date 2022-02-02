@@ -1,5 +1,5 @@
 [format]
-Name:Type 1, Scourge
+Name:Type 1 (Scourge)
 Type:Historic
 Subtype:Vintage
 Effective:2003-07-01

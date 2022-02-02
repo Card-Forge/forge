@@ -1,5 +1,5 @@
 [format]
-Name:Type I, Fourth Edition
+Name:Classic (Fourth Edition)
 Type:Historic
 Subtype:Vintage
 Effective:1995-04-19

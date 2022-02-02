@@ -1,5 +1,5 @@
 [format]
-Name:DC, Revised Edition
+Name:DC (Revised Edition)
 Type:Historic
 Subtype:Vintage
 Effective:1994-04-01

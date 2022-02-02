@@ -1,5 +1,5 @@
 [format]
-Name:Classic-Restricted, Classic Sixth Edition
+Name:Classic-Restricted (Classic Sixth Edition)
 Type:Historic
 Subtype:Legacy
 Effective:1999-06-01

@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Ravnica Allegiance
+Name:Vintage (Ravnica Allegiance)
 Type:Historic
 Subtype:Vintage
 Effective:2019-01-25

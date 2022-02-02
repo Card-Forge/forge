@@ -1,5 +1,5 @@
 [format]
-Name:Classic, Urza's Legacy
+Name:Classic (Urza's Legacy)
 Type:Historic
 Subtype:Vintage
 Effective:1999-03-01

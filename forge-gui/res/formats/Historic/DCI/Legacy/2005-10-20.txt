@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Ravnica: City of Guilds
+Name:Legacy (Ravnica: City of Guilds)
 Type:Historic
 Subtype:Legacy
 Effective:2005-10-20

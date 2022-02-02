@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Coldsnap
+Name:Legacy (Coldsnap)
 Type:Historic
 Subtype:Legacy
 Effective:2006-08-20

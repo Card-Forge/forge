@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Worldwake
+Name:Legacy (Worldwake)
 Type:Historic
 Subtype:Legacy
 Effective:2010-02-05

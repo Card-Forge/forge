@@ -1,5 +1,5 @@
 [format]
-Name:Modern, Strixhaven School of Mages
+Name:Modern (Strixhaven School of Mages)
 Type:Historic
 Subtype:Modern
 Effective:2021-04-23

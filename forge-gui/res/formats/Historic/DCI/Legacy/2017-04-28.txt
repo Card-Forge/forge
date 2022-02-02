@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Amonkhet
+Name:Legacy (Amonkhet)
 Type:Historic
 Subtype:Legacy
 Effective:2017-04-28

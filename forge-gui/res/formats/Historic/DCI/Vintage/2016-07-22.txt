@@ -1,5 +1,5 @@
 [format]
-Name:Vintage, Eldritch Moon
+Name:Vintage (Eldritch Moon)
 Type:Historic
 Subtype:Vintage
 Effective:2016-07-22

@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Eighth Edition
+Name:Standard (Eighth Edition)
 Type:Historic
 Subtype:Standard
 Effective:2003-09-01

@@ -1,5 +1,5 @@
 [format]
-Name:Legacy, Eventide
+Name:Legacy (Eventide)
 Type:Historic
 Subtype:Legacy
 Effective:2008-07-25

@@ -1,5 +1,5 @@
 [format]
-Name:Return to Ravnica Block, Dragon's Maze
+Name:Return to Ravnica Block (Dragon's Maze)
 Type:Historic
 Subtype:Block
 Effective:2013-05-03
