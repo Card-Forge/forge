@@ -1,9 +1,9 @@
 Name:Invoke Justice
 ManaCost:1 W W W W
 Types:Sorcery
-A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target permanent card in your graveyard | ValidTgts$ Permanent.YouCtrl | SubAbility$ DBPlayerTarget | SpellDescription$ Return target permanent card from your graveyard to the battlefield, then distribute four +1/+1 counters among any number of creatures and/or Vehicles target player controls.
-SVar:DBPlayerTarget:DB$ Pump | ValidTgts$ Player | TgtPrompt$ Select target player | RememberObjects$ ThisTargetedPlayer | SubAbility$ DBPutCounter | StackDescription$ None
-SVar:DBPutCounter:DB$ PutCounter | Choices$ Creature.RememberedPlayerCtrl,Vehicle.RememberedPlayerCtrl | ChoiceTitle$ Choose any number of creatures and/or Vehicles target player controls to distribute counters to | ChoiceAmount$ 4 | MinChoiceAmount$ 1 | CounterType$ P1P1 | CounterNum$ 4 | DividedAsYouChoose$ 4 | StackDescription$ Distribute four +1/+1 counters among any number of creatures and/or Vehicles {p:ThisTargetedPlayer} controls. | SubAbility$ DBCleanup
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target permanent card in your graveyard | ValidTgts$ Permanent.YouCtrl | SubAbility$ DBPlayerTarget | SpellDescription$ Return target permanent card from your graveyard to the battlefield, then distribute four +1/+1 counters among any number of creatures and/or Vehicles target player controls. | StackDescription$ Return {c:Targeted} from your graveyard to the battlefield,
+SVar:DBPlayerTarget:DB$ Pump | ValidTgts$ Player | TgtPrompt$ Select target player | RememberObjects$ ThisTargetedPlayer | SubAbility$ DBPutCounter | StackDescription$ then distribute four +1/+1 counters among any number of creatures and/or Vehicles {p:Targeted} controls.
+SVar:DBPutCounter:DB$ PutCounter | Choices$ Creature.RememberedPlayerCtrl,Vehicle.RememberedPlayerCtrl | ChoiceTitle$ Choose any number of creatures and/or Vehicles target player controls to distribute counters to | ChoiceAmount$ 4 | MinChoiceAmount$ 1 | CounterType$ P1P1 | CounterNum$ 4 | DividedAsYouChoose$ 4 | StackDescription$ None | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Graveyard|Counters
 DeckHints:Type$Creature|Vehicle
