@@ -730,7 +730,7 @@ public class CardFactoryUtil {
         String[] splitkw = parse.split(":");
 
         String desc = "CARDNAME enters the battlefield with ";
-        desc += Lang.nounWithNumeral(splitkw[2], CounterType.getType(splitkw[1]).getName() + " counter");
+        desc += Lang.nounWithNumeralExceptOne(splitkw[2], CounterType.getType(splitkw[1]).getName().toLowerCase() + " counter");
         desc += " on it.";
 
         String extraparams = "";
