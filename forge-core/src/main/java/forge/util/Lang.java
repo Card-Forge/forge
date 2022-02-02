@@ -154,6 +154,21 @@ public abstract class Lang {
         }
     }
 
+    public static String nounWithNumeralExceptOne(final int cnt, final String noun) {
+        final String countedForm = cnt == 1 ? noun : getPlural(noun);
+        final String desc = cnt == 1 ? (Lang.startsWithVowel(countedForm) ? "an" : "a") : getNumeral(cnt);
+        return desc + " " + countedForm;
+    }
+
+    public static String nounWithNumeralExceptOne(final String cnt, final String noun) {
+        if (StringUtils.isNumeric(cnt)) {
+            return nounWithNumeralExceptOne(Integer.parseInt(cnt), noun);
+        } else {
+            // for X
+            return cnt + " " + getPlural(noun);
+        }
+    }
+
     public abstract String getPossesive(final String name);
     public abstract String getPossessedObject(final String owner, final String object);
 
