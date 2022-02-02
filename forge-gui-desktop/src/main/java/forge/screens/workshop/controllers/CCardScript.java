@@ -108,6 +108,8 @@ public enum CCardScript implements ICDoc {
 
         final StyledDocument doc = VCardScript.SINGLETON_INSTANCE.getDoc();
         final Style error = VCardScript.SINGLETON_INSTANCE.getErrorStyle();
+        final Style empty = VCardScript.SINGLETON_INSTANCE.getEmptyStyle();
+        doc.setCharacterAttributes(0, 9999, empty, true);
         if (FModel.getPreferences().getPrefBoolean(FPref.DEV_WORKSHOP_SYNTAX) && currentScriptInfo != null) {
             for (final Entry<Integer, Integer> region : new CardScriptParser(currentScriptInfo.getText()).getErrorRegions().entrySet()) {
                 doc.setCharacterAttributes(region.getKey(), region.getValue(), error, true);

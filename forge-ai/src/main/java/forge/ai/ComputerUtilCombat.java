@@ -1033,7 +1033,7 @@ public class ComputerUtilCombat {
                 }
 
                 if (ComputerUtilCost.canPayCost(ability, blocker.getController(), false)) {
-                    int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
+                    int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParamOrDefault("CounterNum", "1"), ability);
                     if (pBonus > 0) {
                         power += pBonus;
                     }
@@ -1104,7 +1104,7 @@ public class ComputerUtilCombat {
                 if (!"M1M1".equals(sa.getParam("CounterType"))) {
                     continue;
                 }
-                toughness -= AbilityUtils.calculateAmount(source, sa.getParam("CounterNum"), sa);
+                toughness -= AbilityUtils.calculateAmount(source, sa.getParamOrDefault("CounterNum", "1"), sa);
             } else
 
             // Pump triggers
@@ -1166,7 +1166,7 @@ public class ComputerUtilCombat {
                 }
 
                 if (ComputerUtilCost.canPayCost(ability, blocker.getController(), false)) {
-                    int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
+                    int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParamOrDefault("CounterNum", "1"), ability);
                     if (tBonus > 0) {
                         toughness += tBonus;
                     }
@@ -1363,7 +1363,7 @@ public class ComputerUtilCombat {
                 }
 
                 if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController(), false)) {
-                    int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
+                    int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParamOrDefault("CounterNum", "1"), ability);
                     if (pBonus > 0) {
                         power += pBonus;
                     }
@@ -1585,7 +1585,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
 
-                int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
+                int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParamOrDefault("CounterNum", "1"), ability);
                 if (tBonus > 0) {
                     toughness += tBonus;
                 }
