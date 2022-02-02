@@ -137,6 +137,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 if (deck.getAI()) {
                     g.drawOutlinedText("AI", font, Color.GREEN, Color.BLACK, x, y, w, IMAGE_SIZE, true, Align.left, true, false);
                     x += IMAGE_SIZE + FList.PADDING;
+                    availableNameWidth -= IMAGE_SIZE + FList.PADDING;
                 }
                 String name = deck.getName();
                 if (!deck.getPath().isEmpty()) { //render path after name if needed
