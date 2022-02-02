@@ -2,6 +2,8 @@ package forge.gamemodes.limited;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import forge.card.ColorSet;
 import forge.card.DeckHints;
 import forge.card.MagicColor;
@@ -61,10 +63,7 @@ public class CardRanker {
     private static List<Pair<Double, PaperCard>> getScores(Iterable<PaperCard> cards) {
         List<Pair<Double, PaperCard>> cardScores = new ArrayList<>();
 
-        List<PaperCard> cache = new ArrayList<>();
-        for (PaperCard card : cards) {
-            cache.add(card);
-        }
+        List<PaperCard> cache = Lists.newArrayList(cards);
 
         for (int i = 0; i < cache.size(); i++) {
             final PaperCard card = cache.get(i);
@@ -96,7 +95,7 @@ public class CardRanker {
             if (card.getRules().getAiHints().getRemAIDecks()) {
                 score -= 20.0;
             }
-            if( !canAddMoreColors && !card.getRules().getDeckbuildingColors().hasNoColorsExcept(chosenColors)) {
+            if (!canAddMoreColors && !card.getRules().getDeckbuildingColors().hasNoColorsExcept(chosenColors)) {
                 score -= 50.0;
             }
 
@@ -163,14 +162,19 @@ public class CardRanker {
                 }
             }
         }
-        final DeckHints needs = card.getRules().getAiHints().getDeckNeeds();
-        if (needs != null && needs.isValid()) {
-            final Map<DeckHints.Type, Iterable<PaperCard>> cardsByType = needs.filterByType(otherCards);
-            for (DeckHints.Type type : cardsByType.keySet()) {
-                Iterable<PaperCard> cards = cardsByType.get(type);
-                score += Iterables.size(cards) * typeFactors.get(type);
-                if (logToConsole && Iterables.size(cards) > 0) {
-                    System.out.println(" - " + card.getName() + ": Found " + Iterables.size(cards) + " cards for " + type);
+
+        List<PaperCard> toBeRanked = Lists.newArrayList(card);
+        // TODO introduce a threshold, so that cards which Needs are already satisfied by enough other cards are ignored
+        for (PaperCard other : otherCards) {
+            final DeckHints needs = other.getRules().getAiHints().getDeckNeeds();
+            if (needs != null && needs.isValid()) {
+                final Map<DeckHints.Type, Iterable<PaperCard>> cardsByType = needs.filterByType(toBeRanked);
+                for (DeckHints.Type type : cardsByType.keySet()) {
+                    Iterable<PaperCard> cards = cardsByType.get(type);
+                    score += Iterables.size(cards) * typeFactors.get(type);
+                    if (logToConsole && Iterables.size(cards) > 0) {
+                        System.out.println(" - " + card.getName() + ": Found " + Iterables.size(cards) + " cards for " + type);
+                    }
                 }
             }
         }
@@ -178,6 +182,8 @@ public class CardRanker {
     }
 
     private static List<PaperCard> sortAndCreateList(List<Pair<Double, PaperCard>> cardScores) {
+        // even if some cards might be assigned the same rank we don't need randomization here
+        // as the limited variant is responsible for that during generation
         Collections.sort(cardScores, Collections.reverseOrder(new CardRankingComparator()));
 
         List<PaperCard> rankedCards = new ArrayList<>(cardScores.size());
