@@ -9,5 +9,6 @@ T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ X | SVarCompare$ GE1 | TriggerZo
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ Self
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Enchantment.YouOwn
 SVar:BuffedBy:Enchantment
+DeckHas:Ability$Counters
 DeckNeeds:Type$Enchantment
 Oracle:Trample\nWhenever you cast an enchantment spell, put a +1/+1 counter on Kami of Transience.\nAt the beginning of each end step, if an enchantment was put into your graveyard from the battlefield this turn, you may return Kami of Transience from your graveyard to your hand.
