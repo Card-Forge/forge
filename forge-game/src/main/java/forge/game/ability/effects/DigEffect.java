@@ -42,8 +42,13 @@ public class DigEffect extends SpellAbilityEffect {
         final int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
-        sb.append(host.getController()).append(sa.hasParam("Reveal") && sa.getParam("Reveal").equals("True")
-                ? " reveals " : " looks at ").append("the top ");
+        String verb = " looks at ";
+        if (sa.hasParam("Reveal") && sa.getParam("Reveal").equals("True")) {
+            verb = " reveals ";
+        } else if (sa.hasParam("DestinationZone") && sa.getParam("DestinationZone").equals("Exile")) {
+            verb = " exiles ";
+        }
+        sb.append(host.getController()).append(verb).append("the top ");
         sb.append(numToDig == 1 ? "card" : (Lang.getNumeral(numToDig) + " cards")).append(" of ");
 
         if (tgtPlayers.contains(host.getController())) {
