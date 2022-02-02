@@ -16,6 +16,7 @@ ScryfallCode=NEO
 4 C Befriending the Moths @Matt Stewart
 6 U Born to Drive @Heonhwa Choe
 7 R Brilliant Restoration @Wylie Beckert
+8 R Cloudsteel Kirin @Jonathan Kuo
 11 C Era of Enlightenment @Amayagido
 12 U The Fall of Lord Konda @Andrew Mar
 14 U Go-Shintai of Shared Purpose @Johannes Voss
@@ -24,14 +25,17 @@ ScryfallCode=NEO
 21 R Invoke Justice @Kekai Kotaki
 23 R Kyodai, Soul of Kamigawa @Daniel Zrom
 24 C Light the Way @Benjamin Ee
+25 R Light-Paws, Emperor's Voice @Randy Vargas
 26 R Lion Sash @Yongjae Choi
 28 R March of Otherworldly Light @Nils Hamm
 29 U Michiko's Reign of Truth @Volkan Baǵa
 31 U Norika Yamazaki, the Poet @Magali Villeneuve
 34 R The Restoration of Eiganjo @Titus Lunter
+36 C Seven-Tail Mentor @Eelis Kyttanen
 38 C Spirited Companion @Ilse Gort
 39 C Sunblade Samurai @Aaron Miller
 42 M The Wandering Emperor @William Arnold
+45 U Anchor to Reality @Alix Branwyn
 46 C Armguard Familiar @Joshua Raphael
 47 U Awakened Awareness @Tran Nguyen
 48 U Behold the Unspeakable @Ravenna Tran
@@ -41,11 +45,16 @@ ScryfallCode=NEO
 56 C Guardians of Oboro @Anna Steinbauer
 59 M Jin-Gitaxias, Progress Tyrant @Chase Stone
 60 M Kairi, the Swirling Sky @Tyler Jacobson
+65 U Mobilizer Mech @Jonathan Kuo
 66 C The Modern Age @Anastasia Ovchinnikova
 67 C Moon-Circuit Hacker @Tia Masic
 69 C Moonsnare Prototype @Fariba Khamseh
+71 C Network Disruptor @Viko Menezes
+73 U Prosperous Thief @Fajareka Setiawan
 74 R The Reality Chip @Campbell White
 75 U Reality Heist @Mila Pesic
+77 C Siba Trespassers @Evyn Fong
+80 C Spell Pierce @Lie Setiawan
 82 R Tameshi, Reality Architect @Scott M. Fischer
 83 C Tamiyo's Compleation @Dominik Mayer
 84 M Tezzeret, Betrayer of Flesh @Bryan Sola
@@ -62,9 +71,14 @@ ScryfallCode=NEO
 107 C Lethal Exploit @Sam Guay
 108 U Life of Toshiro Umezawa @Sidharth Chaturvedi
 110 U Malicious Malfunction @Deruchenko Alexander
+111 R March of Wretched Sorrow @Tyler Jacobson
+114 M Nashi, Moon Sage's Scion @Valera Lutfullina
+115 C Nezumi Bladeblesser @Ilse Gort
 116 U Nezumi Prowler @Joseph Weston
+117 C Okiba Reckoner Raid @Victor Adame Minguez
 123 R Tatsunari, Toad Rider @Justine Cruz
 124 R Tribute to Horobi @Robin Olausson
+129 C You Are Already Dead @Zoltan Boros
 130 C Akki Ember-Keeper @April Prime
 132 C Akki War Paint @Jeremy Wilson
 134 M Atsushi, the Blazing Sky @Victor Adame Minguez
@@ -88,17 +102,22 @@ ScryfallCode=NEO
 172 U Azusa's Many Journeys @Lindsey Look
 173 C Bamboo Grove Archer @Steve Prescott
 177 U Boseiju Reaches Skyward @Zezhou Chen
+179 C Coiling Stalker @Svetlin Velinov
 181 R The Dragon-Kami Reborn @Alix Branwyn
 183 C Fang of Shigeki @Yigit Koroglu
 185 U Generous Visitor @Iris Compiet
 186 C Geothermal Kami @Rudy Siswanto
 189 C Greater Tanuki @Ilse Gort
+191 C Heir of the Ancient Fang @Joseph Weston
 192 U Historian's Wisdom @Jarel Threat
 198 U Kappa Tech-Wrecker @Jehan Choo
 199 M Kodama of the West Tree @Daarken
+207 U Spinning Wheel Kick @Evyn Fong
 209 U Storyweave @Rovina Cai
 212 R Teachings of the Kirin @Sam Burley
+213 R Weaver of Harmony @Tuan Duong Chu
 215 U Asari Captain @Donato Giancola
+217 R Eiganjo Uprising @Johan Grenier
 218 U Enthusiastic Mechanaut @Anna Steinbauer
 219 U Gloomshrieker @Fiona Hsieh
 221 M Hidetsugu Consumes All @Chris Cold
@@ -106,21 +125,27 @@ ScryfallCode=NEO
 226 M Kaito Shizuki @Yongjae Choi
 227 M The Kami War @Kieran Yanner
 229 U Naomi, Pillar of Order @Joshua Raphael
+230 U Oni-Cult Anvil @Yeong-Hao Han
 231 U Prodigy's Prototype @Ryan Pancoast
 232 R Raiyuu, Storm's Edge @Heonhwa Choe
 234 R Satoru Umezawa @Anna Pavleeva
 235 R Satsuki, the Living Lore @Ryan Pancoast
 236 U Silver-Fur Master @Carl Critchlow
+237 M Spirit-Sister's Call @Dominik Mayer
 238 M Tamiyo, Compleated Sage @Chris Rahn
 242 U Circuit Mender @Hector Ortiz
-247 U High-speed Hoverbike @Julian Kok Joon Wen
+247 U High-Speed Hoverbike @Julian Kok Joon Wen
 249 R Mechtitan Core @Victor Adame Minguez
 250 R Mirror Box @Nestor Ossandon Leal
+255 R Reckoner Bankbuster @Steve Prescott
 257 U Runaway Trash-Bot @Nicholas Gregory
 260 R Surgehacker Mech @Wisnu Tan
+263 U Walking Skyscraper @David Auden Nash
 266 R Boseiju, Who Endures @Chris Ostrowski
+271 R Otawara, Soaring City @Alayna Danner
 275 U Secluded Courtyard @Sam Burley
 276 R Sokenzan, Crucible of Defiance @Lucas Staniec
+278 R Takenuma, Abandoned Mire @Sam Burley
 283 L Plains @Piotr Dura
 284 L Plains @Adam Paquette
 285 L Island @Piotr Dura
@@ -149,24 +174,31 @@ ScryfallCode=NEO
 308 M Tamiyo, Compleated Sage @Chris Rahn
 310 C Imperial Subduer @Yunomachi
 311 U Norika Yamazaki, the Poet @Xiaji
+313 C Seven-Tail Mentor @
 315 C Sunblade Samurai @Shirai Hidemi
 316 M The Wandering Emperor @Hisashi Momose
 317 C Guardians of Oboro @Domco.
+318 C Nezumi Bladeblesser @Kemonomichi
 320 R Goro-Goro, Disciple of Ryusei @Rorubei
 321 U Heiko Yamazaki, the General @Xiaji
 322 C Peerless Samurai @Yosuke Adachi
 324 U Upriser Renegade @Maji
+325 C Heir of the Ancient Fang @T-Track
 327 U Asari Captain @Inuchiyo Meimaru
 329 R Raiyuu, Storm's Edge @Ichiko Milk Tei
 332 U Covert Technician @Daisuke Izuka
 333 U Futurist Operative @Clover.K
 334 C Moon-Circuit Hacker @SS39
+336 U Prosperous Thief @SS39
 337 R Thousand-Faced Shadow @Maji
 338 R Biting-Palm Ninja @Piyo
 339 C Dokuchi Shadow-Walker @Sansyu
 341 C Inkrise Infiltrator @Umiu Geso
+343 M Nashi, Moon Sage's Scion @Yoshiya
 344 U Nezumi Prowler @Yukihiro Maruo
 345 R Tatsunari, Toad Rider @Rinco.
+346 C Coiling Stalker @M.Matsumoto
+347 C Fang of Shigeki @Murakami Hisashi
 348 U Kappa Tech-Wrecker @Yoshiro Ambe
 350 M Kaito Shizuki @Hagiya Kaoru
 352 R Satoru Umezawa @Raita Kazama
@@ -175,11 +207,13 @@ ScryfallCode=NEO
 356 R Tribute to Horobi @Tetsu Kurosawa
 357 R Fable of the Mirror-Breaker @akio
 358 R The Dragon-Kami Reborn @Kota Nakatsubo
-360 R Teachings of the Kirin Orochi @Azur
+360 R Teachings of the Kirin @Azur
 361 M Hidetsugu Consumes All @Azur
 362 M The Kami War @Kiritada
-363 R Brilliant Restoration
+363 R Brilliant Restoration @
+364 R Cloudsteel Kirin @Moopic
 366 R Invoke Justice @TODEE
+367 R Light-Paws, Emperor's Voice @
 368 R Lion Sash @TODEE
 369 R March of Otherworldly Light @
 371 M Jin-Gitaxias, Progress Tyrant @Ai Nanahira
@@ -187,14 +221,18 @@ ScryfallCode=NEO
 376 M Tezzeret, Betrayer of Flesh @Maekawa Yuichi
 378 R Hidetsugu, Devouring Chaos @SENNSU
 379 R Invoke Despair @Tomohito
+380 R March of Wretched Sorrow @Sansyu
 384 R Invoke Calamity @ZOUNOSE
 385 R Lizard Blades @Penekor
 386 R March of Reckless Joy @Miyaki Haime
 388 R Scrap Welder @Areku Nishiki
 392 M Kodama of the West Tree @TAPIOCA
+395 R Weaver of Harmony @Miyaki Haime
+396 R Eiganjo Uprising @Ari
 399 R Satsuki, the Living Lore @Domco.
 402 R Mechtitan Core @Naochika Morishita
 403 R Mirror Box @Mid
+404 R Reckoner Bankbuster @Yoshiya
 405 R Surgehacker Mech @Inuchiyo Meimaru
 406 M Ao, the Dawn Sky @Ishikawa Kenta
 407 R Kyodai, Soul of Kamigawa @Yukihiro Maruo
@@ -202,7 +240,9 @@ ScryfallCode=NEO
 409 M Junji, the Midnight Sky @Satoru Senda
 410 M Atsushi, the Blazing Sky @Toshiaki Takayama
 412 R Boseiju, Who Endures @Esuthio
+414 R Otawara, Soaring City @Yuta Shimpo
 415 R Sokenzan, Crucible of Defiance @Nao Miyoshi
+416 R Takenuma, Abandoned Mire @Nao Miyoshi
 429 R Hidetsugu, Devouring Chaos @SENNSU
 430 R Hidetsugu, Devouring Chaos @SENNSU
 431 R Hidetsugu, Devouring Chaos @SENNSU
@@ -223,6 +263,7 @@ ScryfallCode=NEO
 454 R Hidetsugu, Devouring Chaos @Isis
 455 R Invoke Despair @Olivier Bernard
 456 M Junji, the Midnight Sky @Chase Stone
+457 R March of Wretched Sorrow @Tyler Jacobson
 461 R Tatsunari, Toad Rider @Justine Cruz
 463 M Atsushi, the Blazing Sky @Victor Adame Minguez
 465 R Fable of the Mirror-Breaker @Joseph Meehan
@@ -234,17 +275,22 @@ ScryfallCode=NEO
 473 R The Dragon-Kami Reborn @Alix Branwyn
 477 M Kodama of the West Tree @Daarken
 482 R Teachings of the Kirin @Sam Burley
+483 R Weaver of Harmony @Tuan Duong Chu
 484 R Eiganjo Uprising @Johan Grenier
 486 M Hidetsugu Consumes All @Chris Cold
 489 M The Kami War @Kieran Yanner
 491 R Raiyuu, Storm's Edge @Heonhwa Choe
 493 R Satoru Umezawa @Anna Pavleeva
 494 R Satsuki, the Living Lore @Ryan Pancoast
+495 M Spirit-Sister's Call @Dominik Mayer
 497 R Mechtitan Core @Victor Adame Minguez
 498 R Mirror Box @Nestor Ossandon Leal
+499 R Reckoner Bankbuster @Steve Prescott
 500 R Surgehacker Mech @Wisnu Tan
 501 R Boseiju, Who Endures @Chris Ostrowski
+503 R Otawara, Soaring City @Alayna Danner
 504 R Sokenzan, Crucible of Defiance @Lucas Staniec
+505 R Takenuma, Abandoned Mire @Sam Burley
 506 R Invoke Despair @Donato Giancola
 507 R Satoru Umezawa @Yoji Shinkawa
 508 C Spirited Companion @Ilse Gort
