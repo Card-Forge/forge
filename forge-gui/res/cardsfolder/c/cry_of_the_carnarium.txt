@@ -1,6 +1,9 @@
 Name:Cry of the Carnarium
 ManaCost:1 B B
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 1 B B | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | ReplaceDyingValid$ Creature | SubAbility$ ExileSomeCreatures | SpellDescription$ All creatures get -2/-2 until end of turn. Exile all creature cards in all graveyards that were put there from the battlefield this turn. If a creature would die this turn, exile it instead.
-SVar:ExileSomeCreatures:DB$ ChangeZone | Defined$ ValidGraveyard Creature.nonToken+ThisTurnEnteredFrom_Battlefield | Origin$ Graveyard | Destination$ Exile | SpellDescription$ Exile all creature cards in all graveyards that were put there from the battlefield this turn.
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SubAbility$ ExileSomeCreatures | SpellDescription$ All creatures get -2/-2 until end of turn.
+SVar:ExileSomeCreatures:DB$ ChangeZone | Defined$ ValidGraveyard Creature.nonToken+ThisTurnEnteredFrom_Battlefield | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBEffect | SpellDescription$ Exile all creature cards in all graveyards that were put there from the battlefield this turn.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ DeathRep | SpellDescription$ If a creature would die this turn, exile it instead.
+SVar:DeathRep:Event$ Moved | ValidCard$ Creature | Origin$ Battlefield | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If a creature would die this turn, exile it instead.
+SVar:Exile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ Exile
 Oracle:All creatures get -2/-2 until end of turn. Exile all creature cards in all graveyards that were put there from the battlefield this turn. If a creature would die this turn, exile it instead.
