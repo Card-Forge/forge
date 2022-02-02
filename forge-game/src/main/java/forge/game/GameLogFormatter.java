@@ -23,6 +23,7 @@ import forge.util.TextUtil;
 import forge.util.maps.MapOfLists;
 
 public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
+    private final Localizer localizer = Localizer.getInstance();
     private final GameLog log;
     public GameLogFormatter(GameLog gameLog) {
         log = gameLog;
@@ -30,6 +31,10 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventGameOutcome ev) {
+        // Turn number counted from the starting player
+        int lastTurn = (int)Math.ceil((float)ev.result.getLastTurnNumber() / 2.0);
+        log.add(GameLogEntryType.GAME_OUTCOME, localizer.getMessage("lblTurn") + " " + lastTurn);
+
         for (String outcome : ev.result.getOutcomeStrings()) {
             log.add(GameLogEntryType.GAME_OUTCOME, outcome);
         }
@@ -38,7 +43,6 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventScry ev) {
-        final Localizer localizer = Localizer.getInstance();
         String scryOutcome = "";
 
         if (ev.toTop > 0 && ev.toBottom > 0) {
@@ -54,7 +58,6 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventSurveil ev) {
-        final Localizer localizer = Localizer.getInstance();
         String surveilOutcome = "";
 
         if (ev.toLibrary > 0 && ev.toGraveyard > 0) {
@@ -70,13 +73,12 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventSpellResolved ev) {
-        String messageForLog = ev.hasFizzled ? Localizer.getInstance().getMessage("lblLogCardAbilityFizzles", ev.spell.getHostCard().toString()) : ev.spell.getStackDescription();
+        String messageForLog = ev.hasFizzled ? localizer.getMessage("lblLogCardAbilityFizzles", ev.spell.getHostCard().toString()) : ev.spell.getStackDescription();
         return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, messageForLog);
     }
 
     @Override
     public GameLogEntry visit(GameEventSpellAbilityCast event) {
-        final Localizer localizer = Localizer.getInstance();
         String player = event.sa.getActivatingPlayer().getName();
         String action = event.sa.isSpell() ? localizer.getMessage("lblCast")
                 : event.sa.isTrigger() ? localizer.getMessage("lblTriggered")
@@ -115,9 +117,9 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
         String modeChoiceOutcome;
         if (ev.random) {
-            modeChoiceOutcome = Localizer.getInstance().getMessage("lblLogRandomMode", ev.cardName, ev.mode);
+            modeChoiceOutcome = localizer.getMessage("lblLogRandomMode", ev.cardName, ev.mode);
         } else {
-            modeChoiceOutcome = Localizer.getInstance().getMessage("lblLogPlayerChosenModeForCard",
+            modeChoiceOutcome = localizer.getMessage("lblLogPlayerChosenModeForCard",
                     ev.player.toString(), ev.mode, ev.cardName);
         }
         String name = CardTranslation.getTranslatedName(ev.cardName);
@@ -162,9 +164,9 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
         final String message;
         if (newLobbyPlayer == null) {
-            message = Localizer.getInstance().getMessage("lblLogPlayerHasRestoredControlThemself", p.getName());
+            message = localizer.getMessage("lblLogPlayerHasRestoredControlThemself", p.getName());
         } else {
-            message = Localizer.getInstance().getMessage("lblLogPlayerControlledTargetPlayer", p.getName(), newLobbyPlayer.getName());
+            message = localizer.getMessage("lblLogPlayerControlledTargetPlayer", p.getName(), newLobbyPlayer.getName());
         }
         return new GameLogEntry(GameLogEntryType.PLAYER_CONTROL, message);
     }
@@ -177,7 +179,6 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventCardDamaged event) {
-        final Localizer localizer = Localizer.getInstance();
         String additionalLog = "";
         if (event.type == DamageType.Deathtouch) {
             additionalLog = localizer.getMessage("lblDeathtouch");
@@ -197,28 +198,28 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
      */
     @Override
     public GameLogEntry visit(GameEventLandPlayed ev) {
-        String message = Localizer.getInstance().getMessage("lblLogPlayerPlayedLand", ev.player.toString(), ev.land.toString());
+        String message = localizer.getMessage("lblLogPlayerPlayedLand", ev.player.toString(), ev.land.toString());
         return new GameLogEntry(GameLogEntryType.LAND, message);
     }
 
     @Override
     public GameLogEntry visit(GameEventTurnBegan event) {
-        String message = Localizer.getInstance().getMessage("lblLogTurnNOwnerByPlayer", String.valueOf(event.turnNumber), event.turnOwner.toString());
+        String message = localizer.getMessage("lblLogTurnNOwnerByPlayer", String.valueOf(event.turnNumber), event.turnOwner.toString());
         return new GameLogEntry(GameLogEntryType.TURN, message);
     }
 
     @Override
     public GameLogEntry visit(GameEventPlayerDamaged ev) {
-        String extra = ev.infect ? Localizer.getInstance().getMessage("lblLogAsPoisonCounters") : "";
-        String damageType = ev.combat ? Localizer.getInstance().getMessage("lblCombat") : Localizer.getInstance().getMessage("lblNonCombat");
-        String message = Localizer.getInstance().getMessage("lblLogSourceDealsNDamageOfTypeToDest", ev.source.toString(),
+        String extra = ev.infect ? localizer.getMessage("lblLogAsPoisonCounters") : "";
+        String damageType = ev.combat ? localizer.getMessage("lblCombat") : localizer.getMessage("lblNonCombat");
+        String message = localizer.getMessage("lblLogSourceDealsNDamageOfTypeToDest", ev.source.toString(),
                             String.valueOf(ev.amount), damageType, ev.target.toString(), extra);
         return new GameLogEntry(GameLogEntryType.DAMAGE, message);
     }
 
     @Override
     public GameLogEntry visit(GameEventPlayerPoisoned ev) {
-        String message = Localizer.getInstance().getMessage("lblLogPlayerReceivesNPosionCounterFrom",
+        String message = localizer.getMessage("lblLogPlayerReceivesNPosionCounterFrom",
                             ev.receiver.toString(), String.valueOf(ev.amount), ev.source.toString());
         return new GameLogEntry(GameLogEntryType.DAMAGE, message);
     }
@@ -226,7 +227,6 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     @Override
     public GameLogEntry visit(final GameEventAttackersDeclared ev) {
         final StringBuilder sb = new StringBuilder();
-        final Localizer localizer = Localizer.getInstance();
 
         // Loop through Defenders
         // Append Defending Player/Planeswalker
@@ -273,9 +273,9 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
                 blockers = att.getValue();
                 if (blockers.isEmpty()) {
-                    sb.append(Localizer.getInstance().getMessage("lblLogPlayerDidntBlockAttacker", controllerName, att.getKey()));
+                    sb.append(localizer.getMessage("lblLogPlayerDidntBlockAttacker", controllerName, att.getKey()));
                 } else {
-                    sb.append(Localizer.getInstance().getMessage("lblLogPlayerAssignedBlockerToBlockAttacker", controllerName, Lang.joinHomogenous(blockers), att.getKey()));
+                    sb.append(localizer.getMessage("lblLogPlayerAssignedBlockerToBlockAttacker", controllerName, Lang.joinHomogenous(blockers), att.getKey()));
                 }
                 firstAttacker = false;
             }
@@ -286,7 +286,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventMulligan ev) {
-        String message = Localizer.getInstance().getMessage("lblPlayerHasMulliganedDownToNCards").replace("%d", String.valueOf(ev.player.getZone(ZoneType.Hand).size())).replace("%s", ev.player.toString());
+        String message = localizer.getMessage("lblPlayerHasMulliganedDownToNCards").replace("%d", String.valueOf(ev.player.getZone(ZoneType.Hand).size())).replace("%s", ev.player.toString());
         return new GameLogEntry(GameLogEntryType.MULLIGAN, message);
     }
 
