@@ -30,7 +30,6 @@ public class StaticAbilityApiBased extends AbilityStatic {
         return effect.getStackDescriptionWithSubs(mapParams, this);
     }
 
-
     /* (non-Javadoc)
      * @see forge.card.spellability.SpellAbility#resolve()
      */

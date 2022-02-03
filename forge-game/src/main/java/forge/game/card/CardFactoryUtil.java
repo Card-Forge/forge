@@ -1565,7 +1565,7 @@ public class CardFactoryUtil {
             final String trigStr = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard " +
                     " | ValidCard$ Card.Self+counters_EQ0_M1M1 | TriggerZones$ Battlefield | Secondary$ True" +
                     " | TriggerDescription$ Persist (" + inst.getReminderText() + ")";
-            final String effect = "DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | WithCounters$ M1M1_1";
+            final String effect = "DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | WithCountersType$ M1M1";
 
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
 
@@ -1883,7 +1883,7 @@ public class CardFactoryUtil {
             final String trigStr = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard " +
                     " | ValidCard$ Card.Self+counters_EQ0_P1P1 | TriggerZones$ Battlefield | Secondary$ True" +
                     " | TriggerDescription$ Undying (" + inst.getReminderText() + ")";
-            final String effect = "DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | WithCounters$ P1P1_1";
+            final String effect = "DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | WithCountersType$ P1P1";
 
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
             parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));

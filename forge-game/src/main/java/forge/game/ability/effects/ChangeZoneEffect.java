@@ -572,10 +572,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             continue;
                         }
                     }
-                    if (sa.hasParam("WithCounters")) {
-                        String[] parse = sa.getParam("WithCounters").split("_");
-                        gameCard.addEtbCounter(CounterType.getType(parse[0]), Integer.parseInt(parse[1]), player);
-                    }
                     if (sa.hasParam("WithCountersType")) {
                         CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
                         int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
@@ -1245,10 +1241,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             newController = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("NewController"), sa).get(0);
                         }
                         c.setController(newController, game.getNextTimestamp());
-                    }
-                    if (sa.hasParam("WithCounters")) {
-                        String[] parse = sa.getParam("WithCounters").split("_");
-                        c.addEtbCounter(CounterType.getType(parse[0]), Integer.parseInt(parse[1]), player);
                     }
 
                     if (sa.hasParam("WithCountersType")) {

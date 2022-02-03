@@ -463,7 +463,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
 
         if (hasParam("IsPresent")) {
             final ZoneType zone = hasParam("PresentZone") ? ZoneType.valueOf(getParam("PresentZone")) : ZoneType.Battlefield;
-            final String compare = hasParam("PresentCompare") ? getParam("PresentCompare") : "GE1";
+            final String compare = getParamOrDefault("PresentCompare", "GE1");
             CardCollectionView list = game.getCardsIn(zone);
             final String present = getParam("IsPresent");
 
@@ -512,10 +512,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
 
         if (hasParam("CheckSVar")) {
             final int sVar = AbilityUtils.calculateAmount(this.hostCard, getParam("CheckSVar"), this);
-            String comparator = "GE1";
-            if (hasParam("SVarCompare")) {
-                comparator = getParam("SVarCompare");
-            }
+            final String comparator = getParamOrDefault("SVarCompare", "GE1");
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
             final int operandValue = AbilityUtils.calculateAmount(this.hostCard, svarOperand, this);
@@ -528,10 +525,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
 
         if (hasParam("CheckSecondSVar")) {
             final int sVar = AbilityUtils.calculateAmount(this.hostCard, getParam("CheckSecondSVar"), this);
-            String comparator = "GE1";
-            if (hasParam("SecondSVarCompare")) {
-                comparator = getParam("SecondSVarCompare");
-            }
+            final String comparator = getParamOrDefault("SecondSVarCompare", "GE1");
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
             final int operandValue = AbilityUtils.calculateAmount(this.hostCard, svarOperand, this);
@@ -544,10 +538,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
 
         if (hasParam("CheckThirdSVar")) {
             final int sVar = AbilityUtils.calculateAmount(this.hostCard, getParam("CheckThirdSVar"), this);
-            String comparator = "GE1";
-            if (hasParam("ThirdSVarCompare")) {
-                comparator = getParam("ThirdSVarCompare");
-            }
+            final String comparator = getParamOrDefault("ThirdSVarCompare", "GE1");
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
             final int operandValue = AbilityUtils.calculateAmount(this.hostCard, svarOperand, this);
@@ -560,10 +551,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
 
         if (hasParam("CheckFourthSVar")) {
             final int sVar = AbilityUtils.calculateAmount(this.hostCard, getParam("CheckFourthSVar"), this);
-            String comparator = "GE1";
-            if (hasParam("FourthSVarCompare")) {
-                comparator = getParam("FourthSVarCompare");
-            }
+            final String comparator = getParamOrDefault("FourthSVarCompare", "GE1");
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
             final int operandValue = AbilityUtils.calculateAmount(this.hostCard, svarOperand, this);

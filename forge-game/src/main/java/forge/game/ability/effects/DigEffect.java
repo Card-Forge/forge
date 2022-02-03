@@ -111,7 +111,7 @@ public class DigEffect extends SpellAbilityEffect {
 
         boolean changeAll = false;
         boolean allButOne = false;
-        boolean totalCMC = (sa.hasParam("WithTotalCMC"));
+        boolean totalCMC = sa.hasParam("WithTotalCMC");
         int totcmc = AbilityUtils.calculateAmount(host, sa.getParam("WithTotalCMC"), sa);
 
         if (sa.hasParam("ChangeNum")) {
@@ -242,7 +242,7 @@ public class DigEffect extends SpellAbilityEffect {
                     } else if (sa.hasParam("RandomChange")) {
                         int numChanging = Math.min(destZone1ChangeNum, valid.size());
                         movedCards = CardLists.getRandomSubList(valid, numChanging);
-                    } else if (sa.hasParam("WithTotalCMC")) {
+                    } else if (totalCMC) {
                         movedCards = new CardCollection();
                         if (p == chooser) {
                             chooser.getController().tempShowCards(top);

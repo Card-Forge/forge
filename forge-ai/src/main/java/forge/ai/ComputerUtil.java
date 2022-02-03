@@ -1664,7 +1664,7 @@ public class ComputerUtil {
 
         if (saviourApi == ApiType.PutCounter || saviourApi == ApiType.PutCounterAll) {
             if (saviour != null && saviour.getParam("CounterType").equals("P1P1")) {
-                toughness = AbilityUtils.calculateAmount(saviour.getHostCard(), saviour.getParam("CounterNum"), saviour);
+                toughness = AbilityUtils.calculateAmount(saviour.getHostCard(), saviour.getParamOrDefault("CounterNum", "1"), saviour);
             } else {
                 return threatened;
             }
