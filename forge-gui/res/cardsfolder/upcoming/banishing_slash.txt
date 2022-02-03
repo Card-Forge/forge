@@ -6,4 +6,6 @@ SVar:DBToken:DB$ Token | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | Tok
 SVar:Y:Count$Valid Artifact.YouCtrl/LimitMax.1
 SVar:Z:Count$Valid Enchantment.YouCtrl/LimitMax.1
 SVar:X:SVar$Y/Plus.Z
+DeckHints:Type$Artifact|Enchantment
+DeckHas:Ability$Token & Type$Samurai
 Oracle:Destroy up to one target artifact, enchantment, or tapped creature. Then if you control an artifact and an enchantment, create a 2/2 white Samurai creature token with vigilance.
