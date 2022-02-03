@@ -1,0 +1,6 @@
+[format]
+Name:Historic (THB)
+Type:Historic
+Subtype:Arena
+Effective:2020-01-24
+Sets:XLN, RIX, DOM, G18, M19, GRN, RNA, WAR, M20, ELD, HA1, THB

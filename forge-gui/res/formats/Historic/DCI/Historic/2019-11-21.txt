@@ -1,0 +1,6 @@
+[format]
+Name:Historic (2019-11-21)
+Type:Historic
+Subtype:Arena
+Effective:2019-11-21
+Sets:XLN, RIX, DOM, G18, M19, GRN, RNA, WAR, M20, ELD, HA1
