@@ -1,0 +1,11 @@
+Name:Gloomshrieker
+ManaCost:1 B G
+Types:Enchantment Creature Cat Beast
+PT:2/1
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return target permanent card from your graveyard to your hand.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Select target permanent card
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | ReplaceWith$ Exile | Description$ If CARDNAME would die, exile it instead.
+SVar:Exile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ ReplacedCard
+DeckHas:Ability$Graveyard
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhen Gloomshrieker enters the battlefield, return target permanent card from your graveyard to your hand.\nIf Gloomshrieker would die, exile it instead.
