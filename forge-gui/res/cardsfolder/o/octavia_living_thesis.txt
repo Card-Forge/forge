@@ -3,8 +3,7 @@ ManaCost:8 U U
 Types:Legendary Creature Elemental Octopus
 PT:8/8
 K:Ward:8
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 8 | EffectZone$ All | CheckSVar$ X | SVarCompare$ GE8 | Description$ This spell costs {8} less to cast if you have eight or more instant and/or sorcery cards in your graveyard.
-SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 8 | EffectZone$ All | IsPresent$ Instant.YouOwn,Sorcery.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE8 | Description$ This spell costs {8} less to cast if you have eight or more instant and/or sorcery cards in your graveyard.
 T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigOctify | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, target creature has base power and toughness 8/8 until end of turn.
 SVar:TrigOctify:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 8 | Toughness$ 8 | IsCurse$ True | SpellDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, target creature has base power and toughness 8/8 until end of turn.
 DeckNeeds:Type$Instant|Sorcery
