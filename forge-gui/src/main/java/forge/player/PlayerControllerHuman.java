@@ -17,6 +17,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeSet;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.Range;
@@ -133,6 +134,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.util.CardTranslation;
+import forge.util.DeckAIUtils;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.Localizer;
@@ -2093,28 +2095,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         for (Player p : unplayable.keySet()) {
             final Map<DeckSection, List<? extends PaperCard>> removedUnplayableCards = unplayable.get(p);
             final List<String> labels = new ArrayList<>();
-            for (final DeckSection s: removedUnplayableCards.keySet()) {
-                labels.add("=== " + getLocalizedDeckSection(s) + " ===");
+            for (final DeckSection s: new TreeSet<>(removedUnplayableCards.keySet())) {
+                labels.add("=== " + DeckAIUtils.getLocalizedDeckSection(localizer, s) + " ===");
                 for (PaperCard c: removedUnplayableCards.get(s)) {
                     labels.add(c.toString());
                 }
             }
             getGui().reveal(localizer.getMessage("lblActionFromPlayerDeck", message, Lang.getInstance().getPossessedObject(MessageUtil.mayBeYou(player, p), "")),
                     ImmutableList.copyOf(labels));
-        }
-    }
-
-    private String getLocalizedDeckSection(DeckSection d) {
-        switch (d) {
-            case Avatar: return localizer.getMessage("lblAvatar");
-            case Commander: return localizer.getMessage("lblCommanderDeck");
-            case Main: return localizer.getMessage("lblMainDeck");
-            case Sideboard: return localizer.getMessage("lblSideboard");
-            case Planes: return localizer.getMessage("lblPlanarDeck");
-            case Schemes: return localizer.getMessage("lblSchemeDeck");
-            case Conspiracy: return /* TODO localise */ "Conspiracy";
-            case Dungeon: return /* TODO localise */ "Dungeon";
-            default: return /* TODO better handling */ "UNKNOWN";
         }
     }
 

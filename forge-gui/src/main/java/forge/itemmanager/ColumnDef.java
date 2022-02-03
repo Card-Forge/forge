@@ -463,13 +463,13 @@ public enum ColumnDef {
         new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
             @Override
             public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                return toDeck(from.getKey()).getAI() ? Integer.valueOf(1) : Integer.valueOf(-1);
+                return toDeck(from.getKey()).getAI().inMainDeck;
             }
         },
         new Function<Entry<? extends InventoryItem, Integer>, Object>() {
             @Override
             public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                return toDeck(from.getKey()).getAI()? "" : "X";
+                return toDeck(from.getKey()).getAI();
             }
         }),
     /**

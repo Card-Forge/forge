@@ -42,7 +42,6 @@ public class DeckProxy implements InventoryItem {
     // cached values
     protected ColorSet color;
     protected ColorSet colorIdentity;
-    protected Boolean ai;
     protected Set<GameFormat> formats;
     protected Set<GameFormat> exhaustiveFormats;
     private Integer mainSize = null;
@@ -141,7 +140,6 @@ public class DeckProxy implements InventoryItem {
         edition = null;
         mainSize = null;
         sbSize = null;
-        ai = null;
     }
 
     public ColorSet getColor() {
@@ -213,32 +211,8 @@ public class DeckProxy implements InventoryItem {
         return colorIdentity;
     }
 
-    public boolean getAI() {
-        if (ai == null) {
-            boolean hasAi = true;
-            for (final Entry<DeckSection, CardPool> deckEntry : getDeck()) {
-                switch (deckEntry.getKey()) {
-                case Main:
-                case Commander:
-                    for (final Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
-                        CardAiHints ai = poolEntry.getKey().getRules().getAiHints();
-                        if (ai.getRemAIDecks()) {
-                            hasAi = false;
-                            break;
-                        }
-                    }
-                    break;
-                case Sideboard: // Let's pretend the sideboard doesn't matter
-                default:
-                    break; //ignore other sections
-                }
-                if (hasAi == false) {
-                    break;
-                }
-            }
-            ai = hasAi;
-        }
-        return ai;
+    public Deck.UnplayableAICards getAI() {
+        return getDeck().getUnplayableAICards();
     }
 
 
