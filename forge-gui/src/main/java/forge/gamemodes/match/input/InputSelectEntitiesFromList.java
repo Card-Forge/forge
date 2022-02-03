@@ -6,7 +6,9 @@ import java.util.List;
 
 import forge.game.GameEntity;
 import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.card.CardView;
+import forge.game.cost.CostTapType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
@@ -15,6 +17,7 @@ import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.util.ITriggerEvent;
+import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 
@@ -116,9 +119,18 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
 
     @Override
     protected String getMessage() {
-        return max == Integer.MAX_VALUE
+        StringBuilder msg = new StringBuilder();
+        msg.append(max == Integer.MAX_VALUE
                 ? String.format(message, selected.size())
-                : String.format(message, max - selected.size());
+                        : String.format(message, max - selected.size()));
+
+        if (sa != null && sa.hasParam("Crew")) {
+            msg.append("\nCrewing: ").
+            append(CardLists.getTotalPower((FCollection<Card>)getSelected(), true, true)).
+            append(" / ").append(TextUtil.fastReplace(sa.getPayCosts().getCostPartByType(CostTapType.class).getType(), "Creature.YouCtrl+withTotalPowerGE", ""));
+        }
+
+        return msg.toString();
     }
 
     @Override
