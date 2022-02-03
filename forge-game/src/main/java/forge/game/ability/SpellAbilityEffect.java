@@ -101,13 +101,13 @@ public abstract class SpellAbilityEffect {
                 makeSpellDescription(sa, sb, stackDesc);
             }
         } else {
-            final String conditionDesc = sa.getParam("ConditionDescription");
+            final String condDesc = sa.getParam("ConditionDescription");
             final String afterDesc = sa.getParam("AfterDescription");
             final String baseDesc = CardTranslation.translateSingleDescriptionText(this.getStackDescription(sa), sa.getHostCard().getName());
-            if (conditionDesc != null) {
-                sb.append(conditionDesc).append(" ");
+            if (condDesc != null) {
+                sb.append(condDesc).append(" ");
             }
-            sb.append(baseDesc);
+            sb.append(condDesc != null && condDesc.endsWith(",") ? StringUtils.uncapitalize(baseDesc) : baseDesc);
             if (afterDesc != null) {
                 sb.append(" ").append(afterDesc);
             }
