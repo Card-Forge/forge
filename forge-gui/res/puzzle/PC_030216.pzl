@@ -1,0 +1,23 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 030216 - Downside Up
+URL:https://www.coolstuffinc.com/a/seanuy-030216-downside-up
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description: Win this turn. It is the upkeep phase. If you marked upkeep as "skip" then unmark it and restart.
+[state]
+turn=2
+ActivePlayer=human
+ActivePhase=upkeep
+HumanLife=15
+AILife=3
+humanhand=Elemental Uprising|Set:OGW; Hagra Sharpshooter|Set:BFZ; Inverter of Truth|Set:OGW; Turn Against|Set:BFZ; 
+humanprecast=
+humangraveyard=
+humanlibrary= 
+humanbattlefield=Blisterpod|Set:BFZ; Sky Scourer|Set:OGW; Pilgrim's Eye|Set:BFZ; Tajuru Stalwart|Counters:P1P1=3|Set:BFZ; Harvester Troll|Counters:P1P1=2|Set:OGW; Kozilek's Translator|Set:OGW; Swamp|Set:BFZ; Swamp|Set:BFZ; Swamp|Set:BFZ; Swamp|Set:BFZ; Forest|Set:BFZ; Forest|Set:BFZ; Forest|Set:BFZ; Forest|Set:BFZ; Forest|Set:BFZ; Mortuary Mire|Set:BFZ; Timber Gorge|Set:OGW
+aibattlefield=Plains|Set:BFZ|Tapped; Plains|Set:BFZ|Tapped; Plains|Set:BFZ|Tapped; Plains|Set:BFZ|Tapped; Island|Set:BFZ|Tapped; Island|Set:BFZ|Tapped; Island|Set:BFZ|Tapped; Island|Set:BFZ|Tapped; Wastes|Set:OGW|Tapped; Wastes|Set:OGW|Tapped; Sandstone Bridge|Set:BFZ|Tapped; Stone Haven Medic|Set:BFZ; Wall of Resurgence|Set:OGW; Ancient Crab|Set:OGW; Cultivator Drone|Set:OGW|Tapped; Eldrazi Displacer|Set:OGW; Drowner of Hope|Set:BFZ; Island|Set:BFZ|Id:420|Counters:P1P1=3|Tapped;
+aiprecast=Wall of Resurgence:DBAnimate->420
+aigraveyard=
+ailibrary=
+aiexile=
