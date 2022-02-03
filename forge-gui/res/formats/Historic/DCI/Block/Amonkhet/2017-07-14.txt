@@ -1,5 +1,5 @@
 [format]
-Name:Amonkhet Block (Hour of Devastation)
+Name:Block: Amonkhet (HOU)
 Type:Historic
 Subtype:Block
 Effective:2017-07-14

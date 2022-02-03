@@ -1,5 +1,5 @@
 [format]
-Name:Masques Block (Nemesis)
+Name:Block: Masques (NMS)
 Type:Historic
 Subtype:Block
 Effective:2000-03-01

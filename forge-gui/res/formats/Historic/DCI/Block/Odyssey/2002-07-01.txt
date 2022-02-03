@@ -1,5 +1,5 @@
 [format]
-Name:Odyssey Block (Judgment)
+Name:Block: Odyssey (JUD)
 Type:Historic
 Subtype:Block
 Effective:2002-07-01

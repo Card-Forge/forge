@@ -1,5 +1,5 @@
 [format]
-Name:Kamigawa Block (Champions of Kamigawa)
+Name:Block: Kamigawa (CHK)
 Type:Historic
 Subtype:Block
 Effective:2004-10-20

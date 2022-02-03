@@ -1,5 +1,5 @@
 [format]
-Name:Type II (Ice Age)
+Name:Type II (ICE)
 Type:Historic
 Subtype:Standard
 Effective:1995-06

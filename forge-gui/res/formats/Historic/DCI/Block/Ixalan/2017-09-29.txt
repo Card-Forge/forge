@@ -1,5 +1,5 @@
 [format]
-Name:Ixalan Block (Ixalan)
+Name:Block: Ixalan (XLN)
 Type:Historic
 Subtype:Block
 Effective:2017-09-29

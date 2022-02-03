@@ -1,5 +1,5 @@
 [format]
-Name:Urza's Saga/Urza's Legacy Standalone (Urza's Legacy)
+Name:Block: Urza (ULG)
 Type:Historic
 Subtype:Block
 Effective:1999-03-01

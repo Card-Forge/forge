@@ -1,5 +1,5 @@
 [format]
-Name:Mirrodin Block (Darksteel)
+Name:Block: Mirrodin (DST)
 Type:Historic
 Subtype:Block
 Effective:2004-02-20

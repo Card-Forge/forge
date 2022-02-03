@@ -1,5 +1,5 @@
 [format]
-Name:Innistrad Block (Avacyn Restored)
+Name:Block: Innistrad (AVR)
 Type:Historic
 Subtype:Block
 Effective:2012-05-04

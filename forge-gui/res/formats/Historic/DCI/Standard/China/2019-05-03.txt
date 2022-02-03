@@ -1,7 +1,7 @@
 [format]
-Name:China Standard (War of the Spark)
+Name:China Standard (WAR)
 Type:Historic
 Subtype:Standard
-Effective:2019-05-24
+Effective:2019-05-03
 Sets:XLN, RIX, DOM, GS1, M19, GRN, G18, RNA, WAR
 Banned:Rampaging Ferocidon

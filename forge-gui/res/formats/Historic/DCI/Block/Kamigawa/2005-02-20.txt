@@ -1,5 +1,5 @@
 [format]
-Name:Kamigawa Block (Betrayers of Kamigawa)
+Name:Block: Kamigawa (BOK)
 Type:Historic
 Subtype:Block
 Effective:2005-02-20

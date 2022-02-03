@@ -1,5 +1,5 @@
 [format]
-Name:Battle for Zendikar Block (Oath of the Gatewatch)
+Name:Block: Battle for Zendikar (OGW)
 Type:Historic
 Subtype:Block
 Effective:2016-01-22

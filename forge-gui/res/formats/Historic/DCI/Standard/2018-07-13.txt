@@ -1,7 +1,7 @@
 [format]
-Name:China Standard (Core Set 2019)
+Name:Standard (Core Set 2019)
 Type:Historic
 Subtype:Standard
-Effective:2018-07-14
-Sets:KLD, AER, W17, AKH, HOU, XLN, RIX, DOM, GS1, M19
+Effective:2018-07-13
+Sets:KLD, AER, W17, AKH, HOU, XLN, RIX, DOM, M19
 Banned:Aetherworks Marvel; Attune with Aether; Felidar Guardian; Rampaging Ferocidon; Ramunap Ruins; Rogue Refiner; Smuggler's Copter

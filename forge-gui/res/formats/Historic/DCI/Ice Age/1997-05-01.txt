@@ -1,8 +1,0 @@
-[format]
-Name:Ice Age
-Type:Historic
-Subtype:Ice Age
-Effective:1997-05-01
-Retired:1997-07-01
-Sets:ICE
-Banned:Amulet of Quoz, Thawing Glaciers, Zuran Orb

@@ -1,5 +1,5 @@
 [format]
-Name:Invasion Block (Planeshift)
+Name:Block: Invasion (PLS)
 Type:Historic
 Subtype:Block
 Effective:2001-03-01

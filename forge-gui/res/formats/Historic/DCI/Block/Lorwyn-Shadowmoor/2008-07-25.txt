@@ -1,5 +1,5 @@
 [format]
-Name:Lorwyn-Shadowmoor Block (Eventide)
+Name:Block: Lorwyn;Shadowmoor (EVE)
 Type:Historic
 Subtype:Block
 Effective:2008-07-25

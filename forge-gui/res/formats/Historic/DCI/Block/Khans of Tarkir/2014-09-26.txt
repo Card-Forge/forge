@@ -1,5 +1,5 @@
 [format]
-Name:Khans of Tarkir Block (Khans of Tarkir)
+Name:Block: Khans of Tarkir (KTK)
 Type:Historic
 Subtype:Block
 Effective:2014-09-26

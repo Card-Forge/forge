@@ -2,6 +2,6 @@
 Name:Standard (War of the Spark)
 Type:Historic
 Subtype:Standard
-Effective:2019-05-24
+Effective:2019-05-03
 Sets:XLN, RIX, DOM, M19, GRN, G18, RNA, WAR
 Banned:Rampaging Ferocidon

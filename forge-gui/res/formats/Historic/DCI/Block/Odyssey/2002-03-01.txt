@@ -1,5 +1,5 @@
 [format]
-Name:Odyssey Block (Torment)
+Name:Block: Odyssey (TOR)
 Type:Historic
 Subtype:Block
 Effective:2002-03-01

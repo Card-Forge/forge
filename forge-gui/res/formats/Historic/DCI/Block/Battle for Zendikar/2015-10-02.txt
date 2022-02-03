@@ -1,5 +1,5 @@
 [format]
-Name:Battle for Zendikar Block (Battle for Zendikar)
+Name:Block: Battle for Zendikar (BFZ)
 Type:Historic
 Subtype:Block
 Effective:2015-10-02

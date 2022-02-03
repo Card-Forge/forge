@@ -2,6 +2,6 @@
 Name:Standard (Guilds of Ravnica)
 Type:Historic
 Subtype:Standard
-Effective:2018-10-06
+Effective:2018-10-05
 Sets:XLN, RIX, DOM, M19, GRN
 Banned:Rampaging Ferocidon

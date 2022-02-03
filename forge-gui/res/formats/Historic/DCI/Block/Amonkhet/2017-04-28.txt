@@ -1,5 +1,5 @@
 [format]
-Name:Amonkhet Block (Amonkhet)
+Name:Block: Amonkhet (AKH)
 Type:Historic
 Subtype:Block
 Effective:2017-04-28

@@ -1,5 +1,5 @@
 [format]
-Name:Lorwyn Block (Lorwyn)
+Name:Block: Lorwyn (LRW)
 Type:Historic
 Subtype:Block
 Effective:2007-10-20
