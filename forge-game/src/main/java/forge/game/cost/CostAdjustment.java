@@ -137,7 +137,7 @@ public class CostAdjustment {
                 if (StringUtils.isNumeric(amount)) {
                     count = Integer.parseInt(amount);
                 } else {
-                    if (st.hasParam("AffectedAmount")) {
+                    if (st.hasParam("Relative")) {
                         count = AbilityUtils.calculateAmount(hostCard, st.hasSVar(amount) ? st.getSVar(amount) : amount, sa);
                     } else {
                         count = AbilityUtils.calculateAmount(hostCard, amount, st);
