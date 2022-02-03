@@ -1,0 +1,23 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 030916 - Fifty-Fifty
+URL:https://www.coolstuffinc.com/a/seanuy-030916-fifty-fifty
+Goal:Win
+Turns:2
+Difficulty:Hard
+Description: Win on your turn.
+[state]
+ActivePlayer=AI
+ActivePhase=END_OF_TURN
+HumanLife=3
+AILife=19
+humanhand= Obstinate Baloth|Id:430;
+humangraveyard=
+humanlibrary= Tranquil Expanse;
+humanbattlefield=Forest|Tapped|Set:THS; Forest|Tapped|Set:THS; Forest|Tapped|Set:THS; Plains|Tapped|Set:THS; Plains|Tapped|Set:THS; Plains|Tapped|Set:THS; Plains|Set:THS; Seedcradle Witch; Field Surgeon; Oreskos Sun Guide|Id:420; Blazing Torch|AttachedTo:420; Nullmage Advocate; Karametra's Acolyte; Wirewood Channeler;  Test of Endurance; Journey to Nowhere|Id:2|RememberedCards:1
+aibattlefield= Vodalian Zombie; Psychic Membrane; Organ Grinder|Tapped; Serum Raker|Tapped; Nekusar, the Mindrazer; Pit Trap; Island|Set:THS; Island|Tapped|Set:THS; Swamp|Set:THS; Swamp|Tapped|Set:THS; Swamp|Tapped|Set:THS; Swamp|Tapped|Set:THS; Temple of Malice; Brain Maggot|ExecuteScript:TrigExile->Human; Faceless Butcher|Id:6|RememberedCards:5; 
+aiprecast=
+humanprecast=
+aigraveyard=Darkness; Needlebite Trap; 
+ailibrary=
+aiexile=Taurean Mauler|Id:1|ExiledWith:2
+humanexile=Sun Titan|Id:5|ExiledWith:6; 
