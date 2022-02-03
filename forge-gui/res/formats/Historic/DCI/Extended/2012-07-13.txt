@@ -1,5 +1,5 @@
 [format]
-Name:Extended (Magic 2013)
+Name:Extended (M13)
 Type:Historic
 Subtype:Extended
 Effective:2012-05-04

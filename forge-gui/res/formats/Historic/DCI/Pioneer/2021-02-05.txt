@@ -1,5 +1,5 @@
 [format]
-Name:Pioneer (Kaldheim)
+Name:Pioneer (KHM)
 Type:Historic
 Subtype:Pioneer
 Effective:2021-02-05

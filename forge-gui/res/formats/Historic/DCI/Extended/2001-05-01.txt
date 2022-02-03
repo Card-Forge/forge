@@ -1,5 +1,5 @@
 [format]
-Name:Extended (Seventh Edition)
+Name:Extended (7ED)
 Type:Historic
 Subtype:Extended
 Effective:2001-05-01

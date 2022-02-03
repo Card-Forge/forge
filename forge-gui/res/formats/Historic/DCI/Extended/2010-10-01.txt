@@ -1,5 +1,5 @@
 [format]
-Name:Extended (Scars of Mirrodin)
+Name:Extended (SOM)
 Type:Historic
 Subtype:Extended
 Effective:2010-10-01

@@ -1,5 +1,5 @@
 [format]
-Name:Extended (Eighth Edition)
+Name:Extended (8ED)
 Type:Historic
 Subtype:Extended
 Effective:2003-09-01

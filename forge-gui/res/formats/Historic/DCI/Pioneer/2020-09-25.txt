@@ -1,5 +1,5 @@
 [format]
-Name:Pioneer (Zendikar Rising)
+Name:Pioneer (ZNR)
 Type:Historic
 Subtype:Pioneer
 Effective:2020-09-25

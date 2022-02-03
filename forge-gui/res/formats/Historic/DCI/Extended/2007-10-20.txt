@@ -1,5 +1,5 @@
 [format]
-Name:Extended (Lorwyn)
+Name:Extended (LRW)
 Type:Historic
 Subtype:Extended
 Effective:2007-10-20

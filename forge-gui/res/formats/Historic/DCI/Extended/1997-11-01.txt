@@ -1,5 +1,5 @@
 [format]
-Name:Extended (Tempest)
+Name:Extended (TMP)
 Type:Historic
 Subtype:Extended
 Effective:1997-11-01

@@ -1,5 +1,5 @@
 [format]
-Name:Extended (Invasion)
+Name:Extended (INV)
 Type:Historic
 Subtype:Extended
 Effective:2000-11-01

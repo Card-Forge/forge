@@ -1,5 +1,5 @@
 [format]
-Name:Extended (Future Sight)
+Name:Extended (FUT)
 Type:Historic
 Subtype:Extended
 Effective:2007-05-20

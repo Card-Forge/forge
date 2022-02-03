@@ -1,5 +1,5 @@
 [format]
-Name:Extended (2010 Core Set)
+Name:Extended (M10)
 Type:Historic
 Subtype:Extended
 Effective:2009-07-17

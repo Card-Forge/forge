@@ -1,5 +1,5 @@
 [format]
-Name:Extended (Planar Chaos)
+Name:Extended (PLC)
 Type:Historic
 Subtype:Extended
 Effective:2007-02-20

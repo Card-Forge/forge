@@ -1,5 +1,5 @@
 [format]
-Name:Extended (Torment)
+Name:Extended (TOR)
 Type:Historic
 Subtype:Extended
 Effective:2002-03-01

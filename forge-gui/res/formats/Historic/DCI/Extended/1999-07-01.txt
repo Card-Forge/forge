@@ -1,5 +1,5 @@
 [format]
-Name:Extended (Urza's Destiny)
+Name:Extended (UDS)
 Type:Historic
 Subtype:Extended
 Effective:1999-07-01

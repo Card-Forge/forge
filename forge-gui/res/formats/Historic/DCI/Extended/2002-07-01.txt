@@ -1,5 +1,5 @@
 [format]
-Name:Extended (Judgment)
+Name:Extended (JUD)
 Type:Historic
 Subtype:Extended
 Effective:2002-07-01

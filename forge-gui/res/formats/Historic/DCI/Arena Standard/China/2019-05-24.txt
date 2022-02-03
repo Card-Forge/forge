@@ -1,5 +1,5 @@
 [format]
-Name:China Arena Standard (War of the Spark)
+Name:China Arena Standard (WAR)
 Type:Historic
 Subtype:Standard
 Effective:2019-05-24

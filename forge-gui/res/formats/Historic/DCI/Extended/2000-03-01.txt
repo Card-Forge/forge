@@ -1,5 +1,5 @@
 [format]
-Name:Extended (Nemesis)
+Name:Extended (NMS)
 Type:Historic
 Subtype:Extended
 Effective:2000-03-01

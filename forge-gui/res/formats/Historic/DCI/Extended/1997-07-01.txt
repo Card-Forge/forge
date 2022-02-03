@@ -1,5 +1,5 @@
 [format]
-Name:Extended (Weatherlight)
+Name:Extended (WTH)
 Type:Historic
 Subtype:Extended
 Effective:1997-07-01

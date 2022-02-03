@@ -1,5 +1,5 @@
 [format]
-Name:Extended (Odyssey)
+Name:Extended (ODY)
 Type:Historic
 Subtype:Extended
 Effective:2001-11-01

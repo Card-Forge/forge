@@ -1,5 +1,5 @@
 [format]
-Name:Extended (Saviors of Kamigawa)
+Name:Extended (SOK)
 Type:Historic
 Subtype:Extended
 Effective:2005-06-20

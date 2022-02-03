@@ -1,5 +1,5 @@
 [format]
-Name:Extended (Morningtide)
+Name:Extended (MOR)
 Type:Historic
 Subtype:Extended
 Effective:2008-02-01

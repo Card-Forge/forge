@@ -1,5 +1,5 @@
 [format]
-Name:Extended (Ninth Edition)
+Name:Extended (9ED)
 Type:Historic
 Subtype:Extended
 Effective:2005-08-20

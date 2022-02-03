@@ -1,5 +1,5 @@
 [format]
-Name:Extended (Time Spiral)
+Name:Extended (TSP)
 Type:Historic
 Subtype:Extended
 Effective:2006-10-20

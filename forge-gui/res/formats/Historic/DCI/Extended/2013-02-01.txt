@@ -1,5 +1,5 @@
 [format]
-Name:Extended (Gatecrash)
+Name:Extended (GTC)
 Type:Historic
 Subtype:Extended
 Effective:2013-02-01

@@ -1,5 +1,5 @@
 [format]
-Name:Arena Standard (War of the Spark)
+Name:Arena Standard (WAR)
 Type:Historic
 Subtype:Standard
 Effective:2019-05-24
