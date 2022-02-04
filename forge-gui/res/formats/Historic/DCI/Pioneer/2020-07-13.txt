@@ -3,5 +3,5 @@ Name:Pioneer (2020-07-13)
 Type:Historic
 Subtype:Pioneer
 Effective:2020-07-13
-Sets:RTR, GTC, DGM, M14, THS, BNG, JOU, M15, KTK, FRF, DTK, ORI, BFZ, OGW, W16, SOI, EMN, KLD, AER, W17, AKH, HOU, XLN, RIX, DOM, M19, G18, GRN, RNA, WAR, M20, ELD, THB, IKO, M21
+Sets:RTR, GTC, DGM, M14, THS, BNG, JOU, M15, KTK, FRF, DTK, ORI, BFZ, OGW, W16, SOI, EMN, KLD, AER, W17, AKH, HOU, XLN, RIX, DOM, M19, GRN, G18, RNA, WAR, M20, ELD, THB, IKO, M21
 Banned:Bloodstained Mire; Felidar Guardian; Field of the Dead; Flooded Strand; Leyline of Abundance; Nexus of Fate; Oko, Thief of Crowns; Once Upon a Time; Polluted Delta; Smuggler's Copter; Veil of Summer; Windswept Heath; Wooded Foothills

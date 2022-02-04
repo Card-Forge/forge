@@ -3,5 +3,5 @@ Name:Pioneer (2019-10-21)
 Type:Historic
 Subtype:Pioneer
 Effective:2019-10-21
-Sets:RTR, GTC, DGM, M14, THS, BNG, JOU, M15, KTK, FRF, DTK, ORI, BFZ, OGW, W16, SOI, EMN, KLD, AER, W17, AKH, HOU, XLN, RIX, DOM, M19, G18, GRN, RNA, WAR, M20, ELD
+Sets:RTR, GTC, DGM, M14, THS, BNG, JOU, M15, KTK, FRF, DTK, ORI, BFZ, OGW, W16, SOI, EMN, KLD, AER, W17, AKH, HOU, XLN, RIX, DOM, M19, GRN, G18, RNA, WAR, M20, ELD
 Banned:Bloodstained Mire; Flooded Strand; Polluted Delta; Windswept Heath; Wooded Foothills
