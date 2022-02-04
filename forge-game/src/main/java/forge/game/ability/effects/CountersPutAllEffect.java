@@ -11,6 +11,7 @@ import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 
 public class CountersPutAllEffect extends SpellAbilityEffect  {
 
@@ -22,15 +23,18 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
         final String zone = sa.getParamOrDefault("ValidZone", "Battlefield");
 
-        sb.append("Put ").append(amount).append(" ").append(cType.getName()).append(" counter");
-        if (amount != 1) {
-            sb.append("s");
-        }
-        sb.append(" on each valid ");
-        if (zone.matches("Battlefield")) {
-            sb.append("permanent.");
+        sb.append("Put ");
+        sb.append(Lang.nounWithNumeralExceptOne(amount, cType.getName().toLowerCase() + " counter"));
+        sb.append(" on each ");
+        if (sa.hasParam("ValidCardsDesc")) {
+            sb.append(sa.getParam("ValidCardsDesc")).append(".");
         } else {
-            sb.append("card in ").append(zone).append(".");
+            sb.append("valid ");
+            if (zone.matches("Battlefield")) {
+                sb.append("permanent.");
+            } else {
+                sb.append("card in ").append(zone).append(".");
+            }
         }
 
         return sb.toString();
