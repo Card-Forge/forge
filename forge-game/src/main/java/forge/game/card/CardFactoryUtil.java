@@ -3357,10 +3357,11 @@ public class CardFactoryUtil {
 
             // tapXType has a special check for withTotalPower, and NEEDS it to be "+withTotalPowerGE"
             // So adding redundant YouCtrl to simplify matters even though its unnecessary
-            String effect = "AB$ Animate | Cost$ tapXType<Any/Creature.YouCtrl+withTotalPowerGE" + power +
-                    "> | CostDesc$ Crew " + power + " (Tap any number of creatures you control with total power " + power +
-                    " or more: | Crew$ True | Secondary$ True | Defined$ Self | Types$ Creature,Artifact | RemoveCardTypes$ True" +
-                    " | SpellDescription$ CARDNAME becomes an artifact creature until end of turn.)";
+            String effect = "AB$ Animate | Cost$ tapXType<Any/Creature.YouCtrl+withTotalPowerGE" + power + "> | " +
+                    "CostDesc$ Crew " + power + " (Tap any number of creatures you control with total power " + power +
+                    " or more: | Crew$ True | Secondary$ True | Defined$ Self | Types$ Creature,Artifact | " +
+                    "RemoveCardTypes$ True | StackDescription$ SpellDescription | SpellDescription$ CARDNAME becomes" +
+                    " an artifact creature until end of turn.)";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
