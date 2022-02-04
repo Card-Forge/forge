@@ -3,5 +3,5 @@ ManaCost:2 W
 Types:Creature Fox Ninja
 PT:2/2
 K:Ninjutsu:3 W
-K:Double Strike
+K:Double strike
 Oracle:Ninjutsu {3}{W} ({3}{W}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nDouble strike
