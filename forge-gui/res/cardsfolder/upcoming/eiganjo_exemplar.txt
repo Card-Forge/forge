@@ -1,0 +1,7 @@
+Name:Eiganjo Exemplar
+ManaCost:1 W
+Types:Enchantment Creature Human Samurai
+PT:2/1
+T:Mode$ Attacks | ValidCard$ Samurai.YouCtrl,Warrior.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a Samurai or Warrior you control attacks alone, it gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ 1 | NumDef$ 1
+Oracle:Whenever a Samurai or Warrior you control attacks alone, it gets +1/+1 until end of turn.

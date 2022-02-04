@@ -1,0 +1,25 @@
+Name:The Restoration of Eiganjo
+ManaCost:2 W
+Types:Enchantment Saga
+K:Saga:3:DBChange,DBDiscard,DBTransform
+SVar:DBChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Plains.Basic | ChangeNum$ 1 | ChangeTypeDesc$ basic Plains card | SpellDescription$ Search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.
+SVar:DBDiscard:DB$ ImmediateTrigger | Execute$ DBReanimate | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ You may discard a card. When you do, return target permanent card with mana value 2 or less from your graveyard to the battlefield tapped.
+SVar:DBReanimate:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Permanent.YouOwn+cmcLE2 | TgtPrompt$ Choose a permanent card with mana value 2 or less | Tapped$ True
+SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AlternateMode:DoubleFaced
+Oracle:(As this Saga enters and after your draw step, add a lore counter.)\nI — Search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.\nII — You may discard a card. When you do, return target permanent card with mana value 2 or less from your graveyard to the battlefield tapped..\nIII — Exile this Saga, then return it to the battlefield transformed under your control.
+
+ALTERNATE
+
+Name:Architect of Restoration
+ManaCost:no cost
+Colors:white
+Types:Enchantment Creature Fox Monk
+PT:3/4
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever Architect of Restoration attacks or blocks, create a 1/1 colorless Spirit creature token.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever Architect of Restoration attacks or blocks, create a 1/1 colorless Spirit creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_spirit
+Oracle:Vigilance\nWhenever Architect of Restoration attacks or blocks, create a 1/1 colorless Spirit creature token.
