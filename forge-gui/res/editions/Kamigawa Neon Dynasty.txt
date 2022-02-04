@@ -426,18 +426,11 @@ ScryfallCode=NEO
 414 R Otawara, Soaring City @Yuta Shimpo
 415 R Sokenzan, Crucible of Defiance @Nao Miyoshi
 416 R Takenuma, Abandoned Mire @Nao Miyoshi
-417 @
-418 @
-419 @
+
 420 M Blade of the Oni @Tubaki Halsame
-421 @
-422 @
-423 @
-424 @
+
 425 R Risona, Asari Commander @Kato Ayaka
-426 @
-427 @
-428 @
+
 429 R Hidetsugu, Devouring Chaos @SENNSU
 430 R Hidetsugu, Devouring Chaos @SENNSU
 431 R Hidetsugu, Devouring Chaos @SENNSU
