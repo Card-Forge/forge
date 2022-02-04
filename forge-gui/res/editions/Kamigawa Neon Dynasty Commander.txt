@@ -10,5 +10,21 @@ ScryfallCode=NEC
 2 M Kotori, Pilot Prodigy @Aaron J. Riley
 3 M Kaima, the Fractured Calm @
 4 M Shorikai, Genesis Engine @
+31 R Myojin of Blooming Dawn @Yigit Koroglu
+32 M Yoshimaru, Ever Faithful @Ilse Gort
+33 R Myojin of Cryptic Dreams @Yigit Koroglu
+34 R Myojin of Grim Betrayal @Jason A. Engle
+35 R Ruthless Technomancer @PINDURSKI
+36 R Myojin of Roaring Blades @Jason A. Engle
+37 M Go-Shintai of Life's Origin @Alexander Mokhov
+38 R Myojin of Towering Might @Ryan Pancoast
+42 R Myojin of Blooming Dawn @Yigit Koroglu
+46 M Yoshimaru, Ever Faithful @Ilse Gort
+52 R Myojin of Cryptic Dreams @Yigit Koroglu
+55 R Myojin of Grim Betrayal @Jason A. Engle
+56 R Ruthless Technomancer @PINDURSKI
+61 R Myojin of Roaring Blades @Jason A. Engle
+66 M Go-Shintai of Life's Origin @Alexander Mokhov
+68 R Myojin of Towering Might @Ryan Pancoast
 77 M Chishiro, the Shattered Blade @Lius Lasahido
 78 M Kotori, Pilot Prodigy @Aaron J. Riley
