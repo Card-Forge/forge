@@ -146,6 +146,10 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             this.setPhases(PhaseType.parseRange(params.get("ConditionPhases")));
         }
 
+        if (params.containsKey("ConditionFirstCombat")) {
+            this.setFirstCombatOnly(true);
+        }
+
         if (params.containsKey("ConditionGameTypes")) {
             this.setGameTypes(GameType.listValueOf(params.get("ConditionGameTypes")));
         }
@@ -320,6 +324,10 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         }
 
         if (this.isOpponentTurn() && !phase.getPlayerTurn().isOpponentOf(activator)) {
+            return false;
+        }
+
+        if (this.getFirstCombatOnly() && !phase.isFirstCombat()) {
             return false;
         }
 
