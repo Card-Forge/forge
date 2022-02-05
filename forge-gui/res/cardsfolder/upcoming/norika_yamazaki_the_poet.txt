@@ -1,0 +1,10 @@
+Name:Norika Yamazaki, the Poet
+ManaCost:2 W
+Types:Legendary Creature Human Samurai
+PT:3/2
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Samurai.YouCtrl,Warrior.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPlay | TriggerDescription$ Whenever a Samurai or Warrior you control attacks alone, you may cast target enchantment card from your graveyard this turn.
+SVar:TrigPlay:DB$ Play | TgtZone$ Graveyard | ValidTgts$ Enchantment.YouOwn | ValidSA$ Spell | TgtPrompt$ Choose target enchantment in your graveyard | Optional$ True | AILogic$ ReplaySpell
+DeckHints:Type$Samurai|Warrior|Enchantment
+DeckHas:Ability$Graveyard
+Oracle:Vigilance\nWhenever a Samurai or Warrior you control attacks alone, you may cast target enchantment card from your graveyard this turn.
