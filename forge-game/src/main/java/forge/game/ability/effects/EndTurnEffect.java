@@ -20,10 +20,8 @@ public class EndTurnEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final List<Player> enders = getDefinedPlayersOrTargeted(sa, "Defined");
         final Player ender = enders.isEmpty() ? sa.getActivatingPlayer() : enders.get(0);
-        if (sa.hasParam("Optional")) {
-            if (!ender.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantEndTurn"))) {
-                return;
-            }
+        if (sa.hasParam("Optional") && !ender.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantEndTurn"))) {
+            return;
         }
         Game game = ender.getGame();
         // Steps taken from gatherer's rulings on Time Stop.

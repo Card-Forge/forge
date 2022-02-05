@@ -917,12 +917,12 @@ public class CardFactoryUtil {
             }
 
             StringBuilder trig = new StringBuilder();
-            trig.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self");
+            trig.append("Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self");
             trig.append(" | TriggerDescription$ Champion ").append(article).append(" ").append(desc);
             trig.append(" (").append(Keyword.getInstance("Champion:"+desc).getReminderText()) .append(")");
 
             StringBuilder trigReturn = new StringBuilder();
-            trigReturn.append("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self");
+            trigReturn.append("Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self");
             trigReturn.append(" | Secondary$ True | TriggerDescription$ When this leaves the battlefield, that card returns to the battlefield.");
 
             StringBuilder ab = new StringBuilder();
@@ -1065,7 +1065,7 @@ public class CardFactoryUtil {
             inst.addTrigger(trigger);
         } else if (keyword.startsWith("Evoke")) {
             final StringBuilder trigStr = new StringBuilder(
-                    "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Secondary$ True | TriggerDescription$ "
+                    "Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Secondary$ True | TriggerDescription$ "
                             + "Evoke (" + inst.getReminderText() + ")");
 
             final String effect = "DB$ Sacrifice";
@@ -1074,7 +1074,7 @@ public class CardFactoryUtil {
 
             inst.addTrigger(trigger);
         } else if (keyword.equals("Evolve")) {
-            final String trigStr = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
+            final String trigStr = "Mode$ ChangesZone | Destination$ Battlefield | "
                     + " ValidCard$ Creature.YouCtrl+Other | EvolveCondition$ True | "
                     + "TriggerZones$ Battlefield | Secondary$ True | "
                     + "TriggerDescription$ Evolve (" + inst.getReminderText()+ ")";
@@ -1096,7 +1096,7 @@ public class CardFactoryUtil {
 
             inst.addTrigger(trigger);
         } else if (keyword.equals("Exploit")) {
-            final String trigStr = "Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Secondary$ True"
+            final String trigStr = "Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Secondary$ True"
                     + " | TriggerDescription$ Exploit (" + inst.getReminderText() + ")";
             final String effect = "DB$ Sacrifice | SacValid$ Creature | SacMessage$ creature | Exploit$ True | Optional$ True";
 
@@ -1129,7 +1129,7 @@ public class CardFactoryUtil {
 
             final String name = StringUtils.join(k);
 
-            final String trigStr = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield "
+            final String trigStr = "Mode$ ChangesZone | Destination$ Battlefield "
                     + " | ValidCard$ Card.Self | Secondary$ True"
                     + " | TriggerDescription$ Fabricate " + n + " (" + inst.getReminderText() + ")";
 
@@ -1251,7 +1251,7 @@ public class CardFactoryUtil {
             // Fourth, create a trigger that removes the haunting status if the
             // haunter leaves the exile
             final StringBuilder sbUnExiled = new StringBuilder();
-            sbUnExiled.append("Mode$ ChangesZone | Origin$ Exile | Destination$ Any | ");
+            sbUnExiled.append("Mode$ ChangesZone | Origin$ Exile | ");
             sbUnExiled.append("ValidCard$ Card.Self | Static$ True | Secondary$ True | ");
             sbUnExiled.append("TriggerDescription$ Blank");
 
@@ -1266,7 +1266,7 @@ public class CardFactoryUtil {
 
             // Trigger for when the haunted creature leaves the battlefield
             final StringBuilder sbHauntRemoved = new StringBuilder();
-            sbHauntRemoved.append("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ");
+            sbHauntRemoved.append("Mode$ ChangesZone | Origin$ Battlefield | ");
             sbHauntRemoved.append("ValidCard$ Creature.HauntedBy | Static$ True | Secondary$ True | ");
             sbHauntRemoved.append("TriggerDescription$ Blank");
 
@@ -1344,7 +1344,7 @@ public class CardFactoryUtil {
             triggers.add(gainControlTrigger);
 
             // when the card with hideaway leaves the battlefield, forget all exiled cards
-            final Trigger changeZoneTrigger = TriggerHandler.parseTrigger("Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | TriggerZones$ Battlefield | Static$ True", card, intrinsic);
+            final Trigger changeZoneTrigger = TriggerHandler.parseTrigger("Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | TriggerZones$ Battlefield | Static$ True", card, intrinsic);
             String cleanupStr = "DB$ Cleanup | ClearRemembered$ True";
             changeZoneTrigger.setOverridingAbility(AbilityFactory.getAbility(cleanupStr, card));
             triggers.add(changeZoneTrigger);
@@ -1366,7 +1366,7 @@ public class CardFactoryUtil {
             inst.addTrigger(trigger);
         } else if (keyword.equals("Living Weapon")) {
             final StringBuilder sbTrig = new StringBuilder();
-            sbTrig.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ");
+            sbTrig.append("Mode$ ChangesZone | Destination$ Battlefield | ");
             sbTrig.append("ValidCard$ Card.Self | Secondary$ True | TriggerDescription$ ");
             sbTrig.append("Living Weapon (").append(inst.getReminderText()).append(")");
 
@@ -1547,7 +1547,7 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Partner:")) {
             // Partner With
             final String[] k = keyword.split(":");
-            final String trigStr = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield " +
+            final String trigStr = "Mode$ ChangesZone | Destination$ Battlefield " +
                     "| ValidCard$ Card.Self | Secondary$ True " +
                     "| TriggerDescription$ Partner with " + k[1] + " (" + inst.getReminderText() + ")";
             // replace , for ; in the ChangeZone
@@ -1758,7 +1758,7 @@ public class CardFactoryUtil {
             }
         } else if (keyword.equals("Soulbond")) {
             // Setup ETB trigger for card with Soulbond keyword
-            final String actualTriggerSelf = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
+            final String actualTriggerSelf = "Mode$ ChangesZone | Destination$ Battlefield | "
                     + "ValidCard$ Card.Self | OptionalDecider$ You | "
                     + "IsPresent$ Creature.Other+YouCtrl+NotPaired | Secondary$ True | "
                     + "TriggerDescription$ When CARDNAME enters the battlefield, "
@@ -1768,7 +1768,7 @@ public class CardFactoryUtil {
             parsedTriggerSelf.setOverridingAbility(AbilityFactory.getAbility(abStringSelf, card));
 
             // Setup ETB trigger for other creatures you control
-            final String actualTriggerOther = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
+            final String actualTriggerOther = "Mode$ ChangesZone | Destination$ Battlefield | "
                     + "ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | "
                     + " IsPresent$ Creature.Self+NotPaired | Secondary$ True | "
                     + " TriggerDescription$ When another unpaired creature you control enters the battlefield, "
@@ -1873,7 +1873,7 @@ public class CardFactoryUtil {
 
             // get Description from Ability
             final String desc = AbilityFactory.getMapParams(card.getSVar(abStr)).get("SpellDescription");
-            final String trigStr = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+notTributed " +
+            final String trigStr = "Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self+notTributed " +
                      " | Execute$ " + abStr + " | TriggerDescription$ " + desc;
 
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
