@@ -1,0 +1,12 @@
+Name:Awakened Awareness
+ManaCost:X U U
+Types:Enchantment Aura
+K:Enchant artifact or creature
+A:SP$ Attach | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Permanent.EnchantedBy+greatestPower | Execute$ TrigPutCounters | TriggerDescription$ When CARDNAME enters the battlefield, put X +1/+1 counters on enchanted permanent.
+SVar:TrigPutCounters:DB$ PutCounter | Defined$ Enchanted | CounterType$ P1P1 | CounterNum$ X
+SVar:X:Count$xPaid
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | SetPower$ 1 | SetToughness$ 1 | Description$ As long as enchanted permanent is a creature, it has base power and toughness 1/1.
+DeckHints:Type$Artifact|Vehicle
+DeckHas:Ability$Counters
+Oracle:Enchant artifact or creature\nWhen Awakened Awareness enters the battlefield, put X +1/+1 counters on enchanted permanent.\nAs long as enchanted permanent is a creature, it has base power and toughness 1/1.

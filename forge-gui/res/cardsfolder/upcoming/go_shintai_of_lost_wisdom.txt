@@ -1,0 +1,12 @@
+Name:Go-Shintai of Lost Wisdom
+ManaCost:1 U
+Types:Legendary Enchantment Creature Shrine
+PT:0/4
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigImmediateTrig | TriggerDescription$ At the beginning of your end step, you may pay {1}. When you do, target player mills X cards, where X is the number of Shrines you control. (To mill a card, a player puts the top card of their library into their graveyard.)
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ 1 | Execute$ TrigMill | SpellDescription$ Target player mills X cards, where X is the number of Shrines you control.
+SVar:TrigMill:DB$ Mill | ValidTgts$ Player | NumCards$ X | TgtPrompt$ Select target player | SpellDescription$ Fart knocker!
+SVar:X:Count$TypeYouCtrl.Shrine
+DeckHas:Ability$Mill
+DeckHints:Type$Shrine
+Oracle:Flying\nAt the beginning of your end step, you may pay {1}. When you do, target player mills X cards, where X is the number of Shrines you control. (To mill a card, a player puts the top card of their library into their graveyard.)

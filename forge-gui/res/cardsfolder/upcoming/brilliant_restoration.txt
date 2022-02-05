@@ -1,0 +1,7 @@
+Name:Brilliant Restoration
+ManaCost:3 W W W W
+Types:Sorcery
+A:SP$ ChangeZoneAll | ChangeType$ Artifact.YouOwn,Enchantment.YouOwn | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return all artifact and enchantment cards from your graveyard to the battlefield.
+DeckNeeds:Type$Artifact|Enchantment
+DeckHas:Ability$Graveyard
+Oracle:Return all artifact and enchantment cards from your graveyard to the battlefield.
