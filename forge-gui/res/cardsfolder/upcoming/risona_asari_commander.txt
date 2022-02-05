@@ -1,0 +1,11 @@
+Name:Risona, Asari Commander
+Nickname:Risona
+ManaCost:1 R W
+Types:Legendary Creature Human Samurai
+PT:3/3
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Card.Self+counters_LE0_Indestructible | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, if it doesn't have an indestructible counter on it, put an indestructible counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ Indestructible | CounterNum$ 1
+T:Mode$ DamageDone | ValidTarget$ You | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigRemCounter | TriggerDescription$ Whenever combat damage is dealt to you, remove an indestructible counter from CARDNAME.
+SVar:TrigRemCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ Indestructible | CounterNum$ 1
+Oracle:Haste\nWhenever Risona, Asari Commander deals combat damage to a player, if it doesn't have an indestructible counter on it, put an indestructible counter on it.\nWhenever combat damage is dealt to you, remove an indestructible counter from Risona.
