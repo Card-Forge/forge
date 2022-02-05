@@ -138,7 +138,6 @@ public class CostReveal extends CostPartWithList {
         if (revealFrom.size() > 1) {
             final StringBuilder desc = new StringBuilder();
             desc.append(this.getTypeDescription() == null ? this.getType() : this.getTypeDescription());
-            desc.append(" card");
             sb.append(" or choose ");
             sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), desc.toString()));
             sb.append(" you control");
