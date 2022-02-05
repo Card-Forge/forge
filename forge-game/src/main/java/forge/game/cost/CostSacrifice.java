@@ -17,7 +17,7 @@
  */
 package forge.game.cost;
 
-import org.apache.commons.lang3.ObjectUtils;
+import forge.card.CardType;
 
 import com.google.common.collect.Iterables;
 
@@ -86,7 +86,12 @@ public class CostSacrifice extends CostPartWithList {
             String typeDesc = getType().toLowerCase().replace(";","s and/or ");
             sb.append("any number of ").append(typeDesc).append("s");
         } else {
-            final String desc = ObjectUtils.firstNonNull(getTypeDescription(), getType());
+            String desc;
+            if (this.getTypeDescription() == null) {
+                desc = CardType.CoreType.isValidEnum(this.getType()) ? this.getType().toLowerCase() : this.getType();
+            } else {
+                desc = this.getTypeDescription();
+            }
             sb.append(Cost.convertAmountTypeToWords(convertAmount(), getAmount(), desc));
         }
         return sb.toString();
