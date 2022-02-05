@@ -1,0 +1,10 @@
+Name:Circuit Mender
+ManaCost:3
+Types:Artifact Creature Insect
+PT:2/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When CARDNAME leaves the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+DeckHas:Ability$LifeGain
+Oracle:When Circuit Mender enters the battlefield, you gain 2 life.\nWhen Circuit Mender leaves the battlefield, draw a card.
