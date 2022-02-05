@@ -27,6 +27,13 @@ public class CardRanker {
             .put(DeckHints.Type.NAME, 10)
             .put(DeckHints.Type.TYPE, 3)
             .build();
+    private static final Map<DeckHints.Type, Integer> typeThresholds = ImmutableMap.<DeckHints.Type, Integer>builder()
+            .put(DeckHints.Type.ABILITY, 5)
+            .put(DeckHints.Type.COLOR, 10)
+            .put(DeckHints.Type.KEYWORD, 8)
+            .put(DeckHints.Type.NAME, 2)
+            .put(DeckHints.Type.TYPE, 8)
+            .build();
     private static boolean logToConsole = false;
 
     /**
@@ -151,24 +158,12 @@ public class CardRanker {
 
     private static double getScoreForDeckHints(PaperCard card, Iterable<PaperCard> otherCards) {
         double score = 0.0;
-        final DeckHints hints = card.getRules().getAiHints().getDeckHints();
-        if (hints != null && hints.isValid()) {
-            final Map<DeckHints.Type, Iterable<PaperCard>> cardsByType = hints.filterByType(otherCards);
-            for (DeckHints.Type type : cardsByType.keySet()) {
-                Iterable<PaperCard> cards = cardsByType.get(type);
-                score += Iterables.size(cards) * typeFactors.get(type);
-                if (logToConsole && Iterables.size(cards) > 0) {
-                    System.out.println(" - " + card.getName() + ": Found " + Iterables.size(cards) + " cards for " + type);
-                }
-            }
-        }
 
         List<PaperCard> toBeRanked = Lists.newArrayList(card);
-        // TODO introduce a threshold, so that cards which Needs are already satisfied by enough other cards are ignored
         for (PaperCard other : otherCards) {
-            final DeckHints needs = other.getRules().getAiHints().getDeckNeeds();
-            if (needs != null && needs.isValid()) {
-                final Map<DeckHints.Type, Iterable<PaperCard>> cardsByType = needs.filterByType(toBeRanked);
+            final DeckHints hints = other.getRules().getAiHints().getDeckHints();
+            if (hints != null && hints.isValid()) {
+                final Map<DeckHints.Type, Iterable<PaperCard>> cardsByType = hints.filterByType(toBeRanked);
                 for (DeckHints.Type type : cardsByType.keySet()) {
                     Iterable<PaperCard> cards = cardsByType.get(type);
                     score += Iterables.size(cards) * typeFactors.get(type);
@@ -178,6 +173,19 @@ public class CardRanker {
                 }
             }
         }
+
+        final DeckHints needs = card.getRules().getAiHints().getDeckNeeds();
+        if (needs != null && needs.isValid()) {
+            final Map<DeckHints.Type, Iterable<PaperCard>> cardsByType = needs.filterByType(otherCards);
+            for (DeckHints.Type type : cardsByType.keySet()) {
+                Iterable<PaperCard> cards = cardsByType.get(type);
+                score -= (Math.max(typeThresholds.get(type) - Iterables.size(cards), 0) / (double) typeThresholds.get(type)) * typeFactors.get(type);
+                if (logToConsole && Iterables.size(cards) > 0) {
+                    System.out.println(" - " + card.getName() + ": Found " + Iterables.size(cards) + " cards for " + type);
+                }
+            }
+        }
+
         return score;
     }
 
