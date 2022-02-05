@@ -481,7 +481,7 @@ ScryfallCode=PLIST
 473 C Dungeon Shade @Jason Alexander Behnke
 474 R Nightmare @Vance Kovacs
 475 U Noxious Ghoul @Luca Zontini
-476 U Tymaret, Chosen from Death @Chase Stone
+476 U Tymaret, Chosen from Death @Jason A. Engle
 477 U Will-o'-the-Wisp @Rob Alexander
 478 M Balefire Dragon @Eric Deschamps
 479 U Fireball @Dave Dorman
@@ -566,7 +566,7 @@ ScryfallCode=PLIST
 F558 R Kaya, Ghost Haunter @Sydney Adams
 559 R Lich Lord of Unx @Dave Allsop
 560 R Lonis, Cryptozoologist @Andrew Mar
-561 S Mortify @Glen Angus
+561 R Mortify @Brian Snõddy
 562 M Sedris, the Traitor King @Paul Bonner
 563 M Teferi, Hero of Dominaria @Chris Rallis
 564 U Night // Day @Christopher Moeller
@@ -658,3 +658,78 @@ F567 R Puresteel Angel @Lukas Litzsinger
 650 R Blood Crypt @Rob Alexander
 651 R Shinka, the Bloodsoaked Keep @Thomas M. Baxa
 652 R Shivan Gorge @John Matson
+653 U Scion of Ugin @Cliff Childs
+654 R Anointed Procession @Victor Adame Minguez
+655 R Final Judgment @Kev Walker
+656 C Flutterfox @Lucas Graciano
+657 R Michiko Konda, Truth Seeker @Christopher Moeller
+658 U Nagao, Bound by Honor @Dave Dorman
+659 U Novice Knight @Yongjae Choi
+660 R Rune-Tail, Kitsune Ascendant @Randy Gallegos
+661 R Spirit of the Labyrinth @Jason Chan
+662 U Stone Haven Pilgrim @Cristi Balanescu
+663 U The Wanderer @Wesley Burt
+664 U Warchanter Skald @Daniel Zrom
+665 R Aboshan, Cephalid Emperor @Christopher Moeller
+666 C Dispersal Technician @Scott Murphy
+667 U Honden of Seeing Winds @Martina Pilcerova
+668 M Jin-Gitaxias, Core Augur @Eric Deschamps
+669 R Sakashima's Student @Brian Snõddy
+670 U Soratami Savant @Jim Nelson
+671 M Tezzeret, Artifice Master @Josh Hass
+672 R Thousand Winds @Raymond Swanland
+673 R The Unspeakable @Daarken
+674 R Confront the Past @Kieran Yanner
+675 R Ink-Eyes, Servant of Oni @Wayne Reynolds
+676 U Noxious Toad @Adrian Smith
+677 C Rat Colony @Suzanne Helmigh
+678 C Sink into Takenuma @Pat Lee
+679 R Whispersteel Dagger @Svetlin Velinov
+680 U Akki Coalflinger @Nottsuo
+681 R Bedlam @Mike Raabe
+682 R Blazing Shoal @Glen Angus
+683 R Heartless Hidetsugu @Carl Critchlow
+684 R Kiki-Jiki, Mirror Breaker @Pete Venters
+685 R Lavaborn Muse @Brian Snõddy
+686 R Mizzium Tank @Wayne Reynolds
+687 R Pillaging Horde @Kev Walker
+688 R Pyroclasm @John Matson
+689 C Reality Hemorrhage @Chris Rallis
+690 R Ruin Grinder @Hector Ortiz
+691 U Siege Modification @Sung Choi
+692 R Starke of Rath @Dan Frazier
+693 R Eidolon of Blossoms @Min Yum
+694 R Endless Wurm @DiTerlizzi
+695 R Force of Savagery @Dan Scott
+696 U Haru-Onna @Rebecca Guay
+697 C Jade Avenger @Chris Seaman
+698 R Jugan, the Rising Star @Filip Burburan
+699 R Oxidize @Scott M. Fischer
+700 S Reclamation Sage @Christopher Moeller
+701 R Seshiro the Anointed @Daren Bader
+702 U Skullwinder @James Paick
+703 U Sosuke's Summons @Kev Walker
+704 R Spectral Force @Dan Scott
+705 U Vintara Snapper @Joel Biske
+706 C Vulpine Goliath @Adam Paquette
+707 C Architects of Will @Matt Stewart
+708 R Brago, King Eternal @Karla Ortiz
+709 C Deny Reality @Jean-Sébastien Rossbach
+710 M Kaseto, Orochi Archmage @Aaron Miller
+711 U Reyav, Master Smith @Scott Murphy
+712 M Roon of the Hidden Realm @Steve Prescott
+713 R Tamiyo, Collector of Tales @Chase Stone
+714 R Tezzeret's Betrayal @Tyler Jacobson
+715 U Veteran Motorist @Christopher Moeller
+716 U Illusion // Reality @John Avon
+717 M Batterskull @Mark Zug
+718 R Illusionist's Bracers @Svetlin Velinov
+719 R Mirror Gallery @Scott M. Fischer
+720 U O-Naginata @Brian Snõddy
+721 R Sensei's Divining Top @Rob Alexander
+722 U Tapestry of the Ages @Yeong-Hao Han
+723 R That Which Was Taken @Adam Rex
+724 R Thousand-Year Elixir @Richard Sardinha
+725 R Umezawa's Jitte @Christopher Moeller
+726 R Hall of the Bandit Lord @Paolo Parente
+727 R Tendo Ice Bridge @Rob Alexander
