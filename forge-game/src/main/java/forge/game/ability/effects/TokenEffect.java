@@ -17,6 +17,9 @@
  */
 package forge.game.ability.effects;
 
+import java.util.List;
+
+import forge.util.Lang;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import forge.game.Game;
@@ -25,12 +28,24 @@ import forge.game.card.Card;
 import forge.game.card.CardZoneTable;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.event.GameEventTokenCreated;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
 public class TokenEffect extends TokenEffectBase {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
+        if (sa.hasParam("SpellDescription")) {
+            String desc = sa.getParam("SpellDescription");
+            if (desc.startsWith("Create")) {
+                final Card host = sa.getHostCard();
+                final List<Player> creators = AbilityUtils.getDefinedPlayers(host, sa.getParamOrDefault("TokenOwner",
+                        "You"), sa);
+                String start = Lang.joinHomogenous(creators) + (creators.size() == 1 ? " creates" : " create");
+                desc = desc.replace("Create",start);
+            }
+            return desc;
+        }
         return sa.getDescription();
     }
 
