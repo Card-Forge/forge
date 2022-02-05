@@ -2007,11 +2007,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         sbLong.append(" (").append(inst.getReminderText()).append(")").append("\r\n");
                     }
                 } else if (keyword.startsWith("Kicker")) {
+                    final StringBuilder sbx = new StringBuilder();
+                    final String[] n = keyword.split(":");
+                    final Cost cost = new Cost(n[1], false);
                     if (!keyword.endsWith("Generic")) {
-                        final StringBuilder sbx = new StringBuilder();
-                        final String[] n = keyword.split(":");
                         sbx.append("Kicker ");
-                        final Cost cost = new Cost(n[1], false);
                         sbx.append(cost.toSimpleString());
                         if (Lists.newArrayList(n).size() > 2) {
                             sbx.append(" and/or ");
@@ -2019,8 +2019,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                             sbx.append(cost2.toSimpleString());
                         }
                         sbx.append(" (").append(inst.getReminderText()).append(")");
-                        sbLong.append(sbx).append("\r\n");
+                    } else {
+                        sbx.append("As an additional cost to cast this spell, you may ");
+                        String costS = StringUtils.uncapitalize(cost.toSimpleString());
+                        sbx.append(cost.hasManaCost() ? "pay " + costS : costS);
+                        sbx.append(".");
                     }
+                    sbLong.append(sbx).append("\r\n");
                 } else if (keyword.startsWith("Trample:")) {
                     sbLong.append("Trample over planeswalkers").append(" (").append(inst.getReminderText()).append(")").append("\r\n");
                 } else if (keyword.startsWith("Hexproof:")) {
@@ -2545,20 +2550,25 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         sbBefore.append("Multikicker ").append(cost.toSimpleString()).append(" (").append(inst.getReminderText()).append(")").append("\r\n");
                     }
                 } else if (keyword.startsWith("Kicker")) {
+                    final StringBuilder sbx = new StringBuilder();
+                    final String[] n = keyword.split(":");
+                    final Cost cost = new Cost(n[1], false);
                     if (!keyword.endsWith("Generic")) {
-                        final StringBuilder sbx = new StringBuilder();
-                        final String[] n = keyword.split(":");
                         sbx.append("Kicker ");
-                        final Cost cost = new Cost(n[1], false);
                         sbx.append(cost.toSimpleString());
                         if (Lists.newArrayList(n).size() > 2) {
-                                sbx.append(" and/or ");
-                                final Cost cost2 = new Cost(n[2], false);
+                            sbx.append(" and/or ");
+                            final Cost cost2 = new Cost(n[2], false);
                             sbx.append(cost2.toSimpleString());
                         }
                         sbx.append(" (").append(inst.getReminderText()).append(")");
-                        sbBefore.append(sbx).append("\r\n");
+                    } else {
+                        sbx.append("As an additional cost to cast this spell, you may ");
+                        String costS = StringUtils.uncapitalize(cost.toSimpleString());
+                        sbx.append(cost.hasManaCost() ? "pay " + costS : costS);
+                        sbx.append(".\r\n");
                     }
+                    sbBefore.append(sbx).append("\r\n");
                 } else if (keyword.startsWith("AlternateAdditionalCost")) {
                     final String[] k = keyword.split(":");
                     final Cost cost1 = new Cost(k[1], false);
