@@ -6,4 +6,6 @@ SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Lifelink | ConditionCheckSVar$ X 
 SVar:Y:Count$Valid Artifact.YouCtrl/LimitMax.1
 SVar:Z:Count$Valid Enchantment.YouCtrl/LimitMax.1
 SVar:X:SVar$Y/Plus.Z
+DeckHas:Ability$LifeGain
+DeckHints:Type$Artifact|Enchantment
 Oracle:Up to two target creatures each get +2/+2 until end of turn. If you control an artifact and an enchantment, those creatures also gain lifelink until end of turn.
