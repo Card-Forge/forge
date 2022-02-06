@@ -1,6 +1,0 @@
-Name:Citizen Token
-Types: Creature Citizen
-Colors:white,blue,black,red,green
-ManaCost: no cost
-PT:2/2
-Oracle:
