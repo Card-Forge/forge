@@ -293,13 +293,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
     private static String changeKnownOriginStackDescription(final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final Card host = sa.getHostCard();
-
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(host.getName()).append(" -");
-        }
-
-        sb.append(" ");
-
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         ZoneType origin = null;
         if (sa.hasParam("Origin")) {
