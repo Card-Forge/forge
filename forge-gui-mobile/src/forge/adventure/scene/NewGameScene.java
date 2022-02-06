@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
-import forge.adventure.AdventureApplicationAdapter;
+import forge.Forge;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.data.HeroListData;
 import forge.adventure.util.Config;
@@ -47,12 +47,12 @@ public class NewGameScene extends UIScene {
         GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
         //image = new Texture(img);
 
-        AdventureApplicationAdapter.instance.switchScene(SceneType.GameScene.instance);
+        Forge.switchScene(SceneType.GameScene.instance);
         return true;
     }
 
     public boolean back() {
-        AdventureApplicationAdapter.instance.switchScene(SceneType.StartScene.instance);
+        Forge.switchScene(SceneType.StartScene.instance);
         return true;
     }
 

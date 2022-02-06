@@ -3,7 +3,7 @@ package forge.adventure.stage;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import forge.adventure.AdventureApplicationAdapter;
+import forge.Forge;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.BiomeData;
@@ -79,7 +79,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
 
                         ((DuelScene) SceneType.DuelScene.instance).setEnemy(currentMob);
                         ((DuelScene) SceneType.DuelScene.instance).setPlayer(player);
-                        AdventureApplicationAdapter.instance.switchScene(SceneType.DuelScene.instance);
+                        Forge.switchScene(SceneType.DuelScene.instance);
                     });
                     currentMob = mob;
                     WorldSave.getCurrentSave().autoSave();
@@ -117,7 +117,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                 ((RewardScene)SceneType.RewardScene.instance).loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
                 removeEnemy(currentMob);
                 currentMob = null;
-                AdventureApplicationAdapter.instance.switchScene(SceneType.RewardScene.instance);
+                Forge.switchScene(SceneType.RewardScene.instance);
             } );
         } else {
             player.setAnimation(CharacterSprite.AnimationTypes.Hit);
@@ -142,7 +142,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                         continue;
                     }
                     ((TileMapScene) SceneType.TileMapScene.instance).load(point.getPointOfInterest());
-                    AdventureApplicationAdapter.instance.switchScene(SceneType.TileMapScene.instance);
+                    Forge.switchScene(SceneType.TileMapScene.instance);
                 } else {
                     if (point == collidingPoint) {
                         collidingPoint = null;

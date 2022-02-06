@@ -15,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
-import forge.adventure.AdventureApplicationAdapter;
+import forge.Forge;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.localinstance.properties.ForgePreferences;
@@ -70,7 +70,7 @@ public class SettingsScene extends UIScene {
         return true;
     }
     public boolean back() {
-        AdventureApplicationAdapter.instance.switchToLast();
+        Forge.switchToLast();
         return true;
     }
     private void addInputField(String name, ForgePreferences.FPref pref) {

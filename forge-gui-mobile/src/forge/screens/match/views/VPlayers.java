@@ -55,6 +55,7 @@ public class VPlayers extends FDropDown {
             player = player0;
             playerDeck = MatchController.getPlayerDeck(player0);
             btnDeck = new FLabel.ButtonBuilder().opaque(true).iconScaleFactor(0.99f).selectable().alphaComposite(1).iconInBackground(true).build();
+            btnDeck.setEnabled(!Forge.isMobileAdventureMode);
             btnDeck.setCommand(new FEvent.FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {

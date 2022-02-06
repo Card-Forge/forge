@@ -9,10 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
-import com.badlogic.gdx.utils.ScreenUtils;
 import forge.Forge;
-import forge.Graphics;
-import forge.adventure.scene.ForgeScene;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.util.Config;
@@ -32,14 +29,6 @@ public class AdventureApplicationAdapter extends Forge {
     Texture transitionTexture;
     TextureRegion lastScreenTexture;
     private boolean sceneWasSwapped =false;
-    private Graphics graphics;
-
-    public Graphics getGraphics()
-    {
-        if(graphics==null)
-            graphics=new Graphics();
-        return graphics;
-    }
 
     public TextureRegion getLastScreenTexture() {
         return lastScreenTexture;

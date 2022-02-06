@@ -1,8 +1,8 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
+import forge.Forge;
 import forge.LobbyPlayer;
-import forge.adventure.AdventureApplicationAdapter;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.character.PlayerSprite;
 import forge.adventure.player.AdventurePlayer;
@@ -56,7 +56,7 @@ public class DuelScene extends ForgeScene {
         String enemyName=enemy.getData().name;
         Gdx.app.postRunnable(() -> {
             SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
-            Scene last= AdventureApplicationAdapter.instance.switchToLast();
+            Scene last= Forge.switchToLast();
 
             if(last instanceof HudScene)
             {

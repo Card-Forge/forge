@@ -31,6 +31,7 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.FScreen;
+import forge.screens.LoadingOverlay;
 import forge.screens.SplashScreen;
 import forge.screens.home.HomeScreen;
 import forge.screens.home.NewGameMenu;
@@ -88,7 +89,7 @@ public class Forge implements ApplicationListener {
     public static boolean isPortraitMode = false;
     public static boolean gameInProgress = false;
     public static boolean disposeTextures = false;
-    public static boolean isAdventureMode = false;
+    public static boolean isMobileAdventureMode = false;
     public static int cacheSize = 400;
     public static int totalDeviceRAM = 0;
     public static int androidVersion = 0;
@@ -240,6 +241,10 @@ public class Forge implements ApplicationListener {
         });
     }
 
+    public static Graphics getGraphics() {
+        return graphics;
+    }
+
     private void preloadExtendedArt() {
         if (!enablePreloadExtendedArt||!enableUIMask.equals("Full"))
             return;
@@ -279,20 +284,31 @@ public class Forge implements ApplicationListener {
     }
     public static void openAdventure() {
         startContinuousRendering();
-        FSkin.loadLight("default", null, Config.instance().getFile("skin"));
-        FSkin.loadFull(splashScreen);
-        splashScreen = null;
-        isAdventureMode = true;
-        try {
-            for (SceneType sceneType : SceneType.values()) {
-                sceneType.instance.resLoaded();
-            }
+        final LoadingOverlay loader = new LoadingOverlay("Loading Adventure");
+        loader.show();
+        FThreads.invokeInBackgroundThread(new Runnable() {
+            @Override
+            public void run() {
+                FThreads.invokeInEdtLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        FSkin.loadLight("default", null, Config.instance().getFile("skin"));
+                        FSkin.loadFull(splashScreen);
+                        splashScreen = null;
+                        isMobileAdventureMode = true;
+                        try {
+                            for (SceneType sceneType : SceneType.values()) {
+                                sceneType.instance.resLoaded();
+                            }
 
-            switchScene(SceneType.StartScene.instance);
-            animationBatch=new SpriteBatch();
-            transitionTexture =new Texture(Config.instance().getFile("ui/transition.png"));
-        } catch (Exception e) { e.printStackTrace(); }
-        
+                            switchScene(SceneType.StartScene.instance);
+                            animationBatch=new SpriteBatch();
+                            transitionTexture =new Texture(Config.instance().getFile("ui/transition.png"));
+                        } catch (Exception e) { e.printStackTrace(); }
+                    }
+                });
+            }
+        });
     }
     protected void afterDbLoaded() {
         stopContinuousRendering(); //save power consumption by disabling continuous rendering once assets loaded
@@ -526,6 +542,9 @@ public class Forge implements ApplicationListener {
         return currentScreen;
     }
 
+    public static void clearCurrentScreen() {
+        currentScreen = null;
+    }
     private static void setCurrentScreen(FScreen screen0) {
         String toNewScreen = screen0 != null ? screen0.toString() : "";
         String previousScreen = currentScreen != null ? currentScreen.toString() : "";
@@ -565,7 +584,7 @@ public class Forge implements ApplicationListener {
             if (screen == null) {
                 screen = splashScreen;
                 if (screen == null) {
-                    if (isAdventureMode) {
+                    if (isMobileAdventureMode) {
                         float delta=Gdx.graphics.getDeltaTime();
                         float transitionTime = 0.2f;
                         if(sceneWasSwapped)
@@ -731,7 +750,7 @@ public class Forge implements ApplicationListener {
 
 
     }
-    public Scene switchToLast() {
+    public static Scene switchToLast() {
 
         if(lastScene.size!=0)
         {

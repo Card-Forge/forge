@@ -16,7 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.IntMap;
-import forge.adventure.AdventureApplicationAdapter;
+import forge.Forge;
 import forge.adventure.util.Controls;
 import forge.adventure.world.WorldSave;
 import forge.adventure.world.WorldSaveHeader;
@@ -75,7 +75,7 @@ public class SaveLoadScene extends UIScene {
     }
 
     public void back() {
-        AdventureApplicationAdapter.instance.switchToLast();
+        Forge.switchToLast();
     }
 
     public boolean select(int slot) {
@@ -106,7 +106,7 @@ public class SaveLoadScene extends UIScene {
             stage.setKeyboardFocus(textInput);
         } else {
             if(WorldSave.load(currentSlot))
-                AdventureApplicationAdapter.instance.switchScene(SceneType.GameScene.instance);
+                Forge.switchScene(SceneType.GameScene.instance);
         }
     }
 
@@ -130,7 +130,7 @@ public class SaveLoadScene extends UIScene {
         if( WorldSave.getCurrentSave().save(textInput.getText(), currentSlot))
         {
             updateFiles();
-            AdventureApplicationAdapter.instance.switchScene(SceneType.GameScene.instance);
+            Forge.switchScene(SceneType.GameScene.instance);
         }
 
 

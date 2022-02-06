@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.IntMap;
-import forge.adventure.AdventureApplicationAdapter;
+import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
@@ -56,7 +56,7 @@ public class DeckSelectScene extends UIScene {
     }
 
     public void back() {
-        AdventureApplicationAdapter.instance.switchToLast();
+        Forge.switchToLast();
     }
 
     public boolean select(int slot) {
@@ -144,6 +144,6 @@ public class DeckSelectScene extends UIScene {
     }
     private void edit() {
 
-        AdventureApplicationAdapter.instance.switchScene(SceneType.DeckEditScene.instance);
+        Forge.switchScene(SceneType.DeckEditScene.instance);
     }
 }

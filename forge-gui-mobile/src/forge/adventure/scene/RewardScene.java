@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
-import forge.adventure.AdventureApplicationAdapter;
+import forge.Forge;
 import forge.adventure.character.ShopActor;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
@@ -73,12 +73,12 @@ public class RewardScene extends UIScene  {
             }
             else
             {
-                AdventureApplicationAdapter.instance.switchToLast();
+                Forge.switchToLast();
             }
         }
         else
         {
-            AdventureApplicationAdapter.instance.switchToLast();
+            Forge.switchToLast();
         }
         return true;
     }
@@ -93,7 +93,7 @@ public class RewardScene extends UIScene  {
                 flipCountDown-=Gdx.graphics.getDeltaTime();
             if(flipCountDown<=0)
             {
-                AdventureApplicationAdapter.instance.switchToLast();
+                Forge.switchToLast();
             }
         }
     }

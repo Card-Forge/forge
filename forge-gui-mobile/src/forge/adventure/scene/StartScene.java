@@ -3,7 +3,7 @@ package forge.adventure.scene;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import forge.adventure.AdventureApplicationAdapter;
+import forge.Forge;
 import forge.adventure.world.WorldSave;
 
 /**
@@ -20,29 +20,29 @@ public class StartScene extends UIScene {
 
     }
     public boolean NewGame() {
-        AdventureApplicationAdapter.instance.switchScene(SceneType.NewGameScene.instance);
+        Forge.switchScene(SceneType.NewGameScene.instance);
         return true;
     }
 
     public boolean Save() {
         ((SaveLoadScene) SceneType.SaveLoadScene.instance).setSaveGame(true);
-        AdventureApplicationAdapter.instance.switchScene(SceneType.SaveLoadScene.instance);
+        Forge.switchScene(SceneType.SaveLoadScene.instance);
         return true;
     }
 
     public boolean Load() {
         ((SaveLoadScene) SceneType.SaveLoadScene.instance).setSaveGame(false);
-        AdventureApplicationAdapter.instance.switchScene(SceneType.SaveLoadScene.instance);
+        Forge.switchScene(SceneType.SaveLoadScene.instance);
         return true;
     }
 
     public boolean Resume() {
-        AdventureApplicationAdapter.instance.switchToLast();
+        Forge.switchToLast();
         return true;
     }
 
     public boolean settings() {
-        AdventureApplicationAdapter.instance.switchScene(SceneType.SettingsScene.instance);
+        Forge.switchScene(SceneType.SettingsScene.instance);
         return true;
     }
 

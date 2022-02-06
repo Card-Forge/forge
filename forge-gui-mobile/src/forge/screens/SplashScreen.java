@@ -106,16 +106,22 @@ public class SplashScreen extends FContainer {
 
         if (!init) {
             btnAdventure = new FButton(Localizer.getInstance().getMessageorUseDefault("lblAdventureMode", "Adventure Mode"));
+            btnAdventure.setEnabled(true);
             btnAdventure.setCommand(new FEvent.FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
+                    btnHome.setEnabled(false);
+                    btnAdventure.setEnabled(false);
                     Forge.openAdventure();
                 }
             });
             btnHome = new FButton(Localizer.getInstance().getMessageorUseDefault("lblClassicMode", "Classic Mode"));
+            btnHome.setEnabled(true);
             btnHome.setCommand(new FEvent.FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
+                    btnHome.setEnabled(false);
+                    btnAdventure.setEnabled(false);
                     Forge.openHomeDefault();
                 }
             });

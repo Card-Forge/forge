@@ -2,7 +2,7 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import forge.adventure.AdventureApplicationAdapter;
+import forge.Forge;
 import forge.adventure.util.Current;
 
 /**
@@ -18,7 +18,7 @@ public class InnScene extends UIScene  {
 
     public void done()
     {
-        AdventureApplicationAdapter.instance.switchToLast();
+        Forge.switchToLast();
     }
     public void heal()
     {
@@ -40,7 +40,7 @@ public class InnScene extends UIScene  {
     }
 
     private void sell() {
-        AdventureApplicationAdapter.instance.switchScene(SceneType.ShopScene.instance);
+        Forge.switchScene(SceneType.ShopScene.instance);
     }
 
     @Override

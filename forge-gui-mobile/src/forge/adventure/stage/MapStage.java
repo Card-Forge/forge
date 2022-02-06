@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Array;
-import forge.adventure.AdventureApplicationAdapter;
+import forge.Forge;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.character.EntryActor;
@@ -241,7 +241,7 @@ public class MapStage extends GameStage {
                         addMapActor(obj, mob);
                         break;
                     case "inn":
-                        addMapActor(obj, new OnCollide(() -> AdventureApplicationAdapter.instance.switchScene(SceneType.InnScene.instance)));
+                        addMapActor(obj, new OnCollide(() -> Forge.switchScene(SceneType.InnScene.instance)));
                         break;
                     case "exit":
                         addMapActor(obj, new OnCollide(() -> exit()));
@@ -296,7 +296,7 @@ public class MapStage extends GameStage {
     public boolean exit() {
 
         isInMap=false;
-        AdventureApplicationAdapter.instance.switchScene(SceneType.GameScene.instance);
+        Forge.switchScene(SceneType.GameScene.instance);
         return true;
     }
 
@@ -334,7 +334,7 @@ public class MapStage extends GameStage {
         actors.removeValue(currentMob,true);
         changes.deleteObject(currentMob.getId());
         currentMob = null;
-        AdventureApplicationAdapter.instance.switchScene(SceneType.RewardScene.instance);
+        Forge.switchScene(SceneType.RewardScene.instance);
     }
     @Override
     protected void onActing(float delta) {
@@ -363,7 +363,7 @@ public class MapStage extends GameStage {
                         {
                             ((DuelScene) SceneType.DuelScene.instance).setEnemy(mob);
                             ((DuelScene) SceneType.DuelScene.instance).setPlayer(player);
-                            AdventureApplicationAdapter.instance.switchScene(SceneType.DuelScene.instance);
+                            Forge.switchScene(SceneType.DuelScene.instance);
                         });
                     }
 

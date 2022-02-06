@@ -35,10 +35,13 @@ public abstract  class ForgeScene extends Scene implements IUpdateable {
         }
 
 
-        localGraphics.begin(AdventureApplicationAdapter.instance.getCurrentWidth(), AdventureApplicationAdapter.instance.getCurrentHeight());
-        getScreen().screenPos.setSize(AdventureApplicationAdapter.instance.getCurrentWidth(), AdventureApplicationAdapter.instance.getCurrentHeight());
+        localGraphics.begin(Forge.isMobileAdventureMode ? Forge.getScreenWidth() : AdventureApplicationAdapter.instance.getCurrentWidth(),
+                Forge.isMobileAdventureMode ? Forge.getScreenHeight() : AdventureApplicationAdapter.instance.getCurrentHeight());
+        getScreen().screenPos.setSize(Forge.isMobileAdventureMode ? Forge.getScreenWidth() : AdventureApplicationAdapter.instance.getCurrentWidth(),
+                Forge.isMobileAdventureMode ? Forge.getScreenHeight() : AdventureApplicationAdapter.instance.getCurrentHeight());
         if (getScreen().getRotate180()) {
-            localGraphics.startRotateTransform(AdventureApplicationAdapter.instance.getCurrentWidth() / 2f, AdventureApplicationAdapter.instance.getCurrentHeight() / 2f, 180);
+            localGraphics.startRotateTransform( Forge.isMobileAdventureMode ? Forge.getScreenWidth() / 2f : AdventureApplicationAdapter.instance.getCurrentWidth() / 2f,
+                    Forge.isMobileAdventureMode ? Forge.getScreenHeight() / 2f : AdventureApplicationAdapter.instance.getCurrentHeight() / 2f, 180);
         }
         getScreen().draw(localGraphics);
         if (getScreen().getRotate180()) {
@@ -46,8 +49,10 @@ public abstract  class ForgeScene extends Scene implements IUpdateable {
         }
         for (FOverlay overlay : FOverlay.getOverlays()) {
             if (overlay.isVisibleOnScreen(getScreen())) {
-                overlay.screenPos.setSize(AdventureApplicationAdapter.instance.getCurrentWidth(), AdventureApplicationAdapter.instance.getCurrentHeight());
-                overlay.setSize(AdventureApplicationAdapter.instance.getCurrentWidth(), AdventureApplicationAdapter.instance.getCurrentHeight()); //update overlay sizes as they're rendered
+                overlay.screenPos.setSize(Forge.isMobileAdventureMode ? Forge.getScreenWidth() : AdventureApplicationAdapter.instance.getCurrentWidth(),
+                        Forge.isMobileAdventureMode ? Forge.getScreenHeight() : AdventureApplicationAdapter.instance.getCurrentHeight());
+                overlay.setSize(Forge.isMobileAdventureMode ? Forge.getScreenWidth() : AdventureApplicationAdapter.instance.getCurrentWidth(),
+                        Forge.isMobileAdventureMode ? Forge.getScreenHeight() : AdventureApplicationAdapter.instance.getCurrentHeight()); //update overlay sizes as they're rendered
                 if (overlay.getRotate180()) {
                     localGraphics.startRotateTransform(AdventureApplicationAdapter.instance.getCurrentHeight() / 2f, AdventureApplicationAdapter.instance.getCurrentHeight() / 2f, 180);
                 }
@@ -73,7 +78,8 @@ public abstract  class ForgeScene extends Scene implements IUpdateable {
     public void enter() {
         FOverlay.hideAll();
         if(getScreen()!=null)
-            getScreen().setSize(AdventureApplicationAdapter.instance.getCurrentWidth(), AdventureApplicationAdapter.instance.getCurrentHeight());
+            getScreen().setSize(Forge.isMobileAdventureMode ? Forge.getScreenWidth() : AdventureApplicationAdapter.instance.getCurrentWidth(),
+                    Forge.isMobileAdventureMode ? Forge.getScreenHeight() : AdventureApplicationAdapter.instance.getCurrentHeight());
 
         Forge.openScreen(getScreen());
         Gdx.input.setInputProcessor(input);
@@ -88,8 +94,7 @@ public abstract  class ForgeScene extends Scene implements IUpdateable {
 
     @Override
     public void resLoaded() {
-        if (!Forge.isAdventureMode)
-            localGraphics = AdventureApplicationAdapter.instance.getGraphics();
+        localGraphics = Forge.getGraphics();
     }
 
 

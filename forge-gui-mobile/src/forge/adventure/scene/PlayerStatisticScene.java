@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
-import forge.adventure.AdventureApplicationAdapter;
+import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.WorldData;
@@ -46,7 +46,7 @@ public class PlayerStatisticScene  extends UIScene {
         return true;
     }
     public boolean back() {
-        AdventureApplicationAdapter.instance.switchToLast();
+        Forge.switchToLast();
         return true;
     }
     @Override

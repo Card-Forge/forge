@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import forge.adventure.AdventureApplicationAdapter;
+import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
@@ -44,7 +44,7 @@ public class GameHUD extends Stage {
 
         avatar = ui.findActor("avatar");
         ui.onButtonPress("menu", () -> menu());
-        ui.onButtonPress("statistic",()-> AdventureApplicationAdapter.instance.switchScene(SceneType.PlayerStatisticScene.instance));
+        ui.onButtonPress("statistic",()-> Forge.switchScene(SceneType.PlayerStatisticScene.instance));
         ui.onButtonPress("deck", () -> openDeck());
         lifePoints = ui.findActor("lifePoints");
         lifePoints.setText("20/20");
@@ -109,7 +109,7 @@ public class GameHUD extends Stage {
 
     private Object openDeck() {
 
-        AdventureApplicationAdapter.instance.switchScene(SceneType.DeckSelectScene.instance);
+        Forge.switchScene(SceneType.DeckSelectScene.instance);
         return null;
     }
 

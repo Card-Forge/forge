@@ -304,6 +304,10 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void finishGame() {
+        if (Forge.isMobileAdventureMode) {
+            Forge.clearCurrentScreen();
+            return;
+        }
         if (hasLocalPlayers() || getGameView().isMatchOver()) {
             view.setViewWinLose(new ViewWinLose(getGameView()));
             view.getViewWinLose().setVisible(true);

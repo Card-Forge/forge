@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import forge.adventure.AdventureApplicationAdapter;
+import forge.Forge;
 import forge.adventure.character.MapActor;
 import forge.adventure.character.PlayerSprite;
 import forge.adventure.scene.Scene;
@@ -283,7 +283,7 @@ public abstract class GameStage extends Stage {
     public void openMenu() {
 
         WorldSave.getCurrentSave().header.createPreview();
-        AdventureApplicationAdapter.instance.switchScene(SceneType.StartScene.instance);
+        Forge.switchScene(SceneType.StartScene.instance);
     }
 
     public void enter() {

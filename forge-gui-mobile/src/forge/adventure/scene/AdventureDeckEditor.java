@@ -5,7 +5,6 @@ import com.badlogic.gdx.utils.Align;
 import com.google.common.base.Function;
 import forge.Forge;
 import forge.Graphics;
-import forge.adventure.AdventureApplicationAdapter;
 import forge.adventure.player.AdventurePlayer;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
@@ -104,7 +103,8 @@ import java.util.Map;
 
         boolean isShop=false;
         public AdventureDeckEditor(boolean createAsShop) {
-            super(e -> {AdventurePlayer.current().getNewCards().clear();AdventureApplicationAdapter.instance.switchToLast();},getPages());
+            super(e -> {AdventurePlayer.current().getNewCards().clear();
+                Forge.switchToLast();},getPages());
 
             isShop=createAsShop;
 
