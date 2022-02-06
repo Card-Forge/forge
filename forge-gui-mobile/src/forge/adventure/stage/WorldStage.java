@@ -75,11 +75,14 @@ public class WorldStage extends GameStage implements SaveFileContent {
                 if (player.collideWith(mob)) {
                     player.setAnimation(CharacterSprite.AnimationTypes.Attack);
                     mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
-                    startPause(1,()->{
+                    startPause(1, new Runnable() {
+                        @Override
+                        public void run() {
 
-                        ((DuelScene) SceneType.DuelScene.instance).setEnemy(currentMob);
-                        ((DuelScene) SceneType.DuelScene.instance).setPlayer(player);
-                        Forge.switchScene(SceneType.DuelScene.instance);
+                            ((DuelScene) SceneType.DuelScene.instance).setEnemy(currentMob);
+                            ((DuelScene) SceneType.DuelScene.instance).setPlayer(player);
+                            Forge.switchScene(SceneType.DuelScene.instance);
+                        }
                     });
                     currentMob = mob;
                     WorldSave.getCurrentSave().autoSave();
@@ -112,22 +115,26 @@ public class WorldStage extends GameStage implements SaveFileContent {
         if (playerIsWinner) {
             player.setAnimation(CharacterSprite.AnimationTypes.Attack);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
-            startPause(1,()->
-            {
-                ((RewardScene)SceneType.RewardScene.instance).loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
-                removeEnemy(currentMob);
-                currentMob = null;
-                Forge.switchScene(SceneType.RewardScene.instance);
-            } );
+            startPause(1, new Runnable() {
+                @Override
+                public void run() {
+                    ((RewardScene) SceneType.RewardScene.instance).loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
+                    WorldStage.this.removeEnemy(currentMob);
+                    currentMob = null;
+                    Forge.switchScene(SceneType.RewardScene.instance);
+                }
+            });
         } else {
             player.setAnimation(CharacterSprite.AnimationTypes.Hit);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Attack);
-            startPause(1,()->
-            {
-                Current.player().defeated();
-                removeEnemy(currentMob);
-                currentMob = null;
-            } );
+            startPause(1, new Runnable() {
+                @Override
+                public void run() {
+                    Current.player().defeated();
+                    WorldStage.this.removeEnemy(currentMob);
+                    currentMob = null;
+                }
+            });
 
         }
 

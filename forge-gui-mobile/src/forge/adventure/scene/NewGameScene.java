@@ -1,6 +1,8 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -64,7 +66,12 @@ public class NewGameScene extends UIScene {
         avatarImage = ui.findActor("avatarPreview");
         gender = ui.findActor("gender");
         gender.setTextList(new String[]{"Male", "Female"});
-        gender.addListener(event -> updateAvatar());
+        gender.addListener(new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+                return NewGameScene.this.updateAvatar();
+            }
+        });
         Random rand=new Random();
 
         deck = ui.findActor("deck");
@@ -77,7 +84,12 @@ public class NewGameScene extends UIScene {
         deck.setTextList(stringList);
 
         race = ui.findActor("race");
-        race.addListener(event -> updateAvatar());
+        race.addListener(new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+                return NewGameScene.this.updateAvatar();
+            }
+        });
         race.setTextList(HeroListData.getRaces());
         difficulty = ui.findActor("difficulty");
 

@@ -46,12 +46,15 @@ public abstract class GameStage extends Stage {
 
     public GameStage() {
         super(new StretchViewport(Scene.GetIntendedWidth(), Scene.GetIntendedHeight(), new OrthographicCamera()));
-        WorldSave.getCurrentSave().onLoad(() -> {
-            if(player==null)
-                return;
-            foregroundSprites.removeActor(player);
-            player=null;
-            GetPlayer();
+        WorldSave.getCurrentSave().onLoad(new Runnable() {
+            @Override
+            public void run() {
+                if (player == null)
+                    return;
+                foregroundSprites.removeActor(player);
+                player = null;
+                GameStage.this.GetPlayer();
+            }
         });
         camera = (OrthographicCamera) getCamera();
 

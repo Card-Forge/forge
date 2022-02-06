@@ -18,7 +18,12 @@ public class PlayerSprite extends CharacterSprite {
         super(AdventurePlayer.current().spriteName());
         this.gameStage=gameStage;
         setOriginX(getWidth() / 2);
-        Current.player().onPlayerChanged(()->updatePlayer());
+        Current.player().onPlayerChanged(new Runnable() {
+            @Override
+            public void run() {
+                PlayerSprite.this.updatePlayer();
+            }
+        });
         playerSpeed=Config.instance().getConfigData().playerBaseSpeed;
     }
 

@@ -241,10 +241,20 @@ public class MapStage extends GameStage {
                         addMapActor(obj, mob);
                         break;
                     case "inn":
-                        addMapActor(obj, new OnCollide(() -> Forge.switchScene(SceneType.InnScene.instance)));
+                        addMapActor(obj, new OnCollide(new Runnable() {
+                            @Override
+                            public void run() {
+                                Forge.switchScene(SceneType.InnScene.instance);
+                            }
+                        }));
                         break;
                     case "exit":
-                        addMapActor(obj, new OnCollide(() -> exit()));
+                        addMapActor(obj, new OnCollide(new Runnable() {
+                            @Override
+                            public void run() {
+                                MapStage.this.exit();
+                            }
+                        }));
                         break;
                     case "shop":
                         String shopList=prop.get("shopList").toString();
@@ -308,19 +318,26 @@ public class MapStage extends GameStage {
         if (playerWins) {
             player.setAnimation(CharacterSprite.AnimationTypes.Attack);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
-            startPause(1,()->getReward());
+            startPause(1, new Runnable() {
+                @Override
+                public void run() {
+                    MapStage.this.getReward();
+                }
+            });
         } else {
             player.setAnimation(CharacterSprite.AnimationTypes.Hit);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Attack);
-            startPause(1,()->
-            {
+            startPause(1, new Runnable() {
+                @Override
+                public void run() {
 
-                player.setAnimation(CharacterSprite.AnimationTypes.Idle);
-                currentMob.setAnimation(CharacterSprite.AnimationTypes.Idle);
-                player.setPosition(oldPosition4);
-                Current.player().defeated();
-                stop();
-                currentMob=null;
+                    player.setAnimation(CharacterSprite.AnimationTypes.Idle);
+                    currentMob.setAnimation(CharacterSprite.AnimationTypes.Idle);
+                    player.setPosition(oldPosition4);
+                    Current.player().defeated();
+                    MapStage.this.stop();
+                    currentMob = null;
+                }
             });
         }
 
@@ -352,18 +369,25 @@ public class MapStage extends GameStage {
                     if(mob.getData().deck==null||mob.getData().deck.isEmpty())
                     {
                         currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
-                        startPause(1,()->getReward());
+                        startPause(1, new Runnable() {
+                            @Override
+                            public void run() {
+                                MapStage.this.getReward();
+                            }
+                        });
                     }
                     else
                     {
                         player.setAnimation(CharacterSprite.AnimationTypes.Attack);
                         mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
 
-                        startPause(1,()->
-                        {
-                            ((DuelScene) SceneType.DuelScene.instance).setEnemy(mob);
-                            ((DuelScene) SceneType.DuelScene.instance).setPlayer(player);
-                            Forge.switchScene(SceneType.DuelScene.instance);
+                        startPause(1, new Runnable() {
+                            @Override
+                            public void run() {
+                                ((DuelScene) SceneType.DuelScene.instance).setEnemy(mob);
+                                ((DuelScene) SceneType.DuelScene.instance).setPlayer(player);
+                                Forge.switchScene(SceneType.DuelScene.instance);
+                            }
                         });
                     }
 

@@ -5,7 +5,10 @@ import forge.adventure.data.RewardData;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
@@ -56,10 +59,30 @@ public class RewardsEditor extends JComponent{
     {
 
         list.setCellRenderer(new RewardDataRenderer());
-        list.addListSelectionListener(e -> updateEdit());
-        addButton("add",e->addReward());
-        addButton("remove",e->remove());
-        addButton("copy",e->copy());
+        list.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                RewardsEditor.this.updateEdit();
+            }
+        });
+        addButton("add", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RewardsEditor.this.addReward();
+            }
+        });
+        addButton("remove", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RewardsEditor.this.remove();
+            }
+        });
+        addButton("copy", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RewardsEditor.this.copy();
+            }
+        });
         BorderLayout layout=new BorderLayout();
         setLayout(layout);
         add(list, BorderLayout.LINE_START);

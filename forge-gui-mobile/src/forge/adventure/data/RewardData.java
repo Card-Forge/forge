@@ -1,6 +1,7 @@
 package forge.adventure.data;
 
 import com.badlogic.gdx.utils.Array;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import forge.StaticData;
 import forge.adventure.util.CardUtil;
@@ -9,6 +10,7 @@ import forge.adventure.util.Reward;
 import forge.adventure.world.WorldSave;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,9 +85,12 @@ public class RewardData {
             {
                 allCards = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(),  new CardUtil.CardPredicate(legals, true));
             }
-            allEnemyCards=Iterables.filter(allCards, input -> {
-                if(input==null)return false;
-                return !input.getRules().getAiHints().getRemAIDecks();
+            allEnemyCards=Iterables.filter(allCards, new Predicate<PaperCard>() {
+                @Override
+                public boolean apply(@NullableDecl PaperCard input) {
+                    if (input == null) return false;
+                    return !input.getRules().getAiHints().getRemAIDecks();
+                }
             });
         }
         Array<Reward> ret=new Array<>();

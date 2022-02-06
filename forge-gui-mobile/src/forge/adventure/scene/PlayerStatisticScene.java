@@ -101,7 +101,12 @@ public class PlayerStatisticScene  extends UIScene {
         enemiesGroup = new Table(Controls.GetSkin());
 
         enemiesGroup.row();
-        ui.onButtonPress("return", () -> back());
+        ui.onButtonPress("return", new Runnable() {
+            @Override
+            public void run() {
+                PlayerStatisticScene.this.back();
+            }
+        });
         avatar=ui.findActor("avatar");
 
         totalWins=ui.findActor("totalWins");

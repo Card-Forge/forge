@@ -8,6 +8,8 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 /**
@@ -56,22 +58,102 @@ public class RewardEdit extends JComponent {
         add(new JLabel("cardText:")); add(cardText);
 
 
-        typeField.addActionListener(((e)->updateReward()));
-        probability.addChangeListener(e->updateReward());
-        count.addChangeListener(e->updateReward());
-        addMaxCount.addChangeListener(e->updateReward());
-        cardName.getDocument().addDocumentListener(new DocumentChangeListener(()->updateReward()));
-        itemName.getDocument().addDocumentListener(new DocumentChangeListener(()->updateReward()));
-        editions.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(()->updateReward()));
-        colors.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(()->updateReward()));
-        rarity.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(()->updateReward()));
-        subTypes.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(()->updateReward()));
-        cardTypes.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(()->updateReward()));
-        superTypes.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(()->updateReward()));
-        manaCosts.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(()->updateReward()));
-        keyWords.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(()->updateReward()));
-        colorType.addActionListener(((e)->updateReward()));
-        cardText.getDocument().addDocumentListener(new DocumentChangeListener(()->updateReward()));
+        typeField.addActionListener((new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RewardEdit.this.updateReward();
+            }
+        }));
+        probability.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                RewardEdit.this.updateReward();
+            }
+        });
+        count.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                RewardEdit.this.updateReward();
+            }
+        });
+        addMaxCount.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                RewardEdit.this.updateReward();
+            }
+        });
+        cardName.getDocument().addDocumentListener(new DocumentChangeListener(new Runnable() {
+            @Override
+            public void run() {
+                RewardEdit.this.updateReward();
+            }
+        }));
+        itemName.getDocument().addDocumentListener(new DocumentChangeListener(new Runnable() {
+            @Override
+            public void run() {
+                RewardEdit.this.updateReward();
+            }
+        }));
+        editions.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(new Runnable() {
+            @Override
+            public void run() {
+                RewardEdit.this.updateReward();
+            }
+        }));
+        colors.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(new Runnable() {
+            @Override
+            public void run() {
+                RewardEdit.this.updateReward();
+            }
+        }));
+        rarity.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(new Runnable() {
+            @Override
+            public void run() {
+                RewardEdit.this.updateReward();
+            }
+        }));
+        subTypes.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(new Runnable() {
+            @Override
+            public void run() {
+                RewardEdit.this.updateReward();
+            }
+        }));
+        cardTypes.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(new Runnable() {
+            @Override
+            public void run() {
+                RewardEdit.this.updateReward();
+            }
+        }));
+        superTypes.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(new Runnable() {
+            @Override
+            public void run() {
+                RewardEdit.this.updateReward();
+            }
+        }));
+        manaCosts.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(new Runnable() {
+            @Override
+            public void run() {
+                RewardEdit.this.updateReward();
+            }
+        }));
+        keyWords.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(new Runnable() {
+            @Override
+            public void run() {
+                RewardEdit.this.updateReward();
+            }
+        }));
+        colorType.addActionListener((new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RewardEdit.this.updateReward();
+            }
+        }));
+        cardText.getDocument().addDocumentListener(new DocumentChangeListener(new Runnable() {
+            @Override
+            public void run() {
+                RewardEdit.this.updateReward();
+            }
+        }));
 
     }
 

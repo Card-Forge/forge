@@ -83,16 +83,51 @@ public class StartScene extends UIScene {
     public void resLoaded() {
         super.resLoaded();
 
-        ui.onButtonPress("Start", () -> NewGame());
-        ui.onButtonPress("Load", () -> Load());
-        ui.onButtonPress("Start", () -> NewGame());
-        ui.onButtonPress("Save", () -> Save());
-        ui.onButtonPress("Resume", () -> Resume());
+        ui.onButtonPress("Start", new Runnable() {
+            @Override
+            public void run() {
+                StartScene.this.NewGame();
+            }
+        });
+        ui.onButtonPress("Load", new Runnable() {
+            @Override
+            public void run() {
+                StartScene.this.Load();
+            }
+        });
+        ui.onButtonPress("Start", new Runnable() {
+            @Override
+            public void run() {
+                StartScene.this.NewGame();
+            }
+        });
+        ui.onButtonPress("Save", new Runnable() {
+            @Override
+            public void run() {
+                StartScene.this.Save();
+            }
+        });
+        ui.onButtonPress("Resume", new Runnable() {
+            @Override
+            public void run() {
+                StartScene.this.Resume();
+            }
+        });
 
         saveButton = ui.findActor("Save");
         resumeButton = ui.findActor("Resume");
-        ui.onButtonPress("Settings", () -> settings());
-        ui.onButtonPress("Exit", () -> Exit());
+        ui.onButtonPress("Settings", new Runnable() {
+            @Override
+            public void run() {
+                StartScene.this.settings();
+            }
+        });
+        ui.onButtonPress("Exit", new Runnable() {
+            @Override
+            public void run() {
+                StartScene.this.Exit();
+            }
+        });
         saveButton.setVisible(false);
         resumeButton.setVisible(false);
     }

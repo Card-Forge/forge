@@ -119,15 +119,38 @@ public class DeckSelectScene extends UIScene {
         dialog.getButtonTable().add(Controls.newLabel("Name:")).align(Align.left);
         dialog.getButtonTable().add(textInput).fillX().expandX();
         dialog.getButtonTable().row();
-        dialog.getButtonTable().add(Controls.newTextButton("Rename", () -> rename())).align(Align.left);
-        dialog.getButtonTable().add(Controls.newTextButton("Abort", () -> dialog.hide())).align(Align.left);
+        dialog.getButtonTable().add(Controls.newTextButton("Rename", new Runnable() {
+            @Override
+            public void run() {
+                DeckSelectScene.this.rename();
+            }
+        })).align(Align.left);
+        dialog.getButtonTable().add(Controls.newTextButton("Abort", new Runnable() {
+            @Override
+            public void run() {
+                dialog.hide();
+            }
+        })).align(Align.left);
 
-        ui.onButtonPress("return",()-> back());
-        ui.onButtonPress("edit",()-> edit());
-        ui.onButtonPress("rename",()-> {
-            textInput.setText(Current.player().getSelectedDeck().getName());
-            dialog.show(stage);
-            stage.setKeyboardFocus(textInput);
+        ui.onButtonPress("return", new Runnable() {
+            @Override
+            public void run() {
+                DeckSelectScene.this.back();
+            }
+        });
+        ui.onButtonPress("edit", new Runnable() {
+            @Override
+            public void run() {
+                DeckSelectScene.this.edit();
+            }
+        });
+        ui.onButtonPress("rename", new Runnable() {
+            @Override
+            public void run() {
+                textInput.setText(Current.player().getSelectedDeck().getName());
+                dialog.show(stage);
+                stage.setKeyboardFocus(textInput);
+            }
         });
         defColor = ui.findActor("return").getColor();
 

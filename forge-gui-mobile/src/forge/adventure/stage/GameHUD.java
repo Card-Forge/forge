@@ -43,19 +43,49 @@ public class GameHUD extends Stage {
 
 
         avatar = ui.findActor("avatar");
-        ui.onButtonPress("menu", () -> menu());
-        ui.onButtonPress("statistic",()-> Forge.switchScene(SceneType.PlayerStatisticScene.instance));
-        ui.onButtonPress("deck", () -> openDeck());
+        ui.onButtonPress("menu", new Runnable() {
+            @Override
+            public void run() {
+                GameHUD.this.menu();
+            }
+        });
+        ui.onButtonPress("statistic", new Runnable() {
+            @Override
+            public void run() {
+                Forge.switchScene(SceneType.PlayerStatisticScene.instance);
+            }
+        });
+        ui.onButtonPress("deck", new Runnable() {
+            @Override
+            public void run() {
+                GameHUD.this.openDeck();
+            }
+        });
         lifePoints = ui.findActor("lifePoints");
         lifePoints.setText("20/20");
-        AdventurePlayer.current().onLifeChange(()->  lifePoints.setText(AdventurePlayer.current().getLife() +"/"+ AdventurePlayer.current().getMaxLife()));
+        AdventurePlayer.current().onLifeChange(new Runnable() {
+            @Override
+            public void run() {
+                lifePoints.setText(AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
+            }
+        });
         money = ui.findActor("money");
-        WorldSave.getCurrentSave().getPlayer().onGoldChange(()->  money.setText(String.valueOf(AdventurePlayer.current().getGold()))) ;
+        WorldSave.getCurrentSave().getPlayer().onGoldChange(new Runnable() {
+            @Override
+            public void run() {
+                money.setText(String.valueOf(AdventurePlayer.current().getGold()));
+            }
+        }) ;
         miniMap = ui.findActor("map");
 
         addActor(ui);
         addActor(miniMapPlayer);
-        WorldSave.getCurrentSave().onLoad(() -> enter());
+        WorldSave.getCurrentSave().onLoad(new Runnable() {
+            @Override
+            public void run() {
+                GameHUD.this.enter();
+            }
+        });
     }
 
     private void statistic() {

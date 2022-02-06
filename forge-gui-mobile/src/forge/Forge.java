@@ -327,7 +327,11 @@ public class Forge implements ApplicationListener {
         Gdx.input.setCatchKey(Keys.MENU, true);
 
         afterDBloaded = true;
-        splashScreen.setShowModeSelector(true);
+        //open splashscreen mode selector if landscape..
+        if (isLandscapeMode())
+            splashScreen.setShowModeSelector(true);
+        else
+            openHomeDefault();
 
         boolean isLandscapeMode = isLandscapeMode();
 

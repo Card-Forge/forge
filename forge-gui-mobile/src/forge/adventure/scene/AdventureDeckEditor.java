@@ -41,6 +41,7 @@ import forge.util.ItemPool;
 import forge.util.Localizer;
 import forge.util.Utils;
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -103,8 +104,13 @@ import java.util.Map;
 
         boolean isShop=false;
         public AdventureDeckEditor(boolean createAsShop) {
-            super(e -> {AdventurePlayer.current().getNewCards().clear();
-                Forge.switchToLast();},getPages());
+            super(new FEvent.FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    AdventurePlayer.current().getNewCards().clear();
+                    Forge.switchToLast();
+                }
+            },getPages());
 
             isShop=createAsShop;
 
@@ -141,7 +147,12 @@ import java.util.Map;
                         protected void buildMenu() {
                             final Localizer localizer = Localizer.getInstance();
 
-                            addItem(new FMenuItem(localizer.getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e1 -> FDeckViewer.copyDeckToClipboard(getDeck())));
+                            addItem(new FMenuItem(localizer.getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, new FEvent.FEventHandler() {
+                                @Override
+                                public void handleEvent(FEvent e1) {
+                                    FDeckViewer.copyDeckToClipboard(getDeck());
+                                }
+                            }));
                             ((DeckEditorPage)getSelectedPage()).buildDeckMenu(this);
                         }
                     };
@@ -240,7 +251,12 @@ import java.util.Map;
             protected CardManagerPage(ItemManagerConfig config0, String caption0, FImage icon0) {
                 super(caption0, icon0);
                 config = config0;
-                cardManager.setItemActivateHandler(e -> onCardActivated(cardManager.getSelectedItem()));
+                cardManager.setItemActivateHandler(new FEvent.FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {
+                        CardManagerPage.this.onCardActivated(cardManager.getSelectedItem());
+                    }
+                });
                 cardManager.setContextMenuBuilder(new ItemManager.ContextMenuBuilder<PaperCard>() {
                     @Override
                     public void buildMenu(final FDropDownMenu menu, final PaperCard card) {
@@ -248,10 +264,34 @@ import java.util.Map;
                     }
                 });
             }
-            private final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare = from -> AdventurePlayer.current().getNewCards().contains(from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
-            private final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnNewGet = from -> AdventurePlayer.current().getNewCards().contains(from.getKey()) ? "NEW" : "";
-            public static final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = from -> decksUsingMyCards.count(from.getKey());
-            public static final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnDeckGet = from -> Integer.valueOf(decksUsingMyCards.count(from.getKey())).toString();
+            private final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare = new Function<Map.Entry<InventoryItem, Integer>, Comparable<?>>() {
+                @NullableDecl
+                @Override
+                public Comparable<?> apply(@NullableDecl Map.Entry<InventoryItem, Integer> from) {
+                    return AdventurePlayer.current().getNewCards().contains(from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
+                }
+            };
+            private final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnNewGet = new Function<Map.Entry<? extends InventoryItem, Integer>, Object>() {
+                @NullableDecl
+                @Override
+                public Object apply(@NullableDecl Map.Entry<? extends InventoryItem, Integer> from) {
+                    return AdventurePlayer.current().getNewCards().contains(from.getKey()) ? "NEW" : "";
+                }
+            };
+            public static final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = new Function<Map.Entry<InventoryItem, Integer>, Comparable<?>>() {
+                @NullableDecl
+                @Override
+                public Comparable<?> apply(@NullableDecl Map.Entry<InventoryItem, Integer> from) {
+                    return decksUsingMyCards.count(from.getKey());
+                }
+            };
+            public static final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnDeckGet = new Function<Map.Entry<? extends InventoryItem, Integer>, Object>() {
+                @NullableDecl
+                @Override
+                public Object apply(@NullableDecl Map.Entry<? extends InventoryItem, Integer> from) {
+                    return Integer.valueOf(decksUsingMyCards.count(from.getKey())).toString();
+                }
+            };
 
             protected void initialize() {
 
@@ -381,12 +421,15 @@ import java.util.Map;
                 if (!StringUtils.isEmpty(dest)) {
                     label += " " + dest;
                 }
-                menu.addItem(new FMenuItem(label, icon, e -> {
-                    if (max == 1) {
-                        callback.run(max);
-                    } else {
-                        final Localizer localizer = Localizer.getInstance();
-                        GuiChoose.getInteger(cardManager.getSelectedItem() + " - " + verb + " " + localizer.getMessage("lblHowMany"), 1, max, 20, callback);
+                menu.addItem(new FMenuItem(label, icon, new FEvent.FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {
+                        if (max == 1) {
+                            callback.run(max);
+                        } else {
+                            final Localizer localizer = Localizer.getInstance();
+                            GuiChoose.getInteger(cardManager.getSelectedItem() + " - " + verb + " " + localizer.getMessage("lblHowMany"), 1, max, 20, callback);
+                        }
                     }
                 }));
             }
@@ -548,16 +591,24 @@ import java.util.Map;
 
             @Override
             public void refresh() {
-                FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Localizer.getInstance().getMessage("lblLoading"), () -> {
-                    final ItemPool<PaperCard> adventurePool = new ItemPool<>(PaperCard.class);
+                FThreads.invokeInEdtLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        LoadingOverlay.show(Localizer.getInstance().getMessage("lblLoading"), new Runnable() {
+                            @Override
+                            public void run() {
+                                final ItemPool<PaperCard> adventurePool = new ItemPool<>(PaperCard.class);
 
-                    adventurePool.addAll(AdventurePlayer.current().getCards());
-                    // remove bottom cards that are in the deck from the card pool
-                    adventurePool.removeAll(AdventurePlayer.current().getSelectedDeck().getMain());
-                    // remove sideboard cards from the catalog
-                    adventurePool.removeAll(AdventurePlayer.current().getSelectedDeck().getOrCreate(DeckSection.Sideboard));
-                    cardManager.setPool(adventurePool);
-                }));
+                                adventurePool.addAll(AdventurePlayer.current().getCards());
+                                // remove bottom cards that are in the deck from the card pool
+                                adventurePool.removeAll(AdventurePlayer.current().getSelectedDeck().getMain());
+                                // remove sideboard cards from the catalog
+                                adventurePool.removeAll(AdventurePlayer.current().getSelectedDeck().getOrCreate(DeckSection.Sideboard));
+                                cardManager.setPool(adventurePool);
+                            }
+                        });
+                    }
+                });
             }
 
             @Override
@@ -632,11 +683,14 @@ import java.util.Map;
             protected void buildDeckMenu(FPopupMenu menu) {
                 if (cardManager.getConfig().getShowUniqueCardsOption()) {
                     final Localizer localizer = Localizer.getInstance();
-                    menu.addItem(new FCheckBoxMenuItem(localizer.getMessage("lblUniqueCardsOnly"), cardManager.getWantUnique(), e -> {
-                        boolean wantUnique = !cardManager.getWantUnique();
-                        cardManager.setWantUnique(wantUnique);
-                        refresh();
-                        cardManager.getConfig().setUniqueCardsOnly(wantUnique);
+                    menu.addItem(new FCheckBoxMenuItem(localizer.getMessage("lblUniqueCardsOnly"), cardManager.getWantUnique(), new FEvent.FEventHandler() {
+                        @Override
+                        public void handleEvent(FEvent e) {
+                            boolean wantUnique = !cardManager.getWantUnique();
+                            cardManager.setWantUnique(wantUnique);
+                            CatalogPage.this.refresh();
+                            cardManager.getConfig().setUniqueCardsOnly(wantUnique);
+                        }
                     }));
                 }
             }

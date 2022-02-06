@@ -33,9 +33,24 @@ public class InnScene extends UIScene  {
     @Override
     public void resLoaded() {
         super.resLoaded();
-        ui.onButtonPress("done",()->done());
-        ui.onButtonPress("heal",()->heal());
-        ui.onButtonPress("sell",()->sell());
+        ui.onButtonPress("done", new Runnable() {
+            @Override
+            public void run() {
+                InnScene.this.done();
+            }
+        });
+        ui.onButtonPress("heal", new Runnable() {
+            @Override
+            public void run() {
+                InnScene.this.heal();
+            }
+        });
+        ui.onButtonPress("sell", new Runnable() {
+            @Override
+            public void run() {
+                InnScene.this.sell();
+            }
+        });
         TextButton doneButton = ui.findActor("done");
     }
 

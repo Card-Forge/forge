@@ -202,8 +202,18 @@ public class SaveLoadScene extends UIScene {
         dialog.getButtonTable().add(Controls.newLabel("Name:")).align(Align.left);
         dialog.getButtonTable().add(textInput).fillX().expandX();
         dialog.getButtonTable().row();
-        dialog.getButtonTable().add(Controls.newTextButton("Save", () -> save())).align(Align.left);
-        dialog.getButtonTable().add(Controls.newTextButton("Abort", () -> saveAbort())).align(Align.left);
+        dialog.getButtonTable().add(Controls.newTextButton("Save", new Runnable() {
+            @Override
+            public void run() {
+                SaveLoadScene.this.save();
+            }
+        })).align(Align.left);
+        dialog.getButtonTable().add(Controls.newTextButton("Abort", new Runnable() {
+            @Override
+            public void run() {
+                SaveLoadScene.this.saveAbort();
+            }
+        })).align(Align.left);
 
         previewImage = ui.findActor("preview");
         header = Controls.newLabel("Save");
@@ -216,8 +226,18 @@ public class SaveLoadScene extends UIScene {
             addSaveSlot("Slot:" + i, i);
 
         saveLoadButton = ui.findActor("save");
-        ui.onButtonPress("save",()-> loadSave());
-        ui.onButtonPress("return",()-> back());
+        ui.onButtonPress("save", new Runnable() {
+            @Override
+            public void run() {
+                SaveLoadScene.this.loadSave();
+            }
+        });
+        ui.onButtonPress("return", new Runnable() {
+            @Override
+            public void run() {
+                SaveLoadScene.this.back();
+            }
+        });
         defColor = saveLoadButton.getColor();
 
 

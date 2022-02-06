@@ -100,7 +100,12 @@ public class RewardScene extends UIScene  {
     @Override
     public void resLoaded() {
         super.resLoaded();
-        ui.onButtonPress("done",()->done());
+        ui.onButtonPress("done", new Runnable() {
+            @Override
+            public void run() {
+                RewardScene.this.done();
+            }
+        });
         doneButton=ui.findActor("done");
     }
 

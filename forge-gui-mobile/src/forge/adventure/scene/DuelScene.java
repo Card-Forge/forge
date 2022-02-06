@@ -54,14 +54,16 @@ public class DuelScene extends ForgeScene {
     public void GameEnd() {
         boolean winner=humanPlayer == hostedMatch.getGame().getMatch().getWinner();
         String enemyName=enemy.getData().name;
-        Gdx.app.postRunnable(() -> {
-            SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
-            Scene last= Forge.switchToLast();
+        Gdx.app.postRunnable(new Runnable() {
+            @Override
+            public void run() {
+                SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
+                Scene last = Forge.switchToLast();
 
-            if(last instanceof HudScene)
-            {
-                Current.player().getStatistic().setResult(enemyName,winner);
-                ((HudScene)last).stage.setWinner(winner);
+                if (last instanceof HudScene) {
+                    Current.player().getStatistic().setResult(enemyName, winner);
+                    ((HudScene) last).stage.setWinner(winner);
+                }
             }
         });
 
@@ -110,7 +112,12 @@ public class DuelScene extends ForgeScene {
         rules.setGamesPerMatch(1);
         rules.setManaBurn(false);
 
-        hostedMatch.setEndGameHook(() -> GameEnd());
+        hostedMatch.setEndGameHook(new Runnable() {
+            @Override
+            public void run() {
+                DuelScene.this.GameEnd();
+            }
+        });
         hostedMatch.startMatch(rules, appliedVariants, players, guiMap);
 
         MatchController.instance.setGameView(hostedMatch.getGameView());
