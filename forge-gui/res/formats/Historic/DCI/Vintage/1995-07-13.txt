@@ -1,8 +1,0 @@
-[format]
-Name:Classic (1995-07-13)
-Type:Historic
-Subtype:Vintage
-Effective:1995-07-13
-Sets:LEA, LEB, 2ED, ARN, DRC94, ATQ, 3ED, LEG, DRK, ARENA, FEM, WW, SHC, FS, 4ED, ICE, CHR
-Restricted:Ali from Cairo, Ancestral Recall, Balance, Berserk, Black Lotus, Braingeyser, Candelabra of Tawnos, Channel, Chaos Orb, Copy Artifact, Demonic Tutor, Falling Star, Feldon's Cane, Fork, Ivory Tower, Library of Alexandria, Maze of Ith, Mind Twist, Mirror Universe, Mishra's Workshop, Mox Pearl, Mox Emerald, Mox Ruby, Mox Sapphire, Mox Jet, Recall, Regrowth, Sol Ring, Sword of the Ages, Timetwister, Time Walk, Underworld Dreams, Wheel of Fortune
-Banned:Amulet of Quoz, Bronze Tablet, Contract from Below, Darkpact, Demonic Attorney, Divine Intervention, Jeweled Bird, Rebirth, Shahrazad, Time Vault, Tempest Efreet

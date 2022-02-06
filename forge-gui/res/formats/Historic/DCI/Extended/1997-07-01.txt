@@ -3,5 +3,5 @@ Name:Extended (1997-07-01)
 Type:Historic
 Subtype:Extended
 Effective:1997-07-01
-Sets:3ED, DRK, ARENA, FS, SHC, WW, FEM, 4ED, ICE, CHR, HML, ALL, MIR, VIS, 5ED, WTH
+Sets:3ED, DRK, FEM, ARENA, WW, FS, SHC, 4ED, ICE, CHR, HML, ALL, MIR, VIS, 5ED, WTH
 Banned:Amulet of Quoz; Balance; Black Vise; Braingeyser; Bronze Tablet; Channel; Contract from Below; Darkpact; Demonic Attorney; Demonic Tutor; Fastbond; Ivory Tower; Jeweled Bird; Juggernaut; Kird Ape; Mana Crypt; Maze of Ith; Mind Twist; Rebirth; Regrowth; Serendib Efreet; Sol Ring; Strip Mine; Tempest Efreet; Timmerian Fiends; Wheel of Fortune; Zuran Orb
