@@ -69,31 +69,6 @@ public class AdventureApplicationAdapter extends Forge {
         super.resize(w, h);
     }
 
-    public boolean switchScene(Scene newScene) {
-
-        if (currentScene != null) {
-            if (!currentScene.leave())
-                return false;
-            lastScene.add(currentScene);
-        }
-        storeScreen();
-        sceneWasSwapped =true;
-        currentScene = newScene;
-        currentScene.enter();
-        return true;
-    }
-
-    private void storeScreen() {
-         if(!(currentScene instanceof ForgeScene))
-         {
-            if(lastScreenTexture!=null)
-                lastScreenTexture.getTexture().dispose();
-             lastScreenTexture = ScreenUtils.getFrameBufferTexture();
-         }
-
-
-    }
-
     public void resLoaded() {
         for (forge.adventure.scene.SceneType entry : SceneType.values()) {
             entry.instance.resLoaded();
@@ -183,20 +158,6 @@ public class AdventureApplicationAdapter extends Forge {
 
     private Scene getLastScene() {
         return lastScene.size==0?null: lastScene.get(lastScene.size-1);
-    }
-
-    public Scene switchToLast() {
-
-        if(lastScene.size!=0)
-        {
-            storeScreen();
-            currentScene = lastScene.get(lastScene.size-1);
-            currentScene.enter();
-            sceneWasSwapped =true;
-            lastScene.removeIndex(lastScene.size-1);
-            return currentScene;
-        }
-        return null;
     }
 
 }

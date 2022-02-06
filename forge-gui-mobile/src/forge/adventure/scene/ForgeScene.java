@@ -88,7 +88,8 @@ public abstract  class ForgeScene extends Scene implements IUpdateable {
 
     @Override
     public void resLoaded() {
-        localGraphics = AdventureApplicationAdapter.instance.getGraphics();
+        if (!Forge.isAdventureMode)
+            localGraphics = AdventureApplicationAdapter.instance.getGraphics();
     }
 
 

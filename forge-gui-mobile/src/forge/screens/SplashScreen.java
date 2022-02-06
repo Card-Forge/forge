@@ -96,7 +96,10 @@ public class SplashScreen extends FContainer {
             w = getHeight() / backgroundRatio;
             x = (getWidth() - w) / 2;
         }
+        float oldalpha = g.getfloatAlphaComposite();
+        g.setAlphaComposite(0.5f);
         g.drawImage(background, x, y, w, h);
+        g.setAlphaComposite(oldalpha);
         y += h * 295f / 450f;
         float padding = 20f / 450f * w;
         float height = 57f / 450f * h;

@@ -55,6 +55,12 @@
             <artifactId>gdx-freetype</artifactId>
             <version>1.10.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.raeleus.TenPatch</groupId>
+            <artifactId>tenpatch</artifactId>
+            <version>5.2.0</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 </project>

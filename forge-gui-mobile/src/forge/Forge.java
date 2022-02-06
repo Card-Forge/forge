@@ -5,8 +5,17 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
-import forge.adventure.AdventureApplicationAdapter;
+import com.badlogic.gdx.utils.ScreenUtils;
+import forge.adventure.scene.ForgeScene;
+import forge.adventure.scene.Scene;
+import forge.adventure.scene.SceneType;
+import forge.adventure.util.Config;
 import forge.animation.ForgeAnimation;
 import forge.assets.AssetsDownloader;
 import forge.assets.FSkin;
@@ -41,6 +50,13 @@ public class Forge implements ApplicationListener {
     public static final String CURRENT_VERSION = "1.6.47.001";
 
     private static ApplicationListener app = null;
+    static Scene currentScene = null;
+    static Array<Scene> lastScene = new Array<>();
+    private float animationTimeout;
+    static Batch animationBatch;
+    static Texture transitionTexture;
+    static TextureRegion lastScreenTexture;
+    private static boolean sceneWasSwapped =false;
     private static Clipboard clipboard;
     private static IDeviceAdapter deviceAdapter;
     private static int screenWidth;
@@ -262,9 +278,20 @@ public class Forge implements ApplicationListener {
         }
     }
     public static void openAdventure() {
+        startContinuousRendering();
+        FSkin.loadLight("default", null, Config.instance().getFile("skin"));
+        FSkin.loadFull(splashScreen);
         splashScreen = null;
         isAdventureMode = true;
-        //how to insert adventure startup / adapter here??
+        try {
+            for (SceneType sceneType : SceneType.values()) {
+                sceneType.instance.resLoaded();
+            }
+
+            switchScene(SceneType.StartScene.instance);
+            animationBatch=new SpriteBatch();
+            transitionTexture =new Texture(Config.instance().getFile("ui/transition.png"));
+        } catch (Exception e) { e.printStackTrace(); }
         
     }
     protected void afterDbLoaded() {
@@ -537,7 +564,61 @@ public class Forge implements ApplicationListener {
             FContainer screen = currentScreen;
             if (screen == null) {
                 screen = splashScreen;
-                if (screen == null) { 
+                if (screen == null) {
+                    if (isAdventureMode) {
+                        float delta=Gdx.graphics.getDeltaTime();
+                        float transitionTime = 0.2f;
+                        if(sceneWasSwapped)
+                        {
+                            sceneWasSwapped =false;
+                            animationTimeout= transitionTime;
+                            Gdx.gl.glClearColor(0, 0, 0, 1);
+                            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                            return;
+                        }
+                        if(animationTimeout>=0)
+                        {
+                            Gdx.gl.glClearColor(0, 0, 0, 1);
+                            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                            animationBatch.begin();
+                            animationTimeout-=delta;
+                            animationBatch.setColor(1,1,1,1);
+                            animationBatch.draw(lastScreenTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                            animationBatch.setColor(1,1,1,1-(1/ transitionTime)*animationTimeout);
+                            animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                            animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                            animationBatch.end();
+                            if(animationTimeout<0)
+                            {
+                                currentScene.render();
+                                storeScreen();
+                                Gdx.gl.glClearColor(0, 0, 0, 1);
+                                Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                            }
+                            else
+                            {
+                                return;
+                            }
+                        }
+                        if(animationTimeout>=-transitionTime)
+                        {
+                            Gdx.gl.glClearColor(0, 0, 0, 1);
+                            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                            animationBatch.begin();
+                            animationTimeout-=delta;
+                            animationBatch.setColor(1,1,1,1);
+                            animationBatch.draw(lastScreenTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                            animationBatch.setColor(1,1,1,(1/ transitionTime)*(animationTimeout+ transitionTime));
+                            animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                            animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                            animationBatch.end();
+                            return;
+                        }
+                        currentScene.render();
+                        currentScene.act(delta);
+                    }
+                    if (showFPS)
+                        frameRate.render();
                     return;
                 }
             }
@@ -626,6 +707,43 @@ public class Forge implements ApplicationListener {
         catch (Exception e) {}
     }
 
+    public static boolean switchScene(Scene newScene) {
+
+        if (currentScene != null) {
+            if (!currentScene.leave())
+                return false;
+            lastScene.add(currentScene);
+        }
+        storeScreen();
+        sceneWasSwapped =true;
+        currentScene = newScene;
+        currentScene.enter();
+        return true;
+    }
+
+    protected static void storeScreen() {
+        if(!(currentScene instanceof ForgeScene))
+        {
+            if(lastScreenTexture!=null)
+                lastScreenTexture.getTexture().dispose();
+            lastScreenTexture = ScreenUtils.getFrameBufferTexture();
+        }
+
+
+    }
+    public Scene switchToLast() {
+
+        if(lastScene.size!=0)
+        {
+            storeScreen();
+            currentScene = lastScene.get(lastScene.size-1);
+            currentScene.enter();
+            sceneWasSwapped =true;
+            lastScene.removeIndex(lastScene.size-1);
+            return currentScene;
+        }
+        return null;
+    }
     //log message to Forge.log file
     public static void log(Object message) {
         System.out.println(message);
