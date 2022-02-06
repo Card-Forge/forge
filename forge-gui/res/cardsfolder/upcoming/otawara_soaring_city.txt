@@ -1,0 +1,9 @@
+Name:Otawara, Soaring City
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ ChangeZone | PrecostDesc$ Channel — | Cost$ 3 U Discard<1/CARDNAME> | ActivationZone$ Hand | ValidTgts$ Artifact,Creature,Enchantment,Planeswalker | TgtPrompt$ Select target artifact, creature, enchantment, or planeswalker | Origin$ Battlefield | Destination$ Hand | ReduceCost$ X | SpellDescription$ Return target artifact, creature, enchantment, or planeswalker to its owner's hand. This ability costs {1} less to activate for each legendary creature you control.
+SVar:X:Count$Valid Creature.Legendary+YouCtrl
+DeckHints:Type$Legendary
+DeckHas:Ability$Discard
+Oracle:{T}: Add {U}.\nChannel — {3}{U}, Discard Otawara, Soaring City: Return target artifact, creature, enchantment, or planeswalker to its owner's hand. This ability costs {1} less to activate for each legendary creature you control.
