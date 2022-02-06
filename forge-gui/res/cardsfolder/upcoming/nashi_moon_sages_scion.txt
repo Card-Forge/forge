@@ -1,0 +1,14 @@
+Name:Nashi, Moon Sage's Scion
+ManaCost:1 B B
+Types:Legendary Creature Rat Ninja
+PT:3/2
+K:Ninjutsu:3 B
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, exile the top card of each player's library. Until end of turn, you may play one of those cards. If you cast a spell this way, pay life equal to its mana value rather than paying its mana cost.
+SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Defined$ Player | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ MayPlay | Triggers$ Play1,Play2 | SubAbility$ DBCleanup
+SVar:MayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlay$ True | MayPlayAltManaCost$ PayLife<ConvertedManaCost> | Description$ Until end of turn, you may play one of those cards. If you cast a spell this way, pay life equal to its mana value rather than paying its mana cost.
+SVar:Play1:Mode$ SpellCast | ValidCard$ Card.IsRemembered | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ ExileSelf | Static$ True
+SVar:Play2:Mode$ LandPlayed | ValidCard$ Land.IsRemembered | TriggerZones$ Command | Execute$ ExileSelf | Static$ True
+SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Ninjutsu {3}{B} ({3}{B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever Nashi, Moon Sage's Scion deals combat damage to a player, exile the top card of each player's library. Until end of turn, you may play one of those cards. If you cast a spell this way, pay life equal to its mana value rather than paying its mana cost.

@@ -86,7 +86,7 @@ ScryfallCode=NEO
 74 R The Reality Chip @Campbell White
 75 U Reality Heist @Mila Pesic
 76 U Replication Specialist @Cristi Balanescu
-77 C Siba Trespassers @Evyn Fong
+77 C Saiba Trespassers @Evyn Fong
 78 C Short Circuit @Andreas Zafiratos
 79 C Skyswimmer Koi @Donato Giancola
 80 C Spell Pierce @Lie Setiawan

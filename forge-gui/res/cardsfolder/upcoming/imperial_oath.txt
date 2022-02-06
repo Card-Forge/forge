@@ -1,0 +1,7 @@
+Name:Imperial Oath
+ManaCost:5 W
+Types:Sorcery
+A:SP$ Token | TokenAmount$ 3 | TokenScript$ w_2_2_samurai_vigilance | SubAbility$ DBScry | SpellDescription$ Create three 2/2 white Samurai tokens with vigilance. Scry 3. | StackDescription$ {p:You} creates three 2/2 white Samurai tokens with vigilance.
+SVar:DBScry:DB$ Scry | ScryNum$ 3 | StackDescription$ {p:You} scries 3.
+DeckHas:Ability$Token
+Oracle:Create three 2/2 white Samurai tokens with vigilance. Scry 3.

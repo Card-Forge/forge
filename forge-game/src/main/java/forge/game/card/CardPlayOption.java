@@ -86,7 +86,9 @@ public final class CardPlayOption {
         switch (getPayManaCost()) {
             case YES:
                 if (altManaCost != null) {
-                    sb.append(" (by paying ").append(getFormattedAltManaCost()).append(" instead of paying its mana cost");
+                    String insteadCost = getFormattedAltManaCost();
+                    insteadCost = insteadCost.replace("Pay ","");
+                    sb.append(" (by paying ").append(insteadCost).append(" instead of paying its mana cost");
                     if (isWithFlash()) {
                         sb.append(" and as though it has flash");
                     }

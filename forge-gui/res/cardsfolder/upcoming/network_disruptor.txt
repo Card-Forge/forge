@@ -1,0 +1,8 @@
+Name:Network Disruptor
+ManaCost:U
+Types:Artifact Creature Moonfolk Rogue
+PT:1/1
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap target permanent.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
+Oracle:Flying\nWhen Network Disruptor enters the battlefield, tap target permanent.

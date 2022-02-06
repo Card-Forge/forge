@@ -1,0 +1,11 @@
+Name:Imperial Recovery Unit
+ManaCost:2 W
+Types:Artifact Vehicle
+PT:3/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBChangeZone | TriggerDescription$ Whenever CARDNAME attacks, return target creature or Vehicle card with mana value 2 or less from your graveyard to your hand.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn+cmcLE2,Vehicle.YouOwn+cmcLE2 | TgtPrompt$ Choose a creature or Vehicle card with mana value 2 or less
+K:Crew:2
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Graveyard
+DeckHints:Type$Creature|Vehicle
+Oracle:Whenever Imperial Recovery Unit attacks, return target creature or Vehicle card with mana value 2 or less from your graveyard to your hand.\nCrew 2

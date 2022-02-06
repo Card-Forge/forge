@@ -665,7 +665,7 @@ public class AbilityUtils {
                 val = playerXCount(players, calcX[1], card, ability);
             }
             else if (calcX[0].startsWith("TargetedObjects")) {
-                final List<GameObject> objects = new ArrayList<>();
+                List<GameObject> objects = new ArrayList<>();
                 // Make list of all targeted objects starting with the root SpellAbility
                 SpellAbility loopSA = sa.getRootAbility();
                 while (loopSA != null) {
@@ -673,6 +673,9 @@ public class AbilityUtils {
                         Iterables.addAll(objects, loopSA.getTargets());
                     }
                     loopSA = loopSA.getSubAbility();
+                }
+                if (calcX[0].endsWith("Distinct")) {
+                    objects = new ArrayList<>(new HashSet<>(objects));
                 }
                 val = objectXCount(objects, calcX[1], card, ability);
             }
@@ -1849,7 +1852,16 @@ public class AbilityUtils {
 
                 if (sq[0].startsWith("LastStateBattlefield")) {
                     final String[] k = l[0].split(" ");
-                    CardCollectionView list = sa.getLastStateBattlefield();
+                    CardCollectionView list;
+                    // this is only for spells that were cast
+                    if (sq[0].contains("WithFallback")) {
+                        if (!sa.getHostCard().wasCast()) {
+                            return doXMath(0, expr, c, ctb);
+                        }
+                        list = sa.getHostCard().getCastSA().getLastStateBattlefield();
+                    } else {
+                        list = sa.getLastStateBattlefield();
+                    }
                     if (list == null || list.isEmpty()) {
                         // LastState is Empty
                         if (sq[0].contains("WithFallback")) {
@@ -1867,7 +1879,16 @@ public class AbilityUtils {
 
                 if (sq[0].startsWith("LastStateGraveyard")) {
                     final String[] k = l[0].split(" ");
-                    CardCollectionView list = sa.getLastStateGraveyard();
+                    CardCollectionView list;
+                    // this is only for spells that were cast
+                    if (sq[0].contains("WithFallback")) {
+                        if (!sa.getHostCard().wasCast()) {
+                            return doXMath(0, expr, c, ctb);
+                        }
+                        list = sa.getHostCard().getCastSA().getLastStateGraveyard();
+                    } else {
+                        list = sa.getLastStateGraveyard();
+                    }
                     if (sa.getLastStateGraveyard() == null || list.isEmpty()) {
                         // LastState is Empty
                         if (sq[0].contains("WithFallback")) {

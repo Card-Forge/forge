@@ -1,0 +1,12 @@
+Name:Peerless Samurai
+ManaCost:2 R
+Types:Creature Human Samurai
+PT:2/3
+K:Menace
+T:Mode$ Attacks | ValidCard$ Samurai.YouCtrl,Warrior.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever a Samurai or Warrior you control attacks alone, the next spell you cast this turn costs {1} less to cast.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ ReduceCost | Triggers$ TrigCastSpell
+SVar:ReduceCost:Mode$ ReduceCost | EffectZone$ Command | Type$ Spell | Activator$ You | Amount$ 1 | Description$ The next spell you cast this turn costs {1} less to cast.
+SVar:TrigCastSpell:Mode$ SpellCast | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ RemoveEffect | Static$ True
+SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile
+DeckHints:Type$Samurai|Warrior
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhenever a Samurai or Warrior you control attacks alone, the next spell you cast this turn costs {1} less to cast.
