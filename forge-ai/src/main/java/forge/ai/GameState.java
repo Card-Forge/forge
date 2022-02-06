@@ -935,6 +935,11 @@ public abstract class GameState {
                             svarValue += " | ValidTgts$ Card";
                         }
                     }
+
+                    // We don't want to ask for Optional, since the effect is being precast as already active
+                    if (svarValue.contains("| Optional$")) {
+                        svarValue = TextUtil.fastReplace(svarValue, "| Optional$", "| RemovedOptional$");
+                    }
                 }
 
                 sa = AbilityFactory.getAbility(svarValue, c);
