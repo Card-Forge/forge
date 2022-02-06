@@ -1,5 +1,5 @@
 [format]
-Name:DC Rules (ATQ)
+Name:Constructed (ATQ)
 Type:Historic
 Subtype:Vintage
 Effective:1994-03-04

@@ -1,5 +1,5 @@
 [format]
-Name:DC Rules (1994-03-23)
+Name:Constructed (1994-03-23)
 Type:Historic
 Subtype:Vintage
 Effective:1994-03-23
