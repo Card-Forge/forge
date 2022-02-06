@@ -846,6 +846,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         return assignedDamage.keySet();
     }
 
+    public final int getAssignedDamage(final Card c) {
+        return assignedDamage.get(c);
+    }
+
     public final int getAssignedDamage(final String type) {
         final Map<Card, Integer> valueMap = Maps.newHashMap();
         for (final Card c : assignedDamage.keySet()) {
