@@ -261,12 +261,6 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.github.raeleus.TenPatch</groupId>
-            <artifactId>tenpatch</artifactId>
-            <version>5.2.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
             <version>22.0.0</version>

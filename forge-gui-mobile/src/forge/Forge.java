@@ -245,6 +245,14 @@ public class Forge implements ApplicationListener {
         return graphics;
     }
 
+    public static void initialize() {
+        animationBatch = new SpriteBatch();
+        transitionTexture = new Texture(Config.instance().getFile("ui/transition.png"));
+    }
+    public static Scene getCurrentScene() {
+        return currentScene;
+    }
+
     private void preloadExtendedArt() {
         if (!enablePreloadExtendedArt||!enableUIMask.equals("Full"))
             return;
@@ -292,8 +300,8 @@ public class Forge implements ApplicationListener {
                 FThreads.invokeInEdtLater(new Runnable() {
                     @Override
                     public void run() {
-                        FSkin.loadLight("default", null, Config.instance().getFile("skin"));
-                        FSkin.loadFull(splashScreen);
+                        //FSkin.loadLight("default", null, Config.instance().getFile("skin"));
+                        //FSkin.loadFull(splashScreen);
                         splashScreen = null;
                         isMobileAdventureMode = true;
                         try {
@@ -302,8 +310,7 @@ public class Forge implements ApplicationListener {
                             }
 
                             switchScene(SceneType.StartScene.instance);
-                            animationBatch=new SpriteBatch();
-                            transitionTexture =new Texture(Config.instance().getFile("ui/transition.png"));
+                            initialize();
                         } catch (Exception e) { e.printStackTrace(); }
                     }
                 });

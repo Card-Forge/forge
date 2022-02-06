@@ -9,7 +9,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
+import com.badlogic.gdx.utils.ScreenUtils;
 import forge.Forge;
+import forge.Graphics;
+import forge.adventure.scene.ForgeScene;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.util.Config;
@@ -20,15 +23,23 @@ import forge.interfaces.IDeviceAdapter;
  */
 public class AdventureApplicationAdapter extends Forge {
     public static AdventureApplicationAdapter instance;
-    Scene currentScene = null;
-    Array<Scene> lastScene = new Array<>();
+    static Scene currentScene = null;
+    static Array<Scene> lastScene = new Array<>();
     private int currentWidth;
     private int currentHeight;
     private float animationTimeout;
     Batch animationBatch;
     Texture transitionTexture;
-    TextureRegion lastScreenTexture;
-    private boolean sceneWasSwapped =false;
+    static TextureRegion lastScreenTexture;
+    private static boolean sceneWasSwapped =false;
+    private static Graphics graphics;
+
+    public static Graphics getGraphics()
+    {
+        if(graphics==null)
+            graphics=new Graphics();
+        return graphics;
+    }
 
     public TextureRegion getLastScreenTexture() {
         return lastScreenTexture;
@@ -47,7 +58,7 @@ public class AdventureApplicationAdapter extends Forge {
     }
 
 
-    public Scene getCurrentScene() {
+    public static Scene getCurrentScene() {
         return currentScene;
     }
 
@@ -56,6 +67,31 @@ public class AdventureApplicationAdapter extends Forge {
         currentWidth = w;
         currentHeight = h;
         super.resize(w, h);
+    }
+
+    public static boolean switchScene(Scene newScene) {
+
+        if (currentScene != null) {
+            if (!currentScene.leave())
+                return false;
+            lastScene.add(currentScene);
+        }
+        storeScreen();
+        sceneWasSwapped =true;
+        currentScene = newScene;
+        currentScene.enter();
+        return true;
+    }
+
+    protected static void storeScreen() {
+         if(!(currentScene instanceof ForgeScene))
+         {
+            if(lastScreenTexture!=null)
+                lastScreenTexture.getTexture().dispose();
+             lastScreenTexture = ScreenUtils.getFrameBufferTexture();
+         }
+
+
     }
 
     public void resLoaded() {
@@ -148,5 +184,20 @@ public class AdventureApplicationAdapter extends Forge {
     private Scene getLastScene() {
         return lastScene.size==0?null: lastScene.get(lastScene.size-1);
     }
+
+    public static Scene switchToLast() {
+
+        if(lastScene.size!=0)
+        {
+            storeScreen();
+            currentScene = lastScene.get(lastScene.size-1);
+            currentScene.enter();
+            sceneWasSwapped =true;
+            lastScene.removeIndex(lastScene.size-1);
+            return currentScene;
+        }
+        return null;
+    }
+
 
 }

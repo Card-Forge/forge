@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.JsonWriter;
 import forge.adventure.data.ConfigData;
 import forge.adventure.data.SettingData;
 import forge.deck.Deck;
+import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgeProfileProperties;
@@ -40,6 +41,8 @@ public class Config {
     private Config() {
 
         String path= Files.exists(Paths.get("./res"))?"./":"../forge-gui/";
+        if (GuiBase.isAndroid())
+            path = GuiBase.getInterface().getAssetsDir();
          adventures = new File(path + "/res/adventure").list();
         try
         {
