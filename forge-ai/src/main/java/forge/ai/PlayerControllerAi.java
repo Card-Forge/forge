@@ -1204,6 +1204,12 @@ public class PlayerControllerAi extends PlayerController {
             final Card source = sa.getHostCard();
             final String logic = sa.getParam("AILogic");
 
+            // Filter for valid options only
+            if (!valid.isEmpty()) {
+                aiLibrary = CardLists.getValidCards(aiLibrary, valid, source.getController(), source, sa);
+                oppLibrary = CardLists.getValidCards(oppLibrary, valid, source.getController(), source, sa);
+            }
+
             if (source != null && source.getState(CardStateName.Original).hasIntrinsicKeyword("Hidden agenda")) {
                 // If any Conspiracies are present, try not to choose the same name twice
                 // (otherwise the AI will spam the same name)
