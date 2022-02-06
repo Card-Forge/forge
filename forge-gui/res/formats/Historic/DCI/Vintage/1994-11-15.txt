@@ -1,5 +1,5 @@
 [format]
-Name:DCI Rules (FEM)
+Name:DC Rules (FEM)
 Type:Historic
 Subtype:Vintage
 Effective:1994-11-15

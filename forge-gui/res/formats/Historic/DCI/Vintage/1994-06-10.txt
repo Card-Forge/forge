@@ -1,5 +1,5 @@
 [format]
-Name:DCI Rules (LEG)
+Name:DC Rules (LEG)
 Type:Historic
 Subtype:Vintage
 Effective:1994-06-10

@@ -1,5 +1,5 @@
 [format]
-Name:DCI Rules (ATQ)
+Name:DC Rules (ATQ)
 Type:Historic
 Subtype:Vintage
 Effective:1994-03-04

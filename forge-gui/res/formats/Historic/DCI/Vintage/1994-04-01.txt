@@ -1,5 +1,5 @@
 [format]
-Name:DCI Rules (3ED)
+Name:DC Rules (3ED)
 Type:Historic
 Subtype:Vintage
 Effective:1994-04-01

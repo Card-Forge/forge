@@ -1,5 +1,5 @@
 [format]
-Name:DCI Rules (1994-01-25)
+Name:DC Rules (1994-01-25)
 Type:Historic
 Subtype:Vintage
 Effective:1994-01-25
