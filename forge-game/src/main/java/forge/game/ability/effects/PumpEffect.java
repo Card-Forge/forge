@@ -22,6 +22,7 @@ import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
@@ -158,12 +159,33 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         if (tgts.size() > 0) {
-            for (final GameEntity c : tgts) {
-                sb.append(c).append(" ");
+            List<String> keywords = Lists.newArrayList();
+            if (sa.hasParam("KW")) {
+                if (sa.getParam("KW").equals("HIDDEN This card doesn't untap during your next untap step.")) {
+                    if (sa instanceof AbilitySub) {
+                        sb.append(tgts.size() == 1 ? "It doesn't " : "They don't ");
+                    } else {
+                        sb.append(Lang.joinHomogenous(tgts)).append(tgts.size() == 1 ? " doesn't " : " don't ");
+                    }
+                    sb.append("untap during ");
+                    String whose = "your";
+                    for (GameEntity t : tgts) {
+                        final Card c = (Card) t;
+                        if (!(c.getOwner() == sa.getActivatingPlayer())) {
+                            whose = (tgts.size() == 1 ? "its controller's" : "their controller's");
+                            break;
+                        }
+                    }
+                    sb.append(whose).append(" next untap step.");
+                    return sb.toString();
+                }
+                keywords.addAll(Arrays.asList(sa.getParam("KW").split(" & ")));
             }
 
+            sb.append(Lang.joinHomogenous(tgts)).append(" ");
+
             if (sa.hasParam("Radiance")) {
-                sb.append(" and each other ").append(sa.getParam("ValidTgts"))
+                sb.append("and each other ").append(sa.getParam("ValidTgts"))
                         .append(" that shares a color with ");
                 if (tgts.size() > 1) {
                     sb.append("them ");
@@ -172,10 +194,6 @@ public class PumpEffect extends SpellAbilityEffect {
                 }
             }
 
-            List<String> keywords = Lists.newArrayList();
-            if (sa.hasParam("KW")) {
-                keywords.addAll(Arrays.asList(sa.getParam("KW").split(" & ")));
-            }
             final int atk = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumAtt"), sa, true);
             final int def = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumDef"), sa, true);
 
