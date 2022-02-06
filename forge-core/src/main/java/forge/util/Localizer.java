@@ -22,6 +22,7 @@ public class Localizer {
 
     private Locale locale;
     private ResourceBundle resourceBundle;
+    private boolean silent = false;
 
     public static Localizer getInstance() {
         if (instance == null) {
@@ -60,7 +61,11 @@ public class Localizer {
 
     public String getMessageorUseDefault(final String key, final String defaultValue, final Object... messageArguments) {
         try {
-            return getMessage(key, messageArguments);
+            silent = true;
+            String value = getMessage(key, messageArguments);
+            if (value.contains("INVALID PROPERTY:"))
+                return defaultValue;
+            return value;
         } catch (Exception e) {
             return defaultValue;
         }
@@ -73,13 +78,16 @@ public class Localizer {
             //formatter = new MessageFormat(resourceBundle.getString(key.toLowerCase()), locale);
             formatter = new MessageFormat(resourceBundle.getString(key), locale);
         } catch (final IllegalArgumentException | MissingResourceException e) {
-            e.printStackTrace();
+            if (!silent)
+                e.printStackTrace();
         }
 
-        if (formatter == null) {
+        if (formatter == null && !silent) {
             System.err.println("INVALID PROPERTY: '" + key + "' -- Translation Needed?");
             return "INVALID PROPERTY: '" + key + "' -- Translation Needed?";
         }
+
+        silent = false;
 
         formatter.setLocale(locale);
 

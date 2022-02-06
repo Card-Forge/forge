@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Clipboard;
+import forge.adventure.AdventureApplicationAdapter;
 import forge.animation.ForgeAnimation;
 import forge.assets.AssetsDownloader;
 import forge.assets.FSkin;
@@ -71,6 +72,7 @@ public class Forge implements ApplicationListener {
     public static boolean isPortraitMode = false;
     public static boolean gameInProgress = false;
     public static boolean disposeTextures = false;
+    public static boolean isAdventureMode = false;
     public static int cacheSize = 400;
     public static int totalDeviceRAM = 0;
     public static int androidVersion = 0;
@@ -252,7 +254,19 @@ public class Forge implements ApplicationListener {
         /*for (FScreen fScreen : Dscreens)
             System.out.println(fScreen.toString());*/
     }
-
+    public static void openHomeDefault() {
+        openHomeScreen(-1, null); //default for startup
+        splashScreen = null;
+        if (isLandscapeMode()) { //open preferred new game screen by default if landscape mode
+            NewGameMenu.getPreferredScreen().open();
+        }
+    }
+    public static void openAdventure() {
+        splashScreen = null;
+        isAdventureMode = true;
+        //how to insert adventure startup / adapter here??
+        
+    }
     protected void afterDbLoaded() {
         stopContinuousRendering(); //save power consumption by disabling continuous rendering once assets loaded
 
@@ -261,14 +275,11 @@ public class Forge implements ApplicationListener {
         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
         destroyThis = false; //Allow back()
         Gdx.input.setCatchKey(Keys.MENU, true);
-        openHomeScreen(-1, null); //default for startup
-        splashScreen = null;
+
         afterDBloaded = true;
+        splashScreen.setShowModeSelector(true);
 
         boolean isLandscapeMode = isLandscapeMode();
-        if (isLandscapeMode) { //open preferred new game screen by default if landscape mode
-            NewGameMenu.getPreferredScreen().open();
-        }
 
         //adjust height modifier
         adjustHeightModifier(getScreenWidth(), getScreenHeight());
@@ -534,7 +545,7 @@ public class Forge implements ApplicationListener {
             graphics.begin(screenWidth, screenHeight);
             screen.screenPos.setSize(screenWidth, screenHeight);
             if (screen.getRotate180()) {
-                graphics.startRotateTransform(screenWidth / 2, screenHeight / 2, 180);
+                graphics.startRotateTransform(screenWidth / 2f, screenHeight / 2f, 180);
             }
             screen.draw(graphics);
             if (screen.getRotate180()) {
@@ -545,7 +556,7 @@ public class Forge implements ApplicationListener {
                     overlay.screenPos.setSize(screenWidth, screenHeight);
                     overlay.setSize(screenWidth, screenHeight); //update overlay sizes as they're rendered
                     if (overlay.getRotate180()) {
-                        graphics.startRotateTransform(screenWidth / 2, screenHeight / 2, 180);
+                        graphics.startRotateTransform(screenWidth / 2f, screenHeight / 2f, 180);
                     }
                     overlay.draw(graphics);
                     if (overlay.getRotate180()) {
@@ -769,6 +780,9 @@ public class Forge implements ApplicationListener {
             }
             if (currentScreen != null) {
                 currentScreen.buildTouchListeners(x, y, potentialListeners);
+            }
+            if (splashScreen != null) {
+                splashScreen.buildTouchListeners(x, y, potentialListeners);
             }
         }
 
