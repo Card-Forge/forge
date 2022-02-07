@@ -36,11 +36,6 @@ public class ReplaceBeginPhase extends ReplacementEffect {
                 return false;
             }
         }
-        if (hasParam("Condition")) {
-            if (getParam("Condition").equals("Hellbent") && !affected.hasHellbent()) {
-                return false;
-            }
-        }
         return true;
     }
 

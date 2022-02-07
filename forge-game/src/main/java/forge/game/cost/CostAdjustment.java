@@ -470,36 +470,8 @@ public class CostAdjustment {
                 if (!sa.isActivatedAbility() || sa.isManaAbility() || sa.isReplacementAbility()) {
                     return false;
                 }
-            } else if (type.equals("Buyback")) {
-                if (!sa.isBuyBackAbility()) {
-                    return false;
-                }
-            } else if (type.equals("Cycling")) {
-                if (!sa.isCycling()) {
-                    return false;
-                }
-            } else if (type.equals("Dash")) {
-                if (!sa.isDash()) {
-                    return false;
-                }
-            } else if (type.equals("Equip")) {
-                if (!sa.isActivatedAbility() || !sa.hasParam("Equip")) {
-                    return false;
-                }
-            } else if (type.equals("Flashback")) {
-                if (!sa.isFlashBackAbility()) {
-                    return false;
-                }
-            } else if (type.equals("MorphUp")) {
-                if (!sa.isMorphUp()) {
-                    return false;
-                }
             } else if (type.equals("MorphDown")) {
                 if (!sa.isSpell() || !sa.isCastFaceDown()) {
-                    return false;
-                }
-            } else if (type.equals("Loyalty")) {
-                if (!sa.isPwAbility()) {
                     return false;
                 }
             } else if (type.equals("Foretell")) {
@@ -513,8 +485,8 @@ public class CostAdjustment {
         }
         if (st.hasParam("AffectedZone")) {
             List<ZoneType> zones = ZoneType.listValueOf(st.getParam("AffectedZone"));
-            if (sa.isSpell()) {
-                if (!zones.contains(card.getCastFrom())) {
+            if (sa.isSpell() && sa.getHostCard().wasCast()) {
+                if (!zones.contains(card.getCastFrom().getZoneType())) {
                     return false;
                 }
             } else {

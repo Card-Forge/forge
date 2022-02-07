@@ -1200,7 +1200,7 @@ public class PlayerControllerAi extends PlayerController {
     public String chooseCardName(SpellAbility sa, Predicate<ICardFace> cpp, String valid, String message) {
         if (sa.hasParam("AILogic")) {
             CardCollectionView aiLibrary = player.getCardsIn(ZoneType.Library);
-            CardCollectionView oppLibrary = player.getWeakestOpponent().getCardsIn(ZoneType.Library);
+            CardCollectionView oppLibrary = player.getStrongestOpponent().getCardsIn(ZoneType.Library);
             final Card source = sa.getHostCard();
             final String logic = sa.getParam("AILogic");
 

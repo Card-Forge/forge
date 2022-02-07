@@ -3,5 +3,5 @@ ManaCost:1 G
 Types:Creature Elf Shaman Ally
 PT:1/1
 K:Haste
-A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | RestrictValid$ Card.Creature | SpellDescription$ Add one mana of any color. Spend this mana only to cast a creature spell.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | RestrictValid$ Spell.Creature | SpellDescription$ Add one mana of any color. Spend this mana only to cast a creature spell.
 Oracle:Haste\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell.

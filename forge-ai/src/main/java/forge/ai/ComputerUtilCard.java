@@ -944,7 +944,7 @@ public class ComputerUtilCard {
         List<String> chosen = new ArrayList<>();
         Player ai = sa.getActivatingPlayer();
         final Game game = ai.getGame();
-        Player opp = ai.getWeakestOpponent();
+        Player opp = ai.getStrongestOpponent();
         if (sa.hasParam("AILogic")) {
             final String logic = sa.getParam("AILogic");
 

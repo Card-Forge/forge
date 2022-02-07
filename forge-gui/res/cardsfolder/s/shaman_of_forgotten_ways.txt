@@ -2,7 +2,7 @@ Name:Shaman of Forgotten Ways
 ManaCost:2 G
 Types:Creature Human Shaman
 PT:2/3
-A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ 2 | RestrictValid$ Card.Creature | SpellDescription$ Add two mana in any combination of colors. Spend this mana only to cast creature spells.
+A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ 2 | RestrictValid$ Spell.Creature | SpellDescription$ Add two mana in any combination of colors. Spend this mana only to cast creature spells.
 A:AB$ RepeatEach | Cost$ 9 G G T | PrecostDesc$ Formidable — | CheckSVar$ FormidableTest | SVarCompare$ GE8 | RepeatPlayers$ Player | RepeatSubAbility$ DBSetLife | SpellDescription$ Each player's life total becomes the number of creatures they control. Activate only if creatures you control have total power 8 or greater.
 SVar:FormidableTest:Count$SumPower_Creature.YouCtrl
 SVar:DBSetLife:DB$ SetLife | Defined$ Player.IsRemembered | LifeAmount$ X

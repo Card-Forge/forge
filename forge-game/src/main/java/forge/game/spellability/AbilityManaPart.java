@@ -95,7 +95,7 @@ public class AbilityManaPart implements java.io.Serializable {
         this.addsKeywordsUntil = params.get("AddsKeywordsUntil");
         this.addsCounters = params.get("AddsCounters");
         this.triggersWhenSpent = params.get("TriggersWhenSpent");
-        this.persistentMana = (null != params.get("PersistentMana")) && "True".equalsIgnoreCase(params.get("PersistentMana"));
+        this.persistentMana = null != params.get("PersistentMana") && "True".equalsIgnoreCase(params.get("PersistentMana"));
     }
 
     /**
@@ -334,28 +334,13 @@ public class AbilityManaPart implements java.io.Serializable {
                 continue;
             }
 
-            if (sa.isValid(restriction, this.getSourceCard().getController(), this.getSourceCard(), null)) {
-                return true;
-            }
-
             if (restriction.equals("CantPayGenericCosts")) {
                 return true;
             }
 
-            if (sa.isAbility()) {
-                if (restriction.startsWith("Activated")) {
-                    restriction = TextUtil.fastReplace(restriction, "Activated", "Card");
-                } else {
-                    continue;
-                }
+            if (sa.isValid(restriction, this.getSourceCard().getController(), this.getSourceCard(), null)) {
+                return true;
             }
-
-            if (sa.getHostCard() != null) {
-                if (sa.getHostCard().isValid(restriction, this.getSourceCard().getController(), this.getSourceCard(), null)) {
-                    return true;
-                }
-            }
-
         }
 
         return false;
