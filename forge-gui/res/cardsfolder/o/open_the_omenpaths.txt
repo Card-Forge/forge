@@ -2,7 +2,7 @@ Name:Open the Omenpaths
 ManaCost:2 R
 Types:Instant
 A:SP$ Charm | CharmNum$ 1 | Choices$ Mana,Pump
-SVar:Mana:DB$ Mana | Amount$ 2 | TwoEach$ True | Produced$ Combo AnyDifferent | RestrictValid$ Creature,Enchantment | SpellDescription$ Add two mana of any one color and two mana of any other color. Spend this mana only to cast creature or enchantment spells.
+SVar:Mana:DB$ Mana | Amount$ 2 | TwoEach$ True | Produced$ Combo AnyDifferent | RestrictValid$ Spell.Creature,Spell.Enchantment | SpellDescription$ Add two mana of any one color and two mana of any other color. Spend this mana only to cast creature or enchantment spells.
 SVar:Pump:DB$ PumpAll | NumAtt$ 1 | ValidCards$ Creature.YouCtrl | SpellDescription$ Creatures you control get +1/+0 until end of turn.
 DeckHints:Type$Enchantment|Creature
 Oracle:Choose one —\n• Add two mana of any one color and two mana of any other color. Spend this mana only to cast creature or enchantment spells.\n• Creatures you control get +1/+0 until end of turn.
