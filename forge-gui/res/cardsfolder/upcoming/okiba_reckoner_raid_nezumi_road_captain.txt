@@ -1,0 +1,24 @@
+Name:Okiba Reckoner Raid
+ManaCost:B
+Types:Enchantment Saga
+K:Saga:3:DBDrain,DBDrain,DBTransform
+SVar:DBDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 1 life and you gain 1 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AlternateMode:DoubleFaced
+DeckHas:Ability$LifeGain
+Oracle:(As this Saga enters and after your draw step, add a lore counter.)\nI, II — Each opponent loses 1 life and you gain 1 life.\nIII — Exile this Saga, then return it to the battlefield transformed under your control.
+
+ALTERNATE
+
+Name:Nezumi Road Captain
+ManaCost:no cost
+Colors:black
+Types:Enchantment Creature Rat Rogue
+PT:2/2
+K:Menace
+S:Mode$ Continuous | Affected$ Vehicle.YouCtrl | AddKeyword$ Menace | Description$ Vehicles you control have menace. (They can't be blocked except by two or more creatures.)
+DeckHints:Type$Vehicle
+Oracle:Menace\nVehicles you control have menace. (They can't be blocked except by two or more creatures.)
