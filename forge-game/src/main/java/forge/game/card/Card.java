@@ -207,6 +207,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean foretoldThisTurn = false;
     private boolean foretoldByEffect = false;
 
+    private int timesCrewedThisTurn = 0;
+
     private int classLevel = 1;
 
     private long bestowTimestamp = -1;
@@ -5605,6 +5607,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         foretoldThisTurn = false;
     }
 
+    public int timesCrewedThisTurn() {
+        return timesCrewedThisTurn;
+    }
+
+    public final void setTimesCrewedThisTurn(final int t) {
+        this.timesCrewedThisTurn = t;
+    }
+
+    public void resetTimesCrewedThisTurn() {
+        timesCrewedThisTurn = 0;
+    }
+
     public final int getClassLevel() {
         return classLevel;
     }
@@ -6044,6 +6058,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         clearBlockedThisTurn();
         resetMayPlayTurn();
         resetExertedThisTurn();
+        resetTimesCrewedThisTurn();
         resetChosenModeTurn();
         resetAbilityResolvedThisTurn();
     }

@@ -334,6 +334,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
             if (sp.hasParam("Crew")) {
                 // Trigger crews!
+                sp.getHostCard().setTimesCrewedThisTurn(sp.getHostCard().timesCrewedThisTurn() + 1);
                 runParams.put(AbilityKey.Vehicle, sp.getHostCard());
                 runParams.put(AbilityKey.Crew, sp.getPaidList("TappedCards"));
                 game.getTriggerHandler().runTrigger(TriggerType.Crewed, runParams, false);
