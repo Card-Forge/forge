@@ -108,7 +108,8 @@ import java.util.Map;
                 @Override
                 public void handleEvent(FEvent e) {
                     AdventurePlayer.current().getNewCards().clear();
-                    Forge.switchToLast();
+                    Forge.clearCurrentScreen();
+                    Forge.switchScene(SceneType.DeckSelectScene.instance);
                 }
             },getPages());
 

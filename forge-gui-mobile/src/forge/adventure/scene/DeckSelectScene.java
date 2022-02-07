@@ -56,7 +56,7 @@ public class DeckSelectScene extends UIScene {
     }
 
     public void back() {
-        Forge.switchToLast();
+        Forge.switchScene(SceneType.GameScene.instance);
     }
 
     public boolean select(int slot) {
