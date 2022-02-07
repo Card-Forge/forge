@@ -1,6 +1,6 @@
 Name:Citizen Token
 Types:Creature Citizen
+Colors:all
 ManaCost:no cost
 PT:2/2
-S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | SetColor$ All | Description$ CARDNAME is all colors.
 Oracle:This creature is all colors.
