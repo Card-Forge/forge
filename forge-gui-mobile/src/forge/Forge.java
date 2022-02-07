@@ -269,11 +269,13 @@ public class Forge implements ApplicationListener {
         GuiBase.setIsAdventureMode(false);
         openHomeScreen(-1, null); //default for startup
         splashScreen = null;
+        isMobileAdventureMode = false;
         if (isLandscapeMode()) { //open preferred new game screen by default if landscape mode
             NewGameMenu.getPreferredScreen().open();
         }
     }
     public static void openAdventure() {
+        //continuous rendering is needed for adventure mode
         startContinuousRendering();
         GuiBase.setIsAdventureMode(true);
         splashScreen = null;
@@ -296,7 +298,7 @@ public class Forge implements ApplicationListener {
 
         afterDBloaded = true;
         //selection
-        if (isLandscapeMode())
+        if (isLandscapeMode() && !GuiBase.isAndroid())
             splashScreen.setShowModeSelector(true);
         else
             openHomeDefault();

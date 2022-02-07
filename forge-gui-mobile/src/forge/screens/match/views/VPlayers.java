@@ -56,6 +56,7 @@ public class VPlayers extends FDropDown {
             playerDeck = MatchController.getPlayerDeck(player0);
             btnDeck = new FLabel.ButtonBuilder().opaque(true).iconScaleFactor(0.99f).selectable().alphaComposite(1).iconInBackground(true).build();
             btnDeck.setEnabled(!Forge.isMobileAdventureMode);
+            btnDeck.setVisible(!Forge.isMobileAdventureMode);
             btnDeck.setCommand(new FEvent.FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
@@ -87,9 +88,15 @@ public class VPlayers extends FDropDown {
             float x = PADDING;
             float y = PADDING;
             float h = getHeight() - 2 * y;
+            String details = player.getDetails();
+            if (Forge.isMobileAdventureMode) {
+                g.drawImage(MatchController.getPlayerAvatar(player), x, y, h, h);
+            } else {
+                details += playerDeck.getName();
+            }
             x += h + PADDING;
             //Draw Player Details
-            g.drawText(player.getDetails() + playerDeck.getName(), FONT, FList.FORE_COLOR, x, y, getWidth() - PADDING - x, h, true, Align.left, true);
+            g.drawText(details, FONT, FList.FORE_COLOR, x, y, getWidth() - PADDING - x, h, true, Align.left, true);
         }
 
         @Override

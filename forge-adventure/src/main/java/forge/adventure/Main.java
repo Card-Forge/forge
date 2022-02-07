@@ -45,7 +45,7 @@ public class Main {
         } else {
             config.setWindowedMode(Config.instance().getSettingData().width, Config.instance().getSettingData().height);
         }
-        config.setTitle("Forge Mobile");
+        config.setTitle("Forge Adventure Mobile");
         config.setWindowIcon(Config.instance().getFilePath("forge-adventure.png"));
 
 
