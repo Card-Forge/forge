@@ -7,4 +7,6 @@ SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | Count
 SVar:DBPumpOne:DB$ Pump | Defined$ Targeted | NumAtt$ 1 | NumDef$ 1
 SVar:DBPumpTwo:DB$ Pump | Defined$ Targeted | NumAtt$ 2 | NumDef$ 2
 SVar:X:Targeted$Valid Creature.Enchantment,Creature.Legendary
+DeckHas:Ability$Counters
+DeckHints:Type$Enchantment|Legendary
 Oracle:Target creature gets +2/+2 until end of turn. If it's an enchantment creature or legendary creature, instead put a +1/+1 counter on it and it gets +1/+1 until end of turn.
