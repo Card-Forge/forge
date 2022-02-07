@@ -1,0 +1,12 @@
+Name:Spirit-Sister's Call
+ManaCost:3 W B
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ At the beginning of your end step, choose target permanent card in your graveyard. You may sacrifice a permanent that shares a card type with the chosen card. If you do, return the chosen card from your graveyard to the battlefield and it gains "If this permanent would leave the battlefield, exile it instead of putting it anywhere else."
+SVar:TrigChoose:DB$ ChooseCard | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Choose target permanent card in your graveyard | TgtZone$ Graveyard | DefinedCards$ Targeted | SubAbility$ DBSacrifice
+SVar:DBSacrifice:DB$ Sacrifice | Optional$ True | SacValid$ Permanent.sharesCardTypeWith Targeted | SacMessage$ permanent that shares a card type with the chosen card | Amount$ 1 | RememberSacrificed$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | ConditionDefined$ Remembered | ConditionPresent$ Card | Defined$ Targeted | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Replacements$ ReplaceLeaves | Defined$ Targeted | Duration$ Permanent
+SVar:ReplaceLeaves:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ Exile | Description$ If this permanent would leave the battlefield, exile it instead of putting it anywhere else.
+SVar:Exile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ ReplacedCard
+DeckHas:Ability$Graveyard|Sacrifice
+Oracle:At the beginning of your end step, choose target permanent card in your graveyard. You may sacrifice a permanent that shares a card type with the chosen card. If you do, return the chosen card from your graveyard to the battlefield and it gains "If this permanent would leave the battlefield, exile it instead of putting it anywhere else."

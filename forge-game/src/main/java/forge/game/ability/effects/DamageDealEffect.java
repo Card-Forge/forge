@@ -43,19 +43,13 @@ public class DamageDealEffect extends DamageBaseEffect {
         }
 
         List<GameObject> targets = SpellAbilityEffect.getTargets(spellAbility);
-        if (targets.isEmpty()) {
+        final List<Card> definedSources = AbilityUtils.getDefinedCards(spellAbility.getHostCard(), spellAbility.getParam("DamageSource"), spellAbility);
+
+        if (targets.isEmpty() || definedSources.isEmpty()) {
             return "";
         }
 
-        final List<Card> definedSources = AbilityUtils.getDefinedCards(spellAbility.getHostCard(), spellAbility.getParam("DamageSource"), spellAbility);
-
-        if (!definedSources.isEmpty() && definedSources.get(0) != spellAbility.getHostCard()) {
-            stringBuilder.append(definedSources.get(0).toString()).append(" deals");
-        } else {
-            stringBuilder.append("Deals");
-        }
-
-        stringBuilder.append(" ").append(dmg).append(" damage ");
+        stringBuilder.append(definedSources.get(0).toString()).append(" deals").append(" ").append(dmg).append(" damage ");
 
         // if use targeting we show all targets and corresponding damage
         if (spellAbility.usesTargeting()) {

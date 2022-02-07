@@ -1,0 +1,7 @@
+Name:Mothrider Patrol
+ManaCost:W
+Types:Creature Fox Warrior
+PT:1/1
+K:Flying
+A:AB$ Tap | Cost$ 3 W T | ValidTgts$ Creature | TgtPrompt$ Choose target creature | SpellDescription$ Tap target creature.
+Oracle:Flying\n{3}{W}, {T}: Tap target creature.
