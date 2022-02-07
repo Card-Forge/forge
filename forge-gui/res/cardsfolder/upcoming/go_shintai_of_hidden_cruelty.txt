@@ -1,0 +1,12 @@
+Name:Go-Shintai of Hidden Cruelty
+ManaCost:3 B
+Types:Legendary Enchantment Creature Shrine
+PT:2/2
+K:Deathtouch
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigImmediateTrig | TriggerDescription$ At the beginning of your end step, you may pay {1}. When you do, destroy target creature with toughness X or less, where X is the number of Shrines you control.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ 1 | Execute$ TrigDestroy | SpellDescription$ Destroy target creature with toughness X or less, where X is the number of Shrines you control.
+SVar:TrigDestroy:DB$ Mill | ValidTgts$ Creature.toughnessLEX | TgtPrompt$ Select target creature with toughness X or less
+SVar:X:Count$TypeYouCtrl.Shrine
+DeckHas:Ability$Mill
+DeckHints:Type$Shrine
+Oracle:Deathtouch\nAt the beginning of your end step, you may pay {1}. When you do, destroy target creature with toughness X or less, where X is the number of Shrines you control.
