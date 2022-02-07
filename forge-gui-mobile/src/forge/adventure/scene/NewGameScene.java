@@ -109,10 +109,30 @@ public class NewGameScene extends UIScene {
         gender.setCurrentIndex(rand.nextInt());
         deck.setCurrentIndex(rand.nextInt());
         race.setCurrentIndex(rand.nextInt());
-        ui.onButtonPress("back", this::back);
-        ui.onButtonPress("start", this::start);
-        ui.onButtonPress("leftAvatar", this::leftAvatar);
-        ui.onButtonPress("rightAvatar", this::rightAvatar);
+        ui.onButtonPress("back", new Runnable() {
+            @Override
+            public void run() {
+                NewGameScene.this.back();
+            }
+        });
+        ui.onButtonPress("start", new Runnable() {
+            @Override
+            public void run() {
+                NewGameScene.this.start();
+            }
+        });
+        ui.onButtonPress("leftAvatar", new Runnable() {
+            @Override
+            public void run() {
+                NewGameScene.this.leftAvatar();
+            }
+        });
+        ui.onButtonPress("rightAvatar", new Runnable() {
+            @Override
+            public void run() {
+                NewGameScene.this.rightAvatar();
+            }
+        });
 
         updateAvatar();
     }
