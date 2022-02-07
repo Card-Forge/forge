@@ -278,8 +278,10 @@ public class Forge implements ApplicationListener {
     }
     public static void openAdventure() {
         startContinuousRendering();
-        final LoadingOverlay loader = new LoadingOverlay("Loading Adventure");
-        loader.show();
+        if (!isDesktopAdventureMode) {
+            final LoadingOverlay loader = new LoadingOverlay("Loading Adventure");
+            loader.show();
+        }
         GuiBase.setIsAdventureMode(true);
         FThreads.invokeInBackgroundThread(new Runnable() {
             @Override

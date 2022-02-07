@@ -35,16 +35,8 @@ public class Main {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         config.setResizable(false);
 
-        try {
-            //todo figuure out fullscreen mode...
-            if (Config.instance().getSettingData().fullScreen) {
-                config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
-            } else {
-                config.setWindowedMode(Config.instance().getSettingData().width, Config.instance().getSettingData().height);
-            }
-        } catch (Exception e) {}
-
-        config.setWindowIcon(Config.instance().getFilePath("forge-adventure.png"));
+        //todo icon config && fullscreen mode
+        config.setWindowedMode(1280, 720);
 
         new Lwjgl3Application(Forge.getApp(new Lwjgl3Clipboard(), new DesktopAdapter(""), Files.exists(Paths.get("./res"))?"./":"../forge-gui/", true, false, 0, true, 0, "", "", true), config);
 
