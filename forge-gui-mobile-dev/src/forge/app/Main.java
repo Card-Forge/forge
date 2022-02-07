@@ -112,7 +112,7 @@ public class Main {
         ForgePreferences prefs = FModel.getPreferences();
         boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);
         new Lwjgl3Application(Forge.getApp(new Lwjgl3Clipboard(), new DesktopAdapter(switchOrientationFile),//todo get totalRAM && isTabletDevice
-                desktopMode ? desktopModeAssetsDir : assetsDir, propertyConfig, false, 0, false, 0, "", ""), config);
+                desktopMode ? desktopModeAssetsDir : assetsDir, propertyConfig, false, 0, false, 0, "", "", false), config);
     }
 
     private static class DesktopAdapter implements IDeviceAdapter {

@@ -221,7 +221,7 @@ public class Main extends AndroidApplication {
                     new BreadcrumbBuilder().setMessage(message).build()
             );
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
-            initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, true, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
+            initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, true, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName(), false));
             displayMessage(adapter, true, message);
             return;
         }
@@ -236,7 +236,7 @@ public class Main extends AndroidApplication {
                     new BreadcrumbBuilder().setMessage(message).build()
             );
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
-            initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, true, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
+            initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, true, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName(), false));
             displayMessage(adapter, true, message);
             return;
         }
@@ -267,7 +267,7 @@ public class Main extends AndroidApplication {
             isPortrait = true;
             //fake init for permission instruction
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
-            initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, isPortrait, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
+            initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, isPortrait, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName(), false));
             displayMessage(adapter, false, "");
         }
     }

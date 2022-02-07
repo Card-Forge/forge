@@ -90,6 +90,7 @@ public class Forge implements ApplicationListener {
     public static boolean gameInProgress = false;
     public static boolean disposeTextures = false;
     public static boolean isMobileAdventureMode = false;
+    public static boolean isDesktopAdventureMode = false;
     public static int cacheSize = 400;
     public static int totalDeviceRAM = 0;
     public static int androidVersion = 0;
@@ -100,7 +101,7 @@ public class Forge implements ApplicationListener {
     public static boolean afterDBloaded = false;
     public static int mouseButtonID = 0;
 
-    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
+    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName, boolean startAdventure) {
         app = new Forge();
         if (GuiBase.getInterface() == null) {
             clipboard = clipboard0;
@@ -112,24 +113,10 @@ public class Forge implements ApplicationListener {
             totalDeviceRAM = totalRAM;
             isTabletDevice = isTablet;
             androidVersion = AndroidAPI;
+            isDesktopAdventureMode=startAdventure;
         }
         GuiBase.setDeviceInfo(deviceName, AndroidRelease, AndroidAPI, totalRAM);
         return app;
-    }
-    protected Forge(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
-        if (GuiBase.getInterface() == null) {
-            clipboard = clipboard0;
-            deviceAdapter = deviceAdapter0;
-            GuiBase.setUsingAppDirectory(assetDir0.contains("forge.app")); //obb directory on android uses the package name as entrypoint
-            GuiBase.setInterface(new GuiMobile(assetDir0));
-            GuiBase.enablePropertyConfig(value);
-            isPortraitMode = androidOrientation;
-            totalDeviceRAM = totalRAM;
-            isTabletDevice = isTablet;
-            androidVersion = AndroidAPI;
-        }
-        GuiBase.setDeviceInfo(deviceName, AndroidRelease, AndroidAPI, totalRAM);
-        app=this;
     }
     private Forge() {
     }
@@ -171,7 +158,7 @@ public class Forge implements ApplicationListener {
         else {
             skinName = "default"; //use default skin if preferences file doesn't exist yet
         }
-        FSkin.loadLight(skinName, splashScreen);
+        FSkin.loadLight(isDesktopAdventureMode ? "default" : skinName, splashScreen);
 
         textureFiltering = prefs.getPrefBoolean(FPref.UI_LIBGDX_TEXTURE_FILTERING);
         showFPS = prefs.getPrefBoolean(FPref.UI_SHOW_FPS);
@@ -282,6 +269,7 @@ public class Forge implements ApplicationListener {
             System.out.println(fScreen.toString());*/
     }
     public static void openHomeDefault() {
+        GuiBase.setIsAdventureMode(false);
         openHomeScreen(-1, null); //default for startup
         splashScreen = null;
         if (isLandscapeMode()) { //open preferred new game screen by default if landscape mode
@@ -292,6 +280,7 @@ public class Forge implements ApplicationListener {
         startContinuousRendering();
         final LoadingOverlay loader = new LoadingOverlay("Loading Adventure");
         loader.show();
+        GuiBase.setIsAdventureMode(true);
         FThreads.invokeInBackgroundThread(new Runnable() {
             @Override
             public void run() {
@@ -323,20 +312,22 @@ public class Forge implements ApplicationListener {
         Gdx.input.setCatchKey(Keys.MENU, true);
 
         afterDBloaded = true;
-        //open splashscreen mode selector if landscape..
-        if (isLandscapeMode())
-            splashScreen.setShowModeSelector(true);
-        else
-            openHomeDefault();
-
-        boolean isLandscapeMode = isLandscapeMode();
+        if (isDesktopAdventureMode) {
+            openAdventure();
+        } else {
+            //open splashscreen mode selector if landscape..
+            if (isLandscapeMode())
+                splashScreen.setShowModeSelector(true);
+            else
+                openHomeDefault();
+        }
 
         //adjust height modifier
         adjustHeightModifier(getScreenWidth(), getScreenHeight());
 
         //update landscape mode preference if it doesn't match what the app loaded as
-        if (FModel.getPreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE) != isLandscapeMode) {
-            FModel.getPreferences().setPref(FPref.UI_LANDSCAPE_MODE, isLandscapeMode);
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE) != isLandscapeMode()) {
+            FModel.getPreferences().setPref(FPref.UI_LANDSCAPE_MODE, isLandscapeMode());
             FModel.getPreferences().save();
         }
     }
