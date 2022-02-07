@@ -238,51 +238,45 @@ public class AnimateEffect extends AnimateEffectBase {
 
         // if power is -1, we'll assume it's not just setting toughness
         if (power != null && toughness != null) {
-            sb.append("become");
-            if (tgts.size() == 1) {
-                sb.append("s ");
-            }
+            sb.append(tgts.size() == 1 ? "becomes " : "become ");
             sb.append(" ").append(power).append("/").append(toughness);
         } else if (power != null) {
             sb.append("power becomes ").append(power);
         } else if (toughness != null) {
             sb.append("toughness becomes ").append(toughness);
-        } else{
-            sb.append("become");
-            if (tgts.size() == 1) {
-                sb.append("s ");
-            }
+        } else {
+            sb.append(tgts.size() == 1 ? "becomes " : "become ");
         }
 
-        if (colors.size() > 0) {
-            sb.append(" ");
-        }
         if (colors.contains("ChosenColor")) {
             sb.append("color of that player's choice");
         } else {
             for (int i = 0; i < colors.size(); i++) {
-                sb.append(colors.get(i));
+                sb.append(colors.get(i)).append(" ");
                 if (i < (colors.size() - 1)) {
-                    sb.append(" and ");
+                    sb.append("and ");
                 }
             }
         }
-        sb.append(" ");
+
         if (types.contains("ChosenType")) {
             sb.append("type of player's choice ");
         } else {
-            for (int i = types.size() - 1; i >= 0; i--) {
-                sb.append(types.get(i));
-                sb.append(" ");
+            for (int i = 0; i < types.size(); i++) {
+                String type = types.get(i);
+                if (i == 0 && tgts.size() == 1) {
+                    sb.append(Lang.startsWithVowel(type) ? "an " : "a ");
+                }
+                sb.append(CardType.CoreType.isValidEnum(type) ? type.toLowerCase() : type).append(" ");
             }
         }
         if (keywords.size() > 0) {
             sb.append("with ");
         }
         for (int i = 0; i < keywords.size(); i++) {
-            sb.append(keywords.get(i));
+            sb.append(keywords.get(i)).append(" ");
             if (i < (keywords.size() - 1)) {
-                sb.append(" and ");
+                sb.append("and ");
             }
         }
         // sb.append(abilities)
@@ -290,17 +284,17 @@ public class AnimateEffect extends AnimateEffectBase {
         if (!permanent) {
             final String duration = sa.getParam("Duration");
             if ("UntilEndOfCombat".equals(duration)) {
-                sb.append(" until end of combat.");
+                sb.append("until end of combat.");
             } else if ("UntilHostLeavesPlay".equals(duration)) {
-                sb.append(" until ").append(host).append(" leaves the battlefield.");
+                sb.append("until ").append(host).append(" leaves the battlefield.");
             } else if ("UntilYourNextUpkeep".equals(duration)) {
-                sb.append(" until your next upkeep.");
+                sb.append("until your next upkeep.");
             } else if ("UntilYourNextTurn".equals(duration)) {
-                sb.append(" until your next turn.");
+                sb.append("until your next turn.");
             } else if ("UntilControllerNextUntap".equals(duration)) {
-                sb.append(" until its controller's next untap step.");
+                sb.append("until its controller's next untap step.");
             } else {
-                sb.append(" until end of turn.");
+                sb.append("until end of turn.");
             }
         } else {
             sb.append(".");
