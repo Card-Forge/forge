@@ -151,6 +151,8 @@ public class Forge implements ApplicationListener {
         graphics = new Graphics();
         splashScreen = new SplashScreen();
         frameRate = new FrameRate();
+        animationBatch = new SpriteBatch();
+        transitionTexture = new Texture(Config.instance().getFile("ui/transition.png"));
         Gdx.input.setInputProcessor(new MainInputProcessor());
         /*
          Set CatchBackKey here and exit the app when you hit the
@@ -245,10 +247,6 @@ public class Forge implements ApplicationListener {
         return graphics;
     }
 
-    public static void initialize() {
-        animationBatch = new SpriteBatch();
-        transitionTexture = new Texture(Config.instance().getFile("ui/transition.png"));
-    }
     public static Scene getCurrentScene() {
         return currentScene;
     }
@@ -308,9 +306,7 @@ public class Forge implements ApplicationListener {
                             for (SceneType sceneType : SceneType.values()) {
                                 sceneType.instance.resLoaded();
                             }
-
                             switchScene(SceneType.StartScene.instance);
-                            initialize();
                         } catch (Exception e) { e.printStackTrace(); }
                     }
                 });
