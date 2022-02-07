@@ -2,6 +2,7 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Input;
 import forge.Forge;
+import forge.gui.GuiBase;
 import forge.gui.error.BugReporter;
 import forge.screens.match.MatchController;
 import forge.toolbox.FContainer;
@@ -280,6 +281,20 @@ public class ForgeInput extends FGestureAdapter {
     public boolean mouseMoved(int x, int y) {
         mouseMovedX = x;
         mouseMovedY = y;
+        //todo: mouse listener for android?
+        if (GuiBase.isAndroid())
+            return true;
+        Forge.hoveredCount = 0;
+        //reset
+        try {
+            for (FDisplayObject listener : potentialListeners) {
+                listener.setHovered(false);
+            }
+        }
+        catch (Exception ex) {
+            BugReporter.reportException(ex);
+        }
+        updatePotentialListeners(x, y);
         return true;
     }
 

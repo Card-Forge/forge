@@ -1,8 +1,10 @@
 package forge.adventure;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard;
+import com.badlogic.gdx.graphics.glutils.HdpiMode;
 import forge.Forge;
 import forge.adventure.util.Config;
 import forge.util.BuildInfo;
@@ -34,11 +36,20 @@ public class Main {
 
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         config.setResizable(false);
+        ApplicationListener start = Forge.getApp(new Lwjgl3Clipboard(), new DesktopAdapter(""), Files.exists(Paths.get("./res"))?"./":"../forge-gui/", true, false, 0, true, 0, "", "");
 
-        //todo icon config && fullscreen mode
-        config.setWindowedMode(1280, 720);
+        if (Config.instance().getSettingData().fullScreen) {
+            config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
+            config.setAutoIconify(true);
+            config.setHdpiMode(HdpiMode.Logical);
+        } else {
+            config.setWindowedMode(Config.instance().getSettingData().width, Config.instance().getSettingData().height);
+        }
+        config.setTitle("Forge Mobile");
+        config.setWindowIcon(Config.instance().getFilePath("forge-adventure.png"));
 
-        new Lwjgl3Application(Forge.getApp(new Lwjgl3Clipboard(), new DesktopAdapter(""), Files.exists(Paths.get("./res"))?"./":"../forge-gui/", true, false, 0, true, 0, "", "", true), config);
+
+        new Lwjgl3Application(start, config);
 
     }
 }

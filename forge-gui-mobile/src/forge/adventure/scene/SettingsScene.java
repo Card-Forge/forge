@@ -171,31 +171,29 @@ public class SettingsScene extends UIScene {
         addLabel("Plane");
         settingGroup.add(plane).align(Align.right);
 
-        if (!Forge.isMobileAdventureMode) {
-            addSettingField("Fullscreen", Config.instance().getSettingData().fullScreen, new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    Config.instance().getSettingData().fullScreen=((CheckBox) actor).isChecked();
-                    Config.instance().saveSettings();
-                }
-            });
-            addSettingField("Screen width", Config.instance().getSettingData().width, new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    String text=((TextField) actor).getText();
-                    Config.instance().getSettingData().width=text==null||text.isEmpty()?0:Integer.valueOf(text);
-                    Config.instance().saveSettings();
-                }
-            });
-            addSettingField("Screen height", Config.instance().getSettingData().height, new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    String text=((TextField) actor).getText();
-                    Config.instance().getSettingData().height=text==null||text.isEmpty()?0:Integer.valueOf(text);
-                    Config.instance().saveSettings();
-                }
-            });
-        }
+        addSettingField("Fullscreen", Config.instance().getSettingData().fullScreen, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Config.instance().getSettingData().fullScreen=((CheckBox) actor).isChecked();
+                Config.instance().saveSettings();
+            }
+        });
+        addSettingField("Screen width", Config.instance().getSettingData().width, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                String text=((TextField) actor).getText();
+                Config.instance().getSettingData().width=text==null||text.isEmpty()?0:Integer.valueOf(text);
+                Config.instance().saveSettings();
+            }
+        });
+        addSettingField("Screen height", Config.instance().getSettingData().height, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                String text=((TextField) actor).getText();
+                Config.instance().getSettingData().height=text==null||text.isEmpty()?0:Integer.valueOf(text);
+                Config.instance().saveSettings();
+            }
+        });
         addCheckBox(localizer.getMessage("lblCardName"), ForgePreferences.FPref.UI_OVERLAY_CARD_NAME);
         addSettingSlider(localizer.getMessage("cbAdjustMusicVolume"),  ForgePreferences.FPref.UI_VOL_MUSIC,0,100);
         addSettingSlider(localizer.getMessage("cbAdjustSoundsVolume"),  ForgePreferences.FPref.UI_VOL_SOUNDS, 0,100);

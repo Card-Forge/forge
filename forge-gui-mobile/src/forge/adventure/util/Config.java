@@ -4,6 +4,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter;
+import forge.Forge;
 import forge.adventure.data.ConfigData;
 import forge.adventure.data.SettingData;
 import forge.deck.Deck;
@@ -40,10 +41,8 @@ public class Config {
     }
     private Config() {
 
-        String path= Files.exists(Paths.get("./res"))?"./":"../forge-gui/";
-        if (GuiBase.isAndroid())
-            path = GuiBase.getInterface().getAssetsDir();
-         adventures = new File(path + "/res/adventure").list();
+        String path= GuiBase.isAndroid() ? ForgeConstants.ASSETS_DIR : Files.exists(Paths.get("./res"))?"./":"../forge-gui/";
+         adventures = new File(GuiBase.isAndroid() ? ForgeConstants.ADVENTURE_DIR : path + "/res/adventure").list();
         try
         {
             settingsData = new Json().fromJson(SettingData.class, new FileHandle(ForgeConstants.USER_DIR +  "/adventure/settings.json"));

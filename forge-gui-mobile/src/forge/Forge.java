@@ -90,7 +90,6 @@ public class Forge implements ApplicationListener {
     public static boolean gameInProgress = false;
     public static boolean disposeTextures = false;
     public static boolean isMobileAdventureMode = false;
-    public static boolean isDesktopAdventureMode = false;
     public static int cacheSize = 400;
     public static int totalDeviceRAM = 0;
     public static int androidVersion = 0;
@@ -101,7 +100,7 @@ public class Forge implements ApplicationListener {
     public static boolean afterDBloaded = false;
     public static int mouseButtonID = 0;
 
-    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName, boolean startAdventure) {
+    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
         app = new Forge();
         if (GuiBase.getInterface() == null) {
             clipboard = clipboard0;
@@ -113,7 +112,6 @@ public class Forge implements ApplicationListener {
             totalDeviceRAM = totalRAM;
             isTabletDevice = isTablet;
             androidVersion = AndroidAPI;
-            isDesktopAdventureMode=startAdventure;
         }
         GuiBase.setDeviceInfo(deviceName, AndroidRelease, AndroidAPI, totalRAM);
         return app;
@@ -158,7 +156,7 @@ public class Forge implements ApplicationListener {
         else {
             skinName = "default"; //use default skin if preferences file doesn't exist yet
         }
-        FSkin.loadLight(isDesktopAdventureMode ? "default" : skinName, splashScreen);
+        FSkin.loadLight(skinName, splashScreen);
 
         textureFiltering = prefs.getPrefBoolean(FPref.UI_LIBGDX_TEXTURE_FILTERING);
         showFPS = prefs.getPrefBoolean(FPref.UI_SHOW_FPS);
@@ -278,31 +276,15 @@ public class Forge implements ApplicationListener {
     }
     public static void openAdventure() {
         startContinuousRendering();
-        if (!isDesktopAdventureMode) {
-            final LoadingOverlay loader = new LoadingOverlay("Loading Adventure");
-            loader.show();
-        }
         GuiBase.setIsAdventureMode(true);
-        FThreads.invokeInBackgroundThread(new Runnable() {
-            @Override
-            public void run() {
-                FThreads.invokeInEdtLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        //FSkin.loadLight("default", null, Config.instance().getFile("skin"));
-                        //FSkin.loadFull(splashScreen);
-                        splashScreen = null;
-                        isMobileAdventureMode = true;
-                        try {
-                            for (SceneType sceneType : SceneType.values()) {
-                                sceneType.instance.resLoaded();
-                            }
-                            switchScene(SceneType.StartScene.instance);
-                        } catch (Exception e) { e.printStackTrace(); }
-                    }
-                });
+        splashScreen = null;
+        isMobileAdventureMode = true;
+        try {
+            for (SceneType sceneType : SceneType.values()) {
+                sceneType.instance.resLoaded();
             }
-        });
+            switchScene(SceneType.StartScene.instance);
+        } catch (Exception e) { e.printStackTrace(); }
     }
     protected void afterDbLoaded() {
         stopContinuousRendering(); //save power consumption by disabling continuous rendering once assets loaded
@@ -314,15 +296,11 @@ public class Forge implements ApplicationListener {
         Gdx.input.setCatchKey(Keys.MENU, true);
 
         afterDBloaded = true;
-        if (isDesktopAdventureMode) {
-            openAdventure();
-        } else {
-            //open splashscreen mode selector if landscape..
-            if (isLandscapeMode())
-                splashScreen.setShowModeSelector(true);
-            else
-                openHomeDefault();
-        }
+        //selection
+        if (isLandscapeMode() && !GuiBase.isAndroid())
+            splashScreen.setShowModeSelector(true);
+        else
+            openHomeDefault();
 
         //adjust height modifier
         adjustHeightModifier(getScreenWidth(), getScreenHeight());

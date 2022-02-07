@@ -359,17 +359,17 @@ public class MatchScreen extends FScreen {
                  if (viewWinLose == null) {
                      gameMenu.getChildAt(0).setEnabled(!game.isMulligan());
                      gameMenu.getChildAt(1).setEnabled(!game.isMulligan());
-                     gameMenu.getChildAt(2).setEnabled(!game.isMulligan());
-                     if (Forge.isMobileAdventureMode)
-                         gameMenu.getChildAt(2).setEnabled(false);
-                     gameMenu.getChildAt(3).setEnabled(false);
+                     if (!Forge.isMobileAdventureMode) {
+                         gameMenu.getChildAt(2).setEnabled(!game.isMulligan());
+                         gameMenu.getChildAt(3).setEnabled(false);
+                     }
                  } else {
                      gameMenu.getChildAt(0).setEnabled(false);
                      gameMenu.getChildAt(1).setEnabled(false);
-                     gameMenu.getChildAt(2).setEnabled(false);
-                     if (Forge.isMobileAdventureMode)
+                     if (!Forge.isMobileAdventureMode) {
                          gameMenu.getChildAt(2).setEnabled(false);
-                     gameMenu.getChildAt(3).setEnabled(true);
+                         gameMenu.getChildAt(3).setEnabled(true);
+                     }
                  }
              }
         }
