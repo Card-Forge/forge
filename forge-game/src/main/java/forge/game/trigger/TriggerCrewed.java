@@ -21,6 +21,12 @@ public class TriggerCrewed extends Trigger {
         if (!matchesValidParam("ValidCrew", runParams.get(AbilityKey.Crew))) {
             return false;
         }
+        if (hasParam("FirstTimeCrewed")) {
+            Card v = (Card) runParams.get(AbilityKey.Vehicle);
+            if (v.timesCrewedThisTurn() != 1) {
+                return false;
+            }
+        }
         return true;
     }
 
