@@ -77,7 +77,6 @@ public class StaticAbilityCantTarget {
      */
     public static boolean applyCantTargetAbility(final StaticAbility stAb, final Card card,
             final SpellAbility spellAbility) {
-
         if (stAb.hasParam("ValidPlayer")) {
             return false;
         }
@@ -108,7 +107,6 @@ public class StaticAbilityCantTarget {
     }
 
     public static boolean applyCantTargetAbility(final StaticAbility stAb, final Player player, final SpellAbility spellAbility) {
-
         if (stAb.hasParam("ValidCard") || stAb.hasParam("AffectedZone")) {
             return false;
         }

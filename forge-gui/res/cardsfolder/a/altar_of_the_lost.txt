@@ -2,6 +2,6 @@ Name:Altar of the Lost
 ManaCost:3
 Types:Artifact
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ 2 | RestrictValid$ Card.wasCastFromGraveyard+withFlashback | SpellDescription$ Add two mana in any combination of colors. Spend this mana only to cast spells with flashback from a graveyard.
+A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ 2 | RestrictValid$ Spell.wasCastFromGraveyard+withFlashback | SpellDescription$ Add two mana in any combination of colors. Spend this mana only to cast spells with flashback from a graveyard.
 AI:RemoveDeck:Random
 Oracle:Altar of the Lost enters the battlefield tapped.\n{T}: Add two mana in any combination of colors. Spend this mana only to cast spells with flashback from a graveyard.

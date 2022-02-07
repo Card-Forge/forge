@@ -55,7 +55,6 @@ public class TriggerBecomesTargetOnce extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-
         if (!matchesValidParam("ValidSource", ((SpellAbility) runParams.get(AbilityKey.SourceSA)).getHostCard())) {
             return false;
         }

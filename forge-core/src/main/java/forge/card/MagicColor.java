@@ -38,6 +38,9 @@ public final class MagicColor {
         if (s == null) {
             return 0;
         }
+        if (s.equals("all")) {
+            return MagicColor.ALL_COLORS;
+        }
         if (s.length() == 2) { //if name is two characters, check for combination of two colors
             return (byte)(fromName(s.charAt(0)) | fromName(s.charAt(1)));
         }

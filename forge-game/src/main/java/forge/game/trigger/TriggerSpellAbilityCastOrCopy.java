@@ -81,24 +81,12 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
         final Game game = cast.getGame();
         final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spellAbility);
 
-        if (hasParam("ActivatedOnly")) {
-            if (spellAbility.isTrigger()) {
-                return false;
-            }
-        }
-
         if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
             return false;
         }
 
         if (!matchesValidParam("ValidControllingPlayer", cast.getController())) {
             return false;
-        }
-
-        if (hasParam("ValidControllingPlayer")) {
-            if (!matchesValid(cast.getController(), getParam("ValidControllingPlayer").split(","))) {
-                return false;
-            }
         }
 
         if (hasParam("ValidActivatingPlayer")) {
