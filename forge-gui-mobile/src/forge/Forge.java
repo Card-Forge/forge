@@ -296,7 +296,7 @@ public class Forge implements ApplicationListener {
 
         afterDBloaded = true;
         //selection
-        if (isLandscapeMode() && !GuiBase.isAndroid())
+        if (isLandscapeMode())
             splashScreen.setShowModeSelector(true);
         else
             openHomeDefault();

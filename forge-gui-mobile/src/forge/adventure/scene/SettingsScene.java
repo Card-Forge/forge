@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
+import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences;
 import forge.util.Localizer;
 
@@ -171,29 +172,31 @@ public class SettingsScene extends UIScene {
         addLabel("Plane");
         settingGroup.add(plane).align(Align.right);
 
-        addSettingField("Fullscreen", Config.instance().getSettingData().fullScreen, new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Config.instance().getSettingData().fullScreen=((CheckBox) actor).isChecked();
-                Config.instance().saveSettings();
-            }
-        });
-        addSettingField("Screen width", Config.instance().getSettingData().width, new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                String text=((TextField) actor).getText();
-                Config.instance().getSettingData().width=text==null||text.isEmpty()?0:Integer.valueOf(text);
-                Config.instance().saveSettings();
-            }
-        });
-        addSettingField("Screen height", Config.instance().getSettingData().height, new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                String text=((TextField) actor).getText();
-                Config.instance().getSettingData().height=text==null||text.isEmpty()?0:Integer.valueOf(text);
-                Config.instance().saveSettings();
-            }
-        });
+        if (!GuiBase.isAndroid()) {
+            addSettingField("Fullscreen", Config.instance().getSettingData().fullScreen, new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    Config.instance().getSettingData().fullScreen=((CheckBox) actor).isChecked();
+                    Config.instance().saveSettings();
+                }
+            });
+            addSettingField("Screen width", Config.instance().getSettingData().width, new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    String text=((TextField) actor).getText();
+                    Config.instance().getSettingData().width=text==null||text.isEmpty()?0:Integer.valueOf(text);
+                    Config.instance().saveSettings();
+                }
+            });
+            addSettingField("Screen height", Config.instance().getSettingData().height, new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    String text=((TextField) actor).getText();
+                    Config.instance().getSettingData().height=text==null||text.isEmpty()?0:Integer.valueOf(text);
+                    Config.instance().saveSettings();
+                }
+            });
+        }
         addCheckBox(localizer.getMessage("lblCardName"), ForgePreferences.FPref.UI_OVERLAY_CARD_NAME);
         addSettingSlider(localizer.getMessage("cbAdjustMusicVolume"),  ForgePreferences.FPref.UI_VOL_MUSIC,0,100);
         addSettingSlider(localizer.getMessage("cbAdjustSoundsVolume"),  ForgePreferences.FPref.UI_VOL_SOUNDS, 0,100);
@@ -207,8 +210,8 @@ public class SettingsScene extends UIScene {
         addCheckBox(localizer.getMessage("lblBattlefieldTextureFiltering"), ForgePreferences.FPref.UI_LIBGDX_TEXTURE_FILTERING);
         addCheckBox(localizer.getMessage("lblAltZoneTabs"), ForgePreferences.FPref.UI_ALT_PLAYERZONETABS);
         addCheckBox(localizer.getMessage("lblAnimatedCardTapUntap"), ForgePreferences.FPref.UI_ANIMATED_CARD_TAPUNTAP);
-        addCheckBox(localizer.getMessage("lblBorderMaskOption"), ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
-        if (!Forge.isMobileAdventureMode) {
+        if (!GuiBase.isAndroid()) {
+            addCheckBox(localizer.getMessage("lblBorderMaskOption"), ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
             addCheckBox(localizer.getMessage("lblPreloadExtendedArtCards"), ForgePreferences.FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
             addCheckBox(localizer.getMessage("lblAutoCacheSize"), ForgePreferences.FPref.UI_AUTO_CACHE_SIZE);
             addCheckBox(localizer.getMessage("lblDisposeTextures"), ForgePreferences.FPref.UI_ENABLE_DISPOSE_TEXTURES);

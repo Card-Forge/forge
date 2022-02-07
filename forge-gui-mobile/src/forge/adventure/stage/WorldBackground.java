@@ -3,10 +3,10 @@ package forge.adventure.stage;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import forge.adventure.world.WorldSave;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -37,36 +37,36 @@ public class WorldBackground extends Actor {
         if (chunks == null) {
             initialize();
         }
-        Point pos = translateFromWorldToChunk(playerX, playerY);
+        Vector2 pos = translateFromWorldToChunk(playerX, playerY);
         if (currentChunkX != pos.x || currentChunkY != pos.y) {
-            int xDiff = currentChunkX - pos.x;
-            int yDiff = currentChunkY - pos.y;
-            ArrayList<Point> points = new ArrayList<Point>();
+            int xDiff = currentChunkX - (int)pos.x;
+            int yDiff = currentChunkY - (int)pos.y;
+            ArrayList<Vector2> points = new ArrayList<>();
             for (int x = -1; x < 2; x++) {
                 for (int y = -1; y < 2; y++) {
-                    points.add(new Point(pos.x + x, pos.y + y));
+                    points.add(new Vector2(pos.x + x, pos.y + y));
                 }
             }
             for (int x = -1; x < 2; x++) {
                 for (int y = -1; y < 2; y++) {
-                    Point point = new Point(currentChunkX + x, currentChunkY + y);
+                    Vector2 point = new Vector2(currentChunkX + x, currentChunkY + y);
                     if (points.contains(point))// old Point is part of new points
                     {
                         points.remove(point);
                     } else {
                         if (point.y < 0 || point.x < 0 || point.y >= chunks[0].length || point.x >= chunks.length)
                             continue;
-                        unLoadChunk(point.x, point.y);
+                        unLoadChunk((int)point.x, (int)point.y);
                     }
                 }
             }
-            for (Point point : points) {
+            for (Vector2 point : points) {
                 if (point.y < 0 || point.x < 0 || point.y >= chunks[0].length || point.x >= chunks.length)
                     continue;
-                loadChunk(point.x, point.y);
+                loadChunk((int)point.x, (int)point.y);
             }
-            currentChunkX = pos.x;
-            currentChunkY = pos.y;
+            currentChunkX = (int)pos.x;
+            currentChunkY = (int)pos.y;
         }
         batch.disableBlending();
         for (int x = -1; x < 2; x++) {
@@ -75,7 +75,7 @@ public class WorldBackground extends Actor {
                     continue;
 
 
-                batch.draw(getChunkTexture(pos.x + x, pos.y + y), transChunkToWorld(pos.x + x), transChunkToWorld(pos.y + y));
+                batch.draw(getChunkTexture((int)pos.x + x, (int)pos.y + y), transChunkToWorld((int)pos.x + x), transChunkToWorld((int)pos.y + y));
             }
         }
         batch.enableBlending();
@@ -154,10 +154,10 @@ public class WorldBackground extends Actor {
 
         for (int x = -1; x < 2; x++) {
             for (int y = -1; y < 2; y++) {
-                Point point = new Point(currentChunkX + x, currentChunkY + y);
+                Vector2 point = new Vector2(currentChunkX + x, currentChunkY + y);
                 if (point.y < 0 || point.x < 0 || point.y >= chunks[0].length || point.x >= chunks.length)
                     continue;
-                loadChunk(point.x, point.y);
+                loadChunk((int)point.x, (int)point.y);
             }
         }
     }
@@ -171,10 +171,10 @@ public class WorldBackground extends Actor {
         return xy * tileSize * chunkSize;
     }
 
-    Point translateFromWorldToChunk(float x, float y) {
+    Vector2 translateFromWorldToChunk(float x, float y) {
         float worldWidthTiles = x / tileSize;
         float worldHeightTiles = y / tileSize;
-        return new Point((int) worldWidthTiles / chunkSize, (int) worldHeightTiles / chunkSize);
+        return new Vector2((int) worldWidthTiles / chunkSize, (int) worldHeightTiles / chunkSize);
     }
 
     public void setPlayerPos(float x, float y) {
