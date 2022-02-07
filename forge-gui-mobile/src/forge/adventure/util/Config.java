@@ -4,7 +4,6 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter;
-import forge.Forge;
 import forge.adventure.data.ConfigData;
 import forge.adventure.data.SettingData;
 import forge.deck.Deck;

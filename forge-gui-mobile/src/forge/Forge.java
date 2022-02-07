@@ -31,7 +31,6 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.FScreen;
-import forge.screens.LoadingOverlay;
 import forge.screens.SplashScreen;
 import forge.screens.home.HomeScreen;
 import forge.screens.home.NewGameMenu;
