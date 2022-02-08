@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="89">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAMZHgIY2oDYs2kpt3IZtXzYleDLE4Nu8k1gxK7KXU3Ofpx6SEmnCmxG6R+Fx6MDJDF9/JgmkOqvSCAyx/YAEitNJXsJRUMZXvR4xJbPEfx4k8HtPAvLD6R0wB6eqBmXqKH/oEor4gxAz0dUctOQmZRmn6JtRtbPUtJ/QsA90Mgnw==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxr4mZgaBrFo3gUj+JRPIpH8YjAAJnxGPY=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzt1FEOgyAMBmCyV+EE6sX0LLJrOTdP4YUcEZLGwPj/ukebNCZo+Wgama0xM5Ed+b2sk4nUjM6YxeYzxOD+56b3wXzH/UvxsnWb6RcxURt1GROxEVdj1mzE7b+5PfIpI7cWolX22yt7vV3OPc+tNOvS7LXuerHfj9Ltov1sOG9qDjO3L3NPMvYvk70nUbtmsq60fbTTGab49ICpcc816R9rFeeXuQO4xtou
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzt1GEKgCAMBeC5M0nURatzZdR1LEIYIS3nE/rRA0GE7RNRib6bnonCwxi4jbkqfRew/cZE2yUmyraYCDsU1qHuVmfo4Tk//906N9db/iXWzK7cPTMedXuFu7Fuo02LjTI1W54z2pT25K6R9uDFWgvznnTXrW8lJQLabCXp
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF2IAOI2nio4A80EaiODnAjIky/SYU6CfFH9T0M7lAZQSmb3Lj9xoBfW1oNAhoj8DwHU5gOiMEo4sNNQAA8RsHFA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="208.333" y="270.665">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../obj/enemy.tx" x="207.402" y="64.0586">
+   <properties>
+    <property name="enemy" value="Human guard"/>
+   </properties>
+  </object>
+  <object id="83" template="../obj/door_up.tx" x="321.833" y="144.167">
+   <properties>
+    <property name="teleport" value="maps/map/aerie_1B.tmx"/>
+    <property name="teleportObjectId" value="87"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

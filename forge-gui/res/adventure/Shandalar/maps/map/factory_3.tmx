@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="73">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="74">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Hidden Collision" width="30" height="17">
+ <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzFVVEOwyAI5X96ArOLubNs91rT3m0lGRkjjwouS19CjPj0IYoSnYdbJVrK2Ho95qJx7rMf4VriMR5xGxhjPvLrtda9fVyItnerLYLm5GGkK+MSo7aobsYvur1+zsTGbLmZ9VfHv02e72LmPUGcct8Q7P462K9wMndQMMqzjhEZ4v6qy2eQybeN0+uP7rPU/D8QzbMge5/R/BndDNfGp+HpovfJM9G9B/lsXv1G/gSpL/22Rf8TLw9RtPKtO1NTZ+u+AAteXS4=
+   eJzFVVEOwyAI5X96ArOL2bOs91rT3m0z2UsZAQW3pC8hRgQfIijRdVgy0ZbGUnPfVltv86bXcE/+GHu2RVlr9pqe77W/x/VGdHxGLh4UIw8jXqwjRi5e3ogevDWfdyJjlraR/XdDf0ze7yb8nkqcqDcN8nxVOS9sIjUIjPKsxS1z/U9e7BvJt/S35r16Rm8vxj38Cm+egWg9a/4zvBFbGR+Hxau9T5aA9+G0b2L1r+dPQH/xt837n1h58KKkb96Znrqa9wUX/l4H
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">

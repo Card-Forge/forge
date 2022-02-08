@@ -5,9 +5,9 @@
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Hidden Collision" width="30" height="17">
+ <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBjcQJoHu7gsDvFRewe3vbt4IBidvxsqthONPwqGDqjjxo3ruWlnLywNYcO0zjejAAIGKpwHg711NEzbtAIADekSUg==
+   eJxjYBjcQJoHu7gsDvFRewe3vbt4IBidvxsqthONPwqGDqjjxo3ruWlnLywNYcO0zjejAAIGKpwHg711NEzbMIBebuISIxYAAOAZFWo=
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -25,15 +25,10 @@
    eJxjYBic4DEXA0MTN2H8lIv6diry4Fcnz0M9u4m1EwQucFLHblLsRAaU2k2snQpQNVeAOAvNbnLtJRbU8iLY2mToJ9deEFjDiWBfYqefvSoU6idH3w9WBFuOhX72UlM/KXnhIJS+BfTrbRZEHiQHkJoPXZggNLn5nly7T1HJTlLsbuOmrp3odsNwMzTuGtHqI2raiQ4a0extpiDdAwCsQDVs
   </data>
  </layer>
- <layer id="3" name="Foreground" width="30" height="17">
+ <layer id="3" name="Clutter" width="30" height="17">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
-  </data>
- </layer>
- <layer id="5" name="AboveSprites" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
   </data>

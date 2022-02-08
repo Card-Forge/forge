@@ -7,7 +7,7 @@
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYMAOonkZGHbxYGJZKC2NRQ6Eo3hxGEgkAJmPT1wahzwucUrt3Q0V30lnewmBUXtH7R21d+TaCytvkfnoZS+sDMelhxyAzb/ofiFGzai9+MFeoP46blSMzV50NXuItBcAQfQcag==
+   eJxjYMAOonkZGHbxoOIoXoQ4MhtdDSVAlgdTbCcPQnwPkN6NRY00FjFK7QUBmF07ccjTyl5CYNTeUXtH7R259sLKW2Q+qOzdiyQGK59x6SEHYPMvyC/RvITV0MJeUtUMFXtB8VjHjYqx2YuuZg+R9gIAn9sfig==
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -35,14 +35,14 @@
    </properties>
   </object>
   <object id="48" template="../obj/treasure.tx" x="137.5" y="264"/>
-  <object id="50" template="../obj/enemy.tx" x="208" y="224">
+  <object id="50" template="../obj/enemy.tx" x="210.333" y="216">
    <properties>
     <property name="enemy" value="Human guard"/>
    </properties>
   </object>
   <object id="51" template="../obj/treasure.tx" x="207.333" y="27.3333"/>
   <object id="52" template="../obj/gold.tx" x="282.5" y="264.5"/>
-  <object id="53" template="../obj/enemy.tx" x="207" y="43">
+  <object id="53" template="../obj/enemy.tx" x="206" y="40">
    <properties>
     <property name="enemy" value="White Wiz1"/>
    </properties>

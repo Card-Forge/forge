@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="64">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4CBwY2TNHFqmE/IbHL0EFJPrH5y9ZGrnlrmjHR70fk7eRgYdmHBtIhfeqRnUswmR3wUjAwAAAl2DPk=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17" tintcolor="#8a3440">
+  <data encoding="base64" compression="zlib">
+   eJybx8nAMG8Uj+JRPIpH8SgexYMWowNKzAIAu+NKJg==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy91FEOgzAIBmDeW09Qt4O5s8x5LN3m3bY+kDACzU81IyHWaPmCkq6ZaP1DjiqRPbeB6Jn9nIbzXH5ezdf3ylHEmmMD7Ei/2tTuPRE9EmajrjRr/av4rrLPBbQR1zJ131EbcS+g6dmls192N8Msjbnmd4+6cm6sufLiqFvEWtack51nfufF6FmHnoNed8+/89mytVnv353uCNqeadWNnJPats4NxIyek9pu/d+WGXWl7c3wDJg9rrXHymiND/q+9Gw=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgaQJqH/naqMtLfzlEwCmgNPrEPtAtGwXADA1E+j0R7qQUAoG4BvA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="57" template="../obj/enemy.tx" x="118.656" y="136.04">
+   <properties>
+    <property name="enemy" value="Demon"/>
+   </properties>
+  </object>
+  <object id="58" template="../obj/treasure.tx" x="330.5" y="123"/>
+  <object id="59" template="../obj/treasure.tx" x="330.75" y="169.75"/>
+  <object id="60" template="../obj/gold.tx" x="332" y="137.25"/>
+  <object id="61" template="../obj/gold.tx" x="332" y="149.75"/>
+  <object id="62" template="../obj/entry_up.tx" x="207.5" y="144.5"/>
+  <object id="63" template="../obj/door_left.tx" x="176.5" y="49">
+   <properties>
+    <property name="teleport" value="maps/map/portal_2F.tmx"/>
+    <property name="teleportObjectId" value="58"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -5,9 +5,9 @@
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Hidden Collision" width="30" height="17">
+ <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJztk1EOgyAQRPff9QSNF2vPgj0Xgnerhk4cSVcKTeyPk2wAd5Y3iSqy6dGLTCpy79Oe17xfI9xhzQ6a1pumPVavaYb7R4xJ9xV0m8lnV38wuBD6PsvNrGBk+sRl5rfyWmaVuEMls0UXt44bF+/ckPNXLv7ps7mturj/467f57M7n2ux3XIe32XlYs+Rz+KCzXdEOlu5ou5z4505ysG+nDt25WK2y3Khj+ych314/gJppULM
+   eJyT4WFgkBlgjAwG0l5cbGLMIMdOYgGl4UULMFD2EmM/rQE17N4DVLuXDLdS6t8oXgaGaF7620sOGMg4xmY/vcBgCud6bvrbictumHgdN2531XJD5EGYGuU0uvheLO4C2QnKz7ugmFg7SMG70OxGt5NUewEoATCM
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -15,22 +15,17 @@
    eJyrZWFgqB3Fo3gUj+JRPIpH8YjAADIiAQ4=
   </data>
  </layer>
- <layer id="2" name="Ground" width="30" height="17">
+ <layer id="2" name="Grass" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJydlUFOAzEMRSMNRUmu0EK5HBsWLLsrVFxu2qp3gGk5CGNNvvrzSdIBS1GlSexnfzupc/+zZXTu2zu3Cfk6+3n+j7G+148xDo04ygbzlp+ZnS+xzfc1TKsWA/GNf6EzXZz87hs1IdddyL/7eOUeU8zP8Xc9fh98nlfJTr6dc4nLTFuLODGf4lWfYYYetf3e/+Y+h5yJWrcyPzs5VzLTeyFaQyfldjGvE6YzpNxWL5UJrs4+8jRtB9pjtnHt3Kmgt/l9ia/ZC+VZum/ws36+i4aY3QeqDxrpHKgva1ky1PVGM2TWupNdyuODegcu32dopNb7nH1OtWHGW2yuFX7oqc6XMnlGjA09WaMaexv+zjTjO1SaT+5ji2v6ItbxxqxpTbXet3I3fVak0R2dRU76LjIbfOS5brAO6c3cpzr2lR6g7zWuGuaz9N+h7ykvvss8a3ON3wq+Uy2msldJf7YfvxiB8g==
+   eJydlU1OwzAQhS2FVrGvQKFcjk0XLNmVIi7XH/UOkLYHIU/xU15G9qQwkhU19fibeTOehPA/e0wh3NoQPuJ0Xfp3T2ne/9nZs+/POLY+eyV8Muf8YO+xzIbvWxxW7Qyez9xxTtc/mzT4LZ2cwMX6jNP3bRq5p8z97p/rfLbGxdzB3uXf59aPucRVJtYiDcyXNOrTFfQAW2tb0wsxW+5rnDKZ6zaOe7lf95UMei+M1tTJcps0zZNGHWtcr5aWSe7F6MA4oW0n/ykbXOw7F/SG34/xhW0kTstUP9RzZzQE+2ruKDWyfWB9VcuS6UxgD8G8O9nkOL6kduTqfaZG1vbSm2BzFrDHPbbmqjPE9kqJqT2i90I1qrG38e9MmN6hUn9qHT0u9OVZp5lesznVau/FznlNjR5kL2Oyc1HZ5DPOtcM65pl5yHkcKjVg3Wtca+zP0rfDzlNdepe11+41nRV6pzymZa+y/mq/leqFBg==
   </data>
  </layer>
- <layer id="3" name="Foreground" width="30" height="17">
+ <layer id="3" name="Clutter" width="30" height="17">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJydVUFOw0AMtJA4JYf8IYFUiGfwEzjlE3CCShT+lJam8KMeu1Y8xBh7lzKS1cS2PGOvm+2IaKAZdxfzM+y5Irqqia6T9fUS1/7/Gtci4ZloAfy7lPORbF/PfDDL20oerCvwAoPiHKUn+LU29vP7zvBAF3I/C9y6rsXWd38DvWvNk4rluAdTK9JwLrAjETdytFZGq55XTt3RvB/kt6fljBjch8f9l/7sTDQ0h8VK5dg91HX7TP1Ofu8boocmrwuz4Jl9ybPlRb+3GU7Mn3U9Js6nJpNscBPwaq0H0V7aYx1vw6wF3JvHy367J965W5937tG+RHP2dpYRnXmUb3Vh7yzvOvnfJaZnZvsvIbeTx0v/ez7WM/c5/xfo8uaqNXPcO1/Lresw1ybZW/U7FsWRA53c66Zwf4EbOjl/KzHUngwv6r1WP2eGO1PXyNkoZ7528nt1f/F35MXkQDfuihznCW1wa7g=
-  </data>
- </layer>
- <layer id="5" name="AboveSprites" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+   eJydVUtOxDAMtZBYtYvuWbbQEYJbcBNY9RKwGmbE506dL9yIJXlKHrWMkw5YsprEjt+z4yadiAwS5e4sjqnbWqQLeqW0ddb+o8CShHOQSbD+dR6xdwkLmPs6z2endI4bZVCYY9BlFcf4gsNHwuTc46P3bGfwB5lytrLxl3+E8ff17xjkcFnAPVUu/uBb6hHWmdwo4N6q+cKJO5r5MX17E49nYrG9Gtu8SjWxnLUslI+tt47bF+J36XvfiDw0Pi/yZS1Qs880trjM98bBsnmD12PAfGp8uyfXGVxdw2PiPtfHtKN+bcZHc0JuHi7WbZ/Q/1QhTm7PbabOXs9CeOY2Xs5fc9A9Z/NdBds62VEz1t3Lv3SepZ7EfevdH2PQd/M/WAz7v5CXV1fNGXbvfDU28tbxMX4O+lZFXt5d+Jrs62rC0DGQK2JsCm+Ezhv7tT9tB4PLPF4Stn1T5zA1Ns585fj36v3qnJjktqzmMb8B7sFsZw==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -45,7 +40,7 @@
     <property name="enemy" value="Dino"/>
    </properties>
   </object>
-  <object id="52" template="../obj/gold.tx" x="72.4163" y="258.917"/>
+  <object id="52" template="../obj/gold.tx" x="72.9163" y="257.417"/>
   <object id="54" template="../obj/enemy.tx" x="47.6667" y="47.5001">
    <properties>
     <property name="enemy" value="Dino"/>

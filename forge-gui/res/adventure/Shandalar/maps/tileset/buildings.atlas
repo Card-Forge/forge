@@ -151,6 +151,9 @@ ElfShop
 MerfolkShop
   xy: 369, 768
   size: 16, 16
+Test
+  xy: 129, 48
+  size: 32, 32 
 Cave
   xy: 192, 272
   size: 32, 32  
@@ -171,6 +174,15 @@ Cave
   size: 32, 32
 Cave 
   xy: 288, 465
+  size: 32, 32
+Nest 
+  xy: 256, 304
+  size: 32, 32
+Nest 
+  xy: 321, 400
+  size: 32, 32
+Aerie 
+  xy: 289, 368
   size: 32, 32
 Factory 
   xy: 288, 433
@@ -238,6 +250,9 @@ MageTower
 MageTower
   xy:  64, 304
   size: 32, 32
+Portal
+  xy:  96, 48
+  size: 32, 32
 DjinnPalace 
   xy: 128, 528
   size: 64, 64
@@ -247,6 +262,9 @@ DjinnPalace
 DjinnPalace 
   xy: 128, 272
   size: 32, 32
+DjinnPalace 
+  xy: 320, 432
+  size: 32, 32
 MerfolkPool  
   xy: 320, 208
   size: 32, 16
@@ -255,6 +273,9 @@ MerfolkPool
   size: 32, 32
 MerfolkPool  
   xy: 352, 32
+  size: 32, 32
+BlueOrb
+  xy: 129, 48
   size: 32, 32  
 Graveyard           
   xy: 368, 96
@@ -304,6 +325,9 @@ BarbarianCamp
 BarbarianCamp 
   xy: 96, 81
   size: 32, 32
+BarbarianCamp 
+  xy: 320, 304
+  size: 32, 32
 Maze 
   xy: 0, 336
   size: 32, 32
@@ -315,7 +339,10 @@ Maze
   size: 32, 32
 YuleTown 
   xy: 352, 592
-  size: 32, 32  
+  size: 32, 32
+SnowAbbey 
+  xy: 384, 528
+  size: 64, 64  
 Grove 
   xy: 416, 496
   size: 32, 32 

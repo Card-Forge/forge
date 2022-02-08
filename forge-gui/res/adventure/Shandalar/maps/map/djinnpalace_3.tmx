@@ -25,16 +25,16 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFhMA39oF2wSgYBaNgFIyCUUAdAADHzwD+
+   eJxjYBgFgxV8Yx9oF4yCUTAKRsEoGG4AAFE3AP4=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
   <object id="38" template="../obj/entry_up.tx" x="207.632" y="272.303"/>
-  <object id="49" template="../obj/entry_down.tx" x="208.488" y="52.2237">
+  <object id="49" template="../obj/entry_down.tx" x="208.821" y="64.8904">
    <properties>
     <property name="teleport" value="maps/map/djinnpalace_3B.tmx"/>
    </properties>
   </object>
-  <object id="55" template="../obj/gold.tx" x="208.948" y="37.2155"/>
+  <object id="55" template="../obj/gold.tx" x="208.615" y="38.5488"/>
  </objectgroup>
 </map>

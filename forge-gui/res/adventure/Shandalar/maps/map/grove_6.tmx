@@ -5,9 +5,9 @@
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Hidden Collision" width="30" height="17">
+ <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJztktENgzAMRP2PmaBiMTpL6FwhsBtU6YnDqgnwQVWJkyw72M47KYgsetYivYq0da452/4R4Q5vt9GcH5pr5Kh5h/tbjF7XkXTZsbvv+eRwIfSj8c2s5Hj6xmXmXkUts0rc5iDzjG7u/3DxP13NPaOb+zvuONev6nquxw7zufuE54tntuY8Lth8x0Bnz9ega994s0A+eM5yu6oczA7GF/rwzn54Dt8nUmdB+A==
+   eJyT4WFgkBlgjAwGyl50+4l1D6nuJgdQI7yoDQbKXmLtpzUYTPaSawYldlLTr+Ska2rajc9N9IjbOm4Ipre9uOzDVrbR015C/sfnnlpu6pTTuPBeIK7nxrRzD4Xmkmo3pXYCAJH5Kvk=
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -17,20 +17,15 @@
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJydlVFuwjAMhiN1TEmuwBi7HC888MjbNsTlCog7bIUdZLWaX/1jErebpahSG/uzfzupc/+zZXTuxzu3D/m6+Xn+r7H+re1jnI04mg3mlJ+Y7C+xxXcXhlWLgfjCv9OeJg5+z0ZNyPUQ8vc+jtxLivnVP9f9+87neZXs6u2cS1xmylrEgfkWR326GXrUvrf+kbsJORO16l4e1L6Sid4LpTV00twm5nWyCfslrZXSxOqlZoKrZx95iradMZey71rQW/y+C75byrN03uAn/fysaLii+qCRngPty1qWDL38oBkSs85kk/I4Uu/A5fMMjbS1ao5ED6kNM26xuVb4oad6VjSTZ2QZRz1Zoxr7PfydKbaZmE/uo8UVfRHrMjFruqZa763ccc6g0RPtRU76XmQ2+MhzbbDO6c48pTpOlR6g7zWuNsxn6d+h71NefJZ51uYa3498piymZuOOY/sFXnJ81Q==
+   eJydlcFOwzAMhiOVTUnEG2xjvNwuHDhyAyYejUu3ae/AuvEg1Gp+9Y9J3IKlqFIb+7N/O6lz/7NVdO7bO/cS8nX18/wfYv1b28c4GnE0G8wpPzHZX2KL73MYVi0G4gv/RnuaOPgtjZqQ6z7k730cuacU86t/bvv3nc/zKtnZ2zmXuMyUtYgD8zGO+nQz9Kh9b/1v7i7kTNSqe7lX+0omei+U1tBJc5uY18km7HVaG6WJ1UvNBFfPPvIUbTtjLmXfuaC3+F0Kvk+UZ+m8wU/6+V7RcEP1QSM9B9qXtSwZevlGMyRmnckm5fFBvQOXzzM00taqORI9pDbMuMXmWuGHnupZ0UyekVUc9WSNauzX8Hem2G5iPrmPFlf0RazTxKzpmmq9t3LHOYNGd7QXOel7kdngI8+twTqmO/OQ6jhUevB5b3O1YT5L/w59n/Lis8yzNtf4fuQzZTE1G3cc2w8Cf315
   </data>
  </layer>
- <layer id="3" name="Foreground" width="30" height="17">
+ <layer id="3" name="Clutter" width="30" height="17">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJydVUtOAzEMtRCsZm7RgUF8bsGuN+lBoBKFO6WFFvZdlIsgluQpedR1naTiSdYktuNnj52ZQURmkvBwltaUx07kshe5ijL2e7vW/1cQSzLPWvagfhV93qK894mPYnkn2Y8yNHiJmeIMuSbqdW7QY78yPMyLvh8Nbh3XYumr/8Dadc5rZatx6zPTSg6n5kJwRkrc9CnVA1w7tmD2m/wc1TkAdXjctj59poW7hp35enMIsN6xEmNw1pOCb1D2z7y2vKy3lTtxG2V3LvIVZXuC/4349ereokfY69nx5kjrdL78rmjwvni80Ns58eYafPeS6hyM7btyDii9Z29mAfTc6yP9Sz0G+J3xeOdR/9odxvDqb6E0k+D+ufC/56FP3KV7LHJ8v5iX9151zrB7/bXcOg64FlFeumNbyU4f5olaF43/F7mZJ/yX2cbYU8PLeM/d4TvjbOsYNQm553PHf1T/L8zzk/Fh3vxX1Dh/Ac6ecO8=
-  </data>
- </layer>
- <layer id="5" name="AboveSprites" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+   eJydVVtOw0AMtBB8JbdoIIjHLfjrTXoQ2orHndJAgX8+4CKIT3aUDJkabxIxktXdteMZx+6mMrOVdbg56ta028LstDQ7S1aXg1/P/2vIZT3P3gbgHPnbFPOU7Lns9jTPu+jjaNUEL7ESzsYOz6kNfNy3jkd1Ae0Et+b12MXHvyCP5tiL73WEm/0CliMa5mohOCO5uhmTqwc4D3yN27/0v7U8B7Annpvz47nm4GrCT73RHAKstx7JUQXrRSa2Ef9bv/a87OeUduIy2cex2Wey9xnxFxbXq71Fj7Dn7EBTNEd6pnp5ryg46xEvzv2cRADftXV1Vs73JdwRcu85mlkAPY/6yPhcjwG9RzzvJp0/Foc5EDunfq8vAt7n90l8nzdlx537H1OLgrqi96qa4Y/667k1D7jukz0Uf33evy0GDtRHnVgjZjdyV5ObOtcST9/S8bKOu57bf1PXE5zKjZ5vgvhavl9VkBPPbuVbMVbnD7N+dLs=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

@@ -7,7 +7,7 @@
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJy1lFESgyAMRPkHT8B4sXoW7bna2ru1+ci4xiygtDvDjIDhTTaBEI6ahhCeaT9usMb22XqrNN5ThjPHtF9/OTEP81+Jx5hWNjfRHENYvuMet3mJW8rxjLLxYiVnTsNvmJrnarisvmOD/yXldPQbuay+PUzlesJzPcY7bT3wL67ntdTW6/9eLuaTHa9lzmJrmiPvV6wx49bEeqd019HHHm6r9E5i7TxPpA613lKu+Oq9wTgsr/b+MbbWUPY8vzzpG9J6Ry0b+0b2VtMrmLvGlnqtxl7Im5fJN8ZeYXps9KvGPaMP0A5cAw==
+   eJy1lFEOgyAQRPkXT0C8WD1L7bna4t3aTbpxXGcBSzsJH4Lw3NnBEI6axxAecT8uMOete/Ot0v1MCc6c4n7+SfbczXslnse0srWKrkMIy3vchu25xC3VeEbJeJGdM+fxN0ypK5MeeP2dGvwvKcVjlpDr9beHqVwmPJcx1rhl4F9c5rX0luW/l4v1JOK1PHt7a9IsMWGPPW5NXnZKdx197OG2Su8k9o55In2oZUu54iv7B+OwvNr/z2NrD2WN+cWk/8rWO2rZmBtZyyYrWLvuLWWtxl4+36s+sVyy2vXbvhWy0a8a94xeNEZbgw==
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -40,7 +40,7 @@
     <property name="enemy" value="Merfolk"/>
    </properties>
   </object>
-  <object id="53" template="../obj/enemy.tx" x="295.233" y="68.7963">
+  <object id="53" template="../obj/enemy.tx" x="291.96" y="66.0084">
    <properties>
     <property name="enemy" value="Merfolk warrior"/>
    </properties>

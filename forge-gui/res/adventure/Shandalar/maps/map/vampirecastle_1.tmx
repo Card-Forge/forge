@@ -35,7 +35,7 @@
    </properties>
   </object>
   <object id="48" template="../obj/treasure.tx" x="208.333" y="24.3333"/>
-  <object id="50" template="../obj/enemy.tx" x="208.402" y="48.5586">
+  <object id="50" template="../obj/enemy.tx" x="208.902" y="48.5586">
    <properties>
     <property name="enemy" value="High Vampire"/>
    </properties>

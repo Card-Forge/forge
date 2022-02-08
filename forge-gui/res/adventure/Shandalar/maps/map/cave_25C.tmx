@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="80">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="7" name="Collision" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1LENgDAMBEAPkEyAWAwmDVkOGiRQaBHIupO++crfOALIaq0RW7lnqV9f9Z65jN300GVhr72ZnD+qH2mXnwUAAAAAAADwdztv7gnM
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAMA6C+M1f/cqphPyT0kqqqqqqqqqqqqvo+qPovzg==
+  </data>
+ </layer>
+ <layer id="6" name="Background Tint" width="60" height="40" opacity="0.75">
+  <data encoding="base64" compression="zlib">
+   eJztw6ENAAAMAjDs/ld8yw3zbdJeUlVVVVVVVVVVVd8HxDLvDA==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzFWlFSI0EIzdc6Y2VvkKP4q6bmJHuivYLZ6C32KLvGHMOhzCsZBBp6umNXUUnFSTePBzQQH8bN5sGR47DZ/J9fXwb/uV7ya2tLy3OA83UWWv/m1+fhEzf9/XlYftZDjuIMDfOxUgdgpP2BUy7Cze1Aa0rsH9FL0wP2BnY8A13uV3CZXaSLhSOr19GxNT9PPuPpIGXv7P/3pvzZ03zO2fBDTS8vBk6z/Bl8vNrSdKjBG1nStiWOSrpJfej5kg0y/lxrUwvzY8F+pXiX+twre8IG9HpIcAsp6RhZE9P3zbEhfNq75zjH02XPwwUb7X2+fJbFyW16MPzm96i/l0v6lOTpaVjawfJrGQ+lmK8VL+7ubj9EW5ZPyf3AP7izcGj5JJOPMhxnl6eH5Bcxbn1u3Ys9sEKyeat078m8IDnm+1i+Fa1najl+uwjiWbsPEIul3GjhlRxrC2f04tbCj1yIXBP1Lx6/mu7evd/ThyOC2pd0LPmwrK0s3S28/PkfPz/k2ngfx2WMWZi1HG/VPpZP8+e/Cy/pJu9n9ErIrVq97PmlZptMrFyjL9c40XJrpM7TajovF8Omsi9H/9ULO+np1fBRjrSaOOMLcmV6wizHpNfewB3pVaT+2Z5pjZ2jsSJrP+AGT8Bu4eUxJ7ktcQPban0Izm3Br1a7y3gh3IhV2MDzXyvePW74vqfxa8/BdajF6c2xaGXmVt5eNX7Ie47WnFqL30cWxpLNanXmMbQ2ZrPzHeDms8Ps7C/bE8Cn1/Jbo6vEXvo+7maee2p6ep4PajEj7r15zJoF/0OdeBq/zqqyvLS6h6QuUu+sPWQfQL8P1M5u9uI7reoMfk/Knhf2iGKXehFe+JNWo1p5UJuBtMLMOdb2pL+fx/hM18pL9H0ZQ3yOGcn1mRl0lGNL30ie4/68236KdVZ2tZr78FixbBjRcxI4Nbw4i9eOfLau+VDtzL3EW2kW6eV0fFfDu9su45Kfw+OF143afPNa3Fr8yBrXwxr9fVXLVy37Iq1X8GwJns/ifQRrZB7Zg9/S78ER3FIsvDzuM3pz3Gv51WxoxWN2b8+Pa/Y8FfwhI17fsDb3a7XkNH7fPBK2037fa5H7CdNuuzyj5+8mGcytMEq84BExTHh7/s8RyTslyjg7
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="60" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmA0KgjAUgMdAxaBblCeILhPdJLpMQd2jG1Q38QIpOZySbb69vb3hPniooL5f39sUIpFYJpdAeq+NrIh07aUQj2IoO9nbEZoM6dm8O1aNf9uRbIr5787NtxhtalE1Bn3fP+pi2t/awmfX+nfJHRSs/HKn7I5Vl0vlaw3wF5qnEP3hJb/ybuQp++uWUP3aB798wY53LPE6r2n0+OjBVEzZfhTDPHOY6Qk8DqLPfdvHbwFtcSXEeiEWqPYDUKb6T+o3ZqBz566dU8c5G+n3hT67Yp7PS4FzD+dmm097MNcBnHu4sg2jN3Crj7lw6I8Ue0pbHRziAcVUi661Gsve34bYv1sTpfkWFLjGEVKr+revz8LxLNP3zpjY2Hwa/deimLNUtZTAgfPaiwO+5pjvuMe8NokdFXvu/9QSiQ94uieC
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="66" template="../obj/door_up.tx" x="543" y="638">
+   <properties>
+    <property name="teleport" value="maps/map/cave_25B.tmx"/>
+    <property name="teleportObjectId" value="67"/>
+   </properties>
+  </object>
+  <object id="75" template="../obj/treasure.tx" x="187.5" y="91.75"/>
+  <object id="76" template="../obj/treasure.tx" x="148.5" y="92"/>
+  <object id="77" template="../obj/gold.tx" x="168.5" y="90.25"/>
+  <object id="78" template="../obj/enemy.tx" x="167.75" y="156">
+   <properties>
+    <property name="enemy" value="Immersturm Demon"/>
+   </properties>
+  </object>
+  <object id="79" template="../obj/enemy.tx" x="199.5" y="234">
+   <properties>
+    <property name="enemy" value="Rakdos Devil"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

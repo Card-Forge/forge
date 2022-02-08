@@ -7,7 +7,7 @@
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBi8IJqXgWEXDwKj86N4aWMnOpDlwRSjpt3Y7MRlLzXtxmU+LiBNovqhYi8u8aFuL3p+wYZhgJr5abDF76i91LV3L9CcOm7i1ILU7aGSvSBArB9IDRtiAD5/U9uf6ACXv8n1JwAxHhhJ
+   eJxjYBi8IJqXgWEXDwKj86N4aWPnbh5UMVk0/k4q243NTmz2UttubObjA9Ikqh8q9uISH+r2oucXbBgGqJmfBlv8jtpLXXv3As2p42ZgqOfGr66WG6JuD5XsBaVRkB8I+RumZheV7IUBmL/r0PxdR2V/ogNYXkWPP1ks+ZhYAAA7GCJ5
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -20,7 +20,7 @@
    eJy1VUFSwzAMVAvD2PkIB3gD5QXwqxz7hpYPhAJf4RWhJTemLYdaU5uuN1YDBXZGk8SWtZGttUREXpzInc9tHOws2HkwRReerxciy/jNYP+ELsZ7cv01re/zzoLNgz3EeGjjwhj6f4ezxK053VQik2C31X6+Bl/luBrl69m/xDk19qr1+T7ODD9rHHNtIQcG8/O3Fb+EmngVbz9YfyqvFHiPYeHsff/NPiOawPFItaVnsPJ7/gXNYXyuqyHelEsDGl3BPOvnHuY2Yc12wBL0/bOgl47iJ27W7lA9X4/yp5VvylnjP7vD3YS6SnNc839ZV6zREpp41spbH3f9QklHQ8B6Vs4unsN/6oiB99spvOmf331fH5Zesfas/mIB/bl+mZ+B/TDlqjlMqoOtY4wPl49jP2JtWtyYv96pyo/9hfvYJd3/7M+8Je4d6bF5HQ==
   </data>
  </layer>
- <layer id="3" name="Foreground" width="30" height="17">
+ <layer id="3" name="Clutter" width="30" height="17">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
