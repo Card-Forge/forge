@@ -3,8 +3,8 @@ ManaCost:3 U
 Types:Enchantment Saga
 K:Saga:3:DBReturn1,DBReturn2,DBTransform
 SVar:DBReturn1:DB$ ChangeZone | ValidTgts$ Creature,Planeswalker | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ Return up to one target creature or planeswalker to its owner's hand.
-SVar:DBReturn2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Artifact | ChangeNum$ 1 Mandatory$ True | RememberChanged$ True | SubAbility$ DBDraw | SpellDescription$ Return an artifact card from your graveyard to your hand. If you can't, draw a card.
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:DBReturn2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Artifact | ChangeNum$ 1 | Mandatory$ True | RememberChanged$ True | SubAbility$ DBDraw | SpellDescription$ Return an artifact card from your graveyard to your hand. If you can't, draw a card.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
