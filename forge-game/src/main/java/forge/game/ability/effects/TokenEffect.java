@@ -20,6 +20,7 @@ package forge.game.ability.effects;
 import java.util.List;
 
 import forge.util.Lang;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import forge.game.Game;
@@ -37,12 +38,13 @@ public class TokenEffect extends TokenEffectBase {
     protected String getStackDescription(SpellAbility sa) {
         if (sa.hasParam("SpellDescription")) {
             String desc = sa.getParam("SpellDescription");
-            if (desc.startsWith("Create")) {
+            if (StringUtils.containsIgnoreCase(desc,"Create")) {
                 final Card host = sa.getHostCard();
                 final List<Player> creators = AbilityUtils.getDefinedPlayers(host, sa.getParamOrDefault("TokenOwner",
                         "You"), sa);
                 String start = Lang.joinHomogenous(creators) + (creators.size() == 1 ? " creates" : " create");
-                desc = desc.replace("Create",start);
+                String create = desc.contains("Create") ? "Create" : "create";
+                desc = desc.replace(create, start);
             }
             return desc;
         }
