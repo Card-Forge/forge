@@ -5,5 +5,5 @@ Subtype:Standard
 Effective:1995-06-03
 Sets:FEM, 4ED, ICE
 RestrictedLegendary:true
-Restricted:Balance; Channel; Ivory Tower; Maze of Ith; Mind Twist
+Restricted:Balance; Channel; Ivory Tower; Mind Twist
 Banned:Amulet of Quoz; Bronze Tablet; Rebirth; Tempest Efreet

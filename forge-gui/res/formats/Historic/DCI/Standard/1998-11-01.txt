@@ -1,5 +1,5 @@
 [format]
-Name:Standard (Urza's Saga)
+Name:Standard (USG)
 Type:Historic
 Subtype:Standard
 Effective:1998-11-01

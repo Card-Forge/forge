@@ -1,5 +1,5 @@
 [format]
-Name:Standard (Stronghold)
+Name:Standard (STH)
 Type:Historic
 Subtype:Standard
 Effective:1998-04-01

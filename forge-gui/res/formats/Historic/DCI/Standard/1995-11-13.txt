@@ -4,5 +4,5 @@ Type:Historic
 Subtype:Standard
 Effective:1995-11-13
 Sets:FEM, 4ED, ICE, CHR, HML
-Restricted:Balance; Feldon's Cane; Ivory Tower; Maze of Ith; Mind Twist; Recall; Zuran Orb
+Restricted:Balance; Feldon's Cane; Ivory Tower; Mind Twist; Recall; Zuran Orb
 Banned:Amulet of Quoz; Bronze Tablet; Channel; Jeweled Bird; Rebirth; Tempest Efreet; Timmerian Fiends

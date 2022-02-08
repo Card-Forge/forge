@@ -1,8 +1,8 @@
 [format]
-Name:Type II (1996-04-01)
+Name:Type 2 (1996-04-01)
 Type:Historic
 Subtype:Standard
 Effective:1996-04-01
 Sets:FEM, 4ED, ICE, CHR, HML
-Restricted:Balance, Black Vise, Ivory Tower, Zuran Orb
-Banned:Amulet of Quoz, Bronze Tablet, Channel, Mind Twist, Rebirth, Tempest Efreet
+Restricted:Balance; Black Vise; Ivory Tower; Zuran Orb
+Banned:Amulet of Quoz; Bronze Tablet; Channel; Jeweled Bird; Mind Twist; Rebirth; Tempest Efreet; Timmerian Fiends

@@ -1,5 +1,5 @@
 [format]
-Name:Standard (Odyssey)
+Name:Standard (ODY)
 Type:Historic
 Subtype:Standard
 Effective:2001-11-01
