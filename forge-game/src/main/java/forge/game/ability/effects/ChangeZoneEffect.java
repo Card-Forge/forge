@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import forge.game.*;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -16,11 +17,6 @@ import com.google.common.collect.Maps;
 import forge.GameCommand;
 import forge.card.CardStateName;
 import forge.card.CardType;
-import forge.game.Game;
-import forge.game.GameActionUtil;
-import forge.game.GameEntity;
-import forge.game.GameEntityCounterTable;
-import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -81,12 +77,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
         final Card host = sa.getHostCard();
 
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(" -");
-        }
-
-        sb.append(" ");
-
         // Player whose cards will change zones
         List<Player> fetchers = null;
         if (sa.hasParam("DefinedPlayer")) {
@@ -131,9 +121,14 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         String type = "card";
         if (sa.hasParam("ChangeTypeDesc")) {
             type = sa.getParam("ChangeTypeDesc");
-        }
-        else if (sa.hasParam("ChangeType")) {
-            type = sa.getParam("ChangeType");
+            if (type.contains("{")) {
+                final StringBuilder typesb = new StringBuilder();
+                SpellAbilityEffect.tokenizeString(sa, typesb, type);
+                type = typesb.toString();
+            }
+        } else if (sa.hasParam("ChangeType")) {
+            final String ct = sa.getParam("ChangeType");
+            type = CardType.CoreType.isValidEnum(ct) ? ct.toLowerCase() : ct;
         }
 
         final int num = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(host,
@@ -155,28 +150,26 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             sb.append(chooserNames);
             sb.append(" search").append(choosers.size() > 1 ? " " : "es ");
             sb.append(fetchPlayer).append(fetchPlayer.equals(chooserNames) ? "'s " : " ");
-            sb.append("library for ").append(num).append(" ");
-            sb.append(type).append(num > 1 ? "s" : "");
+            sb.append("library for ").append(Lang.nounWithNumeralExceptOne(num, type + " card")).append(", ");
             if (!sa.hasParam("NoReveal")) {
                 if (choosers.size() == 1) {
-                    sb.append(num > 1 ? ", reveals those cards," : ", reveals that card,");
+                    sb.append(num > 1 ? "reveals them, " : "reveals it, ");
                 } else {
-                    sb.append(num > 1 ? ", reveal those cards," : ", reveal that card,");
+                    sb.append(num > 1 ? "reveal them, " : "reveal it, ");
                 }
             }
-            sb.append(" and ");
 
             if (destination.equals("Exile")) {
                 if (num == 1) {
-                    sb.append("exiles that card ");
+                    sb.append("exiles it");
                 } else {
-                    sb.append("exiles those cards ");
+                    sb.append("exiles them");
                 }
             } else {
                 if (num == 1) {
-                    sb.append("puts that card ");
+                    sb.append("puts it ");
                 } else {
-                    sb.append("puts those cards ");
+                    sb.append("puts them ");
                 }
 
                 if (destination.equals("Battlefield")) {
@@ -187,27 +180,23 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("GainControl")) {
                         sb.append(" under ").append(chooserNames).append("'s control");
                     }
-
-                    sb.append(".");
-
                 }
                 if (destination.equals("Hand")) {
                     if (num == 1) {
-                        sb.append("into its owner's hand.");
+                        sb.append("into its owner's hand");
                     } else {
-                        sb.append("into their owner's hand.");
+                        sb.append("into their owner's hand");
                     }
                 }
                 if (destination.equals("Graveyard")) {
                     if (num == 1) {
-                        sb.append("into its owner's graveyard.");
+                        sb.append("into its owner's graveyard");
                     } else {
-                        sb.append("into their owner's graveyard.");
+                        sb.append("into their owner's graveyard");
                     }
-
                 }
             }
-            sb.append(" Then shuffle that library.");
+            sb.append(", then shuffles.");
         } else if (origin.equals("Sideboard")) {
             sb.append(chooserNames);
             //currently Reveal is always True in ChangeZone
