@@ -98,7 +98,7 @@ public abstract class SpellAbilityEffect {
             		sb.append(" (Targeting: ").append(sa.getTargets()).append(")");
             	}
             } else if (!"None".equalsIgnoreCase(stackDesc)) { // by typing "none" they want to suppress output
-                makeSpellDescription(sa, sb, stackDesc);
+                tokenizeString(sa, sb, stackDesc);
             }
         } else {
             final String condDesc = sa.getParam("ConditionDescription");
@@ -155,7 +155,7 @@ public abstract class SpellAbilityEffect {
      *            {@link Player}, {@link SpellAbility}, and {@link Card}
      *            objects.
      */
-    private static void makeSpellDescription(final SpellAbility sa, final StringBuilder sb, final String stackDesc) {
+    public static void tokenizeString(final SpellAbility sa, final StringBuilder sb, final String stackDesc) {
         final StringTokenizer st = new StringTokenizer(stackDesc, "{}", true);
         boolean isPlainText = true;
 
