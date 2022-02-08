@@ -330,7 +330,7 @@ ScryfallCode=WAR
 A221 R A-Teferi, Time Raveler @Chris Rallis
 
 [tokens]
-wubrg_2_2_citizen
+all_2_2_citizen
 b_0_0_zombie_army
 b_0_0_zombie_army
 b_0_0_zombie_army
