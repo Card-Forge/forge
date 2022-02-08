@@ -54,9 +54,9 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     public enum CoreType {
         Artifact(true, "artifacts"),
         Conspiracy(false, "conspiracies"),
+        Enchantment(true, "enchantments"),
         Creature(true, "creatures"),
         Dungeon(false, "dungeons"),
-        Enchantment(true, "enchantments"),
         Instant(false, "instants"),
         Land(true, "lands"),
         Phenomenon(false, "phenomenons"),
