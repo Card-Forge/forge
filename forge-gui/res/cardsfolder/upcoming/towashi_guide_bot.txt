@@ -1,0 +1,9 @@
+Name:Towashi Guide-Bot
+ManaCost:4
+Types:Artifact Creature Construct
+PT:3/2
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Draw | Cost$ 4 T | NumCards$ 1 | ReduceCost$ X | SpellDescription$ Draw a card. This ability costs {1} less to activate for each modified creature you control.
+SVar:X:Count$Valid Creature.modified+YouCtrl
+Oracle:When Towashi Guide-Bot enters the battlefield, put a +1/+1 counter on target creature you control.\n{4}, {T}: Draw a card. This ability costs {1} less to activate for each modified creature you control. (Equipment, Auras you control, and counters are modifications.)

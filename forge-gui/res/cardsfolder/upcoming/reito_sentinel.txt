@@ -1,0 +1,9 @@
+Name:Reito Sentinel
+ManaCost:3
+Types:Artifact Creature Construct
+PT:3/3
+K:Defender
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, target player mills three cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Select target player
+A:AB$ ChangeZone | Cost$ 3 | ValidTgts$ Card | TgtPrompt$ Select target card in a graveyard | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target card from a graveyard on the bottom of its owner's library.
+Oracle:Defender\nWhen Reito Sentinel enters the battlefield, target player mills three cards. (They put the top three cards of their library into their graveyard.)\n{3}: Put target card from a graveyard on the bottom of its owner's library.
