@@ -520,6 +520,7 @@ public class FDeckChooser extends FScreen {
 
         if (cmbDeckTypes == null) { //initialize components with delayed initialization the first time this is populated
             cmbDeckTypes = new FComboBox<>();
+            cmbDeckTypes.setAutoClose(false);
             switch (lstDecks.getGameType()) {
             case Constructed:
             case Gauntlet:
