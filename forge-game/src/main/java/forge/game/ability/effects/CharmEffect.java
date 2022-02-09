@@ -120,10 +120,13 @@ public class CharmEffect extends SpellAbilityEffect {
         }
 
         if (additionalDesc) {
+            String addDescS = (sa.getParam("AdditionalDescription"));
             if (optional) {
-                sb.append(". ").append(sa.getParam("AdditionalDescription").trim());
+                sb.append(". ").append(addDescS.trim());
+            } else if (addDescS.startsWith(("."))) {
+                sb.append(addDescS.trim());
             } else {
-                sb.append(" ").append(sa.getParam("AdditionalDescription").trim());
+                sb.append(" ").append(addDescS.trim());
             }
         }
 
