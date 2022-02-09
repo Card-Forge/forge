@@ -236,6 +236,8 @@ public class FDeckChooser extends FScreen {
 
     @Override
     public void onActivate() {
+        if (cmbDeckTypes != null && cmbDeckTypes.getDropDownisVisible())
+            cmbDeckTypes.hideDropDown();
         String selectedDeck = "";
         int index = 0;
         if (lstDecks.getSelectedItem() != null) {

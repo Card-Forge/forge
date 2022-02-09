@@ -188,6 +188,13 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
     public FEventHandler getDropDownChangeHandler() {
         return dropDownChangeHandler;
     }
+    public boolean getDropDownisVisible() {
+        return dropDown != null && dropDown.isVisible();
+    }
+    public void hideDropDown() {
+        if (dropDown != null)
+            dropDown.hide();
+    }
     public void setDropDownChangeHandler(FEventHandler changedHandler0) {
         dropDownChangeHandler = changedHandler0;
     }
