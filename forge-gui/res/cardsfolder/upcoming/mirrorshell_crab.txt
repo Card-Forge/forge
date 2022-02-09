@@ -1,0 +1,7 @@
+Name:Mirrorshell Crab
+ManaCost:5 U U
+Types:Artifact Creature Crab
+PT:5/7
+K:Ward:3
+A:AB$ Counter | Cost$ 2 U Discard<1/CARDNAME> | TargetType$ Spell,Activated,Triggered | ValidTgts$ Card | UnlessCost$ 3 | ActivationZone$ Hand | PrecostDesc$ Channel — | TgtPrompt$ Select target spell or ability | SpellDescription$ Counter target spell or ability unless its controller pays {3}.
+Oracle:Ward {3} (Whenever this permanent becomes the target of a spell or ability an opponent controls, counter it unless that player pays {3}.)\nChannel - {2}{U}, Discard Mirrorshell Crab: Counter target spell or ability unless its controller pays {3}.
