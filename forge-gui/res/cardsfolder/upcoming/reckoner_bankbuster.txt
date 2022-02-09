@@ -4,7 +4,7 @@ Types:Artifact Vehicle
 PT:4/4
 K:etbCounter:CHARGE:3
 A:AB$ Draw | Cost$ 2 T SubCounter<1/CHARGE> | SubAbility$ DBToken | SpellDescription$ Draw a card.
-SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac,c_1_1_pilot_crewbuff | ConditionDefined$ Self | ConditionPresent$ Card.counters_EQ0_CHARGE | SubAbility$ DBPilot | SpellDescription$ Then if there are no charge counters on CARDNAME, create a Treasure token and a 1/1 colorless Pilot creature token with "This creature crews Vehicles as though its power were 2 greater."
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac,c_1_1_pilot_crewbuff | ConditionDefined$ Self | ConditionPresent$ Card.counters_EQ0_CHARGE | SpellDescription$ Then if there are no charge counters on CARDNAME, create a Treasure token and a 1/1 colorless Pilot creature token with "This creature crews Vehicles as though its power were 2 greater."
 K:Crew:3
 DeckHas:Ability$Counters|Token|Sacrifice & Type$Pilot|Treasure
 DeckHints:Type$Vehicle
