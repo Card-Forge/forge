@@ -141,7 +141,5 @@ https://downloads.cardforge.org/skins/magic_blue/hd_logo.png
 https://downloads.cardforge.org/skins/magic_blue/sprite_avatars.png
 https://downloads.cardforge.org/skins/magic_blue/sprite_buttons.png
 https://downloads.cardforge.org/skins/magic_blue/sprite_icons.png
-https://downloads.cardforge.org/skins/magic_blue/sprite_manaicons.png
-https://downloads.cardforge.org/skins/magic_blue/sprite_planar_conquest.png
 https://downloads.cardforge.org/skins/magic_blue/sprite_start.png
 https://downloads.cardforge.org/skins/magic_blue/sprite_trophies.png
