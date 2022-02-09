@@ -395,7 +395,7 @@ ScryfallCode=NEO
 383 M Explosive Singularity @Ari
 384 R Invoke Calamity @ZOUNOSE
 385 R Lizard Blades @Penekor
-386 R March of Reckless Joy @Miyaki Haime
+386 R March of Reckless Joy @Miyaki Hajime
 387 R Ogre-Head Helm @Dai-XT
 388 R Scrap Welder @Areku Nishiki
 389 R Thundering Raiju @TAPIOCA
@@ -404,7 +404,7 @@ ScryfallCode=NEO
 392 M Kodama of the West Tree @TAPIOCA
 393 R March of Burgeoning Life @SENNSU
 394 R Shigeki, Jukai Visionary @Nablange
-395 R Weaver of Harmony @Miyaki Haime
+395 R Weaver of Harmony @Miyaki Hajime
 396 R Eiganjo Uprising @Ari
 397 R Greasefang, Okiba Boss @TAPIOCA
 398 R Hinata, Dawn-Crowned @Ryota Murayama
