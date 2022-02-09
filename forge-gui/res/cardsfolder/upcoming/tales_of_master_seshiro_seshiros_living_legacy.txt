@@ -1,0 +1,25 @@
+Name:Tales of Master Seshiro
+ManaCost:4 G
+Types:Enchantment Saga
+K:Saga:3:DBPutCounter,DBPutCounter,DBTransform
+SVar:DBPutCounter:DB
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl,Vehicle.YouCtrl | TgtPrompt$ Select target creature or Vehicle you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature or Vehicle you control. It gains vigilance until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Vigilance
+SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AlternateMode:DoubleFaced
+DeckHas:Ability$Counters
+DeckHints:Type$Creature|Vehicle
+Oracle:(As this Saga enters and after your draw step, add a lore counter.)\nI, II — Put a +1/+1 counter on target creature or Vehicle you control. It gains vigilance until end of turn.\nIII — Exile this Saga, then return it to the battlefield transformed under your control.
+
+ALTERNATE
+
+Name:Seshiro's Living Legacy
+ManaCost:no cost
+Colors:green
+Types:Enchantment Creature Snake Warrior
+PT:5/5
+K:Vigilance
+K:Haste
+Oracle:Vigilance, haste
