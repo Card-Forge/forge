@@ -1,0 +1,7 @@
+Name:Papercraft Decoy
+ManaCost:2
+Types:Artifact Creature Frog
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw1 | TriggerDescription$ When CARDNAME leaves the battlefield, you may pay {2}. If you do, draw a card.
+SVar:TrigDraw1:AB$ Draw | Cost$ 2 | Defined$ You | NumCards$ 1
+Oracle:When Papercraft Decoy leaves the battlefield, you may pay {2}. If you do, draw a card.
