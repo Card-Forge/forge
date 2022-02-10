@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import forge.card.CardType;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -834,9 +835,14 @@ public class Cost implements Serializable {
             sb.append(Cost.NUM_NAMES[i]);
         }
 
-        sb.append(" ").append(type);
+        sb.append(" ");
         if (1 != i) {
-            sb.append("s");
+            String [] typewords = type.split(" ");
+            String lastWord = typewords[typewords.length - 1];
+            sb.append(CardType.isASubType(lastWord) ? type.replace(lastWord, CardType.getPluralType(lastWord))
+                    : type + "s");
+        } else {
+            sb.append(type);
         }
 
         return sb.toString();

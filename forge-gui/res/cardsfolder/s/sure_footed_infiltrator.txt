@@ -2,7 +2,7 @@ Name:Sure-Footed Infiltrator
 ManaCost:3 U
 Types:Creature Merfolk Rogue
 PT:2/3
-A:AB$ Pump | Cost$ tapXType<1/Rogue.Other> | CostDesc$ Tap another untapped Rogue you control: | Defined$ Self | KW$ HIDDEN Unblockable | StackDescription$ SpellDescription | SpellDescription$ CARDNAME can't be blocked this turn.
+A:AB$ Pump | Cost$ tapXType<1/Rogue.Other> | Defined$ Self | KW$ HIDDEN Unblockable | StackDescription$ SpellDescription | SpellDescription$ CARDNAME can't be blocked this turn.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 DeckNeeds:Type$Rogue
