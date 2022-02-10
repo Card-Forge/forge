@@ -1,13 +1,13 @@
 [metadata]
 Code=PL22
-Date=2022-01-25
+Date=2022-02-25
 Name=Year of the Tiger 2022
 Type=Promo
 ScryfallCode=PL22
 
 [cards]
-1 R Temur Sabertooth @
+1 R Temur Sabertooth @tswck
 2 R Jedit Ojanen @
 3 M Yuriko, the Tiger's Shadow @
 4 M Snapdax, Apex of the Hunt @
-5 R Herald's Horn @
+5 R Herald's Horn @tswck
