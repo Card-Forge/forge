@@ -3356,8 +3356,7 @@ public class CardFactoryUtil {
             final String power = k[1];
 
             // tapXType has a special check for withTotalPower, and NEEDS it to be "+withTotalPowerGE"
-            // So adding redundant YouCtrl to simplify matters even though its unnecessary
-            String effect = "AB$ Animate | Cost$ tapXType<Any/Creature.YouCtrl+withTotalPowerGE" + power + "> | " +
+            String effect = "AB$ Animate | Cost$ tapXType<Any/Creature.Other+withTotalPowerGE" + power + "> | " +
                     "CostDesc$ Crew " + power + " (Tap any number of creatures you control with total power " + power +
                     " or more: | Crew$ True | Secondary$ True | Defined$ Self | Types$ Creature,Artifact | " +
                     "RemoveCardTypes$ True | StackDescription$ SpellDescription | SpellDescription$ CARDNAME becomes" +
