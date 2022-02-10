@@ -2822,8 +2822,6 @@ public class ComputerUtil {
                 pRating /= 5;
             }
 
-            System.out.println("Board position evaluation for " + p + ": " + pRating);
-
             if (pRating > bestBoardRating) {
                 bestBoardRating = pRating;
                 bestBoardPosition = p;

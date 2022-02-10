@@ -830,7 +830,7 @@ public class ComputerUtilCombat {
         }
 
         // defender == null means unblocked
-        if ((defender == null) && mode == TriggerType.AttackerUnblocked) {
+        if (defender == null && mode == TriggerType.AttackerUnblocked) {
             willTrigger = true;
             if (!trigger.matchesValidParam("ValidCard", attacker)) {
                 return false;

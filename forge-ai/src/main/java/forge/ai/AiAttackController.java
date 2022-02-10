@@ -153,9 +153,14 @@ public class AiAttackController {
         }
     }
 
-    /** Choose opponent for AI to attack here. Expand as necessary. */
+    /**
+     * Choose opponent for AI to attack here. Expand as necessary.
+     * No strategy to secure a second place instead, since Forge has no variant for that
+     */
     public static Player choosePreferredDefenderPlayer(Player ai) {
         Player defender = ai.getWeakestOpponent(); //Concentrate on opponent within easy kill range
+
+        // TODO connect with evaluateBoardPosition and only fall back to random when no player is the biggest threat by a fair margin
 
         if (defender.getLife() > 8) { //Otherwise choose a random opponent to ensure no ganging up on players
             // TODO should we cache the random for each turn? some functions like shouldPumpCard base their decisions on the assumption who will be attacked
@@ -720,7 +725,7 @@ public class AiAttackController {
                     continue;
                 }
                 boolean mustAttack = false;
-                // TODO for nextTurn check if it was temporary
+                // TODO this might result into attacking the wrong player
                 if (attacker.isGoaded()) {
                     mustAttack = true;
                 } else if (attacker.getSVar("MustAttack").equals("True")) {
@@ -737,7 +742,7 @@ public class AiAttackController {
                         mustAttack = true;
                     }
                 }
-                if (mustAttack || (attacker.getController().getMustAttackEntity() != null && nextTurn) || (attacker.getController().getMustAttackEntityThisTurn() != null && !nextTurn)) {
+                if (mustAttack ||attacker.getController().getMustAttackEntityThisTurn() != null) {
                     combat.addAttacker(attacker, defender);
                     attackersLeft.remove(attacker);
                     numForcedAttackers++;
