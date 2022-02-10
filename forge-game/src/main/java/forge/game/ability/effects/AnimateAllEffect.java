@@ -130,7 +130,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
             list = getTargetPlayers(sa).getCardsIn(ZoneType.Battlefield);
         }
 
-        list = CardLists.getValidCards(list, valid.split(","), host.getController(), host, sa);
+        list = CardLists.getValidCards(list, valid, host.getController(), host, sa);
 
         for (final Card c : list) {
             doAnimate(c, sa, power, toughness, types, removeTypes, finalColors,

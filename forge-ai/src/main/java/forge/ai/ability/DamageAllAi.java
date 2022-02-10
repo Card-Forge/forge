@@ -251,7 +251,7 @@ public class  DamageAllAi extends SpellAbilityAi {
 
         // TODO: X may be something different than X paid
         CardCollection list =
-                CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), validC.split(","), source.getController(), source, sa);
+                CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), validC, source.getController(), source, sa);
 
         final Predicate<Card> filterKillable = new Predicate<Card>() {
             @Override

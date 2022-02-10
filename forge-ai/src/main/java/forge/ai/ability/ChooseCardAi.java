@@ -184,7 +184,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             choice = ComputerUtilCard.getBestCreatureAI(options);
         } else if (logic.equals("Clone")) {
             final String filter = "Permanent.YouDontCtrl,Permanent.nonLegendary";
-            CardCollection newOptions = CardLists.getValidCards(options, filter.split(","), ctrl, host, sa);
+            CardCollection newOptions = CardLists.getValidCards(options, filter, ctrl, host, sa);
             if (!newOptions.isEmpty()) {
                 options = newOptions;
             }
@@ -194,7 +194,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             choice = Aggregates.random(options);
         } else if (logic.equals("Untap")) {
             final String filter = "Permanent.YouCtrl,Permanent.tapped";
-            CardCollection newOptions = CardLists.getValidCards(options, filter.split(","), ctrl, host, sa);
+            CardCollection newOptions = CardLists.getValidCards(options, filter, ctrl, host, sa);
             if (!newOptions.isEmpty()) {
                 options = newOptions;
             }

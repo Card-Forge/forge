@@ -144,7 +144,7 @@ public class ComputerUtilCost {
                         return true;
                     }
                 }
-                final CardCollection typeList = CardLists.getValidCards(hand, type.split(","), source.getController(), source, sa);
+                final CardCollection typeList = CardLists.getValidCards(hand, type, source.getController(), source, sa);
                 if (typeList.size() > ai.getMaxHandSize()) {
                     continue;
                 }
