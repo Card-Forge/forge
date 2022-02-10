@@ -66,7 +66,7 @@ import forge.util.collect.FCollectionView;
 public class AiAttackController {
 
     // possible attackers and blockers
-    private final List<Card> attackers;
+    private List<Card> attackers;
     private final List<Card> blockers;
 
     private List<Card> oppList; // holds human player creatures
@@ -75,7 +75,7 @@ public class AiAttackController {
     private final Player ai;
     private Player defendingOpponent;
 
-    private int aiAggression = 0; // added by Masher, how aggressive the ai is attack will be depending on circumstances
+    private int aiAggression = 0; // how aggressive the ai is attack will be depending on circumstances
     private final boolean nextTurn;
 
     /**
@@ -94,12 +94,7 @@ public class AiAttackController {
         this.oppList = getOpponentCreatures(this.defendingOpponent);
         this.myList = ai.getCreaturesInPlay();
         this.nextTurn = nextTurn;
-        this.attackers = new ArrayList<>();
-        for (Card c : myList) {
-            if (canAttackWrapper(c, this.defendingOpponent)) {
-                attackers.add(c);
-            }
-        }
+        refreshAttackers(this.defendingOpponent);
         this.blockers = getPossibleBlockers(oppList, this.attackers, this.nextTurn);
     } // overloaded constructor to evaluate attackers that should attack next turn
 
@@ -115,6 +110,15 @@ public class AiAttackController {
         }
         this.blockers = getPossibleBlockers(oppList, this.attackers, this.nextTurn);
     } // overloaded constructor to evaluate single specified attacker
+
+    private void refreshAttackers(GameEntity defender) {
+        this.attackers = new ArrayList<>();
+        for (Card c : myList) {
+            if (canAttackWrapper(c, defender)) {
+                attackers.add(c);
+            }
+        }
+    }
 
     public static List<Card> getOpponentCreatures(final Player defender) {
         List<Card> defenders = new ArrayList<>(defender.getCreaturesInPlay());
@@ -666,6 +670,13 @@ public class AiAttackController {
      * @return a {@link forge.game.combat.Combat} object.
      */
     public final int declareAttackers(final Combat combat) {
+        final boolean bAssault = doAssault(ai);
+
+        // Determine who will be attacked
+        GameEntity defender = chooseDefender(combat, bAssault);
+        if (defender != defendingOpponent) {
+            refreshAttackers(defender);
+        }
         if (this.attackers.isEmpty()) {
             return aiAggression;
         }
@@ -691,14 +702,11 @@ public class AiAttackController {
             }
         }
 
-        final boolean bAssault = doAssault(ai);
         // TODO: detect Lightmine Field by presence of a card with a specific trigger
         final boolean lightmineField = ai.getGame().isCardInPlay("Lightmine Field");
         // TODO: detect Season of the Witch by presence of a card with a specific trigger
         final boolean seasonOfTheWitch = ai.getGame().isCardInPlay("Season of the Witch");
 
-        // Determine who will be attacked
-        GameEntity defender = chooseDefender(combat, bAssault);
         List<Card> attackersLeft = new ArrayList<>(this.attackers);
 
         // TODO probably use AttackConstraints instead of only GlobalAttackRestrictions?
@@ -725,7 +733,7 @@ public class AiAttackController {
                     continue;
                 }
                 boolean mustAttack = false;
-                // TODO this might result into attacking the wrong player
+                // TODO this might result into trying to attack the wrong player
                 if (attacker.isGoaded()) {
                     mustAttack = true;
                 } else if (attacker.getSVar("MustAttack").equals("True")) {
