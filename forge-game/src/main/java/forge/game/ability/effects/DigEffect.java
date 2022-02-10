@@ -209,7 +209,7 @@ public class DigEffect extends SpellAbilityEffect {
                         if (changeValid.contains("ChosenType")) {
                             changeValid = changeValid.replace("ChosenType", host.getChosenType());
                         }
-                        valid = CardLists.getValidCards(top, changeValid.split(","), cont, host, sa);
+                        valid = CardLists.getValidCards(top, changeValid, cont, host, sa);
                         if (totalCMC) {
                             valid = CardLists.getValidCards(valid, "Card.cmcLE" + totcmc, cont, host, sa);
                         }

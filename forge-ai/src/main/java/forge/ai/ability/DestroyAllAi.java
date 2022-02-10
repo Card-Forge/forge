@@ -92,8 +92,8 @@ public class DestroyAllAi extends SpellAbilityAi {
 
         // TODO should probably sort results when targeted to use on biggest threat instead of first match
         for (Player opponent: ai.getOpponents()) {
-            CardCollection opplist = CardLists.getValidCards(opponent.getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source, sa);
-            CardCollection ailist = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source, sa);
+            CardCollection opplist = CardLists.getValidCards(opponent.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source, sa);
+            CardCollection ailist = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source, sa);
 
             opplist = CardLists.filter(opplist, predicate);
             ailist = CardLists.filter(ailist, predicate);

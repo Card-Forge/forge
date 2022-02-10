@@ -74,7 +74,7 @@ public class TriggerAttackersDeclared extends Trigger {
 
         CardCollection attackers = (CardCollection) runParams.get(AbilityKey.Attackers);
         if (hasParam("ValidAttackers")) {
-            attackers = CardLists.getValidCards(attackers, getParam("ValidAttackers").split(","), getHostCard().getController(), getHostCard(), this);
+            attackers = CardLists.getValidCards(attackers, getParam("ValidAttackers"), getHostCard().getController(), getHostCard(), this);
             FCollection<GameEntity> defenders = new FCollection<>();
             for (Card attacker : attackers) {
                 defenders.add(attacker.getGame().getCombat().getDefenderByAttacker(attacker));

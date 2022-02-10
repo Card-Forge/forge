@@ -467,7 +467,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             CardCollectionView list = game.getCardsIn(zone);
             final String present = getParam("IsPresent");
 
-            list = CardLists.getValidCards(list, present.split(","), controller, hostCard, this);
+            list = CardLists.getValidCards(list, present, controller, hostCard, this);
 
             int right = 1;
             final String rightString = compare.substring(2);

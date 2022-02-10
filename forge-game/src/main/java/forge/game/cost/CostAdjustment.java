@@ -138,6 +138,7 @@ public class CostAdjustment {
                     count = Integer.parseInt(amount);
                 } else {
                     if (st.hasParam("Relative")) {
+                        // grab SVar here already to avoid potential collision when SA has one with same name
                         count = AbilityUtils.calculateAmount(hostCard, st.hasSVar(amount) ? st.getSVar(amount) : amount, sa);
                     } else {
                         count = AbilityUtils.calculateAmount(hostCard, amount, st);
@@ -379,7 +380,7 @@ public class CostAdjustment {
             // TODO: update cards with "This spell costs X less to cast...if you..."
             // The caster is sa.getActivatingPlayer()
             // cards like Hostage Taker can cast spells from other players.
-            value = AbilityUtils.calculateAmount(hostCard, amount, sa);
+            value = AbilityUtils.calculateAmount(hostCard, staticAbility.hasSVar(amount) ? staticAbility.getSVar(amount) : amount, sa);
         } else {
             value = AbilityUtils.calculateAmount(hostCard, amount, staticAbility);
         }

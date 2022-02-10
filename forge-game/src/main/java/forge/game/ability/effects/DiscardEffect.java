@@ -233,7 +233,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                                 "X", Integer.toString(AbilityUtils.calculateAmount(source, "X", sa)));
                     }
 
-                    toBeDiscarded = CardLists.getValidCards(dPHand, valid.split(","), source.getController(), source, sa);
+                    toBeDiscarded = CardLists.getValidCards(dPHand, valid, source.getController(), source, sa);
                     toBeDiscarded = CardLists.filter(toBeDiscarded, Presets.NON_TOKEN);
                     if (toBeDiscarded.size() > 1) {
                         toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
@@ -250,8 +250,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                     }
 
                     final String valid = sa.getParamOrDefault("DiscardValid", "Card");
-                    String[] dValid = valid.split(",");
-                    CardCollection validCards = CardLists.getValidCards(dPHand, dValid, source.getController(), source, sa);
+                    CardCollection validCards = CardLists.getValidCards(dPHand, valid, source.getController(), source, sa);
 
                     Player chooser = p;
                     if (mode.equals("RevealYouChoose")) {
