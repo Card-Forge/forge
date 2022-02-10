@@ -25,6 +25,9 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
 import forge.game.cost.Cost;
+import forge.game.cost.CostDiscard;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostReveal;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -70,7 +73,7 @@ public class PlayEffect extends SpellAbilityEffect {
         Player controlledByPlayer = null;
         long controlledByTimeStamp = -1;
         final Game game = activator.getGame();
-        final boolean optional = sa.hasParam("Optional");
+        boolean optional = sa.hasParam("Optional");
         boolean remember = sa.hasParam("RememberPlayed");
         int amount = 1;
         boolean hasTotalCMCLimit = sa.hasParam("WithTotalCMC");
@@ -330,7 +333,17 @@ public class PlayEffect extends SpellAbilityEffect {
             }
 
             if (!optional) {
-                tgtSA.getPayCosts().setMandatory(true);
+                // 118.8c
+                for (CostPart cost : tgtSA.getPayCosts().getCostParts()) {
+                    if ((cost instanceof CostDiscard || cost instanceof CostReveal)
+                            && !cost.getType().equals("Card") && !cost.getType().equals("Random")) {
+                        optional = true;
+                        break;
+                    }
+                }
+                if (!optional) {
+                    tgtSA.getPayCosts().setMandatory(true);
+                }
             }
 
             if (sa.hasParam("PlayReduceCost")) {
