@@ -19,6 +19,7 @@ package forge.game.cost;
 
 import java.io.Serializable;
 
+import forge.card.CardType;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.game.CardTraitBase;
@@ -106,7 +107,11 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
 
     public final String getDescriptiveType() {
         String typeDesc = this.getTypeDescription();
-        return typeDesc == null ? this.getType() : typeDesc;
+        if (typeDesc == null) {
+            String typeS = this.getType();
+            typeDesc = CardType.CoreType.isValidEnum(typeS) ? typeS.toLowerCase() : typeS;
+        }
+        return typeDesc;
     }
 
     /**

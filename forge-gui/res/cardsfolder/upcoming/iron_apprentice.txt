@@ -1,0 +1,9 @@
+Name:Iron Apprentice
+ManaCost:1
+Types:Artifact Creature Construct
+PT:0/0
+K:etbCounter:P1P1:1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+HasCounters | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME dies, if it had counters on it, put those counters on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ EachFromSource | EachFromSource$ TriggeredCardLKICopy
+DeckHas:Ability$Counters
+Oracle:Iron Apprentice enters the battlefield with a +1/+1 counter on it.\nWhen Iron Apprentice dies, if it had counters on it, put those counters on target creature you control.

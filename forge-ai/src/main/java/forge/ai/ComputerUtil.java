@@ -1343,7 +1343,7 @@ public class ComputerUtil {
                 }
 
                 final CardCollection typeList =
-                        CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), source.getController(), source, sa);
+                        CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type, source.getController(), source, sa);
                 for (Card c : typeList) {
                     if (c.getSVar("SacMe").equals("6")) {
                         return true;
@@ -1620,7 +1620,7 @@ public class ComputerUtil {
                 objects = AbilityUtils.getDefinedObjects(source, topStack.getParam("Defined"), topStack);
             } else if (topStack.hasParam("ValidCards")) {
                 CardCollectionView battleField = aiPlayer.getCardsIn(ZoneType.Battlefield);
-                objects = CardLists.getValidCards(battleField, topStack.getParam("ValidCards").split(","), source.getController(), source, topStack);
+                objects = CardLists.getValidCards(battleField, topStack.getParam("ValidCards"), source.getController(), source, topStack);
             } else {
                 return threatened;
             }
@@ -2821,8 +2821,6 @@ public class ComputerUtil {
             if (p.getCardsIn(ZoneType.Library).size() < 3) {
                 pRating /= 5;
             }
-
-            System.out.println("Board position evaluation for " + p + ": " + pRating);
 
             if (pRating > bestBoardRating) {
                 bestBoardRating = pRating;

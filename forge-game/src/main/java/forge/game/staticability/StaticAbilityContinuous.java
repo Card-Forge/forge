@@ -1070,7 +1070,7 @@ public final class StaticAbilityContinuous {
                 affectedCardsOriginal = new CardCollection(affectedCards);
             }
 
-            affectedCards = CardLists.getValidCards(affectedCards, stAb.getParam("Affected").split(","), controller, hostCard, stAb);
+            affectedCards = CardLists.getValidCards(affectedCards, stAb.getParam("Affected"), controller, hostCard, stAb);
 
             // Add back all cards that are in other player's graveyard, and meet the restrictions without YouOwn/YouCtrl (treat it as in your graveyard)
             if (affectedCardsOriginal != null) {

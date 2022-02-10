@@ -132,7 +132,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                             }
                         }
                     }
-                    valid = CardLists.getValidCards(valid, type.split(","), chosenSA.getActivatingPlayer(), chosenSA.getHostCard(), sa);
+                    valid = CardLists.getValidCards(valid, type, chosenSA.getActivatingPlayer(), chosenSA.getHostCard(), sa);
                     Card originalTarget = Iterables.getFirst(getTargetCards(chosenSA), null);
                     valid.remove(originalTarget);
 

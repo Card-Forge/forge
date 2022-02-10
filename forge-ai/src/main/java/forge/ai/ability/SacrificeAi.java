@@ -79,7 +79,7 @@ public class SacrificeAi extends SpellAbilityAi {
 
             List<Card> list = null;
             try {
-                list = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), source, sa);
+                list = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), source, sa);
             } catch (NullPointerException e) {
                 return false;
             } finally {
@@ -141,7 +141,7 @@ public class SacrificeAi extends SpellAbilityAi {
 
             List<Card> humanList = null;
             try {
-                humanList = CardLists.getValidCards(ai.getStrongestOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), source, sa);
+                humanList = CardLists.getValidCards(ai.getStrongestOpponent().getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), source, sa);
             } catch (NullPointerException e) {
                 return false;
             } finally {
@@ -155,7 +155,7 @@ public class SacrificeAi extends SpellAbilityAi {
         } else if (defined.equals("You")) {
             List<Card> computerList = null;
             try {
-                computerList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), source, sa);
+                computerList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), source, sa);
             } catch (NullPointerException e) {
                 return false;
             } finally {

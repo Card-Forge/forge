@@ -3491,6 +3491,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean isModified() {
+        if (!isCreature()) {
+            return false;
+        }
         if (this.isEquipped() || this.hasCounters()) {
             return true;
         }

@@ -368,7 +368,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
                     list.addAll(p.getCardsIn(presentZone));
                 }
             }
-            list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard(), this);
+            list = CardLists.getValidCards(list, sIsPresent, this.getHostCard().getController(), this.getHostCard(), this);
 
             final String rightString = presentCompare.substring(2);
             int right = AbilityUtils.calculateAmount(getHostCard(), rightString, this);
@@ -397,7 +397,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
                 }
             }
 
-            list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard(), this);
+            list = CardLists.getValidCards(list, sIsPresent, this.getHostCard().getController(), this.getHostCard(), this);
 
             final String rightString = presentCompare.substring(2);
             int right = AbilityUtils.calculateAmount(getHostCard(), rightString, this);

@@ -36,7 +36,7 @@ public class ComputerUtilAbility {
             public boolean apply(final Card c) {
                 if (!c.getSVar("NeedsToPlay").isEmpty()) {
                     final String needsToPlay = c.getSVar("NeedsToPlay");
-                    CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), needsToPlay.split(","), c.getController(), c, null);
+                    CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), needsToPlay, c.getController(), c, null);
                     if (list.isEmpty()) {
                         return false;
                     }

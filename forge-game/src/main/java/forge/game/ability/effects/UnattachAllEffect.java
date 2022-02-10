@@ -140,7 +140,7 @@ public class UnattachAllEffect extends SpellAbilityEffect {
 
             String valid = sa.getParam("UnattachValid");
             CardCollectionView unattachList = game.getCardsIn(ZoneType.Battlefield);
-            unattachList = CardLists.getValidCards(unattachList, valid.split(","), source.getController(), source, sa);
+            unattachList = CardLists.getValidCards(unattachList, valid, source.getController(), source, sa);
             for (final Card c : unattachList) {
                 handleUnattachment((GameEntity) o, c);
             }
