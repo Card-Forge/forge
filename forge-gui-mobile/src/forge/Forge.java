@@ -136,7 +136,7 @@ public class Forge implements ApplicationListener {
         splashScreen = new SplashScreen();
         frameRate = new FrameRate();
         animationBatch = new SpriteBatch();
-        transitionTexture = new Texture(Config.instance().getFile("ui/transition.png"));
+
         Gdx.input.setInputProcessor(new MainInputProcessor());
         /*
          Set CatchBackKey here and exit the app when you hit the
@@ -289,6 +289,8 @@ public class Forge implements ApplicationListener {
     }
     protected void afterDbLoaded() {
         stopContinuousRendering(); //save power consumption by disabling continuous rendering once assets loaded
+        //init here to fix crash if the assets are missings on android
+        transitionTexture =  new Texture(Config.instance().getFile("ui/transition.png"));
 
         FSkin.loadFull(splashScreen);
 
