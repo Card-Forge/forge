@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
@@ -98,7 +99,11 @@ public class SplashScreen extends FContainer {
         }
         float oldalpha = g.getfloatAlphaComposite();
         g.setAlphaComposite(0.5f);
-        g.drawImage(background, x, y, w, h);
+        if (FSkin.hdLogo != null) {
+            g.drawImage(FSkin.hdLogo, getWidth()/2 - (FSkin.hdLogo.getWidth()*1.3f)/2, getHeight()/2 - (FSkin.hdLogo.getHeight()*1.3f)/1.5f, FSkin.hdLogo.getWidth()*1.3f, FSkin.hdLogo.getHeight()*1.3f);
+        } else {
+            g.drawImage(background, x, y, w, h);
+        }
         g.setAlphaComposite(oldalpha);
         y += h * 295f / 450f;
         float padding = 20f / 450f * w;
