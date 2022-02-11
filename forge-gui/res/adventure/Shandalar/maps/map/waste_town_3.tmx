@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="76">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="60" height="34">
+  <data encoding="base64" compression="zlib">
+   eJzt1cENgCAMQNHeCxMYF4NZ0L2M7mYIGi4cTYjtf0kP9NSGNhUBAAAAgP9JUSTH2VV8KxnrB/DuDLMrADBysZsmbdpi1/Yu2nOWrc88L07muu5v/VMvN/YIPQAAeN3Kwgq6
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="60" height="34">
+  <data encoding="base64" compression="zlib">
+   eJztzzERADAIBDBWroaxgltEdPglQwRkXtUEbGckrr6+vr6+vr6+vr6+vr6+AAAAAL8OPzfNaw==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="60" height="34">
+  <data encoding="base64" compression="zlib">
+   eJy9WVlOw0AMTZcPMukdCucohf60PVfhDv1E/HKulnNArcaKZbxNMsOTRpGyzPiNl7Gdrm2at65pvlOjYnl75yyMeWt/89GPObkCNre1Xvr1un59Swb6ztPqfu/noWl2aVgDx1aYg8/btsM8GkBG5Ahzboz9oZwpR/5s1g7rP67uVw1r9pxznStc4TtPn5b8UbwG5pfki4BytWwMgfYhcd4RWxsDamc588A3s4z9fE55+4V6put5fuDJGPWn6+3eJQ37jd+N1TcA9Xcx5gA9l5QRfHRB7i2EuY5piD3gjxgXPK5gN2gvkh2g/qgOJdSQUYsNJzIHjY+R2LdhepF8Bf2Ux17JR0vJiPu8V55754CFJbPDT0HPPMZT+0XOpWWccgZEQM+5yLtSLC8tY2LygO8fhHHtxyHV2x/0WQngA5qeATlnxpVwojHAGrU4gz4lXpae0Rc0zlFO3tg7uj6O3JNOkVvyV4zJODjnUlwpZ42rFk9oPhC1EzjnLJtFXzgLvl96cJ/GPbVsb0t852pwBp4wvJxUszVaw5Qc7528BtUxckW5uSxc3lD+3d/Xzq5TBa7SOh3LA6y8kPLO4brrfZfXrFSWWjZt+TLXqwaq42htxW0C6lUeN2rZNLdrBMSS58xYHamJornIV0W+sLcXJXZQQAyC2huvPNe2egMUVs1cky/NhyMyeL2nKTWz9BzyyBJ2DfOk9q/PlOw94d55NXPEtpF7VIdrIR5MQaT3RGOsxQc4W7016f2IveZiau+JyhapmaOAfZQ4j+XKezLRb7S80auZc2okCjjD6MjFf/XHeM2c05ctiZr9MW2tmtBqVI4a/bEp8gCm1KhWvKzZHxsjD8CrURHW/yLv30rkTIxgqjxWjUpjjPUeIKInr/fkoYQ8pWrUCCw9Y/6snSUl5SlRo0bPPK33tGiHXJrPVVOeMTUq/kvw8puIDHge5cjDY1RUHnw30htfC3paGuem1XtCX5R6T7+rNW/n
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="60" height="34">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzdWF1OwzAMzqROXftStEfgADwhwQ1ASHABnuAqnGI9Atxh4jTABXgBnlk0IqVpnNixk5Z9UjWlS21/jn9aK4VHvxquLxe45zar+J4pkGqX6wcuqPKk9XPQe+6l+NV9xicXkh3yR+/Zc4GMWw5K6DCQiIcNX8SoHnBlStjExXdG2SViJCUXOfHEjcWYvRK9hGojVydUy/4zKD5x93JyalspdVLgeq1gG+w6J92L3Rp6v5SVD6GUHo2Qzw6Rrw8mJw6JL6Zf23bcrpW6W+PXMXSdUkfdWM/ITkbOUp+17bhqh//F1hqfNSzb3m/rwdqY4/1D2/HcKFXvrvd2/1tH1i/N8D50fQB8OeD2dm2H79xCoO43eiiI8XLfSbB9bE58Q/VGqi9L8X3Y1aXHv9p03vj1GGDnKli4eR6KDZsvtj5ft/58DSF0viXnGzZfbH0ukb+5oO14a2n1+SYz35zzQarfzxblz1eyD6fYIcEXO7/zgVPvvpa077rTas/3mPg9+DNh/gbnm4jceZrJvDhnntuypflK5WeOGauGyxfysx0rlPy05eXqzRQfzyWeSyHElxNTU8/XoTi1+ab2BpE5sfkFZEE6sLqN3DnHM6c3QzUmxhfyX6xG+M7JyJL+pqJgyvP9BSfHXkM=
+  </data>
+ </layer>
+ <layer id="5" name="Roofs" width="60" height="34">
+  <data encoding="base64" compression="zlib">
+   eJzt1DENACAAA8E6IMEGeAD/qrAAE5Dcbb91agIAANzQatLrfgP8aJRkltsrzvhnAAAAXrUA3oMDgA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="463.996" y="404.737"/>
+  <object id="41" template="../obj/shop.tx" x="304.333" y="223.667"/>
+  <object id="42" template="../obj/shop.tx" x="368.333" y="223.667"/>
+  <object id="43" template="../obj/shop.tx" x="433" y="224.333"/>
+  <object id="44" template="../obj/shop.tx" x="304.333" y="320.333"/>
+  <object id="45" template="../obj/shop.tx" x="368.667" y="321.667"/>
+  <object id="46" template="../obj/shop.tx" x="432.333" y="321"/>
+  <object id="47" template="../obj/inn.tx" x="550.667" y="304.333"/>
+ </objectgroup>
+</map>

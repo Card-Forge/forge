@@ -7,7 +7,7 @@
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBiaQJpn1F56gJ1Ae3ch4VEwCkbB4AB13BBczz0w9u/lGTi7ZQeoLBooe6kNAE1ZBs4=
+   eJxjYBiaQJpn+Nm7F4/ZA+XfnUB7dyHhoQrwhS0+UM9NXXcMJNiDFgbkhslgBDvJ9At6mAwlUMcNwQOVRkHpB5/dtAxb2QGKt4Gyl9oAAED6DNA=
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -25,7 +25,7 @@
    eJxjYBhaYBfPQLtgeAPZAQrfUXvpa6/0ANk/au/wtncUDA0AAPmRAlc=
   </data>
  </layer>
- <layer id="3" name="Foreground" width="30" height="17">
+ <layer id="3" name="Clutter" width="30" height="17">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>

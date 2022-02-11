@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="62">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1WEKwjAMhuH8lXUnGLuOh9CziPcqejctJZiGDh3DbD/eB0ZGM2go/ZgIAAAorqNITu1zGeu61l4/ypxqPZ8+dUp1XavtFVOKn88q++v5LfWj6Dn96/uteufzzd7z+fvX60dZyqfOR35/m28N8tvu5x0pH0efT/NZ7r5Wn1/b2yu/a5CPdj/rNog8zNrz/X4f2m8i5/P/huzOZ+70c+B8AABgmxebPi1k
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzrEJAEAIBEFTG//QmsUOHgOjOZjwYCsjCgBYb77vgz59+vTp06dPnz59AMCdBlIAHsQ=
+  </data>
+ </layer>
+ <layer id="7" name="Floor Tiles" width="40" height="40" tintcolor="#fffcd9">
+  <data encoding="base64" compression="zlib">
+   eJzt0jEKwCAQRFG7QO5/xJwiVbCSdHEXpgjvgWD5cRwDAJiuY537/H5P9+20pft22+Y9pdJm33effevs22Pffp996/64b7Kv0pb8f5W25PsBAD0PImXiAA==
+  </data>
+ </layer>
+ <layer id="2" name="Walls and Ground" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJytWEty1DAQ1Q7LLOYgIcAFYAdZTaCmigXcCRZcgsoqgeRWk0wGuADuGl6l/dwttW29KtdMWWr1U//UVkpjXHcp/exSGPuc0t0w/zKPn0OeriNrHytzSoD8HDnWiefX8P4h1/cS0SU6HvNYz8dcltE6b7upXk9e5t8rntY+LBm9fkTGW0Nkb4M6S/PEZjfd0/8ltrN0zt2Xh+1/Lsxtie1aQ3Nibq31zMlP5nZJcffBsBtyZ6kea80SOBd0XFt+3SnuEXsgro+FPfNcXlPnOPZp5YS29SHH7LHL8ViGbUq1vIRtHte0mr65dUDP57moPyVw7cU+8/Db0/Nc/ffGPW5ra4b2mfj3B6316VlKV8O7N5uU3m5O4/JO40rJtOQm2Ct+DwY/6P88cPuy8ceBrcHtWwOOWMvSX4Pmt1d7ZSzlqeXW8hPcB9eYW3cFNf/VxufAqz1yZli1U/CuT+k9PRd9fJx1WXrAweoRdd3DmD7jvPwFavmLWLnupnoAXTMwDg7cQ/L53CL+PA7gjfpT6kv3JN8qfwViQ67/6J+0//Qc62y1+tzW+cF9re5hvDkexPYt88PTAf/WoOse5NbmR5RbhJ8G5JbGH+ehBuzA/Slqj1eHmNtafpFvX+7r0HuWZPSeluYH8/P0ed/UVl+p4w81cWl+RPQxT2v+3G8aC7ymgOtxRB/Pbfn9yz6E3+CHyF1DC27ILSsv4VPLhxFd4OWdH5qDpZ/rFa+xJRtaeJQ1hud3N9WDvXnnB3/Psh6uV9Y4fGqtL9xeD7nzZ/g976ffzbU7JL7bi9zrHXK5loLXq/7Ezbrfq+Wod+/o1QIrNz0dsBnuI9Z+Z0PG85Fgzh3i13zy5y6Pz4ZanJa4RXINfW0pZrTtjrR3nBmlewe+By3FtcQPHuRfDd/zEzftE+RHpM+rzdE2kLhGPXjZ1zme9eOeFzlyPqM/rOGsn8YB4iaiR+T/dqfnRYXbP0GBrKw=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzNWEtOQzEMfLuKBQtOxAHgPi10z/XgDohFOQV6i5GskeOM/RzU2VXNx5mMx37ZNh/nx8EfhM8HbdyOF/p9E+e9C7FczJi3YLwdp55xx1VY/4u4+KX/+fy8rgrLB+8xgrd3NzJaUODxjLMr2lG4tXeW0UMFkS6PArrO6KlyXpzh0nQWqxnOHwvcO+s4mhPNBU/dml0J1S+B10X7zeJYnUcVRDUEGqh4sQd1Hc6hrD88P/WM2QF+lHxajaO6BbyzYO2PxDqZsQDXZcTi1Wulv+mAt/esL7C53u2V3v1k+rOuGtSFrH905u+9wWpN8bWo1/OwOn+j/Uf1b7V3Rvk385Bs7zCDqnWOOdMbrKhvgPLddE140X9g5nf2TKvyI6uje+gnVHTVYdTUWb20/1utVTn7Pm3bz6k2l3HEL0b9W0d8Xb2hhyi+jm93XsPqTeH7CH+sqRU9pxqf0rdZrjJvV1FdGsU3mpPlqNKPWg9Q+fP4UN8BGZm65sVX8QnLd8c3BfgY8af4afUtmOOIfEK5X9VnWAOj+1fe1AAvvigHut5LgJm3z/iLcoBzE7r7A5vbb9Q=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="312.5" y="448.5">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../obj/treasure.tx" x="224.254" y="272.356"/>
+  <object id="52" template="../obj/gold.tx" x="400.163" y="271.856"/>
+  <object id="56" template="../obj/enemy.tx" x="335.299" y="247.322">
+   <properties>
+    <property name="enemy" value="Monk"/>
+   </properties>
+  </object>
+  <object id="57" template="../obj/enemy.tx" x="287.308" y="247.989">
+   <properties>
+    <property name="enemy" value="Monk"/>
+   </properties>
+  </object>
+  <object id="58" template="../obj/enemy.tx" x="240.648" y="313.313">
+   <properties>
+    <property name="enemy" value="Monk"/>
+   </properties>
+  </object>
+  <object id="59" template="../obj/enemy.tx" x="384.126" y="314.313">
+   <properties>
+    <property name="enemy" value="Monk"/>
+   </properties>
+  </object>
+  <object id="60" template="../obj/enemy.tx" x="384.292" y="393.969">
+   <properties>
+    <property name="enemy" value="Monk"/>
+   </properties>
+  </object>
+  <object id="61" template="../obj/enemy.tx" x="240.648" y="393.969">
+   <properties>
+    <property name="enemy" value="Monk"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

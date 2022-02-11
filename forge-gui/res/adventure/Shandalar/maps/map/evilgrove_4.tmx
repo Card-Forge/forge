@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="62">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt2UEKwCAMRFG3hR6h5/H+RyouRDcWNCmZDPPAZUs+KEJbr1Iqydp1+pzVauaoeU6t5s3WsWLZW0g8zoqH5x7rRGTHPLtXRwSP+TuEs2FtaNThR/tqQOjwoA4s6sCiDhxMDerAwtKiDixsHdlb1IGFoaFh6GDZU406sKgDizrieP7njMTS0bF0zN+3M3fM1IFFHVjU4fsOK+s98ucdtPPurzs+23oBwepMug==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztmkEKhSAURRs0sKYRtdJ24foiajH/S0UWatDE6+UODgnW651MjUe2rir7Zzb7cWrC+H22voidn4oztPcYi7lyGNv4dU/8vEL9peE8ns+mRFJjVhIsHgILpveKwYNlPJzDZvLnIYQQb7j1atZ6BQPLPni65M5BHlweLPODxYMFjQUW+ibBoieoiTLBsn/IAwt5YCEPPOSBBYMHy/yQBxbywILJI3cO8oh7fPknLBXTb69HbabzagKuvZrw/UNxU/wAofCAsg==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJy9Wlty00AQVEIRy67KCcLrFuEn5Fb8mSi6RiBxToZJuAYPDVbjdnt2dlc2qGrKtizNbs97RurOmz9HP3y+WzTN7fD5ctY0N8NnN37vx8/b8dzD8P3HWdPc039GHV3H526Jz5vF5ty3dvP7a7v53w5ek/lgzRXRI63djfcbL8Pwab7lEdHDyKfk2hQZnreLzbr8PXX9l3H/Jr8P7UaG+G85yqoGA3jeF157TLJ1r9v/t97TsNb3f7BeStaw91+DrpojYng96HdZod9Svq8WafmcDvR5oLuBXhxhvZv51t9K7zE52j48Wdr+n0fZRHzN5sxv1HdMhzU+A3qT8VfQyShDo0tnfZYLjpSOOSamdPk80rHtHfL7eZaOfU+kh1w8y8nW4rwdF4Ft1hD0DF1bDE/FPo7HkW3cSt5J2TuO3uGFGBHZuIfByO5ZBffw3qNYZPnQckiENaeTq3YTIyxWrBKy1f2DzLYiu1I7TGE2+yuxF8bi+RpsPcLAcZPt6ipxn6f3S+da+JDZVg2WmrzAGDhuTomDJqv37a4+jI/ZPeqrKKbxPaUx1cOANabGc2BBXQL9gjdqzpr9lfyH/UKPrIuIB2qa3DXYv/Fdt9s4NFVG4Ks5hv25m29tN7cOXxvZ+JpyCuLu1PwS1QyRXUU82Q9rZDsVA3yM+xfPP1R2ObsC355iXFQfGvVSl2iuNeI8p7E7F8O8nIHzmjehO+j3YrHV8zqIc3/5NOk1katQR2rcA5ZIpx5PWxt585Gu4zzFNURKf8zHs2fOVYop14+dzPaxKh/02ujxPTvUGOetxflX9XEzxotnJ/96cdXj7eUrT8f3gR1Azx8LfF1rRE+3F4tdX0utq1hyekvxyfH2yGrE3vFz9HTAg+/9gevp9Zx3UrxK+Xv6h05hq/jOcXOKHBWD1lx6T0kvALt6DORVSojznmw9HBEG7B1zA45pHkGnd7MyzCmZIt6zP2lt7ul73e7r94T2jnlbqh8ABtTsGv9Kyda1Wsg7UrVUTq/oq3L7YZ2i3rF7rgM/g669nMCxXo/a+ohjXU6mWu+yf0S+annrbrZbn2isRw0FTF4e9nJkLSkG1BKaT6EztnHo27Bob6m4u/m+/7I8orlCCWk/Y+d6mpdoLFF/jXpwtTUvPsNmVg6W0vzD+ojsVn23tPcp8WO2f5MH96e2Ruls25tpdU4+17qktqcuyYdM6P/YBmptTWei7Lc6s6qJPZzLcr7g1XOHYtEYhPhTE0MxZ8rlsJQtwwZqcSwTOtFaq9S2pjyr0jxUq5PUbHdq7VdCOTywgRQWPG/gmfJpgCVlM6lez5t71uJQn4lmsDxTNuoDHIz3dObXnhobNO9MwQEsqb7fekQ8+4YfRvyBnZ9bq+1r/tRYzcT6PPSZJM+3MffJyaxkns7PSdDfq17Qu6O3OPQZvO4j6i9ztuDlHK8e4Nok9zytdN+az9m2gUdrxSlYop516rsEGk/sHNuU1lVerRjVZYxl3e73e8ewHfZBfcbXne/nb7UNxZ/TyyFxqgRDNE9WeabmkyV7Opb8PQwcD1kX2tt58Sc3mznWOx0p6py98P/m4zwv8fSi837GgTkxet4SuSKG5J4F8OwKNr92MID4vayO/B4xoB8/8d+SnjWg310RFu89MNu38THb6M53n+nZNcCDe5f03pjy5XfL+Pdv43yRrw==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="50" height="50">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzlWltOAzEM7Ed/OQr88BBQroaglAu2UAriMihClobBdhwnqZAYqVJ3N+t4veNHnF0sYtic/D53Af+f6fq9Mr4HONf5IJnbgbL+K3bKOY0r3vkMHkjWWpF9N246kyfI8+uB83lgXytA277RtWKri0UOr3Rc8+vbgMxtUheExrsePAW5afFg78h5TPJ+D/9bZSD3kS+a3TQ+9SJqz5HgmPBX0BMX2P/Yj6+SctlWwheW7/lZJMczb7Mxme3wmZQT5XprvNTiQnQujNeRe6I2vKHjS2WM5TN8r5W7tbzLeKkPGXrfiNyQ9atjYGScQ//Ed4m+LWNw3sIH1iOSo9iPPRQOahzYKPpoxxlo/pfJj54t2GckV67gnDz3Ac7hdQHak+Vq43uBcS4aI7VaYG28Q0btumbnbK2rzVXsy7HP0gnrWk2HaA2HNj5dfv/OlrG4LzpYubnVNijH8wO0Cetp1fu1WtnKOWxH1gvlemuNg3PNQraWr827o2uRWMa6aLrJ++M1YRY4R0u8lbEWh9DPZGxr/vf6C6i32Fgbv4a55bqcs+LAio49fBjnR6zPa/U463cAffhZNZ00Ha1nbumrRWrIAu/9ooxs3ZiBZvNNwEe4DvK409sv0ephtrmMiehe8F6ZU3yiyLtXakULUS7MQskdwt1oPGnpa/K71Phj1RESt6zeipfPuIbnWp7jMq9/rLgVQXmeWj8oU7uL7Vj33hwt/Rqv3urNp6P7l8eE1keIoLWXbCHbrxxt8319yA9YPoC+ZsW/mftUVs+efTL73lt926vnGeLrs3J+VO7MvCW8teoA7tUh5J5WrgpG7Gm11rbyvLP3Zns4o+mWyWFerpIcg3HT67+If7L/oF6Sx3tqyuxaZRYids/uF9SwNf57PjkLXj6N7se15sjMPh9yvtYPHr2nh3G6cOKYa8UIRn43o9muxAatd1/A9S7aqvdbCp6vtmaq8eKvxaAeSExv9aUZ30RpsluA8SPiu8KDbG3Oc1hrg6h9vgADRaam
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="48" template="../obj/treasure.tx" x="16.1667" y="769.917"/>
+  <object id="50" template="../obj/enemy.tx" x="33.1667" y="766.917">
+   <properties>
+    <property name="enemy" value="Black Wiz3"/>
+   </properties>
+  </object>
+  <object id="51" template="../obj/treasure.tx" x="544.166" y="128.5"/>
+  <object id="52" template="../obj/gold.tx" x="767.75" y="655.417"/>
+  <object id="53" template="../obj/enemy.tx" x="545.038" y="145.833">
+   <properties>
+    <property name="enemy" value="Rakdos Devil"/>
+   </properties>
+  </object>
+  <object id="54" template="../obj/enemy.tx" x="48.6666" y="336.167">
+   <properties>
+    <property name="enemy" value="Demon"/>
+   </properties>
+  </object>
+  <object id="55" template="../obj/enemy.tx" x="766.319" y="672.03">
+   <properties>
+    <property name="enemy" value="Ashmouth Devil"/>
+   </properties>
+  </object>
+  <object id="56" template="../obj/enemy.tx" x="438.667" y="631.667">
+   <properties>
+    <property name="enemy" value="Black Wiz2"/>
+   </properties>
+  </object>
+  <object id="57" template="../obj/enemy.tx" x="643.333" y="337.5">
+   <properties>
+    <property name="enemy" value="Hellhound"/>
+   </properties>
+  </object>
+  <object id="58" template="../obj/enemy.tx" x="357.333" y="380.667">
+   <properties>
+    <property name="enemy" value="Devil"/>
+   </properties>
+  </object>
+  <object id="59" template="../obj/enemy.tx" x="141" y="117.333">
+   <properties>
+    <property name="enemy" value="Ashmouth Devil"/>
+   </properties>
+  </object>
+  <object id="61" template="../obj/door_right.tx" x="0.333333" y="336.333"/>
+ </objectgroup>
+</map>

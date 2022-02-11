@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="55">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="55">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFowA3qOMeGHt38QyMvaNgFIyCUTDcAQBRIgFQ
+  </data>
+ </layer>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzF0zsOgkAQBuBJDCxSavQCJia2HsBjGbyKjzVexprO6GHE/QMTZlcKxR0s/oJQfDuvkohKkXlOtBvHz5r8THPffWQ6bmjjm+1PTduRb+0+747hLpP/uNekn/3rjC+G6GCGseVewT2Ztu7bQPsMb9+4eMPW/Z8o3XA4Xw7cmaIpXe4xgjmvlOfMLvoK+5m2vuaOSbdy5jGom3fsrrRnVerPWNrkUijUipxNtyvtWDVLF/1dOGOT1bHmfddGkezwfm1ztzKhHbNu5AW2HwRT
@@ -15,17 +20,12 @@
    eJy1lb1OwzAQxx3iOiV5hAo2FhhaRiQGEBMPwFMEnoCV52CrRCVgRozshCdA0BmxIWbuZJ98uV4SD+Gkv+Q0d/71PmIb07ad0oxi95kxD6BH0PvUC42vJfPJGjMbUc828jQu2cWkP5fb7U31Gd9P455tRb95pu/hXGTtZeNwud++9ZL2av8n36PM+50WXhr3DXRcRh3A8xxUuLYv7UHclP5SDOdjjUtQBVoEjgtr/H0Juq7azDG4mGvDVIX/QetD1pch7o3SQznPPKfGdgvZVOsh7lfeZiyU/tbwfAm6G+A2ofcy5765+oD1eqrXmaxOYCNXxmpcYs3KeF51cU+KzR6TVs7X5ErEUv0kd1c5j8kP4+i97DFxqP58rlLyRXsRc0R+eYjDmvAer8I3g/mj6N1SzJTcT9p5Huut+fGa1KGWaMQdsi7ud97e+2eSdsdgTil31+/APbMW5wjO+GeYPbozZM+03nWdR9z+AIO3jM0=
   </data>
  </layer>
- <layer id="3" name="Foreground" width="30" height="17">
+ <layer id="3" name="Clutter" width="30" height="17">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
    eJy1lTtOAzEQhieAREy8ZFuE6Ol4RSLUXIEKFA4AEi1spCQS4gIIzsCjouZ1CECUy1mY0dryrHds1gWfNLLHa+8/42fZBSjRfIasPsmq8tvrcy2MoT4nxr/vADwYe0RTaEvGyoBuiEkPYCrYrBcfR7Fw3VRWNcAR5v+inR2iv6br/TaFf4d09+fq/nqnWSddX4O3SWNiuv7ahSCNd+3mleb9zYvlvA9w0W+OXfZ0B6bdz1fi2cztK9q8qvuWG9S8FXSfUK8bWN+VharcUvHY23KZ1X0l6H4I40Kxc8oW+vZsSbo+UxbrOAco0A4WK5/qxHHufNvHMsvcvFm47leLeFMZBtpC+Q5Yne/xInc5ESOWJ0HtlPuI5SvBdXeE7z/sDmt7xmLsodYplmcQX1/StUaMc5eT9YmClQX7vpFwXxF8rT8h7e7+i5T7mfK9yuJ9pD20rZpt9D5pT1c6u/9Bm/NL8P1N8+6/uRI8/11wdwbtqzuj+wte+0UQ
-  </data>
- </layer>
- <layer id="5" name="AboveSprites" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -35,7 +35,7 @@
     <property name="teleport" value="maps/map/crypt_3.tmx"/>
    </properties>
   </object>
-  <object id="52" template="../obj/enemy.tx" x="239.909" y="90.5375">
+  <object id="52" template="../obj/enemy.tx" x="239.182" y="89.9011">
    <properties>
     <property name="enemy" value="Spider"/>
    </properties>

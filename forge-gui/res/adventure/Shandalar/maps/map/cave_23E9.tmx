@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="63">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAAAAMCXARkAAAE=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7C+M1f/cupjJJBeUlVVVVVV1UcHjs4f3w==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmH1ugzAMxfmTHGxd1YuWrbtVWcsxRkStPr065MPehCYiRQRonJ+dxI/0ELrusNe97vVf1s++6756vX2B+7V+v8n2PV+vYWGR9hiWdixyH1ni70d4fyrww1KPD4aScgVm7dk1+DJK7KSc5/v7fD/M14/++UzapT6MTpzvxDbBu1tYWKdHOzIKP/LGZ4Py/OQQP+TL2buFJ7+w38OrT8Jo5cO55dh5+GxZi7zuPOZCi+Fbow3es5586HurXfTRc27Z99b44Tqp9TGXi9H32jUouf8Cc6D5KAyoGXJlTdFYW2OI+QTzKest7h3RB0078DeiedHWkfrnYoh6uWY/9b6maH7k1pC1pHSjVPdyfKKpQ4VN1C3UDbEjusfcmp2a/CBjpGye+1fdarVpyV2YBzzsaTYt+Y81rmSd1OYIiwazr146wtppYRRfU2yYz0vH0NZNq0bF+V2LG+fZUlbr9wf2T/XV1ieyrnGufZfX8rG+sc7iODxvGqfHtyWvET5bamyYjzkni4/8TV6bR3PrOFW0Paj56H1ewDFQYzW91eYp9uez6ODEhmOwxkqbc23qXMs2/qrGfcT7wvs/AmtsJ4XT8zzlzbm1GDLnVmMoVWK4dT7Ltx3XH0mGOnQ=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt10kOgCAMQFE2ivH+N3A8pisSQ4wWKFTNf0uT1jJowTkA+JbeuoAbQ8N3rZlxXrUK1MAa/ddUMXdXMTfslfwXpLHLxbMWPTf0s6c9LB1Hbn+UONeg3fNbniFSbMr5RuV8wBu89fsN5oJYnxAfzwNnWpndugAgUvPOAlg4ADr+BvU=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="61" template="../obj/door_up.tx" x="321.655" y="638.393">
+   <properties>
+    <property name="teleport" value="maps/map/cave_23F9.tmx"/>
+    <property name="teleportObjectId" value="61"/>
+   </properties>
+  </object>
+  <object id="62" template="../obj/door_right.tx" x="2.95097" y="334.443">
+   <properties>
+    <property name="teleport" value="maps/map/cave_23E8.tmx"/>
+    <property name="teleportObjectId" value="62"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

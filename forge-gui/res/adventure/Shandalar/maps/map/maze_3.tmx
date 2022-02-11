@@ -31,7 +31,7 @@
   </object>
   <object id="48" template="../obj/treasure.tx" x="152" y="221.5"/>
   <object id="49" template="../obj/gold.tx" x="433.333" y="22.8333"/>
-  <object id="50" template="../obj/enemy.tx" x="151.417" y="262.083">
+  <object id="50" template="../obj/enemy.tx" x="148.917" y="263.083">
    <properties>
     <property name="enemy" value="Minotaur"/>
    </properties>

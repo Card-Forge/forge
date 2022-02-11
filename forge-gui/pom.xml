@@ -12,6 +12,10 @@
 
     <repositories>
         <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+        <repository>
             <id>4thline-repo</id>
             <url>http://4thline.org/m2</url>
             <snapshots>
@@ -56,6 +60,12 @@
             <groupId>org.lz4</groupId>
             <artifactId>lz4-java</artifactId>
             <version>1.7.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.raeleus.TenPatch</groupId>
+            <artifactId>tenpatch</artifactId>
+            <version>5.2.2</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

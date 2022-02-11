@@ -5,9 +5,9 @@
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Hidden Collision" width="30" height="17">
+ <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBjcQJaHgUGaB0KDAIwtzTO87Y3mhfCjeOlj7y4eCN4NtWcnD0JsOIJR/476dziBkeZfENiDVj7vpZNfZdHspXXZTAsAAE2UHQU=
+   eJxjYBjcQJaHgUGaB0KDAIwtzTMy7I3ipY+9u3ggeDfUnp08CLHhCEb9O+rf4QRGmn9BYA9a+byXTn6VRbOX1mUzLQAAu9ccxg==
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -39,14 +39,14 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="50" template="../obj/enemy.tx" x="207.902" y="73.0586">
+  <object id="50" template="../obj/enemy.tx" x="207.152" y="71.0586">
    <properties>
     <property name="enemy" value="White Wiz1"/>
    </properties>
   </object>
   <object id="65" template="../obj/treasure.tx" x="199.167" y="48.8333"/>
   <object id="66" template="../obj/gold.tx" x="216.501" y="48.2141"/>
-  <object id="67" template="../obj/enemy.tx" x="207.333" y="222.667">
+  <object id="67" template="../obj/enemy.tx" x="206.833" y="225.667">
    <properties>
     <property name="enemy" value="White Wiz1"/>
    </properties>

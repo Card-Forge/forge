@@ -31,6 +31,7 @@ public final class ForgeConstants {
     public static final String PROFILE_TEMPLATE_FILE = PROFILE_FILE + ".example";
 
     public static final String RES_DIR = ASSETS_DIR + "res" + PATH_SEPARATOR;
+    public static final String ADVENTURE_DIR = RES_DIR + "adventure" + PATH_SEPARATOR;
     public static final String LISTS_DIR = RES_DIR + "lists" + PATH_SEPARATOR;
     public static final String SETLOOKUP_DIR = RES_DIR + "setlookup" + PATH_SEPARATOR;
     public static final String KEYWORD_LIST_FILE                     = LISTS_DIR + "NonStackingKWList.txt";

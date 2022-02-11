@@ -3,6 +3,8 @@ package forge.adventure.editor;
 import forge.adventure.data.EnemyData;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 
 /**
@@ -42,15 +44,60 @@ public class EnemyEdit extends JComponent {
         add(rewards,BorderLayout.CENTER);
         add(preview,BorderLayout.LINE_START);
 
-        atlas.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(()->updateEnemy()));
-        nameField.getDocument().addDocumentListener(new DocumentChangeListener(()->updateEnemy()));
-        deck.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(()->updateEnemy()));
-        lifeFiled.addChangeListener(e -> updateEnemy());
-        speed.addChangeListener(e -> updateEnemy());
-        difficulty.addChangeListener(e -> updateEnemy());
-        spawnRate.addChangeListener(e -> updateEnemy());
-        rewards.addChangeListener(e -> updateEnemy());
-        lifeFiled.addChangeListener(e -> updateEnemy());
+        atlas.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(new Runnable() {
+            @Override
+            public void run() {
+                EnemyEdit.this.updateEnemy();
+            }
+        }));
+        nameField.getDocument().addDocumentListener(new DocumentChangeListener(new Runnable() {
+            @Override
+            public void run() {
+                EnemyEdit.this.updateEnemy();
+            }
+        }));
+        deck.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(new Runnable() {
+            @Override
+            public void run() {
+                EnemyEdit.this.updateEnemy();
+            }
+        }));
+        lifeFiled.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                EnemyEdit.this.updateEnemy();
+            }
+        });
+        speed.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                EnemyEdit.this.updateEnemy();
+            }
+        });
+        difficulty.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                EnemyEdit.this.updateEnemy();
+            }
+        });
+        spawnRate.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                EnemyEdit.this.updateEnemy();
+            }
+        });
+        rewards.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                EnemyEdit.this.updateEnemy();
+            }
+        });
+        lifeFiled.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                EnemyEdit.this.updateEnemy();
+            }
+        });
         refresh();
     }
 

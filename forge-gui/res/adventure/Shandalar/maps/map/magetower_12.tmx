@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="70">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBg8IJqXgWEXDyqO4sUujg2D1JIDZHkwxXYCxXZjEccGpIlUhw72AvXVc6OK1XJjilHbXmLDExlTw15s4UwKGEn2gtLBHirYK01iPFMrH5ETZtQI55FsL764pra95JhHC3uJKSspKZ/ruDExKF/C3FSLRR5ZHTkAX96E2UsoXxMCAC9+QjQ=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxr4mZgaBrFFOFfXMPH3oHyy2DGo/E7vPBMzoF3w0jCC9gReNRe8rEMD34+KRgAjBcb9Q==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzbwcPAsIMOWAYNY1NzmYlyTI69ZkB9pIK1LBD8i4uBYRHn0LIXX/gxc2IXB9kHwjD7qe1fkNm4xGlp70xO2oXzQNpbwQ3BJkTGL7XzkQma33HFLzIwoZO9XGhhTwt7sQERFtraix7XyLiJG4GpYS9yuOLzO8g+Tk5ImHNROR8Rsnc50L4VnOT7dzojAoPyJIyNbi+yOhAG2Qtjk2MvuhoYRrcXFC641BIyEwAw/uG+
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBg8wIyJNHF0YEKkOmqA5ZzUsVeCjf724gvPyzjkqOVfUgGt7eXixC4+1P0LMmclFr/hil9kQE//0hq4cQ20C0YBDAy1dIVcTk5nxM7GBmDyg9m/APFuDHI=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="208" y="271">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../obj/treasure.tx" x="95.6663" y="41.1666"/>
+  <object id="50" template="../obj/enemy.tx" x="168.277" y="57.2669">
+   <properties>
+    <property name="enemy" value="Blue Wiz1"/>
+   </properties>
+  </object>
+  <object id="62" template="../obj/gold.tx" x="96.6667" y="51.3333"/>
+  <object id="64" template="../obj/door_down.tx" x="296.5" y="120">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_12.tmx"/>
+    <property name="teleportObjectId" value="65"/>
+   </properties>
+  </object>
+  <object id="65" template="../obj/door_down.tx" x="271.333" y="190.667">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_12.tmx"/>
+    <property name="teleportObjectId" value="64"/>
+   </properties>
+  </object>
+  <object id="66" template="../obj/door_down.tx" x="128" y="224.667">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_12.tmx"/>
+    <property name="teleportObjectId" value="64"/>
+   </properties>
+  </object>
+  <object id="67" template="../obj/door_down.tx" x="322.167" y="54.833">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_12.tmx"/>
+    <property name="teleportObjectId" value="64"/>
+   </properties>
+  </object>
+  <object id="68" template="../obj/door_down.tx" x="192.5" y="96">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_12.tmx"/>
+    <property name="teleportObjectId" value="64"/>
+   </properties>
+  </object>
+  <object id="69" template="../obj/door_down.tx" x="327.667" y="225.333">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_12.tmx"/>
+    <property name="teleportObjectId" value="64"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

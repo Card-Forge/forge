@@ -20,7 +20,7 @@
    eJzNlF0KwjAQhBd/MMHmFJ7FID2TeB2r9VZq7buvRcyQLE3rg9a1wcJAaENnv91JrCayf6yjIiqdTqq7Htu3yYhWS6KzW1+d7gu/LlWrX9cBPnitiWhrvD9r777dtFct7GW/9srpoDwjP+wLZgknM+HfO9P2kOeJb/GDPdgL3m85oY329aOX+FehPGM8T2Zkv6nznhvZDCv9Oqf4HWqApw28+cg5hh6ZZ+YMoYYUvjyDPMqBNE+f5Bs+nLWYW5Knd5ycIc6ZNL9Dslb3+jsRZniIZqZ7ti5Bqe5p9J7CGec7LFW2bTi/mEORYN4xr5TxCQ2BzIk=
   </data>
  </layer>
- <layer id="3" name="Foreground" width="30" height="17">
+ <layer id="3" name="Clutter" width="30" height="17">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>

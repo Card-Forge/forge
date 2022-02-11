@@ -7,7 +7,7 @@
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgF2IA0D3ZxWRzio2Dwgl08mDiKl4EhmhdVHboYsvpRMLjBXjLjaA8FcYueNpDTFba0hi0djoKhB9DrAFx1BbUAtnRDaToCACCuGxY=
+   eJxjYBgF2IA0D3ZxWRzio2Dwgl08mDiKl4Ehmhe7GDZ9o2Bwg71kxtEeCuIWPW0QSlfY0uEoGHoAvQ7AVVdQC2BLN5SmIwCfVx1o
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">

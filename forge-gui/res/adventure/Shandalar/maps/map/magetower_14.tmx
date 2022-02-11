@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="66">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwWAFu3ggmJAYsQAA2igDGQ==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxr4mZgaBrFo3gUj+JRPIpH8YjAAJnxGPY=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzN1G0KgCAMBmD/myewLlZnqa7V590yYjBkzW1INBhBNR/fCJfGueWDbrOWzAzBua157z7Uc+H5be7pytUqsDV5c5PKKrWlriSnJrfEtZglW+J2RhMqGvNy/y7sKRbeq50Xu7Xz/tGVlNU9U8/eZo5p7jC6LWNz3xlMal3NOUnZby5nas9Jyqbckql1sT35p7EL90qmxc1nsKvdP+4Lkd3cuQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFIxm0UVndKEAAWR7K9EtTqB8doMfhaJwOfTCaf0cBOQAADEIDdQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="208.333" y="270.665">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="65" template="../obj/enemy.tx" x="208.065" y="45.9508">
+   <properties>
+    <property name="enemy" value="Mimic"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

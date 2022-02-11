@@ -5,7 +5,17 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
+import com.badlogic.gdx.utils.ScreenUtils;
+import forge.adventure.scene.ForgeScene;
+import forge.adventure.scene.Scene;
+import forge.adventure.scene.SceneType;
+import forge.adventure.util.Config;
 import forge.animation.ForgeAnimation;
 import forge.assets.AssetsDownloader;
 import forge.assets.FSkin;
@@ -40,6 +50,13 @@ public class Forge implements ApplicationListener {
     public static final String CURRENT_VERSION = "1.6.47.001";
 
     private static ApplicationListener app = null;
+    static Scene currentScene = null;
+    static Array<Scene> lastScene = new Array<>();
+    private float animationTimeout;
+    static Batch animationBatch;
+    static Texture transitionTexture;
+    static TextureRegion lastScreenTexture;
+    private static boolean sceneWasSwapped =false;
     private static Clipboard clipboard;
     private static IDeviceAdapter deviceAdapter;
     private static int screenWidth;
@@ -71,6 +88,7 @@ public class Forge implements ApplicationListener {
     public static boolean isPortraitMode = false;
     public static boolean gameInProgress = false;
     public static boolean disposeTextures = false;
+    public static boolean isMobileAdventureMode = false;
     public static int cacheSize = 400;
     public static int totalDeviceRAM = 0;
     public static int androidVersion = 0;
@@ -97,21 +115,6 @@ public class Forge implements ApplicationListener {
         GuiBase.setDeviceInfo(deviceName, AndroidRelease, AndroidAPI, totalRAM);
         return app;
     }
-    protected Forge(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
-        if (GuiBase.getInterface() == null) {
-            clipboard = clipboard0;
-            deviceAdapter = deviceAdapter0;
-            GuiBase.setUsingAppDirectory(assetDir0.contains("forge.app")); //obb directory on android uses the package name as entrypoint
-            GuiBase.setInterface(new GuiMobile(assetDir0));
-            GuiBase.enablePropertyConfig(value);
-            isPortraitMode = androidOrientation;
-            totalDeviceRAM = totalRAM;
-            isTabletDevice = isTablet;
-            androidVersion = AndroidAPI;
-        }
-        GuiBase.setDeviceInfo(deviceName, AndroidRelease, AndroidAPI, totalRAM);
-        app=this;
-    }
     private Forge() {
     }
 
@@ -132,6 +135,8 @@ public class Forge implements ApplicationListener {
         graphics = new Graphics();
         splashScreen = new SplashScreen();
         frameRate = new FrameRate();
+        animationBatch = new SpriteBatch();
+
         Gdx.input.setInputProcessor(new MainInputProcessor());
         /*
          Set CatchBackKey here and exit the app when you hit the
@@ -222,6 +227,14 @@ public class Forge implements ApplicationListener {
         });
     }
 
+    public static Graphics getGraphics() {
+        return graphics;
+    }
+
+    public static Scene getCurrentScene() {
+        return currentScene;
+    }
+
     private void preloadExtendedArt() {
         if (!enablePreloadExtendedArt||!enableUIMask.equals("Full"))
             return;
@@ -252,30 +265,52 @@ public class Forge implements ApplicationListener {
         /*for (FScreen fScreen : Dscreens)
             System.out.println(fScreen.toString());*/
     }
-
+    public static void openHomeDefault() {
+        GuiBase.setIsAdventureMode(false);
+        openHomeScreen(-1, null); //default for startup
+        splashScreen = null;
+        isMobileAdventureMode = false;
+        if (isLandscapeMode()) { //open preferred new game screen by default if landscape mode
+            NewGameMenu.getPreferredScreen().open();
+        }
+    }
+    public static void openAdventure() {
+        //continuous rendering is needed for adventure mode
+        startContinuousRendering();
+        GuiBase.setIsAdventureMode(true);
+        splashScreen = null;
+        isMobileAdventureMode = true;
+        try {
+            for (SceneType sceneType : SceneType.values()) {
+                sceneType.instance.resLoaded();
+            }
+            switchScene(SceneType.StartScene.instance);
+        } catch (Exception e) { e.printStackTrace(); }
+    }
     protected void afterDbLoaded() {
         stopContinuousRendering(); //save power consumption by disabling continuous rendering once assets loaded
+        //init here to fix crash if the assets are missings on android
+        transitionTexture =  new Texture(Config.instance().getFile("ui/transition.png"));
 
         FSkin.loadFull(splashScreen);
 
         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
         destroyThis = false; //Allow back()
         Gdx.input.setCatchKey(Keys.MENU, true);
-        openHomeScreen(-1, null); //default for startup
-        splashScreen = null;
-        afterDBloaded = true;
 
-        boolean isLandscapeMode = isLandscapeMode();
-        if (isLandscapeMode) { //open preferred new game screen by default if landscape mode
-            NewGameMenu.getPreferredScreen().open();
-        }
+        afterDBloaded = true;
+        //selection
+        if (isLandscapeMode() && !GuiBase.isAndroid())
+            splashScreen.setShowModeSelector(true);
+        else
+            openHomeDefault();
 
         //adjust height modifier
         adjustHeightModifier(getScreenWidth(), getScreenHeight());
 
         //update landscape mode preference if it doesn't match what the app loaded as
-        if (FModel.getPreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE) != isLandscapeMode) {
-            FModel.getPreferences().setPref(FPref.UI_LANDSCAPE_MODE, isLandscapeMode);
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE) != isLandscapeMode()) {
+            FModel.getPreferences().setPref(FPref.UI_LANDSCAPE_MODE, isLandscapeMode());
             FModel.getPreferences().save();
         }
     }
@@ -488,6 +523,9 @@ public class Forge implements ApplicationListener {
         return currentScreen;
     }
 
+    public static void clearCurrentScreen() {
+        currentScreen = null;
+    }
     private static void setCurrentScreen(FScreen screen0) {
         String toNewScreen = screen0 != null ? screen0.toString() : "";
         String previousScreen = currentScreen != null ? currentScreen.toString() : "";
@@ -526,7 +564,61 @@ public class Forge implements ApplicationListener {
             FContainer screen = currentScreen;
             if (screen == null) {
                 screen = splashScreen;
-                if (screen == null) { 
+                if (screen == null) {
+                    if (isMobileAdventureMode) {
+                        float delta=Gdx.graphics.getDeltaTime();
+                        float transitionTime = 0.2f;
+                        if(sceneWasSwapped)
+                        {
+                            sceneWasSwapped =false;
+                            animationTimeout= transitionTime;
+                            Gdx.gl.glClearColor(0, 0, 0, 1);
+                            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                            return;
+                        }
+                        if(animationTimeout>=0)
+                        {
+                            Gdx.gl.glClearColor(0, 0, 0, 1);
+                            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                            animationBatch.begin();
+                            animationTimeout-=delta;
+                            animationBatch.setColor(1,1,1,1);
+                            animationBatch.draw(lastScreenTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                            animationBatch.setColor(1,1,1,1-(1/ transitionTime)*animationTimeout);
+                            animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                            animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                            animationBatch.end();
+                            if(animationTimeout<0)
+                            {
+                                currentScene.render();
+                                storeScreen();
+                                Gdx.gl.glClearColor(0, 0, 0, 1);
+                                Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                            }
+                            else
+                            {
+                                return;
+                            }
+                        }
+                        if(animationTimeout>=-transitionTime)
+                        {
+                            Gdx.gl.glClearColor(0, 0, 0, 1);
+                            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                            animationBatch.begin();
+                            animationTimeout-=delta;
+                            animationBatch.setColor(1,1,1,1);
+                            animationBatch.draw(lastScreenTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                            animationBatch.setColor(1,1,1,(1/ transitionTime)*(animationTimeout+ transitionTime));
+                            animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                            animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                            animationBatch.end();
+                            return;
+                        }
+                        currentScene.render();
+                        currentScene.act(delta);
+                    }
+                    if (showFPS)
+                        frameRate.render();
                     return;
                 }
             }
@@ -534,7 +626,7 @@ public class Forge implements ApplicationListener {
             graphics.begin(screenWidth, screenHeight);
             screen.screenPos.setSize(screenWidth, screenHeight);
             if (screen.getRotate180()) {
-                graphics.startRotateTransform(screenWidth / 2, screenHeight / 2, 180);
+                graphics.startRotateTransform(screenWidth / 2f, screenHeight / 2f, 180);
             }
             screen.draw(graphics);
             if (screen.getRotate180()) {
@@ -545,7 +637,7 @@ public class Forge implements ApplicationListener {
                     overlay.screenPos.setSize(screenWidth, screenHeight);
                     overlay.setSize(screenWidth, screenHeight); //update overlay sizes as they're rendered
                     if (overlay.getRotate180()) {
-                        graphics.startRotateTransform(screenWidth / 2, screenHeight / 2, 180);
+                        graphics.startRotateTransform(screenWidth / 2f, screenHeight / 2f, 180);
                     }
                     overlay.draw(graphics);
                     if (overlay.getRotate180()) {
@@ -615,6 +707,43 @@ public class Forge implements ApplicationListener {
         catch (Exception e) {}
     }
 
+    public static boolean switchScene(Scene newScene) {
+
+        if (currentScene != null) {
+            if (!currentScene.leave())
+                return false;
+            lastScene.add(currentScene);
+        }
+        storeScreen();
+        sceneWasSwapped =true;
+        currentScene = newScene;
+        currentScene.enter();
+        return true;
+    }
+
+    protected static void storeScreen() {
+        if(!(currentScene instanceof ForgeScene))
+        {
+            if(lastScreenTexture!=null)
+                lastScreenTexture.getTexture().dispose();
+            lastScreenTexture = ScreenUtils.getFrameBufferTexture();
+        }
+
+
+    }
+    public static Scene switchToLast() {
+
+        if(lastScene.size!=0)
+        {
+            storeScreen();
+            currentScene = lastScene.get(lastScene.size-1);
+            currentScene.enter();
+            sceneWasSwapped =true;
+            lastScene.removeIndex(lastScene.size-1);
+            return currentScene;
+        }
+        return null;
+    }
     //log message to Forge.log file
     public static void log(Object message) {
         System.out.println(message);
@@ -769,6 +898,9 @@ public class Forge implements ApplicationListener {
             }
             if (currentScreen != null) {
                 currentScreen.buildTouchListeners(x, y, potentialListeners);
+            }
+            if (splashScreen != null) {
+                splashScreen.buildTouchListeners(x, y, potentialListeners);
             }
         }
 

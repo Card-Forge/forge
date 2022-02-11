@@ -7,7 +7,7 @@
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJyL5mVg2MVDXxwFtFMWSNMbSPOM2kuMHlg8ketmUuzdhUcdPjlK7UXWQ0//DrS91ABDwd6BTlfUAKP24gfo8UhqvJJrL7UAchlALIa5kxy9yBgAQ0U6kg==
+   eJyL5mVg2MVDXxwFtFMWSNMbSPOM2ksMgMUTPezFZw+pbiDHv9JI6ZLcOBpK9lIDDAV7BzpdUQOM2osfoMcjuWXWQPqX1LoT5k5y9CJjAGyrOkI=
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -34,18 +34,18 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="50" template="../obj/enemy.tx" x="232.333" y="95.1667">
+  <object id="50" template="../obj/enemy.tx" x="232.333" y="90.2576">
    <properties>
     <property name="enemy" value="Cat"/>
    </properties>
   </object>
-  <object id="51" template="../obj/treasure.tx" x="216.333" y="98.5"/>
+  <object id="51" template="../obj/treasure.tx" x="216.151" y="95.0455"/>
   <object id="53" template="../obj/enemy.tx" x="207.833" y="225.167">
    <properties>
     <property name="enemy" value="Cat"/>
    </properties>
   </object>
-  <object id="54" template="../obj/enemy.tx" x="200.167" y="95.6663">
+  <object id="54" template="../obj/enemy.tx" x="200.167" y="90.7572">
    <properties>
     <property name="enemy" value="Cat"/>
    </properties>
