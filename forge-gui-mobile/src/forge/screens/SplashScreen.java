@@ -88,8 +88,9 @@ public class SplashScreen extends FContainer {
                 percentage = 1;
             }
             if (nobg) {
-                float scale = 1.3f+(percentage*0.7f);
-                float hscale = 1.5f+(percentage*0.9f);
+                float xmod = Forge.getScreenHeight() > 1000 ? 1.5f : Forge.getScreenHeight() > 800 ? 1.3f : 1f;
+                float scale = xmod > 1f ? xmod+(percentage*0.7f) : 0.7f+(percentage*0.7f);
+                float hscale = xmod > 1f ? xmod+0.2f+(percentage*0.9f) : 0.9f+(percentage*0.9f);
                 float logoHeight = FSkin.hdLogo.getHeight()*scale;
                 float logoWidth = FSkin.hdLogo.getWidth()*scale;
                 float logoY = getHeight()/2 - logoHeight/hscale;
@@ -147,7 +148,8 @@ public class SplashScreen extends FContainer {
             x = (getWidth() - w) / 2;
         }
         if (FSkin.hdLogo != null) {
-            g.drawImage(FSkin.hdLogo, getWidth()/2 - (FSkin.hdLogo.getWidth()*1.3f)/2, getHeight()/2 - (FSkin.hdLogo.getHeight()*1.3f)/1.5f, FSkin.hdLogo.getWidth()*1.3f, FSkin.hdLogo.getHeight()*1.3f);
+            float xmod = Forge.getScreenHeight() > 1000 ? 1.5f : Forge.getScreenHeight() > 800 ? 1.3f : 1f;
+            g.drawImage(FSkin.hdLogo, getWidth()/2 - (FSkin.hdLogo.getWidth()*xmod)/2, getHeight()/2 - (FSkin.hdLogo.getHeight()*xmod)/1.5f, FSkin.hdLogo.getWidth()*xmod, FSkin.hdLogo.getHeight()*xmod);
         } else {
             g.drawImage(background, x, y, w, h);
         }
