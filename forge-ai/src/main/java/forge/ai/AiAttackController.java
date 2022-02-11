@@ -728,10 +728,6 @@ public class AiAttackController {
         // because creatures not chosen can't attack.
         if (!nextTurn) {
             for (final Card attacker : this.attackers) {
-                if (!CombatUtil.canAttack(attacker, defender)) {
-                    attackersLeft.remove(attacker);
-                    continue;
-                }
                 boolean mustAttack = false;
                 // TODO this might result into trying to attack the wrong player
                 if (attacker.isGoaded()) {
