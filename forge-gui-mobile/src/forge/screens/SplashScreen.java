@@ -21,7 +21,7 @@ public class SplashScreen extends FContainer {
     private TextureRegion background;
     private final FProgressBar progressBar;
     private FSkinFont disclaimerFont;
-    private boolean preparedForDialogs, showModeSelector, init, nobg;
+    private boolean preparedForDialogs, showModeSelector, init, animateLogo;
     private FButton btnAdventure, btnHome;
     private BGAnimation bgAnimation;
 
@@ -87,7 +87,8 @@ public class SplashScreen extends FContainer {
             } else if (percentage > 1) {
                 percentage = 1;
             }
-            if (nobg) {
+            if (animateLogo) {
+                g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, getWidth(), getHeight());
                 float xmod = Forge.getScreenHeight() > 1000 ? 1.5f : Forge.getScreenHeight() > 800 ? 1.3f : 1f;
                 float scale = xmod > 1f ? xmod+(percentage*0.7f) : 0.7f+(percentage*0.7f);
                 float hscale = xmod > 1f ? xmod+0.2f+(percentage*0.9f) : 0.9f+(percentage*0.9f);
@@ -114,7 +115,7 @@ public class SplashScreen extends FContainer {
 
         @Override
         protected void onEnd(boolean endingAll) {
-            if (nobg) {
+            if (animateLogo) {
                 if (openAdventure)
                     Forge.openAdventure();
                 else
@@ -168,7 +169,7 @@ public class SplashScreen extends FContainer {
                     else {
                         btnAdventure.setVisible(false);
                         btnHome.setVisible(false);
-                        nobg = true;
+                        animateLogo = true;
                         bgAnimation.progress = 0;
                         bgAnimation.openAdventure = true;
                     }
@@ -182,7 +183,7 @@ public class SplashScreen extends FContainer {
                     else {
                         btnAdventure.setVisible(false);
                         btnHome.setVisible(false);
-                        nobg = true;
+                        animateLogo = true;
                         bgAnimation.progress = 0;
                         bgAnimation.openAdventure = false;
                     }
