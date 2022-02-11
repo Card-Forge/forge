@@ -162,7 +162,7 @@ public class FDeckChooser extends FScreen {
                         && selectedDeckType != DeckType.VINTAGE_CARDGEN_DECK && selectedDeckType != DeckType.MODERN_COLOR_DECK &&
                         selectedDeckType != DeckType.COLOR_DECK && selectedDeckType != DeckType.THEME_DECK
                         && selectedDeckType != DeckType.RANDOM_COMMANDER_DECK && selectedDeckType != DeckType.RANDOM_CARDGEN_COMMANDER_DECK) {
-                    FDeckViewer.show(getDeck());
+                    FDeckViewer.show(getDeck(), false, DeckType.DRAFT_DECK.equals(selectedDeckType));
                 }
             }
         });

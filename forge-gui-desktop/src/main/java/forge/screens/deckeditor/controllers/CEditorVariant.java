@@ -70,8 +70,8 @@ public final class CEditorVariant extends CDeckEditor<Deck> {
         this.cardPoolCondition = poolCondition;
         this.sectionMode = deckSection0;
 
-        final CardManager catalogManager = new CardManager(cDetailPicture0, true, false);
-        final CardManager deckManager = new CardManager(cDetailPicture0, false, false);
+        final CardManager catalogManager = new CardManager(cDetailPicture0, true, false, false);
+        final CardManager deckManager = new CardManager(cDetailPicture0, false, false, false);
         deckManager.setAlwaysNonUnique(true);
 
         final Localizer localizer = Localizer.getInstance();

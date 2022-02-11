@@ -422,6 +422,13 @@ public enum FSkinProp {
     IMG_WATERMARK_W (new int[] {2, 1006, 500, 500}, PropType.WATERMARKS),
     IMG_WATERMARK_C (new int[] {504, 1006, 500, 500}, PropType.WATERMARKS),
 
+    //FOR DRAFT RANKING
+    IMG_DRAFTRANK_D (new int[] {2, 2, 240, 240}, PropType.DRAFTRANKS),
+    IMG_DRAFTRANK_C (new int[] {244, 2, 240, 240}, PropType.DRAFTRANKS),
+    IMG_DRAFTRANK_B (new int[] {2, 244, 240, 240}, PropType.DRAFTRANKS),
+    IMG_DRAFTRANK_A (new int[] {244, 244, 240, 240}, PropType.DRAFTRANKS),
+    IMG_DRAFTRANK_S (new int[] {2, 486, 240, 240}, PropType.DRAFTRANKS),
+
     //FOR CARDBG
     IMG_CARDBG_A (new int[] {2, 2, 339, 496}, PropType.CARDBG),
     IMG_CARDBG_B (new int[] {343, 2, 339, 496}, PropType.CARDBG),
@@ -574,6 +581,7 @@ public enum FSkinProp {
         DECKBOX,
         SETLOGO,
         WATERMARKS,
+        DRAFTRANKS,
         CARDBG,
         FAVICON
     }

@@ -71,10 +71,13 @@ public class BoosterDraft implements IBoosterDraft {
     private int packsInDraft;
 
     private final Map<String, Float> draftPicks = new TreeMap<>();
+    static final List<CustomLimited> customs = new ArrayList<>();
     protected LimitedPoolType draftFormat;
 
     protected final List<Supplier<List<PaperCard>>> product = new ArrayList<>();
-
+    public static void initializeCustomDrafts() {
+        loadCustomDrafts();
+    }
     public static BoosterDraft createDraft(final LimitedPoolType draftType) {
         final BoosterDraft draft = new BoosterDraft(draftType);
         if (!draft.generateProduct()) {
@@ -297,25 +300,26 @@ public class BoosterDraft implements IBoosterDraft {
      * Looks for draft files, reads them, returns a list.
      */
     private static List<CustomLimited> loadCustomDrafts() {
-        String[] dList;
-        final List<CustomLimited> customs = new ArrayList<>();
+        if (customs.isEmpty()) {
+            String[] dList;
 
-        // get list of custom draft files
-        final File dFolder = new File(ForgeConstants.DRAFT_DIR);
-        if (!dFolder.exists()) {
-            throw new RuntimeException("BoosterDraft : folder not found -- folder is " + dFolder.getAbsolutePath());
-        }
+            // get list of custom draft files
+            final File dFolder = new File(ForgeConstants.DRAFT_DIR);
+            if (!dFolder.exists()) {
+                throw new RuntimeException("BoosterDraft : folder not found -- folder is " + dFolder.getAbsolutePath());
+            }
 
-        if (!dFolder.isDirectory()) {
-            throw new RuntimeException("BoosterDraft : not a folder -- " + dFolder.getAbsolutePath());
-        }
+            if (!dFolder.isDirectory()) {
+                throw new RuntimeException("BoosterDraft : not a folder -- " + dFolder.getAbsolutePath());
+            }
 
-        dList = dFolder.list();
+            dList = dFolder.list();
 
-        for (final String element : dList) {
-            if (element.endsWith(FILE_EXT)) {
-                final List<String> dfData = FileUtil.readFile(ForgeConstants.DRAFT_DIR + element);
-                customs.add(CustomLimited.parse(dfData, FModel.getDecks().getCubes()));
+            for (final String element : dList) {
+                if (element.endsWith(FILE_EXT)) {
+                    final List<String> dfData = FileUtil.readFile(ForgeConstants.DRAFT_DIR + element);
+                    customs.add(CustomLimited.parse(dfData, FModel.getDecks().getCubes()));
+                }
             }
         }
         return customs;

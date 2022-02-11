@@ -34,8 +34,8 @@ public class CardManager extends ItemManager<PaperCard> {
     
     private boolean QuestMode;
 
-    public CardManager(final CDetailPicture cDetailPicture, final boolean wantUnique0, final boolean qm) {
-        super(PaperCard.class, cDetailPicture, wantUnique0);
+    public CardManager(final CDetailPicture cDetailPicture, final boolean wantUnique0, final boolean qm, boolean sr) {
+        super(PaperCard.class, cDetailPicture, wantUnique0, sr);
         QuestMode = qm;
     }
 

@@ -73,6 +73,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     private boolean alwaysNonUnique = false;
     private boolean allowMultipleSelections = false;
     private boolean hideFilters = false;
+    private boolean showRanking = false;
     private UiCommand itemActivateCommand;
     private ContextMenuBuilder contextMenuBuilder;
     private final Class<T> genericType;
@@ -125,7 +126,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     /**
      * ItemManager Constructor
      */
-    protected ItemManager(final Class<T> genericType0, final CDetailPicture cDetailPicture, final boolean wantUnique0) {
+    protected ItemManager(final Class<T> genericType0, final CDetailPicture cDetailPicture, final boolean wantUnique0, final boolean showRanking) {
+        this.showRanking  = showRanking;
         this.cDetailPicture = cDetailPicture;
         this.genericType = genericType0;
         this.wantUnique = wantUnique0;
@@ -143,7 +145,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     protected ImageView<T> createImageView(final ItemManagerModel<T> model0) {
-        return new ImageView<>(this, model0);
+        return new ImageView<>(this, model0, this.showRanking);
     }
 
     public final CDetailPicture getCDetailPicture() {

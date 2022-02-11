@@ -125,6 +125,13 @@ public enum FSkinImage implements FImage {
     WATERMARK_W    (FSkinProp.IMG_WATERMARK_W, SourceFile.WATERMARKS),
     WATERMARK_C    (FSkinProp.IMG_WATERMARK_C, SourceFile.WATERMARKS),
 
+    //draft ranks
+    DRAFTRANK_D (FSkinProp.IMG_DRAFTRANK_D, SourceFile.DRAFTRANKS),
+    DRAFTRANK_C (FSkinProp.IMG_DRAFTRANK_C, SourceFile.DRAFTRANKS),
+    DRAFTRANK_B (FSkinProp.IMG_DRAFTRANK_B, SourceFile.DRAFTRANKS),
+    DRAFTRANK_A (FSkinProp.IMG_DRAFTRANK_A, SourceFile.DRAFTRANKS),
+    DRAFTRANK_S (FSkinProp.IMG_DRAFTRANK_S, SourceFile.DRAFTRANKS),
+
     //CardBG
     CARDBG_A       (FSkinProp.IMG_CARDBG_A, SourceFile.CARDBG),
     CARDBG_B       (FSkinProp.IMG_CARDBG_B, SourceFile.CARDBG),
@@ -497,6 +504,7 @@ public enum FSkinImage implements FImage {
         PHYREXIAN(ForgeConstants.SPRITE_PHYREXIAN_FILE),
         SETLOGOS(ForgeConstants.SPRITE_SETLOGO_FILE),
         WATERMARKS(ForgeConstants.SPRITE_WATERMARK_FILE),
+        DRAFTRANKS(ForgeConstants.SPRITE_DRAFTRANKS_FILE),
         CRACKS(ForgeConstants.SPRITE_CRACKS_FILE),
         CARDBG(ForgeConstants.SPRITE_CARDBG_FILE),
         PLANAR_CONQUEST(ForgeConstants.SPRITE_PLANAR_CONQUEST_FILE);

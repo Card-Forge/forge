@@ -595,13 +595,17 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("lblShowCardIDOverlays"),
                 localizer.getMessage("nlShowCardIDOverlays")),
                 5);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_DRAFT_RANKING,
+                localizer.getMessage("lblShowDraftRankingOverlay"),
+                localizer.getMessage("nlShowDraftRankingOverlay")),
+                5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_ABILITY_ICONS,
                 localizer.getMessage("lblShowAbilityIconsOverlays"),
                 localizer.getMessage("nlShowAbilityIconsOverlays")),
                 5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_USE_LASER_ARROWS,
-                        localizer.getMessage("lblUseLaserArrows"),
-                        localizer.getMessage("nlUseLaserArrows")),
+                localizer.getMessage("lblUseLaserArrows"),
+                localizer.getMessage("nlUseLaserArrows")),
                 5);
         //Vibration Options
         lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LIFE_LOSS,

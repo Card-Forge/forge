@@ -22,6 +22,7 @@ import forge.assets.FSkin;
 import forge.assets.FSkinFont;
 import forge.assets.ImageCache;
 import forge.error.ExceptionHandler;
+import forge.gamemodes.limited.BoosterDraft;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.error.BugReporter;
@@ -221,6 +222,7 @@ public class Forge implements ApplicationListener {
                         /*  call preloadExtendedArt here, if we put it above we will  *
                          *  get error: No OpenGL context found in the current thread. */
                         preloadExtendedArt();
+                        preloadBoosterDrafts();
                     }
                 });
             }
@@ -250,7 +252,10 @@ public class Forge implements ApplicationListener {
         if (!filteredkeys.isEmpty())
             ImageCache.preloadCache(filteredkeys);
     }
-
+    private void preloadBoosterDrafts() {
+        //preloading of custom drafts
+        BoosterDraft.initializeCustomDrafts();
+    }
     public static void openHomeScreen(int index, FScreen lastMatch) {
         openScreen(HomeScreen.instance);
         HomeScreen.instance.openMenu(index);
