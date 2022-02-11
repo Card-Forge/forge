@@ -743,10 +743,13 @@ public class AiAttackController {
                 } else {
                     // TODO move to static Ability
                     if (attacker.hasKeyword("CARDNAME attacks each combat if able.") || attacker.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
+                        // TODO switch defender if there's one without a cost or it's not the specific player
+                        mustAttack = true;
+                    } else if (attacker.getController().getMustAttackEntityThisTurn() != null && CombatUtil.getAttackCost(ai.getGame(), attacker, defender) == null) {
                         mustAttack = true;
                     }
                 }
-                if (mustAttack ||attacker.getController().getMustAttackEntityThisTurn() != null) {
+                if (mustAttack) {
                     combat.addAttacker(attacker, defender);
                     attackersLeft.remove(attacker);
                     numForcedAttackers++;
