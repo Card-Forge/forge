@@ -3253,6 +3253,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return view.mayPlayerLook(player.getView());
     }
 
+    public final void addMayLookFaceDownExile(final Player p) {
+        mayLookFaceDownExile.add(p);
+        updateMayLook();
+    }
+
     public final void addMayLookAt(final long timestamp, final Iterable<Player> list) {
         PlayerCollection plist = new PlayerCollection(list);
         mayLook.put(timestamp, plist);

@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Enchantment Saga
 K:Saga:3:DBHatching,DBHatching,DBTransform
 SVar:DBHatching:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SubAbility$ DBDig | SpellDescription$ You gain 2 life. Look at the top three cards of your library. Exile one of them face down with a hatching counter on it, then put the rest on the bottom of your library in any order.
-SVar:DBDig:DB$ Dig | DigNum$ 3 | ChangeNum$ 1 | DestinationZone$ Exile | ExileWithCounter$ HATCHING | ExileFaceDown$ True
+SVar:DBDig:DB$ Dig | DigNum$ 3 | ChangeNum$ 1 | DestinationZone$ Exile | ExileWithCounter$ HATCHING | ExileFaceDown$ True | WithMayLook$ True
 SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
