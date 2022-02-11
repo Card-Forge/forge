@@ -682,6 +682,15 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             return false;
         }
     }
+    protected boolean isDraftEditor() {
+        switch (editorType) {
+            case Draft:
+            case QuestDraft:
+                return true;
+            default:
+                return false;
+        }
+    }
 
     public static boolean allowsReplacement(final EditorType editorType){
         switch (editorType) {
@@ -766,6 +775,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     CardManagerPage.this.buildMenu(menu, card);
                 }
             });
+            cardManager.setShowRanking(ItemManagerConfig.DRAFT_CONSPIRACY.equals(config0)
+                    || ItemManagerConfig.DRAFT_PACK.equals(config0) || ItemManagerConfig.DRAFT_POOL.equals(config0)
+                    || ItemManagerConfig.DRAFT_DECKS.equals(config0) || (parentScreen != null && parentScreen.isDraftEditor()));
         }
 
         protected void initialize() {
@@ -773,6 +785,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 cardManager.setup(config);
             else //fix planar conquest deck editor and maybe others...
                 cardManager.setup(config, parentScreen.getColOverrides(config));
+            cardManager.setShowRanking(ItemManagerConfig.DRAFT_CONSPIRACY.equals(config)
+                    || ItemManagerConfig.DRAFT_PACK.equals(config) || ItemManagerConfig.DRAFT_POOL.equals(config)
+                    || ItemManagerConfig.DRAFT_DECKS.equals(config) || (parentScreen != null && parentScreen.isDraftEditor()));
         }
 
         protected boolean canAddCards() {
@@ -1695,6 +1710,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             int packNumber = draft.getCurrentBoosterIndex() + 1;
             caption = Localizer.getInstance().getMessage("lblPackN", String.valueOf(packNumber));
             cardManager.setPool(pool);
+            cardManager.setShowRanking(true);
         }
 
         @Override

@@ -101,8 +101,8 @@ public final class CEditorQuestLimited extends CDeckEditor<DeckGroup> {
 
         this.questData = questData0;
 
-        final CardManager catalogManager = new CardManager(cDetailPicture0, false, true);
-        final CardManager deckManager = new CardManager(cDetailPicture0, false, true);
+        final CardManager catalogManager = new CardManager(cDetailPicture0, false, true, false);
+        final CardManager deckManager = new CardManager(cDetailPicture0, false, true, false);
 
         catalogManager.setCaption("Sideboard");
 

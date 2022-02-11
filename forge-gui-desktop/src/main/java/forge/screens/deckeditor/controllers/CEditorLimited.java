@@ -85,8 +85,8 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
     public CEditorLimited(final IStorage<DeckGroup> deckMap0, final FScreen screen0, final CDetailPicture cDetailPicture0) {
         super(screen0, cDetailPicture0, GameType.Sealed);
 
-        final CardManager catalogManager = new CardManager(cDetailPicture0, false, false);
-        final CardManager deckManager = new CardManager(cDetailPicture0, false, false);
+        final CardManager catalogManager = new CardManager(cDetailPicture0, false, false, FScreen.DECK_EDITOR_DRAFT.equals(screen0));
+        final CardManager deckManager = new CardManager(cDetailPicture0, false, false, FScreen.DECK_EDITOR_DRAFT.equals(screen0));
 
         catalogManager.setCaption("Sideboard");
 

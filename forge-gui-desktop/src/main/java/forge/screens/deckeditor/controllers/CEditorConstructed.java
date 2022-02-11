@@ -131,8 +131,8 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             default:
         }
 
-        catalogManager = new CardManager(getCDetailPicture(), wantUnique, false);
-        deckManager = new CardManager(getCDetailPicture(), false, false);
+        catalogManager = new CardManager(getCDetailPicture(), wantUnique, false, false);
+        deckManager = new CardManager(getCDetailPicture(), false, false, false);
         deckManager.setAlwaysNonUnique(true);
 
         final Localizer localizer = Localizer.getInstance();

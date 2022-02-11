@@ -74,6 +74,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private final List<ItemFilter<? extends T>> filters = new ArrayList<>();
     private boolean hideFilters = false;
     private boolean wantUnique = false;
+    private boolean showRanking = false;
     private boolean multiSelectMode = false;
     private FEventHandler selectionChangedHandler, itemActivateHandler;
     private ContextMenuBuilder<T> contextMenuBuilder;
@@ -820,8 +821,16 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         return wantUnique;
     }
 
+    public boolean getShowRanking() {
+        return showRanking;
+    }
+
     public void setWantUnique(boolean unique) {
         wantUnique = unique;
+    }
+
+    public void setShowRanking(boolean showRanking0) {
+        showRanking = showRanking0;
     }
 
     public void setSelectionSupport(int minSelections0, int maxSelections0) {

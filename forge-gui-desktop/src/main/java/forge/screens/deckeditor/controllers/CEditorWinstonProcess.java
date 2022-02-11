@@ -79,8 +79,8 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
     public CEditorWinstonProcess(final CDetailPicture cDetailPicture0) {
         super(FScreen.DRAFTING_PROCESS, cDetailPicture0, GameType.Draft);
 
-        final CardManager catalogManager = new CardManager(cDetailPicture0, false, false);
-        final CardManager deckManager = new CardManager(cDetailPicture0, false, false);
+        final CardManager catalogManager = new CardManager(cDetailPicture0, false, false, true);
+        final CardManager deckManager = new CardManager(cDetailPicture0, false, false, true);
 
         //hide filters and options panel so more of pack is visible by default
         catalogManager.setHideViewOptions(1, true);
