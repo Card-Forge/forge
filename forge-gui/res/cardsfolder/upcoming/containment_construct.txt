@@ -7,4 +7,5 @@ SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Des
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play this card this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckNeeds:Ability$Discard
 Oracle:Whenever you discard a card, you may exile that card from your graveyard. If you do, you may play that card this turn.
