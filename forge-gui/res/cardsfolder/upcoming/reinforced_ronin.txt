@@ -1,0 +1,10 @@
+Name:Reinforced Ronin
+ManaCost:R
+Types:Artifact Creature Human Samurai
+PT:2/2
+K:Haste
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of your end step, return CARDNAME to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand
+A:AB$ Draw | PrecostDesc$ Channel — | Cost$ 1 R Discard<1/CARDNAME> | NumCards$ 1 | ActivationZone$ Hand | SpellDescription$ Draw a card.
+DeckHas:Ability$Discard
+Oracle:Haste\nAt the beginning of your end step, return Reinforced Ronin to its owner's hand.\nChannel — {1}{R}, Discard Reinforced Ronin: Draw a card.

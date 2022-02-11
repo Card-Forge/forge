@@ -1,0 +1,9 @@
+Name:Ironsoul Enforcer
+ManaCost:4 W
+Types:Artifact Creature Human Samurai
+PT:4/4
+T:Mode$ Attacks | ValidCard$ Card.Self,Card.IsCommander+YouCtrl | Alone$ True | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or a commander you control attacks alone, return target artifact card from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Select target artifact card in your graveyard | Origin$ Graveyard | Destination$ Battlefield
+DeckHints:Type$Artifact
+DeckHas:Ability$Graveyard
+Oracle:Whenever Ironsoul Enforcer or a commander you control attacks alone, return target artifact card from your graveyard to the battlefield.
