@@ -127,7 +127,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         if (sa != null && sa.hasParam("Crew")) {
             msg.append("\nCrewing: ").
             append(CardLists.getTotalPower((FCollection<Card>)getSelected(), true, true)).
-            append(" / ").append(TextUtil.fastReplace(sa.getPayCosts().getCostPartByType(CostTapType.class).getType(), "Creature.YouCtrl+withTotalPowerGE", ""));
+            append(" / ").append(TextUtil.fastReplace(sa.getPayCosts().getCostPartByType(CostTapType.class).getType(), "Creature.Other+withTotalPowerGE", ""));
         }
 
         return msg.toString();

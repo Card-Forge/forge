@@ -184,7 +184,7 @@ public class CostTapType extends CostPartWithList {
         }
 
         final int amount = this.getAbilityAmount(ability);
-        return (typeList.size() != 0) && (typeList.size() >= amount);
+        return typeList.size() != 0 && typeList.size() >= amount;
     }
 
     /* (non-Javadoc)
