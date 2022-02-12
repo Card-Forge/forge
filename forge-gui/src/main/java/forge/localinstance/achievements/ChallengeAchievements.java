@@ -4,6 +4,7 @@ import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameType;
 import forge.game.player.Player;
+import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.Localizer;
 
@@ -25,6 +26,9 @@ public class ChallengeAchievements extends AchievementCollection {
         add(new NoSpells());
         add(new NoLands());
         add(new Domain());
+        if (!GuiBase.getInterface().isLibgdxPort()) {
+            add(new AgainstAllOdds());
+        }
         add("Chromatic", Localizer.getInstance().getMessage("lblChromatic"), 
             Localizer.getInstance().getMessage("lblWinGameAfterCasting5CSpell"),
             Localizer.getInstance().getMessage("lblGreatColorComesPower")
