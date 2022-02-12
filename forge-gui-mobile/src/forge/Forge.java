@@ -222,7 +222,6 @@ public class Forge implements ApplicationListener {
                         /*  call preloadExtendedArt here, if we put it above we will  *
                          *  get error: No OpenGL context found in the current thread. */
                         preloadExtendedArt();
-                        preloadBoosterDrafts();
                     }
                 });
             }
@@ -273,17 +272,16 @@ public class Forge implements ApplicationListener {
     public static void openHomeDefault() {
         GuiBase.setIsAdventureMode(false);
         openHomeScreen(-1, null); //default for startup
-        splashScreen = null;
         isMobileAdventureMode = false;
         if (isLandscapeMode()) { //open preferred new game screen by default if landscape mode
             NewGameMenu.getPreferredScreen().open();
         }
+        stopContinuousRendering(); //save power consumption by disabling continuous rendering once assets loaded
     }
     public static void openAdventure() {
         //continuous rendering is needed for adventure mode
         startContinuousRendering();
         GuiBase.setIsAdventureMode(true);
-        splashScreen = null;
         isMobileAdventureMode = true;
         try {
             for (SceneType sceneType : SceneType.values()) {
@@ -293,23 +291,16 @@ public class Forge implements ApplicationListener {
         } catch (Exception e) { e.printStackTrace(); }
     }
     protected void afterDbLoaded() {
-        stopContinuousRendering(); //save power consumption by disabling continuous rendering once assets loaded
         //init here to fix crash if the assets are missings on android
-        transitionTexture =  new Texture(Config.instance().getFile("ui/transition.png"));
+        transitionTexture =  new Texture(GuiBase.isAndroid()
+                ? Gdx.files.internal("fallback_skin").child("transition.png")
+                : Config.instance().getFile("ui/transition.png"));
 
-        FSkin.loadFull(splashScreen);
 
-        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
         destroyThis = false; //Allow back()
         Gdx.input.setCatchKey(Keys.MENU, true);
 
         afterDBloaded = true;
-        //selection
-        if (isLandscapeMode() && !GuiBase.isAndroid())
-            splashScreen.setShowModeSelector(true);
-        else
-            openHomeDefault();
-
         //adjust height modifier
         adjustHeightModifier(getScreenWidth(), getScreenHeight());
 
@@ -318,6 +309,39 @@ public class Forge implements ApplicationListener {
             FModel.getPreferences().setPref(FPref.UI_LANDSCAPE_MODE, isLandscapeMode());
             FModel.getPreferences().save();
         }
+
+        FThreads.invokeInBackgroundThread(new Runnable() {
+            @Override
+            public void run() {
+                FThreads.invokeInEdtLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        //load skin full
+                        FSkin.loadFull(splashScreen);
+                        FThreads.invokeInBackgroundThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //load Drafts
+                                preloadBoosterDrafts();
+                                FThreads.invokeInEdtLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        //selection
+                                        if (isLandscapeMode() && !GuiBase.isAndroid())
+                                            splashScreen.setShowModeSelector(true);
+                                        else {
+                                            splashScreen.startClassic();
+                                        }
+                                        //start background music
+                                        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
     }
 
     public static Clipboard getClipboard() {
@@ -530,6 +554,10 @@ public class Forge implements ApplicationListener {
 
     public static void clearCurrentScreen() {
         currentScreen = null;
+    }
+
+    public static void clearSplashScreen() {
+        splashScreen = null;
     }
     private static void setCurrentScreen(FScreen screen0) {
         String toNewScreen = screen0 != null ? screen0.toString() : "";
