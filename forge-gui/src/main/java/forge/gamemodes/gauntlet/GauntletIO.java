@@ -60,13 +60,13 @@ public class GauntletIO {
         xStream.allowTypeHierarchy(String.class);
         xStream.allowTypeHierarchy(EnumMap.class);
         xStream.allowTypeHierarchy(ArrayList.class);
-        xStream.allowTypeHierarchy(PaperCard.class);
         xStream.allowTypeHierarchy(CardPool.class);
         xStream.allowTypeHierarchy(SortedSet.class);
         xStream.allowTypeHierarchy(Deck.class);
         xStream.allowTypeHierarchy(TreeMap.class);
         xStream.allowTypeHierarchy(List.class);
         xStream.allowTypeHierarchy(DeckSection.class);
+        xStream.omitField(Deck.class, "unplayableAI");
         // allow any type from the same package
         xStream.allowTypesByWildcard(new String[] {
                 GauntletIO.class.getPackage().getName()+".*",
