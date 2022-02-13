@@ -3,6 +3,11 @@ Code=DBL
 Date=2022-01-28
 Name=Innistrad: Double Feature
 Type=Draft
+BoosterCovers=1
+DraftBooster=4 Common:fromSheet("DBL mid"), 2 Uncommon:fromSheet("DBL mid"), 1 RareMythic:fromSheet("DBL mid"), 4 Common:fromSheet("DBL vow"), 2 Uncommon:fromSheet("DBL vow"), 1 RareMythic:fromSheet("DBL vow"), 1 Any:fromSheet("DBL cards")+
+SheetReplaceCardFromSheet:mid_midDFC
+SheetReplaceCardFromSheet2:vow_vowDFC
+BoosterBox=24
 ScryfallCode=DBL
 
 [cards]
@@ -540,4 +545,548 @@ ScryfallCode=DBL
 532 R Stormcarved Coast @Sarah Finnigan
 533 R Sundown Pass @Muhammad Firdaus
 534 R Voldaren Estate @Richard Wright
+
+[promo]
 535 R Endless Ranks of the Dead @Ryan Yee
+
+[mid]
+1 Adeline, Resplendent Cathar|DBL
+1 Blessed Defiance|DBL
+1 Borrowed Time|DBL
+1 Candlegrove Witch|DBL
+1 Candletrap|DBL
+1 Cathar Commando|DBL
+1 Cathar's Call|DBL
+1 Celestus Sanctifier|DBL
+1 Clarion Cathars|DBL
+1 Curse of Silence|DBL
+1 Duelcraft Trainer|DBL
+1 Fateful Absence|DBL
+1 Flare of Faith|DBL
+1 Gavony Dawnguard|DBL
+1 Gavony Silversmith|DBL
+1 Gavony Trapper|DBL
+1 Hedgewitch's Mask|DBL
+1 Homestead Courage|DBL
+1 Intrepid Adversary|DBL
+1 Loyal Gryff|DBL
+1 Odric's Outrider|DBL
+1 Ritual Guardian|DBL
+1 Ritual of Hope|DBL
+1 Search Party Captain|DBL
+1 Sigarda's Splendor|DBL
+1 Sigardian Savior|DBL
+1 Soul-Guide Gryff|DBL
+1 Sungold Barrage|DBL
+1 Sungold Sentinel|DBL
+1 Sunset Revelry|DBL
+1 Thraben Exorcism|DBL
+1 Unruly Mob|DBL
+1 Vanquish the Horde|DBL
+1 Component Collector|DBL
+1 Consider|DBL
+1 Curse of Surveillance|DBL
+1 Devious Cover-Up|DBL
+1 Dissipate|DBL
+1 Drownyard Amalgam|DBL
+1 Fading Hope|DBL
+1 Falcon Abomination|DBL
+1 Firmament Sage|DBL
+1 Flip the Switch|DBL
+1 Geistwave|DBL
+1 Grafted Identity|DBL
+1 Larder Zombie|DBL
+1 Lier, Disciple of the Drowned|DBL
+1 Locked in the Cemetery|DBL
+1 Memory Deluge|DBL
+1 Nebelgast Intruder|DBL
+1 Ominous Roost|DBL
+1 Organ Hoarder|DBL
+1 Otherworldly Gaze|DBL
+1 Patrician Geist|DBL
+1 Phantom Carriage|DBL
+1 Revenge of the Drowned|DBL
+1 Secrets of the Key|DBL
+1 Shipwreck Sifters|DBL
+1 Skaab Wrangler|DBL
+1 Sludge Monster|DBL
+1 Spectral Adversary|DBL
+1 Startle|DBL
+1 Stormrider Spirit|DBL
+1 Triskaidekaphile|DBL
+1 Unblinking Observer|DBL
+1 Vivisection|DBL
+1 Arrogant Outlaw|DBL
+1 Bat Whisperer|DBL
+1 Bladebrand|DBL
+1 Blood Pact|DBL
+1 Bloodline Culling|DBL
+1 Bloodtithe Collector|DBL
+1 Champion of the Perished|DBL
+1 Crawl from the Cellar|DBL
+1 Defenestrate|DBL
+1 Diregraf Horde|DBL
+1 Dreadhound|DBL
+1 Duress|DBL
+1 Eaten Alive|DBL
+1 Foul Play|DBL
+1 Ghoulish Procession|DBL
+1 Gisa, Glorious Resurrector|DBL
+1 Hobbling Zombie|DBL
+1 Infernal Grasp|DBL
+1 Jadar, Ghoulcaller of Nephalia|DBL
+1 Lord of the Forsaken|DBL
+1 Mask of Griselbrand|DBL
+1 The Meathook Massacre|DBL
+1 Morbid Opportunist|DBL
+1 Morkrut Behemoth|DBL
+1 Necrosynthesis|DBL
+1 No Way Out|DBL
+1 Novice Occultist|DBL
+1 Olivia's Midnight Ambush|DBL
+1 Rotten Reunion|DBL
+1 Siege Zombie|DBL
+1 Slaughter Specialist|DBL
+1 Stromkirk Bloodthief|DBL
+1 Tainted Adversary|DBL
+1 Vampire Interloper|DBL
+1 Abandon the Post|DBL
+1 Ardent Elementalist|DBL
+1 Bloodthirsty Adversary|DBL
+1 Brimstone Vandal|DBL
+1 Burn Down the House|DBL
+1 Burn the Accursed|DBL
+1 Cathartic Pyre|DBL
+1 Curse of Shaken Faith|DBL
+1 Electric Revelation|DBL
+1 Falkenrath Perforator|DBL
+1 Falkenrath Pit Fighter|DBL
+1 Famished Foragers|DBL
+1 Festival Crasher|DBL
+1 Geistflame Reservoir|DBL
+1 Immolation|DBL
+1 Lambholt Harrier|DBL
+1 Light Up the Night|DBL
+1 Lunar Frenzy|DBL
+1 Moonrager's Slash|DBL
+1 Moonveil Regent|DBL
+1 Mounted Dreadknight|DBL
+1 Neonate's Rush|DBL
+1 Obsessive Astronomer|DBL
+1 Pack's Betrayal|DBL
+1 Play with Fire|DBL
+1 Purifying Dragon|DBL
+1 Raze the Effigy|DBL
+1 Seize the Storm|DBL
+1 Stolen Vitality|DBL
+1 Sunstreak Phoenix|DBL
+1 Thermo-Alchemist|DBL
+1 Voldaren Ambusher|DBL
+1 Voldaren Stinger|DBL
+1 Augur of Autumn|DBL
+1 Bounding Wolf|DBL
+1 Bramble Armor|DBL|1
+1 Briarbridge Tracker|DBL
+1 Brood Weaver|DBL
+1 Candlelit Cavalry|DBL
+1 Clear Shot|DBL
+1 Consuming Blob|DBL
+1 Contortionist Troupe|DBL
+1 Dawnhart Mentor|DBL
+1 Dawnhart Rejuvenator|DBL
+1 Defend the Celestus|DBL
+1 Dryad's Revival|DBL
+1 Duel for Dominance|DBL
+1 Eccentric Farmer|DBL
+1 Harvesttide Sentry|DBL
+1 Howl of the Hunt|DBL
+1 Might of the Old Ways|DBL
+1 Path to the Festival|DBL
+1 Pestilent Wolf|DBL
+1 Plummet|DBL
+1 Primal Adversary|DBL
+1 Return to Nature|DBL
+1 Rise of the Ants|DBL
+1 Saryth, the Viper's Fang|DBL
+1 Shadowbeast Sighting|DBL
+1 Snarling Wolf|DBL|1
+1 Storm the Festival|DBL
+1 Tapping at the Window|DBL
+1 Timberland Guide|DBL
+1 Turn the Earth|DBL
+1 Unnatural Growth|DBL
+1 Willow Geist|DBL
+1 Wrenn and Seven|DBL
+1 Angelfire Ignition|DBL
+1 Arcane Infusion|DBL
+1 Bladestitched Skaab|DBL
+1 Can't Stay Away|DBL
+1 Corpse Cobble|DBL
+1 Croaking Counterpart|DBL
+1 Dawnhart Wardens|DBL
+1 Dire-Strain Rampage|DBL
+1 Diregraf Rebirth|DBL
+1 Faithful Mending|DBL
+1 Fleshtaker|DBL
+1 Florian, Voldaren Scion|DBL
+1 Galvanic Iteration|DBL
+1 Ghoulcaller's Harvest|DBL
+1 Grizzly Ghoul|DBL
+1 Hallowed Respite|DBL
+1 Hungry for More|DBL
+1 Join the Dance|DBL
+1 Katilda, Dawnhart Prime|DBL
+1 Liesa, Forgotten Archangel|DBL
+1 Old Stickfingers|DBL
+1 Rem Karolus, Stalwart Slayer|DBL
+1 Rite of Harmony|DBL
+1 Rite of Oblivion|DBL
+1 Rootcoil Creeper|DBL
+1 Sacred Fire|DBL
+1 Sigarda, Champion of Light|DBL
+1 Siphon Insight|DBL
+1 Slogurk, the Overslime|DBL
+1 Storm Skreelix|DBL
+1 Sunrise Cavalier|DBL
+1 Teferi, Who Slows the Sunset|DBL
+1 Unnatural Moonrise|DBL
+1 Vadrik, Astral Archmage|DBL
+1 Vampire Socialite|DBL
+1 Wake to Slaughter|DBL
+1 Winterthorn Blessing|DBL
+1 The Celestus|DBL
+1 Crossroads Candleguide|DBL
+1 Jack-o'-Lantern|DBL
+1 Moonsilver Key|DBL
+1 Pithing Needle|DBL
+1 Silver Bolt|DBL
+1 Stuffed Bear|DBL
+1 Deserted Beach|DBL
+1 Evolving Wilds|DBL|1
+1 Field of Ruin|DBL
+1 Haunted Ridge|DBL
+1 Overgrown Farmland|DBL
+1 Rockfall Vale|DBL
+1 Shipwreck Marsh|DBL
+
+[vow]
+1 Adamant Will|DBL
+1 Angelic Quartermaster|DBL
+1 Arm the Cathars|DBL
+1 Bride's Gown|DBL
+1 By Invitation Only|DBL
+1 Cemetery Protector|DBL
+1 Circle of Confinement|DBL
+1 Dawnhart Geist|DBL
+1 Estwald Shieldbasher|DBL
+1 Fierce Retribution|DBL
+1 Fleeting Spirit|DBL
+1 Gryff Rider|DBL
+1 Gryffwing Cavalry|DBL
+1 Hallowed Haunting|DBL
+1 Heron of Hope|DBL
+1 Heron-Blessed Geist|DBL
+1 Hopeful Initiate|DBL
+1 Lantern Flare|DBL
+1 Militia Rallier|DBL
+1 Nebelgast Beguiler|DBL
+1 Nurturing Presence|DBL
+1 Ollenbock Escort|DBL
+1 Parish-Blade Trainee|DBL
+1 Piercing Light|DBL
+1 Resistance Squad|DBL
+1 Sanctify|DBL
+1 Savior of Ollenbock|DBL
+1 Sigarda's Imprisonment|DBL
+1 Sigarda's Summons|DBL
+1 Supernatural Rescue|DBL
+1 Thalia, Guardian of Thraben|DBL
+1 Traveling Minister|DBL
+1 Unholy Officiant|DBL
+1 Valorous Stance|DBL
+1 Vampire Slayer|DBL
+1 Voice of the Blessed|DBL
+1 Welcoming Vampire|DBL
+1 Alchemist's Retrieval|DBL
+1 Cemetery Illuminator|DBL
+1 Chill of the Grave|DBL
+1 Cobbled Lancer|DBL
+1 Consuming Tide|DBL
+1 Cradle of Safety|DBL
+1 Cruel Witness|DBL
+1 Diver Skaab|DBL
+1 Dreadlight Monstrosity|DBL
+1 Dreamshackle Geist|DBL
+1 Fear of Death|DBL
+1 Geistlight Snare|DBL
+1 Geralf, Visionary Stitcher|DBL
+1 Hullbreaker Horror|DBL
+1 Inspired Idea|DBL
+1 Lunar Rejection|DBL
+1 Necroduality|DBL
+1 Overcharged Amalgam|DBL
+1 Patchwork Crawler|DBL
+1 Repository Skaab|DBL
+1 Scattered Thoughts|DBL
+1 Screaming Swarm|DBL
+1 Selhoff Entomber|DBL
+1 Serpentine Ambush|DBL
+1 Skywarp Skaab|DBL
+1 Steelclad Spirit|DBL
+1 Stitched Assistant|DBL
+1 Stormchaser Drake|DBL
+1 Syncopate|DBL
+1 Syphon Essence|DBL
+1 Thirst for Discovery|DBL
+1 Wanderlight Spirit|DBL
+1 Wash Away|DBL
+1 Whispering Wizard|DBL
+1 Winged Portent|DBL
+1 Witness the Future|DBL
+1 Wretched Throng|DBL
+1 Aim for the Head|DBL
+1 Archghoul of Thraben|DBL
+1 Bleed Dry|DBL
+1 Blood Fountain|DBL
+1 Bloodcrazed Socialite|DBL
+1 Bloodvial Purveyor|DBL
+1 Cemetery Desecrator|DBL
+1 Courier Bat|DBL
+1 Demonic Bargain|DBL
+1 Diregraf Scavenger|DBL
+1 Doomed Dissenter|DBL
+1 Dread Fugue|DBL
+1 Dreadfeast Demon|DBL
+1 Dying to Serve|DBL
+1 Edgar's Awakening|DBL
+1 Falkenrath Forebear|DBL
+1 Fell Stinger|DBL
+1 Gift of Fangs|DBL
+1 Gluttonous Guest|DBL
+1 Graf Reaver|DBL
+1 Grisly Ritual|DBL
+1 Groom's Finery|DBL
+1 Headless Rider|DBL
+1 Hero's Downfall|DBL
+1 Mindleech Ghoul|DBL
+1 Parasitic Grasp|DBL
+1 Path of Peril|DBL
+1 Persistent Specimen|DBL
+1 Pointed Discussion|DBL
+1 Rot-Tide Gargantua|DBL
+1 Skulking Killer|DBL
+1 Sorin the Mirthless|DBL
+1 Toxrill, the Corrosive|DBL
+1 Undead Butler|DBL
+1 Undying Malice|DBL
+1 Unhallowed Phalanx|DBL
+1 Vampire's Kiss|DBL
+1 Wedding Security|DBL
+1 Abrade|DBL
+1 Alchemist's Gambit|DBL
+1 Ancestral Anger|DBL
+1 Belligerent Guest|DBL
+1 Blood Hypnotist|DBL
+1 Blood Petal Celebrant|DBL
+1 Bloody Betrayal|DBL
+1 Cemetery Gatekeeper|DBL
+1 Chandra, Dressed to Kill|DBL
+1 Change of Fortune|DBL
+1 Creepy Puppeteer|DBL
+1 Curse of Hospitality|DBL
+1 Daybreak Combatants|DBL
+1 Dominating Vampire|DBL
+1 End the Festivities|DBL
+1 Falkenrath Celebrants|DBL
+1 Flame-Blessed Bolt|DBL
+1 Frenzied Devils|DBL
+1 Honeymoon Hearse|DBL
+1 Hungry Ridgewolf|DBL
+1 Into the Night|DBL
+1 Kessig Flamebreather|DBL
+1 Kessig Wolfrider|DBL
+1 Lacerate Flesh|DBL
+1 Lightning Wolf|DBL
+1 Magma Pummeler|DBL
+1 Manaform Hellkite|DBL
+1 Markov Retribution|DBL
+1 Olivia's Attendants|DBL
+1 Pyre Spawn|DBL
+1 Reckless Impulse|DBL
+1 Rending Flame|DBL
+1 Runebound Wolf|DBL
+1 Sanguine Statuette|DBL
+1 Stensia Uprising|DBL
+1 Sure Strike|DBL
+1 Vampires' Vengeance|DBL
+1 Voldaren Epicure|DBL
+1 Apprentice Sharpshooter|DBL
+1 Ascendant Packleader|DBL
+1 Bramble Armor|DBL|2
+1 Bramble Wurm|DBL
+1 Cartographer's Survey|DBL
+1 Cemetery Prowler|DBL
+1 Cloaked Cadet|DBL
+1 Crawling Infestation|DBL
+1 Crushing Canopy|DBL
+1 Cultivator Colossus|DBL
+1 Dawnhart Disciple|DBL
+1 Dig Up|DBL
+1 Flourishing Hunter|DBL
+1 Glorious Sunrise|DBL
+1 Hamlet Vanguard|DBL
+1 Hiveheart Shaman|DBL
+1 Howling Moon|DBL
+1 Laid to Rest|DBL
+1 Massive Might|DBL
+1 Moldgraf Millipede|DBL
+1 Mulch|DBL
+1 Nature's Embrace|DBL
+1 Packsong Pup|DBL
+1 Reclusive Taxidermist|DBL
+1 Retrieve|DBL
+1 Rural Recruit|DBL
+1 Sawblade Slinger|DBL
+1 Sheltering Boughs|DBL
+1 Snarling Wolf|DBL|2
+1 Spiked Ripsaw|DBL
+1 Splendid Reclamation|DBL
+1 Spore Crawler|DBL
+1 Sporeback Wolf|DBL
+1 Toxic Scorpion|DBL
+1 Witch's Web|DBL
+1 Wolf Strike|DBL
+1 Ancient Lumberknot|DBL
+1 Anje, Maid of Dishonor|DBL
+1 Bloodtithe Harvester|DBL
+1 Eruth, Tormented Prophet|DBL
+1 Grolnok, the Omnivore|DBL
+1 Halana and Alena, Partners|DBL
+1 Kaya, Geist Hunter|DBL
+1 Markov Purifier|DBL
+1 Markov Waltzer|DBL
+1 Odric, Blood-Cursed|DBL
+1 Old Rutstein|DBL
+1 Olivia, Crimson Bride|DBL
+1 Sigardian Paladin|DBL
+1 Skull Skaab|DBL
+1 Torens, Fist of the Angels|DBL
+1 Vilespawn Spider|DBL
+1 Wandering Mind|DBL
+1 Blood Servitor|DBL
+1 Boarded Window|DBL
+1 Ceremonial Knife|DBL
+1 Dollhouse of Horrors|DBL
+1 Honored Heirloom|DBL
+1 Investigator's Journal|DBL
+1 Lantern of the Lost|DBL
+1 Wedding Invitation|DBL
+1 Deathcap Glade|DBL
+1 Dreamroot Cascade|DBL
+1 Evolving Wilds|DBL|2
+1 Shattered Sanctum|DBL
+1 Stormcarved Coast|DBL
+1 Sundown Pass|DBL
+1 Voldaren Estate|DBL
+
+[midDFC]
+1 Ambitious Farmhand|DBL
+1 Beloved Beggar|DBL
+1 Bereaved Survivor|DBL
+1 Brutal Cathar|DBL
+1 Chaplain of Alms|DBL
+1 Enduring Angel|DBL
+1 Lunarch Veteran|DBL
+1 Mourning Patrol|DBL
+1 Baithook Angler|DBL
+1 Covetous Castaway|DBL
+1 Delver of Secrets|DBL
+1 Galedrifter|DBL
+1 Malevolent Hermit|DBL
+1 Mysterious Tome|DBL
+1 Overwhelmed Archivist|DBL
+1 Poppet Stitcher|DBL
+1 Suspicious Stowaway|DBL
+1 Baneblade Scoundrel|DBL
+1 Covert Cutpurse|DBL
+1 Curse of Leeches|DBL
+1 Ecstatic Awakener|DBL
+1 Graveyard Trespasser|DBL
+1 Heirloom Mirror|DBL
+1 Jerren, Corrupted Bishop|DBL
+1 Shady Traveler|DBL
+1 Vengeful Strangler|DBL
+1 Fangblade Brigand|DBL
+1 Flame Channeler|DBL
+1 Harvesttide Infiltrator|DBL
+1 Reckless Stormseeker|DBL
+1 Smoldering Egg|DBL
+1 Spellrune Painter|DBL
+1 Tavern Ruffian|DBL
+1 Village Watch|DBL
+1 Bird Admirer|DBL
+1 Burly Breaker|DBL
+1 Deathbonnet Sprout|DBL
+1 Hound Tamer|DBL
+1 Outland Liberator|DBL
+1 Tireless Hauler|DBL
+1 Tovolar's Huntmaster|DBL
+1 Arlinn, the Pack's Hope|DBL
+1 Dennick, Pious Apprentice|DBL
+1 Devoted Grafkeeper|DBL
+1 Kessig Naturalist|DBL
+1 Ludevic, Necrogenius|DBL
+1 Tovolar, Dire Overlord|DBL
+1 Mystic Skull|DBL
+1 Hostile Hostel|DBL
+
+[vowDFC]
+1 Distracting Geist|DBL
+1 Drogskol Infantry|DBL
+1 Faithbound Judge|DBL
+1 Katilda, Dawnhart Martyr|DBL
+1 Kindly Ancestor|DBL
+1 Panicked Bystander|DBL
+1 Radiant Grace|DBL
+1 Twinblade Geist|DBL
+1 Wedding Announcement|DBL
+1 Binding Geist|DBL
+1 Biolume Egg|DBL
+1 Gutter Skulker|DBL
+1 Jacob Hauken, Inspector|DBL
+1 Lantern Bearer|DBL
+1 Mirrorhall Mimic|DBL
+1 Mischievous Catgeist|DBL
+1 Soulcipher Board|DBL
+1 Bloodsworn Squire|DBL
+1 Catapult Fodder|DBL
+1 Concealing Curtains|DBL
+1 Desperate Farmer|DBL
+1 Henrika Domnathi|DBL
+1 Innocent Traveler|DBL
+1 Ragged Recluse|DBL
+1 Restless Bloodseeker|DBL
+1 Voldaren Bloodcaster|DBL
+1 Alluring Suitor|DBL
+1 Ballista Watcher|DBL
+1 Fearful Villager|DBL
+1 Ill-Tempered Loner|DBL
+1 Lambholt Raconteur|DBL
+1 Volatile Arsonist|DBL
+1 Voltaic Visionary|DBL
+1 Weary Prisoner|DBL
+1 Avabruck Caretaker|DBL
+1 Dormant Grove|DBL
+1 Hookhand Mariner|DBL
+1 Howlpack Piper|DBL
+1 Infestation Expert|DBL
+1 Oakshade Stalker|DBL
+1 Ulvenwald Oddity|DBL
+1 Weaver of Blossoms|DBL
+1 Wolfkin Outcast|DBL
+1 Brine Comber|DBL
+1 Child of the Pack|DBL
+1 Dorothea, Vengeful Victim|DBL
+1 Edgar, Charmed Groom|DBL
+1 Runo Stromkirk|DBL
+1 Foreboding Statue|DBL
