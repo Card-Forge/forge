@@ -1,0 +1,7 @@
+Name:Virus Beetle
+ManaCost:1 B
+Types:Artifact Creature Insect
+PT:1/1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, each opponent discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ Opponent | NumCards$ 1 | Mode$ TgtChoose
+Oracle:When Virus Beetle enters the battlefield, each opponent discards a card.

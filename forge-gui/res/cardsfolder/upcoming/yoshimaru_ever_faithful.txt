@@ -1,0 +1,9 @@
+Name:Yoshimaru, Ever Faithful
+ManaCost:W
+Types:Legendary Creature Dog
+PT:1/1
+K:Partner
+T:Mode$ ChangesZone | ValidCard$ Card.Legendary+Other+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever another legendary permanent enters the battlefield under your control, put a +1/+1 counter on CARDNAME.
+SVar:TrigCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
+DeckNeeds:Type$Legendary
+Oracle:Whenever another legendary permanent enters the battlefield under your control, put a +1/+1 counter on Yoshimaru, Ever Faithful.\nPartner (You can have two commanders if both have partner.)

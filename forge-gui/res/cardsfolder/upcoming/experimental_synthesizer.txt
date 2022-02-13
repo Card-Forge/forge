@@ -1,0 +1,13 @@
+Name:Experimental Synthesizer
+ManaCost:R
+Types:Artifact
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Execute$ TrigDig | Secondary$ True | TriggerDescription$ When CARDNAME enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.
+SVar:TrigDig:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the remembered card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Token | Cost$ 2 R Sac<1/CARDNAME> | TokenScript$ w_2_2_samurai_vigilance | SorcerySpeed$ True | SpellDescription$ Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+DeckHas:Ability$Token
+SVar:SacMe:4
+Oracle:When Experimental Synthesizer enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.\n{2}{R}, Sacrifice Experimental Synthesizer: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.

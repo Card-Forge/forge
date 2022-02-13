@@ -1,0 +1,9 @@
+Name:Towashi Songshaper
+ManaCost:1 R
+Types:Artifact Creature Human Artificer
+PT:2/2
+T:Mode$ ChangesZone | ValidCard$ Artifact.YouCtrl+Other | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another artifact enters the battlefield under your control, CARDNAME gets +1/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | NumAtt$ 1
+SVar:BuffedBy:Artifact
+DeckHints:Type$Artifact
+Oracle:Whenever another artifact enters the battlefield under your control, Towashi Songshaper gets +1/+0 until end of turn.

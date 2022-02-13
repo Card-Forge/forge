@@ -1,0 +1,10 @@
+Name:Gift of Wrath
+ManaCost:3 R
+Types:Enchantment Aura
+K:Enchant artifact or creature
+A:SP$ Attach | Cost$ 3 R | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | AITgts$ Creature,Vehicle | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Menace | Description$ As long as enchanted permanent is a creature, it gets +2/+2 and has menace. (It can't be blocked except by two or more creatures.)
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME leaves the battlefield, create a 2/2 red Spirit creature token with menace.
+SVar:TrigToken:DB$ Token | TokenScript$ r_2_2_spirit_menace
+DeckHas:Ability$Token
+Oracle:Enchant artifact or creature\nAs long as enchanted permanent is a creature, it gets +2/+2 and has menace. (It can't be blocked except by two or more creatures.)\nWhen Gift of Wrath leaves the battlefield, create a 2/2 red Spirit creature token with menace.
