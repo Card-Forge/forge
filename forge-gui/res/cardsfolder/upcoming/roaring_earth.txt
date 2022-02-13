@@ -1,0 +1,10 @@
+Name:Roaring Earth
+ManaCost:1 G
+Types:Enchantment
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a land enters the battlefield under your control, put a +1/+1 counter on target creature or Vehicle you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl,Vehicle.YouCtrl | TgtPrompt$ Select target creature or Vehicle you control | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ PutCounter | PrecostDesc$ Channel — | Cost$ X G G Discard<1/CARDNAME> | ActivationZone$ Hand | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBAnimate | SpellDescription$ Put X +1/+1 counters on target land you control. It becomes a 0/0 green Spirit creature with haste. It's still a land. | StackDescription$ {p:You} puts X +1/+1 counters on {c:Targeted}. It becomes a 0/0 green Spirit creature with haste. It's still a land.
+SVar:DBAnimate:DB$ Animate | Defined$ ParentTarget | Power$ 0 | Toughness$ 0 | Types$ Creature,Spirit | Colors$ Green | Keywords$ Haste | Duration$ Permanent | StackDescription$ None
+SVar:X:Count$xPaid
+DeckHas:Ability$Counters & Type$Spirit
+Oracle:Whenever a land enters the battlefield under your control, put a +1/+1 counter on target creature or Vehicle you control.\nChannel — {X}{G}{G}, Discard Roaring Earth: Put X +1/+1 counters on target land you control. It becomes a 0/0 green Spirit creature with haste. It's still a land.
