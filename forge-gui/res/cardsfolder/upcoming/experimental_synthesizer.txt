@@ -8,6 +8,6 @@ SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Pl
 SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the remembered card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Token | Cost$ 2 R Sac<1/CARDNAME> | TokenScript$ w_2_2_samurai_vigilance | SorcerySpeed$ True | SpellDescription$ Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
-DeckHas:Ability$Token
+DeckHas:Ability$Token & Type$Samurai & Keyword$Vigilance
 SVar:SacMe:4
 Oracle:When Experimental Synthesizer enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.\n{2}{R}, Sacrifice Experimental Synthesizer: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.

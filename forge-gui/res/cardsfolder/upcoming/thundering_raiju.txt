@@ -7,5 +7,6 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerDescripti
 SVar:TrigCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DamageAll | ValidPlayers$ Opponent | NumDmg$ X
 SVar:X:Count$Valid Creature.Other+YouCtrl+modified
+DeckHas:Ability$Counters
 DeckHints:Type$Equipment|Aura & Ability$Counters
 Oracle:Haste\nWhenever Thundering Raiju attacks, put a +1/+1 counter on target creature you control. Then Thundering Raiju deals X damage to each opponent, where X is the number of modified creatures you control other than Thundering Raiju. (Equipment, Auras you control, and counters are modifications.)

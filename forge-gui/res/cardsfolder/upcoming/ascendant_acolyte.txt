@@ -6,5 +6,6 @@ K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with a +1/+1 co
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDouble | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, double the number of +1/+1 counters on CARDNAME.
 SVar:TrigDouble:DB$ MultiplyCounter | Defined$ Self | CounterType$ P1P1
 SVar:X:Count$TotalCounters_P1P1_Creature.YouCtrl+Other
+SVar:NeedsToPlay:Creature.YouCtrl+counters_GE1_P1P1
 DeckHas:Ability$Counters
 Oracle:Ascendant Acolyte enters the battlefield with a +1/+1 counter on it for each +1/+1 counter among other creatures you control.\nAt the beginning of your upkeep, double the number of +1/+1 counters on Ascendant Acolyte.

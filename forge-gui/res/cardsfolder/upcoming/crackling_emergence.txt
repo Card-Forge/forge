@@ -7,4 +7,5 @@ S:Mode$ Continuous | Affected$ Land.EnchantedBy | AddType$ Creature & Spirit | S
 R:Event$ Destroy | ValidCard$ Card.EnchantedBy | ReplaceWith$ CracklingEgress | Description$ If enchanted land would be destroyed, instead sacrifice CARDNAME and that land gains indestructible until end of turn.
 SVar:CracklingEgress:DB$ Sacrifice | Defined$ Card.Self | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Enchanted | KW$ Indestructible
+DeckHas:Ability$Sacrifice & Type$Spirit
 Oracle:Enchant land you control\nEnchanted land is a 3/3 red Spirit creature with haste. It's still a land.\nIf enchanted land would be destroyed, instead sacrifice Crackling Emergence and that land gains indestructible until end of turn.
