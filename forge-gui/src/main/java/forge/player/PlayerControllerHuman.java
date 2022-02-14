@@ -1278,7 +1278,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         // TODO JAVA 8 use getOrDefault
         for (Card c : player.getAllCards()) {
-
             // Changeling are all creature types, they are not interesting for
             // counting creature types
             if (c.hasStartOfKeyword(Keyword.CHANGELING.toString())) {
