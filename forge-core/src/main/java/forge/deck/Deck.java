@@ -51,7 +51,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     private String lastCardArtPreferenceUsed = "";
     private Boolean lastCardArtOptimisationOptionUsed = null;
     private boolean includeCardsFromUnspecifiedSet = false;
-    private UnplayableAICards unplayableAI = null;
+    private transient UnplayableAICards unplayableAI = null;
 
     public Deck() {
         this("");
