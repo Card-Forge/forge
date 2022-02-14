@@ -1,5 +1,5 @@
 [format]
-Name:Standard (Legions)
+Name:Standard (LGN)
 Type:Historic
 Subtype:Standard
 Effective:2003-03-01

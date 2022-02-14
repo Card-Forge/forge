@@ -1,5 +1,5 @@
 [format]
-Name:Standard (Future Sight)
+Name:Standard (FUT)
 Type:Historic
 Subtype:Standard
 Effective:2007-05-20

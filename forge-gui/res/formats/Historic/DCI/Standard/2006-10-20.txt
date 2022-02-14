@@ -1,5 +1,5 @@
 [format]
-Name:Standard (Time Spiral)
+Name:Standard (TSP)
 Type:Historic
 Subtype:Standard
 Effective:2006-10-20

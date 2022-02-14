@@ -1,5 +1,5 @@
 [format]
-Name:Standard (Guildpact)
+Name:Standard (GPT)
 Type:Historic
 Subtype:Standard
 Effective:2006-02-20
