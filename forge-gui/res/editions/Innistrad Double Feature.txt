@@ -5,8 +5,8 @@ Name=Innistrad: Double Feature
 Type=Draft
 BoosterCovers=1
 DraftBooster=4 Common:fromSheet("DBL mid"), 2 Uncommon:fromSheet("DBL mid"), 1 RareMythic:fromSheet("DBL mid"), 4 Common:fromSheet("DBL vow"), 2 Uncommon:fromSheet("DBL vow"), 1 RareMythic:fromSheet("DBL vow"), 1 Any:fromSheet("DBL cards")+
-SheetReplaceCardFromSheet:mid_midDFC
-SheetReplaceCardFromSheet2:vow_vowDFC
+SheetReplaceCardFromSheet=DBL mid_DBL midDFC
+SheetReplaceCardFromSheet2=DBL vow_DBL vowDFC
 BoosterBox=24
 ScryfallCode=DBL
 
