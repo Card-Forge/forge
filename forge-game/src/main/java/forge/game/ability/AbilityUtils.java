@@ -1853,7 +1853,7 @@ public class AbilityUtils {
                 // Count$TriggeredManaSpent
                 if (sq[0].equals("TriggeredManaSpent")) {
                     final SpellAbility root = (SpellAbility) sa.getRootAbility().getTriggeringObject(AbilityKey.SpellAbility);
-                    return root.getTotalManaSpent();
+                    return root == null ? 0 : root.getTotalManaSpent();
                 }
 
                 // Count$Adamant.<Color>.<True>.<False>
