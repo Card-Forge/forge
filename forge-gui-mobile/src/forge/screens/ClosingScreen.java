@@ -7,6 +7,7 @@ import forge.assets.FSkin;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
 import forge.toolbox.FContainer;
+import forge.toolbox.FOverlay;
 
 public class ClosingScreen extends FContainer {
     private BGAnimation bgAnimation;
@@ -101,6 +102,10 @@ public class ClosingScreen extends FContainer {
 
     @Override
     protected void drawBackground(Graphics g) {
+        //fix overlay showing on closing screen animation
+        for (FOverlay overlay : FOverlay.getOverlays()) {
+            overlay.hide();
+        }
         if (drawStatic) {
             staticAnimation.start();
             staticAnimation.drawBackgroud(g);
