@@ -118,6 +118,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final String destination = sa.getParam("Destination");
 
         String type = "card";
+        boolean defined = false;
         if (sa.hasParam("ChangeTypeDesc")) {
             type = sa.getParam("ChangeTypeDesc");
             if (type.contains("{")) {
@@ -125,6 +126,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 SpellAbilityEffect.tokenizeString(sa, typesb, type);
                 type = typesb.toString();
             }
+        } else if (sa.usesTargeting() || sa.hasParam("Defined")) {
+            List<Card> tgts = getDefinedCardsOrTargeted(sa, "Defined");
+            type = Lang.joinHomogenous(tgts);
+            defined = true;
         } else if (sa.hasParam("ChangeType")) {
             final String ct = sa.getParam("ChangeType");
             type = CardType.CoreType.isValidEnum(ct) ? ct.toLowerCase() : ct;
@@ -132,6 +137,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         final int num = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(host,
                 sa.getParam("ChangeNum"), sa) : 1;
+        boolean tapped = sa.hasParam("Tapped");
+        boolean attacking = sa.hasParam("Attacking");
+        if (sa.hasParam("Ninjutsu")) {
+            tapped = true;
+            attacking = true;
+        }
 
         if (origin.equals("Library") && sa.hasParam("Defined")) {
             // for now, just handle the Exile from top of library case, but
@@ -173,7 +184,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                 if (destination.equals("Battlefield")) {
                     sb.append("onto the battlefield");
-                    if (sa.hasParam("Tapped")) {
+                    if (tapped) {
                         sb.append(" tapped");
                     }
                     if (sa.hasParam("GainControl")) {
@@ -224,18 +235,26 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 sb.append(num).append(" of those ").append(type).append(" card(s)");
             } else {
                 sb.append(destination.equals("Exile") ? " exiles " : " puts ");
-                if (type.equals("Card")) {
-                    sb.append(num);
+                if (defined) {
+                    sb.append(type);
+                } else if (StringUtils.containsIgnoreCase(type, "Card")) {
+                    sb.append(Lang.nounWithNumeralExceptOne(num, type));
                 } else {
-                    sb.append(num).append(" ").append(type);
+                    sb.append(Lang.nounWithNumeralExceptOne(num, type + " card"));
                 }
-                sb.append(" card(s) from ").append(fetchPlayer).append(" hand");
+                sb.append(" from ").append(fetchPlayer).append(" hand");
             }
 
             if (destination.equals("Battlefield")) {
                 sb.append(" onto the battlefield");
-                if (sa.hasParam("Tapped")) {
+                if (tapped) {
                     sb.append(" tapped");
+                    if (attacking) {
+                        sb.append(" and");
+                    }
+                }
+                if (attacking) {
+                    sb.append(" attacking");
                 }
                 if (sa.hasParam("GainControl")) {
                     sb.append(" under ").append(chooserNames).append("'s control");
