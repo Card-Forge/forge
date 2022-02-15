@@ -619,13 +619,12 @@ public class CardRenderer {
             croppedArea = 0.975f;
             minusxy = 0.135f*radius;
         }
+        float oldAlpha = g.getfloatAlphaComposite();
+        if (card.isPhasedOut() && !magnify)
+            g.setAlphaComposite(0.2f);
         if (image != null) {
             if (image == ImageCache.defaultImage || Forge.enableUIMask.equals("Art")) {
-                float oldAlpha = g.getfloatAlphaComposite();
-                if (card.isPhasedOut())
-                    g.setAlphaComposite(0.2f);
                 CardImageRenderer.drawCardImage(g, card, showAltState, x, y, w, h, pos, true, false, isChoiceList, !showCardIdOverlay(card));
-                g.setAlphaComposite(oldAlpha);
             } else if (showsleeves) {
                 if (!card.isForeTold())
                     g.drawCardImage(sleeves, crack_overlay, x, y, w, h, card.wasDestroyed(), magnify ? false : card.getDamage() > 0);
@@ -667,12 +666,9 @@ public class CardRenderer {
             drawFoilEffect(g, card, x, y, w, h, false);
         } else {
             //if card has invalid or no texture due to sudden changes in ImageCache, draw CardImageRenderer instead and wait for it to refresh automatically
-            float oldAlpha = g.getfloatAlphaComposite();
-            if (card.isPhasedOut())
-                g.setAlphaComposite(0.2f);
             CardImageRenderer.drawCardImage(g, card, showAltState, x, y, w, h, pos, Forge.enableUIMask.equals("Art"), false, isChoiceList, !showCardIdOverlay(card));
-            g.setAlphaComposite(oldAlpha);
         }
+        g.setAlphaComposite(oldAlpha);
     }
 
     public static void drawCardWithOverlays(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos) {
@@ -1226,16 +1222,18 @@ public class CardRenderer {
         int markerCounter = markers.size() - 1;
 
         for (String marker : markers) {
-            layout.setText(font, marker);
-            final float markerBoxRealWidth = markerBoxBaseWidth + layout.width + 4;
+            if(font != null && !marker.isEmpty()) {
+                layout.setText(font, marker);
+                final float markerBoxRealWidth = markerBoxBaseWidth + layout.width + 4;
 
-            final float markerYOffset = spaceFromTopOfCard - (markerCounter-- * (markerBoxHeight + markerBoxSpacing));
+                final float markerYOffset = spaceFromTopOfCard - (markerCounter-- * (markerBoxHeight + markerBoxSpacing));
 
-            g.fillRect(counterBackgroundColor, x - 3, markerYOffset, markerBoxRealWidth, markerBoxHeight);
+                g.fillRect(counterBackgroundColor, x - 3, markerYOffset, markerBoxRealWidth, markerBoxHeight);
 
-            Color markerColor = new Color(200.0f / 255.0f, 200.0f / 255.0f, 200.0f / 255.0f, 1.0f);
+                Color markerColor = new Color(200.0f / 255.0f, 200.0f / 255.0f, 200.0f / 255.0f, 1.0f);
 
-            drawText(g, marker, font, markerColor, x + 2 + additionalXOffset, markerYOffset, markerBoxRealWidth, markerBoxHeight, Align.left);
+                drawText(g, marker, font, markerColor, x + 2 + additionalXOffset, markerYOffset, markerBoxRealWidth, markerBoxHeight, Align.left);
+            }
         }
     }
 
