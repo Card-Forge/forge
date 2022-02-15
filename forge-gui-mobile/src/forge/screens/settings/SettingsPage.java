@@ -557,6 +557,12 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("lblMatchScrollIndicator"),
                 localizer.getMessage("nlMatchScrollIndicator")),
                 4);
+        if (!GuiBase.isAndroid()) {
+            lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_MAGNIFIER,
+                    localizer.getMessage("lblEnableMagnifier"),
+                    localizer.getMessage("nlEnableMagnifier")),
+                    4);
+        }
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_FPS,
                 localizer.getMessage("lblShowFPSDisplay"),
                 localizer.getMessage("nlShowFPSDisplay")){

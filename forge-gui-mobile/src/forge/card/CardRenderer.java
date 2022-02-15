@@ -604,9 +604,9 @@ public class CardRenderer {
         }
     }
     public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate) {
-        drawCard(g, card, x, y, w, h, pos, rotate, false, false);
+        drawCard(g, card, x, y, w, h, pos, rotate, false, false, false);
     }
-    public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate, boolean showAltState, boolean isChoiceList) {
+    public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate, boolean showAltState, boolean isChoiceList, boolean magnify) {
         boolean canshow = MatchController.instance.mayView(card);
         boolean showsleeves = card.isFaceDown() && card.isInZone(EnumSet.of(ZoneType.Exile)); //fix facedown card image ie gonti lord of luxury
         Texture image = new RendererCachedCardImage(card, false).getImage( showAltState ? card.getAlternateState().getImageKey() : card.getCurrentState().getImageKey());
@@ -628,9 +628,9 @@ public class CardRenderer {
                 g.setAlphaComposite(oldAlpha);
             } else if (showsleeves) {
                 if (!card.isForeTold())
-                    g.drawCardImage(sleeves, crack_overlay, x, y, w, h, card.wasDestroyed(), card.getDamage() > 0);
+                    g.drawCardImage(sleeves, crack_overlay, x, y, w, h, card.wasDestroyed(), magnify ? false : card.getDamage() > 0);
                 else
-                    g.drawCardImage(image, crack_overlay, x, y, w, h, card.wasDestroyed(), card.getDamage() > 0);
+                    g.drawCardImage(image, crack_overlay, x, y, w, h, card.wasDestroyed(), magnify ? false : card.getDamage() > 0);
             } else {
                 if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
                         && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane()) && rotate){
@@ -648,19 +648,19 @@ public class CardRenderer {
                 } else {
                     if (Forge.enableUIMask.equals("Full") && canshow) {
                         if (ImageCache.isBorderlessCardArt(image))
-                            g.drawCardImage(image, crack_overlay, x, y, w, h, card.wasDestroyed(), card.getDamage() > 0);
+                            g.drawCardImage(image, crack_overlay, x, y, w, h, card.wasDestroyed(), magnify ? false : card.getDamage() > 0);
                         else {
                             boolean t = (card.getCurrentState().getOriginalColors() != card.getCurrentState().getColors()) || card.getCurrentState().hasChangeColors();
                             g.drawBorderImage(ImageCache.getBorderImage(image.toString(), canshow), ImageCache.borderColor(image), ImageCache.getTint(card, image), x, y, w, h, t); //tint check for changed colors
-                            g.drawCardImage(ImageCache.croppedBorderImage(image), crack_overlay, x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea, card.wasDestroyed(), card.getDamage() > 0);
+                            g.drawCardImage(ImageCache.croppedBorderImage(image), crack_overlay, x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea, card.wasDestroyed(), magnify ? false : card.getDamage() > 0);
                         }
                     } else if (Forge.enableUIMask.equals("Crop") && canshow) {
-                        g.drawCardImage(ImageCache.croppedBorderImage(image), crack_overlay, x, y, w, h, card.wasDestroyed(), card.getDamage() > 0);
+                        g.drawCardImage(ImageCache.croppedBorderImage(image), crack_overlay, x, y, w, h, card.wasDestroyed(), magnify ? false : card.getDamage() > 0);
                     } else {
                         if (canshow)
-                            g.drawCardImage(image, crack_overlay, x, y, w, h, card.wasDestroyed(), card.getDamage() > 0);
+                            g.drawCardImage(image, crack_overlay, x, y, w, h, card.wasDestroyed(), magnify ? false : card.getDamage() > 0);
                         else // draw card back sleeves
-                            g.drawCardImage(sleeves, crack_overlay, x, y, w, h, card.wasDestroyed(), card.getDamage() > 0);
+                            g.drawCardImage(sleeves, crack_overlay, x, y, w, h, card.wasDestroyed(), magnify ? false : card.getDamage() > 0);
                     }
                 }
             }
@@ -684,7 +684,7 @@ public class CardRenderer {
         boolean unselectable = !MatchController.instance.isSelectable(card) && MatchController.instance.isSelecting();
         float cx, cy, cw, ch;
         cx = x; cy = y; cw = w; ch = h;
-        drawCard(g, card, x, y, w, h, pos, false, showAltState, isChoiceList);
+        drawCard(g, card, x, y, w, h, pos, false, showAltState, isChoiceList, false);
 
         float padding = w * PADDING_MULTIPLIER; //adjust for card border
         x += padding;

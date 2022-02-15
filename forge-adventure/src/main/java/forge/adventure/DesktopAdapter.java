@@ -61,6 +61,7 @@ public class DesktopAdapter implements IDeviceAdapter {
     @Override
     public void exit() {
         Gdx.app.exit(); //can just use Gdx.app.exit for desktop
+        System.exit(0);
     }
 
     @Override
