@@ -279,6 +279,7 @@ public class ForgeInput extends FGestureAdapter {
 
     @Override
     public boolean mouseMoved(int x, int y) {
+        Forge.magnify = true;
         mouseMovedX = x;
         mouseMovedY = y;
         //todo: mouse listener for android?

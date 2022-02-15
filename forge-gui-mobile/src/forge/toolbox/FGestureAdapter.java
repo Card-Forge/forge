@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
+import forge.Forge;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.util.Utils;
@@ -70,6 +71,12 @@ public abstract class FGestureAdapter extends InputAdapter {
         tapCountInterval = Utils.secondsToTimeSpan(tapCountInterval0);
         longPressDelay = longPressDelay0;
         flingDelay = Utils.secondsToTimeSpan(flingDelay0);
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        Forge.magnify = true;
+        return super.mouseMoved(screenX, screenY);
     }
 
     @Override
@@ -194,6 +201,7 @@ public abstract class FGestureAdapter extends InputAdapter {
             lastTapButton = button;
             lastTapPointer = pointer;
             if (wasPressed) {
+                Forge.magnify = false;
                 return tap(x, y, tapCount);
             }
             return false;

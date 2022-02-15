@@ -140,7 +140,7 @@ public abstract class FDisplayObject {
                     Forge.hoveredCount = 1;
             }
             if (exact) {
-                setHovered(this.enabled && this.visible && ((FCardPanel) this).renderedCardContains(screenToLocalX(screenX), screenToLocalY(screenY)) && Forge.hoveredCount < 2);
+                setHovered(this.enabled && this.visible && ((FCardPanel) this).renderedCardContains(screenToLocalX(screenX), screenToLocalY(screenY)) && Forge.hoveredCount < 2 && Forge.magnify);
             } else {
                 setHovered(this.enabled && this.visible && this.screenPos.contains(screenX, screenY) && Forge.hoveredCount < 2);
             }

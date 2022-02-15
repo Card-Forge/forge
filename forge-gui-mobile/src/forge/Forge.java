@@ -5,6 +5,7 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -71,6 +72,7 @@ public class Forge implements ApplicationListener {
     public static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
     public static boolean safeToClose = false;
+    public static boolean magnify = false;
     private static int continuousRenderingCount = 1; //initialize to 1 since continuous rendering is the default
     private static final Deque<FScreen> Dscreens = new ArrayDeque<>();
     private static boolean textureFiltering = false;
@@ -282,6 +284,10 @@ public class Forge implements ApplicationListener {
         stopContinuousRendering(); //save power consumption by disabling continuous rendering once assets loaded
     }
     public static void openAdventure() {
+        //pixl cursor for adventure
+        Pixmap pm = new Pixmap(Config.instance().getFile("skin/cursor.png"));
+        Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
+        pm.dispose();
         //continuous rendering is needed for adventure mode
         startContinuousRendering();
         GuiBase.setIsAdventureMode(true);
@@ -1114,6 +1120,7 @@ public class Forge implements ApplicationListener {
         private int mouseMovedX, mouseMovedY;
         @Override
         public boolean mouseMoved(int screenX, int screenY) {
+            magnify = true;
             mouseMovedX = screenX;
             mouseMovedY = screenY;
             //todo: mouse listener for android?
