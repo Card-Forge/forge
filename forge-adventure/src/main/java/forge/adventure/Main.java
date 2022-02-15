@@ -4,6 +4,8 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3WindowListener;
 import com.badlogic.gdx.graphics.glutils.HdpiMode;
 import forge.Forge;
 import forge.adventure.util.Config;
@@ -47,6 +49,50 @@ public class Main {
         }
         config.setTitle("Forge Adventure Mobile");
         config.setWindowIcon(Config.instance().getFilePath("forge-adventure.png"));
+        config.setWindowListener(new Lwjgl3WindowListener() {
+            @Override
+            public void created(Lwjgl3Window lwjgl3Window) {
+
+            }
+
+            @Override
+            public void iconified(boolean b) {
+
+            }
+
+            @Override
+            public void maximized(boolean b) {
+
+            }
+
+            @Override
+            public void focusLost() {
+
+            }
+
+            @Override
+            public void focusGained() {
+
+            }
+
+            @Override
+            public boolean closeRequested() {
+                //use the device adpater to exit properly
+                if (Forge.safeToClose)
+                    Forge.exit(true);
+                return false;
+            }
+
+            @Override
+            public void filesDropped(String[] strings) {
+
+            }
+
+            @Override
+            public void refreshRequested() {
+
+            }
+        });
 
 
         new Lwjgl3Application(start, config);
