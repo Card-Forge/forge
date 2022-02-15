@@ -1,0 +1,9 @@
+Name:Spring-Leaf Avenger
+ManaCost:3 G G
+Types:Creature Insect Ninja
+PT:6/5
+K:Ninjutsu:3 G
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigChangeZone | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, return target permanent card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Choose a permanent card
+DeckHas:Ability$Graveyard
+Oracle:Ninjutsu {3}{G} ({3}{G}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever Spring-Leaf Avenger deals combat damage to a player, return target permanent card from your graveyard to your hand.

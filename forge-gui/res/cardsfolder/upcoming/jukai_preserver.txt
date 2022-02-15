@@ -1,0 +1,9 @@
+Name:Jukai Preserver
+ManaCost:3 G
+Types:Enchantment Creature — Human Druid
+PT:3/3
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ PutCounter | PrecostDesc$ Channel — | Cost$ 2 G Discard<1/CARDNAME> | ActivationZone$ Hand | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to two target creatures you control | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each of up to two target creatures you control.
+DeckHas:Ability$Counters|Discard
+Oracle:When Jukai Preserver enters the battlefield, put a +1/+1 counter on target creature you control.\nChannel — {2}{G}, Discard Jukai Preserver: Put a +1/+1 counter on each of up to two target creatures you control.

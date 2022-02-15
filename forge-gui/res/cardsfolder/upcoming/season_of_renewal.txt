@@ -1,0 +1,9 @@
+Name:Season of Renewal
+ManaCost:2 G
+Types:Instant
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ RegrowCreature,RegrowEnchantment
+SVar:RegrowCreature:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn | TgtPrompt$ Choose a creature card | SpellDescription$ Return target creature card from your graveyard to your hand.
+SVar:RegrowEnchantment:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Enchantment.YouOwn | TgtPrompt$ Choose an enchantment card | SpellDescription$ Return target enchantment card from your graveyard to your hand.
+DeckHas:Ability$Graveyard
+DeckHints:Type$Enchantment
+Oracle:Choose one or both —\n• Return target creature card from your graveyard to your hand.\n• Return target enchantment card from your graveyard to your hand.
