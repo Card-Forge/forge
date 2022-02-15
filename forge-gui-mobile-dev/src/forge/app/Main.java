@@ -9,6 +9,8 @@ import java.io.OutputStream;
 
 import javax.imageio.ImageIO;
 
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3WindowListener;
 import com.badlogic.gdx.graphics.glutils.HdpiMode;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -106,6 +108,50 @@ public class Main {
             config.setAutoIconify(true); //fix alt-tab when running fullscreen
         }
         config.setTitle("Forge");
+        config.setWindowListener(new Lwjgl3WindowListener() {
+            @Override
+            public void created(Lwjgl3Window lwjgl3Window) {
+
+            }
+
+            @Override
+            public void iconified(boolean b) {
+
+            }
+
+            @Override
+            public void maximized(boolean b) {
+
+            }
+
+            @Override
+            public void focusLost() {
+
+            }
+
+            @Override
+            public void focusGained() {
+
+            }
+
+            @Override
+            public boolean closeRequested() {
+                //use the device adpater to exit properly
+                if (Forge.safeToClose)
+                    Forge.exit(true);
+                return false;
+            }
+
+            @Override
+            public void filesDropped(String[] strings) {
+
+            }
+
+            @Override
+            public void refreshRequested() {
+
+            }
+        });
         if (desktopMode)
             config.setHdpiMode(HdpiMode.Logical);
 

@@ -31,6 +31,7 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
+import forge.screens.ClosingScreen;
 import forge.screens.FScreen;
 import forge.screens.SplashScreen;
 import forge.screens.home.HomeScreen;
@@ -66,8 +67,10 @@ public class Forge implements ApplicationListener {
     private static FrameRate frameRate;
     private static FScreen currentScreen;
     protected static SplashScreen splashScreen;
+    protected static ClosingScreen closingScreen;
     public static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
+    public static boolean safeToClose = false;
     private static int continuousRenderingCount = 1; //initialize to 1 since continuous rendering is the default
     private static final Deque<FScreen> Dscreens = new ArrayDeque<>();
     private static boolean textureFiltering = false;
@@ -334,6 +337,7 @@ public class Forge implements ApplicationListener {
                                         }
                                         //start background music
                                         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
+                                        Forge.safeToClose = true;
                                     }
                                 });
                             }
@@ -452,7 +456,7 @@ public class Forge implements ApplicationListener {
             public void run(Boolean result) {
                 if (result) {
                     exited = true;
-                    deviceAdapter.restart();
+                    exitAnimation(true);
                 }
             }
         };
@@ -477,7 +481,7 @@ public class Forge implements ApplicationListener {
             public void run(Boolean result) {
                 if (result) {
                     exited = true;
-                    deviceAdapter.exit();
+                    exitAnimation(false);
                 }
             }
         };
@@ -595,7 +599,9 @@ public class Forge implements ApplicationListener {
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
 
             FContainer screen = currentScreen;
-            if (screen == null) {
+            if (closingScreen != null) {
+                screen = closingScreen;
+            } else if (screen == null) {
                 screen = splashScreen;
                 if (screen == null) {
                     if (isMobileAdventureMode) {
@@ -801,6 +807,12 @@ public class Forge implements ApplicationListener {
         return true;
     }
 
+    static void exitAnimation(boolean restart) {
+        if (closingScreen == null) {
+            closingScreen = new ClosingScreen(restart);
+        }
+    }
+
     public static abstract class KeyInputAdapter {
         public abstract FDisplayObject getOwner();
         public abstract boolean allowTouchInput();
@@ -869,7 +881,7 @@ public class Forge implements ApplicationListener {
             }
             if(keyCode == Keys.BACK){
                 if (destroyThis)
-                    deviceAdapter.exit();
+                    exitAnimation(false);
                 else if(onHomeScreen() && isLandscapeMode())
                     back();
             }
