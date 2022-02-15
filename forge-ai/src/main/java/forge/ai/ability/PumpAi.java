@@ -451,9 +451,6 @@ public class PumpAi extends PumpAiBase {
                 } else {
                     return false;
                 }
-            } else if (sa.getParam("AILogic").equals("DonateTargetPerm")) {
-                // Donate step 2 - target a donatable permanent.
-                return SpecialCardAi.Donate.considerDonatingPermanent(ai, sa);
             } else if (sa.getParam("AILogic").equals("SacOneEach")) {
                 // each player sacrifices one permanent, e.g. Vaevictis, Asmadi the Dire - grab the worst for allied and
                 // the best for opponents
