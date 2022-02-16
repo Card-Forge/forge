@@ -79,9 +79,7 @@ public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
         }
 
         // Remember whatever was hit
-        for (Card c : hit) {
-            host.addRemembered(c);
-        }
+        host.addRemembered(hit);
     }
 
     @Override

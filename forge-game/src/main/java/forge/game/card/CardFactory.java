@@ -96,12 +96,8 @@ public class CardFactory {
         out.setAttachedCards(in.getAttachedCards());
         out.setEntityAttachedTo(in.getEntityAttachedTo());
 
-        for (final Object o : in.getRemembered()) {
-            out.addRemembered(o);
-        }
-        for (final Card o : in.getImprintedCards()) {
-            out.addImprintedCard(o);
-        }
+        out.addRemembered(in.getRemembered());
+        out.addImprintedCards(in.getImprintedCards());
         out.setCommander(in.isRealCommander());
         //out.setFaceDown(in.isFaceDown());
 
@@ -125,11 +121,9 @@ public class CardFactory {
     private final static Card copySpellHost(final SpellAbility sourceSA, final SpellAbility targetSA, Player controller) {
         final Card source = sourceSA.getHostCard();
         final Card original = targetSA.getHostCard();
-        final Card c = copyCard(original, true);
-
-        // clear remember/imprint for copied spells
-        c.clearRemembered();
-        c.clearImprintedCards();
+        final Game game = source.getGame();
+        final Card c = new Card(game.nextCardId(), original.getPaperCard(), game);
+        copyCopiableCharacteristics(original, c);
 
         if (sourceSA.hasParam("NonLegendary")) {
             c.removeType(CardType.Supertype.Legendary);
@@ -524,8 +518,6 @@ public class CardFactory {
     public static void copyState(final Card from, final CardStateName fromState, final Card to,
             final CardStateName toState, boolean updateView) {
         // copy characteristics not associated with a state
-        to.setBasePowerString(from.getBasePowerString());
-        to.setBaseToughnessString(from.getBaseToughnessString());
         to.setText(from.getSpellText());
 
         // get CardCharacteristics for desired state
@@ -753,7 +745,7 @@ public class CardFactory {
             if (sa.hasParam("GainThisAbility") && (sa instanceof SpellAbility)) {
                 SpellAbility root = ((SpellAbility) sa).getRootAbility();
 
-                if (root.isTrigger() && root.getTrigger() != null) {
+                if (root.isTrigger()) {
                     state.addTrigger(root.getTrigger().copy(out, false));
                 } else if (root.isReplacementAbility()) {
                     state.addReplacementEffect(root.getReplacementEffect().copy(out, false));
