@@ -784,12 +784,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return false;
         }
 
-        CardStateName destState = transformCard.backside ? CardStateName.Original : CardStateName.Transformed;
-
         // below only when in play
         if (!isInPlay()) {
             return true;
         }
+
+        CardStateName destState = transformCard.backside ? CardStateName.Original : CardStateName.Transformed;
 
         // use Original State for the transform check
         if (!transformCard.getOriginalState(destState).getType().isPermanent()) {
@@ -887,7 +887,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean hasAlternateState() {
         // Note: Since FaceDown state is created lazily (whereas previously
         // it was always created), adjust threshold based on its existence.
-        int threshold = (states.containsKey(CardStateName.FaceDown) ? 2 : 1);
+        int threshold = states.containsKey(CardStateName.FaceDown) ? 2 : 1;
 
         int numStates = states.keySet().size();
 
@@ -6451,6 +6451,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return c.getCardForUi();
     }
 
+    //allow special cards to override this function to return another card for the sake of UI logic
+    public Card getCardForUi() {
+        return this;
+    }
+
     public IPaperCard getPaperCard() {
         IPaperCard cp = paperCard;
         if (cp != null) {
@@ -6484,11 +6489,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public void addStaticCommandList(Object[] objects) {
         staticCommandList.add(objects);
-    }
-
-    //allow special cards to override this function to return another card for the sake of UI logic
-    public Card getCardForUi() {
-        return this;
     }
 
     public String getOracleText() {

@@ -195,8 +195,7 @@ public class CostPutCounter extends CostPartWithList {
             return;
         }
 
-        GameEntityCounterTable tempTable = new GameEntityCounterTable();
-        tempTable.putAll(counterTable);
+        GameEntityCounterTable tempTable = new GameEntityCounterTable(counterTable);
         tempTable.replaceCounterEffect(ability.getHostCard().getGame(), ability, effect);
     }
 

@@ -1104,8 +1104,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 clone.counterTable = new GameEntityCounterTable(counterTable);
             }
             if (changeZoneTable != null) {
-                clone.changeZoneTable = new CardZoneTable();
-                clone.changeZoneTable.putAll(changeZoneTable);
+                clone.changeZoneTable = new CardZoneTable(changeZoneTable);
             }
 
             clone.payingMana = Lists.newArrayList(payingMana);

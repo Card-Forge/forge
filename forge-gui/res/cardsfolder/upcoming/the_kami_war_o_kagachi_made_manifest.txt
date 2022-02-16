@@ -21,7 +21,7 @@ S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefin
 K:Flying
 K:Trample
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ Whenever CARDNAME attacks, defending player chooses a nonland card in your graveyard. Return that card to your hand. CARDNAME gets +X/+0 until end of turn, where X is the mana value of that card.
-SVar:TrigChoose:DB$ ChooseCard | Defined$ TriggeredDefendingPlayer | Choices$ Creature.YouOwn+nonLand | Mandatory$ True | ChoiceZone$ Graveyard | AILogic$ WorstCard | RememberChosen$ True | SubAbility$ DBChangeZone
+SVar:TrigChoose:DB$ ChooseCard | Defined$ TriggeredDefendingPlayer | Choices$ Card.YouOwn+nonLand | Mandatory$ True | ChoiceZone$ Graveyard | AILogic$ WorstCard | RememberChosen$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ +X | SubAbility$ DBCleanup
 SVar:X:Remembered$CardManaCost
