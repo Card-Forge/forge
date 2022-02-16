@@ -26,6 +26,7 @@ public class ForgeInput extends FGestureAdapter {
     private final ForgeScene forgeScene;
     //mouseMoved and scrolled events for desktop version
     private int mouseMovedX, mouseMovedY;
+    private int rightTapCount;
 
     public ForgeInput(ForgeScene forgeScene) {
         this.forgeScene=forgeScene;
@@ -124,6 +125,19 @@ public class ForgeInput extends FGestureAdapter {
             }
         }
         forgeScene.buildTouchListeners(x, y, potentialListeners);
+    }
+
+    @Override
+    public boolean touchUp(int x, int y, int pointer, int button) {
+        if (button == Input.Buttons.RIGHT) {
+            Forge.magnifyToggle = !Forge.magnifyToggle;
+            if (rightTapCount == 2) {
+                Forge.magnifyShowDetails = !Forge.magnifyShowDetails;
+                rightTapCount = 0;
+            }
+            rightTapCount++;
+        }
+        return super.touchUp(x, y, pointer, button);
     }
 
     @Override
