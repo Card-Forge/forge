@@ -193,13 +193,9 @@ public class SubgameEffect extends SpellAbilityEffect {
         if (sa.hasParam("RememberPlayers")) {
             final String param = sa.getParam("RememberPlayers");
             if (param.equals("Win")) {
-                for (Player p : winPlayers) {
-                    hostCard.addRemembered(p);
-                }
+                hostCard.addRemembered(winPlayers);
             } else if (param.equals("NotWin")) {
-                for (Player p : notWinPlayers) {
-                    hostCard.addRemembered(p);
-                }
+                hostCard.addRemembered(notWinPlayers);
             }
         }
 

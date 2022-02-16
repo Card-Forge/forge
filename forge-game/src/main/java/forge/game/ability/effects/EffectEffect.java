@@ -198,9 +198,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
             // Set Remembered
             if (rememberList != null) {
-                for (final Object o : rememberList) {
-                    eff.addRemembered(o);
-                }
+                eff.addRemembered(rememberList);
                 if (sa.hasParam("ForgetOnMoved")) {
                     addForgetOnMovedTrigger(eff, sa.getParam("ForgetOnMoved"));
                     if (!"Stack".equals(sa.getParam("ForgetOnMoved"))) {
@@ -219,9 +217,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
             // Set Imprinted
             if (effectImprinted != null) {
-                for (final Card c : AbilityUtils.getDefinedCards(hostCard, effectImprinted, sa)) {
-                    eff.addImprintedCard(c);
-                }
+                eff.addImprintedCards(AbilityUtils.getDefinedCards(hostCard, effectImprinted, sa));
             }
 
             // Note counters on defined

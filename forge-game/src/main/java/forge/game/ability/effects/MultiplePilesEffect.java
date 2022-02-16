@@ -92,9 +92,7 @@ public class MultiplePilesEffect extends SpellAbilityEffect {
         if (randomChosen) {
             for (Entry<Player, List<CardCollectionView>> ev : record.entrySet()) {
                 CardCollectionView chosen = Aggregates.random(ev.getValue());
-                for (Card c : chosen) {
-                    source.addRemembered(c);
-                }
+                source.addRemembered(chosen);
             }
 
             SpellAbility sub = sa.getAdditionalAbility("ChosenPile");

@@ -1601,15 +1601,11 @@ public class AbilityUtils {
             if (sa.hasParam("ForgetOtherTargets")) {
                 host.clearRemembered();
             }
-            for (final GameObject o : sa.getTargets()) {
-                host.addRemembered(o);
-            }
+            host.addRemembered(sa.getTargets());
         }
 
         if (sa.hasParam("ImprintTargets") && sa.usesTargeting()) {
-            for (final Card c : sa.getTargets().getTargetCards()) {
-                host.addImprintedCard(c);
-            }
+            host.addImprintedCards(sa.getTargets().getTargetCards());
         }
 
         if (sa.hasParam("RememberCostMana")) {
