@@ -1,0 +1,26 @@
+Name:The Long Reach of Night
+ManaCost:3 B
+Types:Enchantment Saga
+K:Saga:3:DBEachOpp,DBEachOpp,DBTransform
+SVar:DBEachOpp:DB$ RepeatEach | RepeatSubAbility$ DBSac | RepeatPlayers$ Opponent | SpellDescription$ Each opponent sacrifices a creature unless they discard a card.
+SVar:DBSac:DB$ Sacrifice | SacValid$ Creature | Defined$ Player.IsRemembered | UnlessCost$ Discard<1/Card> | UnlessPayer$ Remembered
+SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AlternateMode:DoubleFaced
+DeckHas:Ability$Sacrifice|Discard
+Oracle:(As this Saga enters and after your draw step, add a lore counter.)\nI, II — Each opponent sacrifices a creature unless they discard a card.\nIII — Exile this Saga, then return it to the battlefield transformed under your control.
+
+ALTERNATE
+
+Name:Animus of Night's Reach
+ManaCost:no cost
+Colors:black
+Types:Enchantment Creature Spirit
+PT:0/4
+K:Menace
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +X/+0 until end of turn, where X is the number of creature cards in defending player's graveyard.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X
+SVar:X:Count$ValidGraveyard Creature.ControlledBy TriggeredDefendingPlayer
+SVar:HasAttackEffect:TRUE
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhenever Animus of Night's Reach attacks, it gets +X/+0 until end of turn, where X is the number of creature cards in defending player's graveyard.

@@ -372,6 +372,35 @@ public class BoosterGenerator {
             if (!boosterReplaceSlotFromPrintSheet.isEmpty()) {
                 replaceCardFromExtraSheet(result, boosterReplaceSlotFromPrintSheet);
             }
+
+            String sheetReplaceCardFromSheet = edition.getSheetReplaceCardFromSheet();
+            if (!sheetReplaceCardFromSheet.isEmpty()) {
+                String[] split = sheetReplaceCardFromSheet.split("_");
+                PrintSheet replaceThis = StaticData.instance().getPrintSheets().get(split[0]);
+                List<PaperCard> candidates = Lists.newArrayList();
+                for (PaperCard p : result) {
+                    if (replaceThis.all().contains(p)) {
+                        candidates.add(candidates.size(), p);
+                    }
+                }
+                result.removeAll(candidates);
+                replaceCardFromExtraSheet(candidates, split[1]);
+                result.addAll(candidates);
+            }
+            String sheetReplaceCardFromSheet2 = edition.getSheetReplaceCardFromSheet2();
+            if (!sheetReplaceCardFromSheet2.isEmpty()) {
+                String[] split = sheetReplaceCardFromSheet2.split("_");
+                PrintSheet replaceThis = StaticData.instance().getPrintSheets().get(split[0]);
+                List<PaperCard> candidates = Lists.newArrayList();
+                for (PaperCard p : result) {
+                    if (replaceThis.all().contains(p)) {
+                        candidates.add(candidates.size(), p);
+                    }
+                }
+                result.removeAll(candidates);
+                replaceCardFromExtraSheet(candidates, split[1]);
+                result.addAll(candidates);
+            }
         }
 
         return result;

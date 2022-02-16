@@ -9,4 +9,5 @@ T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | CombatDamage$ True | Exe
 SVar:TrigDiscard1:AB$ Discard | Cost$ Sac<1/CARDNAME> | Mode$ Hand | SubAbility$ DBDraw
 SVar:TrigDiscard2:AB$ Discard | Cost$ Sac<1/Creature.EquippedBy/equipped creature> | Mode$ Hand | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 3
+DeckHas:Ability$Sacrifice|Discard
 Oracle:Equipped creature gets +2/+2.\nWhenever Ogre-Head Helm or equipped creature deals combat damage to a player, you may sacrifice it. If you do, discard your hand, then draw three cards.\nReconfigure {3} ({3}: Attach to target creature you control; or unattach from a creature. Reconfigure only as a sorcery. While attached, this isn't a creature.)
