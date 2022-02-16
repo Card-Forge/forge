@@ -2103,7 +2103,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                         labels.add(c);
                     }
                 }
-                getGui().reveal(localizer.getMessage("lblActionFromPlayerDeck", message, Lang.getInstance().getPossessedObject(MessageUtil.mayBeYou(player, p), "")),
+                if (!labels.isEmpty())
+                    getGui().reveal(localizer.getMessage("lblActionFromPlayerDeck", message, Lang.getInstance().getPossessedObject(MessageUtil.mayBeYou(player, p), "")),
                         ImmutableList.copyOf(labels));
             }
             return;
