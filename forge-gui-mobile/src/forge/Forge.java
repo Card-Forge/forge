@@ -35,6 +35,7 @@ import forge.model.FModel;
 import forge.screens.ClosingScreen;
 import forge.screens.FScreen;
 import forge.screens.SplashScreen;
+import forge.screens.TransitionScreen;
 import forge.screens.home.HomeScreen;
 import forge.screens.home.NewGameMenu;
 import forge.screens.match.MatchController;
@@ -69,6 +70,7 @@ public class Forge implements ApplicationListener {
     private static FScreen currentScreen;
     protected static SplashScreen splashScreen;
     protected static ClosingScreen closingScreen;
+    protected static TransitionScreen transitionScreen;
     public static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
     public static boolean safeToClose = false;
@@ -565,6 +567,12 @@ public class Forge implements ApplicationListener {
     public static void clearCurrentScreen() {
         currentScreen = null;
     }
+    public static void setTransitionScreen(TransitionScreen screen) {
+        transitionScreen = screen;
+    }
+    public static void clearTransitionScreen() {
+        transitionScreen = null;
+    }
 
     public static void clearSplashScreen() {
         splashScreen = null;
@@ -605,8 +613,11 @@ public class Forge implements ApplicationListener {
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
 
             FContainer screen = currentScreen;
+
             if (closingScreen != null) {
                 screen = closingScreen;
+            } else if(transitionScreen != null){
+                screen = transitionScreen;
             } else if (screen == null) {
                 screen = splashScreen;
                 if (screen == null) {
