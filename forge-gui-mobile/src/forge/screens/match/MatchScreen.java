@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 import com.badlogic.gdx.math.Vector2;
 import forge.animation.ForgeAnimation;
 import forge.assets.FImage;
+import forge.card.CardImageRenderer;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.game.spellability.StackItemView;
@@ -494,7 +495,10 @@ public class MatchScreen extends FScreen {
                                             if ((cardY+cardH) > bottomPlayerPrompt.screenPos.y)
                                                 cardY = bottomPlayerPrompt.screenPos.y - cardH;
                                         }
-                                        CardRenderer.drawCard(g, cardPanel.getCard(), cardX, cardY, cardW, cardH, CardRenderer.CardStackPosition.Top, false, false, false, true);
+                                        if (Forge.magnifyShowDetails)
+                                            CardImageRenderer.drawDetails(g, cardPanel.getCard(), MatchController.instance.getGameView(), false, cardX, cardY, cardW, cardH);
+                                        else
+                                            CardRenderer.drawCard(g, cardPanel.getCard(), cardX, cardY, cardW, cardH, CardRenderer.CardStackPosition.Top, false, false, false, true);
                                     }
                                 }
                             } catch (Exception e) {
@@ -512,7 +516,10 @@ public class MatchScreen extends FScreen {
                                         cardY = topPlayerPanel.getField().screenPos.y;
                                     if ((cardY+cardH) > bottomPlayerPrompt.screenPos.y)
                                         cardY = bottomPlayerPrompt.screenPos.y - cardH;
-                                    CardRenderer.drawCard(g, cardView, cardX, cardY, cardW, cardH, CardRenderer.CardStackPosition.Top, false, false, false, true);
+                                    if (Forge.magnifyShowDetails)
+                                        CardImageRenderer.drawDetails(g, cardView, MatchController.instance.getGameView(), false, cardX, cardY, cardW, cardH);
+                                    else
+                                        CardRenderer.drawCard(g, cardView, cardX, cardY, cardW, cardH, CardRenderer.CardStackPosition.Top, false, false, false, true);
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();

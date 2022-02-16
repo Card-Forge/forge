@@ -76,6 +76,7 @@ public class Forge implements ApplicationListener {
     public static boolean safeToClose = false;
     public static boolean magnify = false;
     public static boolean magnifyToggle = true;
+    public static boolean magnifyShowDetails = false;
     private static int continuousRenderingCount = 1; //initialize to 1 since continuous rendering is the default
     private static final Deque<FScreen> Dscreens = new ArrayDeque<>();
     private static boolean textureFiltering = false;

@@ -181,7 +181,7 @@ public abstract class FGestureAdapter extends InputAdapter {
                         || lastTapPointer != pointer
                         || time - lastTapTime > tapCountInterval
                         || !isWithinTapSquare(x, y, lastTapX, lastTapY)) {
-                    //todo add magnifier mode switch
+                    Forge.magnifyShowDetails = !Forge.magnifyShowDetails;
                     tapCount = 0;
                 }
                 tapCount++;
