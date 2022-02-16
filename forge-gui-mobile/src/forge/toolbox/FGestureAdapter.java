@@ -1,6 +1,7 @@
 package forge.toolbox;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
@@ -84,6 +85,10 @@ public abstract class FGestureAdapter extends InputAdapter {
         return touchDown((float)x, (float)y, pointer, button);
     }
     private boolean touchDown(float x, float y, int pointer, int button) {
+        if (button == Input.Buttons.RIGHT) {
+            //catch right click
+            return true;
+        }
         if (pointer > 1) { return false; }
 
         if (pointer == 0) {
@@ -166,6 +171,30 @@ public abstract class FGestureAdapter extends InputAdapter {
         return touchUp((float)x, (float)y, pointer, button);
     }
     private boolean touchUp(float x, float y, int pointer, int button) {
+        if (button == Input.Buttons.RIGHT) {
+            //catch right click and set toggle magnify
+            if (inTapSquare) {
+                // handle taps
+                long time = Gdx.input.getCurrentEventTime();
+                if (tapCount == 2 //treat 3rd tap as a first tap, and 4th as a double tap
+                        || lastTapButton != button
+                        || lastTapPointer != pointer
+                        || time - lastTapTime > tapCountInterval
+                        || !isWithinTapSquare(x, y, lastTapX, lastTapY)) {
+                    //todo add magnifier mode switch
+                    tapCount = 0;
+                }
+                tapCount++;
+                lastTapTime = time;
+                lastTapX = x;
+                lastTapY = y;
+                lastTapButton = button;
+                lastTapPointer = pointer;
+                Forge.magnifyToggle = !Forge.magnifyToggle;
+                //todo add cursor image switch
+            }
+            return false;
+        }
         if (pointer > 1) { return false; }
 
         if (longPressHandled) { //do nothing more if long press handled
