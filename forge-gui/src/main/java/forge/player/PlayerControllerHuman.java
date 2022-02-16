@@ -2097,6 +2097,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 final Map<DeckSection, List<? extends PaperCard>> removedUnplayableCards = unplayable.get(p);
                 final List<PaperCard> labels = new ArrayList<>();
                 for (final DeckSection s: new TreeSet<>(removedUnplayableCards.keySet())) {
+                    if (DeckSection.Sideboard.equals(s))
+                        continue;
                     for (PaperCard c: removedUnplayableCards.get(s)) {
                         labels.add(c);
                     }
