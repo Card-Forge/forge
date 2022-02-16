@@ -2,7 +2,6 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 import forge.Forge;
 import forge.Graphics;
@@ -12,7 +11,6 @@ import forge.gamemodes.match.LobbySlotType;
 import forge.interfaces.IUpdateable;
 import forge.screens.FScreen;
 import forge.screens.TransitionScreen;
-import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOverlay;
 
