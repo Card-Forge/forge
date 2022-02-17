@@ -263,19 +263,18 @@ public class DamageDealEffect extends DamageBaseEffect {
         int excess = 0;
         int dmgToTarget = 0;
         if (sa.hasParam("ExcessDamage") || sa.hasParam("ExcessSVar")) {
-            int lethalPW = 0;
-            int lethalCreature = 0;
+            int lethal = 0;
             if (c.isCreature()) {
-                lethalCreature = Math.max(0, c.getLethalDamage());
+                lethal = Math.max(0, c.getLethalDamage());
                 if (sourceLKI.hasKeyword(Keyword.DEATHTOUCH)) {
-                    lethalCreature = Math.min(lethalCreature, 1);
+                    lethal = Math.min(lethal, 1);
                 }
             }
             if (c.isPlaneswalker()) {
-                lethalPW = c.getCurrentLoyalty();
+                int lethalPW = c.getCurrentLoyalty();
+                // 120.4a
+                lethal = c.isCreature() ? Math.min(lethal, lethalPW) : lethalPW;
             }
-            // 120.4a
-            int lethal = Math.min(lethalPW, lethalCreature);
             dmgToTarget = Math.min(lethal, dmg);
             excess = dmg - dmgToTarget;
         }
