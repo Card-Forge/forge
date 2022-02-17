@@ -2223,14 +2223,21 @@ public class ComputerUtilCombat {
      */
     public final static int getDamageToKill(final Card c, boolean withShields) {
         int damageShield = withShields ? c.getPreventNextDamageTotalShields() : 0;
-        int killDamage = (c.isPlaneswalker() ? c.getCurrentLoyalty() : c.getLethalDamage()) + damageShield;
+        int killDamage = 0;
+        if (c.isCreature()) {
+            killDamage = Math.max(0, c.getLethalDamage());
+        }
+        if (c.isPlaneswalker()) {
+            int killDamagePW = c.getCurrentLoyalty();
+            killDamage = c.isCreature() ? Math.min(killDamage, killDamagePW) : killDamagePW;
+        }
 
         if (killDamage > damageShield
                 && c.hasSVar("DestroyWhenDamaged")) {
-            killDamage = 1 + damageShield;
+            killDamage = 1;
         }
 
-        return killDamage;
+        return killDamage + damageShield;
     }
 
     /**
