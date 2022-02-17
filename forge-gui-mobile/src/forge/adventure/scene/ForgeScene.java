@@ -2,9 +2,11 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.utils.ScreenUtils;
 import forge.Forge;
 import forge.Graphics;
+import forge.adventure.util.Config;
 import forge.animation.ForgeAnimation;
 import forge.assets.ImageCache;
 import forge.gamemodes.match.LobbySlotType;
@@ -84,6 +86,9 @@ public abstract  class ForgeScene extends Scene implements IUpdateable {
                     Forge.clearTransitionScreen();
                     Forge.openScreen(getScreen());
                     Gdx.input.setInputProcessor(input);
+                    Pixmap pm = new Pixmap(Config.instance().getFile(Forge.magnifyToggle ? "skin/cursor1.png" : "skin/cursor2.png"));
+                    Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
+                    pm.dispose();
                 }
             };
             Forge.setTransitionScreen(new TransitionScreen(runnable, ScreenUtils.getFrameBufferTexture(), true));

@@ -6,7 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.utils.ScreenUtils;
+import forge.adventure.util.Config;
 import forge.ai.GameState;
 import forge.deck.Deck;
 import forge.game.player.Player;
@@ -312,6 +315,9 @@ public class MatchController extends AbstractGuiGame {
                 public void run() {
                     Forge.clearTransitionScreen();
                     Forge.clearCurrentScreen();
+                    Pixmap pm = new Pixmap(Config.instance().getFile("skin/cursor0.png"));
+                    Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
+                    pm.dispose();
                 }
             };
             Forge.setTransitionScreen(new TransitionScreen(runnable, ScreenUtils.getFrameBufferTexture(), false));

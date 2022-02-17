@@ -40,6 +40,7 @@ import forge.screens.TransitionScreen;
 import forge.screens.home.HomeScreen;
 import forge.screens.home.NewGameMenu;
 import forge.screens.match.MatchController;
+import forge.screens.match.MatchScreen;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.*;
@@ -281,9 +282,6 @@ public class Forge implements ApplicationListener {
             System.out.println(fScreen.toString());*/
     }
     public static void openHomeDefault() {
-        if (magnifyToggle && cursorName != "1") {
-            setCursorFromTextureRegion(FSkin.getCursor().get(1), "1");
-        }
         GuiBase.setIsAdventureMode(false);
         openHomeScreen(-1, null); //default for startup
         isMobileAdventureMode = false;
@@ -294,7 +292,7 @@ public class Forge implements ApplicationListener {
     }
     public static void openAdventure() {
         //pixl cursor for adventure
-        Pixmap pm = new Pixmap(Config.instance().getFile("skin/cursor.png"));
+        Pixmap pm = new Pixmap(Config.instance().getFile("skin/cursor0.png"));
         Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
         pm.dispose();
         //continuous rendering is needed for adventure mode
@@ -364,9 +362,11 @@ public class Forge implements ApplicationListener {
     }
     public static void setCursorFromTextureRegion(TextureRegion textureRegion, String name) {
         if (GuiBase.isAndroid()||isMobileAdventureMode)
-            return; //todo custom cursor for adventure
+            return; //custom cursor for adventure is handled differently
         if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ENABLE_MAGNIFIER) && name != "0")
             return; //don't change if it's disabled
+        if (currentScreen != null && !currentScreen.toString().toLowerCase().contains("match") && name != "0")
+            return; // cursor indicator should be during matches
         TextureData textureData = textureRegion.getTexture().getTextureData();
         if (!textureData.isPrepared()) {
             textureData.prepare();
@@ -562,6 +562,16 @@ public class Forge implements ApplicationListener {
                         Dscreens.addFirst(screen0);
                     }
                     setCurrentScreen(screen0);
+                    if (screen0 instanceof MatchScreen) {
+                        //set cursor for classic mode
+                        if (!isMobileAdventureMode) {
+                            if (magnifyToggle) {
+                                setCursorFromTextureRegion(FSkin.getCursor().get(1), "1");
+                            } else {
+                                setCursorFromTextureRegion(FSkin.getCursor().get(2), "2");
+                            }
+                        }
+                    }
                 }
             }
         });

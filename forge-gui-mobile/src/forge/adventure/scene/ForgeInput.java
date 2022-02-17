@@ -1,7 +1,10 @@
 package forge.adventure.scene;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Pixmap;
 import forge.Forge;
+import forge.adventure.util.Config;
 import forge.gui.GuiBase;
 import forge.gui.error.BugReporter;
 import forge.screens.match.MatchController;
@@ -136,6 +139,9 @@ public class ForgeInput extends FGestureAdapter {
                 rightTapCount = 0;
             }
             rightTapCount++;
+            Pixmap pm = new Pixmap(Config.instance().getFile(Forge.magnifyToggle ? "skin/cursor1.png" : "skin/cursor2.png"));
+            Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
+            pm.dispose();
         }
         return super.touchUp(x, y, pointer, button);
     }
