@@ -1,0 +1,10 @@
+Name:Bearer of Memory
+ManaCost:2 G
+Types:Enchantment Creature Human Monk
+PT:3/2
+A:AB$ PutCounter | Cost$ 5 G | ValidTgts$ Enchantment.Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target enchantment creature. It gains trample until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Trample
+DeckHas:Ability$Counters
+DeckNeeds:Type$Enchantment.Creature
+Oracle:{5}{G}: Put a +1/+1 counter on target enchantment creature. It gains trample until end of turn.
+ 

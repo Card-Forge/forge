@@ -1,0 +1,11 @@
+Name:Grafted Growth
+ManaCost:2 G
+Types:Enchantment Aura
+K:Enchant land
+A:SP$ Attach | ValidTgts$ Land | TgtPrompt$ Select target land | AILogic$ Pump
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on target creature or Vehicle you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl,Vehicle.YouCtrl | TgtPrompt$ Select target creature or Vehicle you control | CounterType$ P1P1 | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Land.EnchantedBy | AddAbility$ ABManaAny2 | Description$ Enchanted land has "{T}: Add two mana of any one color."
+SVar:ABManaAny2:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | SpellDescription$ Add two mana of any one color.
+DeckHas:Ability$Counters
+Oracle:Enchant land\nWhen Grafted Growth enters the battlefield, put a +1/+1 counter on target creature or Vehicle you control.\nEnchanted land has "{T}: Add two mana of any one color."
