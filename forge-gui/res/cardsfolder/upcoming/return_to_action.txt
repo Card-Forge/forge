@@ -1,0 +1,9 @@
+Name:Return to Action
+ManaCost:1 B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | KW$ Lifelink | SubAbility$ DBAnimate | StackDescription$ Until end of turn, {c:Targeted} gets +1/+0 and gains lifelink and "When this creature dies, return it to the battlefield tapped under its owner's control." | SpellDescription$ Until end of turn, target creature gets +1/+0 and gains lifelink and "When this creature dies, return it to the battlefield tapped under its owner's control."
+SVar:DBAnimate:DB$ Animate | Triggers$ DiesTrig | Defined$ ParentTarget | StackDescription$ None
+SVar:DiesTrig:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this creature dies, return it to the battlefield tapped under its owner's control.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | Defined$ TriggeredNewCardLKICopy
+DeckHas:Ability$LifeGain
+Oracle:Until end of turn, target creature gets +1/+0 and gains lifelink and "When this creature dies, return it to the battlefield tapped under its owner's control."
