@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
 import forge.Forge;
+import forge.assets.FSkin;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.util.Utils;
@@ -191,7 +192,11 @@ public abstract class FGestureAdapter extends InputAdapter {
                 lastTapButton = button;
                 lastTapPointer = pointer;
                 Forge.magnifyToggle = !Forge.magnifyToggle;
-                //todo add cursor image switch
+                if (Forge.magnifyToggle && Forge.cursorName != "1") {
+                    Forge.setCursorFromTextureRegion(FSkin.getCursor().get(1), "1");
+                } else if (!Forge.magnifyToggle && Forge.cursorName != "2") {
+                    Forge.setCursorFromTextureRegion(FSkin.getCursor().get(2), "2");
+                }
             }
             return false;
         }

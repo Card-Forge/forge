@@ -4,9 +4,11 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -77,6 +79,7 @@ public class Forge implements ApplicationListener {
     public static boolean magnify = false;
     public static boolean magnifyToggle = true;
     public static boolean magnifyShowDetails = false;
+    public static String cursorName = "";
     private static int continuousRenderingCount = 1; //initialize to 1 since continuous rendering is the default
     private static final Deque<FScreen> Dscreens = new ArrayDeque<>();
     private static boolean textureFiltering = false;
@@ -279,6 +282,9 @@ public class Forge implements ApplicationListener {
             System.out.println(fScreen.toString());*/
     }
     public static void openHomeDefault() {
+        if (magnifyToggle && cursorName != "1") {
+            setCursorFromTextureRegion(FSkin.getCursor().get(1), "1");
+        }
         GuiBase.setIsAdventureMode(false);
         openHomeScreen(-1, null); //default for startup
         isMobileAdventureMode = false;
@@ -357,7 +363,33 @@ public class Forge implements ApplicationListener {
             }
         });
     }
-
+    public static void setCursorFromTextureRegion(TextureRegion textureRegion, String name) {
+        if (GuiBase.isAndroid()||isMobileAdventureMode)
+            return; //todo custom cursor for adventure
+        if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ENABLE_MAGNIFIER) && name != "0")
+            return; //don't change if it's disabled
+        TextureData textureData = textureRegion.getTexture().getTextureData();
+        if (!textureData.isPrepared()) {
+            textureData.prepare();
+        }
+        Pixmap pm = new Pixmap(
+                textureRegion.getRegionWidth(),
+                textureRegion.getRegionHeight(),
+                textureData.getFormat()
+        );
+        pm.drawPixmap(
+                textureData.consumePixmap(), // The other Pixmap
+                0, // The target x-coordinate (top left corner)
+                0, // The target y-coordinate (top left corner)
+                textureRegion.getRegionX(), // The source x-coordinate (top left corner)
+                textureRegion.getRegionY(), // The source y-coordinate (top left corner)
+                textureRegion.getRegionWidth(), // The width of the area from the other Pixmap in pixels
+                textureRegion.getRegionHeight() // The height of the area from the other Pixmap in pixels
+        );
+        Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
+        cursorName = name;
+        pm.dispose();
+    }
     public static Clipboard getClipboard() {
         return clipboard;
     }

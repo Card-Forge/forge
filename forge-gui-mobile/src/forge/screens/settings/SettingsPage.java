@@ -560,8 +560,16 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         if (!GuiBase.isAndroid()) {
             lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_MAGNIFIER,
                     localizer.getMessage("lblEnableMagnifier"),
-                    localizer.getMessage("nlEnableMagnifier")),
-                    4);
+                    localizer.getMessage("nlEnableMagnifier")){
+                    @Override
+                    public void select() {
+                        super.select();
+                        //set default
+                        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_MAGNIFIER)) {
+                            Forge.setCursorFromTextureRegion(FSkin.getCursor().get(0), "0");
+                        }
+                }
+            },4);
         }
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_FPS,
                 localizer.getMessage("lblShowFPSDisplay"),
