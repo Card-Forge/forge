@@ -20,6 +20,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 import forge.util.Localizer;
 
 import java.util.function.Function;
@@ -194,6 +195,11 @@ public class SettingsScene extends UIScene {
                         Config.instance().getSettingData().height = 720;
                     }
                     Config.instance().saveSettings();
+                    //update preference for classic mode if needed
+                    if (FModel.getPreferences().getPref(ForgePreferences.FPref.UI_VIDEO_MODE) != mode) {
+                        FModel.getPreferences().setPref(ForgePreferences.FPref.UI_VIDEO_MODE, mode);
+                        FModel.getPreferences().save();
+                    }
                     return null;
                 }
             });
@@ -202,8 +208,14 @@ public class SettingsScene extends UIScene {
             addSettingField("Fullscreen", Config.instance().getSettingData().fullScreen, new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    Config.instance().getSettingData().fullScreen=((CheckBox) actor).isChecked();
+                    boolean value = ((CheckBox) actor).isChecked();
+                    Config.instance().getSettingData().fullScreen=value;
                     Config.instance().saveSettings();
+                    //update
+                    if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_FULLSCREEN_MODE) != value) {
+                        FModel.getPreferences().setPref(ForgePreferences.FPref.UI_LANDSCAPE_MODE, value);
+                        FModel.getPreferences().save();
+                    }
                 }
             });
         }

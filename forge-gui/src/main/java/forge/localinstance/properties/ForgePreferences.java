@@ -148,6 +148,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_REMIND_ON_PRIORITY ("false"),
         UI_CARD_COUNTER_DISPLAY_TYPE(ForgeConstants.CounterDisplayType.TEXT.getName()),
         UI_CARD_COUNTER_DISPLAY_LOCATION(ForgeConstants.CounterDisplayLocation.TOP.getName()),
+        UI_FULLSCREEN_MODE ("false"),
+        UI_VIDEO_MODE ("720p"),
         UI_ANDROID_MINIMIZE_ON_SCRLOCK("false"),
         UI_ROTATE_PLANE_OR_PHENOMENON("false"),
         UI_ROTATE_SPLIT_CARDS("true"),
