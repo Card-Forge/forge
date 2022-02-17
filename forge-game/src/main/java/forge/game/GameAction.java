@@ -2260,10 +2260,12 @@ public class GameAction {
     public void dealDamage(final boolean isCombat, final CardDamageMap damageMap, final CardDamageMap preventMap,
             final GameEntityCounterTable counterTable, final SpellAbility cause) {
         // Clear assigned damage if is combat
-        for (Map.Entry<GameEntity, Map<Card, Integer>> et : damageMap.columnMap().entrySet()) {
-            final GameEntity ge = et.getKey();
-            if (isCombat && ge instanceof Card) {
-                ((Card) ge).clearAssignedDamage();
+        if (isCombat) {
+            for (Map.Entry<GameEntity, Map<Card, Integer>> et : damageMap.columnMap().entrySet()) {
+                final GameEntity ge = et.getKey();
+                if (ge instanceof Card) {
+                    ((Card) ge).clearAssignedDamage();
+                }
             }
         }
 
@@ -2282,7 +2284,7 @@ public class GameAction {
                 sum += e.getValue();
             }
 
-            if (sourceLKI.hasKeyword(Keyword.LIFELINK)) {
+            if (sum > 0 && sourceLKI.hasKeyword(Keyword.LIFELINK)) {
                 sourceLKI.getController().gainLife(sum, sourceLKI, cause);
             }
         }
