@@ -92,7 +92,7 @@ public class ControlWinLose {
         if (openHomeScreen || humancount == 0)
             Forge.openHomeScreen(Forge.lastButtonIndex, Forge.getCurrentScreen());
         //reset cursor
-        Forge.setCursorFromTextureRegion(FSkin.getCursor().get(0), "0");
+        Forge.setCursor(FSkin.getCursor().get(0), "0");
     }
 
     /**

@@ -445,7 +445,7 @@ public class FSkin {
             FSkin.cursor.put(1, new TextureRegion(cursors, 32, 0, 32, 32)); //magnify on
             FSkin.cursor.put(2, new TextureRegion(cursors, 64, 0, 32, 32)); // magnify off
 
-            Forge.setCursorFromTextureRegion(cursor.get(0), "0");
+            Forge.setCursor(cursor.get(0), "0");
 
             preferredIcons.dispose();
             pxDefaultAvatars.dispose();

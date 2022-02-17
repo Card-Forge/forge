@@ -315,9 +315,7 @@ public class MatchController extends AbstractGuiGame {
                 public void run() {
                     Forge.clearTransitionScreen();
                     Forge.clearCurrentScreen();
-                    Pixmap pm = new Pixmap(Config.instance().getFile("skin/cursor0.png"));
-                    Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
-                    pm.dispose();
+                    Forge.setCursor(null, "0");
                 }
             };
             Forge.setTransitionScreen(new TransitionScreen(runnable, ScreenUtils.getFrameBufferTexture(), false));

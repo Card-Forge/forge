@@ -1,6 +1,7 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -25,7 +26,7 @@ public abstract  class ForgeScene extends Scene implements IUpdateable {
 
     //GameLobby lobby;
     Graphics localGraphics;
-    ForgeInput input=new ForgeInput(this);
+    InputProcessor input= Forge.getInputProcessor(); //new ForgeInput(this);
 
     @Override
     public void dispose() {
@@ -85,10 +86,8 @@ public abstract  class ForgeScene extends Scene implements IUpdateable {
                 public void run() {
                     Forge.clearTransitionScreen();
                     Forge.openScreen(getScreen());
+                    Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
                     Gdx.input.setInputProcessor(input);
-                    Pixmap pm = new Pixmap(Config.instance().getFile(Forge.magnifyToggle ? "skin/cursor1.png" : "skin/cursor2.png"));
-                    Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
-                    pm.dispose();
                 }
             };
             Forge.setTransitionScreen(new TransitionScreen(runnable, ScreenUtils.getFrameBufferTexture(), true));

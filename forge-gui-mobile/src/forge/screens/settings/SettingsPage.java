@@ -608,7 +608,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         super.select();
                         //set default
                         if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_MAGNIFIER)) {
-                            Forge.setCursorFromTextureRegion(FSkin.getCursor().get(0), "0");
+                            Forge.setCursor(FSkin.getCursor().get(0), "0");
                         }
                 }
             },4);

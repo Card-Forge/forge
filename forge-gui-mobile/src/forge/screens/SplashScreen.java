@@ -180,6 +180,7 @@ public class SplashScreen extends FContainer {
         g.setAlphaComposite(oldAlpha);
     }
     private void showSelector(Graphics g, float alpha) {
+        if (background == null) { return; }
         g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, getWidth(), getHeight());
 
         float x, y, w, h;

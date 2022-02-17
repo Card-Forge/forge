@@ -4,6 +4,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
 import com.badlogic.gdx.utils.ScreenUtils;
+import forge.adventure.scene.AdventureDeckEditor;
 import forge.adventure.scene.ForgeScene;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
@@ -111,6 +113,7 @@ public class Forge implements ApplicationListener {
     public static int hoveredCount = 0;
     public static boolean afterDBloaded = false;
     public static int mouseButtonID = 0;
+    public static InputProcessor inputProcessor;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
         app = new Forge();
@@ -149,8 +152,9 @@ public class Forge implements ApplicationListener {
         splashScreen = new SplashScreen();
         frameRate = new FrameRate();
         animationBatch = new SpriteBatch();
+        inputProcessor = new MainInputProcessor();
 
-        Gdx.input.setInputProcessor(new MainInputProcessor());
+        Gdx.input.setInputProcessor(inputProcessor);
         /*
          Set CatchBackKey here and exit the app when you hit the
          back button while the textures,fonts,etc are still loading,
@@ -240,6 +244,9 @@ public class Forge implements ApplicationListener {
         });
     }
 
+    public static InputProcessor getInputProcessor() {
+        return inputProcessor;
+    }
     public static Graphics getGraphics() {
         return graphics;
     }
@@ -291,14 +298,12 @@ public class Forge implements ApplicationListener {
         stopContinuousRendering(); //save power consumption by disabling continuous rendering once assets loaded
     }
     public static void openAdventure() {
-        //pixl cursor for adventure
-        Pixmap pm = new Pixmap(Config.instance().getFile("skin/cursor0.png"));
-        Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
-        pm.dispose();
         //continuous rendering is needed for adventure mode
         startContinuousRendering();
         GuiBase.setIsAdventureMode(true);
         isMobileAdventureMode = true;
+        //pixl cursor for adventure
+        setCursor(null, "0");
         try {
             for (SceneType sceneType : SceneType.values()) {
                 sceneType.instance.resLoaded();
@@ -360,9 +365,16 @@ public class Forge implements ApplicationListener {
             }
         });
     }
-    public static void setCursorFromTextureRegion(TextureRegion textureRegion, String name) {
-        if (GuiBase.isAndroid()||isMobileAdventureMode)
-            return; //custom cursor for adventure is handled differently
+    public static void setCursor(TextureRegion textureRegion, String name) {
+        if (Forge.isMobileAdventureMode) {
+            String path = "skin/cursor"+name+".png";
+            Pixmap pm = new Pixmap(Config.instance().getFile(path));
+            Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
+            pm.dispose();
+            return;
+        }
+        if (GuiBase.isAndroid()||textureRegion == null)
+            return;
         if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ENABLE_MAGNIFIER) && name != "0")
             return; //don't change if it's disabled
         if (currentScreen != null && !currentScreen.toString().toLowerCase().contains("match") && name != "0")
@@ -434,7 +446,10 @@ public class Forge implements ApplicationListener {
     }
 
     public static void showMenu() {
-        if (currentScreen == null) { return; }
+        if (isMobileAdventureMode)
+            return;
+        if (currentScreen == null)
+            return;
         endKeyInput(); //end key input before menu shown
         if (FOverlay.getTopOverlay() == null) { //don't show menu if overlay open
             currentScreen.showMenu();
@@ -449,6 +464,9 @@ public class Forge implements ApplicationListener {
         back(false);
     }
     public static void back(boolean clearlastMatch) {
+        if (isMobileAdventureMode) {
+            return;
+        }
         FScreen lastMatch = currentScreen;
         if(destroyThis && isLandscapeMode())
             return;
@@ -566,9 +584,9 @@ public class Forge implements ApplicationListener {
                         //set cursor for classic mode
                         if (!isMobileAdventureMode) {
                             if (magnifyToggle) {
-                                setCursorFromTextureRegion(FSkin.getCursor().get(1), "1");
+                                setCursor(FSkin.getCursor().get(1), "1");
                             } else {
-                                setCursorFromTextureRegion(FSkin.getCursor().get(2), "2");
+                                setCursor(FSkin.getCursor().get(2), "2");
                             }
                         }
                     }
