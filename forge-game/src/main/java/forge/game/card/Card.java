@@ -1997,10 +1997,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     final Cost cost1 = new Cost(costString1, false);
                     final Cost cost2 = new Cost(costString2, false);
                     sbLong.append("As an additional cost to cast this spell, ")
-                            .append(cost1.toSimpleString())
+                            .append(StringUtils.uncapitalize(cost1.toSimpleString()))
                             .append(" or pay ")
-                            .append(cost2.toSimpleString())
-                            .append(".\r\n");
+                            .append(StringUtils.uncapitalize(cost2.toSimpleString()))
+                            .append(".\r\n\r\n");
                 } else if (keyword.startsWith("Multikicker")) {
                     if (!keyword.endsWith("Generic")) {
                         final String[] n = keyword.split(":");
@@ -2576,10 +2576,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     final Cost cost1 = new Cost(k[1], false);
                     final Cost cost2 = new Cost(k[2], false);
                     sbBefore.append("As an additional cost to cast this spell, ")
-                            .append(cost1.toSimpleString())
+                            .append(StringUtils.uncapitalize(cost1.toSimpleString()))
                             .append(" or pay ")
-                            .append(cost2.toSimpleString())
-                            .append(".\r\n");
+                            .append(StringUtils.uncapitalize(cost2.toSimpleString()))
+                            .append(".\r\n\r\n");
                 } else if (keyword.startsWith("Presence") || keyword.startsWith("MayFlash")) {
                     // Pseudo keywords, only print Reminder
                     sbBefore.append(inst.getReminderText());
