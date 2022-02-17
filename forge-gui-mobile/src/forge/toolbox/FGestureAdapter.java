@@ -192,9 +192,9 @@ public abstract class FGestureAdapter extends InputAdapter {
                 lastTapButton = button;
                 lastTapPointer = pointer;
                 Forge.magnifyToggle = !Forge.magnifyToggle;
-                if (Forge.magnifyToggle && Forge.cursorName != "1") {
+                if (Forge.magnifyToggle) {
                     Forge.setCursorFromTextureRegion(FSkin.getCursor().get(1), "1");
-                } else if (!Forge.magnifyToggle && Forge.cursorName != "2") {
+                } else {
                     Forge.setCursorFromTextureRegion(FSkin.getCursor().get(2), "2");
                 }
             }
