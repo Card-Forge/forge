@@ -6,10 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.utils.ScreenUtils;
-import forge.adventure.util.Config;
 import forge.ai.GameState;
 import forge.deck.Deck;
 import forge.game.player.Player;
