@@ -1854,11 +1854,9 @@ public class GameAction {
     public void reveal(CardCollectionView cards, Player cardOwner) {
         reveal(cards, cardOwner, true);
     }
-
     public void reveal(CardCollectionView cards, Player cardOwner, boolean dontRevealToOwner) {
         reveal(cards, cardOwner, dontRevealToOwner, null);
     }
-
     public void reveal(CardCollectionView cards, Player cardOwner, boolean dontRevealToOwner, String messagePrefix) {
         Card firstCard = Iterables.getFirst(cards, null);
         if (firstCard == null) {
@@ -1866,7 +1864,6 @@ public class GameAction {
         }
         reveal(cards, game.getZoneOf(firstCard).getZoneType(), cardOwner, dontRevealToOwner, messagePrefix);
     }
-
     public void reveal(CardCollectionView cards, ZoneType zt, Player cardOwner, boolean dontRevealToOwner, String messagePrefix) {
         for (Player p : game.getPlayers()) {
             if (dontRevealToOwner && cardOwner == p) {
