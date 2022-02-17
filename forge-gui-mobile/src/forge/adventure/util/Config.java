@@ -62,6 +62,8 @@ public class Config {
             settingsData.width=1280;
             settingsData.height=720;
         }
+        if(settingsData.videomode == null || settingsData.videomode.isEmpty())
+            settingsData.videomode="720p";
 
         this.plane = settingsData.plane;
         currentConfig = this;

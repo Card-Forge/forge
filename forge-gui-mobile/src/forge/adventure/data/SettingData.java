@@ -12,4 +12,5 @@ public class SettingData {
     public int height;
     public String plane;
     public boolean fullScreen;
+    public String videomode;
 }
