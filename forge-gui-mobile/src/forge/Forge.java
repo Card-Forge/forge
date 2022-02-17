@@ -366,6 +366,8 @@ public class Forge implements ApplicationListener {
         });
     }
     public static void setCursor(TextureRegion textureRegion, String name) {
+        if (GuiBase.isAndroid())
+            return;
         if (Forge.isMobileAdventureMode) {
             String path = "skin/cursor"+name+".png";
             Pixmap pm = new Pixmap(Config.instance().getFile(path));
@@ -373,12 +375,13 @@ public class Forge implements ApplicationListener {
             pm.dispose();
             return;
         }
-        if (GuiBase.isAndroid()||textureRegion == null)
-            return;
         if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ENABLE_MAGNIFIER) && name != "0")
             return; //don't change if it's disabled
         if (currentScreen != null && !currentScreen.toString().toLowerCase().contains("match") && name != "0")
             return; // cursor indicator should be during matches
+        if (textureRegion == null) {
+            return;
+        }
         TextureData textureData = textureRegion.getTexture().getTextureData();
         if (!textureData.isPrepared()) {
             textureData.prepare();
