@@ -1,5 +1,6 @@
 package forge.screens;
 
+import com.badlogic.gdx.graphics.Color;
 import forge.Forge;
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
@@ -38,6 +39,7 @@ public class ClosingScreen extends FContainer {
             } else if (percentage > 1) {
                 percentage = 1;
             }
+            g.fillRect(Color.BLACK, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
             g.setAlphaComposite(1-percentage);
             g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
             g.setAlphaComposite(oldAlpha);
@@ -76,6 +78,7 @@ public class ClosingScreen extends FContainer {
             } else if (percentage > 1) {
                 percentage = 1;
             }
+            g.fillRect(Color.BLACK, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
             g.setAlphaComposite(percentage);
             g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
             g.setAlphaComposite(oldAlpha);

@@ -181,6 +181,7 @@ public class SplashScreen extends FContainer {
     }
     private void showSelector(Graphics g, float alpha) {
         if (background == null) { return; }
+        g.fillRect(Color.BLACK, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
         g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, getWidth(), getHeight());
 
         float x, y, w, h;
@@ -263,6 +264,7 @@ public class SplashScreen extends FContainer {
     }
     void drawDisclaimer(Graphics g) {
         if (background == null) { return; }
+        g.fillRect(Color.BLACK, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
         g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, getWidth(), getHeight());
 
         float x, y, w, h;
