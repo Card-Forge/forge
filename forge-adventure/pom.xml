@@ -25,6 +25,7 @@
                     <include>**/*.vert</include>
                     <include>**/*.frag</include>
                     <include>**/title_bg_lq.png</include>
+                    <include>**/transition.png</include>
                 </includes>
             </resource>
         </resources>

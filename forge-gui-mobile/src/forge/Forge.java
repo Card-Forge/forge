@@ -312,9 +312,7 @@ public class Forge implements ApplicationListener {
     }
     protected void afterDbLoaded() {
         //init here to fix crash if the assets are missings on android
-        transitionTexture =  new Texture(GuiBase.isAndroid()
-                ? Gdx.files.internal("fallback_skin").child("transition.png")
-                : Config.instance().getFile("ui/transition.png"));
+        transitionTexture =  new Texture(Gdx.files.internal("fallback_skin").child("transition.png"));
 
 
         destroyThis = false; //Allow back()
