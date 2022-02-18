@@ -89,6 +89,7 @@ public class Config {
 
     public FileHandle getFile(String path) {
         String fullPath = prefix + path;
+        fullPath = fullPath.replace("//","/");
         if (!Cache.containsKey(fullPath)) {
 
             String fileName = fullPath.replaceFirst("[.][^.]+$", "");

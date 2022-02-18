@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.IntMap;
 import forge.adventure.data.BiomeData;
 import forge.adventure.data.BiomeTerrainData;
 import forge.adventure.util.Config;
+import forge.gui.FThreads;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -41,79 +42,84 @@ public class BiomeTexture implements Serializable {
     }
 
     private void generate() {
-        Pixmap completePicture = null;
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override
+            public void run() {
+                Pixmap completePicture = null;
 
-        if (images != null) {
-            for (ArrayList<Pixmap> val : images) {
+                if (images != null) {
+                    for (ArrayList<Pixmap> val : images) {
 
-                for (Pixmap img : val) {
-                    img.dispose();
+                        for (Pixmap img : val) {
+                            img.dispose();
+                        }
+                    }
+                    images.clear();
+                }
+                images = new ArrayList<>();
+                if (smallImages != null) {
+                    for (ArrayList<Pixmap> val : smallImages) {
+
+                        for (Pixmap img : val) {
+                            img.dispose();
+                        }
+                    }
+                    smallImages.clear();
+                }
+                smallImages = new ArrayList<>();
+                if (edgeImages != null) {
+                    for (IntMap<Pixmap> val : edgeImages) {
+
+                        for (IntMap.Entry<Pixmap> img : new IntMap.Entries<Pixmap>(val)) {
+                            img.value.dispose();
+                        }
+                    }
+                    edgeImages.clear();
+                }
+                edgeImages = new ArrayList<>();
+
+                ArrayList<TextureAtlas.AtlasRegion> regions =new ArrayList<>();
+                regions.add(Config.instance().getAtlas(data.tilesetAtlas).findRegion(data.tilesetName));
+                if(data.terrain!=null)
+                {
+                    for(BiomeTerrainData terrain:data.terrain)
+                    {
+                        regions.add(Config.instance().getAtlas(data.tilesetAtlas).findRegion(terrain.spriteName));
+                    }
+                }
+                for (TextureAtlas.AtlasRegion region : regions) {
+                    ArrayList<Pixmap> pics = new ArrayList<>();
+                    ArrayList<Pixmap> spics = new ArrayList<>();
+                    if (completePicture == null) {
+                        region.getTexture().getTextureData().prepare();
+                        completePicture = region.getTexture().getTextureData().consumePixmap();
+                    }
+
+                    for (int y = 0; y < 4; y++) {
+                        for (int x = 0; x < 3; x++) {
+                            int px = region.getRegionX() + (x * tileSize);
+                            int py = region.getRegionY() + (y * tileSize);
+                            Pixmap subPixmap = new Pixmap(tileSize, tileSize, Pixmap.Format.RGBA8888);
+                            subPixmap.drawPixmap(completePicture, 0, 0, px, py, tileSize, tileSize);
+                            pics.add(subPixmap);
+                        }
+                    }
+                    for (int y = 0; y < 8; y++) {
+                        for (int x = 0; x < 6; x++) {
+                            int px = region.getRegionX() + (x * tileSize / 2);
+                            int py = region.getRegionY() + (y * tileSize / 2);
+                            Pixmap subPixmap = new Pixmap(tileSize / 2, tileSize / 2, Pixmap.Format.RGBA8888);
+                            subPixmap.drawPixmap(completePicture, 0, 0, px, py, tileSize / 2, tileSize / 2);
+                            spics.add(subPixmap);
+                        }
+                    }
+                    images.add(pics);
+                    smallImages.add(spics);
+                    edgeImages.add(new IntMap<>());
+
                 }
             }
-            images.clear();
-        }
-        images = new ArrayList<>();
-        if (smallImages != null) {
-            for (ArrayList<Pixmap> val : smallImages) {
-
-                for (Pixmap img : val) {
-                    img.dispose();
-                }
-            }
-            smallImages.clear();
-        }
-        smallImages = new ArrayList<>();
-        if (edgeImages != null) {
-            for (IntMap<Pixmap> val : edgeImages) {
-
-                for (IntMap.Entry<Pixmap> img : new IntMap.Entries<Pixmap>(val)) {
-                    img.value.dispose();
-                }
-            }
-            edgeImages.clear();
-        }
-        edgeImages = new ArrayList<>();
-
-        ArrayList<TextureAtlas.AtlasRegion> regions =new ArrayList<>();
-        regions.add(Config.instance().getAtlas(data.tilesetAtlas).findRegion(data.tilesetName));
-        if(data.terrain!=null)
-        {
-            for(BiomeTerrainData terrain:data.terrain)
-            {
-                regions.add(Config.instance().getAtlas(data.tilesetAtlas).findRegion(terrain.spriteName));
-            }
-        }
-        for (TextureAtlas.AtlasRegion region : regions) {
-            ArrayList<Pixmap> pics = new ArrayList<>();
-            ArrayList<Pixmap> spics = new ArrayList<>();
-            if (completePicture == null) {
-                region.getTexture().getTextureData().prepare();
-                completePicture = region.getTexture().getTextureData().consumePixmap();
-            }
-
-            for (int y = 0; y < 4; y++) {
-                for (int x = 0; x < 3; x++) {
-                    int px = region.getRegionX() + (x * tileSize);
-                    int py = region.getRegionY() + (y * tileSize);
-                    Pixmap subPixmap = new Pixmap(tileSize, tileSize, Pixmap.Format.RGBA8888);
-                    subPixmap.drawPixmap(completePicture, 0, 0, px, py, tileSize, tileSize);
-                    pics.add(subPixmap);
-                }
-            }
-            for (int y = 0; y < 8; y++) {
-                for (int x = 0; x < 6; x++) {
-                    int px = region.getRegionX() + (x * tileSize / 2);
-                    int py = region.getRegionY() + (y * tileSize / 2);
-                    Pixmap subPixmap = new Pixmap(tileSize / 2, tileSize / 2, Pixmap.Format.RGBA8888);
-                    subPixmap.drawPixmap(completePicture, 0, 0, px, py, tileSize / 2, tileSize / 2);
-                    spics.add(subPixmap);
-                }
-            }
-            images.add(pics);
-            smallImages.add(spics);
-            edgeImages.add(new IntMap<>());
-
-        }
+        });
     }
 
     public Pixmap getPixmap(int biomeSubIndex) {
