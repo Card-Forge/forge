@@ -5,6 +5,6 @@ K:Enchant artifact or creature
 A:SP$ Attach | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target artifact or creature | AITgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ Reach | Description$ As long as enchanted permanent is a creature, it gets +3/+3 and has reach.
 A:AB$ Pump | PrecostDesc$ Channel — | Cost$ 1 G Discard<1/CARDNAME> | ActivationZone$ Hand | ValidTgts$ Creature | TgtPrompt$ Choose target creature | NumAtt$ 3 | NumDef$ 3 | KW$ Reach | SpellDescription$ Target creature gets +3/+3 and gains reach until end of turn.
-DeckHas:Ability$Counters|Discard
+DeckHas:Ability$Counters & Keyword$Reach
 DeckHints:Type$Artifact|Creature|Vehicle
 Oracle:Enchant artifact or creature\nAs long as enchanted permanent is a creature, it gets +3/+3 and has reach.\nChannel — {1}{G}, Discard Favor of Jukai: Target creature gets +3/+3 and gains reach until end of turn.

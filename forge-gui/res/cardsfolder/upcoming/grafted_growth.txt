@@ -8,4 +8,5 @@ SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl,Vehicle.YouCtrl
 S:Mode$ Continuous | Affected$ Land.EnchantedBy | AddAbility$ ABManaAny2 | Description$ Enchanted land has "{T}: Add two mana of any one color."
 SVar:ABManaAny2:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | SpellDescription$ Add two mana of any one color.
 DeckHas:Ability$Counters
+DeckHints:Vehicle
 Oracle:Enchant land\nWhen Grafted Growth enters the battlefield, put a +1/+1 counter on target creature or Vehicle you control.\nEnchanted land has "{T}: Add two mana of any one color."
