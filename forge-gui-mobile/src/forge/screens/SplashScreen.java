@@ -8,13 +8,11 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
-import forge.adventure.util.Config;
 import forge.animation.ForgeAnimation;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
-import forge.gui.GuiBase;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
