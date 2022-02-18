@@ -2,8 +2,7 @@ Name:Kumano Faces Kakkazan
 ManaCost:R
 Types:Enchantment Saga
 K:Saga:3:DBDamage,DBEffectAddCounter,DBTransform
-SVar:DBDamage:DB$ DamageAll | NumDmg$ 1 | ValidPlayers$ Opponent | SubAbility$ DBDamagePW | SpellDescription$ CARDNAME deals 1 damage to each opponent and 1 damage to each planeswalker they control.
-SVar:DBDamagePW:DB$ DamageAll | NumDmg$ 1 | ValidCards$ Planeswalker.OppCtrl
+SVar:DBDamage:DB$ DamageAll | NumDmg$ 1 | ValidPlayers$ Opponent | ValidCards$ Planeswalker.OppCtrl | SpellDescription$ CARDNAME deals 1 damage to each opponent and 1 damage to each planeswalker they control.
 SVar:DBEffectAddCounter:DB$ Effect | Triggers$ TrigSpellCast | SpellDescription$ When you cast your next creature spell this turn, that creature enters the battlefield with an additional +1/+1 counter on it.
 SVar:TrigSpellCast:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | OneOff$ True | Static$ True | TriggerZones$ Command | Execute$ ReplEffAddCounter | TriggerDescription$ When you cast your next creature spell this turn, that creature enters the battlefield with an additional +1/+1 counter on it.
 SVar:ReplEffAddCounter:DB$ Effect | ReplacementEffects$ ETBAddCounter | RememberObjects$ TriggeredCard | Execute$ TrigRemoveSelf
