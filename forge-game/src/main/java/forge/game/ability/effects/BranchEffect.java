@@ -13,18 +13,23 @@ public class BranchEffect extends SpellAbilityEffect {
 
         // TODO Reuse SpellAbilityCondition and areMet() here instead of repeating each
 
-        // For now branch conditions will only be an Svar Compare
-        String branchSVar = sa.getParam("BranchConditionSVar");
+        int value = 0;
+        if (sa.hasParam("BranchCondition")) {
+            if (sa.getParam("BranchCondition").equals("ChosenCard")) {
+                value = host.getChosenCards().size();
+            }
+        } else {
+            value = AbilityUtils.calculateAmount(host, sa.getParam("BranchConditionSVar"), sa);
+        }
         String branchCompare = sa.getParamOrDefault("BranchConditionSVarCompare", "GE1");
 
         String operator = branchCompare.substring(0, 2);
         String operand = branchCompare.substring(2);
 
-        final int svarValue = AbilityUtils.calculateAmount(host, branchSVar, sa);
         final int operandValue = AbilityUtils.calculateAmount(host, operand, sa);
 
         SpellAbility sub = null;
-        if (Expressions.compare(svarValue, operator, operandValue)) {
+        if (Expressions.compare(value, operator, operandValue)) {
             sub = sa.getAdditionalAbility("TrueSubAbility");
         } else {
             sub = sa.getAdditionalAbility("FalseSubAbility");
