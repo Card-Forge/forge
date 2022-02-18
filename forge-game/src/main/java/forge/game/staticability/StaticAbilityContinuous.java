@@ -319,18 +319,18 @@ public final class StaticAbilityContinuous {
                     String[] restrictions = params.containsKey("SharedRestrictions") ? params.get("SharedRestrictions").split(",") : new String[] {"Card"};
                     addKeywords = CardFactoryUtil.sharedKeywords(addKeywords, restrictions, zones, hostCard, stAb);
                 }
+            }
 
-                if (params.containsKey("CantHaveKeyword")) {
-                    cantHaveKeyword = Keyword.setValueOf(params.get("CantHaveKeyword"));
-                }
+            if (params.containsKey("CantHaveKeyword")) {
+                cantHaveKeyword = Keyword.setValueOf(params.get("CantHaveKeyword"));
+            }
 
-                if (params.containsKey("RemoveKeyword")) {
-                    removeKeywords = Arrays.asList(params.get("RemoveKeyword").split(" & "));
-                }
+            if (params.containsKey("RemoveKeyword")) {
+                removeKeywords = Arrays.asList(params.get("RemoveKeyword").split(" & "));
             }
         }
 
-        if ((layer == StaticAbilityLayer.RULES) && params.containsKey("AddHiddenKeyword")) {
+        if (layer == StaticAbilityLayer.RULES && params.containsKey("AddHiddenKeyword")) {
             addHiddenKeywords.addAll(Arrays.asList(params.get("AddHiddenKeyword").split(" & ")));
         }
 
