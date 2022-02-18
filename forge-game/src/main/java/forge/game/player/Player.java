@@ -3437,6 +3437,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return;
         }
         if (c.isInZone(ZoneType.Sideboard)) { // Sideboard Lesson to Hand
+            game.getAction().reveal(new CardCollection(c), c.getOwner(), true);
             Card moved = game.getAction().moveTo(ZoneType.Hand, c, sa);
             table.put(ZoneType.Sideboard, ZoneType.Hand, moved);
         } else if (c.isInZone(ZoneType.Hand)) { // Discard and Draw
