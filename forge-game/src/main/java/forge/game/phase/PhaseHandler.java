@@ -34,6 +34,7 @@ import forge.game.ability.effects.SkipPhaseEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.card.CardUtil;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardZoneTable;
 import forge.game.card.CounterEnumType;
@@ -795,8 +796,8 @@ public class PhaseHandler implements java.io.Serializable {
 
             // Run this trigger once for each blocker
             for (final Card b : blockers) {
-                b.addBlockedThisTurn(a);
-                a.addBlockedByThisTurn(b);
+                b.addBlockedThisTurn(CardUtil.getLKICopy(a));
+                a.addBlockedByThisTurn(CardUtil.getLKICopy(b));
 
             	final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                 runParams.put(AbilityKey.Attacker, a);

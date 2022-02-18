@@ -108,8 +108,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     // cards attached or otherwise linked to this card
     private CardCollection hauntedBy, devouredCards, exploitedCards, delvedCards, convokedCards, imprintedCards, encodedCards;
-    private CardCollection mustBlockCards, gainControlTargets, chosenCards, blockedThisTurn, blockedByThisTurn;
+    private CardCollection mustBlockCards, gainControlTargets, chosenCards;
     private CardCollection mergedCards;
+    private List<Card> blockedThisTurn = Lists.newArrayList();
+    private List<Card> blockedByThisTurn = Lists.newArrayList();
 
     private CardCollection untilLeavesBattlefield = new CardCollection();
 
@@ -1289,30 +1291,24 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return count;
     }
 
-    public CardCollectionView getBlockedThisTurn() {
-        return CardCollection.getView(blockedThisTurn);
+    public List<Card> getBlockedThisTurn() {
+        return blockedThisTurn;
     }
     public void addBlockedThisTurn(Card attacker) {
-        if (blockedThisTurn == null) {
-            blockedThisTurn = new CardCollection();
-        }
         blockedThisTurn.add(attacker);
     }
     public void clearBlockedThisTurn() {
-        blockedThisTurn = null;
+        blockedThisTurn.clear();
     }
 
-    public CardCollectionView getBlockedByThisTurn() {
-        return CardCollection.getView(blockedByThisTurn);
+    public List<Card> getBlockedByThisTurn() {
+        return blockedByThisTurn;
     }
     public void addBlockedByThisTurn(Card blocker) {
-        if (blockedByThisTurn == null) {
-            blockedByThisTurn = new CardCollection();
-        }
         blockedByThisTurn.add(blocker);
     }
     public void clearBlockedByThisTurn() {
-        blockedByThisTurn = null;
+        blockedByThisTurn.clear();
     }
 
     //MustBlockCards are cards that this Card must block if able in an upcoming combat.
