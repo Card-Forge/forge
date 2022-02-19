@@ -27,6 +27,7 @@ import java.util.Set;
 
 import forge.util.*;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
@@ -1265,7 +1266,24 @@ public class GameAction {
                         noRegCreats.add(c);
                         checkAgain = true;
                     } else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
-                        for (final Integer dmg : c.getReceivedDamageFromThisTurn().values()) {
+                        // merge entries with same source
+                        List<Integer> dmgList = Lists.newArrayList();
+                        List<Pair<Card, Integer>> remainingDamaged = Lists.newArrayList(c.getReceivedDamageFromThisTurn());
+                        while (!remainingDamaged.isEmpty()) {
+                            Pair <Card, Integer> damaged = remainingDamaged.get(0);
+                            int sum = damaged.getRight();
+                            remainingDamaged.remove(damaged);
+                            for (Pair<Card, Integer> other : Lists.newArrayList(remainingDamaged)) {
+                                if (other.getLeft().equalsWithTimestamp(damaged.getLeft())) {
+                                    sum += other.getRight();
+                                    // once it got counted keep it out
+                                    remainingDamaged.remove(other);
+                                }
+                            }
+                            dmgList.add(sum);
+                        }
+
+                        for (final Integer dmg : dmgList) {
                             if (c.getLethal() <= dmg.intValue() || c.hasBeenDealtDeathtouchDamage()) {
                                 if (desCreats == null) {
                                     desCreats = new CardCollection();
