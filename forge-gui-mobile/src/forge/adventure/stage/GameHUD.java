@@ -30,13 +30,14 @@ public class GameHUD extends Stage {
     private final Label lifePoints;
     private final Label money;
     private Image miniMap;
+    UIActor ui;
 
     private GameHUD(GameStage gameStage) {
         super(new FitViewport(Scene.GetIntendedWidth(), Scene.GetIntendedHeight()), gameStage.getBatch());
         instance = this;
         this.gameStage = gameStage;
 
-        UIActor ui = new UIActor(Config.instance().getFile(GuiBase.isAndroid() ? "ui/hud_mobile.json" : "ui/hud.json"));
+        ui = new UIActor(Config.instance().getFile(GuiBase.isAndroid() ? "ui/hud_mobile.json" : "ui/hud.json"));
         miniMap = ui.findActor("map");
 
 
@@ -90,7 +91,7 @@ public class GameHUD extends Stage {
     }
 
     private void statistic() {
-
+        Forge.switchScene(SceneType.PlayerStatisticScene.instance);
     }
 
     public static GameHUD getInstance() {
@@ -105,10 +106,50 @@ public class GameHUD extends Stage {
 
         float x=(c.x-miniMap.getX())/miniMap.getWidth();
         float y=(c.y-miniMap.getY())/miniMap.getHeight();
+
+        float deckX = ui.findActor("deck").getX();
+        float deckY = ui.findActor("deck").getY();
+        float deckR = ui.findActor("deck").getRight();
+        float deckT = ui.findActor("deck").getTop();
+        //deck button bounds
+        if (c.x>=deckX&&c.x<=deckR&&c.y>=deckY&&c.y<=deckT) {
+            instance.openDeck();
+            return true;
+        }
+
+        float menuX = ui.findActor("menu").getX();
+        float menuY = ui.findActor("menu").getY();
+        float menuR = ui.findActor("menu").getRight();
+        float menuT = ui.findActor("menu").getTop();
+        //menu button bounds
+        if (c.x>=menuX&&c.x<=menuR&&c.y>=menuY&&c.y<=menuT) {
+            instance.menu();
+            return true;
+        }
+
+        float statsX = ui.findActor("statistic").getX();
+        float statsY = ui.findActor("statistic").getY();
+        float statsR = ui.findActor("statistic").getRight();
+        float statsT = ui.findActor("statistic").getTop();
+        //stats button bounds
+        if (c.x>=statsX&&c.x<=statsR&&c.y>=statsY&&c.y<=statsT) {
+            instance.statistic();
+            return true;
+        }
+
+        float uiX = ui.findActor("gamehud").getX();
+        float uiY = ui.findActor("gamehud").getY();
+        float uiTop = ui.findActor("gamehud").getTop();
+        float uiRight = ui.findActor("gamehud").getRight();
+        //gamehud bounds
+        if (c.x>=uiX&&c.x<=uiRight&&c.y>=uiY&&c.y<=uiTop) {
+            return true;
+        }
+
+        //move player except touching the gamehud bounds and buttons
         if(x>=0&&x<=1.0&&y>=0&&y<=1.0)
         {
             WorldStage.getInstance().GetPlayer().setPosition(x*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),y*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
-            return true;
         }
         return super.touchDown(screenX,screenY,  pointer,button);
     }

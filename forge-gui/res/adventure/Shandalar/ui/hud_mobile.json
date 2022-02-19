@@ -4,7 +4,8 @@
     "yDown": true, 
     "elements":[     
     {
-         "type" : "Image",      
+         "type" : "Image",
+          "name" : "gamehud",
           "width": 64,
           "height": 206,      
           "image":"ui/hud.png",

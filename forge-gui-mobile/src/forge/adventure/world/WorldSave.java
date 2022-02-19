@@ -75,7 +75,7 @@ public class WorldSave {
                 currentSave.onLoadList.emit();
 
             }
-        } catch (ClassNotFoundException | IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         } finally {
