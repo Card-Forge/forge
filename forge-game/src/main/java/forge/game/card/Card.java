@@ -174,8 +174,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final Set<Object> rememberedObjects = Sets.newLinkedHashSet();
     private Map<Player, String> flipResult;
 
-    private Map<GameEntity, Integer> receivedDamageFromThisTurn = Maps.newHashMap();
-
+    private List<Pair<Card, Integer>> receivedDamageFromThisTurn = Lists.newArrayList();
+    private Map<Player, Integer> receivedDamageFromPlayerThisTurn = Maps.newHashMap();
+    
     private final Map<Card, Integer> assignedDamageMap = Maps.newTreeMap();
 
     private boolean isCommander = false;
@@ -5154,46 +5155,48 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         damageHistory = history;
     }
 
-    public final Map<GameEntity, Integer> getReceivedDamageFromThisTurn() {
+    public final List<Pair<Card, Integer>> getReceivedDamageFromThisTurn() {
         return receivedDamageFromThisTurn;
     }
-    public final void setReceivedDamageFromThisTurn(final Map<GameEntity, Integer> receivedDamageList) {
-        receivedDamageFromThisTurn = Maps.newHashMap(receivedDamageList);
+    public final void setReceivedDamageFromThisTurn(final List<Pair<Card, Integer>> receivedDamageList) {
+        receivedDamageFromThisTurn = Lists.newArrayList(receivedDamageList);
+    }
+    public final Map<Player, Integer> getReceivedDamageFromPlayerThisTurn() {
+        return receivedDamageFromPlayerThisTurn;
+    }
+    public final void setReceivedDamageFromPlayerThisTurn(final Map<Player, Integer> receivedDamageMap) {
+        receivedDamageFromPlayerThisTurn = Maps.newHashMap(receivedDamageMap);
     }
 
     public int getReceivedDamageByPlayerThisTurn(final Player p) {
-        if (receivedDamageFromThisTurn.containsKey(p)) {
-            return receivedDamageFromThisTurn.get(p);
+        if (receivedDamageFromPlayerThisTurn.containsKey(p)) {
+            return receivedDamageFromPlayerThisTurn.get(p);
         }
         return 0;
     }
 
-    public final void addReceivedDamageFromThisTurn(final Card c, final int damage) {
+    public final void addReceivedDamageFromThisTurn(Card c, final int damage) {
         int currentDamage = 0;
-        if (receivedDamageFromThisTurn.containsKey(c)) {
-            currentDamage = receivedDamageFromThisTurn.get(c);
-        }
-        receivedDamageFromThisTurn.put(c, damage+currentDamage);
+        // because Aegar cares about the past state we need to keep all LKI instances
+        receivedDamageFromThisTurn.add(Pair.of(c.isLKI() ? c : CardUtil.getLKICopy(c), damage));
 
         Player p = c.getController();
         if (p != null) {
-            currentDamage = 0;
-            if (receivedDamageFromThisTurn.containsKey(p)) {
-                currentDamage = receivedDamageFromThisTurn.get(p);
+            if (receivedDamageFromPlayerThisTurn.containsKey(p)) {
+                currentDamage = receivedDamageFromPlayerThisTurn.get(p);
             }
-            receivedDamageFromThisTurn.put(p, damage+currentDamage);
+            receivedDamageFromPlayerThisTurn.put(p, damage+currentDamage);
         }
     }
     public final void resetReceivedDamageFromThisTurn() {
         receivedDamageFromThisTurn.clear();
+        receivedDamageFromPlayerThisTurn.clear();
     }
 
     public final int getTotalDamageReceivedThisTurn() {
         int total = 0;
-        for (Entry<GameEntity, Integer> e : receivedDamageFromThisTurn.entrySet()) {
-            if (e.getKey() instanceof Player) {
-                total += e.getValue();
-            }
+        for (Integer i : receivedDamageFromPlayerThisTurn.values()) {
+            total += i;
         }
         return total;
     }

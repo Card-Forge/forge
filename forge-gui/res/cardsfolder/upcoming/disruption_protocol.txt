@@ -1,0 +1,7 @@
+Name:Disruption Protocol
+ManaCost:U U
+Types:Instant
+K:AlternateAdditionalCost:tapXType<1/Artifact>:1
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
+DeckHints:Type$Artifact
+Oracle:As an additional cost to cast this spell, tap an untapped artifact you control or pay {1}.\nCounter target spell.
