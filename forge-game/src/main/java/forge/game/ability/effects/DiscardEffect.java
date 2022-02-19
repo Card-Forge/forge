@@ -238,7 +238,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                     if (toBeDiscarded.size() > 1) {
                         toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
                     }
-                } else if (mode.equals("RevealYouChoose") || mode.equals("RevealTgtChoose") || mode.equals("TgtChoose")) {
+                } else if (mode.endsWith("YouChoose") || mode.endsWith("TgtChoose")) {
                     CardCollectionView dPHand = p.getCardsIn(ZoneType.Hand);
                     dPHand = CardLists.filter(dPHand, Presets.NON_TOKEN);
                     if (dPHand.isEmpty())
@@ -253,14 +253,17 @@ public class DiscardEffect extends SpellAbilityEffect {
                     CardCollection validCards = CardLists.getValidCards(dPHand, valid, source.getController(), source, sa);
 
                     Player chooser = p;
-                    if (mode.equals("RevealYouChoose")) {
+                    if (mode.endsWith("YouChoose")) {
                         chooser = source.getController();
-                    } else if (mode.equals("RevealTgtChoose")) {
+                    } else if (mode.endsWith("TgtChoose")) {
                         chooser = firstTarget;
                     }
 
-                    if (mode.startsWith("Reveal") && p != chooser) {
+                    if (mode.startsWith("Reveal")) {
                         game.getAction().reveal(dPHand, p);
+                    }
+                    if (mode.startsWith("Look")) {
+                        game.getAction().revealTo(dPHand, chooser);
                     }
 
                     if (!p.canDiscardBy(sa, true)) {
@@ -276,7 +279,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                         toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
                     }
 
-                    if (mode.startsWith("Reveal") ) {
+                    if (mode.startsWith("Reveal") && p != chooser) {
                         p.getController().reveal(toBeDiscarded, ZoneType.Hand, p, Localizer.getInstance().getMessage("lblPlayerHasChosenCardsFrom", chooser.getName()));
                     }
                 }
