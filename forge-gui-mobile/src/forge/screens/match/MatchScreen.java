@@ -507,7 +507,7 @@ public class MatchScreen extends FScreen {
                         } else if (object instanceof VStack.StackInstanceDisplay) {
                             try {
                                 CardView cardView = ((VStack.StackInstanceDisplay) object).stackInstance.getSourceCard();
-                                if (object.isHovered() && cardView != null) {
+                                if (object.isHovered() && cardView != null && getStack().isVisible()) {
                                     float cardW = getHeight() * 0.45f;
                                     float cardH = FCardPanel.ASPECT_RATIO * cardW;
                                     float cardX = object.screenPos.x-cardW-Utils.scale(4);
