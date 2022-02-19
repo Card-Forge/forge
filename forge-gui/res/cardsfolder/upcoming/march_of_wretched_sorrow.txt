@@ -1,0 +1,13 @@
+Name:March of Wretched Sorrow
+ManaCost:X B
+Types:Instant
+A:SP$ DealDamage | AnnounceTitle$ how many black cards to exile | Announce$ Exiled | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals X damage to target creature or planeswalker
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SpellDescription$ and you gain X life.
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Cost$ ExileFromHand<Y/Card.Black/black cards> | EffectZone$ All | Description$ As an additional cost to cast this spell, you may exile any number of black cards from your hand. This spell costs {2} less to cast for each card exiled this way.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Z | EffectZone$ All | Relative$ True | Secondary$ True | Description$ This spell costs {2} less to cast for each card exiled this way.
+SVar:X:Count$xPaid
+SVar:Y:SVar$Exiled
+SVar:Z:SVar$Y/Times.2
+SVar:Exiled:Number$0
+DeckHas:Ability$LifeGain
+Oracle:As an additional cost to cast this spell, you may exile any number of black cards from your hand. This spell costs {2} less to cast for each card exiled this way.\nMarch of Wretched Sorrow deals X damage to target creature or planeswalker and you gain X life.
