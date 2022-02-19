@@ -318,7 +318,7 @@ public class World implements  Disposable, SaveFileContent {
                     {
                         if(counter==499)
                         {
-                            System.err.print("## Can not place POI "+poi.name+" ##");
+                            //System.err.print("## Can not place POI "+poi.name+" ##");
                         }
                         float radius = (float) Math.sqrt(((random.nextDouble())/2 * poi.radiusFactor));
                         float theta = (float) (random.nextDouble() * 2 * Math.PI);

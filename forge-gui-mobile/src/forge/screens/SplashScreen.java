@@ -13,6 +13,7 @@ import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
+import forge.gui.GuiBase;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
@@ -90,7 +91,7 @@ public class SplashScreen extends FContainer {
         private float progress = 0;
         private boolean finished, openAdventure;
         //for transition image only...
-        Texture transition_bg = new Texture(Gdx.files.internal("fallback_skin").child("title_bg_lq.png"));
+        Texture transition_bg = new Texture(GuiBase.isAndroid() ? Gdx.files.internal("fallback_skin").child("title_bg_lq.png") : Gdx.files.classpath("fallback_skin").child("title_bg_lq.png"));
 
         public void drawBackground(Graphics g) {
             float percentage = progress / DURATION;

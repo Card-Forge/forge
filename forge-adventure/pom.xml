@@ -26,6 +26,9 @@
                     <include>**/*.frag</include>
                     <include>**/title_bg_lq.png</include>
                     <include>**/transition.png</include>
+                    <include>**/bg_splash.png</include>
+                    <include>**/bg_texture.jpg</include>
+                    <include>**/font1.ttf</include>
                 </includes>
             </resource>
         </resources>

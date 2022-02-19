@@ -311,8 +311,8 @@ public class Forge implements ApplicationListener {
         } catch (Exception e) { e.printStackTrace(); }
     }
     protected void afterDbLoaded() {
-        //init here to fix crash if the assets are missings on android
-        transitionTexture =  new Texture(Gdx.files.internal("fallback_skin").child("transition.png"));
+        //init here to fix crash if the assets are missing
+        transitionTexture =  new Texture(GuiBase.isAndroid() ? Gdx.files.internal("fallback_skin").child("transition.png") : Gdx.files.classpath("fallback_skin").child("transition.png"));
 
 
         destroyThis = false; //Allow back()
