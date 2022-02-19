@@ -1,0 +1,8 @@
+Name:Moonfolk Puzzlemaker
+ManaCost:2 U
+Types:Artifact Creature Moonfolk Wizard
+PT:1/4
+K:Flying
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigSry | TriggerDescription$ Whenever CARDNAME becomes tapped, scry 1.
+SVar:TrigSry:DB$ Scry | ScryNum$ 1
+Oracle:Flying\nWhenever Moonfolk Puzzlemaker becomes tapped, scry 1.
