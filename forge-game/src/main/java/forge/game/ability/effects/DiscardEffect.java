@@ -255,14 +255,14 @@ public class DiscardEffect extends SpellAbilityEffect {
                     Player chooser = p;
                     if (mode.endsWith("YouChoose")) {
                         chooser = source.getController();
-                    } else if (mode.endsWith("TgtChoose")) {
+                    } else if (mode.equals("RevealTgtChoose")) {
                         chooser = firstTarget;
                     }
 
                     if (mode.startsWith("Reveal")) {
                         game.getAction().reveal(dPHand, p);
                     }
-                    if (mode.startsWith("Look")) {
+                    if (mode.startsWith("Look") && p != chooser) {
                         game.getAction().revealTo(dPHand, chooser);
                     }
 
