@@ -130,7 +130,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      *            the run params
      * @return true, if successful
      */
-    public abstract boolean canReplace (final Map<AbilityKey, Object> runParams);
+    public abstract boolean canReplace(final Map<AbilityKey, Object> runParams);
 
     /**
      * <p>

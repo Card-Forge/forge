@@ -369,7 +369,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (getPresentDefined() != null) {
                 list = AbilityUtils.getDefinedObjects(host, getPresentDefined(), sa);
             } else {
-                list = new FCollection<GameObject>(game.getCardsIn(getPresentZone()));
+                list = new FCollection<>(game.getCardsIn(getPresentZone()));
             }
 
             final int left = Iterables.size(Iterables.filter(list, GameObjectPredicates.restriction(getIsPresent().split(","), sa.getActivatingPlayer(), host, sa)));

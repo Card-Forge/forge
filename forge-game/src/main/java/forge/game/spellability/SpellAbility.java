@@ -272,7 +272,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return true;
         }
 
-        return this.subAbility != null ? this.subAbility.canProduce(s) : false;
+        return this.subAbility != null && this.subAbility.canProduce(s);
     }
 
     public boolean isManaAbilityFor(SpellAbility saPaidFor, byte colorNeeded) {
@@ -290,7 +290,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (mp != null && metConditions() && mp.meetsManaRestrictions(saPaidFor) && mp.abilityProducesManaColor(this, colorNeeded)) {
             return true;
         }
-        return this.subAbility != null ? this.subAbility.isManaAbilityFor(saPaidFor, colorNeeded) : false;
+        return this.subAbility != null && this.subAbility.isManaAbilityFor(saPaidFor, colorNeeded);
     }
 
     public boolean isManaCannotCounter(SpellAbility saPaidFor) {
@@ -298,7 +298,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (mp != null && metConditions() && mp.meetsManaRestrictions(saPaidFor) && mp.cannotCounterPaidWith(saPaidFor)) {
             return true;
         }
-        return this.subAbility != null ? this.subAbility.isManaCannotCounter(saPaidFor) : false;
+        return this.subAbility != null && this.subAbility.isManaCannotCounter(saPaidFor);
     }
 
     public int amountOfManaGenerated(boolean multiply) {

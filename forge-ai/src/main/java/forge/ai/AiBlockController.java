@@ -275,11 +275,9 @@ public class AiBlockController {
                         }
 
                         if (mode == TriggerType.DamageDone) {
-                            if ((!trigParams.containsKey("ValidSource")
-                                        || trigger.matchesValid(attacker, trigParams.get("ValidSource").split(",")))
+                            if (trigger.matchesValidParam("ValidSource", attacker)
                                     && attacker.getNetCombatDamage() > 0
-                                    && (!trigParams.containsKey("ValidTarget")
-                                            || trigger.matchesValid(combat.getDefenderByAttacker(attacker), trigParams.get("ValidTarget").split(",")))) {
+                                    && trigger.matchesValidParam("ValidTarget", combat.getDefenderByAttacker(attacker))) {
                                 value += 50;
                             }
                         } else if (mode == TriggerType.AttackerUnblocked) {
