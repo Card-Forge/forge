@@ -1,0 +1,11 @@
+Name:March of Otherworldly Light
+ManaCost:X W
+Types:Instant
+A:SP$ ChangeZone | AnnounceTitle$ how many white cards to exile | Announce$ Exiled | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Artifact.cmcLEX,Creature.cmcLEX,Enchantment.cmcLEX | TgtPrompt$ Select target artifact, creature, or enchantment with mana value X or less | SpellDescription$ Exile target artifact, creature, or enchantment with mana value X or less.
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Cost$ ExileFromHand<Y/Card.White/white cards> | EffectZone$ All | Description$ As an additional cost to cast this spell, you may exile any number of white cards from your hand. This spell costs {2} less to cast for each card exiled this way.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Z | EffectZone$ All | Relative$ True | Secondary$ True | Description$ This spell costs {2} less to cast for each card exiled this way.
+SVar:X:Count$xPaid
+SVar:Y:SVar$Exiled
+SVar:Z:SVar$Y/Times.2
+SVar:Exiled:Number$0
+Oracle:As an additional cost to cast this spell, you may exile any number of white cards from your hand. This spell costs {2} less to cast for each card exiled this way.\nExile target artifact, creature, or enchantment with mana value X or less.
