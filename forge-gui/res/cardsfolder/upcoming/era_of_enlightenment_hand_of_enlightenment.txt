@@ -18,5 +18,5 @@ ManaCost:no cost
 Colors:white
 Types:Enchantment Creature Human Monk
 PT:2/2
-K:First strike
+K:First Strike
 Oracle:First strike

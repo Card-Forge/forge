@@ -21,7 +21,6 @@ import java.util.Map;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
-import forge.game.card.CardUtil;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
@@ -49,9 +48,6 @@ public class TriggerExcessDamage extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (!matchesValidParam("ValidSource", runParams.get(AbilityKey.DamageSource))) {
-            return false;
-        }
         if (!matchesValidParam("ValidTarget", runParams.get(AbilityKey.DamageTarget))) {
             return false;
         }
@@ -68,7 +64,6 @@ public class TriggerExcessDamage extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObject(AbilityKey.Source, CardUtil.getLKICopy((Card)runParams.get(AbilityKey.DamageSource)));
         sa.setTriggeringObject(AbilityKey.Target, runParams.get(AbilityKey.DamageTarget));
         sa.setTriggeringObjectsFrom(runParams, AbilityKey.DamageAmount);
     }
@@ -76,7 +71,6 @@ public class TriggerExcessDamage extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append(Localizer.getInstance().getMessage("lblDamageSource")).append(": ").append(sa.getTriggeringObject(AbilityKey.Source)).append(", ");
         sb.append(Localizer.getInstance().getMessage("lblDamaged")).append(": ").append(sa.getTriggeringObject(AbilityKey.Target)).append(", ");
         sb.append(Localizer.getInstance().getMessage("lblAmount")).append(": ").append(sa.getTriggeringObject(AbilityKey.DamageAmount));
         return sb.toString();

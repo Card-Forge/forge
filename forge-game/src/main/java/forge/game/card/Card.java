@@ -2155,6 +2155,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 } else if (keyword.endsWith(".") && !keyword.startsWith("Haunt")) {
                     sbLong.append(keyword).append("\r\n");
                 } else {
+                    if (keyword.contains("Strike")) {
+                        keyword = keyword.replace("Strike", "strike");
+                    }
                     sb.append(i !=0 && sb.length() !=0 ? ", " : "");
                     sb.append(i > 0 && sb.length() !=0 ? keyword.toLowerCase() : keyword);
                 }
@@ -5418,16 +5421,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         runParams.put(AbilityKey.DefendingPlayer, game.getCombat() != null ? game.getCombat().getDefendingPlayerRelatedTo(source) : null);
         getGame().getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
 
-        int excess = 0;
-        if (isPlaneswalker()) {
-            excess = damageIn - getCurrentLoyalty();
-        } else if (getDamage() > getLethal()) {
-            // Creature already has lethal damage
-            excess = damageIn;
-        } else {
-            excess = damageIn + getDamage() - getLethal();
-        }
-
         DamageType damageType = DamageType.Normal;
         if (isPlaneswalker()) { // 120.3c
             subtractCounter(CounterType.get(CounterEnumType.LOYALTY), damageIn);
@@ -5457,16 +5450,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
             // Play the Damage sound
             game.fireEvent(new GameEventCardDamaged(this, source, damageIn, damageType));
-        }
-
-        if (excess > 0) {
-            // Run triggers
-            runParams = AbilityKey.newMap();
-            runParams.put(AbilityKey.DamageSource, source);
-            runParams.put(AbilityKey.DamageTarget, this);
-            runParams.put(AbilityKey.DamageAmount, excess);
-            runParams.put(AbilityKey.IsCombatDamage, isCombat);
-            getGame().getTriggerHandler().runTrigger(TriggerType.ExcessDamage, runParams, false);
         }
 
         return damageIn;

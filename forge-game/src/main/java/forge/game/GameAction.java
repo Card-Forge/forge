@@ -2269,6 +2269,8 @@ public class GameAction {
         // Run replacement effect for each entity dealt damage
         game.getReplacementHandler().runReplaceDamage(isCombat, damageMap, preventMap, counterTable, cause);
 
+        Map<Card, Integer> lethalDamage = Maps.newHashMap();
+
         // Actually deal damage according to replaced damage map
         for (Map.Entry<Card, Map<GameEntity, Integer>> et : damageMap.rowMap().entrySet()) {
             final Card sourceLKI = et.getKey();
@@ -2277,6 +2279,21 @@ public class GameAction {
                 if (e.getValue() <= 0) {
                     continue;
                 }
+
+                if (e.getKey() instanceof Card && !lethalDamage.containsKey(e.getKey())) {
+                    Card c = (Card) e.getKey();
+                    int lethal = 0;
+                    if (c.isCreature()) {
+                        lethal = Math.max(0, c.getLethalDamage());
+                    }
+                    if (c.isPlaneswalker()) {
+                        int lethalPW = c.getCurrentLoyalty();
+                        // 120.10
+                        lethal = c.isCreature() ? Math.min(lethal, lethalPW) : lethalPW;
+                    }
+                    lethalDamage.put(c, lethal);
+                }
+
                 e.setValue(Integer.valueOf(e.getKey().addDamageAfterPrevention(e.getValue(), sourceLKI, isCombat, counterTable)));
                 sum += e.getValue();
             }
@@ -2314,6 +2331,7 @@ public class GameAction {
         preventMap.clear();
 
         damageMap.triggerDamageDoneOnce(isCombat, game);
+        damageMap.triggerExcessDamage(isCombat, lethalDamage, game);
         damageMap.clear();
 
         counterTable.replaceCounterEffect(game, cause, !isCombat);

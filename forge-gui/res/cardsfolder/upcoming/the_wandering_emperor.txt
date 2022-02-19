@@ -5,7 +5,7 @@ Loyalty:3
 K:Flash
 S:Mode$ CastWithFlash | ValidCard$ Card.Self+ThisTurnEntered | ValidSA$ Activated.Loyalty | Caster$ You | Description$ As long as CARDNAME entered the battlefield this turn, you may activate her loyalty abilities any time you could cast an instant.
 A:AB$ PutCounter | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | CounterType$ P1P1 | CounterNum$ 1 | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on up to one target creature. It gains first strike until end of turn.
-SVar:DBPump:DB$ Pump | Defined$ Targeted | Keywords$ First strike
+SVar:DBPump:DB$ Pump | Defined$ Targeted | Keywords$ First Strike
 A:AB$ Token | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ w_2_2_samurai_vigilance | TokenOwner$ You | SpellDescription$ Create a 2/2 white Samurai creature token with vigilance.
 A:AB$ ChangeZone | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target tapped creature. You gain 2 life. | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
