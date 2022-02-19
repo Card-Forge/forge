@@ -345,11 +345,7 @@ public class Forge implements ApplicationListener {
                                     @Override
                                     public void run() {
                                         //selection
-                                        if (isLandscapeMode() && !GuiBase.isAndroid())
-                                            splashScreen.setShowModeSelector(true);
-                                        else {
-                                            splashScreen.startClassic();
-                                        }
+                                        splashScreen.setShowModeSelector(true);
                                         //start background music
                                         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
                                         Forge.safeToClose = true;

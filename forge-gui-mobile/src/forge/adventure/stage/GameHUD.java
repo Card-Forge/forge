@@ -16,6 +16,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.util.UIActor;
 import forge.adventure.world.WorldSave;
+import forge.gui.GuiBase;
 
 /**
  * Stage to handle everything rendered in the HUD
@@ -35,7 +36,7 @@ public class GameHUD extends Stage {
         instance = this;
         this.gameStage = gameStage;
 
-        UIActor ui = new UIActor(Config.instance().getFile("ui/hud.json"));
+        UIActor ui = new UIActor(Config.instance().getFile(GuiBase.isAndroid() ? "ui/hud_mobile.json" : "ui/hud.json"));
         miniMap = ui.findActor("map");
 
 

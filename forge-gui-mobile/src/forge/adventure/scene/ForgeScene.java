@@ -1,11 +1,9 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.ScreenUtils;
 import forge.Forge;
-import forge.Graphics;
 import forge.animation.ForgeAnimation;
 import forge.assets.ImageCache;
 import forge.gamemodes.match.LobbySlotType;
@@ -22,47 +20,39 @@ import java.util.List;
  */
 public abstract  class ForgeScene extends Scene implements IUpdateable {
 
-    //GameLobby lobby;
-    Graphics localGraphics;
-    InputProcessor input= Forge.getInputProcessor(); //new ForgeInput(this);
-
     @Override
     public void dispose() {
     }
     @Override
     public void render() {
-
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
         if (getScreen() == null) {
             return;
         }
 
-
-        localGraphics.begin(Forge.getScreenWidth(), Forge.getScreenHeight());
+        Forge.getGraphics().begin(Forge.getScreenWidth(), Forge.getScreenHeight());
         getScreen().screenPos.setSize(Forge.getScreenWidth(), Forge.getScreenHeight());
         if (getScreen().getRotate180()) {
-            localGraphics.startRotateTransform( Forge.getScreenWidth() / 2f, Forge.getScreenHeight() / 2f, 180);
+            Forge.getGraphics().startRotateTransform( Forge.getScreenWidth() / 2f, Forge.getScreenHeight() / 2f, 180);
         }
-        getScreen().draw(localGraphics);
+        getScreen().draw(Forge.getGraphics());
         if (getScreen().getRotate180()) {
-            localGraphics.endTransform();
+            Forge.getGraphics().endTransform();
         }
         for (FOverlay overlay : FOverlay.getOverlays()) {
             if (overlay.isVisibleOnScreen(getScreen())) {
                 overlay.screenPos.setSize(Forge.getScreenWidth(), Forge.getScreenHeight());
                 overlay.setSize(Forge.getScreenWidth(), Forge.getScreenHeight()); //update overlay sizes as they're rendered
                 if (overlay.getRotate180()) {
-                    localGraphics.startRotateTransform(Forge.getScreenWidth() / 2f, Forge.getScreenHeight() / 2f, 180);
+                    Forge.getGraphics().startRotateTransform(Forge.getScreenWidth() / 2f, Forge.getScreenHeight() / 2f, 180);
                 }
-                overlay.draw(localGraphics);
+                overlay.draw(Forge.getGraphics());
                 if (overlay.getRotate180()) {
-                    localGraphics.endTransform();
+                    Forge.getGraphics().endTransform();
                 }
             }
         }
-        localGraphics.end();
-
-        //Batch.end();
+        Forge.getGraphics().end();
     }
     @Override
     public void act(float delta) {
@@ -85,13 +75,13 @@ public abstract  class ForgeScene extends Scene implements IUpdateable {
                     Forge.clearTransitionScreen();
                     Forge.openScreen(getScreen());
                     Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
-                    Gdx.input.setInputProcessor(input);
+                    Gdx.input.setInputProcessor(Forge.getInputProcessor());
                 }
             };
             Forge.setTransitionScreen(new TransitionScreen(runnable, ScreenUtils.getFrameBufferTexture(), true));
         } else {
             Forge.openScreen(getScreen());
-            Gdx.input.setInputProcessor(input);
+            Gdx.input.setInputProcessor(Forge.getInputProcessor());
         }
     }
     public abstract FScreen getScreen();
@@ -103,7 +93,7 @@ public abstract  class ForgeScene extends Scene implements IUpdateable {
 
     @Override
     public void resLoaded() {
-        localGraphics = Forge.getGraphics();
+
     }
 
 

@@ -210,7 +210,9 @@ public class SplashScreen extends FContainer {
 
         if (!init) {
             init = true;
-            btnAdventure = new FButton(Localizer.getInstance().getMessageorUseDefault("lblAdventureMode", "Adventure Mode"));
+            String advAndroid = Forge.isLandscapeMode() ? "[BETA] Adventure" : "[BETA] Adventure Landscape Only";
+            btnAdventure = new FButton(GuiBase.isAndroid() ? advAndroid : Localizer.getInstance().getMessageorUseDefault("lblAdventureMode", "Adventure Mode"));
+            btnAdventure.setEnabled(Forge.isLandscapeMode());
             btnHome = new FButton(Localizer.getInstance().getMessageorUseDefault("lblClassicMode", "Classic Mode"));
             btnAdventure.setCommand(new FEvent.FEventHandler() {
                 @Override
