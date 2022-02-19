@@ -5,4 +5,6 @@ PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoot | TriggerDescription$ Whenever an artifact enters the battlefield under your control, you may draw a card. If you do, discard a card.
 SVar:TrigLoot:AB$ Discard | Defined$ You | Mode$ TgtChoose | Cost$ Draw<1/You>
+DeckHas:Ability$Discard
+DeckHints:Type$Artifact
 Oracle:Flying\nWhenever an artifact enters the battlefield under your control, you may draw a card. If you do, discard a card.
