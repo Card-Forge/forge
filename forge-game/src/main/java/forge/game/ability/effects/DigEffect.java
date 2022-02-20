@@ -12,13 +12,7 @@ import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardZoneTable;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.player.DelayedReveal;
 import forge.game.player.Player;
@@ -40,12 +34,15 @@ public class DigEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final StringBuilder sb = new StringBuilder();
         final int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
+        final int numToChange = (sa.hasParam("ChangeNum") ?
+                AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa) : 1);
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         String verb = " looks at ";
         if (sa.hasParam("Reveal") && sa.getParam("Reveal").equals("True")) {
             verb = " reveals ";
-        } else if (sa.hasParam("DestinationZone") && sa.getParam("DestinationZone").equals("Exile")) {
+        } else if (sa.hasParam("DestinationZone") && sa.getParam("DestinationZone").equals("Exile") &&
+                numToDig == numToChange) {
             verb = " exiles ";
         }
         sb.append(host.getController()).append(verb).append("the top ");
@@ -59,6 +56,27 @@ public class DigEffect extends SpellAbilityEffect {
             }
         }
         sb.append("library.");
+
+        if (numToDig != numToChange) {
+            String destZone1 = sa.hasParam("DestinationZone") ?
+                    sa.getParam("DestinationZone").toLowerCase() : "hand";
+            String destZone2 = sa.hasParam("DestinationZone2") ?
+                    sa.getParam("DestinationZone2").toLowerCase() : "on the bottom of their library in any order.";
+            if (sa.hasParam("RestRandomOrder")) {
+                destZone2 = destZone2.replace("any", "a random");
+            }
+
+            String verb2 = "put ";
+            String where = "in their hand ";
+            if (destZone1.equals("exile")) {
+                verb2 = "exile ";
+                where = "";
+            }
+            sb.append(" They ").append(verb2).append(Lang.getNumeral(numToChange)).append(" of them ").append(where);
+            sb.append(sa.hasParam("ExileFaceDown") ? "face down " : "").append("and put the rest ");
+            sb.append(destZone2);
+        }
+
         return sb.toString();
     }
 

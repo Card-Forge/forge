@@ -291,11 +291,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         Iterable<Card> tgts;
         if (sa.usesTargeting()) {
             tgts = sa.getTargets().getTargetCards();
-        } else {
-            // otherwise add self to list and go from there
+        } else { // otherwise add self to list and go from there
             tgts = sa.knownDetermineDefined(sa.getParam("Defined"));
         }
-        sbTargets.append(" ").append(StringUtils.join(tgts, ", "));
+
+        sbTargets.append(" ").append(sa.getParamOrDefault("DefinedDesc", StringUtils.join(tgts, ", ")));
 
         final String targetname = sbTargets.toString();
 
@@ -305,14 +305,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         if (destination.equals(ZoneType.Battlefield)) {
             if (ZoneType.Graveyard.equals(origin)) {
-                sb.append("Return").append(targetname);
+                sb.append("Return").append(targetname).append(fromGraveyard).append(" to the battlefield");
             } else {
-                sb.append("Put").append(targetname);
-            }
-            if (ZoneType.Graveyard.equals(origin)) {
-                sb.append(fromGraveyard).append(" to the battlefield");
-            } else {
-                sb.append(" onto the battlefield");
+                sb.append("Put").append(targetname).append(" onto the battlefield");
             }
             if (sa.hasParam("Tapped")) {
                 sb.append(" tapped");
@@ -324,11 +319,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         if (destination.equals(ZoneType.Hand)) {
-            sb.append("Return").append(targetname);
             if (ZoneType.Graveyard.equals(origin)) {
-                sb.append(fromGraveyard);
+                sb.append("Return").append(targetname).append(fromGraveyard).append(" to");
+            } else {
+                sb.append("Put").append(targetname).append(" in");
             }
-            sb.append(" to").append(pronoun).append("owner's hand.");
+            sb.append(pronoun).append("owner's hand.");
         }
 
         if (destination.equals(ZoneType.Library)) {
