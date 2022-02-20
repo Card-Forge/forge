@@ -4,6 +4,7 @@ import forge.Forge;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
+import forge.adventure.scene.SceneType;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.Config;
 import forge.adventure.util.SaveFileData;
@@ -79,6 +80,7 @@ public class WorldSave {
         } catch (Exception e) {
             e.printStackTrace();
             Forge.clearTransitionScreen();
+            Forge.switchScene(SceneType.SaveLoadScene.instance);
             return false;
         } finally {
 
