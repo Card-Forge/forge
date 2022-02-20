@@ -315,7 +315,7 @@ public class MatchController extends AbstractGuiGame {
                     Forge.setCursor(null, "0");
                 }
             };
-            Forge.setTransitionScreen(new TransitionScreen(runnable, ScreenUtils.getFrameBufferTexture(), false));
+            Forge.setTransitionScreen(new TransitionScreen(runnable, ScreenUtils.getFrameBufferTexture(), false, false));
             return;
         }
         if (hasLocalPlayers() || getGameView().isMatchOver()) {

@@ -20,6 +20,7 @@ import forge.Forge;
 import forge.adventure.util.Controls;
 import forge.adventure.world.WorldSave;
 import forge.adventure.world.WorldSaveHeader;
+import forge.screens.TransitionScreen;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -105,8 +106,16 @@ public class SaveLoadScene extends UIScene {
             dialog.show(stage);
             stage.setKeyboardFocus(textInput);
         } else {
-            if(WorldSave.load(currentSlot))
-                Forge.switchScene(SceneType.GameScene.instance);
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    if(WorldSave.load(currentSlot)) {
+                        Forge.clearTransitionScreen();
+                        Forge.switchScene(SceneType.GameScene.instance);
+                    }
+                }
+            };
+            Forge.setTransitionScreen(new TransitionScreen(runnable, null, false, true));
         }
     }
 

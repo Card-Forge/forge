@@ -78,7 +78,7 @@ public abstract  class ForgeScene extends Scene implements IUpdateable {
                     Gdx.input.setInputProcessor(Forge.getInputProcessor());
                 }
             };
-            Forge.setTransitionScreen(new TransitionScreen(runnable, ScreenUtils.getFrameBufferTexture(), true));
+            Forge.setTransitionScreen(new TransitionScreen(runnable, ScreenUtils.getFrameBufferTexture(), true, false));
         } else {
             Forge.openScreen(getScreen());
             Gdx.input.setInputProcessor(Forge.getInputProcessor());

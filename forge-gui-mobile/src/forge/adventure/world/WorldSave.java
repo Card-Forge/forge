@@ -1,5 +1,6 @@
 package forge.adventure.world;
 
+import forge.Forge;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
@@ -77,6 +78,7 @@ public class WorldSave {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            Forge.clearTransitionScreen();
             return false;
         } finally {
 
