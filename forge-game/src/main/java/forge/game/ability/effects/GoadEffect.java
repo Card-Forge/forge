@@ -15,6 +15,7 @@ public class GoadEffect extends SpellAbilityEffect {
         final Player player = sa.getActivatingPlayer();
         final Game game = player.getGame();
         final long timestamp = game.getNextTimestamp();
+        final boolean remember = sa.hasParam("RememberGoaded");
 
         for (final Card tgtC : getDefinedCardsOrTargeted(sa)) {
             // only pump things in PumpZone
@@ -40,6 +41,10 @@ public class GoadEffect extends SpellAbilityEffect {
             };
 
             game.getCleanup().addUntil(player, untilEOT);
+
+            if (remember && tgtC.isGoaded()) {
+                sa.getHostCard().addRemembered(tgtC);
+            }
         }
     }
 
