@@ -233,19 +233,32 @@ public class AnimateEffect extends AnimateEffectBase {
         final StringBuilder sb = new StringBuilder();
 
         final List<Card> tgts = getCardsfromTargets(sa);
+        final boolean justOne = tgts.size() == 1;
+
+        if (sa.hasParam("IfDesc")) {
+            if (sa.getParam("IfDesc").equals("True") && sa.hasParam("SpellDescription")) {
+                String ifDesc = sa.getParam("SpellDescription");
+                sb.append(ifDesc, 0, ifDesc.indexOf(",") + 1);
+            } else {
+                sb.append(sa.getParam("IfDesc"));
+            }
+            sb.append(" ");
+        }
 
         sb.append(Lang.joinHomogenous(tgts)).append(" ");
 
         // if power is -1, we'll assume it's not just setting toughness
-        if (power != null && toughness != null) {
-            sb.append(tgts.size() == 1 ? "becomes " : "become ");
-            sb.append(" ").append(power).append("/").append(toughness);
-        } else if (power != null) {
-            sb.append("power becomes ").append(power);
-        } else if (toughness != null) {
-            sb.append("toughness becomes ").append(toughness);
+        if (power != null || toughness != null) {
+            sb.append(justOne ? "has" : "have" ).append(" base ");
+            if (power != null && toughness != null) {
+                sb.append("power and toughness ").append(power).append("/").append(toughness).append(" ");
+            } else if (power != null) {
+                sb.append("power ").append(power).append(" ");
+            } else {
+                sb.append("toughness ").append(toughness).append(" ");
+            }
         } else {
-            sb.append(tgts.size() == 1 ? "becomes " : "become ");
+            sb.append(justOne ? "becomes " : "become ");
         }
 
         if (colors.contains("ChosenColor")) {
@@ -264,20 +277,14 @@ public class AnimateEffect extends AnimateEffectBase {
         } else {
             for (int i = 0; i < types.size(); i++) {
                 String type = types.get(i);
-                if (i == 0 && tgts.size() == 1) {
+                if (i == 0 && justOne) {
                     sb.append(Lang.startsWithVowel(type) ? "an " : "a ");
                 }
                 sb.append(CardType.CoreType.isValidEnum(type) ? type.toLowerCase() : type).append(" ");
             }
         }
         if (keywords.size() > 0) {
-            sb.append("with ");
-        }
-        for (int i = 0; i < keywords.size(); i++) {
-            sb.append(keywords.get(i)).append(" ");
-            if (i < (keywords.size() - 1)) {
-                sb.append("and ");
-            }
+            sb.append("and gains ").append(Lang.joinHomogenous(keywords).toLowerCase()).append(" ");
         }
         // sb.append(abilities)
         // sb.append(triggers)
