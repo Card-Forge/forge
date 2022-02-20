@@ -4,7 +4,7 @@ Types:Creature Human Cleric
 PT:3/1
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigLook | TriggerDescription$ When CARDNAME enters the battlefield, look at target opponent's hand. You may exile a nonland card from it. For as long as that card remains exiled, its owner may play it. A spell cast this way costs {2} more to cast.
-SVar:TrigLook:DB$ RevealHand | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | RememberRevealed$ True | SubAbility$ DBChooseCard
+SVar:TrigLook:DB$ RevealHand | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Look$ True | RememberRevealed$ True | SubAbility$ DBChooseCard
 SVar:DBChooseCard:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.nonLand+IsRemembered | ChoiceTitle$ You may exile a nonland card from it | MinAmount$ 0 | Amount$ 1 | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Hand | Destination$ Exile | Imprint$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | Duration$ Permanent | StaticAbilities$ MayPlay,CostsMore | RememberObjects$ Imprinted | ForgetOnMoved$ Exile | SubAbility$ DBCleanup

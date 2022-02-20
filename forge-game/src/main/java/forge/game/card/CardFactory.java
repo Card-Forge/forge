@@ -681,13 +681,16 @@ public class CardFactory {
                 state.removeIntrinsicKeyword(kw);
             }
 
-            if (sa.hasParam("SetPower")) {
-                state.setBasePower(AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("SetPower"), sa));
+            if (state.getType().isCreature()) {
+                if (sa.hasParam("SetPower")) {
+                    state.setBasePower(AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("SetPower"), sa));
+                }
+                if (sa.hasParam("SetToughness")) {
+                    state.setBaseToughness(AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("SetToughness"), sa));
+                }
             }
-            if (sa.hasParam("SetToughness")) {
-                state.setBaseToughness(AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("SetToughness"), sa));
-            }
-            if (sa.hasParam("SetLoyalty")) {
+
+            if (state.getType().isPlaneswalker() && sa.hasParam("SetLoyalty")) {
                 state.setBaseLoyalty(String.valueOf(sa.getParam("SetLoyalty")));
             }
 
