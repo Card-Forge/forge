@@ -39,6 +39,7 @@ public enum Keyword {
     CHANGELING("Changeling", SimpleKeyword.class, true, "This card is every creature type."),
     CIPHER("Cipher", SimpleKeyword.class, true, "Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost."),
     COMPANION("Companion", Companion.class, true, "Reveal your companion from outside the game if your deck meets the companion restriction."),
+    COMPLEATED("Compleated", SimpleKeyword.class, true, "{$0} can be paid with {$1}, {$2}, or 2 life. If life was paid, this planeswalker enters with two fewer loyalty counters."),
     CONSPIRE("Conspire", SimpleKeyword.class, false, "As an additional cost to cast this spell, you may tap two untapped creatures you control that each share a color with it. If you do, copy it."),
     CONVOKE("Convoke", SimpleKeyword.class, true, "Your creatures can help cast this spell. Each creature you tap while playing this spell reduces its cost by {1} or by one mana of that creature's color."),
     CREW("Crew", KeywordWithAmount.class, false, "Tap any number of creatures you control with total power %1$d or more: This Vehicle becomes an artifact creature until end of turn."),

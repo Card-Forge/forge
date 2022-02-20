@@ -2443,7 +2443,7 @@ public class CardFactoryUtil {
             final String effect = "DB$ PutCounter | Defined$ ReplacedCard | Tribute$ True | "
                     + "CounterType$ P1P1 | CounterNum$ " + tributeAmount
                     + " | ETB$ True | SpellDescription$ Tribute " + tributeAmount
-                    + " ("+ inst.getReminderText() + ")";
+                    + " (" + inst.getReminderText() + ")";
 
             ReplacementEffect cardre = createETBReplacement(card, ReplacementLayer.Other, effect, false, true, intrinsic, "Card.Self", "");
 
