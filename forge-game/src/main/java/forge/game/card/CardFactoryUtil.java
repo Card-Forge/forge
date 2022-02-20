@@ -3122,7 +3122,7 @@ public class CardFactoryUtil {
             attachStr.append("AB$ Attach | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select target creature you ");
             attachStr.append("control | AILogic$ Pump | Secondary$ True | SpellDescription$ Attach ").append(bothStr);
             final StringBuilder unattachStr = new StringBuilder();
-            unattachStr.append("AB$ Unattach | Defined$ Self | SpellDescription$ Unattach | Secondary$ True ");
+            unattachStr.append("AB$ Unattach | Defined$ Self | SpellDescription$ Unattach | Secondary$ True | IsPresent$ Card.Self+AttachedTo Creature");
             unattachStr.append(bothStr);
             // instantiate attach ability
             SpellAbility attachSA = AbilityFactory.getAbility(attachStr.toString(), card);
@@ -3605,10 +3605,6 @@ public class CardFactoryUtil {
                 }
             }
             effect += " | Description$ " + desc;
-            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
-        } else if (keyword.startsWith("Reconfigure")) {
-            String effect = "Mode$ Continuous | Affected$ Card.Self | IsPresent$ Card.Self+AttachedTo Creature | "
-                    + "RemoveType$ Creature | Secondary$ True | Description$ Reconfigure (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Shroud")) {
             String effect = "Mode$ CantTarget | Shroud$ True | ValidCard$ Card.Self | Secondary$ True"
