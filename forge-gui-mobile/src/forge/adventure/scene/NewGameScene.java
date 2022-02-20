@@ -17,6 +17,7 @@ import forge.deck.Deck;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
+import forge.screens.TransitionScreen;
 import forge.util.NameGenerator;
 
 import java.util.Random;
@@ -39,17 +40,22 @@ public class NewGameScene extends UIScene {
     }
 
     public boolean start() {
-        FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
-        WorldSave.generateNewWorld(selectedName.getText(),
-                gender.getCurrentIndex() == 0,
-                race.getCurrentIndex(),
-                avatarIndex,
-                deck.getCurrentIndex(),
-                Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],0);
-        GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
-        //image = new Texture(img);
-
-        Forge.switchScene(SceneType.GameScene.instance);
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
+                WorldSave.generateNewWorld(selectedName.getText(),
+                        gender.getCurrentIndex() == 0,
+                        race.getCurrentIndex(),
+                        avatarIndex,
+                        deck.getCurrentIndex(),
+                        Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],0);
+                GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
+                Forge.clearTransitionScreen();
+                Forge.switchScene(SceneType.GameScene.instance);
+            }
+        };
+        Forge.setTransitionScreen(new TransitionScreen(runnable, null, false, true));
         return true;
     }
 
