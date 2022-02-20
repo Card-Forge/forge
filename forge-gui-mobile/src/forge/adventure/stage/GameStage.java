@@ -256,14 +256,14 @@ public abstract class GameStage extends Stage {
     }
 
     public void stop() {
+        WorldStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
+        MapStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
         touchX = -1;
         touchY = -1;
         player.stop();
     }
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        WorldStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
-        MapStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
         stop();
         return true;
     }
