@@ -68,10 +68,10 @@ public class PlayEffect extends SpellAbilityEffect {
             sb.append(Lang.joinHomogenous(tgtCards));
         }
         if (sa.hasParam("WithoutManaCost")) {
-            sb.append(" without paying ").append(tgtCards.size()==1 ? "its" : "their").append(" mana cost ");
+            sb.append(" without paying ").append(tgtCards.size()==1 ? "its" : "their").append(" mana cost");
         }
         if (sa.hasParam("IfDesc")) {
-            sb.append(sa.getParam("IfDesc"));
+            sb.append(" ").append(sa.getParam("IfDesc"));
         }
         sb.append(".");
         return sb.toString();
