@@ -2664,13 +2664,13 @@ public class ComputerUtil {
         for (Trigger trigger : theTriggers) {
             final Card source = trigger.getHostCard();
 
+            if (trigger.getMode() != TriggerType.SpellCast) {
+                continue;
+            }
             if (!trigger.zonesCheck(game.getZoneOf(source))) {
                 continue;
             }
             if (!trigger.requirementsCheck(game)) {
-                continue;
-            }
-            if (trigger.getMode() != TriggerType.SpellCast) {
                 continue;
             }
             if (trigger.hasParam("ValidCard")) {
@@ -2724,6 +2724,12 @@ public class ComputerUtil {
         for (Trigger trigger : theTriggers) {
             final Card source = trigger.getHostCard();
 
+            if (trigger.getMode() != TriggerType.ChangesZone) {
+                continue;
+            }
+            if (!"Battlefield".equals(trigger.getParam("Destination"))) {
+                continue;
+            }
             if (!trigger.zonesCheck(game.getZoneOf(source))) {
                 continue;
             }
@@ -2732,12 +2738,6 @@ public class ComputerUtil {
             }
             if (trigger.hasParam("CheckOnTriggeredCard")
                     && AbilityUtils.getDefinedCards(permanent, source.getSVar(trigger.getParam("CheckOnTriggeredCard").split(" ")[0]), null).isEmpty()) {
-                continue;
-            }
-            if (trigger.getMode() != TriggerType.ChangesZone) {
-                continue;
-            }
-            if (!"Battlefield".equals(trigger.getParam("Destination"))) {
                 continue;
             }
             if (trigger.hasParam("ValidCard")) {

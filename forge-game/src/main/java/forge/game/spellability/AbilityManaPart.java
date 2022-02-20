@@ -614,8 +614,8 @@ public class AbilityManaPart implements java.io.Serializable {
         for (final Player p : g.getPlayers()) {
             for (final Card crd : p.getAllCards()) {
                 for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
-                    if (replacementEffect.requirementsCheck(g)
-                            && replacementEffect.getMode() == ReplacementType.ProduceMana
+                    if (replacementEffect.getMode() == ReplacementType.ProduceMana
+                            && replacementEffect.requirementsCheck(g)
                             && replacementEffect.canReplace(repParams)
                             && replacementEffect.zonesCheck(g.getZoneOf(crd))) {
                         return true;
