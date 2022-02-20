@@ -449,17 +449,21 @@ public class AiAttackController {
             return false;
         }
 
+        CardLists.sortByPowerDesc(oppList);
         for (Card attacker : oppList) {
             if (!ComputerUtilCombat.canAttackNextTurn(attacker)) {
                 continue;
             }
             if (blockersLeft > 0 && CombatUtil.canBeBlocked(attacker, ai)) {
+                // TODO doesn't take trample into account
                 blockersLeft--;
                 continue;
             }
 
             // Test for some special triggers that can change the creature in combat
             Card effectiveAttacker = ComputerUtilCombat.applyPotentialAttackCloneTriggers(attacker);
+
+            // TODO commander
 
             totalAttack += ComputerUtilCombat.damageIfUnblocked(effectiveAttacker, ai, null, false);
             totalPoison += ComputerUtilCombat.poisonIfUnblocked(effectiveAttacker, ai);
@@ -878,7 +882,7 @@ public class AiAttackController {
             if (ComputerUtilCombat.canAttackNextTurn(pCard) && pCard.getNetCombatDamage() > 0) {
                 candidateAttackers.add(pCard);
                 candidateUnblockedDamage += ComputerUtilCombat.damageIfUnblocked(pCard, opp, null, false);
-                computerForces += 1;
+                computerForces++;
             }
         }
 
@@ -897,13 +901,13 @@ public class AiAttackController {
             if (pCard.getNetCombatDamage() > 0 && ComputerUtilCombat.canAttackNextTurn(pCard)) {
                 nextTurnAttackers.add(pCard);
                 candidateCounterAttackDamage += pCard.getNetCombatDamage();
-                humanForces += 1; // player forces they might use to attack
+                humanForces++; // player forces they might use to attack
             }
             // increment player forces that are relevant to an attritional attack - includes walls
 
             Card potentialOppBlocker = getCardCanBlockAnAttacker(pCard, candidateAttackers, true);
             if (potentialOppBlocker != null) {
-                humanForcesForAttritionalAttack += 1;
+                humanForcesForAttritionalAttack++;
                 if (predictEvasion) {
                     candidateAttackers.remove(potentialOppBlocker);
                 }
