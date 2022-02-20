@@ -3,6 +3,7 @@ package forge.adventure.stage;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import forge.Forge;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.EnemySprite;
@@ -296,5 +297,10 @@ public class WorldStage extends GameStage implements SaveFileContent {
         data.storeObject("y",y);
         data.store("globalTimer",globalTimer);
         return data;
+    }
+
+    @Override
+    public Viewport getViewport() {
+        return super.getViewport();
     }
 }

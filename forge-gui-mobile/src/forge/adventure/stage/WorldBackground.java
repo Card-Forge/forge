@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import forge.adventure.world.WorldSave;
+import forge.gui.GuiBase;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ public class WorldBackground extends Actor {
     int playerY;
 
     Texture[][] chunks;
-    Texture loadingTexture;
+    Texture loadingTexture,t;
     ArrayList<Actor>[][] chunksSprites;
     ArrayList<Actor>[][] chunksSpritesBackground;
     int currentChunkX;
@@ -69,13 +70,22 @@ public class WorldBackground extends Actor {
             currentChunkY = pos.y;
         }
         batch.disableBlending();
-        for (int x = -1; x < 2; x++) {
-            for (int y = -1; y < 2; y++) {
-                if (pos.y + y < 0 || pos.x + x < 0 || pos.y >= chunks[0].length || pos.x >= chunks.length)
-                    continue;
+
+        if (GuiBase.isAndroid()) {
+            //TODO WorldBackground for Android
+            if (t == null)
+                t = new Texture(WorldSave.getCurrentSave().getWorld().getBiomeImage2());
+
+            batch.draw(t, 0, 0, WorldStage.getInstance().getViewport().getWorldWidth(), WorldStage.getInstance().getViewport().getWorldHeight());
+        } else {
+            for (int x = -1; x < 2; x++) {
+                for (int y = -1; y < 2; y++) {
+                    if (pos.y + y < 0 || pos.x + x < 0 || pos.y >= chunks[0].length || pos.x >= chunks.length)
+                        continue;
 
 
-                batch.draw(getChunkTexture(pos.x + x, pos.y + y), transChunkToWorld(pos.x + x), transChunkToWorld(pos.y + y));
+                    batch.draw(getChunkTexture(pos.x + x, pos.y + y), transChunkToWorld(pos.x + x), transChunkToWorld(pos.y + y));
+                }
             }
         }
         batch.enableBlending();
