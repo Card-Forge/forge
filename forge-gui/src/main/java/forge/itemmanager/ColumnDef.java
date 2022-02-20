@@ -64,7 +64,8 @@ public enum ColumnDef {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
                     if (from.getKey() instanceof PaperCard) {
-                        return ((PaperCard)from.getKey()).getSortableName();
+                        String sortableName = ((PaperCard)from.getKey()).getSortableName();
+                        return sortableName == null ? InventoryItem.toSortableName(from.getKey().getName()) : sortableName;
                     }
                     return InventoryItem.toSortableName(from.getKey().getName());
                 }
