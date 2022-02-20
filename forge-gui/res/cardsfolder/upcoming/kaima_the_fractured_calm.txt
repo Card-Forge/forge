@@ -1,0 +1,12 @@
+Name:Kaima, the Fractured Calm
+ManaCost:2 R G
+Types:Legendary Creature Spirit
+PT:3/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGoad | TriggerDescription$ At the beginning of your end step, goad each creature your opponents control that's enchanted by an Aura you control. Put a +1/+1 counter on CARDNAME for each creature goaded this way. (Until your next turn, the goaded creatures attack each combat if able and attack a player other than you if able.)
+SVar:TrigGoad:DB$ Goad | Defined$ Valid Creature.OppCtrl+EnchantedBy Aura.YouCtrl | RememberGoaded$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+DeckHas:Ability$Counters
+DeckHints:Type$Enchantment
+Oracle:At the beginning of your end step, goad each creature your opponents control that's enchanted by an Aura you control. Put a +1/+1 counter on Kaima, the Fractured Calm for each creature goaded this way. (Until your next turn, the goaded creatures attack each combat if able and attack a player other than you if able.)
