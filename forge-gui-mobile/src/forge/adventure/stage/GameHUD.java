@@ -3,6 +3,7 @@ package forge.adventure.stage;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -43,6 +44,36 @@ public class GameHUD extends Stage {
 
         miniMapPlayer = new Image(new Texture(Config.instance().getFile("ui/minimap_player.png")));
 
+        touchpadSkin = new Skin();
+        touchpadSkin.add("touchBackground", new Texture(Config.instance().getFile("ui/touchBackground.png")));
+        touchpadSkin.add("touchKnob", new Texture(Config.instance().getFile("ui/touchKnob.png")));
+        touchpadStyle = new TouchpadStyle();
+        touchBackground = touchpadSkin.getDrawable("touchBackground");
+        touchKnob = touchpadSkin.getDrawable("touchKnob");
+        touchpadStyle.background = touchBackground;
+        touchpadStyle.knob = touchKnob;
+        touchpadStyle.knob.setMinWidth(34);
+        touchpadStyle.knob.setMinHeight(34);
+        touchpad = new Touchpad(10, touchpadStyle);
+        touchpad.setBounds(15, 15, 65, 65);
+        touchpad.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                if (MapStage.getInstance().isInMap()) {
+                    MapStage.getInstance().GetPlayer().getMovementDirection().x+=((Touchpad) actor).getKnobPercentX();
+                    MapStage.getInstance().GetPlayer().getMovementDirection().y+=((Touchpad) actor).getKnobPercentY();
+                } else {
+                    WorldStage.getInstance().GetPlayer().getMovementDirection().x+=((Touchpad) actor).getKnobPercentX();
+                    WorldStage.getInstance().GetPlayer().getMovementDirection().y+=((Touchpad) actor).getKnobPercentY();
+                }
+                if (!((Touchpad) actor).isTouched()) {
+                    MapStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
+                    WorldStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
+                }
+            }
+        });
+        if (GuiBase.isAndroid()) //add touchpad
+            ui.addActor(touchpad);
 
         avatar = ui.findActor("avatar");
         ui.onButtonPress("menu", new Runnable() {
@@ -114,7 +145,7 @@ public class GameHUD extends Stage {
             WorldStage.getInstance().GetPlayer().setPosition(x*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),y*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
             return true;
         }
-        return true;
+        return super.touchDragged(screenX, screenY, pointer);
     }
 
     @Override
@@ -137,6 +168,7 @@ public class GameHUD extends Stage {
         float deckT = ui.findActor("deck").getTop();
         //deck button bounds
         if (c.x>=deckX&&c.x<=deckR&&c.y>=deckY&&c.y<=deckT) {
+            openDeck();
             stageToScreenCoordinates(c2.set(deckX, deckY));
             return super.touchDown((int)c2.x, (int)c2.y, pointer, button);
         }
@@ -147,6 +179,7 @@ public class GameHUD extends Stage {
         float menuT = ui.findActor("menu").getTop();
         //menu button bounds
         if (c.x>=menuX&&c.x<=menuR&&c.y>=menuY&&c.y<=menuT) {
+            menu();
             stageToScreenCoordinates(c2.set(menuX, menuY));
             return super.touchDown((int)c2.x, (int)c2.y, pointer, button);
         }
@@ -157,6 +190,7 @@ public class GameHUD extends Stage {
         float statsT = ui.findActor("statistic").getTop();
         //stats button bounds
         if (c.x>=statsX&&c.x<=statsR&&c.y>=statsY&&c.y<=statsT) {
+            statistic();
             stageToScreenCoordinates(c2.set(statsX, statsY));
             return super.touchDown((int)c2.x, (int)c2.y, pointer, button);
         }
