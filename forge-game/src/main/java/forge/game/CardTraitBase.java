@@ -356,19 +356,19 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             }
             CardCollection list = new CardCollection();
             if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
-                list.addAll(this.getHostCard().getController().getCardsIn(presentZone));
+                list.addAll(hostController.getCardsIn(presentZone));
             }
             if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
-                for (final Player p : this.getHostCard().getController().getOpponents()) {
+                for (final Player p : hostController.getOpponents()) {
                     list.addAll(p.getCardsIn(presentZone));
                 }
             }
             if (presentPlayer.equals("Any")) {
-                for (final Player p : this.getHostCard().getController().getAllies()) {
+                for (final Player p : hostController.getAllies()) {
                     list.addAll(p.getCardsIn(presentZone));
                 }
             }
-            list = CardLists.getValidCards(list, sIsPresent, this.getHostCard().getController(), this.getHostCard(), this);
+            list = CardLists.getValidCards(list, sIsPresent, hostController, this.getHostCard(), this);
 
             final String rightString = presentCompare.substring(2);
             int right = AbilityUtils.calculateAmount(getHostCard(), rightString, this);
@@ -389,15 +389,15 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             }
             CardCollection list = new CardCollection();
             if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
-                list.addAll(this.getHostCard().getController().getCardsIn(presentZone));
+                list.addAll(hostController.getCardsIn(presentZone));
             }
             if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
-                for (final Player p : this.getHostCard().getController().getOpponents()) {
+                for (final Player p : hostController.getOpponents()) {
                     list.addAll(p.getCardsIn(presentZone));
                 }
             }
 
-            list = CardLists.getValidCards(list, sIsPresent, this.getHostCard().getController(), this.getHostCard(), this);
+            list = CardLists.getValidCards(list, sIsPresent, hostController, this.getHostCard(), this);
 
             final String rightString = presentCompare.substring(2);
             int right = AbilityUtils.calculateAmount(getHostCard(), rightString, this);

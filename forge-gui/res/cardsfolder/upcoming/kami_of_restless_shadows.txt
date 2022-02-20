@@ -1,0 +1,11 @@
+Name:Kami of Restless Shadows
+ManaCost:4 B
+Types:Creature Spirit
+PT:3/3
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ RaiseScoundrel,HauntedHarvest
+SVar:RaiseScoundrel:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.Ninja+YouOwn,Creature.Rogue+YouOwn | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target Ninja or Rogue creature card from your graveyard | SpellDescription$ Return up to one target Ninja or Rogue creature card from your graveyard to your hand
+SVar:HauntedHarvest:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature card from your graveyard | SpellDescription$ Put target creature card from your graveyard on top of your library.
+DeckHas:Ability$Graveyard
+DeckHints:Type$Ninja|Rogue
+Oracle:When Kami of Restless Shadows enters the battlefield, choose one —\n• Return up to one target Ninja or Rogue creature card from your graveyard to your hand.\n• Put target creature card from your graveyard on top of your library.

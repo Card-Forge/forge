@@ -1587,8 +1587,8 @@ public class CardProperty {
         } else if (property.startsWith("blockedByThisTurn")) {
             return !card.getBlockedByThisTurn().isEmpty();
         } else if (property.startsWith("blockedValidThisTurn ")) {
-            CardCollectionView blocked = card.getBlockedThisTurn();
-            if (blocked == null) {
+            List<Card> blocked = card.getBlockedThisTurn();
+            if (blocked.isEmpty()) {
                 return false;
             }
             String valid = property.split(" ")[1];
@@ -1604,8 +1604,8 @@ public class CardProperty {
             }
             return false;
         } else if (property.startsWith("blockedByValidThisTurn ")) {
-            CardCollectionView blocked = card.getBlockedByThisTurn();
-            if (blocked == null) {
+            List<Card> blocked = card.getBlockedByThisTurn();
+            if (blocked.isEmpty()) {
                 return false;
             }
             String valid = property.split(" ")[1];

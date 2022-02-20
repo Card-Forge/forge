@@ -1,0 +1,8 @@
+Name:Planar Incision
+ManaCost:1 U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Artifact,Creature | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target artifact or creature | RememberTargets$ True | SubAbility$ DBReturn | SpellDescription$ Exile target artifact or creature, then return it to the battlefield under its owner's control with a +1/+1 counter on it. | StackDescription$ Exile {c:Targeted}, then return it to the battlefield under its owner's control with a +1/+1 counter on it.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | WithCountersType$ P1P1 | WithCountersAmount$ 1 | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Counters
+Oracle:Exile target artifact or creature, then return it to the battlefield under its owner's control with a +1/+1 counter on it.
