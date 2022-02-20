@@ -7,6 +7,11 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
+import com.badlogic.gdx.scenes.scene2d.ui.Touchpad.TouchpadStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import forge.Forge;
@@ -31,7 +36,12 @@ public class GameHUD extends Stage {
     private final Label lifePoints;
     private final Label money;
     private Image miniMap;
-    UIActor ui;
+    private UIActor ui;
+    private Touchpad touchpad;
+    private TouchpadStyle touchpadStyle;
+    private Skin touchpadSkin;
+    private Drawable touchBackground;
+    private Drawable touchKnob;
 
     private GameHUD(GameStage gameStage) {
         super(new FitViewport(Scene.GetIntendedWidth(), Scene.GetIntendedHeight()), gameStage.getBatch());
