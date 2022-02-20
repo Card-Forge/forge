@@ -1,6 +1,6 @@
 Name:Glasses of Urza
 ManaCost:1
 Types:Artifact
-A:AB$ RevealHand | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Look at target player's hand.
+A:AB$ RevealHand | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target player | Look$ True | SpellDescription$ Look at target player's hand.
 AI:RemoveDeck:All
 Oracle:{T}: Look at target player's hand.

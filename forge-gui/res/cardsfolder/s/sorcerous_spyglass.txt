@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact
 K:ETBReplacement:Other:ChoosePlayer
 SVar:ChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to look at the hand: | SubAbility$ DBLook | SpellDescription$ As CARDNAME enters the battlefield, look at an opponent's hand, then choose any card name.
-SVar:DBLook:DB$ RevealHand | Defined$ ChosenPlayer | SubAbility$ DBNameCard
+SVar:DBLook:DB$ RevealHand | Defined$ ChosenPlayer | Look$ True | SubAbility$ DBNameCard
 SVar:DBNameCard:DB$ NameCard | Defined$ You | SubAbility$ DBClear
 SVar:DBClear:DB$ Cleanup | ClearChosenPlayer$ True
 S:Mode$ CantBeActivated | ValidCard$ Card.NamedCard | ValidSA$ Activated.nonManaAbility | Description$ Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.
