@@ -327,6 +327,16 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
         }
         return false;
     }
+
+    public String getFirstPhyrexianHybridPip() {
+        for (ManaCostShard shard : shards) {
+            if (shard.isHybrid() && shard.isPhyrexian()) {
+                return shard.toString();
+            }
+        }
+        return null;
+    }
+
     /**
      * works for Phyrexian Mana and 2Half mana, not for Hybrid mana
      * @return
