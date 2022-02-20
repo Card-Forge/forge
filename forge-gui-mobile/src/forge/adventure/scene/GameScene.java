@@ -47,6 +47,7 @@ public class GameScene extends HudScene {
     @Override
     public void enter() {
         Forge.clearTransitionScreen();
+        Forge.clearCurrentScreen();
         super.enter();
     }
 }

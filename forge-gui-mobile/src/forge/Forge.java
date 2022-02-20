@@ -5,6 +5,7 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -113,6 +114,7 @@ public class Forge implements ApplicationListener {
     public static boolean afterDBloaded = false;
     public static int mouseButtonID = 0;
     public static InputProcessor inputProcessor;
+    private static Cursor cursor0, cursor1, cursor2, cursorA0, cursorA1, cursorA2;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
         app = new Forge();
@@ -362,9 +364,31 @@ public class Forge implements ApplicationListener {
         if (GuiBase.isAndroid())
             return;
         if (Forge.isMobileAdventureMode) {
+            if (cursorA0 != null && name == "0") {
+                setGdxCursor(cursorA0);
+                return;
+            } else if (cursorA1 != null && name == "1") {
+                setGdxCursor(cursorA1);
+                return;
+            } else if (cursorA2 != null && name == "2") {
+                setGdxCursor(cursorA2);
+                return;
+            }
+
             String path = "skin/cursor"+name+".png";
             Pixmap pm = new Pixmap(Config.instance().getFile(path));
-            Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
+
+            if (name == "0") {
+                cursorA0 = Gdx.graphics.newCursor(pm, 0, 0);
+                setGdxCursor(cursorA0);
+            } else if (name == "1") {
+                cursorA1 = Gdx.graphics.newCursor(pm, 0, 0);
+                setGdxCursor(cursorA1);
+            } else {
+                cursorA2 = Gdx.graphics.newCursor(pm, 0, 0);
+                setGdxCursor(cursorA2);
+            }
+
             pm.dispose();
             return;
         }
@@ -373,6 +397,16 @@ public class Forge implements ApplicationListener {
         if (currentScreen != null && !currentScreen.toString().toLowerCase().contains("match") && name != "0")
             return; // cursor indicator should be during matches
         if (textureRegion == null) {
+            return;
+        }
+        if (cursor0 != null && name == "0") {
+            setGdxCursor(cursor0);
+            return;
+        } else if (cursor1 != null && name == "1") {
+            setGdxCursor(cursor1);
+            return;
+        } else if (cursor2 != null && name == "2") {
+            setGdxCursor(cursor2);
             return;
         }
         TextureData textureData = textureRegion.getTexture().getTextureData();
@@ -393,9 +427,21 @@ public class Forge implements ApplicationListener {
                 textureRegion.getRegionWidth(), // The width of the area from the other Pixmap in pixels
                 textureRegion.getRegionHeight() // The height of the area from the other Pixmap in pixels
         );
-        Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
+        if (name == "0") {
+            cursor0 = Gdx.graphics.newCursor(pm, 0, 0);
+            setGdxCursor(cursor0);
+        } else if (name == "1") {
+            cursor1 = Gdx.graphics.newCursor(pm, 0, 0);
+            setGdxCursor(cursor1);
+        } else {
+            cursor2 = Gdx.graphics.newCursor(pm, 0, 0);
+            setGdxCursor(cursor2);
+        }
         cursorName = name;
         pm.dispose();
+    }
+    static void setGdxCursor(Cursor c) {
+        Gdx.graphics.setCursor(c);
     }
     public static Clipboard getClipboard() {
         return clipboard;
