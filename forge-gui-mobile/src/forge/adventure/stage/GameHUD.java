@@ -152,6 +152,8 @@ public class GameHUD extends Stage {
         float mMapR = ui.findActor("map").getRight();
         //map bounds
         if (c.x>=mMapX&&c.x<=mMapR&&c.y>=mMapY&&c.y<=mMapT) {
+            if (MapStage.getInstance().isInMap())
+                return true;
             WorldStage.getInstance().GetPlayer().setPosition(x*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),y*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
             return true;
         }
@@ -220,6 +222,8 @@ public class GameHUD extends Stage {
         float mMapR = ui.findActor("map").getRight();
         //map bounds
         if (c.x>=mMapX&&c.x<=mMapR&&c.y>=mMapY&&c.y<=mMapT) {
+            if (MapStage.getInstance().isInMap())
+                return true;
             WorldStage.getInstance().GetPlayer().setPosition(x*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),y*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
             return true;
         }
