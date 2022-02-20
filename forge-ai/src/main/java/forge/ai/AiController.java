@@ -1419,14 +1419,15 @@ public class AiController {
             } else {
                 chance = SpellApiToAi.Converter.get(spell.getApi()).doTriggerAI(player, spell, mandatory);
             }
-            if (!chance)
+            if (!chance) {
                 return AiPlayDecision.TargetingFailed;
+            }
+
+            if (mandatory) {
+                return AiPlayDecision.WillPlay;
+            }
 
             if (spell instanceof SpellPermanent) {
-                if (mandatory) {
-                    return AiPlayDecision.WillPlay;
-                }
-
                 if (!checkETBEffects(card, spell, null)) {
                     return AiPlayDecision.BadEtbEffects;
                 }
