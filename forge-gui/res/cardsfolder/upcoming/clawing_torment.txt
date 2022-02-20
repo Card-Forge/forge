@@ -1,0 +1,10 @@
+Name:Clawing Torment
+ManaCost:B
+Types:Enchantment Aura
+K:Enchant artifact or creature
+A:SP$ Attach | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target artifact or creature | AITgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -1 | AddToughness$ -1 | AddHiddenKeyword$ CARDNAME can't block. | Description$ As long as enchanted permanent is a creature, it gets -1/-1 and can't block.
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddTrigger$ TriggerTorment | AddSVar$ TrigLoseLife | Description$ Enchanted permanent has "At the beginning of your upkeep, you lose 1 life."
+SVar:TriggerTorment:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you lose 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+Oracle:Enchant artifact or creature\nAs long as enchanted permanent is a creature, it gets -1/-1 and can't block.\nEnchanted permanent has "At the beginning of your upkeep, you lose 1 life."
