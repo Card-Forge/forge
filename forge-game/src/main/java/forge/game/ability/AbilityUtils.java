@@ -2963,18 +2963,22 @@ public class AbilityUtils {
         List<SpellAbility> list = Lists.newArrayList(tgtCard.getBasicSpells());
 
         CardState original = tgtCard.getState(CardStateName.Original);
-        if (tgtCard.isLand()) {
-            LandAbility la = new LandAbility(tgtCard, controller, null);
-            la.setCardState(original);
-            list.add(la);
-        }
-        if (tgtCard.isModal()) {
-            CardState modal = tgtCard.getState(CardStateName.Modal);
-            list.addAll(Lists.newArrayList(tgtCard.getBasicSpells(modal)));
-            if (modal.getType().isLand()) {
+        if (tgtCard.isFaceDown()) {
+            list.addAll(Lists.newArrayList(tgtCard.getBasicSpells(original)));
+        } else {
+            if (tgtCard.isLand()) {
                 LandAbility la = new LandAbility(tgtCard, controller, null);
-                la.setCardState(modal);
+                la.setCardState(original);
                 list.add(la);
+            }
+            if (tgtCard.isModal()) {
+                CardState modal = tgtCard.getState(CardStateName.Modal);
+                list.addAll(Lists.newArrayList(tgtCard.getBasicSpells(modal)));
+                if (modal.getType().isLand()) {
+                    LandAbility la = new LandAbility(tgtCard, controller, null);
+                    la.setCardState(modal);
+                    list.add(la);
+                }
             }
         }
 

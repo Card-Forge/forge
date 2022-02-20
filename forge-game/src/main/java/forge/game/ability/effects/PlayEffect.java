@@ -50,17 +50,28 @@ public class PlayEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
+        sb.append(sa.getActivatingPlayer().toString()).append(" ");
 
-        sb.append("Play ");
-        final List<Card> tgtCards = getTargetCards(sa);
+        if (sa.hasParam("ValidSA")) {
+            sb.append(sa.hasParam("Optional") ? "may cast " : "cast ");
+        } else {
+            sb.append(sa.hasParam("Optional") ? "may play " : "plays ");
+        }
+
+        final List<Card> tgtCards = getDefinedCardsOrTargeted(sa);
 
         if (sa.hasParam("Valid")) {
             sb.append("cards");
+        } else if (sa.hasParam("DefinedDesc")) {
+            sb.append(sa.getParam("DefinedDesc"));
         } else {
-            sb.append(StringUtils.join(tgtCards, ", "));
+            sb.append(Lang.joinHomogenous(tgtCards));
         }
         if (sa.hasParam("WithoutManaCost")) {
-            sb.append(" without paying the mana cost");
+            sb.append(" without paying ").append(tgtCards.size()==1 ? "its" : "their").append(" mana cost ");
+        }
+        if (sa.hasParam("IfDesc")) {
+            sb.append(sa.getParam("IfDesc"));
         }
         sb.append(".");
         return sb.toString();
