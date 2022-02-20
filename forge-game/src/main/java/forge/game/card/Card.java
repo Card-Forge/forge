@@ -3482,6 +3482,23 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         runParams.put(AbilityKey.AttachSource, this);
         runParams.put(AbilityKey.AttachTarget, entity);
         getController().getGame().getTriggerHandler().runTrigger(TriggerType.Attached, runParams, false);
+
+        if (hasKeyword(Keyword.RECONFIGURE)) {
+            // need extra time stamp so it doesn't collide with existing ones
+            long ts = getGame().getNextTimestamp();
+            // TODO make it use a Static Layer Effect instead
+            addChangedCardTypes(null, CardType.parse("Creature", true), false, false, false, false, false, false, false, false, ts, 0, true, false);
+
+            GameCommand unattach = new GameCommand() {
+                private static final long serialVersionUID = 1L;
+
+                @Override
+                public void run() {
+                    removeChangedCardTypes(ts, 0);
+                }
+            };
+            addUnattachCommand(unattach);
+        }
     }
 
     public final void unattachFromEntity(final GameEntity entity) {
