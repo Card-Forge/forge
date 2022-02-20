@@ -99,9 +99,33 @@ public class GameHUD extends Stage {
     }
 
     @Override
-    public boolean touchDown (int screenX, int screenY, int pointer, int button)
-    {
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
         Vector2 c=new Vector2();
+        screenToStageCoordinates(c.set(screenX, screenY));
+
+        float x=(c.x-miniMap.getX())/miniMap.getWidth();
+        float y=(c.y-miniMap.getY())/miniMap.getHeight();
+        float mMapX = ui.findActor("map").getX();
+        float mMapY = ui.findActor("map").getY();
+        float mMapT = ui.findActor("map").getTop();
+        float mMapR = ui.findActor("map").getRight();
+        //map bounds
+        if (c.x>=mMapX&&c.x<=mMapR&&c.y>=mMapY&&c.y<=mMapT) {
+            WorldStage.getInstance().GetPlayer().setPosition(x*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),y*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
+            return true;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button)
+    {
+        return setPosition(screenX, screenY, pointer, button);
+    }
+
+    boolean setPosition(int screenX, int screenY, int pointer, int button) {
+        Vector2 c=new Vector2();
+        Vector2 c2=new Vector2();
         screenToStageCoordinates(c.set(screenX, screenY));
 
         float x=(c.x-miniMap.getX())/miniMap.getWidth();
@@ -113,8 +137,8 @@ public class GameHUD extends Stage {
         float deckT = ui.findActor("deck").getTop();
         //deck button bounds
         if (c.x>=deckX&&c.x<=deckR&&c.y>=deckY&&c.y<=deckT) {
-            instance.openDeck();
-            return true;
+            stageToScreenCoordinates(c2.set(deckX, deckY));
+            return super.touchDown((int)c2.x, (int)c2.y, pointer, button);
         }
 
         float menuX = ui.findActor("menu").getX();
@@ -123,8 +147,8 @@ public class GameHUD extends Stage {
         float menuT = ui.findActor("menu").getTop();
         //menu button bounds
         if (c.x>=menuX&&c.x<=menuR&&c.y>=menuY&&c.y<=menuT) {
-            instance.menu();
-            return true;
+            stageToScreenCoordinates(c2.set(menuX, menuY));
+            return super.touchDown((int)c2.x, (int)c2.y, pointer, button);
         }
 
         float statsX = ui.findActor("statistic").getX();
@@ -133,8 +157,8 @@ public class GameHUD extends Stage {
         float statsT = ui.findActor("statistic").getTop();
         //stats button bounds
         if (c.x>=statsX&&c.x<=statsR&&c.y>=statsY&&c.y<=statsT) {
-            instance.statistic();
-            return true;
+            stageToScreenCoordinates(c2.set(statsX, statsY));
+            return super.touchDown((int)c2.x, (int)c2.y, pointer, button);
         }
 
         float uiX = ui.findActor("gamehud").getX();
@@ -146,14 +170,17 @@ public class GameHUD extends Stage {
             return true;
         }
 
-        //move player except touching the gamehud bounds and buttons
-        if(x>=0&&x<=1.0&&y>=0&&y<=1.0)
-        {
+        float mMapX = ui.findActor("map").getX();
+        float mMapY = ui.findActor("map").getY();
+        float mMapT = ui.findActor("map").getTop();
+        float mMapR = ui.findActor("map").getRight();
+        //map bounds
+        if (c.x>=mMapX&&c.x<=mMapR&&c.y>=mMapY&&c.y<=mMapT) {
             WorldStage.getInstance().GetPlayer().setPosition(x*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),y*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
+            return true;
         }
-        return super.touchDown(screenX,screenY,  pointer,button);
+        return super.touchDown(screenX, screenY, pointer, button);
     }
-
     @Override
     public void draw() {
 
