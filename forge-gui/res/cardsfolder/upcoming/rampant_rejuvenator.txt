@@ -1,0 +1,11 @@
+Name:Rampant Rejuvenator
+ManaCost:3 G
+Types:Creature Plant Hydra
+PT:0/0
+K:etbCounter:P1P1:2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME dies, search your library for up to X basic land cards, where X is CARDNAME's power, put them onto the battlefield, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ X
+SVar:X:TriggeredCard$CardPower
+DeckHas:Ability$Counters
+Oracle:Rampant Rejuvenator enters the battlefield with two +1/+1 counters on it.
+When Rampant Rejuvenator dies, search your library for up to X basic land cards, where X is Rampant Rejuvenator's power, put them onto the battlefield, then shuffle.

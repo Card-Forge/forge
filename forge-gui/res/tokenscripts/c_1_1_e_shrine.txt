@@ -1,0 +1,6 @@
+Name:Shrine Token
+ManaCost:no cost
+Types:Enchantment Creature Shrine
+Colors:colorless
+PT:1/1
+Oracle:
