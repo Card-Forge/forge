@@ -1,5 +1,6 @@
 package forge.adventure.scene;
 
+import forge.adventure.stage.GameHUD;
 import forge.screens.FScreen;
 
 /**
@@ -22,6 +23,7 @@ public class ShopScene extends ForgeScene {
 
     @Override
     public void enter() {
+        GameHUD.getInstance().getTouchpad().setVisible(false);
         getScreen();
         screen.refresh();
         super.enter();

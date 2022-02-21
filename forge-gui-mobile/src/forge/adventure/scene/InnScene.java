@@ -3,6 +3,7 @@ package forge.adventure.scene;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import forge.Forge;
+import forge.adventure.stage.GameHUD;
 import forge.adventure.util.Current;
 
 /**
@@ -18,6 +19,7 @@ public class InnScene extends UIScene  {
 
     public void done()
     {
+        GameHUD.getInstance().getTouchpad().setVisible(false);
         Forge.switchToLast();
     }
     public void heal()

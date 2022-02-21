@@ -11,6 +11,7 @@ import forge.Forge;
 import forge.adventure.character.ShopActor;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
+import forge.adventure.stage.GameHUD;
 import forge.adventure.util.CardUtil;
 import forge.adventure.util.Current;
 import forge.adventure.util.Reward;
@@ -45,6 +46,7 @@ public class RewardScene extends UIScene  {
     float flipCountDown=1.0f;
     public boolean done()
     {
+        GameHUD.getInstance().getTouchpad().setVisible(false);
         if(doneClicked)
             return true;
 

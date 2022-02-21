@@ -119,11 +119,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             }
         }
         addListener(new ClickListener() {
-        @Override
-        public void clicked(InputEvent event, float x, float y) {
-            if(flipOnClick)
-                flip();
-        }
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if(flipOnClick) {
+                    flip();
+                }
+            }
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor){
                 hover=true;
@@ -132,7 +133,23 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             public void exit(InputEvent event, float x, float y, int pointer, Actor fromActor){
                 hover=false;
             }
-    });
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                if (GuiBase.isAndroid() && pointer < 1) {
+                    hover=true;
+                    return true;
+                }
+                return super.touchDown(event, x, y, pointer, button);
+            }
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                if (GuiBase.isAndroid() && pointer < 1) {
+                    hover = false;
+                    return;
+                }
+                super.touchUp(event, x, y, pointer, button);
+            }
+        });
     }
 
     private void setCardImage(Texture img) {
