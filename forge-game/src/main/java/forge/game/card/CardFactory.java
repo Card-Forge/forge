@@ -670,6 +670,10 @@ public class CardFactory {
                 state.removeType(CardType.Supertype.Legendary);
             }
 
+            if (sa.hasParam("RemoveCardTypes")) {
+                state.removeCardTypes();
+            }
+
             state.addType(types);
 
             if (creatureTypes != null) {

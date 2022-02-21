@@ -715,7 +715,8 @@ public class AbilityUtils {
                 }
                 val = playerXCount(getDefinedPlayers(card, key, sa), calcX[1], card, ability);
             }
-            else if (calcX[0].startsWith("TriggeredPlayer") || calcX[0].startsWith("TriggeredTarget")) {
+            else if (calcX[0].startsWith("TriggeredPlayer") || calcX[0].startsWith("TriggeredTarget")
+                    || calcX[0].startsWith("TriggeredDefendingPlayer")) {
                 final SpellAbility root = sa.getRootAbility();
                 Object o = root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(9)));
                 val = o instanceof Player ? playerXProperty((Player) o, calcX[1], card, ability) : 0;
