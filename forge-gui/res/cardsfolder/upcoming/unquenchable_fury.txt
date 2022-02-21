@@ -1,0 +1,13 @@
+Name:Unquenchable Fury
+ManaCost:2 R
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ AttackTrigger | AddSVar$ AE | Description$ Enchanted creature has "Whenever this creature attacks, it deals X damage to defending player, where X is the number of cards in their hand."
+SVar:AttackTrigger:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever this creature attacks, it deals X damage to defending player, where X is the number of cards in their hand.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredDefender | NumDmg$ X
+SVar:X:TriggeredDefendingPlayer$CardsInHand
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ When CARDNAME is put into your graveyard from the battlefield, return it to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Hand
+SVar:AE:SVar:HasAttackEffect:TRUE
+Oracle:Enchant creature\nEnchanted creature has "Whenever this creature attacks, it deals X damage to defending player, where X is the number of cards in their hand."\nWhen Unquenchable Fury is put into your graveyard from the battlefield, return it to your hand.
