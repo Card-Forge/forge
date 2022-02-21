@@ -1,0 +1,10 @@
+Name:Go-Shintai of Life's Origin
+ManaCost:3 G
+Types:Legendary Enchantment Creature Shrine
+PT:3/4
+A:AB$ ChangeZone | Cost$ W U B R G T | ValidTgts$ Enchantment.YouOwn | TgtPrompt$ Select target enchantment card | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return target enchantment card from your graveyard to the battlefield.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Card.Self,Shrine.nonToken+Other+YouCtrl | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another nontoken Shrine enters the battlefield under your control, create a 1/1 colorless Shrine enchantment creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_e_shrine
+DeckHas:Ability$Graveyard|Token
+DeckHints:Type$Enchantment|Shrine
+Oracle:{W}{U}{B}{R}{G}, {T}: Return target enchantment card from your graveyard to the battlefield.\nWhenever Go-Shintai of Life's Origin or another nontoken Shrine enters the battlefield under your control, create a 1/1 colorless Shrine enchantment creature token.
