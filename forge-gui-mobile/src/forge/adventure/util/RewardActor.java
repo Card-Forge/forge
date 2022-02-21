@@ -133,7 +133,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         image = img;
         if (Forge.isTextureFilteringEnabled())
             image.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
-        TextureRegionDrawable drawable = new TextureRegionDrawable(image);
+        TextureRegionDrawable drawable = new TextureRegionDrawable(ImageCache.croppedBorderImage(image));
         drawable.setMinSize((Scene.GetIntendedHeight() / RewardScene.CARD_WIDTH_TO_HEIGHT) * 0.95f, Scene.GetIntendedHeight() * 0.95f);
         toolTipImage = new Image(drawable);
         tooltip = new Tooltip<Image>(toolTipImage);
@@ -217,8 +217,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             x = -getWidth() / 2;
         }
 
-        if (image != null)
-            batch.draw(image, x, -getHeight() / 2, width, getHeight());
+        if (image != null) {
+            batch.draw(ImageCache.croppedBorderImage(image), x, -getHeight() / 2, width, getHeight());
+        }
         else
             batch.draw(ImageCache.defaultImage, x, -getHeight() / 2, width, getHeight());
         switch (reward.getType()) {
