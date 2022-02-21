@@ -17,6 +17,7 @@
  */
 package forge.game.ability.effects;
 
+import java.util.Arrays;
 import java.util.List;
 
 import forge.util.Lang;
@@ -42,9 +43,40 @@ public class TokenEffect extends TokenEffectBase {
                 final Card host = sa.getHostCard();
                 final List<Player> creators = AbilityUtils.getDefinedPlayers(host, sa.getParamOrDefault("TokenOwner",
                         "You"), sa);
-                String start = Lang.joinHomogenous(creators) + (creators.size() == 1 ? " creates" : " create");
+                String verb = creators.size() == 1 ? "creates" : "create";
+                String start = Lang.joinHomogenous(creators) + " " + verb;
                 String create = desc.contains("Create") ? "Create" : "create";
-                desc = desc.replace(create, start);
+                desc = desc.replaceFirst(".*" + create, "");
+                desc = start + desc;
+                //try to put the right amount of tokens for X calculations and the like
+                if (sa.hasParam("TokenAmount") && !StringUtils.isNumeric(sa.getParam("TokenAmount"))) {
+                    final int numTokens = AbilityUtils.calculateAmount(host, sa.getParam("TokenAmount"), sa);
+                    if (numTokens != 0) { //0 probably means calculation isn't ready in time for stack
+                        if (numTokens != 1) { //if we are making more than one, substitute the numeral for a/an
+                            String numeral = " " + Lang.getNumeral(numTokens) + " ";
+                            List<String> words = Arrays.asList(desc.split(" "));
+                            String target = " " + words.get(words.indexOf(verb) + 1) + " ";
+                            desc = desc.replaceFirst(target, numeral);
+                        }
+                        //try to cut out unneeded description, which would now be confusing
+                        String truncate = null;
+                        if (desc.contains(", where")) {
+                            truncate = ", where";
+                        } else if (desc.contains(" for each")) {
+                            truncate = " for each";
+                        }
+                        if (truncate != null) { //if we do truncate, make sure the string ends properly
+                            desc = desc.split(truncate)[0];
+                            if (desc.endsWith("token") && numTokens > 1) {
+                                desc = desc + "s.";
+                            } else {
+                                desc = desc + ".";
+                            }
+                        }
+                    }
+                }
+                //pronoun replacement for things that create an amount based on what you control
+                desc = desc.replace("you control","they control");
             }
             return desc;
         }
