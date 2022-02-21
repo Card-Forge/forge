@@ -7,9 +7,9 @@ import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
-public class TriggerCrewed extends Trigger {
+public class TriggerBecomesCrewed extends Trigger {
 
-    public TriggerCrewed(final Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerBecomesCrewed(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -20,6 +20,12 @@ public class TriggerCrewed extends Trigger {
         }
         if (!matchesValidParam("ValidCrew", runParams.get(AbilityKey.Crew))) {
             return false;
+        }
+        if (hasParam("FirstTimeCrewed")) {
+            Card v = (Card) runParams.get(AbilityKey.Vehicle);
+            if (v.getTimesCrewedThisTurn() != 1) {
+                return false;
+            }
         }
         return true;
     }
