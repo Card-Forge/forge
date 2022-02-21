@@ -5625,7 +5625,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         foretoldThisTurn = false;
     }
 
-    public int timesCrewedThisTurn() {
+    public int getTimesCrewedThisTurn() {
         return timesCrewedThisTurn;
     }
 
@@ -5635,6 +5635,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public void resetTimesCrewedThisTurn() {
         timesCrewedThisTurn = 0;
+    }
+
+    public void becomesCrewed(SpellAbility sa) {
+        timesCrewedThisTurn += 1;
+        Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Vehicle, this);
+        runParams.put(AbilityKey.Crew, sa.getPaidList("TappedCards"));
+        game.getTriggerHandler().runTrigger(TriggerType.BecomesCrewed, runParams, false);
     }
 
     public final int getClassLevel() {
