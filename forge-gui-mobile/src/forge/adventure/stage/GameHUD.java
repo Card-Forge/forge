@@ -42,6 +42,8 @@ public class GameHUD extends Stage {
     private Skin touchpadSkin;
     private Drawable touchBackground;
     private Drawable touchKnob;
+    float TOUCHPAD_SCALE = 70f;
+    float TOUCHPAD_KNOB_MIN_WIDTH = 40f;
 
     private GameHUD(GameStage gameStage) {
         super(new FitViewport(Scene.GetIntendedWidth(), Scene.GetIntendedHeight()), gameStage.getBatch());
@@ -53,19 +55,21 @@ public class GameHUD extends Stage {
 
 
         miniMapPlayer = new Image(new Texture(Config.instance().getFile("ui/minimap_player.png")));
-
+        //create touchpad skin
         touchpadSkin = new Skin();
         touchpadSkin.add("touchBackground", new Texture(Config.instance().getFile("ui/touchBackground.png")));
         touchpadSkin.add("touchKnob", new Texture(Config.instance().getFile("ui/touchKnob.png")));
-        touchpadStyle = new TouchpadStyle();
+        //set touchpad skin background and knob
         touchBackground = touchpadSkin.getDrawable("touchBackground");
         touchKnob = touchpadSkin.getDrawable("touchKnob");
-        touchpadStyle.background = touchBackground;
-        touchpadStyle.knob = touchKnob;
-        touchpadStyle.knob.setMinWidth(34);
-        touchpadStyle.knob.setMinHeight(34);
+        //set touchpad style
+        touchpadStyle = new TouchpadStyle(touchBackground, touchKnob);
+        //set touchpad knob size
+        touchpadStyle.knob.setMinWidth(TOUCHPAD_KNOB_MIN_WIDTH);
+        touchpadStyle.knob.setMinHeight(TOUCHPAD_KNOB_MIN_WIDTH);
+        //create touchpad
         touchpad = new Touchpad(10, touchpadStyle);
-        touchpad.setBounds(15, 15, 65, 65);
+        touchpad.setBounds(15, 15, TOUCHPAD_SCALE, TOUCHPAD_SCALE);
         touchpad.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -80,9 +84,15 @@ public class GameHUD extends Stage {
                     MapStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
                     WorldStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
                 }
+                if (!((Touchpad) actor).isVisible()) {
+                    MapStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
+                    WorldStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
+                }
             }
         });
-        if (GuiBase.isAndroid()) //add touchpad
+        //set touch pad invisible until the user touch the ui
+        touchpad.setVisible(false);
+        if (GuiBase.isAndroid()) //add touchpad for android
             ui.addActor(touchpad);
 
         avatar = ui.findActor("avatar");
@@ -140,6 +150,15 @@ public class GameHUD extends Stage {
     }
 
     @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        if (GuiBase.isAndroid())
+            touchpad.setVisible(false);
+        MapStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
+        WorldStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
+        return super.touchUp(screenX, screenY, pointer, button);
+    }
+
+    @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         Vector2 c=new Vector2();
         screenToStageCoordinates(c.set(screenX, screenY));
@@ -169,6 +188,8 @@ public class GameHUD extends Stage {
     boolean setPosition(int screenX, int screenY, int pointer, int button) {
         Vector2 c=new Vector2();
         Vector2 c2=new Vector2();
+        Vector2 touch =new Vector2();
+
         screenToStageCoordinates(c.set(screenX, screenY));
 
         float x=(c.x-miniMap.getX())/miniMap.getWidth();
@@ -226,6 +247,12 @@ public class GameHUD extends Stage {
                 return true;
             WorldStage.getInstance().GetPlayer().setPosition(x*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),y*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
             return true;
+        }
+        //auto follow touchpad
+        if (GuiBase.isAndroid()) {
+            screenToStageCoordinates(touch.set(screenX, screenY));
+            touchpad.setBounds(touch.x-TOUCHPAD_SCALE/2, touch.y-TOUCHPAD_SCALE/2, TOUCHPAD_SCALE, TOUCHPAD_SCALE);
+            touchpad.setVisible(true);
         }
         return super.touchDown(screenX, screenY, pointer, button);
     }
