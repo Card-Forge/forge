@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Artifact Vehicle
 PT:3/4
 K:Flying
-T:Mode$ Crewed | ValidVehicle$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ Whenever CARDNAME becomes crewed, up to one other target Vehicle you control becomes an artifact creature until end of turn.
+T:Mode$ BecomesCrewed | ValidVehicle$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ Whenever CARDNAME becomes crewed, up to one other target Vehicle you control becomes an artifact creature until end of turn.
 SVar:TrigAnimate:DB$ Animate | ValidTgts$ Vehicle.YouCtrl+Other | TgtPrompt$ Select up to one other target Vehicle you control | TargetMin$ 0 | TargetMax$ 1 | Types$ Creature,Artifact
 K:Crew:3
 Oracle:Flying

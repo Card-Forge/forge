@@ -184,6 +184,10 @@ public class AnimateEffect extends AnimateEffectBase {
                 c.addImprintedCards(AbilityUtils.getDefinedCards(source, animateImprinted, sa));
             }
 
+            if (sa.hasParam("Crew")) {
+                c.becomesCrewed(sa);
+            }
+
             game.fireEvent(new GameEventCardStatsChanged(c));
         }
 
