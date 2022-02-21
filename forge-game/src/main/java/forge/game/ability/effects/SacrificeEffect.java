@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import forge.util.Lang;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Maps;
@@ -217,20 +218,19 @@ public class SacrificeEffect extends SpellAbilityEffect {
             sb.append("Sacrifices ").append(sa.getHostCard().toString());
         } else if (valid.equals("Card.AttachedBy")) {
             final Card toSac = sa.getHostCard().getEnchantingCard();
-            sb.append(toSac.getController()).append(" Sacrifices ").append(toSac).append(".");
+            sb.append(toSac.getController()).append(" sacrifices ").append(toSac).append(".");
         } else {
-            for (final Player p : tgts) {
-                sb.append(p.getName()).append(" ");
-            }
+            sb.append(Lang.joinHomogenous(tgts)).append(" ");
+            boolean oneTgtP = tgts.size() == 1;
 
             String msg = sa.getParamOrDefault("SacMessage", valid);
 
             if (sa.hasParam("Destroy")) {
-                sb.append("Destroys ");
+                sb.append(oneTgtP ? "destroys " : " destroys ");
             } else {
-                sb.append("Sacrifices ");
+                sb.append(oneTgtP ? "sacrifices " : "sacrifices ");
             }
-            sb.append(amount).append(" ").append(msg).append(".");
+            sb.append(Lang.nounWithNumeralExceptOne(amount, msg)).append(".");
         }
 
         return sb.toString();
