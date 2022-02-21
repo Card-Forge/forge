@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import forge.Forge;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -185,6 +186,7 @@ public class SaveFileData extends HashMap<String,byte[]>
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
+            Forge.delayedSwitchBack();
         }
         return null;
     }

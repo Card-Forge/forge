@@ -725,56 +725,60 @@ public class Forge implements ApplicationListener {
                 screen = splashScreen;
                 if (screen == null) {
                     if (isMobileAdventureMode) {
-                        float delta=Gdx.graphics.getDeltaTime();
-                        float transitionTime = 0.2f;
-                        if(sceneWasSwapped)
-                        {
-                            sceneWasSwapped =false;
-                            animationTimeout= transitionTime;
-                            Gdx.gl.glClearColor(0, 0, 0, 1);
-                            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                            return;
-                        }
-                        if(animationTimeout>=0)
-                        {
-                            Gdx.gl.glClearColor(0, 0, 0, 1);
-                            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                            animationBatch.begin();
-                            animationTimeout-=delta;
-                            animationBatch.setColor(1,1,1,1);
-                            animationBatch.draw(lastScreenTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-                            animationBatch.setColor(1,1,1,1-(1/ transitionTime)*animationTimeout);
-                            animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-                            animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-                            animationBatch.end();
-                            if(animationTimeout<0)
+                        try {
+                            float delta=Gdx.graphics.getDeltaTime();
+                            float transitionTime = 0.2f;
+                            if(sceneWasSwapped)
                             {
-                                currentScene.render();
-                                storeScreen();
+                                sceneWasSwapped =false;
+                                animationTimeout= transitionTime;
                                 Gdx.gl.glClearColor(0, 0, 0, 1);
                                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                            }
-                            else
-                            {
                                 return;
                             }
+                            if(animationTimeout>=0)
+                            {
+                                Gdx.gl.glClearColor(0, 0, 0, 1);
+                                Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                                animationBatch.begin();
+                                animationTimeout-=delta;
+                                animationBatch.setColor(1,1,1,1);
+                                animationBatch.draw(lastScreenTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                                animationBatch.setColor(1,1,1,1-(1/ transitionTime)*animationTimeout);
+                                animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                                animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                                animationBatch.end();
+                                if(animationTimeout<0)
+                                {
+                                    currentScene.render();
+                                    storeScreen();
+                                    Gdx.gl.glClearColor(0, 0, 0, 1);
+                                    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                                }
+                                else
+                                {
+                                    return;
+                                }
+                            }
+                            if(animationTimeout>=-transitionTime)
+                            {
+                                Gdx.gl.glClearColor(0, 0, 0, 1);
+                                Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                                animationBatch.begin();
+                                animationTimeout-=delta;
+                                animationBatch.setColor(1,1,1,1);
+                                animationBatch.draw(lastScreenTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                                animationBatch.setColor(1,1,1,(1/ transitionTime)*(animationTimeout+ transitionTime));
+                                animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                                animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                                animationBatch.end();
+                                return;
+                            }
+                            currentScene.render();
+                            currentScene.act(delta);
+                        } catch (IllegalStateException | NullPointerException ie) {
+                            //silence this..
                         }
-                        if(animationTimeout>=-transitionTime)
-                        {
-                            Gdx.gl.glClearColor(0, 0, 0, 1);
-                            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                            animationBatch.begin();
-                            animationTimeout-=delta;
-                            animationBatch.setColor(1,1,1,1);
-                            animationBatch.draw(lastScreenTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-                            animationBatch.setColor(1,1,1,(1/ transitionTime)*(animationTimeout+ transitionTime));
-                            animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-                            animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-                            animationBatch.end();
-                            return;
-                        }
-                        currentScene.render();
-                        currentScene.act(delta);
                     }
                     if (showFPS)
                         frameRate.render();
@@ -815,7 +819,21 @@ public class Forge implements ApplicationListener {
         if (showFPS)
             frameRate.render();
     }
-
+    public static void delayedSwitchBack() {
+        FThreads.invokeInBackgroundThread(new Runnable() {
+            @Override
+            public void run() {
+                FThreads.invokeInEdtLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        clearTransitionScreen();
+                        clearCurrentScreen();
+                        switchToLast();
+                    }
+                });
+            }
+        });
+    }
     @Override
     public void resize(int width, int height) {
         try {

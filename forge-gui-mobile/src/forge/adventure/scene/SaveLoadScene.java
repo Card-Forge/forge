@@ -107,17 +107,11 @@ public class SaveLoadScene extends UIScene {
             stage.setKeyboardFocus(textInput);
         } else {
             if (WorldSave.load(currentSlot)) {
-                Runnable runnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        Forge.switchScene(SceneType.GameScene.instance);
-                    }
-                };
-                Forge.setTransitionScreen(new TransitionScreen(runnable, null, false, true));
+                Forge.setTransitionScreen(new TransitionScreen(null, null, false, true));
+                Forge.switchScene(SceneType.GameScene.instance);
             } else {
                 Forge.clearTransitionScreen();
             }
-
         }
     }
 
