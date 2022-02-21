@@ -12,7 +12,9 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Tooltip;
+import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Disposable;
@@ -30,6 +32,7 @@ import forge.util.ImageFetcher;
  */
 public class RewardActor extends Actor implements Disposable, ImageFetcher.Callback {
     Tooltip<Image> tooltip;
+    HoldTooltip holdTooltip;
     Reward reward;
 
     static TextureRegion backTexture;
@@ -119,12 +122,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             }
         }
         addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                if(flipOnClick) {
-                    flip();
-                }
-            }
+        @Override
+        public void clicked(InputEvent event, float x, float y) {
+            if(flipOnClick)
+                flip();
+        }
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor){
                 hover=true;
@@ -133,23 +135,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             public void exit(InputEvent event, float x, float y, int pointer, Actor fromActor){
                 hover=false;
             }
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if (GuiBase.isAndroid() && pointer < 1) {
-                    hover=true;
-                    return true;
-                }
-                return super.touchDown(event, x, y, pointer, button);
-            }
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (GuiBase.isAndroid() && pointer < 1) {
-                    hover = false;
-                    return;
-                }
-                super.touchUp(event, x, y, pointer, button);
-            }
-        });
+    });
     }
 
     private void setCardImage(Texture img) {
@@ -160,9 +146,13 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         drawable.setMinSize((Scene.GetIntendedHeight()/ RewardScene.CARD_WIDTH_TO_HEIGHT)*0.95f,Scene.GetIntendedHeight()*0.95f);
         toolTipImage=new Image(drawable);
         tooltip=new Tooltip<Image>(toolTipImage);
+        holdTooltip = new HoldTooltip(toolTipImage);
         tooltip.setInstant(true);
-        if(frontSideUp())
+        if(frontSideUp()) {
             addListener(tooltip);
+            if (GuiBase.isAndroid())
+                addListener(holdTooltip);
+        }
     }
 
     private boolean frontSideUp() {
@@ -191,8 +181,14 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             else
                 flipProcess=1;
 
-            if(tooltip!=null&&frontSideUp()&&!getListeners().contains(tooltip,true))
+            if(tooltip!=null&&frontSideUp()&&!getListeners().contains(tooltip,true)) {
                 addListener(tooltip);
+            }
+
+            if(holdTooltip!=null&&frontSideUp()&&!getListeners().contains(holdTooltip,true)) {
+                if (GuiBase.isAndroid())
+                    addListener(holdTooltip);
+            }
             // flipProcess=(float)Gdx.input.getX()/ (float)Gdx.graphics.getWidth();
         }
 
@@ -314,4 +310,32 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     }
 
+    class HoldTooltip extends ActorGestureListener {
+
+        Image tooltip_image;
+        Table tooltip_actor;
+
+        public HoldTooltip(Image tooltip_image) {
+            this.tooltip_image = tooltip_image;
+
+            tooltip_actor = new Table();
+            tooltip_actor.add(this.tooltip_image);
+            tooltip_actor.setSize(this.tooltip_image.getPrefWidth(), this.tooltip_image.getPrefHeight());
+
+            getGestureDetector().setLongPressSeconds(0.5f);
+        }
+
+        @Override
+        public boolean longPress(Actor actor, float x, float y) {
+            tooltip_actor.setPosition(x + 50, y + 50);
+            actor.getStage().addActor(tooltip_actor);
+            return super.longPress(actor, x, y);
+        }
+
+        @Override
+        public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            tooltip_actor.remove();
+            super.touchUp(event, x, y, pointer, button);
+        }
+    }
 }
