@@ -34,7 +34,7 @@ public class World implements  Disposable, SaveFileContent {
 
 
     private WorldData data;
-    private Pixmap biomeImage;
+    private Pixmap biomeImage, biomeImage2;
     private long[][] biomeMap;
     private int[][] terrainMap;
     private int width;
@@ -239,6 +239,7 @@ public class World implements  Disposable, SaveFileContent {
         biomeMap = new long[width][height];
         terrainMap= new int[width][height];
         Pixmap pix = new Pixmap(width, height, Pixmap.Format.RGB888);
+        Pixmap pix2 = new Pixmap(width, height, Pixmap.Format.RGB888);
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -286,6 +287,8 @@ public class World implements  Disposable, SaveFileContent {
                         color.fromHsv(hsv);
                         pix.setColor(color.r, color.g, color.b, 1);
                         pix.drawPixel(x, y);
+                        pix2.setColor(color.r, color.g, color.b, 1);
+                        pix2.drawPixel(x, y);
                         biomeMap[x][y] |= (1L << biomeIndex);
                         int terrainCounter=1;
                         if(biome.terrain==null)
@@ -318,7 +321,7 @@ public class World implements  Disposable, SaveFileContent {
                     {
                         if(counter==499)
                         {
-                            System.err.print("## Can not place POI "+poi.name+" ##");
+                            //System.err.print("## Can not place POI "+poi.name+" ##");
                         }
                         float radius = (float) Math.sqrt(((random.nextDouble())/2 * poi.radiusFactor));
                         float theta = (float) (random.nextDouble() * 2 * Math.PI);
@@ -473,6 +476,7 @@ public class World implements  Disposable, SaveFileContent {
             }
         }
         biomeImage = pix;
+        biomeImage2 = pix2;
 
         return this;//new World();
     }
@@ -507,6 +511,14 @@ public class World implements  Disposable, SaveFileContent {
 
     public Pixmap getBiomeImage() {
         return biomeImage;
+    }
+
+    public Pixmap getBiomeImage2() {
+        if (biomeImage2 == null) {
+            generateNew(0);
+            return biomeImage2;
+        }
+        return biomeImage2;
     }
 
 

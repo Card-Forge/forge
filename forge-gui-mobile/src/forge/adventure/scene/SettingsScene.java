@@ -20,6 +20,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 import forge.util.Localizer;
 
 import java.util.function.Function;
@@ -173,27 +174,48 @@ public class SettingsScene extends UIScene {
         settingGroup.add(plane).align(Align.right);
 
         if (!GuiBase.isAndroid()) {
+            SelectBox videomode = Controls.newComboBox(new String[]{"720p", "768p", "900p", "1080p"}, Config.instance().getSettingData().videomode, new Function<Object, Void>() {
+                @Override
+                public Void apply(Object o) {
+                    String mode = (String)o;
+                    if (mode == null)
+                        mode = "720p";
+                    Config.instance().getSettingData().videomode = mode;
+                    if (mode.equalsIgnoreCase("768p")) {
+                        Config.instance().getSettingData().width = 1366;
+                        Config.instance().getSettingData().height = 768;
+                    } else if (mode.equalsIgnoreCase("900p")) {
+                        Config.instance().getSettingData().width = 1600;
+                        Config.instance().getSettingData().height = 900;
+                    } else if (mode.equalsIgnoreCase("1080p")) {
+                        Config.instance().getSettingData().width = 1920;
+                        Config.instance().getSettingData().height = 1080;
+                    } else {
+                        Config.instance().getSettingData().width = 1280;
+                        Config.instance().getSettingData().height = 720;
+                    }
+                    Config.instance().saveSettings();
+                    //update preference for classic mode if needed
+                    if (FModel.getPreferences().getPref(ForgePreferences.FPref.UI_VIDEO_MODE) != mode) {
+                        FModel.getPreferences().setPref(ForgePreferences.FPref.UI_VIDEO_MODE, mode);
+                        FModel.getPreferences().save();
+                    }
+                    return null;
+                }
+            });
+            addLabel("Video Mode (Restart to apply)");
+            settingGroup.add(videomode).align(Align.right);
             addSettingField("Fullscreen", Config.instance().getSettingData().fullScreen, new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    Config.instance().getSettingData().fullScreen=((CheckBox) actor).isChecked();
+                    boolean value = ((CheckBox) actor).isChecked();
+                    Config.instance().getSettingData().fullScreen=value;
                     Config.instance().saveSettings();
-                }
-            });
-            addSettingField("Screen width", Config.instance().getSettingData().width, new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    String text=((TextField) actor).getText();
-                    Config.instance().getSettingData().width=text==null||text.isEmpty()?0:Integer.valueOf(text);
-                    Config.instance().saveSettings();
-                }
-            });
-            addSettingField("Screen height", Config.instance().getSettingData().height, new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    String text=((TextField) actor).getText();
-                    Config.instance().getSettingData().height=text==null||text.isEmpty()?0:Integer.valueOf(text);
-                    Config.instance().saveSettings();
+                    //update
+                    if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_FULLSCREEN_MODE) != value) {
+                        FModel.getPreferences().setPref(ForgePreferences.FPref.UI_LANDSCAPE_MODE, value);
+                        FModel.getPreferences().save();
+                    }
                 }
             });
         }

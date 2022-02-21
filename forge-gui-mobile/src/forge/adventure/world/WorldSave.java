@@ -78,8 +78,6 @@ public class WorldSave {
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
             return false;
-        } finally {
-
         }
         return true;
     }

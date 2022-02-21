@@ -2091,6 +2091,24 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void revealAISkipCards(final String message, final Map<Player, Map<DeckSection, List<? extends PaperCard>>> unplayable) {
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            //restore old functionality for mobile version since list of card names can't be zoomed to display the cards
+            for (Player p : unplayable.keySet()) {
+                final Map<DeckSection, List<? extends PaperCard>> removedUnplayableCards = unplayable.get(p);
+                final List<PaperCard> labels = new ArrayList<>();
+                for (final DeckSection s: new TreeSet<>(removedUnplayableCards.keySet())) {
+                    if (DeckSection.Sideboard.equals(s))
+                        continue;
+                    for (PaperCard c: removedUnplayableCards.get(s)) {
+                        labels.add(c);
+                    }
+                }
+                if (!labels.isEmpty())
+                    getGui().reveal(localizer.getMessage("lblActionFromPlayerDeck", message, Lang.getInstance().getPossessedObject(MessageUtil.mayBeYou(player, p), "")),
+                        ImmutableList.copyOf(labels));
+            }
+            return;
+        }
         for (Player p : unplayable.keySet()) {
             final Map<DeckSection, List<? extends PaperCard>> removedUnplayableCards = unplayable.get(p);
             final List<String> labels = new ArrayList<>();

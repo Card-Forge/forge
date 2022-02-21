@@ -62,6 +62,8 @@ public class Config {
             settingsData.width=1280;
             settingsData.height=720;
         }
+        if(settingsData.videomode == null || settingsData.videomode.isEmpty())
+            settingsData.videomode="720p";
 
         this.plane = settingsData.plane;
         currentConfig = this;
@@ -87,6 +89,7 @@ public class Config {
 
     public FileHandle getFile(String path) {
         String fullPath = prefix + path;
+        fullPath = fullPath.replace("//","/");
         if (!Cache.containsKey(fullPath)) {
 
             String fileName = fullPath.replaceFirst("[.][^.]+$", "");

@@ -2,6 +2,7 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import forge.Forge;
 import forge.adventure.stage.WorldStage;
 
 /**
@@ -41,6 +42,13 @@ public class GameScene extends HudScene {
     public void resLoaded() {
 
 
+    }
+
+    @Override
+    public void enter() {
+        Forge.clearTransitionScreen();
+        Forge.clearCurrentScreen();
+        super.enter();
     }
 }
 

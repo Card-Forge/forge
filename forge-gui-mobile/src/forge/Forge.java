@@ -4,8 +4,12 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -34,9 +38,11 @@ import forge.model.FModel;
 import forge.screens.ClosingScreen;
 import forge.screens.FScreen;
 import forge.screens.SplashScreen;
+import forge.screens.TransitionScreen;
 import forge.screens.home.HomeScreen;
 import forge.screens.home.NewGameMenu;
 import forge.screens.match.MatchController;
+import forge.screens.match.MatchScreen;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.*;
@@ -68,9 +74,14 @@ public class Forge implements ApplicationListener {
     private static FScreen currentScreen;
     protected static SplashScreen splashScreen;
     protected static ClosingScreen closingScreen;
+    protected static TransitionScreen transitionScreen;
     public static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
     public static boolean safeToClose = false;
+    public static boolean magnify = false;
+    public static boolean magnifyToggle = true;
+    public static boolean magnifyShowDetails = false;
+    public static String cursorName = "";
     private static int continuousRenderingCount = 1; //initialize to 1 since continuous rendering is the default
     private static final Deque<FScreen> Dscreens = new ArrayDeque<>();
     private static boolean textureFiltering = false;
@@ -102,6 +113,8 @@ public class Forge implements ApplicationListener {
     public static int hoveredCount = 0;
     public static boolean afterDBloaded = false;
     public static int mouseButtonID = 0;
+    public static InputProcessor inputProcessor;
+    private static Cursor cursor0, cursor1, cursor2, cursorA0, cursorA1, cursorA2;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
         app = new Forge();
@@ -140,8 +153,9 @@ public class Forge implements ApplicationListener {
         splashScreen = new SplashScreen();
         frameRate = new FrameRate();
         animationBatch = new SpriteBatch();
+        inputProcessor = new MainInputProcessor();
 
-        Gdx.input.setInputProcessor(new MainInputProcessor());
+        Gdx.input.setInputProcessor(inputProcessor);
         /*
          Set CatchBackKey here and exit the app when you hit the
          back button while the textures,fonts,etc are still loading,
@@ -231,6 +245,9 @@ public class Forge implements ApplicationListener {
         });
     }
 
+    public static InputProcessor getInputProcessor() {
+        return inputProcessor;
+    }
     public static Graphics getGraphics() {
         return graphics;
     }
@@ -286,6 +303,8 @@ public class Forge implements ApplicationListener {
         startContinuousRendering();
         GuiBase.setIsAdventureMode(true);
         isMobileAdventureMode = true;
+        //pixl cursor for adventure
+        setCursor(null, "0");
         try {
             for (SceneType sceneType : SceneType.values()) {
                 sceneType.instance.resLoaded();
@@ -294,10 +313,8 @@ public class Forge implements ApplicationListener {
         } catch (Exception e) { e.printStackTrace(); }
     }
     protected void afterDbLoaded() {
-        //init here to fix crash if the assets are missings on android
-        transitionTexture =  new Texture(GuiBase.isAndroid()
-                ? Gdx.files.internal("fallback_skin").child("transition.png")
-                : Config.instance().getFile("ui/transition.png"));
+        //init here to fix crash if the assets are missing
+        transitionTexture =  new Texture(GuiBase.isAndroid() ? Gdx.files.internal("fallback_skin").child("transition.png") : Gdx.files.classpath("fallback_skin").child("transition.png"));
 
 
         destroyThis = false; //Allow back()
@@ -330,11 +347,7 @@ public class Forge implements ApplicationListener {
                                     @Override
                                     public void run() {
                                         //selection
-                                        if (isLandscapeMode() && !GuiBase.isAndroid())
-                                            splashScreen.setShowModeSelector(true);
-                                        else {
-                                            splashScreen.startClassic();
-                                        }
+                                        splashScreen.setShowModeSelector(true);
                                         //start background music
                                         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
                                         Forge.safeToClose = true;
@@ -347,7 +360,89 @@ public class Forge implements ApplicationListener {
             }
         });
     }
+    public static void setCursor(TextureRegion textureRegion, String name) {
+        if (GuiBase.isAndroid())
+            return;
+        if (Forge.isMobileAdventureMode) {
+            if (cursorA0 != null && name == "0") {
+                setGdxCursor(cursorA0);
+                return;
+            } else if (cursorA1 != null && name == "1") {
+                setGdxCursor(cursorA1);
+                return;
+            } else if (cursorA2 != null && name == "2") {
+                setGdxCursor(cursorA2);
+                return;
+            }
 
+            String path = "skin/cursor"+name+".png";
+            Pixmap pm = new Pixmap(Config.instance().getFile(path));
+
+            if (name == "0") {
+                cursorA0 = Gdx.graphics.newCursor(pm, 0, 0);
+                setGdxCursor(cursorA0);
+            } else if (name == "1") {
+                cursorA1 = Gdx.graphics.newCursor(pm, 0, 0);
+                setGdxCursor(cursorA1);
+            } else {
+                cursorA2 = Gdx.graphics.newCursor(pm, 0, 0);
+                setGdxCursor(cursorA2);
+            }
+
+            pm.dispose();
+            return;
+        }
+        if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ENABLE_MAGNIFIER) && name != "0")
+            return; //don't change if it's disabled
+        if (currentScreen != null && !currentScreen.toString().toLowerCase().contains("match") && name != "0")
+            return; // cursor indicator should be during matches
+        if (textureRegion == null) {
+            return;
+        }
+        if (cursor0 != null && name == "0") {
+            setGdxCursor(cursor0);
+            return;
+        } else if (cursor1 != null && name == "1") {
+            setGdxCursor(cursor1);
+            return;
+        } else if (cursor2 != null && name == "2") {
+            setGdxCursor(cursor2);
+            return;
+        }
+        TextureData textureData = textureRegion.getTexture().getTextureData();
+        if (!textureData.isPrepared()) {
+            textureData.prepare();
+        }
+        Pixmap pm = new Pixmap(
+                textureRegion.getRegionWidth(),
+                textureRegion.getRegionHeight(),
+                textureData.getFormat()
+        );
+        pm.drawPixmap(
+                textureData.consumePixmap(), // The other Pixmap
+                0, // The target x-coordinate (top left corner)
+                0, // The target y-coordinate (top left corner)
+                textureRegion.getRegionX(), // The source x-coordinate (top left corner)
+                textureRegion.getRegionY(), // The source y-coordinate (top left corner)
+                textureRegion.getRegionWidth(), // The width of the area from the other Pixmap in pixels
+                textureRegion.getRegionHeight() // The height of the area from the other Pixmap in pixels
+        );
+        if (name == "0") {
+            cursor0 = Gdx.graphics.newCursor(pm, 0, 0);
+            setGdxCursor(cursor0);
+        } else if (name == "1") {
+            cursor1 = Gdx.graphics.newCursor(pm, 0, 0);
+            setGdxCursor(cursor1);
+        } else {
+            cursor2 = Gdx.graphics.newCursor(pm, 0, 0);
+            setGdxCursor(cursor2);
+        }
+        cursorName = name;
+        pm.dispose();
+    }
+    static void setGdxCursor(Cursor c) {
+        Gdx.graphics.setCursor(c);
+    }
     public static Clipboard getClipboard() {
         return clipboard;
     }
@@ -393,7 +488,10 @@ public class Forge implements ApplicationListener {
     }
 
     public static void showMenu() {
-        if (currentScreen == null) { return; }
+        if (isMobileAdventureMode)
+            return;
+        if (currentScreen == null)
+            return;
         endKeyInput(); //end key input before menu shown
         if (FOverlay.getTopOverlay() == null) { //don't show menu if overlay open
             currentScreen.showMenu();
@@ -408,6 +506,9 @@ public class Forge implements ApplicationListener {
         back(false);
     }
     public static void back(boolean clearlastMatch) {
+        if (isMobileAdventureMode) {
+            return;
+        }
         FScreen lastMatch = currentScreen;
         if(destroyThis && isLandscapeMode())
             return;
@@ -521,6 +622,16 @@ public class Forge implements ApplicationListener {
                         Dscreens.addFirst(screen0);
                     }
                     setCurrentScreen(screen0);
+                    if (screen0 instanceof MatchScreen) {
+                        //set cursor for classic mode
+                        if (!isMobileAdventureMode) {
+                            if (magnifyToggle) {
+                                setCursor(FSkin.getCursor().get(1), "1");
+                            } else {
+                                setCursor(FSkin.getCursor().get(2), "2");
+                            }
+                        }
+                    }
                 }
             }
         });
@@ -558,6 +669,12 @@ public class Forge implements ApplicationListener {
 
     public static void clearCurrentScreen() {
         currentScreen = null;
+    }
+    public static void setTransitionScreen(TransitionScreen screen) {
+        transitionScreen = screen;
+    }
+    public static void clearTransitionScreen() {
+        transitionScreen = null;
     }
 
     public static void clearSplashScreen() {
@@ -599,62 +716,69 @@ public class Forge implements ApplicationListener {
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
 
             FContainer screen = currentScreen;
+
             if (closingScreen != null) {
                 screen = closingScreen;
+            } else if(transitionScreen != null){
+                screen = transitionScreen;
             } else if (screen == null) {
                 screen = splashScreen;
                 if (screen == null) {
                     if (isMobileAdventureMode) {
-                        float delta=Gdx.graphics.getDeltaTime();
-                        float transitionTime = 0.2f;
-                        if(sceneWasSwapped)
-                        {
-                            sceneWasSwapped =false;
-                            animationTimeout= transitionTime;
-                            Gdx.gl.glClearColor(0, 0, 0, 1);
-                            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                            return;
-                        }
-                        if(animationTimeout>=0)
-                        {
-                            Gdx.gl.glClearColor(0, 0, 0, 1);
-                            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                            animationBatch.begin();
-                            animationTimeout-=delta;
-                            animationBatch.setColor(1,1,1,1);
-                            animationBatch.draw(lastScreenTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-                            animationBatch.setColor(1,1,1,1-(1/ transitionTime)*animationTimeout);
-                            animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-                            animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-                            animationBatch.end();
-                            if(animationTimeout<0)
+                        try {
+                            float delta=Gdx.graphics.getDeltaTime();
+                            float transitionTime = 0.2f;
+                            if(sceneWasSwapped)
                             {
-                                currentScene.render();
-                                storeScreen();
+                                sceneWasSwapped =false;
+                                animationTimeout= transitionTime;
                                 Gdx.gl.glClearColor(0, 0, 0, 1);
                                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                            }
-                            else
-                            {
                                 return;
                             }
+                            if(animationTimeout>=0)
+                            {
+                                Gdx.gl.glClearColor(0, 0, 0, 1);
+                                Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                                animationBatch.begin();
+                                animationTimeout-=delta;
+                                animationBatch.setColor(1,1,1,1);
+                                animationBatch.draw(lastScreenTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                                animationBatch.setColor(1,1,1,1-(1/ transitionTime)*animationTimeout);
+                                animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                                animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                                animationBatch.end();
+                                if(animationTimeout<0)
+                                {
+                                    currentScene.render();
+                                    storeScreen();
+                                    Gdx.gl.glClearColor(0, 0, 0, 1);
+                                    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                                }
+                                else
+                                {
+                                    return;
+                                }
+                            }
+                            if(animationTimeout>=-transitionTime)
+                            {
+                                Gdx.gl.glClearColor(0, 0, 0, 1);
+                                Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                                animationBatch.begin();
+                                animationTimeout-=delta;
+                                animationBatch.setColor(1,1,1,1);
+                                animationBatch.draw(lastScreenTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                                animationBatch.setColor(1,1,1,(1/ transitionTime)*(animationTimeout+ transitionTime));
+                                animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                                animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                                animationBatch.end();
+                                return;
+                            }
+                            currentScene.render();
+                            currentScene.act(delta);
+                        } catch (IllegalStateException | NullPointerException ie) {
+                            //silence this..
                         }
-                        if(animationTimeout>=-transitionTime)
-                        {
-                            Gdx.gl.glClearColor(0, 0, 0, 1);
-                            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                            animationBatch.begin();
-                            animationTimeout-=delta;
-                            animationBatch.setColor(1,1,1,1);
-                            animationBatch.draw(lastScreenTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-                            animationBatch.setColor(1,1,1,(1/ transitionTime)*(animationTimeout+ transitionTime));
-                            animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-                            animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-                            animationBatch.end();
-                            return;
-                        }
-                        currentScene.render();
-                        currentScene.act(delta);
                     }
                     if (showFPS)
                         frameRate.render();
@@ -695,7 +819,21 @@ public class Forge implements ApplicationListener {
         if (showFPS)
             frameRate.render();
     }
-
+    public static void delayedSwitchBack() {
+        FThreads.invokeInBackgroundThread(new Runnable() {
+            @Override
+            public void run() {
+                FThreads.invokeInEdtLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        clearTransitionScreen();
+                        clearCurrentScreen();
+                        switchToLast();
+                    }
+                });
+            }
+        });
+    }
     @Override
     public void resize(int width, int height) {
         try {
@@ -1114,6 +1252,7 @@ public class Forge implements ApplicationListener {
         private int mouseMovedX, mouseMovedY;
         @Override
         public boolean mouseMoved(int screenX, int screenY) {
+            magnify = true;
             mouseMovedX = screenX;
             mouseMovedY = screenY;
             //todo: mouse listener for android?

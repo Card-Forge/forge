@@ -3,9 +3,10 @@ package forge.adventure.stage;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import forge.adventure.world.WorldSave;
+import forge.gui.GuiBase;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ public class WorldBackground extends Actor {
     int playerY;
 
     Texture[][] chunks;
-    Texture loadingTexture;
+    Texture loadingTexture,t;
     ArrayList<Actor>[][] chunksSprites;
     ArrayList<Actor>[][] chunksSpritesBackground;
     int currentChunkX;
@@ -37,45 +38,54 @@ public class WorldBackground extends Actor {
         if (chunks == null) {
             initialize();
         }
-        Vector2 pos = translateFromWorldToChunk(playerX, playerY);
+        GridPoint2 pos = translateFromWorldToChunk(playerX, playerY);
         if (currentChunkX != pos.x || currentChunkY != pos.y) {
-            int xDiff = currentChunkX - (int)pos.x;
-            int yDiff = currentChunkY - (int)pos.y;
-            ArrayList<Vector2> points = new ArrayList<>();
+            int xDiff = currentChunkX - pos.x;
+            int yDiff = currentChunkY - pos.y;
+            ArrayList<GridPoint2> points = new ArrayList<GridPoint2>();
             for (int x = -1; x < 2; x++) {
                 for (int y = -1; y < 2; y++) {
-                    points.add(new Vector2(pos.x + x, pos.y + y));
+                    points.add(new GridPoint2(pos.x + x, pos.y + y));
                 }
             }
             for (int x = -1; x < 2; x++) {
                 for (int y = -1; y < 2; y++) {
-                    Vector2 point = new Vector2(currentChunkX + x, currentChunkY + y);
+                    GridPoint2 point = new GridPoint2(currentChunkX + x, currentChunkY + y);
                     if (points.contains(point))// old Point is part of new points
                     {
                         points.remove(point);
                     } else {
                         if (point.y < 0 || point.x < 0 || point.y >= chunks[0].length || point.x >= chunks.length)
                             continue;
-                        unLoadChunk((int)point.x, (int)point.y);
+                        unLoadChunk(point.x, point.y);
                     }
                 }
             }
-            for (Vector2 point : points) {
+            for (GridPoint2 point : points) {
                 if (point.y < 0 || point.x < 0 || point.y >= chunks[0].length || point.x >= chunks.length)
                     continue;
-                loadChunk((int)point.x, (int)point.y);
+                loadChunk(point.x, point.y);
             }
-            currentChunkX = (int)pos.x;
-            currentChunkY = (int)pos.y;
+            currentChunkX = pos.x;
+            currentChunkY = pos.y;
         }
         batch.disableBlending();
-        for (int x = -1; x < 2; x++) {
-            for (int y = -1; y < 2; y++) {
-                if (pos.y + y < 0 || pos.x + x < 0 || pos.y >= chunks[0].length || pos.x >= chunks.length)
-                    continue;
+
+        if (GuiBase.isAndroid()) {
+            //TODO WorldBackground for Android
+            if (t == null)
+                t = new Texture(WorldSave.getCurrentSave().getWorld().getBiomeImage2());
+
+            batch.draw(t, 0, 0, WorldStage.getInstance().getViewport().getWorldWidth(), WorldStage.getInstance().getViewport().getWorldHeight());
+        } else {
+            for (int x = -1; x < 2; x++) {
+                for (int y = -1; y < 2; y++) {
+                    if (pos.y + y < 0 || pos.x + x < 0 || pos.y >= chunks[0].length || pos.x >= chunks.length)
+                        continue;
 
 
-                batch.draw(getChunkTexture((int)pos.x + x, (int)pos.y + y), transChunkToWorld((int)pos.x + x), transChunkToWorld((int)pos.y + y));
+                    batch.draw(getChunkTexture(pos.x + x, pos.y + y), transChunkToWorld(pos.x + x), transChunkToWorld(pos.y + y));
+                }
             }
         }
         batch.enableBlending();
@@ -154,10 +164,10 @@ public class WorldBackground extends Actor {
 
         for (int x = -1; x < 2; x++) {
             for (int y = -1; y < 2; y++) {
-                Vector2 point = new Vector2(currentChunkX + x, currentChunkY + y);
+                GridPoint2 point = new GridPoint2(currentChunkX + x, currentChunkY + y);
                 if (point.y < 0 || point.x < 0 || point.y >= chunks[0].length || point.x >= chunks.length)
                     continue;
-                loadChunk((int)point.x, (int)point.y);
+                loadChunk(point.x, point.y);
             }
         }
     }
@@ -171,10 +181,10 @@ public class WorldBackground extends Actor {
         return xy * tileSize * chunkSize;
     }
 
-    Vector2 translateFromWorldToChunk(float x, float y) {
+    GridPoint2 translateFromWorldToChunk(float x, float y) {
         float worldWidthTiles = x / tileSize;
         float worldHeightTiles = y / tileSize;
-        return new Vector2((int) worldWidthTiles / chunkSize, (int) worldHeightTiles / chunkSize);
+        return new GridPoint2((int) worldWidthTiles / chunkSize, (int) worldHeightTiles / chunkSize);
     }
 
     public void setPlayerPos(float x, float y) {

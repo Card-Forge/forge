@@ -15,6 +15,7 @@ import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.scene.TileMapScene;
 import forge.adventure.world.WorldSave;
+import forge.gui.GuiBase;
 
 /**
  * Base class to render a player sprite on a map
@@ -233,8 +234,10 @@ public abstract class GameStage extends Stage {
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         if(isPaused())
             return true;
-        touchX = screenX;
-        touchY = screenY;
+        if (!GuiBase.isAndroid()) {
+            touchX = screenX;
+            touchY = screenY;
+        }
 
         return false;
     }
@@ -243,14 +246,18 @@ public abstract class GameStage extends Stage {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         if(isPaused())
             return true;
-        touchX = screenX;
-        touchY = screenY;
+        if (!GuiBase.isAndroid()) {
+            touchX = screenX;
+            touchY = screenY;
+        }
 
 
         return true;
     }
 
     public void stop() {
+        WorldStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
+        MapStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
         touchX = -1;
         touchY = -1;
         player.stop();

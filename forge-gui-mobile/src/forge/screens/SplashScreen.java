@@ -8,7 +8,6 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
-import forge.adventure.util.Config;
 import forge.animation.ForgeAnimation;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
@@ -92,7 +91,7 @@ public class SplashScreen extends FContainer {
         private float progress = 0;
         private boolean finished, openAdventure;
         //for transition image only...
-        Texture transition_bg = new Texture(GuiBase.isAndroid() ? Gdx.files.internal("fallback_skin").child("title_bg_lq.png") : Config.instance().getFile("ui/title_bg.png"));
+        Texture transition_bg = new Texture(GuiBase.isAndroid() ? Gdx.files.internal("fallback_skin").child("title_bg_lq.png") : Gdx.files.classpath("fallback_skin").child("title_bg_lq.png"));
 
         public void drawBackground(Graphics g) {
             float percentage = progress / DURATION;
@@ -180,6 +179,8 @@ public class SplashScreen extends FContainer {
         g.setAlphaComposite(oldAlpha);
     }
     private void showSelector(Graphics g, float alpha) {
+        if (background == null) { return; }
+        g.fillRect(Color.BLACK, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
         g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, getWidth(), getHeight());
 
         float x, y, w, h;
@@ -209,7 +210,10 @@ public class SplashScreen extends FContainer {
 
         if (!init) {
             init = true;
-            btnAdventure = new FButton(Localizer.getInstance().getMessageorUseDefault("lblAdventureMode", "Adventure Mode"));
+            String defaultText = Localizer.getInstance().getMessageorUseDefault("lblAdventureMode", "Adventure Mode");
+            String advAndroid = Forge.isLandscapeMode() ? defaultText  : "Adventure Mode (Landscape Only)";
+            btnAdventure = new FButton(GuiBase.isAndroid() ? advAndroid : defaultText);
+            btnAdventure.setEnabled(Forge.isLandscapeMode());
             btnHome = new FButton(Localizer.getInstance().getMessageorUseDefault("lblClassicMode", "Classic Mode"));
             btnAdventure.setCommand(new FEvent.FEventHandler() {
                 @Override
@@ -262,6 +266,7 @@ public class SplashScreen extends FContainer {
     }
     void drawDisclaimer(Graphics g) {
         if (background == null) { return; }
+        g.fillRect(Color.BLACK, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
         g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, getWidth(), getHeight());
 
         float x, y, w, h;

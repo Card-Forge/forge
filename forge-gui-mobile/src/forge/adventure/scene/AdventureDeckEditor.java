@@ -52,6 +52,11 @@ import java.util.Map;
         private static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
 
         private static ItemPool<InventoryItem> decksUsingMyCards=new ItemPool<>(InventoryItem.class);
+        public static void leave() {
+            AdventurePlayer.current().getNewCards().clear();
+            Forge.switchScene(SceneType.DeckSelectScene.instance);
+            Forge.clearCurrentScreen();
+        }
 
         @Override
         public void onActivate() {
@@ -107,9 +112,7 @@ import java.util.Map;
             super(new FEvent.FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    AdventurePlayer.current().getNewCards().clear();
-                    Forge.clearCurrentScreen();
-                    Forge.switchScene(SceneType.DeckSelectScene.instance);
+                    leave();
                 }
             },getPages());
 
