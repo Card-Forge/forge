@@ -80,18 +80,8 @@ public class GameHUD extends Stage {
                     WorldStage.getInstance().GetPlayer().getMovementDirection().x+=((Touchpad) actor).getKnobPercentX();
                     WorldStage.getInstance().GetPlayer().getMovementDirection().y+=((Touchpad) actor).getKnobPercentY();
                 }
-                if (!((Touchpad) actor).isTouched()) {
-                    MapStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
-                    WorldStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
-                }
-                if (!((Touchpad) actor).isVisible()) {
-                    MapStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
-                    WorldStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
-                }
             }
         });
-        //set touch pad invisible until the user touch the ui
-        touchpad.setVisible(false);
         if (GuiBase.isAndroid()) //add touchpad for android
             ui.addActor(touchpad);
 
@@ -99,19 +89,19 @@ public class GameHUD extends Stage {
         ui.onButtonPress("menu", new Runnable() {
             @Override
             public void run() {
-                GameHUD.this.menu();
+                menu();
             }
         });
         ui.onButtonPress("statistic", new Runnable() {
             @Override
             public void run() {
-                Forge.switchScene(SceneType.PlayerStatisticScene.instance);
+                statistic();
             }
         });
         ui.onButtonPress("deck", new Runnable() {
             @Override
             public void run() {
-                GameHUD.this.openDeck();
+                openDeck();
             }
         });
         lifePoints = ui.findActor("lifePoints");
@@ -151,8 +141,7 @@ public class GameHUD extends Stage {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        if (GuiBase.isAndroid())
-            touchpad.setVisible(false);
+        touchpad.setVisible(false);
         MapStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
         WorldStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
         return super.touchUp(screenX, screenY, pointer, button);
@@ -171,6 +160,7 @@ public class GameHUD extends Stage {
         float mMapR = ui.findActor("map").getRight();
         //map bounds
         if (c.x>=mMapX&&c.x<=mMapR&&c.y>=mMapY&&c.y<=mMapT) {
+            touchpad.setVisible(false);
             if (MapStage.getInstance().isInMap())
                 return true;
             WorldStage.getInstance().GetPlayer().setPosition(x*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),y*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
@@ -189,7 +179,7 @@ public class GameHUD extends Stage {
         Vector2 c=new Vector2();
         Vector2 c2=new Vector2();
         Vector2 touch =new Vector2();
-
+        screenToStageCoordinates(touch.set(screenX, screenY));
         screenToStageCoordinates(c.set(screenX, screenY));
 
         float x=(c.x-miniMap.getX())/miniMap.getWidth();
@@ -248,17 +238,27 @@ public class GameHUD extends Stage {
             WorldStage.getInstance().GetPlayer().setPosition(x*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),y*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
             return true;
         }
+        //display bounds
+        float displayX = ui.getX();
+        float displayY = ui.getY();
+        float displayT = ui.getTop();
+        float displayR = ui.getRight();
         //auto follow touchpad
         if (GuiBase.isAndroid()) {
-            screenToStageCoordinates(touch.set(screenX, screenY));
-            touchpad.setBounds(touch.x-TOUCHPAD_SCALE/2, touch.y-TOUCHPAD_SCALE/2, TOUCHPAD_SCALE, TOUCHPAD_SCALE);
-            touchpad.setVisible(true);
+            if (!(touch.x>=mMapX&&touch.x<=mMapR&&touch.y>=mMapY&&touch.y<=mMapT) // not inside map bounds
+                && !(touch.x>=uiX&&touch.x<=uiRight&&touch.y>=uiY&&touch.y<=uiTop) //not inside gamehud bounds
+                && (touch.x>=displayX&&touch.x<=displayR&&touch.y>=displayY&&touch.y<=displayT) //inside display bounds
+                && pointer < 1) { //not more than 1 pointer
+                    touchpad.setBounds(touch.x-TOUCHPAD_SCALE/2, touch.y-TOUCHPAD_SCALE/2, TOUCHPAD_SCALE, TOUCHPAD_SCALE);
+                    touchpad.setVisible(true);
+                    touchpad.setResetOnTouchUp(true);
+                return super.touchDown(screenX, screenY, pointer, button);
+            }
         }
         return super.touchDown(screenX, screenY, pointer, button);
     }
     @Override
     public void draw() {
-
         int yPos = (int) gameStage.player.getY();
         int xPos = (int) gameStage.player.getX();
         act(Gdx.graphics.getDeltaTime()); //act the Hud
@@ -270,25 +270,19 @@ public class GameHUD extends Stage {
 
     Texture miniMapTexture;
     public void enter() {
-
         if(miniMapTexture!=null)
             miniMapTexture.dispose();
         miniMapTexture=new Texture(WorldSave.getCurrentSave().getWorld().getBiomeImage());
 
         miniMap.setDrawable(new TextureRegionDrawable(miniMapTexture));
         avatar.setDrawable(new TextureRegionDrawable(Current.player().avatar()));
-
-
     }
 
-    private Object openDeck() {
-
+    private void openDeck() {
         Forge.switchScene(SceneType.DeckSelectScene.instance);
-        return null;
     }
 
-    private Object menu() {
+    private void menu() {
         gameStage.openMenu();
-        return null;
     }
 }
