@@ -149,6 +149,10 @@ public class CardState extends GameObject implements IHasSVars {
         }
     }
 
+    public final void removeCardTypes() {
+        type.removeCardTypes();
+    }
+
     public final void setCreatureTypes(Collection<String> ctypes) {
         if (type.setCreatureTypes(ctypes)) {
             view.updateType(this);

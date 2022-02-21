@@ -204,6 +204,10 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         calculatedType = null;
     }
 
+    public void removeCardTypes() {
+        coreTypes.clear();
+    }
+
     public boolean remove(final Supertype st) {
         return supertypes.remove(st);
     }
