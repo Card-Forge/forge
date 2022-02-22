@@ -186,3 +186,17 @@ ScryfallCode=NEC
 178 R Spire of Industry @John Avon
 179 R Temple of Abandon @Adam Paquette
 180 R Temple of Enlightenment @Piotr Dura
+
+[tokens]
+b_0_0_phyrexian_germ
+c_1_1_a_myr
+c_1_1_a_thopter_flying
+c_1_1_e_shrine
+g_0_1_plant
+g_1_1_saproling
+g_3_3_beast
+g_3_3_elephant
+r_1_1_elemental
+r_1_1_goblin
+smoke_blessing
+w_4_4_angel_flying_vigilance
