@@ -2,8 +2,8 @@ Name:Myojin of Cleansing Fire
 ManaCost:5 W W W
 Types:Legendary Creature Spirit
 PT:4/6
-T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromYourHand+Self | Destination$ Battlefield | Static$ True | Execute$ ETBCounter | TriggerDescription$ CARDNAME enters the battlefield with a divinity counter on it if you cast it from your hand.
-SVar:ETBCounter:DB$ PutCounter | Defined$ Self | CounterType$ DIVINITY | CounterNum$ 1
+K:etbCounter:DIVINITY:1:CheckSVar$ FromHand:CARDNAME enters the battlefield with a divinity counter on it if you cast it from your hand.
+SVar:FromHand:Count$wasCastFromYourHandByYou.1.0
 S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_DIVINITY | AddKeyword$ Indestructible | Description$ CARDNAME has indestructible as long as it has a divinity counter on it.
 A:AB$ DestroyAll | Cost$ SubCounter<1/DIVINITY> | ValidCards$ Creature.Other | SpellDescription$ Destroy all other creatures.
 Oracle:Myojin of Cleansing Fire enters the battlefield with a divinity counter on it if you cast it from your hand.\nMyojin of Cleansing Fire has indestructible as long as it has a divinity counter on it.\nRemove a divinity counter from Myojin of Cleansing Fire: Destroy all other creatures.
