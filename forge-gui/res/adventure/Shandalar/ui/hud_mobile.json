@@ -1,95 +1,93 @@
 {
-    "width": 480,
-    "height": 270, 
-    "yDown": true, 
-    "elements":[     
+  "width": 480,
+  "height": 270,
+  "yDown": true,
+  "elements": [
     {
-         "type" : "Image",
-          "name" : "gamehud",
-          "width": 64,
-          "height": 270,
-          "image":"ui/hud_mobile.png",
-          "x": 416,
-          "y": 0
-    }  ,    
+      "type": "Image",
+      "name": "gamehud",
+      "width": 64,
+      "height": 270,
+      "image": "ui/hud_mobile.png",
+      "x": 416,
+      "y": 0
+    },
     {
-         "type" : "Image",     
-         "name" : "map" , 
-          "width": 80,
-          "height": 80,
-          "x": 0,
-          "y": 0
-    }  ,                    
+      "type": "Image",
+      "name": "map",
+      "width": 80,
+      "height": 80,
+      "x": 0,
+      "y": 0
+    },
     {
-         "type" : "Image",     
-         "image" : "ui/minimap.png" , 
-          "width": 80,
-          "height": 80,
-          "x": 0,
-          "y": 0
-    }  ,
+      "type": "Image",
+      "image": "ui/minimap.png",
+      "width": 80,
+      "height": 80,
+      "x": 0,
+      "y": 0
+    },
     {
-         "type" : "Image",     
-         "name" : "avatar" ,              
-          "width": 46,
-          "height": 46,
-          "x": 425,
-          "y": 10
-    } ,
+      "type": "Image",
+      "name": "avatar",
+      "width": 46,
+      "height": 46,
+      "x": 425,
+      "y": 10
+    },
     {
-         "type" : "Image",     
-         "image" : "ui/avatarhud.png" ,              
-          "width": 46,
-          "height": 46,
-          "x": 425,
-          "y": 10
-    } ,
+      "type": "Image",
+      "image": "ui/avatarhud.png",
+      "width": 46,
+      "height": 46,
+      "x": 425,
+      "y": 10
+    },
     {
-         "type" : "Label",     
-         "name" : "lifePoints" ,        
-         "font" : "default" ,     
-          "width": 64,
-          "height": 16,      
-          "x": 442,
-          "y": 64
-    } ,
+      "type": "Label",
+      "name": "lifePoints",
+      "font": "default",
+      "width": 64,
+      "height": 16,
+      "x": 442,
+      "y": 64
+    },
     {
-         "type" : "Label",     
-         "name" : "money" ,          
-         "font" : "default" ,     
-          "width": 64,
-          "height": 16,      
-          "x": 442,
-          "y": 82
-    } ,
+      "type": "Label",
+      "name": "money",
+      "font": "default",
+      "width": 64,
+      "height": 16,
+      "x": 442,
+      "y": 82
+    },
     {
-         "type" : "TextButton",     
-         "name" : "deck" ,             
-         "text" : "Deck",
-          "width": 40,
-          "height": 44,
-          "x": 428,
-          "y": 106
-    } ,
+      "type": "TextButton",
+      "name": "deck",
+      "text": "Deck",
+      "width": 40,
+      "height": 44,
+      "x": 428,
+      "y": 106
+    },
     {
-         "type" : "TextButton",
-        "name" : "statistic" ,
-        "text" : "Status",
-          "width": 40,
-          "height": 44,
-          "x": 428,
-          "y": 162
-    }  ,
-      {
-        "type" : "TextButton",
-        "name" : "menu" ,
-        "text" : "Menu",
-        "width": 40,
-        "height": 44,
-        "x": 428,
-        "y": 216
-      }
-    ]
-
-
+      "type": "TextButton",
+      "name": "statistic",
+      "text": "Status",
+      "width": 40,
+      "height": 44,
+      "x": 428,
+      "y": 162
+    },
+    {
+      "type": "TextButton",
+      "name": "menu",
+      "text": "Menu",
+      "width": 40,
+      "height": 44,
+      "x": 428,
+      "y": 216
+    }
+  ]
 }

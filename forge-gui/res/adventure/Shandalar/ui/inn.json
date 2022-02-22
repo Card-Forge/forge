@@ -1,44 +1,40 @@
 {
-    "width": 480,
-    "height": 270, 
-    "yDown": true, 
-    "elements":[            
+  "width": 480,
+  "height": 270,
+  "yDown": true,
+  "elements": [
     {
-      "type" : "Image",      
-      "name":"lastScreen",
+      "type": "Image",
+      "name": "lastScreen",
       "width": 480,
       "height": 270
-    }   
-    ,   
-             
+    },
     {
-         "type" : "TextButton",     
-         "name" : "heal" ,             
-         "text" : "Heal" ,       
-         "width": 48,
-          "height": 16,     
-          "x": 420, 
-          "y": 10 
-    }     ,
+      "type": "TextButton",
+      "name": "heal",
+      "text": "Heal",
+      "width": 48,
+      "height": 16,
+      "x": 420,
+      "y": 10
+    },
     {
-         "type" : "TextButton",     
-         "name" : "sell" ,             
-         "text" : "Sell cards" ,       
-         "width": 48,
-          "height": 16,     
-          "x": 420, 
-          "y": 34 
-    }    ,
+      "type": "TextButton",
+      "name": "sell",
+      "text": "Sell cards",
+      "width": 48,
+      "height": 16,
+      "x": 420,
+      "y": 34
+    },
     {
-         "type" : "TextButton",     
-         "name" : "done" ,             
-         "text" : "Leave" ,       
-         "width": 48,
-          "height": 16,     
-          "x": 420, 
-          "y": 58 
-    }   
-    ]
-
-
+      "type": "TextButton",
+      "name": "done",
+      "text": "Leave",
+      "width": 48,
+      "height": 16,
+      "x": 420,
+      "y": 58
+    }
+  ]
 }
