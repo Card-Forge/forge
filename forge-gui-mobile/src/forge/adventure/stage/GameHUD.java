@@ -139,6 +139,10 @@ public class GameHUD extends Stage {
         return instance == null ? instance = new GameHUD(WorldStage.getInstance()) : instance;
     }
 
+    public Touchpad getTouchpad() {
+        return touchpad;
+    }
+
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         touchpad.setVisible(false);

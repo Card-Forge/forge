@@ -55,7 +55,8 @@ public class SaveLoadScene extends UIScene {
 
 
     private TextButton addSaveSlot(String name, int i) {
-        layout.add(Controls.newLabel(name));
+        layout.add(Controls.newLabel(name)).colspan(1).align(Align.right).expandX();
+        layout.add(Controls.newLabel("  "));
         TextButton button = Controls.newTextButton("...");
         button.addListener(new ClickListener() {
             @Override
@@ -68,7 +69,7 @@ public class SaveLoadScene extends UIScene {
                 }
             }
         });
-        layout.add(button).expandX();
+        layout.add(button).colspan(2).align(Align.left).expandX();
         buttons.put(i, button);
         layout.row();
         return button;
@@ -223,7 +224,7 @@ public class SaveLoadScene extends UIScene {
         previewImage = ui.findActor("preview");
         header = Controls.newLabel("Save");
         header.setHeight(header.getHeight() * 2);
-        layout.add(header).colspan(2).align(Align.center);
+        layout.add(header).colspan(3).align(Align.center).expand();
         layout.row();
         autoSave=addSaveSlot("Auto save", WorldSave.AUTO_SAVE_SLOT);
         quickSave=addSaveSlot("Quick save", WorldSave.QUICK_SAVE_SLOT);

@@ -9,6 +9,7 @@ import forge.Graphics;
 import forge.animation.ForgeAnimation;
 import forge.assets.FSkin;
 import forge.assets.FSkinImage;
+import forge.assets.FSkinTexture;
 import forge.gui.GuiBase;
 import forge.toolbox.FContainer;
 
@@ -34,7 +35,6 @@ public class TransitionScreen extends FContainer {
     private class BGAnimation extends ForgeAnimation {
         float DURATION = 0.6f;
         private float progress = 0;
-        Texture transition_bg = new Texture(GuiBase.isAndroid() ? Gdx.files.internal("fallback_skin").child("title_bg_lq.png") : Gdx.files.classpath("fallback_skin").child("title_bg_lq.png"));
 
         public void drawBackground(Graphics g) {
             float percentage = progress / DURATION;
@@ -46,9 +46,9 @@ public class TransitionScreen extends FContainer {
             }
             if (isloading) {
                 g.fillRect(Color.BLACK, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
-                if (transition_bg != null) {
+                if (FSkinTexture.BG_TEXTURE != null) {
                     g.setAlphaComposite(percentage);
-                    g.drawImage(transition_bg, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+                    g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
                     g.setAlphaComposite(oldAlpha);
                 }
                 float xmod = Forge.getScreenHeight() > 2000 ? 1.5f : 1f;

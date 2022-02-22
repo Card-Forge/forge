@@ -303,6 +303,8 @@ public class Forge implements ApplicationListener {
         startContinuousRendering();
         GuiBase.setIsAdventureMode(true);
         isMobileAdventureMode = true;
+        if (GuiBase.isAndroid()) //force it for adventure mode
+            altZoneTabs = true;
         //pixl cursor for adventure
         setCursor(null, "0");
         try {

@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
@@ -49,6 +50,10 @@ public class UIActor extends Group {
                     case "Label":
                         newActor = new Label("", Controls.GetSkin());
                         readLabelProperties((Label) newActor,  new OrderedMap.OrderedMapEntries<>(element));
+                        break;
+                    case "Table":
+                        newActor = new Table(Controls.GetSkin());
+                        readTableProperties((Table) newActor,  new OrderedMap.OrderedMapEntries<>(element));
                         break;
                     case "Image":
                         newActor = new Image();
@@ -156,6 +161,16 @@ public class UIActor extends Group {
                     Label.LabelStyle style = new Label.LabelStyle(newActor.getStyle());
                     style.font = Controls.GetSkin().getFont(property.value.toString());
                     newActor.setStyle(style);
+                    break;
+            }
+        }
+    }
+
+    private void readTableProperties(Table newActor, ObjectMap.Entries<String, String> entries) {
+        for (ObjectMap.Entry property : entries) {
+            switch (property.key.toString()) {
+                case "font":
+                    newActor.getSkin().get(Label.LabelStyle.class).font = Controls.GetSkin().getFont(property.value.toString());
                     break;
             }
         }
