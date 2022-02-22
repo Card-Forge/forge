@@ -6,7 +6,7 @@ Code2=NEO
 MciCode=neo
 Type=Expansion
 BoosterCovers=3
-Booster=9 Common:!fromSheet("NEO doublefaced"):!fromSheet("NEO lands"):fromSheet("NEO cards"), 3 Uncommon:!fromSheet("NEO doublefaced"):!fromSheet("NEO lands"):fromSheet("NEO cards"), 1 fromSheet("NEO doublefaced"), 1 RareMythic:fromSheet("NEO cards"), 1 fromSheet("NEO lands")
+Booster=9 Common:!dfc:!fromSheet("NEO lands"):fromSheet("NEO cards"), 3 Uncommon:!dfc:!fromSheet("NEO lands"):fromSheet("NEO cards"), 1 dfc:!Rare:!Mythic:fromSheet("NEO cards"), 1 RareMythic:fromSheet("NEO cards"), 1 fromSheet("NEO lands")
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=36
 ScryfallCode=NEO
@@ -534,22 +534,6 @@ ScryfallCode=NEO
 510 U Jukai Naturalist @Anna Steinbauer
 511 U Silver-Fur Master @Carl Critchlow
 512 U Secluded Courtyard @Sam Burley
-
-[doublefaced]
-1 Befriending the Moths|NEO
-1 Era of Enlightenment|NEO
-1 The Modern Age|NEO
-1 Okiba Reckoner Raid|NEO
-1 The Shattered States Era|NEO
-1 Tales of Master Seshiro|NEO
-1 The Fall of Lord Konda|NEO
-1 Michiko's Reign of Truth|NEO
-1 Behold the Unspeakable|NEO
-1 Life of Toshiro Umezawa|NEO
-1 The Long Reach of Night|NEO
-1 Kumano Faces Kakkazan|NEO
-1 Azusa's Many Journeys|NEO
-1 Boseiju Reaches Skyward|NEO
 
 [lands]
 1 Plains|NEO|1
