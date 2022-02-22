@@ -182,16 +182,17 @@ public class PumpEffect extends SpellAbilityEffect {
                 keywords.addAll(Arrays.asList(sa.getParam("KW").split(" & ")));
             }
 
-            sb.append(Lang.joinHomogenous(tgts)).append(" ");
+            if (sa instanceof AbilitySub & sa.getRootAbility().getTargets().containsAll(tgts)) {
+                //try to avoid having the same long list of targets twice in a StackDescription
+                sb.append(tgts.size() == 1 && tgts.get(0) instanceof Card ? "It " : "They ");
+            } else {
+                sb.append(Lang.joinHomogenous(tgts)).append(" ");
+            }
 
             if (sa.hasParam("Radiance")) {
                 sb.append("and each other ").append(sa.getParam("ValidTgts"))
                         .append(" that shares a color with ");
-                if (tgts.size() > 1) {
-                    sb.append("them ");
-                } else {
-                    sb.append("it ");
-                }
+                sb.append(tgts.size() > 1 ? "them " : "it ");
             }
 
             final int atk = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumAtt"), sa, true);

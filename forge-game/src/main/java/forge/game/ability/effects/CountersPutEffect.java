@@ -88,7 +88,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 stringBuilder.append(targetCard);
                 Integer v = spellAbility.getDividedValue(targetCard);
                 if (v != null) // fix null counter stack description
-                    stringBuilder.append(" (").append(v).append(" counter)");
+                    stringBuilder.append(" (").append(v).append(v == 1 ? " counter)" : " counters)");
 
                 if(i == targetCards.size() - 2) {
                     stringBuilder.append(" and ");
