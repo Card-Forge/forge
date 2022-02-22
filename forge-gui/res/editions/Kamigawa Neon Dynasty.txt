@@ -5,8 +5,10 @@ Name=Kamigawa: Neon Dynasty
 Code2=NEO
 MciCode=neo
 Type=Expansion
-TODO: Make sure Booster is correct closer to release - these are placeholders
-Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+BoosterCovers=3
+Booster=9 Common:!fromSheet("NEO doublefaced"):!fromSheet("NEO lands"):fromSheet("NEO cards"), 3 Uncommon:!fromSheet("NEO doublefaced"):!fromSheet("NEO lands"):fromSheet("NEO cards"), 1 fromSheet("NEO doublefaced"), 1 RareMythic:fromSheet("NEO cards"), 1 fromSheet("NEO lands")
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
 ScryfallCode=NEO
 
 [cards]
@@ -434,10 +436,10 @@ ScryfallCode=NEO
 418 M The Wandering Emperor @Hisashi Momose
 419 M Tezzeret, Betrayer of Flesh @Maekawa Yuichi
 420 M Blade of the Oni @Tubaki Halsame
-421 M Explosive Singularity @Ari
-422 M Kodama of the West Tree @TAPIOCA
-423 M Kaito Shizuki @Hagiya Kaoru
-424 M Nashi, Moon Sage's Scion @Yoshiya
+421 M Nashi, Moon Sage's Scion @Yoshiya
+422 M Explosive Singularity @Ari
+423 M Kodama of the West Tree @TAPIOCA
+424 M Kaito Shizuki @Hagiya Kaoru
 425 R Risona, Asari Commander @Kato Ayaka
 426 R Satoru Umezawa @Raita Kazama
 427 M Jin-Gitaxias, Progress Tyrant @Chase Stone
@@ -532,6 +534,54 @@ ScryfallCode=NEO
 510 U Jukai Naturalist @Anna Steinbauer
 511 U Silver-Fur Master @Carl Critchlow
 512 U Secluded Courtyard @Sam Burley
+
+[doublefaced]
+1 Befriending the Moths|NEO
+1 Era of Enlightenment|NEO
+1 The Modern Age|NEO
+1 Okiba Reckoner Raid|NEO
+1 The Shattered States Era|NEO
+1 Tales of Master Seshiro|NEO
+1 The Fall of Lord Konda|NEO
+1 Michiko's Reign of Truth|NEO
+1 Behold the Unspeakable|NEO
+1 Life of Toshiro Umezawa|NEO
+1 The Long Reach of Night|NEO
+1 Kumano Faces Kakkazan|NEO
+1 Azusa's Many Journeys|NEO
+1 Boseiju Reaches Skyward|NEO
+
+[lands]
+1 Plains|NEO|1
+1 Plains|NEO|2
+1 Plains|NEO|3
+1 Plains|NEO|4
+1 Island|NEO|1
+1 Island|NEO|2
+1 Island|NEO|3
+1 Island|NEO|4
+1 Swamp|NEO|1
+1 Swamp|NEO|2
+1 Swamp|NEO|3
+1 Swamp|NEO|4
+1 Mountain|NEO|1
+1 Mountain|NEO|2
+1 Mountain|NEO|3
+1 Mountain|NEO|4
+1 Forest|NEO|1
+1 Forest|NEO|2
+1 Forest|NEO|3
+1 Forest|NEO|4
+1 Bloodfell Caves|NEO
+1 Blossoming Sands|NEO
+1 Dismal Backwater|NEO
+1 Jungle Hollow|NEO
+1 Rugged Highlands|NEO
+1 Scoured Barrens|NEO
+1 Swiftwater Cliffs|NEO
+1 Thornwood Falls|NEO
+1 Tranquil Cove|NEO
+1 Wind-Scarred Crag|NEO
 
 [tokens]
 b_1_1_rat_rogue
