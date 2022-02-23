@@ -1,0 +1,60 @@
+{
+  "width": 480,
+  "height": 270,
+  "yDown": true,
+  "elements": [
+    {
+      "type": "Image",
+      "image": "ui/title_bg.png",
+      "width": 480,
+      "height": 270
+    },
+    {
+      "type": "Scroll",
+      "name": "saveSlots",
+      "x": 25,
+      "y": 18,
+      "width": 430,
+      "height": 235
+    },
+    {
+      "type": "Image",
+      "name" : "preview_border",
+      "image": "ui/avatarhud.png",
+      "width": 96,
+      "height": 54,
+      "x": 350,
+      "y": 26
+    },
+    {
+      "type": "Image",
+      "name": "preview",
+      "width": 86,
+      "height": 48,
+      "x": 356,
+      "y": 29
+    },
+    {
+      "type": "TextButton",
+      "name": "return",
+      "text": "Back",
+      "width": 48,
+      "height": 30,
+      "x": 36,
+      "y": 212
+    },
+    {
+      "type": "TextButton",
+      "name": "save",
+      "text": "saveLoad",
+      "width": 48,
+      "height": 30,
+      "x": 398,
+      "y": 212
+    },
+    {
+      "type": "Table",
+      "font": "default"
+    }
+  ]
+}

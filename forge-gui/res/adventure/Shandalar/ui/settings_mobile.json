@@ -1,0 +1,30 @@
+{
+  "width": 480,
+  "height": 270,
+  "yDown": true,
+  "elements": [
+    {
+      "type": "Image",
+      "image": "ui/title_bg.png",
+      "width": 480,
+      "height": 270
+    },
+    {
+      "type": "Scroll",
+      "name": "settings",
+      "x": 25,
+      "y": 18,
+      "width": 430,
+      "height": 235
+    },
+    {
+      "type": "ImageButton",
+      "name": "return",
+      "style": "leftarrow",
+      "width": 32,
+      "height": 32,
+      "x": 25,
+      "y": 220
+    }
+  ]
+}

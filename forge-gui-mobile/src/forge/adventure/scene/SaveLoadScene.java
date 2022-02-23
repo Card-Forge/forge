@@ -20,6 +20,7 @@ import forge.Forge;
 import forge.adventure.util.Controls;
 import forge.adventure.world.WorldSave;
 import forge.adventure.world.WorldSaveHeader;
+import forge.gui.GuiBase;
 import forge.screens.TransitionScreen;
 
 import java.io.File;
@@ -30,7 +31,6 @@ import java.util.zip.InflaterInputStream;
 
 /**
  * Scene to load and save the game.
- *
  */
 public class SaveLoadScene extends UIScene {
     private final IntMap<TextButton> buttons = new IntMap<>();
@@ -43,15 +43,14 @@ public class SaveLoadScene extends UIScene {
     Label header;
     int currentSlot = -3;
     Image previewImage;
+    Image previewBorder;
     TextButton saveLoadButton;
     TextButton quickSave;
     TextButton autoSave;
 
     public SaveLoadScene() {
-        super("ui/save_load.json");
+        super(GuiBase.isAndroid() ? "ui/save_load_mobile.json" : "ui/save_load.json");
     }
-
-
 
 
     private TextButton addSaveSlot(String name, int i) {
@@ -88,9 +87,16 @@ public class SaveLoadScene extends UIScene {
             if (header.preview != null) {
                 previewImage.setDrawable(new TextureRegionDrawable(new Texture(header.preview)));
                 previewImage.layout();
+                previewImage.setVisible(true);
+                previewBorder.setVisible(true);
             }
+        } else {
+            if (previewImage != null)
+                previewImage.setVisible(false);
+            if (previewBorder != null)
+                previewBorder.setVisible(false);
         }
-        for (IntMap.Entry<TextButton> butt : new IntMap.Entries<TextButton> (buttons)) {
+        for (IntMap.Entry<TextButton> butt : new IntMap.Entries<TextButton>(buttons)) {
             butt.value.setColor(defColor);
         }
         if (buttons.containsKey(slot)) {
@@ -123,18 +129,16 @@ public class SaveLoadScene extends UIScene {
     }
 
     @Override
-    public boolean keyPressed(int keycode)
-    {
-        if (keycode == Input.Keys.ESCAPE)
-        {
-                back();
+    public boolean keyPressed(int keycode) {
+        if (keycode == Input.Keys.ESCAPE) {
+            back();
         }
         return true;
     }
+
     public void save() {
         dialog.hide();
-        if( WorldSave.getCurrentSave().save(textInput.getText(), currentSlot))
-        {
+        if (WorldSave.getCurrentSave().save(textInput.getText(), currentSlot)) {
             updateFiles();
             Forge.switchScene(SceneType.GameScene.instance);
         }
@@ -147,7 +151,7 @@ public class SaveLoadScene extends UIScene {
         File f = new File(WorldSave.getSaveDir());
         f.mkdirs();
         File[] names = f.listFiles();
-        if(names==null)
+        if (names == null)
             throw new RuntimeException("Can not find save directory");
         previews.clear();
         for (File name : names) {
@@ -159,7 +163,7 @@ public class SaveLoadScene extends UIScene {
                          ObjectInputStream oos = new ObjectInputStream(inf)) {
 
 
-                        int slot=WorldSave.filenameToSlot(name.getName());
+                        int slot = WorldSave.filenameToSlot(name.getName());
                         WorldSaveHeader header = (WorldSaveHeader) oos.readObject();
                         buttons.get(slot).setText(header.name);
                         previews.put(slot, header);
@@ -222,12 +226,13 @@ public class SaveLoadScene extends UIScene {
         })).align(Align.left);
 
         previewImage = ui.findActor("preview");
+        previewBorder = ui.findActor("preview_border");
         header = Controls.newLabel("Save");
         header.setHeight(header.getHeight() * 2);
         layout.add(header).colspan(3).align(Align.center).expand();
         layout.row();
-        autoSave=addSaveSlot("Auto save", WorldSave.AUTO_SAVE_SLOT);
-        quickSave=addSaveSlot("Quick save", WorldSave.QUICK_SAVE_SLOT);
+        autoSave = addSaveSlot("Auto save", WorldSave.AUTO_SAVE_SLOT);
+        quickSave = addSaveSlot("Quick save", WorldSave.QUICK_SAVE_SLOT);
         for (int i = 1; i < 11; i++)
             addSaveSlot("Slot:" + i, i);
 

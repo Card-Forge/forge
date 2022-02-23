@@ -37,7 +37,7 @@ public class SettingsScene extends UIScene {
     private Table settingGroup;
 
     public SettingsScene() {
-        super("ui/settings.json");
+        super(GuiBase.isAndroid() ? "ui/settings_mobile.json" : "ui/settings.json");
     }
 
 
@@ -63,18 +63,18 @@ public class SettingsScene extends UIScene {
     }
 
     @Override
-    public boolean keyPressed(int keycode)
-    {
-        if (keycode == Input.Keys.ESCAPE)
-        {
+    public boolean keyPressed(int keycode) {
+        if (keycode == Input.Keys.ESCAPE) {
             back();
         }
         return true;
     }
+
     public boolean back() {
         Forge.switchToLast();
         return true;
     }
+
     private void addInputField(String name, ForgePreferences.FPref pref) {
 
 
@@ -91,6 +91,7 @@ public class SettingsScene extends UIScene {
         addLabel(name);
         settingGroup.add(box).align(Align.right);
     }
+
     private void addCheckBox(String name, ForgePreferences.FPref pref) {
 
 
@@ -107,9 +108,10 @@ public class SettingsScene extends UIScene {
         addLabel(name);
         settingGroup.add(box).align(Align.right);
     }
-    private void addSettingSlider(String name,  ForgePreferences.FPref pref, int min,int max) {
 
-        Slider slide = Controls.newSlider(min,max, 1, false);
+    private void addSettingSlider(String name, ForgePreferences.FPref pref, int min, int max) {
+
+        Slider slide = Controls.newSlider(min, max, 1, false);
         slide.setValue(Preference.getPrefInt(pref));
         slide.addListener(new ChangeListener() {
             @Override
@@ -121,6 +123,7 @@ public class SettingsScene extends UIScene {
         addLabel(name);
         settingGroup.add(slide).align(Align.right);
     }
+
     private void addSettingField(String name, boolean value, ChangeListener change) {
 
         CheckBox box = Controls.newCheckBox("");
@@ -129,6 +132,7 @@ public class SettingsScene extends UIScene {
         addLabel(name);
         settingGroup.add(box).align(Align.right);
     }
+
     private void addSettingField(String name, int value, ChangeListener change) {
 
 
@@ -145,14 +149,15 @@ public class SettingsScene extends UIScene {
         addLabel(name);
         settingGroup.add(text).align(Align.right);
     }
-    void addLabel( String name)
-    {
 
-        Label label = new Label(name, Controls.GetSkin().get("white",Label.LabelStyle.class));
+    void addLabel(String name) {
+
+        Label label = new Label(name, Controls.GetSkin().get("white", Label.LabelStyle.class));
 
         settingGroup.row().space(5);
         settingGroup.add(label).align(Align.left).fillX();
     }
+
     @Override
     public void resLoaded() {
         super.resLoaded();
@@ -165,7 +170,7 @@ public class SettingsScene extends UIScene {
         SelectBox plane = Controls.newComboBox(Config.instance().getAllAdventures(), Config.instance().getSettingData().plane, new Function<Object, Void>() {
             @Override
             public Void apply(Object o) {
-                Config.instance().getSettingData().plane= (String) o;
+                Config.instance().getSettingData().plane = (String) o;
                 Config.instance().saveSettings();
                 return null;
             }
@@ -177,7 +182,7 @@ public class SettingsScene extends UIScene {
             SelectBox videomode = Controls.newComboBox(new String[]{"720p", "768p", "900p", "1080p"}, Config.instance().getSettingData().videomode, new Function<Object, Void>() {
                 @Override
                 public Void apply(Object o) {
-                    String mode = (String)o;
+                    String mode = (String) o;
                     if (mode == null)
                         mode = "720p";
                     Config.instance().getSettingData().videomode = mode;
@@ -209,7 +214,7 @@ public class SettingsScene extends UIScene {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     boolean value = ((CheckBox) actor).isChecked();
-                    Config.instance().getSettingData().fullScreen=value;
+                    Config.instance().getSettingData().fullScreen = value;
                     Config.instance().saveSettings();
                     //update
                     if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_FULLSCREEN_MODE) != value) {
@@ -220,10 +225,10 @@ public class SettingsScene extends UIScene {
             });
         }
         addCheckBox(localizer.getMessage("lblCardName"), ForgePreferences.FPref.UI_OVERLAY_CARD_NAME);
-        addSettingSlider(localizer.getMessage("cbAdjustMusicVolume"),  ForgePreferences.FPref.UI_VOL_MUSIC,0,100);
-        addSettingSlider(localizer.getMessage("cbAdjustSoundsVolume"),  ForgePreferences.FPref.UI_VOL_SOUNDS, 0,100);
+        addSettingSlider(localizer.getMessage("cbAdjustMusicVolume"), ForgePreferences.FPref.UI_VOL_MUSIC, 0, 100);
+        addSettingSlider(localizer.getMessage("cbAdjustSoundsVolume"), ForgePreferences.FPref.UI_VOL_SOUNDS, 0, 100);
         addCheckBox(localizer.getMessage("lblManaCost"), ForgePreferences.FPref.UI_OVERLAY_CARD_MANA_COST);
-        addCheckBox(localizer.getMessage("lblPowerOrToughness"),  ForgePreferences.FPref.UI_OVERLAY_CARD_POWER);
+        addCheckBox(localizer.getMessage("lblPowerOrToughness"), ForgePreferences.FPref.UI_OVERLAY_CARD_POWER);
         addCheckBox(localizer.getMessage("lblCardID"), ForgePreferences.FPref.UI_OVERLAY_CARD_ID);
         addCheckBox(localizer.getMessage("lblAbilityIcon"), ForgePreferences.FPref.UI_OVERLAY_ABILITY_ICONS);
         addCheckBox(localizer.getMessage("cbImageFetcher"), ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER);

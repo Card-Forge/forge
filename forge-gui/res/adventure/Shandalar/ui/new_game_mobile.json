@@ -145,18 +145,18 @@
       "type": "TextButton",
       "name": "back",
       "text": "Back",
-      "width": 44,
+      "width": 48,
       "height": 30,
-      "x": 38,
+      "x": 36,
       "y": 212
     },
     {
       "type": "TextButton",
       "name": "start",
       "text": "Start",
-      "width": 44,
+      "width": 48,
       "height": 30,
-      "x": 400,
+      "x": 398,
       "y": 212
     }
   ]
