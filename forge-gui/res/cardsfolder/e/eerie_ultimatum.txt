@@ -3,5 +3,5 @@ ManaCost:W W B B B G G
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ W W B B B G G | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Permanent.YouOwn | DifferentNames$ True | ChangeNum$ X | Hidden$ True | StackDescription$ SpellDescription | SpellDescription$ Return any number of permanent cards with different names from your graveyard to the battlefield.
 SVar:X:Count$DifferentCardNames_Permanent.YouOwn+inZoneGraveyard
-Svar:IsReanimatorCard:TRUE
+SVar:IsReanimatorCard:TRUE
 Oracle:Return any number of permanent cards with different names from your graveyard to the battlefield.
