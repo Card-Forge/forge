@@ -13,10 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Touchpad.TouchpadStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
-import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
@@ -46,7 +46,7 @@ public class GameHUD extends Stage {
     float TOUCHPAD_KNOB_MIN_WIDTH = 40f;
 
     private GameHUD(GameStage gameStage) {
-        super(new FitViewport(Scene.GetIntendedWidth(), Scene.GetIntendedHeight()), gameStage.getBatch());
+        super(new ScalingViewport(Scaling.fillX, 480f, 270f), gameStage.getBatch());
         instance = this;
         this.gameStage = gameStage;
 
@@ -193,10 +193,11 @@ public class GameHUD extends Stage {
         float deckY = ui.findActor("deck").getY();
         float deckR = ui.findActor("deck").getRight();
         float deckT = ui.findActor("deck").getTop();
+        float deckOriginX = ui.findActor("deck").getOriginX();
         //deck button bounds
         if (c.x>=deckX&&c.x<=deckR&&c.y>=deckY&&c.y<=deckT) {
             openDeck();
-            stageToScreenCoordinates(c2.set(deckX, deckY));
+            stageToScreenCoordinates(c2.set(deckOriginX, deckY));
             return super.touchDown((int)c2.x, (int)c2.y, pointer, button);
         }
 
@@ -204,10 +205,11 @@ public class GameHUD extends Stage {
         float menuY = ui.findActor("menu").getY();
         float menuR = ui.findActor("menu").getRight();
         float menuT = ui.findActor("menu").getTop();
+        float menuOriginX = ui.findActor("menu").getOriginX();
         //menu button bounds
         if (c.x>=menuX&&c.x<=menuR&&c.y>=menuY&&c.y<=menuT) {
             menu();
-            stageToScreenCoordinates(c2.set(menuX, menuY));
+            stageToScreenCoordinates(c2.set(menuOriginX, menuY));
             return super.touchDown((int)c2.x, (int)c2.y, pointer, button);
         }
 
@@ -215,10 +217,11 @@ public class GameHUD extends Stage {
         float statsY = ui.findActor("statistic").getY();
         float statsR = ui.findActor("statistic").getRight();
         float statsT = ui.findActor("statistic").getTop();
+        float statsOriginX = ui.findActor("statistic").getOriginX();
         //stats button bounds
         if (c.x>=statsX&&c.x<=statsR&&c.y>=statsY&&c.y<=statsT) {
             statistic();
-            stageToScreenCoordinates(c2.set(statsX, statsY));
+            stageToScreenCoordinates(c2.set(statsOriginX, statsY));
             return super.touchDown((int)c2.x, (int)c2.y, pointer, button);
         }
 
