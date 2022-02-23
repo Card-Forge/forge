@@ -445,7 +445,7 @@ public class FNavigationBar extends FTitleBarBase {
         public void setIcon(final Icon icon) {
             final ImageIcon imageIcon = ReflectionUtil.safeCast(icon, ImageIcon.class);
             if (imageIcon != null) {
-                super.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING)));
+                super.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
             }
             else {
                 super.setIcon((Icon)null);
