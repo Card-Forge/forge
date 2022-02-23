@@ -2387,9 +2387,6 @@ public class AbilityUtils {
             return doXMath(player.getCounters(CounterType.getType(counterType)), expr, c, ctb);
         }
 
-        if (sq[0].contains("YourPoisonCounters")) {
-            return doXMath(player.getPoisonCounters(), expr, c, ctb);
-        }
         if (sq[0].contains("TotalOppPoisonCounters")) {
             return doXMath(player.getOpponentsTotalPoisonCounters(), expr, c, ctb);
         }

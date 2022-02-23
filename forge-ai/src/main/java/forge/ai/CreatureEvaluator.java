@@ -217,7 +217,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value += addValue(14, "paired");
         }
 
-        if (!c.getEncodedCards().isEmpty()) {
+        if (!c.hasEncodedCard()) {
             value += addValue(24, "encoded");
         }
 
