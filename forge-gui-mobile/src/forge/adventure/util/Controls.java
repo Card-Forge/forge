@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 
 import java.util.function.Function;
 
@@ -30,8 +31,8 @@ public class Controls {
     }
 
     static public SelectBox newComboBox(String[] text, String item, Function<Object, Void> func) {
-
         SelectBox ret = new SelectBox<String>(GetSkin());
+        ret.getStyle().listStyle.selection.setTopHeight(4);
         ret.setItems(text);
         ret.addListener(new ChangeListener() {
             @Override
@@ -44,8 +45,9 @@ public class Controls {
             }
         });
         func.apply(item);
-
+        ret.getList().setAlignment(Align.center);
         ret.setSelected(item);
+        ret.setAlignment(Align.right);
         return ret;
     }
 

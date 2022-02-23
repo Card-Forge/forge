@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
@@ -15,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Scaling;
 import forge.Forge;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
@@ -93,9 +95,12 @@ public class SettingsScene extends UIScene {
     }
 
     private void addCheckBox(String name, ForgePreferences.FPref pref) {
-
-
         CheckBox box = Controls.newCheckBox("");
+        if (GuiBase.isAndroid()) {
+            box.getImage().setScaling(Scaling.fill);
+            box.getImageCell().size(12, 12);
+            box.getImageCell().pad(2);
+        }
         box.setChecked(Preference.getPrefBoolean(pref));
         box.addListener(new ChangeListener() {
             @Override
@@ -110,7 +115,6 @@ public class SettingsScene extends UIScene {
     }
 
     private void addSettingSlider(String name, ForgePreferences.FPref pref, int min, int max) {
-
         Slider slide = Controls.newSlider(min, max, 1, false);
         slide.setValue(Preference.getPrefInt(pref));
         slide.addListener(new ChangeListener() {
@@ -127,6 +131,11 @@ public class SettingsScene extends UIScene {
     private void addSettingField(String name, boolean value, ChangeListener change) {
 
         CheckBox box = Controls.newCheckBox("");
+        if (GuiBase.isAndroid()) {
+            box.getImage().setScaling(Scaling.fill);
+            box.getImageCell().size(12, 12);
+            box.getImageCell().pad(2);
+        }
         box.setChecked(value);
         box.addListener(change);
         addLabel(name);
@@ -176,7 +185,7 @@ public class SettingsScene extends UIScene {
             }
         });
         addLabel("Plane");
-        settingGroup.add(plane).align(Align.right);
+        settingGroup.add(plane).align(Align.right).pad(2);
 
         if (!GuiBase.isAndroid()) {
             SelectBox videomode = Controls.newComboBox(new String[]{"720p", "768p", "900p", "1080p"}, Config.instance().getSettingData().videomode, new Function<Object, Void>() {
@@ -209,7 +218,7 @@ public class SettingsScene extends UIScene {
                 }
             });
             addLabel("Video Mode (Restart to apply)");
-            settingGroup.add(videomode).align(Align.right);
+            settingGroup.add(videomode).align(Align.right).pad(2);
             addSettingField("Fullscreen", Config.instance().getSettingData().fullScreen, new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
@@ -250,6 +259,14 @@ public class SettingsScene extends UIScene {
 
 
         settingGroup.row();
+        if (GuiBase.isAndroid()) {
+            ImageButton back = ui.findActor("return");
+            back.getImage().setScaling(Scaling.fill);
+            back.getImageCell().size(12, 12);
+            back.getImageCell().pad(2);
+            back.getImage().setFillParent(true);
+        }
+
         ui.onButtonPress("return", new Runnable() {
             @Override
             public void run() {

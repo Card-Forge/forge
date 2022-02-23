@@ -21,10 +21,8 @@
       "type": "ImageButton",
       "name": "return",
       "style": "leftarrow",
-      "width": 32,
-      "height": 32,
-      "x": 25,
-      "y": 220
+      "x": 32,
+      "y": 230
     }
   ]
 }
