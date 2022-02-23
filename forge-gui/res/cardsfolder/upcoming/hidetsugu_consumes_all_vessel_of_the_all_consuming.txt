@@ -1,0 +1,26 @@
+Name:Hidetsugu Consumes All
+ManaCost:1 B R
+Types:Enchantment Saga
+K:Saga:3:DBDestroyAll,DBExile,DBTransform
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Permanent.nonLand+cmcLE1 | SpellDescription$ Destroy each nonland permanent with mana value 1 or less.
+SVar:DBExile:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Graveyard | Destination$ Exile | SpellDescription$ Exile all graveyards.
+SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AlternateMode:DoubleFaced
+Oracle:(As this Saga enters and after your draw step, add a lore counter.)\nI — Destroy each nonland permanent with mana value 1 or less.\nII — Exile all graveyards.\nIII — Exile this Saga, then return it to the battlefield transformed under your control.
+
+ALTERNATE
+
+Name:Vessel of the All-Consuming
+ManaCost:no cost
+Colors:black,red
+Types:Enchantment Creature Ogre Shaman
+PT:3/3
+K:Trample
+T:Mode$ DamageDealtOnce | ValidSource$ Card.Self | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigLose | DamageToTargetThisTurnCondition$ GE10 | TriggerDescription$ Whenever CARDNAME deals damage to a player, if it has dealt 10 or more damage to that player this turn, they lose the game.
+SVar:TrigLose:DB$ LosesGame | Defined$ TriggeredTarget
+DeckHas:Ability$Counters
+Oracle:Trample\nWhenever Vessel of the All-Consuming deals damage, put a +1/+1 counter on it.\nWhenever Vessel of the All-Consuming deals damage to a player, if it has dealt 10 or more damage to that player this turn, they lose the game.
