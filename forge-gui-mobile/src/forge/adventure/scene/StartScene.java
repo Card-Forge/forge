@@ -37,7 +37,8 @@ public class StartScene extends UIScene {
     }
 
     public boolean Resume() {
-        Forge.switchToLast();
+        //Forge.switchToLast();
+        Forge.switchScene(SceneType.GameScene.instance);
         return true;
     }
 

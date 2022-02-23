@@ -14,6 +14,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Selector;
 import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
+import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -36,10 +37,13 @@ public class NewGameScene extends UIScene {
     private Selector difficulty;
 
     public NewGameScene() {
-        super("ui/new_game.json");
+        super(GuiBase.isAndroid() ? "ui/new_game_mobile.json" : "ui/new_game.json");
     }
 
     public boolean start() {
+        if(selectedName.getText().isEmpty()) {
+            selectedName.setText(NameGenerator.getRandomName("Any", "Any", ""));
+        }
         Runnable runnable = new Runnable() {
             @Override
             public void run() {

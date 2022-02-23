@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import forge.player.GamePlayerUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Gdx;
@@ -326,6 +327,9 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
             //TODO: Investigate why AI names cannot be overriden?
             updateName(i, getPlayerName(i));
+            if(i == 0 && Forge.isMobileAdventureMode) {
+                updateName(0, GamePlayerUtil.getGuiPlayer().getName());
+            }
         }
         FThreads.invokeInBackgroundThread(new Runnable() { //must call startGame in background thread in case there are alerts
             @Override
