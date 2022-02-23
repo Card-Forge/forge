@@ -4819,7 +4819,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         setPhasedOut(!phasedOut);
-        final Combat combat = getGame().getPhaseHandler().getCombat();
+        final Combat combat = getGame().getCombat();
         if (combat != null && phasedOut) {
             combat.saveLKI(this);
             combat.removeFromCombat(this);
