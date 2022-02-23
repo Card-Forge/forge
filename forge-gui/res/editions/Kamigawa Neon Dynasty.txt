@@ -5,8 +5,10 @@ Name=Kamigawa: Neon Dynasty
 Code2=NEO
 MciCode=neo
 Type=Expansion
-TODO: Make sure Booster is correct closer to release - these are placeholders
-Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+BoosterCovers=3
+Booster=9 Common:!dfc:!fromSheet("NEO lands"):fromSheet("NEO cards"), 3 Uncommon:!dfc:!fromSheet("NEO lands"):fromSheet("NEO cards"), 1 dfc:!Rare:!Mythic:fromSheet("NEO cards"), 1 RareMythic:fromSheet("NEO cards"), 1 fromSheet("NEO lands")
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
 ScryfallCode=NEO
 
 [cards]
@@ -312,10 +314,25 @@ ScryfallCode=NEO
 300 L Mountain @Ayami Nakashima
 301 L Forest @Ezoi
 302 L Forest @Ezoi
+
+[borderless]
 303 M The Wandering Emperor @Terada Katsuya
 304 M Tezzeret, Betrayer of Flesh @Lack
 305 M Kaito Shizuki @Tetsuo Hara
 306 M Tamiyo, Compleated Sage @Terada Katsuya
+406 M Ao, the Dawn Sky @Ishikawa Kenta
+407 R Kyodai, Soul of Kamigawa @Yukihiro Maruo
+408 M Kairi, the Swirling Sky @Yoshiya
+409 M Junji, the Midnight Sky @Satoru Senda
+410 M Atsushi, the Blazing Sky @Toshiaki Takayama
+411 M Kura, the Boundless Sky @Satoru Senda
+412 R Boseiju, Who Endures @Esuthio
+413 R Eiganjo, Seat of the Empire @ZOUNOSE
+414 R Otawara, Soaring City @Yuta Shimpo
+415 R Sokenzan, Crucible of Defiance @Nao Miyoshi
+416 R Takenuma, Abandoned Mire @Nao Miyoshi
+
+[showcase]
 307 M Jin-Gitaxias, Progress Tyrant @Chase Stone
 308 M Tamiyo, Compleated Sage @Chris Rahn
 309 C Eiganjo Exemplar @Yamada Rokkaku
@@ -415,25 +432,14 @@ ScryfallCode=NEO
 403 R Mirror Box @Mid
 404 R Reckoner Bankbuster @Yoshiya
 405 R Surgehacker Mech @Inuchiyo Meimaru
-406 M Ao, the Dawn Sky @Ishikawa Kenta
-407 R Kyodai, Soul of Kamigawa @Yukihiro Maruo
-408 M Kairi, the Swirling Sky @Yoshiya
-409 M Junji, the Midnight Sky @Satoru Senda
-410 M Atsushi, the Blazing Sky @Toshiaki Takayama
-411 M Kura, the Boundless Sky @Satoru Senda
-412 R Boseiju, Who Endures @Esuthio
-413 R Eiganjo, Seat of the Empire @ZOUNOSE
-414 R Otawara, Soaring City @Yuta Shimpo
-415 R Sokenzan, Crucible of Defiance @Nao Miyoshi
-416 R Takenuma, Abandoned Mire @Nao Miyoshi
 417 R Farewell @Fuzichoco
 418 M The Wandering Emperor @Hisashi Momose
 419 M Tezzeret, Betrayer of Flesh @Maekawa Yuichi
 420 M Blade of the Oni @Tubaki Halsame
-421 M Explosive Singularity @Ari
-422 M Kodama of the West Tree @TAPIOCA
-423 M Kaito Shizuki @Hagiya Kaoru
-424 M Nashi, Moon Sage's Scion @Yoshiya
+421 M Nashi, Moon Sage's Scion @Yoshiya
+422 M Explosive Singularity @Ari
+423 M Kodama of the West Tree @TAPIOCA
+424 M Kaito Shizuki @Hagiya Kaoru
 425 R Risona, Asari Commander @Kato Ayaka
 426 R Satoru Umezawa @Raita Kazama
 427 M Jin-Gitaxias, Progress Tyrant @Chase Stone
@@ -442,6 +448,8 @@ ScryfallCode=NEO
 430 R Hidetsugu, Devouring Chaos @SENNSU
 431 R Hidetsugu, Devouring Chaos @SENNSU
 432 R Hidetsugu, Devouring Chaos @SENNSU
+
+[extended art]
 433 M Ao, the Dawn Sky @Chris Rahn
 434 R Brilliant Restoration @Wylie Beckert
 435 R Cloudsteel Kirin @Jonathan Kuo
@@ -515,10 +523,65 @@ ScryfallCode=NEO
 503 R Otawara, Soaring City @Alayna Danner
 504 R Sokenzan, Crucible of Defiance @Lucas Staniec
 505 R Takenuma, Abandoned Mire @Sam Burley
-506 R Invoke Despair @Donato Giancola
+
+[buy a box]
 507 R Satoru Umezawa @Yoji Shinkawa
+
+[promo]
+506 R Invoke Despair @Donato Giancola
 508 C Spirited Companion @Ilse Gort
 509 U Enthusiastic Mechanaut @Anna Steinbauer
 510 U Jukai Naturalist @Anna Steinbauer
 511 U Silver-Fur Master @Carl Critchlow
 512 U Secluded Courtyard @Sam Burley
+
+[lands]
+1 Plains|NEO|1
+1 Plains|NEO|2
+1 Plains|NEO|3
+1 Plains|NEO|4
+1 Island|NEO|1
+1 Island|NEO|2
+1 Island|NEO|3
+1 Island|NEO|4
+1 Swamp|NEO|1
+1 Swamp|NEO|2
+1 Swamp|NEO|3
+1 Swamp|NEO|4
+1 Mountain|NEO|1
+1 Mountain|NEO|2
+1 Mountain|NEO|3
+1 Mountain|NEO|4
+1 Forest|NEO|1
+1 Forest|NEO|2
+1 Forest|NEO|3
+1 Forest|NEO|4
+1 Bloodfell Caves|NEO
+1 Blossoming Sands|NEO
+1 Dismal Backwater|NEO
+1 Jungle Hollow|NEO
+1 Rugged Highlands|NEO
+1 Scoured Barrens|NEO
+1 Swiftwater Cliffs|NEO
+1 Thornwood Falls|NEO
+1 Tranquil Cove|NEO
+1 Wind-Scarred Crag|NEO
+
+[tokens]
+b_1_1_rat_rogue
+c_1_1_a_construct
+c_1_1_pilot_crewbuff
+c_1_1_spirit
+c_a_treasure_sac
+g_1_1_human_monk_g
+g_4_5_spirit
+g_x_x_spirit_total_lands
+keimi
+mechtitan
+r_2_2_goblin_shaman_treasure
+r_2_2_spirit_menace
+r_3_1_a_construct_haste
+r_5_5_dragon_spirit_flying
+tamiyos_notebook
+u_1_1_ninja_unblockable
+w_2_2_samurai_vigilance
