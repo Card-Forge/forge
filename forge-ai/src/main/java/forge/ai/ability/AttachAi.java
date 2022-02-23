@@ -1333,7 +1333,7 @@ public class AttachAi extends SpellAbilityAi {
             CardCollection preferred = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card card) {
-                    return card.getAttachedCards().isEmpty();
+                    return !card.hasCardAttachments();
                 }
             });
             return preferred.isEmpty() ? Aggregates.random(list) : Aggregates.random(preferred);
