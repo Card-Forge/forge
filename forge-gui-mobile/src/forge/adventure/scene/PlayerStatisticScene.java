@@ -11,6 +11,7 @@ import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.WorldData;
+import forge.adventure.stage.GameHUD;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 import forge.player.GamePlayerUtil;
@@ -47,6 +48,7 @@ public class PlayerStatisticScene extends UIScene {
     }
 
     public boolean back() {
+        GameHUD.getInstance().getTouchpad().setVisible(false);
         Forge.switchToLast();
         return true;
     }

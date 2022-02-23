@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import forge.Forge;
+import forge.adventure.stage.GameHUD;
 import forge.adventure.world.WorldSave;
 import forge.gui.GuiBase;
 
@@ -39,6 +40,7 @@ public class StartScene extends UIScene {
 
     public boolean Resume() {
         //Forge.switchToLast();
+        GameHUD.getInstance().getTouchpad().setVisible(false);
         Forge.switchScene(SceneType.GameScene.instance);
         return true;
     }
