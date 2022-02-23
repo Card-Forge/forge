@@ -99,7 +99,7 @@ public class SettingsScene extends UIScene {
         if (GuiBase.isAndroid()) {
             box.getImage().setScaling(Scaling.fill);
             box.getImageCell().size(12, 12);
-            box.getImageCell().pad(2);
+            box.getImageCell().pad(2, 2, 2, 10);
         }
         box.setChecked(Preference.getPrefBoolean(pref));
         box.addListener(new ChangeListener() {
@@ -134,7 +134,7 @@ public class SettingsScene extends UIScene {
         if (GuiBase.isAndroid()) {
             box.getImage().setScaling(Scaling.fill);
             box.getImageCell().size(12, 12);
-            box.getImageCell().pad(2);
+            box.getImageCell().pad(2, 2, 2, 10);
         }
         box.setChecked(value);
         box.addListener(change);
@@ -143,8 +143,6 @@ public class SettingsScene extends UIScene {
     }
 
     private void addSettingField(String name, int value, ChangeListener change) {
-
-
         TextField text = Controls.newTextField(String.valueOf(value));
         text.setTextFieldFilter(new TextField.TextFieldFilter() {
             @Override
@@ -153,18 +151,14 @@ public class SettingsScene extends UIScene {
             }
         });
         text.addListener(change);
-
-
         addLabel(name);
         settingGroup.add(text).align(Align.right);
     }
 
     void addLabel(String name) {
-
         Label label = new Label(name, Controls.GetSkin().get("white", Label.LabelStyle.class));
-
         settingGroup.row().space(5);
-        settingGroup.add(label).align(Align.left).fillX();
+        settingGroup.add(label).align(Align.left).pad(2,2, 2, 5);
     }
 
     @Override
@@ -259,13 +253,6 @@ public class SettingsScene extends UIScene {
 
 
         settingGroup.row();
-        if (GuiBase.isAndroid()) {
-            ImageButton back = ui.findActor("return");
-            back.getImage().setScaling(Scaling.fill);
-            back.getImageCell().size(12, 12);
-            back.getImageCell().pad(2);
-            back.getImage().setFillParent(true);
-        }
 
         ui.onButtonPress("return", new Runnable() {
             @Override

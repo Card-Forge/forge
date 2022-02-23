@@ -54,8 +54,7 @@ public class SaveLoadScene extends UIScene {
 
 
     private TextButton addSaveSlot(String name, int i) {
-        layout.add(Controls.newLabel(name)).colspan(1).align(Align.right).expandX();
-        layout.add(Controls.newLabel("  "));
+        layout.add(Controls.newLabel(name)).align(Align.left).pad(4, 10, 4, 15);
         TextButton button = Controls.newTextButton("...");
         button.addListener(new ClickListener() {
             @Override
@@ -68,7 +67,7 @@ public class SaveLoadScene extends UIScene {
                 }
             }
         });
-        layout.add(button).colspan(2).align(Align.left).expandX();
+        layout.add(button).align(Align.left).expandX();
         buttons.put(i, button);
         layout.row();
         return button;
@@ -88,13 +87,10 @@ public class SaveLoadScene extends UIScene {
                 previewImage.setDrawable(new TextureRegionDrawable(new Texture(header.preview)));
                 previewImage.layout();
                 previewImage.setVisible(true);
-                previewBorder.setVisible(true);
             }
         } else {
             if (previewImage != null)
                 previewImage.setVisible(false);
-            if (previewBorder != null)
-                previewBorder.setVisible(false);
         }
         for (IntMap.Entry<TextButton> butt : new IntMap.Entries<TextButton>(buttons)) {
             butt.value.setColor(defColor);
@@ -229,7 +225,8 @@ public class SaveLoadScene extends UIScene {
         previewBorder = ui.findActor("preview_border");
         header = Controls.newLabel("Save");
         header.setHeight(header.getHeight() * 2);
-        layout.add(header).colspan(3).align(Align.center).expand();
+        header.setAlignment(Align.center);
+        layout.add(header).pad(2).colspan(4).align(Align.center).expand();
         layout.row();
         autoSave = addSaveSlot("Auto save", WorldSave.AUTO_SAVE_SLOT);
         quickSave = addSaveSlot("Quick save", WorldSave.QUICK_SAVE_SLOT);
@@ -249,8 +246,8 @@ public class SaveLoadScene extends UIScene {
                 SaveLoadScene.this.back();
             }
         });
-        defColor = saveLoadButton.getColor();
 
+        defColor = saveLoadButton.getColor();
 
         ScrollPane scrollPane = ui.findActor("saveSlots");
         scrollPane.setActor(layout);
