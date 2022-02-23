@@ -135,8 +135,10 @@ public abstract class FDisplayObject {
         //TODO: mouse detection on android?
         if (Forge.afterDBloaded && !GuiBase.isAndroid()) {
             Forge.hoveredCount = listeners.size();
-            if (!Forge.getCurrentScreen().toString().contains("Match"))
-                Forge.hoveredCount = 1;
+            if (Forge.getCurrentScreen() != null) {
+                if (!Forge.getCurrentScreen().toString().contains("Match"))
+                    Forge.hoveredCount = 1;
+            }
             if (exact) {
                 setHovered(this.enabled && this.visible && ((FCardPanel) this).renderedCardContains(screenToLocalX(screenX), screenToLocalY(screenY)) && Forge.hoveredCount < 2);
             } else {

@@ -5,9 +5,9 @@
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Hidden Collision" width="30" height="17">
+ <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBjcQJaHgUGaB0KDAIwtzTO87Y3mhfCjeOlj7y4eCN4NtWcnD0JsOIJR/476dziBkebfUUAZAACVexqE
+   eJxjYBjcQJaHgUGaB0KDAIwtzTMy7I3ipY+9u3ggeDfUnp08CLHhCEb9O+rf4QRGmn9HAWUAAAPNGkU=
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -25,17 +25,12 @@
    eJxjYBic4DEXA0MTN2H8lIv6diry4Fcnz0M9u4m1k5p2k2ontewmx050u8m1lxIwau+ovbj0kZsXYHmQHEBuPiQ331NiNzXsJNVuatqJbjcMN0PjrhGtPqKmneigEc3eZgrSPQArjCuE
   </data>
  </layer>
- <layer id="3" name="Foreground" width="30" height="17">
+ <layer id="3" name="Clutter" width="30" height="17">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBgF2IC+AAODgQCqmC0/A4MdP23t9Qba6YNmbyTQziga2zvcQRsaX4EHghV5IHx5HoQYPn1DFRDr36EKRuN3eMcvNtDCj58/CnADAKcNCf8=
-  </data>
- </layer>
- <layer id="5" name="AboveSprites" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -44,7 +39,7 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="50" template="../obj/enemy.tx" x="207.902" y="73.0586">
+  <object id="50" template="../obj/enemy.tx" x="206.402" y="70.3086">
    <properties>
     <property name="enemy" value="White Wiz1"/>
    </properties>

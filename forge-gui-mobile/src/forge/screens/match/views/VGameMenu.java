@@ -68,22 +68,24 @@ public class VGameMenu extends FDropDownMenu {
                 autoYields.show();
             }
         }));
-        addItem(new FMenuItem(localizer.getMessage("lblSettings"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                //pause game when spectating AI Match
-                if (!MatchController.instance.hasLocalPlayers()) {
-                    if(!MatchController.instance.isGamePaused())
-                        MatchController.instance.pauseMatch();
+        if (!Forge.isMobileAdventureMode) {
+            addItem(new FMenuItem(localizer.getMessage("lblSettings"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    //pause game when spectating AI Match
+                    if (!MatchController.instance.hasLocalPlayers()) {
+                        if(!MatchController.instance.isGamePaused())
+                            MatchController.instance.pauseMatch();
+                    }
+                    SettingsScreen.show(false);
                 }
-                SettingsScreen.show(false);
-            }
-        }));
-        addItem(new FMenuItem(localizer.getMessage("lblShowWinLoseOverlay"), FSkinImage.ENDTURN, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                MatchController.instance.showWinlose();
-            }
-        }));
+            }));
+            addItem(new FMenuItem(localizer.getMessage("lblShowWinLoseOverlay"), FSkinImage.ENDTURN, new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    MatchController.instance.showWinlose();
+                }
+            }));
+        }
     }
 }

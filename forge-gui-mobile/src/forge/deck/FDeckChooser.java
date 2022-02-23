@@ -162,7 +162,7 @@ public class FDeckChooser extends FScreen {
                         && selectedDeckType != DeckType.VINTAGE_CARDGEN_DECK && selectedDeckType != DeckType.MODERN_COLOR_DECK &&
                         selectedDeckType != DeckType.COLOR_DECK && selectedDeckType != DeckType.THEME_DECK
                         && selectedDeckType != DeckType.RANDOM_COMMANDER_DECK && selectedDeckType != DeckType.RANDOM_CARDGEN_COMMANDER_DECK) {
-                    FDeckViewer.show(getDeck());
+                    FDeckViewer.show(getDeck(), false, DeckType.DRAFT_DECK.equals(selectedDeckType));
                 }
             }
         });
@@ -236,6 +236,8 @@ public class FDeckChooser extends FScreen {
 
     @Override
     public void onActivate() {
+        if (cmbDeckTypes != null && cmbDeckTypes.getDropDownisVisible())
+            cmbDeckTypes.hideDropDown();
         String selectedDeck = "";
         int index = 0;
         if (lstDecks.getSelectedItem() != null) {
@@ -520,6 +522,7 @@ public class FDeckChooser extends FScreen {
 
         if (cmbDeckTypes == null) { //initialize components with delayed initialization the first time this is populated
             cmbDeckTypes = new FComboBox<>();
+            cmbDeckTypes.setAutoClose(false);
             switch (lstDecks.getGameType()) {
             case Constructed:
             case Gauntlet:

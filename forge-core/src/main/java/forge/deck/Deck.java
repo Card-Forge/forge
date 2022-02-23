@@ -51,6 +51,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     private String lastCardArtPreferenceUsed = "";
     private Boolean lastCardArtOptimisationOptionUsed = null;
     private boolean includeCardsFromUnspecifiedSet = false;
+    private transient UnplayableAICards unplayableAI = null;
 
     public Deck() {
         this("");
@@ -531,6 +532,37 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         }
         // do not include schemes / avatars and any non-regular cards
         return allCards;
+    }
+
+    public UnplayableAICards getUnplayableAICards() {
+        if (unplayableAI == null) {
+            unplayableAI = new UnplayableAICards(this);
+        }
+        return unplayableAI;
+    }
+
+    public static final class UnplayableAICards {
+        public final Map<DeckSection, List<? extends PaperCard>> unplayable = new HashMap<>();
+        public final int inMainDeck;
+
+        private UnplayableAICards(Deck myDeck) {
+            int mainDeck = 0;
+            for (Entry<DeckSection, CardPool> ds : myDeck) {
+                List<PaperCard> result = Lists.newArrayList();
+                for (Entry<PaperCard, Integer> cp : ds.getValue()) {
+                    if (cp.getKey().getRules().getAiHints().getRemAIDecks()) {
+                        result.add(cp.getKey());
+                    }
+                }
+                if (ds.getKey().equals(DeckSection.Main)) {
+                  mainDeck = result.size();
+                }
+                if (!result.isEmpty()) {
+                    unplayable.put(ds.getKey(), result);
+                }
+            }
+            inMainDeck = mainDeck;
+        }
     }
 
     @Override

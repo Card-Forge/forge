@@ -67,7 +67,7 @@ public class CharmEffect extends SpellAbilityEffect {
         } else {
             num = Math.min(AbilityUtils.calculateAmount(source, sa.getParamOrDefault("CharmNum", "1"), sa), list.size());
         }
-        final int min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParamOrDefault("MinCharmNum", "1"), sa) : num;
+        final int min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParam("MinCharmNum"), sa) : num;
 
         boolean repeat = sa.hasParam("CanRepeatModes");
         boolean random = sa.hasParam("Random");
@@ -120,10 +120,13 @@ public class CharmEffect extends SpellAbilityEffect {
         }
 
         if (additionalDesc) {
+            String addDescS = sa.getParam("AdditionalDescription");
             if (optional) {
-                sb.append(". ").append(sa.getParam("AdditionalDescription").trim());
+                sb.append(". ").append(addDescS.trim());
+            } else if (addDescS.startsWith(("."))) {
+                sb.append(addDescS.trim());
             } else {
-                sb.append(" ").append(sa.getParam("AdditionalDescription").trim());
+                sb.append(" ").append(addDescS.trim());
             }
         }
 

@@ -756,9 +756,9 @@ public class AiController {
         }
 
         // state needs to be switched here so API checks evaluate the right face
-        CardStateName currentState = sa.getCardState() != null && sa.getHostCard().getCurrentStateName() != sa.getCardState().getStateName() && !sa.getHostCard().isInPlay() ? sa.getHostCard().getCurrentStateName() : null;
+        CardStateName currentState = sa.getCardState() != null && sa.getHostCard().getCurrentStateName() != sa.getCardStateName() && !sa.getHostCard().isInPlay() ? sa.getHostCard().getCurrentStateName() : null;
         if (currentState != null) {
-            sa.getHostCard().setState(sa.getCardState().getStateName(), false);
+            sa.getHostCard().setState(sa.getCardStateName(), false);
         }
 
         AiPlayDecision canPlay = canPlaySa(sa); // this is the "heaviest" check, which also sets up targets, defines X, etc.
@@ -1419,14 +1419,15 @@ public class AiController {
             } else {
                 chance = SpellApiToAi.Converter.get(spell.getApi()).doTriggerAI(player, spell, mandatory);
             }
-            if (!chance)
+            if (!chance) {
                 return AiPlayDecision.TargetingFailed;
+            }
+
+            if (mandatory) {
+                return AiPlayDecision.WillPlay;
+            }
 
             if (spell instanceof SpellPermanent) {
-                if (mandatory) {
-                    return AiPlayDecision.WillPlay;
-                }
-
                 if (!checkETBEffects(card, spell, null)) {
                     return AiPlayDecision.BadEtbEffects;
                 }

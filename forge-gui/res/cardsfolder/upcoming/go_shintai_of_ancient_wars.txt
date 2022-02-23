@@ -1,0 +1,11 @@
+Name:Go-Shintai of Ancient Wars
+ManaCost:2 R
+Types:Legendary Enchantment Creature Shrine
+PT:2/2
+K:First Strike
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigImmediateTrig | TriggerDescription$ At the beginning of your end step, you may pay {1}. When you do, CARDNAME deals X damage to target player or planeswalker, where X is the number of Shrines you control.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ 1 | Execute$ TrigDealDamage | SpellDescription$ CARDNAME deals X damage to target player or planeswalker, where X is the number of Shrines you control.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ X
+SVar:X:Count$TypeYouCtrl.Shrine
+DeckHints:Type$Shrine
+Oracle:First strike\nAt the beginning of your end step, you may pay {1}. When you do, Go-Shintai of Ancient Wars deals X damage to target player or planeswalker, where X is the number of Shrines you control.

@@ -830,7 +830,7 @@ public class ComputerUtilCombat {
         }
 
         // defender == null means unblocked
-        if ((defender == null) && mode == TriggerType.AttackerUnblocked) {
+        if (defender == null && mode == TriggerType.AttackerUnblocked) {
             willTrigger = true;
             if (!trigger.matchesValidParam("ValidCard", attacker)) {
                 return false;
@@ -1033,7 +1033,7 @@ public class ComputerUtilCombat {
                 }
 
                 if (ComputerUtilCost.canPayCost(ability, blocker.getController(), false)) {
-                    int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
+                    int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParamOrDefault("CounterNum", "1"), ability);
                     if (pBonus > 0) {
                         power += pBonus;
                     }
@@ -1104,7 +1104,7 @@ public class ComputerUtilCombat {
                 if (!"M1M1".equals(sa.getParam("CounterType"))) {
                     continue;
                 }
-                toughness -= AbilityUtils.calculateAmount(source, sa.getParam("CounterNum"), sa);
+                toughness -= AbilityUtils.calculateAmount(source, sa.getParamOrDefault("CounterNum", "1"), sa);
             } else
 
             // Pump triggers
@@ -1166,7 +1166,7 @@ public class ComputerUtilCombat {
                 }
 
                 if (ComputerUtilCost.canPayCost(ability, blocker.getController(), false)) {
-                    int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
+                    int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParamOrDefault("CounterNum", "1"), ability);
                     if (tBonus > 0) {
                         toughness += tBonus;
                     }
@@ -1363,7 +1363,7 @@ public class ComputerUtilCombat {
                 }
 
                 if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController(), false)) {
-                    int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
+                    int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParamOrDefault("CounterNum", "1"), ability);
                     if (pBonus > 0) {
                         power += pBonus;
                     }
@@ -1585,7 +1585,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
 
-                int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
+                int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParamOrDefault("CounterNum", "1"), ability);
                 if (tBonus > 0) {
                     toughness += tBonus;
                 }
@@ -2223,14 +2223,21 @@ public class ComputerUtilCombat {
      */
     public final static int getDamageToKill(final Card c, boolean withShields) {
         int damageShield = withShields ? c.getPreventNextDamageTotalShields() : 0;
-        int killDamage = (c.isPlaneswalker() ? c.getCurrentLoyalty() : c.getLethalDamage()) + damageShield;
+        int killDamage = 0;
+        if (c.isCreature()) {
+            killDamage = Math.max(0, c.getLethalDamage());
+        }
+        if (c.isPlaneswalker()) {
+            int killDamagePW = c.getCurrentLoyalty();
+            killDamage = c.isCreature() ? Math.min(killDamage, killDamagePW) : killDamagePW;
+        }
 
         if (killDamage > damageShield
                 && c.hasSVar("DestroyWhenDamaged")) {
-            killDamage = 1 + damageShield;
+            killDamage = 1;
         }
 
-        return killDamage;
+        return killDamage + damageShield;
     }
 
     /**

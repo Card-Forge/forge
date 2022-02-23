@@ -74,7 +74,7 @@ public class TriggerDrawn extends Trigger {
             final String sIsPresent = this.getParam("ValidPlayerControls");
             final Player p = ((Player)runParams.get(AbilityKey.Player));
             CardCollection list = (CardCollection) p.getCardsIn(ZoneType.Battlefield);
-            list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(),
+            list = CardLists.getValidCards(list, sIsPresent, this.getHostCard().getController(),
                     this.getHostCard(), this);
             if (list.size() == 0) {
                 return false;

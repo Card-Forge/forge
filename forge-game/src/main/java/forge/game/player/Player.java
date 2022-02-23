@@ -846,6 +846,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         return assignedDamage.keySet();
     }
 
+    public final int getAssignedDamage(final Card c) {
+        return assignedDamage.get(c);
+    }
+
     public final int getAssignedDamage(final String type) {
         final Map<Card, Integer> valueMap = Maps.newHashMap();
         for (final Card c : assignedDamage.keySet()) {
@@ -3433,6 +3437,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return;
         }
         if (c.isInZone(ZoneType.Sideboard)) { // Sideboard Lesson to Hand
+            game.getAction().reveal(new CardCollection(c), c.getOwner(), true);
             Card moved = game.getAction().moveTo(ZoneType.Hand, c, sa);
             table.put(ZoneType.Sideboard, ZoneType.Hand, moved);
         } else if (c.isInZone(ZoneType.Hand)) { // Discard and Draw

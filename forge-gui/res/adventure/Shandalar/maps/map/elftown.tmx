@@ -20,7 +20,7 @@
    eJydVVFuwjAMdWFQUO/AzxCdhrQTIL52GOjEP+IA/HIDNmmTEMcoH0N0uwA34ZNGTRTXdZzQJ1lx6tgvdpwGwI1ZB+AzaifzjhCYINfjNqn0K/HNBL+T1j9KWZWy7jb586Yrm+OmK+8T7+MnqcZD6XeMLD/duwuh6zBOzLdhyZ1Ej/OaWNPY2rCucNbjd9KMY/Jum+8l5vVQtOVdDAB2/Ur+Pby4Hqkeuf6SeH/1/BXZaL607lI9VNzUbRbronJ/Y+qekzlF5olreN+FNSZ2yvBchB508U6Qnd7vqaO3JF6sh+ZL4YpHeYvY9mA28MeV7C9Q7+kl0v8QD8cVwjsh9rHD/9azuquP8DmZM+LOD0PdN3PXtuQ/RP+HBcmXE1MDX50zsHfd96Zx+Y6e6vNnCOPF/Ao5sw8lX1HFuw98j+nbdgehNWrz
   </data>
  </layer>
- <layer id="3" name="Foreground" width="30" height="17">
+ <layer id="3" name="Clutter" width="30" height="17">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
@@ -28,7 +28,7 @@
    eJzT5mFg0AFiWoAsKFYFmq8HxPpA3MYNETsJZJ+ikb0wcBho/hkgPgvEPUB7O7hpax8yAPkTZOchoN1qPKji2EC8EANDghCErSzIwKAiSLmdajQOX2SgimQnte21Y8EuDvIvKI6PIGFygSowvNXIDPMs8q0lC+BKQ9QE+pwMDAac2OWI8a8xHwODCR9VnUR3gB7O9Ixneti1HOi/FVjSEszf9E7X9AbI8ZsDxLl0th8UvlyMDAzcjAg+vQAAOR0c4w==
   </data>
  </layer>
- <layer id="5" name="AboveSprites" width="30" height="17">
+ <layer id="5" name="Rooftops" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFyMBZiIHBRQjCZhdkYOAQHFj3DCawgJn2dnACw5trNMzhYCIHA8MkDvL1i/MxMEjwUc89pAI9zoGze6gATm5gmuceaFeMgpEEAFIgA5M=
   </data>

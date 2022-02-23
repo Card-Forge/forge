@@ -86,13 +86,11 @@ public class ControlExchangeEffect extends SpellAbilityEffect {
             return;
         }
 
-        if (sa.hasParam("Optional")) {
-            if (!sa.getActivatingPlayer().getController().confirmAction(sa, null,
-                    Localizer.getInstance().getMessage("lblExchangeControl",
-                            CardTranslation.getTranslatedName(object1.getName()),
-                            CardTranslation.getTranslatedName(object2.getName())))) {
-                return;
-            }
+        if (sa.hasParam("Optional") && !sa.getActivatingPlayer().getController().confirmAction(sa, null,
+                Localizer.getInstance().getMessage("lblExchangeControl",
+                        CardTranslation.getTranslatedName(object1.getName()),
+                        CardTranslation.getTranslatedName(object2.getName())))) {
+            return;
         }
 
         final long tStamp = game.getNextTimestamp();

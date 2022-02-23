@@ -275,11 +275,9 @@ public class AiBlockController {
                         }
 
                         if (mode == TriggerType.DamageDone) {
-                            if ((!trigParams.containsKey("ValidSource")
-                                        || trigger.matchesValid(attacker, trigParams.get("ValidSource").split(",")))
+                            if (trigger.matchesValidParam("ValidSource", attacker)
                                     && attacker.getNetCombatDamage() > 0
-                                    && (!trigParams.containsKey("ValidTarget")
-                                            || trigger.matchesValid(combat.getDefenderByAttacker(attacker), trigParams.get("ValidTarget").split(",")))) {
+                                    && trigger.matchesValidParam("ValidTarget", combat.getDefenderByAttacker(attacker))) {
                                 value += 50;
                             }
                         } else if (mode == TriggerType.AttackerUnblocked) {
@@ -426,7 +424,6 @@ public class AiBlockController {
         }
 
         attackersLeft = new ArrayList<>(currentAttackers);
-        currentAttackers = new ArrayList<>(attackersLeft);
 
         boolean considerTripleBlock = true;
 
@@ -434,6 +431,11 @@ public class AiBlockController {
         for (final Card attacker : attackersLeft) {
             if (ComputerUtilCombat.combatantCantBeDestroyed(ai, attacker)) {
                 // don't bother with gang blocking if the attacker will regenerate or is indestructible
+                continue;
+            }
+
+            // AI can't handle good blocks with more than three creatures yet
+            if (CombatUtil.getMinNumBlockersForAttacker(attacker, ai) > (considerTripleBlock ? 3 : 2)) {
                 continue;
             }
 
@@ -446,11 +448,6 @@ public class AiBlockController {
             int currentValue; // The value of the creatures in the blockgang
             boolean foundDoubleBlock = false; // if true, a good double block is found
 
-            // AI can't handle good blocks with more than three creatures yet
-            if (CombatUtil.getMinNumBlockersForAttacker(attacker, ai) > (considerTripleBlock ? 3 : 2)) {
-                continue;
-            }
-
             // Try to add blockers that could be destroyed, but are worth less than the attacker
             // Don't use blockers without First Strike or Double Strike if attacker has it
             usableBlockers = CardLists.filter(blockers, new Predicate<Card>() {
@@ -460,8 +457,7 @@ public class AiBlockController {
                             && !ComputerUtilCombat.dealsFirstStrikeDamage(c, false, combat)) {
                         return false;
                     }
-                    final boolean randomTrade = wouldLikeToRandomlyTrade(attacker, c, combat);
-                    return lifeInDanger || randomTrade || ComputerUtilCard.evaluateCreature(c) + diff < ComputerUtilCard.evaluateCreature(attacker);
+                    return lifeInDanger || wouldLikeToRandomlyTrade(attacker, c, combat) || ComputerUtilCard.evaluateCreature(c) + diff < ComputerUtilCard.evaluateCreature(attacker);
                 }
             });
             if (usableBlockers.size() < 2) {

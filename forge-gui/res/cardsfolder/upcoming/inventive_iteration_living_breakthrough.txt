@@ -1,0 +1,28 @@
+Name:Inventive Iteration
+ManaCost:3 U
+Types:Enchantment Saga
+K:Saga:3:DBReturn1,DBReturn2,DBTransform
+SVar:DBReturn1:DB$ ChangeZone | ValidTgts$ Creature,Planeswalker | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ Return up to one target creature or planeswalker to its owner's hand.
+SVar:DBReturn2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Artifact | ChangeNum$ 1 | Mandatory$ True | RememberChanged$ True | SubAbility$ DBDraw | SpellDescription$ Return an artifact card from your graveyard to your hand. If you can't, draw a card.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AlternateMode:DoubleFaced
+DeckHints:Type$Creature|Planeswalker|Artifact
+DeckHas:Ability$Graveyard
+Oracle:(As this Saga enters and after your draw step, add a lore counter.)\nI — Return up to one target creature or planeswalker to its owner's hand.\nII — Return an artifact card from your graveyard to your hand. If you can't, draw a card.\nIII — Exile this Saga, then return it to the battlefield transformed under your control.
+
+ALTERNATE
+
+Name:Living Breakthrough
+ManaCost:no cost
+Colors:blue
+Types:Enchantment Creature Moonfolk
+PT:3/3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever you cast a spell, your opponents can't cast spells with the same mana value as that spell until your next turn.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ OppCantCast | RememberObjects$ TriggeredCard | Duration$ UntilYourNextTurn
+SVar:OppCantCast:Mode$ CantBeCast | ValidCard$ Card.cmcEQX | Caster$ Opponent | Description$ Your opponents can't cast spells with the same mana value as that spell until your next turn.
+SVar:X:Remembered$CardManaCost
+Oracle:Flying\nWhenever you cast a spell, your opponents can't cast spells with the same mana value as that spell until your next turn.

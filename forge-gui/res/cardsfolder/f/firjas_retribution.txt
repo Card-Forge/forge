@@ -6,6 +6,6 @@ SVar:TrigAngel:DB$ Token | TokenAmount$ 1 | TokenScript$ w_4_4_angel_warrior_fly
 SVar:DBAnimateAll:DB$ AnimateAll | ValidCards$ Angel.YouCtrl | Abilities$ TapDestroy | SpellDescription$ Until the end of turn, Angels you control gain "{T}: Destroy target creature with power less than this creature."
 SVar:TapDestroy:AB$ Destroy | Cost$ T | ValidTgts$ Creature.powerLTX | TgtPrompt$ Select target creature with power less than this creature | SpellDescription$ Destroy target creature with power less than this creature.
 SVar:X:Count$CardPower
-SVar:TrigPump:DB$ PumpAll | ValidCards$ Angel.YouCtrl | KW$ Double Strike | SpellDescription$ Angels you control gain Double Strike until end of turn.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Angel.YouCtrl | KW$ Double Strike | SpellDescription$ Angels you control gain double strike until end of turn.
 DeckHints:Type$Angel
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Create a 4/4 white Angel Warrior creature token with flying and vigilance.\nII — Until end of turn, Angels you control gain "{T}: Destroy target creature with power less than this creature's power."\nIII — Angels you control gain double strike until end of turn.

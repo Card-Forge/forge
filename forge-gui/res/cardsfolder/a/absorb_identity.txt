@@ -2,7 +2,7 @@ Name:Absorb Identity
 ManaCost:1 U
 Types:Instant
 A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | RememberChanged$ True | SubAbility$ DBChoice | SpellDescription$ Return target creature to its owner's hand. You may have Shapeshifters you control become copies of that creature until end of turn.
-SVar:DBChoice:DB$ GenericChoice | Choices$ CloneArmy,DBNoop | Defined$ You | SubAbility$ DBCleanup | StackDesription$ You may have Shapeshifters you control become copies of that creature until end of turn.
+SVar:DBChoice:DB$ GenericChoice | Choices$ CloneArmy,DBNoop | Defined$ You | SubAbility$ DBCleanup | StackDescription$ You may have Shapeshifters you control become copies of that creature until end of turn.
 SVar:CloneArmy:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Shapeshifter.YouCtrl | RepeatSubAbility$ DBCopy | SpellDescription$ Shapeshifters you control become copies of that creature until end of turn.
 SVar:DBCopy:DB$ Clone | Defined$ Remembered | CloneTarget$ Imprinted | Duration$ UntilEndOfTurn
 SVar:DBNoop:DB$ Cleanup | SpellDescription$ Do nothing.

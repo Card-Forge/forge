@@ -1,0 +1,10 @@
+Name:Prosperous Thief
+ManaCost:2 U
+Types:Creature Human Ninja
+PT:3/2
+K:Ninjutsu:1 U
+T:Mode$ DamageDoneOnce | ValidSource$ Creature.Ninja+YouCtrl,Creature.Rogue+YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever one or more Ninja or Rogue creatures you control deal combat damage to a player, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac
+DeckHints:Type$Ninja|Rogue
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
+Oracle:Ninjutsu {1}{U} ({1}{U}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever one or more Ninja or Rogue creatures you control deal combat damage to a player, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

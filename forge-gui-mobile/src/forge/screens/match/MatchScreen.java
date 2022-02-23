@@ -6,8 +6,13 @@ import java.util.Map.Entry;
 import com.badlogic.gdx.math.Vector2;
 import forge.animation.ForgeAnimation;
 import forge.assets.FImage;
+import forge.card.CardImageRenderer;
+import forge.card.CardRenderer;
+import forge.card.CardZoom;
 import forge.game.spellability.StackItemView;
 import forge.gui.interfaces.IGuiGame;
+import forge.toolbox.FDisplayObject;
+import forge.util.Utils;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -66,7 +71,7 @@ import forge.util.Localizer;
 public class MatchScreen extends FScreen {
     public static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
 
-    private final Map<PlayerView, VPlayerPanel> playerPanels = Maps.newHashMap();
+    private static final Map<PlayerView, VPlayerPanel> playerPanels = Maps.newHashMap();
     private List<VPlayerPanel> playerPanelsList;
     private final VGameMenu gameMenu;
     private final VPlayers players;
@@ -79,6 +84,7 @@ public class MatchScreen extends FScreen {
     private AbilityEffect activeEffect;
     private BGAnimation bgAnimation;
     private ViewWinLose viewWinLose = null;
+    private List<FDisplayObject> potentialListener;
 
     public MatchScreen(List<VPlayerPanel> playerPanels0) {
         super(new FMenuBar());
@@ -86,6 +92,8 @@ public class MatchScreen extends FScreen {
         scroller = add(new FieldScroller());
 
         int humanCount = 0;
+
+        playerPanels.clear();
 
         for (VPlayerPanel playerPanel : playerPanels0) {
             playerPanels.put(playerPanel.getPlayer(), scroller.add(playerPanel));
@@ -306,7 +314,7 @@ public class MatchScreen extends FScreen {
         return bottomPlayerPanel;
     }
 
-    public Map<PlayerView, VPlayerPanel> getPlayerPanels() {
+    public static Map<PlayerView, VPlayerPanel> getPlayerPanels() {
         return playerPanels;
     }
 
@@ -359,13 +367,17 @@ public class MatchScreen extends FScreen {
                  if (viewWinLose == null) {
                      gameMenu.getChildAt(0).setEnabled(!game.isMulligan());
                      gameMenu.getChildAt(1).setEnabled(!game.isMulligan());
-                     gameMenu.getChildAt(2).setEnabled(!game.isMulligan());
-                     gameMenu.getChildAt(3).setEnabled(false);
+                     if (!Forge.isMobileAdventureMode) {
+                         gameMenu.getChildAt(2).setEnabled(!game.isMulligan());
+                         gameMenu.getChildAt(3).setEnabled(false);
+                     }
                  } else {
                      gameMenu.getChildAt(0).setEnabled(false);
                      gameMenu.getChildAt(1).setEnabled(false);
-                     gameMenu.getChildAt(2).setEnabled(false);
-                     gameMenu.getChildAt(3).setEnabled(true);
+                     if (!Forge.isMobileAdventureMode) {
+                         gameMenu.getChildAt(2).setEnabled(false);
+                         gameMenu.getChildAt(3).setEnabled(true);
+                     }
                  }
              }
         }
@@ -445,6 +457,75 @@ public class MatchScreen extends FScreen {
                 if (phaseLabel != null) {
                     phaseLabel.setActive(true);
                     game.clearNeedsPhaseRedrawn();
+                }
+            }
+        }
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ENABLE_MAGNIFIER) && Forge.magnify && Forge.magnifyToggle) {
+            if (Forge.isLandscapeMode() && !GuiBase.isAndroid() && !CardZoom.isOpen() && potentialListener != null) {
+                for (FDisplayObject object : potentialListener) {
+                    if (object != null) {
+                        if (object instanceof FCardPanel) {
+                            FCardPanel cardPanel = (FCardPanel) object;
+                            try {
+                                if (cardPanel.isHovered()) {
+                                    VPlayerPanel vPlayerPanel = getPlayerPanel(cardPanel.getCard().getController());
+                                    if (vPlayerPanel == null)
+                                        vPlayerPanel = getPlayerPanel(cardPanel.getCard().getOwner());
+                                    if (vPlayerPanel != null) {
+                                        float cardW = getHeight() * 0.45f;
+                                        float cardH = FCardPanel.ASPECT_RATIO * cardW;
+                                        float cardX = !ZoneType.Battlefield.equals(cardPanel.getCard().getZone())
+                                                ? cardPanel.screenPos.x-cardW : cardPanel.screenPos.x+(cardPanel.isTapped()
+                                                ? cardPanel.getWidth() : cardPanel.getWidth()/1.4f);
+                                        if (vPlayerPanel.getSelectedTab() != null && vPlayerPanel.getSelectedTab().isVisible()
+                                                && cardX > vPlayerPanel.getSelectedTab().getDisplayArea().getLeft()) {
+                                            cardX = cardPanel.screenPos.x-cardW;
+                                        }
+                                        if ((cardX+cardW) > scroller.getWidth()+scroller.getLeft())
+                                            cardX = cardPanel.screenPos.x-cardW;
+                                        if (vPlayerPanel.getCommandZone() != null
+                                                && vPlayerPanel.getCommandZone().isVisible() && cardX > vPlayerPanel.getCommandZone().screenPos.x)
+                                            cardX = cardPanel.screenPos.x-cardW;
+                                        float cardY = (cardPanel.screenPos.y-cardH)+cardPanel.getHeight();
+                                        if (vPlayerPanel.getPlayer() == bottomPlayerPanel.getPlayer()) {
+                                            cardY = bottomPlayerPrompt.screenPos.y - cardH;
+                                        }
+                                        else if (cardY < vPlayerPanel.getField().screenPos.y && vPlayerPanel.getPlayer() != bottomPlayerPanel.getPlayer()) {
+                                            cardY = vPlayerPanel.getField().screenPos.y;
+                                            if ((cardY+cardH) > bottomPlayerPrompt.screenPos.y)
+                                                cardY = bottomPlayerPrompt.screenPos.y - cardH;
+                                        }
+                                        if (Forge.magnifyShowDetails)
+                                            CardImageRenderer.drawDetails(g, cardPanel.getCard(), MatchController.instance.getGameView(), false, cardX, cardY, cardW, cardH);
+                                        else
+                                            CardRenderer.drawCard(g, cardPanel.getCard(), cardX, cardY, cardW, cardH, CardRenderer.CardStackPosition.Top, false, false, false, true);
+                                    }
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else if (object instanceof VStack.StackInstanceDisplay) {
+                            try {
+                                CardView cardView = ((VStack.StackInstanceDisplay) object).stackInstance.getSourceCard();
+                                if (object.isHovered() && cardView != null && getStack().isVisible()) {
+                                    float cardW = getHeight() * 0.45f;
+                                    float cardH = FCardPanel.ASPECT_RATIO * cardW;
+                                    float cardX = object.screenPos.x-cardW-Utils.scale(4);
+                                    float cardY = object.screenPos.y-Utils.scale(2);
+                                    if (cardY < topPlayerPanel.getField().screenPos.y)
+                                        cardY = topPlayerPanel.getField().screenPos.y;
+                                    if ((cardY+cardH) > bottomPlayerPrompt.screenPos.y)
+                                        cardY = bottomPlayerPrompt.screenPos.y - cardH;
+                                    if (Forge.magnifyShowDetails)
+                                        CardImageRenderer.drawDetails(g, cardView, MatchController.instance.getGameView(), false, cardX, cardY, cardW, cardH);
+                                    else
+                                        CardRenderer.drawCard(g, cardView, cardX, cardY, cardW, cardH, CardRenderer.CardStackPosition.Top, false, false, false, true);
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -581,7 +662,7 @@ public class MatchScreen extends FScreen {
         }
     }
 
-    public VPlayerPanel getPlayerPanel(final PlayerView playerView) {
+    public static VPlayerPanel getPlayerPanel(final PlayerView playerView) {
         return getPlayerPanels().get(playerView);
     }
 
@@ -775,16 +856,15 @@ public class MatchScreen extends FScreen {
                     for (VPlayerPanel playerPanel : playerPanelsList) {
                         if (playerPanel.getPlayer().getHasLost()) {
                             losers.add(playerPanel);
-                            playerPanelsList.remove(playerPanel);
                         }
                     }
                 }
                 if (!losers.isEmpty()) {
                     float height = 0;
                     for (VPlayerPanel p : losers) {
-                        p.clear();
-                        p.noBG = true;
                         height = p.getAvatar().getHeight();
+                        p.setVisible(false);
+                        playerPanelsList.remove(p);
                         System.out.println("Removed panels: "+p.getPlayer().toString());
                     }
                     losers.clear();
@@ -923,5 +1003,11 @@ public class MatchScreen extends FScreen {
             }
             return false;
         }
+    }
+
+    @Override
+    public void buildTouchListeners(float screenX, float screenY, List<FDisplayObject> listeners) {
+        potentialListener = listeners;
+        super.buildTouchListeners(screenX, screenY, listeners);
     }
 }

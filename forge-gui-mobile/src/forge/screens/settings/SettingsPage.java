@@ -5,6 +5,7 @@ import forge.Forge;
 import forge.Graphics;
 import forge.MulliganDefs;
 import forge.StaticData;
+import forge.adventure.util.Config;
 import forge.ai.AiProfileUtil;
 import forge.assets.*;
 import forge.game.GameLogEntryType;
@@ -116,30 +117,71 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             }
         };
         lstSettings.addItem(settingCJKFonts, 0);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_LANDSCAPE_MODE,
+        if (GuiBase.isAndroid()) {
+            lstSettings.addItem(new BooleanSetting(FPref.UI_LANDSCAPE_MODE,
                 localizer.getMessage("lblLandscapeMode"),
                 localizer.getMessage("nlLandscapeMode")) {
-                    @Override
-                    public void select() {
-                        super.select();
-                        boolean landscapeMode = FModel.getPreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE);
-                        Forge.getDeviceAdapter().setLandscapeMode(landscapeMode); //ensure device able to save off ini file so landscape change takes effect
-                        if (Forge.isLandscapeMode() != landscapeMode) {
-                            FOptionPane.showConfirmDialog(localizer.getMessage("lblRestartForgeDescription"), localizer.getMessage("lblRestartForge"), localizer.getMessage("lblRestart"), localizer.getMessage("lblLater"), new Callback<Boolean>() {
-                                @Override
-                                public void run(Boolean result) {
-                                    if (result) {
-                                        Forge.restart(true);
-                                    }
+                @Override
+                public void select() {
+                    super.select();
+                    boolean landscapeMode = FModel.getPreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE);
+                    Forge.getDeviceAdapter().setLandscapeMode(landscapeMode); //ensure device able to save off ini file so landscape change takes effect
+                    if (Forge.isLandscapeMode() != landscapeMode) {
+                        FOptionPane.showConfirmDialog(localizer.getMessage("lblRestartForgeDescription"), localizer.getMessage("lblRestartForge"), localizer.getMessage("lblRestart"), localizer.getMessage("lblLater"), new Callback<Boolean>() {
+                            @Override
+                            public void run(Boolean result) {
+                                if (result) {
+                                    Forge.restart(true);
                                 }
-                            });
-                        }
+                            }
+                        });
                     }
-                }, 0);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_ANDROID_MINIMIZE_ON_SCRLOCK,
+                }
+            }, 0);
+            lstSettings.addItem(new BooleanSetting(FPref.UI_ANDROID_MINIMIZE_ON_SCRLOCK,
                 localizer.getMessage("lblMinimizeScreenLock"),
                 localizer.getMessage("nlMinimizeScreenLock")),
-                0);
+               0);
+        } else {
+            //fullscreen
+            lstSettings.addItem(new BooleanSetting(FPref.UI_FULLSCREEN_MODE,
+                localizer.getMessage("lblFullScreenMode"),
+                localizer.getMessage("nlFullScreenMode")){
+                @Override
+                public void select() {
+                    super.select();
+                    Config.instance().getSettingData().fullScreen = FModel.getPreferences().getPrefBoolean(FPref.UI_FULLSCREEN_MODE);
+                    Config.instance().saveSettings();
+                }
+            },0);
+            lstSettings.addItem(new CustomSelectSetting(FPref.UI_VIDEO_MODE,
+                localizer.getMessage("lblVideoMode"),
+                localizer.getMessage("nlVideoMode"),
+                new String[]{"720p", "768p", "900p", "1080p"}) {
+                @Override
+                public void valueChanged(String newValue) {
+                    super.valueChanged(newValue);
+                    String mode = newValue;
+                    if (mode == null)
+                        mode = "720p";
+                    Config.instance().getSettingData().videomode = mode;
+                    if (mode.equalsIgnoreCase("768p")) {
+                        Config.instance().getSettingData().width = 1366;
+                        Config.instance().getSettingData().height = 768;
+                    } else if (mode.equalsIgnoreCase("900p")) {
+                        Config.instance().getSettingData().width = 1600;
+                        Config.instance().getSettingData().height = 900;
+                    } else if (mode.equalsIgnoreCase("1080p")) {
+                        Config.instance().getSettingData().width = 1920;
+                        Config.instance().getSettingData().height = 1080;
+                    } else {
+                        Config.instance().getSettingData().width = 1280;
+                        Config.instance().getSettingData().height = 720;
+                    }
+                    Config.instance().saveSettings();
+                }
+            }, 0);
+        }
         lstSettings.addItem(new BooleanSetting(FPref.USE_SENTRY,
                 localizer.getMessage("lblAutomaticBugReports"),
                 localizer.getMessage("nlAutomaticBugReports")),
@@ -557,6 +599,20 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("lblMatchScrollIndicator"),
                 localizer.getMessage("nlMatchScrollIndicator")),
                 4);
+        if (!GuiBase.isAndroid()) {
+            lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_MAGNIFIER,
+                    localizer.getMessage("lblEnableMagnifier"),
+                    localizer.getMessage("nlEnableMagnifier")){
+                    @Override
+                    public void select() {
+                        super.select();
+                        //set default
+                        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_MAGNIFIER)) {
+                            Forge.setCursor(FSkin.getCursor().get(0), "0");
+                        }
+                }
+            },4);
+        }
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_FPS,
                 localizer.getMessage("lblShowFPSDisplay"),
                 localizer.getMessage("nlShowFPSDisplay")){
@@ -595,13 +651,17 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("lblShowCardIDOverlays"),
                 localizer.getMessage("nlShowCardIDOverlays")),
                 5);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_DRAFT_RANKING,
+                localizer.getMessage("lblShowDraftRankingOverlay"),
+                localizer.getMessage("nlShowDraftRankingOverlay")),
+                5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_ABILITY_ICONS,
                 localizer.getMessage("lblShowAbilityIconsOverlays"),
                 localizer.getMessage("nlShowAbilityIconsOverlays")),
                 5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_USE_LASER_ARROWS,
-                        localizer.getMessage("lblUseLaserArrows"),
-                        localizer.getMessage("nlUseLaserArrows")),
+                localizer.getMessage("lblUseLaserArrows"),
+                localizer.getMessage("nlUseLaserArrows")),
                 5);
         //Vibration Options
         lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LIFE_LOSS,

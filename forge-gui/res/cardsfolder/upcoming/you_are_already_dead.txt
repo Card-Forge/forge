@@ -1,0 +1,6 @@
+Name:You Are Already Dead
+ManaCost:B
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature.wasDealtDamageThisTurn | TgtPrompt$ Select target creature that was dealt damage this turn | SubAbility$ DBDraw | SpellDescription$ Destroy target creature that was dealt damage this turn.
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+Oracle:Destroy target creature that was dealt damage this turn.\nDraw a card.

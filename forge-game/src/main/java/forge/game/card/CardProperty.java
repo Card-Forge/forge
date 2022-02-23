@@ -32,6 +32,7 @@ import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Collections;
 import java.util.List;
@@ -633,18 +634,21 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("DamagedBy")) {
+            List<Card> damaged = Lists.newArrayList();
+            for (Pair<Card, Integer> pair : card.getReceivedDamageFromThisTurn()) {
+                damaged.add(pair.getLeft());
+            }
             if (property.endsWith("Source") || property.equals("DamagedBy")) {
-                if (!card.getReceivedDamageFromThisTurn().containsKey(source)) {
+                if (!damaged.contains(source)) {
                     return false;
                 }
             } else {
                 String prop = property.substring("DamagedBy".length());
-                final Iterable<Card> list = Iterables.filter(card.getReceivedDamageFromThisTurn().keySet(), Card.class);
-                boolean found = Iterables.any(list, CardPredicates.restriction(prop, sourceController, source, spellAbility));
+                boolean found = Iterables.any(damaged, CardPredicates.restriction(prop, sourceController, source, spellAbility));
 
                 if (!found) {
                     for (Card d : AbilityUtils.getDefinedCards(source, prop, spellAbility)) {
-                        if (card.getReceivedDamageFromThisTurn().containsKey(d)) {
+                        if (damaged.contains(d)) {
                             found = true;
                             break;
                         }
@@ -1177,7 +1181,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {
-            if ((card.getReceivedDamageFromThisTurn().keySet()).isEmpty()) {
+            if (card.getReceivedDamageFromPlayerThisTurn().isEmpty()) {
                 return false;
             }
         } else if (property.startsWith("dealtDamageThisTurn")) {
@@ -1583,8 +1587,8 @@ public class CardProperty {
         } else if (property.startsWith("blockedByThisTurn")) {
             return !card.getBlockedByThisTurn().isEmpty();
         } else if (property.startsWith("blockedValidThisTurn ")) {
-            CardCollectionView blocked = card.getBlockedThisTurn();
-            if (blocked == null) {
+            List<Card> blocked = card.getBlockedThisTurn();
+            if (blocked.isEmpty()) {
                 return false;
             }
             String valid = property.split(" ")[1];
@@ -1600,8 +1604,8 @@ public class CardProperty {
             }
             return false;
         } else if (property.startsWith("blockedByValidThisTurn ")) {
-            CardCollectionView blocked = card.getBlockedByThisTurn();
-            if (blocked == null) {
+            List<Card> blocked = card.getBlockedByThisTurn();
+            if (blocked.isEmpty()) {
                 return false;
             }
             String valid = property.split(" ")[1];

@@ -17,6 +17,7 @@
  */
 package forge.game.cost;
 
+import forge.card.CardType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
@@ -87,20 +88,33 @@ public class CostTapType extends CostPartWithList {
     @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Tap ");
 
         final Integer i = this.convertAmount();
         final String desc = this.getDescriptiveType();
         final String type = this.getType();
-        
+
+        if (type.contains("+withTotalPowerGE")) {
+            String num = type.split("\\+withTotalPowerGE")[1];
+            sb.append("Tap any number of untapped creatures you control other than CARDNAME with total power ");
+            sb.append(num).append("or greater");
+            return sb.toString();
+        }
+
+        sb.append("Tap ");
         if (type.contains("sharesCreatureTypeWith")) {
             sb.append("two untapped creatures you control that share a creature type");
-        } else if (type.contains("+withTotalPowerGE")) {
-            String num = type.split("\\+withTotalPowerGE")[1];
-            sb.append("Tap any number of untapped creatures you control other than CARDNAME with total power ").append(num).append("or greater");
+        } else if (type.contains("Other")) {
+            String rep = type.contains(".Other") ? ".Other" : "+Other";
+            String descTrim = desc.replace(rep, "");
+            if (CardType.CoreType.isValidEnum(descTrim)) {
+                descTrim = descTrim.toLowerCase();
+            }
+            sb.append("another untapped ").append(descTrim);
+            if (!descTrim.contains("you control")) {
+                sb.append(" you control");
+            }
         } else {
-            sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), "untapped " + desc));
-            sb.append(" you control");
+            sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), "untapped " + desc)).append(" you control");
         }
         return sb.toString();
     }
@@ -170,7 +184,7 @@ public class CostTapType extends CostPartWithList {
         }
 
         final int amount = this.getAbilityAmount(ability);
-        return (typeList.size() != 0) && (typeList.size() >= amount);
+        return typeList.size() != 0 && typeList.size() >= amount;
     }
 
     /* (non-Javadoc)

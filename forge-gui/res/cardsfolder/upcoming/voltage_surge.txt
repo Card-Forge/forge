@@ -1,0 +1,9 @@
+Name:Voltage Surge
+ManaCost:R
+Types:Instant
+K:Kicker:Sac<1/Artifact>:Generic
+A:SP$ DealDamage | NumDmg$ X | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ CARDNAME deals 2 damage to target creature or planeswalker. If this spell's additional cost was paid, CARDNAME deals 4 damage instead.
+SVar:X:Count$OptionalGenericCostPaid.4.2
+DeckHints:Type$Artifact
+DeckHas:Ability$Sacrifice
+Oracle:As an additional cost to cast this spell, you may sacrifice an artifact.\nVoltage Surge deals 2 damage to target creature or planeswalker. If this spell's additional cost was paid, Voltage Surge deals 4 damage instead.

@@ -281,6 +281,8 @@ public final class CardEdition implements Comparable<CardEdition> {
     private String additionalUnlockSet = "";
     private String boosterMustContain = "";
     private String boosterReplaceSlotFromPrintSheet = "";
+    private String sheetReplaceCardFromSheet = "";
+    private String sheetReplaceCardFromSheet2 = "";
     private String doublePickDuringDraft = "";
     private String[] chaosDraftThemes = new String[0];
 
@@ -373,6 +375,8 @@ public final class CardEdition implements Comparable<CardEdition> {
     public String getDoublePickDuringDraft() { return doublePickDuringDraft; }
     public String getBoosterMustContain() { return boosterMustContain; }
     public String getBoosterReplaceSlotFromPrintSheet() { return boosterReplaceSlotFromPrintSheet; }
+    public String getSheetReplaceCardFromSheet() { return sheetReplaceCardFromSheet; }
+    public String getSheetReplaceCardFromSheet2() { return sheetReplaceCardFromSheet2; }
     public String[] getChaosDraftThemes() { return chaosDraftThemes; }
 
     public List<CardInSet> getCards() { return cardMap.get("cards"); }
@@ -703,7 +707,8 @@ public final class CardEdition implements Comparable<CardEdition> {
 
             res.boosterMustContain = section.get("BoosterMustContain", ""); // e.g. Dominaria guaranteed legendary creature
             res.boosterReplaceSlotFromPrintSheet = section.get("BoosterReplaceSlotFromPrintSheet", ""); // e.g. Zendikar Rising guaranteed double-faced card
-
+            res.sheetReplaceCardFromSheet = section.get("SheetReplaceCardFromSheet", "");
+            res.sheetReplaceCardFromSheet2 = section.get("SheetReplaceCardFromSheet2", "");
             res.chaosDraftThemes = section.get("ChaosDraftThemes", "").split(";"); // semicolon separated list of theme names
 
             return res;

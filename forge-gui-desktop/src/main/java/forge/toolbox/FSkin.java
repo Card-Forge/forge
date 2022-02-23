@@ -1089,9 +1089,9 @@ public class FSkin {
             return str;
         }
         //format mana symbols to display as icons
-        pattern = "\\{([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}"; //fancy pattern needed so "/" can be omitted from replacement
+        pattern = "\\{([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)\\}"; //fancy pattern needed so "/" can be omitted from replacement
         try {
-            replacement = "<img src=\"" + new File(ForgeConstants.CACHE_SYMBOLS_DIR + "/$1$2$3.png").toURI().toURL().toString() + "\" width=" + SYMBOL_WIDTH + " height=" + SYMBOL_HEIGHT + ">";
+            replacement = "<img src=\"" + new File(ForgeConstants.CACHE_SYMBOLS_DIR + "/$1$2$3$4$5$6.png").toURI().toURL().toString() + "\" width=" + SYMBOL_WIDTH + " height=" + SYMBOL_HEIGHT + ">";
             str = str.replaceAll(pattern, replacement);
         } catch (final MalformedURLException e) {
             e.printStackTrace();
@@ -1108,7 +1108,8 @@ public class FSkin {
     private static String preferredDir;
     private static String preferredName;
     private static BufferedImage bimDefaultSprite, bimFavIcon, bimPreferredSprite, bimFoils, bimQuestDraftDeck, bimOldFoils,
-    bimDefaultAvatars, bimPreferredAvatars, bimTrophies, bimAbilities, bimManaIcons, bimDefaultSleeve, bimDefaultSleeve2, bimDefaultDeckbox, bimPrefferedSetLogo, bimDefaultWatermark;
+    bimDefaultAvatars, bimPreferredAvatars, bimTrophies, bimAbilities, bimManaIcons, bimPhyrexian, bimDefaultSleeve,
+            bimDefaultSleeve2, bimDefaultDeckbox, bimPrefferedSetLogo, bimDefaultWatermark, bimDefaultDraftRank;
     private static int x0, y0, w0, h0, newW, newH, preferredW, preferredH;
     private static int[] tempCoords;
     private static int defaultFontSize = 12;
@@ -1249,6 +1250,8 @@ public class FSkin {
         final File f15 = new File(defaultDir + ForgeConstants.SPRITE_SETLOGO_FILE);
         final File f16 = new File(preferredDir + ForgeConstants.SPRITE_SETLOGO_FILE);
         final File f17 = new File(defaultDir + ForgeConstants.SPRITE_WATERMARK_FILE);
+        final File f18 = new File(defaultDir +ForgeConstants.SPRITE_PHYREXIAN_FILE);
+        final File f19 = new File(defaultDir + ForgeConstants.SPRITE_DRAFTRANKS_FILE);
 
         try {
             int p = 0;
@@ -1257,6 +1260,8 @@ public class FSkin {
             bimAbilities = ImageIO.read(f10);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimManaIcons = ImageIO.read(f11);
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
+            bimPhyrexian = ImageIO.read(f18);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimPreferredSprite = ImageIO.read(f2);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
@@ -1271,6 +1276,8 @@ public class FSkin {
             bimDefaultSleeve2 = ImageIO.read(f13);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimDefaultDeckbox = ImageIO.read(f14);
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
+            bimDefaultDraftRank = ImageIO.read(f19);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimPrefferedSetLogo = f16.exists() ? ImageIO.read(f16) : ImageIO.read(f15);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
@@ -1337,8 +1344,14 @@ public class FSkin {
                 case MANAICONS:
                     setImage(prop, bimManaIcons);
                     break;
+                case PHYREXIAN:
+                    setImage(prop, bimPhyrexian);
+                    break;
                 case DECKBOX:
                     setImage(prop, bimDefaultDeckbox);
+                    break;
+                case DRAFTRANKS:
+                    setImage(prop, bimDefaultDraftRank);
                     break;
                 case SETLOGO:
                     setImage(prop, bimPrefferedSetLogo);
@@ -1369,11 +1382,13 @@ public class FSkin {
         bimDefaultSleeve.flush();
         bimDefaultSleeve2.flush();
         bimDefaultDeckbox.flush();
+        bimDefaultDraftRank.flush();
         bimPrefferedSetLogo.flush();
         bimDefaultWatermark.flush();
         bimQuestDraftDeck.flush();
         bimTrophies.flush();
         bimAbilities.flush();
+        bimPhyrexian.flush();
         bimManaIcons.flush();
 
         if (bimPreferredAvatars != null) { bimPreferredAvatars.flush(); }
@@ -1386,12 +1401,14 @@ public class FSkin {
         bimDefaultSleeve = null;
         bimDefaultSleeve2 = null;
         bimDefaultDeckbox = null;
+        bimDefaultDraftRank = null;
         bimPrefferedSetLogo = null;
         bimDefaultWatermark = null;
         bimPreferredAvatars = null;
         bimQuestDraftDeck = null;
         bimTrophies = null;
         bimAbilities = null;
+        bimPhyrexian = null;
         bimManaIcons = null;
 
         //establish encoding symbols
@@ -1436,6 +1453,16 @@ public class FSkin {
         addEncodingSymbol("B/P", FSkinProp.IMG_MANA_PHRYX_B);
         addEncodingSymbol("R/P", FSkinProp.IMG_MANA_PHRYX_R);
         addEncodingSymbol("G/P", FSkinProp.IMG_MANA_PHRYX_G);
+        addEncodingSymbol("P/B/G", FSkinProp.IMG_MANA_PHRYX_BG);
+        addEncodingSymbol("P/B/R", FSkinProp.IMG_MANA_PHRYX_BR);
+        addEncodingSymbol("P/G/U", FSkinProp.IMG_MANA_PHRYX_GU);
+        addEncodingSymbol("P/G/W", FSkinProp.IMG_MANA_PHRYX_GW);
+        addEncodingSymbol("P/R/G", FSkinProp.IMG_MANA_PHRYX_RG);
+        addEncodingSymbol("P/R/W", FSkinProp.IMG_MANA_PHRYX_RW);
+        addEncodingSymbol("P/U/B", FSkinProp.IMG_MANA_PHRYX_UB);
+        addEncodingSymbol("P/U/R", FSkinProp.IMG_MANA_PHRYX_UR);
+        addEncodingSymbol("P/W/B", FSkinProp.IMG_MANA_PHRYX_WB);
+        addEncodingSymbol("P/W/U", FSkinProp.IMG_MANA_PHRYX_WU);
         for (int i = 0; i <= 20; i++) {
             addEncodingSymbol(String.valueOf(i), FSkinProp.valueOf("IMG_MANA_" + i));
         }

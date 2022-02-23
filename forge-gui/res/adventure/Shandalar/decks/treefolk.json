@@ -1,0 +1,10 @@
+{                                    
+"name":"Treefolk",
+  "template":
+  {
+   "count":60,
+   "colors":["Green"],
+   "tribe":"Treefolk",        
+   "rares":0.8
+  }
+}

@@ -5,9 +5,9 @@
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Hidden Collision" width="30" height="17">
+ <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBi8IJqXgWEXDwRH8aLyYWK0sHM3D4K/E8iW5UFVs5PKdqPbCQPo9lLbbmzm4xOXxiFOKtgLNKeem/72oqcffO6pBfL3UMleXP6CuQcGqJ2uByp+R6q9O3lQ0xc6huVxWvsXF6Bm/q3Dkn+xgToq5iNQGErjKDuQASjvyqLlcWrYjc/fMH9S006YvejlFSnyuAAAa7Itcg==
+   eJxjYBi8IJqXgWEXDwRH8aLyYWK0sHM3D4K/E8iW5UFVs5PKdqPbCQPo9lLbbmzm4xOXxiFOKtgLNKeem/72oqcffO6pBfL3UMleXP6CuQcGqJ2uByp+R6q9O3lQ0xc6huVxWvsXF6Bm/q3Dkn+xgToq5iNQGErjKDuQASjvyqLlcWrYjc/fMH9S006YvdjKLEJyhAAA1Mou/g==
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -41,7 +41,7 @@
    </properties>
   </object>
   <object id="51" template="../obj/treasure.tx" x="264" y="48.8333"/>
-  <object id="52" template="../obj/gold.tx" x="192" y="37.5"/>
+  <object id="52" template="../obj/gold.tx" x="190.5" y="38.5"/>
   <object id="53" template="../obj/enemy.tx" x="183.5" y="105">
    <properties>
     <property name="enemy" value="Knight"/>

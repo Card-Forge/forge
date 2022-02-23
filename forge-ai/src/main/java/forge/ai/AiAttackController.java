@@ -66,7 +66,7 @@ import forge.util.collect.FCollectionView;
 public class AiAttackController {
 
     // possible attackers and blockers
-    private final List<Card> attackers;
+    private List<Card> attackers;
     private final List<Card> blockers;
 
     private List<Card> oppList; // holds human player creatures
@@ -75,7 +75,7 @@ public class AiAttackController {
     private final Player ai;
     private Player defendingOpponent;
 
-    private int aiAggression = 0; // added by Masher, how aggressive the ai is attack will be depending on circumstances
+    private int aiAggression = 0; // how aggressive the ai is attack will be depending on circumstances
     private final boolean nextTurn;
 
     /**
@@ -94,12 +94,7 @@ public class AiAttackController {
         this.oppList = getOpponentCreatures(this.defendingOpponent);
         this.myList = ai.getCreaturesInPlay();
         this.nextTurn = nextTurn;
-        this.attackers = new ArrayList<>();
-        for (Card c : myList) {
-            if (canAttackWrapper(c, this.defendingOpponent)) {
-                attackers.add(c);
-            }
-        }
+        refreshAttackers(this.defendingOpponent);
         this.blockers = getPossibleBlockers(oppList, this.attackers, this.nextTurn);
     } // overloaded constructor to evaluate attackers that should attack next turn
 
@@ -115,6 +110,15 @@ public class AiAttackController {
         }
         this.blockers = getPossibleBlockers(oppList, this.attackers, this.nextTurn);
     } // overloaded constructor to evaluate single specified attacker
+
+    private void refreshAttackers(GameEntity defender) {
+        this.attackers = new ArrayList<>();
+        for (Card c : myList) {
+            if (canAttackWrapper(c, defender)) {
+                attackers.add(c);
+            }
+        }
+    }
 
     public static List<Card> getOpponentCreatures(final Player defender) {
         List<Card> defenders = new ArrayList<>(defender.getCreaturesInPlay());
@@ -153,9 +157,14 @@ public class AiAttackController {
         }
     }
 
-    /** Choose opponent for AI to attack here. Expand as necessary. */
+    /**
+     * Choose opponent for AI to attack here. Expand as necessary.
+     * No strategy to secure a second place instead, since Forge has no variant for that
+     */
     public static Player choosePreferredDefenderPlayer(Player ai) {
         Player defender = ai.getWeakestOpponent(); //Concentrate on opponent within easy kill range
+
+        // TODO connect with evaluateBoardPosition and only fall back to random when no player is the biggest threat by a fair margin
 
         if (defender.getLife() > 8) { //Otherwise choose a random opponent to ensure no ganging up on players
             // TODO should we cache the random for each turn? some functions like shouldPumpCard base their decisions on the assumption who will be attacked
@@ -440,17 +449,21 @@ public class AiAttackController {
             return false;
         }
 
+        CardLists.sortByPowerDesc(oppList);
         for (Card attacker : oppList) {
             if (!ComputerUtilCombat.canAttackNextTurn(attacker)) {
                 continue;
             }
             if (blockersLeft > 0 && CombatUtil.canBeBlocked(attacker, ai)) {
+                // TODO doesn't take trample into account
                 blockersLeft--;
                 continue;
             }
 
             // Test for some special triggers that can change the creature in combat
             Card effectiveAttacker = ComputerUtilCombat.applyPotentialAttackCloneTriggers(attacker);
+
+            // TODO commander
 
             totalAttack += ComputerUtilCombat.damageIfUnblocked(effectiveAttacker, ai, null, false);
             totalPoison += ComputerUtilCombat.poisonIfUnblocked(effectiveAttacker, ai);
@@ -661,6 +674,13 @@ public class AiAttackController {
      * @return a {@link forge.game.combat.Combat} object.
      */
     public final int declareAttackers(final Combat combat) {
+        final boolean bAssault = doAssault(ai);
+
+        // Determine who will be attacked
+        GameEntity defender = chooseDefender(combat, bAssault);
+        if (defender != defendingOpponent) {
+            refreshAttackers(defender);
+        }
         if (this.attackers.isEmpty()) {
             return aiAggression;
         }
@@ -686,14 +706,11 @@ public class AiAttackController {
             }
         }
 
-        final boolean bAssault = doAssault(ai);
         // TODO: detect Lightmine Field by presence of a card with a specific trigger
         final boolean lightmineField = ai.getGame().isCardInPlay("Lightmine Field");
         // TODO: detect Season of the Witch by presence of a card with a specific trigger
         final boolean seasonOfTheWitch = ai.getGame().isCardInPlay("Season of the Witch");
 
-        // Determine who will be attacked
-        GameEntity defender = chooseDefender(combat, bAssault);
         List<Card> attackersLeft = new ArrayList<>(this.attackers);
 
         // TODO probably use AttackConstraints instead of only GlobalAttackRestrictions?
@@ -715,12 +732,8 @@ public class AiAttackController {
         // because creatures not chosen can't attack.
         if (!nextTurn) {
             for (final Card attacker : this.attackers) {
-                if (!CombatUtil.canAttack(attacker, defender)) {
-                    attackersLeft.remove(attacker);
-                    continue;
-                }
                 boolean mustAttack = false;
-                // TODO for nextTurn check if it was temporary
+                // TODO this might result into trying to attack the wrong player
                 if (attacker.isGoaded()) {
                     mustAttack = true;
                 } else if (attacker.getSVar("MustAttack").equals("True")) {
@@ -734,10 +747,13 @@ public class AiAttackController {
                 } else {
                     // TODO move to static Ability
                     if (attacker.hasKeyword("CARDNAME attacks each combat if able.") || attacker.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
+                        // TODO switch defender if there's one without a cost or it's not the specific player
+                        mustAttack = true;
+                    } else if (attacker.getController().getMustAttackEntityThisTurn() != null && CombatUtil.getAttackCost(ai.getGame(), attacker, defender) == null) {
                         mustAttack = true;
                     }
                 }
-                if (mustAttack || (attacker.getController().getMustAttackEntity() != null && nextTurn) || (attacker.getController().getMustAttackEntityThisTurn() != null && !nextTurn)) {
+                if (mustAttack) {
                     combat.addAttacker(attacker, defender);
                     attackersLeft.remove(attacker);
                     numForcedAttackers++;
@@ -866,7 +882,7 @@ public class AiAttackController {
             if (ComputerUtilCombat.canAttackNextTurn(pCard) && pCard.getNetCombatDamage() > 0) {
                 candidateAttackers.add(pCard);
                 candidateUnblockedDamage += ComputerUtilCombat.damageIfUnblocked(pCard, opp, null, false);
-                computerForces += 1;
+                computerForces++;
             }
         }
 
@@ -885,13 +901,13 @@ public class AiAttackController {
             if (pCard.getNetCombatDamage() > 0 && ComputerUtilCombat.canAttackNextTurn(pCard)) {
                 nextTurnAttackers.add(pCard);
                 candidateCounterAttackDamage += pCard.getNetCombatDamage();
-                humanForces += 1; // player forces they might use to attack
+                humanForces++; // player forces they might use to attack
             }
             // increment player forces that are relevant to an attritional attack - includes walls
 
             Card potentialOppBlocker = getCardCanBlockAnAttacker(pCard, candidateAttackers, true);
             if (potentialOppBlocker != null) {
-                humanForcesForAttritionalAttack += 1;
+                humanForcesForAttritionalAttack++;
                 if (predictEvasion) {
                     candidateAttackers.remove(potentialOppBlocker);
                 }

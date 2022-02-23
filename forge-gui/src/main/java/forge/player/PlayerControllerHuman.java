@@ -17,6 +17,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeSet;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.Range;
@@ -133,6 +134,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.util.CardTranslation;
+import forge.util.DeckAIUtils;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.Localizer;
@@ -470,7 +472,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return null;
         }
 
-        String announceTitle = ability.getParamOrDefault("AnnounceTitle", announce);
+        String announceTitle = "X".equals(announce) ? announce : ability.getParamOrDefault("AnnounceTitle", announce);
         if (cost.isMandatory()) {
             return chooseNumber(ability, localizer.getMessage("lblChooseAnnounceForCard", announceTitle,
                     CardTranslation.getTranslatedName(ability.getHostCard().getName())) , min, max);
@@ -1276,7 +1278,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         // TODO JAVA 8 use getOrDefault
         for (Card c : player.getAllCards()) {
-
             // Changeling are all creature types, they are not interesting for
             // counting creature types
             if (c.hasStartOfKeyword(Keyword.CHANGELING.toString())) {
@@ -2090,31 +2091,35 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void revealAISkipCards(final String message, final Map<Player, Map<DeckSection, List<? extends PaperCard>>> unplayable) {
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            //restore old functionality for mobile version since list of card names can't be zoomed to display the cards
+            for (Player p : unplayable.keySet()) {
+                final Map<DeckSection, List<? extends PaperCard>> removedUnplayableCards = unplayable.get(p);
+                final List<PaperCard> labels = new ArrayList<>();
+                for (final DeckSection s: new TreeSet<>(removedUnplayableCards.keySet())) {
+                    if (DeckSection.Sideboard.equals(s))
+                        continue;
+                    for (PaperCard c: removedUnplayableCards.get(s)) {
+                        labels.add(c);
+                    }
+                }
+                if (!labels.isEmpty())
+                    getGui().reveal(localizer.getMessage("lblActionFromPlayerDeck", message, Lang.getInstance().getPossessedObject(MessageUtil.mayBeYou(player, p), "")),
+                        ImmutableList.copyOf(labels));
+            }
+            return;
+        }
         for (Player p : unplayable.keySet()) {
             final Map<DeckSection, List<? extends PaperCard>> removedUnplayableCards = unplayable.get(p);
             final List<String> labels = new ArrayList<>();
-            for (final DeckSection s: removedUnplayableCards.keySet()) {
-                labels.add("=== " + getLocalizedDeckSection(s) + " ===");
+            for (final DeckSection s: new TreeSet<>(removedUnplayableCards.keySet())) {
+                labels.add("=== " + DeckAIUtils.getLocalizedDeckSection(localizer, s) + " ===");
                 for (PaperCard c: removedUnplayableCards.get(s)) {
                     labels.add(c.toString());
                 }
             }
             getGui().reveal(localizer.getMessage("lblActionFromPlayerDeck", message, Lang.getInstance().getPossessedObject(MessageUtil.mayBeYou(player, p), "")),
                     ImmutableList.copyOf(labels));
-        }
-    }
-
-    private String getLocalizedDeckSection(DeckSection d) {
-        switch (d) {
-            case Avatar: return localizer.getMessage("lblAvatar");
-            case Commander: return localizer.getMessage("lblCommanderDeck");
-            case Main: return localizer.getMessage("lblMainDeck");
-            case Sideboard: return localizer.getMessage("lblSideboard");
-            case Planes: return localizer.getMessage("lblPlanarDeck");
-            case Schemes: return localizer.getMessage("lblSchemeDeck");
-            case Conspiracy: return /* TODO localise */ "Conspiracy";
-            case Dungeon: return /* TODO localise */ "Dungeon";
-            default: return /* TODO better handling */ "UNKNOWN";
         }
     }
 

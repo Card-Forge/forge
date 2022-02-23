@@ -1,11 +1,14 @@
 package forge.toolbox;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
+import forge.Forge;
+import forge.assets.FSkin;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.util.Utils;
@@ -73,10 +76,20 @@ public abstract class FGestureAdapter extends InputAdapter {
     }
 
     @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        Forge.magnify = true;
+        return super.mouseMoved(screenX, screenY);
+    }
+
+    @Override
     public boolean touchDown(int x, int y, int pointer, int button) {
         return touchDown((float)x, (float)y, pointer, button);
     }
     private boolean touchDown(float x, float y, int pointer, int button) {
+        if (button == Input.Buttons.RIGHT) {
+            //catch right click
+            return true;
+        }
         if (pointer > 1) { return false; }
 
         if (pointer == 0) {
@@ -159,6 +172,35 @@ public abstract class FGestureAdapter extends InputAdapter {
         return touchUp((float)x, (float)y, pointer, button);
     }
     private boolean touchUp(float x, float y, int pointer, int button) {
+        if (button == Input.Buttons.RIGHT) {
+            //catch right click and set toggle magnify
+            if (inTapSquare) {
+                // handle taps
+                long time = Gdx.input.getCurrentEventTime();
+                if (tapCount == 2 //treat 3rd tap as a first tap, and 4th as a double tap
+                        || lastTapButton != button
+                        || lastTapPointer != pointer
+                        || time - lastTapTime > tapCountInterval
+                        || !isWithinTapSquare(x, y, lastTapX, lastTapY)) {
+                    Forge.magnifyShowDetails = !Forge.magnifyShowDetails;
+                    tapCount = 0;
+                }
+                tapCount++;
+                lastTapTime = time;
+                lastTapX = x;
+                lastTapY = y;
+                lastTapButton = button;
+                lastTapPointer = pointer;
+                Forge.magnifyToggle = !Forge.magnifyToggle;
+                Forge.magnify = Forge.magnifyToggle;
+                if (Forge.magnifyToggle) {
+                    Forge.setCursor(FSkin.getCursor().get(1), "1");
+                } else {
+                    Forge.setCursor(FSkin.getCursor().get(2), "2");
+                }
+            }
+            return false;
+        }
         if (pointer > 1) { return false; }
 
         if (longPressHandled) { //do nothing more if long press handled
@@ -194,6 +236,7 @@ public abstract class FGestureAdapter extends InputAdapter {
             lastTapButton = button;
             lastTapPointer = pointer;
             if (wasPressed) {
+                Forge.magnify = false;
                 return tap(x, y, tapCount);
             }
             return false;

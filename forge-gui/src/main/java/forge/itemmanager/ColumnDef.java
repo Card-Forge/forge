@@ -63,9 +63,11 @@ public enum ColumnDef {
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    if (from.getKey() instanceof PaperCard)
-                        return toSortableName(from.getKey().toString());
-                    return toSortableName(from.getKey().getName());
+                    if (from.getKey() instanceof PaperCard) {
+                        String sortableName = ((PaperCard)from.getKey()).getSortableName();
+                        return sortableName == null ? InventoryItem.toSortableName(from.getKey().getName()) : sortableName;
+                    }
+                    return InventoryItem.toSortableName(from.getKey().getName());
                 }
             },
             new Function<Entry<? extends InventoryItem, Integer>, Object>() {
@@ -463,13 +465,13 @@ public enum ColumnDef {
         new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
             @Override
             public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                return toDeck(from.getKey()).getAI() ? Integer.valueOf(1) : Integer.valueOf(-1);
+                return toDeck(from.getKey()).getAI().inMainDeck;
             }
         },
         new Function<Entry<? extends InventoryItem, Integer>, Object>() {
             @Override
             public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                return toDeck(from.getKey()).getAI()? "" : "X";
+                return toDeck(from.getKey()).getAI();
             }
         }),
     /**
@@ -538,53 +540,6 @@ public enum ColumnDef {
     @Override
     public String toString() {
         return this.longName;
-    }
-
-    /**
-     * Converts a card name to a sortable name.
-     * Trim leading quotes, then move article last, then replace characters.
-     * Because An-Havva Constable.
-     * Capitals and lowercase sorted as one: "my deck" before "Myr Retribution"
-     * Apostrophes matter, though: "D'Avenant" before "Danitha"
-     * TO DO: Commas before apostrophes: "Rakdos, Lord of Riots" before "Rakdos's Return"
-     *
-     * @param printedName The name of the card.
-     * @return A sortable name.
-     */
-    private static String toSortableName(String printedName) {
-        if (printedName.startsWith("\"")) printedName = printedName.substring(1);
-        return moveArticleToEnd(printedName).toLowerCase().replaceAll("[^\\s'0-9a-z]", "");
-    }
-
-
-    /**
-     * Article words. These words get kicked to the end of a sortable name.
-     * For localization, simply overwrite this array with appropriate words.
-     * Words in this list are used by the method String moveArticleToEnd(String), useful
-     * for alphabetizing phrases, in particular card or other inventory object names.
-     */
-    private static final String[] ARTICLE_WORDS = {
-            "A",
-            "An",
-            "The"
-    };
-
-    /**
-     * Detects whether a string begins with an article word
-     *
-     * @param str The name of the card.
-     * @return The sort-friendly name of the card. Example: "The Hive" becomes "Hive The".
-     */
-    private static String moveArticleToEnd(String str) {
-        String articleWord;
-        for (int i = 0; i < ARTICLE_WORDS.length; i++) {
-            articleWord = ARTICLE_WORDS[i];
-            if (str.startsWith(articleWord + " ")) {
-                str = str.substring(articleWord.length() + 1) + " " + articleWord;
-                return str;
-            }
-        }
-        return str;
     }
 
     private static String toType(final InventoryItem i) {

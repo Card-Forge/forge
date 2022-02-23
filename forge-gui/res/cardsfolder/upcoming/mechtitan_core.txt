@@ -1,0 +1,12 @@
+Name:Mechtitan Core
+ManaCost:2
+Types:Artifact Vehicle
+PT:2/4
+A:AB$ Token | Cost$ 5 Exile<1/CARDNAME> Exile<4/Artifact.Creature+Other;Vehicle.Other/other artifact creatures and/or Vehicle> | CostDesc$ {5}, Exile CARDNAME and four other artifact creatures and/or Vehicles you control: | TokenScript$ mechtitan | RememberCostCards$ True | RememberCostExcept$ Self | ImprintTokens$ True | SubAbility$ DBEffect | SpellDescription$ Create Mechtitan, a legendary 10/10 Construct artifact creature token with flying, vigilance, trample, lifelink, and haste that's all colors.
+SVar:DBEffect:DB$ Effect | Triggers$ TrigLeavesBattlefield | RememberObjects$ RememberedLKI | ForgetObjects$ EffectSource | ForgetOnMoved$ Exile | ImprintCards$ Imprinted | Duration$ Permanent | SubAbility$ DBCleanup | SpellDescription$ When that token leaves the battlefield, return all cards exiled with CARDNAME except CARDNAME to the battlefield tapped under their owners' control.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:TrigLeavesBattlefield:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ DBReturn | TriggerZones$ Command | TriggerDescription$ When that token leaves the battlefield, return all cards exiled with EFFECTSOURCE except EFFECTSOURCE to the battlefield tapped under their owners' control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Tapped$ True
+K:Crew:2
+DeckHints:Type$Vehicle
+Oracle:{5}, Exile Mechtitan Core and four other artifact creatures and/or Vehicles you control: Create Mechtitan, a legendary 10/10 Construct artifact creature token with flying, vigilance, trample, lifelink, and haste that's all colors. When that token leaves the battlefield, return all cards exiled with Mechtitan Core except Mechtitan Core to the battlefield tapped under their owners' control.\nCrew 2

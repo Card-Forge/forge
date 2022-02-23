@@ -318,7 +318,7 @@ public class CombatUtil {
      * @return the {@link Cost} of attacking, or {@code null} if there is no
      *         cost.
      */
-    static Cost getAttackCost(final Game game, final Card attacker, final GameEntity defender) {
+    public static Cost getAttackCost(final Game game, final Card attacker, final GameEntity defender) {
         final Cost attackCost = new Cost(ManaCost.ZERO, true);
         boolean hasCost = false;
         // Sort abilities to apply them in proper order
@@ -339,7 +339,7 @@ public class CombatUtil {
     }
 
     public static boolean payRequiredBlockCosts(Game game, Card blocker, Card attacker) {
-        Cost blockCost = CombatUtil.getBlockCost(game, blocker, attacker);
+        Cost blockCost = getBlockCost(game, blocker, attacker);
         if (blockCost == null) {
             return true;
         }
@@ -348,7 +348,7 @@ public class CombatUtil {
         return blocker.getController().getController().payManaOptional(blocker, blockCost, fakeSA, "Pay cost to declare " + blocker + " a blocker. ", ManaPaymentPurpose.DeclareBlocker);
     }
 
-    static Cost getBlockCost(Game game, Card blocker, Card attacker) {
+    public static Cost getBlockCost(Game game, Card blocker, Card attacker) {
         Cost blockCost = new Cost(ManaCost.ZERO, true);
         // Sort abilities to apply them in proper order
         boolean noCost = true;

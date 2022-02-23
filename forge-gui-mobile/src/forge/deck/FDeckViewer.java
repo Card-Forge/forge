@@ -114,9 +114,12 @@ public class FDeckViewer extends FScreen {
     private DeckSection currentSection;
 
     public static void show(final Deck deck0) {
-        show(deck0, false);
+        show(deck0, false, false);
     }
     public static void show(final Deck deck0, boolean noPreload) {
+        show(deck0, noPreload, false);
+    }
+    public static void show(final Deck deck0, boolean noPreload, boolean showRanking) {
         if (deck0 == null) { return; }
 
         if (!noPreload){
@@ -124,12 +127,12 @@ public class FDeckViewer extends FScreen {
             ImageCache.preloadCache(deck0);
         }
 
-        deckViewer = new FDeckViewer(deck0);
+        deckViewer = new FDeckViewer(deck0, showRanking);
         deckViewer.setRotate180(MatchController.getView() != null && MatchController.getView().isTopHumanPlayerActive());
         Forge.openScreen(deckViewer);
     }
 
-    private FDeckViewer(Deck deck0) {
+    private FDeckViewer(Deck deck0, boolean showRanking) {
         super(new MenuHeader(deck0.getName(), menu) {
             @Override
             protected boolean displaySidebarForLandscapeMode() {
@@ -139,6 +142,7 @@ public class FDeckViewer extends FScreen {
         deck = deck0;
         cardManager = new CardManager(false);
         cardManager.setPool(deck.getMain());
+        cardManager.setShowRanking(showRanking);
 
         currentSection = DeckSection.Main;
         updateCaption();

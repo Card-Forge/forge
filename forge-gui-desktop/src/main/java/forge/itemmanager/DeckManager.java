@@ -68,7 +68,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
      * @param gt
      */
     public DeckManager(final GameType gt, final CDetailPicture cDetailPicture) {
-        super(DeckProxy.class, cDetailPicture, true);
+        super(DeckProxy.class, cDetailPicture, true, false);
         this.gameType = gt;
 
         this.addSelectionListener(new ListSelectionListener() {

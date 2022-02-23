@@ -1,0 +1,8 @@
+Name:Undercity Scrounger
+ManaCost:2 B
+Types:Artifact Creature Human Rogue
+PT:1/4
+A:AB$ Token | Cost$ T | TokenScript$ c_a_treasure_sac | CheckSVar$ X | SVarCompare$ GE1 | SpellDescription$ Create a Treasure token. Activate only if a creature died this turn. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+DeckHas:Ability$Token|Sacrifice & Type$Treasure
+Oracle:{T}: Create a Treasure token. Activate only if a creature died this turn. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

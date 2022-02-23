@@ -72,9 +72,9 @@ public class TriggerAttackersDeclared extends Trigger {
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
         Iterable<GameEntity> attackedTarget = (Iterable<GameEntity>) runParams.get(AbilityKey.AttackedTarget);
 
-        CardCollection attackers = (CardCollection)(runParams.get(AbilityKey.Attackers));
+        CardCollection attackers = (CardCollection) runParams.get(AbilityKey.Attackers);
         if (hasParam("ValidAttackers")) {
-            attackers = CardLists.getValidCards(attackers, getParam("ValidAttackers").split(","), getHostCard().getController(), getHostCard(), this);
+            attackers = CardLists.getValidCards(attackers, getParam("ValidAttackers"), getHostCard().getController(), getHostCard(), this);
             FCollection<GameEntity> defenders = new FCollection<>();
             for (Card attacker : attackers) {
                 defenders.add(attacker.getGame().getCombat().getDefenderByAttacker(attacker));

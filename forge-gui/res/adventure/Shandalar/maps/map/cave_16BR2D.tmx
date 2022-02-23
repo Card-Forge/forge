@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="70">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="70">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgxFI8wy0C0bBKBj6oI57YOzdNYjy71I62LEH6N9oXjpYNAqoAgAGsANM
+  </data>
+ </layer>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzz42Rg8BvFo3gUj+JRPIpH8YjAAAvyrVM=
@@ -30,7 +35,7 @@
     <property name="teleportObjectId" value="75"/>
    </properties>
   </object>
-  <object id="67" template="../obj/enemy.tx" x="206.5" y="183.25">
+  <object id="67" template="../obj/enemy.tx" x="208.5" y="184.75">
    <properties>
     <property name="enemy" value="Djinn"/>
    </properties>

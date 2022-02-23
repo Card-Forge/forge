@@ -2,8 +2,7 @@ Name:Academy Journeymage
 ManaCost:4 U
 Types:Creature Human Wizard
 PT:3/2
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | CheckSVar$ Wizard | SVarCompare$ GE1 | Description$ This spell costs {1} less to cast if you control a Wizard.
-SVar:Wizard:Count$Valid Wizard.YouCtrl
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | IsPresent$ Wizard.YouCtrl | Description$ This spell costs {1} less to cast if you control a Wizard.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target creature an opponent controls to its owner's hand.
 SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Origin$ Battlefield | Destination$ Hand
 DeckHints:Type$Wizard

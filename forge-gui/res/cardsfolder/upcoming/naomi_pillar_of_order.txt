@@ -1,0 +1,11 @@
+Name:Naomi, Pillar of Order
+ManaCost:3 W B
+Types:Legendary Creature Human Advisor
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Artifact.YouCtrl | IsPresent2$ Enchantment.YouCtrl | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, if you control an artifact and an enchantment, create a 2/2 white Samurai creature token with vigilance.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | IsPresent$ Artifact.YouCtrl | IsPresent2$ Enchantment.YouCtrl | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, if you control an artifact and an enchantment, create a 2/2 white Samurai creature token with vigilance.
+SVar:TrigToken:DB$ Token | TokenScript$ w_2_2_samurai_vigilance
+DeckHints:Type$Artifact|Enchantment
+DeckHas:Ability$Token & Type$Samurai
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Naomi, Pillar of Order enters the battlefield or attacks, if you control an artifact and an enchantment, create a 2/2 white Samurai creature token with vigilance.

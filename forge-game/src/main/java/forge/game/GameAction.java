@@ -27,6 +27,7 @@ import java.util.Set;
 
 import forge.util.*;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
@@ -1265,7 +1266,24 @@ public class GameAction {
                         noRegCreats.add(c);
                         checkAgain = true;
                     } else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
-                        for (final Integer dmg : c.getReceivedDamageFromThisTurn().values()) {
+                        // merge entries with same source
+                        List<Integer> dmgList = Lists.newArrayList();
+                        List<Pair<Card, Integer>> remainingDamaged = Lists.newArrayList(c.getReceivedDamageFromThisTurn());
+                        while (!remainingDamaged.isEmpty()) {
+                            Pair <Card, Integer> damaged = remainingDamaged.get(0);
+                            int sum = damaged.getRight();
+                            remainingDamaged.remove(damaged);
+                            for (Pair<Card, Integer> other : Lists.newArrayList(remainingDamaged)) {
+                                if (other.getLeft().equalsWithTimestamp(damaged.getLeft())) {
+                                    sum += other.getRight();
+                                    // once it got counted keep it out
+                                    remainingDamaged.remove(other);
+                                }
+                            }
+                            dmgList.add(sum);
+                        }
+
+                        for (final Integer dmg : dmgList) {
                             if (c.getLethal() <= dmg.intValue() || c.hasBeenDealtDeathtouchDamage()) {
                                 if (desCreats == null) {
                                     desCreats = new CardCollection();
@@ -1854,11 +1872,9 @@ public class GameAction {
     public void reveal(CardCollectionView cards, Player cardOwner) {
         reveal(cards, cardOwner, true);
     }
-
     public void reveal(CardCollectionView cards, Player cardOwner, boolean dontRevealToOwner) {
         reveal(cards, cardOwner, dontRevealToOwner, null);
     }
-
     public void reveal(CardCollectionView cards, Player cardOwner, boolean dontRevealToOwner, String messagePrefix) {
         Card firstCard = Iterables.getFirst(cards, null);
         if (firstCard == null) {
@@ -1866,7 +1882,6 @@ public class GameAction {
         }
         reveal(cards, game.getZoneOf(firstCard).getZoneType(), cardOwner, dontRevealToOwner, messagePrefix);
     }
-
     public void reveal(CardCollectionView cards, ZoneType zt, Player cardOwner, boolean dontRevealToOwner, String messagePrefix) {
         for (Player p : game.getPlayers()) {
             if (dontRevealToOwner && cardOwner == p) {
@@ -2260,15 +2275,19 @@ public class GameAction {
     public void dealDamage(final boolean isCombat, final CardDamageMap damageMap, final CardDamageMap preventMap,
             final GameEntityCounterTable counterTable, final SpellAbility cause) {
         // Clear assigned damage if is combat
-        for (Map.Entry<GameEntity, Map<Card, Integer>> et : damageMap.columnMap().entrySet()) {
-            final GameEntity ge = et.getKey();
-            if (isCombat && ge instanceof Card) {
-                ((Card) ge).clearAssignedDamage();
+        if (isCombat) {
+            for (Map.Entry<GameEntity, Map<Card, Integer>> et : damageMap.columnMap().entrySet()) {
+                final GameEntity ge = et.getKey();
+                if (ge instanceof Card) {
+                    ((Card) ge).clearAssignedDamage();
+                }
             }
         }
 
         // Run replacement effect for each entity dealt damage
         game.getReplacementHandler().runReplaceDamage(isCombat, damageMap, preventMap, counterTable, cause);
+
+        Map<Card, Integer> lethalDamage = Maps.newHashMap();
 
         // Actually deal damage according to replaced damage map
         for (Map.Entry<Card, Map<GameEntity, Integer>> et : damageMap.rowMap().entrySet()) {
@@ -2278,11 +2297,26 @@ public class GameAction {
                 if (e.getValue() <= 0) {
                     continue;
                 }
+
+                if (e.getKey() instanceof Card && !lethalDamage.containsKey(e.getKey())) {
+                    Card c = (Card) e.getKey();
+                    int lethal = 0;
+                    if (c.isCreature()) {
+                        lethal = Math.max(0, c.getLethalDamage());
+                    }
+                    if (c.isPlaneswalker()) {
+                        int lethalPW = c.getCurrentLoyalty();
+                        // 120.10
+                        lethal = c.isCreature() ? Math.min(lethal, lethalPW) : lethalPW;
+                    }
+                    lethalDamage.put(c, lethal);
+                }
+
                 e.setValue(Integer.valueOf(e.getKey().addDamageAfterPrevention(e.getValue(), sourceLKI, isCombat, counterTable)));
                 sum += e.getValue();
             }
 
-            if (sourceLKI.hasKeyword(Keyword.LIFELINK)) {
+            if (sum > 0 && sourceLKI.hasKeyword(Keyword.LIFELINK)) {
                 sourceLKI.getController().gainLife(sum, sourceLKI, cause);
             }
         }
@@ -2315,6 +2349,7 @@ public class GameAction {
         preventMap.clear();
 
         damageMap.triggerDamageDoneOnce(isCombat, game);
+        damageMap.triggerExcessDamage(isCombat, lethalDamage, game);
         damageMap.clear();
 
         counterTable.replaceCounterEffect(game, cause, !isCombat);

@@ -1343,7 +1343,7 @@ public class ComputerUtil {
                 }
 
                 final CardCollection typeList =
-                        CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), source.getController(), source, sa);
+                        CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type, source.getController(), source, sa);
                 for (Card c : typeList) {
                     if (c.getSVar("SacMe").equals("6")) {
                         return true;
@@ -1620,7 +1620,7 @@ public class ComputerUtil {
                 objects = AbilityUtils.getDefinedObjects(source, topStack.getParam("Defined"), topStack);
             } else if (topStack.hasParam("ValidCards")) {
                 CardCollectionView battleField = aiPlayer.getCardsIn(ZoneType.Battlefield);
-                objects = CardLists.getValidCards(battleField, topStack.getParam("ValidCards").split(","), source.getController(), source, topStack);
+                objects = CardLists.getValidCards(battleField, topStack.getParam("ValidCards"), source.getController(), source, topStack);
             } else {
                 return threatened;
             }
@@ -1664,7 +1664,7 @@ public class ComputerUtil {
 
         if (saviourApi == ApiType.PutCounter || saviourApi == ApiType.PutCounterAll) {
             if (saviour != null && saviour.getParam("CounterType").equals("P1P1")) {
-                toughness = AbilityUtils.calculateAmount(saviour.getHostCard(), saviour.getParam("CounterNum"), saviour);
+                toughness = AbilityUtils.calculateAmount(saviour.getHostCard(), saviour.getParamOrDefault("CounterNum", "1"), saviour);
             } else {
                 return threatened;
             }
@@ -2664,13 +2664,13 @@ public class ComputerUtil {
         for (Trigger trigger : theTriggers) {
             final Card source = trigger.getHostCard();
 
+            if (trigger.getMode() != TriggerType.SpellCast) {
+                continue;
+            }
             if (!trigger.zonesCheck(game.getZoneOf(source))) {
                 continue;
             }
             if (!trigger.requirementsCheck(game)) {
-                continue;
-            }
-            if (trigger.getMode() != TriggerType.SpellCast) {
                 continue;
             }
             if (trigger.hasParam("ValidCard")) {
@@ -2724,6 +2724,12 @@ public class ComputerUtil {
         for (Trigger trigger : theTriggers) {
             final Card source = trigger.getHostCard();
 
+            if (trigger.getMode() != TriggerType.ChangesZone) {
+                continue;
+            }
+            if (!"Battlefield".equals(trigger.getParam("Destination"))) {
+                continue;
+            }
             if (!trigger.zonesCheck(game.getZoneOf(source))) {
                 continue;
             }
@@ -2732,12 +2738,6 @@ public class ComputerUtil {
             }
             if (trigger.hasParam("CheckOnTriggeredCard")
                     && AbilityUtils.getDefinedCards(permanent, source.getSVar(trigger.getParam("CheckOnTriggeredCard").split(" ")[0]), null).isEmpty()) {
-                continue;
-            }
-            if (trigger.getMode() != TriggerType.ChangesZone) {
-                continue;
-            }
-            if (!"Battlefield".equals(trigger.getParam("Destination"))) {
                 continue;
             }
             if (trigger.hasParam("ValidCard")) {
@@ -2821,8 +2821,6 @@ public class ComputerUtil {
             if (p.getCardsIn(ZoneType.Library).size() < 3) {
                 pRating /= 5;
             }
-
-            System.out.println("Board position evaluation for " + p + ": " + pRating);
 
             if (pRating > bestBoardRating) {
                 bestBoardRating = pRating;

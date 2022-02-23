@@ -240,8 +240,8 @@ public class VStack extends FDropDown {
         }
     }
 
-    private class StackInstanceDisplay extends FDisplayObject {
-        private final StackItemView stackInstance;
+    public class StackInstanceDisplay extends FDisplayObject {
+        public final StackItemView stackInstance;
         private final Color foreColor, backColor;
         private String text;
         private float preferredHeight;

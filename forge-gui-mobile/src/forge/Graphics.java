@@ -753,11 +753,49 @@ public class Graphics {
             setAlphaComposite(oldalpha);
         }
     }
+    public void drawGrayTransitionImage(Texture image, float x, float y, float w, float h, boolean withDarkOverlay, float percentage) {
+        batch.end();
+        shaderGrayscale.bind();
+        shaderGrayscale.setUniformf("u_grayness", percentage);
+        batch.setShader(shaderGrayscale);
+        batch.begin();
+        //draw gray
+        batch.draw(image, x, y, w, h);
+        //reset
+        batch.end();
+        batch.setShader(null);
+        batch.begin();
+        if(withDarkOverlay){
+            float oldalpha = alphaComposite;
+            setAlphaComposite(0.4f);
+            fillRect(Color.BLACK, x, y, w, h);
+            setAlphaComposite(oldalpha);
+        }
+    }
+    public void drawGrayTransitionImage(TextureRegion image, float x, float y, float w, float h, boolean withDarkOverlay, float percentage) {
+        batch.end();
+        shaderGrayscale.bind();
+        shaderGrayscale.setUniformf("u_grayness", percentage);
+        batch.setShader(shaderGrayscale);
+        batch.begin();
+        //draw gray
+        batch.draw(image, x, y, w, h);
+        //reset
+        batch.end();
+        batch.setShader(null);
+        batch.begin();
+        if(withDarkOverlay){
+            float oldalpha = alphaComposite;
+            setAlphaComposite(0.4f);
+            fillRect(Color.BLACK, x, y, w, h);
+            setAlphaComposite(oldalpha);
+        }
+    }
     public void drawWarpImage(Texture image, float x, float y, float w, float h, float time) {
         batch.end();
         shaderWarp.bind();
         shaderWarp.setUniformf("u_amount", 0.2f);
-        shaderWarp.setUniformf("u_speed", 0.6f);
+        shaderWarp.setUniformf("u_speed", 0.5f);
         shaderWarp.setUniformf("u_time", time);
         batch.setShader(shaderWarp);
         batch.begin();

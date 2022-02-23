@@ -7,7 +7,7 @@
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFpAJpHggtyzP87Y3iHRh7dwLt2gW1bxedw3kUjIKhAkbzBm3ALh4ExiZOrNhgjR8AEk8MKw==
+   eJxjYBgFpAJpHlR6ONsbxQuxr56bvvbuBNq1C4h38yDYo2AUUAJkhmEaGs0XtAG7eBAYmzixYoM1fgDHIQ5j
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -57,7 +57,7 @@
    </properties>
   </object>
   <object id="56" template="../obj/gold.tx" x="289.157" y="56.0147"/>
-  <object id="57" template="../obj/enemy.tx" x="287.666" y="91.5103">
+  <object id="57" template="../obj/enemy.tx" x="289.916" y="90.7603">
    <properties>
     <property name="enemy" value="Goblin"/>
    </properties>

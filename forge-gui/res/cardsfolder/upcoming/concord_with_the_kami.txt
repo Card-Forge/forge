@@ -1,0 +1,11 @@
+Name:Concord with the Kami
+ManaCost:3 G
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ At the beginning of your end step, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBPutCounter,DBDraw,DBToken | MinCharmNum$ 1 | CharmNum$ 3
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | ValidTgts$ Creature.HasCounters | TgtPrompt$ Select target creature with a counter on it | SpellDescription$ Put a +1/+1 counter on target creature with a counter on it.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionPresent$ Creature.enchanted+YouCtrl | SpellDescription$ Draw a card if you control an enchanted creature.
+SVar:DBToken:DB$ Token | TokenScript$ c_1_1_spirit | ConditionPresent$ Creature.equipped+YouCtrl | SpellDescription$ Create a 1/1 colorless Spirit creature token if you control an equipped creature.
+DeckHas:Ability$Counters|Token
+DeckHints:Ability$Counters & Type$Aura|Equipment|Spirit
+Oracle:At the beginning of your end step, choose one or more —\n• Put a +1/+1 counter on target creature with a counter on it.\n• Draw a card if you control an enchanted creature.\n• Create a 1/1 colorless Spirit creature token if you control an equipped creature.

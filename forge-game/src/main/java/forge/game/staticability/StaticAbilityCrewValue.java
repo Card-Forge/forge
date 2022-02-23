@@ -54,6 +54,9 @@ public class StaticAbilityCrewValue {
                 if (!stAb.getParam("Mode").equals(MODE) || stAb.isSuppressed() || !stAb.checkConditions()) {
                     continue;
                 }
+                if (!stAb.matchesValidParam("ValidCard", card)) {
+                    continue;
+                }
                 int t = Integer.parseInt(stAb.getParam("Value"));
                 i = i + t;
             }

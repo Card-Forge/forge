@@ -29,7 +29,7 @@ public class RegenerateAllEffect extends RegenerateBaseEffect {
         final String valid = sa.getParamOrDefault("ValidCards", "");
 
         CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
-        list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard, sa);
+        list = CardLists.getValidCards(list, valid, hostCard.getController(), hostCard, sa);
 
         // create Effect for Regeneration
         createRegenerationEffect(sa, list);

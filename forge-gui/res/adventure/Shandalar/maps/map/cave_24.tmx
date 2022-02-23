@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="66">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzz42Rg8BvFo3gUj+JRPIpH8YjAAAvyrVM=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy9VdsNwjAM9F9SMQaztFRZlEfZCkoZg1jBwrKOSiSmkay2zuNy50s6dETDj3HIwa2vmFsTl0g05Zjz+35HlDbCZLxQqNIxfz//gHHPz2v85B45zrFgenIVLA7mhfiM77oyZy9c8Yq0m+GrOXtqPBpchC019tR4BrhyVrSPdc7q0aqx5Sx4weRQLTy4ch3Fw6hv6errrM+HbUn1B5X38vM3nZPa22L216LxmpfR2nZcK+c1rXswLjjhImzkG31He94djH2KJdCaem9b/IuQF1pxXwScrj0=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFhADbANjJNQB2DkfADsSsA2Av3wDYiQzYB9h+eoCR4EdksJgEtUuobPdIC+vhDgAB0AGH
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="209" y="272">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="65" template="../obj/door_down.tx" x="224.166" y="17">
+   <properties>
+    <property name="teleport" value="maps/map/cave_24B.tmx"/>
+    <property name="teleportObjectId" value="66"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

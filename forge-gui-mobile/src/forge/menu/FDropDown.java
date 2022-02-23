@@ -7,6 +7,7 @@ import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinTexture;
+import forge.gui.GuiBase;
 import forge.screens.FScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
@@ -221,19 +222,22 @@ public abstract class FDropDown extends FScrollPane {
 
         @Override
         public boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical) {
-            hide(); //always hide if backdrop panned
+            if (!GuiBase.isAndroid())
+                hide(); //always hide if backdrop panned
             return false; //allow pan to pass through to object behind backdrop
         }
 
         @Override
         public boolean fling(float velocityX, float velocityY) {
-            hide(); //always hide if backdrop flung
+            if (!GuiBase.isAndroid())
+                hide(); //always hide if backdrop flung
             return false; //allow fling to pass through to object behind backdrop
         }
 
         @Override
         public boolean zoom(float x, float y, float amount) {
-            hide(); //always hide if backdrop zoomed
+            if (!GuiBase.isAndroid())
+                hide(); //always hide if backdrop zoomed
             return false; //allow zoom to pass through to object behind backdrop
         }
 

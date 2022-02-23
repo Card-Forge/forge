@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="60">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt2sENQEAQQNG9CjpQjyLohb5EcSK4EQ6GT/5P5rrjZcVJVaRU/WS+ng5WOljpYKWD1VOOvT19GXt+dHc+/1aEY1zPq7OUuvx89x37I++jKRfLUUOxDNXRXnxv5ruah+p4Y7ffXVY6WOlgpYOVDlY6WOlgpYOVDlY6WOlgpYOVDlY6WOlgpYPV3xzR/3RF7tlmAhh4JgU=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="50" height="50" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJzt2TEKhTAQRdE0Im7c0jW4GtfhUkQkiEHEmIE3I7c4xe/eZQrhZ+5TmgEAvzYNJ/WWr7vvqPe17o/QUtPgreXLdm8d0Rta93voGI0a1B1/ucddS3mvmmZ1h+X91PusWtTbLHrUeyxa1DsAAAAAxLV0B/WOlv3qDTQAQHxruv7O38cI38mn/2/LDm8tb9449tvk+3jsqH2zyT2eWizeoSw6NnJlVqQ=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztmVkKwjAQhgP1oe01xOo5vIULnkc9ghcUl/dapWAGOzQN08UFMsL/wUAT0OTLZPIyxgAAAGAWkTHLqP4+jOrgee3Qvu82imr/d2/fRaTbZdGybwmtLpwDiXNszKWKa1zPa3Fx731XDrLUmJPd/9x+j9OmyyOwR9v5n4VzJ1yXfVLPh/LoqgFymKTyuRPkMrUxS1/jlf2PWwCPrhogtsnL4Rg399tGqFyUPev6591HKI/crrv+cG2pbkK+V5IL3fNNNU+1446ZrKVuQrtsnOBazYWx7zKtfDS9vUOQ8kc+Gt7ed8m9e5YpeHu/wc/NPzowuVBXAAAAAAAAAAAAAEA/3B/R0C97F6m/VkT/0Wce2hsktPQzffr6UhKcHy24DtyboZ7GJe7+HVMoyUvpOOySZowH9tN+5fIEj0FnMg==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="50" height="50">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt2U0KgzAQhuFABakgeCwvUne60nTdnqdX6a7HcVEFA+JPGqWaCbwPuAkRvmGSbEYpAADC0KS+ExyjSnwncHMfvulayELIr4dzX3bn5JYpVWTre5d6JIk564+uhqelDkNqLbXjW2T65bpfKtd+AVv175oO/H4AAAAAAAAA8KO9+E7wH9LqKFfmlrackmqwzWTyH/9KqWNpdvyJ5mtmdv66Hptnj/FcfzwHeMfnZfgCQU0WYQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="368.667" y="800.333">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../obj/treasure.tx" x="496.063" y="234.378"/>
+  <object id="54" template="../obj/enemy.tx" x="262.332" y="574.667">
+   <properties>
+    <property name="enemy" value="Merfolk Lord"/>
+   </properties>
+  </object>
+  <object id="56" template="../obj/gold.tx" x="335.917" y="220.333"/>
+  <object id="57" template="../obj/enemy.tx" x="466.5" y="593.5">
+   <properties>
+    <property name="enemy" value="Sea Monster"/>
+   </properties>
+  </object>
+  <object id="58" template="../obj/enemy.tx" x="339.5" y="232">
+   <properties>
+    <property name="enemy" value="Bird"/>
+   </properties>
+  </object>
+  <object id="59" template="../obj/enemy.tx" x="475.25" y="229.5">
+   <properties>
+    <property name="enemy" value="Bird"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

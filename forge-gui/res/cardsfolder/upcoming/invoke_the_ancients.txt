@@ -1,0 +1,12 @@
+Name:Invoke the Ancients
+ManaCost:1 G G G G
+Types:Sorcery
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ g_4_5_spirit | RememberTokens$ True | SubAbility$ DBRepeatEach | SpellDescription$ Create two 4/5 green Spirit creature tokens.
+SVar:DBRepeatEach:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.IsRemembered | RepeatSubAbility$ CounterChoice | SubAbility$ DBCleanup | SpellDescription$ For each of them, put your choice of a vigilance counter, a reach counter, or a trample counter on it.
+SVar:CounterChoice:DB$ GenericChoice | Defined$ You | Choices$ Vigilance,Reach,Trample
+SVar:Vigilance:DB$ PutCounter | Defined$ Imprinted | CounterType$ Vigilance | CounterNum$ 1 | SpellDescription$ Vigilance
+SVar:Reach:DB$ PutCounter | Defined$ Imprinted | CounterType$ Reach | CounterNum$ 1 | SpellDescription$ Reach
+SVar:Trample:DB$ PutCounter | Defined$ Imprinted | CounterType$ Trample | CounterNum$ 1 | SpellDescription$ Trample
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token|Counters & Type$Spirit & Keyword$Vigilance|Reach|Trample
+Oracle:Create two 4/5 green Spirit creature tokens. For each of them, put your choice of a vigilance counter, a reach counter, or a trample counter on it.

@@ -1,0 +1,12 @@
+Name:Reckoner Shakedown
+ManaCost:2 B
+Types:Sorcery
+A:SP$ RevealHand | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | RememberRevealed$ True | SubAbility$ DBChoose | SpellDescription$ Target opponent reveals their hand.
+SVar:DBChoose:DB$ ChooseCard | ChoiceZone$ Hand | Amount$ 1 | Choices$ Card.nonLand+IsRemembered | ChoiceDesc$ nonland | FromDesc$ from it | SubAbility$ DBBranch | ChoiceTitle$ You may choose a nonland card | SpellDescription$ You may choose a nonland card from it.
+SVar:DBBranch:DB$ Branch | BranchCondition$ ChosenCard | TrueSubAbility$ DBDiscard | FalseSubAbility$ DBPutCounter | StackDescription$ If they do, {p:Targeted} discards that card. If they don't, they put two +1/+1 counters on a creature or Vehicle they control. | SpellDescription$ If you do, that player discards that card. If you don't, put two +1/+1 counters on a creature or Vehicle you control.
+SVar:DBDiscard:DB$ Discard | DefinedCards$ ChosenCard | Defined$ Targeted | Mode$ Defined | SubAbility$ DBCleanup
+SVar:DBPutCounter:DB$ PutCounter | Choices$ Creature.YouCtrl,Vehicle.YouCtrl | ChoiceTitle$ Choose a creature or Vehicle you control | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+DeckHas:Ability$Discard|Counters
+DeckHints:Type$Creature|Vehicle
+Oracle:Target opponent reveals their hand. You may choose a nonland card from it. If you do, that player discards that card. If you don't, put two +1/+1 counters on a creature or Vehicle you control.

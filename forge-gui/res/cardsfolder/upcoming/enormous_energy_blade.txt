@@ -1,0 +1,8 @@
+Name:Enormous Energy Blade
+ManaCost:2 B
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 4 | Description$ Equipped creature gets +4/+0.
+T:Mode$ Attached | ValidSource$ Card.Self | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME becomes attached to a creature, tap that creature.
+SVar:TrigTap:DB$ Tap | Defined$ TriggeredTarget
+K:Equip:2
+Oracle:Equipped creature gets +4/+0.\nWhenever Enormous Energy Blade becomes attached to a creature, tap that creature.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

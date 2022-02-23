@@ -1,0 +1,8 @@
+Name:Myojin of Roaring Blades
+ManaCost:5 R R R
+Types:Legendary Creature Spirit
+PT:7/4
+K:etbCounter:Indestructible:1:CheckSVar$ FromHand:CARDNAME enters the battlefield with an indestructible counter on it if you cast it from your hand.
+SVar:FromHand:Count$wasCastFromYourHandByYou.1.0
+A:AB$ DealDamage | Cost$ SubCounter<1/Indestructible> | NumDmg$ 7 | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | SpellDescription$ CARDNAME deals 7 damage to each of up to three targets.
+Oracle:Myojin of Roaring Blades enters the battlefield with an indestructible counter on it if you cast it from your hand.\nRemove an indestructible counter from Myojin of Roaring Blades: It deals 7 damage to each of up to three targets.

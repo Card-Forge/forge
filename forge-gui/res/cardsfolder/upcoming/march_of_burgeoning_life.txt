@@ -1,0 +1,12 @@
+Name:March of Burgeoning Life
+ManaCost:X G
+Types:Instant
+A:SP$ Pump | AnnounceTitle$ how many green cards to exile | Announce$ Exiled | ValidTgts$ Creature.cmcLTX | TgtPrompt$ Choose target creature with mana value less than X | SubAbility$ DBSearch | StackDescription$ None | SpellDescription$ Choose target creature with mana value less than X. Search your library for a creature card with the same name as that creature, put it onto the battlefield tapped, then shuffle.
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Targeted.Creature+sameName | ChangeTypeDesc$ creature card with the same name as {c:Targeted} | ChangeNum$ 1 | Mandatory$ True | Tapped$ True
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Cost$ ExileFromHand<Y/Card.Green/green cards> | EffectZone$ All | Description$ As an additional cost to cast this spell, you may exile any number of green cards from your hand. This spell costs {2} less to cast for each card exiled this way.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Z | EffectZone$ All | Relative$ True | Secondary$ True | Description$ This spell costs {2} less to cast for each card exiled this way.
+SVar:X:Count$xPaid
+SVar:Y:SVar$Exiled
+SVar:Z:SVar$Y/Times.2
+SVar:Exiled:Number$0
+Oracle:As an additional cost to cast this spell, you may exile any number of green cards from your hand. This spell costs {2} less to cast for each card exiled this way.\nChoose target creature with mana value less than X. Search your library for a creature card with the same name as that creature, put it onto the battlefield tapped, then shuffle.

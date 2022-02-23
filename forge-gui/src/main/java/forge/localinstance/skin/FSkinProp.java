@@ -101,6 +101,16 @@ public enum FSkinProp {
     IMG_MANA_PHRYX_R   (new int[] {412, 166, 80, 80}, PropType.MANAICONS),
     IMG_MANA_PHRYX_G   (new int[] {330, 166, 80, 80}, PropType.MANAICONS),
     IMG_MANA_PHRYX_B   (new int[] {248, 84, 80, 80}, PropType.MANAICONS),
+    IMG_MANA_PHRYX_BG  (new int[] {439, 222, 199, 199}, PropType.PHYREXIAN),
+    IMG_MANA_PHRYX_BR  (new int[] {439, 2, 199, 199}, PropType.PHYREXIAN),
+    IMG_MANA_PHRYX_GU  (new int[] {876, 219, 199, 199}, PropType.PHYREXIAN),
+    IMG_MANA_PHRYX_GW  (new int[] {878, 2, 199, 199}, PropType.PHYREXIAN),
+    IMG_MANA_PHRYX_RG  (new int[] {657, 221, 199, 199}, PropType.PHYREXIAN),
+    IMG_MANA_PHRYX_RW  (new int[] {657, 2, 199, 199}, PropType.PHYREXIAN),
+    IMG_MANA_PHRYX_UB  (new int[] {219, 2, 199, 199}, PropType.PHYREXIAN),
+    IMG_MANA_PHRYX_UR  (new int[] {219, 222, 199, 199}, PropType.PHYREXIAN),
+    IMG_MANA_PHRYX_WB  (new int[] {2, 221, 199, 199}, PropType.PHYREXIAN),
+    IMG_MANA_PHRYX_WU  (new int[] {2, 2, 199, 199}, PropType.PHYREXIAN),
     IMG_MANA_SNOW      (new int[] {412, 2, 80, 80}, PropType.MANAICONS),
 
     //generic mana images
@@ -412,6 +422,13 @@ public enum FSkinProp {
     IMG_WATERMARK_W (new int[] {2, 1006, 500, 500}, PropType.WATERMARKS),
     IMG_WATERMARK_C (new int[] {504, 1006, 500, 500}, PropType.WATERMARKS),
 
+    //FOR DRAFT RANKING
+    IMG_DRAFTRANK_D (new int[] {2, 2, 240, 240}, PropType.DRAFTRANKS),
+    IMG_DRAFTRANK_C (new int[] {244, 2, 240, 240}, PropType.DRAFTRANKS),
+    IMG_DRAFTRANK_B (new int[] {2, 244, 240, 240}, PropType.DRAFTRANKS),
+    IMG_DRAFTRANK_A (new int[] {244, 244, 240, 240}, PropType.DRAFTRANKS),
+    IMG_DRAFTRANK_S (new int[] {2, 486, 240, 240}, PropType.DRAFTRANKS),
+
     //FOR CARDBG
     IMG_CARDBG_A (new int[] {2, 2, 339, 496}, PropType.CARDBG),
     IMG_CARDBG_B (new int[] {343, 2, 339, 496}, PropType.CARDBG),
@@ -559,10 +576,12 @@ public enum FSkinProp {
         BUTTONS,
         BTNSTART,
         MANAICONS,
+        PHYREXIAN,
         PLANAR_CONQUEST,
         DECKBOX,
         SETLOGO,
         WATERMARKS,
+        DRAFTRANKS,
         CARDBG,
         FAVICON
     }

@@ -1,7 +1,9 @@
 package forge.game.ability.effects;
 
+import java.util.Arrays;
 import java.util.List;
 
+import forge.util.Lang;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
@@ -43,10 +45,31 @@ public class CopyPermanentEffect extends TokenEffectBase {
         final StringBuilder sb = new StringBuilder();
 
         final List<Card> tgtCards = getTargetCards(sa);
+        boolean justOne = tgtCards.size() == 1;
 
         sb.append("Copy ");
-        sb.append(StringUtils.join(tgtCards, ", "));
+        sb.append(Lang.joinHomogenous(tgtCards));
+        if (sa.hasParam("AddKeywords")) {
+            final List<String> keywords = Lists.newArrayList();
+            keywords.addAll(Arrays.asList(sa.getParam("AddKeywords").split(" & ")));
+            sb.append(", except ").append(justOne ? "it has " : "they have ");
+            sb.append(Lang.joinHomogenous(keywords).toLowerCase());
+        }
         sb.append(".");
+        if (sa.hasParam("AtEOT")) {
+            String atEOT = sa.getParam("AtEOT");
+            String verb = "Sacrifice ";
+            if (atEOT.startsWith("Exile")) {
+                verb = "Exile ";
+            }
+            sb.append(" ").append(verb).append(justOne ? "it " : "them ").append("at ");
+            String when = "the beginning of the next end step.";
+            if (atEOT.endsWith("Combat")) {
+                when = "end of combat.";
+            }
+            sb.append(when);
+        }
+
         return sb.toString();
     }
 

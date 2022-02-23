@@ -1,0 +1,10 @@
+Name:Kotori, Pilot Prodigy
+ManaCost:1 W U
+Types:Legendary Creature Moonfolk Pilot
+PT:2/4
+S:Mode$ Continuous | Affected$ Vehicle.YouCtrl | AddKeyword$ Crew:2 | Description$ Vehicles you control have crew 2.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target artifact creature you control gains lifelink and vigilance until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Artifact+YouCtrl | TgtPrompt$ Select target artifact creature you control | KW$ Lifelink & Vigilance
+DeckHints:Type$Vehicle
+DeckHas:Ability$LifeGain
+Oracle:Vehicles you control have crew 2.\nAt the beginning of combat on your turn, target artifact creature you control gains lifelink and vigilance until end of turn.

@@ -12,13 +12,7 @@ import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardZoneTable;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.player.DelayedReveal;
 import forge.game.player.Player;
@@ -40,10 +34,18 @@ public class DigEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final StringBuilder sb = new StringBuilder();
         final int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
+        final int numToChange = (sa.hasParam("ChangeNum") ?
+                AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa) : 1);
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
-        sb.append(host.getController()).append(sa.hasParam("Reveal") && sa.getParam("Reveal").equals("True")
-                ? " reveals " : " looks at ").append("the top ");
+        String verb = " looks at ";
+        if (sa.hasParam("Reveal") && sa.getParam("Reveal").equals("True")) {
+            verb = " reveals ";
+        } else if (sa.hasParam("DestinationZone") && sa.getParam("DestinationZone").equals("Exile") &&
+                numToDig == numToChange) {
+            verb = " exiles ";
+        }
+        sb.append(host.getController()).append(verb).append("the top ");
         sb.append(numToDig == 1 ? "card" : (Lang.getNumeral(numToDig) + " cards")).append(" of ");
 
         if (tgtPlayers.contains(host.getController())) {
@@ -54,6 +56,27 @@ public class DigEffect extends SpellAbilityEffect {
             }
         }
         sb.append("library.");
+
+        if (numToDig != numToChange) {
+            String destZone1 = sa.hasParam("DestinationZone") ?
+                    sa.getParam("DestinationZone").toLowerCase() : "hand";
+            String destZone2 = sa.hasParam("DestinationZone2") ?
+                    sa.getParam("DestinationZone2").toLowerCase() : "on the bottom of their library in any order.";
+            if (sa.hasParam("RestRandomOrder")) {
+                destZone2 = destZone2.replace("any", "a random");
+            }
+
+            String verb2 = "put ";
+            String where = "in their hand ";
+            if (destZone1.equals("exile")) {
+                verb2 = "exile ";
+                where = "";
+            }
+            sb.append(" They ").append(verb2).append(Lang.getNumeral(numToChange)).append(" of them ").append(where);
+            sb.append(sa.hasParam("ExileFaceDown") ? "face down " : "").append("and put the rest ");
+            sb.append(destZone2);
+        }
+
         return sb.toString();
     }
 
@@ -106,7 +129,7 @@ public class DigEffect extends SpellAbilityEffect {
 
         boolean changeAll = false;
         boolean allButOne = false;
-        boolean totalCMC = (sa.hasParam("WithTotalCMC"));
+        boolean totalCMC = sa.hasParam("WithTotalCMC");
         int totcmc = AbilityUtils.calculateAmount(host, sa.getParam("WithTotalCMC"), sa);
 
         if (sa.hasParam("ChangeNum")) {
@@ -163,9 +186,7 @@ public class DigEffect extends SpellAbilityEffect {
                     if (!toReveal.isEmpty()) {
                         game.getAction().reveal(toReveal, cont);
                         if (sa.hasParam("RememberRevealed")) {
-                            for (final Card one : toReveal) {
-                                host.addRemembered(one);
-                            }
+                            host.addRemembered(toReveal);
                         }
                     }
                 }
@@ -204,7 +225,7 @@ public class DigEffect extends SpellAbilityEffect {
                         if (changeValid.contains("ChosenType")) {
                             changeValid = changeValid.replace("ChosenType", host.getChosenType());
                         }
-                        valid = CardLists.getValidCards(top, changeValid.split(","), cont, host, sa);
+                        valid = CardLists.getValidCards(top, changeValid, cont, host, sa);
                         if (totalCMC) {
                             valid = CardLists.getValidCards(valid, "Card.cmcLE" + totcmc, cont, host, sa);
                         }
@@ -237,7 +258,7 @@ public class DigEffect extends SpellAbilityEffect {
                     } else if (sa.hasParam("RandomChange")) {
                         int numChanging = Math.min(destZone1ChangeNum, valid.size());
                         movedCards = CardLists.getRandomSubList(valid, numChanging);
-                    } else if (sa.hasParam("WithTotalCMC")) {
+                    } else if (totalCMC) {
                         movedCards = new CardCollection();
                         if (p == chooser) {
                             chooser.getController().tempShowCards(top);
@@ -324,7 +345,7 @@ public class DigEffect extends SpellAbilityEffect {
                             }
                             List<Card> chosen = new ArrayList<>();
 
-                            int max = anyNumber ? valid.size() : Math.min(valid.size(),destZone1ChangeNum);
+                            int max = anyNumber ? valid.size() : Math.min(valid.size(), destZone1ChangeNum);
                             int min = (anyNumber || optional) ? 0 : max;
                             if (max > 0) { // if max is 0 don't make a choice
                                 chosen = chooser.getController().chooseEntitiesForEffect(valid, min, max, delayedReveal, sa, prompt, p, null);
@@ -386,6 +407,9 @@ public class DigEffect extends SpellAbilityEffect {
 
                         if (sa.hasParam("ExileFaceDown")) {
                             c.turnFaceDown(true);
+                        }
+                        if (sa.hasParam("WithMayLook")) {
+                            c.addMayLookFaceDownExile(c.getOwner());
                         }
                         if (sa.hasParam("Imprint")) {
                             host.addImprintedCard(c);

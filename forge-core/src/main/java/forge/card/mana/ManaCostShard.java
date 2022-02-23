@@ -63,6 +63,16 @@ public enum ManaCostShard {
     PB(ManaAtom.BLACK | ManaAtom.OR_2_LIFE, "P/B", "PB"),
     PR(ManaAtom.RED | ManaAtom.OR_2_LIFE, "P/R", "PR"),
     PG(ManaAtom.GREEN | ManaAtom.OR_2_LIFE, "P/G", "PG"),
+    PBG(ManaAtom.BLACK | ManaAtom.GREEN | ManaAtom.OR_2_LIFE, "P/B/G", "PBG"),
+    PBR(ManaAtom.BLACK | ManaAtom.RED | ManaAtom.OR_2_LIFE, "P/B/R", "PBR"),
+    PGU(ManaAtom.GREEN | ManaAtom.BLUE | ManaAtom.OR_2_LIFE, "P/G/U", "PGU"),
+    PGW(ManaAtom.GREEN | ManaAtom.WHITE | ManaAtom.OR_2_LIFE, "P/G/W", "PGW"),
+    PRG(ManaAtom.RED | ManaAtom.GREEN | ManaAtom.OR_2_LIFE, "P/R/G", "PRG"),
+    PRW(ManaAtom.RED | ManaAtom.WHITE | ManaAtom.OR_2_LIFE, "P/R/W", "PRW"),
+    PUB(ManaAtom.BLUE | ManaAtom.BLACK | ManaAtom.OR_2_LIFE, "P/U/B", "PUB"),
+    PUR(ManaAtom.BLUE | ManaAtom.RED | ManaAtom.OR_2_LIFE, "P/U/R", "PUR"),
+    PWB(ManaAtom.WHITE | ManaAtom.BLACK | ManaAtom.OR_2_LIFE, "P/W/B", "PWB"),
+    PWU(ManaAtom.WHITE | ManaAtom.BLUE | ManaAtom.OR_2_LIFE, "P/W/U", "PWU"),
 
     X(ManaAtom.IS_X, "X"),
 

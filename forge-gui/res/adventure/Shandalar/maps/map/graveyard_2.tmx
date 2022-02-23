@@ -15,17 +15,12 @@
    eJytlc9Kw0AQxrc2f9oElHotelNED2mPBQ/2IQSfwVjQiyCKN1/Au3owRQvqWXwH7SNoPfgE4tkZd4f9sk2bCh0YGpLp/PJ9M2yUysdKpOYSDxWlHimfKC88pa5CfX+7Nl4rzGeqa84xXyi/qkotLUx/112/XM8W9QoCpdpeeS32Y/ZhJf98L7Z1ifNMgllhoK9fiTn8J/eI+i5O0M11m55ON5gVE7dFv1Ggr8s0u/51nBmz3k5F16Gual0nR0b37infPJvyHlyPtTIHl3sdTn4/1CV6Es/qFOaArg+o/o5++5Snsa3luiFw2WNmHtcnczPTj7MP8xSOaJb5+kG+h/iC3L99LuFiBM482U/pG8M8MHjfZe+w302o2Z/OjFtmvgn4m/rjGruh7it+M/vSYWfGe+Ty+YHzfSf+qGb1ynxxV1PfahT9A/BTQvZAfHD9W44sqxnZ84rrhIH9dozG28DuVN943vO1txziA/9X/JNoEOOE5rtacB5LXQo7hTNGJj5rA3dg3qVI7775HTkzljo8s3DGwkyMl6mz9xkwi7jnsM/InnY+M6NX4Me0mMZFv7/92b4xvNOzfLt+DLcRjXNdzRy84x+1/P1umNeAWtboeoNyveR7dkbcXyvAbxM=
   </data>
  </layer>
- <layer id="3" name="Foreground" width="30" height="17">
+ <layer id="3" name="Clutter" width="30" height="17">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
    eJxT42FgUAdidGCBKYQBJmIRu0qEPhA4ArTzKBZ7QaCWm4GhDg3Xc5On1oRI94CANNA90bwMDLt4IDgKyJbF4UZi1V6C0hcJ2AvSq8qIysenFp0PiwtzIG7ixWMZmll7eSDhBQrHPWhm6zMSrxYbwBX2O6FhtpsHlY0O6niJV4sLSLJAaCNO7PKVAhC6SgCVD6PRATFhS0zeoQeoQ3IrLv/FEelvZGBGHedhBYY44gkZXCPCHPR4jRXAL44NmBNhDwjUEpnfKAGE0l0VWnwSim/kvE0K0CBTHy5z8PkLW/0CAi1oekLZ8fOncJDktEENcIUJLoArDQMAigc36g==
-  </data>
- </layer>
- <layer id="5" name="AboveSprites" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

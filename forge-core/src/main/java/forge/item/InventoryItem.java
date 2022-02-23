@@ -26,4 +26,51 @@ import forge.util.IHasName;
 public interface InventoryItem extends IHasName {
     String getItemType();
     String getImageKey(boolean altState);
+
+    /**
+     * Converts a card name to a sortable name.
+     * Trim leading quotes, then move article last, then replace characters.
+     * Because An-Havva Constable.
+     * Capitals and lowercase sorted as one: "my deck" before "Myr Retribution"
+     * Apostrophes matter, though: "D'Avenant" before "Danitha"
+     * TO DO: Commas before apostrophes: "Rakdos, Lord of Riots" before "Rakdos's Return"
+     *
+     * @param printedName The name of the card.
+     * @return A sortable name.
+     */
+    public static String toSortableName(String printedName) {
+        if (printedName.startsWith("\"")) printedName = printedName.substring(1);
+        return moveArticleToEnd(printedName).toLowerCase().replaceAll("[^\\s'0-9a-z]", "");
+    }
+
+
+    /**
+     * Article words. These words get kicked to the end of a sortable name.
+     * For localization, simply overwrite this array with appropriate words.
+     * Words in this list are used by the method String moveArticleToEnd(String), useful
+     * for alphabetizing phrases, in particular card or other inventory object names.
+     */
+    public static final String[] ARTICLE_WORDS = {
+            "A",
+            "An",
+            "The"
+    };
+
+    /**
+     * Detects whether a string begins with an article word
+     *
+     * @param str The name of the card.
+     * @return The sort-friendly name of the card. Example: "The Hive" becomes "Hive The".
+     */
+    public static String moveArticleToEnd(String str) {
+        String articleWord;
+        for (int i = 0; i < ARTICLE_WORDS.length; i++) {
+            articleWord = ARTICLE_WORDS[i];
+            if (str.startsWith(articleWord + " ")) {
+                str = str.substring(articleWord.length() + 1) + " " + articleWord;
+                return str;
+            }
+        }
+        return str;
+    }
 }

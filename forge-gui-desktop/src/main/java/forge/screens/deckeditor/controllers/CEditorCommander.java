@@ -104,8 +104,8 @@ public final class CEditorCommander extends CDeckEditor<Deck> {
                     customCards.getAllCardsNoAlt()), PaperCard.class);
         }
 
-        CardManager catalogManager = new CardManager(getCDetailPicture(), true, false);
-        CardManager deckManager = new CardManager(getCDetailPicture(), false, false);
+        CardManager catalogManager = new CardManager(getCDetailPicture(), true, false, false);
+        CardManager deckManager = new CardManager(getCDetailPicture(), false, false, false);
         deckManager.setAlwaysNonUnique(true);
 
         catalogManager.setCaption("Catalog");

@@ -23,11 +23,6 @@
    eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
   </data>
  </layer>
- <layer id="5" name="AboveSprites" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
-  </data>
- </layer>
  <objectgroup id="4" name="Objects">
   <object id="38" template="../obj/entry_up.tx" x="209" y="282">
    <properties>

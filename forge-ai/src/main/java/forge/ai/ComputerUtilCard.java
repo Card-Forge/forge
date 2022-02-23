@@ -944,7 +944,7 @@ public class ComputerUtilCard {
         List<String> chosen = new ArrayList<>();
         Player ai = sa.getActivatingPlayer();
         final Game game = ai.getGame();
-        Player opp = ai.getWeakestOpponent();
+        Player opp = ai.getStrongestOpponent();
         if (sa.hasParam("AILogic")) {
             final String logic = sa.getParam("AILogic");
 
@@ -1951,7 +1951,7 @@ public class ComputerUtilCard {
 
             CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
 
-            list = CardLists.getValidCards(list, needsToPlay.split(","), card.getController(), card, sa);
+            list = CardLists.getValidCards(list, needsToPlay, card.getController(), card, sa);
             if (list.isEmpty()) {
                 return AiPlayDecision.MissingNeededCards;
             }

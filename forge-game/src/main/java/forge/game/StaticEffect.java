@@ -242,7 +242,7 @@ public class StaticEffect {
             }
 
             // remove Types
-            if (hasParam("AddType") || hasParam("RemoveType")) {
+            if (hasParam("AddType") || hasParam("AddAllCreatureTypes") || hasParam("RemoveType")) {
                 // the view is updated in GameAction#checkStaticAbilities to avoid flickering
                 affectedCard.removeChangedCardTypes(getTimestamp(), ability.getId(), false);
             }

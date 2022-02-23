@@ -7,7 +7,7 @@
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJyL5mVg2MVDXxwFtFMWSNMbSPOM2jtq76i9o/aO2ktNe2u5GRjquelrL8jOPUjqpZHql708pLmHWHthdu7CYS8uu3fhMBtdLzEY2V5k80nFAFfPOzA=
+   eJyL5mVg2MVDXxwFtFMWSNMbSPOM2jtq76i9o/aO2ktNe2u5GRjquelrL8jOPUjqpZHql708pLmHWHtBdspA7cBmL6l2o+slBiPbCwPk1MEAaFQ5yg==
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -25,7 +25,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJydlVFuxCAMRHMBTtP969mqQMgF012p3ds0SEz7dmTotiNFIcaY8diQnJZvvJ3j/Xzy+ZTz2fq4BjbZSx83+2rftcerfY+cfvYRMuZX2KPv/0AxNsQqZhOvV6y79vkP2Dgv3DBm7vSXXpcnOecJ5/yLJjMNtXaHrfGvT+p+YKxcvJbiqfcR+BGRJiNf58Y8vJYNNdDPfTwOYzmK2dUbUb24B3tIeB/EmMF9qHeEv5yfLegN4gafNT2eW+UQ6SZ+7TxV6w3vOz+HzqVgf/ISZn3j68T7vjxyoZ7qTfHS2Z5pTsxqyhjXgU/j5DlR99ke0mVPc78GnmvVUP3JvWb99Nnfoxqopspptbg5yCm6u6ib10H1eQm4EyWN7wneR+xr/QMruGued7OPlRvPRtOCvX0s8f1FuEbuG61jLfgfbL5f41BqIg==
+   eJydlVFuxCAMRPPbDw5TtX97tggWcsFtVmp7mwaJ6b547d20I0XBxhgzDFDS9It5ay/bV7bvvH11tJvjm4f/POzuz7DbsBXTUdJtHkGxHRl+z/4PlpGjIpfqsX0njFvH/xM+9gtXtMkF48vwvx+suZr6WPMzTh5xqHaD72rsR3Nc0PbWUrDX+mvMHOQ8yonAPORHnBX4WhBbTC2LsesTjgVpoxgdRXHEh+k7onVbN/n2Yv5yfrKjOYI6yWl/brUGq6MO1beiX75Idydj21z08/xFGrP5hV7397SvhXxKm+JUZ9tyHsHjQ2CONYhp6X5N5L0j2mPxsjicWfBcS8PS55G5Or7GP9oD7anWlNN+P6nb4tQsn3cnMqbX/+bUbhHdE7yPpOuKN1DvGvv5vrHN2Gzm4zouk39/EZYjG+uNm8HZ68ttLT32BzjbZ/U=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -42,7 +42,7 @@
   </object>
   <object id="51" template="../obj/treasure.tx" x="400.666" y="34"/>
   <object id="52" template="../obj/gold.tx" x="385.083" y="240.75"/>
-  <object id="53" template="../obj/enemy.tx" x="351" y="32.6667">
+  <object id="53" template="../obj/enemy.tx" x="351.75" y="32">
    <properties>
     <property name="enemy" value="High Vampire"/>
    </properties>

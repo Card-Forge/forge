@@ -1,0 +1,10 @@
+{                                    
+"name":"Elemental_Blue",
+  "template":
+  {
+   "count":60,
+   "colors":["Blue"],
+   "tribe":"Elemental",
+   "rares":0.7
+  }
+}

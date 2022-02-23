@@ -4,5 +4,5 @@ Types:Land
 K:ETBReplacement:Other:ChooseCT
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type. | AILogic$ MostProminentInComputerDeck
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Creature.ChosenType | AddsNoCounter$ True | SpellDescription$ Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.
+A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Spell.Creature+ChosenType | AddsNoCounter$ True | SpellDescription$ Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.
 Oracle:As Cavern of Souls enters the battlefield, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.

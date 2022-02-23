@@ -25,7 +25,7 @@
    eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
   </data>
  </layer>
- <layer id="3" name="Foreground" width="30" height="17">
+ <layer id="3" name="Clutter" width="30" height="17">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>

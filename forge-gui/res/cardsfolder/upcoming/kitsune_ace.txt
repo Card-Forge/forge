@@ -4,7 +4,7 @@ Types:Creature Fox Pilot
 PT:2/2
 T:Mode$ Attacks | ValidCard$ Vehicle.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ Whenever a Vehicle you control attacks, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBPump,DBUntap
-SVar:DBPump:DB$ Pump | Defined$ TriggeredAttacker | KW$ First strike | SpellDescription$ That Vehicle gains first strike until end of turn
+SVar:DBPump:DB$ Pump | Defined$ TriggeredAttacker | KW$ First Strike | SpellDescription$ That Vehicle gains first strike until end of turn
 SVar:DBUntap:DB$ Untap | Defined$ Self | SpellDescription$ Untap CARDNAME
 DeckNeeds:Type$Vehicle
 Oracle:Whenever a Vehicle you control attacks, choose one —\n• That Vehicle gains first strike until end of turn.\n• Untap Kitsune Ace.

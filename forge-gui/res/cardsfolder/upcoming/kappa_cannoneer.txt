@@ -1,0 +1,13 @@
+Name:Kappa Cannoneer
+ManaCost:5 U
+Types:Artifact Creature Turtle Warrior
+PT:4/4
+K:Improvise
+K:Ward:4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | IsPresent$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever an artifact enters the battlefield under your control, put a +1/+1 counter on CARDNAME and it can't be blocked this turn.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ HIDDEN Unblockable
+DeckNeeds:Type$Artifact
+DeckHas:Ability$Counters
+SVar:BuffedBy:Artifact
+Oracle:Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nWard {4}\nWhenever an artifact enters the battlefield under your control, put a +1/+1 counter on Kappa Cannoneer and it can't be blocked this turn.

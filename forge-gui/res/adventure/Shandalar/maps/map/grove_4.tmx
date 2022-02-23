@@ -5,9 +5,9 @@
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Hidden Collision" width="30" height="17">
+ <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJztkdENgzAMRP2PmQCxWDtL6FwhsFup0hOHhUnpBx8oliw78TnvpIis8WxFRhV5tLnnaudnAm94u73m2mnuUaPmHZ4fMUbdZtJ1x+5+9MnhIjCPxjezkuNpj8vMXyNqmVXi9ieZ/0TlVm7l3os7L/2ruZ7rscNyHr7p+WLNkc7jgs1vTHT2fE269Y0/C+SDdZY7NOVkdjC+MId39sM63L8BHw1AbA==
+   eJztlWEOgyAMhft/zxMsXmw7i9u5AL3bJNjsSagMs+gfX0IK6aNfTdSKfPXsRDxEHl3ac8zzLeIaJfVI8Y601+iQeJzfYnisV4B9J/qDwVVp3mXPzKxg1C9xmfmrHOqsGrdvZO7RxW3njrN/arzzD65+10dz9+jinseN7+b7djzXo8we5vNrWVZf7NnyWXNB2VxjpH+w1Rd7eGYN1If6LOXzy2OdYzYzazXyWlEfbFNAdQ==
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -17,20 +17,15 @@
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJydlUFOAzEMRSMNRUmu0EK5HBsWLLsrVFxu2qp3gGk5CGNNvvrzSdIBS1GlSexnfzupc/+zZXTu2zu3Cfk6+3n+j7G+148xDo04ygbzlp+ZnS+xzfc1TKsWA/GNf6EzXZz87hs1IdddyL/7eOUeU8zP8Xc9fh98nlfJTr6dc4nLTFuLODGf4lWfYYYetf3e/+Y+h5yJWrcyPzs5VzLTeyFaQyfldjGvE6YzpNxWL5UJrs4+8jRtB9pjtnHt3Kmgt/l9ia/ZC+VZum/ws36+i4aY3QeqDxrpHKgva1ky1PVGM2TWupNdyuODegcu32dopNb7nH1OtWHGW2yuFX7oqc6XMnlGjA09WaMaexv+zjTjO1SaT+5ji2v6ItbxxqxpTbXet3I3fVak0R2dRU76LjIbfOS5brAO6c3cpzr2lR6g7zWuGuaz9N+h7ykvvss8a3ON3wq+Uy2msldJf7YfvxiB8g==
+   eJydlU1uAjEMhSNRqkyuAC29HJsuWHbHj3q5AcQd+nuQjjV54s0jcVAtRUiM7c9+dmZC+J8tUgi/MYS3bnq+433xz6n+rB9ynJw8ygazFWdm/iW2xW668dRyIL/xf8hnlsa4R6cn1GrsL4qN6co95/8/ht9V9uO6SnaJfs3g7oaz726ZduZpZL6kaY0tPWrPe5nN05Bv3U2Z6HUr+3MQv5KZ3nPRGjpxHvhynzDdIeV6s1TmRnrVOk1bnjmzjWt+l4LeFvcpsWavVGfpviHO5rkXDbG7Wqe3B+pXmwv62kmsdydnuY737nZn+D5DI7U+TtmIxY57bO6VmborJSbviLGhJ2tUY28LfbaYZuvGfvIcPa7tBHKdG7umPdVm79Vu+ixJowfyRU2HSl5jg486Vw7rlN+Zx9zHsTIDzL3GVcN+lr4d+j7lw3eZd+1e43cF3ymPqexl1p/tD+lLhME=
   </data>
  </layer>
- <layer id="3" name="Foreground" width="30" height="17">
+ <layer id="3" name="Clutter" width="30" height="17">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
    eJydVVFOwzAMtZCQNrW3aKETQoJD7DQ9CExiIMGNuo2O3YhPYjWPPoyTMJ5krbM9v2fHa1oR6WXC+mJ6hj1UIle1yHWwrp7j7P+vaS2JPKPMgH8fcg7B3uuJD2Z5m5gHawu8QE+cQ+wJftamfv2+NzzQhdyPAjfXtdj57m+gd9Y8UizH3ZtaKQ3nAjuS4kYOa1U09Lxy6g7m+zF+djKfkUL78Lj/0p+dCYM5LFaUY/eQ63aZ+i09vy5E3hZpXZiFzuwUny0v+r3NcGL+0HW3FLlfZn5AuEnwstZj1F7aY443yawZ2pvHq367J965W5937ql9Sc3Z21lF6sxT+VYX9s7yboL/JcZ4Zrb/EnI7+Xnpv8+HeuI+5/8CXd5cWbPGvfO13FxHubbBnqvfsVQcOdCpvW4L9xe4oVPzdzGG2qPhRb2n6ufMcGdyjZwN8cw3Tn5H95e+Rx5NDnTjrshxfgEAQ2tW
-  </data>
- </layer>
- <layer id="5" name="AboveSprites" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

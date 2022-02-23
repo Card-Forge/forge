@@ -1,5 +1,5 @@
 Name:Treasure Token
 ManaCost:no cost
 Types:Artifact Treasure
-A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME/this artifact> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
 Oracle:{T}, Sacrifice this artifact: Add one mana of any color.

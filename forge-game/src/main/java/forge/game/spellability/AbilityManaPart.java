@@ -95,7 +95,7 @@ public class AbilityManaPart implements java.io.Serializable {
         this.addsKeywordsUntil = params.get("AddsKeywordsUntil");
         this.addsCounters = params.get("AddsCounters");
         this.triggersWhenSpent = params.get("TriggersWhenSpent");
-        this.persistentMana = (null != params.get("PersistentMana")) && "True".equalsIgnoreCase(params.get("PersistentMana"));
+        this.persistentMana = null != params.get("PersistentMana") && "True".equalsIgnoreCase(params.get("PersistentMana"));
     }
 
     /**
@@ -172,7 +172,7 @@ public class AbilityManaPart implements java.io.Serializable {
         runParams.put(AbilityKey.Activator, root == null ? null : root.getActivatingPlayer());
 
         player.getGame().getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams, false);
-        if (source.isLand() && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost() ) {
+        if (source.isLand() && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
             player.setTappedLandForManaThisTurn(true);
         }
     } // end produceMana(String)
@@ -334,28 +334,13 @@ public class AbilityManaPart implements java.io.Serializable {
                 continue;
             }
 
-            if (sa.isValid(restriction, this.getSourceCard().getController(), this.getSourceCard(), null)) {
-                return true;
-            }
-
             if (restriction.equals("CantPayGenericCosts")) {
                 return true;
             }
 
-            if (sa.isAbility()) {
-                if (restriction.startsWith("Activated")) {
-                    restriction = TextUtil.fastReplace(restriction, "Activated", "Card");
-                } else {
-                    continue;
-                }
+            if (sa.isValid(restriction, this.getSourceCard().getController(), this.getSourceCard(), null)) {
+                return true;
             }
-
-            if (sa.getHostCard() != null) {
-                if (sa.getHostCard().isValid(restriction, this.getSourceCard().getController(), this.getSourceCard(), null)) {
-                    return true;
-                }
-            }
-
         }
 
         return false;
@@ -629,8 +614,8 @@ public class AbilityManaPart implements java.io.Serializable {
         for (final Player p : g.getPlayers()) {
             for (final Card crd : p.getAllCards()) {
                 for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
-                    if (replacementEffect.requirementsCheck(g)
-                            && replacementEffect.getMode() == ReplacementType.ProduceMana
+                    if (replacementEffect.getMode() == ReplacementType.ProduceMana
+                            && replacementEffect.requirementsCheck(g)
                             && replacementEffect.canReplace(repParams)
                             && replacementEffect.zonesCheck(g.getZoneOf(crd))) {
                         return true;

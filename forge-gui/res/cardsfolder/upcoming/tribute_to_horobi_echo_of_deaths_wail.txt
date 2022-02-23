@@ -1,0 +1,27 @@
+Name:Tribute to Horobi
+ManaCost:1 B
+Types:Enchantment Saga
+K:Saga:3:DBToken,DBToken,DBExile
+SVar:DBToken:DB$ Token | TokenScript$ b_1_1_rat_rogue | TokenOwner$ Opponent | SpellDescription$ Each opponent creates a 1/1 black Rat Rogue creature token.
+SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | StackDescription$ SpellDescription | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AlternateMode:DoubleFaced
+DeckHas:Ability$Sacrifice
+Oracle:(As this Saga enters and after your draw step, add a lore counter.)\nI, II — Each opponent creates a 1/1 black Rat Rogue creature token.\nIII — Exile this Saga, then return it to the battlefield transformed under your control.
+
+ALTERNATE
+
+Name:Echo of Death's Wail
+ManaCost:no cost
+Colors:black
+Types:Enchantment Creature Spirit
+PT:3/3
+K:Flying
+K:Haste
+T:Mode$ ChangesZone | Destination$ Battlefield | Execute$ TrigGainControl | TriggerDescription$ When CARDNAME enters the battlefield, gain control of all Rat tokens.
+SVar:TrigGainControl:DB$ GainControl | AllValid$ Rat.token | NewController$ You
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, you may sacrifice another creature. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ Sac<1/Creature.Other/another creature> | NumCards$ 1
+DeckHas:Ability$Sacrifice
+Oracle:Flying, haste\nWhen Echo of Death's Wail enters the battlefield, gain control of all Rat tokens.\nWhenever Echo of Death's Wail attacks, you may sacrifice another creature. If you do, draw a card.

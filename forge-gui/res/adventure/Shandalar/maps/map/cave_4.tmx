@@ -10,20 +10,15 @@
    eJzz42Rg8BvFo3gUj+JRPIpH8YjAAAvyrVM=
   </data>
  </layer>
- <layer id="2" name="Ground" width="30" height="17">
+ <layer id="2" name="Walls" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzVU9EJwjAUfNSKBpMpnMWqBVdyCycQFKuf3cUBpCroAKKgviMJqdX+lKRg4GjSJu9yd6+JIEr+BFmfaMvY9dvlHTO6RHQQ7XIfGRvmGw6I0kBe1vkJzcsAmieMGde91NS2mteMs0e9sSI6CQ3UB3dVPzT79rl6B5snkbtDEZi37CvGlOc9fr4k97UKy2szx7iS/1wzk9+TtURGC+Z3qX21XqelvfYcvI8a6ocm5HeT+gk+zOErOPfkMi7EZ9YL874Jt80xN/l1lMZDOq1zXq+M1+h3fMvNGnub+h+r7/OxcvWpku+v/T5huTFGgXu4rqdD/7eheN8YK786
   </data>
  </layer>
- <layer id="3" name="Foreground" width="30" height="17">
+ <layer id="3" name="Clutter" width="30" height="17">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
-  </data>
- </layer>
- <layer id="5" name="AboveSprites" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
   </data>

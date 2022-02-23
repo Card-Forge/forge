@@ -1,0 +1,9 @@
+Name:Akki Ronin
+ManaCost:1 R
+Types:Creature Goblin Samurai
+PT:1/3
+T:Mode$ Attacks | ValidCard$ Samurai.YouCtrl,Warrior.YouCtrl | Alone$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Samurai or Warrior you control attacks alone, you may discard a card. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Card> | NumCards$ 1
+DeckHas:Ability$Discard
+DeckHints:Type$Samurai|Warrior
+Oracle:Whenever a Samurai or Warrior you control attacks alone, you may discard a card. If you do, draw a card.

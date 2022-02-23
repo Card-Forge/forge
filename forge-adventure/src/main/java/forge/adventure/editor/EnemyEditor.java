@@ -9,7 +9,10 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
@@ -58,12 +61,42 @@ public class EnemyEditor extends JComponent {
     {
 
         list.setCellRenderer(new EnemyDataRenderer());
-        list.addListSelectionListener(e -> updateEdit());
-        addButton("add",e->addEnemy());
-        addButton("remove",e->remove());
-        addButton("copy",e->copy());
-        addButton("load",e->load());
-        addButton("save",e->save());
+        list.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                EnemyEditor.this.updateEdit();
+            }
+        });
+        addButton("add", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EnemyEditor.this.addEnemy();
+            }
+        });
+        addButton("remove", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EnemyEditor.this.remove();
+            }
+        });
+        addButton("copy", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EnemyEditor.this.copy();
+            }
+        });
+        addButton("load", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EnemyEditor.this.load();
+            }
+        });
+        addButton("save", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EnemyEditor.this.save();
+            }
+        });
         BorderLayout layout=new BorderLayout();
         setLayout(layout);
         add(new JScrollPane(list), BorderLayout.LINE_START);

@@ -346,7 +346,7 @@ public class AbilityUtils {
                 candidates = game.getCardsIn(ZoneType.smartValueOf(zone));
                 validDefined = s[1];
             }
-            cards.addAll(CardLists.getValidCards(candidates, validDefined.split(","), hostCard.getController(), hostCard, sa));
+            cards.addAll(CardLists.getValidCards(candidates, validDefined, hostCard.getController(), hostCard, sa));
             return cards;
         } else {
             CardCollection list = null;
@@ -665,7 +665,7 @@ public class AbilityUtils {
                 val = playerXCount(players, calcX[1], card, ability);
             }
             else if (calcX[0].startsWith("TargetedObjects")) {
-                final List<GameObject> objects = new ArrayList<>();
+                List<GameObject> objects = new ArrayList<>();
                 // Make list of all targeted objects starting with the root SpellAbility
                 SpellAbility loopSA = sa.getRootAbility();
                 while (loopSA != null) {
@@ -673,6 +673,9 @@ public class AbilityUtils {
                         Iterables.addAll(objects, loopSA.getTargets());
                     }
                     loopSA = loopSA.getSubAbility();
+                }
+                if (calcX[0].endsWith("Distinct")) {
+                    objects = new ArrayList<>(new HashSet<>(objects));
                 }
                 val = objectXCount(objects, calcX[1], card, ability);
             }
@@ -712,7 +715,8 @@ public class AbilityUtils {
                 }
                 val = playerXCount(getDefinedPlayers(card, key, sa), calcX[1], card, ability);
             }
-            else if (calcX[0].startsWith("TriggeredPlayer") || calcX[0].startsWith("TriggeredTarget")) {
+            else if (calcX[0].startsWith("TriggeredPlayer") || calcX[0].startsWith("TriggeredTarget")
+                    || calcX[0].startsWith("TriggeredDefendingPlayer")) {
                 final SpellAbility root = sa.getRootAbility();
                 Object o = root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(9)));
                 val = o instanceof Player ? playerXProperty((Player) o, calcX[1], card, ability) : 0;
@@ -974,7 +978,7 @@ public class AbilityUtils {
             String var = sa.getParam("AbilityCount");
             valid = TextUtil.fastReplace(valid, var, Integer.toString(calculateAmount(source, var, sa)));
         }
-        return CardLists.getValidCards(list, valid.split(","), sa.getActivatingPlayer(), source, sa);
+        return CardLists.getValidCards(list, valid, sa.getActivatingPlayer(), source, sa);
     }
 
     /**
@@ -1598,15 +1602,11 @@ public class AbilityUtils {
             if (sa.hasParam("ForgetOtherTargets")) {
                 host.clearRemembered();
             }
-            for (final GameObject o : sa.getTargets()) {
-                host.addRemembered(o);
-            }
+            host.addRemembered(sa.getTargets());
         }
 
         if (sa.hasParam("ImprintTargets") && sa.usesTargeting()) {
-            for (final Card c : sa.getTargets().getTargetCards()) {
-                host.addImprintedCard(c);
-            }
+            host.addImprintedCards(sa.getTargets().getTargetCards());
         }
 
         if (sa.hasParam("RememberCostMana")) {
@@ -1633,34 +1633,48 @@ public class AbilityUtils {
         }
 
         if (sa.hasParam("RememberCostCards") && !sa.getPaidHash().isEmpty()) {
+            List <Card> noList = Lists.newArrayList();
+            if (sa.hasParam("RememberCostExcept")) {
+                noList.addAll(AbilityUtils.getDefinedCards(host, sa.getParam("RememberCostExcept"), sa));
+            }
             if (sa.getParam("Cost").contains("Exile")) {
                 final CardCollection paidListExiled = sa.getPaidList("Exiled");
                 for (final Card exiledAsCost : paidListExiled) {
-                    host.addRemembered(exiledAsCost);
+                    if (!noList.contains(exiledAsCost)) {
+                        host.addRemembered(exiledAsCost);
+                    }
                 }
             }
             else if (sa.getParam("Cost").contains("Sac")) {
                 final CardCollection paidListSacrificed = sa.getPaidList("Sacrificed");
                 for (final Card sacrificedAsCost : paidListSacrificed) {
-                    host.addRemembered(sacrificedAsCost);
+                    if (!noList.contains(sacrificedAsCost)) {
+                        host.addRemembered(sacrificedAsCost);
+                    }
                 }
             }
             else if (sa.getParam("Cost").contains("tapXType")) {
                 final CardCollection paidListTapped = sa.getPaidList("Tapped");
                 for (final Card tappedAsCost : paidListTapped) {
-                    host.addRemembered(tappedAsCost);
+                    if (!noList.contains(tappedAsCost)) {
+                        host.addRemembered(tappedAsCost);
+                    }
                 }
             }
             else if (sa.getParam("Cost").contains("Unattach")) {
                 final CardCollection paidListUnattached = sa.getPaidList("Unattached");
                 for (final Card unattachedAsCost : paidListUnattached) {
-                    host.addRemembered(unattachedAsCost);
+                    if (!noList.contains(unattachedAsCost)) {
+                        host.addRemembered(unattachedAsCost);
+                    }
                 }
             }
             else if (sa.getParam("Cost").contains("Discard")) {
                 final CardCollection paidListDiscarded = sa.getPaidList("Discarded");
                 for (final Card discardedAsCost : paidListDiscarded) {
-                    host.addRemembered(discardedAsCost);
+                    if (!noList.contains(discardedAsCost)) {
+                        host.addRemembered(discardedAsCost);
+                    }
                 }
             }
         }
@@ -1836,7 +1850,7 @@ public class AbilityUtils {
                 // Count$TriggeredManaSpent
                 if (sq[0].equals("TriggeredManaSpent")) {
                     final SpellAbility root = (SpellAbility) sa.getRootAbility().getTriggeringObject(AbilityKey.SpellAbility);
-                    return root.getTotalManaSpent();
+                    return root == null ? 0 : root.getTotalManaSpent();
                 }
 
                 // Count$Adamant.<Color>.<True>.<False>
@@ -1849,7 +1863,16 @@ public class AbilityUtils {
 
                 if (sq[0].startsWith("LastStateBattlefield")) {
                     final String[] k = l[0].split(" ");
-                    CardCollectionView list = sa.getLastStateBattlefield();
+                    CardCollectionView list;
+                    // this is only for spells that were cast
+                    if (sq[0].contains("WithFallback")) {
+                        if (!sa.getHostCard().wasCast()) {
+                            return doXMath(0, expr, c, ctb);
+                        }
+                        list = sa.getHostCard().getCastSA().getLastStateBattlefield();
+                    } else {
+                        list = sa.getLastStateBattlefield();
+                    }
                     if (list == null || list.isEmpty()) {
                         // LastState is Empty
                         if (sq[0].contains("WithFallback")) {
@@ -1858,7 +1881,7 @@ public class AbilityUtils {
                             return doXMath(0, expr, c, ctb);
                         }
                     }
-                    list = CardLists.getValidCards(list, k[1].split(","), sa.getActivatingPlayer(), c, sa);
+                    list = CardLists.getValidCards(list, k[1], sa.getActivatingPlayer(), c, sa);
                     if (k[0].contains("TotalToughness")) {
                         return doXMath(Aggregates.sum(list, CardPredicates.Accessors.fnGetNetToughness), expr, c, ctb);
                     }
@@ -1867,7 +1890,16 @@ public class AbilityUtils {
 
                 if (sq[0].startsWith("LastStateGraveyard")) {
                     final String[] k = l[0].split(" ");
-                    CardCollectionView list = sa.getLastStateGraveyard();
+                    CardCollectionView list;
+                    // this is only for spells that were cast
+                    if (sq[0].contains("WithFallback")) {
+                        if (!sa.getHostCard().wasCast()) {
+                            return doXMath(0, expr, c, ctb);
+                        }
+                        list = sa.getHostCard().getCastSA().getLastStateGraveyard();
+                    } else {
+                        list = sa.getLastStateGraveyard();
+                    }
                     if (sa.getLastStateGraveyard() == null || list.isEmpty()) {
                         // LastState is Empty
                         if (sq[0].contains("WithFallback")) {
@@ -1876,7 +1908,7 @@ public class AbilityUtils {
                             return doXMath(0, expr, c, ctb);
                         }
                     }
-                    list = CardLists.getValidCards(list, k[1].split(","), sa.getActivatingPlayer(), c, sa);
+                    list = CardLists.getValidCards(list, k[1], sa.getActivatingPlayer(), c, sa);
                     return doXMath(list.size(), expr, c, ctb);
                 }
 
@@ -1905,14 +1937,14 @@ public class AbilityUtils {
                 if (sq[0].startsWith("LastStateBattlefield")) {
                     final String[] k = l[0].split(" ");
                     CardCollection list = new CardCollection(game.getLastStateBattlefield());
-                    list = CardLists.getValidCards(list, k[1].split(","), player, c, ctb);
+                    list = CardLists.getValidCards(list, k[1], player, c, ctb);
                     return doXMath(list.size(), expr, c, ctb);
                 }
 
                 if (sq[0].startsWith("LastStateGraveyard")) {
                     final String[] k = l[0].split(" ");
                     CardCollection list = new CardCollection(game.getLastStateGraveyard());
-                    list = CardLists.getValidCards(list, k[1].split(","), player, c, ctb);
+                    list = CardLists.getValidCards(list, k[1], player, c, ctb);
                     return doXMath(list.size(), expr, c, ctb);
                 }
 
@@ -2141,7 +2173,7 @@ public class AbilityUtils {
 
         if (sq[0].startsWith("Devoured")) {
             final String validDevoured = sq[0].split(" ")[1];
-            CardCollection cl = CardLists.getValidCards(c.getDevouredCards(), validDevoured.split(","), player, c, ctb);
+            CardCollection cl = CardLists.getValidCards(c.getDevouredCards(), validDevoured, player, c, ctb);
             return doXMath(cl.size(), expr, c, ctb);
         }
 
@@ -2355,9 +2387,6 @@ public class AbilityUtils {
             return doXMath(player.getCounters(CounterType.getType(counterType)), expr, c, ctb);
         }
 
-        if (sq[0].contains("YourPoisonCounters")) {
-            return doXMath(player.getPoisonCounters(), expr, c, ctb);
-        }
         if (sq[0].contains("TotalOppPoisonCounters")) {
             return doXMath(player.getOpponentsTotalPoisonCounters(), expr, c, ctb);
         }
@@ -2416,8 +2445,7 @@ public class AbilityUtils {
 
         if (sq[0].startsWith("ColorsCtrl")) {
             final String restriction = l[0].substring(11);
-            final String[] rest = restriction.split(",");
-            final CardCollection list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), rest, player, c, ctb);
+            final CardCollection list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
             byte n = 0;
             for (final Card card : list) {
                 n |= card.getColor().getColor();
@@ -2676,8 +2704,7 @@ public class AbilityUtils {
         // Count$SumPower_valid
         if (sq[0].startsWith("SumPower")) {
             final String[] restrictions = l[0].split("_");
-            final String[] rest = restrictions[1].split(",");
-            CardCollection filteredCards = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), rest, player, c, ctb);
+            CardCollection filteredCards = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restrictions[1], player, c, ctb);
             return doXMath(Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetNetPower), expr, c, ctb);
         }
 
@@ -2688,9 +2715,8 @@ public class AbilityUtils {
             if (sq[0].contains("Graveyard"))
                 zone = ZoneType.Graveyard;
             final String[] restrictions = l[0].split("_");
-            final String[] rest = restrictions[1].split(",");
             CardCollectionView cardsonbattlefield = game.getCardsIn(zone);
-            CardCollection filteredCards = CardLists.getValidCards(cardsonbattlefield, rest, player, c, ctb);
+            CardCollection filteredCards = CardLists.getValidCards(cardsonbattlefield, restrictions[1], player, c, ctb);
             return Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetCmc);
         }
 
@@ -2786,8 +2812,7 @@ public class AbilityUtils {
 
         if (sq[0].startsWith("GreatestToughness_")) {
             final String restriction = l[0].substring(18);
-            final String[] rest = restriction.split(",");
-            CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), rest, player, c, ctb);
+            CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
             int highest = 0;
             for (final Card crd : list) {
                 if (crd.getNetToughness() > highest) {
@@ -2799,8 +2824,7 @@ public class AbilityUtils {
 
         if (sq[0].startsWith("HighestCMC_")) {
             final String restriction = l[0].substring(11);
-            final String[] rest = restriction.split(",");
-            CardCollection list = CardLists.getValidCards(game.getCardsInGame(), rest, player, c, ctb);
+            CardCollection list = CardLists.getValidCards(game.getCardsInGame(), restriction, player, c, ctb);
             int highest = 0;
             for (final Card crd : list) {
                 // dont check for Split card anymore
@@ -2839,8 +2863,7 @@ public class AbilityUtils {
         if (sq[0].startsWith("DifferentCardNames_")) {
             final List<String> crdname = Lists.newArrayList();
             final String restriction = l[0].substring(19);
-            final String[] rest = restriction.split(",");
-            CardCollection list = CardLists.getValidCards(game.getCardsInGame(), rest, player, c, ctb);
+            CardCollection list = CardLists.getValidCards(game.getCardsInGame(), restriction, player, c, ctb);
             for (final Card card : list) {
                 String name = card.getName();
                 // CR 201.2b Those objects have different names only if each of them has at least one name and no two objects in that group have a name in common
@@ -2854,8 +2877,7 @@ public class AbilityUtils {
         if (sq[0].startsWith("DifferentPower_")) {
             final List<Integer> powers = Lists.newArrayList();
             final String restriction = l[0].substring(15);
-            final String[] rest = restriction.split(",");
-            CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), rest, player, c, ctb);
+            CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
             for (final Card card : list) {
                 Integer pow = card.getNetPower();
                 if (!powers.contains(pow)) {
@@ -2880,8 +2902,7 @@ public class AbilityUtils {
 
         if (sq[0].startsWith("ColorsCtrl")) {
             final String restriction = l[0].substring(11);
-            final String[] rest = restriction.split(",");
-            final CardCollection list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), rest, player, c, ctb);
+            final CardCollection list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
             byte n = 0;
             for (final Card card : list) {
                 n |= card.getColor().getColor();
@@ -2940,18 +2961,22 @@ public class AbilityUtils {
         List<SpellAbility> list = Lists.newArrayList(tgtCard.getBasicSpells());
 
         CardState original = tgtCard.getState(CardStateName.Original);
-        if (tgtCard.isLand()) {
-            LandAbility la = new LandAbility(tgtCard, controller, null);
-            la.setCardState(original);
-            list.add(la);
-        }
-        if (tgtCard.isModal()) {
-            CardState modal = tgtCard.getState(CardStateName.Modal);
-            list.addAll(Lists.newArrayList(tgtCard.getBasicSpells(modal)));
-            if (modal.getType().isLand()) {
+        if (tgtCard.isFaceDown()) {
+            list.addAll(Lists.newArrayList(tgtCard.getBasicSpells(original)));
+        } else {
+            if (tgtCard.isLand()) {
                 LandAbility la = new LandAbility(tgtCard, controller, null);
-                la.setCardState(modal);
+                la.setCardState(original);
                 list.add(la);
+            }
+            if (tgtCard.isModal()) {
+                CardState modal = tgtCard.getState(CardStateName.Modal);
+                list.addAll(Lists.newArrayList(tgtCard.getBasicSpells(modal)));
+                if (modal.getType().isLand()) {
+                    LandAbility la = new LandAbility(tgtCard, controller, null);
+                    la.setCardState(modal);
+                    list.add(la);
+                }
             }
         }
 
@@ -3382,16 +3407,14 @@ public class AbilityUtils {
             String[] lparts = l[0].split(" ", 2);
             final List<ZoneType> vZone = ZoneType.listValueOf(lparts[0].split("Valid")[1]);
             String restrictions = TextUtil.fastReplace(l[0], TextUtil.addSuffix(lparts[0]," "), "");
-            final String[] rest = restrictions.split(",");
-            CardCollection cards = CardLists.getValidCards(game.getCardsIn(vZone), rest, player, source, ctb);
+            CardCollection cards = CardLists.getValidCards(game.getCardsIn(vZone), restrictions, player, source, ctb);
             return doXMath(cards.size(), m, source, ctb);
         }
 
         // count valid cards on the battlefield
         if (l[0].startsWith("Valid ")) {
             final String restrictions = l[0].substring(6);
-            final String[] rest = restrictions.split(",");
-            CardCollection cardsonbattlefield = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), rest, player, source, ctb);
+            CardCollection cardsonbattlefield = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restrictions, player, source, ctb);
             return doXMath(cardsonbattlefield.size(), m, source, ctb);
         }
 

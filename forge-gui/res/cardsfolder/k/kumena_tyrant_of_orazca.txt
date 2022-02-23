@@ -2,9 +2,10 @@ Name:Kumena, Tyrant of Orazca
 ManaCost:1 G U
 Types:Legendary Creature Merfolk Shaman
 PT:2/4
-A:AB$ Pump | Cost$ tapXType<1/Merfolk.Other> | CostDesc$ Tap another untapped Merfolk you control: | Defined$ Self | KW$ HIDDEN Unblockable | AILogic$ BeforeCombat | SpellDescription$ CARDNAME can't be blocked this turn.
-A:AB$ Draw | Cost$ tapXType<3/Merfolk> | CostDesc$ Tap three untapped Merfolk you control: | NumCards$ 1 | AILogic$ AtOppEOT | SpellDescription$ Draw a card.
-A:AB$ PutCounterAll | Cost$ tapXType<5/Merfolk> | CostDesc$ Tap five untapped Merfolk you control: | ValidCards$ Merfolk.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ AtOppEOT | SpellDescription$ Put a +1/+1 counter on each Merfolk you control.
+A:AB$ Pump | Cost$ tapXType<1/Merfolk.Other> | Defined$ Self | KW$ HIDDEN Unblockable | AILogic$ BeforeCombat | SpellDescription$ CARDNAME can't be blocked this turn.
+A:AB$ Draw | Cost$ tapXType<3/Merfolk> | NumCards$ 1 | AILogic$ AtOppEOT | SpellDescription$ Draw a card.
+A:AB$ PutCounterAll | Cost$ tapXType<5/Merfolk> | ValidCards$ Merfolk.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ AtOppEOT | SpellDescription$ Put a +1/+1 counter on each Merfolk you control.
 DeckHints:Type$Merfolk
 SVar:BuffedBy:Merfolk
+DeckHas:Ability$Counters
 Oracle:Tap another untapped Merfolk you control: Kumena, Tyrant of Orazca can't be blocked this turn.\nTap three untapped Merfolk you control: Draw a card.\nTap five untapped Merfolk you control: Put a +1/+1 counter on each Merfolk you control.

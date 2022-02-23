@@ -1,0 +1,10 @@
+Name:Replication Specialist
+ManaCost:4 U
+Types:Creature Moonfolk Artificer
+PT:3/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.nonToken+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever a nontoken artifact enters the battlefield under your control, you may pay {1}{U}. If you do, create a token that's a copy of that artifact.
+SVar:TrigCopy:AB$ CopyPermanent | Cost$ 1 U | Defined$ TriggeredCard
+DeckNeeds:Type$Artifact
+DeckHas:Ability$Token
+Oracle:Flying\nWhenever a nontoken artifact enters the battlefield under your control, you may pay {1}{U}. If you do, create a token that's a copy of that artifact.

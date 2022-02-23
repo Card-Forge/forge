@@ -322,7 +322,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
 
         if (params.containsKey("LifeTotal")) {
             final String player = params.get("LifeTotal");
-            String lifeCompare = "GE1";
+            final String lifeCompare = getParamOrDefault("LifeAmount", "GE1");
             int life = 1;
 
             if (player.equals("You")) {
@@ -337,9 +337,6 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             if (player.equals("ActivePlayer")) {
                 life = game.getPhaseHandler().getPlayerTurn().getLife();
             }
-            if (params.containsKey("LifeAmount")) {
-                lifeCompare = params.get("LifeAmount");
-            }
 
             final String rightString = lifeCompare.substring(2);
             int right = AbilityUtils.calculateAmount(getHostCard(), rightString, this);
@@ -351,33 +348,27 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
 
         if (params.containsKey("IsPresent")) {
             final String sIsPresent = params.get("IsPresent");
-            String presentCompare = "GE1";
+            final String presentCompare = getParamOrDefault("PresentCompare", "GE1");
+            final String presentPlayer = getParamOrDefault("PresentPlayer", "Any");
             ZoneType presentZone = ZoneType.Battlefield;
-            String presentPlayer = "Any";
-            if (params.containsKey("PresentCompare")) {
-                presentCompare = params.get("PresentCompare");
-            }
             if (params.containsKey("PresentZone")) {
                 presentZone = ZoneType.smartValueOf(params.get("PresentZone"));
             }
-            if (params.containsKey("PresentPlayer")) {
-                presentPlayer = params.get("PresentPlayer");
-            }
             CardCollection list = new CardCollection();
             if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
-                list.addAll(this.getHostCard().getController().getCardsIn(presentZone));
+                list.addAll(hostController.getCardsIn(presentZone));
             }
             if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
-                for (final Player p : this.getHostCard().getController().getOpponents()) {
+                for (final Player p : hostController.getOpponents()) {
                     list.addAll(p.getCardsIn(presentZone));
                 }
             }
             if (presentPlayer.equals("Any")) {
-                for (final Player p : this.getHostCard().getController().getAllies()) {
+                for (final Player p : hostController.getAllies()) {
                     list.addAll(p.getCardsIn(presentZone));
                 }
             }
-            list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard(), this);
+            list = CardLists.getValidCards(list, sIsPresent, hostController, this.getHostCard(), this);
 
             final String rightString = presentCompare.substring(2);
             int right = AbilityUtils.calculateAmount(getHostCard(), rightString, this);
@@ -390,29 +381,23 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
 
         if (params.containsKey("IsPresent2")) {
             final String sIsPresent = params.get("IsPresent2");
-            String presentCompare = "GE1";
+            final String presentCompare = getParamOrDefault("PresentCompare2", "GE1");
+            final String presentPlayer = getParamOrDefault("PresentPlayer2", "Any");
             ZoneType presentZone = ZoneType.Battlefield;
-            String presentPlayer = "Any";
-            if (params.containsKey("PresentCompare2")) {
-                presentCompare = params.get("PresentCompare2");
-            }
             if (params.containsKey("PresentZone2")) {
                 presentZone = ZoneType.smartValueOf(params.get("PresentZone2"));
             }
-            if (params.containsKey("PresentPlayer2")) {
-                presentPlayer = params.get("PresentPlayer2");
-            }
             CardCollection list = new CardCollection();
             if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
-                list.addAll(this.getHostCard().getController().getCardsIn(presentZone));
+                list.addAll(hostController.getCardsIn(presentZone));
             }
             if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
-                for (final Player p : this.getHostCard().getController().getOpponents()) {
+                for (final Player p : hostController.getOpponents()) {
                     list.addAll(p.getCardsIn(presentZone));
                 }
             }
 
-            list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard(), this);
+            list = CardLists.getValidCards(list, sIsPresent, hostController, this.getHostCard(), this);
 
             final String rightString = presentCompare.substring(2);
             int right = AbilityUtils.calculateAmount(getHostCard(), rightString, this);
@@ -426,10 +411,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         if (params.containsKey("CheckDefinedPlayer")) {
             final String sIsPresent = params.get("CheckDefinedPlayer");
             int playersize = AbilityUtils.getDefinedPlayers(getHostCard(), sIsPresent, this).size();
-            String comparator = "GE1";
-            if (params.containsKey("DefinedPlayerCompare")) {
-                comparator = params.get("DefinedPlayerCompare");
-            }
+            final String comparator = getParamOrDefault("DefinedPlayerCompare", "GE1");
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
             final int operandValue = AbilityUtils.calculateAmount(getHostCard(), svarOperand, this);
@@ -440,10 +422,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
 
         if (params.containsKey("CheckSVar")) {
             final int sVar = AbilityUtils.calculateAmount(getHostCard(), params.get("CheckSVar"), this);
-            String comparator = "GE1";
-            if (params.containsKey("SVarCompare")) {
-                comparator = params.get("SVarCompare");
-            }
+            final String comparator = getParamOrDefault("SVarCompare", "GE1");
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
             final int operandValue = AbilityUtils.calculateAmount(getHostCard(), svarOperand, this);

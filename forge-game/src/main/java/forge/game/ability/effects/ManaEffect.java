@@ -144,26 +144,36 @@ public class ManaEffect extends SpellAbilityEffect {
 
                 if (type.equals("EnchantedManaCost")) {
                     Card enchanted = card.getEnchantingCard();
-                    if (enchanted == null )
+                    if (enchanted == null)
                         continue;
 
                     StringBuilder sb = new StringBuilder();
                     int generic = enchanted.getManaCost().getGenericCost();
-                    if (generic > 0)
-                        sb.append(generic);
 
                     for (ManaCostShard s : enchanted.getManaCost()) {
                         ColorSet cs = ColorSet.fromMask(s.getColorMask());
+                        byte chosenColor;
                         if (cs.isColorless())
                             continue;
-                        sb.append(' ');
-                        if (cs.isMonoColor())
-                            sb.append(MagicColor.toShortString(s.getColorMask()));
-                        else /* (cs.isMulticolor()) */ {
-                            byte chosenColor = p.getController().chooseColor(Localizer.getInstance().getMessage("lblChooseSingleColorFromTarget", s.toString()), sa, cs);
-                            sb.append(MagicColor.toShortString(chosenColor));
+                        if (s.isOr2Generic()) { // CR 106.8
+                            chosenColor = p.getController().chooseColorAllowColorless(Localizer.getInstance().getMessage("lblChooseSingleColorFromTarget", s.toString()), card, cs);
+                            if (chosenColor == MagicColor.COLORLESS) {
+                                generic += 2;
+                                continue;
+                            }
                         }
+                        else if (cs.isMonoColor())
+                            chosenColor = s.getColorMask();
+                        else /* (cs.isMulticolor()) */ {
+                            chosenColor = p.getController().chooseColor(Localizer.getInstance().getMessage("lblChooseSingleColorFromTarget", s.toString()), sa, cs);
+                        }
+                        sb.append(MagicColor.toShortString(chosenColor));
+                        sb.append(' ');
                     }
+                    if (generic > 0) {
+                        sb.append(generic);
+                    }
+
                     abMana.setExpressChoice(sb.toString().trim());
                 } else if (type.equals("LastNotedType")) {
                     final StringBuilder sb = new StringBuilder();

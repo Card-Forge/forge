@@ -257,6 +257,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
+        if (c == 0) { //in case choice was already made to pay 0 cards
+            return PaymentDecision.number(c);
+        }
+
         if (cost.from == ZoneType.Battlefield || cost.from == ZoneType.Hand) {
             final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, list, ability);
             inp.setMessage(Localizer.getInstance().getMessage("lblExileNCardsFromYourZone", "%d", cost.getFrom().getTranslatedName()));
@@ -760,7 +764,8 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             if (num == 0) {
                 return PaymentDecision.number(0);
             }
-            if (hand.size() == num) {
+            // player might not want to pay if from a trigger
+            if (!ability.hasSVar("IsCastFromPlayEffect") && hand.size() == num) {
                 return PaymentDecision.card(hand);
             }
 

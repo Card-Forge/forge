@@ -128,6 +128,7 @@ public class AddBasicLandsDialog extends FDialog {
         lblDeckInfo.setFont(FSkinFont.get(12));
 
         cbLandSet.setFont(lblLandSet.getFont());
+        cbLandSet.setAutoClose(false);
         cbLandSet.setChangedHandler(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
@@ -251,7 +252,8 @@ public class AddBasicLandsDialog extends FDialog {
         //layout land set combo box
         float comboBoxHeight = cbLandSet.getHeight();
         lblLandSet.setBounds(x, y, lblLandSet.getAutoSizeBounds().width, comboBoxHeight);
-        cbLandSet.setBounds(x + lblLandSet.getWidth(), y, w - lblLandSet.getWidth(), comboBoxHeight);
+        y+= comboBoxHeight;
+        cbLandSet.setBounds(x, y, w, comboBoxHeight);
 
         //layout card panel scroller
         y += comboBoxHeight + padding;

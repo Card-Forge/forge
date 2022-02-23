@@ -12,6 +12,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardUtil;
 import forge.game.combat.Combat;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.spellability.SpellAbility;
@@ -56,8 +57,8 @@ public class BlockEffect extends SpellAbilityEffect {
                 combat.addBlocker(attacker, blocker);
                 combat.orderAttackersForDamageAssignment(blocker);
 
-                blocker.addBlockedThisTurn(attacker);
-                attacker.addBlockedByThisTurn(blocker);
+                blocker.addBlockedThisTurn(CardUtil.getLKICopy(attacker));
+                attacker.addBlockedByThisTurn(CardUtil.getLKICopy(blocker));
 
                 {
                     final Map<AbilityKey, Object> runParams = AbilityKey.newMap();

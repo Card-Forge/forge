@@ -4,7 +4,7 @@ Types:Creature Human Soldier Ally
 PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl
-A:AB$ GenericChoice | Cost$ tapXType<1/Ally.Other> | CostDesc$ Tap another untapped Ally you control: | Choices$ ChooseFirstStrike,ChooseVigilance,ChooseTrample | SpellDescription$ CARDNAME gains your choice of first strike, vigilance, or trample until end of turn.
+A:AB$ GenericChoice | Cost$ tapXType<1/Ally.Other> | Choices$ ChooseFirstStrike,ChooseVigilance,ChooseTrample | SpellDescription$ CARDNAME gains your choice of first strike, vigilance, or trample until end of turn.
 SVar:ChooseFirstStrike:DB$ Pump | Defined$ Self | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
 SVar:ChooseVigilance:DB$ Pump | Defined$ Self | KW$ Vigilance | SpellDescription$ CARDNAME gains vigilance until end of turn.
 SVar:ChooseTrample:DB$ Pump | Defined$ Self | KW$ Trample | SpellDescription$ CARDNAME gains trample until end of turn.

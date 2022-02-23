@@ -1,0 +1,6 @@
+Name:Spirit Token
+Colors:green
+ManaCost:no cost
+PT:4/5
+Types:Creature Spirit
+Oracle:

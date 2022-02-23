@@ -29,10 +29,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        String desc = "Card";
-        if (sa.hasParam("ValidDescription")) {
-            desc = sa.getParam("ValidDescription");
-        }
+        String desc = sa.getParamOrDefault("ValidDescription", "Card");
 
         int untilAmount = 1;
         if (sa.hasParam("Amount")) {
@@ -57,7 +54,6 @@ public class DigUntilEffect extends SpellAbilityEffect {
         final ZoneType found = ZoneType.smartValueOf(sa.getParam("FoundDestination"));
         final ZoneType revealed = ZoneType.smartValueOf(sa.getParam("RevealedDestination"));
         if (found != null) {
-
             sb.append(untilAmount > 1 ? "those cards" : "that card");
             sb.append(" ");
 

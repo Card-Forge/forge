@@ -26,6 +26,7 @@ import com.google.common.collect.Lists;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
+import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -296,6 +297,15 @@ public class ControlGainAi extends SpellAbilityAi {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, final Player ai) {
         final Game game = ai.getGame();
+
+        // Special card logic that is processed elsewhere
+        if (sa.hasParam("AILogic")) {
+            if (("DonateTargetPerm").equals(sa.getParam("AILogic"))) {
+                // Donate step 2 - target a donatable permanent.
+                return SpecialCardAi.Donate.considerDonatingPermanent(ai, sa);
+            }
+        }
+
         if (!sa.usesTargeting()) {
             if (sa.hasParam("AllValid")) {
                 CardCollectionView tgtCards = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponents());

@@ -32,6 +32,7 @@ public class FSkin {
     private static final Map<Integer, TextureRegion> cracks = new HashMap<>(16);
     private static final Map<Integer, TextureRegion> borders = new HashMap<>();
     private static final Map<Integer, TextureRegion> deckbox = new HashMap<>();
+    private static final Map<Integer, TextureRegion> cursor = new HashMap<>();
 
     private static Array<String> allSkins;
     private static FileHandle preferredDir;
@@ -107,7 +108,7 @@ public class FSkin {
         {
             if (!dir.exists() || !dir.isDirectory()) {
                 //if skins directory doesn't exist, point to internal assets/skin directory instead for the sake of the splash screen
-                preferredDir = Gdx.files.internal("fallback_skin");
+                preferredDir = GuiBase.isAndroid() ? Gdx.files.internal("fallback_skin") : Gdx.files.classpath("fallback_skin");
             }
             else {
                 if (splashScreen != null) {
@@ -244,6 +245,8 @@ public class FSkin {
         final FileHandle f12 = getSkinFile(ForgeConstants.SPRITE_START_FILE);
         final FileHandle f13 = getDefaultSkinFile(ForgeConstants.SPRITE_DECKBOX_FILE);
         final FileHandle f17 = getDefaultSkinFile(ForgeConstants.SPRITE_CRACKS_FILE);
+        final FileHandle f18 = getDefaultSkinFile(ForgeConstants.SPRITE_PHYREXIAN_FILE);
+        final FileHandle f19 = getDefaultSkinFile(ForgeConstants.SPRITE_CURSOR_FILE);
 
         /*TODO Themeable
         final FileHandle f14 = getDefaultSkinFile(ForgeConstants.SPRITE_SETLOGO_FILE);
@@ -436,6 +439,13 @@ public class FSkin {
             FSkin.deckbox.put(1, new TextureRegion(deckboxes, 492, 2, 488, 680));
             //generic deck box
             FSkin.deckbox.put(2, new TextureRegion(deckboxes, 982, 2, 488, 680));
+            //cursor
+            Texture cursors = new Texture(f19);
+            FSkin.cursor.put(0, new TextureRegion(cursors, 0, 0, 32, 32)); //default
+            FSkin.cursor.put(1, new TextureRegion(cursors, 32, 0, 32, 32)); //magnify on
+            FSkin.cursor.put(2, new TextureRegion(cursors, 64, 0, 32, 32)); // magnify off
+
+            Forge.setCursor(cursor.get(0), "0");
 
             preferredIcons.dispose();
             pxDefaultAvatars.dispose();
@@ -547,6 +557,10 @@ public class FSkin {
 
     public static Map<Integer, TextureRegion> getDeckbox() {
         return deckbox;
+    }
+
+    public static Map<Integer, TextureRegion> getCursor() {
+        return cursor;
     }
 
     public static boolean isLoaded() { return loaded; }

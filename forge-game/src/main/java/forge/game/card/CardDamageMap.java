@@ -4,6 +4,7 @@
 package forge.game.card;
 
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import com.google.common.collect.ForwardingTable;
@@ -87,6 +88,26 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
         runParams.put(AbilityKey.IsCombatDamage, isCombat);
         game.getTriggerHandler().runTrigger(TriggerType.DamageAll, runParams, false);
     }
+
+    public void triggerExcessDamage(boolean isCombat, Map<Card, Integer> lethalDamage, final Game game) {
+        for (Entry<Card, Integer> damaged : lethalDamage.entrySet()) {
+            int sum = 0;
+            for (Integer i : this.column(damaged.getKey()).values()) {
+                sum += i;
+            }
+
+            int excess = sum - (damaged.getKey().hasBeenDealtDeathtouchDamage() ? 1 : damaged.getValue());
+            if (excess > 0) {
+                // Run triggers
+                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                runParams.put(AbilityKey.DamageTarget, damaged.getKey());
+                runParams.put(AbilityKey.DamageAmount, excess);
+                runParams.put(AbilityKey.IsCombatDamage, isCombat);
+                game.getTriggerHandler().runTrigger(TriggerType.ExcessDamage, runParams, false);
+            }
+        }
+    }
+
     /**
      * special put logic, sum the values
      */
