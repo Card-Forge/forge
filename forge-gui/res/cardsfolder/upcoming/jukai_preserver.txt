@@ -1,6 +1,6 @@
 Name:Jukai Preserver
 ManaCost:3 G
-Types:Enchantment Creature — Human Druid
+Types:Enchantment Creature Human Druid
 PT:3/3
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on target creature you control.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1

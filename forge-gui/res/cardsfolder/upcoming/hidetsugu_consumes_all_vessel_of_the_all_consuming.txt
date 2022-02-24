@@ -23,5 +23,4 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | Counter
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigLose | DamageToTargetThisTurnCondition$ GE10 | TriggerDescription$ Whenever CARDNAME deals damage to a player, if it has dealt 10 or more damage to that player this turn, they lose the game.
 SVar:TrigLose:DB$ LosesGame | Defined$ TriggeredTarget
 DeckHas:Ability$Counters
-Oracle:Trample\nWhenever Vessel of the All-Consuming deals damage, put a +1/+1 counter on it.
-Whenever Vessel of the All-Consuming deals damage to a player, if it has dealt 10 or more damage to that player this turn, they lose the game.
+Oracle:Trample\nWhenever Vessel of the All-Consuming deals damage, put a +1/+1 counter on it.\nWhenever Vessel of the All-Consuming deals damage to a player, if it has dealt 10 or more damage to that player this turn, they lose the game.

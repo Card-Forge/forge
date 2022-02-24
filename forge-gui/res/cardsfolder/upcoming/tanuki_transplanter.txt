@@ -1,6 +1,6 @@
 Name:Tanuki Transplanter
 ManaCost:3 G
-Types:Artifact Creature — Equipment Dog
+Types:Artifact Creature Equipment Dog
 PT:2/4
 T:Mode$ Attacks | ValidCard$ Card.Self,Creature.EquippedBy | Execute$ TrigMana | TriggerDescription$ Whenever CARDNAME or equipped creature attacks, add an amount of {G} equal to its power. Until end of turn, you don't lose this mana as steps and phases end.
 SVar:TrigMana:DB$ Mana | Produced$ G | Amount$ X | PersistentMana$ True
