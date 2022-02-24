@@ -430,8 +430,10 @@ A7 U A-Cloister Gargoyle @Mark Zug
 A53 M A-Demilich @Daniel Zrom
 A81 U A-Wizard Class @Marta Nael
 A87 M A-Acererak the Archlich @Andrey Kuzinskiy
+A95 U A-Death-Priest of Myrkul @Lius Lasahido
 A102 C A-Fates' Reversal @Alix Branwyn
 A115 C A-Precipitous Drop @Gabor Szikszai
+A118 C A-Sepulcher Ghoul @Jason A. Engle
 A180 U A-Druid Class @Svetlin Velinov
 A181 M A-Ellywick Tumblestrum @Anna Steinbauer
 A183 C A-Find the Path @Lindsey Look

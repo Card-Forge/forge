@@ -1,0 +1,10 @@
+Name:A-Skull Skaab
+ManaCost:U B
+Types:Creature Zombie
+PT:2/2
+K:Exploit
+T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a creature you control exploits a creature, create a 2/2 black Zombie creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie
+DeckHas:Ability$Token|Sacrifice
+DeckHints:Keyword$Exploit
+Oracle:Exploit\nWhenever a creature you control exploits a creature, create a 2/2 black Zombie creature token.
