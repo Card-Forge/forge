@@ -39,9 +39,8 @@ public class StartScene extends UIScene {
     }
 
     public boolean Resume() {
-        //Forge.switchToLast();
+        Forge.switchToLast();
         GameHUD.getInstance().getTouchpad().setVisible(false);
-        Forge.switchScene(SceneType.GameScene.instance);
         return true;
     }
 
