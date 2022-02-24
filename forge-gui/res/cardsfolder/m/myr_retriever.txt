@@ -3,6 +3,6 @@ ManaCost:2
 Types:Artifact Creature Myr
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME dies, return another target artifact card from your graveyard to your hand.
-SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Artifact.Other | TargetsWithDefinedController$ TriggeredCardController | Cost$ 0
+SVar:TrigChange:AB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Artifact.Other | TargetsWithDefinedController$ TriggeredCardController | Cost$ 0
 SVar:SacMe:1
 Oracle:When Myr Retriever dies, return another target artifact card from your graveyard to your hand.

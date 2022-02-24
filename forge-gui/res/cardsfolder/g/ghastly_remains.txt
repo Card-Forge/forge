@@ -4,7 +4,7 @@ Types:Creature Zombie
 PT:0/0
 K:Amplify:1:Zombie
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.StrictlySelf | PresentZone$ Graveyard | PresentPlayer$ You | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is in your graveyard, you may pay {B}{B}{B}. If you do, return CARDNAME to your hand.
-SVar:TrigReturn:AB$ChangeZone | Cost$ B B B | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+SVar:TrigReturn:AB$ ChangeZone | Cost$ B B B | Defined$ Self | Origin$ Graveyard | Destination$ Hand
 SVar:NeedsToPlayVar:X GE2
 SVar:X:Count$TypeInYourHand.Zombie
 SVar:SacMe:2
