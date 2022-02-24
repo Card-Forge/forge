@@ -1,6 +1,9 @@
 package forge.game.ability.effects;
 
+import java.util.Map;
+
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -87,8 +90,11 @@ public class ZoneExchangeEffect extends SpellAbilityEffect {
             object1.unattachFromEntity(c);
             object2.attachToEntity(c);
         }
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
+        moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
         // Exchange Zone
-        game.getAction().moveTo(zone2, object1, sa);
-        game.getAction().moveTo(zone1, object2, sa);
+        game.getAction().moveTo(zone2, object1, sa, moveParams);
+        game.getAction().moveTo(zone1, object2, sa, moveParams);
     }
 }

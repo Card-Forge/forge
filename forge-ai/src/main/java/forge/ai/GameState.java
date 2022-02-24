@@ -1250,7 +1250,7 @@ public abstract class GameState {
                     }
 
                     if (cardsWithoutETBTrigs.contains(c)) {
-                        p.getGame().getAction().moveTo(ZoneType.Battlefield, c, null);
+                        p.getGame().getAction().moveTo(ZoneType.Battlefield, c, null, null);
                     } else {
                         p.getZone(ZoneType.Hand).add(c);
                         p.getGame().getAction().moveToPlay(c, null, null);

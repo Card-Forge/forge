@@ -9,6 +9,7 @@ import com.google.common.collect.Maps;
 
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -287,7 +288,11 @@ public class DiscardEffect extends SpellAbilityEffect {
             discardedMap.put(p, toBeDiscarded);
         }
 
-        discard(sa, table, true, discardedMap);
+        Map<AbilityKey, Object> params = AbilityKey.newMap();
+        params.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
+        params.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
+
+        discard(sa, table, true, discardedMap, params);
 
         // run trigger if something got milled
         table.triggerChangesZoneAll(game, sa);

@@ -1,5 +1,8 @@
 package forge.game.ability.effects;
 
+import java.util.Map;
+
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.CardZoneTable;
@@ -34,6 +37,9 @@ public class SurveilEffect extends SpellAbilityEffect {
         boolean isOptional = sa.hasParam("Optional");
 
         CardZoneTable table = new CardZoneTable();
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
+        moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
 
         for (final Player p : getTargetPlayers(sa)) {
             if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
@@ -41,7 +47,7 @@ public class SurveilEffect extends SpellAbilityEffect {
                     continue;
                 }
 
-                p.surveil(num, sa, table);
+                p.surveil(num, sa, table, moveParams);
             }
         }
         table.triggerChangesZoneAll(sa.getHostCard().getGame(), sa);

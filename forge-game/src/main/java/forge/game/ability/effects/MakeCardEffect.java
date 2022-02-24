@@ -1,7 +1,10 @@
 package forge.game.ability.effects;
 
+import java.util.Map;
+
 import forge.StaticData;
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -13,6 +16,9 @@ import forge.game.zone.ZoneType;
 public class MakeCardEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
+        moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
         for (final Player player : getTargetPlayers(sa)) {
             final Card source = sa.getHostCard();
             final Game game = player.getGame();
@@ -43,13 +49,13 @@ public class MakeCardEffect extends SpellAbilityEffect {
                     if (!sa.hasParam("NotToken")) {
                         card.setTokenCard(true);
                     }
-                    game.getAction().moveTo(ZoneType.None, card, sa);
+                    game.getAction().moveTo(ZoneType.None, card, sa, moveParams);
                     cards.add(card);
                     amount--;
                 }
 
                 for (final Card c : cards) {
-                    game.getAction().moveTo(zone, c, sa);
+                    game.getAction().moveTo(zone, c, sa, moveParams);
                     if (sa.hasParam("RememberMade")) {
                         sa.getHostCard().addRemembered(c);
                     }

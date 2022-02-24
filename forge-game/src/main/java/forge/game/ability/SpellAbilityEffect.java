@@ -435,7 +435,7 @@ public abstract class SpellAbilityEffect {
 
         // TODO: Add targeting to the effect so it knows who it's dealing with
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff, sa);
+        game.getAction().moveTo(ZoneType.Command, eff, sa, null);
         eff.updateStateForView();
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }
@@ -553,7 +553,7 @@ public abstract class SpellAbilityEffect {
 
             // TODO: Add targeting to the effect so it knows who it's dealing with
             game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-            game.getAction().moveTo(ZoneType.Command, eff, sa);
+            game.getAction().moveTo(ZoneType.Command, eff, sa, null);
             eff.updateStateForView();
             game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         }
@@ -685,13 +685,13 @@ public abstract class SpellAbilityEffect {
         };
     }
 
-    protected static void discard(SpellAbility sa, CardZoneTable table, final boolean effect, Map<Player, CardCollectionView> discardedMap) {
+    protected static void discard(SpellAbility sa, CardZoneTable table, final boolean effect, Map<Player, CardCollectionView> discardedMap, Map<AbilityKey, Object> params) {
         Set<Player> discarders = discardedMap.keySet();
         for (Player p : discarders) {
             final CardCollection discardedByPlayer = new CardCollection();
             for (Card card : Lists.newArrayList(discardedMap.get(p))) { // without copying will get concurrent modification exception
                 if (card == null) { continue; }
-                if (p.discard(card, sa, effect, table) != null) {
+                if (p.discard(card, sa, effect, table, params) != null) {
                     discardedByPlayer.add(card);
 
                     if (sa.hasParam("RememberDiscarded")) {
