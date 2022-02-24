@@ -15,7 +15,6 @@ import forge.card.CardEdition;
 import forge.deck.io.DeckPreferences;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.planarconquest.ConquestUtil;
-import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.card.CardPreferences;
 import forge.item.PaperCard;
@@ -32,7 +31,6 @@ import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.screens.FScreen;
-import forge.screens.LoadingOverlay;
 import forge.screens.TabPageScreen;
 import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
@@ -1134,97 +1132,87 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         @Override
         public void refresh() {
-            FThreads.invokeInEdtLater(new Runnable() {
-                @Override
-                public void run() {
-                    LoadingOverlay.show(Localizer.getInstance().getMessage("lblLoading"), new Runnable() {
-                        @Override
-                        public void run() {
-                            Predicate<PaperCard> additionalFilter = null;
-                            final EditorType editorType = parentScreen.getEditorType();
-                            final Localizer localizer = Localizer.getInstance();
-                            switch (editorType) {
-                                case Archenemy:
-                                    cardManager.setPool(FModel.getArchenemyCards(), true);
-                                    break;
-                                case Planechase:
-                                    cardManager.setPool(FModel.getPlanechaseCards(), true);
-                                    break;
-                                case Quest:
-                                    final ItemPool<PaperCard> questPool = new ItemPool<>(PaperCard.class);
-                                    questPool.addAll(FModel.getQuest().getCards().getCardpool());
-                                    // remove bottom cards that are in the deck from the card pool
-                                    questPool.removeAll(parentScreen.getDeck().getMain());
-                                    // remove sideboard cards from the catalog
-                                    questPool.removeAll(parentScreen.getDeck().getOrCreate(DeckSection.Sideboard));
-                                    cardManager.setPool(questPool);
-                                    break;
-                                case PlanarConquest:
-                                    cardManager.setPool(ConquestUtil.getAvailablePool(parentScreen.getDeck()));
-                                    break;
-                                case QuestCommander:
-                                case Commander:
-                                case Oathbreaker:
-                                case TinyLeaders:
-                                case Brawl:
-                                    final List<PaperCard> commanders = parentScreen.getDeck().getCommanders();
-                                    if (commanders.isEmpty()) {
-                                        //if no commander set for deck, only show valid commanders
-                                        switch (editorType) {
-                                            case Commander:
-                                            case QuestCommander:
-                                                additionalFilter = DeckFormat.Commander.isLegalCommanderPredicate();
-                                                cardManager.setCaption(localizer.getMessage("lblCommanders"));
-                                                break;
-                                            case Oathbreaker:
-                                                additionalFilter = DeckFormat.Oathbreaker.isLegalCommanderPredicate();
-                                                cardManager.setCaption(localizer.getMessage("lblOathbreakers"));
-                                                break;
-                                            case TinyLeaders:
-                                                additionalFilter = DeckFormat.TinyLeaders.isLegalCommanderPredicate();
-                                                cardManager.setCaption(localizer.getMessage("lblCommanders"));
-                                                break;
-                                            case Brawl:
-                                                additionalFilter = DeckFormat.Brawl.isLegalCommanderPredicate();
-                                                cardManager.setCaption(localizer.getMessage("lblCommanders"));
-                                                break;
-                                            default:
-                                                // Do nothing
-                                        }
-                                    } else {
-                                        //if a commander has been set, only show cards that match its color identity
-                                        switch (editorType) {
-                                            case Commander:
-                                            case QuestCommander:
-                                                additionalFilter = DeckFormat.Commander.isLegalCardForCommanderPredicate(commanders);
-                                                break;
-                                            case Oathbreaker:
-                                                additionalFilter = DeckFormat.Oathbreaker.isLegalCardForCommanderPredicate(commanders);
-                                                break;
-                                            case TinyLeaders:
-                                                additionalFilter = DeckFormat.TinyLeaders.isLegalCardForCommanderPredicate(commanders);
-                                                break;
-                                            case Brawl:
-                                                additionalFilter = DeckFormat.Brawl.isLegalCardForCommanderPredicate(commanders);
-                                                break;
-                                            default:
-                                                // Do nothing
-                                        }
-                                        cardManager.setCaption(localizer.getMessage("lblCards"));
-                                    }
-                                    // fall through to below
-                                default:
-                                    if (cardManager.getWantUnique()) {
-                                        cardManager.setPool(editorType.applyCardFilter(FModel.getUniqueCardsNoAlt(), additionalFilter), true);
-                                    } else {
-                                        cardManager.setPool(editorType.applyCardFilter(FModel.getAllCardsNoAlt(), additionalFilter), true);
-                                    }
-                                    break;
-                            }
+            Predicate<PaperCard> additionalFilter = null;
+            final EditorType editorType = parentScreen.getEditorType();
+            final Localizer localizer = Localizer.getInstance();
+            switch (editorType) {
+                case Archenemy:
+                    cardManager.setPool(FModel.getArchenemyCards(), true);
+                    break;
+                case Planechase:
+                    cardManager.setPool(FModel.getPlanechaseCards(), true);
+                    break;
+                case Quest:
+                    final ItemPool<PaperCard> questPool = new ItemPool<>(PaperCard.class);
+                    questPool.addAll(FModel.getQuest().getCards().getCardpool());
+                    // remove bottom cards that are in the deck from the card pool
+                    questPool.removeAll(parentScreen.getDeck().getMain());
+                    // remove sideboard cards from the catalog
+                    questPool.removeAll(parentScreen.getDeck().getOrCreate(DeckSection.Sideboard));
+                    cardManager.setPool(questPool);
+                    break;
+                case PlanarConquest:
+                    cardManager.setPool(ConquestUtil.getAvailablePool(parentScreen.getDeck()));
+                    break;
+                case QuestCommander:
+                case Commander:
+                case Oathbreaker:
+                case TinyLeaders:
+                case Brawl:
+                    final List<PaperCard> commanders = parentScreen.getDeck().getCommanders();
+                    if (commanders.isEmpty()) {
+                        //if no commander set for deck, only show valid commanders
+                        switch (editorType) {
+                            case Commander:
+                            case QuestCommander:
+                                additionalFilter = DeckFormat.Commander.isLegalCommanderPredicate();
+                                cardManager.setCaption(localizer.getMessage("lblCommanders"));
+                                break;
+                            case Oathbreaker:
+                                additionalFilter = DeckFormat.Oathbreaker.isLegalCommanderPredicate();
+                                cardManager.setCaption(localizer.getMessage("lblOathbreakers"));
+                                break;
+                            case TinyLeaders:
+                                additionalFilter = DeckFormat.TinyLeaders.isLegalCommanderPredicate();
+                                cardManager.setCaption(localizer.getMessage("lblCommanders"));
+                                break;
+                            case Brawl:
+                                additionalFilter = DeckFormat.Brawl.isLegalCommanderPredicate();
+                                cardManager.setCaption(localizer.getMessage("lblCommanders"));
+                                break;
+                            default:
+                                // Do nothing
                         }
-                    });
-                }
-            });
+                    } else {
+                        //if a commander has been set, only show cards that match its color identity
+                        switch (editorType) {
+                            case Commander:
+                            case QuestCommander:
+                                additionalFilter = DeckFormat.Commander.isLegalCardForCommanderPredicate(commanders);
+                                break;
+                            case Oathbreaker:
+                                additionalFilter = DeckFormat.Oathbreaker.isLegalCardForCommanderPredicate(commanders);
+                                break;
+                            case TinyLeaders:
+                                additionalFilter = DeckFormat.TinyLeaders.isLegalCardForCommanderPredicate(commanders);
+                                break;
+                            case Brawl:
+                                additionalFilter = DeckFormat.Brawl.isLegalCardForCommanderPredicate(commanders);
+                                break;
+                            default:
+                                // Do nothing
+                        }
+                        cardManager.setCaption(localizer.getMessage("lblCards"));
+                    }
+                    // fall through to below
+                default:
+                    if (cardManager.getWantUnique()) {
+                        cardManager.setPool(editorType.applyCardFilter(FModel.getUniqueCardsNoAlt(), additionalFilter), true);
+                    } else {
+                        cardManager.setPool(editorType.applyCardFilter(FModel.getAllCardsNoAlt(), additionalFilter), true);
+                    }
+                    break;
+            }
         }
 
         @Override

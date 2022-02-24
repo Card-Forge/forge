@@ -9,6 +9,7 @@ import forge.adventure.util.SaveFileData;
 import forge.adventure.util.SignalList;
 import forge.deck.Deck;
 import forge.localinstance.properties.ForgeProfileProperties;
+import forge.player.GamePlayerUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -69,6 +70,7 @@ public class WorldSave {
                 currentSave.header = (WorldSaveHeader) oos.readObject();
                 SaveFileData mainData=(SaveFileData)oos.readObject();
                 currentSave.player.load(mainData.readSubData("player"));
+                GamePlayerUtil.getGuiPlayer().setName(currentSave.player.getName());
                 currentSave.world.load(mainData.readSubData("world"));
                 WorldStage.getInstance().load(mainData.readSubData("worldStage"));
 

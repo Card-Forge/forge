@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import forge.Forge;
+import forge.adventure.stage.GameHUD;
 import forge.adventure.world.WorldSave;
+import forge.gui.GuiBase;
 
 /**
  * First scene after the splash screen
@@ -16,7 +18,7 @@ public class StartScene extends UIScene {
 
     public StartScene()
     {
-        super("ui/start_menu.json");
+        super(GuiBase.isAndroid() ? "ui/start_menu_mobile.json" : "ui/start_menu.json");
 
     }
     public boolean NewGame() {
@@ -38,6 +40,7 @@ public class StartScene extends UIScene {
 
     public boolean Resume() {
         Forge.switchToLast();
+        GameHUD.getInstance().getTouchpad().setVisible(false);
         return true;
     }
 
