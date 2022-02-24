@@ -17,8 +17,10 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
 import com.badlogic.gdx.utils.ScreenUtils;
 import forge.adventure.scene.ForgeScene;
+import forge.adventure.scene.GameScene;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
+import forge.adventure.stage.MapStage;
 import forge.adventure.util.Config;
 import forge.animation.ForgeAnimation;
 import forge.assets.AssetsDownloader;
@@ -887,7 +889,6 @@ public class Forge implements ApplicationListener {
     }
 
     public static boolean switchScene(Scene newScene) {
-
         if (currentScene != null) {
             if (!currentScene.leave())
                 return false;
@@ -895,6 +896,8 @@ public class Forge implements ApplicationListener {
         }
         storeScreen();
         sceneWasSwapped =true;
+        if (newScene instanceof GameScene)
+            MapStage.getInstance().clearIsInMap();
         currentScene = newScene;
         currentScene.enter();
         return true;

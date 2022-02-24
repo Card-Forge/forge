@@ -14,7 +14,6 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.IntMap;
 import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
-import forge.adventure.stage.GameHUD;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 import forge.gui.GuiBase;
@@ -54,8 +53,7 @@ public class DeckSelectScene extends UIScene {
     }
 
     public void back() {
-        GameHUD.getInstance().getTouchpad().setVisible(false);
-        Forge.switchScene(SceneType.GameScene.instance);
+        Forge.switchToLast();
     }
 
     public boolean select(int slot) {

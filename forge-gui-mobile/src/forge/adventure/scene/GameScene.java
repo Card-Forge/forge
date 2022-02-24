@@ -50,5 +50,6 @@ public class GameScene extends HudScene {
         Forge.clearCurrentScreen();
         super.enter();
     }
+
 }
 

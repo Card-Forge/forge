@@ -58,6 +58,10 @@ public class MapStage extends GameStage {
     private final Vector2 oldPosition3=new Vector2();
     private final Vector2 oldPosition4=new Vector2();
 
+    public void clearIsInMap() {
+        isInMap = false;
+    }
+
 
     public MapLayer getSpriteLayer()
     {
