@@ -6,7 +6,7 @@ K:Flying
 K:Haste
 K:CARDNAME attacks each combat if able.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Graveyard | Execute$ TrigChange | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, you may pay {4}{R}{R}. If you do, return CARDNAME from your graveyard to the battlefield.
-SVar:TrigChange:AB$ChangeZone | Cost$ 4 R R | Origin$ Graveyard | Destination$ Battlefield
+SVar:TrigChange:AB$ ChangeZone | Cost$ 4 R R | Origin$ Graveyard | Destination$ Battlefield
 SVar:SacMe:3
 SVar:DiscardMe:3
 Oracle:Flying, haste\nAkoum Firebird attacks each combat if able.\nLandfall — Whenever a land enters the battlefield under your control, you may pay {4}{R}{R}. If you do, return Akoum Firebird from your graveyard to the battlefield.

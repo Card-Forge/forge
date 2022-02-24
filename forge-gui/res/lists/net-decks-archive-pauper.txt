@@ -1867,3 +1867,19 @@
 2022-01-24 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-01-24-pauper-challenge.zip
 2022-01-26 Pauper League (40 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-01-26-pauper-league.zip
 2022-01-26 Pauper Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-01-26-pauper-preliminary.zip
+2022-01-29 Pauper Super Qualifier (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-01-29-pauper-super-qualifier.zip
+2022-01-31 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-01-31-pauper-challenge.zip
+2022-02-02 Pauper League (47 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-02-02-pauper-league.zip
+2022-02-06 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-02-06-pauper-challenge.zip
+2022-02-07 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-02-07-pauper-challenge.zip
+2022-02-08 0 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-02-08-0-pauper-challenge.zip
+2022-02-08 1 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-02-08-1-pauper-challenge.zip
+2022-02-08 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-02-08-pauper-challenge.zip
+2022-02-09 Pauper League (38 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-02-09-pauper-league.zip
+2022-02-13 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-02-13-pauper-challenge.zip
+2022-02-14 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-02-14-pauper-challenge.zip
+2022-02-16 Pauper League (30 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-02-16-pauper-league.zip
+2022-02-20 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-02-20-pauper-challenge.zip
+2022-02-21 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-02-21-pauper-challenge.zip
+2022-02-23 Pauper League (34 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-02-23-pauper-league.zip
+Pauper League (20 decks) | https://downloads.cardforge.org/decks/archive/pauper/pauper-league.zip
