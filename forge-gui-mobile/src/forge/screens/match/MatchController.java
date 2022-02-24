@@ -312,10 +312,10 @@ public class MatchController extends AbstractGuiGame {
                 public void run() {
                     Forge.clearTransitionScreen();
                     Forge.clearCurrentScreen();
-                    Forge.setCursor(null, "0");
                 }
             };
             Forge.setTransitionScreen(new TransitionScreen(runnable, ScreenUtils.getFrameBufferTexture(), false, false));
+            Forge.setCursor(null, "0");
             return;
         }
         if (hasLocalPlayers() || getGameView().isMatchOver()) {

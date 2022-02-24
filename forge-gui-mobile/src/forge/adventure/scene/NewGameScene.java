@@ -14,6 +14,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Selector;
 import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
+import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -36,10 +37,13 @@ public class NewGameScene extends UIScene {
     private Selector difficulty;
 
     public NewGameScene() {
-        super("ui/new_game.json");
+        super(GuiBase.isAndroid() ? "ui/new_game_mobile.json" : "ui/new_game.json");
     }
 
     public boolean start() {
+        if (selectedName.getText().isEmpty()) {
+            selectedName.setText(NameGenerator.getRandomName("Any", "Any", ""));
+        }
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -49,7 +53,7 @@ public class NewGameScene extends UIScene {
                         race.getCurrentIndex(),
                         avatarIndex,
                         deck.getCurrentIndex(),
-                        Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],0);
+                        Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()], 0);
                 GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
                 Forge.clearTransitionScreen();
                 Forge.switchScene(SceneType.GameScene.instance);
@@ -78,7 +82,7 @@ public class NewGameScene extends UIScene {
                 return NewGameScene.this.updateAvatar();
             }
         });
-        Random rand=new Random();
+        Random rand = new Random();
 
         deck = ui.findActor("deck");
 
@@ -100,18 +104,17 @@ public class NewGameScene extends UIScene {
         difficulty = ui.findActor("difficulty");
 
         Array<String> diffList = new Array<>(starterDeck.length);
-        int i=0;
-        int startingDifficulty=0;
-        for (DifficultyData diff : Config.instance().getConfigData().difficulties)
-        {
-            if(diff.startingDifficulty)
-                startingDifficulty=i;
+        int i = 0;
+        int startingDifficulty = 0;
+        for (DifficultyData diff : Config.instance().getConfigData().difficulties) {
+            if (diff.startingDifficulty)
+                startingDifficulty = i;
             diffList.add(diff.name);
             i++;
         }
         difficulty.setTextList(diffList);
         difficulty.setCurrentIndex(startingDifficulty);
-        avatarIndex=rand.nextInt();
+        avatarIndex = rand.nextInt();
         gender.setCurrentIndex(rand.nextInt());
         deck.setCurrentIndex(rand.nextInt());
         race.setCurrentIndex(rand.nextInt());

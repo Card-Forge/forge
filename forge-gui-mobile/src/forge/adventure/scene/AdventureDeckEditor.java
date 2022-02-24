@@ -54,8 +54,8 @@ import java.util.Map;
         private static ItemPool<InventoryItem> decksUsingMyCards=new ItemPool<>(InventoryItem.class);
         public static void leave() {
             AdventurePlayer.current().getNewCards().clear();
-            Forge.switchScene(SceneType.DeckSelectScene.instance);
             Forge.clearCurrentScreen();
+            Forge.switchToLast();
         }
 
         @Override

@@ -11,90 +11,107 @@
     },
     {
       "type": "Scroll",
+      "style": "paper",
+      "x": 300,
+      "y": 18,
+      "width": 160,
+      "height": 180
+    },
+    {
+      "type": "Scroll",
       "name": "enemies",
-      "x": 206,
-      "y": 10,
+      "x": 15,
+      "y": 18,
       "width": 256,
       "height": 235
     },
     {
       "type": "Image",
       "name": "avatar",
-      "x": 10,
-      "y": 10,
+      "x": 350,
+      "y": 28,
       "width": 64,
       "height": 64
-    },
-    {
-      "type": "Label",
-      "name": "totalWins",
-      "x": 90,
-      "y": 84,
-      "width": 80,
-      "height": 24,
-      "font": "default"
-    },
-    {
-      "type": "Label",
-      "text": "Win:",
-      "x": 10,
-      "y": 84,
-      "width": 80,
-      "height": 24,
-      "font": "default"
-    },
-    {
-      "type": "Label",
-      "name": "totalLoss",
-      "x": 90,
-      "y": 104,
-      "width": 80,
-      "height": 24,
-      "font": "default"
-    },
-    {
-      "type": "Label",
-      "text": "Loss:",
-      "x": 10,
-      "y": 104,
-      "width": 80,
-      "height": 24,
-      "font": "default"
-    },
-    {
-      "type": "Label",
-      "name": "lossWinRatio",
-      "x": 90,
-      "y": 124,
-      "width": 80,
-      "height": 24,
-      "font": "default"
-    },
-    {
-      "type": "Label",
-      "text": "Win Loss Ratio:",
-      "x": 10,
-      "y": 124,
-      "width": 80,
-      "height": 24,
-      "font": "default"
     },
     {
       "type": "Image",
       "image": "ui/avatarhud.png",
-      "x": 10,
-      "y": 10,
+      "x": 350,
+      "y": 28,
       "width": 64,
       "height": 64
+    },
+    {
+      "type": "Label",
+      "name": "playerName",
+      "x": 330,
+      "y": 90,
+      "width": 80,
+      "height": 24,
+      "font": "black"
+    },
+    {
+      "type": "Label",
+      "name": "totalWins",
+      "x": 410,
+      "y": 114,
+      "width": 80,
+      "height": 24,
+      "font": "black"
+    },
+    {
+      "type": "Label",
+      "text": "Win:",
+      "x": 330,
+      "y": 114,
+      "width": 80,
+      "height": 24,
+      "font": "black"
+    },
+    {
+      "type": "Label",
+      "name": "totalLoss",
+      "x": 410,
+      "y": 134,
+      "width": 80,
+      "height": 24,
+      "font": "black"
+    },
+    {
+      "type": "Label",
+      "text": "Loss:",
+      "x": 330,
+      "y": 134,
+      "width": 80,
+      "height": 24,
+      "font": "black"
+    },
+    {
+      "type": "Label",
+      "name": "lossWinRatio",
+      "x": 410,
+      "y": 154,
+      "width": 80,
+      "height": 24,
+      "font": "black"
+    },
+    {
+      "type": "Label",
+      "text": "Win Loss Ratio:",
+      "x": 330,
+      "y": 154,
+      "width": 80,
+      "height": 24,
+      "font": "black"
     },
     {
       "type": "TextButton",
       "name": "return",
       "text": "Back",
-      "width": 48,
-      "height": 16,
-      "x": 15,
-      "y": 250
+      "width": 100,
+      "height": 30,
+      "x": 335,
+      "y": 212
     },
     {
       "type": "Table",

@@ -2,14 +2,12 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.utils.ScreenUtils;
 import forge.Forge;
 import forge.animation.ForgeAnimation;
 import forge.assets.ImageCache;
 import forge.gamemodes.match.LobbySlotType;
 import forge.interfaces.IUpdateable;
 import forge.screens.FScreen;
-import forge.screens.TransitionScreen;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOverlay;
 
@@ -68,21 +66,8 @@ public abstract  class ForgeScene extends Scene implements IUpdateable {
         if(getScreen()!=null)
             getScreen().setSize(Forge.getScreenWidth(), Forge.getScreenHeight());
 
-        if (this instanceof DuelScene) {
-            Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    Forge.clearTransitionScreen();
-                    Forge.openScreen(getScreen());
-                    Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
-                    Gdx.input.setInputProcessor(Forge.getInputProcessor());
-                }
-            };
-            Forge.setTransitionScreen(new TransitionScreen(runnable, ScreenUtils.getFrameBufferTexture(), true, false));
-        } else {
-            Forge.openScreen(getScreen());
-            Gdx.input.setInputProcessor(Forge.getInputProcessor());
-        }
+        Forge.openScreen(getScreen());
+        Gdx.input.setInputProcessor(Forge.getInputProcessor());
     }
     public abstract FScreen getScreen();
 

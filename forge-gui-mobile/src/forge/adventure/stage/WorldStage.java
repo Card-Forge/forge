@@ -1,8 +1,10 @@
 package forge.adventure.stage;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import forge.Forge;
 import forge.adventure.character.CharacterSprite;
@@ -20,6 +22,7 @@ import forge.adventure.util.SaveFileContent;
 import forge.adventure.util.SaveFileData;
 import forge.adventure.world.World;
 import forge.adventure.world.WorldSave;
+import forge.screens.TransitionScreen;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
@@ -76,10 +79,17 @@ public class WorldStage extends GameStage implements SaveFileContent {
                 if (player.collideWith(mob)) {
                     player.setAnimation(CharacterSprite.AnimationTypes.Attack);
                     mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
+                    Gdx.input.vibrate(50);
+                    Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
+                    Forge.setTransitionScreen(new TransitionScreen(new Runnable() {
+                        @Override
+                        public void run() {
+                            Forge.clearTransitionScreen();
+                        }
+                    }, ScreenUtils.getFrameBufferTexture(), true, false));
                     startPause(1, new Runnable() {
                         @Override
                         public void run() {
-
                             ((DuelScene) SceneType.DuelScene.instance).setEnemy(currentMob);
                             ((DuelScene) SceneType.DuelScene.instance).setPlayer(player);
                             Forge.switchScene(SceneType.DuelScene.instance);

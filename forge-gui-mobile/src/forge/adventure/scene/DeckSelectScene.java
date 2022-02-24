@@ -16,6 +16,7 @@ import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
+import forge.gui.GuiBase;
 
 public class DeckSelectScene extends UIScene {
     private final IntMap<TextButton> buttons = new IntMap<>();
@@ -27,11 +28,8 @@ public class DeckSelectScene extends UIScene {
     int currentSlot = 0;
 
     public DeckSelectScene() {
-        super("ui/deck_selector.json");
+        super(GuiBase.isAndroid() ? "ui/deck_selector_mobile.json" : "ui/deck_selector.json");
     }
-
-
-
 
     private TextButton addDeckSlot(String name, int i) {
         TextButton button = Controls.newTextButton("-");
@@ -39,7 +37,7 @@ public class DeckSelectScene extends UIScene {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 try {
-                    if(!button.isDisabled())
+                    if (!button.isDisabled())
                         select(i);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -47,22 +45,21 @@ public class DeckSelectScene extends UIScene {
             }
         });
 
-        layout.add(Controls.newLabel(name)).expandX();
-        layout.add(button).expandX();
+        layout.add(Controls.newLabel(name)).expandX().pad(2);
+        layout.add(button).expandX().pad(2);
         buttons.put(i, button);
         layout.row();
         return button;
-
     }
 
     public void back() {
-        Forge.switchScene(SceneType.GameScene.instance);
+        Forge.switchToLast();
     }
 
     public boolean select(int slot) {
         currentSlot = slot;
 
-        for (IntMap.Entry<TextButton> butt : new IntMap.Entries<TextButton> (buttons)) {
+        for (IntMap.Entry<TextButton> butt : new IntMap.Entries<TextButton>(buttons)) {
             butt.value.setColor(defColor);
         }
         if (buttons.containsKey(slot)) {
@@ -75,23 +72,19 @@ public class DeckSelectScene extends UIScene {
     }
 
 
-
     @Override
-    public boolean keyPressed(int keycode)
-    {
-        if (keycode == Input.Keys.ESCAPE)
-        {
+    public boolean keyPressed(int keycode) {
+        if (keycode == Input.Keys.ESCAPE) {
             back();
         }
         return true;
     }
+
     @Override
     public void enter() {
         select(Current.player().getSelectedDeckIndex());
-        for(int i=0;i<AdventurePlayer.NUMBER_OF_DECKS;i++)
-        {
-            if(buttons.containsKey(i))
-            {
+        for (int i = 0; i < AdventurePlayer.NUMBER_OF_DECKS; i++) {
+            if (buttons.containsKey(i)) {
                 buttons.get(i).setText(Current.player().getDeck(i).getName());
             }
         }
@@ -102,15 +95,13 @@ public class DeckSelectScene extends UIScene {
     public void resLoaded() {
         super.resLoaded();
         layout = new Table();
-        layout.setFillParent(true);
         stage.addActor(layout);
 
         header = Controls.newLabel("Select your Deck");
-        header.setHeight(header.getHeight() * 2);
-        layout.add(header).colspan(2).align(Align.center);
+        layout.add(header).colspan(2).align(Align.center).pad(2, 5, 2, 5);
         layout.row();
         for (int i = 0; i < AdventurePlayer.NUMBER_OF_DECKS; i++)
-            addDeckSlot("Deck:" + (i+1), i);
+            addDeckSlot("Deck:" + (i + 1), i);
 
         dialog = Controls.newDialog("Save");
         textInput = Controls.newTextField("");
@@ -154,19 +145,18 @@ public class DeckSelectScene extends UIScene {
         });
         defColor = ui.findActor("return").getColor();
 
-
         ScrollPane scrollPane = ui.findActor("deckSlots");
         scrollPane.setActor(layout);
     }
 
     private void rename() {
         dialog.hide();
-        String text=textInput.getText();
+        String text = textInput.getText();
         Current.player().renameDeck(text);
         buttons.get(currentSlot).setText(Current.player().getDeck(currentSlot).getName());
     }
-    private void edit() {
 
+    private void edit() {
         Forge.switchScene(SceneType.DeckEditScene.instance);
     }
 }

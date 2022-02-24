@@ -8,30 +8,27 @@ import forge.adventure.util.Current;
 
 /**
  * Scene for the Inn in towns
- *
  */
-public class InnScene extends UIScene  {
+public class InnScene extends UIScene {
 
-    public InnScene()
-    {
+    public InnScene() {
         super("ui/inn.json");
     }
 
-    public void done()
-    {
+    public void done() {
         GameHUD.getInstance().getTouchpad().setVisible(false);
         Forge.switchToLast();
     }
-    public void heal()
-    {
+
+    public void heal() {
         Current.player().heal();
     }
 
     @Override
     public void act(float delta) {
-
         stage.act(delta);
     }
+
     @Override
     public void resLoaded() {
         super.resLoaded();
@@ -61,10 +58,8 @@ public class InnScene extends UIScene  {
     }
 
     @Override
-    public boolean keyPressed(int keycode)
-    {
-        if (keycode == Input.Keys.ESCAPE)
-        {
+    public boolean keyPressed(int keycode) {
+        if (keycode == Input.Keys.ESCAPE) {
             done();
         }
         return true;

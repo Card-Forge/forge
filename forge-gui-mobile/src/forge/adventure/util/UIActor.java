@@ -137,6 +137,9 @@ public class UIActor extends Group {
                 case "text":
                     newActor.setText(property.value.toString());
                     break;
+                case "align":
+                    newActor.setAlignment(((Float) property.value).intValue());
+                    break;
             }
         }
     }

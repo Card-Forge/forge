@@ -284,7 +284,7 @@ public class CardZoom extends FOverlay {
             cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
             
             boolean rotateSplit = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_SPLIT_CARDS);
-            if (currentCard.isSplitCard() && rotateSplit) {
+            if (currentCard != null && currentCard.isSplitCard() && rotateSplit) {
                 // card will be rotated.  Make sure that the height does not exceed the width of the view
                 if (cardHeight > Gdx.graphics.getWidth())
                 {
