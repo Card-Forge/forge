@@ -1,5 +1,5 @@
 Name:Sinister Reflections
-ManaCost:U U
+ManaCost:1 U
 Types:Instant
 A:SP$ RepeatEach | ValidTgts$ Creature.YouCtrl+nonToken | TgtPrompt$ Select up to two target nontoken creatures you control | TargetMin$ 0 | TargetMax$ 2 | RepeatSubAbility$ DBConjure | RepeatTargeted$ True | StackDescription$ SpellDescription | SpellDescription$ Conjure a duplicate of each of up to two target nontoken creatures you control into your hand.
 SVar:DBConjure:DB$ MakeCard | DefinedName$ Remembered | Zone$ Hand

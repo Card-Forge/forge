@@ -432,9 +432,13 @@ ScryfallCode=KHM
 405 C Masked Vandal @Jason A. Engle
 
 [rebalanced]
+A40 M A-Alrund, God of the Cosmos @Kieran Yanner
 A41 M A-Alrund's Epiphany @Kieran Yanner
+A51 R A-Cosmos Charger @Nils Hamm
 A139 M A-Goldspan Dragon @Andrew Mar
 A169 R A-Esika's Chariot @Raoul Vitale
+A224 U A-Narfi, Betrayer King @Daarken
+A233 U A-Vega, the Watcher @Paul Scott Canavan
 A237 R A-Cosmos Elixir @Volkan Baǵa
 A255 R A-Faceless Haven @Titus Lunter
 
