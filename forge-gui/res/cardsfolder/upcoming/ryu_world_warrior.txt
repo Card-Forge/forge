@@ -1,0 +1,10 @@
+Name:Ryu, World Warrior
+ManaCost:2 W
+Types:Legendary Creature Human Warrior
+PT:2/4
+K:Training
+A:AB$ DealDamage | PrecostDesc$ Hadoken — | Cost$ 4 R Untap Discard<1/Card> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | AILogic$ PowerDmg | ExcessSVar$ Excess | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals damage equal to his power to any target.
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ Excess | ConditionSVarCompare$ GE1 | ConditionDefined$ Targeted | ConditionPresent$ Creature | IfDesc$ True | SpellDescription$ If excess damage was dealt to a creature this way, draw a card. ({Q} is the untap symbol.)
+SVar:X:Count$CardPower
+DeckHas:Ability$Counters|Discard
+Oracle:Training (Whenever this creature attacks with another creature with greater power, put a +1/+1 counter on this creature.)\nHadoken — {4}{R}, {Q}, Discard a card: Ryu, World Warrior deals damage equal to his power to any target. If excess damage was dealt to a creature this way, draw a card. ({Q} is the untap symbol.)
