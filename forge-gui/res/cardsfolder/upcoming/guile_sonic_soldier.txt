@@ -1,0 +1,14 @@
+Name:Guile, Sonic Soldier
+ManaCost:1 U R W
+Types:Legendary Creature Human Soldier
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharge | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, put a charge counter on him or remove one from him. When you remove a counter this way, ABILITY
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharge | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, put a charge counter on him or remove one from him. When you remove a counter this way, ABILITY
+SVar:TrigCharge:DB$ AddOrRemoveCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1 | RememberRemovedCards$ True | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card.Self | ConditionCompare$ GE1 | Execute$ TrigCharm | SubAbility$ DBCleanup | TriggerDescription$ When you remove a counter this way, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBDamage,DBPump
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Lifelink & Indestructible | SpellDescription$ CARDNAME gains lifelink and indestructible until end of turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Counters|LifeGain
+Oracle:Whenever Guile, Sonic Soldier enters the battlefield or attacks, put a charge counter on him or remove one from him. When you remove a counter this way, choose one—\n• Sonic Boom — Guile, Sonic Soldier deals 4 damage to any target.\n• Flash Kick — Guile, Sonic Soldier gains lifelink and indestructible until end of turn.
