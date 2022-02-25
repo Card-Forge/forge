@@ -187,6 +187,8 @@ public enum CounterEnumType {
 
     KI("KI", 190, 189, 255),
 
+    KICK("KICK", 255, 255, 240),
+
     KNOWLEDGE("KNOWL", 0, 115, 255),
 
     LANDMARK("LNMRK", 186, 28, 28),
