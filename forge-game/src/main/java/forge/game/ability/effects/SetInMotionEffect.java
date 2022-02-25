@@ -41,7 +41,7 @@ public class SetInMotionEffect extends SpellAbilityEffect {
                 }
 
                 game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-                game.getAction().moveTo(ZoneType.Command, controller.getActiveScheme(), null);
+                game.getAction().moveTo(ZoneType.Command, controller.getActiveScheme(), null, AbilityKey.newMap());
                 game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
                 // Run triggers

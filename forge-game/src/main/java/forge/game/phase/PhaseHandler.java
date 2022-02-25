@@ -393,11 +393,15 @@ public class PhaseHandler implements java.io.Serializable {
                     int numDiscard = playerTurn.isUnlimitedHandSize() || handSize <= max || handSize == 0 ? 0 : handSize - max;
 
                     if (numDiscard > 0) {
+                        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                        moveParams.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
+                        moveParams.put(AbilityKey.LastStateGraveyard, game.getLastStateGraveyard());
+
                         final CardZoneTable table = new CardZoneTable();
                         final CardCollection discarded = new CardCollection();
                         boolean firstDiscarded = playerTurn.getNumDiscardedThisTurn() == 0;
                         for (Card c : playerTurn.getController().chooseCardsToDiscardToMaximumHandSize(numDiscard)) {
-                            if (playerTurn.discard(c, null, false, table) != null) {
+                            if (playerTurn.discard(c, null, false, table, moveParams) != null) {
                                 discarded.add(c);
                             }
                         }

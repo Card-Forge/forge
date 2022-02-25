@@ -1,6 +1,9 @@
 package forge.game.ability.effects;
 
+import java.util.Map;
+
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardZoneTable;
@@ -18,8 +21,11 @@ public class LearnEffect extends SpellAbilityEffect {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
         CardZoneTable table = new CardZoneTable();
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
+        moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
         for (Player p : getTargetPlayers(sa)) {
-            p.learnLesson(sa, table);
+            p.learnLesson(sa, table, moveParams);
         }
         table.triggerChangesZoneAll(game, sa);
     }

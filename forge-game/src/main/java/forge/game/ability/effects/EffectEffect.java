@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -12,6 +13,7 @@ import forge.card.CardRarity;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -135,6 +137,10 @@ public class EffectEffect extends SpellAbilityEffect {
         } else { // use host image
             image = hostCard.getImageKey();
         }
+
+        Map<AbilityKey, Object> params = AbilityKey.newMap();
+        params.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
+        params.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
 
         for (Player controller : effectOwner) {
             final Card eff = createEffect(sa, controller, name, image);
@@ -322,7 +328,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
             // TODO: Add targeting to the effect so it knows who it's dealing with
             game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-            game.getAction().moveTo(ZoneType.Command, eff, sa);
+            game.getAction().moveTo(ZoneType.Command, eff, sa, params);
             eff.updateStateForView();
             game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
             //if (effectTriggers != null) {

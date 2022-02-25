@@ -2803,7 +2803,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                         }
                                     }
                                 }
-                                getGame().getAction().moveTo(targetZone, forgeCard, null);
+                                getGame().getAction().moveTo(targetZone, forgeCard, null, AbilityKey.newMap());
                                 if (forgeCard.isCreature()) {
                                     forgeCard.setSickness(lastSummoningSickness);
                                 }
@@ -2858,7 +2858,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                             getGame().getAction().moveToBottomOfLibrary(forgeCard, null);
                         }
                     } else {
-                        getGame().getAction().moveTo(targetZone, forgeCard, null);
+                        getGame().getAction().moveTo(targetZone, forgeCard, null, AbilityKey.newMap());
                     }
 
                     lastAdded = f;
@@ -2898,7 +2898,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 if (c == null) {
                     continue;
                 }
-                if (getGame().getAction().moveTo(ZoneType.Exile, c, null) != null) {
+                if (getGame().getAction().moveTo(ZoneType.Exile, c, null, AbilityKey.newMap()) != null) {
                     StringBuilder sb = new StringBuilder();
                     sb.append(p).append(" exiles ").append(c).append(" due to Dev Cheats.");
                     getGame().getGameLog().add(GameLogEntryType.DISCARD, sb.toString());
@@ -2937,7 +2937,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 if (c == null) {
                     continue;
                 }
-                if (getGame().getAction().moveTo(ZoneType.Exile, c, null) != null) {
+                if (getGame().getAction().moveTo(ZoneType.Exile, c, null, AbilityKey.newMap()) != null) {
                     StringBuilder sb = new StringBuilder();
                     sb.append(p).append(" exiles ").append(c).append(" due to Dev Cheats.");
                     getGame().getGameLog().add(GameLogEntryType.ZONE_CHANGE, sb.toString());
