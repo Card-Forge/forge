@@ -16,28 +16,31 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
+import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
 
 /**
- * API for adding to or subtracting from existing counters on a target.
+ * API for adding counters to or subtracting existing counters from a target.
  *
  */
 public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        sb.append(sa.getActivatingPlayer().getName());
+        final Player pl = !sa.hasParam("DefinedPlayer") ? sa.getActivatingPlayer() :
+                AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("DefinedPlayer"), sa).getFirst();
+        sb.append(pl.getName());
 
         if (sa.hasParam("CounterType")) {
             CounterType ctype = CounterType.getType(sa.getParam("CounterType"));
-            sb.append(" removes a ").append(ctype.getName());
-            sb.append(" counter from or put another ").append(ctype.getName()).append(" counter on ");
+            sb.append(" puts a ").append(ctype.getName());
+            sb.append(" counter on or removes a ").append(ctype.getName()).append(" counter from ");
         } else {
             sb.append(" removes a counter from or puts another of those counters on ");
         }
 
-        sb.append(Lang.joinHomogenous(getTargets(sa)));
+        sb.append(Lang.joinHomogenous(getDefinedCardsOrTargeted(sa))).append(".");
 
         return sb.toString();
     }
@@ -57,6 +60,10 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
             ctype = CounterType.getType(sa.getParam("CounterType"));
         }
 
+        final Player pl = !sa.hasParam("DefinedPlayer") ? sa.getActivatingPlayer() :
+                AbilityUtils.getDefinedPlayers(source, sa.getParam("DefinedPlayer"), sa).getFirst();
+        final boolean eachExisting = sa.hasParam("EachExistingCounter");
+
         GameEntityCounterTable table = new GameEntityCounterTable();
 
         for (final Card tgtCard : getDefinedCardsOrTargeted(sa)) {
@@ -67,15 +74,22 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
             if (gameCard == null || !tgtCard.equalsWithTimestamp(gameCard)) {
                 continue;
             }
+            if (!eachExisting && sa.hasParam("Optional") && !pl.getController().confirmAction(sa, null,
+                    Localizer.getInstance().getMessage("lblWouldYouLikePutRemoveCounters", ctype.getName(),
+                            CardTranslation.getTranslatedName(gameCard.getName())))) {
+                continue;
+            }
             if (!sa.usesTargeting() || gameCard.canBeTargetedBy(sa)) {
                 if (gameCard.hasCounters()) {
-                    if (sa.hasParam("EachExistingCounter")) {
+                    if (eachExisting) {
                         for (CounterType listType : Lists.newArrayList(gameCard.getCounters().keySet())) {
-                            addOrRemoveCounter(sa, gameCard, listType, counterAmount, table);
+                            addOrRemoveCounter(sa, gameCard, listType, counterAmount, table, pl);
                         }
                     } else {
-                        addOrRemoveCounter(sa, gameCard, ctype, counterAmount, table);
+                        addOrRemoveCounter(sa, gameCard, ctype, counterAmount, table, pl);
                     }
+                } else if (!eachExisting && ctype != null) {
+                    gameCard.addCounter(ctype, counterAmount, pl, table);
                 }
             }
         }
@@ -83,8 +97,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
     }
 
     private void addOrRemoveCounter(final SpellAbility sa, final Card tgtCard, CounterType ctype,
-            final int counterAmount, GameEntityCounterTable table) {
-        final Player pl = sa.getActivatingPlayer();
+            final int counterAmount, GameEntityCounterTable table, final Player pl) {
         final PlayerController pc = pl.getController();
 
         Map<String, Object> params = Maps.newHashMap();
@@ -100,12 +113,15 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
 
         params.put("CounterType", chosenType);
         prompt = Localizer.getInstance().getMessage("lblWhatToDoWithTargetCounter",  chosenType.getName()) + " ";
-        Boolean putCounter = pc.chooseBinary(sa, prompt, BinaryChoiceType.AddOrRemove, params);
+        boolean putCounter = pc.chooseBinary(sa, prompt, BinaryChoiceType.AddOrRemove, params);
 
         if (putCounter) {
             tgtCard.addCounter(chosenType, counterAmount, pl, table);
         } else {
             tgtCard.subtractCounter(chosenType, counterAmount);
+            if (sa.hasParam("RememberRemovedCards")) {
+                sa.getHostCard().addRemembered(tgtCard);
+            }
         }
     }
 }
