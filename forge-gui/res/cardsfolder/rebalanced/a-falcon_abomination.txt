@@ -1,0 +1,10 @@
+Name:A-Falcon Abomination
+ManaCost:2 U
+Types:Creature Zombie Bird
+PT:2/2
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 black Zombie creature token with decayed.
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie_decayed
+DeckHas:Ability$Token|Sacrifice
+Oracle:Flash\nFlying\nWhen Falcon Abomination enters the battlefield, create a 2/2 black Zombie creature token with decayed.

@@ -424,6 +424,9 @@ ScryfallCode=ELD
 396 U Improbable Alliance @Zoltan Boros
 397 U Inspiring Veteran @Scott Murphy
 
+[rebalanced]
+A125 R A-Fires of Invention @Stanton Feng
+
 [tokens]
 w_0_1_goat
 w_1_1_human

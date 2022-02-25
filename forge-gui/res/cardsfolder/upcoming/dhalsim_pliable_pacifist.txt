@@ -1,0 +1,15 @@
+Name:Dhalsim, Pliable Pacifist
+ManaCost:2 G W
+Types:Legendary Creature Human Monk
+PT:1/3
+K:Reach
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Hexproof | IsPresent$ Card.Self+notattacking | Description$ Teleport – CARDNAME has hexproof unless he's attacking.
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+withReach | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever a creature you control with reach attacks, untap it and it can't be blocked by creatures with greater power this combat.
+SVar:TrigUntap:DB$ Untap | Defined$ TriggeredAttacker | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ TriggeredAttacker | staticAbilities$ CantBeBlockedPow | Duration$ UntilEndOfCombat
+SVar:CantBeBlockedPow:Mode$ CantBlockBy | ValidAttacker$ Card.Self | ValidBlocker$ Creature.powerGTX | Description$ CARDNAME can't be blocked by creatures with greater power this combat.
+SVar:X:Count$CardPower
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ TrigDraw | TriggerDescription$ Fierce Punch – Whenever one or more creatures you control deal combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckHints:Keyword$Reach
+Oracle:Reach\nTeleport — Dhalsim, Pliable Pacifist has hexproof unless he's attacking.\nWhenever a creature you control with reach attacks, untap it and it can't be blocked by creatures with greater power this combat.\nFierce Punch — Whenever one or more creatures you control deal combat damage to a player, draw a card.
