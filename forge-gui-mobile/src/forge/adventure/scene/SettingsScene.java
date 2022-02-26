@@ -65,7 +65,7 @@ public class SettingsScene extends UIScene {
 
     @Override
     public boolean keyPressed(int keycode) {
-        if (keycode == Input.Keys.ESCAPE) {
+        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
             back();
         }
         return true;
@@ -157,7 +157,7 @@ public class SettingsScene extends UIScene {
     void addLabel(String name) {
         Label label = new Label(name, Controls.GetSkin().get("white", Label.LabelStyle.class));
         settingGroup.row().space(5);
-        settingGroup.add(label).align(Align.left).pad(2,2, 2, 5);
+        settingGroup.add(label).align(Align.left).pad(2, 2, 2, 5);
     }
 
     @Override
