@@ -2,7 +2,7 @@
 Code=J21
 Date=2021-08-26
 Name=Jumpstart: Historic Horizons
-Type=Draft
+Type=Online
 ScryfallCode=J21
 
 [cards]
