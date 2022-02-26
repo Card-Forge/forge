@@ -2,7 +2,7 @@
     "screenWidth": 480,
 	"screenHeight": 270, 
 	"font": "skin/MiKrollFantasy.ttf",      
-	"skin": "skin/uiskin.json", 
+	"skin": "skin/ui_skin.json",
 	"fontColor": "ffffff"   ,     
 	"playerBaseSpeed": 30 ,
     "minDeckSize":40,
