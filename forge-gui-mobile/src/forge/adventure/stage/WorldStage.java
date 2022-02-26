@@ -23,6 +23,8 @@ import forge.adventure.util.SaveFileData;
 import forge.adventure.world.World;
 import forge.adventure.world.WorldSave;
 import forge.screens.TransitionScreen;
+import forge.sound.SoundEffectType;
+import forge.sound.SoundSystem;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
@@ -81,6 +83,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
                     Gdx.input.vibrate(50);
                     Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
+                    SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
                     Forge.setTransitionScreen(new TransitionScreen(new Runnable() {
                         @Override
                         public void run() {
@@ -132,6 +135,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     ((RewardScene) SceneType.RewardScene.instance).loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
                     WorldStage.this.removeEnemy(currentMob);
                     currentMob = null;
+                    Gdx.input.vibrate(50);
                     Forge.switchScene(SceneType.RewardScene.instance);
                 }
             });

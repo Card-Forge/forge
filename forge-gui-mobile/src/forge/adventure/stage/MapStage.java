@@ -1,6 +1,7 @@
 package forge.adventure.stage;
 
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ScreenUtils;
 import forge.Forge;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.EnemySprite;
@@ -30,6 +32,9 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.util.Reward;
 import forge.adventure.world.WorldSave;
+import forge.screens.TransitionScreen;
+import forge.sound.SoundEffectType;
+import forge.sound.SoundSystem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -355,6 +360,7 @@ public class MapStage extends GameStage {
         actors.removeValue(currentMob,true);
         changes.deleteObject(currentMob.getId());
         currentMob = null;
+        Gdx.input.vibrate(50);
         Forge.switchScene(SceneType.RewardScene.instance);
     }
     @Override
@@ -384,7 +390,15 @@ public class MapStage extends GameStage {
                     {
                         player.setAnimation(CharacterSprite.AnimationTypes.Attack);
                         mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
-
+                        Gdx.input.vibrate(50);
+                        Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
+                        SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
+                        Forge.setTransitionScreen(new TransitionScreen(new Runnable() {
+                            @Override
+                            public void run() {
+                                Forge.clearTransitionScreen();
+                            }
+                        }, ScreenUtils.getFrameBufferTexture(), true, false));
                         startPause(1, new Runnable() {
                             @Override
                             public void run() {
