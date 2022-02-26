@@ -1,7 +1,10 @@
 package forge.game.ability.effects;
 
+import java.util.Map;
+
 import forge.game.Game;
 import forge.game.GameLogEntryType;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -49,8 +52,12 @@ public class EncodeEffect extends SpellAbilityEffect {
             return;
         }
 
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
+        moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
+
         // move host card to exile
-        Card movedCard = game.getAction().moveTo(ZoneType.Exile, host, sa);
+        Card movedCard = game.getAction().moveTo(ZoneType.Exile, host, sa, moveParams);
 
         // choose a creature
         Card choice = player.getController().chooseSingleEntityForEffect(choices, sa, Localizer.getInstance().getMessage("lblChooseACreatureYouControlToEncode") + " ", true, null);

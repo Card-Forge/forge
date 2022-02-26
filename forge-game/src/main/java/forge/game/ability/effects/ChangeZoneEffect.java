@@ -620,7 +620,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
 
-                    Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
+                    Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                     moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
                     moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
                     if (sa.isReplacementAbility()) {
@@ -699,7 +699,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         gameCard.setExiledWith(host);
                         gameCard.setExiledBy(host.getController());
                     }
-                    movedCard = game.getAction().moveTo(destination, gameCard, sa);
+                    Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                    moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+                    moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+                    movedCard = game.getAction().moveTo(destination, gameCard, sa, moveParams);
                     if (ZoneType.Hand.equals(destination) && ZoneType.Command.equals(originZone.getZoneType())) {
                         StringBuilder sb = new StringBuilder();
                         sb.append(movedCard.getName()).append(" has moved from Command Zone to ").append(player).append("'s hand.");
@@ -1210,7 +1213,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             for (final Card c : chosenCards) {
                 Card movedCard = null;
                 final Zone originZone = game.getZoneOf(c);
-                Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
+                Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                 moveParams.put(AbilityKey.FoundSearchingLibrary, searchedLibrary);
                 moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
                 moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);

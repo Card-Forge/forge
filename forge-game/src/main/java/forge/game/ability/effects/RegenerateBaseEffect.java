@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -71,7 +72,7 @@ public abstract class RegenerateBaseEffect extends SpellAbilityEffect {
             c.addShield(eff);
         }
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff, sa);
+        game.getAction().moveTo(ZoneType.Command, eff, sa, AbilityKey.newMap());
         eff.updateStateForView();
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         

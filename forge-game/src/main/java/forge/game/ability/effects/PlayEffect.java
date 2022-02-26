@@ -19,6 +19,7 @@ import forge.StaticData;
 import forge.card.CardRulesPredicates;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -216,6 +217,11 @@ public class PlayEffect extends SpellAbilityEffect {
         boolean singleOption = tgtCards.size() == 1 && amount == 1 && optional;
         Map<String, Object> params = hasTotalCMCLimit ? new HashMap<>() : null;
 
+
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
+        moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
+
         while (!tgtCards.isEmpty() && amount > 0 && totalCMCLimit >= 0) {
             if (hasTotalCMCLimit) {
                 // filter out cards with mana value greater than limit
@@ -376,12 +382,12 @@ public class PlayEffect extends SpellAbilityEffect {
 
             // can't be done later
             if (sa.hasParam("ReplaceGraveyard")) {
-                addReplaceGraveyardEffect(tgtCard, sa, sa.getParam("ReplaceGraveyard"));
+                addReplaceGraveyardEffect(tgtCard, sa, sa.getParam("ReplaceGraveyard"), moveParams);
             }
 
             // For Illusionary Mask effect
             if (sa.hasParam("ReplaceIlluMask")) {
-                addIllusionaryMaskReplace(tgtCard, sa);
+                addIllusionaryMaskReplace(tgtCard, sa, moveParams);
             }
 
             tgtSA.setSVar("IsCastFromPlayEffect", "True");
@@ -420,7 +426,7 @@ public class PlayEffect extends SpellAbilityEffect {
     } // end resolve
 
 
-    protected void addReplaceGraveyardEffect(Card c, SpellAbility sa, String zone) {
+    protected void addReplaceGraveyardEffect(Card c, SpellAbility sa, String zone, Map<AbilityKey, Object> moveParams) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         final Player controller = sa.getActivatingPlayer();
@@ -461,12 +467,12 @@ public class PlayEffect extends SpellAbilityEffect {
 
         // TODO: Add targeting to the effect so it knows who it's dealing with
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff, sa);
+        game.getAction().moveTo(ZoneType.Command, eff, sa, moveParams);
         eff.updateStateForView();
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }
 
-    protected void addIllusionaryMaskReplace(Card c, SpellAbility sa) {
+    protected void addIllusionaryMaskReplace(Card c, SpellAbility sa, Map<AbilityKey, Object> moveParams) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         final Player controller = sa.getActivatingPlayer();
@@ -497,7 +503,7 @@ public class PlayEffect extends SpellAbilityEffect {
         addExileOnCounteredTrigger(eff);
 
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff, sa);
+        game.getAction().moveTo(ZoneType.Command, eff, sa, moveParams);
         eff.updateStateForView();
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }

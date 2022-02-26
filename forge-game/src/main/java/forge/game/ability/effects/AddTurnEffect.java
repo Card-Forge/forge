@@ -4,6 +4,7 @@ import java.util.List;
 
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -84,7 +85,7 @@ public class AddTurnEffect extends SpellAbilityEffect {
         eff.addStaticAbility(stEffect);
 
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff, sa);
+        game.getAction().moveTo(ZoneType.Command, eff, sa, AbilityKey.newMap());
         eff.updateStateForView();
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }

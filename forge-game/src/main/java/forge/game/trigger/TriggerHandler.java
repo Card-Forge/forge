@@ -44,7 +44,8 @@ import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
 
 public class TriggerHandler {
-    private final List<TriggerType> suppressedModes = Collections.synchronizedList(new ArrayList<>());
+    private final Set<TriggerType> suppressedModes = Collections.synchronizedSet(EnumSet.noneOf(TriggerType.class));
+    private boolean allSuppressed = false;
     private final List<Trigger> activeTriggers = Collections.synchronizedList(new ArrayList<>());
 
     private final List<Trigger> delayedTriggers = Collections.synchronizedList(new ArrayList<>());
@@ -106,17 +107,14 @@ public class TriggerHandler {
     }
 
     public final void setSuppressAllTriggers(final boolean suppress) {
-        for (TriggerType t : TriggerType.values()) {
-            if (suppress) {
-                suppressMode(t);
-            } else {
-                clearSuppression(t);
-            }
-        }
+        allSuppressed = suppress;
     }
 
     public final void clearSuppression(final TriggerType mode) {
         suppressedModes.remove(mode);
+    }
+    public boolean isTriggerSuppressed(final TriggerType mode) {
+        return allSuppressed || suppressedModes.contains(mode);
     }
 
     public static Trigger parseTrigger(final String trigParse, final Card host, final boolean intrinsic) {
@@ -252,7 +250,7 @@ public class TriggerHandler {
     }
 
     public final void runTrigger(final TriggerType mode, final Map<AbilityKey, Object> runParams, boolean holdTrigger) {
-        if (suppressedModes.contains(mode)) {
+        if (isTriggerSuppressed(mode)) {
             return;
         }
 
