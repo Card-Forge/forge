@@ -1,8 +1,8 @@
 Name:Spite
 ManaCost:3 U
-AlternateMode: Split
 Types:Instant
 A:SP$ Counter | Cost$ 3 U | TargetType$ Spell | TgtPrompt$ Select target noncreature spell | ValidTgts$ Card.nonCreature | SpellDescription$ Counter target noncreature spell.
+AlternateMode:Split
 Oracle:Counter target noncreature spell.
 
 ALTERNATE

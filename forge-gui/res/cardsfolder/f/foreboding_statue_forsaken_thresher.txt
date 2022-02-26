@@ -7,8 +7,8 @@ SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | Defined$ Self | CounterType$ 
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | IsPresent$ Card.Self+counters_GE3_OMEN | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of your end step, if there are three or more omen counters on CARDNAME, untap it, then transform it.
 SVar:TrigUntap:DB$ Untap | Defined$ Self | SubAbility$ DBTransform
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
-AlternateMode:DoubleFaced
 DeckHas:Ability$Counters
+AlternateMode:DoubleFaced
 Oracle:{T}: Add one mana of any color. Put an omen counter on Foreboding Statue.\nAt the beginning of your end step, if there are three or more omen counters on Foreboding Statue, untap it, then transform it.
 
 ALTERNATE

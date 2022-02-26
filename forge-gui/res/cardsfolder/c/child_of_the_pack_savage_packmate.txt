@@ -4,8 +4,8 @@ Types:Creature Human Werewolf
 PT:2/5
 A:AB$ Token | Cost$ 2 R G | TokenScript$ g_2_2_wolf | StackDescription$ SpellDescription | SpellDescription$ Create a 2/2 green Wolf creature token.
 K:Daybound
-AlternateMode:DoubleFaced
 DeckHas:Ability$Token & Type$Wolf
+AlternateMode:DoubleFaced
 Oracle:{2}{R}{G}: Create a 2/2 green Wolf creature token.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
 
 ALTERNATE

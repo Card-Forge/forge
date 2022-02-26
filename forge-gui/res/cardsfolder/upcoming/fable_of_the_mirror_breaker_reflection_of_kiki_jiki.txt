@@ -10,8 +10,8 @@ SVar:Y:Remembered$Amount
 SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-AlternateMode:DoubleFaced
 DeckHas:Ability$Token|Sacrifice|Discard & Type$Artifact|Treasure
+AlternateMode:DoubleFaced
 Oracle:(As this Saga enters and after your draw step, add a lore counter.)\nI — Create a 2/2 red Goblin Shaman creature token with "Whenever this creature attacks, create a Treasure token."\nII — You may discard up two cards. If you do, draw that many cards.\nIII — Exile this Saga, then return it to the battlefield transformed under your control.
 
 ALTERNATE

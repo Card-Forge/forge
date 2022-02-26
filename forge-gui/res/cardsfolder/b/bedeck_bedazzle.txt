@@ -1,8 +1,8 @@
 Name:Bedeck
 ManaCost:BR BR
-AlternateMode: Split
 Types:Instant
 A:SP$ Pump | Cost$ BR BR | ValidTgts$ Creature | NumAtt$ +3 | NumDef$ -3 | IsCurse$ True | SpellDescription$ Target creature gets +3/-3 until end of turn.
+AlternateMode:Split
 Oracle:Target creature gets +3/-3 until end of turn.
 
 ALTERNATE

@@ -9,8 +9,8 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ 
 SVar:TrigDrain:DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 K:Daybound
-AlternateMode:DoubleFaced
 DeckHas:Ability$LifeGain
+AlternateMode:DoubleFaced
 Oracle:Enchant player\nAs this permanent transforms into Curse of Leeches, attach it to a player.\nAt the beginning of enchanted player's upkeep, they lose 1 life and you gain 1 life.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
 
 ALTERNATE

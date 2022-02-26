@@ -4,8 +4,8 @@ Types:Creature Spirit
 PT:3/3
 K:Disturb:3 U
 S:Mode$ Continuous | Affected$ Card.Self+attacking | AddHiddenKeyword$ Unblockable | IsPresent$ Card.Other+attacking | PresentCompare$ EQ0 | Description$ CARDNAME can't be blocked as long as it's attacking alone.
-AlternateMode:DoubleFaced
 DeckHas:Ability$Graveyard
+AlternateMode:DoubleFaced
 Oracle:Gutter Skulker can't be blocked as long as it's attacking alone.\nDisturb {3}{U} (You may cast this card from your graveyard transformed for its disturb cost.)
 
 ALTERNATE

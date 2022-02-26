@@ -9,8 +9,8 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | I
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ JUDGMENT | CounterNum$ 1
 S:Mode$ Continuous | Affected$ Card.Self+counters_GE3_JUDGMENT | AddHiddenKeyword$ CARDNAME can attack as though it didn't have defender. | Description$ As long as CARDNAME has three or more judgment counters on it, it can attack as though it didn't have defender.
 K:Disturb:5 W W
-AlternateMode:DoubleFaced
 DeckHas:Ability$Graveyard|Counters
+AlternateMode:DoubleFaced
 Oracle:Defender, flying, vigilance\nAt the beginning of your upkeep, if Faithbound Judge has two or fewer judgment counters on it, put a judgment counter on it.\nAs long as Faithbound Judge has three or more judgment counters on it, it can attack as though it didn't have defender.\nDisturb {5}{W}{W}
 
 ALTERNATE

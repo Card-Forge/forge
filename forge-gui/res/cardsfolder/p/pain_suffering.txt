@@ -1,8 +1,8 @@
 Name:Pain
 ManaCost:B
-AlternateMode: Split
 Types:Sorcery
 A:SP$ Discard | Cost$ B | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card.
+AlternateMode:Split
 Oracle:Target player discards a card.
 
 ALTERNATE

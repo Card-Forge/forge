@@ -3,8 +3,8 @@ ManaCost:4 W
 Types:Creature Unicorn
 PT:3/3
 K:Vigilance
-Oracle:Vigilance
 AlternateMode:Adventure
+Oracle:Vigilance
 
 ALTERNATE
 

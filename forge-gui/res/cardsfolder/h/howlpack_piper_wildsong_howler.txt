@@ -7,8 +7,8 @@ A:AB$ ChangeZone | Cost$ 1 G T | Origin$ Hand | Destination$ Battlefield | Chang
 SVar:DBUntap:DB$ Untap | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Wolf,Werewolf | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Daybound
-AlternateMode:DoubleFaced
 DeckHints:Type$Wolf|Werewolf
+AlternateMode:DoubleFaced
 Oracle:This spell can't be countered.\n{1}{G}, {T}: You may put a creature card from your hand onto the battlefield. If it's a Wolf or Werewolf, untap Howlpack Piper. Activate only as a sorcery.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
 
 ALTERNATE

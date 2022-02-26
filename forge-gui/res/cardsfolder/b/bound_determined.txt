@@ -1,6 +1,5 @@
 Name:Bound
 ManaCost:3 B G
-AlternateMode: Split
 Types:Instant
 A:SP$ Sacrifice | Cost$ 3 B G | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ DBReturnChoose | SpellDescription$ Sacrifice a creature. Return up to X cards from your graveyard to your hand, where X is the number of colors that creature was. Exile this card.
 SVar:DBReturnChoose:DB$ ChooseCard | Defined$ You | Choices$ Card.YouOwn | ChoiceZone$ Graveyard | Amount$ X | SubAbility$ DBReturn
@@ -8,6 +7,7 @@ SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ 
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | Defined$ Self | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardNumColors
+AlternateMode:Split
 Oracle:Sacrifice a creature. Return up to X cards from your graveyard to your hand, where X is the number of colors that creature was. Exile this card.
 
 ALTERNATE

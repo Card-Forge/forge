@@ -4,8 +4,8 @@ Types:Creature Human Knight
 PT:2/2
 K:Flying
 K:CARDNAME can't block.
-Oracle:Flying\nOrder of Midnight can't block.
 AlternateMode:Adventure
+Oracle:Flying\nOrder of Midnight can't block.
 
 ALTERNATE
 

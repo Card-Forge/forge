@@ -11,8 +11,8 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$CreaturesAttackedThisTurn Creature.Wolf+YouCtrl/Plus.Y
 SVar:Y:Count$CreaturesAttackedThisTurn Creature.Werewolf+YouCtrl
 K:Daybound
-AlternateMode:DoubleFaced
 DeckHints:Type$Wolf|Werewolf
+AlternateMode:DoubleFaced
 Oracle:First strike\nWhen Rahilda, Wanted Cutthroat deals combat damage to a player, exile a nonland card from their library at random. During any turn you attacked with a Wolf or Werewolf, you may cast that card and you may spend mana as though it were mana of any color to cast that spell.\nDaybound
 
 ALTERNATE

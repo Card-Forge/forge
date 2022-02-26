@@ -1,8 +1,8 @@
 Name:Connive
 ManaCost:2 U/B U/B
 Types:Sorcery
-AlternateMode:Split
 A:SP$ GainControl | Cost$ 2 U/B U/B | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less. | SpellDescription$ Gain control of target creature with power 2 or less.
+AlternateMode:Split
 Oracle:Gain control of target creature with power 2 or less.
 
 ALTERNATE

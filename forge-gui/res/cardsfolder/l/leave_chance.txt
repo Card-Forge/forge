@@ -1,9 +1,9 @@
 Name:Leave
 ManaCost:1 W
-AlternateMode: Split
 Types:Instant
 A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Select target permanent you own | TargetMin$ 0 | TargetMax$ X | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return any number of target permanents you own to your hand.
 SVar:X:Count$Valid Permanent.YouOwn
+AlternateMode:Split
 Oracle:Return any number of target permanents you own to your hand.
 
 ALTERNATE

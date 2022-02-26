@@ -3,8 +3,8 @@ ManaCost:5 W W
 Types:Creature Giant
 PT:7/7
 K:Vigilance
-Oracle:Vigilance
 AlternateMode:Adventure
+Oracle:Vigilance
 
 ALTERNATE
 

@@ -10,9 +10,9 @@ SVar:DBRemoveCtrs:DB$ RemoveCounter | Defined$ Self | CounterType$ EMBER | Count
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:X:Count$TriggeredManaSpent
 SVar:Ember:Count$Valid Card.Self+counters_GE7_EMBER
-AlternateMode:DoubleFaced
 DeckHas:Ability$Counters
 DeckNeeds:Type$Instant|Sorcery
+AlternateMode:DoubleFaced
 Oracle:Defender\nWhenever you cast an instant or sorcery spell, put a number of ember counters on Smoldering Egg equal to the amount of mana spent to cast that spell. Then if Smoldering Egg has seven or more ember counters on it, remove them and transform Smoldering Egg.
 
 ALTERNATE

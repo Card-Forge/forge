@@ -1,9 +1,9 @@
 Name:Start
 ManaCost:2 W
-AlternateMode: Split
 Types:Instant
 A:SP$ Token | Cost$ 2 W | TokenAmount$ 2 | TokenScript$ w_1_1_warrior_vigilance | TokenOwner$ You | LegacyImage$ w 1 1 warrior vigilance akh | SpellDescription$ Create two 1/1 white Warrior creature tokens with vigilance.
 DeckHas:Ability$Token
+AlternateMode:Split
 Oracle:Create two 1/1 white Warrior creature tokens with vigilance.
 
 ALTERNATE

@@ -5,8 +5,8 @@ A:AB$ Draw | Cost$ 1 T PayLife<1> Discard<1/Card/card> | NumCards$ 1 | SubAbilit
 SVar:DBMill:DB$ Mill | NumCards$ 1 | Defined$ You | SubAbility$ DBPutCounter1 | StackDescription$ None
 SVar:DBPutCounter1:DB$ PutCounter | CounterType$ RITUAL | CounterNum$ 1 | SubAbility$ DBTransform | StackDescription$ SpellDescription | SpellDescription$ Put a ritual counter on CARDNAME.
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | ConditionDefined$ Self | ConditionPresent$ Card.counters_GE3_RITUAL | StackDescription$ SpellDescription | SpellDescription$ Then if it has 3 or more ritual counters on it, transform it. Activate only as a sorcery.
-AlternateMode:DoubleFaced
 DeckHas:Ability$Discard|Mill|Counters|Graveyard
+AlternateMode:DoubleFaced
 Oracle:{1}, {T}, Pay 1 life, Discard a card: Draw a card, then mill a card. Put a ritual counter on Heirloom Mirror. Then if it has 3 or more ritual counters on it, transform it. Activate only as a sorcery.
 
 ALTERNATE

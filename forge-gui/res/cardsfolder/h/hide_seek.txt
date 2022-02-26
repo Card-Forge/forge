@@ -1,8 +1,8 @@
 Name:Hide
 ManaCost:R W
-AlternateMode: Split
 Types:Instant
 A:SP$ ChangeZone | Cost$ R W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target artifact or enchantment on the bottom of its owner's library.
+AlternateMode:Split
 Oracle:Put target artifact or enchantment on the bottom of its owner's library.
 
 ALTERNATE

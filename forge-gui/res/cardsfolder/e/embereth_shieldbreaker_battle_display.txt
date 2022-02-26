@@ -2,8 +2,8 @@ Name:Embereth Shieldbreaker
 ManaCost:1 R
 Types:Creature Human Knight
 PT:2/1
-Oracle:
 AlternateMode:Adventure
+Oracle:
 
 ALTERNATE
 

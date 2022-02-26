@@ -1,8 +1,8 @@
 Name:Said
 ManaCost:2 U
-AlternateMode: Split
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 2 U | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | SpellDescription$ Return target instant or sorcery card from your graveyard to your hand.
+AlternateMode:Split
 Oracle:Return target instant or sorcery card from your graveyard to your hand.
 
 ALTERNATE

@@ -10,9 +10,9 @@ A:AB$ Pump | Cost$ 2 | ValidTgts$ Human.YouCtrl | TgtPrompt$ Select target Human
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ13 | Execute$ TrigTransform | TriggerDescription$ At the beginning of your end step, if you have exactly 13 life, you may pay {4}{B}{B}. If you do, transform NICKNAME.
 SVar:TrigTransform:AB$ SetState | Cost$ 4 B B | Defined$ Self | Mode$ Transform
 SVar:X:Count$YourLifeTotal
-AlternateMode:DoubleFaced
-DeckHints:Type$Human
 DeckHas:Ability$Token|LifeGain|Sacrifice
+DeckHints:Type$Human
+AlternateMode:DoubleFaced
 Oracle:Whenever Jerren, Corrupted Bishop enters the battlefield or another nontoken Human you control dies, you lose 1 life and create a 1/1 white Human creature token.\n{2}: Target Human you control gains lifelink until end of turn.\nAt the beginning of your end step, if you have exactly 13 life, you may pay {4}{B}{B}. If you do, transform Jerren.
 
 ALTERNATE
