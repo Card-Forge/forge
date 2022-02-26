@@ -5,8 +5,8 @@ PT:2/2
 K:Lifelink
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ When another creature you control dies, transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
-AlternateMode:DoubleFaced
 DeckHas:Ability$LifeGain
+AlternateMode:DoubleFaced
 Oracle:Lifelink\nWhen another creature you control dies, transform Desperate Farmer.
 
 ALTERNATE

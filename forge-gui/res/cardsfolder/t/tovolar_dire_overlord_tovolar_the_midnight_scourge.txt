@@ -12,8 +12,8 @@ SVar:NumHumanWerewolves:Count$Valid Human.Werewolf+YouCtrl+DoubleFaced
 SVar:Y:Count$Valid Wolf.YouCtrl
 SVar:Z:Count$Valid Werewolf.YouCtrl
 SVar:X:SVar$Y/Plus.Z
-AlternateMode:DoubleFaced
 DeckHints:Type$Wolf|Werewolf
+AlternateMode:DoubleFaced
 Oracle:Whenever a Wolf or Werewolf you control deals combat damage to a player, draw a card.\nAt the beginning of your upkeep, if you control three or more Wolves and/or Werewolves, it becomes night. Then transform any number of Human Werewolves you control.\nDaybound
 
 ALTERNATE

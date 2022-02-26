@@ -1,8 +1,8 @@
 Name:Warrant
 ManaCost:W/U W/U
-AlternateMode: Split
 Types:Instant
 A:SP$ ChangeZone | Cost$ WU WU | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature. | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target attacking or blocking creature on top of its owner's library.
+AlternateMode:Split
 Oracle:Put target attacking or blocking creature on top of its owner's library.
 
 ALTERNATE

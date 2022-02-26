@@ -1,8 +1,8 @@
 Name:Crime
 ManaCost:3 W B
-AlternateMode: Split
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 3 W B | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature or enchantment in an opponent's graveyard | ValidTgts$ Creature.OppCtrl,Enchantment.OppCtrl | SpellDescription$ Put target creature or enchantment card from an opponent's graveyard onto the battlefield under your control.
+AlternateMode:Split
 Oracle:Put target creature or enchantment card from an opponent's graveyard onto the battlefield under your control.
 
 ALTERNATE

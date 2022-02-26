@@ -4,8 +4,8 @@ Types:Creature Human Soldier
 PT:2/3
 K:Vigilance
 K:Disturb:3 W
-AlternateMode:DoubleFaced
 DeckHas:Ability$Graveyard
+AlternateMode:DoubleFaced
 Oracle:Vigilance\nDisturb {3}{W} (You may cast this card from your graveyard transformed for its disturb cost.)
 
 ALTERNATE

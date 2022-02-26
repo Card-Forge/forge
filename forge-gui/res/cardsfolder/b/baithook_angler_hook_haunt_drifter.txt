@@ -3,8 +3,8 @@ ManaCost:1 U
 Types:Creature Human Peasant
 PT:2/1
 K:Disturb:1 U
-AlternateMode:DoubleFaced
 DeckHas:Ability$Graveyard
+AlternateMode:DoubleFaced
 Oracle:Disturb {1}{U} (You may cast this card from your graveyard transformed for its disturb cost.)
 
 ALTERNATE

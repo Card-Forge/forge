@@ -5,9 +5,9 @@ PT:3/1
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLTX | Description$ Creatures with power less than CARDNAME's power can't block it.
 SVar:X:Count$CardPower
 A:AB$ SetState | Cost$ 5 G | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
-AlternateMode:DoubleFaced
-DeckHints:Type$Eldrazi|Horror
 DeckHas:Ability$Token
+DeckHints:Type$Eldrazi|Horror
+AlternateMode:DoubleFaced
 Oracle:Creatures with power less than Shrill Howler's power can't block it.\n{5}{G}: Transform Shrill Howler.
 
 ALTERNATE

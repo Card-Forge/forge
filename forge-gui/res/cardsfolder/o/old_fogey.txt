@@ -3,7 +3,7 @@ ManaCost:G G
 Types:Creature Dinosaur
 PT:7/7
 K:Phasing
-K:Cumulative upkeep: 1
+K:Cumulative upkeep:1
 K:Echo:G G
 K:Fading:3
 K:Bands with Other Dinosaurs

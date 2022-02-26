@@ -2,8 +2,8 @@ Name:Tuinvale Treefolk
 ManaCost:5 G
 Types:Creature Treefolk Druid
 PT:6/5
-Oracle:
 AlternateMode:Adventure
+Oracle:
 
 ALTERNATE
 

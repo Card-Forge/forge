@@ -3,8 +3,8 @@ ManaCost:2 G
 Types:Creature Elf Druid
 PT:2/3
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
-Oracle:{T}: Add one mana of any color.
 AlternateMode:Adventure
+Oracle:{T}: Add one mana of any color.
 
 ALTERNATE
 

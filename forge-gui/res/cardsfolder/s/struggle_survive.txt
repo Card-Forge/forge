@@ -1,9 +1,9 @@
 Name:Struggle
 ManaCost:2 R
-AlternateMode: Split
 Types:Instant
 A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature equal to the number of lands you control.
 SVar:X:Count$TypeYouCtrl.Land
+AlternateMode:Split
 Oracle:Struggle deals damage to target creature equal to the number of lands you control.
 
 ALTERNATE

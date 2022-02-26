@@ -6,9 +6,9 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigExile | Secondary$ True | TriggerDescription$ When this creature enters the battlefield or transforms into CARDNAME, exile target creature an opponent controls until this creature leaves the battlefield.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Duration$ UntilHostLeavesPlay
 K:Daybound
-AlternateMode:DoubleFaced
 SVar:PlayMain1:TRUE
 SVar:OblivionRing:TRUE
+AlternateMode:DoubleFaced
 Oracle:When this creature enters the battlefield or transforms into Brutal Cathar, exile target creature an opponent controls until this creature leaves the battlefield.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
 
 ALTERNATE

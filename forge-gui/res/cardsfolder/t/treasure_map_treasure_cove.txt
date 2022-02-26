@@ -8,8 +8,8 @@ SVar:DBRemoveCtrs:DB$ RemoveCounter | Defined$ Self | CounterType$ LANDMARK | Co
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | SubAbility$ DBTreasureTokens
 SVar:DBTreasureTokens:DB$ Token | TokenAmount$ 3 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | LegacyImage$ c a treasure sac xln
 SVar:XMarksTheSpot:Count$Valid Card.Self+counters_GE3_LANDMARK
-AlternateMode:DoubleFaced
 DeckHas:Ability$Token
+AlternateMode:DoubleFaced
 Oracle:{1}, {T}: Scry 1. Put a landmark counter on Treasure Map. Then if there are three or more landmark counters on it, remove those counters, transform Treasure Map, and create three Treasure tokens. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")
 
 ALTERNATE

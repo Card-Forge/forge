@@ -3,8 +3,8 @@ ManaCost:1 W W
 Types:Creature Human Knight
 PT:2/3
 K:Flying
-Oracle:Flying
 AlternateMode:Adventure
+Oracle:Flying
 
 ALTERNATE
 

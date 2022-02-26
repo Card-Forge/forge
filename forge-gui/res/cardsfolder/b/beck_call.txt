@@ -1,11 +1,11 @@
 Name:Beck
 ManaCost:G U
-AlternateMode: Split
 Types:Sorcery
 K:Fuse
 A:SP$ Effect | Cost$ G U | Name$ Beck Effect | Triggers$ CreatureEntered | SpellDescription$ Whenever a creature enters the battlefield this turn, you may draw a card.
 SVar:CreatureEntered:Mode$ ChangesZone | ValidCard$ Creature | Origin$ Any | Destination$ Battlefield | Execute$ TrigDraw | TriggerZones$ Command | OptionalDecider$ You | TriggerDescription$ Whenever a creature enters the battlefield this turn, you may draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+AlternateMode:Split
 Oracle:Whenever a creature enters the battlefield this turn, you may draw a card.\nFuse (You may cast one or both halves of this card from your hand.)
 
 ALTERNATE

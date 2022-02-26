@@ -4,8 +4,8 @@ Types:Creature Hippogriff
 PT:3/2
 K:Flying
 K:Disturb:4 U
-AlternateMode:DoubleFaced
 DeckHas:Ability$Graveyard
+AlternateMode:DoubleFaced
 Oracle:Flying\nDisturb {4}{U} (You may cast this card from your graveyard transformed for its disturb cost.)
 
 ALTERNATE

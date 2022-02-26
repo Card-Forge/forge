@@ -1,8 +1,8 @@
 Name:Consign
 ManaCost:1 U
-AlternateMode: Split
 Types:Instant
 A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent to its owner's hand.
+AlternateMode:Split
 Oracle:Return target nonland permanent to its owner's hand.
 
 ALTERNATE

@@ -1,8 +1,8 @@
 Name:Invert
 ManaCost:U/R
 Types:Instant
-AlternateMode: Split
 A:SP$ Pump | Cost$ U/R | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch the power and toughness of each of up to two target creatures until end of turn.
+AlternateMode:Split
 Oracle:Switch the power and toughness of each of up to two target creatures until end of turn.
 
 ALTERNATE

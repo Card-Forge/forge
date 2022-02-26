@@ -1,5 +1,5 @@
 Name:Mina and Denn, Wildborn
-ManaCost: 2 R G
+ManaCost:2 R G
 Types:Legendary Creature Elf Ally
 PT:4/4
 S:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land on each of your turns.

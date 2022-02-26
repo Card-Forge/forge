@@ -2,8 +2,8 @@ Name:Silverflame Squire
 ManaCost:1 W
 Types:Creature Human Soldier
 PT:2/1
-Oracle:
 AlternateMode:Adventure
+Oracle:
 
 ALTERNATE
 

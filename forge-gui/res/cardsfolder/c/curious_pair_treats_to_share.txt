@@ -2,8 +2,8 @@ Name:Curious Pair
 ManaCost:1 G
 Types:Creature Human Peasant
 PT:1/3
-Oracle:
 AlternateMode:Adventure
+Oracle:
 
 ALTERNATE
 

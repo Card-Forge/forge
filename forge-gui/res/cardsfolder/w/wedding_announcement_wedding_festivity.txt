@@ -8,8 +8,8 @@ SVar:X:Count$AttackersDeclared
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBTransform
 SVar:DBToken:DB$ Token | TokenScript$ w_1_1_human | SubAbility$ DBTransform
 SVar:DBTransform:DB$ SetState | Defined$ Self | ConditionDefined$ Self | ConditionPresent$ Card.counters_GE3_INVITATION | Mode$ Transform
-AlternateMode:DoubleFaced
 DeckHas:Ability$Counters|Token
+AlternateMode:DoubleFaced
 Oracle:At the beginning of your end step, put an invitation counter on Wedding Announcement. If you attacked with two or more creatures this turn, draw card. Otherwise, create a 1/1 white Human creature token. Then if Wedding Announcement has three or more invitation counters on it, transform it.
 
 ALTERNATE
