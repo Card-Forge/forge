@@ -59,7 +59,7 @@ public class InnScene extends UIScene {
 
     @Override
     public boolean keyPressed(int keycode) {
-        if (keycode == Input.Keys.ESCAPE) {
+        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
             done();
         }
         return true;

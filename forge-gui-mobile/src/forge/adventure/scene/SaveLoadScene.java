@@ -60,7 +60,7 @@ public class SaveLoadScene extends UIScene {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 try {
-                    if(!button.isDisabled())
+                    if (!button.isDisabled())
                         select(i);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -126,7 +126,7 @@ public class SaveLoadScene extends UIScene {
 
     @Override
     public boolean keyPressed(int keycode) {
-        if (keycode == Input.Keys.ESCAPE) {
+        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
             back();
         }
         return true;

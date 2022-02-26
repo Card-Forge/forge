@@ -1023,7 +1023,7 @@ public class Forge implements ApplicationListener {
                 return fling(0,1000);
             }
             if(keyCode == Keys.BACK){
-                if (destroyThis)
+                if ((destroyThis && !isMobileAdventureMode)||(splashScreen != null && splashScreen.isShowModeSelector()))
                     exitAnimation(false);
                 else if(onHomeScreen() && isLandscapeMode())
                     back();

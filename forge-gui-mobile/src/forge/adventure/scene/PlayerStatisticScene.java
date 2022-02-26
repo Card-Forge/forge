@@ -41,7 +41,7 @@ public class PlayerStatisticScene extends UIScene {
 
     @Override
     public boolean keyPressed(int keycode) {
-        if (keycode == Input.Keys.ESCAPE) {
+        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
             back();
         }
         return true;
@@ -92,7 +92,7 @@ public class PlayerStatisticScene extends UIScene {
             enemiesGroup.add((data.name)).fillX().align(Align.center).fillX().space(3, 10, 3, 10);
             enemiesGroup.add((entry.getValue().getLeft().toString())).space(3, 2, 3, 2);
             enemiesGroup.add(("/")).align(Align.center).space(3, 2, 3, 2);
-            enemiesGroup.add((entry.getValue().getRight().toString())).align(Align.center).space(0, 2, 0, 2);
+            enemiesGroup.add((entry.getValue().getRight().toString())).align(Align.center).space(3, 2, 3, 2);
             enemiesGroup.row().space(8);
         }
 

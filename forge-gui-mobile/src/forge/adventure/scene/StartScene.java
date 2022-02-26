@@ -16,11 +16,11 @@ public class StartScene extends UIScene {
     Actor saveButton;
     Actor resumeButton;
 
-    public StartScene()
-    {
+    public StartScene() {
         super(GuiBase.isAndroid() ? "ui/start_menu_mobile.json" : "ui/start_menu.json");
 
     }
+
     public boolean NewGame() {
         Forge.switchScene(SceneType.NewGameScene.instance);
         return true;
@@ -57,9 +57,9 @@ public class StartScene extends UIScene {
     @Override
     public void enter() {
 
-        boolean hasSaveButton=WorldSave.getCurrentSave().getWorld().getData() != null;
-        if(hasSaveButton)
-            hasSaveButton=!((TileMapScene)SceneType.TileMapScene.instance).currentMap().isInMap();
+        boolean hasSaveButton = WorldSave.getCurrentSave().getWorld().getData() != null;
+        if (hasSaveButton)
+            hasSaveButton = !((TileMapScene) SceneType.TileMapScene.instance).currentMap().isInMap();
         saveButton.setVisible(hasSaveButton);
         resumeButton.setVisible(WorldSave.getCurrentSave().getWorld().getData() != null);
         Gdx.input.setInputProcessor(stage); //Start taking input from the ui
@@ -72,15 +72,14 @@ public class StartScene extends UIScene {
     }
 
     @Override
-    public boolean keyPressed(int keycode)
-    {
-        if (keycode == Input.Keys.ESCAPE)
-        {
-            if(WorldSave.getCurrentSave().getWorld().getData() != null)
+    public boolean keyPressed(int keycode) {
+        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
+            if (WorldSave.getCurrentSave().getWorld().getData() != null)
                 Resume();
         }
         return true;
     }
+
     @Override
     public void resLoaded() {
         super.resLoaded();
