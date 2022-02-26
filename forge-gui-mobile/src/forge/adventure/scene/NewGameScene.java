@@ -1,6 +1,7 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -171,7 +172,13 @@ public class NewGameScene extends UIScene {
     @Override
     public void enter() {
         Gdx.input.setInputProcessor(stage); //Start taking input from the ui
+    }
 
-
+    @Override
+    public boolean keyPressed(int keycode) {
+        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
+            back();
+        }
+        return true;
     }
 }
