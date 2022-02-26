@@ -6,9 +6,9 @@ K:Menace
 T:Mode$ Sacrificed | ValidCard$ Permanent.nonToken+OppCtrl | OptionalDecider$ You | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent sacrifices a nontoken permanent, you may put that card from a graveyard onto the battlefield under your control.
 T:Mode$ Discarded | ValidCard$ Permanent.nonToken+OppCtrl | OptionalDecider$ You | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent discards a permanent card, you may put that card from a graveyard onto the battlefield under your control.
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredCard
-Oracle:Menace\nWhenever an opponent sacrifices a nontoken permanent or discards a permanent card, you may put that card from a graveyard onto the battlefield under your control.
 SVar:PlayMain1:TRUE
 AlternateMode:Modal
+Oracle:Menace\nWhenever an opponent sacrifices a nontoken permanent or discards a permanent card, you may put that card from a graveyard onto the battlefield under your control.
 
 ALTERNATE
 

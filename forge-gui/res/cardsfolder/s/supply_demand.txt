@@ -1,10 +1,10 @@
 Name:Supply
 ManaCost:X G W
-AlternateMode: Split
 Types:Sorcery
 A:SP$ Token | Cost$ X G W | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling dis | SpellDescription$ Create X 1/1 green Saproling creature tokens.
 SVar:X:Count$xPaid
 DeckHas:Ability$Token
+AlternateMode:Split
 Oracle:Create X 1/1 green Saproling creature tokens.
 
 ALTERNATE

@@ -3,8 +3,8 @@ ManaCost:1 R
 Types:Creature Dwarf Knight
 PT:3/1
 K:CARDNAME can't block.
-Oracle:Rimrock Knight can't block.
 AlternateMode:Adventure
+Oracle:Rimrock Knight can't block.
 
 ALTERNATE
 

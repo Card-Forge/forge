@@ -1,8 +1,8 @@
 Name:Incubation
 ManaCost:GU
-AlternateMode: Split
 Types:Sorcery
 A:SP$ Dig | Cost$ GU | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Card.Creature | RestRandomOrder$ True | SpellDescription$ Look at the top five cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+AlternateMode:Split
 Oracle:Look at the top five cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
 
 ALTERNATE

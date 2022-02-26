@@ -1,9 +1,9 @@
 Name:Wear
 ManaCost:1 R
-AlternateMode: Split
 Types:Instant
 K:Fuse
 A:SP$ Destroy | Cost$ 1 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
+AlternateMode:Split
 Oracle:Destroy target artifact.\nFuse (You may cast one or both halves of this card from your hand.)
 
 ALTERNATE

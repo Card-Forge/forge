@@ -6,10 +6,10 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ Aura | SourceType$ Spell | TriggerZones$ Battlefield | Execute$ TrigToken | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or becomes the target of an Aura spell, create a 1/1 white Spirit creature token with flying.
 SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_spirit_flying
 K:Disturb:W U
-AlternateMode:DoubleFaced
 SVar:EnchantMe:Multiple
 DeckHas:Ability$Graveyard|Token
 DeckHints:Type$Enchantment
+AlternateMode:DoubleFaced
 Oracle:Whenever Brine Comber enters the battlefield or becomes the target of an Aura spell, create a 1/1 white Spirit creature token with flying.\nDisturb {W}{U} (You may cast this card from your graveyard transformed for its disturb cost.)
 
 ALTERNATE

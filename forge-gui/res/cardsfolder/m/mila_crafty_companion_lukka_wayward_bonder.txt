@@ -6,8 +6,8 @@ T:Mode$ AttackersDeclared | AttackedTarget$ Planeswalker.YouCtrl | TriggerZones$
 SVar:TrigWalkerPump:DB$ PutCounterAll | ValidCards$ Planeswalker.YouCtrl | CounterType$ LOYALTY | CounterNum$ 1
 T:Mode$ BecomesTarget | ValidSource$ Card.OppCtrl | ValidTarget$ Permanent.YouCtrl+inZoneBattlefield | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You
-Oracle:Whenever an opponent attacks one or more planeswalkers you control, put a loyalty counter on each planeswalker you control.\nWhenever a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card.
 AlternateMode:Modal
+Oracle:Whenever an opponent attacks one or more planeswalkers you control, put a loyalty counter on each planeswalker you control.\nWhenever a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card.
 
 ALTERNATE
 

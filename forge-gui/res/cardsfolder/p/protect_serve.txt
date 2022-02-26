@@ -1,9 +1,9 @@
 Name:Protect
 ManaCost:2 W
-AlternateMode: Split
 Types:Instant
 K:Fuse
 A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature to get +2/+4 | NumAtt$ +2 | NumDef$ +4 | SpellDescription$ Target creature you control gets +2/+4 until end of turn.
+AlternateMode:Split
 Oracle:Target creature gets +2/+4 until end of turn.\nFuse (You may cast one or both halves of this card from your hand.)
 
 ALTERNATE

@@ -2,8 +2,8 @@ Name:Shepherd of the Flock
 ManaCost:1 W
 Types:Creature Human Peasant
 PT:3/1
-Oracle:
 AlternateMode:Adventure
+Oracle:
 
 ALTERNATE
 

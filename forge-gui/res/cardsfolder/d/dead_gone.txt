@@ -1,8 +1,8 @@
 Name:Dead
 ManaCost:R
-AlternateMode: Split
 Types:Instant
 A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | NumDmg$ 2 | SpellDescription$ Dead deals 2 damage to target creature.
+AlternateMode:Split
 Oracle:Dead deals 2 damage to target creature.
 
 ALTERNATE

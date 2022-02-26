@@ -1,10 +1,10 @@
 Name:Heaven
 ManaCost:X G
-AlternateMode: Split
 Types:Instant
 A:SP$ DamageAll | Cost$ X G | ValidCards$ Creature.withFlying | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature with flying.
 SVar:X:Count$xPaid
 AI:RemoveDeck:Random
+AlternateMode:Split
 Oracle:Heaven deals X damage to each creature with flying.
 
 ALTERNATE

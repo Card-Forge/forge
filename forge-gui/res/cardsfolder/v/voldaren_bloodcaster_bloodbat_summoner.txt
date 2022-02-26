@@ -7,8 +7,8 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:DB$ Token | TokenScript$ c_a_blood_draw
 T:Mode$ TokenCreated | ValidPlayer$ You | ValidToken$ Blood | IsPresent$ Blood.token+YouCtrl | PresentCompare$ GE5 | Execute$ TrigTransform | TriggerZones$ Battlefield | TriggerDescription$ Whenever you create a Blood token, if you control five or more Blood tokens, transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
-AlternateMode:DoubleFaced
 DeckHas:Ability$Token|Sacrifice & Type$Blood
+AlternateMode:DoubleFaced
 Oracle:Flying\nWhenever Voldaren Bloodcaster or another nontoken creature you control dies, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")\nWhenever you create a Blood token, if you control five or more Blood tokens, transform Voldaren Bloodcaster.
 
 ALTERNATE

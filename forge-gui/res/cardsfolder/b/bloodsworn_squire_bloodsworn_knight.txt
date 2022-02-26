@@ -5,10 +5,10 @@ PT:3/3
 A:AB$ Pump | Cost$ 1 B Discard<1/Card> | Defined$ Self | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ CARDNAME gains indestructible until end of turn.
 SVar:DBTap:DB$ Tap | Defined$ Self | SubAbility$ DBTransform | StackDescription$ SpellDescription | SpellDescription$ Tap it.
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | ConditionPresent$ Creature.YouOwn | ConditionCompare$ GE4 | ConditionZone$ Graveyard | StackDescription$ SpellDescription | SpellDescription$ Then if there are four or more creature cards in your graveyard, transform CARDNAME.
-AlternateMode:DoubleFaced
 SVar:AIPreference:DiscardCost$Creature
-DeckHints:Ability$Graveyard
 DeckHas:Ability$Discard
+DeckHints:Ability$Graveyard
+AlternateMode:DoubleFaced
 Oracle:{1}{B}, Discard a card: Bloodsworn Squire gains indestructible until end of turn. Tap it. Then if there are four or more creature cards in your graveyard, transform Bloodsworn Squire. (Damage and effects that say "destroy" don't destroy it.)
 
 ALTERNATE

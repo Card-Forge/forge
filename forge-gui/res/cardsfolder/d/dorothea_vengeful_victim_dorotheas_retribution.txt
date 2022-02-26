@@ -9,8 +9,8 @@ SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ 
 SVar:TrigSacrifice:DB$ SacrificeAll | Defined$ Self | Controller$ You
 SVar:SacrificeEndCombat:True
 K:Disturb:1 W U
-AlternateMode:DoubleFaced
 DeckHas:Ability$Sacrifice|Graveyard|Token
+AlternateMode:DoubleFaced
 Oracle:Flying\nWhen Dorothea, Vengeful Victim attacks or blocks, sacrifice it at end of combat.\nDisturb {1}{W}{U} (You may cast this card from your graveyard transformed for its disturb cost.)
 
 ALTERNATE

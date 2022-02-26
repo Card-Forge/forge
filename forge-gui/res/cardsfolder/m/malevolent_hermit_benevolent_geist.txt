@@ -4,8 +4,8 @@ Types:Creature Human Wizard
 PT:2/1
 K:Disturb:2 U
 A:AB$ Counter | Cost$ U Sac<1/CARDNAME> | TargetType$ Spell | ValidTgts$ Card.nonCreature | UnlessCost$ 3 | TgtPrompt$ Select target noncreature spell | SpellDescription$ Counter target noncreature spell unless its controller pays {3}.
-AlternateMode:DoubleFaced
 DeckHas:Ability$Graveyard
+AlternateMode:DoubleFaced
 Oracle:{U}, Sacrifice Malevolent Hermit: Counter target noncreature spell unless its controller pays {3}.\nDisturb {2}{U} (You may cast this card from your graveyard transformed for its disturb cost.)
 
 ALTERNATE

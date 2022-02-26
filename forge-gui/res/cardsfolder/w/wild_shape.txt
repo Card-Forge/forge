@@ -1,5 +1,5 @@
 Name:Wild Shape
-ManaCost: G
+ManaCost:G
 Types:Instant
 A:SP$ Charm | Cost$ G | Choices$ ChangeIntoTurtle,ChangeIntoSpider,ChangeIntoElephant | SpellDescription$ Choose one. Until end of turn, target creature you control has that base power and toughness, becomes that creature type, and gains that ability.
 SVar:ChangeIntoTurtle:DB$ Animate | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Power$ 1 | Toughness$ 3 | RemoveCreatureTypes$ True | Types$ Creature,Turtle | Keywords$ Hexproof | SpellDescription$ 1/3 Turtle with hexproof.

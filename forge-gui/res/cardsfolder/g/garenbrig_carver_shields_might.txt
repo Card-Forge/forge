@@ -2,8 +2,8 @@ Name:Garenbrig Carver
 ManaCost:3 G
 Types:Creature Human Warrior
 PT:3/2
-Oracle:
 AlternateMode:Adventure
+Oracle:
 
 ALTERNATE
 

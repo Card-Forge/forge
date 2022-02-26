@@ -1,8 +1,8 @@
 Name:Order
 ManaCost:3 W
-AlternateMode: Split
 Types:Instant
 A:SP$ ChangeZone | Cost$ 3 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target attacking creature.
+AlternateMode:Split
 Oracle:Exile target attacking creature.
 
 ALTERNATE

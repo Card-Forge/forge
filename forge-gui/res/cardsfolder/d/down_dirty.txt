@@ -1,9 +1,9 @@
 Name:Down
 ManaCost:3 B
-AlternateMode: Split
 Types:Sorcery
 K:Fuse
 A:SP$ Discard | Cost$ 3 B | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
+AlternateMode:Split
 Oracle:Target player discards two cards.\nFuse (You may cast one or both halves of this card from your hand.)
 
 ALTERNATE

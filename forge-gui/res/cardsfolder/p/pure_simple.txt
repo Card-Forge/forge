@@ -1,8 +1,8 @@
 Name:Pure
 ManaCost:1 R G
-AlternateMode: Split
 Types:Sorcery
 A:SP$ Destroy | Cost$ 1 R G | ValidTgts$ Permanent.MultiColor | TgtPrompt$ Select target multicolored permanent | SpellDescription$ Destroy target multicolored permanent.
+AlternateMode:Split
 Oracle:Destroy target multicolored permanent.
 
 ALTERNATE

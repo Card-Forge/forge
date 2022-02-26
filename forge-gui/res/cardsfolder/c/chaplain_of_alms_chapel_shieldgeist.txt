@@ -5,8 +5,8 @@ PT:1/1
 K:First Strike
 K:Ward:1
 K:Disturb:3 W
-AlternateMode:DoubleFaced
 DeckHas:Ability$Graveyard
+AlternateMode:DoubleFaced
 Oracle:First strike\nWard {1} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.)\nDisturb {3}{W} (You may cast this card from your graveyard transformed for its disturb cost.)
 
 ALTERNATE

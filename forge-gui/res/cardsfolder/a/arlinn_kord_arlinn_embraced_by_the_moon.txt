@@ -5,8 +5,8 @@ Loyalty:3
 A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumAtt$ +2 | NumDef$ +2 | KW$ Vigilance & Haste | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Until end of turn, up to one target creature gets +2/+2 and gains vigilance and haste.
 A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | TokenOwner$ You | LegacyImage$ g 2 2 wolf soi | Planeswalker$ True | SubAbility$ DBTransform | SpellDescription$ Create a 2/2 green Wolf creature token. Transform CARDNAME.
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | StackDescription$ None
-AlternateMode:DoubleFaced
 SVar:PlayMain1:TRUE
+AlternateMode:DoubleFaced
 Oracle:[+1]: Until end of turn, up to one target creature gets +2/+2 and gains vigilance and haste.\n[0]: Create a 2/2 green Wolf creature token. Transform Arlinn Kord.
 
 ALTERNATE

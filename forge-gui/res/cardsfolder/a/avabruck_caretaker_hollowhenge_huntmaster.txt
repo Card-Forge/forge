@@ -6,8 +6,8 @@ K:Hexproof
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, put two +1/+1 counters on another target creature you control.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | CounterType$ P1P1 | CounterNum$ 2
 K:Daybound
-AlternateMode:DoubleFaced
 DeckHas:Ability$Counters
+AlternateMode:DoubleFaced
 Oracle:Hexproof\nAt the beginning of combat on your turn, put two +1/+1 counters on another target creature you control.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
 
 ALTERNATE
