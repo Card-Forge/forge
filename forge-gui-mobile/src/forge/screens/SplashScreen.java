@@ -85,6 +85,9 @@ public class SplashScreen extends FContainer {
     public void setShowModeSelector(boolean value) {
         showModeSelector = value;
     }
+    public boolean isShowModeSelector() {
+        return showModeSelector;
+    }
 
     private class BGAnimation extends ForgeAnimation {
         float DURATION = 0.8f;
