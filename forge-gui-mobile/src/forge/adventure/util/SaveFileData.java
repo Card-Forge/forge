@@ -168,7 +168,7 @@ public class SaveFileData extends HashMap<String,byte[]>
         try {
 
             ByteArrayInputStream stream=new ByteArrayInputStream(get(key));
-            ObjectInputStream objStream=new ObjectInputStream(stream);
+            ObjectInputStream objStream=new DecompressibleInputStream(stream);
             return (SaveFileData)objStream.readObject();
 
         } catch (IOException | ClassNotFoundException e) {
@@ -199,7 +199,7 @@ public class SaveFileData extends HashMap<String,byte[]>
         try {
 
             ByteArrayInputStream stream=new ByteArrayInputStream(get(key));
-            ObjectInputStream objStream=new ObjectInputStream(stream);
+            ObjectInputStream objStream=new DecompressibleInputStream(stream);
             return objStream.readUTF();
 
         } catch (IOException e) {
@@ -214,7 +214,7 @@ public class SaveFileData extends HashMap<String,byte[]>
         try {
 
             ByteArrayInputStream stream=new ByteArrayInputStream(get(key));
-            ObjectInputStream objStream=new ObjectInputStream(stream);
+            ObjectInputStream objStream=new DecompressibleInputStream(stream);
             return objStream.readLong();
 
         } catch (IOException e) {
@@ -229,7 +229,7 @@ public class SaveFileData extends HashMap<String,byte[]>
         try {
 
             ByteArrayInputStream stream=new ByteArrayInputStream(get(key));
-            ObjectInputStream objStream=new ObjectInputStream(stream);
+            ObjectInputStream objStream=new DecompressibleInputStream(stream);
             return objStream.readFloat();
 
         } catch (IOException e) {
@@ -245,7 +245,7 @@ public class SaveFileData extends HashMap<String,byte[]>
         try {
 
             ByteArrayInputStream stream=new ByteArrayInputStream(get(key));
-            ObjectInputStream objStream=new ObjectInputStream(stream);
+            ObjectInputStream objStream=new DecompressibleInputStream(stream);
             return objStream.readDouble();
 
         } catch (IOException e) {
@@ -260,7 +260,7 @@ public class SaveFileData extends HashMap<String,byte[]>
         try {
 
             ByteArrayInputStream stream=new ByteArrayInputStream(get(key));
-            ObjectInputStream objStream=new ObjectInputStream(stream);
+            ObjectInputStream objStream=new DecompressibleInputStream(stream);
             float x= objStream.readFloat();
             float y= objStream.readFloat();
             return new Vector2(x,y);
@@ -277,7 +277,7 @@ public class SaveFileData extends HashMap<String,byte[]>
         try {
 
             ByteArrayInputStream stream=new ByteArrayInputStream(get(key));
-            ObjectInputStream objStream=new ObjectInputStream(stream);
+            ObjectInputStream objStream=new DecompressibleInputStream(stream);
             float x= objStream.readFloat();
             float y= objStream.readFloat();
             float width= objStream.readFloat();
@@ -305,7 +305,7 @@ public class SaveFileData extends HashMap<String,byte[]>
         try {
 
             ByteArrayInputStream stream=new ByteArrayInputStream(get(key));
-            ObjectInputStream objStream=new ObjectInputStream(stream);
+            ObjectInputStream objStream=new DecompressibleInputStream(stream);
             return objStream.readInt();
 
         } catch (IOException e) {
@@ -320,7 +320,7 @@ public class SaveFileData extends HashMap<String,byte[]>
         try {
 
             ByteArrayInputStream stream=new ByteArrayInputStream(get(key));
-            ObjectInputStream objStream=new ObjectInputStream(stream);
+            ObjectInputStream objStream=new DecompressibleInputStream(stream);
             return objStream.readBoolean();
 
         } catch (IOException e) {
@@ -360,7 +360,7 @@ public class SaveFileData extends HashMap<String,byte[]>
                     s.append(" stream serialVersionUID = ").append(streamSUID);
                     //Exception e = new InvalidClassException(s.toString());
                     //logger.error("Potentially Fatal Deserialization Operation.", e);
-                    System.err.println("[Invalid Class Exception\n]"+s);
+                    System.err.println("[Invalid Class Exception]\n"+s);
                     resultClassDescriptor = localClassDescriptor; // Use local class descriptor for deserialization
                 }
             }
