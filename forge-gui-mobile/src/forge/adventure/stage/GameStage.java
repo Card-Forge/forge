@@ -7,7 +7,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import forge.Forge;
 import forge.adventure.character.MapActor;
 import forge.adventure.character.PlayerSprite;
@@ -48,7 +49,7 @@ public abstract class GameStage extends Stage {
     }
 
     public GameStage() {
-        super(new ExtendViewport(Scene.GetIntendedWidth(), Scene.GetIntendedHeight(), new OrthographicCamera()));
+        super(new ScalingViewport(Scaling.fillX, Scene.GetIntendedWidth(), Scene.GetIntendedHeight(), new OrthographicCamera()));
         WorldSave.getCurrentSave().onLoad(new Runnable() {
             @Override
             public void run() {
