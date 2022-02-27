@@ -18,6 +18,7 @@
 package forge.itemmanager;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.deck.DeckProxy;
@@ -37,7 +38,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.HashSet;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public enum ColumnDef {
     /**
@@ -253,6 +256,47 @@ public enum ColumnDef {
 
                     return ai.getRemAIDecks() ? (ai.getRemRandomDecks() ? "X?" : "X")
                             : (ai.getRemRandomDecks() ? "?" : "");
+                }
+            }),
+    /**
+     * The card format column.
+     */
+    FORMAT("lblFormat", "ttFormats", 60, false, SortState.DESC,
+            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+                @Override
+                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+                    PaperCard card = toPaperCard(from.getKey());
+                    if (card == null) {
+                        return -1;
+                    }
+                    Iterable<GameFormat> formats = FModel.getFormats().getAllFormatsOfCard(card);
+                    int acc = 0;
+                    for (GameFormat gf : formats) {
+                        if (!gf.getFormatType().equals(GameFormat.FormatType.SANCTIONED)) {
+                            continue;
+                        }
+                        int ix = gf.getIndex();
+                        if (ix < 30 && ix > 0)
+                            acc |= 0x40000000 >> (ix - 1);
+                    }
+                    return acc;
+                }
+            },
+            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+                @Override
+                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+                    PaperCard card = toPaperCard(from.getKey());
+                    if (card == null) {
+                        return -1;
+                    }
+                    Iterable<GameFormat> formats = FModel.getFormats().getAllFormatsOfCard(card);
+                    Set<GameFormat> sanctioned = new HashSet<>();
+                    for (GameFormat gf : formats) {
+                        if (gf.getFormatType().equals(GameFormat.FormatType.SANCTIONED)) {
+                            sanctioned.add(gf);
+                        }
+                    }
+                    return StringUtils.join(Iterables.transform(sanctioned, GameFormat.FN_GET_NAME), ", ");
                 }
             }),
     /**
@@ -548,6 +592,10 @@ public enum ColumnDef {
 
     private static IPaperCard toCard(final InventoryItem i) {
         return i instanceof IPaperCard ? ((IPaperCard) i) : null;
+    }
+
+    private static PaperCard toPaperCard(final InventoryItem i) {
+        return i instanceof PaperCard ? ((PaperCard) i) : null;
     }
 
     private static ManaCost toManaCost(final InventoryItem i) {
