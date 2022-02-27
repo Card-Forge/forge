@@ -2,7 +2,6 @@ package forge.adventure.stage;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
@@ -28,7 +27,6 @@ import forge.adventure.data.WorldData;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.DuelScene;
 import forge.adventure.scene.RewardScene;
-import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
