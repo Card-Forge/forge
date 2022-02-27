@@ -331,6 +331,8 @@ public class SaveFileData extends HashMap<String,byte[]>
 
     class DecompressibleInputStream extends ObjectInputStream {
 
+        /*https://stackoverflow.com/questions/1816559/make-java-runtime-ignore-serialversionuids*/
+
         //private static Logger logger = LoggerFactory.getLogger(DecompressibleInputStream.class);
 
         public DecompressibleInputStream(InputStream in) throws IOException {
