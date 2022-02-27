@@ -28,7 +28,7 @@
     {
       "type": "Image",
       "name": "avatar",
-      "x": 350,
+      "x": 320,
       "y": 28,
       "width": 64,
       "height": 64
@@ -36,7 +36,7 @@
     {
       "type": "Image",
       "image": "ui/avatarhud.png",
-      "x": 350,
+      "x": 320,
       "y": 28,
       "width": 64,
       "height": 64
@@ -112,6 +112,40 @@
       "height": 30,
       "x": 335,
       "y": 212
+    },
+    {
+      "type": "Image",
+      "image": "ui/life.png",
+      "x": 400,
+      "y": 40,
+      "width": 16,
+      "height": 16
+    },
+    {
+      "type": "Image",
+      "image": "ui/money.png",
+      "x": 400,
+      "y": 60,
+      "width": 16,
+      "height": 16
+    },
+    {
+      "type": "Label",
+      "name": "lifePoints",
+      "font": "black",
+      "width": 64,
+      "height": 16,
+      "x": 420,
+      "y": 40
+    },
+    {
+      "type": "Label",
+      "name": "money",
+      "font": "black",
+      "width": 64,
+      "height": 16,
+      "x": 420,
+      "y": 60
     },
     {
       "type": "Table",

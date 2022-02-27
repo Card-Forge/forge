@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import forge.Forge;
 import forge.adventure.character.MapActor;
 import forge.adventure.character.PlayerSprite;
@@ -33,20 +33,22 @@ public abstract class GameStage extends Stage {
     private final float timer = 0;
     private float animationTimeout = 0;
 
-    public void startPause(int i) {
-        startPause(i,null);
+    public void startPause(float i) {
+        startPause(i, null);
     }
-    public void startPause(int i,Runnable runnable) {
-        onEndAction=runnable;
-        animationTimeout=i;
+
+    public void startPause(float i, Runnable runnable) {
+        onEndAction = runnable;
+        animationTimeout = i;
         player.setMovementDirection(Vector2.Zero);
     }
+
     public boolean isPaused() {
-        return animationTimeout>0;
+        return animationTimeout > 0;
     }
 
     public GameStage() {
-        super(new StretchViewport(Scene.GetIntendedWidth(), Scene.GetIntendedHeight(), new OrthographicCamera()));
+        super(new ExtendViewport(Scene.GetIntendedWidth(), Scene.GetIntendedHeight(), new OrthographicCamera()));
         WorldSave.getCurrentSave().onLoad(new Runnable() {
             @Override
             public void run() {
@@ -71,6 +73,7 @@ public abstract class GameStage extends Stage {
 
     public void setWinner(boolean b) {
     }
+
     public void setBounds(float width, float height) {
         getViewport().setWorldSize(width, height);
     }
@@ -93,9 +96,8 @@ public abstract class GameStage extends Stage {
     }
 
 
+    Runnable onEndAction;
 
-
-    Runnable  onEndAction;
     @Override
     public final void act(float delta) {
         super.act(delta);
@@ -104,17 +106,15 @@ public abstract class GameStage extends Stage {
             animationTimeout -= delta;
             return;
         }
-        if(isPaused())
-        {
+        if (isPaused()) {
             return;
         }
-
 
 
         if (onEndAction != null) {
 
             onEndAction.run();
-            onEndAction=null;
+            onEndAction = null;
         }
 
         if (touchX >= 0) {
@@ -139,12 +139,10 @@ public abstract class GameStage extends Stage {
         camera.position.y = Math.min(Math.max(Scene.GetIntendedHeight() / 2f, player.pos().y), getViewport().getWorldHeight() - Scene.GetIntendedHeight() / 2f);
 
 
-
         onActing(delta);
     }
 
     abstract protected void onActing(float delta);
-
 
 
     @Override
@@ -168,8 +166,7 @@ public abstract class GameStage extends Stage {
         }
         if (keycode == Input.Keys.F5)//todo config
         {
-            if(!((TileMapScene)SceneType.TileMapScene.instance).currentMap().isInMap())
-            {
+            if (!((TileMapScene) SceneType.TileMapScene.instance).currentMap().isInMap()) {
                 GetPlayer().storePos();
                 WorldSave.getCurrentSave().header.createPreview();
                 WorldSave.getCurrentSave().quickSave();
@@ -178,38 +175,33 @@ public abstract class GameStage extends Stage {
         }
         if (keycode == Input.Keys.F8)//todo config
         {
-            if(!((TileMapScene)SceneType.TileMapScene.instance).currentMap().isInMap())
-            {
+            if (!((TileMapScene) SceneType.TileMapScene.instance).currentMap().isInMap()) {
                 WorldSave.getCurrentSave().quickLoad();
                 enter();
             }
         }
-        if (keycode == Input.Keys.F12)
-        {
+        if (keycode == Input.Keys.F12) {
             debugCollision(true);
             for (Actor actor : foregroundSprites.getChildren()) {
                 if (actor instanceof MapActor) {
-                    ((MapActor)actor).setBoundDebug(true);
+                    ((MapActor) actor).setBoundDebug(true);
                 }
             }
             player.setBoundDebug(true);
         }
-        if (keycode == Input.Keys.F11)
-        {
+        if (keycode == Input.Keys.F11) {
             debugCollision(false);
             for (Actor actor : foregroundSprites.getChildren()) {
                 if (actor instanceof MapActor) {
-                    ((MapActor)actor).setBoundDebug(false);
+                    ((MapActor) actor).setBoundDebug(false);
                 }
             }
             player.setBoundDebug(false);
         }
-        if (keycode == Input.Keys.F10)
-        {
+        if (keycode == Input.Keys.F10) {
             setDebugAll(true);
         }
-        if (keycode == Input.Keys.F9)
-        {
+        if (keycode == Input.Keys.F9) {
             setDebugAll(false);
         }
         return true;
@@ -220,7 +212,7 @@ public abstract class GameStage extends Stage {
 
     @Override
     public boolean scrolled(float amountX, float amountY) {
-        if(isPaused())
+        if (isPaused())
             return true;
         camera.zoom += (amountY * 0.03);
         if (camera.zoom < 0.2f)
@@ -232,7 +224,7 @@ public abstract class GameStage extends Stage {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        if(isPaused())
+        if (isPaused())
             return true;
         if (!GuiBase.isAndroid()) {
             touchX = screenX;
@@ -244,7 +236,7 @@ public abstract class GameStage extends Stage {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if(isPaused())
+        if (isPaused())
             return true;
         if (!GuiBase.isAndroid()) {
             touchX = screenX;
@@ -262,6 +254,7 @@ public abstract class GameStage extends Stage {
         touchY = -1;
         player.stop();
     }
+
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         stop();
@@ -270,18 +263,18 @@ public abstract class GameStage extends Stage {
 
     @Override
     public boolean keyUp(int keycode) {
-        if(isPaused())
+        if (isPaused())
             return true;
         if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A || keycode == Input.Keys.RIGHT || keycode == Input.Keys.D)//todo config
         {
             player.getMovementDirection().x = 0;
-            if(!player.isMoving())
+            if (!player.isMoving())
                 stop();
         }
         if (keycode == Input.Keys.UP || keycode == Input.Keys.W || keycode == Input.Keys.DOWN || keycode == Input.Keys.S)//todo config
         {
             player.getMovementDirection().y = 0;
-            if(!player.isMoving())
+            if (!player.isMoving())
                 stop();
         }
         if (keycode == Input.Keys.ESCAPE) {
@@ -304,56 +297,50 @@ public abstract class GameStage extends Stage {
         stop();
     }
 
-    public  boolean isColliding(Rectangle boundingRect)
-    {
+    public boolean isColliding(Rectangle boundingRect) {
         return false;
     }
-    public  void prepareCollision(Vector2 pos, Vector2 direction, Rectangle boundingRect)
-    {
+
+    public void prepareCollision(Vector2 pos, Vector2 direction, Rectangle boundingRect) {
     }
 
-    public Vector2 adjustMovement( Vector2 direction, Rectangle boundingRect)
-    {
-        Vector2 adjDirX=direction.cpy();
-        Vector2 adjDirY=direction.cpy();
-        boolean foundX=false;
-        boolean foundY=false;
-        while(true)
-        {
+    public Vector2 adjustMovement(Vector2 direction, Rectangle boundingRect) {
+        Vector2 adjDirX = direction.cpy();
+        Vector2 adjDirY = direction.cpy();
+        boolean foundX = false;
+        boolean foundY = false;
+        while (true) {
 
-            if(!isColliding(new Rectangle(boundingRect.x+adjDirX.x,boundingRect.y+adjDirX.y, boundingRect.width, boundingRect.height)))
-            {
-                foundX=true;
+            if (!isColliding(new Rectangle(boundingRect.x + adjDirX.x, boundingRect.y + adjDirX.y, boundingRect.width, boundingRect.height))) {
+                foundX = true;
                 break;
             }
-            if(adjDirX.x==0)
+            if (adjDirX.x == 0)
                 break;
 
-            if(adjDirX.x>=0)
-                adjDirX.x=Math.round(Math.max(0,adjDirX.x-1));
+            if (adjDirX.x >= 0)
+                adjDirX.x = Math.round(Math.max(0, adjDirX.x - 1));
             else
-                adjDirX.x=Math.round(Math.max(0,adjDirX.x+1));
+                adjDirX.x = Math.round(Math.max(0, adjDirX.x + 1));
         }
-        while(true)
-        {
-            if(!isColliding(new Rectangle(boundingRect.x+adjDirY.x,boundingRect.y+adjDirY.y, boundingRect.width, boundingRect.height)))
-            {
-                foundY=true;
+        while (true) {
+            if (!isColliding(new Rectangle(boundingRect.x + adjDirY.x, boundingRect.y + adjDirY.y, boundingRect.width, boundingRect.height))) {
+                foundY = true;
                 break;
             }
-            if(adjDirY.y==0)
+            if (adjDirY.y == 0)
                 break;
 
-            if(adjDirY.y>=0)
-                adjDirY.y=Math.round(Math.max(0,adjDirY.y-1));
+            if (adjDirY.y >= 0)
+                adjDirY.y = Math.round(Math.max(0, adjDirY.y - 1));
             else
-                adjDirY.y=Math.round(Math.max(0,adjDirY.y+1));
+                adjDirY.y = Math.round(Math.max(0, adjDirY.y + 1));
         }
-        if(foundY&&foundX)
-            return adjDirX.len()>adjDirY.len()?adjDirX:adjDirY;
-        else if(foundY)
+        if (foundY && foundX)
+            return adjDirX.len() > adjDirY.len() ? adjDirX : adjDirY;
+        else if (foundY)
             return adjDirY;
-        else if(foundX)
+        else if (foundX)
             return adjDirX;
         return Vector2.Zero.cpy();
     }
