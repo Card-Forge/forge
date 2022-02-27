@@ -22,6 +22,7 @@
     },
     {
       "type": "Image",
+      "name": "mapborder",
       "image": "ui/minimap.png",
       "width": 64,
       "height": 64,
@@ -38,6 +39,7 @@
     },
     {
       "type": "Image",
+      "name": "avatarborder",
       "image": "ui/avatarhud.png",
       "width": 32,
       "height": 32,

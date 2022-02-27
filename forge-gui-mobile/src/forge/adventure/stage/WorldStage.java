@@ -90,7 +90,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                             Forge.clearTransitionScreen();
                         }
                     }, ScreenUtils.getFrameBufferTexture(), true, false));
-                    startPause(1, new Runnable() {
+                    startPause(0.5f, new Runnable() {
                         @Override
                         public void run() {
                             ((DuelScene) SceneType.DuelScene.instance).setEnemy(currentMob);
@@ -129,20 +129,19 @@ public class WorldStage extends GameStage implements SaveFileContent {
         if (playerIsWinner) {
             player.setAnimation(CharacterSprite.AnimationTypes.Attack);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
-            startPause(1, new Runnable() {
+            startPause(0.5f, new Runnable() {
                 @Override
                 public void run() {
                     ((RewardScene) SceneType.RewardScene.instance).loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
                     WorldStage.this.removeEnemy(currentMob);
                     currentMob = null;
-                    Gdx.input.vibrate(50);
                     Forge.switchScene(SceneType.RewardScene.instance);
                 }
             });
         } else {
             player.setAnimation(CharacterSprite.AnimationTypes.Hit);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Attack);
-            startPause(1, new Runnable() {
+            startPause(0.5f, new Runnable() {
                 @Override
                 public void run() {
                     Current.player().defeated();

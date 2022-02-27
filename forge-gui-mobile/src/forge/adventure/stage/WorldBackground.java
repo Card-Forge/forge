@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import forge.adventure.world.WorldSave;
-import forge.gui.GuiBase;
 
 import java.util.ArrayList;
 
@@ -69,26 +68,15 @@ public class WorldBackground extends Actor {
             currentChunkX = pos.x;
             currentChunkY = pos.y;
         }
-        batch.disableBlending();
-
-        if (GuiBase.isAndroid()) {
-            //TODO WorldBackground for Android
-            if (t == null)
-                t = new Texture(WorldSave.getCurrentSave().getWorld().getBiomeImage2());
-
-            batch.draw(t, 0, 0, WorldStage.getInstance().getViewport().getWorldWidth(), WorldStage.getInstance().getViewport().getWorldHeight());
-        } else {
-            for (int x = -1; x < 2; x++) {
-                for (int y = -1; y < 2; y++) {
-                    if (pos.y + y < 0 || pos.x + x < 0 || pos.y >= chunks[0].length || pos.x >= chunks.length)
-                        continue;
+        for (int x = -1; x < 2; x++) {
+            for (int y = -1; y < 2; y++) {
+                if (pos.y + y < 0 || pos.x + x < 0 || pos.y >= chunks[0].length || pos.x >= chunks.length)
+                    continue;
 
 
-                    batch.draw(getChunkTexture(pos.x + x, pos.y + y), transChunkToWorld(pos.x + x), transChunkToWorld(pos.y + y));
-                }
+                batch.draw(getChunkTexture(pos.x + x, pos.y + y), transChunkToWorld(pos.x + x), transChunkToWorld(pos.y + y));
             }
         }
-        batch.enableBlending();
 
     }
 
@@ -124,7 +112,7 @@ public class WorldBackground extends Actor {
     public Texture getChunkTexture(int x, int y) {
         Texture tex = chunks[x][y];
         if (tex == null) {
-            Texture newChunk = new Texture(chunkSize * tileSize, chunkSize * tileSize, Pixmap.Format.RGB888);
+            Texture newChunk = new Texture(chunkSize * tileSize, chunkSize * tileSize, Pixmap.Format.RGBA8888);
             for (int cx = 0; cx < chunkSize; cx++) {
                 for (int cy = 0; cy < chunkSize; cy++) {
                     newChunk.draw(WorldSave.getCurrentSave().getWorld().getBiomeSprite(cx + chunkSize * x, cy + chunkSize * y), cx * tileSize, (chunkSize * tileSize) - (cy + 1) * tileSize);
@@ -155,7 +143,7 @@ public class WorldBackground extends Actor {
 
         if(loadingTexture==null)
         {
-            Pixmap loadPix = new Pixmap(chunkSize * tileSize, chunkSize * tileSize, Pixmap.Format.RGB565);
+            Pixmap loadPix = new Pixmap(chunkSize * tileSize, chunkSize * tileSize, Pixmap.Format.RGBA8888);
             loadPix.setColor(0.5f, 0.5f, 0.5f, 1);
             loadPix.fill();
             loadingTexture = new Texture(loadPix);

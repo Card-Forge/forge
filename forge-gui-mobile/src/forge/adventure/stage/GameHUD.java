@@ -39,7 +39,7 @@ public class GameHUD extends Stage {
     private final Image miniMapPlayer;
     private final Label lifePoints;
     private final Label money;
-    private Image miniMap;
+    private Image miniMap, gamehud, mapborder, avatarborder;
     private TextButton deckActor, menuActor, statsActor;
     private boolean deckPressed = false;
     private boolean menuPressed = false;
@@ -60,9 +60,12 @@ public class GameHUD extends Stage {
 
         ui = new UIActor(Config.instance().getFile(GuiBase.isAndroid() ? "ui/hud_mobile.json" : "ui/hud.json"));
         miniMap = ui.findActor("map");
+        mapborder = ui.findActor("mapborder");
+        avatarborder = ui.findActor("avatarborder");
         deckActor = ui.findActor("deck");
         menuActor = ui.findActor("menu");
         statsActor = ui.findActor("statistic");
+        gamehud = ui.findActor("gamehud");
 
         miniMapPlayer = new Image(new Texture(Config.instance().getFile("ui/minimap_player.png")));
         //create touchpad skin
@@ -129,7 +132,6 @@ public class GameHUD extends Stage {
                 money.setText(String.valueOf(AdventurePlayer.current().getGold()));
             }
         }) ;
-        miniMap = ui.findActor("map");
 
         addActor(ui);
         addActor(miniMapPlayer);
@@ -241,19 +243,19 @@ public class GameHUD extends Stage {
             return true;
         }
 
-        float uiX = ui.findActor("gamehud").getX();
-        float uiY = ui.findActor("gamehud").getY();
-        float uiTop = ui.findActor("gamehud").getTop();
-        float uiRight = ui.findActor("gamehud").getRight();
+        float uiX = gamehud.getX();
+        float uiY = gamehud.getY();
+        float uiTop = gamehud.getTop();
+        float uiRight = gamehud.getRight();
         //gamehud bounds
         if (c.x>=uiX&&c.x<=uiRight&&c.y>=uiY&&c.y<=uiTop) {
             return true;
         }
 
-        float mMapX = ui.findActor("map").getX();
-        float mMapY = ui.findActor("map").getY();
-        float mMapT = ui.findActor("map").getTop();
-        float mMapR = ui.findActor("map").getRight();
+        float mMapX = miniMap.getX();
+        float mMapY = miniMap.getY();
+        float mMapT = miniMap.getTop();
+        float mMapR = miniMap.getRight();
         //map bounds
         if (c.x>=mMapX&&c.x<=mMapR&&c.y>=mMapY&&c.y<=mMapT) {
             if (MapStage.getInstance().isInMap())
@@ -332,5 +334,24 @@ public class GameHUD extends Stage {
 
     private void menu() {
         gameStage.openMenu();
+    }
+    public void showHideMap(boolean visible) {
+        miniMap.setVisible(visible);
+        mapborder.setVisible(visible);
+        miniMapPlayer.setVisible(visible);
+        avatarborder.setVisible(visible);
+        avatar.setVisible(visible);
+        lifePoints.setVisible(visible);
+        money.setVisible(visible);
+        gamehud.setVisible(visible);
+        if (visible) {
+            deckActor.getColor().a = 1f;
+            menuActor.getColor().a = 1f;
+            statsActor.getColor().a = 1f;
+        } else {
+            deckActor.getColor().a = 0.5f;
+            menuActor.getColor().a = 0.5f;
+            statsActor.getColor().a = 0.5f;
+        }
     }
 }

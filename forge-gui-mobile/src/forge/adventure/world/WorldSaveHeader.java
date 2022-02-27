@@ -22,7 +22,7 @@ public class WorldSaveHeader implements java.io.Serializable, Disposable {
 
         out.writeUTF(name);
         if (preview == null)
-            preview = new Pixmap(1, 1, Pixmap.Format.RGB888);
+            preview = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         Serializer.WritePixmap(out, preview, true);
         out.writeObject(saveDate);
     }
@@ -42,7 +42,7 @@ public class WorldSaveHeader implements java.io.Serializable, Disposable {
 
     public void createPreview() {
         Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        Pixmap scaled = new Pixmap(WorldSaveHeader.previewImageWidth, (int) (WorldSaveHeader.previewImageWidth / (Scene.GetIntendedWidth() / (float) Scene.GetIntendedHeight())), Pixmap.Format.RGB888);
+        Pixmap scaled = new Pixmap(WorldSaveHeader.previewImageWidth, (int) (WorldSaveHeader.previewImageWidth / (Scene.GetIntendedWidth() / (float) Scene.GetIntendedHeight())), Pixmap.Format.RGBA8888);
         scaled.drawPixmap(pixmap,
                 0, 0, pixmap.getWidth(), pixmap.getHeight(),
                 0, 0, scaled.getWidth(), scaled.getHeight());

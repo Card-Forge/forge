@@ -34,7 +34,7 @@ public class World implements  Disposable, SaveFileContent {
 
 
     private WorldData data;
-    private Pixmap biomeImage, biomeImage2;
+    private Pixmap biomeImage;
     private long[][] biomeMap;
     private int[][] terrainMap;
     private int width;
@@ -135,7 +135,7 @@ public class World implements  Disposable, SaveFileContent {
     }
     public Pixmap getBiomeSprite(int x, int y) {
         if (x < 0 || y <= 0 || x >= width || y > height)
-            return new Pixmap(data.tileSize, data.tileSize, Pixmap.Format.RGB888);
+            return new Pixmap(data.tileSize, data.tileSize, Pixmap.Format.RGBA8888);
 
         long biomeIndex = getBiome(x, y);
         int terrain = getTerrainIndex(x, y);
@@ -242,8 +242,7 @@ public class World implements  Disposable, SaveFileContent {
         //save at all data
         biomeMap = new long[width][height];
         terrainMap= new int[width][height];
-        Pixmap pix = new Pixmap(width, height, Pixmap.Format.RGB888);
-        Pixmap pix2 = new Pixmap(width, height, Pixmap.Format.RGB888);
+        Pixmap pix = new Pixmap(width, height, Pixmap.Format.RGBA8888);
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -291,8 +290,6 @@ public class World implements  Disposable, SaveFileContent {
                         color.fromHsv(hsv);
                         pix.setColor(color.r, color.g, color.b, 1);
                         pix.drawPixel(x, y);
-                        pix2.setColor(color.r, color.g, color.b, 1);
-                        pix2.drawPixel(x, y);
                         biomeMap[x][y] |= (1L << biomeIndex);
                         int terrainCounter=1;
                         if(biome.terrain==null)
@@ -480,7 +477,6 @@ public class World implements  Disposable, SaveFileContent {
             }
         }
         biomeImage = pix;
-        biomeImage2 = pix2;
 
         return this;//new World();
     }
@@ -516,15 +512,6 @@ public class World implements  Disposable, SaveFileContent {
     public Pixmap getBiomeImage() {
         return biomeImage;
     }
-
-    public Pixmap getBiomeImage2() {
-        if (biomeImage2 == null) {
-            generateNew(0);
-            return biomeImage2;
-        }
-        return biomeImage2;
-    }
-
 
     public List<Pair<Vector2, Integer>> GetMapObjects(int chunkX, int chunkY) {
         return mapObjectIds.positions(chunkX, chunkY);

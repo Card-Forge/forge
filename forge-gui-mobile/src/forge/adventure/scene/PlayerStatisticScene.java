@@ -11,9 +11,11 @@ import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.WorldData;
+import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
+import forge.adventure.world.WorldSave;
 import forge.player.GamePlayerUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -23,6 +25,7 @@ public class PlayerStatisticScene extends UIScene {
 
 
     Image avatar;
+    Label money, life;
     Label totalWins;
     Label totalLoss;
     Label lossWinRatio;
@@ -71,6 +74,22 @@ public class PlayerStatisticScene extends UIScene {
         if (avatar != null) {
             avatar.setDrawable(new TextureRegionDrawable(Current.player().avatar()));
         }
+        if (life != null) {
+            AdventurePlayer.current().onLifeChange(new Runnable() {
+                @Override
+                public void run() {
+                    life.setText(AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
+                }
+            });
+        }
+        if (money != null) {
+            WorldSave.getCurrentSave().getPlayer().onGoldChange(new Runnable() {
+                @Override
+                public void run() {
+                    money.setText(String.valueOf(AdventurePlayer.current().getGold()));
+                }
+            });
+        }
         if (totalWins != null) {
             totalWins.setText(Current.player().getStatistic().totalWins());
         }
@@ -112,7 +131,8 @@ public class PlayerStatisticScene extends UIScene {
         });
         avatar = ui.findActor("avatar");
         playerName = ui.findActor("playerName");
-
+        life = ui.findActor("lifePoints");
+        money = ui.findActor("money");
         totalWins = ui.findActor("totalWins");
         totalLoss = ui.findActor("totalLoss");
         lossWinRatio = ui.findActor("lossWinRatio");
