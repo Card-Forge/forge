@@ -116,7 +116,7 @@ public class WorldBackground extends Actor {
         sprites = chunksSpritesBackground[x][y];
         if (sprites != null) {
             for (Actor sprite : sprites) {
-                stage.GetSpriteGroup().removeActor(sprite);
+                stage.GetBackgroundSprites().removeActor(sprite);
             }
         }
     }

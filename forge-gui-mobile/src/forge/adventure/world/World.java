@@ -214,7 +214,11 @@ public class World implements  Disposable, SaveFileContent {
     }
 
     public long getBiome(int x, int y) {
-        return biomeMap[x][height - y];
+        try {
+            return biomeMap[x][height - y];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return biomeMap[biomeMap.length-1][biomeMap[biomeMap.length-1].length-1];
+        }
     }
 
     public WorldData getData() {
