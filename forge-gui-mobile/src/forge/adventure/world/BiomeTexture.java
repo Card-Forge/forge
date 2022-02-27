@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class BiomeTexture implements Serializable {
     private final BiomeData data;
     private final int tileSize;
-    public Pixmap emptyPixmap = new Pixmap(1, 1, Pixmap.Format.RGB888);
+    public Pixmap emptyPixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
     ArrayList<ArrayList<Pixmap>> images = new ArrayList<>();
     ArrayList<ArrayList<Pixmap>> smallImages = new ArrayList<>();
     ArrayList<IntMap<Pixmap>> edgeImages = new ArrayList<>();

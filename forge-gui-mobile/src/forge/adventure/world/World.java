@@ -135,7 +135,7 @@ public class World implements  Disposable, SaveFileContent {
     }
     public Pixmap getBiomeSprite(int x, int y) {
         if (x < 0 || y <= 0 || x >= width || y > height)
-            return new Pixmap(data.tileSize, data.tileSize, Pixmap.Format.RGB888);
+            return new Pixmap(data.tileSize, data.tileSize, Pixmap.Format.RGBA8888);
 
         long biomeIndex = getBiome(x, y);
         int terrain = getTerrainIndex(x, y);
@@ -242,8 +242,8 @@ public class World implements  Disposable, SaveFileContent {
         //save at all data
         biomeMap = new long[width][height];
         terrainMap= new int[width][height];
-        Pixmap pix = new Pixmap(width, height, Pixmap.Format.RGB888);
-        Pixmap pix2 = new Pixmap(width, height, Pixmap.Format.RGB888);
+        Pixmap pix = new Pixmap(width, height, Pixmap.Format.RGBA8888);
+        Pixmap pix2 = new Pixmap(width, height, Pixmap.Format.RGBA8888);
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
