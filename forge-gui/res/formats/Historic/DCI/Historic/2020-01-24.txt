@@ -3,4 +3,4 @@ Name:Historic (THB)
 Type:Historic
 Subtype:Arena
 Effective:2020-01-24
-Sets:XLN, RIX, DOM, M19, GRN, G18, RNA, WAR, M20, ELD, HA1, THB
+Sets:XLN, RIX, DOM, M19, PANA, GRN, G18, RNA, WAR, M20, ELD, HA1, THB

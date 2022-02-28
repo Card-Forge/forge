@@ -1,5 +1,5 @@
 [format]
-Name:Standard (Alara Reborn)
+Name:Standard (ARB)
 Type:Historic
 Subtype:Standard
 Effective:2009-04-30

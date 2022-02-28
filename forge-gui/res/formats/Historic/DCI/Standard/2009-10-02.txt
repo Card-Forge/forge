@@ -1,5 +1,5 @@
 [format]
-Name:Standard (Zendikar)
+Name:Standard (ZEN)
 Type:Historic
 Subtype:Standard
 Effective:2009-10-02
