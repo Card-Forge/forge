@@ -217,9 +217,9 @@ public class HumanPlaySpellAbility {
             fromZone.add(oldCard, zonePosition >= 0 ? Integer.valueOf(zonePosition) : null);
             ability.setHostCard(oldCard);
             ability.setXManaCostPaid(null);
+            ability.setSpendPhyrexianMana(false);
             if (ability.hasParam("Announce")) {
-                final String announce = ability.getParam("Announce");
-                for (final String aVar : announce.split(",")) {
+                for (final String aVar : ability.getParam("Announce").split(",")) {
                     final String varName = aVar.trim();
                     if (!varName.equals("X")) {
                         ability.setSVar(varName, "0");
