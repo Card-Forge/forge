@@ -49,7 +49,7 @@ public abstract class GameStage extends Stage {
     }
 
     public GameStage() {
-        super(new ScalingViewport(Scaling.fillX, Scene.GetIntendedWidth(), Scene.GetIntendedHeight(), new OrthographicCamera()));
+        super(new ScalingViewport(Scaling.stretch, Scene.GetIntendedWidth(), Scene.GetIntendedHeight(), new OrthographicCamera()));
         WorldSave.getCurrentSave().onLoad(new Runnable() {
             @Override
             public void run() {

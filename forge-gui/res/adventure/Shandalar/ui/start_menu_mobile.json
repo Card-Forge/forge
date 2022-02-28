@@ -58,9 +58,18 @@
       "type": "TextButton",
       "name": "Exit",
       "text": "Exit",
-      "width": 160,
+      "width": 75,
       "height": 30,
       "x": 160,
+      "y": 220
+    },
+    {
+      "type": "TextButton",
+      "name": "Switch",
+      "text": "Classic Mode",
+      "width": 75,
+      "height": 30,
+      "x": 245,
       "y": 220
     }
   ]

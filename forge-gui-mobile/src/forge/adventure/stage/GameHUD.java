@@ -21,6 +21,7 @@ import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
@@ -54,7 +55,7 @@ public class GameHUD extends Stage {
     float TOUCHPAD_KNOB_MIN_WIDTH = 40f;
 
     private GameHUD(GameStage gameStage) {
-        super(new ScalingViewport(Scaling.fillX, 480f, 270f), gameStage.getBatch());
+        super(new ScalingViewport(Scaling.stretch, Scene.GetIntendedWidth(), Scene.GetIntendedHeight()), gameStage.getBatch());
         instance = this;
         this.gameStage = gameStage;
 
