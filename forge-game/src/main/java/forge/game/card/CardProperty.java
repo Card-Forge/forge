@@ -1070,6 +1070,10 @@ public class CardProperty {
             if (p == null || !controller.equals(game.getNextPlayerAfter(p, direction))) {
                 return false;
             }
+        } else if (property.equals("hasABasicLandType")) {
+            if (!card.hasABasicLandType()) {
+                return false;
+            }
         } else if (property.startsWith("hasKeyword")) {
             // "withFlash" would find Flashback cards, add this to fix Mystical Teachings
             if (!card.hasKeyword(property.substring(10))) {

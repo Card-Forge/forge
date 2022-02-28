@@ -24,6 +24,7 @@ public interface CardTypeView extends Iterable<String>, Serializable {
     boolean hasSubtype(String subtype);
     boolean hasCreatureType(String creatureType);
     boolean hasAllCreatureTypes();
+    boolean hasABasicLandType();
 
     public boolean sharesCreaturetypeWith(final CardTypeView ctOther);
     public boolean sharesLandTypeWith(final CardTypeView ctOther);
