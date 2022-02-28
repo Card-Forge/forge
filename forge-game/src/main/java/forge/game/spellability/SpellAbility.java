@@ -913,8 +913,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 // if alternate state is viewed while card uses original
                 if (node.isIntrinsic() && node.cardState != null && node.cardState.getCard() == node.getHostCard()) {
                     currentName = node.cardState.getName();
-                }
-                else {
+                } else {
                     currentName = node.getHostCard().getName();
                 }
                 desc = CardTranslation.translateMultipleDescriptionText(desc, currentName);

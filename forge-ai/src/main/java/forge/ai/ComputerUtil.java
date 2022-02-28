@@ -703,13 +703,13 @@ public class ComputerUtil {
             if (pow <= 0) {
                 continue;
             }
-            totalPower += pow;
             if (pow >= amount) {
                 // If the power of this creature matches the totalPower needed
                 // Might as well only use this creature?
                 tapList.clear();
             }
             tapList.add(next);
+            totalPower = CardLists.getTotalPower(tapList, true, sa.hasParam("Crew"));
             if (totalPower >= amount) {
                 break;
             }
@@ -793,7 +793,7 @@ public class ComputerUtil {
         boolean exceptSelf = "ExceptSelf".equals(source.getParam("AILogic"));
         boolean removedSelf = false;
 
-        if (isOptional && source.hasParam("Devour") || source.hasParam("Exploit")) {
+        if (isOptional && (source.hasParam("Devour") || source.hasParam("Exploit"))) {
             if (source.hasParam("Exploit")) {
                 for (Trigger t : host.getTriggers()) {
                     if (t.getMode() == TriggerType.Exploited) {

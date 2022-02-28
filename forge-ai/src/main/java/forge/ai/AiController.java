@@ -160,9 +160,7 @@ public class AiController {
             all.add(ccvPlayerLibrary.get(0));
         }
 
-        for (final Player opp : player.getOpponents()) {
-            all.addAll(opp.getCardsIn(ZoneType.Exile));
-        }
+        all.addAll(player.getOpponents().getCardsIn(ZoneType.Exile));
 
         final List<SpellAbility> spellAbilities = Lists.newArrayList();
         for (final Card c : all) {

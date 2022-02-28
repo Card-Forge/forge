@@ -344,8 +344,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 }
             }
             chosen = chosen.subList(0, c);
-        }
-        else {
+        } else {
             chosen = ComputerUtil.choosePutToLibraryFrom(player, cost.getFrom(), cost.getType(), source, ability.getTargetCard(), c, ability);
         }
         return chosen.isEmpty() ? null : PaymentDecision.card(chosen);
@@ -363,8 +362,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         Card card;
         if (cost.getType().equals("Creature.YouCtrl")) {
             card = ComputerUtilCard.getWorstCreatureAI(typeList);
-        }
-        else {
+        } else {
             card = ComputerUtilCard.getWorstPermanentAI(typeList, false, false, false, false);
         }
         return PaymentDecision.card(card);
