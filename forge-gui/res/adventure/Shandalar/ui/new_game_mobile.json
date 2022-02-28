@@ -31,6 +31,7 @@
       "text": "Avatar:",
       "width": 128,
       "height": 32,
+      "font" : "black",
       "x": 104,
       "y": 58
     },
@@ -39,6 +40,7 @@
       "text": "Name:",
       "width": 128,
       "height": 32,
+      "font" : "black",
       "x": 104,
       "y": 90
     },
@@ -47,6 +49,7 @@
       "text": "Race:",
       "width": 128,
       "height": 32,
+      "font" : "black",
       "x": 104,
       "y": 124
     },
@@ -55,6 +58,7 @@
       "text": "Gender:",
       "width": 128,
       "height": 32,
+      "font" : "black",
       "x": 104,
       "y": 154
     },
@@ -63,6 +67,7 @@
       "text": "Difficulty:",
       "width": 128,
       "height": 32,
+      "font" : "black",
       "x": 104,
       "y": 186
     },
@@ -71,6 +76,7 @@
       "text": "Deck:",
       "width": 128,
       "height": 32,
+      "font" : "black",
       "x": 104,
       "y": 218
     },
