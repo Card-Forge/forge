@@ -2148,6 +2148,11 @@ public class CardFactoryUtil {
             re.setOverridingAbility(saReturn);
 
             inst.addReplacement(re);
+        } else if (keyword.equals("Compleated")) {
+            String sb = "etbCounter:LOYALTY:-2:ValidCard$ Card.CastSa Spell.paidPhyrexianMana:If life was paid, this planeswalker enters with two fewer loyalty counters";
+            final ReplacementEffect re = makeEtbCounter(sb, card, intrinsic);
+
+            inst.addReplacement(re);
         } else if (keyword.startsWith("Dredge")) {
             final String dredgeAmount = keyword.split(":")[1];
 

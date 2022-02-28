@@ -46,6 +46,7 @@ public class InputPayManaOfCostPayment extends InputPayMana {
         if (player == selected) {
             if (player.canPayLife(this.phyLifeToLose + 2, this.effect, saPaidFor)) {
                 if (manaCost.payPhyrexian()) {
+                    saPaidFor.setSpendPhyrexianMana(true);
                     this.phyLifeToLose += 2;
                 } else {
                     if (player.hasKeyword("PayLifeInsteadOf:B") && manaCost.hasAnyKind(ManaAtom.BLACK)) {
