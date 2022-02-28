@@ -581,25 +581,32 @@ public class Forge implements ApplicationListener {
     public static void exit(boolean silent) {
         if (exited) { return; } //don't allow exiting multiple times
 
-        Callback<Boolean> callback = new Callback<Boolean>() {
+        final Localizer localizer = Localizer.getInstance();
+        final String title = Forge.isLandscapeMode() && GuiBase.isAndroid() ? "" : localizer.getMessage("lblExitForge");
+        final List<String> options = new ArrayList<>();
+        options.add(localizer.getMessage("lblExit"));
+        if (Forge.isLandscapeMode() && GuiBase.isAndroid())
+            options.add(localizer.getMessageorUseDefault("lblAdventureMode", "Adventure Mode"));
+        options.add(localizer.getMessage("lblCancel"));
+
+        Callback<Integer> callback = new Callback<Integer>() {
             @Override
-            public void run(Boolean result) {
-                if (result) {
+            public void run(Integer result) {
+                if (result == 0) {
                     exited = true;
                     exitAnimation(false);
+                } else if (result == 1 && Forge.isLandscapeMode() && GuiBase.isAndroid()) {
+                    switchToAdventure();
                 }
             }
         };
-        
-        final Localizer localizer = Localizer.getInstance();
 
         if (silent) {
-            callback.run(true);
+            callback.run(0);
         }
         else {
-            FOptionPane.showConfirmDialog(
-                localizer.getMessage("lblAreYouSureYouWishExitForge"), localizer.getMessage("lblExitForge"),
-                localizer.getMessage("lblExit"), localizer.getMessage("lblCancel"), callback);
+            FOptionPane.showOptionDialog(localizer.getMessage("lblAreYouSureYouWishExitForge"), title,
+                    FOptionPane.QUESTION_ICON, options,0, callback);
         }
     }
 
@@ -673,6 +680,30 @@ public class Forge implements ApplicationListener {
 
     public static void clearCurrentScreen() {
         currentScreen = null;
+    }
+    public static void switchToClassic() {
+        setTransitionScreen(new TransitionScreen(new Runnable() {
+            @Override
+            public void run() {
+                isMobileAdventureMode = false;
+                GuiBase.setIsAdventureMode(false);
+                setCursor(FSkin.getCursor().get(0), "0");
+                altZoneTabs = FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_PLAYERZONETABS);
+                Gdx.input.setInputProcessor(getInputProcessor());
+                openHomeDefault();
+                clearTransitionScreen();
+            }
+        }, ScreenUtils.getFrameBufferTexture(), false, false));
+    }
+    public static void switchToAdventure() {
+        setTransitionScreen(new TransitionScreen(new Runnable() {
+            @Override
+            public void run() {
+                clearCurrentScreen();
+                clearTransitionScreen();
+                openAdventure();
+            }
+        }, ScreenUtils.getFrameBufferTexture(), false, false));
     }
     public static void setTransitionScreen(TransitionScreen screen) {
         transitionScreen = screen;

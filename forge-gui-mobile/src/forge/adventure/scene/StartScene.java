@@ -133,6 +133,14 @@ public class StartScene extends UIScene {
                 StartScene.this.Exit();
             }
         });
+        if (GuiBase.isAndroid()) {
+            ui.onButtonPress("Switch", new Runnable() {
+                @Override
+                public void run() {
+                    Forge.switchToClassic();
+                }
+            });
+        }
         saveButton.setVisible(false);
         resumeButton.setVisible(false);
     }
