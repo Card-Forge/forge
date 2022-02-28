@@ -66,7 +66,7 @@ public class Forge implements ApplicationListener {
     static Batch animationBatch;
     static Texture transitionTexture;
     static TextureRegion lastScreenTexture;
-    private static boolean sceneWasSwapped =false;
+    private static boolean sceneWasSwapped = false;
     private static Clipboard clipboard;
     private static IDeviceAdapter deviceAdapter;
     private static int screenWidth;
@@ -134,6 +134,7 @@ public class Forge implements ApplicationListener {
         GuiBase.setDeviceInfo(deviceName, AndroidRelease, AndroidAPI, totalRAM);
         return app;
     }
+
     private Forge() {
     }
 
@@ -171,8 +172,7 @@ public class Forge implements ApplicationListener {
         String skinName;
         if (FileUtil.doesFileExist(ForgeConstants.MAIN_PREFS_FILE)) {
             skinName = prefs.getPref(FPref.UI_SKIN);
-        }
-        else {
+        } else {
             skinName = "default"; //use default skin if preferences file doesn't exist yet
         }
         FSkin.loadLight(skinName, splashScreen);
@@ -195,8 +195,8 @@ public class Forge implements ApplicationListener {
 
         if (autoCache) {
             //increase cacheSize for devices with RAM more than 5GB, default is 400. Some phones have more than 10GB RAM (Mi 10, OnePlus 8, S20, etc..)
-            if (totalDeviceRAM>5000) //devices with more than 10GB RAM will have 800 Cache size, 600 Cache size for morethan 5GB RAM
-                cacheSize = totalDeviceRAM>10000 ? 800: 600;
+            if (totalDeviceRAM > 5000) //devices with more than 10GB RAM will have 800 Cache size, 600 Cache size for morethan 5GB RAM
+                cacheSize = totalDeviceRAM > 10000 ? 800 : 600;
         }
         //init cache
         ImageCache.initCache(cacheSize);
@@ -208,7 +208,9 @@ public class Forge implements ApplicationListener {
             public void run() {
                 //see if app or assets need updating
                 AssetsDownloader.checkForUpdates(splashScreen);
-                if (exited) { return; } //don't continue if user chose to exit or couldn't download required assets
+                if (exited) {
+                    return;
+                } //don't continue if user chose to exit or couldn't download required assets
 
                 ImageKeys.setIsLibGDXPort(GuiBase.getInterface().isLibgdxPort());
                 FModel.initialize(splashScreen.getProgressBar(), null);
@@ -223,13 +225,13 @@ public class Forge implements ApplicationListener {
 
                 //add reminder to preload
                 if (enablePreloadExtendedArt) {
-                    if(autoCache)
-                        splashScreen.getProgressBar().setDescription(localizer.getMessage("lblPreloadExtendedArt")+"\nDetected RAM: " +totalDeviceRAM+"MB. Cache size: "+cacheSize);
+                    if (autoCache)
+                        splashScreen.getProgressBar().setDescription(localizer.getMessage("lblPreloadExtendedArt") + "\nDetected RAM: " + totalDeviceRAM + "MB. Cache size: " + cacheSize);
                     else
                         splashScreen.getProgressBar().setDescription(localizer.getMessage("lblPreloadExtendedArt"));
                 } else {
-                    if(autoCache)
-                        splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup")+"\nDetected RAM: " +totalDeviceRAM+"MB. Cache size: "+cacheSize);
+                    if (autoCache)
+                        splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup") + "\nDetected RAM: " + totalDeviceRAM + "MB. Cache size: " + cacheSize);
                     else
                         splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup"));
                 }
@@ -250,6 +252,7 @@ public class Forge implements ApplicationListener {
     public static InputProcessor getInputProcessor() {
         return inputProcessor;
     }
+
     public static Graphics getGraphics() {
         return graphics;
     }
@@ -259,24 +262,26 @@ public class Forge implements ApplicationListener {
     }
 
     private void preloadExtendedArt() {
-        if (!enablePreloadExtendedArt||!enableUIMask.equals("Full"))
+        if (!enablePreloadExtendedArt || !enableUIMask.equals("Full"))
             return;
         List<String> borderlessCardlistkeys = FileUtil.readFile(ForgeConstants.BORDERLESS_CARD_LIST_FILE);
-        if(borderlessCardlistkeys.isEmpty())
+        if (borderlessCardlistkeys.isEmpty())
             return;
         List<String> filteredkeys = new ArrayList<>();
-        for (String cardname : borderlessCardlistkeys){
-            File image = new File(ForgeConstants.CACHE_CARD_PICS_DIR+ForgeConstants.PATH_SEPARATOR+cardname+".jpg");
+        for (String cardname : borderlessCardlistkeys) {
+            File image = new File(ForgeConstants.CACHE_CARD_PICS_DIR + ForgeConstants.PATH_SEPARATOR + cardname + ".jpg");
             if (image.exists())
                 filteredkeys.add(cardname);
         }
         if (!filteredkeys.isEmpty())
             ImageCache.preloadCache(filteredkeys);
     }
+
     private void preloadBoosterDrafts() {
         //preloading of custom drafts
         BoosterDraft.initializeCustomDrafts();
     }
+
     public static void openHomeScreen(int index, FScreen lastMatch) {
         openScreen(HomeScreen.instance);
         HomeScreen.instance.openMenu(index);
@@ -291,6 +296,7 @@ public class Forge implements ApplicationListener {
         /*for (FScreen fScreen : Dscreens)
             System.out.println(fScreen.toString());*/
     }
+
     public static void openHomeDefault() {
         GuiBase.setIsAdventureMode(false);
         openHomeScreen(-1, null); //default for startup
@@ -300,6 +306,7 @@ public class Forge implements ApplicationListener {
         }
         stopContinuousRendering(); //save power consumption by disabling continuous rendering once assets loaded
     }
+
     public static void openAdventure() {
         //continuous rendering is needed for adventure mode
         startContinuousRendering();
@@ -314,11 +321,14 @@ public class Forge implements ApplicationListener {
                 sceneType.instance.resLoaded();
             }
             switchScene(SceneType.StartScene.instance);
-        } catch (Exception e) { e.printStackTrace(); }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
     protected void afterDbLoaded() {
         //init here to fix crash if the assets are missing
-        transitionTexture =  new Texture(GuiBase.isAndroid() ? Gdx.files.internal("fallback_skin").child("transition.png") : Gdx.files.classpath("fallback_skin").child("transition.png"));
+        transitionTexture = new Texture(GuiBase.isAndroid() ? Gdx.files.internal("fallback_skin").child("transition.png") : Gdx.files.classpath("fallback_skin").child("transition.png"));
 
 
         destroyThis = false; //Allow back()
@@ -364,6 +374,7 @@ public class Forge implements ApplicationListener {
             }
         });
     }
+
     public static void setCursor(TextureRegion textureRegion, String name) {
         if (GuiBase.isAndroid())
             return;
@@ -379,7 +390,7 @@ public class Forge implements ApplicationListener {
                 return;
             }
 
-            String path = "skin/cursor"+name+".png";
+            String path = "skin/cursor" + name + ".png";
             Pixmap pm = new Pixmap(Config.instance().getFile(path));
 
             if (name == "0") {
@@ -444,9 +455,11 @@ public class Forge implements ApplicationListener {
         cursorName = name;
         pm.dispose();
     }
+
     static void setGdxCursor(Cursor c) {
         Gdx.graphics.setCursor(c);
     }
+
     public static Clipboard getClipboard() {
         return clipboard;
     }
@@ -461,6 +474,7 @@ public class Forge implements ApplicationListener {
             Gdx.graphics.setContinuousRendering(true);
         }
     }
+
     public static void stopContinuousRendering() {
         if (continuousRenderingCount > 0 && --continuousRenderingCount == 0) {
             //only set continuous rendering to false if all continuous rendering requests have been ended
@@ -477,14 +491,12 @@ public class Forge implements ApplicationListener {
     }
 
     public static void adjustHeightModifier(float DisplayW, float DisplayH) {
-        if(isLandscapeMode())
-        {//TODO: Fullscreen support for Display without screen controls
+        if (isLandscapeMode()) {//TODO: Fullscreen support for Display without screen controls
             float aspectratio = DisplayW / DisplayH;
-            if(aspectratio > 1.82f) {/* extra wide */
+            if (aspectratio > 1.82f) {/* extra wide */
                 setHeightModifier(200.0f);
                 extrawide = "extrawide";
-            }
-            else if(aspectratio > 1.7f) {/* wide */
+            } else if (aspectratio > 1.7f) {/* wide */
                 setHeightModifier(100.0f);
                 extrawide = "wide";
             }
@@ -509,12 +521,13 @@ public class Forge implements ApplicationListener {
     public static void back() {
         back(false);
     }
+
     public static void back(boolean clearlastMatch) {
         if (isMobileAdventureMode) {
             return;
         }
         FScreen lastMatch = currentScreen;
-        if(destroyThis && isLandscapeMode())
+        if (destroyThis && isLandscapeMode())
             return;
         if (Dscreens.size() < 2 || (currentScreen == HomeScreen.instance && Forge.isPortraitMode)) {
             exit(false); //prompt to exit if attempting to go back from home screen
@@ -554,7 +567,9 @@ public class Forge implements ApplicationListener {
     }
 
     public static void restart(boolean silent) {
-        if (exited) { return; } //don't allow exiting multiple times
+        if (exited) {
+            return;
+        } //don't allow exiting multiple times
 
         Callback<Boolean> callback = new Callback<Boolean>() {
             @Override
@@ -570,8 +585,7 @@ public class Forge implements ApplicationListener {
 
         if (silent) {
             callback.run(true);
-        }
-        else {
+        } else {
             FOptionPane.showConfirmDialog(
                     localizer.getMessage("lblAreYouSureYouWishRestartForge"), localizer.getMessage("lblRestartForge"),
                     localizer.getMessage("lblRestart"), localizer.getMessage("lblCancel"), callback);
@@ -579,7 +593,9 @@ public class Forge implements ApplicationListener {
     }
 
     public static void exit(boolean silent) {
-        if (exited) { return; } //don't allow exiting multiple times
+        if (exited) {
+            return;
+        } //don't allow exiting multiple times
 
         final Localizer localizer = Localizer.getInstance();
         final String title = Forge.isLandscapeMode() && GuiBase.isAndroid() ? "" : localizer.getMessage("lblExitForge");
@@ -603,18 +619,20 @@ public class Forge implements ApplicationListener {
 
         if (silent) {
             callback.run(0);
-        }
-        else {
+        } else {
             FOptionPane.showOptionDialog(localizer.getMessage("lblAreYouSureYouWishExitForge"), title,
-                    FOptionPane.QUESTION_ICON, options,0, callback);
+                    FOptionPane.QUESTION_ICON, options, 0, callback);
         }
     }
 
     public static void openScreen(final FScreen screen0) {
         openScreen(screen0, false);
     }
+
     public static void openScreen(final FScreen screen0, final boolean replaceBackScreen) {
-        if (currentScreen == screen0) { return; }
+        if (currentScreen == screen0) {
+            return;
+        }
 
         if (currentScreen == null) {
             Dscreens.addFirst(screen0);
@@ -649,11 +667,11 @@ public class Forge implements ApplicationListener {
     }
 
     public static boolean isTextureFilteringEnabled() {
-        return textureFiltering; 
+        return textureFiltering;
     }
 
     public static boolean isLandscapeMode() {
-        if(GuiBase.isAndroid())
+        if (GuiBase.isAndroid())
             return !isPortraitMode;
         return screenWidth > screenHeight;
     }
@@ -681,6 +699,7 @@ public class Forge implements ApplicationListener {
     public static void clearCurrentScreen() {
         currentScreen = null;
     }
+
     public static void switchToClassic() {
         setTransitionScreen(new TransitionScreen(new Runnable() {
             @Override
@@ -690,11 +709,13 @@ public class Forge implements ApplicationListener {
                 setCursor(FSkin.getCursor().get(0), "0");
                 altZoneTabs = FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_PLAYERZONETABS);
                 Gdx.input.setInputProcessor(getInputProcessor());
-                openHomeDefault();
                 clearTransitionScreen();
+                openHomeDefault();
+                exited = false;
             }
         }, ScreenUtils.getFrameBufferTexture(), false, false));
     }
+
     public static void switchToAdventure() {
         setTransitionScreen(new TransitionScreen(new Runnable() {
             @Override
@@ -702,12 +723,15 @@ public class Forge implements ApplicationListener {
                 clearCurrentScreen();
                 clearTransitionScreen();
                 openAdventure();
+                exited = false;
             }
         }, ScreenUtils.getFrameBufferTexture(), false, false));
     }
+
     public static void setTransitionScreen(TransitionScreen screen) {
         transitionScreen = screen;
     }
+
     public static void clearTransitionScreen() {
         transitionScreen = null;
     }
@@ -715,6 +739,7 @@ public class Forge implements ApplicationListener {
     public static void clearSplashScreen() {
         splashScreen = null;
     }
+
     private static void setCurrentScreen(FScreen screen0) {
         String toNewScreen = screen0 != null ? screen0.toString() : "";
         String previousScreen = currentScreen != null ? currentScreen.toString() : "";
@@ -727,14 +752,13 @@ public class Forge implements ApplicationListener {
             currentScreen = screen0;
             currentScreen.setSize(screenWidth, screenHeight);
             currentScreen.onActivate();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             graphics.end();
             //check if sentry is enabled, if not it will call the gui interface but here we end the graphics so we only send it via sentry..
             if (BugReporter.isSentryEnabled())
                 BugReporter.reportException(ex);
         } finally {
-            if(dispose)
+            if (dispose)
                 ImageCache.disposeTexture();
         }
     }
@@ -754,58 +778,52 @@ public class Forge implements ApplicationListener {
 
             if (closingScreen != null) {
                 screen = closingScreen;
-            } else if(transitionScreen != null){
+            } else if (transitionScreen != null) {
                 screen = transitionScreen;
             } else if (screen == null) {
                 screen = splashScreen;
                 if (screen == null) {
                     if (isMobileAdventureMode) {
                         try {
-                            float delta=Gdx.graphics.getDeltaTime();
+                            float delta = Gdx.graphics.getDeltaTime();
                             float transitionTime = 0.2f;
-                            if(sceneWasSwapped)
-                            {
-                                sceneWasSwapped =false;
-                                animationTimeout= transitionTime;
+                            if (sceneWasSwapped) {
+                                sceneWasSwapped = false;
+                                animationTimeout = transitionTime;
                                 Gdx.gl.glClearColor(0, 0, 0, 1);
                                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
                                 return;
                             }
-                            if(animationTimeout>=0)
-                            {
+                            if (animationTimeout >= 0) {
                                 Gdx.gl.glClearColor(0, 0, 0, 1);
                                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
                                 animationBatch.begin();
-                                animationTimeout-=delta;
-                                animationBatch.setColor(1,1,1,1);
-                                animationBatch.draw(lastScreenTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-                                animationBatch.setColor(1,1,1,1-(1/ transitionTime)*animationTimeout);
-                                animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-                                animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                                animationTimeout -= delta;
+                                animationBatch.setColor(1, 1, 1, 1);
+                                animationBatch.draw(lastScreenTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.setColor(1, 1, 1, 1 - (1 / transitionTime) * animationTimeout);
+                                animationBatch.draw(transitionTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(transitionTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.end();
-                                if(animationTimeout<0)
-                                {
+                                if (animationTimeout < 0) {
                                     currentScene.render();
                                     storeScreen();
                                     Gdx.gl.glClearColor(0, 0, 0, 1);
                                     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                                }
-                                else
-                                {
+                                } else {
                                     return;
                                 }
                             }
-                            if(animationTimeout>=-transitionTime)
-                            {
+                            if (animationTimeout >= -transitionTime) {
                                 Gdx.gl.glClearColor(0, 0, 0, 1);
                                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
                                 animationBatch.begin();
-                                animationTimeout-=delta;
-                                animationBatch.setColor(1,1,1,1);
-                                animationBatch.draw(lastScreenTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-                                animationBatch.setColor(1,1,1,(1/ transitionTime)*(animationTimeout+ transitionTime));
-                                animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-                                animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+                                animationTimeout -= delta;
+                                animationBatch.setColor(1, 1, 1, 1);
+                                animationBatch.draw(lastScreenTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.setColor(1, 1, 1, (1 / transitionTime) * (animationTimeout + transitionTime));
+                                animationBatch.draw(transitionTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(transitionTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.end();
                                 return;
                             }
@@ -844,8 +862,7 @@ public class Forge implements ApplicationListener {
                 }
             }
             graphics.end();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             graphics.end();
             //check if sentry is enabled, if not it will call the gui interface but here we end the graphics so we only send it via sentry..
             if (BugReporter.isSentryEnabled())
@@ -854,6 +871,7 @@ public class Forge implements ApplicationListener {
         if (showFPS)
             frameRate.render();
     }
+
     public static void delayedSwitchBack() {
         FThreads.invokeInBackgroundThread(new Runnable() {
             @Override
@@ -869,6 +887,7 @@ public class Forge implements ApplicationListener {
             }
         });
     }
+
     @Override
     public void resize(int width, int height) {
         try {
@@ -876,12 +895,10 @@ public class Forge implements ApplicationListener {
             screenHeight = height;
             if (currentScreen != null) {
                 currentScreen.setSize(width, height);
-            }
-            else if (splashScreen != null) {
+            } else if (splashScreen != null) {
                 splashScreen.setSize(width, height);
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             graphics.end();
             //check if sentry is enabled, if not it will call the gui interface but here we end the graphics so we only send it via sentry..
             if (BugReporter.isSentryEnabled())
@@ -915,8 +932,8 @@ public class Forge implements ApplicationListener {
         SoundSystem.instance.dispose();
         try {
             ExceptionHandler.unregisterErrorHandling();
+        } catch (Exception e) {
         }
-        catch (Exception e) {}
     }
 
     public static boolean switchScene(Scene newScene) {
@@ -926,7 +943,7 @@ public class Forge implements ApplicationListener {
             lastScene.add(currentScene);
         }
         storeScreen();
-        sceneWasSwapped =true;
+        sceneWasSwapped = true;
         if (newScene instanceof GameScene)
             MapStage.getInstance().clearIsInMap();
         currentScene = newScene;
@@ -935,35 +952,37 @@ public class Forge implements ApplicationListener {
     }
 
     protected static void storeScreen() {
-        if(!(currentScene instanceof ForgeScene))
-        {
-            if(lastScreenTexture!=null)
+        if (!(currentScene instanceof ForgeScene)) {
+            if (lastScreenTexture != null)
                 lastScreenTexture.getTexture().dispose();
             lastScreenTexture = ScreenUtils.getFrameBufferTexture();
         }
 
 
     }
+
     public static Scene switchToLast() {
 
-        if(lastScene.size!=0)
-        {
+        if (lastScene.size != 0) {
             storeScreen();
-            currentScene = lastScene.get(lastScene.size-1);
+            currentScene = lastScene.get(lastScene.size - 1);
             currentScene.enter();
-            sceneWasSwapped =true;
-            lastScene.removeIndex(lastScene.size-1);
+            sceneWasSwapped = true;
+            lastScene.removeIndex(lastScene.size - 1);
             return currentScene;
         }
         return null;
     }
+
     //log message to Forge.log file
     public static void log(Object message) {
         System.out.println(message);
     }
 
     public static void startKeyInput(KeyInputAdapter adapter) {
-        if (keyInputAdapter == adapter) { return; }
+        if (keyInputAdapter == adapter) {
+            return;
+        }
         if (keyInputAdapter != null) {
             keyInputAdapter.onInputEnd(); //make sure previous adapter is ended
         }
@@ -972,7 +991,9 @@ public class Forge implements ApplicationListener {
     }
 
     public static boolean endKeyInput() {
-        if (keyInputAdapter == null) { return false; }
+        if (keyInputAdapter == null) {
+            return false;
+        }
         keyInputAdapter.onInputEnd();
         keyInputAdapter = null;
         MainInputProcessor.keyTyped = false;
@@ -982,6 +1003,8 @@ public class Forge implements ApplicationListener {
     }
 
     static void exitAnimation(boolean restart) {
+        if (transitionScreen != null)
+            return; //finish transition incase exit is touched
         if (closingScreen == null) {
             closingScreen = new ClosingScreen(restart);
         }
@@ -989,32 +1012,41 @@ public class Forge implements ApplicationListener {
 
     public static abstract class KeyInputAdapter {
         public abstract FDisplayObject getOwner();
+
         public abstract boolean allowTouchInput();
+
         public abstract boolean keyTyped(char ch);
+
         public abstract boolean keyDown(int keyCode);
+
         public abstract void onInputEnd();
 
         //also allow handling of keyUp but don't require it
-        public boolean keyUp(int keyCode) { return false; }
+        public boolean keyUp(int keyCode) {
+            return false;
+        }
 
         public static boolean isCtrlKeyDown() {
             return Gdx.input.isKeyPressed(Keys.CONTROL_LEFT) || Gdx.input.isKeyPressed(Keys.CONTROL_RIGHT);
         }
+
         public static boolean isShiftKeyDown() {
             return Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) || Gdx.input.isKeyPressed(Keys.SHIFT_RIGHT);
         }
+
         public static boolean isAltKeyDown() {
             return Gdx.input.isKeyPressed(Keys.ALT_LEFT) || Gdx.input.isKeyPressed(Keys.ALT_RIGHT);
         }
+
         public static boolean isModifierKey(int keyCode) {
             switch (keyCode) {
-            case Keys.CONTROL_LEFT:
-            case Keys.CONTROL_RIGHT:
-            case Keys.SHIFT_LEFT:
-            case Keys.SHIFT_RIGHT:
-            case Keys.ALT_LEFT:
-            case Keys.ALT_RIGHT:
-                return true;
+                case Keys.CONTROL_LEFT:
+                case Keys.CONTROL_RIGHT:
+                case Keys.SHIFT_LEFT:
+                case Keys.SHIFT_RIGHT:
+                case Keys.ALT_LEFT:
+                case Keys.ALT_RIGHT:
+                    return true;
             }
             return false;
         }
@@ -1038,25 +1070,25 @@ public class Forge implements ApplicationListener {
             // Cursor keys emulate swipe gestures
             // First we touch the screen and later swipe (fling) in the direction of the key pressed
             if (keyCode == Keys.LEFT) {
-                touchDown(0,0,0,0);
-                return fling(1000,0);
+                touchDown(0, 0, 0, 0);
+                return fling(1000, 0);
             }
             if (keyCode == Keys.RIGHT) {
-                touchDown(0,0,0,0);
-                return fling(-1000,0);
+                touchDown(0, 0, 0, 0);
+                return fling(-1000, 0);
             }
             if (keyCode == Keys.UP) {
-                touchDown(0,0,0,0);
-                return fling(0,-1000);
+                touchDown(0, 0, 0, 0);
+                return fling(0, -1000);
             }
             if (keyCode == Keys.DOWN) {
-                touchDown(0,0,0,0);
-                return fling(0,1000);
+                touchDown(0, 0, 0, 0);
+                return fling(0, 1000);
             }
-            if(keyCode == Keys.BACK){
-                if ((destroyThis && !isMobileAdventureMode)||(splashScreen != null && splashScreen.isShowModeSelector()))
+            if (keyCode == Keys.BACK) {
+                if ((destroyThis && !isMobileAdventureMode) || (splashScreen != null && splashScreen.isShowModeSelector()))
                     exitAnimation(false);
-                else if(onHomeScreen() && isLandscapeMode())
+                else if (onHomeScreen() && isLandscapeMode())
                     back();
             }
             if (keyInputAdapter == null) {
@@ -1125,6 +1157,8 @@ public class Forge implements ApplicationListener {
 
         @Override
         public boolean touchDown(int x, int y, int pointer, int button) {
+            if (transitionScreen != null)
+                return false;
             if (pointer == 0) { //don't change listeners when second finger goes down for zoom
                 updatePotentialListeners(x, y);
                 if (keyInputAdapter != null) {
@@ -1146,8 +1180,7 @@ public class Forge implements ApplicationListener {
                     }
                 }
                 return false;
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 BugReporter.reportException(ex);
                 return true;
             }
@@ -1162,8 +1195,7 @@ public class Forge implements ApplicationListener {
                     }
                 }
                 return false;
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 BugReporter.reportException(ex);
                 return true;
             }
@@ -1178,8 +1210,7 @@ public class Forge implements ApplicationListener {
                     }
                 }
                 return false;
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 BugReporter.reportException(ex);
                 return true;
             }
@@ -1197,8 +1228,7 @@ public class Forge implements ApplicationListener {
                     }
                 }
                 return false;
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 BugReporter.reportException(ex);
                 return true;
             }
@@ -1213,8 +1243,7 @@ public class Forge implements ApplicationListener {
                     }
                 }
                 return false;
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 BugReporter.reportException(ex);
                 return true;
             }
@@ -1229,8 +1258,7 @@ public class Forge implements ApplicationListener {
                     }
                 }
                 return false;
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 BugReporter.reportException(ex);
                 return true;
             }
@@ -1245,8 +1273,7 @@ public class Forge implements ApplicationListener {
                     }
                 }
                 return false;
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 BugReporter.reportException(ex);
                 return true;
             }
@@ -1261,8 +1288,7 @@ public class Forge implements ApplicationListener {
                     }
                 }
                 return false;
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 BugReporter.reportException(ex);
                 return true;
             }
@@ -1277,8 +1303,7 @@ public class Forge implements ApplicationListener {
                     }
                 }
                 return false;
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 BugReporter.reportException(ex);
                 return true;
             }
@@ -1286,6 +1311,7 @@ public class Forge implements ApplicationListener {
 
         //mouseMoved and scrolled events for desktop version
         private int mouseMovedX, mouseMovedY;
+
         @Override
         public boolean mouseMoved(int screenX, int screenY) {
             magnify = true;
@@ -1300,8 +1326,7 @@ public class Forge implements ApplicationListener {
                 for (FDisplayObject listener : potentialListeners) {
                     listener.setHovered(false);
                 }
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 BugReporter.reportException(ex);
             }
             updatePotentialListeners(screenX, screenY);
@@ -1319,8 +1344,7 @@ public class Forge implements ApplicationListener {
             boolean handled;
             if (KeyInputAdapter.isShiftKeyDown()) {
                 handled = pan(mouseMovedX, mouseMovedY, -Utils.AVG_FINGER_WIDTH * amountX, 0, false);
-            }
-            else {
+            } else {
                 handled = pan(mouseMovedX, mouseMovedY, 0, -Utils.AVG_FINGER_HEIGHT * amountY, true);
             }
             if (panStop(mouseMovedX, mouseMovedY)) {
