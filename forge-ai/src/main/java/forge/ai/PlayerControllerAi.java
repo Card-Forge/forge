@@ -242,11 +242,11 @@ public class PlayerControllerAi extends PlayerController {
         SpellAbility selected;
         do {
             selected = chooseSingleSpellForEffect(remaining, sa, title, params);
-            if ( selected != null ) {
+            if (selected != null) {
                 remaining.remove(selected);
                 selecteds.add(selected);
             }
-        } while ( (selected != null ) && (selecteds.size() < num) );
+        } while (selected != null && selecteds.size() < num);
         return selecteds;
     }
 
@@ -542,12 +542,6 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public CardCollectionView chooseCardsToDelve(int genericAmount, CardCollection grave) {
         return getAi().chooseCardsToDelve(genericAmount, grave);
-    }
-
-    @Override
-    public TargetChoices chooseNewTargetsFor(SpellAbility ability, Predicate<GameObject> filter, boolean optional) {
-        // AI currently can't do this. But when it can it will need to be based on Ability API
-        return null;
     }
 
     @Override
@@ -1100,6 +1094,12 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public TargetChoices chooseNewTargetsFor(SpellAbility ability, Predicate<GameObject> filter, boolean optional) {
+        // AI currently can't do this. But when it can it will need to be based on Ability API
+        return null;
+    }
+
+    @Override
     public boolean chooseCardsPile(SpellAbility sa, CardCollectionView pile1, CardCollectionView pile2, String faceUp) {
         if (faceUp.equals("True")) {
             // AI will choose the first pile if it is larger or the same
@@ -1341,8 +1341,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public List<OptionalCostValue> chooseOptionalCosts(SpellAbility chosen,
-            List<OptionalCostValue> optionalCostValues) {
+    public List<OptionalCostValue> chooseOptionalCosts(SpellAbility chosen, List<OptionalCostValue> optionalCostValues) {
         List<OptionalCostValue> chosenOptCosts = Lists.newArrayList();
         Cost costSoFar = chosen.getPayCosts().copy();
 
