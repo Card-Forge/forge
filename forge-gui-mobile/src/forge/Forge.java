@@ -598,11 +598,9 @@ public class Forge implements ApplicationListener {
         } //don't allow exiting multiple times
 
         final Localizer localizer = Localizer.getInstance();
-        final String title = Forge.isLandscapeMode() && GuiBase.isAndroid() ? "" : localizer.getMessage("lblExitForge");
         final List<String> options = new ArrayList<>();
         options.add(localizer.getMessage("lblExit"));
-        if (Forge.isLandscapeMode() && GuiBase.isAndroid())
-            options.add(localizer.getMessageorUseDefault("lblAdventureMode", "Adventure Mode"));
+        options.add(localizer.getMessageorUseDefault("lblAdventureMode", "Adventure Mode"));
         options.add(localizer.getMessage("lblCancel"));
 
         Callback<Integer> callback = new Callback<Integer>() {
@@ -611,7 +609,7 @@ public class Forge implements ApplicationListener {
                 if (result == 0) {
                     exited = true;
                     exitAnimation(false);
-                } else if (result == 1 && Forge.isLandscapeMode() && GuiBase.isAndroid()) {
+                } else if (result == 1) {
                     switchToAdventure();
                 }
             }
@@ -620,7 +618,7 @@ public class Forge implements ApplicationListener {
         if (silent) {
             callback.run(0);
         } else {
-            FOptionPane.showOptionDialog(localizer.getMessage("lblAreYouSureYouWishExitForge"), title,
+            FOptionPane.showOptionDialog(localizer.getMessage("lblAreYouSureYouWishExitForge"), "",
                     FOptionPane.QUESTION_ICON, options, 0, callback);
         }
     }
@@ -725,7 +723,7 @@ public class Forge implements ApplicationListener {
                 openAdventure();
                 exited = false;
             }
-        }, ScreenUtils.getFrameBufferTexture(), false, false));
+        }, null, false, true));
     }
 
     public static void setTransitionScreen(TransitionScreen screen) {

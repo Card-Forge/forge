@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
@@ -36,9 +37,10 @@ public class SettingsScene extends UIScene {
     Stage stage;
     Texture Background;
     private Table settingGroup;
+    TextButton back;
 
     public SettingsScene() {
-        super(GuiBase.isAndroid() ? "ui/settings_mobile.json" : "ui/settings.json");
+        super(Forge.isLandscapeMode() ? "ui/settings_mobile.json" : "ui/settings.json");
     }
 
 
@@ -95,9 +97,10 @@ public class SettingsScene extends UIScene {
 
     private void addCheckBox(String name, ForgePreferences.FPref pref) {
         CheckBox box = Controls.newCheckBox("");
-        if (GuiBase.isAndroid()) {
-            box.getImage().setScaling(Scaling.fill);
-            box.getImageCell().size(12, 12);
+        if (GuiBase.isAndroid()||!Forge.isLandscapeMode()) {
+            box.getImage().setScaling(Scaling.stretch);
+            float width = !Forge.isLandscapeMode() ? 24 : 12;
+            box.getImageCell().size(width, 12);
             box.getImageCell().pad(2, 2, 2, 10);
         }
         box.setChecked(Preference.getPrefBoolean(pref));
@@ -130,9 +133,10 @@ public class SettingsScene extends UIScene {
     private void addSettingField(String name, boolean value, ChangeListener change) {
 
         CheckBox box = Controls.newCheckBox("");
-        if (GuiBase.isAndroid()) {
-            box.getImage().setScaling(Scaling.fill);
-            box.getImageCell().size(12, 12);
+        if (GuiBase.isAndroid()||!Forge.isLandscapeMode()) {
+            box.getImage().setScaling(Scaling.stretch);
+            float width = !Forge.isLandscapeMode() ? 24 : 12;
+            box.getImageCell().size(width, 12);
             box.getImageCell().pad(2, 2, 2, 10);
         }
         box.setChecked(value);
@@ -156,8 +160,15 @@ public class SettingsScene extends UIScene {
 
     void addLabel(String name) {
         Label label = new Label(name, Controls.GetSkin().get("white", Label.LabelStyle.class));
-        settingGroup.row().space(5);
-        settingGroup.add(label).align(Align.left).pad(2, 2, 2, 5);
+        if (!Forge.isLandscapeMode()) {
+            label.setFontScaleX(2);
+            label.setWrap(true);
+            settingGroup.row().space(5);
+            settingGroup.add(label).align(Align.left).pad(2, 2, 2, 5).expandX();
+        } else {
+            settingGroup.row().space(5);
+            settingGroup.add(label).align(Align.left).pad(2, 2, 2, 5);
+        }
     }
 
     @Override
@@ -178,6 +189,9 @@ public class SettingsScene extends UIScene {
             }
         });
         addLabel("Plane");
+        if (!Forge.isLandscapeMode()) {
+            plane.getStyle().listStyle.font.getData().setScale(2, 1);
+        }
         settingGroup.add(plane).align(Align.right).pad(2);
 
         if (!GuiBase.isAndroid()) {
@@ -252,7 +266,7 @@ public class SettingsScene extends UIScene {
 
 
         settingGroup.row();
-
+        back = ui.findActor("return");
         ui.onButtonPress("return", new Runnable() {
             @Override
             public void run() {
@@ -262,6 +276,18 @@ public class SettingsScene extends UIScene {
 
         ScrollPane scrollPane = ui.findActor("settings");
         scrollPane.setActor(settingGroup);
+
+        if (!Forge.isLandscapeMode()) {
+            float w = Scene.GetIntendedWidth();
+            float bW = w/2;
+            float oX = w/2 - bW/2;
+            back.getLabel().setFontScaleX(2);
+            back.setWidth(bW);
+            back.setHeight(20);
+            float bH = back.getHeight();
+            back.setX(oX);
+            scrollPane.setX(w/2-scrollPane.getWidth()/2);
+        }
     }
 
     @Override

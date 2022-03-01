@@ -213,10 +213,7 @@ public class SplashScreen extends FContainer {
 
         if (!init) {
             init = true;
-            String defaultText = Localizer.getInstance().getMessageorUseDefault("lblAdventureMode", "Adventure Mode");
-            String advAndroid = Forge.isLandscapeMode() ? defaultText  : "Adventure Mode (Landscape Only)";
-            btnAdventure = new FButton(GuiBase.isAndroid() ? advAndroid : defaultText);
-            btnAdventure.setEnabled(Forge.isLandscapeMode());
+            btnAdventure = new FButton(Localizer.getInstance().getMessageorUseDefault("lblAdventureMode", "Adventure Mode"));
             btnHome = new FButton(Localizer.getInstance().getMessageorUseDefault("lblClassicMode", "Classic Mode"));
             btnAdventure.setCommand(new FEvent.FEventHandler() {
                 @Override
@@ -252,7 +249,8 @@ public class SplashScreen extends FContainer {
             });
             float btn_w = (w - 2 * padding);
             float btn_x = x + padding;
-            float btn_y = y + padding;
+            float multiplier = Forge.isLandscapeMode() ? 1 : 1.2f;
+            float btn_y = (y + padding) * multiplier;
             btnHome.setFont(FSkinFont.get(22));
             btnAdventure.setFont(FSkinFont.get(22));
             btnHome.setBounds(btn_x, btn_y, btn_w, height);

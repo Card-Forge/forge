@@ -10,20 +10,20 @@
       "height": 270
     },
     {
-      "type": "Image",
-      "name": "preview",
-      "x": 364,
-      "y": 10,
-      "width": 96,
-      "height": 54
-    },
-    {
       "type": "Scroll",
       "name": "saveSlots",
       "x": 10,
       "y": 10,
       "width": 344,
       "height": 235
+    },
+    {
+      "type": "Image",
+      "name": "preview",
+      "x": 300,
+      "y": 18,
+      "width": 96,
+      "height": 54
     },
     {
       "type": "TextButton",

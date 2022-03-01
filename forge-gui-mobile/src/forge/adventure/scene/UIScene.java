@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import forge.adventure.util.Config;
 import forge.adventure.util.UIActor;
 
@@ -55,8 +54,7 @@ public class UIScene extends Scene{
     }
     @Override
     public void resLoaded() {
-        Viewport viewport = new ScalingViewport(Scaling.stretch, GetIntendedWidth(), GetIntendedHeight());
-        stage = new Stage(viewport){
+        stage = new Stage(new ScalingViewport(Scaling.stretch, GetIntendedWidth(), GetIntendedHeight())) {
 
             @Override
             public boolean keyUp(int keycode) {

@@ -40,7 +40,7 @@ public class GameHUD extends Stage {
     private final Image miniMapPlayer;
     private final Label lifePoints;
     private final Label money;
-    private Image miniMap, gamehud, mapborder, avatarborder;
+    private Image miniMap, gamehud, mapborder, avatarborder, blank;
     private TextButton deckActor, menuActor, statsActor;
     private boolean deckPressed = false;
     private boolean menuPressed = false;
@@ -59,7 +59,9 @@ public class GameHUD extends Stage {
         instance = this;
         this.gameStage = gameStage;
 
-        ui = new UIActor(Config.instance().getFile(GuiBase.isAndroid() ? "ui/hud_mobile.json" : "ui/hud.json"));
+        ui = new UIActor(Config.instance().getFile("ui/hud_mobile.json"));
+
+        blank = ui.findActor("blank");
         miniMap = ui.findActor("map");
         mapborder = ui.findActor("mapborder");
         avatarborder = ui.findActor("avatarborder");
@@ -327,6 +329,37 @@ public class GameHUD extends Stage {
 
         miniMap.setDrawable(new TextureRegionDrawable(miniMapTexture));
         avatar.setDrawable(new TextureRegionDrawable(Current.player().avatar()));
+        if (!Forge.isLandscapeMode()) {
+            miniMap.setWidth(160);
+            mapborder.setWidth(160);
+            miniMapPlayer.setWidth(10);
+            gamehud.setVisible(false);
+            blank.setScaleX(2);
+            blank.setX(388);
+            blank.setHeight(80);
+            blank.setY(miniMap.getY());
+            avatar.setScaleX(2);
+            avatar.setX(388);
+            avatarborder.setX(388);
+            avatarborder.setY(miniMap.getY());
+            avatarborder.setScaleX(2);
+            avatarborder.setHeight(80);
+            money.setX(418);
+            lifePoints.setX(418);
+            lifePoints.setY(avatar.getY()-15);
+            money.setY(avatar.getY()-25);
+            menuActor.setHeight(20);
+            menuActor.setWidth(60);
+            menuActor.setX(420);
+            statsActor.setHeight(20);
+            statsActor.setWidth(60);
+            statsActor.setX(420);
+            statsActor.setY(menuActor.getY() + 35);
+            deckActor.setHeight(20);
+            deckActor.setWidth(60);
+            deckActor.setX(420);
+            deckActor.setY(statsActor.getY() + 35);
+        }
     }
 
     private void openDeck() {
@@ -340,11 +373,12 @@ public class GameHUD extends Stage {
         miniMap.setVisible(visible);
         mapborder.setVisible(visible);
         miniMapPlayer.setVisible(visible);
+        gamehud.setVisible(visible);
         avatarborder.setVisible(visible);
         avatar.setVisible(visible);
         lifePoints.setVisible(visible);
         money.setVisible(visible);
-        gamehud.setVisible(visible);
+        blank.setVisible(visible);
         if (visible) {
             deckActor.getColor().a = 1f;
             menuActor.getColor().a = 1f;
@@ -353,6 +387,9 @@ public class GameHUD extends Stage {
             deckActor.getColor().a = 0.5f;
             menuActor.getColor().a = 0.5f;
             statsActor.getColor().a = 0.5f;
+        }
+        if (!Forge.isLandscapeMode()) {
+            gamehud.setVisible(false);
         }
     }
 }

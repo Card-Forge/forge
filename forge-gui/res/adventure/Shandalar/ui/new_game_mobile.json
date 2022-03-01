@@ -11,6 +11,7 @@
     },
     {
       "type": "Scroll",
+      "name" : "scroll",
       "style": "paper",
       "x": 56,
       "y": 10,
@@ -19,6 +20,7 @@
     },
     {
       "type": "Label",
+      "name" : "titleL",
       "text": "Create a Character",
       "width": 128,
       "height": 32,
@@ -28,6 +30,7 @@
     },
     {
       "type": "Label",
+      "name" : "avatarL",
       "text": "Avatar:",
       "width": 128,
       "height": 32,
@@ -37,6 +40,7 @@
     },
     {
       "type": "Label",
+      "name" : "nameL",
       "text": "Name:",
       "width": 128,
       "height": 32,
@@ -46,6 +50,7 @@
     },
     {
       "type": "Label",
+      "name" : "raceL",
       "text": "Race:",
       "width": 128,
       "height": 32,
@@ -55,6 +60,7 @@
     },
     {
       "type": "Label",
+      "name" : "genderL",
       "text": "Gender:",
       "width": 128,
       "height": 32,
@@ -64,6 +70,7 @@
     },
     {
       "type": "Label",
+      "name" : "difficultyL",
       "text": "Difficulty:",
       "width": 128,
       "height": 32,
@@ -73,6 +80,7 @@
     },
     {
       "type": "Label",
+      "name" : "deckL",
       "text": "Deck:",
       "width": 128,
       "height": 32,
