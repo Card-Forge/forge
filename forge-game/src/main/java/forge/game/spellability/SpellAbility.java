@@ -115,6 +115,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private Player targetingPlayer = null;
     private Pair<Long, Player> controlledByPlayer = null;
     private ManaCostBeingPaid manaCostBeingPaid = null;
+    private boolean spentPhyrexian = false;
 
     private SpellAbility grantorOriginal = null;
     private StaticAbility grantorStatic = null;
@@ -613,6 +614,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         payingMana.clear();
     }
 
+    public final boolean getSpendPhyrexianMana() {
+        return this.spentPhyrexian;
+    }
+    public final void setSpendPhyrexianMana(boolean value) {
+        this.spentPhyrexian = value;
+    }
+
     public final void applyPayingManaEffects() {
         Card host = getHostCard();
 
@@ -905,8 +913,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 // if alternate state is viewed while card uses original
                 if (node.isIntrinsic() && node.cardState != null && node.cardState.getCard() == node.getHostCard()) {
                     currentName = node.cardState.getName();
-                }
-                else {
+                } else {
                     currentName = node.getHostCard().getName();
                 }
                 desc = CardTranslation.translateMultipleDescriptionText(desc, currentName);

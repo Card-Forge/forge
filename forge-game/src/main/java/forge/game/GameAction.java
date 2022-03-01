@@ -1308,6 +1308,7 @@ public class GameAction {
                                     desCreats = new CardCollection();
                                 }
                                 desCreats.add(c);
+                                c.setHasBeenDealtDeathtouchDamage(false);
                                 checkAgain = true;
                                 break;
                             }

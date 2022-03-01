@@ -160,9 +160,7 @@ public class AiController {
             all.add(ccvPlayerLibrary.get(0));
         }
 
-        for (final Player opp : player.getOpponents()) {
-            all.addAll(opp.getCardsIn(ZoneType.Exile));
-        }
+        all.addAll(player.getOpponents().getCardsIn(ZoneType.Exile));
 
         final List<SpellAbility> spellAbilities = Lists.newArrayList();
         for (final Card c : all) {
@@ -703,7 +701,7 @@ public class AiController {
         // but should work in most circumstances to ensure safety in whatever the AI is using this for.
         if (manaSources.size() >= cost.getConvertedManaCost()) {
             for (Card c : manaSources) {
-                AiCardMemory.rememberCard(player, c, memSet);
+                memory.rememberCard(c, memSet);
             }
             return true;
         }
@@ -839,7 +837,7 @@ public class AiController {
 
         // When processing a new SA, clear the previously remembered cards that have been marked to avoid re-entry
         // which might potentially cause a stack overflow.
-        AiCardMemory.clearMemorySet(this, AiCardMemory.MemorySet.MARKED_TO_AVOID_REENTRY);
+        memory.clearMemorySet(AiCardMemory.MemorySet.MARKED_TO_AVOID_REENTRY);
 
         // TODO before suspending some spells try to predict if relevant targets can be expected
         if (sa.getApi() != null) {
@@ -1490,7 +1488,7 @@ public class AiController {
         predictedCombatNextTurn = null;
 
         // Reset priority mana reservation that's meant to work for one spell only
-        AiCardMemory.clearMemorySet(player, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL);
+        memory.clearMemorySet(AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL);
 
         if (useSimulation) {
             return singleSpellAbilityList(simPicker.chooseSpellAbilityToPlay(null));

@@ -795,6 +795,9 @@ public class ComputerUtilMana {
 
                 if (toPay.isPhyrexian()) {
                     cost.payPhyrexian();
+                    if (!test) {
+                        sa.setSpendPhyrexianMana(true);
+                    }
                 } else if (lifeInsteadOfBlack) {
                     cost.decreaseShard(ManaCostShard.BLACK, 1);
                 }

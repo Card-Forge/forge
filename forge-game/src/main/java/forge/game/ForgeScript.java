@@ -182,6 +182,8 @@ public class ForgeScript {
             return sa.hasParam("Daybound");
         } else if (property.equals("Nightbound")) {
             return sa.hasParam("Nightbound");
+        } else if (property.equals("paidPhyrexianMana")) {
+            return sa.getSpendPhyrexianMana();
         } else if (property.equals("MayPlaySource")) {
             StaticAbility m = sa.getMayPlay();
             if (m == null) {

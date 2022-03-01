@@ -119,8 +119,7 @@ public class AiProfileUtil {
      * @return ArrayList<String> - an array of strings containing all 
      * available profiles.
      */
-    public static List<String> getAvailableProfiles()
-    {
+    public static List<String> getAvailableProfiles() {
         final List<String> availableProfiles = new ArrayList<>();
 
         final File dir = new File(AI_PROFILE_DIR);
