@@ -449,6 +449,9 @@ public class AiAttackController {
             return false;
         }
 
+        // TODO for multiplayer this should either add some heuristics
+        // so the other opponents attack power is also measured in
+        // or refactor it with aiLifeInDanger somehow if performance impact isn't too bad
         CardLists.sortByPowerDesc(oppList);
         for (Card attacker : oppList) {
             if (!ComputerUtilCombat.canAttackNextTurn(attacker)) {
@@ -1037,7 +1040,7 @@ public class AiAttackController {
                 && defendingOpponent != null
                 && ComputerUtil.countUsefulCreatures(ai) > ComputerUtil.countUsefulCreatures(defendingOpponent)
                 && ai.getLife() > defendingOpponent.getLife()
-                && !ComputerUtilCombat.lifeInDanger(ai, combat)
+                && !ComputerUtilCombat.lifeInDanger(ai, combat) // this isn't really doing anything unless the attacking player in combat isn't the AI (which currently isn't used like that)
                 && (ComputerUtilMana.getAvailableManaEstimate(ai) > 0) || tradeIfTappedOut
                 && (ComputerUtilMana.getAvailableManaEstimate(defendingOpponent) == 0) || MyRandom.percentTrue(extraChanceIfOppHasMana)
                 && (!tradeIfLowerLifePressure || (ai.getLifeLostLastTurn() + ai.getLifeLostThisTurn() <

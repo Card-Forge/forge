@@ -417,6 +417,7 @@ public class ComputerUtilCombat {
             return false;
         }
 
+        // TODO check for replacement effect instead
         CardCollectionView otb = ai.getCardsIn(ZoneType.Battlefield);
         // Special cases:
         // AI can't lose in combat in presence of Worship (with creatures)
