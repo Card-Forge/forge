@@ -41,6 +41,7 @@ public class SplashScreen extends FContainer {
     public void setBackground(TextureRegion background0) {
         background = background0;
     }
+
     public void startClassic() {
         startClassic = true;
         hideBtn = true;
@@ -56,26 +57,28 @@ public class SplashScreen extends FContainer {
 
     //prepare for showing dialogs on top of splash screen if needed
     public void prepareForDialogs() {
-        if (preparedForDialogs) { return; }
+        if (preparedForDialogs) {
+            return;
+        }
 
         //establish fallback colors for before actual colors are loaded
         Color defaultColor = new Color(0, 0, 0, 0);
         for (final FSkinColor.Colors c : FSkinColor.Colors.values()) {
             switch (c) {
-            case CLR_BORDERS:
-            case CLR_TEXT:
-                c.setColor(FProgressBar.SEL_FORE_COLOR);
-                break;
-            case CLR_ACTIVE:
-            case CLR_THEME2:
-                c.setColor(FProgressBar.SEL_BACK_COLOR);
-                break;
-            case CLR_INACTIVE:
-                c.setColor(FSkinColor.stepColor(FProgressBar.SEL_BACK_COLOR, -80));
-                break;
-            default:
-                c.setColor(defaultColor);
-                break;
+                case CLR_BORDERS:
+                case CLR_TEXT:
+                    c.setColor(FProgressBar.SEL_FORE_COLOR);
+                    break;
+                case CLR_ACTIVE:
+                case CLR_THEME2:
+                    c.setColor(FProgressBar.SEL_BACK_COLOR);
+                    break;
+                case CLR_INACTIVE:
+                    c.setColor(FSkinColor.stepColor(FProgressBar.SEL_BACK_COLOR, -80));
+                    break;
+                default:
+                    c.setColor(defaultColor);
+                    break;
             }
         }
         FSkinColor.updateAll();
@@ -85,6 +88,7 @@ public class SplashScreen extends FContainer {
     public void setShowModeSelector(boolean value) {
         showModeSelector = value;
     }
+
     public boolean isShowModeSelector() {
         return showModeSelector;
     }
@@ -94,7 +98,9 @@ public class SplashScreen extends FContainer {
         private float progress = 0;
         private boolean finished, openAdventure;
         //for transition image only...
-        Texture transition_bg = new Texture(GuiBase.isAndroid() ? Gdx.files.internal("fallback_skin").child("title_bg_lq.png") : Gdx.files.classpath("fallback_skin").child("title_bg_lq.png"));
+        TextureRegion transition_bg = new TextureRegion(new Texture(GuiBase.isAndroid()
+                ? Gdx.files.internal("fallback_skin").child("title_bg_lq.png")
+                : Gdx.files.classpath("fallback_skin").child("title_bg_lq.png")));
 
         public void drawBackground(Graphics g) {
             float percentage = progress / DURATION;
@@ -105,22 +111,22 @@ public class SplashScreen extends FContainer {
                 percentage = 1;
             }
             if (startClassic) {
-                showSplash(g, 1-percentage);
+                showSplash(g, 1 - percentage);
             } else {
                 if (animateLogo) {
                     //bg
                     drawTransition(g, transition_bg, openAdventure, percentage);
-                    g.setAlphaComposite(1-percentage);
+                    g.setAlphaComposite(1 - percentage);
                     g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, getWidth(), getHeight());
                     g.setAlphaComposite(oldAlpha);
                     //logo
-                    g.setAlphaComposite(oldAlpha-percentage);
+                    g.setAlphaComposite(oldAlpha - percentage);
                     float xmod = Forge.getScreenHeight() > 1000 ? 1.5f : Forge.getScreenHeight() > 800 ? 1.3f : 1f;
                     xmod += 10 * percentage;
-                    g.drawImage(FSkin.hdLogo, getWidth()/2 - (FSkin.hdLogo.getWidth()*xmod)/2, getHeight()/2 - (FSkin.hdLogo.getHeight()*xmod)/1.5f, FSkin.hdLogo.getWidth()*xmod, FSkin.hdLogo.getHeight()*xmod);
+                    g.drawImage(FSkin.hdLogo, getWidth() / 2 - (FSkin.hdLogo.getWidth() * xmod) / 2, getHeight() / 2 - (FSkin.hdLogo.getHeight() * xmod) / 1.5f, FSkin.hdLogo.getWidth() * xmod, FSkin.hdLogo.getHeight() * xmod);
                     g.setAlphaComposite(oldAlpha);
                 } else {
-                    g.setAlphaComposite(hideBG ? 1-percentage : 1);
+                    g.setAlphaComposite(hideBG ? 1 - percentage : 1);
                     if (showModeSelector) {
                         showSelector(g, hideBG ? 1 - percentage : 1);
                     } else {
@@ -128,7 +134,7 @@ public class SplashScreen extends FContainer {
                     }
                     g.setAlphaComposite(oldAlpha);
                     if (hideBG) {
-                        g.setAlphaComposite(0+percentage);
+                        g.setAlphaComposite(0 + percentage);
                         drawTransition(g, transition_bg, openAdventure, percentage);
                         g.setAlphaComposite(oldAlpha);
                     }
@@ -137,11 +143,11 @@ public class SplashScreen extends FContainer {
             if (hideBtn) {
                 if (btnAdventure != null) {
                     float y = btnAdventure.getTop();
-                    btnAdventure.setTop(y+(getHeight()/16 * percentage));
+                    btnAdventure.setTop(y + (getHeight() / 16 * percentage));
                 }
                 if (btnHome != null) {
                     float y = btnHome.getTop();
-                    btnHome.setTop(y+(getHeight()/16 * percentage));
+                    btnHome.setTop(y + (getHeight() / 16 * percentage));
                 }
             }
         }
@@ -154,7 +160,7 @@ public class SplashScreen extends FContainer {
 
         @Override
         protected void onEnd(boolean endingAll) {
-            if (animateLogo||hideBG) {
+            if (animateLogo || hideBG) {
                 if (openAdventure)
                     Forge.openAdventure();
                 else
@@ -169,20 +175,31 @@ public class SplashScreen extends FContainer {
         bgAnimation.start();
         bgAnimation.drawBackground(g);
     }
-    void drawTransition(Graphics g, Texture bg, boolean openAdventure, float percentage) {
+
+    void drawTransition(Graphics g, TextureRegion bg, boolean openAdventure, float percentage) {
+        TextureRegion tr = new TextureRegion(bg.getTexture());
+        if (!Forge.isLandscapeMode() && tr != null) {
+            float ar = 1.78f;
+            int w = (int) (tr.getRegionHeight() / ar);
+            int x = (int) ((tr.getRegionWidth() - w) / ar);
+            tr.setRegion(x, 0, w, tr.getRegionHeight());
+        }
         float oldAlpha = g.getfloatAlphaComposite();
         g.setAlphaComposite(percentage);
         if (openAdventure) {
-            if (bg != null) {
-                g.drawGrayTransitionImage(bg, 0, 0, getWidth(), getHeight(), false, percentage*1);
+            if (tr != null) {
+                g.drawGrayTransitionImage(tr, 0, 0, getWidth(), getHeight(), false, percentage * 1);
             }
         } else {
-            g.fillRect(FSkinColor.get(FSkinColor.Colors.CLR_THEME),0, 0, getWidth(), getHeight());
+            g.fillRect(FSkinColor.get(FSkinColor.Colors.CLR_THEME), 0, 0, getWidth(), getHeight());
         }
         g.setAlphaComposite(oldAlpha);
     }
+
     private void showSelector(Graphics g, float alpha) {
-        if (background == null) { return; }
+        if (background == null) {
+            return;
+        }
         g.fillRect(Color.BLACK, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
         g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, getWidth(), getHeight());
 
@@ -194,8 +211,7 @@ public class SplashScreen extends FContainer {
             w = getWidth();
             h = getWidth() * backgroundRatio;
             y = (getHeight() - h) / 2;
-        }
-        else {
+        } else {
             y = 0;
             h = getHeight();
             w = getHeight() / backgroundRatio;
@@ -203,7 +219,7 @@ public class SplashScreen extends FContainer {
         }
         if (FSkin.hdLogo != null) {
             float xmod = Forge.getScreenHeight() > 1000 ? 1.5f : Forge.getScreenHeight() > 800 ? 1.3f : 1f;
-            g.drawImage(FSkin.hdLogo, getWidth()/2 - (FSkin.hdLogo.getWidth()*xmod)/2, getHeight()/2 - (FSkin.hdLogo.getHeight()*xmod)/1.5f, FSkin.hdLogo.getWidth()*xmod, FSkin.hdLogo.getHeight()*xmod);
+            g.drawImage(FSkin.hdLogo, getWidth() / 2 - (FSkin.hdLogo.getWidth() * xmod) / 2, getHeight() / 2 - (FSkin.hdLogo.getHeight() * xmod) / 1.5f, FSkin.hdLogo.getWidth() * xmod, FSkin.hdLogo.getHeight() * xmod);
         } else {
             g.drawImage(background, x, y, w, h);
         }
@@ -255,18 +271,22 @@ public class SplashScreen extends FContainer {
             btnAdventure.setFont(FSkinFont.get(22));
             btnHome.setBounds(btn_x, btn_y, btn_w, height);
             add(btnHome);
-            btnAdventure.setBounds(btn_x, btn_y+height+padding/2, btn_w, height);
+            btnAdventure.setBounds(btn_x, btn_y + height + padding / 2, btn_w, height);
             add(btnAdventure);
         }
     }
+
     private void showSplash(Graphics g, float alpha) {
         float oldAlpha = g.getfloatAlphaComposite();
         g.setAlphaComposite(alpha);
         drawDisclaimer(g);
         g.setAlphaComposite(oldAlpha);
     }
+
     void drawDisclaimer(Graphics g) {
-        if (background == null) { return; }
+        if (background == null) {
+            return;
+        }
         g.fillRect(Color.BLACK, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
         g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, getWidth(), getHeight());
 

@@ -2,6 +2,7 @@ package forge.adventure.util;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -19,6 +20,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.OrderedMap;
+import forge.Forge;
 import forge.adventure.data.UIData;
 
 /**
@@ -36,12 +38,9 @@ public class UIActor extends Group {
         for (OrderedMap<String, String> element : new Array.ArrayIterator<>(data.elements)) {
             String type = element.get("type");
             Actor newActor;
-            if(type==null)
-            {
-                newActor=new Actor();
-            }
-            else
-            {
+            if (type == null) {
+                newActor = new Actor();
+            } else {
                 switch (type) {
                     case "Selector":
                         newActor = new Selector();
@@ -49,35 +48,35 @@ public class UIActor extends Group {
                         break;
                     case "Label":
                         newActor = new Label("", Controls.GetSkin());
-                        readLabelProperties((Label) newActor,  new OrderedMap.OrderedMapEntries<>(element));
+                        readLabelProperties((Label) newActor, new OrderedMap.OrderedMapEntries<>(element));
                         break;
                     case "Table":
                         newActor = new Table(Controls.GetSkin());
-                        readTableProperties((Table) newActor,  new OrderedMap.OrderedMapEntries<>(element));
+                        readTableProperties((Table) newActor, new OrderedMap.OrderedMapEntries<>(element));
                         break;
                     case "Image":
                         newActor = new Image();
-                        readImageProperties((Image) newActor,  new OrderedMap.OrderedMapEntries<>(element));
+                        readImageProperties((Image) newActor, new OrderedMap.OrderedMapEntries<>(element));
                         break;
                     case "ImageButton":
                         newActor = new ImageButton(Controls.GetSkin());
-                        readImageButtonProperties((ImageButton) newActor,  new OrderedMap.OrderedMapEntries<>(element));
+                        readImageButtonProperties((ImageButton) newActor, new OrderedMap.OrderedMapEntries<>(element));
                         break;
                     case "Window":
                         newActor = new Window("", Controls.GetSkin());
-                        readWindowProperties((Window) newActor,  new OrderedMap.OrderedMapEntries<>(element));
+                        readWindowProperties((Window) newActor, new OrderedMap.OrderedMapEntries<>(element));
                         break;
                     case "TextButton":
                         newActor = new TextButton("", Controls.GetSkin());
-                        readButtonProperties((TextButton) newActor,  new OrderedMap.OrderedMapEntries<>(element));
+                        readButtonProperties((TextButton) newActor, new OrderedMap.OrderedMapEntries<>(element));
                         break;
                     case "TextField":
                         newActor = new TextField("", Controls.GetSkin());
-                        readTextFieldProperties((TextField) newActor,  new OrderedMap.OrderedMapEntries<>(element));
+                        readTextFieldProperties((TextField) newActor, new OrderedMap.OrderedMapEntries<>(element));
                         break;
                     case "Scroll":
                         newActor = new ScrollPane(null, Controls.GetSkin());
-                        readScrollPaneProperties((ScrollPane) newActor,  new OrderedMap.OrderedMapEntries<>(element));
+                        readScrollPaneProperties((ScrollPane) newActor, new OrderedMap.OrderedMapEntries<>(element));
                         break;
                     default:
                         throw new IllegalStateException("Unexpected value: " + type);
@@ -85,7 +84,7 @@ public class UIActor extends Group {
             }
             //load Actor Properties
             float yValue = 0;
-            for (ObjectMap.Entry property :  new OrderedMap.OrderedMapEntries<>(element)) {
+            for (ObjectMap.Entry property : new OrderedMap.OrderedMapEntries<>(element)) {
                 switch (property.key.toString()) {
                     case "width":
                         newActor.setWidth((Float) property.value);
@@ -112,7 +111,7 @@ public class UIActor extends Group {
     }
 
     private void readScrollPaneProperties(ScrollPane newActor, ObjectMap.Entries<String, String> entries) {
-        newActor.setActor(new Label("",Controls.GetSkin()));
+        newActor.setActor(new Label("", Controls.GetSkin()));
         for (ObjectMap.Entry property : entries) {
             switch (property.key.toString()) {
                 case "style":
@@ -121,6 +120,7 @@ public class UIActor extends Group {
             }
         }
     }
+
     private void readWindowProperties(Window newActor, ObjectMap.Entries<String, String> entries) {
         for (ObjectMap.Entry property : entries) {
             switch (property.key.toString()) {
@@ -196,7 +196,15 @@ public class UIActor extends Group {
         for (ObjectMap.Entry property : entries) {
             switch (property.key.toString()) {
                 case "image":
-                    newActor.setDrawable(new TextureRegionDrawable(new Texture(Config.instance().getFile(property.value.toString()))));
+                    Texture t = new Texture(Config.instance().getFile(property.value.toString()));
+                    TextureRegion tr = new TextureRegion(t);
+                    if (!Forge.isLandscapeMode() && t.toString().contains("title_bg.png")) {
+                        float ar = 1.78f;
+                        int w = (int) (tr.getRegionHeight() / ar);
+                        int x = (int) ((tr.getRegionWidth() - w) / ar);
+                        tr.setRegion(x, 0, w, tr.getRegionHeight());
+                    }
+                    newActor.setDrawable(new TextureRegionDrawable(tr));
                     break;
             }
         }
