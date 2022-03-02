@@ -2067,7 +2067,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     final ManaCost mc = this.getManaCost();
                     if (mc != ManaCost.NO_COST && mc.getFirstPhyrexianHybridPip() != null) {
                         String hybrid = mc.getFirstPhyrexianHybridPip().replaceAll("\\{", "")
-                                .replaceAll("}","");
+                                .replaceAll("\\}","");
                         String remText = inst.getReminderText();
                         String[] parts = hybrid.split("/");
                         remText = remText.replace("$0", hybrid).replace("$1", parts[1])
