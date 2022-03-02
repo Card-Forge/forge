@@ -11,6 +11,7 @@
     },
     {
       "type": "Scroll",
+      "name": "stats",
       "style": "paper",
       "x": 300,
       "y": 18,
@@ -35,6 +36,7 @@
     },
     {
       "type": "Image",
+      "name": "avatarBorder",
       "image": "ui/avatarhud.png",
       "x": 320,
       "y": 28,
@@ -61,6 +63,7 @@
     },
     {
       "type": "Label",
+      "name": "wins",
       "text": "Win:",
       "x": 330,
       "y": 114,
@@ -79,6 +82,7 @@
     },
     {
       "type": "Label",
+      "name": "loss",
       "text": "Loss:",
       "x": 330,
       "y": 134,
@@ -97,6 +101,7 @@
     },
     {
       "type": "Label",
+      "name": "winloss",
       "text": "Win Loss Ratio:",
       "x": 330,
       "y": 154,
@@ -115,6 +120,7 @@
     },
     {
       "type": "Image",
+      "name": "lifeIcon",
       "image": "ui/life.png",
       "x": 400,
       "y": 40,
@@ -123,6 +129,7 @@
     },
     {
       "type": "Image",
+      "name": "goldIcon",
       "image": "ui/money.png",
       "x": 400,
       "y": 60,

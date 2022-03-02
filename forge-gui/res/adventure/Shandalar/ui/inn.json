@@ -11,6 +11,7 @@
     },
     {
       "type": "Image",
+      "name": "healIcon",
       "image": "ui/heal.png",
       "x": 60,
       "y": 85,
@@ -28,6 +29,7 @@
     },
     {
       "type": "Image",
+      "name": "sellIcon",
       "image": "ui/sell.png",
       "x": 190,
       "y": 85,
@@ -45,6 +47,7 @@
     },
     {
       "type": "Image",
+      "name": "leaveIcon",
       "image": "ui/leave.png",
       "x": 320,
       "y": 85,

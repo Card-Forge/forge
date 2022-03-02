@@ -11,6 +11,7 @@
     },
     {
       "type": "Scroll",
+      "name" : "scroll",
       "style": "paper",
       "x": 10,
       "y": 10,
@@ -19,6 +20,7 @@
     },
     {
       "type": "Label",
+      "name" : "titleL",
       "text": "Create a Character",
       "width": 128,
       "height": 32,
@@ -28,51 +30,63 @@
     },
     {
       "type": "Label",
+      "name" : "avatarL",
       "text": "Avatar:",
       "width": 128,
       "height": 32,
+      "font" : "black",
       "x": 16,
-      "y": 64
+      "y": 58
     },
     {
       "type": "Label",
+      "name" : "nameL",
       "text": "Name:",
       "width": 128,
       "height": 32,
+      "font" : "black",
       "x": 16,
-      "y": 96
+      "y": 90
     },
     {
       "type": "Label",
+      "name" : "raceL",
       "text": "Race:",
       "width": 128,
       "height": 32,
+      "font" : "black",
       "x": 16,
-      "y": 128
+      "y": 124
     },
     {
       "type": "Label",
+      "name" : "genderL",
       "text": "Gender:",
       "width": 128,
       "height": 32,
+      "font" : "black",
       "x": 16,
-      "y": 160
+      "y": 154
     },
     {
       "type": "Label",
+      "name" : "difficultyL",
       "text": "Difficulty:",
       "width": 128,
       "height": 32,
+      "font" : "black",
       "x": 16,
-      "y": 192
+      "y": 186
     },
     {
       "type": "Label",
+      "name" : "deckL",
       "text": "Deck:",
       "width": 128,
       "height": 32,
+      "font" : "black",
       "x": 16,
-      "y": 224
+      "y": 218
     },
     {
       "type": "ImageButton",
@@ -147,7 +161,7 @@
       "width": 38,
       "height": 16,
       "x": 352,
-      "y": 240
+      "y": 251
     },
     {
       "type": "TextButton",
@@ -156,7 +170,7 @@
       "width": 38,
       "height": 16,
       "x": 416,
-      "y": 240
+      "y": 251
     }
   ]
 }

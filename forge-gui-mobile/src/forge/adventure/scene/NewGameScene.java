@@ -5,6 +5,10 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
@@ -15,7 +19,6 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Selector;
 import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
-import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -36,9 +39,13 @@ public class NewGameScene extends UIScene {
     private Selector deck;
     private Selector gender;
     private Selector difficulty;
+    private ScrollPane scrollPane;
+    private Label titleL, avatarL, nameL, raceL, genderL, difficultyL, deckL;
+    private ImageButton leftArrow, rightArrow;
+    private TextButton backButton, startButton;
 
     public NewGameScene() {
-        super(GuiBase.isAndroid() ? "ui/new_game_mobile.json" : "ui/new_game.json");
+        super(Forge.isLandscapeMode() ? "ui/new_game_mobile.json" : "ui/new_game.json");
     }
 
     public boolean start() {
@@ -144,6 +151,76 @@ public class NewGameScene extends UIScene {
             }
         });
 
+        scrollPane = ui.findActor("scroll");
+        titleL = ui.findActor("titleL");
+        avatarL = ui.findActor("avatarL");
+        nameL = ui.findActor("nameL");
+        raceL = ui.findActor("raceL");
+        genderL = ui.findActor("genderL");
+        difficultyL = ui.findActor("difficultyL");
+        deckL = ui.findActor("deckL");
+        leftArrow = ui.findActor("leftAvatar");
+        rightArrow = ui.findActor("rightAvatar");
+        backButton = ui.findActor("back");
+        startButton = ui.findActor("start");
+        if (!Forge.isLandscapeMode()) {
+            float w = Scene.GetIntendedWidth();
+            float sW = w - 20;
+            float oX = w/2 - sW/2;
+            float h = Scene.GetIntendedHeight();
+            float sH = (h - 10)/12;
+
+            selectedName.setWidth(280);
+            selectedName.setX(w/2- selectedName.getWidth()/2);
+            nameL.setFontScaleX(2);
+
+            titleL.setFontScaleX(2);
+            titleL.setX(selectedName.getX()-20);
+
+            avatarImage.setScaleX(2);
+            avatarImage.setX(w/2-avatarImage.getWidth());
+
+            leftArrow.getImage().setScaleX(2);
+            leftArrow.setX(selectedName.getX());
+            rightArrow.getImage().setScaleX(2);
+            rightArrow.setX(selectedName.getRight()-(rightArrow.getWidth()*2));
+
+            avatarL.setFontScaleX(2);
+
+            race.setScaleX(2);
+            race.setWidth(140);
+            race.setX(selectedName.getX());
+            raceL.setFontScaleX(2);
+
+            gender.setScaleX(2);
+            gender.setWidth(140);
+            gender.setX(selectedName.getX());
+            genderL.setFontScaleX(2);
+
+            difficulty.setScaleX(2);
+            difficulty.setWidth(140);
+            difficulty.setX(selectedName.getX());
+            difficultyL.setFontScaleX(2);
+
+            deck.setScaleX(2);
+            deck.setWidth(140);
+            deck.setX(selectedName.getX());
+            deckL.setFontScaleX(2);
+
+            scrollPane.setWidth(sW);
+            scrollPane.setHeight(sH*11);
+            scrollPane.setX(oX);
+
+            float bW = w - 165;
+            float bX = w/2 - bW/2;
+            backButton.setWidth(bW/2);
+            backButton.setHeight(20);
+            backButton.setX(bX);
+            startButton.setWidth(bW/2);
+            startButton.setHeight(20);
+            startButton.setX(backButton.getRight());
+
+        }
         updateAvatar();
     }
 

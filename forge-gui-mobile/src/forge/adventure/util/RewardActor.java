@@ -291,15 +291,16 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     class HoldTooltip extends ActorGestureListener {
         Image tooltip_image;
         Table tooltip_actor;
+        float height;
         //Vector2 tmp = new Vector2();
 
         public HoldTooltip(Image tooltip_image) {
             this.tooltip_image = tooltip_image;
-
             tooltip_actor = new Table();
             tooltip_actor.add(this.tooltip_image);
             tooltip_actor.align(Align.center);
             tooltip_actor.setSize(this.tooltip_image.getPrefWidth(), this.tooltip_image.getPrefHeight());
+            this.height = tooltip_actor.getHeight();
 
             getGestureDetector().setLongPressSeconds(0.1f);
         }
@@ -311,6 +312,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             if (tooltip_actor.getX() + tooltip_actor.getWidth() > 480)
                 tooltip_actor.setX(actor.getX() - tooltip_actor.getWidth());
             tooltip_actor.setY(270 / 2 - tooltip_actor.getHeight() / 2);
+            if (!Forge.isLandscapeMode()) {
+                float h = height * 0.75f;
+                tooltip_actor.setX(480/2 - tooltip_actor.getWidth() /2);
+                tooltip_actor.setHeight(h);
+                tooltip_actor.setY(270/2 - h/2);
+            }
             //tooltip_actor.setX(480/2 - tooltip_actor.getWidth()/2); //480 hud width
             //tooltip_actor.setY(270/2-tooltip_actor.getHeight()/2); //270 hud height
             actor.getStage().addActor(tooltip_actor);

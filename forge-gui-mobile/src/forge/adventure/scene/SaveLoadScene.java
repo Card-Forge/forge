@@ -20,7 +20,6 @@ import forge.Forge;
 import forge.adventure.util.Controls;
 import forge.adventure.world.WorldSave;
 import forge.adventure.world.WorldSaveHeader;
-import forge.gui.GuiBase;
 import forge.screens.TransitionScreen;
 
 import java.io.File;
@@ -44,12 +43,12 @@ public class SaveLoadScene extends UIScene {
     int currentSlot = -3;
     Image previewImage;
     Image previewBorder;
-    TextButton saveLoadButton;
+    TextButton saveLoadButton, back;
     TextButton quickSave;
     TextButton autoSave;
 
     public SaveLoadScene() {
-        super(GuiBase.isAndroid() ? "ui/save_load_mobile.json" : "ui/save_load.json");
+        super(Forge.isLandscapeMode() ? "ui/save_load_mobile.json" : "ui/save_load.json");
     }
 
 
@@ -207,24 +206,43 @@ public class SaveLoadScene extends UIScene {
         stage.addActor(layout);
         dialog = Controls.newDialog("Save");
         textInput = Controls.newTextField("");
-        dialog.getButtonTable().add(Controls.newLabel("Name your new save file.")).colspan(2);
-        dialog.getButtonTable().row();
-        dialog.getButtonTable().add(Controls.newLabel("Name:")).align(Align.left);
-        dialog.getButtonTable().add(textInput).fillX().expandX();
-        dialog.getButtonTable().row();
-        dialog.getButtonTable().add(Controls.newTextButton("Save", new Runnable() {
-            @Override
-            public void run() {
-                SaveLoadScene.this.save();
-            }
-        })).align(Align.left);
-        dialog.getButtonTable().add(Controls.newTextButton("Abort", new Runnable() {
-            @Override
-            public void run() {
-                SaveLoadScene.this.saveAbort();
-            }
-        })).align(Align.left);
-
+        if (!Forge.isLandscapeMode()) {
+            dialog.getButtonTable().add(Controls.newLabel("Name your new save file.")).colspan(2).pad(2, 15, 2, 15);
+            dialog.getButtonTable().row();
+            dialog.getButtonTable().add(Controls.newLabel("Name:")).align(Align.left).pad(2, 15, 2, 2);
+            dialog.getButtonTable().add(textInput).fillX().expandX().padRight(15);
+            dialog.getButtonTable().row();
+            dialog.getButtonTable().add(Controls.newTextButton("Save", new Runnable() {
+                @Override
+                public void run() {
+                    SaveLoadScene.this.save();
+                }
+            })).align(Align.left).padLeft(15);
+            dialog.getButtonTable().add(Controls.newTextButton("Abort", new Runnable() {
+                @Override
+                public void run() {
+                    SaveLoadScene.this.saveAbort();
+                }
+            })).align(Align.right).padRight(15);
+        } else {
+            dialog.getButtonTable().add(Controls.newLabel("Name your new save file.")).colspan(2);
+            dialog.getButtonTable().row();
+            dialog.getButtonTable().add(Controls.newLabel("Name:")).align(Align.left);
+            dialog.getButtonTable().add(textInput).fillX().expandX();
+            dialog.getButtonTable().row();
+            dialog.getButtonTable().add(Controls.newTextButton("Save", new Runnable() {
+                @Override
+                public void run() {
+                    SaveLoadScene.this.save();
+                }
+            })).align(Align.left);
+            dialog.getButtonTable().add(Controls.newTextButton("Abort", new Runnable() {
+                @Override
+                public void run() {
+                    SaveLoadScene.this.saveAbort();
+                }
+            })).align(Align.right);
+        }
         previewImage = ui.findActor("preview");
         previewBorder = ui.findActor("preview_border");
         header = Controls.newLabel("Save");
@@ -244,6 +262,7 @@ public class SaveLoadScene extends UIScene {
                 SaveLoadScene.this.loadSave();
             }
         });
+        back = ui.findActor("return");
         ui.onButtonPress("return", new Runnable() {
             @Override
             public void run() {
@@ -255,5 +274,25 @@ public class SaveLoadScene extends UIScene {
 
         ScrollPane scrollPane = ui.findActor("saveSlots");
         scrollPane.setActor(layout);
+        if (!Forge.isLandscapeMode()) {
+            float w = Scene.GetIntendedWidth();
+            float sW = w - 20;
+            float oX = w/2 - sW/2;
+            float h = Scene.GetIntendedHeight();
+            float sH = (h - 10)/12;
+            scrollPane.setWidth(sW);
+            scrollPane.setHeight(sH*11);
+            scrollPane.setX(oX);
+            previewImage.setScaleX(1.5f);
+            previewImage.setScaleY(0.9f);
+            float bW = w - 165;
+            float bX = w/2 - bW/2;
+            back.setWidth(bW/2);
+            back.setHeight(20);
+            back.setX(bX);
+            saveLoadButton.setWidth(bW/2);
+            saveLoadButton.setHeight(20);
+            saveLoadButton.setX(back.getRight());
+        }
     }
 }

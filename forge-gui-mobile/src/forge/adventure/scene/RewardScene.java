@@ -18,7 +18,6 @@ import forge.adventure.util.Reward;
 import forge.adventure.util.RewardActor;
 import forge.adventure.world.WorldSave;
 import forge.assets.ImageCache;
-import forge.gui.GuiBase;
 
 /**
  * Displays the rewards of a fight or a treasure
@@ -34,12 +33,12 @@ public class RewardScene extends UIScene {
 
     Type type;
     Array<Actor> generated = new Array<>();
-    static public final float CARD_WIDTH = 550f;
-    static public final float CARD_HEIGHT = 400f;
+    static public final float CARD_WIDTH = Forge.isLandscapeMode() ? 550f : 200f;
+    static public final float CARD_HEIGHT = Forge.isLandscapeMode() ? 400f : 300f;
     static public final float CARD_WIDTH_TO_HEIGHT = CARD_WIDTH / CARD_HEIGHT;
 
     public RewardScene() {
-        super(GuiBase.isAndroid() ? "ui/items_mobile.json" : "ui/items.json");
+        super(Forge.isLandscapeMode() ? "ui/items_mobile.json" : "ui/items.json");
     }
 
     boolean doneClicked = false;
@@ -145,10 +144,10 @@ public class RewardScene extends UIScene {
 
         switch (type) {
             case Shop:
-                doneButton.setText("Return");
+                doneButton.setText("Leave");
                 break;
             case Loot:
-                doneButton.setText("Take all");
+                doneButton.setText("Done");
                 break;
         }
         for (int h = 1; h < targetHeight; h++) {
@@ -159,6 +158,7 @@ public class RewardScene extends UIScene {
             //cardHeight=targetHeight/i;
             cardWidth = h / CARD_WIDTH_TO_HEIGHT;
             newArea = newRewards.size * cardWidth * cardHeight;
+
             int rows = (int) (targetHeight / cardHeight);
             int cols = (int) Math.ceil(newRewards.size / (double) rows);
             if (newArea > oldCardArea && newArea <= targetArea && rows * cardHeight < targetHeight && cols * cardWidth < targetWidth) {
@@ -169,11 +169,12 @@ public class RewardScene extends UIScene {
             }
         }
 
-        cardHeight = bestCardHeight;
+        cardHeight = Forge.isLandscapeMode() ? bestCardHeight : bestCardHeight * 0.75f;
         cardWidth = bestCardHeight / CARD_WIDTH_TO_HEIGHT;
 
         yOff += (targetHeight - (cardHeight * numberOfRows)) / 2f;
         xOff += (targetWidth - (cardWidth * numberOfColumns)) / 2f;
+
         float spacing = 2;
         int i = 0;
         for (Reward reward : new Array.ArrayIterator<>(newRewards)) {
@@ -245,7 +246,7 @@ public class RewardScene extends UIScene {
             setX(actor.getX());
             setY(actor.getY() - getHeight());
             price = CardUtil.getCardPrice(actor.getReward().getCard());
-            setText("Buy for " + price);
+            setText("$ " + price);
             addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {

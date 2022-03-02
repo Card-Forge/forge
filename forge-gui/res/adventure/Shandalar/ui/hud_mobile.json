@@ -31,6 +31,15 @@
     },
     {
       "type": "Image",
+      "name": "blank",
+      "image": "ui/blank.png",
+      "width": 46,
+      "height": 46,
+      "x": 425,
+      "y": 10
+    },
+    {
+      "type": "Image",
       "name": "avatar",
       "width": 46,
       "height": 46,
