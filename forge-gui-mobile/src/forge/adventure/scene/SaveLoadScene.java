@@ -40,7 +40,7 @@ public class SaveLoadScene extends UIScene {
     Dialog dialog;
     TextField textInput;
     Label header;
-    int currentSlot = -3;
+    int currentSlot = -3, lastSelectedSlot = 0;
     Image previewImage;
     Image previewBorder;
     TextButton saveLoadButton, back;
@@ -79,7 +79,8 @@ public class SaveLoadScene extends UIScene {
 
     public boolean select(int slot) {
         currentSlot = slot;
-
+        if (slot > 0)
+            lastSelectedSlot = slot;
         if (previews.containsKey(slot)) {
             WorldSaveHeader header = previews.get(slot);
             if (header.preview != null) {
@@ -104,9 +105,12 @@ public class SaveLoadScene extends UIScene {
 
     public void loadSave() {
         if (save) {
-            textInput.setText(buttons.get(currentSlot).getText().toString());
-            dialog.show(stage);
-            stage.setKeyboardFocus(textInput);
+            if (currentSlot > 0) {
+                //prevent NPE, allowed saveslot is 1 to 10..
+                textInput.setText(buttons.get(currentSlot).getText().toString());
+                dialog.show(stage);
+                stage.setKeyboardFocus(textInput);
+            }
         } else {
             if (WorldSave.load(currentSlot)) {
                 Forge.setTransitionScreen(new TransitionScreen(new Runnable() {
@@ -193,7 +197,10 @@ public class SaveLoadScene extends UIScene {
 
     @Override
     public void enter() {
-        select(-3);
+        if (lastSelectedSlot > 0)
+            select(lastSelectedSlot);
+        else
+            select(-3);
         updateFiles();
         super.enter();
     }
@@ -283,8 +290,9 @@ public class SaveLoadScene extends UIScene {
             scrollPane.setWidth(sW);
             scrollPane.setHeight(sH*11);
             scrollPane.setX(oX);
-            previewImage.setScaleX(1.5f);
-            previewImage.setScaleY(0.9f);
+            previewImage.setScale(1, 1.2f);
+            previewImage.setX(scrollPane.getRight()-105);
+            previewImage.setY(scrollPane.getTop()-71);
             float bW = w - 165;
             float bX = w/2 - bW/2;
             back.setWidth(bW/2);
