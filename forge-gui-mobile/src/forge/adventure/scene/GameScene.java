@@ -11,7 +11,7 @@ import forge.adventure.stage.WorldStage;
  * does render the WorldStage and HUD
  */
 public class GameScene extends HudScene {
-    private float cameraWidth, cameraHeight;
+    private float cameraWidth = 0f, cameraHeight = 0f;
 
     public GameScene() {
         super(WorldStage.getInstance());
@@ -44,8 +44,10 @@ public class GameScene extends HudScene {
     @Override
     public void resLoaded() {
         //set initial camera width and height
-        cameraWidth = stage.getCamera().viewportWidth;
-        cameraHeight = stage.getCamera().viewportHeight;
+        if (cameraWidth == 0f)
+            cameraWidth = stage.getCamera().viewportWidth;
+        if (cameraHeight == 0f)
+            cameraHeight = stage.getCamera().viewportHeight;
     }
 
     @Override
