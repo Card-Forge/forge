@@ -86,6 +86,8 @@ public class GameHUD extends Stage {
         //create touchpad
         touchpad = new Touchpad(10, touchpadStyle);
         touchpad.setBounds(15, 15, TOUCHPAD_SCALE, TOUCHPAD_SCALE);
+        if (!Forge.isLandscapeMode())
+            touchpad.getColor().a = 0.01f; //can't scale image on portrait..
         touchpad.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {

@@ -232,7 +232,7 @@ public abstract class GameStage extends Stage {
             touchY = screenY;
         }
 
-        return false;
+        return true;
     }
 
     @Override

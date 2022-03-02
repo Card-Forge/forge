@@ -600,7 +600,7 @@ public class Forge implements ApplicationListener {
         final Localizer localizer = Localizer.getInstance();
         final List<String> options = new ArrayList<>();
         options.add(localizer.getMessage("lblExit"));
-        options.add(localizer.getMessageorUseDefault("lblAdventureMode", "Adventure Mode"));
+        options.add(localizer.getMessage("lblAdventure"));
         options.add(localizer.getMessage("lblCancel"));
 
         Callback<Integer> callback = new Callback<Integer>() {
