@@ -94,7 +94,9 @@ public class SplashScreen extends FContainer {
         private float progress = 0;
         private boolean finished, openAdventure;
         //for transition image only...
-        Texture transition_bg = new Texture(GuiBase.isAndroid() ? Gdx.files.internal("fallback_skin").child("title_bg_lq.png") : Gdx.files.classpath("fallback_skin").child("title_bg_lq.png"));
+        TextureRegion transition_bg = new TextureRegion(new Texture(GuiBase.isAndroid()
+                ? Gdx.files.internal("fallback_skin").child("title_bg_lq.png")
+                : Gdx.files.classpath("fallback_skin").child("title_bg_lq.png")));
 
         public void drawBackground(Graphics g) {
             float percentage = progress / DURATION;
@@ -169,7 +171,10 @@ public class SplashScreen extends FContainer {
         bgAnimation.start();
         bgAnimation.drawBackground(g);
     }
-    void drawTransition(Graphics g, Texture bg, boolean openAdventure, float percentage) {
+    void drawTransition(Graphics g, TextureRegion bg, boolean openAdventure, float percentage) {
+        if (!Forge.isLandscapeMode()) {
+            bg.setRegion(bg.getTexture().getWidth()/2 - Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight(), Gdx.graphics.getWidth(), -Gdx.graphics.getHeight());
+        }
         float oldAlpha = g.getfloatAlphaComposite();
         g.setAlphaComposite(percentage);
         if (openAdventure) {

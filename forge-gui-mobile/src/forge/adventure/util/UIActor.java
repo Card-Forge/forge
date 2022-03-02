@@ -1,7 +1,9 @@
 package forge.adventure.util;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -19,6 +21,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.OrderedMap;
+import forge.Forge;
 import forge.adventure.data.UIData;
 
 /**
@@ -196,7 +199,12 @@ public class UIActor extends Group {
         for (ObjectMap.Entry property : entries) {
             switch (property.key.toString()) {
                 case "image":
-                    newActor.setDrawable(new TextureRegionDrawable(new Texture(Config.instance().getFile(property.value.toString()))));
+                    Texture t = new Texture(Config.instance().getFile(property.value.toString()));
+                    TextureRegion tr = new TextureRegion(t);
+                    if (!Forge.isLandscapeMode() && t.toString().contains("title_bg.png")) {
+                        tr.setRegion(t.getWidth()/2 - Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight(), Gdx.graphics.getWidth(), -Gdx.graphics.getHeight());
+                    }
+                    newActor.setDrawable(new TextureRegionDrawable(tr));
                     break;
             }
         }
