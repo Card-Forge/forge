@@ -1753,7 +1753,7 @@ public class AbilityUtils {
                         // ImmediateTrigger should check for the Ability which created the trigger
                         if (t.getSpawningAbility() != null) {
                             root = t.getSpawningAbility().getRootAbility();
-                            return doXMath(root.getXManaCostPaid(), expr, c, ctb);
+                            return doXMath(root.getXManaCostPaid() == null ? 0 : root.getXManaCostPaid(), expr, c, ctb);
                         }
 
                         // 107.3k If an object’s enters-the-battlefield triggered ability or replacement effect refers to X,
