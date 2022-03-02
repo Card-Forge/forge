@@ -1829,7 +1829,7 @@ public class CardFactoryUtil {
             playTrig.append(" | TriggerDescription$ When the last time counter is removed from this card, if it's exiled, play it without paying its mana cost if able.  ");
             playTrig.append("If you can't, it remains exiled. If you cast a creature spell this way, it gains haste until you lose control of the spell or the permanent it becomes.");
 
-            String abPlay = "DB$ Play | Defined$ Self | WithoutManaCost$ True | SuspendCast$ True";
+            String abPlay = "DB$ Play | Defined$ Self | WithoutManaCost$ True";
             if (card.isPermanent()) {
                 abPlay += "| RememberPlayed$ True";
             }
