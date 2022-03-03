@@ -1,6 +1,6 @@
 Name:Djinn Token
-Types:Artifact Creature Djinn
 ManaCost:no cost
-K:Flying
+Types:Artifact Creature Djinn
 PT:5/5
+K:Flying
 Oracle:Flying

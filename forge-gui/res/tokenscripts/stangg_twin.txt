@@ -1,6 +1,6 @@
 Name:Stangg Twin
-Types:Legendary Creature Human Warrior
-Colors:red,green
 ManaCost:no cost
+Colors:red,green
+Types:Legendary Creature Human Warrior
 PT:3/4
 Oracle:

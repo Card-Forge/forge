@@ -1,7 +1,7 @@
 Name:Smoke Blessing
 ManaCost:no cost
 Colors:red
-Types:Aura Enchantment
+Types:Enchantment Aura
 K:Enchant creature
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.EnchantedBy | Execute$ TrigDamage | TriggerDescription$ When enchanted creature dies, it deals 1 damage to its controller and you create a Treasure token.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredCardController | DamageSource$ TriggeredCard | NumDmg$ 1 | SubAbility$ DBTreasure

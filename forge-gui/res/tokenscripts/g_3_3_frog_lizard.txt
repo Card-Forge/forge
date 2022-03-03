@@ -1,6 +1,6 @@
 Name:Frog Lizard Token
-Colors:green
 ManaCost:no cost
-PT:3/3
+Colors:green
 Types:Creature Frog Lizard
+PT:3/3
 Oracle:

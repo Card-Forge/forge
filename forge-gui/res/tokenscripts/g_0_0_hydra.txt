@@ -1,6 +1,6 @@
 Name:Hydra Token
-Colors:green
 ManaCost:no cost
-PT:0/0
+Colors:green
 Types:Creature Hydra
+PT:0/0
 Oracle:

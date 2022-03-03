@@ -1,7 +1,7 @@
 Name:Wurm Token
-Colors:green
 ManaCost:no cost
-PT:5/5
+Colors:green
 Types:Creature Wurm
+PT:5/5
 K:Trample
 Oracle:Trample

@@ -1,6 +1,0 @@
-Name:Rabid Sheep Token
-ManaCost:no cost
-PT:2/2
-Colors:green
-Types:Creature Sheep
-Oracle:

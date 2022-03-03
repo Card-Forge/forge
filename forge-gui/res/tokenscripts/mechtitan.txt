@@ -1,7 +1,7 @@
 Name:Mechtitan
 ManaCost:no cost
 Colors:all
-Types:Legendary Construct Artifact Creature
+Types:Legendary Artifact Creature Construct
 PT:10/10
 K:Flying
 K:Vigilance
