@@ -998,10 +998,7 @@ public class DamageDealAi extends DamageAiBase {
         String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
 
         // detect the top ability that actually targets in Drain Life and Soul Burn scripts
-        SpellAbility saTgt = sa;
-        while (saTgt.getParent() != null) {
-            saTgt = saTgt.getParent();
-        }
+        SpellAbility saTgt = sa.getRootAbility();
 
         Player opponent = ai.getWeakestOpponent();
 
