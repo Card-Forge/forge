@@ -53,7 +53,6 @@ import forge.game.cost.CostPartMana;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
-import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
@@ -1148,9 +1147,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt /* ai needs hints as well */, ManaConversionMatrix matrix, boolean effect) {
-        // TODO Auto-generated method stub
-        ManaCostBeingPaid cost = !effect ? ComputerUtilMana.calculateManaCost(sa, false, 0) : new ManaCostBeingPaid(toPay);
-        return ComputerUtilMana.payManaCost(cost, sa, player, effect);
+        return ComputerUtilMana.payManaCost(player, sa, effect);
     }
 
     @Override
