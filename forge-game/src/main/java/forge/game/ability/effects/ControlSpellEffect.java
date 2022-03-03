@@ -41,7 +41,6 @@ public class ControlSpellEffect extends SpellAbilityEffect {
         return sb.toString();
     }
 
-
     @Override
     public void resolve(SpellAbility sa) {
         // Gaining Control of Spells is a permanent effect
@@ -98,8 +97,10 @@ public class ControlSpellEffect extends SpellAbilityEffect {
             if (remember) {
                 source.addRemembered(tgtC);
             }
+            if (tgtC.getController() != newController) {
+                tgtC.runChangeControllerCommands();
+            }
             tgtC.addTempController(newController, tStamp);
-            tgtC.runChangeControllerCommands();
             si.setActivatingPlayer(newController);
         }
     }
