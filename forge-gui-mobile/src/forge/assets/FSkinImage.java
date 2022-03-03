@@ -352,6 +352,8 @@ public enum FSkinImage implements FImage {
     HDSTAR_OUTLINE  (FSkinProp.IMG_HDSTAR_OUTLINE, SourceFile.BUTTONS),
     STAR_FILLED     (FSkinProp.IMG_STAR_FILLED, SourceFile.ICONS),
     HDSTAR_FILLED   (FSkinProp.IMG_HDSTAR_FILLED, SourceFile.BUTTONS),
+    AI_ACTIVE       (FSkinProp.IMG_AI_ACTIVE, SourceFile.ICONS),
+    AI_INACTIVE     (FSkinProp.IMG_AI_INACTIVE, SourceFile.ICONS),
 
     ARTIFACT        (FSkinProp.IMG_ARTIFACT, SourceFile.MANAICONS),
     CREATURE        (FSkinProp.IMG_CREATURE, SourceFile.MANAICONS),

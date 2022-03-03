@@ -324,6 +324,8 @@ public enum FSkinProp {
     IMG_HDSTAR_OUTLINE  (new int[] {391, 1308, 64, 64}, PropType.BUTTONS),
     IMG_STAR_FILLED     (new int[] {660, 460, 20, 20}, PropType.IMAGE),
     IMG_HDSTAR_FILLED   (new int[] {391, 1440, 64, 64}, PropType.BUTTONS),
+    IMG_AI_ACTIVE       (new int[] {145, 247, 60, 60}, PropType.IMAGE),
+    IMG_AI_INACTIVE     (new int[] {85, 247, 60, 60}, PropType.IMAGE),
 
     IMG_ARTIFACT        (new int[] {412, 658, 80, 80}, PropType.MANAICONS),
     IMG_CREATURE        (new int[] {2, 740, 80, 80}, PropType.MANAICONS),
