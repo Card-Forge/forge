@@ -132,13 +132,12 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                     g.drawImage(DeckPreferences.getPrefs(deck).getStarCount() > 0 ? FSkinImage.STAR_FILLED : FSkinImage.STAR_OUTLINE, x, y, IMAGE_SIZE, IMAGE_SIZE);
 
                 x += IMAGE_SIZE + FList.PADDING;
+                //AI Icon
+                g.drawImage(deck.getAI().inMainDeck == 0 ? FSkinImage.AI_ACTIVE : FSkinImage.AI_INACTIVE, x, y, IMAGE_SIZE, IMAGE_SIZE);
+                x += IMAGE_SIZE + FList.PADDING;
                 ColorSet deckColor = deck.getColor();
                 float availableNameWidth = w - CardFaceSymbols.getWidth(deckColor, IMAGE_SIZE) - IMAGE_SIZE - 2 * FList.PADDING;
-                if (deck.getAI().inMainDeck == 0) {
-                    g.drawOutlinedText("AI", font, Color.GREEN, Color.BLACK, x, y, w, IMAGE_SIZE, true, Align.left, true, false);
-                    x += IMAGE_SIZE + FList.PADDING;
-                    availableNameWidth -= IMAGE_SIZE + FList.PADDING;
-                }
+                availableNameWidth -= IMAGE_SIZE + FList.PADDING;
                 String name = deck.getName();
                 if (!deck.getPath().isEmpty()) { //render path after name if needed
                     name += " (" + deck.getPath().substring(1) + ")";
