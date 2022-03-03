@@ -2,7 +2,6 @@ package forge.itemmanager;
 
 import java.util.Map.Entry;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
