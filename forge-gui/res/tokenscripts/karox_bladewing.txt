@@ -1,7 +1,7 @@
 Name:Karox Bladewing
-Types:Legendary Creature Dragon
-Colors:red
 ManaCost:no cost
+Colors:red
+Types:Legendary Creature Dragon
 PT:4/4
 K:Flying
 Oracle:Flying

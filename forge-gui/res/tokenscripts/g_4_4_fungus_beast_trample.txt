@@ -1,7 +1,7 @@
 Name:Fungus Beast Token
-Colors:green
 ManaCost:no cost
-PT:4/4
+Colors:green
 Types:Creature Fungus Beast
+PT:4/4
 K:Trample
 Oracle:Trample

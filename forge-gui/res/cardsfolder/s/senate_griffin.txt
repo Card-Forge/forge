@@ -1,5 +1,5 @@
 Name:Senate Griffin
-ManaCost:2 UW UW
+ManaCost:2 WU WU
 Types:Creature Griffin
 PT:3/2
 K:Flying

@@ -1,6 +1,6 @@
 Name:Elemental Token
-Colors:red
 ManaCost:no cost
-PT:*/*
+Colors:red
 Types:Creature Elemental
+PT:*/*
 Oracle:

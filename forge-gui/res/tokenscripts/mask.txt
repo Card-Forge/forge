@@ -1,7 +1,7 @@
 Name:Mask
-Types:Enchantment Aura
-Colors:white
 ManaCost:no cost
+Colors:white
+Types:Enchantment Aura
 K:Enchant permanent
 K:Totem armor
 A:SP$ Attach | Cost$ 0 | ValidTgts$ Permanent | AILogic$ Pump

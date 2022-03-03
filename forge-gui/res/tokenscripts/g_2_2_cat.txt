@@ -1,6 +1,6 @@
 Name:Cat Token
-Colors:green
 ManaCost:no cost
-PT:2/2
+Colors:green
 Types:Creature Cat
+PT:2/2
 Oracle:

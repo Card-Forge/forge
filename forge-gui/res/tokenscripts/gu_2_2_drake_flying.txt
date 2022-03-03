@@ -1,7 +1,7 @@
 Name:Drake Token
-Colors:green,blue
 ManaCost:no cost
-PT:2/2
+Colors:green,blue
 Types:Creature Drake
+PT:2/2
 K:Flying
 Oracle:Flying

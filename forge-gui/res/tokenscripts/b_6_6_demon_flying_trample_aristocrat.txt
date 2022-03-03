@@ -6,7 +6,7 @@ PT:6/6
 K:Flying
 K:Trample
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DemonTrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice another creature. If you can't, this creature deals 6 damage to you.
-SVar:DemonTrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature.Other | SubAbility$ DemonDBDamage | RememberSacrificed$ True | 
+SVar:DemonTrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature.Other | SubAbility$ DemonDBDamage | RememberSacrificed$ True
 SVar:DemonDBDamage:DB$ DealDamage | Defined$ You | NumDmg$ 6 | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DemonDBCleanup
 SVar:DemonDBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount

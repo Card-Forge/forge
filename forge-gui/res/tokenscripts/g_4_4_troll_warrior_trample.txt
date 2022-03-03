@@ -1,7 +1,7 @@
 Name:Troll Warrior Token
-Colors:green
 ManaCost:no cost
-PT:4/4
+Colors:green
 Types:Creature Troll Warrior
+PT:4/4
 K:Trample
 Oracle:Trample
