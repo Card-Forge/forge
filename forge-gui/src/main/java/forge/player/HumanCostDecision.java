@@ -599,7 +599,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return inp.hasCancelled() ? null : PaymentDecision.card(inp.getSelected());
         }
 
-        if (cost.sameZone){
+        if (cost.sameZone) {
             final FCollectionView<Player> players = player.getGame().getPlayers();
             final List<Player> payableZone = new ArrayList<>();
             for (final Player p : players) {
