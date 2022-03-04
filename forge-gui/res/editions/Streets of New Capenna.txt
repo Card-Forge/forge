@@ -1,0 +1,37 @@
+[metadata]
+Code=SNC
+Date=2022-04-29
+Name=Streets of New Capenna
+Code2=SNC
+MciCode=snc
+Type=Expansion
+ScryfallCode=SNC
+
+[cards]
+170 R Broker's Ascendancy @Dallas Williams
+250 R Jetmir's Garden @Kasia 'Kafis' Zielińska
+254 R Raffine's Tower @Sam White
+257 R Spara's Headquarters @Kieran Yanner
+260 R Xander's Lounge @James Paick
+261 R Ziatora's Proving Ground @Viko Menezes
+272 L Plains @Elektrodeko
+273 L Plains @Olga Tereshenko
+274 L Island @Matteo Bassini
+275 L Island @W.Flemming
+276 L Swamp @Matteo Bassini
+277 L Swamp @Zoran Cardula
+278 L Mountain @Zbigniew M. Bielak
+279 L Mountain @Ann-Sophie De Steur
+280 L Forest @Matteo Bassini
+281 L Forest @W.Flemming
+291 R Jetmir's Garden @Dominik Mayer
+292 R Raffine's Tower @Dominik Mayer
+293 R Spara's Headquarters @Dominik Mayer
+294 R Xander's Lounge @Dominik Mayer
+295 R Ziatora's Proving Ground @Dominik Mayer
+297 R Broker's Ascendancy @Shawn Pagels
+351 R Jetmir's Garden @BEMOCS
+353 R Raffine's Tower @Elektrodeko
+355 R Spara's Headquarters @W.Flemming
+358 R Xander's Lounge @Véronique Meignaud
+359 R Ziatora's Proving Ground @Elektrodeko
