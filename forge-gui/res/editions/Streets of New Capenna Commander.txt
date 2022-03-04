@@ -1,0 +1,8 @@
+[metadata]
+Code=NCC
+Date=2022-04-29
+Name=Streets of New Capenna Commander
+Type=Commander
+ScryfallCode=NCC
+
+[cards]
