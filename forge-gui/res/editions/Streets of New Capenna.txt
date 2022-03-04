@@ -8,7 +8,7 @@ Type=Expansion
 ScryfallCode=SNC
 
 [cards]
-170 R Broker's Ascendancy @Dallas Williams
+170 R Brokers Ascendancy @Dallas Williams
 250 R Jetmir's Garden @Kasia 'Kafis' Zielińska
 254 R Raffine's Tower @Sam White
 257 R Spara's Headquarters @Kieran Yanner
@@ -29,7 +29,7 @@ ScryfallCode=SNC
 293 R Spara's Headquarters @Dominik Mayer
 294 R Xander's Lounge @Dominik Mayer
 295 R Ziatora's Proving Ground @Dominik Mayer
-297 R Broker's Ascendancy @Shawn Pagels
+297 R Brokers Ascendancy @Shawn Pagels
 351 R Jetmir's Garden @BEMOCS
 353 R Raffine's Tower @Elektrodeko
 355 R Spara's Headquarters @W.Flemming
