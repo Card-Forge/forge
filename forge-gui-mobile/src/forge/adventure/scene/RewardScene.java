@@ -169,7 +169,7 @@ public class RewardScene extends UIScene {
             }
         }
 
-        cardHeight = Forge.isLandscapeMode() ? bestCardHeight : bestCardHeight * 0.75f;
+        cardHeight = Forge.isLandscapeMode() ? bestCardHeight : bestCardHeight * 0.65f;
         cardWidth = bestCardHeight / CARD_WIDTH_TO_HEIGHT;
 
         yOff += (targetHeight - (cardHeight * numberOfRows)) / 2f;
