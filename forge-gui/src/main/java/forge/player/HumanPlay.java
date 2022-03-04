@@ -384,16 +384,15 @@ public class HumanPlay {
                         //Have to use the stack descriptions here because some copied spells have no description otherwise
                         final String o = controller.getGui().oneOrNone(Localizer.getInstance().getMessage("lblExileFromStack"), descList);
 
-                        if (o != null) {
-                            final SpellAbility toExile = saList.get(descList.indexOf(o));
-
-                            saList.remove(toExile);
-                            descList.remove(o);
-
-                            payList.add(toExile);
-                        } else {
+                        if (o == null) {
                             return false;
                         }
+                        final SpellAbility toExile = saList.get(descList.indexOf(o));
+
+                        saList.remove(toExile);
+                        descList.remove(o);
+
+                        payList.add(toExile);
                     }
                 }
 

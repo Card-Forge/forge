@@ -483,7 +483,6 @@ public abstract class SpellAbilityEffect {
 
     protected static void replaceDying(final SpellAbility sa) {
         if (sa.hasParam("ReplaceDyingDefined") || sa.hasParam("ReplaceDyingValid")) {
-
             if (sa.hasParam("ReplaceDyingCondition")) {
                 // currently there is only one with Kicker
                 final String condition = sa.getParam("ReplaceDyingCondition");
