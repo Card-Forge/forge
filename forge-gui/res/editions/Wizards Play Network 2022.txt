@@ -9,3 +9,4 @@ ScryfallCode=PW22
 1 R Consider @Zezhou Chen
 2 R Fateful Absence @Eric Deschamps
 3 M Atsushi, the Blazing Sky @Victor Adame Minguez
+4 U Swiftfoot Boots @Svetlin Velinov
