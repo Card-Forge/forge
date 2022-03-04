@@ -313,7 +313,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 tooltip_actor.setX(actor.getX() - tooltip_actor.getWidth());
             tooltip_actor.setY(270 / 2 - tooltip_actor.getHeight() / 2);
             if (!Forge.isLandscapeMode()) {
-                float h = height * 0.75f;
+                float h = height * 0.65f;
                 tooltip_actor.setX(480/2 - tooltip_actor.getWidth() /2);
                 tooltip_actor.setHeight(h);
                 tooltip_actor.setY(270/2 - h/2);
