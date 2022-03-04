@@ -1009,58 +1009,63 @@ public class Graphics {
         drawText(text, font, skinColor.getColor(), x, y, w, h, wrap, horzAlignment, centerVertically);
     }
     public void drawText(String text, FSkinFont font, Color color, float x, float y, float w, float h, boolean wrap, int horzAlignment, boolean centerVertically) {
-        if (text == null)
-            return;
-        if (alphaComposite < 1) {
-            color = FSkinColor.alphaColor(color, color.a * alphaComposite);
-        }
-        if (color.a < 1) { //enable blending so alpha colored shapes work properly
-            Gdx.gl.glEnable(GL_BLEND);
-        }
+        try {
+            if (text == null)
+                return;
+            if (alphaComposite < 1) {
+                color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+            }
+            if (color.a < 1) { //enable blending so alpha colored shapes work properly
+                Gdx.gl.glEnable(GL_BLEND);
+            }
 
-        TextBounds textBounds;
-        if (wrap) {
-            textBounds = font.getWrappedBounds(text, w);
-        }
-        else {
-            textBounds = font.getMultiLineBounds(text);
-        }
-
-        boolean needClip = false;
-
-        while (textBounds.width > w || textBounds.height > h) {
-            if (font.canShrink()) { //shrink font to fit if possible
-                font = font.shrink();
-                if (wrap) {
-                    textBounds = font.getWrappedBounds(text, w);
-                }
-                else {
-                    textBounds = font.getMultiLineBounds(text);
-                }
+            TextBounds textBounds;
+            if (wrap) {
+                textBounds = font.getWrappedBounds(text, w);
             }
             else {
-                needClip = true;
-                break;
+                textBounds = font.getMultiLineBounds(text);
             }
-        }
 
-        if (needClip) { //prevent text flowing outside region if couldn't shrink it to fit
-            startClip(x, y, w, h);
-        }
+            boolean needClip = false;
 
-        float textHeight = textBounds.height;
-        if (h > textHeight && centerVertically) {
-            y += (h - textHeight) / 2;
-        }
+            while (textBounds.width > w || textBounds.height > h) {
+                if (font.canShrink()) { //shrink font to fit if possible
+                    font = font.shrink();
+                    if (wrap) {
+                        textBounds = font.getWrappedBounds(text, w);
+                    }
+                    else {
+                        textBounds = font.getMultiLineBounds(text);
+                    }
+                }
+                else {
+                    needClip = true;
+                    break;
+                }
+            }
 
-        font.draw(batch, text, color, adjustX(x), adjustY(y, 0), w, wrap, horzAlignment);
+            if (needClip) { //prevent text flowing outside region if couldn't shrink it to fit
+                startClip(x, y, w, h);
+            }
 
-        if (needClip) {
-            endClip();
-        }
+            float textHeight = textBounds.height;
+            if (h > textHeight && centerVertically) {
+                y += (h - textHeight) / 2;
+            }
 
-        if (color.a < 1) {
-            Gdx.gl.glDisable(GL_BLEND);
+            font.draw(batch, text, color, adjustX(x), adjustY(y, 0), w, wrap, horzAlignment);
+
+            if (needClip) {
+                endClip();
+            }
+
+            if (color.a < 1) {
+                Gdx.gl.glDisable(GL_BLEND);
+            }
+        } catch (Exception e) {
+            //shouldnt be here but force English on CJK Error
+            Forge.setForcedEnglishonCJKMissing();
         }
     }
 
