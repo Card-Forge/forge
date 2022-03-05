@@ -1,0 +1,6 @@
+Name:Raffine's Tower
+ManaCost:no cost
+Types:Land Plains Island Swamp
+K:CARDNAME enters the battlefield tapped.
+K:Cycling:3
+Oracle:({T}: Add {W}, {U}, or {B}.)\nRaffine's Tower enters the battlefield tapped.\nCycling {3} ({3}, Discard this card: Draw a card.)
