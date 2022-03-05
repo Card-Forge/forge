@@ -987,3 +987,4 @@
 2022-01-10 Sealed Mh2 Block Mocs (8 decks) | https://downloads.cardforge.org/decks/archive/block/2022-01-10-sealed-mh2-block-mocs.zip
 2022-01-17 Sealed Vow Block Super Qualifier (8 decks) | https://downloads.cardforge.org/decks/archive/block/2022-01-17-sealed-vow-block-super-qualifier.zip
 2022-02-20 Sealed Neo Block Super Qualifier (8 decks) | https://downloads.cardforge.org/decks/archive/block/2022-02-20-sealed-neo-block-super-qualifier.zip
+2022-02-27 Sealed Neo Block Super Qualifier (8 decks) | https://downloads.cardforge.org/decks/archive/block/2022-02-27-sealed-neo-block-super-qualifier.zip
