@@ -23,6 +23,7 @@ import java.util.Map;
 
 import com.google.common.collect.Iterables;
 
+import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -135,11 +136,12 @@ public class CostSacrifice extends CostPartWithList {
 
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
+        final Game game = targetCard.getGame();
         // no table there, it is already handled by CostPartWithList
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        moveParams.put(AbilityKey.LastStateBattlefield, ability.getLastStateBattlefield());
-        moveParams.put(AbilityKey.LastStateGraveyard, ability.getLastStateGraveyard());
-        return targetCard.getGame().getAction().sacrifice(targetCard, ability, effect, null, moveParams);
+        moveParams.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
+        moveParams.put(AbilityKey.LastStateGraveyard, game.getLastStateGraveyard());
+        return game.getAction().sacrifice(targetCard, ability, effect, null, moveParams);
     }
 
     /* (non-Javadoc)

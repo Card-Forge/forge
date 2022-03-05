@@ -1066,6 +1066,7 @@ public class PhaseHandler implements java.io.Serializable {
                         }
 
                     }
+                    game.copyLastState();
                     loopCount++;
                 } while (loopCount < 999 || !pPlayerPriority.getController().isAI());
 
