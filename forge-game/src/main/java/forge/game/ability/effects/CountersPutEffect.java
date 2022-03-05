@@ -69,19 +69,26 @@ public class CountersPutEffect extends SpellAbilityEffect {
             stringBuilder.append("up to ");
         }
 
-        String type = spellAbility.getParam("CounterType");
-        if (amount == 1) {
-            stringBuilder.append(Lang.startsWithVowel(type) ? "an " : "a ");
-        } else {
-            stringBuilder.append(Lang.getNumeral(amount)).append(" ");
-        }
-
-        stringBuilder.append(CounterType.getType(type).getName().toLowerCase()).append(" counter");
-        stringBuilder.append(amount != 1 ? "s" : "").append(divAsChoose || spellAbility.hasParam("DividedRandomly")
+        final String typeName = CounterType.getType(spellAbility.getParam("CounterType")).getName().toLowerCase();
+        stringBuilder.append(Lang.nounWithNumeralExceptOne(amount,
+                typeName + " counter"));
+        stringBuilder.append(divAsChoose || spellAbility.hasParam("DividedRandomly")
                 ? " among " : " on ");
 
+        // special handling for multiple Defined
+        if (spellAbility.hasParam("Defined") && spellAbility.getParam("Defined").contains(" & ")) {
+            String[] def = spellAbility.getParam("Defined").split(" & ");
+            for (int i = 0; i < def.length; i++) {
+                stringBuilder.append(AbilityUtils.getDefinedEntities(card, def[i],
+                        spellAbility).toString().replaceAll("[\\[\\]]",""));
+                if (i + 1 < def.length) {
+                    stringBuilder.append(" and ");
+                    stringBuilder.append(Lang.nounWithNumeralExceptOne(amount,
+                            typeName + " counter")).append(" on ");
+                }
+            }
         // if use targeting we show all targets and corresponding counters
-        if(spellAbility.usesTargeting()) {
+        } else if (spellAbility.usesTargeting()) {
             final List<Card> targetCards = SpellAbilityEffect.getTargetCards(spellAbility);
             for(int i = 0; i < targetCards.size(); i++) {
                 Card targetCard = targetCards.get(i);
@@ -182,7 +189,13 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         sa.hasParam("ChoiceOptional"), params));
             }
         } else {
-            tgtObjects.addAll(getDefinedEntitiesOrTargeted(sa, "Defined"));
+            if (sa.hasParam("Defined") && sa.getParam("Defined").contains(" & ")) {
+                for (String def : sa.getParam("Defined").split(" & ")) {
+                    tgtObjects.addAll(AbilityUtils.getDefinedEntities(card, def, sa));
+                }
+            } else {
+                tgtObjects.addAll(getDefinedEntitiesOrTargeted(sa, "Defined"));
+            }
         }
 
         if (sa.hasParam("Optional") && !pc.confirmAction
