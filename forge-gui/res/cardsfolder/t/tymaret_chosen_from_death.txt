@@ -2,7 +2,7 @@ Name:Tymaret, Chosen from Death
 ManaCost:B B
 Types:Legendary Enchantment Creature Demigod
 PT:2/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughness$ X | Description$ CARDNAME's toughness is equal to your devotion to black.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughness$ X | Description$ NICKNAME's toughness is equal to your devotion to black.
 SVar:X:Count$Devotion.Black
 SVar:BuffedBy:Permanent.Black
 A:AB$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target cards in graveyards | RememberChanged$ True | SubAbility$ DBGainLife | StackDescription$ SpellDescription | SpellDescription$ Exile up to two target cards from graveyards. You gain 1 life for each creature card exiled this way.
