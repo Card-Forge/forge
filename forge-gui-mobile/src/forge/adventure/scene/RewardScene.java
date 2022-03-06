@@ -23,9 +23,8 @@ import forge.assets.ImageCache;
  * Displays the rewards of a fight or a treasure
  */
 public class RewardScene extends UIScene {
-
     private TextButton doneButton;
-
+    boolean init;
     public enum Type {
         Shop,
         Loot
@@ -92,13 +91,16 @@ public class RewardScene extends UIScene {
     @Override
     public void resLoaded() {
         super.resLoaded();
-        ui.onButtonPress("done", new Runnable() {
-            @Override
-            public void run() {
-                RewardScene.this.done();
-            }
-        });
-        doneButton = ui.findActor("done");
+        if(!this.init) {
+            ui.onButtonPress("done", new Runnable() {
+                @Override
+                public void run() {
+                    RewardScene.this.done();
+                }
+            });
+            doneButton = ui.findActor("done");
+            this.init = true;
+        }
     }
 
     @Override

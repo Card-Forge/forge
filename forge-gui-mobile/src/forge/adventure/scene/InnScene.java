@@ -13,6 +13,7 @@ import forge.adventure.util.Current;
 public class InnScene extends UIScene {
     TextButton heal, sell, leave;
     Image healIcon, sellIcon, leaveIcon;
+    boolean init;
 
     public InnScene() {
         super("ui/inn.json");
@@ -35,34 +36,37 @@ public class InnScene extends UIScene {
     @Override
     public void resLoaded() {
         super.resLoaded();
-        ui.onButtonPress("done", new Runnable() {
-            @Override
-            public void run() {
-                InnScene.this.done();
+        if (!this.init) {
+            ui.onButtonPress("done", new Runnable() {
+                @Override
+                public void run() {
+                    InnScene.this.done();
+                }
+            });
+            ui.onButtonPress("heal", new Runnable() {
+                @Override
+                public void run() {
+                    InnScene.this.heal();
+                }
+            });
+            ui.onButtonPress("sell", new Runnable() {
+                @Override
+                public void run() {
+                    InnScene.this.sell();
+                }
+            });
+            leave = ui.findActor("done");
+            sell = ui.findActor("sell");
+            heal = ui.findActor("heal");
+            leaveIcon = ui.findActor("leaveIcon");
+            healIcon = ui.findActor("healIcon");
+            sellIcon = ui.findActor("sellIcon");
+            if (!Forge.isLandscapeMode()) {
+                sellIcon.setHeight(70);
+                healIcon.setHeight(70);
+                leaveIcon.setHeight(70);
             }
-        });
-        ui.onButtonPress("heal", new Runnable() {
-            @Override
-            public void run() {
-                InnScene.this.heal();
-            }
-        });
-        ui.onButtonPress("sell", new Runnable() {
-            @Override
-            public void run() {
-                InnScene.this.sell();
-            }
-        });
-        leave = ui.findActor("done");
-        sell = ui.findActor("sell");
-        heal = ui.findActor("heal");
-        leaveIcon = ui.findActor("leaveIcon");
-        healIcon = ui.findActor("healIcon");
-        sellIcon = ui.findActor("sellIcon");
-        if (!Forge.isLandscapeMode()) {
-            sellIcon.setHeight(70);
-            healIcon.setHeight(70);
-            leaveIcon.setHeight(70);
+            this.init = true;
         }
     }
 

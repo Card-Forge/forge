@@ -23,8 +23,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.Map;
 
 public class PlayerStatisticScene extends UIScene {
-
-
     Image avatar, avatarBorder, lifeIcon, goldIcon;
     Label money, life;
     Label wins, totalWins;
@@ -33,6 +31,7 @@ public class PlayerStatisticScene extends UIScene {
     Label playerName;
     TextButton back;
     private Table enemiesGroup;
+    boolean init;
 
     public PlayerStatisticScene() {
         super("ui/statistic.json");
@@ -172,36 +171,38 @@ public class PlayerStatisticScene extends UIScene {
     @Override
     public void resLoaded() {
         super.resLoaded();
-        enemiesGroup = new Table(Controls.GetSkin());
-
-        enemiesGroup.row();
-        ui.onButtonPress("return", new Runnable() {
-            @Override
-            public void run() {
-                PlayerStatisticScene.this.back();
-            }
-        });
-        avatar = ui.findActor("avatar");
-        avatarBorder = ui.findActor("avatarBorder");
-        playerName = ui.findActor("playerName");
-        life = ui.findActor("lifePoints");
-        money = ui.findActor("money");
-        lifeIcon = ui.findActor("lifeIcon");
-        goldIcon = ui.findActor("goldIcon");
-        wins = ui.findActor("wins");
-        wins.setText(Forge.getLocalizer().getMessage("lblWinProper")+":");
-        totalWins = ui.findActor("totalWins");
-        loss = ui.findActor("loss");
-        loss.setText(Forge.getLocalizer().getMessage("lblLossProper")+":");
-        totalLoss = ui.findActor("totalLoss");
-        winloss = ui.findActor("winloss");
-        winloss.setText(Forge.getLocalizer().getMessage("lblWinProper")+"/"+Forge.getLocalizer().getMessage("lblLossProper"));
-        lossWinRatio = ui.findActor("lossWinRatio");
-        back = ui.findActor("return");
-        back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
-        ScrollPane scrollPane = ui.findActor("enemies");
-        scrollPane.setActor(enemiesGroup);
-        enemiesGroup.setFillParent(true);
+        if (!this.init) {
+            enemiesGroup = new Table(Controls.GetSkin());
+            enemiesGroup.row();
+            ui.onButtonPress("return", new Runnable() {
+                @Override
+                public void run() {
+                    PlayerStatisticScene.this.back();
+                }
+            });
+            avatar = ui.findActor("avatar");
+            avatarBorder = ui.findActor("avatarBorder");
+            playerName = ui.findActor("playerName");
+            life = ui.findActor("lifePoints");
+            money = ui.findActor("money");
+            lifeIcon = ui.findActor("lifeIcon");
+            goldIcon = ui.findActor("goldIcon");
+            wins = ui.findActor("wins");
+            wins.setText(Forge.getLocalizer().getMessage("lblWinProper")+":");
+            totalWins = ui.findActor("totalWins");
+            loss = ui.findActor("loss");
+            loss.setText(Forge.getLocalizer().getMessage("lblLossProper")+":");
+            totalLoss = ui.findActor("totalLoss");
+            winloss = ui.findActor("winloss");
+            winloss.setText(Forge.getLocalizer().getMessage("lblWinProper")+"/"+Forge.getLocalizer().getMessage("lblLossProper"));
+            lossWinRatio = ui.findActor("lossWinRatio");
+            back = ui.findActor("return");
+            back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
+            ScrollPane scrollPane = ui.findActor("enemies");
+            scrollPane.setActor(enemiesGroup);
+            enemiesGroup.setFillParent(true);
+            this.init = true;
+        }
     }
 
     @Override
