@@ -1,39 +1,38 @@
-{		
-    "screenWidth": 480,
-	"screenHeight": 270, 
-	"font": "skin/MiKrollFantasy.ttf",      
-	"skin": "skin/ui_skin.json",
-	"fontColor": "ffffff"   ,     
-	"playerBaseSpeed": 30 ,
-    "minDeckSize":40,
-    "starterDecks": 
-    [                          
+{
+  "screenWidth": 480,
+  "screenHeight": 270,
+  "skin": "skin/ui_skin.json",
+  "playerBaseSpeed": 30,
+  "minDeckSize": 40,
+  "starterDecks": [
     "decks/starter/white.json",
     "decks/starter/black.json",
     "decks/starter/blue.json",
     "decks/starter/red.json",
     "decks/starter/green.json"
-    ] ,
-    "difficulties":[
+  ],
+  "difficulties": [
     {
-     "name":"Easy",     
-     "startingLife":16,
-     "staringMoney":200,      
-     "enemyLifeFactor":0.8   ,      
-     "sellFactor":0.5 
-    },{
-     "name":"Normal",     
-     "startingLife":12,
-     "staringMoney":100,          
-     "startingDifficulty":true,      
-     "enemyLifeFactor":1.0  ,      
-     "sellFactor":0.2 
-    },{
-     "name":"Hard",     
-     "startingLife":8,
-     "staringMoney":10,      
-     "enemyLifeFactor":1.5 ,      
-     "sellFactor":0.1 
+      "name": "Easy",
+      "startingLife": 16,
+      "staringMoney": 200,
+      "enemyLifeFactor": 0.8,
+      "sellFactor": 0.5
+    },
+    {
+      "name": "Normal",
+      "startingLife": 12,
+      "staringMoney": 100,
+      "startingDifficulty": true,
+      "enemyLifeFactor": 1.0,
+      "sellFactor": 0.2
+    },
+    {
+      "name": "Hard",
+      "startingLife": 8,
+      "staringMoney": 10,
+      "enemyLifeFactor": 1.5,
+      "sellFactor": 0.1
     }
-    ]
+  ]
 }

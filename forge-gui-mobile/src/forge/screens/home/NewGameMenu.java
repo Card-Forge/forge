@@ -18,19 +18,17 @@ import forge.screens.planarconquest.NewConquestScreen;
 import forge.screens.quest.NewQuestScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.util.Localizer;
 
 public class NewGameMenu extends FPopupMenu {
-    final static Localizer localizer = Localizer.getInstance();
 
     public enum NewGameScreen {
-        Constructed(localizer.getMessageorUseDefault("lblConstructed", "Constructed"), FSkinImage.MENU_CONSTRUCTED, ConstructedScreen.class),
-        BoosterDraft(localizer.getMessageorUseDefault("lblBoosterDraft", "Booster Draft"), FSkinImage.MENU_DRAFT, NewDraftScreen.class),
-        SealedDeck(localizer.getMessageorUseDefault("lblSealedDeck", "Sealed Deck"), FSkinImage.MENU_SEALED, NewSealedScreen.class),
-        QuestMode(localizer.getMessageorUseDefault("lblQuestMode", "Quest Mode"), FSkinImage.QUEST_ZEP, NewQuestScreen.class),
-        PuzzleMode(localizer.getMessageorUseDefault("lblPuzzleMode", "Puzzle Mode"), FSkinImage.MENU_PUZZLE, PuzzleScreen.class),
-        PlanarConquest(localizer.getMessageorUseDefault("lblPlanarConquest", "Planar Conquest"), FSkinImage.MENU_GALAXY, NewConquestScreen.class),
-        Gauntlet(localizer.getMessageorUseDefault("lblGauntlet", "Gauntlet"), FSkinImage.MENU_GAUNTLET, NewGauntletScreen.class);
+        Constructed(Forge.getLocalizer().getMessageorUseDefault("lblConstructed", "Constructed"), FSkinImage.MENU_CONSTRUCTED, ConstructedScreen.class),
+        BoosterDraft(Forge.getLocalizer().getMessageorUseDefault("lblBoosterDraft", "Booster Draft"), FSkinImage.MENU_DRAFT, NewDraftScreen.class),
+        SealedDeck(Forge.getLocalizer().getMessageorUseDefault("lblSealedDeck", "Sealed Deck"), FSkinImage.MENU_SEALED, NewSealedScreen.class),
+        QuestMode(Forge.getLocalizer().getMessageorUseDefault("lblQuestMode", "Quest Mode"), FSkinImage.QUEST_ZEP, NewQuestScreen.class),
+        PuzzleMode(Forge.getLocalizer().getMessageorUseDefault("lblPuzzleMode", "Puzzle Mode"), FSkinImage.MENU_PUZZLE, PuzzleScreen.class),
+        PlanarConquest(Forge.getLocalizer().getMessageorUseDefault("lblPlanarConquest", "Planar Conquest"), FSkinImage.MENU_GALAXY, NewConquestScreen.class),
+        Gauntlet(Forge.getLocalizer().getMessageorUseDefault("lblGauntlet", "Gauntlet"), FSkinImage.MENU_GAUNTLET, NewGauntletScreen.class);
 
         private final FMenuItem item;
         private final Class<? extends FScreen> screenClass;
@@ -51,7 +49,7 @@ public class NewGameMenu extends FPopupMenu {
             if (screen == null) { //don't initialize screen until it's opened the first time
                 try {
                     screen = screenClass.getConstructor().newInstance();
-                    screen.setHeaderCaption(localizer.getMessageorUseDefault("lblNewGame", "New Game") + " - " + item.getText());
+                    screen.setHeaderCaption(Forge.getLocalizer().getMessageorUseDefault("lblNewGame", "New Game") + " - " + item.getText());
                 }
                 catch (Exception e) {
                     e.printStackTrace();

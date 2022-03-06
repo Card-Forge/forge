@@ -24,7 +24,6 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTimer;
 import forge.toolbox.GuiDialog;
-import forge.util.Localizer;
 import forge.util.Utils;
 import forge.util.collect.FCollectionView;
 
@@ -135,7 +134,7 @@ public class ConquestPlaneSelector extends FDisplayObject {
             if (!desc.isEmpty()) {
                 GuiDialog.message(plane.getDescription().replace("\\n", "\n"), plane.getName().replace("_", " "));
             } else {
-                GuiDialog.message(Localizer.getInstance().getMessage("lblThisPlaneHasNoDesc"), plane.getName());
+                GuiDialog.message(Forge.getLocalizer().getMessage("lblThisPlaneHasNoDesc"), plane.getName());
             }
             return true;
         }

@@ -2,6 +2,7 @@ package forge.screens.planarconquest;
 
 import com.google.common.collect.Iterables;
 
+import forge.Forge;
 import forge.assets.FImage;
 import forge.card.CardImage;
 import forge.card.CardListPreview;
@@ -19,7 +20,6 @@ import forge.screens.home.NewGameMenu;
 import forge.screens.planarconquest.ConquestMenu.LaunchReason;
 import forge.toolbox.FChoiceList;
 import forge.toolbox.FOptionPane;
-import forge.util.Localizer;
 import forge.util.ThreadUtil;
 
 public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenModel> {
@@ -55,7 +55,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
         FThreads.invokeInEdtLater(new Runnable() {
             @Override
             public void run() {
-                LoadingOverlay.show(Localizer.getInstance().getMessage("lblStartingNewConquest"), new Runnable() {
+                LoadingOverlay.show(Forge.getLocalizer().getMessage("lblStartingNewConquest"), new Runnable() {
                     @Override
                     public void run() {
                         ConquestController qc = FModel.getConquest();
@@ -78,7 +78,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
         private final ConquestPlaneSelector planeSelector = add(new ConquestPlaneSelector());
 
         protected SelectStartingPlaneStep() {
-            super(Localizer.getInstance().getMessage("lblSelectStartingPlane"));
+            super(Forge.getLocalizer().getMessage("lblSelectStartingPlane"));
         }
 
         @Override
@@ -123,7 +123,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
         private final CardListPreview cardDisplay = add(new CardListPreview(lstCommanders));
 
         protected SelectStartingCommanderStep() {
-            super(Localizer.getInstance().getMessage("lblSelectStartingCommander"));
+            super(Forge.getLocalizer().getMessage("lblSelectStartingCommander"));
         }
 
         @Override
@@ -182,7 +182,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
         private final CardListPreview tokenDisplay = add(new CardListPreview(lstPlaneswalkers));
 
         protected SelectStartingPlaneswalkerStep() {
-            super(Localizer.getInstance().getMessage("lblSelectStartingPlaneswalker"));
+            super(Forge.getLocalizer().getMessage("lblSelectStartingPlaneswalker"));
         }
 
         @Override

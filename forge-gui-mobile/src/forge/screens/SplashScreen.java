@@ -18,7 +18,6 @@ import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
 import forge.toolbox.FProgressBar;
-import forge.util.Localizer;
 
 public class SplashScreen extends FContainer {
     private TextureRegion background;
@@ -229,8 +228,8 @@ public class SplashScreen extends FContainer {
 
         if (!init) {
             init = true;
-            btnAdventure = new FButton(Localizer.getInstance().getMessageorUseDefault("lblAdventureMode", "Adventure Mode"));
-            btnHome = new FButton(Localizer.getInstance().getMessageorUseDefault("lblClassicMode", "Classic Mode"));
+            btnAdventure = new FButton(Forge.getLocalizer().getMessageorUseDefault("lblAdventureMode", "Adventure Mode"));
+            btnHome = new FButton(Forge.getLocalizer().getMessageorUseDefault("lblClassicMode", "Classic Mode"));
             btnAdventure.setCommand(new FEvent.FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {

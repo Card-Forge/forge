@@ -153,6 +153,7 @@ public class NewGameScene extends UIScene {
 
         scrollPane = ui.findActor("scroll");
         titleL = ui.findActor("titleL");
+        titleL.setScale(2, 2);
         avatarL = ui.findActor("avatarL");
         nameL = ui.findActor("nameL");
         raceL = ui.findActor("raceL");
@@ -174,7 +175,8 @@ public class NewGameScene extends UIScene {
             selectedName.setX(w/2- selectedName.getWidth()/2);
             nameL.setFontScaleX(2);
 
-            titleL.setFontScaleX(2);
+            titleL.setScale(4, 2);
+            titleL.setFontScale(4, 2);
             titleL.setX(selectedName.getX()-20);
 
             avatarImage.setScaleX(2);

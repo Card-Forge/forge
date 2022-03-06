@@ -48,7 +48,6 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
-import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.Utils;
@@ -62,17 +61,16 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     // General variables
     private GameLobby lobby;
     private IPlayerChangeListener playerChangeListener = null;
-    final Localizer localizer = Localizer.getInstance();
-    private final FLabel lblPlayers = new FLabel.Builder().text(localizer.getMessage("lblPlayers") + ":").font(VARIANTS_FONT).build();
+    private final FLabel lblPlayers = new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblPlayers") + ":").font(VARIANTS_FONT).build();
     private final FComboBox<Integer> cbPlayerCount;
     private final Deck[] decks = new Deck[MAX_PLAYERS];
 
     // Variants frame and variables
-    private final FLabel lblVariants = new FLabel.Builder().text(localizer.getMessage("lblVariants") + ":").font(VARIANTS_FONT).build();
+    private final FLabel lblVariants = new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblVariants") + ":").font(VARIANTS_FONT).build();
     private final FComboBox<Object> cbVariants = new FComboBox<>();
 
     // Max games in a match frame and variables
-    private final FLabel lblGamesInMatch = new FLabel.Builder().text(localizer.getMessage("lblMatch") + ":").font(VARIANTS_FONT).build();
+    private final FLabel lblGamesInMatch = new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblMatch") + ":").font(VARIANTS_FONT).build();
     private final FComboBox<String> cbGamesInMatch = new FComboBox<>();
 
     private final List<PlayerPanel> playerPanels = new ArrayList<>(MAX_PLAYERS);
@@ -149,7 +147,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         add(lblVariants);
         add(cbVariants);
         cbVariants.setFont(VARIANTS_FONT);
-        cbVariants.addItem("(" + localizer.getMessage("lblNone") + ")");
+        cbVariants.addItem("(" + Forge.getLocalizer().getMessage("lblNone") + ")");
         cbVariants.addItem(GameType.Vanguard);
         cbVariants.addItem(GameType.MomirBasic);
         cbVariants.addItem(GameType.MoJhoSto);
@@ -160,7 +158,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         cbVariants.addItem(GameType.Planechase);
         cbVariants.addItem(GameType.Archenemy);
         cbVariants.addItem(GameType.ArchenemyRumble);
-        cbVariants.addItem(localizer.getMessage("lblMore"));
+        cbVariants.addItem(Forge.getLocalizer().getMessage("lblMore"));
         cbVariants.setChangedHandler(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
@@ -191,12 +189,14 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             public void run() {
                 playerPanels.get(0).initialize(FPref.CONSTRUCTED_P1_DECK_STATE, FPref.COMMANDER_P1_DECK_STATE, FPref.OATHBREAKER_P1_DECK_STATE, FPref.TINY_LEADER_P1_DECK_STATE, FPref.BRAWL_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
                 playerPanels.get(1).initialize(FPref.CONSTRUCTED_P2_DECK_STATE, FPref.COMMANDER_P2_DECK_STATE, FPref.OATHBREAKER_P2_DECK_STATE, FPref.TINY_LEADER_P2_DECK_STATE, FPref.BRAWL_P2_DECK_STATE, DeckType.COLOR_DECK);
-                if (getNumPlayers() > 2) {
-                    playerPanels.get(2).initialize(FPref.CONSTRUCTED_P3_DECK_STATE, FPref.COMMANDER_P3_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P3_DECK_STATE, FPref.BRAWL_P3_DECK_STATE, DeckType.COLOR_DECK);
-                }
-                if (getNumPlayers() > 3) {
-                    playerPanels.get(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, FPref.COMMANDER_P4_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P4_DECK_STATE, FPref.BRAWL_P4_DECK_STATE, DeckType.COLOR_DECK);
-                }
+                try {
+                    if (getNumPlayers() > 2) {
+                        playerPanels.get(2).initialize(FPref.CONSTRUCTED_P3_DECK_STATE, FPref.COMMANDER_P3_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P3_DECK_STATE, FPref.BRAWL_P3_DECK_STATE, DeckType.COLOR_DECK);
+                    }
+                    if (getNumPlayers() > 3) {
+                        playerPanels.get(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, FPref.COMMANDER_P4_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P4_DECK_STATE, FPref.BRAWL_P4_DECK_STATE, DeckType.COLOR_DECK);
+                    }
+                } catch (Exception e) {}
                 /*playerPanels.get(4).initialize(FPref.CONSTRUCTED_P5_DECK_STATE, DeckType.COLOR_DECK);
                 playerPanels.get(5).initialize(FPref.CONSTRUCTED_P6_DECK_STATE, DeckType.COLOR_DECK);
                 playerPanels.get(6).initialize(FPref.CONSTRUCTED_P7_DECK_STATE, DeckType.COLOR_DECK);
@@ -341,7 +341,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                     FThreads.invokeInEdtLater(new Runnable() {
                         @Override
                         public void run() {
-                            LoadingOverlay.show(localizer.getMessage("lblLoadingNewGame"), startGame);
+                            LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), startGame);
                         }
                     });
                 }
@@ -403,7 +403,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
         // Name
         String prefName = prefs.getPref(FPref.PLAYER_NAME);
-        playerPanels.get(0).setPlayerName(StringUtils.isBlank(prefName) ? Localizer.getInstance().getMessage("lblHuman") : prefName);
+        playerPanels.get(0).setPlayerName(StringUtils.isBlank(prefName) ? Forge.getLocalizer().getInstance().getMessage("lblHuman") : prefName);
     }
 
     List<Integer> getUsedAvatars() {
@@ -451,7 +451,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         private final FList<Variant> lstVariants = add(new FList<>());
 
         private MultiVariantSelect() {
-            super(Localizer.getInstance().getMessage("lblSelectVariants"));
+            super(Forge.getLocalizer().getInstance().getMessage("lblSelectVariants"));
 
             lstVariants.setListItemRenderer(new VariantRenderer());
             lstVariants.addItem(new Variant(GameType.Vanguard));
@@ -697,7 +697,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             deck = playerPanel.getCommanderDeck();
             if (deck != null) {
                 playerPanel.getCommanderDeckChooser().saveState();
-                deckName =  localizer.getMessage("lblCommanderDeck") + ": "
+                deckName =  Forge.getLocalizer().getMessage("lblCommanderDeck") + ": "
                         + playerPanel.getCommanderDeckChooser().getDeck().getName();
             }
         }
@@ -705,7 +705,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             deck = playerPanel.getOathbreakerDeck();
             if (deck != null) {
                 playerPanel.getOathbreakerDeckChooser().saveState();
-                deckName =  localizer.getMessage("lblOathbreakerDeck") + ": "
+                deckName =  Forge.getLocalizer().getMessage("lblOathbreakerDeck") + ": "
                         + playerPanel.getOathbreakerDeckChooser().getDeck().getName();
             }
         }
@@ -713,7 +713,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             deck = playerPanel.getTinyLeadersDeck();
             if (deck != null) {
                 playerPanel.getTinyLeadersDeckChooser().saveState();
-                deckName =  localizer.getMessage("lblTinyLeadersDeck") + ": "
+                deckName =  Forge.getLocalizer().getMessage("lblTinyLeadersDeck") + ": "
                         + playerPanel.getTinyLeadersDeckChooser().getDeck().getName();
             }
         }
@@ -721,7 +721,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             deck = playerPanel.getBrawlDeck();
             if (deck != null) {
                 playerPanel.getBrawlDeckChooser().saveState();
-                deckName =  localizer.getMessage("lblBrawlDeck") + ": "
+                deckName =  Forge.getLocalizer().getMessage("lblBrawlDeck") + ": "
                         + playerPanel.getBrawlDeckChooser().getDeck().getName();
             }
         }else {
@@ -749,7 +749,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             }
             playerDeck.putSection(DeckSection.Schemes, playerPanel.getSchemeDeck().get(DeckSection.Schemes));
             if (!playerPanel.getSchemeDeck().getName().isEmpty()) {
-                SchemeDeckName = localizer.getMessage("lblSchemeDeck") + ": " + playerPanel.getSchemeDeck().getName();
+                SchemeDeckName = Forge.getLocalizer().getMessage("lblSchemeDeck") + ": " + playerPanel.getSchemeDeck().getName();
                 playerPanel.setSchemeDeckName(SchemeDeckName);
             }
         }
@@ -759,7 +759,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             }
             playerDeck.putSection(DeckSection.Planes, playerPanel.getPlanarDeck().get(DeckSection.Planes));
             if(!playerPanel.getPlanarDeck().getName().isEmpty()) {
-                PlanarDeckname = localizer.getMessage("lblPlanarDeck") + ": " + playerPanel.getPlanarDeck().getName();
+                PlanarDeckname = Forge.getLocalizer().getMessage("lblPlanarDeck") + ": " + playerPanel.getPlanarDeck().getName();
                 playerPanel.setPlanarDeckName(PlanarDeckname);
             }
         }
@@ -770,7 +770,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             CardPool avatarPool = new CardPool();
             avatarPool.add(playerPanel.getVanguardAvatar());
             playerDeck.putSection(DeckSection.Avatar, avatarPool);
-            VanguardAvatar = localizer.getMessage("lblVanguard") + ": " + playerPanel.getVanguardAvatar().getName();
+            VanguardAvatar = Forge.getLocalizer().getMessage("lblVanguard") + ": " + playerPanel.getVanguardAvatar().getName();
             playerPanel.setVanguarAvatarName(VanguardAvatar);
         }
 
@@ -808,7 +808,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         if (ready) {
             updateDeck(index);
             if (decks[index] == null) {
-                FOptionPane.showErrorDialog(localizer.getMessage("msgSelectAdeckBeforeReadying"));
+                FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("msgSelectAdeckBeforeReadying"));
                 update(false);
                 return;
             }

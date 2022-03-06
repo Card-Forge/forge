@@ -168,7 +168,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     }
 
     private static DeckEditorPage[] getPages(EditorType editorType) {
-        final Localizer localizer = Localizer.getInstance();
+        final Localizer localizer = Forge.getLocalizer().getInstance();
         boolean isLandscape = Forge.isLandscapeMode();
         switch (editorType) {
         default:
@@ -207,13 +207,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         case Oathbreaker:
             return isLandscape ? new DeckEditorPage[] {
                     new CatalogPage(ItemManagerConfig.CARD_CATALOG),
-                    new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.OATHBREAKER_SECTION, localizer.getMessage("lblOathbreaker"), FSkinImage.COMMANDER),
+                    new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.OATHBREAKER_SECTION, Forge.getLocalizer().getMessage("lblOathbreaker"), FSkinImage.COMMANDER),
                     new DeckSectionPage(DeckSection.Main),
                     new DeckSectionPage(DeckSection.Sideboard)
             } : new DeckEditorPage[] {
                     new CatalogPage(ItemManagerConfig.CARD_CATALOG),
                     new DeckSectionPage(DeckSection.Main),
-                    new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.OATHBREAKER_SECTION, localizer.getMessage("lblOathbreaker"), FSkinImage.COMMANDER),
+                    new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.OATHBREAKER_SECTION, Forge.getLocalizer().getMessage("lblOathbreaker"), FSkinImage.COMMANDER),
                     new DeckSectionPage(DeckSection.Sideboard)
             };
         case Archenemy:
@@ -228,28 +228,28 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             };
         case Quest:
             return new DeckEditorPage[] {
-                    new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, localizer.getMessage("lblInventory"), FSkinImage.QUEST_BOX),
+                    new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), FSkinImage.QUEST_BOX),
                     new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR),
                     new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.QUEST_DECK_EDITOR)
             };
         case QuestCommander:
             return isLandscape ? new DeckEditorPage[] {
-                    new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, localizer.getMessage("lblInventory"), FSkinImage.QUEST_BOX),
+                    new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), FSkinImage.QUEST_BOX),
                     new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION),
                     new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR)
             } : new DeckEditorPage[] {
-                    new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, localizer.getMessage("lblInventory"), FSkinImage.QUEST_BOX),
+                    new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), FSkinImage.QUEST_BOX),
                     new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR),
                     new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION)
             };
         case PlanarConquest:
             return isLandscape ? new DeckEditorPage[] {
-                    new CatalogPage(ItemManagerConfig.CONQUEST_COLLECTION, localizer.getMessage("lblCollection"), FSkinImage.SPELLBOOK),
+                    new CatalogPage(ItemManagerConfig.CONQUEST_COLLECTION, Forge.getLocalizer().getMessage("lblCollection"), FSkinImage.SPELLBOOK),
                     new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION),
-                    new DeckSectionPage(DeckSection.Main, ItemManagerConfig.CONQUEST_DECK_EDITOR, localizer.getMessage("lblDeck"), Forge.hdbuttons ? FSkinImage.HDLIBRARY : FSkinImage.DECKLIST)
+                    new DeckSectionPage(DeckSection.Main, ItemManagerConfig.CONQUEST_DECK_EDITOR, Forge.getLocalizer().getMessage("lblDeck"), Forge.hdbuttons ? FSkinImage.HDLIBRARY : FSkinImage.DECKLIST)
             } : new DeckEditorPage[] {
-                    new CatalogPage(ItemManagerConfig.CONQUEST_COLLECTION, localizer.getMessage("lblCollection"), FSkinImage.SPELLBOOK),
-                    new DeckSectionPage(DeckSection.Main, ItemManagerConfig.CONQUEST_DECK_EDITOR, localizer.getMessage("lblDeck"), Forge.hdbuttons ? FSkinImage.HDLIBRARY : FSkinImage.DECKLIST),
+                    new CatalogPage(ItemManagerConfig.CONQUEST_COLLECTION, Forge.getLocalizer().getMessage("lblCollection"), FSkinImage.SPELLBOOK),
+                    new DeckSectionPage(DeckSection.Main, ItemManagerConfig.CONQUEST_DECK_EDITOR, Forge.getLocalizer().getMessage("lblDeck"), Forge.hdbuttons ? FSkinImage.HDLIBRARY : FSkinImage.DECKLIST),
                     new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION)
             };
         }
@@ -371,10 +371,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 FPopupMenu menu = new FPopupMenu() {
                     @Override
                     protected void buildMenu() {
-                        final Localizer localizer = Localizer.getInstance();
+                        final Localizer localizer = Forge.getLocalizer().getInstance();
 
                         if (allowsAddBasic())
-                            addItem(new FMenuItem(localizer.getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, new FEventHandler() {
+                            addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
                                     CardEdition defaultLandSet;
@@ -407,7 +407,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                 }
                             }));
                         if (!isLimitedEditor()) {
-                            addItem(new FMenuItem(localizer.getMessage("lblImportFromClipboard"), Forge.hdbuttons ? FSkinImage.HDIMPORT : FSkinImage.OPEN, new FEventHandler() {
+                            addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblImportFromClipboard"), Forge.hdbuttons ? FSkinImage.HDIMPORT : FSkinImage.OPEN, new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
                                     FDeckImportDialog dialog = new FDeckImportDialog(!deck.isEmpty(), editorType);
@@ -438,11 +438,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                 }
                             }));
                             if(allowsSave())
-                                addItem(new FMenuItem(localizer.getMessage("lblSaveAs"), Forge.hdbuttons ? FSkinImage.HDSAVEAS : FSkinImage.SAVEAS, new FEventHandler() {
+                                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblSaveAs"), Forge.hdbuttons ? FSkinImage.HDSAVEAS : FSkinImage.SAVEAS, new FEventHandler() {
                                     @Override
                                     public void handleEvent(FEvent e) {
                                         String defaultName = editorType.getController().getNextAvailableName();
-                                        FOptionPane.showInputDialog(localizer.getMessage("lblNameNewCopyDeck"), defaultName, new Callback<String>() {
+                                        FOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblNameNewCopyDeck"), defaultName, new Callback<String>() {
                                             @Override
                                             public void run(String result) {
                                                 if (!StringUtils.isEmpty(result)) {
@@ -454,10 +454,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                 }));
                         }
                         if (allowRename()) {
-                            addItem(new FMenuItem(localizer.getMessage("lblRenameDeck"), Forge.hdbuttons ? FSkinImage.HDEDIT : FSkinImage.EDIT, new FEventHandler() {
+                            addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblRenameDeck"), Forge.hdbuttons ? FSkinImage.HDEDIT : FSkinImage.EDIT, new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
-                                    FOptionPane.showInputDialog(localizer.getMessage("lblNewNameDeck"), deck.getName(), new Callback<String>() {
+                                    FOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblNewNameDeck"), deck.getName(), new Callback<String>() {
                                         @Override
                                         public void run(String result) {
                                             editorType.getController().rename(result);
@@ -467,12 +467,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             }));
                         }
                         if (allowDelete()) {
-                            addItem(new FMenuItem(localizer.getMessage("lblDeleteDeck"), Forge.hdbuttons ? FSkinImage.HDDELETE : FSkinImage.DELETE, new FEventHandler() {
+                            addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblDeleteDeck"), Forge.hdbuttons ? FSkinImage.HDDELETE : FSkinImage.DELETE, new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
                                     FOptionPane.showConfirmDialog(
-                                            localizer.getMessage("lblConfirmDelete") + " '" + deck.getName() + "'?",
-                                            localizer.getMessage("lblDeleteDeck"), localizer.getMessage("lblDelete"), localizer.getMessage("lblCancel"), false, new Callback<Boolean>() {
+                                            Forge.getLocalizer().getMessage("lblConfirmDelete") + " '" + deck.getName() + "'?",
+                                            Forge.getLocalizer().getMessage("lblDeleteDeck"), Forge.getLocalizer().getMessage("lblDelete"), Forge.getLocalizer().getMessage("lblCancel"), false, new Callback<Boolean>() {
                                                 @Override
                                                 public void run(Boolean result) {
                                                     if (result) {
@@ -484,7 +484,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                 }
                             }));
                         }
-                        addItem(new FMenuItem(localizer.getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, new FEventHandler() {
+                        addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, new FEventHandler() {
                             @Override
                             public void handleEvent(FEvent e) {
                                 FDeckViewer.copyDeckToClipboard(deck);
@@ -591,8 +591,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         if (StringUtils.isEmpty(deck.getName())) {
             List<PaperCard> commanders = deck.getCommanders(); //use commander name as default deck name
             String initialInput = Lang.joinHomogenous(commanders);
-            final Localizer localizer = Localizer.getInstance();
-            FOptionPane.showInputDialog(localizer.getMessage("lblNameNewDeck"), initialInput, new Callback<String>() {
+            final Localizer localizer = Forge.getLocalizer().getInstance();
+            FOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblNameNewDeck"), initialInput, new Callback<String>() {
                 @Override
                 public void run(String result) {
                     if (StringUtils.isEmpty(result)) { return; }
@@ -613,9 +613,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     }
 
     private final static ImmutableList<String> onCloseOptions = ImmutableList.of(
-        Localizer.getInstance().getMessage("lblSave"),
-        Localizer.getInstance().getMessage("lblDontSave"),
-        Localizer.getInstance().getMessage("lblCancel")
+        Forge.getLocalizer().getInstance().getMessage("lblSave"),
+        Forge.getLocalizer().getInstance().getMessage("lblDontSave"),
+        Forge.getLocalizer().getInstance().getMessage("lblCancel")
     );
 
     @Override
@@ -624,8 +624,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             super.onClose(canCloseCallback); //can skip prompt if draft saved
             return;
         }
-        final Localizer localizer = Localizer.getInstance();
-        FOptionPane.showOptionDialog(localizer.getMessage("lblSaveChangesCurrentDeck"), "",
+        final Localizer localizer = Forge.getLocalizer().getInstance();
+        FOptionPane.showOptionDialog(Forge.getLocalizer().getMessage("lblSaveChangesCurrentDeck"), "",
                 FOptionPane.QUESTION_ICON, onCloseOptions, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
@@ -699,7 +699,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             case Brawl:
                 return true;
             default:
-                return false;
+            {
+                if (editorType == EditorType.Draft || editorType == EditorType.Sealed || editorType == EditorType.Winston || editorType == EditorType.QuestDraft)
+                    return false;
+                else if (editorType == EditorType.PlanarConquest || editorType == EditorType.Quest || editorType == EditorType.QuestCommander)
+                    return FModel.getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED);
+                else
+                    return false;
+            }
         }
     }
 
@@ -938,20 +945,20 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     if (max == 1) {
                         callback.run(max);
                     } else {
-                        final Localizer localizer = Localizer.getInstance();
-                        GuiChoose.getInteger(cardManager.getSelectedItem() + " - " + verb + " " + localizer.getMessage("lblHowMany"), 1, max, 20, callback);
+                        final Localizer localizer = Forge.getLocalizer().getInstance();
+                        GuiChoose.getInteger(cardManager.getSelectedItem() + " - " + verb + " " + Forge.getLocalizer().getMessage("lblHowMany"), 1, max, 20, callback);
                     }
                 }
             }));
         }
 
         protected void addCommanderItems(final FDropDownMenu menu, final PaperCard card, boolean isAddMenu, boolean isAddSource) {
-            final Localizer localizer = Localizer.getInstance();
+            final Localizer localizer = Forge.getLocalizer().getInstance();
             if (parentScreen.getCommanderPage() == null) {
                 return;
             }
             boolean isLegalCommander;
-            String captionSuffix = localizer.getMessage("lblCommander");
+            String captionSuffix = Forge.getLocalizer().getMessage("lblCommander");
             switch (parentScreen.editorType) {
             case Brawl:
                 isLegalCommander = card.getRules().canBeBrawlCommander();
@@ -961,7 +968,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 break;
             case Oathbreaker:
                 isLegalCommander = card.getRules().canBeOathbreaker();
-                captionSuffix = localizer.getMessage("lblOathbreaker");
+                captionSuffix = Forge.getLocalizer().getMessage("lblOathbreaker");
                 break;
             case PlanarConquest:
                 isLegalCommander = false; //don't set commander this way in Planar Conquest
@@ -1077,7 +1084,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         private boolean initialized, needRefreshWhenShown;
 
         protected CatalogPage(ItemManagerConfig config) {
-            this(config, Localizer.getInstance().getMessage("lblCatalog"), Forge.hdbuttons ? FSkinImage.HDFOLDER : FSkinImage.FOLDER);
+            this(config, Forge.getLocalizer().getInstance().getMessage("lblCatalog"), Forge.hdbuttons ? FSkinImage.HDFOLDER : FSkinImage.FOLDER);
         }
         protected CatalogPage(ItemManagerConfig config, String caption0, FImage icon0) {
             super(config, caption0, icon0);
@@ -1108,14 +1115,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         protected String getItemManagerCaption() {
-            final Localizer localizer = Localizer.getInstance();
+            final Localizer localizer = Forge.getLocalizer().getInstance();
             switch (parentScreen.getEditorType()) {
             case Archenemy:
-                return localizer.getMessage("lblSchemes");
+                return Forge.getLocalizer().getMessage("lblSchemes");
             case Planechase:
-                return localizer.getMessage("lblPlanes");
+                return Forge.getLocalizer().getMessage("lblPlanes");
             default:
-                return localizer.getMessage("lblCards");
+                return Forge.getLocalizer().getMessage("lblCards");
             }
         }
 
@@ -1134,7 +1141,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         public void refresh() {
             Predicate<PaperCard> additionalFilter = null;
             final EditorType editorType = parentScreen.getEditorType();
-            final Localizer localizer = Localizer.getInstance();
+            final Localizer localizer = Forge.getLocalizer().getInstance();
             switch (editorType) {
                 case Archenemy:
                     cardManager.setPool(FModel.getArchenemyCards(), true);
@@ -1166,19 +1173,19 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             case Commander:
                             case QuestCommander:
                                 additionalFilter = DeckFormat.Commander.isLegalCommanderPredicate();
-                                cardManager.setCaption(localizer.getMessage("lblCommanders"));
+                                cardManager.setCaption(Forge.getLocalizer().getMessage("lblCommanders"));
                                 break;
                             case Oathbreaker:
                                 additionalFilter = DeckFormat.Oathbreaker.isLegalCommanderPredicate();
-                                cardManager.setCaption(localizer.getMessage("lblOathbreakers"));
+                                cardManager.setCaption(Forge.getLocalizer().getMessage("lblOathbreakers"));
                                 break;
                             case TinyLeaders:
                                 additionalFilter = DeckFormat.TinyLeaders.isLegalCommanderPredicate();
-                                cardManager.setCaption(localizer.getMessage("lblCommanders"));
+                                cardManager.setCaption(Forge.getLocalizer().getMessage("lblCommanders"));
                                 break;
                             case Brawl:
                                 additionalFilter = DeckFormat.Brawl.isLegalCommanderPredicate();
-                                cardManager.setCaption(localizer.getMessage("lblCommanders"));
+                                cardManager.setCaption(Forge.getLocalizer().getMessage("lblCommanders"));
                                 break;
                             default:
                                 // Do nothing
@@ -1202,7 +1209,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             default:
                                 // Do nothing
                         }
-                        cardManager.setCaption(localizer.getMessage("lblCards"));
+                        cardManager.setCaption(Forge.getLocalizer().getMessage("lblCards"));
                     }
                     // fall through to below
                 default:
@@ -1235,10 +1242,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         @Override
         protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
-            final Localizer localizer = Localizer.getInstance();
+            if (card == null)
+                return;
+            final Localizer localizer = Forge.getLocalizer().getInstance();
 
             if (!needsCommander() && !canOnlyBePartnerCommander(card)) {
-                addItem(menu, localizer.getMessage("lblAdd"), localizer.getMessage("lblTo") + " " + parentScreen.getMainDeckPage().cardManager.getCaption(), parentScreen.getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
+                addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), Forge.getLocalizer().getMessage("lblTo") + " " + parentScreen.getMainDeckPage().cardManager.getCaption(), parentScreen.getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -1250,7 +1259,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     }
                 });
                 if (parentScreen.getSideboardPage() != null) {
-                    addItem(menu, localizer.getMessage("lblAdd"), localizer.getMessage("lbltosideboard"), parentScreen.getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
+                    addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), Forge.getLocalizer().getMessage("lbltosideboard"), parentScreen.getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
                         @Override
                         public void run(Integer result) {
                             if (result == null || result <= 0) { return; }
@@ -1271,7 +1280,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 //add option to add or remove card from favorites
                 final CardPreferences prefs = CardPreferences.getPrefs(card);
                 if (prefs.getStarCount() == 0) {
-                    menu.addItem(new FMenuItem(localizer.getMessage("lblAddFavorites"), Forge.hdbuttons ? FSkinImage.HDSTAR_FILLED : FSkinImage.STAR_FILLED, new FEventHandler() {
+                    menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAddFavorites"), Forge.hdbuttons ? FSkinImage.HDSTAR_FILLED : FSkinImage.STAR_FILLED, new FEventHandler() {
                         @Override
                         public void handleEvent(FEvent e) {
                             prefs.setStarCount(1);
@@ -1279,7 +1288,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         }
                     }));
                 } else {
-                    menu.addItem(new FMenuItem(localizer.getMessage("lblRemoveFavorites"), Forge.hdbuttons ? FSkinImage.HDSTAR_OUTLINE : FSkinImage.STAR_OUTLINE, new FEventHandler() {
+                    menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblRemoveFavorites"), Forge.hdbuttons ? FSkinImage.HDSTAR_OUTLINE : FSkinImage.STAR_OUTLINE, new FEventHandler() {
                         @Override
                         public void handleEvent(FEvent e) {
                             prefs.setStarCount(0);
@@ -1291,7 +1300,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 //if card has more than one art option, add item to change user's preferred art
                 final List<PaperCard> artOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
                 if (artOptions != null && artOptions.size() > 1) {
-                    menu.addItem(new FMenuItem(localizer.getMessage("lblChangePreferredArt"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, new FEventHandler() {
+                    menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblChangePreferredArt"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, new FEventHandler() {
                         @Override
                         public void handleEvent(FEvent e) {
                             //sort options so current option is on top and selected by default
@@ -1302,7 +1311,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                     sortedOptions.add(option);
                                 }
                             }
-                            GuiChoose.oneOrNone(localizer.getMessage("lblSelectPreferredArt") + " " + card.getName(), sortedOptions, new Callback<PaperCard>() {
+                            GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblSelectPreferredArt") + " " + card.getName(), sortedOptions, new Callback<PaperCard>() {
                                 @Override
                                 public void run(PaperCard result) {
                                     if (result != null) {
@@ -1323,8 +1332,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         @Override
         protected void buildDeckMenu(FPopupMenu menu) {
             if (cardManager.getConfig().getShowUniqueCardsOption()) {
-                final Localizer localizer = Localizer.getInstance();
-                menu.addItem(new FCheckBoxMenuItem(localizer.getMessage("lblUniqueCardsOnly"), cardManager.getWantUnique(), new FEventHandler() {
+                final Localizer localizer = Forge.getLocalizer().getInstance();
+                menu.addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblUniqueCardsOnly"), cardManager.getWantUnique(), new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
                         boolean wantUnique = !cardManager.getWantUnique();
@@ -1347,39 +1356,39 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected DeckSectionPage(DeckSection deckSection0, ItemManagerConfig config) {
             super(config, null, null);
 
-            final Localizer localizer = Localizer.getInstance();
+            final Localizer localizer = Forge.getLocalizer().getInstance();
 
             deckSection = deckSection0;
             switch (deckSection) {
             default:
             case Main:
-                captionPrefix = localizer.getMessage("lblMain");
-                cardManager.setCaption(localizer.getMessage("ttMain"));
+                captionPrefix = Forge.getLocalizer().getMessage("lblMain");
+                cardManager.setCaption(Forge.getLocalizer().getMessage("ttMain"));
                 icon = MAIN_DECK_ICON;
                 break;
             case Sideboard:
-                captionPrefix = localizer.getMessage("lblSide");
-                cardManager.setCaption(localizer.getMessage("lblSideboard"));
+                captionPrefix = Forge.getLocalizer().getMessage("lblSide");
+                cardManager.setCaption(Forge.getLocalizer().getMessage("lblSideboard"));
                 icon = SIDEBOARD_ICON;
                 break;
             case Commander:
-                captionPrefix = localizer.getMessage("lblCommander");
-                cardManager.setCaption(localizer.getMessage("lblCommander"));
+                captionPrefix = Forge.getLocalizer().getMessage("lblCommander");
+                cardManager.setCaption(Forge.getLocalizer().getMessage("lblCommander"));
                 icon = FSkinImage.COMMANDER;
                 break;
             case Avatar:
-                captionPrefix = localizer.getMessage("lblAvatar");
-                cardManager.setCaption(localizer.getMessage("lblAvatar"));
+                captionPrefix = Forge.getLocalizer().getMessage("lblAvatar");
+                cardManager.setCaption(Forge.getLocalizer().getMessage("lblAvatar"));
                 icon = new FTextureRegionImage(FSkin.getAvatars().get(0));
                 break;
             case Planes:
-                captionPrefix = localizer.getMessage("lblPlanes");
-                cardManager.setCaption(localizer.getMessage("lblPlanes"));
+                captionPrefix = Forge.getLocalizer().getMessage("lblPlanes");
+                cardManager.setCaption(Forge.getLocalizer().getMessage("lblPlanes"));
                 icon = FSkinImage.CHAOS;
                 break;
             case Schemes:
-                captionPrefix = localizer.getMessage("lblSchemes");
-                cardManager.setCaption(localizer.getMessage("lblSchemes"));
+                captionPrefix = Forge.getLocalizer().getMessage("lblSchemes");
+                cardManager.setCaption(Forge.getLocalizer().getMessage("lblSchemes"));
                 icon = FSkinImage.POISON;
                 break;
             }
@@ -1439,11 +1448,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         @Override
         protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
-            final Localizer localizer = Localizer.getInstance();
+            final Localizer localizer = Forge.getLocalizer().getInstance();
             switch (deckSection) {
             default:
             case Main:
-                addItem(menu, localizer.getMessage("lblAdd"), null, Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, true, false, new Callback<Integer>() {
+                addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), null, Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, true, false, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -1458,7 +1467,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     }
                 });
                 if (!parentScreen.isLimitedEditor()) {
-                    addItem(menu, localizer.getMessage("lblRemove"), null, Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, false, false, new Callback<Integer>() {
+                    addItem(menu, Forge.getLocalizer().getMessage("lblRemove"), null, Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, false, false, new Callback<Integer>() {
                         @Override
                         public void run(Integer result) {
                             if (result == null || result <= 0) { return; }
@@ -1471,7 +1480,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     });
                 }
                 if (parentScreen.getSideboardPage() != null) {
-                    addItem(menu, localizer.getMessage("lblMove"), localizer.getMessage("lbltosideboard"), parentScreen.getSideboardPage().getIcon(), false, false, new Callback<Integer>() {
+                    addItem(menu, Forge.getLocalizer().getMessage("lblMove"), Forge.getLocalizer().getMessage("lbltosideboard"), parentScreen.getSideboardPage().getIcon(), false, false, new Callback<Integer>() {
                         @Override
                         public void run(Integer result) {
                             if (result == null || result <= 0) { return; }
@@ -1484,7 +1493,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 if (parentScreen.isAllowedReplacement()) {
                     final List<PaperCard> cardOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
                     if (cardOptions != null && cardOptions.size() > 1) {
-                        menu.addItem(new FMenuItem(localizer.getMessage("lblReplaceCard"), Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST, new FEventHandler() {
+                        menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblReplaceCard"), Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST, new FEventHandler() {
                             @Override
                             public void handleEvent(FEvent e) {
                                 //sort options so current option is on top and selected by default
@@ -1495,7 +1504,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                         sortedOptions.add(option);
                                     }
                                 }
-                                GuiChoose.oneOrNone(localizer.getMessage("lblSelectReplacementCard") + " " + card.getName(), sortedOptions, new Callback<PaperCard>() {
+                                GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblSelectReplacementCard") + " " + card.getName(), sortedOptions, new Callback<PaperCard>() {
                                     @Override
                                     public void run(PaperCard result) {
                                         if (result != null) {
@@ -1513,7 +1522,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 addCommanderItems(menu, card, false, false);
                 break;
             case Sideboard:
-                addItem(menu, localizer.getMessage("lblAdd"), null, Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, true, false, new Callback<Integer>() {
+                addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), null, Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, true, false, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -1528,7 +1537,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     }
                 });
                 if (!parentScreen.isLimitedEditor()) {
-                    addItem(menu, localizer.getMessage("lblRemove"), null, Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, false, false, new Callback<Integer>() {
+                    addItem(menu, Forge.getLocalizer().getMessage("lblRemove"), null, Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, false, false, new Callback<Integer>() {
                         @Override
                         public void run(Integer result) {
                             if (result == null || result <= 0) { return; }
@@ -1540,7 +1549,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         }
                     });
                 }
-                addItem(menu, localizer.getMessage("lblMove"), localizer.getMessage("lblToMainDeck"), parentScreen.getMainDeckPage().getIcon(), false, false, new Callback<Integer>() {
+                addItem(menu, Forge.getLocalizer().getMessage("lblMove"), Forge.getLocalizer().getMessage("lblToMainDeck"), parentScreen.getMainDeckPage().getIcon(), false, false, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -1552,7 +1561,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 if (parentScreen.isAllowedReplacement()) {
                     final List<PaperCard> cardOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
                     if (cardOptions != null && cardOptions.size() > 1) {
-                        menu.addItem(new FMenuItem(localizer.getMessage("lblReplaceCard"), Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST, new FEventHandler() {
+                        menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblReplaceCard"), Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST, new FEventHandler() {
                             @Override
                             public void handleEvent(FEvent e) {
                                 //sort options so current option is on top and selected by default
@@ -1563,7 +1572,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                         sortedOptions.add(option);
                                     }
                                 }
-                                GuiChoose.oneOrNone(localizer.getMessage("lblSelectReplacementCard") + " " + card.getName(), sortedOptions, new Callback<PaperCard>() {
+                                GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblSelectReplacementCard") + " " + card.getName(), sortedOptions, new Callback<PaperCard>() {
                                     @Override
                                     public void run(PaperCard result) {
                                         if (result != null) {
@@ -1582,7 +1591,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 break;
             case Commander:
                 if (parentScreen.editorType != EditorType.PlanarConquest || isPartnerCommander(card)) {
-                    addItem(menu, localizer.getMessage("lblRemove"), null, Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, false, false, new Callback<Integer>() {
+                    addItem(menu, Forge.getLocalizer().getMessage("lblRemove"), null, Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, false, false, new Callback<Integer>() {
                         @Override
                         public void run(Integer result) {
                             if (result == null || result <= 0) {
@@ -1598,7 +1607,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 if (parentScreen.isAllowedReplacement()) {
                     final List<PaperCard> cardOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
                     if (cardOptions != null && cardOptions.size() > 1) {
-                        menu.addItem(new FMenuItem(localizer.getMessage("lblReplaceCard"), Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST, new FEventHandler() {
+                        menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblReplaceCard"), Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST, new FEventHandler() {
                             @Override
                             public void handleEvent(FEvent e) {
                                 //sort options so current option is on top and selected by default
@@ -1609,7 +1618,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                         sortedOptions.add(option);
                                     }
                                 }
-                                GuiChoose.oneOrNone(localizer.getMessage("lblSelectReplacementCard") + " " + card.getName(), sortedOptions, new Callback<PaperCard>() {
+                                GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblSelectReplacementCard") + " " + card.getName(), sortedOptions, new Callback<PaperCard>() {
                                     @Override
                                     public void run(PaperCard result) {
                                         if (result != null) {
@@ -1626,7 +1635,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 }
                 break;
             case Avatar:
-                addItem(menu, localizer.getMessage("lblRemove"), null, Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, false, false, new Callback<Integer>() {
+                addItem(menu, Forge.getLocalizer().getMessage("lblRemove"), null, Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, false, false, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -1636,7 +1645,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 });
                 break;
             case Schemes:
-                addItem(menu, localizer.getMessage("lblAdd"), null, Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, true, false, new Callback<Integer>() {
+                addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), null, Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, true, false, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -1644,7 +1653,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         addCard(card, result);
                     }
                 });
-                addItem(menu, localizer.getMessage("lblRemove"), null, Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, false, false, new Callback<Integer>() {
+                addItem(menu, Forge.getLocalizer().getMessage("lblRemove"), null, Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, false, false, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -1654,7 +1663,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 });
                 break;
             case Planes:
-                addItem(menu, localizer.getMessage("lblAdd"), null, Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, true, false, new Callback<Integer>() {
+                addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), null, Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, true, false, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -1662,7 +1671,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         addCard(card, result);
                     }
                 });
-                addItem(menu, localizer.getMessage("lblRemove"), null, Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, false, false, new Callback<Integer>() {
+                addItem(menu, Forge.getLocalizer().getMessage("lblRemove"), null, Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, false, false, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -1686,7 +1695,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
     private static class DraftPackPage extends CatalogPage {
         protected DraftPackPage() {
-            super(ItemManagerConfig.DRAFT_PACK, Localizer.getInstance().getMessage("lblPackN", String.valueOf(1)), FSkinImage.PACK);
+            super(ItemManagerConfig.DRAFT_PACK, Forge.getLocalizer().getInstance().getMessage("lblPackN", String.valueOf(1)), FSkinImage.PACK);
         }
 
         @Override
@@ -1696,7 +1705,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
             CardPool pool = draft.nextChoice();
             int packNumber = draft.getCurrentBoosterIndex() + 1;
-            caption = Localizer.getInstance().getMessage("lblPackN", String.valueOf(packNumber));
+            caption = Forge.getLocalizer().getInstance().getMessage("lblPackN", String.valueOf(packNumber));
             cardManager.setPool(pool);
             cardManager.setShowRanking(true);
         }
@@ -1724,15 +1733,15 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         @Override
         protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
-            final Localizer localizer = Localizer.getInstance();
-            addItem(menu, localizer.getMessage("lblAdd"), localizer.getMessage("lblToMainDeck"), parentScreen.getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
+            final Localizer localizer = Forge.getLocalizer().getInstance();
+            addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), Forge.getLocalizer().getMessage("lblToMainDeck"), parentScreen.getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
                 @Override
                 public void run(Integer result) { //ignore quantity
                     parentScreen.getMainDeckPage().addCard(card);
                     afterCardPicked(card);
                 }
             });
-            addItem(menu, localizer.getMessage("lblAdd"), localizer.getMessage("lbltosideboard"), parentScreen.getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
+            addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), Forge.getLocalizer().getMessage("lbltosideboard"), parentScreen.getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
                 @Override
                 public void run(Integer result) { //ignore quantity
                     parentScreen.getSideboardPage().addCard(card);
@@ -1840,8 +1849,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             if (editor != null) {
                 String name = this.getModelName();
                 if (name.isEmpty()) {
-                    final Localizer localizer = Localizer.getInstance();
-                    name = "[" + localizer.getMessage("lblNewDeck") + "]";
+                    name = "[" + Forge.getLocalizer().getMessage("lblNewDeck") + "]";
                 }
                 if (!saved && editor.allowsSave()) {
                     name = "*" + name;

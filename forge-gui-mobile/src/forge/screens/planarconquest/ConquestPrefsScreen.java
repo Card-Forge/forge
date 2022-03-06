@@ -1,5 +1,6 @@
 package forge.screens.planarconquest;
 
+import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -16,7 +17,6 @@ import forge.toolbox.FNumericTextField;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
-import forge.util.Localizer;
 import forge.util.Utils;
 
 public class ConquestPrefsScreen extends FScreen {
@@ -50,35 +50,35 @@ public class ConquestPrefsScreen extends FScreen {
     });
 
     public ConquestPrefsScreen() {
-        super(Localizer.getInstance().getMessage("lblConquestPreference"), ConquestMenu.getMenu());
+        super(Forge.getLocalizer().getMessage("lblConquestPreference"), ConquestMenu.getMenu());
 
-        scroller.add(new PrefsHeader(Localizer.getInstance().getMessage("lblAetherShards"), FSkinImage.AETHER_SHARD, PrefsGroup.BOOSTER));
-        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblBaseDuplicateValue"), CQPref.AETHER_BASE_DUPLICATE_VALUE, PrefsGroup.AETHER));
-        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblBaseExileValue"), CQPref.AETHER_BASE_EXILE_VALUE, PrefsGroup.AETHER));
-        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblBaseRetrieveCost"), CQPref.AETHER_BASE_RETRIEVE_COST, PrefsGroup.AETHER));
-        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblBasePullCost"), CQPref.AETHER_BASE_PULL_COST, PrefsGroup.AETHER));
-        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblUncommonMultiplier"), CQPref.AETHER_UNCOMMON_MULTIPLIER, PrefsGroup.AETHER));
-        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblRareMultiplier"), CQPref.AETHER_RARE_MULTIPLIER, PrefsGroup.AETHER));
-        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblMythicMultiplier"), CQPref.AETHER_MYTHIC_MULTIPLIER, PrefsGroup.AETHER));
-        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblStartingShards"), CQPref.AETHER_START_SHARDS, PrefsGroup.AETHER));
-        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblChaosWheelShardValue"), CQPref.AETHER_WHEEL_SHARDS, PrefsGroup.AETHER));
+        scroller.add(new PrefsHeader(Forge.getLocalizer().getMessage("lblAetherShards"), FSkinImage.AETHER_SHARD, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsOption(Forge.getLocalizer().getMessage("lblBaseDuplicateValue"), CQPref.AETHER_BASE_DUPLICATE_VALUE, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption(Forge.getLocalizer().getMessage("lblBaseExileValue"), CQPref.AETHER_BASE_EXILE_VALUE, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption(Forge.getLocalizer().getMessage("lblBaseRetrieveCost"), CQPref.AETHER_BASE_RETRIEVE_COST, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption(Forge.getLocalizer().getMessage("lblBasePullCost"), CQPref.AETHER_BASE_PULL_COST, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption(Forge.getLocalizer().getMessage("lblUncommonMultiplier"), CQPref.AETHER_UNCOMMON_MULTIPLIER, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption(Forge.getLocalizer().getMessage("lblRareMultiplier"), CQPref.AETHER_RARE_MULTIPLIER, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption(Forge.getLocalizer().getMessage("lblMythicMultiplier"), CQPref.AETHER_MYTHIC_MULTIPLIER, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption(Forge.getLocalizer().getMessage("lblStartingShards"), CQPref.AETHER_START_SHARDS, PrefsGroup.AETHER));
+        scroller.add(new PrefsOption(Forge.getLocalizer().getMessage("lblChaosWheelShardValue"), CQPref.AETHER_WHEEL_SHARDS, PrefsGroup.AETHER));
 
-        scroller.add(new PrefsHeader(Localizer.getInstance().getMessage("lblBoosterPacks"), FSkinImage.PACK, PrefsGroup.BOOSTER));
-        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblCommons"), CQPref.BOOSTER_COMMONS, PrefsGroup.BOOSTER));
-        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblUncommons"), CQPref.BOOSTER_UNCOMMONS, PrefsGroup.BOOSTER));
-        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblRares"), CQPref.BOOSTER_RARES, PrefsGroup.BOOSTER));
-        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblBoostersPerMythic"), CQPref.BOOSTERS_PER_MYTHIC, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsHeader(Forge.getLocalizer().getMessage("lblBoosterPacks"), FSkinImage.PACK, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsOption(Forge.getLocalizer().getMessage("lblCommons"), CQPref.BOOSTER_COMMONS, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsOption(Forge.getLocalizer().getMessage("lblUncommons"), CQPref.BOOSTER_UNCOMMONS, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsOption(Forge.getLocalizer().getMessage("lblRares"), CQPref.BOOSTER_RARES, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsOption(Forge.getLocalizer().getMessage("lblBoostersPerMythic"), CQPref.BOOSTERS_PER_MYTHIC, PrefsGroup.BOOSTER));
 
-        scroller.add(new PrefsHeader(Localizer.getInstance().getMessage("lblPlaneswalkEmblems"), FSkinImage.PW_BADGE_COMMON, PrefsGroup.PLANESWALK));
-        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblBaseConquerReward"), CQPref.PLANESWALK_CONQUER_EMBLEMS, PrefsGroup.PLANESWALK));
-        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblChaosWheelBonus"), CQPref.PLANESWALK_WHEEL_EMBLEMS, PrefsGroup.PLANESWALK));
-        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblFirstPlaneUnlockCost"), CQPref.PLANESWALK_FIRST_UNLOCK, PrefsGroup.PLANESWALK));
-        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblCostIncreasePerUnlock"), CQPref.PLANESWALK_UNLOCK_INCREASE, PrefsGroup.PLANESWALK));
+        scroller.add(new PrefsHeader(Forge.getLocalizer().getMessage("lblPlaneswalkEmblems"), FSkinImage.PW_BADGE_COMMON, PrefsGroup.PLANESWALK));
+        scroller.add(new PrefsOption(Forge.getLocalizer().getMessage("lblBaseConquerReward"), CQPref.PLANESWALK_CONQUER_EMBLEMS, PrefsGroup.PLANESWALK));
+        scroller.add(new PrefsOption(Forge.getLocalizer().getMessage("lblChaosWheelBonus"), CQPref.PLANESWALK_WHEEL_EMBLEMS, PrefsGroup.PLANESWALK));
+        scroller.add(new PrefsOption(Forge.getLocalizer().getMessage("lblFirstPlaneUnlockCost"), CQPref.PLANESWALK_FIRST_UNLOCK, PrefsGroup.PLANESWALK));
+        scroller.add(new PrefsOption(Forge.getLocalizer().getMessage("lblCostIncreasePerUnlock"), CQPref.PLANESWALK_UNLOCK_INCREASE, PrefsGroup.PLANESWALK));
 
-        scroller.add(new PrefsHeader(Localizer.getInstance().getMessage("lblChaosBattles"), FSkinImage.CHAOS, PrefsGroup.CHAOS));
-        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblWinsforMediumAI"), CQPref.CHAOS_BATTLE_WINS_MEDIUMAI, PrefsGroup.CHAOS));
-        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblWinsforHardAI"), CQPref.CHAOS_BATTLE_WINS_HARDAI, PrefsGroup.CHAOS));
-        scroller.add(new PrefsOption(Localizer.getInstance().getMessage("lblWinsforExpertAI"), CQPref.CHAOS_BATTLE_WINS_EXPERTAI, PrefsGroup.CHAOS));
+        scroller.add(new PrefsHeader(Forge.getLocalizer().getMessage("lblChaosBattles"), FSkinImage.CHAOS, PrefsGroup.CHAOS));
+        scroller.add(new PrefsOption(Forge.getLocalizer().getMessage("lblWinsforMediumAI"), CQPref.CHAOS_BATTLE_WINS_MEDIUMAI, PrefsGroup.CHAOS));
+        scroller.add(new PrefsOption(Forge.getLocalizer().getMessage("lblWinsforHardAI"), CQPref.CHAOS_BATTLE_WINS_HARDAI, PrefsGroup.CHAOS));
+        scroller.add(new PrefsOption(Forge.getLocalizer().getMessage("lblWinsforExpertAI"), CQPref.CHAOS_BATTLE_WINS_EXPERTAI, PrefsGroup.CHAOS));
     }
 
     @Override
@@ -148,7 +148,7 @@ public class ConquestPrefsScreen extends FScreen {
                         default:
                             prefType = "";
                         }
-                        FOptionPane.showErrorDialog(validationError, Localizer.getInstance().getMessage("lblSaveFailed") + prefType);
+                        FOptionPane.showErrorDialog(validationError, Forge.getLocalizer().getMessage("lblSaveFailed") + prefType);
                         return false;
                     }
 

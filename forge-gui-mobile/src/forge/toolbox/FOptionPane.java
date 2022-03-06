@@ -23,7 +23,6 @@ import forge.localinstance.skin.FSkinProp;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
-import forge.util.Localizer;
 import forge.util.Utils;
 import forge.util.WaitCallback;
 
@@ -56,15 +55,15 @@ public class FOptionPane extends FDialog {
     }
 
     public static void showMessageDialog(final String message, final String title, final FImage icon) {
-        showOptionDialog(message, title, icon, ImmutableList.of(Localizer.getInstance().getMessage("lblOK")), 0, null);
+        showOptionDialog(message, title, icon, ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")), 0, null);
     }
 
     public static void showMessageDialog(final String message, FSkinFont messageFont, final String title, final FImage icon) {
-        showOptionDialog(message, messageFont, title, icon, ImmutableList.of(Localizer.getInstance().getMessage("lblOK")), 0, null);
+        showOptionDialog(message, messageFont, title, icon, ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")), 0, null);
     }
 
     public static void showMessageDialog(final String message, final String title, final FImage icon, final Callback<Integer> callback) {
-        showOptionDialog(message, title, icon, ImmutableList.of(Localizer.getInstance().getMessage("lblOK")), 0, callback);
+        showOptionDialog(message, title, icon, ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")), 0, callback);
     }
 
     public static void showConfirmDialog(final String message, final Callback<Boolean> callback) {
@@ -72,11 +71,11 @@ public class FOptionPane extends FDialog {
     }
 
     public static void showConfirmDialog(final String message, final String title, final Callback<Boolean> callback) {
-        showConfirmDialog(message, title, Localizer.getInstance().getMessage("lblYes"), Localizer.getInstance().getMessage("lblNo"), true, callback);
+        showConfirmDialog(message, title, Forge.getLocalizer().getMessage("lblYes"), Forge.getLocalizer().getMessage("lblNo"), true, callback);
     }
 
     public static void showConfirmDialog(final String message, final String title, final boolean defaultYes, final Callback<Boolean> callback) {
-        showConfirmDialog(message, title, Localizer.getInstance().getMessage("lblYes"), Localizer.getInstance().getMessage("lblNo"), defaultYes, callback);
+        showConfirmDialog(message, title, Forge.getLocalizer().getMessage("lblYes"), Forge.getLocalizer().getMessage("lblNo"), defaultYes, callback);
     }
 
     public static void showConfirmDialog(final String message, final String title, final String yesButtonText, final String noButtonText, final Callback<Boolean> callback) {
@@ -190,7 +189,7 @@ public class FOptionPane extends FDialog {
         container.add(inputField);
         container.setHeight(inputField.getHeight() + padTop + PADDING);
 
-        final FOptionPane optionPane = new FOptionPane(message, null, title, null, container, ImmutableList.of(Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel")), 0, new Callback<Integer>() {
+        final FOptionPane optionPane = new FOptionPane(message, null, title, null, container, ImmutableList.of(Forge.getLocalizer().getMessage("lblOK"), Forge.getLocalizer().getMessage("lblCancel")), 0, new Callback<Integer>() {
             @SuppressWarnings("unchecked")
             @Override
             public void run(final Integer result) {

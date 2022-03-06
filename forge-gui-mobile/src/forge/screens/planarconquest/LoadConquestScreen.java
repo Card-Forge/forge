@@ -37,7 +37,6 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList;
 import forge.toolbox.FTextArea;
 import forge.util.FileUtil;
-import forge.util.Localizer;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
 
@@ -47,11 +46,11 @@ public class LoadConquestScreen extends LaunchScreen {
     private static final FSkinColor OLD_CONQUESTS_BACK_COLOR = FSkinColor.get(Colors.CLR_INACTIVE).getContrastColor(20);
     private static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
 
-    private final FTextArea lblOldConquests = add(new FTextArea(false, Localizer.getInstance().getMessage("lblLoadingExistingConquests")));
+    private final FTextArea lblOldConquests = add(new FTextArea(false, Forge.getLocalizer().getMessage("lblLoadingExistingConquests")));
     private final ConquestFileLister lstConquests = add(new ConquestFileLister());
-    private final FButton btnNewConquest = add(new FButton(Localizer.getInstance().getMessage("lblNewQuest")));
-    private final FButton btnRenameConquest = add(new FButton(Localizer.getInstance().getMessage("lblRename")));
-    private final FButton btnDeleteConquest = add(new FButton(Localizer.getInstance().getMessage("lblDelete")));
+    private final FButton btnNewConquest = add(new FButton(Forge.getLocalizer().getMessage("lblNewQuest")));
+    private final FButton btnRenameConquest = add(new FButton(Forge.getLocalizer().getMessage("lblRename")));
+    private final FButton btnDeleteConquest = add(new FButton(Forge.getLocalizer().getMessage("lblDelete")));
 
     public LoadConquestScreen() {
         super(null, LoadGameMenu.getMenu());
@@ -84,7 +83,7 @@ public class LoadConquestScreen extends LaunchScreen {
 
     @Override
     public void onActivate() {
-        lblOldConquests.setText(Localizer.getInstance().getMessage("lblLoadingExistingConquests"));
+        lblOldConquests.setText(Forge.getLocalizer().getMessage("lblLoadingExistingConquests"));
         lstConquests.clear();
         updateEnabledButtons();
         revalidate();
@@ -130,7 +129,7 @@ public class LoadConquestScreen extends LaunchScreen {
                 Gdx.app.postRunnable(new Runnable() {
                     @Override
                     public void run() {
-                        lblOldConquests.setText(Localizer.getInstance().getMessage("lblOldConquestDataPutIntoDirAndRestartForge", ForgeConstants.CONQUEST_SAVE_DIR));
+                        lblOldConquests.setText(Forge.getLocalizer().getMessage("lblOldConquestDataPutIntoDirAndRestartForge", ForgeConstants.CONQUEST_SAVE_DIR));
                         updateEnabledButtons();
                         revalidate();
                         lstConquests.scrollIntoView(lstConquests.selectedIndex);
@@ -199,14 +198,14 @@ public class LoadConquestScreen extends LaunchScreen {
                 String questName;
                 String oldConquestName = conquest.getName();
                 while (true) {
-                    questName = SOptionPane.showInputDialog(Localizer.getInstance().getMessage("lblEnterNewConquestName"), Localizer.getInstance().getMessage("lblRenameConquest"), null, oldConquestName);
+                    questName = SOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblEnterNewConquestName"), Forge.getLocalizer().getMessage("lblRenameConquest"), null, oldConquestName);
                     if (questName == null) { return; }
 
                     questName = QuestUtil.cleanString(questName);
                     if (questName.equals(oldConquestName)) { return; } //quit if chose same name
 
                     if (questName.isEmpty()) {
-                        SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblPleaseSpecifyConquestName"));
+                        SOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblPleaseSpecifyConquestName"));
                         continue;
                     }
 
@@ -218,7 +217,7 @@ public class LoadConquestScreen extends LaunchScreen {
                         }
                     }
                     if (exists) {
-                        SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblConquestNameExistsPleasePickAnotherName"));
+                        SOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblConquestNameExistsPleasePickAnotherName"));
                         continue;
                     }
                     break;
@@ -243,8 +242,8 @@ public class LoadConquestScreen extends LaunchScreen {
             @Override
             public void run() {
                 if (!SOptionPane.showConfirmDialog(
-                        Localizer.getInstance().getMessage("lblAreYouSuerDeleteConquest", conquest.getName()),
-                        Localizer.getInstance().getMessage("lblDeleteConquest"), Localizer.getInstance().getMessage("lblDelete"), Localizer.getInstance().getMessage("lblCancel"))) {
+                        Forge.getLocalizer().getMessage("lblAreYouSuerDeleteConquest", conquest.getName()),
+                        Forge.getLocalizer().getMessage("lblDeleteConquest"), Forge.getLocalizer().getMessage("lblDelete"), Forge.getLocalizer().getMessage("lblCancel"))) {
                     return;
                 }
 
