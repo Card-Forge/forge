@@ -529,7 +529,7 @@ public class CardFactory {
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to, final Card host, final Player p, final boolean lki) {
-        if (from.getTargetRestrictions() != null) {
+        if (from.usesTargeting()) {
             to.setTargetRestrictions(from.getTargetRestrictions());
         }
         to.setDescription(from.getOriginalDescription());

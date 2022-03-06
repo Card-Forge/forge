@@ -198,12 +198,13 @@ public abstract class TapAiBase extends SpellAbilityAi {
                 Predicate<Card> findBlockers = CardPredicates.possibleBlockerForAtLeastOne(attackers);
                 List<Card> creatureList = CardLists.filter(tapList, findBlockers);
 
+                // TODO check if own creature would be forced to attack and we want to keep it alive
+
                 if (!attackers.isEmpty() && !creatureList.isEmpty()) {
                     choice = ComputerUtilCard.getBestCreatureAI(creatureList);
                 } else if (sa.getRootAbility().isTrigger() || ComputerUtil.castSpellInMain1(ai, sa)) {
                     choice = ComputerUtilCard.getMostExpensivePermanentAI(tapList);
                 }
-
             } else if (phase.isPlayerTurn(opp)
                     && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 // Tap creatures possible blockers before combat during AI's turn.

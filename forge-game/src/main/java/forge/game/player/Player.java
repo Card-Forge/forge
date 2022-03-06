@@ -148,35 +148,37 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int lifeStartedThisTurnWith = startingLife;
     private final Map<Card, Integer> assignedDamage = Maps.newHashMap();
     private final Map<Card, Integer> assignedCombatDamage = Maps.newHashMap();
-    private int spellsCastThisTurn = 0;
-    private int spellsCastThisGame = 0;
-    private int spellsCastLastTurn = 0;
-    private int landsPlayedThisTurn = 0;
-    private int landsPlayedLastTurn = 0;
-    private int investigatedThisTurn = 0;
-    private int surveilThisTurn = 0;
-    private int cycledThisTurn = 0;
-    private int equippedThisTurn = 0;
-    private int lifeLostThisTurn = 0;
-    private int lifeLostLastTurn = 0;
-    private int lifeGainedThisTurn = 0;
-    private int lifeGainedTimesThisTurn = 0;
-    private int lifeGainedByTeamThisTurn = 0;
+    private int spellsCastThisTurn;
+    private int spellsCastThisGame;
+    private int spellsCastLastTurn;
+    private int landsPlayedThisTurn;
+    private int landsPlayedLastTurn;
+    private int investigatedThisTurn;
+    private int surveilThisTurn;
+    private int cycledThisTurn;
+    private int equippedThisTurn;
+    private int lifeLostThisTurn;
+    private int lifeLostLastTurn;
+    private int lifeGainedThisTurn;
+    private int lifeGainedTimesThisTurn;
+    private int lifeGainedByTeamThisTurn;
     private int numPowerSurgeLands;
-    private int numLibrarySearchedOwn = 0; //The number of times this player has searched his library
+    private int numLibrarySearchedOwn; //The number of times this player has searched his library
+    private int numDrawnThisTurn;
+    private int numDrawnThisDrawStep;
+    private int numRollsThisTurn;
+    private int numDiscardedThisTurn;
+    private int numTokenCreatedThisTurn;
+    private int numForetoldThisTurn;
+    private int numCardsInHandStartedThisTurnWith;
+    private int attackersDeclaredThisTurn;
+    private int venturedThisTurn;
     private int maxHandSize = 7;
     private int startingHandSize = 7;
     private boolean unlimitedHandSize = false;
-    private Card lastDrawnCard = null;
+    private Card lastDrawnCard;
     private String namedCard = "";
     private String namedCard2 = "";
-    private int numDrawnThisTurn = 0;
-    private int numDrawnThisDrawStep = 0;
-    private int numRollsThisTurn = 0;
-    private int numDiscardedThisTurn = 0;
-    private int numTokenCreatedThisTurn = 0;
-    private int numForetoldThisTurn = 0;
-    private int numCardsInHandStartedThisTurnWith = 0;
 
     private int simultaneousDamage = 0;
 
@@ -200,13 +202,11 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private Table<Long, Long, KeywordsChange> changedKeywords = TreeBasedTable.create();
     private ManaPool manaPool = new ManaPool(this);
-    private GameEntity mustAttackEntity = null;
-    private GameEntity mustAttackEntityThisTurn = null;
+    private GameEntity mustAttackEntity;
+    private GameEntity mustAttackEntityThisTurn;
     private CardCollection creatureAttackedThisTurn = new CardCollection();
     private boolean activateLoyaltyAbilityThisTurn = false;
     private boolean tappedLandForManaThisTurn = false;
-    private int attackersDeclaredThisTurn = 0;
-    private int venturedThisTurn = 0;
     private List<Card> completedDungeons = new ArrayList<>();
 
     private final Map<ZoneType, PlayerZone> zones = Maps.newEnumMap(ZoneType.class);
@@ -236,9 +236,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     // The SA currently being paid for
     private Deque<SpellAbility> paidForStack = new ArrayDeque<>();
 
-    private Card monarchEffect = null;
-    private Card blessingEffect = null;
-    private Card keywordEffect = null;
+    private Card monarchEffect;
+    private Card blessingEffect;
+    private Card keywordEffect;
 
     private Map<Long, Integer> additionalVotes = Maps.newHashMap();
     private Map<Long, Integer> additionalOptionalVotes = Maps.newHashMap();

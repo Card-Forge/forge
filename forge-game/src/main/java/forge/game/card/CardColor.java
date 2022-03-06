@@ -27,7 +27,7 @@ import forge.card.ColorSet;
  * @author Forge
  * @version $Id$
  */
-public class CardColor  {
+public class CardColor {
     private final byte colorMask;
     public final byte getColorMask() {
         return colorMask;

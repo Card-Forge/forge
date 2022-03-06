@@ -87,7 +87,7 @@ public class TargetSelection {
         final int maxTargets = numTargets != null ? numTargets.intValue() : ability.getMaxTargets();
         //final int maxTotalCMC = tgt.getMaxTotalCMC(ability.getHostCard(), ability);
         final int numTargeted = ability.getTargets().size();
-        final boolean isSingleZone = ability.getTargetRestrictions().isSingleZone();
+        final boolean isSingleZone = getTgt().isSingleZone();
 
         final boolean hasEnoughTargets = minTargets == 0 || numTargeted >= minTargets;
         final boolean hasAllTargets = numTargeted == maxTargets && maxTargets > 0;
@@ -219,7 +219,7 @@ public class TargetSelection {
         for (final Card inZone : choices) {
             Zone zz = game.getZoneOf(inZone);
             CardView cardView = CardView.get(inZone);
-            if (this.ability.getTargetRestrictions() != null && this.ability.getTargetRestrictions().isWithSameCreatureType()) {
+            if (getTgt() != null && getTgt().isWithSameCreatureType()) {
                 Card firstTgt = this.ability.getTargetCard();
                 if (firstTgt != null && !firstTgt.sharesCreatureTypeWith(inZone)) {
                     continue;

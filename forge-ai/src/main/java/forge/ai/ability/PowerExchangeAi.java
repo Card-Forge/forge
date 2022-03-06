@@ -37,7 +37,7 @@ public class PowerExchangeAi extends SpellAbilityAi {
                 return c.canBeTargetedBy(sa) && c.getController() != ai;
             }
         });
-        CardLists.sortByPowerAsc(list);
+        CardLists.sortByPowerDesc(list);
         c1 = list.isEmpty() ? null : list.get(0);
         if (sa.hasParam("Defined")) {
             c2 = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).get(0);
@@ -52,7 +52,7 @@ public class PowerExchangeAi extends SpellAbilityAi {
         if (c1 == null || c2 == null) {
             return false;
         }
-        if (ComputerUtilCard.evaluateCreature(c1) > ComputerUtilCard.evaluateCreature(c2) + 40) {
+        if (sa.isMandatory() || ComputerUtilCard.evaluateCreature(c1) > ComputerUtilCard.evaluateCreature(c2) + 40) {
             sa.getTargets().add(c1);
             return MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
         }
