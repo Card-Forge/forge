@@ -153,16 +153,27 @@ public class NewGameScene extends UIScene {
 
         scrollPane = ui.findActor("scroll");
         titleL = ui.findActor("titleL");
+        titleL.setScale(2, 2);
+        titleL.setText(Forge.getLocalizer().getMessage("lblCreateACharacter"));
+        titleL.setX(scrollPane.getX() + 20);
         avatarL = ui.findActor("avatarL");
+        avatarL.setText(Forge.getLocalizer().getMessage("lblAvatar"));
         nameL = ui.findActor("nameL");
+        nameL.setText(Forge.getLocalizer().getMessage("lblName"));
         raceL = ui.findActor("raceL");
+        raceL.setText(Forge.getLocalizer().getMessage("lblRace"));
         genderL = ui.findActor("genderL");
+        genderL.setText(Forge.getLocalizer().getMessage("lblGender"));
         difficultyL = ui.findActor("difficultyL");
+        difficultyL.setText(Forge.getLocalizer().getMessage("lblDifficulty"));
         deckL = ui.findActor("deckL");
+        deckL.setText(Forge.getLocalizer().getMessage("lblDeck"));
         leftArrow = ui.findActor("leftAvatar");
         rightArrow = ui.findActor("rightAvatar");
         backButton = ui.findActor("back");
+        backButton.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
         startButton = ui.findActor("start");
+        startButton.getLabel().setText(Forge.getLocalizer().getMessage("lblStart"));
         if (!Forge.isLandscapeMode()) {
             float w = Scene.GetIntendedWidth();
             float sW = w - 20;
@@ -174,8 +185,9 @@ public class NewGameScene extends UIScene {
             selectedName.setX(w/2- selectedName.getWidth()/2);
             nameL.setFontScaleX(2);
 
-            titleL.setFontScaleX(2);
-            titleL.setX(selectedName.getX()-20);
+            titleL.setScale(4, 2);
+            titleL.setFontScale(4, 2);
+            titleL.setX(scrollPane.getX() + 20);
 
             avatarImage.setScaleX(2);
             avatarImage.setX(w/2-avatarImage.getWidth());

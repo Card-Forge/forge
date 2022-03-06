@@ -25,6 +25,7 @@ import java.util.Map.Entry;
 
 import com.badlogic.gdx.math.Rectangle;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
@@ -40,7 +41,6 @@ import forge.itemmanager.ItemManagerModel;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FList;
-import forge.util.Localizer;
 
 
 public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
@@ -82,7 +82,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     public String getCaption() {
-        return Localizer.getInstance().getMessage("lblListView");
+        return Forge.getLocalizer().getMessage("lblListView");
     }
 
     @Override

@@ -1,6 +1,7 @@
 package forge.adventure.util;
 
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -162,7 +163,11 @@ public class UIActor extends Group {
                     break;
                 case "font":
                     Label.LabelStyle style = new Label.LabelStyle(newActor.getStyle());
-                    style.font = Controls.GetSkin().getFont(property.value.toString());
+                    style.font = Controls.getBitmapFont(property.value.toString());
+                    if (property.value.toString().contains("black"))
+                        style.fontColor = Color.BLACK;
+                    if (property.value.toString().contains("big"))
+                        newActor.setFontScale(2, 2);
                     newActor.setStyle(style);
                     break;
             }
@@ -173,7 +178,11 @@ public class UIActor extends Group {
         for (ObjectMap.Entry property : entries) {
             switch (property.key.toString()) {
                 case "font":
-                    newActor.getSkin().get(Label.LabelStyle.class).font = Controls.GetSkin().getFont(property.value.toString());
+                    newActor.getSkin().get(Label.LabelStyle.class).font = Controls.getBitmapFont(property.value.toString());
+                    if (property.value.toString().contains("black"))
+                        newActor.getSkin().get(Label.LabelStyle.class).fontColor = Color.BLACK;
+                    if (property.value.toString().contains("big"))
+                        newActor.setScale(2, 2);
                     break;
             }
         }

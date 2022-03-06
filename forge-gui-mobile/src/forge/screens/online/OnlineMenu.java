@@ -16,7 +16,6 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
-import forge.util.Localizer;
 
 public class OnlineMenu extends FPopupMenu {
     public enum OnlineScreen {
@@ -30,13 +29,13 @@ public class OnlineMenu extends FPopupMenu {
 
         OnlineScreen(final String caption0, final FImage icon0, final Class<? extends FScreen> screenClass0) {
             screenClass = screenClass0;
-            item = new FMenuItem(Localizer.getInstance().getMessage(caption0), icon0, new FEventHandler() {
+            item = new FMenuItem(Forge.getLocalizer().getMessage(caption0), icon0, new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     if(screenClass == null) {
                         FOptionPane.showConfirmDialog(
-                                Localizer.getInstance().getMessage("lblLeaveLobbyDescription"),
-                                Localizer.getInstance().getMessage("lblDisconnect"), new Callback<Boolean>() {
+                                Forge.getLocalizer().getMessage("lblLeaveLobbyDescription"),
+                                Forge.getLocalizer().getMessage("lblDisconnect"), new Callback<Boolean>() {
                                     @Override
                                     public void run(Boolean result) {
                                         if (result) {
@@ -68,7 +67,7 @@ public class OnlineMenu extends FPopupMenu {
             if (screen == null) { //don't initialize screen until it's opened the first time
                 try {
                     screen = screenClass.getConstructor().newInstance();
-                    screen.setHeaderCaption(Localizer.getInstance().getMessage("lblPlayOnline") + " - " + item.getText());
+                    screen.setHeaderCaption(Forge.getLocalizer().getMessage("lblPlayOnline") + " - " + item.getText());
                 }
                 catch (Exception e) {
                     e.printStackTrace();

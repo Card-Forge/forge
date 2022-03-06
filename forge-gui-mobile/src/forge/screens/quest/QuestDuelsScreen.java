@@ -5,6 +5,7 @@ import java.util.List;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 
+import forge.Forge;
 import forge.assets.FSkinFont;
 import forge.gamemodes.quest.QuestEventDuel;
 import forge.gui.FThreads;
@@ -15,19 +16,18 @@ import forge.screens.home.HomeScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
-import forge.util.Localizer;
 
 public class QuestDuelsScreen extends QuestLaunchScreen {
 
-    private final FLabel lblInfo = add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblSelectNextDuel"))
+    private final FLabel lblInfo = add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblSelectNextDuel"))
             .align(Align.center).font(FSkinFont.get(16)).build());
 
     private final FLabel lblCurrentDeck = add(new FLabel.Builder()
-        .text(Localizer.getInstance().getMessage("lblNoDuelDeck")).align(Align.center).insets(Vector2.Zero)
+        .text(Forge.getLocalizer().getMessage("lblNoDuelDeck")).align(Align.center).insets(Vector2.Zero)
         .font(FSkinFont.get(12)).build());
 
     private final FLabel lblNextChallengeInWins = add(new FLabel.Builder()
-        .text(Localizer.getInstance().getMessage("lblNextChallengeNotYet")).align(Align.center).insets(Vector2.Zero)
+        .text(Forge.getLocalizer().getMessage("lblNextChallengeNotYet")).align(Align.center).insets(Vector2.Zero)
         .font(FSkinFont.get(12)).build());
 
     private final QuestEventPanel.Container pnlDuels = add(new QuestEventPanel.Container());
@@ -71,32 +71,27 @@ public class QuestDuelsScreen extends QuestLaunchScreen {
 
     @Override
     public void onUpdate() {
-        //add loading overlay for generated decks...
-        if (HomeScreen.instance.getQuestWorld().contains("Random")) {
-            FThreads.invokeInEdtLater(new Runnable() {
-                @Override
-                public void run() {
-                    LoadingOverlay.show(Localizer.getInstance().getMessage("lblLoadingCurrentQuest"), new Runnable() {
-                        @Override
-                        public void run() {
-                            generateDuels();
-                        }
-                    });
-                }
-            });
-        } else {
-            generateDuels();
-        }
+        generateDuels();
     }
 
     private void generateDuels() {
-        pnlDuels.clear();
-        List<QuestEventDuel> duels = FModel.getQuest().getDuelsManager().generateDuels();
-        if (duels != null) {
-            for (QuestEventDuel duel : duels) {
-                pnlDuels.add(new QuestEventPanel(duel, pnlDuels));
+        FThreads.invokeInEdtLater(new Runnable() {
+            @Override
+            public void run() {
+                LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingCurrentQuest"), new Runnable() {
+                    @Override
+                    public void run() {
+                        pnlDuels.clear();
+                        List<QuestEventDuel> duels = FModel.getQuest().getDuelsManager().generateDuels();
+                        if (duels != null) {
+                            for (QuestEventDuel duel : duels) {
+                                pnlDuels.add(new QuestEventPanel(duel, pnlDuels));
+                            }
+                        }
+                        pnlDuels.revalidate();
+                    }
+                });
             }
-        }
-        pnlDuels.revalidate();
+        });
     }
 }

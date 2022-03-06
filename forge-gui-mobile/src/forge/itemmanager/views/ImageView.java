@@ -28,7 +28,6 @@ import forge.model.FModel;
 import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.ImageUtil;
-import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.Utils;
 
@@ -132,8 +131,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
     }
     private final ExpandCollapseButton btnExpandCollapseAll = new ExpandCollapseButton();
-    private final FComboBox<Object> cbGroupByOptions = new FComboBox<>(Localizer.getInstance().getMessage("lblGroups") + " ");
-    private final FComboBox<Object> cbPileByOptions = new FComboBox<>(Localizer.getInstance().getMessage("lblPiles") + " ");
+    private final FComboBox<Object> cbGroupByOptions = new FComboBox<>(Forge.getLocalizer().getMessage("lblGroups") + " ");
+    private final FComboBox<Object> cbPileByOptions = new FComboBox<>(Forge.getLocalizer().getMessage("lblPiles") + " ");
 
     public ImageView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
         super(itemManager0, model0);
@@ -355,7 +354,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         otherItems = groups.get(groups.size() - 1);
                     }
                     else {
-                        otherItems = new Group(Localizer.getInstance().getMessage("lblOther"));
+                        otherItems = new Group(Forge.getLocalizer().getMessage("lblOther"));
                         otherItems.isCollapsed = btnExpandCollapseAll.isAllCollapsed;
                         groups.add(otherItems);
                     }
@@ -662,7 +661,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     public String getCaption() {
-        return Localizer.getInstance().getMessage("lblImageView");
+        return Forge.getLocalizer().getMessage("lblImageView");
     }
 
     @Override

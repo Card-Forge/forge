@@ -53,7 +53,6 @@ import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.util.Callback;
-import forge.util.Localizer;
 import forge.util.Utils;
 import forge.util.collect.FCollectionView;
 
@@ -151,7 +150,7 @@ public class ConquestMultiverseScreen extends FScreen {
                     break;
                 case PLANESWALK:
                     if (model.getUnlockedPlaneCount() == model.getAccessiblePlaneCount()) {
-                        FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblAllPlanesUnlockedNotify"), Localizer.getInstance().getMessage("lblAllPlanesUnlocked"), EMBLEM_IMAGE, new Callback<Integer>() {
+                        FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblAllPlanesUnlockedNotify"), Forge.getLocalizer().getMessage("lblAllPlanesUnlocked"), EMBLEM_IMAGE, new Callback<Integer>() {
                             @Override
                             public void run(Integer result) {
                                 launchChaosBattle();
@@ -199,9 +198,9 @@ public class ConquestMultiverseScreen extends FScreen {
                 return;
             }
 
-            String title = Localizer.getInstance().getMessage("lblReceivedBoosterPack");
+            String title = Forge.getLocalizer().getMessage("lblReceivedBoosterPack");
             if (totalCount > 1) {
-                title = Localizer.getInstance().getMessage("lblReceivedBoosterPackNOfTotal", String.valueOf(number), String.valueOf(totalCount));
+                title = Forge.getLocalizer().getMessage("lblReceivedBoosterPackNOfTotal", String.valueOf(number), String.valueOf(totalCount));
             }
             number++;
             List<ConquestReward> rewards = FModel.getConquest().awardBooster(pool);
@@ -226,9 +225,9 @@ public class ConquestMultiverseScreen extends FScreen {
     };
 
     private void awardShards(int shards, boolean fromDuplicateCards) {
-        String message = Localizer.getInstance().getMessage("lblReceivedAetherShards");
+        String message = Forge.getLocalizer().getMessage("lblReceivedAetherShards");
         if (fromDuplicateCards) { //if from duplicate cards, shards already added to model
-            message = Localizer.getInstance().getMessage("lblReceivedAetherShardsForDuplicateCards");
+            message = Forge.getLocalizer().getMessage("lblReceivedAetherShardsForDuplicateCards");
         }
         else {
             model.rewardAEtherShards(shards);
@@ -254,14 +253,14 @@ public class ConquestMultiverseScreen extends FScreen {
     };
 
     private void awardBonusPlaneswalkEmblems(int emblems) {
-        String message = Localizer.getInstance().getMessage("lblReceivedBonusPlaneswalkEmblems");
+        String message = Forge.getLocalizer().getMessage("lblReceivedBonusPlaneswalkEmblems");
         model.rewardPlaneswalkEmblems(emblems);
         model.saveData();
         FOptionPane.showMessageDialog(String.valueOf(emblems), FSkinFont.get(32), message, EMBLEM_IMAGE);
     }
 
     private void launchEvent() {
-        LoadingOverlay.show(Localizer.getInstance().getMessage("lblStartingBattle"), new Runnable() {
+        LoadingOverlay.show(Forge.getLocalizer().getMessage("lblStartingBattle"), new Runnable() {
             @Override
             public void run() {
                 ConquestLocation loc = model.getCurrentLocation();
@@ -275,7 +274,7 @@ public class ConquestMultiverseScreen extends FScreen {
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override
             public void run() {
-                LoadingOverlay.show(Localizer.getInstance().getMessage("lblChaosApproaching"), new Runnable() {
+                LoadingOverlay.show(Forge.getLocalizer().getMessage("lblChaosApproaching"), new Runnable() {
                     @Override
                     public void run() {
                         activeBattle = new ConquestChaosBattle();
@@ -679,7 +678,7 @@ public class ConquestMultiverseScreen extends FScreen {
         private BattleBar() {
             playerAvatar = add(new AvatarDisplay(false));
             opponentAvatar = add(new AvatarDisplay(true));
-            btnBattle = add(new FButton(Localizer.getInstance().getMessage("lblBattle"), new FEventHandler() {
+            btnBattle = add(new FButton(Forge.getLocalizer().getMessage("lblBattle"), new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     launchEvent();

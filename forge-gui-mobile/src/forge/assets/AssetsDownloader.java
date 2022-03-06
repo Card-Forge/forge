@@ -64,13 +64,13 @@ public class AssetsDownloader {
                             Forge didn't open the apk so I downgrade the check so it will run only on target devices without FileUriExposedException */
                             if (Forge.androidVersion < 24) {
                                 Forge.getDeviceAdapter().openFile(apkFile);
-                                Forge.exit(true);
+                                Forge.exitAnimation(false);
                                 return;
                             }
                             // API 24 and above needs manual apk installation unless we provide a FileProvider for FileUriExposedException
                             switch (SOptionPane.showOptionDialog("Download Successful. Go to your downloads folder and install " + filename +" to update Forge. Forge will now exit.", "", null, ImmutableList.of("Ok"))) {
                                 default:
-                                    Forge.exit(true);
+                                    Forge.exitAnimation(false);
                             }
                             return;
                         }
@@ -92,7 +92,7 @@ public class AssetsDownloader {
             }
             catch (IOException e) {
                 e.printStackTrace();
-                Forge.exit(true); //can't continue if this fails
+                Forge.exitAnimation(false); //can't continue if this fails
                 return;
             }
         }
@@ -114,7 +114,7 @@ public class AssetsDownloader {
             }
             SOptionPane.showMessageDialog(message, "No Internet Connection");
             if (!canIgnoreDownload) {
-                Forge.exit(true); //exit if can't ignore download
+                Forge.exitAnimation(false); //exit if can't ignore download
             }
             return;
         }
@@ -141,11 +141,11 @@ public class AssetsDownloader {
         switch (SOptionPane.showOptionDialog(message, "", null, options)) {
             case 1:
                 if (!canIgnoreDownload) {
-                    Forge.exit(true); //exit if can't ignore download
+                    Forge.exitAnimation(false); //exit if can't ignore download
                 }
                 return;
             case 2:
-                Forge.exit(true);
+                Forge.exitAnimation(false);
                 return;
         }
 
@@ -175,7 +175,7 @@ public class AssetsDownloader {
         String msg  = allowDeletion ? "Resource update finished..." : "Forge misses some files for deletion.\nIf you encounter issues, try deleting the Forge/res folder and/or deleting Forge/cache/fonts folder and try to download and update the assets.";
         switch (SOptionPane.showOptionDialog(msg, "", null, ImmutableList.of("Restart"))) {
             default:
-                Forge.restart(true);
+                Forge.exitAnimation(true);
         }
     }
 }

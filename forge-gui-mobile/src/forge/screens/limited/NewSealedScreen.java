@@ -12,7 +12,6 @@ import forge.screens.LaunchScreen;
 import forge.screens.home.NewGameMenu;
 import forge.toolbox.FLabel;
 import forge.toolbox.FTextArea;
-import forge.util.Localizer;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
 
@@ -20,9 +19,9 @@ public class NewSealedScreen extends LaunchScreen {
     private static final float PADDING = Utils.scale(10);
 
     private final FTextArea lblDesc = add(new FTextArea(false,
-            Localizer.getInstance().getMessage("lblSealedText2") + "\n\n" +
-            Localizer.getInstance().getMessage("lblSealedText3") + "\n\n" +
-            Localizer.getInstance().getMessage("lblSealedText4")));
+            Forge.getLocalizer().getMessage("lblSealedText2") + "\n\n" +
+            Forge.getLocalizer().getMessage("lblSealedText3") + "\n\n" +
+            Forge.getLocalizer().getMessage("lblSealedText4")));
 
     public NewSealedScreen() {
         super(null, NewGameMenu.getMenu());

@@ -23,7 +23,6 @@ import forge.adventure.util.Controls;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.util.Localizer;
 
 import java.util.function.Function;
 
@@ -160,15 +159,12 @@ public class SettingsScene extends UIScene {
 
     void addLabel(String name) {
         Label label = new Label(name, Controls.GetSkin().get("white", Label.LabelStyle.class));
+        label.setWrap(true);
         if (!Forge.isLandscapeMode()) {
             label.setFontScaleX(2);
-            label.setWrap(true);
-            settingGroup.row().space(5);
-            settingGroup.add(label).align(Align.left).pad(2, 2, 2, 5).expandX();
-        } else {
-            settingGroup.row().space(5);
-            settingGroup.add(label).align(Align.left).pad(2, 2, 2, 5);
         }
+        settingGroup.row().space(5);
+        settingGroup.add(label).align(Align.left).pad(2, 2, 2, 5).expand();
     }
 
     @Override
@@ -178,7 +174,6 @@ public class SettingsScene extends UIScene {
         if (Preference == null) {
             Preference = new ForgePreferences();
         }
-        Localizer localizer = Localizer.getInstance();
 
         SelectBox plane = Controls.newComboBox(Config.instance().getAllAdventures(), Config.instance().getSettingData().plane, new Function<Object, Void>() {
             @Override
@@ -188,7 +183,7 @@ public class SettingsScene extends UIScene {
                 return null;
             }
         });
-        addLabel("Plane");
+        addLabel(Forge.getLocalizer().getMessage("lblWorld"));
         if (!Forge.isLandscapeMode()) {
             plane.getStyle().listStyle.font.getData().setScale(2, 1);
         }
@@ -240,33 +235,34 @@ public class SettingsScene extends UIScene {
                 }
             });
         }
-        addCheckBox(localizer.getMessage("lblCardName"), ForgePreferences.FPref.UI_OVERLAY_CARD_NAME);
-        addSettingSlider(localizer.getMessage("cbAdjustMusicVolume"), ForgePreferences.FPref.UI_VOL_MUSIC, 0, 100);
-        addSettingSlider(localizer.getMessage("cbAdjustSoundsVolume"), ForgePreferences.FPref.UI_VOL_SOUNDS, 0, 100);
-        addCheckBox(localizer.getMessage("lblManaCost"), ForgePreferences.FPref.UI_OVERLAY_CARD_MANA_COST);
-        addCheckBox(localizer.getMessage("lblPowerOrToughness"), ForgePreferences.FPref.UI_OVERLAY_CARD_POWER);
-        addCheckBox(localizer.getMessage("lblCardID"), ForgePreferences.FPref.UI_OVERLAY_CARD_ID);
-        addCheckBox(localizer.getMessage("lblAbilityIcon"), ForgePreferences.FPref.UI_OVERLAY_ABILITY_ICONS);
-        addCheckBox(localizer.getMessage("cbImageFetcher"), ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER);
+        addCheckBox(Forge.getLocalizer().getMessage("lblCardName"), ForgePreferences.FPref.UI_OVERLAY_CARD_NAME);
+        addSettingSlider(Forge.getLocalizer().getMessage("cbAdjustMusicVolume"), ForgePreferences.FPref.UI_VOL_MUSIC, 0, 100);
+        addSettingSlider(Forge.getLocalizer().getMessage("cbAdjustSoundsVolume"), ForgePreferences.FPref.UI_VOL_SOUNDS, 0, 100);
+        addCheckBox(Forge.getLocalizer().getMessage("lblManaCost"), ForgePreferences.FPref.UI_OVERLAY_CARD_MANA_COST);
+        addCheckBox(Forge.getLocalizer().getMessage("lblPowerOrToughness"), ForgePreferences.FPref.UI_OVERLAY_CARD_POWER);
+        addCheckBox(Forge.getLocalizer().getMessage("lblCardID"), ForgePreferences.FPref.UI_OVERLAY_CARD_ID);
+        addCheckBox(Forge.getLocalizer().getMessage("lblAbilityIcon"), ForgePreferences.FPref.UI_OVERLAY_ABILITY_ICONS);
+        addCheckBox(Forge.getLocalizer().getMessage("cbImageFetcher"), ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER);
 
 
         if (!GuiBase.isAndroid()) {
-            addCheckBox(localizer.getMessage("lblBattlefieldTextureFiltering"), ForgePreferences.FPref.UI_LIBGDX_TEXTURE_FILTERING);
-            addCheckBox(localizer.getMessage("lblAltZoneTabs"), ForgePreferences.FPref.UI_ALT_PLAYERZONETABS);
+            addCheckBox(Forge.getLocalizer().getMessage("lblBattlefieldTextureFiltering"), ForgePreferences.FPref.UI_LIBGDX_TEXTURE_FILTERING);
+            addCheckBox(Forge.getLocalizer().getMessage("lblAltZoneTabs"), ForgePreferences.FPref.UI_ALT_PLAYERZONETABS);
         }
 
-        addCheckBox(localizer.getMessage("lblAnimatedCardTapUntap"), ForgePreferences.FPref.UI_ANIMATED_CARD_TAPUNTAP);
+        addCheckBox(Forge.getLocalizer().getMessage("lblAnimatedCardTapUntap"), ForgePreferences.FPref.UI_ANIMATED_CARD_TAPUNTAP);
         if (!GuiBase.isAndroid()) {
-            addCheckBox(localizer.getMessage("lblBorderMaskOption"), ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
-            addCheckBox(localizer.getMessage("lblPreloadExtendedArtCards"), ForgePreferences.FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
-            addCheckBox(localizer.getMessage("lblAutoCacheSize"), ForgePreferences.FPref.UI_AUTO_CACHE_SIZE);
-            addCheckBox(localizer.getMessage("lblDisposeTextures"), ForgePreferences.FPref.UI_ENABLE_DISPOSE_TEXTURES);
-            //addInputField(localizer.getMessage("lblDisposeTextures"), ForgePreferences.FPref.UI_LANGUAGE);
+            addCheckBox(Forge.getLocalizer().getMessage("lblBorderMaskOption"), ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
+            addCheckBox(Forge.getLocalizer().getMessage("lblPreloadExtendedArtCards"), ForgePreferences.FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
+            addCheckBox(Forge.getLocalizer().getMessage("lblAutoCacheSize"), ForgePreferences.FPref.UI_AUTO_CACHE_SIZE);
+            addCheckBox(Forge.getLocalizer().getMessage("lblDisposeTextures"), ForgePreferences.FPref.UI_ENABLE_DISPOSE_TEXTURES);
+            //addInputField(Forge.getLocalizer().getMessage("lblDisposeTextures"), ForgePreferences.FPref.UI_LANGUAGE);
         }
 
 
         settingGroup.row();
         back = ui.findActor("return");
+        back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
         ui.onButtonPress("return", new Runnable() {
             @Override
             public void run() {

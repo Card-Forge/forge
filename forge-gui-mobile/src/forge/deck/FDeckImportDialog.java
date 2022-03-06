@@ -37,24 +37,23 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextArea;
 import forge.util.Callback;
-import forge.util.Localizer;
 
 
 public class FDeckImportDialog extends FDialog {
     private Callback<Deck> callback;
 
     private final FTextArea txtInput = add(new FTextArea(true));
-    private final FCheckBox newEditionCheck = add(new FCheckBox(Localizer.getInstance().getMessage("lblImportLatestVersionCard"), false));
-    private final FCheckBox dateTimeCheck = add(new FCheckBox(Localizer.getInstance().getMessage("lblUseOnlySetsReleasedBefore"), false));
-    private final FCheckBox smartCardArtCheck = add(new FCheckBox(Localizer.getInstance().getMessage("lblUseSmartCardArt"), false));
-    private final FCheckBox createNewDeckCheck = add(new FCheckBox(Localizer.getInstance().getMessage("lblNewDeckCheckbox"), false));
+    private final FCheckBox newEditionCheck = add(new FCheckBox(Forge.getLocalizer().getMessage("lblImportLatestVersionCard"), false));
+    private final FCheckBox dateTimeCheck = add(new FCheckBox(Forge.getLocalizer().getMessage("lblUseOnlySetsReleasedBefore"), false));
+    private final FCheckBox smartCardArtCheck = add(new FCheckBox(Forge.getLocalizer().getMessage("lblUseSmartCardArt"), false));
+    private final FCheckBox createNewDeckCheck = add(new FCheckBox(Forge.getLocalizer().getMessage("lblNewDeckCheckbox"), false));
 //    private final FCheckBox importInDeck = add(new FCheckBox()
     /*setting onlyCoreExpCheck to false allow the copied cards to pass the check of deck contents
       forge-core\src\main\java\forge\deck\Deck.javaDeck.java starting @ Line 320 which is called by
       forge-gui-mobile\src\forge\deck\FDeckEditor.java starting @ Line 373
       (as of latest commit: 8e6655e3ee67688cff66b422d4722c58392eaa7e)
     */
-    private final FCheckBox onlyCoreExpCheck = add(new FCheckBox(Localizer.getInstance().getMessage("lblUseOnlyCoreAndExpansionSets"), false));
+    private final FCheckBox onlyCoreExpCheck = add(new FCheckBox(Forge.getLocalizer().getMessage("lblUseOnlyCoreAndExpansionSets"), false));
 
     private final FComboBox<String> monthDropdown = add(new FComboBox<>()); //don't need wrappers since skin can't change while this dialog is open
     private final FComboBox<Integer> yearDropdown = add(new FComboBox<>());
@@ -64,10 +63,10 @@ public class FDeckImportDialog extends FDialog {
     private boolean createNewDeckControl;
     private final DeckImportController controller;
 
-    private final static ImmutableList<String> importOrCancel = ImmutableList.of(Localizer.getInstance().getMessage("lblImport"), Localizer.getInstance().getMessage("lblCancel"));
+    private final static ImmutableList<String> importOrCancel = ImmutableList.of(Forge.getLocalizer().getMessage("lblImport"), Forge.getLocalizer().getMessage("lblCancel"));
 
     public FDeckImportDialog(final boolean replacingDeck, final FDeckEditor.EditorType editorType) {
-        super(Localizer.getInstance().getMessage("lblImportFromClipboard"), 2);
+        super(Forge.getLocalizer().getMessage("lblImportFromClipboard"), 2);
         controller = new DeckImportController(dateTimeCheck, monthDropdown, yearDropdown, replacingDeck);
         String contents = Forge.getClipboard().getContents();
         if (contents == null)
@@ -92,7 +91,7 @@ public class FDeckImportDialog extends FDialog {
         this.currentDeckIsEmpty = !replacingDeck;
         this.createNewDeckControl = replacingDeck;
 
-        initButton(0, Localizer.getInstance().getMessage("lblImport"), new FEventHandler() {
+        initButton(0, Forge.getLocalizer().getMessage("lblImport"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 FThreads.invokeInBackgroundThread(new Runnable() {
@@ -116,7 +115,7 @@ public class FDeckImportDialog extends FDialog {
                             }
                         }
                         if (sb.length() > 0) {
-                            if (SOptionPane.showOptionDialog(Localizer.getInstance().getMessage("lblFollowingCardsCannotBeImported") + "\n\n" + sb, Localizer.getInstance().getMessage("lblImportRemainingCards"), SOptionPane.INFORMATION_ICON, importOrCancel) == 1) {
+                            if (SOptionPane.showOptionDialog(Forge.getLocalizer().getMessage("lblFollowingCardsCannotBeImported") + "\n\n" + sb, Forge.getLocalizer().getMessage("lblImportRemainingCards"), SOptionPane.INFORMATION_ICON, importOrCancel) == 1) {
                                 return;
                             }
                         }
@@ -136,7 +135,7 @@ public class FDeckImportDialog extends FDialog {
                 });
             }
         });
-        initButton(1, Localizer.getInstance().getMessage("lblCancel"), new FEventHandler() {
+        initButton(1, Forge.getLocalizer().getMessage("lblCancel"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 hide();
@@ -186,7 +185,7 @@ public class FDeckImportDialog extends FDialog {
 
         showOptions = false;
         setButtonEnabled(0, false);
-        txtInput.setText(Localizer.getInstance().getMessage("lblNoKnownCardsOnClipboard"));
+        txtInput.setText(Forge.getLocalizer().getMessage("lblNoKnownCardsOnClipboard"));
     }
 
     private void setArtPreferenceInController() {

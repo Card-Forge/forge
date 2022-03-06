@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import forge.gui.GuiBase;
 
 /*
 Class to draw directly on a pixmap
@@ -26,14 +25,11 @@ public abstract class DrawOnPixmap {
     }
 
     public static void drawText(Pixmap drawingMap, String text, int x, int y, float width) {
-
-        BitmapFont font = Controls.bigFont();
-        if (GuiBase.isAndroid()) { //todo make this configurable
-            font = new BitmapFont(Gdx.files.internal("fallback_skin").child("MiKrollFantasy(1).fnt"));
-        }
+        //used for big numbers on Gold/Life for reward...
+        BitmapFont font = Controls.getBitmapFont("MiKrollFantasyBig");
 
         BitmapFont.BitmapFontData data = font.getData();
-        Pixmap source = new Pixmap(Gdx.files.internal(data.imagePaths[0]));
+        Pixmap source = new Pixmap(Gdx.files.absolute(data.getImagePath(0)));
 
         float totalLength = data.getGlyph('0').width * text.length();
         float xOffset = (width - totalLength) / 2;

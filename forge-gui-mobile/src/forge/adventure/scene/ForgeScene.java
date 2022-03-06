@@ -10,7 +10,6 @@ import forge.interfaces.IUpdateable;
 import forge.screens.FScreen;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOverlay;
-import forge.util.Localizer;
 
 import java.util.List;
 
@@ -67,7 +66,7 @@ public abstract  class ForgeScene extends Scene implements IUpdateable {
         if(getScreen()!=null)
             getScreen().setSize(Forge.getScreenWidth(), Forge.getScreenHeight());
         //update language for ForgeScene
-        Localizer.getInstance().setEnglish(Forge.forcedEnglishonCJKMissing);
+        Forge.getLocalizer().setEnglish(Forge.forcedEnglishonCJKMissing);
         Forge.openScreen(getScreen());
         Gdx.input.setInputProcessor(Forge.getInputProcessor());
     }
@@ -86,7 +85,7 @@ public abstract  class ForgeScene extends Scene implements IUpdateable {
     @Override
     public boolean leave() {
         //non ForgeScene is english atm...
-        Localizer.getInstance().setEnglish(true);
+        Forge.getLocalizer().setEnglish(Forge.forcedEnglishonCJKMissing);
         return super.leave();
     }
 

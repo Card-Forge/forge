@@ -3,6 +3,7 @@ package forge.screens.match.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.Forge;
 import forge.screens.match.MatchController;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FChoiceList;
@@ -10,7 +11,6 @@ import forge.toolbox.FDialog;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
-import forge.util.Localizer;
 import forge.util.TextBounds;
 
 public class VAutoYields extends FDialog {
@@ -18,7 +18,7 @@ public class VAutoYields extends FDialog {
     private final FCheckBox chkDisableAll;
 
     public VAutoYields() {
-        super(Localizer.getInstance().getMessage("lblAutoYields"), 2);
+        super(Forge.getLocalizer().getMessage("lblAutoYields"), 2);
         List<String> autoYields = new ArrayList<>();
         for (String autoYield : MatchController.instance.getAutoYields()) {
             autoYields.add(autoYield);
@@ -34,20 +34,20 @@ public class VAutoYields extends FDialog {
                 return true;
             }
         });
-        chkDisableAll = add(new FCheckBox(Localizer.getInstance().getMessage("lblDisableAllAutoYields"), MatchController.instance.getDisableAutoYields()));
+        chkDisableAll = add(new FCheckBox(Forge.getLocalizer().getMessage("lblDisableAllAutoYields"), MatchController.instance.getDisableAutoYields()));
         chkDisableAll.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 MatchController.instance.setDisableAutoYields(chkDisableAll.isSelected());
             }
         });
-        initButton(0, Localizer.getInstance().getMessage("lblOK"), new FEventHandler() {
+        initButton(0, Forge.getLocalizer().getMessage("lblOK"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 hide();
             }
         });
-        initButton(1, Localizer.getInstance().getMessage("lblRemoveYield"), new FEventHandler() {
+        initButton(1, Forge.getLocalizer().getMessage("lblRemoveYield"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 String selected = lstAutoYields.getSelectedItem();
@@ -69,7 +69,7 @@ public class VAutoYields extends FDialog {
             super.show();
         }
         else {
-            FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblNoActiveAutoYield"), Localizer.getInstance().getMessage("lblNoAutoYield"), FOptionPane.INFORMATION_ICON);
+            FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblNoActiveAutoYield"), Forge.getLocalizer().getMessage("lblNoAutoYield"), FOptionPane.INFORMATION_ICON);
         }
     }
 

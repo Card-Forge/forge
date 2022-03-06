@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import forge.Forge;
 
 import java.util.function.Function;
 
@@ -24,6 +25,7 @@ import java.util.function.Function;
  */
 public class Controls {
     private static Skin SelectedSkin = null;
+    private static BitmapFont defaultfont, bigfont, miKrollFantasy;
 
     static public TextButton newTextButton(String text) {
 
@@ -98,13 +100,17 @@ public class Controls {
         CheckBox ret = new CheckBox(text, GetSkin());
         return ret;
     }
-    static public BitmapFont bigFont()
-    {
-        return SelectedSkin.getFont("big");
-    }
-    static public BitmapFont font()
-    {
-        return SelectedSkin.getFont("default");
+
+    static public BitmapFont getBitmapFont(String fontName) {
+        switch (fontName) {
+            case "MiKrollFantasyBig":
+                return miKrollFantasy;
+            case "blackbig":
+            case "big":
+                return bigfont;
+            default:
+                return defaultfont;
+        }
     }
 
 
@@ -113,26 +119,34 @@ public class Controls {
         if (SelectedSkin == null) {
             SelectedSkin = new Skin();
 
-
-
             FileHandle skinFile = Config.instance().getFile(Paths.SKIN);
             FileHandle atlasFile = skinFile.sibling(skinFile.nameWithoutExtension() + ".atlas");
             TextureAtlas atlas = new TextureAtlas(atlasFile);
             SelectedSkin.addRegions(atlas);
 
             SelectedSkin.load(skinFile);
+            //font
+            defaultfont = new BitmapFont(Config.instance().getFile(Paths.SKIN).sibling("LanaPixelCJK.fnt"));
+            miKrollFantasy = new BitmapFont(Config.instance().getFile(Paths.SKIN).sibling("MiKrollFantasyBig.fnt"));
+            bigfont = new BitmapFont(Config.instance().getFile(Paths.SKIN).sibling("LanaPixelCJK.fnt"));
+            bigfont.getData().setScale(2, 2);
         }
         return SelectedSkin;
     }
 
     public static Label newLabel(String name) {
-
         Label ret = new Label(name, GetSkin());
+        if (!Forge.isLandscapeMode()) {
+            ret.setFontScaleX(2);
+        }
         return ret;
     }
 
     public static Dialog newDialog(String title) {
         Dialog ret = new Dialog(title, GetSkin());
+        if (!Forge.isLandscapeMode()) {
+            ret.getTitleLabel().setFontScaleX(2);
+        }
         return ret;
     }
 

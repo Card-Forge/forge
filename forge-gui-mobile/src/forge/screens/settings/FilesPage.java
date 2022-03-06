@@ -34,59 +34,57 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.GuiChoose;
 import forge.util.Callback;
 import forge.util.FileUtil;
-import forge.util.Localizer;
 
 public class FilesPage extends TabPage<SettingsScreen> {
     private final FGroupList<FilesItem> lstItems = add(new FGroupList<>());
-    private final Localizer localizer = Localizer.getInstance();
 
     protected FilesPage() {
-        super(Localizer.getInstance().getMessage("lblFiles"), Forge.hdbuttons ? FSkinImage.HDOPEN : FSkinImage.OPEN);
+        super(Forge.getLocalizer().getMessage("lblFiles"), Forge.hdbuttons ? FSkinImage.HDOPEN : FSkinImage.OPEN);
 
         lstItems.setListItemRenderer(new FilesItemRenderer());
 
-        lstItems.addGroup(localizer.getMessage("ContentDownloaders"));
-        lstItems.addGroup(localizer.getMessage("lblStorageLocations"));
+        lstItems.addGroup(Forge.getLocalizer().getMessage("ContentDownloaders"));
+        lstItems.addGroup(Forge.getLocalizer().getMessage("lblStorageLocations"));
         //lstItems.addGroup("Data Import");
 
         //content downloaders
-        lstItems.addItem(new ContentDownloader(localizer.getMessage("btnDownloadPics"),
-                localizer.getMessage("lblDownloadPics")) {
+        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadPics"),
+                Forge.getLocalizer().getMessage("lblDownloadPics")) {
             @Override
             protected GuiDownloadService createService() {
                 return new GuiDownloadPicturesLQ();
             }
         }, 0);
-        lstItems.addItem(new ContentDownloader(localizer.getMessage("btnDownloadSetPics"),
-                localizer.getMessage("lblDownloadSetPics")) {
+        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadSetPics"),
+                Forge.getLocalizer().getMessage("lblDownloadSetPics")) {
             @Override
             protected GuiDownloadService createService() {
                 return new GuiDownloadSetPicturesLQ();
             }
         }, 0);
-        lstItems.addItem(new ContentDownloader(localizer.getMessage("btnDownloadQuestImages"),
-                localizer.getMessage("lblDownloadQuestImages")) {
+        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadQuestImages"),
+                Forge.getLocalizer().getMessage("lblDownloadQuestImages")) {
             @Override
             protected GuiDownloadService createService() {
                 return new GuiDownloadQuestImages();
             }
         }, 0);
-        lstItems.addItem(new ContentDownloader(localizer.getMessage("btnDownloadAchievementImages"),
-                localizer.getMessage("lblDownloadAchievementImages")) {
+        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadAchievementImages"),
+                Forge.getLocalizer().getMessage("lblDownloadAchievementImages")) {
             @Override
             protected GuiDownloadService createService() {
                 return new GuiDownloadAchievementImages();
             }
         }, 0);
-        lstItems.addItem(new ContentDownloader(localizer.getMessage("btnDownloadPrices"),
-                localizer.getMessage("lblDownloadPrices")) {
+        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadPrices"),
+                Forge.getLocalizer().getMessage("lblDownloadPrices")) {
             @Override
             protected GuiDownloadService createService() {
                 return new GuiDownloadPrices();
             }
         }, 0);
-        lstItems.addItem(new ContentDownloader(localizer.getMessage("btnDownloadSkins"),
-                localizer.getMessage("lblDownloadSkins")) {
+        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadSkins"),
+                Forge.getLocalizer().getMessage("lblDownloadSkins")) {
             @Override
             protected GuiDownloadService createService() {
                 return new GuiDownloadSkins();
@@ -96,9 +94,9 @@ public class FilesPage extends TabPage<SettingsScreen> {
                 SettingsScreen.getSettingsScreen().getSettingsPage().refreshSkinsList();
             }
         }, 0);
-        lstItems.addItem(new OptionContentDownloader(localizer.getMessage("btnDownloadCJKFonts"),
-                localizer.getMessage("lblDownloadCJKFonts"),
-                localizer.getMessage("lblDownloadCJKFontPrompt")) {
+        lstItems.addItem(new OptionContentDownloader(Forge.getLocalizer().getMessage("btnDownloadCJKFonts"),
+                Forge.getLocalizer().getMessage("lblDownloadCJKFonts"),
+                Forge.getLocalizer().getMessage("lblDownloadCJKFontPrompt")) {
             @Override
             protected Map<String, String> getCategories() {
                 // read CJK font list
@@ -122,20 +120,20 @@ public class FilesPage extends TabPage<SettingsScreen> {
             }
         }, 0);
         //storage locations
-        final StorageOption cardPicsOption = new StorageOption(localizer.getMessage("lblCardPicsLocation"), ForgeProfileProperties.getCardPicsDir()) {
+        final StorageOption cardPicsOption = new StorageOption(Forge.getLocalizer().getMessage("lblCardPicsLocation"), ForgeProfileProperties.getCardPicsDir()) {
             @Override
             protected void onDirectoryChanged(String newDir) {
                 ForgeProfileProperties.setCardPicsDir(newDir);
             }
         };
-        final StorageOption decksOption = new StorageOption(localizer.getMessage("lblDecksLocation"), ForgeProfileProperties.getDecksDir()) {
+        final StorageOption decksOption = new StorageOption(Forge.getLocalizer().getMessage("lblDecksLocation"), ForgeProfileProperties.getDecksDir()) {
             @Override
             protected void onDirectoryChanged(String newDir) {
                 ForgeProfileProperties.setDecksDir(newDir);
             }
         };
         if (!GuiBase.isUsingAppDirectory()) {
-            lstItems.addItem(new StorageOption(localizer.getMessage("lblDataLocation"), ForgeProfileProperties.getUserDir()) {
+            lstItems.addItem(new StorageOption(Forge.getLocalizer().getMessage("lblDataLocation"), ForgeProfileProperties.getUserDir()) {
                 @Override
                 protected void onDirectoryChanged(String newDir) {
                     ForgeProfileProperties.setUserDir(newDir);
@@ -144,7 +142,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
                     decksOption.updateDir(ForgeProfileProperties.getDecksDir());
                 }
             }, 1);
-            lstItems.addItem(new StorageOption(localizer.getMessage("lblImageCacheLocation"), ForgeProfileProperties.getCacheDir()) {
+            lstItems.addItem(new StorageOption(Forge.getLocalizer().getMessage("lblImageCacheLocation"), ForgeProfileProperties.getCacheDir()) {
                 @Override
                 protected void onDirectoryChanged(String newDir) {
                     ForgeProfileProperties.setCacheDir(newDir);
@@ -270,13 +268,13 @@ public class FilesPage extends TabPage<SettingsScreen> {
 
         @Override
         public void select() {
-            FFileChooser.show(localizer.getMessage("lblSelect").replace("%s", label), ChoiceType.GetDirectory, description, new Callback<String>() {
+            FFileChooser.show(Forge.getLocalizer().getMessage("lblSelect").replace("%s", label), ChoiceType.GetDirectory, description, new Callback<String>() {
                 @Override
                 public void run(String result) {
                     if (StringUtils.isEmpty(result) || description.equals(result)) { return; }
                     updateDir(result);
                     onDirectoryChanged(result);
-                    FOptionPane.showMessageDialog(localizer.getMessage("lblRestartForgeMoveFilesNewLocation"), localizer.getMessage("lblRestartRequired"), FOptionPane.INFORMATION_ICON);
+                    FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblRestartForgeMoveFilesNewLocation"), Forge.getLocalizer().getMessage("lblRestartRequired"), FOptionPane.INFORMATION_ICON);
                 }
             });
         }

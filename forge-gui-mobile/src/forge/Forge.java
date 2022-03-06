@@ -79,7 +79,7 @@ public class Forge implements ApplicationListener {
     protected static TransitionScreen transitionScreen;
     public static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
-    public static boolean safeToClose = false;
+    public static boolean safeToClose = true;
     public static boolean magnify = false;
     public static boolean magnifyToggle = true;
     public static boolean magnifyShowDetails = false;
@@ -118,6 +118,7 @@ public class Forge implements ApplicationListener {
     public static InputProcessor inputProcessor;
     private static Cursor cursor0, cursor1, cursor2, cursorA0, cursorA1, cursorA2;
     public static boolean forcedEnglishonCJKMissing = false;
+    private static Localizer localizer;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
         app = new Forge();
@@ -139,6 +140,11 @@ public class Forge implements ApplicationListener {
     private Forge() {
     }
 
+    public static Localizer getLocalizer() {
+        if (localizer == null)
+            localizer = Localizer.getInstance();
+        return localizer;
+    }
     @Override
     public void create() {
         //install our error handler
@@ -201,7 +207,6 @@ public class Forge implements ApplicationListener {
         }
         //init cache
         ImageCache.initCache(cacheSize);
-        final Localizer localizer = Localizer.getInstance();
 
         //load model on background thread (using progress bar to report progress)
         FThreads.invokeInBackgroundThread(new Runnable() {
@@ -213,28 +218,29 @@ public class Forge implements ApplicationListener {
                     return;
                 } //don't continue if user chose to exit or couldn't download required assets
 
+                safeToClose = false;
                 ImageKeys.setIsLibGDXPort(GuiBase.getInterface().isLibgdxPort());
                 FModel.initialize(splashScreen.getProgressBar(), null);
 
-                splashScreen.getProgressBar().setDescription(localizer.getMessage("lblLoadingFonts"));
+                splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblLoadingFonts"));
                 FSkinFont.preloadAll(locale);
 
-                splashScreen.getProgressBar().setDescription(localizer.getMessage("lblLoadingCardTranslations"));
+                splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblLoadingCardTranslations"));
                 CardTranslation.preloadTranslation(locale, ForgeConstants.LANG_DIR);
 
-                splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup"));
+                splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup"));
 
                 //add reminder to preload
                 if (enablePreloadExtendedArt) {
                     if (autoCache)
-                        splashScreen.getProgressBar().setDescription(localizer.getMessage("lblPreloadExtendedArt") + "\nDetected RAM: " + totalDeviceRAM + "MB. Cache size: " + cacheSize);
+                        splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblPreloadExtendedArt") + "\nDetected RAM: " + totalDeviceRAM + "MB. Cache size: " + cacheSize);
                     else
-                        splashScreen.getProgressBar().setDescription(localizer.getMessage("lblPreloadExtendedArt"));
+                        splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblPreloadExtendedArt"));
                 } else {
                     if (autoCache)
-                        splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup") + "\nDetected RAM: " + totalDeviceRAM + "MB. Cache size: " + cacheSize);
+                        splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup") + "\nDetected RAM: " + totalDeviceRAM + "MB. Cache size: " + cacheSize);
                     else
-                        splashScreen.getProgressBar().setDescription(localizer.getMessage("lblFinishingStartup"));
+                        splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup"));
                 }
 
                 Gdx.app.postRunnable(new Runnable() {
@@ -300,7 +306,7 @@ public class Forge implements ApplicationListener {
 
     public static void openHomeDefault() {
         //default to English only if CJK is missing
-        Localizer.getInstance().setEnglish(Forge.forcedEnglishonCJKMissing);
+        getLocalizer().setEnglish(forcedEnglishonCJKMissing);
         GuiBase.setIsAdventureMode(false);
         openHomeScreen(-1, null); //default for startup
         isMobileAdventureMode = false;
@@ -312,7 +318,7 @@ public class Forge implements ApplicationListener {
 
     public static void openAdventure() {
         //default to english since it doesn't have CJK fonts, it will be updated on Forgescene enter/exit
-        Localizer.getInstance().setEnglish(true);
+        getLocalizer().setEnglish(forcedEnglishonCJKMissing);
         //continuous rendering is needed for adventure mode
         startContinuousRendering();
         GuiBase.setIsAdventureMode(true);
@@ -369,7 +375,7 @@ public class Forge implements ApplicationListener {
                                         splashScreen.setShowModeSelector(true);
                                         //start background music
                                         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
-                                        Forge.safeToClose = true;
+                                        safeToClose = true;
                                     }
                                 });
                             }
@@ -383,7 +389,7 @@ public class Forge implements ApplicationListener {
     public static void setCursor(TextureRegion textureRegion, String name) {
         if (GuiBase.isAndroid())
             return;
-        if (Forge.isMobileAdventureMode) {
+        if (isMobileAdventureMode) {
             if (cursorA0 != null && name == "0") {
                 setGdxCursor(cursorA0);
                 return;
@@ -511,8 +517,8 @@ public class Forge implements ApplicationListener {
     public static void setForcedEnglishonCJKMissing() {
         if (!forcedEnglishonCJKMissing) {
             forcedEnglishonCJKMissing = true;
-            Localizer.getInstance().setEnglish(true);
-            System.err.println("Forge switches to English due to an error generating CJK Fonts. Language: "+Forge.locale);
+            getLocalizer().setEnglish(forcedEnglishonCJKMissing);
+            System.err.println("Forge switches to English due to an error generating CJK Fonts. Language: "+locale);
         }
     }
     public static void showMenu() {
@@ -541,7 +547,7 @@ public class Forge implements ApplicationListener {
         FScreen lastMatch = currentScreen;
         if (destroyThis && isLandscapeMode())
             return;
-        if (Dscreens.size() < 2 || (currentScreen == HomeScreen.instance && Forge.isPortraitMode)) {
+        if (Dscreens.size() < 2 || (currentScreen == HomeScreen.instance && isPortraitMode)) {
             exit(false); //prompt to exit if attempting to go back from home screen
             return;
         }
@@ -593,14 +599,13 @@ public class Forge implements ApplicationListener {
             }
         };
 
-        final Localizer localizer = Localizer.getInstance();
 
         if (silent) {
             callback.run(true);
         } else {
             FOptionPane.showConfirmDialog(
-                    localizer.getMessage("lblAreYouSureYouWishRestartForge"), localizer.getMessage("lblRestartForge"),
-                    localizer.getMessage("lblRestart"), localizer.getMessage("lblCancel"), callback);
+                    getLocalizer().getMessage("lblAreYouSureYouWishRestartForge"), getLocalizer().getMessage("lblRestartForge"),
+                    getLocalizer().getMessage("lblRestart"), getLocalizer().getMessage("lblCancel"), callback);
         }
     }
 
@@ -609,11 +614,10 @@ public class Forge implements ApplicationListener {
             return;
         } //don't allow exiting multiple times
 
-        final Localizer localizer = Localizer.getInstance();
         final List<String> options = new ArrayList<>();
-        options.add(localizer.getMessage("lblExit"));
-        options.add(localizer.getMessage("lblAdventure"));
-        options.add(localizer.getMessage("lblCancel"));
+        options.add(getLocalizer().getMessage("lblExit"));
+        options.add(getLocalizer().getMessage("lblAdventure"));
+        options.add(getLocalizer().getMessage("lblCancel"));
 
         Callback<Integer> callback = new Callback<Integer>() {
             @Override
@@ -630,7 +634,7 @@ public class Forge implements ApplicationListener {
         if (silent) {
             callback.run(0);
         } else {
-            FOptionPane.showOptionDialog(localizer.getMessage("lblAreYouSureYouWishExitForge"), "",
+            FOptionPane.showOptionDialog(getLocalizer().getMessage("lblAreYouSureYouWishExitForge"), "",
                     FOptionPane.QUESTION_ICON, options, 0, callback);
         }
     }
@@ -1012,7 +1016,7 @@ public class Forge implements ApplicationListener {
         return true;
     }
 
-    static void exitAnimation(boolean restart) {
+    public static void exitAnimation(boolean restart) {
         if (transitionScreen != null)
             return; //finish transition incase exit is touched
         if (closingScreen == null) {

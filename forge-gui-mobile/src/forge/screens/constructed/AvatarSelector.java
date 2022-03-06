@@ -18,7 +18,6 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.util.Callback;
-import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.Utils;
 
@@ -64,7 +63,7 @@ public class AvatarSelector extends FScreen {
     };
 
     private AvatarSelector(final String playerName, final int currentIndex0, final List<Integer> usedAvatars0, final Callback<Integer> callback0) {
-        super(Localizer.getInstance().getMessage("lblSelectAvatarFor").replace("%s",playerName));
+        super(Forge.getLocalizer().getMessage("lblSelectAvatarFor").replace("%s",playerName));
 
         currentIndex = currentIndex0;
         usedAvatars = usedAvatars0;

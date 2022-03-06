@@ -41,19 +41,18 @@ import forge.toolbox.FList.CompactModeHandler;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
 import forge.util.Callback;
-import forge.util.Localizer;
 
 public class ConquestCommandersScreen extends FScreen {
     private static final float PADDING = FDeckChooser.PADDING;
 
     private final CommanderManager lstCommanders = add(new CommanderManager());
-    private final FButton btnViewDeck = add(new FButton(Localizer.getInstance().getMessage("lblViewDeck")));
-    private final FButton btnEditDeck = add(new FButton(Localizer.getInstance().getMessage("btnEditDeck")));
+    private final FButton btnViewDeck = add(new FButton(Forge.getLocalizer().getMessage("lblViewDeck")));
+    private final FButton btnEditDeck = add(new FButton(Forge.getLocalizer().getMessage("btnEditDeck")));
 
     private boolean preventRefreshOnActivate;
 
     public ConquestCommandersScreen() {
-        super(Localizer.getInstance().getMessage("lblSelectCommander"), ConquestMenu.getMenu());
+        super(Forge.getLocalizer().getMessage("lblSelectCommander"), ConquestMenu.getMenu());
 
         lstCommanders.setup(ItemManagerConfig.CONQUEST_COMMANDERS);
         lstCommanders.setItemActivateHandler(new FEventHandler() {
@@ -109,7 +108,7 @@ public class ConquestCommandersScreen extends FScreen {
         String problem = DeckFormat.PlanarConquest.getDeckConformanceProblem(commander.getDeck());
         if (problem != null) {
             //prevent selecting a commander with an invalid deck
-            FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblCantSelectDeckBecause", commander.getName(), problem), Localizer.getInstance().getMessage("lblInvalidDeck"), FOptionPane.INFORMATION_ICON, new Callback<Integer>() {
+            FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblCantSelectDeckBecause", commander.getName(), problem), Forge.getLocalizer().getMessage("lblInvalidDeck"), FOptionPane.INFORMATION_ICON, new Callback<Integer>() {
                 @Override
                 public void run(Integer result) {
                     canCloseCallback.run(false);
@@ -159,7 +158,7 @@ public class ConquestCommandersScreen extends FScreen {
     private static class CommanderManager extends ItemManager<ConquestCommander> {
         private CommanderManager() {
             super(ConquestCommander.class, true);
-            setCaption(Localizer.getInstance().getMessage("lblCommanders"));
+            setCaption(Forge.getLocalizer().getMessage("lblCommanders"));
         }
 
         @Override
@@ -289,7 +288,7 @@ public class ConquestCommandersScreen extends FScreen {
 
     private static class CommanderOriginFilter extends ComboBoxFilter<ConquestCommander, ConquestPlane> {
         public CommanderOriginFilter(ItemManager<? super ConquestCommander> itemManager0) {
-            super(Localizer.getInstance().getMessage("lblAllPlanes"), FModel.getPlanes(), itemManager0);
+            super(Forge.getLocalizer().getMessage("lblAllPlanes"), FModel.getPlanes(), itemManager0);
         }
 
         @Override

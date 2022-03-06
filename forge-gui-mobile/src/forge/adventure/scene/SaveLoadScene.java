@@ -184,11 +184,11 @@ public class SaveLoadScene extends UIScene {
 
     public void setSaveGame(boolean save) {
         if (save) {
-            header.setText("Save game");
-            saveLoadButton.setText("Save");
+            header.setText(Forge.getLocalizer().getMessage("lblSaveGame"));
+            saveLoadButton.setText(Forge.getLocalizer().getMessage("lblSave"));
         } else {
-            header.setText("Load game");
-            saveLoadButton.setText("Load");
+            header.setText(Forge.getLocalizer().getMessage("lblLoadGame"));
+            saveLoadButton.setText(Forge.getLocalizer().getMessage("lblLoad"));
         }
         autoSave.setDisabled(save);
         quickSave.setDisabled(save);
@@ -202,6 +202,8 @@ public class SaveLoadScene extends UIScene {
         else
             select(-3);
         updateFiles();
+        autoSave.getLabel().setText(Forge.getLocalizer().getMessage("lblAutoSave"));
+        quickSave.getLabel().setText(Forge.getLocalizer().getMessage("lblQuickSave"));
         super.enter();
     }
 
@@ -211,39 +213,39 @@ public class SaveLoadScene extends UIScene {
         layout = new Table();
         layout.setFillParent(true);
         stage.addActor(layout);
-        dialog = Controls.newDialog("Save");
+        dialog = Controls.newDialog(Forge.getLocalizer().getMessage("lblSave"));
         textInput = Controls.newTextField("");
         if (!Forge.isLandscapeMode()) {
-            dialog.getButtonTable().add(Controls.newLabel("Name your new save file.")).colspan(2).pad(2, 15, 2, 15);
+            dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2).pad(2, 15, 2, 15);
             dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newLabel("Name:")).align(Align.left).pad(2, 15, 2, 2);
+            dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName")+": ")).align(Align.left).pad(2, 15, 2, 2);
             dialog.getButtonTable().add(textInput).fillX().expandX().padRight(15);
             dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newTextButton("Save", new Runnable() {
+            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblSave"), new Runnable() {
                 @Override
                 public void run() {
                     SaveLoadScene.this.save();
                 }
             })).align(Align.left).padLeft(15);
-            dialog.getButtonTable().add(Controls.newTextButton("Abort", new Runnable() {
+            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbort"), new Runnable() {
                 @Override
                 public void run() {
                     SaveLoadScene.this.saveAbort();
                 }
             })).align(Align.right).padRight(15);
         } else {
-            dialog.getButtonTable().add(Controls.newLabel("Name your new save file.")).colspan(2);
+            dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2);
             dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newLabel("Name:")).align(Align.left);
+            dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName")+": ")).align(Align.left);
             dialog.getButtonTable().add(textInput).fillX().expandX();
             dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newTextButton("Save", new Runnable() {
+            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblSave"), new Runnable() {
                 @Override
                 public void run() {
                     SaveLoadScene.this.save();
                 }
             })).align(Align.left);
-            dialog.getButtonTable().add(Controls.newTextButton("Abort", new Runnable() {
+            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbort"), new Runnable() {
                 @Override
                 public void run() {
                     SaveLoadScene.this.saveAbort();
@@ -252,17 +254,18 @@ public class SaveLoadScene extends UIScene {
         }
         previewImage = ui.findActor("preview");
         previewBorder = ui.findActor("preview_border");
-        header = Controls.newLabel("Save");
+        header = Controls.newLabel(Forge.getLocalizer().getMessage("lblSave"));
         header.setHeight(header.getHeight() * 2);
         header.setAlignment(Align.center);
         layout.add(header).pad(2).colspan(4).align(Align.center).expand();
         layout.row();
-        autoSave = addSaveSlot("Auto save", WorldSave.AUTO_SAVE_SLOT);
-        quickSave = addSaveSlot("Quick save", WorldSave.QUICK_SAVE_SLOT);
+        autoSave = addSaveSlot(Forge.getLocalizer().getMessage("lblAutoSave"), WorldSave.AUTO_SAVE_SLOT);
+        quickSave = addSaveSlot(Forge.getLocalizer().getMessage("lblQuickSave"), WorldSave.QUICK_SAVE_SLOT);
         for (int i = 1; i < 11; i++)
-            addSaveSlot("Slot:" + i, i);
+            addSaveSlot(Forge.getLocalizer().getMessage("lblSlot")+": " + i, i);
 
         saveLoadButton = ui.findActor("save");
+        saveLoadButton.getLabel().setText(Forge.getLocalizer().getMessage("lblSave"));
         ui.onButtonPress("save", new Runnable() {
             @Override
             public void run() {
@@ -270,6 +273,7 @@ public class SaveLoadScene extends UIScene {
             }
         });
         back = ui.findActor("return");
+        back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
         ui.onButtonPress("return", new Runnable() {
             @Override
             public void run() {

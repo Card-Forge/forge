@@ -64,7 +64,6 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
-import forge.util.Localizer;
 import forge.util.MessageUtil;
 import forge.util.WaitCallback;
 import forge.util.collect.FCollectionView;
@@ -342,7 +341,7 @@ public class MatchController extends AbstractGuiGame {
         if (abilities.size() == 1) {
             return abilities.get(0);
         }
-        return SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseAbilityToPlay"), abilities);
+        return SGuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblChooseAbilityToPlay"), abilities);
     }
 
     @Override
@@ -625,7 +624,7 @@ public class MatchController extends AbstractGuiGame {
     public boolean confirm(final CardView c, final String question, final boolean defaultIsYes, final List<String> options) {
         final List<String> optionsToUse;
         if (options == null) {
-            optionsToUse = ImmutableList.of(Localizer.getInstance().getMessage("lblYes"), Localizer.getInstance().getMessage("lblNo"));
+            optionsToUse = ImmutableList.of(Forge.getLocalizer().getMessage("lblYes"), Forge.getLocalizer().getMessage("lblNo"));
         } else {
             optionsToUse = options;
         }
@@ -681,7 +680,7 @@ public class MatchController extends AbstractGuiGame {
     public List<GameEntityView> chooseEntitiesForEffect(String title, List<? extends GameEntityView> optionList, int min, int max, DelayedReveal delayedReveal) {
         final int m1 = max >= 0 ? optionList.size() - max : -1;
         final int m2 = min >= 0 ? optionList.size() - min : -1;
-        return SGuiChoose.order(title, Localizer.getInstance().getMessage("lblSelected"), m1, m2, (List<GameEntityView>) optionList, null);
+        return SGuiChoose.order(title, Forge.getLocalizer().getMessage("lblSelected"), m1, m2, (List<GameEntityView>) optionList, null);
     }
 
     @Override

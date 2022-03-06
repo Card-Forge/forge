@@ -66,7 +66,6 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FScrollPane;
 import forge.util.Callback;
-import forge.util.Localizer;
 
 public class MatchScreen extends FScreen {
     public static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
@@ -158,18 +157,17 @@ public class MatchScreen extends FScreen {
         stack.setDropDownContainer(this);
 
         FMenuBar menuBar = (FMenuBar)getHeader();
-        final Localizer localizer = Localizer.getInstance();
         if (topPlayerPrompt == null) {
-            menuBar.addTab(localizer.getMessage("lblGame"), gameMenu);
-            menuBar.addTab(localizer.getMessage("lblPlayers") + " (" + playerPanels.size() + ")", players);
-            menuBar.addTab(localizer.getMessage("lblLog"), log);
-            menuBar.addTab(localizer.getMessage("lblDev"), devMenu);
-            menuBar.addTab( localizer.getMessage("lblStack") + " (0)", stack);
+            menuBar.addTab(Forge.getLocalizer().getMessage("lblGame"), gameMenu);
+            menuBar.addTab(Forge.getLocalizer().getMessage("lblPlayers") + " (" + playerPanels.size() + ")", players);
+            menuBar.addTab(Forge.getLocalizer().getMessage("lblLog"), log);
+            menuBar.addTab(Forge.getLocalizer().getMessage("lblDev"), devMenu);
+            menuBar.addTab( Forge.getLocalizer().getMessage("lblStack") + " (0)", stack);
         }
         else {
             menuBar.addTab("\u2022 \u2022 \u2022", new PlayerSpecificMenu(true));
             stack.setRotate90(true);
-            menuBar.addTab(localizer.getMessage("lblStack") + " (0)", stack);
+            menuBar.addTab(Forge.getLocalizer().getMessage("lblStack") + " (0)", stack);
             menuBar.addTab("\u2022 \u2022 \u2022", new PlayerSpecificMenu(false));
 
             //create fake menu tabs for other drop downs so they can be positioned as needed
@@ -246,18 +244,17 @@ public class MatchScreen extends FScreen {
 
         @Override
         protected void buildMenu() {
-            final Localizer localizer = Localizer.getInstance();
 
             if (isTopHumanPlayerActive() == getRotate180()) {
-                addItem(new MenuItem(localizer.getMessage("lblGame"), gameMenu));
-                addItem(new MenuItem(localizer.getMessage("lblPlayers") + " (" + playerPanels.size() + ")", players));
-                addItem(new MenuItem(localizer.getMessage("lblLog"), log));
+                addItem(new MenuItem(Forge.getLocalizer().getMessage("lblGame"), gameMenu));
+                addItem(new MenuItem(Forge.getLocalizer().getMessage("lblPlayers") + " (" + playerPanels.size() + ")", players));
+                addItem(new MenuItem(Forge.getLocalizer().getMessage("lblLog"), log));
                 if (ForgePreferences.DEV_MODE) {
-                    addItem(new MenuItem(localizer.getMessage("lblDev"), devMenu));
+                    addItem(new MenuItem(Forge.getLocalizer().getMessage("lblDev"), devMenu));
                 }
             }
             else { //TODO: Support using menu when player doesn't have priority
-                FMenuItem item = new FMenuItem(localizer.getMessage("lblMustWaitPriority"), null);
+                FMenuItem item = new FMenuItem(Forge.getLocalizer().getMessage("lblMustWaitPriority"), null);
                 item.setEnabled(false);
                 addItem(item);
             }
@@ -543,7 +540,7 @@ public class MatchScreen extends FScreen {
                 return getActivePrompt().getBtnCancel().trigger(); //trigger Cancel if can't trigger OK
             case Keys.ESCAPE:
                 if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN)) {
-                    if (getActivePrompt().getBtnCancel().getText().equals(Localizer.getInstance().getMessage("lblEndTurn"))) {
+                    if (getActivePrompt().getBtnCancel().getText().equals(Forge.getLocalizer().getInstance().getMessage("lblEndTurn"))) {
                         return false;
                     }
                 }
