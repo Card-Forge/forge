@@ -12,8 +12,8 @@ public class CardCloneStates extends ForwardingMap<CardStateName, CardState> {
 
     private Map<CardStateName, CardState> dataMap = Maps.newEnumMap(CardStateName.class);
 
-    private Card origin = null;
-    private CardTraitBase ctb = null;
+    private Card origin;
+    private CardTraitBase ctb;
 
     public CardCloneStates(Card origin, CardTraitBase sa) {
         super();
