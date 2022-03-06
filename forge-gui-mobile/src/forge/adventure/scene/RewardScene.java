@@ -146,10 +146,10 @@ public class RewardScene extends UIScene {
 
         switch (type) {
             case Shop:
-                doneButton.setText("Leave");
+                doneButton.setText(Forge.getLocalizer().getMessage("lblLeave"));
                 break;
             case Loot:
-                doneButton.setText("Done");
+                doneButton.setText(Forge.getLocalizer().getMessage("lblDone"));
                 break;
         }
         for (int h = 1; h < targetHeight; h++) {
