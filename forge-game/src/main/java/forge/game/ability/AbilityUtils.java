@@ -1225,10 +1225,8 @@ public class AbilityUtils {
                 players.add(p);
             }
         }
-        else if (defined.equals("ChosenCardController")) {
-            for (final Card chosen : card.getChosenCards()) {
-                players.add(game.getCardState(chosen).getController());
-            }
+        else if (defined.startsWith("ChosenCard")) {
+            addPlayer(Lists.newArrayList(card.getChosenCards()), defined, players);
         }
         else if (defined.equals("SourceController")) {
             players.add(sa.getHostCard().getController());
