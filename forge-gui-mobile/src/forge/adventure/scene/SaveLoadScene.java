@@ -184,11 +184,11 @@ public class SaveLoadScene extends UIScene {
 
     public void setSaveGame(boolean save) {
         if (save) {
-            header.setText("Save game");
-            saveLoadButton.setText("Save");
+            header.setText(Forge.getLocalizer().getMessage("lblSaveGame"));
+            saveLoadButton.setText(Forge.getLocalizer().getMessage("lblSave"));
         } else {
-            header.setText("Load game");
-            saveLoadButton.setText("Load");
+            header.setText(Forge.getLocalizer().getMessage("lblLoadGame"));
+            saveLoadButton.setText(Forge.getLocalizer().getMessage("lblLoad"));
         }
         autoSave.setDisabled(save);
         quickSave.setDisabled(save);
@@ -257,12 +257,13 @@ public class SaveLoadScene extends UIScene {
         header.setAlignment(Align.center);
         layout.add(header).pad(2).colspan(4).align(Align.center).expand();
         layout.row();
-        autoSave = addSaveSlot("Auto save", WorldSave.AUTO_SAVE_SLOT);
-        quickSave = addSaveSlot("Quick save", WorldSave.QUICK_SAVE_SLOT);
+        autoSave = addSaveSlot(Forge.getLocalizer().getMessage("lblAutoSave"), WorldSave.AUTO_SAVE_SLOT);
+        quickSave = addSaveSlot(Forge.getLocalizer().getMessage("lblQuickSave"), WorldSave.QUICK_SAVE_SLOT);
         for (int i = 1; i < 11; i++)
-            addSaveSlot("Slot:" + i, i);
+            addSaveSlot(Forge.getLocalizer().getMessage("lblSlot")+": " + i, i);
 
         saveLoadButton = ui.findActor("save");
+        saveLoadButton.getLabel().setText(Forge.getLocalizer().getMessage("lblSave"));
         ui.onButtonPress("save", new Runnable() {
             @Override
             public void run() {
@@ -270,6 +271,7 @@ public class SaveLoadScene extends UIScene {
             }
         });
         back = ui.findActor("return");
+        back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
         ui.onButtonPress("return", new Runnable() {
             @Override
             public void run() {

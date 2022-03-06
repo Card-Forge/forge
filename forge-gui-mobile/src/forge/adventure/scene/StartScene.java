@@ -123,12 +123,19 @@ public class StartScene extends UIScene {
             }
         });
         newGameButton = ui.findActor("Start");
+        newGameButton.getLabel().setText(Forge.getLocalizer().getMessage("lblNewGame"));
         loadButtton = ui.findActor("Load");
+        loadButtton.getLabel().setText(Forge.getLocalizer().getMessage("lblLoad"));
         saveButton = ui.findActor("Save");
+        saveButton.getLabel().setText(Forge.getLocalizer().getMessage("lblSave"));
         resumeButton = ui.findActor("Resume");
+        resumeButton.getLabel().setText(Forge.getLocalizer().getMessage("lblResume"));
         settingsButton = ui.findActor("Settings");
+        settingsButton.getLabel().setText(Forge.getLocalizer().getMessage("lblSettings"));
         exitButton = ui.findActor("Exit");
+        exitButton.getLabel().setText(Forge.getLocalizer().getMessage("lblExit"));
         switchButton = ui.findActor("Switch");
+        switchButton.getLabel().setText(Forge.getLocalizer().getMessage("lblClassic"));
         if (!Forge.isLandscapeMode()) {
             float w = Scene.GetIntendedWidth();
             float bW = w - 165;

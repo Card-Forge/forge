@@ -183,7 +183,7 @@ public class SettingsScene extends UIScene {
                 return null;
             }
         });
-        addLabel("Plane");
+        addLabel(Forge.getLocalizer().getMessage("lblWorld"));
         if (!Forge.isLandscapeMode()) {
             plane.getStyle().listStyle.font.getData().setScale(2, 1);
         }
@@ -262,6 +262,7 @@ public class SettingsScene extends UIScene {
 
         settingGroup.row();
         back = ui.findActor("return");
+        back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
         ui.onButtonPress("return", new Runnable() {
             @Override
             public void run() {
