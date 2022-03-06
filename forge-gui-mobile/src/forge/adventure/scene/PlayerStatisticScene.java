@@ -63,11 +63,11 @@ public class PlayerStatisticScene extends UIScene {
         super.enter();
         enemiesGroup.clear();
 
-        enemiesGroup.add("Avatar").align(Align.center).space(3, 10, 3, 10);
-        enemiesGroup.add("Name").fillX().align(Align.center).fillX().space(3, 10, 3, 60);
-        enemiesGroup.add(("Win")).align(Align.center).space(3, 5, 3, 5);
-        enemiesGroup.add(("/")).align(Align.center).space(3, 5, 3, 5);
-        enemiesGroup.add("Loss").align(Align.center).space(3, 5, 3, 5);
+        enemiesGroup.add(Forge.getLocalizer().getMessage("lblAvatar")).align(Align.center).space(3, 10, 3, 10);
+        enemiesGroup.add(Forge.getLocalizer().getMessage("lblName")).fillX().align(Align.center).fillX().space(3, 10, 3, 60);
+        enemiesGroup.add(Forge.getLocalizer().getMessage("lblWinProper")).align(Align.center).space(3, 5, 3, 5);
+        enemiesGroup.add("/").align(Align.center).space(3, 5, 3, 5);
+        enemiesGroup.add(Forge.getLocalizer().getMessage("lblLossProper")).align(Align.center).space(3, 5, 3, 5);
         enemiesGroup.row().space(8);
 
         if (playerName != null) {
@@ -189,12 +189,16 @@ public class PlayerStatisticScene extends UIScene {
         lifeIcon = ui.findActor("lifeIcon");
         goldIcon = ui.findActor("goldIcon");
         wins = ui.findActor("wins");
+        wins.setText(Forge.getLocalizer().getMessage("lblWinProper")+":");
         totalWins = ui.findActor("totalWins");
         loss = ui.findActor("loss");
+        loss.setText(Forge.getLocalizer().getMessage("lblLossProper")+":");
         totalLoss = ui.findActor("totalLoss");
         winloss = ui.findActor("winloss");
+        winloss.setText(Forge.getLocalizer().getMessage("lblWinProper")+"/"+Forge.getLocalizer().getMessage("lblLossProper"));
         lossWinRatio = ui.findActor("lossWinRatio");
         back = ui.findActor("return");
+        back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
         ScrollPane scrollPane = ui.findActor("enemies");
         scrollPane.setActor(enemiesGroup);
         enemiesGroup.setFillParent(true);

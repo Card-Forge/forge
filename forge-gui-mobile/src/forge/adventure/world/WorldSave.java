@@ -1,6 +1,5 @@
 package forge.adventure.world;
 
-import forge.Forge;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
@@ -130,10 +129,10 @@ public class WorldSave {
         //return currentSave = ret;
     }
     public boolean autoSave() {
-        return save(Forge.getLocalizer().getMessage("lblAutoSave"), AUTO_SAVE_SLOT);
+        return save("auto save",AUTO_SAVE_SLOT);
     }
     public boolean quickSave() {
-        return save(Forge.getLocalizer().getMessage("lblQuickSave"), QUICK_SAVE_SLOT);
+        return save("quick save",QUICK_SAVE_SLOT);
     }
     public boolean quickLoad() {
         return load(QUICK_SAVE_SLOT);

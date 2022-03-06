@@ -202,6 +202,8 @@ public class SaveLoadScene extends UIScene {
         else
             select(-3);
         updateFiles();
+        autoSave.getLabel().setText(Forge.getLocalizer().getMessage("lblAutoSave"));
+        quickSave.getLabel().setText(Forge.getLocalizer().getMessage("lblQuickSave"));
         super.enter();
     }
 
@@ -211,39 +213,39 @@ public class SaveLoadScene extends UIScene {
         layout = new Table();
         layout.setFillParent(true);
         stage.addActor(layout);
-        dialog = Controls.newDialog("Save");
+        dialog = Controls.newDialog(Forge.getLocalizer().getMessage("lblSave"));
         textInput = Controls.newTextField("");
         if (!Forge.isLandscapeMode()) {
-            dialog.getButtonTable().add(Controls.newLabel("Name your new save file.")).colspan(2).pad(2, 15, 2, 15);
+            dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2).pad(2, 15, 2, 15);
             dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newLabel("Name:")).align(Align.left).pad(2, 15, 2, 2);
+            dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName")+": ")).align(Align.left).pad(2, 15, 2, 2);
             dialog.getButtonTable().add(textInput).fillX().expandX().padRight(15);
             dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newTextButton("Save", new Runnable() {
+            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblSave"), new Runnable() {
                 @Override
                 public void run() {
                     SaveLoadScene.this.save();
                 }
             })).align(Align.left).padLeft(15);
-            dialog.getButtonTable().add(Controls.newTextButton("Abort", new Runnable() {
+            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbort"), new Runnable() {
                 @Override
                 public void run() {
                     SaveLoadScene.this.saveAbort();
                 }
             })).align(Align.right).padRight(15);
         } else {
-            dialog.getButtonTable().add(Controls.newLabel("Name your new save file.")).colspan(2);
+            dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2);
             dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newLabel("Name:")).align(Align.left);
+            dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName")+": ")).align(Align.left);
             dialog.getButtonTable().add(textInput).fillX().expandX();
             dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newTextButton("Save", new Runnable() {
+            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblSave"), new Runnable() {
                 @Override
                 public void run() {
                     SaveLoadScene.this.save();
                 }
             })).align(Align.left);
-            dialog.getButtonTable().add(Controls.newTextButton("Abort", new Runnable() {
+            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbort"), new Runnable() {
                 @Override
                 public void run() {
                     SaveLoadScene.this.saveAbort();
@@ -252,7 +254,7 @@ public class SaveLoadScene extends UIScene {
         }
         previewImage = ui.findActor("preview");
         previewBorder = ui.findActor("preview_border");
-        header = Controls.newLabel("Save");
+        header = Controls.newLabel(Forge.getLocalizer().getMessage("lblSave"));
         header.setHeight(header.getHeight() * 2);
         header.setAlignment(Align.center);
         layout.add(header).pad(2).colspan(4).align(Align.center).expand();

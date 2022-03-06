@@ -97,45 +97,45 @@ public class DeckSelectScene extends UIScene {
         layout = new Table();
         stage.addActor(layout);
 
-        header = Controls.newLabel("Select your Deck");
+        header = Controls.newLabel(Forge.getLocalizer().getMessage("lblSelectYourDeck"));
         layout.add(header).colspan(2).align(Align.center).pad(2, 5, 2, 5);
         layout.row();
         for (int i = 0; i < AdventurePlayer.NUMBER_OF_DECKS; i++)
-            addDeckSlot("Deck:" + (i + 1), i);
+            addDeckSlot(Forge.getLocalizer().getMessage("lblDeck")+": " + (i + 1), i);
 
-        dialog = Controls.newDialog("Save");
+        dialog = Controls.newDialog(Forge.getLocalizer().getMessage("lblSave"));
         textInput = Controls.newTextField("");
         if (!Forge.isLandscapeMode()) {
-            dialog.getButtonTable().add(Controls.newLabel("Name your new save file.")).colspan(2).pad(2, 15, 2, 15);
+            dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2).pad(2, 15, 2, 15);
             dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newLabel("Name:")).align(Align.left).pad(2, 15, 2, 2);
+            dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName")+": ")).align(Align.left).pad(2, 15, 2, 2);
             dialog.getButtonTable().add(textInput).fillX().expandX().padRight(15);
             dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newTextButton("Rename", new Runnable() {
+            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblRename"), new Runnable() {
                 @Override
                 public void run() {
                     DeckSelectScene.this.rename();
                 }
             })).align(Align.left).padLeft(15);
-            dialog.getButtonTable().add(Controls.newTextButton("Abort", new Runnable() {
+            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbort"), new Runnable() {
                 @Override
                 public void run() {
                     dialog.hide();
                 }
             })).align(Align.right).padRight(15);
         } else {
-            dialog.getButtonTable().add(Controls.newLabel("Name your new save file.")).colspan(2);
+            dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2);
             dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newLabel("Name:")).align(Align.left);
+            dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName")+": ")).align(Align.left);
             dialog.getButtonTable().add(textInput).fillX().expandX();
             dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newTextButton("Rename", new Runnable() {
+            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblRename"), new Runnable() {
                 @Override
                 public void run() {
                     DeckSelectScene.this.rename();
                 }
             })).align(Align.left);
-            dialog.getButtonTable().add(Controls.newTextButton("Abort", new Runnable() {
+            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbort"), new Runnable() {
                 @Override
                 public void run() {
                     dialog.hide();
@@ -143,8 +143,11 @@ public class DeckSelectScene extends UIScene {
             })).align(Align.left);
         }
         back = ui.findActor("return");
+        back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
         edit = ui.findActor("edit");
+        edit.getLabel().setText(Forge.getLocalizer().getMessage("lblEdit"));
         rename = ui.findActor("rename");
+        rename.getLabel().setText(Forge.getLocalizer().getMessage("lblRename"));
         ui.onButtonPress("return", new Runnable() {
             @Override
             public void run() {
