@@ -3921,11 +3921,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         updatePTforView();
     }
 
-
     public final void addNewPT(final Integer power, final Integer toughness, final long timestamp, final long staticId) {
         addNewPT(power, toughness, timestamp, staticId, false);
     }
-
     public final void addNewPT(final Integer power, final Integer toughness, final long timestamp, final long staticId, final boolean cda) {
         (cda ? newPTCharacterDefining : newPT).put(timestamp, staticId, Pair.of(power, toughness));
         updatePTforView();
