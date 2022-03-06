@@ -49,8 +49,6 @@ public class SettingsScene extends UIScene {
     }
 
     public void renderAct(float delta) {
-
-
         Gdx.gl.glClearColor(1, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.getBatch().begin();
@@ -60,7 +58,6 @@ public class SettingsScene extends UIScene {
         stage.getBatch().end();
         stage.act(delta);
         stage.draw();
-
     }
 
     @Override
@@ -77,8 +74,6 @@ public class SettingsScene extends UIScene {
     }
 
     private void addInputField(String name, ForgePreferences.FPref pref) {
-
-
         TextField box = Controls.newTextField("");
         box.setText(Preference.getPref(pref));
         box.addListener(new ChangeListener() {
@@ -129,7 +124,6 @@ public class SettingsScene extends UIScene {
     }
 
     private void addSettingField(String name, boolean value, ChangeListener change) {
-
         CheckBox box = Controls.newCheckBox("");
         if (GuiBase.isAndroid()||!Forge.isLandscapeMode()) {
             box.getImage().setScaling(Scaling.stretch);
@@ -219,9 +213,9 @@ public class SettingsScene extends UIScene {
                         return null;
                     }
                 });
-                addLabel("Video Mode (Restart to apply)");
+                addLabel(Forge.getLocalizer().getMessage("lblVideoMode"));
                 settingGroup.add(videomode).align(Align.right).pad(2);
-                addSettingField("Fullscreen", Config.instance().getSettingData().fullScreen, new ChangeListener() {
+                addSettingField(Forge.getLocalizer().getMessage("lblFullScreen"), Config.instance().getSettingData().fullScreen, new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
                         boolean value = ((CheckBox) actor).isChecked();

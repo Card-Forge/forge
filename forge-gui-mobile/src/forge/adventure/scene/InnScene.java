@@ -56,8 +56,12 @@ public class InnScene extends UIScene {
                 }
             });
             leave = ui.findActor("done");
+            leave.getLabel().setText(Forge.getLocalizer().getMessage("lblLeave"));
             sell = ui.findActor("sell");
+            sell.getLabel().setText(Forge.getLocalizer().getMessage("lblSell"));
             heal = ui.findActor("heal");
+            heal.getLabel().setText(Forge.getLocalizer().getMessage("lblHeal"));
+
             leaveIcon = ui.findActor("leaveIcon");
             healIcon = ui.findActor("healIcon");
             sellIcon = ui.findActor("sellIcon");
