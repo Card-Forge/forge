@@ -24,6 +24,10 @@ public abstract class RevealAiBase extends SpellAbilityAi {
             opps = Lists.newArrayList(Iterables.filter(opps, PlayerPredicates.isTargetableBy(sa)));
 
             if (opps.isEmpty()) {
+                if (mandatory && sa.canTarget(ai)) {
+                    sa.getTargets().add(ai);
+                    return true;
+                }
                 return false;
             }
 
