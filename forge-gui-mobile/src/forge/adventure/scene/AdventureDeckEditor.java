@@ -89,8 +89,6 @@ import java.util.Map;
             }
         }
         private static DeckEditorPage[] getPages() {
-            final Localizer localizer = Forge.getLocalizer().getInstance();
-
             return new DeckEditorPage[] {
                     new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), FSkinImage.QUEST_BOX),
                     new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR),
@@ -149,8 +147,6 @@ import java.util.Map;
                     FPopupMenu menu = new FPopupMenu() {
                         @Override
                         protected void buildMenu() {
-                            final Localizer localizer = Forge.getLocalizer().getInstance();
-
                             addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, new FEvent.FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e1) {
@@ -431,7 +427,6 @@ import java.util.Map;
                         if (max == 1) {
                             callback.run(max);
                         } else {
-                            final Localizer localizer = Forge.getLocalizer().getInstance();
                             GuiChoose.getInteger(cardManager.getSelectedItem() + " - " + verb + " " + Forge.getLocalizer().getMessage("lblHowMany"), 1, max, 20, callback);
                         }
                     }
@@ -439,7 +434,6 @@ import java.util.Map;
             }
 
             protected void addCommanderItems(final FDropDownMenu menu, final PaperCard card, boolean isAddMenu, boolean isAddSource) {
-                final Localizer localizer = Forge.getLocalizer().getInstance();
                 if (parentScreen.getCommanderPage() == null) {
                     return;
                 }
@@ -578,7 +572,6 @@ import java.util.Map;
             }
 
             protected String getItemManagerCaption() {
-                final Localizer localizer = Forge.getLocalizer().getInstance();
                 return Forge.getLocalizer().getMessage("lblCards");
             }
 
@@ -635,8 +628,6 @@ import java.util.Map;
 
             @Override
             protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
-                final Localizer localizer = Forge.getLocalizer().getInstance();
-
                 if (!needsCommander() && !canOnlyBePartnerCommander(card)) {
                     addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), Forge.getLocalizer().getMessage("lblTo") + " " + parentScreen.getMainDeckPage().cardManager.getCaption(), parentScreen.getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
                         @Override
@@ -686,7 +677,6 @@ import java.util.Map;
             @Override
             protected void buildDeckMenu(FPopupMenu menu) {
                 if (cardManager.getConfig().getShowUniqueCardsOption()) {
-                    final Localizer localizer = Forge.getLocalizer().getInstance();
                     menu.addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblUniqueCardsOnly"), cardManager.getWantUnique(), new FEvent.FEventHandler() {
                         @Override
                         public void handleEvent(FEvent e) {
@@ -706,8 +696,6 @@ import java.util.Map;
 
             protected DeckSectionPage(DeckSection deckSection0, ItemManagerConfig config) {
                 super(config, null, null);
-
-                final Localizer localizer = Forge.getLocalizer().getInstance();
 
                 deckSection = deckSection0;
                 switch (deckSection) {
