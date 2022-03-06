@@ -21,6 +21,7 @@ public class TileMapScene extends HudScene {
     PointOfInterestMapRenderer tiledMapRenderer;
     private String nextMap;
     private float cameraWidth = 0f, cameraHeight = 0f;
+    boolean init;
 
     public TileMapScene() {
         super(MapStage.getInstance());
@@ -66,11 +67,14 @@ public class TileMapScene extends HudScene {
 
     @Override
     public void resLoaded() {
-        //set initial camera width and height
-        if (cameraWidth == 0f)
-            cameraWidth = stage.getCamera().viewportWidth;
-        if (cameraHeight == 0f)
-            cameraHeight = stage.getCamera().viewportHeight;
+        if (!this.init) {
+            //set initial camera width and height
+            if (cameraWidth == 0f)
+                cameraWidth = stage.getCamera().viewportWidth;
+            if (cameraHeight == 0f)
+                cameraHeight = stage.getCamera().viewportHeight;
+            this.init = true;
+        }
         super.resLoaded();
     }
 
@@ -80,7 +84,7 @@ public class TileMapScene extends HudScene {
             //Trick for Map Stage
             stage.getCamera().viewportWidth = cameraHeight;
             stage.getCamera().viewportHeight = cameraWidth;
-            ((OrthographicCamera)stage.getCamera()).zoom = 0.55f;
+            ((OrthographicCamera) stage.getCamera()).zoom = 0.55f;
         }
         super.enter();
     }

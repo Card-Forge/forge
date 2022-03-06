@@ -46,6 +46,7 @@ public class SaveLoadScene extends UIScene {
     TextButton saveLoadButton, back;
     TextButton quickSave;
     TextButton autoSave;
+    boolean init;
 
     public SaveLoadScene() {
         super(Forge.isLandscapeMode() ? "ui/save_load_mobile.json" : "ui/save_load.json");
@@ -210,101 +211,104 @@ public class SaveLoadScene extends UIScene {
     @Override
     public void resLoaded() {
         super.resLoaded();
-        layout = new Table();
-        layout.setFillParent(true);
-        stage.addActor(layout);
-        dialog = Controls.newDialog(Forge.getLocalizer().getMessage("lblSave"));
-        textInput = Controls.newTextField("");
-        if (!Forge.isLandscapeMode()) {
-            dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2).pad(2, 15, 2, 15);
-            dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName")+": ")).align(Align.left).pad(2, 15, 2, 2);
-            dialog.getButtonTable().add(textInput).fillX().expandX().padRight(15);
-            dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblSave"), new Runnable() {
-                @Override
-                public void run() {
-                    SaveLoadScene.this.save();
-                }
-            })).align(Align.left).padLeft(15);
-            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbort"), new Runnable() {
-                @Override
-                public void run() {
-                    SaveLoadScene.this.saveAbort();
-                }
-            })).align(Align.right).padRight(15);
-        } else {
-            dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2);
-            dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName")+": ")).align(Align.left);
-            dialog.getButtonTable().add(textInput).fillX().expandX();
-            dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblSave"), new Runnable() {
-                @Override
-                public void run() {
-                    SaveLoadScene.this.save();
-                }
-            })).align(Align.left);
-            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbort"), new Runnable() {
-                @Override
-                public void run() {
-                    SaveLoadScene.this.saveAbort();
-                }
-            })).align(Align.right);
-        }
-        previewImage = ui.findActor("preview");
-        previewBorder = ui.findActor("preview_border");
-        header = Controls.newLabel(Forge.getLocalizer().getMessage("lblSave"));
-        header.setHeight(header.getHeight() * 2);
-        header.setAlignment(Align.center);
-        layout.add(header).pad(2).colspan(4).align(Align.center).expand();
-        layout.row();
-        autoSave = addSaveSlot(Forge.getLocalizer().getMessage("lblAutoSave"), WorldSave.AUTO_SAVE_SLOT);
-        quickSave = addSaveSlot(Forge.getLocalizer().getMessage("lblQuickSave"), WorldSave.QUICK_SAVE_SLOT);
-        for (int i = 1; i < 11; i++)
-            addSaveSlot(Forge.getLocalizer().getMessage("lblSlot")+": " + i, i);
-
-        saveLoadButton = ui.findActor("save");
-        saveLoadButton.getLabel().setText(Forge.getLocalizer().getMessage("lblSave"));
-        ui.onButtonPress("save", new Runnable() {
-            @Override
-            public void run() {
-                SaveLoadScene.this.loadSave();
+        if (!this.init) {
+            layout = new Table();
+            layout.setFillParent(true);
+            stage.addActor(layout);
+            dialog = Controls.newDialog(Forge.getLocalizer().getMessage("lblSave"));
+            textInput = Controls.newTextField("");
+            if (!Forge.isLandscapeMode()) {
+                dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2).pad(2, 15, 2, 15);
+                dialog.getButtonTable().row();
+                dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName")+": ")).align(Align.left).pad(2, 15, 2, 2);
+                dialog.getButtonTable().add(textInput).fillX().expandX().padRight(15);
+                dialog.getButtonTable().row();
+                dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblSave"), new Runnable() {
+                    @Override
+                    public void run() {
+                        SaveLoadScene.this.save();
+                    }
+                })).align(Align.left).padLeft(15);
+                dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbort"), new Runnable() {
+                    @Override
+                    public void run() {
+                        SaveLoadScene.this.saveAbort();
+                    }
+                })).align(Align.right).padRight(15);
+            } else {
+                dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2);
+                dialog.getButtonTable().row();
+                dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName")+": ")).align(Align.left);
+                dialog.getButtonTable().add(textInput).fillX().expandX();
+                dialog.getButtonTable().row();
+                dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblSave"), new Runnable() {
+                    @Override
+                    public void run() {
+                        SaveLoadScene.this.save();
+                    }
+                })).align(Align.left);
+                dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbort"), new Runnable() {
+                    @Override
+                    public void run() {
+                        SaveLoadScene.this.saveAbort();
+                    }
+                })).align(Align.right);
             }
-        });
-        back = ui.findActor("return");
-        back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
-        ui.onButtonPress("return", new Runnable() {
-            @Override
-            public void run() {
-                SaveLoadScene.this.back();
+            previewImage = ui.findActor("preview");
+            previewBorder = ui.findActor("preview_border");
+            header = Controls.newLabel(Forge.getLocalizer().getMessage("lblSave"));
+            header.setHeight(header.getHeight() * 2);
+            header.setAlignment(Align.center);
+            layout.add(header).pad(2).colspan(4).align(Align.center).expand();
+            layout.row();
+            autoSave = addSaveSlot(Forge.getLocalizer().getMessage("lblAutoSave"), WorldSave.AUTO_SAVE_SLOT);
+            quickSave = addSaveSlot(Forge.getLocalizer().getMessage("lblQuickSave"), WorldSave.QUICK_SAVE_SLOT);
+            for (int i = 1; i < 11; i++)
+                addSaveSlot(Forge.getLocalizer().getMessage("lblSlot")+": " + i, i);
+
+            saveLoadButton = ui.findActor("save");
+            saveLoadButton.getLabel().setText(Forge.getLocalizer().getMessage("lblSave"));
+            ui.onButtonPress("save", new Runnable() {
+                @Override
+                public void run() {
+                    SaveLoadScene.this.loadSave();
+                }
+            });
+            back = ui.findActor("return");
+            back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
+            ui.onButtonPress("return", new Runnable() {
+                @Override
+                public void run() {
+                    SaveLoadScene.this.back();
+                }
+            });
+
+            defColor = saveLoadButton.getColor();
+
+            ScrollPane scrollPane = ui.findActor("saveSlots");
+            scrollPane.setActor(layout);
+            if (!Forge.isLandscapeMode()) {
+                float w = Scene.GetIntendedWidth();
+                float sW = w - 20;
+                float oX = w/2 - sW/2;
+                float h = Scene.GetIntendedHeight();
+                float sH = (h - 10)/12;
+                scrollPane.setWidth(sW);
+                scrollPane.setHeight(sH*11);
+                scrollPane.setX(oX);
+                previewImage.setScale(1, 1.2f);
+                previewImage.setX(scrollPane.getRight()-105);
+                previewImage.setY(scrollPane.getTop()-71);
+                float bW = w - 165;
+                float bX = w/2 - bW/2;
+                back.setWidth(bW/2);
+                back.setHeight(20);
+                back.setX(bX);
+                saveLoadButton.setWidth(bW/2);
+                saveLoadButton.setHeight(20);
+                saveLoadButton.setX(back.getRight());
             }
-        });
-
-        defColor = saveLoadButton.getColor();
-
-        ScrollPane scrollPane = ui.findActor("saveSlots");
-        scrollPane.setActor(layout);
-        if (!Forge.isLandscapeMode()) {
-            float w = Scene.GetIntendedWidth();
-            float sW = w - 20;
-            float oX = w/2 - sW/2;
-            float h = Scene.GetIntendedHeight();
-            float sH = (h - 10)/12;
-            scrollPane.setWidth(sW);
-            scrollPane.setHeight(sH*11);
-            scrollPane.setX(oX);
-            previewImage.setScale(1, 1.2f);
-            previewImage.setX(scrollPane.getRight()-105);
-            previewImage.setY(scrollPane.getTop()-71);
-            float bW = w - 165;
-            float bX = w/2 - bW/2;
-            back.setWidth(bW/2);
-            back.setHeight(20);
-            back.setX(bX);
-            saveLoadButton.setWidth(bW/2);
-            saveLoadButton.setHeight(20);
-            saveLoadButton.setX(back.getRight());
+            this.init = true;
         }
     }
 }
