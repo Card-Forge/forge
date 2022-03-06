@@ -38,7 +38,6 @@ import forge.toolbox.FLabel;
 import forge.toolbox.GuiChoose;
 import forge.util.Callback;
 import forge.util.ItemPool;
-import forge.util.Localizer;
 import forge.util.Utils;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
