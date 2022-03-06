@@ -1,6 +1,4 @@
 #Add one announcement per line
 Get in the discord if you aren't yet. https://discord.gg/3v9JCVr
-All new Alchemy: Innistrad cards (Y22) have been implemented in Forge. Happy brewing!
-Support for rebalanced Arena cards (separate from the original implementations) is implemented.
-It's now possible to choose to play Constructed matches in the best of 1, 3, and 5 formats.
+Kamigawa: Neon Dynasty (NEO) and Kamigawa: Neon Dynasty Commander (NEC) are fully implemented.
 *** Android 7 & 8 support is now deprecated. Support will be dropped in an upcoming release. ***
