@@ -74,8 +74,8 @@ public class AssetsDownloader {
                             }
                             return;
                         }
-                        SOptionPane.showMessageDialog("Could not download update. " +
-                                "Press OK to proceed without update.", "Update Failed");
+                        SOptionPane.showOptionDialog("Could not download update. " +
+                                "Press OK to proceed without update.", "Update Failed", null, ImmutableList.of("Ok"));
                     }
                 }
             }
