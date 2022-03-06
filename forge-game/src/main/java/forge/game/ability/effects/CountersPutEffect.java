@@ -135,6 +135,11 @@ public class CountersPutEffect extends SpellAbilityEffect {
         boolean existingCounter = sa.hasParam("CounterType") && sa.getParam("CounterType").equals("ExistingCounter");
         boolean eachExistingCounter = sa.hasParam("EachExistingCounter");
 
+        if (sa.hasParam("Optional") && !pc.confirmAction
+                (sa, null, Localizer.getInstance().getMessage("lblDoYouWantPutCounter"))) {
+            return;
+        }
+
         List<GameEntity> tgtObjects = Lists.newArrayList();
         int divrem = 0;
         if (sa.hasParam("Bolster")) {
@@ -196,11 +201,6 @@ public class CountersPutEffect extends SpellAbilityEffect {
             } else {
                 tgtObjects.addAll(getDefinedEntitiesOrTargeted(sa, "Defined"));
             }
-        }
-
-        if (sa.hasParam("Optional") && !pc.confirmAction
-                (sa, null, Localizer.getInstance().getMessage("lblDoYouWantPutCounter"))) {
-            return;
         }
 
         int counterRemain = counterAmount;

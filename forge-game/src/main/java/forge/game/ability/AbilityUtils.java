@@ -349,36 +349,7 @@ public class AbilityUtils {
             cards.addAll(CardLists.getValidCards(candidates, validDefined, hostCard.getController(), hostCard, sa));
             return cards;
         } else {
-            CardCollection list = null;
-            if (sa instanceof SpellAbility) {
-                SpellAbility root = ((SpellAbility)sa).getRootAbility();
-                if (defined.startsWith("SacrificedCards")) {
-                    list = root.getPaidList("SacrificedCards");
-                } else if (defined.startsWith("Sacrificed")) {
-                    list = root.getPaidList("Sacrificed");
-                } else if (defined.startsWith("Revealed")) {
-                    list = root.getPaidList("Revealed");
-                } else if (defined.startsWith("DiscardedCards")) {
-                    list = root.getPaidList("DiscardedCards");
-                } else if (defined.startsWith("Discarded")) {
-                    list = root.getPaidList("Discarded");
-                } else if (defined.startsWith("ExiledCards")) {
-                    list = root.getPaidList("ExiledCards");
-                } else if (defined.startsWith("Exiled")) {
-                    list = root.getPaidList("Exiled");
-                } else if (defined.startsWith("Milled")) {
-                    list = root.getPaidList("Milled");
-                } else if (defined.startsWith("TappedCards")) {
-                    list = root.getPaidList("TappedCards");
-                } else if (defined.startsWith("Tapped")) {
-                    list = root.getPaidList("Tapped");
-                } else if (defined.startsWith("UntappedCards")) {
-                    list = root.getPaidList("UntappedCards");
-                } else if (defined.startsWith("Untapped")) {
-                    list = root.getPaidList("Untapped");
-                }
-            }
-
+            CardCollection list = getPaidCards(sa, defined);
             if (list != null) {
                 cards.addAll(list);
             }
@@ -1004,7 +975,7 @@ public class AbilityUtils {
 
         final Player player = sa instanceof SpellAbility ? ((SpellAbility)sa).getActivatingPlayer() : card.getController();
 
-        if (defined.equals("Self") || defined.equals("ThisTargetedCard")) {
+        if (defined.equals("Self") || defined.equals("ThisTargetedCard") || getPaidCards(sa, defined) != null) {
             // do nothing, Self is for Cards, not Players
         } else if (defined.equals("TargetedOrController")) {
             players.addAll(getDefinedPlayers(card, "Targeted", sa));
@@ -3862,6 +3833,39 @@ public class AbilityUtils {
             });
         }
         return someCards;
+    }
+
+    public static CardCollection getPaidCards(CardTraitBase sa, String defined) {
+        CardCollection list = null;
+        if (sa instanceof SpellAbility) {
+            SpellAbility root = ((SpellAbility)sa).getRootAbility();
+            if (defined.startsWith("SacrificedCards")) {
+                list = root.getPaidList("SacrificedCards");
+            } else if (defined.startsWith("Sacrificed")) {
+                list = root.getPaidList("Sacrificed");
+            } else if (defined.startsWith("Revealed")) {
+                list = root.getPaidList("Revealed");
+            } else if (defined.startsWith("DiscardedCards")) {
+                list = root.getPaidList("DiscardedCards");
+            } else if (defined.startsWith("Discarded")) {
+                list = root.getPaidList("Discarded");
+            } else if (defined.startsWith("ExiledCards")) {
+                list = root.getPaidList("ExiledCards");
+            } else if (defined.startsWith("Exiled")) {
+                list = root.getPaidList("Exiled");
+            } else if (defined.startsWith("Milled")) {
+                list = root.getPaidList("Milled");
+            } else if (defined.startsWith("TappedCards")) {
+                list = root.getPaidList("TappedCards");
+            } else if (defined.startsWith("Tapped")) {
+                list = root.getPaidList("Tapped");
+            } else if (defined.startsWith("UntappedCards")) {
+                list = root.getPaidList("UntappedCards");
+            } else if (defined.startsWith("Untapped")) {
+                list = root.getPaidList("Untapped");
+            }
+        }
+        return list;
     }
 
     public static int getNumberOfTypes(final Card card) {
