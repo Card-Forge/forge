@@ -214,6 +214,9 @@ public class Forge implements ApplicationListener {
             public void run() {
                 //see if app or assets need updating
                 AssetsDownloader.checkForUpdates(splashScreen);
+                if (exited) {
+                    return;
+                } //don't continue if user chose to exit or couldn't download required assets
 
                 safeToClose = false;
                 ImageKeys.setIsLibGDXPort(GuiBase.getInterface().isLibgdxPort());
@@ -303,7 +306,7 @@ public class Forge implements ApplicationListener {
 
     public static void openHomeDefault() {
         //default to English only if CJK is missing
-        getLocalizer().setEnglish(Forge.forcedEnglishonCJKMissing);
+        getLocalizer().setEnglish(forcedEnglishonCJKMissing);
         GuiBase.setIsAdventureMode(false);
         openHomeScreen(-1, null); //default for startup
         isMobileAdventureMode = false;
@@ -372,7 +375,7 @@ public class Forge implements ApplicationListener {
                                         splashScreen.setShowModeSelector(true);
                                         //start background music
                                         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
-                                        Forge.safeToClose = true;
+                                        safeToClose = true;
                                     }
                                 });
                             }
@@ -386,7 +389,7 @@ public class Forge implements ApplicationListener {
     public static void setCursor(TextureRegion textureRegion, String name) {
         if (GuiBase.isAndroid())
             return;
-        if (Forge.isMobileAdventureMode) {
+        if (isMobileAdventureMode) {
             if (cursorA0 != null && name == "0") {
                 setGdxCursor(cursorA0);
                 return;
@@ -515,7 +518,7 @@ public class Forge implements ApplicationListener {
         if (!forcedEnglishonCJKMissing) {
             forcedEnglishonCJKMissing = true;
             getLocalizer().setEnglish(forcedEnglishonCJKMissing);
-            System.err.println("Forge switches to English due to an error generating CJK Fonts. Language: "+Forge.locale);
+            System.err.println("Forge switches to English due to an error generating CJK Fonts. Language: "+locale);
         }
     }
     public static void showMenu() {
@@ -544,7 +547,7 @@ public class Forge implements ApplicationListener {
         FScreen lastMatch = currentScreen;
         if (destroyThis && isLandscapeMode())
             return;
-        if (Dscreens.size() < 2 || (currentScreen == HomeScreen.instance && Forge.isPortraitMode)) {
+        if (Dscreens.size() < 2 || (currentScreen == HomeScreen.instance && isPortraitMode)) {
             exit(false); //prompt to exit if attempting to go back from home screen
             return;
         }
