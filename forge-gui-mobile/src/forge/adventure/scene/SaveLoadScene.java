@@ -54,7 +54,7 @@ public class SaveLoadScene extends UIScene {
 
 
     private TextButton addSaveSlot(String name, int i) {
-        layout.add(Controls.newLabel(name)).align(Align.left).pad(4, 10, 4, 15);
+        layout.add(Controls.newLabel(name)).align(Align.left).pad(2, 5, 2, 10);
         TextButton button = Controls.newTextButton("...");
         button.addListener(new ClickListener() {
             @Override
@@ -213,7 +213,6 @@ public class SaveLoadScene extends UIScene {
         super.resLoaded();
         if (!this.init) {
             layout = new Table();
-            layout.setFillParent(true);
             stage.addActor(layout);
             dialog = Controls.newDialog(Forge.getLocalizer().getMessage("lblSave"));
             textInput = Controls.newTextField("");
@@ -257,9 +256,8 @@ public class SaveLoadScene extends UIScene {
             previewImage = ui.findActor("preview");
             previewBorder = ui.findActor("preview_border");
             header = Controls.newLabel(Forge.getLocalizer().getMessage("lblSave"));
-            header.setHeight(header.getHeight() * 2);
             header.setAlignment(Align.center);
-            layout.add(header).pad(2).colspan(4).align(Align.center).expand();
+            layout.add(header).pad(2).colspan(4).align(Align.center).expandX();
             layout.row();
             autoSave = addSaveSlot(Forge.getLocalizer().getMessage("lblAutoSave"), WorldSave.AUTO_SAVE_SLOT);
             quickSave = addSaveSlot(Forge.getLocalizer().getMessage("lblQuickSave"), WorldSave.QUICK_SAVE_SLOT);
