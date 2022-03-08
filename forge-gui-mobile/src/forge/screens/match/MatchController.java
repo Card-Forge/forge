@@ -200,7 +200,7 @@ public class MatchController extends AbstractGuiGame {
         actuateMatchPreferences();
         //reset daytime every match
         updateDayTime(null);
-        Forge.openScreen(view, GuiBase.isNetworkplay());
+        Forge.openScreen(view);
     }
 
     @Override
