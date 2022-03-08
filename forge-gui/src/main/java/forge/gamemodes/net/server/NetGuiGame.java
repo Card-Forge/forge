@@ -76,9 +76,9 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
-    public void showPromptMessage(final PlayerView playerView, final String message, final CardView card) {
+    public void showCardPromptMessage(final PlayerView playerView, final String message, final CardView card) {
         updateGameView();
-        send(ProtocolMethod.showPromptMessage, playerView, message);
+        send(ProtocolMethod.showCardPromptMessage, playerView, message, card);
     }
 
     @Override

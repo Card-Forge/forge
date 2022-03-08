@@ -12,6 +12,7 @@ import forge.deck.Deck;
 import forge.game.player.Player;
 import forge.item.IPaperCard;
 import forge.screens.TransitionScreen;
+import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
@@ -157,13 +158,18 @@ public class MatchController extends AbstractGuiGame {
     public void openView(final TrackableCollection<PlayerView> myPlayers) {
         final boolean noHumans = !hasLocalPlayers();
 
-        final FCollectionView<PlayerView> allPlayers = getGameView().getPlayers();
+        FCollectionView<PlayerView> players = getGameView().getPlayers();
+        if (players.size() == 2 && myPlayers != null && myPlayers.size() == 1 && myPlayers.get(0).equals(players.get(1))) {
+            players = new FCollection<>(new PlayerView[]{players.get(1), players.get(0)});
+        }
         final List<VPlayerPanel> playerPanels = new ArrayList<>();
-        for (final PlayerView p : allPlayers) {
+        boolean init = false;
+        for (final PlayerView p : players) {
             final boolean isLocal = isLocalPlayer(p);
-            final VPlayerPanel playerPanel = new VPlayerPanel(p, isLocal || noHumans, allPlayers.size());
-            if (isLocal && !playerPanels.isEmpty()) {
+            final VPlayerPanel playerPanel = new VPlayerPanel(p, isLocal || noHumans, players.size());
+            if (isLocal && !init) {
                 playerPanels.add(0, playerPanel); //ensure local player always first among player panels
+                init = true;
             }
             else {
                 playerPanels.add(playerPanel);
@@ -194,7 +200,7 @@ public class MatchController extends AbstractGuiGame {
         actuateMatchPreferences();
         //reset daytime every match
         updateDayTime(null);
-        Forge.openScreen(view);
+        Forge.openScreen(view, GuiBase.isNetworkplay());
     }
 
     @Override
@@ -203,7 +209,7 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public void showPromptMessage(final PlayerView player, final String message, final CardView card) {
+    public void showCardPromptMessage(final PlayerView player, final String message, final CardView card) {
         view.getPrompt(player).setMessage(message, card);
     }
 
