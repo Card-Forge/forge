@@ -74,8 +74,8 @@ public class AssetsDownloader {
                             }
                             return;
                         }
-                        SOptionPane.showMessageDialog("Could not download update. " +
-                                "Press OK to proceed without update.", "Update Failed");
+                        SOptionPane.showOptionDialog("Could not download update. " +
+                                "Press OK to proceed without update.", "Update Failed", null, ImmutableList.of("Ok"));
                     }
                 }
             }
@@ -112,9 +112,12 @@ public class AssetsDownloader {
             else {
                 message += "You cannot start the app since you haven't previously downloaded these files.";
             }
-            SOptionPane.showMessageDialog(message, "No Internet Connection");
-            if (!canIgnoreDownload) {
-                Forge.exitAnimation(false); //exit if can't ignore download
+            switch (SOptionPane.showOptionDialog(message, "No Internet Connection", null, ImmutableList.of("Ok"))) {
+                default: {
+                    if (!canIgnoreDownload) {
+                        Forge.exitAnimation(false); //exit if can't ignore download
+                    }
+                }
             }
             return;
         }

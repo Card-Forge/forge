@@ -86,10 +86,12 @@ public class StaticData {
             final Map<String, CardRules> variantsCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
             final Map<String, CardRules> customizedCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
-            for (CardEdition e : editions) {
-                if (e.getType() == CardEdition.Type.FUNNY || e.getBorderColor() == CardEdition.BorderColor.SILVER) {
-                    for (CardEdition.CardInSet cis : e.getAllCardsInSet()) {
-                        funnyCards.add(cis.name);
+            if (!loadNonLegalCards) {
+                for (CardEdition e : editions) {
+                    if (e.getType() == CardEdition.Type.FUNNY || e.getBorderColor() == CardEdition.BorderColor.SILVER) {
+                        for (CardEdition.CardInSet cis : e.getAllCardsInSet()) {
+                            funnyCards.add(cis.name);
+                        }
                     }
                 }
             }
@@ -705,8 +707,6 @@ public class StaticData {
         return altCandidate;
     }
 
-
-
     /**
      * Get the Art Count for a given <code>PaperCard</code> looking for a candidate in all
      * available databases.
@@ -734,7 +734,6 @@ public class StaticData {
     public void setMulliganRule(MulliganDefs.MulliganRule rule) {
         mulliganRule = rule;
     }
-
     public MulliganDefs.MulliganRule getMulliganRule() {
         return mulliganRule;
     }
@@ -754,7 +753,7 @@ public class StaticData {
     }
 
     public CardDb.CardArtPreference getCardArtPreference(boolean latestArt, boolean coreExpansionOnly) {
-        if (latestArt){
+        if (latestArt) {
             return coreExpansionOnly ? CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY : CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
         }
         return coreExpansionOnly ? CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY : CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS;

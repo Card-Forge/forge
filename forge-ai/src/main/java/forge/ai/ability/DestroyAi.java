@@ -208,7 +208,7 @@ public class DestroyAi extends SpellAbilityAi {
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        return (c.getShieldCount() == 0 && !ComputerUtil.canRegenerate(ai, c));
+                        return c.getShieldCount() == 0 && !ComputerUtil.canRegenerate(ai, c);
                     }
                 });
             }
@@ -440,8 +440,8 @@ public class DestroyAi extends SpellAbilityAi {
         boolean nonBasicTgt = !tgtLand.isBasicLand();
 
         // Try not to lose tempo too much and not to mana-screw yourself when considering this logic
-        int numLandsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS_PRODUCING_MANA).size();
-        int numLandsOTB = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA).size();
+        int numLandsInHand = CardLists.count(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS_PRODUCING_MANA);
+        int numLandsOTB = CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA);
 
         // If the opponent skipped a land drop, consider not looking at having the extra land in hand if the profile allows it
         boolean isHighPriority = highPriorityIfNoLandDrop && oppSkippedLandDrop;

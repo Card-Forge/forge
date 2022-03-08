@@ -326,7 +326,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         }
 
         while (compare != null && sub != null) {
-            TargetChoices choices = compare.getTargetRestrictions() != null ? compare.getTargets() : null;
+            TargetChoices choices = compare.usesTargeting() ? compare.getTargets() : null;
 
             if (choices != null && !choices.equals(sub.getTargetChoices())) {
                 return false;

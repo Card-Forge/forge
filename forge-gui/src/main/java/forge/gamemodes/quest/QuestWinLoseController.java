@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import com.google.common.collect.Lists;
+import forge.gui.GuiBase;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -304,8 +305,9 @@ public class QuestWinLoseController {
 
                 if (altReward > 0) {
                     credGameplay += altReward;
-                    sb.append(TextUtil.concatNoSpace("Alternate win condition: <u>",
-                            winConditionName, "</u>! Bonus: ", String.valueOf(altReward), " credits.\n"));
+                    sb.append(GuiBase.getInterface().isLibgdxPort()
+                            ? TextUtil.concatNoSpace("Alternate win condition: ", winConditionName, "! Bonus: ", String.valueOf(altReward), " credits.\n")
+                            : TextUtil.concatNoSpace("Alternate win condition: <u>", winConditionName, "</u>! Bonus: ", String.valueOf(altReward), " credits.\n"));
                 }
             }
             // Mulligan to zero

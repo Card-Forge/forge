@@ -98,8 +98,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private CardState currentState;
     private CardStateName currentStateName = CardStateName.Original;
 
-    private Zone castFrom = null;
-    private SpellAbility castSA = null;
+    private Zone castFrom;
+    private SpellAbility castSA;
 
     private CardDamageHistory damageHistory = new CardDamageHistory();
     // Hidden keywords won't be displayed on the card
@@ -119,18 +119,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private Card encoding, cloneOrigin, haunting, effectSource, pairedWith, meldedWith;
     private Card mergedTo;
 
-    private SpellAbility effectSourceAbility = null;
+    private SpellAbility effectSourceAbility;
 
-    private GameEntity entityAttachedTo = null;
+    private GameEntity entityAttachedTo;
 
-    private GameEntity mustAttackEntity = null;
-    private GameEntity mustAttackEntityThisTurn = null;
+    private GameEntity mustAttackEntity;
+    private GameEntity mustAttackEntityThisTurn;
 
     private final Map<StaticAbility, CardPlayOption> mayPlay = Maps.newHashMap();
 
     // changes by AF animate and continuous static effects
 
-    protected CardChangedType changedTypeByText = null; // Layer 3 by Text Change
+    protected CardChangedType changedTypeByText; // Layer 3 by Text Change
     // x=timestamp y=StaticAbility id
     private final Table<Long, Long, CardChangedType> changedCardTypesByText = TreeBasedTable.create(); // Layer 3
     private final Table<Long, Long, CardChangedType> changedCardTypesCharacterDefining = TreeBasedTable.create(); // Layer 4 CDA
@@ -193,22 +193,22 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean sickness = true; // summoning sickness
     private boolean token = false;
     private boolean tokenCard = false;
-    private Card copiedPermanent = null;
+    private Card copiedPermanent;
     private boolean copiedSpell = false;
 
     private boolean canCounter = true;
 
     private boolean unearthed;
 
-    private boolean monstrous = false;
+    private boolean monstrous;
 
-    private boolean renowned = false;
+    private boolean renowned;
 
-    private boolean manifested = false;
+    private boolean manifested;
 
-    private boolean foretold = false;
-    private boolean foretoldThisTurn = false;
-    private boolean foretoldByEffect = false;
+    private boolean foretold;
+    private boolean foretoldThisTurn;
+    private boolean foretoldByEffect;
 
     private int timesCrewedThisTurn = 0;
 
@@ -253,21 +253,21 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private String oracleText = "";
 
     private int damage;
-    private boolean hasBeenDealtDeathtouchDamage = false;
+    private boolean hasBeenDealtDeathtouchDamage;
 
     // regeneration
     private FCollection<Card> shields = new FCollection<>();
-    private int regeneratedThisTurn = 0;
+    private int regeneratedThisTurn;
 
     private int turnInZone;
     // the player that under which control it enters
-    private Player turnInController = null;
+    private Player turnInController;
 
     private Map<String, Integer> xManaCostPaidByColor;
 
-    private Player owner = null;
-    private Player controller = null;
-    private long controllerTimestamp = 0;
+    private Player owner;
+    private Player controller;
+    private long controllerTimestamp;
     private NavigableMap<Long, Player> tempControllers = Maps.newTreeMap();
 
     private String originalText = "", text = "";
@@ -283,8 +283,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private String chosenMode = "";
     private String currentRoom = null;
 
-    private Card exiledWith = null;
-    private Player exiledBy = null;
+    private Card exiledWith;
+    private Player exiledBy;
 
     private Map<Long, Player> goad = Maps.newTreeMap();
 
@@ -298,11 +298,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final List<Object[]> staticCommandList = Lists.newArrayList();
 
     // Zone-changing spells should store card's zone here
-    private Zone currentZone = null;
+    private Zone currentZone;
 
     // LKI copies of cards are allowed to store the LKI about the zone the card was known to be in last.
     // For all cards except LKI copies this should always be null.
-    private Zone savedLastKnownZone = null;
+    private Zone savedLastKnownZone;
     // LKI copies of cards store CMC separately to avoid shenanigans with the game state visualization
     // breaking when the LKI object is changed to a different card state.
     private int lkiCMC = -1;
@@ -314,7 +314,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private SpellAbility[] basicLandAbilities = new SpellAbility[MagicColor.WUBRG.length];
 
-    private int planeswalkerAbilityActivated = 0;
+    private int planeswalkerAbilityActivated;
 
     private final ActivationTable numberTurnActivations = new ActivationTable();
     private final ActivationTable numberGameActivations = new ActivationTable();
@@ -326,7 +326,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final Table<SpellAbility, StaticAbility, List<String>> chosenModesTurnStatic = HashBasedTable.create();
     private final Table<SpellAbility, StaticAbility, List<String>> chosenModesGameStatic = HashBasedTable.create();
 
-    private CombatLki combatLKI = null;
+    private CombatLki combatLKI;
 
     // Enumeration for CMC request types
     public enum SplitCMCMode {
@@ -3921,11 +3921,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         updatePTforView();
     }
 
-
     public final void addNewPT(final Integer power, final Integer toughness, final long timestamp, final long staticId) {
         addNewPT(power, toughness, timestamp, staticId, false);
     }
-
     public final void addNewPT(final Integer power, final Integer toughness, final long timestamp, final long staticId, final boolean cda) {
         (cda ? newPTCharacterDefining : newPT).put(timestamp, staticId, Pair.of(power, toughness));
         updatePTforView();
@@ -6135,7 +6133,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public int getCMC() {
         return getCMC(SplitCMCMode.CurrentSideCMC);
     }
-
     public int getCMC(SplitCMCMode mode) {
         if (isToken() && getCopiedPermanent() == null) {
             return 0;

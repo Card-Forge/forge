@@ -79,7 +79,7 @@ public class TriggerAbilityTriggered extends Trigger {
         if (hasParam("ValidCause")) {
             boolean match = false;
             for (Card cause : causes) {
-                if(matchesValidParam("ValidCause", cause)) {
+                if (matchesValidParam("ValidCause", cause)) {
                     match = true;
                 }
             }

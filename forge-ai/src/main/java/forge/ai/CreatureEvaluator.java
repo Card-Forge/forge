@@ -11,13 +11,6 @@ import forge.game.keyword.Keyword;
 import forge.game.spellability.SpellAbility;
 
 public class CreatureEvaluator implements Function<Card, Integer> {
-    protected int getEffectivePower(final Card c) {
-        return c.getNetCombatDamage();
-    }
-    protected int getEffectiveToughness(final Card c) {
-        return c.getNetToughness();
-    }
-
     @Override
     public Integer apply(Card c) {
         return evaluateCreature(c);
@@ -31,8 +24,8 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         if (!c.isToken()) {
             value += addValue(20, "non-token"); // tokens should be worth less than actual cards
         }
-        int power = getEffectivePower(c);
-        final int toughness = getEffectiveToughness(c);
+        int power = c.getNetCombatDamage();
+        final int toughness = c.getNetToughness();
 
         // TODO replace with ReplacementEffect checks
         if (c.hasKeyword("Prevent all combat damage that would be dealt by CARDNAME.")
@@ -45,6 +38,11 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         if (considerPT) {
             value += addValue(power * 15, "power");
             value += addValue(toughness * 10, "toughness: " + toughness);
+
+            // because backside is always stronger the potential makes it better than a single faced card
+            if (c.hasKeyword(Keyword.DAYBOUND)) {
+                value += addValue(power * 10, "transforming");
+            }
         }
         if (considerCMC) {
             value += addValue(c.getCMC() * 5, "cmc");
@@ -72,8 +70,8 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             if (c.hasKeyword(Keyword.MENACE)) {
                 value += addValue(power * 4, "menace");
             }
-            if (c.hasStartOfKeyword("CantBeBlockedBy")) {
-                value += addValue(power * 3, "block-restrict");
+            if (c.hasKeyword(Keyword.SKULK)) {
+                value += addValue(power * 3, "skulk");
             }
         }
 
@@ -106,19 +104,18 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value += addValue(c.getKeywordMagnitude(Keyword.AFFLICT) * 5, "afflict");
         }
 
-        value += addValue(c.getKeywordMagnitude(Keyword.BUSHIDO) * 16, "bushido");
-        value += addValue(c.getAmountOfKeyword(Keyword.FLANKING) * 15, "flanking");
-        value += addValue(c.getAmountOfKeyword(Keyword.EXALTED) * 15, "exalted");
         value += addValue(c.getKeywordMagnitude(Keyword.ANNIHILATOR) * 50, "eldrazi");
         value += addValue(c.getKeywordMagnitude(Keyword.ABSORB) * 11, "absorb");
 
         // Keywords that may produce temporary or permanent buffs over time
-        if (c.hasKeyword(Keyword.PROWESS)) {
-            value += addValue(5, "prowess");
-        }
         if (c.hasKeyword(Keyword.OUTLAST)) {
             value += addValue(10, "outlast");
         }
+        value += addValue(c.getKeywordMagnitude(Keyword.BUSHIDO) * 16, "bushido");
+        value += addValue(c.getAmountOfKeyword(Keyword.FLANKING) * 15, "flanking");
+        value += addValue(c.getAmountOfKeyword(Keyword.EXALTED) * 15, "exalted");
+        value += addValue(c.getAmountOfKeyword(Keyword.MELEE) * 18, "melee");
+        value += addValue(c.getAmountOfKeyword(Keyword.PROWESS) * 5, "prowess");
 
         // Defensive Keywords
         if (c.hasKeyword(Keyword.REACH) && !c.hasKeyword(Keyword.FLYING)) {
@@ -141,9 +138,30 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value += addValue(35, "hexproof");
         } else if (c.hasKeyword(Keyword.SHROUD)) {
             value += addValue(30, "shroud");
+        } else if (c.hasKeyword(Keyword.WARD)) {
+            value += addValue(10, "ward");
         }
         if (c.hasKeyword(Keyword.PROTECTION)) {
             value += addValue(20, "protection");
+        }
+
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.isAbility()) {
+                value += addValue(evaluateSpellAbility(sa), "sa: " + sa);
+            }
+        }
+
+        // paired creatures are more valuable because they grant a bonus to the other creature
+        if (c.isPaired()) {
+            value += addValue(14, "paired");
+        }
+
+        if (c.hasEncodedCard()) {
+            value += addValue(24, "encoded");
+        }
+
+        if (ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
+            value += addValue(30, "revive");
         }
 
         // Bad keywords
@@ -152,7 +170,9 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         } else if (c.getSVar("SacrificeEndCombat").equals("True")) {
             value -= subValue(40, "sac-end");
         }
-        if (c.hasKeyword("CARDNAME can't block.")) {
+        if (c.hasKeyword("CARDNAME can't attack or block.")) {
+            value = addValue(50 + (c.getCMC() * 5), "useless"); // reset everything - useless
+        } else if (c.hasKeyword("CARDNAME can't block.")) {
             value -= subValue(10, "cant-block");
         } else if (c.hasKeyword("CARDNAME attacks each combat if able.")) {
             value -= subValue(10, "must-attack");
@@ -165,10 +185,18 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         if (c.hasSVar("DestroyWhenDamaged")) {
             value -= subValue((toughness - 1) * 9, "dies-to-dmg");
         }
-
-        if (c.hasKeyword("CARDNAME can't attack or block.")) {
-            value = addValue(50 + (c.getCMC() * 5), "useless"); // reset everything - useless
+        if (c.getSVar("Targeting").equals("Dies")) {
+            value -= subValue(25, "dies");
         }
+
+        if (c.isUntapped()) {
+            value += addValue(1, "untapped");
+        }
+
+        if (!c.getManaAbilities().isEmpty()) {
+            value += addValue(10, "manadork");
+        }
+
         if (c.hasKeyword("CARDNAME doesn't untap during your untap step.")) {
             if (c.isTapped()) {
                 value = addValue(50 + (c.getCMC() * 5), "tapped-useless"); // reset everything - useless
@@ -185,41 +213,20 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         } else if (c.hasKeyword(Keyword.ECHO) && c.cameUnderControlSinceLastUpkeep()) {
             value -= subValue(10, "echo-unpaid");
         }
-
-        if (c.hasStartOfKeyword("At the beginning of your upkeep, CARDNAME deals")) {
-            value -= subValue(20, "upkeep-dmg");
-        } 
         if (c.hasKeyword(Keyword.FADING)) {
             value -= subValue(20, "fading");
         }
         if (c.hasKeyword(Keyword.VANISHING)) {
             value -= subValue(20, "vanishing");
         }
-        if (c.getSVar("Targeting").equals("Dies")) {
-            value -= subValue(25, "dies");
+        if (c.hasKeyword(Keyword.PHASING)) {
+            value -= subValue(10, "phasing");
         }
 
-        for (final SpellAbility sa : c.getSpellAbilities()) {
-            if (sa.isAbility()) {
-                value += addValue(evaluateSpellAbility(sa), "sa: " + sa);
-            }
-        }
-        if (!c.getManaAbilities().isEmpty()) {
-            value += addValue(10, "manadork");
-        }
-
-        if (c.isUntapped()) {
-            value += addValue(1, "untapped");
-        }
-
-        // paired creatures are more valuable because they grant a bonus to the other creature
-        if (c.isPaired()) {
-            value += addValue(14, "paired");
-        }
-
-        if (!c.hasEncodedCard()) {
-            value += addValue(24, "encoded");
-        }
+        // TODO no longer a KW
+        if (c.hasStartOfKeyword("At the beginning of your upkeep, CARDNAME deals")) {
+            value -= subValue(20, "upkeep-dmg");
+        } 
 
         // card-specific evaluation modifier
         if (c.hasSVar("AIEvaluationModifier")) {
@@ -240,7 +247,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
                     && (!sa.hasParam("Defined") || "Self".equals(sa.getParam("Defined")))) {
                 if (sa.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
                     // Electrostatic Pummeler, can be expanded for similar cards
-                    int initPower = getEffectivePower(sa.getHostCard());
+                    int initPower = sa.getHostCard().getNetPower();
                     int pumpedPower = initPower;
                     int energy = sa.getHostCard().getController().getCounters(CounterEnumType.ENERGY);
                     if (energy > 0) {

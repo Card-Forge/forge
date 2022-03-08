@@ -8,6 +8,7 @@ import com.google.common.base.Predicates;
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
+import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
 import forge.ai.PlayerControllerAi;
@@ -16,7 +17,6 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
-import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -65,7 +65,7 @@ public class ManaEffectAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
-        if (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai && canRampPool(ai, sa.getHostCard())) {
+        if (ph.is(PhaseType.END_OF_TURN) && (ph.getNextTurn() == ai || ComputerUtilCard.willUntap(ai, sa.getHostCard())) && canRampPool(ai, sa.getHostCard())) {
             return true;
         }
         if (!ph.is(PhaseType.MAIN2) || !ComputerUtil.activateForCost(sa, ai)) {
@@ -87,7 +87,7 @@ public class ManaEffectAi extends SpellAbilityAi {
         if (logic.startsWith("ManaRitual")) {
              return ph.is(PhaseType.MAIN2, ai) || ph.is(PhaseType.MAIN1, ai);
         } else if ("AtOppEOT".equals(logic)) {
-            return !ai.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.manaBurn) && ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai;
+            return !ai.getManaPool().hasBurn() && ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai;
         }
         return super.checkPhaseRestrictions(ai, sa, ph, logic);
     }
@@ -106,7 +106,7 @@ public class ManaEffectAi extends SpellAbilityAi {
 
         PhaseHandler ph = ai.getGame().getPhaseHandler();
         boolean moreManaNextTurn = false;
-        if (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai && canRampPool(ai, sa.getHostCard())) {
+        if (ph.is(PhaseType.END_OF_TURN) && (ph.getNextTurn() == ai || ComputerUtilCard.willUntap(ai, sa.getHostCard())) && canRampPool(ai, sa.getHostCard())) {
             moreManaNextTurn = true;
         }
 
@@ -259,7 +259,7 @@ public class ManaEffectAi extends SpellAbilityAi {
         return castableSpells.size() > 0;
     }
 
-    private boolean canRampPool(Player ai, Card source) {
+    public static boolean canRampPool(Player ai, Card source) {
         ManaPool mp = ai.getManaPool();
         Mana test = null;
         if (mp.isEmpty()) {

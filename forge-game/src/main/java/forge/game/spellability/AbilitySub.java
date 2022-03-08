@@ -39,7 +39,7 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
     /** Constant <code>serialVersionUID=4650634415821733134L</code>. */
     private static final long serialVersionUID = 4650634415821733134L;
 
-    private SpellAbility parent = null;
+    private SpellAbility parent;
 
     /**
      * <p>

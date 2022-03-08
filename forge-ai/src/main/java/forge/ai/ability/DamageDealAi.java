@@ -356,7 +356,8 @@ public class DamageDealAi extends DamageAiBase {
                 return c.getSVar("Targeting").equals("Dies")
                         || (ComputerUtilCombat.getEnoughDamageToKill(c, d, source, false, noPrevention) <= d)
                             && !ComputerUtil.canRegenerate(ai, c)
-                            && !(c.getSVar("SacMe").length() > 0);
+                            && !(c.getSVar("SacMe").length() > 0)
+                            && !ComputerUtilCard.hasActiveUndyingOrPersist(c);
             }
         });
 
@@ -489,10 +490,7 @@ public class DamageDealAi extends DamageAiBase {
      */
     private boolean damageTargetAI(final Player ai, final SpellAbility saMe, final int dmg, final boolean immediately) {
         final TargetRestrictions tgt = saMe.getTargetRestrictions();
-        if ("Atarka's Command".equals(ComputerUtilAbility.getAbilitySourceName(saMe))) {
-            // playReusable in damageChooseNontargeted wrongly assumes that CharmEffect options are re-usable
-            return shouldTgtP(ai, saMe, dmg, false);
-        }
+
         if (tgt == null) {
             return damageChooseNontargeted(ai, saMe, dmg);
         }
@@ -833,6 +831,10 @@ public class DamageDealAi extends DamageAiBase {
                     }
                 }
             }
+        }
+        if ("Atarka's Command".equals(ComputerUtilAbility.getAbilitySourceName(saMe))) {
+            // playReusable wrongly assumes that CharmEffect options are re-usable
+            return positive;
         }
         if (!positive && !(saMe instanceof AbilitySub)) {
             return false;

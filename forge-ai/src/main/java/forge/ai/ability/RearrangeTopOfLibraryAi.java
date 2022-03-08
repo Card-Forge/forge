@@ -109,7 +109,7 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
 
         Player p = pc.getFirst(); // currently always a single target spell
         Card top = p.getCardsIn(ZoneType.Library).getFirst();
-        int landsOTB = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA).size();
+        int landsOTB = CardLists.count(p.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA);
         int cmc = top.isSplitCard() ? Math.min(top.getCMC(Card.SplitCMCMode.LeftSplitCMC), top.getCMC(Card.SplitCMCMode.RightSplitCMC))
                 : top.getCMC();
         int maxCastable = ComputerUtilMana.getAvailableManaEstimate(p, false);

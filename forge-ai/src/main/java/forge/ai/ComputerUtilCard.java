@@ -63,6 +63,7 @@ import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.Expressions;
 import forge.util.MyRandom;
+import forge.util.TextUtil;
 
 public class ComputerUtilCard {
     public static Card getMostExpensivePermanentAI(final CardCollectionView list, final SpellAbility spell, final boolean targeted) {
@@ -1816,6 +1817,9 @@ public class ComputerUtilCard {
     }
 
     public static boolean hasActiveUndyingOrPersist(final Card c) {
+        if (c.isToken()) {
+            return false;
+        }
         if (c.hasKeyword(Keyword.UNDYING) && c.getCounters(CounterEnumType.P1P1) == 0) {
             return true;
         }
@@ -1980,6 +1984,50 @@ public class ComputerUtilCard {
             }
         }
         return totalCost;
+    }
+
+    public static boolean willUntap(Player ai, Card tapped) {
+        // TODO use AiLogic on trigger in case card loses all abilities
+        // if it's from a static need to also check canUntap
+        for (Card card : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+            boolean untapsEachTurn = card.hasSVar("UntapsEachTurn");
+            boolean untapsEachOtherTurn = card.hasSVar("UntapsEachOtherPlayerTurn");
+
+            if (untapsEachTurn || untapsEachOtherTurn) {
+                String affected = untapsEachTurn ? card.getSVar("UntapsEachTurn")
+                        : card.getSVar("UntapsEachOtherPlayerTurn");
+
+                for (String aff : TextUtil.split(affected, ',')) {
+                    if (tapped.isValid(aff, ai, tapped, null)
+                            && (untapsEachTurn || (untapsEachOtherTurn && ai.equals(card.getController())))) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean isNonDisabledCardInPlay(final Player ai, final String cardName) {
+        for (Card card : ai.getCardsIn(ZoneType.Battlefield)) {
+            if (card.getName().equals(cardName)) {
+                // TODO - Better logic to determine if a permanent is disabled by local effects
+                // currently assuming any permanent enchanted by another player
+                // is disabled and a second copy is necessary
+                // will need actual logic that determines if the enchantment is able
+                // to disable the permanent or it's still functional and a duplicate is unneeded.
+                boolean disabledByEnemy = false;
+                for (Card card2 : card.getEnchantedBy()) {
+                    if (card2.getOwner() != ai) {
+                        disabledByEnemy = true;
+                    }
+                }
+                if (!disabledByEnemy) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     // Determine if the AI has an AI:RemoveDeck:All or an AI:RemoveDeck:Random hint specified.

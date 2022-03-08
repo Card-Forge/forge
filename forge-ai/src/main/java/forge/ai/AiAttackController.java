@@ -50,7 +50,6 @@ import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Expressions;
 import forge.util.MyRandom;
-import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 
@@ -333,25 +332,6 @@ public class AiAttackController {
             return attackers;
         }
 
-        // no need to block if an effect is in play which untaps all creatures (pseudo-Vigilance akin to
-        // Awakening or Prophet of Kruphix)
-        for (Card card : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
-            boolean untapsEachTurn = card.hasSVar("UntapsEachTurn");
-            boolean untapsEachOtherTurn = card.hasSVar("UntapsEachOtherPlayerTurn");
-
-            if (untapsEachTurn || untapsEachOtherTurn) {
-                String affected = untapsEachTurn ? card.getSVar("UntapsEachTurn")
-                        : card.getSVar("UntapsEachOtherPlayerTurn");
-
-                for (String aff : TextUtil.split(affected, ',')) {
-                    if (aff.equals("Creature")
-                            && (untapsEachTurn || (untapsEachOtherTurn && ai.equals(card.getController())))) {
-                        return attackers;
-                    }
-                }
-            }
-        }
-
         List<Card> opponentsAttackers = new ArrayList<>(oppList);
         opponentsAttackers = CardLists.filter(opponentsAttackers, new Predicate<Card>() {
             @Override
@@ -370,7 +350,9 @@ public class AiAttackController {
                 }
                 continue;
             }
-            if (c.hasKeyword(Keyword.VIGILANCE)) {
+            // no need to block if an effect is in play which untaps all creatures
+            // (pseudo-Vigilance akin to Awakening or or Prophet of Kruphix)
+            if (c.hasKeyword(Keyword.VIGILANCE) || ComputerUtilCard.willUntap(ai, c)) {
                 vigilantes.add(c);
                 notNeededAsBlockers.remove(c); // they will be re-added later
                 if (canBlockAnAttacker(c, opponentsAttackers, false)) {
@@ -392,7 +374,7 @@ public class AiAttackController {
             }
         }
         int blockersStillNeeded = blockersNeeded - fixedBlockers;
-        blockersStillNeeded = Math.min(blockersNeeded, list.size());
+        blockersStillNeeded = Math.min(blockersStillNeeded, list.size());
         for (int i = 0; i < blockersStillNeeded; i++) {
             notNeededAsBlockers.remove(list.get(i));
         }
@@ -850,7 +832,7 @@ public class AiAttackController {
             return aiAggression;
         }
 
-        if (simAI && ai.isCardInPlay("Reconnaissance")) {
+        if (simAI && ComputerUtilCard.isNonDisabledCardInPlay(ai, "Reconnaissance")) {
             for (Card attacker : attackersLeft) {
                 if (canAttackWrapper(attacker, defender)) {
                     // simulation will decide if attacker stays in combat based on blocks
