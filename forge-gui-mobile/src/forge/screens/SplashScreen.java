@@ -97,9 +97,7 @@ public class SplashScreen extends FContainer {
         private float progress = 0;
         private boolean finished, openAdventure;
         //for transition image only...
-        TextureRegion transition_bg = new TextureRegion(new Texture(GuiBase.isAndroid()
-                ? Gdx.files.internal("fallback_skin").child("title_bg_lq.png")
-                : Gdx.files.classpath("fallback_skin").child("title_bg_lq.png")));
+        TextureRegion transition_bg = new TextureRegion(new Texture(Gdx.files.classpath("fallback_skin").child("title_bg_lq.png")));
 
         public void drawBackground(Graphics g) {
             float percentage = progress / DURATION;

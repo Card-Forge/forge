@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectStreamClass;
-import java.io.StreamCorruptedException;
 
 import io.netty.handler.codec.serialization.ClassResolver;
 
@@ -23,16 +22,19 @@ public class CObjectInputStream extends ObjectInputStream {
         if (type < 0) {
             throw new EOFException();
         } else {
-            switch(type) {
-                case 0:
-                    return super.readClassDescriptor();
-                case 1:
-                    String className = readUTF();
-                    Class<?> clazz = classResolver.resolve(className);
-                    return ObjectStreamClass.lookupAny(clazz);
-                default:
-                    throw new StreamCorruptedException("Unexpected class descriptor type: " + type);
+            ObjectStreamClass resultClassDescriptor = super.readClassDescriptor();
+            Class localClass;
+            try {
+                localClass = Class.forName(resultClassDescriptor.getName());
+            } catch (ClassNotFoundException e) {
+                System.err.println("[Class Not Found Exception]\nNo local class for " + resultClassDescriptor.getName());
+                return resultClassDescriptor;
             }
+            ObjectStreamClass localClassDescriptor = ObjectStreamClass.lookupAny(localClass);
+            if (localClassDescriptor != null && type == 1) {
+                resultClassDescriptor = localClassDescriptor; // Use local class descriptor for deserialization by default
+            }
+            return resultClassDescriptor;
         }
     }
 

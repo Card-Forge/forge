@@ -1000,6 +1000,12 @@ public final class CMatchUI
     public void showPromptMessage(final PlayerView playerView, final String message) {
         cPrompt.setMessage(message);
     }
+
+    @Override
+    public void showCardPromptMessage(PlayerView playerView, String message, CardView card) {
+        cPrompt.setMessage(message, card);
+    }
+
     //  no override for now
     public void showPromptMessage(final PlayerView playerView, final String message, final CardView card ) {
         cPrompt.setMessage(message,card);
