@@ -73,7 +73,7 @@ public enum ProtocolMethod {
     setCard             (Mode.SERVER, Void.TYPE, CardView.class),
     setSelectables      (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
     clearSelectables    (Mode.SERVER, Void.TYPE),
-    refreshField        (Mode.SERVER, Void.TYPE, Boolean.TYPE),
+    refreshField        (Mode.SERVER, Void.TYPE),
     // TODO case "setPlayerAvatar":
     openZones           (Mode.SERVER, PlayerZoneUpdates.class, PlayerView.class, Collection/*ZoneType*/.class, Map/*PlayerView,Object*/.class),
     restoreOldZones     (Mode.SERVER, Void.TYPE, PlayerView.class, Iterable/*PlayerZoneUpdates*/.class),
