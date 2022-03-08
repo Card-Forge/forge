@@ -633,7 +633,7 @@ public class AdvancedSearch {
             protected Map<String, Integer> getItemValue(DeckProxy input) {
                 CardPool sideboard = input.getDeck().get(DeckSection.Sideboard);
                 if (sideboard != null) {
-                    sideboard.toNameLookup();
+                    return sideboard.toNameLookup();
                 }
                 return null;
             }
@@ -647,7 +647,7 @@ public class AdvancedSearch {
         DECK_SIDE_SIZE("lblSideboardSize", DeckProxy.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<DeckProxy>(0, 15) {
             @Override
             protected Integer getItemValue(DeckProxy input) {
-                return Math.min(input.getSideSize(), 0);
+                return Math.max(input.getSideSize(), 0);
             }
         }),
         COMMANDER_NAME("lblName", ConquestCommander.class, FilterOperator.STRING_OPS, new StringEvaluator<ConquestCommander>() {
