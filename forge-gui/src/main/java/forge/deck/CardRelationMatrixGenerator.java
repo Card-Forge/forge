@@ -159,13 +159,7 @@ public final class CardRelationMatrixGenerator {
         }
 
         //filter to just legal commanders
-        List<PaperCard> legends = Lists.newArrayList(Iterables.filter(cardList,Predicates.compose(
-                new Predicate<CardRules>() {
-                    @Override
-                    public boolean apply(CardRules rules) {
-                        return format.isLegalCommander(rules);
-                    }
-                }, PaperCard.FN_GET_RULES)));
+        List<PaperCard> legends = Lists.newArrayList(Iterables.filter(cardList, format.isLegalCommanderPredicate()));
 
         //generate lookups for legends to link commander names to matrix rows
         for (int i=0; i<legends.size(); ++i){
