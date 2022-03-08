@@ -80,6 +80,8 @@ import io.sentry.event.BreadcrumbBuilder;
 public class AbilityUtils {
     private final static ImmutableList<String> cmpList = ImmutableList.of("LT", "LE", "EQ", "GE", "GT", "NE");
 
+    static public final String WITH_DELIMITER = "((?<=%1$s)|(?=%1$s))";
+
     // should the three getDefined functions be merged into one? Or better to
     // have separate?
     // If we only have one, each function needs to Cast the Object to the
@@ -3042,15 +3044,21 @@ public class AbilityUtils {
                 replaced = replaced.replaceAll("(?<!>)" + key, value);
             }
         }
-        for (final Entry<String, String> e : typeMap.entrySet()) {
-            final String key = e.getKey();
-            final String pkey = CardType.getPluralType(key);
-            final String pvalue = getReplacedText(pkey, CardType.getPluralType(e.getValue()), isDescriptive);
-            replaced = replaced.replaceAll("(?<!>)" + pkey, pvalue);
-            final String value = getReplacedText(key, e.getValue(), isDescriptive);
-            replaced = replaced.replaceAll("(?<!>)" + key, value);
+        StringBuilder sb = new StringBuilder();
+        for (String replacedPart : replaced.split(String.format(WITH_DELIMITER, "\\."))) {
+            if (!replacedPart.equals("Self") && !replacedPart.equals(".")) {
+                for (final Entry<String, String> e : typeMap.entrySet()) {
+                    final String key = e.getKey();
+                    final String pkey = CardType.getPluralType(key);
+                    final String pvalue = getReplacedText(pkey, CardType.getPluralType(e.getValue()), isDescriptive);
+                    replacedPart = replacedPart.replaceAll("(?<!>)" + pkey, pvalue);
+                    final String value = getReplacedText(key, e.getValue(), isDescriptive);
+                    replacedPart = replacedPart.replaceAll("(?<!>)" + key, value);
+                }
+            }
+            sb.append(replacedPart);
         }
-        return replaced;
+        return sb.toString();
     }
 
     private static final String getReplacedText(final String originalWord, final String newWord, final boolean isDescriptive) {
@@ -3782,7 +3790,7 @@ public class AbilityUtils {
 
         // "Clerics you control" - Count$TypeYouCtrl.Cleric
         if (sq[0].contains("Type")) {
-            someCards = CardLists.filter(someCards, CardPredicates.isType(sq[1]));
+            someCards = CardLists.getType(someCards, sq[1]);
         }
 
         // "Named <CARDNAME> in all graveyards" - Count$NamedAllYards.<CARDNAME>
