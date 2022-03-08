@@ -108,7 +108,7 @@ public class FSkin {
         {
             if (!dir.exists() || !dir.isDirectory()) {
                 //if skins directory doesn't exist, point to internal assets/skin directory instead for the sake of the splash screen
-                preferredDir = Gdx.files.classpath("fallback_skin");
+                preferredDir = GuiBase.isAndroid() ? Gdx.files.internal("fallback_skin") : Gdx.files.classpath("fallback_skin");
             }
             else {
                 if (splashScreen != null) {
