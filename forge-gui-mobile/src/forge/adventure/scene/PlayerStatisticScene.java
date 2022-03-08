@@ -200,7 +200,6 @@ public class PlayerStatisticScene extends UIScene {
             back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
             ScrollPane scrollPane = ui.findActor("enemies");
             scrollPane.setActor(enemiesGroup);
-            enemiesGroup.setFillParent(true);
             this.init = true;
         }
     }
