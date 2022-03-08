@@ -124,7 +124,7 @@ public class CounterAi extends SpellAbilityAi {
 
             if (toPay <= usableManaSources) {
                 // If this is a reusable Resource, feel free to play it most of the time
-                if (!SpellAbilityAi.playReusable(ai,sa)) {
+                if (!SpellAbilityAi.playReusable(ai, sa)) {
                     return false;
                 }
             }

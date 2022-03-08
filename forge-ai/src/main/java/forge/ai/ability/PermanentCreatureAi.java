@@ -139,7 +139,7 @@ public class PermanentCreatureAi extends PermanentAi {
         boolean hasETBTrigger = card.hasETBTrigger(true);
         boolean hasAmbushAI = card.hasSVar("AmbushAI");
         boolean defOnlyAmbushAI = hasAmbushAI && "BlockOnly".equals(card.getSVar("AmbushAI"));
-        boolean hasFloatMana = ai.getManaPool().totalMana() > 0;
+        boolean loseFloatMana = ai.getManaPool().totalMana() > 0 && !ManaEffectAi.canRampPool(ai, card);
         boolean willDiscardNow = isOwnEOT && !ai.isUnlimitedHandSize() && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize();
         boolean willDieNow = combat != null && ComputerUtilCombat.lifeInSeriousDanger(ai, combat);
         boolean wantToCastInMain1 = ph.is(PhaseType.MAIN1, ai) && ComputerUtil.castPermanentInMain1(ai, sa);
@@ -176,7 +176,7 @@ public class PermanentCreatureAi extends PermanentAi {
             }
         }
 
-        if (hasFloatMana || willDiscardNow || willDieNow) {
+        if (loseFloatMana || willDiscardNow || willDieNow) {
             // Will lose mana in pool or about to discard a card in cleanup or about to die in combat, so use this opportunity
             return true;
         } else if (isCommander && isMyMain1OrLater) {

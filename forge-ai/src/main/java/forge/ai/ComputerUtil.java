@@ -487,11 +487,11 @@ public class ComputerUtil {
             // Discard lands
             final CardCollection landsInHand = CardLists.getType(typeList, "Land");
             if (!landsInHand.isEmpty()) {
-                final CardCollection landsInPlay = CardLists.getType(ai.getCardsIn(ZoneType.Battlefield), "Land");
+                final int numLandsInPlay = CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA);
                 final CardCollection nonLandsInHand = CardLists.getNotType(ai.getCardsIn(ZoneType.Hand), "Land");
                 final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
-                if (landsInPlay.size() >= highestCMC
-                        || (landsInPlay.size() + landsInHand.size() > 6 && landsInHand.size() > 1)) {
+                if (numLandsInPlay >= highestCMC
+                        || (numLandsInPlay + landsInHand.size() > 6 && landsInHand.size() > 1)) {
                     // Don't need more land.
                     return ComputerUtilCard.getWorstLand(landsInHand);
                 }
@@ -1190,7 +1190,7 @@ public class ComputerUtil {
         }
 
         final Game game = ai.getGame();
-        final CardCollection landsInPlay = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS);
+        final CardCollection landsInPlay = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA);
         final CardCollection landsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
         final CardCollection nonLandsInHand = CardLists.getNotType(ai.getCardsIn(ZoneType.Hand), "Land");
         final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
