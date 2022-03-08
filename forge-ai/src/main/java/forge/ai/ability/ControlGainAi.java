@@ -122,10 +122,7 @@ public class ControlGainAi extends SpellAbilityAi {
             return true;
         }
 
-        CardCollection list = new CardCollection();
-        for (Player pl : opponents) {
-            list.addAll(pl.getCardsIn(ZoneType.Battlefield));
-        }
+        CardCollection list = opponents.getCardsIn(ZoneType.Battlefield);
 
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard(), sa);
         
@@ -325,7 +322,7 @@ public class ControlGainAi extends SpellAbilityAi {
         } else {
             return this.canPlayAI(ai, sa);
         }
-    } // pumpDrawbackAI()
+    }
 
     @Override
     protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {

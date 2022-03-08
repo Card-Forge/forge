@@ -927,30 +927,8 @@ public class AiController {
         return AiPlayDecision.WillPlay;
     }
 
-    public boolean isNonDisabledCardInPlay(final String cardName) {
-        for (Card card : player.getCardsIn(ZoneType.Battlefield)) {
-            if (card.getName().equals(cardName)) {
-                // TODO - Better logic to determine if a permanent is disabled by local effects
-                // currently assuming any permanent enchanted by another player
-                // is disabled and a second copy is necessary
-                // will need actual logic that determines if the enchantment is able
-                // to disable the permanent or it's still functional and a duplicate is unneeded.
-                boolean disabledByEnemy = false;
-                for (Card card2 : card.getEnchantedBy()) {
-                    if (card2.getOwner() != player) {
-                        disabledByEnemy = true;
-                    }
-                }
-                if (!disabledByEnemy) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     private AiPlayDecision canPlaySpellBasic(final Card card, final SpellAbility sa) {
-        if ("True".equals(card.getSVar("NonStackingEffect")) && isNonDisabledCardInPlay(card.getName())) {
+        if ("True".equals(card.getSVar("NonStackingEffect")) && ComputerUtilCard.isNonDisabledCardInPlay(player, card.getName())) {
             return AiPlayDecision.NeedsToPlayCriteriaNotMet;
         }
 
@@ -1170,12 +1148,11 @@ public class AiController {
     public CardCollection getCardsToDiscard(final int numDiscard, final String[] uTypes, final SpellAbility sa) {
         return getCardsToDiscard(numDiscard, uTypes, sa, CardCollection.EMPTY);
     }
-
     public CardCollection getCardsToDiscard(final int numDiscard, final String[] uTypes, final SpellAbility sa, final CardCollectionView exclude) {
-        boolean noFiltering = (sa != null) && "DiscardCMCX".equals(sa.getParam("AILogic")); // list AI logic for which filtering is taken care of elsewhere
+        boolean noFiltering = sa != null && "DiscardCMCX".equals(sa.getParam("AILogic")); // list AI logic for which filtering is taken care of elsewhere
         CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
         hand.removeAll(exclude);
-        if ((uTypes != null) && (sa != null) && !noFiltering) {
+        if (uTypes != null && sa != null && !noFiltering) {
             hand = CardLists.getValidCards(hand, uTypes, sa.getActivatingPlayer(), sa.getHostCard(), sa);
         }
         return getCardsToDiscard(numDiscard, numDiscard, hand, sa);
@@ -1214,7 +1191,7 @@ public class AiController {
                 if ("DiscardUncastableAndExcess".equals(sa.getParam("AILogic"))) {
                     CardCollection discards = new CardCollection();
                     final CardCollectionView inHand = player.getCardsIn(ZoneType.Hand);
-                    final int numLandsOTB = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS).size();
+                    final int numLandsOTB = CardLists.count(player.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
                     int numOppInHand = 0;
                     for (Player p : player.getGame().getPlayers()) {
                         if (p.getCardsIn(ZoneType.Hand).size() > numOppInHand) {
@@ -1274,7 +1251,7 @@ public class AiController {
             if (validCards.isEmpty()) {
                 continue;
             }
-            final int numLandsInPlay = CardLists.count(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS);
+            final int numLandsInPlay = CardLists.count(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA);
             final CardCollection landsInHand = CardLists.filter(validCards, CardPredicates.Presets.LANDS);
             final int numLandsInHand = landsInHand.size();
     
@@ -2361,7 +2338,7 @@ public class AiController {
                 return Iterables.getFirst(doubleLife, null);
             }
         } else if (mode.equals(ReplacementType.DamageDone)) {
-            List<ReplacementEffect> prevention = filterList(list, CardTraitPredicates.hasParam("Prevention"));
+            List<ReplacementEffect> prevention = filterList(list, CardTraitPredicates.hasParam("Prevent"));
 
             // TODO when Protection is done as ReplacementEffect do them
             // before normal prevention

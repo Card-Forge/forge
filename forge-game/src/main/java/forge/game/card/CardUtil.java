@@ -91,8 +91,7 @@ public final class CardUtil {
             kw = kw.substring(7);
         }
 
-        return !kw.startsWith("Protection") && !kw.startsWith("CantBeBlockedBy")
-                && !NON_STACKING_LIST.contains(kw);
+        return !kw.startsWith("Protection") && !NON_STACKING_LIST.contains(kw);
     }
 
     public static String getShortColorsString(final Iterable<String> colors) {

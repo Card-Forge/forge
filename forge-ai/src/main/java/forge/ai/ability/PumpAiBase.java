@@ -200,7 +200,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             return false;
         }
 
-        final boolean evasive = (keyword.endsWith("Unblockable") || keyword.endsWith("Shadow") || keyword.startsWith("CantBeBlockedBy"));
+        final boolean evasive = keyword.endsWith("Unblockable") || keyword.endsWith("Shadow");
         // give evasive keywords to creatures that can or do attack
         if (evasive) {
             return !ph.isPlayerTurn(opp) && (CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))

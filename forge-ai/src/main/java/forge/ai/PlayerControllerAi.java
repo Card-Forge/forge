@@ -462,7 +462,7 @@ public class PlayerControllerAi extends PlayerController {
                 }
             }
 
-            int landsOTB = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA).size();
+            int landsOTB = CardLists.count(p.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA);
 
             if (!p.isOpponentOf(player)) {
                 if (landsOTB <= 2) {
@@ -611,7 +611,7 @@ public class PlayerControllerAi extends PlayerController {
             hand.removeAll(toReturn);
 
             CardCollection landsInHand = CardLists.filter(hand, Presets.LANDS);
-            int numLandsInHand = landsInHand.size() - CardLists.filter(toReturn, Presets.LANDS).size();
+            int numLandsInHand = landsInHand.size() - CardLists.count(toReturn, Presets.LANDS);
 
             // If we're flooding with lands, get rid of the worst land we have
             if (numLandsInHand > 0 && numLandsInHand > numLandsDesired) {
