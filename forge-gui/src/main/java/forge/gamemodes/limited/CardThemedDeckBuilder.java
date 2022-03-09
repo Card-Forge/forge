@@ -434,7 +434,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
         @Override
         public boolean apply(CardRules subject) {
-            return ((allowedColor.containsAllColorsFrom(subject.getColorIdentity().getColor())));
+            return allowedColor.containsAllColorsFrom(subject.getColorIdentity().getColor());
         }
     }
 

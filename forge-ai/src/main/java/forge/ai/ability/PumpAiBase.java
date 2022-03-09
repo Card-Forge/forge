@@ -448,14 +448,11 @@ public abstract class PumpAiBase extends SpellAbilityAi {
      * @return a {@link forge.CardList} object.
      */
     protected CardCollection getCurseCreatures(final Player ai, final SpellAbility sa, final int defense, final int attack, final List<String> keywords) {
-        CardCollection list = new CardCollection();
-        for (final Player opp : ai.getOpponents()) {
-            list.addAll(opp.getCardsIn(ZoneType.Battlefield));
-        }
+        CardCollection list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
         list = CardLists.getTargetableCards(list, sa);
-        
+
         if (list.isEmpty()) {
             return list;
         }

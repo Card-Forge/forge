@@ -67,8 +67,7 @@ public enum DeckSection {
                 // NOTE: Same rules applies to both Deck and Side, despite "Conspiracy cards" are allowed
                 // in the SideBoard (see Rule 313.2)
                 // Those will be matched later, in case (see `Deck::validateDeferredSections`)
-                return (!t.isConspiracy() && !t.isDungeon() && !t.isPhenomenon() && !t.isPlane() && !t.isScheme() &&
-                        !t.isVanguard());
+                return !t.isConspiracy() && !t.isDungeon() && !t.isPhenomenon() && !t.isPlane() && !t.isScheme() && !t.isVanguard();
             }
         };
 
@@ -76,7 +75,7 @@ public enum DeckSection {
             @Override
             public Boolean apply(PaperCard card) {
                 CardType t = card.getRules().getType();
-                return (t.isPlaneswalker() || (t.isCreature() && t.isLegendary()));
+                return card.getRules().canBeCommander() || t.isPlaneswalker();
             }
         };
 
@@ -84,7 +83,7 @@ public enum DeckSection {
             @Override
             public Boolean apply(PaperCard card) {
                 CardType t = card.getRules().getType();
-                return (t.isPlane() || t.isPhenomenon());
+                return t.isPlane() || t.isPhenomenon();
             }
         };
 
@@ -100,7 +99,7 @@ public enum DeckSection {
             @Override
             public Boolean apply(PaperCard card) {
                 CardType t = card.getRules().getType();
-                return (t.isScheme());
+                return t.isScheme();
             }
         };
 
@@ -108,7 +107,7 @@ public enum DeckSection {
             @Override
             public Boolean apply(PaperCard card) {
                 CardType t = card.getRules().getType();
-                return (t.isConspiracy());
+                return t.isConspiracy();
             }
         };
 
@@ -116,7 +115,7 @@ public enum DeckSection {
             @Override
             public Boolean apply(PaperCard card) {
                 CardType t = card.getRules().getType();
-                return ((t.isCreature() && t.hasSubtype("Avatar")) || t.isVanguard());
+                return (t.isCreature() && t.hasSubtype("Avatar")) || t.isVanguard();
             }
         };
 
