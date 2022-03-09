@@ -13,6 +13,7 @@ import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
+import forge.gui.GuiBase;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
