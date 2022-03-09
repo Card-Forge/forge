@@ -146,7 +146,7 @@ public class CostPutCardToLib extends CostPartWithList {
             boolean foundPayable = false;
             FCollectionView<Player> players = game.getPlayers();
             for (Player p : players) {
-                if (CardLists.filter(typeList, CardPredicates.isController(p)).size() >= i) {
+                if (CardLists.count(typeList, CardPredicates.isController(p)) >= i) {
                     foundPayable = true;
                     break;
                 }

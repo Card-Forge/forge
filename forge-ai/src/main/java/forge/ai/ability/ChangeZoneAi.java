@@ -69,7 +69,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         } else if (aiLogic.equals("PriorityOptionalCost")) {
             boolean highPriority = false;
             // if we have more than one of these in hand, might not be worth waiting for optional cost payment on the additional copy
-            highPriority |= CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(sa.getHostCard().getName())).size() > 1;
+            highPriority |= CardLists.count(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(sa.getHostCard().getName())) > 1;
             // if we are in danger in combat, no need to wait to pay the optional cost
             highPriority |= ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)
                     && ai.getGame().getCombat() != null && ComputerUtilCombat.lifeInDanger(ai, ai.getGame().getCombat());
@@ -278,8 +278,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (sa.hasParam("Ninjutsu")) {
                 if (source.getType().isLegendary()
                         && !ai.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
-                    final CardCollectionView list = ai.getCardsIn(ZoneType.Battlefield);
-                    if (Iterables.any(list, CardPredicates.nameEquals(source.getName()))) {
+                    if (ai.getZone(ZoneType.Battlefield).contains(CardPredicates.nameEquals(source.getName()))) {
                         return false;
                     }
                 }
@@ -740,6 +739,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     for (final Card c : retrieval) {
                         if (!(c.getType().isLegendary() && ai.isCardInPlay(c.getName()))) {
                             nothingWillReturn = false;
+                            break;
                         }
                     }
                     if (nothingWillReturn) {
@@ -1310,7 +1310,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         // Felidar Guardian + Saheeli Rai combo support
         if (sa.getHostCard().getName().equals("Felidar Guardian")) {
-            CardCollection saheeli = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Saheeli Rai"));
+            CardCollectionView saheeli = ai.getCardsIn(ZoneType.Battlefield, "Saheeli Rai");
             if (!saheeli.isEmpty()) {
                 return saheeli.get(0);
             }

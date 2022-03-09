@@ -497,7 +497,7 @@ public class DigEffect extends SpellAbilityEffect {
         final CardCollectionView play = game.getCardsIn(ZoneType.Battlefield);
         for (final Card c : list) {
             for (final Card p : play) {
-                if (p.getName().equals(c.getName()) && !toReturn.contains(c)) {
+                if (p.sharesNameWith(c) && !toReturn.contains(c)) {
                     toReturn.add(c);
                 }
             }

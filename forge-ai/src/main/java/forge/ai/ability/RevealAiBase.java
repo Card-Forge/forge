@@ -1,14 +1,8 @@
 package forge.ai.ability;
 
-
-import java.util.Collections;
-import java.util.List;
-
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -20,8 +14,7 @@ public abstract class RevealAiBase extends SpellAbilityAi {
             // ability is targeted
             sa.resetTargets();
 
-            List<Player> opps = ai.getOpponents();
-            opps = Lists.newArrayList(Iterables.filter(opps, PlayerPredicates.isTargetableBy(sa)));
+            PlayerCollection opps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
 
             if (opps.isEmpty()) {
                 if (mandatory && sa.canTarget(ai)) {
@@ -31,7 +24,7 @@ public abstract class RevealAiBase extends SpellAbilityAi {
                 return false;
             }
 
-            Player p = Collections.max(opps, PlayerPredicates.compareByZoneSize(ZoneType.Hand));
+            Player p = opps.max(PlayerPredicates.compareByZoneSize(ZoneType.Hand));
 
             if (!mandatory && p.getCardsIn(ZoneType.Hand).isEmpty()) {
                 return false;

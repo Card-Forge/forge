@@ -3,6 +3,7 @@ package forge.ai.ability;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCost;
@@ -64,7 +65,7 @@ public class PermanentAi extends SpellAbilityAi {
                     String specialRule = card.getSVar("AILegendaryException");
                     if ("TwoCopiesAllowed".equals(specialRule)) {
                         // One extra copy allowed on the battlefield, e.g. Brothers Yamazaki
-                        if (CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(card.getName())).size() > 1) {
+                        if (CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(card.getName())) > 1) {
                             return false;
                         }
                     } else if ("AlwaysAllowed".equals(specialRule)) {
@@ -200,7 +201,7 @@ public class PermanentAi extends SpellAbilityAi {
 
                 if (param.equals("MustHaveInHand")) {
                     // Only cast if another card is present in hand (e.g. Illusions of Grandeur followed by Donate)
-                    boolean hasCard = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(value)).size() > 0;
+                    boolean hasCard = Iterables.any(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(value));
                     if (!hasCard) {
                         dontCast = true;
                     }

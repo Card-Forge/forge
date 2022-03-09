@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -250,11 +249,7 @@ public class ComputerUtilCard {
         }
         if (iminBL == Integer.MAX_VALUE) {
             // All basic lands have no basic land type. Just return something
-            Iterator<Card> untapped = Iterables.filter(land, CardPredicates.Presets.UNTAPPED).iterator();
-            if (untapped.hasNext()) {
-                return untapped.next();
-            }
-            return land.get(0);
+            return Iterables.find(land, CardPredicates.Presets.UNTAPPED, land.get(0));
         }
 
         final List<Card> bLand = CardLists.getType(land, sminBL);
@@ -996,11 +991,8 @@ public class ComputerUtilCard {
             	int maxExcess = 0;
             	String bestColor = Constant.GREEN;
             	for (byte color : MagicColor.WUBRG) {
-            		CardCollectionView ailist = ai.getCardsIn(ZoneType.Battlefield);
-            		CardCollectionView opplist = opp.getCardsIn(ZoneType.Battlefield);
-            		
-            		ailist = CardLists.filter(ailist, CardPredicates.isColor(color));
-            		opplist = CardLists.filter(opplist, CardPredicates.isColor(color));
+            		CardCollectionView ailist = ai.getColoredCardsInPlay(color);
+            		CardCollectionView opplist = opp.getColoredCardsInPlay(color);
 
                     int excess = evaluatePermanentList(opplist) - evaluatePermanentList(ailist);
                     if (excess > maxExcess) {
@@ -2009,22 +2001,20 @@ public class ComputerUtilCard {
     }
 
     public static boolean isNonDisabledCardInPlay(final Player ai, final String cardName) {
-        for (Card card : ai.getCardsIn(ZoneType.Battlefield)) {
-            if (card.getName().equals(cardName)) {
-                // TODO - Better logic to determine if a permanent is disabled by local effects
-                // currently assuming any permanent enchanted by another player
-                // is disabled and a second copy is necessary
-                // will need actual logic that determines if the enchantment is able
-                // to disable the permanent or it's still functional and a duplicate is unneeded.
-                boolean disabledByEnemy = false;
-                for (Card card2 : card.getEnchantedBy()) {
-                    if (card2.getOwner() != ai) {
-                        disabledByEnemy = true;
-                    }
+        for (Card card : ai.getCardsIn(ZoneType.Battlefield, cardName)) {
+            // TODO - Better logic to determine if a permanent is disabled by local effects
+            // currently assuming any permanent enchanted by another player
+            // is disabled and a second copy is necessary
+            // will need actual logic that determines if the enchantment is able
+            // to disable the permanent or it's still functional and a duplicate is unneeded.
+            boolean disabledByEnemy = false;
+            for (Card card2 : card.getEnchantedBy()) {
+                if (card2.getOwner() != ai) {
+                    disabledByEnemy = true;
                 }
-                if (!disabledByEnemy) {
-                    return true;
-                }
+            }
+            if (!disabledByEnemy) {
+                return true;
             }
         }
         return false;

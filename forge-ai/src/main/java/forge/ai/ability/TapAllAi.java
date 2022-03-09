@@ -123,18 +123,8 @@ public class TapAllAi extends SpellAbilityAi {
         }
 
         if (validTappables.size() > 0) {
-            final int human = Iterables.size(Iterables.filter(validTappables, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.getController().isOpponentOf(ai);
-                }
-            }));
-            final int compy = Iterables.size(Iterables.filter(validTappables, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return !c.getController().isOpponentOf(ai);
-                }
-            }));
+            final int human = CardLists.count(validTappables, CardPredicates.isControlledByAnyOf(ai.getYourTeam()));
+            final int compy = CardLists.count(validTappables, CardPredicates.isControlledByAnyOf(ai.getOpponents()));
             if (human > compy) {
                 return rr;
             }

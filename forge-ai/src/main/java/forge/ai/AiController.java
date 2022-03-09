@@ -178,37 +178,33 @@ public class AiController {
     
     // look for cards on the battlefield that should prevent the AI from using that spellability
     private boolean checkCurseEffects(final SpellAbility sa) {
-        CardCollectionView ccvGameBattlefield = game.getCardsIn(ZoneType.Battlefield);
+        CardCollectionView ccvGameBattlefield = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.hasSVar("AICurseEffect"));
         for (final Card c : ccvGameBattlefield) {
-            if (c.hasSVar("AICurseEffect")) {
-                final String curse = c.getSVar("AICurseEffect");
-                if ("NonActive".equals(curse) && !player.equals(game.getPhaseHandler().getPlayerTurn())) {
+            final String curse = c.getSVar("AICurseEffect");
+            if ("NonActive".equals(curse) && !player.equals(game.getPhaseHandler().getPlayerTurn())) {
+                return true;
+            } else {
+                final Card host = sa.getHostCard();
+                if ("DestroyCreature".equals(curse) && sa.isSpell() && host.isCreature()
+                        && !host.hasKeyword(Keyword.INDESTRUCTIBLE)) {
                     return true;
-                } else {
-                    final Card host = sa.getHostCard();
-                    if ("DestroyCreature".equals(curse) && sa.isSpell() && host.isCreature()
-                            && !host.hasKeyword(Keyword.INDESTRUCTIBLE)) {
-                        return true;
-                    } else if ("CounterEnchantment".equals(curse) && sa.isSpell() && host.isEnchantment()
-                            && CardFactoryUtil.isCounterable(host)) {
-                        return true;
-                    } else if ("ChaliceOfTheVoid".equals(curse) && sa.isSpell() && CardFactoryUtil.isCounterable(host)
-                            && host.getCMC() == c.getCounters(CounterEnumType.CHARGE)) {
-                        return true;
-                    }  else if ("BazaarOfWonders".equals(curse) && sa.isSpell() && CardFactoryUtil.isCounterable(host)) {
-                        String hostName = host.getName();
-                        for (Card card : ccvGameBattlefield) {
-                            if (!card.isToken() && card.getName().equals(hostName)) {
-                                return true;
-                            }
-                        }
-                        for (Card card : game.getCardsIn(ZoneType.Graveyard)) {
-                            if (card.getName().equals(hostName)) {
-                                return true;
-                            }
+                } else if ("CounterEnchantment".equals(curse) && sa.isSpell() && host.isEnchantment()
+                        && CardFactoryUtil.isCounterable(host)) {
+                    return true;
+                } else if ("ChaliceOfTheVoid".equals(curse) && sa.isSpell() && CardFactoryUtil.isCounterable(host)
+                        && host.getCMC() == c.getCounters(CounterEnumType.CHARGE)) {
+                    return true;
+                }  else if ("BazaarOfWonders".equals(curse) && sa.isSpell() && CardFactoryUtil.isCounterable(host)) {
+                    String hostName = host.getName();
+                    for (Card card : ccvGameBattlefield) {
+                        if (!card.isToken() && card.sharesNameWith(host)) {
+                            return true;
                         }
                     }
-                } 
+                    if (Iterables.any(game.getCardsIn(ZoneType.Graveyard), CardPredicates.nameEquals(hostName))) {
+                        return true;
+                    }
+                }
             }
         }
         return false;
@@ -448,8 +444,8 @@ public class AiController {
         CardCollection nonLandsInHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), Predicates.not(CardPredicates.Presets.LANDS));
 
         // Some considerations for Momir/MoJhoSto
-        boolean hasMomir = !CardLists.filter(player.getCardsIn(ZoneType.Command),
-                CardPredicates.nameEquals("Momir Vig, Simic Visionary Avatar")).isEmpty();
+        boolean hasMomir = Iterables.any(player.getCardsIn(ZoneType.Command),
+                CardPredicates.nameEquals("Momir Vig, Simic Visionary Avatar"));
         if (hasMomir && nonLandsInHand.isEmpty()) {
             // Only do this if we have an all-basic land hand, which covers both stock Momir and MoJhoSto modes
             // and also a custom Vanguard setup with a customized basic land deck and Momir as the avatar.
@@ -944,7 +940,7 @@ public class AiController {
             wasteBuybackAllowed = true;
         }
 
-        int copies = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(card.getName())).size();
+        int copies = CardLists.count(player.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(card.getName()));
         // Have two copies : allow
         if (copies >= 2) {
             wasteBuybackAllowed = true;
@@ -1308,7 +1304,7 @@ public class AiController {
                         // Only DoNotDiscardIfAble cards? If we have a duplicate for something, discard it
                         if (worst == null) {
                             for (Card c : validCards) {
-                                if (CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(c.getName())).size() > 1) {
+                                if (CardLists.count(player.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(c.getName())) > 1) {
                                     worst = c;
                                     break;
                                 }
@@ -1529,8 +1525,8 @@ public class AiController {
     }
 
     private boolean isSafeToHoldLandDropForMain2(Card landToPlay) {
-        boolean hasMomir = !CardLists.filter(player.getCardsIn(ZoneType.Command),
-                CardPredicates.nameEquals("Momir Vig, Simic Visionary Avatar")).isEmpty();
+        boolean hasMomir = Iterables.any(player.getCardsIn(ZoneType.Command),
+                CardPredicates.nameEquals("Momir Vig, Simic Visionary Avatar"));
         if (hasMomir) {
             // Don't do this in Momir variants since it messes with the AI decision making for the avatar.
             return false;
@@ -1572,7 +1568,7 @@ public class AiController {
         boolean canCastWithLandDrop = (predictedMana + 1 >= minCMCInHand) && minCMCInHand > 0 && !isTapLand;
         boolean cantCastAnythingNow = predictedMana < minCMCInHand;
 
-        boolean hasRelevantAbsOTB = !CardLists.filter(otb, new Predicate<Card>() {
+        boolean hasRelevantAbsOTB = Iterables.any(otb, new Predicate<Card>() {
             @Override
             public boolean apply(Card card) {
                 boolean isTapLand = false;
@@ -1594,9 +1590,9 @@ public class AiController {
                 }
                 return false;
             }
-        }).isEmpty();
+        });
 
-        boolean hasLandBasedEffect = !CardLists.filter(otb, new Predicate<Card>() {
+        boolean hasLandBasedEffect = Iterables.any(otb, new Predicate<Card>() {
             @Override
             public boolean apply(Card card) {
                 for (Trigger t : card.getTriggers()) {
@@ -1625,7 +1621,7 @@ public class AiController {
                 }
                 return false;
             }
-        }).isEmpty();
+        });
 
         // TODO: add prediction for effects that will untap a tapland as it enters the battlefield
         if (!canCastWithLandDrop && cantCastAnythingNow && !hasLandBasedEffect && (!hasRelevantAbsOTB || isTapLand)) {
@@ -1715,7 +1711,7 @@ public class AiController {
 
             if (sa.getHostCard().hasKeyword(Keyword.STORM)
                     && sa.getApi() != ApiType.Counter // AI would suck at trying to deliberately proc a Storm counterspell
-                    && CardLists.filter(player.getCardsIn(ZoneType.Hand), Predicates.not(Predicates.or(CardPredicates.Presets.LANDS, CardPredicates.hasKeyword("Storm")))).size() > 0) {
+                    && Iterables.any(player.getCardsIn(ZoneType.Hand), Predicates.not(Predicates.or(CardPredicates.Presets.LANDS, CardPredicates.hasKeyword("Storm"))))) {
                 if (game.getView().getStormCount() < this.getIntProperty(AiProps.MIN_COUNT_FOR_STORM_SPELLS)) {
                     // skip evaluating Storm unless we reached the minimum Storm count
                     continue;
@@ -2000,13 +1996,7 @@ public class AiController {
                         break;
                     }
                 } else {
-                    CardCollectionView viableOptions = CardLists.filter(pool, Predicates.and(CardPredicates.isControlledByAnyOf(sa.getActivatingPlayer().getOpponents())),
-                            new Predicate<Card>() {
-                                @Override
-                                public boolean apply(Card card) {
-                                    return card.canBeDestroyed();
-                                }
-                            });
+                    CardCollectionView viableOptions = CardLists.filter(pool, CardPredicates.isControlledByAnyOf(sa.getActivatingPlayer().getOpponents()), CardPredicates.Presets.CAN_BE_DESTROYED);
                     Card best = ComputerUtilCard.getBestAI(viableOptions);
                     if (best != null) {
                         result.add(best);
@@ -2237,7 +2227,7 @@ public class AiController {
         // do mandatory discard early if hand is empty or has DiscardMe card
         boolean discardEarly = false;
         CardCollectionView playerHand = player.getCardsIn(ZoneType.Hand);
-        if (playerHand.isEmpty() || CardLists.count(playerHand, CardPredicates.hasSVar("DiscardMe")) > 0) {
+        if (playerHand.isEmpty() || Iterables.any(playerHand, CardPredicates.hasSVar("DiscardMe"))) {
             discardEarly = true;
             result.addAll(mandatoryDiscard);
         }

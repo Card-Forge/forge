@@ -415,13 +415,13 @@ public class PlayerControllerAi extends PlayerController {
 
         if (destinationZone == ZoneType.Graveyard) {
             // In presence of Volrath's Shapeshifter in deck, try to place the best creature on top of the graveyard
-            if (!CardLists.filter(getGame().getCardsInGame(), new Predicate<Card>() {
+            if (Iterables.any(getGame().getCardsInGame(), new Predicate<Card>() {
                 @Override
                 public boolean apply(Card card) {
                     // need a custom predicate here since Volrath's Shapeshifter may have a different name OTB
                     return card.getOriginalState(CardStateName.Original).getName().equals("Volrath's Shapeshifter");
                 }
-            }).isEmpty()) {
+            })) {
                 int bestValue = 0;
                 Card bestCreature = null;
                 for (Card c : cards) {

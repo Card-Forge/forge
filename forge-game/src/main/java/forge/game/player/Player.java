@@ -2009,9 +2009,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasDesert() {
-        return CardLists.count(
+        return Iterables.any(
                 getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Graveyard)),
-                CardPredicates.isType("Desert")) > 0;
+                CardPredicates.isType("Desert"));
     }
 
     public final boolean hasThreshold() {
@@ -2055,9 +2055,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasSurge() {
-        PlayerCollection list = getAllies();
-        list.add(this);
-        return !CardLists.filterControlledBy(game.getStack().getSpellsCastThisTurn(), list).isEmpty();
+        return !CardLists.filterControlledBy(game.getStack().getSpellsCastThisTurn(), getYourTeam()).isEmpty();
     }
 
     public final int getOpponentLostLifeThisTurn() {

@@ -431,7 +431,7 @@ public class DestroyAi extends SpellAbilityAi {
         // (triggers either if the opponent skipped a land drop or if there are quite a few lands already in play but only one of the given type)
         CardCollection oppLands = tgtPlayer.getLandsInPlay();
         boolean canColorLock = (oppSkippedLandDrop || oppLands.size() > 3)
-                && tgtLand.isBasicLand() && CardLists.filter(oppLands, CardPredicates.nameEquals(tgtLand.getName())).size() == 1;
+                && tgtLand.isBasicLand() && CardLists.count(oppLands, CardPredicates.nameEquals(tgtLand.getName())) == 1;
 
         // Non-basic lands are currently not ranked in any way in ComputerUtilCard#getBestLandAI, so if a non-basic land is best target,
         // consider killing it off unless there's too much potential tempo loss.

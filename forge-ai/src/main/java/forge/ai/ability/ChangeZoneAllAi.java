@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import java.util.Collections;
-import java.util.List;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -114,10 +113,10 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             for (Player player : players) {
                 Player bestTgt = null;
                 if (player.canBeTargetedBy(sa)) {
-                    CardCollectionView cardsGY = CardLists.filter(player.getCardsIn(ZoneType.Graveyard),
+                    int numGY = CardLists.count(player.getCardsIn(ZoneType.Graveyard),
                             CardPredicates.Presets.CREATURES);
-                    if (cardsGY.size() > maxSize) {
-                        maxSize = cardsGY.size();
+                    if (numGY > maxSize) {
+                        maxSize = numGY;
                         bestTgt = player;
                     }
                 }
@@ -139,14 +138,14 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 return true;
             } else {
                 // search targetable Opponents
-                final List<Player> oppList = Lists.newArrayList(Iterables.filter(ai.getOpponents(), PlayerPredicates.isTargetableBy(sa)));
+                final PlayerCollection oppList = new PlayerCollection(Iterables.filter(ai.getOpponents(), PlayerPredicates.isTargetableBy(sa)));
 
                 if (oppList.isEmpty()) {
                     return false;
                 }
 
                 // get the one with the most handsize
-                Player oppTarget = Collections.max(oppList, PlayerPredicates.compareByZoneSize(origin));
+                Player oppTarget = oppList.max(PlayerPredicates.compareByZoneSize(origin));
 
                 // set the target
                 if (!oppTarget.getCardsIn(ZoneType.Hand).isEmpty()) {
@@ -163,7 +162,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             // if human creatures are more valuable
             if (sa.usesTargeting()) {
                 // search targetable Opponents
-                final List<Player> oppList = Lists.newArrayList(Iterables.filter(ai.getOpponents(),
+                final PlayerCollection oppList = new PlayerCollection(Iterables.filter(ai.getOpponents(),
                         PlayerPredicates.isTargetableBy(sa)));
 
                 if (oppList.isEmpty()) {
@@ -172,8 +171,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
 
                 // get the one with the most in graveyard
                 // zone is visible so evaluate which would be hurt the most
-                Player oppTarget = Collections.max(oppList,
-                        PlayerPredicates.compareByZoneSize(origin));
+                Player oppTarget = oppList.max(PlayerPredicates.compareByZoneSize(origin));
 
                 // set the target
                 if (oppTarget.getCardsIn(ZoneType.Graveyard).isEmpty()) {
@@ -283,8 +281,8 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         if (destination.equals(ZoneType.Battlefield)) {
             if (sa.getParam("GainControl") != null) {
                 // Check if the cards are valuable enough
-                if ((CardLists.getNotType(oppType, "Creature").size() == 0)
-                        && (CardLists.getNotType(computerType, "Creature").size() == 0)) {
+                if (CardLists.getNotType(oppType, "Creature").size() == 0
+                        && CardLists.getNotType(computerType, "Creature").size() == 0) {
                     if ((ComputerUtilCard.evaluateCreatureList(computerType) + ComputerUtilCard
                             .evaluateCreatureList(oppType)) < 400) {
                         return false;
@@ -388,7 +386,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         if (origin.equals(ZoneType.Hand) || origin.equals(ZoneType.Library)) {
             if (sa.usesTargeting()) {
                 // search targetable Opponents
-                final List<Player> oppList = Lists.newArrayList(Iterables.filter(ai.getOpponents(),
+                final PlayerCollection oppList = new PlayerCollection(Iterables.filter(ai.getOpponents(),
                         PlayerPredicates.isTargetableBy(sa)));
 
                 if (oppList.isEmpty()) {
@@ -401,7 +399,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 }
 
                 // get the one with the most handsize
-                Player oppTarget = Collections.max(oppList, PlayerPredicates.compareByZoneSize(origin));
+                Player oppTarget = oppList.max(PlayerPredicates.compareByZoneSize(origin));
 
                 // set the target
                 if (!oppTarget.getCardsIn(ZoneType.Hand).isEmpty() || mandatory) {
@@ -434,7 +432,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         } else if (origin.equals(ZoneType.Graveyard)) {
             if (sa.usesTargeting()) {
                 // search targetable Opponents
-                final List<Player> oppList = Lists.newArrayList(Iterables.filter(ai.getOpponents(),
+                final PlayerCollection oppList = new PlayerCollection(Iterables.filter(ai.getOpponents(),
                         PlayerPredicates.isTargetableBy(sa)));
 
                 if (oppList.isEmpty()) {
@@ -448,7 +446,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
 
                 // get the one with the most in graveyard
                 // zone is visible so evaluate which would be hurt the most
-                Player oppTarget = Collections.max(oppList,
+                Player oppTarget = oppList.max(
                         AiPlayerPredicates.compareByZoneValue(sa.getParam("ChangeType"), origin, sa));
 
                 // set the target
