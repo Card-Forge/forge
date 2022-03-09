@@ -358,12 +358,12 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             if (newPower <= 0 || card.hasKeyword(Keyword.INFECT)) {
                 return false;
             }
-            return combat != null && ( combat.isBlocking(card) || (combat.isAttacking(card) && combat.isBlocked(card)) );
+            return combat != null && (combat.isBlocking(card) || (combat.isAttacking(card) && combat.isBlocked(card)));
         } else if (keyword.equals("Lifelink")) {
             if (newPower <= 0 || ai.canGainLife()) {
                 return false;
             }
-            return combat != null && ( combat.isAttacking(card) || combat.isBlocking(card) );
+            return combat != null && (combat.isAttacking(card) || combat.isBlocking(card));
         } else if (keyword.equals("Vigilance")) {
             return !ph.isPlayerTurn(opp) && CombatUtil.canAttack(card, opp)
                     && newPower > 0

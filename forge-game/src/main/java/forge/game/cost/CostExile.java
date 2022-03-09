@@ -167,7 +167,7 @@ public class CostExile extends CostPartWithList {
             boolean foundPayable = false;
             FCollectionView<Player> players = game.getPlayers();
             for (Player p : players) {
-                if (CardLists.filter(list, CardPredicates.isController(p)).size() >= amount) {
+                if (CardLists.count(list, CardPredicates.isController(p)) >= amount) {
                     foundPayable = true;
                     break;
                 }

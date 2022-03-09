@@ -24,7 +24,7 @@ import forge.game.zone.ZoneType;
 public class AmassAi extends SpellAbilityAi {
     @Override
     protected boolean checkApiLogic(Player ai, final SpellAbility sa) {
-        CardCollection aiArmies = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Army"));
+        CardCollection aiArmies = CardLists.getType(ai.getCardsIn(ZoneType.Battlefield), "Army");
         Card host = sa.getHostCard();
         final Game game = ai.getGame();
 

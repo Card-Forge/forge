@@ -787,7 +787,7 @@ public class CountersPutAi extends CountersAi {
             }
         } else if (sa.getTargetRestrictions().canOnlyTgtOpponent() && !sa.getTargetRestrictions().canTgtCreature()) {
             // can only target opponent
-            List<Player> playerList = Lists.newArrayList(Iterables.filter(
+            PlayerCollection playerList = new PlayerCollection(Iterables.filter(
                     sa.getTargetRestrictions().getAllCandidates(sa, true, true), Player.class));
 
             if (playerList.isEmpty()) {
@@ -795,7 +795,7 @@ public class CountersPutAi extends CountersAi {
             }
 
             // try to choose player with less creatures
-            Player choice = Collections.min(playerList, PlayerPredicates.compareByZoneSize(ZoneType.Battlefield, CardPredicates.Presets.CREATURES));
+            Player choice = playerList.min(PlayerPredicates.compareByZoneSize(ZoneType.Battlefield, CardPredicates.Presets.CREATURES));
 
             if (choice != null) {
                 sa.getTargets().add(choice);

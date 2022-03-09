@@ -54,11 +54,8 @@ public class ChooseColorAi extends SpellAbilityAi {
 
         if (logic.equals("MostExcessOpponentControls")) {
             for (byte color : MagicColor.WUBRG) {
-                CardCollectionView ailist = ai.getCardsIn(ZoneType.Battlefield);
-                CardCollectionView opplist = ai.getWeakestOpponent().getCardsIn(ZoneType.Battlefield);
-
-                ailist = CardLists.filter(ailist, CardPredicates.isColor(color));
-                opplist = CardLists.filter(opplist, CardPredicates.isColor(color));
+                CardCollectionView ailist = ai.getColoredCardsInPlay(color);
+                CardCollectionView opplist = ai.getStrongestOpponent().getColoredCardsInPlay(color);
 
                 int excess = ComputerUtilCard.evaluatePermanentList(opplist) - ComputerUtilCard.evaluatePermanentList(ailist);
                 if (excess > 4) {

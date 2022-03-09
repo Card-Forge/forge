@@ -2,8 +2,6 @@ package forge.ai.ability;
 
 import java.util.List;
 
-import com.google.common.collect.Iterables;
-
 import forge.ai.AiAttackController;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -46,7 +44,7 @@ public class DigUntilAi extends SpellAbilityAi {
                 return false;
             }
             if ("Land.Basic".equals(sa.getParam("Valid"))
-                    && Iterables.any(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS_PRODUCING_MANA)) {
+                    && ai.getZone(ZoneType.Hand).contains(CardPredicates.Presets.LANDS_PRODUCING_MANA)) {
                 // We already have a mana-producing land in hand, so bail
                 // until opponent's end of turn phase!
                 // But we still want more (and want to fill grave) if nothing better to do then

@@ -2031,7 +2031,7 @@ public class ComputerUtil {
         }
 
         CardCollectionView library = ai.getZone(ZoneType.Library).getCards();
-        int landsInDeck = CardLists.filter(library, CardPredicates.isType("Land")).size();
+        int landsInDeck = CardLists.count(library, CardPredicates.isType("Land"));
 
         // no land deck, can't do anything better
         if (landsInDeck == 0) {
@@ -2189,7 +2189,7 @@ public class ComputerUtil {
         List<String> manaArts = Arrays.asList("Mox Pearl", "Mox Sapphire", "Mox Jet", "Mox Ruby", "Mox Emerald");
 
         // evaluate creatures available in deck
-        CardCollectionView allCreatures = CardLists.filter(allCards, Predicates.and(CardPredicates.Presets.CREATURES, CardPredicates.isOwner(player)));
+        CardCollectionView allCreatures = CardLists.filter(allCards, CardPredicates.Presets.CREATURES, CardPredicates.isOwner(player));
         int numCards = allCreatures.size();
 
         if (landsOTB.size() < maxLandsToScryLandsToTop && landsInHand.isEmpty()) {
