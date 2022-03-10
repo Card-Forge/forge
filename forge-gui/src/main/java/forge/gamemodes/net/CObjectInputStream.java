@@ -22,10 +22,10 @@ public class CObjectInputStream extends ObjectInputStream {
         if (type < 0) {
             throw new EOFException();
         } else {
-            if (type == 0)
-                return super.readClassDescriptor();
-            else
+            if (type == 1)
                 return ObjectStreamClass.lookupAny(classResolver.resolve(readUTF()));
+            else
+                return super.readClassDescriptor();
         }
     }
 
