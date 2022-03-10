@@ -13,5 +13,4 @@ Name:Rune-Tail's Essence
 ManaCost:2 W
 Types:Legendary Enchantment
 R:Event$ DamageDone | Prevent$ True | ValidTarget$ Creature.YouCtrl | Description$ Prevent all damage that would be dealt to creatures you control.
-# This link may be a temporary solution and could change in the near future.
 Oracle:Prevent all damage that would be dealt to creatures you control.
