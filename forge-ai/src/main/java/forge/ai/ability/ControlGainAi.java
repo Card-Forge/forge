@@ -142,6 +142,10 @@ public class ControlGainAi extends SpellAbilityAi {
                     return true;
                 }
 
+                if (c.canBeControlledBy(ai)) {
+                    return false;
+                }
+
                 // do not take perm control on something that leaves the play end of turn 
                 if (!lose.contains("EOT") && c.hasSVar("EndOfTurnLeavePlay")) {
                     return false;
