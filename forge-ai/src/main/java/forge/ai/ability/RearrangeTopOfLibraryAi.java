@@ -99,6 +99,12 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
         PlayerCollection pc = sa.usesTargeting() ? new PlayerCollection(sa.getTargets().getTargetPlayers())
                 : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
 
+        Player p = pc.getFirst(); // currently always a single target spell
+        Card top = p.getCardsIn(ZoneType.Library).isEmpty() ? null : p.getCardsIn(ZoneType.Library).getFirst();
+        if (top == null) {
+            return false;
+        }
+
         int uncastableCMCThreshold = 2;
         int minLandsToScryLandsAway = 4;
         if (player.getController().isAI()) {
@@ -107,8 +113,6 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
             uncastableCMCThreshold = aic.getIntProperty(AiProps.SCRY_IMMEDIATELY_UNCASTABLE_CMC_DIFF);
         }
 
-        Player p = pc.getFirst(); // currently always a single target spell
-        Card top = p.getCardsIn(ZoneType.Library).getFirst();
         int landsOTB = CardLists.count(p.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA);
         int cmc = top.isSplitCard() ? Math.min(top.getCMC(Card.SplitCMCMode.LeftSplitCMC), top.getCMC(Card.SplitCMCMode.RightSplitCMC))
                 : top.getCMC();

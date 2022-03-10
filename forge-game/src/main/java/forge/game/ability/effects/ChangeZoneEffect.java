@@ -959,7 +959,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             boolean shuffleMandatory = true;
             boolean searchedLibrary = false;
             if (defined) {
-                fetchList = new CardCollection(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
+                fetchList = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
                 if (!sa.hasParam("ChangeNum")) {
                     changeNum = fetchList.size();
                 }

@@ -130,6 +130,9 @@ public class ControlGainEffect extends SpellAbilityEffect {
         if (lose != null && lose.contains("LeavesPlay") && !source.isInPlay()) {
             return;
         }
+        if (lose != null && lose.contains("LoseControl") && source.getController() != sa.getActivatingPlayer()) {
+            return;
+        }
         if (lose != null && lose.contains("Untap") && !source.isTapped()) {
             return;
         }
