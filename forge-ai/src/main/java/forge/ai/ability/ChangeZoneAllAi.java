@@ -138,7 +138,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 return true;
             } else {
                 // search targetable Opponents
-                final PlayerCollection oppList = new PlayerCollection(Iterables.filter(ai.getOpponents(), PlayerPredicates.isTargetableBy(sa)));
+                final PlayerCollection oppList = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
 
                 if (oppList.isEmpty()) {
                     return false;
@@ -162,8 +162,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             // if human creatures are more valuable
             if (sa.usesTargeting()) {
                 // search targetable Opponents
-                final PlayerCollection oppList = new PlayerCollection(Iterables.filter(ai.getOpponents(),
-                        PlayerPredicates.isTargetableBy(sa)));
+                final PlayerCollection oppList = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
 
                 if (oppList.isEmpty()) {
                     return false;
@@ -386,8 +385,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         if (origin.equals(ZoneType.Hand) || origin.equals(ZoneType.Library)) {
             if (sa.usesTargeting()) {
                 // search targetable Opponents
-                final PlayerCollection oppList = new PlayerCollection(Iterables.filter(ai.getOpponents(),
-                        PlayerPredicates.isTargetableBy(sa)));
+                final PlayerCollection oppList = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
 
                 if (oppList.isEmpty()) {
                     if (mandatory && !sa.isTargetNumberValid() && sa.canTarget(ai)) {
@@ -432,8 +430,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         } else if (origin.equals(ZoneType.Graveyard)) {
             if (sa.usesTargeting()) {
                 // search targetable Opponents
-                final PlayerCollection oppList = new PlayerCollection(Iterables.filter(ai.getOpponents(),
-                        PlayerPredicates.isTargetableBy(sa)));
+                final PlayerCollection oppList = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
 
                 if (oppList.isEmpty()) {
                     if (mandatory && !sa.isTargetNumberValid() && sa.canTarget(ai)) {

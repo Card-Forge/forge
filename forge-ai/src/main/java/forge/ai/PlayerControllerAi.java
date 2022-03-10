@@ -987,10 +987,7 @@ public class PlayerControllerAi extends PlayerController {
         }
         final String logic = sa.getParam("AILogic");
         if (logic == null || logic.equals("MostProminentHumanCreatures")) {
-            CardCollection list = new CardCollection();
-            for (Player opp : player.getOpponents()) {
-                list.addAll(opp.getCreaturesInPlay());
-            }
+            CardCollection list = player.getOpponents().getCreaturesInPlay();
             if (list.isEmpty()) {
                 list = CardLists.filterControlledBy(getGame().getCardsInGame(), player.getOpponents());
             }

@@ -34,8 +34,8 @@ public class DigEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final StringBuilder sb = new StringBuilder();
         final int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
-        final int numToChange = (sa.hasParam("ChangeNum") ?
-                AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa) : 1);
+        final String toChange = sa.getParamOrDefault("ChangeNum", "1");
+        final int numToChange = toChange.startsWith("All") ? numToDig : AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa);
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         String verb = " looks at ";

@@ -540,7 +540,7 @@ public class PumpAi extends PumpAiBase {
         // Filter AI-specific targets if provided
         list = ComputerUtil.filterAITgts(sa, ai, list, true);
 
-        if (list.isEmpty() || ComputerUtil.activateForCost(sa, ai)) {
+        if (list.isEmpty() && (mandatory || ComputerUtil.activateForCost(sa, ai))) {
             return pumpMandatoryTarget(ai, sa);
         }
 

@@ -146,13 +146,12 @@ public class ProtectAi extends SpellAbilityAi {
                     String s = aiAtk.toProtectAttacker(sa);
                     if (s == null) {
                         return false;
-                    } else {
-                    	Player opponent = ai.getWeakestOpponent();
-                        Combat combat = ai.getGame().getCombat();
-                        int dmg = ComputerUtilCombat.damageIfUnblocked(c, opponent, combat, true);
-                        float ratio = 1.0f * dmg / opponent.getLife();
-                        return MyRandom.getRandom().nextFloat() < ratio;
                     }
+                    Player opponent = ai.getWeakestOpponent();
+                    Combat combat = ai.getGame().getCombat();
+                    int dmg = ComputerUtilCombat.damageIfUnblocked(c, opponent, combat, true);
+                    float ratio = 1.0f * dmg / opponent.getLife();
+                    return MyRandom.getRandom().nextFloat() < ratio;
                 }
                 return false;
             }
@@ -227,7 +226,7 @@ public class ProtectAi extends SpellAbilityAi {
         }
 
         if (list.isEmpty()) {
-            return mandatory && protectMandatoryTarget(ai, sa, mandatory);
+            return mandatory && protectMandatoryTarget(ai, sa);
         }
 
         while (sa.canAddMoreTarget()) {
@@ -237,7 +236,7 @@ public class ProtectAi extends SpellAbilityAi {
             if (list.isEmpty()) {
                 if ((sa.getTargets().size() < tgt.getMinTargets(source, sa)) || sa.getTargets().size() == 0) {
                     if (mandatory) {
-                        return protectMandatoryTarget(ai, sa, mandatory);
+                        return protectMandatoryTarget(ai, sa);
                     }
 
                     sa.resetTargets();
@@ -256,7 +255,7 @@ public class ProtectAi extends SpellAbilityAi {
         return true;
     } // protectTgtAI()
 
-    private static boolean protectMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
+    private static boolean protectMandatoryTarget(final Player ai, final SpellAbility sa) {
         final Game game = ai.getGame();
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -294,7 +293,7 @@ public class ProtectAi extends SpellAbilityAi {
                 break;
             }
 
-            Card c = ComputerUtilCard.getBestAI(list);
+            Card c = ComputerUtilCard.getBestAI(pref);
             pref.remove(c);
             sa.getTargets().add(c);
         }
@@ -304,7 +303,7 @@ public class ProtectAi extends SpellAbilityAi {
                 break;
             }
 
-            Card c = ComputerUtilCard.getBestAI(list);
+            Card c = ComputerUtilCard.getBestAI(pref2);
             pref2.remove(c);
             sa.getTargets().add(c);
         }
