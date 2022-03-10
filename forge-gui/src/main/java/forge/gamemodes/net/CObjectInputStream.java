@@ -22,19 +22,10 @@ public class CObjectInputStream extends ObjectInputStream {
         if (type < 0) {
             throw new EOFException();
         } else {
-            ObjectStreamClass resultClassDescriptor = super.readClassDescriptor();
-            Class localClass;
-            try {
-                localClass = Class.forName(resultClassDescriptor.getName());
-            } catch (ClassNotFoundException e) {
-                System.err.println("[Class Not Found Exception]\nNo local class for " + resultClassDescriptor.getName());
-                return resultClassDescriptor;
-            }
-            ObjectStreamClass localClassDescriptor = ObjectStreamClass.lookupAny(localClass);
-            if (localClassDescriptor != null && type == 1) {
-                resultClassDescriptor = localClassDescriptor; // Use local class descriptor for deserialization by default
-            }
-            return resultClassDescriptor;
+            if (type == 0)
+                return super.readClassDescriptor();
+            else
+                return ObjectStreamClass.lookupAny(classResolver.resolve(readUTF()));
         }
     }
 
