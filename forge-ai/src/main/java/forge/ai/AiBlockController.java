@@ -890,7 +890,7 @@ public class AiBlockController {
 
             CardCollection pwsWithChumpBlocks = new CardCollection();
             CardCollection chosenChumpBlockers = new CardCollection();
-            CardCollection chumpPWDefenders = CardLists.filter(new CardCollection(this.blockersLeft), new Predicate<Card>() {
+            CardCollection chumpPWDefenders = CardLists.filter(this.blockersLeft, new Predicate<Card>() {
                 @Override
                 public boolean apply(Card card) {
                     return ComputerUtilCard.evaluateCreature(card) <= (card.isToken() ? evalThresholdToken

@@ -106,8 +106,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             }
             return false;
         } else if ("ManifestCreatsFromGraveyard".equals(sa.getParam("AILogic"))) {
-            PlayerCollection players = new PlayerCollection();
-            players.addAll(ai.getOpponents());
+            PlayerCollection players = ai.getOpponents();
             players.add(ai);
             int maxSize = 1;
             for (Player player : players) {

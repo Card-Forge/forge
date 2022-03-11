@@ -1519,7 +1519,7 @@ public class GameAction {
         }
 
         if (c.hasCardAttachments()) {
-            for (final Card attach : Lists.newArrayList(c.getAttachedCards())) {
+            for (final Card attach : c.getAttachedCards()) {
                 if (!attach.isInPlay()) {
                     unAttachList.add(attach);
                     checkAgain = true;

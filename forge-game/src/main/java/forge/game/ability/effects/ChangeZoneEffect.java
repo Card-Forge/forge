@@ -574,13 +574,15 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         gameCard.addEtbCounter(cType, cAmount, player);
                     }
                     if (sa.hasParam("GainControl")) {
+                        Player newController = player;
                         if (sa.hasParam("NewController")) {
-                            final Player p = Iterables.getFirst(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("NewController"), sa), null);
-                            if (p != null) {
-                                gameCard.setController(p, game.getNextTimestamp());
+                            newController = Iterables.getFirst(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("NewController"), sa), null);
+                        }
+                        if (newController != null) {
+                            if (newController != gameCard.getController()) {
+                                gameCard.runChangeControllerCommands();
                             }
-                        } else {
-                            gameCard.setController(player, game.getNextTimestamp());
+                            gameCard.setController(newController, game.getNextTimestamp());
                         }
                     }
                     if (sa.hasParam("AttachedTo")) {
@@ -959,7 +961,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             boolean shuffleMandatory = true;
             boolean searchedLibrary = false;
             if (defined) {
-                fetchList = new CardCollection(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
+                fetchList = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
                 if (!sa.hasParam("ChangeNum")) {
                     changeNum = fetchList.size();
                 }
@@ -1238,6 +1240,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         Player newController = sa.getActivatingPlayer();
                         if (sa.hasParam("NewController")) {
                             newController = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("NewController"), sa).get(0);
+                        }
+                        if (newController != c.getController()) {
+                            c.runChangeControllerCommands();
                         }
                         c.setController(newController, game.getNextTimestamp());
                     }

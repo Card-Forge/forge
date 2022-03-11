@@ -2,9 +2,9 @@ Name:Haphazard Bombardment
 ManaCost:5 R
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, choose four nonenchantment permanents you don't control and put an aim counter on each of them.
-SVar:DBPutCounter:DB$ PutCounter | Choices$ Permanent.YouDontCtrl+nonEnchantment | ChoiceAmount$ 4 | Defined$ ChosenCard | CounterType$ AIM | CounterNum$ 1
+SVar:DBPutCounter:DB$ PutCounter | Choices$ Permanent.YouDontCtrl+nonEnchantment | ChoiceAmount$ 4 | Defined$ ChosenCard | CounterType$ AIM | CounterNum$ 1 | IsCurse$ True
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Permanent.YouDontCtrl+counters_GE1_AIM | PresentCompare$ GE2 | Execute$ TrigDestroy | TriggerDescription$ At the beginning of your end step, if two or more permanents you don't control have an aim counter on them, destroy one of those permanents at random.
-SVar:TrigDestroy:DB$ ChooseCard | Amount$ 1 | AtRandom$ True | Choices$ Permanent.YouDontCtrl+counters_GE1_AIM | SubAbility$ DBDestroy
+SVar:TrigDestroy:DB$ ChooseCard | Amount$ 1 | AtRandom$ True | Choices$ Permanent.YouDontCtrl+counters_GE1_AIM+withoutIndestructible | SubAbility$ DBDestroy
 SVar:DBDestroy:DB$ Destroy | Defined$ ChosenCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 Oracle:When Haphazard Bombardment enters the battlefield, choose four nonenchantment permanents you don't control and put an aim counter on each of them.\nAt the beginning of your end step, if two or more permanents you don't control have an aim counter on them, destroy one of those permanents at random.

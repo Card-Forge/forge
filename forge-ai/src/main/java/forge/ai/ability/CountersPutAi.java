@@ -747,7 +747,7 @@ public class CountersPutAi extends CountersAi {
 
         if (!sa.usesTargeting()) {
             // No target. So must be defined
-            list = new CardCollection(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
+            list = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
 
             if (amountStr.equals("X")
                     && root.getXManaCostPaid() != null /* SubAbility on something that already had set PayX, e.g. Endless One ETB counters */
@@ -987,6 +987,9 @@ public class CountersPutAi extends CountersAi {
                 });
                 if (!negative.isEmpty()) {
                     return ComputerUtilCard.getBestAI(negative);
+                }
+                if (!isOptional) {
+                    return ComputerUtilCard.getBestAI(opponents);
                 }
             }
         }

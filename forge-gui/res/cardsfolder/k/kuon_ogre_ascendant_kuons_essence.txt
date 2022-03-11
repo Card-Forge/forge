@@ -16,5 +16,4 @@ Colors:black
 Types:Legendary Enchantment
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices a creature.
 SVar:TrigSac:DB$ Sacrifice | Defined$ TriggeredPlayer | SacValid$ Creature
-# This link may be a temporary solution and could change in the near future.
 Oracle:At the beginning of each player's upkeep, that player sacrifices a creature.
