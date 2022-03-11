@@ -14,7 +14,6 @@ import forge.deck.Deck;
 import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.deck.FDeckViewer;
-import forge.gui.FThreads;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
@@ -30,7 +29,6 @@ import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.screens.FScreen;
-import forge.screens.LoadingOverlay;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
@@ -49,6 +47,7 @@ import java.util.Map;
         public static FSkinImage MAIN_DECK_ICON = Forge.hdbuttons ? FSkinImage.HDLIBRARY :FSkinImage.DECKLIST;
         public static FSkinImage SIDEBOARD_ICON = Forge.hdbuttons ? FSkinImage.HDSIDEBOARD : FSkinImage.FLASHBACK;
         private static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
+        private static final FLabel lblGold = new FLabel.Builder().text("0").icon(FSkinImage.QUEST_COINSTACK).font(FSkinFont.get(16)).insets(new Vector2(Utils.scale(5), 0)).build();
 
         private static ItemPool<InventoryItem> decksUsingMyCards=new ItemPool<>(InventoryItem.class);
         public static void leave() {
@@ -76,6 +75,7 @@ import java.util.Map;
                     }
                 }
             }
+            lblGold.setText(String.valueOf(AdventurePlayer.current().getGold()));
         }
         public void refresh() {
             for(TabPage<AdventureDeckEditor> page:tabPages)
@@ -196,13 +196,11 @@ import java.util.Map;
             return null; //never use backdrop for editor
         }
 
-
-
-
         protected class DeckHeader extends FContainer {
             private DeckHeader() {
                 setHeight(HEADER_HEIGHT);
             }
+            boolean init;
 
             @Override
             public void drawBackground(Graphics g) {
@@ -224,6 +222,11 @@ import java.util.Map;
                 x += height;
                 //noinspection SuspiciousNameCombination
                 btnMoreOptions.setBounds(x, 0, height, height);
+                if (!init) {
+                    add(lblGold);
+                    init = true;
+                }
+                lblGold.setBounds(0, 0, width, height);
             }
         }
 
@@ -587,24 +590,14 @@ import java.util.Map;
 
             @Override
             public void refresh() {
-                FThreads.invokeInEdtLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        LoadingOverlay.show(Forge.getLocalizer().getInstance().getMessage("lblLoading"), new Runnable() {
-                            @Override
-                            public void run() {
-                                final ItemPool<PaperCard> adventurePool = new ItemPool<>(PaperCard.class);
+                final ItemPool<PaperCard> adventurePool = new ItemPool<>(PaperCard.class);
 
-                                adventurePool.addAll(AdventurePlayer.current().getCards());
-                                // remove bottom cards that are in the deck from the card pool
-                                adventurePool.removeAll(AdventurePlayer.current().getSelectedDeck().getMain());
-                                // remove sideboard cards from the catalog
-                                adventurePool.removeAll(AdventurePlayer.current().getSelectedDeck().getOrCreate(DeckSection.Sideboard));
-                                cardManager.setPool(adventurePool);
-                            }
-                        });
-                    }
-                });
+                adventurePool.addAll(AdventurePlayer.current().getCards());
+                // remove bottom cards that are in the deck from the card pool
+                adventurePool.removeAll(AdventurePlayer.current().getSelectedDeck().getMain());
+                // remove sideboard cards from the catalog
+                adventurePool.removeAll(AdventurePlayer.current().getSelectedDeck().getOrCreate(DeckSection.Sideboard));
+                cardManager.setPool(adventurePool);
             }
 
             @Override
@@ -662,7 +655,8 @@ import java.util.Map;
                                 if (!cardManager.isInfinite()) {
                                     removeCard(card, result);
                                 }
-                                 AdventurePlayer.current().sellCard(card,result);
+                                AdventurePlayer.current().sellCard(card,result);
+                                lblGold.setText(String.valueOf(AdventurePlayer.current().getGold()));
                             }
                         });
                     }
