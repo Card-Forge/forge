@@ -151,6 +151,7 @@ public class RewardScene extends UIScene {
 
         switch (type) {
             case Shop:
+                goldLabel.setVisible(true);
                 doneButton.setText(Forge.getLocalizer().getMessage("lblLeave"));
                 goldLabel.setText("Gold: " + String.valueOf(AdventurePlayer.current().getGold()));
                 float w = 480 - (goldLabel.getPrefWidth() + 10);
@@ -162,6 +163,7 @@ public class RewardScene extends UIScene {
                 }
                 break;
             case Loot:
+                goldLabel.setVisible(false);
                 doneButton.setText(Forge.getLocalizer().getMessage("lblDone"));
                 break;
         }
