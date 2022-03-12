@@ -276,6 +276,7 @@ public class RewardScene extends UIScene {
                         getColor().a = 0.5f;
                         setText("SOLD");
                         updateBuyButtons();
+                        removeListener(this);
                         goldLabel.setText("Gold: " + String.valueOf(AdventurePlayer.current().getGold()));
                     }
                 }

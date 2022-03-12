@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import forge.Forge;
 import forge.adventure.util.Config;
 import forge.adventure.util.UIActor;
 
@@ -73,10 +74,27 @@ public class UIScene extends Scene {
 
     Image screenImage;
     TextureRegion backgroundTexture;
+    TextureRegion market;
 
     @Override
     public void enter() {
         Gdx.input.setInputProcessor(stage); //Start taking input from the ui
+        if (this instanceof RewardScene) {
+            if (RewardScene.Type.Shop.equals(((RewardScene)this).type)) {
+                if (market == null) {
+                    market = new TextureRegion(new Texture(Config.instance().getFile("ui/market.png")));
+                    if (!Forge.isLandscapeMode()) {
+                        float ar = 1.78f;
+                        int w = (int) (market.getRegionHeight() / ar);
+                        int x = (int) ((market.getRegionWidth() - w) / ar);
+                        market.setRegion(x, 0, w, market.getRegionHeight());
+                    }
+                }
+                screenImage.setDrawable(new TextureRegionDrawable(market));
+                super.enter();
+                return;
+            }
+        }
         if (screenImage != null) {
             if (backgroundTexture != null)
                 backgroundTexture.getTexture().dispose();
