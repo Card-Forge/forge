@@ -48,6 +48,22 @@ public class Graphics {
         ShaderProgram.pedantic = false;
     }
 
+    public ShaderProgram getShaderOutline() {
+        return shaderOutline;
+    }
+
+    public ShaderProgram getShaderGrayscale() {
+        return shaderGrayscale;
+    }
+
+    public ShaderProgram getShaderWarp() {
+        return shaderWarp;
+    }
+
+    public ShaderProgram getShaderUnderwater() {
+        return shaderUnderwater;
+    }
+
     public void begin(float regionWidth0, float regionHeight0) {
         batch.begin();
         bounds = new Rectangle(0, 0, regionWidth0, regionHeight0);

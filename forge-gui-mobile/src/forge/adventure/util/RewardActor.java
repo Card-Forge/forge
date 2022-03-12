@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
@@ -34,12 +35,14 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     Tooltip<Image> tooltip;
     HoldTooltip holdTooltip;
     Reward reward;
+    ShaderProgram shaderGrayscale = Forge.getGraphics().getShaderGrayscale();
 
     static TextureRegion backTexture;
     Texture image;
     boolean needsToBeDisposed;
     float flipProcess = 0;
     boolean clicked = false;
+    boolean sold = false;
     boolean flipOnClick;
     private boolean hover;
 
@@ -161,7 +164,13 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         clicked = true;
         flipProcess = 0;
     }
-
+    public void sold() {
+        //todo add new card to be sold???
+        if (sold)
+            return;
+        sold = true;
+        getColor().a = 0.5f;
+    }
     @Override
     public void act(float delta) {
         super.act(delta);
@@ -218,7 +227,21 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
 
         if (image != null) {
-            batch.draw(ImageCache.croppedBorderImage(image), x, -getHeight() / 2, width, getHeight());
+            if (!sold)
+                batch.draw(ImageCache.croppedBorderImage(image), x, -getHeight() / 2, width, getHeight());
+            else {
+                batch.end();
+                shaderGrayscale.bind();
+                shaderGrayscale.setUniformf("u_grayness", 1f);
+                batch.setShader(shaderGrayscale);
+                batch.begin();
+                //draw gray
+                batch.draw(ImageCache.croppedBorderImage(image), x, -getHeight() / 2, width, getHeight());
+                //reset
+                batch.end();
+                batch.setShader(null);
+                batch.begin();
+            }
         }
         else
             batch.draw(ImageCache.defaultImage, x, -getHeight() / 2, width, getHeight());
