@@ -37,5 +37,6 @@ The Cheese Stands Alone|The Cheese|It's cheesy, but hey, it works!
 The Deck of Many Things's Effect|Down on the Deck|Lucky draw!
 Triskaidekaphile|The Luckiest Number|13, 169, 2197, 28561...
 Triskaidekaphobia|The Fear of 13|It's just a silly ancient superstition... right?
+Vessel of the All-Consuming|Consumed by Hidetsugu|Fade into nothingness.
 Vorpal Sword|Snicker-Snack!|He left it dead, and with its head / He went galumphing back.
 Emblem - Vraska, Golgari Queen|The Flurry of Assassins|How good is your dodging?
