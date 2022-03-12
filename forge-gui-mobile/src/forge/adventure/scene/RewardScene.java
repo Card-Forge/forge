@@ -272,8 +272,9 @@ public class RewardScene extends UIScene {
                         Current.player().takeGold(price);
                         Current.player().addReward(reward.getReward());
                         setDisabled(true);
-                        reward.flip();
-                        remove();
+                        reward.sold();
+                        getColor().a = 0.5f;
+                        setText("SOLD");
                         updateBuyButtons();
                         goldLabel.setText("Gold: " + String.valueOf(AdventurePlayer.current().getGold()));
                     }
