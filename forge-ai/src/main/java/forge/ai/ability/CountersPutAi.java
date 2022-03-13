@@ -495,7 +495,7 @@ public class CountersPutAi extends CountersAi {
                 Card sacTarget = ComputerUtil.getCardPreference(ai, source, "SacCost", list);
                 // this card is planned to be sacrificed during cost payment, so don't target it
                 // (otherwise the AI can cheat by activating this SA and not paying the sac cost, e.g. Extruder)
-                // TODO needs update if amount > 1 gets printed, 
+                // TODO needs update if amount > 1 gets printed,
                 // maybe also check putting the counter on that exact creature is more important than sacrificing it (though unlikely?)
                 list.remove(sacTarget);
             }
@@ -961,8 +961,14 @@ public class CountersPutAi extends CountersAi {
             return Iterables.getFirst(options, null);
         }
 
-        final CounterType type = params.containsKey("CounterType") ? (CounterType)params.get("CounterType")
-                : CounterType.getType(sa.getParam("CounterType"));
+        List<CounterType> types = Lists.newArrayList();
+        if (params.containsKey("CounterType")) {
+            types.add((CounterType)params.get("CounterType"));
+        } else {
+            for (String s : sa.getParam("CounterType").split(",")) {
+                CounterType.getType(s);
+            }
+        }
 
         final String amountStr = sa.getParamOrDefault("CounterNum", "1");
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
@@ -980,9 +986,14 @@ public class CountersPutAi extends CountersAi {
                             return false;
                         if (ComputerUtilCard.isUselessCreature(ai, input))
                             return false;
-                        if (type.is(CounterEnumType.M1M1) && amount >= input.getNetToughness())
-                            return true;
-                        return ComputerUtil.isNegativeCounter(type, input);
+                        for (CounterType type : types) {
+                            if (type.is(CounterEnumType.M1M1) && amount >= input.getNetToughness())
+                                return true;
+                            if (ComputerUtil.isNegativeCounter(type, input)) {
+                                return true;
+                            }
+                        }
+                        return false;
                     }
                 });
                 if (!negative.isEmpty()) {
@@ -1005,18 +1016,15 @@ public class CountersPutAi extends CountersAi {
         CardCollection filtered = mine;
 
         // Try to filter out keywords that we already have on cards
-        if (type.isKeywordCounter()) {
-            Keyword kw = Keyword.smartValueOf(type.getName());
-            final CardCollection doNotHaveKeyword = CardLists.filter(filtered, new Predicate<Card>() {
-                @Override
-                public boolean apply(Card card) {
-                    return !card.hasKeyword(kw) && sa.canTarget(card);
-                }
-            });
-
-            if (doNotHaveKeyword.size() > 0)
-                filtered = doNotHaveKeyword;
+        CardCollection doNotHaveKeyword = new CardCollection();
+        for (CounterType type : types) {
+            if (type.isKeywordCounter()) {
+                doNotHaveKeyword.addAll(CardLists.getNotKeyword(filtered, Keyword.smartValueOf(type.getName())));
+            }
         }
+
+        if (doNotHaveKeyword.size() > 0)
+            filtered = doNotHaveKeyword;
 
         final CardCollection notUseless = CardLists.filter(filtered, new Predicate<Card>() {
             @Override
@@ -1032,31 +1040,33 @@ public class CountersPutAi extends CountersAi {
         }
 
         // some special logic to reload Persist/Undying
-        if (p1p1.equals(type)) {
-            final CardCollection persist = CardLists.filter(filtered, new Predicate<Card>() {
-                @Override
-                public boolean apply(Card input) {
-                    if (!input.hasKeyword(Keyword.PERSIST))
-                        return false;
-                    return input.getCounters(m1m1) <= amount;
-                }
-            });
+        for (CounterType type : types) {
+            if (p1p1.equals(type)) {
+                final CardCollection persist = CardLists.filter(filtered, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(Card input) {
+                        if (!input.hasKeyword(Keyword.PERSIST))
+                            return false;
+                        return input.getCounters(m1m1) <= amount;
+                    }
+                });
 
-            if (!persist.isEmpty()) {
-                filtered = persist;
-            }
-        } else if (m1m1.equals(type)) {
-            final CardCollection undying = CardLists.filter(filtered, new Predicate<Card>() {
-                @Override
-                public boolean apply(Card input) {
-                    if (!input.hasKeyword(Keyword.UNDYING))
-                        return false;
-                    return input.getCounters(p1p1) <= amount && input.getNetToughness() > amount;
+                if (!persist.isEmpty()) {
+                    filtered = persist;
                 }
-            });
+            } else if (m1m1.equals(type)) {
+                final CardCollection undying = CardLists.filter(filtered, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(Card input) {
+                        if (!input.hasKeyword(Keyword.UNDYING))
+                            return false;
+                        return input.getCounters(p1p1) <= amount && input.getNetToughness() > amount;
+                    }
+                });
 
-            if (!undying.isEmpty()) {
-                filtered = undying;
+                if (!undying.isEmpty()) {
+                    filtered = undying;
+                }
             }
         }
 
