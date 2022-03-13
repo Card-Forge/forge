@@ -444,8 +444,7 @@ public class AiController {
         CardCollection nonLandsInHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), Predicates.not(CardPredicates.Presets.LANDS));
 
         // Some considerations for Momir/MoJhoSto
-        boolean hasMomir = Iterables.any(player.getCardsIn(ZoneType.Command),
-                CardPredicates.nameEquals("Momir Vig, Simic Visionary Avatar"));
+        boolean hasMomir = player.getZone(ZoneType.Command).contains(CardPredicates.nameEquals("Momir Vig, Simic Visionary Avatar"));
         if (hasMomir && nonLandsInHand.isEmpty()) {
             // Only do this if we have an all-basic land hand, which covers both stock Momir and MoJhoSto modes
             // and also a custom Vanguard setup with a customized basic land deck and Momir as the avatar.
@@ -1525,8 +1524,7 @@ public class AiController {
     }
 
     private boolean isSafeToHoldLandDropForMain2(Card landToPlay) {
-        boolean hasMomir = Iterables.any(player.getCardsIn(ZoneType.Command),
-                CardPredicates.nameEquals("Momir Vig, Simic Visionary Avatar"));
+        boolean hasMomir = player.getZone(ZoneType.Command).contains(CardPredicates.nameEquals("Momir Vig, Simic Visionary Avatar"));
         if (hasMomir) {
             // Don't do this in Momir variants since it messes with the AI decision making for the avatar.
             return false;
@@ -1711,7 +1709,7 @@ public class AiController {
 
             if (sa.getHostCard().hasKeyword(Keyword.STORM)
                     && sa.getApi() != ApiType.Counter // AI would suck at trying to deliberately proc a Storm counterspell
-                    && Iterables.any(player.getCardsIn(ZoneType.Hand), Predicates.not(Predicates.or(CardPredicates.Presets.LANDS, CardPredicates.hasKeyword("Storm"))))) {
+                    && player.getZone(ZoneType.Hand).contains(Predicates.not(Predicates.or(CardPredicates.Presets.LANDS, CardPredicates.hasKeyword("Storm"))))) {
                 if (game.getView().getStormCount() < this.getIntProperty(AiProps.MIN_COUNT_FOR_STORM_SPELLS)) {
                     // skip evaluating Storm unless we reached the minimum Storm count
                     continue;

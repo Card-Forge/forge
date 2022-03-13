@@ -180,10 +180,10 @@ public class DigUntilEffect extends SpellAbilityEffect {
                         Card m = null;
                         if (sa.hasParam("GainControl") && foundDest.equals(ZoneType.Battlefield)) {
                             c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
-                            m = game.getAction().moveTo(c.getController().getZone(foundDest), c, sa, moveParams);
                             if (sa.hasParam("Tapped")) {
                                 c.setTapped(true);
                             }
+                            m = game.getAction().moveTo(c.getController().getZone(foundDest), c, sa, moveParams);
                             if (addToCombat(c, c.getController(), sa, "Attacking", "Blocking")) {
                                 combatChanged = true;
                             }

@@ -114,12 +114,12 @@ public class DigMultipleEffect extends SpellAbilityEffect {
                         }
                         c = game.getAction().moveTo(zone, c, libraryPosition, sa);
                     } else {
-                        c = game.getAction().moveTo(zone, c, sa);
                         if (destZone1.equals(ZoneType.Battlefield)) {
                             if (sa.hasParam("Tapped")) {
                                 c.setTapped(true);
                             }
                         }
+                        c = game.getAction().moveTo(zone, c, sa);
                     }
                     if (!origin.equals(c.getZone().getZoneType())) {
                         table.put(origin, c.getZone().getZoneType(), c);
