@@ -385,11 +385,11 @@ public class DigEffect extends SpellAbilityEffect {
                             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                             moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
                             moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+                            if (sa.hasParam("Tapped")) {
+                                c.setTapped(true);
+                            }
                             c = game.getAction().moveTo(zone, c, sa, moveParams);
                             if (destZone1.equals(ZoneType.Battlefield)) {
-                                if (sa.hasParam("Tapped")) {
-                                    c.setTapped(true);
-                                }
                                 if (addToCombat(c, c.getController(), sa, "Attacking", "Blocking")) {
                                     combatChanged = true;
                                 }
