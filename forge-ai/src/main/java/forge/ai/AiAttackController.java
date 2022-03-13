@@ -491,7 +491,7 @@ public class AiAttackController {
             Zone oppBattlefield = c.getController().getZone(ZoneType.Battlefield);
 
             if (c.getName().equals("Heart of Kiran")) {
-                if (oppBattlefield.contains(CardPredicates.Presets.PLANESWALKERS)) {
+                if (Iterables.any(oppBattlefield, CardPredicates.Presets.PLANESWALKERS)) {
                     // can be activated by removing a loyalty counter instead of tapping a creature
                     continue;
                 }
@@ -500,7 +500,7 @@ public class AiAttackController {
                 // TODO: the AI should ideally predict how many times it can activate
                 // for now, unless the opponent is tapped out, break at this point
                 // and do not predict the blocker limit (which is safer)
-                if (oppBattlefield.contains(Predicates.and(CardPredicates.Presets.UNTAPPED, CardPredicates.Presets.LANDS))) {
+                if (Iterables.any(oppBattlefield, Predicates.and(CardPredicates.Presets.UNTAPPED, CardPredicates.Presets.LANDS))) {
                     maxBlockersAfterCrew = Integer.MAX_VALUE;
                     break;
                 }

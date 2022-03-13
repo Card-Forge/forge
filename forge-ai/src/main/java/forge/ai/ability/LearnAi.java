@@ -46,7 +46,7 @@ public class LearnAi extends SpellAbilityAi {
 
         if (!lessons.isEmpty()) {
             return ComputerUtilCard.getBestAI(lessons);
-        } else if (!goodDiscards.isEmpty()) {
+        } else if (goodDiscards != null && !goodDiscards.isEmpty()) {
             return ComputerUtilCard.getWorstAI(goodDiscards);
         }
 
