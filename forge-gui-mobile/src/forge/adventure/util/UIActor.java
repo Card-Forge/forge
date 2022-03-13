@@ -207,7 +207,7 @@ public class UIActor extends Group {
                 case "image":
                     Texture t = new Texture(Config.instance().getFile(property.value.toString()));
                     TextureRegion tr = new TextureRegion(t);
-                    if (!Forge.isLandscapeMode() && t.toString().contains("title_bg.png")) {
+                    if (!Forge.isLandscapeMode() && t.toString().contains("title_bg")) {
                         float ar = 1.78f;
                         int w = (int) (tr.getRegionHeight() / ar);
                         int x = (int) ((tr.getRegionWidth() - w) / ar);
