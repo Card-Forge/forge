@@ -859,12 +859,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         if (sa.hasParam("DefinedPlayer")) {
             fetchers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("DefinedPlayer"), sa);
         } else {
-            fetchers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
-        }
-
-        // handle case when Defined is for a Card
-        if (fetchers.isEmpty()) {
-            fetchers.add(sa.getHostCard().getController());
+            fetchers = Lists.newArrayList(sa.getActivatingPlayer());
         }
 
         Player chooser = null;
