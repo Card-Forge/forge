@@ -74,12 +74,12 @@ public class UIScene extends Scene {
 
     Image screenImage;
     TextureRegion backgroundTexture;
-    TextureRegion market;
+    TextureRegion market, tavern;
 
     @Override
     public void enter() {
         Gdx.input.setInputProcessor(stage); //Start taking input from the ui
-        if (this instanceof RewardScene) {
+        if (this instanceof RewardScene) { //backdrop for rewardscene - Shop
             if (RewardScene.Type.Shop.equals(((RewardScene)this).type)) {
                 if (market == null) {
                     market = new TextureRegion(new Texture(Config.instance().getFile("ui/market.png")));
@@ -94,6 +94,20 @@ public class UIScene extends Scene {
                 super.enter();
                 return;
             }
+        }
+        if (this instanceof InnScene) { //backdrop for Inn
+            if (tavern == null) {
+                tavern = new TextureRegion(new Texture(Config.instance().getFile("ui/tavern.png")));
+                if (!Forge.isLandscapeMode()) {
+                    float ar = 1.78f;
+                    int w = (int) (tavern.getRegionHeight() / ar);
+                    int x = (int) ((tavern.getRegionWidth() - w) / ar);
+                    tavern.setRegion(x, 0, w, tavern.getRegionHeight());
+                }
+            }
+            screenImage.setDrawable(new TextureRegionDrawable(tavern));
+            super.enter();
+            return;
         }
         if (screenImage != null) {
             if (backgroundTexture != null)
