@@ -457,6 +457,13 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
+    public Void visit(final GameEventCardRegenerated event) {
+        refreshFieldUpdate = true;
+        processCards(event.cards, cardsRefreshDetails);
+        return processCards(event.cards, cardsUpdate);
+    }
+
+    @Override
     public Void visit(final GameEventShuffle event) {
         if (GuiBase.getInterface().isLibgdxPort()) {
             return updateZone(event.player.getZone(ZoneType.Library));
