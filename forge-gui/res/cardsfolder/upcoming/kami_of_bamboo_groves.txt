@@ -1,0 +1,9 @@
+Name:Kami of Bamboo Groves
+ManaCost:G
+Types:Enchantment Creature Spirit
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may put a land card from your hand onto the battlefield tapped.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.YouCtrl
+A:AB$ MakeCard | Cost$ 2 G Discard<1/CARDNAME> | Name$ Forest | Amount$ 2 | ActivationZone$ Hand | Zone$ Hand | PrecostDesc$ Channel — | SpellDescription$ Conjure two cards named Forest into your hand.
+DeckHas:Ability$Discard
+Oracle:When Kami of Bamboo Groves enters the battlefield, you may put a land card from your hand onto the battlefield tapped.\nChannel — {2}{G}, Discard Kami of Bamboo Groves: Conjure two cards named Forest into your hand.

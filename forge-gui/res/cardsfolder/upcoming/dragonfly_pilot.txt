@@ -1,0 +1,9 @@
+Name:Dragonfly Pilot
+ManaCost:W
+Types:Creature Fox Pilot
+PT:1/1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigConjure | TriggerDescription$ Whenever CARDNAME enters the battlefield, conjure a card named Dragonfly Suit into your hand.
+SVar:TrigConjure:DB$ MakeCard | Name$ Dragonfly Suit | Zone$ Hand
+S:Mode$ CrewValue | ValidCard$ Card.Self | Value$ 2 | Description$ CARDNAME crews Vehicles as though its power were 2 greater.
+DeckHints:Type$Vehicle
+Oracle:Whenever Dragonfly Pilot enters the battlefield, conjure a card named Dragonfly Suit into your hand.\nDragonfly Pilot crews Vehicles as though its power were 2 greater.
