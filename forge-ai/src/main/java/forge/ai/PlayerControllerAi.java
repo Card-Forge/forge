@@ -918,6 +918,10 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, String prompt,
             Map<String, Object> params) {
+        // short cut if there is no options to choose
+        if (options.size() <= 1) {
+            return Iterables.getFirst(options, null);
+        }
         ApiType api = sa.getApi();
         if (null == api) {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
