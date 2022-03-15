@@ -3,8 +3,7 @@ ManaCost:2 W W
 Types:Creature Human Samurai
 PT:2/2
 K:Flying
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | CheckSVar$ X | SVarCompare$ EQ0 | Description$ This spell costs {2} less to cast if you have no other creature cards in hand or if the only other creature cards in your hand are named Mothrider Cavalry.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | IsPresent$ Creature.YouOwn+notnamedMothrider Cavalry | PresentZone$ Hand | PresentCompare$ EQ0 | Description$ This spell costs {2} less to cast if you have no other creature cards in hand or if the only other creature cards in your hand are named Mothrider Cavalry.
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other creatures you control get +1/+1.
-SVar:X:Count$ValidHand Creature.YouCtrl+notnamedMothrider Cavalry
 DeckNeeds:Name$Mothrider Cavalry
 Oracle:This spell costs {2} less to cast if you have no other creature cards in hand or if the only other creature cards in your hand are named Mothrider Cavalry.\nFlying\nOther creatures you control get +1/+1.
