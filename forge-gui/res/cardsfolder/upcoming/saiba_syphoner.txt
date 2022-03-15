@@ -1,0 +1,12 @@
+Name:Saiba Syphoner
+ManaCost:2 U U
+Types:Creature Human Ninja
+PT:2/2
+K:Flash
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | CheckSVar$ X | SVarCompare$ EQ0 | Description$ This spell costs {2} less to cast if there are no instant or sorcery cards in your hand.
+SVar:X:Count$ValidHand Instant.YouOwn,Sorcery.YouOwn
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target instant or sorcery card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ If CARDNAME would die, shuffle it into your library instead.
+SVar:TrigChange:DB$ ChangeZone | Destination$ Library | Shuffle$ True | Defined$ TriggeredNewCardLKICopy
+Oracle:Flash\nThis spell costs {2} less to cast if there are no instant or sorcery cards in your hand.\nWhen Saiba Syphoner enters the battlefield, return target instant or sorcery card from your graveyard to your hand.\nIf Saiba Syphoner would die, shuffle it into your library instead.
