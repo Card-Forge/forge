@@ -21,3 +21,9 @@ ScryfallCode=OLGC
 2019 M Tropical Island @Mark Poole
 2019A M Bayou @Raoul Vitale
 2019NA M City of Traitors @Ralph Horsley
+2020A M Karakas @Rob Alexander
+2020B M Rishadan Port @Chris Seaman
+2020C M Maze of Ith @Milivoj Ćeran
+2021A M Wasteland @Mark Tedin
+2021B M Bayou @Sidharth Chaturvedi
+2021C M Sylvan Library @Raoul Vitale
