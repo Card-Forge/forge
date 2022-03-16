@@ -160,8 +160,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             sb.append(chooserNames);
             sb.append(" search").append(choosers.size() > 1 ? " " : "es ");
             sb.append(fetchPlayer).append(fetchPlayer.equals(chooserNames) ? "'s " : " ");
-            sb.append("library for ").append(Lang.nounWithNumeralExceptOne(num, type + " card")).append(", ");
-            if (!sa.hasParam("NoReveal")) {
+            final String cardTag = type.contains("card") ? "" : " card";
+            sb.append("library for ").append(Lang.nounWithNumeralExceptOne(num, type + cardTag)).append(", ");
+            if (!sa.hasParam("NoReveal") || !destination.equals("Battlefield")) {
                 if (choosers.size() == 1) {
                     sb.append(num > 1 ? "reveals them, " : "reveals it, ");
                 } else {
