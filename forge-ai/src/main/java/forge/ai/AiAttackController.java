@@ -46,11 +46,11 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Expressions;
 import forge.util.MyRandom;
-import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 
@@ -333,25 +333,6 @@ public class AiAttackController {
             return attackers;
         }
 
-        // no need to block if an effect is in play which untaps all creatures (pseudo-Vigilance akin to
-        // Awakening or Prophet of Kruphix)
-        for (Card card : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
-            boolean untapsEachTurn = card.hasSVar("UntapsEachTurn");
-            boolean untapsEachOtherTurn = card.hasSVar("UntapsEachOtherPlayerTurn");
-
-            if (untapsEachTurn || untapsEachOtherTurn) {
-                String affected = untapsEachTurn ? card.getSVar("UntapsEachTurn")
-                        : card.getSVar("UntapsEachOtherPlayerTurn");
-
-                for (String aff : TextUtil.split(affected, ',')) {
-                    if (aff.equals("Creature")
-                            && (untapsEachTurn || (untapsEachOtherTurn && ai.equals(card.getController())))) {
-                        return attackers;
-                    }
-                }
-            }
-        }
-
         List<Card> opponentsAttackers = new ArrayList<>(oppList);
         opponentsAttackers = CardLists.filter(opponentsAttackers, new Predicate<Card>() {
             @Override
@@ -370,7 +351,9 @@ public class AiAttackController {
                 }
                 continue;
             }
-            if (c.hasKeyword(Keyword.VIGILANCE)) {
+            // no need to block if an effect is in play which untaps all creatures
+            // (pseudo-Vigilance akin to Awakening or or Prophet of Kruphix)
+            if (c.hasKeyword(Keyword.VIGILANCE) || ComputerUtilCard.willUntap(ai, c)) {
                 vigilantes.add(c);
                 notNeededAsBlockers.remove(c); // they will be re-added later
                 if (canBlockAnAttacker(c, opponentsAttackers, false)) {
@@ -392,7 +375,7 @@ public class AiAttackController {
             }
         }
         int blockersStillNeeded = blockersNeeded - fixedBlockers;
-        blockersStillNeeded = Math.min(blockersNeeded, list.size());
+        blockersStillNeeded = Math.min(blockersStillNeeded, list.size());
         for (int i = 0; i < blockersStillNeeded; i++) {
             notNeededAsBlockers.remove(list.get(i));
         }
@@ -505,7 +488,7 @@ public class AiAttackController {
         int maxBlockersAfterCrew = remainingBlockers.size();
         for (Card c : this.blockers) {
             CardTypeView cardType = c.getCurrentState().getType();
-            CardCollectionView oppBattlefield = c.getController().getCardsIn(ZoneType.Battlefield);
+            Zone oppBattlefield = c.getController().getZone(ZoneType.Battlefield);
 
             if (c.getName().equals("Heart of Kiran")) {
                 if (Iterables.any(oppBattlefield, CardPredicates.Presets.PLANESWALKERS)) {
@@ -850,7 +833,7 @@ public class AiAttackController {
             return aiAggression;
         }
 
-        if (simAI && ai.isCardInPlay("Reconnaissance")) {
+        if (simAI && ComputerUtilCard.isNonDisabledCardInPlay(ai, "Reconnaissance")) {
             for (Card attacker : attackersLeft) {
                 if (canAttackWrapper(attacker, defender)) {
                     // simulation will decide if attacker stays in combat based on blocks
@@ -1125,7 +1108,7 @@ public class AiAttackController {
             CardCollection pwDefending = new CardCollection(Iterables.filter(possibleDefenders, Card.class));
             if (pwDefending.isEmpty()) {
                 // TODO for now only looks at same player as we'd have to check the others from start too
-                //defender = Collections.min(new PlayerCollection(Iterables.filter(possibleDefenders, Player.class)), PlayerPredicates.compareByLife());
+                //defender = new PlayerCollection(Iterables.filter(possibleDefenders, Player.class)).min(PlayerPredicates.compareByLife());
                 defender = opp;
             } else {
                 final Card pwNearUlti = ComputerUtilCard.getBestPlaneswalkerToDamage(pwDefending);
@@ -1204,9 +1187,9 @@ public class AiAttackController {
         boolean canTrampleOverDefenders = attacker.hasKeyword(Keyword.TRAMPLE) && attacker.getNetCombatDamage() > Aggregates.sum(validBlockers, CardPredicates.Accessors.fnGetNetToughness);
 
         // used to check that CanKillAllDangerous check makes sense in context where creatures with dangerous abilities are present
-        boolean dangerousBlockersPresent = !CardLists.filter(validBlockers, Predicates.or(
+        boolean dangerousBlockersPresent = Iterables.any(validBlockers, Predicates.or(
                 CardPredicates.hasKeyword(Keyword.WITHER), CardPredicates.hasKeyword(Keyword.INFECT),
-                CardPredicates.hasKeyword(Keyword.LIFELINK))).isEmpty();
+                CardPredicates.hasKeyword(Keyword.LIFELINK)));
 
         // total power of the defending creatures, used in predicting whether a gang block can kill the attacker
         int defPower = CardLists.getTotalPower(validBlockers, true, false);
@@ -1351,7 +1334,7 @@ public class AiAttackController {
                 // creature would leave the battlefield
                 // no pain in exerting it
                 shouldExert = true;
-            } else if (c.hasKeyword(Keyword.VIGILANCE)) {
+            } else if (c.hasKeyword(Keyword.VIGILANCE) || ComputerUtilCard.willUntap(c.getController(), c)) {
                 // Free exert - why not?
                 shouldExert = true;
             }
@@ -1373,8 +1356,8 @@ public class AiAttackController {
                     if (validTargets.isEmpty()) {
                         missTarget = true;
                         break;
-                    } else if (sa.isCurse() && CardLists.filter(validTargets,
-                            CardPredicates.isControlledByAnyOf(c.getController().getOpponents())).isEmpty()) {
+                    } else if (sa.isCurse() && !Iterables.any(validTargets,
+                            CardPredicates.isControlledByAnyOf(c.getController().getOpponents()))) {
                         // e.g. Ahn-Crop Crasher - the effect is only good when aimed at opponent's creatures
                         missTarget = true;
                         break;

@@ -2,12 +2,12 @@ package forge.screens.match.winlose;
 
 import java.util.List;
 
+import forge.Forge;
 import forge.game.GameView;
 import forge.gamemodes.gauntlet.GauntletWinLoseController;
 import forge.gui.FThreads;
 import forge.gui.util.SOptionPane;
 import forge.localinstance.skin.FSkinProp;
-import forge.util.Localizer;
 
 /**
  * The Win/Lose handler for 'gauntlet' type tournament
@@ -54,7 +54,7 @@ public class GauntletWinLose extends ControlWinLose {
                             }
                         }
 
-                        SOptionPane.showMessageDialog(sb.toString(), Localizer.getInstance().getMessage("lblGauntletProgress"), icon);
+                        SOptionPane.showMessageDialog(sb.toString(), Forge.getLocalizer().getMessage("lblGauntletProgress"), icon);
                     }
                 });
             }

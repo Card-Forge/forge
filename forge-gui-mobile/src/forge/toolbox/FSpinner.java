@@ -1,8 +1,8 @@
 package forge.toolbox;
 
+import forge.Forge;
 import forge.toolbox.FEvent.FEventType;
 import forge.util.Callback;
-import forge.util.Localizer;
 
 
 public class FSpinner extends FTextField {
@@ -36,7 +36,7 @@ public class FSpinner extends FTextField {
 
     @Override
     public boolean tap(float x, float y, int count) {
-        GuiChoose.getInteger(Localizer.getInstance().getMessage("lblSelectANumber"), minValue, maxValue, new Callback<Integer>() {
+        GuiChoose.getInteger(Forge.getLocalizer().getMessage("lblSelectANumber"), minValue, maxValue, new Callback<Integer>() {
             @Override
             public void run(Integer result) {
                 if (result != null && result != value) {

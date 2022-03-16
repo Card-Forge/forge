@@ -18,7 +18,6 @@ import forge.menu.FPopupMenu;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 import forge.util.FileUtil;
-import forge.util.Localizer;
 import forge.util.Utils;
 
 public class FFileChooser extends FDialog {
@@ -65,22 +64,22 @@ public class FFileChooser extends FDialog {
             }
         });
 
-        initButton(0, Localizer.getInstance().getMessage("lblOK"), new FEventHandler() {
+        initButton(0, Forge.getLocalizer().getMessage("lblOK"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 activateSelectedFile(true);
             }
         });
-        initButton(1, Localizer.getInstance().getMessage("lblNewFolder"), new FEventHandler() {
+        initButton(1, Forge.getLocalizer().getMessage("lblNewFolder"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 final File dir = getCurrentDir();
                 if (dir == null) {
-                    FOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblCannotAddNewFolderToInvaildFolder"), Localizer.getInstance().getMessage("lblInvalidFolder"));
+                    FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblCannotAddNewFolderToInvaildFolder"), Forge.getLocalizer().getMessage("lblInvalidFolder"));
                     return;
                 }
 
-                FOptionPane.showInputDialog(Localizer.getInstance().getMessage("lblEnterNewFolderName"), new Callback<String>() {
+                FOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblEnterNewFolderName"), new Callback<String>() {
                     @Override
                     public void run(String result) {
                         if (StringUtils.isEmpty(result)) { return; }
@@ -96,12 +95,12 @@ public class FFileChooser extends FDialog {
                         catch (Exception e) {
                             e.printStackTrace();
                         }
-                        FOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblEnterFolderNameNotValid", result), Localizer.getInstance().getMessage("lblInvalidName"));
+                        FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblEnterFolderNameNotValid", result), Forge.getLocalizer().getMessage("lblInvalidName"));
                     }
                 });
             }
         });
-        initButton(2, Localizer.getInstance().getMessage("lblCancel"), new FEventHandler() {
+        initButton(2, Forge.getLocalizer().getMessage("lblCancel"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 hide();
@@ -205,13 +204,13 @@ public class FFileChooser extends FDialog {
         //validate return value
         if (returnDirectory) {
             if (!file.exists() || !file.isDirectory()) {
-                FOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblNoFolderExistsWithSelectPath"), Localizer.getInstance().getMessage("lblInvalidFolder"));
+                FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblNoFolderExistsWithSelectPath"), Forge.getLocalizer().getMessage("lblInvalidFolder"));
                 return;
             }
         }
         else {
             if ((!file.exists() && choiceType == ChoiceType.OpenFile) || file.isDirectory()) {
-                FOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblNoFileExistsWithSelectPath"), Localizer.getInstance().getMessage("lblInvalidFile"));
+                FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblNoFileExistsWithSelectPath"), Forge.getLocalizer().getMessage("lblInvalidFile"));
                 return;
             }
         }
@@ -234,16 +233,16 @@ public class FFileChooser extends FDialog {
     private void renameFile(final File file) {
         final File dir = file.getParentFile();
         if (dir == null) {
-            FOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblCannotRenameFileInInvalidFolder"), Localizer.getInstance().getMessage("lblInvalidFolder"));
+            FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblCannotRenameFileInInvalidFolder"), Forge.getLocalizer().getMessage("lblInvalidFolder"));
             return;
         }
 
         String title;
         if (file.isDirectory()) {
-            title = Localizer.getInstance().getMessage("lblEnterNewNameForFolder");
+            title = Forge.getLocalizer().getMessage("lblEnterNewNameForFolder");
         }
         else {
-            title = Localizer.getInstance().getMessage("lblEnterNewNameForFile");
+            title = Forge.getLocalizer().getMessage("lblEnterNewNameForFile");
         }
         FOptionPane.showInputDialog(title, file.getName(), new Callback<String>() {
             @Override
@@ -261,15 +260,15 @@ public class FFileChooser extends FDialog {
                 catch (Exception e) {
                     e.printStackTrace();
                 }
-                FOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblEnterNameNotValid", result), Localizer.getInstance().getMessage("lblInvalidName"));
+                FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblEnterNameNotValid", result), Forge.getLocalizer().getMessage("lblInvalidName"));
             }
         });
     }
 
     private void deleteFile(final Integer index, final File file) {
-        final String deleteBehavior = file.isDirectory() ? Localizer.getInstance().getMessage("lblDeleteFolder") : Localizer.getInstance().getMessage("lblDeleteFile");
-        FOptionPane.showConfirmDialog(Localizer.getInstance().getMessage("lblAreYouSureProceedDelete"), deleteBehavior,
-                Localizer.getInstance().getMessage("lblDelete"), Localizer.getInstance().getMessage("lblCancel"), new Callback<Boolean>() {
+        final String deleteBehavior = file.isDirectory() ? Forge.getLocalizer().getMessage("lblDeleteFolder") : Forge.getLocalizer().getMessage("lblDeleteFile");
+        FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblAreYouSureProceedDelete"), deleteBehavior,
+                Forge.getLocalizer().getMessage("lblDelete"), Forge.getLocalizer().getMessage("lblCancel"), new Callback<Boolean>() {
             @Override
             public void run(Boolean result) {
                 if (result) {
@@ -294,7 +293,7 @@ public class FFileChooser extends FDialog {
                     catch (Exception ex) {
                         ex.printStackTrace();
                     }
-                    FOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblCouldBotDeleteFile"));
+                    FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblCouldBotDeleteFile"));
                 }
             }
         });
@@ -369,8 +368,8 @@ public class FFileChooser extends FDialog {
                     FPopupMenu menu = new FPopupMenu() {
                         @Override
                         protected void buildMenu() {
-                            final String renameBehavior = value.isDirectory() ? Localizer.getInstance().getMessage("lblRenameFolder") : Localizer.getInstance().getMessage("lblRenameFile");
-                            final String deleteBehavior = value.isDirectory() ? Localizer.getInstance().getMessage("lblDeleteFolder") : Localizer.getInstance().getMessage("lblDeleteFile");
+                            final String renameBehavior = value.isDirectory() ? Forge.getLocalizer().getMessage("lblRenameFolder") : Forge.getLocalizer().getMessage("lblRenameFile");
+                            final String deleteBehavior = value.isDirectory() ? Forge.getLocalizer().getMessage("lblDeleteFolder") : Forge.getLocalizer().getMessage("lblDeleteFile");
                             addItem(new FMenuItem(renameBehavior, Forge.hdbuttons ? FSkinImage.HDEDIT : FSkinImage.EDIT,
                                     new FEventHandler() {
                                 @Override

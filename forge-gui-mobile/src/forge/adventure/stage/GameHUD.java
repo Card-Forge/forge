@@ -66,8 +66,11 @@ public class GameHUD extends Stage {
         mapborder = ui.findActor("mapborder");
         avatarborder = ui.findActor("avatarborder");
         deckActor = ui.findActor("deck");
+        deckActor.getLabel().setText(Forge.getLocalizer().getMessage("lblDeck"));
         menuActor = ui.findActor("menu");
+        menuActor.getLabel().setText(Forge.getLocalizer().getMessage("lblMenu"));
         statsActor = ui.findActor("statistic");
+        statsActor.getLabel().setText(Forge.getLocalizer().getMessage("lblStatus"));
         gamehud = ui.findActor("gamehud");
 
         miniMapPlayer = new Image(new Texture(Config.instance().getFile("ui/minimap_player.png")));
@@ -137,7 +140,43 @@ public class GameHUD extends Stage {
                 money.setText(String.valueOf(AdventurePlayer.current().getGold()));
             }
         }) ;
-
+        if (!Forge.isLandscapeMode()) {
+            miniMap.setWidth(160);
+            mapborder.setWidth(160);
+            miniMapPlayer.setWidth(10);
+            miniMap.setHeight(70);
+            mapborder.setHeight(70);
+            miniMapPlayer.setHeight(4);
+            gamehud.setVisible(false);
+            blank.setScaleX(2);
+            blank.setX(388);
+            blank.setHeight(70);
+            blank.setY(miniMap.getY());
+            avatar.setScaleX(2);
+            avatar.setX(388);
+            avatar.setHeight(36);
+            avatarborder.setX(388);
+            avatarborder.setY(miniMap.getY());
+            avatarborder.setScaleX(2);
+            avatarborder.setHeight(70);
+            money.setX(418);
+            money.setFontScaleX(2);
+            lifePoints.setX(418);
+            lifePoints.setY(avatar.getY()-15);
+            lifePoints.setFontScaleX(2);
+            money.setY(avatar.getY()-25);
+            menuActor.setHeight(20);
+            menuActor.setWidth(80);
+            menuActor.setX(400);
+            statsActor.setHeight(20);
+            statsActor.setWidth(80);
+            statsActor.setX(400);
+            statsActor.setY(menuActor.getY() + 35);
+            deckActor.setHeight(20);
+            deckActor.setWidth(80);
+            deckActor.setX(400);
+            deckActor.setY(statsActor.getY() + 35);
+        }
         addActor(ui);
         addActor(miniMapPlayer);
         WorldSave.getCurrentSave().onLoad(new Runnable() {
@@ -331,41 +370,6 @@ public class GameHUD extends Stage {
 
         miniMap.setDrawable(new TextureRegionDrawable(miniMapTexture));
         avatar.setDrawable(new TextureRegionDrawable(Current.player().avatar()));
-        if (!Forge.isLandscapeMode()) {
-            miniMap.setWidth(160);
-            mapborder.setWidth(160);
-            miniMapPlayer.setWidth(10);
-            miniMap.setHeight(70);
-            mapborder.setHeight(70);
-            miniMapPlayer.setHeight(4);
-            gamehud.setVisible(false);
-            blank.setScaleX(2);
-            blank.setX(388);
-            blank.setHeight(70);
-            blank.setY(miniMap.getY());
-            avatar.setScaleX(2);
-            avatar.setX(388);
-            avatar.setHeight(36);
-            avatarborder.setX(388);
-            avatarborder.setY(miniMap.getY());
-            avatarborder.setScaleX(2);
-            avatarborder.setHeight(70);
-            money.setX(418);
-            lifePoints.setX(418);
-            lifePoints.setY(avatar.getY()-15);
-            money.setY(avatar.getY()-25);
-            menuActor.setHeight(20);
-            menuActor.setWidth(60);
-            menuActor.setX(420);
-            statsActor.setHeight(20);
-            statsActor.setWidth(60);
-            statsActor.setX(420);
-            statsActor.setY(menuActor.getY() + 35);
-            deckActor.setHeight(20);
-            deckActor.setWidth(60);
-            deckActor.setX(420);
-            deckActor.setY(statsActor.getY() + 35);
-        }
     }
 
     private void openDeck() {

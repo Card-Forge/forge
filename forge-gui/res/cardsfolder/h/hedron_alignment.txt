@@ -2,10 +2,8 @@ Name:Hedron Alignment
 ManaCost:2 U
 Types:Enchantment
 K:Hexproof
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRevealToWin | TriggerDescription$ At the beginning of your upkeep, you may reveal your hand. If you do, you win the game if you own a card named Hedron Alignment in exile, in your hand, in your graveyard, and on the battlefield.
-SVar:TrigRevealToWin:DB$ GenericChoice | Choices$ RevealHand,DontReveal | Defined$ You
-SVar:DontReveal:DB$ Cleanup | SpellDescription$ Don't Reveal Hand
-SVar:RevealHand:DB$ RevealHand | Defined$ You | SubAbility$ WinGame | SpellDescription$ Reveal Hand
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRevealToWin | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may reveal your hand. If you do, you win the game if you own a card named Hedron Alignment in exile, in your hand, in your graveyard, and on the battlefield.
+SVar:TrigRevealToWin:DB$ RevealHand | Defined$ You | SubAbility$ WinGame | SpellDescription$ Reveal Hand
 SVar:WinGame:DB$ WinsGame | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ4
 # Combine Hedron Alignments in 4 different zones, cap the count of each zone to 1.
 SVar:A:Count$Valid Card.YouOwn+nonToken+namedHedron Alignment/LimitMax.1

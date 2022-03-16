@@ -14,7 +14,6 @@ import forge.screens.home.HomeScreen;
 import forge.screens.home.LoadGameMenu.LoadGameScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.util.Localizer;
 
 public class ConquestMenu extends FPopupMenu {
     private static final ConquestMenu conquestMenu = new ConquestMenu();
@@ -27,49 +26,49 @@ public class ConquestMenu extends FPopupMenu {
     private static final ConquestStatsScreen statsScreen = new ConquestStatsScreen();
     private static final ConquestPrefsScreen prefsScreen = new ConquestPrefsScreen();
 
-    private static final FMenuItem multiverseItem = new FMenuItem(Localizer.getInstance().getMessage("lblTheMultiverse"), FSkinImage.MULTIVERSE, new FEventHandler() {
+    private static final FMenuItem multiverseItem = new FMenuItem(Forge.getLocalizer().getMessage("lblTheMultiverse"), FSkinImage.MULTIVERSE, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(multiverseScreen);
         }
     });
-    private static final FMenuItem aetherItem = new FMenuItem(Localizer.getInstance().getMessage("lblTheAether"), FSkinImage.AETHER_SHARD, new FEventHandler() {
+    private static final FMenuItem aetherItem = new FMenuItem(Forge.getLocalizer().getMessage("lblTheAether"), FSkinImage.AETHER_SHARD, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(aetherScreen);
         }
     });
-    private static final FMenuItem commandersItem = new FMenuItem(Localizer.getInstance().getMessage("lblCommanders"), FSkinImage.COMMANDER, new FEventHandler() {
+    private static final FMenuItem commandersItem = new FMenuItem(Forge.getLocalizer().getMessage("lblCommanders"), FSkinImage.COMMANDER, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(commandersScreen);
         }
     });
-    private static final FMenuItem planeswalkersItem = new FMenuItem(Localizer.getInstance().getMessage("lblPlaneswalkers"), FSkinImage.PLANESWALKER, new FEventHandler() {
+    private static final FMenuItem planeswalkersItem = new FMenuItem(Forge.getLocalizer().getMessage("lblPlaneswalkers"), FSkinImage.PLANESWALKER, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(planeswalkersScreen);
         }
     });
-    private static final FMenuItem collectionItem = new FMenuItem(Localizer.getInstance().getMessage("lblCollection"), FSkinImage.SPELLBOOK, new FEventHandler() {
+    private static final FMenuItem collectionItem = new FMenuItem(Forge.getLocalizer().getMessage("lblCollection"), FSkinImage.SPELLBOOK, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(collectionScreen);
         }
     });
-    private static final FMenuItem statsItem = new FMenuItem(Localizer.getInstance().getMessage("lblStatistics"), FSkinImage.MENU_STATS, new FEventHandler() {
+    private static final FMenuItem statsItem = new FMenuItem(Forge.getLocalizer().getMessage("lblStatistics"), FSkinImage.MENU_STATS, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(statsScreen);
         }
     });
-    private static final FMenuItem planeswalkItem = new FMenuItem(Localizer.getInstance().getMessage("lblPlaneswalk"), FSkinImage.PW_BADGE_COMMON, new FEventHandler() {
+    private static final FMenuItem planeswalkItem = new FMenuItem(Forge.getLocalizer().getMessage("lblPlaneswalk"), FSkinImage.PW_BADGE_COMMON, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(planeswalkScreen);
         }
     });
-    private static final FMenuItem prefsItem = new FMenuItem(Localizer.getInstance().getMessage("Preferences"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, new FEventHandler() {
+    private static final FMenuItem prefsItem = new FMenuItem(Forge.getLocalizer().getMessage("Preferences"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(prefsScreen);
@@ -85,7 +84,7 @@ public class ConquestMenu extends FPopupMenu {
     static {
         //the first time planarconquest mode is launched, add button for it if in Landscape mode
         if (Forge.isLandscapeMode()) {
-            HomeScreen.instance.addButtonForMode("-"+Localizer.getInstance().getMessage("lblPlanarConquest"), new FEventHandler() {
+            HomeScreen.instance.addButtonForMode("-"+Forge.getLocalizer().getMessage("lblPlanarConquest"), new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     launchPlanarConquest(LaunchReason.StartPlanarConquest);
@@ -109,7 +108,7 @@ public class ConquestMenu extends FPopupMenu {
 
     public static void launchPlanarConquest(final LaunchReason reason) {
         Forge.lastButtonIndex = 7;
-        LoadingOverlay.show(Localizer.getInstance().getMessage("lblLoadingCurrentConquest"), new Runnable() {
+        LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingCurrentConquest"), new Runnable() {
             @Override
             @SuppressWarnings("unchecked")
             public void run() {

@@ -170,11 +170,11 @@ public final class CardPredicates {
         };
     }
 
-    public static final Predicate<Card> sharesControllerWith(final Card color) {
+    public static final Predicate<Card> sharesControllerWith(final Card card) {
         return new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {
-                return c.sharesControllerWith(color);
+                return c.sharesControllerWith(card);
             }
         };
     }

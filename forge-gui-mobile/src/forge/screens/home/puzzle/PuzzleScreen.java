@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import forge.Forge;
 import forge.assets.FSkinFont;
 import forge.deck.Deck;
 import forge.game.GameRules;
@@ -23,7 +24,6 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextArea;
 import forge.toolbox.GuiChoose;
 import forge.util.Callback;
-import forge.util.Localizer;
 import forge.util.Utils;
 
 public class PuzzleScreen extends LaunchScreen {
@@ -31,9 +31,9 @@ public class PuzzleScreen extends LaunchScreen {
     private static final float PADDING = Utils.scale(10);
 
     private final FTextArea lblDesc = add(new FTextArea(false,
-            Localizer.getInstance().getMessage("lblPuzzleText1") + "\n\n" +
-            Localizer.getInstance().getMessage("lblPuzzleText2") + "\n\n" +
-            Localizer.getInstance().getMessage("lblPuzzleText3")));
+            Forge.getLocalizer().getMessage("lblPuzzleText1") + "\n\n" +
+            Forge.getLocalizer().getMessage("lblPuzzleText2") + "\n\n" +
+            Forge.getLocalizer().getMessage("lblPuzzleText3")));
 
     public PuzzleScreen() {
         super(null, NewGameMenu.getMenu());
@@ -56,11 +56,11 @@ public class PuzzleScreen extends LaunchScreen {
         final ArrayList<Puzzle> puzzles = PuzzleIO.loadPuzzles(ForgeConstants.PUZZLE_DIR);
         Collections.sort(puzzles);
 
-        GuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseAPuzzle"), puzzles, new Callback<Puzzle>() {
+        GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblChooseAPuzzle"), puzzles, new Callback<Puzzle>() {
             @Override
             public void run(final Puzzle chosen) {
                 if (chosen != null) {
-                    LoadingOverlay.show(Localizer.getInstance().getMessage("lblLoadingThePuzzle"), new Runnable() {
+                    LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingThePuzzle"), new Runnable() {
                         @Override
                         public void run() {
                             // Load selected puzzle

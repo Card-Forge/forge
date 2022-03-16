@@ -1,16 +1,16 @@
 {
 "com.badlogic.gdx.graphics.g2d.BitmapFont": {
 	"big": {
-		"file": "MiKrollFantasy(1).fnt"
+		"file": "LanaPixelCJK.fnt"
 	},
 	"black": {
-		"file": "MiKrollFantasy(2).fnt"
+		"file": "LanaPixelCJK.fnt"
 	},
 	"blackbig": {
-		"file": "MiKrollFantasy(3).fnt"
+		"file": "LanaPixelCJK.fnt"
 	},
 	"default": {
-		"file": "MiKrollFantasy.fnt"
+		"file": "LanaPixelCJK.fnt"
 	}
 },
 "com.badlogic.gdx.graphics.Color": {

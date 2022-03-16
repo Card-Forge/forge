@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
@@ -13,6 +14,7 @@ import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.util.CardUtil;
+import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 import forge.adventure.util.Reward;
 import forge.adventure.util.RewardActor;
@@ -23,9 +25,9 @@ import forge.assets.ImageCache;
  * Displays the rewards of a fight or a treasure
  */
 public class RewardScene extends UIScene {
-
     private TextButton doneButton;
-
+    private Label goldLabel;
+    boolean init;
     public enum Type {
         Shop,
         Loot
@@ -92,13 +94,18 @@ public class RewardScene extends UIScene {
     @Override
     public void resLoaded() {
         super.resLoaded();
-        ui.onButtonPress("done", new Runnable() {
-            @Override
-            public void run() {
-                RewardScene.this.done();
-            }
-        });
-        doneButton = ui.findActor("done");
+        if(!this.init) {
+            ui.onButtonPress("done", new Runnable() {
+                @Override
+                public void run() {
+                    RewardScene.this.done();
+                }
+            });
+            doneButton = ui.findActor("done");
+            goldLabel = new Label("0", Controls.GetSkin().get("white", Label.LabelStyle.class));
+            goldLabel.setBounds(0, 0, 100, 16);
+            this.init = true;
+        }
     }
 
     @Override
@@ -144,10 +151,20 @@ public class RewardScene extends UIScene {
 
         switch (type) {
             case Shop:
-                doneButton.setText("Leave");
+                goldLabel.setVisible(true);
+                doneButton.setText(Forge.getLocalizer().getMessage("lblLeave"));
+                goldLabel.setText("Gold: " + String.valueOf(AdventurePlayer.current().getGold()));
+                float w = 480 - (goldLabel.getPrefWidth() + 10);
+                goldLabel.setPosition(w, 250);
+                if (!Forge.isLandscapeMode()) {
+                    goldLabel.setFontScaleX(2);
+                    w = 480/2 - goldLabel.getPrefWidth();
+                    goldLabel.setPosition(w, 250);
+                }
                 break;
             case Loot:
-                doneButton.setText("Done");
+                goldLabel.setVisible(false);
+                doneButton.setText(Forge.getLocalizer().getMessage("lblDone"));
                 break;
         }
         for (int h = 1; h < targetHeight; h++) {
@@ -213,6 +230,8 @@ public class RewardScene extends UIScene {
             }
             i++;
         }
+        if (type == Type.Shop)
+            stage.addActor(goldLabel);
         updateBuyButtons();
     }
 
@@ -255,9 +274,12 @@ public class RewardScene extends UIScene {
                         Current.player().takeGold(price);
                         Current.player().addReward(reward.getReward());
                         setDisabled(true);
-                        reward.flip();
-                        remove();
+                        reward.sold();
+                        getColor().a = 0.5f;
+                        setText("SOLD");
                         updateBuyButtons();
+                        removeListener(this);
+                        goldLabel.setText("Gold: " + String.valueOf(AdventurePlayer.current().getGold()));
                     }
                 }
             });

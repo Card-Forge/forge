@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.badlogic.gdx.utils.Align;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -35,7 +36,6 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
-import forge.util.Localizer;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
 
@@ -45,9 +45,9 @@ public class LoadGauntletScreen extends LaunchScreen {
     private static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
 
     private final GauntletFileLister lstGauntlets = add(new GauntletFileLister());
-    private final FButton btnNewGauntlet = add(new FButton(Localizer.getInstance().getMessage("lblNewQuest")));
-    private final FButton btnRenameGauntlet = add(new FButton(Localizer.getInstance().getMessage("lblRename")));
-    private final FButton btnDeleteGauntlet = add(new FButton(Localizer.getInstance().getMessage("lblDelete")));
+    private final FButton btnNewGauntlet = add(new FButton(Forge.getLocalizer().getMessage("lblNewQuest")));
+    private final FButton btnRenameGauntlet = add(new FButton(Forge.getLocalizer().getMessage("lblRename")));
+    private final FButton btnDeleteGauntlet = add(new FButton(Forge.getLocalizer().getMessage("lblDelete")));
 
     public LoadGauntletScreen() {
         super(null, LoadGameMenu.getMenu());
@@ -117,14 +117,14 @@ public class LoadGauntletScreen extends LaunchScreen {
     protected void startMatch() {
         final GauntletData gauntlet = lstGauntlets.getSelectedGauntlet();
         if (gauntlet == null) {
-            FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblYouMustCreateAndSelectGauntlet"));
+            FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblYouMustCreateAndSelectGauntlet"));
             return;
         }
         FModel.setGauntletData(gauntlet);
         Deck userDeck = gauntlet.getUserDeck();
         if (userDeck == null) {
             //give user a chance to select a deck if none saved with gauntlet
-            FDeckChooser.promptForDeck(Localizer.getInstance().getMessage("lblSelectGauntletDeck"), GameType.Gauntlet, false, new Callback<Deck>() {
+            FDeckChooser.promptForDeck(Forge.getLocalizer().getMessage("lblSelectGauntletDeck"), GameType.Gauntlet, false, new Callback<Deck>() {
                 @Override
                 public void run(Deck result) {
                     if (result != null) {
@@ -136,7 +136,7 @@ public class LoadGauntletScreen extends LaunchScreen {
             return;
         }
 
-        LoadingOverlay.show(Localizer.getInstance().getMessage("lblLoadingNewGame"), new Runnable() {
+        LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), new Runnable() {
             @Override
             public void run() {
                 final GauntletData gauntlet = FModel.getGauntletData();
@@ -158,14 +158,14 @@ public class LoadGauntletScreen extends LaunchScreen {
                 String gauntletName;
                 String oldGauntletName = gauntlet.getName();
                 while (true) {
-                    gauntletName = SOptionPane.showInputDialog(Localizer.getInstance().getMessage("lblEnterNewGauntletGameName"), Localizer.getInstance().getMessage("lblRenameGauntlet"), null, oldGauntletName);
+                    gauntletName = SOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblEnterNewGauntletGameName"), Forge.getLocalizer().getMessage("lblRenameGauntlet"), null, oldGauntletName);
                     if (gauntletName == null) { return; }
 
                     gauntletName = QuestUtil.cleanString(gauntletName);
                     if (gauntletName.equals(oldGauntletName)) { return; } //quit if chose same name
 
                     if (gauntletName.isEmpty()) {
-                        SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblPleaseSpecifyGauntletName"));
+                        SOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblPleaseSpecifyGauntletName"));
                         continue;
                     }
 
@@ -177,7 +177,7 @@ public class LoadGauntletScreen extends LaunchScreen {
                         }
                     }
                     if (exists) {
-                        SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblGauntletNameExistsPleasePickAnotherName"));
+                        SOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblGauntletNameExistsPleasePickAnotherName"));
                         continue;
                     }
                     break;
@@ -202,8 +202,8 @@ public class LoadGauntletScreen extends LaunchScreen {
             @Override
             public void run() {
                 if (!SOptionPane.showConfirmDialog(
-                        Localizer.getInstance().getMessage("lblAreYouSuerDeleteGauntlet", gauntlet.getName()),
-                        Localizer.getInstance().getMessage("lblDeleteGauntlet"), Localizer.getInstance().getMessage("lblDelete"), Localizer.getInstance().getMessage("lblCancel"))) {
+                        Forge.getLocalizer().getMessage("lblAreYouSuerDeleteGauntlet", gauntlet.getName()),
+                        Forge.getLocalizer().getMessage("lblDeleteGauntlet"), Forge.getLocalizer().getMessage("lblDelete"), Forge.getLocalizer().getMessage("lblCancel"))) {
                     return;
                 }
 

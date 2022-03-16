@@ -50,7 +50,6 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.GuiChoose;
 import forge.toolbox.ListChooser;
 import forge.util.Callback;
-import forge.util.Localizer;
 import forge.util.Utils;
 import forge.util.storage.IStorage;
 
@@ -73,15 +72,14 @@ public class FDeckChooser extends FScreen {
     private boolean firstActivation = true;
 
     private final DeckManager lstDecks;
-    private final FButton btnNewDeck = new FButton(Localizer.getInstance().getMessage("lblNewDeck"));
-    private final FButton btnEditDeck = new FButton(Localizer.getInstance().getMessage("btnEditDeck"));
-    private final FButton btnViewDeck = new FButton(Localizer.getInstance().getMessage("lblViewDeck"));
-    private final FButton btnRandom = new FButton(Localizer.getInstance().getMessage("lblRandomDeck"));
+    private final FButton btnNewDeck = new FButton(Forge.getLocalizer().getInstance().getMessage("lblNewDeck"));
+    private final FButton btnEditDeck = new FButton(Forge.getLocalizer().getInstance().getMessage("btnEditDeck"));
+    private final FButton btnViewDeck = new FButton(Forge.getLocalizer().getInstance().getMessage("lblViewDeck"));
+    private final FButton btnRandom = new FButton(Forge.getLocalizer().getInstance().getMessage("lblRandomDeck"));
 
     private RegisteredPlayer player;
     private boolean isAi;
     private final ForgePreferences prefs = FModel.getPreferences();
-    private final Localizer localizer = Localizer.getInstance();
     private FPref stateSetting = null;
     private FOptionPane optionPane;
 
@@ -107,7 +105,7 @@ public class FDeckChooser extends FScreen {
         container.add(deckChooser.lstDecks);
         container.setHeight(FOptionPane.getMaxDisplayObjHeight());
 
-        deckChooser.optionPane = new FOptionPane(null, null, title, null, container, ImmutableList.of(Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel")), 0, new Callback<Integer>() {
+        deckChooser.optionPane = new FOptionPane(null, null, title, null, container, ImmutableList.of(Forge.getLocalizer().getInstance().getMessage("lblOK"), Forge.getLocalizer().getInstance().getMessage("lblCancel")), 0, new Callback<Integer>() {
             @Override
             public void run(Integer result) {
                 if (result == 0) {
@@ -350,7 +348,7 @@ public class FDeckChooser extends FScreen {
         }
         if (isGeneratedDeck(selectedDeckType)) {
             if (deck == null) {
-                FOptionPane.showErrorDialog(localizer.getMessage("lblMustSelectGenerateNewDeck"));
+                FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblMustSelectGenerateNewDeck"));
                 return;
             }
         }
@@ -424,8 +422,8 @@ public class FDeckChooser extends FScreen {
 
 
             //prompt to duplicate deck if deck doesn't exist already
-            FOptionPane.showConfirmDialog(selectedDeckType + " " + localizer.getMessage("lblCannotEditDuplicateCustomDeck").replace("%s", deck.getName()),
-                    localizer.getMessage("lblDuplicateDeck"), localizer.getMessage("lblDuplicate"), localizer.getMessage("lblCancel"), new Callback<Boolean>() {
+            FOptionPane.showConfirmDialog(selectedDeckType + " " + Forge.getLocalizer().getMessage("lblCannotEditDuplicateCustomDeck").replace("%s", deck.getName()),
+                    Forge.getLocalizer().getMessage("lblDuplicateDeck"), Forge.getLocalizer().getMessage("lblDuplicate"), Forge.getLocalizer().getMessage("lblCancel"), new Callback<Boolean>() {
                 @Override
                 public void run(Boolean result) {
                     if (result) {
@@ -1116,16 +1114,16 @@ public class FDeckChooser extends FScreen {
             btnViewDeck.setVisible(false);
             btnRandom.setWidth(btnNewDeck.getWidth());
 
-            btnNewDeck.setText(localizer.getMessage("lblGenerateNewDeck"));
+            btnNewDeck.setText(Forge.getLocalizer().getMessage("lblGenerateNewDeck"));
             switch (deckType) {
             case COLOR_DECK:
-                btnRandom.setText(localizer.getMessage("lblRandomColors"));
+                btnRandom.setText(Forge.getLocalizer().getMessage("lblRandomColors"));
                 break;
             case THEME_DECK:
-                btnRandom.setText(localizer.getMessage("lblRandomTheme"));
+                btnRandom.setText(Forge.getLocalizer().getMessage("lblRandomTheme"));
                 break;
             default:
-                btnRandom.setText(localizer.getMessage("lblRandomDeck"));
+                btnRandom.setText(Forge.getLocalizer().getMessage("lblRandomDeck"));
                 break;
             }
         }
@@ -1135,11 +1133,11 @@ public class FDeckChooser extends FScreen {
             btnViewDeck.setVisible(true);
             btnRandom.setWidth(btnNewDeck.getWidth());
 
-            btnNewDeck.setText(localizer.getMessage("lblNewDeck"));
+            btnNewDeck.setText(Forge.getLocalizer().getMessage("lblNewDeck"));
 
             if (lstDecks.getGameType() == GameType.DeckManager) {
                 //handle special case of Deck Editor screen where this button will start a game with the deck
-                btnRandom.setText(localizer.getMessage("lblTestDeck"));
+                btnRandom.setText(Forge.getLocalizer().getMessage("lblTestDeck"));
 
                 switch (selectedDeckType) {
                 case SCHEME_DECK:
@@ -1152,7 +1150,7 @@ public class FDeckChooser extends FScreen {
                 }
             }
             else {
-                btnRandom.setText(localizer.getMessage("lblRandomDeck"));
+                btnRandom.setText(Forge.getLocalizer().getMessage("lblRandomDeck"));
             }
         }
 
@@ -1437,7 +1435,7 @@ public class FDeckChooser extends FScreen {
             return;
         }
 
-        GuiChoose.getInteger(localizer.getMessage("lblHowManyOpponents"), 1, 50, new Callback<Integer>() {
+        GuiChoose.getInteger(Forge.getLocalizer().getMessage("lblHowManyOpponents"), 1, 50, new Callback<Integer>() {
             @Override
             public void run(final Integer numOpponents) {
                 if (numOpponents == null) { return; }
@@ -1475,7 +1473,7 @@ public class FDeckChooser extends FScreen {
                 }
 
                 ListChooser<DeckType> chooser = new ListChooser<>(
-                        localizer.getMessage("lblChooseAllowedDeckTypeOpponents"), 0, deckTypes.size(), deckTypes, null, new Callback<List<DeckType>>() {
+                        Forge.getLocalizer().getMessage("lblChooseAllowedDeckTypeOpponents"), 0, deckTypes.size(), deckTypes, null, new Callback<List<DeckType>>() {
                     @Override
                     public void run(final List<DeckType> allowedDeckTypes) {
                         if (allowedDeckTypes == null || allowedDeckTypes.isEmpty()) {
@@ -1495,7 +1493,7 @@ public class FDeckChooser extends FScreen {
                                 FThreads.invokeInEdtLater(new Runnable() {
                                     @Override
                                     public void run() {
-                                        LoadingOverlay.show(localizer.getMessage("lblLoadingNewGame"), new Runnable() {
+                                        LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), new Runnable() {
                                             @Override
                                             public void run() {
                                                 GauntletData gauntlet = GauntletUtil.createQuickGauntlet(userDeck, numOpponents, allowedDeckTypes, netCat);
@@ -1521,12 +1519,12 @@ public class FDeckChooser extends FScreen {
     }
 
     private void testVariantDeck(final Deck userDeck, final GameType variant) {
-        promptForDeck(localizer.getMessage("lblSelectOpponentDeck"), variant, true, new Callback<Deck>() {
+        promptForDeck(Forge.getLocalizer().getMessage("lblSelectOpponentDeck"), variant, true, new Callback<Deck>() {
             @Override
             public void run(final Deck aiDeck) {
                 if (aiDeck == null) { return; }
 
-                LoadingOverlay.show(localizer.getMessage("lblLoadingNewGame"), new Runnable() {
+                LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), new Runnable() {
                     @Override
                     public void run() {
                         Set<GameType> appliedVariants = new HashSet<>();

@@ -26,6 +26,7 @@ public class DeckSelectScene extends UIScene {
     Label header;
     TextButton back, edit, rename;
     int currentSlot = 0;
+    boolean init;
 
     public DeckSelectScene() {
         super(Forge.isLandscapeMode() ? "ui/deck_selector_mobile.json" : "ui/deck_selector.json");
@@ -94,103 +95,108 @@ public class DeckSelectScene extends UIScene {
     @Override
     public void resLoaded() {
         super.resLoaded();
-        layout = new Table();
-        stage.addActor(layout);
+        if(!this.init) {
+            layout = new Table();
+            stage.addActor(layout);
 
-        header = Controls.newLabel("Select your Deck");
-        layout.add(header).colspan(2).align(Align.center).pad(2, 5, 2, 5);
-        layout.row();
-        for (int i = 0; i < AdventurePlayer.NUMBER_OF_DECKS; i++)
-            addDeckSlot("Deck:" + (i + 1), i);
+            header = Controls.newLabel(Forge.getLocalizer().getMessage("lblSelectYourDeck"));
+            layout.add(header).colspan(2).align(Align.center).pad(2, 5, 2, 5);
+            layout.row();
+            for (int i = 0; i < AdventurePlayer.NUMBER_OF_DECKS; i++)
+                addDeckSlot(Forge.getLocalizer().getMessage("lblDeck")+": " + (i + 1), i);
 
-        dialog = Controls.newDialog("Save");
-        textInput = Controls.newTextField("");
-        if (!Forge.isLandscapeMode()) {
-            dialog.getButtonTable().add(Controls.newLabel("Name your new save file.")).colspan(2).pad(2, 15, 2, 15);
-            dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newLabel("Name:")).align(Align.left).pad(2, 15, 2, 2);
-            dialog.getButtonTable().add(textInput).fillX().expandX().padRight(15);
-            dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newTextButton("Rename", new Runnable() {
+            dialog = Controls.newDialog(Forge.getLocalizer().getMessage("lblSave"));
+            textInput = Controls.newTextField("");
+            if (!Forge.isLandscapeMode()) {
+                dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2).pad(2, 15, 2, 15);
+                dialog.getButtonTable().row();
+                dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName")+": ")).align(Align.left).pad(2, 15, 2, 2);
+                dialog.getButtonTable().add(textInput).fillX().expandX().padRight(15);
+                dialog.getButtonTable().row();
+                dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblRename"), new Runnable() {
+                    @Override
+                    public void run() {
+                        DeckSelectScene.this.rename();
+                    }
+                })).align(Align.left).padLeft(15);
+                dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbort"), new Runnable() {
+                    @Override
+                    public void run() {
+                        dialog.hide();
+                    }
+                })).align(Align.right).padRight(15);
+            } else {
+                dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2);
+                dialog.getButtonTable().row();
+                dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName")+": ")).align(Align.left);
+                dialog.getButtonTable().add(textInput).fillX().expandX();
+                dialog.getButtonTable().row();
+                dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblRename"), new Runnable() {
+                    @Override
+                    public void run() {
+                        DeckSelectScene.this.rename();
+                    }
+                })).align(Align.left);
+                dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbort"), new Runnable() {
+                    @Override
+                    public void run() {
+                        dialog.hide();
+                    }
+                })).align(Align.left);
+            }
+            back = ui.findActor("return");
+            back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
+            edit = ui.findActor("edit");
+            edit.getLabel().setText(Forge.getLocalizer().getMessage("lblEdit"));
+            rename = ui.findActor("rename");
+            rename.getLabel().setText(Forge.getLocalizer().getMessage("lblRename"));
+            ui.onButtonPress("return", new Runnable() {
                 @Override
                 public void run() {
-                    DeckSelectScene.this.rename();
+                    DeckSelectScene.this.back();
                 }
-            })).align(Align.left).padLeft(15);
-            dialog.getButtonTable().add(Controls.newTextButton("Abort", new Runnable() {
+            });
+            ui.onButtonPress("edit", new Runnable() {
                 @Override
                 public void run() {
-                    dialog.hide();
+                    DeckSelectScene.this.edit();
                 }
-            })).align(Align.right).padRight(15);
-        } else {
-            dialog.getButtonTable().add(Controls.newLabel("Name your new save file.")).colspan(2);
-            dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newLabel("Name:")).align(Align.left);
-            dialog.getButtonTable().add(textInput).fillX().expandX();
-            dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newTextButton("Rename", new Runnable() {
+            });
+            ui.onButtonPress("rename", new Runnable() {
                 @Override
                 public void run() {
-                    DeckSelectScene.this.rename();
+                    textInput.setText(Current.player().getSelectedDeck().getName());
+                    dialog.show(stage);
+                    stage.setKeyboardFocus(textInput);
                 }
-            })).align(Align.left);
-            dialog.getButtonTable().add(Controls.newTextButton("Abort", new Runnable() {
-                @Override
-                public void run() {
-                    dialog.hide();
-                }
-            })).align(Align.left);
+            });
+            defColor = ui.findActor("return").getColor();
+
+            ScrollPane scrollPane = ui.findActor("deckSlots");
+            scrollPane.setActor(layout);
+            if (!Forge.isLandscapeMode()) {
+                float w = Scene.GetIntendedWidth();
+                float sW = w - 20;
+                float oX = w/2 - sW/2;
+                float h = Scene.GetIntendedHeight();
+                float sH = (h - 10)/12;
+                scrollPane.setWidth(sW);
+                scrollPane.setHeight(sH*11);
+                scrollPane.setX(oX);
+                float rW = (w - 20)/3;
+                float rX = w/2 - rW/2;
+                rename.setWidth(rW);
+                rename.setHeight(20);
+                rename.setX(rX);
+                back.setWidth(rW);
+                back.setHeight(20);
+                back.setX(rename.getX()-rW);
+                edit.setWidth(rW);
+                edit.setHeight(20);
+                edit.setX(rename.getRight());
+            }
+            this.init = true;
         }
-        back = ui.findActor("return");
-        edit = ui.findActor("edit");
-        rename = ui.findActor("rename");
-        ui.onButtonPress("return", new Runnable() {
-            @Override
-            public void run() {
-                DeckSelectScene.this.back();
-            }
-        });
-        ui.onButtonPress("edit", new Runnable() {
-            @Override
-            public void run() {
-                DeckSelectScene.this.edit();
-            }
-        });
-        ui.onButtonPress("rename", new Runnable() {
-            @Override
-            public void run() {
-                textInput.setText(Current.player().getSelectedDeck().getName());
-                dialog.show(stage);
-                stage.setKeyboardFocus(textInput);
-            }
-        });
-        defColor = ui.findActor("return").getColor();
-
-        ScrollPane scrollPane = ui.findActor("deckSlots");
-        scrollPane.setActor(layout);
-        if (!Forge.isLandscapeMode()) {
-            float w = Scene.GetIntendedWidth();
-            float sW = w - 20;
-            float oX = w/2 - sW/2;
-            float h = Scene.GetIntendedHeight();
-            float sH = (h - 10)/12;
-            scrollPane.setWidth(sW);
-            scrollPane.setHeight(sH*11);
-            scrollPane.setX(oX);
-            float rW = (w - 20)/3;
-            float rX = w/2 - rW/2;
-            rename.setWidth(rW);
-            rename.setHeight(20);
-            rename.setX(rX);
-            back.setWidth(rW);
-            back.setHeight(20);
-            back.setX(rename.getX()-rW);
-            edit.setWidth(rW);
-            edit.setHeight(20);
-            edit.setX(rename.getRight());
-        }
-
     }
 
     private void rename() {

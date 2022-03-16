@@ -23,7 +23,6 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
-import forge.util.Localizer;
 import forge.util.Utils;
 
 public class AchievementsScreen extends FScreen {
@@ -50,7 +49,7 @@ public class AchievementsScreen extends FScreen {
     private final TrophyCase trophyCase = add(new TrophyCase());
 
     private AchievementsScreen() {
-        super(Localizer.getInstance().getMessage("lblAchievements"));
+        super(Forge.getLocalizer().getMessage("lblAchievements"));
 
         AchievementCollection.buildComboBox(cbCollections);
 

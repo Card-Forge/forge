@@ -2,6 +2,7 @@ package forge.screens.planarconquest;
 
 import java.util.Map;
 
+import forge.Forge;
 import forge.deck.DeckProxy;
 import forge.deck.FDeckEditor;
 import forge.game.GameType;
@@ -13,11 +14,10 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.util.Localizer;
 
 public class ConquestDeckEditor extends FDeckEditor {
     public ConquestDeckEditor(final ConquestCommander commander) {
-        super(EditorType.PlanarConquest, new DeckProxy(commander.getDeck(), Localizer.getInstance().getMessage("lblConquestCommander"),
+        super(EditorType.PlanarConquest, new DeckProxy(commander.getDeck(), Forge.getLocalizer().getMessage("lblConquestCommander"),
                 GameType.PlanarConquest, FModel.getConquest().getDecks()), true);
 
         setSaveHandler(new FEventHandler() {

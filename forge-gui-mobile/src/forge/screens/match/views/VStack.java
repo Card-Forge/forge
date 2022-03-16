@@ -39,7 +39,6 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
-import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.Utils;
 import forge.util.collect.FCollectionView;
@@ -99,7 +98,7 @@ public class VStack extends FDropDown {
         final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
         if(stack!=null) {
             if (isVisible() && stack.isEmpty()) { //visible stack but empty already
-                getMenuTab().setText(Localizer.getInstance().getMessage("lblStack") + " (" + 0 + ")");
+                getMenuTab().setText(Forge.getLocalizer().getMessage("lblStack") + " (" + 0 + ")");
                 MatchController.getView().getStack().hide();
             }
         }
@@ -115,7 +114,7 @@ public class VStack extends FDropDown {
         if (stackSize != stack.size()) {
             int oldStackSize = stackSize;
             stackSize = stack.size();
-            getMenuTab().setText(Localizer.getInstance().getMessage("lblStack") + " (" + stackSize + ")");
+            getMenuTab().setText(Forge.getLocalizer().getMessage("lblStack") + " (" + stackSize + ")");
 
             if (stackSize > 0) {
                 if (!isVisible()) {
@@ -150,7 +149,7 @@ public class VStack extends FDropDown {
 
         final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
         if (stack.isEmpty()) { //show label if stack empty
-            FLabel label = add(new FLabel.Builder().text("[" + Localizer.getInstance().getMessage("lblEmpty") + "]").font(FONT).align(Align.center).build());
+            FLabel label = add(new FLabel.Builder().text("[" + Forge.getLocalizer().getMessage("lblEmpty") + "]").font(FONT).align(Align.center).build());
 
             float height = Math.round(label.getAutoSizeBounds().height) + 2 * PADDING;
             label.setBounds(x, y, width, height);
@@ -288,7 +287,7 @@ public class VStack extends FDropDown {
                         protected void buildMenu() {
                             final String key = stackInstance.getKey();
                             final boolean autoYield = gui.shouldAutoYield(key);
-                            addItem(new FCheckBoxMenuItem(Localizer.getInstance().getMessage("cbpAutoYieldMode"), autoYield,
+                            addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("cbpAutoYieldMode"), autoYield,
                                     new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
@@ -301,7 +300,7 @@ public class VStack extends FDropDown {
                             }));
                             if (stackInstance.isOptionalTrigger() && stackInstance.getActivatingPlayer().equals(player)) {
                                 final int triggerID = stackInstance.getSourceTrigger();
-                                addItem(new FCheckBoxMenuItem(Localizer.getInstance().getMessage("lblAlwaysYes"),
+                                addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysYes"),
                                         gui.shouldAlwaysAcceptTrigger(triggerID),
                                         new FEventHandler() {
                                     @Override
@@ -318,7 +317,7 @@ public class VStack extends FDropDown {
                                         }
                                     }
                                 }));
-                                addItem(new FCheckBoxMenuItem(Localizer.getInstance().getMessage("lblAlwaysNo"),
+                                addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysNo"),
                                         gui.shouldAlwaysDeclineTrigger(triggerID),
                                         new FEventHandler() {
                                     @Override
@@ -336,7 +335,7 @@ public class VStack extends FDropDown {
                                     }
                                 }));
                             }
-                            addItem(new FMenuItem(Localizer.getInstance().getMessage("lblZoomOrDetails"), new FEventHandler() {
+                            addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblZoomOrDetails"), new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
                                     CardZoom.show(stackInstance.getSourceCard());

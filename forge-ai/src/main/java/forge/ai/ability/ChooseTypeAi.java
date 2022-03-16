@@ -7,7 +7,6 @@ import java.util.Set;
 import com.google.common.base.Predicates;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import forge.ai.AiCardMemory;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
@@ -111,10 +110,8 @@ public class ChooseTypeAi extends SpellAbilityAi {
         boolean isCurse = sa.isCurse();
 
         if (sa.usesTargeting()) {
-            final List<Player> oppList = Lists.newArrayList(Iterables.filter(
-                    ai.getOpponents(), PlayerPredicates.isTargetableBy(sa)));
-            final List<Player> alliesList = Lists.newArrayList(Iterables.filter(
-                    ai.getAllies(), PlayerPredicates.isTargetableBy(sa)));
+            final List<Player> oppList = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
+            final List<Player> alliesList = ai.getAllies().filter(PlayerPredicates.isTargetableBy(sa));
 
             sa.resetTargets();
 

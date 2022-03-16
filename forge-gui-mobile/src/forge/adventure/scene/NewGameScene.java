@@ -43,6 +43,7 @@ public class NewGameScene extends UIScene {
     private Label titleL, avatarL, nameL, raceL, genderL, difficultyL, deckL;
     private ImageButton leftArrow, rightArrow;
     private TextButton backButton, startButton;
+    boolean init;
 
     public NewGameScene() {
         super(Forge.isLandscapeMode() ? "ui/new_game_mobile.json" : "ui/new_game.json");
@@ -79,147 +80,162 @@ public class NewGameScene extends UIScene {
     @Override
     public void resLoaded() {
         super.resLoaded();
-        selectedName = ui.findActor("nameField");
-        selectedName.setText(NameGenerator.getRandomName("Any", "Any", ""));
-        avatarImage = ui.findActor("avatarPreview");
-        gender = ui.findActor("gender");
-        gender.setTextList(new String[]{"Male", "Female"});
-        gender.addListener(new EventListener() {
-            @Override
-            public boolean handle(Event event) {
-                return NewGameScene.this.updateAvatar();
+        if (!this.init) {
+            selectedName = ui.findActor("nameField");
+            selectedName.setText(NameGenerator.getRandomName("Any", "Any", ""));
+            avatarImage = ui.findActor("avatarPreview");
+            gender = ui.findActor("gender");
+            gender.setTextList(new String[]{"Male", "Female"});
+            gender.addListener(new EventListener() {
+                @Override
+                public boolean handle(Event event) {
+                    return NewGameScene.this.updateAvatar();
+                }
+            });
+            Random rand = new Random();
+
+            deck = ui.findActor("deck");
+
+            starterDeck = Config.instance().starterDecks();
+            Array<String> stringList = new Array<>(starterDeck.length);
+            for (Deck deck : starterDeck)
+                stringList.add(deck.getName());
+
+            deck.setTextList(stringList);
+
+            race = ui.findActor("race");
+            race.addListener(new EventListener() {
+                @Override
+                public boolean handle(Event event) {
+                    return NewGameScene.this.updateAvatar();
+                }
+            });
+            race.setTextList(HeroListData.getRaces());
+            difficulty = ui.findActor("difficulty");
+
+            Array<String> diffList = new Array<>(starterDeck.length);
+            int i = 0;
+            int startingDifficulty = 0;
+            for (DifficultyData diff : Config.instance().getConfigData().difficulties) {
+                if (diff.startingDifficulty)
+                    startingDifficulty = i;
+                diffList.add(diff.name);
+                i++;
             }
-        });
-        Random rand = new Random();
+            difficulty.setTextList(diffList);
+            difficulty.setCurrentIndex(startingDifficulty);
+            avatarIndex = rand.nextInt();
+            gender.setCurrentIndex(rand.nextInt());
+            deck.setCurrentIndex(rand.nextInt());
+            race.setCurrentIndex(rand.nextInt());
+            ui.onButtonPress("back", new Runnable() {
+                @Override
+                public void run() {
+                    NewGameScene.this.back();
+                }
+            });
+            ui.onButtonPress("start", new Runnable() {
+                @Override
+                public void run() {
+                    NewGameScene.this.start();
+                }
+            });
+            ui.onButtonPress("leftAvatar", new Runnable() {
+                @Override
+                public void run() {
+                    NewGameScene.this.leftAvatar();
+                }
+            });
+            ui.onButtonPress("rightAvatar", new Runnable() {
+                @Override
+                public void run() {
+                    NewGameScene.this.rightAvatar();
+                }
+            });
 
-        deck = ui.findActor("deck");
+            scrollPane = ui.findActor("scroll");
+            titleL = ui.findActor("titleL");
+            titleL.setScale(2, 2);
+            titleL.setText(Forge.getLocalizer().getMessage("lblCreateACharacter"));
+            titleL.setX(scrollPane.getX() + 20);
+            avatarL = ui.findActor("avatarL");
+            avatarL.setText(Forge.getLocalizer().getMessage("lblAvatar"));
+            nameL = ui.findActor("nameL");
+            nameL.setText(Forge.getLocalizer().getMessage("lblName"));
+            raceL = ui.findActor("raceL");
+            raceL.setText(Forge.getLocalizer().getMessage("lblRace"));
+            genderL = ui.findActor("genderL");
+            genderL.setText(Forge.getLocalizer().getMessage("lblGender"));
+            difficultyL = ui.findActor("difficultyL");
+            difficultyL.setText(Forge.getLocalizer().getMessage("lblDifficulty"));
+            deckL = ui.findActor("deckL");
+            deckL.setText(Forge.getLocalizer().getMessage("lblDeck"));
+            leftArrow = ui.findActor("leftAvatar");
+            rightArrow = ui.findActor("rightAvatar");
+            backButton = ui.findActor("back");
+            backButton.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
+            startButton = ui.findActor("start");
+            startButton.getLabel().setText(Forge.getLocalizer().getMessage("lblStart"));
+            if (!Forge.isLandscapeMode()) {
+                float w = Scene.GetIntendedWidth();
+                float sW = w - 20;
+                float oX = w/2 - sW/2;
+                float h = Scene.GetIntendedHeight();
+                float sH = (h - 10)/12;
 
-        starterDeck = Config.instance().starterDecks();
-        Array<String> stringList = new Array<>(starterDeck.length);
-        for (Deck deck : starterDeck)
-            stringList.add(deck.getName());
+                selectedName.setWidth(280);
+                selectedName.setX(w/2- selectedName.getWidth()/2);
+                nameL.setFontScaleX(2);
 
-        deck.setTextList(stringList);
+                titleL.setScale(4, 2);
+                titleL.setFontScale(4, 2);
+                titleL.setX(scrollPane.getX() + 20);
 
-        race = ui.findActor("race");
-        race.addListener(new EventListener() {
-            @Override
-            public boolean handle(Event event) {
-                return NewGameScene.this.updateAvatar();
+                avatarImage.setScaleX(2);
+                avatarImage.setX(w/2-avatarImage.getWidth());
+
+                leftArrow.getImage().setScaleX(2);
+                leftArrow.setX(selectedName.getX());
+                rightArrow.getImage().setScaleX(2);
+                rightArrow.setX(selectedName.getRight()-(rightArrow.getWidth()*2));
+
+                avatarL.setFontScaleX(2);
+
+                race.setScaleX(2);
+                race.setWidth(140);
+                race.setX(selectedName.getX());
+                raceL.setFontScaleX(2);
+
+                gender.setScaleX(2);
+                gender.setWidth(140);
+                gender.setX(selectedName.getX());
+                genderL.setFontScaleX(2);
+
+                difficulty.setScaleX(2);
+                difficulty.setWidth(140);
+                difficulty.setX(selectedName.getX());
+                difficultyL.setFontScaleX(2);
+
+                deck.setScaleX(2);
+                deck.setWidth(140);
+                deck.setX(selectedName.getX());
+                deckL.setFontScaleX(2);
+
+                scrollPane.setWidth(sW);
+                scrollPane.setHeight(sH*11);
+                scrollPane.setX(oX);
+
+                float bW = w - 165;
+                float bX = w/2 - bW/2;
+                backButton.setWidth(bW/2);
+                backButton.setHeight(20);
+                backButton.setX(bX);
+                startButton.setWidth(bW/2);
+                startButton.setHeight(20);
+                startButton.setX(backButton.getRight());
+
             }
-        });
-        race.setTextList(HeroListData.getRaces());
-        difficulty = ui.findActor("difficulty");
-
-        Array<String> diffList = new Array<>(starterDeck.length);
-        int i = 0;
-        int startingDifficulty = 0;
-        for (DifficultyData diff : Config.instance().getConfigData().difficulties) {
-            if (diff.startingDifficulty)
-                startingDifficulty = i;
-            diffList.add(diff.name);
-            i++;
-        }
-        difficulty.setTextList(diffList);
-        difficulty.setCurrentIndex(startingDifficulty);
-        avatarIndex = rand.nextInt();
-        gender.setCurrentIndex(rand.nextInt());
-        deck.setCurrentIndex(rand.nextInt());
-        race.setCurrentIndex(rand.nextInt());
-        ui.onButtonPress("back", new Runnable() {
-            @Override
-            public void run() {
-                NewGameScene.this.back();
-            }
-        });
-        ui.onButtonPress("start", new Runnable() {
-            @Override
-            public void run() {
-                NewGameScene.this.start();
-            }
-        });
-        ui.onButtonPress("leftAvatar", new Runnable() {
-            @Override
-            public void run() {
-                NewGameScene.this.leftAvatar();
-            }
-        });
-        ui.onButtonPress("rightAvatar", new Runnable() {
-            @Override
-            public void run() {
-                NewGameScene.this.rightAvatar();
-            }
-        });
-
-        scrollPane = ui.findActor("scroll");
-        titleL = ui.findActor("titleL");
-        avatarL = ui.findActor("avatarL");
-        nameL = ui.findActor("nameL");
-        raceL = ui.findActor("raceL");
-        genderL = ui.findActor("genderL");
-        difficultyL = ui.findActor("difficultyL");
-        deckL = ui.findActor("deckL");
-        leftArrow = ui.findActor("leftAvatar");
-        rightArrow = ui.findActor("rightAvatar");
-        backButton = ui.findActor("back");
-        startButton = ui.findActor("start");
-        if (!Forge.isLandscapeMode()) {
-            float w = Scene.GetIntendedWidth();
-            float sW = w - 20;
-            float oX = w/2 - sW/2;
-            float h = Scene.GetIntendedHeight();
-            float sH = (h - 10)/12;
-
-            selectedName.setWidth(280);
-            selectedName.setX(w/2- selectedName.getWidth()/2);
-            nameL.setFontScaleX(2);
-
-            titleL.setFontScaleX(2);
-            titleL.setX(selectedName.getX()-20);
-
-            avatarImage.setScaleX(2);
-            avatarImage.setX(w/2-avatarImage.getWidth());
-
-            leftArrow.getImage().setScaleX(2);
-            leftArrow.setX(selectedName.getX());
-            rightArrow.getImage().setScaleX(2);
-            rightArrow.setX(selectedName.getRight()-(rightArrow.getWidth()*2));
-
-            avatarL.setFontScaleX(2);
-
-            race.setScaleX(2);
-            race.setWidth(140);
-            race.setX(selectedName.getX());
-            raceL.setFontScaleX(2);
-
-            gender.setScaleX(2);
-            gender.setWidth(140);
-            gender.setX(selectedName.getX());
-            genderL.setFontScaleX(2);
-
-            difficulty.setScaleX(2);
-            difficulty.setWidth(140);
-            difficulty.setX(selectedName.getX());
-            difficultyL.setFontScaleX(2);
-
-            deck.setScaleX(2);
-            deck.setWidth(140);
-            deck.setX(selectedName.getX());
-            deckL.setFontScaleX(2);
-
-            scrollPane.setWidth(sW);
-            scrollPane.setHeight(sH*11);
-            scrollPane.setX(oX);
-
-            float bW = w - 165;
-            float bX = w/2 - bW/2;
-            backButton.setWidth(bW/2);
-            backButton.setHeight(20);
-            backButton.setX(bX);
-            startButton.setWidth(bW/2);
-            startButton.setHeight(20);
-            startButton.setX(backButton.getRight());
-
+            this.init = true;
         }
         updateAvatar();
     }
@@ -236,7 +252,6 @@ public class NewGameScene extends UIScene {
     }
 
     private boolean updateAvatar() {
-
         avatarImage.setDrawable(new TextureRegionDrawable(HeroListData.getAvatar(race.getCurrentIndex(), gender.getCurrentIndex() != 0, avatarIndex)));
         return false;
     }

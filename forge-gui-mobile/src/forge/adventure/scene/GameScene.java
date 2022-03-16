@@ -12,10 +12,9 @@ import forge.adventure.stage.WorldStage;
  */
 public class GameScene extends HudScene {
     private float cameraWidth = 0f, cameraHeight = 0f;
-
+    boolean init;
     public GameScene() {
         super(WorldStage.getInstance());
-
     }
 
     @Override
@@ -25,29 +24,26 @@ public class GameScene extends HudScene {
 
     @Override
     public void act(float delta) {
-
         stage.act(delta);
-
-
     }
 
     @Override
     public void render() {
-
-
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
         hud.draw();
-
     }
 
     @Override
     public void resLoaded() {
-        //set initial camera width and height
-        if (cameraWidth == 0f)
-            cameraWidth = stage.getCamera().viewportWidth;
-        if (cameraHeight == 0f)
-            cameraHeight = stage.getCamera().viewportHeight;
+        if (!this.init) {
+            //set initial camera width and height
+            if (cameraWidth == 0f)
+                cameraWidth = stage.getCamera().viewportWidth;
+            if (cameraHeight == 0f)
+                cameraHeight = stage.getCamera().viewportHeight;
+            this.init = true;
+        }
     }
 
     @Override

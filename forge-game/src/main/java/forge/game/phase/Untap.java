@@ -57,12 +57,12 @@ import forge.game.zone.ZoneType;
 public class Untap extends Phase {
     private static final long serialVersionUID = 4515266331266259123L;
     protected final Game game;
-    
+
     public Untap(final Game game0) {
         super(PhaseType.UNTAP);
         game = game0;
     }
-    
+
     /**
      * <p>
      * Executes any hardcoded triggers that happen "at end of combat".
@@ -108,7 +108,7 @@ public class Untap extends Phase {
             return Untap.canUntap(c);
         }
     };
-    
+
     /**
      * <p>
      * doUntap.
@@ -296,7 +296,7 @@ public class Untap extends Phase {
 
         if (game.isDay() && !cantBeNight && !Iterables.any(casted, CardPredicates.isController(previous))) {
             game.setDayTime(true);
-        } else if (game.isNight() && Iterables.size(Iterables.filter(casted, CardPredicates.isController(previous))) > 1) {
+        } else if (game.isNight() && CardLists.count(casted, CardPredicates.isController(previous)) > 1) {
             game.setDayTime(false);
         }
     }

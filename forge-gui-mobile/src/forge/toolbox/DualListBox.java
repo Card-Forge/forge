@@ -7,10 +7,10 @@ import java.util.List;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.utils.Align;
 
+import forge.Forge;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.util.Callback;
-import forge.util.Localizer;
 
 // An input box for handling the order of choices.
 // Left box has the original choices
@@ -114,8 +114,8 @@ public class DualListBox<T> extends FDialog {
         };
 
         // Dual List Complete Buttons
-        initButton(0, Localizer.getInstance().getMessage("lblOK"), onAccept);
-        initButton(1, Localizer.getInstance().getMessage("lblAuto"), new FEventHandler() {
+        initButton(0, Forge.getLocalizer().getMessage("lblOK"), onAccept);
+        initButton(1, Forge.getLocalizer().getMessage("lblAuto"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 addAll();
@@ -123,7 +123,7 @@ public class DualListBox<T> extends FDialog {
             }
         });
 
-        selectOrder = add(new FLabel.Builder().align(Align.center).text(Localizer.getInstance().getMessage("lblSelectOrder")).build());
+        selectOrder = add(new FLabel.Builder().align(Align.center).text(Forge.getLocalizer().getMessage("lblSelectOrder")).build());
         orderedLabel = add(new FLabel.Builder().align(Align.center).build());
 
         setButtonState();

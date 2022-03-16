@@ -8,8 +8,7 @@ import com.google.common.base.Predicates;
  */
 public abstract class ItemPredicate {
 
-    // Static builder methods - they choose concrete implementation by
-    // themselves
+    // Static builder methods - they choose concrete implementation by themselves
 
     public static final Predicate<Object> IsBoosterPack = Predicates.instanceOf(BoosterPack.class);
     public static final Predicate<Object> IsPrebuiltDeck = Predicates.instanceOf(PreconDeck.class);

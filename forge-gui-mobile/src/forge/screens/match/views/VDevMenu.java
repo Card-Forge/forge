@@ -1,18 +1,18 @@
 package forge.screens.match.views;
 
+import forge.Forge;
 import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.screens.match.MatchController;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.util.Localizer;
 import forge.util.ThreadUtil;
 
 public class VDevMenu extends FDropDownMenu {
     @Override
     protected void buildMenu() {
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblGenerateMana"), new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblGenerateMana"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() { //must invoke all these in game thread since they may require synchronous user input
@@ -23,7 +23,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblTutor"), new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblTutor"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -34,7 +34,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblRollbackPhase"), new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblRollbackPhase"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() { //must invoke all these in game thread since they may require synchronous user input
@@ -45,7 +45,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblCastSpellOrPlayLand"), new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblCastSpellOrPlayLand"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -56,7 +56,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblCardToHand"), new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblCardToHand"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -67,7 +67,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblCardToBattlefield"), new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblCardToBattlefield"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -78,7 +78,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblCardToLibrary"), new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblCardToLibrary"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -89,7 +89,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblCardToGraveyard"), new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblCardToGraveyard"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -100,7 +100,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblCardToExile"), new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblCardToExile"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -111,7 +111,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblRepeatAddCard"), new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblRepeatAddCard"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -122,7 +122,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblExileFromHand"), new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblExileFromHand"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -133,7 +133,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblExileFromPlay"), new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblExileFromPlay"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -144,7 +144,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblRemoveFromGame"), new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblRemoveFromGame"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -155,7 +155,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblSetLife"), new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblSetLife"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -166,7 +166,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblWinGame"), new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblWinGame"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -177,7 +177,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblSetupGame"), new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblSetupGame"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -188,7 +188,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblDumpGame"), new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblDumpGame"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -201,7 +201,7 @@ public class VDevMenu extends FDropDownMenu {
         }));
 
         final boolean unlimitedLands = MatchController.instance.getGameController().canPlayUnlimitedLands();
-        addItem(new FCheckBoxMenuItem(Localizer.getInstance().getMessage("lblUnlimitedLands"), unlimitedLands,
+        addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblUnlimitedLands"), unlimitedLands,
                 new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
@@ -209,14 +209,14 @@ public class VDevMenu extends FDropDownMenu {
             }
         }));
         final boolean viewAll = MatchController.instance.getGameController().mayLookAtAllCards();
-        addItem(new FCheckBoxMenuItem(Localizer.getInstance().getMessage("lblViewAll"), viewAll,
+        addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblViewAll"), viewAll,
                 new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 MatchController.instance.getGameController().cheat().setViewAllCards(!viewAll);
             }
         }));
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblAddCounterPermanent"), new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAddCounterPermanent"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -227,7 +227,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblSubCounterPermanent"), new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblSubCounterPermanent"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -238,7 +238,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblTapPermanent"), new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblTapPermanent"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -249,7 +249,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblUntapPermanent"), new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblUntapPermanent"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -260,7 +260,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblRiggedRoll"), new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblRiggedRoll"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -271,7 +271,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem(Localizer.getInstance().getMessage("lblWalkTo"), new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblWalkTo"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {

@@ -60,7 +60,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
     // Calculated fields are below:
     private transient CardRarity rarity; // rarity is given in ctor when set is assigned
     // Reference to a new instance of Self, but foiled!
-    private transient PaperCard foiledVersion = null;
+    private transient PaperCard foiledVersion;
 
     @Override
     public String getName() {
@@ -170,7 +170,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         }
     };
 
-    public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0){
+    public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0) {
         this(rules0, edition0, rarity0, IPaperCard.DEFAULT_ART_INDEX, false,
                 IPaperCard.NO_COLLECTOR_NUMBER, IPaperCard.NO_ARTIST_NAME);
     }
@@ -186,7 +186,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         artIndex = Math.max(artIndex0, IPaperCard.DEFAULT_ART_INDEX);
         foil = foil0;
         rarity = rarity0;
-        artist = artist0 != null ? TextUtil.normalizeText(artist0) : IPaperCard.NO_ARTIST_NAME;
+        artist = TextUtil.normalizeText(artist0);
         collectorNumber = (collectorNumber0 != null) && (collectorNumber0.length() > 0) ? collectorNumber0 : IPaperCard.NO_COLLECTOR_NUMBER;
         // If the user changes the language this will make cards sort by the old language until they restart the game.
         // This is a good tradeoff

@@ -34,8 +34,8 @@ public class DigEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final StringBuilder sb = new StringBuilder();
         final int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
-        final int numToChange = (sa.hasParam("ChangeNum") ?
-                AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa) : 1);
+        final String toChange = sa.getParamOrDefault("ChangeNum", "1");
+        final int numToChange = toChange.startsWith("All") ? numToDig : AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa);
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         String verb = " looks at ";
@@ -385,11 +385,11 @@ public class DigEffect extends SpellAbilityEffect {
                             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                             moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
                             moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+                            if (sa.hasParam("Tapped")) {
+                                c.setTapped(true);
+                            }
                             c = game.getAction().moveTo(zone, c, sa, moveParams);
                             if (destZone1.equals(ZoneType.Battlefield)) {
-                                if (sa.hasParam("Tapped")) {
-                                    c.setTapped(true);
-                                }
                                 if (addToCombat(c, c.getController(), sa, "Attacking", "Blocking")) {
                                     combatChanged = true;
                                 }
@@ -497,7 +497,7 @@ public class DigEffect extends SpellAbilityEffect {
         final CardCollectionView play = game.getCardsIn(ZoneType.Battlefield);
         for (final Card c : list) {
             for (final Card p : play) {
-                if (p.getName().equals(c.getName()) && !toReturn.contains(c)) {
+                if (p.sharesNameWith(c) && !toReturn.contains(c)) {
                     toReturn.add(c);
                 }
             }

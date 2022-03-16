@@ -4,6 +4,7 @@ import com.badlogic.gdx.utils.Align;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinFont;
 import forge.item.InventoryItem;
@@ -13,7 +14,6 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FTextField;
-import forge.util.Localizer;
 
 
 public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
@@ -79,10 +79,10 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
     }
 
     public String getCaption() {
-        return txtSearch.getGhostText().substring((Localizer.getInstance().getMessage("lblSearch") + " ").length());
+        return txtSearch.getGhostText().substring((Forge.getLocalizer().getMessage("lblSearch") + " ").length());
     }
     public void setCaption(String caption0) {
-        txtSearch.setGhostText(Localizer.getInstance().getMessage("lblSearch") + " " + caption0);
+        txtSearch.setGhostText(Forge.getLocalizer().getMessage("lblSearch") + " " + caption0);
     }
 
     protected class SearchField extends FTextField {
@@ -90,7 +90,7 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
 
         private SearchField() {
             setFont(FONT);
-            setGhostText(Localizer.getInstance().getMessage("lblSearch"));
+            setGhostText(Forge.getLocalizer().getMessage("lblSearch"));
             setHeight(getDefaultHeight(DEFAULT_FONT)); //set height based on default filter font
         }
 

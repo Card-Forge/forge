@@ -1,0 +1,9 @@
+Name:Boseiju Pathlighter
+ManaCost:2 G
+Types:Creature Human Rogue
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraft | TriggerDescription$ When CARDNAME enters the battlefield, draft a card from CARDNAME's spellbook.
+SVar:TrigDraft:DB$ NameCard | Draft$ True | Defined$ You | ChooseFromList$ Emergence Zone,Radiant Fountain,Scavenger Grounds,Boseiju; Who Endures,Gingerbread Cabin,Khalni Garden,Memorial to Unity,Thriving Grove,Hall of Oracles,Secluded Courtyard,Treasure Vault,Mobilized District,Bonder's Enclave,Roadside Reliquary,Field of Ruin | SubAbility$ DBMakeCard
+SVar:DBMakeCard:DB$ MakeCard | Name$ ChosenName | Zone$ Hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearNamedCard$ True
+Oracle:When Boseiju Pathlighter enters the battlefield, draft a card from Boseiju Pathlighter's spellbook.

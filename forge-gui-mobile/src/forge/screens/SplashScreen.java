@@ -1,8 +1,6 @@
 package forge.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Align;
 
@@ -13,12 +11,10 @@ import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
-import forge.gui.GuiBase;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
 import forge.toolbox.FProgressBar;
-import forge.util.Localizer;
 
 public class SplashScreen extends FContainer {
     private TextureRegion background;
@@ -97,10 +93,6 @@ public class SplashScreen extends FContainer {
         float DURATION = 0.8f;
         private float progress = 0;
         private boolean finished, openAdventure;
-        //for transition image only...
-        TextureRegion transition_bg = new TextureRegion(new Texture(GuiBase.isAndroid()
-                ? Gdx.files.internal("fallback_skin").child("title_bg_lq.png")
-                : Gdx.files.classpath("fallback_skin").child("title_bg_lq.png")));
 
         public void drawBackground(Graphics g) {
             float percentage = progress / DURATION;
@@ -115,7 +107,7 @@ public class SplashScreen extends FContainer {
             } else {
                 if (animateLogo) {
                     //bg
-                    drawTransition(g, transition_bg, openAdventure, percentage);
+                    drawTransition(g, openAdventure, percentage);
                     g.setAlphaComposite(1 - percentage);
                     g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, getWidth(), getHeight());
                     g.setAlphaComposite(oldAlpha);
@@ -135,7 +127,7 @@ public class SplashScreen extends FContainer {
                     g.setAlphaComposite(oldAlpha);
                     if (hideBG) {
                         g.setAlphaComposite(0 + percentage);
-                        drawTransition(g, transition_bg, openAdventure, percentage);
+                        drawTransition(g, openAdventure, percentage);
                         g.setAlphaComposite(oldAlpha);
                     }
                 }
@@ -176,8 +168,8 @@ public class SplashScreen extends FContainer {
         bgAnimation.drawBackground(g);
     }
 
-    void drawTransition(Graphics g, TextureRegion bg, boolean openAdventure, float percentage) {
-        TextureRegion tr = new TextureRegion(bg.getTexture());
+    void drawTransition(Graphics g, boolean openAdventure, float percentage) {
+        TextureRegion tr = new TextureRegion(Forge.getTitleBG());
         if (!Forge.isLandscapeMode() && tr != null) {
             float ar = 1.78f;
             int w = (int) (tr.getRegionHeight() / ar);
@@ -229,8 +221,8 @@ public class SplashScreen extends FContainer {
 
         if (!init) {
             init = true;
-            btnAdventure = new FButton(Localizer.getInstance().getMessageorUseDefault("lblAdventureMode", "Adventure Mode"));
-            btnHome = new FButton(Localizer.getInstance().getMessageorUseDefault("lblClassicMode", "Classic Mode"));
+            btnAdventure = new FButton(Forge.getLocalizer().getMessageorUseDefault("lblAdventureMode", "Adventure Mode"));
+            btnHome = new FButton(Forge.getLocalizer().getMessageorUseDefault("lblClassicMode", "Classic Mode"));
             btnAdventure.setCommand(new FEvent.FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {

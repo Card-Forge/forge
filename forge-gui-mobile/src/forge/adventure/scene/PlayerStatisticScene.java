@@ -23,8 +23,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.Map;
 
 public class PlayerStatisticScene extends UIScene {
-
-
     Image avatar, avatarBorder, lifeIcon, goldIcon;
     Label money, life;
     Label wins, totalWins;
@@ -33,6 +31,7 @@ public class PlayerStatisticScene extends UIScene {
     Label playerName;
     TextButton back;
     private Table enemiesGroup;
+    boolean init;
 
     public PlayerStatisticScene() {
         super("ui/statistic.json");
@@ -63,11 +62,11 @@ public class PlayerStatisticScene extends UIScene {
         super.enter();
         enemiesGroup.clear();
 
-        enemiesGroup.add("Avatar").align(Align.center).space(3, 10, 3, 10);
-        enemiesGroup.add("Name").fillX().align(Align.center).fillX().space(3, 10, 3, 60);
-        enemiesGroup.add(("Win")).align(Align.center).space(3, 5, 3, 5);
-        enemiesGroup.add(("/")).align(Align.center).space(3, 5, 3, 5);
-        enemiesGroup.add("Loss").align(Align.center).space(3, 5, 3, 5);
+        enemiesGroup.add(Forge.getLocalizer().getMessage("lblAvatar")).align(Align.center).space(3, 10, 3, 10);
+        enemiesGroup.add(Forge.getLocalizer().getMessage("lblName")).fillX().align(Align.center).fillX().space(3, 10, 3, 60);
+        enemiesGroup.add(Forge.getLocalizer().getMessage("lblWinProper")).align(Align.center).space(3, 5, 3, 5);
+        enemiesGroup.add("/").align(Align.center).space(3, 5, 3, 5);
+        enemiesGroup.add(Forge.getLocalizer().getMessage("lblLossProper")).align(Align.center).space(3, 5, 3, 5);
         enemiesGroup.row().space(8);
 
         if (playerName != null) {
@@ -172,32 +171,37 @@ public class PlayerStatisticScene extends UIScene {
     @Override
     public void resLoaded() {
         super.resLoaded();
-        enemiesGroup = new Table(Controls.GetSkin());
-
-        enemiesGroup.row();
-        ui.onButtonPress("return", new Runnable() {
-            @Override
-            public void run() {
-                PlayerStatisticScene.this.back();
-            }
-        });
-        avatar = ui.findActor("avatar");
-        avatarBorder = ui.findActor("avatarBorder");
-        playerName = ui.findActor("playerName");
-        life = ui.findActor("lifePoints");
-        money = ui.findActor("money");
-        lifeIcon = ui.findActor("lifeIcon");
-        goldIcon = ui.findActor("goldIcon");
-        wins = ui.findActor("wins");
-        totalWins = ui.findActor("totalWins");
-        loss = ui.findActor("loss");
-        totalLoss = ui.findActor("totalLoss");
-        winloss = ui.findActor("winloss");
-        lossWinRatio = ui.findActor("lossWinRatio");
-        back = ui.findActor("return");
-        ScrollPane scrollPane = ui.findActor("enemies");
-        scrollPane.setActor(enemiesGroup);
-        enemiesGroup.setFillParent(true);
+        if (!this.init) {
+            enemiesGroup = new Table(Controls.GetSkin());
+            enemiesGroup.row();
+            ui.onButtonPress("return", new Runnable() {
+                @Override
+                public void run() {
+                    PlayerStatisticScene.this.back();
+                }
+            });
+            avatar = ui.findActor("avatar");
+            avatarBorder = ui.findActor("avatarBorder");
+            playerName = ui.findActor("playerName");
+            life = ui.findActor("lifePoints");
+            money = ui.findActor("money");
+            lifeIcon = ui.findActor("lifeIcon");
+            goldIcon = ui.findActor("goldIcon");
+            wins = ui.findActor("wins");
+            wins.setText(Forge.getLocalizer().getMessage("lblWinProper")+":");
+            totalWins = ui.findActor("totalWins");
+            loss = ui.findActor("loss");
+            loss.setText(Forge.getLocalizer().getMessage("lblLossProper")+":");
+            totalLoss = ui.findActor("totalLoss");
+            winloss = ui.findActor("winloss");
+            winloss.setText(Forge.getLocalizer().getMessage("lblWinProper")+"/"+Forge.getLocalizer().getMessage("lblLossProper"));
+            lossWinRatio = ui.findActor("lossWinRatio");
+            back = ui.findActor("return");
+            back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
+            ScrollPane scrollPane = ui.findActor("enemies");
+            scrollPane.setActor(enemiesGroup);
+            this.init = true;
+        }
     }
 
     @Override

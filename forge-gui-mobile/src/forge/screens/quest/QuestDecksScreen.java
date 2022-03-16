@@ -23,21 +23,20 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FTextField;
-import forge.util.Localizer;
 import forge.util.ThreadUtil;
 
 public class QuestDecksScreen extends FScreen {
     private static final float PADDING = FDeckChooser.PADDING;
 
     private final DeckManager lstDecks = add(new DeckManager(GameType.Quest));
-    private final FButton btnNewDeck = add(new FButton(Localizer.getInstance().getMessage("lblNewDeck")));
-    private final FButton btnEditDeck = add(new FButton(Localizer.getInstance().getMessage("btnEditDeck")));
-    private final FButton btnViewDeck = add(new FButton(Localizer.getInstance().getMessage("lblViewDeck")));
-    private final FButton btnRandom = add(new FButton(Localizer.getInstance().getMessage("lblRandomDeck")));
+    private final FButton btnNewDeck = add(new FButton(Forge.getLocalizer().getMessage("lblNewDeck")));
+    private final FButton btnEditDeck = add(new FButton(Forge.getLocalizer().getMessage("btnEditDeck")));
+    private final FButton btnViewDeck = add(new FButton(Forge.getLocalizer().getMessage("lblViewDeck")));
+    private final FButton btnRandom = add(new FButton(Forge.getLocalizer().getMessage("lblRandomDeck")));
 
     private final FLabel lblInfo = add(new FLabel.Builder()
         .align(Align.center).font(FSkinFont.get(16))
-        .text(Localizer.getInstance().getMessage("lblBuildorselectadeck")).build());
+        .text(Forge.getLocalizer().getMessage("lblBuildorselectadeck")).build());
 
     private final FEventHandler onDeckSelectionChanged = new FEventHandler() {
         @Override
@@ -73,8 +72,7 @@ public class QuestDecksScreen extends FScreen {
                 ThreadUtil.invokeInGameThread(new Runnable() { //must run in game thread to prevent blocking UI thread
                     @Override
                     public void run() {
-                        final Localizer localizer = Localizer.getInstance();
-                        if (!QuestUtil.checkActiveQuest(localizer.getMessage("lblCreateaDeck"))) {
+                        if (!QuestUtil.checkActiveQuest(Forge.getLocalizer().getMessage("lblCreateaDeck"))) {
                             return;
                         }
                         FThreads.invokeInEdtLater(new Runnable() {

@@ -113,8 +113,8 @@ public class DestroyAllAi extends SpellAbilityAi {
 
             // Special handling for Raiding Party
             if (logic.equals("RaidingParty")) {
-                int numAiCanSave = Math.min(CardLists.filter(ai.getCreaturesInPlay(), Predicates.and(CardPredicates.isColor(MagicColor.WHITE), CardPredicates.Presets.UNTAPPED)).size() * 2, ailist.size());
-                int numOppsCanSave = Math.min(CardLists.filter(ai.getOpponents().getCreaturesInPlay(), Predicates.and(CardPredicates.isColor(MagicColor.WHITE), CardPredicates.Presets.UNTAPPED)).size() * 2, opplist.size());
+                int numAiCanSave = Math.min(CardLists.count(ai.getCreaturesInPlay(), Predicates.and(CardPredicates.isColor(MagicColor.WHITE), CardPredicates.Presets.UNTAPPED)) * 2, ailist.size());
+                int numOppsCanSave = Math.min(CardLists.count(ai.getOpponents().getCreaturesInPlay(), Predicates.and(CardPredicates.isColor(MagicColor.WHITE), CardPredicates.Presets.UNTAPPED)) * 2, opplist.size());
 
                 return numOppsCanSave < opplist.size() && (ailist.size() - numAiCanSave < opplist.size() - numOppsCanSave);
             }

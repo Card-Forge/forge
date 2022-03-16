@@ -2,6 +2,7 @@ package forge.screens.planarconquest;
 
 import com.badlogic.gdx.utils.Align;
 
+import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -17,7 +18,6 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
-import forge.util.Localizer;
 import forge.util.Utils;
 
 public class ConquestStatsScreen extends FScreen implements IVConquestStats {
@@ -52,7 +52,7 @@ public class ConquestStatsScreen extends FScreen implements IVConquestStats {
     public ConquestStatsScreen() {
         super(null, ConquestMenu.getMenu());
 
-        cbPlanes.addItem(Localizer.getInstance().getMessage("lblAllPlanes"));
+        cbPlanes.addItem(Forge.getLocalizer().getMessage("lblAllPlanes"));
         for (ConquestPlane plane : FModel.getPlanes()) {
             if (!plane.isUnreachable() || FModel.getConquest().getModel().getCurrentPlane().equals(plane)) {
                 cbPlanes.addItem(plane);

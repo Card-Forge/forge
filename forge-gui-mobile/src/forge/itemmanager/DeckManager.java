@@ -23,7 +23,6 @@ import forge.itemmanager.filters.DeckFormatFilter;
 import forge.itemmanager.filters.TextSearchFilter;
 import forge.toolbox.FList;
 import forge.toolbox.FList.CompactModeHandler;
-import forge.util.Localizer;
 import forge.util.Utils;
 
 /** 
@@ -41,7 +40,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     public DeckManager(final GameType gt) {
         super(DeckProxy.class, true);
         gameType = gt;
-        setCaption(Localizer.getInstance().getMessage("lblDecks"));
+        setCaption(Forge.getLocalizer().getMessage("lblDecks"));
     }
 
     public GameType getGameType() {

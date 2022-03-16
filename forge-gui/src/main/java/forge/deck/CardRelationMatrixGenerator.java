@@ -12,12 +12,10 @@ import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.deck.io.CardThemedMatrixIO;
 import forge.deck.io.DeckStorage;
@@ -159,13 +157,7 @@ public final class CardRelationMatrixGenerator {
         }
 
         //filter to just legal commanders
-        List<PaperCard> legends = Lists.newArrayList(Iterables.filter(cardList,Predicates.compose(
-                new Predicate<CardRules>() {
-                    @Override
-                    public boolean apply(CardRules rules) {
-                        return format.isLegalCommander(rules);
-                    }
-                }, PaperCard.FN_GET_RULES)));
+        List<PaperCard> legends = Lists.newArrayList(Iterables.filter(cardList, format.isLegalCommanderPredicate()));
 
         //generate lookups for legends to link commander names to matrix rows
         for (int i=0; i<legends.size(); ++i){

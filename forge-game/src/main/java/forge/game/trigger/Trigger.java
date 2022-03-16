@@ -83,7 +83,7 @@ public abstract class Trigger extends TriggerReplacementBase {
 
     private Set<PhaseType> validPhases;
 
-    private SpellAbility spawningAbility = null;
+    private SpellAbility spawningAbility;
 
     /**
      * <p>

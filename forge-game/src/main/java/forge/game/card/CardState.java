@@ -81,7 +81,7 @@ public class CardState extends GameObject implements IHasSVars {
     private final CardStateView view;
     private final Card card;
 
-    private ReplacementEffect loyaltyRep = null;
+    private ReplacementEffect loyaltyRep;
 
     public CardState(Card card, CardStateName name) {
         this(card.getView().createAlternateState(name), card);

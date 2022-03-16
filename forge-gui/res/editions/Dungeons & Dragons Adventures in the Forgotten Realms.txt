@@ -7,7 +7,7 @@ MciCode=afr
 Type=Expansion
 ScryfallCode=AFR
 BoosterCovers=5
-Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+Booster=10 Common:fromSheet("AFR cards"), 3 Uncommon:fromSheet("AFR cards"), 1 RareMythic:fromSheet("AFR cards"), 1 BasicLand
 Prerelease=6 Boosters, 1 RareMythic+
 FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 

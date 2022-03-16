@@ -2,6 +2,7 @@ package forge.screens.quest;
 
 import java.util.List;
 
+import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -21,12 +22,10 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
-import forge.util.Localizer;
 import forge.util.Utils;
 
 public class QuestStatsScreen extends FScreen {
     private static final float PADDING = FOptionPane.PADDING;
-    private static final Localizer localizer = Localizer.getInstance();
 
     private final FScrollPane scroller = add(new FScrollPane() {
         @Override
@@ -52,8 +51,8 @@ public class QuestStatsScreen extends FScreen {
     private final FLabel lblWorld = scroller.add(new StatLabel(FSkinImage.QUEST_MAP));
     private final FComboBox<String> cbxPet = scroller.add(new FComboBox<>());
     private final FComboBox<String> cbxMatchLength  = scroller.add(new FComboBox<>());
-    private final FCheckBox cbPlant = scroller.add(new FCheckBox(Localizer.getInstance().getMessage("cbSummonPlant")));
-    private final FLabel lblZep = scroller.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("cbLaunchZeppelin")).icon(FSkinImage.QUEST_ZEP).font(FSkinFont.get(16)).opaque().build());
+    private final FCheckBox cbPlant = scroller.add(new FCheckBox(Forge.getLocalizer().getMessage("cbSummonPlant")));
+    private final FLabel lblZep = scroller.add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("cbLaunchZeppelin")).icon(FSkinImage.QUEST_ZEP).font(FSkinFont.get(16)).opaque().build());
 
     public FLabel getLblWins() {
         return lblWins;
@@ -87,7 +86,7 @@ public class QuestStatsScreen extends FScreen {
     }
 
     public QuestStatsScreen() {
-        super(localizer.getMessage("lblQuestStatistics"), QuestMenu.getMenu());
+        super(Forge.getLocalizer().getMessage("lblQuestStatistics"), QuestMenu.getMenu());
         lblZep.setHeight(Utils.scale(60));
 
         cbxPet.setDropDownChangeHandler(new FEventHandler() {
@@ -116,14 +115,14 @@ public class QuestStatsScreen extends FScreen {
         cbPlant.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                FModel.getQuest().selectPet(0, cbPlant.isSelected() ? localizer.getMessage("lblPlant") : null);
+                FModel.getQuest().selectPet(0, cbPlant.isSelected() ? Forge.getLocalizer().getMessage("lblPlant") : null);
                 FModel.getQuest().save();
             }
         });
         lblZep.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                if (!QuestUtil.checkActiveQuest(localizer.getMessage("lblLaunchaZeppelin"))) {
+                if (!QuestUtil.checkActiveQuest(Forge.getLocalizer().getMessage("lblLaunchaZeppelin"))) {
                     return;
                 }
                 FModel.getQuest().getAchievements().setCurrentChallenges(null);
@@ -134,7 +133,7 @@ public class QuestStatsScreen extends FScreen {
     }
 
     void addTournamentResultsLabels(QuestTournamentsScreen tournamentsScreen) {
-        scroller.add(new FLabel.Builder().font(FSkinFont.get(16)).text(localizer.getMessage("lblTournamentResults")).build());
+        scroller.add(new FLabel.Builder().font(FSkinFont.get(16)).text(Forge.getLocalizer().getMessage("lblTournamentResults")).build());
         scroller.add(tournamentsScreen.getLblFirst());
         scroller.add(tournamentsScreen.getLblSecond());
         scroller.add(tournamentsScreen.getLblThird());
@@ -148,7 +147,7 @@ public class QuestStatsScreen extends FScreen {
 
     public void update() {
         QuestUtil.updateQuestView(QuestMenu.getMenu());
-        setHeaderCaption(FModel.getQuest().getName() + " - " + localizer.getMessage("lblStatistics") + "\n(" + FModel.getQuest().getRank() + ")");
+        setHeaderCaption(FModel.getQuest().getName() + " - " + Forge.getLocalizer().getMessage("lblStatistics") + "\n(" + FModel.getQuest().getRank() + ")");
         scroller.revalidate(); //revalidate to account for changes in label visibility
     }
 

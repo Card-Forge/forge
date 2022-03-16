@@ -39,7 +39,7 @@ public interface IGuiGame {
     void afterGameEnd();
     void showCombat();
     void showPromptMessage(PlayerView playerView, String message);
-    void showPromptMessage(PlayerView playerView, String message, CardView card);
+    void showCardPromptMessage(PlayerView playerView, String message, CardView card);
     void updateButtons(PlayerView owner, boolean okEnabled, boolean cancelEnabled, boolean focusOk);
     void updateButtons(PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1);
     void flashIncorrectAction();

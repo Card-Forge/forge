@@ -2,7 +2,7 @@ Name:Turntimber Sower
 ManaCost:2 G
 Types:Creature Elf Druid
 PT:3/3
-T:Mode$ ChangesZoneAll | ValidCards$ Land.YouOwn | Origin$ Any | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever one or more land cards are put into your graveyard from anywhere, create a 0/1 green Plant creature token.
+T:Mode$ ChangesZoneAll | ValidCards$ Land.YouOwn+nonToken | Origin$ Any | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever one or more land cards are put into your graveyard from anywhere, create a 0/1 green Plant creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_0_1_plant | TokenOwner$ You | LegacyImage$ g 0 1 plant c18
 A:AB$ ChangeZone | Cost$ G Sac<3/Creature> | TgtPrompt$ Choose target land card in your graveyard | ValidTgts$ Land.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target land card from your graveyard to your hand.
 DeckHas:Ability$Token|Graveyard

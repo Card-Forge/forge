@@ -41,7 +41,6 @@ import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
-import forge.util.Localizer;
 import forge.util.Utils;
 
 /**
@@ -95,7 +94,7 @@ public class ListChooser<T> extends FContainer {
         if (list.size() > 25 && !lstChoices.getListItemRenderer().layoutHorizontal()) {
             txtSearch = add(new FTextField());
             txtSearch.setFont(FSkinFont.get(12));
-            txtSearch.setGhostText(Localizer.getInstance().getMessage("lblSearch"));
+            txtSearch.setGhostText(Forge.getLocalizer().getMessage("lblSearch"));
             txtSearch.setChangedHandler(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
@@ -112,13 +111,13 @@ public class ListChooser<T> extends FContainer {
                             FPopupMenu menu = new FPopupMenu() {
                                 @Override
                                 protected void buildMenu() {
-                                    addItem(new FMenuItem(Localizer.getInstance().getMessage("lblAdvancedSearch"), Forge.hdbuttons ? FSkinImage.HDSEARCH : FSkinImage.SEARCH, new FEventHandler() {
+                                    addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAdvancedSearch"), Forge.hdbuttons ? FSkinImage.HDSEARCH : FSkinImage.SEARCH, new FEventHandler() {
                                         @Override
                                         public void handleEvent(FEvent e) {
                                             advancedSearchFilter.edit();
                                         }
                                     }));
-                                    addItem(new FMenuItem(Localizer.getInstance().getMessage("lblResetFilters"), Forge.hdbuttons ? FSkinImage.HDDELETE : FSkinImage.DELETE, new FEventHandler() {
+                                    addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblResetFilters"), Forge.hdbuttons ? FSkinImage.HDDELETE : FSkinImage.DELETE, new FEventHandler() {
                                         @Override
                                         public void handleEvent(FEvent e) {
                                             resetFilters();
@@ -135,9 +134,9 @@ public class ListChooser<T> extends FContainer {
 
         final List<String> options;
         if (minChoices == 0) {
-            options = ImmutableList.of(Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel"));
+            options = ImmutableList.of(Forge.getLocalizer().getMessage("lblOK"), Forge.getLocalizer().getMessage("lblCancel"));
         } else {
-            options = ImmutableList.of(Localizer.getInstance().getMessage("lblOK"));
+            options = ImmutableList.of(Forge.getLocalizer().getMessage("lblOK"));
         }
 
         updateHeight();
