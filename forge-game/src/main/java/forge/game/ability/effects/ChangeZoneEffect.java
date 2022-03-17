@@ -76,6 +76,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
         final Card host = sa.getHostCard();
 
+        if (sa.hasParam("Optional")) { // TODO make boolean and handle verb reconjugation throughout
+            sb.append("(OPTIONAL) ");
+        }
+
         // Player whose cards will change zones
         List<Player> fetchers = null;
         if (sa.hasParam("DefinedPlayer")) {
@@ -157,11 +161,17 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
             sb.append(".");
         } else if (origin.equals("Library")) {
-            sb.append(chooserNames);
-            sb.append(" search").append(choosers.size() > 1 ? " " : "es ");
-            sb.append(fetchPlayer).append(fetchPlayer.equals(chooserNames) ? "'s " : " ");
+            final boolean originAlt = sa.hasParam("OriginAlternative");
+            sb.append(chooserNames).append(" search").append(choosers.size() > 1 ? " " : "es ");
+            sb.append(fetchPlayer).append(fetchPlayer.equals(chooserNames) ? "'s " : " ").append("library");
+            if (originAlt) {
+                sb.append(sa.getParam("OriginAlternative").contains("Hand") ? ", hand, and/or graveyard for " :
+                                " and/or graveyard for ");
+            } else {
+                sb.append(" for ");
+            }
             final String cardTag = type.contains("card") ? "" : " card";
-            sb.append("library for ").append(Lang.nounWithNumeralExceptOne(num, type + cardTag)).append(", ");
+            sb.append(Lang.nounWithNumeralExceptOne(num, type + cardTag)).append(", ");
             if (!sa.hasParam("NoReveal") || !destination.equals("Battlefield")) {
                 if (choosers.size() == 1) {
                     sb.append(num > 1 ? "reveals them, " : "reveals it, ");
@@ -194,7 +204,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 if (destination.equals("Hand")) {
                     if (num == 1) {
-                        sb.append("into its owner's hand");
+                        sb.append("into their hand");
                     } else {
                         sb.append("into their owner's hand");
                     }
@@ -207,7 +217,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
             }
-            sb.append(", then shuffles.");
+            sb.append(", then shuffles").append(originAlt ? " if they searched their library." : ".");
         } else if (origin.equals("Sideboard")) {
             sb.append(chooserNames);
             //currently Reveal is always True in ChangeZone
