@@ -134,7 +134,7 @@ public class PhaseHandler implements java.io.Serializable {
     public final Player getPlayerTurn() {
         return playerTurn;
     }
-    private final void setPlayerTurn(final Player playerTurn0) {
+    public final void setPlayerTurn(final Player playerTurn0) {
         if (playerTurn == playerTurn0) { return; }
         playerTurn = playerTurn0;
         game.updatePlayerTurnForView();

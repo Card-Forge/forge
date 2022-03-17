@@ -103,8 +103,8 @@ public class RestartGameEffect extends SpellAbilityEffect {
 
         game.resetTurnOrder();
         game.setAge(GameStage.RestartedByKarn);
-        // Do not need this because ability will resolve only during that player's turn
-        //game.getPhaseHandler().setPlayerTurn(sa.getActivatingPlayer());
+        // For the rare case that you get to resolve it during another players turn
+        game.getPhaseHandler().setPlayerTurn(sa.getActivatingPlayer());
 
         // Set turn number?
 
