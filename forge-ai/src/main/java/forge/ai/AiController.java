@@ -29,7 +29,6 @@ import forge.ai.simulation.SpellAbilityPicker;
 import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
-import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.*;
@@ -69,7 +68,6 @@ import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
 
 import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * <p>
@@ -1868,10 +1866,8 @@ public class AiController {
                     toRemove.add(sa);
             }
         }
-        for(SpellAbility sa : toRemove) {
-            result.remove(sa);
-        }
-        
+        result.removeAll(toRemove);
+
         // Play them last
         if (saGemstones != null) {
             result.remove(saGemstones);
@@ -2045,17 +2041,7 @@ public class AiController {
         Map<DeckSection, List<? extends PaperCard>> complaints = new HashMap<>();
         // When using simulation, AI should be able to figure out most cards.
         if (!useSimulation) {
-            for (Entry<DeckSection, CardPool> ds : myDeck) {
-                List<PaperCard> result = Lists.newArrayList();
-                for (Entry<PaperCard, Integer> cp : ds.getValue()) {
-                    if (cp.getKey().getRules().getAiHints().getRemAIDecks()) {
-                        result.add(cp.getKey());
-                    }
-                }
-                if (!result.isEmpty()) {
-                    complaints.put(ds.getKey(), result);
-                }
-            }
+            complaints = myDeck.getUnplayableAICards().unplayable;
         }
         return complaints;
     }

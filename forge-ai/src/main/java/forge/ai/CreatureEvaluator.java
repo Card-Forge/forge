@@ -219,8 +219,9 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         if (c.hasKeyword(Keyword.VANISHING)) {
             value -= subValue(20, "vanishing");
         }
+        // use scaling because the creature is only available halfway
         if (c.hasKeyword(Keyword.PHASING)) {
-            value -= subValue(10, "phasing");
+            value -= subValue(Math.max(20, value / 2), "phasing");
         }
 
         // TODO no longer a KW

@@ -1587,7 +1587,7 @@ public class AttachAi extends SpellAbilityAi {
             return card.getNetCombatDamage() + powerBonus > 0
                     && (ComputerUtilCombat.canAttackNextTurn(card) || CombatUtil.canBlock(card, true));
         } else if (keyword.equals("First Strike")) {
-            return card.getNetCombatDamage() + powerBonus > 0 && !card.hasKeyword(Keyword.DOUBLE_STRIKE)
+            return card.getNetCombatDamage() + powerBonus > 0 && !card.hasDoubleStrike()
                     && (ComputerUtilCombat.canAttackNextTurn(card) || CombatUtil.canBlock(card, true));
         } else if (keyword.startsWith("Flanking")) {
             return card.getNetCombatDamage() + powerBonus > 0

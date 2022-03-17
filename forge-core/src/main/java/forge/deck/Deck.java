@@ -23,6 +23,8 @@ import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.CardEdition;
+import forge.card.CardRules;
+import forge.card.CardType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import org.apache.commons.lang3.StringUtils;
@@ -612,5 +614,28 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             return true;
         }
         return false;
+    }
+
+    public static int getAverageCMC(Deck deck) {
+        int totalCMC = 0;
+        int totalCount = 0;
+        for (final Entry<DeckSection, CardPool> deckEntry : deck) {
+            switch (deckEntry.getKey()) {
+            case Main:
+            case Commander:
+                for (final Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
+                    CardRules rules = poolEntry.getKey().getRules();
+                    CardType type = rules.getType();
+                    if (!type.isLand() && (type.isArtifact() || type.isCreature() || type.isEnchantment() || type.isPlaneswalker() || type.isInstant() || type.isSorcery())) {
+                        totalCMC += rules.getManaCost().getCMC();
+                        totalCount++;
+                    }
+                }
+                break;
+            default:
+                break; //ignore other sections
+            }
+        }
+        return totalCount == 0 ? 0 : Math.round(totalCMC / totalCount);
     }
 }

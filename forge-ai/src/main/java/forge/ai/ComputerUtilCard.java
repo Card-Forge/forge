@@ -611,35 +611,6 @@ public class ComputerUtilCard {
         return combat.isAttacking(card);
     }
 
-    public static boolean canBeKilledByRoyalAssassin(final Player ai, final Card card) {
-        boolean wasTapped = card.isTapped();
-        for (Player opp : ai.getOpponents()) {
-            for (Card c : opp.getCardsIn(ZoneType.Battlefield)) {
-                for (SpellAbility sa : c.getSpellAbilities()) {
-                    if (sa.getApi() != ApiType.Destroy) {
-                        continue;
-                    }
-                    if (!ComputerUtilCost.canPayCost(sa, opp, sa.isTrigger())) {
-                        continue;
-                    }
-                    sa.setActivatingPlayer(opp);
-                    if (sa.canTarget(card)) {
-                        continue;
-                    }
-                    // check whether the ability can only target tapped creatures
-                    card.setTapped(true);
-                    if (!sa.canTarget(card)) {
-                        card.setTapped(wasTapped);
-                        continue;
-                    }
-                    card.setTapped(wasTapped);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     /**
      * Create a mock combat where ai is being attacked and returns the list of likely blockers. 
      * @param ai blocking player
@@ -694,6 +665,35 @@ public class ComputerUtilCard {
         final List<Card> attackers = Lists.newArrayList(attacker);
         aiBlk.assignBlockersGivenAttackers(combat, attackers);
         return ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, combat);
+    }
+
+    public static boolean canBeKilledByRoyalAssassin(final Player ai, final Card card) {
+        boolean wasTapped = card.isTapped();
+        for (Player opp : ai.getOpponents()) {
+            for (Card c : opp.getCardsIn(ZoneType.Battlefield)) {
+                for (SpellAbility sa : c.getSpellAbilities()) {
+                    if (sa.getApi() != ApiType.Destroy) {
+                        continue;
+                    }
+                    if (!ComputerUtilCost.canPayCost(sa, opp, sa.isTrigger())) {
+                        continue;
+                    }
+                    sa.setActivatingPlayer(opp);
+                    if (sa.canTarget(card)) {
+                        continue;
+                    }
+                    // check whether the ability can only target tapped creatures
+                    card.setTapped(true);
+                    if (!sa.canTarget(card)) {
+                        card.setTapped(wasTapped);
+                        continue;
+                    }
+                    card.setTapped(wasTapped);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -1967,13 +1967,11 @@ public class ComputerUtilCard {
 
     public static Cost getTotalWardCost(Card c) {
         Cost totalCost = new Cost(ManaCost.NO_COST, false);
-        for (final KeywordInterface inst : c.getKeywords()) {
-            if (inst.getKeyword() == Keyword.WARD) {
-                final String keyword = inst.getOriginal();
-                final String[] k = keyword.split(":");
-                final Cost wardCost = new Cost(k[1], false);
-                totalCost = totalCost.add(wardCost);
-            }
+        for (final KeywordInterface inst : c.getKeywords(Keyword.WARD)) {
+            final String keyword = inst.getOriginal();
+            final String[] k = keyword.split(":");
+            final Cost wardCost = new Cost(k[1], false);
+            totalCost = totalCost.add(wardCost);
         }
         return totalCost;
     }
@@ -2000,6 +1998,7 @@ public class ComputerUtilCard {
         return false;
     }
 
+    // TODO replace most calls to Player.isCardInPlay because they include phased out
     public static boolean isNonDisabledCardInPlay(final Player ai, final String cardName) {
         for (Card card : ai.getCardsIn(ZoneType.Battlefield, cardName)) {
             // TODO - Better logic to determine if a permanent is disabled by local effects

@@ -302,7 +302,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                     && !opp.getCreaturesInPlay().isEmpty()
                     && Iterables.any(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card));
         } else if (keyword.equals("First Strike")) {
-            if (card.hasKeyword(Keyword.DOUBLE_STRIKE)) {
+            if (card.hasDoubleStrike()) {
                 return false;
             }
             if (combat != null && combat.isBlocked(card) && !combat.getBlockers(card).isEmpty()) {

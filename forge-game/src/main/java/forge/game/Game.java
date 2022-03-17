@@ -861,7 +861,7 @@ public class Game {
             getNextPlayerAfter(p).initPlane();
         }
 
-        if (p != null && p.isMonarch()) {
+        if (p.isMonarch()) {
             // if the player who lost was the Monarch, someone else will be the monarch
             // TODO need to check rules if it should try the next player if able
             if (p.equals(getPhaseHandler().getPlayerTurn())) {

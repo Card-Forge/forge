@@ -653,12 +653,12 @@ public abstract class SpellAbilityEffect {
 
             @Override
             public void run() {
-                CardZoneTable untilTable = new CardZoneTable();
                 CardCollectionView untilCards = hostCard.getUntilLeavesBattlefield();
                 // if the list is empty, then the table doesn't need to be checked anymore
                 if (untilCards.isEmpty()) {
                     return;
                 }
+                CardZoneTable untilTable = new CardZoneTable();
                 Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                 moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
                 moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateGraveyard());
