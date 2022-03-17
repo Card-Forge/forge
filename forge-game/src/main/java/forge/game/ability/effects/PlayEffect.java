@@ -167,8 +167,7 @@ public class PlayEffect extends SpellAbilityEffect {
             // so it gets added to stack
             card.setCopiedPermanent(card);
             card.setToken(true);
-            tgtCards = new CardCollection();
-            tgtCards.add(card);
+            tgtCards = new CardCollection(card);
         } else {
             tgtCards = new CardCollection();
             // filter only cards that didn't changed zones
@@ -216,7 +215,6 @@ public class PlayEffect extends SpellAbilityEffect {
 
         boolean singleOption = tgtCards.size() == 1 && amount == 1 && optional;
         Map<String, Object> params = hasTotalCMCLimit ? new HashMap<>() : null;
-
 
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
@@ -424,7 +422,6 @@ public class PlayEffect extends SpellAbilityEffect {
             activator.popPaidForSA();
         }
     } // end resolve
-
 
     protected void addReplaceGraveyardEffect(Card c, SpellAbility sa, String zone, Map<AbilityKey, Object> moveParams) {
         final Card hostCard = sa.getHostCard();
