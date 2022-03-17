@@ -156,7 +156,7 @@ public class CountersPutAi extends CountersAi {
         final boolean isClockwork = "True".equals(sa.getParam("UpTo")) && "Self".equals(sa.getParam("Defined"))
                 && "P1P0".equals(sa.getParam("CounterType")) && "Count$xPaid".equals(source.getSVar("X"))
                 && sa.hasParam("MaxFromEffect");
-        boolean playAggro = ((PlayerControllerAi) ai.getController()).getAi().getProperty(AiProps.PLAY_AGGRO).equals("true");
+        boolean playAggro = ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.PLAY_AGGRO);
 
         if ("ExistingCounter".equals(type)) {
             final boolean eachExisting = sa.hasParam("EachExistingCounter");

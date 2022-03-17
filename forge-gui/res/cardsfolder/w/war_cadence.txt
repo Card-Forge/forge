@@ -4,7 +4,6 @@ Types:Enchantment
 A:AB$ StoreSVar | Cost$ X R | SVar$ PaidNum | Type$ Count | Expression$ xPaid | SubAbility$ CadenceEffect | AILogic$ RestrictBlocking | SpellDescription$ This turn, creatures can't block unless their controller pays {X} for each blocking creature they control.
 SVar:CadenceEffect:DB$ Effect | StaticAbilities$ CadenceStaticAb | Stackable$ False | RememberObjects$ Valid Creature.blocking
 SVar:CadenceStaticAb:Mode$ CantBlockUnless | ValidCard$ Card.IsNotRemembered | Cost$ PaidNum | EffectZone$ Command | Description$ This turn, creatures can't block unless their controller pays {X} for each blocking creature they control.
-# According to the 10/4/2004 ruling: The ability only applies to blocks declared after it resolves. It will not add costs to any blockers already announced.
 SVar:X:Count$xPaid
 SVar:PaidNum:Number$0
 SVar:NonStackingEffect:True

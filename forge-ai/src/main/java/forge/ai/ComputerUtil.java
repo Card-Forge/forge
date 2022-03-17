@@ -1492,7 +1492,7 @@ public class ComputerUtil {
         return false;
     }
 
-    public static int possibleNonCombatDamage(Player ai, Player enemy) {
+    public static int possibleNonCombatDamage(final Player ai, final Player enemy) {
         int damage = 0;
         final CardCollection all = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
         all.addAll(ai.getCardsActivableInExternalZones(true));
@@ -1550,8 +1550,8 @@ public class ComputerUtil {
     /**
      * Overload of predictThreatenedObjects that evaluates the full stack
      */
-    public static List<GameObject> predictThreatenedObjects(final Player aiPlayer, final SpellAbility sa) {
-        return predictThreatenedObjects(aiPlayer, sa, false);
+    public static List<GameObject> predictThreatenedObjects(final Player ai, final SpellAbility sa) {
+        return predictThreatenedObjects(ai, sa, false);
     }
 
     /**
@@ -2971,7 +2971,7 @@ public class ComputerUtil {
         // TODO: either add SVars to other reanimator cards, or improve the prediction so that it avoids using a SVar
         // at all but detects this effect from SA parameters (preferred, but difficult)
         CardCollectionView inHand = ai.getCardsIn(ZoneType.Hand);
-        CardCollectionView inDeck = ai.getCardsIn(new ZoneType[] {ZoneType.Hand, ZoneType.Library});
+        CardCollectionView inDeck = ai.getCardsIn(ZoneType.Library);
 
         Predicate<Card> markedAsReanimator = new Predicate<Card>() {
             @Override
@@ -3036,13 +3036,30 @@ public class ComputerUtil {
     // call this to determine if it's safe to use a life payment spell
     // or trigger "emergency" strategies such as holding mana for Spike Weaver of Counterspell.
     public static boolean aiLifeInDanger(Player ai, boolean serious, int payment) {
-        // TODO should also consider them as teams
-        for (Player opponent: ai.getOpponents()) {
-            Combat combat = new Combat(opponent);
+        return predictNextCombatsRemainingLife(ai, serious, false, payment, null) == Integer.MIN_VALUE;
+    }
+    public static int predictNextCombatsRemainingLife(Player ai, boolean serious, boolean checkDiff, int payment, final CardCollection excludedBlockers) {
+        // life won't change
+        int remainingLife = Integer.MAX_VALUE;
+
+        // performance shortcut
+        // TODO if checking upcoming turn it should be a permanent effect
+        if (ai.cantLose()) {
+            return remainingLife;
+        }
+
+        // TODO should also consider them as teams (with increased likelihood to be attacked by multiple if ai is biggest threat)
+        // TODO worth it to sort by creature amount for chance to terminate earlier?
+        for (Player opp: ai.getOpponents()) {
+            Combat combat = new Combat(opp);
             boolean containsAttacker = false;
-            boolean thisCombat = ai.getGame().getPhaseHandler().isPlayerTurn(opponent) && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN);
-            for (Card att : opponent.getCreaturesInPlay()) {
+            boolean thisCombat = ai.getGame().getPhaseHandler().isPlayerTurn(opp) && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN);
+
+            // TODO !thisCombat should include cards that will phase in
+            for (Card att : opp.getCreaturesInPlay()) {
                 if ((thisCombat && CombatUtil.canAttack(att, ai)) || (!thisCombat && ComputerUtilCombat.canAttackNextTurn(att, ai))) {
+                    // TODO need to copy the card
+                    // att = ComputerUtilCombat.applyPotentialAttackCloneTriggers(att);
                     combat.addAttacker(att, ai);
                     containsAttacker = true;
                 }
@@ -3050,23 +3067,28 @@ public class ComputerUtil {
             if (!containsAttacker) {
                 continue;
             }
-
             // TODO if it's next turn ignore mustBlockCards
             AiBlockController block = new AiBlockController(ai, false);
-            block.assignBlockersForCombat(combat);
+            // TODO for performance skip ahead to safer blocking approach (though probably only when not in checkDiff mode as that could lead to inflated prediction)
+            block.assignBlockersForCombat(combat, excludedBlockers);
 
             // TODO predict other, noncombat sources of damage and add them to the "payment" variable.
             // examples : Black Vise, The Rack, known direct damage spells in enemy hand, etc
             // If added, might need a parameter to define whether we want to check all threats or combat threats.
 
             if (serious && ComputerUtilCombat.lifeInSeriousDanger(ai, combat, payment)) {
-                return true;
+                return Integer.MIN_VALUE;
             }
             if (!serious && ComputerUtilCombat.lifeInDanger(ai, combat, payment)) {
-                return true;
+                return Integer.MIN_VALUE;
+            }
+
+            if (checkDiff && !ai.cantLoseForZeroOrLessLife()) {
+                // find out the worst possible outcome
+                remainingLife = Math.min(ComputerUtilCombat.lifeThatWouldRemain(ai, combat), remainingLife);
             }
         }
-        return false;
+        return remainingLife;
     }
 
 }

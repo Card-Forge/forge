@@ -1024,13 +1024,13 @@ public class DamageDealAi extends DamageAiBase {
             return false;
         }
 
-        CardCollection creatures = CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+        CardCollection creatures = ai.getOpponents().getCreaturesInPlay();
 
         Card tgtCreature = null;
         for (Card c : creatures) {
             int power = c.getNetPower();
             int toughness = c.getNetToughness();
-            boolean canDie = !(c.hasKeyword(Keyword.INDESTRUCTIBLE) || ComputerUtil.canRegenerate(c.getController(), c));
+            boolean canDie = !ComputerUtilCombat.combatantCantBeDestroyed(c.getController(), c);
 
             // Currently will target creatures with toughness 3+ (or power 5+)
             // and only if the creature can actually die, do not "underdrain"

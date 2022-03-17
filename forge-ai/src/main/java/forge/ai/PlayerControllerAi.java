@@ -89,10 +89,20 @@ import forge.util.collect.FCollectionView;
 public class PlayerControllerAi extends PlayerController {
     private final AiController brains;
 
+    private boolean pilotsNonAggroDeck = false;
+
     public PlayerControllerAi(Game game, Player p, LobbyPlayer lp) {
         super(game, p, lp);
 
         brains = new AiController(p, game);
+    }
+
+    public boolean pilotsNonAggroDeck() {
+        return pilotsNonAggroDeck;
+    }
+
+    public void setupAutoProfile(Deck deck) {
+        pilotsNonAggroDeck = deck.getName().contains("Control") || Deck.getAverageCMC(deck) > 3;
     }
 
     public void allowCheatShuffle(boolean value) {
@@ -1132,6 +1142,9 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public Map<DeckSection, List<? extends PaperCard>> complainCardsCantPlayWell(Deck myDeck) {
+        // TODO check if profile detection set to Auto
+        setupAutoProfile(myDeck);
+
         return brains.complainCardsCantPlayWell(myDeck);
     }
 

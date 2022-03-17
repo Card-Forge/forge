@@ -25,6 +25,7 @@ import forge.card.CardType;
 import forge.card.CardType.CoreType;
 import forge.card.CardType.Supertype;
 import forge.card.MagicColor;
+import forge.deck.Deck;
 import forge.deck.CardPool;
 import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
@@ -681,7 +682,7 @@ public class AdvancedSearch {
         COMMANDER_DECK_AVERAGE_CMC("lblDeckAverageCMC", ConquestCommander.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<ConquestCommander>(0, 20) {
             @Override
             protected Integer getItemValue(ConquestCommander input) {
-                return DeckProxy.getAverageCMC(input.getDeck());
+                return Deck.getAverageCMC(input.getDeck());
             }
         }),
         COMMANDER_DECK_CONTENTS("lblDeckContents", ConquestCommander.class, FilterOperator.DECK_CONTENT_OPS, new DeckContentEvaluator<ConquestCommander>() {
