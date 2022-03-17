@@ -6,5 +6,5 @@ S:Mode$ Continuous | Affected$ Creature.modified+YouCtrl | AddKeyword$ Menace | 
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigSeek | TriggerDescription$ When CARDNAME enters the battlefield, you may discard a card. If you do, seek a card with mana value equal to that card's mana value.
 SVar:TrigSeek:AB$ ChangeZone | Cost$ Discard<1/Card> | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.cmcEQX | ChangeNum$ 1
 SVar:X:Discarded$CardManaCost
-DeckHas:Ability$Discard
+DeckHas:Ability$Discard & Keyword$Menace
 Oracle:Modified creatures you control have menace.\nWhen Artillery Enthusiast enters the battlefield, you may discard a card. If you do, seek a card with mana value equal to that card's mana value.
