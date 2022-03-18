@@ -96,6 +96,7 @@ public enum ApiType {
     Goad (GoadEffect.class),
     Haunt (HauntEffect.class),
     Investigate (InvestigateEffect.class),
+    Intensify (IntensifyEffect.class),
     ImmediateTrigger (ImmediateTriggerEffect.class),
     Learn (LearnEffect.class),
     LookAt (LookAtEffect.class),

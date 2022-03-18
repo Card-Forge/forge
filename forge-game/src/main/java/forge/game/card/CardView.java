@@ -415,6 +415,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.CurrentRoom, c.getCurrentRoom());
     }
 
+    public int getIntensity() {
+        return get (TrackableProperty.Intensity);
+    }
+    void updateIntensity(Card c) {
+        set(TrackableProperty.Intensity, c.getIntensity(true));
+    }
+
     public boolean wasDestroyed() {
         if (get(TrackableProperty.WasDestroyed) == null)
             return false;
@@ -866,6 +873,10 @@ public class CardView extends GameEntityView {
         updateName(c);
         updateZoneText(c);
         updateDamage(c);
+
+        if (c.getIntensity(false) > 0) {
+            updateIntensity(c);
+        }
 
         if (getBackup() == null && !c.isFaceDown() && (c.hasBackSide()||c.isFlipCard()||c.isAdventureCard())) {
             set(TrackableProperty.PaperCardBackup, c.getPaperCard());
