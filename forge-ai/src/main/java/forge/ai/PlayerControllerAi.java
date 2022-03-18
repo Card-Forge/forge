@@ -699,6 +699,7 @@ public class PlayerControllerAi extends PlayerController {
         // TODO replace with EmptySa
         final Ability ability = new AbilityStatic(c, cost, null) { @Override public void resolve() {} };
         ability.setActivatingPlayer(c.getController());
+        ability.setCardState(sa.getCardState());
 
         // FIXME: This is a hack to check if the AI can play the "exile from library" pay costs (Cumulative Upkeep,
         // e.g. Thought Lash). We have to do it and bail early if the AI can't pay, because otherwise the AI will
@@ -1020,6 +1021,7 @@ public class PlayerControllerAi extends PlayerController {
         emptyAbility.setActivatingPlayer(player);
         emptyAbility.setTriggeringObjects(sa.getTriggeringObjects());
         emptyAbility.setSVars(sa.getSVars());
+        emptyAbility.setCardState(sa.getCardState());
         emptyAbility.setXManaCostPaid(sa.getRootAbility().getXManaCostPaid());
         if (ComputerUtilCost.willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers) && ComputerUtilCost.canPayCost(emptyAbility, player, true)) {
             ComputerUtil.playNoStack(player, emptyAbility, getGame(), true); // AI needs something to resolve to pay that cost

@@ -2521,10 +2521,8 @@ public class ComputerUtilCombat {
         if (combat != null) {
             // 1. If the card that spawned the attacker was sent at a planeswalker, attack the same. Consider improving.
             GameEntity def = combat.getDefenderByAttacker(sa.getHostCard());
-            if (def != null && def instanceof Card) {
-                if (((Card)def).isPlaneswalker()) {
-                    return def;
-                }
+            if (def != null && def instanceof Card && ((Card)def).isPlaneswalker() && defenders.contains(def)) {
+                return def;
             }
             // 2. Otherwise, go through the list of options one by one, choose the first one that can't be blocked profitably.
             for (GameEntity p : defenders) {
