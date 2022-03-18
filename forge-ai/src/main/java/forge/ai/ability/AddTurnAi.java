@@ -45,8 +45,7 @@ public class AddTurnAi extends SpellAbilityAi {
 
         if (sa.usesTargeting()) {
             sa.resetTargets();
-            if (sa.canTarget(ai)) {
-                // TODO check for Ugin's Nexus
+            if (sa.canTarget(ai) && (mandatory || !ai.getGame().getReplacementHandler().wouldExtraTurnBeSkipped(ai))) {
                 sa.getTargets().add(ai);
             } else if (mandatory) {
             	for (final Player ally : ai.getAllies()) {

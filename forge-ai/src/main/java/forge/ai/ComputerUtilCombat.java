@@ -110,7 +110,9 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        // TODO check if combat phase would be skipped
+        if (attacker.getGame().getReplacementHandler().wouldPhaseBeSkipped(attacker.getController(), "BeginCombat")) {
+            return false;
+        }
 
         // TODO replace with Static Ability
         for (final String keyword : attacker.getHiddenExtrinsicKeywords()) {
