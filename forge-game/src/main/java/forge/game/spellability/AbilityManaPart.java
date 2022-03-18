@@ -316,7 +316,7 @@ public class AbilityManaPart implements java.io.Serializable {
                 if (restriction.endsWith("X") && sa.costHasManaX()) {
                     return true;
                 }
-                if (restriction.endsWith("C") && sa.getPayCosts().hasManaCost() && sa.getPayCosts().getCostMana().getManaToPay().getGenericCost() > 0) {
+                if (restriction.endsWith("C") && sa.getPayCosts().hasManaCost() && sa.getPayCosts().getCostMana().getManaToPay().getShardCount(ManaCostShard.COLORLESS) > 0) {
                     return true;
                 }
                 continue;
