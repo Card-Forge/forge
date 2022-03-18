@@ -268,7 +268,6 @@ public class Combat {
     public final GameEntity getDefenderByAttacker(final Card c) {
         return getDefenderByAttacker(getBandOfAttacker(c));
     }
-
     public final GameEntity getDefenderByAttacker(final AttackingBand c) {
         for (Entry<GameEntity, AttackingBand> e : attackedByBands.entries()) {
             if (e.getValue() == c) {
