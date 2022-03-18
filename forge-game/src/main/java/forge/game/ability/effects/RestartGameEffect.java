@@ -91,6 +91,9 @@ public class RestartGameEffect extends SpellAbilityEffect {
             p.getZone(ZoneType.Command).removeAllCards(true);
 
             for (Card c : newLibrary) {
+                if (c.getIntensity(false) > 0) {
+                    c.setIntensity(0);
+                }
                 action.moveToLibrary(c, 0, sa);
             }
             p.initVariantsZones(p.getRegisteredPlayer());

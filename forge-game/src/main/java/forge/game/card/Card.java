@@ -2090,6 +2090,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Devour")) {
                     final String[] k = keyword.split(":");
                     sbLong.append(k[0]).append(" ").append(k[1]).append(" (").append(inst.getReminderText()).append(")");
+                } else if (keyword.startsWith("Starting intensity")) {
+                    sbLong.append(TextUtil.fastReplace(keyword, ":", " "));
                 } else if (keyword.contains("Haunt")) {
                     sb.append("\r\nHaunt (");
                     if (isCreature()) {
@@ -2541,6 +2543,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 } else if (keyword.startsWith("Dredge")) {
                     sbAfter.append(TextUtil.fastReplace(keyword, ":", " ")).append(" (").append(inst.getReminderText()).append(")");
                     sbAfter.append("\r\n");
+                } else if (keyword.startsWith("Starting intensity")) {
+                    sbAfter.append(TextUtil.fastReplace(keyword, ":", " ")).append("\r\n");
                 } else if (keyword.startsWith("Escalate") || keyword.startsWith("Buyback")
                         || keyword.startsWith("Prowl")) {
                     final String[] k = keyword.split(":");
@@ -4079,6 +4083,23 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final int getNetCombatDamage() {
         return getNetCombatDamageBreakdown().getTotal();
+    }
+
+    private int intensity = 0;
+    public final void addIntensity(final int n) {
+        intensity = intensity + n;
+        view.updateIntensity(this);
+    }
+    public final int getIntensity(boolean total) {
+        if (total && hasKeyword(Keyword.STARTING_INTENSITY)) {
+            return getKeywordMagnitude(Keyword.STARTING_INTENSITY) + intensity;
+        } else {
+            return intensity;
+        }
+    }
+    public final void setIntensity(final int n) { intensity = n; }
+    public final boolean hasIntensity() {
+            return intensity > 0;
     }
 
     private int multiKickerMagnitude = 0;

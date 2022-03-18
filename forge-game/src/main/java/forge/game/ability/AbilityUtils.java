@@ -2066,6 +2066,10 @@ public class AbilityUtils {
             return doXMath(c.getDamageHistory().getCreatureAttacksThisTurn(), expr, c, ctb);
         }
 
+        if (sq[0].contains("Intensity")) {
+            return doXMath(c.getIntensity(true), expr, c, ctb);
+        }
+
         if (sq[0].contains("CardCounters")) {
             // CardCounters.ALL to be used for Kinsbaile Borderguard and anything that cares about all counters
             int count = 0;

@@ -153,6 +153,7 @@ public enum Keyword {
     SPECTACLE("Spectacle", KeywordWithCost.class, false, "You may cast this spell for its spectacle cost rather than its mana cost if an opponent lost life this turn."),
     SPLICE("Splice", KeywordWithCostAndType.class, false, "As you cast an %2$s spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell."),
     SPLIT_SECOND("Split second", SimpleKeyword.class, true, "As long as this spell is on the stack, players can't cast other spells or activate abilities that aren't mana abilities."),
+    STARTING_INTENSITY("Starting intensity", KeywordWithAmount.class, true, null),
     STORM("Storm", SimpleKeyword.class, false, "When you cast this spell, copy it for each other spell that was cast before it this turn. You may choose new targets for the copies."),
     STRIVE("Strive", KeywordWithCost.class, false, "CARDNAME costs %s more to cast for each target beyond the first."),
     SUNBURST("Sunburst", SimpleKeyword.class, false, "This enters the battlefield with either a +1/+1 or charge counter on it for each color of mana spent to cast it based on whether it's a creature."),

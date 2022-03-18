@@ -565,6 +565,11 @@ public class GameAction {
             copied.clearEtbCounters();
         }
 
+        // intensity is perpetual
+        if (c.hasIntensity()) {
+            copied.setIntensity(c.getIntensity(false));
+        }
+
         // update state for view
         copied.updateStateForView();
 
