@@ -3,4 +3,4 @@ Name:Alchemy (2021-12-09)
 Type:Historic
 Subtype:Arena
 Effective:2021-12-09
-Sets:ANB, ZNR, KHM, STX, AFR, MID, VOW, Y22
+Sets:ANB, ZNR, KHM, STX, AFR, MID, VOW, YMID
