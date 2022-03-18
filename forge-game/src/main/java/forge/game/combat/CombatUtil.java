@@ -301,6 +301,7 @@ public class CombatUtil {
         // Not a great solution, but prevents a crash by passing a fake SA for Propaganda payments
         // If there's a better way of handling this somewhere deeper in the code, feel free to remove
         final SpellAbility fakeSA = new SpellAbility.EmptySa(attacker, attacker.getController());
+        fakeSA.setCardState(attacker.getCurrentState());
         return attacker.getController().getController().payManaOptional(attacker, attackCost, fakeSA,
                 "Pay additional cost to declare " + attacker + " an attacker", ManaPaymentPurpose.DeclareAttacker);
     }
@@ -345,6 +346,7 @@ public class CombatUtil {
         }
 
         SpellAbility fakeSA = new SpellAbility.EmptySa(blocker, blocker.getController());
+        fakeSA.setCardState(blocker.getCurrentState());
         return blocker.getController().getController().payManaOptional(blocker, blockCost, fakeSA, "Pay cost to declare " + blocker + " a blocker. ", ManaPaymentPurpose.DeclareBlocker);
     }
 
