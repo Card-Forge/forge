@@ -4,5 +4,5 @@ Types:Land
 K:ETBReplacement:Other:LandTapped
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Forest.YouCtrl | ConditionCompare$ EQ0 | SpellDescription$ CARDNAME enters the battlefield tapped unless you control a Forest.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-A:AB$ Mana | Cost$ 2 G G T | Produced$ G | Amount$ 6 | RestrictValid$ Spell.Creature,Activated.Creature | SpellDescription$ Add six {G}. Spend this mana only to cast creature spells or activate abilities of creatures.
+A:AB$ Mana | Cost$ 2 G G T | Produced$ G | Amount$ 6 | RestrictValid$ Spell.Creature,Activated.Creature+inZoneBattlefield | SpellDescription$ Add six {G}. Spend this mana only to cast creature spells or activate abilities of creatures.
 Oracle:Castle Garenbrig enters the battlefield tapped unless you control a Forest.\n{T}: Add {G}.\n{2}{G}{G}, {T}: Add six {G}. Spend this mana only to cast creature spells or activate abilities of creatures.

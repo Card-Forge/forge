@@ -312,8 +312,11 @@ public class AbilityManaPart implements java.io.Serializable {
                 continue;
             }
 
-            if (restriction.startsWith("CostContainsX")) {
-                if (sa.costHasManaX()) {
+            if (restriction.startsWith("CostContains")) {
+                if (restriction.endsWith("X") && sa.costHasManaX()) {
+                    return true;
+                }
+                if (restriction.endsWith("C") && sa.getPayCosts().hasManaCost() && sa.getPayCosts().getCostMana().getManaToPay().getShardCount(ManaCostShard.COLORLESS) > 0) {
                     return true;
                 }
                 continue;
@@ -336,6 +339,11 @@ public class AbilityManaPart implements java.io.Serializable {
 
             if (restriction.equals("CantPayGenericCosts")) {
                 return true;
+            }
+
+            // the payment is for a resolving SA, currently no other restrictions would allow that
+            if (getSourceCard().getGame().getStack().getInstanceFromSpellAbility(sa.getRootAbility()) != null) {
+                return false;
             }
 
             if (sa.isValid(restriction, this.getSourceCard().getController(), this.getSourceCard(), null)) {
