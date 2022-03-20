@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import forge.game.event.GameEventDayTimeChanged;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
@@ -55,6 +54,7 @@ import forge.game.card.CardView;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.event.Event;
+import forge.game.event.GameEventDayTimeChanged;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.phase.Phase;
 import forge.game.phase.PhaseHandler;
