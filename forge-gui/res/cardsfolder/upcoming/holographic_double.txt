@@ -1,0 +1,8 @@
+Name:Holographic Double
+ManaCost:U
+Types:Creature Illusion
+PT:1/1
+A:AB$ ChooseCard | Cost$ U ExileFromHand<1/CARDNAME> | ActivationZone$ Hand | Mandatory$ True | ChoiceZone$ Hand | Choices$ Creature.YouOwn | ChoiceDesc$ creature | FromDesc$ from their hand | ChoiceTitle$ Choose a creature card in your hand | Amount$ 1 | SubAbility$ DBConjure | SpellDescription$ Choose a creature card in your hand.
+SVar:DBConjure:DB$ MakeCard | DefinedName$ ChosenCard | Zone$ Hand | SubAbility$ DBCleanup | StackDescription$ {p:You} conjures a duplicate of it into their hand. | SpellDescription$ Conjure a duplicate of it into your hand.
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+Oracle:{U}, Exile Holographic Double from your hand: Choose a creature card in your hand. Conjure a duplicate of it into your hand.

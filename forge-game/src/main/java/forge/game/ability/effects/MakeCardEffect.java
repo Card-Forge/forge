@@ -32,7 +32,10 @@ public class MakeCardEffect extends SpellAbilityEffect {
                 }
             }
             if (sa.hasParam("DefinedName")) {
-                name = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedName"), sa).getFirst().getName();
+                final CardCollection def = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedName"), sa);
+                if (def.size() > 0) {
+                    name = def.getFirst().getName();
+                }
             }
             final ZoneType zone = ZoneType.smartValueOf(sa.getParamOrDefault("Zone", "Library"));
             int amount = sa.hasParam("Amount") ?
