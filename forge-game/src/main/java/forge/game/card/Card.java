@@ -878,9 +878,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public void setChangedCardNames(Table<Long, Long, CardChangedName> changedCardNames) {
         this.changedCardNames.clear();
-        for (Table.Cell<Long, Long, CardChangedName> entry : changedCardNames.cellSet()) {
-            this.changedCardNames.put(entry.getRowKey(), entry.getColumnKey(), entry.getValue());
-        }
+        this.changedCardNames.putAll(changedCardNames);
     }
 
     public final boolean isInAlternateState() {
@@ -6610,15 +6608,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public void setChangedCardTypes(Table<Long, Long, CardChangedType> changedCardTypes) {
         this.changedCardTypes.clear();
-        for (Table.Cell<Long, Long, CardChangedType> entry : changedCardTypes.cellSet()) {
-            this.changedCardTypes.put(entry.getRowKey(), entry.getColumnKey(), entry.getValue());
-        }
+        this.changedCardTypes.putAll(changedCardTypes);
     }
     public void setChangedCardTypesCharacterDefining(Table<Long, Long, CardChangedType> changedCardTypes) {
         this.changedCardTypesCharacterDefining.clear();
-        for (Table.Cell<Long, Long, CardChangedType> entry : changedCardTypes.cellSet()) {
-            this.changedCardTypesCharacterDefining.put(entry.getRowKey(), entry.getColumnKey(), entry.getValue());
-        }
+        this.changedCardTypesCharacterDefining.putAll(changedCardTypes);
     }
 
     public void setChangedCardKeywords(Table<Long, Long, KeywordsChange> changedCardKeywords) {
@@ -6630,15 +6624,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public void setChangedCardColors(Table<Long, Long, CardColor> changedCardColors) {
         this.changedCardColors.clear();
-        for (Table.Cell<Long, Long, CardColor> entry : changedCardColors.cellSet()) {
-            this.changedCardColors.put(entry.getRowKey(), entry.getColumnKey(), entry.getValue());
-        }
+        this.changedCardColors.putAll(changedCardColors);
     }
     public void setChangedCardColorsCharacterDefining(Table<Long, Long, CardColor> changedCardColors) {
         this.changedCardColorsCharacterDefining.clear();
-        for (Table.Cell<Long, Long, CardColor> entry : changedCardColors.cellSet()) {
-            this.changedCardColorsCharacterDefining.put(entry.getRowKey(), entry.getColumnKey(), entry.getValue());
-        }
+        this.changedCardColorsCharacterDefining.putAll(changedCardColors);
     }
 
     public void cleanupCopiedChangesFrom(Card c) {
