@@ -1,5 +1,5 @@
 [format]
-Name:Standard (2012 Core Set)
+Name:Standard (M12)
 Type:Historic
 Subtype:Standard
 Effective:2011-07-15

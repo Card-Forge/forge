@@ -1,5 +1,5 @@
 [format]
-Name:Standard (New Phyrexia)
+Name:Standard (NPH)
 Type:Historic
 Subtype:Standard
 Effective:2011-05-13
