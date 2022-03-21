@@ -9,7 +9,6 @@ import forge.deck.DeckProxy;
 import forge.game.GameFormat;
 import forge.itemmanager.ItemManager;
 import forge.screens.home.quest.DialogChooseSets;
-import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 
 public class DeckSetFilter extends DeckFormatFilter {
@@ -93,7 +92,7 @@ public class DeckSetFilter extends DeckFormatFilter {
     protected Predicate<DeckProxy> buildPredicate() {
         return new Predicate<DeckProxy>() {
             @Override
-            public boolean apply(@NullableDecl DeckProxy input) {
+            public boolean apply(DeckProxy input) {
                 return input != null && sets.contains(input.getEdition().getCode());
             }
         };

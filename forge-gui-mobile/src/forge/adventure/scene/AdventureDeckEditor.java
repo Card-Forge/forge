@@ -38,7 +38,6 @@ import forge.util.Callback;
 import forge.util.ItemPool;
 import forge.util.Utils;
 import org.apache.commons.lang3.StringUtils;
-import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -267,30 +266,26 @@ import java.util.Map;
                 });
             }
             private final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare = new Function<Map.Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @NullableDecl
                 @Override
-                public Comparable<?> apply(@NullableDecl Map.Entry<InventoryItem, Integer> from) {
+                public Comparable<?> apply(Map.Entry<InventoryItem, Integer> from) {
                     return AdventurePlayer.current().getNewCards().contains(from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
                 }
             };
             private final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnNewGet = new Function<Map.Entry<? extends InventoryItem, Integer>, Object>() {
-                @NullableDecl
                 @Override
-                public Object apply(@NullableDecl Map.Entry<? extends InventoryItem, Integer> from) {
+                public Object apply(Map.Entry<? extends InventoryItem, Integer> from) {
                     return AdventurePlayer.current().getNewCards().contains(from.getKey()) ? "NEW" : "";
                 }
             };
             public static final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = new Function<Map.Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @NullableDecl
                 @Override
-                public Comparable<?> apply(@NullableDecl Map.Entry<InventoryItem, Integer> from) {
+                public Comparable<?> apply(Map.Entry<InventoryItem, Integer> from) {
                     return decksUsingMyCards.count(from.getKey());
                 }
             };
             public static final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnDeckGet = new Function<Map.Entry<? extends InventoryItem, Integer>, Object>() {
-                @NullableDecl
                 @Override
-                public Object apply(@NullableDecl Map.Entry<? extends InventoryItem, Integer> from) {
+                public Object apply(Map.Entry<? extends InventoryItem, Integer> from) {
                     return Integer.valueOf(decksUsingMyCards.count(from.getKey())).toString();
                 }
             };
