@@ -1,0 +1,12 @@
+Name:Kami of Mourning
+ManaCost:2 B
+Types:Creature Spirit
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ Whenever CARDNAME enters the battlefield, target creature you control or creature card in your graveyard perpetually gains "Whenever a creature you control with greater mana value than this card dies, return this card from your graveyard to the battlefield tapped."
+SVar:TrigEffect:DB$ Effect | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control or creature card in your graveyard | TgtZone$ Battlefield,Graveyard | RememberObjects$ Targeted | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Name$ Kami of Mourning's Perpetual Effect
+SVar:PerpetualAbility:Mode$ Continuous | Affected$ Card.IsRemembered | AddTrigger$ BiggerDies | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The card perpetually gains "Whenever a creature you control with greater mana value than this card dies, return this card from your graveyard to the battlefield tapped."
+SVar:BiggerDies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+cmcGTX | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ Whenever a creature you control with greater mana value than this card dies, return this card from your graveyard to the battlefield tapped.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
+SVar:X:Count$CardManaCost
+DeckHas:Ability$Graveyard
+Oracle:Whenever Kami of Mourning enters the battlefield, target creature you control or creature card in your graveyard perpetually gains "Whenever a creature you control with greater mana value than this card dies, return this card from your graveyard to the battlefield tapped."

@@ -1,0 +1,7 @@
+Name:Fragment Reality
+ManaCost:W
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Artifact.nonToken,Creature.nonToken,Enchantment.nonToken | TgtPrompt$ Select target nontoken artifact, creature, or enchantment | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBChangeZone | SpellDescription$ Exile target nontoken artifact, creature, or enchantment.
+SVar:DBChangeZone:DB$ ChangeZone | DefinedPlayer$ TargetedController | ChangeType$ Creature.cmcLTX | Origin$ Library | Destination$ Battlefield | Tapped$ True | Hidden$ True | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | StackDescription$ {p:TargetedController} puts a random creature card with lesser mana value from their library onto the battlefield tapped. | SpellDescription$ Its controller puts a random creature card with lesser mana value from their library onto the battlefield tapped.
+SVar:X:Targeted$CardManaCost
+Oracle:Exile target nontoken artifact, creature, or enchantment. Its controller puts a random creature card with lesser mana value from their library onto the battlefield tapped.
