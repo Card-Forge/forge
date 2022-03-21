@@ -16,6 +16,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
+import forge.util.collect.FCollectionView;
 
 public class GameSimulator {
     public static boolean COPY_STACK = false;
@@ -124,7 +125,7 @@ public class GameSimulator {
         }
     }
 
-    private SpellAbility findSaInSimGame(SpellAbility sa) {
+    private SpellAbility findSaInSimGame(final SpellAbility sa) {
         // is already an ability from sim game
         if (sa.getHostCard().getGame().equals(this.simGame)) {
             return sa;
@@ -132,7 +133,15 @@ public class GameSimulator {
         Card origHostCard = sa.getHostCard();
         Card hostCard = (Card) copier.find(origHostCard);
         String desc = sa.getDescription();
-        for (SpellAbility cSa : hostCard.getSpellAbilities()) {
+        FCollectionView<SpellAbility> candidates = hostCard.getSpellAbilities();
+        // first pass for accuracy (spells with alternative costs)
+        for (SpellAbility cSa : candidates) {
+            if (desc.equals(cSa.getDescription())) {
+                return cSa;
+            }
+        }
+        // fall back for safety
+        for (SpellAbility cSa : candidates) {
             if (desc.startsWith(cSa.getDescription())) {
                 return cSa;
             }
@@ -160,7 +169,7 @@ public class GameSimulator {
             }
 
             debugPrint("Found SA " + sa + " on host card " + sa.getHostCard() + " with owner:"+ sa.getHostCard().getOwner());
-            sa.setActivatingPlayer(aiPlayer);
+            sa.setActivatingPlayer(aiPlayer, true);
             SpellAbility origSaOrSubSa = origSa;
             SpellAbility saOrSubSa = sa;
             do {

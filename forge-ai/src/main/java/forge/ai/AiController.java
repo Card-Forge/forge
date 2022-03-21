@@ -209,15 +209,64 @@ public class AiController {
     }
 
     public boolean checkETBEffects(final Card card, final SpellAbility sa, final ApiType api) {
+        final Player activatingPlayer = sa.getActivatingPlayer();
+
+        // for xPaid stuff
+        card.setCastSA(sa);
+
+        // Replacement effects
+        for (final ReplacementEffect re : card.getReplacementEffects()) {
+            // These Replacements all care for ETB effects
+            if (!(re instanceof ReplaceMoved)) {
+                continue;
+            }
+
+            if (!ZoneType.Battlefield.toString().equals(re.getParam("Destination"))) {
+                continue;
+            }
+
+            if (re.hasParam("ValidCard")) {
+                String validCard = re.getParam("ValidCard");
+                if (!validCard.contains("Self")) {
+                    continue;
+                }
+                if (validCard.contains("notkicked")) {
+                    if (sa.isKicked()) {
+                        continue;
+                    }
+                } else if (validCard.contains("kicked")) {
+                    if (validCard.contains("kicked ")) { // want a specific kicker
+                        String s = validCard.split("kicked ")[1];
+                        if ("1".equals(s) && !sa.isOptionalCostPaid(OptionalCost.Kicker1)) continue;
+                        if ("2".equals(s) && !sa.isOptionalCostPaid(OptionalCost.Kicker2)) continue;
+                    } else if (!sa.isKicked()) { // otherwise just any must be present
+                        continue;
+                    }
+                }
+            }
+
+            if (!re.requirementsCheck(game)) {
+                continue;
+            }
+            SpellAbility exSA = re.getOverridingAbility();
+
+            if (exSA != null) {
+                exSA = exSA.copy(activatingPlayer);
+
+                // ETBReplacement uses overriding abilities.
+                // These checks only work if the Executing SpellAbility is an Ability_Sub.
+                if ((exSA instanceof AbilitySub) && !doTrigger(exSA, false)) {
+                    return false;
+                }
+            }
+        }
+
         if (card.isCreature()
                 && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers)) {
             return api == null;
         }
-        boolean rightapi = false;
-        Player activatingPlayer = sa.getActivatingPlayer();
 
-        // for xPaid stuff
-        card.setCastSA(sa);
+        boolean rightapi = false;
 
         // Trigger play improvements
         for (final Trigger tr : card.getTriggers()) {
@@ -303,52 +352,6 @@ public class AiController {
             return false;
         }
 
-        // Replacement effects
-        for (final ReplacementEffect re : card.getReplacementEffects()) {
-            // These Replacements all care for ETB effects
-            if (!(re instanceof ReplaceMoved)) {
-                continue;
-            }
-
-            if (!ZoneType.Battlefield.toString().equals(re.getParam("Destination"))) {
-                continue;
-            }
-
-            if (re.hasParam("ValidCard")) {
-                String validCard = re.getParam("ValidCard");
-                if (!validCard.contains("Self")) {
-                    continue;
-                }
-                if (validCard.contains("notkicked")) {
-                    if (sa.isKicked()) {
-                        continue;
-                    }
-                } else if (validCard.contains("kicked")) {
-                    if (validCard.contains("kicked ")) { // want a specific kicker
-                        String s = validCard.split("kicked ")[1];
-                        if ("1".equals(s) && !sa.isOptionalCostPaid(OptionalCost.Kicker1)) continue;
-                        if ("2".equals(s) && !sa.isOptionalCostPaid(OptionalCost.Kicker2)) continue;
-                    } else if (!sa.isKicked()) { // otherwise just any must be present
-                        continue;
-                    }
-                }
-            }
-
-            if (!re.requirementsCheck(game)) {
-                continue;
-            }
-            SpellAbility exSA = re.getOverridingAbility();
-
-            if (exSA != null) {
-                exSA = exSA.copy(activatingPlayer);
-
-                // ETBReplacement uses overriding abilities.
-                // These checks only work if the Executing SpellAbility is an Ability_Sub.
-                if ((exSA instanceof AbilitySub) && !doTrigger(exSA, false)) {
-                    return false;
-                }
-            }
-        }
         return true;
     }
 

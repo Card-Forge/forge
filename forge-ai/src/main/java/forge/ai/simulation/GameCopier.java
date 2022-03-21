@@ -27,6 +27,7 @@ import forge.game.card.CardFactory;
 import forge.game.card.CounterType;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
+import forge.game.mana.Mana;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -90,7 +91,9 @@ public class GameCopier {
             newPlayer.setLifeLostLastTurn(origPlayer.getLifeLostLastTurn());
             newPlayer.setLifeLostThisTurn(origPlayer.getLifeLostThisTurn());
             newPlayer.setLifeGainedThisTurn(origPlayer.getLifeGainedThisTurn());
-            newPlayer.getManaPool().add(origPlayer.getManaPool());
+            for (Mana m : origPlayer.getManaPool()) {
+                newPlayer.getManaPool().addMana(m, false);
+            }
             newPlayer.setCommanders(origPlayer.getCommanders()); // will be fixed up below
             playerMap.put(origPlayer, newPlayer);
         }
@@ -131,7 +134,7 @@ public class GameCopier {
             for (SpellAbility sa : c.getSpellAbilities()) {
                 Player activatingPlayer = sa.getActivatingPlayer();
                 if (activatingPlayer != null && activatingPlayer.getGame() != newGame) {
-                    sa.setActivatingPlayer(gameObjectMap.map(activatingPlayer));
+                    sa.setActivatingPlayer(gameObjectMap.map(activatingPlayer), true);
                 }
             }
         }
@@ -180,7 +183,7 @@ public class GameCopier {
                 }
             }
             if (newSa != null) {
-                newSa.setActivatingPlayer(map.map(origSa.getActivatingPlayer()));
+                newSa.setActivatingPlayer(map.map(origSa.getActivatingPlayer()), true);
                 if (origSa.usesTargeting()) {
                     for (GameObject o : origSa.getTargets()) {
                         newSa.getTargets().add(map.map(o));
