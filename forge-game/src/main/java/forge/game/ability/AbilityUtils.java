@@ -73,8 +73,8 @@ import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
-import io.sentry.event.BreadcrumbBuilder;
 
 
 public class AbilityUtils {
@@ -1428,11 +1428,11 @@ public class AbilityUtils {
         final Card card = sa.getHostCard();
 
         String msg = "AbilityUtils:resolveApiAbility: try to resolve API ability";
-        Sentry.getContext().recordBreadcrumb(
-                new BreadcrumbBuilder().setMessage(msg)
-                .withData("Api", sa.getApi().toString())
-                .withData("Card", card.getName()).withData("SA", sa.toString()).build()
-        );
+        Breadcrumb bread = new Breadcrumb(msg);
+        bread.setData("Api", sa.getApi().toString());
+        bread.setData("Card", card.getName());
+        bread.setData("SA", sa.toString());
+        Sentry.addBreadcrumb(bread);
 
         // check conditions
         if (sa.metConditions()) {

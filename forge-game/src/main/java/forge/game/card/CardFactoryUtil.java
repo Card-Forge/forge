@@ -74,8 +74,8 @@ import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
-import io.sentry.event.BreadcrumbBuilder;
 
 /**
  * <p>
@@ -599,10 +599,11 @@ public class CardFactoryUtil {
                 intrinsicAbility.setCardState(card.getCurrentState());
             } catch (Exception e) {
                 String msg = "CardFactoryUtil:addAbilityFactoryAbilities: crash in raw Ability";
-                Sentry.getContext().recordBreadcrumb(
-                    new BreadcrumbBuilder().setMessage(msg)
-                    .withData("Card", card.getName()).withData("Ability", rawAbility).build()
-                );
+
+                Breadcrumb bread = new Breadcrumb(msg);
+                bread.setData("Card", card.getName());
+                bread.setData("Ability", rawAbility);
+                Sentry.addBreadcrumb(bread, card);
 
                 // rethrow the exception with card Name for the user
                 throw new RuntimeException("crash in raw Ability, check card script of " + card.getName(), e);

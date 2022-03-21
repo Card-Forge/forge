@@ -14,8 +14,8 @@ import forge.model.FModel;
 import forge.util.Lang;
 import forge.util.Localizer;
 import io.sentry.Sentry;
-import io.sentry.context.Context;
 import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.core.classloader.annotations.SuppressStaticInitializationFor;
 import org.testng.Assert;
@@ -28,6 +28,7 @@ import java.util.ResourceBundle;
 		ImageCache.class, ImageIO.class, ImageKeys.class,
 		ForgeConstants.class, Localizer.class, Sentry.class, GameLogFormatter.class})
 @SuppressStaticInitializationFor({"forge.ImageCache", "forge.localinstance.properties.ForgeConstants"})
+@PowerMockIgnore({"javax.xml.*", "org.xml.sax.*", "com.sun.org.apache.xerces.*", "org.w3c.dom.*",  "org.springframework.context.*", "org.apache.log4j.*"})
 public class BaseGameSimulationTest extends ForgeCardMockTestCase {
 
 	@BeforeMethod
@@ -36,7 +37,7 @@ public class BaseGameSimulationTest extends ForgeCardMockTestCase {
 		super.initMocks();
 		PowerMockito.mockStatic(Sentry.class);
 		PowerMockito.mockStatic(GameLogFormatter.class);
-		PowerMockito.when(Sentry.getContext()).thenReturn(new Context());
+		//PowerMockito.when(Sentry.getContext()).thenReturn(new Context());
 		Lang.createInstance("en-US");
 	}
 

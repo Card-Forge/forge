@@ -31,7 +31,6 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.Localizer;
 import io.sentry.Sentry;
-import io.sentry.event.BreadcrumbBuilder;
 
 /**
  * The class ErrorViewer. Enables showing and saving error messages that
@@ -71,9 +70,7 @@ public class BugReporter {
 
         final StringBuilder sb = new StringBuilder();
         if (null != message && !message.isEmpty()) {
-            Sentry.getContext().recordBreadcrumb(
-                    new BreadcrumbBuilder().setMessage(message).build()
-            );
+            Sentry.addBreadcrumb(message);
             sb.append(FThreads.debugGetCurrThreadId()).append(" > ").append(message).append("\n");
         }
 
@@ -156,9 +153,9 @@ public class BugReporter {
 
     public static void sendSentry() {
         if (exception != null) {
-            Sentry.capture(exception);
+            Sentry.captureException(exception);
         } else if (message !=null) {
-            Sentry.capture(message);
+            Sentry.captureMessage(message);
         }
     }
 
