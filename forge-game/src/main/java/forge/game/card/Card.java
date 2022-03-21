@@ -70,8 +70,8 @@ import forge.trackable.Tracker;
 import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
-import io.sentry.event.BreadcrumbBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.apache.commons.lang3.tuple.Pair;
@@ -2183,10 +2183,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 }
             } catch (Exception e) {
                 String msg = "Card:keywordToText: crash in Keyword parsing";
-                Sentry.getContext().recordBreadcrumb(
-                    new BreadcrumbBuilder().setMessage(msg)
-                    .withData("Card", this.getName()).withData("Keyword", keyword).build()
-                );
+
+                Breadcrumb bread = new Breadcrumb(msg);
+                bread.setData("Card", this.getName());
+                bread.setData("Keyword", keyword);
+                Sentry.addBreadcrumb(bread, this);
 
                 throw new RuntimeException("Error in Card " + this.getName() + " with Keyword " + keyword, e);
             }
@@ -2672,10 +2673,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 }
             } catch (Exception e) {
                 String msg = "Card:abilityTextInstantSorcery: crash in Keyword parsing";
-                Sentry.getContext().recordBreadcrumb(
-                    new BreadcrumbBuilder().setMessage(msg)
-                    .withData("Card", this.getName()).withData("Keyword", keyword).build()
-                );
+
+                Breadcrumb bread = new Breadcrumb(msg);
+                bread.setData("Card", this.getName());
+                bread.setData("Keyword", keyword);
+                Sentry.addBreadcrumb(bread, this);
 
                 throw new RuntimeException("Error in Card " + this.getName() + " with Keyword " + keyword, e);
             }

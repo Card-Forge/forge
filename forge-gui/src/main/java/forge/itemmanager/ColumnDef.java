@@ -34,6 +34,8 @@ import forge.itemmanager.ItemColumnConfig.SortState;
 import forge.model.FModel;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
+import forge.util.TextUtil;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
@@ -68,9 +70,9 @@ public enum ColumnDef {
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
                     if (from.getKey() instanceof PaperCard) {
                         String sortableName = ((PaperCard)from.getKey()).getSortableName();
-                        return sortableName == null ? InventoryItem.toSortableName(from.getKey().getName()) : sortableName;
+                        return sortableName == null ? TextUtil.toSortableName(from.getKey().getName()) : sortableName;
                     }
-                    return InventoryItem.toSortableName(from.getKey().getName());
+                    return TextUtil.toSortableName(from.getKey().getName());
                 }
             },
             new Function<Entry<? extends InventoryItem, Integer>, Object>() {

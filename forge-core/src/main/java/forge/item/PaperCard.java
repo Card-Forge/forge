@@ -190,7 +190,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         collectorNumber = (collectorNumber0 != null) && (collectorNumber0.length() > 0) ? collectorNumber0 : IPaperCard.NO_COLLECTOR_NUMBER;
         // If the user changes the language this will make cards sort by the old language until they restart the game.
         // This is a good tradeoff
-        sortableName = InventoryItem.toSortableName(CardTranslation.getTranslatedName(rules0.getName()));
+        sortableName = TextUtil.toSortableName(CardTranslation.getTranslatedName(rules0.getName()));
     }
 
     // Want this class to be a key for HashTable

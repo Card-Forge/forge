@@ -23,8 +23,8 @@ import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
+import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
-import io.sentry.event.BreadcrumbBuilder;
 
 public class ManaEffect extends SpellAbilityEffect {
 
@@ -231,10 +231,12 @@ public class ManaEffect extends SpellAbilityEffect {
             // this can happen when mana is based on criteria that didn't match
             if (mana.isEmpty()) {
                 String msg = "AbilityFactoryMana::manaResolve() - special mana effect is empty for";
-                Sentry.getContext().recordBreadcrumb(
-                        new BreadcrumbBuilder().setMessage(msg)
-                        .withData("Card", card.getName()).withData("SA", sa.toString()).build()
-                );
+
+                Breadcrumb bread = new Breadcrumb(msg);
+                bread.setData("Card", card.getName());
+                bread.setData("SA", sa.toString());
+                Sentry.addBreadcrumb(bread, sa);
+
                 continue;
             }
 

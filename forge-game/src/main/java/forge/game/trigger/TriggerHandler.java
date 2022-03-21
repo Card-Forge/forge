@@ -40,8 +40,8 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
 import forge.util.Visitor;
+import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
-import io.sentry.event.BreadcrumbBuilder;
 
 public class TriggerHandler {
     private final Set<TriggerType> suppressedModes = Collections.synchronizedSet(EnumSet.noneOf(TriggerType.class));
@@ -127,10 +127,12 @@ public class TriggerHandler {
             return TriggerHandler.parseTrigger(mapParams, host, intrinsic, sVarHolder);
         } catch (Exception e) {
             String msg = "TriggerHandler:parseTrigger failed to parse";
-            Sentry.getContext().recordBreadcrumb(
-                    new BreadcrumbBuilder().setMessage(msg)
-                    .withData("Card", host.getName()).withData("Trigger", trigParse).build()
-            );
+
+            Breadcrumb bread = new Breadcrumb(msg);
+            bread.setData("Card", host.getName());
+            bread.setData("Trigger", trigParse);
+            Sentry.addBreadcrumb(bread, host);
+
             //rethrow
             throw new RuntimeException("Error in Trigger for Card: " + host.getName(), e);
         }
@@ -153,10 +155,12 @@ public class TriggerHandler {
             }
         } catch (Exception e) {
             String msg = "TriggerHandler:parseTrigger failed to parse";
-            Sentry.getContext().recordBreadcrumb(
-                    new BreadcrumbBuilder().setMessage(msg)
-                    .withData("Card", host.getName()).withData("Params", mapParams.toString()).build()
-            );
+
+            Breadcrumb bread = new Breadcrumb(msg);
+            bread.setData("Card", host.getName());
+            bread.setData("Params", mapParams.toString());
+            Sentry.addBreadcrumb(bread, host);
+
             //rethrow
             throw new RuntimeException("Error in Trigger for Card: " + host.getName(), e);
         }

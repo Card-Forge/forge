@@ -638,8 +638,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public <T extends GameEntity> List<T> chooseEntitiesForEffect(final FCollectionView<T> optionList, final int  min, final int max,
             final DelayedReveal delayedReveal, final SpellAbility sa, final String title, final Player targetedPlayer, Map<String, Object> params) {
         // useful details for debugging problems with the mass select logic
-        Sentry.getContext().addExtra("Card", sa.getCardView().toString());
-        Sentry.getContext().addExtra("SpellAbility", sa.toString());
+        Sentry.setExtra("Card", sa.getCardView().toString());
+        Sentry.setExtra("SpellAbility", sa.toString());
 
         // Human is supposed to read the message and understand from it what to choose
         if (optionList.isEmpty()) {

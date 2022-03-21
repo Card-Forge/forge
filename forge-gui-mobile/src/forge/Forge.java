@@ -59,7 +59,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.6.47.001";
+    public static final String CURRENT_VERSION = "1.6.49.001";
 
     private static ApplicationListener app = null;
     static Scene currentScene = null;

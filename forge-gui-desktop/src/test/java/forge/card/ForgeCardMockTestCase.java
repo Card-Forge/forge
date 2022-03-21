@@ -14,6 +14,7 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.core.classloader.annotations.SuppressStaticInitializationFor;
 import org.powermock.modules.testng.PowerMockTestCase;
@@ -33,6 +34,7 @@ import java.util.ResourceBundle;
         ImageCache.class, ImageIO.class, ImageKeys.class,
         ForgeConstants.class, Localizer.class})
 @SuppressStaticInitializationFor({"forge.ImageCache", "forge.localinstance.properties.ForgeConstants"})
+@PowerMockIgnore({"javax.xml.*", "org.xml.sax.*", "com.sun.org.apache.xerces.*", "org.w3c.dom.*",  "org.springframework.context.*", "org.apache.log4j.*"})
 public class ForgeCardMockTestCase extends PowerMockTestCase {
 
     public static final String MOCKED_LOCALISED_STRING = "any localised string";

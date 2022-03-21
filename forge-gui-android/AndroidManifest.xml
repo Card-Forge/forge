@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="forge.app"
     android:versionCode="1"
-    android:versionName="1.6.47" > <!-- versionName should be updated and it's used for Sentry releases tag -->
+    android:versionName="1.6.49" > <!-- versionName should be updated and it's used for Sentry releases tag -->
 
     <uses-sdk
         android:minSdkVersion="19"
@@ -30,5 +30,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".Exiter" android:theme="@android:style/Theme.NoDisplay"/>
+        <meta-data android:name="io.sentry.dsn" android:value="https://a0b8dbad9b8a49cfa51bf65d462e8dae:b3f27d7461224cb8836eb5c6050c666c@sentry.cardforge.org/2?buffer.enabled=false" />
+
+        <!-- manually added -->
+        <provider
+            android:name="io.sentry.android.core.SentryInitProvider"
+            android:authorities=".SentryInitProvider"
+            android:exported="false"/>
+        <provider
+            android:name="io.sentry.android.core.SentryPerformanceProvider"
+            android:authorities=".SentryPerformanceProvider"
+            android:initOrder="200"
+            android:exported="false"/>
     </application>
 </manifest>

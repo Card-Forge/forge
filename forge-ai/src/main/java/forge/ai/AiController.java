@@ -64,8 +64,8 @@ import forge.util.ComparatorUtil;
 import forge.util.Expressions;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
+import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
-import io.sentry.event.BreadcrumbBuilder;
 
 import java.util.*;
 
@@ -628,7 +628,7 @@ public class AiController {
         catch (IllegalArgumentException ex) {
             System.err.println(ex.getMessage());
             String assertex = ComparatorUtil.verifyTransitivity(saComparator, all);
-            Sentry.capture(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
+            Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
         }
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
@@ -839,21 +839,21 @@ public class AiController {
         if (sa.getApi() != null) {
 
             String msg = "AiController:canPlaySa: AI checks for if can PlaySa";
-            Sentry.getContext().recordBreadcrumb(
-                    new BreadcrumbBuilder().setMessage(msg)
-                    .withData("Api", sa.getApi().toString())
-                    .withData("Card", card.getName()).withData("SA", sa.toString()).build()
-            );
+            Breadcrumb bread = new Breadcrumb(msg);
+            bread.setData("Api", sa.getApi().toString());
+            bread.setData("Card", card.getName());
+            bread.setData("SA", sa.toString());
+            Sentry.addBreadcrumb(bread);
 
             // add Extra for debugging
-            Sentry.getContext().addExtra("Card", card);
-            Sentry.getContext().addExtra("SA", sa.toString());
+            Sentry.setExtra("Card", card.getName());
+            Sentry.setExtra("SA", sa.toString());
 
             boolean canPlay = SpellApiToAi.Converter.get(sa.getApi()).canPlayAIWithSubs(player, sa);
 
             // remove added extra
-            Sentry.getContext().removeExtra("Card");
-            Sentry.getContext().removeExtra("SA");
+            Sentry.removeExtra("Card");
+            Sentry.removeExtra("SA");
 
             if (!canPlay) {
                 return AiPlayDecision.CantPlayAi;
@@ -1699,7 +1699,7 @@ public class AiController {
         catch (IllegalArgumentException ex) {
             System.err.println(ex.getMessage());
             String assertex = ComparatorUtil.verifyTransitivity(saComparator, all);
-            Sentry.capture(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
+            Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
         }
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
