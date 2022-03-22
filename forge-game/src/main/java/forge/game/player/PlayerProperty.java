@@ -179,10 +179,6 @@ public class PlayerProperty {
             if (player.getLifeLostThisTurn() <= 0) {
                 return false;
             }
-        } else if (property.equals("DeclaredAttackerThisTurn")) {
-            if (player.getCreaturesAttackedThisTurn().size() <= 0) {
-                return false;
-            }
         } else if (property.equals("TappedLandForManaThisTurn")) {
             if (!player.hasTappedLandForManaThisTurn()) {
                 return false;

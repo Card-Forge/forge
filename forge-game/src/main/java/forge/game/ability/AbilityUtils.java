@@ -3402,10 +3402,6 @@ public class AbilityUtils {
         final String[] sq = l[0].split("\\.");
         final String value = sq[0];
 
-        if (value.contains("CardsInHand")) {
-            return doXMath(player.getCardsIn(ZoneType.Hand).size(), m, source, ctb);
-        }
-
         if (value.contains("NumPowerSurgeLands")) {
             return doXMath(player.getNumPowerSurgeLands(), m, source, ctb);
         }
@@ -3423,6 +3419,10 @@ public class AbilityUtils {
             return doXMath(n, m, source, ctb);
         }
 
+        if (value.contains("CardsInHand")) {
+            return doXMath(player.getCardsIn(ZoneType.Hand).size(), m, source, ctb);
+        }
+
         if (value.contains("CardsInLibrary")) {
             return doXMath(player.getCardsIn(ZoneType.Library).size(), m, source, ctb);
         }
@@ -3434,12 +3434,11 @@ public class AbilityUtils {
             return doXMath(CardLists.getType(player.getCardsIn(ZoneType.Graveyard), "Land").size(), m, source, ctb);
         }
 
-        if (value.contains("CreaturesInPlay")) {
-            return doXMath(player.getCreaturesInPlay().size(), m, source, ctb);
-        }
-
         if (value.contains("CardsInPlay")) {
             return doXMath(player.getCardsIn(ZoneType.Battlefield).size(), m, source, ctb);
+        }
+        if (value.contains("CreaturesInPlay")) {
+            return doXMath(player.getCreaturesInPlay().size(), m, source, ctb);
         }
 
         if (value.contains("StartingLife")) {
@@ -3453,7 +3452,6 @@ public class AbilityUtils {
         if (value.contains("LifeLostThisTurn")) {
             return doXMath(player.getLifeLostThisTurn(), m, source, ctb);
         }
-
         if (value.contains("LifeLostLastTurn")) {
             return doXMath(player.getLifeLostLastTurn(), m, source, ctb);
         }

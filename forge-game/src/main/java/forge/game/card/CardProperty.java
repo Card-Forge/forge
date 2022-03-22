@@ -338,7 +338,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("StrictlySelf")) {
-            if (!card.equals(source) || card.getTimestamp() != source.getTimestamp()) {
+            if (!card.equalsWithTimestamp(source)) {
                 return false;
             }
         } else if (property.startsWith("Self")) {
@@ -542,10 +542,6 @@ public class CardProperty {
             }
         } else if (property.startsWith("CanBeAttachedBy")) {
             if (!card.canBeAttached(source)) {
-                return false;
-            }
-        } else if (property.startsWith("Equipped")) {
-            if (!source.hasCardAttachment(card)) {
                 return false;
             }
         } else if (property.startsWith("Fortified")) {
