@@ -2430,7 +2430,21 @@ public class AbilityUtils {
 
         // Count$AttackersDeclared
         if (sq[0].startsWith("AttackersDeclared")) {
-            return doXMath(player.getAttackersDeclaredThisTurn(), expr, c, ctb);
+            List<Card> attackers = player.getCreaturesAttackedThisTurn();
+            List<Card> differentAttackers = new ArrayList<>();
+            for (Card attacker : attackers) {
+                boolean add = true;
+                for (Card different : differentAttackers) {
+                    if (different.equalsWithTimestamp(attacker)) {
+                        add = false;
+                        break;
+                    }
+                }
+                if (add) {
+                    differentAttackers.add(attacker);
+                }
+            }
+            return doXMath(differentAttackers.size(), expr, c, ctb);
         }
 
         // Count$CardAttackedThisTurn <Valid>
@@ -3402,10 +3416,6 @@ public class AbilityUtils {
         final String[] sq = l[0].split("\\.");
         final String value = sq[0];
 
-        if (value.contains("CardsInHand")) {
-            return doXMath(player.getCardsIn(ZoneType.Hand).size(), m, source, ctb);
-        }
-
         if (value.contains("NumPowerSurgeLands")) {
             return doXMath(player.getNumPowerSurgeLands(), m, source, ctb);
         }
@@ -3423,6 +3433,10 @@ public class AbilityUtils {
             return doXMath(n, m, source, ctb);
         }
 
+        if (value.contains("CardsInHand")) {
+            return doXMath(player.getCardsIn(ZoneType.Hand).size(), m, source, ctb);
+        }
+
         if (value.contains("CardsInLibrary")) {
             return doXMath(player.getCardsIn(ZoneType.Library).size(), m, source, ctb);
         }
@@ -3434,12 +3448,11 @@ public class AbilityUtils {
             return doXMath(CardLists.getType(player.getCardsIn(ZoneType.Graveyard), "Land").size(), m, source, ctb);
         }
 
-        if (value.contains("CreaturesInPlay")) {
-            return doXMath(player.getCreaturesInPlay().size(), m, source, ctb);
-        }
-
         if (value.contains("CardsInPlay")) {
             return doXMath(player.getCardsIn(ZoneType.Battlefield).size(), m, source, ctb);
+        }
+        if (value.contains("CreaturesInPlay")) {
+            return doXMath(player.getCreaturesInPlay().size(), m, source, ctb);
         }
 
         if (value.contains("StartingLife")) {
@@ -3453,7 +3466,6 @@ public class AbilityUtils {
         if (value.contains("LifeLostThisTurn")) {
             return doXMath(player.getLifeLostThisTurn(), m, source, ctb);
         }
-
         if (value.contains("LifeLostLastTurn")) {
             return doXMath(player.getLifeLostLastTurn(), m, source, ctb);
         }
@@ -3495,7 +3507,7 @@ public class AbilityUtils {
         }
 
         if (value.contains("AttackersDeclared")) {
-            return doXMath(player.getAttackersDeclaredThisTurn(), m, source, ctb);
+            return doXMath(player.getCreaturesAttackedThisTurn().size(), m, source, ctb);
         }
 
         if (value.contains("DamageToOppsThisTurn")) {
