@@ -2430,7 +2430,7 @@ public class AbilityUtils {
 
         // Count$AttackersDeclared
         if (sq[0].startsWith("AttackersDeclared")) {
-            return doXMath(player.getAttackersDeclaredThisTurn(), expr, c, ctb);
+            return doXMath(player.getCreaturesAttackedThisTurn().size(), expr, c, ctb);
         }
 
         // Count$CardAttackedThisTurn <Valid>
@@ -3495,7 +3495,7 @@ public class AbilityUtils {
         }
 
         if (value.contains("AttackersDeclared")) {
-            return doXMath(player.getAttackersDeclaredThisTurn(), m, source, ctb);
+            return doXMath(player.getCreaturesAttackedThisTurn().size(), m, source, ctb);
         }
 
         if (value.contains("DamageToOppsThisTurn")) {

@@ -180,7 +180,7 @@ public class PlayerProperty {
                 return false;
             }
         } else if (property.equals("DeclaredAttackerThisTurn")) {
-            if (player.getAttackersDeclaredThisTurn() <= 0) {
+            if (player.getCreaturesAttackedThisTurn().size() <= 0) {
                 return false;
             }
         } else if (property.equals("TappedLandForManaThisTurn")) {
