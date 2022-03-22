@@ -2430,7 +2430,21 @@ public class AbilityUtils {
 
         // Count$AttackersDeclared
         if (sq[0].startsWith("AttackersDeclared")) {
-            return doXMath(player.getCreaturesAttackedThisTurn().size(), expr, c, ctb);
+            List<Card> attackers = player.getCreaturesAttackedThisTurn();
+            List<Card> differentAttackers = new ArrayList<>();
+            for (Card attacker : attackers) {
+                boolean add = true;
+                for (Card different : differentAttackers) {
+                    if (different.equalsWithTimestamp(attacker)) {
+                        add = false;
+                        break;
+                    }
+                }
+                if (add) {
+                    differentAttackers.add(attacker);
+                }
+            }
+            return doXMath(differentAttackers.size(), expr, c, ctb);
         }
 
         // Count$CardAttackedThisTurn <Valid>
