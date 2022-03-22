@@ -257,7 +257,7 @@ public class CountersPutAi extends CountersAi {
             if (playAggro) {
                 // aggro profiles ignore conservative play for this AI logic
                 return true;
-            } else if (ai.getGame().getCombat() != null && source != null) {
+            } else if (ph.inCombat() && source != null) {
                 if (ai.getGame().getCombat().isAttacking(source) && !onlyDefensive) {
                     return true;
                 } else if (ai.getGame().getCombat().isBlocking(source)) {

@@ -329,13 +329,13 @@ public abstract class GameState {
                 newText.append("|Damage:").append(c.getDamage());
             }
 
-            if (!c.getChosenColor().isEmpty()) {
+            if (c.hasChosenColor()) {
                 newText.append("|ChosenColor:").append(TextUtil.join(c.getChosenColors(), ","));
             }
-            if (!c.getChosenType().isEmpty()) {
+            if (c.hasChosenType()) {
                 newText.append("|ChosenType:").append(c.getChosenType());
             }
-            if (!c.getChosenType2().isEmpty()) {
+            if (c.hasChosenType2()) {
                 newText.append("|ChosenType2:").append(c.getChosenType2());
             }
             if (!c.getNamedCard().isEmpty()) {

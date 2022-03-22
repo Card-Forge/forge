@@ -266,9 +266,7 @@ public class GameCopier {
         newCard.setOwner(newOwner);
         newCard.setName(c.getName());
         newCard.setCommander(c.isCommander());
-        for (String type : c.getType()) {
-            newCard.addType(type);
-        }
+        newCard.addType(c.getType());
         for (StaticAbility stAb : c.getStaticAbilities()) {
             newCard.addStaticAbility(stAb.copy(newCard, true));
         }
@@ -358,13 +356,13 @@ public class GameCopier {
             if (c.hasChosenPlayer()) {
                 newCard.setChosenPlayer(playerMap.get(c.getChosenPlayer()));
             }
-            if (!c.getChosenType().isEmpty()) {
+            if (c.hasChosenType()) {
                 newCard.setChosenType(c.getChosenType());
             }
-            if (!c.getChosenType2().isEmpty()) {
+            if (c.hasChosenType2()) {
                 newCard.setChosenType2(c.getChosenType2());
             }
-            if (c.getChosenColors() != null) {
+            if (c.hasChosenColor()) {
                 newCard.setChosenColors(Lists.newArrayList(c.getChosenColors()));
             }
             if (!c.getNamedCard().isEmpty()) {

@@ -39,6 +39,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -403,9 +404,9 @@ public class CombatUtil {
 
         c.getDamageHistory().setCreatureAttackedThisCombat(true);
         c.getDamageHistory().clearNotAttackedSinceLastUpkeepOf();
-        c.getController().addCreaturesAttackedThisTurn(c);
+        c.getController().addCreaturesAttackedThisTurn(CardUtil.getLKICopy(c));
         c.getController().incrementAttackersDeclaredThisTurn();
-    } // checkDeclareAttackers
+    }
 
     /**
      * Create a {@link Map} mapping each possible attacker for the attacking
