@@ -108,8 +108,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     // cards attached or otherwise linked to this card
     private CardCollection hauntedBy, devouredCards, exploitedCards, delvedCards, convokedCards, imprintedCards, encodedCards;
-    private CardCollection mustBlockCards, gainControlTargets, chosenCards;
+    private CardCollection gainControlTargets, chosenCards;
     private CardCollection mergedCards;
+    private Map<Long, CardCollection> mustBlockCards = Maps.newHashMap();
     private List<Card> blockedThisTurn = Lists.newArrayList();
     private List<Card> blockedByThisTurn = Lists.newArrayList();
 
@@ -1313,22 +1314,22 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     //MustBlockCards are cards that this Card must block if able in an upcoming combat.
     //This is cleared at the end of each turn.
     public final CardCollectionView getMustBlockCards() {
-        return CardCollection.getView(mustBlockCards);
+        return CardCollection.getView(Iterables.concat(mustBlockCards.values()));
     }
-    public final void addMustBlockCard(final Card c) {
-        mustBlockCards = view.addCard(mustBlockCards, c, TrackableProperty.MustBlockCards);
+    public final void addMustBlockCard(long ts, final Card c) {
+        mustBlockCards.put(ts, new CardCollection(c));
+        view.setCards(null, Iterables.concat(mustBlockCards.values()), TrackableProperty.MustBlockCards);
     }
-    public final void addMustBlockCards(final Iterable<Card> attackersToBlock) {
-        mustBlockCards = view.addCards(mustBlockCards, attackersToBlock, TrackableProperty.MustBlockCards);
+    public final void addMustBlockCards(long ts, final Iterable<Card> attackersToBlock) {
+        mustBlockCards.put(ts, new CardCollection(attackersToBlock));
+        view.setCards(null, Iterables.concat(mustBlockCards.values()), TrackableProperty.MustBlockCards);
     }
-    public final void removeMustBlockCard(final Card c) {
-        mustBlockCards = view.removeCard(mustBlockCards, c, TrackableProperty.MustBlockCards);
-    }
-    public final void removeMustBlockCards(final Iterable<Card> attackersToBlock) {
-        mustBlockCards = view.removeCards(mustBlockCards, attackersToBlock, TrackableProperty.MustBlockCards);
+    public final void removeMustBlockCards(long ts) {
+        mustBlockCards.remove(ts);
+        view.setCards(null, Iterables.concat(mustBlockCards.values()), TrackableProperty.MustBlockCards);
     }
     public final void clearMustBlockCards() {
-        mustBlockCards = view.clearCards(mustBlockCards, TrackableProperty.MustBlockCards);
+        view.setCards(null, null, TrackableProperty.MustBlockCards);
     }
 
     public final void setMustAttackEntity(final GameEntity e) {
