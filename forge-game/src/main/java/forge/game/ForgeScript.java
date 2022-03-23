@@ -18,6 +18,7 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+import org.apache.commons.lang3.StringUtils;
 
 public class ForgeScript {
 
@@ -78,7 +79,11 @@ public class ForgeScript {
             final String svar = property.substring(8);
             return cardState.hasSVar(svar);
         } else if (property.equals("ChosenType")) {
-            return cardState.getTypeWithChanges().hasStringType(source.getChosenType());
+            String chosenType = source.getChosenType();
+            if (chosenType.startsWith("Non")) {
+                return !cardState.getTypeWithChanges().hasStringType(StringUtils.capitalize(chosenType.substring(3)));
+            }
+            return cardState.getTypeWithChanges().hasStringType(chosenType);
         } else if (property.equals("IsNotChosenType")) {
             return !cardState.getTypeWithChanges().hasStringType(source.getChosenType());
         } else if (property.equals("ChosenType2")) {
