@@ -1,0 +1,14 @@
+Name:Futurist Spellthief
+ManaCost:2 U
+Types:Creature Moonfolk Wizard
+PT:3/2
+K:Flash
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigConjure | TriggerDescription$ When CARDNAME enters the battlefield, conjure a duplicate of target spell into your hand. That card perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
+SVar:TrigConjure:DB$ MakeCard | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card.inZoneStack | TgtZone$ Stack | DefinedName$ TargetedSource | Zone$ Hand | RememberMade$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Name$ Futurist Spellthief's Perpetual Effect | Triggers$ Update | SubAbility$ DBCleanup
+SVar:PerpetualAbility:Mode$ Continuous | AddStaticAbility$ SpendAnyMana | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The conjured card perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
+SVar:SpendAnyMana:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | AffectedZone$ Stack | AddHiddenKeyword$ May spend mana as though it were mana of any color to cast CARDNAME | Description$ You may spend mana as though it were mana of any color to cast this spell.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+Oracle:Flash\nWhen Futurist Spellthief enters the battlefield, conjure a duplicate of target spell into your hand. That card perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
