@@ -332,11 +332,16 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         for (CardRules cr : rulesByName.values()) {
             if (!contains(cr.getName())) {
-                if (upcomingSet != null) {
-                    addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown));
-                } else if (enableUnknownCards && !this.filtered.contains(cr.getName())) {
-                    System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/editions/ folder. ");
-                    addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special));
+                if (!cr.isCustom()) {
+                    if (upcomingSet != null || !cr.isCustom()) {
+                        addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown));
+                    } else if (enableUnknownCards && !this.filtered.contains(cr.getName())) {
+                        System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/editions/ folder. ");
+                        addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special));
+                    }
+                } else {
+                    System.err.println("The custom card " + cr.getName() + " was not assigned to any set. Adding it to custom USER set, and will try to load custom art from USER edition.");
+                    addCard(new PaperCard(cr, "USER", CardRarity.Special));
                 }
             }
         }

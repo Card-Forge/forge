@@ -48,6 +48,7 @@ public final class CardRules implements ICardCharacteristics {
     private ColorSet deckbuildingColors;
     private String meldWith;
     private String partnerWith;
+    private boolean custom;
 
     private CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
         splitType = altMode;
@@ -146,6 +147,9 @@ public final class CardRules implements ICardCharacteristics {
     public CardAiHints getAiHints() {
         return aiHints;
     }
+
+    public boolean isCustom() { return custom; }
+    public void setCustom() { custom = true;   }
 
     @Override
     public CardType getType() {
