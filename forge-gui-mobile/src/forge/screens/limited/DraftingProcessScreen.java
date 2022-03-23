@@ -105,6 +105,7 @@ public class DraftingProcessScreen extends FDeckEditor {
             DeckPreferences.setDraftDeck(name);
 
             LoadGameScreen.BoosterDraft.setAsBackScreen(false); //set load draft screen to be opened when user done editing deck
+            LoadGameScreen.BoosterDraft.open();
             break;
         case QuestDraft:
             FModel.getQuest().getDraftDecks().add(finishedDraft);
