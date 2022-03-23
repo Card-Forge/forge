@@ -7,6 +7,7 @@ import java.util.concurrent.Executors;
 
 import forge.card.CardEdition;
 import forge.item.IPaperCard;
+import forge.item.PaperToken;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.ImageKeys;
@@ -74,6 +75,10 @@ public abstract class ImageFetcher {
                 System.err.println("Paper card not found for: " + imageKey);
                 return;
             }
+            //Skip fetching if it's a custom user card.
+            if (paperCard.getRules().isCustom()){
+                return;
+            }
             // Skip fetching if artist info is not available for art crop
             if (useArtCrop && paperCard.getArtist().isEmpty())
                 return;
@@ -110,6 +115,8 @@ public abstract class ImageFetcher {
             final String filename = imageKey.substring(2) + ".jpg";
             String tokenUrl = tokenImages.get(filename);
             if (tokenUrl == null) {
+                PaperToken T = ImageUtil.getPaperTokenFromImageKey(imageKey.substring(2));
+                if (T.getRules().isCustom()) return; //Custom token, do not fetch image.
                 System.err
                         .println("No specified file for '" + filename + "'.. Attempting to download from default Url");
                 tokenUrl = String.format("%s%s", ForgeConstants.URL_TOKEN_DOWNLOAD, filename);

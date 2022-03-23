@@ -252,7 +252,7 @@ public final class CardEdition implements Comparable<CardEdition> {
     private final static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     public static final CardEdition UNKNOWN = new CardEdition("1990-01-01", "???", "??", "??", Type.UNKNOWN, "Undefined", FoilType.NOT_SUPPORTED, new CardInSet[]{});
-
+    public static final String UNSORTED_USER = "USER"; //Bucket for user content, unassigned to a set.
     private Date date;
     private String code;
     private String code2;
@@ -729,17 +729,35 @@ public final class CardEdition implements Comparable<CardEdition> {
 
     public static class Collection extends StorageBase<CardEdition> {
         private final Map<String, CardEdition> aliasToEdition = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-
+        private boolean lock = false; //Lock once custom content has been added.
         public Collection(IItemReader<CardEdition> reader) {
             super("Card editions", reader);
 
             for (CardEdition ee : this) {
-                String alias = ee.getAlias();
-                if (null != alias) {
-                    aliasToEdition.put(alias, ee);
-                }
-                aliasToEdition.put(ee.getCode2(), ee);
+                initAliases(ee);
             }
+        }
+        private void initAliases(CardEdition E){ //Add the alias to the edition here, to ensure it's always done equally.
+            String alias = E.getAlias();
+            if (null != alias) aliasToEdition.put(alias, E);
+            aliasToEdition.put(E.getCode2(), E);
+        }
+        @Override
+        public void add(CardEdition item) { //Even though we want it to be read only, make an exception for custom content.
+            if(lock) throw new UnsupportedOperationException("This is a read-only storage");
+            else map.put(item.getName(), item);
+        };
+        public void append(CardEdition.Collection C){ //Append custom editions
+            if (lock) throw new UnsupportedOperationException("This is a read-only storage");
+            for(CardEdition E : C){ //Update the alias list as above or else it'll fail to look up.
+                this.add(E);
+                initAliases(E); //Made a method in case the system changes, so it's consistent.
+            }
+            CardEdition customBucket = new CardEdition("2990-01-01", "USER", "USER", "USER",
+                    Type.CUSTOM_SET, "USER", FoilType.NOT_SUPPORTED, new CardInSet[]{});
+            this.add(customBucket);
+            initAliases(customBucket);
+            this.lock = true; //Consider it initialized and prevent from writing any more data.
         }
 
         //Gets a sets by code.  It will search first by three letter codes, then by aliases and two-letter codes.
