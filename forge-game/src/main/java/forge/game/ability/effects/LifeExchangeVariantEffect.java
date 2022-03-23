@@ -63,7 +63,7 @@ public class LifeExchangeVariantEffect extends SpellAbilityEffect {
             return;
         }
 
-        if (!source.isInZone(ZoneType.Battlefield)) {
+        if (!source.isInPlay()) {
             return;
         }
 

@@ -1590,7 +1590,7 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Provoke")) {
             final String actualTrigger = "Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Secondary$ True"
                     + " | TriggerDescription$ Provoke (" + inst.getReminderText() + ")";
-            final String blockStr = "DB$ MustBlock | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature defending player controls";
+            final String blockStr = "DB$ MustBlock | Duration$ UntilEndOfCombat | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature defending player controls";
             final String untapStr = "DB$ Untap | Defined$ Targeted";
 
             SpellAbility blockSA = AbilityFactory.getAbility(blockStr, card);
