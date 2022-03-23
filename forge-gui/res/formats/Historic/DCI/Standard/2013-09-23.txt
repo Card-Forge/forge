@@ -1,6 +1,0 @@
-[format]
-Name:Standard (Theros)
-Type:Historic
-Subtype:Standard
-Effective:2013-09-23
-Sets:RTR, GTC, DGM, M14, THS

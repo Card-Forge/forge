@@ -1,5 +1,5 @@
 [format]
-Name:Standard (Journey into Nyx)
+Name:Standard (JOU)
 Type:Historic
 Subtype:Standard
 Effective:2014-05-02

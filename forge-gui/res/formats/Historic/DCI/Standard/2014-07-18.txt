@@ -1,5 +1,5 @@
 [format]
-Name:Standard (2015 Core Set)
+Name:Standard (M15)
 Type:Historic
 Subtype:Standard
 Effective:2014-07-18

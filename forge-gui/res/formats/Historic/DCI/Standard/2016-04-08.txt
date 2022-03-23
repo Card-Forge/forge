@@ -1,6 +1,6 @@
 [format]
-Name:Standard (Shadows over Innistrad)
+Name:Standard (SOI)
 Type:Historic
 Subtype:Standard
 Effective:2016-04-08
-Sets:DTK, ORI, BFZ, OGW, W16, SOI
+Sets:DTK, ORI, BFZ, OGW, SOI, W16

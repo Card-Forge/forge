@@ -1,6 +1,6 @@
 [format]
-Name:Standard (Magic Origins)
+Name:Standard (ORI)
 Type:Historic
 Subtype:Standard
 Effective:2015-07-17
-Sets:THS, BNG, JOU, M15, KTK, FRF, DTK, ORI
+Sets:THS, BNG, JOU, M15, KTK, FRF, UGF, DTK, ORI
