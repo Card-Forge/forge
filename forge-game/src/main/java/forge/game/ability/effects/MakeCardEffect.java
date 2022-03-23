@@ -10,6 +10,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -19,8 +20,10 @@ public class MakeCardEffect extends SpellAbilityEffect {
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
-        for (final Player player : getTargetPlayers(sa)) {
-            final Card source = sa.getHostCard();
+        final Card source = sa.getHostCard();
+        final PlayerCollection players = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
+
+        for (final Player player : players) {
             final Game game = player.getGame();
 
             String name = sa.getParamOrDefault("Name", "");
