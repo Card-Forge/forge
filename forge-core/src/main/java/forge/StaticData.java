@@ -174,10 +174,6 @@ public class StaticData {
         return this.editions;
     }
 
-    public final CardEdition.Collection getCustomEditions() {
-        return this.editions;
-    }
-
     private List<CardEdition> sortedEditions;
     public final List<CardEdition> getSortedEditions() {
         if (sortedEditions == null) {

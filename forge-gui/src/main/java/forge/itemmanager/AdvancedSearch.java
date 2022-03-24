@@ -332,8 +332,6 @@ public class AdvancedSearch {
             protected CardEdition getItemValue(InventoryItem input) {
                 if (input instanceof PaperCard) {
                     CardEdition set = FModel.getMagicDb().getEditions().get(((PaperCard)input).getEdition());
-                    if (set == null)  // try custom set
-                        set = FModel.getMagicDb().getCustomEditions().get(((PaperCard)input).getEdition());
                     return set;
                 } else if (input instanceof SealedProduct) {
                     return FModel.getMagicDb().getEditions().get(((SealedProduct)input).getEdition());

@@ -252,7 +252,6 @@ public final class CardEdition implements Comparable<CardEdition> {
     private final static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     public static final CardEdition UNKNOWN = new CardEdition("1990-01-01", "???", "??", "??", Type.UNKNOWN, "Undefined", FoilType.NOT_SUPPORTED, new CardInSet[]{});
-    public static final String UNSORTED_USER = "USER"; //Bucket for user content, unassigned to a set.
     private Date date;
     private String code;
     private String code2;

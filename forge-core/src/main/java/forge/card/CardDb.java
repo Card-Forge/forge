@@ -333,7 +333,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         for (CardRules cr : rulesByName.values()) {
             if (!contains(cr.getName())) {
                 if (!cr.isCustom()) {
-                    if (upcomingSet != null || !cr.isCustom()) {
+                    if (upcomingSet != null) {
                         addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown));
                     } else if (enableUnknownCards && !this.filtered.contains(cr.getName())) {
                         System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/editions/ folder. ");
