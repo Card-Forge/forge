@@ -1,7 +1,7 @@
 [format]
-Name:Standard (Aether Revolt)
+Name:Standard (AER)
 Type:Historic
 Subtype:Standard
 Effective:2017-01-20
-Sets:BFZ, OGW, W16, SOI, EMN, KLD, AER
+Sets:BFZ, OGW, SOI, W16, EMN, KLD, AER
 Banned:Emrakul, the Promised End; Reflector Mage; Smuggler's Copter

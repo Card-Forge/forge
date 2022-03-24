@@ -1,7 +1,7 @@
 [format]
-Name:Standard (Hour of Devastation)
+Name:Standard (HOU)
 Type:Historic
 Subtype:Standard
 Effective:2017-07-14
-Sets:BFZ, OGW, W16, SOI, EMN, KLD, AER, W17, AKH, HOU
+Sets:BFZ, OGW, SOI, W16, EMN, KLD, AER, AKH, W17, HOU
 Banned:Aetherworks Marvel; Emrakul, the Promised End; Felidar Guardian; Reflector Mage; Smuggler's Copter

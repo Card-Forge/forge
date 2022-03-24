@@ -1,7 +1,7 @@
 [format]
-Name:Standard (Rivals of Ixalan)
+Name:Standard (RIX)
 Type:Historic
 Subtype:Standard
 Effective:2018-01-19
-Sets:KLD, AER, W17, AKH, HOU, XLN, RIX
+Sets:KLD, AER, AKH, W17, HOU, XLN, RIX
 Banned:Aetherworks Marvel; Attune with Aether; Felidar Guardian; Rampaging Ferocidon; Ramunap Ruins; Rogue Refiner; Smuggler's Copter

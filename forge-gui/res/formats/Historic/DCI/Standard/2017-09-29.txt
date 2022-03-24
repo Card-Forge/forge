@@ -1,7 +1,7 @@
 [format]
-Name:Standard (Ixalan)
+Name:Standard (XLN)
 Type:Historic
 Subtype:Standard
 Effective:2017-09-29
-Sets:KLD, AER, W17, AKH, HOU, XLN
+Sets:KLD, AER, AKH, W17, HOU, XLN
 Banned:Aetherworks Marvel; Felidar Guardian; Smuggler's Copter
