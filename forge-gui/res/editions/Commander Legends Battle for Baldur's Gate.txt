@@ -1,0 +1,27 @@
+[metadata]
+Code=CLB
+Date=2022-06-10
+Name=Commander Legends: Battle for Baldur's Gate
+Type=Draft
+ScryfallCode=CLB
+
+[cards]
+111 M Ancient Brass Dragon @Johan Grenier
+125 R Elder Brain @Daarken
+175 U Fireball @Xavier Ribeiro
+187 C Lightning Bolt @Irina Nordsol
+204 R Wand of Wonder @Xavier Ribeiro
+285 M Minsc & Boo, Timeless Heroes @Andreas Zafiratos
+348 R Bountiful Promenade @Alayna Danner
+358 R Reflecting Pool @Alayna Danner
+363 M Minsc & Boo, Timeless Heroes @Bram Sels
+367 M Ancient Brass Dragon @Raoul Vitale
+389 M Ancient Brass Dragon @Jeff Miracola
+397 U Fireball @Justine Jones
+401 C Lightning Bolt @Phil Stone
+573 R Elder Brain @Daarken
+584 R Wand of Wonder @Xavier Ribeiro
+601 R Bountiful Promenade @Alayna Danner
+604 R Reflecting Pool @Alayna Danner
+935 R Wand of Wonder @Lindsey Look
+936 R Elder Brain @Nino Is
