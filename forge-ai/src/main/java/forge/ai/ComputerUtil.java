@@ -3057,6 +3057,7 @@ public class ComputerUtil {
 
             // TODO !thisCombat should include cards that will phase in
             for (Card att : opp.getCreaturesInPlay()) {
+                // TODO should be limited based on how much getAttackCost the opp can pay
                 if ((thisCombat && CombatUtil.canAttack(att, ai)) || (!thisCombat && ComputerUtilCombat.canAttackNextTurn(att, ai))) {
                     // TODO need to copy the card
                     // att = ComputerUtilCombat.applyPotentialAttackCloneTriggers(att);
