@@ -547,6 +547,10 @@ public class CardState extends GameObject implements IHasSVars {
     }
 
     public final void copyFrom(final CardState source, final boolean lki) {
+        copyFrom(source, lki, null);
+    }
+
+    public final void copyFrom(final CardState source, final boolean lki, final CardTraitBase ctb) {
         // Makes a "deeper" copy of a CardState object
         setName(source.getName());
         setType(source.type);
@@ -576,8 +580,19 @@ public class CardState extends GameObject implements IHasSVars {
         setRarity(source.rarity);
         setSetCode(source.setCode);
 
+        Trigger dontCopyTr = null;
+        if (ctb != null && ctb.hasParam("DoesntHaveThisAbility")) {
+            SpellAbility root = ((SpellAbility) ctb).getRootAbility();
+            if (root.isTrigger()) {
+                dontCopyTr = root.getTrigger();
+            }
+        }
+
         triggers.clear();
         for (Trigger tr : source.triggers) {
+            if (tr.equals(dontCopyTr)) {
+                continue;
+            }
             if (tr.isIntrinsic()) {
                 triggers.add(tr.copy(card, lki));
             }
