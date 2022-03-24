@@ -13,7 +13,11 @@ ScryfallCode=CLB
 204 R Wand of Wonder @Xavier Ribeiro
 285 M Minsc & Boo, Timeless Heroes @Andreas Zafiratos
 348 R Bountiful Promenade @Alayna Danner
+355 R Luxury Suite @Titus Lunter
+357 R Morphic Pool @Chris Ostrowski
 358 R Reflecting Pool @Alayna Danner
+360 R Sea of Clouds @Matt Gaser
+361 R Spire Garden @Alexander Forssberg
 363 M Minsc & Boo, Timeless Heroes @Bram Sels
 367 M Ancient Brass Dragon @Raoul Vitale
 389 M Ancient Brass Dragon @Jeff Miracola
@@ -22,6 +26,10 @@ ScryfallCode=CLB
 573 R Elder Brain @Daarken
 584 R Wand of Wonder @Xavier Ribeiro
 601 R Bountiful Promenade @Alayna Danner
+602 R Luxury Suite @Titus Lunter
+603 R Morphic Pool @Chris Ostrowski
 604 R Reflecting Pool @Alayna Danner
+605 R Sea of Clouds @Matt Gaser
+606 R Spire Garden @Alexander Forssberg
 935 R Wand of Wonder @Lindsey Look
 936 R Elder Brain @Nino Is
