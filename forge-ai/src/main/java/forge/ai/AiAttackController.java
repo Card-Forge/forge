@@ -589,10 +589,9 @@ public class AiAttackController {
         // TODO might want to only calculate that if it's needed
         // TODO might want to factor in isManaSourceReserved
         int myFreeMana = ComputerUtilMana.getAvailableManaEstimate(ai, !nextTurn);
-        // skip attackers exceeding the attack tax
+        // skip attackers exceeding the attack tax that's payable
         // (this prevents the AI from only making a partial attack that could backfire)
-        
-        Pair<Integer, Integer> tramplerFirst = getDamageFromBlockingTramplers(blockedAttackers, remainingAttackers, myFreeMana);
+        final Pair<Integer, Integer> tramplerFirst = getDamageFromBlockingTramplers(blockedAttackers, remainingBlockers, myFreeMana);
         int trampleDamage = tramplerFirst.getLeft();
         int tramplerTaxPaid = tramplerFirst.getRight();
 
@@ -623,7 +622,8 @@ public class AiAttackController {
                 unblockedAttackers.removeAll(unblockableWithPaying);
                 totalCombatDamage = dmgUnblockableAfterPaying;
                 // recalculate the trampler damage with the reduced mana available now
-                trampleDamage = getDamageFromBlockingTramplers(blockedAttackers, remainingAttackers, myFreeMana - unblockableAttackTax).getLeft();
+                myFreeMana -= unblockableAttackTax;
+                trampleDamage = getDamageFromBlockingTramplers(blockedAttackers, remainingBlockers, myFreeMana).getLeft();
             } else {
                 unblockedAttackers = unblockableWithoutCost;
                 myFreeMana -= tramplerTaxPaid;

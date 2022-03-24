@@ -38,6 +38,7 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -1064,6 +1065,8 @@ public class AiBlockController {
                 reinforceBlockersToKill(combat);
             }
 
+            lifeInDanger |= removeUnpayableBlocks(combat);
+
             // == 2. If the AI life would still be in danger make a safer approach ==
             if (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)) {
                 clearBlockers(combat, possibleBlockers); // reset every block assignment
@@ -1338,5 +1341,27 @@ public class AiBlockController {
                 && powerParityOrHigher
                 && (creatureParityOrAllowedDiff || wantToTradeWithCreatInHand)
                 && (MyRandom.percentTrue(chance) || wantToSavePlaneswalker);
+    }
+
+    private boolean removeUnpayableBlocks(final Combat combat) {
+        int myFreeMana = ComputerUtilMana.getAvailableManaEstimate(ai);
+        int currentBlockTax = 0;
+        final List<Card> oldBlockers = combat.getAllBlockers();
+        CardLists.sortByPowerDesc(oldBlockers);
+        boolean modified = false;
+
+        for (final Card blocker : oldBlockers) {
+            if (blocker.getController() == ai) {
+                Cost tax = CombatUtil.getBlockCost(blocker.getGame(), blocker, combat.getAttackersBlockedBy(blocker).get(0));
+                int taxCMC = tax != null ? tax.getCostMana().getMana().getCMC() : 0;
+                if (myFreeMana < currentBlockTax + taxCMC) {
+                    combat.removeFromCombat(blocker);
+                    modified = true;
+                    continue;
+                }
+                currentBlockTax += taxCMC;
+            }
+        }
+        return modified;
     }
 }
