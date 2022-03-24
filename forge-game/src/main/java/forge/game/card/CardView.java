@@ -647,6 +647,9 @@ public class CardView extends GameEntityView {
     public FCollectionView<CardView> getMustBlockCards() {
         return get(TrackableProperty.MustBlockCards);
     }
+    void updateMustBlockCards(Card c) {
+        setCards(null, c.getMustBlockCards(), TrackableProperty.MustBlockCards);
+    }
 
     public CardView getPairedWith() {
         return get(TrackableProperty.PairedWith);
