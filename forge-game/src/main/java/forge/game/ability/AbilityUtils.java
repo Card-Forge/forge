@@ -1164,12 +1164,12 @@ public class AbilityUtils {
             }
         }
         else if (defined.startsWith("Enchanted")) {
-            if (card.getEntityAttachedTo() != null) {
+            if (card.isAttachedToEntity()) {
                 addPlayer(Lists.newArrayList(card.getEntityAttachedTo()), defined, players);
             }
         }
         else if (defined.startsWith("Equipped")) {
-            if (card.getEquipping() != null) {
+            if (card.isEquipping()) {
                 addPlayer(Lists.newArrayList(card.getEquipping()), defined, players);
             }
         }

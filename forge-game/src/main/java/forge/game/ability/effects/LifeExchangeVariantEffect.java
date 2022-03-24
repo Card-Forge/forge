@@ -8,7 +8,6 @@ import forge.game.card.Card;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.zone.ZoneType;
 
 public class LifeExchangeVariantEffect extends SpellAbilityEffect {
 
@@ -63,7 +62,7 @@ public class LifeExchangeVariantEffect extends SpellAbilityEffect {
             return;
         }
 
-        if (!source.isInZone(ZoneType.Battlefield)) {
+        if (!source.isInPlay()) {
             return;
         }
 

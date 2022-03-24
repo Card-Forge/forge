@@ -413,7 +413,7 @@ public class CardProperty {
         } else if (property.startsWith("AttachedTo")) {
             final String restriction = property.split("AttachedTo ")[1];
 
-            if (card.getEntityAttachedTo() == null) {
+            if (!card.isAttachedToEntity()) {
                 return false;
             }
 
