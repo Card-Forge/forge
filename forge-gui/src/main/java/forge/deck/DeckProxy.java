@@ -309,10 +309,11 @@ public class DeckProxy implements InventoryItem {
     private boolean isCustomDeckFormat(){
         Deck deck = this.getDeck();
         CardPool cards = deck.getAllCardsInASinglePool();
-        CardEdition.Collection customEditions = StaticData.instance().getCustomEditions();
+        CardEdition.Collection customEditions = StaticData.instance().getEditions();
         for (Entry<PaperCard, Integer> entry : cards){
             String setCode = entry.getKey().getEdition();
-            if (customEditions.contains(setCode))
+            CardEdition E = customEditions.getEditionByCodeOrThrow(setCode);
+            if (E != null && E.getType() == CardEdition.Type.CUSTOM_SET)
                 return true;
         }
         return false;
