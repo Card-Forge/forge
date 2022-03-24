@@ -27,15 +27,6 @@ public class ImageUtil {
         return cp;
     }
 
-    public static PaperToken getPaperTokenFromImageKey(String key) {
-        if (key == null) return null;
-        String[] data = key.split("[_](?=[^_]*$)");
-        if (data.length == 2) {
-            return StaticData.instance().getAllTokens().getToken(data[0], data[1].toUpperCase());
-        }
-        return null;
-    }
-
     public static String getImageRelativePath(PaperCard cp, boolean backFace, boolean includeSet, boolean isDownloadUrl) {
         final String nameToUse = cp == null ? null : getNameToUse(cp, backFace);
         if (nameToUse == null) {

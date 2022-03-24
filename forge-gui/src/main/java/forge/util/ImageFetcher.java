@@ -115,8 +115,11 @@ public abstract class ImageFetcher {
             final String filename = imageKey.substring(2) + ".jpg";
             String tokenUrl = tokenImages.get(filename);
             if (tokenUrl == null) {
-                PaperToken T = ImageUtil.getPaperTokenFromImageKey(imageKey.substring(2));
-                if (T.getRules().isCustom()) return; //Custom token, do not fetch image.
+                String[] tempdata = imageKey.split("[_](?=[^_]*$)"); //We want to check the edition first.
+                if(tempdata.length == 2){
+                    CardEdition E = StaticData.instance().getEditions().get(tempdata[1]);
+                    if (E.getType() == CardEdition.Type.CUSTOM_SET) return; //Custom set token, skip fetching.
+                }
                 System.err
                         .println("No specified file for '" + filename + "'.. Attempting to download from default Url");
                 tokenUrl = String.format("%s%s", ForgeConstants.URL_TOKEN_DOWNLOAD, filename);
