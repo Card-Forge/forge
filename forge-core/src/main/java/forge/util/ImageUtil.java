@@ -6,7 +6,6 @@ import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.item.PaperCard;
-import forge.item.PaperToken;
 
 public class ImageUtil {
     public static float getNearestHQSize(float baseSize, float actualSize) {

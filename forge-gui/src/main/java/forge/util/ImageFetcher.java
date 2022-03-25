@@ -7,7 +7,6 @@ import java.util.concurrent.Executors;
 
 import forge.card.CardEdition;
 import forge.item.IPaperCard;
-import forge.item.PaperToken;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.ImageKeys;
