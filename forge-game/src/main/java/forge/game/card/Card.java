@@ -1318,18 +1318,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void addMustBlockCard(long ts, final Card c) {
         mustBlockCards.put(ts, new CardCollection(c));
-        view.setCards(null, Iterables.concat(mustBlockCards.values()), TrackableProperty.MustBlockCards);
+        view.updateMustBlockCards(this);
     }
     public final void addMustBlockCards(long ts, final Iterable<Card> attackersToBlock) {
         mustBlockCards.put(ts, new CardCollection(attackersToBlock));
-        view.setCards(null, Iterables.concat(mustBlockCards.values()), TrackableProperty.MustBlockCards);
+        view.updateMustBlockCards(this);
     }
     public final void removeMustBlockCards(long ts) {
         mustBlockCards.remove(ts);
-        view.setCards(null, Iterables.concat(mustBlockCards.values()), TrackableProperty.MustBlockCards);
+        view.updateMustBlockCards(this);
     }
     public final void clearMustBlockCards() {
-        view.setCards(null, null, TrackableProperty.MustBlockCards);
+        mustBlockCards.clear();
+        view.updateMustBlockCards(this);
     }
 
     public final void setMustAttackEntity(final GameEntity e) {

@@ -17,6 +17,7 @@
  */
 package forge.game.combat;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -870,7 +871,7 @@ public class CombatUtil {
      *            a {@link forge.game.combat.Combat} object.
      * @return a boolean.
      */
-    public static boolean mustBlockAnAttacker(final Card blocker, final Combat combat, List<Card> freeBlockers) {
+    public static boolean mustBlockAnAttacker(final Card blocker, final Combat combat, final List<Card> freeBlockers) {
         if (blocker == null || combat == null) {
             return false;
         }
@@ -881,7 +882,7 @@ public class CombatUtil {
             if (getBlockCost(blocker.getGame(), blocker, attacker) != null) {
                 continue;
             }
-            
+
             if (attacker.hasStartOfKeyword("All creatures able to block CARDNAME do so.")
                     || (attacker.hasStartOfKeyword("CARDNAME must be blocked if able.")
                             && combat.getBlockers(attacker).isEmpty())
@@ -962,15 +963,10 @@ public class CombatUtil {
             return false;
         }
 
-        boolean mustBlock = true;
-        if (!canBlock(blocker, combat)) {
+        boolean mustBlock = !combat.getAttackersBlockedBy(blocker).containsAll(requirementCards);
+        if (mustBlock && !canBlock(blocker, combat)) {
             // the blocker can't block more but is he even part of another requirement?
-            for (Card req : requirementCards) {
-                if (combat.getAttackersBlockedBy(blocker).contains(req)) {
-                    mustBlock = false;
-                    break;
-                }
-            }
+            mustBlock = Collections.disjoint(combat.getAttackersBlockedBy(blocker), requirementCards);
         }
         return mustBlock;
     }
