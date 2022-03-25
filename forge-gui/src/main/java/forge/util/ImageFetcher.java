@@ -39,7 +39,7 @@ public abstract class ImageFetcher {
     private HashMap<String, HashSet<Callback>> currentFetches = new HashMap<>();
     private HashMap<String, String> tokenImages;
 
-    private String getScryfallDownloadURL(PaperCard c, boolean backFace, boolean useArtCrop){
+    private String getScryfallDownloadURL(PaperCard c, boolean backFace, boolean useArtCrop) {
         StaticData data = StaticData.instance();
         CardEdition edition = data.getEditions().get(c.getEdition());
         if (edition == null) // edition does not exist - some error occurred with card data
@@ -75,7 +75,7 @@ public abstract class ImageFetcher {
                 return;
             }
             //Skip fetching if it's a custom user card.
-            if (paperCard.getRules().isCustom()){
+            if (paperCard.getRules().isCustom()) {
                 return;
             }
             // Skip fetching if artist info is not available for art crop
@@ -98,7 +98,7 @@ public abstract class ImageFetcher {
             }
 
             final String cardCollectorNumber = paperCard.getCollectorNumber();
-            if (!cardCollectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)){
+            if (!cardCollectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
                 final String scryfallURL = this.getScryfallDownloadURL(paperCard, backFace, useArtCrop);
                 if (scryfallURL != null)
                     downloadUrls.add(scryfallURL);
@@ -115,12 +115,11 @@ public abstract class ImageFetcher {
             String tokenUrl = tokenImages.get(filename);
             if (tokenUrl == null) {
                 String[] tempdata = imageKey.split("[_](?=[^_]*$)"); //We want to check the edition first.
-                if(tempdata.length == 2){
+                if (tempdata.length == 2) {
                     CardEdition E = StaticData.instance().getEditions().get(tempdata[1]);
-                    if (E.getType() == CardEdition.Type.CUSTOM_SET) return; //Custom set token, skip fetching.
+                    if (E != null && E.getType() == CardEdition.Type.CUSTOM_SET) return; //Custom set token, skip fetching.
                 }
-                System.err
-                        .println("No specified file for '" + filename + "'.. Attempting to download from default Url");
+                System.err.println("No specified file for '" + filename + "'.. Attempting to download from default Url");
                 tokenUrl = String.format("%s%s", ForgeConstants.URL_TOKEN_DOWNLOAD, filename);
             }
             destFile = new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, filename);
