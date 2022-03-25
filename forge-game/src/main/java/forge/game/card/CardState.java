@@ -549,7 +549,6 @@ public class CardState extends GameObject implements IHasSVars {
     public final void copyFrom(final CardState source, final boolean lki) {
         copyFrom(source, lki, null);
     }
-
     public final void copyFrom(final CardState source, final boolean lki, final CardTraitBase ctb) {
         // Makes a "deeper" copy of a CardState object
         setName(source.getName());

@@ -1324,6 +1324,10 @@ public class AiController {
     }
 
     public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+        if (mode.equals(PlayerActionConfirmMode.AlternativeDamageAssignment)) {
+            return true;
+        }
+
         ApiType api = sa.getApi();
 
         // Abilities without api may also use this routine, However they should provide a unique mode value ?? How could this work?

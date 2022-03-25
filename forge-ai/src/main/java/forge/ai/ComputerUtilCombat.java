@@ -2059,12 +2059,6 @@ public class ComputerUtilCombat {
 
         boolean isAttacking = defender != null;
 
-        if (isAttacking && (attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
-                || attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked."))) {
-            damageMap.put(null, dmgCanDeal);
-            return damageMap;
-        }
-
         final boolean hasTrample = attacker.hasKeyword(Keyword.TRAMPLE);
 
         if (combat != null && hasTrample && attacker.isAttacking()) {
