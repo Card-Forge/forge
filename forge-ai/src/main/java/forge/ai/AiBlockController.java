@@ -946,10 +946,9 @@ public class AiBlockController {
     }
 
     private void clearBlockers(final Combat combat, final List<Card> possibleBlockers) {
-        final List<Card> oldBlockers = combat.getAllBlockers();
-        for (final Card blocker : oldBlockers) {
-            if (blocker.getController() == ai) // don't touch other player's blockers
-                combat.removeFromCombat(blocker);
+        for (final Card blocker : CardLists.filterControlledBy(combat.getAllBlockers(), ai)) {
+            // don't touch other player's blockers
+            combat.removeFromCombat(blocker);
         }
 
         attackersLeft = new ArrayList<>(attackers); // keeps track of all currently unblocked attackers
@@ -1346,21 +1345,19 @@ public class AiBlockController {
     private boolean removeUnpayableBlocks(final Combat combat) {
         int myFreeMana = ComputerUtilMana.getAvailableManaEstimate(ai);
         int currentBlockTax = 0;
-        final List<Card> oldBlockers = combat.getAllBlockers();
+        List<Card> oldBlockers = CardLists.filterControlledBy(combat.getAllBlockers(), ai);
         CardLists.sortByPowerDesc(oldBlockers);
         boolean modified = false;
 
         for (final Card blocker : oldBlockers) {
-            if (blocker.getController() == ai) {
-                Cost tax = CombatUtil.getBlockCost(blocker.getGame(), blocker, combat.getAttackersBlockedBy(blocker).get(0));
-                int taxCMC = tax != null ? tax.getCostMana().getMana().getCMC() : 0;
-                if (myFreeMana < currentBlockTax + taxCMC) {
-                    combat.removeFromCombat(blocker);
-                    modified = true;
-                    continue;
-                }
-                currentBlockTax += taxCMC;
+            Cost tax = CombatUtil.getBlockCost(blocker.getGame(), blocker, combat.getAttackersBlockedBy(blocker).get(0));
+            int taxCMC = tax != null ? tax.getCostMana().getMana().getCMC() : 0;
+            if (myFreeMana < currentBlockTax + taxCMC) {
+                combat.removeFromCombat(blocker);
+                modified = true;
+                continue;
             }
+            currentBlockTax += taxCMC;
         }
         return modified;
     }

@@ -660,6 +660,7 @@ public class AiAttackController {
         int trampleDamage = 0;
         CardCollection remainingBlockers = new CardCollection(blockers);
         for (Card attacker : CardLists.getKeyword(blockedAttackers, Keyword.TRAMPLE)) {
+            // TODO might sort by quotient of dmg/cost for best combination
             Cost tax = CombatUtil.getAttackCost(attacker.getGame(), attacker, defendingOpponent);
             int taxCMC = tax != null ? tax.getCostMana().getMana().getCMC() : 0;
             if (myFreeMana < currentAttackTax + taxCMC) {

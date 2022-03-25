@@ -1324,7 +1324,7 @@ public class AiController {
     }
 
     public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
-        if (mode.equals(PlayerActionConfirmMode.AlternativeDamageAssignment)) {
+        if (mode == PlayerActionConfirmMode.AlternativeDamageAssignment) {
             return true;
         }
 
