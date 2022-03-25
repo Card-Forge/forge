@@ -227,21 +227,11 @@ public class StaticData {
     public void attemptToLoadCard(String cardName, String setCode) {
         CardRules rules = cardReader.attemptToLoadCard(cardName);
         CardRules customRules = null;
-        if (customCardReader != null) {
-            customRules = customCardReader.attemptToLoadCard(cardName);
-        }
         if (rules != null) {
             if (rules.isVariant()) {
                 variantCards.loadCard(cardName, setCode, rules);
             } else {
                 commonCards.loadCard(cardName, setCode, rules);
-            }
-        }
-        if (customRules != null) {
-            if (customRules.isVariant()) {
-                variantCards.loadCard(cardName, setCode, customRules);
-            } else {
-                commonCards.loadCard(cardName, setCode, customRules);
             }
         }
     }
