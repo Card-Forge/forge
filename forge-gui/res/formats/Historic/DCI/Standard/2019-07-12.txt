@@ -1,5 +1,5 @@
 [format]
-Name:Standard (Core Set 2020)
+Name:Standard (M20)
 Type:Historic
 Subtype:Standard
 Effective:2019-07-12

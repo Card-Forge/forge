@@ -1,5 +1,5 @@
 [format]
-Name:Standard (War of the Spark)
+Name:Standard (WAR)
 Type:Historic
 Subtype:Standard
 Effective:2019-05-03
