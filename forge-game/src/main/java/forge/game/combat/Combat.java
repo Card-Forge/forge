@@ -853,11 +853,13 @@ public class Combat {
                 Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(attacker, orderedBlockers, attackers,
                         damageDealt, defender, divideCombatDamageAsChoose || getAttackingPlayer() != assigningPlayer);
 
+                attackers.remove(attacker);
                 // player wants to assign another first
                 if (map == null) {
+                    // add to end
+                    attackers.add(attacker);
                     continue;
                 }
-                attackers.remove(attacker);
 
                 for (Entry<Card, Integer> dt : map.entrySet()) {
                     if (dt.getKey() == null) {
