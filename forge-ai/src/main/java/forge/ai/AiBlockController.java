@@ -1150,9 +1150,9 @@ public class AiBlockController {
         //Check for validity of blocks in case something slipped through
         for (Card attacker : attackers) {
             if (!CombatUtil.canAttackerBeBlockedWithAmount(attacker, combat.getBlockers(attacker).size(), combat)) {
-                for (final Card blocker : combat.getBlockers(attacker)) {
-                    if (blocker.getController() == ai) // don't touch other player's blockers
-                        combat.removeFromCombat(blocker);
+                for (final Card blocker : CardLists.filterControlledBy(combat.getBlockers(attacker), ai)) {
+                    // don't touch other player's blockers
+                    combat.removeFromCombat(blocker);
                 }
             }
         }

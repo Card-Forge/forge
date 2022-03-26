@@ -2037,7 +2037,7 @@ public class ComputerUtilCombat {
 
         } // attacker no double strike
         return false;// should never arrive here
-    } // canDestroyBlocker
+    }
 
     /**
      * <p>

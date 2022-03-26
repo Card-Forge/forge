@@ -567,30 +567,48 @@ public class PhaseHandler implements java.io.Serializable {
                     continue;
                 }
 
+                final CardCollection untapFromCancel = new CardCollection();
+                // do a full loop first so attackers can't be used to pay for Propaganda
                 for (final Card attacker : combat.getAttackers()) {
                     final boolean shouldTapForAttack = !attacker.hasKeyword(Keyword.VIGILANCE) && !attacker.hasKeyword("Attacking doesn't cause CARDNAME to tap.");
                     if (shouldTapForAttack) {
                         // set tapped to true without firing triggers because it may affect propaganda costs
                         attacker.setTapped(true);
+                        untapFromCancel.add(attacker);
                     }
+                }
 
+                for (final Card attacker : combat.getAttackers()) {
+                    // TODO currently doesn't refund (can really only happen if you cancel paying for a creature with an attacking requirement that could be satisfied without a tax)
                     final boolean canAttack = CombatUtil.checkPropagandaEffects(game, attacker, combat);
-                    attacker.setTapped(false);
 
-                    if (canAttack) {
-                        if (shouldTapForAttack) {
-                            attacker.tap(true, true);
-                        }
-                    } else {
+                    if (!canAttack) {
                         combat.removeFromCombat(attacker);
+                        if (untapFromCancel.contains(attacker)) {
+                            attacker.setTapped(false);
+                        }
                         success = CombatUtil.validateAttackers(combat);
                         if (!success) {
+                            for (Card c : untapFromCancel) {
+                                c.setTapped(false);
+                            }
+                            // might have been sacrificed while paying
+                            combat.removeAbsentCombatants();
+                            combat.initConstraints();
                             break;
                         }
                     }
                 }
 
             } while (!success);
+
+            for (final Card attacker : combat.getAttackers()) {
+                final boolean shouldTapForAttack = !attacker.hasKeyword(Keyword.VIGILANCE) && !attacker.hasKeyword("Attacking doesn't cause CARDNAME to tap.");
+                if (shouldTapForAttack) {
+                    attacker.setTapped(false);
+                    attacker.tap(true, true);
+                }
+            }
 
             // Exert creatures here
             List<Card> possibleExerters = CardLists.getKeyword(combat.getAttackers(),
