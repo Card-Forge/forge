@@ -789,6 +789,8 @@ public final class CardEdition implements Comparable<CardEdition> {
 
         public CardEdition getEditionByCodeOrThrow(final String code) {
             final CardEdition set = this.get(code);
+            if (null == set && code.equals("???")) //Hardcoded set ??? is not with the others, needs special check.
+                return UNKNOWN;
             if (null == set) {
                 throw new RuntimeException("Edition with code '" + code + "' not found");
             }
