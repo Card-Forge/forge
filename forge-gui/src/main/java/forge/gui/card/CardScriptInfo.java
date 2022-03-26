@@ -70,10 +70,15 @@ public final class CardScriptInfo {
         CardScriptInfo script = allScripts.get(name);
         if (script == null) { //attempt to load script if not previously loaded
             final String filename = name.toLowerCase().replaceAll("[^-a-z0-9\\s]","").replaceAll("[-\\s]","_").replaceAll("__","_") + ".txt";
-            String[] folders = { String.valueOf(filename.charAt(0)), "upcoming"};
+            String[] folders = {
+                ForgeConstants.CARD_DATA_DIR + File.separator + String.valueOf(filename.charAt(0)),
+                ForgeConstants.CARD_DATA_DIR + File.separator + "upcoming",
+                ForgeConstants.USER_CUSTOM_CARDS_DIR + File.separator + String.valueOf(filename.charAt(0)),
+                ForgeConstants.USER_CUSTOM_CARDS_DIR,
+            };
             
             for (String folder : folders) {
-               final File file = new File(ForgeConstants.CARD_DATA_DIR + folder + File.separator + filename);
+               final File file = new File(folder + File.separator + filename);
                if (file.exists()) {
                    script = new CardScriptInfo(FileUtil.readFileToString(file), file);
                    allScripts.put(name, script);
