@@ -165,7 +165,7 @@ public class AttackRequirement {
                             }
                         }
                     }
-                    if (!isAttackingDefender && CombatUtil.getAttackCost(attacker.getGame(), attacker, defender) == null) {
+                    if (!isAttackingDefender && CombatUtil.getAttackCost(attacker.getGame(), attacker, def) == null) {
                         violations++; // no one is attacking that defender or any of his PWs
                     }
                 }
@@ -173,14 +173,7 @@ public class AttackRequirement {
         }
 
         // now, count everything else
-        final MapToAmount<GameEntity> defenderSpecificCostFree = new LinkedHashMapToAmount<>();
-        for (GameEntity e : defenderSpecific.keySet()) {
-            if (CombatUtil.getAttackCost(attacker.getGame(), attacker, defender) == null) {
-                defenderSpecificCostFree.put(e, defenderSpecific.get(e));
-            }
-        }
-
-        violations += defenderSpecificCostFree.countAll() - (isAttacking ? defenderSpecificCostFree.count(defender) : 0);
+        violations += defenderSpecific.countAll() - (isAttacking ? defenderSpecific.count(defender) : 0);
         if (isAttacking) {
             final Combat combat = defender.getGame().getCombat();
             final Map<Card, AttackRestriction> constraints = combat.getAttackConstraints().getRestrictions();

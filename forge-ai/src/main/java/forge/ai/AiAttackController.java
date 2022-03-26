@@ -47,6 +47,7 @@ import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
@@ -135,13 +136,11 @@ public class AiAttackController {
             if (c.isToken() && c.getCopiedPermanent() == null) {
                 continue;
             }
-            for (SpellAbility sa : c.getSpellAbilities()) {
-                if (sa.getApi() == ApiType.Animate) {
-                    if (ComputerUtilCost.canPayCost(sa, defender, false)
-                            && sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
-                        Card animatedCopy = AnimateAi.becomeAnimated(c, sa);
-                        defenders.add(animatedCopy);
-                    }
+            for (SpellAbility sa : Iterables.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.Animate))) {
+                if (ComputerUtilCost.canPayCost(sa, defender, false)
+                        && sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
+                    Card animatedCopy = AnimateAi.becomeAnimated(c, sa);
+                    defenders.add(animatedCopy);
                 }
             }
         }

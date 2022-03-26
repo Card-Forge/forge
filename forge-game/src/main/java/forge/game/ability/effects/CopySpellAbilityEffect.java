@@ -108,7 +108,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 if (sa.hasParam("CanTargetPlayer")) {
                     // Radiate
                     // Remove targeted players because getAllCandidates include all the valid players
-                    for(Player p : targetedSA.getTargets().getTargetPlayers())
+                    for (Player p : targetedSA.getTargets().getTargetPlayers())
                         candidates.remove(p);
 
                     for (GameEntity o : candidates) {
