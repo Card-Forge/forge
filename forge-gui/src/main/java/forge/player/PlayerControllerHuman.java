@@ -460,7 +460,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return null;
         }
 
-        String announceTitle = ability.getParamOrDefault("AnnounceTitle", announce);
+        String announceTitle = "X".equals(announce) ? ability.getParamOrDefault("XAnnounceTitle", announce) :
+                ability.getParamOrDefault("AnnounceTitle", announce);
         if (cost.isMandatory()) {
             return chooseNumber(ability, localizer.getMessage("lblChooseAnnounceForCard", announceTitle,
                     CardTranslation.getTranslatedName(ability.getHostCard().getName())) , min, max);
