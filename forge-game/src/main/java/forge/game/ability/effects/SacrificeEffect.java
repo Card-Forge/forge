@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import forge.card.CardType;
 import forge.util.Lang;
 import org.apache.commons.lang3.StringUtils;
 
@@ -224,6 +225,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
             boolean oneTgtP = tgts.size() == 1;
 
             String msg = sa.getParamOrDefault("SacMessage", valid);
+            msg = CardType.CoreType.isValidEnum(msg) ? msg.toLowerCase() : msg;
 
             if (sa.hasParam("Destroy")) {
                 sb.append(oneTgtP ? "destroys " : " destroys ");
