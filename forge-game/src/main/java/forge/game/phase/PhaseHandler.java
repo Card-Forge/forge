@@ -365,7 +365,6 @@ public class PhaseHandler implements java.io.Serializable {
 
                 case COMBAT_END:
                     // End Combat always happens
-                    game.getEndOfCombat().executeUntil();
                     game.getEndOfCombat().executeAt();
 
                     //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
@@ -423,7 +422,7 @@ public class PhaseHandler implements java.io.Serializable {
                         c.onCleanupPhase(playerTurn);
                     }
 
-                    game.getEndOfCombat().executeUntil(); //Repeat here in case Time Stop et. al. ends combat early
+                    endCombat(); //Repeat here in case Time Stop et. al. ends combat early
                     game.getEndOfTurn().executeUntil();
                     game.getEndOfTurn().executeUntilEndOfPhase(playerTurn);
                     game.getEndOfTurn().registerUntilEndCommand(playerTurn);
@@ -1225,8 +1224,6 @@ public class PhaseHandler implements java.io.Serializable {
         endCombat();
         game.getAction().checkStateEffects(true);
         setPhase(PhaseType.COMBAT_END);
-        // End Combat always happens
-        game.getEndOfCombat().executeUntil();
         advanceToNextPhase();
     }
 
@@ -1262,6 +1259,7 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public void endCombat() {
+        game.getEndOfCombat().executeUntil();
         if (combat != null) {
             combat.endCombat();
             combat = null;
