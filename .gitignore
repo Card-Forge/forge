@@ -44,7 +44,7 @@ pom.xml.next
 pom.xml.releaseBackup
 pom.xml.tag
 release.properties
-
+.mvn/local-settings.xml
 
 # Ignore mobile-related resources
 
