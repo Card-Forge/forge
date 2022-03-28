@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - Kamigawa: Neon Dynasty #03
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2022/02/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Your opponent has The Wandering Emperor in their hand (and enough mana to cast it).
+[state]
+humanlife=20
+ailife=8
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Wayward Guide-Beast;Voltage Surge;Gift of Fangs;Ironhoof Boar;Invoke Despair
+humanbattlefield=Nezumi Bladeblesser;Anje, Maid of Dishonor;Eater of Virtue;Swamp;Swamp;Haunted Ridge;Haunted Ridge;Mountain;Mountain
+aihand=The Wandering Emperor
+aipersistentmana=C C W W
+aiprecast=The Wandering Emperor:2;The Wandering Emperor:2
+removesummoningsickness=true
