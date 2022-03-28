@@ -707,6 +707,14 @@ public abstract class GameState {
         }
 
         game.getAction().checkStateEffects(true); //ensure state based effects and triggers are updated
+
+        // Set negative or zero life after state effects if need be, important for some puzzles that rely on
+        // pre-setting negative life (e.g. PS_NEO4).
+        if (humanLife <= 0) {
+            human.setLife(humanLife, null);
+        } else if (computerLife <= 0) {
+            ai.setLife(computerLife, null);
+        }
     }
 
     private String processManaPool(ManaPool manaPool) {
