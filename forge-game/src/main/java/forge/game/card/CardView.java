@@ -480,7 +480,8 @@ public class CardView extends GameEntityView {
 
     public boolean mayPlayerLook(PlayerView pv) {
         TrackableCollection<PlayerView> col = get(TrackableProperty.PlayerMayLook);
-        return col != null && col.contains(pv);
+        // TODO don't use contains as it only queries the backing HashSet which is problematic for netplay because of unsynchronized player ids
+        return col != null && col.indexOf(pv) != -1;
     }
     void setPlayerMayLook(Iterable<Player> list) {
         if (Iterables.isEmpty(list)) {
