@@ -780,6 +780,7 @@ public class CombatUtil {
                     if (getBlockCost(blocker.getGame(), blocker, cardToBeBlocked) != null) {
                         continue;
                     }
+
                     int additionalBlockers = getMinNumBlockersForAttacker(cardToBeBlocked, defending) -1;
                     int potentialBlockers = 0;
                     // if the attacker can only be blocked with multiple creatures check if that's possible
@@ -809,6 +810,7 @@ public class CombatUtil {
                     if (getBlockCost(blocker.getGame(), blocker, attacker) != null) {
                         continue;
                     }
+
                     if (canBlock(attacker, blocker, combat)) {
                         boolean must = true;
                         if (getMinNumBlockersForAttacker(attacker, defending) > 1) {
@@ -877,48 +879,18 @@ public class CombatUtil {
         }
 
         final CardCollectionView attackers = combat.getAttackers();
-        final CardCollection attackersWithLure = new CardCollection();
+
+        final CardCollection requirementCards = new CardCollection();
+        final Player defender = blocker.getController();
         for (final Card attacker : attackers) {
             if (getBlockCost(blocker.getGame(), blocker, attacker) != null) {
                 continue;
             }
 
-            if (attacker.hasStartOfKeyword("All creatures able to block CARDNAME do so.")
-                    || (attacker.hasStartOfKeyword("CARDNAME must be blocked if able.")
-                            && combat.getBlockers(attacker).isEmpty())
-                    || (attacker.hasStartOfKeyword("CARDNAME must be blocked by exactly one creature if able.")
-                            && combat.getBlockers(attacker).size() != 1)
-                    || (attacker.hasStartOfKeyword("CARDNAME must be blocked by two or more creatures if able.")
-                            && combat.getBlockers(attacker).size() < 2)) {
-                attackersWithLure.add(attacker);
-            } else {
-                // TODO replace with Hidden Keyword or Static Ability
-                for (KeywordInterface inst : attacker.getKeywords()) {
-                    String keyword = inst.getOriginal();
-                    // MustBeBlockedBy <valid>
-                    if (keyword.startsWith("MustBeBlockedBy ")) {
-                        final String valid = keyword.substring("MustBeBlockedBy ".length());
-                        if (blocker.isValid(valid, null, null, null) &&
-                                CardLists.getValidCardCount(combat.getBlockers(attacker), valid, null, null, null) == 0) {
-                            attackersWithLure.add(attacker);
-                            break;
-                        }
-                    }
-                    // MustBeBlockedByAll:<valid>
-                    if (keyword.startsWith("MustBeBlockedByAll")) {
-                        final String valid = keyword.split(":")[1];
-                        if (blocker.isValid(valid, null, null, null)) {
-                            attackersWithLure.add(attacker);
-                            break;
-                        }
-                    }
-                }
+            if (attackerLureSatisfied(attacker, blocker, combat.getBlockers(attacker))) {
+                continue;
             }
-        }
 
-        final CardCollection requirementCards = new CardCollection();
-        final Player defender = blocker.getController();
-        for (final Card attacker : attackersWithLure) {
             if (canBeBlocked(attacker, combat, defender) && canBlock(attacker, blocker)) {
                 boolean canBe = true;
                 Player defendingPlayer = combat.getDefenderPlayerByAttacker(attacker);
@@ -963,12 +935,60 @@ public class CombatUtil {
             return false;
         }
 
-        boolean mustBlock = !combat.getAttackersBlockedBy(blocker).containsAll(requirementCards);
-        if (mustBlock && !canBlock(blocker, combat)) {
-            // the blocker can't block more but is he even part of another requirement?
-            mustBlock = Collections.disjoint(combat.getAttackersBlockedBy(blocker), requirementCards);
+        if (combat.getAttackersBlockedBy(blocker).containsAll(requirementCards)) {
+            return false;
         }
-        return mustBlock;
+
+        if (!canBlock(blocker, combat)) {
+            // the blocker can't block more but is he even part of another requirement?
+            for (final Card attacker : attackers) {
+                final boolean requirementSatisfied = attackerLureSatisfied(attacker, blocker, combat.getBlockers(attacker));
+                final CardCollection reducedBlockers = combat.getBlockers(attacker);
+                if (requirementSatisfied && reducedBlockers.contains(blocker)) {
+                    reducedBlockers.remove(blocker);
+                    if (!attackerLureSatisfied(attacker, blocker, reducedBlockers)) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return Collections.disjoint(combat.getAttackersBlockedBy(blocker), requirementCards);
+    }
+
+    private static boolean attackerLureSatisfied(final Card attacker, final Card blocker, final CardCollection blockers) {
+        if (attacker.hasStartOfKeyword("All creatures able to block CARDNAME do so.")
+                || (attacker.hasStartOfKeyword("CARDNAME must be blocked if able.")
+                        && blockers.isEmpty())
+                || (attacker.hasStartOfKeyword("CARDNAME must be blocked by exactly one creature if able.")
+                        && blockers.size() != 1)
+                || (attacker.hasStartOfKeyword("CARDNAME must be blocked by two or more creatures if able.")
+                        && blockers.size() < 2)) {
+            return false;
+        }
+
+        // TODO replace with Hidden Keyword or Static Ability
+        for (KeywordInterface inst : attacker.getKeywords()) {
+            String keyword = inst.getOriginal();
+            // MustBeBlockedBy <valid>
+            if (keyword.startsWith("MustBeBlockedBy ")) {
+                final String valid = keyword.substring("MustBeBlockedBy ".length());
+                if (blocker.isValid(valid, null, null, null) &&
+                        CardLists.getValidCardCount(blockers, valid, null, null, null) == 0) {
+                    return false;
+
+                }
+            }
+            // MustBeBlockedByAll:<valid>
+            if (keyword.startsWith("MustBeBlockedByAll")) {
+                final String valid = keyword.split(":")[1];
+                if (blocker.isValid(valid, null, null, null)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     // can a player block with one or more creatures at the moment?

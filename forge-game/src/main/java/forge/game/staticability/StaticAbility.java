@@ -642,4 +642,4 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     public List<Object> getTriggerRemembered() {
         return ImmutableList.of();
     }
-} // end class StaticAbility
+}
