@@ -2260,3 +2260,16 @@
 2022-03-11 Legacy Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2022-03-11-legacy-preliminary.zip
 2022-03-12 Legacy League (48 decks) | https://downloads.cardforge.org/decks/archive/legacy/2022-03-12-legacy-league.zip
 2022-03-13 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2022-03-13-legacy-challenge.zip
+2022-03-14 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2022-03-14-legacy-challenge.zip
+2022-03-15 Legacy Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2022-03-15-legacy-preliminary.zip
+2022-03-19 Legacy League (52 decks) | https://downloads.cardforge.org/decks/archive/legacy/2022-03-19-legacy-league.zip
+2022-03-19 Legacy Preliminary (3 decks) | https://downloads.cardforge.org/decks/archive/legacy/2022-03-19-legacy-preliminary.zip
+2022-03-20 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2022-03-20-legacy-challenge.zip
+2022-03-21 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2022-03-21-legacy-challenge.zip
+2022-03-22 Legacy Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2022-03-22-legacy-preliminary.zip
+2022-03-23 Legacy Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/legacy/2022-03-23-legacy-preliminary.zip
+2022-03-25 Legacy Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/legacy/2022-03-25-legacy-preliminary.zip
+2022-03-26 Legacy League (37 decks) | https://downloads.cardforge.org/decks/archive/legacy/2022-03-26-legacy-league.zip
+2022-03-26 Legacy Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/legacy/2022-03-26-legacy-preliminary.zip
+2022-03-27 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2022-03-27-legacy-challenge.zip
+2022-03-28 Legacy Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2022-03-28-legacy-challenge.zip
