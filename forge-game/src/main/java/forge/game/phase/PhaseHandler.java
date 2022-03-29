@@ -578,7 +578,7 @@ public class PhaseHandler implements java.io.Serializable {
                 }
 
                 for (final Card attacker : combat.getAttackers()) {
-                    // TODO currently doesn't refund (can really only happen if you cancel paying for a creature with an attacking requirement that could be satisfied without a tax)
+                    // TODO currently doesn't refund previous attackers (can really only happen if you cancel paying for a creature with an attack requirement that could be satisfied without a tax)
                     final boolean canAttack = CombatUtil.checkPropagandaEffects(game, attacker, combat);
 
                     if (!canAttack) {

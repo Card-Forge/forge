@@ -1064,6 +1064,7 @@ public class AiBlockController {
                 reinforceBlockersToKill(combat);
             }
 
+            // TODO could be made more accurate if this would be inside each blocker choosing loop instead
             lifeInDanger |= removeUnpayableBlocks(combat);
 
             // == 2. If the AI life would still be in danger make a safer approach ==
