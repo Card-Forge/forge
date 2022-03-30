@@ -8,4 +8,6 @@ ScryfallCode=P22
 [cards]
 1 R Greater Auramancy @Lucas Graciano
 2 R Omniscience @Alayna Danner
+3 R Parallel Lives @Greg Staples
+4 R Stranglehold @Ralph Horsley
 9 R No Mercy @John Stanko
