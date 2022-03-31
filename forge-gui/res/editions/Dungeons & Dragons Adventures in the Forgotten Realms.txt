@@ -427,6 +427,8 @@ FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 
 [rebalanced]
 A7 U A-Cloister Gargoyle @Mark Zug
+A14 C A-Dwarfhold Champion @Miguel Mercado
+A32 U A-Plate Armor @Martina Pilcerova
 A53 M A-Demilich @Daniel Zrom
 A81 U A-Wizard Class @Marta Nael
 A87 M A-Acererak the Archlich @Andrey Kuzinskiy
@@ -434,9 +436,12 @@ A95 U A-Death-Priest of Myrkul @Lius Lasahido
 A102 C A-Fates' Reversal @Alix Branwyn
 A115 C A-Precipitous Drop @Gabor Szikszai
 A118 C A-Sepulcher Ghoul @Jason A. Engle
+A130 C A-Armory Veteran @Caio Monteiro
 A180 U A-Druid Class @Svetlin Velinov
 A181 M A-Ellywick Tumblestrum @Anna Steinbauer
 A183 C A-Find the Path @Lindsey Look
+A219 U A-Bruenor Battlehammer @Wayne Reynolds
+A231 U A-Shessra, Death's Whisper @Marie Magny
 A237 R A-Triumphant Adventurer @Alexander Mokhov
 A255 R A-Dungeon Descent @Kasia 'Kafis' Zielińska
 
