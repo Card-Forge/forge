@@ -477,7 +477,10 @@ public class CardView extends GameEntityView {
     void updateNamedCard2(Card c) {
         set(TrackableProperty.NamedCard2, c.getNamedCard2());
     }
-
+    public boolean getMayPlayPlayers(PlayerView pv) {
+        TrackableCollection<PlayerView> col = get(TrackableProperty.MayPlayPlayers);
+        return col != null && col.contains(pv);
+    }
     public boolean mayPlayerLook(PlayerView pv) {
         TrackableCollection<PlayerView> col = get(TrackableProperty.PlayerMayLook);
         return col != null && col.contains(pv);
@@ -876,6 +879,11 @@ public class CardView extends GameEntityView {
         updateName(c);
         updateZoneText(c);
         updateDamage(c);
+
+        if (c.getMayPlayPlayers().isEmpty())
+            set(TrackableProperty.MayPlayPlayers, null);
+        else
+            set(TrackableProperty.MayPlayPlayers, PlayerView.getCollection(c.getMayPlayPlayers()));
 
         if (c.getIntensity(false) > 0) {
             updateIntensity(c);

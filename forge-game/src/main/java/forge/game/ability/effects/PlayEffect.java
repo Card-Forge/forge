@@ -254,7 +254,8 @@ public class PlayEffect extends SpellAbilityEffect {
             if (sa.hasParam("ShowCardToActivator")) {
                 game.getAction().revealTo(tgtCard, activator);
             }
-
+            if (singleOption && sa.getTargetCard() == null)
+                sa.setTargetCard(tgtCard);// show card to play rathern than showing the source card
             if (singleOption && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())))) {
                 if (wasFaceDown) {
                     tgtCard.turnFaceDownNoUpdate();
@@ -304,6 +305,7 @@ public class PlayEffect extends SpellAbilityEffect {
 
             if (!sa.hasParam("CastFaceDown")) {
                 // only one mode can be used
+                tgtCard.setMayPlay(sa.getActivatingPlayer(), true, null, false, true, null);
                 tgtSA = sa.getActivatingPlayer().getController().getAbilityToPlay(tgtCard, sas);
             } else {
                 // For Illusionary Mask effect
