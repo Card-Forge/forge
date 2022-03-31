@@ -1477,7 +1477,7 @@ public class AttachAi extends SpellAbilityAi {
             c = attachAIControlPreference(sa, prefList, mandatory, attachSource);
         } else if ("Curse".equals(logic)) {
             c = attachAICursePreference(sa, prefList, mandatory, attachSource, ai);
-        } else if ("Pump".equals(logic) || (logic != null && logic.startsWith("Move"))) {
+        } else if ("Pump".equals(logic) || logic.startsWith("Move")) {
             c = attachAIPumpPreference(ai, sa, prefList, mandatory, attachSource);
         } else if ("Curiosity".equals(logic)) {
             c = attachAICuriosityPreference(sa, prefList, mandatory, attachSource);
