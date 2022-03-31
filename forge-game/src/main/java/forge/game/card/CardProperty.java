@@ -1778,7 +1778,7 @@ public class CardProperty {
             if (!castSA.isValid(v, sourceController, source, spellAbility)) {
                 return false;
             }
-        }else if (property.startsWith("wasCastFrom")) {
+        } else if (property.startsWith("wasCastFrom")) {
             boolean byYou = property.contains("ByYou");
             String strZone = property.substring(11);
             Player zoneOwner = null;

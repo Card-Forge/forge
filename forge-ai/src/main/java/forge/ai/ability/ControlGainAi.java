@@ -142,7 +142,7 @@ public class ControlGainAi extends SpellAbilityAi {
                     return true;
                 }
 
-                if (c.canBeControlledBy(ai)) {
+                if (!c.canBeControlledBy(ai)) {
                     return false;
                 }
 
