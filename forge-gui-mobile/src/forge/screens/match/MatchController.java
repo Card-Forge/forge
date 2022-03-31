@@ -360,7 +360,11 @@ public class MatchController extends AbstractGuiGame {
         FThreads.invokeInEdtLater(new Runnable() {
             @Override
             public void run() {
-                VCardDisplayArea.CardAreaPanel.get(card).showZoom();
+                try {
+                    VCardDisplayArea.CardAreaPanel.get(card).showZoom();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
