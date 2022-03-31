@@ -415,6 +415,11 @@ public final class CMatchUI
     } // showCombat(CombatView)
 
     @Override
+    public void showZoom(CardView card) {
+        //do nothing since this is for mobile GUI
+    }
+
+    @Override
     public void updateDayTime(String daytime) {
         super.updateDayTime(daytime);
         if ("Day".equals(daytime)) {

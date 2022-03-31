@@ -70,6 +70,11 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
+    public void showZoom(CardView card) {
+        //do nothing
+    }
+
+    @Override
     public void showPromptMessage(final PlayerView playerView, final String message) {
         updateGameView();
         send(ProtocolMethod.showPromptMessage, playerView, message);

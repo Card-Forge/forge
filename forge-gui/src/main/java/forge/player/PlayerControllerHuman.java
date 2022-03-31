@@ -270,8 +270,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public SpellAbility getAbilityToPlay(final Card hostCard, final List<SpellAbility> abilities,
             final ITriggerEvent triggerEvent) {
+        boolean setDummy = false;
         // make sure another human player can't choose opponents cards just because he might see them
-        if (triggerEvent != null && !hostCard.isInPlay() && !hostCard.getOwner().equals(player) &&
+        if ((triggerEvent != null||GuiBase.getInterface().isLibgdxPort()) && !hostCard.isInPlay() && !hostCard.getOwner().equals(player) &&
                 !hostCard.getController().equals(player) &&
                 // If player cast Shaman's Trance, they can play spells from any Graveyard (if other effects allow it to be cast)
                 (!player.hasKeyword("Shaman's Trance") || !hostCard.isInZone(ZoneType.Graveyard))) {
@@ -283,6 +284,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 }
             }
             if (noPermission) {
+                //simulate default activate action to show zoom so we don't give a hint that the selected card is a spell
+                if (GuiBase.getInterface().isLibgdxPort())
+                    getGui().showZoom(hostCard.getView());
                 return null;
             }
         }

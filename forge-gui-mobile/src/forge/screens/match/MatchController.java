@@ -12,6 +12,7 @@ import forge.deck.Deck;
 import forge.game.player.Player;
 import forge.item.IPaperCard;
 import forge.screens.TransitionScreen;
+import forge.screens.match.views.VCardDisplayArea;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
@@ -352,6 +353,16 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void showCombat() {
+    }
+
+    @Override
+    public void showZoom(CardView card) {
+        FThreads.invokeInEdtLater(new Runnable() {
+            @Override
+            public void run() {
+                VCardDisplayArea.CardAreaPanel.get(card).showZoom();
+            }
+        });
     }
 
     @Override
