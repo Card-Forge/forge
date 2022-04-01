@@ -64,9 +64,6 @@ public abstract class TriggerReplacementBase extends CardTraitBase implements II
      * @return the overridingAbility
      */
     public SpellAbility getOverridingAbility() {
-        if (overridingAbility != null && !overridingAbility.isTrigger() && this instanceof Trigger) {
-            overridingAbility.setTrigger((Trigger) this);
-        }
         return this.overridingAbility;
     }
 
