@@ -273,7 +273,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         }
 
-        if (frozen) {
+        if (frozen && !sp.hasParam("IgnoreFreeze")) {
             si = new SpellAbilityStackInstance(sp);
             frozenStack.push(si);
             return;

@@ -158,6 +158,9 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             } else {
                 for (int i = 0; i < amount; i++) {
                     SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
+                    if (sa.hasParam("IgnoreFreeze")) {
+                        copy.putParam("IgnoreFreeze", "True");
+                    }
                     if (sa.hasParam("MayChooseTarget")) {
                         copy.setMayChooseNewTargets(true);
                     }
