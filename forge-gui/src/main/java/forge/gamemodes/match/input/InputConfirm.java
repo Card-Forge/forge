@@ -78,8 +78,6 @@ public class InputConfirm extends InputSyncronizedBase {
                  return controller.getGui().confirm(null, message, defaultIsYes, options);
              if (sa.getTargets() != null && sa.getTargets().isTargetingAnyCard() && sa.getTargets().size() == 1)
                  return controller.getGui().confirm((sa.getTargetCard()==null)?null:CardView.get(sa.getTargetCard()), message, defaultIsYes, options);
-             if (ApiType.Play.equals(sa.getApi()) && sa.getHostCard() != null && sa.getHostCard().getImprintedCards().size() == 1)
-                 return controller.getGui().confirm((sa.getHostCard().getImprintedCards().get(0)==null)?null:CardView.get(sa.getHostCard().getImprintedCards().get(0)), message, defaultIsYes, options);
              if (ApiType.Play.equals(sa.getApi()) && sa.getPlayEffectCard() != null)
                  return controller.getGui().confirm(CardView.get(sa.getPlayEffectCard()), message, defaultIsYes, options);
              return controller.getGui().confirm(CardView.get(sa.getHostCard()), message, defaultIsYes, options);
