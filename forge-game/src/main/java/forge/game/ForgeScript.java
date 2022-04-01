@@ -116,8 +116,13 @@ public class ForgeScript {
             }
             for (final Trigger trig : cardState.getTriggers()) {
                 SpellAbility sa = trig.getOverridingAbility();
-                if (sa != null && sa.isManaAbility()) {
-                    return true;
+                if (sa != null) {
+                    if (!sa.isTrigger()) {
+                        sa.setTrigger(trig);
+                    }
+                    if (sa.isManaAbility()) {
+                        return true;
+                    }
                 }
             }
             return false;
