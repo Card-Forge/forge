@@ -6,6 +6,7 @@ import java.util.Set;
 import forge.game.card.Card;
 import forge.game.card.CardState;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.Trigger;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 
@@ -63,6 +64,9 @@ public abstract class TriggerReplacementBase extends CardTraitBase implements II
      * @return the overridingAbility
      */
     public SpellAbility getOverridingAbility() {
+        if (overridingAbility != null && !overridingAbility.isTrigger() && this instanceof Trigger) {
+            overridingAbility.setTrigger((Trigger) this);
+        }
         return this.overridingAbility;
     }
 
