@@ -50,8 +50,8 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
-import io.sentry.event.BreadcrumbBuilder;
 
 public class CardState extends GameObject implements IHasSVars {
     private String name = "";
@@ -270,10 +270,11 @@ public class CardState extends GameObject implements IHasSVars {
             inst = intrinsicKeywords.add(s);
         } catch (Exception e) {
             String msg = "CardState:addIntrinsicKeyword: failed to parse Keyword";
-            Sentry.getContext().recordBreadcrumb(
-                    new BreadcrumbBuilder().setMessage(msg)
-                    .withData("Card", card.getName()).withData("Keyword", s).build()
-            );
+
+            Breadcrumb bread = new Breadcrumb(msg);
+            bread.setData("Card", card.getName());
+            bread.setData("Keyword", s);
+            Sentry.addBreadcrumb(bread, this);
 
             //rethrow
             throw new RuntimeException("Error in Keyword " + s + " for card " + card.getName(), e);
@@ -546,6 +547,9 @@ public class CardState extends GameObject implements IHasSVars {
     }
 
     public final void copyFrom(final CardState source, final boolean lki) {
+        copyFrom(source, lki, null);
+    }
+    public final void copyFrom(final CardState source, final boolean lki, final CardTraitBase ctb) {
         // Makes a "deeper" copy of a CardState object
         setName(source.getName());
         setType(source.type);
@@ -575,8 +579,19 @@ public class CardState extends GameObject implements IHasSVars {
         setRarity(source.rarity);
         setSetCode(source.setCode);
 
+        Trigger dontCopyTr = null;
+        if (ctb != null && ctb.hasParam("DoesntHaveThisAbility")) {
+            SpellAbility root = ((SpellAbility) ctb).getRootAbility();
+            if (root.isTrigger()) {
+                dontCopyTr = root.getTrigger();
+            }
+        }
+
         triggers.clear();
         for (Trigger tr : source.triggers) {
+            if (tr.equals(dontCopyTr)) {
+                continue;
+            }
             if (tr.isIntrinsic()) {
                 triggers.add(tr.copy(card, lki));
             }

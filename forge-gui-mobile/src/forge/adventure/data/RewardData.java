@@ -10,7 +10,6 @@ import forge.adventure.util.Reward;
 import forge.adventure.world.WorldSave;
 import forge.item.PaperCard;
 import forge.model.FModel;
-import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +86,7 @@ public class RewardData {
             }
             allEnemyCards=Iterables.filter(allCards, new Predicate<PaperCard>() {
                 @Override
-                public boolean apply(@NullableDecl PaperCard input) {
+                public boolean apply(PaperCard input) {
                     if (input == null) return false;
                     return !input.getRules().getAiHints().getRemAIDecks();
                 }

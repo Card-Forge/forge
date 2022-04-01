@@ -62,7 +62,7 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
                 if (!op.canBeTargetedBy(sa) || !op.canLoseLife())
                     continue;
                 // an opponent has more live than this toughness
-                if (op.getLife() + 1 >= source.getNetToughness()) {
+                if (op.getLife() > source.getNetToughness()) {
                     shouldDo = true;
                 } else {
                     // opponent can't gain life, so "Tainted Remedy" should not work.

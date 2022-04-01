@@ -653,12 +653,12 @@ public abstract class SpellAbilityEffect {
 
             @Override
             public void run() {
-                CardZoneTable untilTable = new CardZoneTable();
                 CardCollectionView untilCards = hostCard.getUntilLeavesBattlefield();
                 // if the list is empty, then the table doesn't need to be checked anymore
                 if (untilCards.isEmpty()) {
                     return;
                 }
+                CardZoneTable untilTable = new CardZoneTable();
                 Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                 moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
                 moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateGraveyard());
@@ -743,6 +743,13 @@ public abstract class SpellAbilityEffect {
                 game.getEndOfTurn().registerUntilEnd(sa.getActivatingPlayer(), until);
             } else {
                 game.getEndOfTurn().addUntilEnd(sa.getActivatingPlayer(), until);
+            }
+        } else if ("UntilTheEndOfTargetedNextTurn".equals(duration)) {
+            Player targeted = sa.getTargets().getFirstTargetedPlayer();
+            if (game.getPhaseHandler().isPlayerTurn(targeted)) {
+                game.getEndOfTurn().registerUntilEnd(targeted, until);
+            } else {
+                game.getEndOfTurn().addUntilEnd(targeted, until);
             }
         } else if (duration != null && duration.startsWith("UntilAPlayerCastSpell")) {
             game.getStack().addCastCommand(duration.split(" ")[1], until);

@@ -115,9 +115,24 @@ public class SkipPhaseEffect extends SpellAbilityEffect {
         }
         eff.addReplacementEffect(re);
 
-        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff, sa, AbilityKey.newMap());
-        eff.updateStateForView();
-        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        if (sa.hasParam("Start")) {
+            final GameCommand startEffect = new GameCommand() {
+                private static final long serialVersionUID = -5861749814760561373L;
+
+                @Override
+                public void run() {
+                    game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+                    game.getAction().moveTo(ZoneType.Command, eff, sa, AbilityKey.newMap());
+                    eff.updateStateForView();
+                    game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+                }
+            };
+            game.getUpkeep().addUntil(player, startEffect);
+        } else {
+            game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+            game.getAction().moveTo(ZoneType.Command, eff, sa, AbilityKey.newMap());
+            eff.updateStateForView();
+            game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        }
     }
 }

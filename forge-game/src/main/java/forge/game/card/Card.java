@@ -70,8 +70,8 @@ import forge.trackable.Tracker;
 import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
-import io.sentry.event.BreadcrumbBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.apache.commons.lang3.tuple.Pair;
@@ -108,8 +108,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     // cards attached or otherwise linked to this card
     private CardCollection hauntedBy, devouredCards, exploitedCards, delvedCards, convokedCards, imprintedCards, encodedCards;
-    private CardCollection mustBlockCards, gainControlTargets, chosenCards;
+    private CardCollection gainControlTargets, chosenCards;
     private CardCollection mergedCards;
+    private Map<Long, CardCollection> mustBlockCards = Maps.newHashMap();
     private List<Card> blockedThisTurn = Lists.newArrayList();
     private List<Card> blockedByThisTurn = Lists.newArrayList();
 
@@ -878,9 +879,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public void setChangedCardNames(Table<Long, Long, CardChangedName> changedCardNames) {
         this.changedCardNames.clear();
-        for (Table.Cell<Long, Long, CardChangedName> entry : changedCardNames.cellSet()) {
-            this.changedCardNames.put(entry.getRowKey(), entry.getColumnKey(), entry.getValue());
-        }
+        this.changedCardNames.putAll(changedCardNames);
     }
 
     public final boolean isInAlternateState() {
@@ -1315,16 +1314,23 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     //MustBlockCards are cards that this Card must block if able in an upcoming combat.
     //This is cleared at the end of each turn.
     public final CardCollectionView getMustBlockCards() {
-        return CardCollection.getView(mustBlockCards);
+        return CardCollection.getView(Iterables.concat(mustBlockCards.values()));
     }
-    public final void addMustBlockCard(final Card c) {
-        mustBlockCards = view.addCard(mustBlockCards, c, TrackableProperty.MustBlockCards);
+    public final void addMustBlockCard(long ts, final Card c) {
+        mustBlockCards.put(ts, new CardCollection(c));
+        view.updateMustBlockCards(this);
     }
-    public final void addMustBlockCards(final Iterable<Card> attackersToBlock) {
-        mustBlockCards = view.addCards(mustBlockCards, attackersToBlock, TrackableProperty.MustBlockCards);
+    public final void addMustBlockCards(long ts, final Iterable<Card> attackersToBlock) {
+        mustBlockCards.put(ts, new CardCollection(attackersToBlock));
+        view.updateMustBlockCards(this);
+    }
+    public final void removeMustBlockCards(long ts) {
+        mustBlockCards.remove(ts);
+        view.updateMustBlockCards(this);
     }
     public final void clearMustBlockCards() {
-        mustBlockCards = view.clearCards(mustBlockCards, TrackableProperty.MustBlockCards);
+        mustBlockCards.clear();
+        view.updateMustBlockCards(this);
     }
 
     public final void setMustAttackEntity(final GameEntity e) {
@@ -2090,6 +2096,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Devour")) {
                     final String[] k = keyword.split(":");
                     sbLong.append(k[0]).append(" ").append(k[1]).append(" (").append(inst.getReminderText()).append(")");
+                } else if (keyword.startsWith("Starting intensity")) {
+                    sbLong.append(TextUtil.fastReplace(keyword, ":", " "));
                 } else if (keyword.contains("Haunt")) {
                     sb.append("\r\nHaunt (");
                     if (isCreature()) {
@@ -2181,10 +2189,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 }
             } catch (Exception e) {
                 String msg = "Card:keywordToText: crash in Keyword parsing";
-                Sentry.getContext().recordBreadcrumb(
-                    new BreadcrumbBuilder().setMessage(msg)
-                    .withData("Card", this.getName()).withData("Keyword", keyword).build()
-                );
+
+                Breadcrumb bread = new Breadcrumb(msg);
+                bread.setData("Card", this.getName());
+                bread.setData("Keyword", keyword);
+                Sentry.addBreadcrumb(bread, this);
 
                 throw new RuntimeException("Error in Card " + this.getName() + " with Keyword " + keyword, e);
             }
@@ -2541,6 +2550,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 } else if (keyword.startsWith("Dredge")) {
                     sbAfter.append(TextUtil.fastReplace(keyword, ":", " ")).append(" (").append(inst.getReminderText()).append(")");
                     sbAfter.append("\r\n");
+                } else if (keyword.startsWith("Starting intensity")) {
+                    sbAfter.append(TextUtil.fastReplace(keyword, ":", " ")).append("\r\n");
                 } else if (keyword.startsWith("Escalate") || keyword.startsWith("Buyback")
                         || keyword.startsWith("Prowl")) {
                     final String[] k = keyword.split(":");
@@ -2668,10 +2679,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 }
             } catch (Exception e) {
                 String msg = "Card:abilityTextInstantSorcery: crash in Keyword parsing";
-                Sentry.getContext().recordBreadcrumb(
-                    new BreadcrumbBuilder().setMessage(msg)
-                    .withData("Card", this.getName()).withData("Keyword", keyword).build()
-                );
+
+                Breadcrumb bread = new Breadcrumb(msg);
+                bread.setData("Card", this.getName());
+                bread.setData("Keyword", keyword);
+                Sentry.addBreadcrumb(bread, this);
 
                 throw new RuntimeException("Error in Card " + this.getName() + " with Keyword " + keyword, e);
             }
@@ -4079,6 +4091,23 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final int getNetCombatDamage() {
         return getNetCombatDamageBreakdown().getTotal();
+    }
+
+    private int intensity = 0;
+    public final void addIntensity(final int n) {
+        intensity = intensity + n;
+        view.updateIntensity(this);
+    }
+    public final int getIntensity(boolean total) {
+        if (total && hasKeyword(Keyword.STARTING_INTENSITY)) {
+            return getKeywordMagnitude(Keyword.STARTING_INTENSITY) + intensity;
+        } else {
+            return intensity;
+        }
+    }
+    public final void setIntensity(final int n) { intensity = n; }
+    public final boolean hasIntensity() {
+            return intensity > 0;
     }
 
     private int multiKickerMagnitude = 0;
@@ -6133,7 +6162,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public int getCMC() {
         return getCMC(SplitCMCMode.CurrentSideCMC);
     }
-
     public int getCMC(SplitCMCMode mode) {
         if (isToken() && getCopiedPermanent() == null) {
             return 0;
@@ -6588,15 +6616,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public void setChangedCardTypes(Table<Long, Long, CardChangedType> changedCardTypes) {
         this.changedCardTypes.clear();
-        for (Table.Cell<Long, Long, CardChangedType> entry : changedCardTypes.cellSet()) {
-            this.changedCardTypes.put(entry.getRowKey(), entry.getColumnKey(), entry.getValue());
-        }
+        this.changedCardTypes.putAll(changedCardTypes);
     }
     public void setChangedCardTypesCharacterDefining(Table<Long, Long, CardChangedType> changedCardTypes) {
         this.changedCardTypesCharacterDefining.clear();
-        for (Table.Cell<Long, Long, CardChangedType> entry : changedCardTypes.cellSet()) {
-            this.changedCardTypesCharacterDefining.put(entry.getRowKey(), entry.getColumnKey(), entry.getValue());
-        }
+        this.changedCardTypesCharacterDefining.putAll(changedCardTypes);
     }
 
     public void setChangedCardKeywords(Table<Long, Long, KeywordsChange> changedCardKeywords) {
@@ -6608,15 +6632,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public void setChangedCardColors(Table<Long, Long, CardColor> changedCardColors) {
         this.changedCardColors.clear();
-        for (Table.Cell<Long, Long, CardColor> entry : changedCardColors.cellSet()) {
-            this.changedCardColors.put(entry.getRowKey(), entry.getColumnKey(), entry.getValue());
-        }
+        this.changedCardColors.putAll(changedCardColors);
     }
     public void setChangedCardColorsCharacterDefining(Table<Long, Long, CardColor> changedCardColors) {
         this.changedCardColorsCharacterDefining.clear();
-        for (Table.Cell<Long, Long, CardColor> entry : changedCardColors.cellSet()) {
-            this.changedCardColorsCharacterDefining.put(entry.getRowKey(), entry.getColumnKey(), entry.getValue());
-        }
+        this.changedCardColorsCharacterDefining.putAll(changedCardColors);
     }
 
     public void cleanupCopiedChangesFrom(Card c) {

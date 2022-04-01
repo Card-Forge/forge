@@ -58,6 +58,15 @@ public class EffectEffect extends SpellAbilityEffect {
         String noteCounterDefined = null;
         List<Player> effectOwner = null;
         boolean imprintOnHost = false;
+        final String duration = sa.getParam("Duration");
+
+        if (("UntilHostLeavesPlay".equals(duration) || "UntilLoseControlOfHost".equals(duration))
+                && !hostCard.isInPlay()) {
+            return;
+        }
+        if ("UntilLoseControlOfHost".equals(duration) && hostCard.getController() != sa.getActivatingPlayer()) {
+            return;
+        }
 
         if (sa.hasParam("Abilities")) {
             effectAbilities = sa.getParam("Abilities").split(",");
@@ -275,7 +284,6 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             // Duration
-            final String duration = sa.getParam("Duration");
             if (duration == null || !duration.equals("Permanent")) {
                 final GameCommand endEffect = new GameCommand() {
                     private static final long serialVersionUID = -5861759814760561373L;

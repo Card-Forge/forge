@@ -6,6 +6,7 @@ import java.util.Map;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -32,7 +33,7 @@ public class MustBlockEffect extends SpellAbilityEffect {
             cards = Lists.newArrayList(host);
         }
 
-        List<Card> tgtCards = Lists.newArrayList();
+        final List<Card> tgtCards = Lists.newArrayList();
         if (sa.hasParam("Choices")) {
             Player chooser = activator;
             if (sa.hasParam("Chooser")) {
@@ -53,22 +54,38 @@ public class MustBlockEffect extends SpellAbilityEffect {
                 }
             }
         } else {
-            tgtCards = getTargetCards(sa);
+            tgtCards.addAll(getTargetCards(sa));
         }
 
         final boolean mustBlockAll = sa.hasParam("BlockAllDefined");
 
+        long ts = game.getNextTimestamp();
+
         for (final Card c : tgtCards) {
             if ((!sa.usesTargeting()) || c.canBeTargetedBy(sa)) {
                 if (mustBlockAll) {
-                    c.addMustBlockCards(cards);
+                    c.addMustBlockCards(ts, cards);
                 } else {
                     final Card attacker = cards.get(0);
-                    c.addMustBlockCard(attacker);
+                    c.addMustBlockCard(ts, attacker);
                 }
             }
         }
-    } // mustBlockResolve()
+
+        if (sa.hasParam("Duration")) {
+            final GameCommand removeBlockingRequirements = new GameCommand() {
+                private static final long serialVersionUID = -5861529814760561373L;
+
+                @Override
+                public void run() {
+                    for (final Card c : tgtCards) {
+                        c.removeMustBlockCards(ts);
+                    }
+                }
+            };
+            addUntilCommand(sa, removeBlockingRequirements);
+        } 
+    }
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

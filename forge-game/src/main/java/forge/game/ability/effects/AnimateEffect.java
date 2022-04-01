@@ -33,6 +33,9 @@ public class AnimateEffect extends AnimateEffectBase {
                 && !source.isInPlay()) {
             return;
         }
+        if ("UntilLoseControlOfHost".equals(sa.getParam("Duration")) && source.getController() != sa.getActivatingPlayer()) {
+            return;
+        }
 
         // Remember Objects
         if (sa.hasParam("RememberObjects")) {

@@ -196,8 +196,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
-        CardLists.sortByPowerAsc(typeList);
-        Collections.reverse(typeList);
+        CardLists.sortByPowerDesc(typeList);
 
         for (int i = 0; i < c; i++) {
             chosen.add(typeList.get(i));

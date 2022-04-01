@@ -3,6 +3,7 @@ package forge.ai.ability;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCost;
@@ -64,7 +65,7 @@ public class PermanentAi extends SpellAbilityAi {
                     String specialRule = card.getSVar("AILegendaryException");
                     if ("TwoCopiesAllowed".equals(specialRule)) {
                         // One extra copy allowed on the battlefield, e.g. Brothers Yamazaki
-                        if (CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(card.getName())).size() > 1) {
+                        if (CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(card.getName())) > 1) {
                             return false;
                         }
                     } else if ("AlwaysAllowed".equals(specialRule)) {
@@ -179,8 +180,9 @@ public class PermanentAi extends SpellAbilityAi {
                 final SpellAbility emptyAbility = new SpellAbility.EmptySa(card, ai);
                 emptyAbility.setPayCosts(new Cost(costs, true));
                 emptyAbility.setTargetRestrictions(sa.getTargetRestrictions());
-
+                emptyAbility.setCardState(sa.getCardState());
                 emptyAbility.setActivatingPlayer(ai);
+
                 if (!ComputerUtilCost.canPayCost(emptyAbility, ai, true)) {
                     // AiPlayDecision.AnotherTime
                     return false;
@@ -200,7 +202,7 @@ public class PermanentAi extends SpellAbilityAi {
 
                 if (param.equals("MustHaveInHand")) {
                     // Only cast if another card is present in hand (e.g. Illusions of Grandeur followed by Donate)
-                    boolean hasCard = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(value)).size() > 0;
+                    boolean hasCard = Iterables.any(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(value));
                     if (!hasCard) {
                         dontCast = true;
                     }
@@ -244,7 +246,7 @@ public class PermanentAi extends SpellAbilityAi {
                     // Only cast if there are X or more mana sources controlled by the AI *or*
                     // if there are X-1 mana sources in play but the AI has an extra land in hand
                     CardCollection m = ComputerUtilMana.getAvailableManaSources(ai, true);
-                    int extraMana = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS).size() > 0 ? 1 : 0;
+                    int extraMana = CardLists.count(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS) > 0 ? 1 : 0;
                     if (card.getName().equals("Illusions of Grandeur")) {
                         // TODO: this is currently hardcoded for specific Illusions-Donate cost reduction spells, need to make this generic.
                        extraMana += Math.min(3, CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Predicates.or(CardPredicates.nameEquals("Sapphire Medallion"), CardPredicates.nameEquals("Helm of Awakening"))).size()) * 2; // each cost-reduction spell accounts for {1} in both Illusions and Donate

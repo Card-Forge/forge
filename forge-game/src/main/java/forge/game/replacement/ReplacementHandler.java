@@ -921,6 +921,18 @@ public class ReplacementHandler {
         }
         return true;
     }
+    /**
+     * Helper function to check if an extra turn would be skipped for AI.
+     */
+    public boolean wouldExtraTurnBeSkipped(final Player player) {
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(player);
+        repParams.put(AbilityKey.ExtraTurn, true);
+        List<ReplacementEffect> list = getReplacementList(ReplacementType.BeginTurn, repParams, ReplacementLayer.Other);
+        if (list.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
 
     /**
      * Helper function to get total prevention shield amount (limited to "prevent next N damage effects")

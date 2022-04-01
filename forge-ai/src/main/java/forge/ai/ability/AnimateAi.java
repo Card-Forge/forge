@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.ai.*;
@@ -95,7 +94,7 @@ public class AnimateAi extends SpellAbilityAi {
         // COMBAT_DECLARE_ATTACKERS or if no attackers
         if (ph.getPlayerTurn().isOpponentOf(ai) && !"Permanent".equals(sa.getParam("Duration"))
                 && (!ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                        || game.getCombat() != null && game.getCombat().getAttackersOf(ai).isEmpty())) {
+                        || ph.inCombat() && game.getCombat().getAttackersOf(ai).isEmpty())) {
             return false;
         }
         // Don't activate during MAIN2 unless this effect is permanent
@@ -110,7 +109,7 @@ public class AnimateAi extends SpellAbilityAi {
                 && game.getPhaseHandler().getNextTurn() != ai
                 && source.isPermanent();
         if (ph.isPlayerTurn(ai) && ai.getLife() < 6 && opponent.getLife() > 6
-                && Iterables.any(opponent.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)
+                && opponent.getZone(ZoneType.Battlefield).contains(CardPredicates.Presets.CREATURES)
                 && !sa.hasParam("AILogic") && !"Permanent".equals(sa.getParam("Duration")) && !activateAsPotentialBlocker) {
             return false;
         }
@@ -169,7 +168,7 @@ public class AnimateAi extends SpellAbilityAi {
                         }
                     }
                     if (power + toughness > c.getCurrentPower() + c.getCurrentToughness()) {
-                        if (!c.isTapped() || (game.getCombat() != null && game.getCombat().isAttacking(c))) {
+                        if (!c.isTapped() || (ph.inCombat() && game.getCombat().isAttacking(c))) {
                             bFlag = true;
                         }
                     }
@@ -194,7 +193,7 @@ public class AnimateAi extends SpellAbilityAi {
                     if (animatedCopy.getCurrentPower() + animatedCopy.getCurrentToughness() >
                             c.getCurrentPower() + c.getCurrentToughness()) {
                         if (!isAnimatedThisTurn(aiPlayer, sa.getHostCard())) {
-                            if (!c.isTapped() || (game.getCombat() != null && game.getCombat().isAttacking(c))) {
+                            if (!c.isTapped() || (ph.inCombat() && game.getCombat().isAttacking(c))) {
                                 bFlag = true;
                             }
                         }

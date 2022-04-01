@@ -1,9 +1,10 @@
 [metadata]
-Code=Y22
+Code=YMID
 Date=2021-12-09
 Name=Alchemy: Innistrad
+Alias=Y22
 Type=Online
-ScryfallCode=Y22
+ScryfallCode=YMID
 
 [cards]
 1 R Angel of Eternal Dawn @Aurore Folny

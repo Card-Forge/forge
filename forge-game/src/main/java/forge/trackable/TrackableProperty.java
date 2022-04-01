@@ -68,6 +68,7 @@ public enum TrackableProperty {
     ChosenMode(TrackableTypes.StringType),
     ClassLevel(TrackableTypes.IntegerType),
     CurrentRoom(TrackableTypes.StringType),
+    Intensity(TrackableTypes.IntegerType),
     Remembered(TrackableTypes.StringType),
     NamedCard(TrackableTypes.StringType),
     NamedCard2(TrackableTypes.StringType),

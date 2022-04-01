@@ -510,7 +510,7 @@ public class GameAction {
 
         if (mergedCards != null) {
             // Move components of merged permanent here
-            // Also handle 721.3e and 903.9a
+            // Also handle 723.3e and 903.9a
             boolean wasToken = c.isToken();
             if (commanderEffect != null) {
                 for (final ReplacementEffect re : commanderEffect.getReplacementEffects()) {
@@ -524,7 +524,7 @@ public class GameAction {
                 if (card.isRealCommander()) {
                     card.setMoveToCommandZone(true);
                 }
-                // 721.3e & 903.9a
+                // 723.3e & 903.9a
                 if (wasToken && !card.isRealToken() || card.isRealCommander()) {
                     Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(card);
                     repParams.put(AbilityKey.CardLKI, card);
@@ -563,6 +563,11 @@ public class GameAction {
                 }
             }
             copied.clearEtbCounters();
+        }
+
+        // intensity is perpetual
+        if (c.hasIntensity()) {
+            copied.setIntensity(c.getIntensity(false));
         }
 
         // update state for view
@@ -1519,7 +1524,7 @@ public class GameAction {
         }
 
         if (c.hasCardAttachments()) {
-            for (final Card attach : Lists.newArrayList(c.getAttachedCards())) {
+            for (final Card attach : c.getAttachedCards()) {
                 if (!attach.isInPlay()) {
                     unAttachList.add(attach);
                     checkAgain = true;
@@ -1956,7 +1961,7 @@ public class GameAction {
             // Where there are none, it should bring up speed controls
             game.fireEvent(new GameEventGameStarted(gameType, first, game.getPlayers()));
 
-             runPreOpeningHandActions(first);
+            runPreOpeningHandActions(first);
 
             game.setAge(GameStage.Mulligan);
             for (final Player p1 : game.getPlayers()) {
@@ -1997,7 +2002,7 @@ public class GameAction {
                 p.getController().autoPassCancel();
             }
 
-            first = game.getPhaseHandler().getPlayerTurn();  // needed only for restart
+            first = game.getPhaseHandler().getPlayerTurn(); // needed only for restart
         } while (game.getAge() == GameStage.RestartedByKarn);
     }
 

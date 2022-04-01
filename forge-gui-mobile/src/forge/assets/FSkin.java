@@ -124,7 +124,7 @@ public class FSkin {
                 }
 
                 // Non-default (preferred) skin name and dir.
-                preferredDir = Gdx.files.absolute(preferredName.equals("default") ? ForgeConstants.BASE_SKINS_DIR + preferredName : ForgeConstants.CACHE_SKINS_DIR + preferredName);
+                preferredDir = Gdx.files.absolute(preferredName.equalsIgnoreCase("default") ? ForgeConstants.BASE_SKINS_DIR + preferredName : ForgeConstants.CACHE_SKINS_DIR + preferredName);
                 if (!preferredDir.exists() || !preferredDir.isDirectory()) {
                     preferredDir.mkdirs();
                 }

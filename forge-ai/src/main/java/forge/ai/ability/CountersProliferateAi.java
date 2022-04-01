@@ -28,8 +28,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
     @Override
     protected boolean checkApiLogic(Player ai, SpellAbility sa) {
         final List<Card> cperms = Lists.newArrayList();
-        final List<Player> allies = ai.getAllies();
-        allies.add(ai);
+        final List<Player> allies = ai.getYourTeam();
         boolean allyExpOrEnergy = false;
 
         for (final Player p : allies) {

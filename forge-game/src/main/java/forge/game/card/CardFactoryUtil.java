@@ -74,8 +74,8 @@ import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
-import io.sentry.event.BreadcrumbBuilder;
 
 /**
  * <p>
@@ -599,10 +599,11 @@ public class CardFactoryUtil {
                 intrinsicAbility.setCardState(card.getCurrentState());
             } catch (Exception e) {
                 String msg = "CardFactoryUtil:addAbilityFactoryAbilities: crash in raw Ability";
-                Sentry.getContext().recordBreadcrumb(
-                    new BreadcrumbBuilder().setMessage(msg)
-                    .withData("Card", card.getName()).withData("Ability", rawAbility).build()
-                );
+
+                Breadcrumb bread = new Breadcrumb(msg);
+                bread.setData("Card", card.getName());
+                bread.setData("Ability", rawAbility);
+                Sentry.addBreadcrumb(bread, card);
 
                 // rethrow the exception with card Name for the user
                 throw new RuntimeException("crash in raw Ability, check card script of " + card.getName(), e);
@@ -1021,7 +1022,7 @@ public class CardFactoryUtil {
             inst.addTrigger(parsedTrigger);
         } else if (keyword.equals("Demonstrate")) {
             final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | TriggerDescription$ Demonstrate (" + inst.getReminderText() + ")";
-            final String youCopyStr = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | Optional$ True | RememberCopies$ True";
+            final String youCopyStr = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | Optional$ True | RememberCopies$ True | IgnoreFreeze$ True";
             final String chooseOppStr = "DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ConditionDefined$ Remembered | ConditionPresent$ Spell";
             final String oppCopyStr = "DB$ CopySpellAbility | Controller$ ChosenPlayer | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | ConditionDefined$ Remembered | ConditionPresent$ Spell";
             final String cleanupStr = "DB$ Cleanup | ClearRemembered$ True | ClearChosenPlayer$ True";
@@ -1589,7 +1590,7 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Provoke")) {
             final String actualTrigger = "Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Secondary$ True"
                     + " | TriggerDescription$ Provoke (" + inst.getReminderText() + ")";
-            final String blockStr = "DB$ MustBlock | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature defending player controls";
+            final String blockStr = "DB$ MustBlock | Duration$ UntilEndOfCombat | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature defending player controls";
             final String untapStr = "DB$ Untap | Defined$ Targeted";
 
             SpellAbility blockSA = AbilityFactory.getAbility(blockStr, card);

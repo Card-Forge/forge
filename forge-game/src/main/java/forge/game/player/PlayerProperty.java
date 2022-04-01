@@ -9,7 +9,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.TextUtil;
@@ -180,10 +179,6 @@ public class PlayerProperty {
             if (player.getLifeLostThisTurn() <= 0) {
                 return false;
             }
-        } else if (property.equals("DeclaredAttackerThisTurn")) {
-            if (player.getAttackersDeclaredThisTurn() <= 0) {
-                return false;
-            }
         } else if (property.equals("TappedLandForManaThisTurn")) {
             if (!player.hasTappedLandForManaThisTurn()) {
                 return false;
@@ -258,8 +253,8 @@ public class PlayerProperty {
         } else if (property.startsWith("withMore")) {
             final String cardType = property.split("sThan")[0].substring(8);
             final Player controller = "Active".equals(property.split("sThan")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
-            final CardCollectionView oppList = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
-            final CardCollectionView yourList = CardLists.filter(controller.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
+            final CardCollectionView oppList = CardLists.getType(player.getCardsIn(ZoneType.Battlefield), cardType);
+            final CardCollectionView yourList = CardLists.getType(controller.getCardsIn(ZoneType.Battlefield), cardType);
             if (oppList.size() <= yourList.size()) {
                 return false;
             }
@@ -267,8 +262,8 @@ public class PlayerProperty {
             final String cardType = property.split("More")[1].split("sThan")[0];
             final int amount = Integer.parseInt(property.substring(11, 12));
             final Player controller = "Active".equals(property.split("sThan")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
-            final CardCollectionView oppList = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
-            final CardCollectionView yourList = CardLists.filter(controller.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
+            final CardCollectionView oppList = CardLists.getType(player.getCardsIn(ZoneType.Battlefield), cardType);
+            final CardCollectionView yourList = CardLists.getType(controller.getCardsIn(ZoneType.Battlefield), cardType);
             if (oppList.size() < yourList.size() + amount) {
                 return false;
             }
@@ -284,8 +279,8 @@ public class PlayerProperty {
             final String cardType = property.split("sIn")[0].substring(8);
             final Player controller = "Active".equals(property.split("Than")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
             final ZoneType zt = property.substring(8).startsWith("CreaturesInYard") ? ZoneType.Graveyard : ZoneType.Battlefield;
-            final CardCollectionView oppList = CardLists.filter(player.getCardsIn(zt), CardPredicates.isType(cardType));
-            final CardCollectionView yourList = CardLists.filter(controller.getCardsIn(zt), CardPredicates.isType(cardType));
+            final CardCollectionView oppList = CardLists.getType(player.getCardsIn(zt), cardType);
+            final CardCollectionView yourList = CardLists.getType(controller.getCardsIn(zt), cardType);
             if (oppList.size() >= yourList.size()) {
                 return false;
             }

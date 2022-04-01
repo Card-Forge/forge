@@ -1167,7 +1167,7 @@ public class AttachAi extends SpellAbilityAi {
             if (affected == null) {
                 continue;
             }
-            if ((affected.contains(stCheck) || affected.contains("AttachedBy"))) {
+            if (affected.contains(stCheck) || affected.contains("AttachedBy")) {
                 totToughness += AbilityUtils.calculateAmount(attachSource, stabMap.get("AddToughness"), stAbility);
                 totPower += AbilityUtils.calculateAmount(attachSource, stabMap.get("AddPower"), stAbility);
 
@@ -1477,7 +1477,7 @@ public class AttachAi extends SpellAbilityAi {
             c = attachAIControlPreference(sa, prefList, mandatory, attachSource);
         } else if ("Curse".equals(logic)) {
             c = attachAICursePreference(sa, prefList, mandatory, attachSource, ai);
-        } else if ("Pump".equals(logic) || (logic != null && logic.startsWith("Move"))) {
+        } else if ("Pump".equals(logic) || logic.startsWith("Move")) {
             c = attachAIPumpPreference(ai, sa, prefList, mandatory, attachSource);
         } else if ("Curiosity".equals(logic)) {
             c = attachAICuriosityPreference(sa, prefList, mandatory, attachSource);
@@ -1558,8 +1558,7 @@ public class AttachAi extends SpellAbilityAi {
         final boolean evasive = keyword.equals("Unblockable") || keyword.equals("Fear")
                 || keyword.equals("Intimidate") || keyword.equals("Shadow")
                 || keyword.equals("Flying") || keyword.equals("Horsemanship")
-                || keyword.endsWith("walk") || keyword.startsWith("CantBeBlockedBy")
-                || keyword.equals("All creatures able to block CARDNAME do so.");
+                || keyword.endsWith("walk") || keyword.equals("All creatures able to block CARDNAME do so.");
         // give evasive keywords to creatures that can attack and deal damage
 
         boolean canBeBlocked = false;
@@ -1588,7 +1587,7 @@ public class AttachAi extends SpellAbilityAi {
             return card.getNetCombatDamage() + powerBonus > 0
                     && (ComputerUtilCombat.canAttackNextTurn(card) || CombatUtil.canBlock(card, true));
         } else if (keyword.equals("First Strike")) {
-            return card.getNetCombatDamage() + powerBonus > 0 && !card.hasKeyword(Keyword.DOUBLE_STRIKE)
+            return card.getNetCombatDamage() + powerBonus > 0 && !card.hasDoubleStrike()
                     && (ComputerUtilCombat.canAttackNextTurn(card) || CombatUtil.canBlock(card, true));
         } else if (keyword.startsWith("Flanking")) {
             return card.getNetCombatDamage() + powerBonus > 0

@@ -7,6 +7,7 @@ import forge.animation.ForgeAnimation;
 import forge.assets.FSkin;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
+import forge.sound.SoundSystem;
 import forge.toolbox.FContainer;
 import forge.toolbox.FOverlay;
 
@@ -38,6 +39,12 @@ public class ClosingScreen extends FContainer {
                 percentage = 0;
             } else if (percentage > 1) {
                 percentage = 1;
+            }
+            try {
+                //fade out volume
+                SoundSystem.instance.fadeModifier(1-percentage);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             g.fillRect(Color.BLACK, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
             g.setAlphaComposite(1-percentage);

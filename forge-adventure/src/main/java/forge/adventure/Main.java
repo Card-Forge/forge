@@ -16,7 +16,6 @@ import forge.util.FileUtil;
 import forge.util.OperatingSystem;
 import forge.util.RestartUtil;
 import io.sentry.Sentry;
-import io.sentry.SentryClient;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -35,11 +34,12 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Sentry.init();
-        SentryClient sentryClient = Sentry.getStoredClient();
-        sentryClient.setRelease(BuildInfo.getVersionString());
-        sentryClient.setEnvironment(System.getProperty("os.name"));
-        sentryClient.addTag("Java Version", System.getProperty("java.version"));
+        Sentry.init(options -> {
+            options.setEnableExternalConfiguration(true);
+            options.setRelease(BuildInfo.getVersionString());
+            options.setEnvironment(System.getProperty("os.name"));
+            options.setTag("Java Version", System.getProperty("java.version"));
+        }, true);
 
         // HACK - temporary solution to "Comparison method violates it's general contract!" crash
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");

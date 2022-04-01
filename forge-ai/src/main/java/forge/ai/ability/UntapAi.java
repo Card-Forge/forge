@@ -26,6 +26,7 @@ import forge.game.cost.CostTap;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.phase.Untap;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
@@ -213,6 +214,7 @@ public class UntapAi extends SpellAbilityAi {
 
             untapList.remove(choice);
             list.remove(choice);
+            // TODO ComputerUtilCard.willUntap(ai, choice)
             sa.getTargets().add(choice);
         }
         return true;
@@ -321,7 +323,7 @@ public class UntapAi extends SpellAbilityAi {
         }
 
         // See if there's anything to untap that is tapped and that doesn't untap during the next untap step by itself
-        CardCollection noAutoUntap = CardLists.filter(untapList, CardPredicates.hasKeyword("CARDNAME doesn't untap during your untap step."));
+        CardCollection noAutoUntap = CardLists.filter(untapList, Predicates.not(Untap.CANUNTAP));
         if (!noAutoUntap.isEmpty()) {
             return ComputerUtilCard.getBestAI(noAutoUntap);
         }

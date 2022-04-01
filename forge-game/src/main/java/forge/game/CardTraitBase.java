@@ -7,7 +7,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
 import forge.card.CardStateName;
@@ -359,14 +358,10 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
                 list.addAll(hostController.getCardsIn(presentZone));
             }
             if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
-                for (final Player p : hostController.getOpponents()) {
-                    list.addAll(p.getCardsIn(presentZone));
-                }
+                list.addAll(hostController.getOpponents().getCardsIn(presentZone));
             }
             if (presentPlayer.equals("Any")) {
-                for (final Player p : hostController.getAllies()) {
-                    list.addAll(p.getCardsIn(presentZone));
-                }
+                list.addAll(hostController.getAllies().getCardsIn(presentZone));
             }
             list = CardLists.getValidCards(list, sIsPresent, hostController, this.getHostCard(), this);
 
@@ -392,9 +387,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
                 list.addAll(hostController.getCardsIn(presentZone));
             }
             if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
-                for (final Player p : hostController.getOpponents()) {
-                    list.addAll(p.getCardsIn(presentZone));
-                }
+                list.addAll(hostController.getOpponents().getCardsIn(presentZone));
             }
 
             list = CardLists.getValidCards(list, sIsPresent, hostController, this.getHostCard(), this);
@@ -458,7 +451,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             List<Card> casted = game.getStack().getSpellsCastLastTurn();
             boolean conditionMet = false;
             for (Player p : game.getPlayers()) {
-                if (Iterables.size(Iterables.filter(casted, CardPredicates.isController(p))) > 1) {
+                if (CardLists.count(casted, CardPredicates.isController(p)) > 1) {
                     conditionMet = true;
                     break;
                 }

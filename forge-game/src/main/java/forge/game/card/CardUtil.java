@@ -46,8 +46,8 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
+import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
-import io.sentry.event.BreadcrumbBuilder;
 
 public final class CardUtil {
     // disable instantiation
@@ -91,8 +91,7 @@ public final class CardUtil {
             kw = kw.substring(7);
         }
 
-        return !kw.startsWith("Protection") && !kw.startsWith("CantBeBlockedBy")
-                && !NON_STACKING_LIST.contains(kw);
+        return !kw.startsWith("Protection") && !NON_STACKING_LIST.contains(kw);
     }
 
     public static String getShortColorsString(final Iterable<String> colors) {
@@ -191,13 +190,12 @@ public final class CardUtil {
             return cachedCard;
         }
         String msg = "CardUtil:getLKICopy copy object";
-        Sentry.getContext().recordBreadcrumb(
-                new BreadcrumbBuilder().setMessage(msg)
-                .withData("Card", in.getName())
-                .withData("CardState", in.getCurrentStateName().toString())
-                .withData("Player", in.getController().getName())
-                .build()
-        );
+
+        Breadcrumb bread = new Breadcrumb(msg);
+        bread.setData("Card", in.getName());
+        bread.setData("CardState", in.getCurrentStateName().toString());
+        bread.setData("Player", in.getController().getName());
+        Sentry.addBreadcrumb(bread, in);
 
         final Card newCopy = new Card(in.getId(), in.getPaperCard(), in.getGame(), null);
         cachedMap.put(in.getId(), newCopy);

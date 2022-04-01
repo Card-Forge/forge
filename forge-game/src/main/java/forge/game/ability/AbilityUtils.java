@@ -73,12 +73,14 @@ import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
-import io.sentry.event.BreadcrumbBuilder;
 
 
 public class AbilityUtils {
     private final static ImmutableList<String> cmpList = ImmutableList.of("LT", "LE", "EQ", "GE", "GT", "NE");
+
+    static public final String WITH_DELIMITER = "((?<=%1$s)|(?=%1$s))";
 
     // should the three getDefined functions be merged into one? Or better to
     // have separate?
@@ -1162,12 +1164,12 @@ public class AbilityUtils {
             }
         }
         else if (defined.startsWith("Enchanted")) {
-            if (card.getEntityAttachedTo() != null) {
+            if (card.isAttachedToEntity()) {
                 addPlayer(Lists.newArrayList(card.getEntityAttachedTo()), defined, players);
             }
         }
         else if (defined.startsWith("Equipped")) {
-            if (card.getEquipping() != null) {
+            if (card.isEquipping()) {
                 addPlayer(Lists.newArrayList(card.getEquipping()), defined, players);
             }
         }
@@ -1426,11 +1428,11 @@ public class AbilityUtils {
         final Card card = sa.getHostCard();
 
         String msg = "AbilityUtils:resolveApiAbility: try to resolve API ability";
-        Sentry.getContext().recordBreadcrumb(
-                new BreadcrumbBuilder().setMessage(msg)
-                .withData("Api", sa.getApi().toString())
-                .withData("Card", card.getName()).withData("SA", sa.toString()).build()
-        );
+        Breadcrumb bread = new Breadcrumb(msg);
+        bread.setData("Api", sa.getApi().toString());
+        bread.setData("Card", card.getName());
+        bread.setData("SA", sa.toString());
+        Sentry.addBreadcrumb(bread);
 
         // check conditions
         if (sa.metConditions()) {
@@ -2064,6 +2066,10 @@ public class AbilityUtils {
             return doXMath(c.getDamageHistory().getCreatureAttacksThisTurn(), expr, c, ctb);
         }
 
+        if (sq[0].contains("Intensity")) {
+            return doXMath(c.getIntensity(true), expr, c, ctb);
+        }
+
         if (sq[0].contains("CardCounters")) {
             // CardCounters.ALL to be used for Kinsbaile Borderguard and anything that cares about all counters
             int count = 0;
@@ -2424,7 +2430,21 @@ public class AbilityUtils {
 
         // Count$AttackersDeclared
         if (sq[0].startsWith("AttackersDeclared")) {
-            return doXMath(player.getAttackersDeclaredThisTurn(), expr, c, ctb);
+            List<Card> attackers = player.getCreaturesAttackedThisTurn();
+            List<Card> differentAttackers = new ArrayList<>();
+            for (Card attacker : attackers) {
+                boolean add = true;
+                for (Card different : differentAttackers) {
+                    if (different.equalsWithTimestamp(attacker)) {
+                        add = false;
+                        break;
+                    }
+                }
+                if (add) {
+                    differentAttackers.add(attacker);
+                }
+            }
+            return doXMath(differentAttackers.size(), expr, c, ctb);
         }
 
         // Count$CardAttackedThisTurn <Valid>
@@ -3042,15 +3062,21 @@ public class AbilityUtils {
                 replaced = replaced.replaceAll("(?<!>)" + key, value);
             }
         }
-        for (final Entry<String, String> e : typeMap.entrySet()) {
-            final String key = e.getKey();
-            final String pkey = CardType.getPluralType(key);
-            final String pvalue = getReplacedText(pkey, CardType.getPluralType(e.getValue()), isDescriptive);
-            replaced = replaced.replaceAll("(?<!>)" + pkey, pvalue);
-            final String value = getReplacedText(key, e.getValue(), isDescriptive);
-            replaced = replaced.replaceAll("(?<!>)" + key, value);
+        StringBuilder sb = new StringBuilder();
+        for (String replacedPart : replaced.split(String.format(WITH_DELIMITER, "\\."))) {
+            if (!replacedPart.equals("Self") && !replacedPart.equals(".")) {
+                for (final Entry<String, String> e : typeMap.entrySet()) {
+                    final String key = e.getKey();
+                    final String pkey = CardType.getPluralType(key);
+                    final String pvalue = getReplacedText(pkey, CardType.getPluralType(e.getValue()), isDescriptive);
+                    replacedPart = replacedPart.replaceAll("(?<!>)" + pkey, pvalue);
+                    final String value = getReplacedText(key, e.getValue(), isDescriptive);
+                    replacedPart = replacedPart.replaceAll("(?<!>)" + key, value);
+                }
+            }
+            sb.append(replacedPart);
         }
-        return replaced;
+        return sb.toString();
     }
 
     private static final String getReplacedText(final String originalWord, final String newWord, final boolean isDescriptive) {
@@ -3390,10 +3416,6 @@ public class AbilityUtils {
         final String[] sq = l[0].split("\\.");
         final String value = sq[0];
 
-        if (value.contains("CardsInHand")) {
-            return doXMath(player.getCardsIn(ZoneType.Hand).size(), m, source, ctb);
-        }
-
         if (value.contains("NumPowerSurgeLands")) {
             return doXMath(player.getNumPowerSurgeLands(), m, source, ctb);
         }
@@ -3411,6 +3433,10 @@ public class AbilityUtils {
             return doXMath(n, m, source, ctb);
         }
 
+        if (value.contains("CardsInHand")) {
+            return doXMath(player.getCardsIn(ZoneType.Hand).size(), m, source, ctb);
+        }
+
         if (value.contains("CardsInLibrary")) {
             return doXMath(player.getCardsIn(ZoneType.Library).size(), m, source, ctb);
         }
@@ -3422,12 +3448,11 @@ public class AbilityUtils {
             return doXMath(CardLists.getType(player.getCardsIn(ZoneType.Graveyard), "Land").size(), m, source, ctb);
         }
 
-        if (value.contains("CreaturesInPlay")) {
-            return doXMath(player.getCreaturesInPlay().size(), m, source, ctb);
-        }
-
         if (value.contains("CardsInPlay")) {
             return doXMath(player.getCardsIn(ZoneType.Battlefield).size(), m, source, ctb);
+        }
+        if (value.contains("CreaturesInPlay")) {
+            return doXMath(player.getCreaturesInPlay().size(), m, source, ctb);
         }
 
         if (value.contains("StartingLife")) {
@@ -3441,7 +3466,6 @@ public class AbilityUtils {
         if (value.contains("LifeLostThisTurn")) {
             return doXMath(player.getLifeLostThisTurn(), m, source, ctb);
         }
-
         if (value.contains("LifeLostLastTurn")) {
             return doXMath(player.getLifeLostLastTurn(), m, source, ctb);
         }
@@ -3483,7 +3507,7 @@ public class AbilityUtils {
         }
 
         if (value.contains("AttackersDeclared")) {
-            return doXMath(player.getAttackersDeclaredThisTurn(), m, source, ctb);
+            return doXMath(player.getCreaturesAttackedThisTurn().size(), m, source, ctb);
         }
 
         if (value.contains("DamageToOppsThisTurn")) {
@@ -3782,7 +3806,7 @@ public class AbilityUtils {
 
         // "Clerics you control" - Count$TypeYouCtrl.Cleric
         if (sq[0].contains("Type")) {
-            someCards = CardLists.filter(someCards, CardPredicates.isType(sq[1]));
+            someCards = CardLists.getType(someCards, sq[1]);
         }
 
         // "Named <CARDNAME> in all graveyards" - Count$NamedAllYards.<CARDNAME>

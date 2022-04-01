@@ -6,7 +6,7 @@
         <packaging.type>jar</packaging.type>
         <build.min.memory>-Xms1024m</build.min.memory>
         <build.max.memory>-Xmx1536m</build.max.memory>
-        <alpha-version>1.6.47.001</alpha-version>
+        <alpha-version>1.6.49.001</alpha-version>
         <sign.keystore>keystore</sign.keystore>
         <sign.alias>alias</sign.alias>
         <sign.storepass>storepass</sign.storepass>
@@ -19,7 +19,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.48-SNAPSHOT</version>
+        <version>1.6.50-SNAPSHOT</version>
     </parent>
 
     <artifactId>forge-gui-android</artifactId>
@@ -45,7 +45,6 @@
         </resources>
         <finalName>forge-android-${alpha-version}</finalName>
     </build>
-
     <dependencies>
         <dependency>
             <groupId>com.google.android</groupId>
@@ -104,7 +103,69 @@
         <dependency>
             <groupId>io.sentry</groupId>
             <artifactId>sentry-android</artifactId>
-            <version>1.7.30</version>
+            <version>5.7.0</version>
+            <type>aar</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.sentry</groupId>
+                    <artifactId>sentry-android-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.sentry</groupId>
+                    <artifactId>sentry-android-ndk</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- manual sentry-android dependencies because of Gradle Bug -->
+        <dependency>
+            <groupId>io.sentry</groupId>
+            <artifactId>sentry-android-core</artifactId>
+            <version>5.7.0</version>
+            <type>aar</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>androidx.lifecycle</groupId>
+                    <artifactId>lifecycle-process</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>androidx.lifecycle</groupId>
+                    <artifactId>lifecycle-common-java8</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>androidx.core</groupId>
+                    <artifactId>core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.sentry</groupId>
+            <artifactId>sentry-android-ndk</artifactId>
+            <version>5.7.0</version>
+            <type>aar</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.sentry</groupId>
+                    <artifactId>sentry-android-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>androidx.lifecycle</groupId>
+                    <artifactId>lifecycle-process</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>androidx.lifecycle</groupId>
+                    <artifactId>lifecycle-common-java8</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>androidx.core</groupId>
+                    <artifactId>core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- runtime dependency of sentry -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.5</version>
         </dependency>
     </dependencies>
 
@@ -119,7 +180,19 @@
                     <plugin>
                         <groupId>com.simpligility.maven.plugins</groupId>
                         <artifactId>android-maven-plugin</artifactId>
-                        <version>4.2.1</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>javax.xml.bind</groupId>
+                                <artifactId>jaxb-api</artifactId>
+                                <version>2.3.1</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>net.sf.proguard</groupId>
+                                <artifactId>proguard-base</artifactId>
+                                <version>6.2.2</version>
+                            </dependency>
+                        </dependencies>
+                        <version>4.6.0</version>
                         <extensions>true</extensions>
                         <configuration>
                             <sign>
@@ -139,11 +212,21 @@
                                 <config>${project.basedir}/proguard.cfg</config>
                             </proguard>
                             <release>true</release>
-                            <dex>
+                            <dexCompiler>d8</dexCompiler>
+                            <d8>
+                                <minApi>26</minApi>
                                 <jvmArguments>
                                     <argument>${build.min.memory}</argument>
                                     <argument>${build.max.memory}</argument>
                                 </jvmArguments>
+                            </d8>
+                            <dex>
+                                <multi-dex>true</multi-dex>
+                                <jvmArguments>
+                                    <argument>${build.min.memory}</argument>
+                                    <argument>${build.max.memory}</argument>
+                                </jvmArguments>
+                                <dexArguments>--min-sdk-version=26</dexArguments>
                             </dex>
                         </configuration>
                     </plugin>
@@ -160,7 +243,19 @@
                     <plugin>
                         <groupId>com.simpligility.maven.plugins</groupId>
                         <artifactId>android-maven-plugin</artifactId>
-                        <version>4.2.1</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>javax.xml.bind</groupId>
+                                <artifactId>jaxb-api</artifactId>
+                                <version>2.3.1</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>net.sf.proguard</groupId>
+                                <artifactId>proguard-base</artifactId>
+                                <version>6.2.2</version>
+                            </dependency>
+                        </dependencies>
+                        <version>4.6.0</version>
                         <extensions>true</extensions>
                         <configuration>
                             <sign>
@@ -183,11 +278,21 @@
                                 <config>${project.basedir}/proguard.cfg</config>
                             </proguard>
                             <release>true</release>
-                            <dex>
+                            <dexCompiler>d8</dexCompiler>
+                            <d8>
+                                <minApi>26</minApi>
                                 <jvmArguments>
                                     <argument>${build.min.memory}</argument>
                                     <argument>${build.max.memory}</argument>
                                 </jvmArguments>
+                            </d8>
+                            <dex>
+                                <multi-dex>true</multi-dex>
+                                <jvmArguments>
+                                    <argument>${build.min.memory}</argument>
+                                    <argument>${build.max.memory}</argument>
+                                </jvmArguments>
+                                <dexArguments>--min-sdk-version=26</dexArguments>
                             </dex>
                         </configuration>
                     </plugin>
@@ -238,7 +343,19 @@
                     <plugin>
                         <groupId>com.simpligility.maven.plugins</groupId>
                         <artifactId>android-maven-plugin</artifactId>
-                        <version>4.2.1</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>javax.xml.bind</groupId>
+                                <artifactId>jaxb-api</artifactId>
+                                <version>2.3.1</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>net.sf.proguard</groupId>
+                                <artifactId>proguard-base</artifactId>
+                                <version>6.2.2</version>
+                            </dependency>
+                        </dependencies>
+                        <version>4.6.0</version>
                         <inherited>true</inherited>
                         <configuration>
                             <sign>

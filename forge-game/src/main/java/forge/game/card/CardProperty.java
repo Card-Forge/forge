@@ -21,9 +21,7 @@ import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.trigger.Trigger;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
@@ -338,7 +336,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("StrictlySelf")) {
-            if (!card.equals(source) || card.getTimestamp() != source.getTimestamp()) {
+            if (!card.equalsWithTimestamp(source)) {
                 return false;
             }
         } else if (property.startsWith("Self")) {
@@ -388,15 +386,6 @@ public class CardProperty {
             if (!card.equals(source.getEffectSource())) {
                 return false;
             }
-        } else if (property.equals("withoutManaAbility")) {
-            if (Iterables.any(card.getSpellAbilities(), SpellAbilityPredicates.isManaAbility())) {
-                return false;
-            }
-            for (final Trigger trig : card.getTriggers()) {
-                if (trig.getOverridingAbility() != null && !trig.getOverridingAbility().isManaAbility()) {
-                    return false;
-                }
-            }
         } else if (property.equals("CanBeSacrificedBy") && spellAbility instanceof SpellAbility) {
             // used for Emerge and Offering, these are SpellCost, not effect
             if (!card.canBeSacrificedBy((SpellAbility) spellAbility, false)) {
@@ -413,7 +402,7 @@ public class CardProperty {
         } else if (property.startsWith("AttachedTo")) {
             final String restriction = property.split("AttachedTo ")[1];
 
-            if (card.getEntityAttachedTo() == null) {
+            if (!card.isAttachedToEntity()) {
                 return false;
             }
 
@@ -542,10 +531,6 @@ public class CardProperty {
             }
         } else if (property.startsWith("CanBeAttachedBy")) {
             if (!card.canBeAttached(source)) {
-                return false;
-            }
-        } else if (property.startsWith("Equipped")) {
-            if (!source.hasCardAttachment(card)) {
                 return false;
             }
         } else if (property.startsWith("Fortified")) {
@@ -1793,7 +1778,7 @@ public class CardProperty {
             if (!castSA.isValid(v, sourceController, source, spellAbility)) {
                 return false;
             }
-        }else if (property.startsWith("wasCastFrom")) {
+        } else if (property.startsWith("wasCastFrom")) {
             boolean byYou = property.contains("ByYou");
             String strZone = property.substring(11);
             Player zoneOwner = null;

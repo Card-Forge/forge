@@ -48,7 +48,9 @@ import forge.game.card.CardDamageMap;
 import forge.game.card.CardUtil;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.replacement.ReplacementType;
+import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.TriggerType;
 import forge.util.CardTranslation;
@@ -268,7 +270,6 @@ public class Combat {
     public final GameEntity getDefenderByAttacker(final Card c) {
         return getDefenderByAttacker(getBandOfAttacker(c));
     }
-
     public final GameEntity getDefenderByAttacker(final AttackingBand c) {
         for (Entry<GameEntity, AttackingBand> e : attackedByBands.entries()) {
             if (e.getValue() == c) {
@@ -765,34 +766,65 @@ public class Combat {
                 continue;
             }
 
-            boolean divideCombatDamageAsChoose = getDefendersCreatures().size() > 0 &&
-                    attacker.hasKeyword("You may assign CARDNAME's combat damage divided as you choose among " +
-                            "defending player and/or any number of creatures they control.")
-                    && attacker.getController().getController().confirmAction(null, null,
-                    Localizer.getInstance().getMessage("lblAssignCombatDamageAsChoose",
-                            CardTranslation.getTranslatedName(attacker.getName())));
-            boolean trampler = attacker.hasKeyword(Keyword.TRAMPLE);
-            orderedBlockers = blockersOrderedForDamageAssignment.get(attacker);
-            boolean assignCombatDamageToCreature = (orderedBlockers == null || orderedBlockers.isEmpty()) &&
-                    getDefendersCreatures().size() > 0 &&
-                    attacker.hasKeyword("If CARDNAME is unblocked, you may have it assign its combat damage to " +
-                            "a creature defending player controls.") &&
-                    attacker.getController().getController().confirmAction(null, null,
-                    Localizer.getInstance().getMessage("lblAssignCombatDamageToCreature",
-                            CardTranslation.getTranslatedName(attacker.getName())));
-            if (divideCombatDamageAsChoose) {
-                if (orderedBlockers == null || orderedBlockers.isEmpty()) {
-                    orderedBlockers = getDefendersCreatures();
-                } else {
-                    for (Card c : getDefendersCreatures()) {
-                        if (!orderedBlockers.contains(c)) {
-                            orderedBlockers.add(c);
-                        }
-                    }
-                }
-            }
-            assignedDamage = true;
             GameEntity defender = getDefenderByAttacker(band);
+            Player assigningPlayer = getAttackingPlayer();
+            orderedBlockers = blockersOrderedForDamageAssignment.get(attacker);
+            // Defensive Formation is very similar to Banding with Blockers
+            // It allows the defending player to assign damage instead of the attacking player
+            if (defender instanceof Player && defender.hasKeyword("You assign combat damage of each creature attacking you.")) {
+                assigningPlayer = (Player)defender;
+            }
+            else if (orderedBlockers != null && AttackingBand.isValidBand(orderedBlockers, true)) {
+                assigningPlayer = orderedBlockers.get(0).getController();
+            }
+
+            final SpellAbility emptySA = new SpellAbility.EmptySa(attacker);
+
+            boolean assignToPlayer = false;
+            if (attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.")) {
+                assignToPlayer = true;
+            }
+            if (!assignToPlayer && attacker.getGame().getCombat().isBlocked(attacker) && attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
+                assignToPlayer = assigningPlayer.getController().confirmAction(emptySA, PlayerActionConfirmMode.AlternativeDamageAssignment,
+                        Localizer.getInstance().getMessage("lblAssignCombatDamageWerentBlocked",
+                                CardTranslation.getTranslatedName(attacker.getName())));
+            }
+
+            boolean divideCombatDamageAsChoose = false;
+            boolean assignCombatDamageToCreature = false;
+            boolean trampler = attacker.hasKeyword(Keyword.TRAMPLE);
+            if (!assignToPlayer) {
+                divideCombatDamageAsChoose = getDefendersCreatures().size() > 0 &&
+                        attacker.hasKeyword("You may assign CARDNAME's combat damage divided as you choose among " +
+                                "defending player and/or any number of creatures they control.")
+                        && assigningPlayer.getController().confirmAction(emptySA, PlayerActionConfirmMode.AlternativeDamageAssignment,
+                                Localizer.getInstance().getMessage("lblAssignCombatDamageAsChoose",
+                                        CardTranslation.getTranslatedName(attacker.getName())));
+                if (defender instanceof Card && divideCombatDamageAsChoose) {
+                    defender = getDefenderPlayerByAttacker(attacker);
+                }
+
+                assignCombatDamageToCreature = !attacker.getGame().getCombat().isBlocked(attacker) &&
+                        getDefendersCreatures().size() > 0 &&
+                        attacker.hasKeyword("If CARDNAME is unblocked, you may have it assign its combat damage to " +
+                                "a creature defending player controls.") &&
+                        assigningPlayer.getController().confirmAction(emptySA, PlayerActionConfirmMode.AlternativeDamageAssignment,
+                                Localizer.getInstance().getMessage("lblAssignCombatDamageToCreature",
+                                        CardTranslation.getTranslatedName(attacker.getName())));
+                        if (divideCombatDamageAsChoose) {
+                            if (orderedBlockers == null || orderedBlockers.isEmpty()) {
+                                orderedBlockers = getDefendersCreatures();
+                            } else {
+                                for (Card c : getDefendersCreatures()) {
+                                    if (!orderedBlockers.contains(c)) {
+                                        orderedBlockers.add(c);
+                                    }
+                                }
+                            }
+                        }
+            }
+
+            assignedDamage = true;
             // If the Attacker is unblocked, or it's a trampler and has 0 blockers, deal damage to defender
             if (defender instanceof Card && attacker.hasKeyword("Trample:Planeswalker")) {
                 if (orderedBlockers == null || orderedBlockers.isEmpty()) {
@@ -804,7 +836,11 @@ public class Combat {
                 }
                 defender = getDefenderPlayerByAttacker(attacker);
             }
-            if (orderedBlockers == null || orderedBlockers.isEmpty()) {
+            if (assignToPlayer) {
+                attackers.remove(attacker);
+                damageMap.put(attacker, defender, damageDealt);
+            }
+            else if (orderedBlockers == null || orderedBlockers.isEmpty()) {
                 attackers.remove(attacker);
                 if (assignCombatDamageToCreature) {
                     Card chosen = attacker.getController().getController().chooseCardsForEffect(getDefendersCreatures(),
@@ -814,25 +850,13 @@ public class Combat {
                     damageMap.put(attacker, defender, damageDealt);
                 } // No damage happens if blocked but no blockers left
             } else {
-                Player assigningPlayer = getAttackingPlayer();
-                // Defensive Formation is very similar to Banding with Blockers
-                // It allows the defending player to assign damage instead of the attacking player
-                if (defender instanceof Card && divideCombatDamageAsChoose) {
-                    defender = getDefenderPlayerByAttacker(attacker);
-                }
-                if (defender instanceof Player && defender.hasKeyword("You assign combat damage of each creature attacking you.")) {
-                    assigningPlayer = (Player)defender;
-                }
-                else if (AttackingBand.isValidBand(orderedBlockers, true)) {
-                    assigningPlayer = orderedBlockers.get(0).getController();
-                }
-
                 Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(attacker, orderedBlockers, attackers,
                         damageDealt, defender, divideCombatDamageAsChoose || getAttackingPlayer() != assigningPlayer);
 
                 attackers.remove(attacker);
                 // player wants to assign another first
                 if (map == null) {
+                    // add to end
                     attackers.add(attacker);
                     continue;
                 }

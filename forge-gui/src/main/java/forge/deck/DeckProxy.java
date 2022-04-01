@@ -309,10 +309,11 @@ public class DeckProxy implements InventoryItem {
     private boolean isCustomDeckFormat(){
         Deck deck = this.getDeck();
         CardPool cards = deck.getAllCardsInASinglePool();
-        CardEdition.Collection customEditions = StaticData.instance().getCustomEditions();
+        CardEdition.Collection customEditions = StaticData.instance().getEditions();
         for (Entry<PaperCard, Integer> entry : cards){
             String setCode = entry.getKey().getEdition();
-            if (customEditions.contains(setCode))
+            CardEdition E = customEditions.getEditionByCodeOrThrow(setCode);
+            if (E != null && E.getType() == CardEdition.Type.CUSTOM_SET)
                 return true;
         }
         return false;
@@ -347,32 +348,9 @@ public class DeckProxy implements InventoryItem {
         return sbSize;
     }
 
-    public static int getAverageCMC(Deck deck) {
-        int totalCMC = 0;
-        int totalCount = 0;
-        for (final Entry<DeckSection, CardPool> deckEntry : deck) {
-            switch (deckEntry.getKey()) {
-            case Main:
-            case Commander:
-                for (final Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
-                    CardRules rules = poolEntry.getKey().getRules();
-                    CardType type = rules.getType();
-                    if (!type.isLand() && (type.isArtifact() || type.isCreature() || type.isEnchantment() || type.isPlaneswalker() || type.isInstant() || type.isSorcery())) {
-                        totalCMC += rules.getManaCost().getCMC();
-                        totalCount++;
-                    }
-                }
-                break;
-            default:
-                break; //ignore other sections
-            }
-        }
-        return Math.round(totalCMC / totalCount);
-    }
-
     public Integer getAverageCMC() {
         if (avgCMC == null) {
-            avgCMC = getAverageCMC(getDeck());
+            avgCMC = Deck.getAverageCMC(getDeck());
         }
         return avgCMC;
     }

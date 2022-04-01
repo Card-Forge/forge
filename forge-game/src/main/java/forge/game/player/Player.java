@@ -171,7 +171,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int numTokenCreatedThisTurn;
     private int numForetoldThisTurn;
     private int numCardsInHandStartedThisTurnWith;
-    private int attackersDeclaredThisTurn;
     private int venturedThisTurn;
     private int maxHandSize = 7;
     private int startingHandSize = 7;
@@ -204,7 +203,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private ManaPool manaPool = new ManaPool(this);
     private GameEntity mustAttackEntity;
     private GameEntity mustAttackEntityThisTurn;
-    private CardCollection creatureAttackedThisTurn = new CardCollection();
+    private List<Card> creatureAttackedThisTurn = new ArrayList<>();
     private boolean activateLoyaltyAbilityThisTurn = false;
     private boolean tappedLandForManaThisTurn = false;
     private List<Card> completedDungeons = new ArrayList<>();
@@ -1859,7 +1858,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         activateLoyaltyAbilityThisTurn = b;
     }
 
-    public final CardCollection getCreaturesAttackedThisTurn() {
+    public final List<Card> getCreaturesAttackedThisTurn() {
         return creatureAttackedThisTurn;
     }
     public final void addCreaturesAttackedThisTurn(final Card c) {
@@ -1867,16 +1866,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void clearCreaturesAttackedThisTurn() {
         creatureAttackedThisTurn.clear();
-    }
-
-    public final int getAttackersDeclaredThisTurn() {
-        return attackersDeclaredThisTurn;
-    }
-    public final void incrementAttackersDeclaredThisTurn() {
-        attackersDeclaredThisTurn++;
-    }
-    public final void resetAttackersDeclaredThisTurn() {
-        attackersDeclaredThisTurn = 0;
     }
 
     public final int getVenturedThisTurn() {
@@ -2009,9 +1998,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasDesert() {
-        return CardLists.count(
+        return Iterables.any(
                 getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Graveyard)),
-                CardPredicates.isType("Desert")) > 0;
+                CardPredicates.isType("Desert"));
     }
 
     public final boolean hasThreshold() {
@@ -2055,9 +2044,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasSurge() {
-        PlayerCollection list = getAllies();
-        list.add(this);
-        return !CardLists.filterControlledBy(game.getStack().getSpellsCastThisTurn(), list).isEmpty();
+        return !CardLists.filterControlledBy(game.getStack().getSpellsCastThisTurn(), getYourTeam()).isEmpty();
     }
 
     public final int getOpponentLostLifeThisTurn() {
@@ -2435,7 +2422,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetEquippedThisTurn();
         resetSacrificedThisTurn();
         clearAssignedDamage();
-        resetAttackersDeclaredThisTurn();
         resetVenturedThisTurn();
         setRevolt(false);
         resetProwl();

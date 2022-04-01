@@ -7,8 +7,8 @@ SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | SubAb
 SVar:DBVenture:DB$ Venture
 SVar:X:PlayerCountPropertyYou$DungeonCompletedNamed_Tomb of Annihilation
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a number of 2/2 black Zombie creature tokens equal to the number of opponents you have.
-SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ b_2_2_zombie | TokenOwner$ You
-SVar:X:PlayerCountOpponents$Amount
+SVar:TrigToken:DB$ Token | TokenAmount$ Y | TokenScript$ b_2_2_zombie | TokenOwner$ You
+SVar:Y:PlayerCountOpponents$Amount
 DeckHas:Ability$Token
 DeckHints:Type$Zombie
 Oracle:When Acererak the Archlich enters the battlefield, if you haven't completed Tomb of Annihilation, return Acererak the Archlich to its owner's hand and venture into the dungeon.\nWhenever Acererak the Archlich attacks, create a number of 2/2 black Zombie creature tokens equal to the number of opponents you have.

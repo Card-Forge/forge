@@ -1,0 +1,11 @@
+Name:Better Offer
+ManaCost:X U
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ChangeType$ Creature.cmcLEX+TargetedPlayerOwn | ChangeNum$ 1 | Hidden$ True | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | GainControl$ True | RememberChanged$ True | SubAbility$ DBStore | StackDescription$ {p:You} puts a random creature card with mana value X or less from {p:Targeted}'s library onto the battlefield under their control. | SpellDescription$ Put a random creature card with mana value X or less from target opponent's library onto the battlefield under your control.
+SVar:DBStore:DB$ StoreSVar | SVar$ Num | Type$ CountSVar | Expression$ X | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ Perpetual | Name$ Better Offer's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup | SpellDescription$ It perpetually has base power and toughness X/X and perpetually gains ward {1}.
+SVar:Perpetual:Mode$ Continuous | Affected$ Card.IsRemembered | SetPower$ Num | SetToughness$ Num | AddKeyword$ Ward:1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The card perpetually has base power and toughness X/X and perpetually gains ward {1}.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+SVar:Num:Number$0
+Oracle:Put a random creature card with mana value X or less from target opponent's library onto the battlefield under your control. It perpetually has base power and toughness X/X and perpetually gains ward {1}.

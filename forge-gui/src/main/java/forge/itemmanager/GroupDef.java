@@ -287,7 +287,6 @@ public enum GroupDef {
 
         //build sorted list of sets
         List<CardEdition> sortedSets = Lists.newArrayList(FModel.getMagicDb().getEditions());
-        sortedSets.addAll(Lists.newArrayList(FModel.getMagicDb().getCustomEditions()));
         Collections.sort(sortedSets);
         Collections.reverse(sortedSets);
 

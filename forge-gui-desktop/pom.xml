@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>forge</artifactId>
 		<groupId>forge</groupId>
-		<version>1.6.48-SNAPSHOT</version>
+		<version>1.6.50-SNAPSHOT</version>
 	</parent>
 
     <artifactId>forge-gui-desktop</artifactId>
@@ -140,12 +140,6 @@
             <version>0.8.5</version>
         </dependency>
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.9.10</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-testng-common</artifactId>
             <version>2.0.9</version>
@@ -184,30 +178,30 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>3.3.3</version>
+            <version>3.12.4</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>net.bytebuddy</groupId>
             <artifactId>byte-buddy</artifactId>
-            <version>1.10.5</version>
+            <version>1.12.3</version>
         </dependency>
         <dependency>
             <groupId>net.bytebuddy</groupId>
             <artifactId>byte-buddy-agent</artifactId>
-            <version>1.10.5</version>
+            <version>1.12.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.objenesis</groupId>
             <artifactId>objenesis</artifactId>
-            <version>2.6</version>
+            <version>3.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
-            <version>2.3.20</version>
+            <version>2.3.31</version>
         </dependency>
         <dependency>
             <groupId>com.googlecode.soundlibs</groupId>
@@ -240,7 +234,7 @@
                     <plugin>
                         <groupId>com.akathist.maven.plugins.launch4j</groupId>
                         <artifactId>launch4j-maven-plugin</artifactId>
-                        <version>1.7.25</version>
+                        <version>2.1.2</version>
                         <executions>
                             <execution>
                                 <id>l4j-gui</id>
@@ -405,7 +399,7 @@
                     <plugin>
                         <groupId>com.akathist.maven.plugins.launch4j</groupId>
                         <artifactId>launch4j-maven-plugin</artifactId>
-                        <version>1.7.25</version>
+                        <version>2.1.2</version>
                         <executions>
                             <execution>
                                 <id>l4j-gui</id>

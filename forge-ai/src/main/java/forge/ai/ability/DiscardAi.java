@@ -93,7 +93,7 @@ public class DiscardAi extends SpellAbilityAi {
         if (sa.hasParam("AnyNumber")) {
             if ("DiscardUncastableAndExcess".equals(aiLogic)) {
                 final CardCollectionView inHand = ai.getCardsIn(ZoneType.Hand);
-                final int numLandsOTB = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS).size();
+                final int numLandsOTB = CardLists.count(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
                 int numDiscard = 0;
                 int numOppInHand = 0;
                 for (Player p : ai.getGame().getPlayers()) {
@@ -143,7 +143,7 @@ public class DiscardAi extends SpellAbilityAi {
         // some other variables here, like handsize vs. maxHandSize
 
         return randomReturn;
-    } // discardCanPlayAI()
+    }
 
     private boolean discardTargetAI(final Player ai, final SpellAbility sa) {
         final PlayerCollection opps = ai.getOpponents();
@@ -164,7 +164,7 @@ public class DiscardAi extends SpellAbilityAi {
             }
         }
         return false;
-    } // discardTargetAI()
+    }
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
@@ -198,7 +198,7 @@ public class DiscardAi extends SpellAbilityAi {
         }
 
         return true;
-    } // discardTrigger()
+    }
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
@@ -209,10 +209,10 @@ public class DiscardAi extends SpellAbilityAi {
         }
         // TODO: check for some extra things
         return true;
-    } // discardCheckDrawbackAI()
+    }
 
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
-        if ( mode == PlayerActionConfirmMode.Random ) {
+        if (mode == PlayerActionConfirmMode.Random) {
             // TODO For now AI will always discard Random used currently with: Balduvian Horde and similar cards
             return true;
         }

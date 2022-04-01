@@ -14,6 +14,7 @@ public enum PlayerActionConfirmMode {
     BidLife,
     OptionalChoose,
     Tribute,
+    AlternativeDamageAssignment
     // Ripple;
     ;
     

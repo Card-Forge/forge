@@ -43,6 +43,9 @@ public class PumpEffect extends SpellAbilityEffect {
                 && !(host.isInPlay() || host.isInZone(ZoneType.Stack))) {
             return;
         }
+        if ("UntilLoseControlOfHost".equals(sa.getParam("Duration")) && host.getController() != sa.getActivatingPlayer()) {
+            return;
+        }
 
         // do Game Check there in case of LKI
         final Card gameCard = game.getCardState(applyTo, null);

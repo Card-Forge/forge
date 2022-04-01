@@ -167,8 +167,7 @@ public class PlayEffect extends SpellAbilityEffect {
             // so it gets added to stack
             card.setCopiedPermanent(card);
             card.setToken(true);
-            tgtCards = new CardCollection();
-            tgtCards.add(card);
+            tgtCards = new CardCollection(card);
         } else {
             tgtCards = new CardCollection();
             // filter only cards that didn't changed zones
@@ -217,7 +216,6 @@ public class PlayEffect extends SpellAbilityEffect {
         boolean singleOption = tgtCards.size() == 1 && amount == 1 && optional;
         Map<String, Object> params = hasTotalCMCLimit ? new HashMap<>() : null;
 
-
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
@@ -256,7 +254,8 @@ public class PlayEffect extends SpellAbilityEffect {
             if (sa.hasParam("ShowCardToActivator")) {
                 game.getAction().revealTo(tgtCard, activator);
             }
-
+            if (singleOption && sa.getTargetCard() == null)
+                sa.setPlayEffectCard(tgtCard);// show card to play rather than showing the source card
             if (singleOption && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())))) {
                 if (wasFaceDown) {
                     tgtCard.turnFaceDownNoUpdate();
@@ -424,7 +423,6 @@ public class PlayEffect extends SpellAbilityEffect {
             activator.popPaidForSA();
         }
     } // end resolve
-
 
     protected void addReplaceGraveyardEffect(Card c, SpellAbility sa, String zone, Map<AbilityKey, Object> moveParams) {
         final Card hostCard = sa.getHostCard();

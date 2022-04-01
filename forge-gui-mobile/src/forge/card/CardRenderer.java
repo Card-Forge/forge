@@ -674,6 +674,7 @@ public class CardRenderer {
     public static void drawCardWithOverlays(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos) {
         drawCardWithOverlays(g, card, x, y, w, h, pos, false, false, false);
     }
+    static float markersHeight = 0f;
     public static void drawCardWithOverlays(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean stackview, boolean showAltState, boolean isChoiceList) {
         boolean canShow = MatchController.instance.mayView(card);
         float oldAlpha = g.getfloatAlphaComposite();
@@ -730,7 +731,13 @@ public class CardRenderer {
             List<String> markers = new ArrayList<>();
             markers.add("In Room:");
             markers.add(card.getCurrentRoom());
-            drawMarkersTabs(markers, g, x, y, w, h);
+            drawMarkersTabs(markers, g, x, y, w, h, false);
+        }
+        //Class level
+        if (card.getCurrentState().getType().hasStringType("Class") && ZoneType.Battlefield.equals(card.getZone())) {
+            List<String> markers = new ArrayList<>();
+            markers.add("LV:"+card.getClassLevel());
+            drawMarkersTabs(markers, g, x, y - markersHeight, w, h, true);
         }
 
         float otherSymbolsSize = w / 4f;
@@ -1123,7 +1130,7 @@ public class CardRenderer {
                 }
             }
         }
-
+        int c = 0;
         for (Map.Entry<CounterType, Integer> counterEntry : card.getCounters().entrySet()) {
             final CounterType counter = counterEntry.getKey();
             final int numberOfCounters = counterEntry.getValue();
@@ -1144,8 +1151,10 @@ public class CardRenderer {
 
                 drawText(g, counter.getCounterOnCardDisplayName(), font, counterColor, x + 2 + additionalXOffset, counterYOffset, counterBoxRealWidth, counterBoxHeight, Align.left);
                 drawText(g, String.valueOf(numberOfCounters), font, counterColor, x + counterBoxBaseWidth - 4f - additionalXOffset, counterYOffset, counterBoxRealWidth, counterBoxHeight, Align.left);
+                c += counterBoxHeight;
             }
         }
+        markersHeight = c;
     }
 
     private static final int GL_BLEND = GL20.GL_BLEND;
@@ -1203,9 +1212,9 @@ public class CardRenderer {
 
     }
 
-    private static void drawMarkersTabs(final List<String> markers, final Graphics g, final float x, final float y, final float w, final float h) {
+    private static void drawMarkersTabs(final List<String> markers, final Graphics g, final float x, final float y, final float w, final float h, boolean larger) {
 
-        int fontSize = Math.max(8, Math.min(22, (int) (h * 0.05)));
+        int fontSize = larger ? Math.max(9, Math.min(22, (int) (h * 0.08))) : Math.max(8, Math.min(22, (int) (h * 0.05)));
         BitmapFont font = counterFonts.get(fontSize);
 
         final float additionalXOffset = 3f * ((fontSize - 8) / 8f);

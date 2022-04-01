@@ -54,17 +54,18 @@ import java.io.File;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.6.47.001";
+    public static final String CURRENT_VERSION = "1.6.49.001";
 
     private static ApplicationListener app = null;
     static Scene currentScene = null;
     static Array<Scene> lastScene = new Array<>();
-    private float animationTimeout;
+    private static float animationTimeout;
     static Batch animationBatch;
-    static Texture transitionTexture;
     static TextureRegion lastScreenTexture;
     private static boolean sceneWasSwapped = false;
     private static Clipboard clipboard;
@@ -119,6 +120,7 @@ public class Forge implements ApplicationListener {
     private static Cursor cursor0, cursor1, cursor2, cursorA0, cursorA1, cursorA2;
     public static boolean forcedEnglishonCJKMissing = false;
     private static Localizer localizer;
+    static Map<Integer, Texture> misc = new HashMap<>();
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
         app = new Forge();
@@ -336,12 +338,23 @@ public class Forge implements ApplicationListener {
             e.printStackTrace();
         }
     }
-
+    public static Texture getTitleBG() {
+        if (misc.get(0) == null) {
+            misc.put(0, new Texture(GuiBase.isAndroid()
+                    ? Gdx.files.internal("fallback_skin").child("title_bg_lq.png")
+                    : Gdx.files.classpath("fallback_skin").child("title_bg_lq.png")));
+        }
+        return misc.get(0);
+    }
+    public static Texture getTransitionBG() {
+        if (misc.get(1) == null) {
+            misc.put(1, new Texture(GuiBase.isAndroid()
+                    ? Gdx.files.internal("fallback_skin").child("transition.png")
+                    : Gdx.files.classpath("fallback_skin").child("transition.png")));
+        }
+        return misc.get(1);
+    }
     protected void afterDbLoaded() {
-        //init here to fix crash if the assets are missing
-        transitionTexture = new Texture(GuiBase.isAndroid() ? Gdx.files.internal("fallback_skin").child("transition.png") : Gdx.files.classpath("fallback_skin").child("transition.png"));
-
-
         destroyThis = false; //Allow back()
         Gdx.input.setCatchKey(Keys.MENU, true);
 
@@ -816,8 +829,8 @@ public class Forge implements ApplicationListener {
                                 animationBatch.setColor(1, 1, 1, 1);
                                 animationBatch.draw(lastScreenTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.setColor(1, 1, 1, 1 - (1 / transitionTime) * animationTimeout);
-                                animationBatch.draw(transitionTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                                animationBatch.draw(transitionTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getTransitionBG(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getTransitionBG(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.end();
                                 if (animationTimeout < 0) {
                                     currentScene.render();
@@ -836,8 +849,8 @@ public class Forge implements ApplicationListener {
                                 animationBatch.setColor(1, 1, 1, 1);
                                 animationBatch.draw(lastScreenTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.setColor(1, 1, 1, (1 / transitionTime) * (animationTimeout + transitionTime));
-                                animationBatch.draw(transitionTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                                animationBatch.draw(transitionTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getTransitionBG(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getTransitionBG(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.end();
                                 return;
                             }

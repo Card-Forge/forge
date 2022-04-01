@@ -21,9 +21,9 @@ public class RollDiceAi extends SpellAbilityAi {
         String logic = sa.getParamOrDefault("AILogic", "");
 
         if (logic.equals("Combat")) {
-            return game.getCombat() != null && ((game.getCombat().isAttacking(source) && game.getCombat().isUnblocked(source)) || game.getCombat().isBlocking(source));
+            return ph.inCombat() && ((game.getCombat().isAttacking(source) && game.getCombat().isUnblocked(source)) || game.getCombat().isBlocking(source));
         } else if (logic.equals("CombatEarly")) {
-            return game.getCombat() != null && (game.getCombat().isAttacking(source) || game.getCombat().isBlocking(source));
+            return ph.inCombat() && (game.getCombat().isAttacking(source) || game.getCombat().isBlocking(source));
         } else if (logic.equals("Main2")) {
             return ph.is(PhaseType.MAIN2, aiPlayer);
         } else if (logic.equals("AtOppEOT")) {

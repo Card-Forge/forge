@@ -35,8 +35,8 @@ import forge.game.cost.Cost;
 import forge.game.spellability.*;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
+import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
-import io.sentry.event.BreadcrumbBuilder;
 
 /**
  * <p>
@@ -145,10 +145,12 @@ public final class AbilityFactory {
             return getAbility(mapParams, type, state, sVarHolder);
         } catch (Error | Exception ex) {
             String msg = "AbilityFactory:getAbility: crash when trying to create ability ";
-            Sentry.getContext().recordBreadcrumb(
-                new BreadcrumbBuilder().setMessage(msg)
-                .withData("Card", state.getName()).withData("Ability", abString).build()
-            );
+            
+            Breadcrumb bread = new Breadcrumb(msg);
+            bread.setData("Card", state.getName());
+            bread.setData("Ability", abString);
+            
+            Sentry.addBreadcrumb(bread);
             throw new RuntimeException(msg + " of card: " + state.getName(), ex);
         }
     }

@@ -7,7 +7,6 @@ import java.util.Map;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 
 import forge.ai.AiAttackController;
 import forge.ai.ComputerUtilAbility;
@@ -42,8 +41,7 @@ public class ChooseCardAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             sa.resetTargets();
             // search targetable Opponents
-            final List<Player> oppList = Lists.newArrayList(Iterables.filter(
-                    ai.getOpponents(), PlayerPredicates.isTargetableBy(sa)));
+            final List<Player> oppList = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
 
             if (oppList.isEmpty()) {
                 return false;

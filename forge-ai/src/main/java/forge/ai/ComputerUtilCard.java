@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -63,6 +62,7 @@ import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.Expressions;
 import forge.util.MyRandom;
+import forge.util.TextUtil;
 
 public class ComputerUtilCard {
     public static Card getMostExpensivePermanentAI(final CardCollectionView list, final SpellAbility spell, final boolean targeted) {
@@ -249,11 +249,7 @@ public class ComputerUtilCard {
         }
         if (iminBL == Integer.MAX_VALUE) {
             // All basic lands have no basic land type. Just return something
-            Iterator<Card> untapped = Iterables.filter(land, CardPredicates.Presets.UNTAPPED).iterator();
-            if (untapped.hasNext()) {
-                return untapped.next();
-            }
-            return land.get(0);
+            return Iterables.find(land, CardPredicates.Presets.UNTAPPED, land.get(0));
         }
 
         final List<Card> bLand = CardLists.getType(land, sminBL);
@@ -615,35 +611,6 @@ public class ComputerUtilCard {
         return combat.isAttacking(card);
     }
 
-    public static boolean canBeKilledByRoyalAssassin(final Player ai, final Card card) {
-        boolean wasTapped = card.isTapped();
-        for (Player opp : ai.getOpponents()) {
-            for (Card c : opp.getCardsIn(ZoneType.Battlefield)) {
-                for (SpellAbility sa : c.getSpellAbilities()) {
-                    if (sa.getApi() != ApiType.Destroy) {
-                        continue;
-                    }
-                    if (!ComputerUtilCost.canPayCost(sa, opp, sa.isTrigger())) {
-                        continue;
-                    }
-                    sa.setActivatingPlayer(opp);
-                    if (sa.canTarget(card)) {
-                        continue;
-                    }
-                    // check whether the ability can only target tapped creatures
-                    card.setTapped(true);
-                    if (!sa.canTarget(card)) {
-                        card.setTapped(wasTapped);
-                        continue;
-                    }
-                    card.setTapped(wasTapped);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     /**
      * Create a mock combat where ai is being attacked and returns the list of likely blockers. 
      * @param ai blocking player
@@ -698,6 +665,35 @@ public class ComputerUtilCard {
         final List<Card> attackers = Lists.newArrayList(attacker);
         aiBlk.assignBlockersGivenAttackers(combat, attackers);
         return ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, combat);
+    }
+
+    public static boolean canBeKilledByRoyalAssassin(final Player ai, final Card card) {
+        boolean wasTapped = card.isTapped();
+        for (Player opp : ai.getOpponents()) {
+            for (Card c : opp.getCardsIn(ZoneType.Battlefield)) {
+                for (SpellAbility sa : c.getSpellAbilities()) {
+                    if (sa.getApi() != ApiType.Destroy) {
+                        continue;
+                    }
+                    if (!ComputerUtilCost.canPayCost(sa, opp, sa.isTrigger())) {
+                        continue;
+                    }
+                    sa.setActivatingPlayer(opp);
+                    if (sa.canTarget(card)) {
+                        continue;
+                    }
+                    // check whether the ability can only target tapped creatures
+                    card.setTapped(true);
+                    if (!sa.canTarget(card)) {
+                        card.setTapped(wasTapped);
+                        continue;
+                    }
+                    card.setTapped(wasTapped);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -995,11 +991,8 @@ public class ComputerUtilCard {
             	int maxExcess = 0;
             	String bestColor = Constant.GREEN;
             	for (byte color : MagicColor.WUBRG) {
-            		CardCollectionView ailist = ai.getCardsIn(ZoneType.Battlefield);
-            		CardCollectionView opplist = opp.getCardsIn(ZoneType.Battlefield);
-            		
-            		ailist = CardLists.filter(ailist, CardPredicates.isColor(color));
-            		opplist = CardLists.filter(opplist, CardPredicates.isColor(color));
+            		CardCollectionView ailist = ai.getColoredCardsInPlay(color);
+            		CardCollectionView opplist = opp.getColoredCardsInPlay(color);
 
                     int excess = evaluatePermanentList(opplist) - evaluatePermanentList(ailist);
                     if (excess > maxExcess) {
@@ -1337,7 +1330,7 @@ public class ComputerUtilCard {
         // buff attacker/blocker using triggered pump (unless it's lethal and we don't want to be reckless)
         if (immediately && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS) && !loseCardAtEOT) {
             if (phase.isPlayerTurn(ai)) {
-                if (CombatUtil.canAttack(c) || (game.getCombat() != null && c.isAttacking())) {
+                if (CombatUtil.canAttack(c) || (phase.inCombat() && c.isAttacking())) {
                     return true;
                 }
             } else {
@@ -1816,6 +1809,9 @@ public class ComputerUtilCard {
     }
 
     public static boolean hasActiveUndyingOrPersist(final Card c) {
+        if (c.isToken()) {
+            return false;
+        }
         if (c.hasKeyword(Keyword.UNDYING) && c.getCounters(CounterEnumType.P1P1) == 0) {
             return true;
         }
@@ -1971,15 +1967,56 @@ public class ComputerUtilCard {
 
     public static Cost getTotalWardCost(Card c) {
         Cost totalCost = new Cost(ManaCost.NO_COST, false);
-        for (final KeywordInterface inst : c.getKeywords()) {
-            if (inst.getKeyword() == Keyword.WARD) {
-                final String keyword = inst.getOriginal();
-                final String[] k = keyword.split(":");
-                final Cost wardCost = new Cost(k[1], false);
-                totalCost = totalCost.add(wardCost);
-            }
+        for (final KeywordInterface inst : c.getKeywords(Keyword.WARD)) {
+            final String keyword = inst.getOriginal();
+            final String[] k = keyword.split(":");
+            final Cost wardCost = new Cost(k[1], false);
+            totalCost = totalCost.add(wardCost);
         }
         return totalCost;
+    }
+
+    public static boolean willUntap(Player ai, Card tapped) {
+        // TODO use AiLogic on trigger in case card loses all abilities
+        // if it's from a static need to also check canUntap
+        for (Card card : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+            boolean untapsEachTurn = card.hasSVar("UntapsEachTurn");
+            boolean untapsEachOtherTurn = card.hasSVar("UntapsEachOtherPlayerTurn");
+
+            if (untapsEachTurn || untapsEachOtherTurn) {
+                String affected = untapsEachTurn ? card.getSVar("UntapsEachTurn")
+                        : card.getSVar("UntapsEachOtherPlayerTurn");
+
+                for (String aff : TextUtil.split(affected, ',')) {
+                    if (tapped.isValid(aff, ai, tapped, null)
+                            && (untapsEachTurn || (untapsEachOtherTurn && ai.equals(card.getController())))) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    // TODO replace most calls to Player.isCardInPlay because they include phased out
+    public static boolean isNonDisabledCardInPlay(final Player ai, final String cardName) {
+        for (Card card : ai.getCardsIn(ZoneType.Battlefield, cardName)) {
+            // TODO - Better logic to determine if a permanent is disabled by local effects
+            // currently assuming any permanent enchanted by another player
+            // is disabled and a second copy is necessary
+            // will need actual logic that determines if the enchantment is able
+            // to disable the permanent or it's still functional and a duplicate is unneeded.
+            boolean disabledByEnemy = false;
+            for (Card card2 : card.getEnchantedBy()) {
+                if (card2.getOwner() != ai) {
+                    disabledByEnemy = true;
+                }
+            }
+            if (!disabledByEnemy) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // Determine if the AI has an AI:RemoveDeck:All or an AI:RemoveDeck:Random hint specified.

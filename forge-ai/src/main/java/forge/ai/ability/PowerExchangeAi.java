@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import java.util.Collections;
 import java.util.List;
 
 import com.google.common.base.Predicate;
@@ -44,8 +43,7 @@ public class PowerExchangeAi extends SpellAbilityAi {
         }
         else if (tgt.getMinTargets(sa.getHostCard(), sa) > 1) {
             CardCollection list2 = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getHostCard(), sa);
-            CardLists.sortByPowerAsc(list2);
-            Collections.reverse(list2);
+            CardLists.sortByPowerDesc(list2);
             c2 = list2.isEmpty() ? null : list2.get(0);
             sa.getTargets().add(c2);
         }

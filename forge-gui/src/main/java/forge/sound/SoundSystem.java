@@ -245,6 +245,12 @@ public class SoundSystem {
         }
     }
 
+    public void fadeModifier(float value) {
+        if (currentTrack != null) {
+            currentTrack.setVolume((FModel.getPreferences().getPrefInt(FPref.UI_VOL_MUSIC)*value)/100f);
+        }
+    }
+
     public String[] getAvailableSoundSets()
     {
         final List<String> availableSets = new ArrayList<>();

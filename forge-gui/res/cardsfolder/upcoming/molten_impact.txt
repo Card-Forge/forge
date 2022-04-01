@@ -1,0 +1,8 @@
+Name:Molten Impact
+ManaCost:1 R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 4 | ExcessSVar$ Excess | SubAbility$ DBDelayedTrigger | SpellDescription$ CARDNAME deals 4 damage to target creature or planeswalker.
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | ConditionCheckSVar$ Excess | ConditionSVarCompare$ GE1 | RememberSVarAmount$ Excess | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ TrigDamage | TriggerDescription$ If excess damage was dealt this way, when you cast your next instant or sorcery spell, CARDNAME deals damage equal to the excess to target creature or planeswalker.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X
+SVar:X:Count$TriggerRememberAmount
+Oracle:Molten Impact deals 4 damage to target creature or planeswalker. If excess damage was dealt this way, when you cast your next instant or sorcery spell, Molten Impact deals damage equal to the excess to target creature or planeswalker.

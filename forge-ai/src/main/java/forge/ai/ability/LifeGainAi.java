@@ -99,7 +99,7 @@ public class LifeGainAi extends SpellAbilityAi {
                     return ComputerUtil.predictDamageFromSpell(saTop, ai) > 0;
                 }
             }
-            if (game.getCombat() == null) { return false; }
+            if (!ph.inCombat()) { return false; }
             if (!ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) { return false; }
         }
 

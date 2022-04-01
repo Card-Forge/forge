@@ -108,7 +108,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 if (sa.hasParam("CanTargetPlayer")) {
                     // Radiate
                     // Remove targeted players because getAllCandidates include all the valid players
-                    for(Player p : targetedSA.getTargets().getTargetPlayers())
+                    for (Player p : targetedSA.getTargets().getTargetPlayers())
                         candidates.remove(p);
 
                     for (GameEntity o : candidates) {
@@ -158,6 +158,9 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             } else {
                 for (int i = 0; i < amount; i++) {
                     SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
+                    if (sa.hasParam("IgnoreFreeze")) {
+                        copy.putParam("IgnoreFreeze", "True");
+                    }
                     if (sa.hasParam("MayChooseTarget")) {
                         copy.setMayChooseNewTargets(true);
                     }

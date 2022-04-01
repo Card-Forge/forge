@@ -27,11 +27,13 @@ public class AttackRequirement {
     private final MapToAmount<GameEntity> defenderOrPWSpecific;
     private final Map<GameEntity, List<GameEntity>> defenderSpecificAlternatives;
     private final MapToAmount<Card> causesToAttack;
+    private final Card attacker;
 
     public AttackRequirement(final Card attacker, final MapToAmount<Card> causesToAttack, final FCollectionView<GameEntity> possibleDefenders) {
         this.defenderSpecific = new LinkedHashMapToAmount<>();
         this.defenderOrPWSpecific = new LinkedHashMapToAmount<>();
         this.defenderSpecificAlternatives = new HashMap<>();
+        this.attacker = attacker;
 
         this.causesToAttack = causesToAttack;
 
@@ -92,15 +94,10 @@ public class AttackRequirement {
         }
 
         for (final GameEntity defender : possibleDefenders) {
-            if (CombatUtil.getAttackCost(game, attacker, defender) == null) {
-                // use put here because we want to always put it, even if the value is 0
-                defenderSpecific.put(defender, Integer.valueOf(defenderSpecific.count(defender) + nAttackAnything));
-                if (defenderOrPWSpecific.containsKey(defender)) {
-                    defenderOrPWSpecific.put(defender, Integer.valueOf(defenderOrPWSpecific.count(defender) + nAttackAnything));
-                }
-            } else {
-                defenderSpecific.remove(defender);
-                defenderOrPWSpecific.remove(defender);
+            // use put here because we want to always put it, even if the value is 0
+            defenderSpecific.put(defender, Integer.valueOf(defenderSpecific.count(defender) + nAttackAnything));
+            if (defenderOrPWSpecific.containsKey(defender)) {
+                defenderOrPWSpecific.put(defender, Integer.valueOf(defenderOrPWSpecific.count(defender) + nAttackAnything));
             }
         }
 
@@ -168,7 +165,7 @@ public class AttackRequirement {
                             }
                         }
                     }
-                    if (!isAttackingDefender) {
+                    if (!isAttackingDefender && CombatUtil.getAttackCost(attacker.getGame(), attacker, def) == null) {
                         violations++; // no one is attacking that defender or any of his PWs
                     }
                 }
