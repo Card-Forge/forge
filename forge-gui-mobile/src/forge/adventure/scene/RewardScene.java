@@ -216,7 +216,8 @@ public class RewardScene extends UIScene {
                 if (currentRow != ((i + 1) / numberOfColumns))
                     yOff += doneButton.getHeight();
 
-                TextButton buyCardButton = new BuyButton(shopActor.getObjectId(), i, shopActor.getMapStage().getChanges(), actor, doneButton);
+
+                TextButton buyCardButton = new BuyButton(shopActor.getObjectId(), i, shopActor.isUnlimited()?null:shopActor.getMapStage().getChanges(), actor, doneButton);
 
                 generated.add(buyCardButton);
                 if (!skipCard) {
@@ -276,6 +277,7 @@ public class RewardScene extends UIScene {
                         SoundSystem.instance.play(SoundEffectType.FlipCoin, false);
 
                         updateBuyButtons();
+                        goldLabel.setText("Gold: " + String.valueOf(AdventurePlayer.current().getGold()));
                         if(changes==null)
                             return;
                         setDisabled(true);
@@ -283,7 +285,6 @@ public class RewardScene extends UIScene {
                         getColor().a = 0.5f;
                         setText("SOLD");
                         removeListener(this);
-                        goldLabel.setText("Gold: " + String.valueOf(AdventurePlayer.current().getGold()));
                     }
                 }
             });
