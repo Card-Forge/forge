@@ -365,6 +365,9 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         }
 
         public boolean selectCard(boolean selectEntireStack) {
+            if (!getCard().getController().equals(MatchController.instance.getCurrentPlayer()) && !getCard().mayPlayerLook(MatchController.instance.getCurrentPlayer())) {
+                return false;
+            }
             if (MatchController.instance.getGameController().selectCard(getCard(), getOtherCardsToSelect(selectEntireStack), null)) {
                 Gdx.graphics.requestRendering();
                 return true;
