@@ -27,6 +27,7 @@ import forge.sound.SoundSystem;
  */
 public class RewardScene extends UIScene {
     private TextButton doneButton;
+    private Label goldLabel;
     boolean init;
     public enum Type {
         Shop,
@@ -45,7 +46,7 @@ public class RewardScene extends UIScene {
 
     boolean doneClicked = false;
     float flipCountDown = 1.0f;
-    Label goldLabel;
+
     public boolean done() {
         GameHUD.getInstance().getTouchpad().setVisible(false);
         if (doneClicked)
@@ -133,7 +134,7 @@ public class RewardScene extends UIScene {
         Actor card = ui.findActor("cards");
         if(type==Type.Shop)
         {
-            goldLabel.setText("Money:"+Current.player().getGold()+" $");
+            goldLabel.setText("Gold:"+Current.player().getGold());
         }
         else
         {
@@ -158,8 +159,10 @@ public class RewardScene extends UIScene {
         switch (type) {
             case Shop:
                 doneButton.setText(Forge.getLocalizer().getMessage("lblLeave"));
+                goldLabel.setText("Gold:"+Current.player().getGold());
                 break;
             case Loot:
+                goldLabel.setText("");
                 doneButton.setText(Forge.getLocalizer().getMessage("lblDone"));
                 break;
         }
@@ -213,7 +216,7 @@ public class RewardScene extends UIScene {
                 if (currentRow != ((i + 1) / numberOfColumns))
                     yOff += doneButton.getHeight();
 
-                TextButton buyCardButton = new BuyButton(shopActor.getObjectId(), i, shopActor.isUnlimited()?null: shopActor.getMapStage().getChanges(), actor, doneButton);
+                TextButton buyCardButton = new BuyButton(shopActor.getObjectId(), i, shopActor.getMapStage().getChanges(), actor, doneButton);
 
                 generated.add(buyCardButton);
                 if (!skipCard) {
@@ -230,14 +233,6 @@ public class RewardScene extends UIScene {
     }
 
     private void updateBuyButtons() {
-        if(type==Type.Shop)
-        {
-            goldLabel.setText("Money:"+Current.player().getGold()+" $");
-        }
-        else
-        {
-            goldLabel.setText("");
-        }
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
             if (actor instanceof BuyButton) {
                 ((BuyButton) actor).update();
@@ -284,8 +279,11 @@ public class RewardScene extends UIScene {
                         if(changes==null)
                             return;
                         setDisabled(true);
-                        reward.flip();
-                        remove();
+                        reward.sold();
+                        getColor().a = 0.5f;
+                        setText("SOLD");
+                        removeListener(this);
+                        goldLabel.setText("Gold: " + String.valueOf(AdventurePlayer.current().getGold()));
                     }
                 }
             });
