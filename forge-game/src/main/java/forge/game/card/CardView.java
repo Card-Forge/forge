@@ -477,7 +477,6 @@ public class CardView extends GameEntityView {
     void updateNamedCard2(Card c) {
         set(TrackableProperty.NamedCard2, c.getNamedCard2());
     }
-
     public boolean mayPlayerLook(PlayerView pv) {
         TrackableCollection<PlayerView> col = get(TrackableProperty.PlayerMayLook);
         // TODO don't use contains as it only queries the backing HashSet which is problematic for netplay because of unsynchronized player ids

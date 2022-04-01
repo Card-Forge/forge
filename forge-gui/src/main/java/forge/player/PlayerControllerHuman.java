@@ -286,6 +286,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 return null;
             }
         }
+        //FIXME - on mobile gui it allows the card to cast from opponent hands issue #2127, investigate where the bug occurs before this method is called
         spellViewCache = SpellAbilityView.getMap(abilities);
         final SpellAbilityView resultView = getGui().getAbilityToPlay(CardView.get(hostCard),
                 Lists.newArrayList(spellViewCache.keySet()), triggerEvent);

@@ -76,7 +76,7 @@ public enum ProtocolMethod {
     refreshField        (Mode.SERVER, Void.TYPE),
     // TODO case "setPlayerAvatar":
     openZones           (Mode.SERVER, PlayerZoneUpdates.class, PlayerView.class, Collection/*ZoneType*/.class, Map/*PlayerView,Object*/.class),
-    restoreOldZones     (Mode.SERVER, Void.TYPE, PlayerView.class, Iterable/*PlayerZoneUpdates*/.class),
+    restoreOldZones     (Mode.SERVER, Void.TYPE, PlayerView.class, PlayerZoneUpdates.class),
     isUiSetToSkipPhase  (Mode.SERVER, Boolean.TYPE, PlayerView.class, PhaseType.class),
     setRememberedActions(Mode.SERVER, Void.TYPE),
     nextRememberedAction(Mode.SERVER, Void.TYPE),

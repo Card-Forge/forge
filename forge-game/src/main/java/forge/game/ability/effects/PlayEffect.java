@@ -254,7 +254,8 @@ public class PlayEffect extends SpellAbilityEffect {
             if (sa.hasParam("ShowCardToActivator")) {
                 game.getAction().revealTo(tgtCard, activator);
             }
-
+            if (singleOption && sa.getTargetCard() == null)
+                sa.setPlayEffectCard(tgtCard);// show card to play rather than showing the source card
             if (singleOption && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())))) {
                 if (wasFaceDown) {
                     tgtCard.turnFaceDownNoUpdate();

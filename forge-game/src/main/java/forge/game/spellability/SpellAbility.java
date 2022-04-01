@@ -113,6 +113,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private ManaCost multiKickerManaCost;
     private Player activatingPlayer;
     private Player targetingPlayer;
+    private Card playEffectCard;
     private Pair<Long, Player> controlledByPlayer;
     private ManaCostBeingPaid manaCostBeingPaid;
     private boolean spentPhyrexian = false;
@@ -1787,6 +1788,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         resetTargets();
         targetChosen.add(card);
         setStackDescription(getHostCard().getName() + " - targeting " + card);
+    }
+    public void setPlayEffectCard(final Card card) {
+        playEffectCard = card;
+    }
+    public Card getPlayEffectCard() {
+        return playEffectCard;
     }
 
     /**
