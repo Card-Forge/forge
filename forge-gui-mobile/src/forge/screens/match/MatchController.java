@@ -12,7 +12,6 @@ import forge.deck.Deck;
 import forge.game.player.Player;
 import forge.item.IPaperCard;
 import forge.screens.TransitionScreen;
-import forge.screens.match.views.VCardDisplayArea;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
