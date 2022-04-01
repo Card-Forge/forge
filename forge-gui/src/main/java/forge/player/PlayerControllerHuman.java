@@ -285,11 +285,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (noPermission) {
                 return null;
             }
-        } else if (!hostCard.isInPlay() && !hostCard.getController().equals(player)) {
-            if (!hostCard.getMayPlayPlayers().contains(player)) {
-                getGui().showZoom(hostCard.getView());
-                return null;
-            }
         }
         spellViewCache = SpellAbilityView.getMap(abilities);
         final SpellAbilityView resultView = getGui().getAbilityToPlay(CardView.get(hostCard),
