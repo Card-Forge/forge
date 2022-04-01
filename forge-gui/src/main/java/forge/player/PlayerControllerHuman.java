@@ -286,6 +286,21 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 return null;
             }
         }
+        if (GuiBase.getInterface().isLibgdxPort()) { //todo add better check
+            if (hostCard.isInZone(ZoneType.Hand) && !hostCard.getController().equals(player)) {
+                boolean noPermission = true;
+                for (CardPlayOption o : hostCard.mayPlay(player)) {
+                    if (o.grantsZonePermissions()) {
+                        noPermission = false;
+                        break;
+                    }
+                }
+                if (noPermission) {
+                    getGui().showZoom(hostCard.getView());
+                    return null;
+                }
+            }
+        }
         spellViewCache = SpellAbilityView.getMap(abilities);
         final SpellAbilityView resultView = getGui().getAbilityToPlay(CardView.get(hostCard),
                 Lists.newArrayList(spellViewCache.keySet()), triggerEvent);
