@@ -46,7 +46,7 @@ public class EnemySprite extends CharacterSprite {
             return ret;
         for(RewardData rdata:data.rewards)
         {
-            ret.addAll(rdata.generate(false,Current.latestDeck()!=null? Current.latestDeck().getMain().toFlatList():null));
+            ret.addAll(rdata.generate(false,Current.latestDeck()!=null? Current.latestDeck().getMain().toFlatList():null,data.equipment));
         }
         return ret;
     }

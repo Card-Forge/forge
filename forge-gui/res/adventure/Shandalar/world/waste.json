@@ -24,5 +24,5 @@
 		"color": "aeaeae",
     "spriteNames":[ "WasteTree","Stone","WasteRock"]  ,
     "enemies":[ "Bandit","ClayGolem","Construct","Eldrazi","Gargoyle","Gargoyle 2","Golem","Sliver","Black Wiz1","Black Wiz2","Black Wiz3","Blue Wiz1","Blue Wiz2","Blue Wiz3","Green Wiz1","Green Wiz2","Green Wiz3","Red Wiz1","Red Wiz2","Red Wiz3","White Wiz1","White Wiz2","White Wiz3" ]  ,
-    "pointsOfInterest":[ "Waste Town","Waste Town2","Waste Town3","Portal","Fort","Factory","MageTowerC","CaveC" ]
+    "pointsOfInterest":[ "Colorless Castle","Final Castle","Waste Town","Waste Town2","Waste Town3","Portal","Fort","Factory","MageTowerC","CaveC" ]
 }

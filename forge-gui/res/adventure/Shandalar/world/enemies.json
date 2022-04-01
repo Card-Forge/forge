@@ -1357,6 +1357,11 @@
 	"life": 8,
 	"rewards": [
 		{
+			"type": "enemyItems",
+			"probability": 0.2,
+			"count": 1
+		},
+		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -1379,6 +1384,9 @@
 				"Rare"
 			]
 		}
+	],
+	"equipment": [
+		"Battle Standard"
 	]
 },
 {
@@ -1472,7 +1480,7 @@
 			"rarity": [
 				"rare"
 			]
-		},		
+		},
 		{
 			"type": "deckCard",
 			"probability": 1,
@@ -3107,6 +3115,201 @@
 			"rarity": [
 				"Rare"
 			]
+		}
+	]
+},
+{
+	"name": "Sliver Queen",
+	"sprite": "sprites/boss/sliver_queen.atlas",
+	"deck": "decks/boss/sliver_queen.dck",
+	"speed": 1,
+	"life": 50,
+	"rewards": [
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Black Lotus"
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Strange Key"
+		}
+	],
+	"equipment": [
+		"Black Lotus"
+	]
+},
+{
+	"name": "Griselbrand",
+	"sprite": "sprites/boss/griselbrand.atlas",
+	"deck": "decks/boss/griselbrand.dck",
+	"speed": 1,
+	"life": 40,
+	"rewards": [
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Mox Jet"
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Black Key"
+		}
+	],
+	"equipment": [
+		"Mox Jet"
+	]
+},
+{
+	"name": "Akroma",
+	"sprite": "sprites/boss/akroma.atlas",
+	"deck": "decks/boss/akroma.dck",
+	"speed": 1,
+	"life": 80,
+	"rewards": [
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Mox Pearl"
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "White Key"
+		}
+	],
+	"equipment": [
+		"Mox Pearl"
+	]
+},
+{
+	"name": "Emrakul",
+	"sprite": "sprites/boss/emrakul.atlas",
+	"deck": "decks/boss/emrakul.dck",
+	"speed": 1,
+	"life": 40,
+	"rewards": [
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Sol Ring"
+		}
+	],
+	"equipment": [
+		"Sol Ring"
+	]
+},
+{
+	"name": "Ghalta",
+	"sprite": "sprites/boss/ghalta.atlas",
+	"deck": "decks/boss/ghalta.dck",
+	"speed": 1,
+	"life": 80,
+	"rewards": [
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Mox Emerald"
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Green Key"
+		}
+	],
+	"equipment": [
+		"Mox Emerald"
+	]
+},
+{
+	"name": "Lorthos",
+	"sprite": "sprites/boss/lorthos.atlas",
+	"deck": "decks/boss/lorthos.dck",
+	"speed": 1,
+	"life": 80,
+	"rewards": [
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Mox Sapphire"
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Blue Key"
+		}
+	],
+	"equipment": [
+		"Mox Sapphire"
+	]
+},
+{
+	"name": "Lathliss",
+	"sprite": "sprites/boss/lathiss.atlas",
+	"deck": "decks/boss/lathliss.dck",
+	"speed": 1,
+	"life": 80,
+	"rewards": [
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Mox Ruby"
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Red Key"
+		}
+	],
+	"equipment": [
+		"Mox Ruby"
+	]
+},
+{
+	"name": "1Life",
+	"sprite": "sprites/1life.atlas",
+	"deck": "",
+	"rewards": [
+		{
+			"type": "life",
+			"count": 3
+		}
+	]
+},
+{
+	"name": "2Life",
+	"sprite": "sprites/2life.atlas",
+	"deck": "",
+	"rewards": [
+		{
+			"type": "life",
+			"count": 2
+		}
+	]
+},
+{
+	"name": "3Life",
+	"sprite": "sprites/3life.atlas",
+	"deck": "",
+	"rewards": [
+		{
+			"type": "life",
+			"count": 3
 		}
 	]
 }

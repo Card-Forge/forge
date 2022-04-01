@@ -26,7 +26,7 @@ public class SwingAtlas {
     }
     public  SwingAtlas(FileHandle path)
     {
-        if(!path.exists())
+        if(!path.exists()||!path.toString().endsWith(".atlas"))
             return;
         TextureAtlas.TextureAtlasData data=new TextureAtlas.TextureAtlasData(path,path.parent(),false);
         for(TextureAtlas.TextureAtlasData.Region region: new Array.ArrayIterator<>(data.getRegions()))

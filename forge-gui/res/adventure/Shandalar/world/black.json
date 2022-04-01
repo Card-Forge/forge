@@ -24,5 +24,5 @@
 	"color": "110903",
 	"spriteNames":[ "SwampTree","SwampTree2","DarkGras","Skull","SwampRock","DarkWood","Reed","Waterlily","Shroom","Shroom2"]   ,
 	"enemies":[ "Beholder","Big Zombie","Black Wiz1","Black Wiz2","Black Wiz3","Dark Knight","Death Knight","Demon","Ghoul","Ghost","Harpy","Harpy 2","High Vampire","Lich","Rakdos Devil","Skeleton","Skeleton Soldier","Vampire","Zombie","Zombie Lord" ]   ,
-	"pointsOfInterest":[ "Swamp Town","Swamp Town2","Zombie Town","Graveyard","VampireCastle","EvilGrove","SkullCaveB","CaveB" ]
+	"pointsOfInterest":[ "Black Castle","Swamp Town","Swamp Town2","Zombie Town","Graveyard","VampireCastle","EvilGrove","SkullCaveB","CaveB" ]
 }

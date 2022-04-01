@@ -24,5 +24,5 @@
 		"color": "59a650"  ,
     "spriteNames":[ "WoodTree","WoodTree2","Bush","Stump","Moss","Stone","Flower","Wood"]      ,
     "enemies":[ "Ape","Bear","Centaur","Centaur Warrior","Dino","Eldraine Faerie","Elf","Elf warrior","Elk","Faerie","Giant Spider","Gorgon","Gorgon 2","Green Beast","Green Wiz1","Green Wiz2","Green Wiz3","High Elf","Hydra","Satyr","Snake","Spider","Treefolk","Treefolk Guardian","Viper","Werewolf","Wurm" ]  ,
-    "pointsOfInterest":[ "Forest Town","ElfTown","WurmPond","Grove","CatLairG","CaveG" ]
+    "pointsOfInterest":[ "Green Castle","Forest Town","ElfTown","WurmPond","Grove","CatLairG","CaveG" ]
 }

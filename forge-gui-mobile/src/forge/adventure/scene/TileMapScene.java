@@ -47,6 +47,7 @@ public class TileMapScene extends HudScene {
             nextMap = null;
         }
         stage.act(Gdx.graphics.getDeltaTime());
+        hud.act(Gdx.graphics.getDeltaTime());
     }
 
     @Override
@@ -68,11 +69,13 @@ public class TileMapScene extends HudScene {
     @Override
     public void resLoaded() {
         if (!this.init) {
+            MapStage.getInstance().resLoaded();
             //set initial camera width and height
             if (cameraWidth == 0f)
                 cameraWidth = stage.getCamera().viewportWidth;
             if (cameraHeight == 0f)
                 cameraHeight = stage.getCamera().viewportHeight;
+            MapStage.getInstance().setDialogStage(hud);
             this.init = true;
         }
         super.resLoaded();
@@ -109,6 +112,12 @@ public class TileMapScene extends HudScene {
         WorldSave.getCurrentSave().getWorld().setSeed(rootPoint.getSeedOffset());
         tiledMapRenderer.loadMap(map, oldMap);
         oldMap = targetMap;
+    }
+
+
+    @Override
+    public boolean isInHudOnlyMode() {
+        return MapStage.getInstance().getDialogOnlyInput();
     }
 
     public void loadNext(String targetMap) {

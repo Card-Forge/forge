@@ -120,10 +120,7 @@ public class TemplateTmxMapLoader extends TmxMapLoader {
             String source = element.getAttribute("source", null);
             if (source != null) {
                 FileHandle tsx = getRelativeFileHandle(tmxFile, source);
-                if (source.contains("..")) {
-                    File f = new File(tmxFile.parent().parent().path()+source.replace("..", ""));
-                    tsx = new FileHandle(f);
-                }
+
                 try {
                     element = xml.parse(tsx);
                     XmlReader.Element imageElement = element.getChildByName("image");
@@ -210,10 +207,7 @@ public class TemplateTmxMapLoader extends TmxMapLoader {
             }
             String source = element.getAttribute("template");
             FileHandle template = getRelativeFileHandle(tmxFile, source);
-            if (source.contains("..")) {
-                File f = new File(tmxFile.parent().parent().path()+source.replace("..", ""));
-                template = new FileHandle(f);
-            }
+
             XmlReader.Element el = xml.parse(template);
             for (XmlReader.Element obj : new Array.ArrayIterator<>(el.getChildrenByName("object"))) {
                 for(ObjectMap.Entry<String, String> attr: new ObjectMap.Entries<>(element.getAttributes()))

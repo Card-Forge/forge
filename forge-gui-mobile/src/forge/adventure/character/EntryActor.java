@@ -10,13 +10,12 @@ import forge.adventure.stage.MapStage;
  */
 public class EntryActor extends MapActor{
     private final MapStage stage;
-    private final int id;
     String targetMap;
 
     public EntryActor(MapStage stage,String sourceMap, int id,String targetMap,float x,float y,float w,float h,String direction)
     {
+        super(id);
         this.stage = stage;
-        this.id = id;
         this.targetMap = targetMap;
 
 
@@ -61,8 +60,5 @@ public class EntryActor extends MapActor{
         }
     }
 
-    public int getObjectID() {
-        return id;
-    }
 }
 

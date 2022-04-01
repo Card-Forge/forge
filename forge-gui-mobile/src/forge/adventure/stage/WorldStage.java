@@ -232,9 +232,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
 
     @Override
     public void draw() {
-        getBatch().begin();
         background.setPlayerPos(player.getX(), player.getY());
-        getBatch().end();
         //spriteGroup.setCullingArea(new Rectangle(player.getX()-getViewport().getWorldHeight()/2,player.getY()-getViewport().getWorldHeight()/2,getViewport().getWorldHeight(),getViewport().getWorldHeight()));
         super.draw();
     }

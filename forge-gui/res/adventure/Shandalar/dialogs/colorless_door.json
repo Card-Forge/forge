@@ -1,0 +1,19 @@
+[{
+    "effect":[],    
+    "name":"",
+    "text":"A big gate is blocking the path",
+    "condition":[],     
+    "options":[
+    {      
+        "name":"go away" 
+    },
+    {      
+        "name":"unlock with strange key",     
+        "condition":[{"item":"Strange Key"}],    
+        "text":"The gate is unlocked",
+        "options":[{"name":"continue","effect":[{"removeItem":"Strange Key","deleteMapObject":-1}]}]
+    }
+    ]
+    
+}
+]

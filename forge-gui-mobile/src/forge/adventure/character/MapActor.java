@@ -15,6 +15,15 @@ public class MapActor extends Actor {
 
     Texture debugTexture;
     float collisionHeight=1.0f;
+    final int objectId;
+    public MapActor(int objectId)
+    {
+        this.objectId=objectId;
+    }
+    public int getObjectId()
+    {
+        return objectId;
+    }
     private Texture getDebugTexture() {
         if (debugTexture == null) {
             Pixmap pixmap = new Pixmap((int) getWidth(), (int) getHeight(), Pixmap.Format.RGBA8888);

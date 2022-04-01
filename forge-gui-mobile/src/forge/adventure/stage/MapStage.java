@@ -2,25 +2,23 @@ package forge.adventure.stage;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import forge.Forge;
-import forge.adventure.character.CharacterSprite;
-import forge.adventure.character.EnemySprite;
-import forge.adventure.character.EntryActor;
-import forge.adventure.character.MapActor;
-import forge.adventure.character.OnCollide;
-import forge.adventure.character.ShopActor;
-import forge.adventure.character.TextureSprite;
+import forge.adventure.character.*;
 import forge.adventure.data.RewardData;
 import forge.adventure.data.ShopData;
 import forge.adventure.data.WorldData;
@@ -29,6 +27,7 @@ import forge.adventure.scene.DuelScene;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.util.Config;
+import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 import forge.adventure.util.Reward;
 import forge.adventure.world.WorldSave;
@@ -64,11 +63,30 @@ public class MapStage extends GameStage {
     private final Vector2 oldPosition4 = new Vector2();
     private boolean isLoadingMatch = false;
 
+    private Dialog dialog;
+    private Stage dialogStage;
+    private boolean dialogOnlyInput;
+
+    public boolean getDialogOnlyInput() {
+        return dialogOnlyInput;
+    }
+    public Dialog getDialog() {
+        return dialog;
+    }
     public void clearIsInMap() {
         isInMap = false;
         GameHUD.getInstance().showHideMap(true);
     }
+    public void draw (Batch batch) {
+        //Camera camera = getCamera() ;
+        //camera.update();
+        //update camera after all layers got drawn
 
+        if (!getRoot().isVisible()) return;
+
+        getRoot().draw(batch, 1);
+
+    }
 
     public MapLayer getSpriteLayer() {
         return spriteLayer;
@@ -80,6 +98,10 @@ public class MapStage extends GameStage {
 
     public static MapStage getInstance() {
         return instance == null ? instance = new MapStage() : instance;
+    }
+    public void resLoaded()
+    {
+        dialog = Controls.newDialog("");
     }
 
     public void addMapActor(MapObject obj, MapActor newActor) {
@@ -139,7 +161,7 @@ public class MapStage extends GameStage {
             for (int x = 0; x < collision.length; x++) {
                 for (int y = 0; y < collision[x].length; y++) {
                     for (Rectangle rectangle : collision[x][y]) {
-                        MapActor collisionActor = new MapActor();
+                        MapActor collisionActor = new MapActor(0);
                         collisionActor.setBoundDebug(true);
                         collisionActor.setWidth(rectangle.width);
                         collisionActor.setHeight(rectangle.height);
@@ -251,6 +273,15 @@ public class MapStage extends GameStage {
                             }
                         }));
                         break;
+                    case "dialog":
+                        if(obj instanceof TiledMapTileMapObject)
+                        {
+                            TiledMapTileMapObject tiledObj = (TiledMapTileMapObject) obj;
+                            DialogActor dialog = new DialogActor(this, id,  prop.get("dialog").toString(),tiledObj.getTextureRegion());
+                            addMapActor(obj, dialog);
+                        }
+
+                        break;
                     case "shop":
                         String shopList = prop.get("shopList").toString();
                         List possibleShops = Arrays.asList(shopList.split(","));
@@ -273,7 +304,7 @@ public class MapStage extends GameStage {
                         for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
                             ret.addAll(rdata.generate(false));
                         }
-                        ShopActor actor = new ShopActor(this, id, ret);
+                        ShopActor actor = new ShopActor(this, id, ret, data.unlimited);
                         addMapActor(obj, actor);
                         if (prop.containsKey("signYOffset") && prop.containsKey("signXOffset")) {
                             try {
@@ -329,6 +360,18 @@ public class MapStage extends GameStage {
 
     }
 
+    public boolean deleteObject(int id) {
+        changes.deleteObject(id);
+        for (int i=0;i< actors.size;i++) {
+            if (actors.get(i).getObjectId() == id && id > 0) {
+                actors.get(i).remove();
+                actors.removeIndex(i);
+                return true;
+            }
+        }
+        return false;
+
+    }
 
     protected void getReward() {
         isLoadingMatch = false;
@@ -400,4 +443,24 @@ public class MapStage extends GameStage {
         return isInMap;
     }
 
+
+
+    public void showDialog() {
+        dialog.show(dialogStage);
+        dialogOnlyInput=true;
+    }
+    public void hideDialog() {
+        dialog.hide();
+        dialogOnlyInput=false;
+    }
+
+    public void setDialogStage(Stage dialogStage) {
+        this.dialogStage=dialogStage;
+    }
+
+    public void resetPosition() {
+
+        player.setPosition(oldPosition4);
+        stop();
+    }
 }

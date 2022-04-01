@@ -12,5 +12,6 @@ public class DifficultyData {
     public float enemyLifeFactor=1;
     public boolean startingDifficulty;
     public float sellFactor=0.2f;
+    public String[] startItems=new String[0];
 
 }

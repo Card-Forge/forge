@@ -17,6 +17,7 @@ public class EnemyData {
     public float speed;
     public int life;
     public RewardData[] rewards;
+    public String[] equipment;
 
     public EnemyData()
     {
@@ -30,6 +31,7 @@ public class EnemyData {
         difficulty  =enemyData.difficulty ;
         speed       =enemyData.speed;
         life        =enemyData.life;
+        equipment   =enemyData.equipment;
         if(enemyData.rewards==null)
         {
             rewards=null;

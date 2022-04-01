@@ -31,7 +31,10 @@ public abstract class DrawOnPixmap {
         BitmapFont.BitmapFontData data = font.getData();
         Pixmap source = new Pixmap(Gdx.files.absolute(data.getImagePath(0)));
 
-        float totalLength = data.getGlyph('0').width * text.length();
+        float totalLength =0;
+        for (char c : text.toCharArray()) {
+              totalLength += data.getGlyph(c).width;
+        }
         float xOffset = (width - totalLength) / 2;
         xOffset += x;
         for (char c : text.toCharArray()) {

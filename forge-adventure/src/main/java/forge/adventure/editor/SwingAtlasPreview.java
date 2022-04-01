@@ -32,11 +32,11 @@ public class SwingAtlasPreview extends Box {
     List<Pair<JLabel,ArrayList<ImageIcon>>> labels=new ArrayList<>();
     public void setSpritePath(String sprite) {
 
+        if(this.sprite==null||this.sprite.equals(sprite))
+            return;
         removeAll();
         counter=0;
         labels.clear();
-        if(this.sprite.equals(sprite))
-            return;
         this.sprite=sprite;
         SwingAtlas atlas=new SwingAtlas(Config.instance().getFile(sprite));
         for(Map.Entry<String, ArrayList<ImageIcon>> element:atlas.getImages().entrySet())

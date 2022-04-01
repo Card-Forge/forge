@@ -312,7 +312,7 @@ public class World implements  Disposable, SaveFileContent {
         mapPoiIds = new PointOfInterestMap(getChunkSize(), data.tileSize, data.width / getChunkSize(),data.height / getChunkSize());
         List<PointOfInterest> towns = new ArrayList<>();
         List<Rectangle> otherPoints = new ArrayList<>();
-        otherPoints.add(new Rectangle(((float)data.width*data.playerStartPosX*(float)data.tileSize)-data.tileSize*5,((float)data.height*data.playerStartPosY*data.tileSize)-data.tileSize*5,data.tileSize*10,data.tileSize*10));
+        otherPoints.add(new Rectangle(((float)data.width*data.playerStartPosX*(float)data.tileSize)-data.tileSize*3,((float)data.height*data.playerStartPosY*data.tileSize)-data.tileSize*3,data.tileSize*6,data.tileSize*6));
         int biomeIndex2=-1;
         for (BiomeData biome : data.GetBiomes()) {
             biomeIndex2++;
@@ -320,10 +320,6 @@ public class World implements  Disposable, SaveFileContent {
                 for (int i = 0; i < poi.count; i++) {
                     for (int counter = 0; counter < 500; counter++)//tries 100 times to find a free point
                     {
-                        if(counter==499)
-                        {
-                            //System.err.print("## Can not place POI "+poi.name+" ##");
-                        }
                         float radius = (float) Math.sqrt(((random.nextDouble())/2 * poi.radiusFactor));
                         float theta = (float) (random.nextDouble() * 2 * Math.PI);
                         float x = (float) (radius * Math.cos(theta));
@@ -349,8 +345,38 @@ public class World implements  Disposable, SaveFileContent {
                             }
                         }
                         if (breakNextLoop)
-                            continue;
-                        otherPoints.add(new Rectangle(x - data.tileSize * 10, y - data.tileSize * 10, data.tileSize * 20, data.tileSize * 20));
+                        {
+                            boolean foundSolution=false;
+                            boolean noSolution=false;
+                            breakNextLoop=false;
+                            for(int xi=-1;xi<2&&!foundSolution;xi++)
+                            {
+                                for(int yi=-1;yi<2&&!foundSolution;yi++)
+                                {
+                                    for (Rectangle rect : otherPoints) {
+                                        if (rect.contains(x+xi*data.tileSize, y+yi*data.tileSize)) {
+                                            noSolution = true;
+                                            break;
+                                        }
+                                    }
+                                    if(!noSolution)
+                                    {
+                                        foundSolution=true;
+                                        x=x+xi*data.tileSize;
+                                        y=y+yi*data.tileSize;
+                                    }
+                                }
+                            }
+                            if(!foundSolution)
+                            {
+                                if(counter==499)
+                                {
+                                    System.err.print("Can not place POI "+poi.name+"\n");
+                                }
+                                continue;
+                            }
+                        }
+                        otherPoints.add(new Rectangle(x - data.tileSize * 4, y - data.tileSize * 4, data.tileSize * 8, data.tileSize * 8));
                         PointOfInterest newPoint = new PointOfInterest(poi, new Vector2(x, y), random);
 
                         mapPoiIds.add(newPoint);
@@ -358,7 +384,7 @@ public class World implements  Disposable, SaveFileContent {
 
                         Color color = biome.GetColor();
                         pix.setColor(color.r, 0.1f, 0.1f, 1);
-                        pix.drawRectangle((int) x / data.tileSize - 5, height - (int) y / data.tileSize - 5, 10, 10);
+                        pix.drawRectangle((int) x / data.tileSize - 3, height - (int) y / data.tileSize - 3, 6, 6);
 
 
                         if (poi.type!=null&&poi.type.equals("town")) {

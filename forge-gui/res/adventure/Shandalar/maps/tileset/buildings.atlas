@@ -12,34 +12,16 @@ IslandTown
   size: 48, 48
 IslandTown 
   xy: 144, 0
-  size: 48, 48  
-IslandTown 
-  xy: 128, 528
-  size: 64, 64
-IslandTown 
-  xy: 128, 592
-  size: 64, 64  
+  size: 48, 48   
 MountainTown 
   xy: 48, 0
-  size: 48, 48
-MountainTown 
-  xy: 0, 658
-  size: 64, 64
-MountainTown 
-  xy: 128, 656
-  size: 64, 64
-MountainTown 
-  xy: 128, 720
-  size: 64, 64  
+  size: 48, 48  
 SwampTown 
   xy: 0, 0
   size: 48, 48
 SwampTown 
   xy: 97, 336
-  size: 32, 32
-SwampTown 
-  xy: 0, 527
-  size: 64, 64  
+  size: 32, 32 
 ForestTown 
   xy: 352, 496
   size: 32, 32        
@@ -48,22 +30,13 @@ ForestTown
   size: 32, 32         
 ForestTown 
   xy: 416, 496
-  size: 32, 32
-ForestTown 
-  xy: 64, 659
-  size: 64, 64
+  size: 32, 32 
 ForestTown 
   xy: 0, 48
   size: 32, 32  
 PlainsTown 
   xy: 96, 0
-  size: 48, 48
-PlainsTown 
-  xy: 0, 464
-  size: 64, 64
-PlainsTown 
-  xy: 64, 464
-  size: 64, 64
+  size: 48, 48 
 PlainsTown 
   xy: 160, 272
   size: 32, 32  
@@ -90,7 +63,7 @@ RedShop
   size: 16, 16    
 WhiteShop
   xy: 369, 704
-  size: 16, 16 
+  size: 16, 16  
 LandShop
   xy: 304, 720
   size: 16, 16       
@@ -151,6 +124,12 @@ ElfShop
 MerfolkShop
   xy: 369, 768
   size: 16, 16
+EquipmentShop
+  xy: 304, 786   
+  size: 16, 16   
+ArtefactShop
+  xy: 320, 786   
+  size: 16, 16  
 Test
   xy: 129, 48
   size: 32, 32 
@@ -201,19 +180,10 @@ Fort
   size: 32, 32
 Fort 
   xy: 320, 368
-  size: 32, 32  
-Monastery 
-  xy: 384, 592
-  size: 64, 64
+  size: 32, 32   
 Monastery 
   xy: 352, 367
-  size: 32, 32  
-Castle 
-  xy: 0, 464
-  size: 64, 64      
-Castle 
-  xy: 64, 464
-  size: 64, 64
+  size: 32, 32   
 Castle 
   xy: 160, 274
   size: 32, 32
@@ -253,12 +223,6 @@ MageTower
 Portal
   xy:  96, 48
   size: 32, 32
-DjinnPalace 
-  xy: 128, 528
-  size: 64, 64
-DjinnPalace 
-  xy: 128, 592
-  size: 64, 64
 DjinnPalace 
   xy: 128, 272
   size: 32, 32
@@ -312,13 +276,7 @@ SkullCave
   size: 32, 32
 SkullCave 
   xy: 352, 336
-  size: 32, 32  
-BarbarianCamp 
-  xy: 0, 401
-  size: 64, 64
-BarbarianCamp 
-  xy: 64, 400
-  size: 64, 64
+  size: 32, 32   
 BarbarianCamp 
   xy: 351, 209
   size: 32, 16
@@ -357,4 +315,25 @@ Grove
   size: 32, 16
 WurmPond 
   xy: 224, 400
-  size: 32, 32      
+  size: 32, 32  
+black_castle 
+  xy: 0, 800
+  size: 64, 64       
+green_castle 
+  xy: 64, 800
+  size: 64, 64        
+blue_castle 
+  xy: 128, 800
+  size: 64, 64          
+colorless_castle 
+  xy: 192, 800
+  size: 64, 64    
+white_castle 
+  xy: 0, 864
+  size: 64, 64       
+red_castle 
+  xy: 64, 864
+  size: 64, 64        
+final_castle 
+  xy: 128, 864
+  size: 64, 64       

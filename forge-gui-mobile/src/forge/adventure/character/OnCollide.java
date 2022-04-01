@@ -7,6 +7,7 @@ public class OnCollide extends MapActor {
 
     Runnable onCollide;
     public OnCollide(Runnable func) {
+        super(0);
         onCollide = func;
     }
 

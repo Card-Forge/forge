@@ -23,13 +23,11 @@ public class PointOfInterestMapRenderer extends OrthogonalTiledMapRenderer {
             renderMapLayer(layer);
             if(layer==stage.getSpriteLayer())
             {
-                //end render to draw character sprites
-                batch.end();
-                stage.draw();
-                batch.begin();
+                stage.draw(batch);
             }
         }
         endRender();
+        stage.getCamera().update();
     }
 
     public void loadMap(TiledMap map,String sourceMap)

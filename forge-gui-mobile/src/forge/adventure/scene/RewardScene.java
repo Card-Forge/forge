@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
@@ -18,6 +19,8 @@ import forge.adventure.util.Reward;
 import forge.adventure.util.RewardActor;
 import forge.adventure.world.WorldSave;
 import forge.assets.ImageCache;
+import forge.sound.SoundEffectType;
+import forge.sound.SoundSystem;
 
 /**
  * Displays the rewards of a fight or a treasure
@@ -42,7 +45,7 @@ public class RewardScene extends UIScene {
 
     boolean doneClicked = false;
     float flipCountDown = 1.0f;
-
+    Label goldLabel;
     public boolean done() {
         GameHUD.getInstance().getTouchpad().setVisible(false);
         if (doneClicked)
@@ -92,6 +95,7 @@ public class RewardScene extends UIScene {
     public void resLoaded() {
         super.resLoaded();
         if(!this.init) {
+            goldLabel=ui.findActor("gold");
             ui.onButtonPress("done", new Runnable() {
                 @Override
                 public void run() {
@@ -127,7 +131,14 @@ public class RewardScene extends UIScene {
 
 
         Actor card = ui.findActor("cards");
-
+        if(type==Type.Shop)
+        {
+            goldLabel.setText("Money:"+Current.player().getGold()+" $");
+        }
+        else
+        {
+            goldLabel.setText("");
+        }
         // card.setDrawable(new TextureRegionDrawable(new Texture(Res.CurrentRes.GetFile("ui/transition.png"))));
 
         float targetWidth = card.getWidth();
@@ -182,7 +193,7 @@ public class RewardScene extends UIScene {
         for (Reward reward : new Array.ArrayIterator<>(newRewards)) {
             boolean skipCard = false;
             if (type == Type.Shop) {
-                if (shopActor.getMapStage().getChanges().wasCardBought(shopActor.getObjectID(), i)) {
+                if (shopActor.getMapStage().getChanges().wasCardBought(shopActor.getObjectId(), i)) {
                     skipCard = true;
                 }
             }
@@ -202,7 +213,7 @@ public class RewardScene extends UIScene {
                 if (currentRow != ((i + 1) / numberOfColumns))
                     yOff += doneButton.getHeight();
 
-                TextButton buyCardButton = new BuyButton(shopActor.getObjectID(), i, shopActor.getMapStage().getChanges(), actor, doneButton);
+                TextButton buyCardButton = new BuyButton(shopActor.getObjectId(), i, shopActor.isUnlimited()?null: shopActor.getMapStage().getChanges(), actor, doneButton);
 
                 generated.add(buyCardButton);
                 if (!skipCard) {
@@ -219,6 +230,14 @@ public class RewardScene extends UIScene {
     }
 
     private void updateBuyButtons() {
+        if(type==Type.Shop)
+        {
+            goldLabel.setText("Money:"+Current.player().getGold()+" $");
+        }
+        else
+        {
+            goldLabel.setText("");
+        }
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
             if (actor instanceof BuyButton) {
                 ((BuyButton) actor).update();
@@ -247,19 +266,26 @@ public class RewardScene extends UIScene {
             setWidth(actor.getWidth());
             setX(actor.getX());
             setY(actor.getY() - getHeight());
-            price = CardUtil.getCardPrice(actor.getReward().getCard());
+            price = CardUtil.getRewardPrice(actor.getReward());
             setText("$ " + price);
             addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     if (Current.player().getGold() >= price) {
-                        changes.buyCard(objectID, index);
+                        if(changes!=null)
+                            changes.buyCard(objectID, index);
                         Current.player().takeGold(price);
                         Current.player().addReward(reward.getReward());
+
+                        Gdx.input.vibrate(5);
+                        SoundSystem.instance.play(SoundEffectType.FlipCoin, false);
+
+                        updateBuyButtons();
+                        if(changes==null)
+                            return;
                         setDisabled(true);
                         reward.flip();
                         remove();
-                        updateBuyButtons();
                     }
                 }
             });

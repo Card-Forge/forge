@@ -1,0 +1,44 @@
+lorthos.png
+size: 128,112
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 0, 0
+  size: 16, 16      
+Idle 
+  xy: 0, 16
+  size: 32, 32      
+Idle 
+  xy: 32, 16
+  size: 32, 32 
+Idle 
+  xy: 64, 16
+  size: 32, 32 
+Idle 
+  xy: 96, 16
+  size: 32, 32      
+Attack 
+  xy: 0, 48
+  size: 32, 32      
+Attack 
+  xy: 32, 48
+  size: 32, 32 
+Attack 
+  xy: 64, 48
+  size: 32, 32 
+Attack 
+  xy: 96, 48
+  size: 32, 32
+Death 
+  xy: 0, 80
+  size: 32, 32      
+Death 
+  xy: 32, 80
+  size: 32, 32 
+Death 
+  xy: 64, 80
+  size: 32, 32 
+Death 
+  xy: 96, 80
+  size: 32, 32 
