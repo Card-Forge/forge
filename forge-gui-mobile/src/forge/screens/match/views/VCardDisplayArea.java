@@ -393,7 +393,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             return false;
         }
 
-        public void showZoom() {
+        private void showZoom() {
             if (displayArea == null) { return; }
 
             final List<CardView> cards = displayArea.orderedCards;

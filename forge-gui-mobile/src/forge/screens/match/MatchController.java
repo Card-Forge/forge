@@ -356,20 +356,6 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public void showZoom(CardView card) {
-        FThreads.invokeInEdtLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    VCardDisplayArea.CardAreaPanel.get(card).showZoom();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    @Override
     public void showManaPool(final PlayerView player) {
         final VPlayerPanel playerPanel = view.getPlayerPanel(player);
         final InfoTab selectedTab = playerPanel.getSelectedTab(), manaPoolTab = playerPanel.getManaPoolTab();

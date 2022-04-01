@@ -38,7 +38,6 @@ public interface IGuiGame {
     void openView(TrackableCollection<PlayerView> myPlayers);
     void afterGameEnd();
     void showCombat();
-    void showZoom(CardView card);
     void showPromptMessage(PlayerView playerView, String message);
     void showCardPromptMessage(PlayerView playerView, String message, CardView card);
     void updateButtons(PlayerView owner, boolean okEnabled, boolean cancelEnabled, boolean focusOk);
