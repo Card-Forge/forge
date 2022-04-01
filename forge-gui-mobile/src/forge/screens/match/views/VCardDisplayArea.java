@@ -366,7 +366,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         }
 
         public boolean selectCard(boolean selectEntireStack) {
-            if (!getCard().getController().equals(MatchController.instance.getCurrentPlayer()) && !ZoneType.Hand.equals(getCard().getZone())) {
+            if (!getCard().getController().equals(MatchController.instance.getCurrentPlayer()) && ZoneType.Hand.equals(getCard().getZone())) {
                 if (getCard().mayPlayerLook(MatchController.instance.getCurrentPlayer())) { // can see the card, check if can play...
                     if (!getCard().getMayPlayPlayers(MatchController.instance.getCurrentPlayer()))
                         return false;
