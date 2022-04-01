@@ -3337,6 +3337,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         return result;
     }
+    public final List<Player> getMayPlayPlayers() {
+        List<Player> result = Lists.newArrayList();
+        for (CardPlayOption o : mayPlay.values()) {
+            result.add(o.getPlayer());
+        }
+        return result;
+    }
     public final void setMayPlay(final Player player, final boolean withoutManaCost, final Cost altManaCost, final boolean withFlash, final boolean grantZonePermissions, final StaticAbility sta) {
         this.mayPlay.put(sta, new CardPlayOption(player, sta, withoutManaCost, altManaCost, withFlash, grantZonePermissions));
     }
