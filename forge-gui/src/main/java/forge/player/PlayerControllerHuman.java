@@ -285,8 +285,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (noPermission) {
                 return null;
             }
-        }
-        if (!hostCard.getController().equals(player)) {
+        } else if (!hostCard.isInPlay() && !hostCard.getController().equals(player)) {
             if (!hostCard.getMayPlayPlayers().contains(player)) {
                 getGui().showZoom(hostCard.getView());
                 return null;
