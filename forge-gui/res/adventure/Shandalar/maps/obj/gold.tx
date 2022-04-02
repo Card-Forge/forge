@@ -4,6 +4,9 @@
  <object name="Gold" type="enemy" gid="501" width="16" height="16">
   <properties>
    <property name="enemy" value="Gold"/>
+   <property name="override_gold_max" type="int" value="0"/>
+   <property name="override_gold_min" type="int" value="0"/>
+   <property name="override_reward" type="bool" value="false"/>
   </properties>
  </object>
 </template>

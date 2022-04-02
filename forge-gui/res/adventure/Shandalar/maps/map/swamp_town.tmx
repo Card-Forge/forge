@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="48">
+<map version="1.5" tiledversion="1.7.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="49">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="4425" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJyL4GZgiBjFo3gUj+JRPIpH8YjAAH23xTs=
@@ -20,22 +20,51 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYKAcNPJSJk9tQG/7KAUNQPc6MDEwLGYkDzsxkW5nPTSM7pKhFwZI1Yvsxzpm7GrY+RgYOPioay8x6vXZqWMODIDilBj1Z5HsdRdiYPAQwmRT4l9cZiLbq4+DTYm9uMxEtvcckD2ZDYLzOKhjbw7QHCN2TPZZHG4AAVi4kGsvTD/IPph/LqDZa8CO6kcQgIULufZiS7Nn0eyFuckQS1iTay/MTFDYgvwFotHtRXYPetmGK+8TshcGQPaD/ACiczkgfstFCnuYHykp20Cghhl/mYvNb6T4r46Meuou1F5K/QYAz8ROLA==
+   eJxjYKAcNPJSJk9tQG/7KAUNQPc6MDEwLGYkDzsxkW5nPTSM7pKhdxE3eXqR/VjHjF3NbkEGhj2C+M0h1V5i1OuzU8ccGADFKTHqzyLZ+1uUgeGPKCabEv/iMhPZXn0cbErsxWUmsr3ngOzJbBCcx0Ede3OA5hixY7LP4nADCMDChVx7YfpB9sH8cwHNXgN2VD+CACxcyLUXW5o9i2YvzE2GWMKaXHthZoLCFuQvEI1uL7J70Ms2XHmfkL0wALIf5AcQncsB8VsuUtjD/EhO2YYMapjxl7nY/EaK/+rIqKfuQu2l1G8Aq5NY2w==
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBg8oIZ3oF0wCmDgNTAu3tA4PpoGaXxrCzEw6Ahhsmllph4n5eYPB0BpWFMrrpBByyBJo4PFHcSAeiq4Febf5iHk76EEAPQWCPI=
+   eJxjYBg8oIZ3oF0wCmBgviADwwJB2trRNEjj+74oA8MDUUw2rczU46Tc/OEAKA1rasUVMmgZJGl0sLiDGFBPBbfC/Ns8hPw9lAAA6oEQ9g==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
   <object id="38" template="../obj/entry_up.tx" x="208" y="272"/>
-  <object id="41" template="../obj/shop.tx" x="129" y="146"/>
-  <object id="42" template="../obj/shop.tx" x="177" y="145"/>
-  <object id="43" template="../obj/shop.tx" x="321" y="129"/>
-  <object id="44" template="../obj/shop.tx" x="114" y="194"/>
-  <object id="45" template="../obj/shop.tx" x="273" y="130"/>
-  <object id="46" template="../obj/shop.tx" x="337" y="177"/>
+  <object id="41" template="../obj/shop.tx" x="129" y="146">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+   </properties>
+  </object>
+  <object id="42" template="../obj/shop.tx" x="177" y="145">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+   </properties>
+  </object>
+  <object id="43" template="../obj/shop.tx" x="321" y="129">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+   </properties>
+  </object>
+  <object id="44" template="../obj/shop.tx" x="114" y="194">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+   </properties>
+  </object>
+  <object id="45" template="../obj/shop.tx" x="273" y="130">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+   </properties>
+  </object>
+  <object id="46" template="../obj/shop.tx" x="337" y="177">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+   </properties>
+  </object>
   <object id="47" template="../obj/inn.tx" x="230" y="98"/>
+  <object id="48" template="../obj/shop.tx" x="336" y="80">
+   <properties>
+    <property name="shopList" value="Swamp"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

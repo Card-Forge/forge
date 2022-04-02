@@ -1,5 +1,6 @@
 package forge.adventure.util;
 
+import forge.adventure.data.ItemData;
 import forge.item.PaperCard;
 
 /**
@@ -8,9 +9,17 @@ import forge.item.PaperCard;
 public class Reward {
 
 
+    public Reward(ItemData item) {
+        type=Type.Item;
+        this.item=item;
+        count = 1;
+    }
 
     public PaperCard getCard() {
         return card;
+    }
+    public ItemData getItem() {
+        return item;
     }
 
 
@@ -23,6 +32,7 @@ public class Reward {
     }
     Type type;
     PaperCard card;
+    ItemData item;
 
     private final int count;
 

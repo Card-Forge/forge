@@ -138,6 +138,8 @@ public class RewardsEditor extends JComponent{
     public void setRewards(RewardData[] rewards) {
 
         model.clear();
+        if(rewards==null)
+            return;
         for (int i=0;i<rewards.length;i++) {
             model.add(i,rewards[i]);
         }

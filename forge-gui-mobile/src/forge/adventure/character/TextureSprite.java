@@ -12,7 +12,7 @@ public class TextureSprite extends MapActor{
 
     public TextureSprite(TextureRegion region)
     {
-
+        super(0);
         this.region = region;
         setWidth(region.getRegionWidth());
         setHeight(region.getRegionHeight());

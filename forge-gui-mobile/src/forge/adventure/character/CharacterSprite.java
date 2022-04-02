@@ -26,6 +26,7 @@ public class CharacterSprite extends MapActor {
     private Sprite avatar;
 
     public CharacterSprite(String path) {
+        super(0);
         collisionHeight=0.4f;
         load(path);
     }

@@ -69,9 +69,9 @@ public class RewardData {
     private static Iterable<PaperCard> allEnemyCards;
     public Array<Reward> generate(boolean isForEnemy)
     {
-        return generate(isForEnemy,null);
+        return generate(isForEnemy,null,null);
     }
-    public Array<Reward> generate(boolean isForEnemy,Iterable<PaperCard> cards)
+    public Array<Reward> generate(boolean isForEnemy,Iterable<PaperCard> cards,String[] enemyItems)
     {
         if(allCards==null)
         {
@@ -116,6 +116,26 @@ public class RewardData {
                         {
                             ret.add(new Reward(card));
                         }
+                    }
+                    break;
+                case "item":
+                    if(itemName!=null&&!itemName.isEmpty())
+                    {
+                        for(int i=0;i<count+addedCount;i++)
+                        {
+                            ret.add(new Reward(ItemData.getItem(itemName)));
+                        }
+                    }
+                    break;
+                case "enemyItems":
+                    if(enemyItems==null)return ret;
+                    for(int i=0;i<count+addedCount;i++)
+                    {
+                        ret.add(new Reward(ItemData.getItem(enemyItems[WorldSave.getCurrentSave().getWorld().getRandom().nextInt(enemyItems.length)])));
+                    }
+                    for(PaperCard card: CardUtil.generateCards(cards,this, count+addedCount))
+                    {
+                        ret.add(new Reward(card));
                     }
                     break;
                 case "deckCard":

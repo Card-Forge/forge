@@ -260,7 +260,7 @@ public class CardUtil {
         switch (card.getRarity())
         {
             case BasicLand:
-                return 20;
+                return 5;
             case Common:
                 return 50;
             case Uncommon:
@@ -272,6 +272,15 @@ public class CardUtil {
             default:
                 return 600;
         }
+    }
+    public static int getRewardPrice(Reward reward)
+    {
+        PaperCard card=reward.getCard();
+        if(card!=null)
+            return getCardPrice(card);
+        if(reward.getItem()!=null)
+            return reward.getItem().cost;
+        return 1000;
     }
 
     public static Deck generateDeck(GeneratedDeckData data)

@@ -24,5 +24,5 @@
 		"color": "b63729",
     "spriteNames":[ "MountainTree","MountainTree2","MountainRock","LargeMountainRock","Gravel"]    ,
     "enemies":[ "Amonkhet Minotaur","Ashmouth Devil","Axgard Dwarf","Berserker","Boggart","Cyclops","Devil","Dinosaur","Dragon","Dwarf","Efreet","Fire Elemental","Flame Elemental","Goblin","Goblin Chief","Goblin Warrior","Hellhound","Immersturm Demon","Khan","Minotaur","Minotaur Flayer","Red Beast","Red Wiz1","Red Wiz2","Red Wiz3","Shaman","Troll","Vampire Lord","Viashino","Yeti" ]    ,
-    "pointsOfInterest":[ "Mountain Town","YuleTown","BarbarianCamp","Maze","SnowAbbey","SkullCaveR","CaveR" ]
+    "pointsOfInterest":[ "Red Castle","Mountain Town","YuleTown","BarbarianCamp","Maze","SnowAbbey","SkullCaveR","CaveR" ]
 }

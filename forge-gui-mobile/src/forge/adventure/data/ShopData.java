@@ -12,6 +12,7 @@ public class ShopData {
     public String name;
     public String spriteAtlas;
     public String sprite;
+    public boolean unlimited;
     public Array<RewardData> rewards;
 
 

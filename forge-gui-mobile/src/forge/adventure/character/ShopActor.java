@@ -12,14 +12,15 @@ import forge.adventure.util.Reward;
  */
 public class ShopActor extends MapActor{
     private final MapStage stage;
-    private final int id;
+    private final boolean unlimited;
     Array<Reward> rewardData;
 
-    public ShopActor(MapStage stage, int id, Array<Reward> rewardData)
+    public ShopActor(MapStage stage, int id, Array<Reward> rewardData, boolean unlimited)
     {
+        super(id);
         this.stage = stage;
-        this.id = id;
         this.rewardData = rewardData;
+        this.unlimited = unlimited;
 
     }
 
@@ -37,7 +38,8 @@ public class ShopActor extends MapActor{
         Forge.switchScene(SceneType.RewardScene.instance);
     }
 
-    public int getObjectID() {
-        return id;
+
+    public boolean isUnlimited() {
+        return unlimited;
     }
 }

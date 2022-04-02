@@ -34,6 +34,10 @@ public class TokenDb implements ITokenDatabase {
         this.editions = editions;
     }
 
+    public boolean containsRule(String rule) {
+        return this.rulesByName.containsKey(rule);
+
+    }
     @Override
     public PaperToken getToken(String tokenName) {
         return getToken(tokenName, CardEdition.UNKNOWN.getName());

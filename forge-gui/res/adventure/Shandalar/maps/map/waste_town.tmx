@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="48">
+<map version="1.5" tiledversion="1.7.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="49">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="4425" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJyr4GZgqBjFo3gUj+JRPIpH8YjAAA0oBQo=
@@ -20,22 +20,51 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYCAeTOEgQTESmExAHyF5XIBc94DADhYGBmka4l0s2P0Xykq+m4kB2MwHhdNA2ItPnNr2fsVjLz8/A4MAP2Gz3IUYGDyE8LOxmQ8KX1gco/vXkQvTnvfsuNXgYmOzF5/4A6Bedk7seCmUfoikBht7GSd+e7/icQ82gM0/hNSRk66igXEdA41vPU6EeYTiF91ebOULIf+yIYWzCxemf7CxKfUvOnDiIi5+H2GxF70sJjV+NRiJV4/PfFqkK2LM/8JKfPkOspfUeuQbmr3o4U2oTgO5G2QvJeUqyE4Au+wy+Q==
+   eJxjYCAeTOEgQTESmExAHyF5XIBc94DADhYGBmka4l0s2P0Xykq+m4kB2MwHhdNA2ItPnNr2fsVj72EhBoYjQoTN+i3KwPBHFD8bm/mg8IXFMbp/Hbkw7XnPjlsNLjY2e/GJPwDqZefEjpdC6YdIarCxl3Hit/crHvdgA9j8Q0gdOemKX5iBQUAYwtbjRJhHKH7R7cVWvhDyLxtSOLtwYfoHG5tS/6IDJy7i4vcRFnvRy2Jc9u5gwxQD+UODkXh34jOfFumKGPO/sBJfvoPsJbUe+YZmL3p4E6rTQO4G2UtJuQqyEwA8zz0p
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2BwAW0hBgYdIfzsUTD4gT0/A4MDP6b4aPyOglEwsAAA60QDgA==
+   eJxjYBgFo2BwgfuiDAwPRPGzR8HgB5+FGBi+CGGKj8bvKBgFAwsAzsMNgg==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
   <object id="38" template="../obj/entry_up.tx" x="208" y="272"/>
-  <object id="41" template="../obj/shop.tx" x="241" y="113"/>
-  <object id="42" template="../obj/shop.tx" x="289" y="113"/>
-  <object id="43" template="../obj/shop.tx" x="337" y="113"/>
-  <object id="44" template="../obj/shop.tx" x="241" y="177"/>
-  <object id="45" template="../obj/shop.tx" x="288" y="177"/>
-  <object id="46" template="../obj/shop.tx" x="337" y="177"/>
+  <object id="41" template="../obj/shop.tx" x="241" y="113">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Land,Colorless,Artefact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic"/>
+   </properties>
+  </object>
+  <object id="42" template="../obj/shop.tx" x="289" y="113">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Land,Colorless,Artefact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic"/>
+   </properties>
+  </object>
+  <object id="43" template="../obj/shop.tx" x="337" y="113">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Land,Colorless,Artefact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic"/>
+   </properties>
+  </object>
+  <object id="44" template="../obj/shop.tx" x="241" y="177">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Land,Colorless,Artefact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic"/>
+   </properties>
+  </object>
+  <object id="45" template="../obj/shop.tx" x="288" y="177">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Land,Colorless,Artefact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic"/>
+   </properties>
+  </object>
+  <object id="46" template="../obj/shop.tx" x="337" y="177">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Land,Colorless,Artefact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic"/>
+   </properties>
+  </object>
   <object id="47" template="../obj/inn.tx" x="150" y="177"/>
+  <object id="48" template="../obj/shop.tx" x="128" y="224">
+   <properties>
+    <property name="shopList" value="Equipment"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

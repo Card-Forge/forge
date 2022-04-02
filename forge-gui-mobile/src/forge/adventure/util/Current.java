@@ -19,4 +19,13 @@ public class Current {
     public static void setLatestDeck(Deck generateDeck) {
         deck=generateDeck;
     }
+
+    static boolean debug=false;
+    public static boolean isInDebug()
+    {
+        return debug;
+    }
+    public static void setDebug(boolean b) {
+        debug=b;
+    }
 }

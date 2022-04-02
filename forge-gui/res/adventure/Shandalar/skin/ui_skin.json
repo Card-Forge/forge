@@ -282,6 +282,12 @@
 	"rightarrow": {
 		"imageUp": "right",
 		"imageDown": "right_down"
+	},
+	"item_frame": {
+		"imageUp": "item_frame",
+		"imageOver": "item_frame_hover",
+		"imageChecked": "item_frame_selected",
+		"imageCheckedOver": "item_frame_selected_hover"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle": {
@@ -337,7 +343,7 @@
 "com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle": {
 	"default": {
 		"font": "default",
-		"fontColor": "RGBA_255_255_255_255",
+		"fontColor": "RGBA_0_0_0_255",
 		"scrollStyle": "default",
 		"listStyle": "default"
 	}
@@ -350,6 +356,14 @@
 	"default-vertical": {
 		"background": "thinwindow",
 		"knob": "scroll2"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle": {
+	"default-horizontal": {
+		"handle": "scroll2"
+	},
+	"default-vertical": {
+		"handle": "scroll"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
@@ -379,6 +393,23 @@
 		"background": "thinwindow10Patch",
 		"cursor": "cursor",
 		"selection": "select"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle": {
+	"default": {
+		"label": "default"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Touchpad$TouchpadStyle": {
+	"default": {
+		"background": "thinwindow",
+		"knob": "unpressed-hover"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Tree$TreeStyle": {
+	"default": {
+		"plus": "unpressed",
+		"minus": "pressed"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {

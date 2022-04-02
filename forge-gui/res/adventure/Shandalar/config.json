@@ -17,7 +17,8 @@
       "startingLife": 16,
       "staringMoney": 200,
       "enemyLifeFactor": 0.8,
-      "sellFactor": 0.5
+      "sellFactor": 0.5     ,
+      "startItems": ["Treasure","Jungle Shield"]
     },
     {
       "name": "Normal",
@@ -25,7 +26,8 @@
       "staringMoney": 100,
       "startingDifficulty": true,
       "enemyLifeFactor": 1.0,
-      "sellFactor": 0.2
+      "sellFactor": 0.2        ,
+      "startItems": [ "Treasure"]
     },
     {
       "name": "Hard",
@@ -36,3 +38,4 @@
     }
   ]
 }
+

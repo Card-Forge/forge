@@ -1,0 +1,19 @@
+[{
+    "effect":[],    
+    "name":"",
+    "text":"A big green gate is blocking the path",
+    "condition":[],     
+    "options":[
+    {      
+        "name":"go away" 
+    },
+    {      
+        "name":"unlock with green key",     
+        "condition":[{"item":"Green Key"}],    
+        "text":"The gate is unlocked",
+        "options":[{"name":"continue","effect":[{"removeItem":"Green Key","deleteMapObject":-1}]}]
+    }
+    ]
+    
+}
+]

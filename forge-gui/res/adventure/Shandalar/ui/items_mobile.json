@@ -24,6 +24,15 @@
       "height": 30,
       "x": 420,
       "y": 120
+    }  ,
+    {
+      "type": "Label",
+      "name": "gold",
+      "text": "$",
+      "width": 48,
+      "height": 30,
+      "x": 420,
+      "y": 160
     }
   ]
 }

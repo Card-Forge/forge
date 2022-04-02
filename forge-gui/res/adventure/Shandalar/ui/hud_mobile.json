@@ -78,27 +78,37 @@
       "name": "deck",
       "text": "Deck",
       "width": 40,
-      "height": 44,
+      "height": 36,
       "x": 428,
       "y": 106
+    }, 
+    {
+      "type": "TextButton",
+      "name": "inventory",
+      "text": "Inventory",
+      "width": 40,
+      "height": 36,
+      "x": 428,
+      "y": 146
     },
+    
     {
       "type": "TextButton",
       "name": "statistic",
       "text": "Status",
       "width": 40,
-      "height": 44,
+      "height": 36,
       "x": 428,
-      "y": 162
+      "y": 186
     },
     {
       "type": "TextButton",
       "name": "menu",
       "text": "Menu",
       "width": 40,
-      "height": 44,
+      "height": 36,
       "x": 428,
-      "y": 216
+      "y": 226
     }
   ]
 }

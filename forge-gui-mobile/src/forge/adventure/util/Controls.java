@@ -144,6 +144,7 @@ public class Controls {
 
     public static Dialog newDialog(String title) {
         Dialog ret = new Dialog(title, GetSkin());
+        ret.setMovable(false);
         if (!Forge.isLandscapeMode()) {
             ret.getTitleLabel().setFontScaleX(2);
         }

@@ -1,8 +1,8 @@
 {
 "width": 700,
 "height": 700,
-"playerStartPosY": 0.5,
-"playerStartPosX": 0.5,    
+"playerStartPosY": 0.495,
+"playerStartPosX": 0.5025,
 "noiseZoomBiome": 30, 
 "tileSize": 16,      
 "maxRoadDistance": 1000,

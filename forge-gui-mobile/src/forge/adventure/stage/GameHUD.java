@@ -41,7 +41,7 @@ public class GameHUD extends Stage {
     private final Label lifePoints;
     private final Label money;
     private Image miniMap, gamehud, mapborder, avatarborder, blank;
-    private TextButton deckActor, menuActor, statsActor;
+    private TextButton deckActor, menuActor, statsActor, inventoryActor;
     private boolean deckPressed = false;
     private boolean menuPressed = false;
     private boolean statsPressed = false;
@@ -71,6 +71,8 @@ public class GameHUD extends Stage {
         menuActor.getLabel().setText(Forge.getLocalizer().getMessage("lblMenu"));
         statsActor = ui.findActor("statistic");
         statsActor.getLabel().setText(Forge.getLocalizer().getMessage("lblStatus"));
+        inventoryActor = ui.findActor("inventory");
+        //todo translate inventoryActor
         gamehud = ui.findActor("gamehud");
 
         miniMapPlayer = new Image(new Texture(Config.instance().getFile("ui/minimap_player.png")));
@@ -107,24 +109,10 @@ public class GameHUD extends Stage {
             ui.addActor(touchpad);
 
         avatar = ui.findActor("avatar");
-        ui.onButtonPress("menu", new Runnable() {
-            @Override
-            public void run() {
-                menu();
-            }
-        });
-        ui.onButtonPress("statistic", new Runnable() {
-            @Override
-            public void run() {
-                statistic();
-            }
-        });
-        ui.onButtonPress("deck", new Runnable() {
-            @Override
-            public void run() {
-                openDeck();
-            }
-        });
+        ui.onButtonPress("menu", () -> menu());
+        ui.onButtonPress("inventory", () -> openInventory());
+        ui.onButtonPress("statistic", () -> statistic());
+        ui.onButtonPress("deck", () -> openDeck());
         lifePoints = ui.findActor("lifePoints");
         lifePoints.setText("20/20");
         AdventurePlayer.current().onLifeChange(new Runnable() {
@@ -230,7 +218,8 @@ public class GameHUD extends Stage {
             touchpad.setVisible(false);
             if (MapStage.getInstance().isInMap())
                 return true;
-            WorldStage.getInstance().GetPlayer().setPosition(x*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),y*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
+            if(Current.isInDebug())
+                WorldStage.getInstance().GetPlayer().setPosition(x*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),y*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
             return true;
         }
         return super.touchDragged(screenX, screenY, pointer);
@@ -293,6 +282,7 @@ public class GameHUD extends Stage {
         float uiRight = gamehud.getRight();
         //gamehud bounds
         if (c.x>=uiX&&c.x<=uiRight&&c.y>=uiY&&c.y<=uiTop) {
+            super.touchDown(screenX, screenY, pointer, button);
             return true;
         }
 
@@ -304,7 +294,8 @@ public class GameHUD extends Stage {
         if (c.x>=mMapX&&c.x<=mMapR&&c.y>=mMapY&&c.y<=mMapT) {
             if (MapStage.getInstance().isInMap())
                 return true;
-            WorldStage.getInstance().GetPlayer().setPosition(x*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),y*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
+            if(Current.isInDebug())
+                WorldStage.getInstance().GetPlayer().setPosition(x*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),y*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
             return true;
         }
         //display bounds
@@ -376,6 +367,10 @@ public class GameHUD extends Stage {
         Forge.switchScene(SceneType.DeckSelectScene.instance);
     }
 
+    private void openInventory() {
+        WorldSave.getCurrentSave().header.createPreview();
+        Forge.switchScene(SceneType.InventoryScene.instance);
+    }
     private void menu() {
         gameStage.openMenu();
     }
@@ -393,10 +388,12 @@ public class GameHUD extends Stage {
             deckActor.getColor().a = 1f;
             menuActor.getColor().a = 1f;
             statsActor.getColor().a = 1f;
+            inventoryActor.getColor().a = 1f;
         } else {
             deckActor.getColor().a = 0.5f;
             menuActor.getColor().a = 0.5f;
             statsActor.getColor().a = 0.5f;
+            inventoryActor.getColor().a = 0.5f;
         }
         if (!Forge.isLandscapeMode()) {
             gamehud.setVisible(false);

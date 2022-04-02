@@ -15,6 +15,7 @@ import forge.adventure.character.PlayerSprite;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.scene.TileMapScene;
+import forge.adventure.util.Current;
 import forge.adventure.world.WorldSave;
 import forge.gui.GuiBase;
 
@@ -188,6 +189,7 @@ public abstract class GameStage extends Stage {
                     ((MapActor) actor).setBoundDebug(true);
                 }
             }
+            setDebugAll(true);
             player.setBoundDebug(true);
         }
         if (keycode == Input.Keys.F11) {
@@ -198,12 +200,17 @@ public abstract class GameStage extends Stage {
                 }
             }
             player.setBoundDebug(false);
+            setDebugAll(false);
         }
         if (keycode == Input.Keys.F10) {
-            setDebugAll(true);
+            Current.setDebug(true);
+             Current.player().addItem("Cheat");
+            Current.player().takeGold(-1000);
         }
         if (keycode == Input.Keys.F9) {
-            setDebugAll(false);
+            Current.setDebug(false);
+            Current.player().removeItem("Cheat");
+            Current.player().takeGold(1000);
         }
         return true;
     }
@@ -320,9 +327,9 @@ public abstract class GameStage extends Stage {
                 break;
 
             if (adjDirX.x >= 0)
-                adjDirX.x = Math.round(Math.max(0, adjDirX.x - 1));
+                adjDirX.x = Math.max(0, adjDirX.x - 0.2f);
             else
-                adjDirX.x = Math.round(Math.max(0, adjDirX.x + 1));
+                adjDirX.x = Math.max(0, adjDirX.x + 0.2f);
         }
         while (true) {
             if (!isColliding(new Rectangle(boundingRect.x + adjDirY.x, boundingRect.y + adjDirY.y, boundingRect.width, boundingRect.height))) {
@@ -333,9 +340,9 @@ public abstract class GameStage extends Stage {
                 break;
 
             if (adjDirY.y >= 0)
-                adjDirY.y = Math.round(Math.max(0, adjDirY.y - 1));
+                adjDirY.y = (Math.max(0, adjDirY.y - 0.2f));
             else
-                adjDirY.y = Math.round(Math.max(0, adjDirY.y + 1));
+                adjDirY.y = (Math.max(0, adjDirY.y + 0.2f));
         }
         if (foundY && foundX)
             return adjDirX.len() > adjDirY.len() ? adjDirX : adjDirY;
@@ -345,4 +352,5 @@ public abstract class GameStage extends Stage {
             return adjDirX;
         return Vector2.Zero.cpy();
     }
+
 }

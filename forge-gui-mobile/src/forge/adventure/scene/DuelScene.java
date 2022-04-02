@@ -1,10 +1,12 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.Array;
 import forge.Forge;
 import forge.LobbyPlayer;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.character.PlayerSprite;
+import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
@@ -16,6 +18,7 @@ import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.HostedMatch;
 import forge.gui.interfaces.IGuiGame;
+import forge.item.IPaperCard;
 import forge.player.GamePlayerUtil;
 import forge.player.PlayerControllerHuman;
 import forge.screens.FScreen;
@@ -24,12 +27,7 @@ import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.trackable.TrackableCollection;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * DuelScene
@@ -42,6 +40,7 @@ public class DuelScene extends ForgeScene {
     EnemySprite enemy;
     PlayerSprite player;
     RegisteredPlayer humanPlayer;
+
     public DuelScene() {
 
     }
@@ -69,6 +68,26 @@ public class DuelScene extends ForgeScene {
 
 
     }
+    void addItemEffects(RegisteredPlayer player,Array<ItemData> items)
+    {
+        if(items==null)
+            return;
+
+        int lifeMod=0;
+        int changeStartCards=0;
+        Array<IPaperCard> startCards=new Array<>();
+
+        for(ItemData data:items)
+        {
+            lifeMod+=data.lifeModifier;
+            changeStartCards+= data.changeStartCards;
+            startCards.addAll(data.startBattleWithCards());
+        }
+        player.setCardsOnBattlefield(startCards);
+        player.setStartingLife(Math.max(1,lifeMod+player.getStartingLife()));
+        player.setStartingHand(player.getStartingHand()+changeStartCards);
+    }
+
 
     @Override
     public void enter() {
@@ -96,6 +115,32 @@ public class DuelScene extends ForgeScene {
         enemyPlayer.setName(this.enemy.getData().name);
         aiPlayer.setPlayer(enemyPlayer);
         aiPlayer.setStartingLife(Math.round((float)enemy.getData().life*Current.player().getDifficulty().enemyLifeFactor));
+
+
+
+        Array<ItemData> playerItems=new Array<>();
+        Array<ItemData> oppItems=new Array<>();
+
+        for(String playerItem:Current.player().getEquippedItems())
+        {
+            ItemData item=ItemData.getItem(playerItem);
+            playerItems.add(item);
+            if(item.opponent !=null)
+                oppItems.add(item.opponent);
+        }
+        if(enemy.getData().equipment!=null)
+        {
+            for(String oppItem:enemy.getData().equipment)
+            {
+                ItemData item=ItemData.getItem(oppItem);
+                oppItems.add(item);
+                if(item.opponent !=null)
+                    playerItems.add(item.opponent);
+            }
+        }
+
+        addItemEffects(humanPlayer,playerItems);
+        addItemEffects(aiPlayer,oppItems);
 
         players.add(humanPlayer);
         players.add(aiPlayer);

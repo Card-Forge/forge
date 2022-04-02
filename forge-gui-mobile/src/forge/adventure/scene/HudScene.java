@@ -9,7 +9,7 @@ import forge.adventure.stage.GameStage;
 /**
  * Hud base scene
  */
-public class HudScene extends Scene implements InputProcessor {
+public abstract class HudScene extends Scene implements InputProcessor {
 
     GameHUD hud;
     GameStage stage;
@@ -63,6 +63,8 @@ public class HudScene extends Scene implements InputProcessor {
 
         if (hud.keyDown(keycode))
             return true;
+        if(isInHudOnlyMode())
+            return false;
         return stage.keyDown(keycode);
     }
 
@@ -71,6 +73,8 @@ public class HudScene extends Scene implements InputProcessor {
 
         if (hud.keyUp(keycode))
             return true;
+        if(isInHudOnlyMode())
+            return false;
         return stage.keyUp(keycode);
     }
 
@@ -79,6 +83,8 @@ public class HudScene extends Scene implements InputProcessor {
 
         if (hud.keyTyped(character))
             return true;
+        if(isInHudOnlyMode())
+            return false;
         return stage.keyTyped(character);
     }
 
@@ -86,6 +92,8 @@ public class HudScene extends Scene implements InputProcessor {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         if (hud.touchDown(screenX, screenY, pointer, button))
             return true;
+        if(isInHudOnlyMode())
+            return false;
         return stage.touchDown(screenX, screenY, pointer, button);
     }
 
@@ -93,6 +101,8 @@ public class HudScene extends Scene implements InputProcessor {
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         if (hud.touchUp(screenX, screenY, pointer, button))
             return true;
+        if(isInHudOnlyMode())
+            return false;
         return stage.touchUp(screenX, screenY, pointer, button);
     }
 
@@ -100,6 +110,8 @@ public class HudScene extends Scene implements InputProcessor {
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         if (hud.touchDragged(screenX, screenY, pointer))
             return true;
+        if(isInHudOnlyMode())
+            return false;
         return stage.touchDragged(screenX, screenY, pointer);
     }
 
@@ -107,6 +119,8 @@ public class HudScene extends Scene implements InputProcessor {
     public boolean mouseMoved(int screenX, int screenY) {
         if (hud.mouseMoved(screenX, screenY))
             return true;
+        if(isInHudOnlyMode())
+            return false;
         return stage.mouseMoved(screenX, screenY);
     }
 
@@ -114,6 +128,13 @@ public class HudScene extends Scene implements InputProcessor {
     public boolean scrolled(float amountX, float amountY) {
         if (hud.scrolled(amountX, amountY))
             return true;
+        if(isInHudOnlyMode())
+            return false;
         return stage.scrolled(amountX, amountY);
+    }
+
+    public boolean isInHudOnlyMode()
+    {
+        return false;
     }
 }
