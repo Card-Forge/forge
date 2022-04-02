@@ -1,0 +1,15 @@
+Name:Lord Xander, the Collector
+ManaCost:4 U B R
+Types:Legendary Creature Vampire Demon Noble
+PT:6/6
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, target opponent discards half the cards in their hand, rounded down.
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumCards$ X | Mode$ TgtChoose
+SVar:X:TargetedPlayer$CardsInHand/HalfDown
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME attacks, defending player mills half their library, rounded down.
+SVar:TrigMill:DB$ Mill | Defined$ TriggeredDefendingPlayer | NumCards$ Y
+SVar:Y:TriggeredDefendingPlayer$CardsInLibrary/HalfDown
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigSacrifice | TriggerDescription$ When CARDNAME dies, target opponent sacrifices half the nonland permanents they control, rounded down.
+SVar:TrigSacrifice:DB$ Sacrifice | ValidTgts$ Opponent | TgtPrompt$ Select an opponent | Amount$ Z | SacValid$ Permanent.nonLand | Mode$ TgtChoose
+SVar:Z:Count$Valid Permanent.nonLand+TargetedPlayerCtrl/HalfDown
+DeckHas:Ability$Discard|Mill|Sacrifice
+Oracle:When Lord Xander, the Collector enters the battlefield, target opponent discards half the cards in their hand, rounded down.\nWhenever Lord Xander, the Collector attacks, defending player mills half their library, rounded down.\nWhen Lord Xander, the Collector dies, target opponent sacrifices half the nonland permanents they control, rounded down.

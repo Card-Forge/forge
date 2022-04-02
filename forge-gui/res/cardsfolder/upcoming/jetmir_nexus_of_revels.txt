@@ -1,0 +1,9 @@
+Name:Jetmir, Nexus of Revels
+ManaCost:1 R G W
+Types:Legendary Creature Cat Demon
+PT:5/4
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddKeyword$ Vigilance | IsPresent$ Creature.YouCtrl | PresentCompare$ GE3 | Description$ Creatures you control get +1/+0 and have vigilance as long as you control three or more creatures.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddKeyword$ Trample | IsPresent$ Creature.YouCtrl | PresentCompare$ GE6 | Description$ Creatures you control also get +1/+0 and have trample as long as you control six or more creatures.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddKeyword$ Double Strike | IsPresent$ Creature.YouCtrl | PresentCompare$ GE9 | Description$ Creatures you control also get +1/+0 and have double strike as long as you control nine or more creatures.
+SVar:BuffedBy:Creature
+Oracle:Creatures you control get +1/+0 and have vigilance as long as you control three or more creatures.\nCreatures you control also get +1/+0 and have trample as long as you control six or more creatures.\nCreatures you control also get +1/+0 and have double strike as long as you control nine or more creatures.
