@@ -25,6 +25,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.card.CardStateName;
+import forge.card.CardType;
 import forge.game.CardTraitBase;
 import forge.game.IHasSVars;
 import forge.game.ability.effects.CharmEffect;
@@ -327,8 +328,10 @@ public final class AbilityFactory {
         final String min = mapParams.containsKey("TargetMin") ? mapParams.get("TargetMin") : "1";
         final String max = mapParams.containsKey("TargetMax") ? mapParams.get("TargetMax") : "1";
 
-        // TgtPrompt now optional
-        final String prompt = mapParams.containsKey("TgtPrompt") ? mapParams.get("TgtPrompt") : "Select target " + mapParams.get("ValidTgts");
+        // TgtPrompt should only be needed for more complicated ValidTgts
+        final String prompt = mapParams.containsKey("TgtPrompt") ? mapParams.get("TgtPrompt") : "Select target " +
+                (CardType.CoreType.isValidEnum(mapParams.get("ValidTgts")) ? mapParams.get("ValidTgts").toLowerCase() :
+                        mapParams.get("ValidTgts"));
 
         TargetRestrictions abTgt = new TargetRestrictions(prompt, mapParams.get("ValidTgts").split(","), min, max);
 
