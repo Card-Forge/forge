@@ -45,6 +45,7 @@ public class GameHUD extends Stage {
     private boolean deckPressed = false;
     private boolean menuPressed = false;
     private boolean statsPressed = false;
+    private boolean inventoryPressed = false;
     private UIActor ui;
     private Touchpad touchpad;
     private TouchpadStyle touchpadStyle;
@@ -72,7 +73,7 @@ public class GameHUD extends Stage {
         statsActor = ui.findActor("statistic");
         statsActor.getLabel().setText(Forge.getLocalizer().getMessage("lblStatus"));
         inventoryActor = ui.findActor("inventory");
-        //todo translate inventoryActor
+        inventoryActor.getLabel().setText(Forge.getLocalizer().getMessage("lblItem"));
         gamehud = ui.findActor("gamehud");
 
         miniMapPlayer = new Image(new Texture(Config.instance().getFile("ui/minimap_player.png")));
@@ -160,10 +161,14 @@ public class GameHUD extends Stage {
             statsActor.setWidth(80);
             statsActor.setX(400);
             statsActor.setY(menuActor.getY() + 35);
+            inventoryActor.setHeight(20);
+            inventoryActor.setWidth(80);
+            inventoryActor.setX(400);
+            inventoryActor.setY(statsActor.getY() + 35);
             deckActor.setHeight(20);
             deckActor.setWidth(80);
             deckActor.setX(400);
-            deckActor.setY(statsActor.getY() + 35);
+            deckActor.setY(inventoryActor.getY() + 35);
         }
         addActor(ui);
         addActor(miniMapPlayer);
@@ -196,9 +201,11 @@ public class GameHUD extends Stage {
         checkButtonState(deckActor, pointer);
         checkButtonState(menuActor, pointer);
         checkButtonState(statsActor, pointer);
+        checkButtonState(inventoryActor, pointer);
         deckPressed = false;
         menuPressed = false;
         statsPressed = false;
+        inventoryPressed = false;
         return super.touchUp(screenX, screenY, pointer, button);
     }
 
@@ -249,6 +256,18 @@ public class GameHUD extends Stage {
         if (c.x>=deckX&&c.x<=deckR&&c.y>=deckY&&c.y<=deckT) {
             if (pointer < 1)
                 deckPressed = true;
+            return true;
+        }
+
+        float inventoryX = inventoryActor.getX();
+        float inventoryY = inventoryActor.getY();
+        float inventoryR = inventoryActor.getRight();
+        float inventoryT = inventoryActor.getTop();
+        float inventoryOriginX = inventoryActor.getOriginX();
+        //inventory button bounds
+        if (c.x>=inventoryX&&c.x<=inventoryR&&c.y>=inventoryY&&c.y<=inventoryT) {
+            if (pointer < 1)
+                inventoryPressed = true;
             return true;
         }
 
@@ -351,6 +370,7 @@ public class GameHUD extends Stage {
         updateVisualState(statsActor, statsPressed);
         updateVisualState(menuActor, menuPressed);
         updateVisualState(deckActor, deckPressed);
+        updateVisualState(inventoryActor, inventoryPressed);
     }
 
     Texture miniMapTexture;

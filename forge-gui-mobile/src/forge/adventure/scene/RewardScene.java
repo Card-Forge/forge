@@ -160,6 +160,13 @@ public class RewardScene extends UIScene {
             case Shop:
                 doneButton.setText(Forge.getLocalizer().getMessage("lblLeave"));
                 goldLabel.setText("Gold:"+Current.player().getGold());
+                float w = 480 - (goldLabel.getPrefWidth() + 10);
+                goldLabel.setPosition(w, 250);
+                if (!Forge.isLandscapeMode()) {
+                    goldLabel.setFontScaleX(2);
+                    w = 480/2 - goldLabel.getPrefWidth();
+                    goldLabel.setPosition(w, 250);
+                }
                 break;
             case Loot:
                 goldLabel.setText("");
@@ -185,7 +192,7 @@ public class RewardScene extends UIScene {
             }
         }
 
-        cardHeight = Forge.isLandscapeMode() ? bestCardHeight : bestCardHeight * 0.65f;
+        cardHeight = Forge.isLandscapeMode() ? bestCardHeight * 0.90f : bestCardHeight * 0.65f;
         cardWidth = bestCardHeight / CARD_WIDTH_TO_HEIGHT;
 
         yOff += (targetHeight - (cardHeight * numberOfRows)) / 2f;
