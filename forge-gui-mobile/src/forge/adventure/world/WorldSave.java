@@ -71,8 +71,13 @@ public class WorldSave {
                 SaveFileData mainData=(SaveFileData)oos.readObject();
                 currentSave.player.load(mainData.readSubData("player"));
                 GamePlayerUtil.getGuiPlayer().setName(currentSave.player.getName());
-                currentSave.world.load(mainData.readSubData("world"));
-                WorldStage.getInstance().load(mainData.readSubData("worldStage"));
+                try {
+                    currentSave.world.load(mainData.readSubData("world"));
+                    WorldStage.getInstance().load(mainData.readSubData("worldStage"));
+                } catch (Exception e) {
+                    System.err.println("Generating New World");
+                    currentSave.world.generateNew(0);
+                }
 
                 currentSave.onLoadList.emit();
 
@@ -128,6 +133,7 @@ public class WorldSave {
         return currentSave;
         //return currentSave = ret;
     }
+
     public boolean autoSave() {
         return save("auto save",AUTO_SAVE_SLOT);
     }

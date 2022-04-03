@@ -73,7 +73,7 @@ public class InventoryScene  extends UIScene {
             equipButton = ui.findActor("equip");
             deleteButton = ui.findActor("delete");
             itemDescription = ui.findActor("item_description");
-            leave.getLabel().setText(Forge.getLocalizer().getMessage("lblLeave"));
+            leave.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
 
             inventoryButtons=new Array<>();
             equipmentSlots=new HashMap<>();
@@ -132,7 +132,7 @@ public class InventoryScene  extends UIScene {
             columns-=1;
             if(columns<=0)columns=1;
             scrollPane.setActor(inventory);
-            confirm = new Dialog("\n Delete item", Controls.GetSkin())
+            confirm = new Dialog("\n "+Forge.getLocalizer().getMessage("lblDelete"), Controls.GetSkin())
             {
                 protected void result(Object object)
                 {
@@ -142,10 +142,25 @@ public class InventoryScene  extends UIScene {
                 };
             };
 
-            confirm.button("Yes", true);
-            confirm.button("No", false);
+            confirm.button(Forge.getLocalizer().getMessage("lblYes"), true);
+            confirm.button(Forge.getLocalizer().getMessage("lblNo"), false);
             ui.addActor(confirm);
             confirm.hide();
+
+            itemDescription.setWrap(true);
+            //makes confirm dialog hidden immediately when you open inventory first time..
+            confirm.getColor().a = 0;
+            float bw = scrollPane.getWidth() / 3;
+            deleteButton.setX(scrollPane.getX());
+            deleteButton.setWidth(bw);
+            equipButton.setX(scrollPane.getX()+bw);
+            equipButton.setWidth(bw);
+            leave.setX(equipButton.getX()+bw);
+            leave.setWidth(bw);
+            if (!Forge.isLandscapeMode()) {
+                confirm.getTitleLabel().setFontScaleX(2);
+                itemDescription.setFontScaleX(2);
+            }
 
 
             this.init = true;

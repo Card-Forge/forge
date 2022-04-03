@@ -91,7 +91,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
                 DrawOnPixmap.draw(drawingMap, backSprite);
                 Sprite item = reward.getItem().sprite();
-                DrawOnPixmap.draw(drawingMap, (int) ((backSprite.getWidth() / 2f) - item.getWidth() / 2f), (int) ((backSprite.getHeight() / 4f) * 1f), item);
+                DrawOnPixmap.draw(drawingMap, (int) ((backSprite.getWidth() / 2f) - item.getWidth() / 2f), (int) ((backSprite.getHeight() / 4f) * 1.7f), item);
+                DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getItem().name), 0, (int) ((backSprite.getHeight() / 8f) * 1f), backSprite.getWidth(), false);
 
                 image=new Texture(drawingMap);
                 drawingMap.dispose();
@@ -106,7 +107,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 DrawOnPixmap.draw(drawingMap, backSprite);
                 Sprite gold = atlas.createSprite("Gold");
                 DrawOnPixmap.draw(drawingMap, (int) ((backSprite.getWidth() / 2f) - gold.getWidth() / 2f), (int) ((backSprite.getHeight() / 4f) * 1f), gold);
-                DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getCount()), 0, (int) ((backSprite.getHeight() / 4f) * 2f), backSprite.getWidth());
+                DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getCount()), 0, (int) ((backSprite.getHeight() / 4f) * 2f), backSprite.getWidth(), true);
 
                 image=new Texture(drawingMap);
                 drawingMap.dispose();
@@ -121,7 +122,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 DrawOnPixmap.draw(drawingMap, backSprite);
                 Sprite gold = atlas.createSprite("Life");
                 DrawOnPixmap.draw(drawingMap, (int) ((backSprite.getWidth() / 2f) - gold.getWidth() / 2f), (int) ((backSprite.getHeight() / 4f) * 1f), gold);
-                DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getCount()), 0, (int) ((backSprite.getHeight() / 4f) * 2f), backSprite.getWidth());
+                DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getCount()), 0, (int) ((backSprite.getHeight() / 4f) * 2f), backSprite.getWidth(), true);
 
                 image = new Texture(drawingMap);
                 drawingMap.dispose();

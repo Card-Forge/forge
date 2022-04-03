@@ -395,11 +395,6 @@
 		"selection": "select"
 	}
 },
-"com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle": {
-	"default": {
-		"label": "default"
-	}
-},
 "com.badlogic.gdx.scenes.scene2d.ui.Touchpad$TouchpadStyle": {
 	"default": {
 		"background": "thinwindow",
