@@ -41,6 +41,7 @@ import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.keyword.KeywordsChange;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerController;
@@ -287,8 +288,9 @@ public final class GameActionUtil {
                 if (source.isForetoldByEffect() && source.isInZone(ZoneType.Exile) && activator.equals(source.getOwner())
                         && source.isForetold() && !source.isForetoldThisTurn() && !source.getManaCost().isNoCost()) {
                     // Its foretell cost is equal to its mana cost reduced by {2}.
-                    final SpellAbility foretold = sa.copy(activator);
-                    foretold.putParam("ReduceCost", "2");
+                    ManaCostBeingPaid toPay = new ManaCostBeingPaid(sa.getPayCosts().getCostMana().getMana());
+                    toPay.decreaseGenericMana(2);
+                    final SpellAbility foretold = sa.copyWithManaCostReplaced(activator, new Cost(toPay.toManaCost(), true));
                     foretold.setAlternativeCost(AlternativeCost.Foretold);
                     foretold.getRestrictions().setZone(ZoneType.Exile);
                     foretold.putParam("AfterDescription", "(Foretold)");
