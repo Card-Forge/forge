@@ -3324,7 +3324,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void updateMayPlay() {
         PlayerCollection result = new PlayerCollection();
         for (CardPlayOption o : mayPlay.values()) {
-            result.add(o.getPlayer());
+            if (o.grantsZonePermissions())
+                result.add(o.getPlayer());
         }
         getView().setMayPlayPlayers(result);
     }
