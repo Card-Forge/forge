@@ -2228,9 +2228,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         final StringBuilder sb = new StringBuilder();
         if (!mayPlay.isEmpty()) {
-            sb.append("May be played by: ");
-            sb.append(Lang.joinHomogenous(mayPlay.values()));
-            sb.append("\r\n");
+            Set<String> players = new HashSet<>();
+            for (CardPlayOption o : mayPlay.values()) {
+                if (getController() == o.getPlayer())
+                    players.add(o.getPlayer().getName());
+                else if (o.grantsZonePermissions())
+                    players.add(o.getPlayer().getName());
+            }
+            if (!players.isEmpty()) {
+                sb.append("May be played by: ");
+                sb.append(Lang.joinHomogenous(players));
+                sb.append("\r\n");
+            }
         }
 
         if (type.isInstant() || type.isSorcery()) {
@@ -3321,6 +3330,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         getView().setPlayerMayLook(result);
     }
 
+    public final void updateMayPlay() {
+        PlayerCollection result = new PlayerCollection();
+        for (CardPlayOption o : mayPlay.values()) {
+            if (o.grantsZonePermissions())
+                result.add(o.getPlayer());
+        }
+        getView().setMayPlayPlayers(result);
+    }
+
     public final CardPlayOption mayPlay(final StaticAbility sta) {
         if (sta == null) {
             return null;
@@ -3339,9 +3357,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void setMayPlay(final Player player, final boolean withoutManaCost, final Cost altManaCost, final boolean withFlash, final boolean grantZonePermissions, final StaticAbility sta) {
         this.mayPlay.put(sta, new CardPlayOption(player, sta, withoutManaCost, altManaCost, withFlash, grantZonePermissions));
+        this.updateMayPlay();
     }
     public final void removeMayPlay(final StaticAbility sta) {
         this.mayPlay.remove(sta);
+        this.updateMayPlay();
     }
 
     public void resetMayPlayTurn() {

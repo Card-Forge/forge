@@ -15,6 +15,7 @@ import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardZoom;
 import forge.card.CardZoom.ActivateHandler;
 import forge.game.card.CardView;
+import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.screens.match.MatchController;
@@ -365,6 +366,14 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         }
 
         public boolean selectCard(boolean selectEntireStack) {
+            if (!getCard().getController().equals(MatchController.instance.getCurrentPlayer()) && ZoneType.Hand.equals(getCard().getZone())) {
+                if (getCard().mayPlayerLook(MatchController.instance.getCurrentPlayer())) { // can see the card, check if can play...
+                    if (!getCard().getMayPlayPlayers(MatchController.instance.getCurrentPlayer()))
+                        return false;
+                } else {
+                    return false;
+                }
+            }
             if (MatchController.instance.getGameController().selectCard(getCard(), getOtherCardsToSelect(selectEntireStack), null)) {
                 Gdx.graphics.requestRendering();
                 return true;
