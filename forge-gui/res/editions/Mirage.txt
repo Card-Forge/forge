@@ -369,6 +369,6 @@ c_0_2_a_wall_defender
 w_1_1_pegasus_flying
 w_1_1_spirit_flying
 u_5_5_wall_defender
-g_0_1_insect
+b_0_1_insect
 r_1_1_goblin_scout_mountainwalk
 g_1_1_cat
