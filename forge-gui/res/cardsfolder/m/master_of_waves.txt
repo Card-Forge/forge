@@ -8,6 +8,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ u_1_0_elemental | TokenOwner$ You | LegacyImage$ u 1 0 elemental ths
 SVar:X:Count$Devotion.Blue
 SVar:PlayMain1:TRUE
+# TODO doesn't work because the YouCtrl part can't be checked
 SVar:AIEvaluationModifier:SVar$AIElemPTBonus/Plus.AIElemTokenGenBonus
 SVar:AIElemPTBonus:Count$Valid Elemental.YouCtrl/Times.25
 SVar:AIElemTokenGenBonus:Count$Valid Elemental.token+YouCtrl/Times.15
