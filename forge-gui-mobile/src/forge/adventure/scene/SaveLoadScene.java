@@ -253,6 +253,8 @@ public class SaveLoadScene extends UIScene {
                     }
                 })).align(Align.right);
             }
+            //makes dialog hidden immediately when you open saveload scene..
+            dialog.getColor().a = 0;
             previewImage = ui.findActor("preview");
             previewBorder = ui.findActor("preview_border");
             header = Controls.newLabel(Forge.getLocalizer().getMessage("lblSave"));

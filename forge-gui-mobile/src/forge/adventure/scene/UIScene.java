@@ -78,7 +78,6 @@ public class UIScene extends Scene {
 
     @Override
     public void enter() {
-        Gdx.input.setInputProcessor(stage); //Start taking input from the ui
         if (this instanceof RewardScene) { //backdrop for rewardscene - Shop
             if (RewardScene.Type.Shop.equals(((RewardScene)this).type)) {
                 if (market == null) {
@@ -91,6 +90,7 @@ public class UIScene extends Scene {
                     }
                 }
                 screenImage.setDrawable(new TextureRegionDrawable(market));
+                Gdx.input.setInputProcessor(stage); //Start taking input from the ui
                 super.enter();
                 return;
             }
@@ -106,6 +106,7 @@ public class UIScene extends Scene {
                 }
             }
             screenImage.setDrawable(new TextureRegionDrawable(tavern));
+            Gdx.input.setInputProcessor(stage); //Start taking input from the ui
             super.enter();
             return;
         }
@@ -124,6 +125,7 @@ public class UIScene extends Scene {
             pixmap.dispose();
             potPixmap.dispose();
         }
+        Gdx.input.setInputProcessor(stage); //Start taking input from the ui
         super.enter();
     }
 
