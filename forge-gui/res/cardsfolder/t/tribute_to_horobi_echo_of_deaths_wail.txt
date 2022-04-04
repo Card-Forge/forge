@@ -19,7 +19,7 @@ Types:Enchantment Creature Spirit
 PT:3/3
 K:Flying
 K:Haste
-T:Mode$ ChangesZone | Destination$ Battlefield | Execute$ TrigGainControl | TriggerDescription$ When CARDNAME enters the battlefield, gain control of all Rat tokens.
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainControl | TriggerDescription$ When CARDNAME enters the battlefield, gain control of all Rat tokens.
 SVar:TrigGainControl:DB$ GainControl | AllValid$ Rat.token | NewController$ You
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, you may sacrifice another creature. If you do, draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ Sac<1/Creature.Other/another creature> | NumCards$ 1
