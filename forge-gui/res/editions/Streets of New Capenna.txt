@@ -9,7 +9,12 @@ ScryfallCode=SNC
 
 [cards]
 170 R Brokers Ascendancy @Dallas Williams
+173 U Cabaretti Charm @Steve Argyle
+193 M Jetmir, Nexus of Revels @Ryan Pancoast
+197 M Lord Xander, the Collector @Martina Fackova
 199 U Maestros Charm @Steve Argyle
+208 U Obscura Charm @Steve Argyle
+213 M Raffine, Scheming Seer @Johannes Voss
 250 R Jetmir's Garden @Kasia 'Kafis' Zielińska
 254 R Raffine's Tower @Sam White
 257 R Spara's Headquarters @Kieran Yanner
@@ -31,7 +36,9 @@ ScryfallCode=SNC
 294 R Xander's Lounge @Dominik Mayer
 295 R Ziatora's Proving Ground @Dominik Mayer
 297 R Brokers Ascendancy @Shawn Pagels
+300 U Cabaretti Charm @Jérémie Solomon
 317 U Maestros Charm @Jérémie Solomon
+323 U Obscura Charm @Jérémie Solomon
 351 R Jetmir's Garden @BEMOCS
 353 R Raffine's Tower @Elektrodeko
 355 R Spara's Headquarters @W.Flemming
