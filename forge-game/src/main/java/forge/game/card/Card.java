@@ -2228,9 +2228,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         final StringBuilder sb = new StringBuilder();
         if (!mayPlay.isEmpty()) {
-            sb.append("May be played by: ");
-            sb.append(Lang.joinHomogenous(mayPlay.values()));
-            sb.append("\r\n");
+            Set<String> players = new HashSet<>();
+            for (CardPlayOption o : mayPlay.values()) {
+                if (getController() == o.getPlayer())
+                    players.add(o.getPlayer().getName());
+                else if (o.grantsZonePermissions())
+                    players.add(o.getPlayer().getName());
+            }
+            if (!players.isEmpty()) {
+                sb.append("May be played by: ");
+                sb.append(Lang.joinHomogenous(players));
+                sb.append("\r\n");
+            }
         }
 
         if (type.isInstant() || type.isSorcery()) {
