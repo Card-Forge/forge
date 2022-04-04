@@ -41,7 +41,6 @@ import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.keyword.KeywordsChange;
-import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerController;
@@ -288,9 +287,9 @@ public final class GameActionUtil {
                 if (source.isForetoldByEffect() && source.isInZone(ZoneType.Exile) && activator.equals(source.getOwner())
                         && source.isForetold() && !source.isForetoldThisTurn() && !source.getManaCost().isNoCost()) {
                     // Its foretell cost is equal to its mana cost reduced by {2}.
-                    ManaCostBeingPaid toPay = new ManaCostBeingPaid(sa.getPayCosts().getCostMana().getMana());
-                    toPay.decreaseGenericMana(2);
-                    final SpellAbility foretold = sa.copyWithManaCostReplaced(activator, new Cost(toPay.toManaCost(), true));
+                    final SpellAbility foretold = sa.copy(activator);
+                    Integer reduced = Math.min(2, sa.getPayCosts().getCostMana().getMana().getGenericCost());
+                    foretold.putParam("ReduceCost", reduced.toString());
                     foretold.setAlternativeCost(AlternativeCost.Foretold);
                     foretold.getRestrictions().setZone(ZoneType.Exile);
                     foretold.putParam("AfterDescription", "(Foretold)");
@@ -462,6 +461,9 @@ public final class GameActionUtil {
             return sa;
         }
         final SpellAbility result = sa.copy();
+        if (sa.hasParam("ReduceCost")) {
+            result.putParam("ReduceCost", sa.getParam("ReduceCost"));
+        }
         for (OptionalCostValue v : list) {
             result.getPayCosts().add(v.getCost());
             result.addOptionalCost(v.getType());
