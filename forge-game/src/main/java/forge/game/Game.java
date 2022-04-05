@@ -1093,6 +1093,8 @@ public class Game {
 
     public void onCleanupPhase() {
         clearCounterAddedThisTurn();
+        // Reset the attackers this turn/last turn
+        resetPlayersAttackedOnNextTurn();
         // some cards need this info updated even after a player lost, so don't skip them
         for (Player player : getRegisteredPlayers()) {
             player.onCleanupPhase();
