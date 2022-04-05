@@ -170,13 +170,14 @@ public class CharmEffect extends SpellAbilityEffect {
         Card source = sa.getHostCard();
         Player activator = sa.getActivatingPlayer();
 
-        final int num = Math.min(AbilityUtils.calculateAmount(source, sa.getParamOrDefault("CharmNum", "1"), sa), choices.size());
-        final int min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParamOrDefault("MinCharmNum", "1"), sa) : num;
+        int num = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("CharmNum", "1"), sa);
+        final int min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParam("MinCharmNum"), sa) : num;
 
         // if the amount of choices is smaller than min then they can't be chosen
         if (min > choices.size()) {
             return false;
         }
+        num = Math.min(num, choices.size());
 
         boolean isOptional = sa.hasParam("Optional");
         if (isOptional && !activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeCharm", CardTranslation.getTranslatedName(source.getName())))) {
