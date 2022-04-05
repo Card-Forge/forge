@@ -167,8 +167,8 @@ public class CharmEffect extends SpellAbilityEffect {
             return true;
         }
 
-        Card source = sa.getHostCard();
-        Player activator = sa.getActivatingPlayer();
+        final Card source = sa.getHostCard();
+        final Player activator = sa.getActivatingPlayer();
 
         int num = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("CharmNum", "1"), sa);
         final int min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParam("MinCharmNum"), sa) : num;
