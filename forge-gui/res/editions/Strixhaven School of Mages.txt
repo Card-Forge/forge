@@ -410,6 +410,8 @@ ScryfallCode=STX
 
 [rebalanced]
 A41 U A-Divide by Zero @Liiga Smilshkalne
+A56 U A-Symmetry Sage @Jehan Choo
+A258 U A-Spell Satchel @YW Tang
 
 [lesson]
 2 Environmental Sciences

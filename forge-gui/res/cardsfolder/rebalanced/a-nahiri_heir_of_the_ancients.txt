@@ -1,0 +1,15 @@
+Name:A-Nahiri, Heir of the Ancients
+ManaCost:2 R W
+Types:Legendary Planeswalker Nahiri
+Loyalty:4
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ w_1_1_kor_warrior | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBChooseToken | SpellDescription$ Create a 1/1 white Kor Warrior creature token. You may attach an Equipment you control to it.
+SVar:DBChooseToken:DB$ ChooseCard | DefinedCards$ Remembered | Mandatory$ True | ChoiceTitle$ Choose a token | SubAbility$ DBAttach | StackDescription$ None
+SVar:DBAttach:DB$ Attach | Optional$ True | Choices$ Equipment.YouCtrl | ChoiceTitle$ Choose an Equipment you control | Defined$ ChosenCard | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+A:AB$ DigMultiple | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | DigNum$ 6 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Card.Warrior,Card.Equipment | RestRandomOrder$ True | SpellDescription$ Look at the top six cards of your library. You may reveal a Warrior card and/or Equipment card from among them and put them into your hand. Put the rest on the bottom of your library in a random order.
+A:AB$ DealDamage | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature or planeswalker equal to twice the number of Warriors and Equipment you control.
+SVar:X:Count$Valid Warrior.YouCtrl,Equipment.YouCtrl/Twice
+DeckNeeds:Type$Equipment
+DeckHints:Type$Warrior
+DeckHas:Ability$Token
+Oracle:[+1]: Create a 1/1 white Kor Warrior creature token. You may attach an Equipment you control to it.\n[-2]: Look at the top six cards of your library. You may reveal a Warrior card and/or Equipment card from among them and put them into your hand. Put the rest on the bottom of your library in a random order.\n[-3]: Nahiri, Heir of the Ancients deals damage to target creature or planeswalker equal to twice the number of Warriors and Equipment you control.
