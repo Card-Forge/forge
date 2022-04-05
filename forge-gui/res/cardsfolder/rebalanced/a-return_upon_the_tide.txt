@@ -6,4 +6,4 @@ SVar:DBToken:DB$ Token | TokenAmount$ 3 | TokenScript$ g_1_1_elf_warrior | Legac
 SVar:X:Targeted$Valid Elf
 K:Foretell:3 B
 DeckHas:Ability$Token
-Oracle:Return target creature card from your graveyard to the battlefield. If it's an Elf, create three 1/1 green Elf Warrior creature tokens.\nForetell {3}{B} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)
+Oracle:Return target creature card from your graveyard to the battlefield. If it's an Elf, create three 1/1 green Elf Warrior creature tokens.\nForetell {3}{B}
