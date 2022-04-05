@@ -427,10 +427,6 @@ public class PhaseHandler implements java.io.Serializable {
                     for (Player player : game.getPlayers()) {
                         player.getController().autoPassCancel(); // autopass won't wrap to next turn
                     }
-                    // TODO can probably be removed now that onCleanupPhase is done for all Registered
-                    for (Player player : game.getLostPlayers()) {
-                        player.clearAssignedDamage();
-                    }
 
                     nUpkeepsThisTurn = 0;
                     nMain2sThisTurn = 0;
