@@ -1,11 +1,14 @@
 package forge.adventure.util;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
@@ -21,11 +24,17 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import forge.Forge;
+import forge.Graphics;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
 import forge.assets.FSkin;
 import forge.assets.ImageCache;
+import forge.card.CardImageRenderer;
+import forge.card.CardRenderer;
+import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.gui.GuiBase;
+import forge.item.PaperCard;
 import forge.util.ImageFetcher;
 
 import static forge.adventure.util.Paths.ITEMS_ATLAS;
@@ -48,6 +57,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     boolean flipOnClick;
     private boolean hover;
 
+    private FrameBuffer frameBuffer;
     static final ImageFetcher fetcher = GuiBase.getInterface().getImageFetcher();
     Image toolTipImage;
 
@@ -55,6 +65,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     public void dispose() {
         if (needsToBeDisposed)
             image.dispose();
+            if (frameBuffer != null) frameBuffer.dispose();
     }
 
     public Reward getReward() {
@@ -66,6 +77,24 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         setCardImage(ImageCache.getImage(reward.getCard().getImageKey(false), false));
     }
 
+    public Texture renderPlaceholder(PaperCard card){
+        Gdx.gl.glDisable(GL20.GL_SCISSOR_TEST);
+        Graphics G = new Graphics();
+        Matrix4 m  = new Matrix4();
+        if (frameBuffer == null)
+            this.frameBuffer = new FrameBuffer(Pixmap.Format.RGB888, 488, 680, false);
+        frameBuffer.begin();
+        m.setToOrtho2D(0,680,488, -680); //So it renders flipped.
+        G.begin(488, 680);
+        G.setProjectionMatrix(m);
+        CardImageRenderer.drawCardImage(G, CardView.getCardForUi(card), false, 0, 0, 488, 680, CardRenderer.CardStackPosition.Top, Forge.enableUIMask.equals("Art"), true);
+        G.end();
+        G.dispose();
+        setCardImage(frameBuffer.getColorBufferTexture());
+        frameBuffer.end();
+        Gdx.gl.glEnable(GL20.GL_SCISSOR_TEST);
+        return frameBuffer.getColorBufferTexture();
+    }
     public RewardActor(Reward reward, boolean flippable) {
         this.flipOnClick = flippable;
         this.reward = reward;
@@ -79,7 +108,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 } else {
 
                     if (!ImageCache.imageKeyFileExists(reward.getCard().getImageKey(false))) {
-                        fetcher.fetchImage(reward.getCard().getImageKey(false), this);
+                        //Cannot find an image file, set up a rendered card until (if) a file is downloaded.
+                        PaperCard C = reward.getCard();
+                        Texture T = renderPlaceholder(C);
+                        setCardImage(T);
+                        fetcher.fetchImage(C.getImageKey(false), this);
                     }
                 }
                 break;

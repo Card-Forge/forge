@@ -200,6 +200,7 @@ public class RewardScene extends UIScene {
 
         float spacing = 2;
         int i = 0;
+        Forge.getGraphics().startClip(); //This allows to draw placeholder cards.
         for (Reward reward : new Array.ArrayIterator<>(newRewards)) {
             boolean skipCard = false;
             if (type == Type.Shop) {
@@ -238,6 +239,7 @@ public class RewardScene extends UIScene {
             i++;
         }
         updateBuyButtons();
+        Forge.getGraphics().endClip();
     }
 
     private void updateBuyButtons() {
