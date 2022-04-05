@@ -379,9 +379,6 @@ public class PhaseHandler implements java.io.Serializable {
                         playerTurn.getController().resetAtEndOfTurn();
                     }
 
-                    // Reset the attackers this turn/last turn
-                    game.resetPlayersAttackedOnNextTurn();
-
                     game.getEndOfTurn().executeAt();
                     break;
 
