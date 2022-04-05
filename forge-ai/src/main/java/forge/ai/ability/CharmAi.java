@@ -34,7 +34,7 @@ public class CharmAi extends SpellAbilityAi {
             num = min = choices.size();
         } else {
             num = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("CharmNum", "1"), sa);
-            min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParamOrDefault("MinCharmNum", "1"), sa) : num;
+            min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParam("MinCharmNum"), sa) : num;
         }
 
         boolean timingRight = sa.isTrigger(); //is there a reason to play the charm now?
