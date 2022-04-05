@@ -1,0 +1,11 @@
+Name:A-Kargan Intimidator
+ManaCost:1 R
+Types:Creature Human Warrior
+PT:3/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Warrior | ValidBlocker$ Creature.Coward | Description$ Cowards can't block Warriors.
+A:AB$ Charm | Cost$ 1 | Choices$ Pump,Coward | ChoiceRestriction$ ThisTurn | CharmNum$ 1
+SVar:Pump:DB$ Pump | ValidTgts$ Warrior | TgtPrompt$ Select target Warrior | NumAtt$ 1 | NumDef$ 1 | KW$ Trample | SpellDescription$ Target Warrior gets +1/+1 and gains trample until end of turn.
+SVar:Coward:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Types$ Coward | RemoveCreatureTypes$ True | SpellDescription$ Target creature becomes a Coward until end of turn.
+DeckHints:Type$Warrior
+SVar:PlayMain1:TRUE
+Oracle:Cowards can't block Warriors.\n{1}: Choose one that hasn't been chosen this turn —\n• Target Warrior gets +1/+1 and gains trample until end of turn.\n• Target creature becomes a Coward until end of turn.

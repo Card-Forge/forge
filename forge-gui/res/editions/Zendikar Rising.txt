@@ -419,8 +419,13 @@ ScryfallCode=ZNR
 
 [rebalanced]
 A24 R A-Luminarch Aspirant @Mads Ahm
+A141 U A-Goma Fada Vanguard @Sean Sevestre
+A145 R A-Kargan Intimidator @Kieran Yanner
+A224 U A-Kargan Warleader @Colin Boyer
+A230 M A-Nahiri, Heir of the Ancients @Anna Steinbauer
 A232 M A-Omnath, Locus of Creation @Chris Rahn
 A234 R A-Phylath, World Sculptor @Victor Adame Minguez
+A257 U A-Base Camp @Jokubas Uogintas
 
 [ModalDoubleFaceCards]
 1 Agadeem's Awakening|ZNR
