@@ -27,16 +27,12 @@ import forge.assets.AssetsDownloader;
 import forge.assets.FSkin;
 import forge.assets.FSkinFont;
 import forge.assets.ImageCache;
-import forge.card.CardImageRenderer;
-import forge.card.CardRenderer;
 import forge.error.ExceptionHandler;
-import forge.game.card.CardView;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.error.BugReporter;
 import forge.interfaces.IDeviceAdapter;
-import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -388,11 +384,6 @@ public class Forge implements ApplicationListener {
                                 FThreads.invokeInEdtLater(new Runnable() {
                                     @Override
                                     public void run() {
-                                        //Force CardImageRenderer to render a card. This prevents a "fail on first run" scenario.
-                                        PaperCard dummy = StaticData.instance().fetchCard("Black Lotus", "LEB", "233");
-                                        graphics.getBatch().begin(); //Will throw an exception without this.
-                                        CardImageRenderer.drawCardImage(graphics, CardView.getCardForUi(dummy), false, 0, 0, 100, 100, CardRenderer.CardStackPosition.Top, false, false);
-
                                         //selection
                                         splashScreen.setShowModeSelector(true);
                                         //start background music
