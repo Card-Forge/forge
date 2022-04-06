@@ -226,7 +226,6 @@ public class StaticData {
     }
     public void attemptToLoadCard(String cardName, String setCode) {
         CardRules rules = cardReader.attemptToLoadCard(cardName);
-        CardRules customRules = null;
         if (rules != null) {
             if (rules.isVariant()) {
                 variantCards.loadCard(cardName, setCode, rules);
