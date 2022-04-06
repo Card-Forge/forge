@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
@@ -21,11 +22,16 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import forge.Forge;
+import forge.Graphics;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
 import forge.assets.FSkin;
 import forge.assets.ImageCache;
+import forge.card.CardImageRenderer;
+import forge.card.CardRenderer;
+import forge.game.card.CardView;
 import forge.gui.GuiBase;
+import forge.item.PaperCard;
 import forge.util.ImageFetcher;
 
 import static forge.adventure.util.Paths.ITEMS_ATLAS;
@@ -39,6 +45,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     Reward reward;
     ShaderProgram shaderGrayscale = Forge.getGraphics().getShaderGrayscale();
 
+    final int preview_w = 488; //Width and height for generated images.
+    final int preview_h = 680;
+
     static TextureRegion backTexture;
     Texture image;
     boolean needsToBeDisposed;
@@ -48,6 +57,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     boolean flipOnClick;
     private boolean hover;
 
+    public static int renderedCount = 0; //Counter for cards that require rendering a preview.
     static final ImageFetcher fetcher = GuiBase.getInterface().getImageFetcher();
     Image toolTipImage;
 
@@ -66,6 +76,26 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         setCardImage(ImageCache.getImage(reward.getCard().getImageKey(false), false));
     }
 
+    public Texture renderPlaceholder(Graphics G, PaperCard card){ //Use CardImageRenderer to output a Texture.
+        Matrix4 m  = new Matrix4();
+        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGB888, preview_w, preview_h, false);
+        frameBuffer.begin();
+        m.setToOrtho2D(0,preview_h, preview_w, -preview_h); //So it renders flipped directly.
+
+        G.begin(preview_w, preview_h);
+        G.setProjectionMatrix(m);
+        G.startClip();
+        CardImageRenderer.drawCardImage(G, CardView.getCardForUi(card), false, 0, 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.enableUIMask.equals("Art"), true);
+        G.end();
+        G.endClip();
+        //Create a new Pixmap to Texture with mipmaps, otherwise will render as full black.
+        Texture result = new Texture(Pixmap.createFromFrameBuffer(0, 0, preview_w, preview_h), true);
+        frameBuffer.end();
+        G.dispose();
+        frameBuffer.dispose();
+        return result;
+    }
+
     public RewardActor(Reward reward, boolean flippable) {
         this.flipOnClick = flippable;
         this.reward = reward;
@@ -77,8 +107,18 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 if (ImageCache.imageKeyFileExists(reward.getCard().getImageKey(false))) {
                     setCardImage(ImageCache.getImage(reward.getCard().getImageKey(false), false));
                 } else {
-
                     if (!ImageCache.imageKeyFileExists(reward.getCard().getImageKey(false))) {
+                        //Cannot find an image file, set up a rendered card until (if) a file is downloaded.
+                        Graphics G = new Graphics();
+                        if(renderedCount++ == 0) {
+                            //The first time we find a card that has no art, render one out of view to fully initialize CardImageRenderer.
+                            G.begin(preview_w, preview_h);
+                            CardImageRenderer.drawCardImage(G, CardView.getCardForUi(reward.getCard()), false, -(preview_w + 20), 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.enableUIMask.equals("Art"), true);
+                            G.end();
+                        }
+                        Texture T = renderPlaceholder(G, reward.getCard()); //Now we can render the card.
+                        setCardImage(T);
+                        //Set the fetcher regardless. It'll replace the preview once it lands.
                         fetcher.fetchImage(reward.getCard().getImageKey(false), this);
                     }
                 }
