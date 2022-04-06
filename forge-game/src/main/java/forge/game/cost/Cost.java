@@ -890,9 +890,9 @@ public class Cost implements Serializable {
                 } else {
                     costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), r));
                 }
-            } else if (part instanceof CostDiscard || part instanceof CostTapType ||
+            } else if (part instanceof CostDiscard || part instanceof CostDraw ||
                     part instanceof CostAddMana || part instanceof CostPayLife
-                    || part instanceof CostPutCounter) {
+                    || part instanceof CostPutCounter || part instanceof CostTapType) {
                 boolean alreadyAdded = false;
                 for (final CostPart other : costParts) {
                     if ((other.getClass().equals(part.getClass()) || (part instanceof CostPutCounter && ((CostPutCounter)part).getCounter().is(CounterEnumType.LOYALTY))) &&
@@ -916,6 +916,8 @@ public class Cost implements Serializable {
                             }
                         } else if (part instanceof CostDiscard) {
                             costParts.add(new CostDiscard(amount, part.getType(), part.getTypeDescription()));
+                        } else if (part instanceof CostDraw) {
+                            costParts.add(new CostDraw(amount, part.getType()));
                         } else if (part instanceof CostTapType) {
                             CostTapType tappart = (CostTapType)part;
                             costParts.add(new CostTapType(amount, part.getType(), part.getTypeDescription(), !tappart.canTapSource));
