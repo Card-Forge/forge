@@ -104,7 +104,6 @@ public class MillEffect extends SpellAbilityEffect {
         }
 
         sb.append(Lang.nounWithNumeralExceptOne(numCards, "card")).append(".");
-        sb.append(numCards == 1 ? "a card" : (Lang.getNumeral(numCards) + " cards")).append(".");
 
         return sb.toString();
     }
