@@ -288,7 +288,8 @@ public final class GameActionUtil {
                         && source.isForetold() && !source.isForetoldThisTurn() && !source.getManaCost().isNoCost()) {
                     // Its foretell cost is equal to its mana cost reduced by {2}.
                     final SpellAbility foretold = sa.copy(activator);
-                    foretold.putParam("ReduceCost", "2");
+                    Integer reduced = Math.min(2, sa.getPayCosts().getCostMana().getMana().getGenericCost());
+                    foretold.putParam("ReduceCost", reduced.toString());
                     foretold.setAlternativeCost(AlternativeCost.Foretold);
                     foretold.getRestrictions().setZone(ZoneType.Exile);
                     foretold.putParam("AfterDescription", "(Foretold)");
@@ -460,6 +461,9 @@ public final class GameActionUtil {
             return sa;
         }
         final SpellAbility result = sa.copy();
+        if (sa.hasParam("ReduceCost")) {
+            result.putParam("ReduceCost", sa.getParam("ReduceCost"));
+        }
         for (OptionalCostValue v : list) {
             result.getPayCosts().add(v.getCost());
             result.addOptionalCost(v.getType());
