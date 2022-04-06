@@ -900,9 +900,9 @@ public class Cost implements Serializable {
                             StringUtils.isNumeric(part.getAmount()) &&
                             StringUtils.isNumeric(other.getAmount())) {
                         String amount = String.valueOf(Integer.parseInt(part.getAmount()) + Integer.parseInt(other.getAmount()));
-                        if (part instanceof CostPutCounter) { // path for Carth
-                            if (other instanceof CostPutCounter && ((CostPutCounter)other).getCounter().is(CounterEnumType.LOYALTY)) {
-                                costParts.add(new CostPutCounter(amount, CounterType.get(CounterEnumType.LOYALTY), part.getType(), part.getTypeDescription()));
+                        if (part instanceof CostPutCounter) { // path for Carth & Cumulative Upkeep
+                            if (other instanceof CostPutCounter && ((CostPutCounter)other).getCounter().equals(((CostPutCounter) part).getCounter())) {
+                                costParts.add(new CostPutCounter(amount, ((CostPutCounter) part).getCounter(), part.getType(), part.getTypeDescription()));
                             } else if (other instanceof CostRemoveCounter && ((CostRemoveCounter)other).counter.is(CounterEnumType.LOYALTY)) {
                                 Integer counters = Integer.parseInt(other.getAmount()) - Integer.parseInt(part.getAmount());
                                 // the cost can turn positive if multiple Carth raise it
