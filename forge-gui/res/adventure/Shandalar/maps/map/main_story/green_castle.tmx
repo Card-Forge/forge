@@ -43,7 +43,7 @@
   </object>
   <object id="52" template="../../obj/enemy.tx" x="200" y="151" width="32" height="32">
    <properties>
-    <property name="enemy" value="Lathiss"/>
+    <property name="enemy" value="Lathliss"/>
    </properties>
   </object>
  </objectgroup>
