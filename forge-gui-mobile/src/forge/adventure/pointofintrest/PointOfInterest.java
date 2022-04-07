@@ -28,7 +28,7 @@ public class PointOfInterest implements SaveFileContent {
 
         oldMapId="";
         Array<Sprite> textureAtlas = Config.instance().getAtlas(this.data.spriteAtlas).createSprites(this.data.sprite);
-        sprite = textureAtlas.get(spriteIndex % textureAtlas.size);
+        sprite = textureAtlas.get(spriteIndex);
     }
 
     @Override
