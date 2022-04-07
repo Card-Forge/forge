@@ -232,7 +232,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         G.drawImage(icon, 2, 2, icon_w, icon_h); //Draw the item's icon.
         G.drawText(item.name, FSkinFont.get(24), Color.WHITE, icon_w + 2, 2, preview_w - (icon_w + 2), icon_h, false, 1, true); //Item name.
         G.drawRectLines(1, Color.WHITE, 6, icon_h + 2, preview_w - 12, preview_h - (icon_h + 6)); //Description border.
-        G.drawText(item.getDescription(), FSkinFont.get(18), Color.WHITE, 10, icon_h + 8, preview_w - 10, preview_h - 4, false, Align.left, false); //Description.
+        G.drawText(item.getDescription(), FSkinFont.get(18), Color.WHITE, 10, icon_h + 8, preview_w - 10, preview_h - 4, true, Align.left, false); //Description.
         G.end();
         G.endClip();
         Texture result = new Texture(Pixmap.createFromFrameBuffer(0, 0, preview_w, preview_h), Forge.isTextureFilteringEnabled());

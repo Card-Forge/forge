@@ -112,9 +112,7 @@
     "name": "Steel Shield",
     "equipmentSlot": "Right",
     "startBattleWithCard" : ["w_0_3_wall_defender"],
-    "iconName" :"SteelShield"  ,  
-        "opponent":{
-    "startBattleWithCard" : ["c_0_1_a_goblin_construct_noblock_ping","c_0_1_a_goblin_construct_noblock_ping","c_0_1_a_goblin_construct_noblock_ping"]},
+    "iconName" :"SteelShield",
     "cost" :500
   }
 ,
