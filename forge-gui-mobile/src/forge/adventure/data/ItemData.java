@@ -112,7 +112,7 @@ public class ItemData {
         if(data.changeStartCards != 0)
             description+="Starting hand: " + data.changeStartCards + "\n";
         if(data.opponent != null) {
-            String oppEffect=getDescription(data.opponent);
+            String oppEffect=data.opponent.getDescription();
             if(oppEffect != "") {
                 description += "Gives Opponent:\n";
                 description += oppEffect;
