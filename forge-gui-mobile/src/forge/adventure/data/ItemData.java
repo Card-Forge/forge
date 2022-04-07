@@ -96,23 +96,19 @@ public class ItemData {
     }
 
     public String getDescription() {
-        return getDescription(this);
-    }
-
-    public String getDescription(ItemData data) {
         String description = "";
-        if(data.equipmentSlot != null && !data.equipmentSlot.equals(""))
-            description += "Slot: " + data.equipmentSlot + "\n";
-        if(data.lifeModifier != 0)
-            description += "Life: " + ((data.lifeModifier > 0) ? "+" : "") + data.lifeModifier + "\n";
-        if(data.startBattleWithCard != null && data.startBattleWithCard.length != 0)
-            description+="Cards on battlefield: \n" + data.cardNames() + "\n";
-        if(data.moveSpeed!=0 && data.moveSpeed != 1)
-            description+="Movement speed: " + ((data.lifeModifier > 0) ? "+" : "") + Math.round((data.moveSpeed-1.f)*100) + "%\n";
-        if(data.changeStartCards != 0)
-            description+="Starting hand: " + data.changeStartCards + "\n";
-        if(data.opponent != null) {
-            String oppEffect=data.opponent.getDescription();
+        if(this.equipmentSlot != null && !this.equipmentSlot.equals(""))
+            description += "Slot: " + this.equipmentSlot + "\n";
+        if(this.lifeModifier != 0)
+            description += "Life: " + ((this.lifeModifier > 0) ? "+" : "") + this.lifeModifier + "\n";
+        if(this.startBattleWithCard != null && this.startBattleWithCard.length != 0)
+            description+="Cards on battlefield: \n" + this.cardNames() + "\n";
+        if(this.moveSpeed!=0 && this.moveSpeed != 1)
+            description+="Movement speed: " + ((this.lifeModifier > 0) ? "+" : "") + Math.round((this.moveSpeed-1.f)*100) + "%\n";
+        if(this.changeStartCards != 0)
+            description+="Starting hand: " + this.changeStartCards + "\n";
+        if(this.opponent != null) {
+            String oppEffect=this.opponent.getDescription();
             if(oppEffect != "") {
                 description += "Gives Opponent:\n";
                 description += oppEffect;
