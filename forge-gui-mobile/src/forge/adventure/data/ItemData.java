@@ -94,4 +94,30 @@ public class ItemData {
         }
         return ret;
     }
+
+    public String getDescription() {
+        return getDescription(this);
+    }
+
+    public String getDescription(ItemData data) {
+        String description = "";
+        if(data.equipmentSlot != null && !data.equipmentSlot.equals(""))
+            description += "Slot: " + data.equipmentSlot + "\n";
+        if(data.lifeModifier != 0)
+            description += "Life: " + ((data.lifeModifier > 0) ? "+" : "") + data.lifeModifier + "\n";
+        if(data.startBattleWithCard != null && data.startBattleWithCard.length != 0)
+            description+="Cards on battlefield: \n" + data.cardNames() + "\n";
+        if(data.moveSpeed!=0 && data.moveSpeed != 1)
+            description+="Movement speed: " + ((data.lifeModifier > 0) ? "+" : "") + Math.round((data.moveSpeed-1.f)*100) + "%\n";
+        if(data.changeStartCards != 0)
+            description+="Starting hand: " + data.changeStartCards + "\n";
+        if(data.opponent != null) {
+            String oppEffect=getDescription(data.opponent);
+            if(oppEffect != "") {
+                description += "Gives Opponent:\n";
+                description += oppEffect;
+            }
+        }
+        return description;
+    }
 }

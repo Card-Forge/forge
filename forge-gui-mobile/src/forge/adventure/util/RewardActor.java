@@ -1,5 +1,6 @@
 package forge.adventure.util;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -23,9 +24,11 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import forge.Forge;
 import forge.Graphics;
+import forge.adventure.data.ItemData;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
 import forge.assets.FSkin;
+import forge.assets.FSkinFont;
 import forge.assets.ImageCache;
 import forge.card.CardImageRenderer;
 import forge.card.CardRenderer;
@@ -50,6 +53,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     static TextureRegion backTexture;
     Texture image;
+    Texture generatedTooltip = null; //Storage for a generated tooltip. To dispose of on exit.
     boolean needsToBeDisposed;
     float flipProcess = 0;
     boolean clicked = false;
@@ -65,6 +69,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     public void dispose() {
         if (needsToBeDisposed)
             image.dispose();
+          if (generatedTooltip != null)
+             generatedTooltip.dispose();
     }
 
     public Reward getReward() {
@@ -74,26 +80,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     @Override
     public void onImageFetched() {
         setCardImage(ImageCache.getImage(reward.getCard().getImageKey(false), false));
-    }
-
-    public Texture renderPlaceholder(Graphics G, PaperCard card){ //Use CardImageRenderer to output a Texture.
-        Matrix4 m  = new Matrix4();
-        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGB888, preview_w, preview_h, false);
-        frameBuffer.begin();
-        m.setToOrtho2D(0,preview_h, preview_w, -preview_h); //So it renders flipped directly.
-
-        G.begin(preview_w, preview_h);
-        G.setProjectionMatrix(m);
-        G.startClip();
-        CardImageRenderer.drawCardImage(G, CardView.getCardForUi(card), false, 0, 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.enableUIMask.equals("Art"), true);
-        G.end();
-        G.endClip();
-        //Create a new Pixmap to Texture with mipmaps, otherwise will render as full black.
-        Texture result = new Texture(Pixmap.createFromFrameBuffer(0, 0, preview_w, preview_h), true);
-        frameBuffer.end();
-        G.dispose();
-        frameBuffer.dispose();
-        return result;
     }
 
     public RewardActor(Reward reward, boolean flippable) {
@@ -131,9 +117,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
                 DrawOnPixmap.draw(drawingMap, backSprite);
                 Sprite item = reward.getItem().sprite();
-                DrawOnPixmap.draw(drawingMap, (int) ((backSprite.getWidth() / 2f) - item.getWidth() / 2f), (int) ((backSprite.getHeight() / 4f) * 1.7f), item);
-                DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getItem().name), 0, (int) ((backSprite.getHeight() / 8f) * 1f), backSprite.getWidth(), false);
 
+                DrawOnPixmap.draw(drawingMap, (int) ((backSprite.getWidth() / 2f) - item.getWidth() / 2f), (int) ((backSprite.getHeight() / 4f) * 1.7f), item);
+                //DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getItem().name), 0, (int) ((backSprite.getHeight() / 8f) * 1f), backSprite.getWidth(), false);
+
+                setItemTooltips(item);
                 image=new Texture(drawingMap);
                 drawingMap.dispose();
                 needsToBeDisposed = true;
@@ -205,6 +193,65 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             else
                 addListener(tooltip);
         }
+    }
+
+    private Texture renderPlaceholder(Graphics G, PaperCard card){ //Use CardImageRenderer to output a Texture.
+        Matrix4 m  = new Matrix4();
+        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGB888, preview_w, preview_h, false);
+        frameBuffer.begin();
+        m.setToOrtho2D(0,preview_h, preview_w, -preview_h); //So it renders flipped directly.
+
+        G.begin(preview_w, preview_h);
+        G.setProjectionMatrix(m);
+        G.startClip();
+        CardImageRenderer.drawCardImage(G, CardView.getCardForUi(card), false, 0, 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.enableUIMask.equals("Art"), true);
+        G.end();
+        G.endClip();
+        //Rendering ends here. Create a new Pixmap to Texture with mipmaps, otherwise will render as full black.
+        Texture result = new Texture(Pixmap.createFromFrameBuffer(0, 0, preview_w, preview_h), Forge.isTextureFilteringEnabled());
+        frameBuffer.end();
+        G.dispose();
+        frameBuffer.dispose();
+        return result;
+    }
+
+    private void setItemTooltips(Sprite icon) {
+        float icon_w = 64f; float icon_h = 64f; //Sizes for the embedded icon. Could be made smaller on smaller resolutions.
+        Matrix4 m  = new Matrix4();
+        ItemData item = getReward().getItem();
+        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, preview_w, preview_h, false);
+        frameBuffer.begin();
+        m.setToOrtho2D(0,preview_h, preview_w, -preview_h); //So it renders flipped directly.
+        Graphics G = new Graphics();
+        G.begin(preview_w, preview_h);
+        G.setProjectionMatrix(m);
+        G.startClip();
+        //Draw item description panel.
+        G.fillRect(new Color(0f, 0f, 0f, 0.96f), 0, 0, preview_w, preview_h); //Translucent background.
+        G.drawRectLines(2, Color.WHITE, 0, 0, preview_w, preview_h); //Add a border.
+        G.drawImage(icon, 2, 2, icon_w, icon_h); //Draw the item's icon.
+        G.drawText(item.name, FSkinFont.get(24), Color.WHITE, icon_w + 2, 2, preview_w - (icon_w + 2), icon_h, false, 1, true); //Item name.
+        G.drawRectLines(1, Color.WHITE, 6, icon_h + 2, preview_w - 12, preview_h - (icon_h + 6)); //Description border.
+        G.drawText(item.getDescription(), FSkinFont.get(18), Color.WHITE, 10, icon_h + 8, preview_w - 10, preview_h - 4, false, Align.left, false); //Description.
+        G.end();
+        G.endClip();
+        Texture result = new Texture(Pixmap.createFromFrameBuffer(0, 0, preview_w, preview_h), Forge.isTextureFilteringEnabled());
+        frameBuffer.end();
+        G.dispose();
+        frameBuffer.dispose();
+        //Rendering code ends here.
+
+        TextureRegionDrawable drawable = new TextureRegionDrawable(result);
+        drawable.setMinSize((Scene.GetIntendedHeight() / RewardScene.CARD_WIDTH_TO_HEIGHT) * 0.95f, Scene.GetIntendedHeight() * 0.95f);
+        toolTipImage = new Image(drawable);
+        tooltip = new Tooltip<Image>(toolTipImage);
+        holdTooltip = new HoldTooltip(new Image(drawable));
+        tooltip.setInstant(true);
+        if (GuiBase.isAndroid())
+            addListener(holdTooltip);
+        else
+            addListener(tooltip);
+        generatedTooltip = result; //Dispose of this later.
     }
 
     private boolean frontSideUp() {
@@ -308,7 +355,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             batch.draw(ImageCache.defaultImage, x, -getHeight() / 2, width, getHeight());
         switch (reward.getType()) {
             case Card:
-
                 break;
             case Gold:
                 break;
