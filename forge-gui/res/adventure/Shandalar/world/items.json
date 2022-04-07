@@ -113,6 +113,8 @@
     "equipmentSlot": "Right",
     "startBattleWithCard" : ["w_0_3_wall_defender"],
     "iconName" :"SteelShield"  ,  
+        "opponent":{
+    "startBattleWithCard" : ["c_0_1_a_goblin_construct_noblock_ping","c_0_1_a_goblin_construct_noblock_ping","c_0_1_a_goblin_construct_noblock_ping"]},
     "cost" :500
   }
 ,
@@ -216,6 +218,13 @@
     "equipmentSlot": "Right",
     "startBattleWithCard" : ["Mirror Shield"],
     "iconName" :"MirrorShield"
+  }
+,
+  {
+    "name": "Dungeon Map",
+    "equipmentSlot": "Right",
+    "startBattleWithCard" : ["Dungeon Map"],
+    "iconName" :"DungeonMap"
   }
 ,
   {
