@@ -233,7 +233,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         super.act(delta);
         if (clicked) {
             if (flipProcess < 1)
-                flipProcess += delta;
+                flipProcess += delta * 1.5;
             else
                 flipProcess = 1;
 
