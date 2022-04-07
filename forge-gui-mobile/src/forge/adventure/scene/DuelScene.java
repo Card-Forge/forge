@@ -107,12 +107,11 @@ public class DuelScene extends ForgeScene {
         humanPlayer.setStartingLife(Current.player().getLife());
         Current.setLatestDeck(enemy.getData().generateDeck());
         RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(2, appliedVariants, Current.latestDeck(), null, false, null, null);
-        LobbyPlayer enemyPlayer = GamePlayerUtil.createAiPlayer();
+        LobbyPlayer enemyPlayer = GamePlayerUtil.createAiPlayer(this.enemy.getData().name, selectAI(this.enemy.getData().ai));
 
         FSkin.getAvatars().put(90000, this.enemy.getAvatar());
         enemyPlayer.setAvatarIndex(90000);
 
-        enemyPlayer.setName(this.enemy.getData().name);
         aiPlayer.setPlayer(enemyPlayer);
         aiPlayer.setStartingLife(Math.round((float)enemy.getData().life*Current.player().getDifficulty().enemyLifeFactor));
 
@@ -184,14 +183,32 @@ public class DuelScene extends ForgeScene {
         return MatchController.getView();
     }
 
-
-
     public void setEnemy(EnemySprite data) {
         this.enemy = data;
     }
 
     public void setPlayer(PlayerSprite sprite) {
         this.player = sprite;
+    }
+
+    private String selectAI(String ai) { //Decide opponent AI.
+        String AI = ""; //Use user settings if it's null.
+        if (ai != null){
+            switch (ai.toLowerCase()) { //We use this way to ensure capitalization is exact.
+                //We don't want misspellings here.
+                case "default":
+                    AI = "Default";  break;
+                case "reckless":
+                    AI = "Reckless"; break;
+                case "cautious":
+                    AI = "Cautious"; break;
+                case "experimental":
+                    AI = "Experimental"; break;
+                default:
+                    AI = ""; //User settings.
+            }
+        }
+        return AI;
     }
 }
 

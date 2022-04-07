@@ -2999,6 +2999,7 @@
 	"deck": "decks/wurm.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
+	"ai": "reckless",
 	"speed": 15,
 	"life": 19,
 	"rewards": [
