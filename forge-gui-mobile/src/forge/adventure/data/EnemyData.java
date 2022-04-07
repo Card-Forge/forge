@@ -12,6 +12,7 @@ public class EnemyData {
     public String name;
     public String sprite;
     public String deck;
+    public String ai;
     public float spawnRate;
     public float difficulty;
     public float speed;
@@ -27,6 +28,7 @@ public class EnemyData {
         name        =enemyData.name;
         sprite      =enemyData.sprite;
         deck        =enemyData.deck;
+        ai          =enemyData.ai;
         spawnRate   =enemyData.spawnRate;
         difficulty  =enemyData.difficulty ;
         speed       =enemyData.speed;
