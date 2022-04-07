@@ -225,3 +225,6 @@ RingofRenewal
 KiteShield
   xy: 272, 192
   size: 16, 16      
+DungeonMap
+  xy: 176, 848
+  size: 16, 16

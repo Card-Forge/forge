@@ -210,33 +210,9 @@ public class InventoryScene  extends UIScene {
                 button.setChecked(false);
             }
         }
-        itemDescription.setText(data.name+"\n"+itemText(data));
+        itemDescription.setText(data.name+"\n"+data.getDescription());
 
 
-    }
-    private String itemText(ItemData data)
-    {
-        String description="";
-        if(data.equipmentSlot!=null&&data.equipmentSlot!="")
-            description+="Equipment: "+data.equipmentSlot+"\n";
-        if(data.lifeModifier!=0)
-            description+="Life: "+data.lifeModifier+"\n";
-        if(data.startBattleWithCard!=null&&data.startBattleWithCard.length!=0)
-            description+="Cards: "+data.cardNames()+"\n";
-        if(data.moveSpeed!=0&&data.moveSpeed!=1)
-            description+="Movement speed: "+Math.round((data.moveSpeed-1.f)*100)+"%\n";
-        if(data.changeStartCards!=0)
-            description+="Starting hand: "+data.changeStartCards+"\n";
-        if(data.opponent !=null)
-        {
-            String oppEffect=itemText(data.opponent);
-            if(oppEffect!="")
-            {
-                description+="Give Opponent:\n";
-                description+=oppEffect;
-            }
-        }
-        return description;
     }
 
     private void updateInventory()

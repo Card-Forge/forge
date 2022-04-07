@@ -813,7 +813,7 @@ public class Forge implements ApplicationListener {
                     if (isMobileAdventureMode) {
                         try {
                             float delta = Gdx.graphics.getDeltaTime();
-                            float transitionTime = 0.2f;
+                            float transitionTime = 0.12f;
                             if (sceneWasSwapped) {
                                 sceneWasSwapped = false;
                                 animationTimeout = transitionTime;
