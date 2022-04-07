@@ -194,7 +194,7 @@ public class DuelScene extends ForgeScene {
     private String selectAI(String ai) { //Decide opponent AI.
         String AI = ""; //Use user settings if it's null.
         if (ai != null){
-            switch (this.enemy.getData().ai.toLowerCase()) { //We use this way to ensure capitalization is exact.
+            switch (ai.toLowerCase()) { //We use this way to ensure capitalization is exact.
                 //We don't want misspellings here.
                 case "default":
                     AI = "Default";  break;
