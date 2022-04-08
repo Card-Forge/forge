@@ -23,7 +23,7 @@ ScryfallCode=SNC
 112 R Jaxis, the Troublemaker @Zoltan Boros
 113 C Light 'Em Up @Tony Foti
 125 C Strangle @Vincent Proce
-129 M Urabask, Heretic Praetor @Simon Dominic
+129 M Urabrask, Heretic Praetor @Simon Dominic
 142 U Courier's Briefcase @Josu Hernaiz
 148 R Gala Greeters @Bud Cook
 170 R Brokers Ascendancy @Dallas Williams
@@ -43,6 +43,7 @@ ScryfallCode=SNC
 237 R Getaway Car @Donato Giancola
 247 C Botanical Plaza @Grady Frederick
 250 R Jetmir's Garden @Kasia 'Kafis' Zielińska
+251 C Maestros Theater @Jokubas Uogintas
 253 C Racers' Ring @Sam White
 254 R Raffine's Tower @Sam White
 256 C Skybridge Towers @Muhammad Firdaus
@@ -104,7 +105,7 @@ ScryfallCode=SNC
 357 C Waterfront District
 358 R Xander's Lounge @Véronique Meignaud
 359 R Ziatora's Proving Ground @Elektrodeko
-360 M Urabask, Heretic Praetor @Simon Dominic
+360 M Urabrask, Heretic Praetor @Simon Dominic
 386 U Nimble Larcenist @Meel Tamphanon
 408 R Mysterious Limousine @Dan Scott
 412 R Ledger Shredder @Mila Pesic
@@ -113,7 +114,7 @@ ScryfallCode=SNC
 423 R Devilish Valet @Bud Cook
 425 R Jaxis, the Troublemaker @Zoltan Boros
 438 R Getaway Car @Donato Giancola
-446 M Urabask, Heretic Praetor @Igor Kieryluk
+446 M Urabrask, Heretic Praetor @Igor Kieryluk
 450 R Gala Greeters @Fay Dalton
 451 R Gala Greeters @Song Qijin
 452 R Gala Greeters @SENSEN

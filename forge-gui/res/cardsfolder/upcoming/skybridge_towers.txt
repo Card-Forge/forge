@@ -4,4 +4,5 @@ Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ Combo W U | SpellDescription$ Add {W} or {U}.
 A:AB$ Draw | Cost$ 2 W U T Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+DeckHas:Ability$Sacrifice
 Oracle:Skybridge Towers enters the battlefield tapped.\n{T}: Add {W} or {U}.\n{2}{W}{U}, {T}, Sacrifice Skybridge Towers: Draw a card.

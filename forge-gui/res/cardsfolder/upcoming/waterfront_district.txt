@@ -4,4 +4,5 @@ Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ Combo U B | SpellDescription$ Add {U} or {B}.
 A:AB$ Draw | Cost$ 2 U B T Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+DeckHas:Ability$Sacrifice
 Oracle:Waterfront District enters the battlefield tapped.\n{T}: Add {U} or {B}.\n{2}{U}{B}, {T}, Sacrifice Waterfront District: Draw a card.
