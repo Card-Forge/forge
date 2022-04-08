@@ -4,13 +4,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
@@ -18,6 +12,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.IntMap;
 import forge.Forge;
 import forge.adventure.util.Controls;
+import forge.adventure.util.Current;
 import forge.adventure.world.WorldSave;
 import forge.adventure.world.WorldSaveHeader;
 import forge.screens.TransitionScreen;
@@ -36,7 +31,7 @@ public class SaveLoadScene extends UIScene {
     IntMap<WorldSaveHeader> previews = new IntMap<>();
     Color defColor;
     Table layout;
-    boolean save = true;
+    Modes mode;
     Dialog dialog;
     TextField textInput;
     Label header;
@@ -105,14 +100,16 @@ public class SaveLoadScene extends UIScene {
     }
 
     public void loadSave() {
-        if (save) {
+        switch (mode) {
+            case Save:
             if (currentSlot > 0) {
                 //prevent NPE, allowed saveslot is 1 to 10..
                 textInput.setText(buttons.get(currentSlot).getText().toString());
                 dialog.show(stage);
                 stage.setKeyboardFocus(textInput);
             }
-        } else {
+            break;
+            case Load:
             if (WorldSave.load(currentSlot)) {
                 Forge.setTransitionScreen(new TransitionScreen(new Runnable() {
                     @Override
@@ -123,6 +120,23 @@ public class SaveLoadScene extends UIScene {
             } else {
                 Forge.clearTransitionScreen();
             }
+                break;
+            case NewGamePlus:
+                if (WorldSave.load(currentSlot)) {
+                    WorldSave.getCurrentSave().getWorld().generateNew(0);
+                    Current.player().setWorldPosY((int) (WorldSave.getCurrentSave().getWorld().getData().playerStartPosY * WorldSave.getCurrentSave().getWorld().getData().height * WorldSave.getCurrentSave().getWorld().getTileSize()));
+                    Current.player().setWorldPosX((int) (WorldSave.getCurrentSave().getWorld().getData().playerStartPosX * WorldSave.getCurrentSave().getWorld().getData().width * WorldSave.getCurrentSave().getWorld().getTileSize()));
+                    Forge.setTransitionScreen(new TransitionScreen(new Runnable() {
+                        @Override
+                        public void run() {
+                            Forge.switchScene(SceneType.GameScene.instance);
+                        }
+                    }, null, false, true));
+                } else {
+                    Forge.clearTransitionScreen();
+                }
+                break;
+
         }
     }
 
@@ -182,18 +196,33 @@ public class SaveLoadScene extends UIScene {
 
     }
 
+    public enum Modes
+    {
+        Save,
+        Load,
+        NewGamePlus
+    }
 
-    public void setSaveGame(boolean save) {
-        if (save) {
+    public void setMode(Modes mode) {
+        switch (mode)
+        {
+        case Save:
             header.setText(Forge.getLocalizer().getMessage("lblSaveGame"));
             saveLoadButton.setText(Forge.getLocalizer().getMessage("lblSave"));
-        } else {
+            break;
+        case Load:
             header.setText(Forge.getLocalizer().getMessage("lblLoadGame"));
             saveLoadButton.setText(Forge.getLocalizer().getMessage("lblLoad"));
+            break;
+
+        case NewGamePlus:
+            header.setText("New Game Plus");
+            saveLoadButton.setText("Use selected Save");
+            break;
         }
-        autoSave.setDisabled(save);
-        quickSave.setDisabled(save);
-        this.save = save;
+        autoSave.setDisabled(mode == Modes.Save);
+        quickSave.setDisabled(mode == Modes.Save);
+        this.mode = mode;
     }
 
     @Override

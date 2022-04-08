@@ -12,7 +12,7 @@ import forge.adventure.world.WorldSave;
  * First scene after the splash screen
  */
 public class StartScene extends UIScene {
-    TextButton saveButton, resumeButton, newGameButton, loadButtton, settingsButton, exitButton, switchButton;
+    TextButton saveButton, resumeButton, newGameButton, loadButton, settingsButton, exitButton, switchButton;
     boolean init;
 
     public StartScene() {
@@ -26,13 +26,13 @@ public class StartScene extends UIScene {
     }
 
     public boolean Save() {
-        ((SaveLoadScene) SceneType.SaveLoadScene.instance).setSaveGame(true);
+        ((SaveLoadScene) SceneType.SaveLoadScene.instance).setMode(SaveLoadScene.Modes.Save);
         Forge.switchScene(SceneType.SaveLoadScene.instance);
         return true;
     }
 
     public boolean Load() {
-        ((SaveLoadScene) SceneType.SaveLoadScene.instance).setSaveGame(false);
+        ((SaveLoadScene) SceneType.SaveLoadScene.instance).setMode(SaveLoadScene.Modes.Load);
         Forge.switchScene(SceneType.SaveLoadScene.instance);
         return true;
     }
@@ -90,6 +90,7 @@ public class StartScene extends UIScene {
                     StartScene.this.NewGame();
                 }
             });
+            ui.onButtonPress("Start+", () -> NewGamePlus());
             ui.onButtonPress("Load", new Runnable() {
                 @Override
                 public void run() {
@@ -122,8 +123,8 @@ public class StartScene extends UIScene {
             });
             newGameButton = ui.findActor("Start");
             newGameButton.getLabel().setText(Forge.getLocalizer().getMessage("lblNewGame"));
-            loadButtton = ui.findActor("Load");
-            loadButtton.getLabel().setText(Forge.getLocalizer().getMessage("lblLoad"));
+            loadButton = ui.findActor("Load");
+            loadButton.getLabel().setText(Forge.getLocalizer().getMessage("lblLoad"));
             saveButton = ui.findActor("Save");
             saveButton.getLabel().setText(Forge.getLocalizer().getMessage("lblSave"));
             resumeButton = ui.findActor("Resume");
@@ -141,9 +142,9 @@ public class StartScene extends UIScene {
                 newGameButton.setWidth(bW);
                 newGameButton.setX(oX);
                 newGameButton.getLabel().setFontScaleX(2);
-                loadButtton.setWidth(bW);
-                loadButtton.setX(oX);
-                loadButtton.getLabel().setFontScaleX(2);
+                loadButton.setWidth(bW);
+                loadButton.setX(oX);
+                loadButton.getLabel().setFontScaleX(2);
                 saveButton.setWidth(bW);
                 saveButton.setX(oX);
                 saveButton.getLabel().setFontScaleX(2);
@@ -170,5 +171,10 @@ public class StartScene extends UIScene {
             resumeButton.setVisible(false);
             this.init = true;
         }
+    }
+
+    private void NewGamePlus() {
+        ((SaveLoadScene) SceneType.SaveLoadScene.instance).setMode(SaveLoadScene.Modes.NewGamePlus);
+        Forge.switchScene(SceneType.SaveLoadScene.instance);
     }
 }

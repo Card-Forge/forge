@@ -13,9 +13,18 @@
       "type": "TextButton",
       "name": "Start",
       "text": "New Game",
-      "width": 160,
+      "width": 80,
       "height": 30,
       "x": 160,
+      "y": 20
+    },
+    {
+      "type": "TextButton",
+      "name": "Start+",
+      "text": "New Game +",
+      "width": 80,
+      "height": 30,
+      "x": 240,
       "y": 20
     },
     {
