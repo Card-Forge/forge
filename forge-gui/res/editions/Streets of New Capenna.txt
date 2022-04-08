@@ -26,14 +26,17 @@ ScryfallCode=SNC
 129 M Urabrask, Heretic Praetor @Simon Dominic
 142 U Courier's Briefcase @Josu Hernaiz
 148 R Gala Greeters @Bud Cook
+162 M Vivien on the Hunt @Jake Murray
 170 R Brokers Ascendancy @Dallas Williams
 171 U Brokers Charm @Steve Argyle
 173 U Cabaretti Charm @Steve Argyle
 182 U Disciplined Duelist @Josu Hernaiz
+184 R Evelyn, the Covetous @Marta Nael
 186 M Falco Spara, Pactweaver @Kieran Yanner
 193 M Jetmir, Nexus of Revels @Ryan Pancoast
 197 M Lord Xander, the Collector @Martina Fackova
 199 U Maestros Charm @Steve Argyle
+205 U Nimble Larcenist @Volkan Baga
 206 M Ob Nixilis, the Adversary @Yongjae Choi
 208 U Obscura Charm @Steve Argyle
 213 M Raffine, Scheming Seer @Johannes Voss
@@ -73,6 +76,7 @@ ScryfallCode=SNC
 280 L Forest @Matteo Bassini
 281 L Forest @W.Flemming
 282 M Elspeth Resplendent @Tom Roberts
+283 M Vivien on the Hunt @Tom Roberts
 284 M Ob Nixilis, the Adversary @Tom Roberts
 285 M Halo Fountain @Dominik Mayer
 291 R Jetmir's Garden @Dominik Mayer
@@ -83,16 +87,19 @@ ScryfallCode=SNC
 297 R Brokers Ascendancy @Shawn Pagels
 298 U Brokers Charm @Jérémie Solomon
 300 U Cabaretti Charm @Jérémie Solomon
-304 U Disciplined Duelist
+304 U Disciplined Duelist @Serena Malyon
+306 R Evelyn, the Covetous @Julie Dillon
 307 M Falco Spara, Pactweaver @Jack Hughes
 312 M Jetmir, Nexus of Revels @Julie Dillon
 315 M Lord Xander, the Collector @Tran Nguyen
 317 U Maestros Charm @Jérémie Solomon
+321 U Nimble Larcenist @Meel Tamphanon
 323 U Obscura Charm @Jérémie Solomon
 327 M Raffine, Scheming Seer @Véronique Meignaud
 331 U Riveteers Charm @Jérémie Solomon
 339 M Ziatora, the Incinerator @Scott M. Fischer
 341 M Elspeth Resplendent @Krharts
+346 M Urabrask, Heretic Praetor @Igor Kieryluk
 347 M Vivien on the Hunt @Jason A. Engle
 348 M Ob Nixilis, the Adversary @Igor Kieryluk
 350 C Botanical Plaza @Olga Tereshenko
@@ -102,7 +109,7 @@ ScryfallCode=SNC
 354 C Skybridge Towers @Sam Chivers
 355 R Spara's Headquarters @W.Flemming
 356 C Tramway Station @BEMOCS
-357 C Waterfront District
+357 C Waterfront District @Matteo Bassini
 358 R Xander's Lounge @Véronique Meignaud
 359 R Ziatora's Proving Ground @Elektrodeko
 360 M Urabrask, Heretic Praetor @Simon Dominic
@@ -113,8 +120,12 @@ ScryfallCode=SNC
 419 R Cut of the Profits @Donato Giancola
 423 R Devilish Valet @Bud Cook
 425 R Jaxis, the Troublemaker @Zoltan Boros
+431 R Gala Greeters @Bud Cook
 438 R Getaway Car @Donato Giancola
+441 M Elspeth Resplendent @Krharts
 446 M Urabrask, Heretic Praetor @Igor Kieryluk
+447 M Vivien on the Hunt @Jason A. Engle
+448 M Ob Nixilis, the Adversary @Igor Kieryluk
 450 R Gala Greeters @Fay Dalton
 451 R Gala Greeters @Song Qijin
 452 R Gala Greeters @SENSEN
