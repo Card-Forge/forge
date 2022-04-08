@@ -1,0 +1,7 @@
+Name:Botanical Plaza
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ Combo G W | SpellDescription$ Add {G} or {W}.
+A:AB$ Draw | Cost$ 2 G W T Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+Oracle:Botanical Plaza enters the battlefield tapped.\n{T}: Add {G} or {W}.\n{2}{G}{W}, {T}, Sacrifice Botanical Plaza: Draw a card.
