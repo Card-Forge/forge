@@ -26,7 +26,7 @@ public class AscendEffect extends SpellAbilityEffect {
 
         return sb.toString();
     }
-    
+
     /*
      * (non-Javadoc)
      * @see forge.game.ability.SpellAbilityEffect#resolve(forge.game.spellability.SpellAbility)

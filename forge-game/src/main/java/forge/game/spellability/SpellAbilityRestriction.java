@@ -622,4 +622,4 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         return true;
     } // canPlay()
 
-} // end class SpellAbilityRestriction
+}

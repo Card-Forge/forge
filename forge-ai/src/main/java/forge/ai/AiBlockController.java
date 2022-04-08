@@ -1351,6 +1351,7 @@ public class AiBlockController {
         boolean modified = false;
 
         for (final Card blocker : oldBlockers) {
+            // TODO check all blocked attackers
             Cost tax = CombatUtil.getBlockCost(blocker.getGame(), blocker, combat.getAttackersBlockedBy(blocker).get(0));
             int taxCMC = tax != null ? tax.getCostMana().getMana().getCMC() : 0;
             if (myFreeMana < currentBlockTax + taxCMC) {

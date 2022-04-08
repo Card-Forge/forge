@@ -503,4 +503,4 @@ public final class AbilityFactory {
         left.appendSubAbility(right);
         return left;
     }
-} // end class AbilityFactory
+}
