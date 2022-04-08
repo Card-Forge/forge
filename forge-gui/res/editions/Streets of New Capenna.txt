@@ -18,10 +18,13 @@ ScryfallCode=SNC
 65 R Wiretapping @Jason A. Engle
 72 R Cut of the Profits @Donato Giancola
 84 C Incriminate @Kieran Yanner
+86 C Maestros Initiate @Irina Nordsol
 88 C Murder @Yongjae Choi
+101 M Arcane Bombardment @Marta Nael
 105 R Devilish Valet @Bud Cook
 112 R Jaxis, the Troublemaker @Zoltan Boros
 113 C Light 'Em Up @Tony Foti
+116 R Professional Face-Breaker @Dan Scott
 125 C Strangle @Vincent Proce
 129 M Urabrask, Heretic Praetor @Simon Dominic
 142 U Courier's Briefcase @Josu Hernaiz
@@ -36,6 +39,7 @@ ScryfallCode=SNC
 193 M Jetmir, Nexus of Revels @Ryan Pancoast
 197 M Lord Xander, the Collector @Martina Fackova
 199 U Maestros Charm @Steve Argyle
+200 R Maestros Diabolist @Bastien L. Deharme
 205 U Nimble Larcenist @Volkan Baga
 206 M Ob Nixilis, the Adversary @Yongjae Choi
 208 U Obscura Charm @Steve Argyle
@@ -93,6 +97,7 @@ ScryfallCode=SNC
 312 M Jetmir, Nexus of Revels @Julie Dillon
 315 M Lord Xander, the Collector @Tran Nguyen
 317 U Maestros Charm @Jérémie Solomon
+318 R Maestros Diabolist @Samy Halim
 321 U Nimble Larcenist @Meel Tamphanon
 323 U Obscura Charm @Jérémie Solomon
 327 M Raffine, Scheming Seer @Véronique Meignaud
@@ -120,6 +125,7 @@ ScryfallCode=SNC
 419 R Cut of the Profits @Donato Giancola
 423 R Devilish Valet @Bud Cook
 425 R Jaxis, the Troublemaker @Zoltan Boros
+426 R Professional Face-Breaker @Dan Scott
 431 R Gala Greeters @Bud Cook
 438 R Getaway Car @Donato Giancola
 441 M Elspeth Resplendent @Krharts
