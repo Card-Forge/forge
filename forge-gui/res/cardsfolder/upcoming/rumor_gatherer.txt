@@ -1,0 +1,9 @@
+Name:Rumor Gatherer
+ManaCost:1 W W
+Types:Creature Elf Wizard
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ Alliance — Whenever another creature enters the battlefield under your control, scry 1. If this is the second time this ability has resolved this turn, draw a card instead.
+SVar:TrigScry:DB$ Scry | ScryNum$ 1 | ConditionCheckSVar$ CreatureETBAmount | ConditionSVarCompare$ EQ1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionCheckSVar$ CreatureETBAmount | ConditionSVarCompare$ EQ2
+SVar:CreatureETBAmount:Count$ResolvedThisTurn
+Oracle:Alliance — Whenever another creature enters the battlefield under your control, scry 1. If this is the second time this ability has resolved this turn, draw a card instead.
