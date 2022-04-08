@@ -8,20 +8,59 @@ Type=Expansion
 ScryfallCode=SNC
 
 [cards]
+11 M Elspeth Resplendent @Anna Steinbauer
+15 M Halo Fountain @Anastasia Ovchinnikova
+22 R Mysterious Limousine @Dan Scott
+29 U Rumor Gatherer @Simon Dominic
+46 R Ledger Shredder @Mila Pesic
+47 U A Little Chat @Matt Stewart
+51 U An Offer You Can't Refuse @Dallas Williams
+65 R Wiretapping @Jason A. Engle
+72 R Cut of the Profits @Donato Giancola
+84 C Incriminate @Kieran Yanner
+88 C Murder @Yongjae Choi
+105 R Devilish Valet @Bud Cook
+112 R Jaxis, the Troublemaker @Zoltan Boros
+113 C Light 'Em Up @Tony Foti
+125 C Strangle @Vincent Proce
+129 M Urabask, Heretic Praetor @Simon Dominic
+142 U Courier's Briefcase @Josu Hernaiz
+148 R Gala Greeters @Bud Cook
 170 R Brokers Ascendancy @Dallas Williams
 171 U Brokers Charm @Steve Argyle
 173 U Cabaretti Charm @Steve Argyle
+182 U Disciplined Duelist @Josu Hernaiz
+186 M Falco Spara, Pactweaver @Kieran Yanner
 193 M Jetmir, Nexus of Revels @Ryan Pancoast
 197 M Lord Xander, the Collector @Martina Fackova
 199 U Maestros Charm @Steve Argyle
+206 M Ob Nixilis, the Adversary @Yongjae Choi
 208 U Obscura Charm @Steve Argyle
 213 M Raffine, Scheming Seer @Johannes Voss
 217 U Riveteers Charm @Steve Argyle
+231 M Ziatora, the Incinerator @Chris Rahn
+236 C Chrome Cat @Joe Slucher
+237 R Getaway Car @Donato Giancola
+247 C Botanical Plaza @Grady Frederick
 250 R Jetmir's Garden @Kasia 'Kafis' Zielińska
+253 C Racers' Ring @Sam White
 254 R Raffine's Tower @Sam White
+256 C Skybridge Towers @Muhammad Firdaus
 257 R Spara's Headquarters @Kieran Yanner
+258 C Tramway Station @Alexander Forssberg
+259 C Waterfront District @Alexander Forssberg
 260 R Xander's Lounge @James Paick
 261 R Ziatora's Proving Ground @Viko Menezes
+262 L Plains @Sam Burley
+263 L Plains @Thomas Stoop
+264 L Island @Sam Burley
+265 L Island @Jedd Chevrier
+266 L Swamp @Christian Dimitrov
+267 L Swamp @Adam Paquette
+268 L Mountain @Christian Dimitrov
+269 L Mountain @Adam Paquette
+270 L Forest @Christian Dimitrov
+271 L Forest @Thomas Stoop
 272 L Plains @Elektrodeko
 273 L Plains @Olga Tereshenko
 274 L Island @Matteo Bassini
@@ -32,6 +71,9 @@ ScryfallCode=SNC
 279 L Mountain @Ann-Sophie De Steur
 280 L Forest @Matteo Bassini
 281 L Forest @W.Flemming
+282 M Elspeth Resplendent @Tom Roberts
+284 M Ob Nixilis, the Adversary @Tom Roberts
+285 M Halo Fountain @Dominik Mayer
 291 R Jetmir's Garden @Dominik Mayer
 292 R Raffine's Tower @Dominik Mayer
 293 R Spara's Headquarters @Dominik Mayer
@@ -40,11 +82,53 @@ ScryfallCode=SNC
 297 R Brokers Ascendancy @Shawn Pagels
 298 U Brokers Charm @Jérémie Solomon
 300 U Cabaretti Charm @Jérémie Solomon
+304 U Disciplined Duelist
+307 M Falco Spara, Pactweaver @Jack Hughes
+312 M Jetmir, Nexus of Revels @Julie Dillon
+315 M Lord Xander, the Collector @Tran Nguyen
 317 U Maestros Charm @Jérémie Solomon
 323 U Obscura Charm @Jérémie Solomon
+327 M Raffine, Scheming Seer @Véronique Meignaud
 331 U Riveteers Charm @Jérémie Solomon
+339 M Ziatora, the Incinerator @Scott M. Fischer
+341 M Elspeth Resplendent @Krharts
+347 M Vivien on the Hunt @Jason A. Engle
+348 M Ob Nixilis, the Adversary @Igor Kieryluk
+350 C Botanical Plaza @Olga Tereshenko
 351 R Jetmir's Garden @BEMOCS
+352 C Racers' Ring @David Curtis
 353 R Raffine's Tower @Elektrodeko
+354 C Skybridge Towers @Sam Chivers
 355 R Spara's Headquarters @W.Flemming
+356 C Tramway Station @BEMOCS
+357 C Waterfront District
 358 R Xander's Lounge @Véronique Meignaud
 359 R Ziatora's Proving Ground @Elektrodeko
+360 M Urabask, Heretic Praetor @Simon Dominic
+386 U Nimble Larcenist @Meel Tamphanon
+408 R Mysterious Limousine @Dan Scott
+412 R Ledger Shredder @Mila Pesic
+415 R Wiretapping @Jason A. Engle
+419 R Cut of the Profits @Donato Giancola
+423 R Devilish Valet @Bud Cook
+425 R Jaxis, the Troublemaker @Zoltan Boros
+438 R Getaway Car @Donato Giancola
+446 M Urabask, Heretic Praetor @Igor Kieryluk
+450 R Gala Greeters @Fay Dalton
+451 R Gala Greeters @Song Qijin
+452 R Gala Greeters @SENSEN
+453 R Gala Greeters @Daniel Lieske
+454 R Gala Greeters @Samy Halim
+455 R Gala Greeters @Katerina Ladon
+456 R Gala Greeters @Kotakan
+457 R Gala Greeters @Heonhwa Choe
+458 R Gala Greeters @Daniel Correia
+459 R Gala Greeters @Olga Tereshenko
+460 R Gala Greeters @Voyager Illustration
+461 R Jaxis, the Troublemaker @Taras Susak
+462 R Mysterious Limousine @Hector Ortiz
+463 U Rumor Gatherer @Simon Dominic
+464 U An Offer You Can't Refuse @Dallas Williams
+465 C Incriminate @Kieran Yanner
+466 C Light 'Em Up @Tony Foti
+467 U Courier's Briefcase @Josu Hernaiz

@@ -6,3 +6,8 @@ Type=Commander
 ScryfallCode=NCC
 
 [cards]
+186 M Anhelo, the Painter @Aurore Folny
+187 M Henzie "Toolbox" Torre @Johannes Voss
+188 M Kamiz, Obscura Oculus @Chris Rallis
+189 M Kitt Kanto, Mayhem Diva @Fariba Khamseh
+190 M Perrie, the Pulveriser @Joshua Raphael
