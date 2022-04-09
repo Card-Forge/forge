@@ -1,0 +1,14 @@
+Name:Vivien on the Hunt
+ManaCost:4 G G
+Types:Legendary Planeswalker Vivien
+Loyalty: 4
+A:AB$ Sacrifice | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Optional$ True | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ DBChangeZone | SpellDescription$ You may sacrifice a creature. If you do, search your library for a creature card with mana value equal to 1 plus the sacrificed creature's mana value, put it onto the battlefield, then shuffle.
+SVar:DBChangeZone:DB$ ChangeZone | ConditionDefined$ Remembered | ConditionPresent$ Card | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.cmcEQX | ChangeTypeDesc$ creature card with mana value equal to 1 plus the sacrificed creature's mana value | ChangeNum$ 1 | SubAbility$ DBCleanup
+SVar:X:Remembered$CardManaCost/Plus.1
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Mill | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ You | NumCards$ 5 | RememberMilled$ True | SubAbility$ DBChangeZone2 | SpellDescription$ Mill five cards, then put any number of creature cards milled this way into your hand.
+SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Hidden$ True | ChangeType$ Creature.IsRemembered | ChangeTypeDesc$ creature cards milled this way | ChangeNum$ Z | ChangeNumDesc$ any number of | SelectPrompt$ Select any number of creature cards milled this way | SubAbility$ DBCleanup
+SVar:Z:Remembered$Valid Creature
+A:AB$ Token | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | TokenScript$ g_4_4_rhino_warrior | SpellDescription$ Create a 4/4 green Rhino Warrior creature token.
+DeckHas:Ability$Sacrifice|Token|Mill|Graveyard & Type$Rhino
+Oracle:[+2]: You may sacrifice a creature. If you do, search your library for a creature card with mana value equal to 1 plus the sacrificed creature's mana value, put it onto the battlefield, then shuffle.\n[+1]: Mill five cards, then put any number of creature cards milled this way into your hand.\n[−1]: Create a 4/4 green Rhino Warrior creature token.
