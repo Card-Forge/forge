@@ -489,4 +489,4 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         return true;
     }
 
-} // end class SpellAbility_Condition
+}

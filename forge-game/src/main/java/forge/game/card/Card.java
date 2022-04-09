@@ -971,7 +971,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         delvedCards.add(c);
     }
-
     public final void clearDelved() {
         delvedCards = null;
     }
@@ -3212,7 +3211,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public boolean cameUnderControlSinceLastUpkeep() {
         return cameUnderControlSinceLastUpkeep;
     }
-
     public void setCameUnderControlSinceLastUpkeep(boolean underControlSinceLastUpkeep) {
         this.cameUnderControlSinceLastUpkeep = underControlSinceLastUpkeep;
     }

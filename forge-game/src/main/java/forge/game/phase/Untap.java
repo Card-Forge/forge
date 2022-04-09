@@ -300,4 +300,4 @@ public class Untap extends Phase {
             game.setDayTime(false);
         }
     }
-} //end class Untap
+}

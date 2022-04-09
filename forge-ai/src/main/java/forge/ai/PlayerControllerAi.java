@@ -3,7 +3,6 @@ package forge.ai;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -377,7 +376,7 @@ public class PlayerControllerAi extends PlayerController {
         }
 
         // put the rest on top in random order
-        Collections.shuffle(toTop, MyRandom.getRandom());
+        CardLists.shuffle(toTop);
         return ImmutablePair.of(toTop, toBottom);
     }
 
@@ -403,7 +402,7 @@ public class PlayerControllerAi extends PlayerController {
             }
         }
 
-        Collections.shuffle(toTop, MyRandom.getRandom());
+        CardLists.shuffle(toTop);
         return ImmutablePair.of(toTop, toGraveyard);
     }
 

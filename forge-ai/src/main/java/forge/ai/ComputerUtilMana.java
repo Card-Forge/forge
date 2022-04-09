@@ -1571,7 +1571,7 @@ public class ComputerUtilMana {
             System.out.println("DEBUG_MANA_PAYMENT: sortedManaSources = " + sortedManaSources);
         }
         return sortedManaSources;
-    } // getAvailableManaSources()
+    }
 
     //This method is currently used by AI to estimate mana available
     private static ListMultimap<Integer, SpellAbility> groupSourcesByManaColor(final Player ai, boolean checkPlayable) {

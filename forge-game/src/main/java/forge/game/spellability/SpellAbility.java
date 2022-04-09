@@ -2348,7 +2348,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public SpellAbility getOriginalAbility() {
         return grantorOriginal;
     }
-
     public void setOriginalAbility(final SpellAbility sa) {
         grantorOriginal = sa;
     }
@@ -2356,7 +2355,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public StaticAbility getGrantorStatic() {
         return grantorStatic;
     }
-
     public void setGrantorStatic(final StaticAbility st) {
         grantorStatic = st;
     }
