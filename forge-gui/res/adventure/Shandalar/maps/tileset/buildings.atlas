@@ -131,7 +131,7 @@ ArtefactShop
   xy: 320, 786   
   size: 16, 16  
 Test
-  xy: 129, 48
+  xy: 128, 48
   size: 32, 32 
 Cave
   xy: 192, 272
