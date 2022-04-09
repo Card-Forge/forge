@@ -1,0 +1,10 @@
+Name:Devilish Valet
+ManaCost:2 R
+Types:Creature Devil Warrior
+PT:1/3
+K:Trample
+K:Haste
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Alliance — Whenever another creature enters the battlefield under your control, double CARDNAME's power until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | Double$ True
+SVar:X:Count$CardPower
+Oracle:Trample, haste\nAlliance — Whenever another creature enters the battlefield under your control, double Devilish Valet's power until end of turn.
