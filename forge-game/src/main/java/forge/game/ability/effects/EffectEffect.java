@@ -61,7 +61,7 @@ public class EffectEffect extends SpellAbilityEffect {
         final String duration = sa.getParam("Duration");
 
         if (("UntilHostLeavesPlay".equals(duration) || "UntilLoseControlOfHost".equals(duration))
-                && !hostCard.isInPlay()) {
+                && !(hostCard.isInPlay() || hostCard.isInZone(ZoneType.Stack))) {
             return;
         }
         if ("UntilLoseControlOfHost".equals(duration) && hostCard.getController() != sa.getActivatingPlayer()) {
