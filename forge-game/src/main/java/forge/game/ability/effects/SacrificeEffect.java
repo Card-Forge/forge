@@ -213,6 +213,10 @@ public class SacrificeEffect extends SpellAbilityEffect {
         String valid = sa.getParamOrDefault("SacValid", "Self");
         String num = sa.getParamOrDefault("Amount", "1");
 
+        if (sa.hasParam("Optional")) { // TODO make boolean and handle verb reconjugation throughout
+            sb.append("(OPTIONAL) ");
+        }
+
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
 
         if (valid.equals("Self")) {
@@ -228,9 +232,9 @@ public class SacrificeEffect extends SpellAbilityEffect {
             msg = CardType.CoreType.isValidEnum(msg) ? msg.toLowerCase() : msg;
 
             if (sa.hasParam("Destroy")) {
-                sb.append(oneTgtP ? "destroys " : " destroys ");
+                sb.append(oneTgtP ? "destroys " : " destroy ");
             } else {
-                sb.append(oneTgtP ? "sacrifices " : "sacrifices ");
+                sb.append(oneTgtP ? "sacrifices " : "sacrifice ");
             }
             sb.append(Lang.nounWithNumeralExceptOne(amount, msg)).append(".");
         }
