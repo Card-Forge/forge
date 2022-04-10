@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="72">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="72">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="4425" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="40" height="40">
   <data encoding="base64" compression="zlib">
    eJztwQENAAAAwqD3T20PBxQAAAAAAMCXARkAAAE=
@@ -43,22 +43,22 @@
   <object id="67" template="../obj/gold.tx" x="217" y="248.5"/>
   <object id="68" template="../obj/enemy.tx" x="160" y="138">
    <properties>
-    <property name="enemy" value="werewolf"/>
+    <property name="enemy" value="Werewolf"/>
    </properties>
   </object>
   <object id="69" template="../obj/enemy.tx" x="233.5" y="137">
    <properties>
-    <property name="enemy" value="werewolf"/>
+    <property name="enemy" value="Werewolf"/>
    </properties>
   </object>
   <object id="70" template="../obj/enemy.tx" x="296" y="153">
    <properties>
-    <property name="enemy" value="werewolf"/>
+    <property name="enemy" value="Werewolf"/>
    </properties>
   </object>
   <object id="71" template="../obj/enemy.tx" x="377.5" y="152.5">
    <properties>
-    <property name="enemy" value="werewolf"/>
+    <property name="enemy" value="Werewolf"/>
    </properties>
   </object>
  </objectgroup>
