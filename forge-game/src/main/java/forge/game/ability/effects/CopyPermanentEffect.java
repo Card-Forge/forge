@@ -44,18 +44,40 @@ public class CopyPermanentEffect extends TokenEffectBase {
         }
         final StringBuilder sb = new StringBuilder();
 
+        final Player activator = sa.getActivatingPlayer();
         final List<Card> tgtCards = getTargetCards(sa);
         boolean justOne = tgtCards.size() == 1;
+        boolean addKWs = sa.hasParam("AddKeywords");
+        final int numCopies = sa.hasParam("NumCopies") ?
+                AbilityUtils.calculateAmount(host, sa.getParam("NumCopies"), sa) : 1;
 
-        sb.append("Copy ");
+        sb.append(activator).append(" creates ").append(Lang.nounWithNumeralExceptOne(numCopies, "token");
+        sb.append(numCopies == 1 ? " that's a copy" : " that are copies").append(" of ");
         sb.append(Lang.joinHomogenous(tgtCards));
-        if (sa.hasParam("AddKeywords")) {
+
+        if (addKWs) {
             final List<String> keywords = Lists.newArrayList();
             keywords.addAll(Arrays.asList(sa.getParam("AddKeywords").split(" & ")));
-            sb.append(", except ").append(justOne ? "it has " : "they have ");
+            if (sa.getDescription().contains("except")) {
+                sb.append(", except ").append(justOne ? "it has " : "they have ");
+            } else {
+                sb.append(". ").append(justOne ? "It gains " : "They gain ");
+            }
             sb.append(Lang.joinHomogenous(keywords).toLowerCase());
         }
-        sb.append(".");
+
+        if (sa.hasParam("AddTriggers")) {
+            final String oDesc = sa.getDescription();
+            final String trigStg = oDesc.substring(oDesc.indexOf("\""),oDesc.lastIndexOf("\"") + 1);
+            if (addKWs) {
+                sb.append(" and ").append(trigStg);
+            } else {
+                sb.append(". ").append(justOne ? "It gains " : "They gain ").append(trigStg);
+            }
+        } else {
+            sb.append(".");
+        }
+
         if (sa.hasParam("AtEOT")) {
             String atEOT = sa.getParam("AtEOT");
             String verb = "Sacrifice ";
