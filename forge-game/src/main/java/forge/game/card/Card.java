@@ -3816,6 +3816,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return getCounters(CounterEnumType.LOYALTY);
     }
 
+    public final void setBaseLoyalty(final int n) {
+        currentState.setBaseLoyalty(Integer.toString(n));
+    }
+
     // values that are printed on card
     public final int getBasePower() {
         return currentState.getBasePower();
