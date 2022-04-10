@@ -9,7 +9,6 @@ import forge.adventure.util.SaveFileData;
 import forge.adventure.util.SignalList;
 import forge.deck.Deck;
 import forge.localinstance.properties.ForgeConstants;
-import forge.localinstance.properties.ForgeProfileProperties;
 import forge.player.GamePlayerUtil;
 
 import java.io.File;
