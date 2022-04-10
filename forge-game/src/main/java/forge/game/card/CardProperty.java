@@ -1680,6 +1680,11 @@ public class CardProperty {
                 return false;
             }
             return card.getCastSA().isSurged();
+        } else if (property.equals("blitzed")) {
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            return card.getCastSA().isBlitz();
         } else if (property.equals("dashed")) {
             if (card.getCastSA() == null) {
                 return false;
