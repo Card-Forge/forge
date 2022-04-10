@@ -12,7 +12,7 @@ import forge.adventure.world.WorldSave;
  * First scene after the splash screen
  */
 public class StartScene extends UIScene {
-    TextButton saveButton, resumeButton, newGameButton, loadButton, settingsButton, exitButton, switchButton;
+    TextButton saveButton, resumeButton, newGameButton, newGameButtonPlus, loadButton, settingsButton, exitButton, switchButton;
     boolean init;
 
     public StartScene() {
@@ -123,6 +123,8 @@ public class StartScene extends UIScene {
             });
             newGameButton = ui.findActor("Start");
             newGameButton.getLabel().setText(Forge.getLocalizer().getMessage("lblNewGame"));
+            newGameButtonPlus = ui.findActor("Start+");
+            newGameButtonPlus.getLabel().setText(Forge.getLocalizer().getMessage("lblNewGame")+"+");
             loadButton = ui.findActor("Load");
             loadButton.getLabel().setText(Forge.getLocalizer().getMessage("lblLoad"));
             saveButton = ui.findActor("Save");
@@ -139,9 +141,12 @@ public class StartScene extends UIScene {
                 float w = Scene.GetIntendedWidth();
                 float bW = w - 165;
                 float oX = w / 2 - bW / 2;
-                newGameButton.setWidth(bW);
+                newGameButton.setWidth(bW/2);
                 newGameButton.setX(oX);
                 newGameButton.getLabel().setFontScaleX(2);
+                newGameButtonPlus.setWidth(bW/2);
+                newGameButtonPlus.setX(newGameButton.getX()+bW/2);
+                newGameButtonPlus.getLabel().setFontScaleX(2);
                 loadButton.setWidth(bW);
                 loadButton.setX(oX);
                 loadButton.getLabel().setFontScaleX(2);
