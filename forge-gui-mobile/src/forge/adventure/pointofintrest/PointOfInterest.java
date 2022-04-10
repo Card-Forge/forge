@@ -20,8 +20,8 @@ public class PointOfInterest implements SaveFileContent {
     @Override
     public void load(SaveFileData saveFileData) {
 
-        data=PointOfInterestData.getPointOfInterest(saveFileData.readString("name"));
         position.set(saveFileData.readVector2("position"));
+        data=PointOfInterestData.getPointOfInterest(saveFileData.readString("name"),position);
         rectangle.set(saveFileData.readRectangle("rectangle"));
         spriteIndex=saveFileData.readInt("spriteIndex");
 

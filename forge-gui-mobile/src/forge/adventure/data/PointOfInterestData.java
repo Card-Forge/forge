@@ -1,11 +1,11 @@
 package forge.adventure.data;
 
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
-import forge.util.MyRandom;
 
 import java.util.ArrayList;
 
@@ -39,13 +39,13 @@ public class PointOfInterestData {
         }
         return pointOfInterestList;
     }
-    public static PointOfInterestData getPointOfInterest(String name) {
+    public static PointOfInterestData getPointOfInterest(String name, Vector2 index) {
         ArrayList<PointOfInterestData> candidates = new ArrayList<PointOfInterestData>();
         for(PointOfInterestData data: new Array.ArrayIterator<>(getAllPointOfInterest())){
             if(data.name.equals(name)) candidates.add(data); //Populate candidates with specified name.
         }
         if(candidates.size() > 0){ //If we got any candidates, return a random one.
-            return candidates.get(MyRandom.getRandom().nextInt(candidates.size()));
+            return candidates.get(((int)(index.x*6719+index.y)%candidates.size()));//6719 is just a big prime to avoid collisions
         }
         return null;
     }

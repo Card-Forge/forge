@@ -11,20 +11,15 @@ import forge.deck.Deck;
 import forge.localinstance.properties.ForgeConstants;
 import forge.player.GamePlayerUtil;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.HashMap;
+import java.io.*;
+import java.util.Date;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterInputStream;
 
 /**
  * Represents everything that will be saved, like the player and the world.
  */
-public class WorldSave {
+public class WorldSave   {
 
     static final public int AUTO_SAVE_SLOT =-1;
     static final public int QUICK_SAVE_SLOT =-2;
@@ -33,7 +28,7 @@ public class WorldSave {
     public WorldSaveHeader header = new WorldSaveHeader();
     private final AdventurePlayer player=new AdventurePlayer();
     private final World world=new World();
-    private final HashMap<String, PointOfInterestChanges> pointOfInterestChanges=new HashMap<>();
+    private final PointOfInterestChanges.Map pointOfInterestChanges=  new PointOfInterestChanges.Map();
 
 
     private final SignalList onLoadList=new SignalList();
@@ -73,7 +68,9 @@ public class WorldSave {
                 GamePlayerUtil.getGuiPlayer().setName(currentSave.player.getName());
                 try {
                     currentSave.world.load(mainData.readSubData("world"));
+                    currentSave.pointOfInterestChanges.load(mainData.readSubData("pointOfInterestChanges"));
                     WorldStage.getInstance().load(mainData.readSubData("worldStage"));
+
                 } catch (Exception e) {
                     System.err.println("Generating New World");
                     currentSave.world.generateNew(0);
@@ -124,7 +121,7 @@ public class WorldSave {
     public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, int startingDeckIndex, DifficultyData diff, long seed) {
 
         currentSave.world.generateNew(seed);
-
+        currentSave.pointOfInterestChanges.clear();
         Deck starterDeck = Config.instance().starterDecks()[startingDeckIndex];
         currentSave.player.create(name, starterDeck, male, race, avatarIndex,diff);
         currentSave.player.setWorldPosY((int) (currentSave.world.getData().playerStartPosY * currentSave.world.getData().height * currentSave.world.getTileSize()));
@@ -154,11 +151,13 @@ public class WorldSave {
                 DeflaterOutputStream def= new DeflaterOutputStream(fos);
                 ObjectOutputStream oos = new ObjectOutputStream(def))
             {
+                header.saveDate= new Date();
                 oos.writeObject(header);
                 SaveFileData mainData=new SaveFileData();
                 mainData.store("player",currentSave.player.save());
                 mainData.store("world",currentSave.world.save());
                 mainData.store("worldStage", WorldStage.getInstance().save());
+                mainData.store("pointOfInterestChanges",currentSave.pointOfInterestChanges.save());
 
                 oos.writeObject(mainData);
             }
@@ -168,6 +167,10 @@ public class WorldSave {
             return false;
         }
         return true;
+    }
+
+    public void clearChanges() {
+        pointOfInterestChanges.clear();
     }
 
 }

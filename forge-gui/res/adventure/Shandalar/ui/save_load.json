@@ -24,6 +24,14 @@
       "y": 18,
       "width": 96,
       "height": 54
+    },                
+    {
+      "type": "Label",
+      "name": "saveDate",
+      "x": 300,
+      "y": 120,
+      "width": 96,
+      "height": 16
     },
     {
       "type": "TextButton",
@@ -42,10 +50,6 @@
       "height": 16,
       "x": 115,
       "y": 250
-    },
-    {
-      "type": "Table",
-      "font": "default"
-    }
+    } 
   ]
 }
