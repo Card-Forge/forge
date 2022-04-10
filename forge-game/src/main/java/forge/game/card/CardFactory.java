@@ -40,6 +40,7 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.CardTranslation;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -135,6 +136,11 @@ public class CardFactory {
 
         if (sourceSA.hasParam("CopySetToughness")) {
             c.setBaseToughness(Integer.parseInt(sourceSA.getParam("CopySetToughness")));
+        }
+
+        if (sourceSA.hasParam("CopySetLoyalty")) {
+            final String s = sourceSA.getParam("CopySetLoyalty");
+            c.setBaseLoyalty(StringUtils.isNumeric(s) ? Integer.parseInt(s) : Integer.parseInt(targetSA.getSVar(s)));
         }
 
         if (sourceSA.hasParam("CopyAddTypes")) {
