@@ -41,6 +41,14 @@
       "height": 48,
       "x": 376,
       "y": 33
+    },             
+    {
+      "type": "Label",
+      "name": "saveDate",
+      "x": 376,
+      "y": 85,
+      "width": 86,
+      "height": 32
     },
     {
       "type": "TextButton",

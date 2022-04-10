@@ -3,12 +3,12 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/aerie_1.tmx",
+    "activeFile": "map/barbariancamp_2.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "obj",
         "map/main_story",
         "tileset",
+        "obj",
         "map"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -49,8 +49,8 @@
             "scale": 4,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 201.75,
-                "y": 167.75
+                "x": 370.25,
+                "y": 101.75
             }
         },
         "map/barbariancamp_3.tmx": {
@@ -105,7 +105,7 @@
             "scale": 3,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 240,
+                "x": 239.99999999999997,
                 "y": 136
             }
         },
@@ -529,8 +529,8 @@
             "scale": 0.75,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 312,
-                "y": 319.9999999999999
+                "x": 311.99999999999994,
+                "y": 320
             }
         },
         "map/cave_23B10.tmx": {
@@ -673,7 +673,7 @@
             "scale": 1.0166158536585366,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 311.8188633978108,
+                "x": 311.81886339781073,
                 "y": 320.6717648822912
             }
         },
@@ -1497,7 +1497,7 @@
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 400,
+                "x": 399.99999999999994,
                 "y": 400
             }
         },
@@ -1993,7 +1993,7 @@
             "scale": 1.3694556451612903,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 231.4788369525212,
+                "x": 231.47883695252114,
                 "y": 136.5506072874494
             }
         },
@@ -2465,7 +2465,7 @@
             "scale": 1.5,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 400,
+                "x": 399.99999999999994,
                 "y": 400
             }
         },
@@ -2497,7 +2497,7 @@
             "scale": 3,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 240,
+                "x": 239.99999999999997,
                 "y": 136
             }
         },
@@ -2631,7 +2631,7 @@
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 480,
+                "x": 479.99999999999994,
                 "y": 320
             }
         },
@@ -2728,7 +2728,67 @@
         "map/plains_town.tmx",
         "map/main_story/colorless_castle.tmx",
         "map/main_story/blue_castle.tmx",
-        "map/aerie_1.tmx"
+        "map/aerie_1.tmx",
+        "map/cave_13.tmx",
+        "map/cave_14.tmx",
+        "map/cave_15.tmx",
+        "map/cave_16.tmx",
+        "map/cave_16B.tmx",
+        "map/cave_23B10.tmx",
+        "map/cave_23B2.tmx",
+        "map/cave_23B4.tmx",
+        "map/cave_23C5.tmx",
+        "map/cave_3.tmx",
+        "map/cave_25.tmx",
+        "map/cave_25B.tmx",
+        "map/cave_25C.tmx",
+        "map/cave_9.tmx",
+        "map/cave_8.tmx",
+        "map/cave_7.tmx",
+        "map/cave_4.tmx",
+        "map/crypt.tmx",
+        "map/crypt_2.tmx",
+        "map/crypt_3.tmx",
+        "map/crypt_4.tmx",
+        "map/crypt_5.tmx",
+        "map/djinnpalace_1.tmx",
+        "map/djinnpalace_2.tmx",
+        "map/djinnpalace_3.tmx",
+        "map/djinnpalace_3B.tmx",
+        "map/elftown.tmx",
+        "map/evilgrove_1.tmx",
+        "map/evilgrove_2.tmx",
+        "map/evilgrove_3.tmx",
+        "map/factory_1.tmx",
+        "map/factory_2.tmx",
+        "map/factory_3.tmx",
+        "map/factory_4.tmx",
+        "map/evilgrove_4.tmx",
+        "map/evilgrove_5.tmx",
+        "map/magetower_5.tmx",
+        "map/magetower_6.tmx",
+        "map/magetower_7.tmx",
+        "map/vampirecastle_4.tmx",
+        "map/portal_2.tmx",
+        "map/portal_2C.tmx",
+        "map/portal_2C2.tmx",
+        "map/portal_2D.tmx",
+        "map/portal_2E.tmx",
+        "map/portal_2F.tmx",
+        "map/portal_2G.tmx",
+        "map/cave_23I2.tmx",
+        "map/cave_23G4.tmx",
+        "map/cave_23E6.tmx",
+        "map/cave_23C8.tmx",
+        "map/cave_23B1.tmx",
+        "map/cave_2.tmx",
+        "map/cave_16BL2U.tmx",
+        "map/cave_16BL1.tmx",
+        "map/cave_1.tmx",
+        "map/catlair_3.tmx",
+        "map/catlair_2.tmx",
+        "map/catlair_1.tmx",
+        "map/barbariancamp_2.tmx"
     ],
     "project": "main.tiled-project",
     "property.type": "object",

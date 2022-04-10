@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.text.DateFormat;
 import java.util.zip.InflaterInputStream;
 
 /**
@@ -37,6 +38,7 @@ public class SaveLoadScene extends UIScene {
     Label header;
     int currentSlot = -3, lastSelectedSlot = 0;
     Image previewImage;
+    Label previewDate;
     Image previewBorder;
     TextButton saveLoadButton, back;
     TextButton quickSave;
@@ -83,10 +85,17 @@ public class SaveLoadScene extends UIScene {
                 previewImage.setDrawable(new TextureRegionDrawable(new Texture(header.preview)));
                 previewImage.layout();
                 previewImage.setVisible(true);
+                previewDate.setVisible(true);
+                if (header.saveDate != null)
+                    previewDate.setText(DateFormat.getDateInstance().format(header.saveDate));
+                else
+                    previewDate.setText("");
             }
         } else {
             if (previewImage != null)
                 previewImage.setVisible(false);
+            if (previewDate != null)
+                previewDate.setVisible(false);
         }
         for (IntMap.Entry<TextButton> butt : new IntMap.Entries<TextButton>(buttons)) {
             butt.value.setColor(defColor);
@@ -123,7 +132,9 @@ public class SaveLoadScene extends UIScene {
                 break;
             case NewGamePlus:
                 if (WorldSave.load(currentSlot)) {
+                    WorldSave.getCurrentSave().clearChanges();
                     WorldSave.getCurrentSave().getWorld().generateNew(0);
+
                     Current.player().setWorldPosY((int) (WorldSave.getCurrentSave().getWorld().getData().playerStartPosY * WorldSave.getCurrentSave().getWorld().getData().height * WorldSave.getCurrentSave().getWorld().getTileSize()));
                     Current.player().setWorldPosX((int) (WorldSave.getCurrentSave().getWorld().getData().playerStartPosX * WorldSave.getCurrentSave().getWorld().getData().width * WorldSave.getCurrentSave().getWorld().getTileSize()));
                     Forge.setTransitionScreen(new TransitionScreen(new Runnable() {
@@ -285,6 +296,7 @@ public class SaveLoadScene extends UIScene {
             //makes dialog hidden immediately when you open saveload scene..
             dialog.getColor().a = 0;
             previewImage = ui.findActor("preview");
+            previewDate = ui.findActor("saveDate");
             previewBorder = ui.findActor("preview_border");
             header = Controls.newLabel(Forge.getLocalizer().getMessage("lblSave"));
             header.setAlignment(Align.center);
