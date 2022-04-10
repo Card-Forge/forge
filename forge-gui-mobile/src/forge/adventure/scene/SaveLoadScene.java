@@ -348,6 +348,12 @@ public class SaveLoadScene extends UIScene {
                 saveLoadButton.setWidth(bW/2);
                 saveLoadButton.setHeight(20);
                 saveLoadButton.setX(back.getRight());
+                previewDate.setFontScaleX(2);
+                previewDate.setX(previewImage.getX()-10);
+                previewDate.setY(previewImage.getY()-15);
+            } else {
+                previewDate.setX(previewImage.getX()+5);
+                previewDate.setY(previewImage.getY()-10);
             }
             this.init = true;
         }
