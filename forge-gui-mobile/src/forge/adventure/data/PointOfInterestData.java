@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
+import forge.util.MyRandom;
 
 import java.util.ArrayList;
 
@@ -44,7 +45,7 @@ public class PointOfInterestData {
             if(data.name.equals(name)) candidates.add(data); //Populate candidates with specified name.
         }
         if(candidates.size() > 0){ //If we got any candidates, return a random one.
-            return candidates.get((int) (Math.random() * candidates.size()));
+            return candidates.get(MyRandom.getRandom().nextInt(candidates.size()));
         }
         return null;
     }
