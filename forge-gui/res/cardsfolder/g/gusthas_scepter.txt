@@ -2,10 +2,11 @@ Name:Gustha's Scepter
 ManaCost:0
 Types:Artifact
 A:AB$ ChangeZone | Cost$ T | ChangeType$ Card | ChangeNum$ 1 | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | RememberChanged$ True | Mandatory$ True | SubAbility$ DBEffect | SpellDescription$ Exile a card from your hand face down. You may look at it for as long as it remains exiled.
-SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STLook | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STLook | Duration$ Permanent | ForgetOnMoved$ Exile
 SVar:STLook:Mode$ Continuous | MayLookAt$ You | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at it for as long as it remains exiled.
 A:AB$ ChooseCard | Cost$ T | Defined$ You | Amount$ 1 | Mandatory$ True | AILogic$ AtLeast1 | ChoiceTitle$ Choose a card you own to put into your hand | Choices$ Card.IsRemembered+YouOwn+ExiledWithSource | ChoiceZone$ Exile | SubAbility$ MoveChosen | SpellDescription$ Return a card you own exiled with CARDNAME to your hand.
-SVar:MoveChosen:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ ChosenCard
+SVar:MoveChosen:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ ChosenCard | ForgetChanged$ True | SubAbility$ DBCleanupChosen
+SVar:DBCleanupChosen:DB$ Cleanup | ClearChosenCard$ True
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
 SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBChangeZoneAll | TriggerDescription$ When you lose control of CARDNAME, put all cards exiled with CARDNAME into their owner's graveyard.

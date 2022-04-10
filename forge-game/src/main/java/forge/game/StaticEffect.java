@@ -292,4 +292,4 @@ public class StaticEffect {
         makeMappedCopy(map).remove();
     }
 
-} // end class StaticEffect
+}
