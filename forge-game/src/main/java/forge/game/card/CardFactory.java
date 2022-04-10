@@ -139,8 +139,7 @@ public class CardFactory {
         }
 
         if (sourceSA.hasParam("CopySetLoyalty")) {
-            final String s = sourceSA.getParam("CopySetLoyalty");
-            c.setBaseLoyalty(StringUtils.isNumeric(s) ? Integer.parseInt(s) : Integer.parseInt(targetSA.getSVar(s)));
+            c.setBaseLoyalty(AbilityUtils.calculateAmount(source, sourceSA.getParam("CopySetLoyalty"), sourceSA));
         }
 
         if (sourceSA.hasParam("CopyAddTypes")) {
