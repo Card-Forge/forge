@@ -251,6 +251,7 @@ public final class ForgeConstants {
     public static final String USER_CUSTOM_CARDS_DIR = USER_CUSTOM_DIR + "cards" + PATH_SEPARATOR;
     public static final String USER_CUSTOM_TOKENS_DIR = USER_CUSTOM_DIR + "tokens" + PATH_SEPARATOR;
     public static final String USER_FORMATS_DIR     = USER_CUSTOM_DIR + "formats" + PATH_SEPARATOR;
+    public static final String USER_ADVENTURE_DIR   = USER_DIR + "adventure" + PATH_SEPARATOR;
     public static final String DECK_DRAFT_DIR       = DECK_BASE_DIR + "draft" + PATH_SEPARATOR;
     public static final String DECK_WINSTON_DIR     = DECK_BASE_DIR + "winston" + PATH_SEPARATOR;
     public static final String DECK_SEALED_DIR      = DECK_BASE_DIR + "sealed" + PATH_SEPARATOR;
