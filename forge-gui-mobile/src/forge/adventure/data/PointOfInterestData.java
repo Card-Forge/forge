@@ -6,6 +6,8 @@ import com.badlogic.gdx.utils.Json;
 import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
 
+import java.util.ArrayList;
+
 /**
  * Data class that will be used to read Json configuration files
  * BiomeData
@@ -37,10 +39,12 @@ public class PointOfInterestData {
         return pointOfInterestList;
     }
     public static PointOfInterestData getPointOfInterest(String name) {
-        for(PointOfInterestData data: new Array.ArrayIterator<>(getAllPointOfInterest()))
-        {
-            if(data.name.equals(name))
-                return data;
+        ArrayList<PointOfInterestData> candidates = new ArrayList<PointOfInterestData>();
+        for(PointOfInterestData data: new Array.ArrayIterator<>(getAllPointOfInterest())){
+            if(data.name.equals(name)) candidates.add(data); //Populate candidates with specified name.
+        }
+        if(candidates.size() > 0){ //If we got any candidates, return a random one.
+            return candidates.get((int) (Math.random() * candidates.size()));
         }
         return null;
     }
