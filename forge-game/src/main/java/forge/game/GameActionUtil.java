@@ -582,7 +582,7 @@ public final class GameActionUtil {
                             result = sa.copy();
                         }
                         result.getPayCosts().add(cost);
-                        result.setSVar("Casualty", n);
+                        tr.getOverridingAbility().setSVar("Casualty", n);
                         reset = true;
                     }
                 }
