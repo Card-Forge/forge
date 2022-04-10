@@ -8,6 +8,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.SaveFileData;
 import forge.adventure.util.SignalList;
 import forge.deck.Deck;
+import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgeProfileProperties;
 import forge.player.GamePlayerUtil;
 
@@ -110,11 +111,11 @@ public class WorldSave {
     }
 
     public static String getSaveDir() {
-        return ForgeProfileProperties.getUserDir() + File.separator + "Adventure" + File.separator + Config.instance().getPlane();
+        return ForgeConstants.USER_ADVENTURE_DIR + Config.instance().getPlane();
     }
 
     public static String getSaveFile(int slot) {
-        return ForgeProfileProperties.getUserDir() + File.separator + "Adventure" + File.separator + Config.instance().getPlane() + File.separator + filename(slot);
+        return ForgeConstants.USER_ADVENTURE_DIR + Config.instance().getPlane() + File.separator + filename(slot);
     }
 
     public static WorldSave getCurrentSave() {
