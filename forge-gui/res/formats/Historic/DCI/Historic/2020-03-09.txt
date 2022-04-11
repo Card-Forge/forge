@@ -3,5 +3,5 @@ Name:Historic (2020-03-09)
 Type:Historic
 Subtype:Arena
 Effective:2020-03-09
-Sets:XLN, RIX, DOM, M19, PANA, GRN, G18, RNA, WAR, M20, ELD, HA1, THB
+Sets:XLN, RIX, DOM, M19, ANA, PANA, GRN, G18, RNA, WAR, M20, ELD, HA1, THB
 Banned:Oko, Thief of Crowns; Once Upon a Time; Veil of Summer

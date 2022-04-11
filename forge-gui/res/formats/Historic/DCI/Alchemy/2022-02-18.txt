@@ -3,4 +3,4 @@ Name:Alchemy (NEO)
 Type:Historic
 Subtype:Arena
 Effective:2022-02-18
-Sets:ANB, ZNR, KHM, STX, AFR, MID, VOW, YMID, NEO
+Sets:ANA, ANB, ZNR, KHM, STX, AFR, MID, VOW, YMID, NEO

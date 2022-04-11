@@ -3,4 +3,4 @@ Name:Alchemy (YNEO)
 Type:Historic
 Subtype:Arena
 Effective:2022-03-17
-Sets:ANB, ZNR, KHM, STX, AFR, MID, VOW, YMID, NEO, YNEO
+Sets:ANA, ANB, ZNR, KHM, STX, AFR, MID, VOW, YMID, NEO, YNEO
