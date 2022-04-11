@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Coldsnap
+Name:Standard (CSP)
 Type:Historic
 Subtype:Standard
 Effective:2006-08-20

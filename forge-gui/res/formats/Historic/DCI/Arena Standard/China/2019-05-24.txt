@@ -1,7 +1,0 @@
-[format]
-Name:China Arena Standard, War of the Spark
-Type:Historic
-Subtype:Standard
-Effective:2019-05-24
-Sets:XLN, RIX, DOM, GS1, M19, GRN, G18, RNA, WAR
-Banned:Nexus of Fate; Rampaging Ferocidon

@@ -1,5 +1,5 @@
 [format]
-Name:Time Spiral Block, Planar Chaos
+Name:Block: Time Spiral (PLC)
 Type:Historic
 Subtype:Block
 Effective:2007-02-20

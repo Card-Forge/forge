@@ -1,5 +1,5 @@
 [format]
-Name:Urza's Saga Standalone, 01/01/99
+Name:Block: Urza (USG)
 Type:Historic
 Subtype:Block
 Effective:1999-01-01

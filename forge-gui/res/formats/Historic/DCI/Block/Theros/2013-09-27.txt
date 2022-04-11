@@ -1,5 +1,5 @@
 [format]
-Name:Theros Block, Theros
+Name:Block: Theros (THS)
 Type:Historic
 Subtype:Block
 Effective:2013-09-23

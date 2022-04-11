@@ -1,5 +1,5 @@
 [format]
-Name:Zendikar Block, Rise of the Eldrazi
+Name:Block: Zendikar (ROE)
 Type:Historic
 Subtype:Block
 Effective:2010-04-23

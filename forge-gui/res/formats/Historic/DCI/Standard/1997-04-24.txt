@@ -1,6 +1,0 @@
-[format]
-Name:Type II, Fifth Edition
-Type:Historic
-Subtype:Standard
-Effective:1997-04-24
-Sets:ALL, MIR, VIS, 5ED

@@ -1,8 +1,0 @@
-[format]
-Name:Type II, October 1, 1995
-Type:Historic
-Subtype:Standard
-Effective:1995-10-01
-Sets:FEM, 4ED, ICE, CHR
-Restricted:Balance, Channel, Feldon's Cane, Ivory Tower, Mind Twist, Recall
-Banned:Amulet of Quoz, Bronze Tablet, Rebirth, Tempest Efreet

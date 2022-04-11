@@ -1,5 +1,5 @@
 [format]
-Name:Mirrodin Block, Mirrodin
+Name:Block: Mirrodin (MRD)
 Type:Historic
 Subtype:Block
 Effective:2003-10-20

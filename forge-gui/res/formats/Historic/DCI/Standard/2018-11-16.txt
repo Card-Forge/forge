@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Gift Pack 2018
+Name:Standard (G18)
 Type:Historic
 Subtype:Standard
 Effective:2018-11-16

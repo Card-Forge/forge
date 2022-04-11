@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Scourge
+Name:Standard (SCG)
 Type:Historic
 Subtype:Standard
 Effective:2003-07-01

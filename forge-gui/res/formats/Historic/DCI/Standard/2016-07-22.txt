@@ -1,6 +1,6 @@
 [format]
-Name:Standard, Eldritch Moon
+Name:Standard (EMN)
 Type:Historic
 Subtype:Standard
 Effective:2016-07-22
-Sets:DTK, ORI, BFZ, OGW, W16, SOI, EMN
+Sets:DTK, ORI, BFZ, OGW, SOI, W16, EMN

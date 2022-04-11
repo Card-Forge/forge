@@ -1,5 +1,5 @@
 [format]
-Name:Time Spiral Block, Time Spiral
+Name:Block: Time Spiral (TSP)
 Type:Historic
 Subtype:Block
 Effective:2006-10-20

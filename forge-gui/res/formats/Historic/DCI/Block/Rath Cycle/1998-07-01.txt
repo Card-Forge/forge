@@ -1,5 +1,5 @@
 [format]
-Name:Tempest/Stronghold/Exodus Block, Exodus
+Name:Block: Tempest;Stronghold;Exodus (EXO)
 Type:Historic
 Subtype:Block
 Effective:1998-07-01

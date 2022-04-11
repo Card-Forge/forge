@@ -1,5 +1,5 @@
 [format]
-Name:Theros Block, Journey into Nyx
+Name:Block: Theros (JOU)
 Type:Historic
 Subtype:Block
 Effective:2014-05-02

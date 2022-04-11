@@ -1,5 +1,5 @@
 [format]
-Name:Khans of Tarkir Block, Fate Reforged
+Name:Block: Khans of Tarkir (FRF)
 Type:Historic
 Subtype:Block
 Effective:2015-01-23

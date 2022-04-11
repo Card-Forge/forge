@@ -1,6 +1,6 @@
 [format]
-Name:Standard, Ravnica: City of Guilds
+Name:Standard (RAV)
 Type:Historic
 Subtype:Standard
-Effective:2005-08-20
+Effective:2005-10-20
 Sets:CHK, BOK, SOK, 9ED, RAV

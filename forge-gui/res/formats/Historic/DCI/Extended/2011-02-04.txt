@@ -1,5 +1,5 @@
 [format]
-Name:Extended, Mirrodin Besieged
+Name:Extended (MBS)
 Type:Historic
 Subtype:Extended
 Effective:2011-02-04

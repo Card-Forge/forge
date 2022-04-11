@@ -1,5 +1,5 @@
 [format]
-Name:Onslaught Block, Legions
+Name:Block: Onslaught (LGN)
 Type:Historic
 Subtype:Block
 Effective:2003-03-01

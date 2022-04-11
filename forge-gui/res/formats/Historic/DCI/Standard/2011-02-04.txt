@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Mirrodin Besieged
+Name:Standard (MBS)
 Type:Historic
 Subtype:Standard
 Effective:2011-02-04

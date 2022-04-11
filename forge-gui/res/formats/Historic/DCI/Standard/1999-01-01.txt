@@ -1,7 +1,7 @@
 [format]
-Name:Standard, 01/01/99
+Name:Standard (1999-01-01)
 Type:Historic
 Subtype:Standard
 Effective:1999-01-01
 Sets:5ED, TMP, STH, EXO, USG
-Banned:Tolarian Academy, Windfall
+Banned:Tolarian Academy; Windfall

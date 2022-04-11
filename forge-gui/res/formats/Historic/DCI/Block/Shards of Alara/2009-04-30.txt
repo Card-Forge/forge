@@ -1,5 +1,5 @@
 [format]
-Name:Shards of Alara Block, Alara Reborn
+Name:Block: Shards of Alara (ARB)
 Type:Historic
 Subtype:Block
 Effective:2009-04-30

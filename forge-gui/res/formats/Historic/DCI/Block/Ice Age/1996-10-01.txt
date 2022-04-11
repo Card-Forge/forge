@@ -1,5 +1,5 @@
 [format]
-Name:Ice Age/Alliances, 10/01/96
+Name:Block: Ice Age (ALL)
 Type:Historic
 Subtype:Block
 Effective:1996-10-01

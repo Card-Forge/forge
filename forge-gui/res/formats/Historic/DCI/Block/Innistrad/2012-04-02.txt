@@ -1,5 +1,5 @@
 [format]
-Name:Innistrad Block, 04/02/12
+Name:Block: Innistrad (2012-04-02)
 Type:Historic
 Subtype:Block
 Effective:2012-04-02

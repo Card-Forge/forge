@@ -1,5 +1,5 @@
 [format]
-Name:Shadows over Innistrad Block, Eldritch Moon
+Name:Block: Shadows over Innistrad (EMN)
 Type:Historic
 Subtype:Block
 Effective:2016-07-22

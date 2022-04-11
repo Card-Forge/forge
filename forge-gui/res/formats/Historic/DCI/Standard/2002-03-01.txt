@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Torment
+Name:Standard (TOR)
 Type:Historic
 Subtype:Standard
 Effective:2002-03-01

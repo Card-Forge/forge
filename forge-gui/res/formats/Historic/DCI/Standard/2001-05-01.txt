@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Seventh Edition
+Name:Standard (7ED)
 Type:Historic
 Subtype:Standard
 Effective:2001-05-01

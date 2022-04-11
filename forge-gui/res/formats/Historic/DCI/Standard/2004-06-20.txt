@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Fifth Dawn
+Name:Standard (5DN)
 Type:Historic
 Subtype:Standard
 Effective:2004-06-20

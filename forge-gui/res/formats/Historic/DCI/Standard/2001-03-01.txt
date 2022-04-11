@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Planeshift
+Name:Standard (PLS)
 Type:Historic
 Subtype:Standard
 Effective:2001-03-01

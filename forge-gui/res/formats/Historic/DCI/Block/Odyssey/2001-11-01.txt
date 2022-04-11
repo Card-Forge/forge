@@ -1,5 +1,5 @@
 [format]
-Name:Odyssey Block, Odyssey
+Name:Block: Odyssey (ODY)
 Type:Historic
 Subtype:Block
 Effective:2001-11-01
