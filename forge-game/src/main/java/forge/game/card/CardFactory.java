@@ -40,7 +40,6 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.CardTranslation;
 import forge.util.TextUtil;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
