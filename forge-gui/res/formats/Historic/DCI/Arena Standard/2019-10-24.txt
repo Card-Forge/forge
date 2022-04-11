@@ -1,7 +1,7 @@
 [format]
 Name:Arena Standard (2019-10-24)
 Type:Historic
-Subtype:Standard
+Subtype:Arena
 Effective:2019-10-24
 Sets:ANA, PANA, GRN, RNA, WAR, M20, ELD
 Banned:Field of the Dead
