@@ -196,7 +196,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean tokenCard = false;
     private Card copiedPermanent;
     private boolean copiedSpell = false;
-    private boolean receivedNonCombatDamageThisTurn = false;
 
     private boolean canCounter = true;
 
@@ -3202,13 +3201,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         becameTargetThisTurn = becameTargetThisTurn0;
     }
 
-    public boolean hasBeenDealtNonCombatDamageThisTurn() {
-        return receivedNonCombatDamageThisTurn;
-    }
-    public void setHasBeenDealtNonCombatDamageThisTurn(boolean b) {
-        receivedNonCombatDamageThisTurn = b;
-    }
-
     public boolean hasStartedTheTurnUntapped() {
         return startedTheTurnUntapped;
     }
@@ -5487,7 +5479,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (isCombat) {
             source.getDamageHistory().registerCombatDamage(this, damageIn);
         } else {
-            setHasBeenDealtNonCombatDamageThisTurn(true);
+            getDamageHistory().setHasBeenDealtNonCombatDamageThisTurn(true);
         }
 
         // Run triggers
@@ -6125,7 +6117,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             setDamage(0);
         }
         setHasBeenDealtDeathtouchDamage(false);
-        setHasBeenDealtNonCombatDamageThisTurn(false);
         resetReceivedDamageFromThisTurn();
         setRegeneratedThisTurn(0);
         resetShield();
@@ -6136,6 +6127,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttackedThisTurn());
         getDamageHistory().setCreatureAttackedThisTurn(false);
         getDamageHistory().setCreatureAttacksThisTurn(0);
+        getDamageHistory().setHasBeenDealtNonCombatDamageThisTurn(false);
         clearBlockedByThisTurn();
         clearBlockedThisTurn();
         resetMayPlayTurn();

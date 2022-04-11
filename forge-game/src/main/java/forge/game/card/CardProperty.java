@@ -1174,7 +1174,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("wasDealtNonCombatDamageThisTurn")) {
-            if (!card.hasBeenDealtNonCombatDamageThisTurn()) {
+            if (!card.getDamageHistory().hasBeenDealtNonCombatDamageThisTurn()) {
                 return false;
             }
         } else if (property.startsWith("dealtDamageThisTurn")) {
