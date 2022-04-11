@@ -1,6 +1,6 @@
 [format]
 Name:Arena Standard (AKH/HOU)
 Type:Historic
-Subtype:Standard
+Subtype:Arena
 Effective:2018-03-22
 Sets:XLN, RIX, AKH, HOU
