@@ -1,28 +1,37 @@
 {
-	"startPointX": 0.70,
-	"startPointY": 0.78,
-	"name": "black",
-	"noiseWeight": 0.5,
-	"distWeight": 1.5,
+  "startPointX": 0.70,
+  "startPointY": 0.78,
+  "name": "black",
+  "noiseWeight": 0.5,
+  "distWeight": 1.5,
   "tilesetName":"Black",
-  "tilesetAtlas":"world/tilesets/terrain.atlas",  
-    "terrain":[
-    {
-    "spriteName":"Black_1",
-    "min": 0,           
-    "max": 0.2,           
-    "resolution": 10
-    },    {
-    "spriteName":"Black_2",
-    "min": 0.8,           
-    "max": 1.0,           
-    "resolution": 10
+  "tilesetAtlas":"world/tilesets/terrain.atlas",
+  "terrain":[
+  {
+      "spriteName":"Black_1",
+      "min": 0,
+      "max": 0.2,
+      "resolution": 10
+    },{
+      "spriteName":"Black_2",
+      "min": 0.8,
+      "max": 1.0,
+      "resolution": 10
     }
-    ],
-	"width": 0.7,
-	"height": 0.7,
-	"color": "110903",
-	"spriteNames":[ "SwampTree","SwampTree2","DarkGras","Skull","SwampRock","DarkWood","Reed","Waterlily","Shroom","Shroom2"]   ,
-	"enemies":[ "Beholder","Big Zombie","Black Wiz1","Black Wiz2","Black Wiz3","Dark Knight","Death Knight","Demon","Ghoul","Ghost","Harpy","Harpy 2","High Vampire","Lich","Rakdos Devil","Skeleton","Skeleton Soldier","Vampire","Zombie","Zombie Lord" ]   ,
-	"pointsOfInterest":[ "Black Castle","Swamp Town","Swamp Town2","Zombie Town","Graveyard","VampireCastle","EvilGrove","SkullCaveB","CaveB" ]
+  ],
+  "width": 0.7,
+  "height": 0.7,
+  "color": "110903",
+  "spriteNames":[ "SwampTree","SwampTree2","DarkGras","Skull","SwampRock","DarkWood","Reed","Waterlily","Shroom","Shroom2"]   ,
+  "enemies":[ "Beholder","Big Zombie","Black Wiz1","Black Wiz2","Black Wiz3","Dark Knight","Death Knight","Demon","Ghoul","Ghost","Harpy","Harpy 2","High Vampire","Lich","Rakdos Devil","Skeleton","Skeleton Soldier","Vampire","Zombie","Zombie Lord" ]   ,
+  "pointsOfInterest":[
+    "Black Castle",
+    "Swamp Town","Swamp Town2",
+    "Zombie Town",
+    "Graveyard", "Graveyard1", "Graveyard2", "Graveyard3", "Graveyard4",
+    "VampireCastle", "VampireCastle1", "VampireCastle2", "VampireCastle3",
+    "EvilGrove", "EvilGrove1", "EvilGrove2", "EvilGrove3", "EvilGrove4",
+    "SkullCaveB", "SkullCaveB1", "SkullCaveB2",
+    "CaveB", "CaveB1", "CaveB2", "CaveB3", "CaveB4", "CaveB5", "CaveB6", "CaveB7", "CaveB8", "CaveB9", "CaveBA", "CaveBB", "CaveBC"
+  ]
 }
