@@ -2706,6 +2706,26 @@ public class CardFactoryUtil {
             sa.setAlternativeCost(AlternativeCost.Bestow);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
+        } else if (keyword.startsWith("Blitz")) {
+            final String[] k = keyword.split(":");
+            final Cost blitzCost = new Cost(k[1], false);
+
+            final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(blitzCost);
+
+            final StringBuilder desc = new StringBuilder();
+            desc.append("Blitz ").append(blitzCost.toSimpleString()).append(" (");
+            desc.append(inst.getReminderText());
+            desc.append(")");
+
+            newSA.setDescription(desc.toString());
+
+            final StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" (Blitz)");
+            newSA.setStackDescription(sb.toString());
+
+            newSA.setAlternativeCost(AlternativeCost.Blitz);
+            newSA.setIntrinsic(intrinsic);
+            inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Class")) {
             final String[] k = keyword.split(":");
             final int level = Integer.valueOf(k[1]);
@@ -3455,6 +3475,18 @@ public class CardFactoryUtil {
             StaticAbility st = StaticAbility.create(effect, state.getCard(), state, intrinsic);
 
             st.setSVar("AffinityX", "Count$Valid " + t + ".YouCtrl");
+            inst.addStaticAbility(st);
+        } else if (keyword.startsWith("Blitz")) {
+            String effect = "Mode$ Continuous | Affected$ Card.Self+blitzed | AddKeyword$ Haste | AddTrigger$ Dies";
+            String trig = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | " +
+                    "Execute$ TrigDraw | TriggerDescription$ When this creature dies, draw a card.";
+            String ab = "DB$ Draw | NumCards$ 1";
+
+            StaticAbility st = StaticAbility.create(effect, state.getCard(), state, intrinsic);
+
+            st.setSVar("Dies", trig);
+            st.setSVar("TrigDraw", ab);
+
             inst.addStaticAbility(st);
         } else if (keyword.equals("Changeling")) {
             String effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self" +

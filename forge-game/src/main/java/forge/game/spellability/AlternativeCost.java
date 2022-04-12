@@ -3,6 +3,7 @@ package forge.game.spellability;
 public enum AlternativeCost {
     Awaken,
     Bestow,
+    Blitz,
     Cycling, // ActivatedAbility
     Dash,
     Disturb,

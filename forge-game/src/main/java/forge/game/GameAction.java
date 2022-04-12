@@ -234,10 +234,10 @@ public class GameAction {
             }
         }
 
-        // Clean up the temporary Dash SVar when the Dashed card leaves the battlefield
+        // Clean up the temporary Dash/Blitz SVar when the card leaves the battlefield
         // Clean up the temporary AtEOT SVar
         String endofTurn = c.getSVar("EndOfTurnLeavePlay");
-        if (fromBattlefield && (endofTurn.equals("Dash") || endofTurn.equals("AtEOT"))) {
+        if (fromBattlefield && (endofTurn.equals("Dash") || endofTurn.equals("Blitz") || endofTurn.equals("AtEOT"))) {
             c.removeSVar("EndOfTurnLeavePlay");
         }
 

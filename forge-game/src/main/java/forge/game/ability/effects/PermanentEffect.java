@@ -45,6 +45,11 @@ public class PermanentEffect extends SpellAbilityEffect {
             c.setSVar("EndOfTurnLeavePlay", "Dash");
             registerDelayedTrigger(sa, "Hand", Lists.newArrayList(c));
         }
+        // similar for Blitz keyword
+        if (sa.isBlitz() && c.isInPlay()) {
+            c.setSVar("EndOfTurnLeavePlay", "Blitz");
+            registerDelayedTrigger(sa, "Sacrifice", Lists.newArrayList(c));
+        }
 
         ZoneType newZone = c.getZone().getZoneType();
         if (newZone != previousZone) {
