@@ -1,0 +1,17 @@
+Name:All-Seeing Arbiter
+ManaCost:4 U U
+Types:Creature Avatar
+PT:5/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, draw two cards, then discard a card.
+T:Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, draw two cards, then discard a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ TrigDiscard
+SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+T:Mode$ Discarded | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ RememberGraveyardCards | TriggerDescription$ Whenever you discard a card, target creature an opponent controls gets -X/-0 until your next turn, where X is the number of different mana values among cards in your graveyard.
+SVar:RememberGraveyardCards:DB$ PumpAll | PumpZone$ Graveyard | ValidCards$ Card.YouCtrl | RememberAllPumped$ True | SubAbility$ TrigPump
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | IsCurse$ True | NumAtt$ -X | Duration$ UntilYourNextTurn | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$DifferentCMC
+SVar:HasAttackEffect:True
+DeckHas:Ability$Discard
+Oracle:Flying\nWhenever All-Seeing Arbiter enters the battlefield or attacks, draw two cards, then discard a card.\nWhenever you discard a card, target creature an opponent controls gets -X/-0 until your next turn, where X is the number of different mana values among cards in your graveyard.
