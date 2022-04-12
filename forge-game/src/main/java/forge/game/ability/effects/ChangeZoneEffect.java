@@ -172,7 +172,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
             final String cardTag = type.contains("card") ? "" : " card";
             sb.append(Lang.nounWithNumeralExceptOne(num, type + cardTag)).append(", ");
-            if (!sa.hasParam("NoReveal") || !destination.equals("Battlefield")) {
+            if (!sa.hasParam("NoReveal") && !destination.equals("Battlefield")) {
                 if (choosers.size() == 1) {
                     sb.append(num > 1 ? "reveals them, " : "reveals it, ");
                 } else {
@@ -294,6 +294,14 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             // for the non-targeted SAs when you choose what is returned on resolution
             sb.append("Return ").append(num).append(" ").append(type).append(" card(s) ");
             sb.append(" to your ").append(destination);
+        } else if (origin.equals("Graveyard")) {
+            // for non-targeted SAs when you choose what is moved on resolution
+            // this will need expansion as more cards use it
+            sb.append(chooserNames).append(" puts ");
+            final String cardTag = type.contains("card") ? "" : " card";
+            sb.append(num != 0 ? Lang.nounWithNumeralExceptOne(num, type + cardTag) :
+                    sa.getParamOrDefault("ChangeNumDesc", "") + " " + type + cardTag);
+            sb.append(" into their ").append(destination.toLowerCase()).append(".");
         }
 
         return sb.toString();
