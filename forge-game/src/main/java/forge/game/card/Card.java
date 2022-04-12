@@ -5493,6 +5493,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         source.getDamageHistory().registerDamage(this, damageIn);
         if (isCombat) {
             source.getDamageHistory().registerCombatDamage(this, damageIn);
+        } else {
+            getDamageHistory().setHasBeenDealtNonCombatDamageThisTurn(true);
         }
 
         // Run triggers
@@ -6140,6 +6142,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttackedThisTurn());
         getDamageHistory().setCreatureAttackedThisTurn(false);
         getDamageHistory().setCreatureAttacksThisTurn(0);
+        getDamageHistory().setHasBeenDealtNonCombatDamageThisTurn(false);
         clearBlockedByThisTurn();
         clearBlockedThisTurn();
         resetMayPlayTurn();

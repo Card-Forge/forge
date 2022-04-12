@@ -1173,6 +1173,10 @@ public class CardProperty {
             if (card.getReceivedDamageFromPlayerThisTurn().isEmpty()) {
                 return false;
             }
+        } else if (property.equals("wasDealtNonCombatDamageThisTurn")) {
+            if (!card.getDamageHistory().hasBeenDealtNonCombatDamageThisTurn()) {
+                return false;
+            }
         } else if (property.startsWith("dealtDamageThisTurn")) {
             if (card.getTotalDamageDoneBy() == 0) {
                 return false;
