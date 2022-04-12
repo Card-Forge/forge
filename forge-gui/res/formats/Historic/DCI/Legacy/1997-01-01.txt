@@ -1,5 +1,5 @@
 [format]
-Name:Type 1.5 (MIR)
+Name:Type 1.5 (1997-01-01)
 Type:Historic
 Subtype:Legacy
 Effective:1997-01-01

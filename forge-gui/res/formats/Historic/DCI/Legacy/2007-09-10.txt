@@ -1,5 +1,5 @@
 [format]
-Name:Legacy (10E)
+Name:Legacy (MED)
 Type:Historic
 Subtype:Legacy
 Effective:2007-09-10
