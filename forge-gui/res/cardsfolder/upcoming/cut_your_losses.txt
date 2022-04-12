@@ -4,4 +4,5 @@ Types:Sorcery
 K:Casualty:2
 A:SP$ Mill | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ X | SpellDescription$ Target player mills half their library, rounded down.
 SVar:X:TargetedPlayer$CardsInLibrary/HalfDown
+DeckHas:Ability$Sacrifice|Mill
 Oracle:Casualty 2 (As you cast this spell, you may sacrifice a creature with power 2 or greater. When you do, copy this spell and you may choose new targets for the copy.)\nTarget player mills half their library, rounded down.
