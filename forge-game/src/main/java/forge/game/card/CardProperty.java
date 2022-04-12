@@ -1688,7 +1688,7 @@ public class CardProperty {
             if (card.getCastSAFallBack() == null) {
                 return false;
             }
-            return card.getCastSA().isBlitz();
+            return card.getCastSAFallBack().isBlitz();
         } else if (property.equals("dashed")) {
             if (card.getCastSAFallBack() == null) {
                 return false;
