@@ -3,6 +3,6 @@ ManaCost:1 U U
 Types:Creature Merfolk Wizard
 PT:2/2
 T:Mode$ Countered | ValidCause$ Card.YouCtrl | ValidCard$ Card | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a spell or ability you control counters a spell, you may create a 1/1 blue Merfolk creature token.
-SVar:TrigToken:DB$ Token | LegacyImage$ u 1 1 merfolk zen | TokenAmount$ 1 | TokenScript$ u_1_1_merfolk | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_merfolk | TokenOwner$ You
 A:AB$ Counter | Cost$ tapXType<7/Merfolk> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
 Oracle:Whenever a spell or ability you control counters a spell, you may create a 1/1 blue Merfolk creature token.\nTap seven untapped Merfolk you control: Counter target spell.

@@ -5,7 +5,7 @@ PT:3/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RaidTest | Execute$ TrigToken | TriggerDescription$ Raid — When CARDNAME enters the battlefield, if you attacked this turn, create a 3/4 white Bird creature token with flying.
 SVar:RaidTest:Count$AttackersDeclared
-SVar:TrigToken:DB$ Token | TokenScript$ w_3_4_bird_flying | LegacyImage$ w 3 4 bird flying ktk | TokenAmount$ 1 | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenScript$ w_3_4_bird_flying | TokenAmount$ 1 | TokenOwner$ You
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME attacks, you gain 1 life for each attacking creature.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Creature.attacking

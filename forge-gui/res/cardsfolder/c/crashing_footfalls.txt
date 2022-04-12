@@ -4,6 +4,6 @@ Types:Sorcery
 K:Suspend:4:G
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-A:SP$ Token | Cost$ 0 | TokenAmount$ 2 | TokenScript$ g_4_4_rhino_trample | TokenOwner$ You | LegacyImage$ g 4 4 rhino trample mh1 | SpellDescription$ Create two 4/4 green Rhino creature tokens with trample.
+A:SP$ Token | Cost$ 0 | TokenAmount$ 2 | TokenScript$ g_4_4_rhino_trample | TokenOwner$ You | SpellDescription$ Create two 4/4 green Rhino creature tokens with trample.
 DeckHas:Ability$Token
 Oracle:Suspend 4—{G} (Rather than cast this card from your hand, pay {G} and exile it with four time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)\nCreate two 4/4 green Rhino creature tokens with trample.

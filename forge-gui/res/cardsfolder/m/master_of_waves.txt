@@ -5,7 +5,7 @@ PT:2/1
 K:Protection from red
 S:Mode$ Continuous | Affected$ Creature.Elemental+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Elemental creatures you control get +1/+1.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a number of 1/0 blue Elemental creature tokens equal to your devotion to blue. (Each {U} in the mana costs of permanents you control counts toward your devotion to blue.)
-SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ u_1_0_elemental | TokenOwner$ You | LegacyImage$ u 1 0 elemental ths
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ u_1_0_elemental | TokenOwner$ You
 SVar:X:Count$Devotion.Blue
 SVar:PlayMain1:TRUE
 SVar:AIEvaluationModifier:SVar$AIElemPTBonus/Plus.AIElemTokenGenBonus

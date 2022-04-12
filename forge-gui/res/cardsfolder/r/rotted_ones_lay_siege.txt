@@ -3,5 +3,5 @@ ManaCost:no cost
 Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, for each opponent, create a 2/2 black Zombie creature token that attacks that player each combat if able.
 SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBToken | ChangeZoneTable$ True
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie_designated | TokenOwner$ You | LegacyImage$ b 2 2 zombie designated arc | TokenRemembered$ Player.IsRemembered
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie_designated | TokenOwner$ You | TokenRemembered$ Player.IsRemembered
 Oracle:When you set this scheme in motion, for each opponent, create a 2/2 black Zombie creature token that attacks that player each combat if able.

@@ -2,6 +2,6 @@ Name:Open the Graves
 ManaCost:3 B B
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+nonToken | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a nontoken creature you control dies, create a 2/2 black zombie creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | LegacyImage$ b 2 2 zombie m19
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You
 DeckHas:Ability$Token
 Oracle:Whenever a nontoken creature you control dies, create a 2/2 black Zombie creature token.

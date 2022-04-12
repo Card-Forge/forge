@@ -2,6 +2,6 @@ Name:Thraben Standard Bearer
 ManaCost:W
 Types:Creature Human Soldier
 PT:1/1
-A:AB$ Token | Cost$ 1 W T Discard<1/Card> | TokenAmount$ 1 | TokenScript$ w_1_1_human_soldier | TokenOwner$ You | LegacyImage$ w 1 1 human soldier emn | SpellDescription$ Create a 1/1 white Human Soldier creature token.
+A:AB$ Token | Cost$ 1 W T Discard<1/Card> | TokenAmount$ 1 | TokenScript$ w_1_1_human_soldier | TokenOwner$ You | SpellDescription$ Create a 1/1 white Human Soldier creature token.
 DeckHints:Ability$Discard
 Oracle:{1}{W}, {T}, Discard a card: Create a 1/1 white Human Soldier creature token.

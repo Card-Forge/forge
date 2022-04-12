@@ -3,5 +3,5 @@ ManaCost:2 R
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.Goblin | AddHiddenKeyword$ CARDNAME attacks each combat if able. | Description$ Goblin creatures attack each combat if able.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a 1/1 red Goblin creature token with haste.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_goblin_haste | TokenOwner$ You | LegacyImage$ r 1 1 goblin haste ala
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_goblin_haste | TokenOwner$ You
 Oracle:At the beginning of your upkeep, create a 1/1 red Goblin creature token with haste.\nGoblin creatures attack each combat if able.

@@ -3,5 +3,5 @@ ManaCost:4 W
 Types:Creature Camel
 PT:3/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | IsPresent$ Creature.tapped+YouCtrl | TriggerDescription$ When CARDNAME enters the battlefield, if you control a tapped creature, create a 1/1 white Warrior creature token with vigilance.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_warrior_vigilance | TokenOwner$ You | LegacyImage$ w 1 1 warrior vigilance akh
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_warrior_vigilance | TokenOwner$ You
 Oracle:When Supply Caravan enters the battlefield, if you control a tapped creature, create a 1/1 white Warrior creature token with vigilance.

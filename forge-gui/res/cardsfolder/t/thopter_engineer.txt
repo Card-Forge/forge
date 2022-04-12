@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Human Artificer
 PT:1/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 colorless Thopter artifact creature token with flying.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You | LegacyImage$ c 1 1 a thopter flying ori
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You
 S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddKeyword$ Haste | Description$ Artifact creatures you control have haste. (They can attack and {T} as soon as they come under your control.)
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Token

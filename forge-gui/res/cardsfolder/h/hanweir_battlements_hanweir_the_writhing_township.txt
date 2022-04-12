@@ -20,5 +20,5 @@ PT:7/4
 K:Trample
 K:Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create two 3/2 colorless Eldrazi Horror creature tokens that are tapped and attacking.
-SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_3_2_eldrazi_horror | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True | LegacyImage$ c 3 2 eldrazi horror emn
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_3_2_eldrazi_horror | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True
 Oracle:Trample, haste\nWhenever Hanweir, the Writhing Township attacks, create two 3/2 colorless Eldrazi Horror creature tokens that are tapped and attacking.

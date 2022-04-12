@@ -7,6 +7,6 @@ SVar:TrigLoot:DB$ Draw | NumCards$ X | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ X | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:TriggerObjectsAttackers$Valid Zombie.YouCtrl
-A:AB$ Token | Cost$ 2 ExileFromGrave<2/Card> | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | LegacyImage$ b 2 2 zombie c18 | TokenTapped$ True | SpellDescription$ Create a tapped 2/2 black Zombie creature token.
+A:AB$ Token | Cost$ 2 ExileFromGrave<2/Card> | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenTapped$ True | SpellDescription$ Create a tapped 2/2 black Zombie creature token.
 DeckHas:Ability$Token
 Oracle:Whenever you attack with one or more Zombies, draw that many cards, then discard that many cards. You gain that much life.\n{2}, Exile two cards from your graveyard: Create a tapped 2/2 black Zombie creature token.

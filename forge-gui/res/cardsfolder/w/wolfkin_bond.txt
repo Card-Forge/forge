@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 4 G | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 green Wolf creature token.
-SVar:TrigToken:DB$ Token | TokenScript$ g_2_2_wolf | LegacyImage$ g 2 2 wolf emn | TokenOwner$ You | TokenAmount$ 1
+SVar:TrigToken:DB$ Token | TokenScript$ g_2_2_wolf | TokenOwner$ You | TokenAmount$ 1
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
 DeckHas:Ability$Token
 Oracle:Enchant creature\nWhen Wolfkin Bond enters the battlefield, create a 2/2 green Wolf creature token.\nEnchanted creature gets +2/+2.

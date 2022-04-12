@@ -2,10 +2,10 @@ Name:Rebellion of the Flamekin
 ManaCost:3 R
 Types:Tribal Enchantment Elemental
 T:Mode$ Clashed | ValidPlayer$ You | Won$ True | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigTokenW | TriggerDescription$ Whenever you clash, you may pay {1}. If you do, create a 3/1 red Elemental Shaman creature token. If you won, that token gains haste until end of turn. (This ability triggers after the clash ends.)
-SVar:TrigTokenW:AB$Token | Cost$ 1 | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ r_3_1_elemental_shaman | LegacyImage$ r 3 1 elemental shaman lrw | RememberTokens$ True | ForgetOtherRemembered$ True | SubAbility$ AdditionalPump
+SVar:TrigTokenW:AB$Token | Cost$ 1 | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ r_3_1_elemental_shaman | RememberTokens$ True | ForgetOtherRemembered$ True | SubAbility$ AdditionalPump
 SVar:AdditionalPump:DB$ PumpAll | ValidCards$ Creature.IsRemembered | KW$ Haste | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Clashed | ValidPlayer$ You | Won$ False | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigTokenL | Secondary$ True | TriggerDescription$ Whenever you clash, you may pay {1}. If you do, create a 3/1 red Elemental Shaman creature token. If you won, that token gains haste until end of turn. (This ability triggers after the clash ends.)
-SVar:TrigTokenL:AB$Token | Cost$ 1 | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ r_3_1_elemental_shaman | LegacyImage$ r 3 1 elemental shaman lrw
+SVar:TrigTokenL:AB$Token | Cost$ 1 | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ r_3_1_elemental_shaman
 AI:RemoveDeck:Random
 Oracle:Whenever you clash, you may pay {1}. If you do, create a 3/1 red Elemental Shaman creature token. If you won, that token gains haste until end of turn. (This ability triggers after the clash ends.)

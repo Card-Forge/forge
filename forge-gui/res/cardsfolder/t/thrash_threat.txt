@@ -12,6 +12,6 @@ ALTERNATE
 Name:Threat
 ManaCost:2 R G
 Types:Sorcery
-A:SP$ Token | Cost$ 2 R G | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ rg_4_4_beast_trample | LegacyImage$ rg 4 4 beast trample rna | SpellDescription$ Create a 4/4 red and green Beast creature token with trample.
+A:SP$ Token | Cost$ 2 R G | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ rg_4_4_beast_trample | SpellDescription$ Create a 4/4 red and green Beast creature token with trample.
 DeckHas:Ability$Token
 Oracle:Create a 4/4 red and green Beast creature token with trample.

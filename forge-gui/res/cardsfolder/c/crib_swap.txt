@@ -3,5 +3,5 @@ ManaCost:2 W
 Types:Tribal Instant Shapeshifter
 K:Changeling
 A:SP$ ChangeZone | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | IsCurse$ True | SubAbility$ DBToken | AILogic$ Pongify | SpellDescription$ Exile target creature. Its controller creates a 1/1 colorless Shapeshifter creature token with changeling.
-SVar:DBToken:DB$ Token | LegacyImage$ c 1 1 shapeshifter changeling lrw | TokenAmount$ 1 | TokenScript$ c_1_1_shapeshifter_changeling | TokenOwner$ TargetedController
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_shapeshifter_changeling | TokenOwner$ TargetedController
 Oracle:Changeling (This card is every creature type.)\nExile target creature. Its controller creates a 1/1 colorless Shapeshifter creature token with changeling.

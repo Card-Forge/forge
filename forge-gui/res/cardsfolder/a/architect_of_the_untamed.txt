@@ -4,5 +4,5 @@ Types:Creature Elf Artificer Druid
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigEnergy | TriggerDescription$ Whenever a land enters the battlefield under your control, you get {E} (an energy counter).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 1
-A:AB$ Token | Cost$ PayEnergy<8> | TokenAmount$ 1 | TokenScript$ c_6_6_a_beast | TokenOwner$ You | LegacyImage$ c 6 6 a beast kld | SpellDescription$ Create a 6/6 colorless Beast artifact creature token.
+A:AB$ Token | Cost$ PayEnergy<8> | TokenAmount$ 1 | TokenScript$ c_6_6_a_beast | TokenOwner$ You | SpellDescription$ Create a 6/6 colorless Beast artifact creature token.
 Oracle:Whenever a land enters the battlefield under your control, you get {E} (an energy counter).\nPay {E}{E}{E}{E}{E}{E}{E}{E}: Create a 6/6 colorless Beast artifact creature token.

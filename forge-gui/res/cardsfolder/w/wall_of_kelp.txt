@@ -3,5 +3,5 @@ ManaCost:U U
 Types:Creature Plant Wall
 PT:0/3
 K:Defender
-A:AB$ Token | Cost$ U U T | TokenAmount$ 1 | TokenScript$ kelp | TokenOwner$ You | LegacyImage$ kelp hml | SpellDescription$ Create a 0/1 blue Plant Wall creature token with defender named Kelp.
+A:AB$ Token | Cost$ U U T | TokenAmount$ 1 | TokenScript$ kelp | TokenOwner$ You | SpellDescription$ Create a 0/1 blue Plant Wall creature token with defender named Kelp.
 Oracle:Defender (This creature can't attack.)\n{U}{U}, {T}: Create a 0/1 blue Plant Wall creature token with defender named Kelp.

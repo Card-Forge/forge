@@ -3,7 +3,7 @@ ManaCost:3 W W
 Types:Creature Elemental
 PT:4/4
 T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromYourHandByYou+Self | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, create a 1/1 white Bird creature token with flying, then populate. (Create a token that's a copy of a creature token you control.)
-SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ w_1_1_bird_flying | LegacyImage$ w 1 1 bird flying dgm | SubAbility$ DBCopy
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ w_1_1_bird_flying | SubAbility$ DBCopy
 SVar:DBCopy:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True
 DeckHas:Ability$Token
 Oracle:When Scion of Vitu-Ghazi enters the battlefield, if you cast it from your hand, create a 1/1 white Bird creature token with flying, then populate. (Create a token that's a copy of a creature token you control.)

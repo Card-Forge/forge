@@ -4,7 +4,7 @@ Types:Creature Human Werewolf
 PT:2/2
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TokenAndLife | TriggerDescription$ Whenever this creature enters the battlefield or transforms into CARDNAME, create a 2/2 green Wolf creature token and you gain 2 life.
 T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TokenAndLife | Secondary$ True | TriggerDescription$ Whenever this creature enters the battlefield or transforms into CARDNAME, create a 2/2 green Wolf creature token and you gain 2 life.
-SVar:TokenAndLife:DB$ Token | TokenOwner$ You | TokenScript$ g_2_2_wolf | LegacyImage$ g 2 2 wolf dka | TokenAmount$ 1 | SubAbility$ Life
+SVar:TokenAndLife:DB$ Token | TokenOwner$ You | TokenScript$ g_2_2_wolf | TokenAmount$ 1 | SubAbility$ Life
 SVar:Life:DB$ GainLife | Defined$ You | LifeAmount$ 2
 T:Mode$ Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform

@@ -5,7 +5,7 @@ PT:4/4
 K:Partner:Krav, the Unredeemed:Krav
 K:Flying
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ YouTeamLifeGained | SVarCompare$ GE1 | Execute$ TrigWarrior | TriggerDescription$ At the beginning of each end step, if your team gained life this turn, create two 1/1 white Warrior creature tokens.
-SVar:TrigWarrior:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_warrior | TokenOwner$ You | LegacyImage$ w 1 1 warrior bbd | SpellDescription$ Create two 1/1 white Warrior creature tokens.
+SVar:TrigWarrior:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_warrior | TokenOwner$ You | SpellDescription$ Create two 1/1 white Warrior creature tokens.
 SVar:YouTeamLifeGained:Count$LifeYourTeamGainedThisTurn
 DeckHints:Name$Krav, the Unredeemed
 Oracle:Partner with Krav, the Unredeemed (When this creature enters the battlefield, target player may put Krav into their hand from their library, then shuffle.)\nFlying\nAt the beginning of each end step, if your team gained life this turn, create two 1/1 white Warrior creature tokens.

@@ -5,7 +5,7 @@ R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ 
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Mountain.YouCtrl+Other | ConditionCompare$ LT3 | SubAbility$ MoveToPlay
 SVar:MoveToPlay:DB$ ChangeZone | Defined$ Self | Origin$ All | Destination$ Battlefield
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+untapped | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield untapped, create a 1/1 red Dwarf creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_dwarf | TokenOwner$ You | LegacyImage$ r 1 1 dwarf eld
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_dwarf | TokenOwner$ You
 DeckHas:Ability$Token
 DeckNeeds:Color$Red
 Oracle:({T}: Add {R}.)\nDwarven Mine enters the battlefield tapped unless you control three or more other Mountains.\nWhen Dwarven Mine enters the battlefield untapped, create a 1/1 red Dwarf creature token.

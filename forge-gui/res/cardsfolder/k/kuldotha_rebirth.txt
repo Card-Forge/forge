@@ -1,7 +1,7 @@
 Name:Kuldotha Rebirth
 ManaCost:R
 Types:Sorcery
-A:SP$ Token | Cost$ R Sac<1/Artifact> | TokenAmount$ 3 | TokenOwner$ You | TokenScript$ r_1_1_goblin | LegacyImage$ r 1 1 goblin som | SpellDescription$ Create three 1/1 red Goblin creature tokens.
+A:SP$ Token | Cost$ R Sac<1/Artifact> | TokenAmount$ 3 | TokenOwner$ You | TokenScript$ r_1_1_goblin | SpellDescription$ Create three 1/1 red Goblin creature tokens.
 AI:RemoveDeck:Random
 DeckNeeds:Type$Artifact
 SVar:AIPreference:SacCost$Artifact.token,Artifact.cmcEQ1

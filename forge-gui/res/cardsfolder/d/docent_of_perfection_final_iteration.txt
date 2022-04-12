@@ -4,7 +4,7 @@ Types:Creature Insect Horror
 PT:5/4
 K:Flying
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an instant or sorcery spell, create a 1/1 blue Human Wizard creature token. Then if you control three or more Wizards, transform CARDNAME.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_human_wizard | LegacyImage$ u 1 1 human wizard emn | TokenOwner$ You | SubAbility$ DBTransform
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_human_wizard | TokenOwner$ You | SubAbility$ DBTransform
 SVar:DBTransform:DB$ SetState | Defined$ Self | ConditionPresent$ Card.Wizard+YouCtrl | ConditionCompare$ GE3 | Mode$ Transform
 SVar:BuffedBy:Instant,Sorcery
 DeckHints:Type$Wizard
@@ -20,5 +20,5 @@ PT:6/5
 K:Flying
 S:Mode$ Continuous | Affected$ Card.Wizard+YouCtrl | AddPower$ 2 | AddToughness$ 1 | AddKeyword$ Flying | Description$ Wizards you control get +2/+1 and have flying.
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an instant or sorcery spell, create a 1/1 blue Human Wizard creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_human_wizard | LegacyImage$ u 1 1 human wizard emn | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_human_wizard | TokenOwner$ You
 Oracle:Flying\nWizards you control get +2/+1 and have flying.\nWhenever you cast an instant or sorcery spell, create a 1/1 blue Human Wizard creature token.

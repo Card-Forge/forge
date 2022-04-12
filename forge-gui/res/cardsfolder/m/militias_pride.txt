@@ -2,5 +2,5 @@ Name:Militia's Pride
 ManaCost:1 W
 Types:Tribal Enchantment Kithkin
 T:Mode$ Attacks | ValidCard$ Creature.nonToken+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a nontoken creature you control attacks, you may pay {W}. If you do, create a 1/1 white Kithkin Soldier creature token that's tapped and attacking.
-SVar:TrigToken:AB$Token | Cost$ W | TokenAmount$ 1 | TokenScript$ w_1_1_kithkin_soldier | TokenOwner$ You | LegacyImage$ w 1 1 kithkin soldier lrw | TokenTapped$ True | TokenAttacking$ True
+SVar:TrigToken:AB$Token | Cost$ W | TokenAmount$ 1 | TokenScript$ w_1_1_kithkin_soldier | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True
 Oracle:Whenever a nontoken creature you control attacks, you may pay {W}. If you do, create a 1/1 white Kithkin Soldier creature token that's tapped and attacking.

@@ -2,7 +2,7 @@ Name:Wolfrider's Saddle
 ManaCost:3 G
 Types:Artifact Equipment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 green Wolf creature token, then attach CARDNAME to it.
-SVar:TrigToken:DB$ Token | LegacyImage$ g 2 2 wolf m20 | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | RememberTokens$ True | SubAbility$ DBAttach
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | RememberTokens$ True | SubAbility$ DBAttach
 SVar:DBAttach:DB$ Attach | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token

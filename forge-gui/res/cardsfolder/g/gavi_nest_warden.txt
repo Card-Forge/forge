@@ -5,7 +5,7 @@ PT:2/5
 S:Mode$ Continuous | Affected$ You | AddKeyword$ CyclingForZero | CheckSVar$ X | SVarCompare$ LT1 | Description$ You may pay {0} rather than pay the cycling cost of the first card you cycle each turn.
 SVar:X:Count$YouCycledThisTurn
 T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you draw your second card each turn, create a 2/2 red and white Dinosaur Cat creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ rw_2_2_dinosaur_cat | TokenOwner$ You | LegacyImage$ rw 2 2 dinosaur cat c20
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ rw_2_2_dinosaur_cat | TokenOwner$ You
 DeckHas:Ability$Token
 SVar:PlayMain1:TRUE
 DeckHints:Type$Dinosaur

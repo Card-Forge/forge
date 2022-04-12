@@ -5,7 +5,7 @@ PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Forests you control.
 SVar:X:Count$Valid Forest.YouCtrl
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a green Treefolk Warrior creature token with "This creature's power and toughness are each equal to the number of Forests you control."
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_x_x_treefolk_warrior_total_forests | LegacyImage$ g x x treefolk warrior m15
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_x_x_treefolk_warrior_total_forests
 SVar:BuffedBy:Forest
 SVar:NeedsToPlayVar:X GE3
 Oracle:Kalonian Twingrove's power and toughness are each equal to the number of Forests you control.\nWhen Kalonian Twingrove enters the battlefield, create a green Treefolk Warrior creature token with "This creature's power and toughness are each equal to the number of Forests you control."

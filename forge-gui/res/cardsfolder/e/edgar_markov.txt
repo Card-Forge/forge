@@ -4,7 +4,7 @@ Types:Legendary Creature Vampire Knight
 PT:4/4
 T:Mode$ SpellCast | ValidCard$ Card.Vampire+Other | ValidActivatingPlayer$ You | TriggerZones$ Command | PresentZone$ Command | Execute$ TrigToken | TriggerDescription$ Eminence — Whenever you cast another Vampire spell, if Edgar Markov is in the command zone or on the battlefield, create a 1/1 black Vampire creature token.
 T:Mode$ SpellCast | ValidCard$ Card.Vampire+Other | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | PresentZone$ Battlefield | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Eminence — Whenever you cast another Vampire spell, if Edgar Markov is in the command zone or on the battlefield, create a 1/1 black Vampire creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_vampire | TokenOwner$ You | LegacyImage$ b 1 1 vampire c17
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_vampire | TokenOwner$ You
 K:First Strike
 K:Haste
 T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever CARDNAME attacks, put a +1/+1 counter on each Vampire you control.

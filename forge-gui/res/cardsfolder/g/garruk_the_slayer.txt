@@ -3,7 +3,7 @@ ManaCost:no cost
 Colors:black,green
 Types:Legendary Planeswalker Garruk
 Loyalty:20
-A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | TokenScript$ g_2_2_wolf | LegacyImage$ g 2 2 wolf m15 | SpellDescription$ Put a 2/2 green Wolf creature token onto the battlefield.
+A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | TokenScript$ g_2_2_wolf | SpellDescription$ Put a 2/2 green Wolf creature token onto the battlefield.
 A:AB$ Pump | Cost$ AddCounter<4/LOYALTY> | Planeswalker$ True | NumAtt$ +1 | NumDef$ +0 | KW$ Deathtouch | TgtPrompt$ Select target Wolf creature | ValidTgts$ Creature.Wolf | SpellDescription$ Target Wolf creature gets +1/+0 and gains deathtouch until end of turn.
 A:AB$ Destroy | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBAddLoyalty | SpellDescription$ Destroy target creature. Put loyalty counters on CARDNAME equal to that creature's toughness.
 SVar:DBAddLoyalty:DB$ PutCounter | Defined$ Self | CounterType$ LOYALTY | CounterNum$ X

@@ -3,5 +3,5 @@ ManaCost:2 R R
 Types:Creature Goblin Warrior
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 red Goblin creature tokens.
-SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ r_1_1_goblin | LegacyImage$ r 1 1 goblin pc2 | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ r_1_1_goblin | TokenOwner$ You
 Oracle:When Beetleback Chief enters the battlefield, create two 1/1 red Goblin creature tokens.

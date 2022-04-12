@@ -2,7 +2,7 @@ Name:Deeproot Waters
 ManaCost:2 U
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Merfolk | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a Merfolk spell, create a 1/1 blue Merfolk creature token with hexproof. (A creature with hexproof can't be the target of spells or abilities your opponents control.)
-SVar:TrigToken:DB$ Token | LegacyImage$ u 1 1 merfolk hexproof xln | TokenAmount$ 1 | TokenScript$ u_1_1_merfolk_hexproof | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_merfolk_hexproof | TokenOwner$ You
 DeckHas:Ability$Token
 AI:RemoveDeck:Random
 DeckNeeds:Type$Merfolk

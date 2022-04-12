@@ -4,7 +4,7 @@ Types:Instant
 K:Strive:1 U
 A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ X | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | SubAbility$ DBRepeat | SpellDescription$ Exile any number of target creatures. For each creature exiled this way, its controller creates a 4/4 blue Sphinx creature token with flying.
 SVar:DBRepeat:DB$ RepeatEach | DefinedCards$ DirectRemembered | UseImprinted$ True | RepeatSubAbility$ DBToken | SubAbility$ DBCleanup | ChangeZoneTable$ True
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_4_4_sphinx_flying | TokenOwner$ ImprintedController | LegacyImage$ u 4 4 sphinx flying
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_4_4_sphinx_flying | TokenOwner$ ImprintedController
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Creature
 AI:RemoveDeck:All

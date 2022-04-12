@@ -4,7 +4,7 @@ Types:Enchantment Saga
 K:Saga:3:DBDealDamage,DBDealDamage,DBToken
 SVar:DBDealDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 2 damage to each opponent and you gain 2 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_x_x_nightmare_horror | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | LegacyImage$ b x x nightmare horror dom | RememberTokens$ True | SubAbility$ DBDamageYou | SpellDescription$ Create an X/X black Nightmare Horror creature token, where X is half your life total, rounded up. It deals X damage to you.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_x_x_nightmare_horror | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | RememberTokens$ True | SubAbility$ DBDamageYou | SpellDescription$ Create an X/X black Nightmare Horror creature token, where X is half your life total, rounded up. It deals X damage to you.
 SVar:DBDamageYou:DB$ DealDamage | Defined$ You | NumDmg$ X | DamageSource$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$YourLifeTotal/HalfUp

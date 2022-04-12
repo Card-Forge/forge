@@ -4,6 +4,6 @@ Types:Sorcery
 A:SP$ GenericChoice | Cost$ 1 W | Defined$ You | ValidTgts$ Card | TgtZone$ Graveyard | Choices$ DBTop,DBBottom | SpellDescription$ Put target card from a graveyard on the top or bottom of its owner's library. Create a 1/1 white Spirit creature token with flying.
 SVar:DBTop:DB$ ChangeZone | Defined$ ParentTarget | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put it on the top of library. | StackDescription$ SpellDescription | SubAbility$ DBTrigToken
 SVar:DBBottom:DB$ ChangeZone | Defined$ ParentTarget | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put it on the bottom of library. | StackDescription$ SpellDescription | SubAbility$ DBTrigToken
-SVar:DBTrigToken:DB$ Token | LegacyImage$ w 1 1 spirit flying soi | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | SpellDescription$ Create a 1/1 white Spirit creature token with flying. | StackDescription$ SpellDescription
+SVar:DBTrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | SpellDescription$ Create a 1/1 white Spirit creature token with flying. | StackDescription$ SpellDescription
 DeckHas:Ability$Token
 Oracle:Put target card from a graveyard on the top or bottom of its owner's library. Create a 1/1 white Spirit creature token with flying.

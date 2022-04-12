@@ -2,7 +2,7 @@ Name:Krenko, Mob Boss
 ManaCost:2 R R
 Types:Legendary Creature Goblin Warrior
 PT:3/3
-A:AB$ Token | Cost$ T | TokenAmount$ X | TokenScript$ r_1_1_goblin | TokenOwner$ You | LegacyImage$ r 1 1 goblin m13 | SpellDescription$ Create X 1/1 red Goblin creature tokens, where X is the number of Goblins you control.
+A:AB$ Token | Cost$ T | TokenAmount$ X | TokenScript$ r_1_1_goblin | TokenOwner$ You | SpellDescription$ Create X 1/1 red Goblin creature tokens, where X is the number of Goblins you control.
 SVar:X:Count$TypeYouCtrl.Goblin
 DeckHints:Type$Goblin
 Oracle:{T}: Create X 1/1 red Goblin creature tokens, where X is the number of Goblins you control.

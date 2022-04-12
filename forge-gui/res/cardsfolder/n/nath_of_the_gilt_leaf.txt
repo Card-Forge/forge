@@ -5,5 +5,5 @@ PT:4/4
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may have target opponent discard a card at random.
 SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumCards$ 1 | Mode$ Random
 T:Mode$ Discarded | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ Whenever an opponent discards a card, you may create a 1/1 green Elf Warrior creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You | LegacyImage$ g 1 1 elf warrior lrw
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You
 Oracle:At the beginning of your upkeep, you may have target opponent discard a card at random.\nWhenever an opponent discards a card, you may create a 1/1 green Elf Warrior creature token.

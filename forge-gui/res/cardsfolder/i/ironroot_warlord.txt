@@ -4,6 +4,6 @@ Types:Creature Treefolk Soldier
 PT:*/5
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl
-A:AB$ Token | Cost$ 3 G W | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ You | LegacyImage$ w 1 1 soldier m20 | SpellDescription$ Create a 1/1 white Soldier creature token.
+A:AB$ Token | Cost$ 3 G W | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ You | SpellDescription$ Create a 1/1 white Soldier creature token.
 DeckHas:Ability$Token
 Oracle:Ironroot Warlord's power is equal to the number of creatures you control.\n{3}{G}{W}: Create a 1/1 white Soldier creature token.

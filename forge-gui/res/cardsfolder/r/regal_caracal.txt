@@ -4,7 +4,7 @@ Types:Creature Cat
 PT:3/3
 S:Mode$ Continuous | Affected$ Cat.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Lifelink | Description$ Other Cats you control get +1/+1 and have lifelink.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 white Cat creature tokens with lifelink.
-SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_cat_lifelink | TokenOwner$ You | LegacyImage$ w 1 1 cat lifelink akh
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_cat_lifelink | TokenOwner$ You
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Cat
 DeckHas:Ability$Token

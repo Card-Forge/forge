@@ -10,6 +10,6 @@ SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ C
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ SpellCast | ValidCard$ Card.wasCastFromExile | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Pact Boon — Whenever you play a card from exile, create a Treasure token.
 T:Mode$ LandPlayed | Origin$ Exile | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Pact Boon — Whenever you play a card from exile, create a Treasure token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | LegacyImage$ c a treasure sac afr
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 DeckHas:Ability$Token
 Oracle:Deathtouch\nMystic Arcanum — At the beginning of your end step, exile the top card of your library. Until the end of your next turn, you may play that card.\nPact Boon — Whenever you play a card from exile, create a Treasure token.

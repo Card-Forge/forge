@@ -3,7 +3,7 @@ ManaCost:3 U B
 Types:Creature Human Pirate
 PT:3/3
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each artifact you control.
-A:AB$ Token | Cost$ 2 U B | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | LegacyImage$ c a treasure sac xln | SpellDescription$ Create a Treasure token.
+A:AB$ Token | Cost$ 2 U B | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Create a Treasure token.
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:BuffedBy:Artifact
 DeckHas:Ability$Token

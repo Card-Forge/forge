@@ -7,7 +7,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ SacSelf
 SVar:SacSelf:DB$ Sacrifice | Defined$ Card.Self | UnlessCost$ X | UnlessPayer$ You
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ OrbToken | TriggerDescription$ When CARDNAME leaves the battlefield, target opponent creates an X/X blue Orb creature token with flying, where X is the number of +1/+1 counters on CARDNAME.
-SVar:OrbToken:DB$ Token | LegacyImage$ u x x orb all | ValidTgts$ Opponent | TokenOwner$ Targeted | TokenScript$ u_x_x_orb_flying | TokenPower$ XLKI | TokenToughness$ XLKI | TokenAmount$ 1
+SVar:OrbToken:DB$ Token | ValidTgts$ Opponent | TokenOwner$ Targeted | TokenScript$ u_x_x_orb_flying | TokenPower$ XLKI | TokenToughness$ XLKI | TokenAmount$ 1
 SVar:X:Count$CardCounters.P1P1
 SVar:XLKI:TriggeredCard$CardCounters.P1P1
 AI:RemoveDeck:All

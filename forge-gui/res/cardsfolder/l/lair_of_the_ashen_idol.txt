@@ -7,6 +7,6 @@ SVar:IdolWalk:DB$ Planeswalk | ConditionCheckSVar$ IdolX | ConditionSVarCompare$
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:IdolX:Remembered$Amount
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, any number of target players each create a 2/2 black Zombie creature token.
-SVar:RolledChaos:DB$ Token | ValidTgts$ Player | TgtPrompt$ Select target player to receive zombie token | TargetMin$ 0 | TargetMax$ MaxTgt | TokenScript$ b_2_2_zombie | TokenOwner$ Targeted | TokenAmount$ 1 | LegacyImage$ b 2 2 zombie pc2
+SVar:RolledChaos:DB$ Token | ValidTgts$ Player | TgtPrompt$ Select target player to receive zombie token | TargetMin$ 0 | TargetMax$ MaxTgt | TokenScript$ b_2_2_zombie | TokenOwner$ Targeted | TokenAmount$ 1
 SVar:MaxTgt:PlayerCountPlayers$Amount
 Oracle:At the beginning of your upkeep, sacrifice a creature. If you can't, planeswalk.\nWhenever you roll {CHAOS}, any number of target players each create a 2/2 black Zombie creature token.

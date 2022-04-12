@@ -1,7 +1,7 @@
 Name:Waylay
 ManaCost:2 W
 Types:Instant
-A:SP$ Token | Cost$ 2 W | TokenAmount$ 3 | TokenScript$ w_2_2_knight | TokenOwner$ You | LegacyImage$ w 2 2 knight usg | AtEOT$ Exile | SpellDescription$ Create three 2/2 white Knight creature tokens. Exile them at the beginning of the next cleanup step.
+A:SP$ Token | Cost$ 2 W | TokenAmount$ 3 | TokenScript$ w_2_2_knight | TokenOwner$ You | AtEOT$ Exile | SpellDescription$ Create three 2/2 white Knight creature tokens. Exile them at the beginning of the next cleanup step.
 DeckHas:Ability$Token
 AI:RemoveDeck:All
 DeckHints:Type$Knight

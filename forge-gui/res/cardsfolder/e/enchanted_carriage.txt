@@ -3,7 +3,7 @@ ManaCost:5
 Types:Artifact Vehicle
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 white Mouse creature tokens.
-SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_mouse | TokenOwner$ You | LegacyImage$ w 1 1 mouse eld
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_mouse | TokenOwner$ You
 K:Crew:2
 DeckHas:Ability$Token
 Oracle:When Enchanted Carriage enters the battlefield, create two 1/1 white Mouse creature tokens.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)

@@ -4,7 +4,7 @@ Types:Creature Spirit
 PT:1/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 white Spirit creature token with flying.
-SVar:TrigToken:DB$ Token | LegacyImage$ w 1 1 spirit flying m20 | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
 DeckHas:Ability$Token
 A:AB$ ChangeZone | Cost$ 3 W Exile<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature.
 Oracle:Flying\nWhen Hanged Executioner enters the battlefield, create a 1/1 white Spirit creature token with flying.\n{3}{W}, Exile Hanged Executioner: Exile target creature.

@@ -4,6 +4,6 @@ Types:Creature Shapeshifter
 PT:2/2
 K:Changeling
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a colorless Shapeshifter creature token with changeling.
-SVar:TrigToken:DB$ Token | LegacyImage$ c 2 2 shapeshifter changeling mh1 | TokenAmount$ 1 | TokenScript$ c_2_2_shapeshifter_changeling | TokenOwner$ You | SpellDescription$ Create a 2/2 colorless Shapeshifter creature token with changeling. (It has every creature type.)
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_2_2_shapeshifter_changeling | TokenOwner$ You | SpellDescription$ Create a 2/2 colorless Shapeshifter creature token with changeling. (It has every creature type.)
 DeckHas:Ability$Token
 Oracle:Changeling (This card is every creature type.)\nWhen Irregular Cohort enters the battlefield, create a 2/2 colorless Shapeshifter creature token with changeling.

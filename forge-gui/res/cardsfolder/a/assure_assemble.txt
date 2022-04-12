@@ -11,6 +11,6 @@ ALTERNATE
 Name:Assemble
 ManaCost:4 G W
 Types:Instant
-A:SP$ Token | Cost$ 4 G W | TokenAmount$ 3 | TokenScript$ gw_2_2_elf_knight_vigilance | LegacyImage$ gw 2 2 elf knight vigilance grn | SpellDescription$ Create three 2/2 green and white Elf Knight creature tokens with vigilance.
+A:SP$ Token | Cost$ 4 G W | TokenAmount$ 3 | TokenScript$ gw_2_2_elf_knight_vigilance | SpellDescription$ Create three 2/2 green and white Elf Knight creature tokens with vigilance.
 DeckHas:Ability$Counters|Token
 Oracle:Create three 2/2 green and white Elf Knight creature tokens with vigilance.

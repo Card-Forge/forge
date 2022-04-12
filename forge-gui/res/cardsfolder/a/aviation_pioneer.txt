@@ -3,6 +3,6 @@ ManaCost:2 U
 Types:Creature Human Artificer
 PT:1/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 colorless Thopter artifact creature token with flying.
-SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ c_1_1_a_thopter_flying | LegacyImage$ c 1 1 a thopter flying m19
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ c_1_1_a_thopter_flying
 DeckHas:Ability$Token
 Oracle:When Aviation Pioneer enters the battlefield, create a 1/1 colorless Thopter artifact creature token with flying.

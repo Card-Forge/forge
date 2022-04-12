@@ -5,7 +5,7 @@ PT:1/3
 K:First Strike
 K:Menace
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create Ragavan, a legendary 2/1 red Monkey creature token. Ragavan enters the battlefield tapped and attacking. Exile that token at end of combat.
-SVar:TrigToken:DB$ Token | TokenScript$ ragavan | LegacyImage$ ragavan aer | TokenTapped$ True | TokenAttacking$ True | AtEOT$ ExileCombat
+SVar:TrigToken:DB$ Token | TokenScript$ ragavan | TokenTapped$ True | TokenAttacking$ True | AtEOT$ ExileCombat
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Token
 Oracle:First strike, menace\nWhenever Kari Zev, Skyship Raider attacks, create Ragavan, a legendary 2/1 red Monkey creature token. Ragavan enters the battlefield tapped and attacking. Exile that token at end of combat.

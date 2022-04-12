@@ -6,7 +6,7 @@ SVar:DBLandmark:DB$ PutCounter | Defined$ Self | CounterType$ LANDMARK | Counter
 SVar:DBBranch:DB$ Branch | BranchConditionSVar$ XMarksTheSpot | TrueSubAbility$ DBRemoveCtrs
 SVar:DBRemoveCtrs:DB$ RemoveCounter | Defined$ Self | CounterType$ LANDMARK | CounterNum$ All | SubAbility$ DBTransform
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | SubAbility$ DBTreasureTokens
-SVar:DBTreasureTokens:DB$ Token | TokenAmount$ 3 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | LegacyImage$ c a treasure sac xln
+SVar:DBTreasureTokens:DB$ Token | TokenAmount$ 3 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 SVar:XMarksTheSpot:Count$Valid Card.Self+counters_GE3_LANDMARK
 DeckHas:Ability$Token
 AlternateMode:DoubleFaced

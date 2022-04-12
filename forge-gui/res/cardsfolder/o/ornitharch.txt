@@ -4,6 +4,6 @@ Types:Creature Archon
 PT:3/3
 K:Flying
 K:Tribute:2
-SVar:TrigNotTribute:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_bird_flying | TokenOwner$ You | LegacyImage$ w 1 1 bird flying bng | SpellDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, create two 1/1 white Bird creature tokens with flying.
+SVar:TrigNotTribute:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_bird_flying | TokenOwner$ You | SpellDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, create two 1/1 white Bird creature tokens with flying.
 DeckHas:Ability$Counters|Token
 Oracle:Flying\nTribute 2 (As this creature enters the battlefield, an opponent of your choice may put two +1/+1 counters on it.)\nWhen Ornitharch enters the battlefield, if tribute wasn't paid, create two 1/1 white Bird creature tokens with flying.

@@ -2,7 +2,7 @@ Name:Kjeldoran Outpost
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-A:AB$ Token | Cost$ 1 W T | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ You | LegacyImage$ w 1 1 soldier all | SpellDescription$ Create a 1/1 white Soldier creature token.
+A:AB$ Token | Cost$ 1 W T | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ You | SpellDescription$ Create a 1/1 white Soldier creature token.
 R:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ PayBeforeETB | Description$ If CARDNAME would enter the battlefield, sacrifice a Plains instead. If you do, put CARDNAME onto the battlefield. If you don't, put it into its owner's graveyard.
 SVar:PayBeforeETB:DB$ Sacrifice | SacValid$ Plains | Defined$ You | RememberSacrificed$ True | SubAbility$ MoveToGraveyard
 SVar:MoveToGraveyard:DB$ ChangeZone | Origin$ All | Destination$ Graveyard | Defined$ ReplacedCard | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ MoveToBattlefield

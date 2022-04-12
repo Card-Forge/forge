@@ -4,5 +4,5 @@ Types:Creature Troll Warrior
 PT:8/4
 A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, target opponent creates four 1/1 blue Faerie creature tokens with flying.
-SVar:TrigToken:DB$ Token | TokenAmount$ 4 | TokenScript$ u_1_1_faerie_flying | ValidTgts$ Opponent | TokenOwner$ Targeted | LegacyImage$ u 1 1 faerie flying rav
+SVar:TrigToken:DB$ Token | TokenAmount$ 4 | TokenScript$ u_1_1_faerie_flying | ValidTgts$ Opponent | TokenOwner$ Targeted
 Oracle:When Hunted Troll enters the battlefield, target opponent creates four 1/1 blue Faerie creature tokens with flying.\n{G}: Regenerate Hunted Troll.

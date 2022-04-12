@@ -13,5 +13,5 @@ ALTERNATE
 Name:Call
 ManaCost:4 W U
 Types:Sorcery
-A:SP$ Token | Cost$ 4 W U | LegacyImage$ w 1 1 bird flying dgm | TokenAmount$ 4 | TokenScript$ w_1_1_bird_flying | TokenOwner$ You | SpellDescription$ Create four 1/1 white Bird creature tokens with flying.
+A:SP$ Token | Cost$ 4 W U | TokenAmount$ 4 | TokenScript$ w_1_1_bird_flying | TokenOwner$ You | SpellDescription$ Create four 1/1 white Bird creature tokens with flying.
 Oracle:Create four 1/1 white Bird creature tokens with flying.\nFuse (You may cast one or both halves of this card from your hand.)

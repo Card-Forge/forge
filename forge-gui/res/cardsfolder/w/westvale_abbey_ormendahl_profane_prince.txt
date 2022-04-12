@@ -2,7 +2,7 @@ Name:Westvale Abbey
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Token | Cost$ 5 T PayLife<1> | TokenAmount$ 1 | TokenScript$ wb_1_1_human_cleric | TokenOwner$ You | LegacyImage$ wb 1 1 human cleric soi | SpellDescription$ Create a 1/1 white and black Human Cleric creature token.
+A:AB$ Token | Cost$ 5 T PayLife<1> | TokenAmount$ 1 | TokenScript$ wb_1_1_human_cleric | TokenOwner$ You | SpellDescription$ Create a 1/1 white and black Human Cleric creature token.
 A:AB$ SetState | Cost$ 5 T Sac<5/Creature> | Defined$ Self | Mode$ Transform | SubAbility$ DBUntap | SpellDescription$ Transform CARDNAME, then untap it.
 SVar:DBUntap:DB$ Untap | Defined$ Self
 SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE2

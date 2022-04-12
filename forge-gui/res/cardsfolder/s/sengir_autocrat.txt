@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Creature Human
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create three 0/1 black Serf creature tokens.
-SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ b_0_1_serf | TokenOwner$ You | LegacyImage$ b 0 1 serf hml
+SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ b_0_1_serf | TokenOwner$ You
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigExileAllSerfs | TriggerDescription$ When CARDNAME leaves the battlefield, exile all Serf tokens.
 SVar:TrigExileAllSerfs:DB$ ChangeZoneAll | ChangeType$ Serf.token | Origin$ Battlefield | Destination$ Exile
 Oracle:When Sengir Autocrat enters the battlefield, create three 0/1 black Serf creature tokens.\nWhen Sengir Autocrat leaves the battlefield, exile all Serf tokens.

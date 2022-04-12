@@ -2,7 +2,7 @@ Name:My Forces Are Innumerable
 ManaCost:no cost
 Types:Ongoing Scheme
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigHorror | TriggerDescription$ At the beginning of your end step, create a 3/3 black Horror creature token.
-SVar:TrigHorror:DB$ Token | TokenAmount$ 1 | TokenScript$ b_3_3_horror | TokenOwner$ You | LegacyImage$ b 3 3 horror e01
+SVar:TrigHorror:DB$ Token | TokenAmount$ 1 | TokenScript$ b_3_3_horror | TokenOwner$ You
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Opponent | TriggerZones$ Command | Execute$ SacToAbandon | TriggerDescription$ At the beginning of your opponents' end step, they may sacrifice two creatures. If they do, abandon this scheme.
 # TODO: If shared turns are ever implemented that are needed for proper E01 support, this would need to be updated to ensure
 # that several opponents may choose to sacrifice a total of two creatures, as opposed to two creatures by a single opponent.

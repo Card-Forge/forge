@@ -4,5 +4,5 @@ Types:Creature Wurm
 PT:5/5
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 5/5 green Wurm creature token with trample.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_5_5_wurm_trample | TokenOwner$ TriggeredCardController | LegacyImage$ g 5 5 wurm trample rtr
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_5_5_wurm_trample | TokenOwner$ TriggeredCardController
 Oracle:Trample\nWhen Armada Wurm enters the battlefield, create a 5/5 green Wurm creature token with trample.

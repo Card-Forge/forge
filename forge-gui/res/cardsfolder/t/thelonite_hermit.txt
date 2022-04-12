@@ -5,7 +5,7 @@ PT:1/1
 K:Morph:3 G G
 S:Mode$ Continuous | Affected$ Creature.Saproling | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Card.Self+faceUp | Description$ All Saprolings get +1/+1.
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, create four 1/1 green Saproling creature tokens.
-SVar:TrigToken:DB$ Token | TokenAmount$ 4 | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling tsp | SpellDescription$ Create four 1/1 green Saproling creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 4 | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create four 1/1 green Saproling creature tokens.
 SVar:PlayMain1:TRUE
 DeckHints:Type$Fungus
 DeckHas:Ability$Token

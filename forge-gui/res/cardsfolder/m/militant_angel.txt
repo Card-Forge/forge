@@ -5,6 +5,6 @@ PT:3/4
 K:Flying
 K:Lifelink
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a number of 2/2 white Knight creature tokens with vigilance equal to the number of opponents you attacked this turn.
-SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ X | TokenScript$ w_2_2_knight_vigilance | LegacyImage$ w 2 2 knight vigilance gnt | SpellDescription$ Create a number of 2/2 white Knight creature tokens with vigilance equal to the number of opponents you attacked this turn.
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ X | TokenScript$ w_2_2_knight_vigilance | SpellDescription$ Create a number of 2/2 white Knight creature tokens with vigilance equal to the number of opponents you attacked this turn.
 SVar:X:TriggeredCardController$OpponentsAttackedThisTurn
 Oracle:Flying, lifelink\nWhen Militant Angel enters the battlefield, create a number of 2/2 white Knight creature tokens with vigilance equal to the number of opponents you attacked this turn.

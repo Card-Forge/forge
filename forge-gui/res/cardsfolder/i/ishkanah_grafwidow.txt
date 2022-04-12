@@ -4,7 +4,7 @@ Types:Legendary Creature Spider
 PT:3/5
 K:Reach
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Delirium$ True | Execute$ TrigToken | TriggerDescription$ Delirium — When CARDNAME enters the battlefield, if there are four or more card types among cards in your graveyard, create three 1/2 green Spider creature tokens with reach.
-SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ g_1_2_spider_reach | TokenOwner$ You | LegacyImage$ g 1 2 spider reach emn
+SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ g_1_2_spider_reach | TokenOwner$ You
 A:AB$ LoseLife | Cost$ 6 B | ValidTgts$ Opponent | LifeAmount$ X | SpellDescription$ Target opponent loses 1 life for each Spider you control.
 SVar:X:Count$Valid Card.Spider+YouCtrl
 DeckHints:Ability$Graveyard|Discard

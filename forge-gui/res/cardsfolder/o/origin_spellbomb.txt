@@ -1,7 +1,7 @@
 Name:Origin Spellbomb
 ManaCost:1
 Types:Artifact
-A:AB$ Token | Cost$ 1 T Sac<1/CARDNAME> | LegacyImage$ c 1 1 a myr som | TokenAmount$ 1 | TokenScript$ c_1_1_a_myr | SpellDescription$ Create a 1/1 colorless Myr artifact creature token.
+A:AB$ Token | Cost$ 1 T Sac<1/CARDNAME> | TokenAmount$ 1 | TokenScript$ c_1_1_a_myr | SpellDescription$ Create a 1/1 colorless Myr artifact creature token.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ TriggeredCardController | Execute$ TrigDraw | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you may pay {W}. If you do, draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ W | NumCards$ 1
 DeckNeeds:Color$White

@@ -2,7 +2,7 @@ Name:History of Benalia
 ManaCost:1 W W
 Types:Enchantment Saga
 K:Saga:3:DBToken,DBToken,DBPump
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | LegacyImage$ w 2 2 knight vigilance dom | SpellDescription$ Create a 2/2 white Knight creature token with vigilance.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | SpellDescription$ Create a 2/2 white Knight creature token with vigilance.
 SVar:DBPump:DB$ PumpAll | ValidCards$ Knight.YouCtrl | NumAtt$ +2 | NumDef$ +1 | SpellDescription$ Knights you control get +2/+1 until end of turn.
 DeckHints:Type$Knight
 DeckHas:Ability$Token
