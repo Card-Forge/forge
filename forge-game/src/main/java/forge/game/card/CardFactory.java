@@ -124,6 +124,8 @@ public class CardFactory {
         final Game game = source.getGame();
         final Card c = new Card(game.nextCardId(), original.getPaperCard(), game);
         copyCopiableCharacteristics(original, c);
+        // fix old cardstates
+        buildAbilities(c);
 
         if (sourceSA.hasParam("NonLegendary")) {
             c.removeType(CardType.Supertype.Legendary);

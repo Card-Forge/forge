@@ -1680,40 +1680,40 @@ public class CardProperty {
                 if (!card.isOptionalCostPaid(OptionalCost.Generic)) return false;
             }
         } else if (property.equals("surged")) {
-            if (card.getCastSA() == null) {
+            if (card.getCastSAFallBack() == null) {
                 return false;
             }
-            return card.getCastSA().isSurged();
+            return card.getCastSAFallBack().isSurged();
         } else if (property.equals("blitzed")) {
-            if (card.getCastSA() == null) {
+            if (card.getCastSAFallBack() == null) {
                 return false;
             }
             return card.getCastSA().isBlitz();
         } else if (property.equals("dashed")) {
-            if (card.getCastSA() == null) {
+            if (card.getCastSAFallBack() == null) {
                 return false;
             }
-            return card.getCastSA().isDash();
+            return card.getCastSAFallBack().isDash();
         } else if (property.equals("escaped")) {
-            if (card.getCastSA() == null) {
+            if (card.getCastSAFallBack() == null) {
                 return false;
             }
-            return card.getCastSA().isEscape();
+            return card.getCastSAFallBack().isEscape();
         } else if (property.equals("evoked")) {
-            if (card.getCastSA() == null) {
+            if (card.getCastSAFallBack() == null) {
                 return false;
             }
-            return card.getCastSA().isEvoke();
+            return card.getCastSAFallBack().isEvoke();
         } else if (property.equals("prowled")) {
-            if (card.getCastSA() == null) {
+            if (card.getCastSAFallBack() == null) {
                 return false;
             }
-            return card.getCastSA().isProwl();
+            return card.getCastSAFallBack().isProwl();
         } else if (property.equals("spectacle")) {
-            if (card.getCastSA() == null) {
+            if (card.getCastSAFallBack() == null) {
                 return false;
             }
-            return card.getCastSA().isSpectacle();
+            return card.getCastSAFallBack().isSpectacle();
         } else if (property.equals("foretold")) {
             if (!card.isForetold()) {
                 return false;
