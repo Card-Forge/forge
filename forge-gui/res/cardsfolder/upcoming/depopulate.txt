@@ -1,0 +1,6 @@
+Name:Depopulate
+ManaCost:2 W W
+Types:Sorcery
+A:SP$ Draw | Cost$ 2 W W | NumCards$ 1 | Defined$ Player.controlsCreature.MultiColor | SubAbility$ DBDestroy | SpellDescription$ Each player who controls a multicolored creature draws a card. Then destroy all creatures.
+SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Creature
+Oracle:Each player who controls a multicolored creature draws a card. Then destroy all creatures.

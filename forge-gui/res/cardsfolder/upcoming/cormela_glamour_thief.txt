@@ -1,0 +1,10 @@
+Name:Cormela, Glamour Thief
+ManaCost:1 U B R
+Types:Legendary Creature Vampire Rogue
+PT:2/4
+K:Haste
+A:AB$ Mana | Cost$ 1 T | Produced$ U B R | RestrictValid$ Spell.Instant,Spell.Sorcery | SpellDescription$ Add {U} or {R}. Spend this mana only to cast instant and/or sorcery spells.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME dies, return target instant or sorcery card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | TgtPrompt$ Select target instant or sorcery
+DeckHints:Type$Instant|Sorcery
+Oracle:Haste\n{1},{T}: Add {U}{B}{R}. Spend this mana only to cast instant and/or sorcery spells.\nWhen Cormela, Glamour Thief dies, return up to one target instant or sorcery card from your graveyard to your hand.
