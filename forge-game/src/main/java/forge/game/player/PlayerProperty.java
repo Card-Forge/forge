@@ -391,7 +391,18 @@ public class PlayerProperty {
             if (player.getVenturedThisTurn() < 1) {
                 return false;
             }
-        }
+        } else if (property.startsWith("NotedFor")) {
+            final String key = property.substring("NotedFor".length());
+            for (String note : player.getNotesForName(key)) {
+                if (note.equals("Name:" + source.getName())) {
+                    return true;
+                }
+                if (note.equals("Id:" + source.getId())) {
+                    return true;
+                }
+            }
+            return false;
+        }  
         return true;
     }
 

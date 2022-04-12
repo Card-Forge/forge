@@ -19,8 +19,8 @@ import java.util.List;
 public class ChooseEntityEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        return (sa.hasParam("StackDescription") ? sa.getParam("StackDescription") :
-                sa.getParamOrDefault("SpellDescription", "Write a Stack/SpellDescription!"));
+        return sa.hasParam("StackDescription") ? sa.getParam("StackDescription") :
+                sa.getParamOrDefault("SpellDescription", "Write a Stack/SpellDescription!");
     }
 
     @Override
