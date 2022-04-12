@@ -5,7 +5,7 @@ PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ Alliance — Whenever another creature enters the battlefield under your control, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBPutCounter,DBToken,DBGainLife | ChoiceRestriction$ ThisTurn | CharmNum$ 1
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | TokenTapped$ True | SpellDescription$ Create a tapped Treasure token.
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenTapped$ True | SpellDescription$ Create a tapped Treasure token.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
 DeckHas:Ability$Counters|Token|LifeGain
 Oracle:Alliance — Whenever another creature enters the battlefield under your control, choose one that hasn't been chosen this turn —\n• Put a +1/+1 counter on Gala Greeters.\n• Create a tapped Treasure token.\n• You gain 2 life.
