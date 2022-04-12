@@ -1,5 +1,5 @@
 [format]
-Name:Vintage (10E)
+Name:Vintage (MED)
 Type:Historic
 Subtype:Vintage
 Effective:2007-09-10
