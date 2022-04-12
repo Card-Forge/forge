@@ -49,9 +49,9 @@ public class CopyPermanentEffect extends TokenEffectBase {
         boolean justOne = tgtCards.size() == 1;
         boolean addKWs = sa.hasParam("AddKeywords");
         final int numCopies = sa.hasParam("NumCopies") ?
-                AbilityUtils.calculateAmount(host, sa.getParam("NumCopies"), sa) : 1;
+                AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCopies"), sa) : 1;
 
-        sb.append(activator).append(" creates ").append(Lang.nounWithNumeralExceptOne(numCopies, "token");
+        sb.append(activator).append(" creates ").append(Lang.nounWithNumeralExceptOne(numCopies, "token"));
         sb.append(numCopies == 1 ? " that's a copy" : " that are copies").append(" of ");
         sb.append(Lang.joinHomogenous(tgtCards));
 
