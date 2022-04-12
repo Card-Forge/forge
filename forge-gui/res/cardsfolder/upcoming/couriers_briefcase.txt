@@ -2,7 +2,7 @@ Name:Courier's Briefcase
 ManaCost:1 G
 Types:Artifact Treasure
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 green and white Citizen creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ gw_1_1_citizen | TokenOwner$ You | LegacyImage$ gw 1 1 citizen snc
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ gw_1_1_citizen | TokenOwner$ You
 A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color.
 A:AB$ Draw | Cost$ W U B R G T Sac<1/CARDNAME> | NumCards$ 3 | SpellDescription$ Draw three cards.
 DeckHints:Type$Citizen
