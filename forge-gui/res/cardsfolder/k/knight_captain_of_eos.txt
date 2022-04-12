@@ -3,6 +3,6 @@ ManaCost:4 W
 Types:Creature Human Knight
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 white Soldier creature tokens.
-SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_soldier | TokenOwner$ You | LegacyImage$ w 1 1 soldier ala
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_soldier | TokenOwner$ You
 A:AB$ Fog | Cost$ W Sac<1/Soldier> | SpellDescription$ Prevent all combat damage that would be dealt this turn.
 Oracle:When Knight-Captain of Eos enters the battlefield, create two 1/1 white Soldier creature tokens.\n{W}, Sacrifice a Soldier: Prevent all combat damage that would be dealt this turn.

@@ -3,7 +3,7 @@ ManaCost:W U B R
 Types:Legendary Artifact Creature Human
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 blue Thopter artifact creature tokens with flying.
-SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ u_1_1_a_thopter_flying | TokenOwner$ You | LegacyImage$ u 1 1 a thopter flying c16
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ u_1_1_a_thopter_flying | TokenOwner$ You
 A:AB$ Charm | Cost$ 2 Sac<2/Artifact> | Choices$ DBDealDamage,DBPump,DBGainLife | Defined$ You
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target player or planeswalker.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -4 | NumDef$ -4 | IsCurse$ True | SpellDescription$ Target creature gets -4/-4 until end of turn

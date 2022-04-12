@@ -3,7 +3,7 @@ ManaCost:4 R
 Types:Creature Satyr Soldier
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 red Satyr creature token with "This creature can't block."
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_satyr_noblock | TokenOwner$ You | LegacyImage$ r 1 1 satyr noblock thb
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_satyr_noblock | TokenOwner$ You
 T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a spell that targets CARDNAME, creatures you control get +1/+0 until end of turn.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1
 DeckHas:Ability$Token

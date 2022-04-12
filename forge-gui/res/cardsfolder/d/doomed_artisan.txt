@@ -5,6 +5,6 @@ PT:1/1
 S:Mode$ Continuous | Affected$ Sculpture.YouCtrl | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Sculptures you control can't attack or block.
 AI:RemoveDeck:Random
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, create a colorless Sculpture artifact creature token with "This creature's power and toughness are each equal to the number of Sculptures you control."
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_x_x_a_sculpture_total_sculptures | TokenOwner$ You | LegacyImage$ c x x a sculpture total sculptures c19
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_x_x_a_sculpture_total_sculptures | TokenOwner$ You
 SVar:BuffedBy:Artifact
 Oracle:Sculptures you control can't attack or block.\nAt the beginning of your end step, create a colorless Sculpture artifact creature token with "This creature's power and toughness are each equal to the number of Sculptures you control."

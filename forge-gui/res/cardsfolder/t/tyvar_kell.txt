@@ -7,7 +7,7 @@ SVar:Mana:AB$Mana | Cost$ T | Produced$ B | Amount$ 1 | SpellDescription$ Add {B
 A:AB$ PutCounter | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Elf | TgtPrompt$ Select target Elf | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBUntap | SpellDescription$ Put a +1/+1 counter on up to one target Elf. Untap it. It gains deathtouch until end of turn.
 SVar:DBUntap:DB$ Untap | Defined$ Targeted | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | KW$ Deathtouch | Defined$ Targeted
-A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | TokenAmount$ 1 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You | Planeswalker$ True | LegacyImage$ g 1 1 elf warrior khm | SpellDescription$ Create a 1/1 green Elf Warrior creature token.
+A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | TokenAmount$ 1 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You | Planeswalker$ True | SpellDescription$ Create a 1/1 green Elf Warrior creature token.
 A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Tyvar Kell | Image$ emblem_tyvar_kell | Triggers$ TrigSpellCast | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever you cast an Elf spell, it gains haste until end of turn and you draw two cards."
 SVar:TrigSpellCast:Mode$ SpellCast | ValidCard$ Elf | ValidActivatingPlayer$ You | Execute$ EffSpellCast | TriggerDescription$ Whenever you cast an Elf spell, it gains haste until end of turn and you draw two cards.
 SVar:EffSpellCast:DB$ Animate | Defined$ TriggeredCard | Keywords$ Haste | SubAbility$ EffDraw

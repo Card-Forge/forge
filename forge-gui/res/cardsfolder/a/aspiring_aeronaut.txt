@@ -4,6 +4,6 @@ Types:Creature Human Artificer
 PT:1/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 colorless Thopter artifact creature token with flying.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You | LegacyImage$ c 1 1 a thopter flying ori
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You
 DeckHas:Ability$Token
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen Aspiring Aeronaut enters the battlefield, create a 1/1 colorless Thopter artifact creature token with flying.

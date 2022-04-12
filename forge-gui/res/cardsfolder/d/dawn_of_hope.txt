@@ -3,6 +3,6 @@ ManaCost:1 W
 Types:Enchantment
 T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever you gain life, you may pay {2}. If you do, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 2 | Defined$ You | NumCards$ 1
-A:AB$ Token | Cost$ 3 W | TokenAmount$ 1 | TokenScript$ w_1_1_soldier_lifelink | LegacyImage$ w 1 1 soldier lifelink grn | SpellDescription$ Create a 1/1 white Soldier creature token with lifelink.
+A:AB$ Token | Cost$ 3 W | TokenAmount$ 1 | TokenScript$ w_1_1_soldier_lifelink | SpellDescription$ Create a 1/1 white Soldier creature token with lifelink.
 DeckHas:Ability$Token|LifeGain
 Oracle:Whenever you gain life, you may pay {2}. If you do, draw a card.\n{3}{W}: Create a 1/1 white Soldier creature token with lifelink.

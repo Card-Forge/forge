@@ -3,7 +3,7 @@ ManaCost:2 W B
 Types:Legendary Creature Human Knight
 PT:4/4
 K:Vigilance
-A:AB$ Token | Cost$ 2 W T | TokenAmount$ 1 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | LegacyImage$ w 2 2 knight vigilance dom | SpellDescription$ Create a 2/2 white Knight creature token with vigilance.
+A:AB$ Token | Cost$ 2 W T | TokenAmount$ 1 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | SpellDescription$ Create a 2/2 white Knight creature token with vigilance.
 A:AB$ Destroy | Cost$ B T tapXType<X/Knight> | ValidTgts$ Creature.powerLEX | TgtPrompt$ Select target creature with power X or less | SpellDescription$ Destroy target creature with power X or less.
 SVar:X:Count$xPaid
 DeckHas:Ability$Token

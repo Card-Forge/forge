@@ -2,5 +2,5 @@ Name:Zendikar's Roil
 ManaCost:3 G G
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, create a 2/2 green Elemental creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_elemental | TokenOwner$ You | LegacyImage$ g 2 2 elemental ori
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_elemental | TokenOwner$ You
 Oracle:Landfall — Whenever a land enters the battlefield under your control, create a 2/2 green Elemental creature token.

@@ -2,7 +2,7 @@ Name:Selvala's Charge
 ManaCost:4 G
 Types:Sorcery
 A:SP$ Dig | Cost$ 4 G | PreCostDesc$ Parley — | DigNum$ 1 | Defined$ Player | Reveal$ True | NoMove$ True | RememberRevealed$ True | SubAbility$ DBToken | SpellDescription$ Parley — Each player reveals the top card of their library. For each nonland card revealed this way, you create a 3/3 green Elephant creature token. Then each player draws a card.
-SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ g_3_3_elephant | TokenOwner$ You | LegacyImage$ g 3 3 elephant cns | SubAbility$ DBDraw
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ g_3_3_elephant | TokenOwner$ You | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ Player | NumCards$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Card.nonLand

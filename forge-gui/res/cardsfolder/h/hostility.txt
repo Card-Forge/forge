@@ -4,7 +4,7 @@ Types:Creature Elemental Incarnation
 PT:6/6
 K:Haste
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Spell.YouCtrl | ValidTarget$ Opponent | PreventionEffect$ True | ReplaceWith$ HostilityTokens | Description$ If a spell you control would deal damage to an opponent, prevent that damage. Create a 3/1 red Elemental Shaman creature token with haste for each 1 damage prevented this way.
-SVar:HostilityTokens:DB$ Token | TokenAmount$ X | LegacyImage$ r 3 1 elemental shaman haste lrw | TokenScript$ r_3_1_elemental_shaman_haste | TokenOwner$ You
+SVar:HostilityTokens:DB$ Token | TokenAmount$ X | TokenScript$ r_3_1_elemental_shaman_haste | TokenOwner$ You
 SVar:X:ReplaceCount$DamageAmount
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.Self | Execute$ TrigShuffle | TriggerDescription$ When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library.
 SVar:TrigShuffle:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ TriggeredCardLKICopy

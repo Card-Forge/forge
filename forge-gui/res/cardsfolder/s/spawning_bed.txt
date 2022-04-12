@@ -2,7 +2,7 @@ Name:Spawning Bed
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Token | Cost$ 6 T Sac<1/CARDNAME> | TokenOwner$ You | TokenAmount$ 3 | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You | LegacyImage$ c 1 1 eldrazi scion sac bfz | SpellDescription$ Create three 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: Add {C}."
+A:AB$ Token | Cost$ 6 T Sac<1/CARDNAME> | TokenOwner$ You | TokenAmount$ 3 | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You | SpellDescription$ Create three 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: Add {C}."
 DeckHints:Type$Eldrazi
 DeckHas:Ability$Mana.Colorless|Token
 Oracle:{T}: Add {C}.\n{6}, {T}, Sacrifice Spawning Bed: Create three 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: Add {C}."

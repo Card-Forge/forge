@@ -4,6 +4,6 @@ Types:Legendary Creature Human Advisor
 PT:2/3
 A:AB$ ChangeZone | Cost$ Sac<3/Creature.White/white creature> | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature | SpellDescription$ Exile target creature.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Black+Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever another black creature you control dies, create a 1/1 white Spirit creature token with flying.
-SVar:TrigToken:DB$ Token | LegacyImage$ w 1 1 spirit flying gpt | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
 DeckHas:Ability$Token
 Oracle:Sacrifice three white creatures: Exile target creature.\nWhenever another black creature you control dies, create a 1/1 white Spirit creature token with flying.

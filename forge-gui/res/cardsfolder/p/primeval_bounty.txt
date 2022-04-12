@@ -2,7 +2,7 @@ Name:Primeval Bounty
 ManaCost:5 G
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ BountysGift | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell, create a 3/3 green Beast creature token.
-SVar:BountysGift:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_beast | TokenOwner$ You | LegacyImage$ g 3 3 beast m14
+SVar:BountysGift:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_beast | TokenOwner$ You
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, put three +1/+1 counters on target creature you control.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 3 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a land enters the battlefield under your control, you gain 3 life.

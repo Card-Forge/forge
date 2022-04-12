@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Fungus
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 green Saproling creature token.
-SVar:TrigToken:DB$ Token | LegacyImage$ g 1 1 saproling dom | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You
 DeckHas:Ability$Token
 DeckHints:Type$Saproling|Fungus
 Oracle:When Yavimaya Sapherd enters the battlefield, create a 1/1 green Saproling creature token.

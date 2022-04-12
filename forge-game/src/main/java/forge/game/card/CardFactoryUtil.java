@@ -1152,7 +1152,7 @@ public class CardFactoryUtil {
                     " | IsPresent$ Card.StrictlySelf | SpellDescription$ Put "
                     + Lang.nounWithNumeral(n, "+1/+1 counter") + " on it.";
             final String token = "DB$ Token | TokenAmount$ " + n + " | TokenScript$ c_1_1_a_servo | TokenOwner$ You "
-                    + " | LegacyImage$ c 1 1 a servo aer | SpellDescription$ Create "
+                    + " | SpellDescription$ Create "
                     + Lang.nounWithNumeral(n, "1/1 colorless Servo artifact creature token") + ".";
 
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);

@@ -3,7 +3,7 @@ ManaCost:2 W W
 Types:Legendary Planeswalker Serra
 Loyalty:4
 A:AB$ PumpAll | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidCards$ Creature.withFlying+YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control with flying get +1/+1 until end of turn.
-A:AB$ Token | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | TokenScript$ w_4_4_angel_flying_vigilance | TokenOwner$ You | LegacyImage$ w 4 4 angel flying vigilance mh1 | SpellDescription$ Create a 4/4 white Angel creature token with flying and vigilance.
+A:AB$ Token | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | TokenScript$ w_4_4_angel_flying_vigilance | TokenOwner$ You | SpellDescription$ Create a 4/4 white Angel creature token with flying and vigilance.
 A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Name$ Emblem - Serra the Benevolent | Image$ emblem_serra_the_benevolent | ReplacementEffects$ STWorship | Planeswalker$ True | Ultimate$ True | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead."
 SVar:STWorship:Event$ LifeReduced | ValidPlayer$ You | Result$ LT1 | IsDamage$ True | CheckSVar$ YourLife | SVarCompare$ GE1 | IsPresent$ Creature.YouCtrl | ReplaceWith$ ReduceLoss | Description$ If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead.
 SVar:ReduceLoss:DB$ ReplaceEffect | VarName$ Result | VarValue$ X

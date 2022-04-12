@@ -4,9 +4,9 @@ Types:Artifact
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInGame | SpellDescription$ As CARDNAME enters the battlefield, choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.
 # Went for MostProminentInGame logic to give the AI a possible out for situations where it might be locked down based on its colors
-A:AB$ Token | Cost$ 3 T | TokenAmount$ 1 | TokenScript$ w_1_1_citizen | TokenOwner$ You | LegacyImage$ w 1 1 citizen tsp | ConditionChosenColor$ white | SubAbility$ ChoseBlue | SpellDescription$ Create a 1/1 creature token of the chosen color and type.
-SVar:ChoseBlue:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_camarid | TokenOwner$ You | LegacyImage$ u 1 1 camarid tsp | ConditionChosenColor$ blue | SubAbility$ ChoseBlack
-SVar:ChoseBlack:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_thrull | TokenOwner$ You | LegacyImage$ b 1 1 thrull tsp | ConditionChosenColor$ black | SubAbility$ ChoseRed
-SVar:ChoseRed:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_goblin | TokenOwner$ You | ConditionChosenColor$ red | TokenImage$ r 1 1 goblin tsp | SubAbility$ ChoseGreen
-SVar:ChoseGreen:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling tsp | ConditionChosenColor$ green
+A:AB$ Token | Cost$ 3 T | TokenAmount$ 1 | TokenScript$ w_1_1_citizen | TokenOwner$ You | ConditionChosenColor$ white | SubAbility$ ChoseBlue | SpellDescription$ Create a 1/1 creature token of the chosen color and type.
+SVar:ChoseBlue:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_camarid | TokenOwner$ You | ConditionChosenColor$ blue | SubAbility$ ChoseBlack
+SVar:ChoseBlack:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_thrull | TokenOwner$ You | ConditionChosenColor$ black | SubAbility$ ChoseRed
+SVar:ChoseRed:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_goblin | TokenOwner$ You | ConditionChosenColor$ red | SubAbility$ ChoseGreen
+SVar:ChoseGreen:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | ConditionChosenColor$ green
 Oracle:As Sarpadian Empires, Vol. VII enters the battlefield, choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.\n{3}, {T}: Create a 1/1 creature token of the chosen color and type.

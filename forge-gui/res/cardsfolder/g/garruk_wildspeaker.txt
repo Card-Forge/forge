@@ -3,6 +3,6 @@ ManaCost:2 G G
 Types:Legendary Planeswalker Garruk
 Loyalty:3
 A:AB$ Untap | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Land | TgtPrompt$ Select target land | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Untap two target lands.
-A:AB$ Token | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ g_3_3_beast | TokenOwner$ You | LegacyImage$ g 3 3 beast lrw | SpellDescription$ Create a 3/3 green Beast creature token.
+A:AB$ Token | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ g_3_3_beast | TokenOwner$ You | SpellDescription$ Create a 3/3 green Beast creature token.
 A:AB$ PumpAll | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Creature.YouCtrl | NumAtt$ +3 | NumDef$ +3 | KW$ Trample | SpellDescription$ Creatures you control get +3/+3 and gain trample until end of turn.
 Oracle:[+1]: Untap two target lands.\n[-1]: Create a 3/3 green Beast creature token.\n[-4]: Creatures you control get +3/+3 and gain trample until end of turn.

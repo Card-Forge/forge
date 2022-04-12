@@ -3,7 +3,7 @@ ManaCost:2 B G
 Types:Creature Spider
 PT:2/4
 K:Reach
-A:AB$ Token | Cost$ 3 B G ExileFromGrave<1/Creature> | TokenAmount$ 1 | TokenScript$ g_1_2_spider_reach | TokenOwner$ You | LegacyImage$ g 1 2 spider reach mh1 | SubAbility$ DBLoseLife | SpellDescription$ Create a 1/2 green Spider creature token with reach, then each opponent loses 1 life for each Spider you control.
+A:AB$ Token | Cost$ 3 B G ExileFromGrave<1/Creature> | TokenAmount$ 1 | TokenScript$ g_1_2_spider_reach | TokenOwner$ You | SubAbility$ DBLoseLife | SpellDescription$ Create a 1/2 green Spider creature token with reach, then each opponent loses 1 life for each Spider you control.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X
 SVar:X:Count$Valid Spider.YouCtrl
 DeckHas:Ability$Token

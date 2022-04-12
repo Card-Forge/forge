@@ -2,7 +2,7 @@ Name:Masterful Replication
 ManaCost:5 U
 Types:Instant
 A:SP$ Charm | Cost$ 5 U | Choices$ DBToken,DBCopy
-SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_3_3_a_golem | TokenOwner$ You | LegacyImage$ c 3 3 a golem m20 | SpellDescription$ Create two 3/3 colorless Golem artifact creature tokens.
+SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_3_3_a_golem | TokenOwner$ You | SpellDescription$ Create two 3/3 colorless Golem artifact creature tokens.
 SVar:DBCopy:DB$ Pump | ValidTgts$ Artifact.YouCtrl | ImprintCards$ Targeted | SubAbility$ DBRepeat | SpellDescription$ Choose target artifact you control. Each other artifact you control becomes a copy of that artifact until end of turn.
 SVar:DBRepeat:DB$ RepeatEach | RepeatCards$ Artifact.YouCtrl+IsNotImprinted | RepeatSubAbility$ DBClone | SubAbility$ DBCleanup
 SVar:DBClone:DB$ Clone | Defined$ Imprinted | CloneTarget$ Remembered | Duration$ UntilEndOfTurn

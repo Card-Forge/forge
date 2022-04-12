@@ -10,5 +10,5 @@ ALTERNATE
 Name:Battery
 ManaCost:3 G
 Types:Sorcery
-A:SP$ Token | Cost$ 3 G | TokenScript$ g_3_3_elephant | TokenOwner$ You | LegacyImage$ g 3 3 elephant inv | SpellDescription$ Create a 3/3 green Elephant creature token.
+A:SP$ Token | Cost$ 3 G | TokenScript$ g_3_3_elephant | TokenOwner$ You | SpellDescription$ Create a 3/3 green Elephant creature token.
 Oracle:Create a 3/3 green Elephant creature token.

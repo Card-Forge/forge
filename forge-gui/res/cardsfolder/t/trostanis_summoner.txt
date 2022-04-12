@@ -3,8 +3,8 @@ ManaCost:5 G W
 Types:Creature Elf Shaman
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 white Knight creature token with vigilance, a 3/3 green Centaur creature token, and a 4/4 green Rhino creature token with trample.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | LegacyImage$ w 2 2 knight vigilance dgm | SubAbility$ DBCentaurToken
-SVar:DBCentaurToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_centaur | TokenOwner$ You | LegacyImage$ g 3 3 centaur dgm | SubAbility$ DBRhinoToken
-SVar:DBRhinoToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_4_4_rhino_trample | TokenOwner$ You | LegacyImage$ g 4 4 rhino trample dgm
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | SubAbility$ DBCentaurToken
+SVar:DBCentaurToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_centaur | TokenOwner$ You | SubAbility$ DBRhinoToken
+SVar:DBRhinoToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_4_4_rhino_trample | TokenOwner$ You
 DeckHas:Ability$Token
 Oracle:When Trostani's Summoner enters the battlefield, create a 2/2 white Knight creature token with vigilance, a 3/3 green Centaur creature token, and a 4/4 green Rhino creature token with trample.

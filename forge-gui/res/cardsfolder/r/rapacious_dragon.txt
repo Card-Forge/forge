@@ -4,6 +4,6 @@ Types:Creature Dragon
 PT:3/3
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBTreasureTokens | TriggerDescription$ When CARDNAME enters the battlefield, create two Treasure tokens.
-SVar:DBTreasureTokens:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | LegacyImage$ c a treasure sac m20
+SVar:DBTreasureTokens:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 DeckHas:Ability$Token
 Oracle:Flying\nWhen Rapacious Dragon enters the battlefield, create two Treasure tokens. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")

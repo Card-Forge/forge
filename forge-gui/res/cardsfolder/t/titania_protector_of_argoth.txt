@@ -5,5 +5,5 @@ PT:5/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target land card from your graveyard to the battlefield.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Land.YouCtrl
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a land you control is put into a graveyard from the battlefield, create a 5/3 green Elemental creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_5_3_elemental | TokenOwner$ You | LegacyImage$ g 5 3 elemental c14
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_5_3_elemental | TokenOwner$ You
 Oracle:When Titania, Protector of Argoth enters the battlefield, return target land card from your graveyard to the battlefield.\nWhenever a land you control is put into a graveyard from the battlefield, create a 5/3 green Elemental creature token.

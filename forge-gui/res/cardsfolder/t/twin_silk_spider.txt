@@ -4,6 +4,6 @@ Types:Creature Spider
 PT:1/2
 K:Reach
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/2 green Spider creature token with reach.
-SVar:TrigToken:DB$ Token | LegacyImage$ g 1 2 spider reach mh1 | TokenAmount$ 1 | TokenScript$ g_1_2_spider_reach | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_2_spider_reach | TokenOwner$ You
 DeckHas:Ability$Token
 Oracle:Reach\nWhen Twin-Silk Spider enters the battlefield, create a 1/2 green Spider creature token with reach.

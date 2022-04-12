@@ -9,6 +9,6 @@ SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ Enchantment,Aura | Rem
 SVar:STAura:Mode$ Continuous | Affected$ Land.EnchantedBy | AddAbility$ ABMana & ABToken | Description$ Enchanted Forest has '{T}: Add {G}{G}' and '{1}, {T}, Sacrifice this land: Create a tapped 4/4 green Troll Warrior creature token with trample.'
 SVar:SPAttach:SP$ Attach | Cost$ 0 | ValidTgts$ Forest.YouCtrl | AILogic$ Pump
 SVar:ABMana:AB$ Mana | Cost$ T | Produced$ G | Amount$ 2 | SpellDescription$ Add {G}{G}.
-SVar:ABToken:AB$ Token | Cost$ 1 T Sac<1/CARDNAME> | TokenAmount$ 1 | TokenScript$ g_4_4_troll_warrior_trample | TokenOwner$ You | LegacyImage$ g 4 4 troll warrior trample khm | TokenTapped$ True | SpellDescription$ Create a tapped 4/4 green Troll Warrior creature token with trample.
+SVar:ABToken:AB$ Token | Cost$ 1 T Sac<1/CARDNAME> | TokenAmount$ 1 | TokenScript$ g_4_4_troll_warrior_trample | TokenOwner$ You | TokenTapped$ True | SpellDescription$ Create a tapped 4/4 green Troll Warrior creature token with trample.
 DeckHas:Ability$Token
 Oracle:Trample\nWhen Old-Growth Troll dies, if it was a creature, return it to the battlefield. It's an Aura enchantment with enchant Forest you control and "Enchanted Forest has '{T}: Add {G}{G}' and '{1}, {T}, Sacrifice this land: Create a tapped 4/4 green Troll Warrior creature token with trample.'"

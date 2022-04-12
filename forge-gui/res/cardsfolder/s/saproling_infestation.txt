@@ -2,7 +2,7 @@ Name:Saproling Infestation
 ManaCost:1 G
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Card.YouCtrl+kicked | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a player kicks a spell, you create a 1/1 green Saproling creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling inv
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You
 AI:RemoveDeck:Random
 DeckNeeds:Keyword$Kicker
 DeckHas:Ability$Token

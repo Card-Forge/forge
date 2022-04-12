@@ -1,7 +1,7 @@
 Name:Grenzo's Rebuttal
 ManaCost:4 R R
 Types:Sorcery
-A:SP$ Token | Cost$ 4 R R | TokenAmount$ 1 | TokenScript$ r_4_4_ogre | TokenOwner$ You | LegacyImage$ r 4 4 ogre cns | SubAbility$ DBRepeat | SpellDescription$ Create a 4/4 red Ogre creature token. Starting with you, each player chooses an artifact, a creature, and a land from among the permanents controlled by the player to their left. Destroy each permanent chosen this way.
+A:SP$ Token | Cost$ 4 R R | TokenAmount$ 1 | TokenScript$ r_4_4_ogre | TokenOwner$ You | SubAbility$ DBRepeat | SpellDescription$ Create a 4/4 red Ogre creature token. Starting with you, each player chooses an artifact, a creature, and a land from among the permanents controlled by the player to their left. Destroy each permanent chosen this way.
 SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | StartingWithActivator$ True | RepeatSubAbility$ DBChooseArtifact | SubAbility$ DBDestroy
 SVar:DBChooseArtifact:DB$ ChooseCard | Defined$ Remembered | Choices$ Artifact.ControlledByPlayerInTheDirection_Left_Player.IsRemembered | Mandatory$ True | ChoiceTitle$ Choose a artifact | SubAbility$ DBChooseCreature | RememberChosen$ True
 SVar:DBChooseCreature:DB$ ChooseCard | Defined$ Remembered | Choices$ Creature.ControlledByPlayerInTheDirection_Left_Player.IsRemembered | ChoiceTitle$ Choose a creature | Mandatory$ True | SubAbility$ DBChooseLand | RememberChosen$ True

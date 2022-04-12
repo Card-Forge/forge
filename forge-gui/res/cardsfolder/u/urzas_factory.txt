@@ -2,5 +2,5 @@ Name:Urza's Factory
 ManaCost:no cost
 Types:Land Urza's
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Token | Cost$ 7 T | TokenAmount$ 1 | TokenScript$ c_2_2_a_assembly_worker | TokenOwner$ You | LegacyImage$ c 2 2 a assembly worker tsp | SpellDescription$ Create a 2/2 colorless Assembly-Worker artifact creature token.
+A:AB$ Token | Cost$ 7 T | TokenAmount$ 1 | TokenScript$ c_2_2_a_assembly_worker | TokenOwner$ You | SpellDescription$ Create a 2/2 colorless Assembly-Worker artifact creature token.
 Oracle:{T}: Add {C}.\n{7}, {T}: Create a 2/2 colorless Assembly-Worker artifact creature token.

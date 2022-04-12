@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Legendary Creature Human Artificer
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 colorless Thopter artifact creature token with flying.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You | LegacyImage$ c 1 1 a thopter flying kld
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You
 A:AB$ Pump | Cost$ 1 R | ValidTgts$ Creature.Artifact | NumAtt$ +1 | TgtPrompt$ Select target artifact creature. | SpellDescription$ Target artifact creature gets +1/+0 until end of turn.
 A:AB$ Pump | Cost$ 1 Sac<1/Artifact> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
 DeckHas:Ability$Token

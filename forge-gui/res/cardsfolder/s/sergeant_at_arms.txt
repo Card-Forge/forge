@@ -4,6 +4,6 @@ Types:Creature Human Soldier
 PT:2/3
 K:Kicker:2 W
 T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, create two 1/1 white Soldier creature tokens.
-SVar:TrigToken:DB$ Token | LegacyImage$ w 1 1 soldier dom | TokenAmount$ 2 | TokenScript$ w_1_1_soldier | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_soldier | TokenOwner$ You
 DeckHas:Ability$Token
 Oracle:Kicker {2}{W} (You may pay an additional {2}{W} as you cast this spell.)\nWhen Sergeant-at-Arms enters the battlefield, if it was kicked, create two 1/1 white Soldier creature tokens.

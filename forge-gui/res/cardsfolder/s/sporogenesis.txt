@@ -4,7 +4,7 @@ Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a fungus counter on target nontoken creature.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.nonToken | TgtPrompt$ Select target nontoken creature | CounterType$ FUNGUS | CounterNum$ 1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ValidCard$ Creature.counters_GE1_FUNGUS | Execute$ TrigToken | TriggerDescription$ Whenever a creature with a fungus counter on it dies, create a 1/1 green Saproling creature token for each fungus counter on that creature.
-SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling usg
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You
 SVar:X:TriggeredCard$CardCounters.FUNGUS
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigRemove | TriggerDescription$ When CARDNAME leaves the battlefield, remove all fungus counters from all creatures.
 SVar:TrigRemove:DB$ RepeatEach | RepeatCards$ Creature | RepeatSubAbility$ DBRemoveFungus

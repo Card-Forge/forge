@@ -2,7 +2,7 @@ Name:Garruk, Cursed Huntsman
 ManaCost:4 B G
 Types:Legendary Planeswalker Garruk
 Loyalty:5
-A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | LegacyImage$ bg 2 2 wolf garruk eld | TokenAmount$ 2 | TokenScript$ bg_2_2_wolf_garruk | TokenOwner$ You | SpellDescription$ Create two 2/2 black and green Wolf creature tokens with "When this creature dies, put a loyalty counter on each Garruk you control."
+A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | TokenAmount$ 2 | TokenScript$ bg_2_2_wolf_garruk | TokenOwner$ You | SpellDescription$ Create two 2/2 black and green Wolf creature tokens with "When this creature dies, put a loyalty counter on each Garruk you control."
 A:AB$ Destroy | Cost$ SubCounter<3/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Planeswalker$ True | SubAbility$ DBDraw | SpellDescription$ Destroy target creature. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Name$ Emblem - Garruk, Cursed Huntsman | Image$ emblem_garruk_cursed_huntsman | StaticAbilities$ STTrample | Planeswalker$ True | Ultimate$ True | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Creatures you control get +3/+3 and have trample."

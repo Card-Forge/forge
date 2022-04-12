@@ -3,7 +3,7 @@ ManaCost:4 R
 Types:Creature Eldrazi Drone
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create three 0/1 colorless Eldrazi Spawn creature tokens. They have "Sacrifice this creature: Add {C}."
-SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You | LegacyImage$ c 0 1 eldrazi spawn sac roe
+SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You
 DeckHints:Type$Eldrazi
 DeckHas:Ability$Mana.Colorless|Token
 Oracle:When Emrakul's Hatcher enters the battlefield, create three 0/1 colorless Eldrazi Spawn creature tokens. They have "Sacrifice this creature: Add {C}."

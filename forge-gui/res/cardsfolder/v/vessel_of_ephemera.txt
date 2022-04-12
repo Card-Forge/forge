@@ -1,6 +1,6 @@
 Name:Vessel of Ephemera
 ManaCost:1 W
 Types:Enchantment
-A:AB$ Token | Cost$ 2 W Sac<1/CARDNAME> | TokenOwner$ You | TokenAmount$ 2 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | LegacyImage$ w 1 1 spirit flying soi | SpellDescription$ Create two 1/1 white Spirit creature tokens with flying.
+A:AB$ Token | Cost$ 2 W Sac<1/CARDNAME> | TokenOwner$ You | TokenAmount$ 2 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | SpellDescription$ Create two 1/1 white Spirit creature tokens with flying.
 DeckHas:Ability$Token
 Oracle:{2}{W}, Sacrifice Vessel of Ephemera: Create two 1/1 white Spirit creature tokens with flying.

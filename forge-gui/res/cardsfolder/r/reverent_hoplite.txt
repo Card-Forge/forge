@@ -3,7 +3,7 @@ ManaCost:4 W
 Types:Creature Human Soldier
 PT:1/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a number of 1/1 white Human Soldier creature tokens equal to your devotion to white.
-SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_human_soldier | TokenOwner$ You | LegacyImage$ w 1 1 human soldier thb
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_human_soldier | TokenOwner$ You
 SVar:X:Count$Devotion.White
 DeckHas:Ability$Token
 Oracle:When Reverent Hoplite enters the battlefield, create a number of 1/1 white Human Soldier creature tokens equal to your devotion to white. (Each {W} in the mana costs of permanents you control counts toward your devotion to white.)

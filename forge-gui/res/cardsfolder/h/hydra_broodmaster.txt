@@ -4,7 +4,7 @@ Types:Creature Hydra
 PT:7/7
 K:Monstrosity:X:X X G
 T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME becomes monstrous, create X X/X green Hydra creature tokens.
-SVar:TrigToken:DB$ Token | TokenAmount$ MonstrosityX | TokenScript$ g_x_x_hydra | TokenOwner$ You | TokenPower$ MonstrosityX | TokenToughness$ MonstrosityX | LegacyImage$ g x x hydra jou
+SVar:TrigToken:DB$ Token | TokenAmount$ MonstrosityX | TokenScript$ g_x_x_hydra | TokenOwner$ You | TokenPower$ MonstrosityX | TokenToughness$ MonstrosityX
 SVar:X:Count$xPaid
 SVar:MonstrosityX:TriggerCount$MonstrosityAmount
 DeckHas:Ability$Counters|Token

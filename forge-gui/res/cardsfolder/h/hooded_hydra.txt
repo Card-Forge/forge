@@ -5,7 +5,7 @@ PT:0/0
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 1/1 green Snake creature token for each +1/+1 counter on it.
-SVar:TrigToken:DB$ Token | TokenAmount$ Y | TokenScript$ g_1_1_snake | TokenOwner$ TriggeredCardController | LegacyImage$ g 1 1 snake ktk
+SVar:TrigToken:DB$ Token | TokenAmount$ Y | TokenScript$ g_1_1_snake | TokenOwner$ TriggeredCardController
 SVar:Y:TriggeredCard$CardCounters.P1P1
 K:Morph:3 G G
 R:Event$ TurnFaceUp | ValidCard$ Card.Self | ReplaceWith$ AddCounters | ActiveZones$ Battlefield | Description$ As CARDNAME is turned face up, put five +1/+1 counters on it.

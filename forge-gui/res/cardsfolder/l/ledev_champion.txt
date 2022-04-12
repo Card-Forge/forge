@@ -10,6 +10,6 @@ SVar:TrigPump:DB$ Pump | NumAtt$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:Y:Remembered$Amount
-A:AB$ Token | Cost$ 3 G W | TokenAmount$ 1 | TokenScript$ w_1_1_soldier_lifelink | LegacyImage$ w 1 1 soldier lifelink grn | SpellDescription$ Create a 1/1 white Soldier creature token with lifelink.
+A:AB$ Token | Cost$ 3 G W | TokenAmount$ 1 | TokenScript$ w_1_1_soldier_lifelink | SpellDescription$ Create a 1/1 white Soldier creature token with lifelink.
 DeckHas:Ability$Token|LifeGain
 Oracle:Whenever Ledev Champion attacks, you may tap any number of untapped creatures you control. Ledev Champion gets +1/+1 until end of turn for each creature tapped this way.\n{3}{G}{W}: Create a 1/1 white Soldier creature token with lifelink.

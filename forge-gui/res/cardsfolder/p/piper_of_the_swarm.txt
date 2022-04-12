@@ -5,7 +5,7 @@ PT:1/3
 S:Mode$ Continuous | Affected$ Rat.YouCtrl | AddKeyword$ Menace | Description$ Rats you control have menace.
 SVar:PlayMain1:TRUE
 DeckHints:Type$Rat
-A:AB$ Token | Cost$ 1 B T | TokenAmount$ 1 | TokenScript$ b_1_1_rat | TokenOwner$ You | LegacyImage$ b 1 1 rat eld | SpellDescription$ Create a 1/1 black Rat creature token.
+A:AB$ Token | Cost$ 1 B T | TokenAmount$ 1 | TokenScript$ b_1_1_rat | TokenOwner$ You | SpellDescription$ Create a 1/1 black Rat creature token.
 A:AB$ GainControl | Cost$ 2 B B T Sac<3/Rat> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Gain control of target creature.
 SVar:AIPreference:SacCost$Creature.Rat+token,Creature.Rat+cmcLE3
 DeckHas:Ability$Token

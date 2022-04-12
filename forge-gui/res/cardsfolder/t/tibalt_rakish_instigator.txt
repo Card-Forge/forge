@@ -3,6 +3,6 @@ ManaCost:2 R
 Types:Legendary Planeswalker Tibalt
 Loyalty:5
 S:Mode$ CantGainLife | ValidPlayer$ Opponent | Description$ Your opponents can't gain life.
-A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | TokenAmount$ 1 | TokenScript$ r_1_1_devil_burn | TokenOwner$ You | LegacyImage$ r 1 1 devil burn war | Planeswalker$ True | SpellDescription$ Create a 1/1 red Devil creature token "When this creature dies, it deals 1 damage to any target."
+A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | TokenAmount$ 1 | TokenScript$ r_1_1_devil_burn | TokenOwner$ You | Planeswalker$ True | SpellDescription$ Create a 1/1 red Devil creature token "When this creature dies, it deals 1 damage to any target."
 DeckHas:Ability$Token
 Oracle:Your opponents can't gain life.\n[-2]: Create a 1/1 red Devil creature token with "When this creature dies, it deals 1 damage to any target."

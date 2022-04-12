@@ -2,7 +2,7 @@ Name:Ruthless Knave
 ManaCost:2 B
 Types:Creature Orc Pirate
 PT:3/2
-A:AB$ Token | Cost$ 2 B Sac<1/Creature> | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | LegacyImage$ c a treasure sac xln | SpellDescription$ Create two Treasure tokens.
+A:AB$ Token | Cost$ 2 B Sac<1/Creature> | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Create two Treasure tokens.
 A:AB$ Draw | Cost$ Sac<3/Treasure> | NumCards$ 1 | SpellDescription$ Draw a card
 SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | DiscardValid$ Card.IsRemembered | NumCards$ 1 | SubAbility$ DBCleanup
 DeckHas:Ability$Token

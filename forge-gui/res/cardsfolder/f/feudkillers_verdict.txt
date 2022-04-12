@@ -2,6 +2,6 @@ Name:Feudkiller's Verdict
 ManaCost:4 W W
 Types:Tribal Sorcery Giant
 A:SP$ GainLife | Cost$ 4 W W | Defined$ You | LifeAmount$ 10 | SubAbility$ Token | SpellDescription$ You gain 10 life. Then if you have more life than an opponent, create a 5/5 white Giant Warrior creature token.
-SVar:Token:DB$ Token | ConditionLifeTotal$ You | ConditionLifeAmount$ GTX | TokenAmount$ 1 | TokenScript$ w_5_5_giant_warrior | TokenOwner$ You | LegacyImage$ w 5 5 giant warrior mor
+SVar:Token:DB$ Token | ConditionLifeTotal$ You | ConditionLifeAmount$ GTX | TokenAmount$ 1 | TokenScript$ w_5_5_giant_warrior | TokenOwner$ You
 SVar:X:PlayerCountOpponents$LowestLifeTotal
 Oracle:You gain 10 life. Then if you have more life than an opponent, create a 5/5 white Giant Warrior creature token.

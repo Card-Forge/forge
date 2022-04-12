@@ -3,7 +3,7 @@ ManaCost:3 U U
 Types:Creature Octopus
 PT:4/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 0/2 blue Illusion creature tokens with "Whenever this creature blocks a creature, that creature doesn't untap during its controller's next untap step."
-SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ u_0_2_illusion_mesmerize | TokenOwner$ You | LegacyImage$ u 0 2 illusion mesmerize rna
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ u_0_2_illusion_mesmerize | TokenOwner$ You
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Hexproof | IsPresent$ Illusion.YouCtrl | Description$ CARDNAME has hexproof as long as you control an Illusion.
 SVar:BuffedBy:Illusion
 DeckHas:Ability$Token

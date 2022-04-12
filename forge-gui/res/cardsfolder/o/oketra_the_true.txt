@@ -6,6 +6,6 @@ K:Double Strike
 K:Indestructible
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack or block. | CheckSVar$ X | SVarCompare$ LE2 | Description$ CARDNAME can't attack or block unless you control at least three other creatures.
 SVar:X:Count$Valid Creature.Other+YouCtrl
-A:AB$ Token | Cost$ 3 W | TokenAmount$ 1 | TokenScript$ w_1_1_warrior_vigilance | TokenOwner$ You | LegacyImage$ w 1 1 warrior vigilance akh | SpellDescription$ Create a 1/1 white Warrior creature token with vigilance.
+A:AB$ Token | Cost$ 3 W | TokenAmount$ 1 | TokenScript$ w_1_1_warrior_vigilance | TokenOwner$ You | SpellDescription$ Create a 1/1 white Warrior creature token with vigilance.
 DeckHas:Ability$Token
 Oracle:Double strike, indestructible\nOketra the True can't attack or block unless you control at least three other creatures.\n{3}{W}: Create a 1/1 white Warrior creature token with vigilance.

@@ -4,7 +4,7 @@ Types:Creature Demon
 PT:6/6
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a number of 1/1 black Harpy creature tokens with flying equal to your devotion to black.
-SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ b_1_1_harpy_flying | TokenOwner$ You | LegacyImage$ b 1 1 harpy flying ths
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ b_1_1_harpy_flying | TokenOwner$ You
 SVar:X:Count$Devotion.Black
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature.
 SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature | SacMessage$ Creature

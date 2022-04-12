@@ -4,6 +4,6 @@ Types:Creature Human Artificer
 PT:0/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 colorless Thopter artifact creature tokens with flying.
-SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You | LegacyImage$ c 1 1 a thopter flying kld
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You
 DeckHas:Ability$Token
 Oracle:Flying\nWhen Experimental Aviator enters the battlefield, create two 1/1 colorless Thopter artifact creature tokens with flying.

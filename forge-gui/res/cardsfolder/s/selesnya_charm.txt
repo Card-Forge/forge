@@ -4,5 +4,5 @@ Types:Instant
 A:SP$ Charm | Cost$ G W | Choices$ Buff,Exile,Knight | CharmNum$ 1
 SVar:Buff:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature. | NumAtt$ 2 | NumDef$ 2 | KW$ Trample | SpellDescription$ Target creature gets +2/+2 and gains trample until end of turn.
 SVar:Exile:DB$ ChangeZone | ValidTgts$ Creature.powerGE5 | TgtPrompt$ Choose target creature with power 5 or greater | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with power 5 or greater.
-SVar:Knight:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | LegacyImage$ w 2 2 knight vigilance rtr | SpellDescription$ Create a 2/2 white Knight creature token with vigilance.
+SVar:Knight:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | SpellDescription$ Create a 2/2 white Knight creature token with vigilance.
 Oracle:Choose one —\n• Target creature gets +2/+2 and gains trample until end of turn.\n• Exile target creature with power 5 or greater.\n• Create a 2/2 white Knight creature token with vigilance.

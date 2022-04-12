@@ -3,8 +3,8 @@ ManaCost:1 R W W
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, choose one at random. Create a red and white creature token with those characteristics.
 SVar:TrigCharm:DB$ Charm | Random$ True | Choices$ DBToken1,DBToken2,DBToken3
-SVar:DBToken1:DB$ Token | TokenAmount$ 1 | TokenScript$ rw_3_1_human_warrior_trample_haste | TokenOwner$ You | LegacyImage$ rw 3 1 human warrior trample haste eld | SpellDescription$ 3/1 Human Warrior with trample and haste.
-SVar:DBToken2:DB$ Token | TokenAmount$ 1 | TokenScript$ rw_2_1_human_cleric_lifelink_haste | TokenOwner$ You | LegacyImage$ rw 2 1 human cleric lifelink haste eld | SpellDescription$ 2/1 Human Cleric with lifelink and haste.
-SVar:DBToken3:DB$ Token | TokenAmount$ 1 | TokenScript$ rw_1_2_human_rogue_haste_damage | TokenOwner$ You | LegacyImage$ rw 1 2 human rogue haste damage eld | SpellDescription$ 1/2 Human Rogue with haste and "When this creature enters the battlefield, it deals 1 damage to any target."
+SVar:DBToken1:DB$ Token | TokenAmount$ 1 | TokenScript$ rw_3_1_human_warrior_trample_haste | TokenOwner$ You | SpellDescription$ 3/1 Human Warrior with trample and haste.
+SVar:DBToken2:DB$ Token | TokenAmount$ 1 | TokenScript$ rw_2_1_human_cleric_lifelink_haste | TokenOwner$ You | SpellDescription$ 2/1 Human Cleric with lifelink and haste.
+SVar:DBToken3:DB$ Token | TokenAmount$ 1 | TokenScript$ rw_1_2_human_rogue_haste_damage | TokenOwner$ You | SpellDescription$ 1/2 Human Rogue with haste and "When this creature enters the battlefield, it deals 1 damage to any target."
 DeckHas:Ability$Token
 Oracle:At the beginning of your upkeep, choose one at random. Create a red and white creature token with those characteristics.\n• 3/1 Human Warrior with trample and haste.\n• 2/1 Human Cleric with lifelink and haste.\n• 1/2 Human Rogue with haste and "When this creature enters the battlefield, it deals 1 damage to any target."

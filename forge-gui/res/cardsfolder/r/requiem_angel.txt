@@ -4,7 +4,7 @@ Types:Creature Angel
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonSpirit+YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever another non-Spirit creature you control dies, create a 1/1 white Spirit creature token with flying.
-SVar:TrigToken:DB$ Token | LegacyImage$ w 1 1 spirit flying dka | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
 DeckHas:Ability$Token
 SVar:PlayMain1:TRUE
 Oracle:Flying\nWhenever another non-Spirit creature you control dies, create a 1/1 white Spirit creature token with flying.

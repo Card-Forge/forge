@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Creature Human Shaman
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ Morbid | SVarCompare$ GE1 | Execute$ TrigToken | TriggerDescription$ Morbid — When CARDNAME enters the battlefield, if a creature died this turn, create a 2/2 black Zombie creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | LegacyImage$ b 2 2 zombie dka
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You
 SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 Oracle:Morbid — When Wakedancer enters the battlefield, if a creature died this turn, create a 2/2 black Zombie creature token.
