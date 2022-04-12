@@ -8,46 +8,100 @@ Type=Expansion
 ScryfallCode=SNC
 
 [cards]
+3 U Ballroom Brawlers @John Stanko
+10 R Depopulate @Jokubas Uogintas
 11 M Elspeth Resplendent @Anna Steinbauer
 15 M Halo Fountain @Anastasia Ovchinnikova
+17 U Illuminator Virtuoso @John Stanko
+21 U Mage's Attendant @Igor Kieryluk
 22 R Mysterious Limousine @Dan Scott
+25 C Raffine's Guidance @Rémi Jacquot
+26 C Raffine's Informant @John Stanko
 29 U Rumor Gatherer @Simon Dominic
+34 M All-Seeing Arbiter @Anato Finnstark
+38 R Cut Your Losses @Dominik Mayer
+40 C Echo Inspector @Lucas Graciano
+41 R Errant, Street Artist @Justine Cruz
+44 U Faerie Vandal @Irina Nordsol
+45 U Hypnotic Grifter @Josu Hernaiz
 46 R Ledger Shredder @Mila Pesic
 47 U A Little Chat @Matt Stewart
+49 C Make Disappear @Inka Schulz
 51 U An Offer You Can't Refuse @Dallas Williams
+52 U Out of the Way @Tony Foti
+54 U Psychic Pickpocket @Will Gist
+57 C Rooftop Nuisance @Svetlin Velinov
+59 C Security Bypass @Volkan Baǵa
 65 R Wiretapping @Jason A. Engle
+66 C Witness Protection @Dominik Mayer
+69 R Cemetery Tampering @Taras Susak
 72 R Cut of the Profits @Donato Giancola
+76 C Dig Up the Body @Greg Staples
+81 U Graveyard Shift @Liiga Smilshkalne
+82 U Grisly Sigil @Dominik Mayer
+83 U Illicit Shipment @Josu Hernaiz
 84 C Incriminate @Kieran Yanner
+85 C Join the Maestros @Josh Hass
 86 C Maestros Initiate @Irina Nordsol
 88 C Murder @Yongjae Choi
+91 C Revel Ruiner @Christina Davis
+95 R Shakedown Heavy @Randy Vargas
+98 U Vampire Scrivener @Bastien L. Deharme
 101 M Arcane Bombardment @Marta Nael
 105 R Devilish Valet @Bud Cook
 112 R Jaxis, the Troublemaker @Zoltan Boros
 113 C Light 'Em Up @Tony Foti
 116 R Professional Face-Breaker @Dan Scott
+118 U Pyre-Sledge Arsonist @Kekai Kotaki
+122 U Rob the Archives @Steve Argyle
 125 C Strangle @Vincent Proce
+128 U Unlucky Witness @Tyler Walpole
 129 M Urabrask, Heretic Praetor @Simon Dominic
 142 U Courier's Briefcase @Josu Hernaiz
+144 R Evolving Door @Drew Baker
+145 R Fight Rigging @Daarken
 148 R Gala Greeters @Bud Cook
+152 U Luxurious Libation @Joe Slucher
+160 R Topiary Stomper @Robin Olausson
 162 M Vivien on the Hunt @Jake Murray
+167 R Black Market Tycoon @Brock Grossman
+169 U Brazen Upstart @Dallas Williams
 170 R Brokers Ascendancy @Dallas Williams
 171 U Brokers Charm @Steve Argyle
 173 U Cabaretti Charm @Steve Argyle
+175 U Ceremonial Groundbreaker @Drew Baker
+177 U Cormela, Glamour Thief @Bram Sels
+178 U Corpse Appraiser @Josh Hass
 182 U Disciplined Duelist @Josu Hernaiz
 184 R Evelyn, the Covetous @Marta Nael
+185 U Exotic Pets @Drew Baker
 186 M Falco Spara, Pactweaver @Kieran Yanner
+189 U Forge Boss @Igor Kieryluk
+191 R Hostile Takeover @Vincent Proce
 193 M Jetmir, Nexus of Revels @Ryan Pancoast
 197 M Lord Xander, the Collector @Martina Fackova
+198 R Maestros Ascendancy @Jodie Muir
 199 U Maestros Charm @Steve Argyle
 200 R Maestros Diabolist @Bastien L. Deharme
-205 U Nimble Larcenist @Volkan Baga
+205 U Nimble Larcenist @Volkan Baǵa
 206 M Ob Nixilis, the Adversary @Yongjae Choi
+207 R Obscura Ascendancy @Josh Hass
 208 U Obscura Charm @Steve Argyle
+209 R Obscura Interceptor @Jason A. Engle
+212 U Queza, Augur of Agonies @Josh Hass
 213 M Raffine, Scheming Seer @Johannes Voss
+214 C Rakish Revelers @Alessandra Pisano
 217 U Riveteers Charm @Steve Argyle
+220 U Security Rhox @Lie Setiawan
+222 C Snooping Newsie @E. M. Gist
+228 R Toluz, Clever Conductor @Donato Giancola
+229 R Unleash the Inferno @Zoltan Boros
 231 M Ziatora, the Incinerator @Chris Rahn
+233 U Arc Spitter @Matt Forsyth
 236 C Chrome Cat @Joe Slucher
 237 R Getaway Car @Donato Giancola
+240 M Luxior, Giada's Gift @Volkan Baǵa
+245 U Suspicious Bookcase @Josu Hernaiz
 247 C Botanical Plaza @Grady Frederick
 250 R Jetmir's Garden @Kasia 'Kafis' Zielińska
 251 C Maestros Theater @Jokubas Uogintas
@@ -83,27 +137,39 @@ ScryfallCode=SNC
 283 M Vivien on the Hunt @Tom Roberts
 284 M Ob Nixilis, the Adversary @Tom Roberts
 285 M Halo Fountain @Dominik Mayer
+286 M All-Seeing Arbiter @Anato Finnstark
+290 R Topiary Stomper @Anato Finnstark
 291 R Jetmir's Garden @Dominik Mayer
 292 R Raffine's Tower @Dominik Mayer
 293 R Spara's Headquarters @Dominik Mayer
 294 R Xander's Lounge @Dominik Mayer
 295 R Ziatora's Proving Ground @Dominik Mayer
+296 U Brazen Upstart @Samy Halim
 297 R Brokers Ascendancy @Shawn Pagels
 298 U Brokers Charm @Jérémie Solomon
 300 U Cabaretti Charm @Jérémie Solomon
+301 U Cormela, Glamour Thief @Samy Halim
+302 U Corpse Appraiser @Justin Hernandez & Alexis Hernandez
 304 U Disciplined Duelist @Serena Malyon
 306 R Evelyn, the Covetous @Julie Dillon
 307 M Falco Spara, Pactweaver @Jack Hughes
+310 R Hostile Takeover @Isis
 312 M Jetmir, Nexus of Revels @Julie Dillon
 315 M Lord Xander, the Collector @Tran Nguyen
+316 R Maestros Ascendancy @Artur Treffner
 317 U Maestros Charm @Jérémie Solomon
 318 R Maestros Diabolist @Samy Halim
 321 U Nimble Larcenist @Meel Tamphanon
+322 R Obscura Ascendancy @Krharts
 323 U Obscura Charm @Jérémie Solomon
+326 U Queza, Augur of Agonies @Julie Dillon
 327 M Raffine, Scheming Seer @Véronique Meignaud
+328 C Rakish Revelers @Benjamin Ee
 331 U Riveteers Charm @Jérémie Solomon
+336 R Toluz, Clever Conductor @Justin Hernandez & Alexis Hernandez
 339 M Ziatora, the Incinerator @Scott M. Fischer
 341 M Elspeth Resplendent @Krharts
+344 R Errant, Street Artist @Alix Branwyn
 346 M Urabrask, Heretic Praetor @Igor Kieryluk
 347 M Vivien on the Hunt @Jason A. Engle
 348 M Ob Nixilis, the Adversary @Igor Kieryluk
@@ -119,15 +185,24 @@ ScryfallCode=SNC
 359 R Ziatora's Proving Ground @Elektrodeko
 360 M Urabrask, Heretic Praetor @Simon Dominic
 386 U Nimble Larcenist @Meel Tamphanon
+389 R Obscura Interceptor @Erin Vest
+406 R Depopulate @Jokubas Uogintas
 408 R Mysterious Limousine @Dan Scott
+410 R Cut Your Losses @Dominik Mayer
 412 R Ledger Shredder @Mila Pesic
 415 R Wiretapping @Jason A. Engle
+418 R Cemetery Tampering @Taras Susak
 419 R Cut of the Profits @Donato Giancola
+422 M Arcane Bombardment @Marta Nael
 423 R Devilish Valet @Bud Cook
 425 R Jaxis, the Troublemaker @Zoltan Boros
 426 R Professional Face-Breaker @Dan Scott
+429 R Evolving Door @Drew Baker
+430 R Fight Rigging @Daarken
 431 R Gala Greeters @Bud Cook
+434 R Black Market Tycoon @Brock Grossman
 438 R Getaway Car @Donato Giancola
+439 M Luxior, Giada's Gift @Volkan Baǵa
 441 M Elspeth Resplendent @Krharts
 446 M Urabrask, Heretic Praetor @Igor Kieryluk
 447 M Vivien on the Hunt @Jason A. Engle
