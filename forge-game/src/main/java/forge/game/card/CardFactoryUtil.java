@@ -920,7 +920,7 @@ public class CardFactoryUtil {
             StringBuilder trig = new StringBuilder();
             trig.append("Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self");
             trig.append(" | TriggerDescription$ Champion ").append(article).append(" ").append(desc);
-            trig.append(" (").append(Keyword.getInstance("Champion:"+desc).getReminderText()) .append(")");
+            trig.append(" (").append(Keyword.getInstance("Champion:" + desc).getReminderText()).append(")");
 
             StringBuilder trigReturn = new StringBuilder();
             trigReturn.append("Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self");
@@ -955,6 +955,19 @@ public class CardFactoryUtil {
 
             inst.addTrigger(parsedTrigger);
             inst.addTrigger(parsedTrigReturn);
+        } else if (keyword.startsWith("Casualty")) {
+            final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | CheckSVar$ Casualty | Secondary$ True";
+            String abString = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ 1 | MayChooseTarget$ True";
+            String[] k = keyword.split(":");
+            if (k.length > 2) {
+                abString = abString + " | " + k[2];
+            }
+
+            final Trigger casualtyTrigger = TriggerHandler.parseTrigger(trigScript, card, intrinsic);
+            casualtyTrigger.setOverridingAbility(AbilityFactory.getAbility(abString, card));
+            casualtyTrigger.setSVar("Casualty", "0");
+
+            inst.addTrigger(casualtyTrigger);
         } else if (keyword.equals("Conspire")) {
             final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | CheckSVar$ Conspire | Secondary$ True | TriggerDescription$ Copy CARDNAME if its conspire cost was paid";
             final String abString = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ 1 | MayChooseTarget$ True";

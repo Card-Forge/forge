@@ -562,7 +562,31 @@ public final class GameActionUtil {
 
         for (KeywordInterface ki : host.getKeywords()) {
             final String o = ki.getOriginal();
-            if (o.equals("Conspire")) {
+            if (o.startsWith("Casualty")) {
+                Trigger tr = Iterables.getFirst(ki.getTriggers(), null);
+                if (tr != null) {
+                    String n = o.split(":")[1];
+                    if (host.wasCast() && n.equals("X")) {
+                        n = Integer.toString(pc.announceRequirements(sa, "X for Casualty"));
+                    }
+                    final String casualtyCost = "Sac<1/Creature.powerGE" + n + "/creature with power " + n +
+                            " or greater>";
+                    final Cost cost = new Cost(casualtyCost, false);
+                    String str = "Pay for Casualty? " + cost.toSimpleString();
+                    boolean v = pc.addKeywordCost(sa, cost, ki, str);
+
+                    tr.setSVar("Casualty", v ? n : "0");
+
+                    if (v) {
+                        if (result == null) {
+                            result = sa.copy();
+                        }
+                        result.getPayCosts().add(cost);
+                        tr.getOverridingAbility().setSVar("Casualty", n);
+                        reset = true;
+                    }
+                }
+            } else if (o.equals("Conspire")) {
                 Trigger tr = Iterables.getFirst(ki.getTriggers(), null);
                 if (tr != null) {
                     final String conspireCost = "tapXType<2/Creature.SharesColorWith/" +
@@ -807,7 +831,9 @@ public final class GameActionUtil {
         for (Table.Cell<Long, Long, KeywordsChange> entry : oldKW.cellSet()) {
             for (KeywordInterface ki : entry.getValue().getKeywords()) {
                 // check if this keyword existed previously
-                if ((ki.getOriginal().startsWith("Replicate") || ki.getOriginal().startsWith("Conspire")) && updatedKW.get(entry.getRowKey(), entry.getColumnKey()) != null) {
+                if ((ki.getOriginal().startsWith("Replicate") || ki.getOriginal().startsWith("Conspire")
+                        || ki.getOriginal().startsWith("Casualty"))
+                        && updatedKW.get(entry.getRowKey(), entry.getColumnKey()) != null) {
                     updatedKW.put(entry.getRowKey(), entry.getColumnKey(), oldKW.get(entry.getRowKey(), entry.getColumnKey()));
                 }
             }

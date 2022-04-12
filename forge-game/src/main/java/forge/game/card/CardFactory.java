@@ -137,6 +137,10 @@ public class CardFactory {
             c.setBaseToughness(Integer.parseInt(sourceSA.getParam("CopySetToughness")));
         }
 
+        if (sourceSA.hasParam("CopySetLoyalty")) {
+            c.setBaseLoyalty(AbilityUtils.calculateAmount(source, sourceSA.getParam("CopySetLoyalty"), sourceSA));
+        }
+
         if (sourceSA.hasParam("CopyAddTypes")) {
             c.addType(Arrays.asList(sourceSA.getParam("CopyAddTypes").split(" & ")));
         }

@@ -2095,6 +2095,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Devour")) {
                     final String[] k = keyword.split(":");
                     sbLong.append(k[0]).append(" ").append(k[1]).append(" (").append(inst.getReminderText()).append(")");
+                } else if (keyword.startsWith("Casualty")) {
+                    final String[] k = keyword.split(":");
+                    sbLong.append("Casualty ").append(k[1]);
+                    if (k.length >= 4) {
+                        sbLong.append(". ").append(k[3]);
+                    }
+                    sbLong.append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Starting intensity")) {
                     sbLong.append(TextUtil.fastReplace(keyword, ":", " "));
                 } else if (keyword.contains("Haunt")) {
@@ -2552,12 +2559,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.equals("Fuse")) {
                     sbAfter.append(keyword).append(" (").append(inst.getReminderText()).append(")");
                     sbAfter.append("\r\n");
-                } else if (keyword.startsWith("Ripple")) {
-                    sbBefore.append(TextUtil.fastReplace(keyword, ":", " ")).append(" (").append(inst.getReminderText()).append(")");
-                    sbBefore.append("\r\n");
-                } else if (keyword.startsWith("Dredge")) {
-                    sbAfter.append(TextUtil.fastReplace(keyword, ":", " ")).append(" (").append(inst.getReminderText()).append(")");
-                    sbAfter.append("\r\n");
+                } else if (keyword.startsWith("Casualty")) {
+                    final String[] k = keyword.split(":");
+                    sbBefore.append("Casualty ").append(k[1]);
+                    if (k.length >= 4) {
+                        sbBefore.append(". ").append(k[3]);
+                    }
+                    sbBefore.append(" (").append(inst.getReminderText()).append(")").append("\r\n\r\n");
+                } else if (keyword.startsWith("Dredge") || keyword.startsWith("Ripple")) {
+                    sbAfter.append(TextUtil.fastReplace(keyword, ":", " "));
+                    sbAfter.append(" (").append(inst.getReminderText()).append(")").append("\r\n");
                 } else if (keyword.startsWith("Starting intensity")) {
                     sbAfter.append(TextUtil.fastReplace(keyword, ":", " ")).append("\r\n");
                 } else if (keyword.startsWith("Escalate") || keyword.startsWith("Buyback")
@@ -3803,6 +3814,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final int getCurrentLoyalty() {
         return getCounters(CounterEnumType.LOYALTY);
+    }
+
+    public final void setBaseLoyalty(final int n) {
+        currentState.setBaseLoyalty(Integer.toString(n));
     }
 
     // values that are printed on card

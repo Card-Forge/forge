@@ -1,0 +1,9 @@
+Name:Rooftop Nuisance
+ManaCost:2 U
+Types:Sorcery
+K:Casualty:1
+A:SP$ Tap | ValidTgts$ Creature | SubAbility$ DBPump | SpellDescription$ Tap target creature. It doesn't untap during its controller's next untap step.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | SubAbility$ DBDraw | SpellDescription$ It doesn't untap during its controller's next untap step.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$Sacrifice
+Oracle:Casualty 1 (As you cast this spell, you may sacrifice a creature with power 1 or greater. When you do, copy this spell and you may choose new targets for the copy.)\nTap target creature. It doesn't untap during its controller's next untap step.\nDraw a card.

@@ -35,6 +35,7 @@ public enum Keyword {
     BUSHIDO("Bushido", KeywordWithAmount.class, false, "Whenever this creature blocks or becomes blocked, it gets +%1$d/+%1$d until end of turn."),
     BUYBACK("Buyback", KeywordWithCost.class, false, "You may pay an additional %s as you cast this spell. If you do, put it into your hand instead of your graveyard as it resolves."),
     CASCADE("Cascade", SimpleKeyword.class, false, "When you cast this spell, exile cards from the top of your library until you exile a nonland card whose mana value is less than this spell's mana value. You may cast that spell without paying its mana cost if its mana value is less than this spell's mana value. Then put all cards exiled this way that weren't cast on the bottom of your library in a random order."),
+    CASUALTY("Casualty", KeywordWithAmount.class, false, "As you cast this spell, you may sacrifice a creature with power %1$d or greater. When you do, copy this spell."),
     CHAMPION("Champion", KeywordWithType.class, false, "When this enters the battlefield, sacrifice it unless you exile another %s you control. When this leaves the battlefield, that card returns to the battlefield."),
     CHANGELING("Changeling", SimpleKeyword.class, true, "This card is every creature type."),
     CIPHER("Cipher", SimpleKeyword.class, true, "Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost."),
