@@ -1,2010 +1,1696 @@
-[{                                    
-"name":"Colorless Castle",        
-"count":1, 
-"radiusFactor":0.7,
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"colorless_castle",
-"map":  "maps/map/main_story/colorless_castle.tmx"
-},{                                    
-"name":"White Castle",        
-"count":1, 
-"radiusFactor":0.01,
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"white_castle",
-"map":  "maps/map/main_story/white_castle.tmx"
-},{                                    
-"name":"Black Castle",        
-"count":1, 
-"radiusFactor":0.01,
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"black_castle",
-"map":  "maps/map/main_story/black_castle.tmx"
-},{                                    
-"name":"Green Castle",        
-"count":1, 
-"radiusFactor":0.01,
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"green_castle",
-"map":  "maps/map/main_story/green_castle.tmx"
-},{                                    
-"name":"Red Castle",        
-"count":1, 
-"radiusFactor":0.01,
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"red_castle",
-"map":  "maps/map/main_story/red_castle.tmx"
-},{                                    
-"name":"Blue Castle",        
-"count":1, 
-"radiusFactor":0.01,
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"blue_castle",
-"map":  "maps/map/main_story/blue_castle.tmx"
-},{                                    
-"name":"Final Castle",        
-"count":1, 
-"radiusFactor":0.00,
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"final_castle",
-"map":  "maps/map/main_story/final_castle.tmx"
-},{                                    
-"name":"Waste Town",                  
-"type":"town",
-"count":100, 
-"radiusFactor":0.8,
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"WasteTown",
-"map":  "maps/map/waste_town.tmx"
-},{                                    
-"name":"Waste Town2",                  
-"count":3, 
-"radiusFactor":0.8,
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"WasteTown",
-"map":  "maps/map/waste_town_2.tmx"
-},{                                    
-"name":"Waste Town3",                  
-"count":3, 
-"radiusFactor":0.8,
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"WasteTown",
-"map":  "maps/map/waste_town_3.tmx"
-},{                                    
-"name":"Forest Town",                  
-"type":"town",
-"count":100, 
-"radiusFactor":0.8,
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"ForestTown",
-"map":  "maps/map/forest_town.tmx"
-},{                                    
-"name":"Plains Town",                  
-"type":"town",
-"count":100, 
-"radiusFactor":0.8,
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"PlainsTown",
-"map":  "maps/map/plains_town.tmx"
-},{                                    
-"name":"Island Town",                  
-"type":"town",
-"count":100, 
-"radiusFactor":0.8,
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"IslandTown",
-"map":  "maps/map/island_town.tmx"
-},{                                    
-"name":"Mountain Town",                  
-"type":"town",
-"count":100, 
-"radiusFactor":0.8,
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"MountainTown",
-"map":  "maps/map/mountain_town.tmx"
-},{                                    
-"name":"Swamp Town",                  
-"type":"town",
-"count":100, 
-"radiusFactor":0.8,
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"SwampTown",
-"map":  "maps/map/swamp_town.tmx"
-},{                                    
-"name":"Swamp Town2",                  
-"count":3, 
-"radiusFactor":0.8,
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"SwampTown",
-"map":  "maps/map/swamp_town_2.tmx"
-},{
-    		"name":"Test",
-    		"count":100,
-    		"radiusFactor":0.8,
-    		"spriteAtlas":"maps/tileset/buildings.atlas",
-    		"sprite":"Test",
-    		"map":  "maps/map/vampirecastle_4.tmx"
-  },{
-    "name":"Portal",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Portal",
-    "map":  "maps/map/portal_1.tmx"
-  },{
-    "name":"Portal",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Portal",
-    "map":  "maps/map/portal_2.tmx"
-  },{
-    "name":"MageTowerC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_1.tmx"
-  },{
-    "name":"MageTowerC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_2.tmx"
-  },{
-    "name":"MageTowerC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_3.tmx"
-  },{
-    "name":"MageTowerC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_4.tmx"
-  },{
-    "name":"MageTowerC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_5.tmx"
-  },{
-    "name":"MageTowerC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_6.tmx"
-  },{
-    "name":"MageTowerC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_7.tmx"
-  },{
-    "name":"MageTowerC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_8.tmx"
-  },{
-    "name":"MageTowerC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_9.tmx"
-  },{
-    "name":"MageTowerC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_10.tmx"
-  },{
-    "name":"MageTowerC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_11.tmx"
-  },{
-    "name":"MageTowerC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_12.tmx"
-  },{
-    "name":"MageTowerC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_13.tmx"
-  },{
-    "name":"MageTowerC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_14.tmx"
-  },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_1.tmx"
-  },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_2.tmx"
-  },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_3.tmx"
-  },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_4.tmx"
-  },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_5.tmx"
-  },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_6.tmx"
-  },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_7.tmx"
-  },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_8.tmx"
-  },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_9.tmx"
-  },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_10.tmx"
- },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_11.tmx"
- },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_12.tmx"
- },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_13.tmx"
- },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_14.tmx"
- },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_15.tmx"
- },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_16.tmx"
- },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_17.tmx"
- },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_18.tmx"
- },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_19.tmx"
- },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_20.tmx"
- },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_21.tmx"
- },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_22.tmx"
- },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_23.tmx"
- },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_24.tmx"
- },{
-    "name":"CaveC",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_25.tmx"
- },{
-    "name":"Fort",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Fort",
-    "map":  "maps/map/fort_1.tmx"
- },{
-    "name":"Fort",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Fort",
-    "map":  "maps/map/fort_2.tmx"
- },{
-    "name":"Fort",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Fort",
-    "map":  "maps/map/fort_3.tmx"
- },{
-    "name":"Fort",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Fort",
-    "map":  "maps/map/fort_4.tmx"
- },{
-    "name":"Fort",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Fort",
-    "map":  "maps/map/fort_5.tmx"
- },{
-    "name":"Fort",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Fort",
-    "map":  "maps/map/fort_6.tmx"
- },{
-    "name":"Fort",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Fort",
-    "map":  "maps/map/fort_7.tmx"
- },{
-    "name":"Fort",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Fort",
-    "map":  "maps/map/fort_8.tmx"
- },{
-    "name":"Fort",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Fort",
-    "map":  "maps/map/fort_9.tmx"
- },{
-    "name":"Fort",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Fort",
-    "map":  "maps/map/fort_10.tmx"
-  },{
-    "name":"Fort",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Fort",
-    "map":  "maps/map/fort_11.tmx"
-  },{
-    "name":"Fort",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Fort",
-    "map":  "maps/map/fort_12.tmx"
-  },{
-    "name":"Factory",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Factory",
-    "map":  "maps/map/factory_1.tmx"
-  },{
-    "name":"Factory",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Factory",
-    "map":  "maps/map/factory_2.tmx"
-  },{
-    "name":"Factory",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Factory",
-    "map":  "maps/map/factory_3.tmx"
-  },{
-    "name":"Factory",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Factory",
-    "map":  "maps/map/factory_4.tmx"
-},{
-    		"name":"CaveW",
-    		"count":3,
-    		"radiusFactor":0.8,
-    		"spriteAtlas":"maps/tileset/buildings.atlas",
-    		"sprite":"Cave",
-    		"map":  "maps/map/cave_1.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_2.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_3.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_4.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_5.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_6.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_7.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_8.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_9.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_10.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_11.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_12.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_13.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_14.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_15.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_16.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_17.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_18.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_19.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_20.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_21.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_22.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_23.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_24.tmx"
- },{
-    "name":"CaveW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_25.tmx"
- },{
-    "name":"NestW",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Nest",
-    "map":  "maps/map/nest_white_1.tmx"
- },{
-    "name":"Aerie",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Aerie",
-    "map":  "maps/map/aerie_1.tmx"
- },{
-    "name":"Monastery",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Monastery",
-    "map":  "maps/map/monastery_1.tmx"
- },{
-    "name":"Monastery",
-    "count":5,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Monastery",
-    "map":  "maps/map/monastery_2.tmx"
- },{
-    "name":"Monastery",
-    "count":5,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Monastery",
-    "map":  "maps/map/monastery_3.tmx"
- },{
-    "name":"Monastery",
-    "count":5,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Monastery",
-    "map":  "maps/map/monastery_4.tmx"
- },{
-    "name":"Monastery",
-    "count":5,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Monastery",
-    "map":  "maps/map/monastery_5.tmx"
-  },{
-    "name":"Castle",
-    "count":6,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Castle",
-    "map":  "maps/map/castle_plains_1.tmx"
-  },{
-    "name":"Castle",
-    "count":6,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Castle",
-    "map":  "maps/map/castle_plains_2.tmx"
-  },{
-    "name":"Castle",
-    "count":6,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Castle",
-    "map":  "maps/map/castle_plains_3.tmx"
-  },{
-    "name":"CatLairW",
-    "count":5,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"CatLair",
-    "map":  "maps/map/catlair_1.tmx"
-  },{
-    "name":"CatLairW",
-    "count":5,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"CatLair",
-    "map":  "maps/map/catlair_2.tmx"
-  },{
-    "name":"CatLairW",
-    "count":5,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"CatLair",
-    "map":  "maps/map/catlair_3.tmx"
-},{
-    		"name":"CaveU",
-    		"count":2,
-    		"radiusFactor":0.8,
-    		"spriteAtlas":"maps/tileset/buildings.atlas",
-    		"sprite":"Cave",
-   	 	"map":  "maps/map/cave_1.tmx"
- },{
-    "name":"CaveU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_2.tmx"
- },{
-    "name":"CaveU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_3.tmx"
- },{
-    "name":"CaveU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_4.tmx"
- },{
-    "name":"CaveU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_5.tmx"
- },{
-    "name":"CaveU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_6.tmx"
- },{
-    "name":"CaveU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_7.tmx"
- },{
-    "name":"CaveU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_8.tmx"
- },{
-    "name":"CaveU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_9.tmx"
- },{
-    "name":"CaveU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_10.tmx"
- },{
-    "name":"CaveU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_11.tmx"
- },{
-    "name":"CaveU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_12.tmx"
- },{
-    "name":"CaveU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_13.tmx"
- },{
-    "name":"CaveU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_14.tmx"
- },{
-    "name":"CaveU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_15.tmx"
- },{
-    "name":"CaveU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_16.tmx"
- },{
-    "name":"CaveU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_17.tmx"
- },{
-    "name":"CaveU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_18.tmx"
- },{
-    "name":"CaveU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_19.tmx"
- },{
-    "name":"CaveU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_20.tmx"
- },{
-    "name":"CaveU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_21.tmx"
- },{
-    "name":"CaveU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_22.tmx"
- },{
-    "name":"CaveU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_23.tmx"
- },{
-    "name":"CaveU",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_24.tmx"
- },{
-    "name":"CaveU",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_25.tmx"
- },{
-    "name":"MageTowerU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_1.tmx"
-  },{
-    "name":"MageTowerU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_2.tmx"
-  },{
-    "name":"MageTowerU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_3.tmx"
-  },{
-    "name":"MageTowerU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_4.tmx"
-  },{
-    "name":"MageTowerU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_5.tmx"
-  },{
-    "name":"MageTowerU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_6.tmx"
-  },{
-    "name":"MageTowerU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_7.tmx"
-  },{
-    "name":"MageTowerU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_8.tmx"
-  },{
-    "name":"MageTowerU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_9.tmx"
-  },{
-    "name":"MageTowerU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_10.tmx"
-  },{
-    "name":"MageTowerU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_11.tmx"
-  },{
-    "name":"MageTowerU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_12.tmx"
-  },{
-    "name":"MageTowerU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_13.tmx"
-  },{
-    "name":"MageTowerU",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MageTower",
-    "map":  "maps/map/magetower_14.tmx"
-  },{
-    "name":"NestU",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Nest",
-    "map":  "maps/map/nest_blue_1.tmx"
-  },{
-    "name":"MerfolkPool",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MerfolkPool",
-    "map":  "maps/map/merfolkpool_1.tmx"
-  },{
-    "name":"MerfolkPool",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MerfolkPool",
-    "map":  "maps/map/merfolkpool_2.tmx"
-  },{
-    "name":"MerfolkPool",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MerfolkPool",
-    "map":  "maps/map/merfolkpool_3.tmx"
-  },{
-    "name":"MerfolkPool",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MerfolkPool",
-    "map":  "maps/map/merfolkpool_4.tmx"
-  },{
-    "name":"MerfolkPool",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MerfolkPool",
-    "map":  "maps/map/merfolkpool_5.tmx"
-  },{
-    "name":"MerfolkPool",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"MerfolkPool",
-    "map":  "maps/map/merfolkpool_6.tmx"
-  },{
-    "name":"DjinnPalace",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"DjinnPalace",
-    "map":  "maps/map/djinnpalace_1.tmx"
-  },{
-    "name":"DjinnPalace",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"DjinnPalace",
-    "map":  "maps/map/djinnpalace_2.tmx"
-  },{
-    "name":"DjinnPalace",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"DjinnPalace",
-    "map":  "maps/map/djinnpalace_3.tmx"
-},{
-    		"name":"CaveB",
-    		"count":2,
-    		"radiusFactor":0.8,
-    		"spriteAtlas":"maps/tileset/buildings.atlas",
-    		"sprite":"Cave",
-    		"map":  "maps/map/cave_1.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_2.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_3.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_4.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_5.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_6.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_7.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_8.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_9.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_10.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_11.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_12.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_13.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_14.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_15.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_16.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_17.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_18.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_19.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_20.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_21.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_22.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_23.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_24.tmx"
- },{
-    "name":"CaveB",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_25.tmx"
- },{
-  "name":"Graveyard",
-  "count":3, 
-  "radiusFactor":0.8,
-  "spriteAtlas":"maps/tileset/buildings.atlas",
-  "sprite":"Graveyard",
-  "map":  "maps/map/graveyard.tmx"
-},{
-  "name":"Graveyard",
-  "count":3, 
-  "radiusFactor":0.8,
-  "spriteAtlas":"maps/tileset/buildings.atlas",
-  "sprite":"Graveyard",
-  "map":  "maps/map/graveyard_2.tmx"
-},{
-  "name":"Graveyard",
-  "count":3, 
-  "radiusFactor":0.8,
-  "spriteAtlas":"maps/tileset/buildings.atlas",
-  "sprite":"Graveyard",
-  "map":  "maps/map/graveyard_3.tmx"
-},{
-  "name":"Graveyard",
-  "count":3, 
-  "radiusFactor":0.8,
-  "spriteAtlas":"maps/tileset/buildings.atlas",
-  "sprite":"Graveyard",
-  "map":  "maps/map/graveyard_4.tmx"
-},{
-  "name":"Graveyard",
-  "count":3, 
-  "radiusFactor":0.8,
-  "spriteAtlas":"maps/tileset/buildings.atlas",
-  "sprite":"Graveyard",
-  "map":  "maps/map/graveyard_5.tmx"
-},{
-    "name":"EvilGrove",
-    "count":5,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"EvilGrove",
-    "map":  "maps/map/evilgrove_1.tmx"
-},{
-    "name":"EvilGrove",
-    "count":5,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"EvilGrove",
-    "map":  "maps/map/evilgrove_2.tmx"
-},{
-    "name":"EvilGrove",
-    "count":5,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"EvilGrove",
-    "map":  "maps/map/evilgrove_3.tmx"
-},{
-    "name":"EvilGrove",
-    "count":5,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"EvilGrove",
-    "map":  "maps/map/evilgrove_4.tmx"
-},{
-    "name":"EvilGrove",
-    "count":5,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"EvilGrove",
-    "map":  "maps/map/evilgrove_5.tmx"
-},{
-    "name":"VampireCastle",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"VampireCastle",
-    "map":  "maps/map/vampirecastle_1.tmx"
-},{
-    "name":"VampireCastle",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"VampireCastle",
-    "map":  "maps/map/vampirecastle_2.tmx"
-},{
-    "name":"VampireCastle",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"VampireCastle",
-    "map":  "maps/map/vampirecastle_3.tmx"
-},{
-    "name":"VampireCastle",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"VampireCastle",
-    "map":  "maps/map/vampirecastle_4.tmx"
-},{
-    "name":"SkullCaveB",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"SkullCave",
-    "map":  "maps/map/skullcave_1.tmx"
-},{
-    "name":"SkullCaveB",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"SkullCave",
-    "map":  "maps/map/skullcave_2.tmx"
-},{
-    "name":"SkullCaveB",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"SkullCave",
-    "map":  "maps/map/skullcave_3.tmx"
-},{                                    
-    "name":"Zombie Town",                  
-    "count":3, 
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",   
-    "sprite":"SwampTown",
-    "map":  "maps/map/zombietown.tmx"
-},{
-    		"name":"CaveR",
-    		"count":2,
-    		"radiusFactor":0.8,
-    		"spriteAtlas":"maps/tileset/buildings.atlas",
-    		"sprite":"Cave",
-    		"map":  "maps/map/cave_1.tmx"
- },{
-    "name":"CaveR",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_2.tmx"
- },{
-    "name":"CaveR",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_3.tmx"
- },{
-    "name":"CaveR",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_4.tmx"
- },{
-    "name":"CaveR",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_5.tmx"
- },{
-    "name":"CaveR",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_6.tmx"
- },{
-    "name":"CaveR",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_7.tmx"
- },{
-    "name":"CaveR",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_8.tmx"
- },{
-    "name":"CaveR",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_9.tmx"
- },{
-    "name":"CaveR",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_10.tmx"
- },{
-    "name":"CaveR",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_11.tmx"
- },{
-    "name":"CaveR",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_12.tmx"
- },{
-    "name":"CaveR",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_13.tmx"
- },{
-    "name":"CaveR",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_14.tmx"
- },{
-    "name":"CaveR",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_15.tmx"
- },{
-    "name":"CaveR",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_16.tmx"
- },{
-    "name":"CaveR",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_17.tmx"
- },{
-    "name":"CaveR",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_18.tmx"
- },{
-    "name":"CaveR",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_19.tmx"
- },{
-    "name":"CaveR",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_20.tmx"
- },{
-    "name":"CaveR",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_21.tmx"
- },{
-    "name":"CaveR",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_22.tmx"
- },{
-    "name":"CaveR",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_23.tmx"
- },{
-    "name":"CaveR",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_24.tmx"
- },{
-    "name":"CaveR",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_25.tmx"
- },{
-    "name":"Maze",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Maze",
-    "map":  "maps/map/maze_1.tmx"
-},{
-    "name":"Maze",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Maze",
-    "map":  "maps/map/maze_2.tmx"
-},{
-    "name":"Maze",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Maze",
-    "map":  "maps/map/maze_3.tmx"
-},{
-    "name":"Maze",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Maze",
-    "map":  "maps/map/maze_4.tmx"
-},{
-    "name":"BarbarianCamp",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"BarbarianCamp",
-    "map":  "maps/map/barbariancamp_1.tmx"
-},{
-    "name":"BarbarianCamp",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"BarbarianCamp",
-    "map":  "maps/map/barbariancamp_2.tmx"
-},{
-    "name":"BarbarianCamp",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"BarbarianCamp",
-    "map":  "maps/map/barbariancamp_3.tmx"
-},{
-    "name":"BarbarianCamp",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"BarbarianCamp",
-    "map":  "maps/map/barbariancamp_4.tmx"
-},{
-    "name":"SkullCaveR",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"SkullCave",
-    "map":  "maps/map/skullcave_1.tmx"
-},{
-    "name":"SkullCaveR",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"SkullCave",
-    "map":  "maps/map/skullcave_2.tmx"
-},{
-    "name":"SkullCaveR",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"SkullCave",
-    "map":  "maps/map/skullcave_3.tmx"
-},{
-    "name":"YuleTown",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"YuleTown",
-    "map":  "maps/map/yule_town.tmx"
- },{
-    "name":"SnowAbbey",
-    "count":6,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"SnowAbbey",
-    "map":  "maps/map/snowabbey_1.tmx"
- },{
-    "name":"SnowAbbey",
-    "count":6,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"SnowAbbey",
-    "map":  "maps/map/snowabbey_2.tmx"
- },{
-    "name":"SnowAbbey",
-    "count":6,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"SnowAbbey",
-    "map":  "maps/map/snowabbey_3.tmx"
-},{
-    		"name":"CaveG",
-    		"count":3,
-    		"radiusFactor":0.8,
-    		"spriteAtlas":"maps/tileset/buildings.atlas",
-    		"sprite":"Cave",
-    		"map":  "maps/map/cave_1.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_2.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_3.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_4.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_5.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_6.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_7.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_8.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_9.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_10.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_11.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_12.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_13.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_14.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_15.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_16.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_17.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_18.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_19.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_20.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_21.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_22.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_23.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_24.tmx"
- },{
-    "name":"CaveG",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Cave",
-    "map":  "maps/map/cave_25.tmx"
- },{
-    "name":"ElfTown",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"ForestTown",
-    "map":  "maps/map/elftown.tmx"
-  },{
-    "name":"Grove",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Grove",
-    "map":  "maps/map/grove_1.tmx"
-  },{
-    "name":"Grove",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Grove",
-    "map":  "maps/map/grove_2.tmx"
-  },{
-    "name":"Grove",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Grove",
-    "map":  "maps/map/grove_3.tmx"
-  },{
-    "name":"Grove",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Grove",
-    "map":  "maps/map/grove_4.tmx"
-  },{
-    "name":"Grove",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Grove",
-    "map":  "maps/map/grove_5.tmx"
-  },{
-    "name":"Grove",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Grove",
-    "map":  "maps/map/grove_6.tmx"
-  },{
-    "name":"Grove",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Grove",
-    "map":  "maps/map/grove_7.tmx"
-  },{
-    "name":"Grove",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Grove",
-    "map":  "maps/map/grove_8.tmx"
-  },{
-    "name":"Grove",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Grove",
-    "map":  "maps/map/grove_9.tmx"
-  },{
-    "name":"Grove",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Grove",
-    "map":  "maps/map/grove_10.tmx"
-  },{
-    "name":"Grove",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Grove",
-    "map":  "maps/map/grove_11.tmx"
-  },{
-    "name":"Grove",
-    "count":3,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Grove",
-    "map":  "maps/map/grove_12.tmx"
-  },{
-    "name":"CatLairG",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"CatLair",
-    "map":  "maps/map/catlair_1.tmx"
-  },{
-    "name":"CatLairG",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"CatLair",
-    "map":  "maps/map/catlair_2.tmx"
-  },{
-    "name":"CatLairG",
-    "count":4,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"CatLair",
-    "map":  "maps/map/catlair_3.tmx"
-  },{
-    "name":"WurmPond",
-    "count":2,
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"WurmPond",
-    "map":  "maps/map/wurmpond_1.tmx"
+[
+  {
+    "name": "Colorless Castle",
+    "count": 1,
+    "radiusFactor": 0.01,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "colorless_castle",
+    "map": "maps/map/main_story/colorless_castle.tmx"
+  },
+  {
+    "name": "White Castle",
+    "count": 1,
+    "radiusFactor": 0.01,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "white_castle",
+    "map": "maps/map/main_story/white_castle.tmx"
+  },
+  {
+    "name": "Black Castle",
+    "count": 1,
+    "radiusFactor": 0.01,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "black_castle",
+    "map": "maps/map/main_story/black_castle.tmx"
+  },
+  {
+    "name": "Green Castle",
+    "count": 1,
+    "radiusFactor": 0.01,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "green_castle",
+    "map": "maps/map/main_story/green_castle.tmx"
+  },
+  {
+    "name": "Red Castle",
+    "count": 1,
+    "radiusFactor": 0.01,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "red_castle",
+    "map": "maps/map/main_story/red_castle.tmx"
+  },
+  {
+    "name": "Blue Castle",
+    "count": 1,
+    "radiusFactor": 0.01,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "blue_castle",
+    "map": "maps/map/main_story/blue_castle.tmx"
+  },
+  {
+    "name": "Final Castle",
+    "count": 1,
+    "radiusFactor": 0.00,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "final_castle",
+    "map": "maps/map/main_story/final_castle.tmx"
+  },
+  {
+    "name": "Waste Town",
+    "type": "town",
+    "count": 100,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "WasteTown",
+    "map": "maps/map/waste_town.tmx"
+  },
+  {
+    "name": "Waste Town2",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "WasteTown",
+    "map": "maps/map/waste_town_2.tmx"
+  },
+  {
+    "name": "Waste Town3",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "WasteTown",
+    "map": "maps/map/waste_town_3.tmx"
+  },
+  {
+    "name": "Forest Town",
+    "type": "town",
+    "count": 100,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "ForestTown",
+    "map": "maps/map/forest_town.tmx"
+  },
+  {
+    "name": "Plains Town",
+    "type": "town",
+    "count": 100,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "PlainsTown",
+    "map": "maps/map/plains_town.tmx"
+  },
+  {
+    "name": "Island Town",
+    "type": "town",
+    "count": 100,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "IslandTown",
+    "map": "maps/map/island_town.tmx"
+  },
+  {
+    "name": "Mountain Town",
+    "type": "town",
+    "count": 100,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MountainTown",
+    "map": "maps/map/mountain_town.tmx"
+  },
+  {
+    "name": "Swamp Town",
+    "type": "town",
+    "count": 100,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "SwampTown",
+    "map": "maps/map/swamp_town.tmx"
+  },
+  {
+    "name": "Swamp Town2",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "SwampTown",
+    "map": "maps/map/swamp_town_2.tmx"
+  },
+  {
+    "name": "Test",
+    "count": 100,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Test",
+    "map": "maps/map/vampirecastle_4.tmx"
+  },
+  {
+    "name": "Portal",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Portal",
+    "map": "maps/map/portal_1.tmx"
+  },
+  {
+    "name": "Portal1",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Portal",
+    "map": "maps/map/portal_2.tmx"
+  },
+  {
+    "name": "MageTowerC",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_1.tmx"
+  },
+  {
+    "name": "MageTowerC2",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_2.tmx"
+  },
+  {
+    "name": "MageTowerC3",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_3.tmx"
+  },
+  {
+    "name": "MageTowerC4",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_4.tmx"
+  },
+  {
+    "name": "MageTowerC5",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_5.tmx"
+  },
+  {
+    "name": "MageTowerC6",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_6.tmx"
+  },
+  {
+    "name": "MageTowerC7",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_7.tmx"
+  },
+  {
+    "name": "MageTowerC8",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_8.tmx"
+  },
+  {
+    "name": "MageTowerC9",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_9.tmx"
+  },
+  {
+    "name": "MageTowerCA",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_10.tmx"
+  },
+  {
+    "name": "MageTowerCB",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_11.tmx"
+  },
+  {
+    "name": "MageTowerCC",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_12.tmx"
+  },
+  {
+    "name": "MageTowerCD",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_13.tmx"
+  },
+  {
+    "name": "MageTowerCE",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_14.tmx"
+  },
+  {
+    "name": "CaveC",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_1.tmx"
+  },
+  {
+    "name": "CaveC1",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_2.tmx"
+  },
+  {
+    "name": "CaveC2",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_3.tmx"
+  },
+  {
+    "name": "CaveC3",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_5.tmx"
+  },
+  {
+    "name": "CaveC4",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_6.tmx"
+  },
+  {
+    "name": "CaveC5",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_7.tmx"
+  },
+  {
+    "name": "CaveC6",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_9.tmx"
+  },
+  {
+    "name": "CaveC7",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_10.tmx"
+  },
+  {
+    "name": "CaveC8",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_11.tmx"
+  },
+  {
+    "name": "CaveC9",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_12.tmx"
+  },
+  {
+    "name": "CaveCA",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_14.tmx"
+  },
+  {
+    "name": "CaveCB",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_20.tmx"
+  },
+  {
+    "name": "CaveCC",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_21.tmx"
+  },
+  {
+    "name": "CaveCD",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_22.tmx"
+  },
+  {
+    "name": "CaveCE",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_23.tmx"
+  },
+  {
+    "name": "CaveCF",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_24.tmx"
+  },
+  {
+    "name": "Fort",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Fort",
+    "map": "maps/map/fort_1.tmx"
+  },
+  {
+    "name": "Fort1",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Fort",
+    "map": "maps/map/fort_2.tmx"
+  },
+  {
+    "name": "Fort2",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Fort",
+    "map": "maps/map/fort_3.tmx"
+  },
+  {
+    "name": "Fort3",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Fort",
+    "map": "maps/map/fort_4.tmx"
+  },
+  {
+    "name": "Fort4",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Fort",
+    "map": "maps/map/fort_5.tmx"
+  },
+  {
+    "name": "Fort5",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Fort",
+    "map": "maps/map/fort_6.tmx"
+  },
+  {
+    "name": "Fort6",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Fort",
+    "map": "maps/map/fort_7.tmx"
+  },
+  {
+    "name": "Fort7",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Fort",
+    "map": "maps/map/fort_8.tmx"
+  },
+  {
+    "name": "Fort8",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Fort",
+    "map": "maps/map/fort_9.tmx"
+  },
+  {
+    "name": "Fort9",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Fort",
+    "map": "maps/map/fort_10.tmx"
+  },
+  {
+    "name": "FortA",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Fort",
+    "map": "maps/map/fort_11.tmx"
+  },
+  {
+    "name": "FortB",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Fort",
+    "map": "maps/map/fort_12.tmx"
+  },
+  {
+    "name": "Factory",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Factory",
+    "map": "maps/map/factory_1.tmx"
+  },
+  {
+    "name": "Factory1",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Factory",
+    "map": "maps/map/factory_2.tmx"
+  },
+  {
+    "name": "Factory2",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Factory",
+    "map": "maps/map/factory_3.tmx"
+  },
+  {
+    "name": "Factory3",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Factory",
+    "map": "maps/map/factory_4.tmx"
+  },
+  {
+    "name": "CaveW",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_1.tmx"
+  },
+  {
+    "name": "CaveW1",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_2.tmx"
+  },
+  {
+    "name": "CaveW2",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_5.tmx"
+  },
+  {
+    "name": "CaveW3",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_12.tmx"
+  },
+  {
+    "name": "CaveW4",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_15.tmx"
+  },
+  {
+    "name": "CaveW5",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_19.tmx"
+  },
+  {
+    "name": "CaveW6",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_20.tmx"
+  },
+  {
+    "name": "NestW",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Nest",
+    "map": "maps/map/nest_white_1.tmx"
+  },
+  {
+    "name": "Aerie",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Aerie",
+    "map": "maps/map/aerie_1.tmx"
+  },
+  {
+    "name": "Monastery",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Monastery",
+    "map": "maps/map/monastery_1.tmx"
+  },
+  {
+    "name": "Monastery1",
+    "count": 5,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Monastery",
+    "map": "maps/map/monastery_2.tmx"
+  },
+  {
+    "name": "Monastery2",
+    "count": 5,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Monastery",
+    "map": "maps/map/monastery_3.tmx"
+  },
+  {
+    "name": "Monastery3",
+    "count": 5,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Monastery",
+    "map": "maps/map/monastery_4.tmx"
+  },
+  {
+    "name": "Monastery4",
+    "count": 5,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Monastery",
+    "map": "maps/map/monastery_5.tmx"
+  },
+  {
+    "name": "Castle",
+    "count": 6,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Castle",
+    "map": "maps/map/castle_plains_1.tmx"
+  },
+  {
+    "name": "Castle1",
+    "count": 6,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Castle",
+    "map": "maps/map/castle_plains_2.tmx"
+  },
+  {
+    "name": "Castle2",
+    "count": 6,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Castle",
+    "map": "maps/map/castle_plains_3.tmx"
+  },
+  {
+    "name": "CatLairW",
+    "count": 5,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "CatLair",
+    "map": "maps/map/catlair_1.tmx"
+  },
+  {
+    "name": "CatLairW1",
+    "count": 5,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "CatLair",
+    "map": "maps/map/catlair_2.tmx"
+  },
+  {
+    "name": "CatLairW2",
+    "count": 5,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "CatLair",
+    "map": "maps/map/catlair_3.tmx"
+  },
+  {
+    "name": "CaveU",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_2.tmx"
+  },
+  {
+    "name": "CaveU1",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_11.tmx"
+  },
+  {
+    "name": "CaveU2",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_12.tmx"
+  },
+  {
+    "name": "CaveU3",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_13.tmx"
+  },
+  {
+    "name": "CaveU4",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_20.tmx"
+  },
+  {
+    "name": "CaveU5",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_25.tmx"
+  },
+  {
+    "name": "MageTowerU",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_1.tmx"
+  },
+  {
+    "name": "MageTowerU1",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_2.tmx"
+  },
+  {
+    "name": "MageTowerU2",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_3.tmx"
+  },
+  {
+    "name": "MageTowerU3",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_4.tmx"
+  },
+  {
+    "name": "MageTowerU4",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_5.tmx"
+  },
+  {
+    "name": "MageTowerU5",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_6.tmx"
+  },
+  {
+    "name": "MageTowerU6",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_7.tmx"
+  },
+  {
+    "name": "MageTowerU7",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_8.tmx"
+  },
+  {
+    "name": "MageTowerU8",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_9.tmx"
+  },
+  {
+    "name": "MageTowerU9",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_10.tmx"
+  },
+  {
+    "name": "MageTowerUA",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_11.tmx"
+  },
+  {
+    "name": "MageTowerUB",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_12.tmx"
+  },
+  {
+    "name": "MageTowerUC",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_13.tmx"
+  },
+  {
+    "name": "MageTowerUD",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MageTower",
+    "map": "maps/map/magetower_14.tmx"
+  },
+  {
+    "name": "NestU",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Nest",
+    "map": "maps/map/nest_blue_1.tmx"
+  },
+  {
+    "name": "MerfolkPool",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MerfolkPool",
+    "map": "maps/map/merfolkpool_1.tmx"
+  },
+  {
+    "name": "MerfolkPool1",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MerfolkPool",
+    "map": "maps/map/merfolkpool_2.tmx"
+  },
+  {
+    "name": "MerfolkPool2",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MerfolkPool",
+    "map": "maps/map/merfolkpool_3.tmx"
+  },
+  {
+    "name": "MerfolkPool3",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MerfolkPool",
+    "map": "maps/map/merfolkpool_4.tmx"
+  },
+  {
+    "name": "MerfolkPool4",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MerfolkPool",
+    "map": "maps/map/merfolkpool_5.tmx"
+  },
+  {
+    "name": "MerfolkPool5",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MerfolkPool",
+    "map": "maps/map/merfolkpool_6.tmx"
+  },
+  {
+    "name": "DjinnPalace",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "DjinnPalace",
+    "map": "maps/map/djinnpalace_1.tmx"
+  },
+  {
+    "name": "DjinnPalace1",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "DjinnPalace",
+    "map": "maps/map/djinnpalace_2.tmx"
+  },
+  {
+    "name": "DjinnPalace2",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "DjinnPalace",
+    "map": "maps/map/djinnpalace_3.tmx"
+  },
+  {
+    "name": "CaveB",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_1.tmx"
+  },
+  {
+    "name": "CaveB1",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_2.tmx"
+  },
+  {
+    "name": "CaveB2",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_3.tmx"
+  },
+  {
+    "name": "CaveB3",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_7.tmx"
+  },
+  {
+    "name": "CaveB4",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_8.tmx"
+  },
+  {
+    "name": "CaveB5",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_11.tmx"
+  },
+  {
+    "name": "CaveB6",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_12.tmx"
+  },
+  {
+    "name": "CaveB7",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_16.tmx"
+  },
+  {
+    "name": "CaveB8",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_20.tmx"
+  },
+  {
+    "name": "CaveB9",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_21.tmx"
+  },
+  {
+    "name": "CaveBA",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_22.tmx"
+  },
+  {
+    "name": "CaveBB",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_23.tmx"
+  },
+  {
+    "name": "CaveBC",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_25.tmx"
+  },
+  {
+    "name": "Graveyard",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Graveyard",
+    "map": "maps/map/graveyard.tmx"
+  },
+  {
+    "name": "Graveyard1",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Graveyard",
+    "map": "maps/map/graveyard_2.tmx"
+  },
+  {
+    "name": "Graveyard2",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Graveyard",
+    "map": "maps/map/graveyard_3.tmx"
+  },
+  {
+    "name": "Graveyard3",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Graveyard",
+    "map": "maps/map/graveyard_4.tmx"
+  },
+  {
+    "name": "Graveyard4",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Graveyard",
+    "map": "maps/map/graveyard_5.tmx"
+  },
+  {
+    "name": "EvilGrove",
+    "count": 5,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "EvilGrove",
+    "map": "maps/map/evilgrove_1.tmx"
+  },
+  {
+    "name": "EvilGrove1",
+    "count": 5,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "EvilGrove",
+    "map": "maps/map/evilgrove_2.tmx"
+  },
+  {
+    "name": "EvilGrove2",
+    "count": 5,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "EvilGrove",
+    "map": "maps/map/evilgrove_3.tmx"
+  },
+  {
+    "name": "EvilGrove3",
+    "count": 5,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "EvilGrove",
+    "map": "maps/map/evilgrove_4.tmx"
+  },
+  {
+    "name": "EvilGrove4",
+    "count": 5,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "EvilGrove",
+    "map": "maps/map/evilgrove_5.tmx"
+  },
+  {
+    "name": "VampireCastle",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "VampireCastle",
+    "map": "maps/map/vampirecastle_1.tmx"
+  },
+  {
+    "name": "VampireCastle1",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "VampireCastle",
+    "map": "maps/map/vampirecastle_2.tmx"
+  },
+  {
+    "name": "VampireCastle2",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "VampireCastle",
+    "map": "maps/map/vampirecastle_3.tmx"
+  },
+  {
+    "name": "VampireCastle3",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "VampireCastle",
+    "map": "maps/map/vampirecastle_4.tmx"
+  },
+  {
+    "name": "SkullCaveB",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "SkullCave",
+    "map": "maps/map/skullcave_1.tmx"
+  },
+  {
+    "name": "SkullCaveB1",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "SkullCave",
+    "map": "maps/map/skullcave_2.tmx"
+  },
+  {
+    "name": "SkullCaveB2",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "SkullCave",
+    "map": "maps/map/skullcave_3.tmx"
+  },
+  {
+    "name": "Zombie Town",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "SwampTown",
+    "map": "maps/map/zombietown.tmx"
+  },
+  {
+    "name": "CaveR",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_1.tmx"
+  },
+  {
+    "name": "CaveR2",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_2.tmx"
+  },
+  {
+    "name": "CaveR3",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_3.tmx"
+  },
+  {
+    "name": "CaveR4",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_4.tmx"
+  },
+  {
+    "name": "CaveR5",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_5.tmx"
+  },
+  {
+    "name": "CaveR6",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_6.tmx"
+  },
+  {
+    "name": "CaveR7",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_8.tmx"
+  },
+  {
+    "name": "CaveR8",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_9.tmx"
+  },
+  {
+    "name": "CaveR9",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_10.tmx"
+  },
+  {
+    "name": "CaveRA",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_12.tmx"
+  },
+  {
+    "name": "CaveRB",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_14.tmx"
+  },
+  {
+    "name": "CaveRC",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_15.tmx"
+  },
+  {
+    "name": "CaveRD",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_16.tmx"
+  },
+  {
+    "name": "CaveRE",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_17.tmx"
+  },
+  {
+    "name": "CaveRF",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_18.tmx"
+  },
+  {
+    "name": "CaveRG",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_19.tmx"
+  },
+  {
+    "name": "CaveRH",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_20.tmx"
+  },
+  {
+    "name": "CaveRI",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_21.tmx"
+  },
+  {
+    "name": "CaveRJ",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_22.tmx"
+  },
+  {
+    "name": "CaveRK",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_23.tmx"
+  },
+  {
+    "name": "CaveRL",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_24.tmx"
+  },
+  {
+    "name": "Maze",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Maze",
+    "map": "maps/map/maze_1.tmx"
+  },
+  {
+    "name": "Maze1",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Maze",
+    "map": "maps/map/maze_2.tmx"
+  },
+  {
+    "name": "Maze2",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Maze",
+    "map": "maps/map/maze_3.tmx"
+  },
+  {
+    "name": "Maze3",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Maze",
+    "map": "maps/map/maze_4.tmx"
+  },
+  {
+    "name": "BarbarianCamp",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "BarbarianCamp",
+    "map": "maps/map/barbariancamp_1.tmx"
+  },
+  {
+    "name": "BarbarianCamp1",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "BarbarianCamp",
+    "map": "maps/map/barbariancamp_2.tmx"
+  },
+  {
+    "name": "BarbarianCamp2",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "BarbarianCamp",
+    "map": "maps/map/barbariancamp_3.tmx"
+  },
+  {
+    "name": "BarbarianCamp3",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "BarbarianCamp",
+    "map": "maps/map/barbariancamp_4.tmx"
+  },
+  {
+    "name": "SkullCaveR",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "SkullCave",
+    "map": "maps/map/skullcave_1.tmx"
+  },
+  {
+    "name": "SkullCaveR1",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "SkullCave",
+    "map": "maps/map/skullcave_2.tmx"
+  },
+  {
+    "name": "SkullCaveR2",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "SkullCave",
+    "map": "maps/map/skullcave_3.tmx"
+  },
+  {
+    "name": "YuleTown",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "YuleTown",
+    "map": "maps/map/yule_town.tmx"
+  },
+  {
+    "name": "SnowAbbey",
+    "count": 6,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "SnowAbbey",
+    "map": "maps/map/snowabbey_1.tmx"
+  },
+  {
+    "name": "SnowAbbey1",
+    "count": 6,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "SnowAbbey",
+    "map": "maps/map/snowabbey_2.tmx"
+  },
+  {
+    "name": "SnowAbbey2",
+    "count": 6,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "SnowAbbey",
+    "map": "maps/map/snowabbey_3.tmx"
+  },
+  {
+    "name": "CaveG",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_1.tmx"
+  },
+  {
+    "name": "CaveG1",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_2.tmx"
+  },
+  {
+    "name": "CaveG2",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_3.tmx"
+  },
+  {
+    "name": "CaveG3",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_5.tmx"
+  },
+  {
+    "name": "CaveG4",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_9.tmx"
+  },
+  {
+    "name": "CaveG5",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_11.tmx"
+  },
+  {
+    "name": "CaveG6",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_15.tmx"
+  },
+  {
+    "name": "CaveG7",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_16.tmx"
+  },
+  {
+    "name": "CaveG8",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_18.tmx"
+  },
+  {
+    "name": "CaveG9",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_20.tmx"
+  },
+  {
+    "name": "CaveGA",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_21.tmx"
+  },
+  {
+    "name": "CaveGB",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/cave_22.tmx"
+  },
+  {
+    "name": "ElfTown",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "ForestTown",
+    "map": "maps/map/elftown.tmx"
+  },
+  {
+    "name": "Grove",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Grove",
+    "map": "maps/map/grove_1.tmx"
+  },
+  {
+    "name": "Grove1",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Grove",
+    "map": "maps/map/grove_2.tmx"
+  },
+  {
+    "name": "Grove2",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Grove",
+    "map": "maps/map/grove_3.tmx"
+  },
+  {
+    "name": "Grove3",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Grove",
+    "map": "maps/map/grove_4.tmx"
+  },
+  {
+    "name": "Grove4",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Grove",
+    "map": "maps/map/grove_5.tmx"
+  },
+  {
+    "name": "Grove5",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Grove",
+    "map": "maps/map/grove_6.tmx"
+  },
+  {
+    "name": "Grove6",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Grove",
+    "map": "maps/map/grove_7.tmx"
+  },
+  {
+    "name": "Grove7",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Grove",
+    "map": "maps/map/grove_8.tmx"
+  },
+  {
+    "name": "Grove8",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Grove",
+    "map": "maps/map/grove_9.tmx"
+  },
+  {
+    "name": "Grove9",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Grove",
+    "map": "maps/map/grove_10.tmx"
+  },
+  {
+    "name": "GroveA",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Grove",
+    "map": "maps/map/grove_11.tmx"
+  },
+  {
+    "name": "GroveB",
+    "count": 3,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Grove",
+    "map": "maps/map/grove_12.tmx"
+  },
+  {
+    "name": "CatLairG",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "CatLair",
+    "map": "maps/map/catlair_1.tmx"
+  },
+  {
+    "name": "CatLairG1",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "CatLair",
+    "map": "maps/map/catlair_2.tmx"
+  },
+  {
+    "name": "CatLairG2",
+    "count": 4,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "CatLair",
+    "map": "maps/map/catlair_3.tmx"
+  },
+  {
+    "name": "WurmPond",
+    "count": 2,
+    "radiusFactor": 0.8,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "WurmPond",
+    "map": "maps/map/wurmpond_1.tmx"
   }
 ]

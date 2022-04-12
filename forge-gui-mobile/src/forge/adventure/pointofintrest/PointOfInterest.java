@@ -21,7 +21,7 @@ public class PointOfInterest implements SaveFileContent {
     public void load(SaveFileData saveFileData) {
 
         position.set(saveFileData.readVector2("position"));
-        data=PointOfInterestData.getPointOfInterest(saveFileData.readString("name"),position);
+        data=PointOfInterestData.getPointOfInterest(saveFileData.readString("name"));
         rectangle.set(saveFileData.readRectangle("rectangle"));
         spriteIndex=saveFileData.readInt("spriteIndex");
 
