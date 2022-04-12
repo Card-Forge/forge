@@ -1,0 +1,9 @@
+[metadata]
+Code=GDY
+Date=2022-04-08
+Name=Game Day Promos
+Type=Promo
+ScryfallCode=GDY
+
+[cards]
+3 M All-Seeing Arbiter @Nicholas Gregory
