@@ -1312,37 +1312,36 @@ public class CardFactoryUtil {
             for (final Trigger trigger : triggers) {
                 inst.addTrigger(trigger);
             }
-        } else if (keyword.equals("Hideaway")) {
+        } else if (keyword.startsWith("Hideaway")) {
+            final String[] k = keyword.split(":");
+            String n = k[1];
+
             // The exiled card gains ‘Any player who has controlled the permanent that exiled this card may look at this card in the exile zone.’
             // this is currently not possible because the StaticAbility currently has no information about the OriginalHost
 
             List<Trigger> triggers = Lists.newArrayList();
             StringBuilder sb = new StringBuilder();
-            sb.append("Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Secondary$ True ");
-            sb.append("| TriggerDescription$ When CARDNAME enters the battlefield, ");
-            sb.append("look at the top four cards of your library, exile one face down");
-            sb.append(", then put the rest on the bottom of your library.");
+            sb.append("Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self");
+            sb.append("| TriggerDescription$ Hideaway ").append(n).append(" (When CARDNAME enters the battlefield, ");
+            sb.append("look at the top ").append(Lang.getNumeral(Integer.valueOf(n))).append(" cards of your library, exile one face down");
+            sb.append(", then put the rest on the bottom of your library.)");
             final Trigger hideawayTrigger = TriggerHandler.parseTrigger(sb.toString(), card, intrinsic);
 
-            String hideawayDig = "DB$ Dig | Defined$ You | DigNum$ 4 | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True";
+            String hideawayDig = "DB$ Dig | Defined$ You | DigNum$ " + n + " | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True";
             String hideawayEffect = "DB$ Effect | StaticAbilities$ STHideawayEffectLookAtCard | ForgetOnMoved$ Exile | RememberObjects$ Remembered | Duration$ Permanent";
 
-            String lookAtCard = "Mode$ Continuous | Affected$ Card.IsRemembered | MayLookAt$ True | EffectZone$ Command | AffectedZone$ Exile | Description$ You may look at the exiled card.";
+            String lookAtCard = "Mode$ Continuous | Affected$ Card.IsRemembered | MayLookAt$ EffectSourceController | EffectZone$ Command | AffectedZone$ Exile | Description$ Any player who has controlled the permanent that exiled this card may look at this card in the exile zone.";
 
             SpellAbility digSA = AbilityFactory.getAbility(hideawayDig, card);
 
             AbilitySub effectSA = (AbilitySub) AbilityFactory.getAbility(hideawayEffect, card);
             effectSA.setSVar("STHideawayEffectLookAtCard", lookAtCard);
 
-            digSA.setSubAbility((AbilitySub)effectSA.copy());
+            digSA.setSubAbility(effectSA);
 
             hideawayTrigger.setOverridingAbility(digSA);
 
             triggers.add(hideawayTrigger);
-
-            final Trigger gainControlTrigger = TriggerHandler.parseTrigger("Mode$ ChangesController | ValidCard$ Card.Self | Static$ True", card, intrinsic);
-            gainControlTrigger.setOverridingAbility((AbilitySub)effectSA.copy());
-            triggers.add(gainControlTrigger);
 
             // when the card with hideaway leaves the battlefield, forget all exiled cards
             final Trigger changeZoneTrigger = TriggerHandler.parseTrigger("Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | TriggerZones$ Battlefield | Static$ True", card, intrinsic);
@@ -2564,7 +2563,7 @@ public class CardFactoryUtil {
             inst.addReplacement(re);
         }
 
-        if (keyword.equals("CARDNAME enters the battlefield tapped.") || keyword.equals("Hideaway")) {
+        if (keyword.equals("CARDNAME enters the battlefield tapped.")) {
             String effect = "DB$ Tap | Defined$ Self | ETB$ True "
                 + " | SpellDescription$ CARDNAME enters the battlefield tapped.";
 

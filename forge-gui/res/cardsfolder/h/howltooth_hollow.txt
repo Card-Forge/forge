@@ -1,9 +1,10 @@
 Name:Howltooth Hollow
 ManaCost:no cost
 Types:Land
-K:Hideaway
+K:Hideaway:4
+K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
 A:AB$ Play | Cost$ B T | Defined$ Remembered | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ Hands | ConditionSVarCompare$ EQ0 | ForgetRemembered$ True | AILogic$ CheckCondition | SpellDescription$ You may play the exiled card without paying its mana cost if each player has no cards in hand.
 SVar:Hands:Count$NumInAllHands
 AI:RemoveDeck:Random
-Oracle:Hideaway (This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)\n{T}: Add {B}.\n{B}, {T}: You may play the exiled card without paying its mana cost if each player has no cards in hand.
+Oracle:Hideaway 4 (When this permanent enters the battlefield, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)\n enters the battlefield tapped.\n{T}: Add {B}.\n{B}, {T}: You may play the exiled card without paying its mana cost if each player has no cards in hand.
