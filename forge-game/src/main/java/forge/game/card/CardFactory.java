@@ -207,6 +207,8 @@ public class CardFactory {
         }
 
         copySA.setCopied(true);
+        // 707.10b
+        copySA.setOriginalAbility(targetSA);
 
         if (targetSA.usesTargeting()) {
             // do for SubAbilities too?
