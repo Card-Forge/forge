@@ -9,7 +9,7 @@ SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ TrigDiscard
 SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 T:Mode$ Discarded | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you discard a card, target creature an opponent controls gets -X/-0 until your next turn, where X is the number of different mana values among cards in your graveyard.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | IsCurse$ True | NumAtt$ -X | Duration$ UntilYourNextTurn
-SVar:X:Count$DifferentManaValueGraveyard Card.YouOwn
+SVar:X:Count$ValidGraveyard Card.YouOwn$DifferentCMC
 SVar:HasAttackEffect:True
 DeckHas:Ability$Discard
 Oracle:Flying\nWhenever All-Seeing Arbiter enters the battlefield or attacks, draw two cards, then discard a card.\nWhenever you discard a card, target creature an opponent controls gets -X/-0 until your next turn, where X is the number of different mana values among cards in your graveyard.
