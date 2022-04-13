@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="53">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="65">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="4425" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="6321" source="../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJztwzEJAAAMA7C+8w/VWyFLIL2kqqqqvjuO1S8b
@@ -30,11 +30,6 @@
  </layer>
  <objectgroup id="4" name="Objects">
   <object id="47" template="../../obj/gold.tx" x="323" y="219"/>
-  <object id="48" template="../../obj/treasure.tx" x="207" y="67">
-   <properties>
-    <property name="enemy" value="3Life"/>
-   </properties>
-  </object>
   <object id="49" template="../../obj/gold.tx" x="106" y="216"/>
   <object id="50" template="../../obj/enemy.tx" x="186" y="218" width="64" height="64">
    <properties>
@@ -49,6 +44,18 @@
   <object id="52" template="../../obj/gate.tx" x="208" y="448">
    <properties>
     <property name="dialog" value="dialogs/colorless_door.json"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/treasure.tx" x="208" y="80">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;life&quot;,
+    &quot;count&quot;: 3
+  }
+]
+</property>
+    <property name="sprite" value="sprites/3life.atlas"/>
    </properties>
   </object>
  </objectgroup>

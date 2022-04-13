@@ -1,32 +1,5 @@
 [
 {
-	"name": "Gold",
-	"sprite": "sprites/gold.atlas",
-	"rewards": [
-		{
-			"type": "gold",
-			"count": 10,
-			"addMaxCount": 100,
-			"cardName": "",
-			"itemName": "",
-			"manaCosts": [],
-			"cardText": ""
-		}
-	]
-},
-{
-	"name": "Treasure",
-	"sprite": "sprites/treasure.atlas",
-	"deck": "",
-	"rewards": [
-		{
-			"type": "randomCard",
-			"count": 2,
-			"addMaxCount": 8
-		}
-	]
-},
-{
 	"name": "Adventurer",
 	"sprite": "sprites/swordsman_3.atlas",
 	"deck": "decks/adventurer.dck",
@@ -3279,39 +3252,6 @@
 	],
 	"equipment": [
 		"Mox Ruby"
-	]
-},
-{
-	"name": "1Life",
-	"sprite": "sprites/1life.atlas",
-	"deck": "",
-	"rewards": [
-		{
-			"type": "life",
-			"count": 3
-		}
-	]
-},
-{
-	"name": "2Life",
-	"sprite": "sprites/2life.atlas",
-	"deck": "",
-	"rewards": [
-		{
-			"type": "life",
-			"count": 2
-		}
-	]
-},
-{
-	"name": "3Life",
-	"sprite": "sprites/3life.atlas",
-	"deck": "",
-	"rewards": [
-		{
-			"type": "life",
-			"count": 3
-		}
 	]
 }
 ]
