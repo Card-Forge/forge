@@ -2662,6 +2662,27 @@ public class AbilityUtils {
             return doXMath(manaCost.size(), expr, c, ctb);
         }
 
+        //Count$DifferentManaValue<zone> <restriction>
+        if (l[0].contains("DifferentManaValue")) {
+            String[] sqparts = l[0].split(" ", 2);
+            final String[] rest = sqparts[1].split(",");
+
+            final CardCollectionView cardsInZones = sqparts[0].length() > 18
+                    ? game.getCardsIn(ZoneType.listValueOf(sqparts[0].substring(18)))
+                    : game.getCardsIn(ZoneType.Battlefield);
+
+            CardCollection cards = CardLists.getValidCards(cardsInZones, rest, player, c, ctb);
+            final List<Integer> cmcs = Lists.newArrayList();
+
+            for (Card card : cards) {
+                Integer cmc = card.getCMC();
+                if (!cmcs.contains(cmc)) {
+                    cmcs.add(cmc);
+                }
+            }
+            return doXMath(cmcs.size(), expr, c, ctb);
+        }
+
         if (sq[0].equals("StormCount")) {
             return doXMath(game.getStack().getSpellsCastThisTurn().size() - 1, expr, c, ctb);
         }
