@@ -163,8 +163,6 @@ public class CardFactory {
         c.setCopiedSpell(true);
         c.setCopiedPermanent(original);
 
-        c.setCastSA(targetSA);
-
         c.setXManaCostPaidByColor(original.getXManaCostPaidByColor());
         c.setKickerMagnitude(original.getKickerMagnitude());
 
@@ -209,6 +207,7 @@ public class CardFactory {
         copySA.setCopied(true);
         // 707.10b
         copySA.setOriginalAbility(targetSA);
+        c.setCastSA(copySA);
 
         if (targetSA.usesTargeting()) {
             // do for SubAbilities too?

@@ -403,7 +403,7 @@ public class GameAction {
         if (copied.isAura() && !copied.isAttachedToEntity() && toBattlefield) {
             if (zoneFrom != null && zoneFrom.is(ZoneType.Stack) && game.getStack().isResolving(c)) {
                 boolean found = false;
-                if (Iterables.any(game.getPlayers(),PlayerPredicates.canBeAttached(copied))) {
+                if (Iterables.any(game.getPlayers(), PlayerPredicates.canBeAttached(copied))) {
                     found = true;
                 }
                 if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateBattlefield), CardPredicates.canBeAttached(copied))) {
