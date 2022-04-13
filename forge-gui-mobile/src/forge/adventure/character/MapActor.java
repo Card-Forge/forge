@@ -28,7 +28,7 @@ public class MapActor extends Actor {
         if (debugTexture == null) {
             Pixmap pixmap = new Pixmap((int) getWidth(), (int) getHeight(), Pixmap.Format.RGBA8888);
             pixmap.setColor(1.0f,0,0,0.5f);
-            pixmap.fillRectangle(0, (int) getHeight()- (int)boundingRect.getHeight(), (int) boundingRect.getWidth(), (int) boundingRect.getHeight());
+            pixmap.fillRectangle((int)(boundingRect.x - getX()), (int)(getHeight()- boundingRect.getHeight()) + (int)(boundingRect.y - getY()), (int)boundingRect.getWidth(), (int)boundingRect.getHeight());
             debugTexture = new Texture(pixmap);
             pixmap.dispose();
 

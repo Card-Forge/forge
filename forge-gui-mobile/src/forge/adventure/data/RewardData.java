@@ -46,23 +46,23 @@ public class RewardData {
 
     }
     public RewardData(RewardData rewardData) {
-    type        =rewardData.type;
-    probability =rewardData.probability;
-    count       =rewardData.count;
-    addMaxCount =rewardData.addMaxCount;
-    cardName    =rewardData.cardName;
-    itemName    =rewardData.itemName;
-    editions    =rewardData.editions==null?null:rewardData.editions.clone();
-    colors      =rewardData.colors==null?null:rewardData.colors.clone();
-    rarity      =rewardData.rarity==null?null:rewardData.rarity.clone();
-    subTypes    =rewardData.subTypes==null?null:rewardData.subTypes.clone();
-    cardTypes   =rewardData.cardTypes==null?null:rewardData.cardTypes.clone();
-    superTypes  =rewardData.superTypes==null?null:rewardData.superTypes.clone();
-    manaCosts   =rewardData.manaCosts==null?null:rewardData.manaCosts.clone();
-    keyWords    =rewardData.keyWords==null?null:rewardData.keyWords.clone();
-    colorType   =rewardData.colorType;
-    cardText    =rewardData.cardText;
-    matchAllSubTypes    =rewardData.matchAllSubTypes;
+        type        =rewardData.type;
+        probability =rewardData.probability;
+        count       =rewardData.count;
+        addMaxCount =rewardData.addMaxCount;
+        cardName    =rewardData.cardName;
+        itemName    =rewardData.itemName;
+        editions    =rewardData.editions==null?null:rewardData.editions.clone();
+        colors      =rewardData.colors==null?null:rewardData.colors.clone();
+        rarity      =rewardData.rarity==null?null:rewardData.rarity.clone();
+        subTypes    =rewardData.subTypes==null?null:rewardData.subTypes.clone();
+        cardTypes   =rewardData.cardTypes==null?null:rewardData.cardTypes.clone();
+        superTypes  =rewardData.superTypes==null?null:rewardData.superTypes.clone();
+        manaCosts   =rewardData.manaCosts==null?null:rewardData.manaCosts.clone();
+        keyWords    =rewardData.keyWords==null?null:rewardData.keyWords.clone();
+        colorType   =rewardData.colorType;
+        cardText    =rewardData.cardText;
+        matchAllSubTypes    =rewardData.matchAllSubTypes;
     }
 
     private static Iterable<PaperCard> allCards;

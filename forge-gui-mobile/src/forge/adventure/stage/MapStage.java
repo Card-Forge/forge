@@ -253,6 +253,10 @@ public class MapStage extends GameStage {
                         EntryActor entry = new EntryActor(this, sourceMap, id, prop.get("teleport").toString(), x, y, w, h, prop.get("direction").toString());
                         addMapActor(obj, entry);
                         break;
+                    case "reward":
+                        RewardSprite R = new RewardSprite(id, prop.get("reward").toString(), prop.get("sprite").toString());
+                        addMapActor(obj, R);
+                        break;
                     case "enemy":
                         EnemySprite mob = new EnemySprite(id, WorldData.getEnemy(prop.get("enemy").toString()));
                         addMapActor(obj, mob);
@@ -429,6 +433,20 @@ public class MapStage extends GameStage {
                         });
                         break;
                     }
+                } else if (actor instanceof RewardSprite) {
+                    Gdx.input.vibrate(50);
+                    startPause(0.1f, new Runnable() {
+                        @Override
+                        public void run() { //Switch to item pickup scene.
+                            RewardSprite RS = (RewardSprite) actor;
+                            ((RewardScene) SceneType.RewardScene.instance).loadRewards(RS.getRewards(), RewardScene.Type.Loot, null);
+                            RS.remove();
+                            actors.removeValue(RS, true);
+                            changes.deleteObject(RS.getId());
+                            Forge.switchScene(SceneType.RewardScene.instance);
+                        }
+                    });
+                    break;
                 }
             }
         }

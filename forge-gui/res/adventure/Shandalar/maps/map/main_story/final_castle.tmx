@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.1" orientation="orthogonal" renderorder="right-down" width="30" height="114" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="61">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="114" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="63">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -35,11 +35,6 @@
    </properties>
   </object>
   <object id="47" template="../../obj/gold.tx" x="323" y="219"/>
-  <object id="48" template="../../obj/treasure.tx" x="207" y="67">
-   <properties>
-    <property name="enemy" value="3Life"/>
-   </properties>
-  </object>
   <object id="49" template="../../obj/gold.tx" x="106" y="216"/>
   <object id="50" template="../../obj/enemy.tx" x="185" y="213" width="64" height="64">
    <properties>
@@ -94,6 +89,18 @@
   <object id="60" template="../../obj/gate.tx" x="208" y="768">
    <properties>
     <property name="dialog" value="dialogs/black_door.json"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/treasure.tx" x="208" y="80">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;life&quot;,
+    &quot;count&quot;: 3
+  }
+]
+</property>
+    <property name="sprite" value="sprites/3life.atlas"/>
    </properties>
   </object>
  </objectgroup>
