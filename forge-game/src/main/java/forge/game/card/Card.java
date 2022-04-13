@@ -5575,7 +5575,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean isTributed() { return tributed; }
-
     public final void setTributed(final boolean b) {
         tributed = b;
     }
@@ -5670,7 +5669,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public boolean isForetoldByEffect() {
         return foretoldByEffect;
     }
-
     public void setForetoldByEffect(final boolean val) {
         this.foretoldByEffect = val;
     }
@@ -5678,7 +5676,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public boolean isForetoldThisTurn() {
         return foretoldThisTurn;
     }
-
     public final void setForetoldThisTurn(final boolean foretoldThisTurn) {
         this.foretoldThisTurn = foretoldThisTurn;
     }
@@ -5690,11 +5687,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public int getTimesCrewedThisTurn() {
         return timesCrewedThisTurn;
     }
-
     public final void setTimesCrewedThisTurn(final int t) {
         this.timesCrewedThisTurn = t;
     }
-
     public void resetTimesCrewedThisTurn() {
         timesCrewedThisTurn = 0;
     }
@@ -6208,7 +6203,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         int xPaid = 0;
 
-        // 2012-07-22 - If a card is on the stack, count the xManaCost in with it's CMC
+        // If a card is on the stack, count the xManaCost in with it's CMC
         if (isInZone(ZoneType.Stack) && getManaCost() != null) {
             xPaid = getXManaCostPaid() * getManaCost().countX();
         }

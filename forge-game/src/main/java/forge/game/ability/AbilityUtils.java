@@ -2047,7 +2047,7 @@ public class AbilityUtils {
             return doXMath(c.getNetToughness(), expr, c, ctb);
         }
         if (sq[0].contains("CardSumPT")) {
-            return doXMath((c.getNetPower() + c.getNetToughness()), expr, c, ctb);
+            return doXMath(c.getNetPower() + c.getNetToughness(), expr, c, ctb);
         }
         if (sq[0].contains("CardNumTypes")) {
             Card ce;
@@ -2814,14 +2814,7 @@ public class AbilityUtils {
         if (sq[0].startsWith("HighestCMC_")) {
             final String restriction = l[0].substring(11);
             CardCollection list = CardLists.getValidCards(game.getCardsInGame(), restriction, player, c, ctb);
-            int highest = 0;
-            for (final Card crd : list) {
-                // dont check for Split card anymore
-                if (crd.getCMC() > highest) {
-                    highest = crd.getCMC();
-                }
-            }
-            return highest;
+            return Aggregates.max(list, CardPredicates.Accessors.fnGetCmc);
         }
 
         if (sq[0].startsWith("MostCardName")) {
@@ -2917,12 +2910,6 @@ public class AbilityUtils {
         }
         // Complex counting methods
         CardCollectionView someCards = getCardListForXCount(c, player, sq, ctb);
-
-        // 1/10 - Count$MaxCMCYouCtrl
-        if (sq[0].startsWith("MaxCMC")) {
-            int mmc = Aggregates.max(someCards, CardPredicates.Accessors.fnGetCmc);
-            return doXMath(mmc, expr, c, ctb);
-        }
 
         return doXMath(someCards.size(), expr, c, ctb);
     }
@@ -3861,6 +3848,7 @@ public class AbilityUtils {
         CardCollection list = null;
         if (sa instanceof SpellAbility) {
             SpellAbility root = ((SpellAbility)sa).getRootAbility();
+            // TODO do we really need these checks?
             if (defined.startsWith("SacrificedCards")) {
                 list = root.getPaidList("SacrificedCards");
             } else if (defined.startsWith("Sacrificed")) {
