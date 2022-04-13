@@ -494,37 +494,30 @@ public class AbilityUtils {
             if (hType.equals("Players") || hType.equals("")) {
                 players.addAll(game.getPlayers());
                 val = playerXCount(players, calcX[1], card, ability);
-            }
-            else if (hType.equals("YourTeam")) {
+            } else if (hType.equals("YourTeam")) {
                 players.addAll(player.getYourTeam());
                 val = playerXCount(players, calcX[1], card, ability);
-            }
-            else if (hType.equals("Opponents")) {
+            } else if (hType.equals("Opponents")) {
                 players.addAll(player.getOpponents());
                 val = playerXCount(players, calcX[1], card, ability);
-            }
-            else if (hType.equals("RegisteredOpponents")) {
+            } else if (hType.equals("RegisteredOpponents")) {
                 players.addAll(Iterables.filter(game.getRegisteredPlayers(),PlayerPredicates.isOpponentOf(player)));
                 val = playerXCount(players, calcX[1], card, ability);
-            }
-            else if (hType.equals("Other")) {
+            } else if (hType.equals("Other")) {
                 players.addAll(player.getAllOtherPlayers());
                 val = playerXCount(players, calcX[1], card, ability);
-            }
-            else if (hType.equals("Remembered")) {
+            } else if (hType.equals("Remembered")) {
                 for (final Object o : card.getRemembered()) {
                     if (o instanceof Player) {
                         players.add((Player) o);
                     }
                 }
                 val = playerXCount(players, calcX[1], card, ability);
-            }
-            else if (hType.equals("NonActive")) {
+            } else if (hType.equals("NonActive")) {
                 players.addAll(game.getPlayers());
                 players.remove(game.getPhaseHandler().getPlayerTurn());
                 val = playerXCount(players, calcX[1], card, ability);
-            }
-            else if (hType.startsWith("PropertyYou")) {
+            } else if (hType.startsWith("PropertyYou")) {
                 if (ability instanceof SpellAbility) {
                     // Hollow One
                     players.add(((SpellAbility) ability).getActivatingPlayer());
@@ -532,8 +525,7 @@ public class AbilityUtils {
                     players.add(player);
                 }
                 val = playerXCount(players, calcX[1], card, ability);
-            }
-            else if (hType.startsWith("Property")) {
+            } else if (hType.startsWith("Property")) {
                 String defined = hType.split("Property")[1];
                 for (Player p : game.getPlayersInTurnOrder()) {
                     if (ability instanceof SpellAbility && p.hasProperty(defined, ((SpellAbility) ability).getActivatingPlayer(), ability.getHostCard(), ability)) {
@@ -548,10 +540,6 @@ public class AbilityUtils {
             }
         } else if (calcX[0].equals("OriginalHost")) {
             val = xCount(ability.getOriginalHost(), calcX[1], ability);
-        } else if (calcX[0].equals("Equipped")) {
-            if (card.isEquipping()) {
-                val = xCount(card.getEquipping(), calcX[1], ability);
-            }
         } else if (calcX[0].startsWith("Remembered")) {
             // Add whole Remembered list to handlePaid
             final CardCollection list = new CardCollection();
@@ -596,7 +584,7 @@ public class AbilityUtils {
 
             val = handlePaid(list, calcX[1], card, ability);
         }
-        else if (calcX[0].matches("Enchanted")) {
+        else if (calcX[0].matches("Enchanted") || calcX[0].matches("Equipped")) {
             // Add whole Enchanted list to handlePaid
             final CardCollection list = new CardCollection();
             if (card.isEnchanting()) {
