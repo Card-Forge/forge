@@ -3,6 +3,6 @@ ManaCost:5 G G
 Types:Creature Ooze
 PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the total mana value of other creatures you control.
-SVar:X:Count$SumCMC_Creature.Other+YouCtrl
+SVar:X:Count$Valid Creature.Other+YouCtrl$SumCMC
 SVar:NeedsToPlayVar:X GE4
 Oracle:Ancient Ooze's power and toughness are each equal to the total mana value of other creatures you control.

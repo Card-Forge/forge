@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Creature Insect
 PT:0/5
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +X/+0, where X is the greatest power among creature cards in your graveyard.
-SVar:X:Count$GreatestPowerGraveyard_Creature.YouOwn
+SVar:X:Count$ValidGraveyard Creature.YouOwn$GreatestPower
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill four cards.
 SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 4
 DeckHas:Ability$Graveyard

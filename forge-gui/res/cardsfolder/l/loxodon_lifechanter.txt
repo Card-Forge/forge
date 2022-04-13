@@ -3,10 +3,8 @@ ManaCost:5 W
 Types:Creature Elephant Cleric
 PT:4/6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLife | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may have your life total become the total toughness of creatures you control.
-SVar:TrigLife:DB$ PumpAll | ValidCards$ Creature.YouCtrl | RememberAllPumped$ True | SubAbility$ DBSetLife
-SVar:DBSetLife:DB$ SetLife | Defined$ You | LifeAmount$ Y | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Y:Remembered$CardToughness
+SVar:TrigLife:DB$ SetLife | Defined$ You | LifeAmount$ Y | SubAbility$ DBCleanup
+SVar:Y:Count$Valid Creature.YouCtrl$SumToughness
 A:AB$ Pump | Cost$ 5 W | NumAtt$ X | NumDef$ X | SpellDescription$ CARDNAME gets +X/+X until end of turn, where X is your life total.
 SVar:X:Count$YourLifeTotal
 AI:RemoveDeck:All
