@@ -1,0 +1,9 @@
+Name:Luxor, Giada's Gift
+ManaCost:1
+Types:Legendary Artifact Equipment
+K:Equip:1:Planeswalker.YouCtrl:planeswalker
+K:Equip:3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +1/+1 for each counter on it.
+SVar:X:Equipped$CardCounters.ALL
+S:Mode$ Continuous | Affected$ Permanent.EquippedBy | RemoveType$ Planeswalker | AddType$ Creature | Description$ Equipped permanent isn't a planeswalker and is a creature in addition it its other types. (Loyalty abilities can still be activated.)
+Oracle:Equipped creature gets +1/+1 for each counter on it.\nEquipped permanent isn't a planeswalker and is a creature in addition it its other types. (Loyalty abilities can still be activated.)\nEquip planeswalker 1\nEquip 3
