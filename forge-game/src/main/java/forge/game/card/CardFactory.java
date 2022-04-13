@@ -163,6 +163,8 @@ public class CardFactory {
         c.setCopiedSpell(true);
         c.setCopiedPermanent(original);
 
+        c.setCastSA(targetSA);
+
         c.setXManaCostPaidByColor(original.getXManaCostPaidByColor());
         c.setKickerMagnitude(original.getKickerMagnitude());
 
@@ -791,9 +793,6 @@ public class CardFactory {
                 String set = host.getSetCode().toLowerCase();
                 state.setImageKey(ImageKeys.getTokenKey("eternalize_" + name + "_" + set));
             }
-
-            // set the host card for copied replacement effects
-            // needed for copied xPaid ETB effects (for the copy, xPaid = 0)
 
             if (sa.hasParam("GainTextOf") && originalState != null) {
                 state.setSetCode(originalState.getSetCode());
