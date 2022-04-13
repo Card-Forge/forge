@@ -6,8 +6,8 @@
    <property name="reward">[
   {
     &quot;type&quot;: &quot;gold&quot;,
-    &quot;count&quot;: 999,
-    &quot;addMaxCount&quot;: 0
+    &quot;count&quot;: 80,
+    &quot;addMaxCount&quot;: 40
  }
 ]</property>
    <property name="sprite" value="sprites/gold.atlas"/>
