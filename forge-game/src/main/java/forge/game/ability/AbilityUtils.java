@@ -1715,6 +1715,12 @@ public class AbilityUtils {
                         return doXMath(root.getXManaCostPaid(), expr, c, ctb);
                     }
 
+                    // If the chosen creature has X in its mana cost, that X is considered to be 0.
+                    // The value of X in Altered Ego’s last ability will be whatever value was chosen for X while casting Altered Ego.
+                    if (sa.isCopiedTrait() && !sa.getHostCard().equals(c)) {
+                        return doXMath(0, expr, c, ctb);
+                    }
+
                     if (root.isTrigger()) {
                         Trigger t = root.getTrigger();
                         if (t == null) {
@@ -1755,16 +1761,8 @@ public class AbilityUtils {
                         }
                     }
 
-                    // If the chosen creature has X in its mana cost, that X is considered to be 0.
-                    // The value of X in Altered Ego’s last ability will be whatever value was chosen for X while casting Altered Ego.
-                    if (sa.isCopiedTrait() || !sa.getHostCard().equals(c)) {
-                        return doXMath(0, expr, c, ctb);
-                    }
-
-                    if (root.isReplacementAbility()) {
-                        if (sa.hasParam("ETB")) {
-                            return doXMath(c.getXManaCostPaid(), expr, c, ctb);
-                        }
+                    if (root.isReplacementAbility() && sa.hasParam("ETB")) {
+                        return doXMath(c.getXManaCostPaid(), expr, c, ctb);
                     }
 
                     return doXMath(0, expr, c, ctb);

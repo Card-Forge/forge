@@ -174,8 +174,10 @@ public class CardFactory {
         if (targetSA.isBestow()) {
             c.animateBestow();
         }
+        
         return c;
     }
+
     /**
      * <p>
      * copySpellAbilityAndPossiblyHost.
@@ -306,7 +308,7 @@ public class CardFactory {
             buildPlaneAbilities(card);
         }
         CardFactoryUtil.setupKeywordedAbilities(card); // Should happen AFTER setting left/right split abilities to set Fuse ability to both sides
-        card.getView().updateState(card);
+        card.updateStateForView();
     }
 
     private static void buildPlaneAbilities(Card card) {
