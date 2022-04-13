@@ -8,10 +8,10 @@ SVar:RememberCrew:DB$ PumpAll | ValidCards$ Creature.TriggeredCrew | RememberAll
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever CARDNAME attacks or blocks, return up to one target creature that crewed it this turn to its owner’s hand.
-T:Mode$ Blocks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigReturn | TriggerDescription$ Whenever CARDNAME attacks or blocks, return up to one target creature that crewed it this turn to its owner’s hand.
-SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.IsRemembered | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select up to one target creature
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever CARDNAME attacks or blocks, return up to one target creature that crewed it this turn to its owner's hand.
+T:Mode$ Blocks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigReturn | TriggerDescription$ Whenever CARDNAME attacks or blocks, return up to one target creature that crewed it this turn to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.IsRemembered | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select up to one target creature to return to its owner's hand
 K:Crew:1
 SVar:HasAttackEffect:True
 SVar:HasBlockEffect:True
-Oracle:Haste\nWhenever Getaway Car attacks or blocks, return up to one target creature that crewed it this turn to its owner’s hand.\nCrew 1
+Oracle:Haste\nWhenever Getaway Car attacks or blocks, return up to one target creature that crewed it this turn to its owner's hand.\nCrew 1

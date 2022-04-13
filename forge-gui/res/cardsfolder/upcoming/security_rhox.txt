@@ -2,5 +2,6 @@ Name:Security Rhox
 ManaCost:2 R G
 Types:Creature Rhino Warrior
 PT:5/4
-SVar:AltCost:Cost$ Mana<R G\Treasure> | Description$ You may pay {R}{G} rather than pay this spell’s mana cost. Spend only mana produced by Treasures to cast it this way.
-Oracle:You may pay {R}{G} rather than pay this spell’s mana cost. Spend only mana produced by Treasures to cast it this way.
+DeckHints:Type$Treasure
+SVar:AltCost:Cost$ Mana<R G\Treasure> | Description$ You may pay {R}{G} rather than pay this spell's mana cost. Spend only mana produced by Treasures to cast it this way.
+Oracle:You may pay {R}{G} rather than pay this spell's mana cost. Spend only mana produced by Treasures to cast it this way.
