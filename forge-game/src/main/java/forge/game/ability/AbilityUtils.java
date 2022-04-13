@@ -543,15 +543,16 @@ public class AbilityUtils {
                     }
                 }
                 val = playerXCount(players, calcX[1], card, ability);
-            }
-            else {
+            } else {
                 val = 0;
             }
-        }
-        else if (calcX[0].equals("OriginalHost")) {
+        } else if (calcX[0].equals("OriginalHost")) {
             val = xCount(ability.getOriginalHost(), calcX[1], ability);
-        }
-        else if (calcX[0].startsWith("Remembered")) {
+        } else if (calcX[0].equals("Equipped")) {
+            if (card.isEquipping()) {
+                val = xCount(card.getEquipping(), calcX[1], ability);
+            }
+        } else if (calcX[0].startsWith("Remembered")) {
             // Add whole Remembered list to handlePaid
             final CardCollection list = new CardCollection();
             Card newCard = card;
