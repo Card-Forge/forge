@@ -1,0 +1,18 @@
+Name:Urabrask, Heretic Praetor
+ManaCost:3 R R
+Types:Legendary Creature Phyrexian Praetor
+PT:4/4
+K:Haste
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigExile | TriggerDescription$ At the beginning of your upkeep, exile the top card of your library. You may play it this turn.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffectYou
+SVar:DBEffectYou:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Execute$ TrigEffect | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's upkeep, the next time they would draw a card this turn, instead they exile the top card of their library. They may play it this turn.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredPlayer | ReplacementEffects$ DrawReplace | StaticAbilities$ PlayOpp | Triggers$ ExileSelfTrig
+SVar:DrawReplace:Event$ Draw | ValidPlayer$ Player.IsRemembered | ReplaceWith$ Dig | IsPresent$ Card.IsRemembered | PresentZone$ Exile | PresentCompare$ EQ0 | Description$ At the beginning of each opponent's upkeep, the next time they would draw a card this turn, instead they exile the top card of their library. They may play it this turn.
+SVar:Dig:DB$ Dig | ConditionDefined$ Remembered | Defined$ ReplacedPlayer | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True
+SVar:PlayOpp:Mode$ Continuous | MayPlay$ True | MayPlayPlayer$ CardOwner | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile
+SVar:ExileSelfTrig:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ TrigExileEffect | Static$ True
+SVar:TrigExileEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+Oracle:Haste\nAt the beginning of your upkeep, exile the top card of your library. You may play it this turn.\nAt the beginning of each opponent's upkeep, the next time they would draw a card this turn, instead they exile the top card of their library. They may play it this turn.
