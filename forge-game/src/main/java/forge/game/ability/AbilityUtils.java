@@ -2662,27 +2662,6 @@ public class AbilityUtils {
             return doXMath(manaCost.size(), expr, c, ctb);
         }
 
-        //Count$DifferentManaValue<zone> <restriction>
-        if (l[0].contains("DifferentManaValue")) {
-            String[] sqparts = l[0].split(" ", 2);
-            final String[] rest = sqparts[1].split(",");
-
-            final CardCollectionView cardsInZones = sqparts[0].length() > 18
-                    ? game.getCardsIn(ZoneType.listValueOf(sqparts[0].substring(18)))
-                    : game.getCardsIn(ZoneType.Battlefield);
-
-            CardCollection cards = CardLists.getValidCards(cardsInZones, rest, player, c, ctb);
-            final List<Integer> cmcs = Lists.newArrayList();
-
-            for (Card card : cards) {
-                Integer cmc = card.getCMC();
-                if (!cmcs.contains(cmc)) {
-                    cmcs.add(cmc);
-                }
-            }
-            return doXMath(cmcs.size(), expr, c, ctb);
-        }
-
         if (sq[0].equals("StormCount")) {
             return doXMath(game.getStack().getSpellsCastThisTurn().size() - 1, expr, c, ctb);
         }
@@ -2709,25 +2688,6 @@ public class AbilityUtils {
             int max = calculateAmount(c, sq[2], ctb);
 
             return MyRandom.getRandom().nextInt(1+max-min) + min;
-        }
-
-        // Count$SumPower_valid
-        if (sq[0].startsWith("SumPower")) {
-            final String[] restrictions = l[0].split("_");
-            CardCollection filteredCards = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restrictions[1], player, c, ctb);
-            return doXMath(Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetNetPower), expr, c, ctb);
-        }
-
-        // Count$SumCMC_valid
-        if (sq[0].startsWith("SumCMC")) {
-            ZoneType zone = ZoneType.Battlefield;
-            //graveyard support for Inferno Project (may need other zones or multi-zone in future)
-            if (sq[0].contains("Graveyard"))
-                zone = ZoneType.Graveyard;
-            final String[] restrictions = l[0].split("_");
-            CardCollectionView cardsonbattlefield = game.getCardsIn(zone);
-            CardCollection filteredCards = CardLists.getValidCards(cardsonbattlefield, restrictions[1], player, c, ctb);
-            return Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetCmc);
         }
 
         // Count$TotalCounters.<counterType>_<valid>
@@ -2795,47 +2755,17 @@ public class AbilityUtils {
 
         // count valid cards in any specified zone/s
         if (sq[0].startsWith("Valid")) {
-            String[] lparts = l[0].split(" ", 2);
+            String[] paidparts = l[0].split("\\$", 2);
+            String[] lparts = paidparts[0].split(" ", 2);
 
             final CardCollectionView cardsInZones = lparts[0].length() > 5
                 ? game.getCardsIn(ZoneType.listValueOf(lparts[0].substring(5)))
                 : game.getCardsIn(ZoneType.Battlefield);
 
+            if (paidparts.length > 1) {
+                return doXMath(handlePaid(CardLists.getValidCards(cardsInZones, lparts[1], player, c, ctb), paidparts[1], c, ctb), expr, c, ctb);
+            }
             return doXMath(CardLists.getValidCardCount(cardsInZones, lparts[1], player, c, ctb), expr, c, ctb);
-        }
-
-        if (sq[0].startsWith("GreatestPower")) {
-            final String[] lparts = l[0].split("_", 2);
-            final String[] rest = lparts[1].split(",");
-            final CardCollectionView cardsInZones = lparts[0].length() > 13
-                    ? game.getCardsIn(ZoneType.listValueOf(lparts[0].substring(13)))
-                    : game.getCardsIn(ZoneType.Battlefield);
-            CardCollection list = CardLists.getValidCards(cardsInZones, rest, player, c, ctb);
-            int highest = 0;
-            for (final Card crd : list) {
-                if (crd.getNetPower() > highest) {
-                    highest = crd.getNetPower();
-                }
-            }
-            return highest;
-        }
-
-        if (sq[0].startsWith("GreatestToughness_")) {
-            final String restriction = l[0].substring(18);
-            CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
-            int highest = 0;
-            for (final Card crd : list) {
-                if (crd.getNetToughness() > highest) {
-                    highest = crd.getNetToughness();
-                }
-            }
-            return highest;
-        }
-
-        if (sq[0].startsWith("HighestCMC_")) {
-            final String restriction = l[0].substring(11);
-            CardCollection list = CardLists.getValidCards(game.getCardsInGame(), restriction, player, c, ctb);
-            return Aggregates.max(list, CardPredicates.Accessors.fnGetCmc);
         }
 
         if (sq[0].startsWith("MostCardName")) {
@@ -2877,19 +2807,6 @@ public class AbilityUtils {
             return doXMath(crdname.size(), expr, c, ctb);
         }
 
-        if (sq[0].startsWith("DifferentPower_")) {
-            final List<Integer> powers = Lists.newArrayList();
-            final String restriction = l[0].substring(15);
-            CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
-            for (final Card card : list) {
-                Integer pow = card.getNetPower();
-                if (!powers.contains(pow)) {
-                    powers.add(pow);
-                }
-            }
-            return doXMath(powers.size(), expr, c, ctb);
-        }
-
         if (sq[0].startsWith("MostProminentCreatureType")) {
             String restriction = l[0].split(" ")[1];
             CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
@@ -2929,6 +2846,31 @@ public class AbilityUtils {
             }
             return doXMath(creatTypes.size(), expr, c, ctb);
         }
+
+        // TODO move below to handlePaid
+        if (sq[0].startsWith("SumPower")) {
+            final String[] restrictions = l[0].split("_");
+            CardCollection filteredCards = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restrictions[1], player, c, ctb);
+            return doXMath(Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetNetPower), expr, c, ctb);
+        }
+        if (sq[0].startsWith("HighestCMC_")) {
+            final String restriction = l[0].substring(11);
+            CardCollection list = CardLists.getValidCards(game.getCardsInGame(), restriction, player, c, ctb);
+            return Aggregates.max(list, CardPredicates.Accessors.fnGetCmc);
+        }
+        if (sq[0].startsWith("DifferentPower_")) {
+            final List<Integer> powers = Lists.newArrayList();
+            final String restriction = l[0].substring(15);
+            CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
+            for (final Card card : list) {
+                Integer pow = card.getNetPower();
+                if (!powers.contains(pow)) {
+                    powers.add(pow);
+                }
+            }
+            return doXMath(powers.size(), expr, c, ctb);
+        }
+
         // Complex counting methods
         CardCollectionView someCards = getCardListForXCount(c, player, sq, ctb);
 
@@ -3628,13 +3570,14 @@ public class AbilityUtils {
         }
 
         if (string.startsWith("GreatestPower")) {
-            int highest = 0;
-            for (final Card crd : paidList) {
-                if (crd.getNetPower() > highest) {
-                    highest = crd.getNetPower();
-                }
-            }
-            return highest;
+            return Aggregates.max(paidList, CardPredicates.Accessors.fnGetNetPower);
+        }
+        if (string.startsWith("GreatestToughness")) {
+            return Aggregates.max(paidList, CardPredicates.Accessors.fnGetNetToughness);
+        }
+
+        if (string.startsWith("SumToughness")) {
+            return Aggregates.sum(paidList, CardPredicates.Accessors.fnGetNetToughness);
         }
 
         if (string.startsWith("DifferentCMC")) {
@@ -3646,11 +3589,7 @@ public class AbilityUtils {
         }
 
         if (string.startsWith("SumCMC")) {
-            int sumCMC = 0;
-            for (Card c : paidList) {
-                sumCMC += c.getCMC();
-            }
-            return sumCMC;
+            return Aggregates.sum(paidList, CardPredicates.Accessors.fnGetCmc);
         }
 
         if (string.startsWith("Valid")) {
