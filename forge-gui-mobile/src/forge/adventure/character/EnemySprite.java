@@ -1,5 +1,6 @@
 package forge.adventure.character;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
@@ -26,6 +27,11 @@ public class EnemySprite extends CharacterSprite {
         this(enemyData);
 
         this.id = id;
+    }
+
+    @Override
+    void updateBoundingRect() { //We want enemies to take the full tile.
+        boundingRect = new Rectangle(getX(), getY(), getWidth(), getHeight());
     }
 
     public void moveTo(Actor other, float delta) {

@@ -403,7 +403,7 @@ public class GameAction {
         if (copied.isAura() && !copied.isAttachedToEntity() && toBattlefield) {
             if (zoneFrom != null && zoneFrom.is(ZoneType.Stack) && game.getStack().isResolving(c)) {
                 boolean found = false;
-                if (Iterables.any(game.getPlayers(),PlayerPredicates.canBeAttached(copied))) {
+                if (Iterables.any(game.getPlayers(), PlayerPredicates.canBeAttached(copied))) {
                     found = true;
                 }
                 if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateBattlefield), CardPredicates.canBeAttached(copied))) {
@@ -815,7 +815,7 @@ public class GameAction {
             } else {
                 c.setCastFrom(zoneFrom);
             }
-            if (cause != null && cause.isSpell() && c.equals(cause.getHostCard()) && !c.isCopiedSpell()) {
+            if (cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
                 c.setCastSA(cause);
             } else {
                 c.setCastSA(null);

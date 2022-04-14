@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
  <tileset firstgid="1" source="../tileset/buildings.tsx"/>
- <object name="Gold" type="enemy" gid="501" width="16" height="16">
+ <object name="Gold" type="reward" gid="501" width="16" height="16">
   <properties>
-   <property name="enemy" value="Gold"/>
-   <property name="override_gold_max" type="int" value="0"/>
-   <property name="override_gold_min" type="int" value="0"/>
-   <property name="override_reward" type="bool" value="false"/>
+   <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 80,
+    &quot;addMaxCount&quot;: 40
+ }
+]</property>
+   <property name="sprite" value="sprites/gold.atlas"/>
   </properties>
  </object>
 </template>

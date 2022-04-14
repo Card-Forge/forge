@@ -4,6 +4,6 @@ Types:Creature Elf Druid
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get an amount of {E} (energy counters) equal to the greatest power among creatures you control.
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ X
-SVar:X:Count$GreatestPower_Creature.YouCtrl
+SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
 A:AB$ Pump | Cost$ PayEnergy<3> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME blocks each combat if able. | SpellDescription$ Target creature blocks this turn if able.
 Oracle:When Peema Aether-Seer enters the battlefield, you get an amount of {E} (energy counters) equal to the greatest power among creatures you control.\nPay {E}{E}{E}: Target creature blocks this turn if able.

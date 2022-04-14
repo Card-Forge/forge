@@ -195,8 +195,7 @@ public class PlayAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
 
         if (tgt != null) {
-            ZoneType zone = tgt.getZone().get(0);
-            cards = CardLists.getValidCards(ai.getGame().getCardsIn(zone), tgt.getValidTgts(), ai, source, sa);
+            cards = CardLists.getValidCards(ai.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), ai, source, sa);
         } else if (!sa.hasParam("Valid")) {
             cards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
         }
@@ -214,9 +213,11 @@ public class PlayAi extends SpellAbilityAi {
 
         // Ensure that if a ValidZone is specified, there's at least something to choose from in that zone.
         if (sa.hasParam("ValidZone")) {
-            cards = new CardCollection(AbilityUtils.filterListByType(ai.getGame().getCardsIn(ZoneType.valueOf(sa.getParam("ValidZone"))),
+            cards = new CardCollection(AbilityUtils.filterListByType(ai.getGame().getCardsIn(ZoneType.listValueOf(sa.getParam("ValidZone"))),
                     sa.getParam("Valid"), sa));
         }
+        // exclude own card
+        cards.remove(source);
         return cards;
     }
 

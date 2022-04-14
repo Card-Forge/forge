@@ -1,0 +1,10 @@
+Name:Topiary Stomper
+ManaCost:1 G G
+Types:Creature Plant Dinosaur
+PT:4/4
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters the battlefield, search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | Tapped$ True
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack or block. | IsPresent$ Land.YouCtrl | PresentCompare$ LT7 | Description$ CARDNAME can't attack or block unless you control seven or more lands.
+SVar:BuffedBy:Land
+Oracle:Vigilance\nWhen Topiary Stomper enters the battlefield, search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\nTopiary Stomper can't attack or block unless you control seven or more lands.

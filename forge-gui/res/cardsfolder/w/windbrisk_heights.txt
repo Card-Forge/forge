@@ -1,8 +1,9 @@
 Name:Windbrisk Heights
 ManaCost:no cost
 Types:Land
-K:Hideaway
+K:Hideaway:4
+K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
 A:AB$ Play | Cost$ W T | Defined$ Remembered | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE3 | ForgetRemembered$ True | PlayerTurn$ True | AILogic$ CheckCondition | SpellDescription$ You may play the exiled card without paying its mana cost if you attacked with three or more creatures this turn.
 SVar:X:Count$AttackersDeclared
-Oracle:Hideaway (This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)\n{T}: Add {W}.\n{W}, {T}: You may play the exiled card without paying its mana cost if you attacked with three or more creatures this turn.
+Oracle:Hideaway 4 (When this permanent enters the battlefield, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)\nWindbrisk Heights enters the battlefield tapped.\n{T}: Add {W}.\n{W}, {T}: You may play the exiled card without paying its mana cost if you attacked with three or more creatures this turn.

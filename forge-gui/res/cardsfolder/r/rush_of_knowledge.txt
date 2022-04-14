@@ -2,6 +2,6 @@ Name:Rush of Knowledge
 ManaCost:4 U
 Types:Sorcery
 A:SP$ Draw | Cost$ 4 U | Defined$ You | NumCards$ X | SpellDescription$ Draw cards equal to the highest mana value among permanents you control.
-SVar:X:Count$MaxCMCYouCtrl
+SVar:X:Count$HighestCMC_Permanent.YouCtrl+inZoneBattlefield
 AI:RemoveDeck:Random
 Oracle:Draw cards equal to the highest mana value among permanents you control.
