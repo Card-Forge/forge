@@ -71,7 +71,7 @@ public class DialogActor extends MapActor{
         stage.getDialog().getContentTable().clear();
         stage.getDialog().getButtonTable().clear();
         String text = "";
-        if(dialog.loctext != null){ //Check for localized string, otherwise print text.
+        if(dialog.loctext != null || dialog.loctext.equals("")){ //Check for localized string, otherwise print text.
             text = Forge.getLocalizer().getMessage(dialog.loctext);
         } else {
             text = dialog.text;

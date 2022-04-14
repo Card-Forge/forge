@@ -47,8 +47,8 @@
   {
     &quot;effect&quot;:[],
     &quot;name&quot;:&quot;ABC&quot;,
-    &quot;text&quot;:&quot;ONLY NERDS WITH THE STRANGE KEY ALLOWED HERE\nALSO CUPCAKE DELIVERIES.&quot;,
-    &quot;loctext&quot;: &quot;splash.loading.examining-cards&quot;,
+    &quot;text&quot;:&quot;A big gate is blocking the path.&quot;,
+    &quot;loctext&quot;:&quot;&quot;,
     &quot;condition&quot;:[],
     &quot;options&quot;:[
         { &quot;name&quot;:&quot;go away&quot; },
