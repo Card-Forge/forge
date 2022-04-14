@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="65">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="69">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -43,7 +43,26 @@
   </object>
   <object id="52" template="../../obj/gate.tx" x="208" y="448">
    <properties>
-    <property name="dialog" value="dialogs/colorless_door.json"/>
+    <property name="dialog">[
+  {
+    &quot;effect&quot;:[],
+    &quot;name&quot;:&quot;ABC&quot;,
+    &quot;text&quot;:&quot;ONLY NERDS WITH THE STRANGE KEY ALLOWED HERE\nALSO CUPCAKE DELIVERIES.&quot;,
+    &quot;loctext&quot;: &quot;splash.loading.examining-cards&quot;,
+    &quot;condition&quot;:[],
+    &quot;options&quot;:[
+        { &quot;name&quot;:&quot;go away&quot; },
+        {
+          &quot;name&quot;:&quot;unlock with strange key&quot;,
+          &quot;condition&quot;:[ { &quot;item&quot;:&quot;Strange Key&quot;} ],
+          &quot;text&quot;:&quot;The gate is unlocked&quot;,
+          &quot;options&quot;:[
+          {&quot;name&quot;:&quot;continue&quot;,&quot;effect&quot;: [ { &quot;removeItem&quot;:&quot;Strange Key&quot;,&quot;deleteMapObject&quot;:-1 } ] }
+        ]
+      }
+    ]
+  }
+]</property>
    </properties>
   </object>
   <object id="54" template="../../obj/treasure.tx" x="208" y="80">

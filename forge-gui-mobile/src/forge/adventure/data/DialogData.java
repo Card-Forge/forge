@@ -5,6 +5,7 @@ public class DialogData {
     public ConditionData[] condition;
     public String name;
     public String text;
+    public String loctext; //References a localized string.
     public DialogData[] options;
 
     static public class EffectData {

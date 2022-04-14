@@ -254,8 +254,10 @@ public class MapStage extends GameStage {
                         addMapActor(obj, entry);
                         break;
                     case "reward":
-                        RewardSprite R = new RewardSprite(id, prop.get("reward").toString(), prop.get("sprite").toString());
-                        addMapActor(obj, R);
+                        if (prop.get("reward") != null) {
+                            RewardSprite R = new RewardSprite(id, prop.get("reward").toString(), prop.get("sprite").toString());
+                            addMapActor(obj, R);
+                        }
                         break;
                     case "enemy":
                         EnemySprite mob = new EnemySprite(id, WorldData.getEnemy(prop.get("enemy").toString()));
@@ -278,13 +280,12 @@ public class MapStage extends GameStage {
                         }));
                         break;
                     case "dialog":
-                        if(obj instanceof TiledMapTileMapObject)
-                        {
+                        if(obj instanceof TiledMapTileMapObject) {
+                            //Sanity check
                             TiledMapTileMapObject tiledObj = (TiledMapTileMapObject) obj;
-                            DialogActor dialog = new DialogActor(this, id,  prop.get("dialog").toString(),tiledObj.getTextureRegion());
+                            DialogActor dialog = new DialogActor(this, id, prop.get("dialog").toString(), tiledObj.getTextureRegion());
                             addMapActor(obj, dialog);
                         }
-
                         break;
                     case "shop":
                         String shopList = prop.get("shopList").toString();
