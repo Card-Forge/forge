@@ -1258,14 +1258,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final int getXManaCostPaid() {
-        SpellAbility castSA;
-        if (getCopiedPermanent() != null) {
-            castSA = getCopiedPermanent().getCastSA();
-        } else {
-            castSA = getCastSA();
-        }
-        if (castSA != null) {
-            Integer paid = castSA.getXManaCostPaid();
+        if (getCastSA() != null) {
+            Integer paid = getCastSA().getXManaCostPaid();
             return paid == null ? 0 : paid;
         }
         return 0;
