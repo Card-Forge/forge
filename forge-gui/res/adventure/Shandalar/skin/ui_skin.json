@@ -1,18 +1,4 @@
 {
-"com.badlogic.gdx.graphics.g2d.BitmapFont": {
-	"big": {
-		"file": "LanaPixelCJK.fnt"
-	},
-	"black": {
-		"file": "LanaPixelCJK.fnt"
-	},
-	"blackbig": {
-		"file": "LanaPixelCJK.fnt"
-	},
-	"default": {
-		"file": "LanaPixelCJK.fnt"
-	}
-},
 "com.badlogic.gdx.graphics.Color": {
 	"RGBA_0_0_0_255": {
 		"r": 0,
@@ -267,7 +253,7 @@
 	"default": {
 		"checkboxOn": "check",
 		"checkboxOff": "uncheck",
-		"font": "black"
+		"font": "default"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
@@ -292,22 +278,22 @@
 },
 "com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle": {
 	"default": {
-		"font": "blackbig"
+		"font": "default"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
 	"default": {
-		"font": "black"
+		"font": "default"
 	},
 	"big": {
 		"parent": "default",
-		"font": "blackbig"
+		"font": "default"
 	},
 	"white": {
 		"font": "default"
 	},
 	"whiteBig": {
-		"font": "big"
+		"font": "default"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {
@@ -344,6 +330,8 @@
 	"default": {
 		"font": "default",
 		"fontColor": "RGBA_0_0_0_255",
+		"overFontColor": "RGBA_0_216_255_255",
+		"disabledFontColor": "RGBA_255_255_255_255",
 		"scrollStyle": "default",
 		"listStyle": "default"
 	}
@@ -371,11 +359,18 @@
 		"parent": "default",
 		"font": "default",
 		"fontColor": "RGBA_255_255_255_255",
+		"downFontColor": "RGBA_255_255_255_255",
+		"overFontColor": "RGBA_255_255_255_255",
+		"focusedFontColor": "RGBA_255_255_255_255",
+		"disabledFontColor": "RGBA_255_255_255_255",
+		"checkedFontColor": "RGBA_255_255_255_255",
+		"checkedDownFontColor": "RGBA_255_255_255_255",
+		"checkedOverFontColor": "RGBA_255_255_255_255",
+		"checkedFocusedFontColor": "RGBA_255_255_255_255",
 		"pressedOffsetY": -2
 	},
 	"gold": {
 		"parent": "default",
-		"font": "default",
 		"up": "BKey_3_9",
 		"down": "BKey_3_14",
 		"over": "BKey_3_9",
@@ -395,6 +390,11 @@
 		"selection": "select"
 	}
 },
+"com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle": {
+	"default": {
+		"label": "default"
+	}
+},
 "com.badlogic.gdx.scenes.scene2d.ui.Touchpad$TouchpadStyle": {
 	"default": {
 		"background": "thinwindow",
@@ -410,16 +410,17 @@
 "com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
 	"default": {
 		"background": "windowMain10Patch",
-		"titleFont": "black"
+		"titleFont": "default",
+		"titleFontColor": "RGBA_255_255_255_255"
 	},
 	"paper": {
 		"parent": "default",
 		"background": "paper10Patch",
-		"titleFont": "blackbig"
+		"titleFont": "default"
 	},
 	"gold": {
 		"background": "TenPatchGold",
-		"titleFont": "big"
+		"titleFont": "default"
 	}
 }
 }

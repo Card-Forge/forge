@@ -553,7 +553,7 @@ public class World implements  Disposable, SaveFileContent {
     }
 
     public int getChunkSize() {
-        return Scene.GetIntendedWidth() / data.tileSize;
+        return Scene.getIntendedWidth() / data.tileSize;
     }
 
     public void dispose() {

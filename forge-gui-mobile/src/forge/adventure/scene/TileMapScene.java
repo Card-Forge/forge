@@ -2,7 +2,6 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import forge.Forge;
 import forge.adventure.pointofintrest.PointOfInterest;
@@ -21,7 +20,6 @@ public class TileMapScene extends HudScene {
     PointOfInterestMapRenderer tiledMapRenderer;
     private String nextMap;
     private float cameraWidth = 0f, cameraHeight = 0f;
-    boolean init;
 
     public TileMapScene() {
         super(MapStage.getInstance());
@@ -57,7 +55,7 @@ public class TileMapScene extends HudScene {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-        tiledMapRenderer.setView(stage.getCamera().combined, stage.getCamera().position.x - Scene.GetIntendedWidth() / 2.0f, stage.getCamera().position.y - Scene.GetIntendedHeight() / 2.0f, Scene.GetIntendedWidth(), Scene.GetIntendedHeight());
+        tiledMapRenderer.setView(stage.getCamera().combined, stage.getCamera().position.x - Scene.getIntendedWidth() / 2.0f, stage.getCamera().position.y - Scene.getIntendedHeight() / 2.0f, Scene.getIntendedWidth(), Scene.getIntendedHeight());
 
         if (!Forge.isLandscapeMode()) {
             stage.getCamera().position.x = stage.GetPlayer().pos().x;
@@ -68,27 +66,18 @@ public class TileMapScene extends HudScene {
 
     @Override
     public void resLoaded() {
-        if (!this.init) {
-            MapStage.getInstance().resLoaded();
-            //set initial camera width and height
-            if (cameraWidth == 0f)
-                cameraWidth = stage.getCamera().viewportWidth;
-            if (cameraHeight == 0f)
-                cameraHeight = stage.getCamera().viewportHeight;
-            MapStage.getInstance().setDialogStage(hud);
-            this.init = true;
-        }
+        MapStage.getInstance().resLoaded();
+        //set initial camera width and height
+        if (cameraWidth == 0f)
+            cameraWidth = stage.getCamera().viewportWidth;
+        if (cameraHeight == 0f)
+            cameraHeight = stage.getCamera().viewportHeight;
+        MapStage.getInstance().setDialogStage(hud);
         super.resLoaded();
     }
 
     @Override
     public void enter() {
-        if (!Forge.isLandscapeMode()) {
-            //Trick for Map Stage
-            stage.getCamera().viewportWidth = cameraHeight;
-            stage.getCamera().viewportHeight = cameraWidth;
-            ((OrthographicCamera) stage.getCamera()).zoom = 0.55f;
-        }
         super.enter();
     }
 

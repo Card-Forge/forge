@@ -1,0 +1,162 @@
+{
+  "width": 270,
+  "height": 480,
+  "yDown": true,
+  "elements": [
+    {
+      "type": "Image",
+      "image": "ui/title_bg_portrait.png",
+      "width": 270,
+      "height": 480
+    },
+    {
+      "type": "Scroll",
+      "name": "stats",
+      "style": "paper",
+      "x": 4,
+      "y": 4,
+      "width": 262,
+      "height": 90
+    },
+    {
+      "type": "Scroll",
+      "name": "enemies",
+      "x": 4,
+      "y": 98,
+      "width": 262,
+      "height": 335
+    },
+    {
+      "type": "Image",
+      "name": "avatar",
+      "x": 24,
+      "y": 8,
+      "width": 64,
+      "height": 64
+    },
+    {
+      "type": "Image",
+      "name": "avatarBorder",
+      "image": "ui/avatarhud.png",
+      "x": 24,
+      "y": 8,
+      "width": 64,
+      "height": 64
+    },
+    {
+      "type": "Label",
+      "name": "playerName",
+      "x": 34,
+      "y": 70,
+      "width": 80,
+      "height": 24,
+      "font": "black"
+    },
+    {
+      "type": "Label",
+      "name": "totalWins",
+      "x": 234,
+      "y": 14,
+      "width": 40,
+      "height": 24,
+      "font": "black"
+    },
+    {
+      "type": "Label",
+      "name": "wins",
+      "text": "Win:",
+      "x": 170,
+      "y": 14,
+      "width": 60,
+      "height": 24,
+      "font": "black"
+    },
+    {
+      "type": "Label",
+      "name": "totalLoss",
+      "x": 234,
+      "y": 34,
+      "width": 40,
+      "height": 24,
+      "font": "black"
+    },
+    {
+      "type": "Label",
+      "name": "loss",
+      "text": "Loss:",
+      "x": 170,
+      "y": 34,
+      "width": 60,
+      "height": 24,
+      "font": "black"
+    },
+    {
+      "type": "Label",
+      "name": "lossWinRatio",
+      "x": 234,
+      "y": 54,
+      "width": 40,
+      "height": 24,
+      "font": "black"
+    },
+    {
+      "type": "Label",
+      "name": "winloss",
+      "text": "Win Loss Ratio:",
+      "x": 170,
+      "y": 54,
+      "width": 60,
+      "height": 24,
+      "font": "black"
+    },
+    {
+      "type": "TextButton",
+      "name": "return",
+      "text": "Back",
+      "width": 260,
+      "height": 30,
+      "x": 5,
+      "y": 440
+    },
+    {
+      "type": "Image",
+      "name": "lifeIcon",
+      "image": "ui/life.png",
+      "x": 104,
+      "y": 40,
+      "width": 16,
+      "height": 16
+    },
+    {
+      "type": "Image",
+      "name": "goldIcon",
+      "image": "ui/money.png",
+      "x": 104,
+      "y": 60,
+      "width": 16,
+      "height": 16
+    },
+    {
+      "type": "Label",
+      "name": "lifePoints",
+      "font": "black",
+      "width": 64,
+      "height": 16,
+      "x": 124,
+      "y": 40
+    },
+    {
+      "type": "Label",
+      "name": "money",
+      "font": "black",
+      "width": 64,
+      "height": 16,
+      "x": 124,
+      "y": 60
+    },
+    {
+      "type": "Table",
+      "font": "default"
+    }
+  ]
+}

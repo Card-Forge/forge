@@ -2,7 +2,6 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import forge.Forge;
 import forge.adventure.stage.WorldStage;
 
@@ -12,7 +11,6 @@ import forge.adventure.stage.WorldStage;
  */
 public class GameScene extends HudScene {
     private float cameraWidth = 0f, cameraHeight = 0f;
-    boolean init;
     public GameScene() {
         super(WorldStage.getInstance());
     }
@@ -36,26 +34,17 @@ public class GameScene extends HudScene {
 
     @Override
     public void resLoaded() {
-        if (!this.init) {
-            //set initial camera width and height
-            if (cameraWidth == 0f)
-                cameraWidth = stage.getCamera().viewportWidth;
-            if (cameraHeight == 0f)
-                cameraHeight = stage.getCamera().viewportHeight;
-            this.init = true;
-        }
+        //set initial camera width and height
+        if (cameraWidth == 0f)
+            cameraWidth = stage.getCamera().viewportWidth;
+        if (cameraHeight == 0f)
+            cameraHeight = stage.getCamera().viewportHeight;
     }
 
     @Override
     public void enter() {
         Forge.clearTransitionScreen();
         Forge.clearCurrentScreen();
-        if (!Forge.isLandscapeMode()) {
-            //Trick: switch the camera viewport width and height so it looks normal since we shrink the width for portrait mode for WorldStage
-            stage.getCamera().viewportHeight = cameraWidth;
-            stage.getCamera().viewportWidth = cameraHeight;
-            ((OrthographicCamera)stage.getCamera()).zoom = 0.85f;
-        }
         super.enter();
     }
 

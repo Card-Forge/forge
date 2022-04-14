@@ -28,6 +28,8 @@ import forge.adventure.util.Current;
 import forge.adventure.util.UIActor;
 import forge.adventure.world.WorldSave;
 import forge.gui.GuiBase;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 
 /**
  * Stage to handle everything rendered in the HUD
@@ -56,11 +58,11 @@ public class GameHUD extends Stage {
     float TOUCHPAD_KNOB_MIN_WIDTH = 40f;
 
     private GameHUD(GameStage gameStage) {
-        super(new ScalingViewport(Scaling.stretch, Scene.GetIntendedWidth(), Scene.GetIntendedHeight()), gameStage.getBatch());
+        super(new ScalingViewport(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_STRETCH)?Scaling.stretch:Scaling.fit, Scene.getIntendedWidth(), Scene.getIntendedHeight()), gameStage.getBatch());
         instance = this;
         this.gameStage = gameStage;
 
-        ui = new UIActor(Config.instance().getFile("ui/hud_mobile.json"));
+        ui = new UIActor(Config.instance().getFile(Forge.isLandscapeMode()?"ui/hud.json":"ui/hud_portrait.json"));
 
         blank = ui.findActor("blank");
         miniMap = ui.findActor("map");
@@ -92,8 +94,6 @@ public class GameHUD extends Stage {
         //create touchpad
         touchpad = new Touchpad(10, touchpadStyle);
         touchpad.setBounds(15, 15, TOUCHPAD_SCALE, TOUCHPAD_SCALE);
-        if (!Forge.isLandscapeMode())
-            touchpad.getColor().a = 0.01f; //can't scale image on portrait..
         touchpad.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -129,47 +129,6 @@ public class GameHUD extends Stage {
                 money.setText(String.valueOf(AdventurePlayer.current().getGold()));
             }
         }) ;
-        if (!Forge.isLandscapeMode()) {
-            miniMap.setWidth(160);
-            mapborder.setWidth(160);
-            miniMapPlayer.setWidth(10);
-            miniMap.setHeight(70);
-            mapborder.setHeight(70);
-            miniMapPlayer.setHeight(4);
-            gamehud.setVisible(false);
-            blank.setScaleX(2);
-            blank.setX(388);
-            blank.setHeight(70);
-            blank.setY(miniMap.getY());
-            avatar.setScaleX(2);
-            avatar.setX(388);
-            avatar.setHeight(36);
-            avatarborder.setX(388);
-            avatarborder.setY(miniMap.getY());
-            avatarborder.setScaleX(2);
-            avatarborder.setHeight(70);
-            money.setX(418);
-            money.setFontScaleX(2);
-            lifePoints.setX(418);
-            lifePoints.setY(avatar.getY()-15);
-            lifePoints.setFontScaleX(2);
-            money.setY(avatar.getY()-25);
-            menuActor.setHeight(20);
-            menuActor.setWidth(80);
-            menuActor.setX(400);
-            statsActor.setHeight(20);
-            statsActor.setWidth(80);
-            statsActor.setX(400);
-            statsActor.setY(menuActor.getY() + 35);
-            inventoryActor.setHeight(20);
-            inventoryActor.setWidth(80);
-            inventoryActor.setX(400);
-            inventoryActor.setY(statsActor.getY() + 35);
-            deckActor.setHeight(20);
-            deckActor.setWidth(80);
-            deckActor.setX(400);
-            deckActor.setY(inventoryActor.getY() + 35);
-        }
         addActor(ui);
         addActor(miniMapPlayer);
         WorldSave.getCurrentSave().onLoad(new Runnable() {
@@ -414,9 +373,6 @@ public class GameHUD extends Stage {
             menuActor.getColor().a = 0.5f;
             statsActor.getColor().a = 0.5f;
             inventoryActor.getColor().a = 0.5f;
-        }
-        if (!Forge.isLandscapeMode()) {
-            gamehud.setVisible(false);
         }
     }
 }
