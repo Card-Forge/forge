@@ -1334,10 +1334,8 @@ public class CardFactoryUtil {
 
             List<Trigger> triggers = Lists.newArrayList();
             StringBuilder sb = new StringBuilder();
-            sb.append("Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self");
-            sb.append("| TriggerDescription$ Hideaway ").append(n).append(" (When CARDNAME enters the battlefield, ");
-            sb.append("look at the top ").append(Lang.getNumeral(Integer.valueOf(n))).append(" cards of your library, exile one face down");
-            sb.append(", then put the rest on the bottom of your library.)");
+            sb.append("Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Secondary$ True | ");
+            sb.append("TriggerDescription$ Hideaway ").append(n).append(" (").append(inst.getReminderText()).append(")");
             final Trigger hideawayTrigger = TriggerHandler.parseTrigger(sb.toString(), card, intrinsic);
 
             String hideawayDig = "DB$ Dig | Defined$ You | DigNum$ " + n + " | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True";
