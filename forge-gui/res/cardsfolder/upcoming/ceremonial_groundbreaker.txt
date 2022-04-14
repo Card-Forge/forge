@@ -1,0 +1,8 @@
+Name:Ceremonial Groundbreaker
+ManaCost:1 G W
+Types:Artifact Equipment
+K:Equip:1:Creature.YouCtrl+Citizen:citizen
+K:Equip:3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 1 | AddKeyword$ Trample | Description$ Equipped creature gets +2/+1 and has trample.
+DeckHints:Type$Citizen
+Oracle:Equipped creature gets +2/+1 and has trample.\nEquip Citizen {1}\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)

@@ -2,7 +2,7 @@ Name:The Great Henge
 ManaCost:7 G G
 Types:Legendary Artifact
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {X} less to cast, where X is the greatest power among creatures you control.
-SVar:X:Count$GreatestPower_Creature.YouCtrl
+SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
 A:AB$ Mana | Cost$ T | Produced$ G | Amount$ 2 | SubAbility$ DBGainLife | AILogic$ AtOppEOT | SpellDescription$ Add {G}{G}. You gain 2 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.nonToken+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a nontoken creature enters the battlefield under your control, put a +1/+1 counter on it and draw a card.

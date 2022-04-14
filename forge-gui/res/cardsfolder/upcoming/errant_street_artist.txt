@@ -1,0 +1,10 @@
+Name:Errant, Street Artist
+ManaCost:U
+Types:Legendary Creature Human Rogue
+PT:0/3
+K:Flash
+K:Defender
+K:Haste
+A:AB$ CopySpellAbility | Cost$ 1 U T | ValidTgts$ Spell.YouCtrl+wasNotCast | TargetType$ Spell | MayChooseTarget$ True | AILogic$ OnceIfViable | SpellDescription$ Copy target spell you control that wasn't cast. You may choose new targets for the copy.
+AI:RemoveDeck:Random
+Oracle:Flash\nDefender, haste\n{1}{U}, {T}: Copy target spell you control that wasn't cast. You may choose new targets for the copy.

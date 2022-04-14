@@ -134,7 +134,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             List<Card> tgts = getDefinedCardsOrTargeted(sa, "Defined");
             type = Lang.joinHomogenous(tgts);
             defined = true;
-        } else if (sa.hasParam("ChangeType")) {
+        } else if (sa.hasParam("ChangeType") && !sa.getParam("ChangeType").equals("Card")) {
             final String ct = sa.getParam("ChangeType");
             type = CardType.CoreType.isValidEnum(ct) ? ct.toLowerCase() : ct;
         }

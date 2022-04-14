@@ -172,8 +172,10 @@ public class CardFactory {
         if (targetSA.isBestow()) {
             c.animateBestow();
         }
+        
         return c;
     }
+
     /**
      * <p>
      * copySpellAbilityAndPossiblyHost.
@@ -203,6 +205,9 @@ public class CardFactory {
         }
 
         copySA.setCopied(true);
+        // 707.10b
+        copySA.setOriginalAbility(targetSA);
+        c.setCastSA(copySA);
 
         if (targetSA.usesTargeting()) {
             // do for SubAbilities too?
@@ -304,7 +309,7 @@ public class CardFactory {
             buildPlaneAbilities(card);
         }
         CardFactoryUtil.setupKeywordedAbilities(card); // Should happen AFTER setting left/right split abilities to set Fuse ability to both sides
-        card.getView().updateState(card);
+        card.updateStateForView();
     }
 
     private static void buildPlaneAbilities(Card card) {
@@ -791,9 +796,6 @@ public class CardFactory {
                 String set = host.getSetCode().toLowerCase();
                 state.setImageKey(ImageKeys.getTokenKey("eternalize_" + name + "_" + set));
             }
-
-            // set the host card for copied replacement effects
-            // needed for copied xPaid ETB effects (for the copy, xPaid = 0)
 
             if (sa.hasParam("GainTextOf") && originalState != null) {
                 state.setSetCode(originalState.getSetCode());

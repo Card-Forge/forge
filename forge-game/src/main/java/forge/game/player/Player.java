@@ -3396,7 +3396,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         equippedThisTurn = 0;
     }
 
-
     public boolean hasUrzaLands() {
         final CardCollectionView landsControlled = getCardsIn(ZoneType.Battlefield);
         return Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Mine")))
