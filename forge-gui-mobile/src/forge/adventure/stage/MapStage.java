@@ -199,6 +199,11 @@ public class MapStage extends GameStage {
         setBounds(width * tileWidth, height * tileHeight);
         collision = new ArrayList[(int) width][(int) height];
 
+        if( map.getProperties().get("dungeonEffect") != null ){
+            System.err.print("Found map properties.");
+
+        }
+
         GetPlayer().stop();
 
         for (MapLayer layer : map.getLayers()) {

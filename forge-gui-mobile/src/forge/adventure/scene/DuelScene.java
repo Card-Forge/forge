@@ -6,6 +6,7 @@ import forge.Forge;
 import forge.LobbyPlayer;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.character.PlayerSprite;
+import forge.adventure.data.EffectData;
 import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.util.Config;
@@ -68,17 +69,15 @@ public class DuelScene extends ForgeScene {
 
 
     }
-    void addItemEffects(RegisteredPlayer player,Array<ItemData> items)
-    {
-        if(items==null)
+    void addItemEffects(RegisteredPlayer player,Array<EffectData> effects) {
+        if( effects == null )
             return;
 
         int lifeMod=0;
         int changeStartCards=0;
         Array<IPaperCard> startCards=new Array<>();
 
-        for(ItemData data:items)
-        {
+        for(EffectData data:effects) {
             lifeMod+=data.lifeModifier;
             changeStartCards+= data.changeStartCards;
             startCards.addAll(data.startBattleWithCards());
@@ -117,24 +116,22 @@ public class DuelScene extends ForgeScene {
 
 
 
-        Array<ItemData> playerItems=new Array<>();
-        Array<ItemData> oppItems=new Array<>();
+        Array<EffectData> playerItems=new Array<>();
+        Array<EffectData> oppItems=new Array<>();
 
         for(String playerItem:Current.player().getEquippedItems())
         {
             ItemData item=ItemData.getItem(playerItem);
-            playerItems.add(item);
-            if(item.opponent !=null)
-                oppItems.add(item.opponent);
+            playerItems.add(item.effect);
+            if(item.effect.opponent != null) oppItems.add(item.effect.opponent);
         }
         if(enemy.getData().equipment!=null)
         {
             for(String oppItem:enemy.getData().equipment)
             {
                 ItemData item=ItemData.getItem(oppItem);
-                oppItems.add(item);
-                if(item.opponent !=null)
-                    playerItems.add(item.opponent);
+                oppItems.add(item.effect);
+                if(item.effect.opponent !=null) playerItems.add(item.effect.opponent);
             }
         }
 

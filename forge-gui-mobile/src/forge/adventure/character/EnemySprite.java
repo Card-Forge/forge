@@ -48,11 +48,10 @@ public class EnemySprite extends CharacterSprite {
 
     public Array<Reward> getRewards() {
         Array<Reward> ret=new Array<Reward>();
-        if(data.rewards==null)
+        if(data.rewards == null)
             return ret;
-        for(RewardData rdata:data.rewards)
-        {
-            ret.addAll(rdata.generate(false,Current.latestDeck()!=null? Current.latestDeck().getMain().toFlatList():null,data.equipment));
+        for(RewardData rdata:data.rewards) {
+            ret.addAll(rdata.generate(false,(Current.latestDeck()!=null? Current.latestDeck().getMain().toFlatList():null)));
         }
         return ret;
     }

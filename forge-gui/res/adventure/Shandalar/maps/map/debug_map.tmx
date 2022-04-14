@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="80">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="6321" source="../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzaENADAIADBuIFnC/5dxCnoegaiobmVEASzp9/MCANw1XzWdLQ==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJyTEGBgkBjFGFgaiLdhwVI0tlcSRAthYvFRe6mKa/kZGKqAuJofYl8llF/DT1t70f1Na3/S015pKI2eZ0Bi26H2bsUiT2nekoTS6ACbGDZAbliQam+jJANDkyR17IWFGQyg85HBXKCd86hkLyVg1N5Re0ftHbV3sNirREB+1F7iMKwthYzx2YuulpptLnz2UssOQnYj20trO5HjHmQvpe06ANvAfIE=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBg4oCAAweh8ZDFyzECmiVFDin2EzMBnJjY1pNpNrF8Gyr+Ewp3S+EW3Axt/FFAXkJpudgDV7RRA0ITkcakbCDCQaYuc/DEKRsEoGAWjYBSMglFAKQAAIRMR9g==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="47" template="../obj/gold.tx" x="96" y="224"/>
+  <object id="49" template="../obj/gold.tx" x="176" y="224"/>
+  <object id="50" template="../obj/enemy.tx" x="112" y="192" width="64" height="64">
+   <properties>
+    <property name="enemy" value="Emrakul"/>
+   </properties>
+  </object>
+  <object id="51" template="../obj/entry_up.tx" x="209" y="480">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="52" template="../obj/gate.tx" x="208" y="384">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;effect&quot;:[],
+    &quot;name&quot;:&quot;ABC&quot;,
+    &quot;text&quot;:&quot;I am a big gate. Greetings.&quot;,
+    &quot;loctext&quot;:&quot;&quot;,
+    &quot;condition&quot;:[],
+    &quot;options&quot;:[ { &quot;name&quot;:&quot;Okay...&quot; } ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="54" template="../obj/treasure.tx" x="320" y="176">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;life&quot;,
+    &quot;count&quot;: 3
+  }
+]
+</property>
+    <property name="sprite" value="sprites/3life.atlas"/>
+   </properties>
+  </object>
+  <object id="69" template="../obj/treasure.tx" x="192" y="352"/>
+  <object id="74" template="../obj/treasure.tx" x="224" y="352"/>
+  <object id="70" template="../obj/booster.tx" x="192" y="320"/>
+  <object id="72" template="../obj/booster.tx" x="224" y="320"/>
+  <object id="71" template="../obj/gold.tx" x="192" y="288"/>
+  <object id="73" template="../obj/gold.tx" x="224" y="288"/>
+  <object id="78" template="../obj/gate.tx" x="144" y="208" visible="0">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;effect&quot;:[],
+    &quot;name&quot;:&quot;ABC&quot;,
+    &quot;text&quot;:&quot;EMRAKUL\nDon't mind me, just chilling.&quot;,
+    &quot;loctext&quot;:&quot;&quot;,
+    &quot;condition&quot;:[],
+    &quot;options&quot;:[ { &quot;name&quot;:&quot;It happens.&quot; } ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="79" template="../obj/gate.tx" x="128" y="208" visible="0">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;effect&quot;:[],
+    &quot;name&quot;:&quot;ABC&quot;,
+    &quot;text&quot;:&quot;EMRAKUL\nDon't mind me, just chilling.&quot;,
+    &quot;loctext&quot;:&quot;&quot;,
+    &quot;condition&quot;:[],
+    &quot;options&quot;:[ { &quot;name&quot;:&quot;It happens.&quot; } ]
+  }
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

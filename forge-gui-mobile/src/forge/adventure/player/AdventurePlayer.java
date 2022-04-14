@@ -418,12 +418,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public float equipmentSpeed() {
         float factor=1.0f;
-        for(String name:equippedItems.values())
-        {
+        for(String name:equippedItems.values()) {
             ItemData data=ItemData.getItem(name);
-            if(data.moveSpeed!=0.0)
-            {
-                factor*=data.moveSpeed;
+            if(data.effect.moveSpeed > 0.0) { //Avoid negative speeds. It would be silly.
+                factor*=data.effect.moveSpeed;
             }
         }
         return factor;

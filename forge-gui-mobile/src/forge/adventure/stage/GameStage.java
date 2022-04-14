@@ -2,6 +2,7 @@ package forge.adventure.stage;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -12,12 +13,20 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import forge.Forge;
 import forge.adventure.character.MapActor;
 import forge.adventure.character.PlayerSprite;
+import forge.adventure.data.PointOfInterestData;
+import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.scene.TileMapScene;
+import forge.adventure.util.Config;
 import forge.adventure.util.Current;
+import forge.adventure.util.TemplateTmxMapLoader;
+import forge.adventure.world.World;
 import forge.adventure.world.WorldSave;
 import forge.gui.GuiBase;
+import forge.util.MyRandom;
+
+import static forge.adventure.data.PointOfInterestData.getPointOfInterest;
 
 /**
  * Base class to render a player sprite on a map
@@ -191,6 +200,13 @@ public abstract class GameStage extends Stage {
             }
             setDebugAll(true);
             player.setBoundDebug(true);
+        }
+        if (keycode == Input.Keys.F2) {
+            TileMapScene S = ((TileMapScene)SceneType.TileMapScene.instance);
+            PointOfInterestData P = PointOfInterestData.getPointOfInterest("DEBUGZONE");
+            PointOfInterest PoI = new PointOfInterest(P,new Vector2(0,0), MyRandom.getRandom());
+            S.load(PoI);
+            Forge.switchScene(S);
         }
         if (keycode == Input.Keys.F11) {
             debugCollision(false);
