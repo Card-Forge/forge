@@ -19,6 +19,13 @@
 		"a": 1
 	}
 },
+"com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable": {
+	"touchKnob": {
+		"region": "touchKnob",
+		"minWidth": 40,
+		"minHeight": 40
+	}
+},
 "com.ray3k.tenpatch.TenPatchDrawable": {
 	"paper10Patch": {
 		"region": "map",
@@ -389,16 +396,11 @@
 		"cursor": "cursor",
 		"selection": "select"
 	}
-},
-"com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle": {
-	"default": {
-		"label": "default"
-	}
-},
+}, 
 "com.badlogic.gdx.scenes.scene2d.ui.Touchpad$TouchpadStyle": {
 	"default": {
-		"background": "thinwindow",
-		"knob": "unpressed-hover"
+		"background": "touchBackground",
+		"knob": "touchKnob"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Tree$TreeStyle": {

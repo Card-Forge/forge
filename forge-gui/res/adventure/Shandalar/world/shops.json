@@ -184,7 +184,7 @@
 "sprite":"AzoriusShop",
   "rewards": [
     {
-      "count":8,
+      "count":4,
       "colors": ["white","blue"]
     },
     {

@@ -227,8 +227,8 @@ public abstract class GameStage extends Stage {
         camera.zoom += (amountY * 0.03);
         if (camera.zoom < 0.3f)
             camera.zoom = 0.3f;
-        if (camera.zoom > 1f)
-            camera.zoom = 1f;
+        if (camera.zoom > 1.5f)
+            camera.zoom = 1.5f;
         return super.scrolled(amountX, amountY);
     }
 
