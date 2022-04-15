@@ -1,0 +1,10 @@
+Name:Ognis, the Dragon's Lash
+ManaCost:1 BR R RG
+Types:Legendary Creature Viashino Warrior
+PT:3/3
+K:Haste
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+withHaste | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a creature you control with haste attacks, create a tapped Treasure token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenTapped$ True
+DeckHas:Ability$Sacrifice|Token & Type$Treasure|Artifact
+DeckNeeds:Ability&Haste
+Oracle:Haste\nWhenever a creature you control with haste attacks, create a tapped Treasure token.
