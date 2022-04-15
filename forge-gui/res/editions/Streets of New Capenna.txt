@@ -311,7 +311,7 @@ ScryfallCode=SNC
 301 U Cormela, Glamour Thief @Samy Halim
 302 U Corpse Appraiser @Justin Hernandez & Alexis Hernandez
 303 U Crew Captain @Rhonda Libbey
-304 U Disciplined Duelist @Serena Maylon
+304 U Disciplined Duelist @Serena Malyon
 305 R Endless Detour @Jack Hughes
 306 R Evelyn, the Covetous @Julie Dillon
 307 M Falco Spara, Pactweaver @Jack Hughes
@@ -321,7 +321,7 @@ ScryfallCode=SNC
 311 R Incandescent Aria @Yoshi Yoshitani
 312 M Jetmir, Nexus of Revels @Julie Dillon
 313 R Jinnie Fay, Jetmir's Second @Jack Hughes
-314 U Lagrella, the Magpie @Serena Maylon
+314 U Lagrella, the Magpie @Serena Malyon
 315 M Lord Xander, the Collector @Tran Nguyen
 316 R Maestros Ascendancy @Artur Treffner
 317 U Maestros Charm @Jérémie Solomon
@@ -341,7 +341,7 @@ ScryfallCode=SNC
 331 U Riveteers Charm @Jérémie Solomon
 332 U Rocco, Cabaretti Caterer @Alix Branwyn
 333 C Shattered Seraph @Erin Vest
-334 R Soul of Emancipation @Serena Maylon
+334 R Soul of Emancipation @Serena Malyon
 335 C Spara's Adjudicators @Yoshi Yoshitani
 336 R Toluz, Clever Conductor @Justin Hernandez & Alexis Hernandez
 337 R Unleash the Inferno @Justin Hernandez & Alexis Hernandez
@@ -376,7 +376,7 @@ ScryfallCode=SNC
 366 U Cormela, Glamour Thief @Samy Halim
 367 U Corpse Appraiser @Justin Hernandez & Alexis Hernandez
 368 U Crew Captain @Rhonda Libbey
-369 U Disciplined Duelist @Serena Maylon
+369 U Disciplined Duelist @Serena Malyon
 370 R Endless Detour @Jack Hughes
 371 R Evelyn, the Covetous @Julie Dillon
 372 M Falco Spara, Pactweaver @Jack Hughes
@@ -386,7 +386,7 @@ ScryfallCode=SNC
 376 R Incandescent Aria @Yoshi Yoshitani
 377 M Jetmir, Nexus of Revels @Julie Dillon
 378 R Jinnie Fay, Jetmir's Second @Jack Hughes
-379 U Lagrella, the Magpie @Serena Maylon
+379 U Lagrella, the Magpie @Serena Malyon
 380 M Lord Xander, the Collector @Tran Nguyen
 381 R Maestros Ascendancy @Artur Treffner
 382 U Maestros Charm @Jérémie Solomon
@@ -406,7 +406,7 @@ ScryfallCode=SNC
 396 U Riveteers Charm @Jérémie Solomon
 397 U Rocco, Cabaretti Caterer @Alix Branwyn
 398 C Shattered Seraph @Erin Vest
-399 R Soul of Emancipation @Serena Maylon
+399 R Soul of Emancipation @Serena Malyon
 400 C Spara's Adjudicators @Yoshi Yoshitani
 401 R Toluz, Clever Conductor @Justin Hernandez & Alexis Hernandez
 402 R Unleash the Inferno @Justin Hernandez & Alexis Hernandez
