@@ -1,0 +1,10 @@
+Name:Exotic Pets
+ManaCost:1 W U
+Types:Instant
+A:SP$ Token | TokenScript$ u_1_1_fish_unblockable | TokenAmount$ 2 | RememberTokens$ True | SubAbility$ DBRepeatEach | SpellDescription$ Create two 1/1 blue Fish creature tokens with "This creature can't be blocked."
+SVar:DBRepeatEach:DB$ RepeatEach | RepeatCounterKind$ Creature.YouCtrl | RepeatSubAbility$ DBPutCounter | SubAbility$ DBCleanup | SpellDescription$ Then for each kind of counter among creatures you control, put a counter of that kind on either of those tokens.
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ Remembered | CounterNum$ 1 | Choices$ Creature.IsRemembered | SpecifyCounter$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token|Counters & Type$Fish
+DeckHints:Ability$Counters
+Oracle:Create two 1/1 blue Fish creature tokens with "This creature can't be blocked." Then for each kind of counter among creatures you control, put a counter of that kind on either of those tokens.
