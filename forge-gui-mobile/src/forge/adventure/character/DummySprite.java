@@ -4,6 +4,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import forge.adventure.stage.MapStage;
 
+/**
+ * DummySprite
+ * Solid map entity. Cannot move or be interacted with, but can be removed from events.
+ */
+
 public class DummySprite extends MapActor {
     private final TextureRegion textureRegion;
     private final MapStage stage;

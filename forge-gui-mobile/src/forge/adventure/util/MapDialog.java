@@ -6,6 +6,10 @@ import com.badlogic.gdx.utils.SerializationException;
 import forge.Forge;
 import forge.adventure.data.DialogData;
 import forge.adventure.stage.MapStage;
+/**
+ * MapDialog
+ * Implements a dialogue/event tree for dialogs.
+ */
 
 public class MapDialog {
     private final MapStage stage;
@@ -110,14 +114,14 @@ public class MapDialog {
         if(data==null) return true;
         for(DialogData.ConditionData condition:data) {
             if(condition.item != null && !condition.item.isEmpty()) { //Check for item.
-                if(Current.player().hasItem(condition.item)) {
-                    return ((condition.not) ? false : true);
-                }
+                if(!Current.player().hasItem(condition.item)) {
+                    if(!condition.not) return false; //Only return on a false.
+                } else if(condition.not) return false;
             }
             if(condition.actorID != 0) { //Check for actor ID.
-                boolean result = stage.lookForID(condition.actorID);
-                if(condition.not) result = !result;
-                return result;
+                if(!stage.lookForID(condition.actorID)){
+                    if(!condition.not) return false; //Same as above.
+                } else if(condition.not) return false;
             }
         }
         return true;

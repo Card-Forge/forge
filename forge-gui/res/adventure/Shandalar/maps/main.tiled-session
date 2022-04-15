@@ -3,13 +3,13 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/barbariancamp_2.tmx",
+    "activeFile": "tileset/main.tsx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "map/main_story",
         "tileset",
         "obj",
-        "map"
+        "map",
+        "map/main_story"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -46,11 +46,11 @@
             }
         },
         "map/barbariancamp_2.tmx": {
-            "scale": 4,
+            "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 366.875,
-                "y": 101.5
+                "x": 217.66666666666666,
+                "y": 180
             }
         },
         "map/barbariancamp_3.tmx": {
@@ -1421,6 +1421,14 @@
                 "y": 319.33333333333326
             }
         },
+        "map/debug_map.tmx": {
+            "scale": 8,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 132.8125,
+                "y": 159.375
+            }
+        },
         "map/djinnpalace_1.tmx": {
             "scale": 4,
             "selectedLayer": 5,
@@ -2054,11 +2062,11 @@
             }
         },
         "map/main_story/black_castle.tmx": {
-            "scale": 3.7663541666666664,
+            "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 218.380949746937,
-                "y": 134.34742926680866
+                "x": 233.25,
+                "y": 311
             }
         },
         "map/main_story/blue_castle.tmx": {
@@ -2070,11 +2078,11 @@
             }
         },
         "map/main_story/colorless_castle.tmx": {
-            "scale": 2,
-            "selectedLayer": 1,
+            "scale": 3,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 260.25,
-                "y": 311.5
+                "x": 179.5,
+                "y": 358
             }
         },
         "map/main_story/crypt.tmx": {
@@ -2087,26 +2095,26 @@
         },
         "map/main_story/final_castle.tmx": {
             "scale": 2,
-            "selectedLayer": 4,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 222.25,
-                "y": 141.5
+                "x": 266.25,
+                "y": 554
             }
         },
         "map/main_story/green_castle.tmx": {
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 214.5,
-                "y": 151
+                "x": 218.5,
+                "y": 308
             }
         },
         "map/main_story/red_castle.tmx": {
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 249.75,
-                "y": 195
+                "x": 272.25,
+                "y": 328
             }
         },
         "map/main_story/unbenannt.tmx": {
@@ -2121,8 +2129,8 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 238.75,
-                "y": 217
+                "x": 228.75,
+                "y": 304.5
             }
         },
         "map/maze_1.tmx": {
@@ -2695,18 +2703,18 @@
             "scale": 2,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 480,
+                "x": 479.75,
                 "y": 272
             }
         },
         "tileset/buildings.tsx": {
-            "scaleInDock": 2,
+            "scaleInDock": 0.75,
             "scaleInEditor": 2
         },
         "tileset/main.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 2,
-            "scaleInEditor": 8
+            "scaleInDock": 1.5,
+            "scaleInEditor": 0.75
         }
     },
     "map.height": 60,
@@ -2716,95 +2724,25 @@
     "map.tileWidth": 16,
     "map.width": 90,
     "openFiles": [
-        "map/main_story/final_castle.tmx",
-        "tileset/main.tsx",
+        "map/debug_map.tmx",
         "tileset/buildings.tsx",
-        "map/portal_1G2.tmx",
-        "map/island_town.tmx",
-        "map/mountain_town.tmx",
-        "map/forest_town.tmx",
-        "map/waste_town.tmx",
-        "map/swamp_town.tmx",
-        "map/plains_town.tmx",
-        "map/main_story/colorless_castle.tmx",
-        "map/main_story/blue_castle.tmx",
-        "map/aerie_1.tmx",
-        "map/cave_13.tmx",
-        "map/cave_14.tmx",
-        "map/cave_15.tmx",
-        "map/cave_16.tmx",
-        "map/cave_16B.tmx",
-        "map/cave_23B10.tmx",
-        "map/cave_23B2.tmx",
-        "map/cave_23B4.tmx",
-        "map/cave_23C5.tmx",
-        "map/cave_3.tmx",
-        "map/cave_25.tmx",
-        "map/cave_25B.tmx",
-        "map/cave_25C.tmx",
-        "map/cave_9.tmx",
-        "map/cave_8.tmx",
-        "map/cave_7.tmx",
-        "map/cave_4.tmx",
-        "map/crypt.tmx",
-        "map/crypt_2.tmx",
-        "map/crypt_3.tmx",
-        "map/crypt_4.tmx",
-        "map/crypt_5.tmx",
-        "map/djinnpalace_1.tmx",
-        "map/djinnpalace_2.tmx",
-        "map/djinnpalace_3.tmx",
-        "map/djinnpalace_3B.tmx",
-        "map/elftown.tmx",
-        "map/evilgrove_1.tmx",
-        "map/evilgrove_2.tmx",
-        "map/evilgrove_3.tmx",
-        "map/factory_1.tmx",
-        "map/factory_2.tmx",
-        "map/factory_3.tmx",
-        "map/factory_4.tmx",
-        "map/evilgrove_4.tmx",
-        "map/evilgrove_5.tmx",
-        "map/magetower_5.tmx",
-        "map/magetower_6.tmx",
-        "map/magetower_7.tmx",
-        "map/vampirecastle_4.tmx",
-        "map/portal_2.tmx",
-        "map/portal_2C.tmx",
-        "map/portal_2C2.tmx",
-        "map/portal_2D.tmx",
-        "map/portal_2E.tmx",
-        "map/portal_2F.tmx",
-        "map/portal_2G.tmx",
-        "map/cave_23I2.tmx",
-        "map/cave_23G4.tmx",
-        "map/cave_23E6.tmx",
-        "map/cave_23C8.tmx",
-        "map/cave_23B1.tmx",
-        "map/cave_2.tmx",
-        "map/cave_16BL2U.tmx",
-        "map/cave_16BL1.tmx",
-        "map/cave_1.tmx",
-        "map/catlair_3.tmx",
-        "map/catlair_2.tmx",
-        "map/catlair_1.tmx",
-        "map/barbariancamp_2.tmx"
+        "tileset/main.tsx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "map/main_story/final_castle.tmx",
-        "tileset/main.tsx",
+        "map/debug_map.tmx",
         "tileset/buildings.tsx",
-        "map/portal_1G2.tmx",
-        "map/island_town.tmx",
-        "map/mountain_town.tmx",
-        "map/forest_town.tmx",
-        "map/waste_town.tmx",
-        "map/swamp_town.tmx",
-        "map/plains_town.tmx",
+        "tileset/main.tsx",
+        "map/main_story/white_castle.tmx",
+        "map/main_story/final_castle.tmx",
+        "map/main_story/black_castle.tmx",
+        "map/main_story/red_castle.tmx",
+        "map/main_story/green_castle.tmx",
+        "map/main_story/blue_castle.tmx",
         "map/main_story/colorless_castle.tmx",
-        "map/main_story/blue_castle.tmx"
+        "map/barbariancamp_2.tmx",
+        "map/portal_1G2.tmx"
     ],
     "resizeMap.removeObjects": true,
     "textEdit.monospace": true

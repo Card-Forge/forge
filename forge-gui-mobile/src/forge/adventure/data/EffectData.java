@@ -1,8 +1,6 @@
 package forge.adventure.data;
 
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.SerializationException;
 import forge.item.IPaperCard;
 import forge.model.FModel;
 

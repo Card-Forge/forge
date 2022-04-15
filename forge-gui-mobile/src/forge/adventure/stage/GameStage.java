@@ -2,7 +2,6 @@ package forge.adventure.stage;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -18,15 +17,11 @@ import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.scene.TileMapScene;
-import forge.adventure.util.Config;
 import forge.adventure.util.Current;
-import forge.adventure.util.TemplateTmxMapLoader;
-import forge.adventure.world.World;
 import forge.adventure.world.WorldSave;
 import forge.gui.GuiBase;
 import forge.util.MyRandom;
 
-import static forge.adventure.data.PointOfInterestData.getPointOfInterest;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 
