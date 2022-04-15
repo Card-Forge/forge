@@ -4,7 +4,7 @@ Types:Enchantment
 K:Hideaway:5
 T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you attack with one or more creatures, create that many 1/1 green and white Citizen creature tokens. Then if you control ten or more creatures, you may play the exiled card without paying its mana cost.
 SVar:TrigToken:DB$ Token | TokenScript$ gw_1_1_citizen | TokenAmount$ X | SubAbility$ DBPlay
-SVar:DBPlay:DB$ Play | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE10 | Defined$ Remembered | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True
+SVar:DBPlay:DB$ Play | ConditionPresent$ Card.IsRemembered | ConditionZone$ Exile | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE10 | Defined$ Remembered | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True
 SVar:X:TriggerObjectsAttackers$Valid Creature.YouCtrl
 SVar:Y:Count$Valid Creature.YouCtrl
 DeckHas:Ability$Token & Type$Citizen

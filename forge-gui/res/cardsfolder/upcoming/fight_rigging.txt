@@ -4,6 +4,7 @@ Types:Enchantment
 K:Hideaway:5
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, put a +1/+1 counter on target creature you control. Then if you control a creature with power 7 or greater, you may play the exiled card without paying its mana cost.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPlay
-SVar:DBPlay:DB$ Play | ConditionPresent$ Creature.YouCtrl+powerGE7 | Defined$ Remembered | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True
+SVar:DBPlay:DB$ Play | ConditionPresent$ Card.IsRemembered | ConditionZone$ Exile | ConditionCheckSVar$ X | Defined$ Remembered | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True
+SVar:X:Count$Valid Creature.YouCtrl+powerGE7
 DeckHas:Ability$Counters
 Oracle:Hideaway 5 (When this enchantment enters the battlefield, look at the top five cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nAt the beginning of combat on your turn, put a +1/+1 counter on target creature you control. Then if you control a creature with power 7 or greater, you may play the exiled card without paying its mana cost.
