@@ -174,6 +174,8 @@ public class GameHUD extends Stage {
         //gamehud bounds
         for(Actor child:ui.getChildren())
         {
+            if(child==touchpad)
+                continue;
             if (Controls.actorContainsVector(child,c)) {
                  super.touchDown(screenX, screenY, pointer, button);
                 return true;
