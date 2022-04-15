@@ -182,7 +182,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         if (Forge.isTextureFilteringEnabled())
             image.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
         TextureRegionDrawable drawable = new TextureRegionDrawable(ImageCache.croppedBorderImage(image));
-        drawable.setMinSize((Scene.GetIntendedHeight() / RewardScene.CARD_WIDTH_TO_HEIGHT) * 0.95f, Scene.GetIntendedHeight() * 0.95f);
+        if(Forge.isLandscapeMode())
+            drawable.setMinSize((Scene.getIntendedHeight() / RewardScene.CARD_WIDTH_TO_HEIGHT) * 0.95f, Scene.getIntendedHeight() * 0.95f);
+        else
+            drawable.setMinSize(Scene.getIntendedWidth()  * 0.95f, Scene.getIntendedWidth()* RewardScene.CARD_WIDTH_TO_HEIGHT * 0.95f);
         toolTipImage = new Image(drawable);
         tooltip = new Tooltip<Image>(toolTipImage);
         holdTooltip = new HoldTooltip(new Image(drawable));
@@ -242,7 +245,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         //Rendering code ends here.
 
         TextureRegionDrawable drawable = new TextureRegionDrawable(result);
-        drawable.setMinSize((Scene.GetIntendedHeight() / RewardScene.CARD_WIDTH_TO_HEIGHT) * 0.95f, Scene.GetIntendedHeight() * 0.95f);
+        if(Forge.isLandscapeMode())
+            drawable.setMinSize((Scene.getIntendedHeight() / RewardScene.CARD_WIDTH_TO_HEIGHT) * 0.95f, Scene.getIntendedHeight() * 0.95f);
+        else
+            drawable.setMinSize(Scene.getIntendedWidth()  * 0.95f, Scene.getIntendedWidth()* RewardScene.CARD_WIDTH_TO_HEIGHT * 0.95f);
         toolTipImage = new Image(drawable);
         tooltip = new Tooltip<Image>(toolTipImage);
         holdTooltip = new HoldTooltip(new Image(drawable));
@@ -367,19 +373,19 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         final Vector3 direction = new Vector3(0, 0, -1);
         final Vector3 up = new Vector3(0, 1, 0);
         //final Vector3 position = new Vector3( getX()+getWidth()/2 , getY()+getHeight()/2, 0);
-        final Vector3 position = new Vector3(Scene.GetIntendedWidth() / 2f, Scene.GetIntendedHeight() / 2f, 0);
+        final Vector3 position = new Vector3(Scene.getIntendedWidth() / 2f, Scene.getIntendedHeight() / 2f, 0);
 
         float fov = 67;
         Matrix4 projection = new Matrix4();
         Matrix4 view = new Matrix4();
-        float hy = Scene.GetIntendedHeight() / 2f;
+        float hy = Scene.getIntendedHeight() / 2f;
         float a = (float) ((hy) / Math.sin(MathUtils.degreesToRadians * (fov / 2f)));
         float height = (float) Math.sqrt((a * a) - (hy * hy));
         position.z = height * 1f;
         float far = height * 2f;
         float near = height * 0.8f;
 
-        float aspect = (float) Scene.GetIntendedWidth() / (float) Scene.GetIntendedHeight();
+        float aspect = (float) Scene.getIntendedWidth() / (float) Scene.getIntendedHeight();
         projection.setToProjection(Math.abs(near), Math.abs(far), fov, aspect);
         view.setToLookAt(position, position.cpy().add(direction), up);
         Matrix4.mul(projection.val, view.val);
@@ -439,15 +445,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         public boolean longPress(Actor actor, float x, float y) {
             //Vector2 point = actor.localToStageCoordinates(tmp.set(x, y));
             tooltip_actor.setX(actor.getRight());
-            if (tooltip_actor.getX() + tooltip_actor.getWidth() > 480)
-                tooltip_actor.setX(actor.getX() - tooltip_actor.getWidth());
-            tooltip_actor.setY(270 / 2 - tooltip_actor.getHeight() / 2);
-            if (!Forge.isLandscapeMode()) {
-                float h = height * 0.65f;
-                tooltip_actor.setX(480/2 - tooltip_actor.getWidth() /2);
-                tooltip_actor.setHeight(h);
-                tooltip_actor.setY(270/2 - h/2);
-            }
+            if (tooltip_actor.getX() + tooltip_actor.getWidth() > Scene.getIntendedWidth())
+                tooltip_actor.setX(Math.max(0,actor.getX() - tooltip_actor.getWidth()));
+            tooltip_actor.setY(Scene.getIntendedHeight() / 2 - tooltip_actor.getHeight() / 2);
             //tooltip_actor.setX(480/2 - tooltip_actor.getWidth()/2); //480 hud width
             //tooltip_actor.setY(270/2-tooltip_actor.getHeight()/2); //270 hud height
             actor.getStage().addActor(tooltip_actor);

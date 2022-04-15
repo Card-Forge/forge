@@ -43,10 +43,9 @@ public class NewGameScene extends UIScene {
     private Label titleL, avatarL, nameL, raceL, genderL, difficultyL, deckL;
     private ImageButton leftArrow, rightArrow;
     private TextButton backButton, startButton;
-    boolean init;
 
     public NewGameScene() {
-        super(Forge.isLandscapeMode() ? "ui/new_game_mobile.json" : "ui/new_game.json");
+        super(Forge.isLandscapeMode() ? "ui/new_game.json" : "ui/new_game_portrait.json");
     }
 
     public boolean start() {
@@ -80,7 +79,6 @@ public class NewGameScene extends UIScene {
     @Override
     public void resLoaded() {
         super.resLoaded();
-        if (!this.init) {
             selectedName = ui.findActor("nameField");
             selectedName.setText(NameGenerator.getRandomName("Any", "Any", ""));
             avatarImage = ui.findActor("avatarPreview");
@@ -176,68 +174,7 @@ public class NewGameScene extends UIScene {
             backButton.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
             startButton = ui.findActor("start");
             startButton.getLabel().setText(Forge.getLocalizer().getMessage("lblStart"));
-            if (!Forge.isLandscapeMode()) {
-                float w = Scene.GetIntendedWidth();
-                float sW = w - 20;
-                float oX = w/2 - sW/2;
-                float h = Scene.GetIntendedHeight();
-                float sH = (h - 10)/12;
 
-                selectedName.setWidth(280);
-                selectedName.setX(w/2- selectedName.getWidth()/2);
-                nameL.setFontScaleX(2);
-
-                titleL.setScale(4, 2);
-                titleL.setFontScale(4, 2);
-                titleL.setX(scrollPane.getX() + 20);
-
-                avatarImage.setScaleX(2);
-                avatarImage.setX(w/2-avatarImage.getWidth());
-
-                leftArrow.getImage().setScaleX(2);
-                leftArrow.setX(selectedName.getX());
-                rightArrow.getImage().setScaleX(2);
-                rightArrow.setX(selectedName.getRight()-(rightArrow.getWidth()*2));
-
-                avatarL.setFontScaleX(2);
-
-                race.setScaleX(2);
-                race.setWidth(140);
-                race.setX(selectedName.getX());
-                raceL.setFontScaleX(2);
-
-                gender.setScaleX(2);
-                gender.setWidth(140);
-                gender.setX(selectedName.getX());
-                genderL.setFontScaleX(2);
-
-                difficulty.setScaleX(2);
-                difficulty.setWidth(140);
-                difficulty.setX(selectedName.getX());
-                difficultyL.setFontScaleX(2);
-
-                deck.setScaleX(2);
-                deck.setWidth(140);
-                deck.setX(selectedName.getX());
-                deckL.setFontScaleX(2);
-
-                scrollPane.setWidth(sW);
-                scrollPane.setHeight(sH*11);
-                scrollPane.setX(oX);
-
-                float bW = w - 165;
-                float bX = w/2 - bW/2;
-                backButton.setWidth(bW/2);
-                backButton.setHeight(20);
-                backButton.setX(bX);
-                startButton.setWidth(bW/2);
-                startButton.setHeight(20);
-                startButton.setX(backButton.getRight());
-
-            }
-            this.init = true;
-        }
-        updateAvatar();
     }
 
     private void rightAvatar() {
@@ -263,6 +200,7 @@ public class NewGameScene extends UIScene {
 
     @Override
     public void enter() {
+        updateAvatar();
         Gdx.input.setInputProcessor(stage); //Start taking input from the ui
     }
 

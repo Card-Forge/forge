@@ -1,22 +1,22 @@
 {
-  "width": 480,
-  "height": 270,
+  "width": 270,
+  "height": 480,
   "yDown": true,
   "elements": [
     {
       "type": "Image",
-      "image": "ui/title_bg.png",
-      "width": 480,
-      "height": 270
+      "image": "ui/title_bg_portrait.png",
+      "width": 270,
+      "height": 480
     },
     {
       "type": "Scroll",
       "name" : "scroll",
       "style": "paper",
-      "x": 56,
-      "y": 10,
+      "x": 10,
+      "y": 60,
       "width": 256,
-      "height": 250
+      "height": 318
     },
     {
       "type": "Label",
@@ -24,9 +24,10 @@
       "text": "Create a Character",
       "width": 128,
       "height": 32,
-      "font": "blackbig",
-      "x": 104,
-      "y": 16
+      "fontSize": 1.5,   
+      "fontColor": "0x000000FF",
+      "x": 16,
+      "y": 66
     },
     {
       "type": "Label",
@@ -34,9 +35,9 @@
       "text": "Avatar:",
       "width": 128,
       "height": 32,
-      "font" : "black",
-      "x": 75,
-      "y": 58
+      "fontColor": "0x000000FF",
+      "x": 16,
+      "y": 108
     },
     {
       "type": "Label",
@@ -44,9 +45,9 @@
       "text": "Name:",
       "width": 128,
       "height": 32,
-      "font" : "black",
-      "x": 75,
-      "y": 90
+      "fontColor": "0x000000FF",
+      "x": 16,
+      "y": 140
     },
     {
       "type": "Label",
@@ -54,9 +55,9 @@
       "text": "Race:",
       "width": 128,
       "height": 32,
-      "font" : "black",
-      "x": 75,
-      "y": 124
+      "fontColor": "0x000000FF",
+      "x": 16,
+      "y": 174
     },
     {
       "type": "Label",
@@ -64,9 +65,9 @@
       "text": "Gender:",
       "width": 128,
       "height": 32,
-      "font" : "black",
-      "x": 75,
-      "y": 154
+      "fontColor": "0x000000FF",
+      "x": 16,
+      "y": 204
     },
     {
       "type": "Label",
@@ -74,9 +75,9 @@
       "text": "Difficulty:",
       "width": 128,
       "height": 32,
-      "font" : "black",
-      "x": 75,
-      "y": 186
+      "fontColor": "0x000000FF",
+      "x": 16,
+      "y": 236
     },
     {
       "type": "Label",
@@ -85,93 +86,92 @@
       "width": 128,
       "height": 32,
       "font" : "black",
-      "x": 75,
-      "y": 218
+      "x": 16,
+      "y": 268
     },
     {
       "type": "ImageButton",
       "name": "leftAvatar",
       "style": "leftarrow",
-      "width": 16,
-      "height": 16,
-      "x": 164,
-      "y": 64
+      "width": 32,
+      "height": 32,
+      "x": 116,
+      "y": 114
     },
     {
       "type": "Image",
       "name": "avatarPreview",
       "width": 48,
       "height": 48,
-      "x": 196,
-      "y": 48
+      "x": 156,
+      "y": 98
     },
     {
       "type": "ImageButton",
       "name": "rightAvatar",
       "style": "rightarrow",
-      "width": 16,
-      "height": 16,
-      "x": 260,
-      "y": 64
+      "width": 28,
+      "height": 28,
+      "x": 212,
+      "y": 114
     },
     {
       "type": "TextField",
       "name": "nameField",
-      "align": 1,
-      "width": 112,
-      "height": 16,
-      "x": 164,
-      "y": 96
+      "width": 165,
+      "height": 28,
+      "x": 96,
+      "y": 146
     },
     {
       "type": "Selector",
       "name": "race",
-      "width": 112,
-      "height": 16,
-      "x": 164,
-      "y": 128
+      "width": 170,
+      "height": 28,
+      "x": 96,
+      "y": 178
     },
     {
       "type": "Selector",
       "name": "gender",
-      "width": 112,
-      "height": 16,
-      "x": 164,
-      "y": 160
+      "width": 170,
+      "height": 28,
+      "x": 96,
+      "y": 210
     },
     {
       "type": "Selector",
       "name": "difficulty",
-      "width": 112,
-      "height": 16,
-      "x": 164,
-      "y": 192
+      "width": 170,
+      "height": 28,
+      "x": 96,
+      "y": 242
     },
     {
       "type": "Selector",
       "name": "deck",
-      "width": 112,
-      "height": 16,
-      "x": 164,
-      "y": 224
+      "width": 170,
+      "height": 28,
+      "x": 96,
+      "y": 274
     },
     {
       "type": "TextButton",
       "name": "back",
       "text": "Back",
-      "width": 100,
-      "height": 30,
-      "x": 348,
-      "y": 85
+      "width": 64,
+      "height": 28,
+      "x": 32,
+      "y": 320
     },
     {
       "type": "TextButton",
       "name": "start",
       "text": "Start",
-      "width": 100,
-      "height": 30,
-      "x": 348,
-      "y": 155
+      "width": 64,
+      "height": 32,
+      "x": 165,
+      "y": 320
     }
   ]
 }

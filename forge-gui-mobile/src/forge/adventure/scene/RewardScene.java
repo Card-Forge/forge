@@ -28,7 +28,6 @@ import forge.sound.SoundSystem;
 public class RewardScene extends UIScene {
     private TextButton doneButton;
     private Label goldLabel;
-    boolean init;
     public enum Type {
         Shop,
         Loot
@@ -36,12 +35,12 @@ public class RewardScene extends UIScene {
 
     Type type;
     Array<Actor> generated = new Array<>();
-    static public final float CARD_WIDTH = Forge.isLandscapeMode() ? 550f : 200f;
-    static public final float CARD_HEIGHT = Forge.isLandscapeMode() ? 400f : 300f;
+    static public final float CARD_WIDTH =550f ;
+    static public final float CARD_HEIGHT = 400f;
     static public final float CARD_WIDTH_TO_HEIGHT = CARD_WIDTH / CARD_HEIGHT;
 
     public RewardScene() {
-        super(Forge.isLandscapeMode() ? "ui/items_mobile.json" : "ui/items.json");
+        super(Forge.isLandscapeMode() ? "ui/items.json" : "ui/items_portrait.json");
     }
 
     boolean doneClicked = false;
@@ -95,7 +94,6 @@ public class RewardScene extends UIScene {
     @Override
     public void resLoaded() {
         super.resLoaded();
-        if(!this.init) {
             goldLabel=ui.findActor("gold");
             ui.onButtonPress("done", new Runnable() {
                 @Override
@@ -104,8 +102,6 @@ public class RewardScene extends UIScene {
                 }
             });
             doneButton = ui.findActor("done");
-            this.init = true;
-        }
     }
 
     @Override
@@ -135,10 +131,16 @@ public class RewardScene extends UIScene {
         if(type==Type.Shop)
         {
             goldLabel.setText("Gold:"+Current.player().getGold());
+            Actor background = ui.findActor("market_background");
+            if(background!=null)
+                background.setVisible(true);
         }
         else
         {
             goldLabel.setText("");
+            Actor background = ui.findActor("market_background");
+            if(background!=null)
+                background.setVisible(false);
         }
         // card.setDrawable(new TextureRegionDrawable(new Texture(Res.CurrentRes.GetFile("ui/transition.png"))));
 
@@ -160,13 +162,6 @@ public class RewardScene extends UIScene {
             case Shop:
                 doneButton.setText(Forge.getLocalizer().getMessage("lblLeave"));
                 goldLabel.setText("Gold:"+Current.player().getGold());
-                float w = 480 - (goldLabel.getPrefWidth() + 10);
-                goldLabel.setPosition(w, 250);
-                if (!Forge.isLandscapeMode()) {
-                    goldLabel.setFontScaleX(2);
-                    w = 480/2 - goldLabel.getPrefWidth();
-                    goldLabel.setPosition(w, 250);
-                }
                 break;
             case Loot:
                 goldLabel.setText("");
@@ -192,7 +187,7 @@ public class RewardScene extends UIScene {
             }
         }
 
-        cardHeight = Forge.isLandscapeMode() ? bestCardHeight * 0.90f : bestCardHeight * 0.65f;
+        cardHeight = bestCardHeight * 0.90f ;
         cardWidth = bestCardHeight / CARD_WIDTH_TO_HEIGHT;
 
         yOff += (targetHeight - (cardHeight * numberOfRows)) / 2f;

@@ -13,10 +13,9 @@ import forge.adventure.util.Current;
 public class InnScene extends UIScene {
     TextButton heal, sell, leave;
     Image healIcon, sellIcon, leaveIcon;
-    boolean init;
 
     public InnScene() {
-        super("ui/inn.json");
+        super(Forge.isLandscapeMode() ? "ui/inn.json" : "ui/inn_portrait.json");
     }
 
     public void done() {
@@ -36,7 +35,6 @@ public class InnScene extends UIScene {
     @Override
     public void resLoaded() {
         super.resLoaded();
-        if (!this.init) {
             ui.onButtonPress("done", new Runnable() {
                 @Override
                 public void run() {
@@ -65,13 +63,7 @@ public class InnScene extends UIScene {
             leaveIcon = ui.findActor("leaveIcon");
             healIcon = ui.findActor("healIcon");
             sellIcon = ui.findActor("sellIcon");
-            if (!Forge.isLandscapeMode()) {
-                sellIcon.setHeight(70);
-                healIcon.setHeight(70);
-                leaveIcon.setHeight(70);
-            }
-            this.init = true;
-        }
+
     }
 
     private void sell() {

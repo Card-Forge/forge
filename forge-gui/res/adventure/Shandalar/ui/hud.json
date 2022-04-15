@@ -7,44 +7,53 @@
       "type": "Image",
       "name": "gamehud",
       "width": 64,
-      "height": 206,
+      "height": 270,
       "image": "ui/hud.png",
       "x": 416,
-      "y": 64
+      "y": 0
     },
     {
       "type": "Image",
       "name": "map",
-      "width": 64,
-      "height": 64,
-      "x": 416,
+      "width": 80,
+      "height": 80,
+      "x": 0,
       "y": 0
     },
     {
       "type": "Image",
       "name": "mapborder",
       "image": "ui/minimap.png",
-      "width": 64,
-      "height": 64,
-      "x": 416,
+      "width": 80,
+      "height": 80,
+      "x": 0,
       "y": 0
     },
     {
       "type": "Image",
+      "name": "blank",
+      "image": "ui/blank.png",
+      "width": 46,
+      "height": 46,
+      "x": 425,
+      "y": 10
+    },
+    {
+      "type": "Image",
       "name": "avatar",
-      "width": 32,
-      "height": 32,
-      "x": 432,
-      "y": 80
+      "width": 46,
+      "height": 46,
+      "x": 425,
+      "y": 10
     },
     {
       "type": "Image",
       "name": "avatarborder",
       "image": "ui/avatarhud.png",
-      "width": 32,
-      "height": 32,
-      "x": 432,
-      "y": 80
+      "width": 46,
+      "height": 46,
+      "x": 425,
+      "y": 10
     },
     {
       "type": "Label",
@@ -52,8 +61,8 @@
       "font": "default",
       "width": 64,
       "height": 16,
-      "x": 448,
-      "y": 128
+      "x": 442,
+      "y": 64
     },
     {
       "type": "Label",
@@ -61,44 +70,45 @@
       "font": "default",
       "width": 64,
       "height": 16,
-      "x": 448,
-      "y": 144
+      "x": 442,
+      "y": 82
     },
     {
       "type": "TextButton",
       "name": "deck",
       "text": "Deck",
-      "width": 32,
-      "height": 18,
-      "x": 432,
-      "y": 176
-    },      
+      "width": 40,
+      "height": 36,
+      "x": 428,
+      "y": 106
+    }, 
     {
       "type": "TextButton",
       "name": "inventory",
       "text": "Inventory",
-      "width": 32,
-      "height": 18,
-      "x": 432,
-      "y": 198
+      "width": 40,
+      "height": 36,
+      "x": 428,
+      "y": 146
     },
+    
     {
       "type": "TextButton",
       "name": "statistic",
       "text": "Status",
-      "width": 32,
-      "height": 18,
-      "x": 432,
-      "y": 220
+      "width": 40,
+      "height": 36,
+      "x": 428,
+      "y": 186
     },
     {
       "type": "TextButton",
       "name": "menu",
       "text": "Menu",
-      "width": 32,
-      "height": 18,
-      "x": 432,
-      "y": 242
+      "width": 40,
+      "height": 36,
+      "x": 428,
+      "y": 226
     }
   ]
 }

@@ -31,10 +31,9 @@ public class PlayerStatisticScene extends UIScene {
     Label playerName;
     TextButton back;
     private Table enemiesGroup;
-    boolean init;
 
     public PlayerStatisticScene() {
-        super("ui/statistic.json");
+        super(Forge.isLandscapeMode() ? "ui/statistic.json" : "ui/statistic_portrait.json");
     }
 
 
@@ -107,8 +106,6 @@ public class PlayerStatisticScene extends UIScene {
             Image enemyImage = new Image();
             enemyImage.setDrawable(new TextureRegionDrawable(new EnemySprite(data).getAvatar()));
             enemyImage.setSize(8, 8);
-            if (!Forge.isLandscapeMode())
-                enemyImage.setScaleX(2);
 
             enemiesGroup.add(enemyImage).align(Align.center).space(3, 10, 3, 10);
             enemiesGroup.add((data.name)).fillX().align(Align.center).fillX().space(3, 10, 3, 10);
@@ -118,60 +115,12 @@ public class PlayerStatisticScene extends UIScene {
             enemiesGroup.row().space(8);
         }
 
-        if (!Forge.isLandscapeMode()) {
-            float w = Scene.GetIntendedWidth();
-            back.setHeight(20);
-            back.setX(w / 2 - back.getWidth() / 2);
-            back.setY(0);
-            ScrollPane enemies = ui.findActor("enemies");
-            enemies.setWidth(w - 20);
-            enemies.setX(w / 2 - enemies.getWidth() / 2);
-            enemies.setHeight(150);
-            enemies.setY(21);
-            ScrollPane stats = ui.findActor("stats");
-            stats.setWidth(w - 20);
-            stats.setX(w / 2 - enemies.getWidth() / 2);
-            stats.setHeight(90);
-            stats.setY(enemies.getY() + 153);
-            avatar.setScaleX(2);
-            avatar.setX(40);
-            avatar.setY(stats.getY() + 15);
-            avatarBorder.setScaleX(2);
-            avatarBorder.setX(40);
-            avatarBorder.setY(stats.getY() + 15);
-            playerName.setX(avatar.getRight() + 105);
-            playerName.getStyle().font.getData().setScale(2, 1);
-            playerName.setY(avatar.getY() + 45);
-            wins.setY(avatar.getY() + 30);
-            wins.setX(avatar.getRight() + 105);
-            totalWins.setY(wins.getY());
-            totalWins.setX(wins.getRight() + 85);
-            loss.setY(avatar.getY() + 15);
-            loss.setX(avatar.getRight() + 105);
-            totalLoss.setX(loss.getRight() + 85);
-            totalLoss.setY(loss.getY());
-            winloss.setY(avatar.getY());
-            winloss.setX(avatar.getRight() + 105);
-            lossWinRatio.setY(winloss.getY());
-            lossWinRatio.setX(winloss.getRight() + 85);
-            lifeIcon.setScaleX(2);
-            lifeIcon.setY(stats.getY() + 5);
-            lifeIcon.setX(wins.getX()-35);
-            life.setX(lifeIcon.getX() + 35);
-            life.setY(lifeIcon.getY());
-            goldIcon.setScaleX(2);
-            goldIcon.setY(stats.getY() + 5);
-            goldIcon.setX(totalWins.getX()-35);
-            money.setY(goldIcon.getY());
-            money.setX(goldIcon.getX() + 35);
-        }
 
     }
 
     @Override
     public void resLoaded() {
         super.resLoaded();
-        if (!this.init) {
             enemiesGroup = new Table(Controls.GetSkin());
             enemiesGroup.row();
             ui.onButtonPress("return", new Runnable() {
@@ -200,8 +149,6 @@ public class PlayerStatisticScene extends UIScene {
             back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
             ScrollPane scrollPane = ui.findActor("enemies");
             scrollPane.setActor(enemiesGroup);
-            this.init = true;
-        }
     }
 
     @Override

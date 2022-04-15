@@ -13,10 +13,9 @@ import forge.adventure.world.WorldSave;
  */
 public class StartScene extends UIScene {
     TextButton saveButton, resumeButton, newGameButton, newGameButtonPlus, loadButton, settingsButton, exitButton, switchButton;
-    boolean init;
 
     public StartScene() {
-        super("ui/start_menu_mobile.json");
+        super(Forge.isLandscapeMode()?"ui/start_menu.json":"ui/start_menu_portrait.json");
 
     }
 
@@ -83,44 +82,15 @@ public class StartScene extends UIScene {
     @Override
     public void resLoaded() {
         super.resLoaded();
-        if (!this.init) {
-            ui.onButtonPress("Start", new Runnable() {
-                @Override
-                public void run() {
-                    StartScene.this.NewGame();
-                }
-            });
+            ui.onButtonPress("Start", () -> StartScene.this.NewGame());
             ui.onButtonPress("Start+", () -> NewGamePlus());
-            ui.onButtonPress("Load", new Runnable() {
-                @Override
-                public void run() {
-                    StartScene.this.Load();
-                }
-            });
-            ui.onButtonPress("Save", new Runnable() {
-                @Override
-                public void run() {
-                    StartScene.this.Save();
-                }
-            });
-            ui.onButtonPress("Resume", new Runnable() {
-                @Override
-                public void run() {
-                    StartScene.this.Resume();
-                }
-            });
-            ui.onButtonPress("Settings", new Runnable() {
-                @Override
-                public void run() {
-                    StartScene.this.settings();
-                }
-            });
-            ui.onButtonPress("Exit", new Runnable() {
-                @Override
-                public void run() {
-                    StartScene.this.Exit();
-                }
-            });
+            ui.onButtonPress("Load", () -> StartScene.this.Load());
+            ui.onButtonPress("Save", () -> StartScene.this.Save());
+            ui.onButtonPress("Resume", () -> StartScene.this.Resume());
+            ui.onButtonPress("Settings", () -> StartScene.this.settings());
+            ui.onButtonPress("Exit", () -> StartScene.this.Exit());
+            ui.onButtonPress("Switch", () -> Forge.switchToClassic());
+
             newGameButton = ui.findActor("Start");
             newGameButton.getLabel().setText(Forge.getLocalizer().getMessage("lblNewGame"));
             newGameButtonPlus = ui.findActor("Start+");
@@ -137,45 +107,9 @@ public class StartScene extends UIScene {
             exitButton.getLabel().setText(Forge.getLocalizer().getMessage("lblExit"));
             switchButton = ui.findActor("Switch");
             switchButton.getLabel().setText(Forge.getLocalizer().getMessage("lblClassic"));
-            if (!Forge.isLandscapeMode()) {
-                float w = Scene.GetIntendedWidth();
-                float bW = w - 165;
-                float oX = w / 2 - bW / 2;
-                newGameButton.setWidth(bW/2);
-                newGameButton.setX(oX);
-                newGameButton.getLabel().setFontScaleX(2);
-                newGameButtonPlus.setWidth(bW/2);
-                newGameButtonPlus.setX(newGameButton.getX()+bW/2);
-                newGameButtonPlus.getLabel().setFontScaleX(2);
-                loadButton.setWidth(bW);
-                loadButton.setX(oX);
-                loadButton.getLabel().setFontScaleX(2);
-                saveButton.setWidth(bW);
-                saveButton.setX(oX);
-                saveButton.getLabel().setFontScaleX(2);
-                resumeButton.setWidth(bW);
-                resumeButton.setX(oX);
-                resumeButton.getLabel().setFontScaleX(2);
-                settingsButton.setWidth(bW);
-                settingsButton.setX(oX);
-                settingsButton.getLabel().setFontScaleX(2);
-                exitButton.setWidth(bW / 2);
-                exitButton.setX(w / 2 - exitButton.getWidth());
-                exitButton.getLabel().setFontScaleX(2);
-                switchButton.setWidth(bW / 2);
-                switchButton.setX(w / 2);
-                switchButton.getLabel().setFontScaleX(2);
-            }
-            ui.onButtonPress("Switch", new Runnable() {
-                @Override
-                public void run() {
-                    Forge.switchToClassic();
-                }
-            });
+
             saveButton.setVisible(false);
             resumeButton.setVisible(false);
-            this.init = true;
-        }
     }
 
     private void NewGamePlus() {

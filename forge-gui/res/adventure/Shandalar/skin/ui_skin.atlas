@@ -6,7 +6,7 @@ filter: Nearest, Nearest
 repeat: none
 BKey_3_14
   rotate: false
-  xy: 51, 321
+  xy: 253, 371
   size: 32, 16
   split: 6, 6, 9, 6
   pad: 0, 0, 0, 0
@@ -15,7 +15,7 @@ BKey_3_14
   index: -1
 BKey_3_9
   rotate: false
-  xy: 1, 271
+  xy: 203, 321
   size: 32, 16
   split: 5, 5, 6, 7
   pad: 0, 0, 0, 0
@@ -52,7 +52,7 @@ MiKrollFantasy(3)
   index: -1
 9patch4
   rotate: false
-  xy: 51, 339
+  xy: 75, 137
   size: 48, 48
   split: 7, 7, 7, 7
   pad: 0, 0, 0, 0
@@ -61,63 +61,63 @@ MiKrollFantasy(3)
   index: -1
 down
   rotate: false
-  xy: 1, 168
+  xy: 97, 119
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 down_down
   rotate: false
-  xy: 1, 150
+  xy: 125, 147
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 left
   rotate: false
-  xy: 1, 132
+  xy: 147, 169
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 left_down
   rotate: false
-  xy: 1, 114
+  xy: 203, 281
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 right
   rotate: false
-  xy: 1, 96
+  xy: 275, 353
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 right_down
   rotate: false
-  xy: 1, 78
+  xy: 305, 371
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 up
   rotate: false
-  xy: 1, 60
+  xy: 1, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 up_down
   rotate: false
-  xy: 1, 42
+  xy: 51, 72
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 cursor
   rotate: false
-  xy: 125, 384
+  xy: 25, 58
   size: 4, 3
   split: 1, 1, 1, 1
   pad: 0, 0, 0, 0
@@ -126,28 +126,28 @@ cursor
   index: -1
 item_frame
   rotate: false
-  xy: 51, 299
+  xy: 75, 115
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 item_frame_hover
   rotate: false
-  xy: 101, 359
+  xy: 125, 165
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 item_frame_selected
   rotate: false
-  xy: 1, 244
+  xy: 203, 299
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 item_frame_selected_hover
   rotate: false
-  xy: 1, 222
+  xy: 253, 349
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
@@ -161,7 +161,7 @@ select
   index: -1
 bar
   rotate: false
-  xy: 101, 381
+  xy: 1, 55
   size: 22, 6
   split: 2, 2, 2, 2
   pad: 0, 0, 0, 0
@@ -170,7 +170,7 @@ bar
   index: -1
 barcontent
   rotate: false
-  xy: 1, 266
+  xy: 51, 108
   size: 20, 3
   split: 0, 0, 0, 0
   orig: 20, 3
@@ -178,14 +178,14 @@ barcontent
   index: -1
 check
   rotate: false
-  xy: 73, 311
+  xy: 115, 127
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
 map
   rotate: false
-  xy: 1, 289
+  xy: 1, 63
   size: 48, 48
   split: 17, 16, 13, 11
   pad: 0, 0, 0, 0
@@ -194,7 +194,7 @@ map
   index: -1
 pressed
   rotate: false
-  xy: 23, 253
+  xy: 253, 331
   size: 14, 16
   split: 4, 4, 6, 5
   pad: 0, 0, 0, 0
@@ -203,7 +203,7 @@ pressed
   index: -1
 pressedMap
   rotate: false
-  xy: 1, 204
+  xy: 1, 37
   size: 16, 16
   split: 6, 6, 4, 3
   pad: 0, 0, 0, 0
@@ -212,7 +212,7 @@ pressedMap
   index: -1
 pressedround
   rotate: false
-  xy: 23, 236
+  xy: 293, 354
   size: 12, 15
   split: 4, 4, 7, 5
   pad: 0, 0, 0, 0
@@ -221,7 +221,7 @@ pressedround
   index: -1
 scroll
   rotate: false
-  xy: 39, 254
+  xy: 1, 2
   size: 6, 15
   split: 2, 2, 3, 4
   pad: 0, 0, 0, 0
@@ -230,7 +230,7 @@ scroll
   index: -1
 scroll2
   rotate: false
-  xy: 85, 330
+  xy: 225, 312
   size: 14, 7
   split: 3, 3, 2, 3
   pad: 0, 0, 0, 0
@@ -239,7 +239,7 @@ scroll2
   index: -1
 thinwindow
   rotate: false
-  xy: 1, 186
+  xy: 51, 90
   size: 16, 16
   split: 2, 2, 2, 2
   pad: 0, 0, 0, 0
@@ -248,14 +248,14 @@ thinwindow
   index: -1
 uncheck
   rotate: false
-  xy: 101, 331
+  xy: 125, 137
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
 unpressed
   rotate: false
-  xy: 35, 271
+  xy: 237, 321
   size: 14, 16
   split: 4, 4, 4, 7
   pad: 0, 0, 0, 0
@@ -264,7 +264,7 @@ unpressed
   index: -1
 unpressed-disable
   rotate: false
-  xy: 1, 24
+  xy: 203, 263
   size: 14, 16
   split: 3, 3, 3, 6
   pad: 0, 0, 0, 0
@@ -273,7 +273,7 @@ unpressed-disable
   index: -1
 unpressed-hover
   rotate: false
-  xy: 51, 281
+  xy: 165, 169
   size: 14, 16
   split: 3, 3, 3, 6
   pad: 0, 0, 0, 0
@@ -282,7 +282,7 @@ unpressed-hover
   index: -1
 unpressedMap
   rotate: false
-  xy: 101, 341
+  xy: 287, 371
   size: 16, 16
   split: 6, 6, 3, 4
   pad: 0, 0, 0, 0
@@ -291,7 +291,7 @@ unpressedMap
   index: -1
 unpressedround
   rotate: false
-  xy: 1, 7
+  xy: 323, 372
   size: 12, 15
   split: 4, 4, 5, 7
   pad: 0, 0, 0, 0
@@ -300,10 +300,24 @@ unpressedround
   index: -1
 windowMain
   rotate: false
-  xy: 1, 339
+  xy: 203, 339
   size: 48, 48
   split: 6, 6, 6, 6
   pad: 0, 0, 0, 0
   orig: 48, 48
+  offset: 0, 0
+  index: -1
+touchBackground
+  rotate: false
+  xy: 1, 187
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+touchKnob
+  rotate: false
+  xy: 1, 113
+  size: 72, 72
+  orig: 72, 72
   offset: 0, 0
   index: -1
