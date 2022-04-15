@@ -26,10 +26,13 @@ public class CharacterSprite extends MapActor {
     private AnimationDirections currentAnimationDir = AnimationDirections.None;
     private Sprite avatar;
 
-    public CharacterSprite(String path) {
-        super(0);
+    public CharacterSprite(int id,String path) {
+        super(id);
         collisionHeight=0.4f;
         load(path);
+    }
+    public CharacterSprite(String path) {
+        this(0,path);
     }
 
     @Override

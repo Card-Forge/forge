@@ -432,6 +432,17 @@ public class MapStage extends GameStage {
         currentMob = null;
         Forge.switchScene(SceneType.RewardScene.instance);
     }
+    public void removeAllEnemies()
+    {
+        List<Integer> idsToRemove=new ArrayList<>();
+        for (MapActor actor : new Array.ArrayIterator<>(actors)) {
+                if (actor instanceof EnemySprite) {
+                    idsToRemove.add(actor.getObjectId());
+                }
+        }
+        for(Integer i:idsToRemove)
+            deleteObject(i);
+    }
 
     @Override
     protected void onActing(float delta) {

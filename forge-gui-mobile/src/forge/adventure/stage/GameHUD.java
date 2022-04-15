@@ -1,6 +1,7 @@
 package forge.adventure.stage;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -39,6 +40,7 @@ public class GameHUD extends Stage {
     private TextButton deckActor, menuActor, statsActor, inventoryActor;
     private UIActor ui;
     private Touchpad touchpad;
+    private Console console;
     float TOUCHPAD_SCALE = 70f;
 
     private GameHUD(GameStage gameStage) {
@@ -63,8 +65,6 @@ public class GameHUD extends Stage {
         gamehud = ui.findActor("gamehud");
 
         miniMapPlayer = new Image(new Texture(Config.instance().getFile("ui/minimap_player.png")));
-        //create touchpad skin
-
         //create touchpad
         touchpad = new Touchpad(10, Controls.GetSkin());
         touchpad.setBounds(15, 15, TOUCHPAD_SCALE, TOUCHPAD_SCALE);
@@ -105,6 +105,10 @@ public class GameHUD extends Stage {
         }) ;
         addActor(ui);
         addActor(miniMapPlayer);
+        console=new Console();
+        console.setBounds(0,0,getWidth(),getHeight()/2);
+        console.setVisible(false);
+        ui.addActor(console);
         WorldSave.getCurrentSave().onLoad(new Runnable() {
             @Override
             public void run() {
@@ -250,5 +254,20 @@ public class GameHUD extends Stage {
             statsActor.getColor().a = 0.5f;
             inventoryActor.getColor().a = 0.5f;
         }
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        if (keycode == Input.Keys.F10) {
+            console.toggle();
+
+            return true;
+        }
+        if (keycode == Input.Keys.F9) {
+            console.toggle();
+
+            return true;
+        }
+        return super.keyDown(keycode);
     }
 }

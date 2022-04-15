@@ -1,6 +1,7 @@
 package forge.adventure.util;
 
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.world.World;
 import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
 /**
@@ -10,6 +11,10 @@ public class Current {
     public static AdventurePlayer player()
     {
         return WorldSave.getCurrentSave().getPlayer();
+    }
+    public static World world()
+    {
+        return WorldSave.getCurrentSave().getWorld();
     }
 
     static Deck deck;
