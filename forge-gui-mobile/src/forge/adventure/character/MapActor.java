@@ -94,6 +94,10 @@ public class MapActor extends Actor {
 
     }
 
+    public int getId(){
+        return objectId;
+    }
+
     public boolean collideWith(MapActor other) {
         return collideWith(other.boundingRect());
     }

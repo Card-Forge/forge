@@ -250,13 +250,13 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         else
             drawable.setMinSize(Scene.getIntendedWidth()  * 0.95f, Scene.getIntendedWidth()* RewardScene.CARD_WIDTH_TO_HEIGHT * 0.95f);
         toolTipImage = new Image(drawable);
-        tooltip = new Tooltip<Image>(toolTipImage);
+        tooltip = new Tooltip<>(toolTipImage);
         holdTooltip = new HoldTooltip(new Image(drawable));
         tooltip.setInstant(true);
-        if (GuiBase.isAndroid())
-            addListener(holdTooltip);
-        else
-            addListener(tooltip);
+        if (frontSideUp()) {
+            if (GuiBase.isAndroid()) addListener(holdTooltip);
+            else addListener(tooltip);
+        }
         generatedTooltip = result; //Dispose of this later.
     }
 

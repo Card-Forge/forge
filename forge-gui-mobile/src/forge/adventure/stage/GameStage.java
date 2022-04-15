@@ -12,12 +12,16 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import forge.Forge;
 import forge.adventure.character.MapActor;
 import forge.adventure.character.PlayerSprite;
+import forge.adventure.data.PointOfInterestData;
+import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.scene.TileMapScene;
 import forge.adventure.util.Current;
 import forge.adventure.world.WorldSave;
 import forge.gui.GuiBase;
+import forge.util.MyRandom;
+
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 
@@ -193,6 +197,13 @@ public abstract class GameStage extends Stage {
             }
             setDebugAll(true);
             player.setBoundDebug(true);
+        }
+        if (keycode == Input.Keys.F2) {
+            TileMapScene S = ((TileMapScene)SceneType.TileMapScene.instance);
+            PointOfInterestData P = PointOfInterestData.getPointOfInterest("DEBUGZONE");
+            PointOfInterest PoI = new PointOfInterest(P,new Vector2(0,0), MyRandom.getRandom());
+            S.load(PoI);
+            Forge.switchScene(S);
         }
         if (keycode == Input.Keys.F11) {
             debugCollision(false);

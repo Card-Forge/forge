@@ -16,20 +16,17 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.SerializationException;
 import forge.Forge;
 import forge.adventure.character.*;
-import forge.adventure.data.RewardData;
-import forge.adventure.data.ShopData;
-import forge.adventure.data.WorldData;
+import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.DuelScene;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.SceneType;
-import forge.adventure.util.Config;
-import forge.adventure.util.Controls;
-import forge.adventure.util.Current;
-import forge.adventure.util.Reward;
+import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundEffectType;
@@ -67,14 +64,18 @@ public class MapStage extends GameStage {
     private Stage dialogStage;
     private boolean dialogOnlyInput;
 
+    private EffectData effect;
+
     public boolean getDialogOnlyInput() {
         return dialogOnlyInput;
     }
     public Dialog getDialog() {
         return dialog;
     }
+
     public void clearIsInMap() {
         isInMap = false;
+        effect = null;
         GameHUD.getInstance().showHideMap(true);
     }
     public void draw (Batch batch) {
@@ -83,9 +84,7 @@ public class MapStage extends GameStage {
         //update camera after all layers got drawn
 
         if (!getRoot().isVisible()) return;
-
         getRoot().draw(batch, 1);
-
     }
 
     public MapLayer getSpriteLayer() {
@@ -181,6 +180,17 @@ public class MapStage extends GameStage {
 
     }
 
+    private void effectDialog(EffectData E){
+        dialog.getContentTable().clear();
+        dialog.getButtonTable().clear();
+        String text = "Strange magical energies flow within this place...\nAll opponents get:\n";
+        text += E.getDescription();
+        dialog.text(text);
+        dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog));
+        dialog.setKeepWithinStage(true);
+        showDialog();
+    }
+
     public void loadMap(TiledMap map, String sourceMap) {
         isLoadingMatch = false;
         isInMap = true;
@@ -198,6 +208,18 @@ public class MapStage extends GameStage {
         tileWidth = Float.parseFloat(map.getProperties().get("tilewidth").toString());
         setBounds(width * tileWidth, height * tileHeight);
         collision = new ArrayList[(int) width][(int) height];
+
+        //Load dungeon effects.
+        if( map.getProperties().get("dungeonEffect") != null && !map.getProperties().get("dungeonEffect").toString().isEmpty()){
+            Json json = new Json();
+            try { effect = json.fromJson(EffectData.class, map.getProperties().get("dungeonEffect").toString()); }
+            catch(SerializationException E) {
+                //JSON parsing could fail. Since this an user written part, assume failure is possible (it happens).
+                System.err.printf("[%s] while loading JSON file for dialog actor. JSON:\n%s\nUsing a default dialog.", E.getMessage(), map.getProperties().get("dungeonEffect").toString());
+                effect = json.fromJson(EffectData.class, "");
+            }
+            effectDialog(effect);
+        }
 
         GetPlayer().stop();
 
@@ -254,12 +276,22 @@ public class MapStage extends GameStage {
                         addMapActor(obj, entry);
                         break;
                     case "reward":
-                        RewardSprite R = new RewardSprite(id, prop.get("reward").toString(), prop.get("sprite").toString());
-                        addMapActor(obj, R);
+                        if (prop.get("reward") != null) {
+                            RewardSprite R = new RewardSprite(id, prop.get("reward").toString(), prop.get("sprite").toString());
+                            addMapActor(obj, R);
+                        }
                         break;
                     case "enemy":
                         EnemySprite mob = new EnemySprite(id, WorldData.getEnemy(prop.get("enemy").toString()));
                         addMapActor(obj, mob);
+                        if(prop.get("dialog") != null && !prop.get("dialog").toString().isEmpty()) {
+                            mob.dialog = new MapDialog(prop.get("dialog").toString(), this, mob.getId());
+                        }
+                        break;
+                    case "dummy": //Does nothing. Mostly obstacles to be removed by ID by switches or such.
+                        TiledMapTileMapObject obj2 = (TiledMapTileMapObject) obj;
+                        DummySprite D = new DummySprite(id, obj2.getTextureRegion(), this);
+                        addMapActor(obj, D);
                         break;
                     case "inn":
                         addMapActor(obj, new OnCollide(new Runnable() {
@@ -278,13 +310,11 @@ public class MapStage extends GameStage {
                         }));
                         break;
                     case "dialog":
-                        if(obj instanceof TiledMapTileMapObject)
-                        {
+                        if(obj instanceof TiledMapTileMapObject) {
                             TiledMapTileMapObject tiledObj = (TiledMapTileMapObject) obj;
-                            DialogActor dialog = new DialogActor(this, id,  prop.get("dialog").toString(),tiledObj.getTextureRegion());
+                            DialogActor dialog = new DialogActor(this, id, prop.get("dialog").toString(), tiledObj.getTextureRegion());
                             addMapActor(obj, dialog);
                         }
-
                         break;
                     case "shop":
                         String shopList = prop.get("shopList").toString();
@@ -304,7 +334,7 @@ public class MapStage extends GameStage {
                             continue;
 
                         ShopData data = shops.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(shops.size));
-                        Array<Reward> ret = new Array<Reward>();
+                        Array<Reward> ret = new Array<>();
                         for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
                             ret.addAll(rdata.generate(false));
                         }
@@ -328,6 +358,7 @@ public class MapStage extends GameStage {
 
     public boolean exit() {
         isLoadingMatch = false;
+        effect = null; //Reset dungeon effects.
         clearIsInMap();
         Forge.switchScene(SceneType.GameScene.instance);
         return true;
@@ -374,7 +405,22 @@ public class MapStage extends GameStage {
             }
         }
         return false;
+    }
 
+    public boolean lookForID(int id){
+        for(MapActor A : new Array.ArrayIterator<>(actors)){
+            if(A.getId() == id)
+                return true;
+        }
+        return false;
+    }
+
+    public EnemySprite getEnemyByID(int id) {
+        for(MapActor A : new Array.ArrayIterator<>(actors)){
+            if(A instanceof EnemySprite && A.getId() == id)
+                return ((EnemySprite) A);
+        }
+        return null;
     }
 
     protected void getReward() {
@@ -398,41 +444,14 @@ public class MapStage extends GameStage {
                 if (actor instanceof EnemySprite) {
                     EnemySprite mob = (EnemySprite) actor;
                     currentMob = mob;
-                    if (mob.getData().deck == null || mob.getData().deck.isEmpty()) {
-                        currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
-                        Gdx.input.vibrate(50);
-                        startPause(0.3f, new Runnable() {
-                            @Override
-                            public void run() {
-                                MapStage.this.getReward();
-                            }
-                        });
-                        break;
-                    } else {
-                        player.setAnimation(CharacterSprite.AnimationTypes.Attack);
-                        mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
-                        Gdx.input.vibrate(50);
-                        Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
-                        SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
-                        if (!isLoadingMatch) {
-                            isLoadingMatch = true;
-                            Forge.setTransitionScreen(new TransitionScreen(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Forge.clearTransitionScreen();
-                                }
-                            }, ScreenUtils.getFrameBufferTexture(), true, false));
-                        }
-                        startPause(0.5f, new Runnable() {
-                            @Override
-                            public void run() {
-                                ((DuelScene) SceneType.DuelScene.instance).setEnemy(mob);
-                                ((DuelScene) SceneType.DuelScene.instance).setPlayer(player);
-                                Forge.switchScene(SceneType.DuelScene.instance);
-                            }
-                        });
-                        break;
+                    if (mob.dialog != null){ //This enemy has something to say. Display a dialog like if it was a DialogActor.
+                        resetPosition();
+                        showDialog();
+                        mob.dialog.activate();
+                    } else { //Duel the enemy.
+                        beginDuel(mob);
                     }
+                    break;
                 } else if (actor instanceof RewardSprite) {
                     Gdx.input.vibrate(50);
                     startPause(0.1f, new Runnable() {
@@ -452,6 +471,34 @@ public class MapStage extends GameStage {
         }
     }
 
+    public void beginDuel(EnemySprite mob){
+        if(mob == null) return;
+        currentMob = mob;
+        player.setAnimation(CharacterSprite.AnimationTypes.Attack);
+        mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
+        Gdx.input.vibrate(50);
+        Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
+        SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
+        if (!isLoadingMatch) {
+            isLoadingMatch = true;
+            Forge.setTransitionScreen(new TransitionScreen(new Runnable() {
+                @Override
+                public void run() {
+                    Forge.clearTransitionScreen();
+                }
+            }, ScreenUtils.getFrameBufferTexture(), true, false));
+        }
+        startPause(0.4f, new Runnable() {
+            @Override
+            public void run() {
+                DuelScene S = ((DuelScene) SceneType.DuelScene.instance);
+                S.setEnemy(mob);
+                S.setPlayer(player);
+                if(isInMap && effect != null) S.setDungeonEffect(effect);
+                Forge.switchScene(SceneType.DuelScene.instance);
+            }
+        });
+    }
 
     public void setPointOfInterest(PointOfInterestChanges change) {
         changes = change;
@@ -460,8 +507,6 @@ public class MapStage extends GameStage {
     public boolean isInMap() {
         return isInMap;
     }
-
-
 
     public void showDialog() {
         dialog.show(dialogStage);

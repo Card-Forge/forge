@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="4425" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="6321" source="../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="114">
   <data encoding="base64" compression="zlib">
    eJztw8EJAAAMA6H7dn/IvF1EwV1NVVVVVVVVVVVVVVVV1R62fUyd
@@ -68,27 +68,117 @@
   </object>
   <object id="56" template="../../obj/gate.tx" x="208" y="1680">
    <properties>
-    <property name="dialog" value="dialogs/red_door.json"/>
+    <property name="dialog">[{
+  &quot;effect&quot;:[],    
+  &quot;name&quot;:&quot;&quot;,
+  &quot;text&quot;:&quot;A big red gate is blocking the path&quot;,
+  &quot;condition&quot;:[],     
+  &quot;options&quot;:[
+    { &quot;name&quot;:&quot;go away&quot; },
+    {      
+      &quot;name&quot;:&quot;unlock with red key&quot;,     
+      &quot;condition&quot;:[ { &quot;item&quot;: &quot;Red Key&quot; } ],    
+      &quot;text&quot;:&quot;The gate is unlocked&quot;,
+      &quot;options&quot;:[
+        {
+          &quot;name&quot;:&quot;continue&quot;,&quot;effect&quot;:[{&quot;removeItem&quot;:&quot;Red Key&quot;,&quot;deleteMapObject&quot;:-1}]
+        }
+      ]
+    }
+  ]
+}]</property>
    </properties>
   </object>
   <object id="57" template="../../obj/gate.tx" x="208" y="1440">
    <properties>
-    <property name="dialog" value="dialogs/blue_door.json"/>
+    <property name="dialog">[{
+    &quot;effect&quot;:[],    
+    &quot;name&quot;:&quot;&quot;,
+    &quot;text&quot;:&quot;A big blue gate is blocking the path&quot;,
+    &quot;condition&quot;:[],     
+    &quot;options&quot;:[
+    {      
+        &quot;name&quot;:&quot;go away&quot; 
+    },
+    {      
+        &quot;name&quot;:&quot;unlock with blue key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Blue Key&quot;}],    
+        &quot;text&quot;:&quot;The gate is unlocked&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;,&quot;effect&quot;:[{&quot;removeItem&quot;:&quot;Blue Key&quot;,&quot;deleteMapObject&quot;:-1}]}]
+    }
+    ]
+    
+}
+]</property>
    </properties>
   </object>
   <object id="58" template="../../obj/gate.tx" x="208" y="1216">
    <properties>
-    <property name="dialog" value="dialogs/green_door.json"/>
+    <property name="dialog">[{
+    &quot;effect&quot;:[],    
+    &quot;name&quot;:&quot;&quot;,
+    &quot;text&quot;:&quot;A big green gate is blocking the path&quot;,
+    &quot;condition&quot;:[],     
+    &quot;options&quot;:[
+    {      
+        &quot;name&quot;:&quot;go away&quot; 
+    },
+    {      
+        &quot;name&quot;:&quot;unlock with green key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Green Key&quot;}],    
+        &quot;text&quot;:&quot;The gate is unlocked&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;,&quot;effect&quot;:[{&quot;removeItem&quot;:&quot;Green Key&quot;,&quot;deleteMapObject&quot;:-1}]}]
+    }
+    ]
+    
+}
+]</property>
    </properties>
   </object>
   <object id="59" template="../../obj/gate.tx" x="208" y="992">
    <properties>
-    <property name="dialog" value="dialogs/white_door.json"/>
+    <property name="dialog">[{
+    &quot;effect&quot;:[],    
+    &quot;name&quot;:&quot;&quot;,
+    &quot;text&quot;:&quot;A big white gate is blocking the path&quot;,
+    &quot;condition&quot;:[],     
+    &quot;options&quot;:[
+    {      
+        &quot;name&quot;:&quot;go away&quot; 
+    },
+    {      
+        &quot;name&quot;:&quot;unlock with white key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;White Key&quot;}],    
+        &quot;text&quot;:&quot;The gate is unlocked&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;,&quot;effect&quot;:[{&quot;removeItem&quot;:&quot;White Key&quot;,&quot;deleteMapObject&quot;:-1}]}]
+    }
+    ]
+    
+}
+]</property>
    </properties>
   </object>
   <object id="60" template="../../obj/gate.tx" x="208" y="768">
    <properties>
-    <property name="dialog" value="dialogs/black_door.json"/>
+    <property name="dialog">[{
+    &quot;effect&quot;:[],    
+    &quot;name&quot;:&quot;&quot;,
+    &quot;text&quot;:&quot;A big black gate is blocking the path&quot;,
+    &quot;condition&quot;:[],     
+    &quot;options&quot;:[
+    {      
+        &quot;name&quot;:&quot;go away&quot; 
+    },
+    {      
+        &quot;name&quot;:&quot;unlock with black key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Black Key&quot;}],    
+        &quot;text&quot;:&quot;The gate is unlocked&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;,&quot;effect&quot;:[{&quot;removeItem&quot;:&quot;Black Key&quot;,&quot;deleteMapObject&quot;:-1}]}]
+    }
+    ]
+    
+}
+]</property>
    </properties>
   </object>
   <object id="62" template="../../obj/treasure.tx" x="208" y="80">
