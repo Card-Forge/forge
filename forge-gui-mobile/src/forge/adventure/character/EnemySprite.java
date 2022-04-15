@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Array;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.RewardData;
 import forge.adventure.util.Current;
+import forge.adventure.util.MapDialog;
 import forge.adventure.util.Reward;
 
 /**
@@ -16,6 +17,7 @@ import forge.adventure.util.Reward;
 public class EnemySprite extends CharacterSprite {
     EnemyData data;
     private int id;
+    public MapDialog dialog;
 
     public EnemySprite(EnemyData enemyData) {
         super(enemyData.sprite);
