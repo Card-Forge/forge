@@ -184,13 +184,13 @@ public class CountersPutEffect extends SpellAbilityEffect {
             CardCollection choices = CardLists.getValidCards(game.getCardsIn(choiceZone), sa.getParam("Choices"),
                     activator, card, sa);
 
+            // TODO might use better message
             String title = Localizer.getInstance().getMessage("lblChooseaCard") + " ";
             if (sa.hasParam("ChoiceTitle")) {
                 title = sa.getParam("ChoiceTitle");
-                // TODO might use better message
-                if (counterType != null) {
-                    title += " (" + counterType.getName() + ")";
-                }
+            }
+            if ((sa.hasParam("ChoiceTitle") || sa.hasParam("SpecifyCounter")) && counterType != null) {
+                title += " (" + counterType.getName() + ")";
             }
 
             Map<String, Object> params = Maps.newHashMap();
