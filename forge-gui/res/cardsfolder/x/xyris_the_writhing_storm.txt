@@ -3,8 +3,8 @@ ManaCost:2 G U R
 Types:Legendary Creature Snake Leviathan
 PT:3/5
 K:Flying
-T:Mode$ Drawn | ValidCard$ Card.OppOwn | NotFirstCardInDrawStep$ True | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an opponent draws a card except the first one they draw in each of their draw steps, create a 1/1 green Snake creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_snake | TokenOwner$ You
+T:Mode$ Drawn | ValidCard$ Card.OppOwn | FirstCardInDrawStep$ False | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an opponent draws a card except the first one they draw in each of their draw steps, create a 1/1 green Snake creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ g_1_1_snake
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you and that player each draw that many cards.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ TriggeredTarget | NumCards$ X

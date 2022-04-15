@@ -1406,9 +1406,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         return CardCollection.combine(getCardsIn(Player.ALL_ZONES), getCardsIn(ZoneType.Stack), inboundTokens);
     }
 
+    public final void resetNumDrawnThisDrawStep() {
+        numDrawnThisDrawStep = 0;
+    }
+
     public final void resetNumDrawnThisTurn() {
         numDrawnThisTurn = 0;
-        numDrawnThisDrawStep = 0;
         view.updateNumDrawnThisTurn(this);
     }
 

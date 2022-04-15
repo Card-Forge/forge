@@ -87,10 +87,16 @@ public class TriggerDrawn extends Trigger {
             }
         }
 
-        if (hasParam("NotFirstCardInDrawStep")) {
+        if (hasParam("FirstCardInDrawStep")) {
             final Player p = ((Player)runParams.get(AbilityKey.Player));
-            if (p.numDrawnThisDrawStep() == 1 && game.getPhaseHandler().is(PhaseType.DRAW, p)) {
-                return false;
+            if (getParam("FirstCardInDrawStep").equals("True")) {
+                if (!game.getPhaseHandler().is(PhaseType.DRAW, p) || p.numDrawnThisDrawStep() > 1) {
+                    return false;
+                }
+            } else {
+                if (p.numDrawnThisDrawStep() == 1 && game.getPhaseHandler().is(PhaseType.DRAW, p)) {
+                    return false;
+                }
             }
         }
 
