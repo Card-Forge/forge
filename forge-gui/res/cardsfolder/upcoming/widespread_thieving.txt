@@ -1,0 +1,11 @@
+Name:Widespread Thieving
+ManaCost:2 R
+Types:Enchantment
+K:Hideaway:5
+T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a multicolored spell, create a Treasure token. Then, you may pay {W}{U}{B}{R}{G}. If you do, you may play the exiled card without paying its mana cost.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | UnlessCost$ W U B R G | UnlessSwitched$ True | UnlessPayer$ You | ConditionPresent$ Card.IsRemembered | ConditionZone$ Exile | Defined$ Remembered | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True
+AI:RemoveDeck:Random
+SVar:BuffedBy:Card.MultiColor
+DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
+Oracle:Hideaway 5 (When this enchantment enters the battlefield, look at the top five cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nWhenever you cast a multicolored spell, create a Treasure token. Then, you may pay {W}{U}{B}{R}{G}. If you do, you may play the exiled card without paying its mana cost.
