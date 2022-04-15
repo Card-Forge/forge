@@ -1,0 +1,9 @@
+Name:Goldhound
+ManaCost:R
+Types:Artifact Creature Treasure Dog
+PT:1/1
+K:First Strike
+K:Menace
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color.
+DeckHas:Ability$Sacrifice
+Oracle:First strike\nMenace (This creature can't be blocked except by two or more creatures.)\n{T}, Sacrifice Goldhound: Add one mana of any color.

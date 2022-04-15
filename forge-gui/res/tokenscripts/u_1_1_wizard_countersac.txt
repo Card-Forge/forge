@@ -1,0 +1,7 @@
+Name:Wizard Token
+ManaCost:no cost
+Types:Creature Wizard
+PT:1/1
+Colors:blue
+A:AB$ Counter | Cost$ 1 Sac<1/CARDNAME> | TargetType$ Spell | ValidTgts$ Card.nonCreature | UnlessCost$ 1 | TgtPrompt$ Select target noncreature spell | SpellDescription$ Counter target noncreature spell unless its controller pays {1}.
+Oracle:{1}, Sacrifice this creature: Counter target noncreature spell unless its controller pays {1}.

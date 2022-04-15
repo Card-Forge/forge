@@ -1,0 +1,6 @@
+Name:Crooked Custodian
+ManaCost:1 B
+Types:Creature Ogre Rogue
+PT:3/2
+K:CARDNAME enters the battlefield tapped.
+Oracle:Crooked Custodian enters the battlefield tapped.
