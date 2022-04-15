@@ -3,5 +3,4 @@ ManaCost:G
 Types:Creature Raccoon Citizen
 PT:1/2
 A:AB$ Pump | Cost$ 2 RW | Defined$ Self | KW$ Double Strike | SpellDescription$ CARDNAME gains double strike until end of turn.
-DeckHints:Type$Raccoon|Citizen
 Oracle:{2}{R/W}: Cabaretti Initiate gains double strike until end of turn.

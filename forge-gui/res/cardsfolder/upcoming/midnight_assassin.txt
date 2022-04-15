@@ -4,5 +4,4 @@ Types:Creature Vampire Assassin
 PT:1/2
 K:Flying
 K:Deathtouch
-DeckHints:Type$Vampire|Assassin
 Oracle:Flying, deathtouch

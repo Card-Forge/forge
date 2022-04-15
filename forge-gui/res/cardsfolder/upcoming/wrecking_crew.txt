@@ -4,5 +4,4 @@ Types:Creature Human Warrior
 PT:4/5
 K:Reach
 K:Trample
-DeckHints:Type$Human|Warrior
 Oracle:Reach, trample
