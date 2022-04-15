@@ -724,8 +724,6 @@ public final class StaticAbilityContinuous {
             }
 
             // add keywords
-            // TODO regular keywords currently don't try to use keyword multiplier
-            // (Although nothing uses it at this time)
             if (addKeywords != null || removeKeywords != null || removeAllAbilities) {
                 List<String> newKeywords = null;
                 if (addKeywords != null) {
