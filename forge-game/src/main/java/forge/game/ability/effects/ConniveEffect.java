@@ -77,7 +77,6 @@ public class ConniveEffect extends SpellAbilityEffect {
             }
 
             discardedMap.put(p, toBeDiscarded);
-            discard(sa, triggerList, true, discardedMap, moveParams);
 
             int numCntrs = CardLists.getValidCardCount(toBeDiscarded, "Card.nonLand", hostCon, host, sa);
 
@@ -88,6 +87,7 @@ public class ConniveEffect extends SpellAbilityEffect {
                 c.addCounter(CounterEnumType.P1P1, numCntrs, p, table);
             }
         }
+        discard(sa, triggerList, true, discardedMap, moveParams);
         table.replaceCounterEffect(game, sa, true);
         triggerList.triggerChangesZoneAll(game, sa);
     }
