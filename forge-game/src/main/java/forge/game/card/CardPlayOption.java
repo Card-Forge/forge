@@ -20,11 +20,12 @@ public final class CardPlayOption {
     private final boolean withFlash;
     private final boolean grantsZonePermissions;
     private final Cost altManaCost;
+    private final boolean altIsAdditional;
 
-    public CardPlayOption(final Player player, final StaticAbility sta, final boolean withoutManaCost, final Cost altManaCost, final boolean withFlash, final boolean grantZonePermissions) {
-        this(player, sta, withoutManaCost ? PayManaCost.NO : PayManaCost.YES, altManaCost, withFlash, grantZonePermissions);
+    public CardPlayOption(final Player player, final StaticAbility sta, final boolean withoutManaCost, final Cost altManaCost, final boolean altIsAdditional, final boolean withFlash, final boolean grantZonePermissions) {
+        this(player, sta, withoutManaCost ? PayManaCost.NO : PayManaCost.YES, altManaCost, altIsAdditional, withFlash, grantZonePermissions);
     }
-    private CardPlayOption(final Player player, final StaticAbility sta, final PayManaCost payManaCost, final Cost altManaCost, final boolean withFlash,
+    private CardPlayOption(final Player player, final StaticAbility sta, final PayManaCost payManaCost, final Cost altManaCost, final boolean altIsAdditional, final boolean withFlash,
                            final boolean grantZonePermissions) {
         this.player = player;
         this.sta = sta;
@@ -32,6 +33,7 @@ public final class CardPlayOption {
         this.withFlash = withFlash;
         this.grantsZonePermissions = grantZonePermissions;
         this.altManaCost = altManaCost;
+        this.altIsAdditional = altIsAdditional;
     }
 
 
@@ -86,9 +88,14 @@ public final class CardPlayOption {
         switch (getPayManaCost()) {
             case YES:
                 if (altManaCost != null) {
-                    String insteadCost = getFormattedAltManaCost();
-                    insteadCost = insteadCost.replace("Pay ","");
-                    sb.append(" (by paying ").append(insteadCost).append(" instead of paying its mana cost");
+                    if (altIsAdditional) {
+                        String desc = sta.getParam("Description");
+                        sb.append(" (").append(desc, desc.indexOf("by "), desc.indexOf("."));
+                    } else {
+                        String insteadCost = getFormattedAltManaCost();
+                        insteadCost = insteadCost.replace("Pay ","");
+                        sb.append(" (by paying ").append(insteadCost).append(" instead of paying its mana cost");
+                    }
                     if (isWithFlash()) {
                         sb.append(" and as though it has flash");
                     }
