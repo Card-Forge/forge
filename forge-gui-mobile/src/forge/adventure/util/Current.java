@@ -25,6 +25,7 @@ public class Current {
     {
         return debug;
     }
+
     public static void setDebug(boolean b) {
         debug=b;
     }

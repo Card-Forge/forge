@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -25,6 +27,14 @@ public class Controls {
     static public TextButton newTextButton(String text) {
 
         return new TextButton(text, GetSkin());
+    }
+    static public Rectangle getBoundingRect(Actor actor) {
+
+        return new Rectangle(actor.getX(),actor.getY(),actor.getWidth(),actor.getHeight());
+    }
+    static public boolean actorContainsVector (Actor actor, Vector2 point) {
+
+        return getBoundingRect(actor).contains(point);
     }
 
     static public SelectBox newComboBox(String[] text, String item, Function<Object, Void> func) {
