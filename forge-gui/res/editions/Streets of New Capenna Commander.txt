@@ -11,11 +11,24 @@ ScryfallCode=NCC
 3 M Kamiz, Obscura Oculus @Chris Rallis
 4 M Kitt Kanto, Mayhem Diva @Fariba Khamseh
 5 M Perrie, the Pulveriser @Joshua Raphael
+39 R Mari, the Killing Quill
+86 M Bennie Bracks, Zoologist @Eric Deschamps
+87 R Tenuous Truce @Kari Christensen
+88 R Swindler's Scheme @Anato Finnstark
+90 R Spiteful Repossession @Stanton Feng
+91 R Boxing Ring @James Paick
+93 M Threefold Signal @Julian Kok Joon Wen
+94 M Bennie Bracks, Zoologist @Eric Deschamps
+95 R Tenuous Truce @Kari Christensen
+96 R Swindler's Scheme @Anato Finnstark
 100 M Anhelo, the Painter @Aurore Folny
+102 M Henzie "Toolbox" Torre @Johannes Voss
 103 M Kamiz, Obscura Oculus @Chris Rallis
 104 M Kitt Kanto, Mayhem Diva @Fariba Khamseh
 105 M Kros, Defense Contractor @Katerina Ladon
 108 M Phabine, Boss's Confidant @Ryan Pancoast
+110 R Vazi, Keen Negotiator
+111 M Threefold Signal @Julian Kok Joon Wen
 186 M Anhelo, the Painter @Aurore Folny
 187 M Henzie "Toolbox" Torre @Johannes Voss
 188 M Kamiz, Obscura Oculus @Chris Rallis
