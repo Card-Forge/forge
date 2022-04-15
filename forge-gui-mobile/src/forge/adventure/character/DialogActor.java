@@ -37,7 +37,7 @@ public class DialogActor extends MapActor{
     public DialogActor(MapStage stage, int id, String dialog, TextureRegion textureRegion) {
         super(id);
         this.stage = stage;
-        if (dialog.equals("") || dialog.equals(" ")){
+        if (!dialog.isEmpty()){
             System.err.printf("Dialog error. Dialog property is empty.\n");
             this.dialogJSON = defaultJSON;
         }
