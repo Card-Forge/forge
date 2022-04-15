@@ -120,7 +120,6 @@ public class PumpAllEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(final SpellAbility sa) {
-        final PlayerCollection tgtPlayers = getTargetPlayers(sa);
         final List<ZoneType> affectedZones = Lists.newArrayList();
         final Game game = sa.getActivatingPlayer().getGame();
 
@@ -134,6 +133,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
         if (!sa.usesTargeting() && !sa.hasParam("Defined")) {
             list = game.getCardsIn(affectedZones);
         } else {
+            final PlayerCollection tgtPlayers = getTargetPlayers(sa);
             list = tgtPlayers.getCardsIn(affectedZones);
         }
 

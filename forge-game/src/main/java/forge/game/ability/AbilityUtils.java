@@ -1981,9 +1981,9 @@ public class AbilityUtils {
             final int lifeTotal = calculateAmount(c, sq[1], ctb);
             int number = 0;
             for (final Player opp : player.getOpponents()) {
-                    if (opp.getLife() == lifeTotal) {
-                            number++;
-                    }
+                if (opp.getLife() == lifeTotal) {
+                    number++;
+                }
             }
             return doXMath(number, expr, c, ctb);
         }
@@ -2826,23 +2826,6 @@ public class AbilityUtils {
                 n |= card.getColor().getColor();
             }
             return doXMath(ColorSet.fromMask(n).countColors(), expr, c, ctb);
-        }
-
-        if (sq[0].startsWith("CreatureType")) {
-            String[] sqparts = l[0].split(" ", 2);
-            final String[] rest = sqparts[1].split(",");
-
-            final CardCollectionView cardsInZones = sqparts[0].length() > 12
-                ? game.getCardsIn(ZoneType.listValueOf(sqparts[0].substring(12)))
-                : game.getCardsIn(ZoneType.Battlefield);
-
-            CardCollection cards = CardLists.getValidCards(cardsInZones, rest, player, c, ctb);
-            final Set<String> creatTypes = Sets.newHashSet();
-
-            for (Card card : cards) {
-                Iterables.addAll(creatTypes, card.getType().getCreatureTypes());
-            }
-            return doXMath(creatTypes.size(), expr, c, ctb);
         }
 
         // TODO move below to handlePaid
