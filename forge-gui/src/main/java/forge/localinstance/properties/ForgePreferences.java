@@ -67,7 +67,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         BRAWL_P6_DECK_STATE(""),
         BRAWL_P7_DECK_STATE(""),
         BRAWL_P8_DECK_STATE(""),
-        UI_STRETCH("false"),
         UI_LANDSCAPE_MODE ("false"),
         UI_MATCHES_PER_GAME("3"),
         UI_COMPACT_MAIN_MENU ("false"),

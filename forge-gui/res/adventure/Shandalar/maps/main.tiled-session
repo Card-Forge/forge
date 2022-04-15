@@ -3,13 +3,13 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tileset/main.tsx",
+    "activeFile": "map/waste_town.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
         "tileset",
+        "map/main_story",
         "obj",
-        "map",
-        "map/main_story"
+        "map"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -1425,8 +1425,8 @@
             "scale": 8,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 132.8125,
-                "y": 159.375
+                "x": 240,
+                "y": 239.875
             }
         },
         "map/djinnpalace_1.tmx": {
@@ -2663,7 +2663,7 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 235.5,
+                "x": 235.33333333333331,
                 "y": 135.66666666666663
             }
         },
@@ -2726,7 +2726,8 @@
     "openFiles": [
         "map/debug_map.tmx",
         "tileset/buildings.tsx",
-        "tileset/main.tsx"
+        "tileset/main.tsx",
+        "map/waste_town.tmx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",
@@ -2734,6 +2735,7 @@
         "map/debug_map.tmx",
         "tileset/buildings.tsx",
         "tileset/main.tsx",
+        "map/waste_town.tmx",
         "map/main_story/white_castle.tmx",
         "map/main_story/final_castle.tmx",
         "map/main_story/black_castle.tmx",
@@ -2741,8 +2743,7 @@
         "map/main_story/green_castle.tmx",
         "map/main_story/blue_castle.tmx",
         "map/main_story/colorless_castle.tmx",
-        "map/barbariancamp_2.tmx",
-        "map/portal_1G2.tmx"
+        "map/barbariancamp_2.tmx"
     ],
     "resizeMap.removeObjects": true,
     "textEdit.monospace": true

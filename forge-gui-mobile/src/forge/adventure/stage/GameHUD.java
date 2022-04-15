@@ -23,8 +23,6 @@ import forge.adventure.util.Current;
 import forge.adventure.util.UIActor;
 import forge.adventure.world.WorldSave;
 import forge.gui.GuiBase;
-import forge.localinstance.properties.ForgePreferences;
-import forge.model.FModel;
 
 /**
  * Stage to handle everything rendered in the HUD
@@ -44,7 +42,7 @@ public class GameHUD extends Stage {
     float TOUCHPAD_SCALE = 70f;
 
     private GameHUD(GameStage gameStage) {
-        super(new ScalingViewport(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_STRETCH)?Scaling.stretch:Scaling.fit, Scene.getIntendedWidth(), Scene.getIntendedHeight()), gameStage.getBatch());
+        super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight()), gameStage.getBatch());
         instance = this;
         this.gameStage = gameStage;
 
@@ -142,12 +140,8 @@ public class GameHUD extends Stage {
 
         float x=(c.x-miniMap.getX())/miniMap.getWidth();
         float y=(c.y-miniMap.getY())/miniMap.getHeight();
-        float mMapX = ui.findActor("map").getX();
-        float mMapY = ui.findActor("map").getY();
-        float mMapT = ui.findActor("map").getTop();
-        float mMapR = ui.findActor("map").getRight();
         //map bounds
-        if (c.x>=mMapX&&c.x<=mMapR&&c.y>=mMapY&&c.y<=mMapT) {
+        if (Controls.actorContainsVector(miniMap,c)) {
             touchpad.setVisible(false);
             if (MapStage.getInstance().isInMap())
                 return true;
@@ -160,12 +154,7 @@ public class GameHUD extends Stage {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button)
-    {
-        return setPosition(screenX, screenY, pointer, button);
-    }
-
-    boolean setPosition(int screenX, int screenY, int pointer, int button) {
-        Vector2 c=new Vector2();
+    {Vector2 c=new Vector2();
         Vector2 touch =new Vector2();
         screenToStageCoordinates(touch.set(screenX, screenY));
         screenToStageCoordinates(c.set(screenX, screenY));
@@ -174,38 +163,28 @@ public class GameHUD extends Stage {
         float y=(c.y-miniMap.getY())/miniMap.getHeight();
 
 
-        float uiX = gamehud.getX();
-        float uiY = gamehud.getY();
-        float uiTop = gamehud.getTop();
-        float uiRight = gamehud.getRight();
-        //gamehud bounds
-        if (c.x>=uiX&&c.x<=uiRight&&c.y>=uiY&&c.y<=uiTop) {
-            super.touchDown(screenX, screenY, pointer, button);
-            return true;
-        }
-
-        float mMapX = miniMap.getX();
-        float mMapY = miniMap.getY();
-        float mMapT = miniMap.getTop();
-        float mMapR = miniMap.getRight();
         //map bounds
-        if (c.x>=mMapX&&c.x<=mMapR&&c.y>=mMapY&&c.y<=mMapT) {
+        if (Controls.actorContainsVector(miniMap,c)) {
             if (MapStage.getInstance().isInMap())
                 return true;
             if(Current.isInDebug())
                 WorldStage.getInstance().GetPlayer().setPosition(x*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),y*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
             return true;
         }
-        //display bounds
-        float displayX = ui.getX();
-        float displayY = ui.getY();
-        float displayT = ui.getTop();
-        float displayR = ui.getRight();
+        //gamehud bounds
+        for(Actor child:ui.getChildren())
+        {
+            if(child==touchpad)
+                continue;
+            if (Controls.actorContainsVector(child,c)) {
+                 super.touchDown(screenX, screenY, pointer, button);
+                return true;
+            }
+        }
+
         //auto follow touchpad
         if (GuiBase.isAndroid()) {
-            if (!(touch.x>=mMapX&&touch.x<=mMapR&&touch.y>=mMapY&&touch.y<=mMapT) // not inside map bounds
-                    && !(touch.x>=uiX&&touch.x<=uiRight&&touch.y>=uiY&&touch.y<=uiTop) //not inside gamehud bounds
-                    && (touch.x>=displayX&&touch.x<=displayR&&touch.y>=displayY&&touch.y<=displayT) //inside display bounds
+            if ( (Controls.actorContainsVector(ui,touch)) //inside display bounds
                     && pointer < 1) { //not more than 1 pointer
                 touchpad.setBounds(touch.x-TOUCHPAD_SCALE/2, touch.y-TOUCHPAD_SCALE/2, TOUCHPAD_SCALE, TOUCHPAD_SCALE);
                 touchpad.setVisible(true);
@@ -215,6 +194,7 @@ public class GameHUD extends Stage {
         }
         return super.touchDown(screenX, screenY, pointer, button);
     }
+
 
     @Override
     public void draw() {

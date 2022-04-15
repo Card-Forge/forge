@@ -216,7 +216,6 @@ public class SettingsScene extends UIScene {
             addCheckBox(Forge.getLocalizer().getMessage("lblAltZoneTabs"), ForgePreferences.FPref.UI_ALT_PLAYERZONETABS);
         }
 
-        addCheckBox("Stretch", ForgePreferences.FPref.UI_STRETCH);//todo localize
         addCheckBox(Forge.getLocalizer().getMessage("lblLandscapeMode"), ForgePreferences.FPref.UI_LANDSCAPE_MODE);
         addCheckBox(Forge.getLocalizer().getMessage("lblAnimatedCardTapUntap"), ForgePreferences.FPref.UI_ANIMATED_CARD_TAPUNTAP);
         if (!GuiBase.isAndroid()) {

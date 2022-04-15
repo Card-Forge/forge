@@ -1,8 +1,13 @@
 package forge.adventure.util;
 
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -17,11 +22,19 @@ import java.util.function.Function;
  */
 public class Controls {
     private static Skin SelectedSkin = null;
-    private static BitmapFont defaultfont, bigfont, miKrollFantasy;
+    private static BitmapFont defaultfont, bigfont;
 
     static public TextButton newTextButton(String text) {
 
         return new TextButton(text, GetSkin());
+    }
+    static public Rectangle getBoundingRect(Actor actor) {
+
+        return new Rectangle(actor.getX(),actor.getY(),actor.getWidth(),actor.getHeight());
+    }
+    static public boolean actorContainsVector (Actor actor, Vector2 point) {
+
+        return getBoundingRect(actor).contains(point);
     }
 
     static public SelectBox newComboBox(String[] text, String item, Function<Object, Void> func) {
@@ -95,8 +108,6 @@ public class Controls {
 
     static public BitmapFont getBitmapFont(String fontName) {
         switch (fontName) {
-            case "MiKrollFantasyBig": //this is used on drawpixmap for gold/life
-                return miKrollFantasy;
             case "blackbig":
             case "big":
                 return bigfont;
@@ -114,14 +125,27 @@ public class Controls {
             FileHandle skinFile = Config.instance().getFile(Paths.SKIN);
             FileHandle atlasFile = skinFile.sibling(skinFile.nameWithoutExtension() + ".atlas");
             TextureAtlas atlas = new TextureAtlas(atlasFile);
-            SelectedSkin.addRegions(atlas);
-
-            SelectedSkin.load(skinFile);
             //font
-            defaultfont = new BitmapFont(Config.instance().getFile(Paths.SKIN).sibling("LanaPixelCJK.fnt"));
-            miKrollFantasy = new BitmapFont(Config.instance().getFile(Paths.SKIN).sibling("MiKrollFantasyBig.fnt"));
-            bigfont = new BitmapFont(Config.instance().getFile(Paths.SKIN).sibling("LanaPixelCJK.fnt"));
-            bigfont.getData().setScale(2, 2);
+            FreeTypeFontGenerator generateFonts=new FreeTypeFontGenerator(Config.instance().getFile(Paths.SKIN_FONT));
+            FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+            parameter.borderWidth=0;
+            parameter.incremental = true;
+            parameter.mono=true;
+            parameter.size=11;
+            parameter.minFilter = Texture.TextureFilter.Nearest;
+            parameter.magFilter = Texture.TextureFilter.Nearest;
+            parameter.color= Color.WHITE;
+
+            defaultfont = generateFonts.generateFont(parameter);
+
+
+            parameter.size=22;
+            parameter.color= Color.WHITE;
+            bigfont = generateFonts.generateFont(parameter);
+            SelectedSkin.add("default",defaultfont);
+            SelectedSkin.add("big",bigfont);
+            SelectedSkin.addRegions(atlas);
+            SelectedSkin.load(skinFile);
         }
         return SelectedSkin;
     }
