@@ -1,18 +1,4 @@
 {
-"com.badlogic.gdx.graphics.g2d.BitmapFont": {
-	"big": {
-		"file": "LanaPixelCJK.fnt"
-	},
-	"black": {
-		"file": "LanaPixelCJK.fnt"
-	},
-	"blackbig": {
-		"file": "LanaPixelCJK.fnt"
-	},
-	"default": {
-		"file": "LanaPixelCJK.fnt"
-	}
-},
 "com.badlogic.gdx.graphics.Color": {
 	"RGBA_0_0_0_255": {
 		"r": 0,
@@ -350,7 +336,7 @@
 "com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle": {
 	"default": {
 		"font": "default",
-		"fontColor": "RGBA_0_0_0_255",
+		"fontColor": "RGBA_255_255_255_255",
 		"overFontColor": "RGBA_0_216_255_255",
 		"disabledFontColor": "RGBA_255_255_255_255",
 		"scrollStyle": "default",
@@ -410,7 +396,7 @@
 		"cursor": "cursor",
 		"selection": "select"
 	}
-}, 
+},
 "com.badlogic.gdx.scenes.scene2d.ui.Touchpad$TouchpadStyle": {
 	"default": {
 		"background": "touchBackground",
