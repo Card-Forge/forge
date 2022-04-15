@@ -5,4 +5,5 @@ PT:1/1
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, put a +1/+1 counter on target creature you control.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters
+SVar:PlayMain1:TRUE
 Oracle:At the beginning of combat on your turn, put a +1/+1 counter on target creature you control.
