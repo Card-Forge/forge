@@ -1,0 +1,8 @@
+Name:Crew Captain
+ManaCost:B R G
+Types:Creature Human Warrior
+PT:4/2
+K:Haste
+S:Mode$ Continuous | Affected$ Card.Self+ThisTurnEntered | AddKeyword$ Indestructible | Description$ CARDNAME has indestructible as long as it entered the battlefield this turn.
+DeckHints:Type$Human|Warrior
+Oracle:Haste\nCrew Captain has indestructible as long as it entered the battlefield this turn.
