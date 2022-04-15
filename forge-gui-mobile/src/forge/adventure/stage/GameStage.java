@@ -27,6 +27,8 @@ import forge.gui.GuiBase;
 import forge.util.MyRandom;
 
 import static forge.adventure.data.PointOfInterestData.getPointOfInterest;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 
 /**
  * Base class to render a player sprite on a map
@@ -59,7 +61,7 @@ public abstract class GameStage extends Stage {
     }
 
     public GameStage() {
-        super(new ScalingViewport(Scaling.stretch, Scene.GetIntendedWidth(), Scene.GetIntendedHeight(), new OrthographicCamera()));
+        super(new ScalingViewport(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_STRETCH)?Scaling.stretch:Scaling.fit, Scene.getIntendedWidth(), Scene.getIntendedHeight(), new OrthographicCamera()));
         WorldSave.getCurrentSave().onLoad(new Runnable() {
             @Override
             public void run() {
@@ -146,8 +148,8 @@ public abstract class GameStage extends Stage {
         else
             player.setMoveModifier(1);*/
 
-        camera.position.x = Math.min(Math.max(Scene.GetIntendedWidth() / 2f, player.pos().x), getViewport().getWorldWidth() - Scene.GetIntendedWidth() / 2f);
-        camera.position.y = Math.min(Math.max(Scene.GetIntendedHeight() / 2f, player.pos().y), getViewport().getWorldHeight() - Scene.GetIntendedHeight() / 2f);
+        camera.position.x = Math.min(Math.max(Scene.getIntendedWidth() / 2f, player.pos().x), getViewport().getWorldWidth() - Scene.getIntendedWidth() / 2f);
+        camera.position.y = Math.min(Math.max(Scene.getIntendedHeight() / 2f, player.pos().y), getViewport().getWorldHeight() - Scene.getIntendedHeight() / 2f);
 
 
         onActing(delta);
@@ -239,8 +241,8 @@ public abstract class GameStage extends Stage {
         if (isPaused())
             return true;
         camera.zoom += (amountY * 0.03);
-        if (camera.zoom < 0.2f)
-            camera.zoom = 0.2f;
+        if (camera.zoom < 0.3f)
+            camera.zoom = 0.3f;
         if (camera.zoom > 1.5f)
             camera.zoom = 1.5f;
         return super.scrolled(amountX, amountY);

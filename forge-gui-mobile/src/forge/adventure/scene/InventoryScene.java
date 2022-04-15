@@ -30,10 +30,9 @@ public class InventoryScene  extends UIScene {
     Button selected;
     Button deleteButton;
     Texture equipOverlay;
-    boolean init;
     int columns=0;
     public InventoryScene() {
-        super("ui/inventory.json");
+        super(Forge.isLandscapeMode() ? "ui/inventory.json" : "ui/inventory_portrait.json");
     }
 
     public void done() {
@@ -64,7 +63,6 @@ public class InventoryScene  extends UIScene {
     @Override
     public void resLoaded() {
         super.resLoaded();
-        if (!this.init) {
             equipOverlay = new Texture(Config.instance().getFile(Paths.ITEMS_EQUIP));
             ui.onButtonPress("return", () -> done());
             leave = ui.findActor("return");
@@ -150,21 +148,6 @@ public class InventoryScene  extends UIScene {
             itemDescription.setWrap(true);
             //makes confirm dialog hidden immediately when you open inventory first time..
             confirm.getColor().a = 0;
-            float bw = scrollPane.getWidth() / 3;
-            deleteButton.setX(scrollPane.getX());
-            deleteButton.setWidth(bw);
-            equipButton.setX(scrollPane.getX()+bw);
-            equipButton.setWidth(bw);
-            leave.setX(equipButton.getX()+bw);
-            leave.setWidth(bw);
-            if (!Forge.isLandscapeMode()) {
-                confirm.getTitleLabel().setFontScaleX(2);
-                itemDescription.setFontScaleX(2);
-            }
-
-
-            this.init = true;
-        }
     }
 
     private void setSelected(Button actor) {

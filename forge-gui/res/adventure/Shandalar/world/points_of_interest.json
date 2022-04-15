@@ -1,4 +1,12 @@
-[
+[       
+  {
+    "name": "Final Castle",
+    "count": 1,
+    "radiusFactor": 0.00,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "final_castle",
+    "map": "maps/map/main_story/final_castle.tmx"
+  },
   {
     "name": "Colorless Castle",
     "count": 1,
@@ -46,14 +54,6 @@
     "spriteAtlas": "maps/tileset/buildings.atlas",
     "sprite": "blue_castle",
     "map": "maps/map/main_story/blue_castle.tmx"
-  },
-  {
-    "name": "Final Castle",
-    "count": 1,
-    "radiusFactor": 0.00,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "final_castle",
-    "map": "maps/map/main_story/final_castle.tmx"
   },
   {
     "name": "Waste Town",

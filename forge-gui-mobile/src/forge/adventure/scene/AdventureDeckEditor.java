@@ -616,19 +616,9 @@ import java.util.Map;
             @Override
             protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
                 if (!needsCommander() && !canOnlyBePartnerCommander(card)) {
-                    addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), Forge.getLocalizer().getMessage("lblTo") + " " + parentScreen.getMainDeckPage().cardManager.getCaption(), parentScreen.getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
-                        @Override
-                        public void run(Integer result) {
-                            if (result == null || result <= 0) { return; }
-
-                            if (!cardManager.isInfinite()) {
-                                removeCard(card, result);
-                            }
-                            parentScreen.getMainDeckPage().addCard(card, result);
-                        }
-                    });
-                    if (parentScreen.getSideboardPage() != null) {
-                        addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), Forge.getLocalizer().getMessage("lbltosideboard"), parentScreen.getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
+                    if(!parentScreen.isShop)
+                    {
+                        addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), Forge.getLocalizer().getMessage("lblTo") + " " + parentScreen.getMainDeckPage().cardManager.getCaption(), parentScreen.getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
                             @Override
                             public void run(Integer result) {
                                 if (result == null || result <= 0) { return; }
@@ -636,9 +626,22 @@ import java.util.Map;
                                 if (!cardManager.isInfinite()) {
                                     removeCard(card, result);
                                 }
-                                parentScreen.getSideboardPage().addCard(card, result);
+                                parentScreen.getMainDeckPage().addCard(card, result);
                             }
                         });
+                        if (parentScreen.getSideboardPage() != null) {
+                            addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), Forge.getLocalizer().getMessage("lbltosideboard"), parentScreen.getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
+                                @Override
+                                public void run(Integer result) {
+                                    if (result == null || result <= 0) { return; }
+
+                                    if (!cardManager.isInfinite()) {
+                                        removeCard(card, result);
+                                    }
+                                    parentScreen.getSideboardPage().addCard(card, result);
+                                }
+                            });
+                        }
                     }
                     if(parentScreen.isShop)
                     {

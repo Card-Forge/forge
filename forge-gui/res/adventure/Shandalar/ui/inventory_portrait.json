@@ -1,0 +1,115 @@
+{
+  "width": 270,
+  "height": 480,
+  "yDown": true,
+  "elements": [
+        {
+      "type": "Image",
+      "image": "ui/title_bg_portrait.png",
+      "width": 270,
+      "height": 480
+    }, {
+      "type": "Image",
+      "image": "ui/equipment.png",        
+      "x": 8,                                   
+      "y": 112,
+      "width": 129,
+      "height": 243
+    }, 
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Neck",      
+      "style": "item_frame",      
+      "width": 20,
+      "height": 20,
+      "x": 62,
+      "y": 144
+    }   ,
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Body",      
+      "style": "item_frame",      
+      "width": 20,
+      "height": 20,
+      "x": 62,
+      "y": 189
+    }   ,
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Boots",      
+      "style": "item_frame",      
+      "width": 20,
+      "height": 20,
+      "x": 62,
+      "y": 324 
+    }   ,
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Left",      
+      "style": "item_frame",      
+      "width": 20,
+      "height": 20,
+      "x": 17,
+      "y": 234 
+    }     ,
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Right",      
+      "style": "item_frame",      
+      "width": 20,
+      "height": 20,
+      "x": 107,
+      "y": 234 
+    }     ,
+    {
+      "type": "Scroll",
+      "name": "inventory",
+      "x": 145,
+      "y": 112,
+      "width": 117,
+      "height": 243
+    },           
+    {
+      "type": "Window", 
+      "x": 8,
+      "y": 8,
+      "width": 254,
+      "height": 98
+    }    ,
+    {
+      "type": "Label",
+      "name": "item_description",
+      "x": 16,
+      "y": 16,
+      "width": 246,
+      "height": 90
+    }   ,
+    {
+      "type": "TextButton",
+      "name": "delete",
+      "text": "Delete",
+      "width": 80,
+      "height": 30,
+      "x": 8,
+      "y": 363
+    }  ,
+    {
+      "type": "TextButton",
+      "name": "equip",
+      "text": "Equip",
+      "width": 80,
+      "height": 30,
+      "x": 96,
+      "y": 363
+    },
+    {
+      "type": "TextButton",
+      "name": "return",
+      "text": "Back",
+      "width": 80,
+      "height": 30,
+      "x": 184,
+      "y": 363
+    }
+  ]
+}

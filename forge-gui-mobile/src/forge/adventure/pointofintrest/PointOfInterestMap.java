@@ -77,7 +77,6 @@ public class PointOfInterestMap implements SaveFileContent {
         data.store("numberOfChunksY",numberOfChunksY);
         data.store("tileSize",tileSize);
         data.store("chunkSize",chunkSize);
-        data.store("numberOfChunksX",numberOfChunksX);
 
         for (int x = 0; x < numberOfChunksX; x++) {
             for (int y = 0; y < numberOfChunksY; y++) {

@@ -220,7 +220,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
             return;
         }
         EnemySprite sprite = new EnemySprite(enemyData);
-        float unit = Scene.GetIntendedHeight() / 6f;
+        float unit = Scene.getIntendedHeight() / 6f;
         Vector2 spawnPos = new Vector2(1, 1);
         spawnPos.setLength(unit + (unit * 3) * rand.nextFloat());
         spawnPos.setAngleDeg(360 * rand.nextFloat());

@@ -119,6 +119,7 @@ public class Forge implements ApplicationListener {
     public static InputProcessor inputProcessor;
     private static Cursor cursor0, cursor1, cursor2, cursorA0, cursorA1, cursorA2;
     public static boolean forcedEnglishonCJKMissing = false;
+    public static boolean adventureLoaded = false;
     private static Localizer localizer;
     static Map<Integer, Texture> misc = new HashMap<>();
 
@@ -330,8 +331,12 @@ public class Forge implements ApplicationListener {
         //pixl cursor for adventure
         setCursor(null, "0");
         try {
-            for (SceneType sceneType : SceneType.values()) {
-                sceneType.instance.resLoaded();
+            if(!adventureLoaded)
+            {
+                for (SceneType sceneType : SceneType.values()) {
+                    sceneType.instance.resLoaded();
+                }
+                adventureLoaded=true;
             }
             switchScene(SceneType.StartScene.instance);
         } catch (Exception e) {

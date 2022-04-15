@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Disposable;
+import forge.Forge;
 import forge.adventure.util.Config;
 
 /**
@@ -15,12 +16,12 @@ public abstract class Scene implements Disposable {
 
     }
 
-    public static int GetIntendedWidth() {
-        return Config.instance().getConfigData().screenWidth;
+    public static int getIntendedWidth() {
+        return Forge.isLandscapeMode()? Config.instance().getConfigData().screenWidth:Config.instance().getConfigData().screenHeight;
     }
 
-    public static int GetIntendedHeight() {
-        return Config.instance().getConfigData().screenHeight;
+    public static int getIntendedHeight() {
+        return Forge.isLandscapeMode()? Config.instance().getConfigData().screenHeight:Config.instance().getConfigData().screenWidth;
     }
 
     public abstract void act(float delta);

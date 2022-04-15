@@ -12,19 +12,19 @@
     {
       "type": "Scroll",
       "name": "settings",
-      "x": 10,
-      "y": 10,
-      "width": 450,
+      "x": 15,
+      "y": 18,
+      "width": 382,
       "height": 235
     },
     {
       "type": "TextButton",
       "name": "return",
       "text": "Back",
-      "width": 48,
-      "height": 16,
-      "x": 15,
-      "y": 250
+      "width": 52,
+      "height": 30,
+      "x": 415,
+      "y": 120
     }
   ]
 }

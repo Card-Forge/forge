@@ -1,22 +1,17 @@
 package forge.adventure.util;
 
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import forge.Forge;
 
 import java.util.function.Function;
 
@@ -103,7 +98,7 @@ public class Controls {
 
     static public BitmapFont getBitmapFont(String fontName) {
         switch (fontName) {
-            case "MiKrollFantasyBig":
+            case "MiKrollFantasyBig": //this is used on drawpixmap for gold/life
                 return miKrollFantasy;
             case "blackbig":
             case "big":
@@ -136,18 +131,12 @@ public class Controls {
 
     public static Label newLabel(String name) {
         Label ret = new Label(name, GetSkin());
-        if (!Forge.isLandscapeMode()) {
-            ret.setFontScaleX(2);
-        }
         return ret;
     }
 
     public static Dialog newDialog(String title) {
         Dialog ret = new Dialog(title, GetSkin());
         ret.setMovable(false);
-        if (!Forge.isLandscapeMode()) {
-            ret.getTitleLabel().setFontScaleX(2);
-        }
         return ret;
     }
 
