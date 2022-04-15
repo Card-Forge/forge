@@ -7,8 +7,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
-import forge.item.IPaperCard;
-import forge.model.FModel;
 
 import static forge.adventure.util.Paths.ITEMS_ATLAS;
 
