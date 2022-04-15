@@ -22,9 +22,6 @@ import forge.adventure.world.WorldSave;
 import forge.gui.GuiBase;
 import forge.util.MyRandom;
 
-import forge.localinstance.properties.ForgePreferences;
-import forge.model.FModel;
-
 /**
  * Base class to render a player sprite on a map
  * used for the over world and dungeons
@@ -56,7 +53,7 @@ public abstract class GameStage extends Stage {
     }
 
     public GameStage() {
-        super(new ScalingViewport(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_STRETCH)?Scaling.stretch:Scaling.fit, Scene.getIntendedWidth(), Scene.getIntendedHeight(), new OrthographicCamera()));
+        super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight(), new OrthographicCamera()));
         WorldSave.getCurrentSave().onLoad(new Runnable() {
             @Override
             public void run() {

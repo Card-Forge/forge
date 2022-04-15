@@ -23,8 +23,6 @@ import forge.adventure.util.Current;
 import forge.adventure.util.UIActor;
 import forge.adventure.world.WorldSave;
 import forge.gui.GuiBase;
-import forge.localinstance.properties.ForgePreferences;
-import forge.model.FModel;
 
 /**
  * Stage to handle everything rendered in the HUD
@@ -44,7 +42,7 @@ public class GameHUD extends Stage {
     float TOUCHPAD_SCALE = 70f;
 
     private GameHUD(GameStage gameStage) {
-        super(new ScalingViewport(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_STRETCH)?Scaling.stretch:Scaling.fit, Scene.getIntendedWidth(), Scene.getIntendedHeight()), gameStage.getBatch());
+        super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight()), gameStage.getBatch());
         instance = this;
         this.gameStage = gameStage;
 

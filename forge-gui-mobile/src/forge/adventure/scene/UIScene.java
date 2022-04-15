@@ -12,8 +12,6 @@ import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import forge.adventure.util.Config;
 import forge.adventure.util.UIActor;
-import forge.localinstance.properties.ForgePreferences;
-import forge.model.FModel;
 
 /**
  * Base class for an GUI scene where the elements are loaded from a json file
@@ -57,7 +55,7 @@ public class UIScene extends Scene {
 
     @Override
     public void resLoaded() {
-            stage = new Stage(new ScalingViewport(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_STRETCH)?Scaling.stretch:Scaling.fit, getIntendedWidth(), getIntendedHeight())) {
+            stage = new Stage(new ScalingViewport(Scaling.stretch, getIntendedWidth(), getIntendedHeight())) {
 
                 @Override
                 public boolean keyUp(int keycode) {
