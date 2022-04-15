@@ -2,6 +2,8 @@ package forge.adventure.data;
 
 import com.badlogic.gdx.utils.Array;
 import forge.item.IPaperCard;
+import forge.item.PaperCard;
+import forge.item.PaperToken;
 import forge.model.FModel;
 
 public class EffectData {
@@ -18,12 +20,13 @@ public class EffectData {
         Array<IPaperCard> startCards=new Array<>();
         if(startBattleWithCard != null) {
             for (String name:startBattleWithCard) {
-                if(FModel.getMagicDb().getCommonCards().contains(name))
-                    startCards.add(FModel.getMagicDb().getCommonCards().getCard(name));
-                else if (FModel.getMagicDb().getAllTokens().containsRule(name))
-                    startCards.add(FModel.getMagicDb().getAllTokens().getToken(name));
+                PaperCard C = FModel.getMagicDb().getCommonCards().getCard(name);
+                if(C != null)
+                    startCards.add(C);
                 else {
-                    System.err.print("Can not find card "+name+"\n");
+                    PaperToken T = FModel.getMagicDb().getAllTokens().getToken(name);
+                    if (T != null) startCards.add(T);
+                    else System.err.print("Can not find card \"" + name + "\"\n");
                 }
             }
         }
