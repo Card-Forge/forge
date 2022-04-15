@@ -41,6 +41,7 @@ public class DuelScene extends ForgeScene {
     EnemySprite enemy;
     PlayerSprite player;
     RegisteredPlayer humanPlayer;
+    private EffectData dungeonEffect;
 
     public DuelScene() {
 
@@ -69,10 +70,9 @@ public class DuelScene extends ForgeScene {
 
 
     }
-    void addItemEffects(RegisteredPlayer player,Array<EffectData> effects) {
-        if( effects == null )
-            return;
-
+    void addEffects(RegisteredPlayer player,Array<EffectData> effects) {
+        if( effects == null ) return;
+        //Apply various effects.
         int lifeMod=0;
         int changeStartCards=0;
         Array<IPaperCard> startCards=new Array<>();
@@ -87,6 +87,10 @@ public class DuelScene extends ForgeScene {
         player.setStartingHand(player.getStartingHand()+changeStartCards);
     }
 
+    public void setDungeonEffect(EffectData E) {
+        dungeonEffect = E;
+    }
+
 
     @Override
     public void enter() {
@@ -96,7 +100,7 @@ public class DuelScene extends ForgeScene {
         List<RegisteredPlayer> players = new ArrayList<>();
         Deck playerDeck=(Deck)AdventurePlayer.current().getSelectedDeck().copyTo("PlayerDeckCopy");
         int missingCards= Config.instance().getConfigData().minDeckSize-playerDeck.getMain().countAll();
-        if(missingCards>0)
+        if( missingCards > 0 ) //Replace unknown cards for a Wastes.
             playerDeck.getMain().add("Wastes",missingCards);
         humanPlayer = RegisteredPlayer.forVariants(2, appliedVariants,playerDeck, null, false, null, null);
         LobbyPlayer playerObject = GamePlayerUtil.getGuiPlayer();
@@ -116,27 +120,36 @@ public class DuelScene extends ForgeScene {
 
 
 
-        Array<EffectData> playerItems=new Array<>();
-        Array<EffectData> oppItems=new Array<>();
+        Array<EffectData> playerEffects = new Array<>();
+        Array<EffectData> oppEffects    = new Array<>();
 
-        for(String playerItem:Current.player().getEquippedItems())
-        {
+        //Collect and add items effects first.
+        for(String playerItem:Current.player().getEquippedItems()) {
             ItemData item=ItemData.getItem(playerItem);
-            playerItems.add(item.effect);
-            if(item.effect.opponent != null) oppItems.add(item.effect.opponent);
+            playerEffects.add(item.effect);
+            if(item.effect.opponent != null) oppEffects.add(item.effect.opponent);
         }
-        if(enemy.getData().equipment!=null)
-        {
-            for(String oppItem:enemy.getData().equipment)
-            {
+        if(enemy.getData().equipment!=null) {
+            for(String oppItem:enemy.getData().equipment) {
                 ItemData item=ItemData.getItem(oppItem);
-                oppItems.add(item.effect);
-                if(item.effect.opponent !=null) playerItems.add(item.effect.opponent);
+                oppEffects.add(item.effect);
+                if(item.effect.opponent !=null) playerEffects.add(item.effect.opponent);
             }
         }
 
-        addItemEffects(humanPlayer,playerItems);
-        addItemEffects(aiPlayer,oppItems);
+        //Collect and add player blessings.
+
+        //Collect and add enemy effects (same as blessings but for individual enemies).
+
+        //Collect and add dungeon-wide effects.
+        if(dungeonEffect != null)
+            oppEffects.add(dungeonEffect);
+            if(dungeonEffect.opponent != null)
+                playerEffects.add(dungeonEffect.opponent);
+
+
+        addEffects(humanPlayer,playerEffects);
+        addEffects(aiPlayer,oppEffects);
 
         players.add(humanPlayer);
         players.add(aiPlayer);
@@ -160,8 +173,8 @@ public class DuelScene extends ForgeScene {
             }
         });
         hostedMatch.startMatch(rules, appliedVariants, players, guiMap);
-
         MatchController.instance.setGameView(hostedMatch.getGameView());
+
 
 
         for (final Player p : hostedMatch.getGame().getPlayers()) {

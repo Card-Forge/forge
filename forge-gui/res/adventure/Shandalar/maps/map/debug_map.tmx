@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="80">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="81">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  &quot;startBattleWithCard&quot;: [ &quot;Recycle&quot; ],
+  &quot;opponent&quot;: {
+    &quot;startBattleWithCard&quot;: [ &quot;Recycle&quot; ],
+  }
+}</property>
+ </properties>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="6321" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
@@ -94,6 +102,11 @@
     &quot;options&quot;:[ { &quot;name&quot;:&quot;It happens.&quot; } ]
   }
 ]</property>
+   </properties>
+  </object>
+  <object id="80" template="../obj/enemy.tx" x="96" y="304">
+   <properties>
+    <property name="enemy" value="Elf"/>
    </properties>
   </object>
  </objectgroup>

@@ -1,15 +1,20 @@
 package forge.adventure.data;
 
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.SerializationException;
 import forge.item.IPaperCard;
 import forge.model.FModel;
 
 public class EffectData {
-    public int lifeModifier = 0; //Amount to add to starting Life.
-    public int changeStartCards = 0; //Amount to add to starting hand size.
-    public float moveSpeed = 1.0f; //Change of movement speed in the map.
+    //Duel effects.
+    public int lifeModifier = 0;         //Amount to add to starting Life.
+    public int changeStartCards = 0;     //Amount to add to starting hand size.
     public String[] startBattleWithCard; //Cards that start in the Battlefield.
-    public EffectData opponent; //Repeat effects to be applied to the opponent's side.
+    //Map only effects.
+    public float moveSpeed = 1.0f;       //Change of movement speed. Map only.
+    //Opponent field.
+    public EffectData opponent;          //Effects to be applied to the opponent's side.
 
     public Array<IPaperCard> startBattleWithCards() {
         Array<IPaperCard> startCards=new Array<>();

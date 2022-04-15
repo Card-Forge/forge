@@ -16,12 +16,12 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.SerializationException;
 import forge.Forge;
 import forge.adventure.character.*;
-import forge.adventure.data.RewardData;
-import forge.adventure.data.ShopData;
-import forge.adventure.data.WorldData;
+import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.DuelScene;
 import forge.adventure.scene.RewardScene;
@@ -66,6 +66,8 @@ public class MapStage extends GameStage {
     private Dialog dialog;
     private Stage dialogStage;
     private boolean dialogOnlyInput;
+
+    private EffectData effect;
 
     public boolean getDialogOnlyInput() {
         return dialogOnlyInput;
@@ -181,6 +183,16 @@ public class MapStage extends GameStage {
 
     }
 
+    private void effectDialog(EffectData E){
+        dialog.getContentTable().clear();
+        dialog.getButtonTable().clear();
+        String text = "Strange magical energies flow within this place...\nAll opponents get:\n";
+        text += E.getDescription();
+        dialog.text(text);
+        dialog.getButtonTable().add(Controls.newTextButton("OK", () -> { this.hideDialog(); }));
+        showDialog();
+    }
+
     public void loadMap(TiledMap map, String sourceMap) {
         isLoadingMatch = false;
         isInMap = true;
@@ -199,9 +211,16 @@ public class MapStage extends GameStage {
         setBounds(width * tileWidth, height * tileHeight);
         collision = new ArrayList[(int) width][(int) height];
 
-        if( map.getProperties().get("dungeonEffect") != null ){
-            System.err.print("Found map properties.");
-
+        //Load dungeon effects.
+        if( map.getProperties().get("dungeonEffect") != null && !map.getProperties().get("dungeonEffect").toString().isEmpty()){
+            Json json = new Json();
+            try { effect = json.fromJson(EffectData.class, map.getProperties().get("dungeonEffect").toString()); }
+            catch(SerializationException E) {
+                //JSON parsing could fail. Since this an user written part, assume failure is possible (it happens).
+                System.err.printf("[%s] while loading JSON file for dialog actor. JSON:\n%s\nUsing a default dialog.", E.getMessage(), map.getProperties().get("dungeonEffect").toString());
+                effect = json.fromJson(EffectData.class, "");
+            }
+            effectDialog(effect);
         }
 
         GetPlayer().stop();
@@ -429,11 +448,13 @@ public class MapStage extends GameStage {
                                 }
                             }, ScreenUtils.getFrameBufferTexture(), true, false));
                         }
-                        startPause(0.5f, new Runnable() {
+                        startPause(0.4f, new Runnable() {
                             @Override
                             public void run() {
-                                ((DuelScene) SceneType.DuelScene.instance).setEnemy(mob);
-                                ((DuelScene) SceneType.DuelScene.instance).setPlayer(player);
+                                DuelScene S = ((DuelScene) SceneType.DuelScene.instance);
+                                S.setEnemy(mob);
+                                S.setPlayer(player);
+                                S.setDungeonEffect(effect);
                                 Forge.switchScene(SceneType.DuelScene.instance);
                             }
                         });
