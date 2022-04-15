@@ -72,8 +72,10 @@ public class MapStage extends GameStage {
     public Dialog getDialog() {
         return dialog;
     }
+
     public void clearIsInMap() {
         isInMap = false;
+        effect = null;
         GameHUD.getInstance().showHideMap(true);
     }
     public void draw (Batch batch) {
@@ -82,9 +84,7 @@ public class MapStage extends GameStage {
         //update camera after all layers got drawn
 
         if (!getRoot().isVisible()) return;
-
         getRoot().draw(batch, 1);
-
     }
 
     public MapLayer getSpriteLayer() {
@@ -186,7 +186,7 @@ public class MapStage extends GameStage {
         String text = "Strange magical energies flow within this place...\nAll opponents get:\n";
         text += E.getDescription();
         dialog.text(text);
-        dialog.getButtonTable().add(Controls.newTextButton("OK", () -> { this.hideDialog(); }));
+        dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog));
         dialog.setKeepWithinStage(true);
         showDialog();
     }
@@ -334,7 +334,7 @@ public class MapStage extends GameStage {
                             continue;
 
                         ShopData data = shops.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(shops.size));
-                        Array<Reward> ret = new Array<Reward>();
+                        Array<Reward> ret = new Array<>();
                         for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
                             ret.addAll(rdata.generate(false));
                         }
@@ -417,7 +417,7 @@ public class MapStage extends GameStage {
 
     public EnemySprite getEnemyByID(int id) {
         for(MapActor A : new Array.ArrayIterator<>(actors)){
-            if(A instanceof EnemySprite && ((EnemySprite) A).getId() == id)
+            if(A instanceof EnemySprite && A.getId() == id)
                 return ((EnemySprite) A);
         }
         return null;
@@ -448,11 +448,10 @@ public class MapStage extends GameStage {
                         resetPosition();
                         showDialog();
                         mob.dialog.activate();
-                        break;
                     } else { //Duel the enemy.
                         beginDuel(mob);
-                        break;
                     }
+                    break;
                 } else if (actor instanceof RewardSprite) {
                     Gdx.input.vibrate(50);
                     startPause(0.1f, new Runnable() {
@@ -495,7 +494,7 @@ public class MapStage extends GameStage {
                 DuelScene S = ((DuelScene) SceneType.DuelScene.instance);
                 S.setEnemy(mob);
                 S.setPlayer(player);
-                S.setDungeonEffect(effect);
+                if(isInMap && effect != null) S.setDungeonEffect(effect);
                 Forge.switchScene(SceneType.DuelScene.instance);
             }
         });

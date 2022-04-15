@@ -59,6 +59,7 @@ public class DuelScene extends ForgeScene {
             @Override
             public void run() {
                 SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
+                dungeonEffect = null;
                 Scene last = Forge.switchToLast();
 
                 if (last instanceof HudScene) {
@@ -142,11 +143,11 @@ public class DuelScene extends ForgeScene {
         //Collect and add enemy effects (same as blessings but for individual enemies).
 
         //Collect and add dungeon-wide effects.
-        if(dungeonEffect != null)
+        if(dungeonEffect != null) {
             oppEffects.add(dungeonEffect);
-            if(dungeonEffect.opponent != null)
+            if (dungeonEffect.opponent != null)
                 playerEffects.add(dungeonEffect.opponent);
-
+        }
 
         addEffects(humanPlayer,playerEffects);
         addEffects(aiPlayer,oppEffects);
