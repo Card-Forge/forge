@@ -1686,6 +1686,14 @@
     "map": "maps/map/catlair_3.tmx"
   },
   {
+    "name": "DEBUGZONE",
+    "count": 0,
+    "radiusFactor": 5.0,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "WurmPond",
+    "map": "maps/map/debug_map.tmx"
+  },
+  {
     "name": "WurmPond",
     "count": 2,
     "radiusFactor": 0.8,

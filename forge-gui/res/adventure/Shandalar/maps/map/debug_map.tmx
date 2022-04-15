@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="84">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  &quot;startBattleWithCard&quot;: [ &quot;Recycle&quot; ],
+  &quot;opponent&quot;: {
+    &quot;startBattleWithCard&quot;: [ &quot;Recycle&quot; ],
+  }
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="6321" source="../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzaENADAIADBuIFnC/5dxCnoegaiobmVEASzp9/MCANw1XzWdLQ==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJyTEGBgkBjFGFgaiLdhwVI0tlcSRAthYvFRe6mKa/kZGKqAuJofYl8llF/DT1t70f1Na3/S015pKI2eZ0Bi26H2bsUiT2nekoTS6ACbGDZAbliQam+jJANDkyR17IWFGQyg85HBXKCd86hkLyVg1N5RewfaXuQyiZ72UhOQY+9IiV9S7FUiID9qL3EY1pZCxvjsRVdLzTYXPnupZQchu5HtpbWdyHEPspfSdh0A9Qp8zA==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBg4oCAAweh8ZDFyzECmiVFDin2EzMBnJjY1pNpNrF8Gyr+Ewp3S+EW3Axt/FFAXkJpudgDV7RRA0ITkcakbCDCQaYuc/DEKRsEoGAWjYBSMglFAKQAAIRMR9g==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="47" template="../obj/gold.tx" x="96" y="224"/>
+  <object id="49" template="../obj/gold.tx" x="176" y="224"/>
+  <object id="50" template="../obj/enemy.tx" x="112" y="192" width="64" height="64">
+   <properties>
+    <property name="enemy" value="Emrakul"/>
+   </properties>
+  </object>
+  <object id="51" template="../obj/entry_up.tx" x="209" y="480">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="52" template="../obj/gate.tx" x="208" y="384">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;effect&quot;:[],
+    &quot;name&quot;:&quot;ABC&quot;,
+    &quot;text&quot;:&quot;I am a big gate. Greetings.&quot;,
+    &quot;loctext&quot;:&quot;&quot;,
+    &quot;condition&quot;:[],
+    &quot;options&quot;:[ { &quot;name&quot;:&quot;Okay...&quot; } ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="54" template="../obj/treasure.tx" x="320" y="176">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;life&quot;,
+    &quot;count&quot;: 3
+  }
+]
+</property>
+    <property name="sprite" value="sprites/3life.atlas"/>
+   </properties>
+  </object>
+  <object id="69" template="../obj/treasure.tx" x="192" y="352"/>
+  <object id="74" template="../obj/treasure.tx" x="224" y="352"/>
+  <object id="70" template="../obj/booster.tx" x="32" y="336"/>
+  <object id="72" template="../obj/booster.tx" x="224" y="320"/>
+  <object id="71" template="../obj/gold.tx" x="48" y="352"/>
+  <object id="73" template="../obj/gold.tx" x="224" y="288"/>
+  <object id="78" template="../obj/gate.tx" x="144" y="208" visible="0">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;effect&quot;:[],
+    &quot;name&quot;:&quot;ABC&quot;,
+    &quot;text&quot;:&quot;EMRAKUL\nDon't mind me, just chilling.&quot;,
+    &quot;loctext&quot;:&quot;&quot;,
+    &quot;condition&quot;:[],
+    &quot;options&quot;:[ { &quot;name&quot;:&quot;It happens.&quot; } ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="79" template="../obj/gate.tx" x="128" y="208" visible="0">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;effect&quot;:[],
+    &quot;name&quot;:&quot;ABC&quot;,
+    &quot;text&quot;:&quot;EMRAKUL\nDon't mind me, just chilling.&quot;,
+    &quot;loctext&quot;:&quot;&quot;,
+    &quot;condition&quot;:[],
+    &quot;options&quot;:[ { &quot;name&quot;:&quot;It happens.&quot; } ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="80" template="../obj/enemy.tx" x="96" y="304">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;effect&quot;:[],
+    &quot;name&quot;:&quot;ABC&quot;,
+    &quot;text&quot;:&quot;I am an elf. I do elf things like hugging trees and being pretty.&quot;,
+    &quot;loctext&quot;:&quot;&quot;,
+    &quot;condition&quot;:[],
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;OK&quot; },
+      {
+        &quot;name&quot;:&quot;Fight me, elf!&quot;,
+        &quot;text&quot;: &quot;Gladly.&quot;,
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;I FEAR NOTHING!!?&quot;, &quot;effect&quot;: [ { &quot;battleWithActorID&quot;: -1 } ]} ]
+      },
+      {
+        &quot;name&quot;:&quot;I wanna fight Emrakul over there!&quot;,
+        &quot;condition&quot;: [ { &quot;actorID&quot;: 50 } ],
+        &quot;text&quot;: &quot;Really? Oh well... your funeral.\nHEY EMMY! THIS DUDE WANTS TO DANCE!&quot;,
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;WAIT IT WAS A JOKE!!!&quot;, &quot;effect&quot;: [ { &quot;battleWithActorID&quot;: 50 } ]} ]
+      },
+      {
+        &quot;name&quot;:&quot;I wanna fight Emrakul over there!&quot;,
+        &quot;condition&quot;: [ { &quot;actorID&quot;: 50, &quot;not&quot;: true } ],
+        &quot;text&quot;: &quot;She left. Crying. You monster.&quot;,
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;Sorry...&quot; } ]
+      },
+      {
+        &quot;name&quot;:&quot;That's cool dude.&quot;,
+        &quot;condition&quot;: [ { &quot;item&quot;: &quot;Treasure&quot;, &quot;not&quot;: true } ],
+        &quot;effect&quot;: [ { &quot;addItem&quot;: &quot;Treasure&quot; } ],
+        &quot;text&quot;: &quot;You get it. Take this.&quot;,
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;Thanks bro.&quot; } ]
+      },
+      {
+        &quot;name&quot;:&quot;Can you open that hidden wall?&quot;,
+        &quot;condition&quot;: [ { &quot;actorID&quot;: 83 } ],
+        &quot;text&quot;: &quot;Since you asked nicely, I shall.&quot;,
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;Thanks bro.&quot;, &quot;effect&quot;: [ { &quot;deleteMapObject&quot;: 83 } ]} ]
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Elf"/>
+    <property name="permanent" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="81" template="../obj/enemy.tx" x="288" y="224">
+   <properties>
+    <property name="enemy" value="Goblin"/>
+   </properties>
+  </object>
+  <object id="82" template="../obj/enemy.tx" gid="2147491275" x="272" y="224">
+   <properties>
+    <property name="enemy" value="Goblin"/>
+   </properties>
+  </object>
+  <object id="83" template="../obj/gate.tx" type="dummy" gid="3651" x="64" y="336" width="16" height="16"/>
+ </objectgroup>
+</map>

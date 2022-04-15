@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Array;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.RewardData;
 import forge.adventure.util.Current;
+import forge.adventure.util.MapDialog;
 import forge.adventure.util.Reward;
 
 /**
@@ -16,6 +17,7 @@ import forge.adventure.util.Reward;
 public class EnemySprite extends CharacterSprite {
     EnemyData data;
     private int id;
+    public MapDialog dialog;
 
     public EnemySprite(EnemyData enemyData) {
         super(enemyData.sprite);
@@ -48,11 +50,10 @@ public class EnemySprite extends CharacterSprite {
 
     public Array<Reward> getRewards() {
         Array<Reward> ret=new Array<Reward>();
-        if(data.rewards==null)
+        if(data.rewards == null)
             return ret;
-        for(RewardData rdata:data.rewards)
-        {
-            ret.addAll(rdata.generate(false,Current.latestDeck()!=null? Current.latestDeck().getMain().toFlatList():null,data.equipment));
+        for(RewardData rdata:data.rewards) {
+            ret.addAll(rdata.generate(false,(Current.latestDeck()!=null? Current.latestDeck().getMain().toFlatList():null)));
         }
         return ret;
     }
