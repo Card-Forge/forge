@@ -20,7 +20,7 @@ import java.util.function.Function;
  */
 public class Controls {
     private static Skin SelectedSkin = null;
-    private static BitmapFont defaultfont, bigfont;
+    private static BitmapFont defaultfont, bigfont, miKrollFantasy;
 
     static public TextButton newTextButton(String text) {
 
@@ -98,6 +98,8 @@ public class Controls {
 
     static public BitmapFont getBitmapFont(String fontName) {
         switch (fontName) {
+            case "MiKrollFantasyBig": //this is used on drawpixmap for gold/life
+                return miKrollFantasy;
             case "blackbig":
             case "big":
                 return bigfont;
@@ -115,27 +117,14 @@ public class Controls {
             FileHandle skinFile = Config.instance().getFile(Paths.SKIN);
             FileHandle atlasFile = skinFile.sibling(skinFile.nameWithoutExtension() + ".atlas");
             TextureAtlas atlas = new TextureAtlas(atlasFile);
-            //font
-            FreeTypeFontGenerator generateFonts=new FreeTypeFontGenerator(Config.instance().getFile(Paths.SKIN_FONT));
-            FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-            parameter.borderWidth=0;
-            parameter.incremental = true;
-            parameter.mono=true;
-            parameter.size=11;
-            parameter.minFilter = Texture.TextureFilter.Nearest;
-            parameter.magFilter = Texture.TextureFilter.Nearest;
-            parameter.color= Color.WHITE;
-
-            defaultfont = generateFonts.generateFont(parameter);
-
-
-            parameter.size=22;
-            parameter.color= Color.WHITE;
-            bigfont = generateFonts.generateFont(parameter);
-            SelectedSkin.add("default",defaultfont);
-            SelectedSkin.add("big",bigfont);
             SelectedSkin.addRegions(atlas);
+
             SelectedSkin.load(skinFile);
+            //font
+            defaultfont = new BitmapFont(Config.instance().getFile(Paths.SKIN).sibling("LanaPixelCJK.fnt"));
+            miKrollFantasy = new BitmapFont(Config.instance().getFile(Paths.SKIN).sibling("MiKrollFantasyBig.fnt"));
+            bigfont = new BitmapFont(Config.instance().getFile(Paths.SKIN).sibling("LanaPixelCJK.fnt"));
+            bigfont.getData().setScale(2, 2);
         }
         return SelectedSkin;
     }
