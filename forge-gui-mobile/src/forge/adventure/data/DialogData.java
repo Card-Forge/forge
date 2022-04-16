@@ -8,8 +8,9 @@ public class DialogData {
     public EffectData[] effect;       //List of effects to cause when the dialog shows.
     public ConditionData[] condition; //List of conditions for the action to show.
     public String name;               //Text to display when action is listed as a button.
+    public String locname;            //References a localized string for the button labels.
     public String text;               //The text body.
-    public String loctext;            //References a localized string.
+    public String loctext;            //References a localized string for the text body.
     public DialogData[] options;      //
 
     static public class EffectData {

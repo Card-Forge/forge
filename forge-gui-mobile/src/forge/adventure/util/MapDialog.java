@@ -1,11 +1,14 @@
 package forge.adventure.util;
 
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.SerializationException;
 import forge.Forge;
 import forge.adventure.data.DialogData;
 import forge.adventure.stage.MapStage;
+import forge.util.Localizer;
+
 /**
  * MapDialog
  * Implements a dialogue/event tree for dialogs.
@@ -15,7 +18,7 @@ public class MapDialog {
     private final MapStage stage;
     private Array<DialogData> data;
     private final int parentID;
-
+    private final float WIDTH = 260f;
     static private final String defaultJSON = "[\n" +
             "  {\n" +
             "    \"effect\":[],\n" +
@@ -46,30 +49,27 @@ public class MapDialog {
         }
     }
 
-    private void loadDialog(DialogData dialog) {
+    private void loadDialog(DialogData dialog) { //Displays a dialog with dialogue and possible choices.
         setEffects(dialog.effect);
-        stage.getDialog().getContentTable().clear();
-        stage.getDialog().getButtonTable().clear();
-        String text;
-        if(dialog.loctext != null && !dialog.loctext.isEmpty()){ //Check for localized string, otherwise print text.
-            text = Forge.getLocalizer().getMessage(dialog.loctext);
-        } else {
-            text = dialog.text;
-        }
-
-        int charCount = 0;
-
-        stage.getDialog().text(text);
+        Dialog D = stage.getDialog();
+        Localizer L = Forge.getLocalizer();
+        D.getContentTable().clear(); D.getButtonTable().clear(); //Clear tables to start fresh.
+        String text; //Check for localized string (locname), otherwise print text.
+        if(dialog.loctext != null && !dialog.loctext.isEmpty()) text = L.getMessage(dialog.loctext);
+        else text = dialog.text;
+        Label A = Controls.newLabel(text);
+        A.setWrap(true);
+        D.getContentTable().add(A).width(WIDTH); //Add() returns a Cell, which is what the width is being applied to.
         if(dialog.options != null) {
             for(DialogData option:dialog.options) {
                 if( isConditionOk(option.condition) ) {
-                    charCount += option.name.length();
-                    if(charCount > 35){ //Gross hack.
-                        stage.getDialog().getButtonTable().row();
-                        charCount = 0;
-                    }
-                    stage.getDialog().getButtonTable().add(Controls.newTextButton(option.name,() -> loadDialog(option)));
-
+                    String name; //Get localized label if present.
+                    if(option.locname != null && !option.locname.isEmpty()) name = L.getMessage(option.locname);
+                    else name = option.name;
+                    TextButton B = Controls.newTextButton(name,() -> loadDialog(option));
+                    B.getLabel().setWrap(true); //We want this to wrap in case it's a wordy choice.
+                    D.getButtonTable().add(B).width(WIDTH - 10); //The button table also returns a Cell when adding.
+                    D.getButtonTable().row(); //Add a row. Tried to allow a few per row but it was a bit erratic.
                 }
             }
             stage.showDialog();
@@ -90,23 +90,23 @@ public class MapDialog {
     void setEffects(DialogData.EffectData[] data) {
         if(data==null) return;
         for(DialogData.EffectData E:data) {
-            if (E.removeItem != null){
+            if (E.removeItem != null){ //Removes an item from the player's inventory.
                 Current.player().removeItem(E.removeItem);
             }
-            if (E.addItem != null){
+            if (E.addItem != null){ //Gives an item to the player.
                 Current.player().addItem(E.addItem);
             }
-            if (E.deleteMapObject != 0){
+            if (E.deleteMapObject != 0){ //Removes a dummy object from the map.
                 if(E.deleteMapObject < 0) stage.deleteObject(parentID);
                 else stage.deleteObject(E.deleteMapObject);
             }
-            if (E.battleWithActorID != 0){
+            if (E.battleWithActorID != 0){ //Starts a battle with the given enemy ID.
                 if(E.battleWithActorID < 0) stage.beginDuel(stage.getEnemyByID(parentID));
                 else stage.beginDuel(stage.getEnemyByID(E.battleWithActorID));
             }
-
-
-
+            //Create map object.
+            //Check for quest flags, local.
+            //Check for quest flags, global.
         }
     }
 
