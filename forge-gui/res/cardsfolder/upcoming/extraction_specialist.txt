@@ -1,0 +1,11 @@
+Name:Extraction Specialist
+ManaCost:2 W
+Types:Creature Human Rogue
+PT:3/2
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target creature card with mana value 2 or less from your graveyard to the battlefield. That creature can't attack or block for as long as you control CARDNAME.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl+cmcLE2 | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | HiddenKeywords$ CARDNAME can't attack or block. | Duration$ UntilHostLeavesPlay
+SVar:PlayMain1:TRUE
+DeckHas:Ability$LifeGain|Graveyard
+Oracle:Lifelink\nWhen Extraction Specialist enters the battlefield, return target creature card with mana value 2 or less from your graveyard to the battlefield. That creature can't attack or block for as long as you control Extraction Specialist.
