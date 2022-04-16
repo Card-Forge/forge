@@ -50,6 +50,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.*;
@@ -60,6 +61,7 @@ import forge.game.staticability.StaticAbilityCantSacrifice;
 import forge.game.staticability.StaticAbilityCantTarget;
 import forge.game.staticability.StaticAbilityCantTransform;
 import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -148,6 +150,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     // x=timestamp y=StaticAbility id
     private final Table<Long, Long, CardTraitChanges> changedCardTraitsByText = TreeBasedTable.create(); // Layer 3 by Text Change
     private final Table<Long, Long, CardTraitChanges> changedCardTraits = TreeBasedTable.create(); // Layer 6
+
+    // stores the card traits created by static abilities
+    private final Table<StaticAbility, String, SpellAbility> storedSpellAbilility = TreeBasedTable.create();
+    private final Table<StaticAbility, String, Trigger> storedTrigger = TreeBasedTable.create();
+    private final Table<StaticAbility, String, ReplacementEffect> storedReplacementEffect = TreeBasedTable.create();
+    private final Table<StaticAbility, String, StaticAbility> storedStaticAbility = TreeBasedTable.create();
 
     // x=timestamp y=StaticAbility id
     private final Table<Long, Long, CardColor> changedCardColorsByText = TreeBasedTable.create(); // Layer 3 by Text Change
@@ -4261,6 +4269,45 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         ));
         // update view
         updateAbilityTextForView();
+    }
+
+    public final SpellAbility getSpellAbilityForStaticAbility(final String str, final StaticAbility stAb) {
+        SpellAbility result = storedSpellAbilility.get(stAb, str);
+        if (result == null) {
+            result = AbilityFactory.getAbility(str, this, stAb);
+            result.setIntrinsic(false);
+            result.setGrantorStatic(stAb);
+            storedSpellAbilility.put(stAb, str, result);
+        }
+        return result;
+    }
+
+    public final Trigger getTriggerForStaticAbility(final String str, final StaticAbility stAb) {
+        Trigger result = storedTrigger.get(stAb, str);
+        if (result == null) {
+            result = TriggerHandler.parseTrigger(str, this, false, stAb);
+            storedTrigger.put(stAb, str, result);
+        }
+        return result;
+
+    }
+
+    public final ReplacementEffect getReplacementEffectForStaticAbility(final String str, final StaticAbility stAb) {
+        ReplacementEffect result = storedReplacementEffect.get(stAb, str);
+        if (result == null) {
+            result = ReplacementHandler.parseReplacement(str, this, false, stAb);
+            storedReplacementEffect.put(stAb, str, result);
+        }
+        return result;
+    }
+
+    public final StaticAbility getStaticAbilityForStaticAbility(final String str, final StaticAbility stAb) {
+        StaticAbility result = storedStaticAbility.get(stAb, str);
+        if (result == null) {
+            result = StaticAbility.create(str, this, stAb.getCardState(), false);
+            storedStaticAbility.put(stAb, str, result);
+        }
+        return result;
     }
 
     public final void addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
