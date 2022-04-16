@@ -1822,6 +1822,12 @@ public class AbilityUtils {
                     return root == null ? 0 : root.getTotalManaSpent();
                 }
 
+                // Count$ManaColorsPaid
+                if (sq[0].equals("ManaColorsPaid")) {
+                    final SpellAbility root = sa.getRootAbility();
+                    return doXMath(root == null ? 0 : root.getPayingColors().countColors(), expr, c, ctb);
+                }
+
                 // Count$Adamant.<Color>.<True>.<False>
                 if (sq[0].startsWith("Adamant")) {
                     final String payingMana = StringUtils.join(sa.getRootAbility().getPayingMana());
