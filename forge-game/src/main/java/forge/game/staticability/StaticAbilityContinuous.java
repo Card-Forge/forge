@@ -937,7 +937,7 @@ public final class StaticAbilityContinuous {
 
             if (controllerMayPlay && (mayPlayLimit == null || stAb.getMayPlayTurn() < mayPlayLimit)) {
                 String mayPlayAltCost = mayPlayAltManaCost;
-                boolean additional = mayPlayAltCost.contains("RegularCost");
+                boolean additional = mayPlayAltCost != null && mayPlayAltCost.contains("RegularCost");
 
                 if (mayPlayAltCost != null) {
                     if (mayPlayAltCost.contains("ConvertedManaCost")) {
