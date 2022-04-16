@@ -41,7 +41,7 @@ ScryfallCode=SNC
 31 C Sky Crier @Raoul Vitale
 32 C Speakeasy Server @Scott Murphy
 33 U Swooping Protector @Mark Behm
-34 M All-Seeing Arbiter @Anato Finnstark
+34 M All-Seeing Arbiter @Robin Olausson
 35 C Backstreet Bruiser @Aaron Miller
 36 C Brokers Veteran @Lie Setiawan
 37 C Case the Joint @Stella Spente
@@ -137,8 +137,8 @@ ScryfallCode=SNC
 127 U Torch Breath @Cristi Balanescu
 128 U Unlucky Witness @Tyler Walpole
 129 M Urabrask, Heretic Praetor @Simon Dominic
-130 R Widespread Thievery @Andrew Mar
-131 C Witty Roaster @Joe Slucher
+130 R Widespread Thieving @Andrew Mar
+131 C Witty Roastmaster @Joe Slucher
 132 C Wrecking Crew @Joshua Raphael
 133 C Attended Socialite @Drew Baker
 134 M Bootleggers' Stash @Anastasia Ovchinnikova
@@ -435,7 +435,7 @@ ScryfallCode=SNC
 425 R Jaxis, the Troublemaker @Zoltan Boros
 426 R Professional Face-Breaker @Dan Scott
 427 R Structural Assault @Liiga Smilshkalne
-428 R Widespread Thievery @Andrew Mar
+428 R Widespread Thieving @Andrew Mar
 429 R Evolving Door @Drew Baker
 430 R Fight Rigging @Daarken
 431 R Gala Greeters @Bud Cook
@@ -475,3 +475,5 @@ ScryfallCode=SNC
 465 C Incriminate @Kieran Yanner
 466 C Light 'Em Up @Tony Foti
 467 U Courier's Briefcase @Josu Hernaiz
+
+[tokens]
