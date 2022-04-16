@@ -675,6 +675,10 @@ public final class StaticAbilityContinuous {
                 if (stAb.hasParam("AddNames")) { // currently only for AllNonLegendaryCreatureNames
                     affectedCard.addChangedName(null, true, se.getTimestamp(), stAb.getId());
                 }
+                if (stAb.hasParam("SetName")) {
+                    affectedCard.addChangedName(stAb.getParam("SetName"), false,
+                            se.getTimestamp(), stAb.getId());
+                }
 
                 // Change color words
                 if (params.containsKey("ChangeColorWordsTo")) {
