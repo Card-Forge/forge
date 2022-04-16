@@ -280,6 +280,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return HeroListData.getAvatar(heroRace, isFemale, avatarIndex);
     }
 
+    public void addCard(PaperCard card) {
+
+        cards.add(card);
+        newCards.add(card);
+
+    }
     public void addReward(Reward reward) {
 
         switch (reward.getType())
@@ -357,6 +363,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         life+=count;
         onLifeTotalChangeList.emit();
     }
+    public void giveGold(int price) {
+        takeGold(-price);
+    }
     public void takeGold(int price) {
         gold-=price;
         onGoldChangeList.emit();
@@ -431,9 +440,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return inventoryItems.contains(name, false);
     }
 
-    public void addItem(String name) {
+    public boolean addItem(String name) {
         ItemData item=ItemData.getItem(name);
-        if(item!=null)
-            inventoryItems.add(name);
+        if(item==null)
+            return false;
+        inventoryItems.add(name);
+        return true;
     }
 }

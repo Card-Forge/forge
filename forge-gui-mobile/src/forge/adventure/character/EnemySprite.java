@@ -16,19 +16,15 @@ import forge.adventure.util.Reward;
  */
 public class EnemySprite extends CharacterSprite {
     EnemyData data;
-    private int id;
     public MapDialog dialog;
 
     public EnemySprite(EnemyData enemyData) {
-        super(enemyData.sprite);
-
-        data = enemyData;
+        this(0,enemyData);
     }
 
     public EnemySprite(int id, EnemyData enemyData) {
-        this(enemyData);
-
-        this.id = id;
+        super(id,enemyData.sprite);
+        data = enemyData;
     }
 
     @Override
@@ -58,8 +54,5 @@ public class EnemySprite extends CharacterSprite {
         return ret;
     }
 
-    public int getId() {
-        return id;
-    }
 }
 

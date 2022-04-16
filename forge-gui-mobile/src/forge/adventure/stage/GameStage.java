@@ -17,7 +17,6 @@ import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.scene.TileMapScene;
-import forge.adventure.util.Current;
 import forge.adventure.world.WorldSave;
 import forge.gui.GuiBase;
 import forge.util.MyRandom;
@@ -211,16 +210,6 @@ public abstract class GameStage extends Stage {
             }
             player.setBoundDebug(false);
             setDebugAll(false);
-        }
-        if (keycode == Input.Keys.F10) {
-            Current.setDebug(true);
-             Current.player().addItem("Cheat");
-            Current.player().takeGold(-1000);
-        }
-        if (keycode == Input.Keys.F9) {
-            Current.setDebug(false);
-            Current.player().removeItem("Cheat");
-            Current.player().takeGold(1000);
         }
         return true;
     }

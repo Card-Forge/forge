@@ -552,6 +552,9 @@ public class World implements  Disposable, SaveFileContent {
         return mapPoiIds.pointsOfInterest(chunkX, chunkY);
     }
 
+    public PointOfInterest findPointsOfInterest(String name) {
+        return   mapPoiIds.findPointsOfInterest(name);
+    }
     public int getChunkSize() {
         return (Scene.getIntendedWidth()>Scene.getIntendedHeight()?Scene.getIntendedWidth():Scene.getIntendedHeight()) / data.tileSize;
     }
