@@ -253,7 +253,7 @@ public class StaticEffect {
             }
 
             // remove changed name
-            if (hasParam("SetName")) {
+            if (hasParam("SetName") || hasParam("AddNames")) {
                 affectedCard.removeChangedName(timestamp, ability.getId());
             }
 
