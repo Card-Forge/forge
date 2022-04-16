@@ -202,12 +202,12 @@ public class CardFactory {
             copySA = getCopiedTriggeredAbility((WrappedAbility)targetSA, c, controller);
         } else {
             copySA = targetSA.copy(c, controller, false);
+            c.setCastSA(copySA);
         }
 
         copySA.setCopied(true);
         // 707.10b
         copySA.setOriginalAbility(targetSA);
-        c.setCastSA(copySA);
 
         if (targetSA.usesTargeting()) {
             // do for SubAbilities too?
