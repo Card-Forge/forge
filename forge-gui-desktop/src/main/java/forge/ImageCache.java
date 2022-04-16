@@ -45,6 +45,7 @@ import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.gui.FThreads;
+import forge.gui.GuiBase;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
@@ -259,7 +260,8 @@ public class ImageCache {
         // as otherwise it's problematic to update if the real image gets fetched.
         if (original == null || useArtCrop) {
             if ((ipc != null || cardView != null) && !originalKey.equals(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD))) {
-                int width = 488, height = 680;
+                float screenScale = GuiBase.getInterface().getScreenScale();
+                int width = Math.round(488 * screenScale), height = Math.round(680 * screenScale);
                 BufferedImage art = original;
                 CardView card = ipc != null ? Card.getCardForUi(ipc).getView() : cardView;
                 String legalString = null;

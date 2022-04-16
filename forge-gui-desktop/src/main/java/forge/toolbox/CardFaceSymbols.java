@@ -10,6 +10,7 @@ import com.esotericsoftware.minlog.Log;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
+import forge.gui.GuiBase;
 import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FSkin.SkinImage;
 
@@ -295,13 +296,23 @@ public class CardFaceSymbols {
         FSkin.drawImage(g, MANA_IMAGES.get(imageName), x, y);
     }
     public static void drawManaSymbol(final String imageName, final Graphics g, final int x, final int y) {
-        FSkin.drawImage(g, MANA_IMAGES.get(imageName).resize(manaImageSize, manaImageSize), x, y);
+        drawSymbol(imageName, g, x, y, manaImageSize);
     }
     public static void drawSymbol(final String imageName, final Graphics g, final int x, final int y, final int size) {
-        FSkin.drawImage(g, MANA_IMAGES.get(imageName).resize(size, size), x, y);
+        // Obtain screen DPI scale
+        float screenScale = GuiBase.getInterface().getScreenScale();
+        int imageSize = Math.round(size * screenScale);
+
+        FSkin.drawImage(g, MANA_IMAGES.get(imageName).resize(imageSize, imageSize),
+            x, y, x + size, y + size, 0, 0, imageSize, imageSize);
     }
     public static void drawWatermark(final String imageName, final Graphics g, final int x, final int y, final int size) {
-        FSkin.drawImage(g, WATERMARKS.get(imageName).resize(size, size), x, y);
+        // Obtain screen DPI scale
+        float screenScale = GuiBase.getInterface().getScreenScale();
+        int imageSize = Math.round(size * screenScale);
+
+        FSkin.drawImage(g, WATERMARKS.get(imageName).resize(imageSize, imageSize),
+            x, y, x + size, y + size, 0, 0, imageSize, imageSize);
     }
     public static void drawAbilitySymbol(final String imageName, final Graphics g, final int x, final int y, final int w, final int h) {
         FSkin.drawImage(g, MANA_IMAGES.get(imageName), x, y, w, h);

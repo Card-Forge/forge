@@ -8,6 +8,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.gui.GuiBase;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
 import forge.screens.deckeditor.controllers.CStatistics;
 import forge.toolbox.FLabel;
@@ -309,6 +310,7 @@ public enum VStatistics implements IVDoc<CStatistics> {
     }
 
     private static FLabel buildLabel(final StatTypes statType, final boolean zebra) {
-        return buildLabel(FSkin.getImage(statType.skinProp, 18, 18), zebra);
+        int imageSize = Math.round(18 * GuiBase.getInterface().getScreenScale());
+        return buildLabel(FSkin.getImage(statType.skinProp, imageSize, imageSize), zebra);
     }
 }

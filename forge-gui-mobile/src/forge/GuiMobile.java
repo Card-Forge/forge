@@ -322,4 +322,9 @@ public class GuiMobile implements IGuiBase {
     public void preventSystemSleep(boolean preventSleep) {
         Forge.getDeviceAdapter().preventSystemSleep(preventSleep);
     }
+
+    @Override
+    public float getScreenScale() {
+        return 1f;
+    }
 }

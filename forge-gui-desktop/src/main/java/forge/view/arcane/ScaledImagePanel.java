@@ -23,6 +23,8 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
+import forge.gui.GuiBase;
+
 /**
  * <p>
  * ScaledImagePanel class.
@@ -107,24 +109,25 @@ public class ScaledImagePanel extends JPanel {
         //ResampleOp resizer = new ResampleOp(DimensionConstrain.createMaxDimension(this.getWidth(), this.getHeight(), !scaleLarger));
         //resizer.setUnsharpenMask(UnsharpenMask.Soft);
         BufferedImage img = getSrcImage(); //resizer.filter(getSrcImage(), null);
+        float screenScale = GuiBase.getInterface().getScreenScale();
 
-        boolean needsScale = img.getWidth() < sz.width;
-        float scaleFactor = ((float)img.getWidth()) / sz.width;
-        if (needsScale && ( scaleFactor < 0.95 || scaleFactor > 1.05 )) { // This should very low-quality scaling to draw during animation            
-            float maxZoomX = ((float)sz.width) / img.getWidth();
-            float maxZoomY = ((float)sz.height) / img.getHeight();
+        boolean needsScale = Math.round(img.getWidth() / screenScale) < sz.width;
+        float scaleFactor = ((float)img.getWidth() / screenScale) / sz.width;
+        if (needsScale && ( scaleFactor < 0.95 || scaleFactor > 1.05 )) { // This should very low-quality scaling to draw during animation
+            float maxZoomX = ((float)sz.width) / (img.getWidth() / screenScale);
+            float maxZoomY = ((float)sz.height) / (img.getHeight() / screenScale);
             float zoom = Math.min(maxZoomX, maxZoomY);
 
-            int zoomedWidth = (int) (img.getWidth() * zoom);
-            int zoomedHeight = (int) (img.getHeight() * zoom);
+            int zoomedWidth = (int) (img.getWidth() / screenScale * zoom);
+            int zoomedHeight = (int) (img.getHeight() / screenScale * zoom);
             int x = (sz.width - zoomedWidth) / 2;
             int y = (sz.height - zoomedHeight) / 2;
 
-            g.drawImage(img, x, y, zoomedWidth, zoomedHeight, null);
-        } else { 
-            int x = (sz.width / 2) - (img.getWidth() / 2);
-            int y = (sz.height / 2) - (img.getHeight() / 2);
-            g.drawImage(img, x, y, null);
+            g.drawImage(img, x, y, x + zoomedWidth, y + zoomedHeight, 0, 0, img.getWidth(), img.getHeight(), null);
+        } else {
+            int x = Math.round((sz.width / 2) - (img.getWidth() / screenScale / 2));
+            int y = Math.round((sz.height / 2) - (img.getHeight() / screenScale / 2));
+            g.drawImage(img, x, y, x + sz.width, y + sz.height, 0, 0, img.getWidth(), img.getHeight(), null);
         }
     }
 
