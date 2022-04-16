@@ -126,26 +126,14 @@ public class Controls {
             FileHandle atlasFile = skinFile.sibling(skinFile.nameWithoutExtension() + ".atlas");
             TextureAtlas atlas = new TextureAtlas(atlasFile);
             //font
-            FreeTypeFontGenerator generateFonts=new FreeTypeFontGenerator(Config.instance().getFile(Paths.SKIN_FONT));
-            FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-            parameter.borderWidth=0;
-            parameter.incremental = true;
-            parameter.mono=true;
-            parameter.size=11;
-            parameter.minFilter = Texture.TextureFilter.Nearest;
-            parameter.magFilter = Texture.TextureFilter.Nearest;
-            parameter.color= Color.WHITE;
-
-            defaultfont = generateFonts.generateFont(parameter);
-
-
-            parameter.size=22;
-            parameter.color= Color.WHITE;
-            bigfont = generateFonts.generateFont(parameter);
-            SelectedSkin.add("default",defaultfont);
-            SelectedSkin.add("big",bigfont);
+            defaultfont = new BitmapFont(Config.instance().getFile(Paths.SKIN).sibling("LanaPixel.fnt"));
+            bigfont = new BitmapFont(Config.instance().getFile(Paths.SKIN).sibling("LanaPixel.fnt"));
+            bigfont.getData().setScale(2, 2);
+            SelectedSkin.add("default", defaultfont);
+            SelectedSkin.add("big", bigfont);
             SelectedSkin.addRegions(atlas);
             SelectedSkin.load(skinFile);
+
         }
         return SelectedSkin;
     }
