@@ -203,10 +203,12 @@ public class GameHUD extends Stage {
         float displayY = ui.getY();
         float displayT = ui.getTop();
         float displayR = ui.getRight();
+        //menu Y bounds
+        float menuY = menuActor.getY();
         //auto follow touchpad
         if (GuiBase.isAndroid()) {
             if (!(touch.x>=mMapX&&touch.x<=mMapR&&touch.y>=mMapY&&touch.y<=mMapT) // not inside map bounds
-                    && !(touch.x>=uiX&&touch.x<=uiRight&&touch.y>=uiY&&touch.y<=uiTop) //not inside gamehud bounds
+                    && !(touch.x>=uiX&&touch.x<=uiRight&&touch.y>=menuY&&touch.y<=uiTop) //not inside gamehud bounds and menu Y bounds
                     && (touch.x>=displayX&&touch.x<=displayR&&touch.y>=displayY&&touch.y<=displayT) //inside display bounds
                     && pointer < 1) { //not more than 1 pointer
                 touchpad.setBounds(touch.x-TOUCHPAD_SCALE/2, touch.y-TOUCHPAD_SCALE/2, TOUCHPAD_SCALE, TOUCHPAD_SCALE);
