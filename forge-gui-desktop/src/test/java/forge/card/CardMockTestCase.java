@@ -35,7 +35,7 @@ import java.util.ResourceBundle;
         ForgeConstants.class, Localizer.class})
 @SuppressStaticInitializationFor({"forge.ImageCache", "forge.localinstance.properties.ForgeConstants"})
 @PowerMockIgnore({"javax.xml.*", "org.xml.sax.*", "com.sun.org.apache.xerces.*", "org.w3c.dom.*",  "org.springframework.context.*", "org.apache.log4j.*"})
-public class ForgeCardMockTestCase extends PowerMockTestCase {
+public class CardMockTestCase extends PowerMockTestCase {
 
     public static final String MOCKED_LOCALISED_STRING = "any localised string";
 
@@ -73,7 +73,7 @@ public class ForgeCardMockTestCase extends PowerMockTestCase {
         Field fAssetsDir = PowerMockito.field(ForgeConstants.class, "ASSETS_DIR");
         fAssetsDir.set(ForgeConstants.class, assetDir);
         // User Dir
-        String homeDir = ForgeCardMockTestCase.getUserDir();
+        String homeDir = CardMockTestCase.getUserDir();
         Field fUserDir = PowerMockito.field(ForgeConstants.class, "USER_DIR");
         fUserDir.set(ForgeConstants.class, homeDir);
         // User Pref Dir

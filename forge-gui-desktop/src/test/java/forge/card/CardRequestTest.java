@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 @Test(timeOut = 1000, enabled = true)
-public class CardRequestTestCase {
+public class CardRequestTest {
 
     private String cardName;
     private String edition;

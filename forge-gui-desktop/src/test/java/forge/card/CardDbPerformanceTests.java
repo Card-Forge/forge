@@ -10,7 +10,7 @@ import java.util.TreeSet;
 
 import static org.testng.Assert.assertNotNull;
 
-public class CardDbPerformanceTests  extends CardDbTestCase {
+public class CardDbPerformanceTests  extends CardDbCardMockTestCase {
 
     private Set<String> fullDbCardNames = new TreeSet<>();
 

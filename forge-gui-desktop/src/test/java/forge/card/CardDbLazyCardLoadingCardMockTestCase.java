@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
-public class CardDbTestLazyCardLoading extends ForgeCardMockTestCase {
+public class CardDbLazyCardLoadingCardMockTestCase extends CardMockTestCase {
 
     protected CardDb cardDb;
 

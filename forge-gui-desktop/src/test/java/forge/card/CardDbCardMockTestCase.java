@@ -14,7 +14,7 @@ import java.util.*;
 
 import static org.testng.Assert.*;
 
-public class CardDbTestCase extends ForgeCardMockTestCase {
+public class CardDbCardMockTestCase extends CardMockTestCase {
 
     protected LegacyCardDb legacyCardDb;
     protected CardDb cardDb;

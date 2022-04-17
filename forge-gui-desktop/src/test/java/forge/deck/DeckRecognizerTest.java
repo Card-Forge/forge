@@ -3,7 +3,7 @@ package forge.deck;
 import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.CardEdition;
-import forge.card.ForgeCardMockTestCase;
+import forge.card.CardMockTestCase;
 import forge.card.MagicColor;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
@@ -19,7 +19,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class DeckRecognizerTest extends ForgeCardMockTestCase {
+public class DeckRecognizerTest extends CardMockTestCase {
 
     private Set<String> mtgUniqueCardNames;
     private Set<String> mtgUniqueSetCodes;
@@ -348,7 +348,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
                 "       //Colorless----", "(green)",
                 "// Multicolor", "// MultiColour"};
 
-        String cname = ForgeCardMockTestCase.MOCKED_LOCALISED_STRING;
+        String cname = CardMockTestCase.MOCKED_LOCALISED_STRING;
         String[] expectedTokenText = new String[] {
                 String.format("%s {U}", cname), String.format("%s {R}", cname),
                 String.format("%s {W}", cname), String.format("%s {B}", cname),
@@ -377,7 +377,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         String[] mixedSymbols = new String[] {
                 "{u} White", "{R}-black", "White {g}", "// {b} Blue", "(green|{r})"
         };
-        String cname = ForgeCardMockTestCase.MOCKED_LOCALISED_STRING;
+        String cname = CardMockTestCase.MOCKED_LOCALISED_STRING;
         String[] expectedTokenText = new String[] {
                 String.format("%s/%s %s", cname, cname, "{WU}"),
                 String.format("%s/%s %s", cname, cname, "{BR}"),
@@ -412,7 +412,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         String[] manaSymbols = new String[] {"{WU}", "{UB}", "{BR}", "{GW}", "{RG}",
                 "{WB}", "{UR}", "{BG}", "{RW}", "{GU}"};
 
-        String cname = ForgeCardMockTestCase.MOCKED_LOCALISED_STRING;
+        String cname = CardMockTestCase.MOCKED_LOCALISED_STRING;
         String[] expectedTokenText = new String[] {
                 String.format("%s/%s %s", cname, cname, "{WU}"),
                 String.format("%s/%s %s", cname, cname, "{UB}"),
@@ -470,7 +470,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         DeckRecognizer recognizer = new DeckRecognizer();
         String[] cmcTokens = new String[] {"Blue Colourless", "Red Multicolour", "Colorless White",
                 "// Multicolour ", "(green|Colourless)"};
-        String cname = ForgeCardMockTestCase.MOCKED_LOCALISED_STRING;
+        String cname = CardMockTestCase.MOCKED_LOCALISED_STRING;
         String[] expectedTokenText = new String[] {
                 String.format("%s {U} // %s {C}", cname, cname),
                 String.format("%s {R} // %s {W}{U}{B}{R}{G}", cname, cname),
@@ -492,7 +492,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         String[] cmcTokens = new String[] {"Colorless Colourless", "Multicolor Multicolour",
                 "Colorless colourless"};
 
-        String cname = ForgeCardMockTestCase.MOCKED_LOCALISED_STRING;
+        String cname = CardMockTestCase.MOCKED_LOCALISED_STRING;
         String[] expectedTokenText = new String[] {
                 String.format("%s {C}", cname),
                 String.format("%s {W}{U}{B}{R}{G}", cname),
@@ -592,13 +592,13 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         t = recognizer.recogniseNonCardToken("//Blue");
         assertNotNull(t);
         assertEquals(t.getType(), TokenType.MANA_COLOUR);
-        assertEquals(t.getText(), String.format("%s {U}", ForgeCardMockTestCase.MOCKED_LOCALISED_STRING));
+        assertEquals(t.getText(), String.format("%s {U}", CardMockTestCase.MOCKED_LOCALISED_STRING));
         assertEquals(t.getQuantity(), 0);
 
         t = recognizer.recogniseNonCardToken("(Colorless)");
         assertNotNull(t);
         assertEquals(t.getType(), TokenType.MANA_COLOUR);
-        assertEquals(t.getText(), String.format("%s {C}", ForgeCardMockTestCase.MOCKED_LOCALISED_STRING));
+        assertEquals(t.getText(), String.format("%s {C}", CardMockTestCase.MOCKED_LOCALISED_STRING));
         assertEquals(t.getQuantity(), 0);
 
         t = recognizer.recogniseNonCardToken("//Planes");

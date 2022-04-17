@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
-public class CardEditionCollectionTestCase extends ForgeCardMockTestCase {
+public class CardEditionCollectionCardMockTestCase extends CardMockTestCase {
 
     @Test
     public void testGetTheLatestOfAllTheOriginalEditionsOfCardsInPoolWithOriginalSets(){

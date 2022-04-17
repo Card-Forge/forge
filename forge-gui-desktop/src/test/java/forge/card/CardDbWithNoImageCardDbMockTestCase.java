@@ -20,7 +20,7 @@ import static org.testng.Assert.assertNotNull;
  * Note: Run test for the class, being subclass will also run all
  * other tests as regression.
  */
-public class CardDbTestWithNoImage extends CardDbTestCase {
+public class CardDbWithNoImageCardDbMockTestCase extends CardDbCardMockTestCase {
 
     @Override
     @BeforeMethod

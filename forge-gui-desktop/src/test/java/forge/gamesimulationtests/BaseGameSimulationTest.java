@@ -3,7 +3,7 @@ package forge.gamesimulationtests;
 import forge.ImageCache;
 import forge.ImageKeys;
 import forge.Singletons;
-import forge.card.ForgeCardMockTestCase;
+import forge.card.CardMockTestCase;
 import forge.game.GameLogFormatter;
 import forge.gamesimulationtests.util.GameWrapper;
 import forge.gamesimulationtests.util.player.PlayerSpecification;
@@ -29,7 +29,7 @@ import java.util.ResourceBundle;
 		ForgeConstants.class, Localizer.class, Sentry.class, GameLogFormatter.class})
 @SuppressStaticInitializationFor({"forge.ImageCache", "forge.localinstance.properties.ForgeConstants"})
 @PowerMockIgnore({"javax.xml.*", "org.xml.sax.*", "com.sun.org.apache.xerces.*", "org.w3c.dom.*",  "org.springframework.context.*", "org.apache.log4j.*"})
-public class BaseGameSimulationTest extends ForgeCardMockTestCase {
+public class BaseGameSimulationTest extends CardMockTestCase {
 
 	@BeforeMethod
 	@Override
