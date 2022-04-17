@@ -7,6 +7,7 @@ import java.util.Map;
 import com.google.common.collect.Maps;
 
 public class AbilityKeyTest {
+
 	@Test
 	public void testFromStringWorksForAllKeys() {
 		for (AbilityKey key : AbilityKey.values()) {
@@ -17,7 +18,6 @@ public class AbilityKeyTest {
 	@Test
 	public void testCopyingEmptyMapWorks() {
 		Map<AbilityKey, Object> map = Maps.newHashMap();
-
 		Map<AbilityKey, Object> newMap = AbilityKey.newMap(map);
 
 		// An actual copy should be made.

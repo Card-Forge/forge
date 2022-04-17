@@ -11,6 +11,7 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 
 public class ManaCostBeingPaidTest {
+
 	@Test
 	public void testPayManaViaConvoke() {
 		runConvokeTest("1 W W", new byte[] { WHITE, COLORLESS, WHITE }, new String[] { "{1}{W}{W}", "{1}{W}", "{W}" });
@@ -20,16 +21,21 @@ public class ManaCostBeingPaidTest {
 	}
 
 	private void runConvokeTest(String initialCost, byte[] colorsToPay, String[] expectedRemainder) {
-		ManaCostBeingPaid cost = createManaCostBeingPaid(initialCost);
+
+		ManaCostBeingPaid costBeingPaid = createManaCostBeingPaid(initialCost);
+
 		for (int i = 0; i < colorsToPay.length; i++) {
-			AssertJUnit.assertEquals(expectedRemainder[i], cost.toString());
-			cost.payManaViaConvoke(colorsToPay[i]);
+			AssertJUnit.assertEquals(expectedRemainder[i], costBeingPaid.toString());
+			costBeingPaid.payManaViaConvoke(colorsToPay[i]);
 		}
-		AssertJUnit.assertEquals("0", cost.toString());
+
+		AssertJUnit.assertEquals("0", costBeingPaid.toString());
 	}
 
-	private ManaCostBeingPaid createManaCostBeingPaid(String cost) {
-		ManaCostParser parser = new ManaCostParser(cost);
-		return new ManaCostBeingPaid(new ManaCost(parser));
+	private ManaCostBeingPaid createManaCostBeingPaid(String costString) {
+		ManaCostParser parsedCostString = new ManaCostParser(costString);
+		ManaCost manaCost = new ManaCost(parsedCostString);
+
+		return new ManaCostBeingPaid(manaCost);
 	}
 }
