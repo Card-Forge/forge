@@ -21,7 +21,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-public class GameSimulatorTest extends SimulationTest {
+public class GameSimulationTest extends SimulationTest {
 
     @Test
 	public void testActivateAbilityTriggers() {

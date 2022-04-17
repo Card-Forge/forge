@@ -14,7 +14,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-public class SpellAbilityPickerTest extends SimulationTest {
+public class SpellAbilityPickerSimulationTest extends SimulationTest {
     @Test
 	public void testPickingLethalDamage() {
         Game game = initAndCreateGame();

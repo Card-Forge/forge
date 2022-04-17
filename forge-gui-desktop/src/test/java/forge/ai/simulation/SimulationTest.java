@@ -1,14 +1,23 @@
 package forge.ai.simulation;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+
 import forge.GuiDesktop;
 import forge.StaticData;
 import forge.ai.AIOption;
 import forge.ai.LobbyPlayerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.deck.Deck;
-import forge.game.*;
+import forge.game.Game;
+import forge.game.GameRules;
+import forge.game.GameStage;
+import forge.game.GameType;
+import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
@@ -20,11 +29,6 @@ import forge.item.IPaperCard;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import junit.framework.TestCase;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 public class SimulationTest {
     private static boolean initialized = false;
