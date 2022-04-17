@@ -1,0 +1,10 @@
+Name:Bouncer's Beatdown
+ManaCost:2 G
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ CostReduction | Relative$ True | EffectZone$ All | Description$ This spell costs {2} less to cast if it targets a a black permanent.
+SVar:CostReduction:Count$Compare CheckTgt GE1.2.0
+SVar:CheckTgt:Targeted$Valid Permanent.Black
+A:SP$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X | ReplaceDyingDefined$ Targeted | SpellDescription$ CARDNAME deals X damage to target creature or planeswalker. If you controlled a modified creature as you cast this spell, it deals X plus 2 damage instead. (Equipment, auras you control and counters are modifications.)
+SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
+SVar:NeedsToPlayVar:X GE3
+Oracle:This spell costs {2} less to cast if it targets a black permanent.\nBouncer's Beatdown deals X damage to target creature or planeswalker, where X is the greatest power among creatures you control. If that creature or planeswalker would die this turn, exile it instead.
