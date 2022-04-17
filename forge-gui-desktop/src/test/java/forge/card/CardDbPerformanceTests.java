@@ -1,14 +1,15 @@
 package forge.card;
 
-import forge.item.PaperCard;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import static org.testng.Assert.assertNotNull;
 
 import java.util.Collection;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static org.testng.Assert.assertNotNull;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import forge.item.PaperCard;
 
 public class CardDbPerformanceTests  extends CardDbCardMockTestCase {
 

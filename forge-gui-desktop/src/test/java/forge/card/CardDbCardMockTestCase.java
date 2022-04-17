@@ -1,18 +1,29 @@
 package forge.card;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.google.common.base.Predicate;
+
 import forge.StaticData;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.model.FModel;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.util.*;
-
-import static org.testng.Assert.*;
 
 public class CardDbCardMockTestCase extends CardMockTestCase {
 

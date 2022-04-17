@@ -1,14 +1,15 @@
 package forge.card;
 
-import forge.deck.CardPool;
-import forge.item.PaperCard;
-import forge.model.FModel;
-import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
+import org.testng.annotations.Test;
+
+import forge.deck.CardPool;
+import forge.item.PaperCard;
+import forge.model.FModel;
 
 public class CardEditionCollectionCardMockTestCase extends CardMockTestCase {
 

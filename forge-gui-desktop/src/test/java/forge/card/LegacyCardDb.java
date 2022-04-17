@@ -1,18 +1,24 @@
 package forge.card;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.TreeMap;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
+
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.CollectionSuppliers;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.*;
 
 /**
  * Test Class (only for test purposes) to compare previous method implementations

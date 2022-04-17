@@ -1,16 +1,14 @@
 package forge.card;
 
-import forge.ImageCache;
-import forge.ImageKeys;
-import forge.Singletons;
-import forge.StaticData;
-import forge.gamesimulationtests.util.CardDatabaseHelper;
-import forge.item.PaperCard;
-import forge.localinstance.properties.ForgeConstants;
-import forge.localinstance.properties.ForgePreferences;
-import forge.model.FModel;
-import forge.util.Localizer;
-import forge.util.TextUtil;
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import javax.imageio.ImageIO;
+
 import org.apache.commons.lang3.StringUtils;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
@@ -22,13 +20,17 @@ import org.testng.IObjectFactory;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.ObjectFactory;
 
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import forge.ImageCache;
+import forge.ImageKeys;
+import forge.Singletons;
+import forge.StaticData;
+import forge.gamesimulationtests.util.CardDatabaseHelper;
+import forge.item.PaperCard;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
+import forge.util.Localizer;
+import forge.util.TextUtil;
 
 @PrepareForTest(value = {FModel.class, Singletons.class, ResourceBundle.class,
         ImageCache.class, ImageIO.class, ImageKeys.class,
