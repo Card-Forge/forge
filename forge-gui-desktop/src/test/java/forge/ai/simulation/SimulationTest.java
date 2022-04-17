@@ -26,7 +26,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class SimulationTestCase extends TestCase {
+public class SimulationTest {
     private static boolean initialized = false;
 
     protected Game initAndCreateGame() {
