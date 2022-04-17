@@ -3,10 +3,10 @@ ManaCost:W U B R
 Types:Legendary Artifact Creature Human
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 blue Thopter artifact creature tokens with flying.
-SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ u_1_1_a_thopter_flying | TokenOwner$ You
-A:AB$ Charm | Cost$ 2 Sac<2/Artifact> | Choices$ DBDealDamage,DBPump,DBGainLife | Defined$ You
-SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target player or planeswalker.
-SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -4 | NumDef$ -4 | IsCurse$ True | SpellDescription$ Target creature gets -4/-4 until end of turn
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ u_1_1_a_thopter_flying
+A:AB$ Charm | Cost$ 2 Sac<2/Artifact> | Choices$ DBDealDamage,DBPump,DBGainLife
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 3 | SpellDescription$ NICKNAME deals 3 damage to target player or planeswalker.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -4 | NumDef$ -4 | IsCurse$ True | SpellDescription$ Target creature gets -4/-4 until end of turn.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 5 | Defined$ You | SpellDescription$ You gain 5 life.
-DeckHas:Ability$Token|LifeGain
+DeckHas:Ability$Token|LifeGain|Sacrifice & Type$Thopter
 Oracle:When Breya, Etherium Shaper enters the battlefield, create two 1/1 blue Thopter artifact creature tokens with flying.\n{2}, Sacrifice two artifacts: Choose one —\n• Breya deals 3 damage to target player or planeswalker.\n• Target creature gets -4/-4 until end of turn.\n• You gain 5 life.
