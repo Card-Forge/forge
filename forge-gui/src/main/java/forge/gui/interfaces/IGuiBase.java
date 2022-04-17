@@ -61,4 +61,5 @@ public interface IGuiBase {
     void runBackgroundTask(String message, Runnable task);
     String encodeSymbols(String str, boolean formatReminderText);
     void preventSystemSleep(boolean preventSleep);
+    float getScreenScale();
 }

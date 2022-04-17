@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import com.google.common.base.Predicates;
 
+import forge.gui.GuiBase;
 import forge.gui.UiCommand;
 import forge.item.InventoryItem;
 import forge.item.ItemPredicate;
@@ -43,7 +44,8 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
         }
         tooltip.append(")");
 
-        final FLabel button = addToggleButton(widget, FSkin.getImage(st.skinProp, 18, 18), tooltip.toString());
+        int imageSize = Math.round(18 * GuiBase.getInterface().getScreenScale());
+        final FLabel button = addToggleButton(widget, FSkin.getImage(st.skinProp, imageSize, imageSize), tooltip.toString());
         buttonMap.put(st, button);
 
         //hook so right-clicking a button toggles itself on and toggles off all other buttons
