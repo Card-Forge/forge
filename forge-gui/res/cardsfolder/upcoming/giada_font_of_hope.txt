@@ -1,0 +1,13 @@
+Name:Giada, Font of Hope
+ManaCost:1 W
+Types:Legendary Creature Angel
+PT:2/2
+K:Flying
+K:Vigilance
+K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.Angel+YouCtrl+Other
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ Each other Angel you control enters the battlefield with an additional +1/+1 counter on it for each Angel you already control.
+SVar:X:Count$Valid Angel.YouCtrl
+A:AB$ Mana | Cost$ T | Produced$ W | RestrictValid$ Spell.Angel | SpellDescription$ Add {W}. Spend this mana only to cast an Angel spell.
+DeckHas:Ability$Counters
+DeckNeeds:Type$Angel
+Oracle:Flying, vigilance\nEach other Angel you control enters the battlefield with an additional +1/+1 counter on it for each Angel you already control.\n{T}: Add {W}. Spend this mana only to cast an Angel spell.

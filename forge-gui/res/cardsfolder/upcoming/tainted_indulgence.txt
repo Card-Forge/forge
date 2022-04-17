@@ -1,0 +1,8 @@
+Name:Tainted Indulgence
+ManaCost:U B
+Types:Instant
+A:SP$ Draw | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards. Then discard a card unless there are five or more mana values among cards in your graveyard.
+SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | ConditionCheckSVar$ X | ConditionSVarCompare$ LE4
+SVar:X:Count$ValidGraveyard Card.YouOwn$DifferentCMC
+DeckHas:Ability$Discard|Graveyard
+Oracle:Draw two cards. Then discard a card unless there are five or more mana values among cards in your graveyard.
