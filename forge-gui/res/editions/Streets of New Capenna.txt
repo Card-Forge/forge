@@ -5,6 +5,10 @@ Name=Streets of New Capenna
 Code2=SNC
 MciCode=snc
 Type=Expansion
+BoosterCovers=3
+Booster=10 Common:fromsheet("SNC cards"), 3 Uncommon:fromSheet("SNC cards"), 1 RareMythic:fromSheet("SNC cards"), 1 fromSheet("SNC lands")
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
 ScryfallCode=SNC
 
 [cards]
@@ -289,6 +293,8 @@ ScryfallCode=SNC
 279 L Mountain @Ann-Sophie De Steur
 280 L Forest @Matteo Bassini
 281 L Forest @W.Flemming
+
+[borderless]
 282 M Elspeth Resplendent @Tom Roberts
 283 M Vivien on the Hunt @Tom Roberts
 284 M Ob Nixilis, the Adversary @Tom Roberts
@@ -303,6 +309,8 @@ ScryfallCode=SNC
 293 R Spara's Headquarters @Dominik Mayer
 294 R Xander's Lounge @Dominik Mayer
 295 R Ziatora's Proving Ground @Dominik Mayer
+
+[showcase]
 296 U Brazen Upstart @Samy Halim
 297 R Brokers Ascendancy @Shawn Pagels
 298 U Brokers Charm @Jérémie Solomon
@@ -413,6 +421,17 @@ ScryfallCode=SNC
 403 R Void Rend @Krharts
 404 M Ziatora, the Incinerator @Scott M. Fischer
 405 R Ziatora's Envoy @Olga Tereshenko
+441 M Elspeth Resplendent @Krharts
+442 R Giada, Font of Hope @Scott M. Fischer
+443 M Sanctuary Warden @Julie Dillon
+444 R Errant, Street Artist @Alix Branwyn
+445 R Tenacious Underdog @Jason A. Engle
+446 M Urabrask, Heretic Praetor @Igor Kieryluk
+447 M Vivien on the Hunt @Jason A. Engle
+448 M Ob Nixilis, the Adversary @Igor Kieryluk
+449 R Scheming Fence @Artur Treffner
+
+[extended art]
 406 R Depopulate @Jokubas Uogintas
 407 R Extraction Specialist @Irina Nordsol
 408 R Mysterious Limousine @Dan Scott
@@ -448,15 +467,8 @@ ScryfallCode=SNC
 438 R Getaway Car @Donato Giancola
 439 M Luxior, Giada's Gift @Volkan Baǵa
 440 R Unlicensed Hearse @Chris Seaman
-441 M Elspeth Resplendent @Krharts
-442 R Giada, Font of Hope @Scott M. Fischer
-443 M Sanctuary Warden @Julie Dillon
-444 R Errant, Street Artist @Alix Branwyn
-445 R Tenacious Underdog @Jason A. Engle
-446 M Urabrask, Heretic Praetor @Igor Kieryluk
-447 M Vivien on the Hunt @Jason A. Engle
-448 M Ob Nixilis, the Adversary @Igor Kieryluk
-449 R Scheming Fence @Artur Treffner
+
+[box topper]
 450 R Gala Greeters @Fay Dalton
 451 R Gala Greeters @Song Qijin
 452 R Gala Greeters @SENSEN
@@ -468,12 +480,38 @@ ScryfallCode=SNC
 458 R Gala Greeters @Daniel Correia
 459 R Gala Greeters @Olga Tereshenko
 460 R Gala Greeters @Voyager Illustration
+
+[buy a box]
 461 R Jaxis, the Troublemaker @Taras Susak
+
+[promo]
 462 R Mysterious Limousine @Hector Ortiz
 463 U Rumor Gatherer @Simon Dominic
 464 U An Offer You Can't Refuse @Dallas Williams
 465 C Incriminate @Kieran Yanner
 466 C Light 'Em Up @Tony Foti
 467 U Courier's Briefcase @Josu Hernaiz
+
+[lands]
+2 Plains|SNC|1
+2 Plains|SNC|2
+1 Plains|SNC|3
+1 Plains|SNC|4
+2 Island|SNC|1
+2 Island|SNC|2
+1 Island|SNC|3
+1 Island|SNC|4
+2 Swamp|SNC|1
+2 Swamp|SNC|2
+1 Swamp|SNC|3
+1 Swamp|SNC|4
+2 Mountain|SNC|1
+2 Mountain|SNC|2
+1 Mountain|SNC|3
+1 Mountain|SNC|4
+2 Forest|SNC|1
+2 Forest|SNC|2
+1 Forest|SNC|3
+1 Forest|SNC|4
 
 [tokens]
