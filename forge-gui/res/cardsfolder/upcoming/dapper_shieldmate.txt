@@ -1,0 +1,7 @@
+Name:Dapper Shieldmate
+ManaCost:3 W
+Types:Creature Human Soldier
+PT:2/2
+K:etbCounter:Shield:1:no Condition:CARDNAME enters the battlefield with a shield counter on it.  (If it would be dealt damage or destroyed, remove a shield counter from it instead.)
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | Condition$ PlayerTurn | Description$ As long as it's your turn, CARDNAME gets +2/+0.
+Oracle:Dapper Shieldmate enters the battlefield with a shield counter on it. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)\nAs long as it's your turn, Dapper Shieldmate gets +2/+0.
