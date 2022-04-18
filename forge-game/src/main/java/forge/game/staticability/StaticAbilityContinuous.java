@@ -56,11 +56,9 @@ import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
-import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 
@@ -675,6 +673,10 @@ public final class StaticAbilityContinuous {
                 if (stAb.hasParam("AddNames")) { // currently only for AllNonLegendaryCreatureNames
                     affectedCard.addChangedName(null, true, se.getTimestamp(), stAb.getId());
                 }
+                if (stAb.hasParam("SetName")) {
+                    affectedCard.addChangedName(stAb.getParam("SetName"), false,
+                            se.getTimestamp(), stAb.getId());
+                }
 
                 // Change color words
                 if (params.containsKey("ChangeColorWordsTo")) {
@@ -724,8 +726,6 @@ public final class StaticAbilityContinuous {
             }
 
             // add keywords
-            // TODO regular keywords currently don't try to use keyword multiplier
-            // (Although nothing uses it at this time)
             if (addKeywords != null || removeKeywords != null || removeAllAbilities) {
                 List<String> newKeywords = null;
                 if (addKeywords != null) {
@@ -806,10 +806,7 @@ public final class StaticAbilityContinuous {
                             abilty = TextUtil.fastReplace(abilty, "ConvertedManaCost", costcmc);
                         }
                         if (abilty.startsWith("AB") || abilty.startsWith("ST")) { // grant the ability
-                            final SpellAbility sa = AbilityFactory.getAbility(abilty, affectedCard, stAb);
-                            sa.setIntrinsic(false);
-                            sa.setGrantorStatic(stAb);
-                            addedAbilities.add(sa);
+                            addedAbilities.add(affectedCard.getSpellAbilityForStaticAbility(abilty, stAb));
                         }
                     }
                 }
@@ -855,15 +852,14 @@ public final class StaticAbilityContinuous {
                 // add Replacement effects
                 if (addReplacements != null) {
                     for (String rep : addReplacements) {
-                        final ReplacementEffect actualRep = ReplacementHandler.parseReplacement(rep, affectedCard, false, stAb);
-                        addedReplacementEffects.add(actualRep);
+                        addedReplacementEffects.add(affectedCard.getReplacementEffectForStaticAbility(rep, stAb));
                     }
                 }
 
                 // add triggers
                 if (addTriggers != null) {
                     for (final String trigger : addTriggers) {
-                        final Trigger actualTrigger = TriggerHandler.parseTrigger(trigger, affectedCard, false, stAb);
+                        final Trigger actualTrigger = affectedCard.getTriggerForStaticAbility(trigger, stAb);
                         // if the trigger has Execute param, which most trigger gained by Static Abilties should have
                         // turn them into SpellAbility object before adding to card
                         // with that the TargetedCard does not need the Svars added to them anymore
@@ -888,7 +884,7 @@ public final class StaticAbilityContinuous {
                             s = TextUtil.fastReplace(s, "ConvertedManaCost", costcmc);
                         }
 
-                        addedStaticAbility.add(StaticAbility.create(s, affectedCard, stAb.getCardState(), false));
+                        addedStaticAbility.add(affectedCard.getStaticAbilityForStaticAbility(s, stAb));
                     }
                 }
 
@@ -937,7 +933,7 @@ public final class StaticAbilityContinuous {
 
             if (controllerMayPlay && (mayPlayLimit == null || stAb.getMayPlayTurn() < mayPlayLimit)) {
                 String mayPlayAltCost = mayPlayAltManaCost;
-                boolean additional = mayPlayAltCost.contains("RegularCost");
+                boolean additional = mayPlayAltCost != null && mayPlayAltCost.contains("RegularCost");
 
                 if (mayPlayAltCost != null) {
                     if (mayPlayAltCost.contains("ConvertedManaCost")) {

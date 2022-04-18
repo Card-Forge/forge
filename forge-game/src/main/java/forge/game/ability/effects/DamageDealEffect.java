@@ -124,7 +124,7 @@ public class DamageDealEffect extends DamageBaseEffect {
                     break;
                 }
             }
-            stringBuilder.append(statement);
+            stringBuilder.append(" ").append(statement);
         }
         return stringBuilder.toString();
     }

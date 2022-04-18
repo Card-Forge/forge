@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.*;
+import forge.game.card.*;
+import forge.util.Aggregates;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.MagicColor;
@@ -30,17 +32,10 @@ import forge.card.mana.ManaCostParser;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardPlayOption;
 import forge.game.card.CardPlayOption.PayManaCost;
-import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
-import forge.game.keyword.KeywordsChange;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerController;
@@ -567,7 +562,11 @@ public final class GameActionUtil {
                 if (tr != null) {
                     String n = o.split(":")[1];
                     if (host.wasCast() && n.equals("X")) {
-                        n = Integer.toString(pc.announceRequirements(sa, "X for Casualty"));
+                        CardCollectionView creatures = CardLists.filter(CardLists.filterControlledBy(game.getCardsIn
+                                (ZoneType.Battlefield), activator), CardPredicates.Presets.CREATURES);
+                        int max = Aggregates.max(creatures, CardPredicates.Accessors.fnGetNetPower);
+                        int min = Aggregates.min(creatures, CardPredicates.Accessors.fnGetNetPower);
+                        n = Integer.toString(pc.chooseNumber(sa, "Choose X for Casualty", min, max));
                     }
                     final String casualtyCost = "Sac<1/Creature.powerGE" + n + "/creature with power " + n +
                             " or greater>";
@@ -584,6 +583,8 @@ public final class GameActionUtil {
                         result.getPayCosts().add(cost);
                         tr.getOverridingAbility().setSVar("Casualty", n);
                         reset = true;
+                    } else {
+                        tr.getOverridingAbility().setSVar("Casualty", "0");
                     }
                 }
             } else if (o.equals("Conspire")) {
@@ -721,7 +722,7 @@ public final class GameActionUtil {
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         game.getAction().moveTo(ZoneType.Command, eff, null, null);
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-        
+
         return eff;
     }
 
@@ -820,24 +821,8 @@ public final class GameActionUtil {
     }
 
     public static void checkStaticAfterPaying(Card c) {
-        Table<Long, Long, KeywordsChange> oldKW = TreeBasedTable.create((TreeBasedTable<Long, Long, KeywordsChange>) c.getChangedCardKeywords());
-        // this should be the last time checkStaticAbilities is called before SpellCast triggers to
-        // - setup Cascade dependent on high enough X (Imoti)
-        // - remove Replicate if Djinn Illuminatus gets sacrificed as payment
-        // because this will remove the payment SVars for Replicate we need to restore them
         c.getGame().getAction().checkStaticAbilities(false);
 
-        Table<Long, Long, KeywordsChange> updatedKW = c.getChangedCardKeywords();
-        for (Table.Cell<Long, Long, KeywordsChange> entry : oldKW.cellSet()) {
-            for (KeywordInterface ki : entry.getValue().getKeywords()) {
-                // check if this keyword existed previously
-                if ((ki.getOriginal().startsWith("Replicate") || ki.getOriginal().startsWith("Conspire")
-                        || ki.getOriginal().startsWith("Casualty"))
-                        && updatedKW.get(entry.getRowKey(), entry.getColumnKey()) != null) {
-                    updatedKW.put(entry.getRowKey(), entry.getColumnKey(), oldKW.get(entry.getRowKey(), entry.getColumnKey()));
-                }
-            }
-        }
         c.updateKeywords();
 
         c.getGame().getTriggerHandler().resetActiveTriggers();

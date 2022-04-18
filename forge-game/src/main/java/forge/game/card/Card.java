@@ -50,6 +50,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.*;
@@ -60,6 +61,7 @@ import forge.game.staticability.StaticAbilityCantSacrifice;
 import forge.game.staticability.StaticAbilityCantTarget;
 import forge.game.staticability.StaticAbilityCantTransform;
 import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -139,12 +141,21 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private final Table<Long, Long, CardChangedName> changedCardNames = TreeBasedTable.create(); // Layer 3
     private final Table<Long, Long, KeywordsChange> changedCardKeywordsByText = TreeBasedTable.create(); // Layer 3 by Text Change
-    protected KeywordsChange changedCardKeywordsByWord = new KeywordsChange(ImmutableList.<String>of(), null, false); // Layer 3 by Word Change
+    protected KeywordsChange changedCardKeywordsByWord = new KeywordsChange(ImmutableList.<KeywordInterface>of(), ImmutableList.<KeywordInterface>of(), false); // Layer 3 by Word Change
     private final Table<Long, Long, KeywordsChange> changedCardKeywords = TreeBasedTable.create(); // Layer 6
+
+    // stores the keywords created by static abilities
+    private final Table<Long, String, KeywordInterface> storedKeywords = TreeBasedTable.create();
 
     // x=timestamp y=StaticAbility id
     private final Table<Long, Long, CardTraitChanges> changedCardTraitsByText = TreeBasedTable.create(); // Layer 3 by Text Change
     private final Table<Long, Long, CardTraitChanges> changedCardTraits = TreeBasedTable.create(); // Layer 6
+
+    // stores the card traits created by static abilities
+    private final Table<StaticAbility, String, SpellAbility> storedSpellAbilility = TreeBasedTable.create();
+    private final Table<StaticAbility, String, Trigger> storedTrigger = TreeBasedTable.create();
+    private final Table<StaticAbility, String, ReplacementEffect> storedReplacementEffect = TreeBasedTable.create();
+    private final Table<StaticAbility, String, StaticAbility> storedStaticAbility = TreeBasedTable.create();
 
     // x=timestamp y=StaticAbility id
     private final Table<Long, Long, CardColor> changedCardColorsByText = TreeBasedTable.create(); // Layer 3 by Text Change
@@ -179,7 +190,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private List<Pair<Card, Integer>> receivedDamageFromThisTurn = Lists.newArrayList();
     private Map<Player, Integer> receivedDamageFromPlayerThisTurn = Maps.newHashMap();
-    
+
     private final Map<Card, Integer> assignedDamageMap = Maps.newTreeMap();
 
     private boolean isCommander = false;
@@ -3680,7 +3691,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public Iterable<KeywordsChange> getChangedCardKeywordsList() {
         return Iterables.concat(
             changedCardKeywordsByText.values(), // Layer 3
-            ImmutableList.of(new KeywordsChange(ImmutableList.<String>of(), null, this.hasRemoveIntrinsic())), // Layer 4
+            ImmutableList.of(new KeywordsChange(ImmutableList.<KeywordInterface>of(), ImmutableList.<KeywordInterface>of(), this.hasRemoveIntrinsic())), // Layer 4
             changedCardKeywords.values() // Layer 6
         );
     }
@@ -4260,6 +4271,45 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         updateAbilityTextForView();
     }
 
+    public final SpellAbility getSpellAbilityForStaticAbility(final String str, final StaticAbility stAb) {
+        SpellAbility result = storedSpellAbilility.get(stAb, str);
+        if (result == null) {
+            result = AbilityFactory.getAbility(str, this, stAb);
+            result.setIntrinsic(false);
+            result.setGrantorStatic(stAb);
+            storedSpellAbilility.put(stAb, str, result);
+        }
+        return result;
+    }
+
+    public final Trigger getTriggerForStaticAbility(final String str, final StaticAbility stAb) {
+        Trigger result = storedTrigger.get(stAb, str);
+        if (result == null) {
+            result = TriggerHandler.parseTrigger(str, this, false, stAb);
+            storedTrigger.put(stAb, str, result);
+        }
+        return result;
+
+    }
+
+    public final ReplacementEffect getReplacementEffectForStaticAbility(final String str, final StaticAbility stAb) {
+        ReplacementEffect result = storedReplacementEffect.get(stAb, str);
+        if (result == null) {
+            result = ReplacementHandler.parseReplacement(str, this, false, stAb);
+            storedReplacementEffect.put(stAb, str, result);
+        }
+        return result;
+    }
+
+    public final StaticAbility getStaticAbilityForStaticAbility(final String str, final StaticAbility stAb) {
+        StaticAbility result = storedStaticAbility.get(stAb, str);
+        if (result == null) {
+            result = StaticAbility.create(str, this, stAb.getCardState(), false);
+            storedStaticAbility.put(stAb, str, result);
+        }
+        return result;
+    }
+
     public final void addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
             Collection<Trigger> trigger, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics,
             boolean removeAll, boolean removeNonMana, long timestamp, long staticId) {
@@ -4367,8 +4417,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void addChangedCardKeywords(final List<String> keywords, final List<String> removeKeywords,
             final boolean removeAllKeywords, final long timestamp, final long staticId, final boolean updateView) {
-        final KeywordsChange newCks = new KeywordsChange(keywords, removeKeywords, removeAllKeywords);
-        newCks.addKeywordsToCard(this);
+        List<KeywordInterface> kws = Lists.newArrayList();
+        if (keywords != null) {
+            for(String kw : keywords) {
+                kws.add(getKeywordForStaticAbility(kw, staticId));
+            }
+        }
+
+        final KeywordsChange newCks = new KeywordsChange(kws, removeKeywords, removeAllKeywords);
         changedCardKeywords.put(timestamp, staticId, newCks);
 
         if (updateView) {
@@ -4378,10 +4434,24 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
     }
 
+    public final KeywordInterface getKeywordForStaticAbility(String kw, final long staticId) {
+        KeywordInterface result;
+        if (staticId < 1 || !storedKeywords.contains(staticId, kw)) {
+            result = Keyword.getInstance(kw);
+            result.createTraits(this, false);
+            if (staticId > 0) {
+                storedKeywords.put(staticId, kw, result);
+            }
+        } else {
+            result = storedKeywords.get(staticId, kw);
+        }
+        return result;
+    }
+
     public final void addChangedCardKeywordsByText(final List<KeywordInterface> keywords, final long timestamp, final long staticId, final boolean updateView) {
         // keywords should already created for Card, so no addKeywordsToCard
         // this one is done for Volrath's Shapeshifter which replaces all the card text
-        changedCardKeywordsByText.put(timestamp, staticId, new KeywordsChange(keywords, null, true));
+        changedCardKeywordsByText.put(timestamp, staticId, new KeywordsChange(keywords, ImmutableList.<KeywordInterface>of(), true));
 
         if (updateView) {
             updateKeywords();
@@ -4394,7 +4464,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         final long timestamp, final long staticId, final boolean updateView) {
 
         final KeywordsChange newCks = new KeywordsChange(keywords, removeKeywords, removeAllKeywords);
-        newCks.addKeywordsToCard(this);
         changedCardKeywords.put(timestamp, staticId, newCks);
 
         if (updateView) {

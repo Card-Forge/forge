@@ -1,0 +1,8 @@
+Name:Tenacious Underdog
+ManaCost:1 B
+Types:Creature Human Warrior
+PT:3/2
+K:Blitz:2 B B PayLife<2>
+S:Mode$ Continuous | Affected$ Card.Self | MayPlay$ True | ValidSA$ Spell.Blitz | AffectedZone$ Graveyard | EffectZone$ Graveyard | Description$ You may cast CARDNAME from your graveyard using its blitz ability.
+DeckHas:Ability$Sacrifice|Graveyard
+Oracle:Blitz—{2}{B}{B}, Pay 2 life. (If you cast this spell for its blitz cost, it gains haste and "When this creature dies, draw a card." Sacrifice it at the beginning of the next end step.)\nYou may cast Tenacious Underdog from your graveyard using its blitz ability.

@@ -196,6 +196,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     private CardCollection inboundTokens = new CardCollection();
 
     private KeywordCollection keywords = new KeywordCollection();
+    // stores the keywords created by static abilities
+    private final Table<Long, String, KeywordInterface> storedKeywords = TreeBasedTable.create();
 
     private Map<Card, DetachedCardEffect> staticAbilities = Maps.newHashMap();
 
@@ -991,9 +993,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     // ================ POISON Merged =================================
     public final void addChangedKeywords(final List<String> addKeywords, final List<String> removeKeywords, final Long timestamp, final long staticId) {
-        // if the key already exists - merge entries
-        KeywordsChange cks = new KeywordsChange(addKeywords, removeKeywords, false);
-        cks.addKeywordsToPlayer(this);
+        List<KeywordInterface> kws = Lists.newArrayList();
+        if (addKeywords != null) {
+            for(String kw : addKeywords) {
+                kws.add(getKeywordForStaticAbility(kw, staticId));
+            }
+        }
+        KeywordsChange cks = new KeywordsChange(kws, removeKeywords, false);
         if (!cks.getAbilities().isEmpty() || !cks.getTriggers().isEmpty() || !cks.getReplacements().isEmpty() || !cks.getStaticAbilities().isEmpty()) {
             getKeywordCard().addChangedCardTraits(
                 cks.getAbilities(), null, cks.getTriggers(), cks.getReplacements(), cks.getStaticAbilities(), false, false, timestamp, staticId);
@@ -1001,6 +1007,17 @@ public class Player extends GameEntity implements Comparable<Player> {
         changedKeywords.put(timestamp, staticId, cks);
         updateKeywords();
         game.fireEvent(new GameEventPlayerStatsChanged(this, true));
+    }
+
+    public final KeywordInterface getKeywordForStaticAbility(String kw, final long staticId) {
+        KeywordInterface result;
+        if (staticId < 1 || !storedKeywords.contains(staticId, kw)) {
+            result = Keyword.getInstance(kw);
+            result.createTraits(this, false);
+        } else {
+            result = storedKeywords.get(staticId, kw);
+        }
+        return result;
     }
 
     public final KeywordsChange removeChangedKeywords(final Long timestamp, final long staticId) {
@@ -1179,7 +1196,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final boolean canDraw() {
         return canDrawAmount(1);
     }
-    
+
     public final boolean canDrawAmount(int amount) {
         return StaticAbilityCantDraw.canDrawThisAmount(this, amount);
     }

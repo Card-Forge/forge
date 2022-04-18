@@ -1,286 +1,568 @@
 //Rank|Name|Rarity|Set
-#1|Tamiyo, Compleated Sage|M|NEO
-#2|Ao, the Dawn Sky|M|NEO
-#3|The Wandering Emperor|M|NEO
-#4|Kairi, the Swirling Sky|M|NEO
-#5|Junji, the Midnight Sky|M|NEO
-#6|Atsushi, the Blazing Sky|M|NEO
-#7|Kura, the Boundless Sky|M|NEO
-#8|Jugan Defends the Temple|M|NEO
-#9|Hidetsugu, Devouring Chaos|R|NEO
+#1|Workshop Warchief|R|SNC
+#2|Titan of Industry|M|SNC
+#3|Elspeth Resplendent|M|SNC
+#4|Falco Spara, Pactweaver|M|SNC
+#5|Vivien on the Hunt|M|SNC
+#6|Sanctuary Warden|M|SNC
+#7|All-Seeing Arbiter|M|SNC
+#8|Depopulate|R|SNC
+#9|Urabrask, Heretic Praetor|M|SNC
+#10|Fleetfoot Dancer|R|SNC
+#11|Jetmir, Nexus of Revels|M|SNC
+#12|Lord Xander, the Collector|M|SNC
+#13|Ob Nixilis, the Adversary|M|SNC
+#14|Ziatora, the Incinerator|M|SNC
+#15|Brokers Ascendancy|R|SNC
+#16|Raffine, Scheming Seer|M|SNC
+#17|Ziatora's Envoy|R|SNC
+#18|Body Launderer|M|SNC
+#19|Fight Rigging|R|SNC
+#20|Evelyn, the Covetous|R|SNC
+#21|Tenacious Underdog|R|SNC
+#22|Toluz, Clever Conductor|R|SNC
+#23|Rabble Rousing|R|SNC
+#24|Shakedown Heavy|R|SNC
+#25|Jaxis, the Troublemaker|R|SNC
+#26|Professional Face-Breaker|R|SNC
+#27|Gala Greeters|R|SNC
+#28|Aven Heartstabber|R|SNC
+#29|Hostile Takeover|R|SNC
+#30|Obscura Interceptor|R|SNC
+#31|Lagrella, the Magpie|U|SNC
+#32|Mysterious Limousine|R|SNC
+#33|Reservoir Kraken|R|SNC
+#34|Black Market Tycoon|R|SNC
+#35|Maestros Diabolist|R|SNC
+#36|Soul of Emancipation|R|SNC
+#37|Void Rend|R|SNC
+#38|Getaway Car|R|SNC
+#39|Giada, Font of Hope|R|SNC
+#40|Brokers Charm|U|SNC
+#41|Corpse Appraiser|U|SNC
+#42|Riveteers Charm|U|SNC
+#43|Brazen Upstart|U|SNC
+#44|Crew Captain|U|SNC
+#45|Disciplined Duelist|U|SNC
+#46|Unleash the Inferno|R|SNC
+#47|Inspiring Overseer|C|SNC
+#48|Rumor Gatherer|U|SNC
+#49|Ledger Shredder|R|SNC
+#50|Undercover Operative|R|SNC
+#51|Murder|C|SNC
+#52|Sanguine Spy|R|SNC
+#53|Cleanup Crew|U|SNC
+#54|Darling of the Masses|U|SNC
+#55|Jinnie Fay, Jetmir's Second|R|SNC
+#56|Metropolis Angel|U|SNC
+#57|Mr. Orfeo, the Boulder|U|SNC
+#58|Ognis, the Dragon's Lash|R|SNC
+#59|Park Heights Pegasus|R|SNC
+#60|Extraction Specialist|R|SNC
+#61|Faerie Vandal|U|SNC
+#62|Psychic Pickpocket|U|SNC
+#63|Angel of Suffering|M|SNC
+#64|Devilish Valet|R|SNC
+#65|Strangle|C|SNC
+#66|Elegant Entourage|U|SNC
+#67|Cabaretti Ascendancy|R|SNC
+#68|Cormela, Glamour Thief|U|SNC
+#69|Corpse Explosion|R|SNC
+#70|Endless Detour|R|SNC
+#71|Fatal Grudge|U|SNC
+#72|Maestros Charm|U|SNC
+#73|Nimble Larcenist|U|SNC
+#74|Queza, Augur of Agonies|U|SNC
+#75|Rocco, Cabaretti Caterer|U|SNC
+#76|Bouncer's Beatdown|U|SNC
+#77|Citizen's Crowbar|U|SNC
+#78|Even the Score|M|SNC
+#79|Wingshield Agent|U|SNC
+#80|Dusk Mangler|U|SNC
+#81|Night Clubber|U|SNC
+#82|Whack|U|SNC
+#83|Call In a Professional|U|SNC
+#84|Rob the Archives|U|SNC
+#85|Torch Breath|U|SNC
+#86|Jewel Thief|C|SNC
+#87|Take to the Streets|U|SNC
+#88|Cabaretti Charm|U|SNC
+#89|Exotic Pets|U|SNC
+#90|Incandescent Aria|R|SNC
+#91|Security Rhox|U|SNC
+#92|Syndicate Infiltrator|U|SNC
+#93|Jetmir's Garden|R|SNC
+#94|Raffine's Tower|R|SNC
+#95|Spara's Headquarters|R|SNC
+#96|Xander's Lounge|R|SNC
+#97|Ziatora's Proving Ground|R|SNC
+#98|Hold for Ransom|C|SNC
+#99|Courier's Briefcase|U|SNC
+#100|Topiary Stomper|R|SNC
+#101|Celestial Regulator|C|SNC
+#102|Forge Boss|U|SNC
+#103|Spara's Adjudicators|C|SNC
+#104|Mage's Attendant|U|SNC
+#105|Echo Inspector|C|SNC
+#106|Hypnotic Grifter|U|SNC
+#107|Out of the Way|U|SNC
+#108|Sleep with the Fishes|U|SNC
+#109|Raffine's Silencer|U|SNC
+#110|Vampire Scrivener|U|SNC
+#111|Hoard Hauler|R|SNC
+#112|Pyre-Sledge Arsonist|U|SNC
+#113|Riveteers Requisitioner|U|SNC
+#114|Sizzling Soloist|U|SNC
+#115|Unlucky Witness|U|SNC
+#116|Freelance Muscle|U|SNC
+#117|Venom Connoisseur|U|SNC
+#118|Body Dropper|C|SNC
+#119|Civil Servant|C|SNC
+#120|Jetmir's Fixer|C|SNC
+#121|Scheming Fence|R|SNC
+#122|Snooping Newsie|C|SNC
+#123|Tainted Indulgence|U|SNC
+#124|Botanical Plaza|C|SNC
+#125|Racers' Ring|C|SNC
+#126|Skybridge Towers|C|SNC
+#127|Tramway Station|C|SNC
+#128|Waterfront District|C|SNC
+#129|Prizefight|C|SNC
+#130|Ballroom Brawlers|U|SNC
+#131|Illuminator Virtuoso|U|SNC
+#132|Knockout Blow|U|SNC
+#133|Raffine's Informant|C|SNC
+#134|Speakeasy Server|C|SNC
+#135|Obscura Initiate|C|SNC
+#136|Rooftop Nuisance|C|SNC
+#137|Slip Out the Back|U|SNC
+#138|Wiretapping|R|SNC
+#139|Witness Protection|C|SNC
+#140|Deal Gone Bad|C|SNC
+#141|Grisly Sigil|U|SNC
+#142|Maestros Initiate|C|SNC
+#143|Big Score|C|SNC
+#144|Light 'Em Up|C|SNC
+#145|Pugnacious Pugilist|U|SNC
+#146|Witty Roastmaster|C|SNC
+#147|Caldaia Strongarm|C|SNC
+#148|Luxurious Libation|U|SNC
+#149|Glamorous Outlaw|C|SNC
+#150|Masked Bandits|C|SNC
+#151|Rigo, Streetwise Mentor|R|SNC
+#152|Shattered Seraph|C|SNC
+#153|Stimulus Package|U|SNC
+#154|Unlicensed Hearse|R|SNC
+#155|Cabaretti Courtyard|C|SNC
+#156|Maestros Theater|C|SNC
+#157|Obscura Storefront|C|SNC
+#158|Swooping Protector|U|SNC
+#159|Exhibition Magician|C|SNC
+#160|Brokers Hideout|C|SNC
+#161|Riveteers Overlook|C|SNC
+#162|Riveteers Decoy|U|SNC
+#163|Angelic Observer|U|SNC
+#164|Halo Fountain|M|SNC
+#165|Brokers Veteran|C|SNC
+#166|Disdainful Stroke|C|SNC
+#167|A Little Chat|U|SNC
+#168|Girder Goons|C|SNC
+#169|Rogues' Gallery|U|SNC
+#170|Mayhem Patrol|C|SNC
+#171|Plasma Jockey|C|SNC
+#172|Riveteers Initiate|C|SNC
+#173|Rhox Pummeler|C|SNC
+#174|Social Climber|C|SNC
+#175|Voice of the Vermin|U|SNC
+#176|Ceremonial Groundbreaker|U|SNC
+#177|Obscura Charm|U|SNC
+#178|Rakish Revelers|C|SNC
+#179|Corrupt Court Official|C|SNC
+#180|Ready to Rumble|C|SNC
+#181|Backup Agent|C|SNC
+#182|Boon of Safety|C|SNC
+#183|Dapper Shieldmate|C|SNC
+#184|Refuse to Yield|U|SNC
+#185|Case the Joint|C|SNC
+#186|Make Disappear|C|SNC
+#187|Join the Maestros|C|SNC
+#188|Attended Socialite|C|SNC
+#189|Maestros Ascendancy|R|SNC
+#190|Scuttling Butler|U|SNC
+#191|Suspicious Bookcase|U|SNC
+#192|Expendable Lackey|C|SNC
+#193|Gathering Throng|C|SNC
+#194|High-Rise Sawjack|C|SNC
+#195|Civic Gardener|C|SNC
+#196|Crooked Custodian|C|SNC
+#197|Run Out of Town|C|SNC
+#198|Kill Shot|C|SNC
+#199|Buy Your Silence|C|SNC
+#200|Celebrity Fencer|C|SNC
+#201|Patch Up|U|SNC
+#202|Raffine's Guidance|C|SNC
+#203|Errant, Street Artist|R|SNC
+#204|Psionic Snoop|C|SNC
+#205|Public Enemy|U|SNC
+#206|Cut of the Profits|R|SNC
+#207|Graveyard Shift|U|SNC
+#208|Incriminate|C|SNC
+#209|Revel Ruiner|C|SNC
+#210|Tavern Swindler|U|SNC
+#211|Arcane Bombardment|M|SNC
+#212|Glittering Stockpile|U|SNC
+#213|Involuntary Employment|U|SNC
+#214|Cabaretti Initiate|C|SNC
+#215|Obscura Ascendancy|R|SNC
+#216|Riveteers Ascendancy|R|SNC
+#217|Brass Knuckles|U|SNC
+#218|Chrome Cat|C|SNC
+#219|Halo Scarab|C|SNC
+#220|Ominous Parcel|C|SNC
+#221|Goldhound|C|SNC
+#222|Capenna Express|C|SNC
+#223|Sky Crier|C|SNC
+#224|Glittermonger|C|SNC
+#225|Wrecking Crew|C|SNC
+#226|Midnight Assassin|C|SNC
+#227|Majestic Metamorphosis|C|SNC
+#228|Dig Up the Body|C|SNC
+#229|Widespread Thieving|R|SNC
+#230|Cement Shoes|U|SNC
+#231|Luxior, Giada's Gift|M|SNC
+#232|Brokers Initiate|C|SNC
+#233|Extract the Truth|C|SNC
+#234|Sticky Fingers|C|SNC
+#235|Paragon of Modernity|C|SNC
+#236|Quick-Draw Dagger|C|SNC
+#237|Fake Your Own Death|C|SNC
+#238|Gilded Pinions|C|SNC
+#239|Warm Welcome|C|SNC
+#240|For the Family|C|SNC
+#241|Jackhammer|C|SNC
+#242|Antagonize|C|SNC
+#243|Daring Escape|C|SNC
+#244|Demon's Due|C|SNC
+#245|Sewer Crocodile|C|SNC
+#246|Backstreet Bruiser|C|SNC
+#247|An Offer You Can't Refuse|U|SNC
+#248|Security Bypass|C|SNC
+#249|Cemetery Tampering|R|SNC
+#250|Illicit Shipment|U|SNC
+#251|Shadow of Mortality|R|SNC
+#252|Bootleggers' Stash|M|SNC
+#253|Evolving Door|R|SNC
+#254|Arc Spitter|U|SNC
+#255|Most Wanted|C|SNC
+#256|Cutthroat Contender|C|SNC
+#257|Revelation of Power|C|SNC
+#258|Cut Your Losses|R|SNC
+#259|Structural Assault|R|SNC
+#260|Meeting of the Five|M|SNC
+#261|Broken Wings|C|SNC
+#262|Plains 1|C|SNC
+#263|Plains 2|C|SNC
+#264|Island 1|C|SNC
+#265|Island 2|C|SNC
+#266|Swamp 1|C|SNC
+#267|Swamp 2|C|SNC
+#268|Mountain 1|C|SNC
+#269|Mountain 2|C|SNC
+#270|Forest 1|C|SNC
+#271|Forest 2|C|SNC
+#272|Plains 3|C|SNC
+#273|Plains 4|C|SNC
+#274|Island 3|C|SNC
+#275|Island 4|C|SNC
+#276|Swamp 3|C|SNC
+#277|Swamp 4|C|SNC
+#278|Mountain 3|C|SNC
+#279|Mountain 4|C|SNC
+#280|Forest 3|C|SNC
+#281|Forest 4|C|SNC
+//Rank|Name|Rarity|Set
+#1|The Wandering Emperor|M|NEO
+#2|Tamiyo, Compleated Sage|M|NEO
+#3|Farewell|R|NEO
+#4|Jugan Defends the Temple|M|NEO
+#5|Ao, the Dawn Sky|M|NEO
+#6|Kairi, the Swirling Sky|M|NEO
+#7|Junji, the Midnight Sky|M|NEO
+#8|Atsushi, the Blazing Sky|M|NEO
+#9|Kura, the Boundless Sky|M|NEO
 #10|Kaito Shizuki|M|NEO
-#11|Satoru Umezawa|R|NEO
-#12|Blade of the Oni|M|NEO
+#11|Tezzeret, Betrayer of Flesh|M|NEO
+#12|Reckoner Bankbuster|R|NEO
 #13|Kyodai, Soul of Kamigawa|R|NEO
 #14|Lion Sash|R|NEO
-#15|Invoke the Winds|R|NEO
+#15|Jin-Gitaxias, Progress Tyrant|M|NEO
 #16|The Reality Chip|R|NEO
-#17|Tezzeret, Betrayer of Flesh|M|NEO
-#18|Nashi, Moon Sage's Scion|M|NEO
-#19|Thundering Raiju|R|NEO
-#20|Raiyuu, Storm's Edge|R|NEO
-#21|Reckoner Bankbuster|R|NEO
-#22|The Restoration of Eiganjo|R|NEO
-#23|Fable of the Mirror-Breaker|R|NEO
-#24|Tatsunari, Toad Rider|R|NEO
-#25|Kodama of the West Tree|M|NEO
-#26|Tribute to Horobi|R|NEO
-#27|Tameshi, Reality Architect|R|NEO
-#28|Lizard Blades|R|NEO
-#29|Twinshot Sniper|U|NEO
-#30|Surgehacker Mech|R|NEO
-#31|Spring-Leaf Avenger|R|NEO
-#32|Behold the Unspeakable|U|NEO
-#33|Inventive Iteration|R|NEO
-#34|Biting-Palm Ninja|R|NEO
-#35|Soul Transfer|R|NEO
-#36|Kappa Tech-Wrecker|U|NEO
-#37|Goro-Goro, Disciple of Ryusei|R|NEO
-#38|Blossom Prancer|U|NEO
-#39|Ogre-Head Helm|R|NEO
-#40|Eater of Virtue|R|NEO
-#41|Michiko's Reign of Truth|U|NEO
-#42|The Kami War|M|NEO
-#43|Banishing Slash|U|NEO
-#44|Cloudsteel Kirin|R|NEO
-#45|Invoke Justice|R|NEO
+#17|Tameshi, Reality Architect|R|NEO
+#18|Blade of the Oni|M|NEO
+#19|Hidetsugu, Devouring Chaos|R|NEO
+#20|Tatsunari, Toad Rider|R|NEO
+#21|Thundering Raiju|R|NEO
+#22|Invoke the Ancients|R|NEO
+#23|The Restoration of Eiganjo|R|NEO
+#24|Fable of the Mirror-Breaker|R|NEO
+#25|The Kami War|M|NEO
+#26|Kodama of the West Tree|M|NEO
+#27|Kotose, the Silent Spider|R|NEO
+#28|Raiyuu, Storm's Edge|R|NEO
+#29|Inventive Iteration|R|NEO
+#30|Invoke the Winds|R|NEO
+#31|Biting-Palm Ninja|R|NEO
+#32|Nashi, Moon Sage's Scion|M|NEO
+#33|Goro-Goro, Disciple of Ryusei|R|NEO
+#34|Blossom Prancer|U|NEO
+#35|Kappa Tech-Wrecker|U|NEO
+#36|Shigeki, Jukai Visionary|R|NEO
+#37|Spring-Leaf Avenger|R|NEO
+#38|Behold the Unspeakable|U|NEO
+#39|Soul Transfer|R|NEO
+#40|Lizard Blades|R|NEO
+#41|Twinshot Sniper|U|NEO
+#42|Weaver of Harmony|R|NEO
+#43|Surgehacker Mech|R|NEO
+#44|Boseiju Reaches Skyward|U|NEO
+#45|Banishing Slash|U|NEO
 #46|Touch the Spirit Realm|U|NEO
 #47|Assassin's Ink|U|NEO
-#48|Kotose, the Silent Spider|R|NEO
-#49|Farewell|R|NEO
-#50|Invoke the Ancients|R|NEO
-#51|Teachings of the Kirin|R|NEO
-#52|Shigeki, Jukai Visionary|R|NEO
-#53|Gloomshrieker|U|NEO
-#54|Mukotai Soulripper|R|NEO
-#55|Life of Toshiro Umezawa|U|NEO
-#56|Thousand-Faced Shadow|R|NEO
-#57|Leech Gauntlet|U|NEO
-#58|Risona, Asari Commander|R|NEO
-#59|Kami of Transience|R|NEO
-#60|Colossal Skyturtle|U|NEO
-#61|Acquisition Octopus|U|NEO
-#62|Mindlink Mech|R|NEO
-#63|Tempered in Solitude|U|NEO
-#64|Greasefang, Okiba Boss|R|NEO
-#65|Oni-Cult Anvil|U|NEO
-#66|Satsuki, the Living Lore|R|NEO
-#67|Invigorating Hot Spring|U|NEO
-#68|Flame Discharge|U|NEO
-#69|March of Otherworldly Light|R|NEO
-#70|Selfless Samurai|U|NEO
-#71|Jin-Gitaxias, Progress Tyrant|M|NEO
-#72|Moonsnare Specialist|C|NEO
-#73|March of Wretched Sorrow|R|NEO
-#74|Nezumi Prowler|U|NEO
-#75|Reinforced Ronin|U|NEO
-#76|Weaver of Harmony|R|NEO
-#77|Asari Captain|U|NEO
-#78|Enthusiastic Mechanaut|U|NEO
-#79|Isshin, Two Heavens as One|R|NEO
-#80|Jukai Naturalist|U|NEO
-#81|Naomi, Pillar of Order|U|NEO
+#48|Gloomshrieker|U|NEO
+#49|Spirit-Sister's Call|M|NEO
+#50|Ogre-Head Helm|R|NEO
+#51|Eater of Virtue|R|NEO
+#52|Michiko's Reign of Truth|U|NEO
+#53|Life of Toshiro Umezawa|U|NEO
+#54|Selfless Samurai|U|NEO
+#55|Hinata, Dawn-Crowned|R|NEO
+#56|Circuit Mender|U|NEO
+#57|Kami of Transience|R|NEO
+#58|Colossal Skyturtle|U|NEO
+#59|Tribute to Horobi|R|NEO
+#60|Teachings of the Kirin|R|NEO
+#61|Invoke Justice|R|NEO
+#62|Jukai Naturalist|U|NEO
+#63|Oni-Cult Anvil|U|NEO
+#64|Cloudsteel Kirin|R|NEO
+#65|Mindlink Mech|R|NEO
+#66|Naomi, Pillar of Order|U|NEO
+#67|Rabbit Battery|U|NEO
+#68|Dockside Chef|U|NEO
+#69|Patchwork Automaton|U|NEO
+#70|Imperial Oath|C|NEO
+#71|Spirited Companion|C|NEO
+#72|Acquisition Octopus|U|NEO
+#73|Moonsnare Specialist|C|NEO
+#74|Thirst for Knowledge|U|NEO
+#75|March of Wretched Sorrow|R|NEO
+#76|Tempered in Solitude|U|NEO
+#77|Generous Visitor|U|NEO
+#78|Spinning Wheel Kick|U|NEO
+#79|Enthusiastic Mechanaut|U|NEO
+#80|Greasefang, Okiba Boss|R|NEO
+#81|Isshin, Two Heavens as One|R|NEO
 #82|Prodigy's Prototype|U|NEO
-#83|Silver-Fur Master|U|NEO
-#84|Circuit Mender|U|NEO
-#85|Dokuchi Silencer|U|NEO
-#86|Rabbit Battery|U|NEO
-#87|Dockside Chef|U|NEO
+#83|Satoru Umezawa|R|NEO
+#84|Silver-Fur Master|U|NEO
+#85|Invigorating Hot Spring|U|NEO
+#86|Risona, Asari Commander|R|NEO
+#87|Blade-Blizzard Kitsune|U|NEO
 #88|Eiganjo, Seat of the Empire|R|NEO
-#89|Master's Rebuke|C|NEO
-#90|Kami's Flare|C|NEO
-#91|Boseiju Reaches Skyward|U|NEO
-#92|Norika Yamazaki, the Poet|U|NEO
-#93|Spirited Companion|C|NEO
-#94|Replication Specialist|U|NEO
-#95|Thirst for Knowledge|U|NEO
-#96|Bronzeplate Boar|U|NEO
-#97|Sokenzan Smelter|U|NEO
-#98|Roadside Reliquary|U|NEO
-#99|Intercessor's Arrest|C|NEO
-#100|The Fall of Lord Konda|U|NEO
-#101|Kumano Faces Kakkazan|U|NEO
-#102|Go-Shintai of Shared Purpose|U|NEO
-#103|Go-Shintai of Hidden Cruelty|U|NEO
-#104|Go-Shintai of Ancient Wars|U|NEO
-#105|Heiko Yamazaki, the General|U|NEO
-#106|Go-Shintai of Boundless Vigor|U|NEO
-#107|Spinning Wheel Kick|U|NEO
-#108|Hinata, Dawn-Crowned|R|NEO
-#109|Walking Skyscraper|U|NEO
-#110|Otawara, Soaring City|R|NEO
-#111|Takenuma, Abandoned Mire|R|NEO
-#112|Containment Construct|U|NEO
-#113|Blade-Blizzard Kitsune|U|NEO
-#114|Patchwork Automaton|U|NEO
-#115|Voltage Surge|C|NEO
-#116|Twisted Embrace|C|NEO
-#117|Okiba Reckoner Raid|C|NEO
-#118|Sunblade Samurai|C|NEO
-#119|Moon-Circuit Hacker|C|NEO
-#120|Prosperous Thief|U|NEO
-#121|Tamiyo's Compleation|C|NEO
-#122|Gravelighter|U|NEO
-#123|Lethal Exploit|C|NEO
-#124|Scrap Welder|R|NEO
-#125|Generous Visitor|U|NEO
-#126|Orochi Merge-Keeper|U|NEO
-#127|Towashi Guide-Bot|U|NEO
-#128|Boseiju, Who Endures|R|NEO
-#129|Sokenzan, Crucible of Defiance|R|NEO
-#130|Seismic Wave|U|NEO
-#131|Go-Shintai of Lost Wisdom|U|NEO
-#132|Jukai Preserver|C|NEO
-#133|Experimental Synthesizer|C|NEO
-#134|Virus Beetle|C|NEO
-#135|Imperial Recovery Unit|U|NEO
-#136|Hotshot Mechanic|U|NEO
-#137|Seven-Tail Mentor|C|NEO
-#138|Essence Capture|U|NEO
-#139|Futurist Operative|U|NEO
-#140|Inkrise Infiltrator|C|NEO
-#141|You Are Already Dead|C|NEO
-#142|Fang of Shigeki|C|NEO
-#143|Geothermal Kami|C|NEO
-#144|High-Speed Hoverbike|U|NEO
-#145|Unforgiving One|U|NEO
-#146|Uncharted Haven|C|NEO
-#147|Ninja's Kunai|C|NEO
-#148|Fade into Antiquity|C|NEO
-#149|Careful Cultivation|C|NEO
-#150|Moonfolk Puzzlemaker|C|NEO
-#151|Mnemonic Sphere|C|NEO
-#152|Wanderer's Intervention|C|NEO
-#153|Golden-Tail Disciple|C|NEO
-#154|The Modern Age|C|NEO
-#155|Tales of Master Seshiro|C|NEO
-#156|Hidetsugu Consumes All|M|NEO
-#157|The Long Reach of Night|U|NEO
-#158|Sky-Blessed Samurai|U|NEO
-#159|Covert Technician|U|NEO
-#160|Mobilizer Mech|U|NEO
-#161|Network Disruptor|C|NEO
-#162|Dokuchi Shadow-Walker|C|NEO
-#163|Malicious Malfunction|U|NEO
-#164|Mukotai Ambusher|C|NEO
-#165|Nezumi Bladeblesser|C|NEO
-#166|Akki Ronin|C|NEO
-#167|March of Reckless Joy|R|NEO
-#168|Peerless Samurai|C|NEO
-#169|Unstoppable Ogre|C|NEO
-#170|Upriser Renegade|U|NEO
-#171|Boon of Boseiju|U|NEO
-#172|Coiling Stalker|C|NEO
-#173|Greater Tanuki|C|NEO
-#174|Roaring Earth|U|NEO
-#175|Webspinner Cuff|U|NEO
-#176|Dragonspark Reactor|U|NEO
-#177|Searchlight Companion|C|NEO
-#178|Season of Renewal|C|NEO
-#179|Grafted Growth|C|NEO
-#180|Commune with Spirits|C|NEO
-#181|Ironhoof Boar|C|NEO
-#182|Undercity Scrounger|C|NEO
-#183|Kami of Terrible Secrets|C|NEO
-#184|Debt to the Kami|C|NEO
-#185|Chainflail Centipede|C|NEO
-#186|Skyswimmer Koi|C|NEO
-#187|Mirrorshell Crab|C|NEO
-#188|Repel the Vile|C|NEO
-#189|Imperial Oath|C|NEO
-#190|Jukai Trainee|C|NEO
-#191|Era of Enlightenment|C|NEO
-#192|Wind-Scarred Crag|C|NEO
-#193|Bloodfell Caves|C|NEO
-#194|Blossoming Sands|C|NEO
-#195|Dismal Backwater|C|NEO
-#196|Tranquil Cove|C|NEO
-#197|Thornwood Falls|C|NEO
-#198|Swiftwater Cliffs|C|NEO
-#199|When We Were Young|U|NEO
-#200|Moonsnare Prototype|C|NEO
-#201|Invoke Despair|R|NEO
-#202|Okiba Salvage|U|NEO
-#203|Akki Ember-Keeper|C|NEO
-#204|Simian Sling|C|NEO
-#205|Storyweave|U|NEO
-#206|Mechtitan Core|R|NEO
-#207|Papercraft Decoy|C|NEO
-#208|Bearer of Memory|C|NEO
-#209|Kitsune Ace|C|NEO
-#210|Azusa's Many Journeys|U|NEO
-#211|Scoured Barrens|C|NEO
-#212|Rugged Highlands|C|NEO
-#213|Jungle Hollow|C|NEO
-#214|Born to Drive|U|NEO
-#215|Eiganjo Exemplar|C|NEO
-#216|Imperial Subduer|C|NEO
-#217|Light the Way|C|NEO
-#218|Armguard Familiar|C|NEO
-#219|Guardians of Oboro|C|NEO
-#220|Kami of Industry|C|NEO
-#221|Bamboo Grove Archer|C|NEO
-#222|Heir of the Ancient Fang|C|NEO
-#223|Spirit-Sister's Call|M|NEO
-#224|Runaway Trash-Bot|U|NEO
-#225|Explosive Singularity|M|NEO
-#226|Network Terminal|C|NEO
-#227|Ecologist's Terrarium|C|NEO
-#228|Harmonious Emergence|C|NEO
-#229|Towashi Songshaper|C|NEO
-#230|Scrapyard Steelbreaker|C|NEO
-#231|Crackling Emergence|C|NEO
-#232|Ambitious Assault|C|NEO
-#233|Reckoner Shakedown|C|NEO
-#234|Kami of Restless Shadows|C|NEO
-#235|Kaito's Pursuit|C|NEO
-#236|Suit Up|C|NEO
-#237|Planar Incision|C|NEO
-#238|Disruption Protocol|C|NEO
-#239|Mothrider Patrol|C|NEO
-#240|Dragonfly Suit|C|NEO
-#241|Befriending the Moths|C|NEO
-#242|Saiba Trespassers|C|NEO
-#243|Historian's Wisdom|U|NEO
-#244|Eiganjo Uprising|R|NEO
-#245|Reito Sentinel|U|NEO
-#246|March of Swirling Mist|R|NEO
-#247|Thundersteel Colossus|C|NEO
-#248|Shrine Steward|C|NEO
-#249|Brute Suit|C|NEO
-#250|Automated Artificer|C|NEO
-#251|Kindled Fury|C|NEO
-#252|Gift of Wrath|C|NEO
-#253|Return to Action|C|NEO
-#254|Reckoner's Bargain|C|NEO
-#255|Clawing Torment|C|NEO
-#256|Short Circuit|C|NEO
-#257|Regent's Authority|C|NEO
-#258|The Shattered States Era|C|NEO
-#259|Ancestral Katana|C|NEO
-#260|Brilliant Restoration|R|NEO
-#261|Light-Paws, Emperor's Voice|R|NEO
-#262|Reality Heist|U|NEO
-#263|Spell Pierce|C|NEO
-#264|Mech Hangar|U|NEO
-#265|Secluded Courtyard|U|NEO
-#266|Bronze Cudgels|U|NEO
-#267|Iron Apprentice|C|NEO
-#268|Dramatist's Puppet|C|NEO
-#269|Tamiyo's Safekeeping|C|NEO
-#270|Favor of Jukai|C|NEO
-#271|Explosive Entry|C|NEO
-#272|Futurist Sentinel|C|NEO
+#89|Kami's Flare|C|NEO
+#90|Experimental Synthesizer|C|NEO
+#91|Virus Beetle|C|NEO
+#92|Twisted Embrace|C|NEO
+#93|Kumano Faces Kakkazan|U|NEO
+#94|Norika Yamazaki, the Poet|U|NEO
+#95|Moon-Circuit Hacker|C|NEO
+#96|Network Disruptor|C|NEO
+#97|Prosperous Thief|U|NEO
+#98|Replication Specialist|U|NEO
+#99|Thousand-Faced Shadow|R|NEO
+#100|Nezumi Prowler|U|NEO
+#101|Seismic Wave|U|NEO
+#102|Flame Discharge|U|NEO
+#103|Voltage Surge|C|NEO
+#104|Intercessor's Arrest|C|NEO
+#105|The Modern Age|C|NEO
+#106|Okiba Reckoner Raid|C|NEO
+#107|Tamiyo's Compleation|C|NEO
+#108|Gravelighter|U|NEO
+#109|Leech Gauntlet|U|NEO
+#110|Heiko Yamazaki, the General|U|NEO
+#111|Asari Captain|U|NEO
+#112|Boseiju, Who Endures|R|NEO
+#113|Otawara, Soaring City|R|NEO
+#114|Roadside Reliquary|U|NEO
+#115|Dokuchi Silencer|U|NEO
+#116|Containment Construct|U|NEO
+#117|March of Otherworldly Light|R|NEO
+#118|Master's Rebuke|C|NEO
+#119|Fade into Antiquity|C|NEO
+#120|Imperial Recovery Unit|U|NEO
+#121|Sunblade Samurai|C|NEO
+#122|Bronzeplate Boar|U|NEO
+#123|Fang of Shigeki|C|NEO
+#124|Go-Shintai of Boundless Vigor|U|NEO
+#125|Takenuma, Abandoned Mire|R|NEO
+#126|Explosive Singularity|M|NEO
+#127|Jukai Preserver|C|NEO
+#128|Mothrider Patrol|C|NEO
+#129|Mukotai Soulripper|R|NEO
+#130|The Fall of Lord Konda|U|NEO
+#131|Tales of Master Seshiro|C|NEO
+#132|Born to Drive|U|NEO
+#133|Go-Shintai of Shared Purpose|U|NEO
+#134|Hotshot Mechanic|U|NEO
+#135|Covert Technician|U|NEO
+#136|Futurist Operative|U|NEO
+#137|Mobilizer Mech|U|NEO
+#138|Go-Shintai of Hidden Cruelty|U|NEO
+#139|Inkrise Infiltrator|C|NEO
+#140|Lethal Exploit|C|NEO
+#141|Mukotai Ambusher|C|NEO
+#142|Go-Shintai of Ancient Wars|U|NEO
+#143|Scrap Welder|R|NEO
+#144|Simian Sling|C|NEO
+#145|Bamboo Grove Archer|C|NEO
+#146|Boon of Boseiju|U|NEO
+#147|Geothermal Kami|C|NEO
+#148|Greater Tanuki|C|NEO
+#149|Storyweave|U|NEO
+#150|Webspinner Cuff|U|NEO
+#151|High-Speed Hoverbike|U|NEO
+#152|Towashi Guide-Bot|U|NEO
+#153|Unforgiving One|U|NEO
+#154|Go-Shintai of Lost Wisdom|U|NEO
+#155|Uncharted Haven|C|NEO
+#156|Searchlight Companion|C|NEO
+#157|Ninja's Kunai|C|NEO
+#158|Ecologist's Terrarium|C|NEO
+#159|Harmonious Emergence|C|NEO
+#160|Commune with Spirits|C|NEO
+#161|Towashi Songshaper|C|NEO
+#162|Suit Up|C|NEO
+#163|Skyswimmer Koi|C|NEO
+#164|Mnemonic Sphere|C|NEO
+#165|Mirrorshell Crab|C|NEO
+#166|Wanderer's Intervention|C|NEO
+#167|Repel the Vile|C|NEO
+#168|Befriending the Moths|C|NEO
+#169|Azusa's Many Journeys|U|NEO
+#170|The Long Reach of Night|U|NEO
+#171|Eiganjo Exemplar|C|NEO
+#172|Seven-Tail Mentor|C|NEO
+#173|Sky-Blessed Samurai|U|NEO
+#174|Essence Capture|U|NEO
+#175|Dokuchi Shadow-Walker|C|NEO
+#176|Nezumi Bladeblesser|C|NEO
+#177|Okiba Salvage|U|NEO
+#178|Akki Ronin|C|NEO
+#179|Peerless Samurai|C|NEO
+#180|Reinforced Ronin|U|NEO
+#181|Orochi Merge-Keeper|U|NEO
+#182|Roaring Earth|U|NEO
+#183|Sokenzan, Crucible of Defiance|R|NEO
+#184|Papercraft Decoy|C|NEO
+#185|Network Terminal|C|NEO
+#186|Season of Renewal|C|NEO
+#187|Grafted Growth|C|NEO
+#188|Careful Cultivation|C|NEO
+#189|Ironhoof Boar|C|NEO
+#190|Kami of Terrible Secrets|C|NEO
+#191|Debt to the Kami|C|NEO
+#192|Clawing Torment|C|NEO
+#193|Moonfolk Puzzlemaker|C|NEO
+#194|Golden-Tail Disciple|C|NEO
+#195|Jukai Trainee|C|NEO
+#196|Era of Enlightenment|C|NEO
+#197|Hidetsugu Consumes All|M|NEO
+#198|Wind-Scarred Crag|C|NEO
+#199|Bloodfell Caves|C|NEO
+#200|Blossoming Sands|C|NEO
+#201|Dismal Backwater|C|NEO
+#202|Tranquil Cove|C|NEO
+#203|Thornwood Falls|C|NEO
+#204|Swiftwater Cliffs|C|NEO
+#205|Scoured Barrens|C|NEO
+#206|Rugged Highlands|C|NEO
+#207|Jungle Hollow|C|NEO
+#208|Moonsnare Prototype|C|NEO
+#209|Unstoppable Ogre|C|NEO
+#210|Upriser Renegade|U|NEO
+#211|Coiling Stalker|C|NEO
+#212|Runaway Trash-Bot|U|NEO
+#213|Walking Skyscraper|U|NEO
+#214|Dragonspark Reactor|U|NEO
+#215|Shrine Steward|C|NEO
+#216|Tamiyo's Safekeeping|C|NEO
+#217|Chainflail Centipede|C|NEO
+#218|Brilliant Restoration|R|NEO
+#219|Imperial Subduer|C|NEO
+#220|When We Were Young|U|NEO
+#221|Armguard Familiar|C|NEO
+#222|Guardians of Oboro|C|NEO
+#223|Invoke Despair|R|NEO
+#224|Malicious Malfunction|U|NEO
+#225|You Are Already Dead|C|NEO
+#226|Akki Ember-Keeper|C|NEO
+#227|Kami of Industry|C|NEO
+#228|Sokenzan Smelter|U|NEO
+#229|Heir of the Ancient Fang|C|NEO
+#230|Eiganjo Uprising|R|NEO
+#231|Satsuki, the Living Lore|R|NEO
+#232|March of Swirling Mist|R|NEO
+#233|Favor of Jukai|C|NEO
+#234|Bearer of Memory|C|NEO
+#235|Scrapyard Steelbreaker|C|NEO
+#236|Explosive Entry|C|NEO
+#237|Crackling Emergence|C|NEO
+#238|Return to Action|C|NEO
+#239|Reckoner's Bargain|C|NEO
+#240|Kami of Restless Shadows|C|NEO
+#241|Disruption Protocol|C|NEO
+#242|Lucky Offering|C|NEO
+#243|Kitsune Ace|C|NEO
+#244|Dragonfly Suit|C|NEO
+#245|Ancestral Katana|C|NEO
+#246|Light the Way|C|NEO
+#247|Saiba Trespassers|C|NEO
+#248|March of Reckless Joy|R|NEO
+#249|Historian's Wisdom|U|NEO
+#250|Mechtitan Core|R|NEO
+#251|Reito Sentinel|U|NEO
+#252|Iron Apprentice|C|NEO
+#253|Brute Suit|C|NEO
+#254|Kindled Fury|C|NEO
+#255|Gift of Wrath|C|NEO
+#256|Undercity Scrounger|C|NEO
+#257|Kaito's Pursuit|C|NEO
+#258|Futurist Sentinel|C|NEO
+#259|Regent's Authority|C|NEO
+#260|Light-Paws, Emperor's Voice|R|NEO
+#261|Spell Pierce|C|NEO
+#262|Akki War Paint|C|NEO
+#263|Mech Hangar|U|NEO
+#264|Secluded Courtyard|U|NEO
+#265|Thundersteel Colossus|C|NEO
+#266|Dramatist's Puppet|C|NEO
+#267|Automated Artificer|C|NEO
+#268|Ambitious Assault|C|NEO
+#269|Reckoner Shakedown|C|NEO
+#270|Short Circuit|C|NEO
+#271|Planar Incision|C|NEO
+#272|The Shattered States Era|C|NEO
 #273|The Dragon-Kami Reborn|R|NEO
 #274|Anchor to Reality|U|NEO
 #275|Awakened Awareness|U|NEO
 #276|Discover the Impossible|U|NEO
-#277|Enormous Energy Blade|U|NEO
-#278|Akki War Paint|C|NEO
+#277|Reality Heist|U|NEO
+#278|Enormous Energy Blade|U|NEO
 #279|Invoke Calamity|R|NEO
-#280|March of Burgeoning Life|R|NEO
-#281|Mirror Box|R|NEO
-#282|Lucky Offering|C|NEO
+#280|Bronze Cudgels|U|NEO
+#281|March of Burgeoning Life|R|NEO
+#282|Mirror Box|R|NEO
 #283|Plains 1|C|NEO
 #284|Plains 2|C|NEO
 #285|Island 1|C|NEO

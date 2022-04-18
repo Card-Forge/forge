@@ -1,0 +1,10 @@
+Name:Caldaia Strongarm
+ManaCost:4 G
+Types:Creature Human Warrior
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put two +1/+1 counters on target creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 2
+K:Blitz:3 G
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters|Sacrifice
+Oracle:When Caldaia Strongarm enters the battlefield, put two +1/+1 counters on target creature.\nBlitz {3}{G} (If you cast this spell for its blitz cost, it gains haste and "When this creature dies, draw a card." Sacrifice it at the beginning of the next end step.)

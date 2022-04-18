@@ -26,6 +26,7 @@ import forge.card.CardRarity;
 import forge.card.mana.ManaCost;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.gui.GuiBase;
 import forge.gui.card.CardDetailUtil;
 import forge.gui.card.CardDetailUtil.DetailColors;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -82,12 +83,15 @@ public class FCardImageRenderer {
         PT_FONT = NAME_FONT;
         ARTIST_FONT = new Font(Font.SERIF, Font.BOLD, 20);
 
+        float screenScale = GuiBase.getInterface().getScreenScale();
+        int arrayMultiplier = Math.round(2 * screenScale);
+
         cachedFonts = new HashMap<>();
-        cachedFonts.put(NAME_FONT, new Font[NAME_FONT.getSize() * 2]);
-        cachedFonts.put(TYPE_FONT, new Font[TYPE_FONT.getSize() * 2]);
-        cachedFonts.put(TEXT_FONT, new Font[TEXT_FONT.getSize() * 2]);
-        cachedFonts.put(REMINDER_FONT, new Font[REMINDER_FONT.getSize() * 2]);
-        cachedFonts.put(ARTIST_FONT, new Font[ARTIST_FONT.getSize() * 2]);
+        cachedFonts.put(NAME_FONT, new Font[NAME_FONT.getSize() * arrayMultiplier]);
+        cachedFonts.put(TYPE_FONT, new Font[TYPE_FONT.getSize() * arrayMultiplier]);
+        cachedFonts.put(TEXT_FONT, new Font[TEXT_FONT.getSize() * arrayMultiplier]);
+        cachedFonts.put(REMINDER_FONT, new Font[REMINDER_FONT.getSize() * arrayMultiplier]);
+        cachedFonts.put(ARTIST_FONT, new Font[ARTIST_FONT.getSize() * arrayMultiplier]);
 
         isInitialed = true;
     }
@@ -620,10 +624,12 @@ public class FCardImageRenderer {
             float halfWidth = w / 2;
             GradientPaint gradient1 = new GradientPaint(x, y, colors[0], x + halfWidth, y, colors[1]);
             g.setPaint(gradient1);
-            g.fillRoundRect(Math.round(x), Math.round(y), Math.round(halfWidth + arcWidth), Math.round(h), Math.round(arcWidth), Math.round(arcHeight));
+            g.fillRoundRect(Math.round(x), Math.round(y), Math.round(halfWidth), Math.round(h), Math.round(arcWidth), Math.round(arcHeight));
+            g.fillRect(Math.round(x + halfWidth - arcWidth), Math.round(y), Math.round(arcWidth), Math.round(h));
             GradientPaint gradient2 = new GradientPaint(x + halfWidth, y, colors[1], x + w, y, colors[2]);
             g.setPaint(gradient2);
-            g.fillRoundRect(Math.round(x + halfWidth - arcWidth), Math.round(y), Math.round(halfWidth + arcWidth), Math.round(h), Math.round(arcWidth), Math.round(arcHeight));
+            g.fillRoundRect(Math.round(x + halfWidth), Math.round(y), Math.round(halfWidth), Math.round(h), Math.round(arcWidth), Math.round(arcHeight));
+            g.fillRect(Math.round(x + halfWidth), Math.round(y), Math.round(arcWidth), Math.round(h));
             break;
         }
         g.setPaint(oldPaint);

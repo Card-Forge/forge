@@ -1,0 +1,10 @@
+Name:Knockout Blow
+ManaCost:2 W
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ CostReduction | Relative$ True | EffectZone$ All | Description$ This spell costs {2} less to cast if it targets a red creature.
+SVar:CostReduction:Count$Compare CheckTgt GE1.2.0
+SVar:CheckTgt:Targeted$Valid Creature.Red
+A:SP$ DealDamage | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 4 | SubAbility$ GainLife | SpellDescription$ CARDNAME deals 4 damage to target attacking or blocking creature and you gain 2 life.
+SVar:GainLife:DB$ GainLife | LifeAmount$ 2 | Defined$ You
+DeckHas:Ability$LifeGain
+Oracle:This spell costs {2} less to cast if it targets a red creature.\nKnockout Blow deals 4 damage to target attacking or blocking creature and you gain 2 life.

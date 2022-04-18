@@ -102,3 +102,4 @@ Innistrad: Midnight Hunt, 3/6/MID, MID
 Innistrad: Crimson Vow, 3/6/VOW, VOW
 Innistrad: Double Feature, 3/6/MID, DBL
 Kamigawa: Neon Dynasty, 3/6/NEO, NEO
+Streets of New Capenna, 3/6/SNC, SNC

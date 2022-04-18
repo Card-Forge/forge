@@ -172,7 +172,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
             final String cardTag = type.contains("card") ? "" : " card";
             sb.append(Lang.nounWithNumeralExceptOne(num, type + cardTag)).append(", ");
-            if (!sa.hasParam("NoReveal") && !destination.equals("Battlefield")) {
+            if (!sa.hasParam("NoReveal") && ZoneType.smartValueOf(destination).isHidden()) {
                 if (choosers.size() == 1) {
                     sb.append(num > 1 ? "reveals them, " : "reveals it, ");
                 } else {
@@ -359,6 +359,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         if (destination.equals(ZoneType.Hand)) {
             if (ZoneType.Graveyard.equals(origin)) {
                 sb.append("Return").append(targetname).append(fromGraveyard).append(" to");
+            } else if (ZoneType.Battlefield.equals(origin)) {
+                sb.append("Return").append(targetname).append(" to");
             } else {
                 sb.append("Put").append(targetname).append(" in");
             }

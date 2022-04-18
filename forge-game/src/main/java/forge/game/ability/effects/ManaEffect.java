@@ -269,6 +269,11 @@ public class ManaEffect extends SpellAbilityEffect {
         String mana = !sa.hasParam("Amount") || StringUtils.isNumeric(sa.getParam("Amount"))
                 ? GameActionUtil.generatedMana(sa) : "mana";
         sb.append("Add ").append(toManaString(mana)).append(".");
+        if (sa.hasParam("RestrictValid")) {
+            String desc = sa.getDescription();
+            int i = desc.indexOf("Spend this");
+            sb.append(" ").append(desc, i, desc.indexOf(".", i) + 1);
+        }
         return sb.toString();
     }
 }

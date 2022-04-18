@@ -1,4 +1,18 @@
 {
+"com.badlogic.gdx.graphics.g2d.BitmapFont": {
+	"big": {
+		"file": "LanaPixel.fnt"
+	},
+	"black": {
+		"file": "LanaPixel.fnt"
+	},
+	"blackbig": {
+		"file": "LanaPixel.fnt"
+	},
+	"default": {
+		"file": "LanaPixel.fnt"
+	}
+},
 "com.badlogic.gdx.graphics.Color": {
 	"RGBA_0_0_0_255": {
 		"r": 0,

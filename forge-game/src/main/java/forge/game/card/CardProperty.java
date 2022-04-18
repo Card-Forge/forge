@@ -1417,8 +1417,8 @@ public class CardProperty {
             if (card.getCMC() != source.getChosenNumber()) {
                 return false;
             }
-        } else if (property.startsWith("power") || property.startsWith("toughness")
-                || property.startsWith("cmc") || property.startsWith("totalPT")) {
+        } else if (property.startsWith("power") || property.startsWith("toughness") || property.startsWith("cmc")
+                || property.startsWith("totalPT") || property.startsWith("numColors")) {
             int x;
             int y = 0;
             String rhs = "";
@@ -1435,6 +1435,9 @@ public class CardProperty {
             } else if (property.startsWith("totalPT")) {
                 rhs = property.substring(10);
                 y = card.getNetPower() + card.getNetToughness();
+            } else if (property.startsWith("numColors")) {
+                rhs = property.substring(11);
+                y = card.getColor().countColors();
             }
             x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
 

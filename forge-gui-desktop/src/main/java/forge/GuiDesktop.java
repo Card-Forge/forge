@@ -2,8 +2,11 @@ package forge;
 
 import java.awt.Desktop;
 import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -333,5 +336,19 @@ public class GuiDesktop implements IGuiBase {
     @Override
     public void preventSystemSleep(boolean preventSleep) {
         OperatingSystem.preventSystemSleep(preventSleep);
+    }
+
+    private static float initializeScreenScale() {
+        GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
+        AffineTransform at = gc.getDefaultTransform();
+        double scaleX = at.getScaleX();
+        double scaleY = at.getScaleY();
+        return (float) Math.min(scaleX, scaleY);
+    }
+    static float screenScale = initializeScreenScale();
+
+    @Override
+    public float getScreenScale() {
+        return screenScale;
     }
 }

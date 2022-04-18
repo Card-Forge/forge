@@ -441,9 +441,6 @@ public class PhaseHandler implements java.io.Serializable {
 
                     // Rule 514.3a - state-based actions
                     game.getAction().checkStateEffects(true);
-
-                    // done this after check state effects, so it only has effect next check
-                    game.getCleanup().executeUntil(getNextTurn());
                     break;
 
                 default:
@@ -529,6 +526,10 @@ public class PhaseHandler implements java.io.Serializable {
                     // set previous player
                     playerPreviousTurn = this.getPlayerTurn();
                     setPlayerTurn(handleNextTurn());
+
+                    // done this after check state effects, so it only has effect next check
+                    game.getCleanup().executeUntil(playerTurn);
+
                     // "Trigger" for begin turn to get around a phase skipping
                     final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                     runParams.put(AbilityKey.Player, playerTurn);

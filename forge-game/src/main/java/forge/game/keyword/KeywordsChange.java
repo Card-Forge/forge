@@ -23,7 +23,6 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import forge.game.card.Card;
-import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
@@ -51,11 +50,11 @@ public class KeywordsChange implements Cloneable {
      * @param removeAll whether to remove all keywords.
      */
     public KeywordsChange(
-            final Iterable<String> keywordList,
+            final Iterable<KeywordInterface> keywordList,
             final Collection<String> removeKeywordList,
             final boolean removeAll) {
         if (keywordList != null) {
-            this.keywords.addAll(keywordList);
+            this.keywords.insertAll(keywordList);
         }
 
         if (removeKeywordList != null) {
@@ -64,7 +63,6 @@ public class KeywordsChange implements Cloneable {
 
         this.removeAllKeywords = removeAll;
     }
-
     public KeywordsChange(
             final Collection<KeywordInterface> keywordList,
             final Collection<KeywordInterface> removeKeywordInterfaces,
@@ -120,18 +118,6 @@ public class KeywordsChange implements Cloneable {
         return !this.removeAllKeywords
                 && this.keywords.isEmpty()
                 && this.removeKeywords.isEmpty();
-    }
-
-    public final void addKeywordsToCard(final Card host) {
-        for (KeywordInterface inst : keywords.getValues()) {
-            inst.createTraits(host, false, true);
-        }
-    }
-
-    public final void addKeywordsToPlayer(final Player player) {
-        for (KeywordInterface inst : keywords.getValues()) {
-            inst.createTraits(player, true);
-        }
     }
 
     public void setHostCard(final Card host) {
