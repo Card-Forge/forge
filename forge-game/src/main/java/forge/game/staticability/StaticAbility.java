@@ -31,6 +31,7 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameStage;
 import forge.game.IIdentifiable;
+import forge.game.StaticLayerInterface;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -51,7 +52,7 @@ import forge.util.TextUtil;
 /**
  * The Class StaticAbility.
  */
-public class StaticAbility extends CardTraitBase implements IIdentifiable, Cloneable, Comparable<StaticAbility> {
+public class StaticAbility extends CardTraitBase implements IIdentifiable, Cloneable, Comparable<StaticAbility>, StaticLayerInterface {
     private static int maxId = 0;
     private static int nextId() { return ++maxId; }
 

@@ -81,7 +81,7 @@ public class CostRemoveCounter extends CostPart {
         } else {
             List<Card> typeList;
             if (type.equals("OriginalHost")) {
-                typeList = Lists.newArrayList(ability.getOriginalHost());
+                typeList = Lists.newArrayList(ability.getFirstGrantor());
             } else {
                 typeList = CardLists.getValidCards(payer.getCardsIn(this.zone), type.split(";"), payer, source, ability);
             }
@@ -155,7 +155,7 @@ public class CostRemoveCounter extends CostPart {
         else {
             List<Card> typeList;
             if (type.equals("OriginalHost")) {
-                typeList = Lists.newArrayList(ability.getOriginalHost());
+                typeList = Lists.newArrayList(ability.getFirstGrantor());
             } else {
                 typeList = CardLists.getValidCards(payer.getCardsIn(this.zone), type.split(";"), payer, source, ability);
             }

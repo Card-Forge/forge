@@ -105,9 +105,9 @@ public class AbilityUtils {
         }
         else if (defined.equals("OriginalHost")) {
             if (sa instanceof SpellAbility) {
-                c = ((SpellAbility)sa).getRootAbility().getOriginalHost();
+                c = ((SpellAbility)sa).getRootAbility().getFirstGrantor();
             } else {
-                c = sa.getOriginalHost();
+                c = sa.getFirstGrantor();
             }
         }
         else if (defined.equals("EffectSource")) {
@@ -549,7 +549,7 @@ public class AbilityUtils {
             }
         }
         else if (calcX[0].equals("OriginalHost")) {
-            val = xCount(ability.getOriginalHost(), calcX[1], ability);
+            val = xCount(ability.getFirstGrantor(), calcX[1], ability);
         }
         else if (calcX[0].startsWith("Remembered")) {
             // Add whole Remembered list to handlePaid

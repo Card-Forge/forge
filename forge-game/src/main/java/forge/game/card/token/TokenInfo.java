@@ -3,7 +3,6 @@ package forge.game.card.token;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Joiner;
@@ -273,7 +272,7 @@ public class TokenInfo {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
 
-        String edition = ObjectUtils.firstNonNull(sa.getOriginalHost(), host).getSetCode();
+        String edition = sa.getOriginalOrHost().getSetCode();
         PaperToken token = StaticData.instance().getAllTokens().getToken(script, edition);
 
         if (token == null) {

@@ -1,20 +1,21 @@
 package forge.game.card;
 
+import java.util.List;
+
 import org.apache.commons.lang3.ObjectUtils;
 
-import com.google.common.base.Optional;
 import com.google.common.collect.ForwardingTable;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 
+import forge.game.StaticLayerInterface;
 import forge.game.spellability.SpellAbility;
-import forge.game.staticability.StaticAbility;
 
-public class ActivationTable extends ForwardingTable<SpellAbility, Optional<StaticAbility>, Integer> {
-    Table<SpellAbility, Optional<StaticAbility>, Integer> dataTable = HashBasedTable.create();
+public class ActivationTable extends ForwardingTable<SpellAbility, List<StaticLayerInterface>, Integer> {
+    Table<SpellAbility, List<StaticLayerInterface>, Integer> dataTable = HashBasedTable.create();
 
     @Override
-    protected Table<SpellAbility, Optional<StaticAbility>, Integer> delegate() {
+    protected Table<SpellAbility, List<StaticLayerInterface>, Integer> delegate() {
         return dataTable;
     }
 
@@ -36,7 +37,7 @@ public class ActivationTable extends ForwardingTable<SpellAbility, Optional<Stat
         SpellAbility original = getOriginal(sa);
 
         if (original != null) {
-            Optional<StaticAbility> st = Optional.fromNullable(root.getGrantorStatic());
+            List<StaticLayerInterface> st = root.getGrantedByStatic();
 
             delegate().put(original, st, ObjectUtils.defaultIfNull(get(original, st), 0) + 1);
         }
@@ -45,7 +46,7 @@ public class ActivationTable extends ForwardingTable<SpellAbility, Optional<Stat
     public Integer get(SpellAbility sa) {
         SpellAbility root = sa.getRootAbility();
         SpellAbility original = getOriginal(sa);
-        Optional<StaticAbility> st = Optional.fromNullable(root.getGrantorStatic());
+        List<StaticLayerInterface> st = root.getGrantedByStatic();
 
         if (contains(original, st)) {
             return get(original, st);

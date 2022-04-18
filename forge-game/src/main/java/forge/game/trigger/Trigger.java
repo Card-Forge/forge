@@ -206,8 +206,8 @@ public abstract class Trigger extends TriggerReplacementBase {
                 if (!saDesc.startsWith(sa.getHostCard().getName())) {
                     saDesc = saDesc.substring(0, 1).toLowerCase() + saDesc.substring(1);
                 }
-                if (saDesc.contains("ORIGINALHOST") && sa.getOriginalHost() != null) {
-                    saDesc = TextUtil.fastReplace(saDesc, "ORIGINALHOST", sa.getOriginalHost().getName());
+                if (saDesc.contains("ORIGINALHOST") && sa.getFirstGrantor() != null) {
+                    saDesc = TextUtil.fastReplace(saDesc, "ORIGINALHOST", sa.getFirstGrantor().getName());
                 }
             } else {
                 saDesc = "<take no action>"; // printed in case nothing is chosen for the ability (e.g. Charm with Up to X)

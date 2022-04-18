@@ -113,7 +113,10 @@ public class CostSacrifice extends CostPartWithList {
         final Card source = ability.getHostCard();
 
         if (getType().equals("OriginalHost")) {
-            Card originalEquipment = ability.getOriginalHost();
+            Card originalEquipment = ability.getFirstGrantor();
+            if (!originalEquipment.getController().equals(activator)) {
+                return false;
+            }
             return originalEquipment.isEquipping() && originalEquipment.canBeSacrificedBy(ability, effect);
         }
         else if (!payCostFromSource()) { // You can always sac all
@@ -131,7 +134,7 @@ public class CostSacrifice extends CostPartWithList {
             // if X is defined, it needs to be calculated and checked, if X is
             // choice, it can be Paid even if it's 0
         }
-        else return source.canBeSacrificedBy(ability, effect);
+        else return source.getController().equals(activator) && source.canBeSacrificedBy(ability, effect);
     }
 
     @Override

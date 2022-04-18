@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.card.CardStateName;
@@ -34,6 +36,8 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
     /** The host card. */
     protected Card hostCard;
     protected CardState cardState = null;
+
+    protected List<StaticLayerInterface> grantedByStatic = Lists.newArrayList();
 
     /** The map params. */
     protected Map<String, String> originalMapParams = Maps.newHashMap(),
@@ -589,6 +593,31 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         return null;
     }
 
+    public Card getOriginalOrHost() {
+        return ObjectUtils.defaultIfNull(getOriginalHost(), getHostCard());
+    }
+
+    public List<StaticLayerInterface> getGrantedByStatic() {
+        return grantedByStatic;
+    }
+
+    public void setGrantedByStatic(List<StaticLayerInterface> list) {
+        this.grantedByStatic = Lists.newArrayList(list);
+    }
+
+    public void addGrantedByStatic(final StaticLayerInterface stAb) {
+        grantedByStatic.add(stAb);
+    }
+
+    // TODO currently Clone effects doesn't set Grantor like giving Abilities does
+    // if it would, then this needs to be refactored anyway
+    public Card getFirstGrantor() {
+        if (grantedByStatic.isEmpty()) {
+            return null;
+        }
+        return grantedByStatic.get(0).getHostCard();
+    }
+
     public boolean isCopiedTrait() {
         if (this.getCardState() == null) {
             return false;
@@ -650,7 +679,8 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         copy.mapParams = Maps.newHashMap(originalMapParams);
         copy.setSVars(sVars);
         copy.setCardState(cardState);
-        // dont use setHostCard to not trigger the not copied parts yet
+        copy.setGrantedByStatic(grantedByStatic);
+        // don't use setHostCard to not trigger the not copied parts yet
         copy.hostCard = host;
     }
 
