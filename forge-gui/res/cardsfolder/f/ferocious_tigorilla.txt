@@ -3,6 +3,6 @@ ManaCost:3 R
 Types:Creature Cat Ape
 PT:4/3
 K:ETBReplacement:Other:CounterChoice
-SVar:CounterChoice:DB$ PutCounter | ETB$ True | CounterType$ Trample,Menace | SpellDescription$ CARDNAME enters the battlefield your choice of a trample counter or a menace counter on it. (A creature with menace can't be blocked except by two or more creatures.)
+SVar:CounterChoice:DB$ PutCounter | ETB$ True | CounterType$ Trample,Menace | SpellDescription$ CARDNAME enters the battlefield with your choice of a trample counter or a menace counter on it. (A creature with menace can't be blocked except by two or more creatures.)
 DeckHas:Ability$Counters
 Oracle:Ferocious Tigorilla enters the battlefield with your choice of a trample counter or a menace counter on it. (A creature with menace can't be blocked except by two or more creatures.)

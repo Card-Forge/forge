@@ -3,6 +3,6 @@ ManaCost:1 B
 Types:Creature Beast
 PT:2/1
 K:ETBReplacement:Other:CounterChoice
-SVar:CounterChoice:DB$ PutCounter | ETB$ True | CounterType$ Deathtouch,Lifelink | SpellDescription$ CARDNAME enters the battlefield your choice of a deathtouch counter or a lifelink counter on it.
+SVar:CounterChoice:DB$ PutCounter | ETB$ True | CounterType$ Deathtouch,Lifelink | SpellDescription$ CARDNAME enters the battlefield with your choice of a deathtouch counter or a lifelink counter on it.
 DeckHints:Ability$Counters|LifeGain
 Oracle:Boot Nipper enters the battlefield with your choice of a deathtouch counter or a lifelink counter on it.
