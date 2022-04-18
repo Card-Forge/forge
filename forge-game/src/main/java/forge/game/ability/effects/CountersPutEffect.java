@@ -258,6 +258,51 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     }
                 }
 
+                if (sa.hasParam("ChooseDifferent")) {
+                    final int num = Integer.parseInt(sa.getParam("ChooseDifferent"));
+                    final List<CounterType> typesToAdd = Lists.newArrayList();
+                    String options = sa.getParam("CounterType");
+                    for (int i = 0; i < num; i++) {
+                        CounterType ct = chooseTypeFromList(sa, options, obj, pc);
+                        typesToAdd.add(ct);
+                        options = options.replace(ct.getName(),"");
+                    }
+                    for (CounterType ct : typesToAdd) {
+                        if (obj instanceof Player) {
+                            ((Player) obj).addCounter(ct, counterAmount, placer, table);
+                        }
+                        if (obj instanceof Card) {
+                            if (etbcounter) {
+                                gameCard.addEtbCounter(ct, counterAmount, placer);
+                            } else {
+                                gameCard.addCounter(ct, counterAmount, placer, table);
+                            }
+                        }
+                    }
+                    continue;
+                }
+
+                if (sa.hasParam("CounterTypes")) {
+                    final List<CounterType> typesToAdd = Lists.newArrayList();
+                    String types = sa.getParam("CounterTypes");
+                    if (types.contains("ChosenFromList")) {
+                        typesToAdd.add(chooseTypeFromList(sa, sa.getParam("TypeList"), obj, pc));
+                        types = types.replace("ChosenFromList", "");
+                    }
+                    for (String type : types.split(",")) {
+                        typesToAdd.add(CounterType.getType(type));
+                    }
+                    for (CounterType ct : typesToAdd) {
+                        if (obj instanceof Player) {
+                            ((Player) obj).addCounter(ct, counterAmount, placer, table);
+                        }
+                        if (obj instanceof Card) {
+                            gameCard.addCounter(ct, counterAmount, placer, table);
+                        }
+                    }
+                    continue;
+                }
+
                 if (existingCounter) {
                     final List<CounterType> choices = Lists.newArrayList();
                     // get types of counters
