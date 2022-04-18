@@ -23,26 +23,26 @@ import forge.item.PaperCard;
  */
 public class CardDbWithNoImageCardDbMockTestCase extends CardDbCardMockTestCase {
 
-	@Override
-	@BeforeMethod
-	public void setup() {
-		super.setup();
-	}
+    @Override
+    @BeforeMethod
+    public void setup() {
+        super.setup();
+    }
 
-	@Override
-	protected void initCardImageMocks() {
-		PowerMockito.mockStatic(ImageIO.class);
-		PowerMockito.mockStatic(ImageCache.class);
-		PowerMockito.mockStatic(ImageKeys.class);
-		PowerMockito.when(ImageKeys.hasImage(Mockito.any(PaperCard.class), Mockito.anyBoolean())).thenReturn(false);
-	}
+    @Override
+    protected void initCardImageMocks() {
+        PowerMockito.mockStatic(ImageIO.class);
+        PowerMockito.mockStatic(ImageCache.class);
+        PowerMockito.mockStatic(ImageKeys.class);
+        PowerMockito.when(ImageKeys.hasImage(Mockito.any(PaperCard.class), Mockito.anyBoolean())).thenReturn(false);
+    }
 
-	@Test
-	public void testCardIsReturnedEvenIfThereIsNoImage() {
-		PaperCard shivanDragon = this.cardDb.getCard(cardNameShivanDragon);
-		assertNotNull(shivanDragon);
-		assertFalse(ImageKeys.hasImage(shivanDragon));
-		assertFalse(shivanDragon.hasImage());
-	}
+    @Test
+    public void testCardIsReturnedEvenIfThereIsNoImage() {
+        PaperCard shivanDragon = this.cardDb.getCard(cardNameShivanDragon);
+        assertNotNull(shivanDragon);
+        assertFalse(ImageKeys.hasImage(shivanDragon));
+        assertFalse(shivanDragon.hasImage());
+    }
 
 }
