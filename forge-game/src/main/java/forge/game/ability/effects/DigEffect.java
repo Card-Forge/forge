@@ -408,6 +408,9 @@ public class DigEffect extends SpellAbilityEffect {
                             if (sa.hasParam("Tapped")) {
                                 c.setTapped(true);
                             }
+                            if (destZone1.equals(ZoneType.Battlefield) && sa.hasParam("WithCounter")) {
+                                c.addEtbCounter(CounterType.getType(sa.getParam("WithCounter")), 1, player);
+                            }
                             c = game.getAction().moveTo(zone, c, sa, moveParams);
                             if (destZone1.equals(ZoneType.Battlefield)) {
                                 if (addToCombat(c, c.getController(), sa, "Attacking", "Blocking")) {
