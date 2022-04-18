@@ -4,4 +4,5 @@ Types:Creature Devil Citizen
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Alliance — Whenever another creature enters the battlefield under your control, CARDNAME deals 1 damage to each opponent.
 SVar:TrigDmg:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
+SVar:BuffedBy:Creature
 Oracle:Alliance — Whenever another creature enters the battlefield under your control, Witty Roastmaster deals 1 damage to each opponent.

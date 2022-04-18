@@ -5,6 +5,6 @@ PT:4/4
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a tapped and attacking 1/1 red Devil creature token with "When this creature dies, it deals 1 damage to any target."
 SVar:TrigToken:DB$ Token | TokenScript$ r_1_1_devil_burn | TokenTapped$ True | TokenAttacking$ True
 K:Blitz:3 R
-DeckHas:Ability$Token|Sacrifice
+DeckHas:Ability$Token|Sacrifice & Type$Devil
 SVar:HasAttackEffect:True
 Oracle:Whenever Pugnacious Pugilist attacks, create a tapped and attacking 1/1 red Devil creature token with "When this creature dies, it deals 1 damage to any target."\nBlitz {3}{R} (If you cast this spell for its blitz cost, it gains haste and "When this creature dies, draw a card." Sacrifice it at the beginning of the next end step.)
