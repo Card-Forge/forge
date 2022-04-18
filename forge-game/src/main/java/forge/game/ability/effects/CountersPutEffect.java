@@ -45,8 +45,16 @@ public class CountersPutEffect extends SpellAbilityEffect {
         final StringBuilder stringBuilder = new StringBuilder();
         final Card card = spellAbility.getHostCard();
 
-        final int amount = AbilityUtils.calculateAmount(card, spellAbility.getParamOrDefault("CounterNum", "1"),
-                spellAbility);
+        final int amount = AbilityUtils.calculateAmount(card,
+                spellAbility.getParamOrDefault("CounterNum", "1"), spellAbility);
+        if (spellAbility.hasParam("CounterTypes")) {
+            stringBuilder.append(spellAbility.getActivatingPlayer()).append(" ");
+            String desc = spellAbility.getDescription();
+            desc = desc.substring(desc.indexOf("Put"), desc.indexOf(" on ") + 4)
+                    .replaceFirst("Put", "puts");
+            stringBuilder.append(desc).append(Lang.joinHomogenous(getTargets(spellAbility))).append(".");
+            return stringBuilder.toString();
+        }
         // skip the StringBuilder if no targets are chosen ("up to" scenario)
         if (spellAbility.usesTargeting()) {
             final List<Card> targetCards = SpellAbilityEffect.getTargetCards(spellAbility);
