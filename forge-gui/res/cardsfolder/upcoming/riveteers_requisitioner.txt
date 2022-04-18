@@ -1,0 +1,9 @@
+Name:Riveteers Requisitioner
+ManaCost:1 R
+Types:Creature Viashino Rogue
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac
+DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
+K:Blitz:2 R
+Oracle:When Riveteers Requisitioner dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nBlitz {2}{R} (If you cast this spell for its blitz cost, it gains haste and "When this creature dies, draw a card." Sacrifice it at the beginning of the next end step.)
