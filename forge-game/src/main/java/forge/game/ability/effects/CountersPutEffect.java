@@ -479,7 +479,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
         } else {
             CounterType counterType = null;
             if (!sa.hasParam("EachExistingCounter") && !sa.hasParam("EachFromSource")
-                    && !sa.hasParam("CounterTypePerDefined")) {
+                    && !sa.hasParam("UniqueType") && !sa.hasParam("CounterTypePerDefined")
+                    && !sa.hasParam("CounterTypes") && !sa.hasParam("ChooseDifferent")) {
                 try {
                     List<CounterType> choices = Lists.newArrayList();
                     for (String s : sa.getParam("CounterType").split(",")) {
