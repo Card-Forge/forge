@@ -1,0 +1,12 @@
+Name:Workshop Warchief
+ManaCost:3 G G
+Types:Creature Rhino Warrior
+PT:5/3
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 4/4 green Rhino Warrior creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ g_4_4_rhino_warrior
+K:Blitz:4 G G
+DeckHas:Ability$LifeGain|Token
+Oracle:Trample\nWhen Workshop Warchief enters the battlefield, you gain 3 life.\nWhen Workshop Warchief dies, create a 4/4 green Rhino Warrior creature token.\nBlitz {4}{G}{G} (If you cast this spell for its blitz cost, it gains haste and "When this creature dies, draw a card." Sacrifice it at the beginning of the next end step.)

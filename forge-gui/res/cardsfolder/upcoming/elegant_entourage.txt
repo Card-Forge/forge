@@ -1,0 +1,8 @@
+Name:Elegant Entourage
+ManaCost:3 G
+Types:Creature Elf Druid
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Alliance — Whenever another creature enters the battlefield under your control, target creature other than CARDNAME gets +1/+1 and gains trample until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature other than CARDNAME | NumAtt$ +1 | NumDef$ +1 | KW$ Trample
+SVar:PlayMain1:TRUE
+Oracle:Alliance — Whenever another creature enters the battlefield under your control, target creature other than Elegant Entourage gets +1/+1 and gains trample until end of turn.
