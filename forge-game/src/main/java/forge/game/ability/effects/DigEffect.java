@@ -67,14 +67,34 @@ public class DigEffect extends SpellAbilityEffect {
             }
 
             String verb2 = "put ";
-            String where = "in their hand ";
+            String where = " in their hand ";
             if (destZone1.equals("exile")) {
                 verb2 = "exile ";
-                where = "";
+                where = " ";
+            } else if (destZone1.equals("battlefield")) {
+                verb2 = "put ";
+                where = " onto the battlefield ";
             }
-            sb.append(" They ").append(verb2).append(Lang.getNumeral(numToChange)).append(" of them ").append(where);
-            sb.append(sa.hasParam("ExileFaceDown") ? "face down " : "").append("and put the rest ");
-            sb.append(destZone2);
+
+            sb.append(" They ").append(sa.hasParam("Optional") ? "may " : "").append(verb2);
+            if (sa.hasParam("ChangeValid")) {
+                String what = sa.hasParam("ChangeValidDesc") ? sa.getParam("ChangeValidDesc") :
+                        sa.getParam("ChangeValid");
+                sb.append(Lang.nounWithNumeralExceptOne(numToChange, what)).append(" from among them").append(where);
+            } else {
+                sb.append(Lang.getNumeral(numToChange)).append(" of them").append(where);
+            }
+            sb.append(sa.hasParam("ExileFaceDown") ? "face down " : "");
+            if (sa.hasParam("WithCounter") || sa.hasParam("ExileWithCounter")) {
+                String ctr = sa.hasParam("WithCounter") ? sa.getParam("WithCounter") :
+                        sa.getParam("ExileWithCounter");
+                sb.append("with a ");
+                sb.append(CounterType.getType(ctr).getName().toLowerCase());
+                sb.append(" counter on it. They ");
+            } else {
+                sb.append("and ");
+            }
+            sb.append("put the rest ").append(destZone2);
         }
 
         return sb.toString();
