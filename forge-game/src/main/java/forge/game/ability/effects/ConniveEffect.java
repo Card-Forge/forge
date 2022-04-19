@@ -4,7 +4,6 @@ import com.google.common.collect.Maps;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameEntityCounterTable;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
