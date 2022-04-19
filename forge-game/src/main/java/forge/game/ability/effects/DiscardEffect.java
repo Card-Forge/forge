@@ -32,47 +32,58 @@ public class DiscardEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        final String mode = sa.getParam("Mode");
+        final List<Player> tgtPlayers = Lists.newArrayList(Iterables.filter(getTargetPlayers(sa),
+                PlayerPredicates.canDiscardBy(sa, true)));
+
         final StringBuilder sb = new StringBuilder();
 
-        final Iterable<Player> tgtPlayers = Iterables.filter(getTargetPlayers(sa), PlayerPredicates.canDiscardBy(sa, true));
+        if (!tgtPlayers.isEmpty()) {
+            final String tgtPs = Lang.joinHomogenous(tgtPlayers);
+            final String mode = sa.getParam("Mode");
+            final boolean revealYouChoose = mode.equals("RevealYouChoose");
+            final boolean revealDiscardAll = mode.equals("RevealDiscardAll");
+            final Player you = sa.getActivatingPlayer();
+            final boolean oneTgtP = tgtPlayers.size() == 1;
 
-        if (!Iterables.isEmpty(tgtPlayers)) {
-            sb.append(Lang.joinHomogenous(tgtPlayers)).append(" ");
+            sb.append(tgtPs).append(" ");
 
-            if (mode.equals("RevealYouChoose")) {
-                sb.append("reveals their hand.").append("  You choose (");
-            } else if (mode.equals("RevealDiscardAll")) {
-                sb.append("reveals their hand. Discard (");
+            if (revealYouChoose) {
+                sb.append(oneTgtP ? "reveals their hand. " : "reveal their hands. ");
+                sb.append(you).append(" chooses ");
+            } else if (revealDiscardAll) {
+                sb.append(oneTgtP ? "reveals their hand. " : "reveal their hands. ");
+                sb.append("They discard ");
             } else {
-                sb.append("discards ");
+                sb.append(oneTgtP ? "discards " : "discard ");
             }
 
-            int numCards = 1;
-            if (sa.hasParam("NumCards")) {
-                numCards = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
+            int numCards = sa.hasParam("NumCards") ?
+                    AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
+
+            String valid = "card";
+            if (sa.hasParam("DiscardValid")) {
+                valid = sa.hasParam("DiscardValidDesc") ? sa.getParam("DiscardValidDesc")
+                        : sa.getParam("DiscardValid");
             }
 
             if (mode.equals("Hand")) {
-                sb.append("their hand");
-            } else if (mode.equals("RevealDiscardAll")) {
-                sb.append("All");
+                sb.append(oneTgtP ? "their hand" : "their hands");
+            } else if (revealDiscardAll) {
+                sb.append("all");
             } else if (sa.hasParam("AnyNumber")) {
                 sb.append("any number");
             } else if (sa.hasParam("NumCards") && sa.getParam("NumCards").equals("X")
                     && sa.getSVar("X").equals("Remembered$Amount")) {
                 sb.append("that many");
             } else {
-                sb.append(numCards == 1 ? "a card" : (Lang.getNumeral(numCards) + " cards"));
+                sb.append(Lang.nounWithNumeralExceptOne(numCards, valid));
             }
 
-            if (mode.equals("RevealYouChoose")) {
-                sb.append(" to discard");
-            } else if (mode.equals("RevealDiscardAll")) {
-                String valid = sa.getParam("DiscardValid");
-                if (valid == null) {
-                    valid = "Card";
-                }
+            if (revealYouChoose) {
+                sb.append(oneTgtP ? " from it. " : " from them. ").append(tgtPs);
+                sb.append(oneTgtP ? " discards " : " discard ");
+                sb.append(numCards > 1 || !oneTgtP ? "those cards" : "that card");
+            } else if (revealDiscardAll) {
                 sb.append(" of type: ").append(valid);
             }
 
