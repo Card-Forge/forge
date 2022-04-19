@@ -1170,8 +1170,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             final int drawY = bounds.y + borderSize;
             final int drawWidth = bounds.width - 2 * borderSize;
             final int drawHeight = bounds.height - 2 * borderSize;
-            final int imageWidth = Math.round(drawWidth * screenScale);
-            final int imageHeight = Math.round(drawHeight * screenScale);
+            final int imageWidth = Math.round(drawWidth * screenScale)-1;
+            final int imageHeight = Math.round(drawHeight * screenScale)-1;
             BufferedImage img = ImageCache.getImage(item, imageWidth, imageHeight, itemInfo.alt);
 
             if (img != null) {

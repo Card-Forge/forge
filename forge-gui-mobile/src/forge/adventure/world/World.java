@@ -16,6 +16,7 @@ import forge.adventure.data.WorldData;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.pointofintrest.PointOfInterestMap;
 import forge.adventure.scene.Scene;
+import forge.adventure.stage.WorldStage;
 import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
 import forge.adventure.util.SaveFileContent;
@@ -505,7 +506,8 @@ public class World implements  Disposable, SaveFileContent {
         }
         biomeImage = pix;
 
-        return this;//new World();
+        WorldStage.getInstance().clearCache();
+        return this;
     }
 
     public int getWidthInTiles() {

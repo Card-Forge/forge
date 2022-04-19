@@ -39,7 +39,7 @@ import java.awt.Window;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BaseMultiResolutionImage;
+//import java.awt.image.BaseMultiResolutionImage;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -690,14 +690,14 @@ public class FSkin {
 
         protected ImageIcon getIcon() {
             if (this.imageIcon == null) {
-                float screenScale = GuiBase.getInterface().getScreenScale();
+                /*float screenScale = GuiBase.getInterface().getScreenScale();
                 int iconWidth = Math.round(image.getWidth(null) / screenScale);
                 int iconHeight = Math.round(image.getHeight(null) / screenScale);
                 Image [] iconImages = new Image[2];
                 iconImages[0] = image.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
                 iconImages[1] = image;
-                BaseMultiResolutionImage multiImage = new BaseMultiResolutionImage(iconImages);
-                this.imageIcon = new ImageIcon(multiImage);
+                BaseMultiResolutionImage multiImage = new BaseMultiResolutionImage(iconImages);*/
+                this.imageIcon = new ImageIcon(this.image/*multiImage*/);
             }
             return this.imageIcon;
         }

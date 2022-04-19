@@ -362,7 +362,7 @@ public class CountersPutAi extends CountersAi {
             }
         }
 
-        if ("Fight".equals(logic)) {
+        if ("Fight".equals(logic) || "PowerDmg".equals(logic)) {
             int nPump = 0;
             if (type.equals("P1P1")) {
                 nPump = amount;

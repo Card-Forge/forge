@@ -398,7 +398,6 @@ public class SpellAbilityVariables implements Cloneable {
         this.setCardsInHand2(cards);
     }
 
-
     public final void setHellbent(final boolean bHellbent) {
         this.hellbent = bHellbent;
     }
@@ -718,7 +717,6 @@ public class SpellAbilityVariables implements Cloneable {
     public final Set<GameType> getGameTypes() {
         return this.gameTypes;
     }
-
 
     /**
      * Gets the present defined.

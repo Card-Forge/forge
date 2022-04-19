@@ -1,0 +1,13 @@
+Name:Kamiz, Obscura Oculus
+ManaCost:1 W U B
+Types:Legendary Creature Cephalid Rogue
+PT:2/4
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, target attacking creature can't be blocked this turn. It connives. Then choose another attacking creature with lesser power. That creature gains double strike until end of turn. (To have a creature connive, draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+SVar:TrigPump:DB$ Pump | KW$ HIDDEN Unblockable | RememberObjects$ Targeted | TgtPrompt$ Select target attacking creature | ValidTgts$ Creature.attacking | SubAbility$ DBConnive
+SVar:DBConnive:DB$ Connive | Defined$ Targeted | SubAbility$ DBChooseCard
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ You | Choices$ Creature.attacking+IsNotRemembered+powerLTX | ChoiceTitle$ Choose another attacking creature with lesser power | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | KW$ Double Strike | Defined$ ChosenCard | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+SVar:X:Remembered$CardPower
+DeckHas:Ability$Discard|Counters
+Oracle:Whenever you attack, target attacking creature can't be blocked this turn. It connives. Then choose another attacking creature with lesser power. That creature gains double strike until end of turn. (To have a creature connive, draw a card, then discard a card. Put a +1/+1 counter on that creature for each nonland card discarded this way.)

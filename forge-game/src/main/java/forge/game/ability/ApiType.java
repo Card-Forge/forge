@@ -52,6 +52,7 @@ public enum ApiType {
     Cleanup (CleanUpEffect.class),
     Clone (CloneEffect.class),
     CompanionChoose (ChooseCompanionEffect.class),
+    Connive (ConniveEffect.class),
     CopyPermanent (CopyPermanentEffect.class),
     CopySpellAbility (CopySpellAbilityEffect.class),
     ControlSpell (ControlSpellEffect.class),

@@ -8,7 +8,7 @@ A:AB$ ChooseSource | Cost$ T | Choices$ Card,Emblem | AILogic$ NeedsPrevention |
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ SelflessDamage | Triggers$ OutOfSight | Duration$ UntilHostLeavesPlayOrEOT | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card,Emblem | ConditionCompare$ GE1
 SVar:SelflessDamage:Event$ DamageDone | ValidSource$ Card.ChosenCard,Emblem.ChosenCard | ReplaceWith$ SelflessDmg | DamageTarget$ EffectSource | Description$ The next time a source of your choice would deal damage to you this turn, that damage is dealt to EFFECTSOURCE instead.
 SVar:SelflessDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ EffectSource | VarType$ Card | SubAbility$ ExileEffect
-SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Defined$ ChosenCard | Execute$ ExileEffect | Static$ True
+SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.ChosenCard | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 A:AB$ PreventDamage | Cost$ 1 W | Defined$ Self | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to CARDNAME this turn.
