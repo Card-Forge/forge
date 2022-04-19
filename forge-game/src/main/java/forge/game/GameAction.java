@@ -275,55 +275,50 @@ public class GameAction {
                 lastKnownInfo = CardUtil.getLKICopy(c);
             }
 
-            if (!c.isRealToken()) {
-                copied = CardFactory.copyCard(c, false);
+            copied = CardFactory.copyCard(c, false);
 
-                if (zoneTo.is(ZoneType.Stack)) {
-                    // when moving to stack, copy changed card information
-                    copied.setChangedCardColors(c.getChangedCardColorsTable());
-                    copied.setChangedCardColorsCharacterDefining(c.getChangedCardColorsCharacterDefiningTable());
-                    copied.setChangedCardKeywords(c.getChangedCardKeywords());
-                    copied.setChangedCardTypes(c.getChangedCardTypesTable());
-                    copied.setChangedCardTypesCharacterDefining(c.getChangedCardTypesCharacterDefiningTable());
-                    copied.setChangedCardNames(c.getChangedCardNames());
-                    copied.setChangedCardTraits(c.getChangedCardTraits());
-                    copied.setDrawnThisTurn(c.getDrawnThisTurn());
+            if (zoneTo.is(ZoneType.Stack)) {
+                // when moving to stack, copy changed card information
+                copied.setChangedCardColors(c.getChangedCardColorsTable());
+                copied.setChangedCardColorsCharacterDefining(c.getChangedCardColorsCharacterDefiningTable());
+                copied.setChangedCardKeywords(c.getChangedCardKeywords());
+                copied.setChangedCardTypes(c.getChangedCardTypesTable());
+                copied.setChangedCardTypesCharacterDefining(c.getChangedCardTypesCharacterDefiningTable());
+                copied.setChangedCardNames(c.getChangedCardNames());
+                copied.setChangedCardTraits(c.getChangedCardTraits());
+                copied.setDrawnThisTurn(c.getDrawnThisTurn());
 
-                    copied.copyChangedTextFrom(c);
-                    copied.setTimestamp(c.getTimestamp());
+                copied.copyChangedTextFrom(c);
+                copied.setTimestamp(c.getTimestamp());
 
-                    // clean up changes that come from its own static abilities
-                    copied.cleanupCopiedChangesFrom(c);
+                // clean up changes that come from its own static abilities
+                copied.cleanupCopiedChangesFrom(c);
 
-                    // copy exiled properties when adding to stack
-                    // will be cleanup later in MagicStack
-                    copied.setExiledWith(c.getExiledWith());
-                    copied.setExiledBy(c.getExiledBy());
+                // copy exiled properties when adding to stack
+                // will be cleanup later in MagicStack
+                copied.setExiledWith(c.getExiledWith());
+                copied.setExiledBy(c.getExiledBy());
 
-                    // copy bestow timestamp
-                    copied.setBestowTimestamp(c.getBestowTimestamp());
-                } else {
-                    // when a card leaves the battlefield, ensure it's in its original state
-                    // (we need to do this on the object before copying it, or it won't work correctly e.g.
-                    // on Transformed objects)
-                    copied.setState(CardStateName.Original, false);
-                    copied.setBackSide(false);
+                // copy bestow timestamp
+                copied.setBestowTimestamp(c.getBestowTimestamp());
+            } else {
+                // when a card leaves the battlefield, ensure it's in its original state
+                // (we need to do this on the object before copying it, or it won't work correctly e.g.
+                // on Transformed objects)
+                copied.setState(CardStateName.Original, false);
+                copied.setBackSide(false);
 
-                    // reset timestamp in changezone effects so they have same timestamp if ETB simultaneously
-                    copied.setTimestamp(game.getNextTimestamp());
-                }
-
-                copied.setUnearthed(c.isUnearthed());
-                copied.setTapped(false);
-
-                // need to copy counters when card enters another zone than hand or library
-                if (lastKnownInfo.hasKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.") &&
-                        !(zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library))) {
-                    copied.setCounters(Maps.newHashMap(lastKnownInfo.getCounters()));
-                }
-            } else { //Token
-                copied = c;
+                // reset timestamp in changezone effects so they have same timestamp if ETB simultaneously
                 copied.setTimestamp(game.getNextTimestamp());
+            }
+
+            copied.setUnearthed(c.isUnearthed());
+            copied.setTapped(false);
+
+            // need to copy counters when card enters another zone than hand or library
+            if (lastKnownInfo.hasKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.") &&
+                    !(zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library))) {
+                copied.setCounters(Maps.newHashMap(lastKnownInfo.getCounters()));
             }
         }
 
