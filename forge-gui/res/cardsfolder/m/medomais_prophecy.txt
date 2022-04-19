@@ -4,9 +4,9 @@ Types:Enchantment Saga
 K:Saga:4:DBScry,DBNameCard,DBEffect,DBLook
 SVar:DBScry:DB$ Scry | ScryNum$ 2 | SpellDescription$ Scry 2.
 SVar:DBNameCard:DB$ NameCard | SpellDescription$ Choose a card name.
-SVar:DBEffect:DB$ Effect | Name$ Medomai's Prophecy Effect | Triggers$ NamedCardCast | SpellDescription$ When you cast a spell with the chosen name for the first time this turn, draw two cards.
-SVar:DBLook:DB$ Dig | Defined$ Player | DigNum$ 1 | DestinationZone$ Library | LibraryPosition$ 0 | SpellDescription$ Look at the top card of each player's library.
+SVar:DBEffect:DB$ Effect | Triggers$ NamedCardCast | SpellDescription$ When you cast a spell with the chosen name for the first time this turn, draw two cards.
 SVar:NamedCardCast:Mode$ SpellCast | ValidCard$ Card.NamedCard | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ TrigDraw | TriggerDescription$ When you cast a spell with the chosen name for the first time this turn, draw two cards.
 SVar:TrigDraw:DB$ Draw | NumCards$ 2 | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:DBLook:DB$ PeekAndReveal | Defined$ Player | NoReveal$ True | SpellDescription$ Look at the top card of each player's library.
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI — Scry 2.\nII — Choose a card name.\nIII — When you cast a spell with the chosen name for the first time this turn, draw two cards.\nIV — Look at the top card of each player's library.
