@@ -45,8 +45,16 @@ public class CountersPutEffect extends SpellAbilityEffect {
         final StringBuilder stringBuilder = new StringBuilder();
         final Card card = spellAbility.getHostCard();
 
-        final int amount = AbilityUtils.calculateAmount(card, spellAbility.getParamOrDefault("CounterNum", "1"),
-                spellAbility);
+        final int amount = AbilityUtils.calculateAmount(card,
+                spellAbility.getParamOrDefault("CounterNum", "1"), spellAbility);
+        if (spellAbility.hasParam("CounterTypes")) {
+            stringBuilder.append(spellAbility.getActivatingPlayer()).append(" ");
+            String desc = spellAbility.getDescription();
+            desc = desc.substring(desc.indexOf("Put"), desc.indexOf(" on ") + 4)
+                    .replaceFirst("Put", "puts");
+            stringBuilder.append(desc).append(Lang.joinHomogenous(getTargets(spellAbility))).append(".");
+            return stringBuilder.toString();
+        }
         // skip the StringBuilder if no targets are chosen ("up to" scenario)
         if (spellAbility.usesTargeting()) {
             final List<Card> targetCards = SpellAbilityEffect.getTargetCards(spellAbility);
@@ -250,6 +258,51 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     }
                 }
 
+                if (sa.hasParam("ChooseDifferent")) {
+                    final int num = Integer.parseInt(sa.getParam("ChooseDifferent"));
+                    final List<CounterType> typesToAdd = Lists.newArrayList();
+                    String options = sa.getParam("CounterType");
+                    for (int i = 0; i < num; i++) {
+                        CounterType ct = chooseTypeFromList(sa, options, obj, pc);
+                        typesToAdd.add(ct);
+                        options = options.replace(ct.getName(),"");
+                    }
+                    for (CounterType ct : typesToAdd) {
+                        if (obj instanceof Player) {
+                            ((Player) obj).addCounter(ct, counterAmount, placer, table);
+                        }
+                        if (obj instanceof Card) {
+                            if (etbcounter) {
+                                gameCard.addEtbCounter(ct, counterAmount, placer);
+                            } else {
+                                gameCard.addCounter(ct, counterAmount, placer, table);
+                            }
+                        }
+                    }
+                    continue;
+                }
+
+                if (sa.hasParam("CounterTypes")) {
+                    final List<CounterType> typesToAdd = Lists.newArrayList();
+                    String types = sa.getParam("CounterTypes");
+                    if (types.contains("ChosenFromList")) {
+                        typesToAdd.add(chooseTypeFromList(sa, sa.getParam("TypeList"), obj, pc));
+                        types = types.replace("ChosenFromList", "");
+                    }
+                    for (String type : types.split(",")) {
+                        typesToAdd.add(CounterType.getType(type));
+                    }
+                    for (CounterType ct : typesToAdd) {
+                        if (obj instanceof Player) {
+                            ((Player) obj).addCounter(ct, counterAmount, placer, table);
+                        }
+                        if (obj instanceof Card) {
+                            gameCard.addCounter(ct, counterAmount, placer, table);
+                        }
+                    }
+                    continue;
+                }
+
                 if (existingCounter) {
                     final List<CounterType> choices = Lists.newArrayList();
                     // get types of counters
@@ -295,17 +348,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     }
                     continue;
                 }
-                if (sa.hasParam("CounterTypePerDefined")) {
-                    List<CounterType> choices = Lists.newArrayList();
-                    for (String s : sa.getParam("CounterType").split(",")) {
-                        choices.add(CounterType.getType(s));
-                    }
-                    Map<String, Object> params = Maps.newHashMap();
-                    params.put("Target", obj);
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(Localizer.getInstance().getMessage("lblSelectCounterTypeAddTo") + " ");
-                    sb.append(obj);
-                    counterType = pc.chooseCounterType(choices, sa, sb.toString(), params);
+                if (sa.hasParam("CounterTypePerDefined") || sa.hasParam("UniqueType")) {
+                    counterType = chooseTypeFromList(sa, sa.getParam("CounterType"), obj, pc);
                 }
 
                 if (obj instanceof Card) {
@@ -471,16 +515,11 @@ public class CountersPutEffect extends SpellAbilityEffect {
         } else {
             CounterType counterType = null;
             if (!sa.hasParam("EachExistingCounter") && !sa.hasParam("EachFromSource")
-                    && !sa.hasParam("CounterTypePerDefined")) {
+                    && !sa.hasParam("UniqueType") && !sa.hasParam("CounterTypePerDefined")
+                    && !sa.hasParam("CounterTypes") && !sa.hasParam("ChooseDifferent")) {
                 try {
-                    List<CounterType> choices = Lists.newArrayList();
-                    for (String s : sa.getParam("CounterType").split(",")) {
-                        choices.add(CounterType.getType(s));
-                    }
-                    Map<String, Object> params = Maps.newHashMap();
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(Localizer.getInstance().getMessage("lblSelectCounterTypeAddTo"));
-                    counterType = placer.getController().chooseCounterType(choices, sa, sb.toString(), params);
+                    counterType = chooseTypeFromList(sa, sa.getParam("CounterType"), null,
+                            placer.getController());
                 } catch (Exception e) {
                     System.out.println("Counter type doesn't match, nor does an SVar exist with the type name.");
                     return;
@@ -539,6 +578,27 @@ public class CountersPutEffect extends SpellAbilityEffect {
             trig.setOverridingAbility(newSa);
             sa.getActivatingPlayer().getGame().getTriggerHandler().registerDelayedTrigger(trig);
         }
+    }
+
+    protected CounterType chooseTypeFromList(SpellAbility sa, String list, GameEntity obj, PlayerController pc) {
+        List<CounterType> choices = Lists.newArrayList();
+        for (String s : list.split(",")) {
+            if (!s.equals("") && (!sa.hasParam("UniqueType") || obj.getCounters(CounterType.getType(s)) == 0)) {
+                choices.add(CounterType.getType(s));
+            }
+        }
+        if (sa.hasParam("RandomType")) {
+            return Aggregates.random(choices);
+        }
+        Map<String, Object> params = Maps.newHashMap();
+        params.put("Target", obj);
+        StringBuilder sb = new StringBuilder();
+        if (obj != null) {
+            sb.append(Localizer.getInstance().getMessage("lblSelectCounterTypeAddTo")).append(" ").append(obj);
+        } else {
+            sb.append(Localizer.getInstance().getMessage("lblSelectCounterType"));
+        }
+        return pc.chooseCounterType(choices, sa, sb.toString(), params);
     }
 
     protected String logOutput(Map<Object, Integer> randomMap, Card card) {

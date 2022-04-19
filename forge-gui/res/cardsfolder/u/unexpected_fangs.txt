@@ -1,7 +1,6 @@
 Name:Unexpected Fangs
 ManaCost:1 B
 Types:Instant
-A:SP$ PutCounter | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPutCounter | SpellDescription$ Put a +1/+1 counter and a lifelink counter on target creature.
-SVar:DBPutCounter:DB$ PutCounter | CounterType$ Lifelink | CounterNum$ 1 | Defined$ Targeted
-DeckHas:Ability$Counters
+A:SP$ PutCounter | ValidTgts$ Creature | CounterTypes$ P1P1,Lifelink | SpellDescription$ Put a +1/+1 counter and a lifelink counter on target creature.
+DeckHas:Ability$Counters|LifeGain
 Oracle:Put a +1/+1 counter and a lifelink counter on target creature.
