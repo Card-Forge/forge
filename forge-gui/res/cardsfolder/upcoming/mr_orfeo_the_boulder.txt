@@ -1,0 +1,9 @@
+Name:Mr. Orfeo, the Boulder
+ManaCost:1 B R G
+Types:Legendary Creature Rhino Warrior
+PT:2/4
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, double target creature's power until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | Double$ True
+SVar:X:Targeted$CardPower
+SVar:PlayMain1:TRUE
+Oracle:Whenever you attack, double target creature's power until end of turn.
