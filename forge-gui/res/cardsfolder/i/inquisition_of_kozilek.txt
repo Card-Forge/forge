@@ -1,5 +1,5 @@
 Name:Inquisition of Kozilek
 ManaCost:B
 Types:Sorcery
-A:SP$ Discard | Cost$ B | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand+cmcLE3 | NumCards$ 1 | SpellDescription$ Target player reveals their hand. You choose a nonland card from it with mana value 3 or less. That player discards that card.
+A:SP$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand+cmcLE3 | DiscardValidDesc$ nonland card from it with mana value 3 or less | SpellDescription$ Target player reveals their hand. You choose a nonland card from it with mana value 3 or less. That player discards that card.
 Oracle:Target player reveals their hand. You choose a nonland card from it with mana value 3 or less. That player discards that card.
