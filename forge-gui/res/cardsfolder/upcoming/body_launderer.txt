@@ -1,0 +1,12 @@
+Name:Body Launderer
+ManaCost:2 B B
+Types:Creature Ogre Rogue
+PT:3/3
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+nonToken+Other | TriggerZones$ Battlefield | Execute$ TrigConnive | TriggerDescription$ Whenever another nontoken creature you control dies, CARDNAME connives.
+SVar:TrigConnive:DB$ Connive
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME dies, return another target non-Rogue creature card with equal or lesser power from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.powerLEX+YouOwn+nonRogue+Other | TgtPrompt$ Select target non-Rogue creature card with equal or lesser power | Origin$ Graveyard | Destination$ Battlefield
+SVar:X:TriggeredCard$CardPower
+DeckHas:Ability$Discard|Counters|Graveyard
+Oracle:Deathtouch\nWhenever another nontoken creature you control dies, Body Launderer connives.\nWhen Body Launderer dies, return another target non-Rogue creature card with equal or lesser power from your graveyard to the battlefield.
