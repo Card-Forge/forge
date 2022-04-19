@@ -17,6 +17,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
+import forge.util.Lang;
 import forge.util.Localizer;
 
 /** 
@@ -28,6 +29,29 @@ import forge.util.Localizer;
  */
 public class PeekAndRevealEffect extends SpellAbilityEffect {
     
+    @Override
+    protected String getStackDescription(SpellAbility sa) {
+        final Player peeker = sa.getActivatingPlayer();
+
+        final int numPeek = sa.hasParam("PeekAmount") ?
+                AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("PeekAmount"), sa) : 1;
+        final String verb = sa.hasParam("NoReveal") ? " looks at " : " reveals ";
+        final String defined = sa.getParam("Defined");
+        String whose;
+        if (defined.equals("Player")) {
+            whose = "each player's ";
+        } else { // other else ifs for specific defined can be added above as needs arise
+            whose = Lang.joinHomogenous(getTargetPlayers(sa));
+        }
+        final StringBuilder sb = new StringBuilder();
+
+        sb.append(peeker).append(verb).append("the top ");
+        sb.append(numPeek > 1 ? Lang.getNumeral(numPeek) + " cards " : "card ").append("of ").append(whose);
+        sb.append(" library.");
+
+        return sb.toString();
+    }
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(forge.card.spellability.SpellAbility)
      */
