@@ -3,5 +3,5 @@ ManaCost:2 U B R
 Types:Sorcery
 A:SP$ Animate | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | Power$ 1 | Toughness$ 1 | IsCurse$ True | SubAbility$ DBGrow | SpellDescription$ Up to one target creature has base power and toughness 1/1 until end of turn.
 SVar:DBGrow:DB$ Animate | TargetUnique$ True | ValidTgts$ Creature | TgtPrompt$ Select up to one other target creature | TargetMin$ 0 | TargetMax$ 1 | Power$ 4 | Toughness$ 4 | SubAbility$ DBDamageAll | SpellDescription$ Up to one other target creature has base power and toughness 4/4 until end of turn.
-SVar:DBDamageAll:DB$ DamageAll | NumDmg$ 3 | ValidCards$ Creature | ValidDescription$ each creature. | Spelldescription$ Then CARDNAME deals 3 damage to each creature.
+SVar:DBDamageAll:DB$ DamageAll | NumDmg$ 3 | ValidCards$ Creature | ValidDescription$ each creature. | SpellDescription$ Then CARDNAME deals 3 damage to each creature.
 Oracle: Up to one target creature has base power and toughness 1/1 until end of turn. Up to one other target creature has base power and toughness 4/4 until end of turn. Then Hostile Takeover deals 3 damage to each creature.
