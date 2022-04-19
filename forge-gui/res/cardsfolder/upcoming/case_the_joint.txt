@@ -1,0 +1,6 @@
+Name:Case the Joint
+ManaCost:3 U
+Types:Instant
+A:SP$ Draw | NumCards$ 2 | StackDescription$ {p:You} draws two cards, | SubAbility$ DBDig | SpellDescription$ Draw two cards, then look at the top card of each player's library.
+SVar:DBDig:DB$ Dig | Defined$ Player | DigNum$ 1 | DestinationZone$ Library | LibraryPosition$ 0 | StackDescription$ then looks at the top card of each player's library.
+Oracle:Draw two cards, then look at the top card of each player's library.

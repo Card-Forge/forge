@@ -1,0 +1,6 @@
+Name:Cutthroat Contender
+ManaCost:B
+Types:Creature Vampire Warrior
+PT:1/1
+A:AB$ Pump | Cost$ PayLife<1> | ActivationLimit$ 1 | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn. Activate only once each turn.
+Oracle:Pay 1 life: Cutthroat Contender gets +1/+0 until end of turn. Activate only once each turn.
