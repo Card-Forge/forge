@@ -1,0 +1,9 @@
+Name:Social Climber
+ManaCost:2 G
+Types:Creature Human Druid
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Alliance — Whenever another creature enters the battlefield under your control, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+SVar:BuffedBy:Creature
+DeckHas:Ability$LifeGain
+Oracle:Alliance — Whenever another creature enters the battlefield under your control, you gain 1 life.

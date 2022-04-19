@@ -214,6 +214,8 @@ public class GameHUD extends Stage {
                 touchpad.setBounds(touch.x-TOUCHPAD_SCALE/2, touch.y-TOUCHPAD_SCALE/2, TOUCHPAD_SCALE, TOUCHPAD_SCALE);
                 touchpad.setVisible(true);
                 touchpad.setResetOnTouchUp(true);
+                if (!Forge.isLandscapeMode())
+                    hideButtons();
                 return super.touchDown(screenX, screenY, pointer, button);
             }
         }
@@ -289,6 +291,20 @@ public class GameHUD extends Stage {
 
             return true;
         }
+        if (keycode == Input.Keys.BACK) {
+            if (!Forge.isLandscapeMode()) {
+                menuActor.setVisible(!menuActor.isVisible());
+                statsActor.setVisible(!statsActor.isVisible());
+                inventoryActor.setVisible(!inventoryActor.isVisible());
+                deckActor.setVisible(!deckActor.isVisible());
+            }
+        }
         return super.keyDown(keycode);
+    }
+    public void hideButtons() {
+        menuActor.setVisible(false);
+        deckActor.setVisible(false);
+        inventoryActor.setVisible(false);
+        statsActor.setVisible(false);
     }
 }

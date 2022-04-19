@@ -1,0 +1,11 @@
+Name:Mayhem Patrol
+ManaCost:1 R
+Types:Creature Devil Warrior
+PT:1/2
+K:Menace
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target creature gets +1/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1
+K:Blitz:1 R
+SVar:HasAttackEffect:True
+DeckHas:Ability$Sacrifice
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhenever Mayhem Patrol attacks, target creature gets +1/+0 until end of turn.\nBlitz {1}{R} (If you cast this spell for its blitz cost, it gains haste and "When this creature dies, draw a card." Sacrifice it at the beginning of the next end step.)

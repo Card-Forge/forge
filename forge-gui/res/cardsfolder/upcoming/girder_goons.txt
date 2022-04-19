@@ -1,0 +1,9 @@
+Name:Girder Goons
+ManaCost:4 B
+Types:Creature Ogre Warrior
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a tapped 2/2 black Rogue creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_rogue | TokenTapped$ True
+K:Blitz:3 B
+DeckHas:Ability$Token|Sacrifice & Type$Rogue
+Oracle:When Girder Goons dies, create a tapped 2/2 black Rogue creature token.\nBlitz {3}{B} (If you cast this spell for its blitz cost, it gains haste and "When this creature dies, draw a card." Sacrifice it at the beginning of the next end step.)

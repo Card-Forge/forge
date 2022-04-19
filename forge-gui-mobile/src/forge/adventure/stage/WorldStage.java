@@ -32,6 +32,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+
 /**
  * Stage for the over world. Will handle monster spawns
  */
@@ -262,10 +263,8 @@ public class WorldStage extends GameStage implements SaveFileContent {
     @Override
     public void load(SaveFileData data) {
         try {
-            for(Pair<Float, EnemySprite> enemy:enemies)
-                foregroundSprites.removeActor(enemy.getValue());
-            enemies.clear();
-            background.clear();
+            clearCache();
+
 
 
             List<Float> timeouts= (List<Float>) data.readObject("timeouts");
@@ -286,6 +285,15 @@ public class WorldStage extends GameStage implements SaveFileContent {
         {
 
         }
+    }
+
+    public void clearCache() {
+
+        for(Pair<Float, EnemySprite> enemy:enemies)
+            foregroundSprites.removeActor(enemy.getValue());
+        enemies.clear();
+        background.clear();
+        player=null;
     }
 
     @Override
