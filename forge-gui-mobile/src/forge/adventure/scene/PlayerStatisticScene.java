@@ -46,6 +46,7 @@ public class PlayerStatisticScene extends UIScene {
 
     @Override
     public void dispose() {
+        colorFrames.dispose(); //Get rid of the cached color ID texture.
     }
 
 
