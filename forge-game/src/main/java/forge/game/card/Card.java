@@ -4419,7 +4419,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             final boolean removeAllKeywords, final long timestamp, final long staticId, final boolean updateView) {
         List<KeywordInterface> kws = Lists.newArrayList();
         if (keywords != null) {
-            for(String kw : keywords) {
+            for (String kw : keywords) {
                 kws.add(getKeywordForStaticAbility(kw, staticId));
             }
         }

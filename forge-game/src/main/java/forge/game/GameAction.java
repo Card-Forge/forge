@@ -1440,7 +1440,6 @@ public class GameAction {
                 checkAgain = true;
             }
 
-
             if (game.getCombat() != null) {
                 game.getCombat().removeAbsentCombatants();
             }

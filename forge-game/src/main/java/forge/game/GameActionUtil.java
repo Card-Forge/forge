@@ -575,16 +575,14 @@ public final class GameActionUtil {
                     boolean v = pc.addKeywordCost(sa, cost, ki, str);
 
                     tr.setSVar("Casualty", v ? n : "0");
+                    tr.getOverridingAbility().setSVar("Casualty", v ? n : "0");
 
                     if (v) {
                         if (result == null) {
                             result = sa.copy();
                         }
                         result.getPayCosts().add(cost);
-                        tr.getOverridingAbility().setSVar("Casualty", n);
                         reset = true;
-                    } else {
-                        tr.getOverridingAbility().setSVar("Casualty", "0");
                     }
                 }
             } else if (o.equals("Conspire")) {
@@ -769,7 +767,7 @@ public final class GameActionUtil {
             // Mark SAs with subAbilities as undoable. These are generally things like damage, and other stuff
             // that's hard to track and remove
             sa.setUndoable(false);
-        } else if ((sa.getParam("Amount") != null) && (amount != AbilityUtils.calculateAmount(sa.getHostCard(),sa.getParam("Amount"), sa))) {
+        } else if (sa.getParam("Amount") != null && amount != AbilityUtils.calculateAmount(sa.getHostCard(),sa.getParam("Amount"), sa)) {
             sa.setUndoable(false);
         }
 
