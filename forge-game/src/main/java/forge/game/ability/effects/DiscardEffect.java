@@ -80,7 +80,7 @@ public class DiscardEffect extends SpellAbilityEffect {
             }
 
             if (revealYouChoose) {
-                sb.append(oneTgtP ? " from it. " : " from them. ").append(tgtPs);
+                sb.append(valid.contains(" from ") ? ". " : (oneTgtP ? " from it. " : " from them. ")).append(tgtPs);
                 sb.append(oneTgtP ? " discards " : " discard ");
                 sb.append(numCards > 1 || !oneTgtP ? "those cards" : "that card");
             } else if (revealDiscardAll) {
