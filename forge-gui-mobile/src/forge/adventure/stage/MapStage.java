@@ -15,10 +15,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.SerializationException;
 import forge.Forge;
 import forge.adventure.character.*;
 import forge.adventure.data.*;
@@ -64,7 +63,12 @@ public class MapStage extends GameStage {
     private Stage dialogStage;
     private boolean dialogOnlyInput;
 
-    private EffectData effect;
+
+    //Map properties.
+    //These maps are defined as embedded properties within the Tiled maps.
+    private EffectData effect;             //"Dungeon Effect": Character Effect applied to all adversaries within the map.
+    private boolean preventEscape = false; //Prevents player from escaping the dungeon by any means that aren't an exit.
+
 
     public boolean getDialogOnlyInput() {
         return dialogOnlyInput;
@@ -73,16 +77,18 @@ public class MapStage extends GameStage {
         return dialog;
     }
 
+    public boolean canEscape() { return (preventEscape ? true : false); } //Check if escape is possible.
+
     public void clearIsInMap() {
         isInMap = false;
-        effect = null;
+        effect = null; //Reset effect so battles outside the dungeon don't use the last visited dungeon's effects.
+        preventEscape = false;
         GameHUD.getInstance().showHideMap(true);
     }
     public void draw (Batch batch) {
         //Camera camera = getCamera() ;
         //camera.update();
         //update camera after all layers got drawn
-
         if (!getRoot().isVisible()) return;
         getRoot().draw(batch, 1);
     }
@@ -125,7 +131,6 @@ public class MapStage extends GameStage {
             }
         }
         return false;
-
     }
 
     final ArrayList<Rectangle> currentCollidingRectangles = new ArrayList<>();
@@ -185,8 +190,10 @@ public class MapStage extends GameStage {
         dialog.getButtonTable().clear();
         String text = "Strange magical energies flow within this place...\nAll opponents get:\n";
         text += E.getDescription();
-        dialog.text(text);
-        dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog));
+        Label L = Controls.newLabel(text);
+        L.setWrap(true);
+        dialog.getContentTable().add(L).width(260f);
+        dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(260f);
         dialog.setKeepWithinStage(true);
         showDialog();
     }
@@ -210,15 +217,16 @@ public class MapStage extends GameStage {
         collision = new ArrayList[(int) width][(int) height];
 
         //Load dungeon effects.
-        if( map.getProperties().get("dungeonEffect") != null && !map.getProperties().get("dungeonEffect").toString().isEmpty()){
-            Json json = new Json();
-            try { effect = json.fromJson(EffectData.class, map.getProperties().get("dungeonEffect").toString()); }
-            catch(SerializationException E) {
-                //JSON parsing could fail. Since this an user written part, assume failure is possible (it happens).
-                System.err.printf("[%s] while loading JSON file for dialog actor. JSON:\n%s\nUsing a default dialog.", E.getMessage(), map.getProperties().get("dungeonEffect").toString());
-                effect = json.fromJson(EffectData.class, "");
-            }
+        MapProperties MP = map.getProperties();
+
+        if( MP.get("dungeonEffect") != null && !MP.get("dungeonEffect").toString().isEmpty()){
+            JSONStringLoader json = new JSONStringLoader();
+            effect = json.parse(EffectData.class, map.getProperties().get("dungeonEffect").toString(), "");
             effectDialog(effect);
+        }
+        if (MP.get("preventEscape") != null) preventEscape = (boolean)MP.get("preventEscape");
+        if (MP.get("music") != null && !MP.get("music").toString().isEmpty()){
+            //TODO: Add a way to play a music file directly without using a playlist.
         }
 
         GetPlayer().stop();
@@ -276,16 +284,37 @@ public class MapStage extends GameStage {
                         addMapActor(obj, entry);
                         break;
                     case "reward":
-                        if (prop.get("reward") != null) {
-                            RewardSprite R = new RewardSprite(id, prop.get("reward").toString(), prop.get("sprite").toString());
-                            addMapActor(obj, R);
+                        Object R = prop.get("reward");
+                        if(R != null && !R.toString().isEmpty()) {
+                            Object S = prop.get("sprite");
+                            String Sp = "sprites/treasure.atlas";
+                            if(S != null && !S.toString().isEmpty()) Sp = S.toString();
+                            else System.err.printf("No sprite defined for reward (ID:%s), defaulting to \"sprites/treasure.atlas\"", id);
+                            RewardSprite RW = new RewardSprite(id, R.toString(), Sp);
+                            addMapActor(obj, RW);
                         }
                         break;
                     case "enemy":
-                        EnemySprite mob = new EnemySprite(id, WorldData.getEnemy(prop.get("enemy").toString()));
-                        addMapActor(obj, mob);
-                        if(prop.get("dialog") != null && !prop.get("dialog").toString().isEmpty()) {
-                            mob.dialog = new MapDialog(prop.get("dialog").toString(), this, mob.getId());
+                        Object E = prop.get("enemy");
+                        if(E != null && !E.toString().isEmpty()) {
+                            EnemySprite mob = new EnemySprite(id, WorldData.getEnemy(E.toString()));
+                            Object D = prop.get("dialog"); //Check if the enemy has a dialogue attached to it.
+                            if (D != null && !D.toString().isEmpty()) {
+                                mob.dialog = new MapDialog(D.toString(), this, mob.getId());
+                            }
+                            D = prop.get("defeatDialog"); //Check if the enemy has a defeat dialogue attached to it.
+                            if (D != null && !D.toString().isEmpty()) {
+                                mob.defeatDialog = new MapDialog(D.toString(), this, mob.getId());
+                            }
+                            D = prop.get("name"); //Check for name override.
+                            if (D != null && !D.toString().isEmpty()) {
+                                mob.nameOverride = D.toString();
+                            }
+                            D = prop.get("effect"); //Check for special effects.
+                            if (D != null && !D.toString().isEmpty()) {
+                                mob.effect = JSONStringLoader.parse(EffectData.class, D.toString(), "");
+                            }
+                            addMapActor(obj, mob);
                         }
                         break;
                     case "dummy": //Does nothing. Mostly obstacles to be removed by ID by switches or such.
@@ -426,11 +455,17 @@ public class MapStage extends GameStage {
     protected void getReward() {
         isLoadingMatch = false;
         ((RewardScene) SceneType.RewardScene.instance).loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
-        currentMob.remove();
-        actors.removeValue(currentMob, true);
-        changes.deleteObject(currentMob.getId());
-        currentMob = null;
         Forge.switchScene(SceneType.RewardScene.instance);
+        if(currentMob.defeatDialog == null) {
+            currentMob.remove();
+            actors.removeValue(currentMob, true);
+            changes.deleteObject(currentMob.getId());
+        } else {
+            currentMob.defeatDialog.activate();
+            player.setAnimation(CharacterSprite.AnimationTypes.Idle);
+            currentMob.setAnimation(CharacterSprite.AnimationTypes.Idle);
+        }
+        currentMob = null;
     }
     public void removeAllEnemies()
     {

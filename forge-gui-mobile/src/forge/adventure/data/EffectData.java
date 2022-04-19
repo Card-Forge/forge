@@ -6,12 +6,16 @@ import forge.item.PaperCard;
 import forge.item.PaperToken;
 import forge.model.FModel;
 
-public class EffectData {
+import java.io.Serializable;
+
+public class EffectData implements Serializable {
+    public String name = null;           //Effect name. Can be checked for.
     //Duel effects.
     public int lifeModifier = 0;         //Amount to add to starting Life.
     public int changeStartCards = 0;     //Amount to add to starting hand size.
     public String[] startBattleWithCard; //Cards that start in the Battlefield.
     //Map only effects.
+    public boolean colorView = false;    //Allows to display enemy colors on the map (TODO)
     public float moveSpeed = 1.0f;       //Change of movement speed. Map only.
     //Opponent field.
     public EffectData opponent;          //Effects to be applied to the opponent's side.
@@ -45,6 +49,8 @@ public class EffectData {
 
     public String getDescription() {
         String description = "";
+        if(this.name != null && !this.name.isEmpty())
+            description += this.name + "\n";
         if(this.lifeModifier != 0)
             description += "Life: " + ((this.lifeModifier > 0) ? "+" : "") + this.lifeModifier + "\n";
         if(this.startBattleWithCard != null && this.startBattleWithCard.length != 0)
@@ -54,9 +60,9 @@ public class EffectData {
         if(this.changeStartCards != 0)
             description+="Starting hand: " + this.changeStartCards + "\n";
         if(this.opponent != null) {
-            String oppEffect=this.opponent.getDescription();
-            if(oppEffect != "") {
-                description += "Gives Opponent:\n";
+            String oppEffect = this.opponent.getDescription();
+            description += "Gives Opponent:\n";
+            if(!oppEffect.isEmpty()) {
                 description += oppEffect;
             }
         }

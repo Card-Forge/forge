@@ -3,8 +3,10 @@ package forge.adventure.player;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Null;
 import com.google.common.collect.Lists;
 import forge.adventure.data.DifficultyData;
+import forge.adventure.data.EffectData;
 import forge.adventure.data.HeroListData;
 import forge.adventure.data.ItemData;
 import forge.adventure.util.*;
@@ -17,29 +19,30 @@ import forge.item.PaperCard;
 import forge.util.ItemPool;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Class that represents the player (not the player sprite)
  */
 public class AdventurePlayer implements Serializable, SaveFileContent {
+    private enum ColorID { COLORLESS, WHITE, BLACK, BLUE, RED, GREEN }
     public static final int NUMBER_OF_DECKS=10;
-    private  Deck deck;
-    private  int avatarIndex;
-    private  int heroRace;
-    private  boolean isFemale;
+
+    private Deck deck;
+    private int avatarIndex;
+    private int heroRace;
+    private boolean isFemale;
     private float worldPosX;
     private float worldPosY;
     private String name;
+    private ColorID colorIdentity = ColorID.COLORLESS;
     private int gold=0;
     private int maxLife=20;
     private int life=20;
     private int selectedDeckIndex=0;
+    private EffectData blessing; //Blessing to apply for next battle.
     private PlayerStatistic statistic=new PlayerStatistic();
-    private  Deck[] decks=new Deck[NUMBER_OF_DECKS];
+    private Deck[] decks=new Deck[NUMBER_OF_DECKS];
     private final DifficultyData difficultyData=new DifficultyData();
 
     private final Array<String> inventoryItems=new Array<>();
@@ -63,7 +66,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private final CardPool cards=new CardPool();
     private final ItemPool<InventoryItem> newCards=new ItemPool<>(InventoryItem.class);
 
-    public void create(String n, Deck startingDeck, boolean male, int race, int avatar,DifficultyData difficultyData) {
+    public void create(String n, int startingColorIdentity, Deck startingDeck, boolean male, int race, int avatar,DifficultyData difficultyData) {
         inventoryItems.clear();
         equippedItems.clear();
         deck = startingDeck;
@@ -83,11 +86,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         heroRace = race;
         isFemale = !male;
         name = n;
+        setColorIdentity(startingColorIdentity + 1);
         statistic.clear();
         newCards.clear();
         onGoldChangeList.emit();
         onLifeTotalChangeList.emit();
-
+        blessing = null;
         inventoryItems.addAll(difficultyData.startItems);
     }
 
@@ -135,12 +139,41 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         this.worldPosY = worldPosY;
     }
 
+    public void setColorIdentity(String C){
+        switch (C.toUpperCase()){
+            case "B": this.colorIdentity = ColorID.BLACK; break;
+            case "G": this.colorIdentity = ColorID.GREEN; break;
+            case "R": this.colorIdentity = ColorID.RED; break;
+            case "U": this.colorIdentity = ColorID.BLUE; break;
+            case "W": this.colorIdentity = ColorID.WHITE; break;
+            case "C": default: this.colorIdentity = ColorID.COLORLESS; break;
+        }
+    }
 
+    public void setColorIdentity(int C){
+        switch (C){
+            case 2: this.colorIdentity = ColorID.BLACK; break;
+            case 5: this.colorIdentity = ColorID.GREEN; break;
+            case 4: this.colorIdentity = ColorID.RED; break;
+            case 3: this.colorIdentity = ColorID.BLUE; break;
+            case 1: this.colorIdentity = ColorID.WHITE; break;
+            case 0: default: this.colorIdentity = ColorID.COLORLESS; break;
+        }
+    }
+
+    public String getColorIdentity(){
+        switch (colorIdentity){
+            case BLUE     : return "U";
+            case GREEN    : return "G";
+            case RED      : return "R";
+            case BLACK    : return "B";
+            case WHITE    : return "W";
+            case COLORLESS: default: return "C"; //You are either Ugin or an Eldrazi. Nice.
+        }
+    }
 
     @Override
     public void load(SaveFileData data) {
-
-
         this.statistic.load(data.readSubData("statistic"));
         this.difficultyData.startingLife=data.readInt("startingLife");
         this.difficultyData.staringMoney=data.readInt("staringMoney");
@@ -151,7 +184,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if(this.difficultyData.sellFactor==0)
             this.difficultyData.sellFactor=0.2f;
 
-
         name = data.readString("name");
         worldPosX = data.readFloat("worldPosX");
         worldPosY = data.readFloat("worldPosY");
@@ -159,10 +191,14 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         avatarIndex = data.readInt("avatarIndex");
         heroRace = data.readInt("heroRace");
         isFemale = data.readBool("isFemale");
+        colorIdentity = ColorID.COLORLESS;
+        if(data.containsKey("colorIdentity"))
+            setColorIdentity(data.readString("colorIdentity"));
         gold = data.readInt("gold");
         life = data.readInt("life");
         maxLife = data.readInt("maxLife");
-
+        blessing = null;
+        if(data.containsKey("blessing")) blessing = (EffectData)data.readObject("blessing");
         inventoryItems.clear();
         equippedItems.clear();
         if(data.containsKey("inventory"))
@@ -231,13 +267,14 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.store("avatarIndex",avatarIndex);
         data.store("heroRace",heroRace);
         data.store("isFemale",isFemale);
+        data.store("colorIdentity", getColorIdentity());
         data.store("gold",gold);
         data.store("life",life);
         data.store("maxLife",maxLife);
         data.store("deckName",deck.getName());
 
         data.storeObject("inventory",inventoryItems.toArray(String.class));
-
+        data.storeObject("blessing", blessing);
 
         ArrayList<String> slots=new ArrayList<>();
         ArrayList<String> items=new ArrayList<>();
@@ -266,6 +303,17 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return data;
     }
 
+    public void addBlessing(EffectData bless){ blessing = bless; }
+
+    public void clearBlessing() { blessing = null; }
+
+    public @Null EffectData getBlessing(){ return blessing; }
+
+    public boolean hasBlessing(String name){
+        if(blessing == null) return false;
+        if(blessing.name.equals(name)) return true;
+        return false;
+    }
 
 
     public String spriteName() {
@@ -348,8 +396,13 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return maxLife;
     }
 
-    public void heal() {
-        life=maxLife;
+    public void heal(int amount) {
+        life = Math.min(life + amount, maxLife);
+        onLifeTotalChangeList.emit();
+    }
+
+    public void fullHeal() {
+        life = maxLife;
         onLifeTotalChangeList.emit();
     }
     public void defeated() {

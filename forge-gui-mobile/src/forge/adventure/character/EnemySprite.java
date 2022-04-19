@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
+import forge.adventure.data.EffectData;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.RewardData;
 import forge.adventure.util.Current;
@@ -16,7 +17,10 @@ import forge.adventure.util.Reward;
  */
 public class EnemySprite extends CharacterSprite {
     EnemyData data;
-    public MapDialog dialog;
+    public MapDialog dialog; //Dialog to show on contact. Overrides standard battle (can be started as an action)
+    public MapDialog defeatDialog; //Dialog to show on defeat. Overrides standard death (can be removed as an action)
+    public EffectData effect; //Battle effect for this enemy. Similar to a player's blessing.
+    public String nameOverride = ""; //Override name of this enemy in battles.
 
     public EnemySprite(EnemyData enemyData) {
         this(0,enemyData);

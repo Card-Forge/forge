@@ -54,7 +54,8 @@ public class DuelScene extends ForgeScene {
 
     public void GameEnd() {
         boolean winner=humanPlayer == hostedMatch.getGame().getMatch().getWinner();
-        String enemyName=enemy.getData().name;
+        String enemyName=(enemy.nameOverride.isEmpty() ? enemy.getData().name : enemy.nameOverride);
+        Current.player().clearBlessing();
         Gdx.app.postRunnable(new Runnable() {
             @Override
             public void run() {
@@ -97,6 +98,7 @@ public class DuelScene extends ForgeScene {
     public void enter() {
         Set<GameType> appliedVariants = new HashSet<>();
         appliedVariants.add(GameType.Constructed);
+        AdventurePlayer advPlayer = Current.player();
 
         List<RegisteredPlayer> players = new ArrayList<>();
         Deck playerDeck=(Deck)AdventurePlayer.current().getSelectedDeck().copyTo("PlayerDeckCopy");
@@ -105,27 +107,25 @@ public class DuelScene extends ForgeScene {
             playerDeck.getMain().add("Wastes",missingCards);
         humanPlayer = RegisteredPlayer.forVariants(2, appliedVariants,playerDeck, null, false, null, null);
         LobbyPlayer playerObject = GamePlayerUtil.getGuiPlayer();
-        FSkin.getAvatars().put(90001, Current.player().avatar());
+        FSkin.getAvatars().put(90001, advPlayer.avatar());
         playerObject.setAvatarIndex(90001);
         humanPlayer.setPlayer(playerObject);
-        humanPlayer.setStartingLife(Current.player().getLife());
+        humanPlayer.setStartingLife(advPlayer.getLife());
         Current.setLatestDeck(enemy.getData().generateDeck());
         RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(2, appliedVariants, Current.latestDeck(), null, false, null, null);
         LobbyPlayer enemyPlayer = GamePlayerUtil.createAiPlayer(this.enemy.getData().name, selectAI(this.enemy.getData().ai));
-
+        if(!enemy.nameOverride.isEmpty()) enemyPlayer.setName(enemy.nameOverride); //Override name if defined in the map.
         FSkin.getAvatars().put(90000, this.enemy.getAvatar());
         enemyPlayer.setAvatarIndex(90000);
 
         aiPlayer.setPlayer(enemyPlayer);
-        aiPlayer.setStartingLife(Math.round((float)enemy.getData().life*Current.player().getDifficulty().enemyLifeFactor));
-
-
+        aiPlayer.setStartingLife(Math.round((float)enemy.getData().life*advPlayer.getDifficulty().enemyLifeFactor));
 
         Array<EffectData> playerEffects = new Array<>();
         Array<EffectData> oppEffects    = new Array<>();
 
         //Collect and add items effects first.
-        for(String playerItem:Current.player().getEquippedItems()) {
+        for(String playerItem:advPlayer.getEquippedItems()) {
             ItemData item=ItemData.getItem(playerItem);
             playerEffects.add(item.effect);
             if(item.effect.opponent != null) oppEffects.add(item.effect.opponent);
@@ -139,13 +139,22 @@ public class DuelScene extends ForgeScene {
         }
 
         //Collect and add player blessings.
+        if(advPlayer.getBlessing() != null){
+            playerEffects.add(advPlayer.getBlessing());
+            if(advPlayer.getBlessing().opponent != null) oppEffects.add(advPlayer.getBlessing().opponent);
+        }
 
         //Collect and add enemy effects (same as blessings but for individual enemies).
+        if(enemy.effect != null){
+            oppEffects.add(enemy.effect);
+            if(enemy.effect.opponent != null)
+                playerEffects.add(enemy.effect.opponent);
+        }
 
         //Collect and add dungeon-wide effects.
         if(dungeonEffect != null) {
             oppEffects.add(dungeonEffect);
-            if (dungeonEffect.opponent != null)
+            if(dungeonEffect.opponent != null)
                 playerEffects.add(dungeonEffect.opponent);
         }
 

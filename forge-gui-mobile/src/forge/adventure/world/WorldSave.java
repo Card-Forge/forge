@@ -118,12 +118,11 @@ public class WorldSave   {
         return currentSave;
     }
 
-    public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, int startingDeckIndex, DifficultyData diff, long seed) {
-
+    public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, int startingColorIdentity, DifficultyData diff, long seed) {
         currentSave.world.generateNew(seed);
         currentSave.pointOfInterestChanges.clear();
-        Deck starterDeck = Config.instance().starterDecks()[startingDeckIndex];
-        currentSave.player.create(name, starterDeck, male, race, avatarIndex,diff);
+        Deck starterDeck = Config.instance().starterDecks()[startingColorIdentity];
+        currentSave.player.create(name, startingColorIdentity, starterDeck, male, race, avatarIndex,diff);
         currentSave.player.setWorldPosY((int) (currentSave.world.getData().playerStartPosY * currentSave.world.getData().height * currentSave.world.getTileSize()));
         currentSave.player.setWorldPosX((int) (currentSave.world.getData().playerStartPosX * currentSave.world.getData().width * currentSave.world.getTileSize()));
         currentSave.onLoadList.emit();

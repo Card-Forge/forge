@@ -2,10 +2,9 @@ package forge.adventure.util;
 
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.SerializationException;
 import forge.Forge;
 import forge.adventure.data.DialogData;
+import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.MapStage;
 import forge.util.Localizer;
 
@@ -32,21 +31,16 @@ public class MapDialog {
             "]";
 
 
-    public MapDialog(String S, MapStage ST, int parentID) {
-        this.stage = ST;
+    public MapDialog(String S, MapStage stage, int parentID) {
+        this.stage = stage;
         this.parentID = parentID;
-        Json json = new Json();
-        if (S.isEmpty()){
+        if (S.isEmpty()) {
             System.err.print("Dialog error. Dialog property is empty.\n");
-            this.data = json.fromJson(Array.class, DialogData.class, defaultJSON);
+            this.data = JSONStringLoader.parse(Array.class, DialogData.class, defaultJSON, defaultJSON);
             return;
         }
-        try { data = json.fromJson(Array.class, DialogData.class, S); }
-        catch(SerializationException E){
-            //JSON parsing could fail. Since this an user written part, assume failure is possible (it happens).
-            System.err.printf("[%s] while loading JSON file for dialog actor. JSON:\n%s\nUsing a default dialog.", E.getMessage(), S);
-            this.data = json.fromJson(Array.class, DialogData.class, defaultJSON);
-        }
+        this.data = JSONStringLoader.parse(Array.class, DialogData.class, S, defaultJSON);
+
     }
 
     private void loadDialog(DialogData dialog) { //Displays a dialog with dialogue and possible choices.
@@ -69,6 +63,7 @@ public class MapDialog {
                     TextButton B = Controls.newTextButton(name,() -> loadDialog(option));
                     B.getLabel().setWrap(true); //We want this to wrap in case it's a wordy choice.
                     D.getButtonTable().add(B).width(WIDTH - 10); //The button table also returns a Cell when adding.
+                    //TODO: Reducing the space a tiny bit could help. But should be fine as long as there aren't more than 4-5 options.
                     D.getButtonTable().row(); //Add a row. Tried to allow a few per row but it was a bit erratic.
                 }
             }
@@ -87,9 +82,9 @@ public class MapDialog {
         }
     }
 
-    void setEffects(DialogData.EffectData[] data) {
+    void setEffects(DialogData.ActionData[] data) {
         if(data==null) return;
-        for(DialogData.EffectData E:data) {
+        for(DialogData.ActionData E:data) {
             if (E.removeItem != null){ //Removes an item from the player's inventory.
                 Current.player().removeItem(E.removeItem);
             }
@@ -104,18 +99,33 @@ public class MapDialog {
                 if(E.battleWithActorID < 0) stage.beginDuel(stage.getEnemyByID(parentID));
                 else stage.beginDuel(stage.getEnemyByID(E.battleWithActorID));
             }
+            if (E.giveBlessing != null) { //Gives a blessing for your next battle.
+                Current.player().addBlessing(E.giveBlessing);
+            }
+            if (E.setColorIdentity != null && !E.setColorIdentity.isEmpty()){ //Sets color identity (use sparingly)
+                Current.player().setColorIdentity(E.setColorIdentity);
+            }
             //Create map object.
-            //Check for quest flags, local.
-            //Check for quest flags, global.
         }
     }
 
     boolean isConditionOk(DialogData.ConditionData[] data) {
-        if(data==null) return true;
+        if( data==null ) return true;
+        AdventurePlayer player = Current.player();
         for(DialogData.ConditionData condition:data) {
-            if(condition.item != null && !condition.item.isEmpty()) { //Check for item.
-                if(!Current.player().hasItem(condition.item)) {
+            if(condition.item != null && !condition.item.isEmpty()) { //Check for an item in player's inventory.
+                if(!player.hasItem(condition.item)) {
                     if(!condition.not) return false; //Only return on a false.
+                } else if(condition.not) return false;
+            }
+            if(condition.colorIdentity != null && !condition.colorIdentity.isEmpty()) { //Check for player's color ID.
+                if(!player.getColorIdentity().equals(condition.colorIdentity.toUpperCase())){
+                    if(!condition.not) return false;
+                } else if(condition.not) return false;
+            }
+            if(condition.hasBlessing != null && !condition.hasBlessing.isEmpty()){ //Check for a named blessing.
+                if(!player.hasBlessing(condition.hasBlessing)){
+                   if(!condition.not) return false;
                 } else if(condition.not) return false;
             }
             if(condition.actorID != 0) { //Check for actor ID.

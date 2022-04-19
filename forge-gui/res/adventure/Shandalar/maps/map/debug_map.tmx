@@ -36,7 +36,14 @@
   <object id="49" template="../obj/gold.tx" x="176" y="224"/>
   <object id="50" template="../obj/enemy.tx" x="112" y="192" width="64" height="64">
    <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: -25,
+ &quot;opponent&quot;:{
+  &quot;startBattleWithCard&quot;: [ &quot;c_0_1_eldrazi_spawn_sac&quot;, &quot;c_0_1_eldrazi_spawn_sac&quot;, &quot;c_0_1_eldrazi_spawn_sac&quot;, &quot;c_0_1_eldrazi_spawn_sac&quot; ]
+ }
+}</property>
     <property name="enemy" value="Emrakul"/>
+    <property name="name" value="Emrakul, the promised rest"/>
    </properties>
   </object>
   <object id="51" template="../obj/entry_up.tx" x="209" y="480">
@@ -106,6 +113,13 @@
   </object>
   <object id="80" template="../obj/enemy.tx" x="96" y="304">
    <properties>
+    <property name="defeatDialog">[
+  {
+    &quot;text&quot;:&quot;Impressive...&quot;,
+    &quot;loctext&quot;:&quot;&quot;,
+    &quot;options&quot;:[ { &quot;name&quot;:&quot;Hey why are you still standing...?&quot; } ]
+  }
+]</property>
     <property name="dialog">[
   {
     &quot;effect&quot;:[],
@@ -121,6 +135,12 @@
         &quot;options&quot;: [ { &quot;name&quot;: &quot;I FEAR NOTHING!!?&quot;, &quot;effect&quot;: [ { &quot;battleWithActorID&quot;: -1 } ]} ]
       },
       {
+        &quot;name&quot;: &quot;I want to be eco-friendly too.&quot;,
+        &quot;condition&quot;: [ { &quot;colorIdentity&quot;: &quot;G&quot;, &quot;not&quot;: true } ],
+        &quot;text&quot;: &quot;Listen to the forest, friend.\nYour color identity is now green!&quot;,
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;Awesome.&quot;, &quot;effect&quot;: [ { &quot;setColorIdentity&quot;: &quot;G&quot; } ]} ]
+      },
+      {
         &quot;name&quot;:&quot;I wanna fight Emrakul over there!&quot;,
         &quot;condition&quot;: [ { &quot;actorID&quot;: 50 } ],
         &quot;text&quot;: &quot;Really? Oh well... your funeral.\nHEY EMMY! THIS DUDE WANTS TO DANCE!&quot;,
@@ -133,11 +153,31 @@
         &quot;options&quot;: [ { &quot;name&quot;: &quot;Sorry...&quot; } ]
       },
       {
-        &quot;name&quot;:&quot;That's cool dude.&quot;,
-        &quot;condition&quot;: [ { &quot;item&quot;: &quot;Treasure&quot;, &quot;not&quot;: true } ],
+        &quot;name&quot;:&quot;That's cool my green dude.&quot;,
+        &quot;condition&quot;: [ { &quot;item&quot;: &quot;Treasure&quot;, &quot;not&quot;: true }, { &quot;colorIdentity&quot;: &quot;G&quot; } ],
         &quot;effect&quot;: [ { &quot;addItem&quot;: &quot;Treasure&quot; } ],
-        &quot;text&quot;: &quot;You get it. Take this.&quot;,
+        &quot;text&quot;: &quot;You get it! Take this.&quot;,
         &quot;options&quot;: [ { &quot;name&quot;: &quot;Thanks bro.&quot; } ]
+      },
+      {
+        &quot;name&quot;:&quot;Thanks for the blessing.&quot;,
+        &quot;condition&quot;: [ { &quot;hasBlessing&quot;: &quot;Debug Elf&quot; } ],
+        &quot;text&quot;: &quot;You are welcome.&quot;,
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;Thumbs up emoji&quot; } ]
+      },
+      {
+        &quot;name&quot;:&quot;Got any fancy elven blessing?&quot;,
+        &quot;condition&quot;: [ { &quot;item&quot;: &quot;Treasure&quot; }, { &quot;hasBlessing&quot;:  &quot;Debug Elf&quot;, &quot;not&quot;: true } ],
+        &quot;text&quot;: &quot;If you give me a Treasure, I will give you the blessing of the Debug Elf.\nWhich is a Llanowar Elves and 2 extra life in your next battle. Sounds good?&quot;,
+        &quot;options&quot;: [
+          { &quot;name&quot;: &quot;But I love my Treasure! I humbly refuse.&quot;},
+          {
+            &quot;name&quot;: &quot;I'll take it&quot;,
+            &quot;effect&quot;: [
+              { &quot;removeItem&quot;: &quot;Treasure&quot;, &quot;giveBlessing&quot;: { &quot;name&quot;: &quot;Debug Elf&quot; ,&quot;lifeModifier&quot;: 2, &quot;startBattleWithCard&quot;: [ &quot;Llanowar Elves&quot; ] } }
+            ]
+          }
+        ]
       },
       {
         &quot;name&quot;:&quot;Can you open that hidden wall?&quot;,
@@ -148,8 +188,12 @@
     ]
   }
 ]</property>
-    <property name="enemy" value="Elf"/>
-    <property name="permanent" type="bool" value="true"/>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 190,
+ &quot;startBattleWithCard&quot;: [ &quot;Llanowar Elves&quot;, &quot;Llanowar Elves&quot;, &quot;Forest&quot;, &quot;Forest&quot; ]
+}</property>
+    <property name="enemy" value="Elf warrior"/>
+    <property name="name" value="Debug Elf"/>
    </properties>
   </object>
   <object id="81" template="../obj/enemy.tx" x="288" y="224">

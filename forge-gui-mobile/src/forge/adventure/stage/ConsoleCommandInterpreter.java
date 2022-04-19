@@ -161,9 +161,17 @@ public class ConsoleCommandInterpreter {
                 return "Added item "+s[0];
             return "can not find item "+s[0];
         });
-        registerCommand(new String[]{"heal"}, s -> {
-            Current.player().heal();
+        registerCommand(new String[]{"fullHeal"}, s -> {
+            Current.player().fullHeal();
             return "Player life back to "+Current.player().getLife();
+        });
+        registerCommand(new String[]{"heal", "amount"}, s -> {
+            if(s.length<1) return "Command needs 1 parameter";
+            int N = 0;
+            try { N = Integer.parseInt(s[0]); }
+            catch (Exception e) { return "Can not convert " + s[0] + " to integer"; }
+            Current.player().heal(N);
+            return "Player healed to " + Current.player().getLife() + "/" + Current.player().getMaxLife();
         });
         registerCommand(new String[]{"debug","on"}, s -> {
             Current.setDebug(true);
