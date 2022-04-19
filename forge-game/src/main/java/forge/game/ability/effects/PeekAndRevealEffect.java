@@ -21,11 +21,8 @@ import forge.util.Lang;
 import forge.util.Localizer;
 
 /** 
- * PeeakAndReveal is a simplified why of handling something that could
- * be done with dig and NoMove$ . All of the Kinship cards are going to use this
- * And there's probably a bunch of existing cards that would have simpler scripts
- * by just using PeekAndReveal
- *
+ * PeekAndReveal is a simplified way of handling something that could be done with Dig and NoMove$.
+ * Kinship cards use this, and many other cards could have simpler scripts by just using PeekAndReveal.
  */
 public class PeekAndRevealEffect extends SpellAbilityEffect {
     
@@ -57,7 +54,6 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        //RevealValid$ Card.sharesCreatureTypeWith | RevealOptional$ True | RememberRevealed$ True
         Card source = sa.getHostCard();
         final boolean rememberRevealed = sa.hasParam("RememberRevealed");
         final boolean imprintRevealed = sa.hasParam("ImprintRevealed");
@@ -65,7 +61,6 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
         String peekAmount = sa.getParamOrDefault("PeekAmount", "1");
         int numPeek = AbilityUtils.calculateAmount(sa.getHostCard(), peekAmount, sa);
         
-        // Right now, this is only used on your own library.
         List<Player> libraryPlayers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
         Player peekingPlayer = sa.getActivatingPlayer();
         
