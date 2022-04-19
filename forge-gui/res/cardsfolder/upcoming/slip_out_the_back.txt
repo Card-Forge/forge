@@ -1,0 +1,7 @@
+Name:Slip Out the Back
+ManaCost:U
+Types:Instant
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | SubAbility$ DBPhase | SpellDescription$ Put a +1/+1 counter on target creature. It phases out. (Treat it and anything attached to it as though they don't exist until your next turn.)
+SVar:DBPhase:DB$ Phases | Defined$ Targeted
+DeckHas:Ability$Counters
+Oracle:Put a +1/+1 counter on target creature. It phases out. (Treat it and anything attached to it as though they don't exist until your next turn.)

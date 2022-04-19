@@ -1,0 +1,9 @@
+Name:Sky Crier
+ManaCost:1 W
+Types:Creature Bird Citizen
+PT:1/1
+K:Flying
+K:Lifelink
+A:AB$ Draw | Cost$ 3 W | Defined$ TargetedAndYou | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SpellDescription$ You and target opponent each draw a card.
+DeckHas:Ability$LifeGain
+Oracle:Flying, lifelink\n{3}{W}: You and target opponent each draw a card.

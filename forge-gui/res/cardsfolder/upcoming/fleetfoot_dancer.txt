@@ -1,0 +1,9 @@
+Name:Fleetfoot Dancer
+ManaCost:1 R G W
+Types:Creature Elf Druid
+PT:4/4
+K:Trample
+K:Lifelink
+K:Haste
+DeckHas:Ability$LifeGain
+Oracle:Trample, lifelink, haste
