@@ -34,3 +34,38 @@ ScryfallCode=NCC
 188 M Kamiz, Obscura Oculus @Chris Rallis
 189 M Kitt Kanto, Mayhem Diva @Fariba Khamseh
 190 M Perrie, the Pulveriser @Joshua Raphael
+
+[tokens]
+b_2_2_zombie
+b_x_x_demon_flying
+c_0_1_eldrazi_spawn_sac
+c_10_10_eldrazi
+c_1_1_a_thopter_flying
+c_a_clue_draw
+c_a_food_sac
+g_0_1_plant
+g_1_1_elf_warrior
+g_1_1_insect
+g_1_1_ooze
+g_1_1_saproling
+g_1_2_spider_reach
+g_2_2_ooze_mitotic
+g_3_3_beast
+g_3_3_elephant
+g_5_5_wurm
+g_x_x_treefolk
+lightning_rager
+r_0_1_elemental_rekindling_phoenix
+r_1_1_devil_burn
+r_3_3_ogre
+u_1_1_faerie_flying
+u_1_1_squid_islandwalk
+u_1_1_tentacle
+u_2_2_drake_flying
+ur_5_5_elemental_flying
+w_0_1_goat
+w_1_1_human
+w_1_1_human_soldier
+w_1_1_soldier_lifelink
+w_2_2_cat_beast
+w_4_4_elemental_flying
