@@ -1,6 +1,6 @@
 Name:Ominous Parcel
 ManaCost:1
 Types:Artifact
-A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | StackDescription$ SpellDescription | SpellDescription$ Search your library for a basic land card, reveal it, put it into your hand, then shuffle.
-A:AB$ DealDamage | Cost$ 5 T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ It deals 4 damage to target creature.
+A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | ChangeTypeDesc$ basic land | SpellDescription$ Search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+A:AB$ DealDamage | Cost$ 5 T Sac<1/CARDNAME> | ValidTgts$ Creature | NumDmg$ 4 | SpellDescription$ It deals 4 damage to target creature.
 Oracle:{2}, {T}, Sacrifice Ominous Parcel: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.\n{5}, {T}, Sacrifice Ominous Parcel: It deals 4 damage to target creature.

@@ -6,6 +6,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigCharm:DB$ Charm | Choices$ DBToken,DBToken2
 SVar:DBToken:DB$ Token | TokenScript$ gw_1_1_citizen | SpellDescription$ Create a 1/1 green and white Citizen creature token.
 SVar:DBToken2:DB$ Token | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
-DeckHas:Ability$Sacrifice|Token & Type$Treasure|Artifact
-DeckHints:Type$Citizen
+DeckHas:Ability$Sacrifice|Token & Type$Treasure|Artifact|Citizen
 Oracle:When Exhibition Magician enters the battlefield, choose one —\n• Create a 1/1 green and white Citizen creature token.\n• Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

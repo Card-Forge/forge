@@ -7,5 +7,6 @@ T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Tr
 SVar:TrigToken:DB$ Token | TokenScript$ gw_1_1_citizen
 SVar:PlayMain1:TRUE
 SVar:HasAttackEffect:True
-DeckHas:Ability$Token & Type$Citizen
+DeckHas:Ability$Token
+DeckHints:Type$Citizen
 Oracle:Other Citizens you control get +1/+0.\nWhenever Darling of the Masses attacks, create a 1/1 green and white Citizen creature token.
