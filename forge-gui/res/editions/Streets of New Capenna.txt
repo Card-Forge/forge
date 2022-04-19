@@ -515,3 +515,19 @@ ScryfallCode=SNC
 1 Forest|SNC|4
 
 [tokens]
+b_2_2_rogue
+b_4_3_ogre_warrior
+c_a_treasure_sac
+c_a_treasure_sac
+c_a_treasure_sac
+c_a_treasure_sac
+c_a_treasure_sac
+g_2_2_cat_haste
+g_3_1_dog_vigilance
+g_4_4_rhino_warrior
+gw_1_1_citizen
+r_1_1_devil_burn
+u_1_1_fish_unblockable
+u_1_1_wizard_countersac
+w_2_2_spirit_flying
+w_3_3_angel_flying
