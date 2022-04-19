@@ -59,11 +59,14 @@ public class DiscardEffect extends SpellAbilityEffect {
 
             int numCards = sa.hasParam("NumCards") ?
                     AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
+            final boolean oneCard = numCards == 1 && oneTgtP;
 
-            String valid = "card";
+            String valid = oneCard ? "card" : "cards";
             if (sa.hasParam("DiscardValid")) {
-                valid = sa.hasParam("DiscardValidDesc") ? sa.getParam("DiscardValidDesc")
+                String validD = sa.hasParam("DiscardValidDesc") ? sa.getParam("DiscardValidDesc")
                         : sa.getParam("DiscardValid");
+                valid = validD.contains(" card") ?
+                        (oneCard ? validD : validD.replace(" card", " cards")) : validD + " " + valid;
             }
 
             if (mode.equals("Hand")) {
@@ -82,7 +85,7 @@ public class DiscardEffect extends SpellAbilityEffect {
             if (revealYouChoose) {
                 sb.append(valid.contains(" from ") ? ". " : (oneTgtP ? " from it. " : " from them. ")).append(tgtPs);
                 sb.append(oneTgtP ? " discards " : " discard ");
-                sb.append(numCards > 1 || !oneTgtP ? "those cards" : "that card");
+                sb.append(oneCard ? "that card" : "those cards");
             } else if (revealDiscardAll) {
                 sb.append(" of type: ").append(valid);
             }
