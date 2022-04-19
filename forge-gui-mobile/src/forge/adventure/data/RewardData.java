@@ -78,11 +78,11 @@ public class RewardData {
             RewardData legals=Config.instance().getConfigData().legalCards;
             if(legals==null)
             {
-                allCards = FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt();
+                allCards = FModel.getMagicDb().getCommonCards().getUniqueCardsNoAltNoOnline();
             }
             else
             {
-                allCards = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(),  new CardUtil.CardPredicate(legals, true));
+                allCards = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCardsNoAltNoOnline(),  new CardUtil.CardPredicate(legals, true));
             }
             allEnemyCards=Iterables.filter(allCards, new Predicate<PaperCard>() {
                 @Override
