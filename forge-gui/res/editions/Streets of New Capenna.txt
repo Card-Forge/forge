@@ -218,7 +218,7 @@ ScryfallCode=SNC
 204 U Mr. Orfeo, the Boulder @Daarken
 205 U Nimble Larcenist @Volkan Baǵa
 206 M Ob Nixilis, the Adversary @Yongjae Choi
-207 R Obscura Ascendancy @Josh Hass
+207 R Obscura Ascendancy @Igor Krstic
 208 U Obscura Charm @Steve Argyle
 209 R Obscura Interceptor @Jason A. Engle
 210 R Ognis, the Dragon's Lash @Andreas Zafiratos
