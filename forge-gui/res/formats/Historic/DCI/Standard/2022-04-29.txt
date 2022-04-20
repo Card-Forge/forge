@@ -1,7 +1,7 @@
 [format]
-Name:Standard
-Order:101
+Name:Standard (SNC)
+Type:Historic
 Subtype:Standard
-Type:Sanctioned
+Effective:2022-04-29
 Sets:ZNR, KHM, STX, AFR, MID, VOW, NEO, SNC
 Banned:Alrund's Epiphany; Divide by Zero; Faceless Haven; Omnath, Locus of Creation
