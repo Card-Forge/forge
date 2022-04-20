@@ -168,11 +168,11 @@ The resulting snapshot will be found at: forge-gui-desktop/target/forge-gui-desk
 
 ## IntelliJ
 
-Quick start guide for [setting up the Forge project within IntelliJ](https://git.cardforge.org/core-developers/forge/-/wikis/Development/intellij-setup).
+Quick start guide for [setting up the Forge project within IntelliJ](https://github.com/Card-Forge/forge/wiki/IntelliJ-setup).
 
 ## Card Scripting
 
-Visit [this page](https://git.cardforge.org/core-developers/forge/-/wikis/Card-scripting-API/Card-scripting-API) for information on scripting.
+Visit [this page](https://github.com/Card-Forge/forge/wiki/Card-scripting-API) for information on scripting.
 
 Card scripting resources are found in the forge-gui/res/ path.
 

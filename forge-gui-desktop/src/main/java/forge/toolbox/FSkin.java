@@ -104,7 +104,6 @@ import javax.swing.text.JTextComponent;
 
 import forge.Singletons;
 import forge.gui.FThreads;
-import forge.gui.GuiBase;
 import forge.gui.GuiUtils;
 import forge.gui.framework.ILocalRepaint;
 import forge.localinstance.properties.ForgeConstants;

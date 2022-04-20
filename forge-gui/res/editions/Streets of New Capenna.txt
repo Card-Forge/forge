@@ -218,7 +218,7 @@ ScryfallCode=SNC
 204 U Mr. Orfeo, the Boulder @Daarken
 205 U Nimble Larcenist @Volkan Baǵa
 206 M Ob Nixilis, the Adversary @Yongjae Choi
-207 R Obscura Ascendancy @Josh Hass
+207 R Obscura Ascendancy @Igor Krstic
 208 U Obscura Charm @Steve Argyle
 209 R Obscura Interceptor @Jason A. Engle
 210 R Ognis, the Dragon's Lash @Andreas Zafiratos
@@ -515,3 +515,19 @@ ScryfallCode=SNC
 1 Forest|SNC|4
 
 [tokens]
+b_2_2_rogue
+b_4_3_ogre_warrior
+c_a_treasure_sac
+c_a_treasure_sac
+c_a_treasure_sac
+c_a_treasure_sac
+c_a_treasure_sac
+g_2_2_cat_haste
+g_3_1_dog_vigilance
+g_4_4_rhino_warrior
+gw_1_1_citizen
+r_1_1_devil_burn
+u_1_1_fish_unblockable
+u_1_1_wizard_countersac
+w_2_2_spirit_flying
+w_3_3_angel_flying
