@@ -19,8 +19,8 @@ jobs:
           java-version: ${{ matrix.java }}
           cache: 'maven'
 
-      - name: Install virtual framebuffer to allow running GUI on a headless server
-        run: sudo apt update && sudo apt install -y xvfb
+      - name: Install virtual framebuffer (if not available) to allow running GUI on a headless server
+        run: command -v Xvfb >/dev/null 2>&1 || { sudo apt update && sudo apt install -y xvfb; }
 
       - name: Run tests in virtual framebuffer
         run: |
