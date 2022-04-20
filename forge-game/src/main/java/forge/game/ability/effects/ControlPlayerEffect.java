@@ -19,7 +19,6 @@ public class ControlPlayerEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-
         List<Player> tgtPlayers = getTargetPlayers(sa);
         return TextUtil.concatWithSpace(sa.getActivatingPlayer().toString(),"controls", Lang.joinHomogenous(tgtPlayers),"during their next turn");
     }
@@ -32,11 +31,9 @@ public class ControlPlayerEffect extends SpellAbilityEffect {
         final Player controller = sa.hasParam("Controller") ? AbilityUtils.getDefinedPlayers(
                 sa.getHostCard(), sa.getParam("Controller"), sa).get(0) : activator;
 
-        List<Player> tgtPlayers = getTargetPlayers(sa);
-
-        for (final Player pTarget: tgtPlayers) {
-            // on next untap gain control
-            game.getUntap().addUntil(pTarget, new GameCommand() {
+        for (final Player pTarget: getTargetPlayers(sa)) {
+            // before next untap gain control
+            game.getCleanup().addUntil(pTarget, new GameCommand() {
                 @Override
                 public void run() {
                     // CR 800.4b
@@ -47,8 +44,8 @@ public class ControlPlayerEffect extends SpellAbilityEffect {
                     long ts = game.getNextTimestamp();
                     pTarget.addController(ts, controller);
 
-                    // on following cleanup release control
-                    game.getEndOfTurn().addUntil(new GameCommand() {
+                    // after following cleanup release control
+                    game.getCleanup().addUntil(new GameCommand() {
                         @Override
                         public void run() {
                             pTarget.removeController(ts);
