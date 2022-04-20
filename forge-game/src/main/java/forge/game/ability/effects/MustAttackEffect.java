@@ -75,7 +75,6 @@ public class MustAttackEffect extends SpellAbilityEffect {
                 } else {
                     p.setMustAttackEntity(entity);
                 }
-
             }
         }
         for (final Card c : getTargetCards(sa)) {
