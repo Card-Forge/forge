@@ -157,6 +157,7 @@ public class PlayerStatisticScene extends UIScene {
         enemiesGroup.row();
         blessingScroll = Controls.newLabel("");
         blessingScroll.setStyle(new Label.LabelStyle(Controls.getBitmapFont("default"), Color.BLACK));
+        blessingScroll.setAlignment(Align.topLeft);
         ui.onButtonPress("return", new Runnable() {
             @Override
             public void run() {

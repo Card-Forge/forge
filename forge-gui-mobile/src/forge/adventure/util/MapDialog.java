@@ -40,7 +40,6 @@ public class MapDialog {
             return;
         }
         this.data = JSONStringLoader.parse(Array.class, DialogData.class, S, defaultJSON);
-
     }
 
     private void loadDialog(DialogData dialog) { //Displays a dialog with dialogue and possible choices.
@@ -91,6 +90,13 @@ public class MapDialog {
             if (E.addItem != null){ //Gives an item to the player.
                 Current.player().addItem(E.addItem);
             }
+            if(E.addLife != 0){ //Gives (positive or negative) life to the player. Cannot go over max health.
+                Current.player().heal(E.addLife);
+            }
+            if(E.addGold != 0){ //Gives (positive or negative) gold to the player.
+                if(E.addGold > 0) Current.player().giveGold(E.addGold);
+                else               Current.player().takeGold(-E.addGold);
+            }
             if (E.deleteMapObject != 0){ //Removes a dummy object from the map.
                 if(E.deleteMapObject < 0) stage.deleteObject(parentID);
                 else stage.deleteObject(E.deleteMapObject);
@@ -106,6 +112,9 @@ public class MapDialog {
                 Current.player().setColorIdentity(E.setColorIdentity);
             }
             //Create map object.
+            //Toggle dummy object's hitbox. (Like to make a door passable)
+            //Set world flag.
+            //Set dungeon flag.
         }
     }
 
@@ -120,6 +129,16 @@ public class MapDialog {
             }
             if(condition.colorIdentity != null && !condition.colorIdentity.isEmpty()) { //Check for player's color ID.
                 if(!player.getColorIdentity().equals(condition.colorIdentity.toUpperCase())){
+                    if(!condition.not) return false;
+                } else if(condition.not) return false;
+            }
+            if(condition.hasGold != 0){ //Check for at least X gold.
+                if(player.getGold() < condition.hasGold){
+                    if(!condition.not) return false;
+                } else if(condition.not) return false;
+            }
+            if(condition.hasLife != 0){ //Check for at least X life..
+                if(player.getLife() < condition.hasLife + 1){
                     if(!condition.not) return false;
                 } else if(condition.not) return false;
             }

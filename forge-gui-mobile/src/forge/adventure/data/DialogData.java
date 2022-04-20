@@ -16,6 +16,8 @@ public class DialogData {
     static public class ActionData {
         public String removeItem;         //Remove item name from inventory.
         public String addItem;            //Add item name to inventory.
+        public int addLife = 0;           //Gives the player X health. Negative to take.
+        public int addGold = 0;          //Gives the player X gold. Negative to take.
         public int deleteMapObject = 0;   //Remove ID from the map. -1 for self.
         public int battleWithActorID = 0; //Start a battle with enemy ID. -1 for self if possible.
         public EffectData giveBlessing;   //Give a blessing to the player.
@@ -27,6 +29,8 @@ public class DialogData {
         public int flag = 0;               //Check for a local dungeon flag.
         public int actorID = 0;            //Check for an actor ID.
         public String hasBlessing = null;  //Check for specific blessing, if named.
+        public int hasGold = 0;            //Check for player gold. True if gold is equal or higher than X.
+        public int hasLife = 0;            //Check for player life. True if life is equal or higher than X.
         public String colorIdentity = null;//Check for player's current color identity.
         public boolean not = false;        //Reverse the result of a condition ("actorID":"XX" + "not":true => true if XX is not in the map.)
     }

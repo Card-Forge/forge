@@ -206,8 +206,8 @@ public class MapStage extends GameStage {
         for (MapActor actor : new Array.ArrayIterator<>(actors)) {
             actor.remove();
             foregroundSprites.removeActor(actor);
-
         }
+
         actors = new Array<>();
         width = Float.parseFloat(map.getProperties().get("width").toString());
         height = Float.parseFloat(map.getProperties().get("height").toString());
@@ -220,8 +220,8 @@ public class MapStage extends GameStage {
         MapProperties MP = map.getProperties();
 
         if( MP.get("dungeonEffect") != null && !MP.get("dungeonEffect").toString().isEmpty()){
-            JSONStringLoader json = new JSONStringLoader();
-            effect = json.parse(EffectData.class, map.getProperties().get("dungeonEffect").toString(), "");
+            JSONStringLoader J = new JSONStringLoader();
+            effect = J.parse(EffectData.class, map.getProperties().get("dungeonEffect").toString(), "");
             effectDialog(effect);
         }
         if (MP.get("preventEscape") != null) preventEscape = (boolean)MP.get("preventEscape");
@@ -266,7 +266,6 @@ public class MapStage extends GameStage {
     private void loadObjects(MapLayer layer, String sourceMap) {
         player.setMoveModifier(2);
         for (MapObject obj : layer.getObjects()) {
-
             MapProperties prop = obj.getProperties();
             Object typeObject = prop.get("type");
             if (typeObject != null) {
@@ -297,7 +296,12 @@ public class MapStage extends GameStage {
                     case "enemy":
                         Object E = prop.get("enemy");
                         if(E != null && !E.toString().isEmpty()) {
-                            EnemySprite mob = new EnemySprite(id, WorldData.getEnemy(E.toString()));
+                            EnemyData EN = WorldData.getEnemy(E.toString());
+                            if(EN == null){
+                                System.err.printf("Enemy \"%s\" not found.", E.toString());
+                                break;
+                            }
+                            EnemySprite mob = new EnemySprite(id, EN);
                             Object D = prop.get("dialog"); //Check if the enemy has a dialogue attached to it.
                             if (D != null && !D.toString().isEmpty()) {
                                 mob.dialog = new MapDialog(D.toString(), this, mob.getId());
@@ -314,6 +318,7 @@ public class MapStage extends GameStage {
                             if (D != null && !D.toString().isEmpty()) {
                                 mob.effect = JSONStringLoader.parse(EffectData.class, D.toString(), "");
                             }
+                            //TODO: Additional rewards.
                             addMapActor(obj, mob);
                         }
                         break;
@@ -321,6 +326,8 @@ public class MapStage extends GameStage {
                         TiledMapTileMapObject obj2 = (TiledMapTileMapObject) obj;
                         DummySprite D = new DummySprite(id, obj2.getTextureRegion(), this);
                         addMapActor(obj, D);
+                        //TODO: Ability to toggle their solid state.
+                        //TODO: Ability to move them (using a sequence such as "UULU" for up, up, left, up).
                         break;
                     case "inn":
                         addMapActor(obj, new OnCollide(new Runnable() {
@@ -436,7 +443,8 @@ public class MapStage extends GameStage {
         return false;
     }
 
-    public boolean lookForID(int id){
+    public boolean lookForID(int id){ //Search actor by ID.
+
         for(MapActor A : new Array.ArrayIterator<>(actors)){
             if(A.getId() == id)
                 return true;
@@ -444,7 +452,7 @@ public class MapStage extends GameStage {
         return false;
     }
 
-    public EnemySprite getEnemyByID(int id) {
+    public EnemySprite getEnemyByID(int id) { //Search actor by ID, enemies only.
         for(MapActor A : new Array.ArrayIterator<>(actors)){
             if(A instanceof EnemySprite && A.getId() == id)
                 return ((EnemySprite) A);
@@ -492,7 +500,7 @@ public class MapStage extends GameStage {
                     currentMob = mob;
                     if (mob.dialog != null){ //This enemy has something to say. Display a dialog like if it was a DialogActor.
                         resetPosition();
-                        showDialog();
+                        //showDialog();
                         mob.dialog.activate();
                     } else { //Duel the enemy.
                         beginDuel(mob);
@@ -534,7 +542,7 @@ public class MapStage extends GameStage {
                 }
             }, ScreenUtils.getFrameBufferTexture(), true, false));
         }
-        startPause(0.4f, new Runnable() {
+        startPause(0.3f, new Runnable() {
             @Override
             public void run() {
                 DuelScene S = ((DuelScene) SceneType.DuelScene.instance);
@@ -568,7 +576,6 @@ public class MapStage extends GameStage {
     }
 
     public void resetPosition() {
-
         player.setPosition(oldPosition4);
         stop();
     }

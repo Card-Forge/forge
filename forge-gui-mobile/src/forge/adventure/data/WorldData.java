@@ -6,6 +6,10 @@ import com.badlogic.gdx.utils.Json;
 import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
 import forge.adventure.world.BiomeSprites;
+import forge.card.ColorSet;
+import forge.deck.Deck;
+import forge.deck.DeckProxy;
+import forge.game.GameType;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -51,9 +55,7 @@ public class WorldData implements Serializable {
         if (allEnemies == null) {
             Json json = new Json();
             FileHandle handle = Config.instance().getFile(Paths.ENEMIES);
-            if (handle.exists())
-            {
-
+            if (handle.exists()) {
                 Array readList =  json.fromJson(Array.class, EnemyData.class, handle);
                 allEnemies = readList;
             }
@@ -62,8 +64,7 @@ public class WorldData implements Serializable {
     }
 
     public static EnemyData getEnemy(String enemy) {
-        for(EnemyData data: new Array.ArrayIterator<>(getAllEnemies()))
-        {
+        for(EnemyData data: new Array.ArrayIterator<>(getAllEnemies())) {
             if(data.name.equals(enemy))
                 return data;
         }

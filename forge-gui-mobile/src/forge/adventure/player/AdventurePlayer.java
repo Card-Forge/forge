@@ -48,11 +48,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private final Array<String> inventoryItems=new Array<>();
     private final HashMap<String,String> equippedItems=new HashMap<>();
 
-    public AdventurePlayer()
-    {
-
-        for(int i=0;i<NUMBER_OF_DECKS;i++)
-        {
+    public AdventurePlayer() {
+        for(int i=0;i<NUMBER_OF_DECKS;i++) {
             decks[i]=new Deck("Empty Deck");
         }
     }
@@ -303,19 +300,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return data;
     }
 
-    public void addBlessing(EffectData bless){ blessing = bless; }
-
-    public void clearBlessing() { blessing = null; }
-
-    public @Null EffectData getBlessing(){ return blessing; }
-
-    public boolean hasBlessing(String name){
-        if(blessing == null) return false;
-        if(blessing.name.equals(name)) return true;
-        return false;
-    }
-
-
     public String spriteName() {
         return HeroListData.getHero(heroRace, isFemale);
     }
@@ -329,15 +313,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void addCard(PaperCard card) {
-
         cards.add(card);
         newCards.add(card);
-
     }
-    public void addReward(Reward reward) {
 
-        switch (reward.getType())
-        {
+    public void addReward(Reward reward) {
+        switch (reward.getType()) {
             case Card:
                 cards.add(reward.getCard());
                 newCards.add(reward.getCard());
@@ -352,13 +333,13 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 addMaxLife(reward.getCount());
                 break;
         }
-
     }
 
     SignalList onLifeTotalChangeList=new SignalList();
     SignalList onGoldChangeList=new SignalList();
     SignalList onPlayerChangeList=new SignalList();
     SignalList onEquipmentChange=new SignalList();
+    SignalList onBlessing=new SignalList();
 
     private void addGold(int goldCount) {
         gold+=goldCount;
@@ -385,6 +366,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public void onGoldChange(Runnable  o) {
         onGoldChangeList.add(o);
+        o.run();
+    }
+
+    public void onBlessing(Runnable o) {
+        onBlessing.add(o);
         o.run();
     }
 
@@ -423,6 +409,34 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         gold-=price;
         onGoldChangeList.emit();
     }
+
+    public void addBlessing(EffectData bless){
+        blessing = bless;
+        onBlessing.emit();
+    }
+
+    public void clearBlessing() { blessing = null; }
+
+    public @Null EffectData getBlessing(){ return blessing; }
+
+    public boolean hasBlessing(String name){ //Checks for a named blessing.
+        //It is not necessary to name all blessings, only the ones you'd want to check for.
+        if(blessing == null) return false;
+        if(blessing.name.equals(name)) return true;
+        return false;
+    }
+
+    public boolean hasColorView() {
+        for(String name:equippedItems.values()) {
+            ItemData data=ItemData.getItem(name);
+            if(data != null && data.effect.colorView) return true;
+        }
+        if(blessing != null) {
+            if(blessing.colorView) return true;
+        }
+        return false;
+    }
+
 
     public DifficultyData getDifficulty() {
         return difficultyData;
@@ -482,9 +496,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         float factor=1.0f;
         for(String name:equippedItems.values()) {
             ItemData data=ItemData.getItem(name);
-            if(data.effect.moveSpeed > 0.0) { //Avoid negative speeds. It would be silly.
+            if(data != null && data.effect.moveSpeed > 0.0)  //Avoid negative speeds. It would be silly.
                 factor*=data.effect.moveSpeed;
-            }
+        }
+        if(blessing != null) { //If a blessing gives speed, take it into account.
+            if(blessing.moveSpeed > 0.0)
+                factor *= blessing.moveSpeed;
         }
         return factor;
     }

@@ -1,9 +1,12 @@
 package forge.adventure.character;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
+import forge.Forge;
 import forge.adventure.data.EffectData;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.RewardData;
@@ -47,7 +50,6 @@ public class EnemySprite extends CharacterSprite {
         return data;
     }
 
-
     public Array<Reward> getRewards() {
         Array<Reward> ret=new Array<Reward>();
         if(data.rewards == null)
@@ -56,6 +58,58 @@ public class EnemySprite extends CharacterSprite {
             ret.addAll(rdata.generate(false,(Current.latestDeck()!=null? Current.latestDeck().getMain().toFlatList():null)));
         }
         return ret;
+    }
+
+    private void drawColorHints(Batch batch){
+        int size = Math.min(data.colors.length(), 6);
+        int DX = Math.round(getX() - 2);
+        int DY = Math.round(getY());
+
+        for(int i = 0; i < size; i++){
+            char C = data.colors.toUpperCase().charAt(i);
+            switch (C) {
+                default: break;
+                case 'C': {
+                    batch.setColor(Color.DARK_GRAY);
+                    batch.draw(Forge.getGraphics().getDummyTexture(), DX, DY, 2, 2);
+                    DY += 2; break;
+                }
+                case 'B': {
+                    batch.setColor(Color.PURPLE);
+                    batch.draw(Forge.getGraphics().getDummyTexture(), DX, DY, 2, 2);
+                    DY += 2; break;
+                }
+                case 'G': {
+                    batch.setColor(Color.GREEN);
+                    batch.draw(Forge.getGraphics().getDummyTexture(), DX, DY, 2, 2);
+                    DY += 2; break;
+                }
+                case 'R': {
+                    batch.setColor(Color.RED);
+                    batch.draw(Forge.getGraphics().getDummyTexture(), DX, DY, 2, 2);
+                    DY += 2; break;
+                }
+                case 'U': {
+                    batch.setColor(Color.BLUE);
+                    batch.draw(Forge.getGraphics().getDummyTexture(), DX, DY, 2, 2);
+                    DY += 2; break;
+                }
+                case 'W': {
+                    batch.setColor(Color.WHITE);
+                    batch.draw(Forge.getGraphics().getDummyTexture(), DX, DY, 2, 2);
+                    DY += 2; break;
+                }
+            }
+        }
+        batch.setColor(Color.WHITE);
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
+        if(Current.player().hasColorView() && !data.colors.isEmpty()) {
+            drawColorHints(batch);
+        }
     }
 
 }

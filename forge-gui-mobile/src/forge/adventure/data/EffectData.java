@@ -51,6 +51,8 @@ public class EffectData implements Serializable {
         String description = "";
         if(this.name != null && !this.name.isEmpty())
             description += this.name + "\n";
+        if(this.colorView)
+            description += "Manasight.\n";
         if(this.lifeModifier != 0)
             description += "Life: " + ((this.lifeModifier > 0) ? "+" : "") + this.lifeModifier + "\n";
         if(this.startBattleWithCard != null && this.startBattleWithCard.length != 0)

@@ -1,9 +1,18 @@
 package forge.adventure.stage;
 
 
+import com.badlogic.gdx.utils.Array;
 import forge.StaticData;
+import forge.adventure.data.EnemyData;
+import forge.adventure.data.WorldData;
 import forge.adventure.pointofintrest.PointOfInterest;
+import forge.adventure.scene.InventoryScene;
+import forge.adventure.scene.SceneType;
 import forge.adventure.util.Current;
+import forge.card.ColorSet;
+import forge.deck.Deck;
+import forge.deck.DeckProxy;
+import forge.game.GameType;
 import forge.item.PaperCard;
 
 import java.util.ArrayList;
@@ -164,6 +173,28 @@ public class ConsoleCommandInterpreter {
         registerCommand(new String[]{"fullHeal"}, s -> {
             Current.player().fullHeal();
             return "Player life back to "+Current.player().getLife();
+        });
+        registerCommand(new String[]{"reloadScenes"}, s -> {
+            SceneType.InventoryScene.instance.resLoaded();
+            SceneType.PlayerStatisticScene.instance.resLoaded();
+
+            return "Force reload status scenes. Might be unstable.";
+        });
+        registerCommand(new String[]{"dumpEnemyDeckColors"}, s -> {
+            for(EnemyData E : new Array.ArrayIterator<>(WorldData.getAllEnemies())){
+                Deck D = E.generateDeck();
+                DeckProxy DP = new DeckProxy(D, "Constructed", GameType.Constructed, null);
+                ColorSet colorSet = DP.getColor();
+                System.out.printf("%s: Colors: %s (%s%s%s%s%s%s)\n", D.getName(), DP.getColor(),
+                        (colorSet.hasBlack()    ? "B" : ""),
+                        (colorSet.hasGreen()    ? "G" : ""),
+                        (colorSet.hasRed()      ? "R" : ""),
+                        (colorSet.hasBlue()     ? "U" : ""),
+                        (colorSet.hasWhite()    ? "W" : ""),
+                        (colorSet.isColorless() ? "C" : "")
+                );
+            }
+            return "Enemy deck color list dumped to stdout.";
         });
         registerCommand(new String[]{"heal", "amount"}, s -> {
             if(s.length<1) return "Command needs 1 parameter";
