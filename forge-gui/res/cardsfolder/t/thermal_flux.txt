@@ -1,4 +1,4 @@
-﻿Name:Thermal Flux
+Name:Thermal Flux
 ManaCost:U
 Types:Instant
 A:SP$ Charm | Cost$ U | Choices$ ChooseFreeze,ChooseThaw | Defined$ You

@@ -1,4 +1,4 @@
-﻿Name:Sapphire Charm
+Name:Sapphire Charm
 ManaCost:U
 Types:Instant
 A:SP$ Charm | Cost$ U | Choices$ DelTrigSlowtrip,Pump,Phases | CharmNum$ 1

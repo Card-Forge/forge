@@ -1,4 +1,4 @@
-﻿Name:Library of Lat-Nam
+Name:Library of Lat-Nam
 ManaCost:4 U
 Types:Sorcery
 A:SP$ Charm | Cost$ 4 U | Chooser$ Opponent | Choices$ DelTrigSlowDraw,Tutor
