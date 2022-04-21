@@ -7,6 +7,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
@@ -65,6 +66,11 @@ public class DiscardEffect extends SpellAbilityEffect {
             if (sa.hasParam("DiscardValid")) {
                 String validD = sa.hasParam("DiscardValidDesc") ? sa.getParam("DiscardValidDesc")
                         : sa.getParam("DiscardValid");
+                if (validD.equals("card.nonLand")) {
+                    validD = "nonland";
+                } else if (CardType.CoreType.isValidEnum(validD)) {
+                    validD = validD.toLowerCase();
+                }
                 valid = validD.contains(" card") ?
                         (oneCard ? validD : validD.replace(" card", " cards")) : validD + " " + valid;
             }
