@@ -114,23 +114,20 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        // TODO replace with Static Ability
-        for (final String keyword : attacker.getHiddenExtrinsicKeywords()) {
-            if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
-                final String defined = keyword.split(":")[1];
-                final Player player = AbilityUtils.getDefinedPlayers(attacker, defined, null).get(0);
-                if (!defender.equals(player)) {
-                    return false;
+        // MustAttack static abilities
+        for (final Card ca : attacker.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (stAb.isSuppressed() || !stAb.checkConditions()) {
+                    continue;
                 }
-            }
-        }
-        for (final KeywordInterface inst : attacker.getKeywords(Keyword.UNDEFINED)) {
-            final String keyword = inst.getOriginal();
-            if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
-                final String defined = keyword.split(":")[1];
-                final Player player = AbilityUtils.getDefinedPlayers(attacker, defined, null).get(0);
-                if (!defender.equals(player)) {
-                    return false;
+                if (stAb.matchesValid(attacker, stAb.getParam("Affected").split(","))) {
+                    if (stAb.getParam("Mode").equals("MustAttack") && stAb.hasParam("MustAttack")) {
+                        final GameEntity def = AbilityUtils.getDefinedEntities(attacker,
+                                stAb.getParam("MustAttack"), stAb).get(0);
+                        if (!defender.equals(def)) {
+                            return false;
+                        }
+                    }
                 }
             }
         }
