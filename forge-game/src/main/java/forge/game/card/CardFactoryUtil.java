@@ -3213,10 +3213,13 @@ public class CardFactoryUtil {
                     "| SpellDescription$ (" + inst.getReminderText() + ")";
 
             final String copyStr = "DB$ CopyPermanent | Defined$ Self | ImprintTokens$ True " +
-                    "| AddKeywords$ Haste | RememberTokens$ True | TokenRemembered$ Player.IsRemembered";
+                    "| AddKeywords$ Haste | RememberTokens$ True | TokenRemembered$ Player.IsRemembered " +
+                    "| AddStaticAbilities$ MustAttack";
 
-            final String pumpStr = "DB$ PumpAll | ValidCards$ Creature.IsRemembered " +
-                    "| KW$ HIDDEN CARDNAME attacks specific player each combat if able:Remembered";
+            final String pumpStr = "DB$ Animate | Defined$ Creature.IsRemembered | staticAbilities$ AttackChosen ";
+
+            final String attackStaticStr = "Mode$ MustAttack | Affected$ Card.Self | MustAttack$ Remembered" +
+                    " | Description$ This token copy attacks that opponent this turn if able.";
 
             final String pumpcleanStr = "DB$ Cleanup | ForgetDefined$ RememberedCard";
 
@@ -3236,6 +3239,8 @@ public class CardFactoryUtil {
 
             AbilitySub pumpSA = (AbilitySub) AbilityFactory.getAbility(pumpStr, card);
             copySA.setSubAbility(pumpSA);
+
+            sa.setSVar("MustAttack", attackStaticStr);
 
             AbilitySub pumpcleanSA = (AbilitySub) AbilityFactory.getAbility(pumpcleanStr, card);
             pumpSA.setSubAbility(pumpcleanSA);
