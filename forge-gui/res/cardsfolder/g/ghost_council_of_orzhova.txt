@@ -5,7 +5,7 @@ PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ When CARDNAME enters the battlefield, target opponent loses 1 life and you gain 1 life.
 SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
-A:AB$ ChangeZone | Cost$ 1 Sac<1/Creature> | Defined$ Self | Origin$ Battlefield | Destination$ Exile | SubAbility$ DelTrig | SpellDescription$ Exile CARDNAME. Return it to the battlefield under its owner's control at the beginning of the next end step.
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ Return CARDNAME to the battlefield.
+A:AB$ ChangeZone | Cost$ 1 Sac<1/Creature> | Defined$ Self | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DelTrig | SpellDescription$ Exile CARDNAME. Return it to the battlefield under its owner's control at the beginning of the next end step.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | ConditionDefined$ Remembered | ConditionPresent$ Card | TriggerDescription$ Return CARDNAME to the battlefield.
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ Self
 Oracle:When Ghost Council of Orzhova enters the battlefield, target opponent loses 1 life and you gain 1 life.\n{1}, Sacrifice a creature: Exile Ghost Council of Orzhova. Return it to the battlefield under its owner's control at the beginning of the next end step.

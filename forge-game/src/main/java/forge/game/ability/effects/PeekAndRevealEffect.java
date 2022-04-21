@@ -54,14 +54,14 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        Card source = sa.getHostCard();
+        final Card source = sa.getHostCard();
         final boolean rememberRevealed = sa.hasParam("RememberRevealed");
         final boolean imprintRevealed = sa.hasParam("ImprintRevealed");
         String revealValid = sa.getParamOrDefault("RevealValid", "Card");
         String peekAmount = sa.getParamOrDefault("PeekAmount", "1");
-        int numPeek = AbilityUtils.calculateAmount(sa.getHostCard(), peekAmount, sa);
+        int numPeek = AbilityUtils.calculateAmount(source, peekAmount, sa);
         
-        List<Player> libraryPlayers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
+        List<Player> libraryPlayers = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
         Player peekingPlayer = sa.getActivatingPlayer();
         
         for (Player libraryToPeek : libraryPlayers) {
@@ -74,7 +74,7 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
             }
 
             CardCollectionView revealableCards = CardLists.getValidCards(peekCards, revealValid,
-                    sa.getActivatingPlayer(), sa.getHostCard(), sa);
+                    sa.getActivatingPlayer(), source, sa);
             boolean doReveal = !sa.hasParam("NoReveal") && !revealableCards.isEmpty();
             if (!sa.hasParam("NoPeek")) {
                 peekingPlayer.getController().reveal(peekCards, ZoneType.Library, libraryToPeek,
