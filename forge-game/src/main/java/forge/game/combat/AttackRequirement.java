@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import forge.game.staticability.StaticAbility;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
@@ -51,24 +52,33 @@ public class AttackRequirement {
             nAttackAnything += attacker.getGoaded().size();
         }
 
-        // remove it when all of them are HIDDEN or static
-        for (final KeywordInterface inst : attacker.getKeywords()) {
-            final String keyword = inst.getOriginal();
-            if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
-                final String defined = keyword.split(":")[1];
-                final GameEntity mustAttack2 = AbilityUtils.getDefinedPlayers(attacker, defined, null).get(0);
-                defenderSpecific.add(mustAttack2);
-            } else if (keyword.equals("CARDNAME attacks each combat if able.")) {
-                nAttackAnything++;
-            }
-        }
-        for (final String keyword : attacker.getHiddenExtrinsicKeywords()) {
-            if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
-                final String defined = keyword.split(":")[1];
-                final GameEntity mustAttack2 = AbilityUtils.getDefinedPlayers(attacker, defined, null).get(0);
-                defenderSpecific.add(mustAttack2);
-            } else if (keyword.equals("CARDNAME attacks each combat if able.")) {
-                nAttackAnything++;
+        final Game game = attacker.getGame();
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (stAb.isSuppressed() || !stAb.checkConditions()) {
+                    continue;
+                }
+                if (stAb.getParam("Mode").equals("MustAttack")) {
+                    if (stAb.matchesValid(attacker, stAb.getParam("Affected").split(","))) {
+                        if (stAb.hasParam("MustAttack")) {
+                            GameEntity e = AbilityUtils.getDefinedEntities(attacker, stAb.getParam("MustAttack"),
+                                    stAb).get(0);
+                            if (e instanceof Player) {
+                                Player attackPl = (Player) e;
+                                if (!game.getPhaseHandler().isPlayerTurn(attackPl)) { // CR 506.2
+                                    defenderSpecific.add(attackPl);
+                                }
+                            } else if (e instanceof Card) {
+                                Card attackPW = (Card) e;
+                                if (!game.getPhaseHandler().isPlayerTurn(attackPW.getController())) { // CR 506.2
+                                    defenderSpecific.add(attackPW);
+                                }
+                            }
+                        } else {
+                            nAttackAnything++;
+                        }
+                    }
+                }
             }
         }
 
@@ -77,7 +87,6 @@ public class AttackRequirement {
             defenderSpecific.add(mustAttackThisTurn3);
         }
 
-        final Game game = attacker.getGame();
 
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
             if (c.hasKeyword("Each opponent must attack you or a planeswalker you control with at least one creature each combat if able.")) {
