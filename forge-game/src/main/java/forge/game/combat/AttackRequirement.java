@@ -13,6 +13,7 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -101,7 +102,7 @@ public class AttackRequirement {
             }
         }
 
-        // Remove GameEntities that are no longer on the battlefield or are
+        // Remove GameEntities that are no longer on an opposing battlefield or are
         // related to Players who have lost the game
         final MapToAmount<GameEntity> combinedDefMap = new LinkedHashMapToAmount<>();
         combinedDefMap.putAll(defenderSpecific);
@@ -115,8 +116,9 @@ public class AttackRequirement {
                     removeThis = true;
                 }
             } else if (entity instanceof Card) {
-                final Player controller = ((Card) entity).getController();
-                if (controller.hasLost() || !controller.getCardsIn(ZoneType.Battlefield).contains(entity)) {
+                final Card reqPW = (Card) entity;
+                final List<Card> actualPW = CardLists.getValidCards(attacker.getController().getOpponents().getCardsIn(ZoneType.Battlefield), "Card.StrictlySelf", null, reqPW, null);
+                if (reqPW.getController().hasLost() || actualPW.isEmpty()) {
                     removeThis = true;
                 }
             }

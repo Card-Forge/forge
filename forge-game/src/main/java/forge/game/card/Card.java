@@ -1347,7 +1347,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (getController().equals(playerturn)) {
             mustAttackEntity = null;
         }
-        mustAttackEntityThisTurn = null;
+        mustAttackEntityThisTurn = mustAttackEntity;
     }
     public final GameEntity getMustAttackEntityThisTurn() { return mustAttackEntityThisTurn; }
     public final void setMustAttackEntityThisTurn(GameEntity entThisTurn) { mustAttackEntityThisTurn = entThisTurn; }
