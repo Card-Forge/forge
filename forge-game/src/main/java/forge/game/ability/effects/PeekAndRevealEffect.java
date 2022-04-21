@@ -32,11 +32,12 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
 
         final int numPeek = sa.hasParam("PeekAmount") ?
                 AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("PeekAmount"), sa) : 1;
-        final String verb = sa.hasParam("NoReveal") ? " looks at " : " reveals ";
-        final String defined = sa.getParam("Defined");
+        final String verb = sa.hasParam("NoReveal") || sa.hasParam("RevealOptional") ? " looks at " :
+                " reveals ";
+        final String defined = sa.getParamOrDefault("Defined", "their");
         String whose;
         if (defined.equals("Player")) {
-            whose = "each player's ";
+            whose = "each player's";
         } else { // other else ifs for specific defined can be added above as needs arise
             whose = Lang.joinHomogenous(getTargetPlayers(sa));
         }
