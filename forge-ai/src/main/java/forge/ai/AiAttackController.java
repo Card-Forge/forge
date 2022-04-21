@@ -20,6 +20,8 @@ package forge.ai;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.game.Game;
+import forge.game.staticability.StaticAbility;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
@@ -798,11 +800,37 @@ public class AiAttackController {
                     // TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
                     mustAttack = true;
                 } else {
-                    // TODO move to static Ability
-                    if (attacker.hasKeyword("CARDNAME attacks each combat if able.") || attacker.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
-                        // TODO switch defender if there's one without a cost or it's not the specific player
-                        mustAttack = true;
-                    } else if (attacker.getController().getMustAttackEntityThisTurn() != null && CombatUtil.getAttackCost(ai.getGame(), attacker, defender) == null) {
+                    final Game game = attacker.getGame();
+                    for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+                        for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                            if (stAb.isSuppressed() || !stAb.checkConditions()) {
+                                continue;
+                            }
+                            if (stAb.getParam("Mode").equals("MustAttack")) {
+                                if (stAb.matchesValid(attacker, stAb.getParam("Affected").split(","))) {
+                                    if (stAb.hasParam("MustAttack")) {
+                                        GameEntity e = AbilityUtils.getDefinedEntities(attacker,
+                                                stAb.getParam("MustAttack"), stAb).get(0);
+                                        if (e instanceof Player) {
+                                            Player attackPl = (Player) e;
+                                            if (!game.getPhaseHandler().isPlayerTurn(attackPl)) { //CR 506.2
+                                                mustAttack = true;
+                                            }
+                                        } else if (e instanceof Card) {
+                                            Card attackPW = (Card) e;
+                                            if (!game.getPhaseHandler().isPlayerTurn(attackPW.getController())) {
+                                                mustAttack = true; // CR 506.2
+                                            }
+                                        }
+                                    } else {
+                                        // TODO switch defender if there's one without a cost or it's not the specific player
+                                        mustAttack = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (attacker.getController().getMustAttackEntityThisTurn() != null && CombatUtil.getAttackCost(ai.getGame(), attacker, defender) == null) {
                         mustAttack = true;
                     }
                 }
