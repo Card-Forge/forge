@@ -3,7 +3,7 @@ ManaCost:2 R W B
 Types:Legendary Creature Orc Warrior
 PT:7/2
 K:Haste
-K:CARDNAME attacks each combat if able.
+S:Mode$ MustAttack | Affected$ Card.Self | Description$ CARDNAME attacks each combat if able.
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Indestructible | Condition$ PlayerTurn | Description$ CARDNAME has indestructible as long as it's your turn.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature dealt damage by CARDNAME this turn dies, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionPresent$ Card.StrictlySelf
