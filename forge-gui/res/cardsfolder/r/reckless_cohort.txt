@@ -2,7 +2,7 @@ Name:Reckless Cohort
 ManaCost:1 R
 Types:Creature Human Warrior Ally
 PT:2/2
-S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME attacks each combat if able. | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME attacks each combat if able unless you control another Ally.
+S:Mode$ MustAttack | Affected$ Card.Self | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME attacks each combat if able unless you control another Ally.
 SVar:X:Count$Valid Ally.Other+YouCtrl
 SVar:BuffedBy:Ally
 DeckHints:Type$Ally

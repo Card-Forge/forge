@@ -3,7 +3,7 @@ ManaCost:R W
 Types:Creature Dinosaur
 PT:3/3
 K:Vigilance
-K:CARDNAME attacks each combat if able.
+S:Mode$ MustAttack | Affected$ Card.Self | Description$ CARDNAME attacks each combat if able.
 K:CARDNAME blocks each combat if able.
-//According to Release Notes, "attacks or blocks each combat if able" is equivalent to these two together -- if Relentless Raptor attacks and then opponent takes control of it, it still has to block.
+#According to Release Notes, "attacks or blocks each combat if able" is equivalent to these two together -- if Relentless Raptor attacks and then opponent takes control of it, it still has to block.
 Oracle:Vigilance\nRelentless Raptor attacks or blocks each combat if able.
