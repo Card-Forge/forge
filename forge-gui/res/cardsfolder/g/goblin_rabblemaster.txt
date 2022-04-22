@@ -2,11 +2,12 @@ Name:Goblin Rabblemaster
 ManaCost:2 R
 Types:Creature Goblin Warrior
 PT:2/2
-S:Mode$ Continuous | Affected$ Creature.Goblin+Other+YouCtrl | AddHiddenKeyword$ CARDNAME attacks each combat if able. | Description$ Other Goblin creatures you control attack each combat if able.
+S:Mode$ MustAttack | Affected$ Creature.Goblin+Other+YouCtrl | Description$ Other Goblin creatures you control attack each combat if able.
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, create a 1/1 red Goblin creature token with haste.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ r_1_1_goblin_haste
+SVar:TrigToken:DB$ Token | TokenScript$ r_1_1_goblin_haste
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+0 until end of turn for each other attacking Goblin.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X
 SVar:X:Count$Valid Goblin.attacking+Other
 SVar:PlayMain1:TRUE
+DeckHas:Ability$Token
 Oracle:Other Goblin creatures you control attack each combat if able.\nAt the beginning of combat on your turn, create a 1/1 red Goblin creature token with haste.\nWhenever Goblin Rabblemaster attacks, it gets +1/+0 until end of turn for each other attacking Goblin.

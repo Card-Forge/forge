@@ -1,6 +1,7 @@
 Name:Grand Melee
 ManaCost:3 R
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ CARDNAME blocks each combat if able. & CARDNAME attacks each combat if able. | Description$ All creatures attack each combat if able. All creatures block each combat if able.
+S:Mode$ MustAttack | Affected$ Creature | Description$ All creatures attack each combat if able. All creatures block each combat if able.
+S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ CARDNAME blocks each combat if able. | Secondary$ True
 SVar:NonStackingEffect:True
 Oracle:All creatures attack each combat if able.\nAll creatures block each combat if able.
