@@ -1,7 +1,9 @@
 package forge.adventure.character;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -62,8 +64,8 @@ public class EnemySprite extends CharacterSprite {
 
     private void drawColorHints(Batch batch){
         int size = Math.min(data.colors.length(), 6);
-        int DX = Math.round(getX() - 2);
-        int DY = Math.round(getY());
+        float DX = getX() - 2f;
+        float DY = getY();
 
         for(int i = 0; i < size; i++){
             char C = data.colors.toUpperCase().charAt(i);
@@ -109,6 +111,11 @@ public class EnemySprite extends CharacterSprite {
         super.draw(batch, parentAlpha);
         if(Current.player().hasColorView() && !data.colors.isEmpty()) {
             drawColorHints(batch);
+        }
+        if(dialog != null && dialog.canShow()){ //Draw a talk icon on top.
+            Texture T = Current.world().getGlobalTexture();
+            TextureRegion TR = new TextureRegion(T, 0, 0, 16, 16);
+            batch.draw(TR, getX(), getY() + 16, 16, 16);
         }
     }
 

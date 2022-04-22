@@ -225,6 +225,15 @@
   </object>
   <object id="82" template="../obj/enemy.tx" gid="2147491275" x="272" y="224">
    <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;...&quot;,
+    &quot;condition&quot;:[ { &quot;getQuestFlag&quot;:  { &quot;key&quot;: &quot;128&quot;, &quot;op&quot;:&quot;&lt;&quot;, &quot;val&quot;: 3 } } ],
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;???&quot; }
+    ]
+  }
+]</property>
     <property name="enemy" value="Goblin"/>
    </properties>
   </object>

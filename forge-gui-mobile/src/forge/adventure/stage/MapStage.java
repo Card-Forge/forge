@@ -499,9 +499,8 @@ public class MapStage extends GameStage {
                 if (actor instanceof EnemySprite) {
                     EnemySprite mob = (EnemySprite) actor;
                     currentMob = mob;
-                    if (mob.dialog != null){ //This enemy has something to say. Display a dialog like if it was a DialogActor.
-                        resetPosition();
-                        //showDialog();
+                    resetPosition();
+                    if(mob.dialog != null && mob.dialog.canShow()){ //This enemy has something to say. Display a dialog like if it was a DialogActor but only if dialogue is possible.
                         mob.dialog.activate();
                     } else { //Duel the enemy.
                         beginDuel(mob);

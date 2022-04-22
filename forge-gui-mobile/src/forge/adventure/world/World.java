@@ -3,6 +3,7 @@ package forge.adventure.world;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -47,6 +48,7 @@ public class World implements  Disposable, SaveFileContent {
     private long seed;
     private final Random random = MyRandom.getRandom();
     private boolean worldDataLoaded=false;
+    private Texture globalTexture = null;
 
     public Random getRandom()
     {
@@ -570,5 +572,11 @@ public class World implements  Disposable, SaveFileContent {
         random.setSeed(seedOffset+seed);
     }
 
-
+    public Texture getGlobalTexture() {
+        if(globalTexture == null){
+            globalTexture = new Texture(Config.instance().getFile("ui/sprite_markers.png"));
+            System.out.print("Loading auxiliary sprites.\n");
+        }
+        return globalTexture;
+    }
 }

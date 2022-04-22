@@ -73,7 +73,7 @@ public class MapDialog {
         }
     }
 
-    public void activate() {
+    public void activate() { //Method for actors to show their dialogues.
         for(DialogData dialog:data) {
             if(isConditionOk(dialog.condition)) {
                 loadDialog(dialog);
@@ -121,6 +121,16 @@ public class MapDialog {
             }
             //Set dungeon flag.
         }
+    }
+
+    public boolean canShow(){
+        if( data == null) return false;
+        for(DialogData dialog:data) {
+            if(isConditionOk(dialog.condition)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     boolean isConditionOk(DialogData.ConditionData[] data) {
