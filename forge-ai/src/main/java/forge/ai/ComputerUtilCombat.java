@@ -41,7 +41,6 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.CostPayment;
 import forge.game.keyword.Keyword;
-import forge.game.keyword.KeywordInterface;
 import forge.game.phase.Untap;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -49,6 +48,7 @@ import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMustAttack;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -114,22 +114,8 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        // MustAttack static abilities
-        for (final Card ca : attacker.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (stAb.isSuppressed() || !stAb.checkConditions()) {
-                    continue;
-                }
-                if (stAb.matchesValid(attacker, stAb.getParam("Affected").split(","))) {
-                    if (stAb.getParam("Mode").equals("MustAttack") && stAb.hasParam("MustAttack")) {
-                        final GameEntity def = AbilityUtils.getDefinedEntities(attacker,
-                                stAb.getParam("MustAttack"), stAb).get(0);
-                        if (!defender.equals(def)) {
-                            return false;
-                        }
-                    }
-                }
-            }
+        if (StaticAbilityMustAttack.mustAttackSpecific(attacker) != defender) {
+            return false;
         }
 
         // TODO this should be a factor but needs some alignment with AttachAi
