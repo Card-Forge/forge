@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMustAttack;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
@@ -12,7 +12,6 @@ import com.google.common.collect.Lists;
 
 import forge.game.Game;
 import forge.game.GameEntity;
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
@@ -51,34 +50,12 @@ public class AttackRequirement {
             nAttackAnything += attacker.getGoaded().size();
         }
 
-        final Game game = attacker.getGame();
-        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (stAb.isSuppressed() || !stAb.checkConditions()) {
-                    continue;
-                }
-                if (stAb.getParam("Mode").equals("MustAttack")) {
-                    if (stAb.matchesValid(attacker, stAb.getParam("Affected").split(","))) {
-                        if (stAb.hasParam("MustAttack")) {
-                            GameEntity e = AbilityUtils.getDefinedEntities(attacker, stAb.getParam("MustAttack"),
-                                    stAb).get(0);
-                            if (e instanceof Player) {
-                                Player attackPl = (Player) e;
-                                if (!game.getPhaseHandler().isPlayerTurn(attackPl)) { // CR 506.2
-                                    defenderSpecific.add(attackPl);
-                                }
-                            } else if (e instanceof Card) {
-                                Card attackPW = (Card) e;
-                                if (!game.getPhaseHandler().isPlayerTurn(attackPW.getController())) { // CR 506.2
-                                    defenderSpecific.add(attackPW);
-                                }
-                            }
-                        } else {
-                            nAttackAnything++;
-                        }
-                    }
-                }
-            }
+        //MustAttack static check
+        final GameEntity e = StaticAbilityMustAttack.mustAttackSpecific(attacker);
+        if (e != null && e != attacker) {
+            defenderSpecific.add(e);
+        } else if (e == attacker) {
+            nAttackAnything++;
         }
 
         final GameEntity mustAttackThisTurn3 = attacker.getMustAttackEntityThisTurn();
@@ -86,7 +63,7 @@ public class AttackRequirement {
             defenderSpecific.add(mustAttackThisTurn3);
         }
 
-
+        final Game game = attacker.getGame();
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
             if (c.hasKeyword("Each opponent must attack you or a planeswalker you control with at least one creature each combat if able.")) {
                 if (attacker.getController().isOpponentOf(c.getController()) && !defenderOrPWSpecific.containsKey(c.getController())) {
