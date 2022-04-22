@@ -4,7 +4,7 @@ Types:Creature Turtle
 PT:5/9
 K:Islandwalk
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, exile it. Return it to the battlefield under your control tapped and attacking at the beginning of the next declare attackers step on your next turn.
-SVar:TrigExile:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | SubAbility$ DelTrig
-SVar:DelTrig:DB$ DelayedTrigger | DelayedTriggerDefinedPlayer$ You | Mode$ Phase | Phase$ Declare Attackers | Execute$ TrigReturn | TriggerDescription$ Return CARDNAME to the battlefield tapped and attacking.
+SVar:TrigExile:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DelTrig
+SVar:DelTrig:DB$ DelayedTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | DelayedTriggerDefinedPlayer$ You | ThisTurn$ True | Mode$ Phase | Phase$ Declare Attackers | Execute$ TrigReturn | TriggerDescription$ Return CARDNAME to the battlefield tapped and attacking.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Exile | Destination$ Battlefield | Attacking$ True | Tapped$ True | GainControl$ True
 Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nWhenever Meandering Towershell attacks, exile it. Return it to the battlefield under your control tapped and attacking at the beginning of the declare attackers step on your next turn.

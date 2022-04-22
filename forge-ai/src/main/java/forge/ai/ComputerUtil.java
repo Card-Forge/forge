@@ -2057,7 +2057,7 @@ public class ComputerUtil {
         final CardCollectionView castables = CardLists.filter(handList, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return c.getManaCost().getCMC() <= 0 || c.getManaCost().getCMC() > landSize;
+                return c.getManaCost().getCMC() <= 0 || c.getManaCost().getCMC() <= landSize;
             }
         });
 

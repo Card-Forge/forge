@@ -666,7 +666,7 @@ public abstract class SpellAbilityEffect {
                 CardZoneTable untilTable = new CardZoneTable();
                 Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                 moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
-                moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateGraveyard());
+                moveParams.put(AbilityKey.LastStateGraveyard, game.copyLastStateGraveyard());
                 for (Table.Cell<ZoneType, ZoneType, CardCollection> cell : triggerList.cellSet()) {
                     for (Card c : cell.getValue()) {
                         // check if card is still in the until host leaves play list

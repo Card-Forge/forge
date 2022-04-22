@@ -319,7 +319,7 @@ public class EffectEffect extends SpellAbilityEffect {
                         game.getEndOfTurn().addUntilEnd(controller, endEffect);
                     }
                 } else if (duration.equals("ThisTurnAndNextTurn")) {
-                    game.getUntap().addAt(new GameCommand() {
+                    game.getEndOfTurn().addUntil(new GameCommand() {
                         private static final long serialVersionUID = -5054153666503075717L;
 
                         @Override

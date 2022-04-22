@@ -33,9 +33,7 @@ public class DiscardEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        final List<Player> tgtPlayers = Lists.newArrayList(Iterables.filter(getTargetPlayers(sa),
-                PlayerPredicates.canDiscardBy(sa, true)));
-
+        final List<Player> tgtPlayers = getTargetPlayers(sa).filter(PlayerPredicates.canDiscardBy(sa, true));
         final StringBuilder sb = new StringBuilder();
 
         if (!tgtPlayers.isEmpty()) {
