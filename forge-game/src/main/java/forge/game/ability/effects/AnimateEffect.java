@@ -311,7 +311,7 @@ public class AnimateEffect extends AnimateEffectBase {
                 sb.append("until end of turn");
             }
         }
-        if (sa.getParam("staticAbilities").contains("MustAttack")) {
+        if (sa.hasParam("staticAbilities") && sa.getParam("staticAbilities").contains("MustAttack")) {
             sb.append(sb.length() > initial ? " and " : "");
             sb.append(justOne ? "attacks" : "attack").append(" this turn if able");
         }
