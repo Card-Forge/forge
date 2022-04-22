@@ -3,9 +3,9 @@ ManaCost:5
 Types:Artifact Creature Juggernaut
 PT:*/*
 K:Indestructible
-K:CARDNAME attacks each combat if able.
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of artifacts you control.
 SVar:X:Count$Valid Artifact.YouCtrl
+S:Mode$ MustAttack | Affected$ Card.Self | Description$ CARDNAME attacks each combat if able.
 SVar:BuffedBy:Artifact
 SVar:NoZeroToughnessAI:True
 Oracle:Indestructible\nDarksteel Juggernaut's power and toughness are each equal to the number of artifacts you control.\nDarksteel Juggernaut attacks each combat if able.
