@@ -957,7 +957,10 @@ public class GameAction {
         if (c.isInZone(ZoneType.Stack)) {
             c.getGame().getStack().remove(c);
         }
-        c.getZone().remove(c);
+        // in some corner cases there's no zone yet (copied spell that failed targeting)
+        if (c.getZone() != null) {
+            c.getZone().remove(c);
+        }
 
         // CR 603.6c other players LTB triggers should work
         if (!skipTrig) {
@@ -971,13 +974,15 @@ public class GameAction {
             if (lki == null) {
                 lki = CardUtil.getLKICopy(c);
             }
-            if (game.getCombat() != null) {
-                game.getCombat().removeFromCombat(c);
-                game.getCombat().saveLKI(lki);
-            }
-            // again, make sure no triggers run from cards leaving controlled by loser
-            if (!lki.getController().equals(lki.getOwner())) {
-                game.getTriggerHandler().registerActiveLTBTrigger(lki);
+            if (lki.isInPlay()) {
+                if (game.getCombat() != null) {
+                    game.getCombat().saveLKI(lki);
+                    game.getCombat().removeFromCombat(c);
+                }
+                // again, make sure no triggers run from cards leaving controlled by loser
+                if (!lki.getController().equals(lki.getOwner())) {
+                    game.getTriggerHandler().registerActiveLTBTrigger(lki);
+                }
             }
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
             runParams.put(AbilityKey.CardLKI, lki);
