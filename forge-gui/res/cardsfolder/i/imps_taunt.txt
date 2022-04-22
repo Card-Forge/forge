@@ -2,6 +2,7 @@ Name:Imps' Taunt
 ManaCost:1 B
 Types:Instant
 K:Buyback:3
-A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | KW$ HIDDEN CARDNAME attacks each combat if able. | TgtPrompt$ Select target creature | SpellDescription$ Target creature attacks this turn if able.
+A:SP$ Animate | ValidTgts$ Creature | staticAbilities$ MustAttack | SpellDescription$ Target creature attacks this turn if able.
+SVar:MustAttack:Mode$ MustAttack | Affected$ Card.Self | Description$ This creature attacks this turn if able.
 AI:RemoveDeck:All
 Oracle:Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nTarget creature attacks this turn if able.
