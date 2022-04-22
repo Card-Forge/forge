@@ -114,7 +114,7 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        if (StaticAbilityMustAttack.mustAttackSpecific(attacker) != defender) {
+        if (!StaticAbilityMustAttack.entitiesMustAttack(attacker).contains(defender)) {
             return false;
         }
 
