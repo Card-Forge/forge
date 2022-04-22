@@ -51,11 +51,13 @@ public class AttackRequirement {
         }
 
         //MustAttack static check
-        final GameEntity e = StaticAbilityMustAttack.mustAttackSpecific(attacker);
-        if (e != null && e != attacker) {
-            defenderSpecific.add(e);
-        } else if (e == attacker) {
+        final List<GameEntity> e = StaticAbilityMustAttack.entitiesMustAttack(attacker);
+        if (e.contains(attacker)) {
             nAttackAnything++;
+        } else if (!e.isEmpty()) {
+            for (GameEntity mustAtt : e) {
+                defenderSpecific.add(mustAtt);
+            }
         }
 
         final GameEntity mustAttackThisTurn3 = attacker.getMustAttackEntityThisTurn();
