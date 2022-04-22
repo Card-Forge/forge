@@ -7,7 +7,7 @@ SVar:TrigCantBlock:DB$ Pump | ValidTgts$ Creature.OppCtrl | KW$ HIDDEN CARDNAME 
 SVar:DBEffect:DB$ Effect | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ2 | RememberObjects$ Targeted | Triggers$ MustAttackTrig | Duration$ Permanent | ExileOnMoved$ Battlefield
 SVar:MustAttackTrig:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ Player.controlsCreature.IsRemembered_GE1 | Execute$ TrigAttacks | Static$ True | TriggerDescription$ This creature attacks during its controller's next combat phase if able.
 SVar:TrigAttacks:DB$ Animate | Defined$ Remembered | staticAbilities$ MustAttack | Duration$ UntilEndOfCombat | SubAbility$ ExileSelf
-SVar:MustAttack:Mode$ MustAttack | Affected$ Card.Self | Description$ This creature attacks this turn if able.
+SVar:MustAttack:Mode$ MustAttack | Affected$ Card.Self | Description$ This creature attacks during its controller's next combat phase if able.
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 SVar:X:Count$ResolvedThisTurn
 SVar:BuffedBy:Creature
