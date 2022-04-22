@@ -1,6 +1,9 @@
 Name:Taunt
 ManaCost:U
 Types:Sorcery
-A:SP$ MustAttack | Cost$ U | ValidTgts$ Player | TgtPrompt$ Select target player | Defender$ You | SpellDescription$ During target player's next turn, creatures that player controls attack you if able.
+A:SP$ DelayedTrigger | ValidTgts$ Player | Mode$ Phase | Phase$ Upkeep-> | DelayedTriggerDefinedPlayer$ Targeted | NextTurn$ True | RememberObjects$ Targeted | Execute$ TrigEffect | Static$ True | SpellDescription$ During target player's next turn, creatures that player controls attack you if able.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ DelayTriggerRemembered | StaticAbilities$ MustAttack | SubAbility$ DBCleanup
+SVar:MustAttack:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature.RememberedPlayerCtrl | MustAttack$ You | Description$ During target player's next turn, creatures that player controls attack you if able.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 Oracle:During target player's next turn, creatures that player controls attack you if able.
