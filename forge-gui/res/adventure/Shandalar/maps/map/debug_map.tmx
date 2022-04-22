@@ -77,11 +77,11 @@
    </properties>
   </object>
   <object id="69" template="../obj/treasure.tx" x="48" y="336"/>
-  <object id="74" template="../obj/treasure.tx" x="224" y="352"/>
+  <object id="74" template="../obj/treasure.tx" x="224" y="64"/>
   <object id="70" template="../obj/booster.tx" x="32" y="336"/>
-  <object id="72" template="../obj/booster.tx" x="224" y="320"/>
+  <object id="72" template="../obj/booster.tx" x="192" y="64"/>
   <object id="71" template="../obj/gold.tx" x="48" y="352"/>
-  <object id="78" template="../obj/gate.tx" x="144" y="208" visible="0">
+  <object id="78" template="../obj/gate.tx" x="64" y="208" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -95,7 +95,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="79" template="../obj/gate.tx" x="128" y="208" visible="0">
+  <object id="79" template="../obj/gate.tx" x="128" y="208" width="32" height="16" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -121,7 +121,6 @@
     <property name="dialog">[
   {
     &quot;effect&quot;:[],
-    &quot;name&quot;:&quot;ABC&quot;,
     &quot;text&quot;:&quot;I am an elf. I do elf things like hugging trees and being pretty.&quot;,
     &quot;loctext&quot;:&quot;&quot;,
     &quot;condition&quot;:[],
@@ -130,7 +129,7 @@
       {
         &quot;name&quot;:&quot;Fight me, elf!&quot;,
         &quot;text&quot;: &quot;Gladly.&quot;,
-        &quot;options&quot;: [ { &quot;name&quot;: &quot;I FEAR NOTHING!!?&quot;, &quot;effect&quot;: [ { &quot;battleWithActorID&quot;: -1 } ]} ]
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;Hey aren't you a bit swole for an elf...?&quot;, &quot;effect&quot;: [ { &quot;battleWithActorID&quot;: -1 } ]} ]
       },
       {
         &quot;name&quot;: &quot;I want to be eco-friendly too.&quot;,
@@ -182,10 +181,35 @@
         &quot;condition&quot;: [ { &quot;actorID&quot;: 83 } ],
         &quot;text&quot;: &quot;Since you asked nicely, I shall.&quot;,
         &quot;options&quot;: [ { &quot;name&quot;: &quot;Thanks bro.&quot;, &quot;effect&quot;: [ { &quot;deleteMapObject&quot;: 83 } ]} ]
+      },
+      {
+        &quot;name&quot;: &quot;Got a quest?&quot;,
+        &quot;condition&quot;: [ { &quot;checkQuestFlag&quot;:  &quot;128&quot;, &quot;not&quot;: true} ],
+        &quot;text&quot;: &quot;Ah, perhaps you can help me. Can you ask the Debug Demon about his favorite color?&quot;,
+        &quot;options&quot;: [
+          { &quot;name&quot;: &quot;That's weird, but sure.&quot;, &quot;effect&quot;: [ { &quot;setQuestFlag&quot;:  {&quot;key&quot;:&quot;128&quot;, &quot;val&quot;: 1} } ] },
+          { &quot;name&quot;: &quot;That guy scares me, I'd rather not.&quot; }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;About that quest...&quot;,
+        &quot;condition&quot;: [ { &quot;getQuestFlag&quot;:  { &quot;key&quot;: &quot;128&quot;, &quot;op&quot;:&quot;&lt;&quot;, &quot;val&quot;: 3 } } ],
+          &quot;text&quot;: &quot;Please let me know what the Debug Demon's answer is.&quot;,
+          &quot;options&quot;: [
+            { &quot;name&quot;: &quot;Sure&quot; }
+          ]
+        },
+          {
+            &quot;name&quot;: &quot;Got it, bro.&quot;,
+            &quot;condition&quot;: [ { &quot;getQuestFlag&quot;:  { &quot;key&quot;: &quot;128&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 3 } } ],
+            &quot;text&quot;: &quot;Ah. I see. Thank you friend, have this gold for your inconvenience.&quot;,
+            &quot;options&quot;: [
+              { &quot;name&quot;: &quot;Thanks&quot;, &quot;effect&quot;: [ { &quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;128&quot;, &quot;val&quot;: 4}, &quot;addGold&quot;: 250 } ] }
+            ]
+          }
+        ]
       }
-    ]
-  }
-]</property>
+    ]</property>
     <property name="effect">{
  &quot;lifeModifier&quot;: 190,
  &quot;startBattleWithCard&quot;: [ &quot;Llanowar Elves&quot;, &quot;Llanowar Elves&quot;, &quot;Forest&quot;, &quot;Forest&quot; ]
@@ -253,6 +277,14 @@
             ]
           }
         ]
+      },
+      {
+        &quot;name&quot;: &quot;Hey what's your favorite color?&quot;,
+        &quot;condition&quot;: [ {&quot;getQuestFlag&quot;:  { &quot;key&quot;:&quot;128&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;:1 } } ],
+        &quot;text&quot;: &quot;Why, purple. It is a powerful color.&quot;,
+        &quot;options&quot;: [
+          { &quot;name&quot;:  &quot;Thank you Satan.&quot;, &quot;effect&quot;:  [ { &quot;setQuestFlag&quot;:  { &quot;key&quot;:&quot;128&quot;, &quot;val&quot;:3 } } ] }
+        ]
       }
     ]
   }
@@ -261,7 +293,7 @@
     <property name="name" value="Debug Demon"/>
    </properties>
   </object>
-  <object id="85" template="../obj/scroll.tx" x="224" y="288">
+  <object id="85" template="../obj/scroll.tx" x="208" y="96">
    <properties>
     <property name="reward">[
  { &quot;cardName&quot;: &quot;Black Lotus&quot;, &quot;type&quot;:&quot;card&quot;, &quot;count&quot;:1 }

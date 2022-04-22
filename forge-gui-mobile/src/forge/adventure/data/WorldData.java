@@ -6,10 +6,6 @@ import com.badlogic.gdx.utils.Json;
 import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
 import forge.adventure.world.BiomeSprites;
-import forge.card.ColorSet;
-import forge.deck.Deck;
-import forge.deck.DeckProxy;
-import forge.game.GameType;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -89,6 +85,5 @@ public class WorldData implements Serializable {
         }
         return biomes;
     }
-
 
 }

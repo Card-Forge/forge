@@ -1,11 +1,7 @@
 package forge.adventure.data;
 
 import forge.adventure.util.CardUtil;
-import forge.card.ColorSet;
 import forge.deck.Deck;
-import forge.deck.DeckProxy;
-import forge.game.GameType;
-import forge.model.FModel;
 
 /**
  * Data class that will be used to read Json configuration files

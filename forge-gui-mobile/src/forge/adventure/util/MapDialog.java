@@ -84,10 +84,10 @@ public class MapDialog {
     void setEffects(DialogData.ActionData[] data) {
         if(data==null) return;
         for(DialogData.ActionData E:data) {
-            if (E.removeItem != null){ //Removes an item from the player's inventory.
+            if(E.removeItem != null){ //Removes an item from the player's inventory.
                 Current.player().removeItem(E.removeItem);
             }
-            if (E.addItem != null){ //Gives an item to the player.
+            if(E.addItem != null){ //Gives an item to the player.
                 Current.player().addItem(E.addItem);
             }
             if(E.addLife != 0){ //Gives (positive or negative) life to the player. Cannot go over max health.
@@ -97,23 +97,28 @@ public class MapDialog {
                 if(E.addGold > 0) Current.player().giveGold(E.addGold);
                 else               Current.player().takeGold(-E.addGold);
             }
-            if (E.deleteMapObject != 0){ //Removes a dummy object from the map.
+            if(E.deleteMapObject != 0){ //Removes a dummy object from the map.
                 if(E.deleteMapObject < 0) stage.deleteObject(parentID);
                 else stage.deleteObject(E.deleteMapObject);
             }
-            if (E.battleWithActorID != 0){ //Starts a battle with the given enemy ID.
+            if(E.battleWithActorID != 0){ //Starts a battle with the given enemy ID.
                 if(E.battleWithActorID < 0) stage.beginDuel(stage.getEnemyByID(parentID));
                 else stage.beginDuel(stage.getEnemyByID(E.battleWithActorID));
             }
-            if (E.giveBlessing != null) { //Gives a blessing for your next battle.
+            if(E.giveBlessing != null) { //Gives a blessing for your next battle.
                 Current.player().addBlessing(E.giveBlessing);
             }
-            if (E.setColorIdentity != null && !E.setColorIdentity.isEmpty()){ //Sets color identity (use sparingly)
+            if(E.setColorIdentity != null && !E.setColorIdentity.isEmpty()){ //Sets color identity (use sparingly)
                 Current.player().setColorIdentity(E.setColorIdentity);
             }
             //Create map object.
             //Toggle dummy object's hitbox. (Like to make a door passable)
-            //Set world flag.
+            if(E.setQuestFlag != null && !E.setQuestFlag.key.isEmpty()){ //Set a quest to given value.
+                Current.player().setQuestFlag(E.setQuestFlag.key, E.setQuestFlag.val);
+            }
+            if(E.advanceQuestFlag != null && !E.advanceQuestFlag.isEmpty()){ //Increase a given quest flag by 1.
+                Current.player().advanceQuestFlag(E.advanceQuestFlag);
+            }
             //Set dungeon flag.
         }
     }
@@ -150,6 +155,32 @@ public class MapDialog {
             if(condition.actorID != 0) { //Check for actor ID.
                 if(!stage.lookForID(condition.actorID)){
                     if(!condition.not) return false; //Same as above.
+                } else if(condition.not) return false;
+            }
+            if(condition.getQuestFlag != null){
+                String key = condition.getQuestFlag.key;
+                String cond = condition.getQuestFlag.op;
+
+                int val = condition.getQuestFlag.val;
+                int QF = player.getQuestFlag(key);
+                boolean result = false;
+                if(!player.checkQuestFlag(key)) return false; //If the quest is not ongoing, stop.
+
+
+                switch(cond){
+                    default: case "EQUALS": case"EQUAL": case "=":
+                        if(QF == val) result = true; break;
+                    case "LESSTHAN": case "<":  if(QF < val) result = true; break;
+                    case "MORETHAN": case ">":  if(QF > val) result = true; break;
+                    case "LE_THAN": case "<=":  if(QF <= val) result = true; break;
+                    case "ME_THAN": case ">=":  if(QF >= val) result = true; break;
+                }
+                if(!result) { if(!condition.not) return false; }
+                else { if(condition.not) return false; }
+            }
+            if(condition.checkQuestFlag != null && !condition.checkQuestFlag.isEmpty()){
+                if(!player.checkQuestFlag(condition.checkQuestFlag)){
+                    if(!condition.not) return false;
                 } else if(condition.not) return false;
             }
         }

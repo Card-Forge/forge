@@ -319,6 +319,7 @@ public class MapStage extends GameStage {
                                 mob.effect = JSONStringLoader.parse(EffectData.class, D.toString(), "");
                             }
                             //TODO: Additional rewards.
+                            //TODO: Filter by difficulty. (Don't spawn if doesn't match)
                             addMapActor(obj, mob);
                         }
                         break;

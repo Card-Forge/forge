@@ -6,7 +6,6 @@ import forge.StaticData;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.WorldData;
 import forge.adventure.pointofintrest.PointOfInterest;
-import forge.adventure.scene.InventoryScene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.util.Current;
 import forge.card.ColorSet;
@@ -179,6 +178,10 @@ public class ConsoleCommandInterpreter {
             SceneType.PlayerStatisticScene.instance.resLoaded();
 
             return "Force reload status scenes. Might be unstable.";
+        });
+        registerCommand(new String[]{"resetQuests"}, s -> {
+            Current.player().resetQuestFlags();
+            return "All global quest flags have been reset.";
         });
         registerCommand(new String[]{"dumpEnemyDeckColors"}, s -> {
             for(EnemyData E : new Array.ArrayIterator<>(WorldData.getAllEnemies())){

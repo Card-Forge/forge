@@ -5,10 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.google.common.collect.Lists;
-import forge.adventure.data.DifficultyData;
-import forge.adventure.data.EffectData;
-import forge.adventure.data.HeroListData;
-import forge.adventure.data.ItemData;
+import forge.adventure.data.*;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.deck.CardPool;
@@ -40,8 +37,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private int maxLife=20;
     private int life=20;
     private int selectedDeckIndex=0;
+    private Map<String, Byte> questFlags = new HashMap<>();
     private EffectData blessing; //Blessing to apply for next battle.
-    private PlayerStatistic statistic=new PlayerStatistic();
+    private PlayerStatistic statistic = new PlayerStatistic();
     private Deck[] decks=new Deck[NUMBER_OF_DECKS];
     private final DifficultyData difficultyData=new DifficultyData();
 
@@ -83,13 +81,14 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         heroRace = race;
         isFemale = !male;
         name = n;
-        setColorIdentity(startingColorIdentity + 1);
+        setColorIdentity(startingColorIdentity + 1); //+1 because index 0 is colorless.
         statistic.clear();
         newCards.clear();
         onGoldChangeList.emit();
         onLifeTotalChangeList.emit();
         blessing = null;
         inventoryItems.addAll(difficultyData.startItems);
+        questFlags.clear();
     }
 
     public void setSelectedDeckSlot(int slot) {
@@ -198,19 +197,16 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if(data.containsKey("blessing")) blessing = (EffectData)data.readObject("blessing");
         inventoryItems.clear();
         equippedItems.clear();
-        if(data.containsKey("inventory"))
-        {
+        if(data.containsKey("inventory")) {
             String[] inv=(String[])data.readObject("inventory");
             inventoryItems.addAll(inv);
         }
-        if(data.containsKey("equippedSlots")&&data.containsKey("equippedItems"))
-        {
+        if(data.containsKey("equippedSlots") && data.containsKey("equippedItems")) {
             String[] slots=(String[])data.readObject("equippedSlots");
             String[] items=(String[])data.readObject("equippedItems");
 
             assert(slots.length==items.length);
-            for(int i=0;i<slots.length;i++)
-            {
+            for(int i=0;i<slots.length;i++) {
                 equippedItems.put(slots[i],items[i]);
             }
         }
@@ -219,10 +215,18 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if(data.containsKey("sideBoardCards"))
             deck.getOrCreate(DeckSection.Sideboard).addAll(CardPool.fromCardList(Lists.newArrayList((String[])data.readObject("sideBoardCards"))));
 
-        for(int i=0;i<NUMBER_OF_DECKS;i++)
-        {
-            if(!data.containsKey("deck_name_"+i))
-            {
+        questFlags.clear();
+        if(data.containsKey("questFlagsKey") && data.containsKey("questFlagsValue")){
+            String[] keys = (String[]) data.readObject("questFlagsKey");
+            Byte[] values = (Byte[]) data.readObject("questFlagsValue");
+            assert( keys.length == values.length );
+            for( int i = 0; i < keys.length; i++){
+                questFlags.put(keys[i], values[i]);
+            }
+        }
+
+        for(int i=0;i<NUMBER_OF_DECKS;i++) {
+            if(!data.containsKey("deck_name_"+i)) {
                 if(i==0)
                     decks[i]=deck;
                 else
@@ -282,6 +286,15 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.storeObject("equippedSlots",slots.toArray(new String[0]));
         data.storeObject("equippedItems",items.toArray(new String[0]));
 
+        //Save quest flags.
+        ArrayList<String> questFlagsKey = new ArrayList<>();
+        ArrayList<Byte> questFlagsValue  = new ArrayList<>();
+        for(Map.Entry<String, Byte> entry : questFlags.entrySet()){
+            questFlagsKey.add(entry.getKey());
+            questFlagsValue.add(entry.getValue());
+        }
+        data.storeObject("questFlagsKey", questFlagsKey.toArray(new String[0]));
+        data.storeObject("questFlagsValue", questFlagsValue.toArray(new Byte[0]));
 
         data.storeObject("deckCards",deck.getMain().toCardList("\n").split("\n"));
         if(deck.get(DeckSection.Sideboard)!=null)
@@ -415,7 +428,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         onBlessing.emit();
     }
 
-    public void clearBlessing() { blessing = null; }
+    public void clearBlessing() {
+        blessing = null;
+        onBlessing.emit();
+    }
 
     public @Null EffectData getBlessing(){ return blessing; }
 
@@ -516,5 +532,25 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             return false;
         inventoryItems.add(name);
         return true;
+    }
+
+    public void setQuestFlag(String key, int value){
+        questFlags.put(key, (byte) value);
+    }
+    public void advanceQuestFlag(String key){
+        if(questFlags.get(key) != null){
+            questFlags.put(key, (byte) (questFlags.get(key) + 1));
+        } else {
+            questFlags.put(key, (byte) 1);
+        }
+    }
+    public boolean checkQuestFlag(String key){
+        return questFlags.get(key) != null;
+    }
+    public int getQuestFlag(String key){
+        return (int) questFlags.getOrDefault(key, (byte) 0);
+    }
+    public void resetQuestFlags(){
+        questFlags.clear();
     }
 }
