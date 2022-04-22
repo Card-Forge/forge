@@ -35,7 +35,7 @@ public class DiscardEffect extends SpellAbilityEffect {
         final String mode = sa.getParam("Mode");
         final StringBuilder sb = new StringBuilder();
 
-        final Iterable<Player> tgtPlayers = Iterables.filter(getTargetPlayers(sa), PlayerPredicates.canDiscardBy(sa, true));
+        final Iterable<Player> tgtPlayers = getTargetPlayers(sa).filter(PlayerPredicates.canDiscardBy(sa, true));
 
         if (!Iterables.isEmpty(tgtPlayers)) {
             sb.append(Lang.joinHomogenous(tgtPlayers)).append(" ");
