@@ -1,0 +1,10 @@
+Name:Angelic Sleuth
+ManaCost:2 W
+Types:Creature Angel Advisor
+PT:2/3
+K:Flying
+
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Permanent.YouCtrl+Other+HasCounters | TriggerZones$ Battlefield | Execute$ TrigInvestigate | TriggerDescription$ Whenever another permanent you control leaves the battlefield, if it had counters on it, investigate.
+SVar:TrigInvestigate:DB$ Investigate
+
+Oracle:Flying\nWhenever another permanent you control leaves the battlefield, if it had counters on it, investigate.
