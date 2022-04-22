@@ -1,14 +1,23 @@
 package forge.ai.simulation;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+
 import forge.GuiDesktop;
 import forge.StaticData;
 import forge.ai.AIOption;
 import forge.ai.LobbyPlayerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.deck.Deck;
-import forge.game.*;
+import forge.game.Game;
+import forge.game.GameRules;
+import forge.game.GameStage;
+import forge.game.GameType;
+import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
@@ -20,20 +29,15 @@ import forge.item.IPaperCard;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import junit.framework.TestCase;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-public class SimulationTestCase extends TestCase {
+public class SimulationTest {
     private static boolean initialized = false;
 
     protected Game initAndCreateGame() {
 
         if (!initialized) {
             GuiBase.setInterface(new GuiDesktop());
-            FModel.initialize(null, new Function<ForgePreferences, Void>()  {
+            FModel.initialize(null, new Function<ForgePreferences, Void>() {
                 @Override
                 public Void apply(ForgePreferences preferences) {
                     preferences.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
@@ -86,7 +90,7 @@ public class SimulationTestCase extends TestCase {
         }
         return null;
     }
-    
+
     protected String gameStateToString(Game game) {
         StringBuilder sb = new StringBuilder();
         for (ZoneType zone : ZoneType.values()) {
@@ -104,7 +108,7 @@ public class SimulationTestCase extends TestCase {
     protected SpellAbility findSAWithPrefix(Card c, String prefix) {
         return findSAWithPrefix(c.getSpellAbilities(), prefix);
     }
-    
+
     protected SpellAbility findSAWithPrefix(Iterable<SpellAbility> abilities, String prefix) {
         for (SpellAbility sa : abilities) {
             if (sa.getDescription().startsWith(prefix)) {
