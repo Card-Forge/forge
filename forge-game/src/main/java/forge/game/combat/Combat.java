@@ -295,6 +295,9 @@ public class Combat {
 
     // takes LKI into consideration, should use it at all times (though a single iteration over multimap seems faster)
     public final AttackingBand getBandOfAttacker(final Card c) {
+        if (c == null) {
+            return null;
+        }
         for (AttackingBand ab : attackedByBands.values()) {
             if (ab.contains(c)) {
                 return ab;
