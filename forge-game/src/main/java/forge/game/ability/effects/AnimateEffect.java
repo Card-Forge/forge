@@ -205,6 +205,27 @@ public class AnimateEffect extends AnimateEffectBase {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final Card host = sa.getHostCard();
+        final StringBuilder sb = new StringBuilder();
+        final List<Card> tgts = getCardsfromTargets(sa);
+        final boolean justOne = tgts.size() == 1;
+
+        if (sa.hasParam("IfDesc")) {
+            if (sa.getParam("IfDesc").equals("True") && sa.hasParam("SpellDescription")) {
+                String ifDesc = sa.getParam("SpellDescription");
+                sb.append(ifDesc, 0, ifDesc.indexOf(",") + 1);
+            } else {
+                tokenizeString(sa, sb, sa.getParam("IfDesc"));
+            }
+            sb.append(" ");
+        }
+
+        sb.append(sa.hasParam("DefinedDesc") ? sa.getParam("DefinedDesc") : Lang.joinHomogenous(tgts));
+        sb.append(" ");
+
+        if (sa.getParam("staticAbilities").contains("MustAttack")) {
+            sb.append(justOne ? "attacks" : "attack").append(" this turn if able.");
+            return sb.toString();
+        }
 
         Integer power = null;
         if (sa.hasParam("Power")) {
@@ -236,23 +257,6 @@ public class AnimateEffect extends AnimateEffectBase {
         if (sa.hasParam("Colors")) {
             colors.addAll(Arrays.asList(sa.getParam("Colors").split(",")));
         }
-
-        final StringBuilder sb = new StringBuilder();
-
-        final List<Card> tgts = getCardsfromTargets(sa);
-        final boolean justOne = tgts.size() == 1;
-
-        if (sa.hasParam("IfDesc")) {
-            if (sa.getParam("IfDesc").equals("True") && sa.hasParam("SpellDescription")) {
-                String ifDesc = sa.getParam("SpellDescription");
-                sb.append(ifDesc, 0, ifDesc.indexOf(",") + 1);
-            } else {
-                sb.append(sa.getParam("IfDesc"));
-            }
-            sb.append(" ");
-        }
-
-        sb.append(Lang.joinHomogenous(tgts)).append(" ");
 
         // if power is -1, we'll assume it's not just setting toughness
         if (power != null || toughness != null) {
