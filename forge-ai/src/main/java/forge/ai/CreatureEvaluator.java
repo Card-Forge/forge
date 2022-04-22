@@ -12,6 +12,8 @@ import forge.game.keyword.Keyword;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityMustAttack;
 
+import java.util.List;
+
 public class CreatureEvaluator implements Function<Card, Integer> {
     @Override
     public Integer apply(Card c) {
@@ -177,10 +179,10 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         } else if (c.hasKeyword("CARDNAME can't block.")) {
             value -= subValue(10, "cant-block");
         } else {
-            GameEntity mAEnt = StaticAbilityMustAttack.mustAttackSpecific(c);
-            if (mAEnt == c) {
+            List<GameEntity> mAEnt = StaticAbilityMustAttack.entitiesMustAttack(c);
+            if (mAEnt.contains(c)) {
                 value -= subValue(10, "must-attack");
-            } else if (mAEnt != null) {
+            } else if (!mAEnt.isEmpty()) {
                 value -= subValue(10, "must-attack-player");
             }/* else if (c.hasKeyword("CARDNAME can block only creatures with flying.")) {
             value -= subValue(toughness * 5, "reverse-reach");
