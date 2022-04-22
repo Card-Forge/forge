@@ -17,6 +17,7 @@
  */
 package forge.game.ability;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -329,9 +330,16 @@ public final class AbilityFactory {
         final String max = mapParams.containsKey("TargetMax") ? mapParams.get("TargetMax") : "1";
 
         // TgtPrompt should only be needed for more complicated ValidTgts
-        final String prompt = mapParams.containsKey("TgtPrompt") ? mapParams.get("TgtPrompt") : "Select target " +
-                (CardType.CoreType.isValidEnum(mapParams.get("ValidTgts")) ? mapParams.get("ValidTgts").toLowerCase() :
-                        mapParams.get("ValidTgts"));
+        String tgtWhat = mapParams.get("ValidTgts");
+        final String[] commonStuff = new String[] {
+                //list of common one word non-core type ValidTgts that should be lowercase in the target prompt
+                "Player", "Opponent"
+        };
+        if (Arrays.asList(commonStuff).contains(tgtWhat) || CardType.CoreType.isValidEnum(tgtWhat)) {
+            tgtWhat = tgtWhat.toLowerCase();
+        }
+        final String prompt = mapParams.containsKey("TgtPrompt") ? mapParams.get("TgtPrompt") :
+                "Select target " + tgtWhat;
 
         TargetRestrictions abTgt = new TargetRestrictions(prompt, mapParams.get("ValidTgts").split(","), min, max);
 

@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Enchantment Saga
 K:Saga:3:DBDestroy,DBDiscard,DBExile
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl+powerLE2 | TgtPrompt$ Select target creature an opponent controls with power 2 or less | SpellDescription$ Destroy target creature an opponent controls with power 2 or less.
-SVar:DBDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 1 | DiscardValid$ Card.nonCreature+nonLand | Mode$ RevealYouChoose | SpellDescription$ Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card.
+SVar:DBDiscard:DB$ Discard | ValidTgts$ Opponent | DiscardValid$ Card.nonCreature+nonLand | DiscardValidDesc$ noncreature, nonland | Mode$ RevealYouChoose | SpellDescription$ Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card.
 SVar:DBExile:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | IsCurse$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SpellDescription$ Exile target opponent's graveyard.
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Destroy target creature an opponent controls with power 2 or less.\nII — Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card.\nIII — Exile target opponent's graveyard.

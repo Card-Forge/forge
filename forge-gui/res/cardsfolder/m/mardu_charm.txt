@@ -6,5 +6,5 @@ SVar:DealDmg:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ 4 | SpellDescription
 SVar:Warrior:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_warrior | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBPumpFirstStrike | SpellDescription$ Create two 1/1 white Warrior creature tokens. They gain first strike until end of turn.
 SVar:DBPumpFirstStrike:DB$ PumpAll | ValidCards$ Creature.IsRemembered | KW$ First Strike | SubAbility$ DBCleanUp
 SVar:DBCleanUp:DB$ Cleanup | ClearRemembered$ True
-SVar:DBDiscard:DB$ Discard | ValidTgts$ Opponent | Mode$ RevealYouChoose | DiscardValid$ Card.nonCreature+nonLand | NumCards$ 1 | SpellDescription$ Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card.
+SVar:DBDiscard:DB$ Discard | ValidTgts$ Opponent | Mode$ RevealYouChoose | DiscardValid$ Card.nonCreature+nonLand | DiscardValidDesc$ noncreature, nonland | SpellDescription$ Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card.
 Oracle:Choose one —\n• Mardu Charm deals 4 damage to target creature.\n• Create two 1/1 white Warrior creature tokens. They gain first strike until end of turn.\n• Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card.

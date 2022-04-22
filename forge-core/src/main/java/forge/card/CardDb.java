@@ -872,6 +872,23 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }));
     }
 
+    public Collection<PaperCard> getUniqueCardsNoAltNoOnline() {
+        return Lists.newArrayList(Iterables.filter(getUniqueCardsNoAlt(), new Predicate<PaperCard>() {
+            @Override
+            public boolean apply(final PaperCard paperCard) {
+                CardEdition edition = null;
+                try {
+                    edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
+                    if (edition.getType() == Type.ONLINE||edition.getType() == Type.FUNNY)
+                        return false;
+                } catch (Exception ex) {
+                    return false;
+                }
+                return true;
+            }
+        }));
+    }
+
     public Collection<PaperCard> getAllNonPromosNonReprintsNoAlt() {
         return Lists.newArrayList(Iterables.filter(getAllCardsNoAlt(), new Predicate<PaperCard>() {
             @Override

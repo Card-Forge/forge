@@ -7,6 +7,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
@@ -36,43 +37,63 @@ public class DiscardEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
 
         final Iterable<Player> tgtPlayers = getTargetPlayers(sa).filter(PlayerPredicates.canDiscardBy(sa, true));
+        final StringBuilder sb = new StringBuilder();
 
-        if (!Iterables.isEmpty(tgtPlayers)) {
-            sb.append(Lang.joinHomogenous(tgtPlayers)).append(" ");
+        if (!tgtPlayers.isEmpty()) {
+            final String tgtPs = Lang.joinHomogenous(tgtPlayers);
+            final String mode = sa.getParam("Mode");
+            final boolean revealYouChoose = mode.equals("RevealYouChoose");
+            final boolean revealDiscardAll = mode.equals("RevealDiscardAll");
+            final Player you = sa.getActivatingPlayer();
+            final boolean oneTgtP = tgtPlayers.size() == 1;
 
-            if (mode.equals("RevealYouChoose")) {
-                sb.append("reveals their hand.").append("  You choose (");
-            } else if (mode.equals("RevealDiscardAll")) {
-                sb.append("reveals their hand. Discard (");
+            sb.append(tgtPs).append(" ");
+
+            if (revealYouChoose) {
+                sb.append(oneTgtP ? "reveals their hand. " : "reveal their hands. ");
+                sb.append(you).append(" chooses ");
+            } else if (revealDiscardAll) {
+                sb.append(oneTgtP ? "reveals their hand. " : "reveal their hands. ");
+                sb.append("They discard ");
             } else {
-                sb.append("discards ");
+                sb.append(oneTgtP ? "discards " : "discard ");
             }
 
-            int numCards = 1;
-            if (sa.hasParam("NumCards")) {
-                numCards = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
+            int numCards = sa.hasParam("NumCards") ?
+                    AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
+            final boolean oneCard = numCards == 1 && oneTgtP;
+
+            String valid = oneCard ? "card" : "cards";
+            if (sa.hasParam("DiscardValid")) {
+                String validD = sa.hasParam("DiscardValidDesc") ? sa.getParam("DiscardValidDesc")
+                        : sa.getParam("DiscardValid");
+                if (validD.equals("card.nonLand")) {
+                    validD = "nonland";
+                } else if (CardType.CoreType.isValidEnum(validD)) {
+                    validD = validD.toLowerCase();
+                }
+                valid = validD.contains(" card") ?
+                        (oneCard ? validD : validD.replace(" card", " cards")) : validD + " " + valid;
             }
 
             if (mode.equals("Hand")) {
-                sb.append("their hand");
-            } else if (mode.equals("RevealDiscardAll")) {
-                sb.append("All");
+                sb.append(oneTgtP ? "their hand" : "their hands");
+            } else if (revealDiscardAll) {
+                sb.append("all");
             } else if (sa.hasParam("AnyNumber")) {
                 sb.append("any number");
             } else if (sa.hasParam("NumCards") && sa.getParam("NumCards").equals("X")
                     && sa.getSVar("X").equals("Remembered$Amount")) {
                 sb.append("that many");
             } else {
-                sb.append(numCards == 1 ? "a card" : (Lang.getNumeral(numCards) + " cards"));
+                sb.append(Lang.nounWithNumeralExceptOne(numCards, valid));
             }
 
-            if (mode.equals("RevealYouChoose")) {
-                sb.append(" to discard");
-            } else if (mode.equals("RevealDiscardAll")) {
-                String valid = sa.getParam("DiscardValid");
-                if (valid == null) {
-                    valid = "Card";
-                }
+            if (revealYouChoose) {
+                sb.append(valid.contains(" from ") ? ". " : (oneTgtP ? " from it. " : " from them. ")).append(tgtPs);
+                sb.append(oneTgtP ? " discards " : " discard ");
+                sb.append(oneCard ? "that card" : "those cards");
+            } else if (revealDiscardAll) {
                 sb.append(" of type: ").append(valid);
             }
 

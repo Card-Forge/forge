@@ -1,0 +1,7 @@
+Name:Take to the Streets
+ManaCost:4 G
+Types:Sorcery
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 2 | NumDef$ 2 | SubAbility$ DBPumpCitizens | SpellDescription$ Creatures you control get +2/+2 until end of turn. Citizens you control get an additional +1/+1 and gain vigilance until end of turn.
+SVar:DBPumpCitizens:DB$ PumpAll | ValidCards$ Creature.Citizen+YouCtrl | NumAtt$ 1 | NumDef$ 1 | KW$ Vigilance
+DeckHints:Type$Citizen
+Oracle:Creatures you control get +2/+2 until end of turn. Citizens you control get an additional +1/+1 and gain vigilance until end of turn.

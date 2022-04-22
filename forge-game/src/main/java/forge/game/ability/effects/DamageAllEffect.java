@@ -11,6 +11,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardDamageMap;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -30,7 +31,7 @@ public class DamageAllEffect extends DamageBaseEffect {
         final String definedStr = sa.getParam("DamageSource");
         final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getHostCard(), definedStr, sa);
 
-        if (!definedSources.isEmpty() && definedSources.get(0) != sa.getHostCard()) {
+        if (!definedSources.isEmpty() && (definedSources.get(0) != sa.getHostCard() || sa instanceof AbilitySub)) {
             sb.append(definedSources.get(0).toString()).append(" deals");
         } else if ("ParentTarget".equals(definedStr)) {
             sb.append("Target creature deals");

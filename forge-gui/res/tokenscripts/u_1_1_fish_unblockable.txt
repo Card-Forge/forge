@@ -1,0 +1,7 @@
+Name:Fish Token
+ManaCost:no cost
+Types:Creature Fish
+Colors:blue
+PT:1/1
+K:Unblockable
+Oracle:This creature can't be blocked.
