@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Goblin Berserker
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste and attack each combat if able.
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME attacks each combat if able.
+S:Mode$ MustAttack | Affected$ Creature.YouCtrl | Secondary$ True
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Creature
 Oracle:Creatures you control have haste and attack each combat if able.
