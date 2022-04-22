@@ -3,6 +3,6 @@ ManaCost:1 R
 Types:Creature Goblin
 PT:2/1
 A:AB$ Effect | Cost$ T | StaticAbilities$ MustAttack | SpellDescription$ Each creature attacks this turn if able.
-SVar:MustAttack:Mode$ MustAttack | EffectZone$ Command | Affected$ Creature | Description$ Each creature attacks this turn if able.
+SVar:MustAttack:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature | Description$ Each creature attacks this turn if able.
 AI:RemoveDeck:All
 Oracle:{T}: Each creature attacks this turn if able.
