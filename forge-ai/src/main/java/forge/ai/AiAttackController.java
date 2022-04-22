@@ -799,9 +799,10 @@ public class AiAttackController {
                     //TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
                     mustAttack = true;
                 } else {
-                    final GameEntity e = StaticAbilityMustAttack.mustAttackSpecific(attacker);
-                    if (e != null) {
+                    final List<GameEntity> e = StaticAbilityMustAttack.entitiesMustAttack(attacker);
+                    if (!e.isEmpty()) {
                         mustAttack = true;
+                        // TODO switch defender if there's one without a cost or it's not the specific player
                     } else if (attacker.getController().getMustAttackEntityThisTurn() != null &&
                             CombatUtil.getAttackCost(ai.getGame(), attacker, defender) == null) {
                         mustAttack = true;
