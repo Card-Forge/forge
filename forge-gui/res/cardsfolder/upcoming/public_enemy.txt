@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ MustAttack | Affected$ Creature | MustAttack$ EnchantedController | Description$ All creatures attack enchanted creature's controller each combat if able.
+S:Mode$ MustAttack | ValidCreature$ Creature | MustAttack$ EnchantedController | Description$ All creatures attack enchanted creature's controller each combat if able.
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDraw | TriggerDescription$ When enchanted creature dies, draw a card.
 SVar:TrigDraw:DB$ Draw
 Oracle:Enchant creature\nAll creatures attack enchanted creature's controller each combat if able.\nWhen enchanted creature dies, draw a card.
