@@ -173,6 +173,11 @@ public class ConsoleCommandInterpreter {
             Current.player().fullHeal();
             return "Player life back to "+Current.player().getLife();
         });
+        registerCommand(new String[]{"setColorID"}, s -> {
+            if(s.length < 1) return "Please specify color ID: Valid choices: B, G, R, U, W, C. Example:\n\"setColorID G\"";
+            Current.player().setColorIdentity(s[0]);
+            return "Player color identity set to " + Current.player().getColorIdentity();
+        });
         registerCommand(new String[]{"reloadScenes"}, s -> {
             SceneType.InventoryScene.instance.resLoaded();
             SceneType.PlayerStatisticScene.instance.resLoaded();
