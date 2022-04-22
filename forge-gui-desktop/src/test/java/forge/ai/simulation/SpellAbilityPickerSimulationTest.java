@@ -2,6 +2,9 @@ package forge.ai.simulation;
 
 import java.util.List;
 
+import org.testng.AssertJUnit;
+import org.testng.annotations.Test;
+
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
@@ -11,18 +14,19 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-public class SpellAbilityPickerTest extends SimulationTestCase {
+public class SpellAbilityPickerSimulationTest extends SimulationTest {
+    @Test
     public void testPickingLethalDamage() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         p.setTeam(0);
-        
+
         addCard("Mountain", p);
         addCardToZone("Shock", p, ZoneType.Hand);
 
         Player opponent = game.getPlayers().get(0);
         opponent.setTeam(1);
-        
+
         addCard("Runeclaw Bear", opponent);
         opponent.setLife(2, null);
 
@@ -31,11 +35,12 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
 
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
-        assertNotNull(sa);
-        assertNull(sa.getTargetCard());
-        assertEquals(opponent, sa.getTargets().getFirstTargetedPlayer());
+        AssertJUnit.assertNotNull(sa);
+        AssertJUnit.assertNull(sa.getTargetCard());
+        AssertJUnit.assertEquals(opponent, sa.getTargets().getFirstTargetedPlayer());
     }
 
+    @Test
     public void testPickingKillingCreature() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
@@ -52,11 +57,12 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
 
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
-        assertNotNull(sa);
-        assertEquals(bearCard, sa.getTargetCard());
-        assertNull(sa.getTargets().getFirstTargetedPlayer());
+        AssertJUnit.assertNotNull(sa);
+        AssertJUnit.assertEquals(bearCard, sa.getTargetCard());
+        AssertJUnit.assertNull(sa.getTargets().getFirstTargetedPlayer());
     }
 
+    @Test
     public void testSequenceStartingWithPlayingLand() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
@@ -73,16 +79,17 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
 
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
-        //assertEquals(game.PLAY_LAND_SURROGATE, sa);
-        assertEquals(mountain, sa.getHostCard());
+        // assertEquals(game.PLAY_LAND_SURROGATE, sa);
+        AssertJUnit.assertEquals(mountain, sa.getHostCard());
 
         Plan plan = picker.getPlan();
-        assertEquals(2, plan.getDecisions().size());
-        assertEquals("Play land Mountain", plan.getDecisions().get(0).saRef.toString());
-        assertEquals("Shock deals 2 damage to any target.", plan.getDecisions().get(1).saRef.toString());
-        assertTrue(plan.getDecisions().get(1).targets.toString().contains("Runeclaw Bear"));
+        AssertJUnit.assertEquals(2, plan.getDecisions().size());
+        AssertJUnit.assertEquals("Play land Mountain", plan.getDecisions().get(0).saRef.toString());
+        AssertJUnit.assertEquals("Shock deals 2 damage to any target.", plan.getDecisions().get(1).saRef.toString());
+        AssertJUnit.assertTrue(plan.getDecisions().get(1).targets.toString().contains("Runeclaw Bear"));
     }
 
+    @Test
     public void testModeSelection() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
@@ -101,10 +108,12 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         // Expected: All creatures get -2/-2 to kill the bear.
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
-        assertEquals(spell.getSpellAbilities().get(0), sa);
-        assertEquals("Dromar's Charm -> Target creature gets -2/-2 until end of turn.", picker.getPlan().getDecisions().get(0).modesStr);
+        AssertJUnit.assertEquals(spell.getSpellAbilities().get(0), sa);
+        AssertJUnit.assertEquals("Dromar's Charm -> Target creature gets -2/-2 until end of turn.",
+                picker.getPlan().getDecisions().get(0).modesStr);
     }
 
+    @Test
     public void testModeSelection2() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
@@ -120,10 +129,11 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         // Expected: Gain 5 life, since other modes aren't helpful.
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
-        assertEquals(spell.getSpellAbilities().get(0), sa);
-        assertEquals("Dromar's Charm -> You gain 5 life.", picker.getPlan().getDecisions().get(0).modesStr);
+        AssertJUnit.assertEquals(spell.getSpellAbilities().get(0), sa);
+        AssertJUnit.assertEquals("Dromar's Charm -> You gain 5 life.", picker.getPlan().getDecisions().get(0).modesStr);
     }
 
+    @Test
     public void testMultipleModes() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
@@ -144,14 +154,15 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         // Expected: 2x 1 damage to each creature, 1x 2 damage to each opponent.
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
-        assertEquals(spell.getSpellAbilities().get(0), sa);
+        AssertJUnit.assertEquals(spell.getSpellAbilities().get(0), sa);
 
         String dmgCreaturesStr = "Fiery Confluence deals 1 damage to each creature.";
         String dmgOppStr = "Fiery Confluence deals 2 damage to each opponent.";
         String expected = "Fiery Confluence -> " + dmgCreaturesStr + " " + dmgCreaturesStr + " " + dmgOppStr;
-        assertEquals(expected, picker.getPlan().getDecisions().get(0).modesStr);
+        AssertJUnit.assertEquals(expected, picker.getPlan().getDecisions().get(0).modesStr);
     }
 
+    @Test
     public void testMultipleModes2() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
@@ -172,13 +183,14 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         // Expected: 3x 2 damage to each opponent.
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
-        assertEquals(spell.getSpellAbilities().get(0), sa);
+        AssertJUnit.assertEquals(spell.getSpellAbilities().get(0), sa);
 
         String dmgOppStr = "Fiery Confluence deals 2 damage to each opponent.";
         String expected = "Fiery Confluence -> " + dmgOppStr + " " + dmgOppStr + " " + dmgOppStr;
-        assertEquals(expected, picker.getPlan().getDecisions().get(0).modesStr);
+        AssertJUnit.assertEquals(expected, picker.getPlan().getDecisions().get(0).modesStr);
     }
 
+    @Test
     public void testMultipleTargets() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
@@ -197,14 +209,15 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
 
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
-        assertEquals(spell.getSpellAbilities().get(0), sa);
-        assertEquals(bear, sa.getTargetCard());
-        assertEquals("2", sa.getParam("NumDmg"));
+        AssertJUnit.assertEquals(spell.getSpellAbilities().get(0), sa);
+        AssertJUnit.assertEquals(bear, sa.getTargetCard());
+        AssertJUnit.assertEquals("2", sa.getParam("NumDmg"));
         SpellAbility subSa = sa.getSubAbility();
-        assertEquals(men, subSa.getTargetCard());
-        assertEquals("1", subSa.getParam("NumDmg"));
+        AssertJUnit.assertEquals(men, subSa.getTargetCard());
+        AssertJUnit.assertEquals("1", subSa.getParam("NumDmg"));
     }
 
+    @Test
     public void testLandSearchForCombo() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
@@ -224,22 +237,23 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        assertEquals(10, darkDepths.getCounters(CounterEnumType.ICE));
+        AssertJUnit.assertEquals(10, darkDepths.getCounters(CounterEnumType.ICE));
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
-        assertEquals(cropRotation.getSpellAbilities().get(0), sa);
+        AssertJUnit.assertEquals(cropRotation.getSpellAbilities().get(0), sa);
         // Expected: Sac a Forest to get an Urborg.
         List<String> choices = picker.getPlan().getDecisions().get(0).choices;
-        assertEquals(2, choices.size());
-        assertEquals("Forest", choices.get(0));
-        assertEquals("Urborg, Tomb of Yawgmoth", choices.get(1));
+        AssertJUnit.assertEquals(2, choices.size());
+        AssertJUnit.assertEquals("Forest", choices.get(0));
+        AssertJUnit.assertEquals("Urborg, Tomb of Yawgmoth", choices.get(1));
         // Next, expected to use Thespian's Stage to copy Dark Depths.
         Plan.Decision d2 = picker.getPlan().getDecisions().get(1);
         String expected = "{2}, {T}: Thespian's Stage becomes a copy of target land, except it has this ability.";
-        assertEquals(expected, d2.saRef.toString());
-        assertTrue(d2.targets.toString().contains("Dark Depths"));
+        AssertJUnit.assertEquals(expected, d2.saRef.toString());
+        AssertJUnit.assertTrue(d2.targets.toString().contains("Dark Depths"));
     }
 
+    @Test
     public void testPlayRememberedCardsLand() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
@@ -257,18 +271,20 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         game.getAction().checkStateEffects(true);
 
         // Expected plan:
-        //  1. Play Abbot.
-        //  2. Play land exiled by Abbot.
-        //  3. Play Bolt targeting opponent.
+        // 1. Play Abbot.
+        // 2. Play land exiled by Abbot.
+        // 3. Play Bolt targeting opponent.
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
-        assertEquals(abbot.getSpellAbilities().get(0), sa);
+        AssertJUnit.assertEquals(abbot.getSpellAbilities().get(0), sa);
         Plan plan = picker.getPlan();
-        assertEquals(3, plan.getDecisions().size());
-        assertEquals("Play land Mountain", plan.getDecisions().get(1).saRef.toString());
-        assertEquals("Lightning Bolt deals 3 damage to any target.", plan.getDecisions().get(2).saRef.toString());
+        AssertJUnit.assertEquals(3, plan.getDecisions().size());
+        AssertJUnit.assertEquals("Play land Mountain", plan.getDecisions().get(1).saRef.toString());
+        AssertJUnit.assertEquals("Lightning Bolt deals 3 damage to any target.",
+                plan.getDecisions().get(2).saRef.toString());
     }
 
+    @Test
     public void testPlayRememberedCardsSpell() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
@@ -286,23 +302,24 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         game.getAction().checkStateEffects(true);
 
         // Expected plan:
-        //  1. Play Abbot.
-        //  3. Play Bolt exiled by Abbot.
+        // 1. Play Abbot.
+        // 3. Play Bolt exiled by Abbot.
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
-        assertEquals(abbot.getSpellAbilities().get(0), sa);
+        AssertJUnit.assertEquals(abbot.getSpellAbilities().get(0), sa);
         Plan plan = picker.getPlan();
-        assertEquals(2, plan.getDecisions().size());
+        AssertJUnit.assertEquals(2, plan.getDecisions().size());
         String saDesc = plan.getDecisions().get(1).saRef.toString();
-        assertTrue(saDesc, saDesc.startsWith("Lightning Bolt deals 3 damage to any target."));
+        AssertJUnit.assertTrue(saDesc, saDesc.startsWith("Lightning Bolt deals 3 damage to any target."));
     }
-    
+
+    @Test
     public void testPlayingPumpSpellsAfterBlocks() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
         opponent.setLife(2, null);
-        
+
         Card blocker = addCard("Fugitive Wizard", opponent);
         Card attacker1 = addCard("Dwarven Trader", p);
         attacker1.setSickness(false);
@@ -315,19 +332,19 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         game.getAction().checkStateEffects(true);
 
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
-        assertNull(picker.chooseSpellAbilityToPlay(null));
+        AssertJUnit.assertNull(picker.chooseSpellAbilityToPlay(null));
 
         game.getPhaseHandler().devAdvanceToPhase(PhaseType.COMBAT_BEGIN);
         game.getAction().checkStateEffects(true);
-        assertNull(picker.chooseSpellAbilityToPlay(null));
+        AssertJUnit.assertNull(picker.chooseSpellAbilityToPlay(null));
 
         game.getPhaseHandler().devModeSet(PhaseType.COMBAT_DECLARE_ATTACKERS, p);
         Combat combat = new Combat(p);
         combat.addAttacker(attacker1, opponent);
         combat.addAttacker(attacker2, opponent);
         game.getPhaseHandler().setCombat(combat);
-        game.getAction().checkStateEffects(true);        
-        assertNull(picker.chooseSpellAbilityToPlay(null));
+        game.getAction().checkStateEffects(true);
+        AssertJUnit.assertNull(picker.chooseSpellAbilityToPlay(null));
 
         game.getPhaseHandler().devModeSet(PhaseType.COMBAT_DECLARE_BLOCKERS, p, false);
         game.getAction().checkStateEffects(true);
@@ -337,11 +354,12 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
         combat.orderBlockersForDamageAssignment();
         combat.orderAttackersForDamageAssignment();
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
-        assertNotNull(sa);
-        assertEquals("Target creature gets +3/+3 until end of turn.", sa.toString());
-        assertEquals(attacker2, sa.getTargetCard());
+        AssertJUnit.assertNotNull(sa);
+        AssertJUnit.assertEquals("Target creature gets +3/+3 until end of turn.", sa.toString());
+        AssertJUnit.assertEquals(attacker2, sa.getTargetCard());
     }
-    
+
+    @Test
     public void testPlayingSorceryPumpSpellsBeforeBlocks() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
@@ -361,11 +379,12 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
 
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
-        assertNotNull(sa);
-        assertEquals(furor.getSpellAbilities().get(0), sa);
-        assertEquals(attacker1, sa.getTargetCard());
+        AssertJUnit.assertNotNull(sa);
+        AssertJUnit.assertEquals(furor.getSpellAbilities().get(0), sa);
+        AssertJUnit.assertEquals(attacker1, sa.getTargetCard());
     }
 
+    @Test
     public void testPlayingRemovalBeforeBlocks() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
@@ -384,8 +403,8 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
 
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
-        assertNotNull(sa);
-        assertEquals("Destroy target nonblack creature.", sa.toString());
-        assertEquals(blocker, sa.getTargetCard());
+        AssertJUnit.assertNotNull(sa);
+        AssertJUnit.assertEquals("Destroy target nonblack creature.", sa.toString());
+        AssertJUnit.assertEquals(blocker, sa.getTargetCard());
     }
 }
