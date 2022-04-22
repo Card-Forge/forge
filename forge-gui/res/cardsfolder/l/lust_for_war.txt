@@ -1,8 +1,8 @@
 Name:Lust for War
 ManaCost:2 R
 Types:Enchantment Aura
-A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME attacks each combat if able. | Description$ Enchanted creature attacks each combat if able.
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ MustAttack | Affected$ Creature.EnchantedBy | Description$ Enchanted creature attacks each combat if able.
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever enchanted creature becomes tapped, CARDNAME deals 3 damage to that creature's controller.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 3
 Oracle:Enchant creature\nWhenever enchanted creature becomes tapped, Lust for War deals 3 damage to that creature's controller.\nEnchanted creature attacks each combat if able.

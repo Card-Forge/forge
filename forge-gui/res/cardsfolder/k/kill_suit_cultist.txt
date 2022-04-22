@@ -2,7 +2,7 @@ Name:Kill-Suit Cultist
 ManaCost:R
 Types:Creature Goblin Berserker
 PT:1/1
-K:CARDNAME attacks each combat if able.
+S:Mode$ MustAttack | Affected$ Card.Self | Description$ CARDNAME attacks each combat if able.
 A:AB$ Effect | Cost$ B Sac<1/CARDNAME> | ValidTgts$ Creature | ReplacementEffects$ SelfDamage | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ The next time damage would be dealt to target creature this turn, destroy that creature instead.
 SVar:SelfDamage:Event$ DamageDone | ValidTarget$ Creature.IsRemembered | ReplaceWith$ CultistDestroy | Description$ The next time damage would be dealt to target creature this turn, destroy that creature instead.
 SVar:CultistDestroy:DB$ Destroy | Defined$ ReplacedTarget | SubAbility$ ExileEffect
