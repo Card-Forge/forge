@@ -1,7 +1,7 @@
 Name:Boiling Blood
 ManaCost:2 R
 Types:Instant
-A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature | KW$ HIDDEN CARDNAME attacks each combat if able. | TgtPrompt$ Select target creature | SpellDescription$ Target creature attacks this turn if able. | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
-AI:RemoveDeck:All
+A:SP$ Animate | ValidTgts$ Creature | staticAbilities$ MustAttack | SubAbility$ DBDraw | SpellDescription$ Target creature attacks this turn if able.
+SVar:MustAttack:Mode$ MustAttack | Affected$ Card.Self | Description$ This creature attacks this turn if able.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
 Oracle:Target creature attacks this turn if able.\nDraw a card.
