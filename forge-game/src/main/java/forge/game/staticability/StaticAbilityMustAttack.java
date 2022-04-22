@@ -7,38 +7,42 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StaticAbilityMustAttack {
 
     static String MODE = "MustAttack";
 
-    public static GameEntity mustAttackSpecific(final Card attacker) {
+    public static List<GameEntity> entitiesMustAttack(final Card attacker) {
+        final List<GameEntity> entityList = new ArrayList<>();
         final Game game = attacker.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.getParam("Mode").equals(MODE) || stAb.isSuppressed() || !stAb.checkConditions()) {
                     continue;
                 }
-                if (stAb.matchesValid(attacker, stAb.getParam("Affected").split(","))) {
+                if (stAb.matchesValidParam(stAb.getParam("ValidCreature"), attacker)) {
                     if (stAb.hasParam("MustAttack")) {
                         GameEntity e = AbilityUtils.getDefinedEntities(attacker, stAb.getParam("MustAttack"),
                                 stAb).get(0);
                         if (e instanceof Player) {
                             Player attackPl = (Player) e;
                             if (!game.getPhaseHandler().isPlayerTurn(attackPl)) { // CR 506.2
-                                return attackPl;
+                                entityList.add(e);
                             }
                         } else if (e instanceof Card) {
                             Card attackPW = (Card) e;
                             if (!game.getPhaseHandler().isPlayerTurn(attackPW.getController())) { // CR 506.2
-                                return attackPW;
+                                entityList.add(e);
                             }
                         }
-                    } else { // return attacker to indicate that attacker must attack, but no specific entity
-                        return attacker;
+                    } else { // if the list is only the attacker, the attacker must attack, but no specific entity
+                        entityList.add(attacker);
                     }
                 }
             }
         }
-        return null; // null return indicates that attacker is not affected
+        return entityList;
     }
 }
