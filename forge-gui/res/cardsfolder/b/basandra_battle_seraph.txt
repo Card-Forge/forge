@@ -5,5 +5,5 @@ PT:4/4
 K:Flying
 S:Mode$ CantBeCast | ValidCard$ Card | Phases$ BeginCombat->EndCombat | Description$ Players can't cast spells during combat.
 A:AB$ Animate | Cost$ R | ValidTgts$ Creature | staticAbilities$ MustAttack | IsCurse$ True | SpellDescription$ Target creature attacks this turn if able.
-SVar:MustAttack:Mode$ MustAttack | Affected$ Card.Self | Description$ This creature attacks this turn if able.
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ This creature attacks this turn if able.
 Oracle:Flying\nPlayers can't cast spells during combat.\n{R}: Target creature attacks this turn if able.

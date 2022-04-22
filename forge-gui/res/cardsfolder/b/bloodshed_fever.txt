@@ -3,5 +3,5 @@ ManaCost:R
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ MustAttack | Affected$ Creature.EnchantedBy | Description$ Enchanted creature attacks each combat if able.
+S:Mode$ MustAttack | ValidCreature$ Creature.EnchantedBy | Description$ Enchanted creature attacks each combat if able.
 Oracle:Enchant creature\nEnchanted creature attacks each combat if able.

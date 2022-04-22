@@ -2,7 +2,7 @@ Name:Anje's Ravager
 ManaCost:2 R
 Types:Creature Vampire Berserker
 PT:3/3
-S:Mode$ MustAttack | Affected$ Card.Self | Description$ CARDNAME attacks each combat if able.
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, discard your hand, then draw three cards.
 SVar:TrigDiscard:DB$ Discard | Mode$ Hand | Defined$ You | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 3

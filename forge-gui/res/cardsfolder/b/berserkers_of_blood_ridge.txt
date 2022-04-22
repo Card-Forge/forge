@@ -2,5 +2,5 @@ Name:Berserkers of Blood Ridge
 ManaCost:4 R
 Types:Creature Human Berserker
 PT:4/4
-S:Mode$ MustAttack | Affected$ Card.Self | Description$ CARDNAME attacks each combat if able.
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
 Oracle:Berserkers of Blood Ridge attacks each combat if able.

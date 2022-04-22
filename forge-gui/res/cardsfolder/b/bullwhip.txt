@@ -3,5 +3,5 @@ ManaCost:4
 Types:Artifact
 A:AB$ DealDamage | Cost$ 2 T | ValidTgts$ Creature | NumDmg$ 1 | SubAbility$ DBPump | SpellDescription$ CARDNAME deals 1 damage to target creature. That creature attacks this turn if able.
 SVar:DBPump:DB$ Animate | Defined$ Targeted | staticAbilities$ MustAttack
-SVar:MustAttack:Mode$ MustAttack | Affected$ Card.Self | Description$ This creature attacks this turn if able.
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ This creature attacks this turn if able.
 Oracle:{2}, {T}: Bullwhip deals 1 damage to target creature. That creature attacks this turn if able.

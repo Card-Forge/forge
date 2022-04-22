@@ -4,7 +4,7 @@ Types:Legendary Creature Ogre Warrior
 PT:6/6
 K:Vigilance
 K:Reach
-S:Mode$ MustAttack | Affected$ Card.Self | Description$ CARDNAME attacks each combat if able.
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
 T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Player | Execute$ TrigDmg | TriggerDescription$ Whenever a player casts a noncreature spell, CARDNAME deals 6 damage to that player.
 SVar:TrigDmg:DB$ DealDamage | Defined$ TriggeredActivator | NumDmg$ 6
 AI:RemoveDeck:All

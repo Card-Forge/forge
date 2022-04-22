@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Creature Human Wizard
 PT:1/1
 A:AB$ Animate | Cost$ T | ValidTgts$ Creature | staticAbilities$ MustAttack | IsCurse$ True | SpellDescription$ Target creature attacks this turn if able.
-SVar:MustAttack:Mode$ MustAttack | Affected$ Card.Self | Description$ This creature attacks this turn if able.
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ This creature attacks this turn if able.
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME blocks each combat if able. | SpellDescription$ Target creature blocks this turn if able.
 AI:RemoveDeck:All
 Oracle:{T}: Target creature attacks this turn if able.\n{T}: Target creature blocks this turn if able.

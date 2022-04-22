@@ -3218,7 +3218,7 @@ public class CardFactoryUtil {
 
             final String pumpStr = "DB$ Animate | Defined$ Creature.IsRemembered | staticAbilities$ AttackChosen ";
 
-            final String attackStaticStr = "Mode$ MustAttack | Affected$ Card.Self | MustAttack$ Remembered" +
+            final String attackStaticStr = "Mode$ MustAttack | ValidCreature$ Card.Self | MustAttack$ Remembered" +
                     " | Description$ This token copy attacks that opponent this turn if able.";
 
             final String pumpcleanStr = "DB$ Cleanup | ForgetDefined$ RememberedCard";
