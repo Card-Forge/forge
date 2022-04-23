@@ -220,6 +220,34 @@
   </object>
   <object id="81" template="../obj/enemy.tx" x="288" y="224">
    <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;You...you hurt Grog!\nYou...you filthy swine! I will stop at nothing until I see you defeated!\nGods...anyone! Grant me strength! Grant me REVENGE!!!!&quot;,
+    &quot;condition&quot;: [
+      {
+        &quot;actorID&quot;: 1111,
+        &quot;not&quot;: true
+      }
+    ],
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Uh oh.&quot;,
+        &quot;effect&quot;: [
+          {
+            &quot;setEffect&quot;: {
+              &quot;lifeModifier&quot;: 200,
+              &quot;startBattleWithCard&quot;: [
+                &quot;Elesh Norn, Grand Cenobyte&quot;,
+                &quot;Avacyn, Angel of Hope&quot;,
+                &quot;Urabrask the Hidden&quot;
+              ]
+            }, &quot;battleWithActorID&quot;: -1
+          }
+        ]
+      }
+    ]
+  }
+]</property>
     <property name="enemy" value="Goblin"/>
    </properties>
   </object>

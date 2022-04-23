@@ -28,7 +28,8 @@ public class DialogData {
         public int battleWithActorID = 0; //Start a battle with enemy ID. -1 for self if possible.
         public EffectData giveBlessing;   //Give a blessing to the player.
         public String setColorIdentity;   //Change player's color identity.
-        public String advanceQuestFlag;//Increase given quest flag by 1.
+        public String advanceQuestFlag;   //Increase given quest flag by 1.
+        public EffectData setEffect;      //Set or replace current effects on current actor.
         public QuestFlag setQuestFlag;    //Set quest flag {flag ID, value}
     }
 

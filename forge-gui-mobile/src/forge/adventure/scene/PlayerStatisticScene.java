@@ -158,6 +158,7 @@ public class PlayerStatisticScene extends UIScene {
         blessingScroll = Controls.newLabel("");
         blessingScroll.setStyle(new Label.LabelStyle(Controls.getBitmapFont("default"), Color.BLACK));
         blessingScroll.setAlignment(Align.topLeft);
+        blessingScroll.setWrap(true);
         ui.onButtonPress("return", new Runnable() {
             @Override
             public void run() {
