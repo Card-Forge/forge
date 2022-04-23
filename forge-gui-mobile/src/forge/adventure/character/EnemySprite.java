@@ -26,6 +26,7 @@ public class EnemySprite extends CharacterSprite {
     public MapDialog defeatDialog; //Dialog to show on defeat. Overrides standard death (can be removed as an action)
     public EffectData effect; //Battle effect for this enemy. Similar to a player's blessing.
     public String nameOverride = ""; //Override name of this enemy in battles.
+    public RewardData[] rewards; //Additional rewards for this enemy.
 
     public EnemySprite(EnemyData enemyData) {
         this(0,enemyData);
@@ -53,11 +54,16 @@ public class EnemySprite extends CharacterSprite {
     }
 
     public Array<Reward> getRewards() {
-        Array<Reward> ret=new Array<Reward>();
-        if(data.rewards == null)
-            return ret;
-        for(RewardData rdata:data.rewards) {
-            ret.addAll(rdata.generate(false,(Current.latestDeck()!=null? Current.latestDeck().getMain().toFlatList():null)));
+        Array<Reward> ret=new Array<>();
+        if(data.rewards != null) { //Collect standard rewards.
+            for (RewardData rdata : data.rewards) {
+                ret.addAll(rdata.generate(false, (Current.latestDeck() != null ? Current.latestDeck().getMain().toFlatList() : null)));
+            }
+        }
+        if(rewards != null) { //Collect additional rewards.
+            for(RewardData rdata:rewards) {
+                ret.addAll(rdata.generate(false,(Current.latestDeck()!=null? Current.latestDeck().getMain().toFlatList():null)));
+            }
         }
         return ret;
     }
@@ -115,6 +121,11 @@ public class EnemySprite extends CharacterSprite {
         if(dialog != null && dialog.canShow()){ //Draw a talk icon on top.
             Texture T = Current.world().getGlobalTexture();
             TextureRegion TR = new TextureRegion(T, 0, 0, 16, 16);
+            batch.draw(TR, getX(), getY() + 16, 16, 16);
+        }
+        if(effect != null){ //Draw a crown icon on top.
+            Texture T = Current.world().getGlobalTexture();
+            TextureRegion TR = new TextureRegion(T, 16, 0, 16, 16);
             batch.draw(TR, getX(), getY() + 16, 16, 16);
         }
     }

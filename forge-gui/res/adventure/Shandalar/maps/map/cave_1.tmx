@@ -1,47 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="53">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="60">
  <editorsettings>
-  <export target="wastetown..tmx" format="tmx"/>
+  <export format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
- <layer id="1" name="Background" width="30" height="17">
+ <tileset firstgid="6321" source="../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJzz42Rg8BvFo3gUj+JRPIpH8YjAAAvyrVM=
+   eJzz42Rg8BvFo3gUj+JRPIqHINbghuCRYi/M7uEa1gMZnwMRxgPh17wBtpfecZyHZvdgsDePTm4YqeXUSLOXGvEMABb/Ltw=
   </data>
  </layer>
- <layer id="2" name="Ground" width="30" height="17">
+ <layer id="6" name="BackgroundBlend" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJxz42RgcBvFo3gA8CoOBoY1HPS31x2IHwPxaqDdTzjp4waQX58CaWTgSie/ogOY31fTMPyx2YvuBlrYTcheWoX7MyBeAfTPSg7sdi4Hir+gYTyD7Ee3m9Z2YrObXnaixzc98hIy9oDa6zVE7QUATYCf+g==
+   eJxjYBgFo2AUjIJRMApGwVAA6tz0secE0J4uLvrbO5CgB+pfevmVD2jfRQ4GBi2ofUeB9DE62Z3PiYjjbi7C6qkFYH4GAU06pymQn0EAFt7nge64wIFwD60AzM+g8AaFdS4nqntoBfI4Uf3MDbSbB4h56RjfWgNUbgyUvejl5lACAE8hEqc=
   </data>
  </layer>
- <layer id="3" name="Foreground" width="30" height="17">
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlEsKgCAURR0qtK0sWkk7s6xd9aFlZKgkUjbRC8F7cAaOjle9SsGYJAiCIIgfoDljM39fl6IxdIl1Se9imLhlA3qV8Q0BB8iLyJc651Vg3pR29xlODcoaDyL7kzfeQwn3l9dPX93k8O7C9mbkzz5VuFOxXwF77P3XoHwe7fIiOhzSurzo/yuX9wRfCR8q
+  </data>
+ </layer>
+ <layer id="7" name="Foreground" width="30" height="30">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
-  </data>
- </layer>
- <layer id="5" name="AboveSprites" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+   eJztwQEBAAAAgiD/r25IQAEAAPBoDhAAAQ==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../obj/entry_up.tx" x="208" y="281">
+  <object id="38" template="../obj/entry_up.tx" x="196" y="480" width="40" height="8">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="48" template="../obj/treasure.tx" x="137" y="143"/>
-  <object id="49" template="../obj/gold.tx" x="152" y="116"/>
-  <object id="50" template="../obj/enemy.tx" x="208" y="239">
+  <object id="48" template="../obj/treasure.tx" x="240" y="400">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;colors&quot;: [ &quot;green&quot; ],
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+}]</property>
+   </properties>
+  </object>
+  <object id="49" template="../obj/gold.tx" x="144" y="384"/>
+  <object id="50" template="../obj/enemy.tx" x="208" y="448">
    <properties>
     <property name="enemy" value="Wurm"/>
    </properties>
   </object>
-  <object id="51" template="../obj/treasure.tx" x="192" y="128"/>
-  <object id="52" template="../obj/gold.tx" x="246" y="152"/>
+  <object id="55" template="../obj/enemy.tx" x="152" y="288.333">
+   <properties>
+    <property name="enemy" value="Wurm"/>
+   </properties>
+  </object>
+  <object id="56" template="../obj/enemy.tx" x="194.333" y="283">
+   <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 4,
+ &quot;startBattleWithCard&quot;: [ &quot;Forest&quot;, &quot;Forest&quot; ]
+}</property>
+    <property name="enemy" value="Wurm"/>
+   </properties>
+  </object>
+  <object id="57" template="../obj/enemy.tx" x="216.667" y="255">
+   <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 10,
+ &quot;startBattleWithCard&quot;: [ &quot;Sandwurm Convergence&quot; ]
+}</property>
+    <property name="enemy" value="Wurm"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="51" template="../obj/treasure.tx" x="152" y="256.333"/>
+  <object id="58" template="../obj/treasure.tx" x="216.333" y="272.333">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
+  &quot;addMaxCount&quot;: 2
+}]</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="52" template="../obj/gold.tx" x="152.333" y="320"/>
+  <object id="59" template="../obj/gold.tx" x="320" y="384" visible="0">
+   <properties>
+    <property name="reward">[{
+ &quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 250
+}]</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>

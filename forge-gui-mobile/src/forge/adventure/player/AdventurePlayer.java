@@ -74,6 +74,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         this.difficultyData.staringMoney=difficultyData.staringMoney;
         this.difficultyData.startingDifficulty=difficultyData.startingDifficulty;
         this.difficultyData.name=difficultyData.name;
+        this.difficultyData.spawnRank = difficultyData.spawnRank;
         this.difficultyData.enemyLifeFactor=difficultyData.enemyLifeFactor;
         this.difficultyData.sellFactor=difficultyData.sellFactor;
         life=maxLife;
@@ -165,6 +166,17 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             case BLACK    : return "B";
             case WHITE    : return "W";
             case COLORLESS: default: return "C"; //You are either Ugin or an Eldrazi. Nice.
+        }
+    }
+
+    public String getColorIdentityLong(){
+        switch (colorIdentity){
+            case BLUE     : return "blue";
+            case GREEN    : return "green";
+            case RED      : return "red";
+            case BLACK    : return "black";
+            case WHITE    : return "white";
+            case COLORLESS: default: return "colorless";
         }
     }
 

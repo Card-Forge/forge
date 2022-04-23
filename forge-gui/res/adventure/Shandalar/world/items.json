@@ -91,31 +91,37 @@
   {
     "name": "Red Key",
     "iconName": "RedKey",
+    "description": "A mysterious red key.",
     "questItem": true
   },
   {
     "name": "White Key",
     "iconName": "WhiteKey",
+    "description": "A mysterious white key.",
     "questItem": true
   },
   {
     "name": "Blue Key",
     "iconName": "BlueKey",
+    "description": "A mysterious blue key.",
     "questItem": true
   },
   {
     "name": "Green Key",
     "iconName": "GreenKey",
+    "description": "A mysterious green key.",
     "questItem": true
   },
   {
     "name": "Black Key",
     "iconName": "BlackKey",
+    "description": "A mysterious black key.",
     "questItem": true
   },
   {
     "name": "Strange Key",
     "iconName": "StrangeKey",
+    "description": "A mysterious key.",
     "questItem": true
   },
   {

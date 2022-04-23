@@ -39,7 +39,6 @@ import java.util.List;
  * Stage to handle tiled maps for points of interests
  */
 public class MapStage extends GameStage {
-
     public static MapStage instance;
     Array<MapActor> actors = new Array<>();
 
@@ -220,17 +219,17 @@ public class MapStage extends GameStage {
         MapProperties MP = map.getProperties();
 
         if( MP.get("dungeonEffect") != null && !MP.get("dungeonEffect").toString().isEmpty()){
-            JSONStringLoader J = new JSONStringLoader();
-            effect = J.parse(EffectData.class, map.getProperties().get("dungeonEffect").toString(), "");
+            effect = JSONStringLoader.parse(EffectData.class, map.getProperties().get("dungeonEffect").toString(), "");
             effectDialog(effect);
         }
         if (MP.get("preventEscape") != null) preventEscape = (boolean)MP.get("preventEscape");
+
         if (MP.get("music") != null && !MP.get("music").toString().isEmpty()){
             //TODO: Add a way to play a music file directly without using a playlist.
         }
 
         GetPlayer().stop();
-
+        spriteLayer = null;
         for (MapLayer layer : map.getLayers()) {
             if (layer.getProperties().containsKey("spriteLayer") && layer.getProperties().get("spriteLayer", boolean.class)) {
                 spriteLayer = layer;
@@ -241,6 +240,7 @@ public class MapStage extends GameStage {
                 loadObjects(layer, sourceMap);
             }
         }
+        if(spriteLayer == null) System.err.print("Warning: No spriteLayer present in map.\n");
 
     }
 
@@ -263,16 +263,28 @@ public class MapStage extends GameStage {
         }
     }
 
+    private boolean canSpawn(MapProperties prop) {
+        DifficultyData DF = Current.player().getDifficulty();
+        boolean spawnEasy = prop.get("spawn.Easy", Boolean.class);
+        boolean spawnNorm = prop.get("spawn.Normal", Boolean.class);
+        boolean spawnHard = prop.get("spawn.Hard", Boolean.class);
+        if(DF.spawnRank == 2 && !spawnHard) return false;
+        if(DF.spawnRank == 1 && !spawnNorm) return false;
+        if(DF.spawnRank == 0 && !spawnEasy) return false;
+        return true;
+    }
+
     private void loadObjects(MapLayer layer, String sourceMap) {
         player.setMoveModifier(2);
         for (MapObject obj : layer.getObjects()) {
             MapProperties prop = obj.getProperties();
-            Object typeObject = prop.get("type");
-            if (typeObject != null) {
+            if (prop.containsKey("type")) {
                 String type = prop.get("type", String.class);
                 int id = prop.get("id", int.class);
                 if (changes.isObjectDeleted(id))
                     continue;
+                boolean hidden = !obj.isVisible(); //Check if the object is invisible.
+
                 switch (type) {
                     case "entry":
                         float x = Float.parseFloat(prop.get("x").toString());
@@ -283,17 +295,20 @@ public class MapStage extends GameStage {
                         addMapActor(obj, entry);
                         break;
                     case "reward":
+                        if(!canSpawn(prop)) break;
                         Object R = prop.get("reward");
                         if(R != null && !R.toString().isEmpty()) {
                             Object S = prop.get("sprite");
-                            String Sp = "sprites/treasure.atlas";
+                            String Sp; Sp = "sprites/treasure.atlas";
                             if(S != null && !S.toString().isEmpty()) Sp = S.toString();
                             else System.err.printf("No sprite defined for reward (ID:%s), defaulting to \"sprites/treasure.atlas\"", id);
                             RewardSprite RW = new RewardSprite(id, R.toString(), Sp);
+                            RW.hidden = hidden;
                             addMapActor(obj, RW);
                         }
                         break;
                     case "enemy":
+                        if(!canSpawn(prop)) break;
                         Object E = prop.get("enemy");
                         if(E != null && !E.toString().isEmpty()) {
                             EnemyData EN = WorldData.getEnemy(E.toString());
@@ -303,23 +318,26 @@ public class MapStage extends GameStage {
                             }
                             EnemySprite mob = new EnemySprite(id, EN);
                             Object D = prop.get("dialog"); //Check if the enemy has a dialogue attached to it.
-                            if (D != null && !D.toString().isEmpty()) {
+                            if(D != null && !D.toString().isEmpty()) {
                                 mob.dialog = new MapDialog(D.toString(), this, mob.getId());
                             }
                             D = prop.get("defeatDialog"); //Check if the enemy has a defeat dialogue attached to it.
-                            if (D != null && !D.toString().isEmpty()) {
+                            if(D != null && !D.toString().isEmpty()) {
                                 mob.defeatDialog = new MapDialog(D.toString(), this, mob.getId());
                             }
                             D = prop.get("name"); //Check for name override.
-                            if (D != null && !D.toString().isEmpty()) {
+                            if(D != null && !D.toString().isEmpty()) {
                                 mob.nameOverride = D.toString();
                             }
                             D = prop.get("effect"); //Check for special effects.
-                            if (D != null && !D.toString().isEmpty()) {
+                            if(D != null && !D.toString().isEmpty()) {
                                 mob.effect = JSONStringLoader.parse(EffectData.class, D.toString(), "");
                             }
-                            //TODO: Additional rewards.
-                            //TODO: Filter by difficulty. (Don't spawn if doesn't match)
+                            D = prop.get("reward"); //Check for additional rewards.
+                            if(D != null && !D.toString().isEmpty()) {
+                                mob.rewards = JSONStringLoader.parse(RewardData[].class, D.toString(), "[]");
+                            }
+                            mob.hidden = hidden; //Evil.
                             addMapActor(obj, mob);
                         }
                         break;
@@ -417,7 +435,7 @@ public class MapStage extends GameStage {
         } else {
             player.setAnimation(CharacterSprite.AnimationTypes.Hit);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Attack);
-            startPause(0.5f, new Runnable() {
+            startPause(0.3f, new Runnable() {
                 @Override
                 public void run() {
                     player.setAnimation(CharacterSprite.AnimationTypes.Idle);
