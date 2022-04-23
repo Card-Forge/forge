@@ -8,6 +8,6 @@ SVar:DBDelayedEffect:DB$ DelayedTrigger | Mode$ Phase | Phase$ BeginCombat | Exe
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STCantAttack,STMustAttack | SubAbility$ DBCleanup | Duration$ UntilEndOfCombat
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:STCantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.IsRemembered | Target$ You,Planeswalker.YouCtrl | Description$ Each of those creatures attacks that combat if able. They can't attack you or planeswalkers you control that combat.
-SVar:STMustAttack:Mode$ MustAttack | EffectZone$ Command | Affected$ Creature.IsRemembered
+SVar:STMustAttack:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature.IsRemembered
 AI:RemoveDeck:All
 Oracle:Cast this spell only during the declare blockers step on an opponent's turn.\nRemove all attacking creatures from combat and untap them. After this phase, there is an additional combat phase. Each of those creatures attacks that combat if able. They can't attack you or planeswalkers you control that combat.

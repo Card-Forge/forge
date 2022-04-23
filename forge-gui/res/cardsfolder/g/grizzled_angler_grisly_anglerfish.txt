@@ -17,5 +17,5 @@ ManaCost:no cost
 Types:Creature Eldrazi Fish
 PT:4/5
 A:AB$ Effect | Cost$ 6 | StaticAbilities$ MustAttack | SpellDescription$ Creatures your opponents control attack this turn if able.
-SVar:MustAttack:Mode$ MustAttack | EffectZone$ Command | Affected$ Creature.OppCtrl | Description$ Creatures your opponents control attack this turn if able.
+SVar:MustAttack:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature.OppCtrl | Description$ Creatures your opponents control attack this turn if able.
 Oracle:{6}: Creatures your opponents control attack this turn if able.

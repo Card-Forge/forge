@@ -2,6 +2,6 @@ Name:Incite
 ManaCost:R
 Types:Instant
 A:SP$ Animate | ValidTgts$ Creature | Colors$ Red | OverwriteColors$ True | staticAbilities$ MustAttack | SpellDescription$ Target creature becomes red until end of turn and attacks this turn if able.
-SVar:MustAttack:Mode$ MustAttack | Affected$ Card.Self | Description$ This creature attacks this turn if able.
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ This creature attacks this turn if able.
 AI:RemoveDeck:All
 Oracle:Target creature becomes red until end of turn and attacks this turn if able.

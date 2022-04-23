@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact Creature Construct
 PT:4/4
 K:Trample
-S:Mode$ MustAttack | Affected$ Card.Self | Description$ CARDNAME attacks each combat if able.
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
 T:Mode$ DamageDoneOnce | Execute$ TrigFlipSac | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, flip a coin. If you lose the flip, sacrifice CARDNAME.
 SVar:TrigFlipSac:DB$ FlipACoin | LoseSubAbility$ DBSacrifice
 SVar:DBSacrifice:DB$ Sacrifice | Defined$ Self

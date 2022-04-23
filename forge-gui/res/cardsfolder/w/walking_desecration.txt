@@ -5,7 +5,7 @@ PT:1/1
 A:AB$ ChooseType | Cost$ B T | Defined$ You | Type$ Creature | SubAbility$ DBPumpAll | SpellDescription$ Creatures of the creature type of your choice attack this turn if able.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.ChosenType | IsCurse$ True | RememberAllPumped$ True | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | staticAbilities$ MustAttack | SubAbility$ DBCleanup | StackDescription$ None
-SVar:MustAttack:Mode$ MustAttack | Affected$ Card.Self | Description$ This creature attacks this turn if able.
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ This creature attacks this turn if able.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 Oracle:{B}, {T}: Creatures of the creature type of your choice attack this turn if able.

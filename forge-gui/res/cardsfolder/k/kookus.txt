@@ -7,7 +7,7 @@ A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until 
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl+namedKeeper of Kookus | PresentCompare$ EQ0 | Execute$ TrigNoKeeper | TriggerDescription$ At the beginning of your upkeep, if you don't control a creature named Keeper of Kookus, CARDNAME deals 3 damage to you and attacks this turn if able.
 SVar:TrigNoKeeper:DB$ DealDamage | NumDmg$ 3 | Defined$ You | SubAbility$ DBMustAttack
 SVar:DBMustAttack:DB$ Animate | staticAbilities$ MustAttack | Defined$ Self
-SVar:MustAttack:Mode$ MustAttack | Affected$ Card.Self | Secondary$ True
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.Self | Secondary$ True
 AI:RemoveDeck:Random
 DeckNeeds:Name$Keeper of Kookus
 Oracle:Trample\nAt the beginning of your upkeep, if you don't control a creature named Keeper of Kookus, Kookus deals 3 damage to you and attacks this turn if able.\n{R}: Kookus gets +1/+0 until end of turn.

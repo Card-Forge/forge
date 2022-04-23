@@ -4,5 +4,5 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ -1 | Description$ Enchanted creature gets +1/-1 and attacks each combat if able.
-S:Mode$ MustAttack | Affected$ Creature.EnchantedBy | Secondary$ True
+S:Mode$ MustAttack | ValidCreature$ Creature.EnchantedBy | Secondary$ True
 Oracle:Enchant creature\nEnchanted creature gets +1/-1 and attacks each combat if able.
