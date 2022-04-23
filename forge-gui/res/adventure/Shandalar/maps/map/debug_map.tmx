@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="84">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="86">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -32,11 +32,17 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="47" template="../obj/gold.tx" x="96" y="224"/>
-  <object id="49" template="../obj/gold.tx" x="176" y="224"/>
+  <object id="47" template="../obj/gold.tx" x="32" y="352"/>
   <object id="50" template="../obj/enemy.tx" x="112" y="192" width="64" height="64">
    <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: -25,
+ &quot;opponent&quot;:{
+  &quot;startBattleWithCard&quot;: [ &quot;c_0_1_eldrazi_spawn_sac&quot;, &quot;c_0_1_eldrazi_spawn_sac&quot;, &quot;c_0_1_eldrazi_spawn_sac&quot;, &quot;c_0_1_eldrazi_spawn_sac&quot; ]
+ }
+}</property>
     <property name="enemy" value="Emrakul"/>
+    <property name="name" value="Emrakul, the promised rest"/>
    </properties>
   </object>
   <object id="51" template="../obj/entry_up.tx" x="209" y="480">
@@ -70,13 +76,12 @@
     <property name="sprite" value="sprites/3life.atlas"/>
    </properties>
   </object>
-  <object id="69" template="../obj/treasure.tx" x="192" y="352"/>
-  <object id="74" template="../obj/treasure.tx" x="224" y="352"/>
+  <object id="69" template="../obj/treasure.tx" x="48" y="336"/>
+  <object id="74" template="../obj/treasure.tx" x="224" y="64"/>
   <object id="70" template="../obj/booster.tx" x="32" y="336"/>
-  <object id="72" template="../obj/booster.tx" x="224" y="320"/>
+  <object id="72" template="../obj/booster.tx" x="192" y="64"/>
   <object id="71" template="../obj/gold.tx" x="48" y="352"/>
-  <object id="73" template="../obj/gold.tx" x="224" y="288"/>
-  <object id="78" template="../obj/gate.tx" x="144" y="208" visible="0">
+  <object id="78" template="../obj/gate.tx" x="64" y="208" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -90,7 +95,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="79" template="../obj/gate.tx" x="128" y="208" visible="0">
+  <object id="79" template="../obj/gate.tx" x="128" y="208" width="32" height="16" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -106,10 +111,16 @@
   </object>
   <object id="80" template="../obj/enemy.tx" x="96" y="304">
    <properties>
+    <property name="defeatDialog">[
+  {
+    &quot;text&quot;:&quot;Impressive...&quot;,
+    &quot;loctext&quot;:&quot;&quot;,
+    &quot;options&quot;:[ { &quot;name&quot;:&quot;Hey why are you still standing...?&quot; } ]
+  }
+]</property>
     <property name="dialog">[
   {
     &quot;effect&quot;:[],
-    &quot;name&quot;:&quot;ABC&quot;,
     &quot;text&quot;:&quot;I am an elf. I do elf things like hugging trees and being pretty.&quot;,
     &quot;loctext&quot;:&quot;&quot;,
     &quot;condition&quot;:[],
@@ -118,7 +129,13 @@
       {
         &quot;name&quot;:&quot;Fight me, elf!&quot;,
         &quot;text&quot;: &quot;Gladly.&quot;,
-        &quot;options&quot;: [ { &quot;name&quot;: &quot;I FEAR NOTHING!!?&quot;, &quot;effect&quot;: [ { &quot;battleWithActorID&quot;: -1 } ]} ]
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;Hey aren't you a bit swole for an elf...?&quot;, &quot;effect&quot;: [ { &quot;battleWithActorID&quot;: -1 } ]} ]
+      },
+      {
+        &quot;name&quot;: &quot;I want to be eco-friendly too.&quot;,
+        &quot;condition&quot;: [ { &quot;colorIdentity&quot;: &quot;G&quot;, &quot;not&quot;: true } ],
+        &quot;text&quot;: &quot;Listen to the forest, friend.\nYour color identity is now green!&quot;,
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;Awesome.&quot;, &quot;effect&quot;: [ { &quot;setColorIdentity&quot;: &quot;G&quot; } ]} ]
       },
       {
         &quot;name&quot;:&quot;I wanna fight Emrakul over there!&quot;,
@@ -133,35 +150,193 @@
         &quot;options&quot;: [ { &quot;name&quot;: &quot;Sorry...&quot; } ]
       },
       {
-        &quot;name&quot;:&quot;That's cool dude.&quot;,
-        &quot;condition&quot;: [ { &quot;item&quot;: &quot;Treasure&quot;, &quot;not&quot;: true } ],
+        &quot;name&quot;:&quot;That's cool my green dude.&quot;,
+        &quot;condition&quot;: [ { &quot;item&quot;: &quot;Treasure&quot;, &quot;not&quot;: true }, { &quot;colorIdentity&quot;: &quot;G&quot; } ],
         &quot;effect&quot;: [ { &quot;addItem&quot;: &quot;Treasure&quot; } ],
-        &quot;text&quot;: &quot;You get it. Take this.&quot;,
+        &quot;text&quot;: &quot;You get it! Take this.&quot;,
         &quot;options&quot;: [ { &quot;name&quot;: &quot;Thanks bro.&quot; } ]
+      },
+      {
+        &quot;name&quot;:&quot;Thanks for the blessing.&quot;,
+        &quot;condition&quot;: [ { &quot;hasBlessing&quot;: &quot;Debug Elf&quot; } ],
+        &quot;text&quot;: &quot;You are welcome.&quot;,
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;Thumbs up emoji&quot; } ]
+      },
+      {
+        &quot;name&quot;:&quot;Got any fancy elven blessing?&quot;,
+        &quot;condition&quot;: [ { &quot;item&quot;: &quot;Treasure&quot; }, { &quot;hasBlessing&quot;:  &quot;Debug Elf&quot;, &quot;not&quot;: true } ],
+        &quot;text&quot;: &quot;If you give me a Treasure, I will give you the blessing of the Debug Elf.\nWhich is a Llanowar Elves and 2 extra life in your next battle. Sounds good?&quot;,
+        &quot;options&quot;: [
+          { &quot;name&quot;: &quot;But I love my Treasure! I humbly refuse.&quot;},
+          {
+            &quot;name&quot;: &quot;I'll take it&quot;,
+            &quot;effect&quot;: [
+              { &quot;removeItem&quot;: &quot;Treasure&quot;, &quot;giveBlessing&quot;: { &quot;name&quot;: &quot;Debug Elf&quot; ,&quot;lifeModifier&quot;: 2, &quot;startBattleWithCard&quot;: [ &quot;Llanowar Elves&quot; ] } }
+            ]
+          }
+        ]
       },
       {
         &quot;name&quot;:&quot;Can you open that hidden wall?&quot;,
         &quot;condition&quot;: [ { &quot;actorID&quot;: 83 } ],
         &quot;text&quot;: &quot;Since you asked nicely, I shall.&quot;,
         &quot;options&quot;: [ { &quot;name&quot;: &quot;Thanks bro.&quot;, &quot;effect&quot;: [ { &quot;deleteMapObject&quot;: 83 } ]} ]
+      },
+      {
+        &quot;name&quot;: &quot;Got a quest?&quot;,
+        &quot;condition&quot;: [ { &quot;checkQuestFlag&quot;:  &quot;128&quot;, &quot;not&quot;: true} ],
+        &quot;text&quot;: &quot;Ah, perhaps you can help me. Can you ask the Debug Demon about his favorite color?&quot;,
+        &quot;options&quot;: [
+          { &quot;name&quot;: &quot;That's weird, but sure.&quot;, &quot;effect&quot;: [ { &quot;setQuestFlag&quot;:  {&quot;key&quot;:&quot;128&quot;, &quot;val&quot;: 1} } ] },
+          { &quot;name&quot;: &quot;That guy scares me, I'd rather not.&quot; }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;About that quest...&quot;,
+        &quot;condition&quot;: [ { &quot;getQuestFlag&quot;:  { &quot;key&quot;: &quot;128&quot;, &quot;op&quot;:&quot;&lt;&quot;, &quot;val&quot;: 3 } } ],
+          &quot;text&quot;: &quot;Please let me know what the Debug Demon's answer is.&quot;,
+          &quot;options&quot;: [
+            { &quot;name&quot;: &quot;Sure&quot; }
+          ]
+        },
+          {
+            &quot;name&quot;: &quot;Got it, bro.&quot;,
+            &quot;condition&quot;: [ { &quot;getQuestFlag&quot;:  { &quot;key&quot;: &quot;128&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 3 } } ],
+            &quot;text&quot;: &quot;Ah. I see. Thank you friend, have this gold for your inconvenience.&quot;,
+            &quot;options&quot;: [
+              { &quot;name&quot;: &quot;Thanks&quot;, &quot;effect&quot;: [ { &quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;128&quot;, &quot;val&quot;: 4}, &quot;addGold&quot;: 250 } ] }
+            ]
+          }
+        ]
       }
-    ]
-  }
-]</property>
-    <property name="enemy" value="Elf"/>
-    <property name="permanent" type="bool" value="true"/>
+    ]</property>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 190,
+ &quot;startBattleWithCard&quot;: [ &quot;Llanowar Elves&quot;, &quot;Llanowar Elves&quot;, &quot;Forest&quot;, &quot;Forest&quot; ]
+}</property>
+    <property name="enemy" value="Elf warrior"/>
+    <property name="name" value="Debug Elf"/>
    </properties>
   </object>
   <object id="81" template="../obj/enemy.tx" x="288" y="224">
    <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;You...you hurt Grog!\nYou...you filthy swine! I will stop at nothing until I see you defeated!\nGods...anyone! Grant me strength! Grant me REVENGE!!!!&quot;,
+    &quot;condition&quot;: [
+      {
+        &quot;actorID&quot;: 82,
+        &quot;not&quot;: true
+      }
+    ],
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;Uh oh.&quot;,
+        &quot;effect&quot;: [
+          {
+            &quot;setEffect&quot;: {
+              &quot;lifeModifier&quot;: 99,
+              &quot;startBattleWithCard&quot;: [
+                &quot;Avacyn, Angel of Hope&quot;,
+                &quot;Urabrask the Hidden&quot;,
+                &quot;Elesh Norn, Grand Cenobite&quot;,
+                &quot;Emrakul, the Aeons Torn&quot;
+              ]
+            }, &quot;battleWithActorID&quot;: -1
+          }
+        ]
+      }
+    ]
+  }
+]</property>
     <property name="enemy" value="Goblin"/>
    </properties>
   </object>
   <object id="82" template="../obj/enemy.tx" gid="2147491275" x="272" y="224">
    <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;...&quot;,
+    &quot;condition&quot;:[ { &quot;getQuestFlag&quot;:  { &quot;key&quot;: &quot;128&quot;, &quot;op&quot;:&quot;&lt;&quot;, &quot;val&quot;: 3 } } ],
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;???&quot; }
+    ]
+  }
+]</property>
     <property name="enemy" value="Goblin"/>
    </properties>
   </object>
   <object id="83" template="../obj/gate.tx" type="dummy" gid="3651" x="64" y="336" width="16" height="16"/>
+  <object id="84" template="../obj/enemy.tx" x="320" y="304">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;effect&quot;:[],
+    &quot;text&quot;:&quot;I have some things to offer for that life you have...&quot;,
+    &quot;condition&quot;:[],
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;You are suspicious and have two shadows, I'm out.&quot; },
+      {
+        &quot;name&quot;:&quot;I'll vanquish you, demon!&quot;,
+        &quot;text&quot;: &quot;Oh look we got a tough guy over here!&quot;,
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;I FEAR NOTHING!!&quot;, &quot;effect&quot;: [ { &quot;battleWithActorID&quot;: -1 } ]} ]
+      },
+      {
+        &quot;name&quot;: &quot;I dig your edge.&quot;,
+        &quot;condition&quot;: [ { &quot;colorIdentity&quot;: &quot;B&quot;, &quot;not&quot;: true }, { &quot;hasLife&quot;:  2 } ],
+        &quot;text&quot;: &quot;You can be dark and edgy like me. Maybe for some of your life force...&quot;,
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;I'm doing nothing better with it.&quot;, &quot;effect&quot;: [ { &quot;setColorIdentity&quot;: &quot;B&quot;, &quot;addLife&quot;: -2 } ]} ]
+      },
+      {
+        &quot;name&quot;: &quot;I dig your edge.&quot;,
+        &quot;condition&quot;: [ { &quot;colorIdentity&quot;: &quot;B&quot;, &quot;not&quot;: true }, { &quot;hasLife&quot;:  2, &quot;not&quot;: true } ],
+        &quot;text&quot;: &quot;You don't have enough life force...come back with more to offer.&quot;,
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;Aw man...&quot; } ]
+      },
+      {
+        &quot;name&quot;: &quot;Any cool demon deals?&quot;,
+        &quot;condition&quot;: [ { &quot;colorIdentity&quot;: &quot;B&quot; }, { &quot;hasGold&quot;:  200 } ],
+        &quot;text&quot;: &quot;I can offer you this Treasure for the fair price of 200 gold.&quot;,
+        &quot;options&quot;: [
+          { &quot;name&quot;: &quot;This gem has a lot of edge, just like me. Deal!&quot; , &quot;effect&quot;: [ { &quot;addGold&quot;: -20000, &quot;addItem&quot;: &quot;Treasure&quot; } ] },
+          { &quot;name&quot;: &quot;I'll think about it.&quot; }
+        ]
+      },
+      {
+        &quot;name&quot;:&quot;Got any fancy demon blessing?&quot;,
+        &quot;condition&quot;: [ {&quot;colorIdentity&quot;: &quot;B&quot;}, { &quot;item&quot;: &quot;Treasure&quot; }, { &quot;hasBlessing&quot;:  &quot;Debug Demon&quot;, &quot;not&quot;: true } ],
+        &quot;text&quot;: &quot;Give me that Treasure of yours...\n(+1 health, Manasight, move speed 120%, Lord of the Pit starts in play)&quot;,
+        &quot;options&quot;: [
+          { &quot;name&quot;: &quot;That's shady.&quot;},
+          {
+            &quot;name&quot;: &quot;What can possibly go wrong?&quot;,
+            &quot;effect&quot;: [
+              { &quot;removeItem&quot;: &quot;Treasure&quot;, &quot;giveBlessing&quot;: { &quot;name&quot;: &quot;Debug Demon&quot; , &quot;lifeModifier&quot;: 1, &quot;colorView&quot;: true, &quot;moveSpeed&quot;: 2, &quot;startBattleWithCard&quot;: [ &quot;Lord of the Pit&quot; ] } }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Hey what's your favorite color?&quot;,
+        &quot;condition&quot;: [ {&quot;getQuestFlag&quot;:  { &quot;key&quot;:&quot;128&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;:1 } } ],
+        &quot;text&quot;: &quot;Why, purple. It is a powerful color.&quot;,
+        &quot;options&quot;: [
+          { &quot;name&quot;:  &quot;Thank you Satan.&quot;, &quot;effect&quot;:  [ { &quot;setQuestFlag&quot;:  { &quot;key&quot;:&quot;128&quot;, &quot;val&quot;:3 } } ] }
+        ]
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Demon"/>
+    <property name="name" value="Debug Demon"/>
+   </properties>
+  </object>
+  <object id="85" template="../obj/scroll.tx" x="208" y="96">
+   <properties>
+    <property name="reward">[
+ { &quot;cardName&quot;: &quot;Black Lotus&quot;, &quot;type&quot;:&quot;card&quot;, &quot;count&quot;:1 }
+]</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>

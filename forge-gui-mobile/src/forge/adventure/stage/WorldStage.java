@@ -91,7 +91,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                             Forge.clearTransitionScreen();
                         }
                     }, ScreenUtils.getFrameBufferTexture(), true, false));
-                    startPause(0.5f, new Runnable() {
+                    startPause(0.3f, new Runnable() {
                         @Override
                         public void run() {
                             ((DuelScene) SceneType.DuelScene.instance).setEnemy(currentMob);

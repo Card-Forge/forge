@@ -3,12 +3,12 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/waste_town.tmx",
+    "activeFile": "map/debug_map.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
+        "obj",
         "tileset",
         "map/main_story",
-        "obj",
         "map"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -1422,11 +1422,11 @@
             }
         },
         "map/debug_map.tmx": {
-            "scale": 8,
+            "scale": 2,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 240,
-                "y": 239.875
+                "x": 175.75,
+                "y": 316
             }
         },
         "map/djinnpalace_1.tmx": {
@@ -2663,7 +2663,7 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 235.33333333333331,
+                "x": 235.5,
                 "y": 135.66666666666663
             }
         },
@@ -2714,7 +2714,7 @@
         "tileset/main.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 1.5,
-            "scaleInEditor": 0.75
+            "scaleInEditor": 1
         }
     },
     "map.height": 60,
@@ -2726,16 +2726,14 @@
     "openFiles": [
         "map/debug_map.tmx",
         "tileset/buildings.tsx",
-        "tileset/main.tsx",
-        "map/waste_town.tmx"
+        "tileset/main.tsx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "map/debug_map.tmx",
-        "tileset/buildings.tsx",
         "tileset/main.tsx",
-        "map/waste_town.tmx",
+        "tileset/buildings.tsx",
+        "map/debug_map.tmx",
         "map/main_story/white_castle.tmx",
         "map/main_story/final_castle.tmx",
         "map/main_story/black_castle.tmx",
@@ -2743,7 +2741,8 @@
         "map/main_story/green_castle.tmx",
         "map/main_story/blue_castle.tmx",
         "map/main_story/colorless_castle.tmx",
-        "map/barbariancamp_2.tmx"
+        "map/barbariancamp_2.tmx",
+        "map/portal_1G2.tmx"
     ],
     "resizeMap.removeObjects": true,
     "textEdit.monospace": true

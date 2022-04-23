@@ -2,10 +2,10 @@ package forge.adventure.util;
 
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.SerializationException;
 import forge.Forge;
+import forge.adventure.character.EnemySprite;
 import forge.adventure.data.DialogData;
+import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.MapStage;
 import forge.util.Localizer;
 
@@ -32,21 +32,15 @@ public class MapDialog {
             "]";
 
 
-    public MapDialog(String S, MapStage ST, int parentID) {
-        this.stage = ST;
+    public MapDialog(String S, MapStage stage, int parentID) {
+        this.stage = stage;
         this.parentID = parentID;
-        Json json = new Json();
-        if (S.isEmpty()){
+        if (S.isEmpty()) {
             System.err.print("Dialog error. Dialog property is empty.\n");
-            this.data = json.fromJson(Array.class, DialogData.class, defaultJSON);
+            this.data = JSONStringLoader.parse(Array.class, DialogData.class, defaultJSON, defaultJSON);
             return;
         }
-        try { data = json.fromJson(Array.class, DialogData.class, S); }
-        catch(SerializationException E){
-            //JSON parsing could fail. Since this an user written part, assume failure is possible (it happens).
-            System.err.printf("[%s] while loading JSON file for dialog actor. JSON:\n%s\nUsing a default dialog.", E.getMessage(), S);
-            this.data = json.fromJson(Array.class, DialogData.class, defaultJSON);
-        }
+        this.data = JSONStringLoader.parse(Array.class, DialogData.class, S, defaultJSON);
     }
 
     private void loadDialog(DialogData dialog) { //Displays a dialog with dialogue and possible choices.
@@ -69,6 +63,7 @@ public class MapDialog {
                     TextButton B = Controls.newTextButton(name,() -> loadDialog(option));
                     B.getLabel().setWrap(true); //We want this to wrap in case it's a wordy choice.
                     D.getButtonTable().add(B).width(WIDTH - 10); //The button table also returns a Cell when adding.
+                    //TODO: Reducing the space a tiny bit could help. But should be fine as long as there aren't more than 4-5 options.
                     D.getButtonTable().row(); //Add a row. Tried to allow a few per row but it was a bit erratic.
                 }
             }
@@ -79,7 +74,7 @@ public class MapDialog {
         }
     }
 
-    public void activate() {
+    public void activate() { //Method for actors to show their dialogues.
         for(DialogData dialog:data) {
             if(isConditionOk(dialog.condition)) {
                 loadDialog(dialog);
@@ -87,40 +82,120 @@ public class MapDialog {
         }
     }
 
-    void setEffects(DialogData.EffectData[] data) {
+    void setEffects(DialogData.ActionData[] data) {
         if(data==null) return;
-        for(DialogData.EffectData E:data) {
-            if (E.removeItem != null){ //Removes an item from the player's inventory.
+        for(DialogData.ActionData E:data) {
+            if(E.removeItem != null){ //Removes an item from the player's inventory.
                 Current.player().removeItem(E.removeItem);
             }
-            if (E.addItem != null){ //Gives an item to the player.
+            if(E.addItem != null){ //Gives an item to the player.
                 Current.player().addItem(E.addItem);
             }
-            if (E.deleteMapObject != 0){ //Removes a dummy object from the map.
+            if(E.addLife != 0){ //Gives (positive or negative) life to the player. Cannot go over max health.
+                Current.player().heal(E.addLife);
+            }
+            if(E.addGold != 0){ //Gives (positive or negative) gold to the player.
+                if(E.addGold > 0) Current.player().giveGold(E.addGold);
+                else               Current.player().takeGold(-E.addGold);
+            }
+            if(E.deleteMapObject != 0){ //Removes a dummy object from the map.
                 if(E.deleteMapObject < 0) stage.deleteObject(parentID);
                 else stage.deleteObject(E.deleteMapObject);
             }
-            if (E.battleWithActorID != 0){ //Starts a battle with the given enemy ID.
+            if(E.battleWithActorID != 0){ //Starts a battle with the given enemy ID.
                 if(E.battleWithActorID < 0) stage.beginDuel(stage.getEnemyByID(parentID));
                 else stage.beginDuel(stage.getEnemyByID(E.battleWithActorID));
             }
+            if(E.giveBlessing != null) { //Gives a blessing for your next battle.
+                Current.player().addBlessing(E.giveBlessing);
+            }
+            if(E.setColorIdentity != null && !E.setColorIdentity.isEmpty()){ //Sets color identity (use sparingly)
+                Current.player().setColorIdentity(E.setColorIdentity);
+            }
             //Create map object.
-            //Check for quest flags, local.
-            //Check for quest flags, global.
+            //Toggle dummy object's hitbox. (Like to make a door passable)
+            if(E.setQuestFlag != null && !E.setQuestFlag.key.isEmpty()){ //Set a quest to given value.
+                Current.player().setQuestFlag(E.setQuestFlag.key, E.setQuestFlag.val);
+            }
+            if(E.advanceQuestFlag != null && !E.advanceQuestFlag.isEmpty()){ //Increase a given quest flag by 1.
+                Current.player().advanceQuestFlag(E.advanceQuestFlag);
+            }
+            //Set dungeon flag.
+            if(E.setEffect != null){ //Replace current effects.
+                EnemySprite EN = stage.getEnemyByID(parentID);
+                EN.effect = E.setEffect;
+            }
         }
     }
 
+    public boolean canShow(){
+        if( data == null) return false;
+        for(DialogData dialog:data) {
+            if(isConditionOk(dialog.condition)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     boolean isConditionOk(DialogData.ConditionData[] data) {
-        if(data==null) return true;
+        if( data==null ) return true;
+        AdventurePlayer player = Current.player();
         for(DialogData.ConditionData condition:data) {
-            if(condition.item != null && !condition.item.isEmpty()) { //Check for item.
-                if(!Current.player().hasItem(condition.item)) {
+            if(condition.item != null && !condition.item.isEmpty()) { //Check for an item in player's inventory.
+                if(!player.hasItem(condition.item)) {
                     if(!condition.not) return false; //Only return on a false.
+                } else if(condition.not) return false;
+            }
+            if(condition.colorIdentity != null && !condition.colorIdentity.isEmpty()) { //Check for player's color ID.
+                if(!player.getColorIdentity().equals(condition.colorIdentity.toUpperCase())){
+                    if(!condition.not) return false;
+                } else if(condition.not) return false;
+            }
+            if(condition.hasGold != 0){ //Check for at least X gold.
+                if(player.getGold() < condition.hasGold){
+                    if(!condition.not) return false;
+                } else if(condition.not) return false;
+            }
+            if(condition.hasLife != 0){ //Check for at least X life..
+                if(player.getLife() < condition.hasLife + 1){
+                    if(!condition.not) return false;
+                } else if(condition.not) return false;
+            }
+            if(condition.hasBlessing != null && !condition.hasBlessing.isEmpty()){ //Check for a named blessing.
+                if(!player.hasBlessing(condition.hasBlessing)){
+                   if(!condition.not) return false;
                 } else if(condition.not) return false;
             }
             if(condition.actorID != 0) { //Check for actor ID.
                 if(!stage.lookForID(condition.actorID)){
                     if(!condition.not) return false; //Same as above.
+                } else if(condition.not) return false;
+            }
+            if(condition.getQuestFlag != null){
+                String key = condition.getQuestFlag.key;
+                String cond = condition.getQuestFlag.op;
+
+                int val = condition.getQuestFlag.val;
+                int QF = player.getQuestFlag(key);
+                boolean result = false;
+                if(!player.checkQuestFlag(key)) return false; //If the quest is not ongoing, stop.
+
+
+                switch(cond){
+                    default: case "EQUALS": case"EQUAL": case "=":
+                        if(QF == val) result = true; break;
+                    case "LESSTHAN": case "<":  if(QF < val) result = true; break;
+                    case "MORETHAN": case ">":  if(QF > val) result = true; break;
+                    case "LE_THAN": case "<=":  if(QF <= val) result = true; break;
+                    case "ME_THAN": case ">=":  if(QF >= val) result = true; break;
+                }
+                if(!result) { if(!condition.not) return false; }
+                else { if(condition.not) return false; }
+            }
+            if(condition.checkQuestFlag != null && !condition.checkQuestFlag.isEmpty()){
+                if(!player.checkQuestFlag(condition.checkQuestFlag)){
+                    if(!condition.not) return false;
                 } else if(condition.not) return false;
             }
         }

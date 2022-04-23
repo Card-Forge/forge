@@ -588,6 +588,14 @@
     }
   },
   {
+    "name": "Manasight Amulet",
+    "equipmentSlot": "Neck",
+    "iconName": "RelicAmulet",
+    "effect": {
+      "colorView": true
+    }
+  },
+  {
     "name": "Amulet of Kroog",
     "equipmentSlot": "Neck",
     "iconName": "AmuletofKroog",

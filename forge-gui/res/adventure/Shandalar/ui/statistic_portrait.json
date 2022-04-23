@@ -16,15 +16,15 @@
       "x": 4,
       "y": 4,
       "width": 262,
-      "height": 90
+      "height": 98
     },
     {
       "type": "Scroll",
       "name": "enemies",
       "x": 4,
-      "y": 98,
+      "y": 106,
       "width": 262,
-      "height": 335
+      "height": 327
     },
     {
       "type": "Image",
@@ -36,28 +36,19 @@
     },
     {
       "type": "Image",
-      "name": "avatarBorder",
-      "image": "ui/avatarhud.png",
-      "x": 24,
-      "y": 8,
+      "name": "colorFrame",
+      "image": "ui/colorC.png",
+      "x": 8,
+      "y": 25,
       "width": 64,
       "height": 64
     },
     {
       "type": "Label",
-      "name": "playerName",
-      "x": 34,
-      "y": 70,
-      "width": 80,
-      "height": 24,
-      "font": "black"
-    },
-    {
-      "type": "Label",
       "name": "totalWins",
-      "x": 234,
-      "y": 14,
-      "width": 40,
+      "x": 144,
+      "y": 56,
+      "width": 26,
       "height": 24,
       "font": "black"
     },
@@ -65,8 +56,8 @@
       "type": "Label",
       "name": "wins",
       "text": "Win:",
-      "x": 170,
-      "y": 14,
+      "x": 98,
+      "y": 56,
       "width": 60,
       "height": 24,
       "font": "black"
@@ -74,9 +65,9 @@
     {
       "type": "Label",
       "name": "totalLoss",
-      "x": 234,
-      "y": 34,
-      "width": 40,
+      "x": 144,
+      "y": 68,
+      "width": 26,
       "height": 24,
       "font": "black"
     },
@@ -84,8 +75,8 @@
       "type": "Label",
       "name": "loss",
       "text": "Loss:",
-      "x": 170,
-      "y": 34,
+      "x": 98,
+      "y": 68,
       "width": 60,
       "height": 24,
       "font": "black"
@@ -93,9 +84,9 @@
     {
       "type": "Label",
       "name": "lossWinRatio",
-      "x": 234,
-      "y": 54,
-      "width": 40,
+      "x": 144,
+      "y": 80,
+      "width": 26,
       "height": 24,
       "font": "black"
     },
@@ -103,8 +94,8 @@
       "type": "Label",
       "name": "winloss",
       "text": "Win Loss Ratio:",
-      "x": 170,
-      "y": 54,
+      "x": 98,
+      "y": 80,
       "width": 60,
       "height": 24,
       "font": "black"
@@ -119,11 +110,20 @@
       "y": 440
     },
     {
+      "type": "Label",
+      "name": "playerName",
+      "x": 98,
+      "y": 4,
+      "width": 80,
+      "height": 24,
+      "font": "black"
+    },
+    {
       "type": "Image",
       "name": "lifeIcon",
       "image": "ui/life.png",
-      "x": 104,
-      "y": 40,
+      "x": 98,
+      "y": 22,
       "width": 16,
       "height": 16
     },
@@ -131,8 +131,8 @@
       "type": "Image",
       "name": "goldIcon",
       "image": "ui/money.png",
-      "x": 104,
-      "y": 60,
+      "x": 98,
+      "y": 42,
       "width": 16,
       "height": 16
     },
@@ -142,8 +142,8 @@
       "font": "black",
       "width": 64,
       "height": 16,
-      "x": 124,
-      "y": 40
+      "x": 118,
+      "y": 22
     },
     {
       "type": "Label",
@@ -151,8 +151,17 @@
       "font": "black",
       "width": 64,
       "height": 16,
-      "x": 124,
-      "y": 60
+      "x": 118,
+      "y": 42
+    },
+    {
+      "type":  "Scroll",
+      "name":  "blessingInfo",
+      "style": "nobg",
+      "x": 170,
+      "y": 14,
+      "width": 86,
+      "height": 80
     },
     {
       "type": "Table",
