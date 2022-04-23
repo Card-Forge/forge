@@ -285,7 +285,24 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         types = types.replace("ChosenFromList", "");
                     }
                     for (String type : types.split(",")) {
-                        typesToAdd.add(CounterType.getType(type));
+                        if (type.contains("EachType")) {
+                            CardCollectionView counterCards =
+                                    CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield),
+                                            type.split("_")[1], card.getController(), card, sa);
+                            List <CounterType> counterTypes = Lists.newArrayList();
+                            for (Card c : counterCards) {
+                                for (final Map.Entry<CounterType, Integer> map : c.getCounters().entrySet()) {
+                                    if (!counterTypes.contains(map.getKey())) {
+                                        counterTypes.add(map.getKey());
+                                    }
+                                }
+                            }
+                            for (CounterType ct : counterTypes) {
+                                resolvePerType(sa, placer, ct, counterAmount, table, false);
+                            }
+                        } else {
+                            typesToAdd.add(CounterType.getType(type));
+                        }
                     }
                     for (CounterType ct : typesToAdd) {
                         if (obj instanceof Player) {
