@@ -44,16 +44,22 @@ public class DeckRecognizerTest extends CardMockTestCase {
         }
     }
 
-    /*
-     * ====================================== TEST SINGLE (Card and Non-Card) Parts
-     * - CardName - Card Amount - Set Code - Collector Number - Deck Name - Card
-     * Type - Deck Section - Mana Colour ======================================
+    /* ======================================
+     * TEST SINGLE (Card and Non-Card) Parts
+     * - CardName
+     * - Card Amount
+     * - Set Code
+     * - Collector Number
+     * - Deck Name
+     * - Card Type
+     * - Deck Section
+     * - Mana Colour
+     * ======================================
      */
 
-    /*
-     * ================================== Rex Parsing and Matching: CARD DB
-     * =================================
-     */
+    /*==================================
+     * Rex Parsing and Matching: CARD DB
+     * ================================= */
     @Test
     void testMatchAllCardNamesInForgeDB() {
         if (mtgUniqueCardNames == null)
