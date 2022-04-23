@@ -125,7 +125,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
     }
 
     protected void resolvePerType(SpellAbility sa, final Player placer, CounterType counterType, int counterAmount,
-            GameEntityCounterTable table) {
+                                  GameEntityCounterTable table, boolean stopForTypes) {
         final Card card = sa.getHostCard();
         final Game game = card.getGame();
         final Player activator = sa.getActivatingPlayer();
@@ -277,7 +277,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     continue;
                 }
 
-                if (sa.hasParam("CounterTypes")) {
+                if (stopForTypes && sa.hasParam("CounterTypes")) {
                     final List<CounterType> typesToAdd = Lists.newArrayList();
                     String types = sa.getParam("CounterTypes");
                     if (types.contains("ChosenFromList")) {
@@ -496,7 +496,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             Map<CounterType, Integer> counterMap = (Map<CounterType, Integer>) sa
                     .getTriggeringObject(AbilityKey.CounterMap);
             for (Map.Entry<CounterType, Integer> e : counterMap.entrySet()) {
-                resolvePerType(sa, placer, e.getKey(), e.getValue(), table);
+                resolvePerType(sa, placer, e.getKey(), e.getValue(), table, false);
             }
         } else if (sa.hasParam("SharedKeywords")) {
             List<String> keywords = Arrays.asList(sa.getParam("SharedKeywords").split(" & "));
@@ -505,7 +505,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     : new String[] { "Card" };
             keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, card, sa);
             for (String k : keywords) {
-                resolvePerType(sa, placer, CounterType.getType(k), counterAmount, table);
+                resolvePerType(sa, placer, CounterType.getType(k), counterAmount, table, false);
             }
         } else {
             CounterType counterType = null;
@@ -520,7 +520,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     return;
                 }
             }
-            resolvePerType(sa, placer, counterType, counterAmount, table);
+            resolvePerType(sa, placer, counterType, counterAmount, table, true);
         }
 
         int totalAdded = table.totalValues();
