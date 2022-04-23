@@ -153,7 +153,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
             Iterables.addAll(tgtObjects, activator.getController().chooseCardsForEffect(leastToughness, sa,
                     Localizer.getInstance().getMessage("lblChooseACreatureWithLeastToughness"), 1, 1, false, params));
-        } else if (sa.hasParam("Choices")) {
+        } else if (sa.hasParam("Choices") && counterType != null) {
             ZoneType choiceZone = ZoneType.Battlefield;
             if (sa.hasParam("ChoiceZone")) {
                 choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
