@@ -225,7 +225,7 @@
     &quot;text&quot;: &quot;You...you hurt Grog!\nYou...you filthy swine! I will stop at nothing until I see you defeated!\nGods...anyone! Grant me strength! Grant me REVENGE!!!!&quot;,
     &quot;condition&quot;: [
       {
-        &quot;actorID&quot;: 1111,
+        &quot;actorID&quot;: 82,
         &quot;not&quot;: true
       }
     ],
@@ -235,11 +235,12 @@
         &quot;effect&quot;: [
           {
             &quot;setEffect&quot;: {
-              &quot;lifeModifier&quot;: 200,
+              &quot;lifeModifier&quot;: 99,
               &quot;startBattleWithCard&quot;: [
-                &quot;Elesh Norn, Grand Cenobyte&quot;,
                 &quot;Avacyn, Angel of Hope&quot;,
-                &quot;Urabrask the Hidden&quot;
+                &quot;Urabrask the Hidden&quot;,
+                &quot;Elesh Norn, Grand Cenobite&quot;,
+                &quot;Emrakul, the Aeons Torn&quot;
               ]
             }, &quot;battleWithActorID&quot;: -1
           }

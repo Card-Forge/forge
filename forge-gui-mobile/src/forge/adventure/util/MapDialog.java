@@ -3,6 +3,7 @@ package forge.adventure.util;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Array;
 import forge.Forge;
+import forge.adventure.character.EnemySprite;
 import forge.adventure.data.DialogData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.MapStage;
@@ -120,10 +121,10 @@ public class MapDialog {
                 Current.player().advanceQuestFlag(E.advanceQuestFlag);
             }
             //Set dungeon flag.
-//            if(E.setEffect != null){ //Replace current effects.
-                //EnemySprite EN = stage.getEnemyByID(parentID);
-                //EN.effect = E.setEffect;
-//            }
+            if(E.setEffect != null){ //Replace current effects.
+                EnemySprite EN = stage.getEnemyByID(parentID);
+                EN.effect = E.setEffect;
+            }
         }
     }
 
