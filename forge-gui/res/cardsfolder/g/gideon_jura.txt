@@ -2,7 +2,10 @@ Name:Gideon Jura
 ManaCost:3 W W
 Types:Legendary Planeswalker Gideon
 Loyalty:6
-A:AB$ MustAttack | Cost$ AddCounter<2/LOYALTY> | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Defender$ Self | Planeswalker$ True | SpellDescription$ During target opponent's next turn, creatures that player controls attack CARDNAME if able.
+A:AB$ DelayedTrigger | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Opponent | Mode$ Phase | Phase$ Upkeep-> | DelayedTriggerDefinedPlayer$ Targeted | RememberObjects$ Targeted | Execute$ TrigEffect | Static$ True | SpellDescription$ During target opponent's next turn, creatures that player controls attack CARDNAME if able.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ DelayTriggerRemembered | StaticAbilities$ MustAttack | SubAbility$ DBCleanup
+SVar:MustAttack:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature.RememberedPlayerCtrl | MustAttack$ EffectSource | Description$ During target player's next turn, creatures that player controls attack EFFECTSOURCE if able.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Destroy | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | Planeswalker$ True | SpellDescription$ Destroy target tapped creature.
 A:AB$ Animate | Cost$ AddCounter<0/LOYALTY> | Defined$ Self | Power$ 6 | Toughness$ 6 | Types$ Creature,Human,Soldier | SubAbility$ DBPrevent | Planeswalker$ True | Ultimate$ True | SpellDescription$ Until end of turn, CARDNAME becomes a 6/6 Human Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
 SVar:DBPrevent:DB$ Pump | Defined$ Self | KW$ Prevent all damage that would be dealt to CARDNAME.
