@@ -6066,7 +6066,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     @Override
     protected final boolean canBeEquippedBy(final Card equip) {
-        return isCreature() && isInPlay();
+        if (isCreature() && isInPlay()) {
+            return true;
+        } else if (isPlaneswalker() && isInPlay()) {
+            for (KeywordInterface inst : equip.getKeywords(Keyword.EQUIP)) {
+                if (inst.getOriginal().contains("planeswalker")) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
