@@ -16,14 +16,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.event.GameEventRandomLog;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -50,8 +43,10 @@ public class CountersPutEffect extends SpellAbilityEffect {
         if (spellAbility.hasParam("CounterTypes")) {
             stringBuilder.append(spellAbility.getActivatingPlayer()).append(" ");
             String desc = spellAbility.getDescription();
-            desc = desc.substring(desc.indexOf("Put"), desc.indexOf(" on ") + 4)
-                    .replaceFirst("Put", "puts");
+            if (desc.contains("Put")) {
+                desc = desc.substring(desc.indexOf("Put"), desc.indexOf(" on ") + 4)
+                        .replaceFirst("Put", "puts");
+            }
             stringBuilder.append(desc).append(Lang.joinHomogenous(getTargets(spellAbility))).append(".");
             return stringBuilder.toString();
         }
