@@ -10,7 +10,10 @@ SVar:Token4:DB$ Token | TokenAmount$ 2 | TokenScript$ r_3_1_elemental_haste | At
 SVar:Token5:DB$ Token | TokenAmount$ 3 | TokenScript$ w_1_1_soldier | SpellDescription$ Create three 1/1 white Soldier creature tokens.
 SVar:Token6:DB$ Token | TokenScript$ b_3_3_beast_deathtouch | SpellDescription$ Create a 3/3 black Beast creature token with deathtouch.
 SVar:Dig7:DB$ Dig | DigNum$ 5 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature | SpellDescription$ Reveal the top five cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.
-SVar:MustAttack8:DB$ MustAttack | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Defender$ Self | SpellDescription$ During target opponent's next turn, creatures that player controls attack NICKNAME if able.
+SVar:MustAttack8:DB$ DelayedTrigger | ValidTgts$ Opponent | Mode$ Phase | Phase$ Upkeep-> | DelayedTriggerDefinedPlayer$ Targeted | RememberObjects$ Targeted | Execute$ TrigEffect | Static$ True | SpellDescription$ During target opponent's next turn, creatures that player controls attack NICKNAME if able.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ DelayTriggerRemembered | StaticAbilities$ MustAttack | SubAbility$ DBCleanup
+SVar:MustAttack:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature.RememberedPlayerCtrl | MustAttack$ EffectSource | Description$ During target player's next turn, creatures that player controls attack EFFECTSOURCE if able.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PutCounter9:DB$ PutCounter | Defined$ Self | CounterType$ LOYALTY | CounterNum$ X9 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | StackDescription$ SpellDescription | SpellDescription$ Put a loyalty counter on NICKNAME for each creature target opponent controls.
 SVar:X9:TargetedPlayer$CreaturesInPlay
 SVar:Effect10:DB$ Effect | Triggers$ TrigAttack10 | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.
