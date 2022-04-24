@@ -2762,14 +2762,22 @@ public class AbilityUtils {
             String[] paidparts = l[0].split("\\$", 2);
             String[] lparts = paidparts[0].split(" ", 2);
 
-            final CardCollectionView cardsInZones = lparts[0].length() > 5
-                ? game.getCardsIn(ZoneType.listValueOf(lparts[0].substring(5)))
-                : game.getCardsIn(ZoneType.Battlefield);
-
-            if (paidparts.length > 1) {
-                return doXMath(handlePaid(CardLists.getValidCards(cardsInZones, lparts[1], player, c, ctb), paidparts[1], c, ctb), expr, c, ctb);
+            final CardCollectionView cardsInZones;
+            if (lparts[0].contains("All")) {
+                cardsInZones = game.getCardsInGame();
+            } else {
+                cardsInZones = lparts[0].length() > 5
+                        ? game.getCardsIn(ZoneType.listValueOf(lparts[0].substring(5)))
+                                : game.getCardsIn(ZoneType.Battlefield);
             }
-            return doXMath(CardLists.getValidCardCount(cardsInZones, lparts[1], player, c, ctb), expr, c, ctb);
+
+            int cnt;
+            if (paidparts.length > 1) {
+                cnt = handlePaid(CardLists.getValidCards(cardsInZones, lparts[1], player, c, ctb), paidparts[1], c, ctb);
+            } else {
+                cnt = CardLists.getValidCardCount(cardsInZones, lparts[1], player, c, ctb);
+            }
+            return doXMath(cnt, expr, c, ctb);
         }
 
         if (sq[0].startsWith("MostCardName")) {
