@@ -13,12 +13,13 @@ import static forge.adventure.util.Paths.ITEMS_ATLAS;
 /**
  * Data class that will be used to read Json configuration files
  * ItemData
- * contains the information possible hero sprite
+ * contains the information for equipment and items.
  */
 public class ItemData {
     public String name;
     public String equipmentSlot;
     public EffectData effect;
+    public String description; //Manual description of the item.
     public String iconName;
     public boolean questItem=false;
     public int cost=1000;
@@ -57,11 +58,13 @@ public class ItemData {
     }
 
     public String getDescription() {
-        String description = "";
+        String result = "";
+        if(this.description != null && !this.description.isEmpty())
+            result += description + "\n";
         if(this.equipmentSlot != null && !this.equipmentSlot.isEmpty())
-            description += "Slot: " + this.equipmentSlot + "\n";
+            result += "Slot: " + this.equipmentSlot + "\n";
         if(effect != null)
-            description += effect.getDescription();
-        return description;
+            result += effect.getDescription();
+        return result;
     }
 }

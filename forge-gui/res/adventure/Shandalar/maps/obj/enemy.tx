@@ -4,6 +4,9 @@
  <object name="Enemy" type="enemy" gid="1307" width="16" height="16">
   <properties>
    <property name="enemy" value=""/>
+   <property name="spawn.Easy" type="bool" value="true"/>
+   <property name="spawn.Hard" type="bool" value="true"/>
+   <property name="spawn.Normal" type="bool" value="true"/>
   </properties>
  </object>
 </template>

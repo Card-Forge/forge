@@ -44,7 +44,7 @@ public class MapDialog {
     }
 
     private void loadDialog(DialogData dialog) { //Displays a dialog with dialogue and possible choices.
-        setEffects(dialog.effect);
+        setEffects(dialog.action);
         Dialog D = stage.getDialog();
         Localizer L = Forge.getLocalizer();
         D.getContentTable().clear(); D.getButtonTable().clear(); //Clear tables to start fresh.
@@ -96,7 +96,7 @@ public class MapDialog {
             }
             if(E.addGold != 0){ //Gives (positive or negative) gold to the player.
                 if(E.addGold > 0) Current.player().giveGold(E.addGold);
-                else               Current.player().takeGold(-E.addGold);
+                else              Current.player().takeGold(-E.addGold);
             }
             if(E.deleteMapObject != 0){ //Removes a dummy object from the map.
                 if(E.deleteMapObject < 0) stage.deleteObject(parentID);
@@ -112,15 +112,12 @@ public class MapDialog {
             if(E.setColorIdentity != null && !E.setColorIdentity.isEmpty()){ //Sets color identity (use sparingly)
                 Current.player().setColorIdentity(E.setColorIdentity);
             }
-            //Create map object.
-            //Toggle dummy object's hitbox. (Like to make a door passable)
             if(E.setQuestFlag != null && !E.setQuestFlag.key.isEmpty()){ //Set a quest to given value.
                 Current.player().setQuestFlag(E.setQuestFlag.key, E.setQuestFlag.val);
             }
             if(E.advanceQuestFlag != null && !E.advanceQuestFlag.isEmpty()){ //Increase a given quest flag by 1.
                 Current.player().advanceQuestFlag(E.advanceQuestFlag);
             }
-            //Set dungeon flag.
             if(E.setEffect != null){ //Replace current effects.
                 EnemySprite EN = stage.getEnemyByID(parentID);
                 EN.effect = E.setEffect;
@@ -142,6 +139,8 @@ public class MapDialog {
         if( data==null ) return true;
         AdventurePlayer player = Current.player();
         for(DialogData.ConditionData condition:data) {
+            //TODO:Check for card in inventory.
+            //TODO:Check local map flag.
             if(condition.item != null && !condition.item.isEmpty()) { //Check for an item in player's inventory.
                 if(!player.hasItem(condition.item)) {
                     if(!condition.not) return false; //Only return on a false.

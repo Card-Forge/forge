@@ -17,6 +17,7 @@
       "startingLife": 16,
       "staringMoney": 200,
       "enemyLifeFactor": 0.8,
+      "spawnRank": 0,
       "sellFactor": 0.5     ,
       "startItems": ["Treasure","Jungle Shield"]
     },
@@ -26,6 +27,7 @@
       "staringMoney": 100,
       "startingDifficulty": true,
       "enemyLifeFactor": 1.0,
+      "spawnRank": 1,
       "sellFactor": 0.2        ,
       "startItems": [ "Treasure"]
     },
@@ -34,6 +36,7 @@
       "startingLife": 8,
       "staringMoney": 10,
       "enemyLifeFactor": 1.5,
+      "spawnRank": 2,
       "sellFactor": 0.1
     }
   ]
