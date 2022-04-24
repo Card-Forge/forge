@@ -288,7 +288,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         if (type.contains("EachType")) {
                             CardCollectionView counterCards =
                                     CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield),
-                                            type.split("_")[1], card.getController(), card, sa);
+                                            type.split("_")[1], activator, card, sa);
                             List <CounterType> counterTypes = Lists.newArrayList();
                             for (Card c : counterCards) {
                                 for (final Map.Entry<CounterType, Integer> map : c.getCounters().entrySet()) {
