@@ -29,12 +29,12 @@ public class EffectEditor extends JComponent  {
         parameters.setBorder(BorderFactory.createTitledBorder("Effect"));
         parameters.setLayout(new GridLayout(7,2)) ;
 
-        parameters.add(new JLabel("Name:"));                parameters.add(name);
-        parameters.add(new JLabel("Start with extra cards:"));    parameters.add(changeStartCards);
-        parameters.add(new JLabel("Change life:"));        parameters.add(lifeModifier);
-        parameters.add(new JLabel("Movement speed:"));           parameters.add(moveSpeed);
-        parameters.add(new JLabel("Start battle with cards:")); parameters.add(startBattleWithCard);
-        parameters.add(new JLabel("color view:"));           parameters.add(colorView);
+        parameters.add(new JLabel("Name:"));                        parameters.add(name);
+        parameters.add(new JLabel("Start with extra cards:"));      parameters.add(changeStartCards);
+        parameters.add(new JLabel("Change life:"));                 parameters.add(lifeModifier);
+        parameters.add(new JLabel("Movement speed:"));              parameters.add(moveSpeed);
+        parameters.add(new JLabel("Start battle with cards:"));     parameters.add(startBattleWithCard);
+        parameters.add(new JLabel("color view:"));                  parameters.add(colorView);
         add(parameters);
         if(!isOpponentEffect)
         {    add(new JLabel("Opponent:")); add(opponent);}
