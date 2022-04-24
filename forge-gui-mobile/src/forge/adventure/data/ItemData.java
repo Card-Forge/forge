@@ -23,6 +23,20 @@ public class ItemData {
     public String iconName;
     public boolean questItem=false;
     public int cost=1000;
+    public ItemData()
+    {
+
+    }
+    public ItemData(ItemData cpy)
+    {
+          name              = cpy.name         ;
+          equipmentSlot     = cpy.equipmentSlot;
+          effect            = new EffectData(cpy.effect);
+          description       = cpy.description  ;
+          iconName          = cpy.iconName     ;
+          questItem         = cpy.questItem    ;
+          cost              = cpy.cost         ;
+    }
 
     public Sprite sprite()
     {
@@ -67,4 +81,5 @@ public class ItemData {
             result += effect.getDescription();
         return result;
     }
+
 }

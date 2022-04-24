@@ -20,6 +20,20 @@ public class EffectData implements Serializable {
     //Opponent field.
     public EffectData opponent;          //Effects to be applied to the opponent's side.
 
+    public EffectData()
+    {
+
+    }
+    public EffectData(EffectData effect) {
+
+        name=effect.name;
+        lifeModifier=effect.lifeModifier;
+        changeStartCards=effect.changeStartCards;
+        startBattleWithCard=effect.startBattleWithCard;
+        colorView=effect.colorView;
+        opponent=opponent==null?null:new EffectData(effect.opponent);
+    }
+
     public Array<IPaperCard> startBattleWithCards() {
         Array<IPaperCard> startCards=new Array<>();
         if(startBattleWithCard != null) {
