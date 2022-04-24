@@ -1,16 +1,14 @@
 package forge.card;
 
-import forge.ImageCache;
-import forge.ImageKeys;
-import forge.Singletons;
-import forge.StaticData;
-import forge.gamesimulationtests.util.CardDatabaseHelper;
-import forge.item.PaperCard;
-import forge.localinstance.properties.ForgeConstants;
-import forge.localinstance.properties.ForgePreferences;
-import forge.model.FModel;
-import forge.util.Localizer;
-import forge.util.TextUtil;
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import javax.imageio.ImageIO;
+
 import org.apache.commons.lang3.StringUtils;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
@@ -22,20 +20,24 @@ import org.testng.IObjectFactory;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.ObjectFactory;
 
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import forge.ImageCache;
+import forge.ImageKeys;
+import forge.Singletons;
+import forge.StaticData;
+import forge.gamesimulationtests.util.CardDatabaseHelper;
+import forge.item.PaperCard;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
+import forge.util.Localizer;
+import forge.util.TextUtil;
 
-@PrepareForTest(value = {FModel.class, Singletons.class, ResourceBundle.class,
-        ImageCache.class, ImageIO.class, ImageKeys.class,
-        ForgeConstants.class, Localizer.class})
-@SuppressStaticInitializationFor({"forge.ImageCache", "forge.localinstance.properties.ForgeConstants"})
-@PowerMockIgnore({"javax.xml.*", "org.xml.sax.*", "com.sun.org.apache.xerces.*", "org.w3c.dom.*",  "org.springframework.context.*", "org.apache.log4j.*"})
-public class ForgeCardMockTestCase extends PowerMockTestCase {
+@PrepareForTest(value = { FModel.class, Singletons.class, ResourceBundle.class, ImageCache.class, ImageIO.class,
+        ImageKeys.class, ForgeConstants.class, Localizer.class })
+@SuppressStaticInitializationFor({ "forge.ImageCache", "forge.localinstance.properties.ForgeConstants" })
+@PowerMockIgnore({ "javax.xml.*", "org.xml.sax.*", "com.sun.org.apache.xerces.*", "org.w3c.dom.*",
+        "org.springframework.context.*", "org.apache.log4j.*" })
+public class CardMockTestCase extends PowerMockTestCase {
 
     public static final String MOCKED_LOCALISED_STRING = "any localised string";
 
@@ -73,7 +75,7 @@ public class ForgeCardMockTestCase extends PowerMockTestCase {
         Field fAssetsDir = PowerMockito.field(ForgeConstants.class, "ASSETS_DIR");
         fAssetsDir.set(ForgeConstants.class, assetDir);
         // User Dir
-        String homeDir = ForgeCardMockTestCase.getUserDir();
+        String homeDir = CardMockTestCase.getUserDir();
         Field fUserDir = PowerMockito.field(ForgeConstants.class, "USER_DIR");
         fUserDir.set(ForgeConstants.class, homeDir);
         // User Pref Dir
@@ -130,11 +132,14 @@ public class ForgeCardMockTestCase extends PowerMockTestCase {
 
     @BeforeMethod
     protected void initMocks() throws Exception {
-        //Loading a card also automatically loads the image, which we do not want (even if it wouldn't cause exceptions).
-        //The static initializer block in ImageCache can't fully be mocked (https://code.google.com/p/powermock/issues/detail?id=256), so we also need to mess with ImageIO...
+        // Loading a card also automatically loads the image, which we do not want (even
+        // if it wouldn't cause exceptions).
+        // The static initializer block in ImageCache can't fully be mocked
+        // (https://code.google.com/p/powermock/issues/detail?id=256), so we also need
+        // to mess with ImageIO...
         initCardImageMocks();
         initForgeConstants();
-        //Mocking some more static stuff
+        // Mocking some more static stuff
         initForgePreferences();
         initializeStaticData();
     }
@@ -166,7 +171,8 @@ public class ForgeCardMockTestCase extends PowerMockTestCase {
     }
 
     protected void initCardImageMocks() {
-        //make sure that loading images only happens in a GUI environment, so we no longer need to mock this
+        // make sure that loading images only happens in a GUI environment, so we no
+        // longer need to mock this
         PowerMockito.mockStatic(ImageIO.class);
         PowerMockito.mockStatic(ImageCache.class);
         PowerMockito.mockStatic(ImageKeys.class);

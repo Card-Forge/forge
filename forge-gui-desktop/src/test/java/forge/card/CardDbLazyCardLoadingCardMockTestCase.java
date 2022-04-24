@@ -1,21 +1,24 @@
 package forge.card;
 
-import forge.StaticData;
-import forge.gamesimulationtests.util.CardDatabaseHelper;
-import forge.item.PaperCard;
-import forge.model.FModel;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
+
 import org.powermock.api.mockito.PowerMockito;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import forge.StaticData;
+import forge.gamesimulationtests.util.CardDatabaseHelper;
+import forge.item.PaperCard;
+import forge.model.FModel;
 
-public class CardDbTestLazyCardLoading extends ForgeCardMockTestCase {
+public class CardDbLazyCardLoadingCardMockTestCase extends CardMockTestCase {
 
     protected CardDb cardDb;
 
     @BeforeMethod
-    public void setup(){
+    public void setup() {
         StaticData data = FModel.getMagicDb();
         this.cardDb = data.getCommonCards();
     }
@@ -27,9 +30,9 @@ public class CardDbTestLazyCardLoading extends ForgeCardMockTestCase {
     }
 
     @Test
-    public void testLoadAndGetBorrowing100_000ArrowsCardFromAllEditions(){
+    public void testLoadAndGetBorrowing100_000ArrowsCardFromAllEditions() {
         String cardName = "Borrowing 100,000 Arrows";
-        String[] allAvailableEds = new String[] {"PTK", "ME3", "C13", "CMA", "A25", "MB1"};
+        String[] allAvailableEds = new String[] { "PTK", "ME3", "C13", "CMA", "A25", "MB1" };
 
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
@@ -45,7 +48,7 @@ public class CardDbTestLazyCardLoading extends ForgeCardMockTestCase {
         assertEquals(borrowingCard.getEdition(), "MB1");
 
         // Now get card from all the specified editions
-        for (String setCode : allAvailableEds){
+        for (String setCode : allAvailableEds) {
             borrowingCard = this.cardDb.getCard(cardName, setCode);
             assertNotNull(borrowingCard);
             assertEquals(borrowingCard.getName(), cardName);
@@ -54,8 +57,8 @@ public class CardDbTestLazyCardLoading extends ForgeCardMockTestCase {
     }
 
     @Test
-    public void testLoadAndGetAinokBondKinFromKTKWithCaseInsensitiveCardName(){
-        String cardName = "aiNOk Bond-kin";  // wrong case
+    public void testLoadAndGetAinokBondKinFromKTKWithCaseInsensitiveCardName() {
+        String cardName = "aiNOk Bond-kin"; // wrong case
         String expectedCardName = "Ainok Bond-Kin";
         String setCode = "KTK";
 
@@ -72,12 +75,12 @@ public class CardDbTestLazyCardLoading extends ForgeCardMockTestCase {
         assertEquals(borrowingCard.getName(), expectedCardName);
         assertEquals(borrowingCard.getEdition(), setCode);
 
-        assertNull(this.cardDb.getCard(cardName, "IMA"));  // not added yet
+        assertNull(this.cardDb.getCard(cardName, "IMA")); // not added yet
     }
 
     @Test
-    public void tesLoadAndGetAetherVialWithWrongCase(){
-        String cardName = "AEther vial";  // wrong case
+    public void tesLoadAndGetAetherVialWithWrongCase() {
+        String cardName = "AEther vial"; // wrong case
         String expectedCardName = "Aether Vial";
         PaperCard aetherVialCard = this.cardDb.getCard(cardName);
         assertNull(aetherVialCard);
@@ -91,10 +94,10 @@ public class CardDbTestLazyCardLoading extends ForgeCardMockTestCase {
     }
 
     @Test
-    public void tesLoadAndGetUnsupportedCardHavingWrongSetCode(){
+    public void tesLoadAndGetUnsupportedCardHavingWrongSetCode() {
         String cardName = "Dominating Licid";
         String wrongSetCode = "AA";
-        String expectedSetCode = "EXO";  // Exodus
+        String expectedSetCode = "EXO"; // Exodus
         CardRarity expectedCardRarity = CardRarity.Rare;
 
         PaperCard dominatingLycidCard = this.cardDb.getCard(cardName);

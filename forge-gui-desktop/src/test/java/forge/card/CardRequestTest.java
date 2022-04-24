@@ -1,14 +1,19 @@
 package forge.card;
 
-import forge.card.CardDb.CardRequest;
-import forge.item.IPaperCard;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertTrue;
+
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import forge.card.CardDb.CardRequest;
+import forge.item.IPaperCard;
 
 @Test(timeOut = 1000, enabled = true)
-public class CardRequestTestCase {
+public class CardRequestTest {
 
     private String cardName;
     private String edition;
@@ -20,7 +25,7 @@ public class CardRequestTestCase {
     private final char sep = CardDb.NameSetSeparator;
 
     @BeforeTest
-    public void setup(){
+    public void setup() {
         cardName = "Shivan Dragon";
         edition = "2ED";
         collNr = "175";
@@ -31,7 +36,7 @@ public class CardRequestTestCase {
         foilCollNr = "202";
     }
 
-    public void testComposeCardNameAndSet(){
+    public void testComposeCardNameAndSet() {
         // OK request
         String requestInfo = CardRequest.compose(cardName, edition);
         String expected = cardName + sep + edition;
@@ -50,7 +55,7 @@ public class CardRequestTestCase {
         assertEquals(requestInfoFoil, foilCardName + sep + foilEdition);
     }
 
-    public void testComposeCardNameSetAndArtIndex(){
+    public void testComposeCardNameSetAndArtIndex() {
         String requestInfo = CardRequest.compose(cardName, edition, 2);
         String expected = cardName + sep + edition + sep + 2;
         assertEquals(requestInfo, expected);
@@ -61,20 +66,21 @@ public class CardRequestTestCase {
         assertEquals(requestNegativeArtIndex, expected);
     }
 
-    public void testComposeCardNameSetAndCollectorNumber(){
+    public void testComposeCardNameSetAndCollectorNumber() {
         String requestInfo = CardRequest.compose(cardName, edition, collNr);
         String expCN = "[" + collNr + "]";
         String expected = cardName + sep + edition + sep + expCN;
         assertEquals(requestInfo, expected);
 
         // collNr only one bracket
-        requestInfo = CardRequest.compose(cardName, edition, "["+collNr);
+        requestInfo = CardRequest.compose(cardName, edition, "[" + collNr);
         assertEquals(requestInfo, expected);
 
-        requestInfo = CardRequest.compose(cardName, edition, collNr+"]");
+        requestInfo = CardRequest.compose(cardName, edition, collNr + "]");
         assertEquals(requestInfo, expected);
 
-        // collNr with leading spaces, as possible result from a wrong parsing in a deck file
+        // collNr with leading spaces, as possible result from a wrong parsing in a deck
+        // file
         requestInfo = CardRequest.compose(cardName, edition, "\t\t 175   ");
         assertEquals(requestInfo, expected);
 
@@ -83,13 +89,13 @@ public class CardRequestTestCase {
         assertEquals(requestInfo, cardName + sep + edition + sep);
     }
 
-    public void testComposeFullRequest(){
+    public void testComposeFullRequest() {
         String requestInfo = CardRequest.compose(cardName, edition, 1, collNr);
         String expected = cardName + sep + edition + sep + 1 + sep + "[" + collNr + "]";
         assertEquals(requestInfo, expected);
     }
 
-    public void testFromStringCardNameOnly(){
+    public void testFromStringCardNameOnly() {
         CardRequest request = CardRequest.fromString(cardName);
         assertEquals(request.cardName, cardName);
         assertEquals(request.artIndex, IPaperCard.DEFAULT_ART_INDEX);
@@ -97,7 +103,7 @@ public class CardRequestTestCase {
         assertEquals(request.collectorNumber, IPaperCard.NO_COLLECTOR_NUMBER);
     }
 
-    public void testFromStringCardNameAndSetCode(){
+    public void testFromStringCardNameAndSetCode() {
         String requestString = cardName + sep + edition;
         CardRequest request = CardRequest.fromString(requestString);
         assertEquals(request.cardName, cardName);
@@ -115,7 +121,7 @@ public class CardRequestTestCase {
         assertEquals(request.collectorNumber, IPaperCard.NO_COLLECTOR_NUMBER);
     }
 
-    public void testFromStringCardNameAndSetCodeAndArtIndex(){
+    public void testFromStringCardNameAndSetCodeAndArtIndex() {
         String requestString = cardName + sep + edition + sep + 2;
         CardRequest request = CardRequest.fromString(requestString);
         assertEquals(request.cardName, cardName);
@@ -131,7 +137,6 @@ public class CardRequestTestCase {
         assertEquals(request.artIndex, 20);
         assertEquals(request.collectorNumber, IPaperCard.NO_COLLECTOR_NUMBER);
 
-
         // foil
         requestString = foilCardNameFoil + sep + foilEdition + sep + IPaperCard.DEFAULT_ART_INDEX;
         request = CardRequest.fromString(requestString);
@@ -142,7 +147,7 @@ public class CardRequestTestCase {
         assertEquals(request.collectorNumber, IPaperCard.NO_COLLECTOR_NUMBER);
     }
 
-    public void testFromStringCardNameAndSetCodeAndCollectorNumber(){
+    public void testFromStringCardNameAndSetCodeAndCollectorNumber() {
         String requestString = cardName + sep + edition + sep + "[" + collNr + "]";
         CardRequest request = CardRequest.fromString(requestString);
         assertEquals(request.cardName, cardName);
@@ -168,7 +173,7 @@ public class CardRequestTestCase {
         assertEquals(request.collectorNumber, foilCollNr);
     }
 
-    public void fromStringFullInfo(){
+    public void fromStringFullInfo() {
         String requestString = cardName + sep + edition + sep + 2 + sep + "[" + collNr + "]";
         CardRequest request = CardRequest.fromString(requestString);
         assertEquals(request.cardName, cardName);
@@ -185,17 +190,17 @@ public class CardRequestTestCase {
         assertEquals(request.collectorNumber, IPaperCard.NO_COLLECTOR_NUMBER);
 
         // foil
-        requestString = foilCardNameFoil + sep + foilEdition + sep + 3 + sep +"[" + foilCollNr + "]";
+        requestString = foilCardNameFoil + sep + foilEdition + sep + 3 + sep + "[" + foilCollNr + "]";
         request = CardRequest.fromString(requestString);
         assertEquals(request.cardName, foilCardName);
         assertEquals(request.edition, foilEdition);
-        assertEquals(request.artIndex,3);
+        assertEquals(request.artIndex, 3);
         assertTrue(request.isFoil);
         assertEquals(request.collectorNumber, foilCollNr);
     }
 
     @Test
-    public void testCreatingCardRequestUsingAnotherRequestStringAsCardName(){
+    public void testCreatingCardRequestUsingAnotherRequestStringAsCardName() {
         String requestString = CardRequest.compose(cardName, edition, 1);
         CardRequest request = CardRequest.fromString(requestString);
 
@@ -216,7 +221,7 @@ public class CardRequestTestCase {
     }
 
     @Test
-    public void testCreatingCardRequestWithArtIndexGreaterThanNine(){
+    public void testCreatingCardRequestWithArtIndexGreaterThanNine() {
         String requestString = CardRequest.compose("Island", "SLD", 13);
         CardRequest request = CardRequest.fromString(requestString);
 
@@ -226,14 +231,16 @@ public class CardRequestTestCase {
         assertEquals(request.collectorNumber, IPaperCard.NO_COLLECTOR_NUMBER);
     }
 
-    @Test void isFoilCardNameMethod(){
+    @Test
+    void isFoilCardNameMethod() {
         assertTrue(CardRequest.isFoilCardName("Counterspell+"));
         assertFalse(CardRequest.isFoilCardName("Counterspell"));
         assertTrue(CardRequest.isFoilCardName("   Counterspell+    "));
         assertFalse(CardRequest.isFoilCardName("   Counterspell    "));
     }
 
-    @Test void testComposeCardRequestWithCardNameAndFoil(){
+    @Test
+    void testComposeCardRequestWithCardNameAndFoil() {
         String cardName = "Counterspell";
         String foilCardName = "Counterspell+";
 
