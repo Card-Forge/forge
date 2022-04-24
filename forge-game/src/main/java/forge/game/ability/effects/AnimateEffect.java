@@ -205,6 +205,23 @@ public class AnimateEffect extends AnimateEffectBase {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final Card host = sa.getHostCard();
+        final StringBuilder sb = new StringBuilder();
+        final List<Card> tgts = getCardsfromTargets(sa);
+        final boolean justOne = tgts.size() == 1;
+
+        if (sa.hasParam("IfDesc")) {
+            if (sa.getParam("IfDesc").equals("True") && sa.hasParam("SpellDescription")) {
+                String ifDesc = sa.getParam("SpellDescription");
+                sb.append(ifDesc, 0, ifDesc.indexOf(",") + 1);
+            } else {
+                tokenizeString(sa, sb, sa.getParam("IfDesc"));
+            }
+            sb.append(" ");
+        }
+
+        sb.append(sa.hasParam("DefinedDesc") ? sa.getParam("DefinedDesc") : Lang.joinHomogenous(tgts));
+        sb.append(" ");
+        int initial = sb.length();
 
         Integer power = null;
         if (sa.hasParam("Power")) {
@@ -237,23 +254,6 @@ public class AnimateEffect extends AnimateEffectBase {
             colors.addAll(Arrays.asList(sa.getParam("Colors").split(",")));
         }
 
-        final StringBuilder sb = new StringBuilder();
-
-        final List<Card> tgts = getCardsfromTargets(sa);
-        final boolean justOne = tgts.size() == 1;
-
-        if (sa.hasParam("IfDesc")) {
-            if (sa.getParam("IfDesc").equals("True") && sa.hasParam("SpellDescription")) {
-                String ifDesc = sa.getParam("SpellDescription");
-                sb.append(ifDesc, 0, ifDesc.indexOf(",") + 1);
-            } else {
-                sb.append(sa.getParam("IfDesc"));
-            }
-            sb.append(" ");
-        }
-
-        sb.append(Lang.joinHomogenous(tgts)).append(" ");
-
         // if power is -1, we'll assume it's not just setting toughness
         if (power != null || toughness != null) {
             sb.append(justOne ? "has" : "have" ).append(" base ");
@@ -272,7 +272,7 @@ public class AnimateEffect extends AnimateEffectBase {
             sb.append("color of that player's choice");
         } else {
             for (int i = 0; i < colors.size(); i++) {
-                sb.append(colors.get(i)).append(" ");
+                sb.append(colors.get(i).toLowerCase()).append(" ");
                 if (i < (colors.size() - 1)) {
                     sb.append("and ");
                 }
@@ -295,24 +295,27 @@ public class AnimateEffect extends AnimateEffectBase {
         }
         // sb.append(abilities)
         // sb.append(triggers)
-        if (!permanent) {
+        if (!permanent && sb.length() > initial) {
             final String duration = sa.getParam("Duration");
             if ("UntilEndOfCombat".equals(duration)) {
-                sb.append("until end of combat.");
+                sb.append("until end of combat");
             } else if ("UntilHostLeavesPlay".equals(duration)) {
-                sb.append("until ").append(host).append(" leaves the battlefield.");
+                sb.append("until ").append(host).append(" leaves the battlefield");
             } else if ("UntilYourNextUpkeep".equals(duration)) {
-                sb.append("until your next upkeep.");
+                sb.append("until your next upkeep");
             } else if ("UntilYourNextTurn".equals(duration)) {
-                sb.append("until your next turn.");
+                sb.append("until your next turn");
             } else if ("UntilControllerNextUntap".equals(duration)) {
-                sb.append("until its controller's next untap step.");
+                sb.append("until its controller's next untap step");
             } else {
-                sb.append("until end of turn.");
+                sb.append("until end of turn");
             }
-        } else {
-            sb.append(".");
         }
+        if (sa.hasParam("staticAbilities") && sa.getParam("staticAbilities").contains("MustAttack")) {
+            sb.append(sb.length() > initial ? " and " : "");
+            sb.append(justOne ? "attacks" : "attack").append(" this turn if able");
+        }
+        sb.append(".");
 
         return sb.toString();
     }

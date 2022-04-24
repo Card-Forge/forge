@@ -4,7 +4,7 @@ Types:Creature Djinn
 PT:4/4
 K:Flying
 K:Trample
-K:CARDNAME attacks each combat if able.
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
 T:Mode$ DamageDealtOnce | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME deals damage, you lose that much life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount

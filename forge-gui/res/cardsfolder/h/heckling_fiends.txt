@@ -2,5 +2,6 @@ Name:Heckling Fiends
 ManaCost:2 R
 Types:Creature Devil
 PT:2/2
-A:AB$ Pump | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME attacks each combat if able. | IsCurse$ True | SpellDescription$ Target creature attacks this turn if able.
+A:AB$ Animate | Cost$ 2 R | ValidTgts$ Creature | IsCurse$ True | SpellDescription$ Target creature attacks this turn if able.
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ This creature attacks this turn if able.
 Oracle:{2}{R}: Target creature attacks this turn if able.

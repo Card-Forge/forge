@@ -20,6 +20,7 @@ package forge.ai;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.game.staticability.StaticAbilityMustAttack;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
@@ -795,14 +796,15 @@ public class AiAttackController {
                         && isEffectiveAttacker(ai, attacker, combat, defender)) {
                     mustAttack = true;
                 } else if (seasonOfTheWitch) {
-                    // TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
+                    //TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
                     mustAttack = true;
                 } else {
-                    // TODO move to static Ability
-                    if (attacker.hasKeyword("CARDNAME attacks each combat if able.") || attacker.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
-                        // TODO switch defender if there's one without a cost or it's not the specific player
+                    final List<GameEntity> e = StaticAbilityMustAttack.entitiesMustAttack(attacker);
+                    if (!e.isEmpty()) {
                         mustAttack = true;
-                    } else if (attacker.getController().getMustAttackEntityThisTurn() != null && CombatUtil.getAttackCost(ai.getGame(), attacker, defender) == null) {
+                        // TODO switch defender if there's one without a cost or it's not the specific player
+                    } else if (attacker.getController().getMustAttackEntityThisTurn() != null &&
+                            CombatUtil.getAttackCost(ai.getGame(), attacker, defender) == null) {
                         mustAttack = true;
                     }
                 }

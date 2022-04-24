@@ -15,7 +15,7 @@ ManaCost:no cost
 Colors:red
 Types:Creature Werewolf
 PT:5/5
-K:CARDNAME attacks each combat if able.
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
 T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 Oracle:Bane of Hanweir attacks each combat if able.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Bane of Hanweir.

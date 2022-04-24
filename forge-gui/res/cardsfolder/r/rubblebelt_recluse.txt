@@ -2,5 +2,5 @@ Name:Rubblebelt Recluse
 ManaCost:4 R
 Types:Creature Ogre Berserker
 PT:6/5
-K:CARDNAME attacks each combat if able.
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
 Oracle:Rubblebelt Recluse attacks each combat if able.
