@@ -823,6 +823,7 @@ public abstract class GameState {
             String id = rememberedEnts.getValue();
 
             Card exiledWith = idToCard.get(Integer.parseInt(id));
+            exiledWith.addExiledCard(c);
             c.setExiledWith(exiledWith);
             c.setExiledBy(exiledWith.getController());
         }
