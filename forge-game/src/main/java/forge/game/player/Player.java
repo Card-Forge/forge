@@ -203,8 +203,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private Table<Long, Long, KeywordsChange> changedKeywords = TreeBasedTable.create();
     private ManaPool manaPool = new ManaPool(this);
-    private GameEntity mustAttackEntity;
-    private GameEntity mustAttackEntityThisTurn;
     private List<Card> creatureAttackedThisTurn = new ArrayList<>();
     private boolean activateLoyaltyAbilityThisTurn = false;
     private boolean tappedLandForManaThisTurn = false;
@@ -2295,22 +2293,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void setLifeLostLastTurn(final int n) {
         lifeLostLastTurn = n;
     }
-
-    /**
-     * get the Player object or Card (Planeswalker) object that this Player must
-     * attack this combat.
-     *
-     * @return the Player or Card (Planeswalker)
-     * @since 1.1.01
-     */
-    public final GameEntity getMustAttackEntity() {
-        return mustAttackEntity;
-    }
-    public final void setMustAttackEntity(final GameEntity o) {
-        mustAttackEntity = o;
-    }
-    public final GameEntity getMustAttackEntityThisTurn() { return mustAttackEntityThisTurn; }
-    public final void setMustAttackEntityThisTurn(GameEntity entThisTurn) { mustAttackEntityThisTurn = entThisTurn; }
 
     @Override
     public int compareTo(Player o) {

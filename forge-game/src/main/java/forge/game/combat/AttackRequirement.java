@@ -1,5 +1,6 @@
 package forge.game.combat;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,12 +38,6 @@ public class AttackRequirement {
 
         this.causesToAttack = causesToAttack;
 
-        final GameEntity mustAttackThisTurn = attacker.getController().getMustAttackEntityThisTurn();
-        // TODO check if this always illegal (e.g. Taunt cast on self)
-        if (mustAttackThisTurn != null) {
-            defenderSpecific.add(mustAttackThisTurn);
-        }
-
         int nAttackAnything = 0;
 
         if (attacker.isGoaded()) {
@@ -51,18 +46,11 @@ public class AttackRequirement {
         }
 
         //MustAttack static check
-        final List<GameEntity> e = StaticAbilityMustAttack.entitiesMustAttack(attacker);
-        if (e.contains(attacker)) {
-            nAttackAnything++;
-        } else if (!e.isEmpty()) {
-            for (GameEntity mustAtt : e) {
-                defenderSpecific.add(mustAtt);
-            }
-        }
-
-        final GameEntity mustAttackThisTurn3 = attacker.getMustAttackEntityThisTurn();
-        if (mustAttackThisTurn3 != null) {
-            defenderSpecific.add(mustAttackThisTurn3);
+        final List<GameEntity> mustAttack = StaticAbilityMustAttack.entitiesMustAttack(attacker);
+        nAttackAnything += Collections.frequency(mustAttack, attacker);
+        for (GameEntity e : mustAttack) {
+            if (e.equals(attacker)) continue;
+            defenderSpecific.add(e);
         }
 
         final Game game = attacker.getGame();

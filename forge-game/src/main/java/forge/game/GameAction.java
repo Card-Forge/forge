@@ -575,7 +575,6 @@ public class GameAction {
                 copied.setTapped(false); //untap card after it leaves the battlefield if needed
                 game.fireEvent(new GameEventCardTapped(c, false));
             }
-            copied.setMustAttackEntity(null);
         }
 
         // Need to apply any static effects to produce correct triggers

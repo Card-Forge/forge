@@ -114,12 +114,11 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        final List<GameEntity> mustAttackEnts = StaticAbilityMustAttack.entitiesMustAttack(attacker);
+        final List<GameEntity> mustAttack = StaticAbilityMustAttack.entitiesMustAttack(attacker);
         //if it contains only attacker, it only has a non-specific must attack
-        if (mustAttackEnts.size() > 1 || (mustAttackEnts.size() == 1 && mustAttackEnts.get(0) != attacker)) {
-            if (!mustAttackEnts.contains(defender)) {
-                return false;
-            }
+        mustAttack.removeAll(new CardCollection(attacker));
+        if (!mustAttack.isEmpty() && !mustAttack.contains(defender)) {
+            return false;
         }
 
         // TODO this should be a factor but needs some alignment with AttachAi

@@ -112,7 +112,6 @@ public enum ApiType {
     MoveCounter (CountersMoveEffect.class),
     MultiplePiles (MultiplePilesEffect.class),
     MultiplyCounter (CountersMultiplyEffect.class),
-    MustAttack (MustAttackEffect.class),
     MustBlock (MustBlockEffect.class),
     Mutate (MutateEffect.class),
     NameCard (ChooseCardNameEffect.class),
